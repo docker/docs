@@ -19,11 +19,11 @@ Members are granted controlled access to resources and enjoy enhanced organizati
 
 ### Benefits of inviting members
 
- - Enhanced visibility: Gain insights into user activity, making it easier to monitor access and enforce security policies.
- - Streamlined collaboration: Help members collaborate effectively by granting access to shared resources and repositories.
- - Improved resource management: Organize and track users within your organization, ensuring optimal allocation of resources.
- - Access to enhanced features: Members benefit from organization-wide perks, such as increased pull limits and access to premium Docker features.
- - Security control: Apply and enforce security settings at an organizational level, reducing risks associated with unmanaged accounts.
+- Enhanced visibility: Gain insights into user activity, making it easier to monitor access and enforce security policies.
+- Streamlined collaboration: Help members collaborate effectively by granting access to shared resources and repositories.
+- Improved resource management: Organize and track users within your organization, ensuring optimal allocation of resources.
+- Access to enhanced features: Members benefit from organization-wide perks, such as increased pull limits and access to premium Docker features.
+- Security control: Apply and enforce security settings at an organizational level, reducing risks associated with unmanaged accounts.
 
 For detailed information, see [Manage organization members](/manuals/admin/organization/members.md).
 
@@ -37,9 +37,9 @@ Integrating Docker with your identity provider streamlines user access and enhan
 
 SSO:
 
- - Simplifies sign in, as users sign in with their organizational credentials.
- - Reduces password-related vulnerabilities.
- - Simplifies onboarding as it works seamlessly with SCIM and group mapping for automated provisioning.
+- Simplifies sign in, as users sign in with their organizational credentials.
+- Reduces password-related vulnerabilities.
+- Simplifies onboarding as it works seamlessly with SCIM and group mapping for automated provisioning.
 
 For more information, see the [SSO documentation](/manuals/enterprise/security/single-sign-on/_index.md).
 
@@ -49,13 +49,13 @@ Streamline user provisioning and role management with [SCIM](/manuals/enterprise
 
 With SCIM you can:
 
- - Sync users and roles automatically with your identity provider.
- - Automate adding, updating, or removing users based on directory changes.
+- Sync users and roles automatically with your identity provider.
+- Automate adding, updating, or removing users based on directory changes.
 
 With JIT provisioning you can:
 
- - Automatically add users upon first sign in based on [group mapping](#simplify-access-with-group-mapping).
- - Reduce overhead by eliminating pre-invite steps.
+- Automatically add users upon first sign in based on [group mapping](#simplify-access-with-group-mapping).
+- Reduce overhead by eliminating pre-invite steps.
 
 ### Simplify access with group mapping
 
@@ -63,8 +63,8 @@ Group mapping automates permissions management by linking identity provider grou
 
 It also:
 
- - Reduces manual errors in role assignments.
- - Ensures consistent access control policies.
- - Help you scale permissions as teams grow or change.
+- Reduces manual errors in role assignments.
+- Ensures consistent access control policies.
+- Help you scale permissions as teams grow or change.
 
 For more information on how it works, see [Group mapping](/manuals/enterprise/security/provisioning/group-mapping.md).

@@ -7,8 +7,8 @@ weight: 40
 > [!WARNING]
 >
 > Communicate with your users before proceeding, and confirm that your IT and
-MDM teams are prepared to handle any unexpected issues, as these steps will
-affect all existing users signing into your Docker organization.
+> MDM teams are prepared to handle any unexpected issues, as these steps will
+> affect all existing users signing into your Docker organization.
 
 ## Enforce SSO
 

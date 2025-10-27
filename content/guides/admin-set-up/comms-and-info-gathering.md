@@ -18,7 +18,7 @@ Communicate early with users to inform them that:
 - They'll be upgraded to a supported version of Docker Desktop as part of the subscription onboarding
 - Settings will be reviewed and optimized for productivity
 - They'll need to sign in to the company's Docker organization using their
-business email to access subscription benefits
+  business email to access subscription benefits
 
 ### Engage with your MDM team
 
@@ -44,7 +44,7 @@ If you suspect your company has multiple Docker organizations:
 
 - Survey your teams to see if they have their own organizations
 - Contact your Docker Support to get a list of organizations with users whose
-    emails match your domain name
+  emails match your domain name
 
 ## Gather requirements
 
@@ -60,8 +60,8 @@ configuration:
 Review these areas together:
 
 - Security features and
-    [enforcing sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md)
-    for Docker Desktop users
+  [enforcing sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md)
+  for Docker Desktop users
 - Additional Docker products included in your subscriptions
 
 To view the parameters that can be preset, see [Configure Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md#step-two-configure-the-settings-you-want-to-lock-in).

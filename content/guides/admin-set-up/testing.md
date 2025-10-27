@@ -14,23 +14,23 @@ SSO and SCIM setup.
 > [!IMPORTANT]
 >
 > Some users may need CLI based logins to Docker Hub, and for this they will
-need a [personal access token (PAT)](/manuals/security/access-tokens.md).
+> need a [personal access token (PAT)](/manuals/security/access-tokens.md).
 
 ## Test Registry Access Management and Image Access Management
 
 > [!WARNING]
 >
 > Communicate with your users before proceeding, as this step will impact all
-existing users signing into your Docker organization.
+> existing users signing into your Docker organization.
 
 If you plan to use [Registry Access Management (RAM)](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) and/or [Image Access Management (IAM)](/manuals/enterprise/security/hardened-desktop/image-access-management.md):
 
 1. Ensure your test developer signs in to Docker Desktop using their
-    organization credentials
+   organization credentials
 2. Have them attempt to pull an unauthorized image or one from a disallowed
-    registry via the Docker CLI
+   registry via the Docker CLI
 3. Verify they receive an error message indicating that the registry is
-    restricted by the organization
+   restricted by the organization
 
 ## Deploy settings and enforce sign in to test group
 
