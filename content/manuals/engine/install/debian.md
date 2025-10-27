@@ -71,7 +71,9 @@ conflicts with the versions bundled with Docker Engine.
 Run the following command to uninstall all conflicting packages:
 
 ```console
-$ for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+$ for pkg in docker.io docker-doc docker-compose podman-docker containerd runc
+do sudo apt-get remove $pkg
+done
 ```
 
 `apt-get` might report that you have none of these packages installed.
@@ -107,20 +109,21 @@ Docker from the repository.
 
 1. Set up Docker's `apt` repository.
 
-   ```bash
+   ```console
    # Add Docker's official GPG key:
-   sudo apt-get update
-   sudo apt-get install ca-certificates curl
-   sudo install -m 0755 -d /etc/apt/keyrings
-   sudo curl -fsSL {{% param "download-url-base" %}}/gpg -o /etc/apt/keyrings/docker.asc
-   sudo chmod a+r /etc/apt/keyrings/docker.asc
+   $ sudo apt-get update
+   $ sudo apt-get install ca-certificates curl
+   $ sudo install -m 0755 -d /etc/apt/keyrings
+   $ sudo curl -fsSL {{% param "download-url-base" %}}/gpg -o /etc/apt/keyrings/docker.asc
+   $ sudo chmod a+r /etc/apt/keyrings/docker.asc
 
    # Add the repository to Apt sources:
-   echo \
-     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] {{% param "download-url-base" %}} \
-     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-   sudo apt-get update
+   $ echo \
+   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] {{% param "download-url-base" %}} \
+   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+   $ sudo apt-get update
    ```
 
    > [!NOTE]
@@ -156,9 +159,8 @@ Docker from the repository.
    ```console
    # List the available versions:
    $ apt-cache madison docker-ce | awk '{ print $3 }'
-
-   5:{{% param "docker_ce_version" %}}-1~debian.12~bookworm
-   5:{{% param "docker_ce_version_prev" %}}-1~debian.12~bookworm
+     5:{{% param "docker_ce_version" %}}-1~debian.12~bookworm
+     5:{{% param "docker_ce_version_prev" %}}-1~debian.12~bookworm
    ...
    ```
 
@@ -172,20 +174,20 @@ Docker from the repository.
    {{< /tab >}}
    {{< /tabs >}}
 
-    > [!NOTE]
-    >
-    > The Docker service starts automatically after installation. To verify that
-    > Docker is running, use:
-    > 
-    > ```console
-    > $ sudo systemctl status docker
-    > ```
-    >
-    > Some systems may have this behavior disabled and will require a manual start:
-    >
-    > ```console
-    > $ sudo systemctl start docker
-    > ```
+   > [!NOTE]
+   >
+   > The Docker service starts automatically after installation. To verify that
+   > Docker is running, use:
+   > 
+   > ```console
+   > $ sudo systemctl status docker
+   > ```
+   >
+   > Some systems may have this behavior disabled and will require a manual start:
+   >
+   > ```console
+   > $ sudo systemctl start docker
+   > ```
 
 3. Verify that the installation is successful by running the `hello-world` image:
 
@@ -234,26 +236,26 @@ download a new file each time you want to upgrade Docker Engine.
 
    ```console
    $ sudo dpkg -i ./containerd.io_<version>_<arch>.deb \
-     ./docker-ce_<version>_<arch>.deb \
-     ./docker-ce-cli_<version>_<arch>.deb \
-     ./docker-buildx-plugin_<version>_<arch>.deb \
-     ./docker-compose-plugin_<version>_<arch>.deb
+   ./docker-ce_<version>_<arch>.deb \
+   ./docker-ce-cli_<version>_<arch>.deb \
+   ./docker-buildx-plugin_<version>_<arch>.deb \
+   ./docker-compose-plugin_<version>_<arch>.deb
    ```
 
-    > [!NOTE]
-    >
-    > The Docker service starts automatically after installation. To verify that
-    > Docker is running, use:
-    > 
-    > ```console
-    > $ sudo systemctl status docker
-    > ```
-    >
-    > Some systems may have this behavior disabled and will require a manual start:
-    >
-    > ```console
-    > $ sudo systemctl start docker
-    > ```
+   > [!NOTE]
+   >
+   > The Docker service starts automatically after installation. To verify that
+   > Docker is running, use:
+   > 
+   > ```console
+   > $ sudo systemctl status docker
+   > ```
+   >
+   > Some systems may have this behavior disabled and will require a manual start:
+   >
+   > ```console
+   > $ sudo systemctl start docker
+   > ```
 
 6. Verify that the installation is successful by running the `hello-world` image:
 
