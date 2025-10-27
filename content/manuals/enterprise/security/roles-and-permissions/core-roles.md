@@ -1,22 +1,21 @@
 ---
-title: Roles and permissions
+title: Core roles
 description: Control access to content, registry, and organization management with roles in your organization.
 keywords: members, teams, organization, company, roles, access, docker hub, admin console, security, permissions
 aliases:
 - /docker-hub/roles-and-permissions/
 - /security/for-admins/roles-and-permissions/
-weight: 40
+- /enterprise/security/roles-and-permissions/
 ---
 
 {{< summary-bar feature_name="General admin" >}}
 
-Roles control what users can do in your organization. When you invite users, you assign them a role that determines their permissions for repositories, teams, and organization settings.
+Core roles are Docker's built-in roles with predefined permission sets.
+This page provides an overview of Docker's core and permissions for each role.
 
-This page provides an overview of Docker roles and permissions for each role.
+## What are core roles?
 
-## Organization roles
-
-Docker organizations have three main roles:
+Docker organizations have three core roles:
 
 - Member: Non-administrative role with basic access. Members can view other organization members and pull images from repositories they have access to.
 - Editor: Partial administrative access. Editors can create, edit, and delete repositories. They can also manage team permissions for repositories.
