@@ -3,6 +3,8 @@ description: Integrate Artifactory Container Registry with Docker Scout
 keywords: docker scout, artifactory, integration, image analysis, security, cves
 title: Integrate Docker Scout with Artifactory Container Registry
 linkTitle: Artifactory Container Registry
+aliases:
+  - /scout/artifactory/
 ---
 
 {{% experimental %}}
