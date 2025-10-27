@@ -12,6 +12,12 @@ toc_max: 2
 
 {{< rss-button feed="/security/security-announcements/index.xml" text="Subscribe to security RSS feed" >}}
 
+## Docker Desktop 4.49.0 security update: CVE-2025-9164
+
+A vulnerability in Docker Desktop for Windows was fixed on October 23 in the [4.49.0](/manuals/desktop/release-notes.md#4490) release:
+
+- Fixed [CVE-2025-9164](https://www.cve.org/cverecord?id=CVE-2025-9164) where the Docker Desktop for Windows installer was vulnerable to DLL hijacking due to insecure DLL search order. The installer searches for required DLLs in the user's Downloads folder before checking system directories, allowing local privilege escalation through malicious DLL placement.
+
 ## Docker Desktop 4.47.0 security update: CVE-2025-10657
 
 A vulnerability in Docker Desktop was fixed on September 25 in the [4.47.0](/manuals/desktop/release-notes.md#4470) release:
