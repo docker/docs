@@ -40,6 +40,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > Support for Windows 10 21H2 (19044) and 11 22H2 (22621) has ended. Installing Docker Desktop will require Windows 10 22H2 (19045) or Windows 11 23H2 (22631) in the next release.
 
+### Security
+
+- Fixed [CVE-2025-9164](https://www.cve.org/cverecord?id=CVE-2025-9164) where the Docker Desktop for Windows installer was vulnerable to DLL hijacking due to insecure DLL search order. The installer searches for required DLLs in the user's Downloads folder before checking system directories, allowing local privilege escalation through malicious DLL placement.
+
 ### New 
 
 - [cagent](/manuals/ai/cagent/_index.md) is now available through Docker Desktop. 
