@@ -65,7 +65,7 @@ required.
 > [!WARNING]
 >
 > This step could affect the experience for users on older versions of Docker
-Desktop.
+> Desktop.
 
 Existing users may be running outdated or unsupported versions of
 Docker Desktop. All users should update to a supported version. Docker Desktop
