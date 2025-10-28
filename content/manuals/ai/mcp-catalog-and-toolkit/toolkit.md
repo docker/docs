@@ -24,6 +24,12 @@ It is the fastest way from MCP tool discovery to local execution.
 - Zero manual setup: No dependency management, runtime configuration, or setup required.
 - Functions as both an MCP server aggregator and a gateway for clients to access installed MCP servers.
 
+> [!TIP]
+> The MCP Toolkit includes [Dynamic MCP](/manuals/ai/mcp-catalog-and-toolkit/dynamic-mcp.md),
+> which enables AI agents to discover, add, and compose MCP servers on-demand during
+> conversations, without manual configuration. Your agent can search the catalog and
+> add tools as needed when you connect to the gateway.
+
 ## How the MCP Toolkit works
 
 MCP introduces two core concepts: MCP clients and MCP servers.
