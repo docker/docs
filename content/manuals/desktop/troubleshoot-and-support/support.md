@@ -4,29 +4,45 @@ keywords: Support, Docker Desktop, Linux, Mac, Windows
 title: Get support for Docker Desktop
 weight: 20
 aliases:
- - /desktop/support/
- - /support/
+  - /desktop/support/
+  - /support/
 ---
 
 > [!NOTE]
-> 
+>
 > Docker Desktop offers support for developers with a [Pro, Team, or Business subscription](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support).
 
-### How do I get Docker Desktop support?
+## Support options
 
-> [!TIP]
->
-> Before reaching out for support, follow the appropriate [Diagnose steps](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md#diagnose) in the troubleshooting documentation. 
+All Docker Pro, Team, and Business subscribers receive email support for Docker Desktop, including help with account management, billing, configuration, installation, and usage issues.
 
-If you have a paid Docker subscription, you can [contact the Support team](https://hub.docker.com/support/contact/).
+Support response times and availability vary by subscription tier:
 
-All Docker users can seek support through the following resources, where Docker or the community respond on a best effort basis.
-- [Docker Desktop for Windows GitHub repo](https://github.com/docker/for-win) 
+- **Docker Pro**: 3 business day response
+- **Docker Team**: 2 business day response, 24×5 availability
+- **Docker Business**: 1 business day response, 24×5 availability
+
+Premium Support with faster response times and 24×7 availability is available as an add-on for Docker Business subscribers.
+
+For detailed support features and response times, see [Docker Pricing](https://www.docker.com/pricing/).
+
+### Community support
+
+All Docker users can seek support through the following resources, where Docker or the community respond on a best effort basis:
+
+- [Docker Desktop for Windows GitHub repo](https://github.com/docker/for-win)
 - [Docker Desktop for Mac GitHub repo](https://github.com/docker/for-mac)
 - [Docker Desktop for Linux GitHub repo](https://github.com/docker/desktop-linux)
 - [Docker Community Forums](https://forums.docker.com/)
 - [Docker Community Slack](http://dockr.ly/comm-slack)
 
+## How do I get Docker Desktop support?
+
+> [!TIP]
+>
+> Before reaching out for support, follow the appropriate [Diagnose steps](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md#diagnose) in the troubleshooting documentation.
+
+If you have a paid Docker subscription, you can [contact the Support team](https://hub.docker.com/support/contact/).
 
 ### What support can I get?
 
@@ -36,16 +52,17 @@ All Docker users can seek support through the following resources, where Docker 
 - Billing or subscription issues
 - Configuration issues
 - Desktop installation issues
-   - Installation crashes
-   - Failure to launch Docker Desktop on first run
+  - Installation crashes
+  - Failure to launch Docker Desktop on first run
 - Desktop update issues
 - Sign-in issues in both the command line interface and Docker Hub user interface
 - Push or pull issues, including rate limiting
 - Usage issues
-   - Crash closing software
-   - Docker Desktop not behaving as expected
+  - Crash closing software
+  - Docker Desktop not behaving as expected
 
 For Windows users, you can also request support on:
+
 - Turning on virtualization in BIOS
 - Turning on Windows features
 - Running inside [certain VM or VDI environments](/manuals/desktop/setup/vm-vdi.md) (Docker Business customers only)
@@ -87,7 +104,7 @@ For Pro and Team customers, Docker only offers support for the latest version of
 As a Pro user you can get support for Docker Desktop on a single machine.
 As a Team, you can get support for Docker Desktop for the number of machines equal to the number of seats as part of your subscription.
 
-### What OS’s are supported?
+### What operating systems are supported?
 
 Docker Desktop is available for Mac, Linux, and Windows. The supported version information can be found on the following pages:
 
