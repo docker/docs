@@ -29,7 +29,7 @@ long: |-
 
     ### Environment variables
 
-    The following list of environment variables are supported by the `docker` command
+    The following list of environment variables is supported by the `docker` command
     line:
 
     | Variable                      | Description                                                                                                                                                                                                                                                       |
