@@ -161,17 +161,17 @@ For information on how to add tables to your content, see [Useful component and 
 
 When you're discussing a file type, use the formal name of the type. Don't use the filename extension to refer generically to the file type.
 
-  | Correct | Incorrect |
-  | --- | --- |
-  | a PNG file | a .png file |
-  | a Bash file | an .sh file |
+| Correct | Incorrect |
+| --- | --- |
+| a PNG file | a .png file |
+| a Bash file | an .sh file |
 
 ## Referring to units
 
 When you're referring to units of measurement, use the abbreviated form in all caps, with a space between the value and the unit. For example:
 
-  | Correct | Incorrect |
-  | --- | --- |
-  | 10 GB | 10GB |
-  | 10 GB | 10 gb |
-  | 10 GB | 10 gigabytes |
+| Correct | Incorrect |
+| --- | --- |
+| 10 GB | 10GB |
+| 10 GB | 10 gb |
+| 10 GB | 10 gigabytes |
