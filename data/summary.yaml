@@ -170,6 +170,9 @@ Docker GitHub Copilot:
   availability: Early Access
 Docker Hardened Images:
   subscription: [Docker Hardened Images]
+Docker Hardened Image charts:
+  availability: Early Access
+  subscription: [Docker Hardened Images]
 Docker Init:
   requires: Docker Desktop [4.27](/manuals/desktop/release-notes.md#4270) and later
 Docker Model Runner:
