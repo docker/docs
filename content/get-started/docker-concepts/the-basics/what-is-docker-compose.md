@@ -81,7 +81,7 @@ Follow the instructions to run the to-do list app on your system.
 
     If this feels overwhelming, don't worry! You'll get there!
 
-5. With everything now up and running, you can open [http://localhost:3000](http://localhost:3000) in your browser to see the site. Feel free to add items to the list, check them off, and remove them.
+5. With everything now up and running, you can open [http://localhost:3000](http://localhost:3000) in your browser to see the site. Note that the application may take 10-15 seconds to fully start. If the page doesn't load right away, wait a moment and refresh. Feel free to add items to the list, check them off, and remove them.
 
     ![A screenshot of a webpage showing the todo-list application running on port 3000](images/todo-list-app.webp?border=true&w=950&h=400)
 
