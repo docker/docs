@@ -218,7 +218,7 @@ install`.
 
 ## Step 6: Install the Helm chart
 
-1. If the chart is in a private repository, log in to the registry using Helm:
+1. If the chart is in a private repository, sign in to the registry using Helm:
 
    ```console
    $ echo "<your-access-token>" | helm registry login registry-1.docker.io --username <your-username> --password-stdin

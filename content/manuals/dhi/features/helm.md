@@ -13,7 +13,7 @@ catalog on Docker Hub.
 
 Like the hardened images, DHI charts incorporate multiple layers of security metadata to ensure transparency and trust:
 
-- SLSA Level 3 compliance: Each chart is built with our SLSA Build Level 3 system, including a detailed build
+- SLSA Level 3 compliance: Each chart is built with Docker's SLSA Build Level 3 system, including a detailed build
   provenance, and meeting the standards set by the Supply-chain Levels for Software Artifacts (SLSA) framework.
 - Software Bill of Materials (SBOMs): Comprehensive SBOMs are provided, detailing all components referenced within the
   chart to facilitate vulnerability management and compliance audits.
