@@ -13,7 +13,7 @@
   "no-space-in-code": true,
   "no-space-in-links": true,
   "no-empty-links": true,
-  "ol-prefix": false,
+  "ol-prefix": { "style": "one_or_ordered" },
   "no-reversed-links": true,
   "reference-links-images": {
     "shortcut_syntax": false
