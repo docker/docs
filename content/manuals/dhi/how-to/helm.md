@@ -64,7 +64,7 @@ To find a Docker Helm chart for DHI:
 You must mirror the Docker Helm chart to your own repository before using it.
 
 To mirror the Docker Helm chart to your organization, in the Helm chart repository details page you opened in [step
-1](#step-1-find-the-docker-helm-chart):
+1](#step-1-find-a-docker-helm-chart-and-request-access):
 
 1. Select **Mirror Helm chart**.
 2. Follow the on-screen instructions to mirror the Helm chart. For this guide, name the destination repository
