@@ -8,7 +8,7 @@ params:
   sidebar:
     badge:
       color: violet
-      text: EA
+      text: Early Access
 ---
 
 {{< summary-bar feature_name="Docker Hardened Image charts" >}}
@@ -144,9 +144,12 @@ that are accessible to everyone, DHI images must first be mirrored to your own D
 Since each organization will have their own unique repository location, the Helm chart must be updated to point to the
 correct image locations specific to your organization's Docker Hub namespace or registry.
 
-To do this, you can either use pre-rendering or post-rendering. Pre-rendering uses a values override file to set the
-image references, while post-rendering uses a script to rewrite the image references after Helm has rendered the
-templates.
+To do this, you can use one of the following approaches:
+
+- Pre-rendering: Uses a values override file to set the image references before Helm renders the chart templates.
+- Post-rendering: Uses a script that automatically rewrites image references after Helm renders the templates but
+  before deploying to Kubernetes. The script is invoked by Helm during the `helm install` command using the
+  `--post-renderer` flag, where you pass it the new image prefix as an argument.
 
 {{< tabs group="rendering" >}} {{< tab name="Pre-rendering" >}}
 
