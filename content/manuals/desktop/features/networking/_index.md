@@ -10,7 +10,7 @@ This page explains how Docker Desktop routes network traffic and file I/O betwee
 
 ## Overview
 
-Docker Desktop runs the Docker Engine inside a lightweight Linux virtual machine (VM).  Docker Desktop routes all network and file operations between the Docker VM and the host through the `com.docker.backend` process. 
+Docker Desktop runs the Docker Engine inside a lightweight Linux virtual machine (VM). Docker Desktop routes all network and file operations between the Docker VM and the host through the `com.docker.backend` process. 
 
 Th backend acts as:
 
@@ -29,7 +29,7 @@ When a container initiates a network request, for example with `apt-get update` 
 - The traffic is transferred to the host system over a shared-memory channel rather than through a traditional virtual network interface. This approach ensures reliable communication and avoids conflicts with host-level network adapters or firewall configurations.
 - On the host, Docker Desktop’s backend process receives the traffic and creates standard TCP/IP connections using the same networking APIs as other applications.
 
-All outbound container network traffic originates from the `com.docker.backend` process. Firewalls, VPNs, and security tools, like Crowdstrike, see traffic coming from this process — not from a VM or unknown source so firewall and endpoint security software can apply rules directly to `com.docker.backend`
+All outbound container network traffic originates from the `com.docker.backend` process. Firewalls, VPNs, and security tools, like Crowdstrike, see traffic coming from this process — not from a VM or unknown source so firewall and endpoint security software can apply rules directly to `com.docker.backend`.
 
 ## How exposed ports work
 
