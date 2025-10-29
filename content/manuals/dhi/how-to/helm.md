@@ -53,11 +53,11 @@ To find a Docker Helm chart for DHI:
 
    You will see the **Overview** page with details about the chart.
 
-6. If visible, select **Request access**.
+6. If visible, select **Request access to Helm charts**.
 
-   Before you can mirror the chart, you may need to request access for the Early Access program. If **Request access**
-   is visible on the Helm chart repository details page, select it and wait for an email notifying you that the access
-   has been granted by Docker.
+   Before you can mirror the chart, you may need to request access for the Early Access program. If **Request access to
+   Helm charts** is visible on the Helm chart repository details page, select it and wait for an email notifying you
+   that the access has been granted by Docker.
 
 ## Step 2: Mirror the Docker Helm chart
 
