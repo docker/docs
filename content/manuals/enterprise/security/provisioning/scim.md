@@ -53,7 +53,7 @@ SCIM automates:
 > SCIM only manages users provisioned through your identity provider after
 > SCIM is enabled. It cannot remove users who were manually added to your Docker
 > organization before SCIM was set up.
-> <br><br>
+>
 > To remove those users, delete them manually from your Docker organization.
 > For more information, see
 > [Manage organization members](/manuals/admin/organization/members.md).
