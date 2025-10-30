@@ -29,16 +29,16 @@ Solution:
     {{< tabs group="language" >}}
     {{< tab name="TypeScript" >}}
 
-    ```typescript
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    ```
+        ```typescript
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        ```
 
     {{< /tab >}}
     {{< tab name="Python" >}}
 
-    ```python
-    await asyncio.sleep(1)
-    ```
+        ```python
+        await asyncio.sleep(1)
+        ```
 
     {{< /tab >}}
     {{< /tabs >}}
@@ -48,48 +48,48 @@ Solution:
     {{< tabs group="language" >}}
     {{< tab name="TypeScript" >}}
 
-    ```typescript
-    const sbx = await Sandbox.betaCreate({
-      envs: {
-        ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY!,
-        GITHUB_TOKEN: process.env.GITHUB_TOKEN!,
-        SONARQUBE_TOKEN: process.env.SONARQUBE_TOKEN!,
-      },
-      mcp: {
-        githubOfficial: {
-          githubPersonalAccessToken: process.env.GITHUB_TOKEN!,
-        },
-        sonarqube: {
-          org: process.env.SONARQUBE_ORG!,
-          token: process.env.SONARQUBE_TOKEN!,
-          url: "https://sonarcloud.io",
-        },
-      },
-    });
-    ```
+        ```typescript
+        const sbx = await Sandbox.betaCreate({
+          envs: {
+            ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY!,
+            GITHUB_TOKEN: process.env.GITHUB_TOKEN!,
+            SONARQUBE_TOKEN: process.env.SONARQUBE_TOKEN!,
+          },
+          mcp: {
+            githubOfficial: {
+              githubPersonalAccessToken: process.env.GITHUB_TOKEN!,
+            },
+            sonarqube: {
+              org: process.env.SONARQUBE_ORG!,
+              token: process.env.SONARQUBE_TOKEN!,
+              url: "https://sonarcloud.io",
+            },
+          },
+        });
+        ```
 
     {{< /tab >}}
     {{< tab name="Python" >}}
 
-    ```python
-    sbx = await AsyncSandbox.beta_create(
-        envs={
-            "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY"),
-            "GITHUB_TOKEN": os.getenv("GITHUB_TOKEN"),
-            "SONARQUBE_TOKEN": os.getenv("SONARQUBE_TOKEN"),
-        },
-        mcp={
-            "githubOfficial": {
-                "githubPersonalAccessToken": os.getenv("GITHUB_TOKEN"),
+        ```python
+        sbx = await AsyncSandbox.beta_create(
+            envs={
+                "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY"),
+                "GITHUB_TOKEN": os.getenv("GITHUB_TOKEN"),
+                "SONARQUBE_TOKEN": os.getenv("SONARQUBE_TOKEN"),
             },
-            "sonarqube": {
-                "org": os.getenv("SONARQUBE_ORG"),
-                "token": os.getenv("SONARQUBE_TOKEN"),
-                "url": "https://sonarcloud.io",
+            mcp={
+                "githubOfficial": {
+                    "githubPersonalAccessToken": os.getenv("GITHUB_TOKEN"),
+                },
+                "sonarqube": {
+                    "org": os.getenv("SONARQUBE_ORG"),
+                    "token": os.getenv("SONARQUBE_TOKEN"),
+                    "url": "https://sonarcloud.io",
+                },
             },
-        },
-    )
-    ```
+        )
+        ```
 
     {{< /tab >}}
     {{< /tabs >}}
