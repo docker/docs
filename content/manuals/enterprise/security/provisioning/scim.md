@@ -84,7 +84,7 @@ For additional details about supported attributes and SCIM, see
 > enabled, JIT values still take precedence and will overwrite attribute values
 > set by SCIM. To avoid conflicts, make sure your JIT attribute values match
 > your SCIM values.
-> <br><br>
+>
 > Alternatively, you can disable JIT provisioning to rely solely on SCIM.
 > For details, see [Just-in-Time](just-in-time.md).
 
