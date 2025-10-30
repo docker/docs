@@ -15,6 +15,18 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.40.3
+
+{{< release-date date="2025-10-30" >}}
+
+### Bug fixes and enhancements
+
+- Applied hooks on `restart` command
+- Improved override support when publishing OCI artifacts
+- Fixed issue to ensure image exist only for targeted services in `run` command
+- Added a default Prompt implementation
+
+
 ## 2.40.2
 
 {{< release-date date="2025-10-22" >}}
