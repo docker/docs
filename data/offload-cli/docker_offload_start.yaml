@@ -26,6 +26,26 @@ options:
     experimentalcli: false
     kubernetes: false
     swarm: false
+  - option: idle-timeout
+    value_type: duration
+    default_value: ""
+    description: How long before the engine idles
+    deprecated: false
+    hidden: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
+  - option: timeout
+    value_type: duration
+    default_value: 10s
+    description: How long to wait for the engine to be ready
+    deprecated: false
+    hidden: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
 deprecated: false
 hidden: false
 experimental: false

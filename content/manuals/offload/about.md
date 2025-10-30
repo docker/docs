@@ -3,18 +3,18 @@ title: About Docker Offload
 linktitle: About
 weight: 15
 description: Learn about Docker Offload, its features, and how it works.
-keywords: cloud, build, remote builder
+keywords: cloud, offload, vdi, on-demand gpu, gpu
 ---
 
 Docker Offload is a fully managed service for building and running containers in
 the cloud using the Docker tools you already know, including Docker Desktop, the
 Docker CLI, and Docker Compose. It extends your local development workflow into a
-scalable, cloud-powered environment, so you can offload compute-heavy tasks,
-accelerate builds, and securely manage container workloads across the software
-lifecycle.
+scalable, cloud-powered environment, enabling developers to work efficiently even
+in virtual desktop infrastructure (VDI) environments or systems that don't support
+nested virtualization.
 
 Docker Offload also supports GPU-accelerated instances, allowing you to
-containerize and run compute-intensive workloads such as Docker Model Runner and
+containerize and run compute-intensive workloads such as running models and
 other machine learning or data processing tasks that benefit from GPU.
 
 ## Key features
@@ -22,20 +22,17 @@ other machine learning or data processing tasks that benefit from GPU.
 Docker Offload includes the following capabilities to support modern container
 workflows:
 
-- Cloud-based builds: Execute builds on remote, fully managed BuildKit instances
 - GPU acceleration: Use NVIDIA L4 GPU-backed environments for machine learning,
   media processing, and other compute-intensive workloads.
 - Ephemeral cloud runners: Automatically provision and tear down cloud
   environments for each container session.
-- Shared build cache: Speed up build times across machines and teammates with a
-  smart, shared cache layer.
 - Hybrid workflows: Seamlessly transition between local and remote execution
   using Docker Desktop or CLI.
 - Secure communication: Use encrypted tunnels between Docker Desktop and cloud
   environments with support for secure secrets and image pulling.
 - Port forwarding and bind mounts: Retain a local development experience even
   when running containers in the cloud.
-- VDI-friendly: Use Docker Offload in virtual desktop environments or systems that
+- VDI-friendly: [Use Docker Desktop](../desktop/setup/vm-vdi.md) in virtual desktop environments or systems that
   don't support nested virtualization.
 
 ## Why use Docker Offload?
@@ -44,7 +41,6 @@ Docker Offload is designed to support modern development teams working across
 local and cloud environments. It helps you:
 
 - Offload heavy builds and runs to fast, scalable infrastructure
-- Accelerate feedback loops in development and testing
 - Run containers that require more resources than your local setup can provide
 - Build and run AI apps with instant access to GPU-powered environments
 - Use Docker Compose to manage complex, multi-service apps that need cloud
@@ -61,39 +57,16 @@ local tools.
 Docker Offload replaces the need to build or run containers locally by connecting
 Docker Desktop to secure, dedicated cloud resources.
 
-### Building with Docker Offload
-
-When you use Docker Offload for builds, the `docker buildx build` command sends
-the build request to a remote BuildKit instance in the cloud, instead of
-executing it locally. Your workflow stays the same, only the execution
-environment changes.
-
-The build runs on infrastructure provisioned and managed by Docker:
-
-- Each cloud builder is an isolated Amazon EC2 instance with its own EBS volume
-- Remote builders use a shared cache to speed up builds across machines and
-  teammates
-- Build results are encrypted in transit and sent to your specified destination
-  (such as a registry or local image store)
-
-Docker Offload manages the lifecycle of builders automatically. There's no need to
-provision or maintain infrastructure.
-
-> [!NOTE]
->
-> Docker Offload builders are currently hosted in the United States East region. Users in
-> other regions may experience increased latency.
-
 ### Running containers with Docker Offload
 
-When you use Docker Offload to run containers, a Docker Desktop creates a secure
+When you use Docker Offload to build or run containers, a Docker Desktop creates a secure
 SSH tunnel to a Docker daemon running in the cloud. Your containers are started
 and managed entirely in that remote environment.
 
 Here's what happens:
 
 1. Docker Desktop connects to the cloud and triggers container creation.
-2. Docker Offload pulls the required images and starts containers in the cloud.
+2. Docker Offload builds or pulls the required images and starts containers in the cloud.
 3. The connection stays open while the containers run.
 4. When the containers stop running, the environment shuts down and is cleaned
    up automatically.
@@ -105,7 +78,7 @@ using environments such as virtual desktops, cloud-hosted development machines,
 or older hardware.
 
 Docker Offload also supports GPU-accelerated workloads. Containers that require
-GPU access can run on cloud instances provisioned with NVIDIA L4 GPUs for
+GPU access can run on cloud instances provisioned with NVIDIA GPUs for
 efficient AI inferencing, media processing, and general-purpose GPU
 acceleration. This enables compute-heavy workflows such as model evaluation,
 image processing, and hardware-accelerated CI tests to run seamlessly in the
@@ -115,11 +88,11 @@ Despite running remotely, features like bind mounts and port forwarding continue
 to work seamlessly, providing a local-like experience from within Docker Desktop
 and the CLI.
 
-Docker Offload provisions an ephemeral cloud environment for each session. The
-environment remains active while you are interacting with Docker Desktop or
-actively using containers. If no activity is detected for about 5 minutes, the
-session shuts down automatically. This includes any containers, images, or
-volumes in that environment, which are deleted when the session ends.
+Docker Offload automatically transitions between active and idle states based on
+usage. You're only charged when actively building or running containers. When
+idle for more than 5 minutes, the session ends and resources are cleaned up. For
+details about how this works and how to configure idle timeout, see [Active and
+idle states](configuration.md#understand-active-and-idle-states).
 
 ## What's next
 

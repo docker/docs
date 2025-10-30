@@ -3,102 +3,73 @@ title: Configure Docker Offload
 linktitle: Configure
 weight: 20
 description: Learn how to configure build settings for Docker Offload.
-keywords: cloud, configuration, settings, cloud builder, GPU, disk allocation, private resources, firewall
+keywords: cloud, configuration, settings, offload, gpu
 ---
 
-To use Docker Offload, you must start it in Docker Desktop. For more details,
-see the [Docker Offload quickstart](/offload/quickstart/).
+You can configure Docker Offload settings at different levels depending on your role. Organization owners can manage
+settings for all users in their organization, while individual developers can configure their own Docker Desktop
+settings.
 
-Settings for the cloud builders in Docker Offload can be further configured, in
-addition to settings for an entire organization, through **Offload settings** in
-the Docker Offload dashboard.
+## Manage settings for your organization
+
+For organization owners, you can manage Docker Offload settings for all users in your organization. For more details,
+see [Manage Docker products](../admin/organization/manage-products.md). To view usage and configure billing for Docker
+Offload, see [Docker Offload usage and billing](/offload/usage/).
+
+## Configure settings in Docker Desktop
+
+For developers, you can manage Docker Offload settings in Docker Desktop. To manage settings:
+
+1. Open the Docker Desktop Dashboard and sign in.
+2. Select the settings icon in the Docker Desktop Dashboard header.
+3. In **Settings**, select **Docker Offload**.
+
+   Here you can:
+
+   - Toggle **Enable Docker Offload**. When enabled, you can start Offload sessions.
+   - Select **Idle timeout**. This is the duration of time between no activity and Docker Offload entering idle mode.
+     For details about idle timeout, see [Understand active and idle states](#understand-active-and-idle-states).
+   - Check **Enable GPU support**. When enabled, workloads can use cloud GPU if available.
+
+### Understand active and idle states
+
+Docker Offload automatically transitions between active and idle states to help
+you control costs while maintaining a seamless development experience.
+
+#### When your session is active
+
+Your Docker Offload environment is active when you're building images, running
+containers, or actively interacting with them, such as viewing logs or
+maintaining an open network connection. During active state:
+
+- Usage is charged
+- A remote Docker Engine is connected to your local machine
+- All container operations execute in the cloud environment
+
+#### When your session is idle
+
+When there's no activity, Docker Offload transitions to idle state. During idle
+state:
+
+- You are not charged for usage
+- The remote connection is suspended
+- No containers are running in the cloud
+
+The idle transition delay can be configured in Docker Desktop settings, ranging
+from 10 seconds to 1 hour. This setting determines how long Docker Offload
+waits after detecting inactivity before transitioning to idle state.
+
+#### How your session is preserved
+
+If your session has been idle for less than 5 minutes and you resume activity,
+your previous containers and images are preserved and remain available. This
+allows you to pick up right where you left off.
+
+However, if the idle period exceeds 5 minutes, a new session starts with a
+clean environment and any containers, images, or volumes from the previous
+session are deleted.
 
 > [!NOTE]
 >
-> To view usage and configure billing for Docker Offload, see [Docker Offload
-> usage and billing](/offload/usage/).
-
-## Offload settings
-
-The **Offload settings** page in Docker Home lets you configure disk
-allocation, private resource access, and firewall settings for your cloud
-builders in your organization.
-
-To view the **Offload settings** page:
-
-1. Go to [Docker Home](https://app.docker.com/).
-2. Select the account for which you want to manage Docker Offload.
-3. Select **Offload** > **Offload settings**.
-
-The following sections describe the available settings.
-
-### Disk allocation
-
-The **Disk allocation** setting lets you control how much of the available
-storage is dedicated to the build cache. A lower allocation increases storage
-available for active builds.
-
-Adjust the **Disk allocation** slider to specify the percentage of storage used
-for build caching.
-
-Any changes take effect immediately.
-
-> [!TIP]
->
-> If you build very large images, consider allocating less storage for caching.
-
-### Build cache space
-
-Your subscription includes the following Build cache space:
-
-| Subscription | Build cache space |
-|--------------|-------------------|
-| Personal     | N/A               |
-| Pro          | 50GB              |
-| Team         | 100GB             |
-| Business     | 200GB             |
-
-To get more Build cache space, [upgrade your subscription](/manuals/subscription/change.md).
-
-### Private resource access
-
-Private resource access lets cloud builders pull images and packages from
-private resources. This feature is useful when builds rely on self-hosted
-artifact repositories or private OCI registries.
-
-For example, if your organization hosts a private [PyPI](https://pypi.org/)
-repository on a private network, Docker Build Cloud would not be able to access
-it by default, since the cloud builder is not connected to your private network.
-
-To enable your cloud builders to access your private resources, enter the host
-name and port of your private resource and then select **Add**.
-
-#### Authentication
-
-If your internal artifacts require authentication, make sure that you
-authenticate with the repository either before or during the build. For internal
-package repositories for npm or PyPI, use [build
-secrets](/manuals/build/building/secrets.md) to authenticate during the build.
-For internal OCI registries, use `docker login` to authenticate before building.
-
-Note that if you use a private registry that requires authentication, you will
-need to authenticate with `docker login` twice before building. This is because
-the cloud builder needs to authenticate with Docker to use the cloud builder,
-and then again to authenticate with the private registry.
-
-```console
-$ echo $DOCKER_PAT | docker login docker.io -u <username> --password-stdin
-$ echo $REGISTRY_PASSWORD | docker login registry.example.com -u <username> --password-stdin
-$ docker build --builder <cloud-builder> --tag registry.example.com/<image> --push .
-```
-
-### Firewall
-
-Firewall settings let you restrict cloud builder egress traffic to specific IP
-addresses. This helps enhance security by limiting external network egress from
-the builder.
-
-1. Select **Enable firewall: Restrict cloud builder egress to specific public IP address**.
-2. Enter the IP address you want to allow.
-3. Select **Add** to apply the restriction.
-
+> Transitioning from active to idle and back to active within 5 minutes will be
+> charged as continuous usage.

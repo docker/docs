@@ -3,23 +3,18 @@ title: Optimize Docker Offload usage
 linktitle: Optimize usage
 weight: 40
 description: Learn how to optimize your Docker Offload usage.
-keywords: cloud, optimize, performance, caching, cost efficiency
+keywords: cloud, optimize, performance, offload
 ---
 
-Docker Offload runs your builds remotely, not on the machine where you invoke the
-build. This means that files must be transferred from your local system to the
+Docker Offload builds and runs your containers remotely, not on the machine where you invoke the
+commands. This means that files must be transferred from your local system to the
 cloud over the network.
 
 Transferring files over the network introduces higher latency and lower
-bandwidth compared to local transfers. To reduce these effects, Docker Offload
-includes several performance optimizations:
+bandwidth compared to local transfers.
 
-- It uses attached storage volumes for build cache, which makes reading and writing cache fast.
-- When pulling build results back to your local machine, it only transfers layers that changed since the previous build.
-
-Even with these optimizations, large projects or slower network connections can
-lead to longer transfer times. Here are several ways to optimize your build
-setup for Docker Offload:
+Even with optimizations, large projects or slower network connections can lead to longer transfer times. Here are
+several ways to optimize your setup for Docker Offload:
 
 - [Use `.dockerignore` files](#dockerignore-files)
 - [Choose slim base images](#slim-base-images)

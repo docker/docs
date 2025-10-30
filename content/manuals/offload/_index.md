@@ -27,13 +27,13 @@ grid:
   icon: tune
   link: /offload/configuration/
 
-- title: Usage
-  description: Learn about Docker Offload usage and how to monitor your cloud resources.
+- title: Usage and billing
+  description: Learn about Docker Offload usage and billing, and how to monitor your cloud resources.
   icon: monitor_heart
   link: /offload/usage/
 
 - title: Optimize
-  description: Improve performance, caching, and cost efficiency in Docker Offload.
+  description: Improve performance and cost efficiency in Docker Offload.
   icon: speed
   link: /offload/optimize/
 
@@ -55,7 +55,9 @@ aliases:
 
 Docker Offload is a fully managed service that lets you offload building and
 running containers to the cloud using the Docker tools you already know. It
-provides cloud infrastructure for fast, consistent builds and compute-heavy
+enables developers to work efficiently in virtual desktop infrastructure (VDI)
+environments or systems that don't support nested virtualization, while also
+providing cloud infrastructure for fast, consistent builds and compute-heavy
 workloads like running LLMs or machine learning pipelines.
 
 In the following topics, learn about Docker Offload, how to set it up, use it

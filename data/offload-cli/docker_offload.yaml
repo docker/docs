@@ -4,14 +4,12 @@ usage: docker offload
 pname: docker
 plink: docker.yaml
 cname:
-  - docker offload accounts
   - docker offload diagnose
   - docker offload start
   - docker offload status
   - docker offload stop
   - docker offload version
 clink:
-  - docker_offload_accounts.yaml
   - docker_offload_diagnose.yaml
   - docker_offload_start.yaml
   - docker_offload_status.yaml
