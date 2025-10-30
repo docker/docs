@@ -24,75 +24,61 @@ Solution:
     --header "Authorization: Bearer ${mcpToken}"
     ```
 
-2.  Check you're waiting for MCP initialization:
+2.  Check you're waiting for MCP initialization.
 
-    {{< tabs group="language" >}}
-    {{< tab name="TypeScript" >}}
+    ```typescript
+    // typescript
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    ```
 
-        ```typescript
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        ```
-
-    {{< /tab >}}
-    {{< tab name="Python" >}}
-
-        ```python
-        await asyncio.sleep(1)
-        ```
-
-    {{< /tab >}}
-    {{< /tabs >}}
+    ```python
+    # python
+    await asyncio.sleep(1)
+    ```
 
 3.  Ensure credentials are in both `envs` and `mcp` configuration:
 
-    {{< tabs group="language" >}}
-    {{< tab name="TypeScript" >}}
+    ```typescript
+    // typescript
+    const sbx = await Sandbox.betaCreate({
+      envs: {
+        ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY!,
+        GITHUB_TOKEN: process.env.GITHUB_TOKEN!,
+        SONARQUBE_TOKEN: process.env.SONARQUBE_TOKEN!,
+      },
+      mcp: {
+        githubOfficial: {
+          githubPersonalAccessToken: process.env.GITHUB_TOKEN!,
+        },
+        sonarqube: {
+          org: process.env.SONARQUBE_ORG!,
+          token: process.env.SONARQUBE_TOKEN!,
+          url: "https://sonarcloud.io",
+        },
+      },
+    });
+    ```
 
-        ```typescript
-        const sbx = await Sandbox.betaCreate({
-          envs: {
-            ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY!,
-            GITHUB_TOKEN: process.env.GITHUB_TOKEN!,
-            SONARQUBE_TOKEN: process.env.SONARQUBE_TOKEN!,
-          },
-          mcp: {
-            githubOfficial: {
-              githubPersonalAccessToken: process.env.GITHUB_TOKEN!,
+    ```python
+    # python
+    sbx = await AsyncSandbox.beta_create(
+        envs={
+            "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY"),
+            "GITHUB_TOKEN": os.getenv("GITHUB_TOKEN"),
+            "SONARQUBE_TOKEN": os.getenv("SONARQUBE_TOKEN"),
+        },
+        mcp={
+            "githubOfficial": {
+                "githubPersonalAccessToken": os.getenv("GITHUB_TOKEN"),
             },
-            sonarqube: {
-              org: process.env.SONARQUBE_ORG!,
-              token: process.env.SONARQUBE_TOKEN!,
-              url: "https://sonarcloud.io",
+            "sonarqube": {
+                "org": os.getenv("SONARQUBE_ORG"),
+                "token": os.getenv("SONARQUBE_TOKEN"),
+                "url": "https://sonarcloud.io",
             },
-          },
-        });
-        ```
-
-    {{< /tab >}}
-    {{< tab name="Python" >}}
-
-        ```python
-        sbx = await AsyncSandbox.beta_create(
-            envs={
-                "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY"),
-                "GITHUB_TOKEN": os.getenv("GITHUB_TOKEN"),
-                "SONARQUBE_TOKEN": os.getenv("SONARQUBE_TOKEN"),
-            },
-            mcp={
-                "githubOfficial": {
-                    "githubPersonalAccessToken": os.getenv("GITHUB_TOKEN"),
-                },
-                "sonarqube": {
-                    "org": os.getenv("SONARQUBE_ORG"),
-                    "token": os.getenv("SONARQUBE_TOKEN"),
-                    "url": "https://sonarcloud.io",
-                },
-            },
-        )
-        ```
-
-    {{< /tab >}}
-    {{< /tabs >}}
+        },
+    )
+    ```
 
 4.  Verify your API tokens are valid and have proper scopes.
 
