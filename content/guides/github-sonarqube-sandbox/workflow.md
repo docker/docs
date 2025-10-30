@@ -56,111 +56,112 @@ Before you begin, make sure you have:
 
 1. Create a new directory for your workflow and initialize Node.js:
 
-```bash
-mkdir github-sonarqube-workflow
-cd github-sonarqube-workflow
-npm init -y
-```
+   ```bash
+   mkdir github-sonarqube-workflow
+   cd github-sonarqube-workflow
+   npm init -y
+   ```
 
 2. Open `package.json` and configure it for ES modules:
 
-```json
-{
-  "name": "github-sonarqube-workflow",
-  "version": "1.0.0",
-  "description": "Automated code quality workflow using E2B, GitHub, and SonarQube",
-  "type": "module",
-  "main": "quality-workflow.ts",
-  "scripts": {
-    "start": "tsx quality-workflow.ts"
-  },
-  "keywords": ["e2b", "github", "sonarqube", "mcp", "code-quality"],
-  "author": "",
-  "license": "MIT"
-}
-```
+   ```json
+   {
+     "name": "github-sonarqube-workflow",
+     "version": "1.0.0",
+     "description": "Automated code quality workflow using E2B, GitHub, and SonarQube",
+     "type": "module",
+     "main": "quality-workflow.ts",
+     "scripts": {
+       "start": "tsx quality-workflow.ts"
+     },
+     "keywords": ["e2b", "github", "sonarqube", "mcp", "code-quality"],
+     "author": "",
+     "license": "MIT"
+   }
+   ```
 
 3. Install required dependencies:
 
-```bash
-npm install e2b dotenv
-npm install -D typescript tsx @types/node
-```
+   ```bash
+   npm install e2b dotenv
+   npm install -D typescript tsx @types/node
+   ```
 
 4. Create a `.env` file in your project root:
 
-```bash
-touch .env
-```
+   ```bash
+   touch .env
+   ```
 
 5. Add your API keys and configuration, replacing the placeholders with your actual credentials:
 
-```plaintext
-E2B_API_KEY=your_e2b_api_key_here
-ANTHROPIC_API_KEY=your_anthropic_api_key_here
-GITHUB_TOKEN=ghp_your_personal_access_token_here
-GITHUB_OWNER=your_github_username
-GITHUB_REPO=your_repository_name
-SONARQUBE_ORG=your_sonarcloud_org_key
-SONARQUBE_TOKEN=your_sonarqube_user_token
-SONARQUBE_URL=https://sonarcloud.io
-```
+   ```plaintext
+   E2B_API_KEY=your_e2b_api_key_here
+   ANTHROPIC_API_KEY=your_anthropic_api_key_here
+   GITHUB_TOKEN=ghp_your_personal_access_token_here
+   GITHUB_OWNER=your_github_username
+   GITHUB_REPO=your_repository_name
+   SONARQUBE_ORG=your_sonarcloud_org_key
+   SONARQUBE_TOKEN=your_sonarqube_user_token
+   SONARQUBE_URL=https://sonarcloud.io
+   ```
 
 6. Protect your credentials by adding `.env` to `.gitignore`:
 
-```bash
-echo ".env" >> .gitignore
-echo "node_modules/" >> .gitignore
-```
+   ```bash
+   echo ".env" >> .gitignore
+   echo "node_modules/" >> .gitignore
+   ```
 
 {{< /tab >}}
 {{< tab name="Python" >}}
 
 1. Create a new directory for your workflow:
 
-```bash
-mkdir github-sonarqube-workflow
-cd github-sonarqube-workflow
-```
+   ```bash
+   mkdir github-sonarqube-workflow
+   cd github-sonarqube-workflow
+   ```
 
 2. Create a virtual environment and activate it:
 
-```bash
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
 3. Install required dependencies:
-```bash
-pip install e2b python-dotenv
-```
+
+   ```bash
+   pip install e2b python-dotenv
+   ```
 
 4. Create a `.env` file in your project root:
 
-```bash
-touch .env
-```
+   ```bash
+   touch .env
+   ```
 
 5. Add your API keys and configuration, replacing the placeholders with your actual credentials:
 
-```plaintext
-E2B_API_KEY=your_e2b_api_key_here
-ANTHROPIC_API_KEY=your_anthropic_api_key_here
-GITHUB_TOKEN=ghp_your_personal_access_token_here
-GITHUB_OWNER=your_github_username
-GITHUB_REPO=your_repository_name
-SONARQUBE_ORG=your_sonarcloud_org_key
-SONARQUBE_TOKEN=your_sonarqube_user_token
-SONARQUBE_URL=https://sonarcloud.io
-```
+   ```plaintext
+   E2B_API_KEY=your_e2b_api_key_here
+   ANTHROPIC_API_KEY=your_anthropic_api_key_here
+   GITHUB_TOKEN=ghp_your_personal_access_token_here
+   GITHUB_OWNER=your_github_username
+   GITHUB_REPO=your_repository_name
+   SONARQUBE_ORG=your_sonarcloud_org_key
+   SONARQUBE_TOKEN=your_sonarqube_user_token
+   SONARQUBE_URL=https://sonarcloud.io
+   ```
 
 6. Protect your credentials by adding `.env` to `.gitignore`:
 
-```bash
-echo ".env" >> .gitignore
-echo "venv/" >> .gitignore
-echo "__pycache__/" >> .gitignore
-```
+   ```bash
+   echo ".env" >> .gitignore
+   echo "venv/" >> .gitignore
+   echo "__pycache__/" >> .gitignore
+   ```
 
 {{< /tab >}}
 {{< /tabs >}}
