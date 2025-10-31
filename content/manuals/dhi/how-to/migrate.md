@@ -2,7 +2,7 @@
 title: Migrate an existing application to use Docker Hardened Images
 linktitle: Migrate an app
 description: Follow a step-by-step guide to update your Dockerfiles and adopt Docker Hardened Images for secure, minimal, and production-ready builds.
-weight: 50
+weight: 36
 keywords: migrate dockerfile, hardened base image, multi-stage build, non-root containers, secure container build
 ---
 
@@ -322,3 +322,13 @@ Alternatively, you can request assistance to
 migrate your Dockerfile:
 
 {{% include "gordondhi.md" %}}
+
+## What's next
+
+After migrating to Docker Hardened Images, you can:
+
+- [Compare images](./compare.md) to see the security improvements and
+  differences between your DHI and the original image
+- [Verify the image](./verify.md) to check signed attestations like SBOMs and
+  provenance
+- [Scan the image](./scan.md) to analyze it for known vulnerabilities

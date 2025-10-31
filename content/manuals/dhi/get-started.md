@@ -117,7 +117,52 @@ a simple Python command just like you would with any other Docker image:
     This starts a container from the `dhi-python:3.13` image and runs a simple
     Python script that prints `Hello from DHI`.
 
-To dive deeper into using images see [Use a Docker Hardened Image](./how-to/use.md).
+To dive deeper into using images, see:
+
+- [Use a Docker Hardened Image](./how-to/use.md) for general usage
+- [Use in Kubernetes](./how-to/k8s.md) for Kubernetes deployments
+- [Use a Helm chart](./how-to/helm.md) for deploying with Helm
+
+## Step 5: Compare with the other images
+
+You can quickly compare DHIs with other images to see the security
+improvements and differences. This comparison helps you understand the value of
+using hardened images.
+
+Run the following command to see a summary comparison, replacing
+`<your-namespace>` with your organization's namespace:
+
+```console
+$ docker scout compare <your-namespace>/dhi-python:3.13 --to python:3.13 --platform linux/amd64 --ignore-unchanged 2>/dev/null | sed -n '/## Overview/,/^  ## /p' | head -n -1
+```
+
+Example output:
+
+```plaintext
+  ## Overview
+
+                      │                    Analyzed Image                     │               Comparison Image
+  ────────────────────┼───────────────────────────────────────────────────────┼───────────────────────────────────────────────
+    Target            │  docker/dhi-python:3.13                               │  python:3.13
+      digest          │  c215e9da9f84                                         │  7f48e892134c
+      tag             │  3.13                                                 │  3.13
+      platform        │ linux/amd64                                           │ linux/amd64
+      provenance      │ https://github.com/docker-hardened-images/definitions │ https://github.com/docker-library/python.git
+                      │  77a629b3d0db035700206c2a4e7ed904e5902ea8             │  3f2d7e4c339ab883455b81a873519f1d0f2cd80a
+      vulnerabilities │    0C     0H     0M     0L                            │    0C     1H     5M   141L     2?
+                      │           -1     -5   -141     -2                     │
+      size            │ 35 MB (-377 MB)                                       │ 412 MB
+      packages        │ 80 (-530)                                             │ 610
+                      │                                                       │
+```
+
+This comparison shows that the Docker Hardened Image:
+
+- Removes vulnerabilities: 1 HIGH, 5 MEDIUM, 141 LOW, and 2 unspecified severity CVEs removed
+- Reduces size: From 412 MB down to 35 MB (91% reduction)
+- Minimizes packages: From 610 packages down to 80 (87% reduction)
+
+To dive deeper into comparing images see [Compare Docker Hardened Images](./how-to/compare.md).
 
 ## What's next
 
