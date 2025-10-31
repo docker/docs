@@ -58,9 +58,9 @@ before you install the official version of Docker Engine.
 
 The unofficial packages to uninstall are:
 
-- `docker.io`
 - `docker-compose`
 - `docker-doc`
+- `docker.io`
 - `podman-docker`
 
 Moreover, Docker Engine depends on `containerd` and `runc`. Docker Engine
@@ -71,10 +71,17 @@ conflicts with the versions bundled with Docker Engine.
 Run the following command to uninstall all conflicting packages:
 
 ```console
-$ for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+$ for pkg in containerd \
+docker-compose \
+docker-doc \
+docker.io \
+podman-docker \
+runc
+do sudo apt remove $pkg
+done
 ```
 
-`apt-get` might report that you have none of these packages installed.
+`apt` might report that you have none of these packages installed.
 
 Images, containers, volumes, and networks stored in `/var/lib/docker/` aren't
 automatically removed when you uninstall Docker. If you want to start with a
@@ -89,8 +96,8 @@ You can install Docker Engine in different ways, depending on your needs:
   [Docker Desktop for Linux](/manuals/desktop/setup/install/linux/_index.md). This is
   the easiest and quickest way to get started.
 
-- Set up and install Docker Engine from
-  [Docker's `apt` repository](#install-using-the-repository).
+- Set up and install Docker Engine from the
+  [Docker `apt` repository](#install-using-the-repository).
 
 - [Install it manually](#install-from-a-package) and manage upgrades manually.
 
@@ -99,42 +106,36 @@ You can install Docker Engine in different ways, depending on your needs:
 
 {{% include "engine-license.md" %}}
 
-### Install using the `apt` repository {#install-using-the-repository}
+### Install using the Docker `apt` repository {#install-using-the-repository}
 
 Before you install Docker Engine for the first time on a new host machine, you
 need to set up the Docker `apt` repository. Afterward, you can install and update
 Docker from the repository.
 
-1. Set up Docker's `apt` repository.
+1. Set up the Docker `apt` repository.
 
-   ```bash
-   # Add Docker's official GPG key:
-   sudo apt-get update
-   sudo apt-get install ca-certificates curl
-   sudo install -m 0755 -d /etc/apt/keyrings
-   sudo curl -fsSL {{% param "download-url-base" %}}/gpg -o /etc/apt/keyrings/docker.asc
-   sudo chmod a+r /etc/apt/keyrings/docker.asc
+   ```console
+   $ sudo apt install curl ca-certificates sq
 
-   # Add the repository to Apt sources:
-   echo \
-     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] {{% param "download-url-base" %}} \
-     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-   sudo apt-get update
+   $ curl {{% param "download-url-base" %}}/gpg | \
+   sudo sq packet dearmor --output /etc/apt/keyrings/docker.gpg
+
+   $ sudo tee /etc/apt/sources.list.d/docker.sources << EOF
+   Types: deb
+   URIs: {{% param "download-url-base" %}}
+   Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")
+   Components: stable
+   Signed-By: /etc/apt/keyrings/docker.gpg
+   EOF
+
+   $ sudo apt update
    ```
 
    > [!NOTE]
    >
-   > If you use a derivative distribution, such as Kali Linux,
-   > you may need to substitute the part of this command that's expected to
-   > print the version codename:
-   >
-   > ```console
-   > $(. /etc/os-release && echo "$VERSION_CODENAME")
-   > ```
-   >
-   > Replace this part with the codename of the corresponding Debian release,
-   > such as `bookworm`.
+   > If you use a derivative distribution then you may need to change
+   > `Suites:` to the corresponding suite name from
+   > [`{{% param "download-url-base" %}}/dists/`]({{% param "download-url-base" %}}/dists/).
 
 2. Install the Docker packages.
 
@@ -144,7 +145,11 @@ Docker from the repository.
    To install the latest version, run:
 
    ```console
-   $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   $ sudo apt install containerd.io \
+   docker-buildx-plugin \
+   docker-ce \
+   docker-ce-cli \
+   docker-compose-plugin
    ```
 
    {{< /tab >}}
@@ -154,38 +159,40 @@ Docker from the repository.
    available versions in the repository:
 
    ```console
-   # List the available versions:
-   $ apt-cache madison docker-ce | awk '{ print $3 }'
+   $ apt list --all-versions docker-ce
 
-   5:{{% param "docker_ce_version" %}}-1~debian.12~bookworm
-   5:{{% param "docker_ce_version_prev" %}}-1~debian.12~bookworm
-   ...
+     docker-ce/trixie 5:{{% param "docker_ce_version" %}}-1~debian.13~trixie <arch>
+     docker-ce/trixie 5:{{% param "docker_ce_version_prev" %}}-1~debian.13~trixie <arch>
+     ...
    ```
 
    Select the desired version and install:
 
    ```console
-   $ VERSION_STRING=5:{{% param "docker_ce_version" %}}-1~debian.12~bookworm
-   $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
+   $ sudo apt install containerd.io \
+   docker-buildx-plugin \
+   docker-ce=5:{{% param "docker_ce_version" %}}-1~debian.13~trixie \
+   docker-ce-cli=5:{{% param "docker_ce_version" %}}-1~debian.13~trixie \
+   docker-compose-plugin
    ```
 
    {{< /tab >}}
    {{< /tabs >}}
 
-    > [!NOTE]
-    >
-    > The Docker service starts automatically after installation. To verify that
-    > Docker is running, use:
-    > 
-    > ```console
-    > $ sudo systemctl status docker
-    > ```
-    >
-    > Some systems may have this behavior disabled and will require a manual start:
-    >
-    > ```console
-    > $ sudo systemctl start docker
-    > ```
+   > [!NOTE]
+   >
+   > The Docker service starts automatically after installation. To verify that
+   > Docker is running, use:
+   > 
+   > ```console
+   > $ sudo systemctl status docker
+   > ```
+   >
+   > Some systems may have this behavior disabled and will require a manual start:
+   >
+   > ```console
+   > $ sudo systemctl start docker
+   > ```
 
 3. Verify that the installation is successful by running the `hello-world` image:
 
@@ -208,9 +215,8 @@ choosing the new version you want to install.
 
 ### Install from a package
 
-If you can't use Docker's `apt` repository to install Docker Engine, you can
-download the `deb` file for your release and install it manually. You need to
-download a new file each time you want to upgrade Docker Engine.
+You may download the `deb` file for your release and install it manually. You
+would need to download a new file each time you want to upgrade Docker Engine.
 
 <!-- markdownlint-disable-next-line -->
 1. Go to [`{{% param "download-url-base" %}}/dists/`]({{% param "download-url-base" %}}/dists/).
@@ -234,26 +240,26 @@ download a new file each time you want to upgrade Docker Engine.
 
    ```console
    $ sudo dpkg -i ./containerd.io_<version>_<arch>.deb \
-     ./docker-ce_<version>_<arch>.deb \
-     ./docker-ce-cli_<version>_<arch>.deb \
-     ./docker-buildx-plugin_<version>_<arch>.deb \
-     ./docker-compose-plugin_<version>_<arch>.deb
+   ./docker-ce_<version>_<arch>.deb \
+   ./docker-ce-cli_<version>_<arch>.deb \
+   ./docker-buildx-plugin_<version>_<arch>.deb \
+   ./docker-compose-plugin_<version>_<arch>.deb
    ```
 
-    > [!NOTE]
-    >
-    > The Docker service starts automatically after installation. To verify that
-    > Docker is running, use:
-    > 
-    > ```console
-    > $ sudo systemctl status docker
-    > ```
-    >
-    > Some systems may have this behavior disabled and will require a manual start:
-    >
-    > ```console
-    > $ sudo systemctl start docker
-    > ```
+   > [!NOTE]
+   >
+   > The Docker service starts automatically after installation. To verify that
+   > Docker is running, use:
+   > 
+   > ```console
+   > $ sudo systemctl status docker
+   > ```
+   >
+   > Some systems may have this behavior disabled and will require a manual start:
+   >
+   > ```console
+   > $ sudo systemctl start docker
+   > ```
 
 6. Verify that the installation is successful by running the `hello-world` image:
 
@@ -280,7 +286,7 @@ To upgrade Docker Engine, download the newer package files and repeat the
 1. Uninstall the Docker Engine, CLI, containerd, and Docker Compose packages:
 
    ```console
-   $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
+   $ sudo apt purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
    ```
 
 2. Images, containers, volumes, or custom configuration files on your host
@@ -294,8 +300,8 @@ To upgrade Docker Engine, download the newer package files and repeat the
 3. Remove source list and keyrings
 
    ```console
-   $ sudo rm /etc/apt/sources.list.d/docker.list
-   $ sudo rm /etc/apt/keyrings/docker.asc
+   $ sudo rm /etc/apt/sources.list.d/docker.sources
+   $ sudo rm /etc/apt/keyrings/docker.gpg
    ```
 
 You have to delete any edited configuration files manually.
