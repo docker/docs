@@ -694,7 +694,7 @@ Each line in an `.env` file must be in `VAR[=[VAL]]` format. The following synta
   - `VAR="VAL"` -> `VAL`
   - `VAR='VAL'` -> `VAL`
   - `VAR: VAL` -> `VAL`
-  - `VAR = VAL  ` -> `VAL`
+  - `VAR = VAL  ` -> `VAL` <!-- markdownlint-disable-line no-space-in-code -->
 - Inline comments for unquoted values must be preceded with a space.
   - `VAR=VAL # comment` -> `VAL`
   - `VAR=VAL# not a comment` -> `VAL# not a comment`
