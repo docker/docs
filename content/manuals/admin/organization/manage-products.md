@@ -16,6 +16,7 @@ product, including how to set up and configure them, see the following manuals:
 - [Docker Build Cloud](../../build-cloud/_index.md)
 - [Docker Scout](../../scout/_index.md)
 - [Testcontainers Cloud](https://testcontainers.com/cloud/docs/#getting-started)
+- [Docker Offload](../../offload/_index.md)
 
 ## Manage product access for your organization
 
@@ -99,6 +100,52 @@ select **Account**.
 1. Select **Settings**, then **Lock access to Testcontainers Cloud**.
 
 {{< /tab >}}
+{{< tab name="Docker Offload" >}}
+
+### Manage Docker Offload access
+
+> [!NOTE]
+>
+> Docker Offload isn't included in the core Docker subscription plans. To make Docker Offload available, you must [sign
+> up](https://www.docker.com/products/docker-offload/) and subscribe.
+
+To manage Docker Offload access for your organization, use [Settings
+Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md):
+
+1. Sign in to [Docker Home](https://app.docker.com/) as an organization owner.
+1. Select **Admin Console** > **Desktop Settings Management**.
+1. Configure the **Enable Docker Offload** setting to control whether Docker Offload features are available in Docker
+   Desktop. You can configure this setting in five states:
+   - **Always enabled**: Docker Offload is always enabled and users cannot disable it. The Offload
+     toggle is always visible in Docker Desktop header. Recommended for VDI environments where local Docker execution is
+     not possible.
+   - **Enabled**: Docker Offload is enabled by default but users can disable it in Docker Desktop
+     settings. Suitable for hybrid environments.
+   - **Disabled**: Docker Offload is disabled by default but users can enable it in Docker Desktop
+     settings.
+   - **Always disabled**: Docker Offload is disabled and users cannot enable it. The option is
+     visible but locked. Use when Docker Offload is not approved for organizational use.
+   - **User defined**: No enforced default. Users choose whether to enable or disable Docker Offload in their
+     Docker Desktop settings.
+1. If GPU support is enabled for your organization's subscription, configure the
+   **Enable Docker Offload GPU Support** setting to control whether GPU support
+   is available in Docker Desktop. You can configure this setting in five
+   states:
+   - **Always enabled**: GPU support is always enabled and users cannot disable it.
+   - **Enabled**: GPU support is enabled by default but users can disable it in Docker Desktop
+     settings.
+   - **Disabled**: GPU support is disabled by default but users can enable it in Docker Desktop
+     settings.
+   - **Always disabled**: GPU support is disabled and users cannot enable it. The option is
+     visible but locked.
+   - **User defined**: No enforced default. Users choose whether to enable or disable GPU support in their
+     Docker Desktop settings.
+1. Select **Save**.
+
+For more details on Settings Management, see the [Settings
+reference](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md#enable-docker-offload).
+
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Monitor product usage for your organization
@@ -110,6 +157,8 @@ To view usage for Docker products:
 - Docker Build Cloud: View the **Build minutes** page in [Docker Build Cloud](http://app.docker.com/build).
 - Docker Scout: View the [**Repository settings** page](https://scout.docker.com/settings/repos) in Docker Scout.
 - Testcontainers Cloud: View the [**Billing** page](https://app.testcontainers.cloud/dashboard/billing) in Testcontainers Cloud.
+- Docker Offload: View the **Offload** > **Offload overview** page in [Docker Home](https://app.docker.com/). For more details, see
+  [Docker Offload usage and billing](/offload/usage/).
 
 If your usage or seat count exceeds your subscription amount, you can
 [scale your subscription](../../subscription/scale.md) to meet your needs.

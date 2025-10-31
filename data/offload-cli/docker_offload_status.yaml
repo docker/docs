@@ -4,6 +4,17 @@ usage: docker offload status [OPTIONS]
 pname: docker offload
 plink: docker_offload.yaml
 options:
+  - option: format
+    shorthand: f
+    value_type: string
+    default_value: pretty
+    description: "Format of output (default: pretty, one of: pretty|json)"
+    deprecated: false
+    hidden: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
   - option: watch
     shorthand: w
     value_type: bool

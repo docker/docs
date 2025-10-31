@@ -1,5 +1,5 @@
 command: docker offload version
-short: Prints the Docker Offload CLI version
+short: Prints the version
 usage: docker offload version [OPTIONS]
 pname: docker offload
 plink: docker_offload.yaml
