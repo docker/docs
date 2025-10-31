@@ -372,3 +372,6 @@
 
 "/dhi/how-to/customize/#create-an-oci-artifact-image":
   - /go/dhi-customization-artifacts/
+
+"/ai/mcp-catalog-and-toolkit/get-started/#verify-connections":
+  - /go/mcp-client-verify/
