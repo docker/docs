@@ -376,11 +376,12 @@ argument, the argument takes priority.
 
 Sets the type of the BuildKit progress output. Valid values are:
 
-- `auto` (default)
-- `plain`
-- `tty`
-- `quiet`
-- `rawjson`
+- `auto` (default): automatically uses `tty` in interactive terminals, `plain` otherwise
+- `plain`: displays build steps sequentially in simple text format
+- `tty`: interactive output with formatted progress bars and build steps
+- `quiet`: suppresses progress output, only shows errors and final image ID
+- `none`: no progress output, only shows errors
+- `rawjson`: outputs build progress as raw JSON (useful for parsing by other tools)
 
 Usage:
 
