@@ -295,7 +295,7 @@
 "/ai/mcp-catalog-and-toolkit/catalog/":
   - /go/mcp-catalog-and-toolkit-catalog/
 "/ai/mcp-catalog-and-toolkit/mcp-gateway/":
-  - /go/mcp-catalog-and-toolkit-gateway/
+  - /go/mcp-gateway/
 "/ai/mcp-catalog-and-toolkit/toolkit/#install-an-mcp-server":
   - /go/mcp-toolkit-install-mcp-server/
 "/ai/mcp-catalog-and-toolkit/toolkit/#install-an-mcp-client":
