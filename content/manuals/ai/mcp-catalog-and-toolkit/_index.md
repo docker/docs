@@ -23,14 +23,18 @@ grid:
    description: Learn about the MCP Toolkit to manage MCP servers and clients
    icon: /icons/toolkit.svg
    link: /ai/mcp-catalog-and-toolkit/toolkit/
+ - title: Dynamic MCP
+   description: Discover and add MCP servers on-demand using natural language
+   icon: search
+   link: /ai/mcp-catalog-and-toolkit/dynamic-mcp/
  - title: MCP Gateway
    description: Learn about the underlying technology that powers the MCP Toolkit
    icon: developer_board
-   link: /ai/mcp-catalog-and-toolkit/toolkit/
+   link: /ai/mcp-catalog-and-toolkit/mcp-gateway/
  - title: Docker Hub MCP server
    description: Explore about the Docker Hub server for searching images, managing repositories, and more
    icon: device_hub
-   link: /ai/mcp-catalog-and-toolkit/toolkit/
+   link: /ai/mcp-catalog-and-toolkit/hub-mcp/
 ---
 
 {{< summary-bar feature_name="Docker MCP Catalog and Toolkit" >}}
