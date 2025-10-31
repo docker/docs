@@ -688,9 +688,13 @@ Each line in an `.env` file must be in `VAR[=[VAL]]` format. The following synta
 - Blank lines are ignored.
 - Unquoted and double-quoted (`"`) values have [Interpolation](interpolation.md) applied.
 - Each line represents a key-value pair. Values can optionally be quoted.
+- Delimiter separating key and value can be either `=` or `:`.
+- Spaces before and after value are ignored.
   - `VAR=VAL` -> `VAL`
   - `VAR="VAL"` -> `VAL`
   - `VAR='VAL'` -> `VAL`
+  - `VAR: VAL` -> `VAL`
+  - `VAR = VAL  ` -> `VAL`
 - Inline comments for unquoted values must be preceded with a space.
   - `VAR=VAL # comment` -> `VAL`
   - `VAR=VAL# not a comment` -> `VAL# not a comment`
