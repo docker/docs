@@ -6,6 +6,8 @@ description: Learn how to configure build settings for Docker Offload.
 keywords: cloud, configuration, settings, offload, gpu
 ---
 
+{{< summary-bar feature_name="Docker Offload" >}}
+
 You can configure Docker Offload settings at different levels depending on your role. Organization owners can manage
 settings for all users in their organization, while individual developers can configure their own Docker Desktop
 settings.
