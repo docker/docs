@@ -3,7 +3,7 @@ title: Scan Docker Hardened Images
 linktitle: Scan an image
 description: Learn how to scan Docker Hardened Images for known vulnerabilities using Docker Scout, Grype, or Trivy.
 keywords: scan container image, docker scout cves, grype scanner, trivy container scanner, vex attestation
-weight: 45
+weight: 46
 ---
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
