@@ -300,7 +300,7 @@ After you've added your workflow file, it's time to trigger and observe the CI/C
 > To maintain code quality and prevent accidental direct pushes, enable branch protection rules:
 >
 > - Navigate to your **GitHub repo → Settings → Branches**.
-> - Under Branch protection rules, and select **Add rule**.
+> - Under Branch protection rules, select **Add rule**.
 > - Specify `main` as the branch name.
 > - Enable options like:
 >   - _Require a pull request before merging_.
