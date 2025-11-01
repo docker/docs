@@ -653,7 +653,7 @@ The `.dockerignore` file tells Docker which files and folders to exclude when bu
 >
 > To learn more, visit the [.dockerignore reference](/reference/dockerfile.md#dockerignore-file).
 
-Copy and replace the contents of your existing `.dockerignore` with the optimized configuration below:
+Copy and replace the contents of your existing `.dockerignore` with the optimized configuration:
 
 ```dockerignore
 # Optimized .dockerignore for Node.js + React Todo App
