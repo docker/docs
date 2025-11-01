@@ -286,7 +286,7 @@ After you've added your workflow file, it's time to trigger and observe the CI/C
 
 2. Monitor the workflow execution
    1. Go to the Actions tab in your GitHub repository.
-   2. Click into the workflow run to follow each step: **test**, **build**, **security**, and (if successful) **push** and **deploy**.
+   2. Select into the workflow run to follow each step: **test**, **build**, **security**, and (if successful) **push** and **deploy**.
 
 3. Verify the Docker image on Docker Hub
    - After a successful workflow run, visit your [Docker Hub repositories](https://hub.docker.com/repositories).
@@ -300,7 +300,7 @@ After you've added your workflow file, it's time to trigger and observe the CI/C
 > To maintain code quality and prevent accidental direct pushes, enable branch protection rules:
 >
 > - Navigate to your **GitHub repo → Settings → Branches**.
-> - Under Branch protection rules, click **Add rule**.
+> - Under Branch protection rules, and select **Add rule**.
 > - Specify `main` as the branch name.
 > - Enable options like:
 >   - _Require a pull request before merging_.

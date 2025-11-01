@@ -128,7 +128,7 @@ The test suite covers:
 
 - **Client Components** (`src/client/components/__tests__/`): React component testing with React Testing Library
 - **Custom Hooks** (`src/client/hooks/__tests__/`): React hooks testing with proper mocking
-- **Server Routes** (`src/server/__tests__/routes/`): API endpoint testing with Supertest
+- **Server Routes** (`src/server/__tests__/routes/`): API endpoint testing
 - **Database Layer** (`src/server/database/__tests__/`): PostgreSQL database operations testing
 - **Utility Functions** (`src/shared/utils/__tests__/`): Validation and helper function testing
 - **Integration Tests** (`src/client/__tests__/`): Full application integration testing

@@ -448,8 +448,8 @@ docker compose up app-dev --build
 1. **Attach the debugger**:
    - Open VS Code
    - Go to the Debug panel (Ctrl/Cmd + Shift + D)
-   - Select "Attach to Docker Container" from the dropdown
-   - Click the green play button or press F5
+   - Select "Attach to Docker Container" from the drop-down
+   - Select the green play button or press F5
 
 ### Chrome DevTools (Alternative)
 
@@ -467,13 +467,13 @@ docker compose up app-dev --build
 chrome://inspect
 ```
 
-1. **Click "Configure"** and add:
+1. **Select "Configure"** and add:
 
 ```text
 localhost:9229
 ```
 
-1. **Click "inspect"** under your Node.js target when it appears
+1. **Select "inspect"** under your Node.js target when it appears
 
 ### Debugging Configuration Details
 
