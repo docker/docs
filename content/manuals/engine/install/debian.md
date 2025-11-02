@@ -115,13 +115,13 @@ Docker from the repository.
    sudo chmod a+r /etc/apt/keyrings/docker.asc
 
    # Add the repository to Apt sources:
-   echo -e \
-   "Types: deb\n\
-   URIs: https://download.docker.com/linux/debian/\n\
-   Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")\n\
-   Components: stable\n\
-   Signed-By: /etc/apt/keyrings/docker.asc" | \
-   sudo tee /etc/apt/sources.list.d/docker.sources > /dev/null
+   sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+   Types: deb
+   URIs: {{% param "download-url-base" %}}
+   Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")
+   Components: stable
+   Signed-By: /etc/apt/keyrings/docker.asc
+   EOF
 
    sudo apt-get update
    ```
