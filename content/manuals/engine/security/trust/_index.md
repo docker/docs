@@ -63,7 +63,7 @@ have discretion on which tags they sign.
 
 An image repository can contain an image with one tag that is signed and another
 tag that is not. For example, consider [the Mongo image
-repository](https://hub.docker.com/r/library/mongo/tags/). The `latest`
+repository](https://hub.docker.com/_/mongo/tags/). The `latest`
 tag could be unsigned while the `3.1.6` tag could be signed. It is the
 responsibility of the image publisher to decide if an image tag is signed or
 not. In this representation, some image tags are signed, others are not:
