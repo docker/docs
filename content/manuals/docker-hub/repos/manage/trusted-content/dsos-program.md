@@ -7,7 +7,7 @@ aliases:
   - /trusted-content/dsos-program/
 ---
 
-[Docker-Sponsored Open Source images](https://hub.docker.com/search?q=&image_filter=open_source) are published and maintained by open-source projects sponsored by Docker through the program.
+[Docker-Sponsored Open Source images](https://hub.docker.com/search?badges=open_source) are published and maintained by open-source projects sponsored by Docker through the program.
 
 Images that are part of this program have a special badge on Docker Hub making it easier for users to identify projects that Docker has verified as trusted, secure, and active open-source projects.
 
