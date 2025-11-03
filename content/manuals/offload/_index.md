@@ -7,8 +7,8 @@ params:
   sidebar:
     group: Products
     badge:
-      color: blue
-      text: Beta
+      color: violet
+      text: Early Access
 
 grid:
 

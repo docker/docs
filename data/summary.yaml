@@ -150,7 +150,7 @@ Docker Build Cloud:
 Docker CLI OpenTelemetry:
   requires: Docker Engine [26.1.0](/manuals/engine/release-notes/26.1.md#2610) and later
 Docker Offload:
-  availability: Beta
+  availability: Early Access
   requires: Docker Desktop 4.50 and later
 docker compose alpha:
   availability: Experimental
