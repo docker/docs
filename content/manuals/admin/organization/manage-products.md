@@ -127,19 +127,6 @@ Management](/manuals/enterprise/security/hardened-desktop/settings-management/_i
      visible but locked. Use when Docker Offload is not approved for organizational use.
    - **User defined**: No enforced default. Users choose whether to enable or disable Docker Offload in their
      Docker Desktop settings.
-1. If GPU support is enabled for your organization's subscription, configure the
-   **Enable Docker Offload GPU Support** setting to control whether GPU support
-   is available in Docker Desktop. You can configure this setting in five
-   states:
-   - **Always enabled**: GPU support is always enabled and users cannot disable it.
-   - **Enabled**: GPU support is enabled by default but users can disable it in Docker Desktop
-     settings.
-   - **Disabled**: GPU support is disabled by default but users can enable it in Docker Desktop
-     settings.
-   - **Always disabled**: GPU support is disabled and users cannot enable it. The option is
-     visible but locked.
-   - **User defined**: No enforced default. Users choose whether to enable or disable GPU support in their
-     Docker Desktop settings.
 1. Select **Save**.
 
 For more details on Settings Management, see the [Settings

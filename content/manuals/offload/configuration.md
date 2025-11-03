@@ -3,7 +3,7 @@ title: Configure Docker Offload
 linktitle: Configure
 weight: 20
 description: Learn how to configure build settings for Docker Offload.
-keywords: cloud, configuration, settings, offload, gpu
+keywords: cloud, configuration, settings, offload
 ---
 
 {{< summary-bar feature_name="Docker Offload" >}}
@@ -31,7 +31,6 @@ For developers, you can manage Docker Offload settings in Docker Desktop. To man
    - Toggle **Enable Docker Offload**. When enabled, you can start Offload sessions.
    - Select **Idle timeout**. This is the duration of time between no activity and Docker Offload entering idle mode.
      For details about idle timeout, see [Understand active and idle states](#understand-active-and-idle-states).
-   - Check **Enable GPU support**. When enabled, workloads can use cloud GPU if available.
 
 ### Understand active and idle states
 

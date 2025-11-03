@@ -3,13 +3,13 @@ title: Docker Offload quickstart
 linktitle: Quickstart
 weight: 10
 description: Learn how to use Docker Offload to build and run your container images faster, both locally and in CI.
-keywords: cloud, quickstart, Docker Desktop, gpu, offload
+keywords: cloud, quickstart, Docker Desktop, offload
 ---
 
 {{< summary-bar feature_name="Docker Offload" >}}
 
 [Docker Offload](./about.md) lets you build and run containers in the cloud while using your local Docker Desktop tools
-and workflow. This means faster builds, access to powerful cloud resources like GPUs, and a seamless development
+and workflow. This means faster builds, access to powerful cloud resources, and a seamless development
 experience.
 
 This quickstart covers the steps developers need to get started with Docker Offload.
@@ -66,10 +66,6 @@ how to start Docker Offload using the CLI.
 3. If you are a member of multiple organizations that have access to Docker Offload, you have the option to select a
    profile. The selected organization is responsible for any usage.
 
-
-4. If GPU-accelerated instances are enabled for your organization, you have the option to select **GPU Supported**, or
-   **CPU-only support**.
-
 When Docker Offload is started, you'll see a cloud icon
 ({{< inline-image src="./images/cloud-mode.png" alt="Offload mode icon" >}})
 in the Docker Desktop Dashboard header, and the Docker Desktop Dashboard appears purple. You can run
@@ -87,12 +83,6 @@ To verify that Docker Offload is working, run a container:
 $ docker run --rm hello-world
 ```
 
-If you enabled GPU support, you can also run a GPU-enabled container:
-
-```console
-$ docker run --rm --gpus all hello-world
-```
-
 If Docker Offload is working, you'll see `Hello from Docker!` in the terminal output.
 
 ## Step 4: Monitor your Offload usage
@@ -106,8 +96,9 @@ in the left navigation of the Docker Desktop Dashboard.
 
 ## Step 5: Stop Docker Offload
 
-Docker Offload automatically [idles](./configuration.md#understand-active-and-idle-states) after a period of inactivity. You can stop it at
-any time. To stop Docker Offload:
+Docker Offload automatically
+[idles](./configuration.md#understand-active-and-idle-states) after a period of
+inactivity. You can stop it at any time. To stop Docker Offload:
 
 ```console
 $ docker offload stop

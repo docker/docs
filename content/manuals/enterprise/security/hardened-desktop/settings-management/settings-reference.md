@@ -919,25 +919,6 @@ deployment of AI features in security-conscious organizations.
 > This setting is only available when Docker Offload capability is enabled for
 > the organization.
 
-#### Enable Docker Offload GPU Support
-
-| Default value | Accepted values | Format   |
-|---------------|-----------------|----------|
-| `false`       | `true`, `false` | Boolean  |
-
-- **Description:** Enable GPU support for Docker Offload features.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Enable GPU-accelerated workloads in Docker Offload.
-- **Configure this setting with:**
-    - **Docker Offload** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `enableCloudGPUSupport` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Enable Docker Offload GPU Support** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
-
-> [!NOTE]
->
-> This setting requires Docker Offload to be enabled first and is only available when GPU support capability is enabled
-> for the organization.
-
 ### Enable Wasm
 
 | Default value | Accepted values | Format   |

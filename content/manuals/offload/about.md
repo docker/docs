@@ -3,7 +3,7 @@ title: About Docker Offload
 linktitle: About
 weight: 15
 description: Learn about Docker Offload, its features, and how it works.
-keywords: cloud, offload, vdi, on-demand gpu, gpu
+keywords: cloud, offload, vdi
 ---
 
 Docker Offload is a fully managed service for building and running containers in
@@ -13,17 +13,13 @@ scalable, cloud-powered environment, enabling developers to work efficiently eve
 in virtual desktop infrastructure (VDI) environments or systems that don't support
 nested virtualization.
 
-Docker Offload also supports GPU-accelerated instances, allowing you to
-containerize and run compute-intensive workloads such as running models and
-other machine learning or data processing tasks that benefit from GPU.
+
 
 ## Key features
 
 Docker Offload includes the following capabilities to support modern container
 workflows:
 
-- GPU acceleration: Use NVIDIA L4 GPU-backed environments for machine learning,
-  media processing, and other compute-intensive workloads.
 - Ephemeral cloud runners: Automatically provision and tear down cloud
   environments for each container session.
 - Hybrid workflows: Seamlessly transition between local and remote execution
@@ -42,7 +38,6 @@ local and cloud environments. It helps you:
 
 - Offload heavy builds and runs to fast, scalable infrastructure
 - Run containers that require more resources than your local setup can provide
-- Build and run AI apps with instant access to GPU-powered environments
 - Use Docker Compose to manage complex, multi-service apps that need cloud
   resources
 - Maintain consistent environments without managing custom infrastructure
@@ -76,13 +71,6 @@ reliable containers even on low-powered machines, including machines that do not
 support nested virtualization. This makes Docker Offload ideal for developers
 using environments such as virtual desktops, cloud-hosted development machines,
 or older hardware.
-
-Docker Offload also supports GPU-accelerated workloads. Containers that require
-GPU access can run on cloud instances provisioned with NVIDIA GPUs for
-efficient AI inferencing, media processing, and general-purpose GPU
-acceleration. This enables compute-heavy workflows such as model evaluation,
-image processing, and hardware-accelerated CI tests to run seamlessly in the
-cloud.
 
 Despite running remotely, features like bind mounts and port forwarding continue
 to work seamlessly, providing a local-like experience from within Docker Desktop
