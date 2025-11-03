@@ -115,8 +115,8 @@ must be prefixed to avoid ambiguity with a `type://` prefix.
 Compose warns you if the image builder does not support additional contexts and may list
 the unused contexts.
 
-Illustrative examples of how this is used in Buildx can be found
-[here](https://github.com/docker/buildx/blob/master/docs/reference/buildx_build.md#-additional-build-contexts---build-context).
+Refer to the reference documentation for [`docker buildx build --build-context`](https://github.com/docker/buildx/blob/master/docs/reference/buildx_build.md#-additional-build-contexts---build-context)
+for example usage.
 
 `additional_contexts` can also refer to an image built by another service.
 This allows a service image to be built using another service image as a base image, and to share

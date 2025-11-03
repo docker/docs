@@ -30,8 +30,8 @@ when the tests succeed.
 
    > [!NOTE]
    >
-   > You may be redirected to the settings page to [link](link-source.md) the
-   > code repository service. Otherwise, if you are editing the build settings
+   > You may be redirected to the settings page to [link the code repository
+   > service](link-source.md). Otherwise, if you are editing the build settings
    > for an existing automated build, select **Configure automated builds**.
 
 4. Select the **source repository** to build the Docker images from.

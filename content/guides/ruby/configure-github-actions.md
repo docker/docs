@@ -89,7 +89,7 @@ Each GitHub Actions workflow includes one or several jobs. Each job consists of 
 
 ## 2. Run the workflow
 
-Let's commit the changes, push them to the `main` branch. In the workflow above, the trigger is set to `push` events on the `main` branch. This means that the workflow will run every time you push changes to the `main` branch. You can find more information about the workflow triggers [here](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows).
+Commit the changes and push them to the `main` branch. This workflow is runs every time you push changes to the `main` branch. You can find more information about workflow triggers [in the GitHub documentation](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows).
 
 Go to the **Actions** tab of you GitHub repository. It displays the workflow. Selecting the workflow shows you the breakdown of all the steps.
 
