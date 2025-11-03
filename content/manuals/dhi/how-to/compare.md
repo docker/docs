@@ -34,13 +34,17 @@ To compare a Docker Hardened Image with another image, use the [`docker scout
 compare`](/reference/cli/docker/scout/compare/) command:
 
 ```console
-$ docker scout compare <your-namespace>/dhi-<image>:<tag> --to <comparison-image>:<tag> --platform <platform>
+$ docker scout compare <your-namespace>/dhi-<image>:<tag> \
+    --to <comparison-image>:<tag> \
+    --platform <platform>
 ```
 
 For example, to compare a DHI Node.js image with the official Node.js image:
 
 ```console
-$ docker scout compare <your-namespace>/dhi-node:22-debian13 --to node:22 --platform linux/amd64
+$ docker scout compare <your-namespace>/dhi-node:22-debian13 \
+    --to node:22 \
+    --platform linux/amd64
 ```
 
 This command provides a detailed comparison including:
@@ -55,7 +59,10 @@ To focus only on the differences and ignore unchanged packages, use the
 `--ignore-unchanged` flag:
 
 ```console
-$ docker scout compare <your-namespace>/dhi-node:22-debian13 --to node:22 --platform linux/amd64 --ignore-unchanged
+$ docker scout compare <your-namespace>/dhi-node:22-debian13 \
+    --to node:22 \
+    --platform linux/amd64 \
+    --ignore-unchanged
 ```
 
 This output highlights only the packages and vulnerabilities that differ between
@@ -68,7 +75,11 @@ For a concise overview of the comparison results, you can extract just the
 overview section using standard shell tools:
 
 ```console
-$ docker scout compare <your-namespace>/dhi-node:22-debian13 --to node:22 --platform linux/amd64 --ignore-unchanged 2>/dev/null | sed -n '/## Overview/,/^  ## /p' | head -n -1
+$ docker scout compare <your-namespace>/dhi-node:22-debian13 \
+    --to node:22 \
+    --platform linux/amd64 \
+    --ignore-unchanged \
+    2>/dev/null | sed -n '/## Overview/,/^  ## /p' | head -n -1
 ```
 
 The result is a clean summary showing the key differences between the two
@@ -152,7 +163,10 @@ Before migrating from a Docker Official Image to a DHI, compare them to
 understand the security improvements. For example:
 
 ```console
-$ docker scout compare <your-namespace>/dhi-python:3.13 --to python:3.13 --platform linux/amd64 --ignore-unchanged
+$ docker scout compare <your-namespace>/dhi-python:3.13 \
+    --to python:3.13 \
+    --platform linux/amd64 \
+    --ignore-unchanged
 ```
 
 This helps justify the migration by showing concrete vulnerability reductions
@@ -164,7 +178,9 @@ After customizing a DHI, compare the customized version with the original to
 ensure you haven't introduced new vulnerabilities. For example:
 
 ```console
-$ docker scout compare <your-namespace>/dhi-python:3.13-custom --to <your-namespace>/dhi-python:3.13 --platform linux/amd64
+$ docker scout compare <your-namespace>/dhi-python:3.13-custom \
+    --to <your-namespace>/dhi-python:3.13 \
+    --platform linux/amd64
 ```
 
 ### Track updates over time
@@ -172,5 +188,8 @@ $ docker scout compare <your-namespace>/dhi-python:3.13-custom --to <your-namesp
 Compare different versions of the same DHI to see what changed between releases. For example:
 
 ```console
-$ docker scout compare <your-namespace>/dhi-node:22-debian13 --to <your-namespace>/dhi-node:20-debian12 --platform linux/amd64 --ignore-unchanged
+$ docker scout compare <your-namespace>/dhi-node:22-debian13 \
+    --to <your-namespace>/dhi-node:20-debian12 \
+    --platform linux/amd64 \
+    --ignore-unchanged
 ```

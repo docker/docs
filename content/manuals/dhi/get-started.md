@@ -133,7 +133,11 @@ Run the following command to see a summary comparison, replacing
 `<your-namespace>` with your organization's namespace:
 
 ```console
-$ docker scout compare <your-namespace>/dhi-python:3.13 --to python:3.13 --platform linux/amd64 --ignore-unchanged 2>/dev/null | sed -n '/## Overview/,/^  ## /p' | head -n -1
+$ docker scout compare <your-namespace>/dhi-python:3.13 \
+    --to python:3.13 \
+    --platform linux/amd64 \
+    --ignore-unchanged \
+    2>/dev/null | sed -n '/## Overview/,/^  ## /p' | head -n -1
 ```
 
 Example output:
