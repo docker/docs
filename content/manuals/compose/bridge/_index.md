@@ -8,7 +8,7 @@ weight: 50
 
 {{< summary-bar feature_name="Compose bridge" >}}
 
-Compose Bridge converts your Docker Compose configuration into platform-specific deployment formats such as Kubernetes manifests. By default, it geneterates:
+Compose Bridge converts your Docker Compose configuration into platform-specific deployment formats such as Kubernetes manifests. By default, it generates:
 
 - Kubernetes manifests 
 - A Kustomize overlay
