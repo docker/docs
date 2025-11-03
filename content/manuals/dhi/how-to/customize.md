@@ -8,15 +8,23 @@ description: Learn how to customize a Docker Hardened Images (DHI).
 
 You can customize a Docker Hardened Image (DHI) to suit your specific needs
 using the Docker Hub UI. This allows you to select a base image, add packages,
-add artifacts, and configure settings. In addition, the build pipeline ensures that
-your customized image is built securely and includes attestations.
+add OCI artifacts (such as custom certificates or additional tools), and
+configure settings. In addition, the build pipeline ensures that your customized
+image is built securely and includes attestations.
+
+Your customized images stay secure automatically. When the base Docker Hardened
+Image receives a security patch or your OCI artifacts are updated, Docker
+automatically rebuilds your customized images in the background. This ensures
+continuous compliance and protection by default, with no manual work required.
+The rebuilt images are signed and attested to the same SLSA Build Level 3
+standard as the base images, ensuring a secure and verifiable supply chain.
+
+## Customize a Docker Hardened Image
 
 To add a customized Docker Hardened Image to your organization, an organization
 owner must first [mirror](./mirror.md) the DHI repository to your organization.
 Once the repository is mirrored, any user with access to the mirrored DHI
 repository can create a customized image.
-
-## Customize a Docker Hardened Image
 
 To customize a Docker Hardened Image, follow these steps:
 
