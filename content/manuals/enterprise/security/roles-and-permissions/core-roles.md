@@ -29,41 +29,42 @@ Docker organizations have three core roles:
 
 These permissions apply organization-wide, including all repositories in your organization's namespace.
 
-| Permission                                            | Member | Editor | Owner |
+| Permission | Member | Editor | Owner |
 <<<<<<< HEAD
 | :---------------------------------------------------- | :----- | :----- | :----------------- |
-| Explore images and extensions                         | ✅     | ✅     | ✅                 |
-| Star, favorite, vote, and comment on content          | ✅     | ✅     | ✅                 |
-| Pull images                                           | ✅     | ✅     | ✅                 |
-| Create and publish an extension                       | ✅     | ✅     | ✅                 |
-| Become a Verified, Official, or Open Source publisher | ❌     | ❌     | ✅                 |
-| Edit and delete publisher repository logos            | ❌     | ✅     | ✅                 |
-| Observe content engagement as a publisher             | ❌     | ❌     | ✅                 |
-| Create public and private repositories                | ❌     | ✅     | ✅                 |
-| Edit and delete repositories                          | ❌     | ✅     | ✅                 |
-| Manage tags                                           | ❌     | ✅     | ✅                 |
-| View repository activity                              | ❌     | ❌     | ✅                 |
-| Set up Automated builds                               | ❌     | ❌     | ✅                 |
-| Edit build settings                                   | ❌     | ❌     | ✅                 |
-| View teams                                            | ✅     | ✅     | ✅                 |
-| Assign team permissions to repositories               | ❌     | ✅     | ✅                 |
+| Explore images and extensions | ✅ | ✅ | ✅ |
+| Star, favorite, vote, and comment on content | ✅ | ✅ | ✅ |
+| Pull images | ✅ | ✅ | ✅ |
+| Create and publish an extension | ✅ | ✅ | ✅ |
+| Become a Verified, Official, or Open Source publisher | ❌ | ❌ | ✅ |
+| Edit and delete publisher repository logos | ❌ | ✅ | ✅ |
+| Observe content engagement as a publisher | ❌ | ❌ | ✅ |
+| Create public and private repositories | ❌ | ✅ | ✅ |
+| Edit and delete repositories | ❌ | ✅ | ✅ |
+| Manage tags | ❌ | ✅ | ✅ |
+| View repository activity | ❌ | ❌ | ✅ |
+| Set up Automated builds | ❌ | ❌ | ✅ |
+| Edit build settings | ❌ | ❌ | ✅ |
+| View teams | ✅ | ✅ | ✅ |
+| Assign team permissions to repositories | ❌ | ✅ | ✅ |
 =======
 | :---------------------------------------------------- | :----- | :----- | :---- |
-| Explore images and extensions                         | ✅     | ✅     | ✅    |
-| Star, favorite, vote, and comment on content          | ✅     | ✅     | ✅    |
-| Pull images                                           | ✅     | ✅     | ✅    |
-| Create and publish an extension                       | ✅     | ✅     | ✅    |
-| Become a Verified, Official, or Open Source publisher | ❌     | ❌     | ✅    |
-| Observe content engagement as a publisher             | ❌     | ❌     | ✅    |
-| Create public and private repositories                | ❌     | ✅     | ✅    |
-| Edit and delete repositories                          | ❌     | ✅     | ✅    |
-| Manage tags                                           | ❌     | ✅     | ✅    |
-| View repository activity                              | ❌     | ❌     | ✅    |
-| Set up Automated builds                               | ❌     | ❌     | ✅    |
-| Edit build settings                                   | ❌     | ❌     | ✅    |
-| View teams                                            | ✅     | ✅     | ✅    |
-| Assign team permissions to repositories               | ❌     | ✅     | ✅    |
->>>>>>> 521a0d373d (feedback)
+| Explore images and extensions | ✅ | ✅ | ✅ |
+| Star, favorite, vote, and comment on content | ✅ | ✅ | ✅ |
+| Pull images | ✅ | ✅ | ✅ |
+| Create and publish an extension | ✅ | ✅ | ✅ |
+| Become a Verified, Official, or Open Source publisher | ❌ | ❌ | ✅ |
+| Observe content engagement as a publisher | ❌ | ❌ | ✅ |
+| Create public and private repositories | ❌ | ✅ | ✅ |
+| Edit and delete repositories | ❌ | ✅ | ✅ |
+| Manage tags | ❌ | ✅ | ✅ |
+| View repository activity | ❌ | ❌ | ✅ |
+| Set up Automated builds | ❌ | ❌ | ✅ |
+| Edit build settings | ❌ | ❌ | ✅ |
+| View teams | ✅ | ✅ | ✅ |
+| Assign team permissions to repositories | ❌ | ✅ | ✅ |
+
+> > > > > > > 521a0d373d (feedback)
 
 When you add members to teams, you can grant additional repository permissions
 beyond their organization role:
