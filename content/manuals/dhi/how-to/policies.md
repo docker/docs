@@ -16,7 +16,7 @@ DHIs, are used across your environments.
 
 Docker Scout includes a dedicated [**Valid Docker Hardened Image (DHI) or DHI
 base
-image**](/manuals/scout/policy/#valid-docker-hardened-image-dhi-or-dhi-base-image)
+image**](../../scout/policy/_index.md#valid-docker-hardened-image-dhi-or-dhi-base-image)
 policy type that validates whether your images are Docker Hardened Images or are
 built using a DHI as the base image. This policy checks for valid Docker signed
 verification summary attestations.
@@ -43,9 +43,11 @@ images and layers.
 ## Evaluate DHI policy compliance for your images
 
 When you enable Docker Scout for your repositories, Docker Scout automatically
-provides default policies, including the [**Valid Docker Hardened Image (DHI) or DHI base image**](/manuals/scout/policy/#valid-docker-hardened-image-dhi-or-dhi-base-image)
-policy. This policy validates whether your images are DHIs or built with DHI base
-images by checking for Docker signed verification summary attestations.
+provides default policies, including the [**Valid Docker Hardened Image (DHI) or
+DHI base
+image**](../../scout/policy/_index.md#valid-docker-hardened-image-dhi-or-dhi-base-image)
+policy. This policy validates whether your images are DHIs or built with DHI
+base images by checking for Docker signed verification summary attestations.
 
 The following example shows how to build an image using a DHI base image and
 evaluate its compliance with the DHI policy.
