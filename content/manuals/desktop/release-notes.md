@@ -30,6 +30,29 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.50.0
+
+{{< release-date date="2025-11-06" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.49.0" build_path="//" >}}
+
+### New
+
+- Introduced a new Welcome Survey to improve onboarding. New users can now provide information to help tailor their Docker Desktop experience.
+
+### Upgrades
+
+- [Docker Compose v2.40.3](https://github.com/docker/compose/releases/tag/v2.40.3)
+- [NVIDIA Container Toolkit v1.18.0](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.18.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms 
+
+- Docker Desktop now detects and attempts to avoid clashes between the "Docker subnet" and physical networks using RFC1918 addresses. For example if the host has a non-default route which overlaps with `192.168.65.0/24` then an alternative network will be chosen automatically. You can still override the choice as before via Docker Desktop settings and admin settings.
+- Fixed a bug that caused some forwarded UDP ports to hang. 
+- Docker Desktop no longer treats Stargz Snapshotter failures as fatal. If a failure occurs, Docker Desktop continues to run without the Stargz Snapshotter.
+
 ## 4.49.0
 
 {{< release-date date="2025-10-23" >}}
