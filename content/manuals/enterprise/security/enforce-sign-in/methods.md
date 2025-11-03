@@ -151,7 +151,7 @@ Overriding at least one of the proxy settings via Configuration profiles will au
 1. Deploy the profile using your MDM solution.
 1. Verify the profile appears in **System Settings** > **General** > **Device Management** under **Device (Managed)**. Ensure the profile is listed with the correct name and settings.
 
-Some MDM solutions allow specifying the payload as a plain dictionary of key-value settings without the full `.mobileconfig` wrapper:
+Some MDM solutions let you specify the payload as a plain dictionary of key-value settings without the full `.mobileconfig` wrapper:
 
 ```xml
 <dict>
