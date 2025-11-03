@@ -158,7 +158,7 @@ Example output:
 
 This comparison shows that the Docker Hardened Image:
 
-- Removes vulnerabilities: 1 HIGH, 5 MEDIUM, 141 LOW, and 2 unspecified severity CVEs removed
+- Removes vulnerabilities: 1 high, 5 medium, 141 low, and 2 unspecified severity CVEs removed
 - Reduces size: From 412 MB down to 35 MB (91% reduction)
 - Minimizes packages: From 610 packages down to 80 (87% reduction)
 
