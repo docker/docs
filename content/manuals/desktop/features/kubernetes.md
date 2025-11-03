@@ -161,7 +161,7 @@ docker.io/docker/desktop-kubernetes:<tag>
 ```
 
 The image tags are automatically selected by Docker Desktop based on several
-factors, including the version of Kubernetes being used. The tags vary for each image.
+factors, including the version of Kubernetes being used. The tags vary for each image and may change between Docker Desktop releases. To stay informed, monitor the Docker Desktop release notes.
 
 To accommodate scenarios where access to Docker Hub is not allowed, admins can
 configure Docker Desktop to pull the above listed images from a different registry (e.g., a mirror)
