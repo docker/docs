@@ -1799,7 +1799,7 @@ runs with environment variables `DATABASE_URL` and `DATABASE_API_KEY`.
 
 As Compose stops the application, the `awesomecloud` binary is used to manage the `database` service tear down.
 
-The mechanism used by Compose to delegate the service lifecycle to an external binary is described [here](https://github.com/docker/compose/tree/main/docs/extension.md).
+The mechanism used by Compose to delegate the service lifecycle to an external binary is described in the [Compose extensibility documentation](https://github.com/docker/compose/tree/main/docs/extension.md).
 
 For more information on using the `provider` attribute, see [Use provider services](/manuals/compose/how-tos/provider-services.md).
 

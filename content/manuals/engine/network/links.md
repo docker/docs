@@ -44,12 +44,6 @@ Let's say you used this command to run a simple Python Flask application:
 $ docker run -d -P training/webapp python app.py
 ```
 
-> [!NOTE]
->
-> Containers have an internal network and an IP address.
-> Docker can have a variety of network configurations. You can see more
-> information on Docker networking [here](index.md).
-
 When that container was created, the `-P` flag was used to automatically map
 any network port inside it to a random high port within an *ephemeral port
 range* on your Docker host. Next, when `docker ps` was run, you saw that port

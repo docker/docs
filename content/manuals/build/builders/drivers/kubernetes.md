@@ -75,8 +75,7 @@ is configurable using the following driver options:
 - `requests.cpu`, `requests.memory`, `requests.ephemeral-storage`, `limits.cpu`, `limits.memory`, `limits.ephemeral-storage`
 
   These options allow requesting and limiting the resources available to each
-  BuildKit pod according to the official Kubernetes documentation
-  [here](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
+  BuildKit pod [according to the official Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
 
 For example, to create 4 replica BuildKit pods:
 
@@ -247,8 +246,8 @@ that you want to support.
 ## Rootless mode
 
 The Kubernetes driver supports rootless mode. For more information on how
-rootless mode works, and its requirements, see
-[here](https://github.com/moby/buildkit/blob/master/docs/rootless.md).
+rootless mode works, and its requirements, refer to the
+[Rootless Buildkit documentation](https://github.com/moby/buildkit/blob/master/docs/rootless.md).
 
 To turn it on in your cluster, you can use the `rootless=true` driver option:
 

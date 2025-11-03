@@ -20,15 +20,14 @@
     "@floating-ui/dom": "^1.6.12",
     "@material-symbols/svg-400": "^0.23.0",
     "@tailwindcss/cli": "^4.1.6",
-    "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@tailwindcss/typography": "^0.5.15",
     "alpinejs": "^3.14.3",
     "tailwindcss": "^4.1.6"
   },
   "devDependencies": {
-    "markdownlint": "^0.35.0",
-    "prettier": "^3.3.3",
+    "markdownlint": "^0.38.0",
+    "prettier": "^3.6.2",
     "prettier-plugin-go-template": "^0.0.15",
-    "prettier-plugin-tailwindcss": "^0.6.11"
+    "prettier-plugin-tailwindcss": "^0.7.1"
   }
 }

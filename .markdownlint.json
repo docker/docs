@@ -20,5 +20,6 @@
   },
   "fenced-code-language": true,
   "table-pipe-style": true,
-  "table-column-count": true
+  "table-column-count": true,
+	"descriptive-link-text": { "prohibited_texts": ["click here","here","link","more","learn more","find out more"]}
 }
