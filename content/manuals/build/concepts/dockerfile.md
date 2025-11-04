@@ -148,7 +148,7 @@ use this notation to name your images. There are many public images you can
 leverage in your projects, by importing them into your build steps using the
 Dockerfile `FROM` instruction.
 
-[Docker Hub](https://hub.docker.com/search?image_filter=official&q=&type=image)
+[Docker Hub](https://hub.docker.com/search?badges=official)
 contains a large set of official images that you can use for this purpose.
 
 ### Environment setup

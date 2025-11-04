@@ -45,17 +45,17 @@ The first step towards achieving a secure image is to choose the right base
 image. When choosing an image, ensure it's built from a trusted source and keep
 it small.
 
-- [Docker Official Images](https://hub.docker.com/search?image_filter=official)
+- [Docker Official Images](https://hub.docker.com/search?badges=official)
   are a curated collection that have clear documentation, promote best
   practices, and are regularly updated. They provide a trusted starting point
   for many applications.
 
-- [Verified Publisher](https://hub.docker.com/search?image_filter=store) images
+- [Verified Publisher](https://hub.docker.com/search?badges=verified_publisher) images
   are high-quality images published and maintained by the organizations
   partnering with Docker, with Docker verifying the authenticity of the content
   in their repositories.
 
-- [Docker-Sponsored Open Source](https://hub.docker.com/search?image_filter=open_source)
+- [Docker-Sponsored Open Source](https://hub.docker.com/search?badges=open_source)
   are published and maintained by open source projects sponsored by Docker
   through an [open source program](../../docker-hub/image-library/trusted-content.md#docker-sponsored-open-source-software-images).
 
