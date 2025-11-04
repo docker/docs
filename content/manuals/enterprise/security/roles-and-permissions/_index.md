@@ -60,7 +60,7 @@ Use custom roles when:
 
 ## How roles work together
 
-Users and teams can be assigned either a core role or a custom role, but not both. However, roles work in combination with team permissions:
+You can assign users and teams either a core role or a custom role, but not both. However, roles work in combination with team permissions:
 
 1. **Role permissions**: Applied organization-wide (core or custom role). Custom roles can grant permissions to both organization-wide settings and repository access.
 2. **Team permissions**: Additional repository-specific permissions when users are added to teams. This is a separate permission system from role-based permissions.
