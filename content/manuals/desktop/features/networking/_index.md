@@ -10,13 +10,32 @@ This page explains how Docker Desktop routes network traffic and file I/O betwee
 
 ## Overview
 
-Docker Desktop runs the Docker Engine inside a lightweight Linux virtual machine (VM). Docker Desktop routes all network and file operations between the Docker VM and the host through the `com.docker.backend` process. 
+Docker Desktop runs the Docker Engine inside a lightweight Linux virtual machine (VM). Depending on your system configuration and operating system, Docker Desktop routes network and file operations between the Docker VM and the host using different backend components.
+
+### Backend components and responsibilities
 
 Th backend acts as:
 
-- A network proxy, translating traffic between the host and Linux VM.
-- A file server, using gRPC FUSE which handles file access from containers to the host filesystem.
-- A control plane, handling Docker API calls, port forwarding, and proxy settings.
+- Network proxy: Translates traffic between the host and Linux VM.
+   - On Windows and Mac, this is handled by the `com.docker.backend` process.
+   - On Linux, the `qemu` process performs this function.
+- File server: Handles file access from containers to the host filesystem.
+   - When using gRPC FUSE, the backend performs the file sharing.
+   - When using `virtiofs`, `osxfs`, or `krun`, file access is handled by those respective daemons rather than the backend process.
+- Control plane: Manages Docker API calls, port forwarding, and proxy configuration.
+
+The following table summarizes typical setups in more detail:
+
+| Platform        | Setup                                | Networking handled by    | File sharing handled by                | Notes                                                     |
+| --------------- | ------------------------------------ | ------------------------ | -------------------------------------- | --------------------------------------------------------- |
+| Windows         | Hyper-V                              | `com.docker.backend.exe` | `com.docker.backend.exe`               | Simplest setup with full visibility to EDR/firewall tools |
+| Windows (WSL 2) | WSL 2                                | `com.docker.backend.exe` | WSL 2 kernel (no visibility from host) | Recommended only when WSL 2 integration is needed         |
+| macOS           | virtualization.framework + gRPC FUSE | `com.docker.backend`     | `com.docker.backend`                   | Recommended for performance and visibility                |
+| macOS           | virtualization.framework + virtiofs  | `com.docker.backend`     | `virtiofsd`                            | No file access visibility from host                       |
+| macOS           | virtualization.framework + osxfs     | `com.docker.backend`     | `com.docker.osxfs`                     | Legacy setup, not recommended                             |
+| macOS           | DockerVMM + virtiofs                 | `com.docker.backend`     | `com.docker.krun`                      | Used in certain fallback modes                            |
+| Linux           | Native Linux VM                      | `qemu`                   | `virtiofsd`                            | No `com.docker.backend` process on Linux                  |
+
 
 ## How containers connect to the internet
 
@@ -64,17 +83,14 @@ Note that:
   
 ## Firewalls and endpoint visibility 
 
-Docker Desktop doesn't include a built-in firewall. 
-
 To restrict VM or container networking apply rules to `com.docker.backend.exe` (Windows) `com.docker.backend` (Mac) or `qemu` (Linux) as all VM networking is funneled through these processes. 
 
 Use Windows Defender Firewall or enterprise endpoint firewalls for control. This enables traffic inspection and restriction at the host level without modifying the Docker Engine. 
 
-CrowdStrike and similar tools can observe all traffic and file access that passes through the backend process. To monitor in-VM operations, install the agent inside the Docker VM.
+Crowdstrike and similar tools can observe all traffic and file access that passes through the backend process. 
 
 | Action | Visible to host EDR? | Reason | 
 |---------|----------------------|---------| 
 | Container reads host files | Yes | Access handled by `com.docker.backend` | 
 | Container writes host files | Yes | Same process performs the write | 
 | Container accesses its own filesystem layers | No | Exists only inside the VM |
-| Endpoint agent inside VM | Yes | Full visibility | 
