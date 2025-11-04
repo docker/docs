@@ -42,11 +42,10 @@ images and layers.
 
 ## Evaluate DHI policy compliance for your images
 
-When you enable Docker Scout for your repositories, Docker Scout automatically
-provides default policies, including the [**Valid Docker Hardened Image (DHI) or
-DHI base
+When you enable Docker Scout for your repositories, you can configure the
+[**Valid Docker Hardened Image (DHI) or DHI base
 image**](../../scout/policy/_index.md#valid-docker-hardened-image-dhi-or-dhi-base-image)
-policy. This policy validates whether your images are DHIs or built with DHI
+policy. This optional policy validates whether your images are DHIs or built with DHI
 base images by checking for Docker signed verification summary attestations.
 
 The following example shows how to build an image using a DHI base image and
@@ -88,10 +87,22 @@ $ docker scout enroll YOUR_ORG
 $ docker scout repo enable --org YOUR_ORG YOUR_ORG/my-dhi-app
 ```
 
-#### Step 4: View policy compliance
+#### Step 4: Configure the DHI policy
 
-Once Docker Scout is enabled, the default policies, including the **Valid Docker
-Hardened Image (DHI) or DHI base image** policy, are automatically active.
+Once Docker Scout is enabled, you can configure the **Valid Docker Hardened
+Image (DHI) or DHI base image** policy for your organization:
+
+1. Go to the [Docker Scout dashboard](https://scout.docker.com).
+2. Select your organization and navigate to **Policies**.
+3. Configure the **Valid Docker Hardened Image (DHI) or DHI base image** policy
+   to enable it for your repositories.
+
+For more information on configuring policies, see
+[Configure policies](../../scout/policy/configure.md).
+
+#### Step 5: View policy compliance
+
+Once the DHI policy is configured and active, you can view compliance results:
 
 1. Go to the [Docker Scout dashboard](https://scout.docker.com).
 2. Select your organization and navigate to **Images**.
@@ -101,13 +112,5 @@ This shows the policy compliance results for your image. The **Valid Docker
 Hardened Image (DHI) or DHI base image** policy evaluates whether your image has
 a valid Docker signed verification summary attestation or if its base image has
 such an attestation.
-
-You can also view all active policies for your organization:
-
-1. Go to the [Docker Scout dashboard](https://scout.docker.com).
-2. Select your organization and navigate to **Policies**.
-
-Here you can see the **Valid Docker Hardened Image (DHI) or DHI base image**
-policy along with other default policies that Docker Scout provides.
 
 You can now [evaluate policy compliance in your CI](/scout/policy/ci/).

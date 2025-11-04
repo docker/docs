@@ -66,9 +66,14 @@ Docker Scout supports the following policy types:
 - [Valid Docker Hardened Image (DHI) or DHI base image](#valid-docker-hardened-image-dhi-or-dhi-base-image)
 
 Docker Scout automatically provides default policies for repositories where it
-is enabled, except for the SonarQube Quality Gates policy, which requires
-[integration with SonarQube](/manuals/scout/integrations/code-quality/sonarqube.md)
-before use.
+is enabled, except for the following policies, which are optional and must be
+configured:
+
+- The **SonarQube Quality Gates** policy, which requires
+  [integration with SonarQube](/manuals/scout/integrations/code-quality/sonarqube.md)
+  before use.
+- The **Valid Docker Hardened Image (DHI) or DHI base image** policy, which can
+  be configured if you want to enforce the use of Docker Hardened Images.
 
 You can create custom policies from any of the supported policy types, or
 delete a default policy if it isn't applicable to your project. For more
