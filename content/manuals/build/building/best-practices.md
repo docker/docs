@@ -802,7 +802,7 @@ Dockerfile, as you can see in [Ruby’s `ONBUILD` variants](https://github.com/d
 Images built with `ONBUILD` should get a separate tag. For example,
 `ruby:1.9-onbuild` or `ruby:2.0-onbuild`.
 
-Be careful when putting `ADD` or `COPY` in `ONBUILD`. The onbuild image
+Be careful when putting `ADD` or `COPY` in `ONBUILD`. The image
 fails catastrophically if the new build's context is missing the resource being
 added. Adding a separate tag, as recommended above, helps mitigate this by
 allowing the Dockerfile author to make a choice.
