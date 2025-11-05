@@ -7,6 +7,7 @@ tags: [FAQ]
 aliases:
 - /single-sign-on/idp-faqs/
 - /faq/security/single-sign-on/idp-faqs/
+- /security/faqs/single-sign-on/idp-faqs/
 ---
 
 ## Can I use multiple identity providers with Docker SSO?
