@@ -10,7 +10,7 @@ require (
 	github.com/docker/model-runner/cmd/cli v0.1.44 // indirect
 	github.com/docker/scout-cli v1.18.4 // indirect
 	github.com/moby/buildkit v0.25.1 // indirect
-	github.com/moby/moby v28.5.1+incompatible // indirect; see "replace" rule at the bottom for actual version
+	github.com/moby/moby v28.5.2+incompatible // indirect; see "replace" rule at the bottom for actual version
 )
 
 replace (
@@ -21,5 +21,5 @@ replace (
 	github.com/docker/model-runner/cmd/cli => github.com/docker/model-runner/cmd/cli v0.1.44
 	github.com/docker/scout-cli => github.com/docker/scout-cli v1.18.4
 	github.com/moby/buildkit => github.com/moby/buildkit v0.25.1
-	github.com/moby/moby => github.com/moby/moby v28.5.1+incompatible
+	github.com/moby/moby => github.com/moby/moby v28.5.2+incompatible
 )
