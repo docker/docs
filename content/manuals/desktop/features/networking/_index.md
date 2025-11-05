@@ -30,10 +30,10 @@ The following table summarizes typical setups in more detail:
 | --------------- | ------------------------------------ | ------------------------ | -------------------------------------- | --------------------------------------------------------- |
 | Windows         | Hyper-V                              | `com.docker.backend.exe` | `com.docker.backend.exe`               | Simplest setup with full visibility to EDR/firewall tools |
 | Windows (WSL 2) | WSL 2                                | `com.docker.backend.exe` | WSL 2 kernel (no visibility from host) | Recommended only when WSL 2 integration is needed         |
-| macOS           | virtualization.framework + gRPC FUSE | `com.docker.backend`     | `com.docker.backend`                   | Recommended for performance and visibility                |
-| macOS           | virtualization.framework + virtiofs  | `com.docker.backend`     | `virtiofsd`                            | No file access visibility from host                       |
-| macOS           | virtualization.framework + osxfs     | `com.docker.backend`     | `com.docker.osxfs`                     | Legacy setup, not recommended                             |
-| macOS           | DockerVMM + virtiofs                 | `com.docker.backend`     | `com.docker.krun`                      | Used in certain fallback modes                            |
+| Mac             | Virtualization framework + gRPC FUSE | `com.docker.backend`     | `com.docker.backend`                   | Recommended for performance and visibility                |
+| Mac             | Virtualization framework + `virtiofs`| `com.docker.backend`     | Apple's Virtualization framework       | Higher performance but no file access visibility from host|
+| Mac             | Virtualization framework + `osxfs`   | `com.docker.backend`     | `osxfs`                                | Legacy setup, not recommended                             |
+| Mac             | DockerVMM + `virtiofs`               | `com.docker.backend`     | `krun`                                 | Currently in Beta                                         |
 | Linux           | Native Linux VM                      | `qemu`                   | `virtiofsd`                            | No `com.docker.backend` process on Linux                  |
 
 
