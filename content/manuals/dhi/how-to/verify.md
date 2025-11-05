@@ -1,24 +1,44 @@
 ---
-title: Verify a Docker Hardened Image
-linktitle: Verify an image
-description: Use Docker Scout or cosign to verify signed attestations like SBOMs, provenance, and vulnerability data for Docker Hardened Images.
+title: Verify Docker Hardened Images and charts
+linktitle: Verify images and charts
+description: Use Docker Scout or cosign to verify signed attestations like SBOMs, provenance, and vulnerability data for Docker Hardened Images and Helm charts.
 weight: 40
-keywords: verify container image, docker scout attest, cosign verify, sbom validation, signed container attestations
+keywords: verify container image, docker scout attest, cosign verify, sbom validation, signed container attestations, helm chart verification
 ---
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
 
-Docker Hardened Images (DHI) include signed attestations that verify the image’s
+Docker Hardened Images (DHI) and DHI Helm charts include signed attestations that verify the
 build process, contents, and security posture. These attestations are available
-for each image variant and can be verified using
+for each image variant and chart, and can be verified using
 [cosign](https://docs.sigstore.dev/) or the Docker Scout CLI.
 
-Docker's public key for DHI images is published at:
+Docker's public key for DHI images and charts is published at:
 
 - https://registry.scout.docker.com/keyring/dhi/latest.pub
 - https://github.com/docker-hardened-images/keyring
 
-## Verify attestations with Docker Scout
+## Available DHI attestations
+
+See [available image attestations](../core-concepts/attestations.md#image-attestations) for a list
+of attestations available for each DHI, and [available Helm chart attestations](../core-concepts/attestations.md#helm-chart-attestations)
+for attestations included with DHI charts.
+
+### Explore image attestations on Docker Hub
+
+You can also browse attestations visually when [exploring an image
+variant](./explore.md#view-image-variant-details). The **Attestations** section
+lists each available attestation with its:
+
+- Type (e.g. SBOM, VEX)
+- Predicate type URI
+- Digest reference for use with `cosign`
+
+These attestations are generated and signed automatically as part of the Docker
+Hardened Image build process.
+
+
+## Verify image attestations with Docker Scout
 
 You can use the [Docker Scout](/scout/) CLI to list and retrieve attestations for Docker
 Hardened Images, including images mirrored into your organization's namespace.
@@ -231,21 +251,40 @@ Example output:
 >     --key https://registry.scout.docker.com/keyring/dhi/latest.pub --experimental-oci11
 > ```
 
-## Available DHI attestations
+## Verify Helm chart attestations with Docker Scout
 
-See [available
-attestations](../core-concepts/attestations.md#available-attestations) for list
-of attestations available for each DHI.
+You can use the Docker Scout CLI to list and retrieve attestations for DHI Helm
+charts using the same commands as for images.
 
-## Explore attestations on Docker Hub
+### List available chart attestations
 
-You can also browse attestations visually when [exploring an image
-variant](./explore.md#view-image-variant-details). The **Attestations** section
-lists each available attestation with its:
+To list all attestations attached to a DHI Helm chart:
 
-- Type (e.g. SBOM, VEX)
-- Predicate type URI
-- Digest reference for use with `cosign`
+```console
+$ docker scout attestation list <your-namespace>/<chart-name>:<tag>
+```
 
-These attestations are generated and signed automatically as part of the Docker
-Hardened Image build process.
+For example, to view attestations for the Redis HA chart for the `docs` organization:
+
+```console
+$ docker scout attestation list docs/dhi-redis-ha-chart:4.35.2
+```
+
+This command displays an overview of the chart including its provenance source
+and a detailed list of all available attestations with their predicate types and
+digest information.
+
+### Retrieve a specific chart attestation
+
+To retrieve the full content of a specific attestation, use:
+
+```console
+$ docker scout attestation get <your-namespace>/<chart-name>:<tag> --predicate-type <predicate-uri>
+```
+
+For example, to view the SLSA provenance:
+
+```console
+$ docker scout attestation get docs/dhi-redis-ha-chart:4.35.2 \
+  --predicate-type https://slsa.dev/provenance/v0.2
+```
