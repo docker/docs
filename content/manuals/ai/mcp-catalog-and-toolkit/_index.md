@@ -7,7 +7,7 @@ params:
     badge:
       color: blue
       text: Beta
-weight: 30
+weight: 10
 description: Learn about Docker's MCP catalog on Docker Hub
 keywords: Docker, ai, mcp servers, ai agents, extension, docker desktop, llm, docker hub
 grid:

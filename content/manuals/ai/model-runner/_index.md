@@ -4,7 +4,7 @@ linkTitle: Model Runner
 params:
   sidebar:
     group: AI
-weight: 20
+weight: 30
 description: Learn how to use Docker Model Runner to manage and run AI models.
 keywords: Docker, ai, model runner, docker desktop, docker engine, llm
 aliases:

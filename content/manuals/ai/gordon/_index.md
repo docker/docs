@@ -1,7 +1,7 @@
 ---
 title: Ask Gordon
 description: Streamline your workflow with Docker's AI-powered assistant in Docker Desktop and CLI.
-weight: 10
+weight: 40
 params:
   sidebar:
     badge:

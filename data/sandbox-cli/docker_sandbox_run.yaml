@@ -82,6 +82,7 @@ options:
       value_type: string
       description: |
         Container image to use for the sandbox (default: agent-specific image)
+      details_url: '#template'
       deprecated: false
       hidden: false
       experimental: false
@@ -211,6 +212,21 @@ examples: |-
     ```console
     $ docker sandbox run --credentials host claude
     ```
+
+    ### Use a custom base image (-t, --template) {#template}
+
+    ```text
+    --template IMAGE
+    ```
+
+    Specify a custom container image to use as the sandbox base:
+
+    ```console
+    $ docker sandbox run --template python:3-alpine claude
+    ```
+
+    By default, each agent uses a pre-configured image. The `--template` option
+    lets you substitute a different image.
 
     ### Name the sandbox (--name) {#name}
 

@@ -186,6 +186,9 @@ Docker MCP Toolkit:
   availability: Beta
 Docker Projects:
   availability: Beta
+Docker Sandboxes:
+  availability: Experimental
+  requires: Docker Desktop [4.50](/manuals/desktop/release-notes.md#4500) or later
 Docker Scout exceptions:
   availability: Experimental
   requires: Docker Scout CLI [1.15.0](/manuals/scout/release-notes/cli.md#1150) and later
