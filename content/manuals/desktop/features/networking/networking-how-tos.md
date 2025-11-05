@@ -12,7 +12,6 @@ aliases:
 - /docker-for-windows/networking/
 - /desktop/windows/networking/
 - /desktop/networking/
-- /desktop/features/networking/
 ---
 
 Docker Desktop includes built-in networking capabilities to help you connect containers with services on your host, across containers, or through proxies and VPNs.

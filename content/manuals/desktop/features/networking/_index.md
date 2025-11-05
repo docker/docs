@@ -14,7 +14,7 @@ Docker Desktop runs the Docker Engine inside a lightweight Linux virtual machine
 
 ### Backend components and responsibilities
 
-Th backend acts as:
+The backend acts as:
 
 - Network proxy: Translates traffic between the host and Linux VM.
    - On Windows and Mac, this is handled by the `com.docker.backend` process.
