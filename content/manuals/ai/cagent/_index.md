@@ -45,14 +45,6 @@ they don't share knowledge.
 1. Set the following environment variables:
 
    ```bash
-   # If using the Docker AI Gateway, set this environment variable or use
-   # the `--models-gateway <url_to_docker_ai_gateway>` CLI flag
-
-   export CAGENT_MODELS_GATEWAY=<url_to_docker_ai_gateway>
-
-   # Alternatively, set keys for remote inference services.
-   # These are not needed if you are using Docker AI Gateway.
-
    export OPENAI_API_KEY=<your_api_key_here>    # For OpenAI models
    export ANTHROPIC_API_KEY=<your_api_key_here> # For Anthropic models
    export GOOGLE_API_KEY=<your_api_key_here>    # For Gemini models
