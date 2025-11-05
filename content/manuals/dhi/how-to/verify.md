@@ -30,7 +30,7 @@ You can also browse attestations visually when [exploring an image
 variant](./explore.md#view-image-variant-details). The **Attestations** section
 lists each available attestation with its:
 
-- Type (e.g. SBOM, VEX)
+- Type (for example, SBOM or VEX)
 - Predicate type URI
 - Digest reference for use with `cosign`
 
