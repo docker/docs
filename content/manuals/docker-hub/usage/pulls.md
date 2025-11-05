@@ -51,7 +51,7 @@ Attribution is based on the following:
   determined based on domain affiliation and organization membership.
 - Verified domain ownership: When pulling an image from an account linked to a
   verified domain, the attribution is set to be the owner of that
-  [domain](/manuals/security/faqs/single-sign-on/domain-faqs.md).
+  [domain](/manuals/enterprise/security/single-sign-on/faqs/domain-faqs.md).
 - Single organization membership:
    - If the owner of the verified domain is a company and the user is part of
      only one organization within that

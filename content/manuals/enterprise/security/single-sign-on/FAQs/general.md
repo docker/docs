@@ -11,6 +11,7 @@ aliases:
 - /single-sign-on/saml-faqs/
 - /faq/security/single-sign-on/saml-faqs/
 - /security/faqs/single-sign-on/saml-faqs/
+- /security/faqs/single-sign-on/faqs/
 ---
 
 ## What SSO flows does Docker support?

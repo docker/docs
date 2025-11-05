@@ -7,6 +7,7 @@ tags: [FAQ]
 aliases:
 - /single-sign-on/domain-faqs/
 - /faq/security/single-sign-on/domain-faqs/
+- /security/faqs/single-sign-on/domain-faqs/
 ---
 
 ## Can I add sub-domains?

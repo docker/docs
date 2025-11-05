@@ -7,6 +7,7 @@ tags: [FAQ]
 aliases:
 - /single-sign-on/enforcement-faqs/
 - /faq/security/single-sign-on/enforcement-faqs/
+- /security/faqs/single-sign-on/enforcement-faqs/
 ---
 
 ## Does Docker SSO support authenticating through the command line?
