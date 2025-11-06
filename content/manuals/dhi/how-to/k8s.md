@@ -3,7 +3,7 @@ title: Use a Docker Hardened Image in Kubernetes
 linktitle: Use an image in Kubernetes
 description: Learn how to use Docker Hardened Images in Kubernetes deployments.
 keywords: use hardened image, kubernetes, k8s
-weight: 35
+weight: 31
 ---
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}

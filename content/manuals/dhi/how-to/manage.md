@@ -3,7 +3,7 @@ title: Manage Docker Hardened Images
 linktitle: Manage images
 description: Learn how to manage your mirrored and customized Docker Hardened Images in your organization.
 keywords: manage docker hardened images, custom hardened images
-weight: 45
+weight: 35
 ---
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
