@@ -37,6 +37,7 @@ config
 containerd
 Couchbase
 CouchDB
+Crowdstrike
 datacenter
 Datadog
 Ddosify
