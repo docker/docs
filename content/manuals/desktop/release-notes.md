@@ -50,7 +50,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For all platforms 
 
 - Docker Desktop now detects and attempts to avoid clashes between the "Docker subnet" and physical networks using RFC1918 addresses. For example if the host has a non-default route which overlaps with `192.168.65.0/24` then an alternative network will be chosen automatically. You can still override the choice as before via Docker Desktop settings and admin settings.
-- Fixed a bug that caused some forwarded UDP ports to hang. 
 - Docker Desktop no longer treats Stargz Snapshotter failures as fatal. If a failure occurs, Docker Desktop continues to run without the Stargz Snapshotter.
 
 ## 4.49.0
@@ -85,6 +84,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Fixed an issue where Docker Desktop used an expired proxy password while waiting for the user to enter a new one.
 - Fixed a 'chown' error shown on startup with Docker Debug.
+- Fixed a bug that caused some forwarded UDP ports to hang. 
 
 #### For Mac
 
