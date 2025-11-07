@@ -906,13 +906,18 @@ deployment of AI features in security-conscious organizations.
 |---------------|-----------------|----------|
 | `false`       | `true`, `false` | Boolean  |
 
-- **Description:** Enable [Docker Offload](/offload/) in Docker Desktop.
+- **Description:** Enable Docker Offload integration features and functionality. When enabled, users see the Docker Offload toggle in the Docker Desktop header.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Offload building and running containers to the cloud.
+- **Use case:** Control Docker Offload availability and whether users can change the setting.
 - **Configure this setting with:**
-    - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - **Docker Offload** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableCloud` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Enable Docker Cloud** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+    - Settings Management: **Enable Docker Offload** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+
+> [!NOTE]
+>
+> This setting is only available when Docker Offload capability is enabled for
+> the organization.
 
 ### Enable Wasm
 
@@ -1045,17 +1050,6 @@ you relax this in a controlled way. See ECI Configuration for more info.
 ## Settings only available with Settings Management
 
 The following settings aren’t shown in the Docker Desktop GUI. You can only configure them using Settings Management with the Admin Console or the `admin-settings.json` file.
-
-### Enable Docker Cloud GPU Support
-
-| Default value | Accepted values | Format   |
-|---------------|-----------------|----------|
-| `true`        | `true`, `false` | Boolean  |
-
-- **Description:** Enable GPU support for Docker Cloud features.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Configure this setting with:**
-    - Settings Management: **Enable Docker Cloud GPU Support** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md
 
 ### Block `docker load`
 

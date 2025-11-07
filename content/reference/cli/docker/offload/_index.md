@@ -6,8 +6,8 @@ layout: cli
 params:
   sidebar:
     badge:
-      color: blue
-      text: Beta
+      color: violet
+      text: Early Access
 ---
 
 {{< summary-bar feature_name="Docker Offload" >}}
