@@ -8,7 +8,7 @@ aliases:
 - /docker-for-mac/kubernetes/
 - /desktop/kubernetes/
 weight: 60
----
+  n8n
 
 Docker Desktop includes a standalone Kubernetes server and client, as well as Docker CLI integration, enabling local Kubernetes development and testing directly on your machine.
 
