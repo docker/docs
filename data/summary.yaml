@@ -166,8 +166,6 @@ Docker Desktop CLI logs:
   requires: Docker Desktop 4.39 and later
 Docker Desktop CLI kubernetes:
   requires: Docker Desktop 4.44 and later
-Docker GitHub Copilot:
-  availability: Early Access
 Docker Hardened Images:
   subscription: [Docker Hardened Images]
 Docker Hardened Image charts:
