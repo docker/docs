@@ -29,6 +29,9 @@
   - /reference/api/docker_remote_api_v1.21/
   - /reference/api/docker_remote_api_v1.22/
   - /reference/api/docker_remote_api_v1.23/
+# engine API version history is documented in moby/moby on GitHub
+"https://github.com/moby/moby/blob/master/api/docs/CHANGELOG.md":
+  - /reference/api/engine/version-history/
 # redirect updated location of the "running containers" page
 "/engine/containers/run/":
   - "/engine/reference/run/"

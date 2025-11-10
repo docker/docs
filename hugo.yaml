@@ -133,7 +133,7 @@ params:
   # Use `grep` to figure out how they might be used.
 
   # Latest version of the Docker Engine API
-  latest_engine_api_version: "1.51"
+  latest_engine_api_version: "1.52"
   # Latest version of Docker Engine
   docker_ce_version: "28.5.2"
   # Previous version of the Docker Engine
@@ -287,14 +287,10 @@ module:
 
   imports:
 
-    # Docker Engine
-    - path: github.com/moby/moby
+    # Docker Engine API
+    - path: github.com/moby/moby/api
       mounts:
-        - source: docs/api/v1.24.md
-          target: content/reference/api/engine/version/v1.24.md
-        - source: docs/api/version-history.md
-          target: content/reference/api/engine/version-history.md
-        - source: docs/api
+        - source: docs
           target: content/reference/api/engine/version
           includeFiles: "*.yaml"
 
