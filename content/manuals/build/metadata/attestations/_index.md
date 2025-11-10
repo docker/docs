@@ -20,7 +20,7 @@ you to make informed decisions about how an image impacts the supply chain secur
 of your application. It also enables the use of policy engines for validating
 images based on policy rules you've defined.
 
-Two types of build annotations are available:
+Two types of build attestations are available:
 
 - Software Bill of Material (SBOM): list of software artifacts that an image
   contains, or that were used to build the image.
