@@ -353,18 +353,5 @@ A dedicated Docker account manager handles setup and management for Docker Busin
 
 ## Support
 
-All Docker Pro, Team, and Business subscribers receive email support for their subscriptions, including help with account management, billing, configuration, installation, and usage issues.
-
-Support response times and availability vary by subscription tier:
-
-- Docker Pro: 3 business day response
-- Docker Team: 2 business day response, 24×5 availability
-- Docker Business: 1 business day response, 24×5 availability
-
-> [!NOTE]
->
-> Premium Support with faster response times and 24×7 availability is available as an add-on for Docker Business subscribers.
-
-For detailed support features and response times, see [Docker Pricing](https://www.docker.com/pricing/).
-
-All Docker users can also access community support through the [Docker Community Forums](https://forums.docker.com/) and [Docker Community Slack](https://dockr.ly/comm-slack).
+All paid subscriptions come with Docker support. For more information, see
+[Get support for Docker products](/manuals/support/_index.md).
