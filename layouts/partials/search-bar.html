@@ -70,8 +70,11 @@
       {{- $emptyState := `
       <div>
         Start typing to search or try
-        <button onclick="askAI('search-bar-input')" class="link">Ask AI</button
-        >.
+        <button @click="
+          $store.gordon.open($refs.searchBarInput.value.trim());
+          $refs.searchBarInput.value = '';
+          open = false;
+        " class="link">Ask AI</button>.
       </div>
       ` }} {{- $emptyState | safe.HTML }}
       <!-- results -->

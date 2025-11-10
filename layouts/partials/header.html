@@ -49,8 +49,9 @@
       <!-- Hide on small screens, show on md+ -->
       <div class="hidden md:flex items-center gap-3">
         <button
-          @click="open = false"
-          class="topbar-button open-kapa-widget"
+          x-data
+          @click="$store.gordon.toggle()"
+          class="topbar-button"
         >
           <span class="hidden lg:inline">Ask&nbsp;AI</span>
           <span class="icon-svg">
