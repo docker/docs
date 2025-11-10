@@ -32,11 +32,11 @@ For detailed support features and response times, see [Docker Pricing](https://w
 
 Classify support requests by severity levels:
 
-| Severity   | Level    | Impact                                    | Description                                                                                                                                                                                                                          |
-| :--------- | :------- | :---------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Severity 1 | Critical | Widespread or company-wide service outage | A defect or outage that causes a complete loss of core functionality for many customers at once (systemic issue), or all users within a single customer organization. Business operations are halted and no workaround is available. |
-| Severity 2 | High     | Team or department-level impact           | A defect or outage that prevents a significant subset of users within one organization (e.g., a team, department, or site) from using core functionality. The issue has severe business impact and no workaround exists.             |
-| Severity 3 | Medium   | Individual user impact                    | A problem causing partial or non-critical loss of use of functionality for an individual user or small group. Business operations continue, often with a workaround available, but productivity is reduced.                          |
+| Level    | Description                                                                                                                                                                |
+| :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Critical | Widespread or company-wide service outage affecting many customers or all users within a single organization. Business operations are halted with no workaround available. |
+| High     | Team or department-level impact preventing significant users from accessing core functionality. Severe business impact with no workaround exists.                          |
+| Medium   | Individual user or small group impact causing partial loss of functionality. Business operations continue, often with workarounds available but reduced productivity.      |
 
 ### Community support
 
