@@ -26,11 +26,11 @@ If you have an existing Rails application, you will need to create the Docker as
 
 ## 1. Initialize Docker assets
 
-Rails 7.1 and newer generates multistage Dockerfile out of the box. Below are two versions of such file: one using Docker Hardened Images (DHI) and another using the official Docker image.
+Rails 7.1 and newer generates multistage Dockerfile out of the box. Following are two versions of such a file: one using Docker Hardened Images (DHI) and another using the official Docker image.
 
 > [Docker Hardened Images (DHIs)](https://docs.docker.com/dhi/) are minimal, secure, and production-ready container base and application images maintained by Docker.
 
-We recommend using DHI images whenever possible for better security. They are designed to reduce vulnerabilities and simplify compliance.
+DHI images are recommended whenever it is possible for better security. They are designed to reduce vulnerabilities and simplify compliance.
 
 > Multistage Dockerfiles help create smaller, more efficient images by separating build and runtime dependencies, ensuring only necessary components are included in the final image. Read more in the [Multi-stage builds guide](/get-started/docker-concepts/building-images/multi-stage-builds/).
 
