@@ -38,6 +38,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
+- [Dynamic MCP](/manuals/ai/mcp-catalog-and-toolkit/dynamic-mcp.md)(Experimental) is now available in Docker Desktop .
 - Introduced a new Welcome Survey to improve onboarding. New users can now provide information to help tailor their Docker Desktop experience.
 
 ### Upgrades
