@@ -48,7 +48,8 @@
     <div id="buttons" class="flex min-w-0 items-center justify-end flex-shrink-0">
       <div class="flex items-center gap-2">
         <button
-          @click="open = false"
+          x-data
+          @click="$store.gordon.toggle()"
           class="cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-blue-700 border border-blue-500 text-white transition-colors focus:outline-none focus:ring focus:ring-blue-400 shimmer open-kapa-widget"
         >
           <span class="icon-svg">
