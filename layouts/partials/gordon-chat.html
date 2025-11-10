@@ -1,0 +1,558 @@
+<!-- Gordon AI Chat Panel -->
+<div x-data="{
+    isLoading: false,
+    error: null,
+    messages: $persist([]).using(sessionStorage).as('gordon-messages'),
+    currentQuestion: '',
+    threadId: $persist(null).using(sessionStorage).as('gordon-threadId'),
+    includePageContext: $persist(true).using(sessionStorage).as('gordon-includePageContext'),
+
+    init() {
+      // Clean up any streaming messages that might be persisted
+      this.messages = this.messages.filter(m => !m.isStreaming)
+
+      // Watch for store changes to focus input
+      this.$watch('$store.gordon.isOpen', (isOpen) => {
+        if (isOpen) {
+          this.$nextTick(() => {
+            this.$refs.input?.focus()
+          })
+        }
+      })
+
+      // Watch for query from store and populate input
+      this.$watch('$store.gordon.query', (query) => {
+        if (query) {
+          this.currentQuestion = query
+          this.$nextTick(() => {
+            this.$refs.input?.focus()
+            this.$refs.input?.select()
+          })
+          // Clear the store query after using it
+          this.$store.gordon.query = ''
+        }
+      })
+    },
+
+    async askQuestion() {
+      const question = this.currentQuestion.trim()
+      if (!question || this.isLoading) {
+        return
+      }
+
+      // Add user message to UI
+      this.messages.push({
+        role: 'user',
+        content: question
+      })
+
+      this.currentQuestion = ''
+      // Reset textarea height
+      this.$nextTick(() => {
+        if (this.$refs.input) {
+          this.$refs.input.style.height = 'auto'
+        }
+      })
+      this.isLoading = true
+      this.error = null
+
+      // Add placeholder for assistant response
+      const responseIndex = this.messages.length
+      this.messages.push({
+        role: 'assistant',
+        content: '',
+        isStreaming: true,
+        questionAnswerId: null,
+        feedback: null,
+        copied: false
+      })
+
+      this.$nextTick(() => {
+        this.$refs.messagesContainer?.scrollTo({
+          top: this.$refs.messagesContainer.scrollHeight,
+          behavior: 'smooth'
+        })
+      })
+
+      try {
+        await this.streamGordonResponse(responseIndex)
+      } catch (err) {
+        // Only set error if messages weren't cleared
+        if (this.messages.length > 0) {
+          this.error = 'Failed to get response. Please try again.'
+        }
+        console.error('Gordon API error:', err)
+        // Only try to remove message if it still exists
+        if (this.messages[responseIndex]) {
+          this.messages.splice(responseIndex, 1)
+        }
+      } finally {
+        this.isLoading = false
+      }
+    },
+
+    getGordonEndpoint() {
+      const endpoints = {
+        'docs.docker.com': 'https://ai-backend-service.docker.com/public/ask',
+        'localhost': 'http://localhost:8000/public/ask'
+      }
+      return endpoints[window.location.hostname] || 'https://ai-backend-service-stage.docker.com/public/ask'
+    },
+
+    getSessionId() {
+      let sessionId = sessionStorage.getItem('gordon-session-id')
+      if (!sessionId) {
+        sessionId = `docs-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+        sessionStorage.setItem('gordon-session-id', sessionId)
+      }
+      return sessionId
+    },
+
+    getFeedbackEndpoint() {
+      const endpoints = {
+        'docs.docker.com': 'https://ai-backend-service.docker.com/feedback',
+        'localhost': 'http://localhost:8000/feedback'
+      }
+      return endpoints[window.location.hostname] || 'https://ai-backend-service-stage.docker.com/feedback'
+    },
+
+    async streamGordonResponse(responseIndex) {
+
+      // Build API request from messages, excluding the streaming placeholder
+      // The placeholder is at responseIndex, so we take everything before it
+      const conversationMessages = this.messages.slice(0, responseIndex).map((msg, i) => {
+        const message = {
+          role: msg.role,
+          content: msg.content
+        }
+
+        // Add copilot_references to the last message (most recent user question)
+        if (i === responseIndex - 1) {
+          message.copilot_references = [
+            {
+              data: {
+                origin: 'docs-website',
+                email: 'docs@docker.com',
+                uuid: this.getSessionId(),
+                action: 'AskGordon',
+                ...(this.includePageContext && {
+                  page_url: window.location.href,
+                  {{ with .Title }}page_title: {{ . | jsonify }}{{ end }}
+                })
+              }
+            }
+          ]
+        }
+
+        return message
+      })
+
+      const isNewConversation = !this.threadId
+      const payload = {
+        messages: conversationMessages,
+        ...(this.threadId && { thread_uuid: this.threadId })
+      }
+
+      const response = await fetch(this.getGordonEndpoint(), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      }
+
+      // Capture question_answer_id from response headers
+      const questionAnswerId = response.headers.get('DOCKER-AI-QUESTION-ANSWER-ID')
+      if (questionAnswerId) {
+        this.messages[responseIndex].questionAnswerId = questionAnswerId
+      }
+
+      const reader = response.body.getReader()
+      const decoder = new TextDecoder()
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        const chunk = decoder.decode(value, { stream: true })
+        const lines = chunk.split('\n')
+
+        for (const line of lines) {
+          if (!line.trim() || !line.startsWith('data: ')) continue
+
+          const data = line.slice(6)
+          if (data === '[DONE]') continue
+
+          try {
+            const parsed = JSON.parse(data)
+
+            // Capture thread_id for new conversations
+            if (parsed.thread_id) {
+              if (isNewConversation) {
+                this.threadId = parsed.thread_id  // $persist auto-saves to sessionStorage
+              } else if (parsed.thread_id !== this.threadId) {
+                console.warn('Backend returned unexpected thread_id:', parsed.thread_id)
+              }
+              continue
+            }
+
+            if (parsed.choices && parsed.choices[0]?.delta?.content) {
+              const content = parsed.choices[0].delta.content
+              this.messages[responseIndex].content += content
+
+              this.$nextTick(() => {
+                const container = this.$refs.messagesContainer
+                if (container) {
+                  const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 100
+                  if (isNearBottom) {
+                    container.scrollTop = container.scrollHeight
+                  }
+                }
+              })
+            }
+          } catch (e) {
+            console.error('Failed to parse SSE data:', e)
+          }
+        }
+      }
+
+      this.messages[responseIndex].isStreaming = false
+    },
+
+    clearChat() {
+      if (confirm('Clear all messages?')) {
+        this.messages = []      // $persist auto-saves empty array
+        this.threadId = null    // $persist auto-removes from sessionStorage
+        this.error = null
+      }
+    },
+
+    formatMessageContent(content) {
+      return this.$markdown(content)
+    },
+
+    async submitFeedback(messageIndex, feedbackType) {
+      const message = this.messages[messageIndex]
+
+      if (!message.questionAnswerId) {
+        console.error('No question_answer_id available for feedback')
+        return
+      }
+
+      if (message.feedback === feedbackType) {
+        return
+      }
+
+      try {
+        const response = await fetch(this.getFeedbackEndpoint(), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: message.questionAnswerId,
+            feedback: feedbackType
+          })
+        })
+
+        if (response.ok) {
+          message.feedback = feedbackType  // $persist auto-saves
+        } else {
+          console.error('Failed to submit feedback:', response.status, response.statusText)
+        }
+      } catch (err) {
+        console.error('Error submitting feedback:', err)
+      }
+    },
+
+    async copyAnswer(messageIndex) {
+      const message = this.messages[messageIndex]
+      if (!message.content) return
+
+      try {
+        await navigator.clipboard.writeText(message.content)
+        message.copied = true
+        this.$nextTick(() => {
+          setTimeout(() => {
+            message.copied = false
+          }, 2000)
+        })
+      } catch (err) {
+        console.error('Failed to copy:', err)
+      }
+    }
+  }" x-cloak @keydown.escape.window="$store.gordon.close()">
+	<!-- Overlay backdrop -->
+	<div x-show="$store.gordon.isOpen" x-transition.opacity.duration.300ms @click="$store.gordon.close()"
+		class="fixed inset-0 z-40 bg-black/50"></div>
+
+	<!-- Chat panel sliding in from right -->
+	<div id="gordon-chat" x-show="$store.gordon.isOpen" x-transition:enter="transition ease-out duration-200"
+		x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+		x-transition:leave="transition ease-in duration-200" x-transition:leave-start="translate-x-0"
+		x-transition:leave-end="translate-x-full"
+		class="fixed top-0 right-0 z-50 flex h-screen w-full flex-col overflow-hidden rounded-lg bg-white shadow-2xl transition-all duration-200 md:w-[min(70ch,90vw)] md:h-[calc(100vh-1rem)] md:top-2 md:right-2 dark:bg-gray-900">
+		<!-- Header -->
+		<div
+			class="flex items-center justify-between rounded-t-lg border-b border-gray-200 bg-blue-600 px-6 py-3 dark:border-gray-700">
+			<div class="flex items-center gap-3">
+				{{ partial "utils/svg.html" "images/ask-ai-logo.svg" }}
+			</div>
+			<div class="flex items-center gap-2">
+				<button @click="clearChat()" title="Clear chat"
+					class="cursor-pointer rounded p-2 text-white/80 transition-colors hover:bg-blue-500 hover:text-white"
+					:disabled="messages.length === 0"
+					:class="{ 'opacity-50 cursor-not-allowed': messages.length === 0 }">
+					<span class="icon-svg">
+						{{ partialCached "icon" "refresh" "refresh" }}
+					</span>
+				</button>
+				<button @click="$store.gordon.close()"
+					class="cursor-pointer rounded p-2 text-white/80 transition-colors hover:bg-blue-500 hover:text-white"
+					title="Close chat" aria-label="Close chat">
+					<span class="icon-svg">
+						{{ partialCached "icon" "close" "close" }}
+					</span>
+				</button>
+			</div>
+		</div>
+
+		<!-- Messages container -->
+		<div x-ref="messagesContainer" class="flex-1 space-y-4 p-6" :class="{ 'overflow-y-auto': messages.length > 0 }">
+			<!-- Welcome message when empty -->
+			<template x-if="messages.length === 0">
+				<div class="flex h-full flex-col items-center justify-center text-center">
+					<div class="mb-4 rounded-full bg-blue-100 p-4 dark:bg-blue-900">
+						<span class="icon-svg text-blue-600 dark:text-blue-400">
+							{{ partialCached "icon" "icons/sparkle.svg" "icons/sparkle.svg" }}
+						</span>
+					</div>
+					<h3 class="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
+						Ask me about Docker
+					</h3>
+					<p class="max-w-sm text-gray-600 dark:text-gray-400">
+						Get instant answers to your Docker questions. I can help with
+						commands, concepts, troubleshooting, and best practices.
+					</p>
+					<div class="mt-8 flex flex-col items-center gap-3 text-sm">
+						<p class="mb-1 text-gray-500 dark:text-gray-400">Try asking:</p>
+						<button @click="currentQuestion = 'What is the Docker MCP toolkit?'; askQuestion()"
+							class="cursor-pointer rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-gray-700 transition-opacity hover:opacity-70 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">
+							What is the Docker MCP toolkit?
+						</button>
+						<button @click="currentQuestion = 'How do hardened Docker images work?'; askQuestion()"
+							class="cursor-pointer rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-gray-700 transition-opacity hover:opacity-70 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">
+							How do hardened Docker images work?
+						</button>
+						<button @click="currentQuestion = 'How do I use Docker Debug?'; askQuestion()"
+							class="cursor-pointer rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-gray-700 transition-opacity hover:opacity-70 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">
+							How do I use Docker Debug?
+						</button>
+					</div>
+				</div>
+			</template>
+
+			<!-- Messages -->
+			<template x-for="(message, index) in messages" :key="index">
+				<div :class="message.role === 'user' ? 'flex justify-end' : 'flex justify-start'">
+					<div class="flex flex-col gap-2">
+						<div :class="message.role === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100'" class="rounded-lg px-4 py-3">
+							<template x-if="!message.content && message.isStreaming">
+								<div class="flex gap-1">
+									<span class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
+										style="animation-delay: 0ms"></span>
+									<span class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
+										style="animation-delay: 150ms"></span>
+									<span class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
+										style="animation-delay: 300ms"></span>
+								</div>
+							</template>
+							<template x-if="message.content">
+								<div>
+									<div x-html="formatMessageContent(message.content)"
+										:class="message.role === 'assistant' ? 'prose prose-sm dark:prose-invert max-w-none break-words' : 'max-w-none break-words'"></div>
+								</div>
+							</template>
+						</div>
+						<!-- Feedback buttons for assistant messages -->
+						<template x-if="message.role === 'assistant' && !message.isStreaming && message.questionAnswerId">
+							<div class="flex items-center gap-2 text-xs">
+								<div class="flex items-center gap-1">
+									<!-- Copy button -->
+									<button @click="copyAnswer(index)"
+										class="cursor-pointer rounded bg-gray-100 p-1.5 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
+										:title="message.copied ? 'Copied!' : 'Copy answer'">
+										<span x-show="message.copied !== true" class="icon-svg icon-sm">
+											{{ partialCached "icon" "content_copy" "content_copy" }}
+										</span>
+										<span x-show="message.copied === true" class="icon-svg icon-sm">
+											{{ partialCached "icon" "check_circle" "check_circle" }}
+										</span>
+									</button>
+									<!-- Thumbs up -->
+									<button @click="submitFeedback(index, 'positive')"
+										:class="message.feedback === 'positive'
+											? 'bg-green-200 text-green-700 dark:bg-green-900/50 dark:text-green-400'
+											: 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'"
+										class="cursor-pointer rounded p-1.5"
+										title="Helpful">
+										<span class="icon-svg icon-sm">
+											{{ partialCached "icon" "thumb_up" "thumb_up" }}
+										</span>
+									</button>
+									<!-- Thumbs down -->
+									<button @click="submitFeedback(index, 'negative')"
+										:class="message.feedback === 'negative'
+											? 'bg-red-200 text-red-700 dark:bg-red-900/50 dark:text-red-400'
+											: 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'"
+										class="cursor-pointer rounded p-1.5"
+										title="Not helpful">
+										<span class="icon-svg icon-sm">
+											{{ partialCached "icon" "thumb_down" "thumb_down" }}
+										</span>
+									</button>
+								</div>
+								<template x-if="message.feedback">
+									<span :class="message.feedback === 'positive' ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'">
+										Thanks for your feedback!
+									</span>
+								</template>
+							</div>
+						</template>
+					</div>
+				</div>
+			</template>
+
+			<!-- Error message -->
+			<template x-if="error">
+				<div
+					class="rounded-lg border border-red-200 bg-red-50 p-4 text-red-800 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400">
+					<p class="text-sm" x-text="error"></p>
+				</div>
+			</template>
+		</div>
+
+		<!-- Input area -->
+		<div class="border-t border-gray-200 p-4 dark:border-gray-700">
+			<form @submit.prevent="askQuestion()" class="flex items-center gap-2">
+				<div class="relative flex-1 self-stretch">
+					<textarea x-ref="input" x-model="currentQuestion"
+						@input="$el.style.height = 'auto'; $el.style.height = $el.scrollHeight + 'px'"
+						@keydown.enter="if (!$event.shiftKey) { $event.preventDefault(); askQuestion() }"
+						placeholder="Ask a question about Docker..."
+						rows="1"
+						:disabled="isLoading"
+						class="block w-full resize-none rounded-lg border border-gray-300 p-3 pr-24 leading-normal min-h-[3rem] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:focus:border-blue-400"></textarea>
+					<!-- Page context toggle chip inside input -->
+					<div class="absolute right-2 top-1/2 -translate-y-1/2" x-data="{ showTooltip: false }">
+						<button
+							@click="includePageContext = !includePageContext"
+							@mouseenter="showTooltip = true"
+							@mouseleave="showTooltip = false"
+							type="button"
+							:class="includePageContext
+								? 'bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400'
+								: 'bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-400'"
+							class="cursor-pointer rounded-md px-2 py-1 text-xs font-medium transition-colors hover:opacity-80">
+							<span class="flex items-center gap-1">
+								<template x-if="includePageContext">
+									<span class="icon-svg icon-xs">
+										{{ partialCached "icon" "link" "link" }}
+									</span>
+								</template>
+								<template x-if="!includePageContext">
+									<span class="icon-svg icon-xs">
+										{{ partialCached "icon" "link_off" "link_off" }}
+									</span>
+								</template>
+								<span class="hidden sm:inline">Context</span>
+							</span>
+						</button>
+						<!-- Tooltip -->
+						<div
+							x-show="showTooltip"
+							x-transition:enter="transition ease-out duration-100"
+							x-transition:enter-start="opacity-0 scale-95"
+							x-transition:enter-end="opacity-100 scale-100"
+							x-transition:leave="transition ease-in duration-75"
+							x-transition:leave-start="opacity-100 scale-100"
+							x-transition:leave-end="opacity-0 scale-95"
+							class="absolute bottom-full right-0 mb-2 w-56 rounded-lg bg-gray-900 p-2.5 text-xs text-white shadow-lg dark:bg-gray-700"
+							style="display: none;">
+							<div class="relative">
+								<p>When enabled, Gordon considers the current page you're viewing to provide more relevant answers.</p>
+								<!-- Arrow -->
+								<div class="absolute -bottom-3 right-4 h-2 w-2 rotate-45 bg-gray-900 dark:bg-gray-700"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button type="submit" :disabled="!currentQuestion.trim() || isLoading"
+					:title="isLoading ? 'Sending...' : 'Send question'"
+					class="cursor-pointer rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50">
+					<template x-if="!isLoading">
+						<span class="icon-svg">
+							{{ partialCached "icon" "send" "send" }}
+						</span>
+					</template>
+					<template x-if="isLoading">
+						<span class="icon-svg animate-spin">
+							{{ partialCached "icon" "progress_activity" "progress_activity" }}
+						</span>
+					</template>
+				</button>
+			</form>
+		</div>
+
+		<!-- Disclaimer -->
+		<div
+			class="rounded-b-lg border-t border-gray-200 bg-blue-50 px-4 py-3 text-xs text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
+			This is a custom LLM for answering questions about Docker. Answers are
+			based on the documentation.
+		</div>
+	</div>
+</div>
+
+<!-- Styles for Gordon chat -->
+<style>
+	/* Code block styles */
+	#gordon-chat pre {
+		background: #0d1117;
+		border-radius: 0.25rem;
+		padding: 0;
+		margin: 0.5rem 0;
+		overflow-x: auto;
+		white-space: pre;
+	}
+
+	#gordon-chat pre code {
+		background: #0d1117;
+		color: #c9d1d9;
+		padding: 1rem;
+		display: block;
+		font-family: "Roboto Mono", monospace;
+		font-size: 0.875rem;
+		line-height: 1.5;
+		white-space: pre;
+		overflow-x: auto;
+	}
+
+	#gordon-chat pre code * {
+		white-space: pre;
+	}
+
+	/* Inline code styling (not in pre blocks) */
+	#gordon-chat .prose code.not-prose {
+		background-color: rgb(229 231 235);
+		color: rgb(17 24 39);
+		padding: 0.2em 0.4em;
+		border-radius: 0.25rem;
+		font-family: "Roboto Mono", monospace;
+		font-size: 0.875em;
+	}
+
+	.dark #gordon-chat .prose code.not-prose {
+		background-color: rgb(55 65 81);
+		color: rgb(229 231 235);
+	}
+</style>

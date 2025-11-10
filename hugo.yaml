@@ -271,6 +271,9 @@ module:
     # Mount the icon files to assets so we can access them with resources.Get
     - source: node_modules/@material-symbols/svg-400/rounded
       target: assets/icons
+    # Mount highlight.js theme for Gordon chat syntax highlighting
+    - source: node_modules/highlight.js/styles/github-dark.css
+      target: assets/css/highlight-github-dark.css
 
   imports:
 
