@@ -82,15 +82,60 @@ are invoked, enforced through resource and access limitations.
 
 ### OAuth authentication
 
-Some MCP servers require authentication to access external services. The MCP
-Toolkit handles OAuth flows for supported services, currently limited to
-GitHub. When you authorize the MCP Toolkit to access your GitHub account, any
-installed MCP server that needs GitHub access can use those credentials without
-requiring separate authentication.
+Some MCP servers require authentication to access external services like
+GitHub, Notion, and Linear. The MCP Toolkit handles OAuth authentication
+automatically. You authorize access through your browser, and the Toolkit
+manages credentials securely. You don't need to manually create API tokens or
+configure authentication for each service.
 
-To set up OAuth for a service, use the **OAuth** tab in the MCP Toolkit section
-in Docker Desktop. Once authorized, the credentials are available to any MCP
-server that needs them. You can revoke access at any time from the same tab.
+#### Authorize a server with OAuth
+
+{{< tabs >}}
+{{< tab name="Docker Desktop">}}
+
+1. In Docker Desktop, go to **MCP Toolkit** and select the **Catalog** tab.
+2. Find and add an MCP server that requires OAuth.
+3. In the server's **Configuration** tab, select the **OAuth** authentication
+   method. Follow the link to begin the OAuth authorization.
+4. Your browser opens the authorization page for the service. Follow the
+   on-screen instructions to complete authentication.
+5. Return to Docker Desktop when authentication is complete.
+
+View all authorized services in the **OAuth** tab. To revoke access, select
+**Revoke** next to the service you want to disconnect.
+
+{{< /tab >}}
+{{< tab name="CLI">}}
+
+Enable an MCP server:
+
+```console
+$ docker mcp server enable github-official
+```
+
+If the server requires OAuth, authorize the connection:
+
+```console
+$ docker mcp oauth authorize github
+```
+
+Your browser opens the authorization page. Complete the authentication process,
+then return to your terminal.
+
+View authorized services:
+
+```console
+$ docker mcp oauth ls
+```
+
+Revoke access to a service:
+
+```console
+$ docker mcp oauth revoke github
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Usage examples
 
@@ -102,7 +147,7 @@ interact with your GitHub account:
 
 1. From the **MCP Toolkit** menu in Docker Desktop, select the **Catalog** tab
    and find the **GitHub Official** server and add it.
-2. In the server's **Config** tab, authenticate via OAuth.
+2. In the server's **Configuration** tab, authenticate via OAuth.
 3. In the **Clients** tab, ensure Gordon is connected.
 4. From the **Ask Gordon** menu, you can now send requests related to your
    GitHub account, in accordance to the tools provided by the GitHub Official

@@ -54,6 +54,20 @@ In the upcoming versions of Docker Desktop, Docker plans to support pluggable st
 
 No. MCP servers are not technically uninstalled since they exist as Docker containers pulled to your local Docker Desktop. Removing an MCP server stops the container but leaves the image on your system. Even if the container is deleted, credentials remain stored until you remove them manually.
 
+### Why don't I see remote MCP servers in the catalog?
+
+If remote MCP servers aren't visible in the Docker Desktop catalog, your local
+catalog may be out of date. Remote servers are indicated by a cloud icon and
+include services like GitHub, Notion, and Linear.
+
+Update your catalog by running:
+
+```console
+$ docker mcp catalog update
+```
+
+After the update completes, refresh the **Catalog** tab in Docker Desktop.
+
 ## Related pages
 
 - [Get started with MCP Toolkit](/manuals/ai/mcp-catalog-and-toolkit/get-started.md)
