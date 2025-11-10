@@ -375,3 +375,10 @@
 
 "/ai/mcp-catalog-and-toolkit/get-started/#verify-connections":
   - /go/mcp-client-verify/
+
+# Copilot extension (deprecated)
+"https://github.com/marketplace/docker-for-github-copilot":
+  - /copilot/
+  - /copilot/install/
+  - /copilot/usage/
+  - /copilot/examples/

@@ -74,10 +74,6 @@ params:
     description: Image analysis and policy evaluation.
     icon: /icons/Scout.svg
     link: /scout/
-  - title: Docker for GitHub Copilot
-    description: Integrate Docker's capabilities with GitHub Copilot.
-    icon: chat
-    link: /copilot/
   - title: Docker Extensions
     description: Customize your Docker Desktop workflow.
     icon: extension
