@@ -8,6 +8,7 @@
     class="dark:bg-navbar-bg-dark bg-navbar-bg flex flex-col items-center text-base text-black dark:text-white"
   >
     {{ partial "header.html" . }}
+    {{ partial "gordon-chat.html" . }}
     <main class="relative flex w-full max-w-[1920px]">
       <!-- Sidebar -->
       <div
@@ -52,8 +53,9 @@
           <!-- Top nav buttons appear here on sm width -->
           <div class="flex flex-col gap-2 md:hidden mb-4">
             <button
-              @click="open = false"
-              class="topbar-button open-kapa-widget w-full flex items-center gap-2"
+              x-data
+              @click="$store.gordon.toggle(); $store.showSidebar = false"
+              class="topbar-button w-full flex items-center gap-2"
             >
               <span>Ask&nbsp;AI</span>
               <span class="icon-svg">
