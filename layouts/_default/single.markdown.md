@@ -1,3 +1,2 @@
 {{ .Title }}
-
-{{ .RawContent }}
+{{ .RenderShortcodes }}
