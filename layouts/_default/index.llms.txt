@@ -14,5 +14,6 @@
 {{- define "pageItem" }}
 {{- if and .Title .Permalink }}
 - [{{ .Title }}]({{ .Permalink }})
+  {{- with .Description }}: {{ chomp (replace . "\n" " ") }}{{- end }}
 {{- end }}
 {{- end }}
