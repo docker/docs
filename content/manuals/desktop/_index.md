@@ -21,7 +21,7 @@ grid:
   link: /desktop/use-desktop/
 - title: Explore its key features
   description: |
-    Find information about [Docker VMM](/desktop/features/vmm/), [WSL](/desktop/features/wsl/), [deploying on Kubernetes](/desktop/features/kubernetes/), and more.
+    Find information about [Networking](/desktop/features/networking/), [Docker VMM](/desktop/features/vmm/), [WSL](/desktop/features/wsl/), and more.
   icon: category
 - title: View the release notes
   description: Find out about new features, improvements, and bug fixes.

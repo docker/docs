@@ -331,7 +331,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 - Fixed an issue pulling images with zstd differential layers when the containerd image store is enabled.
 - Fixed a bug causing containers launching  with the `--restart` flag to not restart properly when using Enhanced Container Isolation.
-- Improved interaction between [Kubernetes custom registry images](/manuals/desktop/features/kubernetes.md#configuring-a-custom-image-registry-for-kubernetes-control-plane-images) and Enhanced Container Isolation (ECI), so the [ECI Docker Socket image list](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md) no longer needs to be manually updated when using a custom registry for Kubernetes control plane images.
+- Improved interaction between [Kubernetes custom registry images](/manuals/desktop/use-desktop/kubernetes.md#configuring-a-custom-image-registry-for-kubernetes-control-plane-images) and Enhanced Container Isolation (ECI), so the [ECI Docker Socket image list](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md) no longer needs to be manually updated when using a custom registry for Kubernetes control plane images.
 - Fixed a bug where a Docker Desktop Kubernetes cluster in kind mode fails to start after restarting Docker Desktop if the user is required to be signed in but is currently signed out.
 - Fixed a bug that prevented the mounting of MCP secrets into containers when [Enhanced Container Isolation](/enterprise/security/hardened-desktop/enhanced-container-isolation/) is enabled.
 - Fixed a bug preventing the use of `--publish-all` when `--publish` was already specified.

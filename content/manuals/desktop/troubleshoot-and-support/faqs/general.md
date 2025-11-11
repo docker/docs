@@ -27,7 +27,7 @@ This includes:
 - Viewing remote images in the Docker Dashboard
 - Docker Build when using [BuildKit](/manuals/build/buildkit/_index.md#getting-started).
   You can work around this by disabling BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
-- [Kubernetes](/manuals/desktop/features/kubernetes.md) (Images are download when you enable Kubernetes for the first time)
+- [Kubernetes](/manuals/desktop/use-desktop/kubernetes.md) (Images are download when you enable Kubernetes for the first time)
 - Checking for updates
 - [In-app diagnostics](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md#diagnose-from-the-app) (including the [Self-diagnose tool](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md#diagnose-from-the-app))
 - Sending usage statistics

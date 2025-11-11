@@ -3,7 +3,7 @@ description: Understand what Docker Desktop Resource Saver mode is and how to co
 keywords: Docker Dashboard, resource saver, manage, containers, gui, dashboard, user manual
 title: Docker Desktop's Resource Saver mode
 linkTitle: Resource Saver mode
-weight: 50
+weight: 60
 ---
 
 Resource Saver mode significantly reduces Docker
