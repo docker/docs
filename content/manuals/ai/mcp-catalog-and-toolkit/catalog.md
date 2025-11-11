@@ -67,9 +67,16 @@ Local servers offer predictable performance, complete data privacy, and independ
 
 ### Remote MCP servers
 
-Remote MCP servers are hosted services that you connect to through the internet. Service providers maintain and update these servers, ensuring access to current features and live data without requiring local updates or maintenance. Remote servers display a cloud icon {{< inline-image src="../../offload/images/cloud-mode.png" alt="cloud icon" >}} to indicate their hosted nature and external connectivity requirements.
+Remote MCP servers are hosted services that run on the provider's
+infrastructure and connect to external services like GitHub, Notion, and
+Linear. Many remote servers use OAuth authentication. When a remote server
+requires OAuth, the MCP Toolkit handles authentication automatically - you
+authorize access through your browser, and the Toolkit manages credentials
+securely. You don't need to manually create API tokens or configure
+authentication.
 
-Remote servers excel when you need always-current data, want to minimize local resource usage, or require capabilities that benefit from provider-managed infrastructure and scaling.
+Remote servers display a cloud icon in the catalog. For setup instructions, see
+[MCP Toolkit](toolkit.md#oauth-authentication).
 
 ## Use an MCP server from the catalog
 
