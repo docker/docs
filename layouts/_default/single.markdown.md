@@ -1,2 +1,2 @@
-{{ .Title }}
+# {{ .Title }}
 {{ .RenderShortcodes }}
