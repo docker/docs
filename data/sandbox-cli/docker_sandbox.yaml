@@ -1,0 +1,37 @@
+command: docker sandbox
+short: Docker Sandbox
+long: Local sandbox environments for AI agents, using Docker.
+usage: docker sandbox
+pname: docker
+plink: docker.yaml
+cname:
+    - docker sandbox inspect
+    - docker sandbox ls
+    - docker sandbox rm
+    - docker sandbox run
+    - docker sandbox version
+clink:
+    - docker_sandbox_inspect.yaml
+    - docker_sandbox_ls.yaml
+    - docker_sandbox_rm.yaml
+    - docker_sandbox_run.yaml
+    - docker_sandbox_version.yaml
+options:
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+
