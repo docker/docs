@@ -81,7 +81,7 @@ When a Kubernetes cluster is enabled, the **Kubernetes** view displays a live da
 - A real-time list of resources - pods, services, deployments - in the selected namespace
 - Automatic updates when resources are created, deleted, or modified
 
-## Verify instllation
+## Verify installation
 
 Confirm that your cluster is running:
 
