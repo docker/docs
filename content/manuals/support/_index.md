@@ -52,6 +52,8 @@ All Docker users can seek support through community resources, where Docker or t
 
 ## Docker Desktop support
 
+Docker Desktop support is available with a paid subscription.
+
 ### Scope of support
 
 {{< tabs >}}
