@@ -113,6 +113,7 @@ Docker Desktop support excludes:
 
 - Docker Pro: One machine
 - Docker Team: Number of machines equal to subscription seats
+- Docker Business: Unlimited machines
 
 ### Supported operating systems
 
