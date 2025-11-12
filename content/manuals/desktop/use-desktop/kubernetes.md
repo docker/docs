@@ -2,7 +2,7 @@
 description: See how you can deploy to Kubernetes on Docker Desktop
 keywords: deploy, kubernetes, kubectl, orchestration, Docker Desktop
 title: Explore the Kubernetes view
-linkTitle: Deploy on Kubernetes
+linkTitle: Kubernetes
 aliases:
 - /docker-for-windows/kubernetes/
 - /docker-for-mac/kubernetes/
@@ -13,7 +13,7 @@ weight: 50
 
 Docker Desktop includes a standalone Kubernetes server and client, as well as Docker CLI integration, enabling local Kubernetes development and testing directly on your machine.
 
-The Kubernetes server runs as a single or multi-node cluster, within Docker containers. This lightweight setup helps you explore Kubernetes features, test workloads, and work with container orchestration in parallel with other Docker functionality such as Swarm services or standalone containers.
+The Kubernetes server runs as a single or multi-node cluster, within Docker containers. This lightweight setup helps you explore Kubernetes features, test workloads, and work with container orchestration in parallel with other Docker features.
 
 ## Enable Kubernetes
 
