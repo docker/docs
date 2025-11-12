@@ -883,7 +883,7 @@ This is the same as the `--no-cache` flag for `docker build`.
 
 ```hcl
 target "default" {
-  no-cache = 1
+  no-cache = true
 }
 ```
 
@@ -1099,7 +1099,7 @@ or interpolate them in attribute values in your Bake file.
 variable "TAG" {
   type = string
   default = "latest"
-  description: "Tag to use for build"
+  description = "Tag to use for build"
 }
 
 target "webapp-dev" {
