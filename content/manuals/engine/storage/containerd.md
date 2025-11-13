@@ -3,50 +3,72 @@ title: containerd image store with Docker Engine
 linkTitle: containerd image store
 weight: 50
 keywords: containerd, snapshotters, image store, docker engine
-description: Learn how to enable the containerd image store on Docker Engine
+description: Learn about the containerd image store
 aliases:
   - /storage/containerd/
 ---
 
-{{< summary-bar feature_name="containerd" >}}
+The containerd image store is the default storage backend for Docker Engine
+29.0 and later on fresh installations. If you upgraded from an earlier version,
+your daemon continues using the legacy graph drivers (overlay2) until you
+enable the containerd image store.
 
 containerd, the industry-standard container runtime, uses snapshotters instead
-of the classic storage drivers for storing image and container data.
-While the `overlay2` driver still remains the default driver for Docker Engine,
-you can opt in to using containerd snapshotters as an experimental feature.
+of classic storage drivers for storing image and container data.
 
-To learn more about the containerd image store and its benefits, refer to
-[containerd image store on Docker Desktop](/manuals/desktop/features/containerd.md).
+> [!NOTE]
+> The containerd image store is not available when using user namespace
+> remapping (`userns-remap`). See
+> [moby#47377](https://github.com/moby/moby/issues/47377) for details.
+
+## Why use the containerd image store
+
+The containerd image store uses snapshotters to manage how image layers are
+stored and accessed on the filesystem. This differs from the classic graph
+drivers like overlay2.
+
+The containerd image store enables:
+
+- Building and storing multi-platform images locally. With classic storage
+  drivers, you need external builders for multi-platform images.
+- Working with images that include attestations (provenance, SBOM). These use
+  image indices that the classic store doesn't support.
+- Running Wasm containers. The containerd image store supports WebAssembly
+  workloads.
+- Using advanced snapshotters. containerd supports pluggable snapshotters that
+  provide features like lazy-pulling of images (stargz) or peer-to-peer image
+  distribution (nydus, dragonfly).
+
+For most users, switching to the containerd image store is transparent. The
+storage backend changes, but your workflows remain the same.
 
 ## Enable containerd image store on Docker Engine
 
-Switching to containerd snapshotters causes you to temporarily lose images and
-containers created using the classic storage drivers.
-Those resources still exist on your filesystem, and you can retrieve them by
-turning off the containerd snapshotters feature.
+If you're upgrading from an earlier Docker Engine version, you need to manually
+enable the containerd image store.
 
-The following steps explain how to enable the containerd snapshotters feature.
+> [!IMPORTANT]
+> Switching storage backends temporarily hides images and containers created
+> with the other backend. Your data remains on disk. To access the old images
+> again, switch back to your previous storage configuration.
 
-1. Add the following configuration to your `/etc/docker/daemon.json`
-   configuration file:
+Add the following configuration to your `/etc/docker/daemon.json` file:
 
-   ```json
-   {
-     "features": {
-       "containerd-snapshotter": true
-     }
-   }
-   ```
+```json
+{
+  "features": {
+    "containerd-snapshotter": true
+  }
+}
+```
 
-2. Save the file.
-3. Restart the daemon for the changes to take effect.
+Save the file and restart the daemon:
 
-   ```console
-   $ sudo systemctl restart docker
-   ```
+```console
+$ sudo systemctl restart docker
+```
 
-After restarting the daemon, running `docker info` shows that you're using
-containerd snapshotter storage drivers.
+After restarting the daemon, verify you're using the containerd image store:
 
 ```console
 $ docker info -f '{{ .DriverStatus }}'
@@ -54,3 +76,58 @@ $ docker info -f '{{ .DriverStatus }}'
 ```
 
 Docker Engine uses the `overlayfs` containerd snapshotter by default.
+
+> [!NOTE]
+> When you enable the containerd image store, existing images and containers
+> from the overlay2 driver remain on disk but become hidden. They reappear if
+> you switch back to overlay2. To use your existing images with the containerd
+> image store, push them to a registry first, or use `docker save` to export
+> them.
+
+## Experimental automatic migration
+
+Docker Engine includes an experimental feature that can automatically switch to
+the containerd image store under certain conditions. **This feature is
+experimental**. It's provided for those who want to test it, but [starting
+fresh](#enable-containerd-image-store-on-docker-engine) is the recommended
+approach.
+
+> [!CAUTION]
+> The automatic migration feature is experimental and may not work reliably in
+> all scenarios. Create backups before attempting to use it.
+
+To enable automatic migration, add the `containerd-migration` feature to your
+`/etc/docker/daemon.json`:
+
+```json
+{
+  "features": {
+    "containerd-migration": true
+  }
+}
+```
+
+You can also set the `DOCKER_MIGRATE_SNAPSHOTTER_THRESHOLD` environment
+variable to make the daemon switch automatically if you have no containers and
+your image count is at or below the threshold. For systemd:
+
+```console
+$ sudo systemctl edit docker.service
+```
+
+Add:
+
+```ini
+[Service]
+Environment="DOCKER_MIGRATE_SNAPSHOTTER_THRESHOLD=5"
+```
+
+If you have no running or stopped containers and 5 or fewer images, the daemon
+switches to the containerd image store on restart. Your overlay2 data remains
+on disk but becomes hidden.
+
+## Additional resources
+
+To learn more about the containerd image store and its capabilities in Docker
+Desktop, see
+[containerd image store on Docker Desktop](/manuals/desktop/features/containerd.md).
