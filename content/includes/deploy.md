@@ -25,4 +25,4 @@ To enable Kubernetes:
 
     This starts a Kubernetes single-node cluster when Docker Desktop starts.
 
-For detailed information, see [Deploy on Kubernetes](/manuals/desktop/features/kubernetes.md) and [Describing apps using Kubernetes YAML](/guides/deployment-orchestration/kube-deploy/#describing-apps-using-kubernetes-yaml).
+For detailed information, see [Deploy on Kubernetes](/manuals/desktop/use-desktop/kubernetes.md) and [Describing apps using Kubernetes YAML](/guides/deployment-orchestration/kube-deploy/#describing-apps-using-kubernetes-yaml).
