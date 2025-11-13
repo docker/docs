@@ -30,6 +30,27 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.51.0
+
+{{< release-date date="2025-11-13" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.51.0" build_path="/210443/" >}}
+
+### New
+
+- You can now set up your Kubernetes resources from the **Kubernetes** view. This new view also provides a real-time display of your pods, services, and deployments. 
+
+### Upgrades
+
+- [Docker Engine v28.5.2](/manuals/engine/release-notes/28.md#2852)
+- Linux kernel `v6.12.54`
+
+### Bug fixes and enhancements
+
+#### For all platforms 
+
+- Kind now only pulls required dependency images if they are not available locally.
+
 ## 4.50.0
 
 {{< release-date date="2025-11-06" >}}
