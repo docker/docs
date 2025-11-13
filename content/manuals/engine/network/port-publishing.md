@@ -289,6 +289,28 @@ For example:
 > Changing the default bind address doesn't have any effect on Swarm services.
 > Swarm services are always exposed on the `0.0.0.0` network interface.
 
+### Masquerade or SNAT for outgoing packets
+
+NAT is enabled by default for bridge networks, meaning outgoing packets
+from containers are masqueraded. The source address of packets leaving
+the Docker host is changed to an address on the host interface the packet
+is sent on.
+
+Masquerading can be disabled for a user-defined bridge network by using
+the `com.docker.network.bridge.enable_ip_masquerade` driver option when
+creating the network. For example:
+```console
+$ docker network create mybridge \
+  -o com.docker.network.bridge.enable_ip_masquerade=false ...
+```
+
+To use a specific source address for outgoing packets for a user-defined
+network, instead of letting masquerading select an address, use options
+`com.docker.network.host_ipv4` and `com.docker.network.host_ipv6` to
+specify the Source NAT (SNAT) address to use. The
+`com.docker.network.bridge.enable_ip_masquerade` option must
+be `true`, the default, for these options to have any effect.
+
 ### Default bridge
 
 To set the default binding for the default bridge network, configure the `"ip"`
