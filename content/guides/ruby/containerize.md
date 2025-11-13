@@ -51,7 +51,7 @@ Although the Dockerfile is generated automatically, understanding its purpose an
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
 ARG RUBY_VERSION=3.4.7
-FROM <your-namespace>/dhi-ruby:$RUBY_VERSION AS base
+FROM <your-namespace>/dhi-ruby:$RUBY_VERSION-dev AS base
 
 # Rails app lives here
 WORKDIR /rails
