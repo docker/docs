@@ -144,3 +144,10 @@ Refer to the following section for a list of events and their descriptions:
 | Billing Cycle Change Requested | Occurs when a user in your organization requests a change in the billing cycle. |
 | Plan Downgrade Cancellation Requested | Occurs when a user in your organization requests a cancellation of a scheduled plan downgrade. |
 | Seat Removal Cancellation Requested | Occurs when a user in your organization requests a cancellation of a scheduled seat removal. |
+
+### Offload events
+
+| Event                                                          | Description                                   |
+|:------------------------------------------------------------------|:------------------------------------------------|
+| Offload Lease Start | Occurs when an Offload lease is started in your organization. |
+| Offload Lease End | Occurs when an Offload lease is ended in your organization. |
