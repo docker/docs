@@ -69,19 +69,6 @@ outputFormats:
     isPlainText: true
     mediaType: "application/json"
     notAlternative: true
-  # robots.txt, see: layouts/index.robots.json
-  robots:
-    baseName: robots
-    isPlainText: true
-    mediaType: "text/plain"
-    notAlternative: true
-  # Markdown for LLMs, see layouts/_default/single.markdown.md
-  Markdown:
-    baseName: index
-    mediaType: "text/markdown"
-    isPlainText: true
-    isHTML: false
-    permalinkable: false
   # llms.txt
   llms:
     baseName: llms
@@ -101,10 +88,10 @@ outputs:
     - llms
   page:
     - html
-    - Markdown
+    - markdown
   section:
     - html
-    - Markdown
+    - markdown
 
 languages:
   en:

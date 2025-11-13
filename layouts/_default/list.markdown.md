@@ -1,7 +1,5 @@
-{{ .Title }}
-
-{{ .RawContent }}
-
-{{ range .Pages }}
-- [{{ .Title }}](https://docs.docker.com{{ .RelPermalink }})
+# {{ .Title }}
+{{ .RenderShortcodes }}
+{{ range where .Pages "Permalink" "ne" "" }}
+- [{{ .Title }}]({{ .Permalink }})
 {{ end }}
