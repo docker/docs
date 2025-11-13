@@ -190,6 +190,11 @@ You can configure DNS resolution on a per-container basis, using flags for the
 The following table describes the available `docker run` flags related to DNS
 configuration.
 
+> [!NOTE]
+>
+> In case no non-localhost DNS is defined in the `/etc/resolve.conf`,
+> Docker Engine automatically adds a fallback DNS configuration using public Google DNS servers (8.8.8.8 and 8.8.4.4).
+
 | Flag           | Description                                                                                                                                                                                                                                           |
 | -------------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--dns`        | The IP address of a DNS server. To specify multiple DNS servers, use multiple `--dns` flags. DNS requests will be forwarded from the container's network namespace so, for example, `--dns=127.0.0.1` refers to the container's own loopback address. |
