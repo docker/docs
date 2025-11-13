@@ -104,6 +104,34 @@ organization.
     - **Delete**
 1. Select **Save** after making changes to a token.
 
+## Migrate from service accounts
+
+[Enhanced Service Account add-ons](/manuals/docker-hub/service-accounts.md)
+are deprecated and no longer available for
+new purchases as of December 10, 2024.
+
+Organization access tokens provide a
+modern, secure replacement with additional benefits:
+
+| Feature | Service accounts | Organization access tokens |
+|---------|------------------|----------------------------|
+| Authentication | Username/password | Organization name + token |
+| Cost | Tiered add-on pricing | Included with subscription |
+| Management | Individual account-based | Organization owner managed |
+| Repository access | Full account access | Granular repository permissions |
+| Security | Basic password auth | Token-based with expiration |
+| Rate limits | Separate tiered limits | Organization subscription limits |
+
+### Migration steps
+
+To migrate from service accounts to OATs, use the following steps:
+
+1. Document current service accounts and their purposes.
+1. Generate organization access tokens with appropriate repository permissions.
+1. Replace service account credentials in your systems.
+1. Validate all automated workflows work correctly.
+1. Remove deprecated service account credentials.
+
 ## Organization access token best practices
 
 - Regular token rotation: Set reasonable expiration dates and rotate tokens regularly to minimize security risks.

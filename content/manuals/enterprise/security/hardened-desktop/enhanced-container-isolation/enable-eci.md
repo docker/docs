@@ -50,7 +50,7 @@ Configure Enhanced Container Isolation organization-wide using Settings Manageme
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
 
-1. Sign in to [Docker Home](https://app.docker.com) and select your organization.
+1. Sign in to [Docker Home](https://app.docker.com) and select your organization from the top-left account drop-down.
 1. Go to **Admin Console** > **Desktop Settings Management**.
 1. [Create or edit a setting policy](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md).
 1. Set **Enhanced Container Isolation** to **Always enabled**.
@@ -159,7 +159,7 @@ Settings Management:
 - The **Use Enhanced Container Isolation** setting appears turned on in
 Docker Desktop settings.
 - If set to `"locked": true`, the setting is locked and greyed out.
-- All new containers automatically use Linux user namepsaces.
+- All new containers automatically use Linux user namespaces.
 - Existing development workflows continue to work without modification.
 - Users see `sysbox-runc` as the container runtime in `docker inspect` output.
 

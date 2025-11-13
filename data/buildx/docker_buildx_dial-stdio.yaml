@@ -20,9 +20,9 @@ options:
       swarm: false
     - option: progress
       value_type: string
-      default_value: quiet
+      default_value: none
       description: |
-        Set type of progress output (`auto`, `plain`, `tty`, `rawjson`). Use plain to show container output
+        Set type of progress output (`auto`, `plain`, `rawjson`, `tty`). Use plain to show container output
       deprecated: false
       hidden: false
       experimental: false

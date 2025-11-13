@@ -161,27 +161,27 @@
             >
               <div class="flex flex-col gap-4">
                 <h2 class="font-medium">
-                  Gen AI catalog
+                  Docker Hardened Images
                   {{ partial
                     "components/badge.html" (dict "color" "blue" "content" "New")
                   }}
                 </h2>
                 <p class="text-xl">
-                  Integrate AI solutions into your apps with minimal effort
+                  Secure, minimal, production-ready images with near-zero known CVEs.
                 </p>
               </div>
               <div class="flex flex-col items-start gap-4 xl:flex-row">
                 <a
-                  href="https://hub.docker.com/catalogs/gen-ai"
+                  href="/dhi/get-started/"
                   class="bg-blue dark:bg-blue rounded-sm p-2 px-4 text-white transition duration-300 hover:bg-blue-500 dark:hover:bg-blue-500"
                 >
-                  Explore on Docker Hub
+                  Start your free trial
                 </a>
                 <a
-                  href="/docker-hub/image-library/catalogs/"
+                  href="https://hub.docker.com/hardened-images/catalog"
                   class="bg-blue dark:bg-blue rounded-sm p-2 px-4 text-white transition duration-300 hover:bg-blue-500 dark:hover:bg-blue-500"
                 >
-                  Read the docs
+                  Explore images
                 </a>
               </div>
             </div>
@@ -200,33 +200,31 @@
               />
             </div>
           </div>
-          <div
-            class="rounded-sm bg-gradient-to-br from-blue-400 to-blue-200 p-[2px] drop-shadow dark:from-blue-300 dark:to-blue-400"
-          >
-            <div class="bg-pattern-purple rounded-sm p-6">
-              <div class="flex flex-col gap-12">
-                <div class="flex flex-col gap-4">
-                  <h2 class="font-medium">
-                    Docker Model Runner
-                    {{ partial "components/badge.html" (dict "color" "blue" "content" "Beta") }}
-                  </h2>
-                  <p class="text-xl">
-                    Run, test, and serve AI models locally in seconds — no
-                    setup, no hassle.
-                  </p>
-                  <p>
-                    Whether you’re experimenting with the latest LLMs or
-                    deploying to production, Docker Model Runner brings the
-                    performance and control you need, without the friction.
-                  </p>
-                </div>
-                <div class="flex flex-col items-start gap-4 xl:flex-row">
-                  <a
-                    href="/desktop/features/model-runner/"
-                    class="bg-blue dark:bg-blue rounded-sm p-2 px-4 text-white transition duration-300 hover:bg-blue-500 dark:hover:bg-blue-500"
-                    >Read the docs</a>
-                </div>
+          <div class="bg-pattern-purple rounded-sm p-6">
+            <div class="flex flex-col gap-12">
+              <div class="flex flex-col gap-4">
+                <p class="text-xl">
+		          Docker State of Application Development survey
+                </p>
+		        <p>
+		          Share your feedback and help us better understand and serve
+		          the application development community. It will take just 20
+		          minutes of your time. We want to know where you are
+		          focused, what you are working on, and what is most
+		          important to you.
+                </p>
+                <p>
+		          You can save your progress and return at any time. As a
+		          thank-you, you can opt into a raffle for Docker swag and
+		          other prizes.
+                </p>
               </div>
+              <div>
+		        <a
+                  href="https://docker.qualtrics.com/jfe/form/SV_1BIUSxxzRiXoS4S?SOURCE_URL=DOCSSITE"
+                  class="bg-blue dark:bg-blue rounded-sm p-2 px-4 text-white transition duration-300 hover:bg-blue-500 dark:hover:bg-blue-500"
+                  >Take the survey</a>
+		      </div>
             </div>
           </div>
         </div>

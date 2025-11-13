@@ -323,7 +323,7 @@ They're used to configure the Buildx client, or the BuildKit daemon.
 | [BUILDX_GIT_INFO](#buildx_git_info)                                         | Boolean           | Remove Git information in provenance attestations.               |
 | [BUILDX_GIT_LABELS](#buildx_git_labels)                                     | String \| Boolean | Add Git provenance labels to images.                             |
 | [BUILDX_MEM_PROFILE](#buildx_mem_profile)                                   | String            | Generate a `pprof` memory profile at the specified location.     |
-| [BUILDX_METADATA_PROVENANCE](#buildx_metadata_provenance)                   | String \| Boolean | Customize provenance informations included in the metadata file. |
+| [BUILDX_METADATA_PROVENANCE](#buildx_metadata_provenance)                   | String \| Boolean | Customize provenance information included in the metadata file.  |
 | [BUILDX_METADATA_WARNINGS](#buildx_metadata_warnings)                       | String            | Include build warnings in the metadata file.                     |
 | [BUILDX_NO_DEFAULT_ATTESTATIONS](#buildx_no_default_attestations)           | Boolean           | Turn off default provenance attestations.                        |
 | [BUILDX_NO_DEFAULT_LOAD](#buildx_no_default_load)                           | Boolean           | Turn off loading images to image store by default.               |
@@ -376,11 +376,12 @@ argument, the argument takes priority.
 
 Sets the type of the BuildKit progress output. Valid values are:
 
-- `auto` (default)
-- `plain`
-- `tty`
-- `quiet`
-- `rawjson`
+- `auto` (default): automatically uses `tty` in interactive terminals, `plain` otherwise
+- `plain`: displays build steps sequentially in simple text format
+- `tty`: interactive output with formatted progress bars and build steps
+- `quiet`: suppresses progress output, only shows errors and final image ID
+- `none`: no progress output, only shows errors
+- `rawjson`: outputs build progress as raw JSON (useful for parsing by other tools)
 
 Usage:
 

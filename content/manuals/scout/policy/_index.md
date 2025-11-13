@@ -63,11 +63,17 @@ Docker Scout supports the following policy types:
 - [Default Non-Root User](#default-non-root-user)
 - [Approved Base Images](#approved-base-images)
 - [SonarQube Quality Gates](#sonarqube-quality-gates)
+- [Valid Docker Hardened Image (DHI) or DHI base image](#valid-docker-hardened-image-dhi-or-dhi-base-image)
 
 Docker Scout automatically provides default policies for repositories where it
-is enabled, except for the SonarQube Quality Gates policy, which requires
-[integration with SonarQube](/manuals/scout/integrations/code-quality/sonarqube.md)
-before use.
+is enabled, except for the following policies, which are optional and must be
+configured:
+
+- The **SonarQube Quality Gates** policy, which requires
+  [integration with SonarQube](/manuals/scout/integrations/code-quality/sonarqube.md)
+  before use.
+- The **Valid Docker Hardened Image (DHI) or DHI base image** policy, which can
+  be configured if you want to enforce the use of Docker Hardened Images.
 
 You can create custom policies from any of the supported policy types, or
 delete a default policy if it isn't applicable to your project. For more
@@ -357,6 +363,26 @@ in the CLI.
 > is enabled. Docker Scout doesn't have access to historic evaluations. Trigger
 > a SonarQube analysis and policy evaluation after enabling the integration to
 > view the results in Docker Scout.
+
+### Valid Docker Hardened Image (DHI) or DHI base image
+
+The **Valid Docker Hardened Image (DHI) or DHI base image** policy type ensures
+that your images are either Docker Hardened Images (DHI) or are built using a
+DHI as the base image.
+
+This policy validates images by checking for a valid Docker signed verification
+summary attestation. The policy considers an image compliant if either:
+
+- The image itself is a Docker Hardened Image with a valid Docker signed
+  verification summary attestation, or
+- The base image used in the build (identified from SLSA provenance
+  attestations) has a valid Docker signed verification summary attestation
+
+Images are non-compliant with this policy if they lack the required Docker
+signed verification summary attestation and are not built from a base image
+with such an attestation.
+
+This policy has no configurable parameters.
 
 ## No base image data
 

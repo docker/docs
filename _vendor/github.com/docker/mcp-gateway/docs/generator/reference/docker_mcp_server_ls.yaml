@@ -1,0 +1,25 @@
+command: docker mcp server ls
+aliases: docker mcp server ls, docker mcp server list
+short: List enabled servers
+long: List enabled servers
+usage: docker mcp server ls
+pname: docker mcp server
+plink: docker_mcp_server.yaml
+options:
+    - option: json
+      value_type: bool
+      default_value: "false"
+      description: Output in JSON format
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

@@ -319,7 +319,7 @@ The long syntax provides more granularity in how the config is created within th
 - `target`: The path and name of the file to be mounted in the service's
   task containers. Defaults to `/<source>` if not specified.
 - `uid` and `gid`: The numeric uid or gid that owns the mounted config file
-  within the service's task containers. Default value when not specified is `USER`.
+  within the service's task containers.
 - `mode`: The [permissions](https://wintelguy.com/permissions-calc.pl) for the file that is mounted within the service's
   task containers, in octal notation. Default value is world-readable (`0444`).
   Writable bit must be ignored. The executable bit can be set.
@@ -688,9 +688,13 @@ Each line in an `.env` file must be in `VAR[=[VAL]]` format. The following synta
 - Blank lines are ignored.
 - Unquoted and double-quoted (`"`) values have [Interpolation](interpolation.md) applied.
 - Each line represents a key-value pair. Values can optionally be quoted.
+- Delimiter separating key and value can be either `=` or `:`.
+- Spaces before and after value are ignored.
   - `VAR=VAL` -> `VAL`
   - `VAR="VAL"` -> `VAL`
   - `VAR='VAL'` -> `VAL`
+  - `VAR: VAL` -> `VAL`
+  - `VAR = VAL  ` -> `VAL` <!-- markdownlint-disable-line no-space-in-code -->
 - Inline comments for unquoted values must be preceded with a space.
   - `VAR=VAL # comment` -> `VAL`
   - `VAR=VAL# not a comment` -> `VAL# not a comment`
@@ -1795,7 +1799,7 @@ runs with environment variables `DATABASE_URL` and `DATABASE_API_KEY`.
 
 As Compose stops the application, the `awesomecloud` binary is used to manage the `database` service tear down.
 
-The mechanism used by Compose to delegate the service lifecycle to an external binary is described [here](https://github.com/docker/compose/tree/main/docs/extension.md).
+The mechanism used by Compose to delegate the service lifecycle to an external binary is described in the [Compose extensibility documentation](https://github.com/docker/compose/tree/main/docs/extension.md).
 
 For more information on using the `provider` attribute, see [Use provider services](/manuals/compose/how-tos/provider-services.md).
 
@@ -1920,7 +1924,7 @@ the service's containers.
 - `target`: The name of the file to be mounted in `/run/secrets/` in the
   service's task container, or absolute path of the file if an alternate location is required. Defaults to `source` if not specified.
 - `uid` and `gid`: The numeric uid or gid that owns the file within
-  `/run/secrets/` in the service's task containers. Default value is `USER`.
+  `/run/secrets/` in the service's task containers.
 - `mode`: The [permissions](https://wintelguy.com/permissions-calc.pl) for the file to be mounted in `/run/secrets/`
   in the service's task containers, in octal notation.
   The default value is world-readable permissions (mode `0444`).

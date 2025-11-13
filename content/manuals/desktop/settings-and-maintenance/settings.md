@@ -427,9 +427,9 @@ You can only start and stop builders using the `docker-container` driver.
 Docker Desktop includes a standalone Kubernetes server, so that you can test
 deploying your Docker workloads on Kubernetes. To turn on Kubernetes support and
 install a standalone instance of Kubernetes running as a Docker container,
-select **Enable Kubernetes**.
+select **Enable Kubernetes**. This can also be done from the **Kubernetes** view. 
 
-With Docker Desktop version 4.38 and later, you can choose your cluster provisioning method:
+You can choose your cluster provisioning method:
  - **Kubeadm** creates a single-node cluster and the version is set by Docker Desktop.
  - **kind** creates a multi-node cluster and you can set the version and number of nodes. 
 
@@ -439,7 +439,7 @@ using Docker commands.
 Select **Reset Kubernetes cluster** to delete all stacks and Kubernetes resources.
 
 For more information about using the Kubernetes integration with Docker Desktop,
-see [Deploy on Kubernetes](/manuals/desktop/features/kubernetes.md).
+see [Explore the Kubernetes view](/manuals/desktop/use-desktop/kubernetes.md).
 
 ## Software updates
 
@@ -519,3 +519,15 @@ On Mac, you can reconfigure your initial installation settings  on the **Advance
 - **Allow privileged port mapping (Requires password)**. Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#binding-privileged-ports).
 
 For more information on each configuration and use case, see [Permission requirements](/manuals/desktop/setup/install/mac-permission-requirements.md).
+
+## Docker Offload
+
+When signed in with a Docker account that has access to [Docker Offload](../../offload/_index.md), you can manage your
+Offload settings from the **Docker Offload** tab.
+
+Use the **Docker Offload** tab to:
+
+- Toggle **Enable Docker Offload**. When enabled, you can start Offload sessions.
+- Select **Idle timeout**. This is the duration of time between no activity and Docker Offload entering idle mode.For
+  details about idle timeout, see [Active and idle states](../../offload/configuration.md#understand-active-and-idle-states)
+- Check **Enable GPU support**. When enabled, workloads can use cloud GPU if available.

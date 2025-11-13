@@ -8,32 +8,40 @@ description: Learn how to customize a Docker Hardened Images (DHI).
 
 You can customize a Docker Hardened Image (DHI) to suit your specific needs
 using the Docker Hub UI. This allows you to select a base image, add packages,
-add artifacts, and configure settings. In addition, the build pipeline ensures that
-your customized image is built securely and includes attestations.
+add OCI artifacts (such as custom certificates or additional tools), and
+configure settings. In addition, the build pipeline ensures that your customized
+image is built securely and includes attestations.
+
+Your customized images stay secure automatically. When the base Docker Hardened
+Image receives a security patch or your OCI artifacts are updated, Docker
+automatically rebuilds your customized images in the background. This ensures
+continuous compliance and protection by default, with no manual work required.
+The rebuilt images are signed and attested to the same SLSA Build Level 3
+standard as the base images, ensuring a secure and verifiable supply chain.
+
+## Customize a Docker Hardened Image
 
 To add a customized Docker Hardened Image to your organization, an organization
 owner must first [mirror](./mirror.md) the DHI repository to your organization.
 Once the repository is mirrored, any user with access to the mirrored DHI
 repository can create a customized image.
 
-## Customize a Docker Hardened Image
-
 To customize a Docker Hardened Image, follow these steps:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **My Hub**.
-3. In the namespace drop-down, select your organization that has a mirrored DHI
+1. Select **My Hub**.
+1. In the namespace drop-down, select your organization that has a mirrored DHI
    repository.
-4. Select **Hardened Images** > **Management**.
-5. For the mirrored DHI repository you want to customize, select the menu icon in the far right column.
-6. Select **Customize**.
+1. Select **Hardened Images** > **Management**.
+1. For the mirrored DHI repository you want to customize, select the menu icon in the far right column.
+1. Select **Customize**.
 
    At this point, the on-screen instructions will guide you through the
    customization process. You can continue with the following steps for more
    details.
 
-7. Select the image version you want to customize.
-8. Add packages.
+1. Select the image version you want to customize.
+1. Optional. Add packages.
 
    1. In the **Packages** drop-down, select the packages you want to add to the
       image.
@@ -43,7 +51,7 @@ To customize a Docker Hardened Image, follow these steps:
       variant of the Python DHI, the list will include all Alpine system
       packages.
 
-   2. In the **OCI artifacts** drop-down, first, select the repository that
+   1. In the **OCI artifacts** drop-down, first, select the repository that
       contains the OCI artifact image. Then, select the tag you want to use from
       that repository. Finally, specify the specific paths you want to include
       from the OCI artifact image.
@@ -71,27 +79,39 @@ To customize a Docker Hardened Image, follow these steps:
       > image build still succeeds, but you may have issues when running the
       > image.
 
-9. Select **Next: Configure** and then configure the following options.
+   1. In the **Scripts** section, you can add, edit, or remove scripts.
 
-   1. Specify a suffix that is appended to the customized image's tag. For
-      example, if you specify `custom` when customizing the `dhi-python:3.13`
-      image, the customized image will be tagged as `dhi-python:3.13_custom`.
-   2. Select the platforms you want to build the image for.
-   3. Add [`ENTRYPOINT`](/reference/dockerfile/#entrypoint) and
-      [`CMD`](/reference/dockerfile/#cmd) arguments to the image. These
-      arguments are appended to the base image's entrypoint and command.
-   4. Specify the users to add to the image.
-   5. Specify the user groups to add to the image.
-   6. Select which [user](/reference/dockerfile/#user) to run the images as.
-   7. Specify the [environment variables](/reference/dockerfile/#env) and their
-      values that the image will contain.
-   8. Add [annotations](/build/metadata/annotations/) to the image.
-   9. Add [labels](/reference/dockerfile/#label) to the image.
-10. Select **Create Customization**.
+      Scripts let you add files to the container image that you can access at runtime. They are not executed during
+      the build process. This is useful for services that require pre-start initialization, such as setup scripts or
+      file writes to directories like `/var/lock` or `/out`.
 
-    A summary of the customization appears. It may take some time for the image
-    to build. Once built, it will appear in the **Tags** tab of the repository,
-    and your team members can pull it like any other image.
+      You must specify the following:
+
+      - The path where the script will be placed
+      - The script content
+      - The UID and GID ownership of the script
+      - The octal file permissions of the script
+
+1. Select **Next: Configure** and then configure the following options.
+1. Specify a suffix that is appended to the customized image's tag. For
+   example, if you specify `custom` when customizing the `dhi-python:3.13`
+   image, the customized image will be tagged as `dhi-python:3.13_custom`.
+1. Select the platforms you want to build the image for.
+1. Add [`ENTRYPOINT`](/reference/dockerfile/#entrypoint) and
+   [`CMD`](/reference/dockerfile/#cmd) arguments to the image. These
+   arguments are appended to the base image's entrypoint and command.
+1. Specify the users to add to the image.
+1. Specify the user groups to add to the image.
+1. Select which [user](/reference/dockerfile/#user) to run the images as.
+1. Specify the [environment variables](/reference/dockerfile/#env) and their
+   values that the image will contain.
+1. Add [annotations](/build/metadata/annotations/) to the image.
+1. Add [labels](/reference/dockerfile/#label) to the image.
+1. Select **Create Customization**.
+
+   A summary of the customization appears. It may take some time for the image
+   to build. Once built, it will appear in the **Tags** tab of the repository,
+   and your team members can pull it like any other image.
 
 ## Edit or delete a Docker Hardened Image customization
 

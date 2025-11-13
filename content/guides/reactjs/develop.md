@@ -36,7 +36,7 @@ Create a file named `Dockerfile.dev` in your project root with the following con
 # =========================================
 # Stage 1: Develop the React.js Application
 # =========================================
-ARG NODE_VERSION=22.14.0-alpine
+ARG NODE_VERSION=24.7.0-alpine
 
 # Use a lightweight Node.js image for development
 FROM node:${NODE_VERSION} AS dev

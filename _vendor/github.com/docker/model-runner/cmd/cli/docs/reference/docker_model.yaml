@@ -1,0 +1,50 @@
+command: docker model
+short: Docker Model Runner
+long: |-
+    Use Docker Model Runner to run and interact with AI models directly from the command line.
+    For more information, see the [documentation](/ai/model-runner/)
+pname: docker
+plink: docker.yaml
+cname:
+    - docker model df
+    - docker model inspect
+    - docker model install-runner
+    - docker model list
+    - docker model logs
+    - docker model package
+    - docker model ps
+    - docker model pull
+    - docker model push
+    - docker model requests
+    - docker model rm
+    - docker model run
+    - docker model status
+    - docker model tag
+    - docker model uninstall-runner
+    - docker model unload
+    - docker model version
+clink:
+    - docker_model_df.yaml
+    - docker_model_inspect.yaml
+    - docker_model_install-runner.yaml
+    - docker_model_list.yaml
+    - docker_model_logs.yaml
+    - docker_model_package.yaml
+    - docker_model_ps.yaml
+    - docker_model_pull.yaml
+    - docker_model_push.yaml
+    - docker_model_requests.yaml
+    - docker_model_rm.yaml
+    - docker_model_run.yaml
+    - docker_model_status.yaml
+    - docker_model_tag.yaml
+    - docker_model_uninstall-runner.yaml
+    - docker_model_unload.yaml
+    - docker_model_version.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

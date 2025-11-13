@@ -1,12 +1,12 @@
 command: docker mcp client disconnect
 short: |
-    Disconnect the Docker MCP Toolkit from a client. Supported clients: claude-desktop continue cursor gemini goose gordon lmstudio sema4 vscode
+    Disconnect the Docker MCP Toolkit from a client. Supported clients: claude-code claude-desktop codex continue cursor gemini goose gordon lmstudio opencode sema4 vscode zed
 long: |
-    Disconnect the Docker MCP Toolkit from a client. Supported clients: claude-desktop continue cursor gemini goose gordon lmstudio sema4 vscode
+    Disconnect the Docker MCP Toolkit from a client. Supported clients: claude-code claude-desktop codex continue cursor gemini goose gordon lmstudio opencode sema4 vscode zed
 usage: |-
     docker mcp client disconnect [OPTIONS] <mcp-client>
 
-    Supported clients: claude-desktop continue cursor gemini goose gordon lmstudio sema4 vscode
+    Supported clients: claude-code claude-desktop codex continue cursor gemini goose gordon lmstudio opencode sema4 vscode zed
 pname: docker mcp client
 plink: docker_mcp_client.yaml
 options:

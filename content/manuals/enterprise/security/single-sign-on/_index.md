@@ -2,7 +2,7 @@
 title: Single sign-on overview
 linkTitle: Single sign-on
 description: Learn how single sign-on works, how to set it up, and the required SSO attributes.
-keywords: Single Sign-On, SSO, sign-in, admin, docker hub, admin console, security, indentity provider, SSO configuration, enterprise login, Docker Business, user authentication
+keywords: Single Sign-On, SSO, sign-in, admin, docker hub, admin console, security, identity provider, SSO configuration, enterprise login, Docker Business, user authentication
 aliases:
 - /single-sign-on/
 - /admin/company/settings/sso/
@@ -67,5 +67,5 @@ Using a PAT ensures continued CLI access. For more information, see the
 ## Next steps
 
 - Start [configuring SSO](configure.md).
-- Read the FAQs [FAQs](/manuals/security/faqs/_index.md).
+- Read the [FAQs](/manuals/enterprise/security/single-sign-on/faqs/general.md).
 - [Troubleshoot](/manuals/enterprise/troubleshoot/troubleshoot-sso.md) SSO issues.

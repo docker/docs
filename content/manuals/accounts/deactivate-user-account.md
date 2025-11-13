@@ -50,3 +50,9 @@ to back up any important data.
 1. Select **Account settings**.
 1. Select **Deactivate**.
 1. Select **Deactivate account**, then select again to confirm.
+
+## Delete personal data
+
+Deactivating your account does not delete your personal data. To request
+personal data deletion, fill out Docker's
+[Privacy request form](https://preferences.docker.com/).

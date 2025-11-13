@@ -12,8 +12,7 @@ aliases:
 ## Prerequisites
 
 - Complete all the previous sections of this guide, starting with [Containerize a Node.js application](containerize.md).
-- [Turn on Kubernetes](/manuals/desktop/features/kubernetes.md#install-and-turn-on-kubernetes) in Docker Desktop.
-- Have your Docker image built and available (either locally or in a registry).
+- [Turn on Kubernetes](/manuals/desktop/use-desktop/kubernetes.md#enable-kubernetes) in Docker Desktop.
 
 ## Overview
 

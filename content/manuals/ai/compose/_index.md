@@ -2,7 +2,7 @@
 build:
   render: never
 title: AI and Docker Compose
-weight: 40
+weight: 50
 params:
   sidebar:
     group: AI

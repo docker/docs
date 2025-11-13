@@ -126,42 +126,24 @@ will be used when IPv6 is enabled. These `/64` subnets include a 40-bit
 Global ID based on the Docker Engine's randomly generated ID, to give a
 high probability of uniqueness.
 
+The built-in default address pool configuration is shown in [Subnet allocation](../network/_index.md#subnet-allocation).
+It does not include any IPv6 pools.
+
 To use different pools of IPv6 subnets for dynamic address allocation,
 you must manually configure address pools of the daemon to include:
 
 - The default IPv4 address pools
 - One or more IPv6 pools of your own
 
-The default address pool configuration is:
+The following example shows a valid configuration with IPv4 and IPv6 pools,
+both pools provide 256 subnets. IPv4 subnets with prefix length `/24` will
+be allocated from a `/16` pool. IPv6 subnets with prefix length `/64` will
+be allocated from a `/56` pool.
 
 ```json
 {
   "default-address-pools": [
-    { "base": "172.17.0.0/16", "size": 16 },
-    { "base": "172.18.0.0/16", "size": 16 },
-    { "base": "172.19.0.0/16", "size": 16 },
-    { "base": "172.20.0.0/14", "size": 16 },
-    { "base": "172.24.0.0/14", "size": 16 },
-    { "base": "172.28.0.0/14", "size": 16 },
-    { "base": "192.168.0.0/16", "size": 20 }
-  ]
-}
-```
-
-The following example shows a valid configuration with the default values and
-an IPv6 pool. The IPv6 pool in the example provides up to 256 IPv6 subnets of
-size `/64`, from an IPv6 pool of prefix length `/56`.
-
-```json
-{
-  "default-address-pools": [
-    { "base": "172.17.0.0/16", "size": 16 },
-    { "base": "172.18.0.0/16", "size": 16 },
-    { "base": "172.19.0.0/16", "size": 16 },
-    { "base": "172.20.0.0/14", "size": 16 },
-    { "base": "172.24.0.0/14", "size": 16 },
-    { "base": "172.28.0.0/14", "size": 16 },
-    { "base": "192.168.0.0/16", "size": 20 },
+    { "base": "172.17.0.0/16", "size": 24 },
     { "base": "2001:db8::/56", "size": 64 }
   ]
 }
@@ -175,6 +157,9 @@ size `/64`, from an IPv6 pool of prefix length `/56`.
 >
 > The default IPv4 pools are from the private address range,
 > similar to the default IPv6 [ULA][wikipedia-ipv6-ula] networks.
+
+See [Subnet allocation](../network/_index.md#subnet-allocation) for more information about
+`default-address-pools`.
 
 [wikipedia-ipv6-reserved]: https://en.wikipedia.org/wiki/Reserved_IP_addresses#IPv6
 [wikipedia-ipv6-ula]: https://en.wikipedia.org/wiki/Unique_local_address

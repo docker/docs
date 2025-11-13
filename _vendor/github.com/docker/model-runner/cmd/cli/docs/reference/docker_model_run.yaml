@@ -1,0 +1,87 @@
+command: docker model run
+short: Run a model and interact with it using a submitted prompt or chat mode
+long: |-
+    When you run a model, Docker calls an inference server API endpoint hosted by the Model Runner through Docker Desktop. The model stays in memory until another model is requested, or until a pre-defined inactivity timeout is reached (currently 5 minutes).
+
+    You do not have to use Docker model run before interacting with a specific model from a host process or from within a container. Model Runner transparently loads the requested model on-demand, assuming it has been pulled and is locally available.
+
+    You can also use chat mode in the Docker Desktop Dashboard when you select the model in the **Models** tab.
+usage: docker model run MODEL [PROMPT]
+pname: docker model
+plink: docker_model.yaml
+options:
+    - option: backend
+      value_type: string
+      description: Specify the backend to use (llama.cpp, openai)
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: color
+      value_type: string
+      default_value: auto
+      description: Use colored output (auto|yes|no)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: debug
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: ignore-runtime-memory-check
+      value_type: bool
+      default_value: "false"
+      description: |
+        Do not block pull if estimated runtime memory for model exceeds system resources.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+examples: |-
+    ### One-time prompt
+
+    ```console
+    docker model run ai/smollm2 "Hi"
+    ```
+
+    Output:
+
+    ```console
+    Hello! How can I assist you today?
+    ```
+
+    ### Interactive chat
+
+    ```console
+    docker model run ai/smollm2
+    ```
+
+    Output:
+
+    ```console
+    Interactive chat mode started. Type '/bye' to exit.
+    > Hi
+    Hi there! It's SmolLM, AI assistant. How can I help you today?
+    > /bye
+    Chat session ended.
+    ```
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

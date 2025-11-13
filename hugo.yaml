@@ -69,19 +69,6 @@ outputFormats:
     isPlainText: true
     mediaType: "application/json"
     notAlternative: true
-  # robots.txt, see: layouts/index.robots.json
-  robots:
-    baseName: robots
-    isPlainText: true
-    mediaType: "text/plain"
-    notAlternative: true
-  # Markdown for LLMs, see layouts/_default/single.markdown.md
-  Markdown:
-    baseName: index
-    mediaType: "text/markdown"
-    isPlainText: true
-    isHTML: false
-    permalinkable: false
   # llms.txt
   llms:
     baseName: llms
@@ -101,10 +88,10 @@ outputs:
     - llms
   page:
     - html
-    - Markdown
+    - markdown
   section:
     - html
-    - Markdown
+    - markdown
 
 languages:
   en:
@@ -133,16 +120,16 @@ params:
   # Use `grep` to figure out how they might be used.
 
   # Latest version of the Docker Engine API
-  latest_engine_api_version: "1.51"
+  latest_engine_api_version: "1.52"
   # Latest version of Docker Engine
-  docker_ce_version: "28.4.0"
+  docker_ce_version: "29.0.0"
   # Previous version of the Docker Engine
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
-  docker_ce_version_prev: "28.3.3"
+  docker_ce_version_prev: "28.5.2"
   # Latest Docker Compose version
-  compose_version: "v2.39.3"
+  compose_version: "v2.40.3"
   # Latest BuildKit version
-  buildkit_version: "0.24.0"
+  buildkit_version: "0.25.0"
 
   # Example runtime/library/os versions
   example_go_version: "1.24"
@@ -287,14 +274,12 @@ module:
 
   imports:
 
-    # Docker Engine
-    - path: github.com/moby/moby
+    # Docker Engine API
+    - path: github.com/moby/moby/api
       mounts:
-        - source: docs/api/v1.24.md
-          target: content/reference/api/engine/version/v1.24.md
-        - source: docs/api/version-history.md
+        - source: docs/CHANGELOG.md
           target: content/reference/api/engine/version-history.md
-        - source: docs/api
+        - source: docs
           target: content/reference/api/engine/version
           includeFiles: "*.yaml"
 
@@ -345,7 +330,7 @@ module:
           includeFiles: "*.yaml"
 
     # Model CLI
-    - path: github.com/docker/model-cli
+    - path: github.com/docker/model-runner/cmd/cli
       mounts:
         - source: docs/reference
           target: data/model-cli

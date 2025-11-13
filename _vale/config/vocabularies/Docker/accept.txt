@@ -1,11 +1,14 @@
 (?i)[A-Z]{2,}'?s
-
+jq
+ripgrep
+sandboxing
 Adreno
 Aleksandrov
 Amazon
 Anchore
 Apple
 Artifactory
+armhf
 auditable
 autolock
 Azure
@@ -36,6 +39,7 @@ config
 containerd
 Couchbase
 CouchDB
+Crowdstrike
 datacenter
 Datadog
 Ddosify
@@ -72,6 +76,7 @@ EPERM
 ESXi
 Ethernet
 exploitability
+[Ff]ailover
 Fargate
 Fedora
 firewalld
@@ -154,6 +159,7 @@ PAT
 perl
 pgAdmin
 PKG
+plaintext
 plist
 Postgres
 PowerShell
@@ -224,6 +230,7 @@ Zsh
 [Aa]gentic
 [Aa]utobuilds?
 [Aa]utotests?
+[Aa]utoscaling
 [Bb]uildx
 [Bb]uildpack(s)?
 [Bb]uildx
@@ -232,6 +239,7 @@ Zsh
 [Cc]onfigs
 [dD]eduplicate
 [Dd]ev
+[Dd]iscoverability
 [Dd]istroless
 [Ff]ilepaths?
 [Ff]iletypes?
@@ -269,6 +277,7 @@ Zsh
 [Ss]yscalls?
 [Ss]ysfs
 [Tt]eardown
+[Tt]echnographic
 [Tt]odo
 [Tt]oolchains?
 [Uu]narchived?

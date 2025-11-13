@@ -4,7 +4,7 @@ linkTitle: Subscriptions and features
 description: Learn about Docker subscription tiers and their key features
 keywords: subscription, personal, pro, team, business, features, docker subscription
 aliases:
-- /subscription/core-subscription/details/
+  - /subscription/core-subscription/details/
 weight: 10
 ---
 
@@ -21,6 +21,8 @@ Docker subscriptions provide licensing for commercial use of Docker products and
 - [Testcontainers Cloud](https://testcontainers.com/cloud/docs): Container-based
   testing automation that provides faster tests, a unified developer experience,
   and more.
+- [Docker Hardened Images](/manuals/dhi/_index.md): Minimal, secure, and
+  production-ready container base and application images maintained by Docker.
 
 Choose the subscription that fits your needs, from individual developers to large enterprises.
 
@@ -62,7 +64,7 @@ Docker Pro includes:
 
 - Full access to all Docker tools
 - 200 Docker Build Cloud minutes per month, Docker Build Cloud minutes do not
-rollover month to month
+  rollover month to month
 - 2 Docker Scout repositories with vulnerability analysis
 - 100 Testcontainers Cloud runtime minutes per month, Testcontainers Cloud runtime minutes do not rollover month to month
 - No Docker Hub pull rate limits
@@ -77,12 +79,12 @@ Pricing](https://www.docker.com/pricing/).
 Docker Team includes:
 
 - 500 Docker Build Cloud minutes per month, Docker Build Cloud minutes do not
-rollover month to month
+  rollover month to month
 - Unlimited Docker Scout repositories with vulnerability analysis
 - 500 Testcontainers Cloud runtime minutes per month, Testcontainers Cloud runtime minutes do not rollover month to month
 - No Docker Hub pull rate limits
 - Advanced collaboration tools including organization management, [Role Based Access Control
-(RBAC)](/security/for-admins/roles-and-permissions/), [activity logs](/admin/organization/activity-logs/), and more
+  (RBAC)](/security/for-admins/roles-and-permissions/), [activity logs](/admin/organization/activity-logs/), and more
 
 For a list of features available in each tier, see [Docker
 Pricing](https://www.docker.com/pricing/).
@@ -94,22 +96,22 @@ Pricing](https://www.docker.com/pricing/).
 Docker Business includes:
 
 - 1500 Docker Build Cloud minutes per month, Docker Build Cloud minutes do not
-rollover month to month
+  rollover month to month
 - Unlimited Docker Scout repositories with vulnerability analysis
 - 1500 Testcontainers Cloud runtime minutes per month, Testcontainers Cloud runtime minutes do not rollover month to month
 - No Docker Hub pull rate limits
 - Enterprise security features:
   - [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/_index.md)
   - [Image Access
-  Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md)
-  which lets admins control what content developers can access
+    Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md)
+    which lets admins control what content developers can access
   - [Registry Access
-  Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md)
-  which lets admins control what registries developers can access
+    Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md)
+    which lets admins control what registries developers can access
   - [Company layer](/admin/company/) to manage multiple organizations and settings
   - [Single sign-on](/security/for-admins/single-sign-on/)
   - [System for Cross-domain Identity
-  Management](/security/for-admins/provisioning/scim/)
+    Management](/security/for-admins/provisioning/scim/)
 
 For a list of features available in each tier, see [Docker
 Pricing](https://www.docker.com/pricing/).
@@ -132,6 +134,7 @@ repetitive tasks and empowers developers to spend more time creating value for
 their customers.
 
 Legacy Docker Pro includes:
+
 - Unlimited public repositories
 - Unlimited [Scoped Access Tokens](/security/access-tokens/)
 - Unlimited [collaborators](/docker-hub/repos/manage/access/#collaborators) for public repositories at no cost per month.
@@ -164,6 +167,7 @@ licensing for commercial use of Docker components including Docker Desktop and
 Docker Hub.
 
 Legacy Docker Team includes:
+
 - Everything included in legacy Docker Pro
 - Unlimited teams
 - [Auto Builds](/docker-hub/builds/) with 15 concurrent builds
@@ -196,6 +200,7 @@ initiatives. A Docker Business subscription includes licensing for commercial
 use of Docker components including Docker Desktop and Docker Hub.
 
 Legacy Docker Business includes:
+
 - Everything included in legacy Docker Team
 - [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/_index.md)
 - [Image Access Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md) which lets admins control what content developers can access
@@ -271,8 +276,8 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 ## Legacy Docker Build Cloud subscriptions
 
- This section describes the features available for the different legacy Docker
- Build Cloud subscription tiers.
+This section describes the features available for the different legacy Docker
+Build Cloud subscription tiers.
 
 > [!IMPORTANT]
 >
@@ -348,4 +353,5 @@ A dedicated Docker account manager handles setup and management for Docker Busin
 
 ## Support
 
-All Docker Pro, Team, and Business subscribers receive email support for their subscriptions.
+All paid subscriptions come with Docker support. For more information, see
+[Get support for Docker products](/manuals/support/_index.md).

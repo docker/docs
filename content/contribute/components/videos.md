@@ -25,7 +25,7 @@ If all of the above criteria are met, you can reference the following best pract
 - Videos should adhere to the same standards for accessibility as the rest of the documentation.
 - Ensure the quality of your video by writing a script (if there's narration), making sure multiple browsers and URLs aren't visible, blurring or cropping out any sensitive information, and using smooth transitions between different browsers or screens.
 
-Videos are not hosted in the Docker documentation repository. To add a video, you can use a [link](./links.md) to hosted content, or embed using an [iframe](#iframe).
+Videos are not hosted in the Docker documentation repository. To add a video, you can [link to](./links.md) hosted content, or embed using an [iframe](#iframe).
 
 
 ## iframe

@@ -1,19 +1,34 @@
 command: docker mcp catalog
 aliases: docker mcp catalog, docker mcp catalogs
-short: Manage the catalog
-long: Manage the catalog
+short: Manage MCP server catalogs
+long: |
+    Manage MCP server catalogs for organizing and configuring custom MCP servers alongside Docker's official catalog.
 pname: docker mcp
 plink: docker_mcp.yaml
 cname:
+    - docker mcp catalog add
+    - docker mcp catalog bootstrap
+    - docker mcp catalog create
+    - docker mcp catalog export
+    - docker mcp catalog fork
+    - docker mcp catalog import
     - docker mcp catalog init
     - docker mcp catalog ls
     - docker mcp catalog reset
+    - docker mcp catalog rm
     - docker mcp catalog show
     - docker mcp catalog update
 clink:
+    - docker_mcp_catalog_add.yaml
+    - docker_mcp_catalog_bootstrap.yaml
+    - docker_mcp_catalog_create.yaml
+    - docker_mcp_catalog_export.yaml
+    - docker_mcp_catalog_fork.yaml
+    - docker_mcp_catalog_import.yaml
     - docker_mcp_catalog_init.yaml
     - docker_mcp_catalog_ls.yaml
     - docker_mcp_catalog_reset.yaml
+    - docker_mcp_catalog_rm.yaml
     - docker_mcp_catalog_show.yaml
     - docker_mcp_catalog_update.yaml
 deprecated: false

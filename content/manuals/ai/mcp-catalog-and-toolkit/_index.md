@@ -7,10 +7,14 @@ params:
     badge:
       color: blue
       text: Beta
-weight: 30
+weight: 10
 description: Learn about Docker's MCP catalog on Docker Hub
 keywords: Docker, ai, mcp servers, ai agents, extension, docker desktop, llm, docker hub
 grid:
+ - title: Get started with MCP Toolkit
+   description: Learn how to quickly install and use the MCP Toolkit to set up servers and clients.
+   icon: explore
+   link: /ai/mcp-catalog-and-toolkit/get-started/
  - title: MCP Catalog
    description: Learn about the benefits of the MCP Catalog, how you can use it, and how you can contribute
    icon: hub
@@ -19,51 +23,71 @@ grid:
    description: Learn about the MCP Toolkit to manage MCP servers and clients
    icon: /icons/toolkit.svg
    link: /ai/mcp-catalog-and-toolkit/toolkit/
+ - title: Dynamic MCP
+   description: Discover and add MCP servers on-demand using natural language
+   icon: search
+   link: /ai/mcp-catalog-and-toolkit/dynamic-mcp/
+ - title: MCP Gateway
+   description: Learn about the underlying technology that powers the MCP Toolkit
+   icon: developer_board
+   link: /ai/mcp-catalog-and-toolkit/mcp-gateway/
+ - title: Docker Hub MCP server
+   description: Explore about the Docker Hub server for searching images, managing repositories, and more
+   icon: device_hub
+   link: /ai/mcp-catalog-and-toolkit/hub-mcp/
 ---
 
 {{< summary-bar feature_name="Docker MCP Catalog and Toolkit" >}}
 
-Docker MCP Catalog and Toolkit is a solution for securely building, sharing, and
-running MCP tools.
+[Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) is
+an open protocol that standardizes how AI applications access external tools
+and data sources. By connecting LLMs to local development tools, databases,
+APIs, and other resources, MCP extends their capabilities beyond their base
+training.
 
-It simplifies the developer experience across these areas:
+Through a client-server architecture, applications such as Claude, ChatGPT, and
+[Gordon](/manuals/ai/gordon/_index.md) act as clients that send requests to MCP
+servers, which then process these requests and deliver the necessary context to
+AI models.
 
-- Discovery: A central catalog with verified, versioned tools.
-- Credential management: OAuth-based and secure by default.
-- Execution: Tools run in isolated, containerized environments.
-- Portability: Use MCP tools across Claude, Cursor, Visual Studio Code, and more—no code
-  changes needed.
+MCP servers extend the utility of AI applications, but running servers locally
+also presents several operational challenges. Typically, servers must be
+installed directly on your machine and configured individually for each
+application. Running untrusted code locally requires careful vetting, and the
+responsibility of keeping servers up-to-date and resolving environment
+conflicts falls on the user.
 
-With Docker Hub and the MCP Toolkit, you can:
+## Docker MCP features
 
-- Launch MCP servers in seconds.
-- Add tools using the CLI or GUI.
-- Rely on Docker's pull-based infrastructure for trusted delivery.
+Docker provides three integrated components that address the challenges of
+running local MCP servers:
+
+MCP Catalog
+: A curated collection of verified MCP servers, packaged and distributed as
+container images via Docker Hub. All servers are versioned, come with full
+provenance and SBOM metadata, and are continuously maintained and updated with
+security patches.
+
+MCP Toolkit
+: A graphical interface in Docker Desktop for discovering, configuring, and
+managing MCP servers. The Toolkit provides a unified way to search for servers,
+handle authentication, and connect them to AI applications.
+
+MCP Gateway
+: The core open source component that powers the MCP Toolkit. The MCP Gateway
+manages MCP containers provides a unified endpoint that exposes your enabled
+servers to all AI applications you use.
+
+This integrated approach ensures:
+
+- Simplified discovery and setup of trusted MCP servers from a curated catalog
+  of tools
+- Centralized configuration and authentication from within Docker Desktop
+- A secure, consistent execution environment by default
+- Improved performance since applications can share a single server runtime,
+  compared to having to spin up duplicate servers for each application.
 
 ![MCP overview](./images/mcp-overview.svg)
-
-## MCP servers
-
-MCP servers are systems that use the [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol) (MCP) to help manage
-and run AI or machine learning models more efficiently. MCP allows different
-parts of a system, like the model, data, and runtime environment, to
-communicate in a standardized way. You can see them as
-add-ons that provide specific tools to an LLM.
-
-![Example of the GitHub MCP server](./images/mcp-servers-overview.svg)
-
-> [!TIP]
-> Example:
-> If you work in Visual Studio Code's _agent mode_ and ask it to create a
-> branch in GitHub, it needs an MCP server provided by GitHub to do that.
->
-> The MCP server provided by GitHub provides _tools_ to your model to perform
-> atomic actions, like:
->
-> - `Create a PR`
-> - `Create a branch`
-> - ...
->
 
 ## Learn more
 

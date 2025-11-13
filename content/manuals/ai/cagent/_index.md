@@ -18,7 +18,7 @@ delegates tasks to the sub-agents you define.
 Each agent:
 - uses the model of your choice, with the parameters of your choice.
 - has access to the [built-in tools](#built-in-tools) and MCP servers
-  configured in the [Docker MCP gateway](/manuals/ai/mcp-gateway/_index.md).
+  configured in the [Docker MCP gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md).
 - works in its own context. They do not share knowledge.
 
 The root agent is your main contact point. Each agent has its own context,
@@ -37,34 +37,14 @@ they don't share knowledge.
 
 ## Get started with cagent
 
-1. Download the [latest release](https://github.com/docker/cagent/releases)
-   for your operating system.
+1. The easiest way to get cagent is to [install Docker Desktop version 4.49 or later](/manuals/desktop/release-notes.md) for your operating system.
 
    > [!NOTE]
-   > You might need to give the binary executable permissions.
-   > On macOS and Linux, run:
-
-     ```console
-     chmod +x /path/to/downloads/cagent-linux-<arm/amd>64
-     ```
-
-   > [!NOTE]
-   > You can also build cagent from the source. See the [repository](https://github.com/docker/cagent?tab=readme-ov-file#build-from-source).
-
-1. Optional: Rename the binary as needed and update your PATH to include
-   cagent's executable.
+   > You can also build cagent from the source. For more information, see the [cagent GitHub repository](https://github.com/docker/cagent?tab=readme-ov-file#build-from-source).
 
 1. Set the following environment variables:
 
    ```bash
-   # If using the Docker AI Gateway, set this environment variable or use
-   # the `--models-gateway <url_to_docker_ai_gateway>` CLI flag
-
-   export CAGENT_MODELS_GATEWAY=<url_to_docker_ai_gateway>
-
-   # Alternatively, set keys for remote inference services.
-   # These are not needed if you are using Docker AI Gateway.
-
    export OPENAI_API_KEY=<your_api_key_here>    # For OpenAI models
    export ANTHROPIC_API_KEY=<your_api_key_here> # For Anthropic models
    export GOOGLE_API_KEY=<your_api_key_here>    # For Gemini models
@@ -207,7 +187,7 @@ sub-agents defined in its configuration.
 
 ### Using tools via the Docker MCP Gateway
 
-If you use the [Docker MCP gateway](/manuals/ai/mcp-gateway.md),
+If you use the [Docker MCP gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md),
 you can configure your agent to interact with the
 gateway and use the MCP servers configured in it. See [docker mcp
 gateway run](/reference/cli/docker/mcp/gateway/gateway_run.md).
@@ -257,4 +237,4 @@ it with the `cagent run <filename>` command.
 
 - For more information about cagent, see the
 [GitHub repository](https://github.com/docker/cagent).
-- [Docker MCP Gateway](/manuals/ai/mcp-gateway/_index.md)
+- [Docker MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)

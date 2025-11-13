@@ -48,26 +48,9 @@ For more information on roles, see
 
 ## Create a team
 
-{{< tabs >}}
-{{< tab name="Admin Console" >}}
-
 1. Sign in to [Docker Home](https://app.docker.com) and select your
 organization.
 1. Select **Teams**.
-
-{{< /tab >}}
-{{< tab name="Docker Hub" >}}
-
-{{% include "hub-org-management.md" %}}
-
-1. Sign in to [Docker Hub](https://hub.docker.com).
-1. Select **My Hub** and choose your organization.
-1. Select the **Teams** and then select **Create Team**.
-1. Fill out your team's information and select **Create**.
-1. [Add members to your team](members.md#add-a-member-to-a-team).
-
-{{< /tab >}}
-{{< /tabs >}}
 
 ## Set team repository permissions
 
@@ -144,31 +127,12 @@ organization, this action revokes member access to the team's permitted
 resources. It won't remove users from other teams that they belong to, and it
 won't delete any resources.
 
-{{< tabs >}}
-{{< tab name="Admin Console" >}}
-
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
 organization.
 1. Select **Teams**.
 1. Select the **Actions** icon next to the name of the team you want to delete.
 1. Select **Delete team**.
 1. Review the confirmation message, then select **Delete**.
-
-{{< /tab >}}
-{{< tab name="Docker Hub" >}}
-
-{{% include "hub-org-management.md" %}}
-
-1. Sign in to [Docker Hub](https://hub.docker.com).
-1. Select **My Hub** and choose your organization.
-1. Select **Teams**.
-1. Select the name of the team that you want to delete.
-1. Select **Settings**.
-1. Select **Delete Team**.
-1. Review the confirmation message, then select **Delete**.
-
-{{< /tab >}}
-{{< /tabs >}}
 
 ## More resources
 

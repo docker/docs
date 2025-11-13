@@ -12,6 +12,7 @@ cname:
     - docker mcp catalog
     - docker mcp client
     - docker mcp config
+    - docker mcp feature
     - docker mcp gateway
     - docker mcp policy
     - docker mcp secret
@@ -22,6 +23,7 @@ clink:
     - docker_mcp_catalog.yaml
     - docker_mcp_client.yaml
     - docker_mcp_config.yaml
+    - docker_mcp_feature.yaml
     - docker_mcp_gateway.yaml
     - docker_mcp_policy.yaml
     - docker_mcp_secret.yaml

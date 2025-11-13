@@ -1,10 +1,10 @@
 ---
 description: Learn how to install Docker Engine on a 32-bit Raspberry Pi OS system. These instructions cover
-  the different installation methods, how to uninstall, and next steps.
+  the different installation methods, how to uninstall, and next steps. Note that 32-bit support will be deprecated in Docker Engine v29 and later.
 keywords: requirements, apt, installation, install docker engine, Raspberry Pi OS, install, uninstall, upgrade,
-  update
-title: Install Docker Engine on Raspberry Pi OS (32-bit)
-linkTitle: Raspberry Pi OS (32-bit)
+  update, deprecated
+title: Install Docker Engine on Raspberry Pi OS (32-bit / armhf)
+linkTitle: Raspberry Pi OS (32-bit / armhf) 
 weight: 50
 toc_max: 4
 aliases:
@@ -12,6 +12,22 @@ aliases:
 - /engine/install/raspbian/
 download-url-base: https://download.docker.com/linux/raspbian
 ---
+
+> [!WARNING]
+>
+> **Raspberry Pi OS 32-bit (armhf) Deprecation**
+>
+> Docker Engine v28 will be the last major version to support Raspberry Pi OS 32-bit (armhf).
+> Starting with Docker Engine v29, new major versions will no longer provide packages for Raspberry Pi OS 32-bit (armhf).
+>
+> **Migration options**
+> - **64-bit ARM:** Install the Debian `arm64` packages (fully supported). See the
+>   [Debian installation instructions](debian.md).
+> - **32-bit ARM (v7):** Install the Debian `armhf` packages (targets ARMv7 CPUs).
+>
+> **Note:** Older devices based on the ARMv6 architecture are no longer supported by official packages, including:
+> - Raspberry Pi 1 (Model A/B/A+/B+)
+> - Raspberry Pi Zero and Zero W
 
 To get started with Docker Engine on Raspberry Pi OS, make sure you
 [meet the prerequisites](#prerequisites), and then follow the
@@ -48,6 +64,18 @@ To install Docker Engine, you need one of the following OS versions:
 
 - 32-bit Raspberry Pi OS Bookworm 12 (stable)
 - 32-bit Raspberry Pi OS Bullseye 11 (oldstable)
+
+> [!WARNING]
+>
+> Docker Engine v28 is the last major version to support Raspberry Pi OS 32-bit (armhf). Starting with v29,
+> no new packages will be provided for 32-bit Raspberry Pi OS.
+>
+> Migration options:
+> - 64-bit ARM: use Debian `arm64` packages; see the [Debian installation instructions](debian.md).
+> - 32-bit ARM (v7): use Debian `armhf` packages (targets ARMv7 CPUs).
+>
+> Note: ARMv6-based devices (Raspberry Pi 1 models and Raspberry Pi Zero/Zero W) are not supported by
+> official packages.
 
 ### Uninstall old versions
 
@@ -160,6 +188,21 @@ Docker from the repository.
    {{< /tab >}}
    {{< /tabs >}}
 
+    > [!NOTE]
+    >
+    > The Docker service starts automatically after installation. To verify that
+    > Docker is running, use:
+    > 
+    > ```console
+    > $ sudo systemctl status docker
+    > ```
+    >
+    > Some systems may have this behavior disabled and will require a manual start:
+    >
+    > ```console
+    > $ sudo systemctl start docker
+    > ```
+
 3. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
@@ -213,12 +256,24 @@ download a new file each time you want to upgrade Docker Engine.
      ./docker-compose-plugin_<version>_<arch>.deb
    ```
 
-   The Docker daemon starts automatically.
+    > [!NOTE]
+    >
+    > The Docker service starts automatically after installation. To verify that
+    > Docker is running, use:
+    > 
+    > ```console
+    > $ sudo systemctl status docker
+    > ```
+    >
+    > Some systems may have this behavior disabled and will require a manual start:
+    >
+    > ```console
+    > $ sudo systemctl start docker
+    > ```
 
 6. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
-   $ sudo service docker start
    $ sudo docker run hello-world
    ```
 

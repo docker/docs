@@ -50,7 +50,7 @@ For more information, see [Docker Engine Python SDK reference](https://docker-py
 
 You can
 [view the reference for the latest version of the API](/reference/api/engine/latest/)
-or [choose a specific version](/reference/api/engine/version-history/).
+or [choose a specific version](/reference/api/engine/#api-version-matrix).
 
 ## Versioned API and SDK
 

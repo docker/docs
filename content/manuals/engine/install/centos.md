@@ -29,7 +29,8 @@ To get started with Docker Engine on CentOS, make sure you
 To install Docker Engine, you need a maintained version of one of the following
 CentOS versions:
 
-- CentOS 9 (stream)
+- CentOS Stream 10
+- CentOS Stream 9
 
 The `centos-extras` repository must be enabled. This repository is enabled by
 default. If you have disabled it, you need to re-enable it.

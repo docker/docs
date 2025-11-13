@@ -13,6 +13,21 @@ issues, and bug fixes in [Dockerfile reference](/reference/dockerfile.md).
 
 For usage, see the [Dockerfile frontend syntax](frontend.md) page.
 
+## 1.19.0
+
+{{< release-date date="2025-09-30" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.19.0).
+
+```dockerfile
+# syntax=docker/dockerfile:1.19.0
+```
+
+* The `--exclude` flag for `COPY` and `ADD` instructions is now generally available. This flag was previously available under the `labs` channel. [moby/buildkit#6232](https://github.com/moby/buildkit/pull/6232) 
+* Fix issue where adding `--exclude` flag to `COPY` could cause a broken symlink to fail the build. [moby/buildkit#6220](https://github.com/moby/buildkit/pull/6220) 
+* Fix issue where `EXPOSE` instruction did not correctly format the history record it created. [moby/buildkit#6218](https://github.com/moby/buildkit/pull/6218) 
+
 ## 1.18.0
 
 {{< release-date date="2025-09-03" >}}

@@ -11,16 +11,25 @@ aliases:
 - /network/drivers/bridge/
 ---
 
-In terms of networking, a bridge network is a Link Layer device
-which forwards traffic between network segments. A bridge can be a hardware
-device or a software device running within a host machine's kernel.
+A Docker bridge network has an IPv4 subnet and, optionally, an IPv6 subnet.
+Each container connected to the bridge network has a network interface with
+addresses in the network's subnets. By default, it:
+- Allows unrestricted network access to containers in the network from
+  the host, and from other containers connected to the same bridge network.
+- Blocks access from containers in other networks and from outside the
+  Docker host.
+- Uses masquerading to give containers external network access. Devices on
+  the host's external networks only see the IP address of the Docker host.
+- Supports port publishing, where network traffic is forwarded between
+  container ports and ports on host IP addresses. The published ports
+  can be accessed from outside the Docker host, on its IP addresses.
 
 In terms of Docker, a bridge network uses a software bridge which lets
 containers connected to the same bridge network communicate, while providing
-isolation from containers that aren't connected to that bridge network. The
-Docker bridge driver automatically installs rules in the host machine so that
-containers on different bridge networks can't communicate directly with each
-other.
+isolation from containers that aren't connected to that bridge network. By
+default, the Docker bridge driver automatically installs rules in the host
+machine so that containers connected to different bridge networks can only
+communicate with each other using published ports.
 
 Bridge networks apply to containers running on the same Docker daemon host.
 For communication among containers running on different Docker daemon hosts, you
@@ -109,6 +118,7 @@ The following table describes the driver-specific options that you can pass to
 |-------------------------------------------------------------------------------------------------|-----------------------------|-----------------------------------------------------------------------------------------------------|
 | `com.docker.network.bridge.name`                                                                |                             | Interface name to use when creating the Linux bridge.                                               |
 | `com.docker.network.bridge.enable_ip_masquerade`                                                | `true`                      | Enable IP masquerading.                                                                             |
+| `com.docker.network.host_ipv4`<br/>`com.docker.network.host_ipv6`                               |                             | Address to use for source NAT. See [Packet filtering and firewalls](packet-filtering-firewalls.md). |
 | `com.docker.network.bridge.gateway_mode_ipv4`<br/>`com.docker.network.bridge.gateway_mode_ipv6` | `nat`                       | Control external connectivity. See [Packet filtering and firewalls](packet-filtering-firewalls.md). |
 | `com.docker.network.bridge.enable_icc`                                                          | `true`                      | Enable or Disable inter-container connectivity.                                                     |
 | `com.docker.network.bridge.host_binding_ipv4`                                                   | all IPv4 and IPv6 addresses | Default IP when binding container ports.                                                            |

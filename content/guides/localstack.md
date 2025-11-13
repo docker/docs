@@ -76,7 +76,7 @@ Launch a quick demo of LocalStack by using the following steps:
 
    When you create a local S3 bucket using LocalStack, you're essentially simulating the creation of an S3 bucket on AWS. This lets you to test and develop applications that interact with S3 without needing an actual AWS account.
 
-   To create Local Amazon S3 bucket, you’ll need to install an `awscli-local` package to be installed on your system. This package provides the awslocal command, which is a thin wrapper around the AWS command line interface for use with LocalStack.  It lets you to test and develop against a simulated environment on your local machine without needing to access the real AWS services. You can learn more about this utility [here](https://github.com/localstack/awscli-local).
+   To create Local Amazon S3 bucket, install the [`awscli-local` CLI](https://github.com/localstack/awscli-local) on your system. The `awslocal` command is a thin wrapper around the AWS command line interface for use with LocalStack. It lets you to test and develop against a simulated environment on your local machine without needing to access the real AWS services.
 
     ```console
     $ pip install awscli-local

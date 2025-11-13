@@ -9,19 +9,19 @@ Quick overview of an image
 
 ### Options
 
-| Name                  | Type          | Default | Description                                                                                             |
-|:----------------------|:--------------|:--------|:--------------------------------------------------------------------------------------------------------|
-| `--env`               | `string`      |         | Name of the environment                                                                                 |
-| `--ignore-suppressed` |               |         | Filter CVEs found in Scout exceptions based on the specified exception scope                            |
-| `--latest`            |               |         | Latest indexed image                                                                                    |
-| `--only-policy`       | `stringSlice` |         | Comma separated list of policies to evaluate                                                            |
-| `--only-vex-affected` |               |         | Filter CVEs by VEX statements with status not affected                                                  |
-| `--org`               | `string`      |         | Namespace of the Docker organization                                                                    |
-| `-o`, `--output`      | `string`      |         | Write the report to a file                                                                              |
-| `--platform`          | `string`      |         | Platform of image to analyze                                                                            |
-| `--ref`               | `string`      |         | Reference to use if the provided tarball contains multiple references.<br>Can only be used with archive |
-| `--vex-author`        | `stringSlice` |         | List of VEX statement authors to accept                                                                 |
-| `--vex-location`      | `stringSlice` |         | File location of directory or file containing VEX statements                                            |
+| Name                  | Type          | Default             | Description                                                                                             |
+|:----------------------|:--------------|:--------------------|:--------------------------------------------------------------------------------------------------------|
+| `--env`               | `string`      |                     | Name of the environment                                                                                 |
+| `--ignore-suppressed` |               |                     | Filter CVEs found in Scout exceptions based on the specified exception scope                            |
+| `--latest`            |               |                     | Latest indexed image                                                                                    |
+| `--only-policy`       | `stringSlice` |                     | Comma separated list of policies to evaluate                                                            |
+| `--only-vex-affected` |               |                     | Filter CVEs by VEX statements with status not affected                                                  |
+| `--org`               | `string`      |                     | Namespace of the Docker organization                                                                    |
+| `-o`, `--output`      | `string`      |                     | Write the report to a file                                                                              |
+| `--platform`          | `string`      |                     | Platform of image to analyze                                                                            |
+| `--ref`               | `string`      |                     | Reference to use if the provided tarball contains multiple references.<br>Can only be used with archive |
+| `--vex-author`        | `stringSlice` | `[<.*@docker.com>]` | List of VEX statement authors to accept                                                                 |
+| `--vex-location`      | `stringSlice` |                     | File location of directory or file containing VEX statements                                            |
 
 
 <!---MARKER_GEN_END-->

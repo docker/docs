@@ -65,6 +65,10 @@
   - /go/daemon-access/
 "/engine/deprecated/#deprecated-engine-features-1":
   - /go/deprecated/
+"https://www.docker.com/blog/retiring-docker-content-trust/":
+  # Details about the deprecation of Docker Content Trust. This URL can be used
+  # for in-product links to the deprecation, and is used by the Docker CLI.
+  - /go/dct-deprecation/
 "/engine/reference/commandline/cli/#experimental-features":
   - /go/experimental/
 "/reference/cli/docker/login/#credential-stores":
@@ -294,6 +298,8 @@
   - /go/mcp-catalog-and-toolkit/
 "/ai/mcp-catalog-and-toolkit/catalog/":
   - /go/mcp-catalog-and-toolkit-catalog/
+"/ai/mcp-catalog-and-toolkit/mcp-gateway/":
+  - /go/mcp-gateway/
 "/ai/mcp-catalog-and-toolkit/toolkit/#install-an-mcp-server":
   - /go/mcp-toolkit-install-mcp-server/
 "/ai/mcp-catalog-and-toolkit/toolkit/#install-an-mcp-client":
@@ -366,3 +372,13 @@
 
 "/dhi/how-to/customize/#create-an-oci-artifact-image":
   - /go/dhi-customization-artifacts/
+
+"/ai/mcp-catalog-and-toolkit/get-started/#verify-connections":
+  - /go/mcp-client-verify/
+
+# Copilot extension (deprecated)
+"https://github.com/marketplace/docker-for-github-copilot":
+  - /copilot/
+  - /copilot/install/
+  - /copilot/usage/
+  - /copilot/examples/

@@ -1,0 +1,37 @@
+command: docker scout vex
+aliases: docker scout vex, docker scout vex
+short: Manage VEX attestations on images
+long: Manage VEX attestations on images
+pname: docker scout
+plink: docker_scout.yaml
+cname:
+    - docker scout vex get
+clink:
+    - docker_scout_vex_get.yaml
+inherited_options:
+    - option: debug
+      value_type: bool
+      default_value: "false"
+      description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: verbose-debug
+      value_type: bool
+      default_value: "false"
+      description: Verbose debug
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

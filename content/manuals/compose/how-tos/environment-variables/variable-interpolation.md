@@ -12,9 +12,9 @@ aliases:
 
 A Compose file can use variables to offer more flexibility. If you want to quickly switch 
 between image tags to test multiple versions, or want to adjust a volume source to your local
-environment, you don't need to edit the Compose file each time, you can just set variables that insert values into your Compose file at run time.
+environment, you don't need to edit the Compose file each time, you can just set variables that insert values into your Compose file at runtime.
 
-Interpolation can also be used to insert values into your Compose file at run time, which is then used to pass variables into your container's environment
+Interpolation can also be used to insert values into your Compose file at runtime, which is then used to pass variables into your container's environment
 
 Below is a simple example: 
 
@@ -130,9 +130,13 @@ The following syntax rules apply to environment files:
 - Blank lines are ignored.
 - Unquoted and double-quoted (`"`) values have interpolation applied.
 - Each line represents a key-value pair. Values can optionally be quoted.
+- Delimiter separating key and value can be either `=` or `:`.
+- Spaces before and after value are ignored.
   - `VAR=VAL` -> `VAL`
   - `VAR="VAL"` -> `VAL`
   - `VAR='VAL'` -> `VAL`
+  - `VAR: VAL` -> `VAL`
+  - `VAR = VAL  ` -> `VAL` <!-- markdownlint-disable-line no-space-in-code -->
 - Inline comments for unquoted values must be preceded with a space.
   - `VAR=VAL # comment` -> `VAL`
   - `VAR=VAL# not a comment` -> `VAL# not a comment`

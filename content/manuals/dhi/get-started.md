@@ -24,30 +24,35 @@ example, they can be applied to any DHI.
 > configuration or commands. Start with this guide, then see the [migration
 > guide](./how-to/migrate.md) for more details and examples.
 
+## Step 1: Start a free trial to access DHI
 
-## Step 1: Sign up and subscribe to DHI for access
+You can browse the Docker Hardened Images catalog without a subscription, but to
+use an image, you must either [contact sales to
+subscribe](https://www.docker.com/products/hardened-images/#getstarted) or start
+a free trial for an [organization](/admin/organization/). This guide walks you
+through starting a free trial.
 
-To access Docker Hardened Images, your organization must [sign
-up](https://www.docker.com/products/hardened-images/#getstarted) and subscribe.
+To start a free trial:
+
+1. Go to the Hardened Images catalog in [Docker
+   Hub](https://hub.docker.com/hardened-images/catalog) and sign in.
+2. Select **Start trial** and follow the on-screen instructions.
 
 ## Step 2: Find an image to use
 
-Once subscribed, Docker Hardened Images will appear under your organization's
-namespace on Docker Hub.
-
-1. Go to [Docker Hub](https://hub.docker.com) and sign in.
-2. Select **My Hub** in the top navigation.
-3. In the left sidebar, choose your organization that has DHI access.
-4. In the left sidebar, select **Hardened Images** > **Catalog**.
+1. Go to the Hardened Images catalog in [Docker
+   Hub](https://hub.docker.com/hardened-images/catalog) and sign in.
+2. In the left sidebar, choose your organization that has DHI access.
+3. In the left sidebar, select **Hardened Images** > **Catalog**.
 
    ![Docker Hub sidebar showing DHI catalog](./images/dhi-catalog.png)
 
-5. Use the search bar or filters to find an image (e.g., `python`, `node`,
+4. Use the search bar or filters to find an image (e.g., `python`, `node`,
    `golang`). For this guide, use the Python image as an example.
 
     ![DHI catalog with Python repository shown](./images/dhi-python-search.png)
 
-6. Select the Python repository to view its details.
+5. Select the Python repository to view its details.
 
 Continue to the next step to mirror the image. To dive deeper into exploring
 images see [Explore Docker Hardened Images](./how-to/explore.md).
@@ -70,13 +75,7 @@ it.
    > **View in repository** to see the mirrored image's location or mirror it to
    > another repository.
   
-2. Follow the on-screen instructions to choose a name. For this guide, the
-   example uses the name `dhi-python`. Note that the name must start with
-   `dhi-`.
-
-   ![Mirror a repository page](./images/dhi-mirror-screen.png)
-
-3. Select **Create repository** to start the mirroring process.
+2. Follow the on-screen instructions to mirror the repository.
 
 It may take a few minutes for all the tags to finish mirroring. Once
 mirrored, the image repository appears in your organization's namespace. For
@@ -118,7 +117,56 @@ a simple Python command just like you would with any other Docker image:
     This starts a container from the `dhi-python:3.13` image and runs a simple
     Python script that prints `Hello from DHI`.
 
-To dive deeper into using images see [Use a Docker Hardened Image](./how-to/use.md).
+To dive deeper into using images, see:
+
+- [Use a Docker Hardened Image](./how-to/use.md) for general usage
+- [Use in Kubernetes](./how-to/k8s.md) for Kubernetes deployments
+- [Use a Helm chart](./how-to/helm.md) for deploying with Helm
+
+## Step 5: Compare with the other images
+
+You can quickly compare DHIs with other images to see the security
+improvements and differences. This comparison helps you understand the value of
+using hardened images.
+
+Run the following command to see a summary comparison, replacing
+`<your-namespace>` with your organization's namespace:
+
+```console
+$ docker scout compare <your-namespace>/dhi-python:3.13 \
+    --to python:3.13 \
+    --platform linux/amd64 \
+    --ignore-unchanged \
+    2>/dev/null | sed -n '/## Overview/,/^  ## /p' | head -n -1
+```
+
+Example output:
+
+```plaintext
+  ## Overview
+
+                      │                    Analyzed Image                     │               Comparison Image
+  ────────────────────┼───────────────────────────────────────────────────────┼───────────────────────────────────────────────
+    Target            │  docker/dhi-python:3.13                               │  python:3.13
+      digest          │  c215e9da9f84                                         │  7f48e892134c
+      tag             │  3.13                                                 │  3.13
+      platform        │ linux/amd64                                           │ linux/amd64
+      provenance      │ https://github.com/docker-hardened-images/definitions │ https://github.com/docker-library/python.git
+                      │  77a629b3d0db035700206c2a4e7ed904e5902ea8             │  3f2d7e4c339ab883455b81a873519f1d0f2cd80a
+      vulnerabilities │    0C     0H     0M     0L                            │    0C     1H     5M   141L     2?
+                      │           -1     -5   -141     -2                     │
+      size            │ 35 MB (-377 MB)                                       │ 412 MB
+      packages        │ 80 (-530)                                             │ 610
+                      │                                                       │
+```
+
+This comparison shows that the Docker Hardened Image:
+
+- Removes vulnerabilities: 1 high, 5 medium, 141 low, and 2 unspecified severity CVEs removed
+- Reduces size: From 412 MB down to 35 MB (91% reduction)
+- Minimizes packages: From 610 packages down to 80 (87% reduction)
+
+To dive deeper into comparing images see [Compare Docker Hardened Images](./how-to/compare.md).
 
 ## What's next
 

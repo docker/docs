@@ -21,6 +21,11 @@ trace = true
 root = "/var/lib/buildkit"
 # insecure-entitlements allows insecure entitlements, disabled by default.
 insecure-entitlements = [ "network.host", "security.insecure", "device" ]
+# provenanceEnvDir is the directory where extra config is loaded that is added
+# to the provenance of builds:
+# slsa v0.2: invocation.environment.*
+# slsa v1: buildDefinition.internalParameters.*
+provenanceEnvDir = "/etc/buildkit/provenance.d"
 
 [log]
   # log formatter: json or text
@@ -178,6 +183,9 @@ insecure-entitlements = [ "network.host", "security.insecure", "device" ]
   http = true
   # Use HTTPS with self-signed certificates. Do not enable this together with `http`.
   insecure = true
+  # If you use token auth with self-signed certificates,
+  # then buildctl also needs to trust the token provider CA (for example, certificates that are configured for registry)
+  # because buildctl pulls tokens directly without daemon process
   ca=["/etc/config/myca.pem"]
   [[registry."docker.io".keypair]]
     key="/etc/config/key.pem"

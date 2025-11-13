@@ -37,7 +37,6 @@ jobs:
             DOCS_URL="https://docs.docker.com"
             DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/prod-docs-docs.docker.com-20220818202218674300000001"
             DOCS_S3_BUCKET="prod-docs-docs.docker.com"
-            DOCS_S3_CONFIG="s3-config.json"
             DOCS_CLOUDFRONT_ID="E228TTN20HNU8F"
             DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-prod"
             DOCS_SLACK_MSG="Successfully deployed docs from the main branch. $DOCS_URL"
@@ -46,7 +45,6 @@ jobs:
             DOCS_URL="https://docs-labs.docker.com"
             DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/labs-docs-docs.docker.com-20220818202218402500000001"
             DOCS_S3_BUCKET="labs-docs-docs.docker.com"
-            DOCS_S3_CONFIG="s3-config.json"
             DOCS_CLOUDFRONT_ID="E1MYDYF65FW3HG"
             DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-labs"
           else
@@ -63,7 +61,6 @@ jobs:
           echo "DOCS_AWS_REGION=$DOCS_AWS_REGION" >> $GITHUB_ENV
           echo "DOCS_AWS_IAM_ROLE=$DOCS_AWS_IAM_ROLE" >> $GITHUB_ENV
           echo "DOCS_S3_BUCKET=$DOCS_S3_BUCKET" >> $GITHUB_ENV
-          echo "DOCS_S3_CONFIG=$DOCS_S3_CONFIG" >> $GITHUB_ENV
           echo "DOCS_CLOUDFRONT_ID=$DOCS_CLOUDFRONT_ID" >> $GITHUB_ENV
           echo "DOCS_LAMBDA_FUNCTION_REDIRECTS=$DOCS_LAMBDA_FUNCTION_REDIRECTS" >> $GITHUB_ENV
           echo "DOCS_SLACK_MSG=$DOCS_SLACK_MSG" >> $GITHUB_ENV
@@ -100,7 +97,6 @@ jobs:
         if: ${{ env.DOCS_S3_BUCKET != '' }}
         run: |
           aws --region ${{ env.DOCS_AWS_REGION }} s3 sync \
-            --acl public-read \
             --delete \
             --exclude "*" \
             --include "*.webp" \
@@ -109,23 +105,9 @@ jobs:
             --content-type="image/webp" \
             public s3://${{ env.DOCS_S3_BUCKET }}/
           aws --region ${{ env.DOCS_AWS_REGION }} s3 sync \
-            --acl public-read \
             --delete \
             --exclude "*.webp" \
             public s3://${{ env.DOCS_S3_BUCKET }}/
-      -
-        name: Update S3 config
-        if: ${{ env.DOCS_S3_BUCKET != '' && env.DOCS_S3_CONFIG != '' }}
-        uses: docker/bake-action@v6
-        with:
-          source: .
-          files: |
-            docker-bake.hcl
-          targets: aws-s3-update-config
-        env:
-          AWS_REGION: ${{ env.DOCS_AWS_REGION }}
-          AWS_S3_BUCKET: ${{ env.DOCS_S3_BUCKET }}
-          AWS_S3_CONFIG: ${{ env.DOCS_S3_CONFIG }}
       -
         name: Update Cloudfront config
         if: ${{ env.DOCS_CLOUDFRONT_ID != '' }}

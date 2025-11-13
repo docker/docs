@@ -40,3 +40,14 @@ Updated images are published with cryptographic provenance attestations to
 support verification and compliance workflows. This automated process reduces
 the operational burden of manual patching and helps teams stay aligned with
 secure software development practices.
+
+## Automatic patching for customized images
+
+When you [customize a Docker Hardened Image](../how-to/customize.md), your
+customized images also benefit from automatic patching. When the base Docker
+Hardened Image receives a security update, Docker automatically rebuilds your
+customized images in the background, ensuring they stay current with the latest
+security patches without requiring manual intervention.
+
+This means your customizations maintain continuous compliance and protection by
+default, with no additional operational overhead.

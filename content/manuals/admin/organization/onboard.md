@@ -23,7 +23,7 @@ Onboarding your organization includes:
 - Enforce sign-in for Docker Desktop to ensure security best practices
 
 These actions help administrators gain visibility into user activity and
-enforce security settings. Organization memebers also receive increased pull
+enforce security settings. Organization members also receive increased pull
 limits and other benefits when they are signed in.
 
 ## Prerequisites
