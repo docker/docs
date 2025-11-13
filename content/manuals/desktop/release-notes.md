@@ -39,7 +39,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### New
 
 - You can now set up your Kubernetes resources from the **Kubernetes** view. This new view also provides a real-time display of your pods, services, and deployments. 
-- The left-hand navigation items can now be customized in Docker Desktop. Right-click on the panel and then select **Customize**. 
 
 ### Upgrades
 
