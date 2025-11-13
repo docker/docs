@@ -34,7 +34,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-11-13" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.51.0" build_path="//" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.51.0" build_path="/210443/" >}}
 
 ### New
 
