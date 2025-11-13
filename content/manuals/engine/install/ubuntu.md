@@ -88,10 +88,10 @@ conflicts with the versions bundled with Docker Engine.
 Run the following command to uninstall all conflicting packages:
 
 ```console
-$ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+$ sudo apt remove $(dpkg --get-selections docker.io docker-compose docker-compose-v2 docker-doc podman-docker containerd runc | cut -f1)
 ```
 
-`apt-get` might report that you have none of these packages installed.
+`apt` might report that you have none of these packages installed.
 
 Images, containers, volumes, and networks stored in `/var/lib/docker/` aren't
 automatically removed when you uninstall Docker. If you want to start with a
@@ -126,18 +126,22 @@ Docker from the repository.
 
    ```bash
    # Add Docker's official GPG key:
-   sudo apt-get update
-   sudo apt-get install ca-certificates curl
+   sudo apt update
+   sudo apt install ca-certificates curl
    sudo install -m 0755 -d /etc/apt/keyrings
    sudo curl -fsSL {{% param "download-url-base" %}}/gpg -o /etc/apt/keyrings/docker.asc
    sudo chmod a+r /etc/apt/keyrings/docker.asc
 
    # Add the repository to Apt sources:
-   echo \
-     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] {{% param "download-url-base" %}} \
-     $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
-     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-   sudo apt-get update
+   sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+   Types: deb
+   URIs: {{% param "download-url-base" %}}
+   Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+   Components: stable
+   Signed-By: /etc/apt/keyrings/docker.asc
+   EOF
+
+   sudo apt update
    ```
 
 2. Install the Docker packages.
@@ -148,7 +152,7 @@ Docker from the repository.
    To install the latest version, run:
 
    ```console
-   $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   $ sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
    {{< /tab >}}
@@ -158,11 +162,10 @@ Docker from the repository.
    available versions in the repository:
 
    ```console
-   # List the available versions:
-   $ apt-cache madison docker-ce | awk '{ print $3 }'
+   $ apt list --all-versions docker-ce
 
-   5:{{% param "docker_ce_version" %}}-1~ubuntu.24.04~noble
-   5:{{% param "docker_ce_version_prev" %}}-1~ubuntu.24.04~noble
+   docker-ce/noble 5:{{% param "docker_ce_version" %}}-1~ubuntu.24.04~noble <arch>
+   docker-ce/noble 5:{{% param "docker_ce_version_prev" %}}-1~ubuntu.24.04~noble <arch>
    ...
    ```
 
@@ -170,7 +173,7 @@ Docker from the repository.
 
    ```console
    $ VERSION_STRING=5:{{% param "docker_ce_version" %}}-1~ubuntu.24.04~noble
-   $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
+   $ sudo apt install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
    {{< /tab >}}
@@ -284,7 +287,7 @@ To upgrade Docker Engine, download the newer package files and repeat the
 1. Uninstall the Docker Engine, CLI, containerd, and Docker Compose packages:
 
    ```console
-   $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
+   $ sudo apt purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
    ```
 
 2. Images, containers, volumes, or custom configuration files on your host
@@ -298,7 +301,7 @@ To upgrade Docker Engine, download the newer package files and repeat the
 3. Remove source list and keyrings
 
    ```console
-   $ sudo rm /etc/apt/sources.list.d/docker.list
+   $ sudo rm /etc/apt/sources.list.d/docker.sources
    $ sudo rm /etc/apt/keyrings/docker.asc
    ```
 
