@@ -196,10 +196,10 @@ file them with the library maintainers.
 | Gradle                | [gradle-docker-plugin](https://github.com/gesellix/gradle-docker-plugin)    |
 | Groovy                | [docker-client](https://github.com/gesellix/docker-client)                  |
 | Haskell               | [docker-hs](https://github.com/denibertovic/docker-hs)                      |
-| Java                  | [docker-client](https://github.com/spotify/docker-client)                   |
 | Java                  | [docker-java](https://github.com/docker-java/docker-java)                   |
-| Java                  | [docker-java-api](https://github.com/amihaiemil/docker-java-api)            |
-| Java                  | [jocker](https://github.com/ndeloof/jocker)                                 |
+| Java                  | [docker-client(INACTIVE)](https://github.com/spotify/docker-client)         |
+| Java                  | [docker-java-api(INACTIVE)](https://github.com/amihaiemil/docker-java-api)  |
+| Java                  | [jocker(INACTIVE)](https://github.com/ndeloof/jocker)                       |
 | NodeJS                | [dockerode](https://github.com/apocas/dockerode)                            |
 | NodeJS                | [harbor-master](https://github.com/arhea/harbor-master)                     |
 | NodeJS                | [the-moby-effect](https://github.com/leonitousconforti/the-moby-effect)     |
