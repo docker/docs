@@ -27,7 +27,7 @@ Before you begin, ensure you have:
 Organization access tokens let you authenticate API requests without
 interactive login steps.
 
-1. Navigate to your organization in Docker Hub and select **Admin Console**.
+1. Navigate to your organization in [Docker Home](https://app.docker.com) and select **Admin Console**.
 
 2. Select **Access tokens** from the sidebar.
 
