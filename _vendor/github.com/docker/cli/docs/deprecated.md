@@ -53,6 +53,8 @@ The following table provides an overview of the current status of deprecated fea
 
 | Status     | Feature                                                                                                                            | Deprecated | Remove |
 |------------|------------------------------------------------------------------------------------------------------------------------------------|------------|--------|
+| Deprecated | [Support for cgroup v1](#support-for-cgroup-v1)                                                                                    | v29.0      | -      |
+| Deprecated | [`--pause` option on `docker commit`](#--pause-option-on-docker-commit)                                                            | v29.0      | v30.0  |
 | Deprecated | [Legacy links environment variables](#legacy-links-environment-variables)                                                          | v28.4      | v30.0  |
 | Deprecated | [Special handling for quoted values for TLS flags](#special-handling-for-quoted-values-for-tls-flags)                              | v28.4      | v29.0  |
 | Deprecated | [Empty/nil fields in image Config from inspect API](#emptynil-fields-in-image-config-from-inspect-api)                             | v28.3      | v29.0  |
@@ -65,7 +67,7 @@ The following table provides an overview of the current status of deprecated fea
 | Removed    | [`Container` and `ContainerConfig` fields in Image inspect](#container-and-containerconfig-fields-in-image-inspect)                | v25.0      | v26.0  |
 | Removed    | [Deprecate legacy API versions](#deprecate-legacy-api-versions)                                                                    | v25.0      | v26.0  |
 | Removed    | [Container short ID in network Aliases field](#container-short-id-in-network-aliases-field)                                        | v25.0      | v26.0  |
-| Deprecated | [Mount `bind-nonrecursive` option](#mount-bind-nonrecursive-option)                                                                | v25.0      | v29.0  |
+| Removed    | [Mount `bind-nonrecursive` option](#mount-bind-nonrecursive-option)                                                                | v25.0      | v29.0  |
 | Removed    | [IsAutomated field, and `is-automated` filter on `docker search`](#isautomated-field-and-is-automated-filter-on-docker-search)     | v25.0      | v28.2  |
 | Removed    | [logentries logging driver](#logentries-logging-driver)                                                                            | v24.0      | v25.0  |
 | Removed    | [OOM-score adjust for the daemon](#oom-score-adjust-for-the-daemon)                                                                | v24.0      | v25.0  |
@@ -123,6 +125,39 @@ The following table provides an overview of the current status of deprecated fea
 | Removed    | [`--api-enable-cors` flag on `dockerd`](#--api-enable-cors-flag-on-dockerd)                                                        | v1.6       | v17.09 |
 | Removed    | [`--run` flag on `docker commit`](#--run-flag-on-docker-commit)                                                                    | v0.10      | v1.13  |
 | Removed    | [Three arguments form in `docker import`](#three-arguments-form-in-docker-import)                                                  | v0.6.7     | v1.12  |
+
+### Support for cgroup v1
+
+**Deprecated in release: v29.0**
+
+Support for cgroup v1 is deprecated in the v29.0 release, however, it will continue
+to be supported until May 2029.
+The latest release in May 2029 may not necessarily support cgroup v1,
+but there will be at least one maintained branch with the support for cgroup v1.
+
+The cgroup version currently in use can be checked by running the `docker info` command:
+
+```console
+$ docker info
+<...>
+Server:
+ <...>
+ Cgroup Version: 2
+ <...>
+```
+
+### `--pause` option on `docker commit`
+
+**Deprecated in release: v29.0**
+
+**Target for removal in release: v30.0**
+
+The `--pause` option is enabled by default since Docker v1.1.0 to prevent
+committing containers in an inconsistent state, but can be disabled by
+setting the `--pause=false` option. In docker CLI v29.0 this flag is
+replaced by a `--no-pause` flag instead. The `--pause` option is still
+functional in the v29.0 release, printing a deprecation warning, but
+will be removed in docker CLI v30.
 
 ### Legacy links environment variables
 
@@ -454,7 +489,7 @@ introduced in v25.0 and should be used instead of the `Aliases` field.
 
 **Deprecated in release: v25.0**
 
-**Scheduled for removal in release: v29.0**
+**Removed in release: v29.0**
 
 The `bind-nonrecursive` option was replaced with the [`bind-recursive`]
 option (see [cli-4316], [cli-4671]). The option was still accepted, but
@@ -464,7 +499,7 @@ printed a deprecation warning:
 bind-nonrecursive is deprecated, use bind-recursive=disabled instead
 ```
 
-In the v29.0 release, this warning will be removed and returned as an error.
+In the v29.0 release, this warning is removed, and returned as an error.
 Users should use the equivalent `bind-recursive=disabled` option instead.
 
 [`bind-recursive`]: https://docs.docker.com/engine/storage/bind-mounts/#recursive-mounts
@@ -730,25 +765,11 @@ When using cgroups v2, the `--blkio-weight` options are implemented using
 
 Specifying kernel memory limit (`docker run --kernel-memory`) is no longer supported
 because the [Linux kernel deprecated `kmem.limit_in_bytes` in v5.4](https://github.com/torvalds/linux/commit/0158115f702b0ba208ab0b5adf44cae99b3ebcc7).
-The OCI runtime specification now marks this option (as well as `--kernel-memory-tcp`)
-as ["NOT RECOMMENDED"](https://github.com/opencontainers/runtime-spec/pull/1093),
+The OCI runtime specification now marks this option as ["NOT RECOMMENDED"](https://github.com/opencontainers/runtime-spec/pull/1093),
 and OCI runtimes such as `runc` no longer support this option.
 
-Docker API v1.42 and up now ignores this option when set. Older versions of the
-API continue to accept the option, but depending on the OCI runtime used, may
-take no effect.
-
-> [!NOTE]
-> While not deprecated (yet) in Docker, the OCI runtime specification also
-> deprecated the `memory.kmem.tcp.limit_in_bytes` option. When using `runc` as
-> runtime, this option takes no effect. The Linux kernel did not explicitly
-> deprecate this feature, and there is a tracking ticket in the `runc` issue
-> tracker to determine if this option should be reinstated or if this was an
-> oversight of the Linux kernel maintainers (see [opencontainers/runc#3174](https://github.com/opencontainers/runc/issues/3174)).
->
-> The `memory.kmem.tcp.limit_in_bytes` option is only supported with cgroups v1,
-> and not available on installations running with cgroups v2. This option is
-> only supported by the API, and not exposed on the `docker` command-line.
+The Docker API no longer handles the kernel-memory fields, and Docker CLI v29.0
+removes the `--kernel-memory` option.
 
 ### Classic Swarm and overlay networks using cluster store
 

@@ -1,9 +1,7 @@
 github.com/docker/buildx v0.29.1 h1:58hxM5Z4mnNje3G5NKfULT9xCr8ooM8XFtlfUK9bKaA=
 github.com/docker/buildx v0.29.1/go.mod h1:J4EFv6oxlPiV1MjO0VyJx2u5tLM7ImDEl9zyB8d4wPI=
-github.com/docker/cli v28.5.1+incompatible h1:ESutzBALAD6qyCLqbQSEf1a/U8Ybms5agw59yGVc+yY=
-github.com/docker/cli v28.5.1+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
-github.com/docker/cli v28.5.2+incompatible h1:XmG99IHcBmIAoC1PPg9eLBZPlTrNUAijsHLm8PjhBlg=
-github.com/docker/cli v28.5.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v29.0.0+incompatible h1:KgsN2RUFMNM8wChxryicn4p46BdQWpXOA1XLGBGPGAw=
+github.com/docker/cli v29.0.0+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/compose/v2 v2.40.3 h1:XeYkQu1svDtyfZPv5nTwFryQ25ZJMkIlc4pz9HalMPI=
 github.com/docker/compose/v2 v2.40.3/go.mod h1:iNY1tvoHTyN3C3QHCuWAgj3OjR2T6mGkk/qxfbBF/4M=
 github.com/docker/mcp-gateway v0.22.0 h1:l4t+HRNHxR7Jn545KDeXaeiEEhkCDBeWMTyuCaXVH7A=
@@ -14,7 +12,5 @@ github.com/docker/scout-cli v1.18.4 h1:Td+SSA55WlD7gmrNaBe0imgfVzzQjlfb/prwBn9GO
 github.com/docker/scout-cli v1.18.4/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
 github.com/moby/buildkit v0.25.1 h1:j7IlVkeNbEo+ZLoxdudYCHpmTsbwKvhgc/6UJ/mY/o8=
 github.com/moby/buildkit v0.25.1/go.mod h1:phM8sdqnvgK2y1dPDnbwI6veUCXHOZ6KFSl6E164tkc=
-github.com/moby/moby v28.5.1+incompatible h1:JD8lBdCDBF2oiHWLqIRofPqI8qvkppRjMJ6EnwrhvX0=
-github.com/moby/moby v28.5.1+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
-github.com/moby/moby v28.5.2+incompatible h1:hIn6qcenb3JY1E3STwqEbBvJ8bha+u1LpqjX4CBvNCk=
-github.com/moby/moby v28.5.2+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
+github.com/moby/moby/api v1.52.0 h1:00BtlJY4MXkkt84WhUZPRqt5TvPbgig2FZvTbe3igYg=
+github.com/moby/moby/api v1.52.0/go.mod h1:8mb+ReTlisw4pS6BRzCMts5M49W5M7bKt1cJy/YbAqc=
