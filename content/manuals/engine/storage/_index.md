@@ -8,6 +8,22 @@ aliases:
   - /storage/
 ---
 
+Docker storage covers two different concepts:
+
+**Container data persistence** (this page): How to store application data
+outside containers using volumes, bind mounts, and tmpfs mounts. This data
+persists independently of container lifecycle.
+
+**Daemon storage backends** ([containerd image store](containerd.md) and
+[storage drivers](drivers/)): How the daemon stores image layers and container
+writable layers on disk.
+
+This page focuses on container data persistence. For information about how
+Docker stores images and container layers, see
+[containerd image store](containerd.md) or [Storage drivers](drivers/).
+
+## Container layer basics
+
 By default all files created inside a container are stored on a writable
 container layer that sits on top of the read-only, immutable image layers.
 
@@ -78,9 +94,13 @@ Docker Engine API using a named pipe.
 
 ## Next steps
 
-- Learn more about [volumes](./volumes.md).
-- Learn more about [bind mounts](./bind-mounts.md).
-- Learn more about [tmpfs mounts](./tmpfs.md).
-- Learn more about [storage drivers](/engine/storage/drivers/), which
-  are not related to bind mounts or volumes, but allow you to store data in a
-  container's writable layer.
+Learn more about container data persistence:
+
+- [Volumes](./volumes.md)
+- [Bind mounts](./bind-mounts.md)
+- [tmpfs mounts](./tmpfs.md)
+
+Learn more about daemon storage backends:
+
+- [containerd image store](containerd.md)
+- [Storage drivers](drivers/)
