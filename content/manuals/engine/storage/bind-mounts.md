@@ -469,9 +469,9 @@ volumes:
 ```
 
 For more information about using volumes of the `bind` type with Compose, see
-[Compose reference on volumes](/reference/compose-file/services.md#volumes).
+[Compose reference on the volumes top-level element](/reference/compose-file/volumes.md).
 and
-[Compose reference on volume configuration](/reference/compose-file/services.md#volumes).
+[Compose reference on the volume attribute](/reference/compose-file/services.md#volumes).
 
 ## Next steps
 
