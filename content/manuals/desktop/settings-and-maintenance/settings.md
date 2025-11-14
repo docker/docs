@@ -235,15 +235,17 @@ containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 ### Proxies
 
-Docker Desktop supports the use of HTTP/HTTPS and [SOCKS5 proxies](/manuals/desktop/features/networking.md#socks5-proxy-support).
+Docker Desktop supports the use of HTTP/HTTPS and SOCKS5 proxies (Requires a business subscription).
 
-HTTP/HTTPS proxies can be used when:
+HTTP/HTTPS and SOCKS5 proxies can be used when:
 
 - Signing in to Docker
 - Pulling or pushing images
 - Fetching artifacts during image builds
 - Containers interact with the external network
 - Scanning images
+
+For more details on how it works, see [Using Docker Desktop with a proxy](/manuals/desktop/features/networking/index.md#useing-docker-desktop-with-a-proxy).
 
 If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration (PAC)), Docker Desktop reads
 this configuration
