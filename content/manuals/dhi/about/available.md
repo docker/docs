@@ -40,7 +40,9 @@ requirements:
 Each image maintains a minimal and secure runtime layer by removing
 non-essential components like shells, package managers, and debugging tools.
 This helps reduce the attack surface while retaining compatibility with common
-runtime environments.
+runtime environments. To maintain this lean, secure foundation, DHI standardizes
+on Debian for glibc-based images, which provides broad compatibility while
+minimizing complexity and maintenance overhead.
 
 Example tags include:
 
