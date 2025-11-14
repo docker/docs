@@ -396,7 +396,7 @@ Any changes to the application's source files on your local machine will now be 
 
 Try making a change to test hot reloading:
 
-1. Open `src/client/components/TodoApp.tsx` in an IDE or text editor
+1. Open `src/client/components/TodoApp.tsx` in an IDE or text editor.
 1. Update the main heading text:
 
   ```diff
@@ -408,7 +408,7 @@ Try making a change to test hot reloading:
     + </h1>
   ```
 
-1. Save the file and the Vite dev server will automatically reload the page with your changes
+1. Save the file and the Vite dev server will automatically reload the page with your changes.
 
 **Debugging support:**
 
@@ -451,7 +451,7 @@ You can connect a debugger to your application on port 9229. The Node.js inspect
    - Select "Attach to Docker Container" from the drop-down
    - Select the green play button or press F5
 
-### Chrome DevTools (Alternative)
+### Chrome DevTools (alternative)
 
 You can also use Chrome DevTools for debugging:
 
