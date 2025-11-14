@@ -50,7 +50,7 @@ To enable GitHub Actions to build and push Docker images, you'll securely store 
 
 3. Create a new [GitHub repository](https://github.com/new) for your Node.js project
 
-4. Add Docker Hub credentials as GitHub repository secrets
+4. Add Docker Hub credentials as GitHub repository secrets.
 
    In your newly created GitHub repository:
    1. Navigate to:
@@ -66,7 +66,7 @@ To enable GitHub Actions to build and push Docker images, you'll securely store 
 
    These secrets let GitHub Actions to authenticate securely with Docker Hub during automated workflows.
 
-5. Connect Your Local Project to GitHub
+5. Connect your local project to GitHub.
 
    Link your local project `docker-nodejs-sample` to the GitHub repository you just created by running the following command from your project root:
 
@@ -92,7 +92,7 @@ To enable GitHub Actions to build and push Docker images, you'll securely store 
 
    This confirms that your local repository is properly linked and ready to push your source code to GitHub.
 
-6. Push Your Source Code to GitHub
+6. Push your source code to GitHub.
 
    Follow these steps to commit and push your local project to your GitHub repository:
    1. Stage all files for commit.
