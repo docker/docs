@@ -77,7 +77,7 @@ Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace
 
 ```dockerfile
 # Use the DHI Deno image as the base image
-FROM <your-namespace>/dhi-deno:1
+FROM <your-namespace>/dhi-deno:2
 
 # Set the working directory
 WORKDIR /app
