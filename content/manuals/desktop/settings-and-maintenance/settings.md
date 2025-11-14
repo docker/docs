@@ -22,6 +22,8 @@ You can also locate the `settings-store.json` file (or `settings.json` for Docke
  - Windows: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings-store.json`
  - Linux: `~/.docker/desktop/settings-store.json`
 
+For additional information on settings that can be set in the Docker Desktop Dashboard and by administrators via the Admin Console, see the [Settings reference](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md).
+
 ## General
 
 On the **General** tab, you can configure when to start Docker and specify other settings:
