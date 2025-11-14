@@ -129,7 +129,7 @@ params:
   # Latest Docker Compose version
   compose_version: "v2.40.3"
   # Latest BuildKit version
-  buildkit_version: "0.25.0"
+  buildkit_version: "0.26.0"
 
   # Example runtime/library/os versions
   example_go_version: "1.24"
