@@ -87,7 +87,7 @@ $ docker compose ps
 
 For a full list of all the Compose CLI commands, see the [reference documentation](/reference/cli/docker/compose/_index.md).
 
-## Illustrative example
+## Example
 
 The following example illustrates the Compose concepts outlined above. The example is non-normative.
 
