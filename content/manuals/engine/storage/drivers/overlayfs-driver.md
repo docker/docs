@@ -12,13 +12,18 @@ This page refers to the Linux kernel driver as `OverlayFS` and to the Docker
 storage driver as `overlay2`.
 
 > [!NOTE]
->
+> Docker Engine 29.0 and later uses the
+> [containerd image store](/manuals/engine/storage/containerd.md) by default.
+> The `overlay2` driver is a legacy storage driver that is superseded by the
+> `overlayfs` containerd snapshotter. For more information, see
+> [Select a storage driver](/manuals/engine/storage/drivers/select-storage-driver.md).
+
+> [!NOTE]
 > For `fuse-overlayfs` driver, check [Rootless mode documentation](/manuals/engine/security/rootless.md).
 
 ## Prerequisites
 
-OverlayFS is the recommended storage driver, and supported if you meet the following
-prerequisites:
+The `overlay2` driver is supported if you meet the following prerequisites:
 
 - Version 4.0 or higher of the Linux kernel, or RHEL or CentOS using
   version 3.10.0-514 of the kernel or higher.

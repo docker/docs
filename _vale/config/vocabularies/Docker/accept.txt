@@ -161,6 +161,7 @@ pgAdmin
 PKG
 plaintext
 plist
+pluggable
 Postgres
 PowerShell
 Python
@@ -183,6 +184,7 @@ Solr
 SonarQube
 Splunk
 SQLite
+stargz
 stdin
 stdout
 subfolder
