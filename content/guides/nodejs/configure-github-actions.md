@@ -37,18 +37,18 @@ To enable GitHub Actions to build and push Docker images, you'll securely store 
 
 ### Step 1: Connect your GitHub repository to Docker Hub
 
-1. Create a Personal Access Token (PAT) from [Docker Hub](https://hub.docker.com)
+1. Create a Personal Access Token (PAT) from [Docker Hub](https://hub.docker.com).
    1. Go to your **Docker Hub account → Account Settings → Security**.
    2. Generate a new Access Token with **Read/Write** permissions.
    3. Name it something like `docker-nodejs-sample`.
    4. Copy and save the token — you'll need it in Step 4.
 
-2. Create a repository in [Docker Hub](https://hub.docker.com/repositories/)
+2. Create a repository in [Docker Hub](https://hub.docker.com/repositories/).
    1. Go to your **Docker Hub account → Create a repository**.
    2. For the Repository Name, use something descriptive — for example: `nodejs-sample`.
    3. Once created, copy and save the repository name — you'll need it in Step 4.
 
-3. Create a new [GitHub repository](https://github.com/new) for your Node.js project
+3. Create a new [GitHub repository](https://github.com/new) for your Node.js project.
 
 4. Add Docker Hub credentials as GitHub repository secrets.
 

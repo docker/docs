@@ -644,16 +644,16 @@ This Dockerfile implements several strategies to minimize the final image size:
 
 **Expected size reduction**: ~50% smaller than standard Node.js images
 
-### Step 3: Configure the .dockerignore file
+### Step 2: Configure the .dockerignore file
 
 The `.dockerignore` file tells Docker which files and folders to exclude when building the image.
 
 > [!NOTE]
 > This helps:
 >
-> 1.Reduce image size  
-> 2.Speed up the build process  
-> 3.Prevent sensitive or unnecessary files (like `.env`, `.git`, or `node_modules`) from being added to the final image.
+> - Reduce image size  
+> - Speed up the build process  
+> - Prevent sensitive or unnecessary files (like `.env`, `.git`, or `node_modules`) from being added to the final image.
 >
 > To learn more, visit the [.dockerignore reference](/reference/dockerfile.md#dockerignore-file).
 
@@ -705,7 +705,7 @@ nodejs-sample-kubernetes.yaml
 !tsconfig.json
 ```
 
-### Step 4: Build the Node.js application image
+### Step 3: Build the Node.js application image
 
 After creating all the configuration files, your project directory should now contain all necessary Docker configuration files:
 
@@ -735,7 +735,7 @@ What this command does:
 - Packages the application and its dependencies into a Docker image
 - Tags the image as docker-nodejs-sample so you can reference it later
 
-#### Step 6: View local images
+#### Step 4: View local images
 
 After building your Docker image, you can check which images are available on your local machine using either the Docker CLI or [Docker Desktop](/manuals/desktop/use-desktop/images.md). Since you're already working in the terminal, let's use the Docker CLI.
 

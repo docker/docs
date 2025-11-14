@@ -166,7 +166,7 @@ networks:
 
 1. The PostgreSQL database configuration is handled automatically by the application. The database is created and initialized when the application starts, with data persisted using the `postgres_data` volume.
 
-2. Configure your environment by copying the example file:
+1. Configure your environment by copying the example file:
 
    ```console
    $ cp .env.example .env
@@ -192,25 +192,25 @@ networks:
    ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
    ```
 
-3. Run the following command to start your application in development mode:
+1. Run the following command to start your application in development mode:
 
    ```console
    $ docker compose up app-dev --build
    ```
 
-4. Open a browser and verify that the application is running at [http://localhost:5173](http://localhost:5173) for the frontend or [http://localhost:3000](http://localhost:3000) for the API. The React frontend is served by Vite dev server on port 5173, with API calls proxied to the Express server on port 3000.
+1. Open a browser and verify that the application is running at [http://localhost:5173](http://localhost:5173) for the frontend or [http://localhost:3000](http://localhost:3000) for the API. The React frontend is served by Vite dev server on port 5173, with API calls proxied to the Express server on port 3000.
 
-5. Add some items to the todo list to test data persistence.
+1. Add some items to the todo list to test data persistence.
 
-6. After adding some items to the todo list, press `CTRL + C` in the terminal to stop your application.
+1. After adding some items to the todo list, press `CTRL + C` in the terminal to stop your application.
 
-7. Run the application again:
+1. Run the application again:
 
-   ```console
-   $ docker compose up app-dev
-   ```
+  ```console
+  $ docker compose up app-dev
+  ```
 
-8. Refresh [http://localhost:5173](http://localhost:5173) in your browser and verify that the todo items persisted, even after the containers were removed and ran again.
+1. Refresh [http://localhost:5173](http://localhost:5173) in your browser and verify that the todo items persisted, even after the containers were removed and ran again.
 
 ## Configure and run a development container
 
@@ -355,7 +355,7 @@ $ npm run db:start    # Start PostgreSQL container
 $ npm run dev         # Start both server and client
 ```
 
-### Using Task Runner (Alternative)
+### Using Task Runner (alternative)
 
 The project includes a comprehensive Taskfile.yml for advanced workflows:
 
@@ -397,55 +397,55 @@ Any changes to the application's source files on your local machine will now be 
 Try making a change to test hot reloading:
 
 1. Open `src/client/components/TodoApp.tsx` in an IDE or text editor
-2. Update the main heading text:
+1. Update the main heading text:
 
-```diff
-- <h1 className="text-3xl font-bold text-gray-900 mb-8">
--   Modern Todo App
-- </h1>
-+ <h1 className="text-3xl font-bold text-gray-900 mb-8">
-+   My Todo App
-+ </h1>
-```
+  ```diff
+    - <h1 className="text-3xl font-bold text-gray-900 mb-8">
+    -   Modern Todo App
+    - </h1>
+    + <h1 className="text-3xl font-bold text-gray-900 mb-8">
+    +   My Todo App
+    + </h1>
+  ```
 
 1. Save the file and the Vite dev server will automatically reload the page with your changes
 
-**Debugging Support:**
+**Debugging support:**
 
 You can connect a debugger to your application on port 9229. The Node.js inspector is enabled with `--inspect=0.0.0.0:9230` in the development script (`dev:server`).
 
-### VS Code Debugger Setup
+### VS Code debugger setup
 
-1. **Create a launch configuration** in `.vscode/launch.json`:
+1. Create a launch configuration in `.vscode/launch.json`:
 
-```json
-{
-  "version": "0.2.0",
-  "configurations": [
+  ```json
     {
-      "name": "Attach to Docker Container",
-      "type": "node",
-      "request": "attach",
-      "port": 9229,
-      "address": "localhost",
-      "localRoot": "${workspaceFolder}",
-      "remoteRoot": "/app",
-      "protocol": "inspector",
-      "restart": true,
-      "sourceMaps": true,
-      "skipFiles": ["<node_internals>/**"]
+      "version": "0.2.0",
+      "configurations": [
+        {
+          "name": "Attach to Docker Container",
+          "type": "node",
+          "request": "attach",
+          "port": 9229,
+          "address": "localhost",
+          "localRoot": "${workspaceFolder}",
+          "remoteRoot": "/app",
+          "protocol": "inspector",
+          "restart": true,
+          "sourceMaps": true,
+          "skipFiles": ["<node_internals>/**"]
+        }
+      ]
     }
-  ]
-}
 ```
 
-1. **Start your development container**:
+1. Start your development container:
 
-```console
-docker compose up app-dev --build
-```
+  ```console
+  docker compose up app-dev --build
+  ```
 
-1. **Attach the debugger**:
+1. Attach the debugger:
    - Open VS Code
    - Go to the Debug panel (Ctrl/Cmd + Shift + D)
    - Select "Attach to Docker Container" from the drop-down
@@ -455,27 +455,27 @@ docker compose up app-dev --build
 
 You can also use Chrome DevTools for debugging:
 
-1. **Start your container** (if not already running):
+1. Start your container (if not already running):
 
-```console
-docker compose up app-dev --build
-```
+  ```console
+    docker compose up app-dev --build
+  ```
 
-1. **Open Chrome** and navigate to:
+1. Open Chrome and navigate to:
 
-```text
-chrome://inspect
-```
+  ```text
+  chrome://inspect
+  ```
 
-1. **Select "Configure"** and add:
+1. Select **Configure** and add:
 
-```text
-localhost:9229
-```
+  ```text
+  localhost:9229
+  ```
 
-1. **Select "inspect"** under your Node.js target when it appears
+1. Select **inspect** under your Node.js target when it appears.
 
-### Debugging Configuration Details
+### Debugging configuration details
 
 The debugger configuration:
 
@@ -485,32 +485,32 @@ The debugger configuration:
 
 The debugger listens on all interfaces (`0.0.0.0`) inside the container on port 9230 and is accessible on port 9229 from your host machine.
 
-### Troubleshooting Debugger Connection
+### Troubleshooting debugger connection
 
 If the debugger doesn't connect:
 
-1. **Check if the container is running**:
+1. Check if the container is running:
 
-```console
-docker ps
-```
+  ```console
+  docker ps
+  ```
 
-1. **Check if the port is exposed**:
+1. Check if the port is exposed:
 
-```console
-docker port todoapp-dev
-```
+  ```console
+  docker port todoapp-dev
+  ```
 
-1. **Check container logs**:
+1. Check container logs:
 
-```console
-docker compose logs app-dev
-```
+  ```console
+  docker compose logs app-dev
+  ```
 
-You should see a message like:
+  You should see a message like:
 
-```text
-Debugger listening on ws://0.0.0.0:9230/...
+  ```text
+  Debugger listening on ws://0.0.0.0:9230/...
 ```
 
 Now you can set breakpoints in your TypeScript source files and debug your containerized Node.js application!

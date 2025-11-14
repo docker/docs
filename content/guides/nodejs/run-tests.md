@@ -122,7 +122,7 @@ You should see output like the following:
    Duration  1.98s (transform 456ms, setup 1.26s, collect 1.74s, tests 1.87s, environment 5.82s, prepare 916ms)
 ```
 
-### Test Structure
+### Test structure
 
 The test suite covers:
 
