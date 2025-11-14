@@ -25,7 +25,7 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-deprecated: false
+deprecated: true
 hidden: true
 experimental: false
 experimentalcli: false
