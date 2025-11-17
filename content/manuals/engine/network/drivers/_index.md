@@ -66,12 +66,7 @@ exist by default, and provide core networking functionality:
 - Third-party network plugins allow you to integrate Docker with specialized
   network stacks.
 
-## Networking tutorials
+## Next steps
 
-Now that you understand the basics about Docker networks, deepen your
-understanding using the following tutorials:
-
-- [Standalone networking tutorial](/manuals/engine/network/tutorials/standalone.md)
-- [Host networking tutorial](/manuals/engine/network/tutorials/host.md)
-- [Overlay networking tutorial](/manuals/engine/network/tutorials/overlay.md)
-- [Macvlan networking tutorial](/manuals/engine/network/tutorials/macvlan.md)
+Each driver page includes detailed explanations, configuration options, and
+hands-on usage examples to help you work with that driver effectively.
