@@ -39,12 +39,71 @@ $ git clone https://github.com/docker/docker-dotnet-sample
 
 ## Initialize Docker assets
 
-Now that you have an application, you can use `docker init` to create the
-necessary Docker assets to containerize your application. Inside the
-`docker-dotnet-sample` directory, run the `docker init` command in a terminal.
-`docker init` provides some default configuration, but you'll need to answer a
-few questions about your application. Refer to the following example to answer
-the prompts from `docker init` and use the same answers for your prompts.
+Now that you have an application, you can create the necessary Docker assets to containerize it. You can choose between using the official .NET images or Docker Hardened Images (DHI).
+
+> [Docker Hardened Images (DHIs)](https://docs.docker.com/dhi/) are minimal, secure, and production-ready container base and application images maintained by Docker. DHI images are recommended for better security—they are designed to reduce vulnerabilities and simplify compliance.
+
+> **Note**: DHI for .NET 10 is not yet available. The following DHI example uses .NET 9. Check the [DHI catalog](https://hub.docker.com/hardened-images/catalog) for .NET 10 availability, or use the official image tab below for .NET 10.
+
+{{< tabs >}}
+{{< tab name="Using Docker Hardened Images (.NET 9)" >}}
+
+Docker Hardened Images (DHIs) for .NET are available on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/aspnetcore). Unlike using the Docker Official Image, you must first mirror the image into your organization. Follow the instructions in the [DHI quickstart](/dhi/get-started/) to create a mirrored repository.
+
+Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace>/dhi-aspnetcore:<tag>`.
+
+You can use `docker init` to generate Docker assets, then modify the Dockerfile to use DHI images:
+
+```console
+$ docker init
+Welcome to the Docker Init CLI!
+
+This utility will walk you through creating the following files with sensible defaults for your project:
+  - .dockerignore
+  - Dockerfile
+  - compose.yaml
+  - README.Docker.md
+
+Let's get started!
+
+? What application platform does your project use? ASP.NET Core
+? What's the name of your solution's main project? myWebApp
+? What version of .NET do you want to use? 9.0
+? What local port do you want to use to access your server? 8080
+```
+
+Then update your Dockerfile to use DHI images:
+
+```dockerfile {title=Dockerfile}
+# syntax=docker/dockerfile:1
+
+FROM --platform=$BUILDPLATFORM <your-namespace>/dhi-dotnet:9.0-alpine AS build
+ARG TARGETARCH
+COPY . /source
+WORKDIR /source/src
+RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
+    dotnet publish -a ${TARGETARCH/amd64/x64} --use-current-runtime --self-contained false -o /app
+
+FROM <your-namespace>/dhi-aspnetcore:9.0-alpine AS final
+WORKDIR /app
+COPY --from=build /app .
+ARG UID=10001
+RUN adduser \
+    --disabled-password \
+    --gecos "" \
+    --home "/nonexistent" \
+    --shell "/sbin/nologin" \
+    --no-create-home \
+    --uid "${UID}" \
+    appuser
+USER appuser
+ENTRYPOINT ["dotnet", "myWebApp.dll"]
+```
+
+{{< /tab >}}
+{{< tab name="Using the official .NET 10 image" >}}
+
+You can use `docker init` to create the necessary Docker assets. Inside the `docker-dotnet-sample` directory, run the `docker init` command in a terminal. `docker init` provides some default configuration, but you'll need to answer a few questions about your application. Refer to the following example to answer the prompts from `docker init` and use the same answers for your prompts.
 
 ```console
 $ docker init
@@ -64,6 +123,37 @@ Let's get started!
 ? What local port do you want to use to access your server? 8080
 ```
 
+This generates a Dockerfile using the official .NET 10 images from Microsoft Container Registry:
+
+```dockerfile {title=Dockerfile}
+# syntax=docker/dockerfile:1
+
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0-alpine AS build
+ARG TARGETARCH
+COPY . /source
+WORKDIR /source/src
+RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
+    dotnet publish -a ${TARGETARCH/amd64/x64} --use-current-runtime --self-contained false -o /app
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0-alpine AS final
+WORKDIR /app
+COPY --from=build /app .
+ARG UID=10001
+RUN adduser \
+    --disabled-password \
+    --gecos "" \
+    --home "/nonexistent" \
+    --shell "/sbin/nologin" \
+    --no-create-home \
+    --uid "${UID}" \
+    appuser
+USER appuser
+ENTRYPOINT ["dotnet", "myWebApp.dll"]
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
 You should now have the following contents in your `docker-dotnet-sample`
 directory.
 
@@ -78,7 +168,7 @@ directory.
 │ └── README.md
 ```
 
-To learn more about the files that `docker init` added, see the following:
+To learn more about the files, see the following:
  - [Dockerfile](/reference/dockerfile.md)
  - [.dockerignore](/reference/dockerfile.md#dockerignore-file)
  - [compose.yaml](/reference/compose-file/_index.md)
@@ -126,6 +216,7 @@ Related information:
  - [Dockerfile reference](/reference/dockerfile.md)
  - [.dockerignore file reference](/reference/dockerfile.md#dockerignore-file)
  - [Docker Compose overview](/manuals/compose/_index.md)
+ - [Docker Hardened Images](/dhi/)
 
 ## Next steps
 
