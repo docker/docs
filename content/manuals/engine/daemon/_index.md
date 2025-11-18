@@ -98,13 +98,24 @@ The Docker daemon persists all data in a single directory. This tracks
 everything related to Docker, including containers, images, volumes, service
 definition, and secrets.
 
-By default this directory is:
+By default the daemon stores data in:
 
-- `/var/lib/docker` on Linux.
-- `C:\ProgramData\docker` on Windows.
+- `/var/lib/docker` on Linux
+- `C:\ProgramData\docker` on Windows
 
-You can configure the Docker daemon to use a different directory, using the
-`data-root` configuration option. For example:
+When using the [containerd image store](/manuals/engine/storage/containerd.md)
+(the default for Docker Engine 29.0 and later on fresh installations), image
+contents and container snapshots are stored in `/var/lib/containerd`. Other
+daemon data (volumes, configs) remains in `/var/lib/docker`.
+
+When using [classic storage drivers](/manuals/engine/storage/drivers/_index.md)
+like `overlay2` (the default for upgraded installations), all data is stored in
+`/var/lib/docker`.
+
+### Configure the data directory location
+
+You can configure the Docker daemon to use a different storage directory using
+the `data-root` configuration option.
 
 ```json
 {
@@ -112,10 +123,19 @@ You can configure the Docker daemon to use a different directory, using the
 }
 ```
 
-Since the state of a Docker daemon is kept on this directory, make sure you use
-a dedicated directory for each daemon. If two daemons share the same directory,
-for example, an NFS share, you are going to experience errors that are difficult
-to troubleshoot.
+The `data-root` option does not affect image and container data stored in
+`/var/lib/containerd` when using the containerd image store. To change the
+storage location of containerd snapshotters, use the system containerd
+configuration file:
+
+```toml {title="/etc/containerd/config.toml"}
+version = 2
+root = "/mnt/containerd-data"
+```
+
+Make sure you use a dedicated directory for each daemon. If two daemons share
+the same directory, for example an NFS share, you will experience errors that
+are difficult to troubleshoot.
 
 ## Next steps
 
