@@ -379,7 +379,7 @@ secrets:
     file: db/password.txt
 ```
 
-Your containerized application will now use the `mcr.microsoft.com/dotnet/sdk:8.0-alpine` image, which includes development tools like `dotnet test`. Continue to the next section to learn how you can run `dotnet test`.
+Your containerized application will now use the `mcr.microsoft.com/dotnet/sdk:10.0-alpine` image, which includes development tools like `dotnet test`. Continue to the next section to learn how you can run `dotnet test`.
 
 ## Summary
 
