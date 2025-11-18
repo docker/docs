@@ -34,7 +34,7 @@ Open a terminal, change directory to a directory that you want to work in, and
 run the following command to clone the repository.
 
 ```console
-$ git clone https://github.com/docker/docker-dotnet-sample
+$ git clone https://github.com/docker/docker-dotnet-sample && cd docker-dotnet-sample
 ```
 
 ## Initialize Docker assets
