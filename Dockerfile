@@ -53,13 +53,12 @@ RUN --mount=type=cache,target=/tmp/hugo_cache \
     hugo --gc --minify -e $HUGO_ENV -b $DOCS_URL
 
 # lint lints markdown files
-FROM davidanson/markdownlint-cli2:v0.14.0 AS lint
-USER root
+FROM ghcr.io/igorshubovych/markdownlint-cli:v0.45.0 AS lint
 RUN --mount=type=bind,target=. \
-    /usr/local/bin/markdownlint-cli2 \
+    markdownlint \
     "content/**/*.md" \
-    "#content/manuals/engine/release-notes/*.md" \
-    "#content/manuals/desktop/previous-versions/*.md"
+    --ignore "content/manuals/engine/release-notes/*.md" \
+    --ignore "content/manuals/desktop/previous-versions/*.md"
 
 # test validates HTML output and checks for broken links
 FROM wjdp/htmltest:v${HTMLTEST_VERSION} AS test

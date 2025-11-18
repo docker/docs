@@ -1,0 +1,23 @@
+command: docker mcp registry convert
+short: Convert OCI registry server definition to catalog server format
+long: Convert OCI registry server definition to catalog server format
+usage: docker mcp registry convert
+pname: docker mcp registry
+plink: docker_mcp_registry.yaml
+options:
+    - option: file
+      value_type: string
+      description: Path to the OCI registry server definition JSON file
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: true
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

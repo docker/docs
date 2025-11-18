@@ -22,7 +22,7 @@ This information includes:
 To edit this information:
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin) and
-select your organization.
+select your organization from the top-left account drop-down.
 1. Enter or update your organization’s details, then select **Save**.
 
 ## Next steps

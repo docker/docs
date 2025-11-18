@@ -55,14 +55,20 @@ offers several key advantages when working with Docker Hardened Images:
   ensuring compatibility and simplifying verification for users within the
   Docker ecosystem.
 
-In short, Docker Scout streamlines the verification process and reduces the chances of human error, while still giving you full visibility and the option to fall back to cosign when needed.
+In short, Docker Scout streamlines the verification process and reduces the chances of human error, while still giving
+you full visibility and the option to fall back to cosign when needed.
 
 ### List available attestations
 
 To list attestations for a mirrored DHI:
 
+> [!NOTE]
+>
+> If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
+> `registry://docs/dhi-python:3.13` instead of `docs/dhi-python:3.13`.
+
 ```console
-$ docker scout attest list <your-org-namespace>/dhi-<image>:<tag> --platform <platform>
+$ docker scout attest list <your-org-namespace>/dhi-<image>:<tag>
 ```
 
 This command shows all available attestations, including SBOMs, provenance, vulnerability reports, and more.
@@ -73,34 +79,39 @@ To retrieve a specific attestation, use the `--predicate-type` flag with the ful
 
 ```console
 $ docker scout attest get \
-  --predicate-type https://cyclonedx.org/bom/v1.5 \
-  <your-org-namespace>/dhi-<image>:<tag> --platform <platform>
+  --predicate-type https://cyclonedx.org/bom/v1.6 \
+  <your-org-namespace>/dhi-<image>:<tag>
 ```
+
+> [!NOTE]
+>
+> If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
+> `registry://docs/dhi-python:3.13` instead of `docs/dhi-python:3.13`.
 
 For example:
 
 ```console
 $ docker scout attest get \
-  --predicate-type https://cyclonedx.org/bom/v1.5 \
-  docs/dhi-python:3.13 --platform linux/amd64
+  --predicate-type https://cyclonedx.org/bom/v1.6 \
+  docs/dhi-python:3.13
 ```
 
 To retrieve only the predicate body:
 
 ```console
 $ docker scout attest get \
-  --predicate-type https://cyclonedx.org/bom/v1.5 \
+  --predicate-type https://cyclonedx.org/bom/v1.6 \
   --predicate \
-  <your-org-namespace>/dhi-<image>:<tag> --platform <platform>
+  <your-org-namespace>/dhi-<image>:<tag>
 ```
 
 For example:
 
 ```console
 $ docker scout attest get \
-  --predicate-type https://cyclonedx.org/bom/v1.5 \
+  --predicate-type https://cyclonedx.org/bom/v1.6 \
   --predicate \
-  docs/dhi-python:3.13 --platform linux/amd64
+  docs/dhi-python:3.13
 ```
 
 ### Validate the attestation with Docker Scout
@@ -112,12 +123,60 @@ $ docker scout attest get <image-name>:<tag> \
    --predicate-type https://scout.docker.com/sbom/v0.1 --verify
 ```
 
+> [!NOTE]
+>
+> If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
+> `registry://docs/dhi-node:20.19-debian12-fips-20250701182639` instead of
+> `docs/dhi-node:20.19-debian12-fips-20250701182639`.
+
+
 For example, to verify the SBOM attestation for the `dhi/node:20.19-debian12-fips-20250701182639` image:
 
 ```console
 $ docker scout attest get docs/dhi-node:20.19-debian12-fips-20250701182639 \
    --predicate-type https://scout.docker.com/sbom/v0.1 --verify
 ```
+
+#### Handle missing transparency log entries
+
+When using `--verify`, you may sometimes see an error like:
+
+```text
+ERROR no matching signatures: signature not found in transparency log
+```
+
+This occurs because Docker Hardened Images don't always record attestations in
+the public [Rekor](https://docs.sigstore.dev/logging/overview/) transparency
+log. In cases where an attestation would contain private user information (for
+example, your organization's namespace in the image reference), writing it to
+Rekor would expose that information publicly.
+
+Even if the Rekor entry is missing, the attestation is still signed with
+Docker's public key and can be verified offline by skipping the Rekor
+transparency log check.
+
+To skip the transparency log check and validate against Docker's key, use the
+`--skip-tlog` flag:
+
+```console
+$ docker scout attest get \
+  --predicate-type https://cyclonedx.org/bom/v1.6 \
+  <your-org-namespace>/dhi-<image>:<tag> \
+  --verify --skip-tlog
+```
+
+> [!NOTE]
+>
+> The `--skip-tlog` flag is only available in Docker Scout CLI version 1.18.2 and
+> later.
+>
+> If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
+> `registry://docs/dhi-python:3.13` instead of `docs/dhi-python:3.13`.
+
+
+This is equivalent to using `cosign` with the `--insecure-ignore-tlog=true`
+flag, which validates the signature against Docker's published public key, but
+ignores the transparency log check.
 
 ### Show the equivalent cosign command
 
@@ -126,18 +185,23 @@ When using the `--verify` flag, it also prints the corresponding
 
 ```console
 $ docker scout attest get \
-  --predicate-type https://cyclonedx.org/bom/v1.5 \
+  --predicate-type https://cyclonedx.org/bom/v1.6 \
   --verify \
-  <your-org-namespace>/dhi-<image>:<tag> --platform <platform>
+  <your-org-namespace>/dhi-<image>:<tag>
 ```
+
+> [!NOTE]
+>
+> If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
+> `registry://docs/dhi-python:3.13` instead of `docs/dhi-python:3.13`.
 
 For example:
 
 ```console
 $ docker scout attest get \
-  --predicate-type https://cyclonedx.org/bom/v1.5 \
+  --predicate-type https://cyclonedx.org/bom/v1.6 \
   --verify \
-  docs/dhi-python:3.13 --platform linux/amd64
+  docs/dhi-python:3.13
 ```
 
 If verification succeeds, Docker Scout prints the full `cosign verify` command.

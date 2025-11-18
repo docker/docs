@@ -11,7 +11,7 @@ description: Learn how to deploy locally to test and debug your Kubernetes deplo
 
 Before you begin, make sure you’ve completed the following:
 - Complete all the previous sections of this guide, starting with [Containerize Angular application](containerize.md).
-- [Enable Kubernetes](/manuals/desktop/features/kubernetes.md#install-and-turn-on-kubernetes) in Docker Desktop.
+- [Enable Kubernetes](/manuals/desktop/use-desktop/kubernetes.md#enable-kubernetes) in Docker Desktop.
 
 > **New to Kubernetes?**  
 > Visit the [Kubernetes basics tutorial](https://kubernetes.io/docs/tutorials/kubernetes-basics/) to get familiar with how clusters, pods, deployments, and services work.
@@ -195,7 +195,7 @@ What you accomplished:
 Explore official references and best practices to sharpen your Kubernetes deployment workflow:
 
 - [Kubernetes documentation](https://kubernetes.io/docs/home/) – Learn about core concepts, workloads, services, and more.  
-- [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/features/kubernetes.md) – Use Docker Desktop’s built-in Kubernetes support for local testing and development.
+- [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/use-desktop/kubernetes.md) – Use Docker Desktop’s built-in Kubernetes support for local testing and development.
 - [`kubectl` CLI reference](https://kubernetes.io/docs/reference/kubectl/) – Manage Kubernetes clusters from the command line.  
 - [Kubernetes Deployment resource](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) – Understand how to manage and scale applications using Deployments.  
 - [Kubernetes Service resource](https://kubernetes.io/docs/concepts/services-networking/service/) – Learn how to expose your application to internal and external traffic.

@@ -15,6 +15,31 @@ issues for Docker Service APIs.
 
 ---
 
+## 2025-09-25
+
+### Updates
+
+- Fix [Assign repository group](/reference/api/hub/latest/#tag/repositories/operation/CreateRepositoryGroup) endpoints request/response
+
+---
+
+## 2025-09-19
+
+### New
+
+- Add [Create repository](/reference/api/hub/latest/#tag/repositories/operation/CreateRepository) endpoints for a given `namespace`.
+- Add [Get repository](/reference/api/hub/latest/#tag/repositories/operation/GetRepository) endpoints for a given `namespace`.
+- Add [Check repository](/reference/api/hub/latest/#tag/repositories/operation/CheckRepository) endpoints for a given `namespace`.
+
+### Deprecations
+
+- [Deprecate POST /v2/repositories](/reference/api/hub/deprecated/#deprecate-legacy-createrepository)
+- [Deprecate POST /v2/repositories/{namespace}](/reference/api/hub/deprecated/#deprecate-legacy-createrepository)
+- [Deprecate GET /v2/repositories/{namespace}/{repository}](/reference/api/hub/deprecated/#deprecate-legacy-getrepository)
+- [Deprecate HEAD /v2/repositories/{namespace}/{repository}](/reference/api/hub/deprecated/#deprecate-legacy-getrepository)
+
+---
+
 ## 2025-07-29
 
 ### New

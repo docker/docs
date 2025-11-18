@@ -7,7 +7,7 @@ aliases:
   - /trusted-content/dsos-program/
 ---
 
-[Docker-Sponsored Open Source images](https://hub.docker.com/search?q=&image_filter=open_source) are published and maintained by open-source projects sponsored by Docker through the program.
+[Docker-Sponsored Open Source images](https://hub.docker.com/search?badges=open_source) are published and maintained by open-source projects sponsored by Docker through the program.
 
 Images that are part of this program have a special badge on Docker Hub making it easier for users to identify projects that Docker has verified as trusted, secure, and active open-source projects.
 
@@ -31,8 +31,7 @@ These benefits are valid for one year and publishers can renew annually if the p
 DSOS organizations can upload custom images for individual repositories on Docker Hub.
 This lets you override the default organization-level logo on a per-repository basis.
 
-Only a user with administrative access (owner or team member with administrator permission)
-over the repository can change the repository logo.
+Only a user with an owner or editor role for the organization can change the repository logo.
 
 #### Image requirements
 

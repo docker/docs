@@ -7,14 +7,15 @@ Manage MCP servers and clients
 
 | Name                        | Description                   |
 |:----------------------------|:------------------------------|
-| [`catalog`](mcp_catalog.md) | Manage the catalog            |
+| [`catalog`](mcp_catalog.md) | Manage MCP server catalogs    |
 | [`client`](mcp_client.md)   | Manage MCP clients            |
 | [`config`](mcp_config.md)   | Manage the configuration      |
+| [`feature`](mcp_feature.md) | Manage experimental features  |
 | [`gateway`](mcp_gateway.md) | Manage the MCP Server gateway |
 | [`policy`](mcp_policy.md)   | Manage secret policies        |
 | [`secret`](mcp_secret.md)   | Manage secrets                |
 | [`server`](mcp_server.md)   | Manage servers                |
-| [`tools`](mcp_tools.md)     | List/count/call MCP tools     |
+| [`tools`](mcp_tools.md)     | Manage tools                  |
 | [`version`](mcp_version.md) | Show the version information  |
 
 

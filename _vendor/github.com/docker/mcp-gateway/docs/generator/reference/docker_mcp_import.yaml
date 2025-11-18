@@ -1,0 +1,49 @@
+command: docker mcp import
+short: Import a server
+long: |-
+    Import and parse a server definition from an official MCP registry URL.
+
+    This command fetches the server definition from the provided URL, parses it as a ServerDetail,
+    converts it to the internal Server format, and displays the results.
+
+    Example:
+      docker mcp officialregistry import https://registry.example.com/servers/my-server
+usage: docker mcp import
+pname: docker mcp
+plink: docker_mcp.yaml
+options:
+    - option: catalog
+      value_type: string
+      description: import to local catalog
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: mcp-registry
+      value_type: string
+      description: import from MCP registry format
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: push
+      value_type: bool
+      default_value: "false"
+      description: push the new server artifact
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

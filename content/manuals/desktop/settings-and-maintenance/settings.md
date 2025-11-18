@@ -22,6 +22,8 @@ You can also locate the `settings-store.json` file (or `settings.json` for Docke
  - Windows: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings-store.json`
  - Linux: `~/.docker/desktop/settings-store.json`
 
+For additional information on settings that can be set in the Docker Desktop Dashboard and by administrators via the Admin Console, see the [Settings reference](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md).
+
 ## General
 
 On the **General** tab, you can configure when to start Docker and specify other settings:
@@ -233,15 +235,17 @@ containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 ### Proxies
 
-Docker Desktop supports the use of HTTP/HTTPS and [SOCKS5 proxies](/manuals/desktop/features/networking.md#socks5-proxy-support).
+Docker Desktop supports the use of HTTP/HTTPS and SOCKS5 proxies (Requires a business subscription).
 
-HTTP/HTTPS proxies can be used when:
+HTTP/HTTPS and SOCKS5 proxies can be used when:
 
 - Signing in to Docker
 - Pulling or pushing images
 - Fetching artifacts during image builds
 - Containers interact with the external network
 - Scanning images
+
+For more details on how it works, see [Using Docker Desktop with a proxy](/manuals/desktop/features/networking/index.md#useing-docker-desktop-with-a-proxy).
 
 If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration (PAC)), Docker Desktop reads
 this configuration
@@ -427,9 +431,9 @@ You can only start and stop builders using the `docker-container` driver.
 Docker Desktop includes a standalone Kubernetes server, so that you can test
 deploying your Docker workloads on Kubernetes. To turn on Kubernetes support and
 install a standalone instance of Kubernetes running as a Docker container,
-select **Enable Kubernetes**.
+select **Enable Kubernetes**. This can also be done from the **Kubernetes** view. 
 
-With Docker Desktop version 4.38 and later, you can choose your cluster provisioning method:
+You can choose your cluster provisioning method:
  - **Kubeadm** creates a single-node cluster and the version is set by Docker Desktop.
  - **kind** creates a multi-node cluster and you can set the version and number of nodes. 
 
@@ -439,28 +443,23 @@ using Docker commands.
 Select **Reset Kubernetes cluster** to delete all stacks and Kubernetes resources.
 
 For more information about using the Kubernetes integration with Docker Desktop,
-see [Deploy on Kubernetes](/manuals/desktop/features/kubernetes.md).
+see [Explore the Kubernetes view](/manuals/desktop/use-desktop/kubernetes.md).
 
-## Software Updates
+## Software updates
 
-The **Software Updates** tab notifies you of any updates available to Docker Desktop.
+The **Software updates** tab lets you manage your Docker Desktop updates. 
 When there's a new update, you can choose to download the update right away, or
 select the **Release Notes** option to learn what's included in the updated version.
 
-Turn off the check for updates by clearing the **Automatically check for updates**
-check box. This disables notifications in the Docker menu and the notification
-badge that appears on the Docker Desktop Dashboard. To check for updates manually, select
-the **Check for updates** option in the Docker menu.
+The **Automatically check for updates** setting notifies you of any updates available to Docker Desktop in the Docker menu and the footer of the Docker Desktop Dashboard. This is turned on by default. 
 
 To allow Docker Desktop to automatically download new updates in the background,
 select **Always download updates**. This downloads newer versions of Docker Desktop
 when an update becomes available. After downloading the update, select
-**Apply and Restart** to install the update. You can do this either through the
+**Apply and restart** to install the update. You can do this either through the
 Docker menu or in the **Updates** section in the Docker Desktop Dashboard.
 
-> [!TIP]
-> 
-> With Docker Desktop version 4.38 and later, components of Docker Desktop, such as Docker Compose, Docker Scout, and the Docker CLI, can be updated independently without the need for a full restart. This feature is still in Beta. 
+The **Automatically update components** setting checks whether components of Docker Desktop, such as Docker Compose, Docker Scout, and the Docker CLI, can be updated independently without the need for a full restart. This is turned on by default. 
 
 ## Extensions
 
@@ -524,3 +523,15 @@ On Mac, you can reconfigure your initial installation settings  on the **Advance
 - **Allow privileged port mapping (Requires password)**. Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#binding-privileged-ports).
 
 For more information on each configuration and use case, see [Permission requirements](/manuals/desktop/setup/install/mac-permission-requirements.md).
+
+## Docker Offload
+
+When signed in with a Docker account that has access to [Docker Offload](../../offload/_index.md), you can manage your
+Offload settings from the **Docker Offload** tab.
+
+Use the **Docker Offload** tab to:
+
+- Toggle **Enable Docker Offload**. When enabled, you can start Offload sessions.
+- Select **Idle timeout**. This is the duration of time between no activity and Docker Offload entering idle mode.For
+  details about idle timeout, see [Active and idle states](../../offload/configuration.md#understand-active-and-idle-states)
+- Check **Enable GPU support**. When enabled, workloads can use cloud GPU if available.

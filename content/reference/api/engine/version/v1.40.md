@@ -1,6 +1,0 @@
----
-linkTitle: v1.40
-title: Docker Engine API v1.40 reference
-aliases:
-  - /engine/api/v1.40/
----

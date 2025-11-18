@@ -31,12 +31,18 @@ Build entitlements:
   requires: Docker Compose [2.27.1](/manuals/compose/releases/release-notes.md#2271) and later
 Build multiple exporters:
   requires: Docker Buildx [0.13.0](/manuals/build/release-notes.md#0130) and later
+Build URL Queries:
+  requires: Docker Buildx [0.28.0](/manuals/build/release-notes.md#0280) and later, Dockerfile [1.18.0](/manuals/build/buildkit/dockerfile-release-notes.md#1180) and later, and Docker Desktop [4.46.0](/manuals/desktop/release-notes.md#4460) and later
 Buildkit host:
   requires: Docker Buildx [0.9.0](/manuals/build/release-notes.md#090) and later
 Build privileged:
   requires: Docker Compose [2.15.0](/manuals/compose/releases/release-notes.md#2) and later
 Build ulimits:
   requires: Docker Compose [2.23.1](/manuals/compose/releases/release-notes.md#2231) and later
+Buildx bake file:
+  requires: Docker Buildx [0.26.0](/manuals/build/release-notes.md#0260) and later
+Buildx bake file separator:
+  requires: Docker Buildx [0.26.0](/manuals/build/release-notes.md#0260) and later
 Buildx bake Git auth token:
   requires: Docker Buildx [0.14.0](/manuals/build/release-notes.md#0140) and later
 Buildx bake Git SSH:
@@ -58,6 +64,8 @@ Buildx metadata warnings:
 Buildx no default:
   requires: Docker Buildx [0.10.4](/manuals/build/release-notes.md#0104) and later
 Cache backend API:
+  availability: Experimental
+cagent:
   availability: Experimental
 Company:
   subscription: [Business]
@@ -142,13 +150,12 @@ Docker Build Cloud:
 Docker CLI OpenTelemetry:
   requires: Docker Engine [26.1.0](/manuals/engine/release-notes/26.1.md#2610) and later
 Docker Offload:
-  availability: Beta
-  requires: Docker Desktop 4.43 and later
+  availability: Early Access
+  requires: Docker Desktop 4.50 and later
 docker compose alpha:
   availability: Experimental
 Docker Debug:
-  subscription: [Pro, Team, Business]
-  requires: Docker Desktop [4.33.0](/manuals/desktop/release-notes.md#4330) and later
+  requires: Docker Desktop 4.49 and later. For Docker Desktop versions 4.48.0 and earlier, you must have a Pro, Team, or Business subscription
 Docker Desktop Archlinux:
   availability: Experimental
 Docker Desktop CLI:
@@ -159,14 +166,14 @@ Docker Desktop CLI logs:
   requires: Docker Desktop 4.39 and later
 Docker Desktop CLI kubernetes:
   requires: Docker Desktop 4.44 and later
-Docker GitHub Copilot:
-  availability: Early Access
 Docker Hardened Images:
+  subscription: [Docker Hardened Images]
+Docker Hardened Image charts:
+  availability: Early Access
   subscription: [Docker Hardened Images]
 Docker Init:
   requires: Docker Desktop [4.27](/manuals/desktop/release-notes.md#4270) and later
 Docker Model Runner:
-  availability: Beta
   requires: Docker Engine or Docker Desktop (Windows) 4.41+ or Docker Desktop (MacOS) 4.40+
   for: See Requirements section below
 Docker MCP Catalog and Toolkit:
@@ -177,6 +184,9 @@ Docker MCP Toolkit:
   availability: Beta
 Docker Projects:
   availability: Beta
+Docker Sandboxes:
+  availability: Experimental
+  requires: Docker Desktop [4.50](/manuals/desktop/release-notes.md#4500) or later
 Docker Scout exceptions:
   availability: Experimental
   requires: Docker Scout CLI [1.15.0](/manuals/scout/release-notes/cli.md#1150) and later
@@ -226,6 +236,8 @@ MSI installer:
   requires: Docker Desktop [4.32](/manuals/desktop/release-notes.md#4320) and later
   for: Administrators
 OATs:
+  subscription: [Team, Business]
+Pay by invoice:
   subscription: [Team, Business]
 PKG installer:
   subscription: [Business]

@@ -37,4 +37,4 @@ Docker Desktop is built using open-source software. For information about the li
 ## Open source components
 
 Docker Desktop distributes some components that are licensed under the
-GNU General Public License. Select [here](https://download.docker.com/opensource/License.tar.gz) to download the source for these components.
+GNU General Public License. [Download the source code for these components here](https://download.docker.com/opensource/License.tar.gz).

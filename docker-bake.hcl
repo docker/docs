@@ -130,14 +130,6 @@ target "_common-aws" {
   provenance = false
 }
 
-target "aws-s3-update-config" {
-  inherits = ["_common-aws"]
-  context = "hack/releaser"
-  target = "aws-s3-update-config"
-  no-cache-filter = ["aws-update-config"]
-  output = ["type=cacheonly"]
-}
-
 target "aws-lambda-invoke" {
   inherits = ["_common-aws"]
   context = "hack/releaser"

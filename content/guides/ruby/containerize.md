@@ -26,12 +26,18 @@ If you have an existing Rails application, you will need to create the Docker as
 
 ## 1. Initialize Docker assets
 
-Rails 7.1 generates multistage Dockerfile out of the box, below is an example of such file generated from a Rails template.
+Rails 7.1 and newer generates multistage Dockerfile out of the box. Following are two versions of such a file: one using Docker Hardened Images (DHI) and another using the official Docker image.
+
+> [Docker Hardened Images (DHIs)](https://docs.docker.com/dhi/) are minimal, secure, and production-ready container base and application images maintained by Docker.
+
+DHI images are recommended whenever it is possible for better security. They are designed to reduce vulnerabilities and simplify compliance.
 
 > Multistage Dockerfiles help create smaller, more efficient images by separating build and runtime dependencies, ensuring only necessary components are included in the final image. Read more in the [Multi-stage builds guide](/get-started/docker-concepts/building-images/multi-stage-builds/).
 
 Although the Dockerfile is generated automatically, understanding its purpose and functionality is important. Reviewing the following example is highly recommended.
 
+{{< tabs >}}
+{{< tab name="Using Docker Hardened Images" >}}
 
 ```dockerfile {title=Dockerfile}
 # syntax=docker/dockerfile:1
@@ -44,7 +50,104 @@ Although the Dockerfile is generated automatically, understanding its purpose an
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=3.3.6
+ARG RUBY_VERSION=3.4.7
+FROM <your-namespace>/dhi-ruby:$RUBY_VERSION-dev AS base
+
+# Rails app lives here
+WORKDIR /rails
+
+# Install base packages
+# Replace libpq-dev with sqlite3 if using SQLite, or libmysqlclient-dev if using MySQL
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 libvips libpq-dev && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Set production environment
+ENV RAILS_ENV="production" \
+    BUNDLE_DEPLOYMENT="1" \
+    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_WITHOUT="development"
+
+# Throw-away build stage to reduce size of final image
+FROM base AS build
+
+# Install packages needed to build gems
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential curl git pkg-config libyaml-dev && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Install JavaScript dependencies and Node.js for asset compilation
+#
+# Uncomment the following lines if you are using NodeJS need to compile assets
+#
+# ARG NODE_VERSION=18.12.0
+# ARG YARN_VERSION=1.22.19
+# ENV PATH=/usr/local/node/bin:$PATH
+# RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
+#     /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
+#     npm install -g yarn@$YARN_VERSION && \
+#     npm install -g mjml && \
+#     rm -rf /tmp/node-build-master
+
+# Install application gems
+COPY Gemfile Gemfile.lock ./
+RUN bundle install && \
+    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
+    bundle exec bootsnap precompile --gemfile
+
+# Install node modules
+#
+# Uncomment the following lines if you are using NodeJS need to compile assets
+#
+# COPY package.json yarn.lock ./
+# RUN --mount=type=cache,id=yarn,target=/rails/.cache/yarn YARN_CACHE_FOLDER=/rails/.cache/yarn \
+#     yarn install --frozen-lockfile
+
+# Copy application code
+COPY . .
+
+# Precompile bootsnap code for faster boot times
+RUN bundle exec bootsnap precompile app/ lib/
+
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+
+# Final stage for app image
+FROM base
+
+# Copy built artifacts: gems, application
+COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+COPY --from=build /rails /rails
+
+# Run and own only the runtime files as a non-root user for security
+RUN groupadd --system --gid 1000 rails && \
+    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
+    chown -R rails:rails db log storage tmp
+USER 1000:1000
+
+# Entrypoint prepares the database.
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+# Start server via Thruster by default, this can be overwritten at runtime
+EXPOSE 80
+CMD ["./bin/thrust", "./bin/rails", "server"]
+```
+
+{{< /tab >}}
+{{< tab name="Using the official Docker image" >}}
+
+```dockerfile {title=Dockerfile}
+# syntax=docker/dockerfile:1
+# check=error=true
+
+# This Dockerfile is designed for production, not development.
+# docker build -t app .
+# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name app app
+
+# For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
+
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version
+ARG RUBY_VERSION=3.4.7
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
 # Rails app lives here
@@ -127,6 +230,9 @@ EXPOSE 80
 CMD ["./bin/thrust", "./bin/rails", "server"]
 ```
 
+{{< /tab >}}
+{{< /tabs >}}
+
 The Dockerfile above assumes you are using Thruster together with Puma as an application server. In case you are using any other server, you can replace the last three lines with the following:
 
 ```dockerfile
@@ -135,7 +241,7 @@ EXPOSE 3000
 CMD ["./bin/rails", "server"]
 ```
 
-This Dockerfile uses a script at `./bin/docker-entrypoint` as the container's entrypiont. This script prepares the database and runs the application server. Below is an example of such a script.
+This Dockerfile uses a script at `./bin/docker-entrypoint` as the container's entrypoint. This script prepares the database and runs the application server. Below is an example of such a script.
 
 ```bash {title=docker-entrypoint}
 #!/bin/bash -e
@@ -279,3 +385,4 @@ Related information:
 ## Next steps
 
 In the next section, you'll take a look at how to set up a CI/CD pipeline using GitHub Actions.
+

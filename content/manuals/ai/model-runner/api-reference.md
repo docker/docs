@@ -66,9 +66,9 @@ on how you run Docker:
   DELETE /models/{namespace}/{name}
   ```
 
-### Available OpenAPI endpoints
+### Available OpenAI endpoints
 
-DMR supports the following OpenAPI endpoints:
+DMR supports the following OpenAI endpoints:
 
 - [List models](https://platform.openai.com/docs/api-reference/models/list):
 

@@ -96,6 +96,47 @@ command.
 $ docker buildx bake all
 ```
 
+## Pattern matching for targets and groups
+
+Bake supports shell-style wildcard patterns when specifying target or grouped targets.
+This makes it easier to build multiple targets without listing each one explicitly.
+
+Supported patterns:
+
+- `*` matches any sequence of characters
+- `?` matches any single character
+- `[abc]` matches any character in brackets
+
+> [!NOTE]
+>
+> Always wrap wildcard patterns in quotes. Without quotes, your shell will expand the
+> wildcard to match files in the current directory, which usually causes errors.
+
+Examples: 
+
+```console
+# Match all targets starting with 'foo-'
+$ docker buildx bake "foo-*"
+
+# Match all targets
+$ docker buildx bake "*"
+
+# Matches: foo-baz, foo-caz, foo-daz, etc.
+$ docker buildx bake "foo-?az"
+
+# Matches: foo-bar, boo-bar
+$ docker buildx bake "[fb]oo-bar"
+
+# Matches: mtx-a-b-d, mtx-a-b-e, mtx-a-b-f
+$ docker buildx bake "mtx-a-b-*"
+``` 
+
+You can also combine multiple patterns:
+
+```console
+$ docker buildx bake "foo*" "tests"
+```
+
 ## Additional resources
 
 Refer to the following pages to learn more about Bake's features:

@@ -35,6 +35,16 @@ ensure that the images they pull are signed. Publishers could be individuals
 or organizations manually signing their content or automated software supply
 chains signing content as part of their release process.
 
+> [!NOTE]
+>
+> Docker is retiring DCT for Docker Official Images
+> (DOI). You should start planning to transition to a different image signing
+> and verification solution (like [Sigstore](https://www.sigstore.dev/) or
+> [Notation](https://github.com/notaryproject/notation#readme)). Timelines for the
+> complete deprecation of DCT are being finalized and will be published soon.
+>
+> For more information, see [Retiring Docker Content Trust](https://www.docker.com/blog/retiring-docker-content-trust/).
+
 ### Image tags and DCT
 
 An individual image record has the following identifier:
@@ -53,7 +63,7 @@ have discretion on which tags they sign.
 
 An image repository can contain an image with one tag that is signed and another
 tag that is not. For example, consider [the Mongo image
-repository](https://hub.docker.com/r/library/mongo/tags/). The `latest`
+repository](https://hub.docker.com/_/mongo/tags/). The `latest`
 tag could be unsigned while the `3.1.6` tag could be signed. It is the
 responsibility of the image publisher to decide if an image tag is signed or
 not. In this representation, some image tags are signed, others are not:
@@ -111,9 +121,19 @@ Within the Docker CLI we can sign and push a container image with the
 `$ docker trust` command syntax. This is built on top of the Notary feature
 set. For more information, see the [Notary GitHub repository](https://github.com/theupdateframework/notary).
 
-A prerequisite for signing an image is a Docker Registry with a Notary server
-attached (Such as the Docker Hub ). Instructions for
-standing up a self-hosted environment can be found [here](/engine/security/trust/deploying_notary/).
+A prerequisite for signing an image is a Docker Registry with a Notary server (such as Docker Hub) attached.
+Refer to [Deploying Notary](/engine/security/trust/deploying_notary/) for instructions.
+
+> [!NOTE]
+>
+> Docker is retiring DCT for Docker Official Images
+> (DOI). You should start planning to transition to a different image signing
+> and verification solution (like [Sigstore](https://www.sigstore.dev/) or
+> [Notation](https://github.com/notaryproject/notation#readme)). Timelines for the
+> complete deprecation of DCT are being finalized and will be published soon.
+>
+> For more information, see [Retiring Docker Content Trust](https://www.docker.com/blog/retiring-docker-content-trust/).
+
 
 To sign a Docker Image you will need a delegation key pair. These keys
 can be generated locally using `$ docker trust key generate` or generated

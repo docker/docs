@@ -55,8 +55,6 @@ To upgrade your legacy Docker subscription to a new Docker subscription that inc
 
 ## Downgrade your subscription
 
-You can downgrade your Docker subscription at anytime before the renewal date. The unused portion of the subscription isn't refundable or creditable.
-
 You can downgrade your Docker subscription at any time before the renewal date. The unused portion isn't refundable, but you retain access to paid features until the next billing cycle.
 
 ### Downgrade considerations

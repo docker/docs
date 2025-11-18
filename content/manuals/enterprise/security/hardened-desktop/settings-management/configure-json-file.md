@@ -109,7 +109,9 @@ The following sample is an `admin-settings.json` file with common enterprise set
     "https": "",
     "exclude": [],
     "windowsDockerdPort": 65000,
-    "enableKerberosNtlm": false
+    "enableKerberosNtlm": false,
+    "pac": "",
+    "embeddedPac": ""
   },
   "containersProxy": {
     "locked": true,
@@ -118,6 +120,7 @@ The following sample is an `admin-settings.json` file with common enterprise set
     "https": "",
     "exclude": [],
     "pac":"",
+    "embeddedPac": "",
     "transparentPorts": ""
   },
   "enhancedContainerIsolation": {
@@ -216,6 +219,26 @@ The following sample is an `admin-settings.json` file with common enterprise set
   "desktopTerminalEnabled": {
     "locked": false,
     "value": false
+  },
+  "enableInference": {
+    "locked": false,
+    "value": true
+  },
+  "enableInferenceTCP": {
+    "locked": false,
+    "value": true
+  },
+  "enableInferenceTCPPort": {
+    "locked": true,
+    "value": 12434
+  },
+  "enableInferenceCORS": {
+    "locked": true,
+    "value": ""
+  },
+  "enableInferenceGPUVariant": {
+    "locked": true,
+    "value": true
   }
 }
 ```
@@ -258,6 +281,7 @@ The following tables describe all available settings in the `admin-settings.json
 | `displayedOnboarding` |  | If `value` is set to `true`, the onboarding survey will not be displayed to new users. Setting `value` to `false` has no effect. |  Docker Desktop version 4.30 and later |
 | `desktopTerminalEnabled` |  | If `value` is set to `false`, developers cannot use the Docker terminal to interact with the host machine and execute commands directly from Docker Desktop. |  |
 |`exposeDockerAPIOnTCP2375`| Windows only| Exposes the Docker API on a specified port. If `value` is set to true, the Docker API is exposed on port 2375. Note: This is unauthenticated and should only be enabled if protected by suitable firewall rules.|  |
+| `silentModulesUpdate` | | If `value` is set to `true`, Docker Desktop automatically updates components that don't require a restart. For example, the Docker CLI or Docker Scout components. | Docker Desktop version 4.46 and later. |
 
 ### File sharing and emulation
 
@@ -279,14 +303,18 @@ The following tables describe all available settings in the `admin-settings.json
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
 |`proxy`|   |If `mode` is set to `system` instead of `manual`, Docker Desktop gets the proxy values from the system and ignores and values set for `http`, `https` and `exclude`. Change `mode` to `manual` to manually configure proxy servers. If the proxy port is custom, specify it in the `http` or `https` property, for example `"https": "http://myotherproxy.com:4321"`. The `exclude` property specifies a comma-separated list of hosts and domains to bypass the proxy. |  |
-|&nbsp; &nbsp; &nbsp; &nbsp;`windowsDockerdPort`| Windows only | Exposes Docker Desktop's internal proxy locally on this port for the Windows Docker daemon to connect to. If it is set to 0, a random free port is chosen. If the value is greater than 0, use that exact value for the port. The default value is -1 which disables the option. |  |
-|&nbsp; &nbsp; &nbsp; &nbsp;`enableKerberosNtlm`|  |When set to `true`, Kerberos and NTLM authentication is enabled. Default is `false`. For more information, see the settings documentation. | Docker Desktop version 4.32 and later. |
+| `windowsDockerdPort`| Windows only | Exposes Docker Desktop's internal proxy locally on this port for the Windows Docker daemon to connect to. If it is set to 0, a random free port is chosen. If the value is greater than 0, use that exact value for the port. The default value is -1 which disables the option. |  |
+|`enableKerberosNtlm`|  |When set to `true`, Kerberos and NTLM authentication is enabled. Default is `false`. For more information, see the settings documentation. | Docker Desktop version 4.32 and later. |
+| `pac` | | Specifies a PAC file URL. For example, `"pac": "http://proxy/proxy.pac"`. | |
+| `embeddedPac`  | | Specifies an embedded PAC (Proxy Auto-Config) script. For example, `"embeddedPac": "function FindProxyForURL(url, host) { return \"DIRECT\"; }"`. This setting takes precedence over HTTP, HTTPS, Proxy bypass and PAC server URL. |  Docker Desktop version 4.46 and later. |
 
 ### Container proxy
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
 |`containersProxy` | | Creates air-gapped containers. For more information see [Air-Gapped Containers](../air-gapped-containers.md).| Docker Desktop version 4.29 and later. |
+| `pac` | | Specifies a PAC file URL. For example, `"pac": "http://containerproxy/proxy.pac"`. | |
+| `embeddedPac`  | | Specifies an embedded PAC (Proxy Auto-Config) script. For example, `"embeddedPac": "function FindProxyForURL(url, host) { return \"PROXY 192.168.92.1:2003\"; }"`. This setting takes precedence over HTTP, HTTPS, Proxy bypass and PAC server URL. |  Docker Desktop version 4.46 and later. |
 
 ### Linux VM settings
 
@@ -312,7 +340,7 @@ The following tables describe all available settings in the `admin-settings.json
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
-|`kubernetes`|  | If `enabled` is set to true, a Kubernetes single-node cluster is started when Docker Desktop starts. If `showSystemContainers` is set to true, Kubernetes containers are displayed in the Docker Desktop Dashboard and when you run `docker ps`. The [imagesRepository](../../../../desktop/features/kubernetes.md#configuring-a-custom-image-registry-for-kubernetes-control-plane-images) setting lets you specify which repository Docker Desktop pulls control-plane Kubernetes images from. |  |
+|`kubernetes`|  | If `enabled` is set to true, a Kubernetes single-node cluster is started when Docker Desktop starts. If `showSystemContainers` is set to true, Kubernetes containers are displayed in the Docker Desktop Dashboard and when you run `docker ps`. The [imagesRepository](/manuals/desktop/use-desktop/kubernetes.md#configuring-a-custom-image-registry-for-kubernetes-control-plane-images) setting lets you specify which repository Docker Desktop pulls control-plane Kubernetes images from. |  |
 
 > [!NOTE]
 >
@@ -332,6 +360,16 @@ The following tables describe all available settings in the `admin-settings.json
 
 For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
 
+### AI settings
+
+| Parameter                   | OS            | Description                                                                                                                                                                                                                         | Version |
+|:----------------------------|---------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `enableInference`           |               | Setting `enableInference` to `true` enables [Docker Model Runner](/manuals/ai/model-runner/_index.md).                                                                                                                              |         |
+| `enableInferenceTCP`        |               | Enable host-side TCP support. This setting requires the Docker Model Runner setting to be enabled first.                                                                                                                                |         |
+| `enableInferenceTCPPort`    |               | Specifies the exposed TCP port. This setting requires the Docker Model Runner and Enable host-side TCP support settings to be enabled first.                                                                                            |         |
+| `enableInferenceCORS`       |               | Specifies the allowed CORS origins. Empty string to deny all,`*` to accept all, or a list of comma-separated values. This setting requires the Docker Model Runner and Enable host-side TCP support settings to be enabled first.       |         |
+| `enableInferenceGPUVariant` | Windows only  | Setting `enableInferenceGPUVariant` to `true` enables GPU-backed inference. The additional components required for this don't come by default with Docker Desktop, therefore they will be downloaded to `~/.docker/bin/inference`.  |         |
+
 ### Beta features
 
 > [!IMPORTANT]
@@ -342,10 +380,6 @@ For more information, see [Networking](/manuals/desktop/features/networking.md#n
 |:-----------------------------------------------------|----|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
 | `allowBetaFeatures`                                  |    | If `value` is set to `true`, beta features are enabled.                                                                                                                                                                                                   |                                         |
 | `enableDockerAI`                                     |    | If `allowBetaFeatures` is true, setting `enableDockerAI` to `true` enables [Docker AI (Ask Gordon)](/manuals/ai/gordon/_index.md) by default. You can independently control this setting from the `allowBetaFeatures` setting.                            |                                         |
-| `enableInference`                                    |    | If `allowBetaFeatures` is true, setting `enableInference` to `true` enables [Docker Model Runner](/manuals/ai/model-runner/_index.md) by default. You can independently control this setting from the `allowBetaFeatures` setting.                        |                                         |
-| &nbsp; &nbsp; &nbsp; &nbsp; `enableInferenceTCP`     |    | Enable host-side TCP support. This setting requires Docker Model Runner setting to be enabled first.                                                                                                                                                      |                                         |
-| &nbsp; &nbsp; &nbsp; &nbsp; `enableInferenceTCPPort` |    | Specifies the exposed TCP port. This setting requires Docker Model Runner setting to be enabled first.                                                                                                                                                    |                                         |
-| &nbsp; &nbsp; &nbsp; &nbsp; `enableInferenceCORS`    |    | Specifies the allowed CORS origins. Empty string to deny all,`*` to accept all, or a list of comma-separated values. This setting requires Docker Model Runner setting to be enabled first.                                                                                                                                                    |                                         |
 | `enableDockerMCPToolkit`                             |    | If `allowBetaFeatures` is true, setting `enableDockerMCPToolkit` to `true` enables the [MCP Toolkit feature](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md) by default. You can independently control this setting from the `allowBetaFeatures` setting. |                                         |
 | `allowExperimentalFeatures`                          |    | If `value` is set to `true`, experimental features are enabled.                                                                                                                                                                                           | Docker Desktop version 4.41 and earlier |
 

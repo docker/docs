@@ -6,17 +6,11 @@ keywords: billing, cycle, payments, subscription
 ---
 
 You can choose between a monthly or annual billing cycle when purchasing a
-Docker subscription. If you have a monthly billing cycle, you can choose to
-switch to an annual
-billing cycle.
+subscription. If you have a monthly billing cycle, you can choose to
+switch to an annual billing cycle.
 
-> [!NOTE]
->
-> Docker Business subscriptions are only available on an annual billing cycle.
-
-> [!NOTE]
->
-> Switching from an annual billing cycle to a monthly cycle isn't supported.
+If you're on a monthly plan, you can switch to a yearly plan at any time.
+However, switching from a yearly to a monthly cycle isn't supported.
 
 When you change your billing cycle:
 
@@ -38,8 +32,11 @@ final charge is $95 ($100-$5).
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
-Follow these steps to switch from a monthly to annual billing
-cycle for your Docker subscription:
+> [!IMPORTANT]
+>
+> Pay by invoice is not available for subscription upgrades or changes.
+
+To change your billing cycle:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select
 your organization.
@@ -55,8 +52,7 @@ your organization.
 > more information, see
 [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
 
-After completing the change, the billing plans and usage page displays
-your updated annual subscription details.
+The billing plans and usage page will now reflect your new annual plan details.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
@@ -75,12 +71,14 @@ page and select **Accept Terms and Purchase** to confirm.
 
 ## Change organization to an annual cycle
 
-> [!NOTE]
->
-> You must be an organization owner to make changes to the payment information.
+You must be an organization owner to make changes to the payment information.
 
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
+
+> [!IMPORTANT]
+>
+> Pay by invoice is not available for subscription upgrades or changes.
 
 Follow these steps to switch from a monthly to annual billing cycle for your
 organization's Docker subscription:

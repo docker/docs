@@ -147,7 +147,7 @@ options:
       swarm: false
     - option: vex-author
       value_type: stringSlice
-      default_value: '[]'
+      default_value: '[<.*@docker.com>]'
       description: List of VEX statement authors to accept
       deprecated: false
       hidden: false

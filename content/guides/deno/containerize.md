@@ -65,8 +65,42 @@ await app.listen({ port: 8000 });
 
 ## Create a Dockerfile
 
-In the Dockerfile, you'll notice that the `FROM` instruction uses `denoland/deno:latest`
-as the base image. This is the official image for Deno. This image is [available on the Docker Hub](https://hub.docker.com/r/denoland/deno).
+Before creating a Dockerfile, you need to choose a base image. You can either use the [Deno Docker Official Image](https://hub.docker.com/r/denoland/deno) or a Docker Hardened Image (DHI) from the [Hardened Image catalog](https://hub.docker.com/hardened-images/catalog).
+
+Choosing DHI offers the advantage of a production-ready image that is lightweight and secure. For more information, see [Docker Hardened Images](https://docs.docker.com/dhi/).
+
+{{< tabs >}}
+{{< tab name="Using Docker Hardened Images" >}}
+Docker Hardened Images (DHIs) are available for Deno on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/deno). Unlike using the Docker Official Image, you must first mirror the Deno image into your organization and then use it as your base image. Follow the instructions in the [DHI quickstart](/dhi/get-started/) to create a mirrored repository for Deno.
+
+Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace>/dhi-deno:<tag>`. In the following Dockerfile, the `FROM` instruction uses `<your-namespace>/dhi-deno:2` as the base image.
+
+```dockerfile
+# Use the DHI Deno image as the base image
+FROM <your-namespace>/dhi-deno:2
+
+# Set the working directory
+WORKDIR /app
+
+# Copy server code into the container
+COPY server.ts .
+
+# Set permissions (optional but recommended for security)
+USER deno
+
+# Expose port 8000
+EXPOSE 8000
+
+# Run the Deno server
+CMD ["run", "--allow-net", "server.ts"]
+```
+
+{{< /tab >}}
+{{< tab name="Using the official image" >}}
+
+Using the Docker Official Image is straightforward. In the following Dockerfile, you'll notice that the `FROM` instruction uses `denoland/deno:latest` as the base image.
+
+This is the official image for Deno. This image is [available on the Docker Hub](https://hub.docker.com/r/denoland/deno).
 
 ```dockerfile
 # Use the official Deno image
@@ -88,7 +122,10 @@ EXPOSE 8000
 CMD ["run", "--allow-net", "server.ts"]
 ```
 
-Aside from specifying `denoland/deno:latest` as the base image, the Dockerfile:
+{{< /tab >}}
+{{< /tabs >}}
+
+In addition to specifying the base image, the Dockerfile also:
 
 - Sets the working directory in the container to `/app`.
 - Copies `server.ts` into the container.
@@ -139,6 +176,7 @@ Related information:
  - [.dockerignore file](/reference/dockerfile.md#dockerignore-file)
  - [Docker Compose overview](/manuals/compose/_index.md)
  - [Compose file reference](/reference/compose-file/_index.md)
+ - [Docker Hardened Images](/dhi/)
 
 ## Next steps
 

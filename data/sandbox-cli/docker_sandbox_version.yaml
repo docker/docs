@@ -1,0 +1,25 @@
+command: docker sandbox version
+short: Show sandboxd version information
+long: Show sandboxd version information
+usage: docker sandbox version
+pname: docker sandbox
+plink: docker_sandbox.yaml
+inherited_options:
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

@@ -48,8 +48,8 @@ _For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
 {{< tab name="WSL 2 backend, x86_64" >}}
 
 - WSL version 2.1.5 or later.
-- Windows 11 64-bit: Home or Pro version 22H2 or higher, or Enterprise or Education version 22H2 or higher.
-- Windows 10 64-bit: Minimum required is Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher. 
+- Windows 10 64-bit: Enterprise, Pro, or Education version 22H2 (build 19045).
+- Windows 11 64-bit: Enterprise, Pro, or Education version 23H2 (build 22631) or higher.
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
   [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 - The following hardware prerequisites are required to successfully run
@@ -73,8 +73,8 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 {{< /tab >}}
 {{< tab name="Hyper-V backend, x86_64" >}}
 
-- Windows 11 64-bit: Enterprise, Pro, or Education version 22H2 or higher.
-- Windows 10 64-bit: Enterprise, Pro, or Education version 22H2 (build 19045) or higher.
+- Windows 10 64-bit: Enterprise, Pro, or Education version 22H2 (build 19045).
+- Windows 11 64-bit: Enterprise, Pro, or Education version 23H2 (build 22631) or higher.
 - Turn on Hyper-V and Containers Windows features.
 - The following hardware prerequisites are required to successfully run Client
   Hyper-V on Windows 10:
@@ -98,8 +98,8 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 {{< tab name="WSL 2 backend, Arm (Early Access)" >}}
 
 - WSL version 2.1.5 or later.
-- Windows 11 64-bit: Home or Pro version 22H2 or higher, or Enterprise or Education version 22H2 or higher.
-- Windows 10 64-bit: Minimum required is Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher.
+- Windows 10 64-bit: Enterprise, Pro, or Education version 22H2 (build 19045).
+- Windows 11 64-bit: Enterprise, Pro, or Education version 23H2 (build 22631) or higher.
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
   [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 - The following hardware prerequisites are required to successfully run
@@ -285,6 +285,20 @@ The `install` command accepts the following flags:
 - `--override-proxy-https=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests, requires `--proxy-http-mode` to be `manual`
 - `--override-proxy-exclude=<hosts/domains>`: Bypasses proxy settings for the hosts and domains. Uses a comma-separated list.
 - `--proxy-enable-kerberosntlm`: Enables Kerberos and NTLM proxy authentication. If you are enabling this, ensure your proxy server is properly configured for Kerberos/NTLM authentication. Available with Docker Desktop 4.32 and later.
+- `--override-proxy-pac=<PAC file URL>`: Sets the PAC file URL. This setting takes effect only when using `manual` proxy mode.
+- `--override-proxy-embedded-pac=<PAC script>`: Specifies an embedded PAC (Proxy Auto-Config) script. This setting takes effect only when using `manual` proxy mode and has precedence over the `--override-proxy-pac` flag.
+
+###### Example of specifying PAC file
+
+```console
+"Docker Desktop Installer.exe" install --proxy-http-mode="manual" --override-proxy-pac="http://localhost:8080/myproxy.pac"
+```
+
+###### Example of specifying PAC script
+
+```console
+"Docker Desktop Installer.exe" install --proxy-http-mode="manual" --override-proxy-embedded-pac="function FindProxyForURL(url, host) { return \"DIRECT\"; }"
+```
 
 ##### Data root and disk location
 

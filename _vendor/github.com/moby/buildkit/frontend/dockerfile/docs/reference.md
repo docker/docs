@@ -568,8 +568,8 @@ You can also use heredocs with the shell form to break up supported commands.
 
 ```dockerfile
 RUN <<EOF
-source $HOME/.bashrc && \
-echo $HOME
+  source $HOME/.bashrc
+  echo $HOME
 EOF
 ```
 
@@ -693,7 +693,7 @@ The available `[OPTIONS]` for the `RUN` instruction are:
 | [`--device`](#run---device)     | 1.14-labs                  |
 | [`--mount`](#run---mount)       | 1.2                        |
 | [`--network`](#run---network)   | 1.3                        |
-| [`--security`](#run---security) | 1.1.2-labs                 |
+| [`--security`](#run---security) | 1.20                       |
 
 ### Cache invalidation for RUN instructions
 
@@ -720,6 +720,12 @@ RUN --device=name,[required]
 
 `RUN --device` allows build to request [CDI devices](https://github.com/moby/buildkit/blob/master/docs/cdi.md)
 to be available to the build step.
+
+> [!WARNING]
+> The use of `--device` is protected by the `device` entitlement, which needs
+> to be enabled when starting the buildkitd daemon with
+> `--allow-insecure-entitlement device` flag or in [buildkitd config](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md),
+> and for a build request with [`--allow device` flag](https://docs.docker.com/engine/reference/commandline/buildx_build/#allow).
 
 The device `name` is provided by the CDI specification registered in BuildKit.
 
@@ -752,6 +758,8 @@ devices:
     containerEdits:
       env:
         - QUX=injected
+annotations:
+  org.mobyproject.buildkit.device.autoallow: true
 ```
 
 The device name format is flexible and accepts various patterns to support
@@ -761,6 +769,14 @@ multiple device configurations:
 * `vendor1.com/device=foo`: request a specific device
 * `vendor1.com/device=*`: request all devices for this vendor
 * `class1`: request devices by `org.mobyproject.buildkit.device.class` annotation
+
+> [!NOTE]
+> Annotations are supported by the CDI specification since 0.6.0.
+
+> [!NOTE]
+> To automatically allow all devices registered in the CDI specification, you
+> can set the `org.mobyproject.buildkit.device.autoallow` annotation. You can
+> also set this annotation for a specific device.
 
 #### Example: CUDA-Powered LLaMA Inference
 
@@ -1023,9 +1039,6 @@ The command is run in the host's network environment (similar to
 
 ### RUN --security
 
-> [!NOTE]
-> Not yet available in stable syntax, use [`docker/dockerfile:1-labs`](#syntax) version.
-
 ```dockerfile
 RUN --security=<sandbox|insecure>
 ```
@@ -1046,7 +1059,7 @@ Default sandbox mode can be activated via `--security=sandbox`, but that is no-o
 #### Example: check entitlements
 
 ```dockerfile
-# syntax=docker/dockerfile:1-labs
+# syntax=docker/dockerfile:1
 FROM ubuntu
 RUN --security=insecure cat /proc/self/status | grep CapEff
 ```
@@ -1312,7 +1325,7 @@ The available `[OPTIONS]` are:
 | [`--chown`](#add---chown---chmod)       |                            |
 | [`--chmod`](#add---chown---chmod)       | 1.2                        |
 | [`--link`](#add---link)                 | 1.4                        |
-| [`--exclude`](#add---exclude)           | 1.7-labs                   |
+| [`--exclude`](#add---exclude)           | 1.19                       |
 
 The `ADD` instruction copies new files or directories from `<src>` and adds
 them to the filesystem of the image at the path `<dest>`. Files and directories
@@ -1418,9 +1431,8 @@ ADD arr[[]0].txt /dest/
 
 When using a local tar archive as the source for `ADD`, and the archive is in a
 recognized compression format (`gzip`, `bzip2` or `xz`, or uncompressed), the
-archive is decompressed and extracted into the specified destination. Only
-local tar archives are extracted. If the tar archive is a remote URL, the
-archive is not extracted, but downloaded and placed at the destination.
+archive is decompressed and extracted into the specified destination. Local tar
+archives are extracted by default, see the [`ADD --unpack` flag].
 
 When a directory is extracted, it has the same behavior as `tar -x`.
 The result is the union of:
@@ -1444,6 +1456,9 @@ timestamp from that header will be used to set the `mtime` on the destination
 file. However, like any other file processed during an `ADD`, `mtime` isn't
 included in the determination of whether or not the file has changed and the
 cache should be updated.
+
+If remote file is a tar archive, the archive is not extracted by default. To
+download and extract the archive, use the [`ADD --unpack` flag].
 
 If the destination ends with a trailing slash, then the filename is inferred
 from the URL path. For example, `ADD http://example.com/foobar /` would create
@@ -1579,6 +1594,26 @@ See [`COPY --link`](#copy---link).
 
 See [`COPY --exclude`](#copy---exclude).
 
+### ADD --unpack
+
+```dockerfile
+ADD [--unpack=<bool>] <src> ... <dir>
+```
+
+The `--unpack` flag controls whether or not to automatically unpack tar
+archives (including compressed formats like `gzip` or `bzip2`) when adding them
+to the image. Local tar archives are unpacked by default, whereas remote tar
+archives (where `src` is a URL) are downloaded without unpacking.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM alpine
+# Download and unpack archive.tar.gz into /download:
+ADD --unpack=true https://example.com/archive.tar.gz /download
+# Add local tar without unpacking:
+ADD --unpack=false my-archive.tar.gz .
+```
+
 ## COPY
 
 COPY has two forms.
@@ -1597,8 +1632,8 @@ The available `[OPTIONS]` are:
 | [`--chown`](#copy---chown---chmod) |                            |
 | [`--chmod`](#copy---chown---chmod) | 1.2                        |
 | [`--link`](#copy---link)           | 1.4                        |
-| [`--parents`](#copy---parents)     | 1.7-labs                   |
-| [`--exclude`](#copy---exclude)     | 1.7-labs                   |
+| [`--parents`](#copy---parents)     | 1.20                       |
+| [`--exclude`](#copy---exclude)     | 1.19                       |
 
 The `COPY` instruction copies new files or directories from `<src>` and adds
 them to the filesystem of the image at the path `<dest>`. Files and directories
@@ -1888,9 +1923,6 @@ conditions for cache reuse.
 
 ### COPY --parents
 
-> [!NOTE]
-> Not yet available in stable syntax, use [`docker/dockerfile:1.7-labs`](#syntax) version.
-
 ```dockerfile
 COPY [--parents[=<boolean>]] <src> ... <dest>
 ```
@@ -1898,7 +1930,7 @@ COPY [--parents[=<boolean>]] <src> ... <dest>
 The `--parents` flag preserves parent directories for `src` entries. This flag defaults to `false`.
 
 ```dockerfile
-# syntax=docker/dockerfile:1-labs
+# syntax=docker/dockerfile:1
 FROM scratch
 
 COPY ./x/a.txt ./y/a.txt /no_parents/
@@ -1918,7 +1950,7 @@ directories after it will be preserved. This may be especially useful copies bet
 with `--from` where the source paths need to be absolute.
 
 ```dockerfile
-# syntax=docker/dockerfile:1-labs
+# syntax=docker/dockerfile:1
 FROM scratch
 
 COPY --parents ./x/./y/*.txt /parents/
@@ -1945,9 +1977,6 @@ with the `--parents` flag, the Buildkit is capable of packing multiple
 
 ### COPY --exclude
 
-> [!NOTE]
-> Not yet available in stable syntax, use [`docker/dockerfile:1.7-labs`](#syntax) version.
-
 ```dockerfile
 COPY [--exclude=<path> ...] <src> ... <dest>
 ```
@@ -1960,7 +1989,7 @@ supporting wildcards and matching using Go's
 For example, to add all files starting with "hom", excluding files with a `.txt` extension:
 
 ```dockerfile
-# syntax=docker/dockerfile:1-labs
+# syntax=docker/dockerfile:1
 FROM scratch
 
 COPY --exclude=*.txt hom* /mydir/
@@ -1972,7 +2001,7 @@ even if the files paths match the pattern specified in `<src>`.
 To add all files starting with "hom", excluding files with either `.txt` or `.md` extensions:
 
 ```dockerfile
-# syntax=docker/dockerfile:1-labs
+# syntax=docker/dockerfile:1
 FROM scratch
 
 COPY --exclude=*.txt --exclude=*.md hom* /mydir/
@@ -2608,16 +2637,17 @@ RUN echo "I'm building for $TARGETPLATFORM"
 
 ### BuildKit built-in build args
 
-| Arg                              | Type   | Description                                                                                                                                                                                       |
-|----------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `BUILDKIT_CACHE_MOUNT_NS`        | String | Set optional cache ID namespace.                                                                                                                                                                  |
-| `BUILDKIT_CONTEXT_KEEP_GIT_DIR`  | Bool   | Trigger Git context to keep the `.git` directory.                                                                                                                                                 |
-| `BUILDKIT_HISTORY_PROVENANCE_V1` | Bool   | Enable [SLSA Provenance v1](https://slsa.dev/spec/v1.1/provenance) for build history record.                                                                                                      |
-| `BUILDKIT_INLINE_CACHE`[^2]      | Bool   | Inline cache metadata to image config or not.                                                                                                                                                     |
-| `BUILDKIT_MULTI_PLATFORM`        | Bool   | Opt into deterministic output regardless of multi-platform output or not.                                                                                                                         |
-| `BUILDKIT_SANDBOX_HOSTNAME`      | String | Set the hostname (default `buildkitsandbox`)                                                                                                                                                      |
-| `BUILDKIT_SYNTAX`                | String | Set frontend image                                                                                                                                                                                |
-| `SOURCE_DATE_EPOCH`              | Int    | Set the Unix timestamp for created image and layers. More info from [reproducible builds](https://reproducible-builds.org/docs/source-date-epoch/). Supported since Dockerfile 1.5, BuildKit 0.11 |
+| Arg                              | Type   | Description                                                                                                                                                                                                      |
+|----------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `BUILDKIT_BUILD_NAME`            | String | Override the build name shown in [`buildx history` command](https://docs.docker.com/reference/cli/docker/buildx/history/) and [Docker Desktop Builds view](https://docs.docker.com/desktop/use-desktop/builds/). |
+| `BUILDKIT_CACHE_MOUNT_NS`        | String | Set optional cache ID namespace.                                                                                                                                                                                 |
+| `BUILDKIT_CONTEXT_KEEP_GIT_DIR`  | Bool   | Trigger Git context to keep the `.git` directory.                                                                                                                                                                |
+| `BUILDKIT_HISTORY_PROVENANCE_V1` | Bool   | Enable [SLSA Provenance v1](https://slsa.dev/spec/v1.1/provenance) for build history record.                                                                                                                     |
+| `BUILDKIT_INLINE_CACHE`[^2]      | Bool   | Inline cache metadata to image config or not.                                                                                                                                                                    |
+| `BUILDKIT_MULTI_PLATFORM`        | Bool   | Opt into deterministic output regardless of multi-platform output or not.                                                                                                                                        |
+| `BUILDKIT_SANDBOX_HOSTNAME`      | String | Set the hostname (default `buildkitsandbox`)                                                                                                                                                                     |
+| `BUILDKIT_SYNTAX`                | String | Set frontend image                                                                                                                                                                                               |
+| `SOURCE_DATE_EPOCH`              | Int    | Set the Unix timestamp for created image and layers. More info from [reproducible builds](https://reproducible-builds.org/docs/source-date-epoch/). Supported since Dockerfile 1.5, BuildKit 0.11                |
 
 #### Example: keep `.git` dir
 
@@ -2815,7 +2845,8 @@ The health check will first run **interval** seconds after the container is
 started, and then again **interval** seconds after each previous check completes.
 
 If a single run of the check takes longer than **timeout** seconds then the check
-is considered to have failed.
+is considered to have failed. The process performing the check is abruptly stopped
+with a `SIGKILL`.
 
 It takes **retries** consecutive failures of the health check for the container
 to be considered `unhealthy`.

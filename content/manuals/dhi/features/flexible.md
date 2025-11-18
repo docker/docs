@@ -3,7 +3,6 @@ title: Flexibility through pricing and customization
 linktitle: Flexibility
 description: Learn how Docker Hardened Images give you control over costs and image behavior through repository-based pricing and secure customization.
 keywords: docker hardened images pricing, per repo billing, flexible pricing model, mirror image pricing, container pricing model, customize hardened image
-weight: 30
 ---
 
 Docker Hardened Images are designed not only for security and compliance, but

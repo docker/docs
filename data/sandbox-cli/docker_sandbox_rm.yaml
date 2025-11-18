@@ -1,0 +1,49 @@
+command: docker sandbox rm
+short: Remove one or more sandboxes
+long: |-
+    Remove one or more sandboxes by their IDs or names.
+
+    This command removes the specified sandboxes. Each sandbox is identified by its unique ID or name.
+usage: docker sandbox rm [OPTIONS] SANDBOX [SANDBOX...]
+pname: docker sandbox
+plink: docker_sandbox.yaml
+inherited_options:
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+examples: |-
+    ### Remove a sandbox
+
+    ```console
+    $ docker sandbox rm abc123def
+    abc123def
+    ```
+
+    ### Remove multiple sandboxes
+
+    ```console
+    $ docker sandbox rm abc123def def456ghi
+    abc123def
+    def456ghi
+    ```
+
+    ### Remove all sandboxes
+
+    ```console
+    $ docker sandbox rm $(docker sandbox ls -q)
+    ```
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

@@ -218,7 +218,7 @@ You can now start your dev-ready container.
      -e MYSQL_USER=root \
      -e MYSQL_PASSWORD=secret \
      -e MYSQL_DB=todos \
-     node:18-alpine \
+     node:lts-alpine \
      sh -c "yarn install && yarn run dev"
    ```
    
@@ -234,7 +234,7 @@ You can now start your dev-ready container.
      -e MYSQL_USER=root `
      -e MYSQL_PASSWORD=secret `
      -e MYSQL_DB=todos `
-     node:18-alpine `
+     node:lts-alpine `
      sh -c "yarn install && yarn run dev"
    ```
 
@@ -250,7 +250,7 @@ You can now start your dev-ready container.
      -e MYSQL_USER=root ^
      -e MYSQL_PASSWORD=secret ^
      -e MYSQL_DB=todos ^
-     node:18-alpine ^
+     node:lts-alpine ^
      sh -c "yarn install && yarn run dev"
    ```
 
@@ -265,7 +265,7 @@ You can now start your dev-ready container.
      -e MYSQL_USER=root \
      -e MYSQL_PASSWORD=secret \
      -e MYSQL_DB=todos \
-     node:18-alpine \
+     node:lts-alpine \
      sh -c "yarn install && yarn run dev"
    ```
    

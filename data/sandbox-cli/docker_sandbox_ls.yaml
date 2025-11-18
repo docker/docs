@@ -1,0 +1,94 @@
+command: docker sandbox ls
+aliases: docker sandbox ls, docker sandbox list
+short: List sandboxes
+long: |-
+    List all sandboxes.
+
+    This command lists all sandboxes using the Docker API.
+usage: docker sandbox ls
+pname: docker sandbox
+plink: docker_sandbox.yaml
+options:
+    - option: no-trunc
+      value_type: bool
+      default_value: "false"
+      description: Don't truncate output
+      details_url: '#no-trunc'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: quiet
+      shorthand: q
+      value_type: bool
+      default_value: "false"
+      description: Only display sandbox IDs
+      details_url: '#quiet'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+examples: |-
+    ### List all sandboxes
+
+    ```console
+    $ docker sandbox ls
+    SANDBOX ID    NAME         WORKSPACE                    CREATED
+    abc123def     my-project   /home/user/my-project        2 hours ago
+    def456ghi     ml-work      /home/user/ml-projects       1 day ago
+    ```
+
+    ### Show only sandbox IDs (--quiet) {#quiet}
+
+    ```text
+    --quiet
+    ```
+
+    Output only sandbox IDs:
+
+    ```console
+    $ docker sandbox ls --quiet
+    abc123def
+    def456ghi
+    ```
+
+    ### Don't truncate output (--no-trunc) {#no-trunc}
+
+    ```text
+    --no-trunc
+    ```
+
+    By default, long sandbox IDs and workspace paths are truncated for readability. Use `--no-trunc` to display the full values:
+
+    ```console
+    $ docker sandbox ls
+    SANDBOX ID    TEMPLATE  NAME         WORKSPACE                     STATUS   CREATED
+    abc123def456  ubuntu    my-project   /home/user/.../my-project     running  2 hours ago
+
+    $ docker sandbox ls --no-trunc
+    SANDBOX ID              TEMPLATE  NAME         WORKSPACE                                          STATUS   CREATED
+    abc123def456ghi789jkl   ubuntu    my-project   /home/user/very/long/path/to/my-project           running  2 hours ago
+    ```
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

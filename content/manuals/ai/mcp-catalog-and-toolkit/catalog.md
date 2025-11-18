@@ -3,7 +3,7 @@ title: Docker MCP Catalog
 linkTitle: MCP Catalog
 description: Learn about the benefits of the MCP Catalog, how you can use it, and how you can contribute
 keywords: docker hub, mcp, mcp servers, ai agents, catalog, docker
-weight: 10
+weight: 20
 ---
 
 {{< summary-bar feature_name="Docker MCP Catalog" >}}
@@ -29,10 +29,15 @@ compatibility.
 
 ## Key features
 
-- Over 100 verified MCP servers in one place.
+- Extensive collection of verified MCP servers in one place.
 - Publisher verification and versioned releases.
 - Pull-based distribution using Docker infrastructure.
 - Tools provided by partners such as New Relic, Stripe, Grafana, and more.
+
+> [!NOTE]
+> E2B sandboxes now include direct access to the Docker MCP Catalog, giving developers
+> access to over 200 tools and services to seamlessly build and run AI agents. For
+> more information, see [E2B Sandboxes](sandboxes.md).
 
 ## How it works
 
@@ -49,6 +54,29 @@ Each catalog entry displays:
 - Version history.
 - List of tools provided by the MCP server.
 - Example configuration for agent integration.
+
+## Server deployment types
+
+The Docker MCP Catalog supports both local and remote server deployments, each optimized for different use cases and requirements.
+
+### Local MCP servers
+
+Local MCP servers are containerized applications that run directly on your machine. All local servers are built and digitally signed by Docker, providing enhanced security through verified provenance and integrity. These servers run as containers on your local environment and function without internet connectivity once downloaded. Local servers display a Docker icon {{< inline-image src="../../desktop/images/whale-x.svg" alt="docker whale icon" >}} to indicate they are built by Docker.
+
+Local servers offer predictable performance, complete data privacy, and independence from external service availability. They work well for development workflows, sensitive data processing, and scenarios requiring offline functionality.
+
+### Remote MCP servers
+
+Remote MCP servers are hosted services that run on the provider's
+infrastructure and connect to external services like GitHub, Notion, and
+Linear. Many remote servers use OAuth authentication. When a remote server
+requires OAuth, the MCP Toolkit handles authentication automatically - you
+authorize access through your browser, and the Toolkit manages credentials
+securely. You don't need to manually create API tokens or configure
+authentication.
+
+Remote servers display a cloud icon in the catalog. For setup instructions, see
+[MCP Toolkit](toolkit.md#oauth-authentication).
 
 ## Use an MCP server from the catalog
 

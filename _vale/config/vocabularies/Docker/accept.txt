@@ -1,22 +1,26 @@
 (?i)[A-Z]{2,}'?s
-
-[Dd]ev
+jq
+ripgrep
+sandboxing
 Adreno
 Aleksandrov
 Amazon
 Anchore
 Apple
 Artifactory
+armhf
 auditable
 autolock
 Azure
 Azure AD
 bootup
+Bitnami
 Btrfs
 Bugsnag
 BuildKit
 buildkitd
 BusyBox
+cagent
 CD
 CentOS
 Ceph
@@ -35,6 +39,7 @@ config
 containerd
 Couchbase
 CouchDB
+Crowdstrike
 datacenter
 Datadog
 Ddosify
@@ -65,11 +70,13 @@ dockerignore
 Dockerize
 Dockerized
 Dockerizing
+Duckduckgo
 Entra
 EPERM
 ESXi
 Ethernet
 exploitability
+[Ff]ailover
 Fargate
 Fedora
 firewalld
@@ -130,11 +137,11 @@ MySQL
 nameserver
 namespaced?
 namespacing
+Neovim
 netfilter
 netlabel
 netlink
 Netplan
-Neovim
 NFSv\d
 Nginx
 npm
@@ -152,6 +159,7 @@ PAT
 perl
 pgAdmin
 PKG
+plaintext
 plist
 Postgres
 PowerShell
@@ -160,6 +168,7 @@ Qualcomm
 Quickview
 rebalance
 reimplement
+Rekor
 rollback
 rootful
 runc
@@ -218,8 +227,10 @@ Zsh
 [Aa]nonymized?
 [Aa]utobuild
 [Aa]llowlist
+[Aa]gentic
 [Aa]utobuilds?
 [Aa]utotests?
+[Aa]utoscaling
 [Bb]uildx
 [Bb]uildpack(s)?
 [Bb]uildx
@@ -228,6 +239,7 @@ Zsh
 [Cc]onfigs
 [dD]eduplicate
 [Dd]ev
+[Dd]iscoverability
 [Dd]istroless
 [Ff]ilepaths?
 [Ff]iletypes?
@@ -265,6 +277,8 @@ Zsh
 [Ss]yscalls?
 [Ss]ysfs
 [Tt]eardown
+[Tt]echnographic
+[Tt]odo
 [Tt]oolchains?
 [Uu]narchived?
 [Uu]ngated

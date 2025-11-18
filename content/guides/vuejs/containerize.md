@@ -125,7 +125,7 @@ Replace the contents of your current `Dockerfile` with the optimized configurati
 # Stage 1: Build the Vue.js Application
 # =========================================
 ARG NODE_VERSION=23.11.0-alpine
-ARG NGINX_VERSION=alpine3.21
+ARG NGINX_VERSION=alpine3.22
 
 # Use a lightweight Node.js image for building (customizable via ARG)
 FROM node:${NODE_VERSION} AS builder

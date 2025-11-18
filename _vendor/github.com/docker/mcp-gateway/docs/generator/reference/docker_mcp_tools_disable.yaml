@@ -1,0 +1,65 @@
+command: docker mcp tools disable
+short: disable one or more tools
+long: disable one or more tools
+usage: docker mcp tools disable [tool1] [tool2] ...
+pname: docker mcp tools
+plink: docker_mcp_tools.yaml
+options:
+    - option: server
+      value_type: string
+      description: |
+        Specify which server provides the tools (optional, will auto-discover if not provided)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: format
+      value_type: string
+      default_value: list
+      description: Output format (json|list)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: gateway-arg
+      value_type: stringSlice
+      default_value: '[]'
+      description: Additional arguments passed to the gateway
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: verbose
+      value_type: bool
+      default_value: "false"
+      description: Verbose output
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: version
+      value_type: string
+      default_value: "2"
+      description: Version of the gateway
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

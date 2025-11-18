@@ -4,8 +4,8 @@ keywords: nested virtualization, Docker Desktop, windows, VM, VDI environment
 title: Run Docker Desktop for Windows in a VM or VDI environment
 linkTitle: VM or VDI environments
 aliases:
- - /desktop/nested-virtualization/
- - /desktop/vm-vdi/
+  - /desktop/nested-virtualization/
+  - /desktop/vm-vdi/
 weight: 30
 ---
 
@@ -16,18 +16,16 @@ depending on whether nested virtualization is supported:
 
 - If your environment supports nested virtualization, you can run Docker Desktop
   with its default local Linux VM.
-- If nested virtualization is not supported, Docker recommends using [Docker
-  Offload](/offload/).
+- If nested virtualization is not supported, Docker recommends subscribing to and using Docker Offload.
 
 ## Use Docker Offload
 
-Docker Offload lets you offload container workloads to a high-performance, fully
-hosted cloud environment, enabling a seamless hybrid experience.
+[Docker Offload](/offload/) lets you offload container workloads to a high-performance, fully hosted cloud environment,
+enabling a seamless hybrid experience.
 
-Docker Offload is useful in virtual desktop environments where nested
-virtualization isn't supported. In these environments, Docker Desktop defaults
-to using Docker Offload to ensure you can still build and run containers without
-relying on local virtualization.
+Docker Offload is useful in virtual desktop environments where nested virtualization isn't supported. In these
+environments, Docker Desktop can use Docker Offload to ensure you can still build and run containers without relying on
+local virtualization.
 
 Docker Offload decouples the Docker Desktop client from the Docker Engine,
 allowing the Docker CLI and Docker Desktop Dashboard to interact with
@@ -46,11 +44,11 @@ quickstart](/offload/quickstart/).
 >
 > Support for running Docker Desktop on a virtual desktop is available to Docker Business customers, on VMware ESXi or Azure VMs only.
 
-Docker support includes installing and running Docker Desktop within the VM, provided that nested virtualization is correctly enabled. The only hypervisors successfully tested are VMware ESXi and Azure, and there is no support for other VMs. For more information on Docker Desktop support, see [Get support](/manuals/desktop/troubleshoot-and-support/support.md).
+Docker support includes installing and running Docker Desktop within the VM, provided that nested virtualization is correctly enabled. The only hypervisors successfully tested are VMware ESXi and Azure, and there is no support for other VMs. For more information on Docker Desktop support, see [Get support](/manuals/support/_index.md).
 
 For troubleshooting problems and intermittent failures that are outside of Docker's control, you should contact your hypervisor vendor. Each hypervisor vendor offers different levels of support. For example, Microsoft supports running nested Hyper-V both on-prem and on Azure, with some version constraints. This may not be the case for VMware ESXi.
 
-Docker does not support running multiple instances of Docker Desktop on the same machine in a VM or VDI environment. 
+Docker does not support running multiple instances of Docker Desktop on the same machine in a VM or VDI environment.
 
 > [!TIP]
 >
@@ -85,14 +83,14 @@ If using Windows container mode, confirm that the Nutanix environment supports H
 
 Docker Desktop follows the VDI support definitions outlined [previously](#virtual-desktop-support-when-using-nested-virtualization):
 
- - Persistent VDI environments (Supported): You receive the same virtual desktop instance across sessions, preserving installed software and configurations.
+- Persistent VDI environments (Supported): You receive the same virtual desktop instance across sessions, preserving installed software and configurations.
 
- - Non-persistent VDI environments (Not supported): Docker Desktop does not support environments where the OS resets between sessions, requiring re-installation or reconfiguration each time. 
+- Non-persistent VDI environments (Not supported): Docker Desktop does not support environments where the OS resets between sessions, requiring re-installation or reconfiguration each time.
 
 ### Support scope and responsibilities
 
 For WSL 2-related issues, contact Nutanix support. For Docker Desktop-specific issues, contact Docker support.
 
-## Aditional resources
+## Additional resources
 
 - [Docker Desktop on Microsoft Dev Box](/manuals/enterprise/enterprise-deployment/dev-box.md)

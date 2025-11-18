@@ -1,0 +1,24 @@
+command: docker mcp server import
+short: Import a server
+long: Import a server
+usage: docker mcp server import
+pname: docker mcp server
+plink: docker_mcp_server.yaml
+options:
+    - option: push
+      value_type: bool
+      default_value: "false"
+      description: push the new server artifact
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

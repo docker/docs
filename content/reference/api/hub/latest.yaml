@@ -425,46 +425,247 @@ paths:
                 response:
                   value:
                     actions:
+                      billing:
+                        actions:
+                          - name: plan.upgrade
+                            description: Occurs when your organization’s billing plan is upgraded to a higher tier plan.
+                            label: Plan Upgraded
+                          - name: plan.downgrade
+                            description: Occurs when your organization’s billing plan is downgraded to a lower tier plan.
+                            label: Plan Downgraded
+                          - name: plan.seat_add
+                            description: Occurs when a seat is added to your organization’s billing plan.
+                            label: Seat Added
+                          - name: plan.seat_remove
+                            description: Occurs when a seat is removed from your organization’s billing plan.
+                            label: Seat Removed
+                          - name: plan.cycle_change
+                            description: Occurs when there is a change in the recurring interval that your organization is charged.
+                            label: Billing Cycle Changed
+                          - name: plan.downgrade_cancel
+                            description: Occurs when a scheduled plan downgrade for your organization is canceled.
+                            label: Plan Downgrade Canceled
+                          - name: plan.seat_removal_cancel
+                            description: Occurs when a scheduled seat removal for an organization’s billing plan is canceled.
+                            label: Seat Removal Canceled
+                          - name: plan.upgrade.request
+                            description: Occurs when a user in your organization requests a plan upgrade.
+                            label: Plan Upgrade Requested
+                          - name: plan.downgrade.request
+                            description: Occurs when a user in your organization requests a plan downgrade.
+                            label: Plan Downgrade Requested
+                          - name: plan.seat_add.request
+                            description: Occurs when a user in your organization requests an increase in the number of seats.
+                            label: Seat Addition Requested
+                          - name: plan.seat_removal.request
+                            description: Occurs when a user in your organization requests a decrease in the number of seats.
+                            label: Seat Removal Requested
+                          - name: plan.cycle_change.request
+                            description: Occurs when a user in your organization requests a change in the billing cycle.
+                            label: Billing Cycle Change Requested
+                          - name: plan.downgrade_cancel.request
+                            description: Occurs when a user in your organization requests a cancellation of a scheduled plan downgrade.
+                            label: Plan Downgrade Cancellation Requested
+                          - name: plan.seat_removal_cancel.request
+                            description: Occurs when a user in your organization requests a cancellation of a scheduled seat removal.
+                            label: Seat Removal Cancellation Requested
+                          - name: plan.product_change
+                            description: Occurs when there is a change in the product that your organization subscribes to.
+                            label: Billing Product Changed
+                        label: Billing
+                      enterprise:
+                        actions:
+                          - name: setting.policy.create
+                            description: Details of adding an admin settings policy
+                            label: Policy created
+                          - name: setting.policy.update
+                            description: Details of updating an admin settings policy
+                            label: Policy updated
+                          - name: setting.policy.delete
+                            description: Details of deleting an admin settings policy
+                            label: Policy deleted
+                          - name: setting.policy.transfer
+                            description: Details of transferring an admin settings policy to another owner
+                            label: Policy transferred
+                          - name: sso.connection.create
+                            description: Details of creating a new org/company SSO connection
+                            label: Create SSO Connection
+                          - name: sso.connection.update
+                            description: Details of updating an existing org/company SSO connection
+                            label: Update SSO Connection
+                          - name: sso.connection.delete
+                            description: Details of deleting an existing org/company SSO connection
+                            label: Delete SSO Connection
+                          - name: sso.connection.enforcement_toggle
+                            description: Details of toggling enforcement on an existing org/company SSO connection
+                            label: Enforce SSO
+                          - name: sso.connection.scim_toggle
+                            description: Details of toggling SCIM on an existing org/company SSO connection
+                            label: Enforce SCIM
+                          - name: sso.connection.scim_token_refresh
+                            description: Details of a SCIM token refresh on an existing org/company SSO connection
+                            label: Refresh SCIM Token
+                          - name: sso.connection.connection_type_change
+                            description: Details of a connection type change on an existing org/company SSO connection
+                            label: Change SSO Connection Type
+                          - name: sso.connection.jit_toggle
+                            description: Details of a JIT toggle on an existing org/company SSO connection
+                            label: Toggle JIT provisioning
+                        label: Enterprise
+                      offload:
+                        actions:
+                          - name: lease.start
+                            description: Details of the started Offload lease.
+                            label: Offload lease start
+                          - name: lease.end
+                            description: Details of the ended Offload lease.
+                            label: Offload lease end
+                        label: Offload
+                      oidc:
+                        actions:
+                          - name: connection.create
+                            description: Details of creating an OIDC connection.
+                            label: OIDC connection created
+                          - name: connection.update
+                            description: Details of updating an OIDC connection.
+                            label: OIDC connection updated
+                          - name: connection.delete
+                            description: Details of deleting an OIDC connection.
+                            label: OIDC connection deleted
+                        label: OIDC
                       org:
                         actions:
+                          - name: create
+                            description: Activities related to the creation of a new organization
+                            label: Organization Created
+                          - name: member.add
+                            description: Details of the member added to your organization
+                            label: Organization Member Added
+                          - name: member.remove
+                            description: Details about the member removed from your organization
+                            label: Organization Member Removed
+                          - name: member.role.change
+                            description: Details about the role changed for a member in your organization
+                            label: Member Role Changed
+                          - name: member.invite.send
+                            description: Details of the member invited to your organization
+                            label: Org Member Invited
                           - name: team.create
-                            description: contains team create events
-                            label: Team Created
+                            description: Activities related to the creation of a team
+                            label: Organization Created
+                          - name: team.update
+                            description: Activities related to the modification of a team
+                            label: Organization Deleted
                           - name: team.delete
-                            description: contains team delete events
-                            label: Team Deleted
+                            description: Activities related to the deletion of a team
+                            label: Organization Deleted
                           - name: team.member.add
-                            description: contains team member add events
+                            description: Details of the member added to your team
                             label: Team Member Added
                           - name: team.member.remove
-                            description: contains team member remove events
+                            description: Details of the member removed from your team
                             label: Team Member Removed
-                          - name: team.member.invite
-                            description: contains team member invite events
-                            label: Team Member Invited
-                          - name: member.removed
-                            description: contains org member remove events
-                            label: Organization Member Removed
-                          - name: create
-                            description: contains organization create events
-                            label: Organization Created
+                          - name: domain.create
+                            description: Details of the single sign-on domain added to your organization
+                            label: Single Sign-On domain added
+                          - name: domain.verify
+                            description: Details of the single sign-on domain verified for your organization
+                            label: Single Sign-On domain verified
+                          - name: domain.delete
+                            description: Details of the single sign-on domain removed from your organization
+                            label: Single Sign-On domain deleted
+                          - name: domain.auto-provisioning.toggle
+                            description: Details of toggling the Auto-Provisioning feature on a domain on or off
+                            label: Organization Auto-Provisioning Toggled
+                          - name: settings.update
+                            description: Details related to the organization setting that was updated
+                            label: Organization Settings Updated
+                          - name: registry_access.enabled
+                            description: Activities related to enabling Registry Access Management
+                            label: Registry Access Management enabled
+                          - name: registry_access.disabled
+                            description: Activities related to disabling Registry Access Management
+                            label: Registry Access Management disabled
+                          - name: registry_access.registry_added
+                            description: Activities related to the addition of a registry
+                            label: Registry Access Management registry added
+                          - name: registry_access.registry_updated
+                            description: Details related to the registry that was updated
+                            label: Registry Access Management registry updated
+                          - name: registry_access.registry_removed
+                            description: Activities related to the removal of a registry
+                            label: Registry Access Management registry removed
+                          - name: access_token.create
+                            description: Access token created in organization
+                            label: Access token created
+                          - name: access_token.update
+                            description: Access token updated in organization
+                            label: Access token updated
+                          - name: access_token.delete
+                            description: Access token deleted in organization
+                            label: Access token deleted
+                          - name: customrole.create
+                            description: A custom role was created
+                            label: Custom role created
+                          - name: customrole.update
+                            description: An existing custom role was updated
+                            label: Custom role updated
+                          - name: customrole.delete
+                            description: A custom role was deleted
+                            label: Custom role deleted
+                          - name: securepolicyconfigure.create
+                            description: A secure policy configuration was created
+                            label: Secure Policy Configuration created
+                          - name: securepolicyconfigure.update
+                            description: A secure policy configuration was updated
+                            label: Secure Policy Configuration updated
+                          - name: securepolicyconfigure.delete
+                            description: A secure policy configuration was deleted
+                            label: Secure Policy Configuration deleted
+                          - name: securepolicyclient.create
+                            description: A secure policy client was created
+                            label: Secure Policy Client created
+                          - name: securepolicyclient.update
+                            description: A secure policy client was updated
+                            label: Secure Policy Client updated
+                          - name: securepolicyclient.delete
+                            description: A secure policy client was deleted
+                            label: Secure Policy Client deleted
+                          - name: securepolicyprofile.create
+                            description: A secure policy profile was created
+                            label: Secure Policy Profile created
+                          - name: securepolicyprofile.update
+                            description: A secure policy profile was updated
+                            label: Secure Policy Profile updated
+                          - name: securepolicyprofile.delete
+                            description: A secure policy profile was deleted
+                            label: Secure Policy Profile deleted
                         label: Organization
                       repo:
                         actions:
                           - name: create
-                            description: contains repository create events
+                            description: Activities related to the creation of a new repository
                             label: Repository Created
+                          - name: update
+                            description: Activities related to the modification of a repository
+                            label: Repository Updated
                           - name: delete
-                            description: contains repository delete events
+                            description: Activities related to the deletion of a repository
                             label: Repository Deleted
                           - name: change_privacy
-                            description: contains repository privacy change events
+                            description: Details related to the privacy policies that were updated
                             label: Privacy Changed
+                          - name: category.updated
+                            description: Details related to updating a repository categories
+                            label: Categories updated
+                          - name: immutable.tags.updated
+                            description: Details related to updating tag immutability of a repository
+                            label: Tag immutability updated
                           - name: tag.push
-                            description: contains image tag push events
+                            description: Activities related to the tags pushed
                             label: Tag Pushed
                           - name: tag.delete
-                            description: contains image tag delete events
+                            description: Activities related to the tags deleted
                             label: Tag Deleted
                         label: Repository
         "429":
@@ -958,28 +1159,37 @@ paths:
       summary: Assign a group (Team) to a repository for access
       tags:
         - repositories
+      operationId: CreateRepositoryGroup
       security:
         - bearerAuth: []
-      parameters:
-        - in: query
-          name: group_name
-          required: true
-          schema:
-            type: string
-          description: Name of the group (team) in the organization.
-        - in: query
-          name: permission
-          required: true
-          schema:
-            type: string
-            description: |
-              Access level for the group. Possible values:
-              - `read`
-              - `write`
-              - `admin`
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RepositoryGroupCreationRequest'
+            example:
+              group_id: 12345
+              permission: "write"
       responses:
         "200":
-          $ref: "#/components/responses/team_repo"
+          description: Repository group permission created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryGroup'
+              example:
+                group_name: "developers"
+                permission: "write"
+                group_id: 12345
+        "400":
+          description: Bad Request - Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+        "401":
+          $ref: "#/components/responses/unauthorized"
         "403":
           $ref: "#/components/responses/forbidden"
         "404":
@@ -1129,7 +1339,177 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/error"
-
+    post:
+      summary: Create a new repository
+      description: |
+        Creates a new repository within the specified namespace. The repository will be created
+        with the provided metadata including name, description, and privacy settings.
+      operationId: CreateRepository
+      tags:
+        - repositories
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/repo_creation_request'
+            example:
+              name: "my-app"
+              namespace: "myorganization"
+              description: "A sample application repository"
+              full_description: "This is a comprehensive description of my application repository that contains additional details about the project."
+              registry: "docker.io"
+              is_private: false
+      responses:
+        201:
+          description: Repository created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/repository_info'
+              example:
+                name: "my-app"
+                namespace: "myorganization"
+                repository_type: "image"
+                status: 1
+                status_description: "Active"
+                description: "A sample application repository"
+                is_private: false
+                is_automated: false
+                star_count: 0
+                pull_count: 0
+                last_updated: "2025-01-20T10:30:00Z"
+                date_registered: "2025-01-20T10:30:00Z"
+                collaborator_count: 0
+                hub_user: "myorganization"
+                has_starred: false
+                full_description: "This is a comprehensive description of my application repository that contains additional details about the project."
+                media_types: [ ]
+                content_types: [ ]
+                categories: [ ]
+                immutable_tags_settings:
+                  enabled: false
+                  rules: [ ]
+                storage_size: null
+                source: null
+        400:
+          $ref: "#/components/responses/bad_request"
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
+        500:
+          $ref: "#/components/responses/internal_error"
+  /v2/namespaces/{namespace}/repositories/{repository}:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+    get:
+      operationId: GetRepository
+      summary: Get repository in a namespace
+      description: |
+        Returns a repository within the specified namespace (organization or user).
+        
+        Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
+      tags:
+        - repositories
+      security:
+        - bearerAuth: [ ]
+        - { }  # Allow anonymous access for public repositories
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/repository_info'
+              example:
+                name: "my-app"
+                namespace: "myorganization"
+                repository_type: "image"
+                status: 1
+                status_description: "Active"
+                description: "A sample application repository"
+                is_private: false
+                is_automated: false
+                star_count: 0
+                pull_count: 0
+                last_updated: "2025-01-20T10:30:00Z"
+                date_registered: "2025-01-20T10:30:00Z"
+                collaborator_count: 0
+                hub_user: "myorganization"
+                has_starred: false
+                full_description: "This is a comprehensive description of my application repository that contains additional details about the project."
+                media_types: [ ]
+                content_types: [ ]
+                categories: [ ]
+                immutable_tags_settings:
+                  enabled: false
+                  rules: [ ]
+                storage_size: null
+                source: null
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
+        500:
+          $ref: "#/components/responses/internal_error"
+    head:
+      operationId: CheckRepository
+      summary: Check repository in a namespace
+      description: |
+        Check a repository within the specified namespace (organization or user).
+        
+        Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
+      tags:
+        - repositories
+      security:
+        - bearerAuth: [ ]
+        - { }  # Allow anonymous access for public repositories
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/repository_info'
+              example:
+                name: "my-app"
+                namespace: "myorganization"
+                repository_type: "image"
+                status: 1
+                status_description: "Active"
+                description: "A sample application repository"
+                is_private: false
+                is_automated: false
+                star_count: 0
+                pull_count: 0
+                last_updated: "2025-01-20T10:30:00Z"
+                date_registered: "2025-01-20T10:30:00Z"
+                collaborator_count: 0
+                hub_user: "myorganization"
+                has_starred: false
+                full_description: "This is a comprehensive description of my application repository that contains additional details about the project."
+                media_types: [ ]
+                content_types: [ ]
+                categories: [ ]
+                immutable_tags_settings:
+                  enabled: false
+                  rules: [ ]
+                storage_size: null
+                source: null
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
+        500:
+          $ref: "#/components/responses/internal_error"
   /v2/orgs/{org_name}/members:
     parameters:
       - $ref: "#/components/parameters/org_name"
@@ -2240,6 +2620,82 @@ components:
       required:
         - immutable_tags
         - immutable_tags_rules
+    repo_creation_request:
+      type: object
+      required:
+        - name
+        - namespace
+      properties:
+        name:
+          type: string
+          description: |
+            The name of the repository. Must be 2-255 characters long and may only include 
+            alphanumeric characters, periods (.), underscores (_), or hyphens (-). 
+            Letters must be lowercase.
+          minLength: 2
+          maxLength: 255
+          pattern: '^[a-z0-9]+(?:[._-][a-z0-9]+)*$'
+          example: "my-app"
+        namespace:
+          type: string
+          description: The namespace where the repository will be created
+          example: "myorganization"
+        description:
+          type: string
+          description: Short description of the repository
+          maxLength: 100
+          example: "A sample application repository"
+        full_description:
+          type: string
+          description: Detailed description of the repository
+          maxLength: 25000
+          example: "This is a comprehensive description of my application repository that contains additional details about the project, its purpose, usage instructions, and other relevant information."
+        registry:
+          type: string
+          description: The registry where the repository will be hosted
+          example: "docker.io"
+        is_private:
+          type: boolean
+          description: Whether the repository should be private
+          default: false
+          example: false
+    RepositoryGroupCreationRequest:
+      type: object
+      required:
+        - group_id
+        - permission
+      properties:
+        group_id:
+          type: integer
+          format: int64
+          description: The ID of the organization group to grant access to
+          example: 12345
+        permission:
+          type: string
+          description: |
+            The permission level to grant to the group:
+            - read: Can view and pull from the repository
+            - write: Can view, pull, and push to the repository
+            - admin: Can view, pull, push, and manage repository settings
+          enum: [ "read", "write", "admin" ]
+          example: "write"
+    RepositoryGroup:
+      type: object
+      properties:
+        group_name:
+          type: string
+          description: The name of the group
+          example: "developers"
+        permission:
+          type: string
+          description: The permission level granted to the group
+          enum: [ "read", "write", "admin" ]
+          example: "write"
+        group_id:
+          type: integer
+          format: int64
+          description: The ID of the group
+          example: 12345
     repository_info:
       type: object
       properties:
@@ -2339,6 +2795,10 @@ components:
           format: int64
           nullable: true
           description: Storage size in bytes
+        source:
+          type: string
+          nullable: true
+          description: Source of the repository, where it was created from
       required:
         - user
         - name
@@ -3030,7 +3490,7 @@ components:
           example: moby
         invitee:
           type: string
-          description: can either be a dockerID for registred users or an email for non-registred users
+          description: can either be a dockerID for registered users or an email for non-registered users
           example: invitee@docker.com
         org:
           type: string
@@ -3160,7 +3620,7 @@ components:
             - owners
         is_guest:
           type: boolean
-          description: If the organization has verfied domains, members that have email addresses outside of those domains will be flagged as guests.
+          description: If the organization has verified domains, members that have email addresses outside of those domains will be flagged as guests.
           example: false
         primary_email:
           type: string

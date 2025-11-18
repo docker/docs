@@ -45,7 +45,7 @@ shows how Docker ties them all together with the following tools:
   Toolkit](../manuals/ai/mcp-catalog-and-toolkit/_index.md) helps you discover
   and securely run external tools, like APIs and databases, using the Model
   Context Protocol (MCP).
-- [Docker MCP Gateway](/ai/mcp-gateway/) lets you orchestrate and manage MCP servers.
+- [Docker MCP Gateway](../manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md) lets you orchestrate and manage MCP servers.
 - [Docker Offload](/offload/) provides a powerful, GPU-accelerated
   environment to run your AI applications with the same Compose-based
   workflow you use locally.
@@ -382,7 +382,7 @@ that support local and cloud-based agentic AI development:
 - [Docker MCP Catalog and
   Toolkit](../manuals/ai/mcp-catalog-and-toolkit/_index.md): Launch and manage
   tool integrations that follow the Model Context Protocol (MCP) standard.
-- [Docker MCP Gateway](/ai/mcp-gateway/): Orchestrate and manage
+- [Docker MCP Gateway](../manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md): Orchestrate and manage
   MCP servers to connect agents to external tools and services.
 - [Docker Compose](/manuals/ai/compose/models-and-compose.md): Define and run
   multi-container agentic AI applications with a single file, using the same

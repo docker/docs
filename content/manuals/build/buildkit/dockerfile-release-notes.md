@@ -13,6 +13,36 @@ issues, and bug fixes in [Dockerfile reference](/reference/dockerfile.md).
 
 For usage, see the [Dockerfile frontend syntax](frontend.md) page.
 
+## 1.19.0
+
+{{< release-date date="2025-09-30" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.19.0).
+
+```dockerfile
+# syntax=docker/dockerfile:1.19.0
+```
+
+* The `--exclude` flag for `COPY` and `ADD` instructions is now generally available. This flag was previously available under the `labs` channel. [moby/buildkit#6232](https://github.com/moby/buildkit/pull/6232) 
+* Fix issue where adding `--exclude` flag to `COPY` could cause a broken symlink to fail the build. [moby/buildkit#6220](https://github.com/moby/buildkit/pull/6220) 
+* Fix issue where `EXPOSE` instruction did not correctly format the history record it created. [moby/buildkit#6218](https://github.com/moby/buildkit/pull/6218) 
+
+## 1.18.0
+
+{{< release-date date="2025-09-03" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.18.0).
+
+```dockerfile
+# syntax=docker/dockerfile:1.18.0
+```
+
+* Add support for Git URLs for remote build contexts and `ADD` command now allows new syntax with added query parameters in `?key=value` format for better control over the Git clone procedure. Supported options in this release are `ref`, `tag`, `branch`, `checksum` (alias `commit`), `subdir`, `keep-git-dir` and `submodules`. [moby/buildkit#6172](https://github.com/moby/buildkit/pull/6172) [moby/buildkit#6173](https://github.com/moby/buildkit/pull/6173) 
+* Add new check rules `ExposeProtoCasing` and `ExposeInvalidFormat` to improve usage of `EXPOSE` commands. [moby/buildkit#6135](https://github.com/moby/buildkit/pull/6135)
+* Fix created time not being set correctly from the base image if named context is used. [moby/buildkit#6096](https://github.com/moby/buildkit/pull/6096)
+
 ## 1.17.0
 
 {{< release-date date="2025-06-17" >}}

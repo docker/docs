@@ -150,7 +150,7 @@ see [GitHub issues](https://github.com/moby/buildkit/issues?q=is%3Aissue%20state
 
    Select the Docker icon in the taskbar, and then **Switch to Windows containers...**.
 
-3. Install containerd version 1.7.7 or later following the setup instructions [here](https://github.com/containerd/containerd/blob/main/docs/getting-started.md#installing-containerd-on-windows).
+3. Install containerd version 1.7.7 or later following the [setup instructions](https://github.com/containerd/containerd/blob/main/docs/getting-started.md#installing-containerd-on-windows).
 
 4. Download and extract the latest BuildKit release.
 

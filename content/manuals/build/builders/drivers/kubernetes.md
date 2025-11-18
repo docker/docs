@@ -42,6 +42,7 @@ can pass to `--driver-opt`:
 | `limits.cpu`                 | CPU units    |                                         | Sets the limit CPU value specified in units of Kubernetes CPU. For example `requests.cpu=100m` or `requests.cpu=2`                   |
 | `limits.memory`              | Memory size  |                                         | Sets the limit memory value specified in bytes or with a valid suffix. For example `requests.memory=500Mi` or `requests.memory=4G`   |
 | `limits.ephemeral-storage`   | Storage size |                                         | Sets the limit ephemeral-storage value specified in bytes or with a valid suffix. For example `requests.ephemeral-storage=100M`      |
+| `buildkit-root-volume-memory`| Memory size  | Using regular file system               | Mounts `/var/lib/buildkit` on an `emptyDir` memory-backed volume, with `SizeLimit` as the value. For example, `buildkit-root-folder-memory=6G`     |
 | `nodeselector`               | CSV string   |                                         | Sets the pod's `nodeSelector` label(s). See [node assignment][2].                                                                    |
 | `annotations`                | CSV string   |                                         | Sets additional annotations on the deployments and pods.                                                                             |
 | `labels`                     | CSV string   |                                         | Sets additional labels on the deployments and pods.                                                                                  |
@@ -74,8 +75,7 @@ is configurable using the following driver options:
 - `requests.cpu`, `requests.memory`, `requests.ephemeral-storage`, `limits.cpu`, `limits.memory`, `limits.ephemeral-storage`
 
   These options allow requesting and limiting the resources available to each
-  BuildKit pod according to the official Kubernetes documentation
-  [here](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
+  BuildKit pod [according to the official Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
 
 For example, to create 4 replica BuildKit pods:
 
@@ -246,8 +246,8 @@ that you want to support.
 ## Rootless mode
 
 The Kubernetes driver supports rootless mode. For more information on how
-rootless mode works, and its requirements, see
-[here](https://github.com/moby/buildkit/blob/master/docs/rootless.md).
+rootless mode works, and its requirements, refer to the
+[Rootless Buildkit documentation](https://github.com/moby/buildkit/blob/master/docs/rootless.md).
 
 To turn it on in your cluster, you can use the `rootless=true` driver option:
 

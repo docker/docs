@@ -32,10 +32,6 @@ This page provides download links, system requirements, and step-by-step install
 
 *For checksums, see [Release notes](/manuals/desktop/release-notes.md).*
 
-> [!WARNING]
->
-> If you're experiencing malware detection issues, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
-
 ## System requirements
 
 {{< tabs >}}
@@ -66,6 +62,16 @@ This page provides download links, system requirements, and step-by-step install
    ```
 {{< /tab >}}
 {{< /tabs >}}
+
+> **Before you install or update**
+>
+> - Quit tools that might call Docker in the background (Visual Studio Code, terminals, agent apps).
+>
+> - If you manage fleets or install via MDM, use the [**PKG installer**](/manuals/enterprise/enterprise-deployment/pkg-install-and-configure.md).
+>
+> - Keep the installer volume mounted until the installation completes.
+>
+> If you encounter a "Docker.app is damaged" dialog, see [Fix "Docker.app is damaged" on macOS](/manuals/desktop/troubleshoot-and-support/troubleshoot/mac-damaged-dialog.md).
 
 ## Install and run Docker Desktop on Mac
 
@@ -135,6 +141,20 @@ The `install` command accepts the following flags:
 - `--override-proxy-http=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests. It requires `--proxy-http-mode` to be `manual`.
 - `--override-proxy-https=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests, requires `--proxy-http-mode` to be `manual`
 - `--override-proxy-exclude=<hosts/domains>`: Bypasses proxy settings for the hosts and domains. It's a comma-separated list.
+- `--override-proxy-pac=<PAC file URL>`: Sets the PAC file URL. This setting takes effect only when using `manual` proxy mode.
+- `--override-proxy-embedded-pac=<PAC script>`: Specifies an embedded PAC (Proxy Auto-Config) script. This setting takes effect only when using `manual` proxy mode and has precedence over the `--override-proxy-pac` flag.
+
+###### Example of specifying PAC file
+
+```console
+$ sudo /Applications/Docker.app/Contents/MacOS/install --user testuser --proxy-http-mode="manual" --override-proxy-pac="http://localhost:8080/myproxy.pac"
+```
+
+###### Example of specifying PAC script
+
+```console
+$ sudo /Applications/Docker.app/Contents/MacOS/install --user testuser --proxy-http-mode="manual" --override-proxy-embedded-pac="function FindProxyForURL(url, host) { return \"DIRECT\"; }"
+```
 
 > [!TIP]
 >

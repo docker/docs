@@ -3,11 +3,8 @@ title: Docker Model Runner
 linkTitle: Model Runner
 params:
   sidebar:
-    badge:
-      color: blue
-      text: Beta
     group: AI
-weight: 20
+weight: 30
 description: Learn how to use Docker Model Runner to manage and run AI models.
 keywords: Docker, ai, model runner, docker desktop, docker engine, llm
 aliases:
@@ -41,6 +38,7 @@ with AI models locally.
 - Run and interact with AI models directly from the command line or from the Docker Desktop GUI
 - Manage local models and display logs
 - Display prompt and response details
+- Conversational context support for multi-turn interactions
 
 ## Requirements
 

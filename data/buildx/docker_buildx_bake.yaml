@@ -93,7 +93,8 @@ options:
     - option: load
       value_type: bool
       default_value: "false"
-      description: Shorthand for `--set=*.output=type=docker`
+      description: Shorthand for `--set=*.output=type=docker`. Conditional.
+      details_url: '#load'
       deprecated: false
       hidden: false
       experimental: false
@@ -136,7 +137,7 @@ options:
       value_type: string
       default_value: auto
       description: |
-        Set type of progress output (`auto`, `quiet`, `plain`, `tty`, `rawjson`). Use plain to show container output
+        Set type of progress output (`auto`, `none`,  `plain`, `quiet`, `rawjson`, `tty`). Use plain to show container output
       details_url: '#progress'
       deprecated: false
       hidden: false
@@ -168,7 +169,8 @@ options:
     - option: push
       value_type: bool
       default_value: "false"
-      description: Shorthand for `--set=*.output=type=registry`
+      description: Shorthand for `--set=*.output=type=registry`. Conditional.
+      details_url: '#push'
       deprecated: false
       hidden: false
       experimental: false
@@ -233,7 +235,7 @@ examples: |-
     privileges.
 
     In addition to BuildKit's `network.host` and `security.insecure` entitlements
-    (see [`docker buildx build --allow`](/reference/cli/docker/buildx/build/#allow),
+    (see [`docker buildx build --allow`](/reference/cli/docker/buildx/build/#allow)),
     Bake supports file system entitlements that grant granular control over file
     system access. These are particularly useful when working with builds that need
     access to files outside the default working directory.
@@ -388,6 +390,47 @@ examples: |-
     $ docker buildx bake --list=type=targets,format=json
     ```
 
+    ### Load images into Docker (--load) {#load}
+
+    The `--load` flag is a convenience shorthand for adding an image export of type
+    `docker`:
+
+    ```console
+    --load   ≈   --set=*.output=type=docker
+    ```
+
+    However, its behavior is conditional:
+
+    - If the build definition has no output defined, `--load` adds
+    `type=docker`.
+    - If the build definition’s outputs are `docker`, `image`, `registry`,
+    `oci`, `--load` will add a `type=docker` export if one is not already present.
+    - If the build definition contains `local` or `tar` outputs,
+    `--load` does nothing. It will not override those outputs.
+
+    For example, with the following bake file:
+
+    ```hcl
+    target "default" {
+      output = ["type=tar,dest=hi.tar"]
+    }
+    ```
+
+    With `--load`:
+
+    ```console
+    $ docker buildx bake --load --print
+    ...
+    "output": [
+      {
+        "dest": "hi.tar"
+        "type": "tar",
+       }
+    ]
+    ```
+
+    The `tar` output remains unchanged.
+
     ### Write build results metadata to a file (--metadata-file) {#metadata-file}
 
     Similar to [`buildx build --metadata-file`](/reference/cli/docker/buildx/build/#metadata-file) but
@@ -507,6 +550,14 @@ examples: |-
 
     Same as `build --pull`.
 
+    ### Push images to a registry (--push) {#push}
+
+    The `--push` flag follows the same logic as `--load`:
+
+    - If no outputs are defined, it adds a `type=image,push=true` export.
+    - For existing `image` outputs, it sets `push=true`.
+    - If outputs are set to `local` or `tar`, it does not override them.
+
     ### Create SBOM attestations (--sbom) {#sbom}
 
     Same as [`build --sbom`](/reference/cli/docker/buildx/build/#sbom).
@@ -528,6 +579,13 @@ examples: |-
     $ docker buildx bake --set foo*.no-cache                # bypass caching only for targets starting with 'foo'
     $ docker buildx bake --set target.platform+=linux/arm64 # appends 'linux/arm64' to the platform list
     ```
+
+    > [!NOTE]
+    >
+    > `--set` is a repeatable flag. For array fields such as `tags`, repeat `--set`
+    > to provide multiple values or use the `+=` operator to append without
+    > replacing. Array literal syntax like `--set target.tags=[a,b]` is not
+    > supported.
 
     You can override the following fields:
 
