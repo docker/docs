@@ -1,6 +1,8 @@
+layouts/partials/components/badge.html
 {{- $colors := (dict
   "amber" "bg-amber-500 dark:bg-amber-400"
   "blue" "bg-blue-500 dark:bg-blue-400"
+  "gray" "bg-gray-500 dark:bg-gray-400"
   "green" "bg-green-500 dark:bg-green-700"
   "red" "bg-red-500 dark:bg-red-400"
   "violet" "bg-violet-500 dark:bg-violet-400"
@@ -8,11 +10,11 @@
 -}}
 
 {{- if not (isset $colors .color) -}}
-  {{- errorf "[badge] wrong color name: '%s' - supported values: amber, blue, green, red, violet" .color -}}h
+  {{- errorf "[badge] wrong color name: '%s' - supported values: amber, blue, gray, green, red, violet" .color -}}h
 {{- end -}}
 
 
 <span
   class="not-prose {{ index $colors .color }} rounded-sm px-1 text-xs text-white"
-  >{{ .content }}</span
->
+  >{{ .content }}
+</span>
