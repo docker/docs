@@ -59,6 +59,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Docker Model Runner improvements:
    - You can now skip the `/engines` prefix for [Docker Model Runner's OpenAI API endpoint](/manuals/ai/model-runner/api-reference.md#rest-api-examples) `curl http://localhost:12434/v1/models`.
    - You can now skip the `ai/` prefix for the models [published on Docker Hub with](https://hub.docker.com/u/ai) `docker model pull`.
+   - Downloads are now resumed when they get interrupted.
 
 #### For Windows
 
