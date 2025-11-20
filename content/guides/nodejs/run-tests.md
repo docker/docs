@@ -15,14 +15,11 @@ Complete all the previous sections of this guide, starting with [Containerize a 
 
 ## Overview
 
-Testing is an essential part of modern software development. Testing can mean a
-lot of things to different development teams. There are unit tests, integration
-tests and end-to-end testing. In this guide you take a look at running your unit
-tests in Docker when developing and when building.
+Testing is a core part of building reliable software. Whether you're writing unit tests, integration tests, or end-to-end tests, running them consistently across environments matters. Docker makes this easy by giving you the same setup locally, in CI/CD, and during image builds.
 
 ## Run tests when developing locally
 
-The sample application uses Vitest for testing with comprehensive test coverage across client and server components. The test suite includes 101 passing tests covering React components, custom hooks, API routes, database operations, and utility functions.
+The sample application uses Vitest for testing, and it already includes tests for React components, custom hooks, API routes, database operations, and utility functions.
 
 ### Run tests locally (without Docker)
 
@@ -116,10 +113,10 @@ You should see output like the following:
  ✓ src/client/components/__tests__/AddTodoForm.test.tsx (12 tests) 323ms
  ✓ src/client/hooks/__tests__/useTodos.test.ts (11 tests) 569ms
 
- Test Files  10 passed (10)
-      Tests  101 passed (101)
-   Start at  15:32:56
-   Duration  1.98s (transform 456ms, setup 1.26s, collect 1.74s, tests 1.87s, environment 5.82s, prepare 916ms)
+ Test Files  9 passed (9)
+      Tests  88 passed (88)
+   Start at  20:57:19
+   Duration  4.41s (transform 1.79s, setup 2.66s, collect 5.38s, tests 4.61s, environment 14.07s, prepare 4.34s)
 ```
 
 ### Test structure
@@ -209,10 +206,10 @@ You should see output containing the following:
  ✓ src/client/components/__tests__/AddTodoForm.test.tsx (12 tests) 323ms
  ✓ src/client/hooks/__tests__/useTodos.test.ts (11 tests) 569ms
 
- Test Files  10 passed (10)
-      Tests  101 passed (101)
-   Start at  07:33:25
-   Duration  2.11s (transform 339ms, setup 619ms, collect 1.12s, tests 1.43s, environment 3.52s, prepare 901ms)
+ Test Files  9 passed (9)
+      Tests  88 passed (88)
+   Start at  20:57:19
+   Duration  4.41s (transform 1.79s, setup 2.66s, collect 5.38s, tests 4.61s, environment 14.07s, prepare 4.34s)
 ```
 
 ## Summary

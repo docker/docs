@@ -65,7 +65,7 @@ $ docker init
 You’ll see output similar to:
 
 ```text
-Welcome to the Docker Init CLI!
+Welcome to the Docker Init CLI
 
 This utility will walk you through creating the following files with sensible defaults for your project:
   - .dockerignore
@@ -304,7 +304,7 @@ In the following step, you’ll improve the Dockerfile and configuration files b
 - Use multi-stage builds to keep the final image clean and small
 - Improve performance and security by only including what’s needed
 
-These updates help ensure your app is easy to deploy, fast to load, and production-ready.
+These updates make your app easier to deploy and faster to load.
 
 > [!NOTE]
 > A `Dockerfile` is a plain text file that contains step-by-step instructions to build a Docker image. It automates packaging your application along with its dependencies and runtime environment.  
@@ -619,30 +619,14 @@ CMD ["npm", "run", "test:coverage"]
 
 {{< /tabs >}}
 
-Key features of this ultra-optimized Dockerfile:
-
-- **Multi-stage builds**: Separate stages for dependencies, build, development, production, and testing
-- **Fast Build System**: Uses esbuild for lightning-fast server builds (12KB output)
-- **Ultra-small Production Image**: ~50% size reduction through aggressive optimization
-- **Security hardening**: Non-root user, minimal attack surface, no unnecessary packages
-- **Performance optimization**: Layer caching, build caching, memory-optimized runtime
-- **Aggressive Cleanup**: Removes documentation, tests, TypeScript definitions, and cache files
-- **Health checks**: Lightweight health monitoring using Node.js built-in modules
-- **Signal handling**: Proper process management with graceful shutdown handlers
-- **Single Port Production**: API runs on port 3000 internally, exposed as port 8080 externally
-- **Memory Optimized**: Reduced Node.js memory footprint (256MB versus 1GB default)
-
-### Image Size Optimization
-
-This Dockerfile implements several strategies to minimize the final image size:
-
-1. **Aggressive node_modules cleanup**: Removes documentation, tests, and unnecessary files with .dockerignore file.
-2. **Multi-stage optimization**: Only copies essential files to production stage
-3. **Memory constraints**: Limits Node.js heap size to reduce memory usage
-4. **Cache cleanup**: Removes all temporary files and caches
-5. **Minimal base image**: Uses Alpine Linux for smallest possible base
-
-**Expected size reduction**: ~50% smaller than standard Node.js images
+Key features of this Dockerfile:
+- Multi-stage structure — Separate stages for dependencies, build, development, production, and testing to keep each phase clean and efficient.
+- Lean production image — Optimized layering reduces size and keeps only what’s required to run the app.
+- Security-minded setup — Uses a dedicated non-root user and excludes unnecessary packages.
+- Performance-friendly design — Effective use of caching and well-structured layers for faster builds.
+- Clean runtime environment — Removes files not needed in production, such as docs, tests, and build caches.
+- Straightforward port usage — The app runs on port 3000 internally, exposed externally as port 8080.
+- Memory-optimized runtime — Node.js is configured to run with a smaller memory limit than the default.
 
 ### Step 2: Configure the .dockerignore file
 
@@ -737,7 +721,7 @@ What this command does:
 
 #### Step 4: View local images
 
-After building your Docker image, you can check which images are available on your local machine using either the Docker CLI or [Docker Desktop](/manuals/desktop/use-desktop/images.md). Since you're already working in the terminal, let's use the Docker CLI.
+After building your Docker image, you can check which images are available on your local machine using either the Docker CLI or [Docker Desktop](/manuals/desktop/use-desktop/images.md). Since you're already working in the terminal, use the Docker CLI.
 
 To list all locally available Docker images, run the following command:
 
@@ -848,7 +832,7 @@ In this guide, you learned how to containerize, build, and run a Node.js applica
 What you accomplished:
 
 - Initialized your project using `docker init` to scaffold essential Docker configuration files.
-- Created a comprehensive `compose.yml` file with development, production, and database services.
+- Created a `compose.yml` file with development, production, and database services.
 - Set up environment configuration with a `.env` file for flexible deployment settings.
 - Replaced the default `Dockerfile` with a multi-stage build optimized for TypeScript and React.
 - Replaced the default `.dockerignore` file to exclude unnecessary files and keep the image clean and efficient.

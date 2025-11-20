@@ -24,7 +24,7 @@ In this section, you'll learn how to set up a development environment for your c
 
 ## Add a local database and persist data
 
-The application uses PostgreSQL for data persistence, providing a production-ready database solution. You'll need to add a database service to your Docker Compose configuration.
+The application uses PostgreSQL for data persistence. Add a database service to your Docker Compose configuration.
 
 ### Add database service to Docker Compose
 
@@ -262,7 +262,7 @@ Next, you'll need to update your Compose file to use the new stage.
 
 ### Update your Compose file for development
 
-Now you need to configure your `compose.yml` file to run the development stage with comprehensive bind mounts for hot reloading. Update your development service configuration:
+Update your `compose.yml` file to run the development stage with bind mounts for hot reloading:
 
 ```yaml {hl_lines=[5,8-10,20-27],collapse=true,title=compose.yml}
 services:
@@ -356,7 +356,7 @@ $ npm run dev         # Start both server and client
 
 ### Using Task Runner (alternative)
 
-The project includes a comprehensive Taskfile.yml for advanced workflows:
+The project includes a Taskfile.yml for advanced workflows:
 
 ```console
 # Development
@@ -446,8 +446,7 @@ You can connect a debugger to your application on port 9229. The Node.js inspect
 
 1. Attach the debugger:
    - Open VS Code
-   - Go to the Debug panel (Ctrl/Cmd + Shift + D)
-   - Select "Attach to Docker Container" from the drop-down
+   - From the Debug panel (Ctrl/Cmd + Shift + D), select **Attach to Docker Container** from the drop-down
    - Select the green play button or press F5
 
 ### Chrome DevTools (alternative)
@@ -460,19 +459,15 @@ You can also use Chrome DevTools for debugging:
     docker compose up app-dev --build
     ```
 
-1. Open Chrome and navigate to:
+1. Open Chrome and go to `chrome://inspect`.
 
-    ```text
-    chrome://inspect
-    ```
-
-1. Select **Configure** and add:
+1. From the **Configure** option, add:
 
     ```text
     localhost:9229
     ```
 
-1. Select **inspect** under your Node.js target when it appears.
+1. When your Node.js target appears, select **inspect**.
 
 ### Debugging configuration details
 
@@ -512,15 +507,13 @@ If the debugger doesn't connect:
     Debugger listening on ws://0.0.0.0:9230/...
     ```
 
-Now you can set breakpoints in your TypeScript source files and debug your containerized Node.js application!
+Now you can set breakpoints in your TypeScript source files and debug your containerized Node.js application.
 
 For more details about Node.js debugging, see the [Node.js documentation](https://nodejs.org/en/docs/guides/debugging-getting-started).
 
 ## Summary
 
-In this section, you took a look at setting up your Compose file to add a mock
-database and persist data. You also learned how to create a multi-stage
-Dockerfile and set up a bind mount for development.
+You've set up your Compose file with a PostgreSQL database and data persistence. You also created a multi-stage Dockerfile and configured bind mounts for development.
 
 Related information:
 

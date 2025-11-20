@@ -15,12 +15,12 @@ params:
   time: 20 minutes
 ---
 
-[Node.js](https://nodejs.org/en) is a powerful JavaScript runtime for building scalable, high-performance applications. This guide demonstrates containerizing a modern TypeScript Node.js application with React.js front-end, PostgreSQL database, and production-ready Docker configurations.
+[Node.js](https://nodejs.org/en) is a JavaScript runtime for building web applications. This guide shows you how to containerize a TypeScript Node.js application with a React frontend and PostgreSQL database.
 
 The sample application is a modern full-stack Todo application featuring:
 
-- **Backend**: Express.js 5.x with TypeScript, PostgreSQL database, RESTful API with comprehensive error handling.
-- **Frontend**: React 19 with Vite, Tailwind CSS 4, modern UI components and hooks.
+- **Backend**: Express.js with TypeScript, PostgreSQL database, and RESTful API
+- **Frontend**: React.js with Vite and Tailwind CSS 4
 
 
 > **Acknowledgment**
@@ -34,7 +34,7 @@ The sample application is a modern full-stack Todo application featuring:
 In this guide, you will learn how to:
 
 - Containerize and run a Node.js application using Docker.
-- Run unit tests inside a Docker container.
+- Run tests inside a Docker container.
 - Set up a development container environment.
 - Configure GitHub Actions for CI/CD with Docker.
 - Deploy your Dockerized Node.js app to Kubernetes.

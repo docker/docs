@@ -20,15 +20,13 @@ In this section, you'll learn how to deploy your containerized Node.js applicati
 
 You'll deploy a complete stack including:
 
-- Your Node.js Todo application with 3 replicas
-- PostgreSQL database with persistent storage
-- Auto-scaling based on CPU and memory usage
-- SSL/TLS ready ingress configuration
-- Production security settings
+- Node.js Todo application with 3 replicas.
+- PostgreSQL database with persistent storage.
+- Auto-scaling based on CPU and memory usage.
+- Ingress configuration for external access.
+- Security settings.
 
 ## Create a Kubernetes deployment file
-
-Create a production-ready Kubernetes deployment file that includes all the components needed for a scalable, secure Node.js application.
 
 Create a new file called `nodejs-sample-kubernetes.yaml` in your project root:
 
@@ -396,9 +394,8 @@ Before deploying, you need to customize the deployment file for your environment
 
 3. **Database password** (optional): The default password is already base64 encoded. To change it:
 
-   ```bash
-   # Generate new base64 encoded password
-   echo -n "your-new-password" | base64
+   ```console
+   $ echo -n "your-new-password" | base64
    ```
 
    Then update the Secret:
@@ -412,43 +409,51 @@ Before deploying, you need to customize the deployment file for your environment
 
 ## Understanding the deployment
 
-This deployment creates a complete, production-ready stack with the following components:
+The deployment file creates a complete application stack with multiple components working together.
 
-### Application Architecture
+### Architecture
 
-- **Node.js Application**: 3 replicas running your containerized Todo app
-- **PostgreSQL Database**: Single instance with persistent 10Gi storage
-- **Load Balancing**: Kubernetes services distribute traffic across app replicas
-- **External Access**: Ingress controller handles SSL/TLS and routing
+The deployment includes:
 
-### Production Features
+- **Node.js application**: Runs 3 replicas of your containerized Todo app
+- **PostgreSQL database**: Single instance with 10Gi of persistent storage
+- **Services**: Kubernetes services handle load balancing across application replicas
+- **Ingress**: External access through an ingress controller with SSL/TLS support
 
-**Security Hardening:**
+### Security
 
-- Non-root user execution (UID 1001)
-- Read-only root filesystem
-- Dropped Linux capabilities
-- Kubernetes secrets for sensitive data
+The deployment uses several security features:
 
-**High Availability:**
+- Containers run as a non-root user (UID 1001)
+- Read-only root filesystem prevents unauthorized writes
+- Linux capabilities are dropped to minimize attack surface
+- Sensitive data like database passwords are stored in Kubernetes secrets
 
-- Multiple application replicas (3)
-- Pod disruption budget (minimum 1 available)
-- Rolling updates with zero downtime
-- Health checks on `/health` endpoint
+### High availability
 
-**Auto-Scaling:**
+To keep your application running reliably:
 
-- Horizontal Pod Autoscaler (1-5 replicas)
-- CPU-based scaling (70% threshold)
-- Memory-based scaling (80% threshold)
-- Resource limits: 256Mi-512Mi memory, 250m-500m CPU
+- Three application replicas ensure service continues if one pod fails
+- Pod disruption budget maintains at least one available pod during updates
+- Rolling updates allow zero-downtime deployments
+- Health checks on the `/health` endpoint ensure only healthy pods receive traffic
 
-**Data Persistence:**
+### Auto-scaling
 
-- PostgreSQL with 10Gi persistent volume
-- Automatic database initialization
-- Data survives pod restarts and updates
+The Horizontal Pod Autoscaler scales your application based on resource usage:
+
+- Scales between 1 and 5 replicas automatically
+- Triggers scaling when CPU usage exceeds 70%
+- Triggers scaling when memory usage exceeds 80%
+- Resource limits: 256Mi-512Mi memory, 250m-500m CPU per pod
+
+### Data persistence
+
+PostgreSQL data is stored persistently:
+
+- 10Gi persistent volume stores database files
+- Database initializes automatically on first startup
+- Data persists across pod restarts and updates
 
 ## Deploy your application
 
@@ -567,7 +572,7 @@ $ kubectl delete -f nodejs-sample-kubernetes.yaml
 
 ## Summary
 
-In this section, you successfully deployed your containerized Node.js application to Kubernetes with a production-ready configuration. You learned how to:
+You've deployed your containerized Node.js application to Kubernetes. You learned how to:
 
 - Create a comprehensive Kubernetes deployment file with security hardening
 - Deploy a multi-tier application (Node.js + PostgreSQL) with persistent storage

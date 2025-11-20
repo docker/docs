@@ -25,7 +25,7 @@ You must also have:
 In this section, you'll set up a **CI/CD pipeline** using [GitHub Actions](https://docs.github.com/en/actions) to automatically:
 
 - Build your Node.js application inside a Docker container.
-- Run comprehensive tests including unit tests, integration tests, and linting.
+- Run unit and integration tests, and make sure your application meets solid code quality standards.
 - Perform security scanning and vulnerability assessment.
 - Push production-ready images to [Docker Hub](https://hub.docker.com).
 
@@ -38,13 +38,13 @@ To enable GitHub Actions to build and push Docker images, you'll securely store 
 ### Step 1: Connect your GitHub repository to Docker Hub
 
 1. Create a Personal Access Token (PAT) from [Docker Hub](https://hub.docker.com).
-   1. Go to your **Docker Hub account → Account Settings → Security**.
+   1. From your Docker Hub account, go to **Account Settings → Security**.
    2. Generate a new Access Token with **Read/Write** permissions.
    3. Name it something like `docker-nodejs-sample`.
    4. Copy and save the token — you'll need it in Step 4.
 
 2. Create a repository in [Docker Hub](https://hub.docker.com/repositories/).
-   1. Go to your **Docker Hub account → Create a repository**.
+   1. From your Docker Hub account, select **Create a repository**.
    2. For the Repository Name, use something descriptive — for example: `nodejs-sample`.
    3. Once created, copy and save the repository name — you'll need it in Step 4.
 
@@ -53,8 +53,7 @@ To enable GitHub Actions to build and push Docker images, you'll securely store 
 4. Add Docker Hub credentials as GitHub repository secrets.
 
    In your newly created GitHub repository:
-   1. Navigate to:
-      **Settings → Secrets and variables → Actions → New repository secret**.
+   1. From **Settings**, go to **Secrets and variables → Actions → New repository secret**.
 
    2. Add the following secrets:
 
@@ -135,9 +134,9 @@ Once completed, your code will be available on GitHub, and any GitHub Actions wo
 
 Now you'll create a GitHub Actions workflow that builds your Docker image, runs tests, and pushes the image to Docker Hub.
 
-1. Go to your repository on GitHub and select the **Actions** tab in the top menu.
+1. From your repository on GitHub, select the **Actions** tab in the top menu.
 
-2. Select **Set up a workflow yourself** when prompted.
+2. When prompted, select **Set up a workflow yourself**.
 
    This opens an inline editor to create a new workflow file. By default, it will be saved to:
    `.github/workflows/main.yml`
@@ -261,14 +260,14 @@ jobs:
 
 This workflow performs the following tasks for your Node.js application:
 
-- Triggers on every `push` or `pull request` targeting the `main` branch.
-- Builds a test Docker image using the `test` stage in your Dockerfile.
-- Executes comprehensive tests (101 tests) inside a clean, containerized environment with PostgreSQL integration to ensure consistency.
-- Halts the workflow immediately if any test fails — enforcing code quality.
-- Caches both Docker build layers and npm dependencies for faster CI runs.
-- Authenticates securely with Docker Hub using GitHub repository secrets.
-- Builds a production-ready image using the `production` stage in your Dockerfile.
-- Tags and pushes the final image to Docker Hub with both `latest` and short SHA tags for traceability.
+- Triggers on every `push` or `pull request` to the `main` branch.
+- Builds a test Docker image using the `test` stage.
+- Runs tests in a containerized environment.
+- Stops the workflow if any test fails.
+- Caches Docker build layers and npm dependencies for faster runs.
+- Authenticates with Docker Hub using GitHub secrets.
+- Builds an image using the `production` stage.
+- Tags and pushes the image to Docker Hub with `latest` and short SHA tags.
 
 > [!NOTE]
 > For more information about `docker/build-push-action`, refer to the [GitHub Action README](https://github.com/docker/build-push-action/blob/master/README.md).
@@ -277,16 +276,16 @@ This workflow performs the following tasks for your Node.js application:
 
 ### Step 3: Run the workflow
 
-After you've added your workflow file, it's time to trigger and observe the CI/CD process in action.
+After adding your workflow file, trigger the CI/CD process.
 
 1. Commit and push your workflow file
 
-   Select "Commit changes…" in the GitHub editor.
-   - This push will automatically trigger the GitHub Actions pipeline.
+   From the GitHub editor, select **Commit changes…**.
+   - This push automatically triggers the GitHub Actions pipeline.
 
 2. Monitor the workflow execution
-   1. Go to the Actions tab in your GitHub repository.
-   2. Select into the workflow run to follow each step: **test**, **build**, **security**, and (if successful) **push** and **deploy**.
+   1. From your GitHub repository, go to the **Actions** tab.
+   2. Select the workflow run to follow each step: **test**, **build**, **security**, and (if successful) **push** and **deploy**.
 
 3. Verify the Docker image on Docker Hub
    - After a successful workflow run, visit your [Docker Hub repositories](https://hub.docker.com/repositories).
@@ -299,7 +298,7 @@ After you've added your workflow file, it's time to trigger and observe the CI/C
 > [!TIP] Protect your main branch
 > To maintain code quality and prevent accidental direct pushes, enable branch protection rules:
 >
-> - Navigate to your **GitHub repo → Settings → Branches**.
+> - From your GitHub repository, go to **Settings → Branches**.
 > - Under Branch protection rules, select **Add rule**.
 > - Specify `main` as the branch name.
 > - Enable options like:
@@ -314,18 +313,17 @@ After you've added your workflow file, it's time to trigger and observe the CI/C
 
 In this section, you set up a comprehensive CI/CD pipeline for your containerized Node.js application using GitHub Actions.
 
-Here's what you accomplished:
+What you accomplished:
 
 - Created a new GitHub repository specifically for your project.
-- Generated a secure Docker Hub access token and added it to GitHub as a secret.
-- Defined a GitHub Actions workflow to:
-  - Build your application inside a Docker container.
-  - Run comprehensive tests (101 tests) in a consistent, containerized environment with PostgreSQL integration.
-  - Push a production-ready image to Docker Hub if tests pass.
-- Triggered and verified the workflow execution through GitHub Actions.
-- Confirmed that your image was successfully published to Docker Hub.
+- Generated a Docker Hub access token and added it as a GitHub secret.
+- Created a GitHub Actions workflow that:
+  - Builds your application in a Docker container.
+  - Run tests in a containerized environment.
+  - Pushes an image to Docker Hub if tests pass.
+- Verified the workflow runs successfully.
 
-With this setup, your Node.js application is now ready for automated testing and deployment across environments — increasing confidence, consistency, and team productivity.
+Your Node.js application now has automated testing and deployment.
 
 ---
 
