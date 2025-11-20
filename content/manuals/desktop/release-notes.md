@@ -30,6 +30,41 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.52.0
+
+{{< release-date date="2025-11-20" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.52.0" build_path="/210994/" >}}
+
+### New
+
+- Added new port binding settings to Docker Desktop. This can also be controlled by administrators via Settings Management using the `admin-settings.json` file.
+- Added a new Docker Model Runner command. With `docker model purge` you can remove all your models.
+
+### Upgrades
+
+- [Docker Engine v29.0.0](/manuals/engine/release-notes/28.md#2900)
+- [Docker Model Runner v1.0.3](https://github.com/docker/model-runner/releases/tag/v1.0.3)
+- [Docker Model Runner CLI v1.0.0](https://github.com/docker/model-runner/releases/tag/cmd%2Fcli%2Fv1.0.0)
+- Docker MCP plugin `v0.28.0`
+
+### Bug fixes and enhancements
+
+#### For all platforms 
+
+- Docker MCP Toolkit improvements:
+   - Amazon Q client support
+   - OAuth DCR (Dynamic Client Registration) with Docker Engine
+   - Create MCP profiles using the CLI
+- Docker Model Runner improvements:
+   - You can now skip the `/engines` prefix for [Docker Model Runner's OpenAI API endpoint](/manuals/ai/model-runner/api-reference.md#rest-api-examples) `curl http://localhost:12434/v1/models`.
+   - You can now skip the `ai/` prefix for the models [published on Docker Hub with](https://hub.docker.com/u/ai) `docker model pull`.
+   - Downloads are now resumed when they get interrupted.
+
+#### For Windows
+
+- Fixed an issue with Kerberos/NTLM proxy sign in.
+
 ## 4.51.0
 
 {{< release-date date="2025-11-13" >}}
