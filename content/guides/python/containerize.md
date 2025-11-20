@@ -330,8 +330,8 @@ Create a file named `Dockerfile` with the following contents.
 
 # This Dockerfile uses Docker Hardened Images (DHI) for enhanced security.
 # For more information, see https://docs.docker.com/dhi/
-ARG PYTHON_VERSION=3.12
-FROM hardened-images/dhi/python:${PYTHON_VERSION}
+ARG PYTHON_VERSION=3.12.12-debian13-fips-dev
+FROM <your-workspace>/dhi-python:${PYTHON_VERSION}
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -339,6 +339,9 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Keeps Python from buffering stdout and stderr to avoid situations where
 # the application crashes without emitting any logs due to buffering.
 ENV PYTHONUNBUFFERED=1
+
+#Add dependencies for adduser
+RUN apt update -y && apt install adduser -y
 
 WORKDIR /app
 
