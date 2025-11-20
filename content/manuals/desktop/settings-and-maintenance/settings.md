@@ -315,6 +315,8 @@ On Windows and Mac, you can also set the default networking mode and DNS resolut
 
 On Mac, you can also select the **Use kernel networking for UDP** setting. This lets you use a more efficient kernel networking path for UDP. This may not be compatible with your VPN software.
 
+You can also define the behavior of port bindings. By default Docker Desktop binds all ports on containers to `0.0.0.0` on the host, though this can be overridden by providing a specific IP. You can change this default behavior by changing the **Port binding behavior** setting, allowing you to either bind to `localhost` (`127.0.0.1`) by default, or only allow containers to bind to `localhost` under any circumstances, even if requested otherwise.
+
 ### WSL Integration
 
 On Windows in WSL 2 mode, you can configure which WSL 2 distributions will have the Docker
