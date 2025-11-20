@@ -15,16 +15,13 @@ params:
   time: 20 minutes
 ---
 
-[Node.js](https://nodejs.org/en) is a powerful JavaScript runtime for building scalable, high-performance applications. This guide demonstrates containerizing a modern TypeScript Node.js application with React frontend, PostgreSQL database, and production-ready Docker configurations.
+[Node.js](https://nodejs.org/en) is a powerful JavaScript runtime for building scalable, high-performance applications. This guide demonstrates containerizing a modern TypeScript Node.js application with React.js front-end, PostgreSQL database, and production-ready Docker configurations.
 
 The sample application is a modern full-stack Todo application featuring:
 
-- **Backend**: Express.js 5.x with TypeScript, PostgreSQL database, RESTful API with comprehensive error handling
-- **Frontend**: React 19 with Vite, Tailwind CSS 4, modern UI components and hooks
-- **Build System**: Lightning-fast esbuild for server builds (12KB output), Vite for client builds
-- **Production Features**: Multi-stage Docker builds, security hardening, health checks, graceful shutdown
-- **Development Tools**: Hot reload, debugging support, comprehensive testing with Vitest
-- **Architecture**: Clean separation of client/server code, shared utilities, and comprehensive test coverage
+- **Backend**: Express.js 5.x with TypeScript, PostgreSQL database, RESTful API with comprehensive error handling.
+- **Frontend**: React 19 with Vite, Tailwind CSS 4, modern UI components and hooks.
+
 
 > **Acknowledgment**
 >

@@ -205,10 +205,9 @@ networks:
 1. After adding some items to the todo list, press `CTRL + C` in the terminal to stop your application.
 
 1. Run the application again:
-
-  ```console
-  $ docker compose up app-dev
-  ```
+   ```console
+   $ docker compose up app-dev
+   ```
 
 1. Refresh [http://localhost:5173](http://localhost:5173) in your browser and verify that the todo items persisted, even after the containers were removed and ran again.
 
@@ -399,14 +398,14 @@ Try making a change to test hot reloading:
 1. Open `src/client/components/TodoApp.tsx` in an IDE or text editor.
 1. Update the main heading text:
 
-  ```diff
+    ```diff
     - <h1 className="text-3xl font-bold text-gray-900 mb-8">
     -   Modern Todo App
     - </h1>
     + <h1 className="text-3xl font-bold text-gray-900 mb-8">
     +   My Todo App
     + </h1>
-  ```
+    ```
 
 1. Save the file and the Vite dev server will automatically reload the page with your changes.
 
@@ -418,7 +417,7 @@ You can connect a debugger to your application on port 9229. The Node.js inspect
 
 1. Create a launch configuration in `.vscode/launch.json`:
 
-  ```json
+    ```json
     {
       "version": "0.2.0",
       "configurations": [
@@ -437,13 +436,13 @@ You can connect a debugger to your application on port 9229. The Node.js inspect
         }
       ]
     }
-```
+    ```
 
 1. Start your development container:
 
-  ```console
-  docker compose up app-dev --build
-  ```
+    ```console
+    docker compose up app-dev --build
+    ```
 
 1. Attach the debugger:
    - Open VS Code
@@ -457,21 +456,21 @@ You can also use Chrome DevTools for debugging:
 
 1. Start your container (if not already running):
 
-  ```console
+    ```console
     docker compose up app-dev --build
-  ```
+    ```
 
 1. Open Chrome and navigate to:
 
-  ```text
-  chrome://inspect
-  ```
+    ```text
+    chrome://inspect
+    ```
 
 1. Select **Configure** and add:
 
-  ```text
-  localhost:9229
-  ```
+    ```text
+    localhost:9229
+    ```
 
 1. Select **inspect** under your Node.js target when it appears.
 
@@ -491,27 +490,27 @@ If the debugger doesn't connect:
 
 1. Check if the container is running:
 
-  ```console
-  docker ps
-  ```
+    ```console
+    docker ps
+    ```
 
 1. Check if the port is exposed:
 
-  ```console
-  docker port todoapp-dev
-  ```
+    ```console
+    docker port todoapp-dev
+    ```
 
 1. Check container logs:
 
-  ```console
-  docker compose logs app-dev
-  ```
+    ```console
+    docker compose logs app-dev
+    ```
 
-  You should see a message like:
+    You should see a message like:
 
-  ```text
-  Debugger listening on ws://0.0.0.0:9230/...
-```
+    ```text
+    Debugger listening on ws://0.0.0.0:9230/...
+    ```
 
 Now you can set breakpoints in your TypeScript source files and debug your containerized Node.js application!
 
