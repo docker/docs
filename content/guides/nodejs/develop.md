@@ -1,7 +1,7 @@
 ---
 title: Use containers for Node.js development
 linkTitle: Develop your app
-weight: 20
+weight: 30
 keywords: node, node.js, development
 description: Learn how to develop your Node.js application locally using containers.
 aliases:
@@ -24,253 +24,192 @@ In this section, you'll learn how to set up a development environment for your c
 
 ## Add a local database and persist data
 
-You can use containers to set up local services, like a database. In this section, you'll update the `compose.yaml` file to define a database service and a volume to persist data.
+The application uses PostgreSQL for data persistence. Add a database service to your Docker Compose configuration.
 
-1. Open your `compose.yaml` file in an IDE or text editor.
-2. Uncomment the database related instructions. The following is the updated
-   `compose.yaml` file.
+### Add database service to Docker Compose
 
-   > [!IMPORTANT]
-   >
-   > For this section, don't run `docker compose up` until you are instructed to. Running the command at intermediate points may incorrectly initialize your database.
+If you haven't already created a `compose.yml` file in the previous section, or if you need to add the database service, update your `compose.yml` file to include the PostgreSQL database service:
 
-   ```yaml {hl_lines="26-51",collapse=true,title=compose.yaml}
-   # Comments are provided throughout this file to help you get started.
-   # If you need more help, visit the Docker Compose reference guide at
-   # https://docs.docker.com/go/compose-spec-reference/
+```yaml
+services:
+  # ... existing app services ...
 
-   # Here the instructions define your application as a service called "server".
-   # This service is built from the Dockerfile in the current directory.
-   # You can add other services your application may depend on here, such as a
-   # database or a cache. For examples, see the Awesome Compose repository:
-   # https://github.com/docker/awesome-compose
-   services:
-     server:
-       build:
-         context: .
-       environment:
-         NODE_ENV: production
-       ports:
-         - 3000:3000
+  # ========================================
+  # PostgreSQL Database Service
+  # ========================================
+  db:
+    image: postgres:16-alpine
+    container_name: todoapp-db
+    environment:
+      POSTGRES_DB: '${POSTGRES_DB:-todoapp}'
+      POSTGRES_USER: '${POSTGRES_USER:-todoapp}'
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-todoapp_password}'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - '${DB_PORT:-5432}:5432'
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-todoapp} -d ${POSTGRES_DB:-todoapp}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    networks:
+      - todoapp-network
 
-       # The commented out section below is an example of how to define a PostgreSQL
-       # database that your application can use. `depends_on` tells Docker Compose to
-       # start the database before your application. The `db-data` volume persists the
-       # database data between container restarts. The `db-password` secret is used
-       # to set the database password. You must create `db/password.txt` and add
-       # a password of your choosing to it before running `docker compose up`.
+# ========================================
+# Volume Configuration
+# ========================================
+volumes:
+  postgres_data:
+    name: todoapp-postgres-data
+    driver: local
 
-       depends_on:
-         db:
-           condition: service_healthy
-     db:
-       image: postgres
-       restart: always
-       user: postgres
-       secrets:
-         - db-password
-       volumes:
-         - db-data:/var/lib/postgresql/data
-       environment:
-         - POSTGRES_DB=example
-         - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-       expose:
-         - 5432
-       healthcheck:
-         test: ["CMD", "pg_isready"]
-         interval: 10s
-         timeout: 5s
-         retries: 5
-   volumes:
-     db-data:
-   secrets:
-     db-password:
-       file: db/password.txt
+# ========================================
+# Network Configuration
+# ========================================
+networks:
+  todoapp-network:
+    name: todoapp-network
+    driver: bridge
+```
+
+### Update your application service
+
+Make sure your application service in `compose.yml` is configured to connect to the database:
+
+```yaml {hl_lines="18-20,42-44",collapse=true,title=compose.yml}
+services:
+  app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: todoapp-dev
+    ports:
+      - '${APP_PORT:-3000}:3000' # API server
+      - '${VITE_PORT:-5173}:5173' # Vite dev server
+      - '${DEBUG_PORT:-9229}:9229' # Node.js debugger
+    environment:
+      NODE_ENV: development
+      DOCKER_ENV: 'true'
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: todoapp
+      POSTGRES_USER: todoapp
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-todoapp_password}'
+      ALLOWED_ORIGINS: '${ALLOWED_ORIGINS:-http://localhost:3000,http://localhost:5173}'
+    volumes:
+      - ./src:/app/src:ro
+      - ./package.json:/app/package.json
+      - ./vite.config.ts:/app/vite.config.ts:ro
+      - ./tailwind.config.js:/app/tailwind.config.js:ro
+      - ./postcss.config.js:/app/postcss.config.js:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+          ignore:
+            - '**/*.test.*'
+            - '**/__tests__/**'
+        - action: rebuild
+          path: ./package.json
+        - action: sync
+          path: ./vite.config.ts
+          target: /app/vite.config.ts
+        - action: sync
+          path: ./tailwind.config.js
+          target: /app/tailwind.config.js
+        - action: sync
+          path: ./postcss.config.js
+          target: /app/postcss.config.js
+    restart: unless-stopped
+    networks:
+      - todoapp-network
+
+  db:
+    image: postgres:16-alpine
+    container_name: todoapp-db
+    environment:
+      POSTGRES_DB: '${POSTGRES_DB:-todoapp}'
+      POSTGRES_USER: '${POSTGRES_USER:-todoapp}'
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-todoapp_password}'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - '${DB_PORT:-5432}:5432'
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-todoapp} -d ${POSTGRES_DB:-todoapp}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    networks:
+      - todoapp-network
+
+volumes:
+  postgres_data:
+    name: todoapp-postgres-data
+    driver: local
+
+networks:
+  todoapp-network:
+    name: todoapp-network
+    driver: bridge
+```
+
+1. The PostgreSQL database configuration is handled automatically by the application. The database is created and initialized when the application starts, with data persisted using the `postgres_data` volume.
+
+1. Configure your environment by copying the example file:
+
+   ```console
+   $ cp .env.example .env
    ```
 
-   > [!NOTE]
-   >
-   > To learn more about the instructions in the Compose file, see [Compose file
-   > reference](/reference/compose-file/).
+   Update the `.env` file with your preferred settings:
 
-3. Open `src/persistence/postgres.js` in an IDE or text editor. You'll notice
-   that this application uses a Postgres database and requires some environment
-   variables in order to connect to the database. The `compose.yaml` file doesn't
-   have these variables defined yet.
-4. Add the environment variables that specify the database configuration. The
-   following is the updated `compose.yaml` file.
+   ```env
+   # Application Configuration
+   NODE_ENV=development
+   APP_PORT=3000
+   VITE_PORT=5173
+   DEBUG_PORT=9230
 
-   ```yaml {hl_lines="16-19",collapse=true,title=compose.yaml}
-   # Comments are provided throughout this file to help you get started.
-   # If you need more help, visit the Docker Compose reference guide at
-   # https://docs.docker.com/go/compose-spec-reference/
+   # Database Configuration
+   POSTGRES_HOST=db
+   POSTGRES_PORT=5432
+   POSTGRES_DB=todoapp
+   POSTGRES_USER=todoapp
+   POSTGRES_PASSWORD=todoapp_password
 
-   # Here the instructions define your application as a service called "server".
-   # This service is built from the Dockerfile in the current directory.
-   # You can add other services your application may depend on here, such as a
-   # database or a cache. For examples, see the Awesome Compose repository:
-   # https://github.com/docker/awesome-compose
-   services:
-     server:
-       build:
-         context: .
-       environment:
-         NODE_ENV: production
-         POSTGRES_HOST: db
-         POSTGRES_USER: postgres
-         POSTGRES_PASSWORD_FILE: /run/secrets/db-password
-         POSTGRES_DB: example
-       ports:
-         - 3000:3000
-
-       # The commented out section below is an example of how to define a PostgreSQL
-       # database that your application can use. `depends_on` tells Docker Compose to
-       # start the database before your application. The `db-data` volume persists the
-       # database data between container restarts. The `db-password` secret is used
-       # to set the database password. You must create `db/password.txt` and add
-       # a password of your choosing to it before running `docker compose up`.
-
-       depends_on:
-         db:
-           condition: service_healthy
-     db:
-       image: postgres
-       restart: always
-       user: postgres
-       secrets:
-         - db-password
-       volumes:
-         - db-data:/var/lib/postgresql/data
-       environment:
-         - POSTGRES_DB=example
-         - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-       expose:
-         - 5432
-       healthcheck:
-         test: ["CMD", "pg_isready"]
-         interval: 10s
-         timeout: 5s
-         retries: 5
-   volumes:
-     db-data:
-   secrets:
-     db-password:
-       file: db/password.txt
+   # Security Configuration
+   ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
    ```
 
-5. Add the `secrets` section under the `server` service so that your application securely handles the database password. The following is the updated `compose.yaml` file.
+1. Run the following command to start your application in development mode:
 
-   ```yaml {hl_lines="33-34",collapse=true,title=compose.yaml}
-   # Comments are provided throughout this file to help you get started.
-   # If you need more help, visit the Docker Compose reference guide at
-   # https://docs.docker.com/go/compose-spec-reference/
-
-   # Here the instructions define your application as a service called "server".
-   # This service is built from the Dockerfile in the current directory.
-   # You can add other services your application may depend on here, such as a
-   # database or a cache. For examples, see the Awesome Compose repository:
-   # https://github.com/docker/awesome-compose
-   services:
-     server:
-       build:
-         context: .
-       environment:
-         NODE_ENV: production
-         POSTGRES_HOST: db
-         POSTGRES_USER: postgres
-         POSTGRES_PASSWORD_FILE: /run/secrets/db-password
-         POSTGRES_DB: example
-       ports:
-         - 3000:3000
-
-       # The commented out section below is an example of how to define a PostgreSQL
-       # database that your application can use. `depends_on` tells Docker Compose to
-       # start the database before your application. The `db-data` volume persists the
-       # database data between container restarts. The `db-password` secret is used
-       # to set the database password. You must create `db/password.txt` and add
-       # a password of your choosing to it before running `docker compose up`.
-
-       depends_on:
-         db:
-           condition: service_healthy
-       secrets:
-         - db-password
-     db:
-       image: postgres
-       restart: always
-       user: postgres
-       secrets:
-         - db-password
-       volumes:
-         - db-data:/var/lib/postgresql/data
-       environment:
-         - POSTGRES_DB=example
-         - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-       expose:
-         - 5432
-       healthcheck:
-         test: ["CMD", "pg_isready"]
-         interval: 10s
-         timeout: 5s
-         retries: 5
-   volumes:
-     db-data:
-   secrets:
-     db-password:
-       file: db/password.txt
+   ```console
+   $ docker compose up app-dev --build
    ```
 
-6. In the `docker-nodejs-sample` directory, create a directory named `db`.
-7. In the `db` directory, create a file named `password.txt`. This file will
-   contain your database password.
+1. Open a browser and verify that the application is running at [http://localhost:5173](http://localhost:5173) for the frontend or [http://localhost:3000](http://localhost:3000) for the API. The React frontend is served by Vite dev server on port 5173, with API calls proxied to the Express server on port 3000.
 
-   You should now have at least the following contents in your
-   `docker-nodejs-sample` directory.
+1. Add some items to the todo list to test data persistence.
 
-   ```text
-   ├── docker-nodejs-sample/
-   │ ├── db/
-   │ │ └── password.txt
-   │ ├── spec/
-   │ ├── src/
-   │ ├── .dockerignore
-   │ ├── .gitignore
-   │ ├── compose.yaml
-   │ ├── Dockerfile
-   │ ├── package-lock.json
-   │ ├── package.json
-   │ └── README.md
+1. After adding some items to the todo list, press `CTRL + C` in the terminal to stop your application.
+
+1. Run the application again:
+   ```console
+   $ docker compose up app-dev
    ```
 
-8. Open the `password.txt` file in an IDE or text editor, and specify a password
-   of your choice. Your password must be on a single line with no additional
-   lines. Ensure that the file doesn't contain any newline characters or other
-   hidden characters.
-9. Ensure that you save your changes to all the files that you have modified.
-10. Run the following command to start your application.
-
-    ```console
-    $ docker compose up --build
-    ```
-
-11. Open a browser and verify that the application is running at
-    [http://localhost:3000](http://localhost:3000).
-12. Add some items to the todo list to test data persistence.
-13. After adding some items to the todo list, press `ctrl+c` in the terminal to
-    stop your application.
-14. In the terminal, run `docker compose rm` to remove your containers.
-
-    ```console
-    $ docker compose rm
-    ```
-
-15. Run `docker compose up` to run your application again.
-
-    ```console
-    $ docker compose up --build
-    ```
-
-16. Refresh [http://localhost:3000](http://localhost:3000) in your browser and verify that the todo items persisted, even after the containers were removed and ran again.
+1. Refresh [http://localhost:5173](http://localhost:5173) in your browser and verify that the todo items persisted, even after the containers were removed and ran again.
 
 ## Configure and run a development container
 
@@ -280,145 +219,301 @@ In addition to adding a bind mount, you can configure your Dockerfile and `compo
 
 ### Update your Dockerfile for development
 
-Open the Dockerfile in an IDE or text editor. Note that the Dockerfile doesn't
-install development dependencies and doesn't run nodemon. You'll
-need to update your Dockerfile to install the development dependencies and run
-nodemon.
+Your Dockerfile should be configured as a multi-stage build with separate stages for development, production, and testing. If you followed the previous section, your Dockerfile already includes a development stage that has all development dependencies and runs the application with hot reload enabled.
 
-Rather than creating one Dockerfile for production, and another Dockerfile for
-development, you can use one multi-stage Dockerfile for both.
-
-Update your Dockerfile to the following multi-stage Dockerfile.
+Here's the development stage from your multi-stage Dockerfile:
 
 ```dockerfile {hl_lines="5-26",collapse=true,title=Dockerfile}
-# syntax=docker/dockerfile:1
+# ========================================
+# Development Stage
+# ========================================
+FROM build-deps AS development
 
-ARG NODE_VERSION=18.0.0
+# Set environment
+ENV NODE_ENV=development \
+    NPM_CONFIG_LOGLEVEL=warn
 
-FROM node:${NODE_VERSION}-alpine as base
-WORKDIR /usr/src/app
-EXPOSE 3000
-
-FROM base as dev
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci --include=dev
-USER node
+# Copy source files
 COPY . .
-CMD npm run dev
 
-FROM base as prod
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci --omit=dev
-USER node
-COPY . .
-CMD node src/index.js
+# Ensure all directories have proper permissions
+RUN mkdir -p /app/node_modules/.vite && \
+    chown -R nodejs:nodejs /app && \
+    chmod -R 755 /app
+
+# Switch to non-root user
+USER nodejs
+
+# Expose ports
+EXPOSE 3000 5173 9229
+
+# Start development server
+CMD ["npm", "run", "dev:docker"]
 ```
 
-In the Dockerfile, you first add a label `as base` to the `FROM
-node:${NODE_VERSION}-alpine` statement. This lets you refer to this build stage
-in other build stages. Next, you add a new build stage labeled `dev` to install
-your development dependencies and start the container using `npm run dev`.
-Finally, you add a stage labeled `prod` that omits the dev dependencies and runs
-your application using `node src/index.js`. To learn more about multi-stage
-builds, see [Multi-stage builds](/manuals/build/building/multi-stage.md).
+The development stage:
+
+- Installs all dependencies including dev dependencies
+- Exposes ports for the API server (3000), Vite dev server (5173), and Node.js debugger (9229)
+- Runs `npm run dev` which starts both the Express server and Vite dev server concurrently
+- Includes health checks for monitoring container status
 
 Next, you'll need to update your Compose file to use the new stage.
 
 ### Update your Compose file for development
 
-To run the `dev` stage with Compose, you need to update your `compose.yaml`
-file. Open your `compose.yaml` file in an IDE or text editor, and then add the
-`target: dev` instruction to target the `dev` stage from your multi-stage
-Dockerfile.
+Update your `compose.yml` file to run the development stage with bind mounts for hot reloading:
 
-Also, add a new volume to the server service for the bind mount. For this application, you'll mount `./src` from your local machine to `/usr/src/app/src` in the container.
-
-Lastly, publish port `9229` for debugging.
-
-The following is the updated Compose file. All comments have been removed.
-
-```yaml {hl_lines=[5,8,20,21],collapse=true,title=compose.yaml}
+```yaml {hl_lines=[5,8-10,20-27],collapse=true,title=compose.yml}
 services:
-  server:
+  app-dev:
     build:
       context: .
-      target: dev
+      dockerfile: Dockerfile
+      target: development
+    container_name: todoapp-dev
     ports:
-      - 3000:3000
-      - 9229:9229
+      - '${APP_PORT:-3000}:3000' # API server
+      - '${VITE_PORT:-5173}:5173' # Vite dev server
+      - '${DEBUG_PORT:-9229}:9229' # Node.js debugger
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
+      DOCKER_ENV: 'true'
       POSTGRES_HOST: db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD_FILE: /run/secrets/db-password
-      POSTGRES_DB: example
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: todoapp
+      POSTGRES_USER: todoapp
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-todoapp_password}'
+      ALLOWED_ORIGINS: '${ALLOWED_ORIGINS:-http://localhost:3000,http://localhost:5173}'
+    volumes:
+      - ./src:/app/src:ro
+      - ./package.json:/app/package.json
+      - ./vite.config.ts:/app/vite.config.ts:ro
+      - ./tailwind.config.js:/app/tailwind.config.js:ro
+      - ./postcss.config.js:/app/postcss.config.js:ro
     depends_on:
       db:
         condition: service_healthy
-    secrets:
-      - db-password
-    volumes:
-      - ./src:/usr/src/app/src
-  db:
-    image: postgres
-    restart: always
-    user: postgres
-    secrets:
-      - db-password
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=example
-      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-    expose:
-      - 5432
-    healthcheck:
-      test: ["CMD", "pg_isready"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-volumes:
-  db-data:
-secrets:
-  db-password:
-    file: db/password.txt
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+          ignore:
+            - '**/*.test.*'
+            - '**/__tests__/**'
+        - action: rebuild
+          path: ./package.json
+        - action: sync
+          path: ./vite.config.ts
+          target: /app/vite.config.ts
+        - action: sync
+          path: ./tailwind.config.js
+          target: /app/tailwind.config.js
+        - action: sync
+          path: ./postcss.config.js
+          target: /app/postcss.config.js
+    restart: unless-stopped
+    networks:
+      - todoapp-network
 ```
+
+Key features of the development configuration:
+
+- **Multi-port exposure**: API server (3000), Vite dev server (5173), and debugger (9229)
+- **Comprehensive bind mounts**: Source code, configuration files, and package files for hot reloading
+- **Environment variables**: Configurable through `.env` file or defaults
+- **PostgreSQL database**: Production-ready database with persistent storage
+- **Docker Compose watch**: Automatic file synchronization and container rebuilds
+- **Health checks**: Database health monitoring with automatic dependency management
 
 ### Run your development container and debug your application
 
-Run the following command to run your application with the new changes to the `Dockerfile` and `compose.yaml` file.
+Run the following command to run your application with the development configuration:
 
 ```console
-$ docker compose up --build
+$ docker compose up app-dev --build
 ```
 
-Open a browser and verify that the application is running at [http://localhost:3000](http://localhost:3000).
+Or with file watching for automatic updates:
 
-Any changes to the application's source files on your local machine will now be
-immediately reflected in the running container.
-
-Open `docker-nodejs-sample/src/static/js/app.js` in an IDE or text editor and update the button text on line 109 from `Add Item` to `Add`.
-
-```diff
-+                         {submitting ? 'Adding...' : 'Add'}
--                         {submitting ? 'Adding...' : 'Add Item'}
+```console
+$ docker compose up app-dev --watch
 ```
 
-Refresh [http://localhost:3000](http://localhost:3000) in your browser and verify that the updated text appears.
+For local development without Docker:
 
-You can now connect an inspector client to your application for debugging. For
-more details about inspector clients, see the [Node.js
-documentation](https://nodejs.org/en/docs/guides/debugging-getting-started).
+```console
+$ npm run dev:with-db
+```
+
+Or start services separately:
+
+```console
+$ npm run db:start    # Start PostgreSQL container
+$ npm run dev         # Start both server and client
+```
+
+### Using Task Runner (alternative)
+
+The project includes a Taskfile.yml for advanced workflows:
+
+```console
+# Development
+$ task dev              # Start development environment
+$ task dev:build        # Build development image
+$ task dev:run          # Run development container
+
+# Production
+$ task build            # Build production image
+$ task run              # Run production container
+$ task build-run        # Build and run in one step
+
+# Testing
+$ task test             # Run all tests
+$ task test:unit        # Run unit tests with coverage
+$ task test:lint        # Run linting
+
+# Kubernetes
+$ task k8s:deploy       # Deploy to Kubernetes
+$ task k8s:status       # Check deployment status
+$ task k8s:logs         # View pod logs
+
+# Utilities
+$ task clean            # Clean up containers and images
+$ task health           # Check application health
+$ task logs             # View container logs
+```
+
+The application will start with both the Express API server and Vite development server:
+
+- **API Server**: [http://localhost:3000](http://localhost:3000) - Express.js backend with REST API
+- **Frontend**: [http://localhost:5173](http://localhost:5173) - Vite dev server with hot module replacement
+- **Health Check**: [http://localhost:3000/health](http://localhost:3000/health) - Application health status
+
+Any changes to the application's source files on your local machine will now be immediately reflected in the running container thanks to the bind mounts.
+
+Try making a change to test hot reloading:
+
+1. Open `src/client/components/TodoApp.tsx` in an IDE or text editor.
+1. Update the main heading text:
+
+    ```diff
+    - <h1 className="text-3xl font-bold text-gray-900 mb-8">
+    -   Modern Todo App
+    - </h1>
+    + <h1 className="text-3xl font-bold text-gray-900 mb-8">
+    +   My Todo App
+    + </h1>
+    ```
+
+1. Save the file and the Vite dev server will automatically reload the page with your changes.
+
+**Debugging support:**
+
+You can connect a debugger to your application on port 9229. The Node.js inspector is enabled with `--inspect=0.0.0.0:9230` in the development script (`dev:server`).
+
+### VS Code debugger setup
+
+1. Create a launch configuration in `.vscode/launch.json`:
+
+    ```json
+    {
+      "version": "0.2.0",
+      "configurations": [
+        {
+          "name": "Attach to Docker Container",
+          "type": "node",
+          "request": "attach",
+          "port": 9229,
+          "address": "localhost",
+          "localRoot": "${workspaceFolder}",
+          "remoteRoot": "/app",
+          "protocol": "inspector",
+          "restart": true,
+          "sourceMaps": true,
+          "skipFiles": ["<node_internals>/**"]
+        }
+      ]
+    }
+    ```
+
+1. Start your development container:
+
+    ```console
+    docker compose up app-dev --build
+    ```
+
+1. Attach the debugger:
+   - Open VS Code
+   - From the Debug panel (Ctrl/Cmd + Shift + D), select **Attach to Docker Container** from the drop-down
+   - Select the green play button or press F5
+
+### Chrome DevTools (alternative)
+
+You can also use Chrome DevTools for debugging:
+
+1. Start your container (if not already running):
+
+    ```console
+    docker compose up app-dev --build
+    ```
+
+1. Open Chrome and go to `chrome://inspect`.
+
+1. From the **Configure** option, add:
+
+    ```text
+    localhost:9229
+    ```
+
+1. When your Node.js target appears, select **inspect**.
+
+### Debugging configuration details
+
+The debugger configuration:
+
+- **Container port**: 9230 (internal debugger port)
+- **Host port**: 9229 (mapped external port)
+- **Script**: `tsx watch --inspect=0.0.0.0:9230 src/server/index.ts`
+
+The debugger listens on all interfaces (`0.0.0.0`) inside the container on port 9230 and is accessible on port 9229 from your host machine.
+
+### Troubleshooting debugger connection
+
+If the debugger doesn't connect:
+
+1. Check if the container is running:
+
+    ```console
+    docker ps
+    ```
+
+1. Check if the port is exposed:
+
+    ```console
+    docker port todoapp-dev
+    ```
+
+1. Check container logs:
+
+    ```console
+    docker compose logs app-dev
+    ```
+
+    You should see a message like:
+
+    ```text
+    Debugger listening on ws://0.0.0.0:9230/...
+    ```
+
+Now you can set breakpoints in your TypeScript source files and debug your containerized Node.js application.
+
+For more details about Node.js debugging, see the [Node.js documentation](https://nodejs.org/en/docs/guides/debugging-getting-started).
 
 ## Summary
 
-In this section, you took a look at setting up your Compose file to add a mock
-database and persist data. You also learned how to create a multi-stage
-Dockerfile and set up a bind mount for development.
+You've set up your Compose file with a PostgreSQL database and data persistence. You also created a multi-stage Dockerfile and configured bind mounts for development.
 
 Related information:
 
