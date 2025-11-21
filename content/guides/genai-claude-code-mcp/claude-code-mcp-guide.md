@@ -28,7 +28,7 @@ In this guide, you’ll learn how to:
 
 ---
 
-# Use Claude Code and Docker MCP Toolkit to generate a Docker Compose file from natural language
+## Use Claude Code and Docker MCP Toolkit to generate a Docker Compose file from natural language
 
 
 - **Setup**: Enable MCP Toolkit → Add Docker Hub MCP server → Connect Claude Code  
@@ -40,6 +40,7 @@ In this guide, you’ll learn how to:
 **Estimated time**: ~15 minutes
 
 ---
+
 ## 1. What you are building
 
 The goal is simple: use Claude Code together with the Docker MCP Toolkit to search Docker Hub images and generate a complete Docker Compose file for a Node.js and PostgreSQL setup. 
@@ -184,12 +185,12 @@ Claude will search images through MCP and generate a Compose file for you.
 
 ---
 
-## 8. Save the generated docker-compose.yml
+## 8. Save the generated Docker Compose file
 
 Tell Claude:
 
 ```text
-Save the final docker-compose.yml into the current project directory.
+Save the final Docker Compose file (docker-compose.yml) into the current project directory.
 ```
 
 Verify it:
