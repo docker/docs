@@ -40,22 +40,9 @@ In this guide, you’ll learn how to:
 **Estimated time**: ~15 minutes
 
 ---
-# Use Claude Code and Docker MCP Toolkit to generate a Docker Compose file from natural language
-
-
-- **Setup**: Enable Docker MCP Toolkit → Add Docker Hub MCP server → Connect Claude Code
-- **Use Claude**: Describe your stack in natural language to Claude Code
-- **Automate**: Claude searches Docker Hub via MCP and generates production-ready `docker-compose.yml`
-- **Deploy**: Run `docker compose up` and your Node.js + PostgreSQL app is live on `localhost:3000`
-- **Key Benefit**: No manual YAML writing, no image hunting — describe once, Claude builds it
-
-**Time to completion**: ~15 minutes
-
----
-
 ## 1. What you are building
 
-The goal is simple: use Claude Code together with the Docker MCP Toolkit to search Docker Hub images and generate a complete docker compose file for a Node.js and PostgreSQL setup. 
+The goal is simple: use Claude Code together with the Docker MCP Toolkit to search Docker Hub images and generate a complete Docker Compose file for a Node.js and PostgreSQL setup. 
 
 The Model Context Protocol (MCP) bridges Claude Code and Docker Desktop, giving Claude real-time access to Docker's tools. Instead of context-switching between Docker, terminal commands, and YAML editors, you describe your requirements once and Claude handles the infrastructure details.
 
@@ -76,10 +63,10 @@ Make sure you have:
 ## 3. Enable Docker MCP Toolkit in Docker Desktop
 
 1. Open Docker Desktop  
-2. Go to **Settings**  
-3. Open **Beta features**  
-4. Turn on **Enable Docker MCP Toolkit**  
-5. Click **Apply and restart**
+1. Go to **Settings**  
+1. Open **Beta features**  
+1. Turn on **Enable Docker MCP Toolkit**  
+1. Select **Apply and restart**
 
 ![Enable MCP](./images/enable_mcp.png "Enable MCP")
 
@@ -91,11 +78,11 @@ You should now see **MCP Toolkit** in the sidebar.
 ## 4. Install the Docker Hub MCP server
 
 1. Open **Docker Desktop**  
-2. Select **MCP Toolkit**  
-3. Go to the **Catalog** tab  
-4. Search for **Docker Hub**  
-5. Click the **Docker Hub MCP server**  
-6. Select **+ Add**
+1. Select **MCP Toolkit**  
+1. Go to the **Catalog** tab  
+1. Search for **Docker Hub**  
+1. Select the **Docker Hub MCP server**  
+1. Select **+ Add**
 
 ![Docker Hub](./images/catalog_docker_hub.png "Docker Hub")
 
@@ -113,9 +100,9 @@ You can connect from Docker Desktop or using the CLI.
 ### Option A. Connect with Docker Desktop
 
 1. Open **MCP Toolkit**  
-2. Go to the **Clients** tab  
-3. Locate **Claude Code**  
-4. Click **Connect**
+1. Go to the **Clients** tab  
+1. Locate **Claude Code**  
+1. Select **Connect**
 
 ![Docker Connection](./images/docker-connect-claude.png)
 
@@ -148,7 +135,7 @@ MCP_DOCKER  docker mcp gateway run  user
 cd /path/to/project
 ```
 
-2. Start Claude Code:
+1. Start Claude Code:
 
 ```bash
 claude code
@@ -156,7 +143,7 @@ claude code
 
 ![Claude Home](./images/claude-home.png)
 
-3. In the input box, type:
+1. In the input box, type:
 
 ```text
 /mcp
@@ -173,7 +160,7 @@ If not, restart Claude Code or check Docker Desktop to confirm the connection.
 
 ---
 
-## 7. Ask Claude Code to design your docker compose stack
+## 7. Ask Claude Code to design your Docker Compose stack
 
 Paste this message into Claude Code:
 
@@ -183,7 +170,7 @@ Using the Docker Hub MCP server:
 Search Docker Hub for an official Node.js image and a PostgreSQL image.
 Choose stable, commonly used tags such as the Node LTS version and a recent major Postgres version.
 
-Generate a docker-compose.yml with:
+Generate a Docker Compose file (`docker-compose.yml`) with:
 - app: running on port 3000
 - db: running on port 5432 using a named volume
 
@@ -286,7 +273,7 @@ Add a start script to `package.json`:
 
 ---
 
-## 10. Run the docker compose stack
+## 10. Run the Docker Compose stack
 
 From your project root:
 
@@ -302,7 +289,7 @@ Docker will:
 
 Open your browser:
 
-```
+```text
 http://localhost:3000
 ```
 ![Local Host](./images/Localhost.png)
@@ -328,7 +315,7 @@ The future of development is not about switching between tools. It is about tool
 
 
 ## Learn more
+
 - **[Explore the MCP Catalog](https://hub.docker.com/mcp):** Discover containerized, security-hardened MCP servers  
 - **[Get started with MCP Toolkit in Docker Desktop](https://hub.docker.com/open-desktop?url=https://open.docker.com/dashboard/mcp):** Requires version 4.48 or newer to launch automatically  
 - **[Read the MCP Horror Stories series](https://www.docker.com/blog/mcp-horror-stories-the-supply-chain-attack/):** Learn about common MCP security pitfalls and how to avoid them  
-
