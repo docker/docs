@@ -25,8 +25,8 @@ weight: 30
   1. Create and install the currently logged-in user's AppArmor profile:
 
      ```console
-     $ filename=$(echo $HOME/bin/rootlesskit | sed -e s@^/@@ -e s@/@.@g)
-     $ cat <<EOF > ~/${filename}
+     $ filename=$(echo $HOME/bin/rootlesskit | sed -e 's@^/@@' -e 's@/@.@g')
+     $ [ ! -z "${filename}" ] && sudo cat <<EOF > /etc/apparmor.d/${filename}
      abi <abi/4.0>,
      include <tunables/global>
 
@@ -36,7 +36,6 @@ weight: 30
        include if exists <local/${filename}>
      }
      EOF
-     $ sudo mv ~/${filename} /etc/apparmor.d/${filename}
      ```
   2. Restart AppArmor.
 
