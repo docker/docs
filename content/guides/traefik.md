@@ -47,7 +47,7 @@ Let’s do a quick demo of starting Traefik and then configuring two additional 
    $ docker network create traefik-demo
    ```
 
-2. Start a Traefik container using one of the following methods.
+2. Start a Traefik container using one of the following methods. These commands exposes Traefik on port 80, mounts the Docker socket (which is used to monitor containers to update configuration), and passes the `--providers.docker` argument to configure Traefik to use the Docker provider.
 
 {{< tabs >}}
 {{< tab name="Using Docker Hardened Images" >}}
