@@ -262,7 +262,7 @@ By default, containers inherit the DNS settings as defined in the
 `/etc/resolv.conf` configuration file.
 Containers that attach to the default `bridge` network receive a copy of this file.
 Containers that attach to a
-[custom network](tutorials/standalone.md#use-user-defined-bridge-networks)
+[custom network](drivers/bridge.md#use-user-defined-bridge-networks)
 use Docker's embedded DNS server.
 The embedded DNS server forwards external DNS lookups to the DNS servers configured on the host.
 
