@@ -41,6 +41,8 @@ While there are [many Traefik-monitored labels](https://doc.traefik.io/traefik/r
 
 Let’s do a quick demo of starting Traefik and then configuring two additional containers to be accessible using different hostnames.
 
+<!-- markdownlint-disable MD029 -->
+
 1. In order for two containers to be able to communicate with each other, they need to be on the same network. Create a network named `traefik-demo` using the `docker network create` command:
 
    ```console
@@ -123,6 +125,8 @@ $ docker run -d --network=traefik-demo \
 
    Once the container starts, open your browser to http://welcome.localhost. You should see a “Welcome to Docker” website.
 
+<!-- markdownlint-enable MD029 -->
+
 ## Using Traefik in development
 
 Now that you’ve experienced Traefik, it’s time to try using it in a development environment. In this example, you will use a sample application that has a split frontend and backend. This app stack has the following configuration:
@@ -134,6 +138,8 @@ Now that you’ve experienced Traefik, it’s time to try using it in a developm
 ![Architecture diagram showing Traefik routing requests to other containers based on the path of the request](./images/traefik-in-development.webp)
 
 The application can be accessed on GitHub at [dockersamples/easy-http-routing-with-traefik](https://github.com/dockersamples/easy-http-routing-with-traefik).
+
+<!-- markdownlint-disable MD029 -->
 
 1. In the `compose.yaml` file, Traefik is using the following configuration:
 
@@ -237,6 +243,8 @@ services:
 
 And that’s it. Now, you only need to spin up the Compose stack with a `docker compose up` and all of the services and applications will be ready for development.
 
+<!-- markdownlint-enable MD029 -->
+
 ## Sending traffic to non-containerized workloads
 
 In some situations, you may want to forward requests to applications not running in containers. In the following architecture diagram, the same application from before is used, but the API and React apps are now running natively on the host machine.
@@ -269,6 +277,8 @@ http:
 This configuration indicates that requests that for `localhost/api` will be forwarded to a service named `native-api`, which then forwards the request to http://host.docker.internal:3000. The hostname `host.docker.internal` is a name that Docker Desktop provides to send requests to the host machine.
 
 With this file, the only change is to the Compose configuration for Traefik. There are specifically two things that have changed:
+
+<!-- markdownlint-disable MD029 -->
 
 1. The configuration file is mounted into the Traefik container (the exact destination path is up to you)
 2. The `command` is updated to add the file provider and point to the location of the configuration file
@@ -308,6 +318,8 @@ services:
 
 {{< /tab >}}
 {{< /tabs >}}
+
+<!-- markdownlint-enable MD029 -->
 
 ### Starting the example app
 
