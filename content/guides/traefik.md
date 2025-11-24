@@ -47,17 +47,71 @@ Let’s do a quick demo of starting Traefik and then configuring two additional 
    $ docker network create traefik-demo
    ```
 
-2. Start a Traefik container using the following command. The command exposes Traefik on port 80, mounts the Docker socket (which is used to monitor containers to update configuration), and passes the `--providers.docker` argument to configure Traefik to use the Docker provider.
+2. Start a Traefik container using one of the following methods.
 
-   ```console
-   $ docker run -d --network=traefik-demo -p 80:80 -v /var/run/docker.sock:/var/run/docker.sock traefik:v3.6.2 --providers.docker
-   ```
+{{< tabs >}}
+{{< tab name="Using Docker Hardened Images" >}}
+
+Docker Hardened Images (DHI) for Traefik are available on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/traefik).  
+Before you can use a DHI image, you must mirror it into your organization’s namespace.  
+Follow the [DHI quickstart](/dhi/get-started/) to create a mirrored repository.
+
+For example — use:
+`FROM <your-namespace>/dhi-traefik:<tag>`
+
+Then start a container using the Hardened image:
+
+```console
+$ docker run -d --network=traefik-demo \
+  -p 80:80 \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  <your-namespace>/dhi-traefik:3.6.2 \
+  --providers.docker
+```
+
+{{< /tab >}}
+{{< tab name="Using the official image" >}}
+
+You can also use the official image from Docker Hub:
+
+```console
+$ docker run -d --network=traefik-demo \
+  -p 80:80 \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  traefik:v3.6.2 \
+  --providers.docker
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 3. Now, start a simple Nginx container and define the labels Traefik is watching for to configure the HTTP routing. Note that the Nginx container is not exposing any ports.
 
-   ```console
-   $ docker run -d --network=traefik-demo --label 'traefik.http.routers.nginx.rule=Host(`nginx.localhost`)' nginx
-   ```
+{{< tabs >}}
+{{< tab name="Using Docker Hardened Images" >}}
+
+If your organization uses an [Nginx DHI image](https://hub.docker.com/hardened-images/catalog/dhi/nginx),  
+you can use the mirrored image name below. For example:
+
+```console
+$ docker run -d --network=traefik-demo \
+  --label 'traefik.http.routers.nginx.rule=Host(`nginx.localhost`)' \
+  <your-namespace>/dhi-nginx:1.29.3
+```
+
+{{< /tab >}}
+{{< tab name="Using the official image" >}}
+
+You can also run the official NGINX image as follows:
+
+```console
+$ docker run -d --network=traefik-demo \
+  --label 'traefik.http.routers.nginx.rule=Host(`nginx.localhost`)' \
+  nginx:1.29.3
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
    Once the container starts, open your browser to [http://nginx.localhost](http://nginx.localhost) to see the app (all Chromium-based browsers route \*.localhost requests locally with no additional setup).
 
@@ -83,31 +137,74 @@ The application can be accessed on GitHub at [dockersamples/easy-http-routing-wi
 
 1. In the `compose.yaml` file, Traefik is using the following configuration:
 
-   ```yaml
-   services:
-     proxy:
-       image: traefik:v3.6.2
-       command: --providers.docker
-       ports:
-         - 80:80
-       volumes:
-         - /var/run/docker.sock:/var/run/docker.sock
-   ```
+{{< tabs >}}
+{{< tab name="Using DHI image" >}}
+
+```yaml
+services:
+  proxy:
+    image: <your-namespace>/dhi-traefik:3.6.2
+    command: --providers.docker
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+```
+
+{{< /tab >}}
+{{< tab name="Using official image" >}}
+
+```yaml
+services:
+  proxy:
+    image: traefik:v3.6.2
+    command: --providers.docker
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
    Note that this is essentially the same configuration as used earlier, but now in a Compose syntax.
 
 2. The client service has the following configuration, which will start the container and provide it with the labels to receive requests at localhost.
 
-   ```yaml {hl_lines=[7,8]}
-   services:
-     # …
-     client:
-       image: nginx:alpine
-       volumes:
-         - "./client:/usr/share/nginx/html"
-       labels:
-         traefik.http.routers.client.rule: "Host(`localhost`)"
-   ```
+{{< tabs >}}
+{{< tab name="Using Docker Hardened Images" >}}
+
+If your organization mirrors the [Nginx DHI image](https://hub.docker.com/hardened-images/catalog/dhi/nginx),  
+you can use it as your base image as shown below:
+
+```yaml
+services:
+  # …
+  client:
+    image: <your-namespace>/dhi-nginx:1.29.3-alpine3.21
+    volumes:
+      - "./client:/usr/share/nginx/html"
+    labels:
+      traefik.http.routers.client.rule: "Host(`localhost`)"
+```
+
+{{< /tab >}}
+{{< tab name="Using the official image" >}}
+
+```yaml
+services:
+  # …
+  client:
+    image: nginx:1.29.3-alpine3.22
+    volumes:
+      - "./client:/usr/share/nginx/html"
+    labels:
+      traefik.http.routers.client.rule: "Host(`localhost`)"
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 3. The api service has a similar configuration, but you’ll notice the routing rule has two conditions - the host must be “localhost” and the URL path must have a prefix of “/api”. Since this rule is more specific, Traefik will evaluate it first compared to the client rule.
 
@@ -176,6 +273,26 @@ With this file, the only change is to the Compose configuration for Traefik. The
 1. The configuration file is mounted into the Traefik container (the exact destination path is up to you)
 2. The `command` is updated to add the file provider and point to the location of the configuration file
 
+{{< tabs >}}
+{{< tab name="Using DHI image" >}}
+
+```yaml
+services:
+  proxy:
+    image: <your-namespace>/dhi-traefik:3.6.2
+    command: --providers.docker --providers.file.filename=/config/traefik-config.yaml --api.insecure
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./dev/traefik-config.yaml:/config/traefik-config.yaml
+```
+
+{{< /tab >}}
+
+{{< tab name="Using official image" >}}
+
 ```yaml
 services:
   proxy:
@@ -188,6 +305,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./dev/traefik-config.yaml:/config/traefik-config.yaml
 ```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ### Starting the example app
 
