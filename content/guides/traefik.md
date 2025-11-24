@@ -91,7 +91,7 @@ $ docker run -d --network=traefik-demo \
 {{< tab name="Using Docker Hardened Images" >}}
 
 If your organization uses an [Nginx DHI image](https://hub.docker.com/hardened-images/catalog/dhi/nginx),  
-you can use the mirrored image name below. For example:
+you can use the mirrored image name following. For example:
 
 ```console
 $ docker run -d --network=traefik-demo \
@@ -102,7 +102,7 @@ $ docker run -d --network=traefik-demo \
 {{< /tab >}}
 {{< tab name="Using the official image" >}}
 
-You can also run the official NGINX image as follows:
+You can also run the official Nginx image as follows:
 
 ```console
 $ docker run -d --network=traefik-demo \
@@ -110,7 +110,7 @@ $ docker run -d --network=traefik-demo \
   nginx:1.29.3
 ```
 
-{{< /tab >}}
+{{< /tab >}}g
 {{< /tabs >}}
 
    Once the container starts, open your browser to [http://nginx.localhost](http://nginx.localhost) to see the app (all Chromium-based browsers route \*.localhost requests locally with no additional setup).
@@ -176,7 +176,7 @@ services:
 {{< tab name="Using Docker Hardened Images" >}}
 
 If your organization mirrors the [Nginx DHI image](https://hub.docker.com/hardened-images/catalog/dhi/nginx),  
-you can use it as your base image as shown below:
+you can use it as your base image as shown following:
 
 ```yaml
 services:
