@@ -64,11 +64,11 @@ Make sure you have:
 ## 3. Install the Docker Hub MCP server
 
 1. Open **Docker Desktop**  
-2. Select **MCP Toolkit**  
-3. Go to the **Catalog** tab  
-4. Search for **Docker Hub**  
-5. Select the **Docker Hub MCP server**  
-6. Select **+ Add**
+1. Select **MCP Toolkit**  
+1. Go to the **Catalog** tab  
+1. Search for **Docker Hub**  
+1. Select the **Docker Hub MCP server**  
+1. Select **+ Add**
 
 ![Docker Hub](./images/catalog_docker_hub.avif "Docker Hub")
 
@@ -86,9 +86,9 @@ You can connect from Docker Desktop or using the CLI.
 ### Option A. Connect with Docker Desktop
 
 1. Open **MCP Toolkit**  
-2. Go to the **Clients** tab  
-3. Locate **Claude Code**  
-4. Select **Connect**
+1. Go to the **Clients** tab  
+1. Locate **Claude Code**  
+1. Select **Connect**
 
 ![Docker Connection](./images/docker-connect-claude.avif)
 
@@ -108,13 +108,13 @@ $ claude mcp add MCP_DOCKER -s user -- docker mcp gateway run
 $ cd /path/to/project
 ```
 
-2. Start Claude Code:
+1. Start Claude Code:
 
 ```console
 $ claude
 ```
 
-3. In the input box, type:
+1. In the input box, type:
 
 ```console
 /mcp
