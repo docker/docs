@@ -43,7 +43,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Upgrades
 
-- [Docker Engine v29.0.0](/manuals/engine/release-notes/28.md#2900)
+- [Docker Engine v29.0.0](/manuals/engine/release-notes/29.md#2900)
 - [Docker Model Runner v1.0.3](https://github.com/docker/model-runner/releases/tag/v1.0.3)
 - [Docker Model Runner CLI v1.0.0](https://github.com/docker/model-runner/releases/tag/cmd%2Fcli%2Fv1.0.0)
 - Docker MCP plugin `v0.28.0`
