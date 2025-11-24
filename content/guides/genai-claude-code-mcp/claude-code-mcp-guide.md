@@ -12,7 +12,7 @@ params:
   time: 15 minutes
 ---
 
-This guide introduces how to use Claude Code together with Docker MCP Toolkit so Claude can search Docker Hub in real time and generate a complete `docker-compose.yml` from natural language.
+This guide introduces how to use Claude Code together with Docker MCP Toolkit so Claude can search Docker Hub in real time and generate a complete `docker-compose.yaml` from natural language.
 
 Instead of manually writing YAML or looking for image tags, you describe your stack once — Claude uses the Model Context Protocol (MCP) to query Docker Hub and build a production-ready Compose file.
 
@@ -32,7 +32,7 @@ In this guide, you’ll learn how to:
 
 - **Setup**: Enable MCP Toolkit → Add Docker Hub MCP server → Connect Claude Code  
 - **Use Claude**: Describe your stack in plain English  
-- **Automate**: Claude queries Docker Hub via MCP and builds a complete `docker-compose.yml`  
+- **Automate**: Claude queries Docker Hub via MCP and builds a complete `docker-compose.yaml`  
 - **Deploy**: Run `docker compose up` → Node.js + PostgreSQL live on `localhost:3000`  
 - **Benefit**: Zero YAML authoring. Zero image searching. Describe once → Claude builds it.
 
@@ -67,8 +67,11 @@ Make sure you have:
 1. Select **MCP Toolkit**  
 1. Go to the **Catalog** tab  
 1. Search for **Docker Hub**  
-1. Select the **Docker Hub MCP server**  
-1. Select **+ Add**
+1. Select the **Docker Hub**MCP server
+1. Add the MCP server, then open the **Configuration** tab
+1. Enter your Docker Hub username
+1. [Create a read-only personal access token](/security/access-tokens/#create-a-personal-access-token) and enter your access token under **Secrets**
+1. Save the configuration
 
 ![Docker Hub](./images/catalog_docker_hub.avif "Docker Hub")
 
@@ -181,7 +184,7 @@ Using the Docker Hub MCP server:
 Search Docker Hub for an official Node.js image and a PostgreSQL image.
 Choose stable, commonly used tags such as the Node LTS version and a recent major Postgres version.
 
-Generate a Docker Compose file (`docker-compose.yml`) with:
+Generate a Docker Compose file (`docker-compose.yaml`) with:
 - app:
   - runs on port 3000
   - bind mounts the existing ./app directory into /usr/src/app
@@ -204,7 +207,7 @@ Claude will search images through MCP, inspect the `app` directory, and generate
 Tell Claude:
 
 ```console
-Save the final Docker Compose file (docker-compose.yml) into the current project directory.
+Save the final Docker Compose file (docker-compose.yaml) into the current project directory.
 ```
 
 You should see something like this:
