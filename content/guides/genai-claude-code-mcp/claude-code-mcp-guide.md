@@ -56,97 +56,68 @@ The Model Context Protocol (MCP) bridges Claude Code and Docker Desktop, giving 
 Make sure you have:
 
 - Docker Desktop installed
-- Docker Desktop updated with MCP Toolkit support
+- Enable Docker Desktop updated with [MCP Toolkit](https://docs.docker.com/ai/mcp-catalog-and-toolkit/get-started/#setup) support
+
 - Claude Code installed
 
 ---
 
-## 3. Enable Docker MCP Toolkit in Docker Desktop
-
-1. Open Docker Desktop  
-1. Go to **Settings**  
-1. Open **Beta features**  
-1. Turn on **Enable Docker MCP Toolkit**  
-1. Select **Apply and restart**
-
-![Enable MCP](./images/enable_mcp.png "Enable MCP")
-
-
-You should now see **MCP Toolkit** in the sidebar.
-
----
-
-## 4. Install the Docker Hub MCP server
+## 3. Install the Docker Hub MCP server
 
 1. Open **Docker Desktop**  
-1. Select **MCP Toolkit**  
-1. Go to the **Catalog** tab  
-1. Search for **Docker Hub**  
-1. Select the **Docker Hub MCP server**  
-1. Select **+ Add**
+2. Select **MCP Toolkit**  
+3. Go to the **Catalog** tab  
+4. Search for **Docker Hub**  
+5. Select the **Docker Hub MCP server**  
+6. Select **+ Add**
 
-![Docker Hub](./images/catalog_docker_hub.png "Docker Hub")
+![Docker Hub](./images/catalog_docker_hub.avif "Docker Hub")
 
 Public images work without credentials. For private repositories, you can add your Docker Hub username and token later.
 
-![Docker Hub Secrets](./images/dockerhub_secrets.png "Docker Hub Secrets")
+![Docker Hub Secrets](./images/dockerhub_secrets.avif "Docker Hub Secrets")
 
 
 ---
 
-## 5. Connect Claude Code to Docker MCP Toolkit
+## 4. Connect Claude Code to Docker MCP Toolkit
 
 You can connect from Docker Desktop or using the CLI.
 
 ### Option A. Connect with Docker Desktop
 
 1. Open **MCP Toolkit**  
-1. Go to the **Clients** tab  
-1. Locate **Claude Code**  
-1. Select **Connect**
+2. Go to the **Clients** tab  
+3. Locate **Claude Code**  
+4. Select **Connect**
 
-![Docker Connection](./images/docker-connect-claude.png)
+![Docker Connection](./images/docker-connect-claude.avif)
 
 ### Option B. Connect using the CLI
 
-```bash
-claude mcp add MCP_DOCKER -s user -- docker mcp gateway run
-```
-
-Verify the connection:
-
-```bash
-claude mcp list
-```
-
-You should see:
-![MCP List](./images/claude-mcp-list.png "MCP List")
-
-```bash
-MCP_DOCKER  docker mcp gateway run  user
+```console
+$ claude mcp add MCP_DOCKER -s user -- docker mcp gateway run
 ```
 
 ---
 
-## 6. Verify MCP servers inside Claude Code
+## 5. Verify MCP servers inside Claude Code
 
 1. Navigate to your project folder:
 
-```bash
-cd /path/to/project
+```console
+$ cd /path/to/project
 ```
 
-1. Start Claude Code:
+2. Start Claude Code:
 
-```bash
-claude code
+```console
+$ claude
 ```
 
-![Claude Home](./images/claude-home.png)
+3. In the input box, type:
 
-1. In the input box, type:
-
-```text
+```console
 /mcp
 ```
 
@@ -155,9 +126,49 @@ You should now see:
 - The MCP gateway (for example `MCP_DOCKER`)
 - Tools provided by the Docker Hub MCP server
 
-![mcp-docker](./images/mcp-servers.png)
+![mcp-docker](./images/mcp-servers.avif)
 
 If not, restart Claude Code or check Docker Desktop to confirm the connection.
+
+---
+
+## 6. Create a basic Node.js app
+
+Claude Code generates more accurate Compose files when it can inspect a real project. Set up the application code now so the agent can bind mount it later.
+
+Inside project folder, create a folder named `app`:
+
+```console
+$ mkdir app
+$ cd app
+$ npm init -y
+$ npm install express
+```
+
+Create `index.js`:
+
+```console
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Node.js, Docker, and MCP Toolkit are working together!");
+});
+
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
+});
+```
+
+Add a start script to `package.json`:
+
+```console
+"scripts": {
+  "start": "node index.js"
+}
+```
+
+Return to your project root (`cd ..`) once the app is ready.
 
 ---
 
@@ -165,23 +176,27 @@ If not, restart Claude Code or check Docker Desktop to confirm the connection.
 
 Paste this message into Claude Code:
 
-```text
+```console
 Using the Docker Hub MCP server:
 
 Search Docker Hub for an official Node.js image and a PostgreSQL image.
 Choose stable, commonly used tags such as the Node LTS version and a recent major Postgres version.
 
 Generate a Docker Compose file (`docker-compose.yml`) with:
-- app: running on port 3000
+- app:
+  - runs on port 3000
+  - bind mounts the existing ./app directory into /usr/src/app
+  - sets /usr/src/app as the working directory and runs `npm install && npm start`
 - db: running on port 5432 using a named volume
 
 Include:
 - Environment variables for Postgres
 - A shared bridge network
 - Healthchecks where appropriate
+- Pin the image version using the tag + index digest
 ```
 
-Claude will search images through MCP and generate a Compose file for you.
+Claude will search images through MCP, inspect the `app` directory, and generate a Compose file that mounts and runs your local code.
 
 ---
 
@@ -189,19 +204,13 @@ Claude will search images through MCP and generate a Compose file for you.
 
 Tell Claude:
 
-```text
+```console
 Save the final Docker Compose file (docker-compose.yml) into the current project directory.
-```
-
-Verify it:
-
-```bash
-cat docker-compose.yml
 ```
 
 You should see something like this:
 
-```yaml
+```console
 services:
   app:
     image: node:<tag>
@@ -238,48 +247,12 @@ networks:
 
 ---
 
-## 9. Add a basic Node.js app
-
-Inside your project folder, create a folder named `app`:
-
-```bash
-mkdir app
-cd app
-npm init -y
-npm install express
-```
-
-Create `index.js`:
-
-```js
-const express = require("express");
-const app = express();
-
-app.get("/", (req, res) => {
-  res.send("Node.js, Docker, and MCP Toolkit are working together!");
-});
-
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
-```
-
-Add a start script to `package.json`:
-
-```json
-"scripts": {
-  "start": "node index.js"
-}
-```
-
----
-
-## 10. Run the Docker Compose stack
+## 9. Run the Docker Compose stack
 
 From your project root:
 
-```bash
-docker compose up
+```console
+$ docker compose up
 ```
 
 Docker will:
@@ -290,10 +263,10 @@ Docker will:
 
 Open your browser:
 
-```text
+```console
 http://localhost:3000
 ```
-![Local Host](./images/Localhost.png)
+![Local Host](./images/Localhost.avif)
 
 Your Node.js app should now be running.
 
