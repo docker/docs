@@ -112,7 +112,7 @@ $ docker run -d --network=traefik-demo \
   nginx:1.29.3
 ```
 
-{{< /tab >}}g
+{{< /tab >}}
 {{< /tabs >}}
 
    Once the container starts, open your browser to [http://nginx.localhost](http://nginx.localhost) to see the app (all Chromium-based browsers route \*.localhost requests locally with no additional setup).
