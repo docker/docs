@@ -110,7 +110,6 @@ Docker from the repository.
    ```bash
    # Add Docker's official GPG key:
    sudo apt update
-   sudo apt install ca-certificates
    sudo install -m 0755 -d /etc/apt/keyrings
    wget -qO- {{% param "download-url-base" %}}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
    sudo chmod a+r /etc/apt/keyrings/docker.gpg
