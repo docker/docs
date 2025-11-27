@@ -36,6 +36,12 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.53.0" build_path="//" >}}
 
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where the Support Diagnostics tooling inadvertently captured expired Docker Hub authorization bearer tokens.
+
 ### Security 
 
 - Added security patches to address CVEs [2025-52565](https://github.com/opencontainers/runc/security/advisories/GHSA-9493-h29p-rfm2), [2025-52881](https://github.com/opencontainers/runc/security/advisories/GHSA-cgrx-mc8f-2prm), and [2025-31133](https://github.com/opencontainers/runc/security/advisories/GHSA-qw9x-cqr3-wc7r) when using [Enhanced Container Isolation](https://docs.docker.com/enterprise/security/hardened-desktop/enhanced-container-isolation). 
