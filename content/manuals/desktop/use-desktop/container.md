@@ -68,9 +68,9 @@ Using the **Exec** tab is the same as running one of the following commands:
 
 For more details, see the [`docker exec` CLI reference](/reference/cli/docker/exec/).
 
-If you have enabled Docker Debug in settings, or toggled on **Debug mode** to the right of the tab options, the **Debug** tab displays. 
+If you have enabled Docker Debug in settings, or toggled on **Debug mode** to the right of the tab options, the **Debug** tab displays. Debug mode requires a [Pro, Team, or Business subscription](/subscription/details/) with Docker Desktop version 4.48 and earlier. 
 
-Debug mode requires a [Pro, Team, or Business subscription](/subscription/details/). Debug mode has several advantages, such as:
+Debug mode has several advantages, such as:
 
 - A customizable toolbox. The toolbox comes with many standard Linux tools
   pre-installed, such as `vim`, `nano`, `htop`, and `curl`. For more details, see the [`docker debug` CLI reference](/reference/cli/docker/debug/).
