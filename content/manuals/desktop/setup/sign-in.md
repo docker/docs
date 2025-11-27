@@ -71,10 +71,10 @@ Docker Desktop displays a warning if `pass` is not configured.
     3ABCD1234EF56G78
    uid          Molly <molly@example.com>
    ```
-3. Copy the GPG ID and use it to initialize `pass`
+3. Copy the GPG ID and use it to initialize `pass`. For example
 
    ```console
-   $ pass init <your_generated_gpg-id_public_key>
+   $ pass init 3ABCD1234EF56G78
    ``` 
 
    You should see output similar to: 
