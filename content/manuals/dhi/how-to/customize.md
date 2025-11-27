@@ -92,7 +92,7 @@ To customize a Docker Hardened Image, follow these steps:
       - The UID and GID ownership of the script
       - The octal file permissions of the script
 
-1. Select **Next: Configure** and then configure the following image settings:
+1. Select **Next: Configure** to configure the following image settings:
 
    1. Specify the [environment variables](/reference/dockerfile/#env) and their
       values that the image will contain.
