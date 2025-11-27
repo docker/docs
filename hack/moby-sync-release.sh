@@ -20,18 +20,28 @@ github_notes=$(mktemp -t old)
 # Get the release notes from the docs.
 grep -A 10000 "## ${version}" "content/manuals/engine/release-notes/${major_version}.md" | \
     grep -m 2 -A 0 -B 10000 '^## ' | \
-    sed '$d' | `# remove the last line` \
+    sed '$d' | \
     sed '/{{< release-date /{N;d;}' \
-    > "$docs_notes"
+    > "$docs_notes" || { echo "Release notes for ${version} not found" && exit 1; }
 
-# Get the release notes from the Github.
-curl -s "https://api.github.com/repos/$moby/releases/tags/${moby_tag}" | jq -r '.body' | sed 's/\r$//' > "$github_notes"
+release_json=$(gh api repos/moby/moby/releases -q ".[] | select(.name==\"v${version}\" or .tag_name==\"$moby_tag\")")
+
+if [ -z "$release_json" ]; then
+    echo "Release not found"
+    printf '\033[0;34mTo create the draft Github release run the following command:\033[0m\n\n'
+    echo gh -R moby/moby release create --draft \
+        --notes-file '"'$docs_notes'"' \
+        --title '"'v${version}'"' \
+        ${moby_tag}
+    exit 1
+fi
+
+release_id=$(echo "$release_json" | jq -r '.id')
+echo "$release_json" | jq -r '.body' | sed 's/\r$//' > "$github_notes"
 
 docs_notes_diff=$(mktemp -t diff)
-# Copy docs_notes content and ensure it has exactly 2 blank lines at the end
-# Because Github for some reason adds an extra newline at the end of the release notes.
-sed -e :a -e '/^\n*$/{$d;N;ba' -e '}' "$docs_notes" > "$docs_notes_diff"
-printf '\n\n' >> "$docs_notes_diff"
+# Copy docs_notes content and ensure it has exactly 1 blank line at the end
+sed -e :a -e '/^\n*$/{$d;N;ba' -e '}' "$docs_notes" | sed '$a\' > "$docs_notes_diff"
 
 # Compare the release notes.
 if diff -u --color=auto "$github_notes" "$docs_notes_diff"; then
@@ -41,4 +51,4 @@ fi
 
 echo '========================================'
 printf '\033[0;34mTo update the release notes run the following command:\033[0m\n\n'
-echo gh -R moby/moby release edit "$moby_tag" --notes-file "$docs_notes"
+echo gh api "repos/moby/moby/releases/$release_id" -X PATCH -f '"body=$(cat "'$docs_notes'")"'
