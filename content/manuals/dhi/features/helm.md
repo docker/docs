@@ -21,6 +21,9 @@ Like the hardened images, DHI charts incorporate multiple layers of security met
   authenticity.
 - Hardened configuration: Charts automatically reference Docker hardened images, ensuring security in deployments.
 
+For a complete list of attestations included with DHI charts, see [Helm chart
+attestations](../core-concepts/attestations.md#helm-chart-attestations).
+
 ## Developer Friendly
 
 DHI charts are robustly tested after building to ensure they work out-of-the-box with Docker Hardened Images. This
