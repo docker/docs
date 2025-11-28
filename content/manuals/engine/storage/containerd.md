@@ -42,6 +42,33 @@ The containerd image store enables:
 For most users, switching to the containerd image store is transparent. The
 storage backend changes, but your workflows remain the same.
 
+## Disk space usage
+
+The containerd image store uses more disk space than the legacy storage
+drivers for the same images. This is because containerd stores images in both
+compressed and uncompressed formats, while the legacy drivers stored only the
+uncompressed layers.
+
+When you pull an image, containerd keeps the compressed layers (as received
+from the registry) and also extracts them to disk. This dual storage means
+each layer occupies more space. The compressed format enables faster pulls and
+pushes, but requires additional disk capacity.
+
+This difference is particularly noticeable with multiple images sharing the
+same base layers. With legacy storage drivers, shared base layers were stored
+once locally, and reused images that depended on them. With containerd, each
+image stores its own compressed version of shared layers, even though the
+uncompressed layers are still de-duplicated through snapshotters. The
+compressed storage adds overhead proportional to the number of images using
+those layers.
+
+If disk space is constrained, consider the following:
+
+- Regularly prune unused images with `docker image prune`
+- Use `docker system df` to monitor disk usage
+- [Configure the data directory](../daemon/_index.md#configure-the-data-directory-location)
+  to use a partition with adequate space
+
 ## Enable containerd image store on Docker Engine
 
 If you're upgrading from an earlier Docker Engine version, you need to manually
