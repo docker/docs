@@ -26,12 +26,10 @@ they don't share knowledge.
 
 ## Key features
 
-- ️Multi-tenant architecture with client isolation and session management.
 - Rich tool ecosystem via Model Context Protocol (MCP) integration.
 - Hierarchical agent system with intelligent task delegation.
 - Multiple interfaces including CLI, TUI, API server, and MCP server.
 - Agent distribution via Docker registry integration.
-- Security-first design with proper client scoping and resource isolation.
 - Event-driven streaming for real-time interactions.
 - Multi-model support (OpenAI, Anthropic, Gemini, DMR, Docker AI Gateway).
 

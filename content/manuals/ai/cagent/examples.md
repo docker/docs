@@ -1,8 +1,8 @@
 ---
-title: cagent examples
+title: Examples
 description: Get inspiration from agent examples
 keywords: [ai, agent, cagent]
-weight: 10
+weight: 100
 ---
 
 Get inspiration from the following agent examples.
