@@ -41,21 +41,20 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/docker/api/types/container"
-	"github.com/docker/docker/api/types/image"
-	"github.com/docker/docker/client"
-	"github.com/docker/docker/pkg/stdcopy"
+	"github.com/moby/moby/api/pkg/stdcopy"
+	"github.com/moby/moby/api/types/container"
+	"github.com/moby/moby/client"
 )
 
 func main() {
 	ctx := context.Background()
-	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
+	apiClient, err := client.New(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
-	defer cli.Close()
+	defer apiClient.Close()
 
-	reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", image.PullOptions{})
+	reader, err := apiClient.ImagePull(ctx, "docker.io/library/alpine", client.ImagePullOptions{})
 	if err != nil {
 		panic(err)
 	}
@@ -66,29 +65,31 @@ func main() {
 	// If stdout is not required, consider using io.Discard instead of os.Stdout.
 	io.Copy(os.Stdout, reader)
 
-	resp, err := cli.ContainerCreate(ctx, &container.Config{
+	resp, err := apiClient.ContainerCreate(ctx, client.ContainerCreateOptions{
+		Config: &container.Config{
+			Cmd: []string{"echo", "hello world"},
+			Tty: false,
+		},
 		Image: "alpine",
-		Cmd:   []string{"echo", "hello world"},
-		Tty:   false,
-	}, nil, nil, nil, "")
+	})
 	if err != nil {
 		panic(err)
 	}
 
-	if err := cli.ContainerStart(ctx, resp.ID, container.StartOptions{}); err != nil {
+	if _, err := apiClient.ContainerStart(ctx, resp.ID, client.ContainerStartOptions{}); err != nil {
 		panic(err)
 	}
 
-	statusCh, errCh := cli.ContainerWait(ctx, resp.ID, container.WaitConditionNotRunning)
+	wait := apiClient.ContainerWait(ctx, resp.ID, client.ContainerWaitOptions{})
 	select {
-	case err := <-errCh:
+	case err := <-wait.Error:
 		if err != nil {
 			panic(err)
 		}
-	case <-statusCh:
+	case <-wait.Result:
 	}
 
-	out, err := cli.ContainerLogs(ctx, resp.ID, container.LogsOptions{ShowStdout: true})
+	out, err := apiClient.ContainerLogs(ctx, resp.ID, client.ContainerLogsOptions{ShowStdout: true})
 	if err != nil {
 		panic(err)
 	}
@@ -156,36 +157,34 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/docker/api/types/container"
-	"github.com/docker/docker/api/types/image"
-	"github.com/docker/docker/client"
+	"github.com/moby/moby/client"
 )
 
 func main() {
 	ctx := context.Background()
-	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
+	apiClient, err := client.New(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
-	defer cli.Close()
+	defer apiClient.Close()
 
 	imageName := "bfirsh/reticulate-splines"
 
-	out, err := cli.ImagePull(ctx, imageName, image.PullOptions{})
+	out, err := apiClient.ImagePull(ctx, imageName, client.ImagePullOptions{})
 	if err != nil {
 		panic(err)
 	}
 	defer out.Close()
 	io.Copy(os.Stdout, out)
 
-	resp, err := cli.ContainerCreate(ctx, &container.Config{
+	resp, err := apiClient.ContainerCreate(ctx, client.ContainerCreateOptions{
 		Image: imageName,
-	}, nil, nil, nil, "")
+	})
 	if err != nil {
 		panic(err)
 	}
 
-	if err := cli.ContainerStart(ctx, resp.ID, container.StartOptions{}); err != nil {
+	if _, err := apiClient.ContainerStart(ctx, resp.ID, client.ContainerStartOptions{}); err != nil {
 		panic(err)
 	}
 
@@ -233,24 +232,23 @@ import (
 	"context"
 	"fmt"
 
-	containertypes "github.com/docker/docker/api/types/container"
-	"github.com/docker/docker/client"
+	"github.com/moby/moby/client"
 )
 
 func main() {
 	ctx := context.Background()
-	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
+	apiClient, err := client.New(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
-	defer cli.Close()
+	defer apiClient.Close()
 
-	containers, err := cli.ContainerList(ctx, containertypes.ListOptions{})
+	containers, err := apiClient.ContainerList(ctx, client.ContainerListOptions{})
 	if err != nil {
 		panic(err)
 	}
 
-	for _, container := range containers {
+	for _, container := range containers.Items {
 		fmt.Println(container.ID)
 	}
 }
@@ -303,27 +301,26 @@ import (
 	"context"
 	"fmt"
 
-	containertypes "github.com/docker/docker/api/types/container"
-	"github.com/docker/docker/client"
+	"github.com/moby/moby/client"
 )
 
 func main() {
 	ctx := context.Background()
-	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
+	apiClient, err := client.New(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
-	defer cli.Close()
+	defer apiClient.Close()
 
-	containers, err := cli.ContainerList(ctx, containertypes.ListOptions{})
+	containers, err := apiClient.ContainerList(ctx, client.ContainerListOptions{})
 	if err != nil {
 		panic(err)
 	}
 
-	for _, container := range containers {
+	for _, container := range containers.Items {
 		fmt.Print("Stopping container ", container.ID[:10], "... ")
 		noWaitTimeout := 0 // to not wait for the container to exit gracefully
-		if err := cli.ContainerStop(ctx, container.ID, containertypes.StopOptions{Timeout: &noWaitTimeout}); err != nil {
+		if _, err := apiClient.ContainerStop(ctx, container.ID, client.ContainerStopOptions{Timeout: &noWaitTimeout}); err != nil {
 			panic(err)
 		}
 		fmt.Println("Success")
@@ -377,21 +374,20 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/docker/api/types/container"
-	"github.com/docker/docker/client"
+	"github.com/moby/moby/client"
 )
 
 func main() {
 	ctx := context.Background()
-	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
+	apiClient, err := client.New(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
-	defer cli.Close()
+	defer apiClient.Close()
 
-	options := container.LogsOptions{ShowStdout: true}
+	options := client.ContainerLogsOptions{ShowStdout: true}
 	// Replace this ID with a container that really exists
-	out, err := cli.ContainerLogs(ctx, "f1064a8a4c82", options)
+	out, err := apiClient.ContainerLogs(ctx, "f1064a8a4c82", options)
 	if err != nil {
 		panic(err)
 	}
@@ -439,24 +435,23 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/docker/docker/api/types/image"
-	"github.com/docker/docker/client"
+	"github.com/moby/moby/client"
 )
 
 func main() {
 	ctx := context.Background()
-	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
+	apiClient, err := client.New(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
-	defer cli.Close()
+	defer apiClient.Close()
 
-	images, err := cli.ImageList(ctx, image.ListOptions{})
+	images, err := apiClient.ImageList(ctx, client.ImageListOptions{})
 	if err != nil {
 		panic(err)
 	}
 
-	for _, image := range images {
+	for _, image := range images.Items {
 		fmt.Println(image.ID)
 	}
 }
@@ -502,19 +497,18 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/docker/api/types/image"
-	"github.com/docker/docker/client"
+	"github.com/moby/moby/client"
 )
 
 func main() {
 	ctx := context.Background()
-	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
+	apiClient, err := client.New(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
-	defer cli.Close()
+	defer apiClient.Close()
 
-	out, err := cli.ImagePull(ctx, "alpine", image.PullOptions{})
+	out, err := apiClient.ImagePull(ctx, "alpine", client.ImagePullOptions{})
 	if err != nil {
 		panic(err)
 	}
@@ -572,18 +566,17 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/docker/api/types/image"
-	"github.com/docker/docker/api/types/registry"
-	"github.com/docker/docker/client"
+	"github.com/moby/moby/api/types/registry"
+	"github.com/moby/moby/client"
 )
 
 func main() {
 	ctx := context.Background()
-	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
+	apiClient, err := client.New(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
-	defer cli.Close()
+	defer apiClient.Close()
 
 	authConfig := registry.AuthConfig{
 		Username: "username",
@@ -595,7 +588,7 @@ func main() {
 	}
 	authStr := base64.URLEncoding.EncodeToString(encodedJSON)
 
-	out, err := cli.ImagePull(ctx, "alpine", image.PullOptions{RegistryAuth: authStr})
+	out, err := apiClient.ImagePull(ctx, "alpine", client.ImagePullOptions{RegistryAuth: authStr})
 	if err != nil {
 		panic(err)
 	}
@@ -660,40 +653,42 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/docker/docker/api/types/container"
-	"github.com/docker/docker/client"
+	"github.com/moby/moby/api/types/container"
+	"github.com/moby/moby/client"
 )
 
 func main() {
 	ctx := context.Background()
-	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
+	apiClient, err := client.New(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
-	defer cli.Close()
+	defer apiClient.Close()
 
-	createResp, err := cli.ContainerCreate(ctx, &container.Config{
+	createResp, err := apiClient.ContainerCreate(ctx, client.ContainerCreateOptions{
+		Config: &container.Config{
+			Cmd: []string{"touch", "/helloworld"},
+		},
 		Image: "alpine",
-		Cmd:   []string{"touch", "/helloworld"},
-	}, nil, nil, nil, "")
+	})
 	if err != nil {
 		panic(err)
 	}
 
-	if err := cli.ContainerStart(ctx, createResp.ID, container.StartOptions{}); err != nil {
+	if _, err := apiClient.ContainerStart(ctx, createResp.ID, client.ContainerStartOptions{}); err != nil {
 		panic(err)
 	}
 
-	statusCh, errCh := cli.ContainerWait(ctx, createResp.ID, container.WaitConditionNotRunning)
+	wait := apiClient.ContainerWait(ctx, createResp.ID, client.ContainerWaitOptions{})
 	select {
-	case err := <-errCh:
+	case err := <-wait.Error:
 		if err != nil {
 			panic(err)
 		}
-	case <-statusCh:
+	case <-wait.Result:
 	}
 
-	commitResp, err := cli.ContainerCommit(ctx, createResp.ID, container.CommitOptions{Reference: "helloworld"})
+	commitResp, err := apiClient.ContainerCommit(ctx, createResp.ID, client.ContainerCommitOptions{Reference: "helloworld"})
 	if err != nil {
 		panic(err)
 	}
