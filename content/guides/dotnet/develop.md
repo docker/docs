@@ -288,11 +288,11 @@ immediately reflected in the running container.
 Open `docker-dotnet-sample/src/Pages/Index.cshtml` in an IDE or text editor and update the student name text on line 13 from `Student name is` to `Student name:`.
 
 ```diff
--    <p>Student Name is @Model.StudentName</p>
+-    <p>Student name is @Model.StudentName</p>
 +    <p>Student name: @Model.StudentName</p>
 ```
 
-Save the changes to `Index.cshmtl` and then wait a few seconds for the application to rebuild. Refresh [http://localhost:8080](http://localhost:8080) in your browser and verify that the updated text appears.
+Save the changes to `Index.cshtml` and then wait a few seconds for the application to rebuild. Refresh [http://localhost:8080](http://localhost:8080) in your browser and verify that the updated text appears.
 
 Press `ctrl+c` in the terminal to stop your application.
 
@@ -307,19 +307,19 @@ The following is the updated Dockerfile.
 ```Dockerfile {hl_lines="10-13"}
 # syntax=docker/dockerfile:1
 
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0-alpine AS build
 ARG TARGETARCH
 COPY . /source
 WORKDIR /source/src
 RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
     dotnet publish -a ${TARGETARCH/amd64/x64} --use-current-runtime --self-contained false -o /app
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS development
+FROM mcr.microsoft.com/dotnet/sdk:10.0-alpine AS development
 COPY . /source
 WORKDIR /source/src
 CMD dotnet run --no-launch-profile
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS final
+FROM mcr.microsoft.com/dotnet/aspnet:10.0-alpine AS final
 WORKDIR /app
 COPY --from=build /app .
 ARG UID=10001
@@ -379,7 +379,7 @@ secrets:
     file: db/password.txt
 ```
 
-Your containerized application will now use the `mcr.microsoft.com/dotnet/sdk:8.0-alpine` image, which includes development tools like `dotnet test`. Continue to the next section to learn how you can run `dotnet test`.
+Your containerized application will now use the `mcr.microsoft.com/dotnet/sdk:10.0-alpine` image, which includes development tools like `dotnet test`. Continue to the next section to learn how you can run `dotnet test`.
 
 ## Summary
 
