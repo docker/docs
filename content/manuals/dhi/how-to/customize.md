@@ -92,21 +92,28 @@ To customize a Docker Hardened Image, follow these steps:
       - The UID and GID ownership of the script
       - The octal file permissions of the script
 
-1. Select **Next: Configure** and then configure the following options.
-1. Specify a suffix that is appended to the customized image's tag. For
-   example, if you specify `custom` when customizing the `dhi-python:3.13`
-   image, the customized image will be tagged as `dhi-python:3.13_custom`.
-1. Select the platforms you want to build the image for.
-1. Add [`ENTRYPOINT`](/reference/dockerfile/#entrypoint) and
-   [`CMD`](/reference/dockerfile/#cmd) arguments to the image. These
-   arguments are appended to the base image's entrypoint and command.
-1. Specify the users to add to the image.
-1. Specify the user groups to add to the image.
-1. Select which [user](/reference/dockerfile/#user) to run the images as.
-1. Specify the [environment variables](/reference/dockerfile/#env) and their
-   values that the image will contain.
-1. Add [annotations](/build/metadata/annotations/) to the image.
-1. Add [labels](/reference/dockerfile/#label) to the image.
+1. Select **Next: Configure** to configure the following image settings:
+
+   1. Specify the [environment variables](/reference/dockerfile/#env) and their
+      values that the image will contain.
+   1. Add [labels](/reference/dockerfile/#label) to the image.
+   1. Add [annotations](/build/metadata/annotations/) to the image.
+   1. Specify the users to add to the image.
+   1. Specify the user groups to add to the image.
+   1. Select which [user](/reference/dockerfile/#user) to run the images as.
+   1. Add [`ENTRYPOINT`](/reference/dockerfile/#entrypoint) arguments to the
+      image. These arguments are appended to the base image's entrypoint.
+   1. Add [`CMD`](/reference/dockerfile/#cmd) arguments to the image. These
+      arguments are appended to the base image's command.
+   1. Specify a suffix for the customization name that is appended to the
+      customized image's tag. For example, if you specify `custom` when
+      customizing the `dhi-python:3.13` image, the customized image will be
+      tagged as `dhi-python:3.13_custom`.
+   1. Select the platforms you want to build the image for. You must select at
+      least one platform.
+
+1. Select **Next: Review customization**.
+
 1. Select **Create Customization**.
 
    A summary of the customization appears. It may take some time for the image
@@ -168,6 +175,57 @@ Install the necessary tools or libraries in the first stage, and then copy the
 relevant files to the final stage that uses `FROM scratch`. This ensures that
 your OCI artifact is minimal and contains only the necessary files.
 
-Build and push the OCI artifact image to a repository in your organization's
-namespace and it automatically appears in the customization workflow when you
-select the OCI artifacts to add to your customized Docker Hardened Image.
+In order for the OCI artifact to be available in a DHI customization, it must be built and
+pushed to a repository in the same namespace as the mirrored DHI repository.
+
+If you're customizing a DHI for multiple platforms (such as `linux/amd64` and
+`linux/arm64`), build your OCI artifact for all the platforms using the
+`--platform` flag:
+
+```console
+$ docker buildx build --platform linux/amd64,linux/arm64 \
+  -t <your-namespace>/my-oci-artifact:latest \
+  --push .
+```
+
+This creates a single image manifest that you can use for each platform. The
+customization build system automatically selects the correct platform variant
+when building each customized image.
+
+> [!IMPORTANT]
+>
+> The customization UI will only allow you to select platforms that are
+> available in all OCI artifacts you've added. If a platform is missing from
+> any OCI artifact, you won't be able to select that platform for your
+> customization.
+
+Once pushed to a repository in your organization's namespace, the OCI artifact
+automatically appears in the customization workflow when you select OCI
+artifacts to add to your customized Docker Hardened Image.
+
+### Best practices for OCI artifacts
+
+Follow these best practices when creating OCI artifacts for DHI customizations:
+
+- Use multi-stage builds: Build or install dependencies in a builder stage,
+  then copy only the necessary files to a `FROM scratch` final stage. This keeps
+  the OCI artifact minimal and free of unnecessary build tools.
+
+- Include only essential files: OCI artifacts should contain only the files
+  you need to add to the customized image. Avoid including package managers,
+  shells, or other utilities that won't be used in the final image.
+
+- Match target platforms: Build your OCI artifact for all platforms you plan
+  to use in your customizations. Use `docker buildx build --platform` to create
+  multi-platform images when needed.
+
+- Use specific tags: Tag your OCI artifacts with specific versions or dates
+  (like `v1.0` or `20250101`) rather than relying solely on `latest`. This
+  ensures reproducible builds and makes it easier to track which artifacts are
+  used in which customizations.
+
+- Enable immutable tags: Consider enabling [immutable
+  tags](../../docker-hub/repos/manage/hub-images/immutable-tags.md) for your
+  OCI artifact repositories. This prevents accidental overwrites and ensures that
+  each version of your OCI artifact remains unchanged, improving reproducibility
+  and reliability of your customizations.
