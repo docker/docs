@@ -73,11 +73,11 @@ Make sure you have:
 1. [Create a read-only personal access token](/security/access-tokens/#create-a-personal-access-token) and enter your access token under **Secrets**
 1. Save the configuration
 
-![Docker Hub](./images/catalog_docker_hub.avif "Docker Hub")
+![Docker Hub](./Images/catalog_docker_hub.avif "Docker Hub")
 
 Public images work without credentials. For private repositories, you can add your Docker Hub username and token later.
 
-![Docker Hub Secrets](./images/dockerhub_secrets.avif "Docker Hub Secrets")
+![Docker Hub Secrets](./Images/dockerhub_secrets.avif "Docker Hub Secrets")
 
 
 ---
@@ -93,7 +93,7 @@ You can connect from Docker Desktop or using the CLI.
 1. Locate **Claude Code**  
 1. Select **Connect**
 
-![Docker Connection](./images/docker-connect-claude.avif)
+![Docker Connection](./Images/docker-connect-claude.avif)
 
 ### Option B. Connect using the CLI
 
@@ -128,7 +128,7 @@ You should now see:
 - The MCP gateway (for example `MCP_DOCKER`)
 - Tools provided by the Docker Hub MCP server
 
-![mcp-docker](./images/mcp-servers.avif)
+![mcp-docker](./Images/mcp-servers.avif)
 
 If not, restart Claude Code or check Docker Desktop to confirm the connection.
 
@@ -268,7 +268,7 @@ Open your browser:
 ```console
 http://localhost:3000
 ```
-![Local Host](./images/Localhost.avif)
+![Local Host](./Images/Localhost.avif)
 
 Your Node.js app should now be running.
 
