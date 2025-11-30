@@ -99,6 +99,38 @@ func IntMin(a, b int) int {
 
 To build a container image with Docker, a `Dockerfile` with build instructions is required.
 
+Before creating a Dockerfile, you need to choose a base image. You can either use the [Go Docker Official Image](https://hub.docker.com/_/golang) or a Docker Hardened Image (DHI) from the [Hardened Image catalog](https://hub.docker.com/hardened-images/catalog).
+
+Choosing DHI offers the advantage of a production-ready image that is lightweight and secure. For more information, see [Docker Hardened Images](https://docs.docker.com/dhi/).
+
+{{< tabs >}}
+{{< tab name="Using Docker Hardened Images" >}}
+Docker Hardened Images (DHIs) are available for Go on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/golang). Unlike using the Docker Official Image, you must first mirror the Go image into your organization and then use it as your base image. Follow the instructions in the [DHI quickstart](/dhi/get-started/) to create a mirrored repository for Go.
+
+Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace>/dhi-golang:<tag>`. In the following Dockerfile, the `FROM` instruction uses `<your-namespace>/dhi-golang:1.19` as the base image.
+
+Begin your `Dockerfile` with the (optional) parser directive line that instructs BuildKit to
+interpret your file according to the grammar rules for the specified version of the syntax.
+
+You then tell Docker what base image you would like to use for your application:
+
+```dockerfile
+# syntax=docker/dockerfile:1
+
+FROM <your-namespace>/dhi-golang:1.19
+```
+
+Docker images can be inherited from other images. Therefore, instead of creating
+your own base image from scratch, you can use the DHI Go image that already
+has all necessary tools and libraries to compile and run a Go application.
+
+{{< /tab >}}
+{{< tab name="Using the official image" >}}
+
+Using the Docker Official Image is straightforward. In the following Dockerfile, you'll notice that the `FROM` instruction uses `golang:1.19` as the base image.
+
+This is the official image for Go. This image is [available on the Docker Hub](https://hub.docker.com/_/golang).
+
 Begin your `Dockerfile` with the (optional) parser directive line that instructs BuildKit to
 interpret your file according to the grammar rules for the specified version of the syntax.
 
@@ -113,6 +145,9 @@ FROM golang:1.19
 Docker images can be inherited from other images. Therefore, instead of creating
 your own base image from scratch, you can use the official Go image that already
 has all necessary tools and libraries to compile and run a Go application.
+
+{{< /tab >}}
+{{< /tabs >}}
 
 > [!NOTE]
 >
@@ -209,6 +244,42 @@ CMD ["/docker-gs-ping"]
 
 Here's the complete `Dockerfile`:
 
+{{< tabs >}}
+{{< tab name="Using Docker Hardened Images" >}}
+
+```dockerfile
+# syntax=docker/dockerfile:1
+
+FROM <your-namespace>/dhi-golang:1.19
+
+# Set destination for COPY
+WORKDIR /app
+
+# Download Go modules
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Copy the source code. Note the slash at the end, as explained in
+# https://docs.docker.com/reference/dockerfile/#copy
+COPY *.go ./
+
+# Build
+RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
+
+# Optional:
+# To bind to a TCP port, runtime parameters must be supplied to the docker command.
+# But we can document in the Dockerfile what ports
+# the application is going to listen on by default.
+# https://docs.docker.com/reference/dockerfile/#expose
+EXPOSE 8080
+
+# Run
+CMD ["/docker-gs-ping"]
+```
+
+{{< /tab >}}
+{{< tab name="Using the official image" >}}
+
 ```dockerfile
 # syntax=docker/dockerfile:1
 
@@ -238,6 +309,9 @@ EXPOSE 8080
 # Run
 CMD ["/docker-gs-ping"]
 ```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 The `Dockerfile` may also contain comments. They always begin with a `#` symbol,
 and must be at the beginning of a line. Comments are there for your convenience
@@ -415,13 +489,52 @@ These two issues can be solved by using [multi-stage builds](/manuals/build/buil
 In a nutshell, a multi-stage build can carry over the artifacts from one build stage into another,
 and every build stage can be instantiated from a different base image.
 
-Thus, in the following example, you are going to use a full-scale official Go
-image to build your application. Then you'll copy the application binary into
+Thus, in the following example, you are going to use a full-scale Go
+image (either DHI or official) to build your application. Then you'll copy the application binary into
 another image whose base is very lean and doesn't include the Go toolchain or
 other optional components.
 
 The `Dockerfile.multistage` in the sample application's repository has the
 following content:
+
+{{< tabs >}}
+{{< tab name="Using Docker Hardened Images" >}}
+
+```dockerfile
+# syntax=docker/dockerfile:1
+
+# Build the application from source
+FROM <your-namespace>/dhi-golang:1.19 AS build-stage
+
+WORKDIR /app
+
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY *.go ./
+
+RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
+
+# Run the tests in the container
+FROM build-stage AS run-test-stage
+RUN go test -v ./...
+
+# Deploy the application binary into a lean image
+FROM gcr.io/distroless/base-debian11 AS build-release-stage
+
+WORKDIR /
+
+COPY --from=build-stage /docker-gs-ping /docker-gs-ping
+
+EXPOSE 8080
+
+USER nonroot:nonroot
+
+ENTRYPOINT ["/docker-gs-ping"]
+```
+
+{{< /tab >}}
+{{< tab name="Using the official image" >}}
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -456,6 +569,9 @@ USER nonroot:nonroot
 ENTRYPOINT ["/docker-gs-ping"]
 ```
 
+{{< /tab >}}
+{{< /tabs >}}
+
 Since you have two Dockerfiles now, you have to tell Docker what Dockerfile
 you'd like to use to build the image. Tag the new image with `multistage`. This
 tag (like any other, apart from `latest`) has no special meaning for Docker,
@@ -481,9 +597,22 @@ base image that you have used in the second stage of the build is very barebones
 There's much more to multi-stage builds, including the possibility of multi-architecture builds,
 so feel free to check out [multi-stage builds](/manuals/build/building/multi-stage.md). This is, however, not essential for your progress here.
 
+## Summary
+
+In this section, you learned how you can build a container image for your Go
+application using Docker.
+
+Related information:
+
+- [Dockerfile reference](/reference/dockerfile.md)
+- [.dockerignore file](/reference/dockerfile.md#dockerignore-file)
+- [Docker Compose overview](/manuals/compose/_index.md)
+- [Compose file reference](/reference/compose-file/_index.md)
+- [Docker Hardened Images](/dhi/)
+
 ## Next steps
 
 In this module, you met your example application and built and container image
 for it.
 
-In the next module, you’ll take a look at how to run your image as a container.
+In the next module, you'll take a look at how to run your image as a container.
