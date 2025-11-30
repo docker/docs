@@ -107,7 +107,7 @@ Choosing DHI offers the advantage of a production-ready image that is lightweigh
 {{< tab name="Using Docker Hardened Images" >}}
 Docker Hardened Images (DHIs) are available for Go on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/golang). Unlike using the Docker Official Image, you must first mirror the Go image into your organization and then use it as your base image. Follow the instructions in the [DHI quickstart](/dhi/get-started/) to create a mirrored repository for Go.
 
-Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace>/dhi-golang:<tag>`. In the following Dockerfile, the `FROM` instruction uses `<your-namespace>/dhi-golang:1.19` as the base image.
+Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace>/dhi-golang:<tag>`. In the following Dockerfile, the `FROM` instruction uses `<your-namespace>/dhi-golang:1.25` as the base image.
 
 Begin your `Dockerfile` with the (optional) parser directive line that instructs BuildKit to
 interpret your file according to the grammar rules for the specified version of the syntax.
@@ -117,7 +117,7 @@ You then tell Docker what base image you would like to use for your application:
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-FROM <your-namespace>/dhi-golang:1.19
+FROM <your-namespace>/dhi-golang:1.25
 ```
 
 Docker images can be inherited from other images. Therefore, instead of creating
@@ -127,7 +127,7 @@ has all necessary tools and libraries to compile and run a Go application.
 {{< /tab >}}
 {{< tab name="Using the official image" >}}
 
-Using the Docker Official Image is straightforward. In the following Dockerfile, you'll notice that the `FROM` instruction uses `golang:1.19` as the base image.
+Using the Docker Official Image is straightforward. In the following Dockerfile, you'll notice that the `FROM` instruction uses `golang:1.25` as the base image.
 
 This is the official image for Go. This image is [available on the Docker Hub](https://hub.docker.com/_/golang).
 
@@ -139,7 +139,7 @@ You then tell Docker what base image you would like to use for your application:
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-FROM golang:1.19
+FROM golang:1.25
 ```
 
 Docker images can be inherited from other images. Therefore, instead of creating
@@ -206,7 +206,7 @@ directory inside the image.
 RUN go mod download
 ```
 
-At this point, you have a Go toolchain version 1.19.x and all your Go
+At this point, you have a Go toolchain version 1.25.x and all your Go
 dependencies installed inside the image.
 
 The next thing you need to do is to copy your source code into the image. You’ll
@@ -250,7 +250,7 @@ Here's the complete `Dockerfile`:
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-FROM <your-namespace>/dhi-golang:1.19
+FROM <your-namespace>/dhi-golang:1.25
 
 # Set destination for COPY
 WORKDIR /app
@@ -283,7 +283,7 @@ CMD ["/docker-gs-ping"]
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-FROM golang:1.19
+FROM golang:1.25
 
 # Set destination for COPY
 WORKDIR /app
@@ -326,7 +326,7 @@ that you may have used:
 # syntax=docker/dockerfile:1
 # A sample microservice in Go packaged into a container image.
 
-FROM golang:1.19
+FROM golang:1.25
 
 # ...
 ```
@@ -361,8 +361,8 @@ The following is just an example of what these messages may look like.
  => CACHED docker-image://docker.io/docker/dockerfile:1@sha256:39b85bbfa7536a5feceb7372a0817649ecb2724562a38360f4d6a7782a409b14            0.0s
  => [internal] load build definition from Dockerfile                                                                                       0.0s
  => [internal] load .dockerignore                                                                                                          0.0s
- => [internal] load metadata for docker.io/library/golang:1.19                                                                             0.7s
- => [1/6] FROM docker.io/library/golang:1.19@sha256:5d947843dde82ba1df5ac1b2ebb70b203d106f0423bf5183df3dc96f6bc5a705                       0.0s
+ => [internal] load metadata for docker.io/library/golang:1.25                                                                             0.7s
+ => [1/6] FROM docker.io/library/golang:1.25@sha256:5d947843dde82ba1df5ac1b2ebb70b203d106f0423bf5183df3dc96f6bc5a705                       0.0s
  => [internal] load build context                                                                                                          0.0s
  => => transferring context: 6.08kB                                                                                                        0.0s
  => CACHED [2/6] WORKDIR /app                                                                                                              0.0s
@@ -504,7 +504,7 @@ following content:
 # syntax=docker/dockerfile:1
 
 # Build the application from source
-FROM <your-namespace>/dhi-golang:1.19 AS build-stage
+FROM <your-namespace>/dhi-golang:1.25 AS build-stage
 
 WORKDIR /app
 
@@ -540,7 +540,7 @@ ENTRYPOINT ["/docker-gs-ping"]
 # syntax=docker/dockerfile:1
 
 # Build the application from source
-FROM golang:1.19 AS build-stage
+FROM golang:1.25 AS build-stage
 
 WORKDIR /app
 
