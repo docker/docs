@@ -290,4 +290,6 @@ Zsh
 [Vv]irtiofs
 [Vv]irtualize
 [Ww]alkthrough
+[Tt]oolsets?
+[Rr]erank(ing|ed)?
 
