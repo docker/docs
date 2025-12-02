@@ -30,6 +30,16 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.54.0
+
+{{< release-date date="2025-12-04" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.54.0" build_path="//" >}}
+
+### Upgrades
+
+- [Docker Buildx v0.30.1](https://github.com/docker/buildx/releases/tag/v0.30.1)
+
 ## 4.53.0
 
 {{< release-date date="2025-11-27" >}}
