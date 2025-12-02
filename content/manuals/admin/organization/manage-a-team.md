@@ -110,15 +110,6 @@ The following table shows what each permission level allows users to do:
 > A user who hasn't verified their email address only has `Read-only` access to
 the repository, regardless of the rights their team membership has given them.
 
-## View team permissions for all repositories
-
-To view a team's permissions across all repositories:
-
-1. Sign in to [Docker Hub](https://hub.docker.com).
-1. Select **My Hub** and choose your organization.
-1. Select **Teams** and choose your team name.
-1. Select the **Permissions** tab, where you can view the repositories this
-team can access.
 
 ## Delete a team
 
