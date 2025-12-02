@@ -44,6 +44,23 @@ If your build contains several layers and you want to ensure the build cache is
 reusable, order the instructions from less frequently changed to more
 frequently changed where possible.
 
+## WORKDIR and SOURCE_DATE_EPOCH
+
+The `WORKDIR` instruction respects the `SOURCE_DATE_EPOCH` build argument when
+determining cache validity. Changing `SOURCE_DATE_EPOCH` between builds
+invalidates the cache for `WORKDIR` and all subsequent instructions.
+
+`SOURCE_DATE_EPOCH` sets timestamps for files created during the build. If you
+set this to a dynamic value like a Git commit timestamp, the cache breaks with
+each commit. This is expected behavior when tracking build provenance.
+
+For reproducible builds without frequent cache invalidation, use a fixed
+timestamp:
+
+```console
+$ docker build --build-arg SOURCE_DATE_EPOCH=0 .
+```
+
 ## RUN instructions
 
 The cache for `RUN` instructions isn't invalidated automatically between builds.
