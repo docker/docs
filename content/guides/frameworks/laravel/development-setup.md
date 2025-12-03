@@ -285,7 +285,7 @@ services:
       - laravel-development
 
   postgres:
-    image: postgres:16
+    image: postgres:18
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
     environment:
@@ -293,7 +293,7 @@ services:
       - POSTGRES_USER=laravel
       - POSTGRES_PASSWORD=secret
     volumes:
-      - postgres-data-development:/var/lib/postgresql/data
+      - postgres-data-development:/var/lib/postgresql
     networks:
       - laravel-development
 

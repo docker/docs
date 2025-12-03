@@ -252,8 +252,8 @@ For more merging rules, see [Merge and override](/reference/compose-file/merge.m
 
    ```console
    $ docker compose -f ~/sandbox/rails/compose.yaml pull db
-   Pulling db (postgres:latest)...
-   latest: Pulling from library/postgres
+   Pulling db (postgres:18)...
+   18: Pulling from library/postgres
    ef0380f84d05: Pull complete
    50cf91dc1db8: Pull complete
    d3add4cd115c: Pull complete
@@ -268,7 +268,7 @@ For more merging rules, see [Merge and override](/reference/compose-file/merge.m
    dcca70822752: Pull complete
    cecf11b8ccf3: Pull complete
    Digest: sha256:1364924c753d5ff7e2260cd34dc4ba05ebd40ee8193391220be0f9901d4e1651
-   Status: Downloaded newer image for postgres:latest
+   Status: Downloaded newer image for postgres:18
    ```
 
 ## Example
@@ -292,7 +292,7 @@ services:
       - cache
 
   db:
-    image: postgres:latest
+    image: postgres:18
 
   cache:
     image: redis:latest

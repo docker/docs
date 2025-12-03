@@ -179,7 +179,7 @@ $ docker container stop postgres
 
    ```plaintext
    # syntax=docker/dockerfile:1
-   FROM postgres:latest
+   FROM postgres:18
    COPY seed.sql /docker-entrypoint-initdb.d/
    ```
 
@@ -204,7 +204,7 @@ $ docker container stop postgres
        ports:
          - "5432:5432"
        volumes:
-         - data_sql:/var/lib/postgresql/data   # Persistent data storage
+         - data_sql:/var/lib/postgresql   # Persistent data storage
 
    volumes:
      data_sql:

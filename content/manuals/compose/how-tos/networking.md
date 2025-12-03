@@ -31,7 +31,7 @@ services:
     ports:
       - "8000:8000"
   db:
-    image: postgres
+    image: postgres:18
     ports:
       - "8001:5432"
 ```
@@ -80,7 +80,7 @@ services:
     links:
       - "db:database"
   db:
-    image: postgres
+    image: postgres:18
 ```
 
 See the [links reference](/reference/compose-file/services.md#links) for more information.
@@ -116,7 +116,7 @@ services:
       - frontend
       - backend
   db:
-    image: postgres
+    image: postgres:18
     networks:
       - backend
 
@@ -155,7 +155,7 @@ services:
     ports:
       - "8000:8000"
   db:
-    image: postgres
+    image: postgres:18
 
 networks:
   default:

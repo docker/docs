@@ -160,7 +160,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:16-alpine
+        image: postgres:18-alpine
         env:
           POSTGRES_DB: todoapp_test
           POSTGRES_USER: postgres

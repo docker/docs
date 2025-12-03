@@ -40,7 +40,7 @@ services:
   redis:
     image: redis
   db:
-    image: postgres
+    image: postgres:18
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 10s
