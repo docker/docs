@@ -39,6 +39,8 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### Upgrades
 
 - [Docker Buildx v0.30.1](https://github.com/docker/buildx/releases/tag/v0.30.1)
+- [Docker Engine v29.1.2](https://docs.docker.com/engine/release-notes/29/#2912)
+- [Runc v1.3.4](https://github.com/opencontainers/runc/releases/tag/v1.3.4)
 
 ## 4.53.0
 
