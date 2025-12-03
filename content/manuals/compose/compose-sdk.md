@@ -11,6 +11,8 @@ params:
       text: New
 ---
 
+{{< summary-bar feature_name="Compose SDK" >}}
+
 The `docker/compose` package can be used as a Go library by third-party applications to programmatically manage
 containerized applications defined in Compose files. This SDK provides a comprehensive API that lets you
 integrate Compose functionality directly into your applications, allowing you to load, validate, and manage
