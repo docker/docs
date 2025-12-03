@@ -127,7 +127,7 @@ params:
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
   docker_ce_version_prev: "29.1.1"
   # Latest Docker Compose version
-  compose_version: "v2.40.3"
+  compose_version: "v5.0.0"
   # Latest BuildKit version
   buildkit_version: "0.26.0"
 
@@ -323,7 +323,7 @@ module:
           target: content/reference/cli/dockerd.md
 
     # Compose
-    - path: github.com/docker/compose/v2
+    - path: github.com/docker/compose/v5
       mounts:
         - source: docs/reference
           target: data/compose-cli

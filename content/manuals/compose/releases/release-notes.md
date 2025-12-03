@@ -15,6 +15,49 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 5.0.0
+
+{{< release-date date="2025-12-02" >}}
+
+### Bug fixes and enhancements
+
+- Dropped support for internal buildkit builder.
+- Introduced Compose SDK using functional parameters.
+- Introduced abstractions to support SDK usage without requiring Docker CLI.
+- Made progress Writer a configurable CLI component.
+- Moved progress package to cmd as a CLI component.
+- Added load project function to SDK.
+- Introduced SDK docs.
+- Documented support for OCI and Git remote resources.
+- Added support for run hooks on restart.
+- Fixed check for existing image to only select the target service in run c.ommand
+- Introduced --insecure-registry, reserved for testing purpose.
+- Added support for build.no_cache_filter.
+- Added --wait option to start command.
+
+- Fixed OCI compose override support.
+- Fixed help output for "exec --no-tty" option.
+- Fixed typo in error message.
+- Disabled progress UI when build is ran with --print.
+- Restores support for detach keys.
+- Fixed images command to display image Created time.
+- Fixed  support for port range.
+- Fixed support for includes in publish command.
+- Ignore runtime flags in model configuration.
+
+### Update
+
+- Dependencies upgrade:  Bump compose go to v2.10.0
+- Dependencies upgrade: bump docker 28.5.2
+- Dependencies upgrade: bump containerd to 2.2.0
+- Dependencies upgrade: bump docker/cli to 28.5.2
+- Dependencies upgrade: bump buildx v0.30.0, buildkit v0.26.0, otel v1.38.0, otel/contrib v0.63.0
+- Dependencies upgrade: bump golang.org/x/sys 0.38.0
+- Dependencies upgrade: bump golang.org/x/sync to 0.18.0
+- Dependencies upgrade: bump github.com/hashicorp/go-version to 1.8.0
+- Dependencies upgrade: bump golang.org/x/crypto v0.45.0
+- Dockerfile: update golangci-lint to v2.6.2
+
 ## 2.40.3
 
 {{< release-date date="2025-10-30" >}}
