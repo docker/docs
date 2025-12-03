@@ -10,6 +10,8 @@ github.com/docker/cli v29.1.2+incompatible h1:s4QI7drXpIo78OM+CwuthPsO5kCf8cpNsc
 github.com/docker/cli v29.1.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/compose/v2 v2.40.3 h1:XeYkQu1svDtyfZPv5nTwFryQ25ZJMkIlc4pz9HalMPI=
 github.com/docker/compose/v2 v2.40.3/go.mod h1:iNY1tvoHTyN3C3QHCuWAgj3OjR2T6mGkk/qxfbBF/4M=
+github.com/docker/compose/v5 v5.0.0 h1:J2uMCzJ/5xLcoIVVXvMmPe6HBzVQpmJThKa7Qk7Xldc=
+github.com/docker/compose/v5 v5.0.0/go.mod h1:BurapGv8zmYnsbSmlpCz5EU2Pi3YFV/PjeUnoFpcw64=
 github.com/docker/mcp-gateway v0.22.0 h1:l4t+HRNHxR7Jn545KDeXaeiEEhkCDBeWMTyuCaXVH7A=
 github.com/docker/mcp-gateway v0.22.0/go.mod h1:4sGoRoMeu8lj4a/HbAd/jdxXjMNVMegNnjCqmhsED+I=
 github.com/docker/model-runner/cmd/cli v0.1.44 h1:A0LBBlH8Bzjxl8CAW5tTDiqePwkNi0zNWMennQtOgt4=
