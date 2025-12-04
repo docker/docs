@@ -1,0 +1,110 @@
+{{- $description := partial "utils/description.html" . -}}
+{{- $keywords := delimit (partialCached "utils/keywords.html" . .) ", " -}}
+
+{{- /* Build TechArticle schema for content pages */ -}}
+{{- $schema := dict
+  "@context" "https://schema.org"
+  "@type" "TechArticle"
+  "headline" .LinkTitle
+  "description" $description
+  "url" .Permalink
+-}}
+
+{{- /* Add dates (from Git via enableGitInfo) */ -}}
+{{- with .PublishDate -}}
+  {{- $schema = merge $schema (dict "datePublished" (time.Format "2006-01-02T15:04:05Z07:00" .)) -}}
+{{- end -}}
+{{- with .Lastmod -}}
+  {{- $schema = merge $schema (dict "dateModified" (time.Format "2006-01-02T15:04:05Z07:00" .)) -}}
+{{- end -}}
+
+{{- /* Add author and publisher */ -}}
+{{- $logoUrl := printf "%sassets/images/docker-logo.png" (strings.TrimSuffix "/" site.BaseURL | printf "%s/") -}}
+{{- $org := dict
+  "@type" "Organization"
+  "name" "Docker Inc"
+  "url" "https://www.docker.com"
+-}}
+{{- $schema = merge $schema (dict "author" $org "publisher" (merge $org (dict "logo" (dict "@type" "ImageObject" "url" $logoUrl)))) -}}
+
+{{- /* Add article section (from Hugo section) */ -}}
+{{- with .Section -}}
+  {{- $schema = merge $schema (dict "articleSection" .) -}}
+{{- end -}}
+
+{{- /* Add keywords if present */ -}}
+{{- with $keywords -}}
+  {{- $schema = merge $schema (dict "keywords" .) -}}
+{{- end -}}
+
+{{- /* Add time required if specified in frontmatter */ -}}
+{{- with .Params.time -}}
+  {{- /* Convert "20 minutes" to ISO 8601 duration "PT20M" */ -}}
+  {{- $duration := . -}}
+  {{- $isoDuration := "" -}}
+  {{- if findRE `(\d+)\s*minutes?` $duration -}}
+    {{- $mins := index (findRE `\d+` $duration) 0 -}}
+    {{- $isoDuration = printf "PT%sM" $mins -}}
+  {{- else if findRE `(\d+)\s*hours?` $duration -}}
+    {{- $hours := index (findRE `\d+` $duration) 0 -}}
+    {{- $isoDuration = printf "PT%sH" $hours -}}
+  {{- end -}}
+  {{- with $isoDuration -}}
+    {{- $schema = merge $schema (dict "timeRequired" .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Add isPartOf relationship to parent section */ -}}
+{{- with .Parent -}}
+  {{- if and (not .IsHome) .Permalink -}}
+    {{- $isPartOf := dict
+      "@type" "WebPage"
+      "@id" .Permalink
+      "name" .LinkTitle
+    -}}
+    {{- $schema = merge $schema (dict "isPartOf" $isPartOf) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Output the schema as JSON-LD */ -}}
+<script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
+
+{{- /* Add BreadcrumbList schema */ -}}
+{{- $breadcrumbs := slice -}}
+{{- $position := 1 -}}
+{{- range .Ancestors.Reverse -}}
+  {{- if and (not .IsHome) .Permalink -}}
+    {{- $item := dict
+      "@type" "ListItem"
+      "position" $position
+      "item" (dict
+        "@id" .Permalink
+        "name" .LinkTitle
+      )
+    -}}
+    {{- $breadcrumbs = $breadcrumbs | append $item -}}
+    {{- $position = add $position 1 -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Add current page to breadcrumbs */ -}}
+{{- $currentItem := dict
+  "@type" "ListItem"
+  "position" $position
+  "item" (dict
+    "@id" .Permalink
+    "name" .LinkTitle
+  )
+-}}
+{{- $breadcrumbs = $breadcrumbs | append $currentItem -}}
+
+{{- /* Only output breadcrumbs if there's more than just the current page */ -}}
+{{- if gt (len $breadcrumbs) 1 -}}
+<script type="application/ld+json">
+{{- dict
+  "@context" "https://schema.org"
+  "@type" "BreadcrumbList"
+  "itemListElement" $breadcrumbs
+| jsonify | safeJS -}}
+</script>
+{{- end -}}
