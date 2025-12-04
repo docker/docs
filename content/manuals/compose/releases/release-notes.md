@@ -19,6 +19,10 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 {{< release-date date="2025-12-02" >}}
 
+Major changes in this release:
+
+ - Compose can now officially be used as [an SDK]() to be integrated into third-party softwares
+
 ### Bug fixes and enhancements
 
 - Dropped support for internal buildkit builder.
