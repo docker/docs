@@ -81,7 +81,7 @@ The `type` field in a provider service references the name of either:
 
 1. A Docker CLI plugin (e.g., `docker-model`)
 2. A binary available in the user's PATH
-3. A direct path to the binary or script to execute
+3. Path to the binary or script to execute
 
 When Compose encounters a provider service, it looks for a plugin or binary with the specified name to handle the provisioning of the requested capability.
 
