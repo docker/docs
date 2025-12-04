@@ -34,11 +34,17 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-12-04" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.54.0" build_path="//" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.54.0" build_path="/212467/" >}}
 
 ### New
 
 - Added support for vLLM in Docker Model Runner on Windows with WSL2 and NVIDIA GPUs.
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Fixed a bug where `/dev/shm` did not have enough permission for containers to write into. Fixes [docker/for-mac#7804](https://github.com/docker/for-mac/issues/7804). 
 
 ### Upgrades
 
