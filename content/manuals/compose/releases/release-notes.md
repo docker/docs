@@ -21,7 +21,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 Major changes in this release:
 
-- Compose v5 introduces a new official Go SDK. This SDK provides a comprehensive API that lets you integrate Compose functionality directly into your applications, allowing you to load, validate, and manage multi-container environments without relying on the Compose CLI. 
+- Compose v5 introduces a new official Go SDK. This SDK provides a comprehensive API that lets you integrate Compose functionality directly into your applications, allowing you to load, validate, and manage multi-container environments without relying on the Compose CLI. For more information, see the [Compose SDK docs](/manuals/compose/compose-sdk.md).
 
 > [!NOTE]
 >
