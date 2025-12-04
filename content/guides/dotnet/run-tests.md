@@ -47,6 +47,34 @@ To run your tests when building, you need to update your Dockerfile. You can cre
 
 The following is the updated Dockerfile.
 
+{{< tabs >}}
+{{< tab name="Using Docker Hardened Images" >}}
+
+```dockerfile {hl_lines="9"}
+# syntax=docker/dockerfile:1
+
+FROM --platform=$BUILDPLATFORM <your-namespace>/dhi-dotnet:10-sdk AS build
+ARG TARGETARCH
+COPY . /source
+WORKDIR /source/src
+RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
+    dotnet publish -a ${TARGETARCH/amd64/x64} --use-current-runtime --self-contained false -o /app
+RUN dotnet test /source/tests
+
+FROM <your-namespace>/dhi-dotnet:10-sdk AS development
+COPY . /source
+WORKDIR /source/src
+CMD dotnet run --no-launch-profile
+
+FROM <your-namespace>/dhi-aspnetcore:10
+WORKDIR /app
+COPY --from=build /app .
+ENTRYPOINT ["dotnet", "myWebApp.dll"]
+```
+
+{{< /tab >}}
+{{< tab name="Using the official .NET 10 image" >}}
+
 ```dockerfile {hl_lines="9"}
 # syntax=docker/dockerfile:1
 
@@ -78,6 +106,9 @@ RUN adduser \
 USER appuser
 ENTRYPOINT ["dotnet", "myWebApp.dll"]
 ```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 Run the following command to build an image using the build stage as the target and view the test results. Include `--progress=plain` to view the build output, `--no-cache` to ensure the tests always run, and `--target build` to target the build stage.
 

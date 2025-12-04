@@ -43,10 +43,8 @@ Now that you have an application, you can create the necessary Docker assets to 
 
 > [Docker Hardened Images (DHIs)](https://docs.docker.com/dhi/) are minimal, secure, and production-ready container base and application images maintained by Docker. DHI images are recommended for better security—they are designed to reduce vulnerabilities and simplify compliance.
 
-> **Note**: DHI for .NET 10 is not yet available. The following DHI example uses .NET 9. Check the [DHI catalog](https://hub.docker.com/hardened-images/catalog) for .NET 10 availability, or use the official image tab below for .NET 10.
-
 {{< tabs >}}
-{{< tab name="Using Docker Hardened Images (.NET 9)" >}}
+{{< tab name="Using Docker Hardened Images" >}}
 
 Docker Hardened Images (DHIs) for .NET are available on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/aspnetcore). Unlike using the Docker Official Image, you must first mirror the image into your organization. Follow the instructions in the [DHI quickstart](/dhi/get-started/) to create a mirrored repository.
 
@@ -68,7 +66,7 @@ Let's get started!
 
 ? What application platform does your project use? ASP.NET Core
 ? What's the name of your solution's main project? myWebApp
-? What version of .NET do you want to use? 9.0
+? What version of .NET do you want to use? 10.0
 ? What local port do you want to use to access your server? 8080
 ```
 
@@ -77,28 +75,22 @@ Then update your Dockerfile to use DHI images:
 ```dockerfile {title=Dockerfile}
 # syntax=docker/dockerfile:1
 
-FROM --platform=$BUILDPLATFORM <your-namespace>/dhi-dotnet:9.0-alpine AS build
+FROM --platform=$BUILDPLATFORM <your-namespace>/dhi-dotnet:10-sdk AS build
 ARG TARGETARCH
 COPY . /source
 WORKDIR /source/src
 RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
     dotnet publish -a ${TARGETARCH/amd64/x64} --use-current-runtime --self-contained false -o /app
 
-FROM <your-namespace>/dhi-aspnetcore:9.0-alpine AS final
+FROM <your-namespace>/dhi-aspnetcore:10
 WORKDIR /app
 COPY --from=build /app .
-ARG UID=10001
-RUN adduser \
-    --disabled-password \
-    --gecos "" \
-    --home "/nonexistent" \
-    --shell "/sbin/nologin" \
-    --no-create-home \
-    --uid "${UID}" \
-    appuser
-USER appuser
 ENTRYPOINT ["dotnet", "myWebApp.dll"]
 ```
+
+> [!NOTE]
+>
+> DHI runtime images already run as a non-root user (`nonroot`), so there's no need to create a user or specify `USER` in your Dockerfile. This reduces the attack surface and simplifies your configuration.
 
 {{< /tab >}}
 {{< tab name="Using the official .NET 10 image" >}}
