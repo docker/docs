@@ -23,6 +23,10 @@ Major changes in this release:
 
 - Compose v5 introduces a new official Go SDK. This SDK provides a comprehensive API that lets you integrate Compose functionality directly into your applications, allowing you to load, validate, and manage multi-container environments without relying on the Compose CLI. 
 
+> [!NOTE]
+>
+> To avoid confusion with the legacy Compose file formats labeled “v2” and “v3,” the versioning was advanced directly to v5.
+
 ### Bug fixes and enhancements
 
 - Dropped support for internal buildkit builder.
