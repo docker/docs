@@ -30,7 +30,19 @@ methods for all core Compose operations including creating, starting, stopping, 
 loading and validating Compose files. The service handles the underlying Docker API interactions and resource
 management, allowing you to focus on your application logic.
 
-## Example usage
+### Requirements
+
+Before using the SDK, make sure you're using a compatible version of the Docker CLI. 
+
+```go
+require (
+    github.com/docker/cli v28.5.2+incompatible
+)
+```
+
+Docker CLI version 29.0.0 and later depends on the new `github.com/moby/moby` module, whereas Docker Compose v5 currently depends on `github.com/docker/docker`. This means you need to pin `docker/cli v28.5.2+incompatible` to ensure compatibility and avoid build errors.
+
+### Example usage
 
 Here's a basic example demonstrating how to load a Compose project and start the services:
 
@@ -54,7 +66,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to create docker CLI: %v", err)
 	}
-	err = dockerCLI.Initialize(flags.ClientOptions{})
+	err = dockerCLI.Initialize(&flags.ClientOptions{})
 	if err != nil {
 		log.Fatalf("Failed to initialize docker CLI: %v", err)
 	}
