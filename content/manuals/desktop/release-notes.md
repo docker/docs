@@ -36,11 +36,16 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.54.0" build_path="//" >}}
 
+### New
+
+- Added support for vLLM in Docker Model Runner on Windows with WSL2 and NVIDIA GPUs.
+
 ### Upgrades
 
 - [Docker Buildx v0.30.1](https://github.com/docker/buildx/releases/tag/v0.30.1)
 - [Docker Engine v29.1.2](https://docs.docker.com/engine/release-notes/29/#2912)
 - [Runc v1.3.4](https://github.com/opencontainers/runc/releases/tag/v1.3.4)
+- [Docker Model Runner CLI v1.0.2](https://github.com/docker/model-runner/releases/tag/cmd%2Fcli%2Fv1.0.2)
 
 ## 4.53.0
 
