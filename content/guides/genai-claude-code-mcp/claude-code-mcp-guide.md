@@ -227,13 +227,13 @@ services:
       - app-net
 
   db:
-    image: postgres:<tag>
+    image: postgres:18
     environment:
       POSTGRES_USER: example
       POSTGRES_PASSWORD: example
       POSTGRES_DB: appdb
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql
     ports:
       - "5432:5432"
     networks:

@@ -96,7 +96,7 @@ spec:
               value: example
             - name: POSTGRES_PASSWORD
               value: example
-          image: postgres
+          image: postgres:18
           name: db
           ports:
             - containerPort: 5432

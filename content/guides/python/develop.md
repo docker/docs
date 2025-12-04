@@ -205,13 +205,13 @@ You'll need to clone a new repository to get a sample application that includes 
    #       db:
    #         condition: service_healthy
    #   db:
-   #     image: postgres
+   #     image: postgres:18
    #     restart: always
    #     user: postgres
    #     secrets:
    #       - db-password
    #     volumes:
-   #       - db-data:/var/lib/postgresql/data
+   #       - db-data:/var/lib/postgresql
    #     environment:
    #       - POSTGRES_DB=example
    #       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
@@ -358,13 +358,13 @@ services:
     secrets:
       - db-password
   db:
-    image: postgres
+    image: postgres:18
     restart: always
     user: postgres
     secrets:
       - db-password
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql
     environment:
       - POSTGRES_DB=example
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
@@ -501,13 +501,13 @@ services:
         - action: rebuild
           path: .
   db:
-    image: postgres
+    image: postgres:18
     restart: always
     user: postgres
     secrets:
       - db-password
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql
     environment:
       - POSTGRES_DB=example
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password

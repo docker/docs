@@ -53,7 +53,7 @@ Volumes have their own lifecycle beyond that of containers and can grow quite la
 
 ## Try it out
 
-In this guide, you’ll practice creating and using volumes to persist data created by a Postgres container. When the database runs, it stores files into the `/var/lib/postgresql/data` directory. By attaching the volume here, you will be able to restart the container multiple times while keeping the data.
+In this guide, you'll practice creating and using volumes to persist data created by a Postgres container. When the database runs, it stores files into the `/var/lib/postgresql` directory. By attaching the volume here, you will be able to restart the container multiple times while keeping the data.
 
 ### Use volumes
 
@@ -62,7 +62,7 @@ In this guide, you’ll practice creating and using volumes to persist data crea
 2. Start a container using the [Postgres image](https://hub.docker.com/_/postgres) with the following command:
 
     ```console
-    $ docker run --name=db -e POSTGRES_PASSWORD=secret -d -v postgres_data:/var/lib/postgresql/data postgres
+    $ docker run --name=db -e POSTGRES_PASSWORD=secret -d -v postgres_data:/var/lib/postgresql postgres:18
     ```
 
     This will start the database in the background, configure it with a password, and attach a volume to the directory PostgreSQL will persist the database files.
@@ -115,7 +115,7 @@ In this guide, you’ll practice creating and using volumes to persist data crea
 8. Start a new container by running the following command, attaching the same volume with the persisted data:
 
     ```console
-    $ docker run --name=new-db -d -v postgres_data:/var/lib/postgresql/data postgres 
+    $ docker run --name=new-db -d -v postgres_data:/var/lib/postgresql postgres:18
     ```
 
     You might have noticed that the `POSTGRES_PASSWORD` environment variable has been omitted. That’s because that variable is only used when bootstrapping a new database.

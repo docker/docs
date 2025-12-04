@@ -210,14 +210,14 @@ services:
   # PostgreSQL Database Service
   # ========================================
   db:
-    image: postgres:16-alpine
+    image: postgres:18-alpine
     container_name: todoapp-db
     environment:
       POSTGRES_DB: '${POSTGRES_DB:-todoapp}'
       POSTGRES_USER: '${POSTGRES_USER:-todoapp}'
       POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-todoapp_password}'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
     ports:
       - '${DB_PORT:-5432}:5432'
     restart: unless-stopped

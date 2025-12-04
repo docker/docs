@@ -109,7 +109,7 @@ spec:
               value: whatever
             - name: POSTGRES_USER
               value: postgres
-          image: postgres
+          image: postgres:18
           name: db
           ports:
             - containerPort: 5432
