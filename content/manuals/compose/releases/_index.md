@@ -2,5 +2,5 @@
 build:
   render: never
 title: Releases
-weight: 70
+weight: 80
 ---
