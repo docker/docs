@@ -7,8 +7,9 @@ Run a model and interact with it using a submitted prompt or chat mode
 
 | Name                            | Type     | Default | Description                                                                       |
 |:--------------------------------|:---------|:--------|:----------------------------------------------------------------------------------|
-| `--color`                       | `string` | `auto`  | Use colored output (auto\|yes\|no)                                                |
+| `--color`                       | `string` | `no`    | Use colored output (auto\|yes\|no)                                                |
 | `--debug`                       | `bool`   |         | Enable debug logging                                                              |
+| `-d`, `--detach`                | `bool`   |         | Load the model in the background without interaction                              |
 | `--ignore-runtime-memory-check` | `bool`   |         | Do not block pull if estimated runtime memory for model exceeds system resources. |
 
 
@@ -45,9 +46,15 @@ docker model run ai/smollm2
 Output:
 
 ```console
-Interactive chat mode started. Type '/bye' to exit.
 > Hi
 Hi there! It's SmolLM, AI assistant. How can I help you today?
 > /bye
-Chat session ended.
 ```
+
+### Pre-load a model
+
+```console
+docker model run --detach ai/smollm2
+```
+
+This loads the model into memory without interaction, ensuring maximum performance for subsequent requests.

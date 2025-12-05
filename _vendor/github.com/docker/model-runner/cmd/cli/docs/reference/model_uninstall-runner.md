@@ -1,7 +1,7 @@
 # docker model uninstall-runner
 
 <!---MARKER_GEN_START-->
-Uninstall Docker Model Runner
+Uninstall Docker Model Runner (Docker Engine only)
 
 ### Options
 

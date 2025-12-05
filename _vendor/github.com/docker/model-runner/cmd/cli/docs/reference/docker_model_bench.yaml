@@ -1,0 +1,69 @@
+command: docker model bench
+short: Benchmark a model's performance at different concurrency levels
+long: |-
+    Benchmark a model's performance showing tokens per second at different concurrency levels.
+
+    This command runs a series of benchmarks with 1, 2, 4, and 8 concurrent requests by default,
+    measuring the tokens per second (TPS) that the model can generate.
+usage: docker model bench [MODEL]
+pname: docker model
+plink: docker_model.yaml
+options:
+    - option: concurrency
+      value_type: intSlice
+      default_value: '[1,2,4,8]'
+      description: Concurrency levels to test
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: duration
+      value_type: duration
+      default_value: 30s
+      description: Duration to run each concurrency test
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: json
+      value_type: bool
+      default_value: "false"
+      description: Output results in JSON format
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: prompt
+      value_type: string
+      default_value: |
+        Write a comprehensive 100 word summary on whales and their impact on society.
+      description: Prompt to use for benchmarking
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: timeout
+      value_type: duration
+      default_value: 5m0s
+      description: Timeout for each individual request
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+
