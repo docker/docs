@@ -65,6 +65,10 @@ GPU Device 0: "GeForce RTX 2060 with Max-Q Design" with compute capability 7.5
 
 ## Run a real-world model: SmolLM2 with Docker Model Runner
 
+> [!NOTE]
+>
+> Docker Model Runner with vLLM for Windows with WSL2 is available starting with Docker Desktop 4.54.
+
 Use Docker Model Runner to run the SmolLM2 LLM with vLLM and GPU acceleration:
 
 ```console
