@@ -63,7 +63,7 @@ GPU Device 0: "GeForce RTX 2060 with Max-Q Design" with compute capability 7.5
 = 2724.379 single-precision GFLOP/s at 20 flops per interaction
 ```
 
-## Run a real-world model: smollm2 with Docker Model Runner
+## Run a real-world model: SmolLM2 with Docker Model Runner
 
 Use Docker Model Runner to run the SmolLM2 LLM with vLLM and GPU acceleration:
 
