@@ -1,0 +1,64 @@
+command: docker pass
+short: Manage your local OS keychain secrets.
+long: |-
+  Docker Pass is a helper that allows you to store secrets securely in your
+  local OS keychain and inject them into containers later.
+
+  On Windows: Uses the Windows Credential Manager API.
+
+  On macOS: Uses macOS Keychain services API.
+
+  On Linux: `org.freedesktop.secrets` API (requires DBus and `gnome-keyring` or
+  `kdewallet` to be installed).
+usage: docker pass set|get|ls|rm
+pname: docker
+plink: docker.yaml
+cname:
+  - docker pass set
+  - docker pass get
+  - docker pass ls
+  - docker pass rm
+clink:
+  - docker_pass_set.yaml
+  - docker_pass_get.yaml
+  - docker_pass_ls.yaml
+  - docker_pass_rm.yaml
+deprecated: false
+experimental: true
+experimentalcli: true
+kubernetes: false
+swarm: false
+examples: |-
+  ### Using keychain secrets in containers
+
+  Create a secret:
+
+  ```console
+  $ docker pass set GH_TOKEN=123456789
+  ```
+
+  Creating a secret from STDIN:
+
+  ```console
+  echo 123456789 > token.txt
+  cat token.txt | docker pass set GH_TOKEN
+  ```
+
+  Run a container that uses the secret:
+
+  ```console
+  $ docker run -e GH_TOKEN= -dt --name demo busybox
+  ```
+
+  Inspect your secret from inside the container
+
+  ```console
+  $ docker exec demo sh -c 'echo $GH_TOKEN'
+  123456789
+  ```
+
+  Explicitly assigning a secret to another environment variable:
+
+  ```console
+  $ docker run -e GITHUB_TOKEN=se://GH_TOKEN -dt --name demo busybox
+  ```
