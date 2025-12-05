@@ -244,16 +244,16 @@
 }
 
 .footer {
-  @apply hidden md:flex flex-row ml-auto justify-between px-4 pt-6 pb-2 gap-6;
-  @apply bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700;
+  @apply ml-auto hidden flex-row justify-between gap-6 px-4 pt-6 pb-2 md:flex;
+  @apply border-t border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-gray-900;
   @apply text-gray-600 dark:text-gray-400;
-  a:hover{
+  a:hover {
     @apply underline underline-offset-4;
   }
 }
 
 .social {
-  @apply items-center gap-1 flex-wrap min-w-20 flex;
+  @apply flex min-w-20 flex-wrap items-center gap-1;
 }
 
 .links {
@@ -261,27 +261,29 @@
 }
 
 .links a {
-  @apply inline-flex whitespace-normal truncate min-w-15;
+  @apply inline-flex min-w-15 truncate whitespace-normal;
 }
 
 .secondaryLinks {
-  @apply  flex items-center;
-  a, button{
+  @apply flex items-center;
+  a,
+  button {
     @apply whitespace-normal md:truncate;
   }
 }
 
 .secondaryLinks > *:not(:last-child)::after {
   content: "|";
-  @apply text-gray-400 mx-1;
+  @apply mx-1 text-gray-400;
 }
 
 .ot-sdk-show-settings {
-  @apply !text-gray-600 dark:!text-gray-400 hover:!text-gray-800 dark:hover:!text-gray-200;
-  @apply !text-sm !border-none !p-0 !m-0 !truncate !min-w-15;
+  @apply !text-gray-600 hover:!text-gray-800 dark:!text-gray-400 dark:hover:!text-gray-200;
+  @apply !m-0 !min-w-15 !truncate !border-none !p-0 !text-sm;
 }
-#ot-sdk-btn.ot-sdk-show-settings:hover, #ot-sdk-btn.optanon-show-settings:hover{
-  @apply hover:!bg-transparent !text-gray-600 dark:!text-gray-400 underline underline-offset-4 decoration-1;
+#ot-sdk-btn.ot-sdk-show-settings:hover,
+#ot-sdk-btn.optanon-show-settings:hover {
+  @apply !text-gray-600 underline decoration-1 underline-offset-4 hover:!bg-transparent dark:!text-gray-400;
 }
 
 @keyframes reflection {
