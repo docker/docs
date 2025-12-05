@@ -92,12 +92,16 @@ Alpine.store("showSidebar", false)
 Alpine.store('gordon', {
   isOpen: false,
   query: '',
+  autoSubmit: false,
   toggle() {
     this.isOpen = !this.isOpen
   },
-  open(query) {
+  open(query, autoSubmit = false) {
     this.isOpen = true
-    if (query) this.query = query
+    if (query) {
+      this.query = query
+      this.autoSubmit = autoSubmit
+    }
   },
   close() {
     this.isOpen = false

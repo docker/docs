@@ -16,7 +16,6 @@
   }
 }
 
-
 @utility icon-lg {
   svg {
     font-size: 32px;
@@ -39,43 +38,10 @@
   @apply dark:hue-rotate-180 dark:invert dark:filter;
 }
 
-@utility bg-pattern-blue {
-  background-color: rgba(255, 255, 255, 0.5);
-  background-image: url("/assets/images/bg-pattern-blue.webp");
-  background-blend-mode: overlay;
-  background-size: cover;
-  background-repeat: no-repeat;
-  .dark & {
-    background-color: rgba(0, 0, 0, 0.741);
-  }
-}
-
-@utility bg-pattern-purple {
-  background-color: rgba(255, 255, 255, 0.5);
-  background-image: url("/assets/images/bg-pattern-purple.webp");
-  background-blend-mode: overlay;
-  background-size: cover;
-  background-repeat: no-repeat;
-  .dark & {
-    background-color: rgba(0, 0, 0, 0.741);
-  }
-}
-
 @utility bg-background-toc {
   background-color: var(--color-navbar-bg);
   .dark & {
     background-color: var(--color-navbar-bg-dark);
-  }
-}
-
-@utility bg-pattern-verde {
-  background-color: rgba(255, 255, 255, 0.5);
-  background-image: url("/assets/images/bg-pattern-verde.webp");
-  background-blend-mode: overlay;
-  background-size: cover;
-  background-repeat: no-repeat;
-  .dark & {
-    background-color: rgba(0, 0, 0, 0.741);
   }
 }
 
@@ -151,8 +117,8 @@
   }
 
   /* code in `inline code` style */
-  :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)),
-  a>code {
+  :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)),
+  a > code {
     font-size: 0.875em;
     font-weight: 400 !important;
     border: 1px solid !important;
@@ -261,6 +227,20 @@
 
 @utility breadcrumbs {
   font-size: 90%;
+}
+
+@utility topbar-button {
+  @apply min-h-10 max-w-40 rounded-md border-1 border-blue-300 bg-(--topnav-button-bg) px-2 text-center font-semibold text-white;
+  @apply inline-flex items-center justify-center gap-1.5 transition-colors hover:border-blue-300 hover:bg-blue-400;
+  svg {
+    font-size: 19px;
+  }
+}
+@utility topbar-button-clear {
+  @apply min-h-9 px-0 text-center font-semibold text-white/95 transition-colors hover:text-white/85;
+  svg {
+    font-size: 19px;
+  }
 }
 
 .footer {
