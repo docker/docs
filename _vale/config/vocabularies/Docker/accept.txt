@@ -170,6 +170,7 @@ Quickview
 rebalance
 reimplement
 Rekor
+ROCm
 rollback
 rootful
 runc
@@ -213,6 +214,7 @@ Visual Studio Code
 VMware
 vpnkit
 vSphere
+Vulkan
 Vue
 Wasm
 Wasmtime
