@@ -65,7 +65,7 @@ GPU Device 0: "GeForce RTX 2060 with Max-Q Design" with compute capability 7.5
 
 ## Run a real-world model: smollm2 with Docker Model Runner
 
-Use Docker Model Runner to run smollm2 LLM using vLLM with GPU acceleration:
+Use Docker Model Runner to run the SmolLM2 LLM with vLLM and GPU acceleration:
 
 ```console
 $ docker model install-runner --backend vllm --gpu cuda
