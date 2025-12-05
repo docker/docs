@@ -1,7 +1,7 @@
-# docker model install-runner
+# docker model reinstall-runner
 
 <!---MARKER_GEN_START-->
-Install Docker Model Runner (Docker Engine only)
+Reinstall Docker Model Runner (Docker Engine only)
 
 ### Options
 
@@ -19,4 +19,4 @@ Install Docker Model Runner (Docker Engine only)
 
 ## Description
 
- This command runs implicitly when a docker model command is executed. You can run this command explicitly to add a new configuration.
+This command removes the existing Docker Model Runner container and reinstalls it with the specified configuration. Models and images are preserved during reinstallation.

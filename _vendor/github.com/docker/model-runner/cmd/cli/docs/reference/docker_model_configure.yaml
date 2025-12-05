@@ -1,7 +1,7 @@
 command: docker model configure
 short: Configure runtime options for a model
 long: Configure runtime options for a model
-usage: docker model configure [--context-size=<n>] MODEL [-- <runtime-flags...>]
+usage: docker model configure [--context-size=<n>] [--speculative-draft-model=<model>] [--hf_overrides=<json>] [--reasoning-budget=<n>] MODEL
 pname: docker model
 plink: docker_model.yaml
 options:
@@ -9,6 +9,54 @@ options:
       value_type: int64
       default_value: "-1"
       description: context size (in tokens)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: hf_overrides
+      value_type: string
+      description: HuggingFace model config overrides (JSON) - vLLM only
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: reasoning-budget
+      value_type: int64
+      default_value: "0"
+      description: reasoning budget for reasoning models - llama.cpp only
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: speculative-draft-model
+      value_type: string
+      description: draft model for speculative decoding
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: speculative-min-acceptance-rate
+      value_type: float64
+      default_value: "0"
+      description: minimum acceptance rate for speculative decoding
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: speculative-num-tokens
+      value_type: int
+      default_value: "0"
+      description: number of tokens to predict speculatively
       deprecated: false
       hidden: false
       experimental: false

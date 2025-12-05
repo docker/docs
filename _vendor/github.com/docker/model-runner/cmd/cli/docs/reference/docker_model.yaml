@@ -6,6 +6,7 @@ long: |-
 pname: docker
 plink: docker.yaml
 cname:
+    - docker model bench
     - docker model df
     - docker model inspect
     - docker model install-runner
@@ -14,16 +15,22 @@ cname:
     - docker model package
     - docker model ps
     - docker model pull
+    - docker model purge
     - docker model push
+    - docker model reinstall-runner
     - docker model requests
+    - docker model restart-runner
     - docker model rm
     - docker model run
+    - docker model start-runner
     - docker model status
+    - docker model stop-runner
     - docker model tag
     - docker model uninstall-runner
     - docker model unload
     - docker model version
 clink:
+    - docker_model_bench.yaml
     - docker_model_df.yaml
     - docker_model_inspect.yaml
     - docker_model_install-runner.yaml
@@ -32,11 +39,16 @@ clink:
     - docker_model_package.yaml
     - docker_model_ps.yaml
     - docker_model_pull.yaml
+    - docker_model_purge.yaml
     - docker_model_push.yaml
+    - docker_model_reinstall-runner.yaml
     - docker_model_requests.yaml
+    - docker_model_restart-runner.yaml
     - docker_model_rm.yaml
     - docker_model_run.yaml
+    - docker_model_start-runner.yaml
     - docker_model_status.yaml
+    - docker_model_stop-runner.yaml
     - docker_model_tag.yaml
     - docker_model_uninstall-runner.yaml
     - docker_model_unload.yaml
