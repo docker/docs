@@ -1,0 +1,11 @@
+command: docker pass ls
+short: List secrets
+usage: docker pass ls
+pname: docker pass
+plink: docker_pass.yaml
+deprecated: false
+hidden: false
+experimental: true
+experimentalcli: true
+kubernetes: false
+swarm: false

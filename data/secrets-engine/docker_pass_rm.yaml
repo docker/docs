@@ -1,0 +1,11 @@
+command: docker pass rm
+short: Remove a secret
+usage: docker pass rm NAME
+pname: docker pass
+plink: docker_pass.yaml
+deprecated: false
+hidden: false
+experimental: true
+experimentalcli: true
+kubernetes: false
+swarm: false
