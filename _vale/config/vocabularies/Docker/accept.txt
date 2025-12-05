@@ -169,6 +169,7 @@ Qualcomm
 Quickview
 rebalance
 reimplement
+Rego
 Rekor
 ROCm
 rollback
@@ -180,6 +181,7 @@ scrollable
 SELinux
 Slack
 snapshotters?
+Sigstore
 Snyk
 Solr
 SonarQube
@@ -292,4 +294,3 @@ Zsh
 [Vv]irtiofs
 [Vv]irtualize
 [Ww]alkthrough
-
