@@ -79,13 +79,9 @@ Debug mode has several advantages, such as:
 
 To use debug mode:
 
-1. Sign in to Docker Desktop with an account that has a Pro, Team, or Business
-   subscription.
-2. After you're signed in, either:
-
-   - Hover over your running container and under the **Actions** column, select the **Show container actions**
-     menu. From the drop-down menu, select **Use Docker Debug**.
-   - Or, select the container and then select the **Debug** tab. 
+- Hover over your running container and under the **Actions** column, select the **Show container actions**
+menu. From the drop-down menu, select **Use Docker Debug**.
+- Or, select the container and then select the **Debug** tab. 
 
 To use debug mode by default, navigate to
 the **General** tab in **Settings** and select the **Enable Docker Debug by
