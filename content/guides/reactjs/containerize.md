@@ -135,7 +135,7 @@ Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace
 
 ```dockerfile
 # =========================================
-# Stage 1: Build the Angular Application
+# Stage 1: Build the React.js Application
 # =========================================
 
 # Use a lightweight Node.js image for building (customizable via ARG)
@@ -153,8 +153,8 @@ RUN --mount=type=cache,target=/root/.npm npm ci
 # Copy the rest of the application source code into the container
 COPY . .
 
-# Build the Angular application
-RUN npm run build 
+# Build the React.js application (outputs to /app/dist)
+RUN npm run build
 
 # =========================================
 # Stage 2: Prepare Nginx to Serve Static Files
@@ -166,7 +166,7 @@ FROM <your-namespace>/dhi-nginx:1.28.0-alpine3.21-dev AS runner
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy the static build output from the build stage to Nginx's default HTML serving directory
-COPY --chown=nginx:nginx --from=builder /app/dist/*/browser /usr/share/nginx/html
+COPY --chown=nginx:nginx --from=builder /app/dist /usr/share/nginx/html
 
 # Use a non-root user for security best practices
 USER nginx
@@ -187,7 +187,7 @@ Now you need to create a production-ready multi-stage Dockerfile. Replace the ge
 
 ```dockerfile
 # =========================================
-# Stage 1: Build the Angular Application
+# Stage 1: Build the React.js Application
 # =========================================
 ARG NODE_VERSION=24.11.1-alpine
 ARG NGINX_VERSION=alpine3.22
@@ -207,8 +207,8 @@ RUN --mount=type=cache,target=/root/.npm npm ci
 # Copy the rest of the application source code into the container
 COPY . .
 
-# Build the Angular application
-RUN npm run build 
+# Build the React.js application (outputs to /app/dist)
+RUN npm run build
 
 # =========================================
 # Stage 2: Prepare Nginx to Serve Static Files
@@ -220,7 +220,7 @@ FROM nginxinc/nginx-unprivileged:${NGINX_VERSION} AS runner
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy the static build output from the build stage to Nginx's default HTML serving directory
-COPY --chown=nginx:nginx --from=builder /app/dist/*/browser /usr/share/nginx/html
+COPY --chown=nginx:nginx --from=builder /app/dist /usr/share/nginx/html
 
 # Use a built-in non-root user for security best practices
 USER nginx
