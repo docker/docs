@@ -78,7 +78,7 @@ For consistency, please use the same responses shown in the example below when p
 | Question                                                   | Answer          |
 |------------------------------------------------------------|-----------------|
 | What application platform does your project use?           | Node            |
-| What version of Node do you want to use?                   | 24.7.0-alpine  |
+| What version of Node do you want to use?                   | 24.11.1-alpine  |
 | Which package manager do you want to use?                  | npm             |
 | Do you want to run "npm run build" before starting server? | yes             |
 | What directory is your build output to?                    | dist            |
@@ -118,13 +118,78 @@ These updates help ensure your app is easy to deploy, fast to load, and producti
 
 ### Step 2: Configure the Dockerfile file 
 
-Copy and replace the contents of your existing `Dockerfile` with the configuration below:
+Before creating a Dockerfile, you need to choose a base image. You can either use the [Node.js Official Image](https://hub.docker.com/_/node) or a Docker Hardened Image (DHI) from the [Hardened Image catalog](https://hub.docker.com/hardened-images/catalog).
+
+Choosing DHI offers the advantage of a production-ready image that is lightweight and secure. For more information, see [Docker Hardened Images](https://docs.docker.com/dhi/).
+
+> [!IMPORTANT]
+> This guide uses a stable Node.js LTS image tag that is considered secure when the guide is written. Because new releases and security patches are published regularly, the tag shown here may no longer be the safest option when you follow the guide. Always review the latest available image tags and select a secure, up-to-date version before building or deploying your application.
+>
+> Official Node.js Docker Images: https://hub.docker.com/_/node
+
+{{< tabs >}}
+{{< tab name="Using Docker Hardened Images" >}}
+Docker Hardened Images (DHIs) are available for Node.js on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/node). Unlike using the Docker Official Image, you must first mirror the Node.js image into your organization and then use it as your base image. Follow the instructions in the [DHI quickstart](/dhi/get-started/) to create a mirrored repository for Node.js.
+
+Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace>/dhi-node:<tag>`. In the following Dockerfile, the `FROM` instruction uses `<your-namespace>/dhi-node:24-alpine3.22-dev` as the base image.
 
 ```dockerfile
 # =========================================
-# Stage 1: Build the React.js Application
+# Stage 1: Build the Angular Application
 # =========================================
-ARG NODE_VERSION=24.7.0-alpine
+
+# Use a lightweight Node.js image for building (customizable via ARG)
+FROM <your-namespace>/dhi-node:24-alpine3.22-dev AS builder
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy package-related files first to leverage Docker's caching mechanism
+COPY package.json package-lock.json ./
+
+# Install project dependencies using npm ci (ensures a clean, reproducible install)
+RUN --mount=type=cache,target=/root/.npm npm ci
+
+# Copy the rest of the application source code into the container
+COPY . .
+
+# Build the Angular application
+RUN npm run build 
+
+# =========================================
+# Stage 2: Prepare Nginx to Serve Static Files
+# =========================================
+
+FROM <your-namespace>/dhi-nginx:1.28.0-alpine3.21-dev AS runner
+
+# Copy custom Nginx config
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Copy the static build output from the build stage to Nginx's default HTML serving directory
+COPY --chown=nginx:nginx --from=builder /app/dist/*/browser /usr/share/nginx/html
+
+# Use a non-root user for security best practices
+USER nginx
+
+# Expose port 8080 to allow HTTP traffic
+# Note: The default NGINX container now listens on port 8080 instead of 80 
+EXPOSE 8080
+
+# Start Nginx directly with custom config
+ENTRYPOINT ["nginx", "-c", "/etc/nginx/nginx.conf"]
+CMD ["-g", "daemon off;"]
+```
+
+{{< /tab >}}
+{{< tab name="Using the Docker Official Image" >}}
+
+Now you need to create a production-ready multi-stage Dockerfile. Replace the generated Dockerfile with the following optimized configuration:
+
+```dockerfile
+# =========================================
+# Stage 1: Build the Angular Application
+# =========================================
+ARG NODE_VERSION=24.11.1-alpine
 ARG NGINX_VERSION=alpine3.22
 
 # Use a lightweight Node.js image for building (customizable via ARG)
@@ -142,8 +207,8 @@ RUN --mount=type=cache,target=/root/.npm npm ci
 # Copy the rest of the application source code into the container
 COPY . .
 
-# Build the React.js application (outputs to /app/dist)
-RUN npm run build
+# Build the Angular application
+RUN npm run build 
 
 # =========================================
 # Stage 2: Prepare Nginx to Serve Static Files
@@ -151,14 +216,14 @@ RUN npm run build
 
 FROM nginxinc/nginx-unprivileged:${NGINX_VERSION} AS runner
 
-# Use a built-in non-root user for security best practices
-USER nginx
-
 # Copy custom Nginx config
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy the static build output from the build stage to Nginx's default HTML serving directory
-COPY --chown=nginx:nginx  --from=builder /app/dist /usr/share/nginx/html
+COPY --chown=nginx:nginx --from=builder /app/dist/*/browser /usr/share/nginx/html
+
+# Use a built-in non-root user for security best practices
+USER nginx
 
 # Expose port 8080 to allow HTTP traffic
 # Note: The default NGINX container now listens on port 8080 instead of 80 
@@ -168,6 +233,16 @@ EXPOSE 8080
 ENTRYPOINT ["nginx", "-c", "/etc/nginx/nginx.conf"]
 CMD ["-g", "daemon off;"]
 ```
+
+> [!NOTE]
+> We are using nginx-unprivileged instead of the standard NGINX image to follow security best practices.
+> Running as a non-root user in the final image:
+>- Reduces the attack surface
+>- Aligns with Docker’s recommendations for container hardening
+>- Helps comply with stricter security policies in production environments
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ### Step 3: Configure the .dockerignore file
 
