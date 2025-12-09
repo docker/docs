@@ -12,6 +12,12 @@ toc_max: 2
 
 {{< rss-button feed="/security/security-announcements/index.xml" text="Subscribe to security RSS feed" >}}
 
+## Docker Desktop 4.54.0 security update: CVE-2025-13743
+
+A vulnerability in Docker Desktop was fixed on December 4 in the [4.54.0](/manuals/desktop/release-notes.md#4540) release:
+
+- Fixed [CVE-2025-13743](https://www.cve.org/cverecord?id=CVE-2025-13743) where Docker Desktop diagnostics bundles were found to include expired Hub PATs in log output due to error object serialization.
+
 ## Docker Desktop 4.49.0 security update: CVE-2025-9164
 
 A vulnerability in Docker Desktop for Windows was fixed on October 23 in the [4.49.0](/manuals/desktop/release-notes.md#4490) release:
