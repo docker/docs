@@ -30,6 +30,24 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.55.0
+
+{{< release-date date="2025-12-16" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.55.0" build_path="//" >}}
+
+### New
+
+- (WORDING TBD)With the Docker MCP Toolkit you can now assign servers and clients to profiles
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue that caused Docker Desktop to get stuck during startup.
+- Improved the error message if the `daemon.json` is invalid.
+- WASM is now deprecated and will be removed in a future Docker Desktop release.
+
 ## 4.54.0
 
 {{< release-date date="2025-12-04" >}}
