@@ -33,9 +33,29 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: runtime-flags
+    - option: speculative-draft-model
       value_type: string
-      description: raw runtime flags to pass to the inference engine
+      description: draft model for speculative decoding
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: speculative-min-acceptance-rate
+      value_type: float64
+      default_value: "0"
+      description: minimum acceptance rate for speculative decoding
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: speculative-num-tokens
+      value_type: int
+      default_value: "0"
+      description: number of tokens to predict speculatively
       deprecated: false
       hidden: false
       experimental: false

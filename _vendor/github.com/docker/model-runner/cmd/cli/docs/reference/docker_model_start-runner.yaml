@@ -1,8 +1,10 @@
-command: docker model install-runner
-short: Install Docker Model Runner (Docker Engine only)
-long: |
-    This command runs implicitly when a docker model command is executed. You can run this command explicitly to add a new configuration.
-usage: docker model install-runner
+command: docker model start-runner
+short: Start Docker Model Runner (Docker Engine only)
+long: |-
+    This command starts the Docker Model Runner without pulling container images. Use this command to start the runner when you already have the required images locally.
+
+    For the first-time setup or to ensure you have the latest images, use `docker model install-runner` instead.
+usage: docker model start-runner
 pname: docker model
 plink: docker_model.yaml
 options:
@@ -39,16 +41,6 @@ options:
       value_type: string
       default_value: auto
       description: Specify GPU support (none|auto|cuda|rocm|musa|cann)
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: host
-      value_type: string
-      default_value: 127.0.0.1
-      description: Host address to bind Docker Model Runner
       deprecated: false
       hidden: false
       experimental: false
