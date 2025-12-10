@@ -53,6 +53,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Runc v1.3.4](https://github.com/opencontainers/runc/releases/tag/v1.3.4)
 - [Docker Model Runner CLI v1.0.2](https://github.com/docker/model-runner/releases/tag/cmd%2Fcli%2Fv1.0.2)
 
+### Security 
+
+- Added a security patch to address [CVE-2025-13743](https://www.cve.org/cverecord?id=CVE-2025-13743) where Docker Desktop diagnostics bundles were found to include expired Hub PATs in log output due to error object serialization. 
+
 ## 4.53.0
 
 {{< release-date date="2025-11-27" >}}
