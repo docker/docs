@@ -2,7 +2,7 @@
 title: Building a coding agent
 description: Create a coding agent that can read, write, and validate code changes in your projects
 keywords: [cagent, tutorial, coding agent, ai assistant]
-weight: 10
+weight: 30
 ---
 
 This tutorial teaches you how to build a coding agent that can help with

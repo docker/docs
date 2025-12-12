@@ -2,7 +2,7 @@
 title: Best practices
 description: Patterns and techniques for building effective cagent agents
 keywords: [cagent, best practices, patterns, agent design, optimization]
-weight: 20
+weight: 40
 ---
 
 Patterns you learn from building and running cagent agents. These aren't

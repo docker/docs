@@ -2,7 +2,7 @@
 title: RAG
 description: How RAG gives your cagent agents access to codebases and documentation
 keywords: [cagent, rag, retrieval, embeddings, semantic search]
-weight: 60
+weight: 70
 ---
 
 When you configure a RAG source in cagent, your agent automatically gains a
