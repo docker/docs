@@ -3,7 +3,8 @@
 
 ARG ALPINE_VERSION=3.21
 ARG GO_VERSION=1.24
-ARG HTMLTEST_VERSION=0.17.0
+# LYCHEE_VERSION v0.21.0
+ARG LYCHEE_VERSION=92a3a7c
 ARG VALE_VERSION=3.11.2
 ARG HUGO_VERSION=0.141.0
 ARG NODE_VERSION=22
@@ -61,11 +62,15 @@ RUN --mount=type=bind,target=. \
     --ignore "content/manuals/desktop/previous-versions/*.md"
 
 # test validates HTML output and checks for broken links
-FROM wjdp/htmltest:v${HTMLTEST_VERSION} AS test
+FROM lycheeverse/lychee:sha-${LYCHEE_VERSION}-alpine AS test
 WORKDIR /test
 COPY --from=build /project/public ./public
-ADD .htmltest.yml .htmltest.yml
-RUN htmltest
+ADD lychee.toml lychee.toml
+RUN lychee --config lychee.toml \
+    --base-url file:///test/public \
+    --include-fragments \
+    --verbose \
+    ./public
 
 # vale
 FROM jdkato/vale:v${VALE_VERSION} AS vale-run
@@ -134,11 +139,15 @@ ENV HUGO_MODULE_REPLACEMENTS="github.com/${UPSTREAM_MODULE_NAME} -> github.com/$
 RUN hugo --ignoreVendorPaths "github.com/${UPSTREAM_MODULE_NAME}"
 
 # validate-upstream validates HTML output for upstream builds
-FROM wjdp/htmltest:v${HTMLTEST_VERSION} AS validate-upstream
+FROM lycheeverse/lychee:sha-${LYCHEE_VERSION}-alpine AS validate-upstream
 WORKDIR /test
 COPY --from=build-upstream /project/public ./public
-ADD .htmltest.yml .htmltest.yml
-RUN htmltest
+ADD lychee.toml lychee.toml
+RUN lychee --config lychee.toml \
+    --base-url file:///test/public \
+    --include-fragments \
+    --verbose \
+    ./public
 
 # unused-media checks for unused graphics and other media
 FROM alpine:${ALPINE_VERSION} AS unused-media
