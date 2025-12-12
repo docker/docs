@@ -49,40 +49,6 @@
             >
             Back
           </button>
-          <!-- Top nav buttons appear here on sm width -->
-          <div class="flex flex-col gap-2 md:hidden mb-4">
-            <button
-              @click="open = false"
-              class="topbar-button open-kapa-widget w-full flex items-center gap-2"
-            >
-              <span>Ask&nbsp;AI</span>
-              <span class="icon-svg">
-                {{ partialCached "utils/svg.html" "/icons/sparkle.svg" }}
-              </span>
-            </button>
-            <div class="topbar-button w-full flex items-center gap-2" id="search-bar-container">
-               {{ partialCached "search-bar.html" "-" }}
-            </div>
-            {{ partial "contact-support-button.html" .}}
-            <button
-              aria-label="Theme switch"
-              id="theme-switch"
-              class="topbar-button flex items-center"
-              x-data="{ theme: localStorage.getItem('theme-preference') }"
-              x-init="$watch('theme', value => {
-                    localStorage.setItem('theme-preference', value);
-                    document.firstElementChild.className = value;
-                  })"
-              @click="theme = (theme === 'dark' ? 'light' : 'dark')"
-            >
-              <span class="icon-svg icon-sm dark:hidden"
-                >{{ partialCached "icon" "icons/sun.svg" "sun" }}
-              </span>
-              <span class="icon-svg icon-sm hidden dark:block">
-                {{ partialCached "icon" "icons/moon.svg" "moon" }}
-              </span>
-            </button>
-          </div>
           <!-- Actual Sidebar Content -->
           {{ block "left" . }}
             {{ partial "sidebar/mainnav.html" . }}

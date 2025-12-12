@@ -4,10 +4,10 @@
   @click.outside="open = false;"
   @keyup.escape.window="open = false"
   id="search-bar"
-  class="relative flex w-full max-w-full items-center overflow-visible"
+  class="h-full relative flex items-center overflow-visible"
 >
   <input
-    class="min-w-0 border-none outline-none focus:outline-none"
+    class="rounded-lg hidden w-64 lg:inline focus:outline-none bg-blue-700 border border-blue-500 px-3 py-[0.5625rem] focus:ring focus:ring-blue-400 placeholder-blue-300 h-[42px]"
     x-ref="searchBarInput"
     type="search"
     id="search-bar-input"
@@ -30,12 +30,12 @@
   <button
     id="search-bar-icon"
     @click="window.location.href = '/search/?q=' + $refs.searchBarInput.value;"
-    class="cursor-pointer transition-opacity hover:opacity-80"
+    class="lg:absolute right-2 p-1 rounded-lg cursor-pointer transition-colors hover:bg-blue-600 lg:hover:bg-transparent lg:hover:opacity-80"
     aria-label="Search"
   >
-    <span class="icon-svg-stroke">
+    <div class="bg-blue-700 rounded-md p-2 border border-blue-500 lg:border-none icon-svg">
       {{ partial "utils/svg.html" "/icons/search.svg" }}
-    </span>
+    </div>
   </button>
   <div
     id="search-bar-dropdown"

@@ -46,28 +46,25 @@
       </nav>
     </div>
     <div id="buttons" class="flex min-w-0 items-center justify-end flex-shrink-0">
-      <!-- Hide on small screens, show on md+ -->
-      <div class="hidden md:flex items-center gap-3">
+      <div class="flex items-center gap-2">
         <button
           @click="open = false"
-          class="topbar-button open-kapa-widget"
+          class="cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-blue-700 border border-blue-500 text-white transition-colors focus:outline-none focus:ring focus:ring-blue-400 shimmer open-kapa-widget"
         >
-          <span class="hidden lg:inline">Ask&nbsp;AI</span>
           <span class="icon-svg">
-            {{ partialCached "utils/svg.html" "/icons/sparkle.svg" }}
+            {{ partial "utils/svg.html" "/icons/sparkle.svg" }}
           </span>
+          <span class="hidden px-1 lg:inline">Ask&nbsp;AI</span>
         </button>
 
-        <div class="topbar-button" id="search-bar-container">
+        <div id="search-bar-container">
            {{ partialCached "search-bar.html" "-" }}
         </div>
-
-        {{ partial "contact-support-button.html" "notext" }}
 
         <button
           aria-label="Theme switch"
           id="theme-switch"
-          class="topbar-button-clear"
+          class="cursor-pointer p-2 rounded-lg bg-blue-700 border border-blue-500 hover:bg-blue-800 hover:border-blue-400 transition-colors focus:outline-none focus:ring focus:ring-blue-400"
           x-data="{ theme: localStorage.getItem('theme-preference') }"
           x-init="$watch('theme', value => {
                 localStorage.setItem('theme-preference', value);
@@ -75,21 +72,14 @@
               })"
           @click="theme = (theme === 'dark' ? 'light' : 'dark')"
         >
-          <span class="icon-svg icon-sm dark:hidden"
+          <span class="icon-svg dark:hidden"
             >{{ partialCached "icon" "icons/sun.svg" "sun" }}
           </span>
-          <span class="icon-svg icon-sm hidden dark:block">
+          <span class="icon-svg hidden dark:block">
             {{ partialCached "icon" "icons/moon.svg" "moon" }}
           </span>
         </button>
       </div>
-      <!-- On sm screens, hide all buttons here (they will be in sidebar) -->
-    </div>
-  </div>
-</header>
-        </button>
-      </div>
-      <!-- On sm screens, hide all buttons here (they will be in sidebar) -->
     </div>
   </div>
 </header>
