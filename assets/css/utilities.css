@@ -257,20 +257,6 @@
   font-size: 90%;
 }
 
-@utility topbar-button {
-  @apply text-center max-w-40 text-white font-semibold min-h-10 px-2 bg-(--topnav-button-bg) rounded-md border-1 border-blue-300;
-  @apply inline-flex justify-center items-center gap-1.5 hover:bg-blue-400 hover:border-blue-300 transition-colors;
-  svg {
-   font-size: 19px;
-  }
-}
-@utility topbar-button-clear {
-  @apply text-center text-white/95 font-semibold min-h-9 px-0   hover:text-white/85 transition-colors;
-  svg {
-   font-size: 19px;
-  }
-}
-
 .footer {
   @apply hidden md:flex flex-row ml-auto justify-between px-4 pt-6 pb-2 gap-6;
   @apply bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700;
@@ -310,4 +296,56 @@
 }
 #ot-sdk-btn.ot-sdk-show-settings:hover, #ot-sdk-btn.optanon-show-settings:hover{
   @apply hover:!bg-transparent !text-gray-600 dark:!text-gray-400 underline underline-offset-4 decoration-1;
+}
+
+@keyframes reflection {
+  0% {
+    transform: translateX(-100%);
+  }
+  18% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@utility shimmer {
+  position: relative;
+  overflow: hidden;
+
+  & > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      transparent 43%,
+      rgba(123, 164, 244, 0.25) 49%,
+      rgba(170, 196, 248, 0.45) 50%,
+      rgba(123, 164, 244, 0.25) 51%,
+      transparent 57%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    pointer-events: none;
+    z-index: 1;
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: reflection 3s ease-in-out 3s forwards;
+    }
+  }
+
+  &:hover {
+    @apply bg-blue-800 border-blue-400;
+  }
 }
