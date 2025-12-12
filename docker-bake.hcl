@@ -33,6 +33,7 @@ target "release" {
   args = {
     HUGO_ENV = HUGO_ENV
     DOCS_URL = DOCS_URL
+    BUILDKIT_CONTEXT_KEEP_GIT_DIR = 1
   }
   target = "release"
   output = [DOCS_SITE_DIR]
@@ -44,6 +45,7 @@ group "validate" {
 }
 
 target "test" {
+  args = { BUILDKIT_CONTEXT_KEEP_GIT_DIR = 1 }
   target = "test"
   output = ["type=cacheonly"]
   provenance = false
@@ -71,16 +73,19 @@ target "unused-media" {
 }
 
 target "test-go-redirects" {
+  args = { BUILDKIT_CONTEXT_KEEP_GIT_DIR = 1 }
   target = "test-go-redirects"
   output = ["type=cacheonly"]
   provenance = false
 }
 
 target "dockerfile-lint" {
+  args = { BUILDKIT_CONTEXT_KEEP_GIT_DIR = 1 }
   call = "check"
 }
 
 target "path-warnings" {
+  args = { BUILDKIT_CONTEXT_KEEP_GIT_DIR = 1 }
   target = "path-warnings"
   output = ["type=cacheonly"]
 }
@@ -143,7 +148,7 @@ target "aws-cloudfront-update" {
   context = "hack/releaser"
   target = "aws-cloudfront-update"
   contexts = {
-    sitedir = DOCS_SITE_DIR
+    sitedir = "target:release"
   }
   no-cache-filter = ["aws-cloudfront-update"]
   output = ["type=cacheonly"]
@@ -163,6 +168,7 @@ target "vendor" {
 }
 
 target "validate-vendor" {
+  args = { BUILDKIT_CONTEXT_KEEP_GIT_DIR = 1 }
   target = "validate-vendor"
   output = ["type=cacheonly"]
 }
