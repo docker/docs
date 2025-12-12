@@ -141,8 +141,8 @@ Composefile include:
   requires: Docker Compose [2.20.0](/manuals/compose/releases/release-notes.md#2200) and later
 Compose sbom:
   requires: Docker Compose [2.39.0](/manuals/compose/releases/release-notes.md#2390) and later
-containerd:
-  availability: Experimental
+Compose SDK:
+  requires: Docker Compose [5.00.0](/manuals/compose/releases/release-notes.md#5000) and later
 Dev Environments:
   availability: Beta
 Docker Build Cloud:
@@ -181,6 +181,9 @@ Docker MCP Catalog and Toolkit:
 Docker MCP Catalog:
   availability: Beta
 Docker MCP Toolkit:
+  availability: Beta
+Docker Pass:
+  requires: Docker Desktop 4.54 and later
   availability: Beta
 Docker Projects:
   availability: Beta

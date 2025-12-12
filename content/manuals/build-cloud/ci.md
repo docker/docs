@@ -100,7 +100,6 @@ jobs:
         with:
           driver: cloud
           endpoint: "${{ vars.DOCKER_ACCOUNT }}/${{ vars.CLOUD_BUILDER_NAME }}" # for example, "acme/default"
-          install: true
       
       - name: Build and push
         uses: docker/build-push-action@v6
@@ -110,6 +109,31 @@ jobs:
           # Otherwise, push to a registry.
           outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry' }}
 ```
+
+The example above uses `docker/build-push-action`, which automatically uses the
+builder set up by `setup-buildx-action`. If you need to use the `docker build`
+command directly instead, you have two options:
+
+- Use `docker buildx build` instead of `docker build`
+- Set the `BUILDX_BUILDER` environment variable to use the cloud builder:
+
+  ```yaml
+  - name: Set up Docker Buildx
+    id: builder
+    uses: docker/setup-buildx-action@v3
+    with:
+      driver: cloud
+      endpoint: "${{ vars.DOCKER_ACCOUNT }}/${{ vars.CLOUD_BUILDER_NAME }}"
+
+  - name: Build
+    run: |
+      docker build .
+    env:
+      BUILDX_BUILDER: ${{ steps.builder.outputs.name }}
+  ```
+
+For more information about the `BUILDX_BUILDER` environment variable, see
+[Build variables](/manuals/build/building/variables.md#buildx_builder).
 
 ### GitLab
 

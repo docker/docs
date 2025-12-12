@@ -44,13 +44,13 @@ In the following command, option `--mount` is for starting the container with a 
 
 ```console
 $ docker run --rm -d --mount \
-  "type=volume,src=db-data,target=/var/lib/postgresql/data" \
+  "type=volume,src=db-data,target=/var/lib/postgresql" \
   -p 5432:5432 \
   --network postgresnet \
   --name db \
   -e POSTGRES_PASSWORD=mysecretpassword \
   -e POSTGRES_DB=example \
-  postgres
+  postgres:18
 ```
 
 Now, make sure that your PostgreSQL database is running and that you can connect to it. Connect to the running PostgreSQL database inside the container.
@@ -258,13 +258,13 @@ services:
       db:
         condition: service_healthy
   db:
-    image: postgres
+    image: postgres:18
     restart: always
     user: postgres
     secrets:
       - db-password
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql
     environment:
       - POSTGRES_DB=example
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password

@@ -26,20 +26,18 @@ installed and coexist together.
 ### Go SDK
 
 ```console
-$ go get github.com/docker/docker/client
+$ go get github.com/moby/moby/client
 ```
 
 The client requires a recent version of Go. Run `go version` and ensure that you're running a currently supported version of Go.
 
-
-For more information, see [Docker Engine Go SDK reference](https://godoc.org/github.com/docker/docker/client).
+For more information, see [Go client reference](https://pkg.go.dev/github.com/moby/moby/client).
 
 ### Python SDK
 
 - Recommended: Run `pip install docker`.
 
 - If you can't use `pip`:
-
   1.  [Download the package directly](https://pypi.python.org/pypi/docker/).
   2.  Extract it and change to the extracted directory.
   3.  Run `python setup.py install`.
@@ -50,7 +48,7 @@ For more information, see [Docker Engine Python SDK reference](https://docker-py
 
 You can
 [view the reference for the latest version of the API](/reference/api/engine/latest/)
-or [choose a specific version](/reference/api/engine/version-history/).
+or [choose a specific version](/reference/api/engine/#api-version-matrix).
 
 ## Versioned API and SDK
 
@@ -84,53 +82,54 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/docker/api/types/container"
-        "github.com/docker/docker/api/types/image"
-	"github.com/docker/docker/client"
-	"github.com/docker/docker/pkg/stdcopy"
+	"github.com/moby/moby/api/pkg/stdcopy"
+	"github.com/moby/moby/api/types/container"
+	"github.com/moby/moby/client"
 )
 
 func main() {
-    ctx := context.Background()
-    cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
-    if err != nil {
-        panic(err)
-    }
-    defer cli.Close()
+	ctx := context.Background()
+	apiClient, err := client.New(client.FromEnv)
+	if err != nil {
+		panic(err)
+	}
+	defer apiClient.Close()
 
-    reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", image.PullOptions{})
-    if err != nil {
-        panic(err)
-    }
-    io.Copy(os.Stdout, reader)
+	reader, err := apiClient.ImagePull(ctx, "docker.io/library/alpine", client.ImagePullOptions{})
+	if err != nil {
+		panic(err)
+	}
+	io.Copy(os.Stdout, reader)
 
-    resp, err := cli.ContainerCreate(ctx, &container.Config{
-        Image: "alpine",
-        Cmd:   []string{"echo", "hello world"},
-    }, nil, nil, nil, "")
-    if err != nil {
-        panic(err)
-    }
+	resp, err := apiClient.ContainerCreate(ctx, client.ContainerCreateOptions{
+		Image: "alpine",
+		Config: &container.Config{
+			Cmd: []string{"echo", "hello world"},
+		},
+	})
+	if err != nil {
+		panic(err)
+	}
 
-    if err := cli.ContainerStart(ctx, resp.ID, container.StartOptions{}); err != nil {
-        panic(err)
-    }
+	if _, err := apiClient.ContainerStart(ctx, resp.ID, client.ContainerStartOptions{}); err != nil {
+		panic(err)
+	}
 
-    statusCh, errCh := cli.ContainerWait(ctx, resp.ID, container.WaitConditionNotRunning)
-    select {
-    case err := <-errCh:
-        if err != nil {
-            panic(err)
-        }
-    case <-statusCh:
-    }
+	wait := apiClient.ContainerWait(ctx, resp.ID, client.ContainerWaitOptions{})
+	select {
+	case err := <-wait.Error:
+		if err != nil {
+			panic(err)
+		}
+	case <-wait.Result:
+	}
 
-    out, err := cli.ContainerLogs(ctx, resp.ID, container.LogsOptions{ShowStdout: true})
-    if err != nil {
-        panic(err)
-    }
+	out, err := apiClient.ContainerLogs(ctx, resp.ID, client.ContainerLogsOptions{ShowStdout: true})
+	if err != nil {
+		panic(err)
+	}
 
-    stdcopy.StdCopy(os.Stdout, os.Stderr, out)
+	stdcopy.StdCopy(os.Stdout, os.Stderr, out)
 }
 ```
 
@@ -186,29 +185,29 @@ file them with the library maintainers.
 
 | Language              | Library                                                                     |
 |:----------------------|:----------------------------------------------------------------------------|
-| C                     | [libdocker](https://github.com/danielsuo/libdocker)                         |
+| C                     | [libdocker(INACTIVE)](https://github.com/danielsuo/libdocker)                         |
 | C#                    | [Docker.DotNet](https://github.com/ahmetalpbalkan/Docker.DotNet)            |
-| C++                   | [lasote/docker_client](https://github.com/lasote/docker_client)             |
-| Clojure               | [clj-docker-client](https://github.com/into-docker/clj-docker-client)       |
+| C++                   | [lasote/docker_client(INACTIVE)](https://github.com/lasote/docker_client)             |
+| Clojure               | [clj-docker-client(INACTIVE)](https://github.com/into-docker/clj-docker-client)       |
 | Clojure               | [contajners](https://github.com/lispyclouds/contajners)                     |
-| Dart                  | [bwu_docker](https://github.com/bwu-dart/bwu_docker)                        |
-| Erlang                | [erldocker](https://github.com/proger/erldocker)                            |
+| Dart                  | [bwu_docker(INACTIVE)](https://github.com/bwu-dart/bwu_docker)                        |
+| Erlang                | [erldocker(INACTIVE)](https://github.com/proger/erldocker)                            |
 | Gradle                | [gradle-docker-plugin](https://github.com/gesellix/gradle-docker-plugin)    |
 | Groovy                | [docker-client](https://github.com/gesellix/docker-client)                  |
-| Haskell               | [docker-hs](https://github.com/denibertovic/docker-hs)                      |
+| Haskell               | [docker-hs(INACTIVE)](https://github.com/denibertovic/docker-hs)                      |
 | Java                  | [docker-java](https://github.com/docker-java/docker-java)                   |
 | Java                  | [docker-client(INACTIVE)](https://github.com/spotify/docker-client)         |
 | Java                  | [docker-java-api(INACTIVE)](https://github.com/amihaiemil/docker-java-api)  |
 | Java                  | [jocker(INACTIVE)](https://github.com/ndeloof/jocker)                       |
 | NodeJS                | [dockerode](https://github.com/apocas/dockerode)                            |
-| NodeJS                | [harbor-master](https://github.com/arhea/harbor-master)                     |
+| NodeJS                | [harbor-master(INACTIVE)](https://github.com/arhea/harbor-master)                     |
 | NodeJS                | [the-moby-effect](https://github.com/leonitousconforti/the-moby-effect)     |
-| Perl                  | [Eixo::Docker](https://github.com/alambike/eixo-docker)                     |
-| PHP                   | [Docker-PHP](https://github.com/docker-php/docker-php)                      |
+| Perl                  | [Eixo::Docker(INACTIVE)](https://github.com/alambike/eixo-docker)                     |
+| PHP                   | [Docker-PHP(INACTIVE)](https://github.com/docker-php/docker-php)                      |
 | Ruby                  | [docker-api](https://github.com/swipely/docker-api)                         |
 | Rust                  | [bollard](https://github.com/fussybeaver/bollard)                           |
-| Rust                  | [docker-rust](https://github.com/abh1nav/docker-rust)                       |
-| Rust                  | [shiplift](https://github.com/softprops/shiplift)                           |
-| Scala                 | [tugboat](https://github.com/softprops/tugboat)                             |
-| Scala                 | [reactive-docker](https://github.com/almoehi/reactive-docker)               |
-| Swift                 | [docker-client-swift](https://github.com/valeriomazzeo/docker-client-swift) |
+| Rust                  | [docker-rust(INACTIVE)](https://github.com/abh1nav/docker-rust)                       |
+| Rust                  | [shiplift(INACTIVE)](https://github.com/softprops/shiplift)                           |
+| Scala                 | [tugboat(INACTIVE)](https://github.com/softprops/tugboat)                             |
+| Scala                 | [reactive-docker(INACTIVE)](https://github.com/almoehi/reactive-docker)               |
+| Swift                 | [docker-client-swift(INACTIVE)](https://github.com/valeriomazzeo/docker-client-swift) |

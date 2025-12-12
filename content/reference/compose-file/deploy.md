@@ -98,7 +98,7 @@ For more detailed information about job options and behavior, see the [Docker CL
 deploy:
   placement:
     constraints:
-      - disktype=ssd
+      - node.labels.disktype==ssd
 ```
 
 #### `preferences`

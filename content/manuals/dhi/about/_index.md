@@ -8,6 +8,10 @@ params:
       description: Learn what a hardened image is, how Docker Hardened Images are built, what sets them apart from typical base and application images, and why you should use them.
       icon: info
       link: /dhi/about/what/
+    - title: Build process
+      description: Learn how Docker builds, tests, and maintains Docker Hardened Images through an automated, security-focused pipeline.
+      icon: build
+      link: /dhi/about/build-process/
     - title: Image testing
       description: See how Docker Hardened Images are automatically tested for standards compliance, functionality, and security.
       icon: science

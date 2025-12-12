@@ -3,7 +3,7 @@ description: Understand what Docker Desktop Resource Saver mode is and how to co
 keywords: Docker Dashboard, resource saver, manage, containers, gui, dashboard, user manual
 title: Docker Desktop's Resource Saver mode
 linkTitle: Resource Saver mode
-weight: 50
+weight: 60
 ---
 
 Resource Saver mode significantly reduces Docker
@@ -20,7 +20,7 @@ experience.
 Resource Saver is enabled by default but can be disabled by navigating to the **Resources** tab, in **Settings**. You can also configure the idle
 timer as shown below.
 
-![Resource Saver Settings](../images/resource-saver-settings.png)
+![Resource Saver Settings](../images/resource-saver-settings.webp) 
 
 If the values available aren't sufficient for your
 needs, you can reconfigure it to any value, as long as the value is larger than 30 seconds, by
@@ -33,13 +33,9 @@ changing `autoPauseTimeoutSeconds` in the Docker Desktop `settings-store.json` f
 There's no need to restart Docker Desktop after reconfiguring. 
 
 When Docker Desktop enters Resource Saver mode: 
-- A leaf icon displays on the
+- A moon icon displays on the
 Docker Desktop status bar as well as on the Docker icon in
-the system tray. The following image shows the Linux VM CPU and memory utilization reduced
-to zero when Resource Saver mode is on. 
-
-   ![Resource Saver Status Bar](../images/resource-saver-status-bar.png)
-
+the system tray. 
 - Docker commands that don't run containers, for example listing container images or volumes, don't necessarily trigger an exit from Resource Saver mode as Docker Desktop can serve such commands without unnecessarily waking up the Linux VM.
 
 > [!NOTE]

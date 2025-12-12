@@ -62,10 +62,10 @@ services:
     environment:
       - POSTGRES_URL=jdbc:postgresql://db:5432/petclinic
   db:
-    image: postgres
+    image: postgres:18
     restart: always
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql
     environment:
       - POSTGRES_DB=petclinic
       - POSTGRES_USER=petclinic
@@ -193,10 +193,10 @@ services:
     environment:
       - POSTGRES_URL=jdbc:postgresql://db:5432/petclinic
   db:
-    image: postgres
+    image: postgres:18
     restart: always
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql
     environment:
       - POSTGRES_DB=petclinic
       - POSTGRES_USER=petclinic
@@ -345,10 +345,10 @@ services:
         - action: rebuild
           path: .
   db:
-    image: postgres
+    image: postgres:18
     restart: always
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql
     environment:
       - POSTGRES_DB=petclinic
       - POSTGRES_USER=petclinic

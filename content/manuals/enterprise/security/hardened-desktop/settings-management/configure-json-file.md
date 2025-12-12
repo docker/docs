@@ -239,6 +239,10 @@ The following sample is an `admin-settings.json` file with common enterprise set
   "enableInferenceGPUVariant": {
     "locked": true,
     "value": true
+  },
+  "portBindingBehavior": {
+    "locked": true,
+    "value": "default-port-binding"
   }
 }
 ```
@@ -340,7 +344,7 @@ The following tables describe all available settings in the `admin-settings.json
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
-|`kubernetes`|  | If `enabled` is set to true, a Kubernetes single-node cluster is started when Docker Desktop starts. If `showSystemContainers` is set to true, Kubernetes containers are displayed in the Docker Desktop Dashboard and when you run `docker ps`. The [imagesRepository](../../../../desktop/features/kubernetes.md#configuring-a-custom-image-registry-for-kubernetes-control-plane-images) setting lets you specify which repository Docker Desktop pulls control-plane Kubernetes images from. |  |
+|`kubernetes`|  | If `enabled` is set to true, a Kubernetes single-node cluster is started when Docker Desktop starts. If `showSystemContainers` is set to true, Kubernetes containers are displayed in the Docker Desktop Dashboard and when you run `docker ps`. The [imagesRepository](/manuals/desktop/use-desktop/kubernetes.md#configuring-a-custom-image-registry-for-kubernetes-control-plane-images) setting lets you specify which repository Docker Desktop pulls control-plane Kubernetes images from. |  |
 
 > [!NOTE]
 >
@@ -357,6 +361,7 @@ The following tables describe all available settings in the `admin-settings.json
 |:-------------------------------|---|:-------------------------------|---|
 | `defaultNetworkingMode` | Windows and Mac only | Defines the default IP protocol for new Docker networks: `dual-stack` (IPv4 + IPv6, default), `ipv4only`, or `ipv6only`. | Docker Desktop version 4.43 and later. |
 | `dnsInhibition` | Windows and Mac only | Controls DNS record filtering returned to containers. Options: `auto` (recommended), `ipv4`, `ipv6`, `none`| Docker Desktop version 4.43 and later. |
+| `portBindingBehavior` | Linux-based containers only | Defines port binding restrictions and default behavior, allowing admins to control how a user exposes ports from their containers. Options: `default-port-binding`, `default-local-port-binding`, `local-only-port-binding` | Docker Desktop version 4.52 and later. |
 
 For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
 

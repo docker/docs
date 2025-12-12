@@ -3,9 +3,17 @@
 {{- $grouped := $sorted.GroupBy "Section" -}}
 
 # Docker Documentation
+{{- range $grouped }}
 
-{{ range $grouped }}
 ## {{ humanize .Key }}
-{{ range .Pages }}
-- [{{ .Title }}]({{ .Permalink }}){{ end }}
-{{ end -}}
+{{- range .Pages }}
+{{- template "pageItem" . }}
+{{- end }}
+{{- end -}}
+
+{{- define "pageItem" }}
+{{- if and .Title .Permalink }}
+- [{{ .Title }}]({{ .Permalink }})
+  {{- with .Description }}: {{ chomp (replace . "\n" " ") }}{{- end }}
+{{- end }}
+{{- end }}

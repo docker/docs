@@ -63,16 +63,32 @@ GPU Device 0: "GeForce RTX 2060 with Max-Q Design" with compute capability 7.5
 = 2724.379 single-precision GFLOP/s at 20 flops per interaction
 ```
 
-## Run a real-world model: Llama2 with Ollama
+## Run a real-world model: SmolLM2 with Docker Model Runner
 
-Use the [official Ollama image](https://hub.docker.com/r/ollama/ollama) to run the Llama2 LLM with GPU acceleration:
+> [!NOTE]
+>
+> Docker Model Runner with vLLM for Windows with WSL2 is available starting with Docker Desktop 4.54.
+
+Use Docker Model Runner to run the SmolLM2 LLM with vLLM and GPU acceleration:
 
 ```console
-$ docker run --gpus=all -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+$ docker model install-runner --backend vllm --gpu cuda
 ```
 
-Then start the model:
+Check it's correctly installed:
 
 ```console
-$ docker exec -it ollama ollama run llama2
+$ docker status
+Docker Model Runner is running
+
+Status:
+llama.cpp: running llama.cpp version: c22473b
+vllm: running vllm version: 0.11.0
+```
+
+Run the model:
+
+```console
+$ docker model un ai/smollm2-vllm hi
+Hello! I'm sure everything goes smoothly here. How can I assist you today?
 ```

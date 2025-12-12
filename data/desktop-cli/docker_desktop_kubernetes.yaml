@@ -3,9 +3,6 @@ short: Manage Kubernetes settings
 usage: docker desktop kubernetes
 pname: docker desktop
 plink: docker_desktop.yaml
-usage: docker desktop kubernetes
-pname: docker desktop
-plink: docker_desktop.yaml
 cname:
     - docker desktop kubernetes images
 clink:

@@ -12,7 +12,7 @@ aliases:
 ## Prerequisites
 
 - Complete all the previous sections of this guide, starting with [Use containers for Python development](develop.md).
-- [Turn on Kubernetes](/manuals/desktop/features/kubernetes.md#install-and-turn-on-kubernetes) in Docker Desktop.
+- [Turn on Kubernetes](/manuals/desktop/use-desktop/kubernetes.md#enable-kubernetes) in Docker Desktop.
 
 ## Overview
 
@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres
+          image: postgres:18
           ports:
             - containerPort: 5432
           env:
@@ -56,7 +56,7 @@ spec:
                   key: POSTGRES_PASSWORD
           volumeMounts:
             - name: postgres-data
-              mountPath: /var/lib/postgresql/data
+              mountPath: /var/lib/postgresql
       volumes:
         - name: postgres-data
           persistentVolumeClaim:
@@ -256,5 +256,5 @@ In this section, you learned how to use Docker Desktop to deploy your applicatio
 Related information:
 
 - [Kubernetes documentation](https://kubernetes.io/docs/home/)
-- [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/features/kubernetes.md)
+- [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/use-desktop/kubernetes.md)
 - [Swarm mode overview](/manuals/engine/swarm/_index.md)

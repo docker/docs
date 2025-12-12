@@ -96,7 +96,7 @@ import { Sandbox } from "e2b";
 async function quickstart(): Promise<void> {
   console.log("Creating E2B sandbox with Notion and GitHub MCP servers...\n");
 
-  const sbx: Sandbox = await Sandbox.betaCreate({
+  const sbx: Sandbox = await Sandbox.create({
     envs: {
       ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY as string,
     },
@@ -111,8 +111,8 @@ async function quickstart(): Promise<void> {
     },
   });
 
-  const mcpUrl: string = sbx.betaGetMcpUrl();
-  const mcpToken: string = await sbx.betaGetMcpToken();
+  const mcpUrl = sbx.getMcpUrl();
+  const mcpToken = await sbx.getMcpToken();
 
   console.log("Sandbox created successfully!");
   console.log(`MCP Gateway URL: ${mcpUrl}\n`);
@@ -254,7 +254,7 @@ import { Sandbox } from "e2b";
 async function exampleWorkflow(): Promise<void> {
   console.log("Creating sandbox...\n");
 
-  const sbx: Sandbox = await Sandbox.betaCreate({
+  const sbx: Sandbox = await Sandbox.create({
     envs: {
       ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY as string,
     },
@@ -269,8 +269,8 @@ async function exampleWorkflow(): Promise<void> {
     },
   });
 
-  const mcpUrl: string = sbx.betaGetMcpUrl();
-  const mcpToken: string = await sbx.betaGetMcpToken();
+  const mcpUrl = sbx.getMcpUrl();
+  const mcpToken = await sbx.getMcpToken();
 
   console.log("Sandbox created successfully\n");
 

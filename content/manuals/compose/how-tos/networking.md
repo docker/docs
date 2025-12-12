@@ -5,7 +5,7 @@ title: Networking in Compose
 linkTitle: Networking
 weight: 70
 aliases:
-- /compose/networking/
+  - /compose/networking/
 ---
 
 {{% include "compose-eol.md" %}}
@@ -31,7 +31,7 @@ services:
     ports:
       - "8000:8000"
   db:
-    image: postgres
+    image: postgres:18
     ports:
       - "8001:5432"
 ```
@@ -75,13 +75,12 @@ Links allow you to define extra aliases by which a service is reachable from ano
 
 ```yaml
 services:
-
   web:
     build: .
     links:
       - "db:database"
   db:
-    image: postgres
+    image: postgres:18
 ```
 
 See the [links reference](/reference/compose-file/services.md#links) for more information.
@@ -93,8 +92,8 @@ you can make use of the built-in `overlay` driver to enable multi-host communica
 
 Overlay networks are always created as `attachable`. You can optionally set the [`attachable`](/reference/compose-file/networks.md#attachable) property to `false`.
 
-Consult the [Swarm mode section](/manuals/engine/swarm/_index.md), to see how to set up
-a Swarm cluster, and the [Getting started with multi-host networking](/manuals/engine/network/tutorials/overlay.md)
+Consult the [Swarm mode section](/manuals/engine/swarm/_index.md) to see how to set up
+a Swarm cluster, and the [overlay network driver documentation](/manuals/engine/network/drivers/overlay.md)
 to learn about multi-host overlay networks.
 
 ## Specify custom networks
@@ -117,7 +116,7 @@ services:
       - frontend
       - backend
   db:
-    image: postgres
+    image: postgres:18
     networks:
       - backend
 
@@ -156,7 +155,7 @@ services:
     ports:
       - "8000:8000"
   db:
-    image: postgres
+    image: postgres:18
 
 networks:
   default:
@@ -169,6 +168,7 @@ networks:
 If you've manually created a bridge network outside of Compose using the `docker network create` command, you can connect your Compose services to it by marking the network as `external`.
 
 If you want your containers to join a pre-existing network, use the [`external` option](/reference/compose-file/networks.md#external)
+
 ```yaml
 services:
   # ...
@@ -180,7 +180,7 @@ networks:
 
 Instead of attempting to create a network called `[projectname]_default`, Compose looks for a network called `my-pre-existing-network` and connects your app's containers to it.
 
-## Further reference information 
+## Further reference information
 
 For full details of the network configuration options available, see the following references:
 

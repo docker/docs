@@ -1,7 +1,7 @@
 ---
 linkTitle: Migrate to Compose v2
 Title: Migrate from Docker Compose v1 to v2
-weight: 20
+weight: 30
 description: Step-by-step guidance to migrate from Compose v1 to v2, including syntax differences, environment handling, and CLI changes
 keywords: migrate docker compose, upgrade docker compose v2, docker compose migration, docker compose v1 vs v2, docker compose CLI changes, docker-compose to docker compose
 aliases:

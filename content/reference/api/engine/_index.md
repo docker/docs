@@ -41,7 +41,7 @@ The Docker Engine API is a RESTful API accessed by an HTTP client such as `wget`
 
 You can
 [view the reference for the latest version of the API](/reference/api/engine/version/v{{% param latest_engine_api_version %}}.md)
-or [choose a specific version](/reference/api/engine/version-history/).
+or [choose a specific version](/reference/api/engine/#api-version-matrix).
 
 ## Versioned API and SDK
 
@@ -73,21 +73,21 @@ To see the highest version of the API your Docker daemon and client support, use
 ```console
 $ docker version
 Client: Docker Engine - Community
- Version:           28.5.2
- API version:       1.51
- Go version:        go1.25.3
- Git commit:        ecc6942
- Built:             Wed Nov  5 14:44:01 2025
+ Version:           29.1.2
+ API version:       1.52
+ Go version:        go1.25.5
+ Git commit:        890dcca
+ Built:             Tue Dec  2 21:56:10 2025
  OS/Arch:           linux/arm64
  Context:           default
 
 Server: Docker Engine - Community
  Engine:
-  Version:          28.5.2
-  API version:      1.51 (minimum version 1.24)
-  Go version:       go1.25.3
-  Git commit:       89c5e8f
-  Built:            Wed Nov  5 14:44:01 2025
+  Version:          29.1.2
+  API version:      1.52 (minimum version 1.44)
+  Go version:       go1.25.5
+  Git commit:       de45c2a
+  Built:            Tue Dec  2 21:56:10 2025
   OS/Arch:          linux/arm64
   ...
 ```
@@ -131,7 +131,8 @@ You can specify the API version to use in any of the following ways:
 ### API version matrix
 
 | Docker version | Maximum API version                          | Change log                                                         |
-|:---------------|:---------------------------------------------|:-------------------------------------------------------------------|
+| :------------- | :------------------------------------------- | :----------------------------------------------------------------- |
+| 29.0           | [1.52](/reference/api/engine/version/v1.52/) | [changes](/reference/api/engine/version-history/#v152-api-changes) |
 | 28.3           | [1.51](/reference/api/engine/version/v1.51/) | [changes](/reference/api/engine/version-history/#v151-api-changes) |
 | 28.2           | [1.50](/reference/api/engine/version/v1.50/) | [changes](/reference/api/engine/version-history/#v150-api-changes) |
 | 28.1           | [1.49](/reference/api/engine/version/v1.49/) | [changes](/reference/api/engine/version-history/#v149-api-changes) |
@@ -145,35 +146,35 @@ You can specify the API version to use in any of the following ways:
 | 26.1           | [1.45](/reference/api/engine/version/v1.45/) | [changes](/reference/api/engine/version-history/#v145-api-changes) |
 | 26.0           | [1.45](/reference/api/engine/version/v1.45/) | [changes](/reference/api/engine/version-history/#v145-api-changes) |
 | 25.0           | [1.44](/reference/api/engine/version/v1.44/) | [changes](/reference/api/engine/version-history/#v144-api-changes) |
-| 24.0           | [1.43](/reference/api/engine/version/v1.43/) | [changes](/reference/api/engine/version-history/#v143-api-changes) |
-| 23.0           | [1.42](/reference/api/engine/version/v1.42/) | [changes](/reference/api/engine/version-history/#v142-api-changes) |
-| 20.10          | [1.41](/reference/api/engine/version/v1.41/) | [changes](/reference/api/engine/version-history/#v141-api-changes) |
-| 19.03          | [1.40](/reference/api/engine/version/v1.40/) | [changes](/reference/api/engine/version-history/#v140-api-changes) |
-| 18.09          | [1.39](/reference/api/engine/version/v1.39/) | [changes](/reference/api/engine/version-history/#v139-api-changes) |
-| 18.06          | [1.38](/reference/api/engine/version/v1.38/) | [changes](/reference/api/engine/version-history/#v138-api-changes) |
-| 18.05          | [1.37](/reference/api/engine/version/v1.37/) | [changes](/reference/api/engine/version-history/#v137-api-changes) |
-| 18.04          | [1.37](/reference/api/engine/version/v1.37/) | [changes](/reference/api/engine/version-history/#v137-api-changes) |
-| 18.03          | [1.37](/reference/api/engine/version/v1.37/) | [changes](/reference/api/engine/version-history/#v137-api-changes) |
-| 18.02          | [1.36](/reference/api/engine/version/v1.36/) | [changes](/reference/api/engine/version-history/#v136-api-changes) |
-| 17.12          | [1.35](/reference/api/engine/version/v1.35/) | [changes](/reference/api/engine/version-history/#v135-api-changes) |
-| 17.11          | [1.34](/reference/api/engine/version/v1.34/) | [changes](/reference/api/engine/version-history/#v134-api-changes) |
-| 17.10          | [1.33](/reference/api/engine/version/v1.33/) | [changes](/reference/api/engine/version-history/#v133-api-changes) |
-| 17.09          | [1.32](/reference/api/engine/version/v1.32/) | [changes](/reference/api/engine/version-history/#v132-api-changes) |
-| 17.07          | [1.31](/reference/api/engine/version/v1.31/) | [changes](/reference/api/engine/version-history/#v131-api-changes) |
-| 17.06          | [1.30](/reference/api/engine/version/v1.30/) | [changes](/reference/api/engine/version-history/#v130-api-changes) |
-| 17.05          | [1.29](/reference/api/engine/version/v1.29/) | [changes](/reference/api/engine/version-history/#v129-api-changes) |
-| 17.04          | [1.28](/reference/api/engine/version/v1.28/) | [changes](/reference/api/engine/version-history/#v128-api-changes) |
-| 17.03.1        | [1.27](/reference/api/engine/version/v1.27/) | [changes](/reference/api/engine/version-history/#v127-api-changes) |
-| 17.03          | [1.26](/reference/api/engine/version/v1.27/) | [changes](/reference/api/engine/version-history/#v126-api-changes) |
-| 1.13.1         | [1.26](/reference/api/engine/version/v1.26/) | [changes](/reference/api/engine/version-history/#v126-api-changes) |
-| 1.13           | [1.25](/reference/api/engine/version/v1.26/) | [changes](/reference/api/engine/version-history/#v125-api-changes) |
-| 1.12           | [1.24](/reference/api/engine/version/v1.24/) | [changes](/reference/api/engine/version-history/#v124-api-changes) |
+| 24.0           | 1.43                                         | [changes](/reference/api/engine/version-history/#v143-api-changes) |
+| 23.0           | 1.42                                         | [changes](/reference/api/engine/version-history/#v142-api-changes) |
+| 20.10          | 1.41                                         | [changes](/reference/api/engine/version-history/#v141-api-changes) |
+| 19.03          | 1.40                                         | [changes](/reference/api/engine/version-history/#v140-api-changes) |
+| 18.09          | 1.39                                         | [changes](/reference/api/engine/version-history/#v139-api-changes) |
+| 18.06          | 1.38                                         | [changes](/reference/api/engine/version-history/#v138-api-changes) |
+| 18.05          | 1.37                                         | [changes](/reference/api/engine/version-history/#v137-api-changes) |
+| 18.04          | 1.37                                         | [changes](/reference/api/engine/version-history/#v137-api-changes) |
+| 18.03          | 1.37                                         | [changes](/reference/api/engine/version-history/#v137-api-changes) |
+| 18.02          | 1.36                                         | [changes](/reference/api/engine/version-history/#v136-api-changes) |
+| 17.12          | 1.35                                         | [changes](/reference/api/engine/version-history/#v135-api-changes) |
+| 17.11          | 1.34                                         | [changes](/reference/api/engine/version-history/#v134-api-changes) |
+| 17.10          | 1.33                                         | [changes](/reference/api/engine/version-history/#v133-api-changes) |
+| 17.09          | 1.32                                         | [changes](/reference/api/engine/version-history/#v132-api-changes) |
+| 17.07          | 1.31                                         | [changes](/reference/api/engine/version-history/#v131-api-changes) |
+| 17.06          | 1.30                                         | [changes](/reference/api/engine/version-history/#v130-api-changes) |
+| 17.05          | 1.29                                         | [changes](/reference/api/engine/version-history/#v129-api-changes) |
+| 17.04          | 1.28                                         | [changes](/reference/api/engine/version-history/#v128-api-changes) |
+| 17.03.1        | 1.27                                         | [changes](/reference/api/engine/version-history/#v127-api-changes) |
+| 17.03          | 1.26                                         | [changes](/reference/api/engine/version-history/#v126-api-changes) |
+| 1.13.1         | 1.26                                         | [changes](/reference/api/engine/version-history/#v126-api-changes) |
+| 1.13           | 1.25                                         | [changes](/reference/api/engine/version-history/#v125-api-changes) |
+| 1.12           | 1.24                                         | [changes](/reference/api/engine/version-history/#v124-api-changes) |
 
 ### Deprecated API versions
 
-API versions before v1.24 are [deprecated](/engine/deprecated/#deprecate-legacy-api-versions).
-You can find archived documentation for deprecated versions of the API in the
-code repository on GitHub:
+API versions before v1.44 are deprecated. You can find archived documentation
+for deprecated versions of the API in the code repository on GitHub:
 
-- [Documentation for API versions 1.23 and before](https://github.com/moby/moby/tree/v25.0.0/docs/api).
+- [Documentation for API versions 1.24–1.43](https://github.com/moby/moby/tree/28.x/docs/api).
+- [Documentation for API versions 1.18–1.23](https://github.com/moby/moby/tree/v25.0.0/docs/api).
 - [Documentation for API versions 1.17 and before](https://github.com/moby/moby/tree/v1.9.1/docs/reference/api).

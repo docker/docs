@@ -568,8 +568,8 @@ You can also use heredocs with the shell form to break up supported commands.
 
 ```dockerfile
 RUN <<EOF
-source $HOME/.bashrc && \
-echo $HOME
+  source $HOME/.bashrc
+  echo $HOME
 EOF
 ```
 
@@ -693,7 +693,7 @@ The available `[OPTIONS]` for the `RUN` instruction are:
 | [`--device`](#run---device)     | 1.14-labs                  |
 | [`--mount`](#run---mount)       | 1.2                        |
 | [`--network`](#run---network)   | 1.3                        |
-| [`--security`](#run---security) | 1.1.2-labs                 |
+| [`--security`](#run---security) | 1.20                       |
 
 ### Cache invalidation for RUN instructions
 
@@ -1039,9 +1039,6 @@ The command is run in the host's network environment (similar to
 
 ### RUN --security
 
-> [!NOTE]
-> Not yet available in stable syntax, use [`docker/dockerfile:1-labs`](#syntax) version.
-
 ```dockerfile
 RUN --security=<sandbox|insecure>
 ```
@@ -1062,7 +1059,7 @@ Default sandbox mode can be activated via `--security=sandbox`, but that is no-o
 #### Example: check entitlements
 
 ```dockerfile
-# syntax=docker/dockerfile:1-labs
+# syntax=docker/dockerfile:1
 FROM ubuntu
 RUN --security=insecure cat /proc/self/status | grep CapEff
 ```
@@ -1434,9 +1431,8 @@ ADD arr[[]0].txt /dest/
 
 When using a local tar archive as the source for `ADD`, and the archive is in a
 recognized compression format (`gzip`, `bzip2` or `xz`, or uncompressed), the
-archive is decompressed and extracted into the specified destination. Only
-local tar archives are extracted. If the tar archive is a remote URL, the
-archive is not extracted, but downloaded and placed at the destination.
+archive is decompressed and extracted into the specified destination. Local tar
+archives are extracted by default, see the [`ADD --unpack` flag].
 
 When a directory is extracted, it has the same behavior as `tar -x`.
 The result is the union of:
@@ -1460,6 +1456,9 @@ timestamp from that header will be used to set the `mtime` on the destination
 file. However, like any other file processed during an `ADD`, `mtime` isn't
 included in the determination of whether or not the file has changed and the
 cache should be updated.
+
+If remote file is a tar archive, the archive is not extracted by default. To
+download and extract the archive, use the [`ADD --unpack` flag].
 
 If the destination ends with a trailing slash, then the filename is inferred
 from the URL path. For example, `ADD http://example.com/foobar /` would create
@@ -1595,6 +1594,26 @@ See [`COPY --link`](#copy---link).
 
 See [`COPY --exclude`](#copy---exclude).
 
+### ADD --unpack
+
+```dockerfile
+ADD [--unpack=<bool>] <src> ... <dir>
+```
+
+The `--unpack` flag controls whether or not to automatically unpack tar
+archives (including compressed formats like `gzip` or `bzip2`) when adding them
+to the image. Local tar archives are unpacked by default, whereas remote tar
+archives (where `src` is a URL) are downloaded without unpacking.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM alpine
+# Download and unpack archive.tar.gz into /download:
+ADD --unpack=true https://example.com/archive.tar.gz /download
+# Add local tar without unpacking:
+ADD --unpack=false my-archive.tar.gz .
+```
+
 ## COPY
 
 COPY has two forms.
@@ -1613,7 +1632,7 @@ The available `[OPTIONS]` are:
 | [`--chown`](#copy---chown---chmod) |                            |
 | [`--chmod`](#copy---chown---chmod) | 1.2                        |
 | [`--link`](#copy---link)           | 1.4                        |
-| [`--parents`](#copy---parents)     | 1.7-labs                   |
+| [`--parents`](#copy---parents)     | 1.20                       |
 | [`--exclude`](#copy---exclude)     | 1.19                       |
 
 The `COPY` instruction copies new files or directories from `<src>` and adds
@@ -1904,9 +1923,6 @@ conditions for cache reuse.
 
 ### COPY --parents
 
-> [!NOTE]
-> Not yet available in stable syntax, use [`docker/dockerfile:1-labs`](#syntax) version.
-
 ```dockerfile
 COPY [--parents[=<boolean>]] <src> ... <dest>
 ```
@@ -1914,7 +1930,7 @@ COPY [--parents[=<boolean>]] <src> ... <dest>
 The `--parents` flag preserves parent directories for `src` entries. This flag defaults to `false`.
 
 ```dockerfile
-# syntax=docker/dockerfile:1-labs
+# syntax=docker/dockerfile:1
 FROM scratch
 
 COPY ./x/a.txt ./y/a.txt /no_parents/
@@ -1934,7 +1950,7 @@ directories after it will be preserved. This may be especially useful copies bet
 with `--from` where the source paths need to be absolute.
 
 ```dockerfile
-# syntax=docker/dockerfile:1-labs
+# syntax=docker/dockerfile:1
 FROM scratch
 
 COPY --parents ./x/./y/*.txt /parents/
@@ -2829,7 +2845,8 @@ The health check will first run **interval** seconds after the container is
 started, and then again **interval** seconds after each previous check completes.
 
 If a single run of the check takes longer than **timeout** seconds then the check
-is considered to have failed.
+is considered to have failed. The process performing the check is abruptly stopped
+with a `SIGKILL`.
 
 It takes **retries** consecutive failures of the health check for the container
 to be considered `unhealthy`.

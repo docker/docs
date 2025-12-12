@@ -16,8 +16,10 @@ details such as:
 - Source code details
 - Materials (files, scripts) consumed during the build
 
-Provenance attestations follow the
-[SLSA provenance schema, version 0.2](https://slsa.dev/provenance/v0.2#schema).
+By default, provenance attestations follow the
+[SLSA provenance schema, version 0.2](https://slsa.dev/spec/v0.2/provenance#schema).
+You can optionally enable [SLSA Provenance v1](https://slsa.dev/spec/v1.1/provenance#schema)
+using [the `version` parameter](#version).
 
 For more information about how BuildKit populates these provenance properties, refer to
 [SLSA definitions](slsa-definitions.md).
@@ -29,11 +31,12 @@ to the `docker buildx build` command:
 
 ```console
 $ docker buildx build --tag <namespace>/<image>:<version> \
-    --attest type=provenance,mode=[min,max] .
+    --attest type=provenance,mode=[min,max],version=[v0.2,v1] .
 ```
 
 Alternatively, you can use the shorthand `--provenance=true` option instead of `--attest type=provenance`.
-To specify the `mode` parameter using the shorthand option, use: `--provenance=mode=max`.
+To specify the `mode` or `version` parameters using the shorthand option, use:
+`--provenance=mode=max,version=v1`.
 
 For an example on how to add provenance attestations with GitHub Actions, see
 [Add attestations with GitHub Actions](/manuals/build/ci/github-actions/attestations.md).
@@ -149,6 +152,23 @@ detailed information for analysis.
 > tokens, or other secrets, you should refactor your build to pass the secrets using
 > [secret mounts](/reference/cli/docker/buildx/build.md#secret) instead.
 > Secret mounts don't leak outside of the build and are never included in provenance attestations.
+
+## Version
+
+The `version` parameter lets you specify which SLSA provenance schema version
+to use. Supported values are `version=v0.2` (default) and `version=v1`.
+
+To use SLSA Provenance v1:
+
+```console
+$ docker buildx build --tag <namespace>/<image>:<version> \
+    --attest type=provenance,mode=max,version=v1 .
+```
+
+For more information about SLSA Provenance v1, see the
+[SLSA specification](https://slsa.dev/spec/v1.1/provenance). To see the
+difference between SLSA v0.2 and v1 provenance attestations, refer to
+[SLSA definitions](./slsa-definitions.md)
 
 ## Inspecting Provenance
 
