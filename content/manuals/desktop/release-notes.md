@@ -36,12 +36,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.55.0" build_path="//" >}}
 
-### New
-
-- The MCP Toolkit now features a refreshed look and improved usability:
-   - Create profiles that combine MCP servers + a client for task-focused workflows
-   - Import custom MCP server catalogs to extend or customize your MCP environment
-
 ### Updates
 
 - [Docker Engine v29.1.3](https://docs.docker.com/engine/release-notes/29/#2913)
