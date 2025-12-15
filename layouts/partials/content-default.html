@@ -2,7 +2,7 @@
   <article class="prose dark:prose-invert max-w-4xl min-w-0 flex-[2_2_0%]">
     {{ partial "breadcrumbs.html" . }}
     <div class="flex items-start justify-between">
-      <h1 data-pagefind-weight="10">{{ .Title }}</h1>
+      <h1 data-pagefind-weight="10">{{ .Title | safeHTML }}</h1>
       <div class="md-dropdown ml-auto hidden lg:block">
         {{ partial "md-dropdown.html" . }}
       </div>

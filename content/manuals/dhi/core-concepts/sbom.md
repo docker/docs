@@ -62,7 +62,7 @@ To view the SBOM of a Docker Hardened Image, you can use the `docker scout sbom`
 command. Replace `<image-name>:<tag>` with the image name and tag.
 
 ```console
-$ docker scout sbom <image-name>:<tag>
+$ docker scout sbom dhi.io/<image-name>:<tag>
 ```
 
 ## Verify the SBOM of a Docker Hardened Image
@@ -75,14 +75,14 @@ are trustworthy.
 To verify the SBOM of a Docker Hardened Image using Docker Scout, use the following command:
 
 ```console
-$ docker scout attest get <image-name>:<tag> \
+$ docker scout attest get dhi.io/<image-name>:<tag> \
    --predicate-type https://scout.docker.com/sbom/v0.1 --verify --platform <platform>
 ```
 
-For example, to verify the SBOM attestation for the `dhi/node:20.19-debian12-fips-20250701182639` image:
+For example, to verify the SBOM attestation for the `node:20.19-debian12` image:
 
 ```console
-$ docker scout attest get docs/dhi-node:20.19-debian12-fips-20250701182639 \
+$ docker scout attest get dhi.io/node:20.19-debian12 \
    --predicate-type https://scout.docker.com/sbom/v0.1 --verify --platform linux/amd64
 ```
 

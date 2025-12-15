@@ -16,6 +16,9 @@ Amazon S3 cache:
 Ask Gordon:
   availability: Beta
   requires: Docker Desktop [4.38.0](/manuals/desktop/release-notes.md#4380) or later
+Ask Gordon DHI migration:
+  availability: Experimental
+  requires: Docker Desktop [4.38.0](/manuals/desktop/release-notes.md#4380) or later
 Automated builds:
   subscription: [Pro, Team, Business]
 Azure blob:
@@ -167,10 +170,7 @@ Docker Desktop CLI logs:
 Docker Desktop CLI kubernetes:
   requires: Docker Desktop 4.44 and later
 Docker Hardened Images:
-  subscription: [Docker Hardened Images]
-Docker Hardened Image charts:
-  availability: Early Access
-  subscription: [Docker Hardened Images]
+  subscription: [Docker Hardened Images Enterprise]
 Docker Init:
   requires: Docker Desktop [4.27](/manuals/desktop/release-notes.md#4270) and later
 Docker Model Runner:

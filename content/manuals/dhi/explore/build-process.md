@@ -8,8 +8,13 @@ weight: 15
 
 Docker Hardened Images are built through an automated pipeline that monitors
 upstream sources, applies security updates, and publishes signed artifacts.
-This page explains the build process for both DHI images and customized
-images built from them.
+This page explains the build process for both base DHI images and DHI Enterprise
+customized images.
+
+With a DHI Enterprise subscription, the automated security update pipeline for
+both base and customized images is backed by SLA commitments, including a 7-day
+SLA for critical and high severity vulnerabilities. Only DHI Enterprise includes
+SLAs. DHI Free offers a secure baseline but no guaranteed remediation timelines.
 
 ## Build triggers
 
@@ -46,14 +51,17 @@ dependencies. When a package update is detected (for example, a security patch
 for a library), Docker automatically identifies and rebuilds all images within
 the support window that use that package.
 
-### Customization changes
+### Customization changes {{< badge color="blue" text="DHI Enterprise" >}}
+
+{{< summary-bar feature_name="Docker Hardened Images" >}}
 
 Updates to your OCI artifact customizations trigger rebuilds of your customized
 images.
 
-When you customize a DHI image, your changes are packaged as OCI artifacts that
-layer on top of the base image. Docker monitors your artifact repositories and
-automatically rebuilds your customized images whenever you push updates.
+When you customize a DHI image with DHI Enterprise, your changes are packaged as
+OCI artifacts that layer on top of the base image. Docker monitors your artifact
+repositories and automatically rebuilds your customized images whenever you push
+updates.
 
 The rebuild process fetches the current base image, applies your OCI artifacts,
 signs the result, and publishes it automatically. You don't need to manage
@@ -99,8 +107,10 @@ Each Docker Hardened Image is built through an automated pipeline:
 
 Docker responds quickly to critical vulnerabilities. By building essential
 components from source rather than waiting for packaged updates, Docker can
-patch Critical and High-severity CVEs within days of upstream fixes and publish
-updated images with new attestations.
+patch critical and high severity CVEs within days of upstream fixes and publish
+updated images with new attestations. For DHI Enterprise subscriptions, this
+rapid response is backed by a 7-day SLA for critical and high severity
+vulnerabilities.
 
 The following diagram shows the base image build flow:
 
@@ -117,9 +127,11 @@ The following diagram shows the base image build flow:
 '-------------------'      '-------------------'      '-------------------'      '-------------------'
 ```
 
-### Customized image pipeline
+### Customized image pipeline {{< badge color="blue" text="DHI Enterprise" >}}
 
-When you customize a DHI image, the build process is simplified:
+{{< summary-bar feature_name="Docker Hardened Images" >}}
+
+When you customize a DHI image with DHI Enterprise, the build process is simplified:
 
 1. Monitoring: Docker monitors your OCI artifact repositories for changes.
 2. Rebuild trigger: When you push updates to your OCI artifacts, or when the base

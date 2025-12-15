@@ -6,8 +6,6 @@ keywords: debug, hardened images, DHI, troubleshooting, ephemeral container, doc
 description: Learn how to use Docker Debug to troubleshoot Docker Hardened Images (DHI) locally or in production.
 ---
 
-{{< summary-bar feature_name="Docker Hardened Images" >}}
-
 Docker Hardened Images (DHI) prioritize minimalism and security, which means
 they intentionally leave out many common debugging tools (like shells or package
 managers). This makes direct troubleshooting difficult without introducing risk.
@@ -19,14 +17,14 @@ without modifying the original image.
 This guide shows how to debug Docker Hardened Images locally during
 development. You can also debug containers remotely using the `--host` option.
 
-The following example uses a mirrored `dhi-python:3.13` image, but the same steps apply to any image.
+The following example uses a mirrored `python:3.13` image, but the same steps apply to any image.
 
 ## Step 1: Run a container from a Hardened Image
 
 Start with a DHI-based container that simulates an issue:
 
 ```console
-$ docker run -d --name myapp <YOUR_ORG>/dhi-python:3.13 python -c "import time; time.sleep(300)"
+$ docker run -d --name myapp dhi.io/python:3.13 python -c "import time; time.sleep(300)"
 ```
 
 This container doesn't include a shell or tools like `ps`, `top`, or `cat`.

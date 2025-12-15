@@ -1,5 +1,5 @@
 ---
-title: Questions, bugs, or feedback
+title: Give feedback
 linkTitle: Feedback
 description: How to interact with the DHI team
 keywords: software supply chain security, feedback, bugs, discussion, questions

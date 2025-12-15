@@ -1,30 +1,35 @@
 ---
-title: Customize a Docker Hardened Image
-linkTitle: Customize an image
+title: 'Customize a Docker Hardened Image or chart <span class="not-prose bg-blue-500 dark:bg-blue-400 rounded-sm px-1 text-xs text-white whitespace-nowrap">DHI Enterprise</span>'
+linkTitle: Customize an image or chart
 weight: 25
-keywords: debug, hardened images, DHI, customize, certificate, artifact
-description: Learn how to customize a Docker Hardened Images (DHI).
+keywords: hardened images, DHI, customize, certificate, artifact, helm chart
+description: Learn how to customize Docker Hardened Images (DHI) and charts.
 ---
 
-You can customize a Docker Hardened Image (DHI) to suit your specific needs
-using the Docker Hub UI. This allows you to select a base image, add packages,
-add OCI artifacts (such as custom certificates or additional tools), and
-configure settings. In addition, the build pipeline ensures that your customized
-image is built securely and includes attestations.
+{{< summary-bar feature_name="Docker Hardened Images" >}}
 
-Your customized images stay secure automatically. When the base Docker Hardened
-Image receives a security patch or your OCI artifacts are updated, Docker
-automatically rebuilds your customized images in the background. This ensures
-continuous compliance and protection by default, with no manual work required.
-The rebuilt images are signed and attested to the same SLSA Build Level 3
-standard as the base images, ensuring a secure and verifiable supply chain.
+When you have a Docker Hardened Images subscription, you can customize Docker
+Hardened Images (DHI) and charts to suit your specific needs using the Docker
+Hub web interface. For images, this lets you select a base image, add packages,
+add OCI artifacts (such as custom certificates or additional tools), and
+configure settings. For charts, this lets you customize the image references.
+
+Your customizations stay secure automatically. When the base Docker Hardened
+Image or chart receives a security patch or your OCI artifacts are updated,
+Docker automatically rebuilds your customizations in the background. This
+ensures continuous compliance and protection by default, with no manual work
+required. The rebuilt artifacts are signed and attested to the same SLSA Build
+Level 3 standard as the base images and charts, ensuring a secure and verifiable
+supply chain.
 
 ## Customize a Docker Hardened Image
 
 To add a customized Docker Hardened Image to your organization, an organization
-owner must first [mirror](./mirror.md) the DHI repository to your organization.
-Once the repository is mirrored, any user with access to the mirrored DHI
-repository can create a customized image.
+owner must first [mirror](./mirror.md) the DHI repository to your organization
+on Docker Hub. Once the repository is mirrored, any user with access to the
+mirrored DHI repository can create a customized image.
+
+### Create an image customization
 
 To customize a Docker Hardened Image, follow these steps:
 
@@ -32,7 +37,7 @@ To customize a Docker Hardened Image, follow these steps:
 1. Select **My Hub**.
 1. In the namespace drop-down, select your organization that has a mirrored DHI
    repository.
-1. Select **Hardened Images** > **Management**.
+1. Select **Hardened Images** > **Manage** > **Mirrored Images**.
 1. For the mirrored DHI repository you want to customize, select the menu icon in the far right column.
 1. Select **Customize**.
 
@@ -61,7 +66,7 @@ To customize a Docker Hardened Image, follow these steps:
       DHI. For example, you can add a custom root CA certificate or a another
       image that contains a tool you need, like adding Python to a Node.js
       image. For more details on how to create an OCI artifact image, see
-      [Create an OCI artifact image](#create-an-oci-artifact-image).
+      [Create an OCI artifact image](#create-an-oci-artifact-image-for-image-customization).
 
       When combining images that contain directories and files with the same
       path, images later in the list will overwrite files from earlier images.
@@ -120,26 +125,7 @@ To customize a Docker Hardened Image, follow these steps:
    to build. Once built, it will appear in the **Tags** tab of the repository,
    and your team members can pull it like any other image.
 
-## Edit or delete a Docker Hardened Image customization
-
-To edit or delete a Docker Hardened Image customization, follow these steps:
-
-1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **My Hub**.
-3. In the namespace drop-down, select your organization that has a mirrored DHI.
-4. Select **Hardened Images** > **Management**.
-5. Select **Customizations**.
-
-6. For the customized DHI repository you want to manage, select the menu icon in the far right column.
-   From here, you can:
-
-   - **Edit**: Edit the customized image.
-   - **Create new**: Create a new customized image based on the source repository.
-   - **Delete**: Delete the customized image.
-
-7. Follow the on-screen instructions to complete the edit or deletion.
-
-## Create an OCI artifact image
+### Create an OCI artifact image for image customization
 
 An OCI artifact image is a Docker image that contains files or directories that
 you want to include in your customized Docker Hardened Image (DHI). This can
@@ -156,7 +142,7 @@ extracted into a minimal final image:
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-FROM <your-namespace>/dhi-bash:5-dev AS certs
+FROM dhi.io/bash:5-dev AS certs
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -203,7 +189,7 @@ Once pushed to a repository in your organization's namespace, the OCI artifact
 automatically appears in the customization workflow when you select OCI
 artifacts to add to your customized Docker Hardened Image.
 
-### Best practices for OCI artifacts
+#### Best practices for OCI artifacts
 
 Follow these best practices when creating OCI artifacts for DHI customizations:
 
@@ -229,3 +215,61 @@ Follow these best practices when creating OCI artifacts for DHI customizations:
   OCI artifact repositories. This prevents accidental overwrites and ensures that
   each version of your OCI artifact remains unchanged, improving reproducibility
   and reliability of your customizations.
+
+## Customize a DHI Helm chart
+
+You can customize DHI Helm charts to meet your organization's specific needs.
+Via the Docker Hub web interface, you can modify the image references to
+reference mirrored images or customized images you've created. This lets you
+create a custom, securely-built chart with references to images stored in Docker
+Hub or other private registries. DHI securely packages customized Helm charts
+that reference your repositories, wherever they are stored, by default.
+
+To customize image references, an organization owner must [mirror](./mirror.md)
+the DHI chart repository to your organization on Docker Hub.
+
+You can create one chart customization per Helm chart repository. This is
+different from image customizations, where you can create multiple
+customizations per repository. If you need to make changes, you can edit your
+existing customization. Alternatively, you can mirror the same Helm chart
+repository again and add a new customization to the new mirror.
+
+> [!NOTE]
+>
+> You can customize Docker Hardened Image charts like any other Helm chart using
+> standard Helm tools and practices, such as a `values.yaml` file, outside of
+> Docker Hub. The following instructions describe how to customize image
+> references for the chart using the Docker Hub web interface.
+
+To customize a Docker Hardened Image Helm chart after it has been mirrored:
+
+1. Sign in to [Docker Hub](https://hub.docker.com).
+1. Select **My Hub**.
+1. In the namespace drop-down, select your organization that has a mirrored DHI
+   repository.
+1. Select **Hardened Images** > **Manage** > **Mirrored Helm charts**.
+1. For the mirrored DHI repository you want to customize, select the **Name**.
+1. Select the **Customizations** tab.
+1. Select **Create customization**.
+
+   At this point, the on-screen instructions will guide you through the
+   customization process.
+
+## Edit or delete a customization
+
+To edit or delete a DHI or chart customization, follow these steps:
+
+1. Sign in to [Docker Hub](https://hub.docker.com).
+2. Select **My Hub**.
+3. In the namespace drop-down, select your organization that has a mirrored repository.
+4. Select **Hardened Images** > **Manage**.
+5. Select **Customizations**.
+
+6. For the customized DHI repository you want to manage, select the menu icon in the far right column.
+   From here, you can:
+
+   - **Edit**: Edit the customization.
+   - **Create new**: Create a new customization based on the source repository.
+   - **Delete**: Delete the customization.
+
+7. Follow the on-screen instructions to complete the edit or deletion.

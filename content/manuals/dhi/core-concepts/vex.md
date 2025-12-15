@@ -57,8 +57,11 @@ vulnerability management.
 
 ## Use VEX to filter known non-exploitable CVEs
 
-When using Docker Scout, VEX statements are automatically applied and no
-manual configuration is needed.
+When using Docker Scout or Trivy, VEX statements are automatically applied as
+shown in the examples in [Common Vulnerabilities and Exposures (CVEs)](./cves.md).
+
+For Grype, you need to export the VEX attestation to a file first before
+scanning, as shown in the [Grype scanning example](./cves.md#scan-a-dhi-using-grype).
 
 > [!NOTE]
 >
@@ -70,7 +73,7 @@ manual configuration is needed.
 To manually retrieve the VEX attestation for tools that support it:
 
 ```console
-$ docker scout vex get <your-namespace>/dhi-<image>:<tag> --output vex.json
+$ docker scout vex get dhi.io/<image>:<tag> --output vex.json
 ```
 
 > [!NOTE]
@@ -79,21 +82,14 @@ $ docker scout vex get <your-namespace>/dhi-<image>:<tag> --output vex.json
 > CLI](https://github.com/docker/scout-cli/) version 1.18.3 or later.
 >
 > If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
-> `registry://docs/dhi-python:3.13` instead of `docs/dhi-python:3.13`.
+> `registry://dhi.io/python:3.13` instead of `dhi.io/python:3.13`.
 
 For example:
 
 ```console
-$ docker scout vex get docs/dhi-python:3.13 --output vex.json
+$ docker scout vex get dhi.io/python:3.13 --output vex.json
 ```
 
 This creates a `vex.json` file containing the VEX statements for the specified
 image. You can then use this file with tools that support VEX to filter out
 known non-exploitable CVEs.
-
-For example, with Grype and Trivy, you can use the `--vex` flag to apply the VEX
-statements during the scan:
-
-```console
-$ grype <your-namespace>/dhi-<image>:<tag> --vex vex.json
-```

@@ -78,13 +78,13 @@ You can view and verify this attestation using the Docker Scout CLI.
    $ docker scout attest get \
      --predicate-type https://scout.docker.com/tests/v0.1 \
      --predicate \
-     <your-namespace>/dhi-<image>:<tag>
+     dhi.io/<image>:<tag>
    ```
 
    > [!NOTE]
    >
    > If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
-   > `registry://docs/dhi-python` instead of `docs/dhi-python`.
+   > `registry://dhi.io/python` instead of `dhi.io/python`.
 
    For example:
 
@@ -92,7 +92,7 @@ You can view and verify this attestation using the Docker Scout CLI.
    $ docker scout attest get \
      --predicate-type https://scout.docker.com/tests/v0.1 \
      --predicate \
-     docs/dhi-python:3.13
+     dhi.io/python:3.13
    ```
 
    This contains a list of tests and their results.
@@ -125,7 +125,7 @@ You can view and verify this attestation using the Docker Scout CLI.
    docker scout attest get \
      --predicate-type https://scout.docker.com/tests/v0.1 \
      --verify \
-     <your-namespace>/dhi-<image>:<tag> --platform <platform>
+     dhi.io/<image>:<tag> --platform <platform>
    ```
 
    Example output:

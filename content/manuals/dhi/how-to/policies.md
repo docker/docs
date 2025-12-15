@@ -6,13 +6,12 @@ weight: 50
 keywords: docker scout policies, enforce image compliance, container security policy, image provenance, vulnerability policy check
 ---
 
-{{< summary-bar feature_name="Docker Hardened Images" >}}
-
-Mirroring a Docker Hardened Image (DHI) repository automatically enables [Docker
-Scout](/scout/), allowing you to start enforcing security and compliance policies for your
-images without additional setup. Using Docker Scout policies, you can define and
-apply rules that ensure only approved and secure images, such as those based on
-DHIs, are used across your environments.
+When you have a Docker Hardened Images Enterprise subscription, mirroring a
+Docker Hardened Image (DHI) repository automatically enables [Docker
+Scout](/scout/), allowing you to start enforcing security and compliance
+policies for your images without additional setup. Using Docker Scout policies,
+you can define and apply rules that ensure only approved and secure images, such
+as those based on DHIs, are used across your environments.
 
 Docker Scout includes a dedicated [**Valid Docker Hardened Image (DHI) or DHI
 base
@@ -60,7 +59,7 @@ base. For example:
 
 ```dockerfile
 # Dockerfile
-FROM ORG_NAME/dhi-python:3.13-alpine3.21
+FROM <your-namespace>/dhi-python:3.13-alpine3.21
 
 ENTRYPOINT ["python", "-c", "print('Hello from a DHI-based image')"]
 ```
@@ -73,7 +72,7 @@ build and push the image to your Docker Hub repository:
 ```console
 $ docker build \
   --push \
-  -t YOUR_ORG/my-dhi-app:v1 .
+  -t <your-namespace>/my-dhi-app:v1 .
 ```
 
 #### Step 3: Enable Docker Scout
@@ -83,8 +82,8 @@ following commands in your terminal:
 
 ```console
 $ docker login
-$ docker scout enroll YOUR_ORG
-$ docker scout repo enable --org YOUR_ORG YOUR_ORG/my-dhi-app
+$ docker scout enroll <your-namespace>
+$ docker scout repo enable --org <your-namespace> <your-namespace>/my-dhi-app
 ```
 
 #### Step 4: Configure the DHI policy
@@ -106,7 +105,7 @@ Once the DHI policy is configured and active, you can view compliance results:
 
 1. Go to the [Docker Scout dashboard](https://scout.docker.com).
 2. Select your organization and navigate to **Images**.
-3. Find your image, `YOUR_ORG/my-dhi-app:v1`, and select the link in the **Compliance** column.
+3. Find your image, `<your-namespace>/my-dhi-app:v1`, and select the link in the **Compliance** column.
 
 This shows the policy compliance results for your image. The **Valid Docker
 Hardened Image (DHI) or DHI base image** policy evaluates whether your image has
