@@ -38,7 +38,13 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
-- (WORDING TBD)With the Docker MCP Toolkit you can now assign servers and clients to profiles
+- The MCP Toolkit now features a refreshed look and improved usability:
+   - Create profiles that combine MCP servers + a client for task-focused workflows
+   - Import custom MCP server catalogs to extend or customize your MCP environment
+
+### Updates
+
+- [Docker Engine v29.1.3](https://docs.docker.com/engine/release-notes/29/#2913)
 
 ### Bug fixes and enhancements
 
@@ -47,6 +53,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed an issue that caused Docker Desktop to get stuck during startup.
 - Improved the error message if the `daemon.json` is invalid.
 - WASM is now deprecated and will be removed in a future Docker Desktop release.
+- Fixed performance issues on every keystroke within a long Ask Gordon session.
 
 ## 4.54.0
 
