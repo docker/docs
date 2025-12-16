@@ -46,9 +46,14 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For all platforms
 
 - Fixed an issue that caused Docker Desktop to get stuck during startup.
-- Improved the error message if the `daemon.json` is invalid.
-- WASM is now deprecated and will be removed in a future Docker Desktop release.
+- Improved the error message when the `daemon.json` is invalid.
 - Fixed performance issues on every keystroke within a long Ask Gordon session.
+
+### Deprecation
+
+#### For all platforms
+
+- WASM is now deprecated and will be removed in a future Docker Desktop release.
 
 ## 4.54.0
 
