@@ -39,6 +39,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### Updates
 
 - [Docker Engine v29.1.3](https://docs.docker.com/engine/release-notes/29/#2913)
+- [cagent v1.15.1](https://github.com/docker/cagent/releases/tag/v1.15.1)
 
 ### Bug fixes and enhancements
 
