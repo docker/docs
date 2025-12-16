@@ -66,6 +66,47 @@ For more information and examples, see [how to connect from a container to a ser
 
 Docker Desktop does not support direct USB device passthrough. However, you can use USB over IP to connect common USB devices to the Docker Desktop VM and in turn be forwarded to a container. For more details, see [Using USB/IP with Docker Desktop](/manuals/desktop/features/usbip.md).
 
+### How do I verify Docker Desktop is using a proxy server ?
+
+To verify, look at the most recent events logged in `httpproxy.log`. This is located at `~/Library/Containers/com.docker.docker/Data/log/host` on macOS or `%LOCALAPPDATA%/Docker/log/host/` on Windows. 
+
+The following shows a few examples of what you can expect to see:
+
+- Docker Desktop using app level settings (proxy mode manual) for proxy:
+
+   ```console
+   host will use proxy: app settings http_proxy=http://172.211.16.3:3128 https_proxy=http://172.211.16.3:3128
+   Linux will use proxy: app settings http_proxy=http://172.211.16.3:3128 https_proxy=http://172.211.16.3:3128
+   ```
+
+- Docker Desktop using system level settings (proxy mode system) for proxy:
+
+   ```console
+   host will use proxy: static system http_proxy=http://172.211.16.3:3128 https_proxy=http://172.211.16.3:3128 no_proxy=
+   Linux will use proxy: static system http_proxy=http://172.211.16.3:3128 https_proxy=http://172.211.16.3:3128 no_proxy=
+   ```
+
+- Docker Desktop is not configured to use a proxy server:
+
+   ```console
+   host will use proxy: disabled
+   Linux will use proxy: disabled
+   ```
+
+- Docker Desktop is configured to use app level settings (proxy mode manual) and using a PAC file:
+
+   ```console
+   using a proxy PAC file: http://127.0.0.1:8081/proxy.pac
+   host will use proxy: app settings from PAC file http://127.0.0.1:8081/proxy.pac
+   Linux will use proxy: app settings from PAC file http://127.0.0.1:8081/proxy.pac
+   ```
+
+- Connect request using the configured proxy server:
+
+   ```console
+   CONNECT desktop.docker.com:443: host connecting via static system HTTPS proxy http://172.211.16.3:3128
+   ```
+
 ### How do I run Docker Desktop without administrator privileges?
 
 Docker Desktop requires administrator privileges only for installation. Once installed, administrator privileges are not needed to run it. However, for non-admin users to run Docker Desktop, it must be installed using a specific installer flag and meet certain prerequisites, which vary by platform.
