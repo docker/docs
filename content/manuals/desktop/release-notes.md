@@ -30,6 +30,29 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.55.0
+
+{{< release-date date="2025-12-16" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.55.0" build_path="/213807/" >}}
+
+### Updates
+
+- [Docker Engine v29.1.3](https://docs.docker.com/engine/release-notes/29/#2913)
+- [cagent v1.15.1](https://github.com/docker/cagent/releases/tag/v1.15.1)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue that caused Docker Desktop to get stuck during startup.
+- Improved the error message when the `daemon.json` is invalid.
+- Fixed performance issues on every keystroke within a long Ask Gordon session.
+
+> [!IMPORTANT]
+>
+> Wasm workloads will be deprecated and removed in a future Docker Desktop release.
+
 ## 4.54.0
 
 {{< release-date date="2025-12-04" >}}
