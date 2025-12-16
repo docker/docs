@@ -68,6 +68,8 @@ aliases:
   - /desktop/features/dev-environments/share/
   - /desktop/features/dev-environments/dev-cli/
   - /desktop/dev-environments/
+  - /desktop/features/wasm/
+  - /desktop/wasm/
 ---
 
 This document provides an overview of Docker features, products, and

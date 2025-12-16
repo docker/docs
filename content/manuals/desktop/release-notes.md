@@ -49,11 +49,9 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Improved the error message when the `daemon.json` is invalid.
 - Fixed performance issues on every keystroke within a long Ask Gordon session.
 
-### Deprecation
-
-#### For all platforms
-
-- WASM is now deprecated and will be removed in a future Docker Desktop release.
+> [!IMPORTANT]
+>
+> Wasm workloads will be deprecated and removed in a future Docker Desktop release.
 
 ## 4.54.0
 
