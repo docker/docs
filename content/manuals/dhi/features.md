@@ -4,7 +4,6 @@ linktitle: Features
 description: Docker Hardened Images provide total transparency, minimal attack surface, and enterprise-grade security for every application—free and open source.
 weight: 5
 aliases:
-  - /dhi/features/
   - /dhi/features/secure/
   - /dhi/features/integration/
   - /dhi/features/support/
