@@ -294,4 +294,4 @@ Zsh
 [Ww]alkthrough
 [Tt]oolsets?
 [Rr]erank(ing|ed)?
-
+[Ee]vals?

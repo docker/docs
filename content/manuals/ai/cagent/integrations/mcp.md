@@ -37,6 +37,30 @@ config with `root`, `designer`, and `engineer` agents gives Claude three tools
 to choose from. Claude might call the engineer directly or use the root
 coordinator—depends on your agent descriptions and what you ask for.
 
+## MCP Gateway
+
+Docker provides an [MCP Gateway](/ai/mcp-catalog-and-toolkit/mcp-gateway/) that
+gives cagent agents access to a catalog of pre-configured MCP servers. Instead
+of configuring individual MCP servers, agents can use the gateway to access
+tools like web search, database queries, and more.
+
+Configure MCP toolset with gateway reference:
+
+```yaml
+agents:
+  root:
+    toolsets:
+      - type: mcp
+        ref: docker:duckduckgo # Uses Docker MCP Gateway
+```
+
+The `docker:` prefix tells cagent to use the MCP Gateway for this server. See
+the [MCP Gateway documentation](/ai/mcp-catalog-and-toolkit/mcp-gateway/) for
+available servers and configuration options.
+
+You can also use the [MCP Toolkit](/ai/mcp-catalog-and-toolkit/) to explore and
+manage MCP servers interactively.
+
 ## Prerequisites
 
 Before configuring MCP integration, you need:
@@ -264,25 +288,12 @@ Your team keeps agents in an OCI registry. Everyone adds
 agent, they get the new version on their next restart. No YAML files to pass
 around.
 
-## ACP vs MCP integration
-
-Both protocols let you integrate cagent agents with other tools, but they're
-designed for different use cases:
-
-| Feature     | ACP Integration              | MCP Integration                |
-| ----------- | ---------------------------- | ------------------------------ |
-| Use case    | Embedded agents in editors   | Agents as tools in MCP clients |
-| Filesystem  | Delegated to client (editor) | Direct cagent access           |
-| Working dir | Client workspace             | Configurable per agent         |
-| Best for    | Code editing workflows       | Using agents as callable tools |
-
-Use ACP when you want agents embedded in your editor. Use MCP when you want to
-expose agents as tools to MCP clients like Claude Desktop or Claude Code.
-
-For ACP integration setup, see [ACP integration](./acp.md).
-
 ## What's next
 
+- Use the [MCP Gateway](/ai/mcp-catalog-and-toolkit/mcp-gateway/) to give your
+  agents access to pre-configured MCP servers
+- Explore MCP servers interactively with the [MCP
+  Toolkit](/ai/mcp-catalog-and-toolkit/)
 - Review the [configuration reference](../reference/config.md) for advanced
   agent setup
 - Explore the [toolsets reference](../reference/toolsets.md) to learn what tools

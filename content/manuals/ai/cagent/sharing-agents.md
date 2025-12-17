@@ -2,7 +2,7 @@
 title: Sharing agents
 description: Distribute agent configurations through OCI registries
 keywords: [cagent, oci, registry, docker hub, sharing, distribution]
-weight: 30
+weight: 50
 ---
 
 Push your agent to a registry and share it by name. Your teammates
