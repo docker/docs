@@ -192,6 +192,12 @@ commands to set up the VEX repository:
 $ trivy vex repo init
 $ cat << REPO > ~/.trivy/vex/repository.yaml
 repositories:
+  - name: default
+    url: https://github.com/aquasecurity/vexhub
+    enabled: true
+    username: ""
+    password: ""
+    token: ""
   - name: dhi-vex
     url: https://github.com/docker-hardened-images/advisories
     enabled: true
