@@ -185,7 +185,7 @@ Images that are part of this program have a special badge on Docker Hub making
 it easier for users to identify projects that Docker has verified as
 high-quality commercial publishers.
 
-![Docker-Sponsored Open Source badge](../images/verified-publisher-badge-iso.png)
+![Docker-Verified Publisher badge](../images/verified-publisher-badge-iso.png)
 
 ## Docker-Sponsored Open Source Software images
 

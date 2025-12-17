@@ -22,7 +22,7 @@ DHI provides security for everyone:
 - [DHI Free](#dhi-free-features) provides core security features available to
   everyone with no licensing restrictions under Apache 2.0
 - [DHI Enterprise subscription
-  features](#docker-hardened-image-enterprise-subscription-features) add
+  features](#dhi-enterprise-subscription-features) add
   SLA-backed security updates, compliance variants (like FIPS and STIG), image
   customization, and optional Extended Lifecycle Support (ELS) for post-EOL
   coverage
@@ -87,7 +87,7 @@ metadata to ensure transparency and trust:
 - Hardened configuration: Charts automatically reference Docker hardened images,
   ensuring security in deployments.
 
-## Docker Hardened Image Enterprise subscription features
+## DHI Enterprise subscription features
 
 For organizations with strict security requirements, regulatory demands, or
 operational needs, DHI Enterprise delivers additional capabilities.

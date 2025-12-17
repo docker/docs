@@ -133,8 +133,7 @@ You've pulled and run your first Docker Hardened Image. Here are a few ways to k
   Docker's AI assistant to update your Dockerfiles to use Docker Hardened Images
   as the base.
 
-- [Start a trial](https://hub.docker.com/hardened-images/catalog) by selecting
-  **How it works** on the Docker Hardened Images catalog page in Docker Hub to
+- [Start a trial](https://hub.docker.com/hardened-images/start-free-trial) to
   explore the benefits of a DHI Enterprise subscription, such as access to FIPS
   and STIG variants, customized images, and SLA-backed updates.
 
