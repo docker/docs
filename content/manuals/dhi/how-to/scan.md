@@ -184,9 +184,23 @@ packages and application dependencies.
 
 ### Scan a DHI using Trivy
 
-Before you can use VEX statements with Trivy, you need to configure Trivy to
-download the Docker Hardened Images advisories repository. Run the following
-commands to set up the VEX repository:
+After installing Trivy, you can scan a Docker Hardened Image by pulling
+the image and running the scan command:
+
+```console
+$ docker pull dhi.io/<image>:<tag>
+$ trivy image --scanners vuln dhi.io/<image>:<tag>
+```
+
+To filter vulnerabilities using VEX statements, Trivy supports multiple
+approaches. Docker recommeneds using VEXhub, which provides a seamless workflow
+for automatically downloading and applying VEX statements from configured
+repositories.
+
+#### Using VEXhub (recommended)
+
+Configure Trivy to download the Docker Hardened Images advisories repository
+from VEXhub. Run the following commands to set up the VEX repository:
 
 ```console
 $ trivy vex repo init
@@ -206,8 +220,7 @@ $ trivy vex repo list
 $ trivy vex repo download
 ```
 
-After setting up VEXhub, you can scan a Docker Hardened Image by pulling
-the image and running the scan command:
+After setting up VEXhub, you can scan a Docker Hardened Image with VEX filtering:
 
 ```console
 $ docker pull dhi.io/<image>:<tag>
@@ -239,6 +252,24 @@ Legend:
 
 The `--vex repo` flag applies VEX statements from the configured repository during the scan,
 which filters out known non-exploitable CVEs.
+
+#### Using local VEX files
+
+In addition to VEXhub, Trivy also supports the use of local VEX files for
+vulnerability filtering. You can download the VEX attestation that Docker
+Hardened Images provide and use it directly with Trivy.
+
+First, download the VEX attestation for your image:
+
+```console
+$ docker scout vex get dhi.io/<image>:<tag> --output vex.json
+```
+
+Then scan the image with the local VEX file:
+
+```console
+$ trivy image --scanners vuln --vex vex.json dhi.io/<image>:<tag>
+```
 
 ## Use VEX to filter known non-exploitable CVEs
 
