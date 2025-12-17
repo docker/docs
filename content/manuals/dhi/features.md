@@ -88,7 +88,7 @@ metadata to ensure transparency and trust:
 - Hardened configuration: Charts automatically reference Docker hardened images,
   ensuring security in deployments.
 
-## Docker Hardened Image Enterprise subscription features
+## DHI Enterprise subscription features
 
 For organizations with strict security requirements, regulatory demands, or
 operational needs, DHI Enterprise delivers additional capabilities.
