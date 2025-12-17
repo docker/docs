@@ -184,7 +184,7 @@ packages and application dependencies.
 
 ### Scan a DHI using Trivy
 
-Before you can use VEX statements with Trivy, you need to configure VEXhub to
+Before you can use VEX statements with Trivy, you need to configure Trivy to
 download the Docker Hardened Images advisories repository. Run the following
 commands to set up the VEX repository:
 
