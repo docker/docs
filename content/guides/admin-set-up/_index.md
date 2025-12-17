@@ -5,7 +5,6 @@ summary: Get the most out of Docker by streamlining workflows, standardizing dev
 description: Learn how to onboard your company and take advantage of all of the Docker products and features.
 tags: [admin]
 params:
-  featured: true
   time: 20 minutes
   image:
   resource_links:

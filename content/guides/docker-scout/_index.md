@@ -12,7 +12,6 @@ tags: [product-demo]
 aliases:
   - /learning-paths/docker-scout/
 params:
-  featured: true
   image: images/learning-paths/scout.png
   time: 20 minutes
   resource_links:
