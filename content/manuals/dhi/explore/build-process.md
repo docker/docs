@@ -51,7 +51,7 @@ dependencies. When a package update is detected (for example, a security patch
 for a library), Docker automatically identifies and rebuilds all images within
 the support window that use that package.
 
-### Customization changes {{< badge color="blue" text="DHI Enterprise" >}}
+### Customization changes {tier="DHI Enterprise"}
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
 
@@ -127,7 +127,7 @@ The following diagram shows the base image build flow:
 '-------------------'      '-------------------'      '-------------------'      '-------------------'
 ```
 
-### Customized image pipeline {{< badge color="blue" text="DHI Enterprise" >}}
+### Customized image pipeline {tier="DHI Enterprise"}
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
 

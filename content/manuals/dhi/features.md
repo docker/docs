@@ -93,12 +93,12 @@ metadata to ensure transparency and trust:
 For organizations with strict security requirements, regulatory demands, or
 operational needs, DHI Enterprise delivers additional capabilities.
 
-### Compliance variants {{< badge color="blue" text="DHI Enterprise" >}}
+### Compliance variants {tier="DHI Enterprise"}
 
 - FIPS-enabled images: For regulated industries and government systems
 - STIG-ready images: Meet DoD Security Technical Implementation Guide requirements
 
-### SLA-backed security {{< badge color="blue" text="DHI Enterprise" >}}
+### SLA-backed security {tier="DHI Enterprise"}
 
 - CVE remediation SLA: 7-day SLA for critical and high severity vulnerabilities,
   with SLA commitments for other severity levels
@@ -106,14 +106,14 @@ operational needs, DHI Enterprise delivers additional capabilities.
   for CVE remediation, even after upstream end-of-life
 - Enterprise support: Access to Docker's support team for mission-critical applications
 
-### Customization and control {{< badge color="blue" text="DHI Enterprise" >}}
+### Customization and control {tier="DHI Enterprise"}
 
 - Build custom images: Add your own packages, tools, certificates, and configurations
 - Secure build infrastructure: Customizations built on Docker's trusted infrastructure
 - Full chain of trust: Customized images maintain provenance and cryptographic signing
 - Automatic updates: Custom images are automatically rebuilt when base images are patched
 
-### Extended Lifecycle Support {{< badge color="blue" text="DHI Enterprise add-on" >}}
+### Extended Lifecycle Support {tier="DHI Enterprise add-on"}
 
 - Post-EOL security coverage: Continue receiving patches for years after upstream support ends
 - Continuous compliance: Updated SBOMs, provenance, and signing for audit requirements
