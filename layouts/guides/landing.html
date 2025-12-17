@@ -40,7 +40,7 @@
     >
       <div class="pl-2"><strong>Tags</strong></div>
       <fieldset class="flex flex-col gap-2">
-        {{- range $name, $taxonomy := where site.Taxonomies.tags ".Page.Type" "guides" }}
+        {{- range $name, $taxonomy := where site.Taxonomies.tags ".Page.Section" "guides" }}
           {{- $id := anchorize (fmt.Printf "tag-%s" $name) }}
           <div class="flex gap-2 pl-2">
             <input
@@ -158,9 +158,8 @@
                 <div class="flex h-full flex-col">
                   <a class="hover:underline" href="{{ .Permalink }}">
                     {{- $img := resources.Get (.Params.image | default "/images/thumbnail.webp") }}
-                    {{- $img = $img.Process "resize 600x" }}
                     <img
-                      class="h-48 w-full rounded-sm object-cover shadow"
+                      class="h-64 w-full rounded-sm object-cover shadow"
                       src="{{ $img.Permalink }}"
                     />
                     <p class="my-4 text-xl leading-snug">{{ .Title }}</p>

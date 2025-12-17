@@ -35,9 +35,10 @@ securely.
 
 - Upstream: Maintains and updates the source code for each component,
   including fixing vulnerabilities in libraries and dependencies.
-- Docker: Rebuilds and re-releases images with upstream patches applied.
-  Docker also monitors for vulnerabilities and rapidly publishes updates to
-  affected images.
+- Docker: Rebuilds and re-releases images with upstream patches applied. Docker
+  monitors for vulnerabilities and publishes updates to affected images. Only
+  DHI Enterprise includes SLAs. DHI Free offers a secure baseline but no
+  guaranteed remediation timelines.
 - You: Apply DHI updates in your environments and patch any software or
   dependencies you install on top of the base image.
 
@@ -55,8 +56,22 @@ securely.
 
 - Docker: Publishes signed SBOMs, VEX documents, provenance data, and CVE
   scan results with each image to support compliance and supply chain security.
+  - For free DHI users: All security metadata and transparency features are
+    included at no cost.
+  - For DHI Enterprise users: Additional compliance variants (like FIPS and
+    STIG) and customization capabilities are available, with automatic rebuilds
+    when base images are patched.
 - You: Integrate DHIs into your security and compliance workflows, including
   vulnerability management and auditing.
+
+## Support
+
+- Docker:
+  - For free DHI users: Community support and public documentation are available.
+  - For DHI Enterprise users: Access to Docker's enterprise support team for
+    mission-critical applications.
+- You: Monitor Docker's release notes, security advisories, and documentation
+  for updates and best practices.
 
 ## Summary
 

@@ -1,8 +1,11 @@
 ---
-title: FIPS
+title: 'FIPS <span class="not-prose bg-blue-500 dark:bg-blue-400 rounded-sm px-1 text-xs text-white whitespace-nowrap">DHI Enterprise</span>'
+linkTitle: FIPS
 description: Learn how Docker Hardened Images support FIPS 140 through validated cryptographic modules to help organizations meet compliance requirements.
 keywords: docker fips, fips 140 images, fips docker images, docker compliance, secure container images
 ---
+
+{{< summary-bar feature_name="Docker Hardened Images" >}}
 
 ## What is FIPS 140?
 
@@ -34,6 +37,9 @@ Using software components that rely on validated cryptographic modules can help 
   and ensuring consistent behavior across environments.
 
 ## How Docker Hardened Images support FIPS compliance
+
+While Docker Hardened Images are available to all, the FIPS variant requires a
+Docker Hardened Images Enterprise subscription.
 
 Docker Hardened Images (DHIs) include variants that use cryptographic modules
 validated under FIPS 140. These images are intended to help organizations meet
@@ -67,6 +73,11 @@ These indicators help you quickly locate repositories that support FIPS-based
 compliance needs. Image variants that include FIPS support will have a tag
 ending with `-fips`, such as `3.13-fips`.
 
+## Use a FIPS variant
+
+To use a FIPS variant, you must [mirror](../how-to/mirror.md) the repository
+and then pull the FIPS image from your mirrored repository.
+
 ## View the FIPS attestation
 
 The FIPS variants of Docker Hardened Images contain a FIPS attestation that
@@ -78,7 +89,7 @@ You can retrieve and inspect the FIPS attestation using the Docker Scout CLI:
 $ docker scout attest get \
   --predicate-type https://docker.com/dhi/fips/v0.1 \
   --predicate \
-  <your-namespace>/dhi-<image>:<tag>
+  dhi.io/<image>:<tag>
 ```
 
 For example:
@@ -87,7 +98,7 @@ For example:
 $ docker scout attest get \
   --predicate-type https://docker.com/dhi/fips/v0.1 \
   --predicate \
-  docs/dhi-python:3.13-fips
+  dhi.io/python:3.13-fips
 ```
 
 The attestation output is a JSON array describing the cryptographic modules

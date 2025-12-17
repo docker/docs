@@ -9,7 +9,6 @@ tags: [devops]
 languages: [go]
 params:
   time: 30 minutes
-  featured: true
   image: /images/guides/bake.webp
 ---
 

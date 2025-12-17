@@ -11,7 +11,6 @@ tags: [product-demo]
 aliases:
   - /learning-paths/docker-build-cloud/
 params:
-  featured: true
   image: images/learning-paths/build-cloud.png
   time: 10 minutes
   resource_links:

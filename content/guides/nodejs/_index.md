@@ -11,6 +11,7 @@ aliases:
   - /language/nodejs/
   - /guides/language/nodejs/
 languages: [js]
+tags: [dhi]
 params:
   time: 20 minutes
 ---

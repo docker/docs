@@ -4,7 +4,7 @@ description: Review the full set of signed attestations included with each Docke
 keywords: container image attestations, signed sbom, build provenance, slsa compliance, vex document
 ---
 
-Docker Hardened Images (DHIs) include comprehensive, signed security
+Docker Hardened Images (DHIs) and charts include comprehensive, signed security
 attestations that verify the image's build process, contents, and security
 posture. These attestations are a core part of secure software supply chain
 practices and help users validate that an image is trustworthy and
@@ -13,13 +13,13 @@ policy-compliant.
 ## What is an attestation?
 
 An attestation is a signed statement that provides verifiable information
-about an image, such as how it was built, what's inside it, and what security
+about an image or chart, such as how it was built, what's inside it, and what security
 checks it has passed. Attestations are typically signed using Sigstore tooling
 (such as Cosign), making them tamper-evident and cryptographically verifiable.
 
 Attestations follow standardized formats (like [in-toto](https://in-toto.io/),
 [CycloneDX](https://cyclonedx.org/), and [SLSA](https://slsa.dev/)) and are
-attached to the image as OCI-compliant metadata. They can be generated
+attached to the image or chart as OCI-compliant metadata. They can be generated
 automatically during image builds or added manually to document extra tests,
 scan results, or custom provenance.
 
@@ -38,25 +38,25 @@ They are essential for meeting industry standards such as SLSA,
 and help teams reduce the risk of supply chain attacks by making build and
 security data transparent and verifiable.
 
-## How Docker Hardened Images use attestations
+## How Docker Hardened Images and charts use attestations
 
-All DHIs are built using [SLSA Build Level
+All DHIs and charts are built using [SLSA Build Level
 3](https://slsa.dev/spec/latest/levels) practices, and each image variant is
 published with a full set of signed attestations. These attestations allow users
 to:
 
-- Verify that the image was built from trusted sources in a secure environment
+- Verify that the image or chart was built from trusted sources in a secure environment
 - View SBOMs in multiple formats to understand component-level details
 - Review scan results to check for vulnerabilities or embedded secrets
 - Confirm the build and deployment history of each image
 
-Attestations are automatically published and associated with each mirrored DHI
-in your Docker Hub organization. They can be inspected using tools like [Docker
+Attestations are automatically published and associated with each  DHI
+and chart. They can be inspected using tools like [Docker
 Scout](../how-to/verify.md) or
 [Cosign](https://docs.sigstore.dev/cosign/overview), and are consumable by CI/CD
 tooling or security platforms.
 
-## Available attestations
+## Image attestations
 
 While every DHI variant includes a set of attestations, the attestations may
 vary based on the image variant. For example, some images may include a STIG
@@ -82,10 +82,38 @@ details](../how-to/explore.md#view-image-variant-details) in Docker Hub.
 | SLSA verification summary  | A summary attestation indicating the image's compliance with SLSA requirements.                                                                                                          | `https://slsa.dev/verification_summary/v1`        |
 | SPDX SBOM                  | An SBOM in [SPDX](https://spdx.dev/) format, widely adopted in open-source ecosystems.                                                                                                   | `https://spdx.dev/Document`                       |
 | FIPS compliance            | An attestation that verifies the image uses FIPS 140-validated cryptographic modules.                              | `https://docker.com/dhi/fips/v0.1`                |
+| DHI Image Sources          | Links to a corresponding source image containing all materials used to build the image, including package source code, git repos, and local files, ensuring compliance with open source license requirements. | `https://docker.com/dhi/source/v0.1`              |
+
+## Helm chart attestations
+
+Docker Hardened Image (DHI) charts also include comprehensive signed attestations
+that provide transparency and verification for your Kubernetes deployments. Like
+DHI container images, these charts are built following SLSA Build Level 3
+practices and include extensive security metadata.
+
+DHI Helm charts include the following attestations:
+
+| Attestation type           | Description                                                                                                                                                                                                                     | Predicate type URI                                 |
+|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
+| CycloneDX SBOM             | A software bill of materials in [CycloneDX](https://cyclonedx.org/) format, listing the chart itself and all container images and tools referenced by the chart.                                                              | `https://cyclonedx.org/bom/v1.6`                  |
+| CVEs (In-Toto format)      | A list of known vulnerabilities (CVEs) affecting the container images and components referenced by the chart.                                                                                                                   | `https://in-toto.io/attestation/vulns/v0.1`       |
+| Scout health score         | A signed attestation from Docker Scout that summarizes the overall security and quality posture of the chart and its referenced images.                                                                                        | `https://scout.docker.com/health/v0.1`            |
+| Scout provenance           | Provenance metadata generated by Docker Scout, including the chart source repository, build images used, and build parameters.                                                                                                  | `https://scout.docker.com/provenance/v0.1`        |
+| Scout SBOM                 | An SBOM generated and signed by Docker Scout, including the chart and container images it references, with additional Docker-specific metadata.                                                                                | `https://scout.docker.com/sbom/v0.1`              |
+| Secrets scan               | Results of a scan for accidentally included secrets, such as credentials, tokens, or private keys, in the chart package.                                                                                                       | `https://scout.docker.com/secrets/v0.1`           |
+| Tests                      | A record of automated tests run against the chart to validate functionality and compatibility with referenced images.                                                                                                          | `https://scout.docker.com/tests/v0.1`             |
+| Virus scan                 | Results of antivirus scans performed on the chart package.                                                                                                                                                                     | `https://scout.docker.com/virus/v0.1`             |
+| CVEs (Scout format)        | A vulnerability report generated by Docker Scout, listing known CVEs and severity data for the chart's referenced images.                                                                                                      | `https://scout.docker.com/vulnerabilities/v0.1`   |
+| SLSA provenance            | A standard [SLSA](https://slsa.dev/) provenance statement describing how the chart was built, including build tool, source repository, referenced images, and build materials.                                                 | `https://slsa.dev/provenance/v0.2`                |
+| SPDX SBOM                  | An SBOM in [SPDX](https://spdx.dev/) format, listing the chart and all container images and tools it references.                                                                                                              | `https://spdx.dev/Document`                       |
+
+For instructions on how to view and verify Helm chart attestations, see [Verify
+Helm chart
+attestations](../how-to/verify.md#verify-helm-chart-attestations-with-docker-scout).
 
 ## View and verify attestations
 
-To view and verify attestations for an image, see [Verify a Docker Hardened
+To view and verify attestations, see [Verify a Docker Hardened
 Image](../how-to/verify.md).
 
 ## Add your own attestations

@@ -23,7 +23,7 @@ For example, you might find repositories like the following in the DHI catalog:
 - `python`: framework for Python applications
 - `nginx`: web server image
 
-## Compatibility options
+## Base image distributions
 
 Docker Hardened Images are available in different base image options, giving you
 flexibility to choose the best match for your environment and workload
@@ -74,7 +74,9 @@ For example, you might find tags like the following in a DHI repository:
 - `3.9.23-debian12`: runtime image for Python 3.9.23
 - `3.9.23-debian12-dev`: development image for Python 3.9.23
 
-## FIPS variants
+## FIPs and STIG variants {{< badge color="blue" text="DHI Enterprise" >}}
+
+{{< summary-bar feature_name="Docker Hardened Images" >}}
 
 Some Docker Hardened Images include a `-fips` variant. These variants use
 cryptographic modules that have been validated under [FIPS
@@ -94,3 +96,35 @@ For example:
 FIPS variants can be used in the same way as any other Docker Hardened Image and
 are ideal for teams operating in regulated industries or under compliance
 frameworks that require cryptographic validation.
+
+In addition to FIPS variants, some Docker Hardened Images also include
+STIG-ready variants. These images are scanned against custom STIG-based
+profiles and come with signed STIG scan attestations to support audits and
+compliance reporting. To identify STIG-ready variants, look for the **STIG**
+in the **Compliance** column of the image tags list in the Docker Hub catalog.
+
+## Compatibility variants
+
+Some Docker Hardened Images include a compatiability variant. These variants
+provide additional tools and configurations for specific use cases without
+bloating the minimal base images.
+
+Compatibility variants are created to support:
+
+- Helm chart compatibility: Applications deployed via Helm charts and
+  Kubernetes that require specific runtime configurations or utilities for
+  seamless integration with popular Helm charts.
+
+- Special application use-cases: Applications that need optional tools not
+  included in the minimal image.
+
+By offering these as separate image flavors, DHI ensures that the minimal images
+remain lean and secure, while providing the tools you need in dedicated
+variants. This approach maintains a minimal attack surface for standard
+deployments while supporting specialized requirements when needed.
+
+You can recognize compatibility variants by their tag that includes `-compat`.
+
+Use compatibility variants when your deployment requires additional tools beyond
+the minimal runtime, such as when using Helm charts or applications with
+specific tooling requirements.

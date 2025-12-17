@@ -29,14 +29,14 @@ params:
       description: Learn how to use a Docker Hardened Image chart.
       icon: leaderboard
       link: /dhi/how-to/helm/
+    - title: Use extended lifecycle support with Docker Hardened Images
+      description: Learn how to use extended lifecycle support with Docker Hardened Images.
+      icon: update
+      link: /dhi/how-to/els/
     - title: Manage Docker Hardened Images
       description: Learn how to manage your mirrored and customized Docker Hardened Images in your organization.
       icon: reorder
       link: /dhi/how-to/manage/
-    - title: Migrate an existing application to use Docker Hardened Images
-      description: Follow a step-by-step guide to update your Dockerfiles and adopt Docker Hardened Images for secure, minimal, and production-ready builds.
-      icon: directions_run
-      link: /dhi/how-to/migrate/
   grid_evaluate:
     - title: Compare Docker Hardened Images
       description: Learn how to compare Docker Hardened Images with other container images to evaluate security improvements and differences.
