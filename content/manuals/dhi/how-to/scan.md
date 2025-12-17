@@ -184,7 +184,23 @@ packages and application dependencies.
 
 ### Scan a DHI using Trivy
 
-After installing Trivy, you can scan a Docker Hardened Image by pulling
+Before you can use VEX statements with Trivy, you need to configure VEXhub to
+download the Docker Hardened Images advisories repository. Run the following
+commands to set up the VEX repository:
+
+```console
+$ trivy vex repo init
+$ cat << REPO > ~/.trivy/vex/repository.yaml
+repositories:
+  - name: dhi-vex
+    url: https://github.com/docker-hardened-images/advisories
+    enabled: true
+REPO
+$ trivy vex repo list
+$ trivy vex repo download
+```
+
+After setting up VEXhub, you can scan a Docker Hardened Image by pulling
 the image and running the scan command:
 
 ```console
@@ -192,22 +208,31 @@ $ docker pull dhi.io/<image>:<tag>
 $ trivy image --scanners vuln --vex repo dhi.io/<image>:<tag>
 ```
 
+For example, scanning the `dhi.io/python:3.13` image:
+
+```console
+$ trivy image --scanners vuln --vex repo dhi.io/python:3.13
+```
+
 Example output:
 
 ```plaintext
 Report Summary
 
-┌──────────────────────────────────────────────────────────────────────────────┬────────────┬─────────────────┬─────────┐
-│                                    Target                                    │    Type    │ Vulnerabilities │ Secrets │
-├──────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
-│ dhi.io/<image>:<tag> (debian 12.11)                                          │   debian   │       66        │    -    │
-├──────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
-│ opt/python-3.13.4/lib/python3.13/site-packages/pip-25.1.1.dist-info/METADATA │ python-pkg │        0        │    -    │
-└──────────────────────────────────────────────────────────────────────────────┴────────────┴─────────────────┴─────────┘
+┌─────────────────────────────────────────────────────────────────────────────┬────────────┬─────────────────┐
+│                                   Target                                    │    Type    │ Vulnerabilities │
+├─────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┤
+│ dhi.io/python:3.13 (debian 13.2)                                            │   debian   │        0        │
+├─────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┤
+│ opt/python-3.13.11/lib/python3.13/site-packages/pip-25.3.dist-info/METADATA │ python-pkg │        0        │
+└─────────────────────────────────────────────────────────────────────────────┴────────────┴─────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
 ```
 
-You should include the `--vex` flag to apply VEX statements during the scan,
-which filter out known non-exploitable CVEs.
+The `--vex repo` flag applies VEX statements from the configured repository during the scan,
+which filters out known non-exploitable CVEs.
 
 ## Use VEX to filter known non-exploitable CVEs
 
