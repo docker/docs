@@ -12,7 +12,7 @@ aliases:
   - /language/ruby/
   - /guides/language/ruby/
 languages: [ruby]
-tags: [frameworks, dhi]
+tags: [frameworks]
 params:
   time: 20 minutes
 ---

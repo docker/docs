@@ -6,7 +6,7 @@ summary: |
   Learn how to containerize JavaScript applications with the Bun runtime.
 linkTitle: Bun
 languages: [js]
-tags: [dhi]
+tags: []
 params:
   time: 10 minutes
 ---
