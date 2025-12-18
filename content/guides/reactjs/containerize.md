@@ -129,9 +129,24 @@ Choosing DHI offers the advantage of a production-ready image that is lightweigh
 
 {{< tabs >}}
 {{< tab name="Using Docker Hardened Images" >}}
-Docker Hardened Images (DHIs) are available for Node.js on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/node). Unlike using the Docker Official Image, you must first mirror the Node.js image into your organization and then use it as your base image. Follow the instructions in the [DHI quickstart](/dhi/get-started/) to create a mirrored repository for Node.js.
+Docker Hardened Images (DHIs) are available for Node.js in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/node). Docker Hardened Images are freely available to everyone with no subscription required. You can pull and use them like any other Docker image after signing in to the DHI registry. For more information, see the [DHI quickstart](/dhi/get-started/) guide.
 
-Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace>/dhi-node:<tag>`. In the following Dockerfile, the `FROM` instruction uses `<your-namespace>/dhi-node:24-alpine3.22-dev` as the base image.
+1. Sign in to the DHI registry:
+   ```console
+   $ docker login dhi.io
+   ```
+
+2. Pull the Node.js DHI (check the catalog for available versions):
+   ```console
+   $ docker pull dhi.io/node:24-alpine3.22-dev
+   ```
+
+3. Pull the Nginx DHI (check the catalog for available versions):
+   ```console
+   $ docker pull dhi.io/nginx:1.28.0-alpine3.21-dev
+   ```
+
+In the following Dockerfile, the `FROM` instructions use `dhi.io/node:24-alpine3.22-dev` and `dhi.io/nginx:1.28.0-alpine3.21-dev` as the base images.
 
 ```dockerfile
 # =========================================
@@ -139,7 +154,7 @@ Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace
 # =========================================
 
 # Use a lightweight Node.js image for building (customizable via ARG)
-FROM <your-namespace>/dhi-node:24-alpine3.22-dev AS builder
+FROM dhi.io/node:24-alpine3.22-dev AS builder
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -160,7 +175,7 @@ RUN npm run build
 # Stage 2: Prepare Nginx to Serve Static Files
 # =========================================
 
-FROM <your-namespace>/dhi-nginx:1.28.0-alpine3.21-dev AS runner
+FROM dhi.io/nginx:1.28.0-alpine3.21-dev AS runner
 
 # Copy custom Nginx config
 COPY nginx.conf /etc/nginx/nginx.conf
