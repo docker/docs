@@ -211,7 +211,6 @@ undeterminable
 Unix
 unmanaged
 Visual Studio Code
-VEXhub
 VMware
 vpnkit
 vSphere
