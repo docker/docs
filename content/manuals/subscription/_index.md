@@ -7,8 +7,8 @@ params:
   sidebar:
     group: Platform
 grid_subscriptions:
-- title: Docker subscriptions and features
-  description: Explore what you can do with your Docker subscription.
+- title: Compare Docker subscriptions
+  description: Visit the pricing page to see what's included in a Docker subscription.
   link: "https://www.docker.com/pricing/"
   icon: feature_search
 - title: Set up your subscription
