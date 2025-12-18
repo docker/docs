@@ -236,12 +236,16 @@
     async submitFeedback(messageIndex, feedbackType) {
       const message = this.messages[messageIndex]
 
-      if (!message.questionAnswerId) {
-        console.error('No question_answer_id available for feedback')
+      if (message.feedback === feedbackType) {
         return
       }
 
-      if (message.feedback === feedbackType) {
+      // Clear any previous error
+      message.feedbackError = null
+
+      if (!message.questionAnswerId) {
+        message.feedbackError = 'Unable to submit feedback'
+        console.error('No question_answer_id available for feedback')
         return
       }
 
@@ -258,9 +262,11 @@
         if (response.ok) {
           message.feedback = feedbackType  // $persist auto-saves
         } else {
+          message.feedbackError = 'Unable to submit feedback'
           console.error('Failed to submit feedback:', response.status, response.statusText)
         }
       } catch (err) {
+        message.feedbackError = 'Unable to submit feedback'
         console.error('Error submitting feedback:', err)
       }
     },
@@ -372,7 +378,7 @@
 							</template>
 						</div>
 						<!-- Feedback buttons for assistant messages -->
-						<template x-if="message.role === 'assistant' && !message.isStreaming && message.questionAnswerId">
+						<template x-if="message.role === 'assistant' && !message.isStreaming">
 							<div class="flex items-center gap-2 text-xs">
 								<div class="flex items-center gap-1">
 									<!-- Copy button -->
@@ -413,6 +419,9 @@
 									<span :class="message.feedback === 'positive' ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'">
 										Thanks for your feedback!
 									</span>
+								</template>
+								<template x-if="message.feedbackError">
+									<span class="text-red-600 dark:text-red-400" x-text="message.feedbackError"></span>
 								</template>
 							</div>
 						</template>
