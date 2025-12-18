@@ -127,9 +127,9 @@ Choosing DHI offers the advantage of a production-ready image that is lightweigh
 
 {{< tabs >}}
 {{< tab name="Using Docker Hardened Images" >}}
-Docker Hardened Images (DHIs) are available for Node.js on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/node). Unlike using the Docker Official Image, you must first mirror the Node.js image into your organization and then use it as your base image. Follow the instructions in the [DHI quickstart](/dhi/get-started/) to create a mirrored repository for Node.js.
+Docker Hardened Images (DHIs) are available for Node.js on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/node). Docker Hardened Images are freely available to everyone with no subscription required. You can pull and use them like any other Docker image after signing in to the DHI registry. For more information, see the [DHI quickstart](/dhi/get-started/) guide.
 
-Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace>/dhi-node:<tag>`. In the following Dockerfile, the `FROM` instruction uses `<your-namespace>/dhi-node:24-alpine3.22-dev` as the base image.
+To use a DHI, first sign in to the Docker Hardened Images registry using your Docker ID credentials, then pull and use the image. DHI images use the `dhi.io` prefix, for example: `FROM dhi.io/node:<tag>`. In the following Dockerfile, the `FROM` instruction uses `dhi.io/node:24-alpine3.22-dev` as the base image.
 
 ```dockerfile
 # =========================================
@@ -137,7 +137,7 @@ Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace
 # =========================================
 
 # Use a lightweight DHI Node.js image for building
-FROM <your-namespace>/dhi-node:24-alpine3.22-dev AS builder
+FROM dhi.io/node:24-alpine3.22-dev AS builder
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -158,7 +158,7 @@ RUN npm run build
 # Stage 2: Prepare Nginx to Serve Static Files
 # =========================================
 
-FROM <your-namespace>/dhi-nginx:1.28.0-alpine3.21-dev AS runner
+FROM dhi.io/nginx:1.28.0-alpine3.21-dev AS runner
 
 # Copy custom Nginx config
 COPY nginx.conf /etc/nginx/nginx.conf
