@@ -79,7 +79,11 @@
       } catch (err) {
         // Only set error if messages weren't cleared
         if (this.messages.length > 0) {
-          this.error = 'Failed to get response. Please try again.'
+          if (err.message === 'RATE_LIMIT_EXCEEDED') {
+            this.error = 'You\'ve exceeded your question quota for the day. Please come back tomorrow.'
+          } else {
+            this.error = 'Failed to get response. Please try again.'
+          }
         }
         console.error('Gordon API error:', err)
         // Only try to remove message if it still exists
@@ -160,6 +164,9 @@
       })
 
       if (!response.ok) {
+        if (response.status === 429) {
+          throw new Error('RATE_LIMIT_EXCEEDED')
+        }
         throw new Error(`HTTP ${response.status}: ${response.statusText}`)
       }
 
