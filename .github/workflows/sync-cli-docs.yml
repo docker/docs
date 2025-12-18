@@ -1,0 +1,100 @@
+name: sync-cli-docs
+
+on:
+  schedule:
+    # Run daily at 02:00 UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "(optional) Docker CLI version - defaults to docker_ce_version in hugo.yaml"
+        required: false
+        default: ""
+  pull_request:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync-cli-docs:
+    runs-on: ubuntu-24.04
+    steps:
+      -
+        name: Checkout docs repo
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      -
+        name: Get version from hugo.yaml
+        id: get-version
+        run: |
+          if [ -n "${{ inputs.version }}" ]; then
+            VERSION="${{ inputs.version }}"
+          else
+            VERSION=$(grep "docker_ce_version:" hugo.yaml | awk '{print $2}' | tr -d '"')
+          fi
+          # TODO(vvoland): Remove this after 29.2.0 is released
+          # VERSION=v${VERSION}
+          VERSION=60f06cb2df3df36ddfb531c1dae8c6fa96e5f9e7
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Docker CLI version: **$VERSION**" | tee -a "$GITHUB_STEP_SUMMARY"
+      -
+        name: Checkout docker/cli repo
+        uses: actions/checkout@v5
+        with:
+          repository: docker/cli
+          path: cli-source
+          ref: ${{ steps.get-version.outputs.version }}
+          fetch-depth: 0
+      -
+        name: Create update branch
+        id: create-branch
+        run: |
+          BRANCH_NAME="bot/sync-cli-docs-$(date +%Y%m%d-%H%M%S)"
+          git checkout -b "$BRANCH_NAME"
+          echo "branch_name=$BRANCH_NAME" >> "$GITHUB_OUTPUT"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      -
+        name: Run sync script
+        id: sync
+        run: |
+          set +e
+          ./hack/sync-cli-docs.sh HEAD cli-source
+          EXIT_CODE=$?
+          set -e
+          
+          if [ $EXIT_CODE -eq 0 ]; then
+            echo "changes=true" >> "$GITHUB_OUTPUT"
+            echo "Changes detected - syncing CLI docs" >> "$GITHUB_STEP_SUMMARY"
+          elif [ $EXIT_CODE -eq 100 ]; then
+            echo "changes=false" >> "$GITHUB_OUTPUT"
+            echo "No changes to sync - CLI docs are up to date" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::error::Script failed with exit code $EXIT_CODE"
+            exit $EXIT_CODE
+          fi
+
+      -
+        name: Show PR
+        if: steps.sync.outputs.changes == 'true'
+        run: |
+          git show "${{ steps.create-branch.outputs.branch_name }}"
+      -
+        name: Create Pull Request
+        if: steps.sync.outputs.changes == 'true' && github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_BODY: |
+            ## Summary
+
+            Automated sync of CLI documentation from docker/cli repository.
+        run: |
+          git push -u origin "${{ steps.create-branch.outputs.branch_name }}"
+          gh pr create \
+            --title "cli: sync docs with docker/cli" \
+            --body "$PR_BODY" \
+            --base main \
+            --head "${{ steps.create-branch.outputs.branch_name }}"
