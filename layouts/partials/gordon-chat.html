@@ -431,24 +431,41 @@
 
 		<!-- Input area -->
 		<div class="border-t border-gray-200 p-4 dark:border-gray-700">
-			<form @submit.prevent="askQuestion()" class="flex items-center gap-2">
-				<div class="relative flex-1 self-stretch">
-					<textarea x-ref="input" x-model="currentQuestion"
-						@input="$el.style.height = 'auto'; $el.style.height = $el.scrollHeight + 'px'"
-						@keydown.enter="if (!$event.shiftKey) { $event.preventDefault(); askQuestion() }"
-						placeholder="Ask a question about Docker..."
-						rows="1"
-						:disabled="isLoading"
-						class="block w-full resize-none rounded-lg border border-gray-300 p-3 pr-24 leading-normal min-h-[3rem] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:focus:border-blue-400"></textarea>
-					<!-- Page context toggle chip inside input -->
-					<div class="absolute right-2 top-1/2 -translate-y-1/2" x-data="{ showTooltip: false }">
+			<form @submit.prevent="askQuestion()" class="space-y-2">
+				<div class="flex items-center gap-2">
+					<div class="relative flex-1 self-stretch">
+						<textarea x-ref="input" x-model="currentQuestion"
+							@input="$el.style.height = 'auto'; $el.style.height = $el.scrollHeight + 'px'"
+							@keydown.enter="if (!$event.shiftKey) { $event.preventDefault(); askQuestion() }"
+							placeholder="Ask a question about Docker..."
+							rows="1"
+							:disabled="isLoading"
+							class="block w-full resize-none rounded-lg border border-gray-300 p-3 leading-normal min-h-[3rem] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:focus:border-blue-400"></textarea>
+					</div>
+					<button type="submit" :disabled="!currentQuestion.trim() || isLoading"
+						:title="isLoading ? 'Sending...' : 'Send question'"
+						class="cursor-pointer rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50">
+						<template x-if="!isLoading">
+							<span class="icon-svg">
+								{{ partialCached "icon" "send" "send" }}
+							</span>
+						</template>
+						<template x-if="isLoading">
+							<span class="icon-svg animate-spin">
+								{{ partialCached "icon" "progress_activity" "progress_activity" }}
+							</span>
+						</template>
+					</button>
+				</div>
+				<div class="flex items-center" x-data="{ showTooltip: false }">
+					<div class="relative">
 						<button
 							@click="includePageContext = !includePageContext"
 							@mouseenter="showTooltip = true"
 							@mouseleave="showTooltip = false"
 							type="button"
 							:class="includePageContext
-								? 'bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400'
+								? 'bg-blue-100 text-blue-600 dark:bg-blue-800 dark:text-blue-200'
 								: 'bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-400'"
 							class="cursor-pointer rounded-md px-2 py-1 text-xs font-medium transition-colors hover:opacity-80">
 							<span class="flex items-center gap-1">
@@ -462,7 +479,7 @@
 										{{ partialCached "icon" "link_off" "link_off" }}
 									</span>
 								</template>
-								<span class="hidden sm:inline">Context</span>
+								<span>Context</span>
 							</span>
 						</button>
 						<!-- Tooltip -->
@@ -474,30 +491,16 @@
 							x-transition:leave="transition ease-in duration-75"
 							x-transition:leave-start="opacity-100 scale-100"
 							x-transition:leave-end="opacity-0 scale-95"
-							class="absolute bottom-full right-0 mb-2 w-56 rounded-lg bg-gray-900 p-2.5 text-xs text-white shadow-lg dark:bg-gray-700"
+							class="absolute bottom-full left-0 mb-2 w-56 rounded-lg bg-gray-900 p-2.5 text-xs text-white shadow-lg dark:bg-gray-700"
 							style="display: none;">
 							<div class="relative">
 								<p>When enabled, Gordon considers the current page you're viewing to provide more relevant answers.</p>
 								<!-- Arrow -->
-								<div class="absolute -bottom-3 right-4 h-2 w-2 rotate-45 bg-gray-900 dark:bg-gray-700"></div>
+								<div class="absolute -bottom-3 left-4 h-2 w-2 rotate-45 bg-gray-900 dark:bg-gray-700"></div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<button type="submit" :disabled="!currentQuestion.trim() || isLoading"
-					:title="isLoading ? 'Sending...' : 'Send question'"
-					class="cursor-pointer rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50">
-					<template x-if="!isLoading">
-						<span class="icon-svg">
-							{{ partialCached "icon" "send" "send" }}
-						</span>
-					</template>
-					<template x-if="isLoading">
-						<span class="icon-svg animate-spin">
-							{{ partialCached "icon" "progress_activity" "progress_activity" }}
-						</span>
-					</template>
-				</button>
 			</form>
 		</div>
 
