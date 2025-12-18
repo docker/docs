@@ -358,7 +358,7 @@
 					<div class="flex flex-col gap-2 max-w-full">
 						<div :class="message.role === 'user' ? 'bg-blue-500 dark:bg-blue-800 text-white' : 'max-w-none bg-gray-100 dark:bg-gray-800'" class="prose prose-sm dark:prose-invert rounded-lg px-4">
 							<template x-if="!message.content && message.isStreaming">
-								<div class="flex gap-1">
+								<div class="flex gap-1 py-3">
 									<span class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
 										style="animation-delay: 0ms"></span>
 									<span class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
