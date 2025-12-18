@@ -47,14 +47,20 @@ DHIs](./how-to/use.md#considerations-when-adopting-dhis).
 The following example demonstrates that you can run the Python image and execute
 a simple Python command just like you would with any other Docker image:
 
-1. Open a terminal and run the following commands:
+1. Open a terminal and sign in to the Docker Hardened Images registry using your
+   Docker ID credentials.
 
    ```console
    $ docker login dhi.io
+   ```
+
+2. Pull the image:
+
+   ```console
    $ docker pull dhi.io/python:3.13
    ```
 
-2. Run the image to confirm everything works:
+3. Run the image to confirm everything works:
 
     ```console
     $ docker run --rm dhi.io/python:3.13 python -c "print('Hello from DHI')"

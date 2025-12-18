@@ -18,13 +18,12 @@ Docker's public key for DHI images and charts is published at:
 
 > [!IMPORTANT]
 >
-> You must authenticate to the Docker Hardened Image registry (`dhi.io`) to pull images. To
-> do this, you can use [`docker login`](../../../reference/cli/docker/login.md):
+> You must authenticate to the Docker Hardened Images registry (`dhi.io`) to
+> pull images. Use your Docker ID credentials (the same username and password
+> you use for Docker Hub) when signing in. If you don't have a Docker account,
+> [create one](../../accounts/create-account.md) for free.
 >
-> ```console
-> $ docker login dhi.io
-> ```
-
+> Run `docker login dhi.io` to authenticate.
 
 ## Verify image attestations with Docker Scout
 
