@@ -72,7 +72,7 @@ For feature limits in each tier, see [Docker Pricing](https://www.docker.com/pri
 
 > [!IMPORTANT]
 >
-> If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription.
+> If you have a sales-assisted Docker Business subscription, contact your account manager to downgrade your subscription.
 
 To downgrade your subscription:
 
@@ -87,7 +87,7 @@ the organization you want to downgrade.
 
 > [!IMPORTANT]
 >
-> If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription.
+> If you have a sales-assisted Docker Business subscription, contact your account manager to downgrade your subscription.
 
 To downgrade your legacy Docker subscription:
 

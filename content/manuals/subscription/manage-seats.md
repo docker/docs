@@ -24,7 +24,7 @@ You can add or remove seats from your Docker Team or Business subscription at an
 
 > [!IMPORTANT]
 >
-> If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to add seats to your subscription.
+> If you have a sales-assisted Docker Business subscription, contact your account manager to add seats to your subscription.
 
 To add seats:
 
@@ -47,7 +47,7 @@ You can now add more members to your organization. For more information, see [Ma
 
 > [!IMPORTANT]
 >
-> If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to add seats to your subscription.
+> If you have a sales-assisted Docker Business subscription, contact your account manager to add seats to your subscription.
 
 To add seats to your Legacy Docker subscription:
 
@@ -80,7 +80,7 @@ For example, if you're billed on the 8th of every month for 10 seats and remove 
 
 > [!IMPORTANT]
 >
-> If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to remove seats from your subscription.
+> If you have a sales-assisted Docker Business subscription, contact your account manager to remove seats from your subscription.
 
 To remove seats:
 
@@ -97,7 +97,7 @@ You can cancel the removal of seats before your next billing cycle. To do so, se
 
 > [!IMPORTANT]
 >
-> If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to remove seats from your subscription.
+> If you have a sales-assisted Docker Business subscription, contact your account manager to remove seats from your subscription.
 
 To remove seats from your Legacy Docker subscription:
 
