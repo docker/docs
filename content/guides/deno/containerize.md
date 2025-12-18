@@ -72,23 +72,25 @@ Choosing DHI offers the advantage of a production-ready image that is lightweigh
 {{< tabs >}}
 {{< tab name="Using Docker Hardened Images" >}}
 
-Docker Hardened Images (DHIs) are available for Deno in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/deno). You can pull DHIs directly from the `dhi.io` registry. They are freely available to everyone with no subscription required, no usage restrictions, and no vendor lock-in
+Docker Hardened Images (DHIs) are available for Deno in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/deno). You can pull DHIs directly from the `dhi.io` registry.
 
 1. Sign in to the DHI registry:
+
    ```console
    $ docker login dhi.io
    ```
 
-2. Pull the Deno DHI (check the catalog for available versions):
+2. Pull the Deno DHI as `dhi.io/deno:2`. The tag (`2`) in this example refers to the version to the latest 2.x version of Deno.
+
    ```console
-   $ docker pull dhi.io/deno:<version>
+   $ docker pull dhi.io/deno:2
    ```
 
-In the following Dockerfile, the `FROM` instruction uses `dhi.io/deno:<version>` as the base image. Replace `<version>` with the specific version you want to use.
+For other available versions, refer to the [catalog](https://hub.docker.com/hardened-images/catalog/dhi/deno).
 
 ```dockerfile
 # Use the DHI Deno image as the base image
-FROM dhi.io/deno:<version>
+FROM dhi.io/deno:2
 
 # Set the working directory
 WORKDIR /app
