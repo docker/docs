@@ -1,4 +1,13 @@
 <!-- Gordon AI Chat Panel -->
+<script>
+  window.GORDON_BASE_URL = {{ if eq hugo.Environment "production" -}}
+    'https://ai-backend-service.docker.com'
+  {{- else if getenv "HUGO_GORDON_URL" -}}
+    '{{ getenv "HUGO_GORDON_URL" }}'
+  {{- else -}}
+    'https://ai-backend-service-stage.docker.com'
+  {{- end }};
+</script>
 <div x-data="{
     isLoading: false,
     error: null,
@@ -95,14 +104,6 @@
       }
     },
 
-    getGordonEndpoint() {
-      const endpoints = {
-        'docs.docker.com': 'https://ai-backend-service.docker.com/public/ask',
-        'localhost': 'http://localhost:8000/public/ask'
-      }
-      return endpoints[window.location.hostname] || 'https://ai-backend-service-stage.docker.com/public/ask'
-    },
-
     getSessionId() {
       let sessionId = sessionStorage.getItem('gordon-session-id')
       if (!sessionId) {
@@ -110,14 +111,6 @@
         sessionStorage.setItem('gordon-session-id', sessionId)
       }
       return sessionId
-    },
-
-    getFeedbackEndpoint() {
-      const endpoints = {
-        'docs.docker.com': 'https://ai-backend-service.docker.com/feedback',
-        'localhost': 'http://localhost:8000/feedback'
-      }
-      return endpoints[window.location.hostname] || 'https://ai-backend-service-stage.docker.com/feedback'
     },
 
     async streamGordonResponse(responseIndex) {
@@ -157,7 +150,7 @@
         ...(this.threadId && { thread_uuid: this.threadId })
       }
 
-      const response = await fetch(this.getGordonEndpoint(), {
+      const response = await fetch(window.GORDON_BASE_URL + '/public/ask', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -253,7 +246,7 @@
       }
 
       try {
-        const response = await fetch(this.getFeedbackEndpoint(), {
+        const response = await fetch(window.GORDON_BASE_URL + '/feedback', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
