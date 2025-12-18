@@ -27,9 +27,8 @@ be mirrored into your organization on Docker Hub.
 >
 > You must authenticate to the Docker Hardened Images registry (`dhi.io`) to
 > pull images. Use your Docker ID credentials (the same username and password
-> credentials (the same username and password you use for Docker Hub) when
-> logging in. If you don't have a Docker account, [create
-> one](../../accounts/create-account.md) for free.
+> you use for Docker Hub) when logging in. If you don't have a Docker account,
+> [create one](../../accounts/create-account.md) for free.
 >
 > Run `docker login dhi.io` to authenticate.
 
