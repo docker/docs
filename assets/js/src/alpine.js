@@ -35,6 +35,22 @@ hljs.registerLanguage('py', python)
 hljs.registerLanguage('go', go)
 hljs.registerLanguage('golang', go)
 
+// Configure marked to escape HTML in text tokens only (not code blocks)
+marked.use({
+  walkTokens(token) {
+    // Escape HTML in text and HTML tokens, preserve code blocks
+    if (token.type === 'text' || token.type === 'html') {
+      const text = token.text || token.raw
+      const escaped = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+      if (token.text) token.text = escaped
+      if (token.raw) token.raw = escaped
+    }
+  }
+})
+
 // Add $markdown magic for rendering markdown with syntax highlighting
 Alpine.magic('markdown', () => {
   return (content) => {
