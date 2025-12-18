@@ -20,6 +20,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 {{< release-date date="2025-12-18" >}}
 
 ### Bug fixes and enhancements
+
 - Restored support for `COMPOSE_COMPATIBILITY`.
 - Fixed grammatical errors and improve clarity in code..
 - Fixed broken `run --quiet`.
