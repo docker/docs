@@ -291,7 +291,7 @@
 		x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
 		x-transition:leave="transition ease-in duration-200" x-transition:leave-start="translate-x-0"
 		x-transition:leave-end="translate-x-full"
-		class="fixed top-0 right-0 z-50 flex h-screen w-full flex-col overflow-hidden rounded-lg bg-white shadow-2xl transition-all duration-200 md:w-[min(70ch,90vw)] md:h-[calc(100vh-1rem)] md:top-2 md:right-2 dark:bg-gray-900">
+		class="fixed top-0 right-0 z-50 flex h-screen w-full flex-col overflow-hidden rounded-lg bg-white shadow-2xl transition-all duration-200 md:w-[min(80ch,90vw)] md:h-[calc(100vh-1rem)] md:top-2 md:right-2 dark:bg-gray-900">
 		<!-- Header -->
 		<div
 			class="flex items-center justify-between rounded-t-lg border-b border-gray-200 bg-blue-600 px-6 py-3 dark:border-gray-700">
@@ -355,8 +355,8 @@
 			<!-- Messages -->
 			<template x-for="(message, index) in messages" :key="index">
 				<div :class="message.role === 'user' ? 'flex justify-end' : 'flex justify-start'">
-					<div class="flex flex-col gap-2">
-						<div :class="message.role === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100'" class="rounded-lg px-4 py-3">
+					<div class="flex flex-col gap-2 max-w-full">
+						<div :class="message.role === 'user' ? 'bg-blue-500 dark:bg-blue-800 text-white' : 'max-w-none bg-gray-100 dark:bg-gray-800'" class="prose prose-sm dark:prose-invert rounded-lg px-4">
 							<template x-if="!message.content && message.isStreaming">
 								<div class="flex gap-1">
 									<span class="inline-block h-2 w-2 animate-bounce rounded-full bg-current"
@@ -368,10 +368,7 @@
 								</div>
 							</template>
 							<template x-if="message.content">
-								<div>
-									<div x-html="formatMessageContent(message.content)"
-										:class="message.role === 'assistant' ? 'prose prose-sm dark:prose-invert max-w-none break-words' : 'max-w-none break-words'"></div>
-								</div>
+								<div x-html="formatMessageContent(message.content)"></div>
 							</template>
 						</div>
 						<!-- Feedback buttons for assistant messages -->
