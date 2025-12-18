@@ -31,7 +31,7 @@ limits and other benefits when they are signed in.
 Before you start onboarding your organization, ensure you:
 
 - Have a Docker Team or Business subscription. For more details, see
-[Docker subscriptions and features](/manuals/subscription/details.md).
+[Docker subscriptions and features](https://www.docker.com/pricing/).
 
   > [!NOTE]
   >
@@ -147,7 +147,7 @@ automatically via SSO and SCIM. See the following for more details:
 By default, members of your organization can use Docker Desktop without signing
 in. When users don’t sign in as a member of your organization, they don’t
 receive the
-[benefits of your organization’s subscription](../../subscription/details.md)
+[benefits of your organization’s subscription](https://www.docker.com/pricing/)
 and they can circumvent [Docker’s security features](/manuals/enterprise/security/hardened-desktop/_index.md).
 
 There are multiple ways you can enforce sign-in, depending on your organization's
@@ -172,4 +172,4 @@ security posture:
 - [Manage your domains](/manuals/enterprise/security/domain-management.md) to ensure that all Docker users in your domain are part of your organization.
 
 Your Docker subscription provides many more additional features. To learn more,
-see [Docker subscriptions and features](/subscription/details/).
+see [Docker subscriptions and features](https://www.docker.com/pricing/).

@@ -63,7 +63,7 @@ to get access to Docker Build Cloud:
 - Users with a free Personal account can opt-in to a 7-day free trial, with the option
 to subscribe for access. To start your free trial, sign in to [Docker Build Cloud Dashboard](https://app.docker.com/build/) and follow the on-screen instructions.
 - All users with a paid Docker subscription have access to Docker Build Cloud included
-with their Docker suite of products. See [Docker subscriptions and features](/manuals/subscription/details.md) for more information.
+with their Docker suite of products. See [Docker subscriptions and features](https://www.docker.com/pricing/) for more information.
 
 Once you've signed up and created a builder, continue by
 [setting up the builder in your local environment](./setup.md).

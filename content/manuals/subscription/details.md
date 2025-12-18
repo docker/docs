@@ -1,5 +1,5 @@
 ---
-title: Subscriptions and features
+title: Compare subscription
 weight: 10
 params:
   sidebar:

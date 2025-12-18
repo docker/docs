@@ -7,7 +7,7 @@ weight: 15
 
 Docker subscriptions provide features and benefits for individual developers, teams, and enterprise businesses. This page explains how to set up subscriptions for personal accounts and organizations.
 
-Before you begin, make sure you have a [Docker ID](../accounts/create-account.md). To learn more about what's included with each tier, see [Docker subscriptions and features](./details.md) and [Docker Pricing](https://www.docker.com/pricing/).
+Before you begin, make sure you have a [Docker ID](../accounts/create-account.md). To learn more about what's included with each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
 {{% include "tax-compliance.md" %}}
 
