@@ -12,8 +12,9 @@ in improving the Hardened Images ecosystem.
 
 ## Questions or discussions
 
-You can use the [GitHub Discussions board](https://github.com/docker-hardened-images/discussion) to engage with the DHI
-team for:
+You can use the [GitHub Discussions
+board](https://github.com/orgs/docker-hardened-images/discussions) to engage
+with the DHI team for:
 
 - General questions about DHIs
 - Best practices and recommendations
@@ -23,7 +24,7 @@ team for:
 
 ## Reporting bugs or issues
 
-You can [open a new issue](https://github.com/docker-hardened-images/discussion/issues/) for topics such as:
+You can [open a new issue](https://github.com/docker-hardened-images/catalog/issues) for topics such as:
 
 - Bug reports
 - Feature requests

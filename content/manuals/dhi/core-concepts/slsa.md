@@ -14,7 +14,7 @@ Developed by Google and maintained by the Open Source Security Foundation
 tampering, improve integrity, and secure packages and infrastructure in software
 projects.
 
-SLSA defines [four build levels (0–3)](https://slsa.dev/spec/latest/levels) of
+SLSA defines [four build levels (0–3)](https://slsa.dev/spec/latest/build-track-basics) of
 increasing security rigor, focusing on areas such as build provenance, source
 integrity, and build environment security. Each level builds upon the previous
 one, offering a structured approach to achieving higher levels of software
@@ -59,7 +59,7 @@ reduces the risk of supply chain attacks.
 Docker Hardened Images (DHIs) are secure-by-default container images
 purpose-built for modern production environments. Each DHI is cryptographically
 signed and complies with the [SLSA Build Level 3
-standard](https://slsa.dev/spec/latest/levels#build-l3-hardened-builds), ensuring
+standard](https://slsa.dev/spec/latest/build-track-basics#build-l3), ensuring
 verifiable build provenance and integrity.
 
 By integrating SLSA-compliant DHIs into your development and deployment processes, you can:
