@@ -127,9 +127,19 @@ Choosing DHI offers the advantage of a production-ready image that is lightweigh
 
 {{< tabs >}}
 {{< tab name="Using Docker Hardened Images" >}}
-Docker Hardened Images (DHIs) are available for Node.js on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/node). Docker Hardened Images are freely available to everyone with no subscription required. You can pull and use them like any other Docker image after signing in to the DHI registry. For more information, see the [DHI quickstart](/dhi/get-started/) guide.
+Docker Hardened Images (DHIs) are available for Node.js in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/node). Docker Hardened Images are freely available to everyone with no subscription required. You can pull and use them like any other Docker image after signing in to the DHI registry. For more information, see the [DHI quickstart](/dhi/get-started/) guide.
 
-To use a DHI, first sign in to the Docker Hardened Images registry using your Docker ID credentials, then pull and use the image. DHI images use the `dhi.io` prefix, for example: `FROM dhi.io/node:<tag>`. In the following Dockerfile, the `FROM` instruction uses `dhi.io/node:24-alpine3.22-dev` as the base image.
+1. Sign in to the DHI registry:
+   ```console
+   $ docker login dhi.io
+   ```
+
+2. Pull the Node.js DHI (check the catalog for available versions):
+   ```console
+   $ docker pull dhi.io/node:24-alpine3.22-dev
+   ```
+
+In the following Dockerfile, the `FROM` instruction uses `dhi.io/node:24-alpine3.22-dev` as the base image.
 
 ```dockerfile
 # =========================================
