@@ -59,23 +59,24 @@ Choosing DHI offers the advantage of a production-ready image that is lightweigh
 {{< tabs >}}
 {{< tab name="Using Docker Hardened Images" >}}
 
-Docker Hardened Images (DHIs) are available for Bun in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/bun). You can pull DHIs directly from the `dhi.io` registry. They are freely available to everyone with no subscription required, no usage restrictions, and no vendor lock-in
+Docker Hardened Images (DHIs) are available for Bun in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/bun). You can pull DHIs directly from the `dhi.io` registry.
 
 1. Sign in to the DHI registry:
    ```console
    $ docker login dhi.io
    ```
 
-2. Pull the Bun DHI (check the catalog for available versions):
+2. Pull the Bun DHI as `dhi.io/bun:1`. The tag (`1`) in this example refers to the version to the latest 1.x version of Bun.
+
    ```console
-   $ docker pull dhi.io/bun:<version>
+   $ docker pull dhi.io/bun:1
    ```
 
-In the following Dockerfile, the `FROM` instruction uses `dhi.io/bun:<version>` as the base image. Replace `<version>` with the specific version you want to use.
+For other available versions, refer to the [catalog](https://hub.docker.com/hardened-images/catalog/dhi/bun).
 
 ```dockerfile
 # Use the DHI Bun image as the base image
-FROM dhi.io/bun:<version>
+FROM dhi.io/bun:1
 
 # Set the working directory in the container
 WORKDIR /app
