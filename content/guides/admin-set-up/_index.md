@@ -23,7 +23,7 @@ params:
     - title: Image Access Management
       url: /security/for-admins/hardened-desktop/image-access-management/
     - title: Docker subscription information
-      url: /subscription/details/
+      url: "https://www.docker.com/pricing/"
 ---
 
 Docker's tools provide a scalable, secure platform that empowers your

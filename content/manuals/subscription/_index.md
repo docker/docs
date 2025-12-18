@@ -9,7 +9,7 @@ params:
 grid_subscriptions:
 - title: Docker subscriptions and features
   description: Explore what you can do with your Docker subscription.
-  link: /subscription/details/
+  link: "https://www.docker.com/pricing/"
   icon: feature_search
 - title: Set up your subscription
   description: Get started setting up a personal or organization subscription.

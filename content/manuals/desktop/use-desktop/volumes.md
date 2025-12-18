@@ -146,7 +146,7 @@ You can either [export a volume now](#export-a-volume-now) or [schedule a recurr
    {{< /tab >}}
    {{< tab name="External cloud storage" >}}
 
-   You must have a [Docker Business subscription](../../subscription/details.md) to export to an external cloud provider.
+   You must have a [Docker Business subscription](https://www.docker.com/pricing/) to export to an external cloud provider.
 
    Select your cloud provider and then specify the URL to upload to the storage.
    Refer to the following documentation for your cloud provider to learn how to
@@ -163,7 +163,7 @@ You can either [export a volume now](#export-a-volume-now) or [schedule a recurr
 
 ### Schedule a volume export
 
-1. Sign in to Docker Desktop. You must be signed in and have a paid [Docker subscription](../../subscription/details.md) to schedule a volume export.
+1. Sign in to Docker Desktop. You must be signed in and have a paid [Docker subscription](https://www.docker.com/pricing/) to schedule a volume export.
 2. In the **Volumes** view, select the volume you want to export.
 3. Select the **Exports** tab.
 4. Select **Schedule export**.
@@ -192,7 +192,7 @@ You can either [export a volume now](#export-a-volume-now) or [schedule a recurr
    {{< /tab >}}
    {{< tab name="External cloud storage" >}}
 
-   You must have a [Docker Business subscription](../../subscription/details.md) to export to an external cloud provider.
+   You must have a [Docker Business subscription](https://www.docker.com/pricing/) to export to an external cloud provider.
 
    Select your cloud provider and then specify the URL to upload to the storage.
    Refer to the following documentation for your cloud provider to learn how to
