@@ -13,7 +13,7 @@ params:
 
 {{< summary-bar feature_name="Ask Gordon DHI migration" >}}
 
-You can use Docker's AI-powered assistant, to automatically migrate your
+You can use Docker's AI-powered assistant to automatically migrate your
 Dockerfile to use Docker Hardened Images (DHI).
 
 1. Ensure Docker's AI-powered assistant is [enabled](/manuals/ai/gordon.md#enable-ask-gordon).
