@@ -163,12 +163,6 @@
         throw new Error(`HTTP ${response.status}: ${response.statusText}`)
       }
 
-      // Capture question_answer_id from response headers
-      const questionAnswerId = response.headers.get('DOCKER-AI-QUESTION-ANSWER-ID')
-      if (questionAnswerId) {
-        this.messages[responseIndex].questionAnswerId = questionAnswerId
-      }
-
       const reader = response.body.getReader()
       const decoder = new TextDecoder()
 
@@ -195,6 +189,12 @@
               } else if (parsed.thread_id !== this.threadId) {
                 console.warn('Backend returned unexpected thread_id:', parsed.thread_id)
               }
+              continue
+            }
+
+            // Capture question_answer_id for feedback
+            if (parsed.question_answer_id) {
+              this.messages[responseIndex].questionAnswerId = parsed.question_answer_id
               continue
             }
 
