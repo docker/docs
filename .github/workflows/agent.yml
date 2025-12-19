@@ -31,7 +31,7 @@ jobs:
           git checkout -b agent/issue-${{ github.event.issue.number }}
 
       - name: Run agent
-        uses: docker/cagent-action@v1
+        uses: docker/cagent-action@v1.0.3
         with:
           agent: ./agent.yml
           yolo: true
