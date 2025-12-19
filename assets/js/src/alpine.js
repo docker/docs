@@ -90,7 +90,7 @@ Alpine.magic('markdown', () => {
 // Stores
 Alpine.store("showSidebar", false)
 Alpine.store('gordon', {
-  isOpen: Alpine.$persist(false).using(sessionStorage).as('gordon-isOpen'),
+  isOpen: false,
   query: '',
   toggle() {
     this.isOpen = !this.isOpen
