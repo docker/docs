@@ -102,6 +102,12 @@ agents:
 Each agent has clear responsibilities. The writer doesn't worry about line
 wrapping. The editor doesn't generate content. The reviewer just runs tools.
 
+This example uses `sub_agents` where root delegates discrete tasks and gets
+results back. The root agent maintains control and coordinates all work. For
+different coordination patterns where agents should transfer control to each
+other, see the `handoffs` mechanism in the [configuration
+reference](./reference/config.md#task-delegation-versus-conversation-handoff).
+
 **When to use teams:**
 
 - Multiple distinct steps in your workflow
