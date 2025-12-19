@@ -59,7 +59,7 @@ organization:
 - [Start a free trial](https://hub.docker.com/hardened-images/start-free-trial):
   Explore DHI Enterprise features including FIPS/STIG variants, customization,
   and SLA-backed support
-- [Request a demo](https://www.docker.com/products/hardened-images/): Get a
+- [Request a demo](https://www.docker.com/products/hardened-images/#getstarted): Get a
   personalized demo and information about DHI Enterprise subscriptions
 - [Request an image](https://github.com/docker-hardened-images/catalog/issues):
   Submit a request for a specific Docker Hardened Image
