@@ -1,6 +1,6 @@
 {{ $cols := .Get "cols" | default 3 }}
 <div
-  class="not-prose md:grid-cols-{{ math.Max 2 (sub $cols 1) }} lg:grid-cols-{{ $cols }} grid grid-cols-1 gap-4 mb-6"
+  class="not-prose md:grid-cols-{{ math.Max 2 (sub $cols 1) }} xl:grid-cols-{{ $cols }} grid grid-cols-1 gap-4 mb-6"
 >
   {{ $items := index .Page.Params (.Get "items" | default "grid") }}
   {{ range $items }}
