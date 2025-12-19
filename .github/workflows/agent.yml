@@ -33,14 +33,18 @@ jobs:
       - name: Run agent
         uses: docker/cagent-action@v1.0.3
         with:
+          cagent-version: v1.15.5
           agent: ./agent.yml
           yolo: true
           prompt: |
             Work on GitHub issue: ${{ github.event.issue.html_url }}
 
-            Fetch the issue, analyze what documentation changes are needed, and implement them following your standard workflow.
+            Fetch the issue, analyze what documentation changes are needed, and
+            implement them following your standard workflow.
 
-            If you identify any upstream coordination issues (broken links from vendored content, missing CLI flags, etc.), document them in .upstream-issues.md as specified in your instructions.
+            If you identify any upstream coordination issues (broken links from
+            vendored content, missing CLI flags, etc.), document them in
+            .upstream-issues.md as specified in your instructions.
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
