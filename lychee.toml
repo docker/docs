@@ -1,0 +1,49 @@
+# Lychee link checker configuration
+# Replacement for htmltest
+
+# Cache configuration
+cache = true
+max_cache_age = "6h"
+
+require_https = false
+# base_url = "https://docs.docker.com"
+
+# Explicitly include file scheme for local fragment checking
+# This is crucial for checking fragments in local HTML files
+scheme = ["file"]
+
+exclude = [
+  # Exclude external links (we only check internal links)
+  '^https?://.*',
+  # Ignore specific internal paths
+  '/reference/api/hub/',
+  # Exclude API engine version links with fragments (Redoc JavaScript-rendered)
+  '/reference/api/engine/version/v[0-9.]+/#',
+  '/reference/api/registry/',
+]
+
+# Exclude specific directories and file types
+exclude_path = [
+  'registry/configuration',
+  'compose/compose-file',
+  # Exclude markdown/txt files from being scanned
+  '\.md$',
+  '\.txt$',
+]
+
+# Accept these HTTP status codes as valid
+accept = [200, 204, 301, 302, 307, 308, 429]
+
+# Configure retries and timeout
+max_retries = 2
+timeout = 10
+
+# Set user agent
+user_agent = "lychee/link-checker"
+
+# Check fragments (anchors) in URLs
+# This is essential for validating internal anchor links
+include_fragments = true
+
+# Don't ignore localhost since we're checking local files
+exclude_loopback = false
