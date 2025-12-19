@@ -33,6 +33,10 @@ params:
       description: Resolve common issues with building, running, or debugging Docker Hardened Images.
       icon: help_center
       link: /dhi/troubleshoot/
+    - title: Additional resources
+      description: Links to blog posts, Docker Hub catalog, GitHub repositories, and more.
+      icon: link
+      link: /dhi/resources/
 ---
 
 Docker Hardened Images (DHI) are minimal, secure, and production-ready container
