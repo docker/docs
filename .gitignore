@@ -10,3 +10,6 @@ public
 resources
 static/pagefind
 tmp
+.cagent
+.upstream-issues.md
+.validation-log.md
