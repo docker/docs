@@ -15,4 +15,4 @@ cagent
 # cagent tmp files
 .cagent
 .upstream-issues.md
-.validation-log.md
+.validation.log

@@ -26,12 +26,16 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+      - name: Install dependencies
+        run: npm ci
+
       - name: Create branch
         run: |
           git checkout -b agent/issue-${{ github.event.issue.number }}
 
       - name: Run agent
         uses: docker/cagent-action@v1.0.3
+        timeout-minutes: 15
         with:
           cagent-version: v1.15.5
           agent: ./agent.yml
