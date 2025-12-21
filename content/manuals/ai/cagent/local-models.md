@@ -45,10 +45,10 @@ Docker Model Runner can run any compatible model. Models can come from:
 - HuggingFace models directly (`hf.co/org/model-name`)
 - The Docker Model catalog in Docker Desktop
 
-To see models available through the Docker catalog, run:
+To see models available to the local Docker catalog, run:
 
 ```console
-$ docker model list --available
+$ docker model list --openai
 ```
 
 To use a model, reference it in your configuration. DMR automatically pulls
