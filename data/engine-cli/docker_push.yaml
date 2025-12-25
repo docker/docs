@@ -20,9 +20,9 @@ options:
     - option: disable-content-trust
       value_type: bool
       default_value: "true"
-      description: Skip image signing
-      deprecated: false
-      hidden: false
+      description: Skip image verification (deprecated)
+      deprecated: true
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false
