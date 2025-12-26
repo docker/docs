@@ -10,7 +10,7 @@ options:
       shorthand: a
       value_type: bool
       default_value: "false"
-      description: Show all images (default hides intermediate images)
+      description: Show all images (default hides intermediate and dangling images)
       deprecated: false
       hidden: false
       experimental: false
