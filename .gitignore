@@ -14,5 +14,5 @@ tmp
 cagent
 # cagent tmp files
 .cagent
-.upstream-issues.md
+.pr-body.md
 .validation.log
