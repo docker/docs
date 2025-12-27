@@ -305,9 +305,9 @@ options:
     - option: disable-content-trust
       value_type: bool
       default_value: "true"
-      description: Skip image verification
-      deprecated: false
-      hidden: false
+      description: Skip image verification (deprecated)
+      deprecated: true
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false
@@ -546,7 +546,8 @@ options:
       swarm: false
       os_type: windows
     - option: ip
-      value_type: string
+      value_type: ip
+      default_value: <nil>
       description: IPv4 address (e.g., 172.30.100.104)
       deprecated: false
       hidden: false
@@ -555,7 +556,8 @@ options:
       kubernetes: false
       swarm: false
     - option: ip6
-      value_type: string
+      value_type: ip
+      default_value: <nil>
       description: IPv6 address (e.g., 2001:db8::33)
       deprecated: false
       hidden: false
@@ -586,9 +588,9 @@ options:
     - option: kernel-memory
       value_type: bytes
       default_value: "0"
-      description: Kernel memory limit
-      deprecated: false
-      hidden: false
+      description: Kernel memory limit (deprecated)
+      deprecated: true
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false
@@ -2262,7 +2264,9 @@ examples: |-
 
     It's conventional to use `host.docker.internal` as the hostname referring to
     `host-gateway`. Docker Desktop automatically resolves this hostname, see
-    [Explore networking features](/desktop/features/networking/networking-how-tos/#connect-a-container-to-a-service-on-the-host).
+    [Explore networking how-tos on Docker Desktop](/desktop/features/networking/networking-how-tos/#connect-a-container-to-a-service-on-the-host)
+    and
+    [Configure host gateway IP](/reference/cli/dockerd/#configure-host-gateway-ip).
 
     The following example shows how the special `host-gateway` value works. The
     example runs an HTTP server that serves a file from host to container over the
