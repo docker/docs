@@ -39,7 +39,7 @@ iptables or nftables is used. See
 
 On Linux, Docker needs "IP Forwarding" enabled on the host. So, it enables
 the `sysctl` settings `net.ipv4.ip_forward` and `net.ipv6.conf.all.forwarding`
-it they are not already enabled when it starts. When it does that, it also
+if they are not already enabled when it starts. When it does that, it also
 configures the firewall to drop forwarded packets unless they are explicitly
 accepted.
 
