@@ -114,29 +114,6 @@ If you have SCIM enabled, troubleshoot your SCIM connection using the following 
 1. Ensure that the attributes being synced from your IdP match Docker's [supported attributes](/manuals/enterprise/security/provisioning/scim.md#supported-attributes) for SCIM.
 1. Test user provisioning by trying to provision a test user through your IdP and verify if they appear in Docker.
 
-## IdP-initiated sign in is not enabled for connection
-
-### Error message
-
-When this issue occurs, the following error message is common:
-```text
-IdP-Initiated sign in is not enabled for connection '$ssoConnection'.
-```
-
-### Causes
-
-Docker does not support an IdP-initiated SAML flow. This error occurs when a user attempts to authenticate from your IdP, such as using the Docker SSO app tile on the sign in page.
-
-### Solutions
-
-**Authenticate from Docker apps**
-
-The user must initiate authentication from Docker applications (Hub, Desktop, etc). The user needs to enter their email address in a Docker app and they will get redirected to the configured SSO IdP for their domain.
-
-**Hide the Docker SSO app**
-
-You can hide the Docker SSO app from users in your IdP. This prevents users from attempting to start authentication from the IdP dashboard. You must hide and configure this in your IdP.
-
 ## Not enough seats in organization
 
 ### Error message
