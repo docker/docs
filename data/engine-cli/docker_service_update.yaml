@@ -239,6 +239,7 @@ options:
       description: Add a Generic resource
       deprecated: false
       hidden: false
+      min_api_version: "1.32"
       experimental: false
       experimentalcli: false
       kubernetes: false
@@ -248,6 +249,7 @@ options:
       description: Remove a Generic resource
       deprecated: false
       hidden: false
+      min_api_version: "1.32"
       experimental: false
       experimentalcli: false
       kubernetes: false
@@ -340,7 +342,7 @@ options:
       description: Add a custom host-to-IP mapping (`host:ip`)
       deprecated: false
       hidden: false
-      min_api_version: "1.32"
+      min_api_version: "1.25"
       experimental: false
       experimentalcli: false
       kubernetes: false
@@ -470,6 +472,28 @@ options:
       deprecated: false
       hidden: false
       min_api_version: "1.41"
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: memory-swap
+      value_type: bytes
+      default_value: "0"
+      description: Swap Bytes (-1 for unlimited)
+      deprecated: false
+      hidden: false
+      min_api_version: "1.52"
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: memory-swappiness
+      value_type: int64
+      default_value: "-1"
+      description: Tune memory swappiness (0-100), -1 to reset to default
+      deprecated: false
+      hidden: false
+      min_api_version: "1.52"
       experimental: false
       experimentalcli: false
       kubernetes: false
