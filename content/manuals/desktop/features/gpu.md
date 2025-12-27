@@ -78,7 +78,7 @@ $ docker model install-runner --backend vllm --gpu cuda
 Check it's correctly installed:
 
 ```console
-$ docker status
+$ docker run status
 Docker Model Runner is running
 
 Status:
@@ -89,6 +89,6 @@ vllm: running vllm version: 0.11.0
 Run the model:
 
 ```console
-$ docker model un ai/smollm2-vllm hi
+$ docker model run ai/smollm2-vllm hi
 Hello! I'm sure everything goes smoothly here. How can I assist you today?
 ```
