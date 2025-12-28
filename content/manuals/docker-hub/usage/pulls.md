@@ -16,13 +16,13 @@ an unlimited pull rate.
 The following pull usage and limits apply based on your subscription, subject to
 fair use:
 
-| User type                | Pull rate limit per 6 hours             |
-|--------------------------|-----------------------------------------|
-| Business (authenticated) | Unlimited                               |
-| Team (authenticated)     | Unlimited                               |
-| Pro (authenticated)      | Unlimited                               |
-| Personal (authenticated) | 200                                     |
-| Unauthenticated Users    | 100 per IPv4 address or IPv6 /64 subnet |
+| User type                | Pull rate limit per 6 hours              |
+|--------------------------|------------------------------------------|
+| Business (authenticated) | Unlimited                                |
+| Team (authenticated)     | Unlimited                                |
+| Pro (authenticated)      | Unlimited                                |
+| Personal (authenticated) | 20000                                    |
+| Unauthenticated Users    | 1000 per IPv4 address or IPv6 /64 subnet |
 
 ## Pull definition
 
