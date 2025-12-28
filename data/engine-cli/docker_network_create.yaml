@@ -108,7 +108,7 @@ options:
       kubernetes: false
       swarm: false
     - option: gateway
-      value_type: stringSlice
+      value_type: ipSlice
       default_value: '[]'
       description: IPv4 or IPv6 Gateway for the master subnet
       deprecated: false
@@ -141,7 +141,7 @@ options:
       kubernetes: false
       swarm: false
     - option: ip-range
-      value_type: stringSlice
+      value_type: ipNetSlice
       default_value: '[]'
       description: Allocate container ip from a sub-range
       deprecated: false
