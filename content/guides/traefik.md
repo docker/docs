@@ -54,12 +54,15 @@ Let’s do a quick demo of starting Traefik and then configuring two additional 
 {{< tabs >}}
 {{< tab name="Using Docker Hardened Images" >}}
 
-Docker Hardened Images (DHI) for Traefik are available on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/traefik).  
-Before you can use a DHI image, you must mirror it into your organization’s namespace.  
-Follow the [DHI quickstart](/dhi/get-started/) to create a mirrored repository.
+Docker Hardened Images (DHI) for Traefik are available on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/traefik).
+If you haven't authenticated yet, first run:
+
+```bash
+docker login dhi.io
+```
 
 For example — use:
-`FROM <your-namespace>/dhi-traefik:<tag>`
+`FROM dhi.io/traefik:<tag>`
 
 Then start a container using the Hardened image:
 
@@ -67,7 +70,7 @@ Then start a container using the Hardened image:
 $ docker run -d --network=traefik-demo \
   -p 80:80 \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  <your-namespace>/dhi-traefik:3.6.2 \
+  dhi.io/traefik:3.6.2 \
   --providers.docker
 ```
 
@@ -92,13 +95,17 @@ $ docker run -d --network=traefik-demo \
 {{< tabs >}}
 {{< tab name="Using Docker Hardened Images" >}}
 
-If your organization uses an [Nginx DHI image](https://hub.docker.com/hardened-images/catalog/dhi/nginx),  
-you can use the mirrored image name following. For example:
+Docker Hardened Images (DHI) for Nginx are available on [Nginx DHI image](https://hub.docker.com/hardened-images/catalog/dhi/nginx).
+If you haven't authenticated yet, first run:
+
+```bash
+docker login dhi.io
+```
 
 ```console
 $ docker run -d --network=traefik-demo \
   --label 'traefik.http.routers.nginx.rule=Host(`nginx.localhost`)' \
-  <your-namespace>/dhi-nginx:1.29.3
+  dhi.io/nginx:1.29.3
 ```
 
 {{< /tab >}}
@@ -149,7 +156,7 @@ The application can be accessed on GitHub at [dockersamples/easy-http-routing-wi
 ```yaml
 services:
   proxy:
-    image: <your-namespace>/dhi-traefik:3.6.2
+    image: dhi.io/traefik:3.6.2
     command: --providers.docker
     ports:
       - 80:80
@@ -181,14 +188,21 @@ services:
 {{< tabs >}}
 {{< tab name="Using Docker Hardened Images" >}}
 
-If your organization mirrors the [Nginx DHI image](https://hub.docker.com/hardened-images/catalog/dhi/nginx),  
-you can use it as your base image as shown following:
+Docker Hardened Images (DHI) for Nginx are available on [Nginx DHI image](https://hub.docker.com/hardened-images/catalog/dhi/nginx).
+
+If you haven't authenticated yet, first run:
+
+```bash
+docker login dhi.io
+```
+
+You can use it as your base image as shown following:
 
 ```yaml
 services:
   # …
   client:
-    image: <your-namespace>/dhi-nginx:1.29.3-alpine3.21
+    image: dhi.io/nginx:1.29.3-alpine3.21
     volumes:
       - "./client:/usr/share/nginx/html"
     labels:
@@ -289,7 +303,7 @@ With this file, the only change is to the Compose configuration for Traefik. The
 ```yaml
 services:
   proxy:
-    image: <your-namespace>/dhi-traefik:3.6.2
+    image: dhi.io/traefik:3.6.2
     command: --providers.docker --providers.file.filename=/config/traefik-config.yaml --api.insecure
     ports:
       - 80:80
