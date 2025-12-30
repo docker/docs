@@ -20,9 +20,10 @@ options:
       kubernetes: false
       swarm: false
     - option: platform
-      value_type: string
+      value_type: stringSlice
+      default_value: '[]'
       description: |
-        Save only the given platform variant. Formatted as `os[/arch[/variant]]` (e.g., `linux/amd64`)
+        Save only the given platform(s). Formatted as a comma-separated list of `os[/arch[/variant]]` (e.g., `linux/amd64,linux/arm64/v8`)
       details_url: '#platform'
       deprecated: false
       hidden: false

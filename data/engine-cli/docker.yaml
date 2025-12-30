@@ -37,8 +37,6 @@ long: |-
     | `DOCKER_API_VERSION`          | Override the negotiated API version to use for debugging (e.g. `1.19`)                                                                                                                                                                                            |
     | `DOCKER_CERT_PATH`            | Location of your authentication keys. This variable is used both by the `docker` CLI and the [`dockerd` daemon](/reference/cli/dockerd/)                                                                                                   |
     | `DOCKER_CONFIG`               | The location of your client configuration files.                                                                                                                                                                                                                  |
-    | `DOCKER_CONTENT_TRUST_SERVER` | The URL of the Notary server to use. Defaults to the same URL as the registry.                                                                                                                                                                                    |
-    | `DOCKER_CONTENT_TRUST`        | When set Docker uses notary to sign and verify images. Equates to `--disable-content-trust=false` for build, create, pull, push, run.                                                                                                                             |
     | `DOCKER_CONTEXT`              | Name of the `docker context` to use (overrides `DOCKER_HOST` env var and default context set with `docker context use`)                                                                                                                                           |
     | `DOCKER_CUSTOM_HEADERS`       | (Experimental) Configure [custom HTTP headers](#custom-http-headers) to be sent by the client. Headers must be provided as a comma-separated list of `name=value` pairs. This is the equivalent to the `HttpHeaders` field in the configuration file.             |
     | `DOCKER_DEFAULT_PLATFORM`     | Default platform for commands that take the `--platform` flag.                                                                                                                                                                                                    |
@@ -47,6 +45,8 @@ long: |-
     | `DOCKER_TLS`                  | Enable TLS for connections made by the `docker` CLI (equivalent of the `--tls` command-line option). Set to a non-empty value to enable TLS. Note that TLS is enabled automatically if any of the other TLS options are set.                                      |
     | `DOCKER_TLS_VERIFY`           | When set Docker uses TLS and verifies the remote. This variable is used both by the `docker` CLI and the [`dockerd` daemon](/reference/cli/dockerd/)                                                                                       |
     | `BUILDKIT_PROGRESS`           | Set type of progress output (`auto`, `plain`, `tty`, `rawjson`) when [building](/reference/cli/docker/image/build/) with [BuildKit backend](/build/buildkit/). Use plain to show container output (default `auto`). |
+    | `NO_COLOR`                    | Disable any ANSI escape codes in the output in accordance with https://no-color.org/
+                                                                                                                 |
 
     Because Docker is developed using Go, you can also use any environment
     variables used by the Go runtime. In particular, you may find these useful:
@@ -234,8 +234,8 @@ long: |-
 
     These settings are used to configure proxy settings for containers only, and not
     used as proxy settings for the `docker` CLI or the `dockerd` daemon. Refer to the
-    [environment variables](#environment-variables) and [HTTP/HTTPS proxy](/engine/daemon/proxy/#httphttps-proxy)
-    sections for configuring proxy settings for the CLI and daemon.
+    [environment variables](#environment-variables) section and the [Daemon proxy configuration](/engine/daemon/proxy/)
+    guide for configuring proxy settings for the CLI and daemon.
 
     > [!WARNING]
     > Proxy settings may contain sensitive information (for example, if the proxy
@@ -390,7 +390,6 @@ cname:
     - docker system
     - docker tag
     - docker top
-    - docker trust
     - docker unpause
     - docker update
     - docker version
@@ -449,7 +448,6 @@ clink:
     - docker_system.yaml
     - docker_tag.yaml
     - docker_top.yaml
-    - docker_trust.yaml
     - docker_unpause.yaml
     - docker_update.yaml
     - docker_version.yaml
@@ -500,7 +498,7 @@ options:
       swarm: false
     - option: host
       shorthand: H
-      value_type: list
+      value_type: string
       description: Daemon socket to connect to
       details_url: '#host'
       deprecated: false
