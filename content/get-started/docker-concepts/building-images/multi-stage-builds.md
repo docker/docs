@@ -276,7 +276,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
     COPY ./src ./src
     RUN ./mvnw clean install
 
-    FROM eclipse-temurin:21.0.8_9-jre-jammy AS final
+    FROM eclipse-temurin:21.0.2_13-jre-jammy AS final
     WORKDIR /opt/app
     EXPOSE 8080
     COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar
