@@ -24,6 +24,14 @@ In this section, you'll learn how to set up code quality tools for your Python a
 
 Ruff is an extremely fast Python linter and formatter written in Rust. It replaces multiple tools like flake8, isort, and black with a single unified tool.
 
+Before using Ruff, install it in your Python environment:
+
+```bash
+pip install ruff
+```
+
+If you're using a virtual environment, make sure it is activated so the `ruff` command is available when you run the commands below.
+
 Create a `pyproject.toml` file:
 
 ```toml

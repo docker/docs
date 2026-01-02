@@ -161,6 +161,7 @@ pgAdmin
 PKG
 plaintext
 plist
+pluggable
 Postgres
 PowerShell
 Python
@@ -169,6 +170,7 @@ Quickview
 rebalance
 reimplement
 Rekor
+ROCm
 rollback
 rootful
 runc
@@ -183,6 +185,7 @@ Solr
 SonarQube
 Splunk
 SQLite
+stargz
 stdin
 stdout
 subfolder
@@ -211,6 +214,7 @@ Visual Studio Code
 VMware
 vpnkit
 vSphere
+Vulkan
 Vue
 Wasm
 Wasmtime
@@ -288,4 +292,6 @@ Zsh
 [Vv]irtiofs
 [Vv]irtualize
 [Ww]alkthrough
-
+[Tt]oolsets?
+[Rr]erank(ing|ed)?
+[Ee]vals?

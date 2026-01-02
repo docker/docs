@@ -15,6 +15,12 @@ issues for Docker Service APIs.
 
 ---
 
+## 2025-11-21
+
+### Updates
+
+- Add missing `expires_at` fields on [PAT management](/reference/api/hub/latest/#tag/access-tokens) endpoints.
+
 ## 2025-09-25
 
 ### Updates

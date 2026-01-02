@@ -1,27 +1,34 @@
 ---
-title: Verify a Docker Hardened Image
-linktitle: Verify an image
-description: Use Docker Scout or cosign to verify signed attestations like SBOMs, provenance, and vulnerability data for Docker Hardened Images.
+title: Verify a Docker Hardened Image or chart
+linktitle: Verify an image or chart
+description: Use Docker Scout or cosign to verify signed attestations like SBOMs, provenance, and vulnerability data for Docker Hardened Images and charts.
 weight: 40
-keywords: verify container image, docker scout attest, cosign verify, sbom validation, signed container attestations
+keywords: verify container image, docker scout attest, cosign verify, sbom validation, signed container attestations, helm chart verification
 ---
 
-{{< summary-bar feature_name="Docker Hardened Images" >}}
-
-Docker Hardened Images (DHI) include signed attestations that verify the image’s
-build process, contents, and security posture. These attestations are available
-for each image variant and can be verified using
+Docker Hardened Images (DHI) and charts include signed attestations that verify
+the build process, contents, and security posture. These attestations are
+available for each image variant and chart and can be verified using
 [cosign](https://docs.sigstore.dev/) or the Docker Scout CLI.
 
-Docker's public key for DHI images is published at:
+Docker's public key for DHI images and charts is published at:
 
 - https://registry.scout.docker.com/keyring/dhi/latest.pub
 - https://github.com/docker-hardened-images/keyring
 
-## Verify attestations with Docker Scout
+> [!IMPORTANT]
+>
+> You must authenticate to the Docker Hardened Images registry (`dhi.io`) to
+> pull images. Use your Docker ID credentials (the same username and password
+> you use for Docker Hub) when signing in. If you don't have a Docker account,
+> [create one](../../accounts/create-account.md) for free.
+>
+> Run `docker login dhi.io` to authenticate.
+
+## Verify image attestations with Docker Scout
 
 You can use the [Docker Scout](/scout/) CLI to list and retrieve attestations for Docker
-Hardened Images, including images mirrored into your organization's namespace.
+Hardened Images.
 
 > [!NOTE]
 >
@@ -32,11 +39,11 @@ Hardened Images, including images mirrored into your organization's namespace.
 ### Why use Docker Scout instead of cosign directly?
 
 While you can use cosign to verify attestations manually, the Docker Scout CLI
-offers several key advantages when working with Docker Hardened Images:
+offers several key advantages when working with Docker Hardened Images and charts:
 
 - Purpose-built experience: Docker Scout understands the structure of DHI
-  attestations and image naming conventions, so you don't have to construct full
-  image digests or URIs manually.
+  attestations and naming conventions, so you don't have to construct full
+  digests or URIs manually.
 
 - Automatic platform resolution: With Scout, you can specify the platform (e.g.,
   `--platform linux/amd64`), and it automatically verifies the correct image
@@ -60,15 +67,15 @@ you full visibility and the option to fall back to cosign when needed.
 
 ### List available attestations
 
-To list attestations for a mirrored DHI:
+To list attestations for a mirrored DHI image:
 
 > [!NOTE]
 >
 > If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
-> `registry://docs/dhi-python:3.13` instead of `docs/dhi-python:3.13`.
+> `registry://dhi.io/python:3.13` instead of `dhi.io/python:3.13`.
 
 ```console
-$ docker scout attest list <your-org-namespace>/dhi-<image>:<tag>
+$ docker scout attest list dhi.io/<image>:<tag>
 ```
 
 This command shows all available attestations, including SBOMs, provenance, vulnerability reports, and more.
@@ -80,20 +87,20 @@ To retrieve a specific attestation, use the `--predicate-type` flag with the ful
 ```console
 $ docker scout attest get \
   --predicate-type https://cyclonedx.org/bom/v1.6 \
-  <your-org-namespace>/dhi-<image>:<tag>
+  dhi.io/<image>:<tag>
 ```
 
 > [!NOTE]
 >
 > If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
-> `registry://docs/dhi-python:3.13` instead of `docs/dhi-python:3.13`.
+> `registry://dhi.io/python:3.13` instead of `dhi.io/python:3.13`.
 
 For example:
 
 ```console
 $ docker scout attest get \
   --predicate-type https://cyclonedx.org/bom/v1.6 \
-  docs/dhi-python:3.13
+  dhi.io/python:3.13
 ```
 
 To retrieve only the predicate body:
@@ -102,7 +109,7 @@ To retrieve only the predicate body:
 $ docker scout attest get \
   --predicate-type https://cyclonedx.org/bom/v1.6 \
   --predicate \
-  <your-org-namespace>/dhi-<image>:<tag>
+  dhi.io/<image>:<tag>
 ```
 
 For example:
@@ -111,7 +118,7 @@ For example:
 $ docker scout attest get \
   --predicate-type https://cyclonedx.org/bom/v1.6 \
   --predicate \
-  docs/dhi-python:3.13
+  dhi.io/python:3.13
 ```
 
 ### Validate the attestation with Docker Scout
@@ -119,21 +126,21 @@ $ docker scout attest get \
 To validate the attestation using Docker Scout, you can use the `--verify` flag:
 
 ```console
-$ docker scout attest get <image-name>:<tag> \
+$ docker scout attest get dhi.io/<image>:<tag> \
    --predicate-type https://scout.docker.com/sbom/v0.1 --verify
 ```
 
 > [!NOTE]
 >
-> If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
-> `registry://docs/dhi-node:20.19-debian12-fips-20250701182639` instead of
-> `docs/dhi-node:20.19-debian12-fips-20250701182639`.
+> If the image exists locally on your device, you must prefix the image name
+> with `registry://`. For example, use `registry://dhi.io/node:20.19-debian12`
+> instead of `dhi.io/node:20.19-debian12`.
 
 
-For example, to verify the SBOM attestation for the `dhi/node:20.19-debian12-fips-20250701182639` image:
+For example, to verify the SBOM attestation for the `dhi.io/node:20.19-debian12` image:
 
 ```console
-$ docker scout attest get docs/dhi-node:20.19-debian12-fips-20250701182639 \
+$ docker scout attest get dhi.io/node:20.19-debian12 \
    --predicate-type https://scout.docker.com/sbom/v0.1 --verify
 ```
 
@@ -161,7 +168,7 @@ To skip the transparency log check and validate against Docker's key, use the
 ```console
 $ docker scout attest get \
   --predicate-type https://cyclonedx.org/bom/v1.6 \
-  <your-org-namespace>/dhi-<image>:<tag> \
+  dhi.io/<image>:<tag> \
   --verify --skip-tlog
 ```
 
@@ -171,7 +178,7 @@ $ docker scout attest get \
 > later.
 >
 > If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
-> `registry://docs/dhi-python:3.13` instead of `docs/dhi-python:3.13`.
+> `registry://dhi.io/python:3.13` instead of `dhi.io/python:3.13`.
 
 
 This is equivalent to using `cosign` with the `--insecure-ignore-tlog=true`
@@ -187,13 +194,13 @@ When using the `--verify` flag, it also prints the corresponding
 $ docker scout attest get \
   --predicate-type https://cyclonedx.org/bom/v1.6 \
   --verify \
-  <your-org-namespace>/dhi-<image>:<tag>
+  dhi.io/<image>:<tag>
 ```
 
 > [!NOTE]
 >
 > If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
-> `registry://docs/dhi-python:3.13` instead of `docs/dhi-python:3.13`.
+> `registry://dhi.io/python:3.13` instead of `dhi.io/python:3.13`.
 
 For example:
 
@@ -201,7 +208,7 @@ For example:
 $ docker scout attest get \
   --predicate-type https://cyclonedx.org/bom/v1.6 \
   --verify \
-  docs/dhi-python:3.13
+  dhi.io/python:3.13
 ```
 
 If verification succeeds, Docker Scout prints the full `cosign verify` command.
@@ -211,31 +218,98 @@ Example output:
 ```console
     v SBOM obtained from attestation, 101 packages found
     v Provenance obtained from attestation
-    v cosign verify registry.scout.docker.com/docker/dhi-python@sha256:b5418da893ada6272add2268573a3d5f595b5c486fb7ec58370a93217a9785ae \
-        --key https://registry.scout.docker.com/keyring/dhi/latest.pub --experimental-oci11
-    ...
+    v cosign verify ...
 ```
 
 > [!IMPORTANT]
 >
-> When using cosign, you must first authenticate to both the Docker Hub registry
+> When using cosign, you must first authenticate to both the DHI registry
 > and the Docker Scout registry.
 >
 > For example:
 >
 > ```console
-> $ docker login
+> $ docker login dhi.io
 > $ docker login registry.scout.docker.com
-> $ cosign verify \
->     registry.scout.docker.com/docker/dhi-python@sha256:b5418da893ada6272add2268573a3d5f595b5c486fb7ec58370a93217a9785ae \
->     --key https://registry.scout.docker.com/keyring/dhi/latest.pub --experimental-oci11
+> $ cosign verify ...
 > ```
+
+## Verify Helm chart attestations with Docker Scout
+
+Docker Hardened Image Helm charts include the same comprehensive attestations
+as container images. The verification process for charts is identical to that
+for images, using the same Docker Scout CLI commands.
+
+### List available chart attestations
+
+To list attestations for a DHI Helm chart:
+
+```console
+$ docker scout attest list oci://dhi.io/<chart>:<version>
+```
+
+For example, to list attestations for the Redis HA chart:
+
+```console
+$ docker scout attest list oci://dhi.io/redis-ha-chart:0.1.0
+```
+
+This command shows all available chart attestations, including SBOMs, provenance, vulnerability reports, and more.
+
+### Retrieve a specific chart attestation
+
+To retrieve a specific attestation from a Helm chart, use the `--predicate-type` flag with the full predicate type URI:
+
+```console
+$ docker scout attest get \
+  --predicate-type https://cyclonedx.org/bom/v1.6 \
+  oci://dhi.io/<chart>:<version>
+```
+
+For example:
+
+```console
+$ docker scout attest get \
+  --predicate-type https://cyclonedx.org/bom/v1.6 \
+  oci://dhi.io/redis-ha-chart:0.1.0
+```
+
+To retrieve only the predicate body:
+
+```console
+$ docker scout attest get \
+  --predicate-type https://cyclonedx.org/bom/v1.6 \
+  --predicate \
+  oci://dhi.io/<chart>:<version>
+```
+
+### Validate chart attestations with Docker Scout
+
+To validate a chart attestation using Docker Scout, use the `--verify` flag:
+
+```console
+$ docker scout attest get oci://dhi.io/<chart>:<version> \
+   --predicate-type https://scout.docker.com/sbom/v0.1 --verify
+```
+
+For example, to verify the SBOM attestation for the Redis HA chart:
+
+```console
+$ docker scout attest get oci://dhi.io/redis-ha-chart:0.1.0 \
+   --predicate-type https://scout.docker.com/sbom/v0.1 --verify
+```
+
+The same `--skip-tlog` flag described in [Handle missing transparency log
+entries](#handle-missing-transparency-log-entries) can also be used with chart
+attestations when needed.
 
 ## Available DHI attestations
 
 See [available
-attestations](../core-concepts/attestations.md#available-attestations) for list
-of attestations available for each DHI.
+attestations](../core-concepts/attestations.md#image-attestations) for a list
+of attestations available for each DHI image and [Helm chart
+attestations](../core-concepts/attestations.md#helm-chart-attestations) for a
+list of attestations available for each DHI chart.
 
 ## Explore attestations on Docker Hub
 
@@ -248,4 +322,4 @@ lists each available attestation with its:
 - Digest reference for use with `cosign`
 
 These attestations are generated and signed automatically as part of the Docker
-Hardened Image build process.
+Hardened Image or chart build process.

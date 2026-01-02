@@ -1,319 +1,172 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    {{ partial "head.html" . }}
-  </head>
 
-  <body
-    class="flex h-max flex-col bg-gray-50 text-base dark:bg-gray-950 dark:text-white"
-  >
-    <div class="absolute -z-10 w-full">
-      <svg
-        class="dark:hidden"
-        viewBox="0 0 1616 797"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M1066.69 797L0 136.789V0H1616V488.038L1066.69 797Z"
-          fill="#EFEFF2"
-        />
-      </svg>
-      <svg
-        class="hidden dark:block"
-        viewBox="0 0 1616 797"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M1066.69 797L0 136.789V0H1616V488.038L1066.69 797Z"
-          fill="#080B0E"
-          fill-opacity="0.3"
-        />
-      </svg>
-    </div>
-    {{ partial "header.html" . }}
-    <main class="flex min-h-screen w-full flex-col items-stretch self-center">
-      <div
-        class="flex w-full flex-col items-stretch gap-20 self-center px-4 py-20 xl:w-[1200px]"
-      >
-        <div
-          class="bg-pattern-blue relative overflow-hidden rounded-sm drop-shadow"
-        >
-          <div
-            class="flex h-full flex-col items-start justify-between gap-4 p-8"
-          >
-            <div class="flex items-center gap-2">
-              <span class="icon-svg text-blue dark:text-blue">
-                {{ partial "icon" "play_circle" }}</span
-              >
-              <h1 class="text-2xl">Get Docker</h1>
-            </div>
-            <p>
-              Learn how to install Docker for Mac, Windows, or Linux and explore
-              our developer tools.
-            </p>
-            <a
-              href="/get-started/get-docker/"
-              class="bg-blue mt-20 flex cursor-pointer items-center gap-2 rounded-sm p-2 px-4 text-white transition duration-300 hover:bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-400"
-            >
-              <span class="icon-svg">{{ partial "icon" "download" }}</span>
-              Get Docker
-            </a>
-          </div>
-          <div
-            class="absolute right-0 bottom-0 origin-bottom-right scale-50 lg:scale-100"
-          >
-            <img
-              class="dark:hidden"
-              alt="Low-fi desktop app"
-              src="/assets/images/app-wf-light-1.svg"
-            />
-            <img
-              class="hidden dark:block"
-              alt="Low-fi desktop app"
-              src="/assets/images/app-wf-dark-1.svg"
-            />
-          </div>
-        </div>
+<head>
+	{{ partial "head.html" . }}
+</head>
 
-        <div>
-          <div class="grid grid-cols-1 gap-4 lg:grid-cols-4">
-            <div>
-              <a class="h-full" href="/get-started/">
-                <div class="section-card">
-                  <div class="flex items-center gap-4">
-                    <span class="icon-svg text-blue dark:text-blue">
-                      {{ partial "icon" "rocket" }}
-                    </span>
-                    <div>
-                      <div class="section-card-title">Get started</div>
-                    </div>
-                  </div>
-                  <div class="section-card-text">
-                    Learn Docker basics and the benefits of containerization.
-                  </div>
-                </div>
-              </a>
-            </div>
+<body class="flex min-h-screen flex-col bg-gray-50 text-base dark:bg-gray-950 dark:text-white">
+	<div class="absolute -z-10 w-full">
+		<svg class="dark:hidden" viewBox="0 0 1616 797" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M1066.69 797L0 136.789V0H1616V488.038L1066.69 797Z" fill="#EFEFF2" />
+		</svg>
+		<svg class="hidden dark:block" viewBox="0 0 1616 797" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M1066.69 797L0 136.789V0H1616V488.038L1066.69 797Z" fill="#080B0E" fill-opacity="0.3" />
+		</svg>
+	</div>
+	{{ partial "header.html" . }}
+	<main class="flex w-full flex-col items-stretch gap-20 self-center pt-20">
+		<div class="grid w-full grid-cols-1 items-center gap-20 px-4 lg:grid-cols-2 xl:w-[1200px] self-center">
+			<div class="bg-pattern-blue relative overflow-hidden rounded-sm drop-shadow">
+				<div class="flex h-full flex-col items-start justify-between gap-4 px-8 py-4">
+					<div class="flex items-center gap-2">
+						<span class="icon-svg text-blue dark:text-blue">
+							{{ partial "icon" "play_circle" }}</span>
+						<h1 class="text-xl">Get Docker</h1>
+					</div>
+					<p>
+						Learn how to install Docker for Mac, Windows, or Linux and explore
+						our developer tools.
+					</p>
+					<a href="/get-started/get-docker/"
+						class="shadow bg-blue mt-20 flex cursor-pointer items-center gap-2 rounded-sm p-2 px-4 text-white transition duration-300 hover:bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-400">
+						<span class="icon-svg icon-sm">{{ partial "icon" "download" }}</span>
+						Get Docker
+					</a>
+				</div>
+				<div class="absolute right-0 bottom-0 origin-bottom-right scale-50">
+					<img class="dark:hidden" alt="Low-fi desktop app" src="/assets/images/app-wf-light-1.svg" />
+					<img class="hidden dark:block" alt="Low-fi desktop app" src="/assets/images/app-wf-dark-1.svg" />
+				</div>
+			</div>
+			<div class="h-full bg-pattern-purple rounded-sm drop-shadow">
+				<div class="flex h-full flex-col items-start gap-4 px-6 py-4">
+					<div class="flex flex-col gap-2">
+						<h2 class="text-xl">Docker Hardened Images, now free to use</h1>
+					</div>
+					<p>
+						Minimal, hardened base images with full transparency:
+						signed SBOMs, SLSA Level 3 provenance, and complete CVE
+						data.
+					</p>
+					<a href="/dhi/"
+						class="shadow bg-blue flex mt-auto cursor-pointer items-center gap-2 rounded-sm p-2 px-4 text-white transition duration-300 hover:bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-400">
+						Get started for free
+					</a>
+				</div>
+			</div>
+		</div>
 
-            <div>
-              <a class="h-full" href="/guides/">
-                <div class="section-card">
-                  <div class="flex items-center gap-4">
-                    <span class="icon-svg text-blue dark:text-blue">
-                      {{ partial "icon" "developer_guide" }}
-                    </span>
-                    <div>
-                      <div class="section-card-title">Guides</div>
-                    </div>
-                  </div>
-                  <div class="section-card-text">
-                    Learn how Docker can optimize your development workflows.
-                  </div>
-                </div>
-              </a>
-            </div>
+		<div>
+			<div class="grid grid-cols-1 gap-4 lg:grid-cols-4 mx-auto px-4 xl:w-[1200px]">
+				<div>
+					<a class="h-full" href="/get-started/">
+						<div class="section-card">
+							<div class="flex items-center gap-4">
+								<span class="icon-svg text-blue dark:text-blue">
+									{{ partial "icon" "rocket" }}
+								</span>
+								<div>
+									<div class="section-card-title">Get started</div>
+								</div>
+							</div>
+							<div class="section-card-text">
+								Learn Docker basics and the benefits of containerization.
+							</div>
+						</div>
+					</a>
+				</div>
 
-            <div>
-              <a class="h-full" href="/manuals/">
-                <div class="section-card">
-                  <div class="flex items-center gap-4">
-                    <span class="icon-svg text-blue dark:text-blue">
-                      {{ partial "icon" "description" }}
-                    </span>
-                    <div>
-                      <div class="section-card-title">Manuals</div>
-                    </div>
-                  </div>
-                  <div class="section-card-text">
-                    Learn how to install, set up, configure, and use Docker
-                    products.
-                  </div>
-                </div>
-              </a>
-            </div>
+				<div>
+					<a class="h-full" href="/guides/">
+						<div class="section-card">
+							<div class="flex items-center gap-4">
+								<span class="icon-svg text-blue dark:text-blue">
+									{{ partial "icon" "developer_guide" }}
+								</span>
+								<div>
+									<div class="section-card-title">Guides</div>
+								</div>
+							</div>
+							<div class="section-card-text">
+								Learn how Docker can optimize your development workflows.
+							</div>
+						</div>
+					</a>
+				</div>
 
-            <div>
-              <a class="h-full" href="/reference/">
-                <div class="section-card">
-                  <div class="flex items-center gap-4">
-                    <span class="icon-svg text-blue dark:text-blue">
-                      {{ partial "icon" "terminal" }}
-                    </span>
-                    <div>
-                      <div class="section-card-title">Reference</div>
-                    </div>
-                  </div>
-                  <div class="section-card-text">
-                    Browse the CLI and API documentation.
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
+				<div>
+					<a class="h-full" href="/manuals/">
+						<div class="section-card">
+							<div class="flex items-center gap-4">
+								<span class="icon-svg text-blue dark:text-blue">
+									{{ partial "icon" "description" }}
+								</span>
+								<div>
+									<div class="section-card-title">Manuals</div>
+								</div>
+							</div>
+							<div class="section-card-text">
+								Learn how to install, set up, configure, and use Docker
+								products.
+							</div>
+						</div>
+					</a>
+				</div>
 
-        <div class="z-10 grid grid-cols-1 gap-20 lg:grid-cols-2">
-          <div class="bg-pattern-verde relative rounded-sm p-6 drop-shadow">
-            <div
-              class="flex h-full flex-col items-start justify-between gap-12"
-            >
-              <div class="flex flex-col gap-4">
-                <h2 class="font-medium">
-                  Docker Hardened Images
-                  {{ partial
-                    "components/badge.html" (dict "color" "blue" "content" "New")
-                  }}
-                </h2>
-                <p class="text-xl">
-                  Secure, minimal, production-ready images with near-zero known CVEs.
-                </p>
-              </div>
-              <div class="flex flex-col items-start gap-4 xl:flex-row">
-                <a
-                  href="/dhi/get-started/"
-                  class="bg-blue dark:bg-blue rounded-sm p-2 px-4 text-white transition duration-300 hover:bg-blue-500 dark:hover:bg-blue-500"
-                >
-                  Start your free trial
-                </a>
-                <a
-                  href="https://hub.docker.com/hardened-images/catalog"
-                  class="bg-blue dark:bg-blue rounded-sm p-2 px-4 text-white transition duration-300 hover:bg-blue-500 dark:hover:bg-blue-500"
-                >
-                  Explore images
-                </a>
-              </div>
-            </div>
-            <div
-              class="absolute right-0 bottom-0 origin-bottom-right scale-75 md:scale-100"
-            >
-              <img
-                class="dark:hidden"
-                alt="Low-fi desktop app"
-                src="/assets/images/app-wf-light-2.svg"
-              />
-              <img
-                class="hidden dark:block"
-                alt="Low-fi desktop app"
-                src="/assets/images/app-wf-dark-2.svg"
-              />
-            </div>
-          </div>
-          <div class="bg-pattern-purple rounded-sm p-6">
-            <div class="flex flex-col gap-12">
-              <div class="flex flex-col gap-4">
-                <p class="text-xl">
-		          Docker State of Application Development survey
-                </p>
-		        <p>
-		          Share your feedback and help us better understand and serve
-		          the application development community. It will take just 20
-		          minutes of your time. We want to know where you are
-		          focused, what you are working on, and what is most
-		          important to you.
-                </p>
-                <p>
-		          You can save your progress and return at any time. As a
-		          thank-you, you can opt into a raffle for Docker swag and
-		          other prizes.
-                </p>
-              </div>
-              <div>
-		        <a
-                  href="https://docker.qualtrics.com/jfe/form/SV_1BIUSxxzRiXoS4S?SOURCE_URL=DOCSSITE"
-                  class="bg-blue dark:bg-blue rounded-sm p-2 px-4 text-white transition duration-300 hover:bg-blue-500 dark:hover:bg-blue-500"
-                  >Take the survey</a>
-		      </div>
-            </div>
-          </div>
-        </div>
+				<div>
+					<a class="h-full" href="/reference/">
+						<div class="section-card">
+							<div class="flex items-center gap-4">
+								<span class="icon-svg text-blue dark:text-blue">
+									{{ partial "icon" "terminal" }}
+								</span>
+								<div>
+									<div class="section-card-title">Reference</div>
+								</div>
+							</div>
+							<div class="section-card-text">
+								Browse the CLI and API documentation.
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
 
-        <div>
-          <h2 class="mb-4 text-xl">Browse by section</h2>
-          <div
-            class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-          >
-            {{ range .Params.grid }}
-              <div>
-                <div class="section-card">
-                  <div class="flex items-center gap-4">
-                    <span class="icon-svg text-gray dark:text-gray"
-                      >{{ partial "icon" .icon }}</span
-                    >
-                    <div>
-                      <div class="section-card-title">{{ .title }}</div>
-                    </div>
-                  </div>
-                  <div class="flex h-full flex-col justify-between gap-4">
-                    <p>{{ .description | markdownify }}</p>
-                    <nav class="flex flex-col gap-2">
-                      {{ range .links }}
-                        <div>
-                          <span class="icon-svg text-gray dark:text-gray"
-                            >{{ partial "icon" "arrow_right" }}</span
-                          >
-                          <a class="link" href="{{ .url }}">{{ .text }}</a>
-                        </div>
-                      {{ end }}
-                    </nav>
-                  </div>
-                </div>
-              </div>
-            {{ end }}
-          </div>
-        </div>
-        <div class="flex flex-col gap-4">
-          <h2 class="mb-4 text-xl">Browse by tag</h2>
-          <div class="flex flex-wrap gap-4">
-            {{ $tags := slice }}
-            {{- range site.Taxonomies.tags }}
-              {{ $tags = $tags | append .Page }}
-            {{ end }}
-            {{ partial "tags.html" $tags }}
-          </div>
-        </div>
-      </div>
+		<div
+			class="relative flex h-full items-center justify-center overflow-hidden bg-gray-100 py-8 md:h-[334px] dark:bg-gray-900">
+			<div class="w-[1200px] px-4">
+				<div class="flex max-w-full flex-col gap-8 md:max-w-[66%]">
+					<h2 class="text-2xl">Community resources</h2>
+					<p>
+						Find fellow Docker enthusiasts, engage in insightful discussions,
+						share knowledge, and collaborate on projects. Our communities
+						offer a rich online experience for developers to create valuable
+						connections that challenge and inspire!
+					</p>
+					<div class="flex flex-col gap-4 md:flex-row">
+						<a href="https://forums.docker.com/"
+							class="cursor-pointer rounded-sm bg-white px-4 py-2 hover:bg-gray-50 dark:bg-gray-500 dark:text-white dark:hover:bg-gray-600">
+							Visit Docker Forum
+						</a>
+						<a href="https://dockr.ly/comm-slack"
+							class="cursor-pointer rounded-sm bg-white px-4 py-2 hover:bg-gray-50 dark:bg-gray-500 dark:text-white dark:hover:bg-gray-600">
+							Join Docker Slack
+						</a>
+						<a href="https://www.docker.com/community/captains/"
+							class="cursor-pointer rounded-sm bg-white px-4 py-2 hover:bg-gray-50 dark:bg-gray-500 dark:text-white dark:hover:bg-gray-600">
+							Find your Docker Captain
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="absolute top-0 right-0 hidden md:block">
+				{{- (resources.Get "images/home-abstract-faint.svg").Content | safe.HTML -}}
+			</div>
+		</div>
+	</main>
+	<footer class="mt-auto">{{ partialCached "footer.html" . }}</footer>
+</body>
 
-      <div
-        class="relative flex h-full items-center justify-center overflow-hidden bg-gray-100 py-8 md:h-[334px] dark:bg-gray-900"
-      >
-        <div class="w-[1200px] px-4">
-          <div class="flex max-w-full flex-col gap-8 md:max-w-[66%]">
-            <h2 class="text-2xl">Community resources</h2>
-            <p>
-              Find fellow Docker enthusiasts, engage in insightful discussions,
-              share knowledge, and collaborate on projects. Our communities
-              offer a rich online experience for developers to create valuable
-              connections that challenge and inspire!
-            </p>
-            <div class="flex flex-col gap-4 md:flex-row">
-              <a
-                href="https://forums.docker.com/"
-                class="cursor-pointer rounded-sm bg-white px-4 py-2 hover:bg-gray-50 dark:bg-gray-500 dark:text-white dark:hover:bg-gray-600"
-              >
-                Visit Docker Forum
-              </a>
-              <a
-                href="https://dockr.ly/comm-slack"
-                class="cursor-pointer rounded-sm bg-white px-4 py-2 hover:bg-gray-50 dark:bg-gray-500 dark:text-white dark:hover:bg-gray-600"
-              >
-                Join Docker Slack
-              </a>
-              <a
-                href="https://www.docker.com/community/captains/"
-                class="cursor-pointer rounded-sm bg-white px-4 py-2 hover:bg-gray-50 dark:bg-gray-500 dark:text-white dark:hover:bg-gray-600"
-              >
-                Find your Docker Captain
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="absolute top-0 right-0 hidden md:block">
-          {{- (resources.Get "images/home-abstract-faint.svg").Content | safe.HTML -}}
-        </div>
-      </div>
-    </main>
-    <footer>{{ partialCached "footer.html" . }}</footer>
-  </body>
 </html>

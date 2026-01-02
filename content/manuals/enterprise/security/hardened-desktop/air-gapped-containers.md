@@ -39,7 +39,6 @@ Some important considerations include:
 
 - The existing `proxy` setting continues to apply to Docker Desktop application traffic on the host
 - If PAC file download fails, containers block requests to target URLs
-- URL parameter format is `http://host_or_ip:port` or `https://host_or_ip:port`
 - Hostname is available for ports 80 and 443, but only IP addresses for other ports
 
 ## Prerequisites
@@ -142,6 +141,21 @@ function FindProxyForURL(url, host) {
     return "PROXY reject.docker.internal:1234";
 }
 ```
+
+### General considerations
+
+ - `FindProxyForURL` function URL parameter format is http://host_or_ip:port or https://host_or_ip:port
+ - If you have an internal container trying to access https://docs.docker.com/enterprise/security/hardened-desktop/air-gapped-containers the docker proxy service will submit docs.docker.com for the host value and https://docs.docker.com:443 for the url value to FindProxyForURL, if you are using `shExpMatch` function in your PAC file as follows:
+
+   ```console
+   if(shExpMatch(url, "https://docs.docker.com:443/enterprise/security/*")) return "DIRECT";
+   ```
+
+   `shExpMatch` function will fail, instead use:
+
+   ```console
+   if (host == docs.docker.com && url.indexOf(":443") > 0) return "DIRECT";
+   ```
 
 ### PAC file return values
 

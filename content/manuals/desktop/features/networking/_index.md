@@ -61,7 +61,7 @@ For example, with `docker run -p 80:80 nginx`:
 - Inside the VM, the connection is routed to the container’s internal IP address and port, for example `172.17.0.2:80`.
 - The container responds through the same path, so you can access it from your host just like any other local service.
 
-By default, `docker run -p` listens on all network interfaces (`0.0.0.0`), but you can restrict it to a specific address, such as `127.0.0.1` (localhost) or a particular network adapter.
+By default, `docker run -p` listens on all network interfaces (`0.0.0.0`), but you can restrict it to a specific address, such as `127.0.0.1` (`localhost`) or a particular network adapter. This behavior can be modified to bind to `localhost` by default in [Docker Desktop's network settings](/manuals/desktop/settings-and-maintenance/settings.md#network)
 
 Host firewalls can permit or deny inbound connections by filtering on `com.docker.backend`.
 

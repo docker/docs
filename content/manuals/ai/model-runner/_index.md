@@ -6,7 +6,7 @@ params:
     group: AI
 weight: 30
 description: Learn how to use Docker Model Runner to manage and run AI models.
-keywords: Docker, ai, model runner, docker desktop, docker engine, llm
+keywords: Docker, ai, model runner, docker desktop, docker engine, llm, openai, llama.cpp, vllm, cpu, nvidia, cuda, amd, rocm, vulkan
 aliases:
   - /desktop/features/model-runner/
   - /model-runner/
@@ -34,7 +34,8 @@ with AI models locally.
 
 - [Pull and push models to and from Docker Hub](https://hub.docker.com/u/ai)
 - Serve models on OpenAI-compatible APIs for easy integration with existing apps
-- Package GGUF files as OCI Artifacts and publish them to any Container Registry
+- Support for both llama.cpp and vLLM inference engines (vLLM currently supported on Linux x86_64/amd64 with NVIDIA GPUs only)
+- Package GGUF and Safetensors files as OCI Artifacts and publish them to any Container Registry
 - Run and interact with AI models directly from the command line or from the Docker Desktop GUI
 - Manage local models and display logs
 - Display prompt and response details
@@ -68,8 +69,8 @@ Windows(arm64):
 
 Docker Engine only:
 
-- Linux CPU & Linux NVIDIA
-- NVIDIA drivers 575.57.08+
+- Supports CPU, NVIDIA (CUDA), AMD (ROCm), and Vulkan backends
+- Requires NVIDIA driver 575.57.08+ when using NVIDIA GPUs
 
 {{< /tab >}}
 {{</tabs >}}
@@ -82,6 +83,8 @@ unload when not in use to optimize resources. Because models can be large, the
 initial pull may take some time. After that, they're cached locally for faster
 access. You can interact with the model using
 [OpenAI-compatible APIs](api-reference.md).
+
+Docker Model Runner supports both [llama.cpp](https://github.com/ggerganov/llama.cpp) and [vLLM](https://github.com/vllm-project/vllm) as inference engines, providing flexibility for different model formats and performance requirements. For more details, see the [Docker Model Runner repository](https://github.com/docker/model-runner).
 
 > [!TIP]
 >
@@ -111,14 +114,9 @@ $ ln -s /Applications/Docker.app/Contents/Resources/cli-plugins/docker-model ~/.
 
 Once linked, rerun the command.
 
-### No consistent digest support in Model CLI
-
-The Docker Model CLI currently lacks consistent support for specifying models by image digest. As a temporary workaround, you should refer to models by name instead of digest.
-
 ## Share feedback
 
-Thanks for trying out Docker Model Runner. Give feedback or report any bugs
-you may find through the **Give feedback** link next to the **Enable Docker Model Runner** setting.
+Thanks for trying out Docker Model Runner. To report bugs or request features, [open an issue on GitHub](https://github.com/docker/model-runner/issues). You can also give feedback through the **Give feedback** link next to the **Enable Docker Model Runner** setting.
 
 ## Next steps
 

@@ -1106,7 +1106,7 @@ paths:
         Updates the immutable tags configuration for this repository.
         
         **Only users with administrative privileges for the repository can modify these settings.**
-      tags: 
+      tags:
         - repositories
       security:
         - bearerAuth: []
@@ -3213,6 +3213,10 @@ components:
             - repo:read
           items:
             type: string
+        expires_at:
+          type: string
+          format: date-time
+          example: "2021-10-28T18:30:19.520861Z"
     createAccessTokenRequest:
       type: object
       required:

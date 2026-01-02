@@ -1,0 +1,67 @@
+command: docker model start-runner
+short: Start Docker Model Runner (Docker Engine only)
+long: |-
+    This command starts the Docker Model Runner without pulling container images. Use this command to start the runner when you already have the required images locally.
+
+    For the first-time setup or to ensure you have the latest images, use `docker model install-runner` instead.
+usage: docker model start-runner
+pname: docker model
+plink: docker_model.yaml
+options:
+    - option: backend
+      value_type: string
+      description: 'Specify backend (llama.cpp|vllm). Default: llama.cpp'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: debug
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: do-not-track
+      value_type: bool
+      default_value: "false"
+      description: Do not track models usage in Docker Model Runner
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: gpu
+      value_type: string
+      default_value: auto
+      description: Specify GPU support (none|auto|cuda|rocm|musa|cann)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: port
+      value_type: uint16
+      default_value: "0"
+      description: |
+        Docker container port for Docker Model Runner (default: 12434 for Docker Engine, 12435 for Cloud mode)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

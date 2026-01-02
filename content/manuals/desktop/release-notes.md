@@ -30,6 +30,107 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.55.0
+
+{{< release-date date="2025-12-16" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.55.0" build_path="/213807/" >}}
+
+### Updates
+
+- [Docker Engine v29.1.3](https://docs.docker.com/engine/release-notes/29/#2913)
+- [cagent v1.15.1](https://github.com/docker/cagent/releases/tag/v1.15.1)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue that caused Docker Desktop to get stuck during startup.
+- Improved the error message when the `daemon.json` is invalid.
+- Fixed performance issues on every keystroke within a long Ask Gordon session.
+
+> [!IMPORTANT]
+>
+> Wasm workloads will be deprecated and removed in a future Docker Desktop release.
+
+## 4.54.0
+
+{{< release-date date="2025-12-04" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.54.0" build_path="/212467/" >}}
+
+### New
+
+- Added support for vLLM in Docker Model Runner on Windows with WSL2 and NVIDIA GPUs.
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Fixed a bug where `/dev/shm` did not have enough permission for containers to write into. Fixes [docker/for-mac#7804](https://github.com/docker/for-mac/issues/7804). 
+
+### Upgrades
+
+- [Docker Buildx v0.30.1](https://github.com/docker/buildx/releases/tag/v0.30.1)
+- [Docker Engine v29.1.2](https://docs.docker.com/engine/release-notes/29/#2912)
+- [Runc v1.3.4](https://github.com/opencontainers/runc/releases/tag/v1.3.4)
+- [Docker Model Runner CLI v1.0.2](https://github.com/docker/model-runner/releases/tag/cmd%2Fcli%2Fv1.0.2)
+
+### Security 
+
+- Added a security patch to address [CVE-2025-13743](https://www.cve.org/cverecord?id=CVE-2025-13743) where Docker Desktop diagnostics bundles were found to include expired Hub PATs in log output due to error object serialization. 
+
+## 4.53.0
+
+{{< release-date date="2025-11-27" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.53.0" build_path="/211793/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where the Support Diagnostics tooling inadvertently captured expired Docker Hub authorization bearer tokens.
+
+### Security 
+
+- Added security patches to address CVEs [2025-52565](https://github.com/opencontainers/runc/security/advisories/GHSA-9493-h29p-rfm2), [2025-52881](https://github.com/opencontainers/runc/security/advisories/GHSA-cgrx-mc8f-2prm), and [2025-31133](https://github.com/opencontainers/runc/security/advisories/GHSA-qw9x-cqr3-wc7r) when using [Enhanced Container Isolation](https://docs.docker.com/enterprise/security/hardened-desktop/enhanced-container-isolation). 
+
+## 4.52.0
+
+{{< release-date date="2025-11-20" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.52.0" build_path="/210994/" >}}
+
+### New
+
+- Added new port binding settings to Docker Desktop. This can also be controlled by administrators via Settings Management using the `admin-settings.json` file.
+- Added a new Docker Model Runner command. With `docker model purge` you can remove all your models.
+
+### Upgrades
+
+- [Docker Engine v29.0.0](/manuals/engine/release-notes/29.md#2900)
+- [Docker Model Runner v1.0.3](https://github.com/docker/model-runner/releases/tag/v1.0.3)
+- [Docker Model Runner CLI v1.0.0](https://github.com/docker/model-runner/releases/tag/cmd%2Fcli%2Fv1.0.0)
+- Docker MCP plugin `v0.28.0`
+
+### Bug fixes and enhancements
+
+#### For all platforms 
+
+- Docker MCP Toolkit improvements:
+   - Amazon Q client support
+   - OAuth DCR (Dynamic Client Registration) with Docker Engine
+   - Create MCP profiles using the CLI
+- Docker Model Runner improvements:
+   - You can now skip the `/engines` prefix for [Docker Model Runner's OpenAI API endpoint](/manuals/ai/model-runner/api-reference.md#rest-api-examples) `curl http://localhost:12434/v1/models`.
+   - You can now skip the `ai/` prefix for the models [published on Docker Hub with](https://hub.docker.com/u/ai) `docker model pull`.
+   - Downloads are now resumed when they get interrupted.
+
+#### For Windows
+
+- Fixed an issue with Kerberos/NTLM proxy sign in.
+
 ## 4.51.0
 
 {{< release-date date="2025-11-13" >}}
@@ -73,6 +174,8 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Docker Desktop now detects and attempts to avoid clashes between the "Docker subnet" and physical networks using RFC1918 addresses. For example if the host has a non-default route which overlaps with `192.168.65.0/24` then an alternative network will be chosen automatically. You can still override the choice as before via Docker Desktop settings and admin settings.
 - Docker Desktop no longer treats Stargz Snapshotter failures as fatal. If a failure occurs, Docker Desktop continues to run without the Stargz Snapshotter.
+- Ask Gordon no longer displays images with user provided URLs.
+- Ask Gordon now asks for confirmation before running all built-in and all user added MCP tools.
 
 ## 4.49.0
 

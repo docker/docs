@@ -3,8 +3,8 @@ title: None network driver
 description: How to isolate the networking stack of a container using the none driver
 keywords: network, none, standalone
 aliases:
-- /network/none/
-- /network/drivers/none/
+  - /network/none/
+  - /network/drivers/none/
 ---
 
 If you want to completely isolate the networking stack of a container, you can
@@ -32,8 +32,8 @@ $ docker run --rm --network none --name no-net-alpine alpine:latest ip addr show
 
 ## Next steps
 
-- Go through the [host networking tutorial](/manuals/engine/network/tutorials/host.md)
 - Learn about [networking from the container's point of view](../_index.md)
+- Learn about [host networking](host.md)
 - Learn about [bridge networks](bridge.md)
 - Learn about [overlay networks](overlay.md)
 - Learn about [Macvlan networks](macvlan.md)

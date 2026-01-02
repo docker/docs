@@ -10,3 +10,9 @@ public
 resources
 static/pagefind
 tmp
+# Binary installed by cagent-action in CI
+cagent
+# cagent tmp files
+.cagent
+.upstream-issues.md
+.validation.log

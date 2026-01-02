@@ -1,18 +1,19 @@
 ---
 title: IPvlan network driver
-description: All about using IPvlan to make your containers appear like physical machines
+description:
+  All about using IPvlan to make your containers appear like physical machines
   on the network
 keywords: network, ipvlan, l2, l3, standalone
 aliases:
-- /network/ipvlan/
-- /network/drivers/ipvlan/
+  - /network/ipvlan/
+  - /network/drivers/ipvlan/
 ---
 
 The IPvlan driver gives users total control over both IPv4 and IPv6 addressing.
 The VLAN driver builds on top of that in giving operators complete control of
 layer 2 VLAN tagging and even IPvlan L3 routing for users interested in underlay
 network integration. For overlay deployments that abstract away physical constraints
-see the [multi-host overlay](/manuals/engine/network/tutorials/overlay.md) driver.
+see the [multi-host overlay](overlay.md) driver.
 
 IPvlan is a new twist on the tried and true network virtualization technique.
 The Linux implementations are extremely lightweight because rather than using
@@ -52,7 +53,7 @@ The following table describes the driver-specific options that you can pass to
   `docker network create` all together and the driver will create a `dummy`
   interface that will enable local host connectivity to perform the examples.
 - Kernel requirements:
-    - IPvlan Linux kernel v4.2+ (support for earlier kernels exists but is buggy). To check your current kernel version, use `uname -r`
+  - IPvlan Linux kernel v4.2+ (support for earlier kernels exists but is buggy). To check your current kernel version, use `uname -r`
 
 ### IPvlan L2 mode example usage
 
@@ -292,11 +293,11 @@ as parent interfaces. Example mappings from NetOps to Docker network commands
 are as follows:
 
 - VLAN: 10, Subnet: 172.16.80.0/24, Gateway: 172.16.80.1
-    - `--subnet=172.16.80.0/24 --gateway=172.16.80.1 -o parent=eth0.10`
+  - `--subnet=172.16.80.0/24 --gateway=172.16.80.1 -o parent=eth0.10`
 - VLAN: 20, IP subnet: 172.16.50.0/22, Gateway: 172.16.50.1
-    - `--subnet=172.16.50.0/22 --gateway=172.16.50.1 -o parent=eth0.20`
+  - `--subnet=172.16.50.0/22 --gateway=172.16.50.1 -o parent=eth0.20`
 - VLAN: 30, Subnet: 10.1.100.0/16, Gateway: 10.1.100.1
-    - `--subnet=10.1.100.0/16 --gateway=10.1.100.1 -o parent=eth0.30`
+  - `--subnet=10.1.100.0/16 --gateway=10.1.100.1 -o parent=eth0.30`
 
 ### IPvlan L3 mode example
 

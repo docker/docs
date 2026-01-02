@@ -110,7 +110,7 @@ grid:
       - text: "Overview"
         url: "/subscription/"
       - text: "Subscriptions and features"
-        url: "/subscription/details/"
+        url: "https://www.docker.com/pricing/"
       - text: "Change subscription"
         url: "/subscription/change/"
   - title: Billing

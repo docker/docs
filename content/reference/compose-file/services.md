@@ -38,7 +38,7 @@ services:
       - "8080:80"
 
   db:
-    image: postgres:13
+    image: postgres:18
     environment:
       POSTGRES_USER: example
       POSTGRES_DB: exampledb
@@ -433,7 +433,7 @@ services:
   redis:
     image: redis
   db:
-    image: postgres
+    image: postgres:18
 ```
 
 Compose guarantees dependency services have been started before
@@ -485,7 +485,7 @@ services:
   redis:
     image: redis
   db:
-    image: postgres
+    image: postgres:18
 ```
 
 Compose guarantees dependency services are started before

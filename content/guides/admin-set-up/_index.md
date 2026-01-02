@@ -5,7 +5,6 @@ summary: Get the most out of Docker by streamlining workflows, standardizing dev
 description: Learn how to onboard your company and take advantage of all of the Docker products and features.
 tags: [admin]
 params:
-  featured: true
   time: 20 minutes
   image:
   resource_links:
@@ -24,7 +23,7 @@ params:
     - title: Image Access Management
       url: /security/for-admins/hardened-desktop/image-access-management/
     - title: Docker subscription information
-      url: /subscription/details/
+      url: "https://www.docker.com/pricing/"
 ---
 
 Docker's tools provide a scalable, secure platform that empowers your

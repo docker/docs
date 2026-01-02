@@ -369,6 +369,8 @@
 # Docker Hardened Images (DHI)
 "/dhi/how-to/customize/":
   - /go/dhi-customization/
+"/dhi/how-to/scan/#scan-a-dhi-using-grype":
+  - /go/dhi-grype/
 
 "/dhi/how-to/customize/#create-an-oci-artifact-image":
   - /go/dhi-customization-artifacts/

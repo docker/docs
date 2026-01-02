@@ -10,18 +10,9 @@ usage: docker model run MODEL [PROMPT]
 pname: docker model
 plink: docker_model.yaml
 options:
-    - option: backend
-      value_type: string
-      description: Specify the backend to use (llama.cpp, openai)
-      deprecated: false
-      hidden: true
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
     - option: color
       value_type: string
-      default_value: auto
+      default_value: "no"
       description: Use colored output (auto|yes|no)
       deprecated: false
       hidden: false
@@ -33,6 +24,17 @@ options:
       value_type: bool
       default_value: "false"
       description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: detach
+      shorthand: d
+      value_type: bool
+      default_value: "false"
+      description: Load the model in the background without interaction
       deprecated: false
       hidden: false
       experimental: false
@@ -72,12 +74,18 @@ examples: |-
     Output:
 
     ```console
-    Interactive chat mode started. Type '/bye' to exit.
     > Hi
     Hi there! It's SmolLM, AI assistant. How can I help you today?
     > /bye
-    Chat session ended.
     ```
+
+    ### Pre-load a model
+
+    ```console
+    docker model run --detach ai/smollm2
+    ```
+
+    This loads the model into memory without interaction, ensuring maximum performance for subsequent requests.
 deprecated: false
 hidden: false
 experimental: false

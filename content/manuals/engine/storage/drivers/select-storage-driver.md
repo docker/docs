@@ -2,7 +2,7 @@
 title: Select a storage driver
 weight: 10
 description: Learn how to select the proper storage driver for your container.
-keywords: container, storage, driver, btrfs, zfs, overlay, overlay2
+keywords: container, storage, driver, btrfs, zfs, overlay, overlay2, containerd
 aliases:
   - /storage/storagedriver/selectadriver/
   - /storage/storagedriver/select-storage-driver/
@@ -12,6 +12,14 @@ Ideally, very little data is written to a container's writable layer, and you
 use Docker volumes to write data. However, some workloads require you to be able
 to write to the container's writable layer. This is where storage drivers come
 in.
+
+> [!NOTE]
+> Docker Engine 29.0 and later uses the
+> [containerd image store](../containerd.md) by default for fresh installations.
+> If you upgraded from an earlier version, your daemon continues using the
+> classic storage drivers described on this page. You can migrate to the
+> containerd image store following the instructions in the
+> [containerd image store](../containerd.md) documentation.
 
 Docker supports several storage drivers, using a pluggable architecture. The
 storage driver controls how images and containers are stored and managed on your
@@ -25,14 +33,15 @@ driver with the best overall performance and stability in the most usual scenari
 > storage driver is windowsfilter. For more information, see
 > [windowsfilter](windowsfilter-driver.md).
 
-The Docker Engine provides the following storage drivers on Linux:
+The Docker Engine provides the following storage backends on Linux:
 
-| Driver            | Description                                                                                                                                                                                                                                                                                                                                          |
-| :---------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `overlay2`        | `overlay2` is the preferred storage driver for all currently supported Linux distributions, and requires no extra configuration.                                                                                                                                                                                                                     |
-| `fuse-overlayfs`  | `fuse-overlayfs`is preferred only for running Rootless Docker on an old host that does not provide support for rootless `overlay2`. The `fuse-overlayfs` driver does not need to be used since Linux kernel 5.11, and `overlay2` works even in rootless mode. Refer to the [rootless mode documentation](/manuals/engine/security/rootless.md) for details. |
-| `btrfs` and `zfs` | The `btrfs` and `zfs` storage drivers allow for advanced options, such as creating "snapshots", but require more maintenance and setup. Each of these relies on the backing filesystem being configured correctly.                                                                                                                                   |
-| `vfs`             | The `vfs` storage driver is intended for testing purposes, and for situations where no copy-on-write filesystem can be used. Performance of this storage driver is poor, and is not generally recommended for production use.                                                                                                                        |
+| Backend                     | Description                                                                                                                                                                                                                                                |
+| :-------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `containerd` (snapshotters) | The default for Docker Engine 29.0 and later. Uses containerd snapshotters for image storage. Supports multi-platform images and attestations. See [containerd image store](../containerd.md) for details.                                                 |
+| `overlay2`                  | Classic storage driver. Most widely compatible across all currently supported Linux distributions, and requires no extra configuration.                                                                                                                    |
+| `fuse-overlayfs`            | Preferred only for running Rootless Docker on hosts that don't support rootless `overlay2`. Not needed since Linux kernel 5.11, as `overlay2` works in rootless mode. See [rootless mode documentation](/manuals/engine/security/rootless.md) for details. |
+| `btrfs` and `zfs`           | Allow for advanced options, such as creating snapshots, but require more maintenance and setup. Each relies on the backing filesystem being configured correctly.                                                                                          |
+| `vfs`                       | Intended for testing purposes, and for situations where no copy-on-write filesystem can be used. Performance is poor, and not generally recommended for production use.                                                                                    |
 
 <!-- markdownlint-disable reference-links-images -->
 
@@ -56,32 +65,35 @@ the final decision.
 ## Supported storage drivers per Linux distribution
 
 > [!NOTE]
->
 > Modifying the storage driver by editing the daemon configuration file isn't
-> supported on Docker Desktop. Only the default `overlay2` driver or the
-> [containerd storage](/manuals/desktop/features/containerd.md) are supported. The
-> following table is also not applicable for the Docker Engine in rootless
-> mode. For the drivers available in rootless mode, see the [Rootless mode
-> documentation](/manuals/engine/security/rootless.md).
+> supported on Docker Desktop. Docker Desktop uses the
+> [containerd image store](/manuals/desktop/features/containerd.md) by default
+> (version 4.34 and later for clean installs). The following table is also not
+> applicable for the Docker Engine in rootless mode. For the drivers available
+> in rootless mode, see the
+> [Rootless mode documentation](/manuals/engine/security/rootless.md).
 
-Your operating system and kernel may not support every storage driver. For
-example, `btrfs` is only supported if your system uses `btrfs` as storage. In
-general, the following configurations work on recent versions of the Linux
+This section applies to classic storage drivers only. If you're using the
+containerd image store (the default for Docker Engine 29.0+), see the
+[containerd image store documentation](../containerd.md) instead.
+
+Your operating system and kernel may not support every classic storage driver.
+For example, `btrfs` is only supported if your system uses `btrfs` as storage.
+In general, the following configurations work on recent versions of the Linux
 distribution:
 
-| Linux distribution   | Recommended storage drivers  | Alternative drivers  |
-| :------------------- | :--------------------------- | :------------------- |
-| Ubuntu               | `overlay2`                   | `zfs`, `vfs`         |
-| Debian               | `overlay2`                   | `vfs`                |
-| CentOS               | `overlay2`                   | `zfs`, `vfs`         |
-| Fedora               | `overlay2`                   | `zfs`, `vfs`         |
-| SLES 15              | `overlay2`                   | `vfs`                |
-| RHEL                 | `overlay2`                   | `vfs`                |
+| Linux distribution   | Default classic driver  | Alternative drivers  |
+| :------------------- | :---------------------- | :------------------- |
+| Ubuntu               | `overlay2`              | `zfs`, `vfs`         |
+| Debian               | `overlay2`              | `vfs`                |
+| CentOS               | `overlay2`              | `zfs`, `vfs`         |
+| Fedora               | `overlay2`              | `zfs`, `vfs`         |
+| SLES 15              | `overlay2`              | `vfs`                |
+| RHEL                 | `overlay2`              | `vfs`                |
 
-When in doubt, the best all-around configuration is to use a modern Linux
-distribution with a kernel that supports the `overlay2` storage driver, and to
-use Docker volumes for write-heavy workloads instead of relying on writing data
-to the container's writable layer.
+For systems using classic storage drivers, `overlay2` provides broad
+compatibility across Linux distributions. Use Docker volumes for write-heavy
+workloads instead of relying on writing data to the container's writable layer.
 
 The `vfs` storage driver is usually not the best choice, and primarily intended
 for debugging purposes in situations where no other storage-driver is supported.

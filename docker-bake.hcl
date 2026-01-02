@@ -40,7 +40,7 @@ target "release" {
 }
 
 group "validate" {
-  targets = ["lint", "vale", "test", "unused-media", "test-go-redirects", "dockerfile-lint", "path-warnings", "validate-vendor"]
+  targets = ["lint", "test", "unused-media", "test-go-redirects", "dockerfile-lint", "path-warnings", "validate-vendor"]
 }
 
 target "test" {

@@ -1,0 +1,11 @@
+command: docker pass get
+short: Get a secret
+usage: docker pass get NAME
+pname: docker pass
+plink: docker_pass.yaml
+deprecated: false
+hidden: false
+experimental: true
+experimentalcli: true
+kubernetes: false
+swarm: false

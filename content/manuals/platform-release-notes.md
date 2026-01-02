@@ -24,7 +24,7 @@ This page provides details on new features, enhancements, known issues, and bug 
 ### New
 
 - New Docker subscriptions are now available. For more information, see [Docker
-  subscriptions and features](/manuals/subscription/details.md) and [Announcing
+  subscriptions and features](https://www.docker.com/pricing/) and [Announcing
   Upgraded Docker Plans: Simpler, More Value, Better Development and
   Productivity](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
 
