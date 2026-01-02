@@ -11,6 +11,9 @@ on:
         required: false
         default: ""
   pull_request:
+    paths:
+      - '.github/workflows/sync-cli-docs.yml'
+      - 'hack/sync-cli-docs.sh'
 
 permissions:
   contents: write
