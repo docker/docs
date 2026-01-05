@@ -25,7 +25,10 @@ Running PostgreSQL in Docker requires understanding one critical concept: contai
 Run PostgreSQL immediately with this single command:
 
 ```console
-$ docker run --rm --name postgres-dev -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -d postgres:18
+$ docker run --rm --name postgres-dev \
+  -e POSTGRES_PASSWORD=mysecretpassword \
+  -p 5432:5432 \
+  -d postgres:18
 ```
 
 ### Understanding the flags
@@ -81,7 +84,44 @@ $ docker exec postgres-dev psql -U postgres -c "\l" | grep testdb
 
 Your `testdb` database vanished because the new container started with a fresh filesystem. This is expected behavior—and exactly why volumes exist.
 
-## Named Volumes (Recommended Approach)
+## Named Volumes
+
+Named volumes are Docker-managed storage locations that persist independently of containers. Docker handles the filesystem location, permissions, and lifecycle.
+
+Create a container with a named volume:
+
+```console
+$ docker run --rm --name postgres-dev \
+  -e POSTGRES_PASSWORD=mysecretpassword \
+  -p 5432:5432 \
+  -v postgres_data:/var/lib/postgresql \
+  -d postgres:18
+```
+
+The `-v postgres_data:/var/lib/postgresql` flag mounts a named volume called `postgres_data` to PostgreSQL's data directory. If the volume doesn't exist, Docker creates it automatically.
+
+> **Note:** PostgreSQL 18+ stores data in a version-specific subdirectory under `/var/lib/postgresql`. Mounting at this level (rather than `/var/lib/postgresql/data`) allows for easier upgrades using `pg_upgrade --link`.
+
+### Verify persistence works
+
+```console
+$ docker exec postgres-dev psql -U postgres -c "CREATE DATABASE testdb;"
+CREATE DATABASE
+
+$ docker stop postgres-dev
+postgres-dev
+
+$ docker run --rm --name postgres-dev \
+  -e POSTGRES_PASSWORD=mysecretpassword \
+  -p 5432:5432 \
+  -v postgres_data:/var/lib/postgresql \
+  -d postgres:18
+
+$ docker exec postgres-dev psql -U postgres -c "\l" | grep testdb
+ testdb    | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           |
+```
+
+The database survived because the volume preserved it.
 
 ## Bind Mounts (Alternative)
 
