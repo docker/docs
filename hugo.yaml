@@ -342,10 +342,3 @@ module:
         - source: docs/generator/reference
           target: data/mcp-cli
           includeFiles: "*.yaml"
-
-    # Scout CLI plugin (public dist repo)
-    - path: github.com/docker/scout-cli
-      mounts:
-        - source: docs
-          target: data/scout-cli
-          includeFiles: "*.yaml"

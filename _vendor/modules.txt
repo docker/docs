@@ -5,4 +5,3 @@
 # github.com/docker/compose/v5 v5.0.1
 # github.com/docker/model-runner/cmd/cli v1.0.3
 # github.com/docker/mcp-gateway v0.22.0
-# github.com/docker/scout-cli v1.18.4
