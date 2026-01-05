@@ -78,7 +78,7 @@ $ docker model install-runner --backend vllm --gpu cuda
 Check it's correctly installed:
 
 ```console
-$ docker run status
+$ docker model status
 Docker Model Runner is running
 
 Status:
