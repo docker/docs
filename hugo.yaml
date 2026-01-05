@@ -15,9 +15,9 @@ taxonomies:
 # Remove the /manuals prefix for content in the manuals section
 permalinks:
   page:
-    manuals: /:sections[1:]/:slugorfilename/
+    manuals: /:sections[1:]/:slugorcontentbasename/
   section:
-    manuals: /:sections[1:]/:slugorfilename/
+    manuals: /:sections[1:]/
 
 markup:
   tableOfContents:
