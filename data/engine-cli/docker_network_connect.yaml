@@ -41,7 +41,8 @@ options:
       kubernetes: false
       swarm: false
     - option: ip
-      value_type: string
+      value_type: ip
+      default_value: <nil>
       description: IPv4 address (e.g., `172.30.100.104`)
       details_url: '#ip'
       deprecated: false
@@ -51,7 +52,8 @@ options:
       kubernetes: false
       swarm: false
     - option: ip6
-      value_type: string
+      value_type: ip
+      default_value: <nil>
       description: IPv6 address (e.g., `2001:db8::33`)
       deprecated: false
       hidden: false
@@ -70,7 +72,7 @@ options:
       kubernetes: false
       swarm: false
     - option: link-local-ip
-      value_type: stringSlice
+      value_type: ipSlice
       default_value: '[]'
       description: Add a link-local address for the container
       deprecated: false
