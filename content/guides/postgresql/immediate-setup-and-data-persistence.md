@@ -123,8 +123,65 @@ $ docker exec postgres-dev psql -U postgres -c "\l" | grep testdb
 
 The database survived because the volume preserved it.
 
+### Managing volumes
+
+List all volumes:
+
+```console
+$ docker volume ls --filter name=postgres_data
+DRIVER    VOLUME NAME
+local     postgres_data
+```
+
+Inspect a volume to see its details:
+
+```console
+$ docker volume inspect postgres_data
+[
+    {
+        "CreatedAt": "2025-01-05T10:30:00Z",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/postgres_data/_data",
+        "Name": "postgres_data",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+```
+
+Remove an unused volume (warning: this deletes all data):
+
+```console
+$ docker volume rm postgres_data
+```
+
 ## Bind Mounts (Alternative)
 
-## Verifying Persistence
+Bind mounts map a specific host directory to a container path. Unlike named volumes, you control exactly where data lives on the host filesystem.
+
+```console
+$ mkdir -p ~/postgres-data
+
+$ docker run --rm --name postgres-dev \
+  -e POSTGRES_PASSWORD=mysecretpassword \
+  -p 5432:5432 \
+  -v ~/postgres-data:/var/lib/postgresql \
+  -d postgres:18
+```
+
+### When to use bind mounts
+
+Bind mounts are useful when you need direct filesystem access to the data directory for backup scripts that read files directly, when integrating with host-level monitoring tools, or when specific permission requirements exist. For most development and production scenarios, named volumes are simpler and less error-prone.
+
+### Common bind mount issues
+
+Permission errors are the most frequent problem with bind mounts. PostgreSQL runs as user `postgres` (UID 999) inside the container. If your host directory has restrictive permissions, the container fails to start.
+
+Check logs if the container exits immediately:
+
+```console
+$ docker logs postgres-dev
+```
 
 ## Docker Compose Version
