@@ -19,6 +19,9 @@ permissions:
   contents: write
   pull-requests: write
 
+env:
+  BRANCH_NAME: "bot/sync-cli-docs"
+
 jobs:
   sync-cli-docs:
     runs-on: ubuntu-24.04
@@ -54,10 +57,10 @@ jobs:
       -
         name: Create update branch
         id: create-branch
+        env:
+          BRANCH_NAME: ${{ env.BRANCH_NAME }}
         run: |
-          BRANCH_NAME="bot/sync-cli-docs-$(date +%Y%m%d-%H%M%S)"
           git checkout -b "$BRANCH_NAME"
-          echo "branch_name=$BRANCH_NAME" >> "$GITHUB_OUTPUT"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       -
@@ -84,12 +87,13 @@ jobs:
         name: Show PR
         if: steps.sync.outputs.changes == 'true'
         run: |
-          git show "${{ steps.create-branch.outputs.branch_name }}"
+          git show "${{ env.BRANCH_NAME }}"
       -
-        name: Create Pull Request
+        name: Create or update Pull Request
         if: steps.sync.outputs.changes == 'true' && github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
+          BRANCH_NAME: ${{ env.BRANCH_NAME }}
           PR_TITLE: "cli: sync docs with cli ${{ steps.get-version.outputs.version }}"
           PR_BODY: |
             ## Summary
@@ -104,27 +108,19 @@ jobs:
             > **Reviewer:** Please close and reopen this PR to trigger CI checks.
             > See: https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow#triggering-a-workflow-from-a-workflow
         run: |
-          CLI_VERSION="${{ steps.get-version.outputs.version }}"
-
-          # Check for existing PR
-          EXISTING_PR=$(gh pr list --state open --json title,url --jq ".[] | select(.title | contains(\"$PR_TITLE\")) | .url" | head -n 1)
+          # Check for existing PR from this branch
+          EXISTING_PR=$(gh pr list --state open --head "$BRANCH_NAME" --json url --jq ".[0].url")
 
           if [ -n "$EXISTING_PR" ]; then
-            echo "PR already exists for CLI version $CLI_VERSION" >> "$GITHUB_STEP_SUMMARY"
-            echo "Existing PR: $EXISTING_PR" >> "$GITHUB_STEP_SUMMARY"
-
-            # Add a bump comment
-            gh pr comment "$EXISTING_PR" --body "🔄 @engine PTAL"
-            echo "Added bump comment to PR" >> "$GITHUB_STEP_SUMMARY"
-
-            exit 0
+            echo "Updating existing PR: $EXISTING_PR" >> "$GITHUB_STEP_SUMMARY"
+            git push -u origin "$BRANCH_NAME" --force
+            gh pr edit "$EXISTING_PR" --title "$PR_TITLE" --body "$PR_BODY"
+          else
+            echo "Creating new PR" >> "$GITHUB_STEP_SUMMARY"
+            git push -u origin "$BRANCH_NAME"
+            gh pr create \
+              --title "$PR_TITLE" \
+              --body "$PR_BODY" \
+              --base main \
+              --head "$BRANCH_NAME"
           fi
-
-          echo "Creating PR for CLI version $CLI_VERSION" >> "$GITHUB_STEP_SUMMARY"
-
-          git push -u origin "${{ steps.create-branch.outputs.branch_name }}"
-          gh pr create \
-            --title "$PR_TITLE" \
-            --body "$PR_BODY" \
-            --base main \
-            --head "${{ steps.create-branch.outputs.branch_name }}"
