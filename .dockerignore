@@ -3,6 +3,7 @@
 .gitignore
 .idea
 .hugo_build.lock
+hugo_stats.json
 _releaser
 CONTRIBUTING.md
 Dockerfile
