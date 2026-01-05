@@ -54,19 +54,17 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For Windows
 
+- Fixed a bug on Windows where removing the state directory would fail because log files were still open.
+- Fixed installations from the Microsoft Store wrongly advertizing a new update.
 - Fixed a crash when running `/sbin/ldconfig` in `ubuntu:22.04` ARM64 containers by upgrading QEMU from 8.1.5 to 10.0.4. This resolves a known issue reported in [docker/for-win#15004](https://github.com/docker/for-win/issues/15004).
 
   > [!NOTE]
   >
   > When running under ARM64 emulation, some `amd64` Go binaries built with older Go versions may still segfault. To avoid this, rebuild affected binaries using Go 1.25.4 or later. For details, see [golang/go#69255](https://github.com/golang/go/issues/69255) and the corresponding [Go commit](https://github.com/golang/go/commit/bf95b767394eb5643265f44c7b98bdbb85b897ce).
 
-- Fixed a bug on Windows where removing the state directory would fail because log files were still open.
-- Fixed installations from the Microsoft Store wrongly advertizing a new update.
-
 #### For Linux
 
 - Fixed Kubernetes `hostPath` volume mounts failing on Linux hosts. Fixes [docker/desktop-linux#12](https://github.com/docker/desktop-linux/issues/12).
-
 
 ## 4.55.0
 
