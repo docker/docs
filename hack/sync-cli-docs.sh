@@ -17,21 +17,10 @@ main() {
     (set -e; cd "$worktree_dir"; make -f docker.Makefile yamldocs || { printf "::error::Failed to generate YAML docs!\n"; exit 1; }) || return $?
     cp "$worktree_dir"/docs/yaml/*.yaml ./data/engine-cli/
 
-    if git diff --quiet "./data/engine-cli/*.yaml"; then
-        printf "\e[32m✅ Already up to date\e[0m\n"
-        return 100
-    fi
-
-    echo -e "ℹ️ Changes detected:"
-    git diff --stat "./data/engine-cli/*.yaml" || true
-
     NICE_GIT_REF=$(cd "$worktree_dir" && git describe --always --dirty) || return $?
+    echo "git_ref=$NICE_GIT_REF" >> "${GITHUB_OUTPUT:-/dev/stdout}"
 
-    git add "./data/engine-cli/*.yaml"
-
-    git commit -m "cli: sync docs with docker/cli $NICE_GIT_REF"
-    
-    printf "\e[32m✅ Committed changes\e[0m\n"
+    printf "\e[32m✅ Synced CLI docs from %s\e[0m\n" "$NICE_GIT_REF"
     return 0
 }
 

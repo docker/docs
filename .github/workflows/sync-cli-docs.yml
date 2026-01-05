@@ -11,6 +11,9 @@ on:
         required: false
         default: ""
   pull_request:
+    paths:
+      - '.github/workflows/sync-cli-docs.yml'
+      - 'hack/sync-cli-docs.sh'
 
 permissions:
   contents: write
@@ -49,52 +52,32 @@ jobs:
           ref: ${{ steps.get-version.outputs.version }}
           fetch-depth: 0
       -
-        name: Create update branch
-        id: create-branch
-        run: |
-          BRANCH_NAME="bot/sync-cli-docs-$(date +%Y%m%d-%H%M%S)"
-          git checkout -b "$BRANCH_NAME"
-          echo "branch_name=$BRANCH_NAME" >> "$GITHUB_OUTPUT"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      -
         name: Run sync script
         id: sync
-        run: |
-          set +e
-          ./hack/sync-cli-docs.sh HEAD cli-source
-          EXIT_CODE=$?
-          set -e
-          
-          if [ $EXIT_CODE -eq 0 ]; then
-            echo "changes=true" >> "$GITHUB_OUTPUT"
-            echo "Changes detected - syncing CLI docs" >> "$GITHUB_STEP_SUMMARY"
-          elif [ $EXIT_CODE -eq 100 ]; then
-            echo "changes=false" >> "$GITHUB_OUTPUT"
-            echo "No changes to sync - CLI docs are up to date" >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "::error::Script failed with exit code $EXIT_CODE"
-            exit $EXIT_CODE
-          fi
-
-      -
-        name: Show PR
-        if: steps.sync.outputs.changes == 'true'
-        run: |
-          git show "${{ steps.create-branch.outputs.branch_name }}"
+        run: ./hack/sync-cli-docs.sh HEAD cli-source
       -
         name: Create Pull Request
-        if: steps.sync.outputs.changes == 'true' && github.event_name != 'pull_request'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PR_BODY: |
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: bot/sync-cli-docs-${{ steps.get-version.outputs.version }}
+          base: main
+          delete-branch: true
+          add-paths: |
+            data/engine-cli/*.yaml
+          commit-message: "cli: sync docs with docker/cli ${{ steps.sync.outputs.git_ref }}"
+          title: "cli: sync docs with docker/cli"
+          body: |
             ## Summary
 
             Automated sync of CLI documentation from docker/cli repository.
+
+            **CLI version**: ${{ steps.get-version.outputs.version }}
+            **Git ref**: ${{ steps.sync.outputs.git_ref }}
+          reviewers: "@engine"
+      -
+        name: Check outputs
+        if: ${{ steps.cpr.outputs.pull-request-number }}
         run: |
-          git push -u origin "${{ steps.create-branch.outputs.branch_name }}"
-          gh pr create \
-            --title "cli: sync docs with docker/cli" \
-            --body "$PR_BODY" \
-            --base main \
-            --head "${{ steps.create-branch.outputs.branch_name }}"
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
