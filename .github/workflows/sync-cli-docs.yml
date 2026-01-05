@@ -11,6 +11,9 @@ on:
         required: false
         default: ""
   pull_request:
+    paths:
+      - '.github/workflows/sync-cli-docs.yml'
+      - 'hack/sync-cli-docs.sh'
 
 permissions:
   contents: write
@@ -65,7 +68,7 @@ jobs:
           ./hack/sync-cli-docs.sh HEAD cli-source
           EXIT_CODE=$?
           set -e
-          
+
           if [ $EXIT_CODE -eq 0 ]; then
             echo "changes=true" >> "$GITHUB_OUTPUT"
             echo "Changes detected - syncing CLI docs" >> "$GITHUB_STEP_SUMMARY"
@@ -87,14 +90,41 @@ jobs:
         if: steps.sync.outputs.changes == 'true' && github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
+          PR_TITLE: "cli: sync docs with cli ${{ steps.get-version.outputs.version }}"
           PR_BODY: |
             ## Summary
 
             Automated sync of CLI documentation from docker/cli repository.
+
+            **CLI Version:** ${{ steps.get-version.outputs.version }}
+
+            ---
+
+            > [!IMPORTANT]
+            > **Reviewer:** Please close and reopen this PR to trigger CI checks.
+            > See: https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow#triggering-a-workflow-from-a-workflow
         run: |
+          CLI_VERSION="${{ steps.get-version.outputs.version }}"
+
+          # Check for existing PR
+          EXISTING_PR=$(gh pr list --state open --json title,url --jq ".[] | select(.title | contains(\"$PR_TITLE\")) | .url" | head -n 1)
+
+          if [ -n "$EXISTING_PR" ]; then
+            echo "PR already exists for CLI version $CLI_VERSION" >> "$GITHUB_STEP_SUMMARY"
+            echo "Existing PR: $EXISTING_PR" >> "$GITHUB_STEP_SUMMARY"
+
+            # Add a bump comment
+            gh pr comment "$EXISTING_PR" --body "🔄 @engine PTAL"
+            echo "Added bump comment to PR" >> "$GITHUB_STEP_SUMMARY"
+
+            exit 0
+          fi
+
+          echo "Creating PR for CLI version $CLI_VERSION" >> "$GITHUB_STEP_SUMMARY"
+
           git push -u origin "${{ steps.create-branch.outputs.branch_name }}"
           gh pr create \
-            --title "cli: sync docs with docker/cli" \
+            --title "$PR_TITLE" \
             --body "$PR_BODY" \
             --base main \
             --head "${{ steps.create-branch.outputs.branch_name }}"
