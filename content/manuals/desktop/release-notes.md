@@ -2255,7 +2255,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### Removed
 
-- Removed Compose V1 from Docker Desktop as it has stopped receiving updates.  Compose V2 has replaced it and is now integrated into all current Docker Desktop versions. For more information, see [Migrate to Compose V2](/manuals/compose/releases/migrate.md).
+- Removed Compose V1 from Docker Desktop as it has stopped receiving updates.  Compose V2 has replaced it and is now integrated into all current Docker Desktop versions.
 
 ### Bug fixes and enhancements
 
@@ -2520,7 +2520,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Added more details to dashboard errors when a `docker-compose` action fails ([docker/for-win#13378](https://github.com/docker/for-win/issues/13378)).
 - Added support for setting HTTP proxy configuration during installation. This can be done via the `--proxy-http-mode`, `--overrider-proxy-http`, `--override-proxy-https` and `--override-proxy-exclude` installer flags in the case of installation from the CLI on [Mac](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) and [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line), or alternatively by setting the values in the `install-settings.json` file.
 - Docker Desktop now stops overriding .docker/config.json `credsStore` keys on application start. Note that if you use a custom credential helper then the CLI `docker login` and `docker logout` does not affect whether the UI is signed in to Docker or not. In general, it is better to sign into Docker via the UI since the UI supports multi-factor authentication.
-- Added a warning about the [forthcoming removal of Compose V1 from Docker Desktop](/manuals/compose/releases/migrate.md). Can be suppressed with `COMPOSE_V1_EOL_SILENT=1`.
+- Added a warning about the forthcoming removal of Compose V1 from Docker Desktop. Can be suppressed with `COMPOSE_V1_EOL_SILENT=1`.
 - In the Compose config, boolean fields in YAML should be either `true` or `false`. Deprecated YAML 1.1 values such as “on” or “no” now produce a warning.
 - Improved UI for image table, allowing rows to use more available space.
 - Fixed various bugs in port-forwarding.

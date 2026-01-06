@@ -224,7 +224,6 @@ This is an opt-out variable. When turned off it deactivates the experimental fea
 ## Unsupported in Compose V2
 
 The following environment variables have no effect in Compose V2.
-For more information, see [Migrate to Compose V2](/manuals/compose/releases/migrate.md).
 
 - `COMPOSE_API_VERSION`
     By default the API version is negotiated with the server. Use `DOCKER_API_VERSION`.  

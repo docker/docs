@@ -47,10 +47,9 @@ To address confusion around Compose CLI versioning, Compose file format versioni
 
 Compose v2 uses the Compose Specification for project definition. Unlike the prior file formats, the Compose Specification is rolling and makes the `version` top-level element optional. Compose v2 also makes use of optional specifications - [Deploy](/reference/compose-file/deploy.md), [Develop](/reference/compose-file/develop.md), and [Build](/reference/compose-file/build.md).
 
-To make [migration](/manuals/compose/releases/migrate.md) easier, Compose v2 has backwards compatibility for certain elements that have been deprecated or changed between Compose file format 2.x/3.x and the Compose Specification.
+To make migration easier, Compose v2 has backwards compatibility for certain elements that have been deprecated or changed between Compose file format 2.x/3.x and the Compose Specification.
 
 ## What's next?
 
 - [How Compose works](compose-application-model.md)
 - [Compose Specification reference](/reference/compose-file/_index.md)
-- [Migrate from Compose v1 to v2](/manuals/compose/releases/migrate.md)
