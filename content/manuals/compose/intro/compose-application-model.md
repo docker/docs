@@ -165,5 +165,5 @@ example-backend-1   example/database     "docker-entrypoint.s…"   backend     
 ## What's next 
 
 - [Try the Quickstart guide](/manuals/compose/gettingstarted.md)
-- [Explore some sample applications](/manuals/compose/support-and-feedback/samples-for-compose.md)
+- [Explore some sample applications](https://github.com/docker/awesome-compose)
 - [Familiarize yourself with the Compose Specification](/reference/compose-file/_index.md)
