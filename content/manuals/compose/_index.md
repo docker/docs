@@ -28,7 +28,7 @@ grid:
 - title: View the release notes
   description: Find out about the latest enhancements and bug fixes.
   icon: note_add
-  link: /compose/release-notes
+  link: "https://github.com/docker/compose/releases"
 - title: Explore the Compose file reference
   description: Find information on defining services, networks, and volumes for a
     Docker application.
@@ -42,10 +42,6 @@ grid:
   description: Explore general FAQs and find out how to give feedback.
   icon: help
   link: /compose/faq
-- title: Migrate to Compose v2
-  description: Learn how to migrate from Compose v1 to v2
-  icon: folder_delete
-  link: /compose/releases/migrate/
 aliases:
 - /compose/cli-command/
 - /compose/networking/swarm/
