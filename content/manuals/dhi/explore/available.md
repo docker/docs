@@ -4,6 +4,8 @@ title: Available types of Docker Hardened Images
 description: Learn about the different image types, distributions, and variants offered in the Docker Hardened Images catalog.
 keywords: docker hardened images, distroless containers, distroless images, docker distroless, alpine base image, debian base image, development containers, runtime containers, secure base image, multi-stage builds
 weight: 20
+aliases:
+  - /dhi/about/available/
 ---
 
 Docker Hardened Images (DHI) is a comprehensive catalog of

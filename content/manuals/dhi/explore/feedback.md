@@ -4,6 +4,8 @@ linkTitle: Feedback
 description: How to interact with the DHI team
 keywords: software supply chain security, feedback, bugs, discussion, questions
 weight: 50
+aliases:
+  - /dhi/about/feedback/
 ---
 
 Committed to maintaining the quality, security, and reliability of the Docker Hardened Images (DHI)

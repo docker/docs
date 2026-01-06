@@ -4,6 +4,8 @@ linktitle: Hardened images
 description: Learn what a hardened image is, why it matters, and how Docker Hardened Images offer stronger security, compliance, and operational efficiency.
 keywords: hardened container image, docker hardened images, distroless container, slsa build level 3, signed sbom, vulnerability scan, compliance-ready container
 weight: 5
+aliases:
+  - /dhi/about/what/
 ---
 
 In today’s diverse software environments, container images are often designed
