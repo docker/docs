@@ -79,7 +79,7 @@ grid:
       - text: "Try Docker Compose"
         url: "/compose/gettingstarted/"
       - text: "Release notes"
-        url: "/compose/releases/release-notes/"
+        url: "https://github.com/docker/compose/releases"
   - title: Docker Hub
     icon: device_hub
     description: |
