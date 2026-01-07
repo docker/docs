@@ -172,6 +172,12 @@
   /* code blocks with unrecognized languages*/
   pre:not(.chroma) {
     @apply overflow-x-auto p-3;
+    background: var(--tw-prose-code-bg);
+    color: var(--color-gray-700);
+    .dark & {
+      background: var(--tw-prose-code-bg-dark);
+      color: var(--color-gray-200);
+    }
   }
 
   .highlight {
