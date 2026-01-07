@@ -31,6 +31,7 @@ params:
 aliases:
   - /engine/get-started/
   - /engine/tutorials/usingdocker/
+  - /guides/getting-started/get-docker-desktop/
 ---
 
 If you're new to Docker, this section guides you through the essential resources to get started.
