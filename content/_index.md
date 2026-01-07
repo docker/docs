@@ -57,7 +57,7 @@ grid:
       - text: "Packaging your software"
         url: "/build/building/packaging/"
       - text: "Release notes"
-        url: "/build/release-notes/"
+        url: "https://github.com/docker/buildx/releases"
   - title: Docker Build Cloud
     icon: cloud
     description: |
