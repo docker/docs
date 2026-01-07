@@ -4,6 +4,8 @@ linkTitle: Responsibility overview
 description: Understand the division of responsibilities between Docker, upstream projects, and you when using Docker Hardened Images.
 keywords: software supply chain security, signed sbom, vex document, container provenance, image attestation
 weight: 46
+aliases:
+  - /dhi/about/responsibility/
 ---
 
 Docker Hardened Images (DHIs) are curated and maintained by Docker, and built

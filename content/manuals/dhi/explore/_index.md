@@ -29,6 +29,8 @@ params:
       icon: question_exchange
       description: Docker welcomes all contributions and feedback.
       link: /dhi/explore/feedback
+aliases:
+  - /dhi/about/
 ---
 
 Docker Hardened Images (DHI) are minimal, secure, and production-ready container
