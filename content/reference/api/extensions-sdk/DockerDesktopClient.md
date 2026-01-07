@@ -96,7 +96,7 @@ const containers = await window.ddClient.listContainers();
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `options` | `never` | (Optional). A JSON like `{ "all": true, "limit": 10, "size": true, "filters": JSON.stringify({ status: ["exited"] }), }` For more information about the different properties see [the Docker API endpoint documentation](https://docs.docker.com/reference/api/engine/version/v1.48/#operation/ContainerList). |
+| `options` | `never` | (Optional). A JSON like `{ "all": true, "limit": 10, "size": true, "filters": JSON.stringify({ status: ["exited"] }), }` For more information about the different properties see [the Docker API endpoint documentation](https://docs.docker.com/reference/api/engine/version/v1.52/#operation/ContainerList). |
 
 #### Returns
 
@@ -128,7 +128,7 @@ const images = await window.ddClient.listImages();
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `options` | `never` | (Optional). A JSON like `{ "all": true, "filters": JSON.stringify({ dangling: ["true"] }), "digests": true }` For more information about the different properties see [the Docker API endpoint documentation](https://docs.docker.com/reference/api/engine/version/v1.48/#tag/Image). |
+| `options` | `never` | (Optional). A JSON like `{ "all": true, "filters": JSON.stringify({ dangling: ["true"] }), "digests": true }` For more information about the different properties see [the Docker API endpoint documentation](https://docs.docker.com/reference/api/engine/version/v1.52/#tag/Image). |
 
 #### Returns
 
