@@ -72,7 +72,7 @@ To configure Image Access Management:
     - To remove a repository, in the **Repository allow list** section, select
       the trashcan icon next to it.
 
-    Repositories in the allow list are accessible to all organization members regardless of the image type restrictions configured above.
+    Repositories in the allow list are accessible to all organization members regardless of the image type restrictions configured in the previous steps.
 
 Once restrictions are applied, organization members can view the permissions page in read-only format.
 
