@@ -1,7 +1,7 @@
 ---
 title: Scan Docker Hardened Images
 linktitle: Scan an image
-description: Learn how to scan Docker Hardened Images for known vulnerabilities using Docker Scout, Grype, or Trivy.
+description: Learn how to scan Docker Hardened Images for known vulnerabilities using Docker Scout, Grype, Trivy, or Wiz.
 keywords: scan container image, docker scout cves, grype scanner, trivy container scanner, vex attestation
 weight: 46
 ---
@@ -10,27 +10,20 @@ Docker Hardened Images (DHIs) are designed to be secure by default, but like any
 container image, it's important to scan them regularly as part of your
 vulnerability management process.
 
-You can scan DHIs using the same tools you already use for standard images, such
-as Docker Scout, Grype, and Trivy. DHIs follow the same formats and standards
-for compatibility across your security tooling. Before you scan an image, the image must
-be mirrored into your organization on Docker Hub.
+## Scan with OpenVEX-compliant scanners
 
-> [!NOTE]
->
-> When you have a Docker Hardened Images Enterprise subscription, [Docker
-> Scout](/manuals/scout/_index.md) is automatically enabled at no additional
-> cost for all mirrored Docker Hardened Image repositories on Docker Hub. You
-> can view scan results directly in the Docker Hub UI under your organization's
-> repository.
+To get accurate vulnerability assessments, use scanners that support
+[VEX](/manuals/dhi/core-concepts/vex.md) attestations. The following scanners can
+read and apply the VEX statements included with Docker Hardened Images:
 
-> [!IMPORTANT]
->
-> You must authenticate to the Docker Hardened Images registry (`dhi.io`) to
-> pull images. Use your Docker ID credentials (the same username and password
-> you use for Docker Hub) when signing in. If you don't have a Docker account,
-> [create one](../../accounts/create-account.md) for free.
->
-> Run `docker login dhi.io` to authenticate.
+- [Docker Scout](#docker-scout): Automatically applies VEX statements with zero configuration
+- [Trivy](#trivy): Supports VEX through VEX Hub or local VEX files
+- [Grype](#grype): Supports VEX via the `--vex` flag
+- [Wiz](#wiz): Supports VEX attestations for accurate vulnerability filtering
+
+For guidance on choosing the right scanner and understanding the differences
+between VEX-enabled and non-VEX scanners, see [Scanner
+integrations](/manuals/dhi/explore/scanner-integrations.md).
 
 ## Docker Scout
 
@@ -43,6 +36,7 @@ To scan a Docker Hardened Image using Docker Scout, run the following
 command:
 
 ```console
+$ docker login dhi.io
 $ docker scout cves dhi.io/<image>:<tag> --platform <platform>
 ```
 
@@ -126,26 +120,6 @@ insecure images.
 For more details on using Docker Scout in CI, see [Integrating Docker
 Scout with other systems](/manuals/scout/integrations/_index.md).
 
-### Comparing Docker Scout results with other scanners
-
-Some vulnerabilities reported by other scanners may not appear in Docker Scout results. This can happen for several
-reasons:
-
-- Hardware-specific vulnerabilities: Certain vulnerabilities may only affect specific hardware architectures (for
-  example, Power10 processors) that are not relevant to Docker images, so they are not reported by Docker Scout.
-- VEX statement filtering: Docker Scout automatically applies VEX statements to document and suppress vulnerabilities
-  that do not apply to the image. If your scanner does not consume VEX statements, you may see more vulnerabilities
-  reported than what appears in Docker Scout results.
-- Temporary vulnerability identifiers: Temporary vulnerability identifiers (like `TEMP-xxxxxxx` from Debian) are not
-  surfaced by Docker Scout, as they are not intended for external reference.
-
-While Docker Scout handles this filtering automatically, you can manually configure similar filtering with other
-scanners using [Grype ignore rules](https://github.com/anchore/grype#specifying-matches-to-ignore) in its configuration
-file (`~/.grype.yaml`) or [Trivy policy exceptions](https://trivy.dev/v0.19.2/misconfiguration/policy/exceptions/) using
-REGO rules to filter out specific vulnerabilities by CVE ID, package name, fix state, or other criteria. You can also
-use VEX statements with other scanners as described in [Use VEX to filter known non-exploitable
-CVEs](#use-vex-to-filter-known-non-exploitable-cves).
-
 ## Grype
 
 [Grype](https://github.com/anchore/grype) is an open-source scanner that checks
@@ -154,27 +128,21 @@ advisories.
 
 ### Scan a DHI using Grype
 
-After installing Grype, you can scan a Docker Hardened Image by pulling
-the image and running the scan command:
+To scan a Docker Hardened Image using Grype with VEX filtering, first export
+the VEX attestation and then scan with the `--vex` flag:
 
 ```console
+$ docker login dhi.io
 $ docker pull dhi.io/<image>:<tag>
-$ grype dhi.io/<image>:<tag>
+$ docker scout vex get dhi.io/<image>:<tag> --output vex.json
+$ grype dhi.io/<image>:<tag> --vex vex.json
 ```
 
-Example output:
+The `--vex` flag applies VEX statements during the scan, filtering out known
+non-exploitable CVEs for accurate results.
 
-```plaintext
-NAME               INSTALLED              FIXED-IN     TYPE  VULNERABILITY     SEVERITY    EPSS%  RISK
-libperl5.36        5.36.0-7+deb12u2       (won't fix)  deb   CVE-2023-31484    High        79.45    1.1
-perl               5.36.0-7+deb12u2       (won't fix)  deb   CVE-2023-31484    High        79.45    1.1
-perl-base          5.36.0-7+deb12u2       (won't fix)  deb   CVE-2023-31484    High        79.45    1.1
-...
-```
-
-You should include the `--vex` flag to apply VEX statements during the scan,
-which filter out known non-exploitable CVEs. For more information, see the [VEX
-section](#use-vex-to-filter-known-non-exploitable-cves).
+For more information on exporting VEX attestations, see [Export VEX
+attestations](#export-vex-attestations).
 
 ## Trivy
 
@@ -188,6 +156,7 @@ After installing Trivy, you can scan a Docker Hardened Image by pulling
 the image and running the scan command:
 
 ```console
+$ docker login dhi.io
 $ docker pull dhi.io/<image>:<tag>
 $ trivy image --scanners vuln dhi.io/<image>:<tag>
 ```
@@ -223,6 +192,7 @@ $ trivy vex repo download
 After setting up VEX Hub, you can scan a Docker Hardened Image with VEX filtering:
 
 ```console
+$ docker login dhi.io
 $ docker pull dhi.io/<image>:<tag>
 $ trivy image --scanners vuln --vex repo dhi.io/<image>:<tag>
 ```
@@ -271,14 +241,24 @@ Then scan the image with the local VEX file:
 $ trivy image --scanners vuln --vex vex.json dhi.io/<image>:<tag>
 ```
 
-## Use VEX to filter known non-exploitable CVEs
+## Wiz
 
-Docker Hardened Images include signed VEX (Vulnerability Exploitability
-eXchange) attestations that identify vulnerabilities not relevant to the image’s
-runtime behavior.
+[Wiz](https://www.wiz.io/) is a cloud security platform that includes container
+image scanning capabilities with support for VEX attestations. Wiz automatically
+consumes VEX statements from Docker Hardened Images to provide accurate
+vulnerability assessments.
 
-When using Docker Scout, these VEX statements are automatically applied and no
-manual configuration needed.
+### Scan a DHI using Wiz
+
+Wiz automatically integrates with container registries and scans images as part
+of its cloud security posture management.
+
+TBD
+
+## Export VEX attestations
+
+For scanners that need local VEX files (like Grype or Trivy with local files),
+you can export the VEX attestations from Docker Hardened Images.
 
 > [!NOTE]
 >
@@ -286,7 +266,7 @@ manual configuration needed.
 > if your network has outbound restrictions. You can also mirror the attestations to an alternate registry. For more
 > details, see [Mirror to a third-party registry](mirror.md#mirror-to-a-third-party-registry).
 
-To manually create a JSON file of VEX attestations for tools that support it:
+Export VEX attestations to a JSON file:
 
 ```console
 $ docker scout vex get dhi.io/<image>:<tag> --output vex.json
@@ -300,19 +280,3 @@ $ docker scout vex get dhi.io/<image>:<tag> --output vex.json
 > If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
 > `registry://docs/dhi-python:3.13` instead of `docs/dhi-python:3.13`.
 
-For example:
-
-```console
-$ docker scout vex get dhi.io/python:3.13 --output vex.json
-```
-
-This creates a `vex.json` file containing the VEX statements for the specified
-image. You can then use this file with tools that support VEX to filter out
-known non-exploitable CVEs.
-
-For example, with Grype you can use the `--vex` flag to apply the VEX
-statements during the scan:
-
-```console
-$ grype dhi.io/python:3.13 --vex vex.json
-```

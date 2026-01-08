@@ -1,39 +1,41 @@
 ---
 title: Vulnerability Exploitability eXchange (VEX)
 linktitle: VEX
-description: Learn how VEX helps you prioritize real risks by identifying which vulnerabilities in Docker Hardened Images are actually exploitable.
+description: Learn how VEX helps you prioritize real risks through producer assertions about which vulnerabilities in Docker Hardened Images are exploitable in the product as shipped.
 keywords: vex container security, vulnerability exploitability, filter false positives, docker scout vex, cve prioritization
 ---
 
 ## What is VEX?
 
-Vulnerability Exploitability eXchange (VEX) is a standardized framework
-developed by the U.S. Cybersecurity and Infrastructure Security Agency (CISA) to
-document the exploitability of vulnerabilities within software components.
-Unlike traditional CVE (Common Vulnerabilities and Exposures) databases, VEX
-provides contextual assessments, indicating whether a vulnerability is
-exploitable in a given environment. This approach helps organizations prioritize
-remediation efforts by distinguishing between vulnerabilities that are
-exploitable and those that are not relevant to their specific use cases.
+Vulnerability Exploitability eXchange (VEX) is a specification for documenting
+the exploitability status of vulnerabilities within software components. VEX is
+primarily defined through industry standards such as CSAF (OASIS) and CycloneDX
+VEX, with the U.S. Cybersecurity and Infrastructure Security Agency (CISA)
+encouraging its adoption. VEX complements CVE (Common Vulnerabilities and
+Exposures) identifiers by adding producer-asserted status information,
+indicating whether a vulnerability is exploitable in the product as shipped.
+This helps organizations prioritize remediation efforts by identifying
+vulnerabilities that do not affect their specific product configurations.
 
 ## Why is VEX important?
 
 VEX enhances traditional vulnerability management by:
 
-- Reducing false positives: By providing context-specific assessments, VEX helps
-  in filtering out vulnerabilities that do not pose a threat in a particular
-  environment.
+- Suppressing non-applicable vulnerabilities: By providing product-level
+  exploitability assertions from the supplier, VEX helps filter out
+  vulnerabilities that do not affect the product as shipped.
 
 - Prioritizing remediation: Organizations can focus resources on addressing
-  vulnerabilities that are exploitable in their specific context, improving
-  efficiency in vulnerability management.
+  vulnerabilities that the producer has confirmed are exploitable in the
+  product, improving efficiency in vulnerability management.
 
-- Enhancing compliance: VEX reports provide detailed information that can assist
-  in meeting regulatory requirements and internal security standards.
+- Supporting vulnerability documentation: VEX statements can support audit
+  discussions and help document why certain vulnerabilities do not require
+  remediation.
 
-This approach is particularly beneficial in complex environments where numerous
-components and configurations exist, and traditional CVE-based assessments may
-lead to unnecessary remediation efforts.
+This approach is particularly beneficial when working with complex software
+components where not all reported CVEs apply to the specific product
+configuration.
 
 ## How Docker Hardened Images integrate VEX
 
@@ -42,54 +44,29 @@ VEX reports, providing context-specific assessments of known vulnerabilities.
 
 This integration allows you to:
 
-- Assess exploitability: Determine whether known vulnerabilities in the image's
-components are exploitable in their specific environment.
+- Consume producer assertions: Review Docker's assertions about whether known
+  vulnerabilities in the image's components are exploitable in the product as
+  shipped.
 
-- Prioritize actions: Focus remediation efforts on vulnerabilities that pose
-  actual risks, optimizing resource allocation.
+- Prioritize actions: Focus remediation efforts on vulnerabilities that Docker
+  has confirmed are exploitable in the image, optimizing resource allocation.
 
-- Streamline audits: Utilize the detailed information provided by VEX reports to
-  simplify compliance audits and reporting.
+- Support audit documentation: Use VEX statements to document why certain
+  reported vulnerabilities do not require immediate action.
 
-By combining the security features of DHI with the contextual insights of VEX,
-organizations can achieve a more effective and efficient approach to
-vulnerability management.
+By combining the security features of DHI with VEX's product-level
+exploitability assertions, organizations can achieve a more effective and
+efficient approach to vulnerability management.
 
-## Use VEX to filter known non-exploitable CVEs
-
-When using Docker Scout or Trivy, VEX statements are automatically applied as
-shown in the examples in [Common Vulnerabilities and Exposures (CVEs)](./cves.md).
-
-For Grype, you need to export the VEX attestation to a file first before
-scanning, as shown in the [Grype scanning example](./cves.md#scan-a-dhi-using-grype).
-
-> [!NOTE]
+> [!TIP]
 >
-> By default, VEX attestations are fetched from `registry.scout.docker.com`. Ensure that you can access this registry if
-> your network has outbound restrictions. You can also mirror the attestations to an alternate registry. For more
-> details, see [Mirror a Docker Hardened Image
-> repository](../how-to/mirror.md#mirror-from-docker-hub-to-another-registry).
+> To understand which scanners support VEX and why it matters for your security
+> workflow, see [Scanner integrations](/manuals/dhi/explore/scanner-integrations.md).
 
-To manually retrieve the VEX attestation for tools that support it:
+## Use VEX to suppress non-applicable CVEs
 
-```console
-$ docker scout vex get dhi.io/<image>:<tag> --output vex.json
-```
-
-> [!NOTE]
->
-> The `docker scout vex get` command requires [Docker Scout
-> CLI](https://github.com/docker/scout-cli/) version 1.18.3 or later.
->
-> If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
-> `registry://dhi.io/python:3.13` instead of `dhi.io/python:3.13`.
-
-For example:
-
-```console
-$ docker scout vex get dhi.io/python:3.13 --output vex.json
-```
-
-This creates a `vex.json` file containing the VEX statements for the specified
-image. You can then use this file with tools that support VEX to filter out
-known non-exploitable CVEs.
+Docker Hardened Images include VEX attestations that can be consumed by
+vulnerability scanners to suppress non-applicable CVEs. For detailed
+instructions on scanning with VEX support across different tools including
+Docker Scout, Trivy, and Grype, see [Scan Docker Hardened
+Images](/manuals/dhi/how-to/scan.md).
