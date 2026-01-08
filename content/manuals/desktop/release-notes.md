@@ -44,7 +44,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - [containerd v2.2.1](https://github.com/containerd/containerd/releases/tag/v2.2.1)
 - [Docker Compose v5.0.0](https://github.com/docker/compose/releases/tag/v5.0.0)
-- [cagent v1.18.0](https://github.com/docker/cagent/releases/tag/v1.18.0)
+- [cagent v1.18.6](https://github.com/docker/cagent/releases/tag/v1.18.6)
 
 ### Bug fixes and enhancements
 
