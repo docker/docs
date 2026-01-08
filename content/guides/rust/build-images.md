@@ -77,7 +77,7 @@ Docker Hardened Images (DHIs) are publicly available and can be used directly as
 To pull Docker Hardened Images, authenticate once with Docker:
 
 ```bash
-docker login
+docker login dhi.io
 ```
 
 Use DHIs from the dhi.io registry, for example:
