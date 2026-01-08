@@ -218,8 +218,14 @@ GitHub Actions cache:
 Hardened Docker Desktop:
   subscription: [Business]
   for: Administrators
+Disable public repositories:
+  subscription: [Team, Business]
+  for: Administrators
 Image management:
   availability: Beta
+Namespace access:
+  subscription: [Business]
+  for: Administrators
 Immutable tags:
   availability: Beta
 Import builds:

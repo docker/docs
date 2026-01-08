@@ -20,6 +20,10 @@ grid:
     or the Docker community.
   icon: inbox
   link: /docker-hub/repos
+- title: Settings
+  description: Learn about settings in Docker Hub.
+  icon: settings
+  link: /docker-hub/settings
 - title: Organizations
   description: Learn about organization administration.
   icon: store

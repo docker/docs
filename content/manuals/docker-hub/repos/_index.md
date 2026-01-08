@@ -54,6 +54,3 @@ In this section, learn how to:
 
 - [Archive](./archive.md) an outdated or unsupported repository.
 - [Delete](./delete.md) a repository.
-- [Manage personal settings](./settings.md): For your account, you can set personal
-  settings for repositories, including default repository privacy and autobuild
-  notifications.

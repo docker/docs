@@ -39,6 +39,7 @@ These permissions apply organization-wide, including all repositories in your or
 | Edit and delete publisher repository logos            | ❌     | ✅     | ✅    |
 | Observe content engagement as a publisher             | ❌     | ❌     | ✅    |
 | Create public and private repositories                | ❌     | ✅     | ✅    |
+| Disable public repositories                           | ❌     | ✅     | ✅    |
 | Edit and delete repositories                          | ❌     | ✅     | ✅    |
 | Manage tags                                           | ❌     | ✅     | ✅    |
 | View repository activity                              | ❌     | ❌     | ✅    |
@@ -68,6 +69,7 @@ beyond their organization role:
 | Export and reporting                                              | ❌     | ❌     | ✅    |
 | Image Access Management                                           | ❌     | ❌     | ✅    |
 | Registry Access Management                                        | ❌     | ❌     | ✅    |
+| Namespace access control                                          | ❌     | ❌     | ✅    |
 | Set up Single Sign-On (SSO) and SCIM                              | ❌     | ❌     | ✅ \* |
 | Require Docker Desktop sign-in                                    | ❌     | ❌     | ✅ \* |
 | Manage billing information (for example, billing address)         | ❌     | ❌     | ✅    |
