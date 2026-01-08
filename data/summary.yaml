@@ -220,6 +220,9 @@ Hardened Docker Desktop:
   for: Administrators
 Image management:
   availability: Beta
+Namespace access:
+  subscription: [Business]
+  for: Administrators
 Immutable tags:
   availability: Beta
 Import builds:
