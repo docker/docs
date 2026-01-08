@@ -15,11 +15,7 @@ aliases:
 - /desktop/linux/release-notes/
 - /mackit/release-notes/
 weight: 220
-outputs: ["HTML", "markdown", "RSS"]
-type: "desktop-release"
 ---
-{{< rss-button feed="/desktop/release-notes/index.xml" text="Subscribe to Docker Desktop RSS feed" >}}
-
 <!-- vale off -->
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
