@@ -390,3 +390,9 @@
   - /compose/releases/release-notes/
   - /compose/releases/prior-releases/
   - /release-notes/docker-compose/
+
+# Build release notes
+"https://github.com/docker/buildx/releases":
+  - /build/release-notes/
+"https://github.com/moby/buildkit/releases/":
+  - /build/buildkit/dockerfile-release-notes/
