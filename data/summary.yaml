@@ -27,45 +27,45 @@ Build additional contexts:
   requires: Docker Compose [2.17.0](https://github.com/docker/compose/releases/tag/v2.17.0) and later
 Build checks:
   availability: Beta
-  requires: Docker Buildx [0.15.0](/manuals/build/release-notes.md#0150) and later
+  requires: Docker Buildx [0.15.0](https://github.com/docker/buildx/releases/tag/v0.15.0) and later
 Build dockerfile inline:
   requires: Docker Compose [2.17.0](https://github.com/docker/compose/releases/tag/v2.17.0) and later
 Build entitlements:
   requires: Docker Compose [2.27.1](https://github.com/docker/compose/releases/tag/v2.27.1) and later
 Build multiple exporters:
-  requires: Docker Buildx [0.13.0](/manuals/build/release-notes.md#0130) and later
+  requires: Docker Buildx [0.13.0](https://github.com/docker/buildx/releases/tag/v0.13.0) and later
 Build URL Queries:
-  requires: Docker Buildx [0.28.0](/manuals/build/release-notes.md#0280) and later, Dockerfile [1.18.0](/manuals/build/buildkit/dockerfile-release-notes.md#1180) and later, and Docker Desktop [4.46.0](/manuals/desktop/release-notes.md#4460) and later
+  requires: Docker Buildx [0.28.0](https://github.com/docker/buildx/releases/tag/v0.28.0) and later, Dockerfile [1.18.0](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.18.0) and later, and Docker Desktop [4.46.0](/manuals/desktop/release-notes.md#4460) and later
 Buildkit host:
-  requires: Docker Buildx [0.9.0](/manuals/build/release-notes.md#090) and later
+  requires: Docker Buildx [0.9.0](https://github.com/docker/buildx/releases/tag/v0.9.0) and later
 Build privileged:
   requires: Docker Compose [2.15.0](https://github.com/docker/compose/releases/tag/v2.15.0) and later
 Build ulimits:
   requires: Docker Compose [2.23.1](https://github.com/docker/compose/releases/tag/v2.23.1) and later
 Buildx bake file:
-  requires: Docker Buildx [0.26.0](/manuals/build/release-notes.md#0260) and later
+  requires: Docker Buildx [0.26.0](https://github.com/docker/buildx/releases/tag/v0.26.0) and later
 Buildx bake file separator:
-  requires: Docker Buildx [0.26.0](/manuals/build/release-notes.md#0260) and later
+  requires: Docker Buildx [0.26.0](https://github.com/docker/buildx/releases/tag/v0.26.0) and later
 Buildx bake Git auth token:
-  requires: Docker Buildx [0.14.0](/manuals/build/release-notes.md#0140) and later
+  requires: Docker Buildx [0.14.0](https://github.com/docker/buildx/releases/tag/v0.14.0) and later
 Buildx bake Git SSH:
-  requires: Docker Buildx [0.14.0](/manuals/build/release-notes.md#0140) and later
+  requires: Docker Buildx [0.14.0](https://github.com/docker/buildx/releases/tag/v0.14.0) and later
 Buildx CPU profile:
-  requires: Docker Buildx [0.18.0](/manuals/build/release-notes.md#0180) and later
+  requires: Docker Buildx [0.18.0](https://github.com/docker/buildx/releases/tag/v0.18.0) and later
 Buildx Git check dirty:
-  requires: Docker Buildx [0.10.4](/manuals/build/release-notes.md#0104) and later
+  requires: Docker Buildx [0.10.4](https://github.com/docker/buildx/releases/tag/v0.10.4) and later
 Buildx Git info:
-  requires: Docker Buildx [0.10.0](/manuals/build/release-notes.md#0100) and later
+  requires: Docker Buildx [0.10.0](https://github.com/docker/buildx/releases/tag/v0.10.0) and later
 Buildx Git labels:
-  requires: Docker Buildx [0.10.0](/manuals/build/release-notes.md#0100) and later
+  requires: Docker Buildx [0.10.0](https://github.com/docker/buildx/releases/tag/v0.10.0) and later
 Buildx mem profile:
-  requires: Docker Buildx [0.18.0](/manuals/build/release-notes.md#0180) and later
+  requires: Docker Buildx [0.18.0](https://github.com/docker/buildx/releases/tag/v0.18.0) and later
 Buildx metadata provenance:
-  requires: Docker Buildx [0.14.0](/manuals/build/release-notes.md#0140) and later
+  requires: Docker Buildx [0.14.0](https://github.com/docker/buildx/releases/tag/v0.14.0) and later
 Buildx metadata warnings:
-  requires: Docker Buildx [0.16.0](/manuals/build/release-notes.md#0160) and later
+  requires: Docker Buildx [0.16.0](https://github.com/docker/buildx/releases/tag/v0.16.0) and later
 Buildx no default:
-  requires: Docker Buildx [0.10.4](/manuals/build/release-notes.md#0104) and later
+  requires: Docker Buildx [0.10.4](https://github.com/docker/buildx/releases/tag/v0.10.4) and later
 Cache backend API:
   availability: Experimental
 cagent:
@@ -233,7 +233,7 @@ Intune:
 Jamf Pro:
   for: Administrators
 Load by default:
-  requires: Docker Buildx [0.14.0](/manuals/build/release-notes.md#0140) and later
+  requires: Docker Buildx [0.14.0](https://github.com/docker/buildx/releases/tag/v0.14.0) and later
 MSI installer:
   subscription: [Business]
   requires: Docker Desktop [4.32](/manuals/desktop/release-notes.md#4320) and later

@@ -118,7 +118,7 @@ specification. In this case it uses `foo`, which is the first device in
 > [!NOTE]
 > [`RUN --device` command](/reference/dockerfile.md#run---device) is only
 > featured in [`labs` channel](../buildkit/frontend.md#labs-channel) since
-> [Dockerfile frontend v1.14.0-labs](../buildkit/dockerfile-release-notes.md#1140-labs)
+> [Dockerfile frontend v1.14.0-labs](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.14.0-labs)
 > and not yet available in stable syntax.
 
 Now let's build this Dockerfile:
