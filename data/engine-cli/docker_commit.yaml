@@ -36,13 +36,23 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: no-pause
+      value_type: bool
+      default_value: "false"
+      description: Disable pausing container during commit
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: pause
       shorthand: p
       value_type: bool
       default_value: "true"
-      description: Pause container during commit
-      deprecated: false
-      hidden: false
+      description: 'Pause container during commit (deprecated: use --no-pause instead)'
+      deprecated: true
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false
