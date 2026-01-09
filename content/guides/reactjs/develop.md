@@ -36,7 +36,7 @@ Create a file named `Dockerfile.dev` in your project root with the following con
 # =========================================
 # Stage 1: Develop the React.js Application
 # =========================================
-ARG NODE_VERSION=24.11.1-alpine
+ARG NODE_VERSION=24.12.0-alpine
 
 # Use a lightweight Node.js image for development
 FROM node:${NODE_VERSION} AS dev
@@ -45,7 +45,7 @@ FROM node:${NODE_VERSION} AS dev
 WORKDIR /app
 
 # Copy package-related files first to leverage Docker's caching mechanism
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json* ./
 
 # Install project dependencies
 RUN --mount=type=cache,target=/root/.npm npm install
