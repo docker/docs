@@ -8,8 +8,9 @@ keywords: python, migration, dhi
 This example shows how to migrate a Python application to Docker Hardened Images.
 
 The following examples show Dockerfiles before and after migration to Docker
-Hardened Images. Each example includes four variations:
+Hardened Images. Each example includes five variations:
 
+- Before (Ubuntu): A sample Dockerfile using Ubuntu-based images, before migrating to DHI
 - Before (Wolfi): A sample Dockerfile using Wolfi distribution images, before migrating to DHI
 - Before (DOI): A sample Dockerfile using Docker Official Images, before migrating to DHI
 - After (multi-stage): A sample Dockerfile after migrating to DHI with multi-stage builds (recommended for minimal, secure images)
@@ -24,6 +25,39 @@ Hardened Images. Each example includes four variations:
 > Run `docker login dhi.io` to authenticate.
 
 {{< tabs >}}
+{{< tab name="Before (Ubuntu)" >}}
+
+```dockerfile
+#syntax=docker/dockerfile:1
+
+FROM ubuntu/python:3.13-24.04_stable AS builder
+
+ENV LANG=C.UTF-8
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV PATH="/app/venv/bin:$PATH"
+
+WORKDIR /app
+
+RUN python -m venv /app/venv
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+FROM ubuntu/python:3.13-24.04_stable
+
+WORKDIR /app
+
+ENV PYTHONUNBUFFERED=1
+ENV PATH="/app/venv/bin:$PATH"
+
+COPY app.py ./
+COPY --from=builder /app/venv /app/venv
+
+ENTRYPOINT [ "python", "/app/app.py" ]
+```
+
+{{< /tab >}}
 {{< tab name="Before (Wolfi)" >}}
 
 ```dockerfile

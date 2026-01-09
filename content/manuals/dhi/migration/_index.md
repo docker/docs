@@ -15,6 +15,10 @@ params:
       description: Manual migration guide for moving from Docker Official Images (Alpine or Debian-based) to Docker Hardened Images.
       icon: code
       link: /dhi/migration/migrate-from-doi/
+    - title: Migrate from Ubuntu
+      description: Manual migration guide for transitioning from Ubuntu-based images to Docker Hardened Images.
+      icon: upgrade
+      link: /dhi/migration/migrate-from-ubuntu/
     - title: Migrate from Wolfi
       description: Manual migration guide for transitioning from Wolfi-based images to Docker Hardened Images.
       icon: transform
