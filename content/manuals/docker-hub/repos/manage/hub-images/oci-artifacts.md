@@ -84,17 +84,17 @@ Steps:
 3. Sign in to Docker Hub with Helm, using your Docker credentials.
 
    ```console
-   $ helm registry login registry-1.docker.io -u hubuser
+   $ helm registry login registry-1.docker.io -u <hubuser>
    ```
 
 4. Push the chart to a Docker Hub repository.
 
    ```console
-   $ helm push demo-0.1.0.tgz oci://registry-1.docker.io/docker
+   $ helm push demo-0.1.0.tgz oci://registry-1.docker.io/<hubuser>
    ```
 
-   This uploads the Helm chart tarball to a `demo` repository in the `docker`
-   namespace.
+   This uploads the Helm chart tarball to a `demo` repository in the `hubuser`
+   namespace. It will create a `hubuser/demo` repository.
 
 5. Go to the repository page on Docker Hub. The **Tags** section of the page
    shows the Helm chart tag.
