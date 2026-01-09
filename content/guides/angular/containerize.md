@@ -77,7 +77,7 @@ For consistency, please use the same responses shown in the example below when p
 | Question                                                   | Answer          |
 |------------------------------------------------------------|-----------------|
 | What application platform does your project use?           | Node            |
-| What version of Node do you want to use?                   | 24.11.1-alpine  |
+| What version of Node do you want to use?                   | 24.12.0-alpine  |
 | Which package manager do you want to use?                  | npm             |
 | Do you want to run "npm run build" before starting server? | yes             |
 | What directory is your build output to?                    | dist            |
@@ -153,7 +153,7 @@ FROM dhi.io/node:24-alpine3.22-dev AS builder
 WORKDIR /app
 
 # Copy package-related files first to leverage Docker's caching mechanism
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json* ./
 
 # Install project dependencies using npm ci (ensures a clean, reproducible install)
 RUN --mount=type=cache,target=/root/.npm npm ci
@@ -197,7 +197,7 @@ Now you need to create a production-ready multi-stage Dockerfile. Replace the ge
 # =========================================
 # Stage 1: Build the Angular Application
 # =========================================
-ARG NODE_VERSION=24.11.1-alpine
+ARG NODE_VERSION=24.12.0-alpine
 ARG NGINX_VERSION=alpine3.22
 
 # Use a lightweight Node.js image for building (customizable via ARG)
@@ -207,7 +207,7 @@ FROM node:${NODE_VERSION} AS builder
 WORKDIR /app
 
 # Copy package-related files first to leverage Docker's caching mechanism
-COPY package.json package-lock.json ./
+COPY package.json *package-lock.json* ./
 
 # Install project dependencies using npm ci (ensures a clean, reproducible install)
 RUN --mount=type=cache,target=/root/.npm npm ci
