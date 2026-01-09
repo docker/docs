@@ -122,14 +122,14 @@ params:
   # Latest version of the Docker Engine API
   latest_engine_api_version: "1.52"
   # Latest version of Docker Engine
-  docker_ce_version: "29.1.3"
+  docker_ce_version: "29.1.4"
   # Previous version of the Docker Engine
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
-  docker_ce_version_prev: "29.1.2"
+  docker_ce_version_prev: "29.1.3"
   # Latest Docker Compose version
   compose_version: "v5.0.1"
   # Latest BuildKit version
-  buildkit_version: "0.26.0"
+  buildkit_version: "0.26.3"
 
   # Example runtime/library/os versions
   example_go_version: "1.24"
