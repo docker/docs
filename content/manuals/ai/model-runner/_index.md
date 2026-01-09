@@ -6,7 +6,7 @@ params:
     group: AI
 weight: 30
 description: Learn how to use Docker Model Runner to manage and run AI models.
-keywords: Docker, ai, model runner, docker desktop, docker engine, llm, openai, llama.cpp, vllm, cpu, nvidia, cuda, amd, rocm, vulkan
+keywords: Docker, ai, model runner, docker desktop, docker engine, llm, openai, ollama, llama.cpp, vllm, cpu, nvidia, cuda, amd, rocm, vulkan, cline, continue, cursor
 aliases:
   - /desktop/features/model-runner/
   - /model-runner/
@@ -21,7 +21,7 @@ large language models (LLMs) and other AI models directly from Docker Hub or any
 OCI-compliant registry.
 
 With seamless integration into Docker Desktop and Docker
-Engine, you can serve models via OpenAI-compatible APIs, package GGUF files as
+Engine, you can serve models via OpenAI and Ollama-compatible APIs, package GGUF files as
 OCI Artifacts, and interact with models from both the command line and graphical
 interface.
 
@@ -33,10 +33,13 @@ with AI models locally.
 ## Key features
 
 - [Pull and push models to and from Docker Hub](https://hub.docker.com/u/ai)
-- Serve models on OpenAI-compatible APIs for easy integration with existing apps
-- Support for both llama.cpp and vLLM inference engines (vLLM currently supported on Linux x86_64/amd64 with NVIDIA GPUs only)
+- Serve models on [OpenAI and Ollama-compatible APIs](api-reference.md) for easy integration with existing apps
+- Support for both [llama.cpp and vLLM inference engines](inference-engines.md) (vLLM on Linux x86_64/amd64 and Windows WSL2 with NVIDIA GPUs)
 - Package GGUF and Safetensors files as OCI Artifacts and publish them to any Container Registry
 - Run and interact with AI models directly from the command line or from the Docker Desktop GUI
+- [Connect to AI coding tools](ide-integrations.md) like Cline, Continue, Cursor, and Aider
+- [Configure context size and model parameters](configuration.md) to tune performance
+- [Set up Open WebUI](openwebui-integration.md) for a ChatGPT-like web interface
 - Manage local models and display logs
 - Display prompt and response details
 - Conversational context support for multi-turn interactions
@@ -82,9 +85,28 @@ locally. They load into memory only at runtime when a request is made, and
 unload when not in use to optimize resources. Because models can be large, the
 initial pull may take some time. After that, they're cached locally for faster
 access. You can interact with the model using
-[OpenAI-compatible APIs](api-reference.md).
+[OpenAI and Ollama-compatible APIs](api-reference.md).
 
-Docker Model Runner supports both [llama.cpp](https://github.com/ggerganov/llama.cpp) and [vLLM](https://github.com/vllm-project/vllm) as inference engines, providing flexibility for different model formats and performance requirements. For more details, see the [Docker Model Runner repository](https://github.com/docker/model-runner).
+### Inference engines
+
+Docker Model Runner supports two inference engines:
+
+| Engine | Best for | Model format |
+|--------|----------|--------------|
+| [llama.cpp](inference-engines.md#llamacpp) | Local development, resource efficiency | GGUF (quantized) |
+| [vLLM](inference-engines.md#vllm) | Production, high throughput | Safetensors |
+
+llama.cpp is the default engine and works on all platforms. vLLM requires NVIDIA GPUs and is supported on Linux x86_64 and Windows with WSL2. See [Inference engines](inference-engines.md) for detailed comparison and setup.
+
+### Context size
+
+Models have a configurable context size (context length) that determines how many tokens they can process. The default varies by model but is typically 2,048-8,192 tokens. You can adjust this per-model:
+
+```console
+$ docker model configure --context-size 8192 ai/qwen2.5-coder
+```
+
+See [Configuration options](configuration.md) for details on context size and other parameters.
 
 > [!TIP]
 >
@@ -120,4 +142,9 @@ Thanks for trying out Docker Model Runner. To report bugs or request features, [
 
 ## Next steps
 
-[Get started with DMR](get-started.md)
+- [Get started with DMR](get-started.md) - Enable DMR and run your first model
+- [API reference](api-reference.md) - OpenAI and Ollama-compatible API documentation
+- [Configuration options](configuration.md) - Context size and runtime parameters
+- [Inference engines](inference-engines.md) - llama.cpp and vLLM details
+- [IDE integrations](ide-integrations.md) - Connect Cline, Continue, Cursor, and more
+- [Open WebUI integration](openwebui-integration.md) - Set up a web chat interface
