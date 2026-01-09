@@ -17,7 +17,55 @@
 	{{ partial "header.html" . }}
 	<main class="flex w-full flex-col items-stretch gap-20 self-center pt-20">
 		<div class="grid w-full grid-cols-1 items-center gap-20 px-4 lg:grid-cols-2 xl:w-[1200px] self-center">
-			<div class="bg-pattern-blue relative overflow-hidden rounded-sm drop-shadow">
+			<div class="bg-pattern-blue relative rounded-sm drop-shadow z-10"
+				x-data="{
+					open: false,
+					os: 'unknown',
+					arch: 'unknown',
+					init() {
+						const platform = navigator.platform.toLowerCase();
+						const userAgent = navigator.userAgent.toLowerCase();
+
+						if (platform.includes('mac') || platform.includes('darwin')) {
+							this.os = 'mac';
+							// Default to Apple Silicon (arm64) as it's now the standard
+							// Modern browsers on Apple Silicon report MacIntel for compatibility
+							this.arch = 'arm64';
+						} else if (platform.includes('win')) {
+							this.os = 'windows';
+							// Default to x86_64 - Windows ARM is rare and detection is unreliable
+							this.arch = 'amd64';
+						} else if (platform.includes('linux')) {
+							this.os = 'linux';
+						}
+					},
+					getDownloadUrl(os, arch = 'amd64') {
+						const baseUtm = 'utm_source=docker&utm_medium=webreferral';
+						const urls = {
+							'mac-arm64': `https://desktop.docker.com/mac/main/arm64/Docker.dmg?${baseUtm}&utm_campaign=docs-driven-download-mac-arm64`,
+							'mac-amd64': `https://desktop.docker.com/mac/main/amd64/Docker.dmg?${baseUtm}&utm_campaign=docs-driven-download-mac-amd64`,
+							'windows-arm64': `https://desktop.docker.com/win/main/arm64/Docker%20Desktop%20Installer.exe?${baseUtm}&utm_campaign=docs-driven-download-win-arm64`,
+							'windows-amd64': `https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?${baseUtm}&utm_campaign=docs-driven-download-win-amd64`,
+							'linux': '/desktop/linux/install/'
+						};
+						return urls[os === 'linux' ? 'linux' : `${os}-${arch}`] || '/desktop/setup/install/linux/';
+					},
+					getOsLabel(os, arch = 'amd64') {
+						const labels = {
+							'mac-arm64': 'Docker Desktop for Mac (Apple Silicon)',
+							'mac-amd64': 'Docker Desktop for Mac (Intel)',
+							'windows-arm64': 'Docker Desktop for Windows (ARM)',
+							'windows-amd64': 'Docker Desktop for Windows',
+							'linux': 'Docker Desktop for Linux'
+						};
+						return labels[os === 'linux' ? 'linux' : `${os}-${arch}`] || 'Docker Desktop';
+					},
+					getPrimaryLabel() {
+						if (this.os === 'unknown') return 'Download Docker Desktop';
+						return this.getOsLabel(this.os, this.arch);
+					}
+				}"
+				@click.outside="open = false">
 				<div class="flex h-full flex-col items-start justify-between gap-4 px-8 py-4">
 					<div class="flex items-center gap-2">
 						<span class="icon-svg text-blue dark:text-blue">
@@ -25,18 +73,50 @@
 						<h1 class="text-xl">Get Docker</h1>
 					</div>
 					<p>
-						Learn how to install Docker for Mac, Windows, or Linux and explore
-						our developer tools.
+						Download Docker Desktop for your platform or
+						<a href="/get-started/get-docker/" class="text-blue dark:text-blue-400 hover:underline">view getting started guides</a>.
 					</p>
-					<a href="/get-started/get-docker/"
-						class="shadow bg-blue mt-20 flex cursor-pointer items-center gap-2 rounded-sm p-2 px-4 text-white transition duration-300 hover:bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-400">
-						<span class="icon-svg icon-sm">{{ partial "icon" "download" }}</span>
-						Get Docker
-					</a>
-				</div>
-				<div class="absolute right-0 bottom-0 origin-bottom-right scale-50">
-					<img class="dark:hidden" alt="Low-fi desktop app" src="/assets/images/app-wf-light-1.svg" />
-					<img class="hidden dark:block" alt="Low-fi desktop app" src="/assets/images/app-wf-dark-1.svg" />
+					<div class="mt-20">
+						<div class="relative inline-block">
+							<div class="flex shadow rounded-sm overflow-hidden">
+								<a :href="getDownloadUrl(os, arch)"
+									class="bg-blue flex cursor-pointer items-center gap-2 p-2 px-4 text-white transition duration-300 hover:bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-400 whitespace-nowrap">
+									<span class="icon-svg icon-sm">{{ partial "icon" "download" }}</span>
+									<span x-text="getPrimaryLabel()">Download Docker Desktop</span>
+								</a>
+								<button @click="open = !open" type="button"
+									class="bg-blue flex items-center justify-center px-3 text-white border-l border-blue-400 hover:bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-400 transition duration-300"
+									aria-label="More download options">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+									</svg>
+								</button>
+							</div>
+							<div x-show="open" x-collapse
+								class="absolute top-full left-0 mt-1 min-w-full bg-white dark:bg-gray-800 rounded-sm shadow-lg overflow-hidden z-50">
+								<a href="https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64"
+									class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap">
+									Docker Desktop for Mac (Apple Silicon)
+								</a>
+								<a href="https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64"
+									class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap">
+									Docker Desktop for Mac (Intel)
+								</a>
+								<a href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64"
+									class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap">
+									Docker Desktop for Windows
+								</a>
+								<a href="https://desktop.docker.com/win/main/arm64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-arm64"
+									class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap">
+									Docker Desktop for Windows (ARM)
+								</a>
+								<a href="/desktop/linux/install/"
+									class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap">
+									Docker Desktop for Linux
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="h-full bg-pattern-purple rounded-sm drop-shadow">
