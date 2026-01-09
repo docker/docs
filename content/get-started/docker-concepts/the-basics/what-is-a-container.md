@@ -29,7 +29,7 @@ What is a container? Simply put, containers are isolated processes for each of y
 Here's what makes them awesome. Containers are:
 
 - Self-contained. Each container has everything it needs to function with no reliance on any pre-installed dependencies on the host machine.
-- Isolated. Since containers are run in isolation, they have minimal influence on the host and other containers, increasing the security of your applications.
+- Isolated. Since containers run in isolation, they have minimal influence on the host and other containers, increasing the security of your applications.
 - Independent. Each container is independently managed. Deleting one container won't affect any others.
 - Portable. Containers can run anywhere! The container that runs on your development machine will work the same way in a data center or anywhere in the cloud!
 
