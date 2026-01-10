@@ -28,6 +28,8 @@ This means the CLI plugin isn't installed or isn't in the correct location. To f
 
 2. If using Docker Desktop, restart it to detect the plugin.
 
+Other cause could be  DOCKER_CONFIG environment variable set, pointing to someother path than ~/.docker. Unsetting DOCKER_CONFIG should resolve the issue in this case.   
+
 ## "Experimental Features" needs to be enabled by your administrator
 
 You see an error about beta features being disabled when trying to use sandboxes.
