@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  {{ $specURL := urls.Parse (printf "/%s%s.yaml" .File.Dir .File.ContentBaseName) }}
   <title>{{ .Title }}</title>
   <!-- needed for adaptive design -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,6 +9,13 @@
   <meta charset="utf-8" />
   <!-- favicon -->
   <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/svg">
+  <!--
+  Provide a link to the swagger / OpenAPI spec itself. We're currently using
+  Swagger (OpenAPI v2) for some, so use a more generic "application/yaml" type.
+
+  Once all our specs are updated to OpenAPI v3, we can change this to "application/vnd.oai.openapi"
+  -->
+  <link rel="alternate" href="{{ $specURL.String | absURL }}" type="application/yaml" title="{{ .Title }} (Swagger/OpenAPI)" />
   <style>
     body {
       margin: 0;
@@ -49,7 +56,12 @@
 </head>
 
 <body>
-  {{ $specURL := urls.Parse (printf "/%s%s.yaml" .File.Dir .File.ContentBaseName) }}
+  <noscript>
+    <p>
+      This page is rendered with JavaScript.<br>
+      <a target="_blank" href="{{ $specURL.String | absURL }}" rel="noreferrer">Download {{ .Title }} Swagger/OpenAPI specification</a>
+    </p>
+  </noscript>
   {{ if or (strings.HasPrefix .RelPermalink "/reference/api/hub/") (strings.HasPrefix .RelPermalink "/reference/api/registry/") }}
     <redoc spec-url="{{ $specURL.String }}" suppress-warnings="true" lazy-rendering></redoc>
   {{ else }}

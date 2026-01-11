@@ -15,9 +15,9 @@ taxonomies:
 # Remove the /manuals prefix for content in the manuals section
 permalinks:
   page:
-    manuals: /:sections[1:]/:slugorfilename/
+    manuals: /:sections[1:]/:slugorcontentbasename/
   section:
-    manuals: /:sections[1:]/:slugorfilename/
+    manuals: /:sections[1:]/
 
 markup:
   tableOfContents:
@@ -122,14 +122,14 @@ params:
   # Latest version of the Docker Engine API
   latest_engine_api_version: "1.52"
   # Latest version of Docker Engine
-  docker_ce_version: "29.1.3"
+  docker_ce_version: "29.1.4"
   # Previous version of the Docker Engine
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
-  docker_ce_version_prev: "29.1.2"
+  docker_ce_version_prev: "29.1.3"
   # Latest Docker Compose version
   compose_version: "v5.0.1"
   # Latest BuildKit version
-  buildkit_version: "0.26.0"
+  buildkit_version: "0.26.3"
 
   # Example runtime/library/os versions
   example_go_version: "1.24"
@@ -341,11 +341,4 @@ module:
       mounts:
         - source: docs/generator/reference
           target: data/mcp-cli
-          includeFiles: "*.yaml"
-
-    # Scout CLI plugin (public dist repo)
-    - path: github.com/docker/scout-cli
-      mounts:
-        - source: docs
-          target: data/scout-cli
           includeFiles: "*.yaml"

@@ -1,4 +1,5 @@
 .hugo_build.lock
+hugo_stats.json
 .idea/
 .vscode/mcp.json
 .vscode/settings.json
@@ -14,5 +15,5 @@ tmp
 cagent
 # cagent tmp files
 .cagent
-.upstream-issues.md
+.pr-body.md
 .validation.log

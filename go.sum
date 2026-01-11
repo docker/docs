@@ -72,8 +72,6 @@ github.com/docker/model-runner/cmd/cli v1.0.3 h1:oycm6fHwhFBNM47Y2Ka7nUSsrbSG3FL
 github.com/docker/model-runner/cmd/cli v1.0.3/go.mod h1:86LCLsk93vuevYRDKoBxwGusyGlW+UnKCnbXJ7m6Zjo=
 github.com/docker/model-runner/pkg/go-containerregistry v0.0.0-20251121150728-6951a2a36575 h1:N2yLWYSZFTVLkLTh8ux1Z0Nug/F78pXsl2KDtbWhe+Y=
 github.com/docker/model-runner/pkg/go-containerregistry v0.0.0-20251121150728-6951a2a36575/go.mod h1:gbdiY0X8gr0J88OfUuRD29JXCWT9jgHzPmrqTlO15BM=
-github.com/docker/scout-cli v1.18.4 h1:Td+SSA55WlD7gmrNaBe0imgfVzzQjlfb/prwBn9GOSw=
-github.com/docker/scout-cli v1.18.4/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
 github.com/elastic/go-sysinfo v1.15.4 h1:A3zQcunCxik14MgXu39cXFXcIw2sFXZ0zL886eyiv1Q=
 github.com/elastic/go-sysinfo v1.15.4/go.mod h1:ZBVXmqS368dOn/jvijV/zHLfakWTYHBZPk3G244lHrU=
 github.com/elastic/go-windows v1.0.2 h1:yoLLsAsV5cfg9FLhZ9EXZ2n2sQFKeDYrHenkcivY4vI=

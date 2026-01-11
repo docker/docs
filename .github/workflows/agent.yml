@@ -21,17 +21,8 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Configure Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
       - name: Install dependencies
         run: npm ci
-
-      - name: Create branch
-        run: |
-          git checkout -b agent/issue-${{ github.event.issue.number }}
 
       - name: Run agent
         uses: docker/cagent-action@v1.0.3
@@ -44,11 +35,27 @@ jobs:
             Work on GitHub issue: ${{ github.event.issue.html_url }}
 
             Fetch the issue, analyze what documentation changes are needed, and
-            implement them following your standard workflow.
+            implement them.
 
-            If you identify any upstream coordination issues (broken links from
-            vendored content, missing CLI flags, etc.), document them in
-            .upstream-issues.md as specified in your instructions.
+            When complete, write .pr-body.md following this structure:
+
+            ## Summary
+            One sentence describing what was fixed/added/changed.
+
+            ## Changes
+            Bulleted list of specific changes (be concise, focus on what matters).
+
+            ## Upstream coordination needed
+            Only include this section if there are issues requiring fixes in upstream
+            repos (docker/cli, moby/moby, etc.). Otherwise omit it entirely.
+
+            Fixes #${{ github.event.issue.number }}
+
+            ---
+            🤖 Generated with [cagent](https://github.com/docker/cagent)
+
+            Keep the PR body brief and practical. Don't over-explain or add sections
+            that aren't needed.
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -56,15 +63,22 @@ jobs:
       - name: Check for changes
         id: changes
         run: |
-          if [[ -n $(git status --porcelain) ]]; then
-            echo "has_changes=true" >> $GITHUB_OUTPUT
-          else
+          if git diff --quiet; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Commit changes
+      - name: Commit and push
         if: steps.changes.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          BRANCH="agent/issue-${{ github.event.issue.number }}"
+          git checkout -b "$BRANCH"
           git add .
           git commit -m "docs: address issue #${{ github.event.issue.number }}
 
@@ -73,41 +87,17 @@ jobs:
 
           🤖 Generated with cagent"
 
-      - name: Push changes
-        if: steps.changes.outputs.has_changes == 'true'
-        run: |
-          git push -u origin agent/issue-${{ github.event.issue.number }}
+          git push origin "$BRANCH"
 
       - name: Create pull request
         if: steps.changes.outputs.has_changes == 'true'
         env:
-          GH_TOKEN: ${{ github.token }}
-          PR_BODY: |
-            ## Summary
-
-            This PR addresses #${{ github.event.issue.number }}.
-
-            ## Changes
-
-            The documentation agent team analyzed the issue and implemented the requested changes.
-
-            🤖 Generated with [cagent](https://github.com/docker/cagent)
-
-            Closes #${{ github.event.issue.number }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Add upstream coordination section if file exists
-          if [[ -f .upstream-issues.md ]]; then
-            UPSTREAM_SECTION=$(cat .upstream-issues.md)
-            FULL_PR_BODY="${PR_BODY/Closes #/$UPSTREAM_SECTION\n\nCloses #}"
-          else
-            FULL_PR_BODY="$PR_BODY"
-          fi
-
           gh pr create \
             --title "docs: address issue #${{ github.event.issue.number }}" \
-            --body "$FULL_PR_BODY" \
-            --base main \
-            --head agent/issue-${{ github.event.issue.number }}
+            --body-file .pr-body.md \
+            --label agent/generated
 
       - name: Comment on issue (success)
         if: steps.changes.outputs.has_changes == 'true'

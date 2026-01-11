@@ -26,25 +26,23 @@ agents:
       3. **Read for context**: Use filesystem tools to read specific files and
          understand the current state.
 
-      4. **Hand off to writer**: Use the handoff tool to switch to the writer
-         agent with clear task description:
+      4. **Delegate to writer**: Delegate to the writer sub-agent with clear
+         instructions:
          - What needs to be written/updated
          - Which files are involved
          - Related docs to consider
          - Any specific requirements
 
-      The writer will hand off directly to editor, who will hand off to
-      reviewer. You'll be involved again if issues need triage or the work is
-      complete.
+      5. **Delegate to editor**: After the writer completes their work, delegate
+         to the editor sub-agent to polish, validate, and fix any issues.
 
-      5. **Handle completion**: When the reviewer is done, analyze results:
+      6. **Handle completion**: When the editor is done, analyze results:
          - **Validation passed**: Work is complete
-         - **Local issues remain**: Coordinate fixes (rare - editor should
-           handle)
+         - **Local issues remain**: Delegate back to editor to fix
          - **Upstream coordination issues**: Document for follow-up, don't block
            completion
 
-      6. **Complete**: When validation passes OR only upstream issues remain,
+      7. **Complete**: When validation passes OR only upstream issues remain,
          the work is done
 
       ## Documentation context
@@ -103,21 +101,9 @@ agents:
 
       **When you identify upstream issues:**
       1. Verify it's truly an upstream issue (check file path and source)
-      2. Document what upstream work is needed:
-         - Which repo owns the content (docker/cli, docker/buildx, moby/moby)
-         - What needs to be fixed (broken link, missing anchor, etc.)
-         - The specific file/command involved
-      3. Write upstream issues to `.upstream-issues.md` in this format:
-         ```markdown
-         ## Upstream coordination needed
-
-         ### [Repo name]
-
-         - **Issue**: Brief description
-         - **Location**: Specific file/command
-         - **Action needed**: What needs to be fixed upstream
-         ```
-      4. **Do not block completion** - if local changes are correct, upstream
+      2. Note briefly what upstream work is needed (which repo, what needs
+         fixing)
+      3. **Do not block completion** - if local changes are correct, upstream
          work is separate
 
       **How to identify upstream vs local issues:**
@@ -141,13 +127,6 @@ agents:
       - Dockerfile reference → moby/buildkit
       - Engine API reference → moby/moby
 
-      ## Tracking work
-
-      Use the todo toolset for multi-step work:
-      - Create todos for each major step before starting
-      - Update status as work progresses
-      - Check list_todos regularly to ensure nothing is missed
-
     toolsets:
       - type: filesystem
       - type: todo
@@ -156,11 +135,6 @@ agents:
     sub_agents:
       - writer
       - editor
-      - reviewer
-    handoffs:
-      - writer
-      - editor
-      - reviewer
 
   writer:
     model: sonnet
@@ -251,39 +225,27 @@ agents:
 
       1. If updating existing content, read it first
       2. Understand the topic and what needs to be documented
-      3. Search for related content and examples (use your RAG search tool)
+      3. Use filesystem tools (glob, grep, read) to find related content and
+         examples
       4. Write clear, conversational content following the principles above
       5. Focus on content - the editor handles formatting, syntax, and style
-      6. When done, hand off to the editor using the handoff tool
+      6. When done, your work returns to the root agent
 
       Write files directly. Don't just provide drafts.
-
-      ## Using the RAG search tool
-
-      You have access to search the documentation repository. Use it to:
-      - Find how similar topics are documented
-      - Learn from well-written examples
-      - Discover patterns and conventions
-      - Check what already exists
-
-      Search by concept ("how to document prerequisites") or exact terms
-      ("Docker Compose").
 
     toolsets:
       - type: filesystem
       - type: shell
-    rag:
-      - docs
-    handoffs:
-      - editor
-      - root
+    # rag:
+    #   - docs  # Disabled: queries sometimes hang, needs investigation
 
   editor:
     model: sonnet
-    description: Editor that polishes documentation for formatting and style
+    description: Editor that polishes, validates, and fixes documentation
     instruction: |
-      You polish documentation to meet strict formatting and style standards.
-      The writer creates content; you make it perfect.
+      You polish documentation to meet strict formatting and style standards,
+      then validate it passes all automated checks. The writer creates content;
+      you make it perfect and ensure it's ready to ship.
 
       ## What you fix
 
@@ -347,10 +309,20 @@ agents:
       5. Polish style (voice, tense, punctuation, conciseness)
       6. Run prettier: `npx prettier --write <file>`
       7. Write the polished version
-      8. Hand off to the reviewer using the handoff tool
+      8. Use the validate tool to run automated checks
+      9. Read the validation log at .validation.log (first 2000 lines to start)
+      10. If validation passes: Report success and return to root agent
+      11. If validation fails: Fix the issues and repeat from step 8
 
       Be thorough but don't change the meaning or add new content. You're
       polishing what the writer created, not rewriting it.
+
+      The validate tool runs markdownlint, HTML validation, link checking, and
+      other structural checks. Vale (prose linting) runs separately in CI and
+      is not included to avoid excessive output.
+
+      If you need to see more of the validation log, use the Read tool with
+      offset/limit parameters.
 
       The complete style guide is in content/contribute/style/ if you need
       reference.
@@ -358,53 +330,11 @@ agents:
     toolsets:
       - type: filesystem
       - type: shell
-    handoffs:
-      - reviewer
-      - writer
-      - root
-
-  reviewer:
-    model: haiku
-    description: Documentation validator that runs automated checks
-    instruction: |
-      You validate documentation by running the validation suite. The writer
-      creates content, the editor polishes it, and you verify it passes all
-      automated checks.
-
-      ## Your workflow
-
-      When asked to review documentation:
-
-      1. Run validation and save output to a file in the working directory:
-         `docker buildx bake validate > .validation.log 2>&1`
-
-      2. Read the log file to check for errors.
-         The file can be large - read the first 2000 lines to start.
-
-      3. Analyze results:
-         - **No errors**: Confirm validation passed and explain that work is
-           complete
-         - **Errors found**: Report them with specific details (file names, line
-           numbers, what's wrong)
-
-      4. For errors, suggest next steps:
-         - **Fixable locally**: Hand off to editor to fix
-         - **Unclear if upstream**: Explain the issue so root agent can triage
-
-      The validate target runs markdownlint, HTML validation, link checking, and
-      other structural checks. Vale (prose linting) runs separately in CI and
-      is not included to avoid excessive output.
-
-      If you need to see more of the log, use the Read tool with offset/limit
-      parameters.
-
-    toolsets:
-      - type: filesystem
-      - type: shell
-    handoffs:
-      - editor
-      - writer
-      - root
+      - type: script
+        shell:
+          validate:
+            cmd: "docker buildx bake validate > .validation.log 2>&1"
+            description: Run documentation validation checks (markdownlint, HTML validation, link checking)
 
 rag:
   docs:
@@ -421,9 +351,6 @@ rag:
       limit: 10
 
 models:
-  haiku:
-    provider: anthropic
-    model: claude-haiku-4-5
   sonnet:
     provider: anthropic
     model: claude-sonnet-4-5

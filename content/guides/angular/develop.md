@@ -38,7 +38,7 @@ Create a file named `Dockerfile.dev` in your project root with the following con
 # =========================================
 
 # Define the Node.js version to use (Alpine for a small footprint)
-ARG NODE_VERSION=24.7.0-alpine
+ARG NODE_VERSION=24.12.0-alpine
 
 # Set the base image for development
 FROM node:${NODE_VERSION} AS dev
@@ -50,7 +50,7 @@ ENV NODE_ENV=development
 WORKDIR /app
 
 # Copy only the dependency files first to optimize Docker caching
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json* ./
 
 # Install dependencies using npm with caching to speed up subsequent builds
 RUN --mount=type=cache,target=/root/.npm npm install

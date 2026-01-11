@@ -37,7 +37,6 @@ require (
 	github.com/docker/model-runner v1.0.3 // indirect
 	github.com/docker/model-runner/cmd/cli v1.0.3 // indirect
 	github.com/docker/model-runner/pkg/go-containerregistry v0.0.0-20251121150728-6951a2a36575 // indirect
-	github.com/docker/scout-cli v1.18.4 // indirect
 	github.com/elastic/go-sysinfo v1.15.4 // indirect
 	github.com/elastic/go-windows v1.0.2 // indirect
 	github.com/emirpasic/gods/v2 v2.0.0-alpha // indirect
@@ -137,7 +136,6 @@ replace (
 	github.com/docker/compose/v5 => github.com/docker/compose/v5 v5.0.1
 	github.com/docker/mcp-gateway => github.com/docker/mcp-gateway v0.22.0
 	github.com/docker/model-runner/cmd/cli => github.com/docker/model-runner/cmd/cli v1.0.3
-	github.com/docker/scout-cli => github.com/docker/scout-cli v1.18.4
 	github.com/moby/buildkit => github.com/moby/buildkit v0.26.0
 	github.com/moby/moby/api => github.com/moby/moby/api v1.52.0
 )

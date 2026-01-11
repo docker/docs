@@ -4,6 +4,8 @@ linkTitle: Build process
 description: Learn how Docker builds, tests, and maintains Docker Hardened Images through an automated, security-focused pipeline.
 keywords: docker hardened images, slsa build level 3, automated patching, ai guardrail, build process, signed sbom, supply chain security
 weight: 15
+aliases:
+  - /dhi/about/build-process/
 ---
 
 Docker Hardened Images are built through an automated pipeline that monitors

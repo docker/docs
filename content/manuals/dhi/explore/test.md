@@ -4,6 +4,8 @@ linktitle: Image testing
 description: See how Docker Hardened Images are automatically tested for standards compliance, functionality, and security.
 keywords: docker scout, test attestation, cosign verify, image testing, vulnerability scan
 weight: 45
+aliases:
+  - /dhi/about/test/
 ---
 
 Docker Hardened Images (DHIs) are designed to be secure, minimal, and

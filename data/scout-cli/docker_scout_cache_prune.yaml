@@ -60,7 +60,7 @@ examples: |-
         ✓ temporary data deleted
     ```
 
-    ### Delete temporary _and_ cache data
+    ### Delete temporary and cache data
 
     ```console
     $ docker scout cache prune --sboms

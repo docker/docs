@@ -26,18 +26,18 @@ If you have an existing Rails application, you will need to create the Docker as
 
 ## 1. Initialize Docker assets
 
-Rails 7.1 and newer generates multistage Dockerfile out of the box. Following are two versions of such a file: one using Docker Hardened Images (DHI) and another using the official Docker image.
+Rails 7.1 and newer generates multistage Dockerfile out of the box. Following are two versions of such a file: one using Docker Hardened Images (DHIs) and another using the Docker Official Image (DOIs). Although the Dockerfile is generated automatically, understanding its purpose and functionality is important. Reviewing the following example is highly recommended.
 
-> [Docker Hardened Images (DHIs)](https://docs.docker.com/dhi/) are minimal, secure, and production-ready container base and application images maintained by Docker.
+[Docker Hardened Images (DHIs)](https://docs.docker.com/dhi/) are minimal, secure, and production-ready container base and application images maintained by Docker. DHIs are recommended whenever it is possible for better security. They are designed to reduce vulnerabilities and simplify compliance, freely available to everyone with no subscription required, no usage restrictions, and no vendor lock-in.
 
-DHI images are recommended whenever it is possible for better security. They are designed to reduce vulnerabilities and simplify compliance.
+Multistage Dockerfiles help create smaller, more efficient images by separating build and runtime dependencies, ensuring only necessary components are included in the final image. Read more in the [Multi-stage builds guide](/get-started/docker-concepts/building-images/multi-stage-builds/).
 
-> Multistage Dockerfiles help create smaller, more efficient images by separating build and runtime dependencies, ensuring only necessary components are included in the final image. Read more in the [Multi-stage builds guide](/get-started/docker-concepts/building-images/multi-stage-builds/).
 
-Although the Dockerfile is generated automatically, understanding its purpose and functionality is important. Reviewing the following example is highly recommended.
 
 {{< tabs >}}
-{{< tab name="Using Docker Hardened Images" >}}
+{{< tab name="Using DHIs" >}}
+
+You must authenticate to `dhi.io` before you can pull Docker Hardened Images. Run `docker login dhi.io` to authenticate.
 
 ```dockerfile {title=Dockerfile}
 # syntax=docker/dockerfile:1
@@ -50,8 +50,8 @@ Although the Dockerfile is generated automatically, understanding its purpose an
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=3.4.7
-FROM <your-namespace>/dhi-ruby:$RUBY_VERSION-dev AS base
+ARG RUBY_VERSION=3.4.8
+FROM dhi.io/ruby:$RUBY_VERSION-dev AS base
 
 # Rails app lives here
 WORKDIR /rails
@@ -134,7 +134,7 @@ CMD ["./bin/thrust", "./bin/rails", "server"]
 ```
 
 {{< /tab >}}
-{{< tab name="Using the official Docker image" >}}
+{{< tab name="Using DOIs" >}}
 
 ```dockerfile {title=Dockerfile}
 # syntax=docker/dockerfile:1
@@ -147,7 +147,7 @@ CMD ["./bin/thrust", "./bin/rails", "server"]
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=3.4.7
+ARG RUBY_VERSION=3.4.8
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
 # Rails app lives here
