@@ -1,79 +1,75 @@
-<details id="markdownDropdown" class="ml-3 group relative z-10 inline-block" data-heap-id="markdown-dropdown">
-    <summary
-      class="dropdown-base hover:bg-gray-50 dark:hover:bg-gray-900 inline-flex cursor-pointer items-center gap-0 py-1 pl-2 text-sm font-semibold transition-colors"
-      data-heap-id="markdown-dropdown-toggle"
+<div class="ml-3 relative inline-block" x-data="{ open: false }" @click.outside="open = false">
+  <div class="flex shadow rounded-sm overflow-hidden border border-gray-200 dark:border-gray-700">
+    <!-- Primary copy button -->
+    <button
+      onclick="copyMarkdown()"
+      data-heap-id="copy-markdown-button"
+      class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 flex cursor-pointer items-center gap-2 px-3 py-2 text-sm transition-colors whitespace-nowrap text-gray-900 dark:text-white"
     >
-      <span class="font-normal">Page options</span>
-      <span class="icon-svg transition-transform group-open:rotate-180">
-        {{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}
+      <span class="icon-svg icon-sm">
+        {{ partial "icon" "content_copy" }}
       </span>
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-      </svg>
-    </summary>
+      <span class="icon-svg icon-sm hidden">
+        {{ partial "icon" "check_circle" }}
+      </span>
+      <span>Copy as Markdown</span>
+    </button>
 
-    <!-- Dropdown menu -->
-    <div
-      class="dropdown-base absolute right-0 z-50 mt-1 w-65 origin-top-right p-2 text-sm shadow-md [display:none] group-open:[display:block]"
-      data-heap-id="markdown-dropdown-menu"
+    <!-- Dropdown toggle -->
+    <button
+      @click="open = !open"
+      type="button"
+      data-heap-id="markdown-dropdown-toggle"
+      class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center justify-center px-2 border-l border-gray-200 dark:border-gray-700 transition-colors text-gray-900 dark:text-white"
+      aria-label="More options"
     >
-      <button
-        onclick="copyMarkdown()"
-        data-heap-id="copy-markdown-button"
-        class="sub-button"
-      >
-        <span class="icon-svg mt-[2px] text-base leading-none">
-          {{ partial "icon" "content_copy" }}
-        </span>
-        <span class="icon-svg hidden mt-[2px] text-base leading-none">
-          {{ partial "icon" "check_circle" }}
-        </span>
-        <div class="leading-tight">
-          <div class="text-base">Copy page as Markdown for LLMs</div>
-        </div>
-      </button>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+      </svg>
+    </button>
+  </div>
 
-      <button
-        onclick="viewPlainText()"
-        data-heap-id="view-markdown-button"
-        class="sub-button"
-      >
-        <span class="icon-svg mt-[2px] text-base leading-none">
-          {{ partial "icon" "description" }}
-        </span>
-        <div class="leading-tight">
-          <div class="text-base">View page as plain text</div>
-        </div>
-      </button>
+  <!-- Dropdown menu -->
+  <div
+    x-show="open"
+    x-collapse
+    x-cloak
+    class="absolute right-0 top-full mt-1 min-w-full bg-white dark:bg-gray-800 rounded-sm shadow-lg overflow-hidden z-50 border border-gray-200 dark:border-gray-700"
+    data-heap-id="markdown-dropdown-menu"
+  >
+    <button
+      onclick="viewPlainText()"
+      data-heap-id="view-markdown-button"
+      class="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+    >
+      <span class="icon-svg icon-sm">
+        {{ partialCached "icon" "open_in_new" "open_in_new" }}
+      </span>
+      <span>Open Markdown</span>
+    </button>
 
-      <button
-        onclick="openInDocsAI()"
-        data-heap-id="search-docs-ai-button"
-        class="sub-button"
-      >
-        <span class="icon-svg mt-[2px] text-base leading-none">
-          {{ partial "icon" "search" }}
-        </span>
-        <div class="leading-tight">
-          <div class="text-base">Ask questions with Docs AI</div>
-        </div>
-      </button>
-      {{ if eq hugo.Environment "production" }}
-       <button
-        onclick="openInClaude()"
-        data-heap-id="search-docs-ai-button"
-        class="sub-button"
-      >
-        <span class="icon-svg mt-[2px] text-base leading-none">
-          {{ partial "icon" "/icons/claude.svg" }}
-        </span>
-        <div class="leading-tight">
-          <div class="text-base">Open in Claude</div>
-        </div>
-      </button>
-      {{ end }}
-
-    </div>
-  </details>
+    <button
+      onclick="openInDocsAI()"
+      data-heap-id="search-docs-ai-button"
+      class="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+    >
+      <span class="icon-svg icon-sm">
+        {{ partialCached "icon" "search" "search" }}
+      </span>
+      <span>Ask Docs AI</span>
+    </button>
+    <button
+      onclick="openInClaude()"
+      data-heap-id="open-claude-button"
+      class="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+    >
+      <span class="icon-svg icon-sm">
+        {{ partialCached "icon" "/icons/claude.svg" "claude" }}
+      </span>
+      <span>Open in Claude</span>
+    </button>
+  </div>
+</div>
 
 <script>
     function getCurrentPlaintextUrl() {
