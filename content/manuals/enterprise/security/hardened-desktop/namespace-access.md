@@ -47,7 +47,7 @@ After any attempt to push to an existing repository in your personal namespace,
 you'll see an error message like the following:
 
 ```console
-$ docker push some-repo/tagname
+$ docker push <personal-namespace>/<image>:<tag>
 Unavailable
-authentication required - namespace access restriction from an organization you belong to prevents pushing new content in your personal namespace. Restriction applied by: sheltontest19,hubregistrystagetest. Please contact your organization administrator
+authentication required - namespace access restriction from an organization you belong to prevents pushing new content in your personal namespace. Restriction applied by: <organizations>. Please contact your organization administrator
 ```
