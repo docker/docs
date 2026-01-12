@@ -10,7 +10,12 @@
   <div class="flex w-full">
     <article class="prose min-w-0 flex-[2_2_0%] max-w-4xl dark:prose-invert">
     {{ partial "breadcrumbs.html" . }}
-    <h1>{{ .Title }}</h1>
+    <div class="flex items-start justify-between gap-4">
+      <h1>{{ .Title }}</h1>
+      <div class="md-dropdown ml-auto mr-4 hidden lg:block">
+        {{ partial "md-dropdown.html" . }}
+      </div>
+    </div>
     <div class="overflow-x-auto">
       <table>
         <tbody>
