@@ -145,7 +145,7 @@ Composefile include:
 Compose sbom:
   requires: Docker Compose [2.39.0](https://github.com/docker/compose/releases/tag/v2.39.0) and later
 Compose SDK:
-  requires: Docker Compose [5.00.0](https://github.com/docker/compose/releases/tag/v5.00.0) and later
+  requires: Docker Compose [5.0.0](https://github.com/docker/compose/releases/tag/v5.0.0) and later
 Dev Environments:
   availability: Beta
 Docker Build Cloud:
