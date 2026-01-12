@@ -92,6 +92,10 @@ outputs:
   section:
     - html
     - markdown
+  taxonomy:
+    - html
+  term:
+    - html
 
 languages:
   en:
