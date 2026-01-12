@@ -26,6 +26,43 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.56.0
+
+{{< release-date date="2026-01-12" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.56.0" build_path="/214940/" >}}
+
+### New
+
+- Docker Desktop now includes Docker Compose v5 which introduces a new official Go SDK. This SDK provides a comprehensive API that lets you integrate Compose functionality directly into your applications, allowing you to load, validate, and manage multi-container environments without relying on the Compose CLI. For more information, see the [Compose SDK docs](/manuals/compose/compose-sdk.md).
+
+### Updates
+
+- [containerd v2.2.1](https://github.com/containerd/containerd/releases/tag/v2.2.1)
+- [Docker Compose v5.0.0](https://github.com/docker/compose/releases/tag/v5.0.0)
+- [cagent v1.18.6](https://github.com/docker/cagent/releases/tag/v1.18.6)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a panic in filesharing tests when containers don't have an IP address immediately after starting.
+- Added support for custom DNS entries in the LinuxKit VM with the `ExtraDNSEntries` configuration field.
+
+#### For Windows
+
+- Fixed a bug on Windows where removing the state directory would fail because log files were still open.
+- Fixed installations from the Microsoft Store wrongly advertizing a new update.
+- Fixed a crash when running `/sbin/ldconfig` in `ubuntu:22.04` ARM64 containers by upgrading QEMU from 8.1.5 to 10.0.4. This resolves a known issue reported in [docker/for-win#15004](https://github.com/docker/for-win/issues/15004).
+
+  > [!NOTE]
+  >
+  > When running under ARM64 emulation, some `amd64` Go binaries built with older Go versions may still segfault. To avoid this, rebuild affected binaries using Go 1.25.4 or later. For details, see [golang/go#69255](https://github.com/golang/go/issues/69255) and the corresponding [Go commit](https://github.com/golang/go/commit/bf95b767394eb5643265f44c7b98bdbb85b897ce).
+
+#### For Linux
+
+- Fixed Kubernetes `hostPath` volume mounts failing on Linux hosts. Fixes [docker/desktop-linux#12](https://github.com/docker/desktop-linux/issues/12).
+
 ## 4.55.0
 
 {{< release-date date="2025-12-16" >}}
