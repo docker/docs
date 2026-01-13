@@ -30,6 +30,12 @@ prev:
   title: {{ .Title }}
   url: {{ .Permalink }}
 {{- end }}
+{{- $specURL := urls.Parse (printf "/%s%s.yaml" .File.Dir .File.ContentBaseName) }}
+openapi_spec: {{ $specURL.String | absURL }}
 ---
 
-{{ .RenderShortcodes }}
+{{ .Content }}
+
+**OpenAPI Specification:** [{{ .Title }} API Spec]({{ $specURL.String | absURL }})
+
+This page provides interactive API documentation. For the machine-readable OpenAPI specification, see the link above.

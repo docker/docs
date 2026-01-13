@@ -51,6 +51,7 @@ ARG DOCS_URL="https://docs.docker.com"
 ENV HUGO_CACHEDIR="/tmp/hugo_cache"
 RUN --mount=type=cache,target=/tmp/hugo_cache \
     hugo --gc --minify -e $HUGO_ENV -b $DOCS_URL
+RUN ./hack/flatten-markdown.sh public
 
 # lint lints markdown files
 FROM ghcr.io/igorshubovych/markdownlint-cli:v0.45.0 AS lint
