@@ -67,16 +67,20 @@ exports.handler = (event, context, callback) => {
 
     // If it's not a file, treat it as a directory
     if (!hasFileExtension) {
-        // Ensure the URI ends with a slash before appending index file
-        if (!uri.endsWith("/")) {
-            uri += "/";
+        if (wantsMarkdown) {
+            // Markdown files are flattened: /path/to/page.md not /path/to/page/index.md
+            uri = uri.replace(/\/$/, '') + '.md';
+        } else {
+            // HTML uses directory structure with index.html
+            if (!uri.endsWith("/")) {
+                uri += "/";
+            }
+            uri += "index.html";
         }
-        // Serve markdown if Accept header requests it, otherwise serve HTML
-        uri += wantsMarkdown ? "index.md" : "index.html";
         request.uri = uri;
-    } else if (wantsMarkdown && uri.endsWith('.html')) {
-        // If requesting a specific HTML file but wants markdown, try the .md version
-        uri = uri.replace(/\.html$/, '.md');
+    } else if (wantsMarkdown && uri.endsWith('/index.html')) {
+        // If requesting index.html but wants markdown, use the flattened .md file
+        uri = uri.replace(/\/index\.html$/, '.md');
         request.uri = uri;
     }
 
