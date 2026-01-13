@@ -1,6 +1,7 @@
 (?i)[A-Z]{2,}'?s
 jq
 ripgrep
+exfiltration
 sandboxing
 Adreno
 Aleksandrov
@@ -242,6 +243,7 @@ Zsh
 [Cc]ompose
 [Cc]onfigs
 [dD]eduplicate
+[Dd]enylist
 [Dd]ev
 [Dd]iscoverability
 [Dd]istroless
