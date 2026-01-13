@@ -8,8 +8,9 @@ keywords: go, golang, migration, dhi
 This example shows how to migrate a Go application to Docker Hardened Images.
 
 The following examples show Dockerfiles before and after migration to Docker
-Hardened Images. Each example includes four variations:
+Hardened Images. Each example includes five variations:
 
+- Before (Ubuntu): A sample Dockerfile using Ubuntu-based images, before migrating to DHI
 - Before (Wolfi): A sample Dockerfile using Wolfi distribution images, before migrating to DHI
 - Before (DOI): A sample Dockerfile using Docker Official Images, before migrating to DHI
 - After (multi-stage): A sample Dockerfile after migrating to DHI with multi-stage builds (recommended for minimal, secure images)
@@ -28,6 +29,25 @@ Hardened Images. Each example includes four variations:
 > Run `docker login dhi.io` to authenticate.
 
 {{< tabs >}}
+{{< tab name="Before (Ubuntu)" >}}
+
+```dockerfile
+#syntax=docker/dockerfile:1
+
+FROM ubuntu/go:1.22-24.04
+
+WORKDIR /app
+ADD . ./
+
+# Install any additional packages if needed using apt
+# RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
+RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags="-s -w" --installsuffix cgo -o main .
+
+ENTRYPOINT ["/app/main"]
+```
+
+{{< /tab >}}
 {{< tab name="Before (Wolfi)" >}}
 
 ```dockerfile
