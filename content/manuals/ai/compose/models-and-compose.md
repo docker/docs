@@ -77,7 +77,7 @@ Common configuration options include:
    > as small as feasible for your specific needs.
 
 - `runtime_flags`: A list of raw command-line flags passed to the inference engine when the model is started.
-   For example, if you use llama.cpp, you can pass any of [the available parameters](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md).
+   See [Configuration options](/manuals/ai/model-runner/configuration.md) for commonly used parameters and examples.
 - Platform-specific options may also be available via extension attributes `x-*`
 
 > [!TIP]
@@ -364,5 +364,7 @@ services:
 
 - [`models` top-level element](/reference/compose-file/models.md)
 - [`models` attribute](/reference/compose-file/services.md#models)
-- [Docker Model Runner documentation](/manuals/ai/model-runner.md)
-- [Compose Model Runner documentation](/manuals/ai/compose/models-and-compose.md)
+- [Docker Model Runner documentation](/manuals/ai/model-runner/_index.md)
+- [Configuration options](/manuals/ai/model-runner/configuration.md) - Context size and runtime parameters
+- [Inference engines](/manuals/ai/model-runner/inference-engines.md) - llama.cpp and vLLM details
+- [API reference](/manuals/ai/model-runner/api-reference.md) - OpenAI and Ollama-compatible APIs
