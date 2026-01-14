@@ -34,7 +34,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
-- Docker Desktop now has a new issue tracker for all platforms at https://github.com/docker/desktop-feedback.
+- Docker Desktop now has a new issue tracker for all platforms at https://github.com/docker/desktop-feedback. Relevant, actively discussed issues from the previous platform-specific trackers will be migrated.
 
 ### Updates
 
