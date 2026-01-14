@@ -12,6 +12,12 @@ tags: [Release notes, admin]
 
 This page provides details on new features, enhancements, known issues, and bug fixes across Docker Home, the Admin Console, billing, security, and subscription functionalities.
 
+## TBD
+
+### New
+
+- Administrators can now use an allow list with [Image Access Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md) to approve specific repositories that bypass image access controls.
+
 ## 2025-01-30
 
 ### New
