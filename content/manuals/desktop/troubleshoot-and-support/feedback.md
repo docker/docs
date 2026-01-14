@@ -26,11 +26,7 @@ discussion, sign in to the appropriate Docker forums:
 ### Report bugs or problems on GitHub
 
 To report bugs or problems, visit:
-- [Docker Desktop for Mac issues on
-GitHub](https://github.com/docker/for-mac/issues)
-- [Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues)
-- [Docker Desktop for Linux issues on
-GitHub](https://github.com/docker/desktop-linux/issues)
+- [Docker Desktop issues on GitHub](https://github.com/docker/desktop-feedback)
 - [Docker Extensions issues on GitHub](https://github.com/docker/extensions-sdk/issues)
 
 ### Feedback via Community Slack channels
