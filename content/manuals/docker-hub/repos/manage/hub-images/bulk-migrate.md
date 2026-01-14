@@ -112,7 +112,7 @@ enumerate tags and copy each one. The following example script retrieves all
 tags for a given repository and migrates them in a loop. This approach scales to
 repositories with many tags without overwhelming local resources. Note that
 there is a rate limit on Docker Hub requests, so you may need to add delays or
-pagination handling for very large repositories.
+pagination handling for large repositories.
 
 Replace the environment variable values with your source and destination
 organization names and repository name. If your source repository is private,
