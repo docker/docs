@@ -35,6 +35,7 @@ $ docker run --rm --name postgres-dev \
 
 | Flag | Purpose |
 |------|---------|
+| `--rm` | Automatically removes the container when it stops |
 | `--name postgres-dev` | Assigns a memorable name instead of a random string |
 | `-e POSTGRES_PASSWORD=...` | Sets the superuser password (required) |
 | `-p 5432:5432` | Maps host port 5432 to container port 5432 |
@@ -76,7 +77,10 @@ $ docker exec postgres-dev psql -U postgres -c "\l" | grep testdb
 $ docker stop postgres-dev
 postgres-dev
 
-$ docker run --rm --name postgres-dev -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -d postgres:18
+$ docker run --rm --name postgres-dev \
+  -e POSTGRES_PASSWORD=mysecretpassword \
+  -p 5432:5432 \
+  -d postgres:18
 
 $ docker exec postgres-dev psql -U postgres -c "\l" | grep testdb
 (no output - database is gone)
@@ -104,6 +108,8 @@ The `-v postgres_data:/var/lib/postgresql` flag mounts a named volume called `po
 
 ### Verify persistence works
 
+To verify data persistence, repeat the previous test, but this time with the named volume attached in place.
+
 ```console
 $ docker exec postgres-dev psql -U postgres -c "CREATE DATABASE testdb;"
 CREATE DATABASE
@@ -121,7 +127,7 @@ $ docker exec postgres-dev psql -U postgres -c "\l" | grep testdb
  testdb    | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           |
 ```
 
-The database survived because the volume preserved it.
+If you see "testdb" in the output, persistence works: The database survived because the volume preserved the data directory.
 
 ### Managing volumes
 
@@ -160,9 +166,15 @@ $ docker volume rm postgres_data
 
 Bind mounts map a specific host directory to a container path. Unlike named volumes, you control exactly where data lives on the host filesystem.
 
+Create a directory on your host machine to store Postgres data.
+
 ```console
 $ mkdir -p ~/postgres-data
+```
 
+Run Postgres using a bind mount.
+
+```console
 $ docker run --rm --name postgres-dev \
   -e POSTGRES_PASSWORD=mysecretpassword \
   -p 5432:5432 \
