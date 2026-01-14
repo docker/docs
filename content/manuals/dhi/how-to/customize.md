@@ -110,6 +110,8 @@ To customize a Docker Hardened Image, follow these steps:
       image. These arguments are appended to the base image's entrypoint.
    1. Add [`CMD`](/reference/dockerfile/#cmd) arguments to the image. These
       arguments are appended to the base image's command.
+   1. Override the default (`/`) [working
+      directory](/reference/dockerfile/#workdir) for the image.
    1. Specify a suffix for the customization name that is appended to the
       customized image's tag. For example, if you specify `custom` when
       customizing the `dhi-python:3.13` image, the customized image will be
