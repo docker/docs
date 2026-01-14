@@ -26,6 +26,27 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.57.0
+
+{{< release-date date="2026-01-19" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.57.0" build_path="//" >}}
+
+### New
+
+- Docker Desktop now has a new issue tracker for all platforms at https://github.com/docker/desktop-feedback.
+
+### Updates
+
+- [Docker Compose v5.0.1](https://github.com/docker/compose/releases/tag/v5.0.1)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Improved alignment of the Ask Gordon streaming indicator so it stays in sync with content on large screens.
+- Fixed a bug where `docker debug` failed on containers started with environement variables but no '='. For example, `docker run -e NONEXISTENT_ENV_VAR`.
+
 ## 4.56.0
 
 {{< release-date date="2026-01-12" >}}
