@@ -65,7 +65,7 @@ from Docker Hardened Images provide:
 - Scanner flexibility: Switch between any VEX-enabled scanner (Docker Scout,
   Trivy, Grype, etc.) without losing vulnerability context or rebuilding
   exclusion lists.
-- Consistent results: All VEX-enabled scanners interpret the same data the
+- Consistent results: VEX-enabled scanners interpret the same data the
   same way, eliminating discrepancies between tools.
 - Faster workflows: Focus on real risks rather than researching why reported
   CVEs don't actually affect your deployment.
@@ -80,7 +80,9 @@ apply to Docker Hardened Images. This creates operational challenges:
 - Higher false positive rates: Expect to see more reported vulnerabilities
   that don't represent real risks.
 - Increased investigation time: Security teams spend time researching why
-  CVEs don't apply instead of addressing actual vulnerabilities.
+  CVEs don't apply instead of addressing actual vulnerabilities. With Docker
+  Hardened Images, security experts at Docker manage this investigation for
+  you, thoroughly vetting each justification before adding it to a VEX statement.
 - CI/CD friction: Build pipelines may fail on vulnerabilities that aren't
   exploitable in your images.
 
