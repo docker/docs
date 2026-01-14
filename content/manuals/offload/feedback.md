@@ -22,4 +22,4 @@ opens a feedback form where you can share ideas directly with the Docker Team.
 
 ## Report bugs or problems on GitHub
 
-To report bugs or problems, the [Docker Desktop issue tracker](https://github.com/docker/desktop-feedback).
+To report bugs or problems, visit the [Docker Desktop issue tracker](https://github.com/docker/desktop-feedback).
