@@ -60,10 +60,6 @@
 							'linux': 'Docker Desktop for Linux'
 						};
 						return labels[os === 'linux' ? 'linux' : `${os}-${arch}`] || 'Docker Desktop';
-					},
-					getPrimaryLabel() {
-						if (this.os === 'unknown') return 'Download Docker Desktop';
-						return this.getOsLabel(this.os, this.arch);
 					}
 				}"
 				@click.outside="open = false">
