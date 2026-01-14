@@ -64,6 +64,9 @@ values with your source and destination organization names, repository name, and
 tag.
 
 ```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
 SRC_ORG="oldorg"
 DEST_ORG="neworg"
 REPO="myapp"
@@ -89,6 +92,9 @@ digest, and tag. You can choose between `crane` and `regctl` for the copy
 operation.
 
 ```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
 SRC_ORG="oldorg"
 DEST_ORG="neworg"
 REPO="myapp"
@@ -213,6 +219,9 @@ source and destination organization names, repository name, and tag. You can
 choose between `crane` and `regctl` for retrieving digests.
 
 ```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
 SRC_ORG="oldorg"
 DEST_ORG="neworg"
 REPO="myapp"
@@ -248,6 +257,9 @@ your source and destination organization names, repository name, and tag. You
 can choose between `crane` and `regctl` for retrieving manifests.
 
 ```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
 SRC_ORG="oldorg"
 DEST_ORG="neworg"
 REPO="myapp"
