@@ -60,10 +60,6 @@
 							'linux': 'Docker Desktop for Linux'
 						};
 						return labels[os === 'linux' ? 'linux' : `${os}-${arch}`] || 'Docker Desktop';
-					},
-					getPrimaryLabel() {
-						if (this.os === 'unknown') return 'Download Docker Desktop';
-						return this.getOsLabel(this.os, this.arch);
 					}
 				}"
 				@click.outside="open = false">
@@ -83,7 +79,7 @@
 								<a :href="getDownloadUrl(os, arch)"
 									class="bg-blue flex cursor-pointer items-center gap-2 p-2 px-4 text-white transition duration-300 hover:bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-400 whitespace-nowrap">
 									<span class="icon-svg icon-sm">{{ partial "icon" "download" }}</span>
-									<span x-text="getPrimaryLabel()">Download Docker Desktop</span>
+									<span>Download Docker Desktop</span>
 								</a>
 								<button @click="open = !open" type="button"
 									class="bg-blue flex items-center justify-center px-3 text-white border-l border-blue-400 hover:bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-400 transition duration-300"
@@ -93,7 +89,7 @@
 									</svg>
 								</button>
 							</div>
-							<div x-show="open" x-collapse
+							<div x-show="open" x-collapse x-cloak
 								class="absolute top-full left-0 mt-1 min-w-full bg-white dark:bg-gray-800 rounded-sm shadow-lg overflow-hidden z-50">
 								<a href="https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64"
 									class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap">
