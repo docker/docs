@@ -35,7 +35,7 @@ You can create the `admin-settings.json` file in two ways:
 - Use the `--admin-settings` installer flag to auto-generate the file:
     - [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) installation guide
     - [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) installation guide
-- Create it manually and place it in the following locations:
+- Create it manually (UTF-8 without BOM) and place it in the following locations:
     - Mac: `/Library/Application\ Support/com.docker.docker/admin-settings.json`
     - Windows: `C:\ProgramData\DockerDesktop\admin-settings.json`
     - Linux: `/usr/share/docker-desktop/admin-settings.json`
