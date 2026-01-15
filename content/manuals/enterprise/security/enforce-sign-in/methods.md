@@ -220,7 +220,7 @@ The registry.json method works across all platforms and offers flexible deployme
 
 ### File locations
 
-Create the `registry.json` file at the appropriate location:
+Create the `registry.json` file (UTF-8 without BOM) at the appropriate location:
 
 | Platform | Location |
 | --- | --- |
