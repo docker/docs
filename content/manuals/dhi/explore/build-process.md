@@ -103,7 +103,8 @@ Each Docker Hardened Image is built through an automated pipeline:
    functionality.
 6. Signing and attestations: Docker signs each image and generates
    attestations (SBOMs, VEX documents, build provenance).
-7. Publishing: The signed image and attestations are published to Docker Hub.
+7. Publishing: The signed image is published to the DHI registry and the
+   attestations are published to the Docker Scout registry.
 8. Cascade rebuilds: If any customized images use this base, their rebuilds
    are automatically triggered.
 
@@ -125,7 +126,7 @@ The following diagram shows the base image build flow:
                                                                                            v
 .-------------------.      .-------------------.      .-------------------.      .-------------------.
 | Cascade rebuilds  |<-----| Publish to        |<-----| Sign & generate   |<-----| Testing           |
-| (if needed)       |      | Docker Hub        |      | attestations      |      |                   |
+| (if needed)       |      | DHI registry      |      | attestations      |      |                   |
 '-------------------'      '-------------------'      '-------------------'      '-------------------'
 ```
 
@@ -142,8 +143,8 @@ When you customize a DHI image with DHI Enterprise, the build process is simplif
 4. Apply customizations: Your OCI artifacts are applied to the base image.
 5. Signing and attestations: Docker signs the customized image and generates
    attestations (SBOMs, VEX documents, build provenance).
-6. Publishing: The signed customized image and attestations are published to
-   Docker Hub.
+6. Publishing: The signed customized image is published to Docker Hub and the
+   attestations are published to the Docker Scout registry.
 
 Docker handles the entire process automatically, so you don't need to manage
 builds for your customized images. However, you're responsible for testing your
