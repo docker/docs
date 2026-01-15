@@ -245,13 +245,13 @@ for images, using the same Docker Scout CLI commands.
 To list attestations for a DHI Helm chart:
 
 ```console
-$ docker scout attest list oci://dhi.io/<chart>:<version>
+$ docker scout attest list dhi.io/<chart>:<version>
 ```
 
-For example, to list attestations for the Redis HA chart:
+For example, to list attestations for the external-dns chart:
 
 ```console
-$ docker scout attest list oci://dhi.io/redis-ha-chart:0.1.0
+$ docker scout attest list dhi.io/external-dns-chart:1.20.0
 ```
 
 This command shows all available chart attestations, including SBOMs, provenance, vulnerability reports, and more.
@@ -263,7 +263,7 @@ To retrieve a specific attestation from a Helm chart, use the `--predicate-type`
 ```console
 $ docker scout attest get \
   --predicate-type https://cyclonedx.org/bom/v1.6 \
-  oci://dhi.io/<chart>:<version>
+  dhi.io/<chart>:<version>
 ```
 
 For example:
@@ -271,7 +271,7 @@ For example:
 ```console
 $ docker scout attest get \
   --predicate-type https://cyclonedx.org/bom/v1.6 \
-  oci://dhi.io/redis-ha-chart:0.1.0
+  dhi.io/external-dns-chart:1.20.0
 ```
 
 To retrieve only the predicate body:
@@ -280,7 +280,7 @@ To retrieve only the predicate body:
 $ docker scout attest get \
   --predicate-type https://cyclonedx.org/bom/v1.6 \
   --predicate \
-  oci://dhi.io/<chart>:<version>
+  dhi.io/<chart>:<version>
 ```
 
 ### Validate chart attestations with Docker Scout
@@ -288,14 +288,14 @@ $ docker scout attest get \
 To validate a chart attestation using Docker Scout, use the `--verify` flag:
 
 ```console
-$ docker scout attest get oci://dhi.io/<chart>:<version> \
+$ docker scout attest get dhi.io/<chart>:<version> \
    --predicate-type https://scout.docker.com/sbom/v0.1 --verify
 ```
 
-For example, to verify the SBOM attestation for the Redis HA chart:
+For example, to verify the SBOM attestation for the external-dns chart:
 
 ```console
-$ docker scout attest get oci://dhi.io/redis-ha-chart:0.1.0 \
+$ docker scout attest get dhi.io/external-dns-chart:1.20.0 \
    --predicate-type https://scout.docker.com/sbom/v0.1 --verify
 ```
 
