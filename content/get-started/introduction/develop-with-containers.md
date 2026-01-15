@@ -97,7 +97,13 @@ The greeting at the top of the page is populated by an API call at `/api/greetin
     };
     ```
 
-3. If you haven't done so yet, save the file. If you refresh your browser, you should see a new greeting. If you keep refreshing, you should see all of the messages appear.
+3. Save the file if you haven't done so yet, then run the following command again: 
+
+   ```console
+   $ docker compose watch
+   ```
+   
+    If you refresh your browser, you should see a new greeting. If you keep refreshing, you should see all of the messages appear.
 
     ![Screenshot of the to-do app with a new greeting](images/develop-app-with-greetings.webp)
 
