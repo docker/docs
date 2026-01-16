@@ -100,9 +100,9 @@ Before you push your changes and open a pull request, we recommend that you
 test your site locally first. Local tests check for broken links, incorrectly
 formatted markup, and other things. To run the tests:
 
-```console
-$ docker buildx bake validate
-```
+    ```console
+    $ docker buildx bake validate
+    ```
 
 If this command doesn't result in any errors, you're good to go!
 
