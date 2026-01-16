@@ -33,6 +33,11 @@ If you’re new to container images, think of them as a standardized package tha
 
 To share your Docker images, you need a place to store them. This is where registries come in. While there are many registries, Docker Hub is the default and go-to registry for images. Docker Hub provides both a place for you to store your own images and to find images from others to either run or use as the bases for your own images.
 
+When choosing base images, Docker Hub offers two categories of trusted, Docker-maintained images:
+
+- [Docker Official Images (DOI)](/manuals/docker-hub/image-library/trusted-content.md#docker-official-images) – Curated images for popular software, following best practices and regularly updated.
+- [Docker Hardened Images (DHI)](/manuals/dhi/_index.md) – Minimal, secure, production-ready images with near-zero CVEs, designed to reduce attack surface and simplify compliance. DHI images are free and open source under Apache 2.0.
+
 In [Develop with containers](develop-with-containers.md), you used the following images that came from Docker Hub, each of which are [Docker Official Images](/manuals/docker-hub/image-library/trusted-content.md#docker-official-images):
 
 - [node](https://hub.docker.com/_/node) - provides a Node environment and is used as the base of your development efforts. This image is also used as the base for the final application image.
@@ -40,7 +45,11 @@ In [Develop with containers](develop-with-containers.md), you used the following
 - [phpmyadmin](https://hub.docker.com/_/phpmyadmin) - provides phpMyAdmin, a web-based interface to the MySQL database
 - [traefik](https://hub.docker.com/_/traefik) - provides Traefik, a modern HTTP reverse proxy and load balancer that routes requests to the appropriate container based on routing rules
 
-Explore the full catalog of [Docker Official Images](https://hub.docker.com/search?badges=official), [Docker Verified Publishers](https://hub.docker.com/search?badges=verified_publisher), and [Docker Sponsored Open Source Software](https://hub.docker.com/search?badges=open_source) images to see more of what there is to run and build on.
+Explore the full catalog of trusted content on Docker Hub:
+- [Docker Official Images](https://hub.docker.com/search?badges=official) – Curated images for popular software
+- [Docker Hardened Images](https://hub.docker.com/hardened-images/catalog) – Security-hardened, minimal production images (also available at [dhi.io](https://dhi.io))
+- [Docker Verified Publishers](https://hub.docker.com/search?badges=verified_publisher) – Images from verified software vendors
+- [Docker Sponsored Open Source](https://hub.docker.com/search?badges=open_source) – Images from sponsored OSS projects
 
 ## Try it out
 
