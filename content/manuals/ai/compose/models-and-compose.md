@@ -333,6 +333,27 @@ models:
       - "0.9"
 ```
 
+### Embeddings
+
+When using embedding models with the `/v1/embeddings` endpoint, you must include the `--embeddings` runtime flag for the model to be properly configured.
+
+```yaml
+services:
+  app:
+    image: app
+    models:
+      embedding_model:
+        endpoint_var: EMBEDDING_URL
+        model_var: EMBEDDING_MODEL
+
+models:
+  embedding_model:
+    model: ai/all-minilm
+    context_size: 2048
+    runtime_flags:
+      - "--embeddings"          # Required for embedding models
+```
+
 ## Alternative configuration with provider services
 
 > [!IMPORTANT]
