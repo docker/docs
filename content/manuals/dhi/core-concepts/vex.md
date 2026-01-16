@@ -1,7 +1,7 @@
 ---
 title: Vulnerability Exploitability eXchange (VEX)
 linktitle: VEX
-description: Learn how VEX helps you prioritize real risks through producer assertions about which vulnerabilities in Docker Hardened Images are exploitable in the product as shipped.
+description: Learn how VEX helps you prioritize real risks by identifying which vulnerabilities in Docker Hardened Images are actually exploitable.
 keywords: vex container security, vulnerability exploitability, filter false positives, docker scout vex, cve prioritization
 ---
 
