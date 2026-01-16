@@ -13,6 +13,14 @@ params:
       description: Learn how Docker builds, tests, and maintains Docker Hardened Images through an automated, security-focused pipeline.
       icon: build
       link: /dhi/explore/build-process/
+    - title: Image types
+      description: Learn about the different image types, distributions, and variants offered in the Docker Hardened Images catalog.
+      icon: view_module
+      link: /dhi/explore/available/
+    - title: Scanner integrations
+      description: Discover which vulnerability scanners integrate with Docker Hardened Images and support open standards like OpenVEX.
+      icon: security
+      link: /dhi/explore/scanner-integrations/
     - title: Image testing
       description: See how Docker Hardened Images are automatically tested for standards compliance, functionality, and security.
       icon: science
@@ -21,10 +29,6 @@ params:
       description: Understand Docker's role and your responsibilities when using Docker Hardened Images as part of your secure software supply chain.
       icon: group
       link: /dhi/explore/responsibility/
-    - title: Image types
-      description: Learn about the different image types, distributions, and variants offered in the Docker Hardened Images catalog.
-      icon: view_module
-      link: /dhi/explore/available/
     - title: Give feedback
       icon: question_exchange
       description: Docker welcomes all contributions and feedback.
