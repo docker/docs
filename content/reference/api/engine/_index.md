@@ -73,21 +73,21 @@ To see the highest version of the API your Docker daemon and client support, use
 ```console
 $ docker version
 Client: Docker Engine - Community
- Version:           29.1.3
+ Version:           29.1.5
  API version:       1.52
- Go version:        go1.25.5
- Git commit:        f52814d
- Built:             Fri Dec 12 14:50:13 2025
+ Go version:        go1.25.6
+ Git commit:        0e6fee6
+ Built:             Fri Jan 16 12:49:41 2026
  OS/Arch:           linux/arm64
  Context:           default
 
 Server: Docker Engine - Community
  Engine:
-  Version:          29.1.3
+  Version:          29.1.5
   API version:      1.52 (minimum version 1.44)
-  Go version:       go1.25.5
-  Git commit:       fbf3ed2
-  Built:            Fri Dec 12 14:50:13 2025
+  Go version:       go1.25.6
+  Git commit:       3b01d64
+  Built:            Fri Jan 16 12:49:41 2026
   OS/Arch:          linux/arm64
   ...
 ```
