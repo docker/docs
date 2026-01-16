@@ -35,7 +35,7 @@ To share your Docker images, you need a place to store them. This is where regis
 
 When choosing base images, Docker Hub offers two categories of trusted, Docker-maintained images:
 
-- [Docker Official Images (DOI)](https://docs.docker.com/docker-hub/image-library/trusted-content/#docker-official-images) – Curated images for popular software, following best practices and regularly updated.
+- [Docker Official Images (DOI)](/manuals/docker-hub/image-library/trusted-content/#docker-official-images) – Curated images for popular software, following best practices and regularly updated.
 - [Docker Hardened Images (DHI)](https://docs.docker.com/dhi/) – Minimal, secure, production-ready images with near-zero CVEs, designed to reduce attack surface and simplify compliance. DHI images are free and open source under Apache 2.0.
 
 In [Develop with containers](develop-with-containers.md), you used the following images that came from Docker Hub, each of which are [Docker Official Images](/manuals/docker-hub/image-library/trusted-content.md#docker-official-images):
