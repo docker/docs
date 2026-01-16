@@ -87,7 +87,7 @@ apply to Docker Hardened Images. This creates operational challenges:
 - CI/CD friction: Build pipelines may fail on vulnerabilities that aren't
   exploitable in your images.
 
-### VEX-based vulnerability handling vs. proprietary approaches
+### VEX-based vulnerability handling versus proprietary approaches
 
 Docker Hardened Images use VEX attestations based on the OpenVEX open standard to document vulnerability exploitability. OpenVEX is an open standard that is recognized by government agencies such as CISA. This open standards approach differs from how some other image vendors handle vulnerabilities using proprietary methods.
 
