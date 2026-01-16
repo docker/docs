@@ -63,10 +63,7 @@ in that workspace.
 Docker Sandboxes is an experimental feature. Features and setup are subject to
 change.
 
-Report issues on GitHub:
-- [Docker Desktop for Mac](https://github.com/docker/for-mac)
-- [Docker Desktop for Windows](https://github.com/docker/for-win)
-- [Docker Desktop for Linux](https://github.com/docker/desktop-linux)
+Report issues on the [Docker Desktop issue tracker](https://github.com/docker/desktop-feedback).
 
 ## Get started
 

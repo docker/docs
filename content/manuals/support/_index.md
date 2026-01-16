@@ -123,9 +123,7 @@ Docker Desktop support excludes:
 
 ### Community resources
 
-- [Docker Desktop for Windows](https://github.com/docker/for-win)
-- [Docker Desktop for Mac](https://github.com/docker/for-mac)
-- [Docker Desktop for Linux](https://github.com/docker/desktop-linux)
+- [Docker Desktop issue tracker](https://github.com/docker/desktop-feedback)
 
 ### Diagnostic data and privacy
 

@@ -48,11 +48,7 @@ If you are a Mac or Linux user, you also have the option to **Uninstall** Docker
 
 > [!TIP]
 >
-> If you do not find a solution in troubleshooting, browse the GitHub repositories or create a new issue:
->
-> - [docker/for-mac](https://github.com/docker/for-mac/issues)
-> - [docker/for-win](https://github.com/docker/for-win/issues)
-> - [docker/desktop-linux](https://github.com/docker/desktop-linux/issues)
+> If you do not find a solution in troubleshooting, browse the GitHub repositories or create a new issue on the [Docker Desktop issue tracker](https://github.com/docker/desktop-feedback).
 
 ### Diagnose from the app
 
@@ -75,7 +71,7 @@ If you are a Mac or Linux user, you also have the option to **Uninstall** Docker
      > [!NOTE]
      >
      > You must be signed in to Docker Desktop to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](/manuals/support/_index.md).
-   - If you don't have a paid Docker subscription, you can open a new Docker Desktop issue on GitHub for [Mac](https://github.com/docker/for-mac/issues), [Windows](https://github.com/docker/for-win/issues), or [Linux](https://github.com/docker/for-linux/issues). Complete the information required and ensure you add the diagnostic ID printed in step two.
+   - If you don't have a paid Docker subscription, you can open a new [Docker Desktop issue on GitHub](https://github.com/docker/desktop-feedback). Complete the information required and ensure you add the diagnostic ID printed in step two.
 
 ### Diagnose from the terminal
 
@@ -178,11 +174,7 @@ $ unzip –l /tmp/<your-diagnostics-ID>.zip
 
 If you have a paid Docker subscription, select **Contact support**. This opens the Docker Desktop support form. Fill in the information required and add the ID you copied in step three to the **Diagnostics ID field**. Then, select **Submit ticket** to request Docker Desktop support.
 
-If you don't have a paid Docker subscription, create an issue on GitHub:
-
-- [For Linux](https://github.com/docker/desktop-linux/issues)
-- [For Mac](https://github.com/docker/for-mac/issues)
-- [For Windows](https://github.com/docker/for-win/issues)
+If you don't have a paid Docker subscription, create an issue on [GitHub](https://github.com/docker/desktop-feedback).
 
 ### Self-diagnose tool
 

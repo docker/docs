@@ -6,15 +6,9 @@ contact_links:
   - name: Moby
     url: https://github.com/moby/moby/issues
     about: Bug reports for Docker Engine
-  - name: Docker Desktop for Windows
-    url: https://github.com/docker/for-win/issues
-    about: Bug reports for Docker Desktop for Windows 
-  - name: Docker Desktop for Mac
-    url: https://github.com/docker/for-mac/issues
-    about: Bug reports for Docker Desktop for Mac 
-  - name: Docker Desktop for Linux
-    url: https://github.com/docker/for-linux/issues
-    about: Bug reports for Docker Desktop for Linux 
+  - name: Docker Desktop
+    url: https://github.com/docker/desktop-feedback
+    about: Bug reports for Docker Desktop
   - name: Docker Compose
     url: https://github.com/docker/compose/issues
     about: Bug reports for Docker Compose
