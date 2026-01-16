@@ -175,29 +175,29 @@ building with remote, private Git repositories, including:
 - Building with a private Git repository as build context
 - Fetching private Git repositories in a build with `ADD`
 
-For example, say you have a private GitLab project at
-`https://gitlab.com/example/todo-app.git`, and you want to run a build using
+For example, say you have a private GitHub repository at
+`https://github.com/example/todo-app.git`, and you want to run a build using
 that repository as the build context. An unauthenticated `docker build` command
 fails because the builder isn't authorized to pull the repository:
 
 ```console
-$ docker build https://gitlab.com/example/todo-app.git
+$ docker build https://github.com/example/todo-app.git
 [+] Building 0.4s (1/1) FINISHED
- => ERROR [internal] load git source https://gitlab.com/example/todo-app.git
+ => ERROR [internal] load git source https://github.com/example/todo-app.git
 ------
- > [internal] load git source https://gitlab.com/example/todo-app.git:
-0.313 fatal: could not read Username for 'https://gitlab.com': terminal prompts disabled
+ > [internal] load git source https://github.com/example/todo-app.git:
+0.313 fatal: could not read Username for 'https://github.com': terminal prompts disabled
 ------
 ```
 
-To authenticate the builder to the Git server, set the `GIT_AUTH_TOKEN`
-environment variable to contain a valid GitLab access token, and pass it as a
+To authenticate the builder to GitHub, set the `GIT_AUTH_TOKEN`
+environment variable to contain a valid GitHub access token, and pass it as a
 secret to the build:
 
 ```console
-$ GIT_AUTH_TOKEN=$(cat gitlab-token.txt) docker build \
+$ GIT_AUTH_TOKEN=$(gh auth token) docker build \
   --secret id=GIT_AUTH_TOKEN \
-  https://gitlab.com/example/todo-app.git
+  https://github.com/example/todo-app.git
 ```
 
 The `GIT_AUTH_TOKEN` also works with `ADD` to fetch private Git repositories as
@@ -205,30 +205,49 @@ part of your build:
 
 ```dockerfile
 FROM alpine
-ADD https://gitlab.com/example/todo-app.git /src
+ADD https://github.com/example/todo-app.git /src
 ```
 
 ### HTTP authentication scheme
 
-By default, Git authentication over HTTP uses the Bearer authentication scheme:
+BuildKit supports two types of Git authentication secrets, and you should use either one or the other, not both:
+
+- **`GIT_AUTH_TOKEN`**: Uses Basic authentication with a fixed username of `x-access-token` (GitHub-specific)
+- **`GIT_AUTH_HEADER`**: Uses the raw authorization header value you provide (works with any Git provider)
+
+#### Using GIT_AUTH_TOKEN (f.ex. GitHub)
+
+When you use `GIT_AUTH_TOKEN`, BuildKit automatically constructs a Basic authentication header using `x-access-token` as the user:
 
 ```http
-Authorization: Bearer <GIT_AUTH_TOKEN>
+Authorization: Basic <base64("x-access-token:<GIT_AUTH_TOKEN>")>
 ```
 
-If you need to use a Basic scheme, with a username and password, you can set
-the `GIT_AUTH_HEADER` build secret:
+This method works with GitHub. Example usage:
 
 ```console
-$ export GIT_AUTH_TOKEN=$(cat gitlab-token.txt)
-$ export GIT_AUTH_HEADER=basic
+$ export GIT_AUTH_TOKEN=$(gh auth token)
 $ docker build \
   --secret id=GIT_AUTH_TOKEN \
+  https://github.com/example/todo-app.git
+```
+
+#### Using GIT_AUTH_HEADER (Any Git provider)
+
+When you use `GIT_AUTH_HEADER`, BuildKit uses the exact value you provide as the authorization header:
+
+```http
+Authorization: <GIT_AUTH_HEADER>
+```
+
+Example usage with GitLab CI/CD token:
+
+```console
+$ export GIT_AUTH_HEADER="Basic $(echo -n "gitlab-ci-token:${CI_JOB_TOKEN}" | base64)"
+$ docker build \
   --secret id=GIT_AUTH_HEADER \
   https://gitlab.com/example/todo-app.git
 ```
-
-BuildKit currently only supports the Bearer and Basic schemes.
 
 ### Multiple hosts
 
@@ -238,12 +257,10 @@ hostnames. To specify a hostname, append the hostname as a suffix to the secret
 ID:
 
 ```console
-$ export GITLAB_TOKEN=$(cat gitlab-token.txt)
-$ export GERRIT_TOKEN=$(cat gerrit-username-password.txt)
-$ export GERRIT_SCHEME=basic
+$ export GITHUB_TOKEN=$(gh auth token)
+$ export GITLAB_AUTH_HEADER="Basic $(echo -n "gitlab-ci-token:${CI_JOB_TOKEN}" | base64)"
 $ docker build \
-  --secret id=GIT_AUTH_TOKEN.gitlab.com,env=GITLAB_TOKEN \
-  --secret id=GIT_AUTH_TOKEN.gerrit.internal.example,env=GERRIT_TOKEN \
-  --secret id=GIT_AUTH_HEADER.gerrit.internal.example,env=GERRIT_SCHEME \
-  https://gitlab.com/example/todo-app.git
+  --secret id=GIT_AUTH_TOKEN.github.com,env=GITHUB_TOKEN \
+  --secret id=GIT_AUTH_HEADER.gitlab.com,env=GITLAB_AUTH_HEADER \
+  https://github.com/example/todo-app.git
 ```
