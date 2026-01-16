@@ -1,0 +1,132 @@
+command: docker sandbox exec
+short: Execute a command inside a sandbox
+long: |-
+    Execute a command in a sandbox that was previously created with 'docker sandbox create'.
+
+    The command and any additional arguments are executed inside the sandbox container.
+usage: docker sandbox exec [OPTIONS] SANDBOX COMMAND [ARG...]
+pname: docker sandbox
+plink: docker_sandbox.yaml
+options:
+    - option: detach
+      shorthand: d
+      value_type: bool
+      default_value: "false"
+      description: 'Detached mode: run command in the background'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: detach-keys
+      value_type: string
+      description: Override the key sequence for detaching a container
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: env
+      shorthand: e
+      value_type: stringArray
+      default_value: '[]'
+      description: Set environment variables
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: env-file
+      value_type: stringArray
+      default_value: '[]'
+      description: Read in a file of environment variables
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: interactive
+      shorthand: i
+      value_type: bool
+      default_value: "false"
+      description: Keep STDIN open even if not attached
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: privileged
+      value_type: bool
+      default_value: "false"
+      description: Give extended privileges to the command
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: tty
+      shorthand: t
+      value_type: bool
+      default_value: "false"
+      description: Allocate a pseudo-TTY
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: user
+      shorthand: u
+      value_type: string
+      description: 'Username or UID (format: <name|uid>[:<group|gid>])'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: workdir
+      shorthand: w
+      value_type: string
+      description: Working directory inside the container
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: socket
+      value_type: string
+      description: |
+        Connect to daemon at specific socket path (for development/debugging)
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

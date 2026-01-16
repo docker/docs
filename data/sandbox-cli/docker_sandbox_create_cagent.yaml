@@ -1,9 +1,14 @@
-command: docker sandbox version
-short: Show sandbox version information
-long: Show sandbox version information
-usage: docker sandbox version
-pname: docker sandbox
-plink: docker_sandbox.yaml
+command: docker sandbox create cagent
+short: Create a sandbox for cagent
+long: |-
+    Create a sandbox with access to a host workspace for cagent.
+
+    The workspace path is required and will be exposed inside the sandbox at the same path as on the host.
+
+    Use 'docker sandbox run SANDBOX' to start cagent after creation.
+usage: docker sandbox create cagent WORKSPACE
+pname: docker sandbox create
+plink: docker_sandbox_create.yaml
 inherited_options:
     - option: debug
       shorthand: D

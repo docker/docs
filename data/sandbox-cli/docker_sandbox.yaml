@@ -5,16 +5,24 @@ usage: docker sandbox
 pname: docker
 plink: docker.yaml
 cname:
-    - docker sandbox inspect
+    - docker sandbox create
+    - docker sandbox exec
     - docker sandbox ls
+    - docker sandbox network
+    - docker sandbox reset
     - docker sandbox rm
     - docker sandbox run
+    - docker sandbox stop
     - docker sandbox version
 clink:
-    - docker_sandbox_inspect.yaml
+    - docker_sandbox_create.yaml
+    - docker_sandbox_exec.yaml
     - docker_sandbox_ls.yaml
+    - docker_sandbox_network.yaml
+    - docker_sandbox_reset.yaml
     - docker_sandbox_rm.yaml
     - docker_sandbox_run.yaml
+    - docker_sandbox_stop.yaml
     - docker_sandbox_version.yaml
 options:
     - option: debug
@@ -24,6 +32,16 @@ options:
       description: Enable debug logging
       deprecated: false
       hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: socket
+      value_type: string
+      description: |
+        Connect to daemon at specific socket path (for development/debugging)
+      deprecated: false
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false
