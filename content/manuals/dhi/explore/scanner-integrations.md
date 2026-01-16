@@ -22,7 +22,8 @@ assessments:
   updates or local VEX files for air-gapped environments.
 - [Grype](https://github.com/anchore/grype): Supports VEX via the `--vex`
   flag for local VEX file processing.
-- [Wiz](https://www.wiz.io/): TBD
+- [Wiz](https://www.wiz.io/): Automatically applies VEX statements with
+  zero configuration.
 
 For step-by-step instructions, see [Scan Docker Hardened Images](/manuals/dhi/how-to/scan.md).
 

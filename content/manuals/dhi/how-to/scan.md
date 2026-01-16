@@ -19,7 +19,8 @@ read and apply the VEX statements included with Docker Hardened Images:
 - [Docker Scout](#docker-scout): Automatically applies VEX statements with zero configuration
 - [Trivy](#trivy): Supports VEX through VEX Hub or local VEX files
 - [Grype](#grype): Supports VEX via the `--vex` flag
-- [Wiz](#wiz): Supports VEX attestations for accurate vulnerability filtering
+- [Wiz](#wiz): Automatically applies VEX statements with
+  zero configuration
 
 For guidance on choosing the right scanner and understanding the differences
 between VEX-enabled and non-VEX scanners, see [Scanner
@@ -244,16 +245,20 @@ $ trivy image --scanners vuln --vex vex.json dhi.io/<image>:<tag>
 ## Wiz
 
 [Wiz](https://www.wiz.io/) is a cloud security platform that includes container
-image scanning capabilities with support for VEX attestations. Wiz automatically
-consumes VEX statements from Docker Hardened Images to provide accurate
-vulnerability assessments.
+image scanning capabilities with support for DHI VEX attestations. Wiz CLI
+automatically consumes VEX statements from Docker Hardened Images to provide
+accurate vulnerability assessments.
 
-### Scan a DHI using Wiz
+### Scan a DHI using Wiz CLI
 
-Wiz automatically integrates with container registries and scans images as part
-of its cloud security posture management.
+After acquiring a Wiz subscription and installing the Wiz CLI, you can scan a
+Docker Hardened Image by pulling the image and running the scan command:
 
-TBD
+```console
+$ docker login dhi.io
+$ docker pull dhi.io/<image>:<tag>
+$ wiz docker scan --image dhi.io/<image>:<tag>
+```
 
 ## Export VEX attestations
 
