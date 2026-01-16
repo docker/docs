@@ -33,7 +33,7 @@ These two principles let you to extend or add to existing images. For example, i
 Docker Hub provides a variety of Docker-supported and endorsed images known as Docker Trusted Content. These provide fully managed services or great starters for your own images. These include:
 
 - [Docker Official Images](https://hub.docker.com/search?badges=official) - a curated set of Docker repositories, serve as the starting point for the majority of users, and are some of the most secure on Docker Hub
-- [Docker Hardened Images](https://docs.docker.com/dhi/) - minimal, secure, production-ready images with near-zero CVEs, designed to reduce attack surface and simplify compliance. Free and open source under Apache 2.0
+- [Docker Hardened Images](https://hub.docker.com/hardened-images/catalog) - minimal, secure, production-ready images with near-zero CVEs, designed to reduce attack surface and simplify compliance. Free and open source under Apache 2.0
 - [Docker Verified Publishers](https://hub.docker.com/search?badges=verified_publisher) - high-quality images from commercial publishers verified by Docker
 - [Docker-Sponsored Open Source](https://hub.docker.com/search?badges=open_source) - images published and maintained by open-source projects sponsored by Docker through Docker's open source program
 
