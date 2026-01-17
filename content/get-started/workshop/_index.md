@@ -47,7 +47,8 @@ In this section, you learned about containers and images.
 Next, you'll containerize a simple application and get hands-on with the concepts.
 
 {{< button text="Containerize an application" url="02_our_app.md" >}}
-## ⚠️ Security note
+
+## Security considerations
 
 This example application and Dockerfile are intended for learning purposes only.
 The resulting image may contain known vulnerabilities originating from the base image
@@ -58,10 +59,11 @@ When building images for production environments, consider:
 - minimizing the runtime image,
 - pinning dependency versions,
 - and scanning images for vulnerabilities as part of CI/CD.
+
 ## Optional: A more security-aware Dockerfile
 
-If you’d like to explore a more production-oriented approach, the following Dockerfile
-demonstrates common security best practices while keeping the application behavior the same.
+If you'd like to explore a more production-oriented approach, the following Dockerfile
+demonstrates an alternative build approach while keeping the application behavior the same.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
