@@ -55,10 +55,10 @@ The resulting image may contain known vulnerabilities originating from the base 
 or third-party dependencies.
 
 When building images for production environments, consider:
-- using multi-stage builds,
-- minimizing the runtime image,
-- pinning dependency versions,
-- and scanning images for vulnerabilities as part of CI/CD.
+- using multi-stage builds
+- minimizing the runtime image
+- pinning dependency versions
+- and scanning images for vulnerabilities as part of CI/CD
 
 ## Optional: A more security-aware Dockerfile
 
