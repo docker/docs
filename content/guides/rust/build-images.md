@@ -96,7 +96,7 @@ ARG APP_NAME=docker-rust-hello
 ################################################################################
 # Create a stage for building the application.
 
-FROM rust:${RUST_VERSION}-alpine AS build
+FROM dhi.io/rust:${RUST_VERSION}-alpine3.22-dev AS build
 ARG APP_NAME
 WORKDIR /app
 
