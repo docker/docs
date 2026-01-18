@@ -95,6 +95,7 @@ ARG APP_NAME=docker-rust-hello
 
 ################################################################################
 # Create a stage for building the application.
+################################################################################
 
 FROM dhi.io/rust:${RUST_VERSION}-alpine3.22-dev AS build
 ARG APP_NAME
@@ -115,7 +116,10 @@ RUN --mount=type=bind,source=src,target=src \
 
 ################################################################################
 # Create a new stage for running the application that contains the minimal
-FROM alpine:3.18 AS final
+# We use dhi.io/static for the final stage because it’s a minimal Docker Hardened Image runtime (basically “just # enough OS to run the binary”), which helps keep the image small and with a lower attack surface compared to a # # full Alpine/Debian runtime.
+################################################################################
+
+FROM dhi.io/static:20250419 AS final
 
 # Create a non-privileged user that the app will run under.
 ARG UID=10001
@@ -143,6 +147,75 @@ CMD ["/bin/server"]
 
 ```
 
+{{< /tab >}}
+{{< tab name="Using the Docker Official Images" >}}
+
+```dockerfile {title=Dockerfile}
+# Pin the Rust toolchain version used in the build stage.
+ARG RUST_VERSION=1.92
+
+# Name of the compiled binary produced by Cargo (must match Cargo.toml package name).
+ARG APP_NAME=docker-rust-hello
+
+################################################################################
+# Build stage (DOI Rust image)
+# This stage compiles the application.
+################################################################################
+
+FROM docker.io/library/rust:${RUST_VERSION}-alpine AS build
+
+# Re-declare args inside the stage if you want to use them here.
+ARG APP_NAME
+
+# All build steps happen inside /app.
+WORKDIR /app
+
+# Install build dependencies needed to compile Rust crates on Alpine
+RUN apk add --no-cache clang lld musl-dev git
+
+# Build the application 
+RUN --mount=type=bind,source=src,target=src \
+    --mount=type=bind,source=Cargo.toml,target=Cargo.toml \
+    --mount=type=bind,source=Cargo.lock,target=Cargo.lock \
+    --mount=type=cache,target=/app/target/ \
+    --mount=type=cache,target=/usr/local/cargo/git/db \
+    --mount=type=cache,target=/usr/local/cargo/registry/ \
+    cargo build --locked --release && \
+    cp ./target/release/$APP_NAME /bin/server
+
+################################################################################
+# Runtime stage (DOI Alpine image)
+# This stage runs the already-compiled binary with minimal dependencies.
+################################################################################
+
+FROM docker.io/library/alpine:3.18 AS final
+
+# Create a non-privileged user (recommended best practice)
+ARG UID=10001
+RUN adduser \
+    --disabled-password \
+    --gecos "" \
+    --home "/nonexistent" \
+    --shell "/sbin/nologin" \
+    --no-create-home \
+    --uid "${UID}" \
+    appuser
+
+# Drop privileges for runtime.
+USER appuser
+
+# Copy only the compiled binary from the build stage.
+COPY --from=build /bin/server /bin/
+
+# Rocket: listen on all interfaces inside the container.
+ENV ROCKET_ADDRESS=0.0.0.0
+
+# Document the port your app listens on.
+EXPOSE 8000
+
+# Start the application.
+CMD ["/bin/server"]
+```
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -177,47 +250,34 @@ $ docker build --tag docker-rust-image .
 You should see output like the following.
 
 ```console
-[+] Building 85.0s (18/18) FINISHED                                                                                                                                docker:desktop-linux
+[+] Building 1.4s (13/13) FINISHED                                                                                                                                 docker:desktop-linux
  => [internal] load build definition from Dockerfile                                                                                                                               0.0s
- => => transferring dockerfile: 2.88kB                                                                                                                                             0.0s
- => resolve image config for docker-image://docker.io/docker/dockerfile:1                                                                                                          0.8s
- => [auth] docker/dockerfile:pull token for registry-1.docker.io                                                                                                                   0.0s
- => CACHED docker-image://docker.io/docker/dockerfile:1@sha256:b6afd42430b15f2d2a4c5a02b919e98a525b785b1aaff16747d2f623364e39b6                                                    0.0s
- => => resolve docker.io/docker/dockerfile:1@sha256:b6afd42430b15f2d2a4c5a02b919e98a525b785b1aaff16747d2f623364e39b6                                                               0.0s
- => [internal] load metadata for docker.io/library/rust:1.92-alpine                                                                                                                1.3s
- => [internal] load metadata for docker.io/library/alpine:3.18                                                                                                                     0.5s
- => [auth] library/rust:pull token for registry-1.docker.io                                                                                                                        0.0s
- => [auth] library/alpine:pull token for registry-1.docker.io                                                                                                                      0.0s
+ => => transferring dockerfile: 1.67kB                                                                                                                                             0.0s
+ => [internal] load metadata for dhi.io/static:20250419                                                                                                                            1.1s
+ => [internal] load metadata for dhi.io/rust:1.92-alpine3.22-dev                                                                                                                   1.2s
+ => [auth] static:pull token for dhi.io                                                                                                                                            0.0s
+ => [auth] rust:pull token for dhi.io                                                                                                                                              0.0s
  => [internal] load .dockerignore                                                                                                                                                  0.0s
  => => transferring context: 646B                                                                                                                                                  0.0s
- => [build 1/4] FROM docker.io/library/rust:1.92-alpine@sha256:f6c22e0a256c05d44fca23bf530120b5d4a6249a393734884281ca80782329bc                                                    9.0s
- => => resolve docker.io/library/rust:1.92-alpine@sha256:f6c22e0a256c05d44fca23bf530120b5d4a6249a393734884281ca80782329bc                                                          0.1s
- => => sha256:4150afa531694b681cd299599f1d2391c5f4a409844096124ffc475e4eb1ea2f 268.07MB / 268.07MB                                                                                 6.6s
- => => sha256:1074353eec0db2c1d81d5af2671e56e00cf5738486f5762609ea33d606f88612 3.86MB / 3.86MB                                                                                     0.4s
- => => sha256:14182cde8de9d61826651827a8dd082edaa51d4a5a8e9567c2a1e416e32c75e8 75.12MB / 75.12MB                                                                                   1.9s
- => => extracting sha256:1074353eec0db2c1d81d5af2671e56e00cf5738486f5762609ea33d606f88612                                                                                          0.1s
- => => extracting sha256:14182cde8de9d61826651827a8dd082edaa51d4a5a8e9567c2a1e416e32c75e8                                                                                          0.8s
- => => extracting sha256:4150afa531694b681cd299599f1d2391c5f4a409844096124ffc475e4eb1ea2f                                                                                          1.9s
- => [final 1/3] FROM docker.io/library/alpine:3.18@sha256:de0eb0b3f2a47ba1eb89389859a9bd88b28e82f5826b6969ad604979713c2d4f                                                         0.1s
- => => resolve docker.io/library/alpine:3.18@sha256:de0eb0b3f2a47ba1eb89389859a9bd88b28e82f5826b6969ad604979713c2d4f                                                               0.1s
- => [internal] load build context                                                                                                                                                  0.1s
- => => transferring context: 41.56kB                                                                                                                                               0.0s
- => CACHED [final 2/3] RUN adduser     --disabled-password     --gecos ""     --home "/nonexistent"     --shell "/sbin/nologin"     --no-create-home     --uid "10001"     appuse  0.0s
- => [build 2/4] WORKDIR /app                                                                                                                                                       0.4s
- => [build 3/4] RUN apk add --no-cache clang lld musl-dev git                                                                                                                      2.8s
- => [build 4/4] RUN --mount=type=bind,source=src,target=src     --mount=type=bind,source=Cargo.toml,target=Cargo.toml     --mount=type=bind,source=Cargo.lock,target=Cargo.lock   69.9s
- => [final 3/3] COPY --from=build /bin/server /bin/                                                                                                                                0.1s
- => exporting to image                                                                                                                                                             0.4s
- => => exporting layers                                                                                                                                                            0.3s
- => => exporting manifest sha256:46028e22a9d976f062b51b2444bf0ccaf3930637e70fe576c8185029e2d91927                                                                                  0.0s
- => => exporting config sha256:948f75c524906ae8444ec8fc8b95b9e773878b5b5123586391f54e34aad4c493                                                                                    0.0s
- => => exporting attestation manifest sha256:71e9aac25186f83b404bd91433d72a5a764a378c6f5ef75098da92a9990483f7                                                                      0.0s
- => => exporting manifest list sha256:c713a4f71c510999215a4a3e7f225fea7c9a26df118504906486a6e934f0beb0                                                                             0.0s
- => => naming to docker.io/library/docker-rust-image:latest                                                                                                                        0.0s
- => => unpacking to docker.io/library/docker-rust-image:latest                                                                                                                     0.0s
+ => [build 1/3] FROM dhi.io/rust:1.92-alpine3.22-dev@sha256:49eb72825a9e15fe48f2c4875a63c7e7f52a5b430bb52b8254b91d132aa5bf38                                                       0.0s
+ => => resolve dhi.io/rust:1.92-alpine3.22-dev@sha256:49eb72825a9e15fe48f2c4875a63c7e7f52a5b430bb52b8254b91d132aa5bf38                                                             0.0s
+ => [final 1/2] FROM dhi.io/static:20250419@sha256:74fc43fa240887b8159970e434244039aab0c6efaaa9cf044004cdc22aa2a34d                                                                0.0s
+ => => resolve dhi.io/static:20250419@sha256:74fc43fa240887b8159970e434244039aab0c6efaaa9cf044004cdc22aa2a34d                                                                      0.0s
+ => [internal] load build context                                                                                                                                                  0.0s
+ => => transferring context: 117B                                                                                                                                                  0.0s
+ => CACHED [build 2/3] WORKDIR /build                                                                                                                                              0.0s
+ => CACHED [build 3/3] RUN --mount=type=bind,source=src,target=src     --mount=type=bind,source=Cargo.toml,target=Cargo.toml     --mount=type=bind,source=Cargo.lock,target=Cargo  0.0s
+ => CACHED [final 2/2] COPY --from=build /build/target/release/docker-rust-hello /server                                                                                           0.0s
+ => exporting to image                                                                                                                                                             0.1s
+ => => exporting layers                                                                                                                                                            0.0s
+ => => exporting manifest sha256:cc937bbdd712ef6e5445501f77e02ef8455ef64c567598786d46b7b21a4d4fa8                                                                                  0.0s
+ => => exporting config sha256:077507b483af4b5e1a928e527e4bb3a4aaf0557e1eea81cd39465f564c187669                                                                                    0.0s
+ => => exporting attestation manifest sha256:11b60e7608170493da1fdd88c120e2d2957f2a72a22edbc9cfbdd0dd37d21f89                                                                      0.0s
+ => => exporting manifest list sha256:99a1b925a8d6ebf80e376b8a1e50cd806ec42d194479a3375e1cd9d2911b4db9                                                                             0.0s
+ => => naming to docker.io/library/docker-rust-image-dhi:latest                                                                                                                    0.0s
+ => => unpacking to docker.io/library/docker-rust-image-dhi:latest                                                                                                                 0.0s
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/zudqyd9mk3zaq1bl1h6q7vsiz
-
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/yczk0ijw8kc5g20e8nbc8r6lj
 ```
 
 ## View local images
@@ -228,11 +288,11 @@ To list images, run the `docker images` command.
 
 ```console
 $ docker images
-REPOSITORY                TAG               IMAGE ID       CREATED         SIZE
-docker-rust-image         latest            41423bf3040a   3 minutes ago   5.33MB
+IMAGE                          ID             DISK USAGE   CONTENT SIZE   EXTRA
+docker-rust-image-dhi:latest   99a1b925a8d6       11.6MB         2.45MB    U   
 ```
 
-You should see at least one image listed, including the image you just built `docker-rust-image:latest`.
+You should see at least one image listed, including the image you just built `docker-rust-image-dhi:latest  `.
 
 ## Tag images
 
@@ -252,29 +312,29 @@ Now, run the `docker images` command to see a list of the local images.
 
 ```console
 $ docker images
-REPOSITORY                TAG               IMAGE ID       CREATED         SIZE
-docker-rust-image         latest            41423bf3040a   4 minutes ago   5.33MB
-docker-rust-image         v1.0.0            41423bf3040a   4 minutes ago   5.33MB
+IMAGE                          ID             DISK USAGE   CONTENT SIZE   EXTRA
+docker-rust-image-dhi:latest   99a1b925a8d6       11.6MB         2.45MB    U   
+docker-rust-image-dhi:v1.0.0   99a1b925a8d6       11.6MB         2.45MB    U  
 ```
 
-You can see that two images start with `docker-rust-image`. You know they're the same image because if you take a look at the `IMAGE ID` column, you can see that the values are the same for the two images.
+You can see that two images start with `docker-rust-image-dhi`. You know they're the same image because if you take a look at the `IMAGE ID` column, you can see that the values are the same for the two images.
 
 Remove the tag you just created. To do this, use the `rmi` command. The `rmi` command stands for remove image.
 
 ```console
-$ docker rmi docker-rust-image:v1.0.0
-Untagged: docker-rust-image:v1.0.0
+$ docker rmi docker-rust-image-dhi:v1.0.0
+Untagged: docker-rust-image-dhi:v1.0.0
 ```
 
 Note that the response from Docker tells you that Docker didn't remove the image, but only "untagged" it. You can check this by running the `docker images` command.
 
 ```console
 $ docker images
-REPOSITORY               TAG               IMAGE ID       CREATED         SIZE
-docker-rust-image        latest            41423bf3040a   6 minutes ago   5.33MB
+IMAGE                          ID             DISK USAGE   CONTENT SIZE   EXTRA
+docker-rust-image-dhi:latest   99a1b925a8d6       11.6MB         2.45MB    U   
 ```
 
-Docker removed the image tagged with `:v1.0.0`, but the `docker-rust-image:latest` tag is available on your machine.
+Docker removed the image tagged with `:v1.0.0`, but the `docker-rust-image-dhi:latest` tag is available on your machine.
 
 ## Summary
 
