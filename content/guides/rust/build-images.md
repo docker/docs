@@ -244,7 +244,7 @@ Docker uses "latest" as its default tag.
 Build the Docker image.
 
 ```console
-$ docker build --tag docker-rust-image .
+$ docker build --tag docker-rust-image-dhi .
 ```
 
 You should see output like the following.
