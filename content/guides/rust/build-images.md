@@ -292,7 +292,7 @@ IMAGE                          ID             DISK USAGE   CONTENT SIZE   EXTRA
 docker-rust-image-dhi:latest   99a1b925a8d6       11.6MB         2.45MB    U   
 ```
 
-You should see at least one image listed, including the image you just built `docker-rust-image-dhi:latest  `.
+You should see at least one image listed, including the image you just built `docker-rust-image-dhi:latest`.
 
 ## Tag images
 
