@@ -22,9 +22,4 @@ opens a feedback form where you can share ideas directly with the Docker Team.
 
 ## Report bugs or problems on GitHub
 
-To report bugs or problems, visit:
-- [Docker Desktop for Mac issues on
-GitHub](https://github.com/docker/for-mac/issues)
-- [Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues)
-- [Docker Desktop for Linux issues on
-GitHub](https://github.com/docker/desktop-linux/issues)
+To report bugs or problems, visit the [Docker Desktop issue tracker](https://github.com/docker/desktop-feedback).
