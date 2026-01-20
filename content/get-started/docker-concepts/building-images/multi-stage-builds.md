@@ -64,7 +64,7 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
     ![A screenshot of Spring Initializr tool selected with Java 21, Spring Web and Spring Boot 3.4.0](images/multi-stage-builds-spring-initializer.webp?border=true)
 
 
-    [Spring Initializr](https://start.spring.io/) is a quickstart generator for Spring projects. It provides an extensible API to generate JVM-based projects with implementations for several common concepts — like basic language generation for Java, Kotlin, Groovy and Maven. 
+    [Spring Initializr](https://start.spring.io/) is a quickstart generator for Spring projects. It provides an extensible API to generate JVM-based projects with implementations for several common concepts — like basic language generation for Java, Kotlin, Groovy, and Maven. 
 
     Select **Generate** to create and download the zip file for this project.
 
