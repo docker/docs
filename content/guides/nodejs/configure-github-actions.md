@@ -16,7 +16,7 @@ Complete all the previous sections of this guide, starting with [Containerize a 
 You must also have:
 
 - A [GitHub](https://github.com/signup) account.
-- A [Docker Hub](https://hub.docker.com/signup) account.
+- A verified [Docker Hub](https://hub.docker.com/signup) account.
 
 ---
 

@@ -28,8 +28,7 @@ You can sign up with an email address or use your Google or GitHub account.
 
 ### Sign up with your email
 
-1. Go to the [Docker sign-up page](https://app.docker.com/signup/).
-1. Enter a unique, valid email address.
+1. Go to the [Docker sign-up page](https://app.docker.com/signup/) and enter a unique, valid email address.
 1. Enter a username to use as your Docker ID. Once you create your Docker ID
 you can't reuse it in the future if you deactivate this account.
 
@@ -37,16 +36,12 @@ you can't reuse it in the future if you deactivate this account.
     - Must be between 4 and 30 characters long
     - Can only contain numbers and lowercase letters
 
-1. Enter a password that's at least 9 characters long.
-1. Select **Sign Up**.
-1. Open your email client. Docker sends a verification email to the
-address you provided.
-1. Verify your email address to complete the registration process.
+1. Choose a password that's at least 9 characters long, then select **Sign Up**.
+1. Verify your email address when you receive the Docker verification email. This completes the registration process.
 
 > [!NOTE]
 >
-> You must verify your email address before you have full access to Docker's
-features.
+> You must verify your email address before you have full access to Docker's features.
 
 ### Sign up with Google or GitHub
 
