@@ -16,7 +16,6 @@
   }
 }
 
-
 @utility icon-lg {
   svg {
     font-size: 32px;
@@ -39,43 +38,10 @@
   @apply dark:hue-rotate-180 dark:invert dark:filter;
 }
 
-@utility bg-pattern-blue {
-  background-color: rgba(255, 255, 255, 0.5);
-  background-image: url("/assets/images/bg-pattern-blue.webp");
-  background-blend-mode: overlay;
-  background-size: cover;
-  background-repeat: no-repeat;
-  .dark & {
-    background-color: rgba(0, 0, 0, 0.741);
-  }
-}
-
-@utility bg-pattern-purple {
-  background-color: rgba(255, 255, 255, 0.5);
-  background-image: url("/assets/images/bg-pattern-purple.webp");
-  background-blend-mode: overlay;
-  background-size: cover;
-  background-repeat: no-repeat;
-  .dark & {
-    background-color: rgba(0, 0, 0, 0.741);
-  }
-}
-
 @utility bg-background-toc {
   background-color: var(--color-navbar-bg);
   .dark & {
     background-color: var(--color-navbar-bg-dark);
-  }
-}
-
-@utility bg-pattern-verde {
-  background-color: rgba(255, 255, 255, 0.5);
-  background-image: url("/assets/images/bg-pattern-verde.webp");
-  background-blend-mode: overlay;
-  background-size: cover;
-  background-repeat: no-repeat;
-  .dark & {
-    background-color: rgba(0, 0, 0, 0.741);
   }
 }
 
@@ -151,8 +117,8 @@
   }
 
   /* code in `inline code` style */
-  :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)),
-  a>code {
+  :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)),
+  a > code {
     font-size: 0.875em;
     font-weight: 400 !important;
     border: 1px solid !important;
@@ -263,17 +229,31 @@
   font-size: 90%;
 }
 
+@utility topbar-button {
+  @apply min-h-10 max-w-40 rounded-md border-1 border-blue-300 bg-(--topnav-button-bg) px-2 text-center font-semibold text-white;
+  @apply inline-flex items-center justify-center gap-1.5 transition-colors hover:border-blue-300 hover:bg-blue-400;
+  svg {
+    font-size: 19px;
+  }
+}
+@utility topbar-button-clear {
+  @apply min-h-9 px-0 text-center font-semibold text-white/95 transition-colors hover:text-white/85;
+  svg {
+    font-size: 19px;
+  }
+}
+
 .footer {
-  @apply hidden md:flex flex-row ml-auto justify-between px-4 pt-6 pb-2 gap-6;
-  @apply bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700;
+  @apply ml-auto hidden flex-row justify-between gap-6 px-4 pt-6 pb-2 md:flex;
+  @apply border-t border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-gray-900;
   @apply text-gray-600 dark:text-gray-400;
-  a:hover{
+  a:hover {
     @apply underline underline-offset-4;
   }
 }
 
 .social {
-  @apply items-center gap-1 flex-wrap min-w-20 flex;
+  @apply flex min-w-20 flex-wrap items-center gap-1;
 }
 
 .links {
@@ -281,27 +261,29 @@
 }
 
 .links a {
-  @apply inline-flex whitespace-normal truncate min-w-15;
+  @apply inline-flex min-w-15 truncate whitespace-normal;
 }
 
 .secondaryLinks {
-  @apply  flex items-center;
-  a, button{
+  @apply flex items-center;
+  a,
+  button {
     @apply whitespace-normal md:truncate;
   }
 }
 
 .secondaryLinks > *:not(:last-child)::after {
   content: "|";
-  @apply text-gray-400 mx-1;
+  @apply mx-1 text-gray-400;
 }
 
 .ot-sdk-show-settings {
-  @apply !text-gray-600 dark:!text-gray-400 hover:!text-gray-800 dark:hover:!text-gray-200;
-  @apply !text-sm !border-none !p-0 !m-0 !truncate !min-w-15;
+  @apply !text-gray-600 hover:!text-gray-800 dark:!text-gray-400 dark:hover:!text-gray-200;
+  @apply !m-0 !min-w-15 !truncate !border-none !p-0 !text-sm;
 }
-#ot-sdk-btn.ot-sdk-show-settings:hover, #ot-sdk-btn.optanon-show-settings:hover{
-  @apply hover:!bg-transparent !text-gray-600 dark:!text-gray-400 underline underline-offset-4 decoration-1;
+#ot-sdk-btn.ot-sdk-show-settings:hover,
+#ot-sdk-btn.optanon-show-settings:hover {
+  @apply !text-gray-600 underline decoration-1 underline-offset-4 hover:!bg-transparent dark:!text-gray-400;
 }
 
 @keyframes reflection {
