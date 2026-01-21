@@ -57,17 +57,19 @@ To build the image, you'll need to use a Dockerfile. A Dockerfile is simply a te
 
    ```dockerfile
    # syntax=docker/dockerfile:1
-
-   FROM node:lts-alpine
+   FROM node:24-alpine
    WORKDIR /app
+   COPY package.json yarn.lock ./
+   RUN yarn install --production && \
+       mkdir -p /etc/todos && chown node:node /etc/todos
    COPY . .
-   RUN yarn install --production
-   CMD ["node", "src/index.js"]
+   USER node
    EXPOSE 3000
+   CMD ["node", "src/index.js"]
    ```
 
-   This Dockerfile starts off with a `node:lts-alpine` base image, a
-   light-weight Linux image that comes with Node.js and the Yarn package
+   This Dockerfile starts off with a `node:24-alpine` base image, a
+   light-weight Linux image that comes with Node.js and the YARN package
    manager pre-installed. It copies all of the source code into the image,
    installs the necessary dependencies, and starts the application.
 
