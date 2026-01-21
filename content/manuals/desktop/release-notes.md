@@ -37,6 +37,20 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Linux kernel `v6.12.65`
 - [Credential helpers v0.9.5](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.5)
 - [Docker Engine v29.1.5](https://docs.docker.com/engine/release-notes/29/#2915)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- The `kind` dependency image `envoyproxy/envoy` was upgraded from v1.32.6 to v1.36.4. If you mirror `kind` images, ensure your mirrors are updated.
+- Docker Desktop now supports UTF-8 BOM for `admin-settings.json` and `registry.json`.
+
+> [!IMPORTANT]
+>
+> Starting with Docker Desktop version 4.59, installing an update from the tray menu will proceed without opening the Docker Desktop Dashboard.
+
+### Security
+
 - Updated Kubernetes images to address CVEs.
    - Kind:
       - `docker/desktop-containerd-registry-mirror:v0.0.3`
@@ -44,17 +58,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
    - Kubeadm:
       - `docker/desktop-vpnkit-controller:v4.0`
       - `docker/desktop-storage-provisioner:v3.0`
-
-### Bug fixes and enhancements
-
-#### For all platforms
-
-- The `kind` dependency image `envoyproxy/envoy` was upgraded from v1.32.6 to v1.36.4. If you mirror `kind` images, ensure your mirrors are updated.
-- Docker Desktop now supports utf-8 BOM for `admin-settings.json` and `registry.json`.
-
-> [!IMPORTANT]
->
-> Starting with Docker Desktop version 4.59, installing an update from the tray menu will proceed without opening the Docker Desktop Dashboard.
 
 ## 4.57.0
 
