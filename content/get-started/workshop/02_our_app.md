@@ -59,8 +59,9 @@ To build the image, you'll need to use a Dockerfile. A Dockerfile is simply a te
    # syntax=docker/dockerfile:1
    FROM node:24-alpine
    WORKDIR /app
-   COPY package.json yarn.lock ./
-   RUN yarn install --production && \
+   COPY package*.json ./
+   RUN npm install --omit=dev && \
+       rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx && \
        mkdir -p /etc/todos && chown node:node /etc/todos
    COPY . .
    USER node
@@ -69,7 +70,7 @@ To build the image, you'll need to use a Dockerfile. A Dockerfile is simply a te
    ```
 
    This Dockerfile starts off with a `node:24-alpine` base image, a
-   light-weight Linux image that comes with Node.js and the YARN package
+   light-weight Linux image that comes with Node.js and the npm package
    manager pre-installed. It copies all of the source code into the image,
    installs the necessary dependencies, and starts the application.
 
