@@ -1,13 +1,13 @@
 ---
 title: DMR REST API
-description: Reference documentation for the Docker Model Runner REST API endpoints, including OpenAI and Ollama compatibility.
+description: Reference documentation for the Docker Model Runner REST API endpoints, including OpenAI, Anthropic, and Ollama compatibility.
 weight: 30
-keywords: Docker, ai, model runner, rest api, openai, ollama, endpoints, documentation, cline, continue, cursor
+keywords: Docker, ai, model runner, rest api, openai, anthropic, ollama, endpoints, documentation, cline, continue, cursor
 ---
 
 Once Model Runner is enabled, new API endpoints are available. You can use
 these endpoints to interact with a model programmatically. Docker Model Runner
-provides compatibility with both OpenAI and Ollama API formats.
+provides compatibility with OpenAI, Anthropic, and Ollama API formats.
 
 ## Determine the base URL
 
@@ -54,6 +54,7 @@ When configuring third-party tools that expect OpenAI-compatible APIs, use these
 | Tool type | Base URL format |
 |-----------|-----------------|
 | OpenAI SDK / clients | `http://localhost:12434/engines/v1` |
+| Anthropic SDK / clients | `http://localhost:12434` |
 | Ollama-compatible clients | `http://localhost:12434` |
 
 See [IDE and tool integrations](ide-integrations.md) for specific configuration examples.
@@ -65,6 +66,7 @@ Docker Model Runner supports multiple API formats:
 | API | Description | Use case |
 |-----|-------------|----------|
 | [OpenAI API](#openai-compatible-api) | OpenAI-compatible chat completions, embeddings | Most AI frameworks and tools |
+| [Anthropic API](#anthropic-compatible-api) | Anthropic-compatible messages endpoint | Tools built for Claude |
 | [Ollama API](#ollama-compatible-api) | Ollama-compatible endpoints | Tools built for Ollama |
 | [DMR API](#dmr-native-endpoints) | Native Docker Model Runner endpoints | Model management |
 
@@ -131,6 +133,62 @@ Be aware of these differences when using DMR's OpenAI-compatible API:
 | JSON mode | Supported via `response_format: {"type": "json_object"}`. |
 | Logprobs | Supported. |
 | Token counting | Uses the model's native token encoder, which may differ from OpenAI's. |
+
+## Anthropic-compatible API
+
+DMR provides [Anthropic Messages API](https://platform.claude.com/docs/en/api/messages) compatibility for tools and frameworks built for Claude.
+
+### Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/anthropic/v1/messages` | POST | [Create a message](https://platform.claude.com/docs/en/api/messages/create) |
+| `/anthropic/v1/messages/count_tokens` | POST | [Count tokens](https://docs.anthropic.com/en/api/messages-count-tokens) |
+
+### Supported parameters
+
+The following Anthropic API parameters are supported:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `model` | string | Required. The model identifier. |
+| `messages` | array | Required. The conversation messages. |
+| `max_tokens` | integer | Maximum tokens to generate. |
+| `temperature` | float | Sampling temperature (0.0-1.0). |
+| `top_p` | float | Nucleus sampling parameter. |
+| `top_k` | integer | Top-k sampling parameter. |
+| `stream` | Boolean | Enable streaming responses. |
+| `stop_sequences` | array | Custom stop sequences. |
+| `system` | string | System prompt. |
+
+### Example: Chat with Anthropic API
+
+```bash
+curl http://localhost:12434/v1/messages \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "ai/smollm2",
+    "max_tokens": 1024,
+    "messages": [
+      {"role": "user", "content": "Hello!"}
+    ]
+  }'
+```
+
+### Example: Streaming response
+
+```bash
+curl http://localhost:12434/v1/messages \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "ai/smollm2",
+    "max_tokens": 1024,
+    "stream": true,
+    "messages": [
+      {"role": "user", "content": "Count from 1 to 10"}
+    ]
+  }'
+```
 
 ## Ollama-compatible API
 
