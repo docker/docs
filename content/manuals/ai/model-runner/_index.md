@@ -136,6 +136,20 @@ $ ln -s /Applications/Docker.app/Contents/Resources/cli-plugins/docker-model ~/.
 
 Once linked, rerun the command.
 
+## Privacy and data collection
+
+Docker Model Runner respects your privacy settings in Docker Desktop. Data collection is controlled by the **Send usage statistics** setting:
+
+- **Disabled**: No usage data is collected
+- **Enabled**: Only minimal, non-personal data is collected:
+  - [Model names](https://github.com/docker/model-runner/blob/eb76b5defb1a598396f99001a500a30bbbb48f01/pkg/metrics/metrics.go#L96) (via HEAD requests to Docker Hub)
+  - User agent information
+  - Whether requests originate from the host or containers
+
+When using Docker Model Runner with Docker Engine, HEAD requests to Docker Hub are made to track model names, regardless of any settings.
+
+No prompt content, responses, or personally identifiable information is ever collected.
+
 ## Share feedback
 
 Thanks for trying out Docker Model Runner. To report bugs or request features, [open an issue on GitHub](https://github.com/docker/model-runner/issues). You can also give feedback through the **Give feedback** link next to the **Enable Docker Model Runner** setting.
