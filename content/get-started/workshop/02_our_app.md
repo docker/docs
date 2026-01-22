@@ -69,10 +69,17 @@ To build the image, you'll need to use a Dockerfile. A Dockerfile is simply a te
    CMD ["node", "src/index.js"]
    ```
 
-   This Dockerfile starts off with a `node:24-alpine` base image, a
-   light-weight Linux image that comes with Node.js and the npm package
-   manager pre-installed. It copies all of the source code into the image,
-   installs the necessary dependencies, and starts the application.
+   This Dockerfile:
+
+   - Starts with a `node:24-alpine` base image, a lightweight Linux image that comes with Node.js and npm pre-installed
+   - Sets `/app` as the working directory for subsequent instructions
+   - Copies `package.json` and `package-lock.json` first to leverage Docker's layer caching for dependencies
+   - Installs production dependencies only (`--omit=dev`)
+   - Removes npm after installation since it's no longer needed at runtime
+   - Creates the `/etc/todos` directory for the SQLite database with proper ownership
+   - Copies the application source code
+   - Switches to the non-root node user for security
+   - Exposes port `3000` and starts the application
 
 2. Build the image using the following commands:
 
