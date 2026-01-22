@@ -25,7 +25,7 @@ Your Docker ID becomes your username for hosted Docker services, and
 
 Signing up with an email address, Google, or GitHub account requires additional verification to complete account creation:
 
-- If you sign up with Google or Github, you must first verify your email address with that provider.
+- If you sign up with Google or GitHub, you must first verify your email address with that provider.
 - If you sign up with an email address, Docker sends a verification email. Follow the procedures in that email to verify your account and complete the sign-up process.
 
 Docker blocks sign-in until you've verified your account. 
