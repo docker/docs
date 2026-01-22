@@ -24,7 +24,12 @@ else Docker can offer you.
 
 ## Create an account
 
-You can sign up with an email address or use your Google or GitHub account.
+Signing up with an email address, Google, or GitHub account requires additional verification to complete account creation:
+
+- You must verify your email address with your social provider to use those providers as a sign up method.
+- If you're using an email address, Docker will send you a verification email. Follow those procedures to verify your account and complete the sign up process.
+
+Keep in mind that Docker blocks login until you've verified your account. 
 
 ### Sign up with your email
 
@@ -39,28 +44,19 @@ you can't reuse it in the future if you deactivate this account.
 1. Choose a password that's at least 9 characters long, then select **Sign Up**.
 1. Verify your email address when you receive the Docker verification email. This completes the registration process.
 
-> [!NOTE]
->
-> You must verify your email address before you have full access to Docker's features.
-
 ### Sign up with Google or GitHub
 
-> [!IMPORTANT]
->
-> To sign up with your social provider, you must verify your email address with
-your provider before you begin.
-
 1. Go to the [Docker sign-up page](https://app.docker.com/signup/).
-1. Select your social provider, Google or GitHub.
-1. Select the social account you want to link to your Docker account.
-1. Select **Authorize Docker** to let Docker access your social account
+2. Select your social provider, Google or GitHub.
+3. Select the social account you want to link to your Docker account.
+4. Select **Authorize Docker** to let Docker access your social account
 information. You will be re-routed to the sign-up page.
 1. Enter a username to use as your Docker ID.
 
     Your username:
     - Must be between 4 and 30 characters long
     - Can only contain numbers and lowercase letters
-1. Select **Sign up**.
+2. Select **Sign up**.
 
 ## Sign in to your account
 
@@ -76,10 +72,6 @@ the Docker CLI.
 To reset your password, see [Reset your password](#reset-your-password).
 
 ### Sign in with Google or GitHub
-
-> [!IMPORTANT]
->
-> Your Google or GitHub account must have a verified email address.
 
 You can sign in using your Google or GitHub credentials. If your social
 account uses the same email address as an existing Docker ID, the
