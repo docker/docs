@@ -50,6 +50,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > Starting with Docker Desktop version 4.59, installing an update from the tray menu will proceed without opening the Docker Desktop Dashboard.
 
+#### For Mac
+
+- Fixed a bug where shared file permissions could be modified inadvertently while using DockerVMM on macOS. Fixes [docker/for-mac#7830](https://github.com/docker/for-mac/issues/7830).
+
 ### Security
 
 - Updated Kubernetes images to address CVEs.
