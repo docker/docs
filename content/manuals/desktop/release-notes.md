@@ -42,6 +42,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
+- Docker Model Runner now exposes an [Anthropic-compatible API](/manuals/ai/model-runner/api-reference.md#anthropic-compatible-api).
 - The `kind` dependency image `envoyproxy/envoy` was upgraded from v1.32.6 to v1.36.4. If you mirror `kind` images, ensure your mirrors are updated.
 - Docker Desktop now supports UTF-8 BOM for `admin-settings.json` and `registry.json`.
 
