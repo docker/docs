@@ -29,7 +29,7 @@ Signing up with an email address, Google, or GitHub account requires additional 
 - You must verify your email address with your social provider to use those providers as a sign up method.
 - If you're using an email address, Docker will send you a verification email. Follow those procedures to verify your account and complete the sign up process.
 
-Keep in mind that Docker blocks login until you've verified your account. 
+Keep in mind that Docker blocks sign in until you've verified your account. 
 
 ### Sign up with your email
 
