@@ -19,8 +19,7 @@ Your Docker ID becomes your username for hosted Docker services, and
 
 > [!TIP]
 >
-> Explore [Docker's subscriptions](https://www.docker.com/pricing/) to see what
-else Docker can offer you.
+> Explore [Docker's subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you.
 
 ## Create an account
 
@@ -47,16 +46,16 @@ you can't reuse it in the future if you deactivate this account.
 ### Sign up with Google or GitHub
 
 1. Go to the [Docker sign-up page](https://app.docker.com/signup/).
-2. Select your social provider, Google or GitHub.
-3. Select the social account you want to link to your Docker account.
-4. Select **Authorize Docker** to let Docker access your social account
+1. Select your social provider, Google or GitHub.
+1. Select the social account you want to link to your Docker account.
+1. Select **Authorize Docker** to let Docker access your social account
 information. You will be re-routed to the sign-up page.
 1. Enter a username to use as your Docker ID.
 
     Your username:
     - Must be between 4 and 30 characters long
     - Can only contain numbers and lowercase letters
-2. Select **Sign up**.
+1. Select **Sign up**.
 
 ## Sign in to your account
 
