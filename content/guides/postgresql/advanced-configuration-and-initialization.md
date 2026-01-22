@@ -2,11 +2,15 @@
 title: Advanced Configuration and Initialization
 linkTitle: Advanced Configuration and Initialization
 weight: 20
+description: Configure PostgreSQL initialization scripts, tune performance parameters, and set timezone and locale settings for containerized deployments.
+keywords:
+  - PostgreSQL Docker
+  - Docker Compose PostgreSQL
+  - container database
+  - PostgreSQL performance tuning
 ---
 
-# PostgreSQL: Advanced Configuration and Initialization
-
-This guide covers advanced configuration techniques for running PostgreSQL in Docker containers, including automated database initialization, performance tuning, and timezone configuration.
+With persistent storage configured in the previous section, you're ready to customize PostgreSQL for real-world use. This guide covers advanced configuration techniques for running PostgreSQL in Docker containers, including automated database initialization, performance tuning, and timezone configuration.
 
 ## Overview
 
@@ -51,7 +55,7 @@ services:
     image: postgres:18
     volumes:
       - ./init-db:/docker-entrypoint-initdb.d
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
     environment:
       POSTGRES_PASSWORD: mysecretpassword
 
@@ -99,7 +103,7 @@ services:
     volumes:
       - ./my-postgres.conf:/etc/postgresql/postgresql.conf
       - ./init-db:/docker-entrypoint-initdb.d
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
     command: postgres -c config_file=/etc/postgresql/postgresql.conf
     environment:
       POSTGRES_PASSWORD: mysecretpassword
@@ -129,6 +133,8 @@ The following tables list important `postgresql.conf` parameters for containeriz
 | `maintenance_work_mem` | Memory for VACUUM, CREATE INDEX | 64MB - 256MB |
 | `effective_cache_size` | Planner's cache size estimate | 50-75% of container memory |
 
+> **Docker memory limits:** When tuning memory parameters, set explicit memory limits on your container using `deploy.resources.limits.memory` in Compose or `--memory` with `docker run`. Without limits, PostgreSQL sees the host's total RAM and may allocate more than intended. For example, if your container should use 4GB maximum, set `shared_buffers` to approximately 1GB (25%).
+
 ### I/O settings
 
 | Parameter | Description | Recommended starting value |
@@ -155,20 +161,26 @@ services:
   db:
     image: postgres:18
     volumes:
+      - postgres_data:/var/lib/postgresql
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     environment:
       POSTGRES_PASSWORD: mysecretpassword
       TZ: America/New_York
+
+volumes:
+  postgres_data:
 ```
 
-Alternatively, set the timezone using a PostgreSQL parameter:
+Alternatively, set the timezone using a PostgreSQL command-line parameter:
 
 ```yaml
-command:
-  - postgres
-  - -c
-  - timezone=America/New_York
+services:
+  db:
+    image: postgres:18
+    command: ["postgres", "-c", "timezone=America/New_York"]
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
 ```
 
 ### Setting the locale
@@ -179,12 +191,17 @@ Specify locale settings during database initialization using the `POSTGRES_INITD
 services:
   db:
     image: postgres:18
+    volumes:
+      - postgres_data:/var/lib/postgresql
     environment:
       POSTGRES_PASSWORD: mysecretpassword
-      POSTGRES_INITDB_ARGS: --encoding=UTF8 --lc-collate=en_US.UTF-8 --lc-ctype=en_US.UTF-8
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --lc-collate=en_US.UTF-8 --lc-ctype=en_US.UTF-8"
+
+volumes:
+  postgres_data:
 ```
 
-This affects collation (sorting) and character processing behavior. Changing this variable after db creation will have no effect, this only has effect during the first run.
+This affects collation (sorting) and character processing behavior. Changing this variable after database creation has no effect—it only applies during the first run when the data directory is initialized.
 
 ## Connecting to the database
 
