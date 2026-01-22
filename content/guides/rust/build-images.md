@@ -303,7 +303,7 @@ An image is made up of a manifest and a list of layers. Don't worry too much abo
 To create a new tag for the image you built, run the following command.
 
 ```console
-$ docker tag docker-rust-image:latest docker-rust-image:v1.0.0
+$ docker tag docker-rust-image-dhi:latest docker-rust-image-dhi:v1.0.0
 ```
 
 The `docker tag` command creates a new tag for an image. It doesn't create a new image. The tag points to the same image and is just another way to reference the image.
