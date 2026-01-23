@@ -88,7 +88,7 @@ with your organization's domain, or create a new account with that email.
    their email address in your organization's domain.
    - To create a new account, instruct your users to
    [sign up](https://hub.docker.com/signup) using their email address associated
-   with your organization's domain.
+   with your organization's domain. Ensure your users verify their email address.
 1. Identify Docker accounts associated with your organization's domain:
    - Ask your Docker sales representative or
    [contact sales](https://www.docker.com/pricing/contact-sales/) to get a list

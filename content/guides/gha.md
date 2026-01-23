@@ -18,7 +18,7 @@ Docker builds. Use it as-is, or extend it further to fit your needs.
 
 If you want to follow along with the guide, ensure you have the following:
 
-- A Docker account.
+- A verified Docker account.
 - Familiarity with Dockerfiles.
 
 This guide assumes basic knowledge of Docker concepts but provides explanations
