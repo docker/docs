@@ -34,7 +34,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
-- [Docker Sandboxes](/manuals/ai/sandboxes/_index.md) is now available on Docker Desktop, providing a secure, isolated environment for running AI coding agents. This lets agents work freely without compromising your local machine.
+- [Docker Sandboxes](/manuals/ai/sandboxes/_index.md) is now available on Docker Desktop, providing a secure, isolated environment for running AI agents. This lets agents work freely without the risk of compromising your local machine.
 
 ### Updates
 
