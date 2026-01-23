@@ -416,3 +416,7 @@
   - /build/release-notes/
 "https://github.com/moby/buildkit/releases/":
   - /build/buildkit/dockerfile-release-notes/
+
+# Scout CLI release notes
+"https://github.com/docker/scout-cli/releases":
+  - /scout/release-notes/cli/
