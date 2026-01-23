@@ -66,6 +66,8 @@ To configure Image Access Management:
     - **Community images**: Images contributed by various users that may pose security risks. This category includes Docker-Sponsored Open Source images and is turned off by default.
     - **Docker Verified Publisher Images**: Images from Docker partners in the Verified Publisher program, qualified for secure supply chains.
     - **Docker Official Images**: Curated Docker repositories that provide OS repositories, best practices for Dockerfiles, drop-in solutions, and timely security updates.
+    - **Repository allow list**: A list of specific repositories that should be
+      allowed. Configure in the next step.
 1. Optionally, add or remove specific repositories in the allow list:
     - To add repositories, in the **Repository allow list** section, select
       **Add repositories** and follow the on-screen instructions.
