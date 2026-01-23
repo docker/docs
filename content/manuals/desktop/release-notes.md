@@ -32,6 +32,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.58.0" build_path="//" >}}
 
+### New
+
+- [Docker Sandboxes](/manuals/ai/sandboxes/_index.md) is now available on Docker Desktop, providing a secure, isolated environment for running AI coding agents. This lets agents work freely without compromising your local machine.
+
 ### Updates
 
 - Linux kernel `v6.12.65`
