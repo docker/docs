@@ -241,7 +241,7 @@ This pattern separates the build environment from the runtime environment,
 helping reduce image size and improve security by removing unnecessary tooling
 from the final image.
 
-## Use compliance variants {{< badge color="blue" text="DHI Enterprise" >}}
+## Use compliance variants {tier="DHI Enterprise"}
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
 
