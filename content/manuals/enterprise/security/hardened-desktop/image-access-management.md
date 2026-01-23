@@ -70,7 +70,7 @@ To configure Image Access Management:
       allowed. Configure in the next step.
 1. Optionally, add or remove specific repositories in the allow list:
     - To add repositories, in the **Repository allow list** section, select
-      **Add repositories** and follow the on-screen instructions.
+      **Add repositories to allow list** and follow the on-screen instructions.
     - To remove a repository, in the **Repository allow list** section, select
       the trashcan icon next to it.
 
