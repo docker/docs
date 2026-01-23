@@ -10,4 +10,4 @@ HUGO_ENVIRONMENT = "preview"
 SECRETS_SCAN_OMIT_PATHS = "public/contribute/file-conventions/index.html"
 
 [context.deploy-preview]
-command = "hugo --gc --minify -b $DEPLOY_PRIME_URL && ./hack/flatten-markdown.sh && npx pagefind@v1.3.0"
+command = "hugo --gc --minify -b $DEPLOY_PRIME_URL && ./hack/flatten-and-resolve.js && npx pagefind@v1.3.0"
