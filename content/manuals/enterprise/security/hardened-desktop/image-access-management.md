@@ -68,7 +68,8 @@ To configure Image Access Management:
     - **Docker Official Images**: Curated Docker repositories that provide OS repositories, best practices for Dockerfiles, drop-in solutions, and timely security updates.
     - **Repository allow list**: A list of specific repositories that should be
       allowed. Configure in the next step.
-1. Optionally, add or remove specific repositories in the allow list:
+1. Optionally, when **Repository allow list** is enabled in the previous step,
+   you can add or remove specific repositories in the allow list:
     - To add repositories, in the **Repository allow list** section, select
       **Add repositories to allow list** and follow the on-screen instructions.
     - To remove a repository, in the **Repository allow list** section, select
