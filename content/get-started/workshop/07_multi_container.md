@@ -219,7 +219,7 @@ You can now start your dev-ready container.
      -e MYSQL_PASSWORD=secret \
      -e MYSQL_DB=todos \
      node:lts-alpine \
-     sh -c "yarn install && yarn run dev"
+     sh -c "npm install && npm run dev"
    ```
    
    {{< /tab >}}
@@ -235,7 +235,7 @@ You can now start your dev-ready container.
      -e MYSQL_PASSWORD=secret `
      -e MYSQL_DB=todos `
      node:lts-alpine `
-     sh -c "yarn install && yarn run dev"
+     sh -c "npm install && npm run dev"
    ```
 
    {{< /tab >}}
@@ -251,7 +251,7 @@ You can now start your dev-ready container.
      -e MYSQL_PASSWORD=secret ^
      -e MYSQL_DB=todos ^
      node:lts-alpine ^
-     sh -c "yarn install && yarn run dev"
+     sh -c "npm install && npm run dev"
    ```
 
    {{< /tab >}}
@@ -266,7 +266,7 @@ You can now start your dev-ready container.
      -e MYSQL_PASSWORD=secret \
      -e MYSQL_DB=todos \
      node:lts-alpine \
-     sh -c "yarn install && yarn run dev"
+     sh -c "npm install && npm run dev"
    ```
    
    {{< /tab >}}
