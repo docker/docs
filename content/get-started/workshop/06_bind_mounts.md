@@ -116,7 +116,7 @@ filesystem you can share with containers. For details about accessing the settin
    ```console
    root@ac1237fad8db:/# cd src
    root@ac1237fad8db:/src# ls
-   Dockerfile  node_modules  package.json  spec  src  yarn.lock
+   Dockerfile  node_modules  package.json  package-lock.json  spec  src  
    ```
 
 6. Create a new file named `myfile.txt`.
@@ -124,7 +124,7 @@ filesystem you can share with containers. For details about accessing the settin
    ```console
    root@ac1237fad8db:/src# touch myfile.txt
    root@ac1237fad8db:/src# ls
-   Dockerfile  myfile.txt  node_modules  package.json  spec  src  yarn.lock
+   Dockerfile  myfile.txt  node_modules  package.json  package-lock.json  spec  src  
    ```
 
 7. Open the `getting-started-app` directory on the host and observe that the
@@ -136,9 +136,9 @@ filesystem you can share with containers. For details about accessing the settin
    │ ├── myfile.txt
    │ ├── node_modules/
    │ ├── package.json
+   │ ├── package-lock.json
    │ ├── spec/
-   │ ├── src/
-   │ └── yarn.lock
+   │ └── src/
    ```
 
 8. From the host, delete the `myfile.txt` file.
@@ -146,7 +146,7 @@ filesystem you can share with containers. For details about accessing the settin
 
    ```console
    root@ac1237fad8db:/src# ls
-   Dockerfile  node_modules  package.json  spec  src  yarn.lock
+   Dockerfile  node_modules  package.json  package-lock.json spec  src  
    ```
 
 10. Stop the interactive container session with `Ctrl` + `D`.
@@ -182,7 +182,7 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
    $ docker run -dp 127.0.0.1:3000:3000 \
        -w /app --mount type=bind,src="$(pwd)",target=/app \
        node:lts-alpine \
-       sh -c "yarn install && yarn run dev"
+       sh -c "npm install && npm run dev"
    ```
 
    The following is a breakdown of the command:
@@ -194,9 +194,9 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
      directory from the host into the `/app` directory in the container
    - `node:lts-alpine` - the image to use. Note that this is the base image for
      your app from the Dockerfile
-   - `sh -c "yarn install && yarn run dev"` - the command. You're starting a
-     shell using `sh` (alpine doesn't have `bash`) and running `yarn install` to
-     install packages and then running `yarn run dev` to start the development
+   - `sh -c "npm install && npm run dev"` - the command. You're starting a
+     shell using `sh` (alpine doesn't have `bash`) and running `npm install` to
+     install packages and then running `npm run dev` to start the development
      server. If you look in the `package.json`, you'll see that the `dev` script
      starts `nodemon`.
 
@@ -228,7 +228,7 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
    $ docker run -dp 127.0.0.1:3000:3000 `
        -w /app --mount "type=bind,src=$pwd,target=/app" `
        node:lts-alpine `
-       sh -c "yarn install && yarn run dev"
+       sh -c "npm install && npm run dev"
    ```
 
    The following is a breakdown of the command:
@@ -240,9 +240,9 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
      directory from the host into the `/app` directory in the container
    - `node:lts-alpine` - the image to use. Note that this is the base image for
      your app from the Dockerfile
-   - `sh -c "yarn install && yarn run dev"` - the command. You're starting a
-     shell using `sh` (alpine doesn't have `bash`) and running `yarn install` to
-     install packages and then running `yarn run dev` to start the development
+   - `sh -c "npm install && npm run dev"` - the command. You're starting a
+     shell using `sh` (alpine doesn't have `bash`) and running `npm install` to
+     install packages and then running `npm run dev` to start the development
      server. If you look in the `package.json`, you'll see that the `dev` script
      starts `nodemon`.
 
@@ -274,7 +274,7 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
    $ docker run -dp 127.0.0.1:3000:3000 ^
        -w /app --mount "type=bind,src=%cd%,target=/app" ^
        node:lts-alpine ^
-       sh -c "yarn install && yarn run dev"
+       sh -c "npm install && npm run dev"
    ```
 
    The following is a breakdown of the command:
@@ -286,9 +286,9 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
      directory from the host into the `/app` directory in the container
    - `node:lts-alpine` - the image to use. Note that this is the base image for
      your app from the Dockerfile
-   - `sh -c "yarn install && yarn run dev"` - the command. You're starting a
-     shell using `sh` (alpine doesn't have `bash`) and running `yarn install` to
-     install packages and then running `yarn run dev` to start the development
+   - `sh -c "npm install && npm run dev"` - the command. You're starting a
+     shell using `sh` (alpine doesn't have `bash`) and running `npm install` to
+     install packages and then running `npm run dev` to start the development
      server. If you look in the `package.json`, you'll see that the `dev` script
      starts `nodemon`.
 
@@ -320,7 +320,7 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
    $ docker run -dp 127.0.0.1:3000:3000 \
        -w //app --mount type=bind,src="/$(pwd)",target=/app \
        node:lts-alpine \
-       sh -c "yarn install && yarn run dev"
+       sh -c "npm install && npm run dev"
    ```
 
    The following is a breakdown of the command:
@@ -332,9 +332,9 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
      directory from the host into the `/app` directory in the container
    - `node:lts-alpine` - the image to use. Note that this is the base image for
      your app from the Dockerfile
-   - `sh -c "yarn install && yarn run dev"` - the command. You're starting a
-     shell using `sh` (alpine doesn't have `bash`) and running `yarn install` to
-     install packages and then running `yarn run dev` to start the development
+   - `sh -c "npm install && npm run dev"` - the command. You're starting a
+     shell using `sh` (alpine doesn't have `bash`) and running `npm install` to
+     install packages and then running `npm run dev` to start the development
      server. If you look in the `package.json`, you'll see that the `dev` script
      starts `nodemon`.
 
