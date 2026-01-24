@@ -27,14 +27,13 @@ to create each layer within an image.
     ```plaintext
     IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
     a78a40cbf866        18 seconds ago      /bin/sh -c #(nop)  CMD ["node" "src/index.j…    0B                  
-    f1d1808565d6        19 seconds ago      /bin/sh -c yarn install --production            85.4MB              
+    f1d1808565d6        19 seconds ago      /bin/sh -c npm install --omit-dev               85.4MB              
     a2c054d14948        36 seconds ago      /bin/sh -c #(nop) COPY dir:5dc710ad87c789593…   198kB               
     9577ae713121        37 seconds ago      /bin/sh -c #(nop) WORKDIR /app                  0B                  
     b95baba1cfdb        13 days ago         /bin/sh -c #(nop)  CMD ["node"]                 0B                  
     <missing>           13 days ago         /bin/sh -c #(nop)  ENTRYPOINT ["docker-entry…   0B                  
     <missing>           13 days ago         /bin/sh -c #(nop) COPY file:238737301d473041…   116B                
     <missing>           13 days ago         /bin/sh -c apk add --no-cache --virtual .bui…   5.35MB              
-    <missing>           13 days ago         /bin/sh -c #(nop)  ENV YARN_VERSION=1.21.1      0B                  
     <missing>           13 days ago         /bin/sh -c addgroup -g 1000 node     && addu…   74.3MB              
     <missing>           13 days ago         /bin/sh -c #(nop)  ENV NODE_VERSION=12.14.1     0B                  
     <missing>           13 days ago         /bin/sh -c #(nop)  CMD ["/bin/sh"]              0B                  
@@ -64,12 +63,12 @@ Look at the following Dockerfile you created for the getting started app.
 FROM node:lts-alpine
 WORKDIR /app
 COPY . .
-RUN yarn install --production
+RUN npm install --omit=dev
 CMD ["node", "src/index.js"]
 ```
 
 Going back to the image history output, you see that each command in the Dockerfile becomes a new layer in the image.
-You might remember that when you made a change to the image, the yarn dependencies had to be reinstalled. It doesn't make much sense to ship around the same dependencies every time you build.
+You might remember that when you made a change to the image, the dependencies had to be reinstalled. It doesn't make much sense to ship around the same dependencies every time you build.
 
 To fix it, you need to restructure your Dockerfile to help support the caching
 of the dependencies. For Node-based applications, those dependencies are defined
@@ -83,8 +82,8 @@ dependencies if there was a change to the `package.json`.
    # syntax=docker/dockerfile:1
    FROM node:lts-alpine
    WORKDIR /app
-   COPY package.json yarn.lock ./
-   RUN yarn install --production
+   COPY package.json package-lock.json ./
+   RUN npm install --omit=dev
    COPY . .
    CMD ["node", "src/index.js"]
    ```
@@ -108,8 +107,8 @@ dependencies if there was a change to the `package.json`.
     => => transferring context: 53.37MB
     => [1/5] FROM docker.io/library/node:lts-alpine
     => CACHED [2/5] WORKDIR /app
-    => [3/5] COPY package.json yarn.lock ./
-    => [4/5] RUN yarn install --production
+    => [3/5] COPY package.json package-lock.json ./
+    => [4/5] RUN npm install --omit=dev
     => [5/5] COPY . .
     => exporting to image
     => => exporting layers
@@ -132,8 +131,8 @@ dependencies if there was a change to the `package.json`.
     => => transferring context: 450.43kB
     => [1/5] FROM docker.io/library/node:lts-alpine
     => CACHED [2/5] WORKDIR /app
-    => CACHED [3/5] COPY package.json yarn.lock ./
-    => CACHED [4/5] RUN yarn install --production
+    => CACHED [3/5] COPY package.json package-lock.json ./
+    => CACHED [4/5] RUN npm install
     => [5/5] COPY . .
     => exporting to image
     => => exporting layers
@@ -184,11 +183,11 @@ for your production build. You can ship the static resources in a static nginx c
 # syntax=docker/dockerfile:1
 FROM node:lts AS build
 WORKDIR /app
-COPY package* yarn.lock ./
-RUN yarn install
+COPY package* ./
+RUN npm install
 COPY public ./public
 COPY src ./src
-RUN yarn run build
+RUN npm run build
 
 FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html

@@ -29,9 +29,9 @@ In the `getting-started-app` directory, create a file named `compose.yaml`.
 │ ├── compose.yaml
 │ ├── node_modules/
 │ ├── package.json
+│ ├── package-lock.json
 │ ├── spec/
-│ ├── src/
-│ └── yarn.lock
+│ └── src/
 ```
 
 ## Define the app service
@@ -47,7 +47,7 @@ $ docker run -dp 127.0.0.1:3000:3000 \
   -e MYSQL_PASSWORD=secret \
   -e MYSQL_DB=todos \
   node:lts-alpine \
-  sh -c "yarn install && yarn run dev"
+  sh -c "npm install && npm run dev"
 ```
 
 You'll now define this service in the `compose.yaml` file.
@@ -67,7 +67,7 @@ You'll now define this service in the `compose.yaml` file.
    services:
      app:
        image: node:lts-alpine
-       command: sh -c "yarn install && yarn run dev"
+       command: sh -c "npm install && npm run dev"
    ```
 
 3. Now migrate the `-p 127.0.0.1:3000:3000` part of the command by defining the `ports` for the service.
@@ -76,7 +76,7 @@ You'll now define this service in the `compose.yaml` file.
    services:
      app:
        image: node:lts-alpine
-       command: sh -c "yarn install && yarn run dev"
+       command: sh -c "npm install && npm run dev"
        ports:
          - 127.0.0.1:3000:3000
    ```
@@ -90,7 +90,7 @@ You'll now define this service in the `compose.yaml` file.
    services:
      app:
        image: node:lts-alpine
-       command: sh -c "yarn install && yarn run dev"
+       command: sh -c "npm install && npm run dev"
        ports:
          - 127.0.0.1:3000:3000
        working_dir: /app
@@ -104,7 +104,7 @@ You'll now define this service in the `compose.yaml` file.
    services:
      app:
        image: node:lts-alpine
-       command: sh -c "yarn install && yarn run dev"
+       command: sh -c "npm install && npm run dev"
        ports:
          - 127.0.0.1:3000:3000
        working_dir: /app
@@ -186,7 +186,7 @@ At this point, your complete `compose.yaml` should look like this:
 services:
   app:
     image: node:lts-alpine
-    command: sh -c "yarn install && yarn run dev"
+    command: sh -c "npm install && npm run dev"
     ports:
       - 127.0.0.1:3000:3000
     working_dir: /app
