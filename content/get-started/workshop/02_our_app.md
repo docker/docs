@@ -87,7 +87,7 @@ To build the image, you'll need to use a Dockerfile. A Dockerfile is simply a te
    $ docker build -t getting-started .
    ```
 
-   The `docker build` command uses the Dockerfile to build a new image. You might have noticed that Docker downloaded a lot of "layers". This is because you instructed the builder that you wanted to start from the `node:lts-alpine` image. But, since you didn't have that on your machine, Docker needed to download the image.
+   The `docker build` command uses the Dockerfile to build a new image. You might have noticed that Docker downloaded a lot of "layers". This is because you instructed the builder that you wanted to start from the `node:24-alpine` image. But, since you didn't have that on your machine, Docker needed to download the image.
 
    After Docker downloaded the image, the instructions from the Dockerfile copied in your application and used `npm` to install your application's dependencies.
 

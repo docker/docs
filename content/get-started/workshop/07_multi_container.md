@@ -218,7 +218,7 @@ You can now start your dev-ready container.
      -e MYSQL_USER=root \
      -e MYSQL_PASSWORD=secret \
      -e MYSQL_DB=todos \
-     node:lts-alpine \
+     node:24-alpine \
      sh -c "npm install && npm run dev"
    ```
    
@@ -234,7 +234,7 @@ You can now start your dev-ready container.
      -e MYSQL_USER=root `
      -e MYSQL_PASSWORD=secret `
      -e MYSQL_DB=todos `
-     node:lts-alpine `
+     node:24-alpine `
      sh -c "npm install && npm run dev"
    ```
 
@@ -250,7 +250,7 @@ You can now start your dev-ready container.
      -e MYSQL_USER=root ^
      -e MYSQL_PASSWORD=secret ^
      -e MYSQL_DB=todos ^
-     node:lts-alpine ^
+     node:24-alpine ^
      sh -c "npm install && npm run dev"
    ```
 
@@ -265,7 +265,7 @@ You can now start your dev-ready container.
      -e MYSQL_USER=root \
      -e MYSQL_PASSWORD=secret \
      -e MYSQL_DB=todos \
-     node:lts-alpine \
+     node:24-alpine \
      sh -c "npm install && npm run dev"
    ```
    
