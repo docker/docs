@@ -27,7 +27,7 @@ to create each layer within an image.
     ```plaintext
     IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
     a78a40cbf866        18 seconds ago      /bin/sh -c #(nop)  CMD ["node" "src/index.j…    0B                  
-    f1d1808565d6        19 seconds ago      /bin/sh -c npm install --omit-dev               85.4MB              
+    f1d1808565d6        19 seconds ago      /bin/sh -c npm install --omit=dev               85.4MB              
     a2c054d14948        36 seconds ago      /bin/sh -c #(nop) COPY dir:5dc710ad87c789593…   198kB               
     9577ae713121        37 seconds ago      /bin/sh -c #(nop) WORKDIR /app                  0B                  
     b95baba1cfdb        13 days ago         /bin/sh -c #(nop)  CMD ["node"]                 0B                  
@@ -60,11 +60,12 @@ Look at the following Dockerfile you created for the getting started app.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM node:lts-alpine
+FROM node:24-alpine
 WORKDIR /app
 COPY . .
 RUN npm install --omit=dev
 CMD ["node", "src/index.js"]
+EXPOSE 3000
 ```
 
 Going back to the image history output, you see that each command in the Dockerfile becomes a new layer in the image.
@@ -73,14 +74,14 @@ You might remember that when you made a change to the image, the dependencies ha
 To fix it, you need to restructure your Dockerfile to help support the caching
 of the dependencies. For Node-based applications, those dependencies are defined
 in the `package.json` file. You can copy only that file in first, install the
-dependencies, and then copy in everything else. Then, you only recreate the yarn
+dependencies, and then copy in everything else. Then, you only recreate the
 dependencies if there was a change to the `package.json`.
 
 1. Update the Dockerfile to copy in the `package.json` first, install dependencies, and then copy everything else in.
 
    ```dockerfile
    # syntax=docker/dockerfile:1
-   FROM node:lts-alpine
+   FROM node:24-alpine
    WORKDIR /app
    COPY package.json package-lock.json ./
    RUN npm install --omit=dev
@@ -102,10 +103,10 @@ dependencies if there was a change to the `package.json`.
     => => transferring dockerfile: 175B
     => [internal] load .dockerignore
     => => transferring context: 2B
-    => [internal] load metadata for docker.io/library/node:lts-alpine
+    => [internal] load metadata for docker.io/library/node:24-alpine
     => [internal] load build context
     => => transferring context: 53.37MB
-    => [1/5] FROM docker.io/library/node:lts-alpine
+    => [1/5] FROM docker.io/library/node:24-alpine
     => CACHED [2/5] WORKDIR /app
     => [3/5] COPY package.json package-lock.json ./
     => [4/5] RUN npm install --omit=dev
@@ -126,10 +127,10 @@ dependencies if there was a change to the `package.json`.
     => => transferring dockerfile: 37B
     => [internal] load .dockerignore
     => => transferring context: 2B
-    => [internal] load metadata for docker.io/library/node:lts-alpine
+    => [internal] load metadata for docker.io/library/node:24-alpine
     => [internal] load build context
     => => transferring context: 450.43kB
-    => [1/5] FROM docker.io/library/node:lts-alpine
+    => [1/5] FROM docker.io/library/node:24-alpine
     => CACHED [2/5] WORKDIR /app
     => CACHED [3/5] COPY package.json package-lock.json ./
     => CACHED [4/5] RUN npm install
@@ -181,7 +182,7 @@ for your production build. You can ship the static resources in a static nginx c
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM node:lts AS build
+FROM node:24-alpine AS build
 WORKDIR /app
 COPY package* ./
 RUN npm install
@@ -193,8 +194,13 @@ FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 ```
 
-In the previous Dockerfile example, it uses the `node:lts` image to perform the build (maximizing layer caching) and then copies the output
+In the previous Dockerfile example, it uses the `node:24-alpine` image to perform the build (maximizing layer caching) and then copies the output
 into an nginx container.
+
+
+  > [!Tips]
+  > This React example is for illustration purposes. The getting-started todo app is a `Node.js` backend application, not a React frontend.
+
 
 ## Summary
 

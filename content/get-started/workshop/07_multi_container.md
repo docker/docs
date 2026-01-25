@@ -276,11 +276,13 @@ You can now start your dev-ready container.
    using the mysql database.
 
    ```console
-   $ nodemon src/index.js
-   [nodemon] 2.0.20
+   [nodemon] 3.1.11
    [nodemon] to restart at any time, enter `rs`
-   [nodemon] watching dir(s): *.*
+   [nodemon] watching path(s): *.*
+   [nodemon] watching extensions: js,mjs,cjs,json
    [nodemon] starting `node src/index.js`
+   Waiting for mysql:3306.
+   Connected!
    Connected to mysql db at host mysql
    Listening on port 3000
    ```
