@@ -12,9 +12,8 @@ attestations included with each image.
 
 ## Scanners with VEX support
 
-The following are a few scanners that can read and apply the VEX attestations
-included with Docker Hardened Images, providing accurate vulnerability
-assessments:
+The following scanners can read and apply VEX attestations included with Docker
+Hardened Images to deliver more accurate vulnerability assessments:
 
 - [Docker Scout](/scout/): Automatically applies VEX statements with
   zero configuration. Integrated directly into Docker Desktop and the Docker CLI.
@@ -54,8 +53,8 @@ vulnerability assessments across different scanning tools.
 
 ### Benefits of scanners with VEX support
 
-Scanners that support open standards like OpenVEX and can read VEX attestations
-from Docker Hardened Images provide:
+Scanners that support open standards like OpenVEX and can interpret VEX attestations
+from Docker Hardened Images offer the following benefits:
 
 - Accurate vulnerability counts: Automatically filter out vulnerabilities
   that don't apply to your specific image, often reducing false positives
