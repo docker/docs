@@ -26,6 +26,53 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.58.0
+
+{{< release-date date="2026-01-26" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.58.0" build_path="/216728/" >}}
+
+### New
+
+- A new version of [Docker Sandboxes](/manuals/ai/sandboxes/_index.md) is now available on Docker Desktop for Mac. It provides a secure, isolated, microVM-based environment for running coding agents.
+
+### Updates
+
+- Linux kernel `v6.12.65`
+- [Credential helpers v0.9.5](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.5)
+- [Docker Engine v29.1.5](https://docs.docker.com/engine/release-notes/29/#2915)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Docker Model Runner now exposes an [Anthropic-compatible API](/manuals/ai/model-runner/api-reference.md#anthropic-compatible-api).
+- Docker Desktop now supports UTF-8 BOM for `admin-settings.json` and `registry.json`.
+
+> [!IMPORTANT]
+>
+> Starting with Docker Desktop version 4.59, installing an update from the tray menu will proceed without opening the Docker Desktop Dashboard.
+
+#### For Mac
+
+- Fixed a bug where shared file permissions could be modified inadvertently while using DockerVMM on macOS. Fixes [docker/for-mac#7830](https://github.com/docker/for-mac/issues/7830).
+
+#### For Windows
+
+- Fixed an issue where the installer failed because of special ACLs set on `ProgramData`.
+
+
+### Security
+
+- Updated Kubernetes images to address CVEs.
+   - Kind:
+      - `docker/desktop-containerd-registry-mirror:v0.0.3`
+      - `docker/desktop-cloud-provider-kind:v0.5.0`
+   - Kubeadm:
+      - `docker/desktop-vpnkit-controller:v4.0`
+      - `docker/desktop-storage-provisioner:v3.0`
+- The `kind` dependency image `envoyproxy/envoy` was upgraded from v1.32.6 to v1.36.4. If you mirror `kind` images, ensure your mirrors are updated.
+
 ## 4.57.0
 
 {{< release-date date="2026-01-19" >}}
@@ -624,8 +671,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 {{< release-date date="2025-06-18" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.42.1" build_path="/196648/" >}}
-
 ### Upgrades
 
 - [Docker Compose v2.37.1](https://github.com/docker/compose/releases/tag/v2.37.1)
@@ -649,8 +694,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 ## 4.42.0
 
 {{< release-date date="2025-06-04" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.42.0" build_path="/195023/" >}}
 
 ### New
 
@@ -722,8 +765,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 {{< release-date date="2025-05-06" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.41.2" build_path="/191736/" >}}
-
 ### Bug fixes and enhancements
 
 #### For all platforms
@@ -733,8 +774,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 ## 4.41.1
 
 {{< release-date date="2025-04-30" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.41.1" build_path="/191279/" >}}
 
 ### Bug fixes and enhancements
 
@@ -749,8 +788,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 ## 4.41.0
 
 {{< release-date date="2025-04-28" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.41.0" build_path="/190950/" >}}
 
 ### New
 
@@ -814,8 +851,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 {{< release-date date="2025-03-31" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.40.0" build_path="/187762/" >}}
-
 ### New
 
 - You can now pull, run, and manage AI models from Docker Hub directly in Docker Desktop with [Docker Model Runner (Beta)](/manuals/ai/model-runner.md). Currently available for Docker Desktop for Mac with Apple Silicon.
@@ -862,8 +897,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 ## 4.39.0
 
 {{< release-date date="2025-03-05" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.39.0" build_path="/184744/" >}}
 
 ### New
 
