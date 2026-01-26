@@ -10,6 +10,7 @@ Anchore
 Apple
 Artifactory
 armhf
+[Aa]uditability
 auditable
 autolock
 Azure
@@ -41,6 +42,7 @@ containerd
 Couchbase
 CouchDB
 Crowdstrike
+[Cc]ybersecurity
 datacenter
 Datadog
 Ddosify
@@ -76,7 +78,7 @@ Entra
 EPERM
 ESXi
 Ethernet
-exploitability
+[Ee]xploitability
 [Ff]ailover
 Fargate
 Fedora
