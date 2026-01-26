@@ -34,7 +34,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
-- A new version of [Docker Sandboxes](/manuals/ai/sandboxes/_index.md) is now available on Docker Desktop for Mac. It provides a secure, isolated, microVM-based environment for running coding agents.
+- A new version of [Docker Sandboxes](/manuals/ai/sandboxes/_index.md) is now available on Docker Desktop. It provides a secure, isolated, microVM-based environment for running coding agents.
 
 ### Updates
 
