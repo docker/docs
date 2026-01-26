@@ -61,6 +61,7 @@ Docker capabilities but cannot safely share your Docker daemon.
 Sandboxes use your system's native virtualization:
 
 - macOS: virtualization.framework
+- Windows: Hyper-V {{< badge color=violet text=Experimental >}}
 
 This provides hypervisor-level isolation between the sandbox and your host.
 Unlike containers (which share the host kernel), VMs have separate kernels and

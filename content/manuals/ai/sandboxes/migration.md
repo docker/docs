@@ -16,6 +16,10 @@ Docker Sandboxes now run in lightweight microVMs instead of containers. Each
 sandbox has a private Docker daemon, better isolation, and network filtering
 policies.
 
+> [!NOTE]
+> If you need to use legacy container-based sandboxes, install
+> [Docker Desktop 4.57](/desktop/release-notes/#4570).
+
 After upgrading to Docker Desktop 4.58:
 
 - Old sandboxes don't appear in `docker sandbox ls`
