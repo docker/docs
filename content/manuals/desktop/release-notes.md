@@ -30,7 +30,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-01-26" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.58.0" build_path="//" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.58.0" build_path="/216728/" >}}
 
 ### New
 
@@ -47,7 +47,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For all platforms
 
 - Docker Model Runner now exposes an [Anthropic-compatible API](/manuals/ai/model-runner/api-reference.md#anthropic-compatible-api).
-- The `kind` dependency image `envoyproxy/envoy` was upgraded from v1.32.6 to v1.36.4. If you mirror `kind` images, ensure your mirrors are updated.
 - Docker Desktop now supports UTF-8 BOM for `admin-settings.json` and `registry.json`.
 
 > [!IMPORTANT]
@@ -58,6 +57,11 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Fixed a bug where shared file permissions could be modified inadvertently while using DockerVMM on macOS. Fixes [docker/for-mac#7830](https://github.com/docker/for-mac/issues/7830).
 
+#### For Windows
+
+- Fixed an issue where the installer failed because of special ACLs set on `ProgramData`.
+
+
 ### Security
 
 - Updated Kubernetes images to address CVEs.
@@ -67,6 +71,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
    - Kubeadm:
       - `docker/desktop-vpnkit-controller:v4.0`
       - `docker/desktop-storage-provisioner:v3.0`
+- The `kind` dependency image `envoyproxy/envoy` was upgraded from v1.32.6 to v1.36.4. If you mirror `kind` images, ensure your mirrors are updated.
 
 ## 4.57.0
 
