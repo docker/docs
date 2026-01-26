@@ -1,0 +1,102 @@
+command: docker sandbox network proxy
+short: Manage proxy configuration for a sandbox
+long: Manage proxy configuration for a sandbox
+usage: docker sandbox network proxy <sandbox> [OPTIONS]
+pname: docker sandbox network
+plink: docker_sandbox_network.yaml
+options:
+    - option: allow-cidr
+      value_type: string
+      description: |
+        Remove an IP range in CIDR notation from the block or bypass lists (can be specified multiple times)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: allow-host
+      value_type: string
+      description: Permit access to a domain or IP (can be specified multiple times)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: block-cidr
+      value_type: string
+      description: |
+        Block access to an IP range in CIDR notation (can be specified multiple times)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: block-host
+      value_type: string
+      description: Block access to a domain or IP (can be specified multiple times)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: bypass-cidr
+      value_type: string
+      description: |
+        Bypass proxy for an IP range in CIDR notation (can be specified multiple times)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: bypass-host
+      value_type: string
+      description: Bypass proxy for a domain or IP (can be specified multiple times)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: policy
+      value_type: allow|deny
+      description: Set the default policy
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: socket
+      value_type: string
+      description: |
+        Connect to daemon at specific socket path (for development/debugging)
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

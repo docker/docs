@@ -1,0 +1,67 @@
+command: docker sandbox network log
+short: Show network logs
+long: Show network logs
+usage: docker sandbox network log
+pname: docker sandbox network
+plink: docker_sandbox_network.yaml
+options:
+    - option: json
+      value_type: bool
+      default_value: "false"
+      description: Output in JSON format
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: limit
+      value_type: int
+      default_value: "0"
+      description: Maximum number of log entries to show
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: quiet
+      shorthand: q
+      value_type: bool
+      default_value: "false"
+      description: Only display log entries
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: socket
+      value_type: string
+      description: |
+        Connect to daemon at specific socket path (for development/debugging)
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

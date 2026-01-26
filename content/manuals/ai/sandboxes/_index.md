@@ -12,59 +12,83 @@ params:
 
 {{< summary-bar feature_name="Docker Sandboxes" >}}
 
-Docker Sandboxes simplifies running AI agents securely on your local machine.
-Designed for developers building with coding agents like Claude Code, Sandboxes
-isolate your agents from your local machine while preserving a familiar
-development experience. With Docker Sandboxes, agents can execute commands,
-install packages, and modify files inside a containerized workspace that
-mirrors your local directory. This gives you full agent autonomy without
-compromising safety.
+Docker Sandboxes lets you run AI coding agents in isolated environments on your
+machine. If you're building with agents like Claude Code, Sandboxes provides a
+secure way to give agents autonomy without compromising your system.
+
+## Why use Docker Sandboxes
+
+AI agents need to execute commands, install packages, and test code. Running
+them directly on your host machine means they have full access to your files,
+processes, and network. Docker Sandboxes isolates agents in microVMs, each with
+its own Docker daemon. Agents can spin up test containers and modify their
+environment without affecting your host.
+
+You get:
+
+- Agent autonomy without host system risk
+- Private Docker daemon for running test containers
+- File sharing between host and sandbox
+- Network access control
+
+For a comparison between Docker Sandboxes and other approaches to isolating
+coding agents, see [Comparison to alternatives](./architecture.md#comparison-to-alternatives).
+
+## How to use sandboxes
+
+To create and run a sandbox:
+
+```console
+$ docker sandbox run claude ~/my-project
+```
+
+This command creates a sandbox for your workspace (`~/my-project`) and starts
+the Claude Code agent inside it. The agent can now work with your code, install
+tools, and run containers inside the isolated sandbox.
 
 ## How it works
 
-When you run `docker sandbox run <agent>`:
+Sandboxes run in lightweight microVMs with private Docker daemons. Each sandbox
+is completely isolated - the agent runs inside the VM and can't access your
+host Docker daemon, containers, or files outside the workspace.
 
-1. Docker creates a container from a template image and mounts your current
-   working directory into the container at the same path.
+Your workspace directory syncs between host and sandbox at the same absolute
+path, so file paths in error messages match between environments.
 
-2. Docker discovers your Git `user.name` and `user.email` configuration and
-   injects it into the container so commits made by the agent are attributed
-   to you.
+Sandboxes don't appear in `docker ps` on your host because they're VMs, not
+containers. Use `docker sandbox ls` to see them.
 
-3. On first run, you're prompted to authenticate. Credentials are stored in a
-   Docker volume and reused for future sandboxed agents.
+For technical details on the architecture, isolation model, and networking, see
+[Architecture](architecture.md).
 
-4. The agent starts inside the container with bypass permissions enabled.
+### Multiple sandboxes
 
-### Workspace mounting
+Create separate sandboxes for different projects:
 
-Your workspace directory is mounted into the container at the same absolute path
-(on macOS and Linux). For example, `/Users/alice/projects/myapp` on your host
-is also `/Users/alice/projects/myapp` in the container. This means:
+```console
+$ docker sandbox run claude ~/project-a
+$ docker sandbox run claude ~/project-b
+```
 
-- File paths in error messages match your host
-- Scripts with hard-coded paths work as expected
-- Changes to workspace files are immediately visible on both host and container
+Each sandbox is completely isolated from the others. Sandboxes persist until
+you remove them, so installed packages and configuration stay available for
+that workspace.
 
-### One sandbox per workspace
+## Supported agents
 
-Docker enforces one sandbox per workspace. When you run `docker sandbox run
-<agent>` in the same directory, Docker reuses the existing container. This
-means state (installed packages, temporary files) persists across agent sessions
-in that workspace.
+Docker Sandboxes works with multiple AI coding agents:
 
-> [!NOTE]
-> To change a sandbox's configuration (environment variables, mounted volumes,
-> etc.), you need to remove and recreate it. See
-> [Managing sandboxes](advanced-config.md#managing-sandboxes) for details.
-
-## Release status
-
-Docker Sandboxes is an experimental feature. Features and setup are subject to
-change.
-
-Report issues on the [Docker Desktop issue tracker](https://github.com/docker/desktop-feedback).
+- **Claude Code** - Anthropic's coding agent
+- **Codex** - OpenAI's Codex agent (partial support; in development)
+- **Gemini** - Google's Gemini agent (partial support; in development)
+- **cagent** - Docker's [cagent](/ai/cagent/) (partial support; in development)
+- **Kiro** - by AWS (partial support; in development)
 
 ## Get started
 
 Head to the [Get started guide](get-started.md) to run your first sandboxed agent.
+
+## Troubleshooting
+
+See [Troubleshooting](./troubleshooting) for common configuration errors, or
+report issues on the [Docker Desktop issue tracker](https://github.com/docker/desktop-feedback).

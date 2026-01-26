@@ -11,39 +11,10 @@ running Claude Code in a sandboxed environment.
 
 ## Quick start
 
-The simplest way to start Claude in a sandbox:
+To create a sandbox and run Claude Code for a project directory:
 
 ```console
-$ docker sandbox run claude
-```
-
-This starts a sandboxed Claude Code agent with the current working directory as
-its workspace.
-
-Or specify a different workspace:
-
-```console
-$ docker sandbox run -w ~/my-project claude
-```
-
-## Passing CLI options to Claude
-
-Claude Code supports various command-line options that you can pass through
-`docker sandbox run`. Any arguments after the agent name (`claude`) are passed
-directly to Claude Code inside the sandbox.
-
-### Continue previous conversation
-
-Resume your most recent conversation:
-
-```console
-$ docker sandbox run claude -c
-```
-
-Or use the long form:
-
-```console
-$ docker sandbox run claude --continue
+$ docker sandbox run claude ~/my-project
 ```
 
 ### Pass a prompt directly
@@ -51,103 +22,94 @@ $ docker sandbox run claude --continue
 Start Claude with a specific prompt:
 
 ```console
-$ docker sandbox run claude "Add error handling to the login function"
+$ docker sandbox run <sandbox-name> -- "Add error handling to the login function"
+```
+
+Or:
+
+```console
+$ docker sandbox run <sandbox-name> -- "$(cat prompt.txt)"
 ```
 
 This starts Claude and immediately processes the prompt.
 
-### Combine options
-
-You can combine sandbox options with Claude options:
-
-```console
-$ docker sandbox run -e DEBUG=1 claude -c
-```
-
-This creates a sandbox with `DEBUG` set to `1`, enabling debug output for
-troubleshooting, and continues the previous conversation.
-
-### Available Claude options
-
-All Claude Code CLI options work through `docker sandbox run`:
-
-- `-c, --continue` - Continue the most recent conversation
-- `-p, --prompt` - Read prompt from stdin (useful for piping)
-- `--dangerously-skip-permissions` - Skip permission prompts (enabled by default in sandboxes)
-- And more - see the [Claude Code documentation](https://docs.claude.com/en/docs/claude-code) for a complete list
-
 ## Authentication
 
-Claude sandboxes support the following credential management strategies.
+Claude Code needs an Anthropic API key to work. The recommended approach is to
+set the `ANTHROPIC_API_KEY` environment variable in your shell configuration
+file.
 
-### Strategy 1: `sandbox` (Default)
+Docker Sandboxes run through a daemon process that doesn't inherit environment
+variables from your current shell session. To make your API key available to
+sandboxes, you need to set it globally in your shell configuration file.
 
-```console
-$ docker sandbox run claude
+Add the API key to your shell configuration file:
+
+```plaintext {title="~/.bashrc or ~/.zshrc"}
+export ANTHROPIC_API_KEY=sk-ant-api03-xxxxx
 ```
 
-On first run, Claude prompts you to enter your Anthropic API key. The
-credentials are stored in a persistent Docker volume named
-`docker-claude-sandbox-data`. All future Claude sandboxes automatically use
-these stored credentials, and they persist across sandbox restarts and deletion.
+Then apply the changes:
 
-Sandboxes mount this volume at `/mnt/claude-data` and create symbolic links in
-the sandbox user's home directory.
-
-> [!NOTE]
-> If your workspace contains a `.claude.json` file with a `primaryApiKey`
-> field, you'll receive a warning about potential conflicts. You can choose to
-> remove the `primaryApiKey` field from your `.claude.json` or proceed and
-> ignore the warning.
-
-### Strategy 2: `none`
-
-No automatic credential management.
+1. Source your shell configuration: `source ~/.bashrc` (or `~/.zshrc`)
+2. Restart Docker Desktop so the daemon picks up the new environment variable
+3. Create and run your sandbox:
 
 ```console
-$ docker sandbox run --credentials=none claude
+$ docker sandbox create claude ~/project
+$ docker sandbox run <sandbox-name>
 ```
 
-Docker does not discover, inject, or store any credentials. You must
-authenticate manually inside the container. Credentials are not shared with
-other sandboxes but persist for the lifetime of the container.
+The sandbox will detect the environment variable and use it automatically.
+
+### Interactive authentication
+
+If no credentials are found, Claude Code prompts you to authenticate when it
+starts. You'll need to authenticate for each workspace separately when using
+this method.
+
+To avoid repeated authentication, use the `ANTHROPIC_API_KEY` environment
+variable method described above.
 
 ## Configuration
 
 Claude Code can be configured through CLI options. Any arguments you pass after
-the agent name are passed directly to Claude Code inside the container.
+the sandbox name and a `--` separator are passed directly to Claude Code.
 
-Pass options after the agent name:
+Pass options after the sandbox name:
 
 ```console
-$ docker sandbox run claude [claude-options]
+$ docker sandbox run <sandbox-name> -- [claude-options]
 ```
 
 For example:
 
 ```console
-$ docker sandbox run claude --continue
+$ docker sandbox run <sandbox-name> -- --continue
 ```
 
 See the [Claude Code CLI reference](https://docs.claude.com/en/docs/claude-code/cli-reference)
-for a complete list of available options.
-
-## Advanced usage
-
-For more advanced configurations including environment variables, volume mounts,
-Docker socket access, and custom templates, see
-[Advanced configurations](advanced-config.md).
+for available options.
 
 ## Base image
 
-The `docker/sandbox-templates:claude-code` image includes Claude Code with
-automatic credential management, plus development tools (Docker CLI, GitHub
-CLI, Node.js, Go, Python 3, Git, ripgrep, jq). It runs as a non-root `agent`
-user with `sudo` access and launches Claude with
-`--dangerously-skip-permissions` by default.
+The Claude Code sandbox template is a container image that runs inside the
+sandbox VM. It includes:
 
-## Next Steps
+- Ubuntu-based environment with Claude Code
+- Development tools: Docker CLI, GitHub CLI, Node.js, Go, Python 3, Git, ripgrep, jq
+- Non-root `agent` user with sudo access
+- Private Docker daemon for running additional containers
 
-- [Advanced configurations](advanced-config.md)
+Claude launches with `--dangerously-skip-permissions` by default in sandboxes.
+
+You can build custom templates based on `docker/sandbox-templates:claude-code`.
+See [Custom templates](templates.md) for details.
+
+## Next steps
+
+- [Using sandboxes effectively](workflows.md)
+- [Custom templates](templates.md)
+- [Network policies](network-policies.md)
 - [Troubleshooting](troubleshooting.md)
 - [CLI Reference](/reference/cli/docker/sandbox/)

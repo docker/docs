@@ -1,13 +1,8 @@
-command: docker sandbox rm
-aliases: docker sandbox rm, docker sandbox remove
-short: Remove one or more sandboxes
-long: |-
-    Remove one or more sandboxes and all their associated resources.
-
-    This command will:
-    - Check if the sandbox exists
-    - Remove the sandbox and clean up its associated resources
-usage: docker sandbox rm SANDBOX [SANDBOX...]
+command: docker sandbox stop
+short: Stop one or more sandboxes without removing them
+long: |
+    Stop one or more sandboxes without removing them. The sandboxes can be restarted later.
+usage: docker sandbox stop SANDBOX [SANDBOX...]
 pname: docker sandbox
 plink: docker_sandbox.yaml
 inherited_options:
@@ -32,27 +27,6 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-examples: |-
-    ### Remove a sandbox
-
-    ```console
-    $ docker sandbox rm abc123def
-    abc123def
-    ```
-
-    ### Remove multiple sandboxes
-
-    ```console
-    $ docker sandbox rm abc123def def456ghi
-    abc123def
-    def456ghi
-    ```
-
-    ### Remove all sandboxes
-
-    ```console
-    $ docker sandbox rm $(docker sandbox ls -q)
-    ```
 deprecated: false
 hidden: false
 experimental: false
