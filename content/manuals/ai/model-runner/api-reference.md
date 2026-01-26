@@ -68,6 +68,7 @@ Docker Model Runner supports multiple API formats:
 | [OpenAI API](#openai-compatible-api) | OpenAI-compatible chat completions, embeddings | Most AI frameworks and tools |
 | [Anthropic API](#anthropic-compatible-api) | Anthropic-compatible messages endpoint | Tools built for Claude |
 | [Ollama API](#ollama-compatible-api) | Ollama-compatible endpoints | Tools built for Ollama |
+| [Image Generation API](#image-generation-api-diffusers) | Diffusers-based image generation | Generating images from text prompts |
 | [DMR API](#dmr-native-endpoints) | Native Docker Model Runner endpoints | Model management |
 
 ## OpenAI-compatible API
@@ -222,6 +223,63 @@ curl http://localhost:12434/api/chat \
 ```bash
 curl http://localhost:12434/api/tags
 ```
+
+## Image generation API (Diffusers)
+
+DMR supports image generation through the Diffusers backend, enabling you to generate
+images from text prompts using models like Stable Diffusion.
+
+> [!NOTE]
+> The Diffusers backend requires an NVIDIA GPU with CUDA support and is only
+> available on Linux (x86_64 and ARM64). See [Inference engines](inference-engines.md#diffusers)
+> for setup instructions.
+
+### Endpoint
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/engines/diffusers/v1/images/generations` | POST | Generate an image from a text prompt |
+
+### Supported parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `model` | string | Required. The model identifier (e.g., `stable-diffusion:Q4`). |
+| `prompt` | string | Required. The text description of the image to generate. |
+| `size` | string | Image dimensions in `WIDTHxHEIGHT` format (e.g., `512x512`). |
+
+### Response format
+
+The API returns a JSON response with the generated image encoded in base64:
+
+```json
+{
+  "data": [
+    {
+      "b64_json": "<base64-encoded-image-data>"
+    }
+  ]
+}
+```
+
+### Example: Generate an image
+
+```bash
+curl -s -X POST http://localhost:12434/engines/diffusers/v1/images/generations \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "stable-diffusion:Q4",
+    "prompt": "A picture of a nice cat",
+    "size": "512x512"
+  }' | jq -r '.data[0].b64_json' | base64 -d > image.png
+```
+
+This command:
+1. Sends a POST request to the Diffusers image generation endpoint
+2. Specifies the model, prompt, and output image size
+3. Extracts the base64-encoded image from the response using `jq`
+4. Decodes the base64 data and saves it as `image.png`
+
 
 ## DMR native endpoints
 
@@ -378,4 +436,4 @@ console.log(response.choices[0].message.content);
 
 - [IDE and tool integrations](ide-integrations.md) - Configure Cline, Continue, Cursor, and other tools
 - [Configuration options](configuration.md) - Adjust context size and runtime parameters
-- [Inference engines](inference-engines.md) - Learn about llama.cpp and vLLM options
+- [Inference engines](inference-engines.md) - Learn about llama.cpp, vLLM, and Diffusers options
