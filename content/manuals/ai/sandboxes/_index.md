@@ -34,6 +34,11 @@ You get:
 For a comparison between Docker Sandboxes and other approaches to isolating
 coding agents, see [Comparison to alternatives](./architecture.md#comparison-to-alternatives).
 
+> [!NOTE]
+> MicroVM-based sandboxes require macOS or Windows (experimental). Linux users
+> can use legacy container-based sandboxes with
+> [Docker Desktop 4.57](/desktop/release-notes/#4570).
+
 ## How to use sandboxes
 
 To create and run a sandbox:

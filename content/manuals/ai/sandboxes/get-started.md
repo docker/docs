@@ -19,7 +19,7 @@ This guide runs Claude Code in an isolated sandbox for the first time.
 Before you begin, ensure you have:
 
 - Docker Desktop 4.58 or later
-- macOS
+- macOS, or Windows {{< badge color=violet text=Experimental >}}
 - A Claude API key
 
 ## Run your first sandbox

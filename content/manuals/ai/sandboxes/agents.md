@@ -57,6 +57,7 @@ See the agent-specific documentation:
 - Docker Desktop 4.58 or later
 - Platform support:
   - macOS with virtualization.framework
+  - Windows with Hyper-V {{< badge color=violet text=Experimental >}}
 - API keys or credentials for your chosen agent
 
 ## Next steps
