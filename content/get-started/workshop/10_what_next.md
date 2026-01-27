@@ -69,7 +69,7 @@ Take your image-building skills to the next level with Docker Hardened Images—
 
 ## Build with AI
 
-Docker makes it easy to run AI models locally and build intelligent applications. Explore Docker's AI tools and start building AI-powered apps.
+Docker makes it easy to run AI models locally and build agentic AI applications. Explore Docker's AI tools and start building AI-powered apps.
 
 {{< grid items="ai-development" >}}
 
