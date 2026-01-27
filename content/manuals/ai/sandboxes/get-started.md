@@ -66,6 +66,11 @@ When you ran `docker sandbox run`:
 The sandbox persists until you remove it. Installed packages and configuration
 remain available. Run `docker sandbox run <sandbox-name>` again to reconnect.
 
+> [!NOTE]
+> Agents can modify files in your workspace. Review changes before executing
+> code or performing actions that auto-run scripts. See
+> [Security considerations](workflows.md#security-considerations) for details.
+
 ## Basic commands
 
 Here are essential commands to manage your sandboxes:
