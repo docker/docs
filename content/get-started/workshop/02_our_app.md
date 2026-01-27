@@ -42,6 +42,7 @@ Before you can run the application, you need to get the application source code 
    ├── getting-started-app/
    │ ├── .dockerignore
    │ ├── package.json
+   │ ├── package-lock.json   
    │ ├── README.md
    │ ├── spec/
    │ ├── src/
