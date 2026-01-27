@@ -1,6 +1,6 @@
 module github.com/docker/docs
 
-go 1.24.9
+go 1.25.0
 
 require (
 	github.com/Azure/go-ansiterm v0.0.0-20250102033503-faa5f7b0171c // indirect
