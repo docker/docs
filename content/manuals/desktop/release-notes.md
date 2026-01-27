@@ -26,6 +26,38 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.59.0
+
+{{< release-date date="2026-02-2" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.59.0" build_path="//" >}}
+
+### Updates
+
+- Linux kernel `v6.12.67`
+- [Docker Compose v5.0.2](https://github.com/docker/compose/releases/tag/v5.0.2)
+- Docker Sandbox `v0.7.0`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Added Neo4j as a known publisher to the Docker MCP Toolkit.
+- Fixed an issue where the **Models** tab would crash when displaying requests made via the Anthropic Messages API.
+
+#### For Mac
+
+- Fixed an issue where shared file permissions could be unintentionally modified when using DockerVMM. Fixes [docker/for-mac#7830](https://github.com/docker/for-mac/issues/7830).
+
+#### For Windows
+
+- Fixed an issue where container secrets injection could fail with `docker-pass`.
+- Temporarily disabled VHDX compaction for the WSL data disk to improve stability.
+
+### Security
+
+- Fixed a security issue in enhanced container isolation where Docker socket mount permissions could be bypassed when using the `--use-api-socket` flag.
+
 ## 4.58.0
 
 {{< release-date date="2026-01-26" >}}
