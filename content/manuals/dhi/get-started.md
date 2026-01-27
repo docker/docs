@@ -21,12 +21,10 @@ specific image as an example, they can be applied to any DHI.
 ## Step 1: Find an image to use
 
 1. Go to the Hardened Images catalog in [Docker
-   Hub](https://hub.docker.com/hardened-images/catalog) and sign in.
-2. In the left sidebar, select **Hardened Images**. If you have DHI Enterprise,
-   then select **Hardened Images** > **Catalog**.
-3. Use the search bar or filters to find an image (e.g., `python`, `node`,
+   Hub](https://hub.docker.com/hardened-images/catalog).
+2. Use the search bar or filters to find an image (e.g., `python`, `node`,
    `golang`). For this guide, use the Python image as an example.
-4. Select the Python repository to view its details.
+3. Select the Python repository to view its details.
 
 Continue to the next step to pull and run the image. To dive deeper into exploring
 images see [Explore Docker Hardened Images](./how-to/explore.md).
