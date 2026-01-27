@@ -137,8 +137,8 @@ params:
 
   # Example runtime/library/os versions
   example_go_version: "1.25"
-  example_alpine_version: "3.21"
-  example_node_version: "20"
+  example_alpine_version: "3.23"
+  example_node_version: "24"
 
 menus:
   # Site header menu
