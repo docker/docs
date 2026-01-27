@@ -70,7 +70,7 @@ require (
 	github.com/moby/buildkit v0.26.3 // indirect
 	github.com/moby/docker-image-spec v1.3.1 // indirect
 	github.com/moby/locker v1.0.1 // indirect
-	github.com/moby/moby/api v1.52.0 // indirect; see "replace" rule at the bottom for actual version
+	github.com/moby/moby/api v1.53.0 // indirect; see "replace" rule at the bottom for actual version
 	github.com/moby/moby/client v0.2.1 // indirect
 	github.com/moby/sys/atomicwriter v0.1.0 // indirect
 	github.com/moby/sys/sequential v0.6.0 // indirect
@@ -137,5 +137,5 @@ replace (
 	github.com/docker/mcp-gateway => github.com/docker/mcp-gateway v0.22.0
 	github.com/docker/model-runner/cmd/cli => github.com/docker/model-runner/cmd/cli v1.0.3
 	github.com/moby/buildkit => github.com/moby/buildkit v0.26.0
-	github.com/moby/moby/api => github.com/moby/moby/api v1.52.0
+	github.com/moby/moby/api => github.com/moby/moby/api v1.53.0
 )
