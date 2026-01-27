@@ -90,6 +90,31 @@ When you remove a sandbox:
 
 To preserve a configured environment, create a [Custom template](templates.md).
 
+## Security considerations
+
+Agents can create and modify any files in your mounted workspace, including
+scripts, configuration files, and hidden files.
+
+After an agent works in a workspace, review changes before performing actions
+on your host that might execute code:
+
+- Committing changes (executes Git hooks)
+- Opening the workspace in an IDE (may auto-run scripts or extensions)
+- Running scripts or executables the agent created or modified
+
+Review what changed:
+
+```console
+$ git status                        # See modified and new files
+$ git diff                          # Review changes to tracked files
+```
+
+Check for untracked files and be aware that some changes, like Git hooks in
+`.git/hooks/`, won't appear in standard diffs.
+
+This is the same trust model used by editors like Visual Studio Code, which
+warn when opening new workspaces for similar reasons.
+
 ## Named sandboxes
 
 Use meaningful names for sandboxes you'll reuse:
