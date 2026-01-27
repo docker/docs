@@ -19,8 +19,11 @@ features, and announcements:
 
 | Date published | Title |
 |------|-------|
+| January 25, 2026 | [Making the Most of Your Docker Hardened Images Enterprise Trial - Part 3](https://www.docker.com/blog/making-the-most-of-your-docker-hardened-images-enterprise-trial-part-3/) |
+| January 24, 2026 | [Making the Most of Your Docker Hardened Images Enterprise Trial - Part 2](https://www.docker.com/blog/making-the-most-of-your-docker-hardened-images-enterprise-trial-part-2/) |
 | December 19, 2025 | [Docker Hardened Images: Security Independently Validated by SRLabs](https://www.docker.com/blog/docker-hardened-images-security-independently-validated-by-srlabs/) |
 | December 17, 2025 | [A Safer Container Ecosystem with Docker: Free Docker Hardened Images](https://www.docker.com/blog/docker-hardened-images-for-every-developer/) |
+| November 14, 2025 | [Making the Most of Your Docker Hardened Images Enterprise Trial - Part 1](https://www.docker.com/blog/making-the-most-of-your-docker-hardened-images-trial-part-1/) |
 | October 15, 2025 | [Docker Hardened Images: Crafted by Humans, Protected by AI](https://www.docker.com/blog/docker-hardened-images-crafted-by-humans-protected-by-ai/) |
 | September 29, 2025 | [Expanding Docker Hardened Images: Secure Helm Charts for Deployments](https://www.docker.com/blog/docker-hardened-images-helm-charts-beta/) |
 | August 6, 2025 | [The Next Evolution of Docker Hardened Images: Customizable, FedRAMP Ready, AI Migration Agent, and Deeper Integrations](https://www.docker.com/blog/the-next-evolution-of-docker-hardened-images/) |
