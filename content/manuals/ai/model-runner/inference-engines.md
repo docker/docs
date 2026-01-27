@@ -1,27 +1,28 @@
 ---
 title: Inference engines
-description: Learn about the llama.cpp and vLLM inference engines in Docker Model Runner.
+description: Learn about the llama.cpp, vLLM, and Diffusers inference engines in Docker Model Runner.
 weight: 50
-keywords: Docker, ai, model runner, llama.cpp, vllm, inference, gguf, safetensors, cuda, gpu
+keywords: Docker, ai, model runner, llama.cpp, vllm, diffusers, inference, gguf, safetensors, cuda, gpu, image generation, stable diffusion
 ---
 
-Docker Model Runner supports two inference engines: **llama.cpp** and **vLLM**.
+Docker Model Runner supports three inference engines: **llama.cpp**, **vLLM**, and **Diffusers**.
 Each engine has different strengths, supported platforms, and model format
 requirements. This guide helps you choose the right engine and configure it for
 your use case.
 
 ## Engine comparison
 
-| Feature | llama.cpp | vLLM |
-|---------|-----------|------|
-| **Model formats** | GGUF | Safetensors, HuggingFace |
-| **Platforms** | All (macOS, Windows, Linux) | Linux x86_64 only |
-| **GPU support** | NVIDIA, AMD, Apple Silicon, Vulkan | NVIDIA CUDA only |
-| **CPU inference** | Yes | No |
-| **Quantization** | Built-in (Q4, Q5, Q8, etc.) | Limited |
-| **Memory efficiency** | High (with quantization) | Moderate |
-| **Throughput** | Good | High (with batching) |
-| **Best for** | Local development, resource-constrained environments | Production, high throughput |
+| Feature | llama.cpp | vLLM | Diffusers                           |
+|---------|-----------|------|-------------------------------------|
+| **Model formats** | GGUF | Safetensors, HuggingFace | DDUF                                |
+| **Platforms** | All (macOS, Windows, Linux) | Linux x86_64 only | Linux (x86_64, ARM64)               |
+| **GPU support** | NVIDIA, AMD, Apple Silicon, Vulkan | NVIDIA CUDA only | NVIDIA CUDA only                    |
+| **CPU inference** | Yes | No | No                                  |
+| **Quantization** | Built-in (Q4, Q5, Q8, etc.) | Limited | Limited                             |
+| **Memory efficiency** | High (with quantization) | Moderate | Moderate                            |
+| **Throughput** | Good | High (with batching) | Good                                |
+| **Best for** | Local development, resource-constrained environments | Production, high throughput | Image generation                    |
+| **Use case** | Text generation (LLMs) | Text generation (LLMs) | Image generation (Stable Diffusion) |
 
 ## llama.cpp
 
@@ -205,9 +206,95 @@ $ docker model configure --hf_overrides '{"max_model_len": 8192}' ai/model-vllm
 | Apple Silicon Mac | llama.cpp |
 | Production deployment | vLLM (if hardware supports it) |
 
-## Running both engines
+## Diffusers
 
-You can run both llama.cpp and vLLM simultaneously. Docker Model Runner routes
+[Diffusers](https://github.com/huggingface/diffusers) is an inference engine
+for image generation models, including Stable Diffusion. Unlike llama.cpp and
+vLLM which focus on text generation with LLMs, Diffusers enables you to generate
+images from text prompts.
+
+### Platform support
+
+| Platform | GPU | Support status |
+|----------|-----|----------------|
+| Linux x86_64 | NVIDIA CUDA | Supported |
+| Linux ARM64 | NVIDIA CUDA | Supported |
+| Windows | - | Not supported |
+| macOS | - | Not supported |
+
+> [!IMPORTANT]
+> Diffusers requires an NVIDIA GPU with CUDA support. It does not support
+> CPU-only inference.
+
+### Setting up Diffusers
+
+Install the Model Runner with Diffusers backend:
+
+```console
+$ docker model reinstall-runner --backend diffusers --gpu cuda
+```
+
+Verify the installation:
+
+```console
+$ docker model status
+Docker Model Runner is running
+
+Status:
+llama.cpp: running llama.cpp version: 34ce48d
+mlx: not installed
+sglang: sglang package not installed
+vllm: vLLM binary not found
+diffusers: running diffusers version: 0.36.0
+```
+
+### Pulling Diffusers models
+
+Pull a Stable Diffusion model:
+
+```console
+$ docker model pull stable-diffusion:Q4
+```
+
+### Generating images with Diffusers
+
+Diffusers uses an image generation API endpoint. To generate an image:
+
+```console
+$ curl -s -X POST http://localhost:12434/engines/diffusers/v1/images/generations \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "stable-diffusion:Q4",
+    "prompt": "A picture of a nice cat",
+    "size": "512x512"
+  }' | jq -r '.data[0].b64_json' | base64 -d > image.png
+```
+
+This command:
+1. Sends a POST request to the Diffusers image generation endpoint
+2. Specifies the model, prompt, and output image size
+3. Extracts the base64-encoded image from the response
+4. Decodes it and saves it as `image.png`
+
+### Diffusers API endpoint
+
+When using Diffusers, specify the engine in the API path:
+
+```text
+POST /engines/diffusers/v1/images/generations
+```
+
+### Supported parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `model` | string | Required. The model identifier (e.g., `stable-diffusion:Q4`). |
+| `prompt` | string | Required. The text description of the image to generate. |
+| `size` | string | Image dimensions in `WIDTHxHEIGHT` format (e.g., `512x512`). |
+
+## Running multiple engines
+
+You can run llama.cpp, vLLM, and Diffusers simultaneously. Docker Model Runner routes
 requests to the appropriate engine based on the model or explicit engine selection.
 
 Check which engines are running:
@@ -217,17 +304,21 @@ $ docker model status
 Docker Model Runner is running
 
 Status:
-llama.cpp: running llama.cpp version: c22473b
+llama.cpp: running llama.cpp version: 34ce48d
+mlx: not installed
+sglang: sglang package not installed
 vllm: running vllm version: 0.11.0
+diffusers: running diffusers version: 0.36.0
 ```
 
 ### Engine-specific API paths
 
-| Engine | API path |
-|--------|----------|
-| llama.cpp | `/engines/llama.cpp/v1/...` |
-| vLLM | `/engines/vllm/v1/...` |
-| Auto-select | `/engines/v1/...` |
+| Engine | API path | Use case |
+|--------|----------|----------|
+| llama.cpp | `/engines/llama.cpp/v1/chat/completions` | Text generation |
+| vLLM | `/engines/vllm/v1/chat/completions` | Text generation |
+| Diffusers | `/engines/diffusers/v1/images/generations` | Image generation |
+| Auto-select | `/engines/v1/chat/completions` | Text generation (auto-selects engine) |
 
 ## Managing inference engines
 
@@ -238,7 +329,7 @@ $ docker model install-runner --backend <engine> [--gpu <type>]
 ```
 
 Options:
-- `--backend`: `llama.cpp` or `vllm`
+- `--backend`: `llama.cpp`, `vllm`, or `diffusers`
 - `--gpu`: `cuda`, `rocm`, `vulkan`, or `metal` (depends on platform)
 
 ### Reinstall an engine

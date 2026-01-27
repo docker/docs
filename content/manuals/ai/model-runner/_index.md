@@ -6,7 +6,7 @@ params:
     group: AI
 weight: 30
 description: Learn how to use Docker Model Runner to manage and run AI models.
-keywords: Docker, ai, model runner, docker desktop, docker engine, llm, openai, ollama, llama.cpp, vllm, cpu, nvidia, cuda, amd, rocm, vulkan, cline, continue, cursor
+keywords: Docker, ai, model runner, docker desktop, docker engine, llm, openai, ollama, llama.cpp, vllm, diffusers, cpu, nvidia, cuda, amd, rocm, vulkan, cline, continue, cursor, image generation, stable diffusion
 aliases:
   - /desktop/features/model-runner/
   - /model-runner/
@@ -34,7 +34,8 @@ with AI models locally.
 
 - [Pull and push models to and from Docker Hub](https://hub.docker.com/u/ai)
 - Serve models on [OpenAI and Ollama-compatible APIs](api-reference.md) for easy integration with existing apps
-- Support for both [llama.cpp and vLLM inference engines](inference-engines.md) (vLLM on Linux x86_64/amd64 and Windows WSL2 with NVIDIA GPUs)
+- Support for [llama.cpp, vLLM, and Diffusers inference engines](inference-engines.md) (vLLM and Diffusers on Linux with NVIDIA GPUs)
+- [Generate images from text prompts](inference-engines.md#diffusers) using Stable Diffusion models with the Diffusers backend
 - Package GGUF and Safetensors files as OCI Artifacts and publish them to any Container Registry
 - Run and interact with AI models directly from the command line or from the Docker Desktop GUI
 - [Connect to AI coding tools](ide-integrations.md) like Cline, Continue, Cursor, and Aider
@@ -89,14 +90,15 @@ access. You can interact with the model using
 
 ### Inference engines
 
-Docker Model Runner supports two inference engines:
+Docker Model Runner supports three inference engines:
 
 | Engine | Best for | Model format |
 |--------|----------|--------------|
 | [llama.cpp](inference-engines.md#llamacpp) | Local development, resource efficiency | GGUF (quantized) |
 | [vLLM](inference-engines.md#vllm) | Production, high throughput | Safetensors |
+| [Diffusers](inference-engines.md#diffusers) | Image generation (Stable Diffusion) | Safetensors |
 
-llama.cpp is the default engine and works on all platforms. vLLM requires NVIDIA GPUs and is supported on Linux x86_64 and Windows with WSL2. See [Inference engines](inference-engines.md) for detailed comparison and setup.
+llama.cpp is the default engine and works on all platforms. vLLM requires NVIDIA GPUs and is supported on Linux x86_64 and Windows with WSL2. Diffusers enables image generation and requires NVIDIA GPUs on Linux (x86_64 or ARM64). See [Inference engines](inference-engines.md) for detailed comparison and setup.
 
 ### Context size
 
@@ -159,6 +161,6 @@ Thanks for trying out Docker Model Runner. To report bugs or request features, [
 - [Get started with DMR](get-started.md) - Enable DMR and run your first model
 - [API reference](api-reference.md) - OpenAI and Ollama-compatible API documentation
 - [Configuration options](configuration.md) - Context size and runtime parameters
-- [Inference engines](inference-engines.md) - llama.cpp and vLLM details
+- [Inference engines](inference-engines.md) - llama.cpp, vLLM, and Diffusers details
 - [IDE integrations](ide-integrations.md) - Connect Cline, Continue, Cursor, and more
 - [Open WebUI integration](openwebui-integration.md) - Set up a web chat interface
