@@ -16,6 +16,7 @@ cname:
     - docker buildx imagetools
     - docker buildx inspect
     - docker buildx ls
+    - docker buildx policy
     - docker buildx prune
     - docker buildx rm
     - docker buildx stop
@@ -33,6 +34,7 @@ clink:
     - docker_buildx_imagetools.yaml
     - docker_buildx_inspect.yaml
     - docker_buildx_ls.yaml
+    - docker_buildx_policy.yaml
     - docker_buildx_prune.yaml
     - docker_buildx_rm.yaml
     - docker_buildx_stop.yaml

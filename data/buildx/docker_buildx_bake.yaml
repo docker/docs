@@ -198,6 +198,16 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: var
+      value_type: stringArray
+      default_value: '[]'
+      description: Set a variable value (e.g., `name=value`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 inherited_options:
     - option: builder
       value_type: string
@@ -578,6 +588,7 @@ examples: |-
     $ docker buildx bake --set *.platform=linux/arm64       # overrides platform for all targets
     $ docker buildx bake --set foo*.no-cache                # bypass caching only for targets starting with 'foo'
     $ docker buildx bake --set target.platform+=linux/arm64 # appends 'linux/arm64' to the platform list
+    $ docker buildx bake --set target.contexts.bar=../bar   # overrides 'bar' named context
     ```
 
     > [!NOTE]
@@ -596,6 +607,7 @@ examples: |-
     * `cache-to`
     * `call`
     * `context`
+    * `contexts`
     * `dockerfile`
     * `entitlements`
     * `extra-hosts`

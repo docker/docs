@@ -314,6 +314,17 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: policy
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Policy configuration (format: `filename=path[,filename=path][,reset=true|false][,disabled=true|false][,strict=true|false][,log-level=level]`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: print
       value_type: string
       description: Print result of information request (e.g., outline, targets)
@@ -356,7 +367,7 @@ options:
     - option: push
       value_type: bool
       default_value: "false"
-      description: Shorthand for `--output=type=registry`
+      description: Shorthand for `--output=type=registry,unpack=false`
       deprecated: false
       hidden: false
       experimental: false
