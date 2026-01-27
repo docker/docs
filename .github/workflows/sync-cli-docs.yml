@@ -38,11 +38,8 @@ jobs:
           if [ -n "${{ inputs.version }}" ]; then
             VERSION="${{ inputs.version }}"
           else
-            VERSION=$(grep "docker_ce_version:" hugo.yaml | awk '{print $2}' | tr -d '"')
+            VERSION=v$(grep "docker_ce_version:" hugo.yaml | awk '{print $2}' | tr -d '"')
           fi
-          # TODO(vvoland): Remove this after 29.2.0 is released
-          # VERSION=v${VERSION}
-          VERSION=60f06cb2df3df36ddfb531c1dae8c6fa96e5f9e7
 
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "Docker CLI version: **$VERSION**" | tee -a "$GITHUB_STEP_SUMMARY"
