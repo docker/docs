@@ -48,6 +48,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Docker Model Runner now exposes an [Anthropic-compatible API](/manuals/ai/model-runner/api-reference.md#anthropic-compatible-api).
 - Docker Desktop now supports UTF-8 BOM for `admin-settings.json` and `registry.json`.
+- Fixed an issue where admin settings incorrectly changed user proxy settings after a restart.
 
 > [!IMPORTANT]
 >
