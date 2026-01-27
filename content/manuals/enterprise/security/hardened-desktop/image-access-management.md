@@ -1,7 +1,7 @@
 ---
 title: Image Access Management
 description: Control which Docker Hub images developers can access with Image Access Management for enhanced supply chain security
-keywords: image access management, docker official images, verified publisher, supply chain security, docker business
+keywords: image access management, docker official images, verified publisher, supply chain security, docker business, allow list
 tags: [admin]
 aliases:
  - /docker-hub/image-access-management/
@@ -23,6 +23,8 @@ With Image Access Management, you can restrict access to:
 - Organization images: Your organization's private repositories
 - Community images: Public images from individual developers
 
+You can also use a repository allow list to approve specific repositories that bypass all other access controls.
+
 ## Who should use Image Access Management?
 
 Image Access Management helps prevent supply chain attacks by ensuring developers only use trusted container images. For example, a developer building a new application might accidentally use a malicious community image as a component. Image Access Management prevents this by restricting access to only approved image types.
@@ -33,6 +35,12 @@ Common security scenarios include:
 - Ensure developers use only vetted, official base images
 - Control access to commercial third-party images
 - Maintain consistent security standards across development teams
+
+Use the repository allow list when you need to:
+
+- Grant access to specific vetted community images
+- Allow essential third-party tools that don't fall under official categories
+- Provide exceptions to general image access policies for specific business requirements
 
 ## Prerequisites
 
@@ -58,6 +66,16 @@ To configure Image Access Management:
     - **Community images**: Images contributed by various users that may pose security risks. This category includes Docker-Sponsored Open Source images and is turned off by default.
     - **Docker Verified Publisher Images**: Images from Docker partners in the Verified Publisher program, qualified for secure supply chains.
     - **Docker Official Images**: Curated Docker repositories that provide OS repositories, best practices for Dockerfiles, drop-in solutions, and timely security updates.
+    - **Repository allow list**: A list of specific repositories that should be
+      allowed. Configure in the next step.
+1. Optionally, when **Repository allow list** is enabled in the previous step,
+   you can add or remove specific repositories in the allow list:
+    - To add repositories, in the **Repository allow list** section, select
+      **Add repositories to allow list** and follow the on-screen instructions.
+    - To remove a repository, in the **Repository allow list** section, select
+      the trashcan icon next to it.
+
+    Repositories in the allow list are accessible to all organization members regardless of the image type restrictions configured in the previous steps.
 
 Once restrictions are applied, organization members can view the permissions page in read-only format.
 
@@ -92,10 +110,12 @@ Start with the most restrictive policy and gradually expand based on legitimate 
 1. Start with: Docker Official Images and Organization images
 2. Add if needed: Docker Verified Publisher Images for commercial tools
 3. Carefully evaluate: Community images only for specific, vetted use cases
+4. Use the repository allow list sparingly: Only add repositories that have been thoroughly vetted and approved through your organization's security review process
 
 Other security recommendations include:
 
 - Monitor usage patterns: Review which images developers are attempting to pull, identify legitimate requests for additional image types, regularly audit approved image categories for continued relevance, and use Docker Desktop analytics to monitor usage patterns.
+- Regularly review the repository allow list: Periodically audit the repositories in your allow list to ensure they remain necessary and trustworthy, and remove any that are no longer needed or maintained.
 - Layer security controls: Image Access Management works best with Registry Access Management to control which registries developers can access, Enhanced Container Isolation to secure containers at runtime, and Settings Management to control Docker Desktop configuration.
 
 ## Scope and bypass considerations
