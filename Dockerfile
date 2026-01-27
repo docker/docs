@@ -93,8 +93,6 @@ RUN <<"EOT"
 set -ex
 if [ -n "$MODULE" ]; then
     hugo mod get ${MODULE}
-    RESOLVED=$(cat go.mod | grep -m 1 "${MODULE/@*/}" | awk '{print $1 "@" $2}')
-    go mod edit -replace "${MODULE/@*/}=${RESOLVED}";
 else
     echo "no module set";
 fi
