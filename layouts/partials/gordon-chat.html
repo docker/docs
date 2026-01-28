@@ -449,12 +449,56 @@
             <template
               x-if="message.role === 'assistant' && !message.isStreaming"
             >
-              <div class="flex items-center gap-2 text-xs">
-                <div class="flex items-center gap-1">
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center gap-3 text-xs">
+                  <!-- "Was this helpful?" prompt with sparkle icon -->
+                  <div class="flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
+                    <span class="icon-svg icon-xs text-blue-500 dark:text-blue-400">
+                      {{ partialCached "icon" "icons/sparkle.svg" "icons/sparkle.svg" }}
+                    </span>
+                    <span class="font-medium">Was this helpful?</span>
+                  </div>
+
+                  <!-- Feedback buttons group -->
+                  <div class="flex items-center gap-2">
+                    <!-- Thumbs up - Helpful -->
+                    <button
+                      @click="submitFeedback(index, 'positive')"
+                      :class="message.feedback === 'positive'
+                        ? 'bg-green-100 text-green-700 ring ring-green-500 dark:bg-green-900/50 dark:text-green-400 dark:ring-green-600'
+                        : 'bg-gray-100 text-gray-600 hover:bg-green-50 hover:text-green-600 hover:ring hover:ring-green dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-green-900/30 dark:hover:text-green-400 dark:hover:ring-green'"
+                      class="cursor-pointer rounded-full px-3 py-1.5 transition-all duration-200 flex items-center gap-1.5"
+                      title="Helpful"
+                    >
+                      <span class="icon-svg icon-sm transition-transform">
+                        {{ partialCached "icon" "thumb_up" "thumb_up" }}
+                      </span>
+                      <span class="hidden sm:inline font-medium">Helpful</span>
+                    </button>
+
+                    <!-- Thumbs down - Not quite -->
+                    <button
+                      @click="submitFeedback(index, 'negative')"
+                      :class="message.feedback === 'negative'
+                        ? 'bg-red-100 text-red-700 ring ring-red-500 dark:bg-red-900/50 dark:text-red-400 dark:ring-red-600'
+                        : 'bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600 hover:ring hover:ring-red dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-red-900/30 dark:hover:text-red-400 dark:hover:ring-red'"
+                      class="cursor-pointer rounded-full px-3 py-1.5 transition-all duration-200 flex items-center gap-1.5"
+                      title="Not quite"
+                    >
+                      <span class="icon-svg icon-sm transition-transform">
+                        {{ partialCached "icon" "thumb_down" "thumb_down" }}
+                      </span>
+                      <span class="hidden sm:inline font-medium">Not quite</span>
+                    </button>
+                  </div>
+
+                  <!-- Separator -->
+                  <div class="h-4 w-px bg-gray-300 dark:bg-gray-600"></div>
+
                   <!-- Copy button -->
                   <button
                     @click="copyAnswer(index)"
-                    class="cursor-pointer rounded bg-gray-100 p-1.5 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
+                    class="cursor-pointer rounded-full px-3 py-1.5 transition-all duration-200 flex items-center gap-1.5 bg-gray-100 text-gray-600 hover:bg-blue-50 hover:text-blue-700 hover:ring hover:ring-blue dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-blue-900/30 dark:hover:text-blue-300 dark:hover:ring-blue-400"
                     :title="message.copied ? 'Copied!' : 'Copy answer'"
                   >
                     <span
@@ -469,46 +513,20 @@
                     >
                       {{ partialCached "icon" "check_circle" "check_circle" }}
                     </span>
-                  </button>
-                  <!-- Thumbs up -->
-                  <button
-                    @click="submitFeedback(index, 'positive')"
-                    :class="message.feedback === 'positive'
-											? 'bg-green-200 text-green-700 dark:bg-green-900/50 dark:text-green-400'
-											: 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'"
-                    class="cursor-pointer rounded p-1.5"
-                    title="Helpful"
-                  >
-                    <span class="icon-svg icon-sm">
-                      {{ partialCached "icon" "thumb_up" "thumb_up" }}
-                    </span>
-                  </button>
-                  <!-- Thumbs down -->
-                  <button
-                    @click="submitFeedback(index, 'negative')"
-                    :class="message.feedback === 'negative'
-											? 'bg-red-200 text-red-700 dark:bg-red-900/50 dark:text-red-400'
-											: 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'"
-                    class="cursor-pointer rounded p-1.5"
-                    title="Not helpful"
-                  >
-                    <span class="icon-svg icon-sm">
-                      {{ partialCached "icon" "thumb_down" "thumb_down" }}
-                    </span>
+                    <span class="hidden sm:inline font-medium">Copy</span>
                   </button>
                 </div>
-                <template x-if="message.feedback">
-                  <span
-                    :class="message.feedback === 'positive' ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'"
-                  >
-                    Thanks for your feedback!
-                  </span>
-                </template>
+
+                <!-- Error message -->
                 <template x-if="message.feedbackError">
-                  <span
-                    class="text-red-600 dark:text-red-400"
-                    x-text="message.feedbackError"
-                  ></span>
+                  <div
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 translate-y-1"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    class="flex items-center gap-1.5 text-xs text-red-600 dark:text-red-400"
+                  >
+                    <span x-text="message.feedbackError"></span>
+                  </div>
                 </template>
               </div>
             </template>
