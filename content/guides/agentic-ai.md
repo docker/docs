@@ -113,6 +113,8 @@ To run the application locally, follow these steps:
    incorrect fact in the prompt and hit enter. An agent searches DuckDuckGo to
    verify it and another agent revises the output.
 
+    ![Screenshot of the application](./images/agentic-ai-app.png)
+
 3. Press ctrl-c in the terminal to stop the application when you're done.
 
 ## Step 3: Review the application environment
