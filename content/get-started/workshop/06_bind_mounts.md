@@ -65,7 +65,7 @@ filesystem you can share with containers. For details about accessing the settin
    {{< tab name="Mac / Linux" >}}
 
    ```console
-   $ docker run -it --mount type=bind,src="$(pwd)",target=/src ubuntu bash
+   $ docker run -it --mount type=bind,src=.,target=/src ubuntu bash
    ```
    
    {{< /tab >}}
@@ -79,14 +79,14 @@ filesystem you can share with containers. For details about accessing the settin
    {{< tab name="Git Bash" >}}
 
    ```console
-   $ docker run -it --mount type=bind,src="/$(pwd)",target=/src ubuntu bash
+   $ docker run -it --mount type=bind,src="/.",target=/src ubuntu bash
    ```
    
    {{< /tab >}}
    {{< tab name="PowerShell" >}}
 
    ```console
-   $ docker run -it --mount "type=bind,src=$($pwd),target=/src" ubuntu bash
+   $ docker run -it --mount "type=bind,src=.,target=/src" ubuntu bash
    ```
    
    {{< /tab >}}
@@ -180,7 +180,7 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
 
    ```console
    $ docker run -dp 127.0.0.1:3000:3000 \
-       -w /app --mount type=bind,src="$(pwd)",target=/app \
+       -w /app --mount type=bind,src=.,target=/app \
        node:24-alpine \
        sh -c "npm install && npm run dev"
    ```
@@ -190,7 +190,7 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
      create a port mapping
    - `-w /app` - sets the "working directory" or the current directory that the
      command will run from
-   - `--mount type=bind,src="$(pwd)",target=/app` - bind mount the current
+   - `--mount type=bind,src=.,target=/app` - bind mount the current
      directory from the host into the `/app` directory in the container
    - `node:24-alpine` - the image to use. Note that this is the base image for
      your app from the Dockerfile
@@ -226,7 +226,7 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
 
    ```powershell
    $ docker run -dp 127.0.0.1:3000:3000 `
-       -w /app --mount "type=bind,src=$pwd,target=/app" `
+       -w /app --mount "type=bind,src=.,target=/app" `
        node:24-alpine `
        sh -c "npm install && npm run dev"
    ```
@@ -236,7 +236,7 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
      create a port mapping
    - `-w /app` - sets the "working directory" or the current directory that the
      command will run from
-   - `--mount "type=bind,src=$pwd,target=/app"` - bind mount the current
+   - `--mount "type=bind,src=.,target=/app"` - bind mount the current
      directory from the host into the `/app` directory in the container
    - `node:24-alpine` - the image to use. Note that this is the base image for
      your app from the Dockerfile
@@ -318,7 +318,7 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
 
    ```console
    $ docker run -dp 127.0.0.1:3000:3000 \
-       -w //app --mount type=bind,src="/$(pwd)",target=/app \
+       -w //app --mount type=bind,src="/.",target=/app \
        node:24-alpine \
        sh -c "npm install && npm run dev"
    ```
@@ -328,7 +328,7 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
      create a port mapping
    - `-w //app` - sets the "working directory" or the current directory that the
      command will run from
-   - `--mount type=bind,src="/$(pwd)",target=/app` - bind mount the current
+   - `--mount type=bind,src="/.",target=/app` - bind mount the current
      directory from the host into the `/app` directory in the container
    - `node:24-alpine` - the image to use. Note that this is the base image for
      your app from the Dockerfile

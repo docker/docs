@@ -212,7 +212,7 @@ You can now start your dev-ready container.
 
    ```console
    $ docker run -dp 127.0.0.1:3000:3000 \
-     -w /app -v "$(pwd):/app" \
+     -w /app -v ".:/app" \
      --network todo-app \
      -e MYSQL_HOST=mysql \
      -e MYSQL_USER=root \

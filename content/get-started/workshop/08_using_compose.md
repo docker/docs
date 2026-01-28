@@ -40,7 +40,7 @@ In [part 6](./07_multi_container.md), you used the following command to start th
 
 ```console
 $ docker run -dp 127.0.0.1:3000:3000 \
-  -w /app -v "$(pwd):/app" \
+  -w /app -v ".:/app" \
   --network todo-app \
   -e MYSQL_HOST=mysql \
   -e MYSQL_USER=root \
@@ -82,7 +82,7 @@ You'll now define this service in the `compose.yaml` file.
    ```
 
 4. Next, migrate both the working directory (`-w /app`) and the volume mapping
-   (`-v "$(pwd):/app"`) by using the `working_dir` and `volumes` definitions.
+   (`-v ".:/app"`) by using the `working_dir` and `volumes` definitions.
 
     One advantage of Docker Compose volume definitions is you can use relative paths from the current directory.
 
