@@ -56,10 +56,14 @@ github.com/docker/cli v29.1.2+incompatible h1:s4QI7drXpIo78OM+CwuthPsO5kCf8cpNsc
 github.com/docker/cli v29.1.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v29.1.5+incompatible h1:GckbANUt3j+lsnQ6eCcQd70mNSOismSHWt8vk2AX8ao=
 github.com/docker/cli v29.1.5+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v29.2.0+incompatible h1:9oBd9+YM7rxjZLfyMGxjraKBKE4/nVyvVfN4qNl9XRM=
+github.com/docker/cli v29.2.0+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/compose/v5 v5.0.0 h1:J2uMCzJ/5xLcoIVVXvMmPe6HBzVQpmJThKa7Qk7Xldc=
 github.com/docker/compose/v5 v5.0.0/go.mod h1:BurapGv8zmYnsbSmlpCz5EU2Pi3YFV/PjeUnoFpcw64=
 github.com/docker/compose/v5 v5.0.1 h1:5yCjDJbwUqcuI+6WNFHNWz2/3vyBDsNnfe8LlFjyxEc=
 github.com/docker/compose/v5 v5.0.1/go.mod h1:vuKBtnRuvsVIlYHzdPkF3SToljqR+pFJseO5lDBuF18=
+github.com/docker/compose/v5 v5.0.2 h1:OTBsvKsim2rVNUBrb9pP5byiGG5trTt+uO3qr6WIQYo=
+github.com/docker/compose/v5 v5.0.2/go.mod h1:MbI7iBpjcgTN27JC4cYYR1mmfmaWEqEgqKKfbEGFK1c=
 github.com/docker/distribution v2.8.3+incompatible h1:AtKxIZ36LoNK51+Z6RpzLpddBirtxJnzDrHLEKxTAYk=
 github.com/docker/distribution v2.8.3+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
 github.com/docker/docker v28.5.2+incompatible h1:DBX0Y0zAjZbSrm1uzOkdr1onVghKaftjlSWt4AFexzM=
