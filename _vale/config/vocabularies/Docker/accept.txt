@@ -1,5 +1,6 @@
 (?i)[A-Z]{2,}'?s
 jq
+untracked
 ripgrep
 exfiltration
 sandboxing
@@ -13,6 +14,7 @@ armhf
 [Aa]uditability
 auditable
 autolock
+[Aa]llowlist(ing)?
 Azure
 Azure AD
 bootup
@@ -172,6 +174,7 @@ Qualcomm
 Quickview
 rebalance
 reimplement
+Rego
 Rekor
 ROCm
 rollback
@@ -183,6 +186,7 @@ scrollable
 SELinux
 Slack
 snapshotters?
+Sigstore
 Snyk
 Solr
 SonarQube
