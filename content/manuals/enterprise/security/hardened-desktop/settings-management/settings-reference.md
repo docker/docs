@@ -839,13 +839,28 @@ third-party or unvetted plugins from being installed.
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
-| `true`        | `true`, `false` | Boolean  |
+| `false`        | `true`, `false` | Boolean  |
 
 - **Description:** Restriction of Docker Extensions to only those available through the official marketplace.
 - **OS:** {{< badge color=blue text="All" >}}
 - **Use case:** Prevent installation of third-party or locally developed extensions.
 - **Configure this setting with:**
     - **Extensions** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - Settings Management: `onlyMarketplaceExtensions` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Only marketplace extensions** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+
+### Enable a private marketplace
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `false`        | `true`, `false` | Boolean  |
+
+- **Description:** Activates the private marketplace. 
+- **OS:** {{< badge color=blue text="All" >}}
+- **Use case:** Ensures Docker Desktop connects to content defined and controlled by the administrator instead of the public Docker marketplace.
+- **Configure this setting with:**
+    - Settings Management: `extensionsPrivateMarketplace` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Extensions private marketplace** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 ### Show Docker Extensions system containers
 
