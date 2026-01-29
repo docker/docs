@@ -232,10 +232,9 @@ The following `strftime` codes are supported:
 
 In addition, the following non-`strftime` codes are supported:
 
-| Code | Meaning                                                          | Example  |
-| :--- | :--------------------------------------------------------------- | :------- |
-| `%L` | Milliseconds as a zero-padded decimal number preceded with a     | .123     |
-|      | period.                                                          |          |
+| Code | Meaning                                                              | Example  |
+| :--- | :------------------------------------------------------------------- | :------- |
+| `%L` | Milliseconds as a zero-padded decimal number preceded with a period. | .123     |
 
 ### awslogs-multiline-pattern
 
