@@ -225,11 +225,17 @@ The following `strftime` codes are supported:
 | `%p` | AM or PM.                                                        | AM       |
 | `%M` | Minute as a zero-padded decimal number.                          | 57       |
 | `%S` | Second as a zero-padded decimal number.                          | 04       |
-| `%L` | Milliseconds as a zero-padded decimal number.                    | .123     |
 | `%f` | Microseconds as a zero-padded decimal number.                    | 000345   |
 | `%z` | UTC offset in the form +HHMM or -HHMM.                           | +1300    |
 | `%Z` | Time zone name.                                                  | PST      |
 | `%j` | Day of the year as a zero-padded decimal number.                 | 363      |
+
+In addition, the following non-`strftime` codes are supported:
+
+| Code | Meaning                                                          | Example  |
+| :--- | :--------------------------------------------------------------- | :------- |
+| `%L` | Milliseconds as a zero-padded decimal number preceeded with a    | .123     |
+|      | period.                                                          |          |
 
 ### awslogs-multiline-pattern
 
