@@ -1,0 +1,55 @@
+---
+title: {{.TitlePrefix}} {{.Tag}}
+description: {{.Description}}
+keywords: {{.Keywords}}
+date: {{.Date}}
+type: release-note
+params:
+  github_url: {{.URL}}
+  tag: {{.Tag}}
+  prerelease: {{.IsPrerelease}}
+  author: {{.Author}}
+{{- if .Assets}}
+  assets:
+{{- range .Assets}}
+    - name: "{{.Name}}"
+      url: "{{.URL}}"
+      size: {{.Size}}
+      downloadCount: {{.DownloadCount}}
+{{- end}}
+{{- end}}
+---
+{{if .IsPrerelease}}
+{{print "{{< badge color=amber text=\"Pre-release\" >}}"}}
+{{end}}
+
+{{.Body}}
+{{- if or .Binaries .Checksums}}
+
+## Downloads
+{{- end}}
+{{- if .Binaries}}
+
+### Binaries
+
+| File | Artifacts | Size |
+|------|-----------|------|
+{{- range .Binaries}}
+| [`{{.Name}}`]({{.URL}}) | {{.Artifacts}} | {{.SizeMB}} MB |
+{{- end}}
+{{- end}}
+{{- if .Checksums}}
+
+### Checksums
+{{range .Checksums}}
+- [`{{.Name}}`]({{.URL}}) ({{.SizeKB}} KB)
+{{- end}}
+
+To verify downloads, check the checksum file and compare with your downloaded file:
+
+```console
+$ sha256sum -c checksums.txt
+```
+{{- end}}
+
+[View on GitHub]({{.URL}})
