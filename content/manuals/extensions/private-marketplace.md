@@ -61,9 +61,17 @@ This creates 2 files:
 - `admin-settings.json`, which activates the private marketplace feature once it’s applied to Docker Desktop on your developers’ machines.
 - `extensions.txt`, which determines which extensions to list in your private marketplace.
 
+> [!IMPORTANT]
+>
+> If your org is using [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) via the [Admin Console](manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console/_index.md), you will not need the `admins-settings.json` file. Delete the generated file and keep only the `extensions.txt` file.
+
 ## Step two: Set the behaviour
 
 The generated `admin-settings.json` file includes various settings you can modify.
+
+> [!IMPORTANT]
+>
+> If your org is managing settings via the [Admin Console](manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console/_index.md), you will define the same settings in the Admin Console instead of the `admin-settings.json` file.
 
 Each setting has a `value` that you can set, including a `locked` field that lets you lock the setting and make it unchangeable by your developers.
 
@@ -174,6 +182,10 @@ It's recommended that you try the private marketplace on your Docker Desktop ins
 2. Quit and re-open Docker Desktop. 
 3. Sign in with a Docker account.
 
+> [!IMPORTANT]
+>
+> > If your org is managing settings via the [Admin Console](manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console/_index.md), with Docker Desktop version 4.59 and earlier you need to manually delete the `admin-settings.json` file that has been created in the target folder by the `apply` command before step 2. 
+
 When you select the **Extensions** tab, you should see the private marketplace listing only the extensions you have allowed in `extensions.txt`.
 
 ![Extensions Private Marketplace](/assets/images/extensions-private-marketplace.webp)
@@ -183,7 +195,7 @@ When you select the **Extensions** tab, you should see the private marketplace l
 Once you’ve confirmed that the private marketplace configuration works, the final step is to distribute the files to the developers’ machines with the MDM software your organization uses. For example, [Jamf](https://www.jamf.com/).
 
 The files to distribute are:
-* `admin-settings.json`
+* `admin-settings.json` (except if your org is managing settings via the [Admin Console](manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console/_index.md))
 * the entire `extension-marketplace` folder and its subfolders
 
 These files must be placed on developer's machines. Depending on your operating system, the target location is (as mentioned above):

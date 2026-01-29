@@ -280,12 +280,20 @@ The following tables describe all available settings in the `admin-settings.json
 |`configurationFileVersion`|   |Specifies the version of the configuration file format.|   |
 |`analyticsEnabled`|  |If `value` is set to false, Docker Desktop doesn't send usage statistics to Docker. |  |
 |`disableUpdate`|  |If `value` is set to true, checking for and notifications about Docker Desktop updates is disabled.|  |
-|`extensionsEnabled`|  |If `value` is set to false, Docker extensions are disabled. |  |
 | `blockDockerLoad` | | If `value` is set to `true`, users are no longer able to run [`docker load`](/reference/cli/docker/image/load/) and receive an error if they try to.|  |
 | `displayedOnboarding` |  | If `value` is set to `true`, the onboarding survey will not be displayed to new users. Setting `value` to `false` has no effect. |  Docker Desktop version 4.30 and later |
 | `desktopTerminalEnabled` |  | If `value` is set to `false`, developers cannot use the Docker terminal to interact with the host machine and execute commands directly from Docker Desktop. |  |
 |`exposeDockerAPIOnTCP2375`| Windows only| Exposes the Docker API on a specified port. If `value` is set to true, the Docker API is exposed on port 2375. Note: This is unauthenticated and should only be enabled if protected by suitable firewall rules.|  |
 | `silentModulesUpdate` | | If `value` is set to `true`, Docker Desktop automatically updates components that don't require a restart. For example, the Docker CLI or Docker Scout components. | Docker Desktop version 4.46 and later. |
+
+### Extensions
+
+|Parameter|OS|Description|Version|
+|:-------------------------------|---|:-------------------------------|---|
+|`extensionsEnabled`|  |If `value` is set to false, Docker Extensions are disabled. |  |
+| `onlyMarketplaceExtensions` |  | If `value` is set to true, developers are blocked from installing other extensions via the command line.|  |
+| `extensionsPrivateMarketplace` |  | If `value` is set to true, activates the private marketplace is enabled which ensures Docker Desktop connects to content defined and controlled by the administrator instead of the public Docker marketplace. |  |
+| `extensionsPrivateMarketplaceAdminContactURL` |  | Defines a contact link for developers to request new extensions in the private marketplace. |  |
 
 ### File sharing and emulation
 
