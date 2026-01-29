@@ -35,13 +35,15 @@ This starts Claude and immediately processes the prompt.
 
 ## Authentication
 
-Claude Code needs an Anthropic API key to work. The recommended approach is to
-set the `ANTHROPIC_API_KEY` environment variable in your shell configuration
-file.
+Claude Code requires an Anthropic API key. You can authenticate using an environment variable (recommended) or through interactive login.
 
-Docker Sandboxes run through a daemon process that doesn't inherit environment
+### Environment variable (recommended)
+
+The recommended approach is to set the `ANTHROPIC_API_KEY` environment variable in your shell configuration file.
+
+Docker Sandboxes use a daemon process that doesn't inherit environment
 variables from your current shell session. To make your API key available to
-sandboxes, you need to set it globally in your shell configuration file.
+sandboxes, set it globally in your shell configuration file.
 
 Add the API key to your shell configuration file:
 
@@ -49,7 +51,7 @@ Add the API key to your shell configuration file:
 export ANTHROPIC_API_KEY=sk-ant-api03-xxxxx
 ```
 
-Then apply the changes:
+Apply the changes:
 
 1. Source your shell configuration: `source ~/.bashrc` (or `~/.zshrc`)
 2. Restart Docker Desktop so the daemon picks up the new environment variable
@@ -60,16 +62,19 @@ $ docker sandbox create claude ~/project
 $ docker sandbox run <sandbox-name>
 ```
 
-The sandbox will detect the environment variable and use it automatically.
+The sandbox detects the environment variable and uses it automatically.
 
 ### Interactive authentication
 
-If no credentials are found, Claude Code prompts you to authenticate when it
-starts. You'll need to authenticate for each workspace separately when using
-this method.
+If no credentials are found, Claude Code prompts you to authenticate interactively when it starts. You can also trigger the login flow manually using the `/login` command within Claude Code.
 
-To avoid repeated authentication, use the `ANTHROPIC_API_KEY` environment
-variable method described above.
+When using interactive authentication:
+
+- You'll need to authenticate for each workspace/sandbox separately
+- If the sandbox is removed or destroyed, you'll need to authenticate again when you recreate it
+- Authentication sessions aren't persisted outside the sandbox
+
+To avoid repeated authentication, use the `ANTHROPIC_API_KEY` environment variable method described above.
 
 ## Configuration
 

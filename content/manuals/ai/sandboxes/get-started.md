@@ -7,7 +7,7 @@ weight: 20
 
 {{< summary-bar feature_name="Docker Sandboxes" >}}
 
-This guide runs Claude Code in an isolated sandbox for the first time.
+This guide shows how to run Claude Code in an isolated sandbox for the first time.
 
 > [!NOTE]
 > Upgrading from an earlier version of Docker Desktop? See the
@@ -20,13 +20,13 @@ Before you begin, ensure you have:
 
 - Docker Desktop 4.58 or later
 - macOS, or Windows {{< badge color=violet text=Experimental >}}
-- A Claude API key
+- A Claude API key (can be provided via environment variable or interactively)
 
 ## Run your first sandbox
 
 Follow these steps to run Claude Code:
 
-1. Set your Anthropic API key as an environment variable.
+1. (Optional but recommended) Set your Anthropic API key as an environment variable.
 
    Add the API key to your shell configuration file:
 
@@ -39,9 +39,14 @@ Follow these steps to run Claude Code:
    in your current session will not work. You must set it globally in your
    shell configuration file to ensure the daemon can access it.
 
-   Then apply the changes:
+   Apply the changes:
    1. Source your shell configuration.
    2. Restart Docker Desktop so the daemon picks up the new environment variable.
+
+   Alternatively, you can skip this step and authenticate interactively when
+   Claude Code starts. If no credentials are found, you'll be prompted to log
+   in. Note that interactive authentication requires you to authenticate for
+   each workspace separately.
 
 2. Create and run a sandbox for Claude Code for your workspace:
 
