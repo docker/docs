@@ -24,6 +24,7 @@ options:
       value_type: bool
       default_value: "false"
       description: Skip confirmation prompt
+      details_url: '#force'
       deprecated: false
       hidden: false
       experimental: false
@@ -52,6 +53,28 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+examples: |-
+    ### Reset with confirmation prompt
+
+    ```console
+    $ docker sandbox reset
+    ⚠️  WARNING: This will permanently delete all VM data and stop all running agents!
+    Are you sure you want to continue? (y/N): y
+    All VMs reset successfully
+    ```
+
+    ### Force reset without confirmation (-f, --force) {#force}
+
+    Skip the confirmation prompt:
+
+    ```console
+    $ docker sandbox reset --force
+    All VMs reset successfully
+    ```
+
+    > [!CAUTION]
+    > This is a destructive operation that cannot be undone!
+    > All running agents will be terminated and their work will be lost.
 deprecated: false
 hidden: false
 experimental: false

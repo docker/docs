@@ -31,6 +31,25 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+examples: |-
+    ### Create a Gemini sandbox in the current directory
+
+    ```console
+    $ docker sandbox create gemini .
+    ```
+
+    ### Create with an absolute path
+
+    ```console
+    $ docker sandbox create gemini /home/user/my-project
+    ```
+
+    ### Create and then run
+
+    ```console
+    $ docker sandbox create --name my-gemini gemini ~/my-project
+    $ docker sandbox run my-gemini
+    ```
 deprecated: false
 hidden: false
 experimental: false
