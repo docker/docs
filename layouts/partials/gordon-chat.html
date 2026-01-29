@@ -74,6 +74,11 @@
         return
       }
 
+      // Track Ask AI submission
+      if (window.heap !== undefined) {
+        heap.track("Docs - Ask Gordon - Submit");
+      }
+
       // Add user message to UI
       this.messages.push({
         role: 'user',
