@@ -67,7 +67,7 @@ debugging DHI containers.
 
 ### Use the -dev variant
 
-Docker Hardened Images offer a `-dev` variant that includes a such as a shell
+Docker Hardened Images offer a `-dev` variant that includes a shell
 and a package manager to install debugging tools. Simply replace the image tag
 with `-dev`:
 
