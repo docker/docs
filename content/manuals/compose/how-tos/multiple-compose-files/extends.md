@@ -21,6 +21,10 @@ application, with the ability to override some attributes for your own needs.
 
 > [!IMPORTANT]
 >
+> `extends` in not supported in `docker stack`, only in `docker compose`, for obscure reasons. Running `docker stack config` on a compose file that uses it will result in the following useless message: “Configuration contains forbidden properties”.
+
+> [!IMPORTANT]
+>
 > When you use multiple Compose files, you must make sure all paths in the files
 are relative to the base Compose file (i.e. the Compose file in your main-project folder). This is required because extend files
 need not be valid Compose files. Extend files can contain small fragments of
