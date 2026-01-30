@@ -28,6 +28,10 @@ grid:
     description: Restrict containers from accessing unwanted network resources.
     icon: "vpn_lock"
     link: /enterprise/security/hardened-desktop/air-gapped-containers/
+  - title: "Namespace access"
+    description: Control whether organization members can push content to their personal namespaces.
+    icon: "folder_managed"
+    link: /enterprise/security/hardened-desktop/namespace-access/
 weight: 60
 ---
 
@@ -52,6 +56,7 @@ Hardened Docker Desktop features work independently and together to create a def
 - Registry Access Management and Image Access Management prevent access to unauthorized container registries and image types, reducing exposure to malicious payloads
 - Enhanced Container Isolation runs containers without root privileges inside a Linux user namespace, limiting the impact of malicious containers
 - Air-gapped containers let you configure network restrictions for containers, preventing malicious containers from accessing your organization's internal network resources
+- Namespace access controls whether organization members can push content to their personal Docker Hub namespaces, preventing accidental publication of images outside approved locations
 - Settings Management locks down Docker Desktop configurations to enforce company policies and prevent developers from introducing insecure settings, whether intentionally or accidentally
 
 ## Next steps
