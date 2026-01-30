@@ -32,6 +32,22 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+examples: |-
+    ### View network logs
+
+    ```console
+    $ docker sandbox network log
+    ```
+
+    ### Configure proxy for a sandbox
+
+    ```console
+    $ docker sandbox network proxy my-sandbox --block-host example.com
+    ```
+
+    See the subcommands for more details:
+    - [`docker sandbox network log`](/reference/cli/docker/sandbox/network/log/) - Show network logs
+    - [`docker sandbox network proxy`](/reference/cli/docker/sandbox/network/proxy/) - Manage proxy configuration
 deprecated: false
 hidden: false
 experimental: false
