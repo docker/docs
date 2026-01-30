@@ -1,0 +1,34 @@
+{
+  "repos": [
+    {
+      "owner": "docker",
+      "repo": "buildx",
+      "content_path": "content/manuals/build/release-notes",
+      "title_prefix": "Buildx",
+      "description_template": "Release notes for Docker Buildx {{version}}",
+      "keywords_base": "buildx, docker, build, release notes",
+      "fetch_limit": 30,
+      "include_prereleases": true
+    },
+    {
+      "owner": "docker",
+      "repo": "compose",
+      "content_path": "content/manuals/compose/release-notes",
+      "title_prefix": "Compose",
+      "description_template": "Release notes for Docker Compose {{version}}",
+      "keywords_base": "compose, docker, release notes",
+      "fetch_limit": 30,
+      "include_prereleases": true
+    },
+    {
+      "owner": "moby",
+      "repo": "buildkit",
+      "content_path": "content/manuals/build/buildkit/release-notes",
+      "title_prefix": "BuildKit",
+      "description_template": "Release notes for BuildKit {{version}}",
+      "keywords_base": "buildkit, docker, dockerfile, release notes",
+      "fetch_limit": 30,
+      "include_prereleases": true
+    }
+  ]
+}
