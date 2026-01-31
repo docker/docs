@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/docker/cagent/refs/heads/main/cagent-schema.json
 agents:
   root:
     model: sonnet
