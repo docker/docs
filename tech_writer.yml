@@ -344,7 +344,7 @@ rag:
       - ./CONTRIBUTING.md # Repository-specific workflows
     strategies:
       - type: bm25
-        database: ./.cagent/bm25.db
+        database: ./.cagent/writer-bm25.db
         chunking:
           size: 1500
     results:
