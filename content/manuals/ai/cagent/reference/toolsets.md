@@ -43,7 +43,7 @@ MCP toolsets
 (stdio) or remote servers (HTTP/SSE). MCP enables access to a wide ecosystem
 of standardized tools.
 Custom toolsets
-: Shell scripts wrapped as tools with typed parameters (`script_shell`). This
+: Shell scripts wrapped as tools with typed parameters (`script`). This
 lets you define domain-specific tools for your use case.
 
 ## Configuration
@@ -77,7 +77,7 @@ agents:
             Authorization: Bearer ${API_TOKEN}
 
       # Custom shell tools
-      - type: script_shell
+      - type: script
         tools:
           build:
             cmd: npm run build
@@ -316,7 +316,7 @@ toolsets:
 ### API
 
 The `api` toolset lets you define custom tools that call HTTP APIs. Similar to
-`script_shell` but for web services, this allows you to expose REST APIs,
+`script` but for web services, this allows you to expose REST APIs,
 webhooks, or any HTTP endpoint as a tool your agent can use. The agent sees
 these as typed tools with automatic parameter validation.
 
@@ -367,9 +367,9 @@ requests, parameters are sent as JSON in the request body.
 
 Supported argument types: `string`, `number`, `boolean`, `array`, `object`.
 
-### Script Shell
+### Script
 
-The `script_shell` toolset lets you define custom tools by wrapping shell
+The `script` toolset lets you define custom tools by wrapping shell
 commands with typed parameters. This allows you to expose domain-specific
 operations to your agent as first-class tools. The agent sees these custom
 tools just like built-in tools, with parameter validation and type checking
@@ -385,7 +385,7 @@ parameters:
 
 ```yaml
 toolsets:
-  - type: script_shell
+  - type: script
     tools:
       deploy:
         cmd: ./deploy.sh
