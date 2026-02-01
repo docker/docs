@@ -313,6 +313,33 @@ toolsets:
   - type: fetch
 ```
 
+### User Prompt
+
+The `user_prompt` toolset lets your agent ask you questions during task
+execution. When the agent needs clarification, decisions, or additional
+information it can't determine on its own, it displays a dialog and waits for
+your response.
+
+You'll see a prompt with the agent's question. Depending on what the agent
+needs, you might provide free-form text, select from options, or fill out a
+form with multiple fields. You can accept and provide the information, decline
+to answer, or cancel the operation entirely.
+
+#### Configuration
+
+```yaml
+toolsets:
+  - type: user_prompt
+```
+
+No additional configuration is required. The tool becomes available to the
+agent once configured. When the agent calls this tool, the user sees a dialog
+with the prompt. The user can:
+
+- **Accept**: Provide the requested information
+- **Decline**: Refuse to provide the information
+- **Cancel**: Cancel the operation
+
 ### API
 
 The `api` toolset lets you define custom tools that call HTTP APIs. Similar to
