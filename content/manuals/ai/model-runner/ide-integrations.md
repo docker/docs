@@ -230,7 +230,7 @@ print(response.text)
 
 ### Configuration
 
-1. Install OpenCode (s. [docs](https://opencode.ai/docs/#install))
+1. Install OpenCode (see [docs](https://opencode.ai/docs/#install))
 2. Reference DMR in your OpenCode configuration, either globally at `~/.config/opencode/opencode.json` or project specific with a `opencode.json` file in the root of your project
    ```
    {
@@ -240,14 +240,14 @@ print(response.text)
          "npm": "@ai-sdk/openai-compatible",
          "name": "Docker Model Runner",
          "options": {
-           "baseURL": "http://localhost:12434/v1",
+           "baseURL": "http://localhost:12434/v1"
          },
          "models": {
-           "qwen-coder3": {
-             "name": "qwen-coder3"
+           "ai/qwen2.5-coder": {
+             "name": "ai/qwen2.5-coder"
            },
-           "devstral-small-2": {
-             "name": "devstral-small-2"
+           "ai/llama3.2": {
+             "name": "ai/llama3.2"
            }
          }
        }
@@ -256,7 +256,7 @@ print(response.text)
    ```
 3. Select the model you want in OpenCode
 
-Your can find more details in [this Docker Blog post](https://www.docker.com/blog/opencode-docker-model-runner-private-ai-coding/)
+You can find more details in [this Docker Blog post](https://www.docker.com/blog/opencode-docker-model-runner-private-ai-coding/)
 
 ## Common issues
 
