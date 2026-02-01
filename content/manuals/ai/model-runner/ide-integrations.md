@@ -232,7 +232,7 @@ print(response.text)
 
 1. Install OpenCode (see [docs](https://opencode.ai/docs/#install))
 2. Reference DMR in your OpenCode configuration, either globally at `~/.config/opencode/opencode.json` or project specific with a `opencode.json` file in the root of your project
-   ```
+   ```json
    {
      "$schema": "https://opencode.ai/config.json",
      "provider": {
