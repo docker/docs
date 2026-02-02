@@ -22,7 +22,7 @@ Use custom templates when:
 For one-off work or simple setups, use the default template and ask the agent
 to install what's needed.
 
-## Building a template
+## Building templates with Dockerfiles
 
 Start from Docker's official sandbox templates:
 
@@ -46,9 +46,9 @@ RUN pip3 install --no-cache-dir \
 USER agent
 ```
 
-Official templates include the agent binary, Ubuntu base, development tools
-(Git, Docker CLI, Node.js, Python, Go), and the non-root `agent` user with
-sudo access.
+Official templates include the agent binary, Ubuntu base, and development tools
+like Git, Docker CLI, Node.js, Python, and Go. They run as the non-root
+`agent` user with sudo access.
 
 ### The USER pattern
 
@@ -57,7 +57,7 @@ end. The base template defaults to `USER agent`, so you need to explicitly
 switch to root for package installations. Always switch back to `agent` before
 the end of your Dockerfile so the agent runs with the correct permissions.
 
-### Using templates
+### Using templates built from Dockerfiles
 
 Build your template:
 
@@ -65,33 +65,65 @@ Build your template:
 $ docker build -t my-template:v1 .
 ```
 
-Then choose how to use it:
-
-Option 1: Load from local images (quick, for personal use)
+Use it directly from your local Docker daemon:
 
 ```console
-$ docker sandbox create --template my-template:v1 \
-    --load-local-template \
-    claude ~/project
-$ docker sandbox run <sandbox-name>
+$ docker sandbox run --load-local-template -t my-template:v1 claude ~/project
 ```
 
-The `--load-local-template` flag loads the image from your local Docker daemon
-into the sandbox VM. This works for quick iteration and personal templates.
+The `--load-local-template` flag tells the sandbox to use an image from your
+local Docker daemon. Without it, the sandbox looks for the image in a registry.
 
-Option 2: Push to a registry (for sharing and persistence)
+To share the template with others, push it to a registry:
 
 ```console
 $ docker tag my-template:v1 myorg/my-template:v1
 $ docker push myorg/my-template:v1
-$ docker sandbox create --template myorg/my-template:v1 claude ~/project
-$ docker sandbox run <sandbox-name>
+$ docker sandbox run -t myorg/my-template:v1 claude ~/project
 ```
 
-Pushing to a registry makes templates available to your team and persists them
-beyond your local machine.
+Once pushed to a registry, you don't need `--load-local-template`.
+
+## Creating templates from existing sandboxes
+
+Rather than writing a Dockerfile, you can start with a sandbox, configure it,
+then save it as a template. This is convenient when you already have a working
+environment set up by the agent.
+
+Start a sandbox and have the agent install what you need:
+
+```console
+$ docker sandbox run claude ~/project
+```
+
+Inside the sandbox, ask the agent to install tools and configure the
+environment. Once everything works, exit and save the sandbox as a template:
+
+```console
+$ docker sandbox save claude-sandbox-2026-02-02-123456 my-template:v1
+✓ Saved sandbox as my-template:v1
+```
+
+This saves the image to your local Docker daemon. Use `--load-local-template`
+to create new sandboxes from it:
+
+```console
+$ docker sandbox run --load-local-template -t my-template:v1 claude ~/other-project
+```
+
+To save as a tar file instead (for example, to transfer to another machine):
+
+```console
+$ docker sandbox save -o template.tar claude-sandbox-2026-02-02-123456 my-template:v1
+```
+
+Use a Dockerfile when you want a clear record of how the environment is built.
+Use `docker sandbox save` when you already have a working sandbox and want to
+reuse it.
 
 ## Example: Node.js template
+
+This template adds Node.js 20 and common development tools:
 
 ```dockerfile
 FROM docker/sandbox-templates:claude-code
@@ -108,14 +140,14 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 
 # Install common tools
 RUN npm install -g \
-    typescript@5.1.6 \
-    eslint@8.46.0 \
-    prettier@3.0.0
+    typescript@5.7.2 \
+    eslint@9.17.0 \
+    prettier@3.4.2
 
 USER agent
 ```
 
-Pin versions for reproducible builds.
+Pin specific versions for reproducible builds across your team.
 
 ## Using standard images
 
@@ -138,21 +170,28 @@ dependencies, configure the shell, and set up the `agent` user. Building from
 
 ## Sharing with teams
 
-Push templates to a registry and version them:
+To share templates, push them to a registry with version tags:
 
 ```console
 $ docker build -t myorg/sandbox-templates:python-v1.0 .
 $ docker push myorg/sandbox-templates:python-v1.0
 ```
 
-Team members can then use the template:
+Or tag and push a saved sandbox:
 
 ```console
-$ docker sandbox create --template myorg/sandbox-templates:python-v1.0 claude ~/project
+$ docker tag my-template:v1 myorg/my-template:v1.0
+$ docker push myorg/my-template:v1.0
 ```
 
-Using version tags (`:v1.0`, `:v2.0`) instead of `:latest` ensures stability
-across your team.
+Team members use the template by referencing the registry image:
+
+```console
+$ docker sandbox run -t myorg/sandbox-templates:python-v1.0 claude ~/project
+```
+
+Use version tags like `:v1.0` instead of `:latest` for consistency across your
+team.
 
 ## Next steps
 
