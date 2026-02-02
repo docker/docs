@@ -36,7 +36,8 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Linux kernel `v6.12.67`
 - [Docker Compose v5.0.2](https://github.com/docker/compose/releases/tag/v5.0.2)
-- Docker Sandbox `v0.7.0`
+- Docker Sandbox `v0.10.1`
+- - [Docker Buildx v0.31.1](https://github.com/docker/buildx/releases/tag/v0.31.1)
 
 ### Bug fixes and enhancements
 
