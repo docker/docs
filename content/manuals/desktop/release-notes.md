@@ -37,13 +37,13 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Linux kernel `v6.12.67`
 - [Docker Compose v5.0.2](https://github.com/docker/compose/releases/tag/v5.0.2)
 - Docker Sandbox `v0.10.1`
-- - [Docker Buildx v0.31.1](https://github.com/docker/buildx/releases/tag/v0.31.1)
+- [Docker Buildx v0.31.1](https://github.com/docker/buildx/releases/tag/v0.31.1)
 
 ### Bug fixes and enhancements
 
 #### For all platforms
 
-- Added Neo4j as a known publisher to the Docker MCP Toolkit.
+- Added Neo4j as a known publisher to the Docker MCP Catalog.
 - Fixed an issue where the **Models** tab would crash when displaying requests made via the Anthropic Messages API.
 
 #### For Mac
