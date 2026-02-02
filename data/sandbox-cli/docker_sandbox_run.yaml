@@ -4,16 +4,6 @@ long: |-
     Run an agent in a sandbox. Create the sandbox if it does not exist.
 
     Pass agent arguments after the "--" separator.
-
-    Examples:
-      # Create and run a sandbox with claude in current directory
-      docker sandbox run claude .
-
-      # Run an existing sandbox
-      docker sandbox run existing-sandbox
-
-      # Run a sandbox with agent arguments
-      docker sandbox run claude . -- -p "What version are you running?"
 usage: docker sandbox run SANDBOX [-- AGENT_ARGS...] | AGENT WORKSPACE [-- AGENT_ARGS...]
 pname: docker sandbox
 plink: docker_sandbox.yaml
