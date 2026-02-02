@@ -87,6 +87,7 @@ Docker Sandboxes works with multiple AI coding agents:
 - **Codex** - OpenAI's Codex agent (partial support; in development)
 - **Gemini** - Google's Gemini agent (partial support; in development)
 - **cagent** - Docker's [cagent](/ai/cagent/) (partial support; in development)
+- **Github Copilot CLI** - GitHub Copilot terminal agent (partial support; in development)
 - **Kiro** - by AWS (partial support; in development)
 
 ## Get started
