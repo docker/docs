@@ -11,13 +11,14 @@ inside microVMs with private Docker daemons.
 
 ## Supported agents
 
-| Agent       | Command  | Status       | Notes                      |
-| ----------- | -------- | ------------ | -------------------------- |
-| Claude Code | `claude` | Experimental | Most tested implementation |
-| Codex       | `codex`  | Experimental | In development             |
-| Gemini      | `gemini` | Experimental | In development             |
-| cagent      | `cagent` | Experimental | In development             |
-| Kiro        | `kiro`   | Experimental | In development             |
+| Agent       | Command    | Status       | Notes                      |
+| ----------- | ---------- | ------------ | -------------------------- |
+| Claude Code | `claude`   | Experimental | Most tested implementation |
+| Codex       | `codex`    | Experimental | In development             |
+| Copilot     | `copilot`  | Experimental | In development             |
+| Gemini      | `gemini`   | Experimental | In development             |
+| cagent      | `cagent`   | Experimental | In development             |
+| Kiro        | `kiro`     | Experimental | In development             |
 
 ## Experimental status
 
@@ -37,6 +38,7 @@ The agent type is specified when creating a sandbox:
 ```console
 $ docker sandbox create claude ~/my-project
 $ docker sandbox create codex ~/my-project
+$ docker sandbox create copilot ~/my-project
 $ docker sandbox create gemini ~/my-project
 $ docker sandbox create cagent ~/my-project
 $ docker sandbox create kiro ~/my-project
