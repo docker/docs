@@ -224,6 +224,40 @@ response = llm.complete("Write a hello world function")
 print(response.text)
 ```
 
+## OpenCode
+
+[OpenCode](https://opencode.ai/) is an open-source coding assistant designed to integrate directly into developer workflows. It supports multiple model providers and exposes a flexible configuration system that makes it easy to switch between them.
+
+### Configuration
+
+1. Install OpenCode (see [docs](https://opencode.ai/docs/#install))
+2. Reference DMR in your OpenCode configuration, either globally at `~/.config/opencode/opencode.json` or project specific with a `opencode.json` file in the root of your project
+   ```json
+   {
+     "$schema": "https://opencode.ai/config.json",
+     "provider": {
+       "dmr": {
+         "npm": "@ai-sdk/openai-compatible",
+         "name": "Docker Model Runner",
+         "options": {
+           "baseURL": "http://localhost:12434/v1"
+         },
+         "models": {
+           "ai/qwen2.5-coder": {
+             "name": "ai/qwen2.5-coder"
+           },
+           "ai/llama3.2": {
+             "name": "ai/llama3.2"
+           }
+         }
+       }
+     }
+   }
+   ```
+3. Select the model you want in OpenCode
+
+You can find more details in [this Docker Blog post](https://www.docker.com/blog/opencode-docker-model-runner-private-ai-coding/)
+
 ## Common issues
 
 ### "Connection refused" errors
@@ -239,6 +273,8 @@ print(response.text)
    ```
 
 3. Check if another service is using port 12434.
+
+4. If you run your tool in WSL and want to connect to DMR on the host via `localhost`, this might not directly work. Configuring WSL to use [mirrored networking](https://learn.microsoft.com/en-us/windows/wsl/networking#mirrored-mode-networking) can solve this.
 
 ### "Model not found" errors
 
