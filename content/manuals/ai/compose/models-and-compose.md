@@ -7,11 +7,6 @@ aliases:
   - /compose/how-tos/model-runner/
   - /ai/compose/model-runner/
 weight: 10
-params:
-  sidebar:
-    badge:
-      color: green
-      text: New
 ---
 
 {{< summary-bar feature_name="Compose models" >}}
