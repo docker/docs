@@ -27,6 +27,27 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+examples: |-
+    ### Stop a sandbox
+
+    ```console
+    $ docker sandbox stop my-sandbox
+    my-sandbox
+    ```
+
+    ### Stop multiple sandboxes
+
+    ```console
+    $ docker sandbox stop sandbox1 sandbox2
+    sandbox1
+    sandbox2
+    ```
+
+    ### Stop all running sandboxes
+
+    ```console
+    $ docker sandbox stop $(docker sandbox ls -q)
+    ```
 deprecated: false
 hidden: false
 experimental: false

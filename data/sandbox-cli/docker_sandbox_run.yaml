@@ -84,90 +84,25 @@ inherited_options:
       kubernetes: false
       swarm: false
 examples: |-
-    ### Run Claude in the current directory
+    ### Create and run Claude in the current directory
 
     ```console
-    $ docker sandbox run claude
+    $ docker sandbox run claude .
     ```
 
-    ### Specify a workspace directory (-w, --workspace) {#workspace}
-
-    ```text
-    --workspace PATH
-    ```
-
-    Run the agent in a specific directory:
+    ### Run an existing sandbox
 
     ```console
-    $ docker sandbox run --workspace ~/projects/my-app claude
+    $ docker sandbox run my-sandbox
+    ```
+
+    ### Create and run with a specific workspace
+
+    ```console
+    $ docker sandbox run claude ~/projects/my-app
     ```
 
     The workspace directory is mounted at the same absolute path inside the sandbox.
-
-    ### Enable Docker-in-Docker (--mount-docker-socket) {#mount-docker-socket}
-
-    ```text
-    --mount-docker-socket
-    ```
-
-    Mount the host's Docker socket into the sandbox, giving the agent access to Docker commands:
-
-    ```console
-    $ docker sandbox run --mount-docker-socket claude
-    ```
-
-    > [!CAUTION]
-    > This grants the agent full access to your Docker daemon with root-level
-    > privileges. Only use when you trust the code being executed.
-
-    The agent can now build images, run containers, and manage your Docker environment.
-
-    ### Set environment variables (-e, --env) {#env}
-
-    ```text
-    --env KEY=VALUE
-    ```
-
-    Pass environment variables to the sandbox:
-
-    ```console
-    $ docker sandbox run \
-      --env NODE_ENV=development \
-      --env DATABASE_URL=postgresql://localhost/myapp \
-      claude
-    ```
-
-    ### Mount additional volumes (-v, --volume) {#volume}
-
-    ```text
-    --volume HOST_PATH:CONTAINER_PATH[:ro]
-    ```
-
-    Mount additional directories or files into the sandbox:
-
-    ```console
-    $ docker sandbox run \
-      --volume ~/datasets:/data:ro \
-      --volume ~/models:/models \
-      claude
-    ```
-
-    Use `:ro` or `:readonly` to make mounts read-only.
-
-    ### Use a custom base image (-t, --template) {#template}
-
-    ```text
-    --template IMAGE
-    ```
-
-    Specify a custom container image to use as the sandbox base:
-
-    ```console
-    $ docker sandbox run --template python:3-alpine claude
-    ```
-
-    By default, each agent uses a pre-configured image. The `--template` option
-    lets you substitute a different image.
 
     ### Name the sandbox (--name) {#name}
 
@@ -175,10 +110,41 @@ examples: |-
     --name NAME
     ```
 
-    Assign a custom name to the sandbox for easier identification:
+    Assign a custom name when creating a sandbox:
 
     ```console
-    $ docker sandbox run --name my-project claude
+    $ docker sandbox run --name my-project claude .
+    ```
+
+    ### Use a custom base image (-t, --template) {#template}
+
+    ```text
+    --template IMAGE
+    ```
+
+    Specify a custom container image when creating a sandbox:
+
+    ```console
+    $ docker sandbox run --template python:3-alpine claude .
+    ```
+
+    By default, each agent uses a pre-configured image. The `--template` option
+    lets you substitute a different image.
+
+    ### Pass arguments to the agent
+
+    Use `--` to separate sandbox options from agent arguments:
+
+    ```console
+    $ docker sandbox run claude . -- -p "What version are you running?"
+    ```
+
+    ### Run with locally built template
+
+    Use `--load-local-template` to test local template changes:
+
+    ```console
+    $ docker sandbox run --load-local-template claude .
     ```
 deprecated: false
 hidden: false

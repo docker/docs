@@ -26,6 +26,13 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+examples: |-
+    ### Show version information
+
+    ```console
+    $ docker sandbox version
+    github.com/docker/sandboxes/cli-plugin v0.7.1 f00f0d6473647c2201cd0507ce31613345c48ae6
+    ```
 deprecated: false
 hidden: false
 experimental: false

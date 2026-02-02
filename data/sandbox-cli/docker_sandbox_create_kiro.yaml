@@ -31,6 +31,25 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+examples: |-
+    ### Create a Kiro sandbox in the current directory
+
+    ```console
+    $ docker sandbox create kiro .
+    ```
+
+    ### Create with an absolute path
+
+    ```console
+    $ docker sandbox create kiro /home/user/my-project
+    ```
+
+    ### Create and then run
+
+    ```console
+    $ docker sandbox create --name my-kiro kiro ~/my-project
+    $ docker sandbox run my-kiro
+    ```
 deprecated: false
 hidden: false
 experimental: false

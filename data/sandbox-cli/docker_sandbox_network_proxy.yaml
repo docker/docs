@@ -18,6 +18,7 @@ options:
     - option: allow-host
       value_type: string
       description: Permit access to a domain or IP (can be specified multiple times)
+      details_url: '#allow-host'
       deprecated: false
       hidden: false
       experimental: false
@@ -28,6 +29,7 @@ options:
       value_type: string
       description: |
         Block access to an IP range in CIDR notation (can be specified multiple times)
+      details_url: '#block-cidr'
       deprecated: false
       hidden: false
       experimental: false
@@ -47,6 +49,7 @@ options:
       value_type: string
       description: |
         Bypass proxy for an IP range in CIDR notation (can be specified multiple times)
+      details_url: '#bypass-cidr'
       deprecated: false
       hidden: false
       experimental: false
@@ -56,6 +59,7 @@ options:
     - option: bypass-host
       value_type: string
       description: Bypass proxy for a domain or IP (can be specified multiple times)
+      details_url: '#bypass-host'
       deprecated: false
       hidden: false
       experimental: false
@@ -65,6 +69,7 @@ options:
     - option: policy
       value_type: allow|deny
       description: Set the default policy
+      details_url: '#policy'
       deprecated: false
       hidden: false
       experimental: false
@@ -93,6 +98,99 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+examples: |-
+    ### Block access to a domain
+
+    ```console
+    $ docker sandbox network proxy my-sandbox --block-host example.com
+    ```
+
+    ### Block multiple domains
+
+    ```console
+    $ docker sandbox network proxy my-sandbox \
+      --block-host example.com \
+      --block-host malicious.site
+    ```
+
+    ### Block IP range (--block-cidr) {#block-cidr}
+
+    ```text
+    --block-cidr CIDR
+    ```
+
+    Block access to an IP range in CIDR notation:
+
+    ```console
+    $ docker sandbox network proxy my-sandbox --block-cidr 192.168.1.0/24
+    ```
+
+    ### Allow specific domain (--allow-host) {#allow-host}
+
+    ```text
+    --allow-host DOMAIN
+    ```
+
+    Permit access to a domain (useful with deny-by-default policy):
+
+    ```console
+    $ docker sandbox network proxy my-sandbox \
+      --policy deny \
+      --allow-host api.trusted-service.com
+    ```
+
+    ### Bypass proxy for domain (--bypass-host) {#bypass-host}
+
+    ```text
+    --bypass-host DOMAIN
+    ```
+
+    Bypass proxy for specific domains:
+
+    ```console
+    $ docker sandbox network proxy my-sandbox --bypass-host localhost
+    ```
+
+    ### Bypass proxy for IP range (--bypass-cidr) {#bypass-cidr}
+
+    ```text
+    --bypass-cidr CIDR
+    ```
+
+    Bypass proxy for an IP range:
+
+    ```console
+    $ docker sandbox network proxy my-sandbox --bypass-cidr 127.0.0.0/8
+    ```
+
+    ### Set default policy (--policy) {#policy}
+
+    ```text
+    --policy allow|deny
+    ```
+
+    Set the default policy for network access:
+
+    ```console
+    # Allow by default, block specific hosts
+    $ docker sandbox network proxy my-sandbox \
+      --policy allow \
+      --block-host dangerous.example
+
+    # Deny by default, allow specific hosts
+    $ docker sandbox network proxy my-sandbox \
+      --policy deny \
+      --allow-host api.trusted.com \
+      --allow-host cdn.trusted.com
+    ```
+
+    ### Remove rules
+
+    Use `--allow-cidr` to remove IP ranges from block or bypass lists:
+
+    ```console
+    $ docker sandbox network proxy my-sandbox --allow-cidr 192.168.1.0/24
+    ```
 deprecated: false
 hidden: false
 experimental: false

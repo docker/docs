@@ -42,6 +42,25 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+examples: |-
+    ### Create a Claude sandbox in the current directory
+
+    ```console
+    $ docker sandbox create claude .
+    ```
+
+    ### Create with an absolute path
+
+    ```console
+    $ docker sandbox create claude /home/user/my-project
+    ```
+
+    ### Create and then run
+
+    ```console
+    $ docker sandbox create --name my-claude claude ~/my-project
+    $ docker sandbox run my-claude
+    ```
 deprecated: false
 hidden: false
 experimental: false

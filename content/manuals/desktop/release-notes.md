@@ -59,6 +59,18 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Fixed a security issue in enhanced container isolation where Docker socket mount permissions could be bypassed when using the `--use-api-socket` flag.
 
+## 4.58.1
+
+{{< release-date date="2026-01-29" >}}
+
+{{< desktop-install-v2 mac=true version="4.58.1" build_path="/217134/" >}}
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Fixed an issue where CPU usage could spike at regular intervals. Fixes [docker/for-mac#7839](https://github.com/docker/for-mac/issues/7839).
+
 ## 4.58.0
 
 {{< release-date date="2026-01-26" >}}

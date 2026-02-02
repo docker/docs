@@ -13,6 +13,7 @@ options:
       value_type: bool
       default_value: "false"
       description: 'Detached mode: run command in the background'
+      details_url: '#detach'
       deprecated: false
       hidden: false
       experimental: false
@@ -33,6 +34,7 @@ options:
       value_type: stringArray
       default_value: '[]'
       description: Set environment variables
+      details_url: '#env'
       deprecated: false
       hidden: false
       experimental: false
@@ -85,6 +87,7 @@ options:
       shorthand: u
       value_type: string
       description: 'Username or UID (format: <name|uid>[:<group|gid>])'
+      details_url: '#user'
       deprecated: false
       hidden: false
       experimental: false
@@ -95,6 +98,7 @@ options:
       shorthand: w
       value_type: string
       description: Working directory inside the container
+      details_url: '#workdir'
       deprecated: false
       hidden: false
       experimental: false
@@ -123,6 +127,65 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+examples: |-
+    ### Execute a command in a sandbox
+
+    ```console
+    $ docker sandbox exec my-sandbox ls -la
+    ```
+
+    ### Run an interactive shell
+
+    ```console
+    $ docker sandbox exec -it my-sandbox /bin/bash
+    ```
+
+    ### Set environment variables (-e, --env) {#env}
+
+    ```text
+    --env KEY=VALUE
+    ```
+
+    Pass environment variables to the command:
+
+    ```console
+    $ docker sandbox exec \
+      --env NODE_ENV=development \
+      --env DATABASE_URL=postgresql://localhost/myapp \
+      my-sandbox npm test
+    ```
+
+    ### Set working directory (-w, --workdir) {#workdir}
+
+    ```text
+    --workdir PATH
+    ```
+
+    Run the command in a specific directory:
+
+    ```console
+    $ docker sandbox exec --workdir /app my-sandbox python script.py
+    ```
+
+    ### Run as specific user (-u, --user) {#user}
+
+    ```text
+    --user USER[:GROUP]
+    ```
+
+    Execute command as a different user:
+
+    ```console
+    $ docker sandbox exec --user 1000:1000 my-sandbox id
+    ```
+
+    ### Run in background (-d, --detach) {#detach}
+
+    Run a long-running command in the background:
+
+    ```console
+    $ docker sandbox exec -d my-sandbox python server.py
+    ```
 deprecated: false
 hidden: false
 experimental: false
