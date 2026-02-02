@@ -27,6 +27,7 @@ environment without affecting your host.
 You get:
 
 - Agent autonomy without host system risk
+- YOLO mode by default - agents work without asking permission
 - Private Docker daemon for running test containers
 - File sharing between host and sandbox
 - Network access control
@@ -85,6 +86,7 @@ Docker Sandboxes works with multiple AI coding agents:
 
 - **Claude Code** - Anthropic's coding agent
 - **Codex** - OpenAI's Codex agent (partial support; in development)
+- **Copilot** - GitHub Copilot agent (partial support; in development)
 - **Gemini** - Google's Gemini agent (partial support; in development)
 - **cagent** - Docker's [cagent](/ai/cagent/) (partial support; in development)
 - **Kiro** - by AWS (partial support; in development)

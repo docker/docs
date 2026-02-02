@@ -12,6 +12,7 @@ cname:
     - docker sandbox reset
     - docker sandbox rm
     - docker sandbox run
+    - docker sandbox save
     - docker sandbox stop
     - docker sandbox version
 clink:
@@ -22,6 +23,7 @@ clink:
     - docker_sandbox_reset.yaml
     - docker_sandbox_rm.yaml
     - docker_sandbox_run.yaml
+    - docker_sandbox_save.yaml
     - docker_sandbox_stop.yaml
     - docker_sandbox_version.yaml
 options:
