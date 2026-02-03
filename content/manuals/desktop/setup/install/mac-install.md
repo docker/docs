@@ -35,17 +35,6 @@ This page provides download links, system requirements, and step-by-step install
 ## System requirements
 
 {{< tabs >}}
-{{< tab name="Mac with Intel chip" >}}
-
-- A supported version of macOS.
-
-  > [!IMPORTANT]
-  >
-  > Docker Desktop is supported on the current and two previous major macOS releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases).
-
-- At least 4 GB of RAM.
-
-{{< /tab >}}
 {{< tab name="Mac with Apple silicon" >}}
 
 - A supported version of macOS.
@@ -60,6 +49,17 @@ This page provides download links, system requirements, and step-by-step install
    ```console
    $ softwareupdate --install-rosetta
    ```
+{{< /tab >}}
+{{< tab name="Mac with Intel chip" >}}
+
+- A supported version of macOS.
+
+  > [!IMPORTANT]
+  >
+  > Docker Desktop is supported on the current and two previous major macOS releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases).
+
+- At least 4 GB of RAM.
+
 {{< /tab >}}
 {{< /tabs >}}
 
