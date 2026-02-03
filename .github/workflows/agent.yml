@@ -28,7 +28,7 @@ jobs:
         uses: docker/cagent-action@v1.1.0
         timeout-minutes: 15
         with:
-          cagent-version: v1.15.5
+          cagent-version: v1.20.3
           agent: ./tech_writer.yml
           yolo: true
           prompt: |
