@@ -17,3 +17,9 @@ cagent
 .cagent
 .pr-body.md
 .validation.log
+
+# Gas Town (added by gt)
+.runtime/
+.claude/
+.beads/
+.logs/
