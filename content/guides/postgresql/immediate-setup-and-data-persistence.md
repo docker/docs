@@ -31,7 +31,7 @@ Run PostgreSQL immediately with this single command:
 {{< tabs >}}
 {{< tab name="Using DHIs" >}}
 
-You must authenticate to dhi.io before you can pull Docker Hardened Images. Run docker login dhi.io to authenticate.
+You must authenticate to dhi.io before you can pull Docker Hardened Images. Run `docker login dhi.io` to authenticate.
 
 ```console
 docker run --rm --name postgres-dev \
@@ -90,6 +90,32 @@ Containers use an ephemeral filesystem. When a container is removed, everything 
 
 Demonstrate this yourself:
 
+{{< tabs >}}
+{{< tab name="Using DHIs" >}}
+
+```console
+$ docker exec postgres-dev psql -U postgres -c "CREATE DATABASE testdb;"
+CREATE DATABASE
+
+$ docker exec postgres-dev psql -U postgres -c "\l" | grep testdb
+ testdb    | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           |
+
+$ docker stop postgres-dev
+postgres-dev
+
+$ docker run --rm --name postgres-dev \
+  -e POSTGRES_PASSWORD=mysecretpassword \
+  -p 5432:5432 \
+  -d dhi.io/postgres:18
+
+$ docker exec postgres-dev psql -U postgres -c "\l" | grep testdb
+(no output - database is gone)
+```
+
+{{< /tab >}}
+
+{{< tab name="Using DOIs" >}}
+
 ```console
 $ docker exec postgres-dev psql -U postgres -c "CREATE DATABASE testdb;"
 CREATE DATABASE
@@ -109,6 +135,9 @@ $ docker exec postgres-dev psql -U postgres -c "\l" | grep testdb
 (no output - database is gone)
 ```
 
+{{< /tab >}}
+{{< /tabs >}}
+
 Your `testdb` database vanished because the new container started with a fresh filesystem. This is expected behavior—and exactly why volumes exist.
 
 ## Named Volumes
@@ -122,17 +151,7 @@ Create a container with a named volume:
 
 You must authenticate to dhi.io before you can pull Docker Hardened Images. Run docker login dhi.io to authenticate.
 
-> [!NOTE]
->
-> Hardened image runs as a non-root user, and the volume gets created with root ownership. To avoid permission issues, pre-create the volume and set ownership to UID 999 (the `postgres` user inside the container).
-
 ```console
-$ docker volume create postgres_data
-
-$ docker run --rm \
-  -v postgres_data:/var/lib/postgresqlbusybox \
-  chown -R 999:999 /var/lib/postgresql
-
 $ docker run --rm --name postgres-dev \
   -e POSTGRES_PASSWORD=mysecretpassword \
   -p 5432:5432 \
@@ -164,6 +183,30 @@ The `-v postgres_data:/var/lib/postgresql` flag mounts a named volume called `po
 
 To verify data persistence, repeat the previous test, but this time with the named volume attached in place.
 
+{{< tabs >}}
+{{< tab name="Using DHIs" >}}
+
+```console
+$ docker exec postgres-dev psql -U postgres -c "CREATE DATABASE testdb;"
+CREATE DATABASE
+
+$ docker stop postgres-dev
+postgres-dev
+
+$ docker run --rm --name postgres-dev \
+  -e POSTGRES_PASSWORD=mysecretpassword \
+  -p 5432:5432 \
+  -v postgres_data:/var/lib/postgresql \
+  -d dhi.io/postgres:18
+
+$ docker exec postgres-dev psql -U postgres -c "\l" | grep testdb
+ testdb    | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           |
+```
+
+{{< /tab >}}
+
+{{< tab name="Using DOIs" >}}
+
 ```console
 $ docker exec postgres-dev psql -U postgres -c "CREATE DATABASE testdb;"
 CREATE DATABASE
@@ -179,7 +222,10 @@ $ docker run --rm --name postgres-dev \
 
 $ docker exec postgres-dev psql -U postgres -c "\l" | grep testdb
  testdb    | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           |
-```
+
+{{< /tab >}}
+
+{{< /tabs >}}
 
 If you see "testdb" in the output, persistence works: The database survived because the volume preserved the data directory.
 
@@ -222,6 +268,27 @@ Bind mounts map a specific host directory to a container path. Unlike named volu
 
 Create a directory on your host machine to store Postgres data.
 
+{{< tabs >}}
+{{< tab name="Using DHIs" >}}
+
+```console
+mkdir -p ~/postgres-data && sudo chown -R 999:999 ~/postgres-data
+```
+
+Run Postgres using a bind mount.
+
+```console
+docker run --rm --name postgres-dev \
+  -e POSTGRES_PASSWORD=mysecretpassword \
+  -p 5432:5432 \
+  -v ~/postgres-data:/var/lib/postgresql \
+  -d dhi.io/postgres:18
+```
+
+{{< /tab >}}
+
+{{< tab name="Using DOIs" >}}
+
 ```console
 $ mkdir -p ~/postgres-data
 ```
@@ -235,6 +302,9 @@ $ docker run --rm --name postgres-dev \
   -v ~/postgres-data:/var/lib/postgresql \
   -d postgres:18
 ```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ### When to use bind mounts
 
