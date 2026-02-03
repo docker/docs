@@ -26,6 +26,24 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.60.0
+
+{{< release-date date="2026-02-09" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.60.0" build_path="//" >}}
+
+### New
+
+- Added a new `docker desktop diagnose` command to gather diagnostics.
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Ask Gordon is no longer in Beta. 
+- Fixed `ping6 host.docker.internal`.
+- Enabled landlock LSM.
+
 ## 4.59.0
 
 {{< release-date date="2026-02-02" >}}
