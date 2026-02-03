@@ -43,6 +43,12 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Ask Gordon is no longer in Beta. 
 - Fixed `ping6 host.docker.internal`.
 - Enabled landlock LSM.
+- Docker Sandboxes improvements:
+   - Improved agent system prompt with network access documentation      
+   - Fixed Gemini API key injection  
+   - Sandboxes now block `console.anthropic.com/claude.ai` in proxy default rules
+   - Fix CLI help text for `run <agent> --help`
+   - Improved terminal size handling
 
 ## 4.59.0
 
