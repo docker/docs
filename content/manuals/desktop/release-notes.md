@@ -26,6 +26,19 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.59.1
+
+{{< release-date date="2026-02-03" >}}
+
+{{< desktop-install-v2 mac=true version="4.59.1" build_path="/217750/" >}}
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Fixed an issue where CPU usage could spike at regular intervals. Fixes [docker/for-mac#7839](https://github.com/docker/for-mac/issues/7839).
+
+
 ## 4.59.0
 
 {{< release-date date="2026-02-02" >}}
