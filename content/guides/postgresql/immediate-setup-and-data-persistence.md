@@ -22,7 +22,27 @@ Running PostgreSQL in Docker requires understanding one critical concept: contai
 
 ## Quick Start (Minimal Viable Container)
 
+> [!NOTE]
+>
+> [Docker Hardened Images (DHIs)](https://docs.docker.com/dhi/) are minimal, secure, and production-ready container base and application images maintained by Docker. DHIs are recommended whenever it is possible for better security. They are designed to reduce vulnerabilities and simplify compliance, freely available to everyone with no subscription required, no usage restrictions, and no vendor lock-in.
+
 Run PostgreSQL immediately with this single command:
+
+{{< tabs >}}
+{{< tab name="Using DHIs" >}}
+
+You must authenticate to dhi.io before you can pull Docker Hardened Images. Run docker login dhi.io to authenticate.
+
+```console
+docker run --rm --name postgres-dev \
+  -e POSTGRES_PASSWORD=mysecretpassword \
+  -p 5432:5432 \
+  -d dhi.io/postgres:18
+```
+
+{{< /tab >}}
+
+{{< tab name="Using DOIs" >}}
 
 ```console
 $ docker run --rm --name postgres-dev \
@@ -30,6 +50,9 @@ $ docker run --rm --name postgres-dev \
   -p 5432:5432 \
   -d postgres:18
 ```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ### Understanding the flags
 
@@ -94,6 +117,33 @@ Named volumes are Docker-managed storage locations that persist independently of
 
 Create a container with a named volume:
 
+{{< tabs >}}
+{{< tab name="Using DHIs" >}}
+
+You must authenticate to dhi.io before you can pull Docker Hardened Images. Run docker login dhi.io to authenticate.
+
+> [!NOTE]
+>
+> Hardened image runs as a non-root user, and the volume gets created with root ownership. To avoid permission issues, pre-create the volume and set ownership to UID 999 (the `postgres` user inside the container).
+
+```console
+$ docker volume create postgres_data
+
+$ docker run --rm \
+  -v postgres_data:/var/lib/postgresqlbusybox \
+  chown -R 999:999 /var/lib/postgresql
+
+$ docker run --rm --name postgres-dev \
+  -e POSTGRES_PASSWORD=mysecretpassword \
+  -p 5432:5432 \
+  -v postgres_data:/var/lib/postgresql \
+  -d dhi.io/postgres:18
+```
+
+{{< /tab >}}
+
+{{< tab name="Using DOIs" >}}
+
 ```console
 $ docker run --rm --name postgres-dev \
   -e POSTGRES_PASSWORD=mysecretpassword \
@@ -101,6 +151,10 @@ $ docker run --rm --name postgres-dev \
   -v postgres_data:/var/lib/postgresql \
   -d postgres:18
 ```
+
+{{< /tab >}}
+{{< /tabs >}}
+
 
 The `-v postgres_data:/var/lib/postgresql` flag mounts a named volume called `postgres_data` to PostgreSQL's data directory. If the volume doesn't exist, Docker creates it automatically.
 
