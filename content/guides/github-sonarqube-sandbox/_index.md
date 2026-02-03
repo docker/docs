@@ -5,7 +5,6 @@ summary: Build AI-powered code quality workflows using E2B sandboxes with Docker
 description: Learn how to create E2B sandboxes with MCP servers, analyze code quality with SonarQube, and generate quality-gated pull requests using GitHub—all through natural language interactions with Claude.
 tags: [devops]
 params:
-  featured: true
   time: 40 minutes
   image:
   resource_links:

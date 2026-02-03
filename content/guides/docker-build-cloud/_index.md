@@ -11,7 +11,6 @@ tags: [product-demo]
 aliases:
   - /learning-paths/docker-build-cloud/
 params:
-  featured: true
   image: images/learning-paths/build-cloud.png
   time: 10 minutes
   resource_links:
@@ -20,7 +19,7 @@ params:
     - title: Docker Build Cloud overview
       url: /build-cloud/
     - title: Subscriptions and features
-      url: /subscription/details/
+      url: "https://www.docker.com/pricing/"
     - title: Using Docker Build Cloud
       url: /build-cloud/usage/
 ---

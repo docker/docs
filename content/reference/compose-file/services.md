@@ -38,7 +38,7 @@ services:
       - "8080:80"
 
   db:
-    image: postgres:13
+    image: postgres:18
     environment:
       POSTGRES_USER: example
       POSTGRES_DB: exampledb
@@ -433,7 +433,7 @@ services:
   redis:
     image: redis
   db:
-    image: postgres
+    image: postgres:18
 ```
 
 Compose guarantees dependency services have been started before
@@ -448,7 +448,7 @@ expressed in the short form.
 
 - `restart`: When set to `true` Compose restarts this service after it updates the dependency service.
   This applies to an explicit restart controlled by a Compose operation, and excludes automated restart by the container runtime
-  after the container dies. Introduced in Docker Compose version [2.17.0](/manuals/compose/releases/release-notes.md#2170).
+  after the container dies. Introduced in Docker Compose version [2.17.0](https://github.com/docker/compose/releases/tag/v2.17.0).
 
 - `condition`: Sets the condition under which dependency is considered satisfied
   - `service_started`: An equivalent of the short syntax described previously
@@ -458,7 +458,7 @@ expressed in the short form.
   - `service_completed_successfully`: Specifies that a dependency is expected to run
     to successful completion before starting a dependent service.
 - `required`: When set to `false` Compose only warns you when the dependency service isn't started or available. If it's not defined
-    the default value of `required` is `true`. Introduced in Docker Compose version [2.20.0](/manuals/compose/releases/release-notes.md#2200).
+    the default value of `required` is `true`. Introduced in Docker Compose version [2.20.0](https://github.com/docker/compose/releases/tag/v2.20.0).
 
 Service dependencies cause the following behaviors:
 
@@ -485,7 +485,7 @@ services:
   redis:
     image: redis
   db:
-    image: postgres
+    image: postgres:18
 ```
 
 Compose guarantees dependency services are started before
@@ -991,7 +991,7 @@ extra_hosts:
   - "myhostv6=[::1]"
 ```
 
-The separator `=` is preferred, but `:` can also be used. Introduced in Docker Compose version [2.24.1](/manuals/compose/releases/release-notes.md#2241). For example:
+The separator `=` is preferred, but `:` can also be used. Introduced in Docker Compose version [2.24.1](https://github.com/docker/compose/releases/tag/v2.24.1). For example:
 
 ```yml
 extra_hosts:
@@ -1077,7 +1077,7 @@ healthcheck:
   start_interval: 5s
 ```
 
-`interval`, `timeout`, `start_period`, and `start_interval` are [specified as durations](extension.md#specifying-durations). Introduced in Docker Compose version [2.20.2](/manuals/compose/releases/release-notes.md#2202)
+`interval`, `timeout`, `start_period`, and `start_interval` are [specified as durations](extension.md#specifying-durations). Introduced in Docker Compose version [2.20.2](https://github.com/docker/compose/releases/tag/v2.20.2)
 
 `test` defines the command Compose runs to check container health. It can be
 either a string or a list. If it's a list, the first item must be either `NONE`, `CMD` or `CMD-SHELL`.
@@ -1692,7 +1692,7 @@ expressed in the short form.
 - `published`: The publicly exposed port. It is defined as a string and can be set as a range using syntax `start-end`. It means the actual port is assigned a remaining available port, within the set range.
 - `host_ip`: The host IP mapping. If it is not set, it binds to all network interfaces (`0.0.0.0`).
 - `protocol`: The port protocol (`tcp` or `udp`). Defaults to `tcp`.
-- `app_protocol`: The application protocol (TCP/IP level 4 / OSI level 7) this port is used for. This is optional and can be used as a hint for Compose to offer richer behavior for protocols that it understands. Introduced in Docker Compose version [2.26.0](/manuals/compose/releases/release-notes.md#2260).
+- `app_protocol`: The application protocol (TCP/IP level 4 / OSI level 7) this port is used for. This is optional and can be used as a hint for Compose to offer richer behavior for protocols that it understands. Introduced in Docker Compose version [2.26.0](https://github.com/docker/compose/releases/tag/v2.26.0).
 - `mode`: Specifies how the port is published in a Swarm setup. If set to `host`, it publishes the port on every node in Swarm. If set to `ingress`, it allows load balancing across the nodes in Swarm. Defaults to `ingress`.
 - `name`: A human-readable name for the port, used to document its usage within the service.
 
@@ -2185,9 +2185,9 @@ expressed in the short form.
   - `subpath`: Path inside a volume to mount instead of the volume root.
 - `tmpfs`: Configures additional tmpfs options:
   - `size`: The size for the tmpfs mount in bytes (either numeric or as bytes unit).
-  - `mode`: The file mode for the tmpfs mount as Unix permission bits as an octal number. Introduced in Docker Compose version [2.14.0](/manuals/compose/releases/release-notes.md#2260).
+  - `mode`: The file mode for the tmpfs mount as Unix permission bits as an octal number. Introduced in Docker Compose version [2.14.0](https://github.com/docker/compose/releases/tag/v2.14.0).
 - `image`: Configures additional image options:
-  - `subpath`: Path inside the source image to mount instead of the image root. Available in [Docker Compose version 2.35.0](/manuals/compose/releases/release-notes.md#2350)
+  - `subpath`: Path inside the source image to mount instead of the image root. Available in [Docker Compose version 2.35.0](https://github.com/docker/compose/releases/tag/v2.35.0)
 - `consistency`: The consistency requirements of the mount. Available values are platform specific.
 
 > [!TIP]

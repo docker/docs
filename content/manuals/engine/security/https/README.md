@@ -1,5 +1,5 @@
 ---
-_build:
+build:
   list: never
   publishResources: false
   render: never

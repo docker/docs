@@ -273,9 +273,9 @@ options:
     - option: disable-content-trust
       value_type: bool
       default_value: "true"
-      description: Skip image verification
-      deprecated: false
-      hidden: false
+      description: Skip image verification (deprecated)
+      deprecated: true
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false
@@ -510,7 +510,8 @@ options:
       swarm: false
       os_type: windows
     - option: ip
-      value_type: string
+      value_type: ip
+      default_value: <nil>
       description: IPv4 address (e.g., 172.30.100.104)
       deprecated: false
       hidden: false
@@ -519,7 +520,8 @@ options:
       kubernetes: false
       swarm: false
     - option: ip6
-      value_type: string
+      value_type: ip
+      default_value: <nil>
       description: IPv6 address (e.g., 2001:db8::33)
       deprecated: false
       hidden: false
@@ -548,9 +550,9 @@ options:
     - option: kernel-memory
       value_type: bytes
       default_value: "0"
-      description: Kernel memory limit
-      deprecated: false
-      hidden: false
+      description: Kernel memory limit (deprecated)
+      deprecated: true
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false

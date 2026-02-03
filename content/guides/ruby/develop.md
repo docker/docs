@@ -41,13 +41,13 @@ services:
       - RAILS_ENV=test
     env_file: "webapp.env"
   db:
-    image: postgres:latest
+    image: postgres:18
     secrets:
       - db-password
     environment:
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
 
 volumes:
   postgres_data:
@@ -153,13 +153,13 @@ services:
         - action: rebuild
           path: .
   db:
-    image: postgres:latest
+    image: postgres:18
     secrets:
       - db-password
     environment:
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
 
 volumes:
   postgres_data:

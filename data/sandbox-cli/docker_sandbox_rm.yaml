@@ -1,10 +1,13 @@
 command: docker sandbox rm
+aliases: docker sandbox rm, docker sandbox remove
 short: Remove one or more sandboxes
 long: |-
-    Remove one or more sandboxes by their IDs or names.
+    Remove one or more sandboxes and all their associated resources.
 
-    This command removes the specified sandboxes. Each sandbox is identified by its unique ID or name.
-usage: docker sandbox rm [OPTIONS] SANDBOX [SANDBOX...]
+    This command will:
+    - Check if the sandbox exists
+    - Remove the sandbox and clean up its associated resources
+usage: docker sandbox rm SANDBOX [SANDBOX...]
 pname: docker sandbox
 plink: docker_sandbox.yaml
 inherited_options:
@@ -15,6 +18,16 @@ inherited_options:
       description: Enable debug logging
       deprecated: false
       hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: socket
+      value_type: string
+      description: |
+        Connect to daemon at specific socket path (for development/debugging)
+      deprecated: false
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false

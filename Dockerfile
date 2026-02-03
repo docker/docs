@@ -2,10 +2,10 @@
 # check=skip=InvalidBaseImagePlatform
 
 ARG ALPINE_VERSION=3.21
-ARG GO_VERSION=1.24
+ARG GO_VERSION=1.25
 ARG HTMLTEST_VERSION=0.17.0
 ARG VALE_VERSION=3.11.2
-ARG HUGO_VERSION=0.141.0
+ARG HUGO_VERSION=0.154.2
 ARG NODE_VERSION=22
 ARG PAGEFIND_VERSION=1.3.0
 
@@ -51,6 +51,7 @@ ARG DOCS_URL="https://docs.docker.com"
 ENV HUGO_CACHEDIR="/tmp/hugo_cache"
 RUN --mount=type=cache,target=/tmp/hugo_cache \
     hugo --gc --minify -e $HUGO_ENV -b $DOCS_URL
+RUN ./hack/flatten-and-resolve.js public
 
 # lint lints markdown files
 FROM ghcr.io/igorshubovych/markdownlint-cli:v0.45.0 AS lint
@@ -92,8 +93,6 @@ RUN <<"EOT"
 set -ex
 if [ -n "$MODULE" ]; then
     hugo mod get ${MODULE}
-    RESOLVED=$(cat go.mod | grep -m 1 "${MODULE/@*/}" | awk '{print $1 "@" $2}')
-    go mod edit -replace "${MODULE/@*/}=${RESOLVED}";
 else
     echo "no module set";
 fi

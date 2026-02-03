@@ -35,7 +35,7 @@ You can create the `admin-settings.json` file in two ways:
 - Use the `--admin-settings` installer flag to auto-generate the file:
     - [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) installation guide
     - [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) installation guide
-- Create it manually and place it in the following locations:
+- Create it manually (UTF-8 without BOM) and place it in the following locations:
     - Mac: `/Library/Application\ Support/com.docker.docker/admin-settings.json`
     - Windows: `C:\ProgramData\DockerDesktop\admin-settings.json`
     - Linux: `/usr/share/docker-desktop/admin-settings.json`
@@ -239,6 +239,10 @@ The following sample is an `admin-settings.json` file with common enterprise set
   "enableInferenceGPUVariant": {
     "locked": true,
     "value": true
+  },
+  "portBindingBehavior": {
+    "locked": true,
+    "value": "default-port-binding"
   }
 }
 ```
@@ -276,12 +280,20 @@ The following tables describe all available settings in the `admin-settings.json
 |`configurationFileVersion`|   |Specifies the version of the configuration file format.|   |
 |`analyticsEnabled`|  |If `value` is set to false, Docker Desktop doesn't send usage statistics to Docker. |  |
 |`disableUpdate`|  |If `value` is set to true, checking for and notifications about Docker Desktop updates is disabled.|  |
-|`extensionsEnabled`|  |If `value` is set to false, Docker extensions are disabled. |  |
 | `blockDockerLoad` | | If `value` is set to `true`, users are no longer able to run [`docker load`](/reference/cli/docker/image/load/) and receive an error if they try to.|  |
 | `displayedOnboarding` |  | If `value` is set to `true`, the onboarding survey will not be displayed to new users. Setting `value` to `false` has no effect. |  Docker Desktop version 4.30 and later |
 | `desktopTerminalEnabled` |  | If `value` is set to `false`, developers cannot use the Docker terminal to interact with the host machine and execute commands directly from Docker Desktop. |  |
 |`exposeDockerAPIOnTCP2375`| Windows only| Exposes the Docker API on a specified port. If `value` is set to true, the Docker API is exposed on port 2375. Note: This is unauthenticated and should only be enabled if protected by suitable firewall rules.|  |
 | `silentModulesUpdate` | | If `value` is set to `true`, Docker Desktop automatically updates components that don't require a restart. For example, the Docker CLI or Docker Scout components. | Docker Desktop version 4.46 and later. |
+
+### Extensions
+
+|Parameter|OS|Description|Version|
+|:-------------------------------|---|:-------------------------------|---|
+|`extensionsEnabled`|  |If `value` is set to false, Docker Extensions are disabled. |  |
+| `onlyMarketplaceExtensions` |  | If `value` is set to true, developers are blocked from installing other extensions via the command line.|  |
+| `extensionsPrivateMarketplace` |  | If `value` is set to true, activates the private marketplace is enabled which ensures Docker Desktop connects to content defined and controlled by the administrator instead of the public Docker marketplace. |  |
+| `extensionsPrivateMarketplaceAdminContactURL` |  | Defines a contact link for developers to request new extensions in the private marketplace. |  |
 
 ### File sharing and emulation
 
@@ -357,6 +369,7 @@ The following tables describe all available settings in the `admin-settings.json
 |:-------------------------------|---|:-------------------------------|---|
 | `defaultNetworkingMode` | Windows and Mac only | Defines the default IP protocol for new Docker networks: `dual-stack` (IPv4 + IPv6, default), `ipv4only`, or `ipv6only`. | Docker Desktop version 4.43 and later. |
 | `dnsInhibition` | Windows and Mac only | Controls DNS record filtering returned to containers. Options: `auto` (recommended), `ipv4`, `ipv6`, `none`| Docker Desktop version 4.43 and later. |
+| `portBindingBehavior` | Linux-based containers only | Defines port binding restrictions and default behavior, allowing admins to control how a user exposes ports from their containers. Options: `default-port-binding`, `default-local-port-binding`, `local-only-port-binding` | Docker Desktop version 4.52 and later. |
 
 For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
 

@@ -46,7 +46,7 @@ services:
       - frontend
       - backend
   db:
-    image: postgres
+    image: postgres:18
     networks:
       - backend
 

@@ -17,6 +17,26 @@
   - /engine/api/v1.21/
   - /engine/api/v1.22/
   - /engine/api/v1.23/
+  - /engine/api/v1.24/
+  - /engine/api/v1.25/
+  - /engine/api/v1.26/
+  - /engine/api/v1.27/
+  - /engine/api/v1.28/
+  - /engine/api/v1.29/
+  - /engine/api/v1.30/
+  - /engine/api/v1.31/
+  - /engine/api/v1.32/
+  - /engine/api/v1.33/
+  - /engine/api/v1.34/
+  - /engine/api/v1.35/
+  - /engine/api/v1.36/
+  - /engine/api/v1.37/
+  - /engine/api/v1.38/
+  - /engine/api/v1.39/
+  - /engine/api/v1.40/
+  - /engine/api/v1.41/
+  - /engine/api/v1.42/
+  - /engine/api/v1.43/
   - /engine/reference/api/docker_remote_api_v1.18/
   - /engine/reference/api/docker_remote_api_v1.19/
   - /engine/reference/api/docker_remote_api_v1.20/
@@ -369,6 +389,8 @@
 # Docker Hardened Images (DHI)
 "/dhi/how-to/customize/":
   - /go/dhi-customization/
+"/dhi/how-to/scan/#scan-a-dhi-using-grype":
+  - /go/dhi-grype/
 
 "/dhi/how-to/customize/#create-an-oci-artifact-image":
   - /go/dhi-customization-artifacts/
@@ -382,3 +404,19 @@
   - /copilot/install/
   - /copilot/usage/
   - /copilot/examples/
+
+# Compose release notes
+"https://github.com/docker/compose/releases":
+  - /compose/releases/release-notes/
+  - /compose/releases/prior-releases/
+  - /release-notes/docker-compose/
+
+# Build release notes
+"https://github.com/docker/buildx/releases":
+  - /build/release-notes/
+"https://github.com/moby/buildkit/releases/":
+  - /build/buildkit/dockerfile-release-notes/
+
+# Scout CLI release notes
+"https://github.com/docker/scout-cli/releases":
+  - /scout/release-notes/cli/

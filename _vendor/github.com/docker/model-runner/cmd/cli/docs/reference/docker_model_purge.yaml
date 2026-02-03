@@ -1,0 +1,25 @@
+command: docker model purge
+short: Remove all models
+long: Remove all models
+usage: docker model purge [OPTIONS]
+pname: docker model
+plink: docker_model.yaml
+options:
+    - option: force
+      shorthand: f
+      value_type: bool
+      default_value: "false"
+      description: Forcefully remove all models
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

@@ -1,25 +1,29 @@
 module github.com/docker/docs
 
-go 1.24.9
+go 1.25.0
 
+// This go.mod file is used by hugo to vendor documentation from upstream
+// reposities. Use the "require" section to specify the version of the
+// upstream repository.
+//
+// Make sure to add an entry in the "tools" section when adding a new repository.
 require (
-	github.com/docker/buildx v0.30.0 // indirect
-	github.com/docker/cli v29.0.0+incompatible // indirect; see "replace" rule at the bottom for actual version
-	github.com/docker/compose/v2 v2.40.3 // indirect
-	github.com/docker/mcp-gateway v0.22.0 // indirect
-	github.com/docker/model-runner/cmd/cli v0.1.44 // indirect
-	github.com/docker/scout-cli v1.18.4 // indirect
-	github.com/moby/buildkit v0.26.0 // indirect
-	github.com/moby/moby/api v1.52.0 // indirect; see "replace" rule at the bottom for actual version
+	github.com/docker/buildx v0.31.1
+	github.com/docker/cli v29.2.0+incompatible
+	github.com/docker/compose/v5 v5.0.2
+	github.com/docker/mcp-gateway v0.22.0
+	github.com/docker/model-runner/cmd/cli v1.0.3
+	github.com/moby/buildkit v0.27.0
+	github.com/moby/moby/api v1.53.0
 )
 
-replace (
-	github.com/docker/buildx => github.com/docker/buildx v0.30.0
-	github.com/docker/cli => github.com/docker/cli v29.0.0+incompatible
-	github.com/docker/compose/v2 => github.com/docker/compose/v2 v2.40.3
-	github.com/docker/mcp-gateway => github.com/docker/mcp-gateway v0.22.0
-	github.com/docker/model-runner/cmd/cli => github.com/docker/model-runner/cmd/cli v0.1.44
-	github.com/docker/scout-cli => github.com/docker/scout-cli v1.18.4
-	github.com/moby/buildkit => github.com/moby/buildkit v0.26.0
-	github.com/moby/moby/api => github.com/moby/moby/api v1.52.0
+tool (
+	github.com/docker/buildx
+	github.com/docker/cli
+	github.com/docker/compose/v5
+	github.com/docker/mcp-gateway
+	github.com/docker/model-runner/cmd/cli
+	github.com/docker/scout-cli
+	github.com/moby/buildkit
+	github.com/moby/moby/api
 )

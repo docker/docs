@@ -57,3 +57,7 @@ Webhook payloads have the following JSON format:
   }
 }
 ```
+
+> [!NOTE]
+>
+> The `callback_url` field is a legacy field and is no longer supported.

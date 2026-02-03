@@ -10,7 +10,7 @@ aliases:
 
 When you open Docker Desktop, the Docker Desktop Dashboard displays.
 
-![Docker Desktop Dashboard on Containers view](../images/dashboard.png)
+![Docker Desktop Dashboard on Containers view](../images/dashboard.webp) 
 
 It provides a centralized interface to manage your [containers](container.md), [images](images.md), [volumes](volumes.md), [builds](builds.md), and [Kubernetes resources](kubernetes.md).
 

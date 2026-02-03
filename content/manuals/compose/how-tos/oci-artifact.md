@@ -4,11 +4,6 @@ linkTitle: OCI artifact applications
 weight: 110
 description: Learn how to package, publish, and securely run Docker Compose applications from OCI-compliant registries.
 keywords: cli, compose, oci, docker hub, artificats, publish, package, distribute, docker compose oci support
-params:
-  sidebar:
-    badge:
-      color: green
-      text: New
 ---
 
 {{< summary-bar feature_name="Compose OCI artifact" >}}

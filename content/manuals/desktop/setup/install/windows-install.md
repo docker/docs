@@ -47,7 +47,7 @@ _For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
 {{< tabs >}}
 {{< tab name="WSL 2 backend, x86_64" >}}
 
-- WSL version 2.1.5 or later.
+- WSL version 2.1.5 or later. To check your version, see [WSL: Verification and setup](#wsl-verification-and-setup)
 - Windows 10 64-bit: Enterprise, Pro, or Education version 22H2 (build 19045).
 - Windows 11 64-bit: Enterprise, Pro, or Education version 23H2 (build 22631) or higher.
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
@@ -67,7 +67,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 
 > [!IMPORTANT]
 >
-> To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
+> To run [Windows containers](#windows-containers), you need Windows 10 or Windows 11 Professional or Enterprise edition.
 > Windows Home or Education editions only allow you to run Linux containers.
 
 {{< /tab >}}
@@ -91,13 +91,13 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 
 > [!IMPORTANT]
 >
-> To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
+> To run [Windows containers](#windows-containers), you need Windows 10 or Windows 11 Professional or Enterprise edition.
 > Windows Home or Education editions only allow you to run Linux containers.
 
 {{< /tab >}}
 {{< tab name="WSL 2 backend, Arm (Early Access)" >}}
 
-- WSL version 2.1.5 or later.
+- WSL version 2.1.5 or later. To check your version, see [WSL: Verification and setup](#wsl-verification-and-setup)
 - Windows 10 64-bit: Enterprise, Pro, or Education version 22H2 (build 19045).
 - Windows 11 64-bit: Enterprise, Pro, or Education version 23H2 (build 22631) or higher.
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
@@ -124,80 +124,7 @@ Running Docker Desktop inside a VMware ESXi or Azure VM is supported for Docker 
 It requires enabling nested virtualization on the hypervisor first.
 For more information, see [Running Docker Desktop in a VM or VDI environment](/manuals/desktop/setup/vm-vdi.md).
 
-{{< accordion title="How do I switch between Windows and Linux containers?" >}}
-
-From the Docker Desktop menu, you can toggle which daemon (Linux or Windows)
-the Docker CLI talks to. Select **Switch to Windows containers** to use Windows
-containers, or select **Switch to Linux containers** to use Linux containers
-(the default).
-
-For more information on Windows containers, refer to the following documentation:
-
-- Microsoft documentation on [Windows containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/index).
-
-- [Build and Run Your First Windows Server Container (Blog Post)](https://www.docker.com/blog/build-your-first-docker-windows-server-container/)
-  gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
-
-- [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
-  shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/)
-  application with Windows containers. The MusicStore is a standard .NET application and,
-  [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
-
-- To understand how to connect to Windows containers from the local host, see
-  [I want to connect to a container from Windows](/manuals/desktop/features/networking.md#i-want-to-connect-to-a-container-from-the-host)
-
-> [!NOTE]
->
-> When you switch to Windows containers, **Settings** only shows those tabs that are active and apply to your Windows containers.
-
-If you set proxies or daemon configuration in Windows containers mode, these
-apply only on Windows containers. If you switch back to Linux containers,
-proxies and daemon configurations return to what you had set for Linux
-containers. Your Windows container settings are retained and become available
-again when you switch back.
-
-{{< /accordion >}}
-
-## Administrator privileges and installation requirements
-
-Installing Docker Desktop requires administrator privileges. However, once installed, it can be used without administrative access. Some actions, though, still need elevated permissions. See [Understand permission requirements for Windows](./windows-permission-requirements.md) for more detail.
-
-If your users do not have administrator rights and plan to perform operations that require elevated privileges, be sure to install Docker Desktop using the `--always-run-service` installer flag. This ensures those actions can still be executed without prompting for User Account Control (UAC) elevation. See [Installer Flags](#installer-flags) for more detail.
-
-## WSL: Verification and setup
-
-If you have chosen to use WSL, first verify that your installed version meets system requirements by running the following command in your terminal:
-
-```console
-wsl --version
-```
-
-If version details do not appear, you are likely using the inbox version of WSL. This version does not support modern capabilities and must be updated.
-
-You can update or install WSL using one of the following methods:
-
-### Option 1: Install or update WSL via the terminal
-
-1. Open PowerShell or Windows Command Prompt in administrator mode.
-2. Run either the install or update command. You may be prompted to restart your machine. For more information, refer to [Install WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
-```console
-wsl --install
-
-wsl --update
-```
-
-### Option 2: Install WSL via the MSI package
-
-If Microsoft Store access is blocked due to security policies:
-1. Go to the official [WSL GitHub Releases page](https://github.com/microsoft/WSL/releases).
-2. Download the `.msi` installer from the latest stable release (under the Assets drop-down).
-3. Run the downloaded installer and follow the setup instructions.
-
 ## Install Docker Desktop on Windows
-
-> [!TIP]
->
-> See the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/general.md#how-do-i-run-docker-desktop-without-administrator-privileges) on how to install and run Docker Desktop without needing administrator privileges.
 
 ### Install interactively
 
@@ -244,67 +171,13 @@ start /w "" "Docker Desktop Installer.exe" install
 
 By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
 
-#### Installer flags
-
-> [!NOTE]
->
-> If you're using PowerShell, you need to use the `ArgumentList` parameter before any flags. 
-> For example:
-> ```powershell
-> Start-Process 'Docker Desktop Installer.exe' -Wait -ArgumentList 'install', '--accept-license'
-> ```
-
-If your admin account is different to your user account, you must add the user to the **docker-users** group to access features that require higher privileges, such as creating and managing the Hyper-V VM, or using Windows containers.
+If your administrator account is different to your user account, you must add the user to the **docker-users** group to access features that require higher privileges, such as creating and managing the Hyper-V VM, or using Windows containers.
 
 ```console
 $ net localgroup docker-users <user> /add
 ```
 
-The `install` command accepts the following flags:
-
-##### Installation behavior
-
-- `--quiet`: Suppresses information output when running the installer 
-- `--accept-license`: Accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) now, rather than requiring it to be accepted when the application is first run
-- `--installation-dir=<path>`: Changes the default installation location (`C:\Program Files\Docker\Docker`)
-- `--backend=<backend name>`: Selects the default backend to use for Docker Desktop, `hyper-v`, `windows` or `wsl-2` (default)
-- `--always-run-service`: After installation completes, starts `com.docker.service` and sets the service startup type to Automatic. This circumvents the need for administrator privileges, which are otherwise necessary to start `com.docker.service`. `com.docker.service` is required by Windows containers and Hyper-V backend.
-
-##### Security and access control
-
-- `--allowed-org=<org name>`: Requires the user to sign in and be part of the specified Docker Hub organization when running the application
-- `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md).
-  - It must be used together with the `--allowed-org=<org name>` flag. 
-  - For example:`--allowed-org=<org name> --admin-settings="{'configurationFileVersion': 2, 'enhancedContainerIsolation': {'value': true, 'locked': false}}"`
-- `--no-windows-containers`: Disables the Windows containers integration. This can improve security. For more information, see [Windows containers](/manuals/desktop/setup/install/windows-permission-requirements.md#windows-containers).
-
-##### Proxy configuration
-
-- `--proxy-http-mode=<mode>`: Sets the HTTP Proxy mode, `system` (default) or `manual`
-- `--override-proxy-http=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests, requires `--proxy-http-mode` to be `manual`
-- `--override-proxy-https=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests, requires `--proxy-http-mode` to be `manual`
-- `--override-proxy-exclude=<hosts/domains>`: Bypasses proxy settings for the hosts and domains. Uses a comma-separated list.
-- `--proxy-enable-kerberosntlm`: Enables Kerberos and NTLM proxy authentication. If you are enabling this, ensure your proxy server is properly configured for Kerberos/NTLM authentication. Available with Docker Desktop 4.32 and later.
-- `--override-proxy-pac=<PAC file URL>`: Sets the PAC file URL. This setting takes effect only when using `manual` proxy mode.
-- `--override-proxy-embedded-pac=<PAC script>`: Specifies an embedded PAC (Proxy Auto-Config) script. This setting takes effect only when using `manual` proxy mode and has precedence over the `--override-proxy-pac` flag.
-
-###### Example of specifying PAC file
-
-```console
-"Docker Desktop Installer.exe" install --proxy-http-mode="manual" --override-proxy-pac="http://localhost:8080/myproxy.pac"
-```
-
-###### Example of specifying PAC script
-
-```console
-"Docker Desktop Installer.exe" install --proxy-http-mode="manual" --override-proxy-embedded-pac="function FindProxyForURL(url, host) { return \"DIRECT\"; }"
-```
-
-##### Data root and disk location
-
-- `--hyper-v-default-data-root=<path>`: Specifies the default location for the Hyper-V VM disk. 
-- `--windows-containers-default-data-root=<path>`: Specifies the default location for the Windows containers.
-- `--wsl-default-data-root=<path>`: Specifies the default location for the WSL distribution disk.
+See the [Installer flags](#installer-flags) section to see what flags the `install` command accepts.
 
 ## Start Docker Desktop
 
@@ -330,6 +203,132 @@ Docker Desktop does not start automatically after installation. To start Docker 
 > - [Kandji](https://support.kandji.io/support/solutions/articles/72000559793-view-a-device-application-list)
 > - [Kolide](https://www.kolide.com/features/device-inventory/properties/mac-apps)
 > - [Workspace One](https://blogs.vmware.com/euc/2022/11/how-to-use-workspace-one-intelligence-to-manage-app-licenses-and-reduce-costs.html)
+
+
+## Advanced system configuration and installation options
+
+### WSL: Verification and setup
+
+If you have chosen to use WSL, first verify that your installed version meets system requirements by running the following command in your terminal:
+
+```console
+wsl --version
+```
+
+If version details do not appear, you are likely using the inbox version of WSL. This version does not support modern capabilities and must be updated.
+
+You can update or install WSL using one of the following methods:
+
+#### Option 1: Install or update WSL via the terminal
+
+1. Open PowerShell or Windows Command Prompt in administrator mode.
+2. Run either the install or update command. You may be prompted to restart your machine. For more information, refer to [Install WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
+```console
+wsl --install
+
+wsl --update
+```
+
+#### Option 2: Install WSL via the MSI package
+
+If Microsoft Store access is blocked due to security policies:
+1. Go to the official [WSL GitHub Releases page](https://github.com/microsoft/WSL/releases).
+2. Download the `.msi` installer from the latest stable release (under the Assets drop-down).
+3. Run the downloaded installer and follow the setup instructions.
+
+### Installer flags
+
+> [!NOTE]
+>
+> If you're using PowerShell, you need to use the `ArgumentList` parameter before any flags. 
+> For example:
+> ```powershell
+> Start-Process 'Docker Desktop Installer.exe' -Wait -ArgumentList 'install', '--accept-license'
+> ```
+
+#### Installation behavior
+
+- `--quiet`: Suppresses information output when running the installer 
+- `--accept-license`: Accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) now, rather than requiring it to be accepted when the application is first run
+- `--installation-dir=<path>`: Changes the default installation location (`C:\Program Files\Docker\Docker`)
+- `--backend=<backend name>`: Selects the default backend to use for Docker Desktop, `hyper-v`, `windows` or `wsl-2` (default)
+- `--always-run-service`: After installation completes, starts `com.docker.service` and sets the service startup type to Automatic. This circumvents the need for administrator privileges, which are otherwise necessary to start `com.docker.service`. `com.docker.service` is required by Windows containers and Hyper-V backend.
+
+#### Security and access control
+
+- `--allowed-org=<org name>`: Requires the user to sign in and be part of the specified Docker Hub organization when running the application
+- `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md).
+  - It must be used together with the `--allowed-org=<org name>` flag. 
+  - For example:`--allowed-org=<org name> --admin-settings="{'configurationFileVersion': 2, 'enhancedContainerIsolation': {'value': true, 'locked': false}}"`
+- `--no-windows-containers`: Disables the Windows containers integration. This can improve security. For more information, see [Windows containers](/manuals/desktop/setup/install/windows-permission-requirements.md#windows-containers).
+
+#### Proxy configuration
+
+- `--proxy-http-mode=<mode>`: Sets the HTTP Proxy mode, `system` (default) or `manual`
+- `--override-proxy-http=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests, requires `--proxy-http-mode` to be `manual`
+- `--override-proxy-https=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests, requires `--proxy-http-mode` to be `manual`
+- `--override-proxy-exclude=<hosts/domains>`: Bypasses proxy settings for the hosts and domains. Uses a comma-separated list.
+- `--proxy-enable-kerberosntlm`: Enables Kerberos and NTLM proxy authentication. If you are enabling this, ensure your proxy server is properly configured for Kerberos/NTLM authentication. Available with Docker Desktop 4.32 and later.
+- `--override-proxy-pac=<PAC file URL>`: Sets the PAC file URL. This setting takes effect only when using `manual` proxy mode.
+- `--override-proxy-embedded-pac=<PAC script>`: Specifies an embedded PAC (Proxy Auto-Config) script. This setting takes effect only when using `manual` proxy mode and has precedence over the `--override-proxy-pac` flag.
+
+##### Example of specifying PAC file
+
+```console
+"Docker Desktop Installer.exe" install --proxy-http-mode="manual" --override-proxy-pac="http://localhost:8080/myproxy.pac"
+```
+
+##### Example of specifying PAC script
+
+```console
+"Docker Desktop Installer.exe" install --proxy-http-mode="manual" --override-proxy-embedded-pac="function FindProxyForURL(url, host) { return \"DIRECT\"; }"
+```
+
+#### Data root and disk location
+
+- `--hyper-v-default-data-root=<path>`: Specifies the default location for the Hyper-V VM disk. 
+- `--windows-containers-default-data-root=<path>`: Specifies the default location for the Windows containers.
+- `--wsl-default-data-root=<path>`: Specifies the default location for the WSL distribution disk.
+
+### Administrator privileges
+
+Installing Docker Desktop requires administrator privileges. However, once installed, it can be used without administrative access. Some actions, though, still need elevated permissions. See [Understand permission requirements for Windows](./windows-permission-requirements.md) for more detail.
+
+See the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/general.md#how-do-i-run-docker-desktop-without-administrator-privileges) on how to install and run Docker Desktop without needing administrator privileges.
+
+If you're an IT admin and your users do not have administrator rights and plan to perform operations that require elevated privileges, be sure to install Docker Desktop using the `--always-run-service` installer flag. This ensures those actions can still be executed without prompting for User Account Control (UAC) elevation. See [Installer Flags](#installer-flags) for more detail.
+
+### Windows containers 
+
+From the Docker Desktop menu, you can toggle which daemon (Linux or Windows)
+the Docker CLI talks to. Select **Switch to Windows containers** to use Windows
+containers, or select **Switch to Linux containers** to use Linux containers
+(the default).
+
+For more information on Windows containers, refer to the following documentation:
+
+- Microsoft documentation on [Windows containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/index).
+
+- [Build and Run Your First Windows Server Container (Blog Post)](https://www.docker.com/blog/build-your-first-docker-windows-server-container/)
+  gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
+
+- [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
+  shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/)
+  application with Windows containers. The MusicStore is a standard .NET application and,
+  [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
+
+- To understand how to connect to Windows containers from the local host, see
+  [I want to connect to a container from Windows](/manuals/desktop/features/networking.md#i-want-to-connect-to-a-container-from-the-host)
+
+> [!NOTE]
+>
+> When you switch to Windows containers, **Settings** only shows those tabs that are active and apply to your Windows containers.
+
+If you set proxies or daemon configuration in Windows containers mode, these
+apply only on Windows containers. If you switch back to Linux containers,
+proxies and daemon configurations return to what you had set for Linux
+containers. Your Windows container settings are retained and become available
+again when you switch back.
 
 ## Where to go next
 

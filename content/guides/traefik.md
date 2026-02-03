@@ -50,7 +50,7 @@ Let’s do a quick demo of starting Traefik and then configuring two additional 
 2. Start a Traefik container using the following command. The command exposes Traefik on port 80, mounts the Docker socket (which is used to monitor containers to update configuration), and passes the `--providers.docker` argument to configure Traefik to use the Docker provider.
 
    ```console
-   $ docker run -d --network=traefik-demo -p 80:80 -v /var/run/docker.sock:/var/run/docker.sock traefik:v3.1.2 --providers.docker
+   $ docker run -d --network=traefik-demo -p 80:80 -v /var/run/docker.sock:/var/run/docker.sock traefik:v3.6.2 --providers.docker
    ```
 
 3. Now, start a simple Nginx container and define the labels Traefik is watching for to configure the HTTP routing. Note that the Nginx container is not exposing any ports.
@@ -86,7 +86,7 @@ The application can be accessed on GitHub at [dockersamples/easy-http-routing-wi
    ```yaml
    services:
      proxy:
-       image: traefik:v3.1.2
+       image: traefik:v3.6.2
        command: --providers.docker
        ports:
          - 80:80
@@ -179,7 +179,7 @@ With this file, the only change is to the Compose configuration for Traefik. The
 ```yaml
 services:
   proxy:
-    image: traefik:v3.1.2
+    image: traefik:v3.6.2
     command: --providers.docker --providers.file.filename=/config/traefik-config.yaml --api.insecure
     ports:
       - 80:80

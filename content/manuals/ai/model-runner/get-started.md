@@ -221,6 +221,10 @@ In Docker Desktop, to inspect the requests and responses for each model:
 
 ## Related pages
 
-- [Interact with your model programmatically](./api-reference.md)
-- [Models and Compose](../compose/models-and-compose.md)
-- [Docker Model Runner CLI reference documentation](/reference/cli/docker/model)
+- [API reference](./api-reference.md) - OpenAI and Ollama-compatible API documentation
+- [Configuration options](./configuration.md) - Context size and runtime parameters
+- [Inference engines](./inference-engines.md) - llama.cpp and vLLM details
+- [IDE integrations](./ide-integrations.md) - Connect Cline, Continue, Cursor, and more
+- [Open WebUI integration](./openwebui-integration.md) - Set up a web chat interface
+- [Models and Compose](../compose/models-and-compose.md) - Use models in Compose applications
+- [Docker Model Runner CLI reference](/reference/cli/docker/model) - Complete CLI documentation

@@ -15,9 +15,9 @@ taxonomies:
 # Remove the /manuals prefix for content in the manuals section
 permalinks:
   page:
-    manuals: /:sections[1:]/:slugorfilename/
+    manuals: /:sections[1:]/:slugorcontentbasename/
   section:
-    manuals: /:sections[1:]/:slugorfilename/
+    manuals: /:sections[1:]/
 
 markup:
   tableOfContents:
@@ -92,6 +92,10 @@ outputs:
   section:
     - html
     - markdown
+  taxonomy:
+    - html
+  term:
+    - html
 
 languages:
   en:
@@ -120,21 +124,21 @@ params:
   # Use `grep` to figure out how they might be used.
 
   # Latest version of the Docker Engine API
-  latest_engine_api_version: "1.52"
+  latest_engine_api_version: "1.53"
   # Latest version of Docker Engine
-  docker_ce_version: "29.0.0"
+  docker_ce_version: "29.2.1"
   # Previous version of the Docker Engine
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
-  docker_ce_version_prev: "28.5.2"
+  docker_ce_version_prev: "29.2.0"
   # Latest Docker Compose version
-  compose_version: "v2.40.3"
+  compose_version: "v5.0.1"
   # Latest BuildKit version
-  buildkit_version: "0.26.0"
+  buildkit_version: "0.27.0"
 
   # Example runtime/library/os versions
-  example_go_version: "1.24"
-  example_alpine_version: "3.21"
-  example_node_version: "20"
+  example_go_version: "1.25"
+  example_alpine_version: "3.23"
+  example_node_version: "24"
 
 menus:
   # Site header menu
@@ -271,6 +275,9 @@ module:
     # Mount the icon files to assets so we can access them with resources.Get
     - source: node_modules/@material-symbols/svg-400/rounded
       target: assets/icons
+    # Mount highlight.js theme for Gordon chat syntax highlighting
+    - source: node_modules/highlight.js/styles/github-dark.css
+      target: assets/css/highlight-github-dark.css
 
   imports:
 
@@ -323,7 +330,7 @@ module:
           target: content/reference/cli/dockerd.md
 
     # Compose
-    - path: github.com/docker/compose/v2
+    - path: github.com/docker/compose/v5
       mounts:
         - source: docs/reference
           target: data/compose-cli
@@ -341,11 +348,4 @@ module:
       mounts:
         - source: docs/generator/reference
           target: data/mcp-cli
-          includeFiles: "*.yaml"
-
-    # Scout CLI plugin (public dist repo)
-    - path: github.com/docker/scout-cli
-      mounts:
-        - source: docs
-          target: data/scout-cli
           includeFiles: "*.yaml"

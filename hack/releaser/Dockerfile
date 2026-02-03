@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG GO_VERSION=1.24
+ARG GO_VERSION=1.25
 
 FROM scratch AS sitedir
 
@@ -8,9 +8,6 @@ FROM golang:${GO_VERSION}-alpine AS base
 RUN apk add --no-cache openssl
 ENV CGO_ENABLED=0
 WORKDIR /src
-COPY go.mod go.sum ./
-RUN --mount=type=cache,target=/go/pkg/mod \
-  go mod download
 
 FROM base AS releaser
 RUN --mount=type=bind,target=. \

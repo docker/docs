@@ -17,7 +17,10 @@
 <link rel="canonical" href="{{ .Permalink }}" />
 
 <!-- favicon -->
-<link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/svg">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="shortcut icon" href="/favicon.ico">
 <meta name="theme-color" content="#2496ed" />
 
 <!-- SEO -->
@@ -58,4 +61,4 @@
   itemprop="datePublished"
   content="{{ .PublishDate | default .Lastmod }}"
 />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":{{ .LinkTitle | jsonify }},"description":{{ $description | jsonify }},"url":"{{ .Permalink }}"}</script>
+{{ partial "schema.html" . }}

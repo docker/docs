@@ -19,50 +19,35 @@ Your Docker ID becomes your username for hosted Docker services, and
 
 > [!TIP]
 >
-> Explore [Docker's subscriptions](https://www.docker.com/pricing/) to see what
-else Docker can offer you.
+> Explore [Docker's subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you.
 
 ## Create an account
 
-You can sign up with an email address or use your Google or GitHub account.
+Signing up with an email address, Google, or GitHub account requires additional verification to complete account creation:
+
+- If you sign up with Google or GitHub, you must first verify your email address with that provider.
+- If you sign up with an email address, Docker sends a verification email. Follow the procedures in that email to verify your account and complete the sign-up process.
+
+Docker blocks sign-in until you've verified your account. 
 
 ### Sign up with your email
 
-1. Go to the [Docker sign-up page](https://app.docker.com/signup/).
-1. Enter a unique, valid email address.
+1. Go to the [Docker sign-up page](https://app.docker.com/signup/) and enter a unique, valid email address.
 1. Enter a username to use as your Docker ID. Once you create your Docker ID
-you can't reuse it in the future if you deactivate this account.
-
-    Your username:
+you can't reuse it in the future if you deactivate this account. Your username:
     - Must be between 4 and 30 characters long
     - Can only contain numbers and lowercase letters
-
-1. Enter a password that's at least 9 characters long.
-1. Select **Sign Up**.
-1. Open your email client. Docker sends a verification email to the
-address you provided.
-1. Verify your email address to complete the registration process.
-
-> [!NOTE]
->
-> You must verify your email address before you have full access to Docker's
-features.
+1. Choose a password that's at least 9 characters long, then select **Sign Up**.
+1. Verify your email address when you receive the Docker verification email. This completes the registration process.
 
 ### Sign up with Google or GitHub
-
-> [!IMPORTANT]
->
-> To sign up with your social provider, you must verify your email address with
-your provider before you begin.
 
 1. Go to the [Docker sign-up page](https://app.docker.com/signup/).
 1. Select your social provider, Google or GitHub.
 1. Select the social account you want to link to your Docker account.
 1. Select **Authorize Docker** to let Docker access your social account
 information. You will be re-routed to the sign-up page.
-1. Enter a username to use as your Docker ID.
-
-    Your username:
+1. Enter a username to use as your Docker ID. Your username:
     - Must be between 4 and 30 characters long
     - Can only contain numbers and lowercase letters
 1. Select **Sign up**.
@@ -81,10 +66,6 @@ the Docker CLI.
 To reset your password, see [Reset your password](#reset-your-password).
 
 ### Sign in with Google or GitHub
-
-> [!IMPORTANT]
->
-> Your Google or GitHub account must have a verified email address.
 
 You can sign in using your Google or GitHub credentials. If your social
 account uses the same email address as an existing Docker ID, the

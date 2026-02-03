@@ -118,7 +118,7 @@ specification. In this case it uses `foo`, which is the first device in
 > [!NOTE]
 > [`RUN --device` command](/reference/dockerfile.md#run---device) is only
 > featured in [`labs` channel](../buildkit/frontend.md#labs-channel) since
-> [Dockerfile frontend v1.14.0-labs](../buildkit/dockerfile-release-notes.md#1140-labs)
+> [Dockerfile frontend v1.14.0-labs](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.14.0-labs)
 > and not yet available in stable syntax.
 
 Now let's build this Dockerfile:
@@ -209,26 +209,25 @@ GPU request is automatically added to the container builder if the host has GPU
 drivers installed in the kernel. This is similar to using [`--gpus=all` with the `docker run`](/reference/cli/docker/container/run.md#gpus)
 command.
 
-> [!NOTE]
-> We made a specially crafted BuildKit image because the current BuildKit
-> release image is based on Alpine that doesn’t support NVIDIA drivers. The
-> following image is based on Ubuntu and installs the NVIDIA client libraries
-> and generates the CDI specification for your GPU in the container builder if
-> a device is requested during a build. This image is temporarily hosted on
-> Docker Hub under `crazymax/buildkit:v0.23.2-ubuntu-nvidia`.
-
 Now let's create a container builder named `gpubuilder` using Buildx:
 
 ```console
-$ docker buildx create --name gpubuilder --driver-opt "image=crazymax/buildkit:v0.23.2-ubuntu-nvidia" --bootstrap
+$ docker buildx create --name gpubuilder --driver-opt "image=moby/buildkit:buildx-stable-1-gpu" --bootstrap
 #1 [internal] booting buildkit
-#1 pulling image crazymax/buildkit:v0.23.2-ubuntu-nvidia
-#1 pulling image crazymax/buildkit:v0.23.2-ubuntu-nvidia 1.0s done
+#1 pulling image moby/buildkit:buildx-stable-1-gpu
+#1 pulling image moby/buildkit:buildx-stable-1-gpu 1.0s done
 #1 creating container buildx_buildkit_gpubuilder0
 #1 creating container buildx_buildkit_gpubuilder0 8.8s done
 #1 DONE 9.8s
 gpubuilder
 ```
+
+> [!NOTE]
+> We made a specially crafted BuildKit image because the current BuildKit
+> release image is based on Alpine that doesn't support NVIDIA drivers. The
+> following image is based on Ubuntu and installs the NVIDIA client libraries
+> and generates the CDI specification for your GPU in the container builder if
+> a device is requested during a build.
 
 Let's inspect this builder:
 
@@ -241,10 +240,10 @@ Last Activity: 2025-07-10 08:18:09 +0000 UTC
 Nodes:
 Name:                  gpubuilder0
 Endpoint:              unix:///var/run/docker.sock
-Driver Options:        image="crazymax/buildkit:v0.23.2-ubuntu-nvidia"
+Driver Options:        image="moby/buildkit:buildx-stable-1-gpu"
 Status:                running
 BuildKit daemon flags: --allow-insecure-entitlement=network.host
-BuildKit version:      v0.23.2
+BuildKit version:      v0.26.2
 Platforms:             linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/arm64, linux/riscv64, linux/ppc64le, linux/s390x, linux/386, linux/arm/v7, linux/arm/v6
 Labels:
  org.mobyproject.buildkit.worker.executor:         oci

@@ -62,7 +62,7 @@ $ docker scout attest list <image-name>:<tag>
 > [!NOTE]
 >
 > If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
-> `registry://docs/dhi-python` instead of `docs/dhi-python`.
+> `registry://dhi.io/python` instead of `dhi.io/python`.
 
 To verify a specific signed attestation (e.g., SBOM, VEX, provenance):
 
@@ -76,7 +76,7 @@ $ docker scout attest get \
 > [!NOTE]
 >
 > If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
-> `registry://docs/dhi-python:3.13` instead of `docs/dhi-python:3.13`.
+> `registry://dhi.io/python:3.13` instead of `dhi.io/python:3.13`.
 
 For example:
 
@@ -84,7 +84,7 @@ For example:
 $ docker scout attest get \
   --predicate-type https://openvex.dev/ns/v0.2.0 \
   --verify \
-  docs/dhi-python:3.13
+  dhi.io/python:3.13
 ```
 
 If valid, Docker Scout will confirm the signature and display signature payload, as well as the equivalent Cosign command to verify the image.

@@ -235,15 +235,17 @@ containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 ### Proxies
 
-Docker Desktop supports the use of HTTP/HTTPS and [SOCKS5 proxies](/manuals/desktop/features/networking.md#socks5-proxy-support).
+Docker Desktop supports the use of HTTP/HTTPS and SOCKS5 proxies (Requires a business subscription).
 
-HTTP/HTTPS proxies can be used when:
+HTTP/HTTPS and SOCKS5 proxies can be used when:
 
 - Signing in to Docker
 - Pulling or pushing images
 - Fetching artifacts during image builds
 - Containers interact with the external network
 - Scanning images
+
+For more details on how it works, see [Using Docker Desktop with a proxy](/manuals/desktop/features/networking/index.md#useing-docker-desktop-with-a-proxy).
 
 If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration (PAC)), Docker Desktop reads
 this configuration
@@ -312,6 +314,8 @@ Docker Desktop uses a private IPv4 network for internal services such as a DNS s
 On Windows and Mac, you can also set the default networking mode and DNS resolution behavior. For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
 
 On Mac, you can also select the **Use kernel networking for UDP** setting. This lets you use a more efficient kernel networking path for UDP. This may not be compatible with your VPN software.
+
+You can also define the behavior of port bindings. By default Docker Desktop binds all ports on containers to `0.0.0.0` on the host, though this can be overridden by providing a specific IP. You can change this default behavior by changing the **Port binding behavior** setting, allowing you to either bind to `localhost` (`127.0.0.1`) by default, or only allow containers to bind to `localhost` under any circumstances, even if requested otherwise.
 
 ### WSL Integration
 

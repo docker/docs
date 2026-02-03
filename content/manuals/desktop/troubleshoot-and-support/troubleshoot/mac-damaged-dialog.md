@@ -53,7 +53,7 @@ If you continue to see the "damaged" dialog after following the recovery steps:
 
 2. Get help:
    - If you have a paid Docker subscription, [contact support](/manuals/support/_index.md) and include your diagnostics ID
-   - For community users, [open an issue on GitHub](https://github.com/docker/for-mac/issues) and include your diagnostics ID
+   - For community users, [open an issue on GitHub](https://github.com/docker/desktop-feedback) and include your diagnostics ID
 
 ## Prevention
 

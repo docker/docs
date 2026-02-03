@@ -18,22 +18,6 @@ Source Software images.
 
 ## Docker Official Images
 
-> [!NOTE]
->
-> Docker is retiring Docker Content Trust (DCT) for Docker Official Images
-> (DOI). Starting on August 8th, 2025, the oldest of DOI DCT signing
-> certificates will begin to expire. You may have already started seeing expiry
-> warnings if you use the `docker trust` commands with DOI. These certificates,
-> once cached by the Docker client, are not subsequently refreshed, making
-> certificate rotation impractical. If you have set the `DOCKER_CONTENT_TRUST`
-> environment variable to true (`DOCKER_CONTENT_TRUST=1`), DOI pulls will start to
-> fail. The workaround is to unset the `DOCKER_CONTENT_TRUST` environment
-> variable. The use of  `docker trust inspect` will also start to fail and should
-> no longer be used for DOI.
->
-> For more details, see
-> https://www.docker.com/blog/retiring-docker-content-trust/.
-
 The Docker Official Images are a curated set of Docker repositories hosted on
 Docker Hub.
 
@@ -172,6 +156,15 @@ documentation. Reading through the "How to use this image" and
 "Image Variants" sections will help you to understand how to use these
 variants.
 
+### Troubleshooting failed pulls
+
+If you're experiencing failed pulls of Docker Official Images, check whether
+the `DOCKER_CONTENT_TRUST` environment variable is set to `1`. Starting in
+August 2025, Docker Content Trust signing certificates for Docker Official
+Images began expiring. To resolve pull failures, unset the `DOCKER_CONTENT_TRUST`
+environment variable. For more details, see the
+[DCT retirement blog post](https://www.docker.com/blog/retiring-docker-content-trust/).
+
 ## Verified Publisher images
 
 The Docker Verified Publisher program provides high-quality images from
@@ -185,7 +178,7 @@ Images that are part of this program have a special badge on Docker Hub making
 it easier for users to identify projects that Docker has verified as
 high-quality commercial publishers.
 
-![Docker-Sponsored Open Source badge](../images/verified-publisher-badge-iso.png)
+![Docker-Verified Publisher badge](../images/verified-publisher-badge-iso.png)
 
 ## Docker-Sponsored Open Source Software images
 

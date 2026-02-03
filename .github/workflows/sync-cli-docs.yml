@@ -1,0 +1,123 @@
+name: sync-cli-docs
+
+on:
+  schedule:
+    # Run daily at 02:00 UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "(optional) Docker CLI version - defaults to docker_ce_version in hugo.yaml"
+        required: false
+        default: ""
+  pull_request:
+    paths:
+      - '.github/workflows/sync-cli-docs.yml'
+      - 'hack/sync-cli-docs.sh'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  BRANCH_NAME: "bot/sync-cli-docs"
+
+jobs:
+  sync-cli-docs:
+    runs-on: ubuntu-24.04
+    steps:
+      -
+        name: Checkout docs repo
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      -
+        name: Get version from hugo.yaml
+        id: get-version
+        run: |
+          if [ -n "${{ inputs.version }}" ]; then
+            VERSION="${{ inputs.version }}"
+          else
+            VERSION=v$(grep "docker_ce_version:" hugo.yaml | awk '{print $2}' | tr -d '"')
+          fi
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Docker CLI version: **$VERSION**" | tee -a "$GITHUB_STEP_SUMMARY"
+      -
+        name: Checkout docker/cli repo
+        uses: actions/checkout@v5
+        with:
+          repository: docker/cli
+          path: cli-source
+          ref: ${{ steps.get-version.outputs.version }}
+          fetch-depth: 0
+      -
+        name: Create update branch
+        id: create-branch
+        env:
+          BRANCH_NAME: ${{ env.BRANCH_NAME }}
+        run: |
+          git checkout -b "$BRANCH_NAME"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      -
+        name: Run sync script
+        id: sync
+        run: |
+          set +e
+          ./hack/sync-cli-docs.sh HEAD cli-source
+          EXIT_CODE=$?
+          set -e
+
+          if [ $EXIT_CODE -eq 0 ]; then
+            echo "changes=true" >> "$GITHUB_OUTPUT"
+            echo "Changes detected - syncing CLI docs" >> "$GITHUB_STEP_SUMMARY"
+          elif [ $EXIT_CODE -eq 100 ]; then
+            echo "changes=false" >> "$GITHUB_OUTPUT"
+            echo "No changes to sync - CLI docs are up to date" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::error::Script failed with exit code $EXIT_CODE"
+            exit $EXIT_CODE
+          fi
+
+      -
+        name: Show PR
+        if: steps.sync.outputs.changes == 'true'
+        run: |
+          git show "${{ env.BRANCH_NAME }}"
+      -
+        name: Create or update Pull Request
+        if: steps.sync.outputs.changes == 'true' && github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH_NAME: ${{ env.BRANCH_NAME }}
+          PR_TITLE: "cli: sync docs with cli ${{ steps.get-version.outputs.version }}"
+          PR_BODY: |
+            ## Summary
+
+            Automated sync of CLI documentation from docker/cli repository.
+
+            **CLI Version:** ${{ steps.get-version.outputs.version }}
+
+            ---
+
+            > [!IMPORTANT]
+            > **Reviewer:** Please close and reopen this PR to trigger CI checks.
+            > See: https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow#triggering-a-workflow-from-a-workflow
+        run: |
+          # Check for existing PR from this branch
+          EXISTING_PR=$(gh pr list --state open --head "$BRANCH_NAME" --json url --jq ".[0].url")
+
+          if [ -n "$EXISTING_PR" ]; then
+            echo "Updating existing PR: $EXISTING_PR" >> "$GITHUB_STEP_SUMMARY"
+            git push -u origin "$BRANCH_NAME" --force
+            gh pr edit "$EXISTING_PR" --title "$PR_TITLE" --body "$PR_BODY"
+          else
+            echo "Creating new PR" >> "$GITHUB_STEP_SUMMARY"
+            git push -u origin "$BRANCH_NAME"
+            gh pr create \
+              --title "$PR_TITLE" \
+              --body "$PR_BODY" \
+              --base main \
+              --head "$BRANCH_NAME"
+          fi

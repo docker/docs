@@ -1,7 +1,7 @@
 ---
 title: Read the daemon logs
-description: How to read the event logs for the Docker daemon
-keywords: docker, daemon, configuration, troubleshooting, logging
+description: How to read Docker daemon logs and force a stack trace using SIGUSR1 for debugging
+keywords: docker, daemon, configuration, troubleshooting, logging, debug, stack trace, SIGUSR1, signal, goroutine dump, crash diagnostics
 aliases:
   - /config/daemon/logs/
 ---

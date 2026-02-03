@@ -29,47 +29,27 @@ jobs:
     if: github.repository_owner == 'docker'
     steps:
       -
-        name: Prepare
-        run: |
-          DOCS_AWS_REGION=us-east-1
-          HUGO_ENV=production
-          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            DOCS_URL="https://docs.docker.com"
-            DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/prod-docs-docs.docker.com-20220818202218674300000001"
-            DOCS_S3_BUCKET="prod-docs-docs.docker.com"
-            DOCS_CLOUDFRONT_ID="E228TTN20HNU8F"
-            DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-prod"
-            DOCS_SLACK_MSG="Successfully deployed docs from the main branch. $DOCS_URL"
-          elif [ "${{ github.ref }}" = "refs/heads/lab" ]; then
-            HUGO_ENV=lab
-            DOCS_URL="https://docs-labs.docker.com"
-            DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/labs-docs-docs.docker.com-20220818202218402500000001"
-            DOCS_S3_BUCKET="labs-docs-docs.docker.com"
-            DOCS_CLOUDFRONT_ID="E1MYDYF65FW3HG"
-            DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-labs"
-          else
-            echo >&2 "ERROR: unknown branch ${{ github.ref }}"
-            exit 1
-          fi
-          SEND_SLACK_MSG="true"
-          if [ -z "$DOCS_AWS_IAM_ROLE" ] || [ -z "$DOCS_S3_BUCKET" ] || [ -z "$DOCS_CLOUDFRONT_ID" ] || [ -z "$DOCS_SLACK_MSG" ]; then
-            SEND_SLACK_MSG="false"
-          fi
-          echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-          echo "HUGO_ENV=$HUGO_ENV" >> $GITHUB_ENV
-          echo "DOCS_URL=$DOCS_URL" >> $GITHUB_ENV
-          echo "DOCS_AWS_REGION=$DOCS_AWS_REGION" >> $GITHUB_ENV
-          echo "DOCS_AWS_IAM_ROLE=$DOCS_AWS_IAM_ROLE" >> $GITHUB_ENV
-          echo "DOCS_S3_BUCKET=$DOCS_S3_BUCKET" >> $GITHUB_ENV
-          echo "DOCS_CLOUDFRONT_ID=$DOCS_CLOUDFRONT_ID" >> $GITHUB_ENV
-          echo "DOCS_LAMBDA_FUNCTION_REDIRECTS=$DOCS_LAMBDA_FUNCTION_REDIRECTS" >> $GITHUB_ENV
-          echo "DOCS_SLACK_MSG=$DOCS_SLACK_MSG" >> $GITHUB_ENV
-          echo "SEND_SLACK_MSG=$SEND_SLACK_MSG" >> $GITHUB_ENV
-      -
         name: Checkout
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
+      -
+        name: Set environment variables
+        uses: actions/github-script@v8
+        env:
+          INPUT_GITHUB-REF: ${{ github.ref }}
+        with:
+          script: |
+            const fs = require('fs');
+            const env = JSON.parse(fs.readFileSync('hack/releaser/env.json', 'utf8'));
+            const ref = core.getInput('github-ref');
+            if (!env.hasOwnProperty(ref)) {
+              core.setFailed(`ERROR: unknown branch ${ref}`);
+            }
+            for (const [key, value] of Object.entries(env[ref])) {
+              core.exportVariable(key, value);
+              core.info(`${key}=${value}`);
+            }
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -129,8 +109,3 @@ jobs:
         env:
           AWS_REGION: us-east-1 # cloudfront is only available in us-east-1 region
           AWS_MAX_ATTEMPTS: 5
-      -
-        name: Send Slack notification
-        if: ${{ env.SEND_SLACK_MSG == 'true' }}
-        run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"${{ env.DOCS_SLACK_MSG }}"}' ${{ secrets.SLACK_WEBHOOK }}

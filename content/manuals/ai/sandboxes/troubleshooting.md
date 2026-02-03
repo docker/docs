@@ -50,21 +50,7 @@ ask your administrator to [allow beta features](/enterprise/security/hardened-de
 
 Claude can't authenticate, or you see API key errors.
 
-The API key is likely invalid, expired, or not configured correctly. How to fix depends on your credential mode:
-
-If using `--credentials=sandbox` (the default):
-
-1. Remove the stored credentials:
-
-   ```console
-   $ docker volume rm docker-claude-sandbox-data
-   ```
-
-2. Start a new sandbox and complete the authentication workflow:
-
-   ```console
-   $ docker sandbox run claude
-   ```
+The API key is likely invalid, expired, or not configured correctly.
 
 ## Workspace contains API key configuration
 
@@ -119,3 +105,17 @@ Also verify the workspace path exists:
 $ cd <workspace>
 $ pwd
 ```
+
+## Sandbox crashes on Windows when launching multiple sandboxes
+
+On Windows, launching too many sandboxes simultaneously can cause crashes.
+
+If this happens, recover by closing the OpenVMM processes:
+
+1. Open Task Manager (Ctrl+Shift+Esc).
+2. Find all `docker.openvmm.exe` processes.
+3. End each process.
+4. Restart Docker Desktop if needed.
+
+To avoid this issue, launch sandboxes one at a time rather than creating
+multiple sandboxes concurrently.

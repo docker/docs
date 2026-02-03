@@ -68,7 +68,7 @@ In this command:
 - `mysql:latest` specifies that you want to use the latest version of the MySQL
   image.
 
-To verify that you container is running, run `docker ps` in a terminal
+To verify that your container is running, run `docker ps` in a terminal
 
 {{< /tab >}}
 {{< tab name="GUI" >}}

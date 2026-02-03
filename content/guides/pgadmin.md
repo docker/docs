@@ -30,7 +30,7 @@ In this guide you will learn how to:
     ```yaml
     services:
       postgres:
-        image: postgres:17.4
+        image: postgres:18
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: secret

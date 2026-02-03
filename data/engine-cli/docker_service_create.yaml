@@ -348,6 +348,28 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: memory-swap
+      value_type: bytes
+      default_value: "0"
+      description: Swap Bytes (-1 for unlimited)
+      deprecated: false
+      hidden: false
+      min_api_version: "1.52"
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: memory-swappiness
+      value_type: int64
+      default_value: "-1"
+      description: Tune memory swappiness (0-100), -1 to reset to default
+      deprecated: false
+      hidden: false
+      min_api_version: "1.52"
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: mode
       value_type: string
       default_value: replicated
@@ -1141,20 +1163,6 @@ examples: |-
             Otherwise the Engine raises an error.</li>
           </ul>
           When the option is not specified, the default behavior correponds to setting <tt>enabled</tt>.
-        </td>
-      </tr>
-      <tr>
-        <td><b>bind-nonrecursive</b></td>
-        <td>
-          <tt>bind-nonrecursive</tt> is deprecated since Docker Engine v25.0.
-          Use <tt>bind-recursive</tt>instead.<br />
-          <br />
-          A value is optional:<br />
-          <br />
-          <ul>
-            <li><tt>true</tt> or <tt>1</tt>:  Equivalent to <tt>bind-recursive=disabled</tt>.</li>
-            <li><tt>false</tt> or <tt>0</tt>: Equivalent to <tt>bind-recursive=enabled</tt>.</li>
-          </ul>
         </td>
       </tr>
     </table>

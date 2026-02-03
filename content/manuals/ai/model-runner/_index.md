@@ -6,7 +6,7 @@ params:
     group: AI
 weight: 30
 description: Learn how to use Docker Model Runner to manage and run AI models.
-keywords: Docker, ai, model runner, docker desktop, docker engine, llm
+keywords: Docker, ai, model runner, docker desktop, docker engine, llm, openai, ollama, llama.cpp, vllm, diffusers, cpu, nvidia, cuda, amd, rocm, vulkan, cline, continue, cursor, image generation, stable diffusion
 aliases:
   - /desktop/features/model-runner/
   - /model-runner/
@@ -21,7 +21,7 @@ large language models (LLMs) and other AI models directly from Docker Hub or any
 OCI-compliant registry.
 
 With seamless integration into Docker Desktop and Docker
-Engine, you can serve models via OpenAI-compatible APIs, package GGUF files as
+Engine, you can serve models via OpenAI and Ollama-compatible APIs, package GGUF files as
 OCI Artifacts, and interact with models from both the command line and graphical
 interface.
 
@@ -33,9 +33,14 @@ with AI models locally.
 ## Key features
 
 - [Pull and push models to and from Docker Hub](https://hub.docker.com/u/ai)
-- Serve models on OpenAI-compatible APIs for easy integration with existing apps
-- Package GGUF files as OCI Artifacts and publish them to any Container Registry
+- Serve models on [OpenAI and Ollama-compatible APIs](api-reference.md) for easy integration with existing apps
+- Support for [llama.cpp, vLLM, and Diffusers inference engines](inference-engines.md) (vLLM and Diffusers on Linux with NVIDIA GPUs)
+- [Generate images from text prompts](inference-engines.md#diffusers) using Stable Diffusion models with the Diffusers backend
+- Package GGUF and Safetensors files as OCI Artifacts and publish them to any Container Registry
 - Run and interact with AI models directly from the command line or from the Docker Desktop GUI
+- [Connect to AI coding tools](ide-integrations.md) like Cline, Continue, Cursor, and Aider
+- [Configure context size and model parameters](configuration.md) to tune performance
+- [Set up Open WebUI](openwebui-integration.md) for a ChatGPT-like web interface
 - Manage local models and display logs
 - Display prompt and response details
 - Conversational context support for multi-turn interactions
@@ -68,8 +73,8 @@ Windows(arm64):
 
 Docker Engine only:
 
-- Linux CPU & Linux NVIDIA
-- NVIDIA drivers 575.57.08+
+- Supports CPU, NVIDIA (CUDA), AMD (ROCm), and Vulkan backends
+- Requires NVIDIA driver 575.57.08+ when using NVIDIA GPUs
 
 {{< /tab >}}
 {{</tabs >}}
@@ -81,7 +86,29 @@ locally. They load into memory only at runtime when a request is made, and
 unload when not in use to optimize resources. Because models can be large, the
 initial pull may take some time. After that, they're cached locally for faster
 access. You can interact with the model using
-[OpenAI-compatible APIs](api-reference.md).
+[OpenAI and Ollama-compatible APIs](api-reference.md).
+
+### Inference engines
+
+Docker Model Runner supports three inference engines:
+
+| Engine | Best for | Model format |
+|--------|----------|--------------|
+| [llama.cpp](inference-engines.md#llamacpp) | Local development, resource efficiency | GGUF (quantized) |
+| [vLLM](inference-engines.md#vllm) | Production, high throughput | Safetensors |
+| [Diffusers](inference-engines.md#diffusers) | Image generation (Stable Diffusion) | Safetensors |
+
+llama.cpp is the default engine and works on all platforms. vLLM requires NVIDIA GPUs and is supported on Linux x86_64 and Windows with WSL2. Diffusers enables image generation and requires NVIDIA GPUs on Linux (x86_64 or ARM64). See [Inference engines](inference-engines.md) for detailed comparison and setup.
+
+### Context size
+
+Models have a configurable context size (context length) that determines how many tokens they can process. The default varies by model but is typically 2,048-8,192 tokens. You can adjust this per-model:
+
+```console
+$ docker model configure --context-size 8192 ai/qwen2.5-coder
+```
+
+See [Configuration options](configuration.md) for details on context size and other parameters.
 
 > [!TIP]
 >
@@ -111,15 +138,29 @@ $ ln -s /Applications/Docker.app/Contents/Resources/cli-plugins/docker-model ~/.
 
 Once linked, rerun the command.
 
-### No consistent digest support in Model CLI
+## Privacy and data collection
 
-The Docker Model CLI currently lacks consistent support for specifying models by image digest. As a temporary workaround, you should refer to models by name instead of digest.
+Docker Model Runner respects your privacy settings in Docker Desktop. Data collection is controlled by the **Send usage statistics** setting:
+
+- **Disabled**: No usage data is collected
+- **Enabled**: Only minimal, non-personal data is collected:
+  - [Model names](https://github.com/docker/model-runner/blob/eb76b5defb1a598396f99001a500a30bbbb48f01/pkg/metrics/metrics.go#L96) (via HEAD requests to Docker Hub)
+  - User agent information
+  - Whether requests originate from the host or containers
+
+When using Docker Model Runner with Docker Engine, HEAD requests to Docker Hub are made to track model names, regardless of any settings.
+
+No prompt content, responses, or personally identifiable information is ever collected.
 
 ## Share feedback
 
-Thanks for trying out Docker Model Runner. Give feedback or report any bugs
-you may find through the **Give feedback** link next to the **Enable Docker Model Runner** setting.
+Thanks for trying out Docker Model Runner. To report bugs or request features, [open an issue on GitHub](https://github.com/docker/model-runner/issues). You can also give feedback through the **Give feedback** link next to the **Enable Docker Model Runner** setting.
 
 ## Next steps
 
-[Get started with DMR](get-started.md)
+- [Get started with DMR](get-started.md) - Enable DMR and run your first model
+- [API reference](api-reference.md) - OpenAI and Ollama-compatible API documentation
+- [Configuration options](configuration.md) - Context size and runtime parameters
+- [Inference engines](inference-engines.md) - llama.cpp, vLLM, and Diffusers details
+- [IDE integrations](ide-integrations.md) - Connect Cline, Continue, Cursor, and more
+- [Open WebUI integration](openwebui-integration.md) - Set up a web chat interface

@@ -27,7 +27,7 @@ params:
       icon: verified
       link: /dhi/core-concepts/fips/
     - title: STIG
-      description: Learn how Docker Hardened Images provide STIG-hardened container images with verifiable security scan attestations for government and enterprise compliance requirements.
+      description: Learn how Docker Hardened Images provide STIG-ready container images with verifiable security scan attestations for government and enterprise compliance requirements.
       icon: policy
       link: /dhi/core-concepts/stig/
     - title: CIS Benchmarks

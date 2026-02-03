@@ -1,6 +1,6 @@
 command: docker sandbox version
-short: Show sandboxd version information
-long: Show sandboxd version information
+short: Show sandbox version information
+long: Show sandbox version information
 usage: docker sandbox version
 pname: docker sandbox
 plink: docker_sandbox.yaml
@@ -16,6 +16,23 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: socket
+      value_type: string
+      description: |
+        Connect to daemon at specific socket path (for development/debugging)
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+examples: |-
+    ### Show version information
+
+    ```console
+    $ docker sandbox version
+    github.com/docker/sandboxes/cli-plugin v0.7.1 f00f0d6473647c2201cd0507ce31613345c48ae6
+    ```
 deprecated: false
 hidden: false
 experimental: false

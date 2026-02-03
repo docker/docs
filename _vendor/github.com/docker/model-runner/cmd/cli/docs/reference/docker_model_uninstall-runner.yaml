@@ -1,6 +1,6 @@
 command: docker model uninstall-runner
-short: Uninstall Docker Model Runner
-long: Uninstall Docker Model Runner
+short: Uninstall Docker Model Runner (Docker Engine only)
+long: Uninstall Docker Model Runner (Docker Engine only)
 usage: docker model uninstall-runner
 pname: docker model
 plink: docker_model.yaml

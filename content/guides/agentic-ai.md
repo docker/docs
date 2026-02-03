@@ -1,13 +1,20 @@
 ---
 title: Build and run agentic AI applications with Docker
 linktitle: Agentic AI applications
-keywords: AI, Docker, Model Runner, MCP Toolkit, Docker Offload, AI agents, application development
+keywords: AI, Docker, Model Runner, MCP Toolkit, AI agents, application development
 summary: |
-  Learn how to create AI agent applications using Docker Model Runner, MCP Toolkit, and Docker Offload.
+  Learn how to create AI agent applications using Docker Model Runner, and MCP Toolkit.
 params:
   tags: [AI]
   time: 30 minutes
 ---
+
+> [!TIP]
+>
+> This guide uses the familiar Docker Compose workflow to orchestrate agentic AI
+> applications. For a smoother development experience, check out [Docker
+> cagent](../manuals/ai/cagent/_index.md), a purpose-built agent runtime that
+> simplifies running and managing AI agents.
 
 ## Introduction
 
@@ -31,8 +38,8 @@ architecture. It's a new kind of stack, built from three core components:
   capabilities via the Model Context Protocol (MCP).
 
 Docker makes this AI-powered stack simpler, faster, and more secure by unifying
-models, tool gateways, and cloud infrastructure into a developer-friendly
-workflow that uses Docker Compose.
+models, and tool gateways into a developer-friendly workflow that uses Docker
+Compose.
 
 ![A diagram of the agentic stack](./images/agentic-ai-diagram.webp)
 
@@ -46,18 +53,13 @@ shows how Docker ties them all together with the following tools:
   and securely run external tools, like APIs and databases, using the Model
   Context Protocol (MCP).
 - [Docker MCP Gateway](../manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md) lets you orchestrate and manage MCP servers.
-- [Docker Offload](/offload/) provides a powerful, GPU-accelerated
-  environment to run your AI applications with the same Compose-based
-  workflow you use locally.
 - [Docker Compose](/manuals/ai/compose/models-and-compose.md) is the tool that ties it all
   together, letting you define and run multi-container applications with a
   single file.
 
-For this guide, you'll start by running the app in Docker Offload, using the
-same Compose workflow you're already familiar with. Then, if your machine
-hardware supports it, you'll run the same app locally using the same workflow.
-Finally, you'll dig into the Compose file, Dockerfile, and app to see how it all
-works together.
+For this guide, you'll use the same Compose workflow you're already familiar
+with. Then, you'll dig into the Compose file, Dockerfile, and app to see how it
+all works together.
 
 ## Prerequisites
 
@@ -65,7 +67,9 @@ To follow this guide, you need to:
 
  - [Install Docker Desktop 4.43 or later](../get-started/get-docker.md)
  - [Enable Docker Model Runner](/manuals/ai/model-runner.md#enable-dmr-in-docker-desktop)
- - [Join Docker Offload Beta](/offload/quickstart/)
+ - At least the following hardware specifications:
+    - VRAM: 3.5 GB
+    - Storage: 2.31 GB
 
 ## Step 1: Clone the sample application
 
@@ -77,59 +81,9 @@ $ git clone https://github.com/docker/compose-for-agents.git
 $ cd compose-for-agents/adk/
 ```
 
-## Step 2: Run the application with Docker Offload
+## Step 2: Run the application locally
 
-You'll start by running the application in Docker Offload, which provides a
-managed environment for running AI workloads. This is ideal if you want to
-leverage cloud resources or if your local machine doesn't meet the hardware
-requirements to run the model locally. Docker Offload includes support for
-GPU-accelerated instances, making it ideal for compute-intensive workloads like
-AI model inference.
-
-To run the application with Docker Offload, follow these steps:
-
-1. Sign in to the Docker Desktop Dashboard.
-2. In a terminal, start Docker Offload by running the following command:
-
-   ```console
-   $ docker offload start
-   ```
-
-   When prompted, choose the account you want to use for Docker Offload and select
-   **Yes** when prompted **Do you need GPU support?**.
-
-3. In the `adk/` directory of the cloned repository, run the following command
-   in a terminal to build and run the application:
-
-   ```console
-   $ docker compose up
-   ```
-
-   The first time you run this command, Docker pulls the model from Docker Hub,
-   which may take some time.
-
-   The application is now running with Docker Offload. Note that the Compose workflow
-   is the same when using Docker Offload as it is locally. You define your
-   application in a `compose.yaml` file, and then use `docker compose up` to build
-   and run it.
-
-4. Visit [http://localhost:8080](http://localhost:8080). Enter a correct or
-   incorrect fact in the prompt and hit enter. An agent searches DuckDuckGo to
-   verify it and another agent revises the output.
-
-   ![Screenshot of the application](./images/agentic-ai-app.png)
-
-5. Press ctrl-c in the terminal to stop the application when you're done.
-
-6. Run the following command to stop Docker Offload:
-
-   ```console
-   $ docker offload stop
-   ```
-
-## Step 3: Optional. Run the application locally
-
-If your machine meets the necessary hardware requirements, you can run the
+Your machine must meet the necessary hardware requirements to run the
 entire application stack locally using Docker Compose. This lets you test the
 application end-to-end, including the model and MCP gateway, without needing to
 run in the cloud. This particular example uses the [Gemma 3 4B
@@ -159,9 +113,11 @@ To run the application locally, follow these steps:
    incorrect fact in the prompt and hit enter. An agent searches DuckDuckGo to
    verify it and another agent revises the output.
 
+    ![Screenshot of the application](./images/agentic-ai-app.png)
+
 3. Press ctrl-c in the terminal to stop the application when you're done.
 
-## Step 4: Review the application environment
+## Step 3: Review the application environment
 
 You can find the `compose.yaml` file in the `adk/` directory. Open it in a text
 editor to see how the services are defined.
@@ -316,7 +272,7 @@ Together, these variables let the same ADK web server code seamlessly target eit
 - Hosted OpenAI: if you supply `OPENAI_API_KEY` (and optionally `OPENAI_MODEL_NAME`)
 - Model Runner: by remapping `MODEL_RUNNER_URL` and `MODEL_RUNNER_MODEL` into the OpenAI client’s expected variables
 
-## Step 5: Review the application
+## Step 4: Review the application
 
 The `adk` web application is an agent implementation that connects to the MCP
 gateway and a model through environment variables and API calls. It uses the
@@ -375,7 +331,7 @@ combine local model inference with external tool integrations in a structured,
 modular way.
 
 You also saw how Docker simplifies this process by providing a suite of tools
-that support local and cloud-based agentic AI development:
+that support agentic AI development:
 
 - [Docker Model Runner](../manuals/ai/model-runner/_index.md): Run and serve
   open-source models locally via OpenAI-compatible APIs.
@@ -386,9 +342,7 @@ that support local and cloud-based agentic AI development:
   MCP servers to connect agents to external tools and services.
 - [Docker Compose](/manuals/ai/compose/models-and-compose.md): Define and run
   multi-container agentic AI applications with a single file, using the same
-  workflow locally and in the cloud.
-- [Docker Offload](/offload/): Run GPU-intensive AI workloads in a secure, managed
-  cloud environment using the same Docker Compose workflow you use locally.
+  workflow.
 
 With these tools, you can develop and test agentic AI applications efficiently,
-locally or in the cloud, using the same consistent workflow throughout.
+using the same consistent workflow throughout.

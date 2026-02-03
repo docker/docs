@@ -12,6 +12,14 @@ tags: [Release notes, admin]
 
 This page provides details on new features, enhancements, known issues, and bug fixes across Docker Home, the Admin Console, billing, security, and subscription functionalities.
 
+## 2026-01-27
+
+### New
+
+- Administrators can now use an allow list with [Image Access
+  Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md)
+  to approve specific repositories that bypass image access controls.
+
 ## 2025-01-30
 
 ### New
@@ -24,7 +32,7 @@ This page provides details on new features, enhancements, known issues, and bug 
 ### New
 
 - New Docker subscriptions are now available. For more information, see [Docker
-  subscriptions and features](/manuals/subscription/details.md) and [Announcing
+  subscriptions and features](https://www.docker.com/pricing/) and [Announcing
   Upgraded Docker Plans: Simpler, More Value, Better Development and
   Productivity](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
 

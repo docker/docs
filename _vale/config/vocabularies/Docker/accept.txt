@@ -1,6 +1,8 @@
 (?i)[A-Z]{2,}'?s
 jq
+untracked
 ripgrep
+exfiltration
 sandboxing
 Adreno
 Aleksandrov
@@ -9,8 +11,10 @@ Anchore
 Apple
 Artifactory
 armhf
+[Aa]uditability
 auditable
 autolock
+[Aa]llowlist(ing)?
 Azure
 Azure AD
 bootup
@@ -40,6 +44,7 @@ containerd
 Couchbase
 CouchDB
 Crowdstrike
+[Cc]ybersecurity
 datacenter
 Datadog
 Ddosify
@@ -75,7 +80,7 @@ Entra
 EPERM
 ESXi
 Ethernet
-exploitability
+[Ee]xploitability
 [Ff]ailover
 Fargate
 Fedora
@@ -161,6 +166,7 @@ pgAdmin
 PKG
 plaintext
 plist
+pluggable
 Postgres
 PowerShell
 Python
@@ -168,7 +174,9 @@ Qualcomm
 Quickview
 rebalance
 reimplement
+Rego
 Rekor
+ROCm
 rollback
 rootful
 runc
@@ -178,11 +186,13 @@ scrollable
 SELinux
 Slack
 snapshotters?
+Sigstore
 Snyk
 Solr
 SonarQube
 Splunk
 SQLite
+stargz
 stdin
 stdout
 subfolder
@@ -211,6 +221,7 @@ Visual Studio Code
 VMware
 vpnkit
 vSphere
+Vulkan
 Vue
 Wasm
 Wasmtime
@@ -238,6 +249,7 @@ Zsh
 [Cc]ompose
 [Cc]onfigs
 [dD]eduplicate
+[Dd]enylist
 [Dd]ev
 [Dd]iscoverability
 [Dd]istroless
@@ -288,4 +300,6 @@ Zsh
 [Vv]irtiofs
 [Vv]irtualize
 [Ww]alkthrough
-
+[Tt]oolsets?
+[Rr]erank(ing|ed)?
+[Ee]vals?

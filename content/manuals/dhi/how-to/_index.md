@@ -13,8 +13,8 @@ params:
       description: Learn how to mirror an image into your organization's namespace and optionally push it to another private registry.
       icon: compare_arrows
       link: /dhi/how-to/mirror/
-    - title: Customize a Docker Hardened Image
-      description: Learn how to customize a DHI to suit your organization's needs.
+    - title: Customize a Docker Hardened Image or chart
+      description: Learn how to customize Docker Hardened Images and charts.
       icon: settings
       link: /dhi/how-to/customize/
     - title: Use a Docker Hardened Image
@@ -29,25 +29,25 @@ params:
       description: Learn how to use a Docker Hardened Image chart.
       icon: leaderboard
       link: /dhi/how-to/helm/
-    - title: Manage Docker Hardened Images
+    - title: Use Extended Lifecycle Support for Docker Hardened Images
+      description: Learn how to use Extended Lifecycle Support with Docker Hardened Images.
+      icon: update
+      link: /dhi/how-to/els/
+    - title: Manage Docker Hardened Images and charts
       description: Learn how to manage your mirrored and customized Docker Hardened Images in your organization.
       icon: reorder
       link: /dhi/how-to/manage/
-    - title: Migrate an existing application to use Docker Hardened Images
-      description: Follow a step-by-step guide to update your Dockerfiles and adopt Docker Hardened Images for secure, minimal, and production-ready builds.
-      icon: directions_run
-      link: /dhi/how-to/migrate/
   grid_evaluate:
     - title: Compare Docker Hardened Images
       description: Learn how to compare Docker Hardened Images with other container images to evaluate security improvements and differences.
       icon: compare
       link: /dhi/how-to/compare/
   grid_verify:
-    - title: Verify a Docker Hardened Image
-      description: Use Docker Scout or cosign to verify signed attestations like SBOMs, provenance, and vulnerability data for Docker Hardened Images.
+    - title: Verify a Docker Hardened Image or chart
+      description: Use Docker Scout or cosign to verify signed attestations like SBOMs, provenance, and vulnerability data for Docker Hardened Images and charts.
       icon: check_circle
       link: /dhi/how-to/verify/
-    - title: Scan a Docker Hardened Image
+    - title: Scan Docker Hardened Images
       description: Learn how to scan Docker Hardened Images for known vulnerabilities using Docker Scout, Grype, or Trivy.
       icon: bug_report
       link: /dhi/how-to/scan/

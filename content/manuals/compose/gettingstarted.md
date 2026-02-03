@@ -8,6 +8,9 @@ keywords: docker compose example, docker compose tutorial, how to use docker com
 title: Docker Compose Quickstart
 linkTitle: Quickstart
 weight: 30
+aliases:
+- /compose/samples-for-compose/
+- /compose/support-and-feedback/samples-for-compose/
 ---
 
 This tutorial aims to introduce fundamental concepts of Docker Compose by guiding you through the development of a basic Python web application. 

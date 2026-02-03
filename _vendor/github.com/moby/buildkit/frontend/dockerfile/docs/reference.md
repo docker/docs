@@ -880,7 +880,7 @@ FROM ubuntu
 RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   --mount=type=cache,target=/var/lib/apt,sharing=locked \
-  apt update && apt-get --no-install-recommends install -y gcc
+  apt-get update && apt-get --no-install-recommends install -y gcc
 ```
 
 Apt needs exclusive access to its data, so the caches use the option
@@ -1322,9 +1322,10 @@ The available `[OPTIONS]` are:
 | --------------------------------------- | -------------------------- |
 | [`--keep-git-dir`](#add---keep-git-dir) | 1.1                        |
 | [`--checksum`](#add---checksum)         | 1.6                        |
-| [`--chown`](#add---chown---chmod)       |                            |
-| [`--chmod`](#add---chown---chmod)       | 1.2                        |
+| [`--chmod`](#add---chmod)               | 1.2                        |
+| [`--chown`](#add---chown)               |                            |
 | [`--link`](#add---link)                 | 1.4                        |
+| [`--unpack`](#add---unpack)             | 1.17                       |
 | [`--exclude`](#add---exclude)           | 1.19                       |
 
 The `ADD` instruction copies new files or directories from `<src>` and adds
@@ -1572,27 +1573,30 @@ ADD --keep-git-dir=true https://github.com/moby/buildkit.git#v0.10.1 /buildkit
 ADD [--checksum=<hash>] <src> ... <dir>
 ```
 
-The `--checksum` flag lets you verify the checksum of a remote resource. The
-checksum is formatted as `sha256:<hash>`. SHA-256 is the only supported hash
-algorithm.
+The `--checksum` flag lets you verify the checksum of a remote Git or HTTP
+resource:
+
+- For Git sources, the checksum is the commit SHA. It can be the full commit
+  SHA or match on the prefix (1 or more characters).
+- For HTTP sources, the checksum is the SHA-256 content digest, formatted as
+  `sha256:<hash>`. SHA-256 is the only supported hash algorithm.
 
 ```dockerfile
+ADD --checksum=be1f38e https://github.com/moby/buildkit.git#v0.26.2 /
 ADD --checksum=sha256:24454f830cdb571e2c4ad15481119c43b3cafd48dd869a9b2945d1036d1dc68d https://mirrors.edge.kernel.org/pub/linux/kernel/Historic/linux-0.01.tar.gz /
 ```
 
-The `--checksum` flag only supports HTTP(S) sources.
+### ADD --chmod
 
-### ADD --chown --chmod
+See [`COPY --chmod`](#copy---chmod).
 
-See [`COPY --chown --chmod`](#copy---chown---chmod).
+### ADD --chown
+
+See [`COPY --chown`](#copy---chown).
 
 ### ADD --link
 
 See [`COPY --link`](#copy---link).
-
-### ADD --exclude
-
-See [`COPY --exclude`](#copy---exclude).
 
 ### ADD --unpack
 
@@ -1614,6 +1618,10 @@ ADD --unpack=true https://example.com/archive.tar.gz /download
 ADD --unpack=false my-archive.tar.gz .
 ```
 
+### ADD --exclude
+
+See [`COPY --exclude`](#copy---exclude).
+
 ## COPY
 
 COPY has two forms.
@@ -1629,8 +1637,8 @@ The available `[OPTIONS]` are:
 | Option                             | Minimum Dockerfile version |
 | ---------------------------------- | -------------------------- |
 | [`--from`](#copy---from)           |                            |
-| [`--chown`](#copy---chown---chmod) |                            |
-| [`--chmod`](#copy---chown---chmod) | 1.2                        |
+| [`--chmod`](#copy---chmod)         | 1.2                        |
+| [`--chown`](#copy---chown)         |                            |
 | [`--link`](#copy---link)           | 1.4                        |
 | [`--parents`](#copy---parents)     | 1.20                       |
 | [`--exclude`](#copy---exclude)     | 1.19                       |
@@ -1800,32 +1808,52 @@ COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
 The source path of `COPY --from` is always resolved from filesystem root of the
 image or stage that you specify.
 
-### COPY --chown --chmod
-
-> [!NOTE]
-> Only octal notation is currently supported. Non-octal support is tracked in
-> [moby/buildkit#1951](https://github.com/moby/buildkit/issues/1951).
+### COPY --chmod
 
 ```dockerfile
-COPY [--chown=<user>:<group>] [--chmod=<perms> ...] <src> ... <dest>
+COPY [--chmod=<perms>] <src> ... <dest>
 ```
 
-The `--chown` and `--chmod` features are only supported on Dockerfiles used to build Linux containers,
-and doesn't work on Windows containers. Since user and group ownership concepts do
-not translate between Linux and Windows, the use of `/etc/passwd` and `/etc/group` for
-translating user and group names to IDs restricts this feature to only be viable for
-Linux OS-based containers.
+The `--chmod` flag supports octal notation (e.g., `755`, `644`) and symbolic
+notation (e.g., `+x`, `g=u`). Symbolic notation (added in Dockerfile version 1.14)
+is useful when octal isn't flexible enough. For example, `u=rwX,go=rX` sets
+directories to 755 and files to 644, while preserving the executable bit on files
+that already have it. (Capital `X` means "executable only if it's a directory or
+already executable.")
 
-All files and directories copied from the build context are created with a UID and GID of `0` unless the
-optional `--chown` flag specifies a given username, groupname, or UID/GID
-combination to request specific ownership of the copied content. The
-format of the `--chown` flag allows for either username and groupname strings
-or direct integer UID and GID in any combination. Providing a username without
-groupname or a UID without GID will use the same numeric UID as the GID. If a
-username or groupname is provided, the container's root filesystem
-`/etc/passwd` and `/etc/group` files will be used to perform the translation
-from name to integer UID or GID respectively. The following examples show
-valid definitions for the `--chown` flag:
+For more information about symbolic notation syntax, see the
+[chmod(1) manual](https://man.freebsd.org/cgi/man.cgi?chmod).
+
+Examples using octal notation:
+
+```dockerfile
+COPY --chmod=755 app.sh /app/
+COPY --chmod=644 file.txt /data/
+ARG MODE=440
+COPY --chmod=$MODE . .
+```
+
+Examples using symbolic notation:
+
+```dockerfile
+COPY --chmod=+x script.sh /app/
+COPY --chmod=u=rwX,go=rX . /app/
+COPY --chmod=g=u config/ /config/
+```
+
+The `--chmod` flag is not supported when building Windows containers.
+
+### COPY --chown
+
+```dockerfile
+COPY [--chown=<user>:<group>] <src> ... <dest>
+```
+
+Sets ownership of copied files. Without this flag, files are created with UID
+and GID of 0.
+
+The flag accepts usernames, group names, UIDs, or GIDs in any combination.
+If you specify only a user, the GID is set to the same numeric value as the UID.
 
 ```dockerfile
 COPY --chown=55:mygroup files* /somedir/
@@ -1835,22 +1863,12 @@ COPY --chown=10:11 files* /somedir/
 COPY --chown=myuser:mygroup --chmod=644 files* /somedir/
 ```
 
-If the container root filesystem doesn't contain either `/etc/passwd` or
-`/etc/group` files and either user or group names are used in the `--chown`
-flag, the build will fail on the `COPY` operation. Using numeric IDs requires
-no lookup and does not depend on container root filesystem content.
+When using names instead of numeric IDs, BuildKit resolves them using
+`/etc/passwd` and `/etc/group` in the container's root filesystem. If these
+files are missing or don't contain the specified names, the build fails.
+Numeric IDs don't require this lookup.
 
-With the Dockerfile syntax version 1.10.0 and later,
-the `--chmod` flag supports variable interpolation,
-which lets you define the permission bits using build arguments:
-
-```dockerfile
-# syntax=docker/dockerfile:1.10
-FROM alpine
-WORKDIR /src
-ARG MODE=440
-COPY --chmod=$MODE . .
-```
+The `--chown` flag is not supported when building Windows containers.
 
 ### COPY --link
 
@@ -2358,7 +2376,7 @@ USER <UID>[:<GID>]
 The `USER` instruction sets the user name (or UID) and optionally the user
 group (or GID) to use as the default user and group for the remainder of the
 current stage. The specified user is used for `RUN` instructions and at
-runtime, runs the relevant `ENTRYPOINT` and `CMD` commands.
+runtime runs the relevant `ENTRYPOINT` and `CMD` commands.
 
 > Note that when specifying a group for the user, the user will have _only_ the
 > specified group membership. Any other configured group memberships will be ignored.
@@ -2426,9 +2444,15 @@ Therefore, to avoid unintended operations in unknown directories, it's best prac
 ARG <name>[=<default value>] [<name>[=<default value>]...]
 ```
 
-The `ARG` instruction defines a variable that users can pass at build-time to
+The `ARG` instruction defines a variable that users can pass at build time to
 the builder with the `docker build` command using the `--build-arg <varname>=<value>`
-flag.
+flag. This variable can be used in subsequent instructions such as `FROM`, `ENV`,
+`WORKDIR`, and others using the `${VAR}` or `$VAR` template syntax.
+It is also passed to all subsequent `RUN` instructions as a build-time
+environment variable.
+
+Unlike `ENV`, an `ARG` variable is not embedded in the image and is not available
+in the final container.
 
 > [!WARNING]
 > It isn't recommended to use build arguments for passing secrets such as

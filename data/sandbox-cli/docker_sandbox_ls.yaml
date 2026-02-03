@@ -1,14 +1,21 @@
 command: docker sandbox ls
 aliases: docker sandbox ls, docker sandbox list
-short: List sandboxes
-long: |-
-    List all sandboxes.
-
-    This command lists all sandboxes using the Docker API.
-usage: docker sandbox ls
+short: List VMs
+long: List all VMs managed by sandboxd with their sandboxes
+usage: docker sandbox ls [OPTIONS]
 pname: docker sandbox
 plink: docker_sandbox.yaml
 options:
+    - option: json
+      value_type: bool
+      default_value: "false"
+      description: Output in JSON format
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: no-trunc
       value_type: bool
       default_value: "false"
@@ -24,7 +31,7 @@ options:
       shorthand: q
       value_type: bool
       default_value: "false"
-      description: Only display sandbox IDs
+      description: Only display VM names
       details_url: '#quiet'
       deprecated: false
       hidden: false
@@ -44,28 +51,38 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: socket
+      value_type: string
+      description: |
+        Connect to daemon at specific socket path (for development/debugging)
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 examples: |-
-    ### List all sandboxes
+    ### List all VMs
 
     ```console
     $ docker sandbox ls
-    SANDBOX ID    NAME         WORKSPACE                    CREATED
-    abc123def     my-project   /home/user/my-project        2 hours ago
-    def456ghi     ml-work      /home/user/ml-projects       1 day ago
+    VM ID         NAME       STATUS    WORKSPACE                    SOCKET PATH                           SANDBOXES    AGENTS
+    abc123def     claude-vm  running   /home/user/my-project        /Users/.../docker-1764682554072.sock  2           claude
+    def456ghi     gemini-vm  stopped   /home/user/ml-projects
     ```
 
-    ### Show only sandbox IDs (--quiet) {#quiet}
+    ### Show only VM names (--quiet) {#quiet}
 
     ```text
     --quiet
     ```
 
-    Output only sandbox IDs:
+    Output only VM names:
 
     ```console
     $ docker sandbox ls --quiet
-    abc123def
-    def456ghi
+    claude-vm
+    gemini-vm
     ```
 
     ### Don't truncate output (--no-trunc) {#no-trunc}
@@ -74,16 +91,49 @@ examples: |-
     --no-trunc
     ```
 
-    By default, long sandbox IDs and workspace paths are truncated for readability. Use `--no-trunc` to display the full values:
+    By default, long VM IDs, workspace paths, and socket paths are truncated for readability. Use `--no-trunc` to display the full values:
 
     ```console
     $ docker sandbox ls
-    SANDBOX ID    TEMPLATE  NAME         WORKSPACE                     STATUS   CREATED
-    abc123def456  ubuntu    my-project   /home/user/.../my-project     running  2 hours ago
+    VM ID         NAME       STATUS    WORKSPACE                   SOCKET PATH                           SANDBOXES    AGENTS
+    abc123def     claude-vm  running   /home/user/.../my-project   ...sandboxes/vm/claude-vm/docker.sock  2           claude
 
     $ docker sandbox ls --no-trunc
-    SANDBOX ID              TEMPLATE  NAME         WORKSPACE                                          STATUS   CREATED
-    abc123def456ghi789jkl   ubuntu    my-project   /home/user/very/long/path/to/my-project           running  2 hours ago
+    VM ID                     NAME       STATUS    WORKSPACE                                          SOCKET PATH                                                              SANDBOXES    AGENTS
+    abc123def456ghi789jkl     claude-vm  running   /home/user/very/long/path/to/my-project           /Users/user/.docker/sandboxes/vm/claude-vm/docker-1764682554072.sock    2           claude
+    ```
+
+    ### JSON output (--json)
+
+    ```text
+    --json
+    ```
+
+    Output detailed VM information in JSON format:
+
+    ```console
+    $ docker sandbox ls --json
+    {
+      "vms": [
+        {
+          "name": "claude-vm",
+          "agent": "claude",
+          "status": "running",
+          "socket_path": "/Users/user/.docker/sandboxes/vm/claude-vm/docker-1234567890.sock",
+          "sandbox_count": 2,
+          "workspaces": [
+            "/home/user/my-project",
+            "/home/user/another-project"
+          ]
+        },
+        {
+          "name": "gemini-vm",
+          "agent": "gemini",
+          "status": "stopped",
+          "sandbox_count": 0
+        }
+      ]
+    }
     ```
 deprecated: false
 hidden: false

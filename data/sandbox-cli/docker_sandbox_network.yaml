@@ -1,0 +1,57 @@
+command: docker sandbox network
+short: Manage sandbox networking
+long: Manage sandbox networking
+usage: docker sandbox network
+pname: docker sandbox
+plink: docker_sandbox.yaml
+cname:
+    - docker sandbox network log
+    - docker sandbox network proxy
+clink:
+    - docker_sandbox_network_log.yaml
+    - docker_sandbox_network_proxy.yaml
+inherited_options:
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: socket
+      value_type: string
+      description: |
+        Connect to daemon at specific socket path (for development/debugging)
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+examples: |-
+    ### View network logs
+
+    ```console
+    $ docker sandbox network log
+    ```
+
+    ### Configure proxy for a sandbox
+
+    ```console
+    $ docker sandbox network proxy my-sandbox --block-host example.com
+    ```
+
+    See the subcommands for more details:
+    - [`docker sandbox network log`](/reference/cli/docker/sandbox/network/log/) - Show network logs
+    - [`docker sandbox network proxy`](/reference/cli/docker/sandbox/network/proxy/) - Manage proxy configuration
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

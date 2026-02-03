@@ -14,7 +14,7 @@ Developed by Google and maintained by the Open Source Security Foundation
 tampering, improve integrity, and secure packages and infrastructure in software
 projects.
 
-SLSA defines [four build levels (0–3)](https://slsa.dev/spec/latest/levels) of
+SLSA defines [four build levels (0–3)](https://slsa.dev/spec/latest/build-track-basics) of
 increasing security rigor, focusing on areas such as build provenance, source
 integrity, and build environment security. Each level builds upon the previous
 one, offering a structured approach to achieving higher levels of software
@@ -59,7 +59,7 @@ reduces the risk of supply chain attacks.
 Docker Hardened Images (DHIs) are secure-by-default container images
 purpose-built for modern production environments. Each DHI is cryptographically
 signed and complies with the [SLSA Build Level 3
-standard](https://slsa.dev/spec/latest/levels#build-l3-hardened-builds), ensuring
+standard](https://slsa.dev/spec/latest/build-track-basics#build-l3), ensuring
 verifiable build provenance and integrity.
 
 By integrating SLSA-compliant DHIs into your development and deployment processes, you can:
@@ -86,7 +86,7 @@ demonstrate adherence to SLSA Build Level 3 standards.
 To get and verify SLSA provenance for a DHI, you can use Docker Scout.
 
 ```console
-$ docker scout attest get <your-namespace>/dhi-<image>:<tag> \
+$ docker scout attest get dhi.io/<image>:<tag> \
   --predicate-type https://slsa.dev/provenance/v0.2 \
   --verify
 ```
@@ -94,11 +94,12 @@ $ docker scout attest get <your-namespace>/dhi-<image>:<tag> \
 For example:
 
 ```console
-$ docker scout attest get docs/dhi-node:20.19-debian12-fips-20250701182639 \
+$ docker scout attest get dhi.io/node:20.19-debian12 \
   --predicate-type https://slsa.dev/provenance/v0.2 \
   --verify
 ```
 
 ## Resources
 
-For more details about SLSA definitions and Docker Build, see [SLSA definitions](/build/metadata/attestations/slsa-definitions/).
+For more details about SLSA definitions and Docker Build, see [SLSA
+definitions](/build/metadata/attestations/slsa-definitions/).

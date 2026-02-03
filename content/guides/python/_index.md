@@ -11,6 +11,7 @@ aliases:
   - /language/python/
   - /guides/language/python/
 languages: [python]
+tags: []
 params:
   time: 20 minutes
 ---

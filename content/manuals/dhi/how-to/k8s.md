@@ -6,20 +6,20 @@ keywords: use hardened image, kubernetes, k8s
 weight: 31
 ---
 
-{{< summary-bar feature_name="Docker Hardened Images" >}}
-
 ## Authentication
 
-To be able to use Docker Hardened Images in Kubernetes, you need to create a 
+To be able to use Docker Hardened Images in Kubernetes, you need to create a
 Kubernetes secret for pulling images from your mirror or internal registry.
 
 > [!NOTE]
 >
 > You need to create this secret in each Kubernetes namespace that uses a DHI.
 
-Create a secret using a Personal Access Token (PAT). Ensure the token has at least
-read-only access to private repositories. For Docker Hub replace `<registry server>`
-with `docker.io`.
+Create a secret using a Personal Access Token (PAT). Ensure the token has at
+least read-only access to public repositories. For Docker Hardened Images
+replace `<registry server>` with `dhi.io`. If you are using a mirrored
+repository, replace it with your mirror's registry server, such as `docker.io`
+for Docker Hub.
 
 ```console
 $ kubectl create -n <kubernetes namespace> secret docker-registry <secret name> --docker-server=<registry server> \
@@ -39,7 +39,7 @@ metadata:
 spec:
   containers:
   - name: test
-    image: <your-namespace>/dhi-bash:5
+    image: bash:5
     command: [ "sh", "-c", "echo 'Hello from DHI in Kubernetes!'" ]
   imagePullSecrets:
   - name: <secret name>

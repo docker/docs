@@ -1,55 +1,28 @@
 command: docker sandbox run
-short: Run an AI agent inside a sandbox
+short: Run an agent in a sandbox
 long: |-
-    Run an AI agent inside a sandbox with access to a host workspace.
+    Run an agent in a sandbox. Create the sandbox if it does not exist.
 
-    The agent argument must be one of: claude, gemini.
-    Agent-specific options can be passed after the agent name.
-    If no workspace is specified via the "--workspace" option, the current working directory is used.
-    The workspace is exposed inside the sandbox at the same path as on the host.
-usage: docker sandbox run [options] <agent> [agent-options]
+    Pass agent arguments after the "--" separator.
+usage: docker sandbox run SANDBOX [-- AGENT_ARGS...] | AGENT WORKSPACE [-- AGENT_ARGS...]
 pname: docker sandbox
 plink: docker_sandbox.yaml
 options:
-    - option: credentials
-      value_type: string
-      default_value: sandbox
-      description: Credentials source (host, sandbox, or none)
-      details_url: '#credentials'
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
     - option: detached
       shorthand: d
       value_type: bool
       default_value: "false"
-      description: Create sandbox without running agent interactively
+      description: Return sandbox ID without running agent (hidden, for testing)
       deprecated: false
-      hidden: false
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: env
-      shorthand: e
-      value_type: stringSlice
-      default_value: '[]'
-      description: 'Set environment variables (format: KEY=VALUE)'
-      details_url: '#env'
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: mount-docker-socket
+    - option: load-local-template
       value_type: bool
       default_value: "false"
-      description: Mount the host's Docker socket into the sandbox
-      details_url: '#mount-docker-socket'
+      description: Load a locally built template image into the sandbox
       deprecated: false
       hidden: false
       experimental: false
@@ -58,19 +31,8 @@ options:
       swarm: false
     - option: name
       value_type: string
-      description: Name for the sandbox
+      description: 'Name for the sandbox (default: <agent>-<workdir>)'
       details_url: '#name'
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: quiet
-      shorthand: q
-      value_type: bool
-      default_value: "false"
-      description: Suppress verbose output
       deprecated: false
       hidden: false
       experimental: false
@@ -89,31 +51,6 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: volume
-      shorthand: v
-      value_type: stringSlice
-      default_value: '[]'
-      description: |
-        Bind mount a volume or host file or directory into the sandbox (format: hostpath:sandboxpath[:readonly|:ro])
-      details_url: '#volume'
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: workspace
-      shorthand: w
-      value_type: string
-      default_value: .
-      description: Workspace path
-      details_url: '#workspace'
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
 inherited_options:
     - option: debug
       shorthand: D
@@ -126,91 +63,47 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: socket
+      value_type: string
+      description: |
+        Connect to daemon at specific socket path (for development/debugging)
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 examples: |-
-    ### Run Claude in the current directory
+    ### Create and run Claude in the current directory
 
     ```console
-    $ docker sandbox run claude
+    $ docker sandbox run claude .
     ```
 
-    ### Specify a workspace directory (-w, --workspace) {#workspace}
-
-    ```text
-    --workspace PATH
-    ```
-
-    Run the agent in a specific directory:
+    ### Run an existing sandbox
 
     ```console
-    $ docker sandbox run --workspace ~/projects/my-app claude
+    $ docker sandbox run my-sandbox
+    ```
+
+    ### Create and run with a specific workspace
+
+    ```console
+    $ docker sandbox run claude ~/projects/my-app
     ```
 
     The workspace directory is mounted at the same absolute path inside the sandbox.
 
-    ### Enable Docker-in-Docker (--mount-docker-socket) {#mount-docker-socket}
+    ### Name the sandbox (--name) {#name}
 
     ```text
-    --mount-docker-socket
+    --name NAME
     ```
 
-    Mount the host's Docker socket into the sandbox, giving the agent access to Docker commands:
+    Assign a custom name when creating a sandbox:
 
     ```console
-    $ docker sandbox run --mount-docker-socket claude
-    ```
-
-    > [!CAUTION]
-    > This grants the agent full access to your Docker daemon with root-level
-    > privileges. Only use when you trust the code being executed.
-
-    The agent can now build images, run containers, and manage your Docker environment.
-
-    ### Set environment variables (-e, --env) {#env}
-
-    ```text
-    --env KEY=VALUE
-    ```
-
-    Pass environment variables to the sandbox:
-
-    ```console
-    $ docker sandbox run \
-      --env NODE_ENV=development \
-      --env DATABASE_URL=postgresql://localhost/myapp \
-      claude
-    ```
-
-    ### Mount additional volumes (-v, --volume) {#volume}
-
-    ```text
-    --volume HOST_PATH:CONTAINER_PATH[:ro]
-    ```
-
-    Mount additional directories or files into the sandbox:
-
-    ```console
-    $ docker sandbox run \
-      --volume ~/datasets:/data:ro \
-      --volume ~/models:/models \
-      claude
-    ```
-
-    Use `:ro` or `:readonly` to make mounts read-only.
-
-    ### Configure credential access (--credentials) {#credentials}
-
-    ```text
-    --credentials MODE
-    ```
-
-    Control how the agent accesses credentials. Valid modes are:
-
-    - `sandbox` (default): Authenticate once and share credentials across sandboxes
-    - `host`: Share host credentials (~/.gitconfig, ~/.ssh, etc.)
-    - `none`: Handle authentication manually
-
-    ```console
-    $ docker sandbox run --credentials host claude
+    $ docker sandbox run --name my-project claude .
     ```
 
     ### Use a custom base image (-t, --template) {#template}
@@ -219,25 +112,29 @@ examples: |-
     --template IMAGE
     ```
 
-    Specify a custom container image to use as the sandbox base:
+    Specify a custom container image when creating a sandbox:
 
     ```console
-    $ docker sandbox run --template python:3-alpine claude
+    $ docker sandbox run --template python:3-alpine claude .
     ```
 
     By default, each agent uses a pre-configured image. The `--template` option
     lets you substitute a different image.
 
-    ### Name the sandbox (--name) {#name}
+    ### Pass arguments to the agent
 
-    ```text
-    --name NAME
-    ```
-
-    Assign a custom name to the sandbox for easier identification:
+    Use `--` to separate sandbox options from agent arguments:
 
     ```console
-    $ docker sandbox run --name my-project claude
+    $ docker sandbox run claude . -- -p "What version are you running?"
+    ```
+
+    ### Run with locally built template
+
+    Use `--load-local-template` to test local template changes:
+
+    ```console
+    $ docker sandbox run --load-local-template claude .
     ```
 deprecated: false
 hidden: false
