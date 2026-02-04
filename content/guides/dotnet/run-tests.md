@@ -53,7 +53,7 @@ The following is the updated Dockerfile.
 ```dockerfile {hl_lines="9"}
 # syntax=docker/dockerfile:1
 
-FROM --platform=$BUILDPLATFORM <your-namespace>/dhi-dotnet:10-sdk AS build
+FROM --platform=$BUILDPLATFORM dhi.io/dotnet:10-sdk AS build
 ARG TARGETARCH
 COPY . /source
 WORKDIR /source/src
@@ -61,12 +61,12 @@ RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
     dotnet publish -a ${TARGETARCH/amd64/x64} --use-current-runtime --self-contained false -o /app
 RUN dotnet test /source/tests
 
-FROM <your-namespace>/dhi-dotnet:10-sdk AS development
+FROM dhi.io/dotnet:10-sdk AS development
 COPY . /source
 WORKDIR /source/src
 CMD dotnet run --no-launch-profile
 
-FROM <your-namespace>/dhi-aspnetcore:10
+FROM dhi.io/aspnetcore:10
 WORKDIR /app
 COPY --from=build /app .
 ENTRYPOINT ["dotnet", "myWebApp.dll"]

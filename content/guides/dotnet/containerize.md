@@ -46,9 +46,22 @@ Now that you have an application, you can create the necessary Docker assets to 
 {{< tabs >}}
 {{< tab name="Using Docker Hardened Images" >}}
 
-Docker Hardened Images (DHIs) for .NET are available on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/aspnetcore). Unlike using the Docker Official Image, you must first mirror the image into your organization. Follow the instructions in the [DHI quickstart](/dhi/get-started/) to create a mirrored repository.
+Docker Hardened Images (DHIs) for .NET are available in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/aspnetcore). Docker Hardened Images are freely available to everyone with no subscription required. You can pull and use them like any other Docker image after signing in to the DHI registry. For more information, see the [DHI quickstart](/dhi/get-started/) guide.
 
-Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace>/dhi-aspnetcore:<tag>`.
+1. Sign in to the DHI registry:
+   ```console
+   $ docker login dhi.io
+   ```
+
+2. Pull the .NET SDK DHI (check the catalog for available versions):
+   ```console
+   $ docker pull dhi.io/dotnet:10-sdk
+   ```
+
+3. Pull the ASP.NET Core runtime DHI (check the catalog for available versions):
+   ```console
+   $ docker pull dhi.io/aspnetcore:10
+   ```
 
 You can use `docker init` to generate Docker assets, then modify the Dockerfile to use DHI images:
 
@@ -70,19 +83,19 @@ Let's get started!
 ? What local port do you want to use to access your server? 8080
 ```
 
-Then update your Dockerfile to use DHI images:
+In the following Dockerfile, the `FROM` instructions use `dhi.io/dotnet:10-sdk` and `dhi.io/aspnetcore:10` as the base images.
 
 ```dockerfile {title=Dockerfile}
 # syntax=docker/dockerfile:1
 
-FROM --platform=$BUILDPLATFORM <your-namespace>/dhi-dotnet:10-sdk AS build
+FROM --platform=$BUILDPLATFORM dhi.io/dotnet:10-sdk AS build
 ARG TARGETARCH
 COPY . /source
 WORKDIR /source/src
 RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
     dotnet publish -a ${TARGETARCH/amd64/x64} --use-current-runtime --self-contained false -o /app
 
-FROM <your-namespace>/dhi-aspnetcore:10
+FROM dhi.io/aspnetcore:10
 WORKDIR /app
 COPY --from=build /app .
 ENTRYPOINT ["dotnet", "myWebApp.dll"]
@@ -90,7 +103,7 @@ ENTRYPOINT ["dotnet", "myWebApp.dll"]
 
 > [!NOTE]
 >
-> DHI runtime images already run as a non-root user (`nonroot`), so there's no need to create a user or specify `USER` in your Dockerfile. This reduces the attack surface and simplifies your configuration.
+> DHI runtime images already run as a non-root user (`nonroot`, UID 65532), so there's no need to create a user or specify `USER` in your Dockerfile. This reduces the attack surface and simplifies your configuration.
 
 {{< /tab >}}
 {{< tab name="Using the official .NET 10 image" >}}

@@ -310,19 +310,19 @@ The following is the updated Dockerfile.
 ```Dockerfile {hl_lines="10-13"}
 # syntax=docker/dockerfile:1
 
-FROM --platform=$BUILDPLATFORM <your-namespace>/dhi-dotnet:10-sdk AS build
+FROM --platform=$BUILDPLATFORM dhi.io/dotnet:10-sdk AS build
 ARG TARGETARCH
 COPY . /source
 WORKDIR /source/src
 RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
     dotnet publish -a ${TARGETARCH/amd64/x64} --use-current-runtime --self-contained false -o /app
 
-FROM <your-namespace>/dhi-dotnet:10-sdk AS development
+FROM dhi.io/dotnet:10-sdk AS development
 COPY . /source
 WORKDIR /source/src
 CMD dotnet run --no-launch-profile
 
-FROM <your-namespace>/dhi-aspnetcore:10
+FROM dhi.io/aspnetcore:10
 WORKDIR /app
 COPY --from=build /app .
 ENTRYPOINT ["dotnet", "myWebApp.dll"]
@@ -409,7 +409,7 @@ secrets:
     file: db/password.txt
 ```
 
-Your containerized application will now use the SDK image (either `<your-namespace>/dhi-dotnet:10-sdk` for DHI or `mcr.microsoft.com/dotnet/sdk:10.0-alpine` for official images), which includes development tools like `dotnet test`. Continue to the next section to learn how you can run `dotnet test`.
+Your containerized application will now use the SDK image (either `dhi.io/dotnet:10-sdk` for DHI or `mcr.microsoft.com/dotnet/sdk:10.0-alpine` for official images), which includes development tools like `dotnet test`. Continue to the next section to learn how you can run `dotnet test`.
 
 ## Summary
 

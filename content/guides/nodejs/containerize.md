@@ -323,9 +323,17 @@ Choosing DHI offers the advantage of a production-ready image that is lightweigh
 
 {{< tabs >}}
 {{< tab name="Using Docker Hardened Images" >}}
-Docker Hardened Images (DHIs) are available for Node.js on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/node). Unlike using the Docker Official Image, you must first mirror the Node.js image into your organization and then use it as your base image. Follow the instructions in the [DHI quickstart](/dhi/get-started/) to create a mirrored repository for Node.js.
+Docker Hardened Images (DHIs) are available for Node.js in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/node). Docker Hardened Images are freely available to everyone with no subscription required. You can pull and use them like any other Docker image after signing in to the DHI registry. For more information, see the [DHI quickstart](/dhi/get-started/) guide.
 
-Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace>/dhi-node:<tag>`. In the following Dockerfile, the `FROM` instruction uses `<your-namespace>/dhi-node:24-alpine3.22-dev` as the base image.
+1. Sign in to the DHI registry:
+
+   $ docker login dhi.io
+
+2. Pull the Node.js DHI (check the catalog for available versions):
+
+   $ docker pull dhi.io/node:24-alpine3.22-dev
+
+In the following Dockerfile, the `FROM` instruction uses `dhi.io/node:24-alpine3.22-dev` as the base image.
 
 ```dockerfile
 # ========================================
@@ -333,7 +341,7 @@ Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace
 # Node.js TypeScript Application (Using DHI)
 # ========================================
 
-FROM <your-namespace>/dhi-node:24-alpine3.22-dev AS base
+FROM dhi.io/node:24-alpine3.22-dev AS base
 
 # Set working directory
 WORKDIR /app
@@ -419,7 +427,7 @@ CMD ["npm", "run", "dev:docker"]
 # ========================================
 # Production Stage
 # ========================================
-FROM <your-namespace>/dhi-node:24-alpine3.22-dev AS production
+FROM dhi.io/node:24-alpine3.22-dev AS production
 
 # Set working directory
 WORKDIR /app
