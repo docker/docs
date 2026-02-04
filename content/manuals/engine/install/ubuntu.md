@@ -52,7 +52,6 @@ To install Docker Engine, you need the 64-bit version of one of these Ubuntu
 versions:
 
 - Ubuntu Questing 25.10
-- Ubuntu Plucky 25.04
 - Ubuntu Noble 24.04 (LTS)
 - Ubuntu Jammy 22.04 (LTS)
 
