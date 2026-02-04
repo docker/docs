@@ -509,7 +509,7 @@ Top-level RAG source:
 
 | Field        | Type     | Description                                                     |
 | ------------ | -------- | --------------------------------------------------------------- |
-| `docs`       | []string | Document paths (suppports glob patterns, respects `.gitignore`) |
+| `docs`       | []string | Document paths (supports glob patterns, respects `.gitignore`) |
 | `tool`       | object   | Customize RAG tool name/description/instruction                 |
 | `strategies` | []object | Retrieval strategies (see above for strategy-specific fields)   |
 | `results`    | object   | Post-processing (fusion, reranking, limits)                     |
