@@ -155,7 +155,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For all platforms
 
 - Improved alignment of the Ask Gordon streaming indicator so it stays in sync with content on large screens.
-- Fixed a bug where `docker debug` failed on containers started with environement variables but no '='. For example, `docker run -e NONEXISTENT_ENV_VAR`.
+- Fixed a bug where `docker debug` failed on containers started with environment variables but no '='. For example, `docker run -e NONEXISTENT_ENV_VAR`.
 
 ## 4.56.0
 
@@ -612,7 +612,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Security
 
-We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266), a critical vulnerability affecting the NVIDIA Container Toolkit in CDI mode up to version 1.17.7. Docker Desktop includes version 1.17.8, which is not impacted. However, older versions of Docker Desktop that bundled earlier toolkit versions may be affected if CDI mode was manually enabled. Uprade to Docker Desktop 4.44 or later to ensure you're using the patched version.
+We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266), a critical vulnerability affecting the NVIDIA Container Toolkit in CDI mode up to version 1.17.7. Docker Desktop includes version 1.17.8, which is not impacted. However, older versions of Docker Desktop that bundled earlier toolkit versions may be affected if CDI mode was manually enabled. Upgrade to Docker Desktop 4.44 or later to ensure you're using the patched version.
 
 ### Bug fixes and enhancements
 

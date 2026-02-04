@@ -1930,7 +1930,7 @@ events or unexpected unmounts.
 * Improved Moby syslog facilities
 * Improved file-sharing tab
 * `com.docker.slirp`: included the DNS TCP fallback fix, required when UDP responses are truncated
-* `docker build/events/logs/stats...` won't leak when iterrupted with Ctrl-C
+* `docker build/events/logs/stats...` won't leak when interrupted with Ctrl-C
 
 **Known issues**
 

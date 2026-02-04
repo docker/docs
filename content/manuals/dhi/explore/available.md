@@ -107,7 +107,7 @@ in the **Compliance** column of the image tags list in the Docker Hub catalog.
 
 ## Compatibility variants
 
-Some Docker Hardened Images include a compatiability variant. These variants
+Some Docker Hardened Images include a compatibility variant. These variants
 provide additional tools and configurations for specific use cases without
 bloating the minimal base images.
 
