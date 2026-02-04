@@ -82,7 +82,7 @@ To run PostgreSQL and PgBouncer together, you need three files: `docker-compose.
 
 First, create the PgBouncer configuration file (`pgbouncer.ini`):
 
-```ini
+```bash
 [databases]
 benchmark = host=postgres port=5432 dbname=benchmark user=postgres
 
@@ -102,7 +102,7 @@ max_db_connections = 100
 
 Next, create the user authentication file (`userlist.txt`):
 
-```
+```bash
 "postgres" "postgres"
 ```
 
