@@ -16,20 +16,26 @@ You can configure the following settings in Docker Hub:
 You can configure the following default privacy settings for all repositories in
 a namespace:
 
-- [Configure disable public repositories](#configure-disable-public-repositories): Prevent
+- [Disable creation of public repos](#disable-creation-of-public-repos): Prevent
   organization users from creating public repositories (organization namespaces
   only)
 - [Configure default repository privacy](#configure-default-repository-privacy):
   Set the default repository privacy for new repositories
 
 
-### Configure disable public repositories
+### Disable creation of public repos
 
 {{< summary-bar feature_name="Disable public repositories" >}}
 
 Organization owners and editors can prevent creating public repositories within
 organization namespaces. You cannot configure this setting for personal account
 namespaces.
+
+> [!NOTE]
+>
+> Enabling this feature does not affect existing public repositories. Any public
+> repositories that already exist will remain public. To make them private, you
+> must change their visibility in the individual repository settings.
 
 To configure the disable public repositories setting for an organization
 namespace:

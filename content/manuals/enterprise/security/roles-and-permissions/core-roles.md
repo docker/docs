@@ -36,10 +36,10 @@ These permissions apply organization-wide, including all repositories in your or
 | Pull images                                           | ✅     | ✅     | ✅    |
 | Create and publish an extension                       | ✅     | ✅     | ✅    |
 | Become a Verified, Official, or Open Source publisher | ❌     | ❌     | ✅    |
-| Edit and delete publisher repository logos            | ❌     | ✅     | ✅    |
+| Edit and delete publisher repository logos            | ❌     | ❌     | ✅    |
 | Observe content engagement as a publisher             | ❌     | ❌     | ✅    |
-| Create public and private repositories                | ❌     | ✅     | ✅    |
-| Disable public repositories                           | ❌     | ✅     | ✅    |
+| Create public and private repositories                | ❌     | ❌     | ✅    |
+| Disable public repositories                           | ❌     | ❌     | ✅    |
 | Edit and delete repositories                          | ❌     | ✅     | ✅    |
 | Manage tags                                           | ❌     | ✅     | ✅    |
 | View repository activity                              | ❌     | ❌     | ✅    |

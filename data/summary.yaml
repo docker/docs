@@ -219,7 +219,7 @@ Hardened Docker Desktop:
   subscription: [Business]
   for: Administrators
 Disable public repositories:
-  subscription: [Team, Business]
+  subscription: [Business]
   for: Administrators
 Image management:
   availability: Beta
