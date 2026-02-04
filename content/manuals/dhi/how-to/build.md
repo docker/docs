@@ -305,9 +305,14 @@ contents:
     - https://packages.redis.io/gpg
   packages:
     - '!libelogind0'
+    - '!mawk'
+    - '!original-awk'
     - base-files
+    - libpcre2-8-0
     - libssl3t64
+    - libstdc++6
     - libsystemd0
+    - redis=6:8.0.5-1rl1~trixie1
     - redis-server=6:8.0.5-1rl1~trixie1
     - redis-tools=6:8.0.5-1rl1~trixie1
     - tini
@@ -344,6 +349,8 @@ entrypoint:
 cmd:
   - redis-server
   - /etc/redis/redis.conf
+  - --include
+  - /etc/redis/conf.d/*.conf
 ```
 
 There are several Debian-specific differences from the Alpine examples:
@@ -362,6 +369,7 @@ name with `!` to exclude it:
   packages:
     - '!libelogind0'
     - '!mawk'
+    - '!original-awk'
 ```
 
 Wrap exclusions in quotes because YAML treats `!` as a special character.
@@ -430,9 +438,10 @@ contents:
   packages:
     - alpine-baselayout-data
     - busybox
+    - musl-utils
     - nginx=1.29.4-r1
   builds:
-    - name: configure-nginx
+    - name: nginx
       contents:
         repositories:
           - https://dl-cdn.alpinelinux.org/alpine/v3.23/main
@@ -443,9 +452,10 @@ contents:
         packages:
           - alpine-baselayout-data
           - bash
+          - musl-utils
           - nginx=1.29.4-r1
       pipeline:
-        - name: setup
+        - name: install
           runs: |
             set -eux -o pipefail
 
@@ -456,11 +466,18 @@ contents:
               /etc/nginx/conf.d/default.conf
 
             sed -i "/user  nginx;/d" /etc/nginx/nginx.conf
+            sed -i "s,pid        /run/nginx.pid;,pid        /var/run/nginx.pid;," \
+              /etc/nginx/nginx.conf
             sed -i '/^http {$/a\    server_tokens off;' \
               /etc/nginx/nginx.conf
 
             chown -R 65532:65532 /var/cache/nginx
+            chmod -R g+w /var/cache/nginx
             chown -R 65532:65532 /etc/nginx
+            chmod -R g+w /etc/nginx
+            chown -R 65532:65532 /run
+            chown -R 65532:65532 /run/lock
+            chown -R 65532:65532 /var/run
             chown -R 65532:65532 /var/log/nginx
       outputs:
         - source: /
@@ -504,11 +521,7 @@ contents:
     - alpine-baselayout-data
     - apk-tools
     - busybox
-    - bash
     - ca-certificates-bundle
-    - curl
-    - git
-    - jq
 
 accounts:
   root: true
@@ -527,7 +540,7 @@ environment:
   SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
 
 cmd:
-  - /bin/bash
+  - /bin/sh
 ```
 
 The dev variant typically adds the following:
@@ -535,9 +548,9 @@ The dev variant typically adds the following:
 | Feature | Runtime variant | Dev variant |
 |---------|----------------|-------------|
 | Package manager | Not included | `apk-tools` (Alpine) or `apt` (Debian) |
-| Shell | Not included | `bash` |
+| Shell | `busybox` (Alpine) or none (Debian) | `busybox` (Alpine) or `bash` (Debian) |
 | User | `nonroot` (65532) | `root` |
-| Debug tools | Not included | `curl`, `jq`, `git` |
+| Debug tools | Not included | Install via package manager at runtime |
 
 The runtime and dev variants share the same `image` field but use different
 `variant` values and tag suffixes. This keeps them in the same repository while
