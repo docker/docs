@@ -626,8 +626,7 @@ Measure the security improvement against an equivalent non-hardened image:
 
 ```console
 $ docker scout compare <my-image>:latest \
-    --to <non-hardened-image>:<tag> \
-    --platform linux/amd64
+    --to <non-hardened-image>:<tag> 
 ```
 
 To learn more about comparing images, see
