@@ -12,7 +12,7 @@ This guide covers two common ways to connect to PostgreSQL running in Docker:
 - **Container-to-container**: Connect from your application container to PostgreSQL over a private Docker network. No ports need to be exposed to the host.
 - **Host-to-container**: Connect from your laptop or development machine using `localhost` and a published port.
 
-**Prerequisite**: This guide assumes you have PostgreSQL running with persistent storage. If you don't, follow the [Immediate Setup & Data Persistence]({{< relref "immediate-setup-and-data-persistence" >}}) guide first.
+**Prerequisite**: This guide assumes you have PostgreSQL running with persistent storage. If you don't, follow the [Immediate Setup & Data Persistence](/content/guides/postgresql/immediate-setup-and-data-persistence/) guide first.
 
 ## Internal Network Access (container-to-container)
 
@@ -216,10 +216,10 @@ When exposing PostgreSQL to external access, follow these PostgreSQL-specific se
 - **Avoid using the `postgres` superuser**: The default `postgres` user has full database privileges. Create dedicated users with only the permissions your application needs.
 - **Use strong passwords**: PostgreSQL passwords should be complex. Consider using environment variables or secrets management instead of hardcoding passwords.
 - **Limit network exposure**: Binding to `127.0.0.1` (localhost only) is safer than exposing to all interfaces (`0.0.0.0`).
-- **Consider SSL/TLS**: For production, configure PostgreSQL to require SSL connections. The [Advanced Configuration and Initialization]({{< relref "advanced-configuration-and-initialization" >}}) guide shows how to configure PostgreSQL settings.
+- **Consider SSL/TLS**: For production, configure PostgreSQL to require SSL connections. The [Advanced Configuration and Initialization](/content/guides/postgresql/advanced-configuration-and-initialization/) guide shows how to configure PostgreSQL settings.
 - **Create application-specific users**: Use initialization scripts to create users with limited privileges. For example, a read-only user for reporting or a user that can only access specific databases.
 
-The [Advanced Configuration and Initialization]({{< relref "advanced-configuration-and-initialization" >}}) guide shows how to use initialization scripts to create users and roles automatically.
+The [Advanced Configuration and Initialization](/content/guides/postgresql/advanced-configuration-and-initialization/) guide shows how to use initialization scripts to create users and roles automatically.
 
 ## Using Docker Compose for networking
 
