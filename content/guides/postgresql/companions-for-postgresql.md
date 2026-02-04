@@ -1,11 +1,16 @@
 ---
 title: Companions for PostgreSQL
 linkTitle: Companions for PostgreSQL
+description: This module explains how to customize PostgreSQL for real-world use in Docker, covering automated database initialization, performance tuning, and timezone configuration once persistent storage is in place.
+keywords:
+  - PostgreSQL Docker
+  - Docker Compose PostgreSQL
+  - container database
 weight: 40
 ---
 
 
-# PostgreSQL Ecosystem Companions: pgAdmin, PgBouncer, and Performance Testing
+## PostgreSQL Ecosystem Companions: pgAdmin, PgBouncer, and Performance Testing
 
 Running a standalone PostgreSQL container is often just the beginning. What happens when thousands of connections arrive, or when you need a visual interface to manage your database?
 
