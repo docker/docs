@@ -57,7 +57,7 @@ Key metrics at the top of the page summarize your Docker Offload usage:
 
 - **Total duration**: The total time spent in Offload sessions
 - **Average duration**: The average time per Offload session
-- **Total Sessions**: The total number of Offload sessions
+- **Total sessions**: The total number of Offload sessions
 - **Unique images used**: The number of distinct container images used across
   sessions
 - **Unique users**: The number of different users in Docker Offload sessions
