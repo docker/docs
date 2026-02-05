@@ -1,8 +1,8 @@
 ---
-title: Build a custom Docker Hardened Image
-linktitle: Build a custom image
+title: Create and build a Docker Hardened Image
+linktitle: Create and build an image
 description: Learn how to write a DHI definition file and build your own Docker Hardened Image from the declarative YAML schema.
-keywords: hardened images, DHI, custom image, build, yaml, security, sbom, provenance, declarative, catalog
+keywords: hardened images, DHI, build, yaml, security, sbom, provenance, declarative, catalog, definition file
 weight: 26
 ---
 
@@ -77,6 +77,34 @@ Each image organizes its variants by distribution. A `runtime` variant is
 minimal and typically runs as a non-root user. A `dev` variant adds a shell,
 package manager, and development tools.
 
+## Try it: build a catalog image
+
+Before writing your own definition, try building an existing catalog image
+directly from GitHub:
+
+```console
+$ docker buildx build \
+    https://raw.githubusercontent.com/docker-hardened-images/catalog/refs/heads/main/image/alpine-base/alpine-3.23/3.23.yaml \
+    --sbom=generator=dhi.io/scout-sbom-indexer:1 \
+    --provenance=1 \
+    --tag my-alpine-base:3.23 \
+    --load
+```
+
+This pulls the definition file from the catalog and builds it locally. After
+the build completes, verify the image:
+
+```console
+$ docker images my-alpine-base
+```
+
+To modify an image, clone the catalog and edit the YAML files locally:
+
+```console
+$ git clone https://github.com/docker-hardened-images/catalog.git
+$ cd catalog
+```
+
 ## YAML schema reference
 
 The following tables describe the fields available in a DHI definition file.
@@ -106,7 +134,7 @@ Every definition must include these top-level fields:
 | `volumes` | Volume mount points. |
 | `ports` | Exposed network ports. |
 | `paths` | Directories, files, and symlinks to create. |
-| `os-release` | Customizes `/etc/os-release` inside the image. |
+| `os-release` | Defines the `/etc/os-release` contents inside the image. |
 | `annotations` | OCI image annotations such as description and license. |
 
 ### Advanced fields
@@ -165,7 +193,7 @@ os-release:
   name: Docker Hardened Images (Alpine)
   id: alpine
   version-id: "3.23"
-  pretty-name: My Custom Hardened Image
+  pretty-name: My Hardened Image
   home-url: https://docker.com/products/hardened-images/
 
 environment:
@@ -183,7 +211,7 @@ In this definition:
   required in most Alpine-based images.
 - The `accounts` section creates a `nonroot` user with UID 65532 (a common
   convention for hardened images) and sets it as the default runtime user.
-- The `os-release` block customizes what appears in `/etc/os-release`.
+- The `os-release` block defines what appears in `/etc/os-release`.
 
 Build the image:
 
@@ -495,6 +523,109 @@ Key concepts for build stages:
 | `pipeline` | Contains named steps that run shell commands. Always start scripts with `set -eux -o pipefail`. |
 | `outputs` | Copies results from the build stage into the final image. Setting `diff: true` copies only files that changed, keeping the image minimal. |
 
+## Use OCI artifacts as package sources
+
+Instead of installing packages from Alpine or Debian repositories, you can pull
+pre-built binaries from DHI package artifacts. This is how the catalog builds
+images like Python and Node.js — the runtime is compiled separately and
+published as an OCI artifact, then referenced by digest in the image definition.
+
+The `contents.artifacts` field pulls files from a DHI package into your image:
+
+```yaml
+# syntax=dhi.io/build:2-alpine3.23
+
+name: My Python App
+image: my-registry/my-python-app
+variant: runtime
+tags:
+  - "1.0"
+platforms:
+  - linux/amd64
+  - linux/arm64
+
+contents:
+  repositories:
+    - https://dl-cdn.alpinelinux.org/alpine/v3.23/main
+    - https://dl-cdn.alpinelinux.org/alpine/v3.23/community
+  packages:
+    - alpine-baselayout-data
+    - bzip2
+    - ca-certificates-bundle
+    - expat
+    - gdbm
+    - libffi
+    - mpdecimal
+    - musl
+    - ncurses
+    - openssl
+    - readline
+    - sqlite-libs
+    - tzdata
+    - zlib
+  artifacts:
+    - name: dhi.io/pkg-python:3.13.12-alpine3.23@sha256:a10ed19d2602bc1693474c78fd965f53c2d9a1ce177695f96d2c1fa007a010c4
+      includes:
+        - opt/**
+      uid: 0
+      gid: 0
+
+accounts:
+  run-as: nonroot
+  users:
+    - name: nonroot
+      uid: 65532
+      gid: 65532
+  groups:
+    - name: nonroot
+      gid: 65532
+      members:
+        - nonroot
+
+environment:
+  LD_LIBRARY_PATH: /opt/python/lib
+  PATH: /opt/python/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+  PYTHON_VERSION: 3.13.12
+  SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+
+cmd:
+  - python3
+```
+
+This example pulls a hardened Python 3.13 runtime from `dhi.io/pkg-python` and
+overlays it at `/opt`. The `@sha256:...` digest pins the exact artifact version,
+ensuring reproducible builds.
+
+You can also use artifacts inside a build stage for more control. The Node.js
+image uses this pattern to selectively include and exclude files:
+
+```yaml
+  builds:
+    - name: node
+      contents:
+        artifacts:
+          - name: dhi.io/pkg-node:22.22.0-alpine3.23@sha256:bce51bba...
+            includes:
+              - opt/nodejs
+              - usr/local/bin/node
+            excludes:
+              - opt/nodejs/node-v22.22.0/include
+              - opt/nodejs/node-v22.22.0/lib
+            uid: 0
+            gid: 0
+```
+
+| Field | Description |
+|-------|-------------|
+| `name` | OCI artifact reference with digest, in the format `dhi.io/pkg-<name>:<version>@sha256:<digest>`. |
+| `includes` | Glob patterns for files to extract from the artifact. Use `opt/**` to include everything under a directory. |
+| `excludes` | Glob patterns for files to skip. Useful for removing headers, docs, or unused binaries. |
+| `uid`, `gid` | Ownership for extracted files. |
+
+Available DHI packages are in the
+[`package/`](https://github.com/docker-hardened-images/catalog/tree/main/package)
+directory of the catalog repository.
+
 ## Create a dev variant
 
 Production images should be minimal, but developers often need additional tools
@@ -626,7 +757,7 @@ Measure the security improvement against an equivalent non-hardened image:
 
 ```console
 $ docker scout compare <my-image>:latest \
-    --to <non-hardened-image>:<tag> 
+    --to <non-hardened-image>:<tag>
 ```
 
 To learn more about comparing images, see
