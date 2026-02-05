@@ -10,6 +10,7 @@ IgnoreURLs:
 - "^/reference/api/hub/.*$"
 - "^/reference/api/engine/v.+/#.*$"
 - "^/reference/api/registry/.*$"
+- "^/pagefind/.*$"
 IgnoreDirs:
 - "registry/configuration"
 - "compose/compose-file" # temporarily ignore until upstream is fixed

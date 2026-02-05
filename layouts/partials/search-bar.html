@@ -1,203 +1,108 @@
-<div
-  x-ref="searchBarRef"
-  x-data="{ open: false }"
-  @click.outside="open = false;"
-  @keyup.escape.window="open = false"
-  id="search-bar"
-  class="h-full relative flex items-center overflow-visible"
->
-  <input
-    class="rounded-lg hidden w-64 lg:inline focus:outline-none bg-blue-700 border border-blue-500 px-3 py-[0.5625rem] focus:ring focus:ring-blue-400 placeholder-blue-300 h-[42px]"
-    x-ref="searchBarInput"
-    type="search"
-    id="search-bar-input"
-    placeholder="Search"
-    @focus="open = true;"
-    @keyup.enter.prevent="window.location.href = '/search/?q=' + $event.target.value;"
-    @keyup.escape.prevent="open = false;"
-    @keydown.window="(e) => {
-            switch(e.key) {
-            case 'k':
-              if (e.metaKey || e.ctrlKey) {
-                e.preventDefault();
-                $el.focus();
-              }
-              break;
-            }
-          }"
-    tabindex="0"
-  />
+<div id="search-bar" class="h-full relative flex items-center overflow-visible">
   <button
-    id="search-bar-icon"
-    @click="window.location.href = '/search/?q=' + $refs.searchBarInput.value;"
-    class="lg:absolute right-2 p-1 rounded-lg cursor-pointer transition-colors hover:bg-blue-600 lg:hover:bg-transparent lg:hover:opacity-80"
+    type="button"
     aria-label="Search"
+    class="cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-blue-700 border border-blue-500 text-white transition-colors focus:outline-none focus:ring focus:ring-blue-400 hover:bg-blue-800 hover:border-blue-400"
+    id="search-modal-trigger"
   >
-    <div class="bg-blue-700 rounded-md p-2 border border-blue-500 lg:border-none icon-svg">
-      {{ partial "utils/svg.html" "/icons/search.svg" }}
-    </div>
+    <span class="icon-svg">
+      {{ partialCached "icon" "search" "search" }}
+    </span>
+    <span class="hidden px-1 lg:inline">Search</span>
   </button>
-  <div
-    id="search-bar-dropdown"
-    x-show="open"
-    x-cloak
-    x-ref="dropdown"
-    class="border-1 fixed z-[999] mt-2 hidden rounded-sm border-gray-100 bg-gray-50 p-6 font-medium text-gray-400 shadow-md md:block dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200"
-    style="width: min(500px, 90vw)"
-    x-effect="if (open) {
-        const rect = $refs.searchBarRef.getBoundingClientRect();
-        const dropdownWidth = Math.min(500, window.innerWidth * 0.9);
-        const viewportWidth = window.innerWidth;
-        
-        // Calculate left position
-        let leftPos = rect.left;
-        
-        // Prevent going off right edge
-        if (leftPos + dropdownWidth > viewportWidth - 20) {
-          leftPos = viewportWidth - dropdownWidth - 20;
-        }
-        
-        // Prevent going off left edge
-        if (leftPos < 20) {
-          leftPos = 20;
-        }
-        
-        $el.style.top = (rect.bottom + 8) + 'px';
-        $el.style.left = leftPos + 'px';
-      }"
-  >
-    <div id="search-bar-results">
-      {{- $emptyState := `
-      <div>
-        Start typing to search or try
-        <button @click="
-          $store.gordon.open($refs.searchBarInput.value.trim());
-          $refs.searchBarInput.value = '';
-          open = false;
-        " class="link">Ask AI</button>.
-      </div>
-      ` }} {{- $emptyState | safe.HTML }}
-      <!-- results -->
-    </div>
-  </div>
-  <script type="module">
-    window.addEventListener("load", async function () {
-      const pagefind = await import("/pagefind/pagefind.js");
-      await pagefind.options({
-        ranking: {
-          termFrequency: 0.2,
-          pageLength: 0.75,
-          termSaturation: 1.4,
-          termSimilarity: 6.0,
-        },
-      });
+</div>
 
-      const searchBarInput = document.querySelector("#search-bar-input");
-      const searchBarResults = document.querySelector("#search-bar-results");
-      const searchDropdown = document.querySelector("#search-bar-dropdown");
+<script type="module">
+  // Configure Pagefind before any components connect to DOM
+  await import('/pagefind/pagefind-component-ui.js');
+  const { configureInstance, getInstanceManager } = window.PagefindComponents;
 
-      // Update position on scroll and resize
-      function updateDropdownPosition() {
-        const searchBar = document.querySelector("#search-bar");
-        if (
-          !searchBar ||
-          !searchDropdown ||
-          searchDropdown.style.display === "none"
-        )
-          return;
-
-        const rect = searchBar.getBoundingClientRect();
-        const dropdownWidth = Math.min(500, window.innerWidth * 0.9);
-        const viewportWidth = window.innerWidth;
-
-        let leftPos = rect.left;
-
-        if (leftPos + dropdownWidth > viewportWidth - 20) {
-          leftPos = viewportWidth - dropdownWidth - 20;
-        }
-
-        if (leftPos < 20) {
-          leftPos = 20;
-        }
-
-        searchDropdown.style.top = rect.bottom + 8 + "px";
-        searchDropdown.style.left = leftPos + "px";
-      }
-
-      window.addEventListener("scroll", updateDropdownPosition);
-      window.addEventListener("resize", updateDropdownPosition);
-
-      async function search(e) {
-        const query = e.target.value;
-        if (query === "") {
-          searchBarResults.innerHTML = `{{ $emptyState | safe.HTML }}`;
-          return;
-        }
-        const search = await pagefind.debouncedSearch(query);
-        if (search === null) {
-          return;
-        } else {
-          const resultsLength = search.results.length;
-          const resultsData = await Promise.all(
-            search.results.slice(0, 5).map((r) => r.data()),
-          );
-          const results = resultsData.map((item, index) => ({
-            ...item,
-            index: index + 1,
-          }));
-
-          if (query) {
-            searchBarResults.classList.remove("hidden");
-          } else {
-            searchBarResults.classList.add("hidden");
-          }
-
-let resultsHTML = `<div class="p-2 text-gray-400 dark:text-gray-500">${resultsLength} results</div>`;
-resultsHTML += results
-  .map((item) => {
-    // Truncate excerpt if it's too long
-    let excerpt = item.excerpt;
-    if (excerpt.length > 200) {
-      excerpt = excerpt.substring(0, 200);
+  configureInstance('default', {
+    bundlePath: '/pagefind/',
+    ranking: {
+      termFrequency: 0.0,
+      termSimilarity: 2.0,
+      pageLength: 0.0,
+      termSaturation: 1.0
     }
-    return `<div class="p-2">
-<div class="flex flex-col items-start item">
-  <a class="link" style="word-break: break-word; overflow-wrap: anywhere;" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
-  <p class="text-black dark:text-white overflow-hidden text-left" style="word-break: break-word; overflow-wrap: anywhere;">…${excerpt}…</p>
-</div>
-</div>`;
-  })
-  .join("");
+  });
 
-if (resultsLength > 5) {
-  resultsHTML += `<div class="w-fit ml-auto px-4 py-2"><a href="/search/?q=${query}" class="link">Show all results</a></div>`;
-}
+  // Create modal after config is set
+  document.body.insertAdjacentHTML('beforeend', `
+    <pagefind-modal id="search-modal" reset-on-close>
+      <pagefind-modal-header>
+        <pagefind-input placeholder="Search documentation…"></pagefind-input>
+      </pagefind-modal-header>
+      <pagefind-modal-body>
+        <p id="search-placeholder" class="text-center text-gray-500 dark:text-gray-400 py-8">
+          Start typing to search the documentation
+        </p>
+        <pagefind-summary></pagefind-summary>
+        <pagefind-results></pagefind-results>
+      </pagefind-modal-body>
+    </pagefind-modal>
+  `);
 
-          searchBarResults.innerHTML = resultsHTML;
-        }
+  const modal = document.getElementById('search-modal');
+  const placeholder = document.getElementById('search-placeholder');
+
+  // Custom result template
+  modal.querySelector('pagefind-results').resultTemplate = (result) => {
+    const li = document.createElement('li');
+    li.className = 'py-3 border-b border-gray-200 dark:border-gray-700 last:border-b-0';
+
+    const title = document.createElement('p');
+    title.className = 'font-medium';
+
+    const link = document.createElement('a');
+    link.className = 'text-blue-600 dark:text-blue-400 hover:underline';
+    link.href = result.meta.url || result.url;
+    link.textContent = result.meta.title;
+    title.appendChild(link);
+    li.appendChild(title);
+
+    if (result.excerpt) {
+      const excerpt = document.createElement('p');
+      excerpt.className = 'text-gray-600 dark:text-gray-400 mt-1 text-sm';
+      excerpt.innerHTML = result.excerpt;
+      li.appendChild(excerpt);
+    }
+
+    if (result.sub_results?.length) {
+      const ul = document.createElement('ul');
+      ul.className = 'mt-3 ml-4 flex flex-wrap gap-2';
+      for (const sub of result.sub_results) {
+        const subLi = document.createElement('li');
+        subLi.className = 'text-sm';
+        const subLink = document.createElement('a');
+        subLink.className = 'text-blue-600 dark:text-blue-400 hover:underline';
+        subLink.href = sub.url;
+        subLink.textContent = sub.title;
+        subLi.appendChild(subLink);
+        ul.appendChild(subLi);
       }
+      li.appendChild(ul);
+    }
 
-      searchBarInput.addEventListener("input", search);
+    return li;
+  };
 
-      // Event delegation for tracking link clicks
-      if (window.heap !== undefined) {
-        searchBarResults.addEventListener("click", function (event) {
-          if (event.target.tagName === "A" && event.target.closest(".link")) {
-            const searchQuery = event.target.getAttribute("data-query");
-            const resultIndex = event.target.getAttribute("data-index");
-            const url = new URL(event.target.href);
-            const properties = {
-              docs_search_target_path: url.pathname,
-              docs_search_target_title: event.target.textContent,
-              docs_search_query_text: searchQuery,
-              docs_search_target_index: resultIndex,
-              docs_search_source_path: window.location.pathname,
-              docs_search_source_title: document.title,
-            };
-            heap.track("Docs - Search - Click - Result Link", properties);
-          }
-        });
-      }
-    });
-  </script>
-</div>
+  // Show/hide placeholder based on search state
+  const instance = getInstanceManager().getInstance('default');
+  instance.on('search', (term) => {
+    placeholder.hidden = !!term;
+  });
+  instance.on('results', () => {
+    placeholder.hidden = !!instance.searchTerm;
+  });
+
+  // Open modal
+  const openModal = () => modal.open?.();
+  document.getElementById('search-modal-trigger').addEventListener('click', openModal);
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      openModal();
+    }
+  });
+</script>
