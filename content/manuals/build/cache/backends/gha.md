@@ -100,7 +100,7 @@ For example:
 
 ```yaml
 - name: Build and push
-  uses: docker/build-push-action@v6
+  uses: docker/build-push-action@{{% param "build_push_action_version" %}}
   with:
     context: .
     push: true
@@ -149,7 +149,7 @@ action. You can also set the `ghtoken` parameter manually using the
 
 ```yaml
 - name: Build and push
-  uses: docker/build-push-action@v6
+  uses: docker/build-push-action@{{% param "build_push_action_version" %}}
   with:
     context: .
     push: true

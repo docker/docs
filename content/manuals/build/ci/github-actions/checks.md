@@ -25,21 +25,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 
       - name: Validate build configuration
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           call: check
 
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           push: true
           tags: user/app:latest
@@ -79,21 +79,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 
       - name: Validate build configuration
-        uses: docker/bake-action@v6
+        uses: docker/bake-action@{{% param "bake_action_version" %}}
         with:
           targets: validate-build
 
       - name: Build
-        uses: docker/bake-action@v6
+        uses: docker/bake-action@{{% param "bake_action_version" %}}
         with:
           targets: build
           push: true
@@ -116,10 +116,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 
       - name: Validate build configuration
-        uses: docker/bake-action@v6
+        uses: docker/bake-action@{{% param "bake_action_version" %}}
         with:
           targets: build
           call: check

@@ -74,7 +74,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build and push
-        uses: docker/build-push-action@v6.6.0
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}.6.0
 ```
 
 ![GitHub Actions build check annotations](./images/gha-check-annotations.png)

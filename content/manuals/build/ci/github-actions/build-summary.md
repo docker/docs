@@ -19,8 +19,8 @@ versions of the [Build and push Docker images](https://github.com/marketplace/ac
 or [Docker Buildx Bake](https://github.com/marketplace/actions/docker-buildx-bake)
 GitHub Actions:
 
-- `docker/build-push-action@v6`
-- `docker/bake-action@v6`
+- `docker/build-push-action@{{% param "build_push_action_version" %}}`
+- `docker/bake-action@{{% param "bake_action_version" %}}`
 
 To view the job summary, open the details page for the job in GitHub after the
 job has finished. The summary is available for both failed and successful
@@ -67,7 +67,7 @@ in the YAML configuration for your build step:
 
 ```yaml {hl_lines=4}
       - name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         env:
           DOCKER_BUILD_SUMMARY: false
         with:
@@ -83,7 +83,7 @@ your build step:
 
 ```yaml {hl_lines=4}
       - name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         env:
           DOCKER_BUILD_RECORD_UPLOAD: false
         with:
