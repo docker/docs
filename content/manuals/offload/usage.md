@@ -85,7 +85,7 @@ The following cards provide insights into your Docker Offload usage:
 
 - **Offload usage**: Displays your usage trends over time, helping you track
   patterns in cloud resource consumption. If you have billing permissions, you
-  can view detailed billing information.
+  can select the card to view detailed billing information.
 - **Popular images**: Shows the top 4 most frequently used container images in
   your Docker Offload sessions. Select the card to see more images.
 - **Top users**: Displays the top 4 users by usage, helping you understand who
