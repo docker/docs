@@ -1,0 +1,10 @@
+{{/* Pagefind metadata - must be inside data-pagefind-body */}}
+{{- $description := partial "utils/description.html" . -}}
+{{- $keywords := partialCached "utils/keywords.html" . . -}}
+{{- $breadcrumbs := slice -}}
+{{- range .Ancestors.Reverse -}}
+  {{- $breadcrumbs = $breadcrumbs | append .LinkTitle -}}
+{{- end -}}
+{{- with $description }}<meta data-pagefind-meta="description:{{ . }}">{{ end }}
+{{- with $keywords }}<meta data-pagefind-meta="keywords:{{ delimit . ", " }}">{{ end }}
+{{- with $breadcrumbs }}<meta data-pagefind-meta="breadcrumbs:{{ delimit . " / " }}">{{ end }}

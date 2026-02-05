@@ -1,19 +1,13 @@
 <nav
   id="breadcrumbs"
-  {{- $breadcrumbTitles := slice }}
   data-pagefind-ignore
   class="breadcrumbs mb-4 flex min-w-0 items-center gap-2 text-gray-400 dark:text-gray-300"
 >
   {{ range .Ancestors.Reverse }}
-    {{ $breadcrumbTitles = $breadcrumbTitles | append .LinkTitle }}
     <a href="{{ .Permalink }}" class="link truncate"
       >{{ markdownify .LinkTitle }}</a
     >
     <span>/</span>
   {{- end }}
-  <span
-    data-pagefind-meta="breadcrumbs:{{ collections.Delimit $breadcrumbTitles " / " }}"
-    class="truncate"
-    >{{ markdownify .LinkTitle }}</span
-  >
+  <span class="truncate">{{ markdownify .LinkTitle }}</span>
 </nav>
