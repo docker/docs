@@ -149,7 +149,7 @@ Create a container with a named volume:
 {{< tabs >}}
 {{< tab name="Using DHIs" >}}
 
-You must authenticate to dhi.io before you can pull Docker Hardened Images. Run docker login dhi.io to authenticate.
+You must authenticate to dhi.io before you can pull Docker Hardened Images. Run `docker login dhi.io` to authenticate.
 
 ```console
 $ docker run --rm --name postgres-dev \

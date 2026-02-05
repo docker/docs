@@ -22,7 +22,7 @@ When your application runs in another container, connecting to PostgreSQL throug
 
 **Here's a quick comparison:**
 
-> **Note**: The examples below show the difference in approach. To actually test this, follow the steps in this guide to set up containers on the appropriate networks first.
+> **Note**: The following examples show the difference in approach. To actually test this, follow the steps in this guide to set up containers on the appropriate networks first.
 
 With the default bridge network, you'd need to find the IP address first:
 ```bash
@@ -82,7 +82,7 @@ CONTAINER ID  IMAGE        COMMAND                 CREATED         STATUS       
 
 ### Step 3: Connect from another container using the Postgres container name
 
-You can test connectivity with a temporary psql client container:
+You can test connectivity with a temporary `psql` client container:
 
 ```bash
 docker run --rm -it \
