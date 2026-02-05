@@ -72,7 +72,7 @@ CONTAINER ID   IMAGE         COMMAND                  STATUS         PORTS      
 a1b2c3d4e5f6   postgres:18   "docker-entrypoint.s…"   Up 2 seconds   0.0.0.0:5432->5432/tcp   postgres-dev
 ```
 
-Connect using psql from inside the container:
+Connect using `psql` from inside the container:
 
 ```console
 $ docker exec -it postgres-dev psql -U postgres

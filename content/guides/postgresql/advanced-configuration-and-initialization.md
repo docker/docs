@@ -150,7 +150,7 @@ The following tables list important `postgresql.conf` parameters for containeriz
 | `deadlock_timeout` | Time before checking for deadlock | `1s` |
 | `transaction_timeout` | Max time for a transaction | `0` (disabled) |
 
-> **Note:** Setting `shared_buffers` too high in a container can exceed kernel shared memory limits. We recommend using no more than 25-30% of the container's memory limit.
+> **Note:** Setting `shared_buffers` too high in a container can exceed kernel shared memory limits. Use no more than 25-30% of the container's memory limit.
 
 ## Timezone and locale configuration
 
@@ -205,11 +205,11 @@ This affects collation (sorting) and character processing behavior. Changing thi
 
 ## Connecting to the database
 
-You can interact with PostgreSQL running in a container even without psql installed on your host machine.
+You can interact with PostgreSQL running in a container even without `psql` installed on your host machine.
 
 ### Interactive shell
 
-Open a psql session inside the container:
+Open a `psql` session inside the container:
 
 ```console
 $ docker exec -it postgres-container psql -U postgres

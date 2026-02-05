@@ -14,7 +14,7 @@ weight: 40
 
 Running a standalone PostgreSQL container is often just the beginning. What happens when thousands of connections arrive, or when you need a visual interface to manage your database?
 
-This is where **companion tools** come into play. These applications extend PostgreSQL with capabilities the core database engine doesn't provide natively: visual administration, connection pooling, and performance benchmarking. This guide covers how to deploy pgAdmin 4, PgBouncer, Pgpool-II, and pgbench in Docker, when to use each tool, and real-world benchmark results demonstrating their performance impact.
+This is where **companion tools** come into play. These applications extend PostgreSQL with capabilities the core database engine doesn't provide natively: visual administration, connection pooling, and performance benchmarking. This guide covers how to deploy pgAdmin 4, PgBouncer, Pgpool-II, and `pgbench` in Docker, when to use each tool, and real-world benchmark results demonstrating their performance impact.
 
 ## pgAdmin 4: Visual Management Platform
 
@@ -154,20 +154,20 @@ networks:
 
 Key configuration notes:
 
-- PgBouncer listens on port **6432**, avoiding confusion with the direct PostgreSQL connection on port 5432
+- `PgBouncer` listens on port **6432**, avoiding confusion with the direct PostgreSQL connection on port 5432
 - The `depends_on` directive with `service_healthy` condition ensures PgBouncer starts only after PostgreSQL is ready
 - `pool_mode = transaction` is the optimal choice for most web applications
-- The Percona PgBouncer image requires mounted configuration files (without the `:ro` flag, as the entrypoint script needs to modify them)
+- The [Percona PgBouncer image](https://hub.docker.com/r/percona/percona-pgbouncer) requires mounted configuration files (without the `:ro` flag, as the entrypoint script needs to modify them)
 - This example uses `trust` authentication for simplicity. In production, configure proper SCRAM-SHA-256 authentication
 
-> **Note**: The Percona PgBouncer entrypoint script processes the configuration files on startup. Mount them without the read-only flag to avoid permission errors.
+> **Note**: The `Percona PgBouncer` entrypoint script processes the configuration files on startup. Mount them without the read-only flag to avoid permission errors.
 
 
 
 
-## pgbench: Performance Benchmarking
+## `pgbench`: Performance Benchmarking
 
-pgbench is a benchmarking utility included with the official PostgreSQL image. It allows you to simulate heavy workloads and verify how your Docker configuration performs under pressure.
+`pgbench` is a benchmarking utility included with the official PostgreSQL image. It allows you to simulate heavy workloads and verify how your Docker configuration performs under pressure.
 
 ### Initialize Benchmark Tables
 

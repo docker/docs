@@ -156,7 +156,7 @@ When connecting from your application container, use these PostgreSQL connection
 
 ## Connecting from the Host (external access)
 
-To connect to PostgreSQL from your host machine using tools like `psql`, pgAdmin, DBeaver, or database management scripts, you need to publish PostgreSQL's port (`5432`) to the host. This allows external tools to reach the PostgreSQL container.
+To connect to PostgreSQL from your host machine using tools like `psql`, `pgAdmin`, `DBeaver`, or database management scripts, you need to publish PostgreSQL's port (`5432`) to the host. This allows external tools to reach the PostgreSQL container.
 
 ### Expose Postgres to localhost only (recommended for development)
 
@@ -214,7 +214,7 @@ docker run -d --name postgres-dev \
 When exposing PostgreSQL to external access, follow these PostgreSQL-specific security practices:
 
 - **Avoid using the `postgres` superuser**: The default `postgres` user has full database privileges. Create dedicated users with only the permissions your application needs.
-- **Use strong passwords**: PostgreSQL passwords should be complex. Consider using environment variables or secrets management instead of hardcoding passwords.
+- **Use strong passwords**: PostgreSQL passwords should be complex. Consider using environment variables or secrets management instead of `hardcoding` passwords.
 - **Limit network exposure**: Binding to `127.0.0.1` (localhost only) is safer than exposing to all interfaces (`0.0.0.0`).
 - **Consider SSL/TLS**: For production, configure PostgreSQL to require SSL connections. The [Advanced Configuration and Initialization](/guides/postgresql/advanced-configuration-and-initialization/) guide shows how to configure PostgreSQL settings.
 - **Create application-specific users**: Use initialization scripts to create users with limited privileges. For example, a read-only user for reporting or a user that can only access specific databases.
