@@ -40,7 +40,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- Ask Gordon is no longer in Beta. 
 - Fixed `ping6 host.docker.internal`.
 - Enabled landlock LSM.
 - Docker Sandboxes improvements:
