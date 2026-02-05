@@ -61,7 +61,7 @@ jobs:
 
     steps:
       - name: Set up Docker
-        uses: docker/setup-docker-action@v4
+        uses: docker/setup-docker-action@{{% param "setup_docker_action_version" %}}
 
       - name: Install docker-model-plugin
         run: |

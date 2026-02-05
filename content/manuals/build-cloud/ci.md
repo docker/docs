@@ -90,19 +90,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
           username: ${{ vars.DOCKER_ACCOUNT }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
       
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         with:
           driver: cloud
           endpoint: "${{ vars.DOCKER_ACCOUNT }}/${{ vars.CLOUD_BUILDER_NAME }}" # for example, "acme/default"
       
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           tags: "<IMAGE>" # for example, "acme/my-image:latest"
           # For pull requests, export results to the build cache.
@@ -120,7 +120,7 @@ command directly instead, you have two options:
   ```yaml
   - name: Set up Docker Buildx
     id: builder
-    uses: docker/setup-buildx-action@v3
+    uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
     with:
       driver: cloud
       endpoint: "${{ vars.DOCKER_ACCOUNT }}/${{ vars.CLOUD_BUILDER_NAME }}"
