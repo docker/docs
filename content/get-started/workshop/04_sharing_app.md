@@ -55,7 +55,7 @@ Let's try to push the image to Docker Hub.
    ```
 
    This failure is expected because the image isn't tagged correctly yet.
-   Docker is looking for an image name `docker/getting started`, but your
+   Docker is looking for an image name `docker/getting-started`, but your
    local image is still named `getting-started`.
 
    You can confirm this by running:
