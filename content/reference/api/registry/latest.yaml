@@ -202,7 +202,7 @@ tags:
 
       > **Note**
       >
-      > Manifest deletion operations may experience latency. In some cases, you may encounter a `500 Internal Server Error` during deletion. The system automatically retries the deletion in the background, so the manifest will eventually be removed. You do not need to manually retry the request.
+      > Manifest deletion operations may experience latency and could return a `500 Internal Server Error` during deletion. The system automatically retries the deletion in the background, so the manifest will eventually be removed. You do not need to manually retry the request.
 
       This section outlines the basic steps to delete an image using the registry API.
 
@@ -664,7 +664,7 @@ paths:
 
         > **Note**
         >
-        > Manifest deletion operations may take some time to complete. In some cases, you may receive a `500 Internal Server Error` response. If this occurs, the system will automatically retry the deletion in the background. The manifest will be removed without requiring manual intervention or additional requests from your side.
+        > Manifest deletion operations may take some time and could return a `500 Internal Server Error`. The system automatically retries the deletion in the background. Manual intervention is not required.
       parameters:
         - name: name
           in: path

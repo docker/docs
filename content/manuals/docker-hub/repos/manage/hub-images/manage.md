@@ -57,7 +57,7 @@ endpoint](/reference/api/registry/latest/#tag/delete).
 
    > [!NOTE]
    >
-   > Deletion operations may take some time to complete. In rare cases, you may
-   > see a time-out error during the deletion process. If this occurs, the system will
-   > automatically retry the deletion in the background, and the items will be
-   > removed without requiring any action from you.
+   > Deletion operations may take some time to complete. Timeout errors may
+   > occur during the deletion process. The system automatically retries the
+   > deletion in the background, and the items will be removed without requiring
+   > any action from you.
