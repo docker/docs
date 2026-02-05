@@ -3,9 +3,12 @@
 We value documentation contributions from the Docker community. We'd like to
 make it as easy as possible for you to work in this repository.
 
-Our style guide and instructions on using our page templates and components is
-available in the [contribution section](https://docs.docker.com/contribute/) on
-the website.
+Before contributing, review our documentation standards:
+
+- [STYLE.md](STYLE.md) - Writing style, voice, grammar, and formatting
+  guidelines
+- [COMPONENTS.md](COMPONENTS.md) - How to use Hugo shortcodes, front matter,
+  and components
 
 The following guidelines describe how to contribute to the
 Docker documentation at <https://docs.docker.com/>, and how to get started.

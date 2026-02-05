@@ -13,6 +13,7 @@ Feel free to open pull requests or issues. Our docs are completely open source, 
 ## Provide feedback
 
 We’d love to hear your feedback! To submit feedback:
+
 - Click **[New issue](https://github.com/docker/docs/issues/new)** on the docs repository, or
 - Click **Request changes** in the right column of every page on
   [docs.docker.com](https://docs.docker.com/), or
@@ -28,7 +29,11 @@ repository.
 
 ## Contribute to Docker docs
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+We welcome contributions! To get started:
+
+- [CONTRIBUTING.md](CONTRIBUTING.md) - Contribution workflow and setup
+- [STYLE.md](STYLE.md) - Writing style and content guidelines
+- [COMPONENTS.md](COMPONENTS.md) - Component and shortcode usage
 
 ## Copyright and license
 

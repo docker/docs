@@ -44,11 +44,6 @@
       class="inline-flex truncate whitespace-normal"
       >About us</a
     >
-    {{- with .GetPage "/contribute" }}
-      <a href="{{ .Permalink }}" class="inline-flex truncate whitespace-normal"
-        >{{ .LinkTitle }}</a
-      >
-    {{- end }}
     <a
       href="{{ "llms.txt" | relURL }}"
       class="inline-flex truncate whitespace-normal"
