@@ -39,30 +39,66 @@ You must be an organization owner to manage billing. For more general informatio
 
 ## Monitor your usage
 
-The **Offload overview** page in Docker Home provides visibility into
-how you are using cloud resources to build and run containers.
+The **Offload activity** page in Docker Home provides visibility into
+how you are using cloud resources to run containers. You can explore recent Docker Offload activity and usage with detailed metrics and filters.
 
 To monitor your usage:
 
 1. Sign in to [Docker Home](https://app.docker.com/).
 2. Select the account for which you want to monitor usage.
-3. Select **Offload** > **Offload overview**.
+3. Select **Offload** > **Offload activity**.
 
-The following widgets are available:
+### Overview metrics
 
-- My recent sessions: This widget shows your total session time as well as a break down of your most recent sessions'
-  duration.
-- My top 10 images: This widget shows the top 10 images used in Docker Offload in run sessions. It provides insight into
-  which images are most frequently used, helping you understand your container usage patterns.
-- My active sessions: This widget displays any currently active Docker Offload sessions.
+At the top of the page, you'll see key metrics summarizing your Docker Offload usage:
 
-### View recent activity
+- **Total duration**: The total time spent in Offload sessions
+- **Average duration**: The average time per Offload session
+- **Total Sessions**: The total number of Offload sessions
+- **Unique images used**: The number of distinct container images used across sessions
+- **Unique users**: The number of different users who have used Docker Offload
 
-The **Recent activity** page in Docker Home provides detailed information about your recent Docker Offload sessions.
-This includes session ID, start date and time, duration, and number of containers.
+### Filter and export your data
 
-To view the **Recent activity** page:
+You can filter the Offload activity data by:
 
-1. Sign in to [Docker Home](https://app.docker.com/).
-2. Select the account for which you want to manage Docker Offload.
-3. Select **Offload** > **Recent activity**.
+- **Period**: Select a preset time period or choose a custom date range
+- **Users**: Organization owners and members with analytics permissions can filter by specific users
+
+You can also export your session data by selecting the **Download CSV** button. The exported file includes:
+
+- Session ID
+- Username
+- Image
+- Started time
+- Ended time
+- Duration (in seconds)
+- Status
+- Container count
+
+The CSV export respects your currently selected date range and user filters,
+allowing you to download exactly the data you're viewing.
+
+### Activity cards
+
+The following cards provide insights into your Docker Offload usage:
+
+- **Offload usage**: Displays your usage trends over time, helping you track
+  patterns in cloud resource consumption. If you have billing permissions, you
+  can view detailed billing information.
+- **Popular images**: Shows the top 4 most frequently used container images in
+  your Docker Offload sessions. Select the card to see more images.
+- **Top users**: Displays the top 4 users by usage, helping you understand who
+  is using Docker Offload most frequently. Select the card to see more users.
+
+### Offload sessions
+
+Below the activity cards, you'll find a detailed list of Offload sessions. The list:
+
+- Starts with any currently active sessions
+- Shows session details including start time, duration, images used, and user information
+- Can be filtered using the date and user filters described above
+- Displays **Offload sessions** if you have organization-wide analytics
+  permissions, or **My Offload sessions** if viewing only your own data
+
+Select any session to view more details in a side panel.
