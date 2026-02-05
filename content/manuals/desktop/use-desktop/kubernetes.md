@@ -136,16 +136,16 @@ docker.io/docker/desktop-containerd-registry-mirror:<tag>
 In `kubeadm` mode it requires the following images:
 
 ```console
-docker.io/registry.k8s.io/kube-controller-manager:<tag>
-docker.io/registry.k8s.io/kube-apiserver:<tag>
-docker.io/registry.k8s.io/kube-scheduler:<tag>
-docker.io/registry.k8s.io/kube-proxy
-docker.io/registry.k8s.io/etcd:<tag>
-docker.io/registry.k8s.io/pause:<tag>
-docker.io/registry.k8s.io/coredns/coredns:<tag>
+docker.io/docker/desktop-kubernetes:<tag>
 docker.io/docker/desktop-storage-provisioner:<tag>
 docker.io/docker/desktop-vpnkit-controller:<tag>
-docker.io/docker/desktop-kubernetes:<tag>
+docker.io/docker/desktop-kubernetes-etcd:<tag>
+docker.io/docker/desktop-kubernetes-coredns:<tag>
+docker.io/docker/desktop-kubernetes-pause:<tag>
+docker.io/docker/desktop-kubernetes-apiserver:<tag>
+docker.io/docker/desktop-kubernetes-controller-manager:<tag>
+docker.io/docker/desktop-kubernetes-scheduler:<tag>
+docker.io/docker/desktop-kubernetes-proxy:<tag>
 ```
 
 The image tags are automatically selected by Docker Desktop based on several
