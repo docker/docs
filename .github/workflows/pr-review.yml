@@ -77,7 +77,7 @@ jobs:
 
       - name: Restore reviewer memory
         if: steps.membership.outputs.is_member == 'true'
-        uses: actions/cache/restore@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
           path: .github/pr-review-memory.db
           key: pr-review-memory-${{ github.repository }}-${{ github.run_id }}
@@ -100,7 +100,7 @@ jobs:
 
       - name: Save reviewer memory
         if: steps.membership.outputs.is_member == 'true' && always()
-        uses: actions/cache/save@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
+        uses: actions/cache/save@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
           path: .github/pr-review-memory.db
           key: pr-review-memory-${{ github.repository }}-${{ github.run_id }}
@@ -194,7 +194,7 @@ jobs:
 
       - name: Restore reviewer memory
         if: steps.membership.outputs.is_member == 'true'
-        uses: actions/cache/restore@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
+        uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
           path: .github/pr-review-memory.db
           key: pr-review-memory-${{ github.repository }}-${{ github.run_id }}
@@ -216,7 +216,7 @@ jobs:
 
       - name: Save reviewer memory
         if: steps.membership.outputs.is_member == 'true' && always()
-        uses: actions/cache/save@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
+        uses: actions/cache/save@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
           path: .github/pr-review-memory.db
           key: pr-review-memory-${{ github.repository }}-${{ github.run_id }}
