@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Check if PR author is Docker org member
         id: membership
-        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        uses: actions/github-script@450193c5abd4cdb17ba9f3ffcfe8f635c4bb6c2a # v7
         with:
           github-token: ${{ secrets.ORG_MEMBERSHIP_TOKEN }}
           script: |
@@ -144,7 +144,7 @@ jobs:
     steps:
       - name: Check if commenter is Docker org member
         id: membership
-        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        uses: actions/github-script@450193c5abd4cdb17ba9f3ffcfe8f635c4bb6c2a # v7
         with:
           github-token: ${{ secrets.ORG_MEMBERSHIP_TOKEN }}
           script: |
