@@ -293,10 +293,10 @@ gui
   .add(state, "backend", ["wasm", "webgl", "cpu"])
   .onChange(async (backend) => {
     await tf.setBackend(backend);
-    addFlagLables();
+    addFlagLabels();
   });
 
-async function addFlagLables() {
+async function addFlagLabels() {
   if (!document.querySelector("#simd_supported")) {
     const simdSupportLabel = document.createElement("div");
     simdSupportLabel.id = "simd_supported";
@@ -385,7 +385,7 @@ const renderPrediction = async () => {
 
 const setupPage = async () => {
   await tf.setBackend(state.backend);
-  addFlagLables();
+  addFlagLabels();
   await setupCamera();
   video.play();
 
