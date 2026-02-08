@@ -63,6 +63,7 @@
         {{ if ne .Params.sitemap false }}data-pagefind-body{{- end }}
         class="dark:bg-background-dark w-full min-w-0 bg-white p-8"
       >
+        {{ partial "pagefind-meta.html" . }}
         {{ block "main" . }}
         {{ end }}
       </div>
