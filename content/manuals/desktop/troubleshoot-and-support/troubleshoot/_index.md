@@ -132,6 +132,10 @@ After the diagnostics have finished, the terminal displays your diagnostics ID a
 {{< /tab >}}
 {{< /tabs >}}
 
+> [!TIP]
+>
+> You can also use the [`docker desktop diagnose` command](/manuals/desktop/features/desktop-cli.md) to diagnose Docker Desktop and upload the diagnostics ID.
+
 To view the contents of the diagnostic file:
 
 {{< tabs group="os" >}}

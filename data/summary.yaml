@@ -169,6 +169,8 @@ Docker Desktop CLI logs:
   requires: Docker Desktop 4.39 and later
 Docker Desktop CLI kubernetes:
   requires: Docker Desktop 4.44 and later
+Docker Desktop CLI diagnose:
+  requires: Docker Desktop 4.60 and later
 Docker Hardened Images:
   subscription: [Docker Hardened Images Enterprise]
 Docker Init:
