@@ -200,6 +200,10 @@ tags:
 
       Only untagged manifests (or those not referenced by other tags or images) can be deleted. If a manifest is still referenced, the registry returns `403 Forbidden`.
 
+      > **Note**
+      >
+      > Manifest deletion operations may experience latency and could return a `500 Internal Server Error` during deletion. The system automatically retries the deletion in the background, so the manifest will eventually be removed. You do not need to manually retry the request.
+
       This section outlines the basic steps to delete an image using the registry API.
 
       1. [Get a bearer token for the repository](https://docs.docker.com/reference/api/registry/auth/).
@@ -657,6 +661,10 @@ paths:
         Only untagged or unreferenced manifests can be deleted. If the manifest is still referenced by a tag or another image, the registry will return `403 Forbidden`.
 
         This operation requires `delete` access to the repository.
+
+        > **Note**
+        >
+        > Manifest deletion operations may take some time and could return a `500 Internal Server Error`. The system automatically retries the deletion in the background. Manual intervention is not required.
       parameters:
         - name: name
           in: path
