@@ -139,7 +139,7 @@ tags:
     description: |
       The groups endpoints allow you to manage your organization's teams and their members.
 
-      For more information, seee [Create and manage a team](https://docs.docker.com/admin/organization/manage-a-team/).
+      For more information, see [Create and manage a team](https://docs.docker.com/admin/organization/manage-a-team/).
   - name: invites
     x-displayName: Invites
     x-audience: public
