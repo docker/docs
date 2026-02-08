@@ -14,7 +14,7 @@ aliases:
 ## Prerequisites
 
 - You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
-- You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
+- You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
 
 ## Overview
 
@@ -314,8 +314,19 @@ venv.bak/
 {{< /tab >}}
 {{< tab name="Using Docker Hardened Image" >}}
 
-If you don't have Docker Desktop installed or prefer creating the assets
-manually, you can create the following files in your project directory.
+Docker Hardened Images (DHIs) are available for Python in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/python). Docker Hardened Images are freely available to everyone with no subscription required. You can pull and use them like any other Docker image after signing in to the DHI registry. For more information, see the [DHI quickstart](/dhi/get-started/) guide.
+
+1. Sign in to the DHI registry:
+
+   ```console
+   $ docker login dhi.io
+   ```
+
+2. Pull the Python DHI (check the catalog for available versions):
+
+   ```console
+   $ docker pull dhi.io/python:3.12.12-debian13-fips-dev
+   ```
 
 Create a file named `Dockerfile` with the following contents.
 
@@ -331,7 +342,7 @@ Create a file named `Dockerfile` with the following contents.
 # This Dockerfile uses Docker Hardened Images (DHI) for enhanced security.
 # For more information, see https://docs.docker.com/dhi/
 ARG PYTHON_VERSION=3.12.12-debian13-fips-dev
-FROM <your-workspace>/dhi-python:${PYTHON_VERSION}
+FROM dhi.io/python:${PYTHON_VERSION}
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
