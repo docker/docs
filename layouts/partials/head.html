@@ -5,6 +5,7 @@
   <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" />
 {{ end -}}
 {{ partial "utils/css.html" "-" }}
+<link href="/pagefind/pagefind-component-ui.css" rel="stylesheet">
 {{- if hugo.IsProduction -}}
   <script
     src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"

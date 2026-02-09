@@ -290,6 +290,7 @@ agents:
 
     toolsets:
       - type: filesystem
+      - type: fetch
       - type: shell
       - type: todo
       - type: script
