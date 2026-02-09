@@ -11,14 +11,14 @@ inside microVMs with private Docker daemons.
 
 ## Supported agents
 
-| Agent       | Command    | Status       | Notes                      |
-| ----------- | ---------- | ------------ | -------------------------- |
-| Claude Code | `claude`   | Experimental | Most tested implementation |
-| Codex       | `codex`    | Experimental | In development             |
-| Copilot     | `copilot`  | Experimental | In development             |
-| Gemini      | `gemini`   | Experimental | In development             |
-| cagent      | `cagent`   | Experimental | In development             |
-| Kiro        | `kiro`     | Experimental | In development             |
+| Agent       | Command   | Status       | Notes                      |
+| ----------- | --------- | ------------ | -------------------------- |
+| Claude Code | `claude`  | Experimental | Most tested implementation |
+| Codex       | `codex`   | Experimental | In development             |
+| Copilot     | `copilot` | Experimental | In development             |
+| Gemini      | `gemini`  | Experimental | In development             |
+| cagent      | `cagent`  | Experimental | In development             |
+| Kiro        | `kiro`    | Experimental | In development             |
 
 ## Experimental status
 
@@ -44,7 +44,10 @@ sandbox when created and cannot be changed later.
 
 ## Agent-specific configuration
 
-Different agents may require different authentication methods or configuration.
+Each agent has its own credential requirements and authentication flow.
+Credentials are scoped per agent and must be provided specifically for that
+agent (no fallback authentication methods are used).
+
 See the agent-specific documentation:
 
 - [Claude Code configuration](claude-code.md)
