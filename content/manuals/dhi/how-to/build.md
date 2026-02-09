@@ -39,10 +39,16 @@ the DHI frontend instead of the Dockerfile parser:
 
 The frontend version corresponds to the base distribution:
 
-| Distribution | Syntax directive |
-|-------------|-----------------|
-| Alpine 3.23 | `# syntax=dhi.io/build:2-alpine3.23` |
-| Debian 13 (Trixie) | `# syntax=dhi.io/build:2-debian13` |
+| Distribution        | Syntax directive                       |
+|---------------------|----------------------------------------|
+| Alpine 3.22         | `# syntax=dhi.io/build:2-alpine3.22`  |
+| Alpine 3.23         | `# syntax=dhi.io/build:2-alpine3.23`  |
+| Debian 12 (Bookworm)| `# syntax=dhi.io/build:2-debian12`    |
+| Debian 13 (Trixie)  | `# syntax=dhi.io/build:2-debian13`    |
+
+The DHI build system reads the YAML, resolves packages from the specified
+repositories, assembles the filesystem, creates user accounts, sets metadata,
+and produces a signed OCI image.
 
 ## Explore the catalog for reference
 
@@ -57,25 +63,54 @@ The catalog follows this directory structure:
 catalog/
 ├── image/
 │   ├── alpine-base/
-│   │   └── alpine-3.23/
-│   │       ├── 3.23.yaml
-│   │       └── 3.23-dev.yaml
+│   │   ├── alpine-3.23/
+│   │   │   ├── 3.23.yaml            # runtime variant
+│   │   │   └── 3.23-dev.yaml        # dev variant
+│   │   ├── guides.md
+│   │   ├── info.yaml
+│   │   ├── logo.svg
+│   │   └── overview.md
 │   ├── nginx/
+│   │   ├── alpine-3.22/
 │   │   ├── alpine-3.23/
 │   │   │   ├── mainline.yaml
-│   │   │   └── mainline-dev.yaml
-│   │   └── debian-13/
+│   │   │   ├── mainline-dev.yaml
+│   │   │   ├── stable.yaml
+│   │   │   └── stable-dev.yaml
+│   │   ├── debian-12/
+│   │   ├── debian-13/
+│   │   ├── bin/
+│   │   ├── guides.md
+│   │   ├── info.yaml
+│   │   ├── logo.svg
+│   │   └── overview.md
 │   └── redis/
-│       └── debian-13/
-│           ├── 8.0.yaml
-│           └── 8.0-dev.yaml
+│       ├── debian-13/
+│       │   ├── 8.0.yaml              # runtime
+│       │   ├── 8.0-dev.yaml          # dev
+│       │   ├── 8.0-compat.yaml       # compat runtime
+│       │   └── 8.0-compat-dev.yaml   # compat dev
+│       ├── guides.md
+│       ├── info.yaml
+│       ├── logo.svg
+│       └── overview.md
 ├── chart/
 └── package/
 ```
 
-Each image organizes its variants by distribution. A `runtime` variant is
-minimal and typically runs as a non-root user. A `dev` variant adds a shell,
-package manager, and development tools.
+Each image organizes its variants by distribution. Images support multiple
+variant types:
+
+- A `runtime` variant is minimal and typically runs as a non-root user.
+- A `dev` variant adds a shell, package manager, and development tools.
+- A `compat` variant adds common shell utilities such as `bash`, `coreutils`,
+  `grep`, and `sed` for compatibility with existing workflows. Compat images use
+  the `flavor: compat` field alongside a `runtime` or `dev` variant.
+- A `compat-dev` variant combines the compat packages with dev tools.
+
+Some images also support additional flavors such as `sfw` (software framework)
+variants. Refer to the catalog for the full list of available variants for each
+image.
 
 ## Try it: build a catalog image
 
@@ -107,51 +142,64 @@ $ cd catalog
 
 ## YAML schema reference
 
-The following tables describe the fields available in a DHI definition file.
+The following sections describe the fields available in a DHI definition file.
 
 ### Required fields
 
 Every definition must include these top-level fields:
 
-| Field | Description |
-|-------|-------------|
-| `name` | Human-readable name for the image. |
-| `image` | Full registry path, such as `dhi.io/my-image`. |
-| `variant` | Either `runtime` or `dev`. |
-| `tags` | List of image tags. |
-| `platforms` | Target architectures, such as `linux/amd64` and `linux/arm64`. |
-| `contents` | Package repositories and packages to install. |
+| Field       | Description                                                         |
+|-------------|---------------------------------------------------------------------|
+| `name`      | Human-readable name for the image.                                  |
+| `image`     | Full registry path, such as `dhi.io/my-image`.                      |
+| `variant`   | Image variant type: `runtime` or `dev`.                             |
+| `tags`      | List of image tags.                                                 |
+| `platforms`  | Target architectures, such as `linux/amd64` and `linux/arm64`.     |
+| `contents`  | Package repositories and packages to install.                       |
+
+### Image metadata
+
+These fields add metadata to the image:
+
+| Field         | Description                                                       |
+|---------------|-------------------------------------------------------------------|
+| `os-release`  | Defines the `/etc/os-release` contents inside the image.          |
+| `annotations` | OCI image annotations such as description and license.            |
+| `dates`       | Release date and end-of-life date.                                |
+| `vars`        | Build-time variables for templating.                              |
+| `flavor`      | Image flavor modifier, such as `compat` for compatibility images. |
 
 ### Container configuration
 
-| Field | Description |
-|-------|-------------|
-| `accounts` | Users, groups, and the `run-as` user. |
-| `environment` | Environment variables. |
-| `entrypoint` | Container entrypoint command. |
-| `cmd` | Default command arguments. |
-| `work-dir` | Working directory inside the container. |
-| `volumes` | Volume mount points. |
-| `ports` | Exposed network ports. |
-| `paths` | Directories, files, and symlinks to create. |
-| `os-release` | Defines the `/etc/os-release` contents inside the image. |
-| `annotations` | OCI image annotations such as description and license. |
+These fields control how the container runs:
+
+| Field         | Description                                                       |
+|---------------|-------------------------------------------------------------------|
+| `accounts`    | Users, groups, and the `run-as` user.                             |
+| `environment` | Environment variables.                                            |
+| `entrypoint`  | Container entrypoint command.                                     |
+| `cmd`         | Default command arguments.                                        |
+| `work-dir`    | Working directory inside the container.                           |
+| `volumes`     | Volume mount points.                                              |
+| `ports`       | Exposed network ports.                                            |
+| `paths`       | Directories, files, and symlinks to create.                       |
 
 ### Advanced fields
 
-| Field | Description |
-|-------|-------------|
-| `contents.builds` | Build stages with shell pipelines. |
-| `contents.keyring` | Signing keys for third-party package repositories. |
-| `contents.artifacts` | Pre-built OCI artifacts to include. |
-| `contents.mappings` | Package URL (purl) mappings for SBOM accuracy. |
-| `vars` | Build-time variables for templating. |
-| `dates` | Release date and end-of-life date. |
+These fields support more complex build patterns:
 
-## Build a minimal Alpine image
+| Field                | Description                                                  |
+|----------------------|--------------------------------------------------------------|
+| `contents.builds`    | Build stages with shell pipelines.                           |
+| `contents.keyring`   | Signing keys for third-party package repositories.           |
+| `contents.artifacts` | Pre-built OCI artifacts to include.                          |
+| `contents.mappings`  | Package URL (purl) mappings for SBOM accuracy.               |
+| `contents.files`     | Source files fetched from git URLs with checksums.            |
 
-The following example shows the simplest possible definition: an Alpine base
-image with a non-root user.
+## Create a minimal image
+
+Start with the simplest possible definition: an Alpine base image with a
+non-root user.
 
 Create a directory for your project and add a file called `base.yaml`:
 
@@ -195,9 +243,13 @@ os-release:
   version-id: "3.23"
   pretty-name: My Hardened Image
   home-url: https://docker.com/products/hardened-images/
+  bug-report-url: https://docker.com/support/
 
 environment:
   SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+
+annotations:
+  org.opencontainers.image.description: A minimal Alpine base image
 
 cmd:
   - /bin/sh
@@ -206,12 +258,13 @@ cmd:
 In this definition:
 
 - `contents.repositories` uses full URLs to Alpine package mirrors.
-- `contents.packages` lists exact Alpine package names. The package
-  `alpine-baselayout-data` provides essential filesystem structure and is
-  required in most Alpine-based images.
-- The `accounts` section creates a `nonroot` user with UID 65532 (a common
-  convention for hardened images) and sets it as the default runtime user.
-- The `os-release` block defines what appears in `/etc/os-release`.
+- `contents.packages` lists exact Alpine package names.
+- The `accounts` block creates a `nonroot` user (UID 65532) and sets it as the
+  default user for the container.
+- The `os-release` block defines what appears in `/etc/os-release`. Always
+  include `bug-report-url` alongside `home-url`.
+- The `annotations` block adds OCI metadata visible in registries and Docker
+  Scout reports.
 
 Build the image:
 
@@ -223,96 +276,13 @@ $ docker buildx build . -f base.yaml \
     --load
 ```
 
-Verify the image by checking the running user:
+## Use a Debian base with third-party repositories
 
-```console
-$ docker run --rm my-base:latest id
-```
+For applications that require Debian packages or third-party APT repositories,
+use the Debian syntax directive. The following example builds a Redis image
+from the official Redis APT repository.
 
-This should show `uid=65532(nonroot)`.
-
-## Add application packages
-
-To create a useful image, add application-specific packages to the
-`contents.packages` list. The following example adds Python:
-
-```yaml
-# syntax=dhi.io/build:2-alpine3.23
-
-name: Python Runtime
-image: my-registry/my-python
-variant: runtime
-tags:
-  - "3.13"
-platforms:
-  - linux/amd64
-  - linux/arm64
-
-contents:
-  repositories:
-    - https://dl-cdn.alpinelinux.org/alpine/v3.23/main
-    - https://dl-cdn.alpinelinux.org/alpine/v3.23/community
-  packages:
-    - alpine-baselayout-data
-    - ca-certificates-bundle
-    - bzip2
-    - expat
-    - libffi
-    - mpdecimal
-    - musl
-    - ncurses
-    - openssl
-    - readline
-    - sqlite-libs
-    - python3
-    - tzdata
-    - zlib
-
-accounts:
-  run-as: nonroot
-  users:
-    - name: nonroot
-      uid: 65532
-      gid: 65532
-  groups:
-    - name: nonroot
-      gid: 65532
-      members:
-        - nonroot
-
-environment:
-  SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
-  PYTHON_VERSION: "3.13"
-
-annotations:
-  org.opencontainers.image.description: A minimal Python runtime image
-  org.opencontainers.image.licenses: PSF-2.0
-
-cmd:
-  - python3
-```
-
-Only include the packages your application actually needs. Fewer packages means
-a smaller attack surface.
-
-For reproducible builds, pin packages to specific versions:
-
-```yaml
-  packages:
-    - python3=3.13.2-r1
-```
-
-To look up available versions, run:
-
-```console
-$ docker run --rm alpine:3.23 apk search <package-name>
-```
-
-## Build a Debian-based image
-
-To build a Debian-based image instead of Alpine, change the syntax directive
-and adjust the repository format. The following example defines a Redis image
-on Debian 13 with a third-party package repository:
+Create a file called `redis.yaml`:
 
 ```yaml
 # syntax=dhi.io/build:2-debian13
@@ -322,6 +292,7 @@ image: my-registry/my-redis
 variant: runtime
 tags:
   - "8.0"
+  - "8.0.5"
 platforms:
   - linux/amd64
   - linux/arm64
@@ -344,6 +315,10 @@ contents:
     - redis-server=6:8.0.5-1rl1~trixie1
     - redis-tools=6:8.0.5-1rl1~trixie1
     - tini
+  mappings:
+    redis: pkg:deb/redis/redis@6:8.0.5-1rl1~trixie1?os_name=debian&os_version=13
+    redis-server: pkg:deb/redis/redis-server@6:8.0.5-1rl1~trixie1?os_name=debian&os_version=13
+    redis-tools: pkg:deb/redis/redis-tools@6:8.0.5-1rl1~trixie1?os_name=debian&os_version=13
 
 accounts:
   run-as: nonroot
@@ -364,11 +339,16 @@ os-release:
   version-codename: trixie
   pretty-name: Docker Hardened Images/Debian GNU/Linux 13 (trixie)
   home-url: https://docker.com/products/hardened-images/
+  bug-report-url: https://docker.com/support/
 
 work-dir: /data
 
 environment:
   REDIS_VERSION: 8.0.5
+
+annotations:
+  org.opencontainers.image.description: A minimal Redis image
+  org.opencontainers.image.licenses: AGPL-3.0-only
 
 entrypoint:
   - /usr/bin/tini
@@ -381,81 +361,103 @@ cmd:
   - /etc/redis/conf.d/*.conf
 ```
 
-There are several Debian-specific differences from the Alpine examples:
+This example introduces several patterns:
 
-| Feature | Alpine | Debian |
-|---------|--------|--------|
-| Syntax directive | `dhi.io/build:2-alpine3.23` | `dhi.io/build:2-debian13` |
-| Repository format | Plain URL | `deb [signed-by=...] <url> <suite> <component>` |
+- **Third-party repositories**: The `repositories` field uses the Debian
+  `deb [signed-by=...] URL suite component` format for APT sources.
+- **Keyring**: The `keyring` field downloads the GPG key used to verify packages
+  from the third-party repository.
+- **Package exclusions**: Prefix a package name with `!` to explicitly exclude
+  it. This prevents unwanted dependencies from being installed. In this case,
+  `!libelogind0`, `!mawk`, and `!original-awk` are excluded.
+- **Debian version pinning**: Use the full epoch format,
+  `redis-server=6:8.0.5-1rl1~trixie1`, to pin exact package versions.
+- **SBOM mappings**: The `mappings` field provides Package URL (purl) metadata
+  so that Docker Scout can accurately identify the software in the SBOM.
+- **Init process**: The `entrypoint` uses `tini` as a lightweight init process
+  (PID 1) to handle signal forwarding and zombie process reaping.
+- **Config includes**: The `cmd` uses `--include /etc/redis/conf.d/*.conf` so
+  that configuration files created in the `paths` section are loaded at startup.
 
-### Exclude unwanted packages
+## Create paths
 
-Debian packages sometimes pull in dependencies you don't need. Prefix a package
-name with `!` to exclude it:
-
-```yaml
-  packages:
-    - '!libelogind0'
-    - '!mawk'
-    - '!original-awk'
-```
-
-Wrap exclusions in quotes because YAML treats `!` as a special character.
-
-To look up available Debian packages, run:
-
-```console
-$ docker run --rm debian:trixie apt-cache search <package-name>
-```
-
-## Create files, directories, and symlinks
-
-Use the `paths` field to create filesystem entries without running shell
-commands. This is cleaner and more auditable than using build stages for simple
-file operations.
+Use the `paths` field to create directories, files with inline content, and
+symlinks inside the image. The following example extends the Redis definition
+with the paths required for operation:
 
 ```yaml
 paths:
   - type: directory
-    path: /var/lib/myapp
+    path: /var/lib/redis
     uid: 65532
     gid: 65532
     mode: "0755"
-
+  - type: directory
+    path: /var/log/redis
+    uid: 65532
+    gid: 65532
+    mode: "0755"
+  - type: directory
+    path: /run/redis/
+    uid: 65532
+    gid: 65532
+    mode: "0755"
+  - type: directory
+    path: /data
+    uid: 65532
+    gid: 65532
+    mode: "0755"
   - type: file
-    path: /etc/myapp/config.conf
+    path: /etc/redis/conf.d/docker.conf
     content: |
       daemonize no
-      bind 0.0.0.0
+      bind 0.0.0.0 -::1
       logfile ""
     uid: 0
     gid: 0
     mode: "0555"
-
   - type: symlink
-    path: /usr/bin/myapp-alias
+    path: /usr/bin/redis-sentinel
     uid: 0
     gid: 0
-    source: /usr/bin/myapp
+    source: /usr/bin/redis-check-rdb
 ```
 
-The `paths` field supports three types:
+Three path types are available:
 
-| Type | Description |
-|------|-------------|
-| `directory` | Creates a directory with the specified ownership and permissions. |
-| `file` | Creates a file with inline content. |
-| `symlink` | Creates a symbolic link pointing to `source`. |
+| Type        | Required fields                  | Description                          |
+|-------------|----------------------------------|--------------------------------------|
+| `directory` | `path`, `uid`, `gid`, `mode`     | Creates an empty directory.          |
+| `file`      | `path`, `content`, `uid`, `gid`, `mode` | Creates a file with inline content. |
+| `symlink`   | `path`, `source`, `uid`, `gid`   | Creates a symbolic link.             |
 
-## Use build stages for runtime configuration
+The `mode` field uses a string representation of the octal permission bits,
+such as `"0755"` for read-write-execute by owner or `"0555"` for read-execute
+by all. Note that the `file` type supports inline `content` using a YAML
+multiline string.
 
-Some images need shell commands during the build to configure the application.
-Use `contents.builds` to define build stages with shell pipelines. This is
-conceptually similar to multi-stage Dockerfiles.
+## Add build stages
 
-The following example configures Nginx to run as a non-root user:
+For images that need to run shell commands during the build, such as
+configuring files, creating symlinks, or adjusting permissions, use the
+`contents.builds` field. Each build stage has its own packages, a pipeline
+of named steps, and output mappings.
+
+The following example configures Nginx during the build to run on an
+unprivileged port and disable server tokens:
 
 ```yaml
+# syntax=dhi.io/build:2-alpine3.23
+
+name: Nginx mainline
+image: my-registry/my-nginx
+variant: runtime
+tags:
+  - "1.29"
+platforms:
+  - linux/amd64
+  - linux/arm64
+
 contents:
   repositories:
     - https://dl-cdn.alpinelinux.org/alpine/v3.23/main
@@ -467,7 +469,7 @@ contents:
     - alpine-baselayout-data
     - busybox
     - musl-utils
-    - nginx=1.29.4-r1
+    - nginx=1.29.5-r1
   builds:
     - name: nginx
       contents:
@@ -481,7 +483,7 @@ contents:
           - alpine-baselayout-data
           - bash
           - musl-utils
-          - nginx=1.29.4-r1
+          - nginx=1.29.5-r1
       pipeline:
         - name: install
           runs: |
@@ -490,14 +492,10 @@ contents:
             ln -sf /dev/stdout /var/log/nginx/access.log
             ln -sf /dev/stderr /var/log/nginx/error.log
 
-            sed -i "s,listen       80;,listen       8080;," \
-              /etc/nginx/conf.d/default.conf
-
+            sed -i "s,listen       80;,listen       8080;," /etc/nginx/conf.d/default.conf
             sed -i "/user  nginx;/d" /etc/nginx/nginx.conf
-            sed -i "s,pid        /run/nginx.pid;,pid        /var/run/nginx.pid;," \
-              /etc/nginx/nginx.conf
-            sed -i '/^http {$/a\    server_tokens off;' \
-              /etc/nginx/nginx.conf
+            sed -i "s,pid        /run/nginx.pid;,pid        /var/run/nginx.pid;," /etc/nginx/nginx.conf
+            sed -i '/^http {$/a\    server_tokens off;' /etc/nginx/nginx.conf
 
             chown -R 65532:65532 /var/cache/nginx
             chmod -R g+w /var/cache/nginx
@@ -513,15 +511,56 @@ contents:
           uid: 0
           gid: 0
           diff: true
+
+accounts:
+  run-as: nginx
+  users:
+    - name: nginx
+      uid: 65532
+      gid: 65532
+  groups:
+    - name: nginx
+      gid: 65532
+      members:
+        - nginx
+    - name: www-data
+      gid: 82
+
+os-release:
+  name: Docker Hardened Images (Alpine)
+  id: alpine
+  version-id: "3.23"
+  pretty-name: Docker Hardened Images/Alpine Linux v3.23
+  home-url: https://docker.com/products/hardened-images/
+  bug-report-url: https://docker.com/support/
+
+environment:
+  NGINX_VERSION: 1.29.5-r1
+
+annotations:
+  org.opencontainers.image.description: A minimal Nginx image
+  org.opencontainers.image.licenses: BSD-2-Clause
+
+entrypoint:
+  - nginx
+
+cmd:
+  - -g
+  - daemon off;
+
+ports:
+  - 8080/tcp
 ```
 
-Key concepts for build stages:
+Key patterns in this definition:
 
-| Field | Description |
-|-------|-------------|
-| `contents` | Each build stage has its own `contents` section. Include packages needed only during the build, such as `bash`. |
-| `pipeline` | Contains named steps that run shell commands. Always start scripts with `set -eux -o pipefail`. |
-| `outputs` | Copies results from the build stage into the final image. Setting `diff: true` copies only files that changed, keeping the image minimal. |
+| Element     | Description                                                                |
+|-------------|----------------------------------------------------------------------------|
+| `contents`  | Each build stage has its own `contents` section. Include packages needed only during the build, such as `bash`. |
+| `pipeline`  | Contains named steps that run shell commands. Always start scripts with `set -eux -o pipefail`. |
+| `outputs`   | Copies results from the build stage into the final image. Setting `diff: true` copies only files that changed, keeping the image minimal. |
+| `accounts`  | Nginx uses a dedicated `nginx` user (UID 65532) instead of `nonroot`. The `www-data` group (GID 82) is also created for web server compatibility. |
+| `musl-utils` | Required in both the main and build packages for Alpine-based Nginx images. |
 
 ## Use OCI artifacts as package sources
 
@@ -530,20 +569,9 @@ pre-built binaries from DHI package artifacts. This is how the catalog builds
 images like Python and Node.js — the runtime is compiled separately and
 published as an OCI artifact, then referenced by digest in the image definition.
 
-The `contents.artifacts` field pulls files from a DHI package into your image:
+Add the `artifacts` field under `contents`:
 
 ```yaml
-# syntax=dhi.io/build:2-alpine3.23
-
-name: My Python App
-image: my-registry/my-python-app
-variant: runtime
-tags:
-  - "1.0"
-platforms:
-  - linux/amd64
-  - linux/arm64
-
 contents:
   repositories:
     - https://dl-cdn.alpinelinux.org/alpine/v3.23/main
@@ -564,63 +592,19 @@ contents:
     - tzdata
     - zlib
   artifacts:
-    - name: dhi.io/pkg-python:3.13.12-alpine3.23@sha256:a10ed19d2602bc1693474c78fd965f53c2d9a1ce177695f96d2c1fa007a010c4
+    - name: dhi.io/pkg-python:3.13.12-alpine3.23@sha256:052b3b915055006a27c42470eed5c65d7ee92d2c3de47ecaedcc6bbd36077b95
       includes:
         - opt/**
       uid: 0
       gid: 0
-
-accounts:
-  run-as: nonroot
-  users:
-    - name: nonroot
-      uid: 65532
-      gid: 65532
-  groups:
-    - name: nonroot
-      gid: 65532
-      members:
-        - nonroot
-
-environment:
-  LD_LIBRARY_PATH: /opt/python/lib
-  PATH: /opt/python/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-  PYTHON_VERSION: 3.13.12
-  SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
-
-cmd:
-  - python3
 ```
 
-This example pulls a hardened Python 3.13 runtime from `dhi.io/pkg-python` and
-overlays it at `/opt`. The `@sha256:...` digest pins the exact artifact version,
-ensuring reproducible builds.
-
-You can also use artifacts inside a build stage for more control. The Node.js
-image uses this pattern to selectively include and exclude files:
-
-```yaml
-  builds:
-    - name: node
-      contents:
-        artifacts:
-          - name: dhi.io/pkg-node:22.22.0-alpine3.23@sha256:bce51bba...
-            includes:
-              - opt/nodejs
-              - usr/local/bin/node
-            excludes:
-              - opt/nodejs/node-v22.22.0/include
-              - opt/nodejs/node-v22.22.0/lib
-            uid: 0
-            gid: 0
-```
-
-| Field | Description |
-|-------|-------------|
-| `name` | OCI artifact reference with digest, in the format `dhi.io/pkg-<name>:<version>@sha256:<digest>`. |
+| Field      | Description                                                                  |
+|------------|------------------------------------------------------------------------------|
+| `name`     | Full OCI reference with digest pin. Always use `@sha256:` for reproducibility. |
 | `includes` | Glob patterns for files to extract from the artifact. Use `opt/**` to include everything under a directory. |
 | `excludes` | Glob patterns for files to skip. Useful for removing headers, docs, or unused binaries. |
-| `uid`, `gid` | Ownership for extracted files. |
+| `uid`, `gid` | Ownership for extracted files.                                             |
 
 Available DHI packages are in the
 [`package/`](https://github.com/docker-hardened-images/catalog/tree/main/package)
@@ -628,14 +612,16 @@ directory of the catalog repository.
 
 ## Create a dev variant
 
-Production images should be minimal, but developers often need additional tools
-for debugging and troubleshooting. A common pattern is to maintain both a
-`runtime` and a `dev` variant of each image.
+A dev variant of an image adds a shell, package manager, and development tools.
+This is useful for debugging and for use as a build stage in multi-stage
+workflows.
+
+To create a dev variant, change the `variant` field and enable root access:
 
 ```yaml
 # syntax=dhi.io/build:2-alpine3.23
 
-name: My Base Image (dev)
+name: Alpine 3.23 Base (dev)
 image: my-registry/my-base
 variant: dev
 tags:
@@ -667,78 +653,112 @@ accounts:
       members:
         - nonroot
 
+os-release:
+  name: Docker Hardened Images (Alpine)
+  id: alpine
+  version-id: "3.23"
+  pretty-name: Docker Hardened Images/Alpine Linux v3.23
+  home-url: https://docker.com/products/hardened-images/
+  bug-report-url: https://docker.com/support/
+
 environment:
   SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+
+annotations:
+  org.opencontainers.image.description: A minimal Alpine base image
 
 cmd:
   - /bin/sh
 ```
 
-The dev variant typically adds the following:
+The key differences from a runtime variant:
 
-| Feature | Runtime variant | Dev variant |
-|---------|----------------|-------------|
-| Package manager | Not included | `apk-tools` (Alpine) or `apt` (Debian) |
-| Shell | `busybox` (Alpine) or none (Debian) | `busybox` (Alpine) or `bash` (Debian) |
-| User | `nonroot` (65532) | `root` |
-| Debug tools | Not included | Install via package manager at runtime |
+- `variant: dev` instead of `variant: runtime`.
+- `accounts.root: true` enables the root account.
+- `run-as: root` sets root as the default user.
+- `apk-tools` is added to packages, giving the image a package manager.
+- The `nonroot` user is still defined so that applications can switch to an
+  unprivileged user at runtime.
 
-The runtime and dev variants share the same `image` field but use different
-`variant` values and tag suffixes. This keeps them in the same repository while
-making it clear which variant a consumer is pulling.
+For Debian-based dev variants, add `apt` instead of `apk-tools` and include the
+`DEBIAN_FRONTEND: noninteractive` environment variable.
 
-> [!NOTE]
->
-> Using the dev variant increases the attack surface. It is not recommended as a
-> runtime for production environments.
+## Create a compat variant
 
-## Expose ports and volumes
+A compat (compatibility) variant includes common shell utilities for
+compatibility with scripts and automation tools that expect a standard Linux
+userland. Compat images use the `flavor` field:
 
-For services that listen on network ports or persist data, use the `ports` and
-`volumes` fields:
+```yaml
+variant: runtime
+flavor: compat
+```
+
+A compat variant adds packages such as `bash`, `coreutils`, `findutils`,
+`grep`, `hostname`, `openssl`, `procps`, and `sed` alongside the application
+packages. A `compat-dev` variant combines both the compat packages and the dev
+tools:
+
+```yaml
+variant: dev
+flavor: compat
+```
+
+Refer to the Redis compat images in the catalog for a complete example of the
+compat pattern.
+
+## Set ports and volumes
+
+Use the `ports` field to declare which ports the container exposes. Always use
+unprivileged ports (higher than 1024) when the container runs as a non-root
+user.
 
 ```yaml
 ports:
   - 8080/tcp
-  - 8443/tcp
-
-volumes:
-  - /data
-  - /var/log/myapp
 ```
 
-Always use unprivileged ports (higher than 1024) when the container runs as a
-non-root user. This avoids the need for `NET_BIND_SERVICE` capabilities.
+Use the `volumes` field to declare volume mount points:
 
-## Build and verify an image
+```yaml
+volumes:
+  - /data
+```
 
-### Build
+## Set annotations
+
+OCI annotations add machine-readable metadata to the image. Use the
+`annotations` field:
+
+```yaml
+annotations:
+  org.opencontainers.image.description: A minimal hardened application image
+  org.opencontainers.image.licenses: Apache-2.0
+```
+
+These annotations appear in Docker Scout reports and container registry
+interfaces.
+
+## Build and verify
+
+### Build the image
 
 Build a single-platform image for local testing:
 
 ```console
-$ docker buildx build . -f <my-image>.yaml \
+$ docker buildx build . -f my-image.yaml \
     --sbom=generator=dhi.io/scout-sbom-indexer:1 \
     --provenance=1 \
-    --tag <my-image>:latest \
+    --tag my-image:latest \
     --load
 ```
-
-The flags break down as follows:
-
-| Flag | Description |
-|------|-------------|
-| `-f <my-image>.yaml` | Points to the DHI definition file. |
-| `--sbom=generator=dhi.io/scout-sbom-indexer:1` | Generates a Software Bill of Materials. |
-| `--provenance=1` | Attaches SLSA provenance attestation. |
-| `--load` | Loads the built image into the local Docker image store. |
 
 ### Inspect the SBOM
 
 View the generated Software Bill of Materials:
 
 ```console
-$ docker scout sbom <my-image>:latest
+$ docker scout sbom my-image:latest
 ```
 
 ### Scan for vulnerabilities
@@ -746,45 +766,66 @@ $ docker scout sbom <my-image>:latest
 Check the image against known CVE databases:
 
 ```console
-$ docker scout cves <my-image>:latest
+$ docker scout cves my-image:latest
 ```
-
-To learn more about scanning, see [Scan Docker Hardened Images](./scan.md).
 
 ### Compare with a non-hardened image
 
 Measure the security improvement against an equivalent non-hardened image:
 
 ```console
-$ docker scout compare <my-image>:latest \
-    --to <non-hardened-image>:<tag>
+$ docker scout compare my-image:latest \
+    --to <non-hardened-equivalent>:<tag> \
+    --platform linux/amd64
 ```
 
-To learn more about comparing images, see
-[Compare Docker Hardened Images](./compare.md).
+Replace `<non-hardened-equivalent>` with the Docker Official Image or
+community image you're comparing against.
 
 ### Inspect with Docker Debug
 
-Verify the entrypoint configuration and explore the image contents:
+Verify the os-release and entrypoint configuration:
 
 ```console
-$ docker debug <my-image>:latest
+$ docker debug my-image:latest
 ```
 
-To learn more about debugging, see
-[Debug a Docker Hardened Image container](./debug.md).
+The output shows the detected distribution name from your `os-release`
+configuration and runs an entrypoint lint check.
 
 ## Push to a registry
 
 Tag and push the image to your container registry:
 
 ```console
-$ docker tag <my-image>:latest <your-namespace>/<my-image>:latest
+$ docker tag my-image:latest <your-namespace>/my-image:latest
 ```
 
 ```console
-$ docker push <your-namespace>/<my-image>:latest
+$ docker push <your-namespace>/my-image:latest
 ```
 
 Replace `<your-namespace>` with your Docker Hub username or organization
 namespace.
+
+## Contribute to the catalog
+
+Docker Hardened Images is an open source project. You can contribute new image
+definitions or improve existing ones by submitting a pull request to the
+[catalog repository](https://github.com/docker-hardened-images/catalog).
+
+To contribute a new image:
+
+1. Fork the catalog repository.
+2. Create a directory under `image/` following the naming convention:
+   `image/<image-name>/<distribution>/`.
+3. Add your YAML definition files (one per variant).
+4. Add an `info.yaml` with display name, description, and categories.
+5. Add an `overview.md` describing the image.
+6. Add a `logo.svg` for the image icon.
+7. Add a `guides.md` with usage documentation.
+8. Open a pull request against the `main` branch.
+
+For more details, read the
+[contributing guide](https://github.com/docker-hardened-images/catalog/blob/main/CONTRIBUTING.md)
+in the catalog repository.
