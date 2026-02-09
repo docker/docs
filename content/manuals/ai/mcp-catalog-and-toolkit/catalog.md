@@ -1,8 +1,8 @@
 ---
 title: Docker MCP Catalog
 linkTitle: Catalog
-description: Learn about the benefits of the MCP Catalog, how you can use it, and how you can contribute
-keywords: docker hub, mcp, mcp servers, ai agents, catalog, docker
+description: Browse Docker's curated collection of verified MCP servers, and create custom catalogs for your team or organization.
+keywords: docker hub, mcp, mcp servers, ai agents, catalog, custom catalog, docker
 weight: 20
 ---
 
@@ -13,14 +13,15 @@ verified MCP servers, packaged as Docker images and distributed through Docker
 Hub. It solves common challenges with running MCP servers locally: environment
 conflicts, setup complexity, and security concerns.
 
-The catalog serves as the source of available MCP servers. Each server runs as
-an isolated container, making it portable and consistent across different
-environments.
+The catalog serves as the source of available MCP servers. When you add servers
+to your [profiles](/manuals/ai/mcp-catalog-and-toolkit/profiles.md), you select
+them from the catalog. Each server runs as an isolated container, making it
+portable and consistent across different environments.
 
 > [!NOTE]
-> E2B sandboxes now include direct access to the Docker MCP Catalog, giving developers
-> access to over 200 tools and services to seamlessly build and run AI agents. For
-> more information, see [E2B Sandboxes](sandboxes.md).
+> E2B sandboxes now include direct access to the Docker MCP Catalog, giving
+> developers access to over 200 tools and services to seamlessly build and run
+> AI agents. For more information, see [E2B Sandboxes](e2b-sandboxes.md).
 
 ## What's in the catalog
 
@@ -35,9 +36,6 @@ The Docker MCP Catalog includes:
 - Remote services: Cloud-hosted servers that connect to external services like
   GitHub, Notion, and Linear
 
-You can browse the catalog at [hub.docker.com/mcp](https://hub.docker.com/mcp)
-or through the **Catalog** tab in Docker Desktop's MCP Toolkit.
-
 ### Local versus remote servers
 
 The catalog contains two types of servers based on where they run:
@@ -50,22 +48,81 @@ Remote servers run on the provider's infrastructure and connect to external
 services. Many remote servers use OAuth authentication, which the MCP Toolkit
 handles automatically through your browser.
 
-## Using servers from the catalog
+## Browse the catalog
 
-To start using MCP servers from the catalog:
+Browse available MCP servers at [hub.docker.com/mcp](https://hub.docker.com/mcp)
+or directly in Docker Desktop:
 
-1. Browse servers in the [MCP Catalog](https://hub.docker.com/mcp) or in Docker
-   Desktop
-2. Enable servers through the MCP Toolkit
-3. Configure any required authentication (OAuth is handled automatically)
-4. Connect your AI applications to use the servers
+1. In Docker Desktop, select **MCP Toolkit**.
+2. Select the **Catalog** tab to browse available servers.
+3. Select a server to view its description, tools, and configuration options.
 
-For detailed step-by-step instructions, see:
+## Add servers to a profile
 
-- [Get started with MCP Toolkit](/ai/mcp-catalog-and-toolkit/get-started/) -
-  Quick start guide
-- [MCP Toolkit](/ai/mcp-catalog-and-toolkit/toolkit/) - Detailed usage
-  instructions
+To add a server from the catalog to a profile:
+
+1. In the **Catalog** tab, select the checkbox next to a server.
+2. Choose the profile to add it to from the drop-down.
+
+For step-by-step instructions and client connection, see
+[Get started with MCP Toolkit](get-started.md) or
+[MCP Profiles](profiles.md).
+
+## Custom catalogs
+
+Custom catalogs let you curate focused collections of servers for your team or
+organization. Instead of exposing all 300+ servers in the Docker catalog, you
+define exactly which servers are available.
+
+Common use cases:
+
+- Restrict which servers your organization approves for use
+- Add your organization's private MCP servers alongside public ones
+- Control which server versions your team uses
+- Define the server set available to AI agents using [Dynamic MCP](dynamic-mcp.md)
+
+### Custom catalogs with Dynamic MCP
+
+Custom catalogs work particularly well with
+[Dynamic MCP](/ai/mcp-catalog-and-toolkit/dynamic-mcp/), where agents discover
+and add MCP servers on-demand during conversations. When you run the gateway
+with a custom catalog, the `mcp-find` tool searches only within that catalog.
+If your catalog contains 20 servers instead of 300+, agents work within that
+focused set, discovering and enabling tools as needed without manual
+configuration each time.
+
+### Import a custom catalog
+
+If someone on your team has created and published a catalog, you can import it
+using its OCI registry reference.
+
+In Docker Desktop:
+
+1. Select **MCP Toolkit** and select the **Catalog** tab.
+2. Select **Import catalog**.
+3. Enter the OCI reference for the catalog (for example,
+   `registry.example.com/mcp/team-catalog:latest`).
+4. Select **Import**.
+
+Using the CLI:
+
+```console
+$ docker mcp catalog pull <oci-reference>
+```
+
+Once imported, the catalog appears alongside the Docker catalog and you can add
+its servers to your profiles.
+
+### Create and manage custom catalogs
+
+Creating and managing custom catalogs requires the CLI. See
+[Custom catalogs](/manuals/ai/mcp-catalog-and-toolkit/cli.md#custom-catalogs)
+in the CLI how-to for step-by-step instructions, including:
+
+- Curating a subset of the Docker catalog
+- Adding private servers to a catalog
+- Building a focused catalog from scratch
+- Pushing a catalog to a registry for your team to import
 
 ## Contribute an MCP server to the catalog
 
@@ -80,119 +137,3 @@ within 24 hours on:
 - The [Docker MCP Catalog](https://hub.docker.com/mcp).
 - The [Docker Hub](https://hub.docker.com/u/mcp) `mcp` namespace (for MCP
   servers built by Docker).
-
-## Custom catalogs
-
-Custom catalogs let you curate focused collections of recommended servers. You
-can package custom server implementations alongside public servers, distribute
-curated lists to your team, and define what agents can discover when using
-Dynamic MCP.
-
-Common use cases:
-
-- Curate a subset of servers from the Docker MCP Catalog that your organization
-  approves
-- Include community registry servers that aren't in the Docker catalog
-- Add your organization's private MCP servers
-- Control which versions of servers your team uses
-
-### Custom catalogs with Dynamic MCP
-
-Custom catalogs work particularly well with
-[Dynamic MCP](/ai/mcp-catalog-and-toolkit/dynamic-mcp/), where agents
-discover and add MCP servers on-demand during conversations. When you specify a
-custom catalog with the gateway, the `mcp-find` tool searches only within your
-curated catalog. If your catalog contains 20 servers instead of 300+, agents
-work within that focused set and can dynamically add servers as needed without
-manual configuration each time.
-
-This gives agents the autonomy to discover and use tools while keeping their
-options within boundaries your team defines.
-
-### Create and curate a catalog
-
-The most practical way to create a custom catalog is to fork the Docker catalog
-and then curate which servers to keep:
-
-```console
-$ docker mcp catalog fork docker-mcp my-catalog
-```
-
-This creates a copy of the Docker catalog with all available servers. Export it
-to a file where you can edit which servers to include:
-
-```console
-$ docker mcp catalog export my-catalog ./my-catalog.yaml
-```
-
-Edit `my-catalog.yaml` to remove servers you don't want, keeping only the ones
-your team needs. Each server is listed in the `registry` section. Import the
-edited catalog back:
-
-```console
-$ docker mcp catalog import ./my-catalog.yaml
-```
-
-View your curated catalog:
-
-```console
-$ docker mcp catalog show my-catalog
-```
-
-#### Alternative: Build incrementally
-
-You can also build a catalog from scratch. Start with an empty catalog or a
-template:
-
-```console
-$ docker mcp catalog create my-catalog
-```
-
-Or create a starter template with example servers:
-
-```console
-$ docker mcp catalog bootstrap ./starter-catalog.yaml
-```
-
-Add servers from other catalog files:
-
-```console
-$ docker mcp catalog add my-catalog notion ./other-catalog.yaml
-```
-
-### Use a custom catalog
-
-Use your custom catalog when running the MCP gateway. For static server
-configuration, specify which servers to enable:
-
-```console
-$ docker mcp gateway run --catalog my-catalog.yaml --servers notion,brave
-```
-
-For Dynamic MCP, where agents discover and add servers during conversations,
-specify just the catalog:
-
-```console
-$ docker mcp gateway run --catalog my-catalog.yaml
-```
-
-Agents can then use `mcp-find` to search for servers within your catalog and
-`mcp-add` to enable them dynamically.
-
-The `--catalog` flag points to a catalog file in `~/.docker/mcp/catalogs/`.
-
-### Share your catalog
-
-Share your catalog with your team by distributing the YAML file or hosting it
-at a URL:
-
-```console
-$ docker mcp catalog export my-catalog ./team-catalog.yaml
-```
-
-Team members can import it:
-
-```console
-$ docker mcp catalog import ./team-catalog.yaml
-$ docker mcp catalog import https://example.com/team-catalog.yaml
-```

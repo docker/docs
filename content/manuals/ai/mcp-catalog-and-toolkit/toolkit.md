@@ -1,6 +1,6 @@
 ---
 title: Docker MCP Toolkit
-linkTitle: MCP Toolkit
+linkTitle: Toolkit UI
 description: Use the MCP Toolkit to set up MCP servers and MCP clients.
 keywords: Docker MCP Toolkit, MCP server, MCP client, AI agents
 weight: 30
@@ -11,18 +11,24 @@ aliases:
 
 {{< summary-bar feature_name="Docker MCP Toolkit" >}}
 
+> [!NOTE]
+> This page describes the MCP Toolkit interface in Docker Desktop 4.62 and
+> later. Earlier versions have a different UI. Upgrade to follow these
+> instructions exactly.
+
 The Docker MCP Toolkit is a management interface integrated into Docker Desktop
-that lets you set up, manage, and run containerized MCP servers and connect
-them to AI agents. It removes friction from tool usage by offering secure
-defaults, easy setup, and support for a growing ecosystem of LLM-based clients.
-It is the fastest way from MCP tool discovery to local execution.
+that lets you set up, manage, and run containerized MCP servers in profiles and
+connect them to AI agents. It removes friction from tool usage by offering
+secure defaults, easy setup, and support for a growing ecosystem of LLM-based
+clients. It is the fastest way from MCP tool discovery to local execution.
 
 ## Key features
 
 - Cross-LLM compatibility: Works with Claude, Cursor, and other MCP clients.
 - Integrated tool discovery: Browse and launch MCP servers from the Docker MCP Catalog directly in Docker Desktop.
 - Zero manual setup: No dependency management, runtime configuration, or setup required.
-- Functions as both an MCP server aggregator and a gateway for clients to access installed MCP servers.
+- Profile-based organization: Create separate server collections for different projects or environments.
+- Organizes MCP servers into profiles, acting as a gateway for clients to access the servers in each profile.
 
 > [!TIP]
 > The MCP Toolkit includes [Dynamic MCP](/manuals/ai/mcp-catalog-and-toolkit/dynamic-mcp.md),
@@ -47,6 +53,11 @@ runtimes.
 
 Depending on the MCP server, the tools it provides might run within the same
 container as the server or in dedicated containers for better isolation.
+
+The MCP Toolkit organizes servers into profiles: named collections of servers
+with their configurations. This lets you maintain different server setups for
+different projects or environments. When you connect a client, you specify
+which profile it should use.
 
 ## Security
 
@@ -90,9 +101,6 @@ configure authentication for each service.
 
 #### Authorize a server with OAuth
 
-{{< tabs >}}
-{{< tab name="Docker Desktop">}}
-
 1. In Docker Desktop, go to **MCP Toolkit** and select the **Catalog** tab.
 2. Find and add an MCP server that requires OAuth.
 3. In the server's **Configuration** tab, select the **OAuth** authentication
@@ -104,74 +112,16 @@ configure authentication for each service.
 View all authorized services in the **OAuth** tab. To revoke access, select
 **Revoke** next to the service you want to disconnect.
 
-{{< /tab >}}
-{{< tab name="CLI">}}
-
-Enable an MCP server:
-
-```console
-$ docker mcp server enable github-official
-```
-
-If the server requires OAuth, authorize the connection:
-
-```console
-$ docker mcp oauth authorize github
-```
-
-Your browser opens the authorization page. Complete the authentication process,
-then return to your terminal.
-
-View authorized services:
-
-```console
-$ docker mcp oauth ls
-```
-
-Revoke access to a service:
-
-```console
-$ docker mcp oauth revoke github
-```
-
-{{< /tab >}}
-{{< /tabs >}}
-
 ## Usage examples
-
-### Example: Use the GitHub Official MCP server with Ask Gordon
-
-To illustrate how the MCP Toolkit works, here's how to enable the GitHub
-Official MCP server and use [Ask Gordon](/manuals/ai/gordon/_index.md) to
-interact with your GitHub account:
-
-1. From the **MCP Toolkit** menu in Docker Desktop, select the **Catalog** tab
-   and find the **GitHub Official** server and add it.
-2. In the server's **Configuration** tab, authenticate via OAuth.
-3. In the **Clients** tab, ensure Gordon is connected.
-4. From the **Ask Gordon** menu, you can now send requests related to your
-   GitHub account, in accordance to the tools provided by the GitHub Official
-   server. To test it, ask Gordon:
-
-   ```text
-   What's my GitHub handle?
-   ```
-
-   Make sure to allow Gordon to interact with GitHub by selecting **Always
-   allow** in Gordon's answer.
-
-> [!TIP]
-> The Gordon client is enabled by default,
-> which means Gordon can automatically interact with your MCP servers.
 
 ### Example: Use Claude Desktop as a client
 
-Imagine you have Claude Desktop installed, and you want to use the GitHub MCP server,
-and the Puppeteer MCP server, you do not have to install the servers in Claude Desktop.
-You can simply install these 2 MCP servers in the MCP Toolkit,
-and add Claude Desktop as a client:
+Imagine you have Claude Desktop installed, and you want to use the GitHub MCP
+server and the Puppeteer MCP server. You do not have to install the servers in
+Claude Desktop. You can add these 2 MCP servers to your profile in the MCP
+Toolkit and connect Claude Desktop as a client:
 
-1. From the **MCP Toolkit** menu, select the **Catalog** tab and find the **Puppeteer** server and add it.
+1. From the **MCP Toolkit** menu, select the **Catalog** tab and find the **Puppeteer** server and add it to your profile.
 1. Repeat for the **GitHub Official** server.
 1. From the **Clients** tab, select **Connect** next to **Claude Desktop**. Restart
    Claude Desktop if it's running, and it can now access all the servers in the MCP Toolkit.
@@ -189,7 +139,6 @@ You can interact with all your installed MCP servers in Visual Studio Code:
 
    {{< tabs group="" >}}
    {{< tab name="Enable globally">}}
-
    1. Insert the following in your Visual Studio Code's User `mcp.json`:
 
       ```json
@@ -200,7 +149,9 @@ You can interact with all your installed MCP servers in Visual Studio Code:
            "args": [
              "mcp",
              "gateway",
-             "run"
+             "run",
+             "--profile",
+             "my_profile"
            ],
            "type": "stdio"
          }
@@ -210,25 +161,25 @@ You can interact with all your installed MCP servers in Visual Studio Code:
 
    {{< /tab >}}
    {{< tab name="Enable for a given project">}}
-
    1. In your terminal, navigate to your project's folder.
    1. Run:
 
       ```bash
-      docker mcp client connect vscode
+      docker mcp client connect vscode --profile my_profile
       ```
 
       > [!NOTE]
-      > This command creates a `.vscode/mcp.json` file in the current
-      > directory. As this is a user-specific file, add it to your `.gitignore`
-      > file to prevent it from being committed to the repository.
+      > This command creates a `.vscode/mcp.json` file in the current directory
+      > that connects VSCode to your profile. As this is a user-specific file,
+      > add it to your `.gitignore` file to prevent it from being committed to
+      > the repository.
       >
       > ```console
       > echo ".vscode/mcp.json" >> .gitignore
       > ```
 
-  {{< /tab >}}
-  {{</tabs >}}
+{{< /tab >}}
+{{</tabs >}}
 
 1. In Visual Studio Code, open a new Chat and select the **Agent** mode:
 
@@ -243,5 +194,6 @@ For more information about the Agent mode, see the
 
 ## Further reading
 
+- [Use MCP Toolkit from the CLI](/manuals/ai/mcp-catalog-and-toolkit/cli.md)
 - [MCP Catalog](/manuals/ai/mcp-catalog-and-toolkit/catalog.md)
 - [MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)

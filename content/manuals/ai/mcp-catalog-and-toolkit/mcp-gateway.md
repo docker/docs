@@ -1,6 +1,7 @@
 ---
 title: MCP Gateway
-description: "Docker's MCP Gateway provides secure, centralized, and scalable orchestration of AI tools through containerized MCP servers—empowering developers, operators, and security teams."
+linkTitle: Gateway
+description: "Docker's MCP Gateway provides secure, centralized, and scalable orchestration of AI tools through containerized MCP servers, empowering developers, operators, and security teams."
 keywords: MCP Gateway
 weight: 40
 aliases:
@@ -14,7 +15,8 @@ and servers, managing configuration, credentials, and access control.
 When using MCP servers without the MCP Gateway, you need to configure
 applications individually for each AI application. With the MCP Gateway, you
 configure applications to connect to the Gateway. The Gateway then handles
-server lifecycle, routing, and authentication across all your servers.
+server lifecycle, routing, and authentication across all servers in your
+[profiles](/manuals/ai/mcp-catalog-and-toolkit/profiles.md).
 
 > [!NOTE]
 > If you use Docker Desktop with MCP Toolkit enabled, the Gateway runs
@@ -48,47 +50,16 @@ with installation, dependencies, updates, and security risks. By running them
 as containers managed by the Gateway, you get isolation, consistent
 environments, and centralized control.
 
+The Gateway works with profiles to determine which servers are available. When
+you run the Gateway, you specify which profile to use with the `--profile` flag
+to determine which servers are made available to clients.
+
 ## Usage
 
 To use the MCP Gateway, you'll need Docker Desktop with MCP Toolkit enabled.
 Follow the [MCP Toolkit guide](toolkit.md) to enable and configure servers
-through the graphical interface.
-
-### Manage the MCP Gateway from the CLI
-
-With MCP Toolkit enabled, you can also interact with the MCP Gateway using the
-CLI. The `docker mcp` suite of commands lets you manage servers and tools
-directly from your terminal. You can also manually run Gateways with custom
-configurations, including security restrictions, server catalogs, and more.
-
-To run an MCP Gateway manually, with customized parameters, use the `docker
-mcp` suite of commands.
-
-1. Browse the [MCP Catalog](https://hub.docker.com/mcp) for a server that you
-   want to use, and copy the install command from the **Manual installation**
-   section.
-
-   For example, run this command in your terminal to install the `duckduckgo`
-   MCP server:
-
-   ```console
-   docker mcp server enable duckduckgo
-   ```
-
-2. Connect a client, like Claude Code:
-
-   ```console
-   docker mcp client connect claude-code
-   ```
-
-3. Run the gateway:
-
-   ```console
-   docker mcp gateway run
-   ```
-
-Now your MCP gateway is running and you can leverage all the servers set up
-behind it from Claude Code.
+through the Docker Desktop interface, or see
+[Use MCP Toolkit from the CLI](cli.md) for terminal-based workflows.
 
 ### Install the MCP Gateway manually
 
