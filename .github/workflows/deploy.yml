@@ -87,7 +87,22 @@ jobs:
           aws --region ${{ env.DOCS_AWS_REGION }} s3 sync \
             --delete \
             --exclude "*.webp" \
+            --exclude "pagefind/*.pf_meta" \
+            --exclude "pagefind/fragment/*.pf_fragment" \
             public s3://${{ env.DOCS_S3_BUCKET }}/
+      -
+        name: Upload pagefind files with compression headers
+        if: ${{ env.DOCS_S3_BUCKET != '' }}
+        run: |
+          aws --region ${{ env.DOCS_AWS_REGION }} s3 cp \
+            --recursive \
+            --content-encoding="gzip" \
+            --content-type="application/octet-stream" \
+            --metadata-directive="REPLACE" \
+            public/pagefind/ s3://${{ env.DOCS_S3_BUCKET }}/pagefind/ \
+            --exclude "*" \
+            --include "*.pf_meta" \
+            --include "*.pf_fragment"
       -
         name: Update Cloudfront config
         if: ${{ env.DOCS_CLOUDFRONT_ID != '' }}
