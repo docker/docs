@@ -36,10 +36,6 @@ To manage your mirrored DHI repositories:
    - **Customize**: Create a customized image based on the source repository.
    - **Stop mirroring**: Stop mirroring the DHI repository.
 
-For other management tasks like configuring permissions, visibility, or
-webhooks, see [Docker Hub repositories](/manuals/docker-hub/repos/_index.md) for
-more information.
-
 ## Manage customized Docker Hardened Image repositories
 
 To manage your customized DHI repositories:

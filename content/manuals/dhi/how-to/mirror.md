@@ -79,9 +79,8 @@ which means you can manage access and permissions, configure webhooks, and use
 other standard Hub features. See [Docker Hub
 repositories](/manuals/docker-hub/repos/_index.md) for details.
 
-Additionally, mirrored DHI repositories support the customization capability
-that lets you modify images and charts. To learn more, see [Customize a Docker
-Hardened Image or chart](./customize.md).
+Additionally, mirrored DHI repositories let you customize images and charts. To
+learn more, see [Customize a Docker Hardened Image or chart](./customize.md).
 
 ### Webhook integration for syncing and alerts
 
