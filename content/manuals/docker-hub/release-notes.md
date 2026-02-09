@@ -13,13 +13,13 @@ tags: [Release notes]
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
-## 2026-02-05
+## 2026-02-10
 
 ### New
 
 - Administrators can now prevent creating public repositories within
   organization namespaces using the [Disable public
-  repositories](./settings.md#configure-disable-public-repositories) setting.
+  repositories](./settings.md#disable-creation-of-public-repos) setting.
 
 ## 2025-02-18
 
