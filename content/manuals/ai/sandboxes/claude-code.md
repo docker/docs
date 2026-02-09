@@ -17,6 +17,13 @@ To create a sandbox and run Claude Code for a project directory:
 $ docker sandbox run claude ~/my-project
 ```
 
+The workspace parameter is optional and defaults to the current directory:
+
+```console
+$ cd ~/my-project
+$ docker sandbox run claude
+```
+
 ### Pass a prompt directly
 
 Start Claude with a specific prompt:
@@ -35,7 +42,8 @@ This starts Claude and immediately processes the prompt.
 
 ## Authentication
 
-Claude Code requires an Anthropic API key. You can authenticate using an environment variable (recommended) or through interactive login.
+Claude Code requires an Anthropic API key. Credentials are scoped per sandbox
+and must be provided through environment variables or interactive login.
 
 ### Environment variable (recommended)
 
@@ -66,13 +74,16 @@ The sandbox detects the environment variable and uses it automatically.
 
 ### Interactive authentication
 
-If no credentials are found, Claude Code prompts you to authenticate interactively when it starts. You can also trigger the login flow manually using the `/login` command within Claude Code.
+If the `ANTHROPIC_API_KEY` environment variable is not set, Claude Code prompts
+you to authenticate interactively when it starts. You can also trigger the login
+flow manually using the `/login` command within Claude Code.
 
 When using interactive authentication:
 
-- You'll need to authenticate for each workspace/sandbox separately
+- You must authenticate each sandbox separately
 - If the sandbox is removed or destroyed, you'll need to authenticate again when you recreate it
 - Authentication sessions aren't persisted outside the sandbox
+- No fallback authentication methods are used
 
 To avoid repeated authentication, use the `ANTHROPIC_API_KEY` environment variable method described above.
 

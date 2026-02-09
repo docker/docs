@@ -15,14 +15,38 @@ Create a sandbox for your project:
 
 ```console
 $ cd ~/my-project
-$ docker sandbox run claude .
+$ docker sandbox run claude
 ```
 
-The sandbox persists. Stop and restart it without losing installed packages or
+The workspace defaults to your current directory when omitted. You can also
+specify an explicit path:
+
+```console
+$ docker sandbox run claude ~/my-project
+```
+
+The `docker sandbox run` command is idempotent. Running the same command
+multiple times reuses the existing sandbox instead of creating a new one:
+
+```console
+$ docker sandbox run claude ~/my-project  # Creates sandbox
+$ docker sandbox run claude ~/my-project  # Reuses same sandbox
+```
+
+This works with workspace path (absolute or relative) or omitted workspace. The
+sandbox persists. Stop and restart it without losing installed packages or
 configuration:
 
 ```console
-$ docker sandbox run <sandbox-name>  # Reconnect later
+$ docker sandbox run <sandbox-name>  # Reconnect by name
+```
+
+When using the `--name` flag, the behavior is also idempotent based on the
+name:
+
+```console
+$ docker sandbox run --name dev claude  # Creates sandbox named "dev"
+$ docker sandbox run --name dev claude  # Reuses sandbox "dev"
 ```
 
 ## Installing dependencies
@@ -92,6 +116,9 @@ To preserve a configured environment, create a [Custom template](templates.md).
 
 ## Security considerations
 
+Agents running in sandboxes automatically trust the workspace directory without
+prompting. This enables agents to work freely within the isolated environment.
+
 Agents can create and modify any files in your mounted workspace, including
 scripts, configuration files, and hidden files.
 
@@ -117,7 +144,9 @@ warn when opening new workspaces for similar reasons.
 
 ## Named sandboxes
 
-Use meaningful names for sandboxes you'll reuse:
+Docker automatically generates sandbox names based on the agent and workspace
+directory (for example, `claude-my-project`). You can also specify custom names
+using the `--name` flag:
 
 ```console
 $ docker sandbox run --name myproject claude ~/project
@@ -133,6 +162,7 @@ $ docker sandbox run dev
 
 Each maintains separate packages, Docker images, and state, but share the
 workspace files.
+
 
 ## Debugging
 

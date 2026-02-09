@@ -45,7 +45,8 @@ coding agents, see [Comparison to alternatives](./architecture.md#comparison-to-
 To create and run a sandbox:
 
 ```console
-$ docker sandbox run claude ~/my-project
+$ cd ~/my-project
+$ docker sandbox run claude
 ```
 
 This command creates a sandbox for your workspace (`~/my-project`) and starts

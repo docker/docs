@@ -19,7 +19,7 @@ This guide shows how to run Claude Code in an isolated sandbox for the first tim
 Before you begin, ensure you have:
 
 - Docker Desktop 4.58 or later
-- macOS, or Windows {{< badge color=violet text=Experimental >}}
+- macOS or Windows {{< badge color=violet text=Experimental >}}
 - A Claude API key (can be provided via environment variable or interactively)
 
 ## Run your first sandbox
@@ -51,10 +51,20 @@ Follow these steps to run Claude Code:
 2. Create and run a sandbox for Claude Code for your workspace:
 
    ```console
-   $ docker sandbox run claude ~/my-project
+   $ docker sandbox run claude [PATH]
    ```
 
-   This creates a microVM sandbox. Docker assigns it a name automatically.
+   This creates a microVM sandbox. Docker assigns it a name automatically based
+   on the agent and workspace directory (`claude-somedir`). If that name is
+   already in use, Docker appends a number.
+
+   The workspace parameter is optional and defaults to your current directory
+   if omitted:
+
+   ```console
+   $ cd ~/my-project
+   $ docker sandbox run claude
+   ```
 
 3. Claude Code starts and you can begin working. The first run takes longer
    while Docker initializes the microVM and pulls the template image.
@@ -86,7 +96,8 @@ Here are essential commands to manage your sandboxes:
 $ docker sandbox ls
 ```
 
-Shows all your sandboxes with their IDs, names, status, and creation time.
+Shows all your sandboxes with their IDs, names, status, workspace paths, and
+creation time. Workspace paths are shown for both running and stopped sandboxes.
 
 > [!NOTE]
 > Sandboxes don't appear in `docker ps` because they're microVMs, not
@@ -120,7 +131,7 @@ To start fresh with a clean environment, remove and recreate the sandbox:
 
 ```console
 $ docker sandbox rm <sandbox-name>
-$ docker sandbox run claude ~/project
+$ docker sandbox run claude [PATH]
 ```
 
 Configuration like custom templates and workspace paths are set when you create

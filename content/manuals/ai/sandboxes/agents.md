@@ -36,12 +36,7 @@ Use sandboxes for development and testing, not production workloads.
 The agent type is specified when creating a sandbox:
 
 ```console
-$ docker sandbox create claude ~/my-project
-$ docker sandbox create codex ~/my-project
-$ docker sandbox create copilot ~/my-project
-$ docker sandbox create gemini ~/my-project
-$ docker sandbox create cagent ~/my-project
-$ docker sandbox create kiro ~/my-project
+$ docker sandbox create AGENT [PATH]
 ```
 
 Each agent runs in its own isolated sandbox. The agent type is bound to the

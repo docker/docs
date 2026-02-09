@@ -68,7 +68,7 @@ $ docker build -t my-template:v1 .
 Use it directly from your local Docker daemon:
 
 ```console
-$ docker sandbox run --load-local-template -t my-template:v1 claude ~/project
+$ docker sandbox run --load-local-template -t my-template:v1 claude [PATH]
 ```
 
 The `--load-local-template` flag tells the sandbox to use an image from your
@@ -79,7 +79,7 @@ To share the template with others, push it to a registry:
 ```console
 $ docker tag my-template:v1 myorg/my-template:v1
 $ docker push myorg/my-template:v1
-$ docker sandbox run -t myorg/my-template:v1 claude ~/project
+$ docker sandbox run -t myorg/my-template:v1 claude [PATH]
 ```
 
 Once pushed to a registry, you don't need `--load-local-template`.
@@ -100,7 +100,7 @@ Inside the sandbox, ask the agent to install tools and configure the
 environment. Once everything works, exit and save the sandbox as a template:
 
 ```console
-$ docker sandbox save claude-sandbox-2026-02-02-123456 my-template:v1
+$ docker sandbox save claude-project my-template:v1
 ✓ Saved sandbox as my-template:v1
 ```
 
@@ -114,7 +114,7 @@ $ docker sandbox run --load-local-template -t my-template:v1 claude ~/other-proj
 To save as a tar file instead (for example, to transfer to another machine):
 
 ```console
-$ docker sandbox save -o template.tar claude-sandbox-2026-02-02-123456 my-template:v1
+$ docker sandbox save -o template.tar claude-project my-template:v1
 ```
 
 Use a Dockerfile when you want a clear record of how the environment is built.
@@ -157,8 +157,8 @@ base, but they don't include agent binaries or sandbox configuration.
 Using a standard image directly creates the sandbox but fails at runtime:
 
 ```console
-$ docker sandbox create --template python:3-slim claude ~/project
-✓ Created sandbox claude-sandbox-2026-01-16-170525 in VM claude-project
+$ docker sandbox create --template python:3-slim claude [PATH]
+✓ Created sandbox claude-project
 
 $ docker sandbox run claude-project
 agent binary "claude" not found in sandbox: verify this is the correct sandbox type
@@ -187,7 +187,7 @@ $ docker push myorg/my-template:v1.0
 Team members use the template by referencing the registry image:
 
 ```console
-$ docker sandbox run -t myorg/sandbox-templates:python-v1.0 claude ~/project
+$ docker sandbox run -t myorg/sandbox-templates:python-v1.0 claude [PATH]
 ```
 
 Use version tags like `:v1.0` instead of `:latest` for consistency across your
