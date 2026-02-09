@@ -136,20 +136,25 @@ docker.io/docker/desktop-containerd-registry-mirror:<tag>
 In `kubeadm` mode it requires the following images:
 
 ```console
-docker.io/registry.k8s.io/kube-controller-manager:<tag>
-docker.io/registry.k8s.io/kube-apiserver:<tag>
-docker.io/registry.k8s.io/kube-scheduler:<tag>
-docker.io/registry.k8s.io/kube-proxy
-docker.io/registry.k8s.io/etcd:<tag>
-docker.io/registry.k8s.io/pause:<tag>
-docker.io/registry.k8s.io/coredns/coredns:<tag>
+docker.io/docker/desktop-kubernetes:<tag>
 docker.io/docker/desktop-storage-provisioner:<tag>
 docker.io/docker/desktop-vpnkit-controller:<tag>
-docker.io/docker/desktop-kubernetes:<tag>
+docker.io/docker/desktop-kubernetes-etcd:<tag>
+docker.io/docker/desktop-kubernetes-coredns:<tag>
+docker.io/docker/desktop-kubernetes-pause:<tag>
+docker.io/docker/desktop-kubernetes-apiserver:<tag>
+docker.io/docker/desktop-kubernetes-controller-manager:<tag>
+docker.io/docker/desktop-kubernetes-scheduler:<tag>
+docker.io/docker/desktop-kubernetes-proxy:<tag>
 ```
 
 The image tags are automatically selected by Docker Desktop based on several
 factors, including the version of Kubernetes being used. The tags vary for each image and may change between Docker Desktop releases. To stay informed, monitor the Docker Desktop release notes.
+
+> [!NOTE]
+>
+> In Docker Desktop versions 4.44 or later you can run `docker desktop kubernetes images list` to list Kubernetes images used by the currently installed version of Docker Desktop.
+> For more information, see the [Docker Desktop CLI](/reference/cli/docker/desktop/kubernetes/images).
 
 To accommodate scenarios where access to Docker Hub is not allowed, admins can
 configure Docker Desktop to pull the above listed images from a different registry (e.g., a mirror)
@@ -176,7 +181,9 @@ also match what Docker Desktop expects.
 The recommended approach to set this up is the following:
 
 1. Start Kubernetes using the desired cluster provisioning method: `kubeadm` or `kind`.
-2. Once Kubernetes has started, use `docker ps` to view the container images used by Docker Desktop for the Kubernetes control plane.
+2. After Kubernetes has started, use either:
+   - (Docker Desktop version 4.44 or later) `docker desktop kubernetes images list` to list the image tags that will be pulled by the current Docker Desktop installation
+   - `docker ps` to view the container images used by Docker Desktop for the Kubernetes control plane
 3. Clone or mirror those images (with matching tags) to your custom registry.
 4. Stop the Kubernetes cluster.
 5. Configure the `KubernetesImagesRepository` setting to point to your custom registry.
