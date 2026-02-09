@@ -163,6 +163,24 @@ $ docker sandbox run dev
 Each maintains separate packages, Docker images, and state, but share the
 workspace files.
 
+## Resetting state
+
+If you encounter issues with sandbox state, use the reset command to clean up
+all VMs and registries:
+
+```console
+$ docker sandbox reset
+```
+
+This command:
+
+- Stops all running sandbox VMs
+- Deletes all VM state and registries
+- Continues running the sandbox daemon (does not shut it down)
+- Warns about directories it cannot remove
+
+After reset, you can create fresh sandboxes. Use this when troubleshooting
+persistent issues or reclaiming disk space from all sandboxes at once.
 
 ## Debugging
 

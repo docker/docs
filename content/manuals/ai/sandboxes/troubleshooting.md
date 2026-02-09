@@ -119,3 +119,17 @@ If this happens, recover by closing the OpenVMM processes:
 
 To avoid this issue, launch sandboxes one at a time rather than creating
 multiple sandboxes concurrently.
+
+## Persistent issues or corrupted state
+
+If sandboxes behave unexpectedly or fail to start, reset all sandbox state:
+
+```console
+$ docker sandbox reset
+```
+
+This stops all running VMs and deletes all sandbox data. The daemon continues
+running. After reset, create fresh sandboxes as needed.
+
+Use reset when troubleshooting persistent problems or to reclaim disk space from
+all sandboxes at once.
