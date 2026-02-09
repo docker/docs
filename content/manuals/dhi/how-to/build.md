@@ -103,10 +103,11 @@ variant types:
 
 - A `runtime` variant is minimal and typically runs as a non-root user.
 - A `dev` variant adds a shell, package manager, and development tools.
-- A `compat` variant adds common shell utilities such as `bash`, `coreutils`,
-  `grep`, and `sed` for compatibility with existing workflows. Compat images use
-  the `flavor: compat` field alongside a `runtime` or `dev` variant.
-- A `compat-dev` variant combines the compat packages with dev tools.
+- A compatibility variant adds common shell utilities such as `bash`,
+  `coreutils`, `grep`, and `sed` for use with existing workflows. Compatibility
+  images use the `flavor: compat` field alongside a `runtime` or `dev` variant.
+- A compatibility-dev variant combines the compatibility packages with dev
+  tools.
 
 Some images also support additional flavors such as `sfw` (software framework)
 variants. Refer to the catalog for the full list of available variants for each
@@ -167,7 +168,7 @@ These fields add metadata to the image:
 | `annotations` | OCI image annotations such as description and license.            |
 | `dates`       | Release date and end-of-life date.                                |
 | `vars`        | Build-time variables for templating.                              |
-| `flavor`      | Image flavor modifier, such as `compat` for compatibility images. |
+| `flavor`      | Image flavor modifier, such as `compat` for compatibility images.|
 
 ### Container configuration
 
@@ -194,7 +195,7 @@ These fields support more complex build patterns:
 | `contents.keyring`   | Signing keys for third-party package repositories.           |
 | `contents.artifacts` | Pre-built OCI artifacts to include.                          |
 | `contents.mappings`  | Package URL (purl) mappings for SBOM accuracy.               |
-| `contents.files`     | Source files fetched from git URLs with checksums.            |
+| `contents.files`     | Source files fetched from Git URLs with checksums.            |
 
 ## Create a minimal image
 
@@ -434,7 +435,7 @@ Three path types are available:
 The `mode` field uses a string representation of the octal permission bits,
 such as `"0755"` for read-write-execute by owner or `"0555"` for read-execute
 by all. Note that the `file` type supports inline `content` using a YAML
-multiline string.
+multi-line string.
 
 ## Add build stages
 
@@ -683,29 +684,29 @@ The key differences from a runtime variant:
 For Debian-based dev variants, add `apt` instead of `apk-tools` and include the
 `DEBIAN_FRONTEND: noninteractive` environment variable.
 
-## Create a compat variant
+## Create a compatibility variant
 
-A compat (compatibility) variant includes common shell utilities for
-compatibility with scripts and automation tools that expect a standard Linux
-userland. Compat images use the `flavor` field:
+A compatibility variant includes common shell utilities for use with
+scripts and automation tools that expect a standard Linux userland. Compatibility
+images use the `flavor` field:
 
 ```yaml
 variant: runtime
 flavor: compat
 ```
 
-A compat variant adds packages such as `bash`, `coreutils`, `findutils`,
+A compatibility variant adds packages such as `bash`, `coreutils`, `findutils`,
 `grep`, `hostname`, `openssl`, `procps`, and `sed` alongside the application
-packages. A `compat-dev` variant combines both the compat packages and the dev
-tools:
+packages. A compatibility-dev variant combines both the compatibility packages
+and the dev tools:
 
 ```yaml
 variant: dev
 flavor: compat
 ```
 
-Refer to the Redis compat images in the catalog for a complete example of the
-compat pattern.
+Refer to the Redis compatibility images in the catalog for a complete example of
+the compatibility pattern.
 
 ## Set ports and volumes
 
