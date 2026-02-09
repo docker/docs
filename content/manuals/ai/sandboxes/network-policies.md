@@ -61,6 +61,32 @@ the allow-list (e.g., `localhost:1234`).
 HTTP requests to `host.docker.internal` are rewritten to `localhost`, so only
 the name `localhost` will work in the allow-list.
 
+## Default policy
+
+New sandboxes use this default policy unless you configure a custom policy:
+
+**Policy mode:** `allow` (permit all traffic except what's explicitly blocked)
+
+**Blocked CIDRs:**
+
+- `10.0.0.0/8` - Private network (Class A)
+- `127.0.0.0/8` - Loopback addresses
+- `169.254.0.0/16` - Link-local addresses
+- `172.16.0.0/12` - Private network (Class B)
+- `192.168.0.0/16` - Private network (Class C)
+- `::1/128` - IPv6 loopback
+- `fc00::/7` - IPv6 unique local addresses
+- `fe80::/10` - IPv6 link-local addresses
+
+**Allowed hosts:**
+
+- `*.anthropic.com` - Claude API and services
+- `platform.claude.com:443` - Claude platform services
+
+The default policy blocks access to private networks, localhost, and cloud
+metadata services while allowing internet access. Explicitly allowed hosts
+bypass CIDR checks for performance.
+
 ## Monitor network activity
 
 View what your agent is accessing and whether requests are being blocked:
@@ -100,16 +126,8 @@ This policy:
 
 > [!NOTE]
 > These CIDR blocks are already blocked by default. The example above shows how
-> to explicitly configure them if needed. The default policy blocks:
->
-> - `10.0.0.0/8`
-> - `127.0.0.0/8`
-> - `169.254.0.0/16`
-> - `172.16.0.0/12`
-> - `192.168.0.0/16`
-> - `::1/128`
-> - `fc00::/7`
-> - `fe80::/10`
+> to explicitly configure them. See [Default policy](#default-policy) for the
+> complete list.
 
 ### Example: Restrict to package managers only
 
@@ -317,8 +335,7 @@ first sandbox starts, but only if it doesn't already exist.
 
 The current default policy is `allow`, which permits all outbound connections
 except to blocked CIDR ranges (private networks, localhost, and cloud metadata
-services). This default will change to `deny` in a future release to provide
-more restrictive defaults.
+services).
 
 You can modify the default policy:
 
