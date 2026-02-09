@@ -49,8 +49,8 @@ namespace:
 
 ### Configure default repository privacy
 
-The default repository privacy setting is useful if you or others in your
-organization use the `docker push` command to push to a repository that doesn't
+Use the default repository privacy setting to automatically set privacy for
+repositories created via `docker push` commands when the repository doesn't
 exist yet. In this case, Docker Hub automatically creates the repository with
 the default repository privacy for that namespace.
 

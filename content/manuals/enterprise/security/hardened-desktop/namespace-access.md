@@ -11,10 +11,10 @@ weight: 50
 
 Namespace access control lets organization administrators control whether all
 members of an organization can push content to their personal namespaces on
-Docker Hub. This helps organizations prevent developers from accidentally
-publishing images outside of approved, governed locations.
+Docker Hub. This prevents organizations from accidentally publishing images
+outside of approved, governed locations.
 
-When namespace access control is enabled, affected users can still view and pull images
+When namespace access control is enabled, organization members can still view and pull images
 from their personal namespaces and continue accessing all existing repositories
 and content. However, they will no longer be able to create new repositories or
 push new images to their personal namespace.
