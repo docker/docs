@@ -26,6 +26,18 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.60.1
+
+{{< release-date date="2026-02-09" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.60.1" build_path="/218247/" >}}
+
+### Updates
+
+- Linux kernel `v6.12.68`
+- [Docker Engine v29.2.1](https://docs.docker.com/engine/release-notes/29/#2921)
+- Docker Sandbox `v0.11.0`
+
 ## 4.60.0
 
 {{< release-date date="2026-02-09" >}}
