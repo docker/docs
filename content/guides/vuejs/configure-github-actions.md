@@ -164,7 +164,7 @@ jobs:
 
       # 2. Set up Docker Buildx
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 
       # 3. Cache Docker layers
       - name: Cache Docker Layers
@@ -193,7 +193,7 @@ jobs:
 
       # 6. Build Docker image for testing
       - name: Build Dev Docker Image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           context: .
           file: Dockerfile.dev
@@ -217,14 +217,14 @@ jobs:
 
       # 8. Log in to Docker Hub
       - name: Docker Hub Login
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       # 9. Build and push production image
       - name: Build and Push Production Image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           context: .
           file: Dockerfile

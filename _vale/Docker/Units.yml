@@ -7,4 +7,4 @@ swap:
   gigabytes?: GB
   megabytes?: MB
   petabytes?: PB
-  terrabytes?: TB
+  terabytes?: TB

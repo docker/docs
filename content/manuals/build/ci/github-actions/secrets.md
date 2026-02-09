@@ -43,13 +43,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@{{% param "setup_qemu_action_version" %}}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 
       - name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           platforms: linux/amd64,linux/arm64
           tags: user/app:latest
@@ -178,7 +178,7 @@ jobs:
           private-key-name: github-ppk
 
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           ssh: default
           push: true
@@ -206,7 +206,7 @@ jobs:
           private-key-name: github-ppk
 
       - name: Build
-        uses: docker/bake-action@v6
+        uses: docker/bake-action@{{% param "bake_action_version" %}}
         with:
           set: |
             *.ssh=default

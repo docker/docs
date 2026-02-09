@@ -49,6 +49,18 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
    - Fix CLI help text for `run <agent> --help`
    - Improved terminal size handling
 
+## 4.59.1
+
+{{< release-date date="2026-02-03" >}}
+
+{{< desktop-install-v2 mac=true version="4.59.1" build_path="/217750/" >}}
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Fixed an issue where CPU usage could spike at regular intervals. Fixes [docker/for-mac#7839](https://github.com/docker/for-mac/issues/7839).
+
 ## 4.59.0
 
 {{< release-date date="2026-02-02" >}}
@@ -148,6 +160,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.57.0" build_path="/215387/" >}}
 
+### Security
+
+- Fixed [CVE-2025-14740](https://www.cve.org/cverecord?id=CVE-2025-14740) where the Docker Desktop for Windows installer contained multiple incorrect permission assignment vulnerabilities in the handling of the `C:\ProgramData\DockerDesktop` directory.
+
 ### New
 
 - Docker Desktop now has a new issue tracker for all platforms at https://github.com/docker/desktop-feedback. Relevant, actively discussed issues from the previous platform-specific trackers will be migrated.
@@ -161,7 +177,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For all platforms
 
 - Improved alignment of the Ask Gordon streaming indicator so it stays in sync with content on large screens.
-- Fixed a bug where `docker debug` failed on containers started with environement variables but no '='. For example, `docker run -e NONEXISTENT_ENV_VAR`.
+- Fixed a bug where `docker debug` failed on containers started with environment variables but no '='. For example, `docker run -e NONEXISTENT_ENV_VAR`.
 
 ## 4.56.0
 
@@ -618,7 +634,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Security
 
-We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266), a critical vulnerability affecting the NVIDIA Container Toolkit in CDI mode up to version 1.17.7. Docker Desktop includes version 1.17.8, which is not impacted. However, older versions of Docker Desktop that bundled earlier toolkit versions may be affected if CDI mode was manually enabled. Uprade to Docker Desktop 4.44 or later to ensure you're using the patched version.
+We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266), a critical vulnerability affecting the NVIDIA Container Toolkit in CDI mode up to version 1.17.7. Docker Desktop includes version 1.17.8, which is not impacted. However, older versions of Docker Desktop that bundled earlier toolkit versions may be affected if CDI mode was manually enabled. Upgrade to Docker Desktop 4.44 or later to ensure you're using the patched version.
 
 ### Bug fixes and enhancements
 

@@ -1,0 +1,266 @@
+name: PR Review
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  # Auto-trigger when PR becomes ready for review (supports forks)
+  pull_request_target:
+    types: [ready_for_review, opened]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  # ==========================================================================
+  # AUTOMATIC REVIEW FOR DOCKER EMPLOYEES
+  # Triggers when a PR is marked ready for review or opened (non-draft)
+  # Only runs for Docker org members (supports fork-based workflow)
+  # ==========================================================================
+  auto-review:
+    if: |
+      github.event_name == 'pull_request_target' &&
+      !github.event.pull_request.draft
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if PR author is Docker org member
+        id: membership
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          github-token: ${{ secrets.ORG_MEMBERSHIP_TOKEN }}
+          script: |
+            const org = 'docker';
+            const username = context.payload.pull_request.user.login;
+
+            try {
+              await github.rest.orgs.checkMembershipForUser({
+                org: org,
+                username: username
+              });
+              core.setOutput('is_member', 'true');
+              console.log(`✅ ${username} is a Docker org member - proceeding with auto-review`);
+            } catch (error) {
+              if (error.status === 404 || error.status === 302) {
+                core.setOutput('is_member', 'false');
+                console.log(`⏭️ ${username} is not a Docker org member - skipping auto-review`);
+              } else if (error.status === 401) {
+                core.setFailed(
+                  '❌ ORG_MEMBERSHIP_TOKEN secret is missing or invalid.\n\n' +
+                  'This secret is required to check Docker org membership for auto-reviews.\n\n' +
+                  'To fix this:\n' +
+                  '1. Create a classic PAT with read:org scope at https://github.com/settings/tokens/new\n' +
+                  '2. Add it as a repository secret named ORG_MEMBERSHIP_TOKEN:\n' +
+                  '   gh secret set ORG_MEMBERSHIP_TOKEN --repo docker/docs'
+                );
+              } else {
+                core.setFailed(`Failed to check org membership: ${error.message}`);
+              }
+            }
+
+      # Checkout PR head for content review, but restore agent config from base branch for security
+      - name: Checkout PR head
+        if: steps.membership.outputs.is_member == 'true'
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Restore trusted agent config from base branch
+        if: steps.membership.outputs.is_member == 'true'
+        run: |
+          # Ensure we use the agent config from base branch, not PR head
+          # This prevents malicious PRs from modifying the agent to exfiltrate secrets
+          git checkout origin/${{ github.event.pull_request.base.ref }} -- .github/pr-reviewer.yml
+
+      - name: Restore reviewer memory
+        if: steps.membership.outputs.is_member == 'true'
+        uses: actions/cache/restore@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
+        with:
+          path: .github/pr-review-memory.db
+          key: pr-review-memory-${{ github.repository }}-${{ github.run_id }}
+          restore-keys: |
+            pr-review-memory-${{ github.repository }}-
+
+      - name: Run Documentation PR Review
+        if: steps.membership.outputs.is_member == 'true'
+        uses: docker/cagent-action@latest
+        with:
+          agent: .github/pr-reviewer.yml
+          prompt: |
+            Review PR #${{ github.event.pull_request.number }}
+
+            **Title:** ${{ github.event.pull_request.title }}
+            **Author:** ${{ github.event.pull_request.user.login }}
+
+            Execute the review pipeline as documented in your instructions.
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Save reviewer memory
+        if: steps.membership.outputs.is_member == 'true' && always()
+        uses: actions/cache/save@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
+        with:
+          path: .github/pr-review-memory.db
+          key: pr-review-memory-${{ github.repository }}-${{ github.run_id }}
+
+      - name: Clean up old memory caches
+        if: steps.membership.outputs.is_member == 'true' && always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          CACHE_PREFIX="pr-review-memory-${{ github.repository }}-"
+
+          echo "🧹 Cleaning up old memory caches (keeping 5 most recent)"
+
+          OLD_CACHES=$(gh api "repos/${{ github.repository }}/actions/caches" \
+            --jq "[.actions_caches | map(select(.key | startswith(\"$CACHE_PREFIX\"))) | sort_by(.created_at) | reverse | .[5:] | .[].id] | .[]" \
+            2>/dev/null || echo "")
+
+          if [ -z "$OLD_CACHES" ]; then
+            echo "✅ No old caches to clean up"
+            exit 0
+          fi
+
+          DELETED=0
+          for CACHE_ID in $OLD_CACHES; do
+            if gh api "repos/${{ github.repository }}/actions/caches/$CACHE_ID" -X DELETE 2>/dev/null; then
+              ((DELETED++))
+            fi
+          done
+
+          echo "✅ Deleted $DELETED old cache(s)"
+
+  # ==========================================================================
+  # MANUAL REVIEW PIPELINE
+  # Triggers when someone comments /review on a PR
+  # Only runs for Docker org members
+  # ==========================================================================
+  run-review:
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/review')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if commenter is Docker org member
+        id: membership
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          github-token: ${{ secrets.ORG_MEMBERSHIP_TOKEN }}
+          script: |
+            const org = 'docker';
+            const username = context.payload.comment.user.login;
+
+            try {
+              await github.rest.orgs.checkMembershipForUser({
+                org: org,
+                username: username
+              });
+              core.setOutput('is_member', 'true');
+              console.log(`✅ ${username} is a Docker org member - proceeding with review`);
+            } catch (error) {
+              if (error.status === 404 || error.status === 302) {
+                core.setOutput('is_member', 'false');
+                console.log(`⏭️ ${username} is not a Docker org member - ignoring /review command`);
+              } else if (error.status === 401) {
+                core.setFailed(
+                  '❌ ORG_MEMBERSHIP_TOKEN secret is missing or invalid.\n\n' +
+                  'This secret is required to check Docker org membership.\n\n' +
+                  'To fix this:\n' +
+                  '1. Create a classic PAT with read:org scope at https://github.com/settings/tokens/new\n' +
+                  '2. Add it as a repository secret named ORG_MEMBERSHIP_TOKEN:\n' +
+                  '   gh secret set ORG_MEMBERSHIP_TOKEN --repo docker/docs'
+                );
+              } else {
+                core.setFailed(`Failed to check org membership: ${error.message}`);
+              }
+            }
+
+      - name: Checkout repository
+        if: steps.membership.outputs.is_member == 'true'
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+        with:
+          fetch-depth: 0
+
+      - name: Restore trusted agent config from base branch
+        if: steps.membership.outputs.is_member == 'true'
+        run: |
+          # Get the PR's base branch and ensure agent config comes from there
+          PR_BASE=$(gh api repos/${{ github.repository }}/pulls/${{ github.event.issue.number }} --jq '.base.ref')
+          git fetch origin "$PR_BASE"
+          git checkout "origin/$PR_BASE" -- .github/pr-reviewer.yml
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Restore reviewer memory
+        if: steps.membership.outputs.is_member == 'true'
+        uses: actions/cache/restore@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
+        with:
+          path: .github/pr-review-memory.db
+          key: pr-review-memory-${{ github.repository }}-${{ github.run_id }}
+          restore-keys: |
+            pr-review-memory-${{ github.repository }}-
+
+      - name: Run Documentation PR Review
+        if: steps.membership.outputs.is_member == 'true'
+        uses: docker/cagent-action@latest
+        with:
+          agent: .github/pr-reviewer.yml
+          prompt: |
+            Review PR #${{ github.event.issue.number }}
+
+            Triggered manually by @${{ github.event.comment.user.login }}
+
+            Execute the review pipeline as documented in your instructions.
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Save reviewer memory
+        if: steps.membership.outputs.is_member == 'true' && always()
+        uses: actions/cache/save@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
+        with:
+          path: .github/pr-review-memory.db
+          key: pr-review-memory-${{ github.repository }}-${{ github.run_id }}
+
+      - name: Clean up old memory caches
+        if: steps.membership.outputs.is_member == 'true' && always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          CACHE_PREFIX="pr-review-memory-${{ github.repository }}-"
+
+          echo "🧹 Cleaning up old memory caches (keeping 5 most recent)"
+
+          OLD_CACHES=$(gh api "repos/${{ github.repository }}/actions/caches" \
+            --jq "[.actions_caches | map(select(.key | startswith(\"$CACHE_PREFIX\"))) | sort_by(.created_at) | reverse | .[5:] | .[].id] | .[]" \
+            2>/dev/null || echo "")
+
+          if [ -z "$OLD_CACHES" ]; then
+            echo "✅ No old caches to clean up"
+            exit 0
+          fi
+
+          DELETED=0
+          for CACHE_ID in $OLD_CACHES; do
+            if gh api "repos/${{ github.repository }}/actions/caches/$CACHE_ID" -X DELETE 2>/dev/null; then
+              ((DELETED++))
+            fi
+          done
+
+          echo "✅ Deleted $DELETED old cache(s)"
+
+  # ==========================================================================
+  # LEARN FROM FEEDBACK
+  # Processes replies to agent review comments for continuous improvement
+  # ==========================================================================
+  learn-from-feedback:
+    if: github.event_name == 'pull_request_review_comment' && github.event.comment.in_reply_to_id
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+
+      - name: Learn from user feedback
+        uses: docker/cagent-action/review-pr/learn@latest
+        with:
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}

@@ -61,7 +61,7 @@ Django
 DMR
 Docker Build Cloud
 Docker Business
-Docker Dasboard
+Docker Dashboard
 Docker Desktop
 Docker Engine
 Docker Extension
