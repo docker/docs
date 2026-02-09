@@ -73,9 +73,15 @@ It may take a few minutes for all the tags to finish mirroring.
 After mirroring a repository, the repository appears in your organization's
 repository list, prefixed by `dhi-`. It will continue to receive updated images.
 
-Once mirrored, the repository works like any other private repository on Docker
-Hub and you can now customize it. To learn more about customization, see
-[Customize a Docker Hardened Image or chart](./customize.md).
+Once mirrored, the repository is a standard Docker Hub repository in your
+organization's namespace. It behaves exactly like any other Hub repository,
+which means you can manage access and permissions, configure webhooks, and use
+other standard Hub features. See [Docker Hub
+repositories](/manuals/docker-hub/repos/_index.md) for details.
+
+Additionally, mirrored DHI repositories support the customization capability
+that lets you modify images and charts. To learn more, see [Customize a Docker
+Hardened Image or chart](./customize.md).
 
 ### Webhook integration for syncing and alerts
 
