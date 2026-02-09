@@ -16,132 +16,132 @@ Each setting includes:
 - Configuration methods (Docker Desktop GUI, Admin Console, `admin-settings.json` file, or CLI)
 - Enterprise security recommendations where applicable
 
-## General settings
+# General settings
 
-### Start Docker Desktop when you sign in to your computer
+## Start Docker Desktop when you sign in to your computer {{< badge color=blue text="All OS" >}}
+
+Ensures Docker Desktop is always available after system boot.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
 
 | Default value | Accepted values | Format |
 |---------------|-----------------|--------|
 | `false`       | `true`, `false` | Boolean |
 
-- **Description:** Automatic startup of Docker Desktop when the user logs in to their computer.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Ensure Docker Desktop is always available after system boot.
-- **Configure this setting with:**
-    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+## Open Docker Dashboard when Docker Desktop starts {{< badge color=blue text="All OS" >}}
 
-### Open Docker Dashboard when Docker Desktop starts
+Provide immediate access to containers, images, and volumes after startup.
 
-| Default value | Accepted values            | Format |
-|---------------|----------------------------|--------|
-| `false`      | `true`, `false`  | Boolean   |
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
 
-- **Description:** Whether the Docker Dashboard opens automatically when Docker Desktop launches.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Provide immediate access to containers, images, and volumes after startup.
-- **Configure this setting with:**
-    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+| Default value | Accepted values | Format |
+|---------------|-----------------|--------|
+| `false`       | `true`, `false` | Boolean |
 
-### Choose theme for Docker Desktop
+## Choose theme for Docker Desktop {{< badge color=blue text="All OS" >}}
+
+Customize interface appearance to match user preferences or system theme.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
 
 | Default value | Accepted values            | Format |
 |---------------|----------------------------|--------|
 | `system`      | `light`, `dark`, `system`  | Enum   |
 
-- **Description:** Visual appearance of the Docker Desktop interface.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Customize interface appearance to match user preferences or system theme.
-- **Configure this setting with:**
-    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+## Configure shell completions {{< badge color=blue text="All OS" >}}
 
-### Configure shell completions
+Control whether Docker modifies shell configuration files for auto-completion.
 
-| Default value | Accepted values         | Format |
-|---------------|-------------------------|--------|
-| `integrated`  | `integrated`, `system`  | String |
-
-- **Description:** How Docker CLI auto-completion integrates with the user's shell.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Control whether Docker modifies shell configuration files for auto-completion.
-- **Configure this setting with:**
-    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-
-### Choose container terminal
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
 
 | Default value | Accepted values         | Format |
 |---------------|-------------------------|--------|
 | `integrated`  | `integrated`, `system`  | String |
 
-- **Description:** Default terminal used when launching Docker CLI from Docker Desktop.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Set preferred terminal application for Docker CLI interactions.
-- **Configure this setting with:**
-    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+## Choose container terminal {{< badge color=blue text="All OS" >}}
 
-### Enable Docker terminal
+Se the default terminal to use when launching Docker CLI from Docker Desktop.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
+
+| Default value | Accepted values         | Format |
+|---------------|-------------------------|--------|
+| `integrated`  | `integrated`, `system`  | String |
+
+## Enable Docker terminal {{< badge color=blue text="All OS" >}}
+
+Allow or restrict access to the built-in terminal for host system interaction.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
+| [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md) | `desktopTerminalEnabled` |
 
 | Default value | Accepted values | Format |
 |---------------|-----------------|--------|
 | `false`       | `true`, `false` | Boolean |
 
-- **Description:** Access to Docker Desktop's integrated terminal feature. If
-the value is set to `false`, users can't use the Docker terminal to interact
-with the host machine and execute commands directly from Docker Desktop.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Allow or restrict developer access to the built-in terminal for host system interaction.
-- **Configure this setting with:**
-    - **General** setting in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `desktopTerminalEnabled` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-
-> [!NOTE]
+> [!TIP]
 >
 > In hardened environments, disable and lock this setting to limit host access.
 
-### Enable Docker Debug by default
+## Enable Docker Debug by default {{< badge color=blue text="All OS" >}}
+
+Provide verbose output for troubleshooting and support scenarios.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
 | `false`       | `true`, `false` | Boolean  |
 
-- **Description:** Whether debug logging is turned on by default for Docker CLI commands.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Provide verbose output for troubleshooting and support scenarios.
-- **Configure this setting with:**
-    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+## Include VM in Time Machine backup {{< badge color=orange text="Mac only" >}}
 
-### Include VM in Time Machine backup
+Set whether the Docker Desktop virtual machine is included in macOS Time Machine backups. Balance backup completeness with backup size and performance.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
 
 | Default value | Accepted values | Format |
 |---------------|-----------------|--------|
 | `false`       | `true`, `false` | Boolean |
 
-- **Description:** Whether the Docker Desktop virtual machine is included in macOS Time Machine backups.
-- **OS:** {{< badge color=blue text="Mac only" >}}
-- **Use case:** Balance backup completeness with backup size and performance.
-- **Configure this setting with:**
-    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+## Use containerd for pulling and storing images {{< badge color=blue text="All OS" >}}
 
-### Use containerd for pulling and storing images
+Se the image storage backend used by Docker Desktop. Improve image handling performance and enable containerd-native features.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
 | `false`       | `true`, `false` | Boolean  |
 
-- **Description:** Image storage backend used by Docker Desktop.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Improve image handling performance and enable containerd-native features.
-- **Configure this setting with:**
-    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+## Choose Virtual Machine Manager {{< badge color=orange text="Mac only" >}}
 
-### Choose Virtual Machine Manager
+### Docker VMM (Beta)
 
-#### Docker VMM
+Use Docker VMM to run Docker containers.
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
 
-#### Apple Virtualization framework
+### Apple Virtualization framework
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
@@ -153,7 +153,7 @@ with the host machine and execute commands directly from Docker Desktop.
 - **Configure this setting with:**
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
-#### Rosetta
+### Rosetta
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
@@ -178,7 +178,7 @@ images are permitted.
 >
 > Rosetta requires enabling Apple Virtualization framework.
 
-#### QEMU
+### QEMU
 
 > [!WARNING]
 >
