@@ -1,9 +1,10 @@
-<div id="search-bar" class="h-full relative flex items-center overflow-visible">
+<div id="search-bar" class="h-full relative flex items-center overflow-visible" x-data="{ isSafari: /^((?!chrome|android).)*safari/i.test(navigator.userAgent) }">
   <button
     type="button"
     aria-label="Search"
     class="cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-blue-700 border border-blue-500 text-white transition-colors focus:outline-none focus:ring focus:ring-blue-400 hover:bg-blue-800 hover:border-blue-400"
     id="search-modal-trigger"
+    x-show="!isSafari"
   >
     <span class="icon-svg">
       {{ partialCached "icon" "search" "search" }}
