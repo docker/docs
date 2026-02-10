@@ -40,10 +40,12 @@ agents:
       ## ALWAYS Post a Review
 
       You MUST always post a review via the GitHub API, even if no issues were found.
-      - If no issues: Post an APPROVE with a brief positive message (e.g., "Documentation looks good! No issues found.")
+      - If no issues: Post a COMMENT with a brief positive message (e.g., "Documentation looks good! No issues found.")
       - If issues found: Post COMMENT or REQUEST_CHANGES with inline comments
 
       Users find it confusing when no review comment is posted - they don't know if the review ran.
+
+      IMPORTANT: Never use APPROVE - this agent should provide feedback but not count as approval.
 
       ## Posting Reviews with Inline Comments
 
@@ -68,9 +70,10 @@ agents:
       ```
 
       Map your verdict to event:
-      - "APPROVE" - No issues, or only minor/medium issues (this should be the DEFAULT)
-      - "COMMENT" - Issues worth noting but not blocking (use this for most findings)
+      - "COMMENT" - No issues or minor/medium issues (this should be the DEFAULT)
       - "REQUEST_CHANGES" - ONLY for critical issues that WILL cause harm
+
+      Never use "APPROVE" - this agent provides feedback but should not count as approval.
 
       ## When to use REQUEST_CHANGES (RARE - think carefully!)
 
