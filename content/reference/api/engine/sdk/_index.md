@@ -44,6 +44,17 @@ For more information, see [Go client reference](https://pkg.go.dev/github.com/mo
 
 For more information, see [Docker Engine Python SDK reference](https://docker-py.readthedocs.io/).
 
+> [!NOTE]
+> Docker Desktop for Linux users
+>
+> Docker Desktop for Linux uses a per-user socket instead of the system-wide `/var/run/docker.sock`. To use Docker SDKs with Docker Desktop for Linux, set the `DOCKER_HOST` environment variable:
+>
+> ```bash
+> export DOCKER_HOST=unix://$HOME/.docker/desktop/docker.sock
+> ```
+>
+> For more details, see [Using Docker SDKs with Docker Desktop](/manuals/desktop/setup/install/linux/_index.md#using-docker-sdks-with-docker-desktop).
+
 ## View the API reference
 
 You can
