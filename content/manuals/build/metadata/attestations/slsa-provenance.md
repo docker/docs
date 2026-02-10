@@ -205,7 +205,34 @@ RUN apt-get update
 <!-- TODO: add a link to the definitions page, imported from moby/buildkit -->
 
 The following example shows what a JSON representation of a provenance
-attestation with `mode=max` looks like:
+attestation with `mode=max` looks like.
+
+### Retrieving the raw in-toto format
+
+While the [Inspecting Provenance](#inspecting-provenance) section shows how to
+use `imagetools inspect` with templates to extract specific provenance data,
+you can also retrieve the complete attestation in its raw in-toto format.
+
+To retrieve the raw in-toto format attestation, use the following commands:
+
+```bash
+# Retrieves the digest for the attestation manifest
+DIGEST=$(docker buildx imagetools inspect $IMAGE --format '{{ json .Manifest }}' | jq -r '.manifests[] | select(.annotations."vnd.docker.reference.type"=="attestation-manifest") | .digest')
+
+# Retrieve the in-toto digest
+INTOTO_DIGEST=$(docker buildx imagetools inspect $IMAGE@$DIGEST --raw | jq -r '.layers[] | select(.annotations."in-toto.io/predicate-type"=="https://slsa.dev/provenance/v0.2") | .digest')
+
+# Read the SLSA provenance attestation from the blob
+crane blob $IMAGE@$INTOTO_DIGEST
+```
+
+These commands:
+
+1. Find the attestation manifest digest from the image index
+2. Extract the in-toto digest for the SLSA provenance predicate
+3. Retrieve the complete attestation blob using `crane`
+
+The output is the full in-toto format attestation, as shown below:
 
 ```json
 {
