@@ -2071,7 +2071,7 @@ Only the last `ENTRYPOINT` instruction in the Dockerfile will have an effect.
 ### Exec form ENTRYPOINT example
 
 You can use the exec form of `ENTRYPOINT` to set fairly stable default commands
-and arguments and then use either form of `CMD` to set additional defaults that
+and arguments and then use the exec form of `CMD` to set additional defaults that
 are more likely to be changed.
 
 ```dockerfile
