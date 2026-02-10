@@ -46,6 +46,9 @@
         <pagefind-results>
           <script type="text/pagefind-template">
             <li class="py-3 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+              {{ print "{{#if meta.breadcrumbs}}" }}
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">{{ print "{{ meta.breadcrumbs }}" }}</p>
+              {{ print "{{/if}}" }}
               <p class="font-medium">
                 <a class="text-blue-600 dark:text-blue-400 hover:underline" href="{{ print "{{ meta.url | default(url) | safeUrl }}" }}">
                   {{ print "{{ meta.title }}" }}
