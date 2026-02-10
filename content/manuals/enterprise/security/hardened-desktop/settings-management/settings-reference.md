@@ -347,100 +347,100 @@ Regular verification that Docker Desktop configuration hasn't been modified by e
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
 
-## Resources settings
+# Resources settings
 
-### CPU limit
+## CPU limit {{< badge color=blue text="All OS" >}}
+
+Number of CPU cores allocated to the Docker Desktop virtual machine.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **Resources** tab |
 
 | Default value                                 | Accepted values | Format  |
 |-----------------------------------------------|-----------------|---------|
 | Number of logical CPU cores available on host | Integer         | Integer |
 
-- **Description:** Number of CPU cores allocated to the Docker Desktop virtual machine.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Balance Docker performance with host system resource availability.
-- **Configure this setting with:**
-    - **Advanced** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+## Memory limit {{< badge color=blue text="All OS" >}}
 
-### Memory limit
+Amount of RAM (in MiB) allocated to the Docker Desktop virtual machine.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **Resources** tab |
 
 | Default value              | Accepted values | Format  |
 |---------------------------|-----------------|---------|
 | Based on system resources | Integer         | Integer |
 
-- **Description:** Amount of RAM (in MiB) allocated to the Docker Desktop virtual machine.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Control memory allocation to optimize performance for both Docker and host applications.
-- **Configure this setting with:**
-    - **Advanced** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+## Swap {{< badge color=blue text="All OS" >}}
 
-### Swap
+Amount of swap space (in MiB) available to the Docker virtual machine.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **Resources** tab |
 
 | Default value | Accepted values | Format  |
 |---------------|-----------------|---------|
 | `1024`        | Integer         | Integer |
 
-- **Description:** Amount of swap space (in MiB) available to the Docker virtual machine.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Extend available memory for container workloads when physical RAM is limited.
-- **Configure this setting with:**
-    - **Advanced** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+## Disk usage limit {{< badge color=blue text="All OS" >}}
 
-### Disk usage limit
+Maximum disk space (in MiB) allocated for Docker Desktop data.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **Resources** tab |
 
 | Default value                  | Accepted values | Format  |
 |-------------------------------|-----------------|---------|
 | Default disk size of machine. | Integer         | Integer |
 
-- **Description:** Maximum disk space (in MiB) allocated for Docker Desktop data.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Prevent Docker from consuming excessive disk space on the host system.
-- **Configure this setting with:**
-    - **Advanced** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+## Disk image location {{< badge color=blue text="All OS" >}}
 
-### Disk image location
+Set the file system path where Docker Desktop stores virtual machine data.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **Resources** tab |
 
 | Default value                                                                 | Accepted values | Format |
 |--------------------------------------------------|-----------------|--------|
 | macOS: `~/Library/Containers/com.docker.docker/Data/vms/0`  <br> Windows: `%USERPROFILE%\AppData\Local\Docker\wsl\data` | File path       | String |
 
-- **Description:** File system path where Docker Desktop stores virtual machine data.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Move Docker data to custom storage locations for performance or space management.
-- **Configure this setting with:**
-    - **Advanced** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+## Enable Resource Saver {{< badge color=blue text="All OS" >}}
 
-### Enable Resource Saver
+Automatic pausing of Docker Desktop when idle to conserve system resources.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **Resources** tab |
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
 
-- **Description:** Automatic pausing of Docker Desktop when idle to conserve system resources.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Reduce CPU and memory usage when Docker Desktop isn't actively being used.
-- **Configure this setting with:**
-    - **Advanced** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+### File sharing directories {{< badge color=blue text="All OS" >}}
 
-### File sharing directories
+Define which host directories containers can access for development workflows.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **Resources** tab |
+| [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md) | `filesharingAllowedDirectories` |
+| [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md) | **File sharing and emulation** tab |
 
 | Default value                           | Accepted values                 | Format                  |
 |----------------------------------------|---------------------------------|--------------------------|
 | Varies by OS                           | List of file paths as strings   | Array list of strings   |
 
-- **Description:** Host directories that can be mounted into containers as volumes.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Define which host directories containers can access for development workflows.
-- **Configure this setting with:**
-    - **File sharing** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `filesharingAllowedDirectories` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Allowed file sharing directories** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
-
-> [!NOTE]
+> [!TIP]
 >
 > In hardened environments, lock to an explicit allowlist and disable end-user
 edits.
 
-### Proxy exclude
+### Proxy exclude {{< badge color=blue text="All OS" >}}
 
 | Default value | Accepted values    | Format |
 |---------------|--------------------|--------|
@@ -458,7 +458,7 @@ edits.
 >
 > In hardened environments, disable and lock this setting to maintain strict proxy control.
 
-### Docker subnet
+### Docker subnet 
 
 | Default value     | Accepted values | Format |
 |-------------------|-----------------|--------|
