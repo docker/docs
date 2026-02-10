@@ -26,7 +26,7 @@ environments.
 
 The Docker MCP Catalog includes:
 
-- Verified servers: All servers are versioned with full provenance and SBOM
+- Verified servers: All local servers are versioned with full provenance and SBOM
   metadata
 - Partner tools: Servers from New Relic, Stripe, Grafana, and other trusted
   partners

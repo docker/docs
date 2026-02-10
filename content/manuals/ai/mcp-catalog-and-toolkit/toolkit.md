@@ -80,6 +80,23 @@ are invoked, enforced through resource and access limitations.
 - Interception of tool requests: Requests to and from tools that contain sensitive
   information such as secrets are blocked.
 
+### Governance and policy controls
+
+Organizations can define rules to control which MCP servers and tools
+users can load and invoke. This lets administrators enforce security
+policies and compliance requirements.
+
+The policy system supports:
+
+- Allow or deny rules for loading MCP servers
+- Control over tool invocation within allowed servers
+- Filtering by server type, source, or transport mechanism
+- Default allow or deny behavior with explicit exceptions
+
+Policies are configured through Settings Management in the Admin Console.
+For detailed policy documentation, examples, and best practices, see
+[MCP governance and policy controls](/manuals/ai/mcp-catalog-and-toolkit/governance.md).
+
 ### OAuth authentication
 
 Some MCP servers require authentication to access external services like

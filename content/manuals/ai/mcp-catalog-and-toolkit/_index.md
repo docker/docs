@@ -27,6 +27,10 @@ grid:
     description: Learn about the underlying technology that powers the MCP Toolkit
     icon: developer_board
     link: /ai/mcp-catalog-and-toolkit/mcp-gateway/
+  - title: Governance and policy controls
+    description: Control which MCP servers and tools users can access
+    icon: security
+    link: /ai/mcp-catalog-and-toolkit/governance/
   - title: Dynamic MCP
     description: Discover and add MCP servers on-demand using natural language
     icon: search
