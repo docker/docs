@@ -26,11 +26,15 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
-## 4.60.1
+## 4.61.0
 
-{{< release-date date="2026-02-09" >}}
+{{< release-date date="2026-02-16" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.60.1" build_path="/218247/" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.60.1" build_path="//" >}}
+
+### New 
+
+- Ask Gordon is no longer in Beta.
 
 ### Updates
 
