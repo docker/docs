@@ -25,7 +25,7 @@ jobs:
         run: npm ci
 
       - name: Run agent
-        uses: docker/cagent-action@v1.1.4
+        uses: docker/cagent-action@v1.1.6
         timeout-minutes: 15
         with:
           cagent-version: v1.20.3
