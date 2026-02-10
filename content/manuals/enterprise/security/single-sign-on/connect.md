@@ -67,7 +67,7 @@ To enable SSO with Okta, you need [super admin](https://help.okta.com/en-us/cont
     - Name ID format: `EmailAddress`
     - Application username: `Email`
     - Update application on: `Create and update`
-1. Optional. Add [SAML attributes](/enterprise/security/provisioning/_index.md#sso-attributes), if required by your org. 
+1. Optional. Add [SAML attributes](/manuals/enterprise/security/provisioning/_index.md#sso-attributes), if required by your org. 
 1. Select the **This is an internal app that we have created** checkbox before finishing. 
 
 {{< /tab >}}
@@ -165,7 +165,7 @@ After assigning yourself to an app:
 1. Open an incognito browser window and sign in to the Admin Console using your domain email address.
 1. When redirected to your IdP's sign in page, authenticate with your domain email instead of using your Docker ID. 
 
-If you have [multiple IdPs](#optional-configure-multiple-idps), choose the sign-in option **Continue with SSO**. If you're using the CLI, you must authenticate using a personal access token.
+If you have multiple IdPs, choose the sign-in option **Continue with SSO**. If you're using the CLI, you must authenticate using a personal access token.
 
 ## Configure multiple IdPs
 
