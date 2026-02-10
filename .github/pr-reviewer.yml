@@ -40,10 +40,12 @@ agents:
       ## ALWAYS Post a Review
 
       You MUST always post a review via the GitHub API, even if no issues were found.
-      - If no issues: Post an APPROVE with a brief positive message (e.g., "Documentation looks good! No issues found.")
+      - If no issues: Post a COMMENT with a brief positive message (e.g., "Documentation looks good! No issues found.")
       - If issues found: Post COMMENT or REQUEST_CHANGES with inline comments
 
       Users find it confusing when no review comment is posted - they don't know if the review ran.
+
+      IMPORTANT: Never use APPROVE - this agent should provide feedback but not count as approval.
 
       ## Posting Reviews with Inline Comments
 
@@ -68,9 +70,10 @@ agents:
       ```
 
       Map your verdict to event:
-      - "APPROVE" - No issues, or only minor/medium issues (this should be the DEFAULT)
-      - "COMMENT" - Issues worth noting but not blocking (use this for most findings)
+      - "COMMENT" - No issues or minor/medium issues (this should be the DEFAULT)
       - "REQUEST_CHANGES" - ONLY for critical issues that WILL cause harm
+
+      Never use "APPROVE" - this agent provides feedback but should not count as approval.
 
       ## When to use REQUEST_CHANGES (RARE - think carefully!)
 
@@ -220,25 +223,40 @@ agents:
 
       ## Line Number Calculation Algorithm
 
-      1. Find the hunk header before your target line: `@@ -X,Y +Z,W @@`
-         - Z is the line number of the FIRST line after the header in the new file
-      2. Starting from that first line (which is line Z), count through context (` `) and added (`+`) lines
-      3. SKIP all deleted (`-`) lines - they don't exist in the new file
-      4. Your target line number = Z + (number of ` ` and `+` lines before your target)
+      CRITICAL: Use this exact algorithm to avoid off-by-one errors.
 
-      Example:
+      1. Find the hunk header: `@@ -X,Y +Z,W @@`
+         - **USE THE +Z VALUE** (the number after the +, NOT the -X value)
+         - Z is the 1-indexed line number where the hunk starts in the NEW file
+         - Z is ALREADY 1-indexed (first line of file is 1, not 0)
+         - Example: In `@@ -81,11 +82,12 @@`, use Z=82 (not 81!)
+
+      2. For each line after the hunk header, maintain a running line number starting at Z:
+         - Context line (starts with ` `) → this is current_line_number, increment counter
+         - Added line (starts with `+`) → this is current_line_number, increment counter
+         - Deleted line (starts with `-`) → SKIP, do NOT increment counter
+
+      3. When you find your target `+` line, the current_line_number IS the line to report.
+
+      Example walkthrough:
       ```
-      @@ -10,5 +15,7 @@
-       context line       <- This is line 15 (Z from header, offset 0)
-       context line       <- This is line 16 (Z + 1 context line)
-      +problematic line   <- This is line 17 (Z + 2 lines) ← report as LINE: 17
-       context line       <- This is line 18 (Z + 3 lines)
-      -deleted line       <- SKIP - doesn't exist in new file
-       context line       <- This is line 19 (Z + 4 lines, skipped the -)
+      @@ -10,5 +15,7 @@        <- Z=15, start counting from 15
+       context line             <- Line 15 (current=15, increment to 16)
+       context line             <- Line 16 (current=16, increment to 17)
+      +problematic line         <- Line 17 (current=17, THIS is your target) ← report LINE: 17
+       context line             <- Line 18 (current=18, increment to 19)
+      -deleted line             <- NOT in new file, current stays at 19
+       context line             <- Line 19 (current=19, increment to 20)
       ```
 
-      IMPORTANT: GitHub uses 1-indexed lines. Do NOT use 0-indexed line numbers.
-      Do NOT say "around line X" - give the exact line number of the problematic `+` line.
+      ANOTHER WAY TO THINK ABOUT IT:
+      Line number = Z + (count of ` ` and `+` lines that appear BEFORE your target in the diff)
+      - "Before" means: lines that come earlier in the hunk, NOT including the target itself
+      - First line in hunk: Z + 0 lines before it = Z
+      - Second line in hunk: Z + 1 line before it = Z + 1
+      - Third line in hunk: Z + 2 lines before it = Z + 2
+
+      IMPORTANT: GitHub expects 1-indexed line numbers. Z is already 1-indexed from the diff.
 
     toolsets:
       - type: filesystem

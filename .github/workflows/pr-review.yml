@@ -88,6 +88,7 @@ jobs:
         if: steps.membership.outputs.is_member == 'true'
         uses: docker/cagent-action@latest
         with:
+          cagent-version: v1.22.0
           agent: .github/pr-reviewer.yml
           prompt: |
             Review PR #${{ github.event.pull_request.number }}
@@ -205,6 +206,7 @@ jobs:
         if: steps.membership.outputs.is_member == 'true'
         uses: docker/cagent-action@latest
         with:
+          cagent-version: v1.22.0
           agent: .github/pr-reviewer.yml
           prompt: |
             Review PR #${{ github.event.issue.number }}
