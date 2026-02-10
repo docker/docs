@@ -137,46 +137,47 @@ Se the image storage backend used by Docker Desktop. Improve image handling perf
 
 Use Docker VMM to run Docker containers.
 
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
+
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
-| `true`        | `true`, `false` | Boolean  |
+| `false`        | `true`, `false` | Boolean  |
 
 ### Apple Virtualization framework
 
+Use Apple Virtualization Framework to run Docker containers.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
+
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
-
-- **Description:** Use Apple Virtualization Framework to run Docker containers.
-- **OS:** {{< badge color=blue text="Mac only" >}}
-- **Use case:** Improve VM performance on Apple Silicon.
-- **Configure this setting with:**
-    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
 ### Rosetta
 
-| Default value | Accepted values | Format   |
-|---------------|-----------------|----------|
-| `true`        | `true`, `false` | Boolean  |
-
-- **Description:** Use Rosetta to emulate `amd64` on Apple Silicon. If value
-is set to `true`, Docker Desktop turns on Rosetta to accelerate
-x86_64/amd64 binary emulation on Apple Silicon.
-- **OS:** {{< badge color=blue text="Mac only" >}} 13+
-- **Use case:** Run Intel-based containers on Apple Silicon hosts.
-- **Configure this setting with:**
-    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management:`useVirtualizationFrameworkRosetta` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Use Rosetta for x86_64/amd64 emulation on Apple Silicon** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
-
-> [!NOTE]
->
-> In hardened environments, disable and lock this setting so only ARM-native
-images are permitted.
+Use Rosetta for x86_64/amd64 emulation on Apple Silicon
 
 > [!NOTE]
 >
 > Rosetta requires enabling Apple Virtualization framework.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
+| [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md) | `useVirtualizationFrameworkRosetta` |
+| [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md) | **General** tab |
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `true`        | `true`, `false` | Boolean  |
+
+> [!TIP]
+>
+> In hardened environments, disable and lock this setting so only ARM-native images are permitted.
 
 ### QEMU
 
@@ -188,86 +189,76 @@ images are permitted.
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
 
-### Choose file sharing implementation
+## Choose file sharing implementation {{< badge color=blue text="Mac only 12.5+" >}}
 
-#### VirtioFS
+### VirtioFS
 
-| Default value | Accepted values | Format   |
-|---------------|-----------------|----------|
-| `true`        | `true`, `false` | Boolean  |
-
-- **Description:** Use VirtioFS for fast, native file sharing between host and
+Use VirtioFS for fast, native file sharing between host and
 containers. If value is set to `true`, VirtioFS is set as the file sharing
 mechanism. If both VirtioFS and gRPC are set to `true`, VirtioFS takes
 precedence.
-- **OS:** {{< badge color=blue text="Mac only" >}} 12.5+
-- **Use case:** Achieve better file system performance and compatibility on modern macOS.
-- **Configure this setting with:**
-    - **General settings** in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `useVirtualizationFrameworkVirtioFS` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Use VirtioFS for file sharing** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
-> [!NOTE]
->
-> In hardened environments, enable and lock this setting for macOS 12.5 and
-later.
-
-#### gRPC FUSE
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
+| [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md) | `useVirtualizationFrameworkVirtioFS` |
+| [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md) | **General** tab |
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
 
-- **Description:** Enable gRPC FUSE for macOS file sharing. If value is set to
-`true`, gRPC Fuse is set as the file sharing mechanism.
-- **OS:** {{< badge color=blue text="Mac only" >}}
-- **Use case:** Alternative file sharing with improved performance over legacy osxfs.
-- **Configure this setting with:**
-    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `useGrpcfuse` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Use gRPC FUSE for file sharing** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+> [!TIP]
+>
+> In hardened environments, enable and lock this setting for macOS 12.5 and later.
 
-> [!NOTE]
+### gRPC FUSE
+
+Enable gRPC FUSE for macOS file sharing.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
+| [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md) | `useGrpcfuse` |
+| [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md) | **General** tab |
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `true`        | `true`, `false` | Boolean  |
+
+> [!TIP]
 >
 > In hardened environments, disable and lock this setting.
 
-#### osxfs
+### osxfs
+
+Use the original osxfs file sharing driver for macOS. Use when compatibility with legacy tooling requires the original file sharing implementation.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
 
 | Default value | Accepted values | Format  |
 | ------------- | --------------- | ------- |
 | `false`       | `true`, `false` | Boolean |
 
-- **Description:** Use the original osxfs file sharing driver for macOS. When
-set to true, Docker Desktop uses osxfs instead of VirtioFS or gRPC FUSE to mount
-host directories into containers.
-- **OS:** {{< badge color=blue text="Mac only" >}}
-- **Use case:** Compatibility with legacy tooling that requires the original file sharing implementation.
-- **Configure this setting with:**
-    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+## Send usage statistics {{< badge color=blue text="All OS" >}}
 
-### Send usage statistics
-
-| Default value | Accepted values | Format |
-|---------------|-----------------|--------|
-| `true`        | `true`, `false` | Boolean |
-
-- **Description:** Controls whether Docker Desktop collects and sends local
+Controls whether Docker Desktop collects and sends local
 usage statistics and crash reports to Docker. This setting affects telemetry
 gathered from the Docker Desktop application itself. It does not affect
 server-side telemetry collected via Docker Hub or other backend services, such
 as sign in timestamps, pulls, or builds.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Help Docker improve the product based on usage patterns.
-- **Configure this setting with:**
-    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `analyticsEnabled` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Send usage statistics** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
-> [!NOTE]
->
-> In hardened environments, disable and lock this setting. This allows you
-to control all your data flows and collect support logs via secure channels
-if needed.
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
+| [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md) | `analyticsEnabled` |
+| [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md) | **General** tab |
+
+| Default value | Accepted values | Format |
+|---------------|-----------------|--------|
+| `true`        | `true`, `false` | Boolean |
 
 > [!NOTE]
 >
@@ -276,84 +267,85 @@ ensure that developer activity is fully visible. If users opt out and the
 setting is not locked, their activity may be excluded from analytics
 views.
 
-### Use Enhanced Container Isolation
+## Use Enhanced Container Isolation {{< badge color=blue text="All OS" >}}
+
+Prevent containers from modifying Docker Desktop VM configuration or accessing sensitive host areas.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
+| [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md) | `enhancedContainerIsolation` |
+| [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md) | **General** tab |
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
 | `false`       | `true`, `false` | Boolean  |
 
-- **Description:** Advanced container security through Linux user namespaces and additional isolation.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Prevent containers from modifying Docker Desktop VM configuration or accessing sensitive host areas.
-- **Configure this setting with:**
-    - **General settings** in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `enhancedContainerIsolation` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Enable enhanced container isolation** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
-
-> [!NOTE]
+> [!TIP]
 >
 > In hardened environments, disable and lock this setting. This allows you
 to control all your data flows and collect support logs via secure channels
 if needed.
 
-### Show CLI hints
+## Show CLI hints {{< badge color=blue text="All OS" >}}
+
+Discover Docker CLI features through contextual tips.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
 | `true`       | `true`, `false` | Boolean  |
 
-- **Description:** Display of helpful CLI suggestions in the terminal when using Docker commands.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Help users discover Docker CLI features through contextual tips.
-- **Configure this setting with:**
-    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+## Enable Scout image analysis  {{< badge color=blue text="All OS" >}}
 
-### Enable Scout image analysis
+ Turn on vulnerability scanning and software bill of materials analysis for container images.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
+| [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md) | `sbomIndexing` |
+| [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md) | **Scout** tab |
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
 
-- **Description:** Docker Scout SBOM generation and vulnerability scanning for container images.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Turn on vulnerability scanning and software bill of materials analysis.
-- **Configure this setting with:**
-    - **General settings** in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `sbomIndexing` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **SBOM indexing** settings in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
-
-> [!NOTE]
+> [!TIP]
 >
 > In hardened environments, enable and lock this setting to ensure compliance scanning is always available.
 
-### Enable background Scout SBOM indexing
+## Enable background Scout SBOM indexing {{< badge color=blue text="All OS" >}}
+
+Keep image metadata current by indexing during idle time or after image operations.
+
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
+| [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md) | `useBackgroundIndexing` |
+| [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md) | **Scout** tab |
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
 | `false`        | `true`, `false` | Boolean  |
 
-- **Description:** Automatic SBOM indexing for images without requiring user interaction.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Keep image metadata current by indexing during idle time or after image operations.
-- **Configure this setting with:**
-    - **General settings** in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-
-> [!NOTE]
+> [!TIP]
 >
 > In hardened environments, enable and lock this setting for continuous security analysis.
 
-### Automatically check configuration
+## Automatically check configuration {{< badge color=blue text="All OS" >}}
 
-| Default value         | Accepted values | Format  |
-|-----------------------|-----------------|---------|
-| `CurrentSettingsVersions` | Integer         | Integer |
+Regular verification that Docker Desktop configuration hasn't been modified by external applications.
 
-- **Description:** Regular verification that Docker Desktop configuration hasn't been modified by external applications.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Track configuration versions for compatibility and change detection.
-- **Configure this setting with:**
-    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `configurationFileVersion` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+| Configuration method | Location/Paremeter |
+| -------------------- | ------------ |
+| [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md) | **General** tab |
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `true`        | `true`, `false` | Boolean  |
 
 ## Resources settings
 
