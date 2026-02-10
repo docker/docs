@@ -2865,8 +2865,9 @@ The options that can appear before `CMD` are:
 - `--start-interval=DURATION` (default: `5s`)
 - `--retries=N` (default: `3`)
 
-The health check will first run **interval** seconds after the container is
-started, and then again **interval** seconds after each previous check completes.
+The health check will first run **start-interval** seconds after the container is
+started (during the start period), and then **interval** seconds after each
+previous check completes once the container is considered started.
 
 If a single run of the check takes longer than **timeout** seconds then the check
 is considered to have failed. The process performing the check is abruptly stopped
