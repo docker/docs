@@ -57,11 +57,13 @@
               {{ print "{{#if sub_results}}" }}
                 <ul class="mt-3 ml-4 flex flex-wrap gap-2">
                   {{ print "{{#each sub_results as sub}}" }}
-                    <li class="text-sm">
-                      <a class="text-blue-600 dark:text-blue-400 hover:underline" href="{{ print "{{ sub.url | safeUrl }}" }}">
-                        {{ print "{{ sub.title }}" }}
-                      </a>
-                    </li>
+                    {{ print "{{#if (lt @index 5)}}" }}
+                      <li class="text-sm">
+                        <a class="text-blue-600 dark:text-blue-400 hover:underline" href="{{ print "{{ sub.url | safeUrl }}" }}">
+                          {{ print "{{ sub.title }}" }}
+                        </a>
+                      </li>
+                    {{ print "{{/if}}" }}
                   {{ print "{{/each}}" }}
                 </ul>
               {{ print "{{/if}}" }}
