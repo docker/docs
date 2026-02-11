@@ -77,6 +77,8 @@ beyond their organization role:
 | Manage seats                                                      | ❌     | ❌     | ✅    |
 | Upgrade and downgrade plans                                       | ❌     | ❌     | ✅    |
 
+If you want more granular access control, you can [upgrade to a Docker Business plan](https://www.docker.com/pricing/) for custom roles and advanced permissions.
+
 _\* If not part of a company_
 
 ### Docker Scout permissions
