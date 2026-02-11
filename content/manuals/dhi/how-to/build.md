@@ -30,8 +30,9 @@ A Dockerfile is a sequence of imperative instructions: `RUN`, `COPY`, `FROM`.
 A DHI definition file is a declarative specification. You describe the desired
 state of the image, and the build system figures out how to produce it.
 
-Every DHI definition starts with a syntax directive that tells BuildKit to use
-the DHI frontend instead of the Dockerfile parser:
+Every DHI definition starts with a syntax directive that tells BuildKit which
+DHI build frontend to use. The frontend is the component that parses and
+processes YAML definitions instead of the default Dockerfile parser:
 
 ```yaml
 # syntax=dhi.io/build:2-alpine3.23
