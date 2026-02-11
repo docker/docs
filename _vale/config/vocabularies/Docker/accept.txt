@@ -179,7 +179,9 @@ Rekor
 ROCm
 rollback
 rootful
+rqt
 runc
+RViz
 Ryuk
 S3
 scrollable
@@ -204,11 +206,13 @@ sysctl
 sysctls
 Sysdig
 systemd
+teleop
 Testcontainers
 tmpfs
 Traefik
 Trivy
 Trixie
+Turtlesim
 Ubuntu
 ufw
 umask
@@ -231,6 +235,7 @@ WireMock
 workdir
 WORKDIR
 Xdebug
+XQuartz
 youki
 Yubikey
 Zscaler

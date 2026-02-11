@@ -150,7 +150,7 @@ You can explore the node graph by navigating to **Plugins > Introspection > Node
 
 ### Topic Monitor
 
-You can monitor active topics by navigating to **Plugins > Topics > Topic Monitor**. A new tab opens displaying all active topics and their current values. Click the eye icon next to `/turtle1/pose` to monitor it. As you move the turtle, watch the pose values update in real time, showing the position of the turtle and orientation changing based on your commands.
+You can monitor active topics by navigating to **Plugins > Topics > Topic Monitor**. A new tab opens displaying all active topics and their current values. Select the eye icon next to `/turtle1/pose` to monitor it. As you move the turtle, watch the pose values update in real time, showing the position of the turtle and orientation changing based on your commands.
 
 ### Message Publisher
 
@@ -162,7 +162,7 @@ To plot topic data over time navigate to **Plugins > Visualization > Plot**. For
 
 ## Call ROS 2 services
 
-Turtlesim provides services for actions such as teleporting the turtle and clearing the path.
+Turtlesim provides services for actions such as repositioning the turtle and clearing the path.
 
 1. List available services:
 
