@@ -35,21 +35,33 @@ aliases:
 - /docker-hub/admin-overview
 ---
 
-Administrators can manage companies and organizations using the
-[Docker Admin Console](https://app.docker.com/admin). The Admin Console
-provides centralized observability, access management, and security controls
-across Docker environments.
+Administrators use the [Docker Admin Console](https://app.docker.com/admin) to provision user seats, manage access tokens and SSO, and deploy Docker Desktop to their orgs. Admin Console lets you oversee and manage seats, security, and identity management from a single point of visibility.
+
+## Set up Docker with Admin Console 
+
+Administrators get started with Docker by accessing the Admin Console to create a company and organizations. 
+
+- If you're a Docker Business subscriber, you have access to both company and organization features in Admin Console.
+- If you're Docker Team subscriber, you only have access to organization features in Admin Console.
+
+As an administrator, you act as an owner who can invite users with their email addresses, then assign them member roles to particular teams.
 
 ## Company and organization hierarchy
 
-The [Docker Admin Console](https://app.docker.com/admin) provides administrators with centralized observability, access management, and controls for their company and organizations. To provide these features, Docker uses the following hierarchy and roles.
+Admin Console gives administrators a bird's eye overview of a company  and its downstream organizations. Company and organizations have a hierarchical relationship:
 
 ![Diagram showing Docker’s administration hierarchy with Company at the top, followed by Organizations, Teams, and Members](./images/docker-admin-structure.webp)
 
+Administrators can occupy either company owner or organization owner roles, each with their own permissions and seat rules. 
+
+- Company owners can view and edit downstream organizations, or change SSO and SCIM settings. When a company owner makes a change to the company, it affects all organizations beneath them.
+- Organization owners have full admin permissions to manage members, roles, and teams within their organization, but not organizations they are not the owner to.
+
+When an administrator creates the first company from Admin Console, they assume both company and organization owner roles. If you're a Docker Team subscriber, you're the owner for that organization only and don't assume company owner permissions.    
+
 ### Company
 
-A company groups multiple Docker organizations for centralized configuration.
-Companies are only available for Docker Business subscribers.
+If you're a Docker Business subscriber, then a company is the highest level of visibility an administrator can have.
 
 Companies have the following administrator role available:
 
@@ -66,6 +78,8 @@ Organizations have the following administrator role available:
 
 - Organization owner: Can manage organization settings, users, and access
 controls.
+
+## Seats
 
 ### Team
 
