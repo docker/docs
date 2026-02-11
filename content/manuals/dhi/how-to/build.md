@@ -9,8 +9,9 @@ weight: 26
 Docker Hardened Images (DHI) are built from declarative YAML definition files
 instead of traditional Dockerfiles. A single YAML file describes exactly what
 goes into an image: packages, users, environment variables, entrypoint, and
-metadata. The DHI build system produces a minimal, signed image with a Software
-Bill of Materials (SBOM) and SLSA Build Level 3 provenance.
+metadata. The DHI build system produces a signed image containing only the required
+packages, with a Software Bill of Materials (SBOM) and SLSA Build Level 3
+provenance.
 
 This page explains how to write a DHI definition file, build images locally, and
 use advanced patterns such as build stages, third-party repositories, file
@@ -128,8 +129,8 @@ $ docker buildx build \
     --load
 ```
 
-This pulls the definition file from the catalog and builds it locally. After
-the build completes, verify the image:
+This downloads the definition file directly from GitHub and builds it locally.
+After the build completes, verify the image:
 
 ```console
 $ docker images my-alpine-base
