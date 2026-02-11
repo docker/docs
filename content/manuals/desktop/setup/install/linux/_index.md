@@ -37,7 +37,7 @@ This page contains information about general system requirements, supported plat
 
 Docker Desktop for Linux provides a user-friendly graphical interface that simplifies the management of containers and services. It includes Docker Engine as this is the core technology that powers Docker containers. Docker Desktop for Linux also comes with additional features like Docker Scout and Docker Extensions.
 
-#### Installing Docker Desktop and Docker Engine
+### Installing Docker Desktop and Docker Engine
 
 Docker Desktop for Linux and Docker Engine can be installed side-by-side on the
 same machine. Docker Desktop for Linux stores containers and images in an isolated
@@ -114,10 +114,6 @@ Current context is now "desktop-linux"
 
 Refer to the [Docker Context documentation](/manuals/engine/manage-resources/contexts.md) for more details.
 {{< /accordion >}}
-
-### Using Docker SDKs with Docker Desktop
-
-Docker Desktop for Linux uses a per-user socket instead of the system-wide `/var/run/docker.sock`. Docker SDKs and tools that connect directly to the Docker daemon need the `DOCKER_HOST` environment variable set to connect to Docker Desktop. For configuration details, see [How do I use Docker SDKs with Docker Desktop for Linux?](/manuals/desktop/troubleshoot-and-support/faqs/linuxfaqs.md#how-do-i-use-docker-sdks-with-docker-desktop-for-linux)
 
 ## Supported platforms
 
@@ -204,6 +200,10 @@ $ sudo usermod -aG kvm $USER
 ```
 
 Sign out and sign back in so that your group membership is re-evaluated.
+
+## Using Docker SDKs with Docker Desktop
+
+Docker Desktop for Linux uses a per-user socket instead of the system-wide `/var/run/docker.sock`. Docker SDKs and tools that connect directly to the Docker daemon need the `DOCKER_HOST` environment variable set to connect to Docker Desktop. For configuration details, see [How do I use Docker SDKs with Docker Desktop for Linux?](/manuals/desktop/troubleshoot-and-support/faqs/linuxfaqs.md#how-do-i-use-docker-sdks-with-docker-desktop-for-linux).
 
 ## Where to go next
 

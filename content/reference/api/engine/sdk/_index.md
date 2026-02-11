@@ -53,7 +53,7 @@ For more information, see [Docker Engine Python SDK reference](https://docker-py
 > export DOCKER_HOST=unix://$HOME/.docker/desktop/docker.sock
 > ```
 >
-> For more details, see [Using Docker SDKs with Docker Desktop](/manuals/desktop/setup/install/linux/_index.md#using-docker-sdks-with-docker-desktop).
+> For more details, see [the Linux FAQs](/manuals/desktop/troubleshoot-and-support/faqs/linuxfaqs.md#how-do-i-use-docker-sdks-with-docker-desktop-for-linux).
 
 ## View the API reference
 

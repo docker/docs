@@ -23,7 +23,7 @@ Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
 
 2. To make use of new kernel features.
 
-   Sometimes we want to make use of new operating system features. Because we control the kernel and the OS inside the VM, we can roll these out to all users immediately, even to users who are intentionally sticking on an LTS version of their machine OS.
+   Because Docker controls the kernel and the OS inside the VM, Docker can roll these out to all users immediately, even to users who are intentionally sticking on an LTS version of their machine OS.
 
 3. To enhance security.
 
@@ -33,9 +33,9 @@ Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
 
 4. To provide the benefits of feature parity and enhanced security, with minimal impact on performance.
 
-   The VM utilized by Docker Desktop for Linux uses [`VirtioFS`](https://virtio-fs.gitlab.io), a shared file system that allows virtual machines to access a directory tree located on the host. Our internal benchmarking shows that with the right resource allocation to the VM, near native file system performance can be achieved with VirtioFS.
+   The VM utilized by Docker Desktop for Linux uses [`VirtioFS`](https://virtio-fs.gitlab.io), a shared file system that allows virtual machines to access a directory tree located on the host. Docker's internal benchmarking shows that with the right resource allocation to the VM, near native file system performance can be achieved with VirtioFS.
 
-   As such, we have adjusted the default memory available to the VM in Docker Desktop for Linux. You can tweak this setting to your specific needs by using the **Memory** slider within the **Settings** > **Resources** tab of Docker Desktop.
+   As such, the default memory available to the VM in Docker Desktop for Linux is adjusted. You can tweak this setting to your specific needs by using the **Memory** slider within the **Settings** > **Resources** tab of Docker Desktop.
 
 ### How do I enable file sharing?
 
@@ -97,7 +97,7 @@ ACL (see `setfacl(1)`) for folders shared with the Docker Desktop VM.
 
 ### How do I use Docker SDKs with Docker Desktop for Linux?
 
-Docker Desktop for Linux uses a per-user socket located at `~/.docker/desktop/docker.sock` instead of the system-wide `/var/run/docker.sock`. The `docker` CLI handles this automatically through the `desktop-linux` context, but Docker SDKs and other tools that connect directly to the Docker daemon need the `DOCKER_HOST` environment variable set.
+Docker Desktop for Linux uses a per-user socket located at `~/.docker/desktop/docker.sock` instead of the system-wide `/var/run/docker.sock`. The Docker CLI handles this automatically through the `desktop-linux` context, but Docker SDKs and other tools that connect directly to the Docker daemon also need the `DOCKER_HOST` environment variable set.
 
 Without setting `DOCKER_HOST`, SDKs attempt to connect to `/var/run/docker.sock` and fail with an error like:
 
@@ -122,8 +122,6 @@ To make this permanent, add the export command to your shell profile (`~/.bashrc
 ```bash
 echo 'export DOCKER_HOST=unix://$HOME/.docker/desktop/docker.sock' >> ~/.bashrc
 ```
-
-This issue is specific to Docker Desktop for Linux. On macOS and Windows, Docker Desktop binds to the default socket location, so SDKs work without additional configuration.
 
 ### Where does Docker Desktop store Linux containers?
 
