@@ -21,11 +21,9 @@ All Docker Pro, Team, and Business subscribers receive email support for Docker 
 - Docker Team: 2 business day response, 24×5 availability
 - Docker Business: 1 business day response, 24×5 availability
 
-> [!NOTE]
+> [!TIP]
 >
-> Premium Support with faster response times and 24×7 availability is available as an add-on for Docker Business subscribers.
-
-For detailed support features and response times, see [Docker Pricing](https://www.docker.com/pricing/).
+> Premium Support with faster response times and 24×7 availability is available as an add-on for [Docker Business subscribers](https://www.docker.com/pricing/).
 
 ### Support severity levels
 

@@ -112,7 +112,7 @@ After accepting an invitation, you are now a member of the organization.
 
 ## Manage invitations
 
-After inviting members, you can resend or remove invitations as needed.
+After inviting members, you can resend or remove invitations as needed. Need to manage more than 1,000 team members? [Upgrade to Docker Business for unlimited user invites](https://www.docker.com/pricing/) and advanced role management.
 
 ### Resend an invitation
 
@@ -159,9 +159,7 @@ organization.
 1. Select the team name.
 1. Select **Add member**. You can add the member by searching for their email address or username.
 
-   > [!NOTE]
-   >
-   > An invitee must first accept the invitation to join the organization before being added to the team.
+An invitee must first accept the invitation to join the organization before being added to the team.
 
 ### Remove members from teams
 
