@@ -35,63 +35,75 @@ aliases:
 - /docker-hub/admin-overview
 ---
 
-Administrators can manage companies and organizations using the
-[Docker Admin Console](https://app.docker.com/admin). The Admin Console
-provides centralized observability, access management, and security controls
-across Docker environments.
+Administrators start with the [Docker Admin Console](https://app.docker.com/admin) to provision user seats, manage access tokens, SSO and SCIM, and deploy Docker Desktop to their organizations. 
+
+## Set up Docker with Admin Console 
+
+Administrators get started with Docker by accessing the Admin Console to create a company and organizations. 
+
+- If you're a Docker Business subscriber, you have access to both company and organization features.
+- If you're Docker Team subscriber, you have access to organization features.
 
 ## Company and organization hierarchy
 
-The [Docker Admin Console](https://app.docker.com/admin) provides administrators with centralized observability, access management, and controls for their company and organizations. To provide these features, Docker uses the following hierarchy and roles.
+Admin Console gives administrators a bird's eye view of who has access to Docker. There are two levels of visibility, company and organizations, and they have a hierarchical relationship:
 
 ![Diagram showing Docker’s administration hierarchy with Company at the top, followed by Organizations, Teams, and Members](./images/docker-admin-structure.webp)
 
 ### Company
 
-A company groups multiple Docker organizations for centralized configuration.
-Companies are only available for Docker Business subscribers.
-
-Companies have the following administrator role available:
-
-- Company owner: Can view and manage all organizations within the company.
-Has full access to company-wide settings and inherits the same permissions as
-organization owners.
+The highest level of visibility an administrator can have is at the company level. A company owner views and manages all organizations within the company and has full access to company-wide settings.
 
 ### Organization
 
-An organization contains teams and repositories. All Docker Team and Business
-subscribers must have at least one organization.
+An organization contains teams and repositories. Organization owners manage organization settings, users, and access controls. 
 
-Organizations have the following administrator role available:
+- All Docker Team and Business
+subscribers must create one organization before inviting new members to Docker.
+- All organizations owners occupy one seat, but can occupy more than one seat if they're members or owners of multiple, separate organizations.
+- Unlike a company, an organization is discrete from other organizations and cannot inherit permissions in bulk from other organizations. 
 
-- Organization owner: Can manage organization settings, users, and access
-controls.
+If you're a Docker team subscriber who wants access to company-level permissions, you can [upgrade to Docker Business](/subscription/change/#upgrade-your-subscription).
 
-### Team
+## Seats and user management
 
-Teams are optional and let you group members to assign repository permissions
-collectively. Teams simplify permission management across projects
+The number of seats an administrator can provision depends on their [subscription type](https://www.docker.com/pricing/). Administrators can act as company or organization owners who can invite users with their email addresses, then assign them member roles to particular teams.
+
+### Company and organization owners 
+
+Administrators can occupy company owner or organization owner roles (or both), where each role has its own permissions and seat rules. 
+
+- Company owners can view and bulk edit settings and configurations for all organizations beneath them.
+- Company owners won't occupy a seat unless SSO is enabled, or they're a member of an organization within the company. 
+- Organization owners have full admin permissions to manage settings, members, roles, and teams within their organization, but not organizations they're not part of.
+
+When an administrator creates the first company or organization from Admin Console, they assume owner roles for the company and/or the organization by default.
+
+### Seats 
+
+A seat is a unit purchased with a subscription plan that extends access to users to an organization's repo.
+
+  - They give administrators granular permissions around who can contribute to a repository.
+  - They prevent unauthorized users from pushing to a repos they're not members of. 
+
+For example, an organization owner takes up one seat. They can invite Docker users to an organization. Once invitees become members, organization owners can set permissions to members of their company or organization. 
+
+### Users and members 
+
+Docker uses specific terminology to define user access: 
+
+- A user is someone with a Docker ID.
+  - They're not necessarily affiliated with an organization.
+  - They do not occupy a seat by default.
+- An invitee is a user invited to an organization.
+  - Invitees occupy one seat. 
+  - It behaves as a user state before accepting and joining an organization. 
+- A member is a user who accepted an invitation to an organization.
+- Teams let you group members together.
+  - They are optional. 
+  - They allow you to assign repository permissions in bulk. 
+  - Teams can simplify permission management across projects
 or functions.
-
-### Member
-
-A member is any Docker user added to an organization. Organization and company
-owners can assign roles to members to define their level of access.
-
-> [!NOTE]
->
-> Creating a company is optional, but organizations are required for Team and
-Business subscriptions.
-
-## Admin Console features
-
-Docker's [Admin Console](https://app.docker.com/admin) allows you to:
-
-- Create and manage companies and organizations
-- Assign roles and permissions to members
-- Group members into teams to manage access by project or role
-- Set company-wide policies, including SCIM provisioning and security
-enforcement
 
 ## Manage companies and organizations
 
