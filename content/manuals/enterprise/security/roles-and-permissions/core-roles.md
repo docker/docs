@@ -78,7 +78,7 @@ beyond their organization role:
 > [!TIP]
 > 
 > If you want more granular access control, you can
-> [upgrade to a Docker Business plan](https://www.docker.com/pricing/) 
+> <a href="https://www.docker.com/pricing/" id="pricing-link" class="link" rel="noopener">upgrade to a Docker Business plan</a> 
 > for custom roles and advanced permissions.
 
 
