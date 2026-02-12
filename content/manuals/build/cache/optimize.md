@@ -116,13 +116,16 @@ instruction in your Dockerfile:
 
 ```dockerfile
 FROM golang:latest
-WORKDIR /app
+WORKDIR /build
 RUN --mount=type=bind,target=. go build -o /app/hello
 ```
 
-In this example, the current directory is mounted into the build container
-before the `go build` command gets executed. The source code is available in
-the build container for the duration of that `RUN` instruction. When the
+In this example, the current directory is mounted into the build container at
+`/build` before the `go build` command gets executed. The build output is
+written to `/app/hello`, which is outside the mount point. This distinction is
+important: the build output must be written outside the bind mount target,
+since the mount is read-only by default. The source code is available in the
+build container for the duration of that `RUN` instruction. When the
 instruction is done executing, the mounted files are not persisted in the final
 image, or in the build cache. Only the output of the `go build` command
 remains.
