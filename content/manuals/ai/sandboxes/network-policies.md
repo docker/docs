@@ -95,7 +95,43 @@ View what your agent is accessing and whether requests are being blocked:
 $ docker sandbox network log
 ```
 
-Network logs help you understand agent behavior and define policies.
+The network log shows aggregated summaries of HTTP/HTTPS network requests:
+
+- **Allowed requests** - Requests that were permitted by your network policy
+- **Blocked requests** - Requests that were denied by your network policy
+
+For each host accessed, the log shows:
+
+- **Sandbox** - Name of the sandbox making the request
+- **Host** - The destination (hostname and port)
+- **Rule** - The policy rule that matched this request (or `<default policy>`)
+- **Last Seen** - When this host was most recently accessed
+- **Count** - Number of requests to this host since tracking began
+
+Use network logs to understand agent behavior, identify blocked requests that
+should be allowed, and debug network policy issues. The logs are especially
+helpful when defining policies - they show exactly what your agent is trying to
+access.
+
+### Example log output
+
+```console
+$ docker sandbox network log
+Blocked requests:
+SANDBOX          HOST                    RULE             LAST SEEN         COUNT
+my-sandbox       internal.corp.com:443   <default policy> 14:30:15 12-Feb   3
+my-sandbox       192.168.1.100:22        <default policy> 14:25:10 12-Feb   1
+
+Allowed requests:
+SANDBOX          HOST                          RULE                   LAST SEEN         COUNT
+my-sandbox       api.anthropic.com:443         api.anthropic.com      14:35:21 12-Feb   15
+my-sandbox       registry.npmjs.org:443        *.npmjs.org            14:32:18 12-Feb   8
+my-sandbox       raw.githubusercontent.com:443 *.githubusercontent.com 14:30:45 12-Feb   2
+```
+
+The log displays both blocked and allowed requests in separate sections. Use
+`--json` for machine-readable output, `--quiet` to suppress headers, or
+`--limit N` to show only the first N entries.
 
 ## Applying policies
 
