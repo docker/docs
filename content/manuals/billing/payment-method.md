@@ -111,9 +111,9 @@ To add a payment method:
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
 organization.
 1. Select **Billing**.
-2. Select **Payment methods** from the left-hand menu.
-3. Select **Add payment method**.
-4. Enter your new payment information:
+1. Select **Payment methods** from the left-hand menu.
+1. Select **Add payment method**.
+1. Enter your new payment information:
     - Add a card:
         - Select **Card** and fill out the card information form.
     - Add a Link payment:
@@ -127,8 +127,8 @@ organization.
         - If your bank is listed, select your bank's name.
         - If your bank is not listed, select **Search for your bank**.
         - To verify your bank account, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
-5. Select **Add payment method**.
-6. Optional. You can set a new default payment method by selecting
+1. Select **Add payment method**.
+1. Optional. You can set a new default payment method by selecting
 the **Set as default** action.
 1. Optional. You can remove non-default payment methods by selecting
 the **Delete** action.
@@ -141,10 +141,10 @@ If you want to set a US bank account as your default payment method, you must ve
 To add a payment method:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select your organization, then select **Billing**.
-3. Select the **Payment methods** link.
-4. Select **Add payment method**.
-5. Enter your new payment information:
+1. Select your organization, then select **Billing**.
+1. Select the **Payment methods** link.
+1. Select **Add payment method**.
+1. Enter your new payment information:
     - Add a card:
         - Select **Card** and fill out the card information form.
     - Add a Link payment:
@@ -152,8 +152,8 @@ To add a payment method:
         Link **email address** and **phone number**.
         - If you are not an existing Link customer, you must fill out the
         card information form to store a card for Link payments.
-6. Select **Add payment method**.
-7. Select the **Actions** icon, then select **Make default** to ensure that
+1. Select **Add payment method**.
+1. Select the **Actions** icon, then select **Make default** to ensure that
 your new payment method applies to all purchases and subscriptions.
 1. Optional. You can remove non-default payment methods by selecting
 the **Actions** icon. Then, select **Delete**.
