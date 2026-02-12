@@ -13,10 +13,9 @@ This page describes how to create an organization.
 
 ## Prerequisites
 
-Before you begin creating an organization:
+Before you create an organization, you need a [Docker ID](/accounts/create-account/).
 
-- You need a [Docker ID](/accounts/create-account/)
-- Review the [Docker subscriptions and features](https://www.docker.com/pricing/)
+Need a different plan for your team's needs? Review different [Docker subscriptions and features](https://www.docker.com/pricing/)
   to determine what subscription to choose for your organization
 
 ## Create an organization
