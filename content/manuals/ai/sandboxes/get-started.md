@@ -66,6 +66,12 @@ Follow these steps to run Claude Code:
    $ docker sandbox run claude
    ```
 
+   You can also mount multiple workspaces. Append `:ro` for read-only access:
+
+   ```console
+   $ docker sandbox run claude ~/my-project ~/docs:ro
+   ```
+
 3. Claude Code starts and you can begin working. The first run takes longer
    while Docker initializes the microVM and pulls the template image.
 

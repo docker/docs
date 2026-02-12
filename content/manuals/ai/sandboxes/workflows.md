@@ -142,6 +142,25 @@ Check for untracked files and be aware that some changes, like Git hooks in
 This is the same trust model used by editors like Visual Studio Code, which
 warn when opening new workspaces for similar reasons.
 
+## Managing multiple projects
+
+Create sandboxes for different projects:
+
+```console
+$ docker sandbox create claude ~/project-a
+$ docker sandbox create claude ~/project-b
+$ docker sandbox create claude ~/work/client-project
+```
+
+Each sandbox is completely isolated. Switch between them by running the
+appropriate sandbox name.
+
+Remove unused sandboxes to reclaim disk space:
+
+```console
+$ docker sandbox rm <sandbox-name>
+```
+
 ## Named sandboxes
 
 Docker automatically generates sandbox names based on the agent and workspace
@@ -162,6 +181,67 @@ $ docker sandbox run dev
 
 Each maintains separate packages, Docker images, and state, but share the
 workspace files.
+
+## Multiple workspaces
+
+Mount multiple directories into a single sandbox for working with related
+projects or when the agent needs access to documentation and shared libraries.
+
+```console
+$ docker sandbox run claude ~/my-project ~/shared-docs
+```
+
+The primary workspace (first argument) is always mounted read-write. Additional
+workspaces are mounted read-write by default.
+
+### Read-only mounts
+
+Mount additional workspaces as read-only by appending `:ro` or `:readonly`:
+
+```console
+$ docker sandbox run claude . /path/to/docs:ro /path/to/lib:readonly
+```
+
+The primary workspace remains fully writable while read-only workspaces are
+protected from changes.
+
+### Path resolution
+
+Workspaces are mounted at their absolute paths inside the sandbox. Relative
+paths are resolved to absolute paths before mounting.
+
+Example:
+
+```console
+$ cd /Users/bob/projects
+$ docker sandbox run claude ./app ~/docs:ro
+```
+
+Inside the sandbox:
+
+- `/Users/bob/projects/app` - Primary workspace (read-write)
+- `/Users/bob/docs` - Additional workspace (read-only)
+
+Changes to `/Users/bob/projects/app` sync back to your host, while
+`/Users/bob/docs` remains read-only.
+
+### Sharing workspaces across sandboxes
+
+A single path can be included in multiple sandboxes simultaneously:
+
+```console
+$ docker sandbox create --name sb1 claude ./project-a
+$ docker sandbox create --name sb2 claude ./project-a ./project-b
+$ docker sandbox create --name sb3 cagent ./project-a
+$ docker sandbox ls
+SANDBOX   AGENT    STATUS    WORKSPACE
+sb1       claude   running   /Users/bob/src/project-a
+sb2       claude   running   /Users/bob/src/project-a, /Users/bob/src/project-b
+sb3       cagent   running   /Users/bob/src/project-a
+```
+
+Each sandbox runs in isolation with separate configurations while sharing the
+same workspace files.
 
 ## Resetting state
 
@@ -202,25 +282,6 @@ List all sandboxes:
 
 ```console
 $ docker sandbox ls
-```
-
-## Managing multiple projects
-
-Create sandboxes for different projects:
-
-```console
-$ docker sandbox create claude ~/project-a
-$ docker sandbox create claude ~/project-b
-$ docker sandbox create claude ~/work/client-project
-```
-
-Each sandbox is completely isolated. Switch between them by running the
-appropriate sandbox name.
-
-Remove unused sandboxes to reclaim disk space:
-
-```console
-$ docker sandbox rm <sandbox-name>
 ```
 
 ## Next steps
