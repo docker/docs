@@ -32,10 +32,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.60.1" build_path="//" >}}
 
-### New 
-
-- Ask Gordon is no longer in Beta.
-
 ### Updates
 
 - Linux kernel `v6.12.68`
