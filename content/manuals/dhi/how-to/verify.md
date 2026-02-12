@@ -148,7 +148,7 @@ $ regctl artifact get registry.scout.docker.com/${DOCKER_ORG}/dhi-node@sha256:6c
 
 ### Validate the attestation
 
-{{< tabs group="tool" >}}
+{{< tabs >}}
 {{< tab name="Docker Scout" >}}
 
 To validate the attestation using Docker Scout, you can use the `--verify` flag:
