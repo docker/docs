@@ -86,6 +86,8 @@ that workspace.
 Docker Sandboxes works with multiple AI coding agents:
 
 - **Claude Code** - Anthropic's coding agent
+- **OpenCode** - Multi-provider agent with AGENTS.md support
+- **Shell** - Minimal sandbox for manual agent installation
 - **Codex** - OpenAI's Codex agent (partial support; in development)
 - **Copilot** - GitHub Copilot agent (partial support; in development)
 - **Gemini** - Google's Gemini agent (partial support; in development)

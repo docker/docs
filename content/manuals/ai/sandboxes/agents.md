@@ -11,14 +11,16 @@ inside microVMs with private Docker daemons.
 
 ## Supported agents
 
-| Agent       | Command   | Status       | Notes                      |
-| ----------- | --------- | ------------ | -------------------------- |
-| Claude Code | `claude`  | Experimental | Most tested implementation |
-| Codex       | `codex`   | Experimental | In development             |
-| Copilot     | `copilot` | Experimental | In development             |
-| Gemini      | `gemini`  | Experimental | In development             |
-| cagent      | `cagent`  | Experimental | In development             |
-| Kiro        | `kiro`    | Experimental | In development             |
+| Agent       | Command    | Status       | Notes                                     |
+| ----------- | ---------- | ------------ | ----------------------------------------- |
+| Claude Code | `claude`   | Experimental | Most tested implementation                |
+| Codex       | `codex`    | Experimental | In development                            |
+| Copilot     | `copilot`  | Experimental | In development                            |
+| Gemini      | `gemini`   | Experimental | In development                            |
+| cagent      | `cagent`   | Experimental | In development                            |
+| Kiro        | `kiro`     | Experimental | In development                            |
+| OpenCode    | `opencode` | Experimental | In development                            |
+| Shell       | `shell`    | Experimental | Minimal environment for manual setup      |
 
 ## Experimental status
 
@@ -36,7 +38,7 @@ Use sandboxes for development and testing, not production workloads.
 The agent type is specified when creating a sandbox:
 
 ```console
-$ docker sandbox create AGENT [PATH]
+$ docker sandbox create AGENT [PATH] [PATH...]
 ```
 
 Each agent runs in its own isolated sandbox. The agent type is bound to the
