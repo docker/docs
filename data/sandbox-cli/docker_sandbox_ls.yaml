@@ -16,17 +16,6 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: no-trunc
-      value_type: bool
-      default_value: "false"
-      description: Don't truncate output
-      details_url: '#no-trunc'
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
     - option: quiet
       shorthand: q
       value_type: bool
@@ -83,24 +72,6 @@ examples: |-
     $ docker sandbox ls --quiet
     claude-vm
     gemini-vm
-    ```
-
-    ### Don't truncate output (--no-trunc) {#no-trunc}
-
-    ```text
-    --no-trunc
-    ```
-
-    By default, long VM IDs, workspace paths, and socket paths are truncated for readability. Use `--no-trunc` to display the full values:
-
-    ```console
-    $ docker sandbox ls
-    VM ID         NAME       STATUS    WORKSPACE                   SOCKET PATH                           SANDBOXES    AGENTS
-    abc123def     claude-vm  running   /home/user/.../my-project   ...sandboxes/vm/claude-vm/docker.sock  2           claude
-
-    $ docker sandbox ls --no-trunc
-    VM ID                     NAME       STATUS    WORKSPACE                                          SOCKET PATH                                                              SANDBOXES    AGENTS
-    abc123def456ghi789jkl     claude-vm  running   /home/user/very/long/path/to/my-project           /Users/user/.docker/sandboxes/vm/claude-vm/docker-1764682554072.sock    2           claude
     ```
 
     ### JSON output (--json)

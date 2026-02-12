@@ -48,7 +48,7 @@ options:
     - option: bypass-cidr
       value_type: string
       description: |
-        Bypass proxy for an IP range in CIDR notation (can be specified multiple times)
+        Bypass MITM proxy for an IP range in CIDR notation (can be specified multiple times)
       details_url: '#bypass-cidr'
       deprecated: false
       hidden: false
@@ -58,7 +58,8 @@ options:
       swarm: false
     - option: bypass-host
       value_type: string
-      description: Bypass proxy for a domain or IP (can be specified multiple times)
+      description: |
+        Bypass MITM proxy for a domain or IP (can be specified multiple times)
       details_url: '#bypass-host'
       deprecated: false
       hidden: false
@@ -139,25 +140,25 @@ examples: |-
       --allow-host api.trusted-service.com
     ```
 
-    ### Bypass proxy for domain (--bypass-host) {#bypass-host}
+    ### Bypass MITM proxy for domain (--bypass-host) {#bypass-host}
 
     ```text
     --bypass-host DOMAIN
     ```
 
-    Bypass proxy for specific domains:
+    Bypass MITM proxy for specific domains:
 
     ```console
     $ docker sandbox network proxy my-sandbox --bypass-host localhost
     ```
 
-    ### Bypass proxy for IP range (--bypass-cidr) {#bypass-cidr}
+    ### Bypass MITM proxy for IP range (--bypass-cidr) {#bypass-cidr}
 
     ```text
     --bypass-cidr CIDR
     ```
 
-    Bypass proxy for an IP range:
+    Bypass MITM proxy for an IP range:
 
     ```console
     $ docker sandbox network proxy my-sandbox --bypass-cidr 127.0.0.0/8
