@@ -45,7 +45,7 @@ You can verify and inspect these attestations to confirm the integrity and
 provenance of any image. See [SLSA](../core-concepts/slsa.md) for details on
 how to verify build attestations.
 
-This transparency allows security teams to review image configurations and
+This transparency lets security teams review image configurations and
 understand what goes into each image.
 
 ## Build triggers
