@@ -182,7 +182,7 @@ Turtlesim provides services for actions such as repositioning the turtle and cle
     "
     ```
 
-    The turtle should instantly move to the specified position (3.0, 4.0).
+    The turtle should instantly move to the specified position (1.0, 3.0).
 
 ## Create a simple publisher
 
