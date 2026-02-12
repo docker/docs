@@ -107,19 +107,19 @@ Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docke
 
 To fix this, set the `DOCKER_HOST` environment variable before running your SDK-based application:
 
-```bash
+```console
 export DOCKER_HOST=unix://$HOME/.docker/desktop/docker.sock
 ```
 
 Or dynamically retrieve it from the `desktop-linux` context:
 
-```bash
+```console
 export DOCKER_HOST=$(docker context inspect desktop-linux --format '{{ .Endpoints.docker.Host }}')
 ```
 
 To make this permanent, add the export command to your shell profile (`~/.bashrc`, `~/.zshrc`, or similar):
 
-```bash
+```console
 echo 'export DOCKER_HOST=unix://$HOME/.docker/desktop/docker.sock' >> ~/.bashrc
 ```
 
