@@ -21,9 +21,7 @@ Docker organizations have three core roles:
 - **Editor**: Partial administrative access. Editors can create, edit, and delete repositories. They can also manage team permissions for repositories.
 - **Owner**: Full administrative access. Owners can manage all organization settings, including repositories, teams, members, billing, and security features.
 
-> [!NOTE]
->
-> A company owner has the same organization management permissions as an organization owner, but there are some content and registry permissions that company owners don't have (for example, repository pull/push). For more information, see [Company overview](/admin/company/).
+A company owner has the same organization management permissions as an organization owner, but there are some content and registry permissions that company owners don't have (for example, repository pull/push). For more information, see [Company overview](/admin/company/).
 
 ### Content and registry permissions
 
@@ -77,7 +75,12 @@ beyond their organization role:
 | Manage seats                                                      | ❌     | ❌     | ✅    |
 | Upgrade and downgrade plans                                       | ❌     | ❌     | ✅    |
 
-If you want more granular access control, you can [upgrade to a Docker Business plan](https://www.docker.com/pricing/) for custom roles and advanced permissions.
+> [!TIP]
+> 
+> If you want more granular access control, you can
+> [upgrade to a Docker Business plan](https://www.docker.com/pricing/) 
+> for custom roles and advanced permissions.
+
 
 _\* If not part of a company_
 
