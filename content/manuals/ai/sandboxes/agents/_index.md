@@ -1,5 +1,6 @@
 ---
 title: Supported agents
+linkTitle: Agents
 description: AI coding agents supported by Docker Sandboxes with experimental status and configuration details.
 weight: 50
 ---
@@ -20,7 +21,7 @@ inside microVMs with private Docker daemons.
 | cagent      | `cagent`   | Experimental | In development                            |
 | Kiro        | `kiro`     | Experimental | In development                            |
 | OpenCode    | `opencode` | Experimental | In development                            |
-| Shell       | `shell`    | Experimental | Minimal environment for manual setup      |
+| Custom shell | `shell`   | Experimental | Minimal environment for manual setup      |
 
 ## Experimental status
 
@@ -44,6 +45,19 @@ $ docker sandbox create AGENT [PATH] [PATH...]
 Each agent runs in its own isolated sandbox. The agent type is bound to the
 sandbox when created and cannot be changed later.
 
+## Template environment
+
+All agent templates share a common base environment:
+
+- Ubuntu 25.10 base
+- Development tools: Docker CLI (with Buildx and Compose), Git, GitHub CLI, Node.js, Go, Python 3, uv, make, jq, ripgrep
+- Non-root `agent` user with sudo access
+- Private Docker daemon for running additional containers
+- Package managers: apt, pip, npm
+
+Individual agents add their specific CLI tools on top of this base. See
+[Custom templates](../templates.md) to build your own agent images.
+
 ## Agent-specific configuration
 
 Each agent has its own credential requirements and authentication flow.
@@ -52,7 +66,14 @@ agent (no fallback authentication methods are used).
 
 See the agent-specific documentation:
 
-- [Claude Code configuration](claude-code.md)
+- [Claude Code](./claude-code.md)
+- [cagent](./cagent.md)
+- [Codex](./codex.md)
+- [Copilot](./copilot.md)
+- [Gemini](./gemini.md)
+- [Kiro](./kiro.md)
+- [OpenCode](./opencode.md)
+- [Custom shell](./shell.md)
 
 ## Requirements
 
@@ -61,9 +82,3 @@ See the agent-specific documentation:
   - macOS with virtualization.framework
   - Windows with Hyper-V {{< badge color=violet text=Experimental >}}
 - API keys or credentials for your chosen agent
-
-## Next steps
-
-- [Claude Code configuration](claude-code.md)
-- [Custom templates](templates.md)
-- [Using sandboxes effectively](workflows.md)

@@ -194,5 +194,5 @@ New command structure:
 $ docker sandbox run claude ~/project
 ```
 
-The agent name (`claude`, `codex`, `gemini`, `cagent`, `kiro`) is now a
-required parameter when creating sandboxes, and you run the sandbox by name.
+The agent name is now a required parameter when creating sandboxes, and you run
+the sandbox by name.

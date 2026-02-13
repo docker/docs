@@ -15,22 +15,23 @@ Create a sandbox for your project:
 
 ```console
 $ cd ~/my-project
-$ docker sandbox run claude
+$ docker sandbox run AGENT
 ```
 
+Replace `AGENT` with your preferred agent (`claude`, `codex`, `copilot`, etc.).
 The workspace defaults to your current directory when omitted. You can also
 specify an explicit path:
 
 ```console
-$ docker sandbox run claude ~/my-project
+$ docker sandbox run AGENT ~/my-project
 ```
 
 The `docker sandbox run` command is idempotent. Running the same command
 multiple times reuses the existing sandbox instead of creating a new one:
 
 ```console
-$ docker sandbox run claude ~/my-project  # Creates sandbox
-$ docker sandbox run claude ~/my-project  # Reuses same sandbox
+$ docker sandbox run AGENT ~/my-project  # Creates sandbox
+$ docker sandbox run AGENT ~/my-project  # Reuses same sandbox
 ```
 
 This works with workspace path (absolute or relative) or omitted workspace. The
@@ -45,8 +46,8 @@ When using the `--name` flag, the behavior is also idempotent based on the
 name:
 
 ```console
-$ docker sandbox run --name dev claude  # Creates sandbox named "dev"
-$ docker sandbox run --name dev claude  # Reuses sandbox "dev"
+$ docker sandbox run --name dev AGENT  # Creates sandbox named "dev"
+$ docker sandbox run --name dev AGENT  # Reuses sandbox "dev"
 ```
 
 ## Installing dependencies
@@ -55,10 +56,10 @@ Ask the agent to install what's needed:
 
 ```plaintext
 You: "Install pytest and black"
-Claude: [Installs packages via pip]
+Agent: [Installs packages via pip]
 
 You: "Install build-essential"
-Claude: [Installs via apt]
+Agent: [Installs via apt]
 ```
 
 The agent has sudo access. Installed packages persist for the sandbox lifetime.
@@ -77,7 +78,7 @@ runs inside the sandbox's private Docker daemon.
 ```plaintext
 You: "Build the Docker image and run the tests"
 
-Claude: *runs*
+Agent: *runs*
   docker build -t myapp:test .
   docker run myapp:test npm test
 ```
@@ -90,7 +91,7 @@ don't appear in your host's `docker ps`.
 ```plaintext
 You: "Start the application with docker-compose and run integration tests"
 
-Claude: *runs*
+Agent: *runs*
   docker-compose up -d
   docker-compose exec api pytest tests/integration
   docker-compose down
@@ -148,8 +149,8 @@ Create sandboxes for different projects:
 
 ```console
 $ docker sandbox create claude ~/project-a
-$ docker sandbox create claude ~/project-b
-$ docker sandbox create claude ~/work/client-project
+$ docker sandbox create codex ~/project-b
+$ docker sandbox create copilot ~/work/client-project
 ```
 
 Each sandbox is completely isolated. Switch between them by running the
@@ -168,14 +169,14 @@ directory (for example, `claude-my-project`). You can also specify custom names
 using the `--name` flag:
 
 ```console
-$ docker sandbox run --name myproject claude ~/project
+$ docker sandbox run --name myproject AGENT ~/project
 ```
 
 Create multiple sandboxes for the same workspace:
 
 ```console
 $ docker sandbox create --name dev claude ~/project
-$ docker sandbox create --name staging claude ~/project
+$ docker sandbox create --name staging codex ~/project
 $ docker sandbox run dev
 ```
 
@@ -188,7 +189,7 @@ Mount multiple directories into a single sandbox for working with related
 projects or when the agent needs access to documentation and shared libraries.
 
 ```console
-$ docker sandbox run claude ~/my-project ~/shared-docs
+$ docker sandbox run AGENT ~/my-project ~/shared-docs
 ```
 
 The primary workspace (first argument) is always mounted read-write. Additional
@@ -199,7 +200,7 @@ workspaces are mounted read-write by default.
 Mount additional workspaces as read-only by appending `:ro` or `:readonly`:
 
 ```console
-$ docker sandbox run claude . /path/to/docs:ro /path/to/lib:readonly
+$ docker sandbox run AGENT . /path/to/docs:ro /path/to/lib:readonly
 ```
 
 The primary workspace remains fully writable while read-only workspaces are
@@ -214,7 +215,7 @@ Example:
 
 ```console
 $ cd /Users/bob/projects
-$ docker sandbox run claude ./app ~/docs:ro
+$ docker sandbox run AGENT ./app ~/docs:ro
 ```
 
 Inside the sandbox:

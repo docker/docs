@@ -6,7 +6,7 @@ weight: 50
 
 {{< summary-bar feature_name="Docker Sandboxes" >}}
 
-This guide helps you resolve common issues when sandboxing Claude Code locally.
+This guide helps you resolve common issues when using Docker Sandboxes with AI coding agents.
 
 <!-- vale off -->
 

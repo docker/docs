@@ -1,13 +1,15 @@
 ---
 title: Get started with Docker Sandboxes
 linkTitle: Get started
-description: Run Claude Code in an isolated sandbox. Quick setup guide with prerequisites and essential commands.
+description: Run AI coding agents in isolated sandboxes. Quick setup guide using Claude Code as an example.
 weight: 20
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes" >}}
 
-This guide shows how to run Claude Code in an isolated sandbox for the first time.
+This guide shows how to run an AI coding agent in an isolated sandbox for the
+first time, using Claude Code as an example. The same concepts apply to
+[other supported agents](agents/).
 
 > [!NOTE]
 > Upgrading from an earlier version of Docker Desktop? See the
@@ -24,7 +26,7 @@ Before you begin, ensure you have:
 
 ## Run your first sandbox
 
-Follow these steps to run Claude Code:
+Follow these steps to run a sandbox with Claude Code:
 
 1. (Optional but recommended) Set your Anthropic API key as an environment variable.
 
@@ -148,10 +150,9 @@ For a complete list of commands and options, see the
 
 ## Next steps
 
-Now that you have Claude running in a sandbox, learn more about:
+Now that you have an agent running in a sandbox, learn more about:
 
-- [Claude Code configuration](claude-code.md)
-- [Supported agents](agents.md)
+- [Supported agents](agents/_index.md)
 - [Using sandboxes effectively](workflows.md)
 - [Custom templates](templates.md)
 - [Network policies](network-policies.md)
