@@ -213,8 +213,8 @@ name: My Base Image
 image: my-registry/my-base
 variant: runtime
 tags:
+  - "1.0.0"
   - "1.0"
-  - "latest"
 platforms:
   - linux/amd64
   - linux/arm64
