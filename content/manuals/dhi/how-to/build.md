@@ -606,7 +606,7 @@ contents:
 | Field      | Description                                                                  |
 |------------|------------------------------------------------------------------------------|
 | `name`     | Full OCI reference with digest pin. Always use `@sha256:` for reproducibility. |
-| `includes` | Glob patterns for files to extract from the artifact. Use `opt/**` to include everything under a directory. |
+| `includes` | Glob patterns for files to extract from the artifact. Paths are resolved from the filesystem root; `opt/**` includes everything under the `/opt` path. |
 | `excludes` | Glob patterns for files to skip. Useful for removing headers, docs, or unused binaries. |
 | `uid`, `gid` | Ownership for extracted files.                                             |
 
