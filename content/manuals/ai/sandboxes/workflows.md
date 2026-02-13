@@ -284,9 +284,3 @@ List all sandboxes:
 ```console
 $ docker sandbox ls
 ```
-
-## Next steps
-
-- [Custom templates](templates.md)
-- [Architecture](architecture.md)
-- [Network policies](network-policies.md)

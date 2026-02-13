@@ -385,9 +385,3 @@ You can modify the default policy:
 Review and customize the default policy to match your security requirements
 before creating new sandboxes. Once created, the default policy file won't be
 modified by upgrades, preserving your custom configuration.
-
-## Next steps
-
-- [Architecture](architecture.md)
-- [Using sandboxes effectively](workflows.md)
-- [Custom templates](templates.md)

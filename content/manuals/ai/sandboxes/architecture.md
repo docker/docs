@@ -223,9 +223,3 @@ Sandboxes trade higher resource overhead (VM + daemon) for complete isolation.
 Use containers when you need lightweight packaging without Docker access. Use
 sandboxes when you need to give something autonomous full Docker capabilities
 without trusting it with your host environment.
-
-## Next steps
-
-- [Network policies](network-policies.md)
-- [Custom templates](templates.md)
-- [Using sandboxes effectively](workflows.md)

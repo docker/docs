@@ -218,9 +218,3 @@ $ docker sandbox run -t myorg/sandbox-templates:python-v1.0 claude [PATH]
 
 Use version tags like `:v1.0` instead of `:latest` for consistency across your
 team.
-
-## Next steps
-
-- [Using sandboxes effectively](workflows.md)
-- [Architecture](architecture.md)
-- [Network policies](network-policies.md)
