@@ -43,9 +43,9 @@ Let’s do a quick demo of starting Traefik and then configuring two additional 
 
 1. In order for two containers to be able to communicate with each other, they need to be on the same network. Create a network named `traefik-demo` using the `docker network create` command:
 
-  ```console
-  $ docker network create traefik-demo
-  ```
+   ```console
+   $ docker network create traefik-demo
+   ```
 
 2. Start a Traefik container using one of the following methods. These commands exposes Traefik on port 80, mounts the Docker socket (which is used to monitor containers to update configuration), and passes the `--providers.docker` argument to configure Traefik to use the Docker provider.
 
@@ -56,7 +56,7 @@ Let’s do a quick demo of starting Traefik and then configuring two additional 
   If you haven't authenticated yet, first run:
 
   ```bash
-  docker login dhi.io
+  $ docker login dhi.io
   ```
 
   Then start a container using the Hardened image:
@@ -95,7 +95,7 @@ Let’s do a quick demo of starting Traefik and then configuring two additional 
   If you haven't authenticated yet, first run:
 
   ```bash
-  docker login dhi.io
+  $ docker login dhi.io
   ```
 
   ```console
