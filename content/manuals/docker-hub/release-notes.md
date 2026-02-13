@@ -13,7 +13,7 @@ tags: [Release notes]
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
-## 2026-02-10
+## 2026-02-13
 
 ### New
 
