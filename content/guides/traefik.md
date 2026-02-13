@@ -176,77 +176,77 @@ The application can be accessed on GitHub at [dockersamples/easy-http-routing-wi
 
 2. The client service has the following configuration, which will start the container and provide it with the labels to receive requests at localhost.
 
-  {{< tabs >}}
-  {{< tab name="Using Docker Hardened Images" >}}
+    {{< tabs >}}
+    {{< tab name="Using Docker Hardened Images" >}}
 
-  Docker Hardened Images (DHI) for Nginx are available on [Nginx DHI image](https://hub.docker.com/hardened-images/catalog/dhi/nginx).
+    Docker Hardened Images (DHI) for Nginx are available on [Nginx DHI image](https://hub.docker.com/hardened-images/catalog/dhi/nginx).
 
-  If you haven't authenticated yet, first run:
+    If you haven't authenticated yet, first run:
 
-  ```bash
-  docker login dhi.io
-  ```
+    ```bash
+    docker login dhi.io
+    ```
 
-  You can use it as your base image as shown following:
+    You can use it as your base image as shown following:
 
-  ```yaml
-  services:
-    # …
-    client:
-      image: dhi.io/nginx:1.29.3-alpine3.21
-      volumes:
-        - "./client:/usr/share/nginx/html"
-      labels:
-        traefik.http.routers.client.rule: "Host(`localhost`)"
-  ```
+    ```yaml
+    services:
+      # …
+      client:
+        image: dhi.io/nginx:1.29.3-alpine3.21
+        volumes:
+          - "./client:/usr/share/nginx/html"
+        labels:
+          traefik.http.routers.client.rule: "Host(`localhost`)"
+    ```
 
-  {{< /tab >}}
-  {{< tab name="Using the official image" >}}
+    {{< /tab >}}
+    {{< tab name="Using the official image" >}}
 
-  ```yaml
-  services:
-    # …
-    client:
-      image: nginx:1.29.3-alpine3.22
-      volumes:
-        - "./client:/usr/share/nginx/html"
-      labels:
-        traefik.http.routers.client.rule: "Host(`localhost`)"
-  ```
+    ```yaml
+    services:
+      # …
+      client:
+        image: nginx:1.29.3-alpine3.22
+        volumes:
+          - "./client:/usr/share/nginx/html"
+        labels:
+          traefik.http.routers.client.rule: "Host(`localhost`)"
+    ```
 
-  {{< /tab >}}
-  {{< /tabs >}}
+    {{< /tab >}}
+    {{< /tabs >}}
 
 3. The api service has a similar configuration, but you’ll notice the routing rule has two conditions - the host must be “localhost” and the URL path must have a prefix of “/api”. Since this rule is more specific, Traefik will evaluate it first compared to the client rule.
 
-  ```yaml {hl_lines=[7,8]}
-  services:
-    # …
-    api:
-      build: ./dev/api
-      volumes:
-        - "./api:/var/www/html/api"
-      labels:
-        traefik.http.routers.api.rule: "Host(`localhost`) && PathPrefix(`/api`)"
-  ```
+    ```yaml {hl_lines=[7,8]}
+    services:
+      # …
+      api:
+        build: ./dev/api
+        volumes:
+          - "./api:/var/www/html/api"
+        labels:
+          traefik.http.routers.api.rule: "Host(`localhost`) && PathPrefix(`/api`)"
+    ```
 
 4. And finally, the `phpmyadmin` service is configured to receive requests for the hostname “db.localhost”. The service also has environment variables defined to automatically log in, making it a little easier to get into the app.
 
-  ```yaml {hl_lines=[5,6]}
-  services:
-    # …
-    phpmyadmin:
-      image: phpmyadmin:5.2.1
-      labels:
-        traefik.http.routers.db.rule: "Host(`db.localhost`)"
-      environment:
-        PMA_USER: root
-        PMA_PASSWORD: password
-  ```
+    ```yaml {hl_lines=[5,6]}
+    services:
+      # …
+      phpmyadmin:
+        image: phpmyadmin:5.2.1
+        labels:
+          traefik.http.routers.db.rule: "Host(`db.localhost`)"
+        environment:
+          PMA_USER: root
+          PMA_PASSWORD: password
+    ```
 
 5. Before starting the stack, stop the Nginx container if it is still running.
 
-  And that’s it. Now, you only need to spin up the Compose stack with a `docker compose up` and all of the services and applications will be ready for development.
+    And that’s it. Now, you only need to spin up the Compose stack with a `docker compose up` and all of the services and applications will be ready for development.
 
 ## Sending traffic to non-containerized workloads
 
