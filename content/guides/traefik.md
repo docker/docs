@@ -52,35 +52,35 @@ Let’s do a quick demo of starting Traefik and then configuring two additional 
     {{< tabs >}}
     {{< tab name="Using Docker Hardened Images" >}}
 
-    Docker Hardened Images (DHI) for Traefik are available on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/traefik).
-    If you haven't authenticated yet, first run:
+      Docker Hardened Images (DHI) for Traefik are available on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/traefik).
+      If you haven't authenticated yet, first run:
 
-    ```bash
-    docker login dhi.io
-    ```
+      ```bash
+      docker login dhi.io
+      ```
 
-    Then start a container using the Hardened image:
+      Then start a container using the Hardened image:
 
-    ```console
-    $ docker run -d --network=traefik-demo \
-      -p 80:80 \
-      -v /var/run/docker.sock:/var/run/docker.sock \
-      dhi.io/traefik:3.6.2 \
-      --providers.docker
-    ```
+      ```console
+      $ docker run -d --network=traefik-demo \
+        -p 80:80 \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        dhi.io/traefik:3.6.2 \
+        --providers.docker
+      ```
 
     {{< /tab >}}
     {{< tab name="Using the official image" >}}
 
-    You can also use the official image from Docker Hub:
+      You can also use the official image from Docker Hub:
 
-    ```console
-    $ docker run -d --network=traefik-demo \
-      -p 80:80 \
-      -v /var/run/docker.sock:/var/run/docker.sock \
-      traefik:v3.6.2 \
-      --providers.docker
-    ```
+      ```console
+      $ docker run -d --network=traefik-demo \
+        -p 80:80 \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        traefik:v3.6.2 \
+        --providers.docker
+      ```
 
     {{< /tab >}}
     {{< /tabs >}}
@@ -90,29 +90,29 @@ Let’s do a quick demo of starting Traefik and then configuring two additional 
     {{< tabs >}}
     {{< tab name="Using Docker Hardened Images" >}}
 
-    Docker Hardened Images (DHI) for Nginx are available on [Nginx DHI image](https://hub.docker.com/hardened-images/catalog/dhi/nginx).
-    If you haven't authenticated yet, first run:
+      Docker Hardened Images (DHI) for Nginx are available on [Nginx DHI image](https://hub.docker.com/hardened-images/catalog/dhi/nginx).
+      If you haven't authenticated yet, first run:
 
-    ```bash
-    docker login dhi.io
-    ```
+      ```bash
+      docker login dhi.io
+      ```
 
-    ```console
-    $ docker run -d --network=traefik-demo \
-      --label 'traefik.http.routers.nginx.rule=Host(`nginx.localhost`)' \
-      dhi.io/nginx:1.29.3
-    ```
+      ```console
+      $ docker run -d --network=traefik-demo \
+        --label 'traefik.http.routers.nginx.rule=Host(`nginx.localhost`)' \
+        dhi.io/nginx:1.29.3
+      ```
 
     {{< /tab >}}
     {{< tab name="Using the official image" >}}
 
-    You can also run the official Nginx image as follows:
+      You can also run the official Nginx image as follows:
 
-    ```console
-    $ docker run -d --network=traefik-demo \
-      --label 'traefik.http.routers.nginx.rule=Host(`nginx.localhost`)' \
-      nginx:1.29.3
-    ```
+      ```console
+      $ docker run -d --network=traefik-demo \
+        --label 'traefik.http.routers.nginx.rule=Host(`nginx.localhost`)' \
+        nginx:1.29.3
+      ```
 
     {{< /tab >}}
     {{< /tabs >}}
@@ -144,30 +144,30 @@ The application can be accessed on GitHub at [dockersamples/easy-http-routing-wi
     {{< tabs >}}
     {{< tab name="Using DHI image" >}}
 
-    ```yaml
-    services:
-      proxy:
-        image: dhi.io/traefik:3.6.2
-        command: --providers.docker
-        ports:
-          - 80:80
-        volumes:
-          - /var/run/docker.sock:/var/run/docker.sock
-    ```
+      ```yaml
+      services:
+        proxy:
+          image: dhi.io/traefik:3.6.2
+          command: --providers.docker
+          ports:
+            - 80:80
+          volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+      ```
 
     {{< /tab >}}
     {{< tab name="Using official image" >}}
 
-    ```yaml
-    services:
-      proxy:
-        image: traefik:v3.6.2
-        command: --providers.docker
-        ports:
-          - 80:80
-        volumes:
-          - /var/run/docker.sock:/var/run/docker.sock
-    ```
+      ```yaml
+      services:
+        proxy:
+          image: traefik:v3.6.2
+          command: --providers.docker
+          ports:
+            - 80:80
+          volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+      ```
 
     {{< /tab >}}
     {{< /tabs >}}
@@ -179,40 +179,40 @@ The application can be accessed on GitHub at [dockersamples/easy-http-routing-wi
     {{< tabs >}}
     {{< tab name="Using Docker Hardened Images" >}}
 
-    Docker Hardened Images (DHI) for Nginx are available on [Nginx DHI image](https://hub.docker.com/hardened-images/catalog/dhi/nginx).
+      Docker Hardened Images (DHI) for Nginx are available on [Nginx DHI image](https://hub.docker.com/hardened-images/catalog/dhi/nginx).
 
-    If you haven't authenticated yet, first run:
+      If you haven't authenticated yet, first run:
 
-    ```bash
-    docker login dhi.io
-    ```
+      ```bash
+      docker login dhi.io
+      ```
 
-    You can use it as your base image as shown following:
+      You can use it as your base image as shown following:
 
-    ```yaml
-    services:
-      # …
-      client:
-        image: dhi.io/nginx:1.29.3-alpine3.21
-        volumes:
-          - "./client:/usr/share/nginx/html"
-        labels:
-          traefik.http.routers.client.rule: "Host(`localhost`)"
-    ```
+      ```yaml
+      services:
+        # …
+        client:
+          image: dhi.io/nginx:1.29.3-alpine3.21
+          volumes:
+            - "./client:/usr/share/nginx/html"
+          labels:
+            traefik.http.routers.client.rule: "Host(`localhost`)"
+      ```
 
     {{< /tab >}}
     {{< tab name="Using the official image" >}}
 
-    ```yaml
-    services:
-      # …
-      client:
-        image: nginx:1.29.3-alpine3.22
-        volumes:
-          - "./client:/usr/share/nginx/html"
-        labels:
-          traefik.http.routers.client.rule: "Host(`localhost`)"
-    ```
+      ```yaml
+      services:
+        # …
+        client:
+          image: nginx:1.29.3-alpine3.22
+          volumes:
+            - "./client:/usr/share/nginx/html"
+          labels:
+            traefik.http.routers.client.rule: "Host(`localhost`)"
+      ```
 
     {{< /tab >}}
     {{< /tabs >}}
