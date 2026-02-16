@@ -46,7 +46,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforma
 
-- Docker Sanboxes:
+- Docker Sandboxes:
    - Added automated image caching to prevent re-downloading images unnecessarily.
    - Added Shell mode for blank coding agent sandboxes.
    - Added support for OpenCode.
