@@ -37,27 +37,27 @@ On macOS, use XQuartz to provide X11 support. Install XQuartz using Homebrew:
 3. After rebooting, open a terminal and allow local connections:
 
     ```console
+    $ defaults write org.xquartz.X11 nolisten_tcp -bool false
     $ xhost +localhost
+    $ xhost + 127.0.0.1
     ```
 
-> [!Note]
->
-> Some ROS 2 visualization tools, such as RViz may be unavailable when using macOS.
+## Start the container
 
-## Start the dev container
-
-Start the container using the same dev container setup from the workspace section.
+Start the container using the same Docker Compose setup from the workspace section.
 
 For Linux:
 ```console
-$ devcontainer up --workspace-folder ws_linux/src
-$ devcontainer exec --workspace-folder ws_linux/src /bin/bash
+$ cd ws_linux
+$ docker compose up -d
+$ docker compose exec ros2 /bin/bash
 ```
 
 For macOS:
 ```console
-$ devcontainer up --workspace-folder ws_mac/src
-$ devcontainer exec --workspace-folder ws_mac/src /bin/bash
+$ cd ws_mac
+$ docker compose up -d
+$ docker compose exec ros2 /bin/bash
 ```
 
 ## Install and Run Turtlesim
@@ -133,7 +133,7 @@ A window should appear on your desktop showing a turtle in a grid.
 2. Install rqt:
 
     ```console
-    $ sudo apt install 'ros-humble-rqt*'
+    $ sudo apt install -y 'ros-humble-rqt*'
     ```
 
 3. Start rqt:
@@ -152,9 +152,9 @@ You can explore the node graph by navigating to **Plugins > Introspection > Node
 
 You can monitor active topics by navigating to **Plugins > Topics > Topic Monitor**. A new tab opens displaying all active topics and their current values. Select the eye icon next to `/turtle1/pose` to monitor it. As you move the turtle, watch the pose values update in real time, showing the position of the turtle and orientation changing based on your commands.
 
-### Message Publisher
+### Service Caller
 
-You can also publish messages manually using **Plugins > Topics > Message Publisher**. The Message Publisher plugin allows you to manually publish messages to any topic. You can use it to send velocity commands directly without writing a script.
+You can call services from rqt using **Plugins > Services > Service Caller**. Select a service such as `/turtle1/teleport_absolute`, enter values for the request fields, and select **Call** to send the request.
 
 ### Plots
 

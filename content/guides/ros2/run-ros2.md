@@ -24,7 +24,7 @@ The fastest way to get started with ROS 2 is to use the [official Docker image](
 
     This guide uses the Humble distribution. You can replace `humble` with another supported distribution such as `rolling`, `jazzy`, or `iron`.
 
-    > [!Note]
+    > [!NOTE]
     >
     > This environment is temporary and does not maintain persistence. 
     > Any files you create or packages you install will be deleted once the container is stopped or removed.

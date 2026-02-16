@@ -30,53 +30,49 @@ A consistent workspace simplifies managing ROS 2 projects and build artifacts ac
 2. Verify the workspace structure:
 
     ```text
-    ws/
-    ├── cache/
-    |   ├── [ROS2_DISTRO]/
-    |   |   ├── build/
-    |   |   ├── install/
-    |   |   └── log/
-    |   └── ...
-    |
-    ├── src/
-        ├── .devcontainer/
-        │   ├── devcontainer.json
-        │   └── Dockerfile
+    ws_linux/
+    ├── compose.yml
+    ├── Dockerfile
+    └── src/
+        ├── package1/
+        └── package2/
+
+    ws_mac/
+    ├── compose.yml
+    ├── Dockerfile
+    └── src/
         ├── package1/
         └── package2/
 
     ```
 
 3. Explore the workspace layout
-- `cache` : Stores build, install, and log artifacts for each ROS 2 distribution. Keeping these directories outside the source tree lets you change distributions without rebuilding everything from scratch.
-- `src` : Contains all ROS 2 packages and the development container configuration. This directory is mounted into the container as the active workspace.
-- `.devcontainer/` : Holds the configuration used by Visual Studio Code to open the workspace in a container.
-  - `Dockerfile` : Builds the ROS 2 development image. It uses an official ROS 2 base image, creates a non-root development user, and installs required system and ROS 2 dependencies.
-  - `devcontainer.json` : Defines how Visual Studio Code builds, runs, and connects to the container. It configures the workspace location, user context, mounted directories, environment variables, networking options, installed extensions, and post-create setup commands.
 
-## Open and build dev container
+- `compose.yml` : Defines how Docker Compose builds and runs the ROS 2 container, including mounts, environment variables, and networking settings.
+- `Dockerfile` : Builds the ROS 2 development image. It uses an official ROS 2 base image, creates a non-root development user, and installs required system and ROS 2 dependencies.
+- `src` : Contains all ROS 2 packages. This directory is mounted into the container as the active workspace.
 
-1. Install the `devcontainer` CLI:
+## Open and build the container
 
-    - Linux / Windows
-    ```console
-    $ sudo apt update && sudo apt upgrade
-    $ sudo apt install -y nodejs npm
-    $ sudo npm install -g @devcontainers/cli
-    ```
-    - macOS
-    ```console
-    $ brew install devcontainer
-    ```
+1. Execute the following commands to build and start the container:
 
-2. Execute the following commands to build and start the container:
+    For Linux:
 
     ```console
-    $ devcontainer up --workspace-folder ws/src
-
+    $ cd ws_linux
+    $ docker compose up -d
+    $ docker compose exec ros2 /bin/bash
     ```
 
-    This command builds the Docker image defined in your `.devcontainer` folder and starts the container in the background.
+    For macOS:
+
+    ```console
+    $ cd ws_mac
+    $ docker compose up -d
+    $ docker compose exec ros2 /bin/bash
+    ```
+
+    This command builds the Docker image defined in your `Dockerfile` and starts the container in the background.
 
     > [!NOTE]
     >
@@ -84,16 +80,16 @@ A consistent workspace simplifies managing ROS 2 projects and build artifacts ac
     > as the CLI pulls the base ROS 2 image and installs required dependencies. 
     > Subsequent starts will be significantly faster.
 
-3. Once the container is running, execute commands inside it using `exec`:
+2. Once the container is running, execute commands inside it using `exec`:
 
     ```console
-    devcontainer exec --workspace-folder ws/src /bin/bash
+    $ docker compose exec ros2 /bin/bash
     ```
 
-4. Inside the container terminal, verify the environment:
+3. Inside the container terminal, verify the environment:
 
 ```console
-$ ros2 --version
+$ echo $ROS_VERSION
 $ which colcon
 ```
 
@@ -101,17 +97,11 @@ All commands should execute successfully inside the container.
 
 ## Switch ROS 2 distributions
 
-1. Create a new cache directory for the target distribution:
-
-    ```console
-    $ mkdir -p ~/ws/cache/[ROS_DISTRIBUTION]/{build,install,log}
-    ```
-
-2. Update the cache paths in `src/.devcontainer/Dockerfile` and `src/.devcontainer/devcontainer.json`, changing from `humble` to `ROS_DISTRIBUTION`.
+Update the base image in your `Dockerfile`, changing from `humble` to another distribution like `rolling`, `jazzy`, or `iron`.
 
 ## Summary
 
-In this section, you learned how to create a structured workspace with cache directories, write a Dockerfile with development tools and configure a dev container with `devcontainer.json`. Your ROS 2 development environment is now ready with a consistent, reproducible setup across any machine.
+In this section, you learned how to create a structured workspace, write a Dockerfile with development tools, and configure a Docker Compose setup. Your ROS 2 development environment is now ready with a consistent, reproducible setup across any machine.
 
 ## Next steps
 
