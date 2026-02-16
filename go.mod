@@ -1,6 +1,6 @@
 module github.com/docker/docs
 
-go 1.25.0
+go 1.25.6
 
 // This go.mod file is used by hugo to vendor documentation from upstream
 // reposities. Use the "require" section to specify the version of the
