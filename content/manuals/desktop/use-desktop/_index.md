@@ -30,7 +30,7 @@ In addition, the Docker Desktop Dashboard lets you:
 
 > [!TIP]
 >
-> You can now customize the left-hand navigation to show only the tabs that matter to you, and hide the ones that don’t. Right-click the left-hand navigation, select **Customize**, and then select, de-select, or re-order the tabs.
+> You can customize the left-hand navigation to show only the tabs that matter to you, and hide the ones that don’t. Right-click the left-hand navigation, select **Customize**, and then select, deselect, or re-order the tabs.
 
 ## Docker terminal
 
