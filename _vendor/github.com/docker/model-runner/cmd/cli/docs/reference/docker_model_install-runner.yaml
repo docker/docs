@@ -8,7 +8,8 @@ plink: docker_model.yaml
 options:
     - option: backend
       value_type: string
-      description: 'Specify backend (llama.cpp|vllm). Default: llama.cpp'
+      description: |
+        Specify backend (llama.cpp|vllm|diffusers|vllm-metal). Default: llama.cpp
       deprecated: false
       hidden: false
       experimental: false
@@ -60,6 +61,54 @@ options:
       default_value: "0"
       description: |
         Docker container port for Docker Model Runner (default: 12434 for Docker Engine, 12435 for Cloud mode)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: proxy-cert
+      value_type: string
+      description: Path to a CA certificate file for proxy SSL inspection
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: tls
+      value_type: bool
+      default_value: "false"
+      description: Enable TLS/HTTPS for Docker Model Runner API
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: tls-cert
+      value_type: string
+      description: Path to TLS certificate file (auto-generated if not provided)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: tls-key
+      value_type: string
+      description: Path to TLS private key file (auto-generated if not provided)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: tls-port
+      value_type: uint16
+      default_value: "0"
+      description: |
+        TLS port for Docker Model Runner (default: 12444 for Docker Engine, 12445 for Cloud mode)
       deprecated: false
       hidden: false
       experimental: false

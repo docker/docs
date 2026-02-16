@@ -1,12 +1,14 @@
 command: docker model package
 short: |
-    Package a GGUF file, Safetensors directory, or existing model into a Docker model OCI artifact.
+    Package a GGUF file, Safetensors directory, DDUF file, or existing model into a Docker model OCI artifact.
 long: |-
-    Package a GGUF file, Safetensors directory, or existing model into a Docker model OCI artifact, with optional licenses. The package is sent to the model-runner, unless --push is specified.
+    Package a GGUF file, Safetensors directory, DDUF file, or existing model into a Docker model OCI artifact, with optional licenses and multimodal projector. The package is sent to the model-runner, unless --push is specified.
     When packaging a sharded GGUF model, --gguf should point to the first shard. All shard files should be siblings and should include the index in the file name (e.g. model-00001-of-00015.gguf).
     When packaging a Safetensors model, --safetensors-dir should point to a directory containing .safetensors files and config files (*.json, merges.txt). All files will be auto-discovered and config files will be packaged into a tar archive.
+    When packaging a DDUF file (Diffusers Unified Format), --dduf should point to a .dduf archive file.
     When packaging from an existing model using --from, you can modify properties like context size to create a variant of the original model.
-usage: docker model package (--gguf <path> | --safetensors-dir <path> | --from <model>) [--license <path>...] [--context-size <tokens>] [--push] MODEL
+    For multimodal models, use --mmproj to include a multimodal projector file.
+usage: docker model package (--gguf <path> | --safetensors-dir <path> | --dduf <path> | --from <model>) [--license <path>...] [--mmproj <path>] [--context-size <tokens>] [--push] MODEL
 pname: docker model
 plink: docker_model.yaml
 options:
@@ -23,6 +25,15 @@ options:
       value_type: uint64
       default_value: "0"
       description: context size in tokens
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: dduf
+      value_type: string
+      description: absolute path to DDUF archive file (Diffusers Unified Format)
       deprecated: false
       hidden: false
       experimental: false
@@ -63,6 +74,15 @@ options:
       value_type: stringArray
       default_value: '[]'
       description: absolute path to a license file
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: mmproj
+      value_type: string
+      description: absolute path to multimodal projector file
       deprecated: false
       hidden: false
       experimental: false

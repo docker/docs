@@ -33,6 +33,15 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: runtime-flags
+      value_type: string
+      description: raw runtime flags to pass to the inference engine
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: speculative-draft-model
       value_type: string
       description: draft model for speculative decoding
