@@ -54,6 +54,8 @@ Docker Desktop Windows users can connect to the Docker Engine through a **named 
 
 For details, see [Docker Engine API](/reference/api/engine/_index.md).
 
+See the [Linux FAQs](linuxfaqs.md) for Linux specific setup. 
+
 ### How do I connect from a container to a service on the host?
 
 The host has a changing IP address, or none if you have no network access.

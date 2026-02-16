@@ -7,14 +7,20 @@ keywords: verify container image, docker scout attest, cosign verify, sbom valid
 ---
 
 Docker Hardened Images (DHI) and charts include signed attestations that verify
-the build process, contents, and security posture. These attestations are
-available for each image variant and chart and can be verified using
-[cosign](https://docs.sigstore.dev/) or the Docker Scout CLI.
+the build process, contents, and security posture.
 
 Docker's public key for DHI images and charts is published at:
 
 - https://registry.scout.docker.com/keyring/dhi/latest.pub
 - https://github.com/docker-hardened-images/keyring
+
+Docker recommends using [Docker Scout](/scout/), but you can use
+[`regctl`](https://github.com/regclient/regclient) and
+[`cosign`](https://docs.sigstore.dev/) to retrieve and verify attestations.
+Docker Scout offers several key advantages: it understands DHI attestation
+structures, automatically resolves platforms, provides human-readable summaries,
+validates in one step with `--verify`, and integrates tightly with Docker's
+attestation infrastructure.
 
 > [!IMPORTANT]
 >
@@ -25,10 +31,7 @@ Docker's public key for DHI images and charts is published at:
 >
 > Run `docker login dhi.io` to authenticate.
 
-## Verify image attestations with Docker Scout
-
-You can use the [Docker Scout](/scout/) CLI to list and retrieve attestations for Docker
-Hardened Images.
+## Verify image attestations
 
 > [!NOTE]
 >
@@ -36,38 +39,12 @@ Hardened Images.
 > pulled locally is up to date with the remote image. You can do this by running
 > `docker pull`. If you don't do this, you may see `No attestation found`.
 
-### Why use Docker Scout instead of cosign directly?
-
-While you can use cosign to verify attestations manually, the Docker Scout CLI
-offers several key advantages when working with Docker Hardened Images and charts:
-
-- Purpose-built experience: Docker Scout understands the structure of DHI
-  attestations and naming conventions, so you don't have to construct full
-  digests or URIs manually.
-
-- Automatic platform resolution: With Scout, you can specify the platform (e.g.,
-  `--platform linux/amd64`), and it automatically verifies the correct image
-  variant. Cosign requires you to look up the digest yourself.
-
-- Human-readable summaries: Scout returns summaries of attestation contents
-  (e.g., package counts, provenance steps), whereas cosign only returns raw
-  signature validation output.
-
-- One-step validation: The `--verify` flag in `docker scout attest get` validates
-  the attestation and shows the equivalent cosign command, making it easier to
-  understand what's happening behind the scenes.
-
-- Integrated with Docker Hub and DHI trust model: Docker Scout is tightly
-  integrated with Docker’s attestation infrastructure and public keyring,
-  ensuring compatibility and simplifying verification for users within the
-  Docker ecosystem.
-
-In short, Docker Scout streamlines the verification process and reduces the chances of human error, while still giving
-you full visibility and the option to fall back to cosign when needed.
-
 ### List available attestations
 
 To list attestations for a mirrored DHI image:
+
+{{< tabs group="tool" >}}
+{{< tab name="Docker Scout" >}}
 
 > [!NOTE]
 >
@@ -80,7 +57,46 @@ $ docker scout attest list dhi.io/<image>:<tag>
 
 This command shows all available attestations, including SBOMs, provenance, vulnerability reports, and more.
 
+{{< /tab >}}
+{{< tab name="regctl" >}}
+
+First, authenticate to both registries. Prepare a [personal access token
+(PAT)](../../security/access-tokens.md) for your user with `read only` access:
+
+```console
+$ export DOCKER_USERNAME="YOUR_DOCKER_USERNAME"
+$ export DOCKER_PAT="YOUR_DOCKER_PAT"
+$ export DOCKER_ORG="YOUR_DOCKER_ORG"
+$ echo $DOCKER_PAT | regctl registry login -u "$DOCKER_USERNAME" --pass-stdin docker.io
+$ echo $DOCKER_PAT | regctl registry login -u "$DOCKER_USERNAME" --pass-stdin registry.scout.docker.com
+```
+
+Then list attestations using the `--external` flag. DHI repositories store image
+layers on `dhi.io` (or `docker.io` for mirrored images) and signed attestations
+in `registry.scout.docker.com`:
+
+```console
+$ regctl artifact list docker.io/${DOCKER_ORG}/<image>:<tag> \
+  --external registry.scout.docker.com/${DOCKER_ORG}/<image> \
+  --platform linux/amd64
+```
+
+For example:
+
+```console
+$ regctl artifact list docker.io/${DOCKER_ORG}/dhi-node:22 \
+  --external registry.scout.docker.com/${DOCKER_ORG}/dhi-node \
+  --platform linux/amd64
+```
+
+
+{{< /tab >}}
+{{< /tabs >}}
+
 ### Retrieve a specific attestation
+
+{{< tabs group="tool" >}}
+{{< tab name="Docker Scout" >}}
 
 To retrieve a specific attestation, use the `--predicate-type` flag with the full predicate type URI:
 
@@ -112,16 +128,28 @@ $ docker scout attest get \
   dhi.io/<image>:<tag>
 ```
 
-For example:
+{{< /tab >}}
+{{< tab name="regctl" >}}
+
+Once you've listed attestations, download the full attestation artifact using the digest from the `Name` field:
 
 ```console
-$ docker scout attest get \
-  --predicate-type https://cyclonedx.org/bom/v1.6 \
-  --predicate \
-  dhi.io/python:3.13
+$ regctl artifact get <attestation-digest> > attestation.json
 ```
 
-### Validate the attestation with Docker Scout
+For example, to save a SLSA provenance attestation:
+
+```console
+$ regctl artifact get registry.scout.docker.com/${DOCKER_ORG}/dhi-node@sha256:6cbf803796e281e535f2681de7cd33a1012202610322a50ee745d1bb02ac3c18 > slsa_provenance.json
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
+### Validate the attestation
+
+{{< tabs >}}
+{{< tab name="Docker Scout" >}}
 
 To validate the attestation using Docker Scout, you can use the `--verify` flag:
 
@@ -144,9 +172,41 @@ $ docker scout attest get dhi.io/node:20.19-debian12 \
    --predicate-type https://scout.docker.com/sbom/v0.1 --verify
 ```
 
+{{< /tab >}}
+{{< tab name="cosign" >}}
+
+Once you've listed the attestations and obtained the digest from the `Name` field, verify them using cosign:
+
+```console
+$ cosign verify \
+  <attestation-digest-from-name-field> \
+  --key https://registry.scout.docker.com/keyring/dhi/latest.pub \
+  --insecure-ignore-tlog=true
+```
+
+For example:
+
+```console
+$ cosign verify \
+  registry.scout.docker.com/${DOCKER_ORG}/dhi-node@sha256:6cbf803796e281e535f2681de7cd33a1012202610322a50ee745d1bb02ac3c18 \
+  --key https://registry.scout.docker.com/keyring/dhi/latest.pub \
+  --insecure-ignore-tlog=true
+```
+
+> [!NOTE]
+>
+> The `--insecure-ignore-tlog=true` flag is needed because DHI attestations
+> may not be recorded in the public Rekor transparency log to protect private
+> customer information. The attestation signature is still verified against
+> Docker's public key.
+
+{{< /tab >}}
+{{< /tabs >}}
+
 #### Handle missing transparency log entries
 
-When using `--verify`, you may sometimes see an error like:
+When using `--verify` with Docker Scout or `cosign verify`, you may sometimes
+see an error like:
 
 ```text
 ERROR no matching signatures: signature not found in transparency log

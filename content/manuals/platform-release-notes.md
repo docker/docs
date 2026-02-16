@@ -12,6 +12,17 @@ tags: [Release notes, admin]
 
 This page provides details on new features, enhancements, known issues, and bug fixes across Docker Home, the Admin Console, billing, security, and subscription functionalities.
 
+## 2026-02-13
+
+### New
+
+- Administrators can now control whether organization members can push content
+  to their personal namespaces on Docker Hub with [namespace access
+  control](/manuals/enterprise/security/hardened-desktop/namespace-access.md).
+- Administrators can now prevent creating public repositories within
+  organization namespaces using the [Disable public
+  repositories](/manuals/docker-hub/settings.md#disable-creation-of-public-repos) setting.
+
 ## 2026-01-27
 
 ### New

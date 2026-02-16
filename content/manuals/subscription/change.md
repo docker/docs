@@ -26,7 +26,9 @@ You can upgrade or downgrade your Docker subscription at any time to match your 
 
 ## Upgrade your subscription
 
-When you upgrade your Docker subscription, you immediately get access to all features and entitlements in your new subscription tier. For detailed feature information, see [Docker Pricing](https://www.docker.com/pricing).
+When you upgrade your Docker subscription, you immediately get access to all features and entitlements in your new subscription tier. 
+
+For detailed feature information, see [Docker Pricing](https://www.docker.com/pricing).
 
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}

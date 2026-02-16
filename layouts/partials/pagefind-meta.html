@@ -2,7 +2,7 @@
 {{- $description := partial "utils/description.html" . -}}
 {{- $keywords := partialCached "utils/keywords.html" . . -}}
 {{- $breadcrumbs := slice -}}
-{{- range .Ancestors.Reverse -}}
+{{- range after 1 .Ancestors.Reverse -}}
   {{- $breadcrumbs = $breadcrumbs | append .LinkTitle -}}
 {{- end -}}
 {{- with $description }}<meta data-pagefind-meta="description:{{ . }}">{{ end }}

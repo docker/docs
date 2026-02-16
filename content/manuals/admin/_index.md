@@ -51,21 +51,20 @@ The [Docker Admin Console](https://app.docker.com/admin) provides administrators
 A company groups multiple Docker organizations for centralized configuration.
 Companies are only available for Docker Business subscribers.
 
-Companies have the following administrator role available:
+Companies have the company owner administrator role available: 
 
-- Company owner: Can view and manage all organizations within the company.
-Has full access to company-wide settings and inherits the same permissions as
-organization owners.
+- Can view and manage all organizations within the company
+- Has full access to company-wide settings and inherits the same permissions as organization owners
+- Do not occupy a seat
 
 ### Organization
 
 An organization contains teams and repositories. All Docker Team and Business
 subscribers must have at least one organization.
 
-Organizations have the following administrator role available:
+Organization owners have the organization owner administrator role available. They can manage organization settings, users, and access controls, but occupy a [seat](/admin/faqs/organization-faqs/#what-is-the-difference-between-user-invitee-seat-and-member). If you want to [upgrade to a Docker Business plan](https://www.docker.com/pricing/), you can access the company owner role. 
 
-- Organization owner: Can manage organization settings, users, and access
-controls.
+While creating a company is optional, organizations are required for Team and Business subscriptions.
 
 ### Team
 
@@ -77,11 +76,6 @@ or functions.
 
 A member is any Docker user added to an organization. Organization and company
 owners can assign roles to members to define their level of access.
-
-> [!NOTE]
->
-> Creating a company is optional, but organizations are required for Team and
-Business subscriptions.
 
 ## Admin Console features
 

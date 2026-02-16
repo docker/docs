@@ -1,9 +1,10 @@
-<div id="search-bar" class="h-full relative flex items-center overflow-visible">
+<div id="search-bar" class="h-full relative flex items-center overflow-visible" x-data="{ isSafari: /^((?!chrome|android).)*safari/i.test(navigator.userAgent) }">
   <button
     type="button"
     aria-label="Search"
     class="cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-blue-700 border border-blue-500 text-white transition-colors focus:outline-none focus:ring focus:ring-blue-400 hover:bg-blue-800 hover:border-blue-400"
     id="search-modal-trigger"
+    x-show="!isSafari"
   >
     <span class="icon-svg">
       {{ partialCached "icon" "search" "search" }}
@@ -43,54 +44,42 @@
           Start typing to search the documentation
         </p>
         <pagefind-summary></pagefind-summary>
-        <pagefind-results></pagefind-results>
+        <pagefind-results>
+          <script type="text/pagefind-template">
+            <li class="py-3 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+              {{ print "{{#if meta.breadcrumbs}}" }}
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">{{ print "{{ meta.breadcrumbs }}" }}</p>
+              {{ print "{{/if}}" }}
+              <p class="font-medium">
+                <a class="text-blue-600 dark:text-blue-400 hover:underline" href="{{ print "{{ meta.url | default(url) | safeUrl }}" }}">
+                  {{ print "{{ meta.title }}" }}
+                </a>
+              </p>
+              {{ print "{{#if excerpt}}" }}
+                <p class="text-gray-600 dark:text-gray-400 mt-1 text-sm">{{ print "{{+ excerpt +}}" }}</p>
+              {{ print "{{/if}}" }}
+              {{ print "{{#if sub_results}}" }}
+                <ul class="mt-3 ml-4 flex flex-wrap gap-2">
+                  {{ print "{{#each sub_results as sub}}" }}
+                    {{ print "{{#if (lt @index 5)}}" }}
+                      <li class="text-sm">
+                        <a class="text-blue-600 dark:text-blue-400 hover:underline" href="{{ print "{{ sub.url | safeUrl }}" }}">
+                          {{ print "{{ sub.title }}" }}
+                        </a>
+                      </li>
+                    {{ print "{{/if}}" }}
+                  {{ print "{{/each}}" }}
+                </ul>
+              {{ print "{{/if}}" }}
+            </li>
+          </script>
+        </pagefind-results>
       </pagefind-modal-body>
     </pagefind-modal>
   `);
 
   const modal = document.getElementById('search-modal');
   const placeholder = document.getElementById('search-placeholder');
-
-  // Custom result template
-  modal.querySelector('pagefind-results').resultTemplate = (result) => {
-    const li = document.createElement('li');
-    li.className = 'py-3 border-b border-gray-200 dark:border-gray-700 last:border-b-0';
-
-    const title = document.createElement('p');
-    title.className = 'font-medium';
-
-    const link = document.createElement('a');
-    link.className = 'text-blue-600 dark:text-blue-400 hover:underline';
-    link.href = result.meta.url || result.url;
-    link.textContent = result.meta.title;
-    title.appendChild(link);
-    li.appendChild(title);
-
-    if (result.excerpt) {
-      const excerpt = document.createElement('p');
-      excerpt.className = 'text-gray-600 dark:text-gray-400 mt-1 text-sm';
-      excerpt.innerHTML = result.excerpt;
-      li.appendChild(excerpt);
-    }
-
-    if (result.sub_results?.length) {
-      const ul = document.createElement('ul');
-      ul.className = 'mt-3 ml-4 flex flex-wrap gap-2';
-      for (const sub of result.sub_results) {
-        const subLi = document.createElement('li');
-        subLi.className = 'text-sm';
-        const subLink = document.createElement('a');
-        subLink.className = 'text-blue-600 dark:text-blue-400 hover:underline';
-        subLink.href = sub.url;
-        subLink.textContent = sub.title;
-        subLi.appendChild(subLink);
-        ul.appendChild(subLi);
-      }
-      li.appendChild(ul);
-    }
-
-    return li;
-  };
 
   // Show/hide placeholder based on search state
   const instance = getInstanceManager().getInstance('default');

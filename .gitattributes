@@ -3,3 +3,19 @@
 
 # Fine-tune GitHub's language detection
 content/**/*.md linguist-detectable
+
+# Mark generated and vendored content
+# These files should not be edited directly in this repository
+
+# Vendored Hugo modules (from upstream repositories)
+/_vendor/** linguist-generated=true
+# Generated CLI reference data (vendored from upstream)
+/data/buildx/** linguist-generated=true
+/data/debug-cli/** linguist-generated=true
+/data/desktop-cli/** linguist-generated=true
+/data/engine-cli/** linguist-generated=true
+/data/init-cli/** linguist-generated=true
+/data/offload-cli/** linguist-generated=true
+/data/sandbox-cli/** linguist-generated=true
+/data/scout-cli/** linguist-generated=true
+/data/secrets-engine/** linguist-generated=true

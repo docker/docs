@@ -11,11 +11,7 @@ This page describes how to add or update a payment method for your personal
 account or for an organization.
 
 You can add a payment method or update your account's existing payment method
-at any time.
-
-> [!IMPORTANT]
->
-> If you want to remove all payment methods, you must first downgrade your
+at any time. If you want to remove all payment methods, you must first downgrade your
 subscription to a free subscription. See [Downgrade](../subscription/change.md).
 
 The following payment methods are supported:
@@ -75,10 +71,7 @@ the **Set as default** action.
 1. Optional. You can remove non-default payment methods by selecting
 the **Delete** action.
 
-> [!NOTE]
->
-> If you want to set a US bank account as your default payment method, you must
-> [verify the account](#verify-a-bank-account) first.
+If you want to set a US bank account as your default payment method, you must [verify the account](#verify-a-bank-account) first.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
@@ -108,9 +101,7 @@ the **Actions** icon. Then, select **Delete**.
 
 ### Organization
 
-> [!NOTE]
->
-> You must be an organization owner to make changes to the payment information.
+You must be an organization owner to make changes to the payment information.
 
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
@@ -142,10 +133,7 @@ the **Set as default** action.
 1. Optional. You can remove non-default payment methods by selecting
 the **Delete** action.
 
-> [!NOTE]
->
-> If you want to set a US bank account as your default payment method, you must
-> verify the account first.
+If you want to set a US bank account as your default payment method, you must verify the account first.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
@@ -193,6 +181,8 @@ organization.
 1. To enable pay by invoice, select the toggle.
 1. Confirm your billing contact details. If you need to change them, select
 **Change** and enter your new details.
+
+If you want to pay by invoice, [upgrade to a Docker Business or Docker Team plan](https://www.docker.com/pricing/).
 
 ## Verify a bank account
 
@@ -246,9 +236,7 @@ verification email and enter the amount of this deposit to verify your account.
 
 ## Failed payments
 
-> [!NOTE]
->
-> You can't manually retry a failed payment. Docker will retry failed payments
+You can't manually retry a failed payment. Docker will retry failed payments
 based on the retry schedule.
 
 If your subscription payment fails, there is a grace period of 15 days,

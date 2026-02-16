@@ -55,6 +55,18 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
    - Added support for running in WSL 2.
    - Sandboxes now start in the current working directory if no path is provided.
 
+## 4.60.1
+
+{{< release-date date="2026-02-10" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.60.1" build_path="/218372/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a rare issue that crashed the Docker Desktop Dashboard after sign-in.
+
 ## 4.60.0
 
 {{< release-date date="2026-02-09" >}}
