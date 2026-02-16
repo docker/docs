@@ -4,7 +4,6 @@ linkTitle: Set Up ROS 2 workspace
 weight: 15
 keywords: ros2, robotics, docker, dockerfile, devcontainer, vscode, workspace
 description: Learn how to develop ROS 2 applications using a Docker based workspace and development containers.
-
 ---
 
 ## Overview
@@ -19,32 +18,32 @@ A consistent workspace simplifies managing ROS 2 projects and build artifacts ac
 
 1. Open a terminal and clone the sample workspace repository:
 
-    ```console
-    $ git clone https://github.com/shakirth-anisha/docker-ros2-workspace.git
-    $ cd docker-ros2-workspace
+   ```console
+   $ git clone https://github.com/shakirth-anisha/docker-ros2-workspace.git
+   $ cd docker-ros2-workspace
 
-    ```
+   ```
 
-    Moving forward, Linux users can use the `ws_linux` folder, and macOS users can use `ws_mac`.
+   Moving forward, Linux users can use the `ws_linux` folder, and macOS users can use `ws_mac`.
 
 2. Verify the workspace structure:
 
-    ```text
-    ws_linux/
-    ├── compose.yml
-    ├── Dockerfile
-    └── src/
-        ├── package1/
-        └── package2/
+   ```text
+   ws_linux/
+   ├── compose.yml
+   ├── Dockerfile
+   └── src/
+       ├── package1/
+       └── package2/
 
-    ws_mac/
-    ├── compose.yml
-    ├── Dockerfile
-    └── src/
-        ├── package1/
-        └── package2/
+   ws_mac/
+   ├── compose.yml
+   ├── Dockerfile
+   └── src/
+       ├── package1/
+       └── package2/
 
-    ```
+   ```
 
 3. Explore the workspace layout
 
@@ -56,35 +55,35 @@ A consistent workspace simplifies managing ROS 2 projects and build artifacts ac
 
 1. Execute the following commands to build and start the container:
 
-    For Linux:
+   For Linux:
 
-    ```console
-    $ cd ws_linux
-    $ docker compose up -d
-    $ docker compose exec ros2 /bin/bash
-    ```
+   ```console
+   $ cd ws_linux
+   $ docker compose up -d
+   $ docker compose exec ros2 /bin/bash
+   ```
 
-    For macOS:
+   For macOS:
 
-    ```console
-    $ cd ws_mac
-    $ docker compose up -d
-    $ docker compose exec ros2 /bin/bash
-    ```
+   ```console
+   $ cd ws_mac
+   $ docker compose up -d
+   $ docker compose exec ros2 /bin/bash
+   ```
 
-    This command builds the Docker image defined in your `Dockerfile` and starts the container in the background.
+   This command builds the Docker image defined in your `Dockerfile` and starts the container in the background.
 
-    > [!NOTE]
-    >
-    > Building the image may take several minutes during the first run 
-    > as the CLI pulls the base ROS 2 image and installs required dependencies. 
-    > Subsequent starts will be significantly faster.
+   > [!NOTE]
+   >
+   > Building the image may take several minutes during the first run
+   > as the CLI pulls the base ROS 2 image and installs required dependencies.
+   > Subsequent starts will be significantly faster.
 
 2. Once the container is running, execute commands inside it using `exec`:
 
-    ```console
-    $ docker compose exec ros2 /bin/bash
-    ```
+   ```console
+   $ docker compose exec ros2 /bin/bash
+   ```
 
 3. Inside the container terminal, verify the environment:
 

@@ -7,10 +7,12 @@ summary: |
   This guide details how to containerize ROS 2 applications using Docker.
 toc_min: 1
 toc_max: 2
-languages: []
+languages: [python]
+tags: [frameworks]
 params:
-  tags: [frameworks]
   time: 30 minutes
+  image: /images/guides/ros2.jpg
+  featured: true
 ---
 
 > **Acknowledgment**

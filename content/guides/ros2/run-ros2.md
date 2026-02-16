@@ -18,28 +18,28 @@ The fastest way to get started with ROS 2 is to use the [official Docker image](
 
 1. Pull and run the official ROS 2 Docker image:
 
-    ```console
-    $ docker run -it ros:humble
-    ```
+   ```console
+   $ docker run -it ros:humble
+   ```
 
-    This guide uses the Humble distribution. You can replace `humble` with another supported distribution such as `rolling`, `jazzy`, or `iron`.
+   This guide uses the Humble distribution. You can replace `humble` with another supported distribution such as `rolling`, `jazzy`, or `iron`.
 
-    > [!NOTE]
-    >
-    > This environment is temporary and does not maintain persistence. 
-    > Any files you create or packages you install will be deleted once the container is stopped or removed.
+   > [!NOTE]
+   >
+   > This environment is temporary and does not maintain persistence.
+   > Any files you create or packages you install will be deleted once the container is stopped or removed.
 
 2. Verify ROS 2 is working:
 
-    ```console
-    $ echo $ROS_DISTRO
-    ```
+   ```console
+   $ echo $ROS_DISTRO
+   ```
 
-    You should see output similar to:
+   You should see output similar to:
 
-    ```text
-    humble
-    ```
+   ```text
+   humble
+   ```
 
 ## Install ROS 2 packages
 
@@ -47,15 +47,15 @@ The official ROS 2 images include core packages. To install additional packages,
 
 1. Update the package manager:
 
-    ```console
-    $ sudo apt update
-    ```
+   ```console
+   $ sudo apt update
+   ```
 
 2. Install the desired package:
 
-    ```console
-    $ sudo apt install $PACKAGE_NAME
-    ```
+   ```console
+   $ sudo apt install $PACKAGE_NAME
+   ```
 
 Replace `$PACKAGE_NAME` with any package you want to install.
 
