@@ -23,7 +23,7 @@ Before you begin, make sure you have:
 
 > [!IMPORTANT]
 >
-> You must add users to your verified domain for settings to take effect.
+> You can create settings management policies at any time, but your organization needs to verify a domain before the policies take effect. 
 
 ## Create a settings policy
 
