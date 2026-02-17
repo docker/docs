@@ -55,7 +55,8 @@ your verified publisher namespaces.
 3. Configure the settings:
    - **Tracked companies**: Set the number of companies to track for reporting
      purposes. This setting determines how many company domains appear in your
-     [Tracked companies report](#tracked-companies-report).
+     [Tracked companies report](#tracked-companies-report). You can only set
+     this number up to the maximum included in your DVP subscription.
    - **Benchmark report allocations**: If your organization has benchmark
      reports enabled, enter the number of companies to include in the benchmark
      report for each namespace listed.
