@@ -61,7 +61,7 @@ You can bulk invite members using the Docker Hub API. For more information, see 
 
 ## Accept invitation
 
-When a user receives an email invitation, they receive
+After receiving an email invitation, users can access
 a link to Docker Hub where they can accept or decline the invitation. 
 
 To accept an invitation:
@@ -138,7 +138,7 @@ An invitee must first accept the invitation to join the organization before bein
 
 ### Remove members from teams
 
-If your organization uses single sign-on (SSO) with [SCIM](/enterprise/security/provisioning/scim) enabled, you should remove members from your identity provider (IdP). This automatically removes members from Docker. If SCIM is disabled, be sure to follow procedures to remove members manually in Docker.
+If your organization uses single sign-on (SSO) with [SCIM](/enterprise/security/provisioning/scim) enabled, you should remove members from your identity provider (IdP). This automatically removes members from Docker. If SCIM is disabled, follow procedures in this doc to remove members manually in Docker.
 
 Organization owners can remove a member from a team in Docker Hub or Admin Console. Removing the member from the team will revoke their access to the permitted resources. To remove a member from a specific team with the Admin Console:
 
@@ -163,7 +163,7 @@ organization.
 **Actions** menu, then **Edit role**.
 
 If you're the only owner of an organization and you want to edit your role, assign a new owner
-for you organization so you can edit your role.
+for your organization so you can edit your role.
 
 ## Export members CSV file
 
