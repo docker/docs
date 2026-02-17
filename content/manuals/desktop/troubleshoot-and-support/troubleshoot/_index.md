@@ -52,10 +52,11 @@ If you are a Mac or Linux user, you also have the option to **Uninstall** Docker
 
 ### Diagnose from the app
 
-1. From **Troubleshoot**, select **Get support**. This opens the in-app Support page and starts collecting the diagnostics.
-2. When the diagnostics collection process is complete, select **Upload to get a Diagnostic ID**.
-3. When the diagnostics are uploaded, Docker Desktop prints a diagnostic ID. Copy this ID.
-4. Use your diagnostics ID to get help:
+1. If the Docker Desktop Dashboard is unresponsive, you may be unable to generate a diagnostic bundle from the application. In that case, please collect and upload the diagnostics using the terminal. Refer to the instructions in `Diagnose from the terminal` section below.
+2. From **Troubleshoot**, select **Get support**. This opens the in-app Support page and starts collecting the diagnostics.
+3. When the diagnostics collection process is complete, select **Upload to get a Diagnostic ID**.
+4. When the diagnostics are uploaded, Docker Desktop prints a diagnostic ID. Copy this ID.
+5. Use your diagnostics ID to get help:
    - If you have a paid Docker subscription, select **Contact support**. This opens the Docker Desktop support form. Fill in the information required and add the ID you copied in step three to the **Diagnostics ID field**. Then, select **Submit ticket** to request Docker Desktop support.
      > [!NOTE]
      >
@@ -80,6 +81,10 @@ Docker Desktop cannot start.
 
 {{< tabs group="os" >}}
 {{< tab name="Windows" >}}
+#### Using docker CLI
+	docker desktop diagnose
+
+#### Using diagnose executable
 
 1. Locate the `com.docker.diagnose` tool:
 
@@ -97,6 +102,10 @@ After the diagnostics have finished, the terminal displays your diagnostics ID a
 
 {{< /tab >}}
 {{< tab name="Mac" >}}
+#### Using docker CLI
+	docker desktop diagnose
+
+#### Using diagnose executable
 
 1. Locate the `com.docker.diagnose` tool:
 
@@ -114,6 +123,10 @@ After the diagnostics have finished, the terminal displays your diagnostics ID a
 
 {{< /tab >}}
 {{< tab name="Linux" >}}
+#### Using docker CLI
+	docker desktop diagnose
+
+#### Using diagnose executable
 
 1. Locate the `com.docker.diagnose` tool:
 
