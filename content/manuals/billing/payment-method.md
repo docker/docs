@@ -182,7 +182,8 @@ organization.
 1. Confirm your billing contact details. If you need to change them, select
 **Change** and enter your new details.
 
-If you want to pay by invoice, [upgrade to a Docker Business or Docker Team plan](https://www.docker.com/pricing/).
+> [!TIP]
+> Do you need to pay by invoice? [Upgrade to a Docker Business or Docker Team plan](https://www.docker.com/pricing/) and choose the annual subscription.
 
 ## Verify a bank account
 
