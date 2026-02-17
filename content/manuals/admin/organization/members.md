@@ -51,9 +51,7 @@ To invite multiple members to an organization via a CSV file containing email ad
 1. After the CSV file has been uploaded, select **Review** to identify any invalid email addresses, already invited users, invited users who are already members, or duplicated email addresses within the same CSV file. 
 1. Follow the on-screen instructions to invite members.
 
-Pending invitations appear in the table. The invitees receive an email with a link to Docker Hub where they can accept or decline the invitation. When you invite members, you assign them a role. See [Roles and permissions](/enterprise/security/roles-and-permissions) for
-details about the access permissions for each role. 
-
+Pending invitations appear in the table. The invitees receive an email with a link to Docker Hub where they can accept or decline the invitation.
 
 ### Invite members via API
 
