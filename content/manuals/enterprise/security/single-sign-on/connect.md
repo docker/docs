@@ -11,7 +11,7 @@ aliases:
 
 Setting up a single sign-on (SSO) connection involves configuring both Docker
 and your identity provider (IdP). This guide walks you through set-up
-in Docker, set-up in your IdP, and final connection. 
+in Docker, setup in your IdP, and final connection. 
 
 ## Prerequisites
 
@@ -25,18 +25,19 @@ Before you begin:
 
 Docker supports any SAML 2.0 or OIDC-compatible identity provider. This guide
 provides detailed setup instructions for the most commonly
-used providers: Okta and Microsoft Entra ID. If you're using a
-different IdP, the general process remains the same:
+used providers: Okta and Microsoft Entra ID. 
+
+If you're using a different IdP, the general process remains the same:
 
 - Configure the connection in Docker.
 - Set up the application in your IdP using the values from Docker.
--  Complete the connection by entering your IdP's values back into Docker.
+- Complete the connection by entering your IdP's values back into Docker.
 - Test the connection.
 
-These procedures prompt you to navigate between Docker docs and IdP docs. You will also need to copy and paste values 
-between Docker and your IdP. Complete this guide in one session with separate browser windows open for Docker and your IdP. 
+> [!TIP]
+> These procedures have you copy and paste values between Docker and your IdP. Complete this guide in one session with separate browser windows open for Docker and your IdP. 
 
-### Create an SSO connection in Docker
+### Step 1. Create an SSO connection in Docker
 
 1. From [Docker Home](https://app.docker.com), choose your
 organization and toggle the **Admin Console** dropdown. Select **SSO and SCIM** from the **Security** section. 
@@ -47,7 +48,7 @@ organization and toggle the **Admin Console** dropdown. Select **SSO and SCIM** 
 
 Keep this window open to paste values from your IdP later.
 
-### Create an SSO connection in your IdP
+### Step 2. Create an SSO connection in your IdP
 
 Use the following tabs based on your IdP provider.
 
@@ -85,16 +86,18 @@ To enable SSO with Microsoft Entra, you need [Cloud Application Administrator](h
 1. From the **SAML Signing Certificate** section, download your **Certificate (Base64)**.
 
 {{< /tab >}}
-{{< tab name="Azure Connect (OIDC)" >}}
+{{< tab name="Azure OpenID Connect (OIDC)" >}}
+
+The following procedures reproduce instructions from Microsoft Learn documentation for [configuring an app service with OIDC](https://learn.microsoft.com/en-us/azure/app-service/configure-authentication-provider-openid-connect#-register-your-app-with-the-oidc-identity-provider). If you're uncertain, review the official Microsoft documentation and return here for the rest of the procedures.  
 
 #### Register the app
 
-1. Sign in to Microsoft Entra (formerly Azure AD).
-1. Select **App Registration** > **New Registration**.
-1. Name the application "Docker".
-1. Set account types and paste the **Redirect URI** from Docker.
-1. Select **Register**.
-1. Copy the **Client ID**.
+1. Sign in to [Microsoft Entra admin center](https://entra.microsoft.com/).
+2. Go to **App Registration** and select **New Registration**.
+3. Name the application "Docker".
+4. Set account types and paste the **Redirect URI** from Docker.
+5. Select **Register**.
+6. Copy the **Client ID**.
 
 #### Create client secrets
 
@@ -113,14 +116,13 @@ To enable SSO with Microsoft Entra, you need [Cloud Application Administrator](h
 {{< /tab >}}
 {{< /tabs >}}
 
-### Connect Docker to your IdP
+### Step 3. Connect Docker to your IdP
 
 Complete the integration by pasting your IdP values into Docker.
 
 > [!IMPORTANT]
-    > 
-    > When prompted to copy a certificate, copy the entire certificate starting > with `----BEGIN CERTIFICATE----` and including the `----END 
-    > CERTIFICATE----` lines.
+> When prompted to copy a certificate, copy the entire certificate starting with 
+> `----BEGIN CERTIFICATE----` and including the `----END CERTIFICATE----` lines.
 
 {{< tabs >}}
 {{< tab name="Okta SAML" >}}
@@ -143,7 +145,7 @@ Complete the integration by pasting your IdP values into Docker.
 1. Review and select **Create connection**.
 
 {{< /tab >}}
-{{< tab name="Azure Connect (OIDC)" >}}
+{{< tab name="Azure OpenID Connect (OIDC)" >}}
 
 1. Return to the Docker Admin Console.
 1. Paste the following values:
@@ -156,7 +158,7 @@ Complete the integration by pasting your IdP values into Docker.
 {{< /tab >}}
 {{< /tabs >}}
 
-### Test the connection
+### Step 4. Test the connection
 
 IdPs like Microsoft Entra and Okta may require that you assign a user to an application before testing SSO. You can review [Microsoft Entra](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/add-application-portal-setup-sso#test-single-sign-on)'s documentation and [Okta](https://help.okta.com/wf/en-us/content/topics/workflows/connector-reference/okta/actions/assignusertoapplicationforsso.htm)'s documentation to learn how to assign yourself or other users to an app.
 
@@ -177,20 +179,16 @@ Docker supports multiple IdP configurations. To use multiple IdPs with one domai
 
 ## Enforce SSO
 
-> [!IMPORTANT]
->
-> If SSO is not enforced, users can still sign in using Docker usernames and passwords.
-
-Enforcing SSO requires users to use SSO when signing into Docker. This centralizes authentication and enforces policies set by the IdP.
+If SSO is not enforced, users can still sign in using Docker usernames and passwords. Enforcing SSO requires users to use SSO when signing into Docker, which centralizes authentication and enforces policies set by the IdP.
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select
 your organization or company.
 1. Select **Admin Console**, then **SSO and SCIM**.
-1. In the SSO connections table, select the **Action** menu, then **Enable enforcement**.
-1. Follow the on-screen instructions.
-1. Select **Turn on enforcement**.
+2. In the SSO connections table, select the **Action** menu, then **Enable enforcement**.
+3. Follow the on-screen instructions.
+4. Select **Turn on enforcement**.
 
-When SSO is enforced, your users are unable to modify their email address and
+When you enforce SSO, your users cannot modify their email address and
 password, convert a user account to an organization, or set up 2FA through
 Docker Hub. If you want to use 2FA, you must enable 2FA through your IdP.
 
