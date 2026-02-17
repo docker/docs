@@ -81,7 +81,7 @@ Docker Desktop cannot start.
 
 {{< tabs group="os" >}}
 {{< tab name="Windows" >}}
-#### Using docker CLI
+#### Using docker CLI (Docker Desktop 4.60 and later)
 	docker desktop diagnose
 
 #### Using diagnose executable
@@ -102,7 +102,7 @@ After the diagnostics have finished, the terminal displays your diagnostics ID a
 
 {{< /tab >}}
 {{< tab name="Mac" >}}
-#### Using docker CLI
+#### Using docker CLI (Docker Desktop 4.60 and later)
 	docker desktop diagnose
 
 #### Using diagnose executable
@@ -123,7 +123,7 @@ After the diagnostics have finished, the terminal displays your diagnostics ID a
 
 {{< /tab >}}
 {{< tab name="Linux" >}}
-#### Using docker CLI
+#### Using docker CLI (Docker Desktop 4.60 and later)
 	docker desktop diagnose
 
 #### Using diagnose executable
