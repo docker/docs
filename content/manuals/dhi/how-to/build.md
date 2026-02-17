@@ -278,7 +278,13 @@ $ docker buildx build . -f base.yaml \
     --tag my-base:latest \
     --load
 ```
-> **Note:** The `tags` field in the spec file defines the image metadata (variant and version labels embedded in the image manifest). The `--tag` flag on the CLI sets the OCI image reference used to push or load the image. These serve different purposes — the spec file tags describe *what the image is*, while the CLI tag determines *where it's stored*.
+> [!NOTE]
+>
+> The `tags` field in the spec file defines the image metadata (variant and
+> version labels embedded in the image manifest). The `--tag` flag on the CLI
+> sets the OCI image reference used to push or load the image. These serve
+> different purposes — the spec file tags describe *what the image is*, while
+> the CLI tag determines *where it's stored*.
 
 ## Use a Debian base with third-party repositories
 
