@@ -49,25 +49,23 @@ it's a prerequisite for unlocking a range of new use cases, including:
 
 ## Enable the containerd image store
 
-The containerd image store is enabled by default in Docker Desktop version 4.34
-and later, but only for clean installs or if you perform a factory reset. If
-you upgrade from an earlier version of Docker Desktop, or if you use an older
-version of Docker Desktop you must manually switch to the containerd image
-store.
+The containerd image store is enabled by default in Docker Desktop version 4.52
+and later.
 
-To manually enable this feature in Docker Desktop:
+To manually select which image store Docker Desktop uses:
 
 1. Navigate to **Settings** in Docker Desktop.
-2. In the **General** tab, check **Use containerd for pulling and storing images**.
+2. In the **General** tab, check or clear the **Use containerd for pulling and storing images** option.
 3. Select **Apply**.
-
-To disable the containerd image store,
-clear the **Use containerd for pulling and storing images** checkbox.
 
 ## Build multi-platform images
 
-The term multi-platform image refers to a bundle of images for multiple different architectures.
-Out of the box, the default builder for Docker Desktop doesn't support building multi-platform images.
+Enabling the containerd image store lets you build multi-platform images
+and load them to your local image store:
+
+<script async id="asciicast-ZSUI4Mi2foChLjbevl2dxt5GD" src="https://asciinema.org/a/ZSUI4Mi2foChLjbevl2dxt5GD.js"></script>
+
+Building multi-platform images with the classic image store is not supported:
 
 ```console
 $ docker build --platform=linux/amd64,linux/arm64 .
@@ -76,10 +74,3 @@ ERROR: Multi-platform build is not supported for the docker driver.
 Switch to a different driver, or turn on the containerd image store, and try again.
 Learn more at https://docs.docker.com/go/build-multi-platform/
 ```
-
-Enabling the containerd image store lets you build multi-platform images
-and load them to your local image store:
-
-<script async id="asciicast-ZSUI4Mi2foChLjbevl2dxt5GD" src="https://asciinema.org/a/ZSUI4Mi2foChLjbevl2dxt5GD.js"></script>
-
-
