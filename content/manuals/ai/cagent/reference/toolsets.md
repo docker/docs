@@ -274,6 +274,55 @@ toolsets:
     shared: true
 ```
 
+### Tasks
+
+The `tasks` toolset is an advanced version of the `todo` toolset, and provides
+task management with priorities, dependencies, and persistence. Your agent can
+create tasks with different priority levels, establish prerequisite
+relationships between tasks, and automatically track which tasks are blocked by
+incomplete dependencies. Tasks are sorted by priority and blocking status,
+making it easy to identify the next actionable work.
+
+Tasks are stored in a JSON file and persist across cagent sessions.
+
+#### Configuration
+
+```yaml
+toolsets:
+  - type: tasks
+
+  # Optional: specify storage location
+  - type: tasks
+    path: ./project-tasks.json
+```
+
+#### Available tools
+
+The tasks toolset provides these tools:
+
+- **create_task**: Create a new task with title, description, priority, and
+  dependencies
+- **get_task**: Retrieve full details of a task by ID, including effective
+  status
+- **update_task**: Modify task fields (title, description, priority, status,
+  dependencies)
+- **delete_task**: Remove a task and clean up its dependencies
+- **list_tasks**: List all tasks sorted by priority, optionally filtered by
+  status or priority
+- **next_task**: Get the highest-priority actionable task (not blocked or done)
+- **add_dependency**: Add a dependency between tasks (with cycle detection)
+- **remove_dependency**: Remove a dependency from a task
+
+#### Task statuses and priorities
+
+Tasks have four statuses: `pending`, `in_progress`, `done`, and `blocked`. The
+agent automatically calculates the effective status. A task becomes `blocked`
+if any of its dependencies are not `done`, regardless of its assigned status.
+
+Priority levels (from highest to lowest): `critical`, `high`, `medium`
+(default), `low`. Tasks are sorted by blocking status first (unblocked tasks
+first), then by priority, then by creation time.
+
 ### Memory
 
 The `memory` toolset allows your agent to store and retrieve information across
