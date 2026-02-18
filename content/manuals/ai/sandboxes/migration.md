@@ -6,9 +6,9 @@ weight: 100
 
 {{< summary-bar feature_name="Docker Sandboxes" >}}
 
-Docker Desktop 4.58 introduces microVM-based sandboxes, replacing the previous
-container-based implementation. This guide helps you migrate from legacy
-sandboxes to the new architecture.
+The most recent versions of Docker Desktop create microVM-based sandboxes,
+replacing the container-based implementation released in earlier versions. This
+guide helps you migrate from legacy sandboxes to the new architecture.
 
 ## What changed
 
@@ -20,7 +20,7 @@ policies.
 > If you need to use legacy container-based sandboxes, install
 > [Docker Desktop 4.57](/desktop/release-notes/#4570).
 
-After upgrading to Docker Desktop 4.58:
+After upgrading to Docker Desktop 4.58 or later:
 
 - Old sandboxes don't appear in `docker sandbox ls`
 - They still exist as regular Docker containers and volumes
@@ -121,9 +121,14 @@ template.
 
    ```console
    $ docker sandbox create --template my-sandbox-template:v1 \
-       --load-local-template \
+       --pull-template=never \
        claude ~/project
    ```
+
+   > [!NOTE]
+   > The `--pull-template` flag was introduced in Docker Desktop 4.61 (Sandbox
+   > version 0.12). For Docker Desktop 4.58–4.60, substitute
+   > `--pull-template=never` with `--load-local-template`.
 
 5. Run the sandbox:
 
@@ -189,5 +194,5 @@ New command structure:
 $ docker sandbox run claude ~/project
 ```
 
-The agent name (`claude`, `codex`, `gemini`, `cagent`, `kiro`) is now a
-required parameter when creating sandboxes, and you run the sandbox by name.
+The agent name is now a required parameter when creating sandboxes, and you run
+the sandbox by name.

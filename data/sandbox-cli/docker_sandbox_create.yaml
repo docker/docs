@@ -14,6 +14,8 @@ cname:
     - docker sandbox create copilot
     - docker sandbox create gemini
     - docker sandbox create kiro
+    - docker sandbox create opencode
+    - docker sandbox create shell
 clink:
     - docker_sandbox_create_cagent.yaml
     - docker_sandbox_create_claude.yaml
@@ -21,23 +23,24 @@ clink:
     - docker_sandbox_create_copilot.yaml
     - docker_sandbox_create_gemini.yaml
     - docker_sandbox_create_kiro.yaml
+    - docker_sandbox_create_opencode.yaml
+    - docker_sandbox_create_shell.yaml
 options:
-    - option: load-local-template
-      value_type: bool
-      default_value: "false"
+    - option: name
+      value_type: string
       description: |
-        Load a locally built template image into the sandbox (useful for testing local changes)
-      details_url: '#load-local-template'
+        Name for the sandbox (default: <agent>-<workdir>, letters, numbers, hyphens, underscores, periods, plus signs and minus signs only)
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: name
+    - option: pull-template
       value_type: string
+      default_value: missing
       description: |
-        Name for the sandbox (default: <agent>-<workdir>, letters, numbers, hyphens, and underscores)
+        Template image pull policy: always (always pull from registry), missing (pull only if not cached), never (use only cached images)
       deprecated: false
       hidden: false
       experimental: false
@@ -115,16 +118,6 @@ examples: |-
     ```
 
     By default, each agent uses a pre-configured image.
-
-    ### Use locally built template (--load-local-template) {#load-local-template}
-
-    Load a locally built template image for testing:
-
-    ```console
-    $ docker sandbox create --load-local-template claude ~/my-project
-    ```
-
-    This is useful when developing or testing changes to sandbox templates.
 
     ### Create and run immediately
 

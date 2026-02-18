@@ -97,6 +97,7 @@ Google
 Grafana
 Gravatar
 gRPC
+Groq
 Grype
 HyperKit
 inferencing
@@ -115,6 +116,7 @@ JFrog
 JUnit
 Kata
 Kerberos
+Kiro
 Kitematic
 Kubeadm
 kubectl
@@ -198,6 +200,7 @@ stargz
 stdin
 stdout
 subfolder
+sudo
 subvolume
 Syft
 syntaxes

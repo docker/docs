@@ -4,7 +4,24 @@ long: |-
     Run an agent in a sandbox. Create the sandbox if it does not exist.
 
     Pass agent arguments after the "--" separator.
-usage: docker sandbox run SANDBOX [-- AGENT_ARGS...] | AGENT WORKSPACE [-- AGENT_ARGS...]
+    Additional workspaces can be provided as extra arguments. Append ":ro" to mount them read-only.
+
+    Examples:
+      # Create and run a sandbox with claude in current directory
+      docker sandbox run claude
+
+      # Create and run a sandbox with claude in current directory (explicit)
+      docker sandbox run claude .
+
+      # Create and run with additional workspaces (read-only)
+      docker sandbox run claude . /path/to/docs:ro
+
+      # Run an existing sandbox
+      docker sandbox run existing-sandbox
+
+      # Run a sandbox with agent arguments
+      docker sandbox run claude -- --continue
+usage: docker sandbox run SANDBOX [-- AGENT_ARGS...] | AGENT [WORKSPACE] [EXTRA_WORKSPACE...] [-- AGENT_ARGS...]
 pname: docker sandbox
 plink: docker_sandbox.yaml
 options:
@@ -19,20 +36,31 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: load-local-template
-      value_type: bool
-      default_value: "false"
-      description: Load a locally built template image into the sandbox
+    - option: name
+      value_type: string
+      description: 'Name for the sandbox (default: <agent>-<workdir>)'
+      details_url: '#name'
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: name
+    - option: patch-settings
+      value_type: bool
+      default_value: "false"
+      description: Intercept claude settings API call and patch payload
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: pull-template
       value_type: string
-      description: 'Name for the sandbox (default: <agent>-<workdir>)'
-      details_url: '#name'
+      default_value: missing
+      description: |
+        Template image pull policy: always (always pull from registry), missing (pull only if not cached), never (use only cached images)
       deprecated: false
       hidden: false
       experimental: false
@@ -127,14 +155,6 @@ examples: |-
 
     ```console
     $ docker sandbox run claude . -- -p "What version are you running?"
-    ```
-
-    ### Run with locally built template
-
-    Use `--load-local-template` to test local template changes:
-
-    ```console
-    $ docker sandbox run --load-local-template claude .
     ```
 deprecated: false
 hidden: false

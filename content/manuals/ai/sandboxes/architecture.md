@@ -153,6 +153,29 @@ An HTTP/HTTPS filtering proxy runs on your host and is available at
 web requests. You can configure network policies to control which destinations
 are allowed. See [Network policies](network-policies.md).
 
+### Credential injection
+
+The HTTP/HTTPS proxy automatically injects credentials into API requests for
+supported providers (OpenAI, Anthropic, Google, GitHub, etc.). When you set
+environment variables like `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` on your
+host, the proxy intercepts outbound requests to those services and adds the
+appropriate authentication headers.
+
+This approach keeps credentials on your host system - they're never stored
+inside the sandbox VM. The agent makes API requests without credentials, and
+the proxy injects them transparently. When the sandbox is removed, no
+credentials remain inside.
+
+For multi-provider agents (OpenCode, cagent), the proxy automatically selects
+the correct credentials based on the API endpoint being called. See individual
+[agent configuration](agents/) for credential setup instructions.
+
+When building custom templates or installing agents manually in the shell
+sandbox, some agents may require environment variables like `OPENAI_API_KEY`
+to be set before they start. Set these to placeholder values (e.g.,
+`proxy-managed`) if needed - the proxy will inject actual credentials
+regardless of the environment variable value.
+
 ### Sandbox isolation
 
 Sandboxes cannot communicate with each other. Each VM has its own private
@@ -200,9 +223,3 @@ Sandboxes trade higher resource overhead (VM + daemon) for complete isolation.
 Use containers when you need lightweight packaging without Docker access. Use
 sandboxes when you need to give something autonomous full Docker capabilities
 without trusting it with your host environment.
-
-## Next steps
-
-- [Network policies](network-policies.md)
-- [Custom templates](templates.md)
-- [Using sandboxes effectively](workflows.md)

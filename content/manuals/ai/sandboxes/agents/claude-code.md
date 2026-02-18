@@ -1,7 +1,10 @@
 ---
-title: Configure Claude Code
-description: Learn how to configure Claude Code authentication, pass CLI options, and customize your sandboxed agent environment with Docker.
-weight: 30
+title: Claude Code sandbox
+description: |
+  Use Claude Code in Docker Sandboxes with authentication, configuration, and
+  YOLO mode for AI-assisted development.
+keywords: docker, sandboxes, claude code, anthropic, ai agent, authentication, configuration
+weight: 10
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes" >}}
@@ -9,12 +12,21 @@ weight: 30
 This guide covers authentication, configuration files, and common options for
 running Claude Code in a sandboxed environment.
 
+Official documentation: [Claude Code](https://code.claude.com/docs)
+
 ## Quick start
 
 To create a sandbox and run Claude Code for a project directory:
 
 ```console
 $ docker sandbox run claude ~/my-project
+```
+
+The workspace parameter is optional and defaults to the current directory:
+
+```console
+$ cd ~/my-project
+$ docker sandbox run claude
 ```
 
 ### Pass a prompt directly
@@ -35,7 +47,7 @@ This starts Claude and immediately processes the prompt.
 
 ## Authentication
 
-Claude Code requires an Anthropic API key. You can authenticate using an environment variable (recommended) or through interactive login.
+Claude Code requires an Anthropic API key. Credentials are scoped per sandbox.
 
 ### Environment variable (recommended)
 
@@ -66,15 +78,18 @@ The sandbox detects the environment variable and uses it automatically.
 
 ### Interactive authentication
 
-If no credentials are found, Claude Code prompts you to authenticate interactively when it starts. You can also trigger the login flow manually using the `/login` command within Claude Code.
+If the `ANTHROPIC_API_KEY` environment variable is not set, Claude Code prompts
+you to authenticate interactively when it starts. You can also trigger the login
+flow manually using the `/login` command within Claude Code.
 
 When using interactive authentication:
 
-- You'll need to authenticate for each workspace/sandbox separately
+- You must authenticate each sandbox separately
 - If the sandbox is removed or destroyed, you'll need to authenticate again when you recreate it
 - Authentication sessions aren't persisted outside the sandbox
+- No fallback authentication methods are used
 
-To avoid repeated authentication, use the `ANTHROPIC_API_KEY` environment variable method described above.
+To avoid repeated authentication, set the `ANTHROPIC_API_KEY` environment variable.
 
 ## Configuration
 
@@ -93,28 +108,13 @@ For example:
 $ docker sandbox run <sandbox-name> -- --continue
 ```
 
-See the [Claude Code CLI reference](https://docs.claude.com/en/docs/claude-code/cli-reference)
+See the [Claude Code CLI reference](https://code.claude.com/docs/en/cli-reference)
 for available options.
 
 ## Base image
 
-The Claude Code sandbox template is a container image that runs inside the
-sandbox VM. It includes:
+Template: `docker/sandbox-templates:claude-code`
 
-- Ubuntu-based environment with Claude Code
-- Development tools: Docker CLI, GitHub CLI, Node.js, Go, Python 3, Git, ripgrep, jq
-- Non-root `agent` user with sudo access
-- Private Docker daemon for running additional containers
+Claude Code launches with `--dangerously-skip-permissions` by default in sandboxes.
 
-Claude launches with `--dangerously-skip-permissions` by default in sandboxes.
-
-You can build custom templates based on `docker/sandbox-templates:claude-code`.
-See [Custom templates](templates.md) for details.
-
-## Next steps
-
-- [Using sandboxes effectively](workflows.md)
-- [Custom templates](templates.md)
-- [Network policies](network-policies.md)
-- [Troubleshooting](troubleshooting.md)
-- [CLI Reference](/reference/cli/docker/sandbox/)
+See [Custom templates](../templates.md) to build your own agent images.

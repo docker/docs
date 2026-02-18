@@ -1,13 +1,13 @@
-command: docker sandbox create cagent
-short: Create a sandbox for cagent
+command: docker sandbox create opencode
+short: Create a sandbox for opencode
 long: |-
-    Create a sandbox with access to a host workspace for cagent.
+    Create a sandbox with access to a host workspace for opencode.
 
     The workspace path is required and will be exposed inside the sandbox at the same path as on the host.
     Additional workspaces can be provided as extra arguments. Append ":ro" to mount them read-only.
 
-    Use 'docker sandbox run SANDBOX' to start cagent after creation.
-usage: docker sandbox create cagent WORKSPACE [EXTRA_WORKSPACE...]
+    Use 'docker sandbox run SANDBOX' to start opencode after creation.
+usage: docker sandbox create opencode WORKSPACE [EXTRA_WORKSPACE...]
 pname: docker sandbox create
 plink: docker_sandbox_create.yaml
 inherited_options:
@@ -33,23 +33,23 @@ inherited_options:
       kubernetes: false
       swarm: false
 examples: |-
-    ### Create a Cagent sandbox in the current directory
+    ### Create an OpenCode sandbox in the current directory
 
     ```console
-    $ docker sandbox create cagent .
+    $ docker sandbox create opencode .
     ```
 
     ### Create with an absolute path
 
     ```console
-    $ docker sandbox create cagent /home/user/my-project
+    $ docker sandbox create opencode /home/user/my-project
     ```
 
     ### Create and then run
 
     ```console
-    $ docker sandbox create --name my-cagent cagent ~/my-project
-    $ docker sandbox run my-cagent
+    $ docker sandbox create --name my-opencode opencode ~/my-project
+    $ docker sandbox run my-opencode
     ```
 deprecated: false
 hidden: false

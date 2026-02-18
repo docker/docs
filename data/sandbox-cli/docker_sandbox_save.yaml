@@ -5,6 +5,13 @@ long: |-
 
     By default, the image is loaded into the host's Docker daemon (requires Docker to be running).
     Use --output to save the image to a tar file instead.
+
+    Examples:
+      # Load into host Docker (requires host Docker running)
+      docker sandbox save my-sandbox myimage:v1.0
+
+      # Save to file (works without host Docker)
+      docker sandbox save my-sandbox myimage:v1.0 --output /tmp/myimage.tar
 usage: docker sandbox save SANDBOX TAG
 pname: docker sandbox
 plink: docker_sandbox.yaml
