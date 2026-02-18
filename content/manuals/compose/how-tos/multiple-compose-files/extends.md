@@ -66,7 +66,7 @@ To include the service `webapp` in the final project when extending services fro
 ```yaml
 services:
   web:
-    build: alpine
+    build: ./alpine
     command: echo
     extends:
       file: common-services.yml
@@ -86,7 +86,7 @@ If you define services in the same Compose file and extend one service from anot
 ```yaml 
 services:
   web:
-    build: alpine
+    build: ./alpine
     extends: webapp
   webapp:
     environment:
