@@ -1,0 +1,49 @@
+command: docker mcp
+short: Manage MCP servers and clients
+long: |-
+    The MCP Gateway is Docker's open-source enterprise solution for orchestrating
+    Model Context Protocol (MCP) servers and clients.
+
+    For more information see [Docker MCP](/ai/mcp-gateway/) and
+    the public [GitHub repository](https://github.com/docker/mcp-gateway).
+pname: docker
+plink: docker.yaml
+cname:
+    - docker mcp catalog
+    - docker mcp client
+    - docker mcp feature
+    - docker mcp gateway
+    - docker mcp profile
+    - docker mcp secret
+    - docker mcp server
+    - docker mcp tools
+    - docker mcp version
+clink:
+    - docker_mcp_catalog.yaml
+    - docker_mcp_client.yaml
+    - docker_mcp_feature.yaml
+    - docker_mcp_gateway.yaml
+    - docker_mcp_profile.yaml
+    - docker_mcp_secret.yaml
+    - docker_mcp_server.yaml
+    - docker_mcp_tools.yaml
+    - docker_mcp_version.yaml
+options:
+    - option: version
+      shorthand: v
+      value_type: bool
+      default_value: "false"
+      description: Print version information and quit
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

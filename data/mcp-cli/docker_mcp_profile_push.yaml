@@ -1,0 +1,13 @@
+command: docker mcp profile push
+short: Push profile to OCI registry
+long: Push profile to OCI registry
+usage: docker mcp profile push <profile-id> <oci-reference>
+pname: docker mcp profile
+plink: docker_mcp_profile.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+
