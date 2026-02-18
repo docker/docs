@@ -26,6 +26,35 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.61.0
+
+{{< release-date date="2026-02-16" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.60.1" build_path="/219004/" >}}
+
+### New
+
+- You can now customize the left-hand navigation to show only the tabs that matter to you, and hide the ones that don’t.
+
+### Updates
+
+- Linux kernel `v6.12.68`
+- [Docker Engine v29.2.1](https://docs.docker.com/engine/release-notes/29/#2921)
+- Docker Sandbox `v0.12.0`
+
+### Bug fixes and enhancements
+
+#### For all platforma
+
+- Docker Sandboxes:
+   - Added automated image caching to prevent re-downloading images unnecessarily.
+   - Added Shell mode for blank coding agent sandboxes.
+   - Added support for OpenCode.
+   - Added support for mounting multiple workspaces.
+   - Added experimental Linux support (single user only, UID 1000).
+   - Added support for running in WSL 2.
+   - Sandboxes now start in the current working directory if no path is provided.
+
 ## 4.60.1
 
 {{< release-date date="2026-02-10" >}}
