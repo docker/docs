@@ -33,20 +33,9 @@ contents, build pipeline steps, security configurations, and runtime settings.
 
 ### SLSA attestations
 
-Every Docker Hardened Image includes SLSA Build Level 3 attestations that provide
-verifiable build provenance. These attestations show:
-
-- Exactly how the image was built
-- The build system and environment used
-- All inputs and dependencies
-- When and where the build occurred
-
-You can verify and inspect these attestations to confirm the integrity and
-provenance of any image. See [SLSA](../core-concepts/slsa.md) for details on
-how to verify build attestations.
-
-This transparency lets security teams review image configurations and
-understand what goes into each image.
+Every Docker Hardened Image includes a SLSA Build Level 3 attestation that
+provides verifiable build provenance. For details on SLSA attestations and how to
+verify them, see [SLSA](../core-concepts/slsa.md).
 
 ## Build triggers
 
