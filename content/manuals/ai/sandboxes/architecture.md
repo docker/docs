@@ -91,7 +91,7 @@ Your workspace syncs to the sandbox at the same absolute path:
 Changes sync both ways. Edit a file on your host, and the agent sees it. The
 agent modifies a file, and you see the change on your host.
 
-This is file synchronization, not volume mounting. Files are copied between
+This is achieved through bind mounts. Files are constantly synchronized between
 host and VM. This approach works across different filesystems and maintains
 consistent paths regardless of platform differences.
 
