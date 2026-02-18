@@ -9,7 +9,6 @@ params:
     group: Products
 aliases:
   - /docker-hub/service-accounts/
-  - /manuals/docker-hub/service-accounts/
   - /cloud/
   - /cloud/aci-compose-features/
   - /cloud/aci-container-features/

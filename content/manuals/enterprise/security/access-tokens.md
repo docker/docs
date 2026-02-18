@@ -5,7 +5,6 @@ description: Create and manage organization access tokens to securely authentica
 keywords: organization access tokens, OAT, docker hub security, programmatic access, automation
 aliases:
  - /security/for-admins/access-tokens/
- - /docker-hub/service-accounts/
 ---
 
 {{< summary-bar feature_name="OATs" >}}
