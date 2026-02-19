@@ -40,8 +40,11 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- Added support for vllm-metal in Docker Model Runner on macOS.
 - Fixed an issue where background update checks did not respect the Automatically check for updates setting when disabled. Fixes [docker/for-mac#3908](https://github.com/docker/for-mac/issues/3908).
+
+#### For Mac
+
+- Added support for vllm-metal in Docker Model Runner.
 
 #### For Linux 
 
