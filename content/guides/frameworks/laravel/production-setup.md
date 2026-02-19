@@ -368,7 +368,7 @@ services:
     env_file:
       - .env
     networks:
-      - laravel
+      - laravel-production
 
   postgres:
     image: postgres:18
