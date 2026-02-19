@@ -120,15 +120,13 @@ template.
 4. Create a new sandbox with your template:
 
    ```console
-   $ docker sandbox create --template my-sandbox-template:v1 \
-       --pull-template=never \
-       claude ~/project
+   $ docker sandbox create --template my-sandbox-template:v1 claude ~/project
    ```
 
    > [!NOTE]
    > The `--pull-template` flag was introduced in Docker Desktop 4.61 (Sandbox
-   > version 0.12). For Docker Desktop 4.58–4.60, substitute
-   > `--pull-template=never` with `--load-local-template`.
+   > version 0.12). On Docker Desktop 4.58–4.60, use `--load-local-template`
+   > to use a locally-built template image.
 
 5. Run the sandbox:
 
