@@ -68,11 +68,11 @@ $ docker build -t my-template:v1 .
 Use it directly from your local Docker daemon:
 
 ```console
-$ docker sandbox run --pull-template never -t my-template:v1 claude [PATH]
+$ docker sandbox run -t my-template:v1 claude [PATH]
 ```
 
-The `--pull-template never` flag tells the sandbox to use local template
-images.
+The default `--pull-template missing` policy finds the image in your local
+Docker daemon without pulling from a registry.
 
 To share the template with others, push it to a registry:
 
@@ -92,19 +92,20 @@ Docker Sandboxes caches template images to speed up sandbox creation. The
 
 - `--pull-template missing` (default)
 
-  Pull the image only if it's not already cached locally. First sandbox
-  creation automatically pulls the image, and subsequent sandboxes are created
-  quickly because the image is cached.
+  Use the local image if present, otherwise pull from the registry. Works for
+  both locally-built images and registry images. On first use, registry images
+  are pulled and cached; subsequent sandboxes reuse the cache.
 
 - `--pull-template always`
 
-  Always pull the image from the registry before creating the sandbox, even if
-  it's cached. Slower than `missing` but guarantees freshness.
+  Always pull the latest image from the registry and update the host cache.
+  The VM uses the refreshed cache. Slower than `missing` but guarantees the
+  sandbox uses the latest version. Requires a registry image.
 
 - `--pull-template never`
 
-  Use only cached images. Never pull from a registry. Fails if the image isn't
-  in the cache.
+  Never use the host cache. The sandbox VM pulls the image directly from the
+  registry on every startup. Requires a registry image.
 
 The cache stores template images separately from your host Docker daemon's
 images. Cached images persist across sandbox creation and deletion, but are
@@ -130,11 +131,11 @@ $ docker sandbox save claude-project my-template:v1
 ✓ Saved sandbox as my-template:v1
 ```
 
-This saves the image to your local Docker daemon. Use `--pull-template never`
-to create new sandboxes from it:
+This saves the image to your local Docker daemon. The default pull policy finds
+the image locally:
 
 ```console
-$ docker sandbox run --pull-template never -t my-template:v1 claude ~/other-project
+$ docker sandbox run -t my-template:v1 claude ~/other-project
 ```
 
 To save as a tar file instead (for example, to transfer to another machine):

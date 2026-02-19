@@ -7,7 +7,7 @@ keywords: docker, sandboxes, shell, custom, manual setup, development environmen
 weight: 80
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes" >}}
+{{< summary-bar feature_name="Docker Sandboxes v0.12" >}}
 
 This guide covers the Shell sandbox, a minimal environment for custom agent
 installation and development. Unlike other agent sandboxes, Shell doesn't

@@ -117,6 +117,22 @@ To preserve a configured environment, create a [Custom template](templates.md).
 
 ## Security considerations
 
+### Credential security
+
+Set API keys as environment variables on the host rather than authenticating
+interactively inside a sandbox. When you set credentials on the host, Docker
+Sandboxes proxies API calls from the sandbox through the host daemon, so the
+agent never has direct access to the raw key.
+
+When you authenticate interactively, credentials are stored inside the sandbox
+where the agent can read them directly. This creates a risk of credential
+exfiltration if the agent is compromised or behaves unexpectedly.
+
+Interactive authentication also requires you to re-authenticate for each
+workspace separately.
+
+### Workspace trust
+
 Agents running in sandboxes automatically trust the workspace directory without
 prompting. This enables agents to work freely within the isolated environment.
 
@@ -184,6 +200,8 @@ Each maintains separate packages, Docker images, and state, but share the
 workspace files.
 
 ## Multiple workspaces
+
+{{< summary-bar feature_name="Docker Sandboxes v0.12" >}}
 
 Mount multiple directories into a single sandbox for working with related
 projects or when the agent needs access to documentation and shared libraries.

@@ -7,7 +7,7 @@ keywords: docker, sandboxes, opencode, ai agent, multi-provider, authentication,
 weight: 50
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes" >}}
+{{< summary-bar feature_name="Docker Sandboxes v0.12" >}}
 
 This guide covers authentication, configuration, and usage of OpenCode in a
 sandboxed environment.
