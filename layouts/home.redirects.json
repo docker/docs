@@ -21,15 +21,17 @@
 -}}
 
 {{- $redirects := newScratch }}
-{{- range $i, $e := site.AllPages -}} 
-  {{- if .Params.aliases -}}
-    {{- $target := .RelPermalink -}}
-    {{- range .Params.aliases -}}
-      {{ $redirects.SetInMap "paths" . $target }}
+{{- range hugo.Sites -}}
+  {{- range .Pages -}}
+    {{- if .Params.aliases -}}
+      {{- $target := .RelPermalink -}}
+      {{- range .Params.aliases -}}
+        {{ $redirects.SetInMap "paths" . $target }}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
-{{- range $target, $aliases := site.Data.redirects -}}
+{{- range $target, $aliases := hugo.Data.redirects -}}
 {{- range $aliases }}
 {{- $redirects.SetInMap "paths" . $target -}}
 {{- end -}}
