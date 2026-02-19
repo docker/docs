@@ -44,7 +44,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Bug fixes and enhancements
 
-#### For all platforma
+#### For all platforms
 
 - Docker Sandboxes:
    - Added automated image caching to prevent re-downloading images unnecessarily.
