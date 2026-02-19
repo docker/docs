@@ -46,9 +46,9 @@ Follow these steps to run a sandbox with Claude Code:
    2. Restart Docker Desktop so the daemon picks up the new environment variable.
 
    Alternatively, you can skip this step and authenticate interactively when
-   Claude Code starts. If no credentials are found, you'll be prompted to log
-   in. Note that interactive authentication requires you to authenticate for
-   each workspace separately.
+   Claude Code starts. Interactive authentication is less secure and requires
+   you to re-authenticate for each workspace. See
+   [Credential security](workflows.md#credential-security) for details.
 
 2. Create and run a sandbox for Claude Code for your workspace:
 
