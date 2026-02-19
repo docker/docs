@@ -21,7 +21,9 @@ my-laravel-app/
 ├── docker/
 │   ├── common/
 │   │   └── php-fpm/
-│   │       └── Dockerfile
+│   │       ├── Dockerfile
+│   │       └── conf.d/
+│   │           └── 20-status-path.conf
 │   ├── development/
 │   ├── production/
 │   │   ├── php-fpm/
@@ -136,8 +138,8 @@ COPY --from=builder /usr/local/bin/docker-php-ext-* /usr/local/bin/
 # -----------------------------------------------------------
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-# Enable PHP-FPM status page by modifying zz-docker.conf with sed
-RUN sed -i '/\[www\]/a pm.status_path = /status' /usr/local/etc/php-fpm.d/zz-docker.conf
+# Keep the image-provided FPM global config intact and add pool overrides separately
+COPY ./docker/common/php-fpm/conf.d/*.conf /usr/local/etc/php-fpm.d/
 # Update the variables_order to include E (for ENV)
 #RUN sed -i 's/variables_order = "GPCS"/variables_order = "EGPCS"/' "$PHP_INI_DIR/php.ini"
 
