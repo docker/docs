@@ -192,6 +192,9 @@ Docker Projects:
 Docker Sandboxes:
   availability: Experimental
   requires: Docker Desktop [4.58](/manuals/desktop/release-notes.md#4580) or later
+Docker Sandboxes v0.12:
+  availability: Experimental
+  requires: Docker Desktop [4.61](/manuals/desktop/release-notes.md#4610) or later
 Docker Scout exceptions:
   availability: Experimental
   requires: Docker Scout CLI [1.15.0](/manuals/scout/release-notes/cli.md#1150) and later

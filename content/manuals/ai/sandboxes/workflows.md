@@ -185,6 +185,8 @@ workspace files.
 
 ## Multiple workspaces
 
+{{< summary-bar feature_name="Docker Sandboxes v0.12" >}}
+
 Mount multiple directories into a single sandbox for working with related
 projects or when the agent needs access to documentation and shared libraries.
 
