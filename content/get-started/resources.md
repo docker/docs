@@ -9,32 +9,7 @@ Docker and the broader community of Docker experts have put together many differ
 
 ## Docker Training
 
-Expand your knowledge on all things Docker with [basic to advanced trainings from Docker experts](https://www.docker.com/trainings/). 
-
-You can find recorded content at your own convenience, or register for a live session to participate in Q&A.
-
-## Hosted labs
-
-These self-paced and hands-on workshops use a free, hosted environment ([Play with Kubernetes](https://labs.play-with-k8s.com/)) that doesn't require any installation. Follow along and learn more about Kubernetes.
-
-* [Kubernetes Workshop](https://training.play-with-kubernetes.com/kubernetes-workshop/)
-
-\* Labs are free but require registration with a Docker ID.
-
-## Self-guided tutorials
-
-Created by experts in the Docker community, these free tutorials provide guided step-by-step workflows for working with the Docker platform.
-
-* **Integrating Docker with Your IDE**
-    * [Java Development: Eclipse](https://training.play-with-docker.com/java-debugging-eclipse/)
-    * [Java Development: IntelliJ](https://training.play-with-docker.com/java-debugging-intellij/)
-    * [Java Development: Netbeans](https://training.play-with-docker.com/java-debugging-netbeans/)
-    * [Live Debugging Node.js with Docker and Visual Studio Code](https://training.play-with-docker.com/nodejs-live-debugging/)
-
-* **Windows Containers**
-    * [Windows Container Setup](https://training.play-with-docker.com/windows-containers-setup/)
-    * [Windows Container Basics](https://training.play-with-docker.com/windows-containers-basics/)
-    * [Windows Containers Multi-Container Applications](https://training.play-with-docker.com/windows-containers-multicontainer/)
+Learn Docker and containerization fundamentals through self-paced, [hands-on training courses](/get-started/introduction) created by Docker experts.
 
 ## Books
 
@@ -62,18 +37,7 @@ A number of Docker Captains have also created video courses on Docker and Kubern
 * [Elton Stoneman](https://docker4.net/udemy): Docker for .NET Apps - on Linux and Windows. Includes the discount code `644ABCBC33F474541885`.
 * [Nick Janetakis](https://nickjanetakis.com/courses/) Dive into Docker, Docker for DevOps
 * [Nigel Poulton](https://nigelpoulton.com/video-courses): Kubernetes 101, Getting Started with Kubernetes, Docker and Kubernetes: The Big Picture, Kubernetes Deep Dive, Docker Deep Dive
-* [Arun Gupta](https://www.lynda.com/Docker-tutorials/Docker-Java-developers/576584-2.html): Docker for Java Developers
 * [Ajeet Singh Raina](https://collabnix.com/): Docker and Kubernetes Labs
 * \[French\] [Luc Juggery](https://www.udemy.com/user/lucjuggery/): Introduction to Kubernetes, The Docker Platform
 
 \* Many of the courses are fee-based
-
-## Community-translated docs
-
-> [!NOTE]
->
-> The following section contains a subset of Docker docs that are translated by community
-> members. This is not an officially translated version of Docker docs and it may not be up to date.
-> You must use the community-translated docs at your own discretion.
-
-- [Subset of Docker docs in Japanese](https://docs.docker.jp/index.html) translated by Docker Captain [Masahito Zembutsu](https://github.com/zembutsu).
