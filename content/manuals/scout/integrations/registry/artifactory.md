@@ -154,6 +154,16 @@ Scout.
    --refresh-registry
    ```
 
+   > [!IMPORTANT]
+   >
+   > The `docker scout watch` command is a long-running process that must
+   > continue running indefinitely in the background to receive webhooks and
+   > watch for new images. If you run it directly in a terminal and close the
+   > session, the process will stop.
+   >
+   > You can run the process as a system service, for example using
+   > `systemd` or `nohup`, to ensure it continues running in the background.
+
 9. Optional. Set up Scout integration for real-time notifications from popular
    collaboration platforms. For details, see [Integrate Docker Scout with
    Slack](../team-collaboration/slack.md).
