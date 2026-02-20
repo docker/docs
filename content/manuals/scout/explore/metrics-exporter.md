@@ -118,7 +118,7 @@ alongside Grafana with a pre-configured dashboard to visualize the vulnerability
 3. In the Prometheus configuration file at `/prometheus/prometheus/prometheus.yml`,
    replace `ORG` in the `metrics_path` property on line 6 with the namespace of your Docker organization.
 
-   ```yaml {title="prometheus/prometheus.yml",hl_lines="6",linenos=1}
+   ```yaml {title="prometheus/prometheus.yml",hl_lines="6",linenos=true}
    global:
      scrape_interval: 60s
      scrape_timeout: 40s

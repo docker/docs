@@ -272,7 +272,7 @@ module:
   proxy: https://proxy.golang.org,direct
   hugoVersion:
     extended: false
-    min: "0.141.0"
+    min: "0.156.0"
   mounts:
     # Mount the assets directory so it doesn't get overwritten
     - source: assets
@@ -297,7 +297,7 @@ module:
           target: content/reference/api/engine/version-history.md
         - source: docs
           target: content/reference/api/engine/version
-          includeFiles: "*.yaml"
+          files: ["*.yaml"]
 
     # BuildKit
     - path: github.com/moby/buildkit
@@ -306,7 +306,7 @@ module:
           target: content/reference/dockerfile.md
         - source: frontend/dockerfile/docs/rules
           target: content/reference/build-checks
-          includeFiles: "*.md"
+          files: ["*.md"]
         - source: docs/buildkitd.toml.md
           target: content/manuals/build/buildkit/toml-configuration.md
         - source: docs/attestations/slsa-definitions.md
@@ -327,10 +327,10 @@ module:
       mounts:
         - source: docs/extend
           target: content/manuals/engine/extend
-          excludeFiles:
-            - "EBS_volume.md"
-            - "plugins_metrics.md"
-            - "plugins_services.md"
+          files:
+            - "! EBS_volume.md"
+            - "! plugins_metrics.md"
+            - "! plugins_services.md"
         - source: docs/deprecated.md
           target: content/manuals/engine/deprecated.md
         - source: docs/reference/run.md
@@ -343,18 +343,18 @@ module:
       mounts:
         - source: docs/reference
           target: data/compose-cli
-          includeFiles: "*.yaml"
+          files: ["*.yaml"]
 
     # Model CLI
     - path: github.com/docker/model-runner/cmd/cli
       mounts:
         - source: docs/reference
           target: data/model-cli
-          includeFiles: "*.yaml"
+          files: ["*.yaml"]
 
     # MCP CLI
     - path: github.com/docker/mcp-gateway
       mounts:
         - source: docs/generator/reference
           target: data/mcp-cli
-          includeFiles: "*.yaml"
+          files: ["*.yaml"]
