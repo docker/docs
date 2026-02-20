@@ -1,0 +1,71 @@
+name: Nightly Documentation Scan
+
+on:
+  schedule:
+    # Run every day at 3am UTC
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: "Report issues but do not create them"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: nightly-docs-scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      HAS_APP_SECRETS: ${{ secrets.CAGENT_REVIEWER_APP_ID != '' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Ensure cache directory exists
+        run: mkdir -p "${{ github.workspace }}/.cache"
+
+      - name: Restore scanner memory
+        uses: actions/cache/restore@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
+        with:
+          path: ${{ github.workspace }}/.cache/scanner-memory.db
+          key: docs-scanner-memory-${{ github.repository }}-${{ github.run_id }}
+          restore-keys: |
+            docs-scanner-memory-${{ github.repository }}-
+
+      - name: Generate GitHub App token
+        if: env.HAS_APP_SECRETS == 'true'
+        id: app-token
+        continue-on-error: true
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2
+        with:
+          app_id: ${{ secrets.CAGENT_REVIEWER_APP_ID }}
+          private_key: ${{ secrets.CAGENT_REVIEWER_APP_PRIVATE_KEY }}
+
+      - name: Run documentation scan
+        uses: docker/cagent-action@latest
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token || github.token }}
+        with:
+          agent: ${{ github.workspace }}/.github/agents/docs-scanner.yaml
+          prompt: "${{ inputs['dry-run'] && 'DRY RUN MODE: Do not create any GitHub issues. Report what you would create but skip the gh issue create commands.' || 'Run the nightly documentation scan as described in your instructions.' }}"
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github-token: ${{ steps.app-token.outputs.token || github.token }}
+          timeout: 1200
+
+      - name: Save scanner memory
+        uses: actions/cache/save@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
+        if: always()
+        with:
+          path: ${{ github.workspace }}/.cache/scanner-memory.db
+          key: docs-scanner-memory-${{ github.repository }}-${{ github.run_id }}
