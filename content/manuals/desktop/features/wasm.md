@@ -17,7 +17,7 @@ params:
 
 > [!IMPORTANT]
 >
-> Wasm workloads will be deprecated and removed in a future Docker Desktop release. It is no longer actively maintained. 
+> Wasm workloads are deprecated and will be removed in a future Docker Desktop release. This feature is no longer actively maintained. 
 
 WebAssembly (Wasm) is a fast, light alternative to Linux and
 Windows containers.  With Docker Desktop, you can now run Wasm workloads side by side with traditional containers.
