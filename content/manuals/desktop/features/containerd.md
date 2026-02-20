@@ -1,36 +1,28 @@
 ---
 title: containerd image store
 weight: 80
-description: How to activate the containerd integration feature in Docker Desktop
+description: Learn about the containerd image store in Docker Desktop and how it extends image management capabilities.
 keywords: Docker, containerd, engine, image store, lazy-pull
 toc_max: 3
 aliases:
-- /desktop/containerd/
+  - /desktop/containerd/
 ---
 
-Docker Desktop is transitioning to use containerd for image and filesystem management. This page outlines the benefits, setup process, and new capabilities enabled by the containerd image store.
-
-> [!NOTE]
-> 
-> Docker Desktop maintains separate image stores for the classic and containerd image stores.
-> When switching between them, images and containers from the inactive store remain on disk but are hidden until you switch back.
+Docker Desktop uses containerd as its image store by default. The image store
+is the component responsible for pushing, pulling, and storing images on your
+filesystem. The containerd image store supports features like multi-platform
+images, image attestations, and alternative snapshotters.
 
 ## What is `containerd`?
 
-`containerd` is a container runtime that provides a lightweight, consistent interface for container lifecycle management. It is already used under the hood by Docker Engine for creating, starting, and stopping containers.
-
-Docker Desktop’s ongoing integration of containerd now extends to the image store, offering more flexibility and modern image support.
+`containerd` is a container runtime that provides a lightweight, consistent
+interface for container lifecycle and image management. It is used under the
+hood by Docker Engine for creating, starting, and stopping containers.
 
 ## What is the `containerd` image store?
 
 The image store is the component responsible for pushing, pulling,
 and storing images on the filesystem.
-
-The classic Docker image store is limited in the types of images that it supports.
-For example, it doesn't support image indices, containing manifest lists.
-When you create multi-platform images, for example,
-the image index resolves all the platform-specific variants of the image.
-An image index is also required when building images with attestations.
 
 The containerd image store extends the range of image types
 that the Docker Engine can natively interact with.
@@ -47,20 +39,33 @@ it's a prerequisite for unlocking a range of new use cases, including:
 [2]: https://github.com/containerd/nydus-snapshotter
 [3]: https://github.com/dragonflyoss/image-service
 
-## Enable the containerd image store
+## Classic image store
 
-The containerd image store is enabled by default in Docker Desktop version 4.52
-and later.
+The classic image store is Docker's legacy storage backend, replaced by the
+containerd image store. It doesn't support image indices or manifest lists, so
+you can't load multi-platform images locally or build images with attestations.
 
-To manually select which image store Docker Desktop uses:
+Most users have no reason to use the classic image store. It's available for
+cases where you need to match older behavior or have compatibility
+requirements.
+
+## Switch image stores
+
+The containerd image store is enabled by default in Docker Desktop version 4.34
+and later. To switch between image stores:
 
 1. Navigate to **Settings** in Docker Desktop.
 2. In the **General** tab, check or clear the **Use containerd for pulling and storing images** option.
 3. Select **Apply**.
 
+> [!NOTE]
+>
+> Docker Desktop maintains separate image stores for the classic and containerd image stores.
+> When switching between them, images and containers from the inactive store remain on disk but are hidden until you switch back.
+
 ## Build multi-platform images
 
-Enabling the containerd image store lets you build multi-platform images
+The containerd image store lets you build multi-platform images
 and load them to your local image store:
 
 <script async id="asciicast-ZSUI4Mi2foChLjbevl2dxt5GD" src="https://asciinema.org/a/ZSUI4Mi2foChLjbevl2dxt5GD.js"></script>
