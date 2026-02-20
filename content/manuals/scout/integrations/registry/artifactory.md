@@ -146,23 +146,22 @@ Scout.
 8. Continuously watch for new or updated images.
 
    Run `docker scout watch` with the `--refresh-registry` option to watch for
-   new images to index. The following is an example command:
+   new images to index.
+
+   The `docker scout watch` command is a long-running process that must
+   continue running indefinitely in the background to receive webhooks and
+   watch for new images. If you run it directly in a terminal and close the
+   session, the process will stop.
+
+   The following is an example command. You can run the process as a system
+   service, for example using `systemd` or `nohup`, to ensure it continues
+   running in the background.
 
    ```console
    $ docker scout watch --registry \
    "type=artifactory,registry=example.jfrog.io,api=https://example.jfrog.io/artifactory,include=*/frontend*,exclude=*/dta/*,repository=docker-local,port=9000,subdomain-mode=true" \
    --refresh-registry
    ```
-
-   > [!IMPORTANT]
-   >
-   > The `docker scout watch` command is a long-running process that must
-   > continue running indefinitely in the background to receive webhooks and
-   > watch for new images. If you run it directly in a terminal and close the
-   > session, the process will stop.
-   >
-   > You can run the process as a system service, for example using
-   > `systemd` or `nohup`, to ensure it continues running in the background.
 
 9. Optional. Set up Scout integration for real-time notifications from popular
    collaboration platforms. For details, see [Integrate Docker Scout with
