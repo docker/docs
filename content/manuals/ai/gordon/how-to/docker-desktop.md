@@ -35,8 +35,8 @@ to change it during a conversation:
 To disable Gordon:
 
 1. Open Docker Desktop Settings.
-2. Navigate to the **Beta features** section.
-3. Clear the **Enable Docker AI** option.
+2. Navigate to the **AI** section.
+3. Clear the **Enable Gordon** option.
 4. Select **Apply**.
 
 ## Configure tools

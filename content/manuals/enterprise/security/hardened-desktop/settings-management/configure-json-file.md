@@ -383,6 +383,12 @@ For more information, see [Networking](/manuals/desktop/features/networking.md#n
 | `enableInferenceCORS`       |               | Specifies the allowed CORS origins. Empty string to deny all,`*` to accept all, or a list of comma-separated values. This setting requires the Docker Model Runner and Enable host-side TCP support settings to be enabled first.       |         |
 | `enableInferenceGPUVariant` | Windows only  | Setting `enableInferenceGPUVariant` to `true` enables GPU-backed inference. The additional components required for this don't come by default with Docker Desktop, therefore they will be downloaded to `~/.docker/bin/inference`.  |         |
 
+### AI
+
+| Parameter                                            | OS | Description                                                                                                                                                                                                                                               | Version                                 |
+|:-----------------------------------------------------|----|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
+| `enableDockerAI`                                     |    | Setting `enableDockerAI` to `true` enables [Gordon](/manuals/ai/gordon/_index.md) by default. You can independently control this setting from the `allowBetaFeatures` setting.                            |                                         |
+
 ### Beta features
 
 > [!IMPORTANT]
@@ -392,7 +398,6 @@ For more information, see [Networking](/manuals/desktop/features/networking.md#n
 | Parameter                                            | OS | Description                                                                                                                                                                                                                                               | Version                                 |
 |:-----------------------------------------------------|----|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
 | `allowBetaFeatures`                                  |    | If `value` is set to `true`, beta features are enabled.                                                                                                                                                                                                   |                                         |
-| `enableDockerAI`                                     |    | If `allowBetaFeatures` is true, setting `enableDockerAI` to `true` enables [Docker AI (Ask Gordon)](/manuals/ai/gordon/_index.md) by default. You can independently control this setting from the `allowBetaFeatures` setting.                            |                                         |
 | `enableDockerMCPToolkit`                             |    | If `allowBetaFeatures` is true, setting `enableDockerMCPToolkit` to `true` enables the [MCP Toolkit feature](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md) by default. You can independently control this setting from the `allowBetaFeatures` setting. |                                         |
 | `allowExperimentalFeatures`                          |    | If `value` is set to `true`, experimental features are enabled.                                                                                                                                                                                           | Docker Desktop version 4.41 and earlier |
 

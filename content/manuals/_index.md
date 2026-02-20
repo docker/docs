@@ -38,7 +38,7 @@ params:
     link: /ai/cagent
   ai:
   - title: Ask Gordon
-    description: Streamline your workflow and get the most out of the Docker ecosystem with your personal AI assistant.
+    description: Streamline your workflow and get the most out of the Docker ecosystem with Gordon, your AI agent for Docker.
     icon: note_add
     link: /ai/gordon/
   - title: Docker Model Runner
@@ -121,7 +121,7 @@ Open source development and containerization technologies.
 
 ## AI
 
-All the Docker AI tools in one easy-to-access location.
+All AI tools in one easy-to-access location.
 
 {{< grid items=ai >}}
 
