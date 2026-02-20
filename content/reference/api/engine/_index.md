@@ -73,21 +73,21 @@ To see the highest version of the API your Docker daemon and client support, use
 ```console
 $ docker version
 Client: Docker Engine - Community
- Version:           29.2.0-rc.2
+ Version:           29.2.1
  API version:       1.53
  Go version:        go1.25.6
- Git commit:        d5ed037
- Built:             Mon Jan 19 12:05:12 2026
- OS/Arch:           linux/arm64
- Context:           default
+ Git commit:        a5c7197
+ Built:             Mon Feb  2 17:16:37 2026
+ OS/Arch:           darwin/arm64
+ Context:           desktop-linux
 
 Server: Docker Engine - Community
  Engine:
-  Version:          29.2.0-rc.2
+  Version:          29.2.1
   API version:      1.53 (minimum version 1.44)
   Go version:       go1.25.6
-  Git commit:       f164e50
-  Built:            Mon Jan 19 12:05:12 2026
+  Git commit:       6bc6209
+  Built:            Mon Feb  2 17:16:47 2026
   OS/Arch:          linux/arm64
   ...
 ```
@@ -132,7 +132,11 @@ You can specify the API version to use in any of the following ways:
 
 | Docker version | Maximum API version                          | Change log                                                         |
 | :------------- | :------------------------------------------- | :----------------------------------------------------------------- |
+| 29.2           | [1.53](/reference/api/engine/version/v1.53/) | [changes](/reference/api/engine/version-history/#v153-api-changes) |
+| 29.1           | [1.52](/reference/api/engine/version/v1.52/) | [changes](/reference/api/engine/version-history/#v152-api-changes) |
 | 29.0           | [1.52](/reference/api/engine/version/v1.52/) | [changes](/reference/api/engine/version-history/#v152-api-changes) |
+| 28.5           | [1.51](/reference/api/engine/version/v1.51/) | [changes](/reference/api/engine/version-history/#v151-api-changes) |
+| 28.4           | [1.51](/reference/api/engine/version/v1.51/) | [changes](/reference/api/engine/version-history/#v151-api-changes) |
 | 28.3           | [1.51](/reference/api/engine/version/v1.51/) | [changes](/reference/api/engine/version-history/#v151-api-changes) |
 | 28.2           | [1.50](/reference/api/engine/version/v1.50/) | [changes](/reference/api/engine/version-history/#v150-api-changes) |
 | 28.1           | [1.49](/reference/api/engine/version/v1.49/) | [changes](/reference/api/engine/version-history/#v149-api-changes) |
