@@ -1,14 +1,14 @@
-{{ define "main" }}
+{{ define "article" }}
   {{ $data := "" }}
   {{ if .Params.datafolder }}
     {{ $data = index (index site.Data .Params.datafolder) .Params.datafile }}
   {{ else }}
     {{ $data = index site.Data .Params.datafile }}
   {{ end }}
+
   {{ .Store.Set "headings" slice }}
   {{ .Store.Set "subheadings" slice }}
-  <div class="flex w-full">
-    <article class="prose min-w-0 flex-[2_2_0%] max-w-4xl dark:prose-invert">
+  <article class="prose min-w-0 max-w-4xl dark:prose-invert">
     {{ partial "breadcrumbs.html" . }}
     <div class="flex items-start justify-between gap-4">
       <h1>{{ .Title }}</h1>
@@ -200,11 +200,11 @@ can be removed entirely in a future release.
       </table>
     {{ end }}
   </article>
+{{ end }}
 
-  <div class="hidden flex-1 min-w-52 lg:block">
-    <aside
-      class="sticky top-16 h-[calc(100vh-64px)] min-w-52 space-y-4 overflow-y-auto py-4 w-full"
-      >
+{{ define "right" }}
+  <div class="hidden min-w-52 flex-1 lg:block">
+    <aside class="sticky top-16 h-[calc(100vh-64px)] min-w-52 space-y-4 overflow-y-auto py-4 w-full">
       <div id="TableOfContents">
         <div class="text-lg pb-2">{{ T "tableOfContents" }}</div>
         <nav class="toc">
@@ -229,5 +229,4 @@ can be removed entirely in a future release.
       </div>
     </aside>
   </div>
-
 {{ end }}

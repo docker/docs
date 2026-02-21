@@ -1,7 +1,11 @@
-{{ define "main" }}
-{{ partial "breadcrumbs.html" . }}
+{{ define "article" }}
 <article class="prose max-w-none dark:prose-invert">
+  {{ partial "breadcrumbs.html" . }}
   <h1 data-pagefind-weight="10" class="scroll-mt-36">{{ .Title }}</h1>
+  <div class="block lg:hidden">
+    {{ partialCached "pagemeta.html" . . }}
+    <hr />
+  </div>
   <div class="text-lg">{{ .Summary }}</div>
   {{- if or .Params.proficiencyLevel .Params.time .Params.prerequisites }}
   <div class="not-prose">
@@ -39,3 +43,5 @@
   </ol>
 </article>
 {{ end }}
+
+{{ define "right" }}{{ end }}

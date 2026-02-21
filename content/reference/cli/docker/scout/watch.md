@@ -1,11 +1,10 @@
 ---
 datafolder: scout-cli
 datafile: docker_scout_watch
-markdownfile: scout_watch.md
 aliases:
 - /engine/reference/commandline/scout_watch
 title: docker scout watch
-layout: scout-cli
+layout: cli
 ---
 
 <!--

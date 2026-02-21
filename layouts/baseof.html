@@ -69,6 +69,20 @@
       >
         {{ partial "pagefind-meta.html" . }}
         {{ block "main" . }}
+          <div class="flex w-full gap-8">
+            <div class="min-w-0 flex-[2_2_0%]">
+              {{ block "article" . }}
+                <article class="prose dark:prose-invert max-w-4xl">
+                  {{ partial "content-default.html" . }}
+                </article>
+              {{ end }}
+            </div>
+            {{ block "right" . }}
+              <div class="-mt-8 hidden min-w-48 flex-1 lg:block">
+                {{ partial "aside.html" . }}
+              </div>
+            {{ end }}
+          </div>
         {{ end }}
       </div>
     </main>
