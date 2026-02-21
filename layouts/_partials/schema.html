@@ -43,6 +43,16 @@
   {{- $schema = merge $schema (dict "keywords" .) -}}
 {{- end -}}
 
+{{- /* Add proficiency level if specified in frontmatter */ -}}
+{{- with .Params.proficiencyLevel -}}
+  {{- $schema = merge $schema (dict "proficiencyLevel" .) -}}
+{{- end -}}
+
+{{- /* Add prerequisites if specified in frontmatter */ -}}
+{{- with .Params.prerequisites -}}
+  {{- $schema = merge $schema (dict "dependencies" .) -}}
+{{- end -}}
+
 {{- /* Add time required if specified in frontmatter */ -}}
 {{- with .Params.time -}}
   {{- /* Convert "20 minutes" to ISO 8601 duration "PT20M" */ -}}

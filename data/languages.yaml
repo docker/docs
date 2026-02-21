@@ -1,0 +1,30 @@
+c-sharp:
+  title: "C#"
+  icon: https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg
+cpp:
+  title: C++
+  icon: https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg
+go:
+  title: Go
+  icon: https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg
+java:
+  title: Java
+  icon: https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg
+js:
+  title: JavaScript
+  icon: https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg
+php:
+  title: PHP
+  icon: https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg
+python:
+  title: Python
+  icon: https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg
+r:
+  title: R
+  icon: https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/r/r-original.svg
+ruby:
+  title: Ruby
+  icon: https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ruby/ruby-original.svg
+rust:
+  title: Rust
+  icon: https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg

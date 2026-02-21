@@ -8,9 +8,7 @@ disableHugoGeneratorInject: true
 ignoreLogs:
   - cascade-pattern-with-extension
 
-taxonomies:
-  tag: tags
-  language: languages
+taxonomies: {}
 
 # Remove the /manuals prefix for content in the manuals section
 permalinks:
@@ -92,10 +90,6 @@ outputs:
   section:
     - html
     - markdown
-  taxonomy:
-    - html
-  term:
-    - html
 
 languages:
   en:

@@ -1,0 +1,9 @@
+{{- range . -}}
+  {{- $tag := index site.Data.tags . -}}
+  {{- with $tag }}
+  <span class="chip">
+    <span class="icon-svg icon-sm pb-0.5">{{ partialCached "icon" "tag" "tag" }}</span>
+    {{ .title }}
+  </span>
+  {{- end -}}
+{{- end -}}

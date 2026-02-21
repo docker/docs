@@ -4,8 +4,11 @@
   {{- $desc := partialCached "utils/description.html" . . -}}
   {{- $kwd := partialCached "utils/keywords.html" . . -}}
   {{- $tags := slice -}}
-  {{- range (.GetTerms "tags") -}}
-    {{ $tags = $tags | append .LinkTitle }}
+  {{- range (.Params.tags | default slice) -}}
+    {{- $tagData := index site.Data.tags . -}}
+    {{- with $tagData -}}
+      {{ $tags = $tags | append .title }}
+    {{- end -}}
   {{- end -}}
   {{- jsonify (dict "url" .Permalink "title" $title "description" $desc "keywords" $kwd "tags" $tags) -}},
 {{- end -}}
