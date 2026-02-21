@@ -1,3 +1,0 @@
----
-title: Docker Hardened Images
----

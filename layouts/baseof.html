@@ -53,7 +53,11 @@
           <!-- Actual Sidebar Content -->
           {{ block "left" . }}
             {{ partial "sidebar/mainnav.html" . }}
-            {{ partial "sidebar/sections.html" . }}
+            {{ if eq .Type "guides" }}
+              {{ partial "sidebar/guides.html" . }}
+            {{ else }}
+              {{ partial "sidebar/sections.html" . }}
+            {{ end }}
           {{ end }}
         </div>
       </div>

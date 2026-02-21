@@ -60,6 +60,32 @@ params:
 ---
 ```
 
+### Series (guide) pages
+
+Section pages under `content/guides/` automatically use the `series` layout
+(via a Hugo cascade in `hugo.yaml`). Series pages support additional front
+matter parameters for the metadata card:
+
+```yaml
+---
+title: Getting started
+description: Learn the basics of Docker
+summary: |
+  A longer summary shown on the series landing page.
+params:
+  proficiencyLevel: Beginner
+  time: 15 minutes
+  prerequisites: None
+---
+```
+
+| Field            | Description                              |
+| ---------------- | ---------------------------------------- |
+| summary          | Extended description for the series page |
+| proficiencyLevel | Skill level (Beginner, Intermediate)     |
+| time             | Estimated time to complete               |
+| prerequisites    | Prerequisites or "None"                  |
+
 ## Shortcodes
 
 Shortcodes are reusable components that add rich functionality to your

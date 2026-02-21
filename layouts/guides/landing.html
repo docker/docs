@@ -40,7 +40,7 @@
     >
       <div class="pl-2"><strong>Tags</strong></div>
       <fieldset class="flex flex-col gap-2">
-        {{- range $name, $taxonomy := where site.Taxonomies.tags ".Page.Section" "guides" }}
+        {{- range $name, $data := site.Data.tags }}
           {{- $id := anchorize (fmt.Printf "tag-%s" $name) }}
           <div class="flex gap-2 pl-2">
             <input
@@ -51,14 +51,14 @@
               :checked="filters['tags'].includes('{{ $name }}')"
             />
             <label class="select-none" for="{{ $id }}"
-              >{{ .Page.LinkTitle }}</label
+              >{{ $data.title }}</label
             >
           </div>
         {{ end }}
       </fieldset>
       <div class="pl-2"><strong>Languages</strong></div>
       <fieldset class="flex flex-wrap gap-2 pl-2">
-        {{- range $name, $taxonomy := where site.Taxonomies.languages ".Page.Type" "guides" }}
+        {{- range $name, $data := site.Data.languages }}
           {{- $id := anchorize (fmt.Printf "lang-%s" $name) }}
           <button
             class="border-divider-light dark:border-divider-dark flex gap-1 rounded-full border bg-white px-2 py-1 dark:bg-gray-800"
@@ -68,10 +68,10 @@
             <img
               height="18"
               width="18"
-              title="{{ .Page.LinkTitle }}"
-              src="{{ .Page.Params.icon }}"
+              title="{{ $data.title }}"
+              src="{{ $data.icon }}"
             />
-            <span>{{ .Page.LinkTitle }}</span>
+            <span>{{ $data.title }}</span>
           </button>
         {{ end }}
       </fieldset>
@@ -189,12 +189,12 @@
             </p>
           </div>
           <div class="flex items-center gap-2 pl-4">
-            {{- range $name, $taxonomy := site.Taxonomies.tags }}
+            {{- range $name, $data := site.Data.tags }}
               <div x-show="filters.tags.includes('{{ $name }}')">
-                {{ template "termchip" $taxonomy.Page.LinkTitle }}
+                {{ template "termchip" $data.title }}
               </div>
             {{- end }}
-            {{- range $name, $taxonomy := site.Taxonomies.languages }}
+            {{- range $name, $data := site.Data.languages }}
               <div
                 x-show="filters.languages.includes('{{ $name }}')"
                 class="border-divider-light dark:border-divider-dark inline-flex items-center gap-1 rounded-full border bg-gray-100 px-2 text-sm text-gray-200 select-none dark:bg-gray-800 dark:text-gray-300"
@@ -203,10 +203,10 @@
                   class="py-1"
                   height="18"
                   width="18"
-                  title="{{ .Page.LinkTitle }}"
-                  src="{{ .Page.Params.icon }}"
+                  title="{{ $data.title }}"
+                  src="{{ $data.icon }}"
                 />
-                <span>{{ .Page.LinkTitle }}</span>
+                <span>{{ $data.title }}</span>
               </div>
             {{- end }}
           </div>
@@ -241,11 +241,11 @@
     class="flex items-center justify-between gap-8 text-sm text-gray-400 dark:text-gray-300"
   >
     <div class="flex flex-wrap gap-2 md:flex-nowrap">
-      {{- $langs := .GetTerms "languages" }}
-      {{ partial "languages" $langs }}
-      {{- $tags := .GetTerms "tags" }}
-      {{- range $tags }}
-        {{ template "termchip" .Page.LinkTitle }}
+      {{- with .Params.languages }}
+        {{ partial "guide-languages.html" . }}
+      {{- end }}
+      {{- with .Params.tags }}
+        {{ partial "guide-tags.html" . }}
       {{- end }}
     </div>
     {{- with .Params.time }}

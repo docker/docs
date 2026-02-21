@@ -12,6 +12,17 @@
       <hr />
     </div>
     {{ .Content }}
+    {{- if and (eq .Type "guides") (not .IsSection) (ne .CurrentSection .FirstSection) -}}
+      {{- with .PrevInSection -}}
+        <div class="not-prose col-start-2 my-4">
+          <a
+            href="{{ .Permalink }}"
+            class="cursor-pointer rounded-sm bg-blue-500 px-4 py-2 text-white hover:bg-blue-400 dark:bg-blue-800 dark:hover:bg-blue-700"
+            >{{ .Title }} &raquo;</a
+          >
+        </div>
+      {{- end -}}
+    {{- end -}}
   </article>
   <div class="-mt-8 hidden min-w-48 flex-1 lg:block">
     {{ partial "aside.html" . }}
