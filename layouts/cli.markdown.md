@@ -1,9 +1,4 @@
-{{- $data := "" }}
-{{- if .Params.datafolder }}
-  {{- $data = index (index site.Data .Params.datafolder) .Params.datafile }}
-{{- else }}
-  {{- $data = index site.Data .Params.datafile }}
-{{- end -}}
+{{- $data := index (index site.Data .Params.datafolder) .Params.datafile -}}
 # {{ .Title }}
 
 {{ with $data.short }}**Description:** {{ . }}{{ end }}
@@ -11,8 +6,6 @@
 {{ with $data.usage }}**Usage:** `{{ . }}`{{ end }}
 
 {{ with $data.aliases }}{{ $aliases := strings.Replace . (printf "%s, " $.Title) "" }}**Aliases:** {{ range $i, $alias := (strings.Split $aliases ", ") }}{{ if $i }}, {{ end }}`{{ $alias }}`{{ end }}{{ end }}
-
-{{ .Content }}
 
 {{ if $data.deprecated }}> [!WARNING]
 > **Deprecated**

@@ -50,7 +50,7 @@ Valid profiles names follow the regex format of `[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
 
 ## Start specific profiles
 
-To start a specific profile supply the `--profile` [command-line option](/reference/cli/docker/compose.md) or
+To start a specific profile supply the `--profile` [command-line option](/reference/cli/docker/compose/) or
 use the [`COMPOSE_PROFILES` environment variable](environment-variables/envvars.md#compose_profiles):
 
 ```console
@@ -130,7 +130,7 @@ If the targeted service has dependencies that are also gated behind a profile, y
 
 ## Stop application and services with specific profiles
 
-As with starting specific profiles, you can use the `--profile` [command-line option](/reference/cli/docker/compose.md#use--p-to-specify-a-project-name) or
+As with starting specific profiles, you can use the `--profile` [command-line option](/reference/cli/docker/compose/#use--p-to-specify-a-project-name) or
 use the [`COMPOSE_PROFILES` environment variable](environment-variables/envvars.md#compose_profiles):
 
 ```console

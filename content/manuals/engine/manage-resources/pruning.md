@@ -52,7 +52,7 @@ $ docker image prune -a --filter "until=24h"
 ```
 
 Other filtering expressions are available. See the
-[`docker image prune` reference](/reference/cli/docker/image/prune.md)
+[`docker image prune` reference](/reference/cli/docker/image/prune/)
 for more examples.
 
 ## Prune containers
@@ -83,7 +83,7 @@ $ docker container prune --filter "until=24h"
 ```
 
 Other filtering expressions are available. See the
-[`docker container prune` reference](/reference/cli/docker/container/prune.md)
+[`docker container prune` reference](/reference/cli/docker/container/prune/)
 for more examples.
 
 ## Prune volumes
@@ -111,7 +111,7 @@ $ docker volume prune --filter "label!=keep"
 ```
 
 Other filtering expressions are available. See the
-[`docker volume prune` reference](/reference/cli/docker/volume/prune.md)
+[`docker volume prune` reference](/reference/cli/docker/volume/prune/)
 for more examples.
 
 ## Prune networks
@@ -140,7 +140,7 @@ $ docker network prune --filter "until=24h"
 ```
 
 Other filtering expressions are available. See the
-[`docker network prune` reference](/reference/cli/docker/network/prune.md)
+[`docker network prune` reference](/reference/cli/docker/network/prune/)
 for more examples.
 
 ## Prune everything
@@ -188,5 +188,5 @@ $ docker system prune --filter "until=24h"
 ```
 
 Other filtering expressions are available. See the
-[`docker system prune` reference](/reference/cli/docker/system/prune.md)
+[`docker system prune` reference](/reference/cli/docker/system/prune/)
 for more examples.

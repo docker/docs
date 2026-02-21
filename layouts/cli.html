@@ -1,10 +1,5 @@
 {{ define "article" }}
-  {{ $data := "" }}
-  {{ if .Params.datafolder }}
-    {{ $data = index (index site.Data .Params.datafolder) .Params.datafile }}
-  {{ else }}
-    {{ $data = index site.Data .Params.datafile }}
-  {{ end }}
+  {{ $data := index (index site.Data .Params.datafolder) .Params.datafile }}
 
   {{ .Store.Set "headings" slice }}
   {{ .Store.Set "subheadings" slice }}
@@ -50,7 +45,6 @@
         </tbody>
       </table>
     </div>
-    {{ .Content }}
     {{ if $data.deprecated }}
       {{ markdownify `
 > [!WARNING]
@@ -200,6 +194,7 @@ can be removed entirely in a future release.
       </table>
     {{ end }}
   </article>
+
 {{ end }}
 
 {{ define "right" }}

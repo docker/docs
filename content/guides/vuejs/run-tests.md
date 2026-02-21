@@ -108,7 +108,7 @@ Duration:   718ms
 
 > [!NOTE]
 > For more information about Compose commands, see the [Compose CLI
-> reference](/reference/cli/docker/compose/_index.md).
+> reference](/reference/cli/docker/compose/).
 
 ---
 

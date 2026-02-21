@@ -53,7 +53,7 @@ maintain productivity while enhancing security.
 
 | Concern           | How Docker Hardened Images help                                                                                                                                                                                         |
 |-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Debuggability | Hardened images exclude shells and CLI tools by default. Use [Docker Debug](../../../reference/cli/docker/debug.md) to temporarily attach a debug sidecar for troubleshooting without modifying the original container. |
+| Debuggability | Hardened images exclude shells and CLI tools by default. Use [Docker Debug](/reference/cli/docker/debug/) to temporarily attach a debug sidecar for troubleshooting without modifying the original container. |
 | Familiarity   | DHI supports multiple base images, including Alpine and Debian variants, so you can choose a familiar environment while still benefiting from hardening practices.                                                        |
 | Flexibility   | Runtime immutability helps secure your containers. Use multi-stage builds and CI/CD to control changes, and optionally use dev-focused base images during development.                                                  |
 

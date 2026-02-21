@@ -18,7 +18,7 @@ Use this procedure to back up and restore your images and container data. This i
 
 ### Save your data
 
-1. Commit your containers to an image with [`docker container commit`](/reference/cli/docker/container/commit.md).
+1. Commit your containers to an image with [`docker container commit`](/reference/cli/docker/container/commit/).
 
    Committing a container stores filesystem changes and some container configurations, such as labels and environment variables, as a local image. Be aware that environment variables may contain sensitive
    information such as passwords or proxy-authentication, so take care when pushing the resulting image to a registry.
@@ -28,14 +28,14 @@ Use this procedure to back up and restore your images and container data. This i
 
    If you used a [named volume](/manuals/engine/storage/_index.md#more-details-about-mount-types) to store container data, such as databases, refer to the [back up, restore, or migrate data volumes](/manuals/engine/storage/volumes.md#back-up-restore-or-migrate-data-volumes) page in the storage section.
 
-2. Use [`docker push`](/reference/cli/docker/image/push.md) to push any
+2. Use [`docker push`](/reference/cli/docker/image/push/) to push any
    images you have built locally and want to keep to the [Docker Hub registry](/manuals/docker-hub/_index.md).
    
    > [!TIP]
    >
    > [Set the repository visibility to private](/manuals/docker-hub/repos/_index.md) if your image includes sensitive content.
 
-   Alternatively, use [`docker image save -o images.tar image1 [image2 ...]`](/reference/cli/docker/image/save.md)
+   Alternatively, use [`docker image save -o images.tar image1 [image2 ...]`](/reference/cli/docker/image/save/)
    to save any images you want to keep to a local `.tar` file. 
 
 After backing up your data, you can uninstall the current version of Docker Desktop
@@ -57,7 +57,7 @@ and [install a different version](/manuals/desktop/release-notes.md) or reset Do
       $ docker image load -i images.tar
       ```
 
-2. Re-create your containers if needed, using [`docker run`](/reference/cli/docker/container/run.md),
+2. Re-create your containers if needed, using [`docker run`](/reference/cli/docker/container/run/),
    or [Docker Compose](/manuals/compose/_index.md).
 
 To restore volume data, refer to [backup, restore, or migrate data volumes](/manuals/engine/storage/volumes.md#back-up-restore-or-migrate-data-volumes). 

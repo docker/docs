@@ -183,8 +183,8 @@ $ docker scout cves --format only-packages --only-vuln-packages \
 For more information about these commands and how to use them, refer to the CLI
 reference documentation:
 
-- [`docker scout quickview`](/reference/cli/docker/scout/quickview.md)
-- [`docker scout cves`](/reference/cli/docker/scout/cves.md)
+- [`docker scout quickview`](/reference/cli/docker/scout/quickview/)
+- [`docker scout cves`](/reference/cli/docker/scout/cves/)
 
 ## Vulnerability severity assessment
 

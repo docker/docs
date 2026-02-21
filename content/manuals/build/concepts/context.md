@@ -319,7 +319,7 @@ either SSH or token-based authentication.
 Buildx automatically detects and uses SSH credentials if the Git context you
 specify is an SSH or Git address. By default, this uses `$SSH_AUTH_SOCK`.
 You can configure the SSH credentials to use with the
-[`--ssh` flag](/reference/cli/docker/buildx/build.md#ssh).
+[`--ssh` flag](/reference/cli/docker/buildx/build/#ssh).
 
 ```console
 $ docker buildx build --ssh default git@github.com:user/private.git
@@ -327,7 +327,7 @@ $ docker buildx build --ssh default git@github.com:user/private.git
 
 If you want to use token-based authentication instead, you can pass the token
 using the
-[`--secret` flag](/reference/cli/docker/buildx/build.md#secret).
+[`--secret` flag](/reference/cli/docker/buildx/build/#secret).
 
 ```console
 $ GIT_AUTH_TOKEN=<token> docker buildx build \
@@ -802,5 +802,5 @@ $ docker buildx bake app
 
 For more information about working with named contexts, see:
 
-- [`--build-context` CLI reference](/reference/cli/docker/buildx/build.md#build-context)
+- [`--build-context` CLI reference](/reference/cli/docker/buildx/build/#build-context)
 - [Using Bake with additional contexts](/manuals/build/bake/contexts.md)

@@ -23,6 +23,13 @@ cascade:
       path: /reference/samples/**
       kind: page
     type: samples
+  # CLI reference pages use the cli layout (data-driven from YAML)
+  - target:
+      path: /reference/cli/docker
+    layout: cli
+  - target:
+      path: /reference/cli/docker/**
+    layout: cli
 
 # Remove the /manuals prefix for content in the manuals section
 permalinks:

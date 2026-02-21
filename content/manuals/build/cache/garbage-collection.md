@@ -6,8 +6,8 @@ aliases:
   - /build/building/cache/garbage-collection/
 ---
 
-While [`docker builder prune`](/reference/cli/docker/builder/prune.md)
-or [`docker buildx prune`](/reference/cli/docker/buildx/prune.md)
+While [`docker builder prune`](/reference/cli/docker/builder/prune/)
+or [`docker buildx prune`](/reference/cli/docker/buildx/prune/)
 commands run at once, Garbage Collection (GC) runs periodically and follows an
 ordered list of prune policies. The BuildKit daemon clears the build cache when
 the cache size becomes too big, or when the cache age expires.

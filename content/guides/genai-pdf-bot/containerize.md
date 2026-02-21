@@ -133,7 +133,7 @@ application using Docker.
 
 Related information:
 
-- [docker init CLI reference](../../../reference/cli/docker/init.md)
+- [docker init CLI reference](/reference/cli/docker/init/)
 
 ## Next steps
 

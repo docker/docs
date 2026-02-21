@@ -85,7 +85,7 @@ To list all the services along with their current status:
 $ docker compose ps
 ```
 
-For a full list of all the Compose CLI commands, see the [reference documentation](/reference/cli/docker/compose/_index.md).
+For a full list of all the Compose CLI commands, see the [reference documentation](/reference/cli/docker/compose/).
 
 ## Illustrative example
 

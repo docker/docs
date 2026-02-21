@@ -73,7 +73,7 @@ $ docker run -d -P --name webserver nginx
 Alternatively, you can also use [host networking](/manuals/engine/network/drivers/host.md#docker-desktop)
 to give the container direct access to the network stack of the host.
 
-See the [run command](/reference/cli/docker/container/run.md) for more details on
+See the [run command](/reference/cli/docker/container/run/) for more details on
 publish options used with `docker run`.
 
 All inbound connections pass through the Docker Desktop backend process (`com.docker.backend` (Mac), `com.docker.backend` (Windows), or `qemu` (Linux), which handles port forwarding into the VM.

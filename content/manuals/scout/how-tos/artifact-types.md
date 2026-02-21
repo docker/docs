@@ -176,6 +176,6 @@ $ docker scout sbom --format spdx -o sbom.spdx.json archive://scout-cli.tar
 
 Read about the commands and supported flags in the CLI reference documentation:
 
-- [`docker scout quickview`](/reference/cli/docker/scout/quickview.md)
-- [`docker scout cves`](/reference/cli/docker/scout/cves.md)
-- [`docker scout compare`](/reference/cli/docker/scout/compare.md)
+- [`docker scout quickview`](/reference/cli/docker/scout/quickview/)
+- [`docker scout cves`](/reference/cli/docker/scout/cves/)
+- [`docker scout compare`](/reference/cli/docker/scout/compare/)

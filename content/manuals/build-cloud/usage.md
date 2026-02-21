@@ -144,7 +144,7 @@ The traffic is encrypted and secrets are never stored in the build cache.
 >
 > If you're misusing build arguments to pass credentials, authentication
 > tokens, or other secrets, you should refactor your build to pass the secrets using
-> [secret mounts](/reference/cli/docker/buildx/build.md#secret) instead.
+> [secret mounts](/reference/cli/docker/buildx/build/#secret) instead.
 > Build arguments are stored in the cache and their values are exposed through attestations.
 > Secret mounts don't leak outside of the build and are never included in attestations.
 

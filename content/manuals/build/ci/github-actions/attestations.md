@@ -34,7 +34,7 @@ attestations to your image, with the following conditions:
 > arguments to pass secrets to your build, such as user credentials or
 > authentication tokens, those secrets are exposed in the provenance
 > attestation. Refactor your build to pass those secrets using
-> [secret mounts](/reference/cli/docker/buildx/build.md#secret)
+> [secret mounts](/reference/cli/docker/buildx/build/#secret)
 > instead. Also remember to rotate any secrets you may have exposed.
 
 ## Max-level provenance
