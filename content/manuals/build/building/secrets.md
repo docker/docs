@@ -37,7 +37,7 @@ First you need to pass the secret into the `docker build` command, and then you
 need to consume the secret in your Dockerfile.
 
 To pass a secret to a build, use the [`docker build --secret`
-flag](/reference/cli/docker/buildx/build.md#secret), or the
+flag](/reference/cli/docker/buildx/build/#secret), or the
 equivalent options for [Bake](../bake/reference.md#targetsecret).
 
 {{< tabs >}}
@@ -84,8 +84,8 @@ builds, such as API tokens, passwords, or SSH keys.
 ### Sources
 
 The source of a secret can be either a
-[file](/reference/cli/docker/buildx/build.md#file) or an
-[environment variable](/reference/cli/docker/buildx/build.md#env).
+[file](/reference/cli/docker/buildx/build/#file) or an
+[environment variable](/reference/cli/docker/buildx/build/#env).
 When you use the CLI or Bake, the type can be detected automatically. You can
 also specify it explicitly with `type=file` or `type=env`.
 
@@ -159,7 +159,7 @@ ADD git@github.com:me/myprivaterepo.git /src/
 ```
 
 To pass an SSH socket the build, you use the [`docker build --ssh`
-flag](/reference/cli/docker/buildx/build.md#ssh), or equivalent
+flag](/reference/cli/docker/buildx/build/#ssh), or equivalent
 options for [Bake](../bake/reference.md#targetssh).
 
 ```console

@@ -6,7 +6,7 @@ keywords: build, buildkit, configuration, buildx, network, cni, registry
 
 If you create a `docker-container` or `kubernetes` builder with Buildx, you can
 apply a custom [BuildKit configuration](toml-configuration.md) by passing the
-[`--buildkitd-config` flag](/reference/cli/docker/buildx/create.md#buildkitd-config)
+[`--buildkitd-config` flag](/reference/cli/docker/buildx/create/#buildkitd-config)
 to the `docker buildx create` command.
 
 ## Registry mirror
@@ -166,7 +166,7 @@ ADD https://raw.githubusercontent.com/moby/buildkit/${BUILDKIT_VERSION}/hack/fix
 ```
 
 Now you can build this image, and create a builder instance from it using
-[the `--driver-opt image` option](/reference/cli/docker/buildx/create.md#driver-opt):
+[the `--driver-opt image` option](/reference/cli/docker/buildx/create/#driver-opt):
 
 ```console
 $ docker buildx build --tag buildkit-cni:local --load .
@@ -183,7 +183,7 @@ $ docker buildx create --use --bootstrap \
 
 You can limit the parallelism of the BuildKit solver, which is particularly useful
 for low-powered machines, using a [BuildKit configuration](toml-configuration.md)
-while creating a builder with the [`--buildkitd-config` flag](/reference/cli/docker/buildx/create.md#buildkitd-config).
+while creating a builder with the [`--buildkitd-config` flag](/reference/cli/docker/buildx/create/#buildkitd-config).
 
 ```toml
 # /etc/buildkitd.toml

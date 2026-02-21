@@ -10,7 +10,7 @@ aliases:
 
 Exporters save your build results to a specified output type. You specify the
 exporter to use with the
-[`--output` CLI option](/reference/cli/docker/buildx/build.md#output).
+[`--output` CLI option](/reference/cli/docker/buildx/build/#output).
 Buildx supports the following exporters:
 
 - `image`: exports the build result to a container image.

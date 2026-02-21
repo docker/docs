@@ -178,7 +178,7 @@ $ docker network create my-net
 
 You can specify the subnet, the IP address range, the gateway, and other
 options. See the
-[docker network create](/reference/cli/docker/network/create.md#specify-advanced-options)
+[docker network create](/reference/cli/docker/network/create/#specify-advanced-options)
 reference or the output of `docker network create --help` for details.
 
 Use the `docker network rm` command to remove a user-defined bridge

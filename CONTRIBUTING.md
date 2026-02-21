@@ -111,14 +111,17 @@ If this command doesn't result in any errors, you're good to go!
 
 ## Content not edited here
 
-CLI reference documentation is maintained in upstream repositories. It's
-partially generated from code, and is only vendored here for publishing. To
-update the CLI reference docs, refer to the corresponding repository:
+CLI reference documentation is maintained in upstream repositories and
+generated from YAML data files in `data/cli/`. A Hugo content adapter
+(`content/reference/cli/_content.gotmpl`) turns these data files into pages
+automatically. To update the CLI reference docs, refer to the corresponding
+repository:
 
 - [docker/cli](https://github.com/docker/cli)
 - [docker/buildx](https://github.com/docker/buildx)
 - [docker/compose](https://github.com/docker/compose)
 - [docker/model-runner](https://github.com/docker/model-runner)
+- [docker/mcp-gateway](https://github.com/docker/mcp-gateway)
 
 Feel free to raise an issue on this repository if you're not sure how to
 proceed, and we'll help out.

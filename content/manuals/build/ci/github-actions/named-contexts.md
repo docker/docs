@@ -5,7 +5,7 @@ description: Use additional contexts in multi-stage builds with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, context
 ---
 
-You can define [additional build contexts](/reference/cli/docker/buildx/build.md#build-context),
+You can define [additional build contexts](/reference/cli/docker/buildx/build/#build-context),
 and access them in your Dockerfile with `FROM name` or `--from=name`. When
 Dockerfile defines a stage with the same name it's overwritten.
 
