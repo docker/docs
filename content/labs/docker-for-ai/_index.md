@@ -3,7 +3,7 @@ title: "Docker for AI Labs: Hands-on learning with Docker's AI tools"
 linkTitle: Docker for AI
 description: |
   Master AI application development with Docker through interactive,
-  hands-on labspacespaces covering Docker Model Runner, MCP Gateway, cagent, and more.
+  hands-on labspaces covering Docker Model Runner, MCP Gateway, cagent, and more.
 summary: |
   Learn to build agentic apps, configure MCP servers, fine-tune models, and
   create intelligent agent teams using Docker's AI toolchain.
