@@ -18,6 +18,12 @@
   {{- $schema = merge $schema (dict "dateModified" (time.Format "2006-01-02T15:04:05Z07:00" .)) -}}
 {{- end -}}
 
+{{- /* Add mainEntityOfPage and language */ -}}
+{{- $schema = merge $schema (dict
+  "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+  "inLanguage" site.Language.Lang
+) -}}
+
 {{- /* Add author and publisher */ -}}
 {{- $logoUrl := printf "%sassets/images/docker-logo.png" (strings.TrimSuffix "/" site.BaseURL | printf "%s/") -}}
 {{- $org := dict
