@@ -1,0 +1,21 @@
+{{ define "left" }}
+  {{ partial "sidebar/mainnav.html" . }}
+  {{ partial "sidebar/guides.html" . }}
+{{ end }}
+
+{{ define "main" }}
+  {{ partial "content-default.html" . }}
+  <div class="prose dark:prose-invert max-w-4xl">
+    {{ if (.Store.Get "multipage") }}
+      {{- with .PrevInSection }}
+        <div class="not-prose col-start-2 my-4">
+          <a
+            href="{{ .Permalink }}"
+            class="cursor-pointer rounded-sm bg-blue-500 px-4 py-2 text-white hover:bg-blue-400 dark:bg-blue-800 dark:hover:bg-blue-700"
+            >{{ .Title }} »</a
+          >
+        </div>
+      {{- end }}
+    {{- end }}
+  </div>
+{{ end }}
