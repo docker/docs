@@ -1,3 +1,5 @@
-{{ define "main" }}
-  {{ partial "content-default.html" . }}
+{{ define "article" }}
+  <article class="prose dark:prose-invert max-w-4xl">
+    {{ partial "content-default.html" . }}
+  </article>
 {{ end }}

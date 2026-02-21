@@ -1,6 +1,6 @@
-{{ define "main" }}
-  {{ partial "breadcrumbs.html" . }}
+{{ define "article" }}
   <article class="prose dark:prose-invert max-w-none">
+    {{ partial "breadcrumbs.html" . }}
     {{ with .Title }}
       <h1>{{ . }}</h1>
     {{ end }}
@@ -45,8 +45,4 @@
       </li>
     </ul>
   </article>
-{{ end }}
-
-{{ define "right" }}
-  {{ partial "aside.html" . }}
 {{ end }}

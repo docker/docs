@@ -3,9 +3,6 @@ linkTitle: Samples
 title: Samples overview
 description: Learn how to containerize different types of services by walking through
   Official Docker samples.
-cascade:
-  layout: samples
-  type: samples
 aliases:
 - /en/latest/examples/
 - /engine/examples/
