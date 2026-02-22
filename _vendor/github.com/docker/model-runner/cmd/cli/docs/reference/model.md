@@ -11,6 +11,7 @@ Docker Model Runner
 | [`df`](model_df.md)                             | Show Docker Model Runner disk usage                                                             |
 | [`inspect`](model_inspect.md)                   | Display detailed information on one model                                                       |
 | [`install-runner`](model_install-runner.md)     | Install Docker Model Runner (Docker Engine only)                                                |
+| [`launch`](model_launch.md)                     | Launch an app configured to use Docker Model Runner                                             |
 | [`list`](model_list.md)                         | List the models pulled to your local environment                                                |
 | [`logs`](model_logs.md)                         | Fetch the Docker Model Runner logs                                                              |
 | [`package`](model_package.md)                   | Package a GGUF file, Safetensors directory, or existing model into a Docker model OCI artifact. |
