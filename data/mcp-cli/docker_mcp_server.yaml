@@ -1,0 +1,16 @@
+command: docker mcp server
+short: Manage servers
+long: Manage servers
+pname: docker mcp
+plink: docker_mcp.yaml
+cname:
+    - docker mcp server init
+clink:
+    - docker_mcp_server_init.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

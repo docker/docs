@@ -1,0 +1,54 @@
+command: docker mcp catalog show
+short: Show a catalog
+long: Show a catalog
+usage: docker mcp catalog show <oci-reference> [--pull <pull-option>]
+pname: docker mcp catalog
+plink: docker_mcp_catalog.yaml
+options:
+    - option: format
+      value_type: string
+      default_value: human
+      description: 'Supported: json, yaml, human.'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: no-tools
+      value_type: bool
+      default_value: "false"
+      description: Exclude tools from output (deprecated, use --yq instead)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: pull
+      value_type: string
+      default_value: never
+      description: |
+        Supported: missing, never, always, initial, exists, or duration (e.g. '1h', '1d'). Duration represents time since last update.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: yq
+      value_type: string
+      description: YQ expression to apply to the output
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+
