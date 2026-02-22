@@ -61,7 +61,7 @@ jobs:
               const yamlSrcFilename = path.basename(yamlSrcPath);
               const yamlSrcNoExt = yamlSrcPath.replace(".yaml", "");
               const hasSubCommands = (await (await glob.create(yamlSrcNoExt)).glob()).length > 1;
-              const yamlDestPath = path.join('data', `${{ inputs.data-files-folder }}`, yamlSrcFilename);
+              const yamlDestPath = path.join('data', 'cli', `${{ inputs.data-files-folder }}`, yamlSrcFilename);
               let placeholderPath = path.join("content/reference/cli", yamlSrcFilename.replace('_', '/').replace(/\.yaml$/, '.md'));
               if (hasSubCommands) {
                 placeholderPath = placeholderPath.replace('.md', '/_index.md');

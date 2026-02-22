@@ -357,19 +357,19 @@ module:
     - path: github.com/docker/compose/v5
       mounts:
         - source: docs/reference
-          target: data/compose-cli
+          target: data/cli/compose
           files: ["*.yaml"]
 
     # Model CLI
     - path: github.com/docker/model-runner/cmd/cli
       mounts:
         - source: docs/reference
-          target: data/model-cli
+          target: data/cli/model
           files: ["*.yaml"]
 
     # MCP CLI
     - path: github.com/docker/mcp-gateway
       mounts:
         - source: docs/generator/reference
-          target: data/mcp-cli
+          target: data/cli/mcp
           files: ["*.yaml"]
