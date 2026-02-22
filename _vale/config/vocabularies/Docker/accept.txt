@@ -1,5 +1,7 @@
 (?i)[A-Z]{2,}'?s
 jq
+zstd
+Zstandard
 untracked
 ripgrep
 exfiltration
