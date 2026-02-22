@@ -1,0 +1,28 @@
+{{ define "left" }}
+  {{- partial "sidebar/mainnav.html" . }}
+{{ end }}
+
+{{ define "main" }}
+  <div class="flex w-full gap-8">
+    <article class="prose dark:prose-invert max-w-none min-w-0">
+      {{- partial "breadcrumbs.html" . }}
+      <h1 data-pagefind-weight="10" class="scroll-mt-36">{{ .Title }}</h1>
+      {{ .Content }}
+      <div class="not-prose grid grid-cols-1 gap-8 py-4 lg:grid-cols-2 xl:grid-cols-3">
+        {{- range .Pages }}
+          <div class="flex h-full flex-col border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:bg-gray-100 hover:dark:bg-gray-800">
+            <a href="{{ .Permalink }}" class="hover:underline">
+              <p class="my-2 text-xl leading-snug">{{ .Title }}</p>
+            </a>
+            <p class="flex-grow text-sm">{{ .Summary }}</p>
+            <div class="mt-4 flex items-center gap-2 text-sm text-gray-400">
+              {{- with .Params.time }}
+                <span>{{ . }}</span>
+              {{- end }}
+            </div>
+          </div>
+        {{- end }}
+      </div>
+    </article>
+  </div>
+{{ end }}

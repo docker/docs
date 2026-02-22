@@ -161,6 +161,9 @@ menus:
   - name: Manuals
     pageRef: /manuals/
     weight: 3
+  - name: Labspaces
+    pageRef: /labs/
+    weight: 5
   - name: Reference
     pageRef: /reference/
     weight: 4
