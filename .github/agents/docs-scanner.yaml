@@ -21,14 +21,16 @@ agents:
 
       ## Setup
 
-      1. Call `get_memories` to find which subsection to scan next
-      2. Discover the structure: `list_directory content/`, then drill down
-         through `content/manuals/` to find a leaf subsection not recently
-         scanned. Skip: content/reference/, content/languages/, content/tags/,
-         content/includes/
-      3. Call `directory_tree` on that subsection and read all its files
+      1. Call `get_memories` to get the list of already-scanned paths.
+         Each entry has the form `scanned: <path> YYYY-MM-DD`.
+      2. Use `list_directory` to explore `content/manuals/` and find a leaf
+         directory (no subdirectories) whose path does NOT appear in memory.
+         Skip: content/reference/, content/languages/, content/tags/,
+         content/includes/. If all leaves have been scanned, pick the one
+         with the oldest date.
+      3. Call `directory_tree` on that leaf and read all its files
       4. File issues for what you find (max 3 per run)
-      5. Call `add_memory` with `scanned: <subsection> YYYY-MM-DD`
+      5. Call `add_memory` with `scanned: <path> YYYY-MM-DD`
 
       ## What good issues look like
 
