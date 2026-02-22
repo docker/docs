@@ -16,7 +16,7 @@ clink:
   - docker_offload_stop.yaml
   - docker_offload_version.yaml
 deprecated: false
-hidden: true
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false
