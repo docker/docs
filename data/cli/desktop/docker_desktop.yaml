@@ -27,7 +27,7 @@ clink:
     - docker_desktop_enable.yaml
     - docker_desktop_version.yaml
 deprecated: false
-hidden: true
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false
