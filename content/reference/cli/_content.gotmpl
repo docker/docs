@@ -18,48 +18,40 @@
   so they still appear in the sidebar navigation.
 */ -}}
 
-{{- $folders := slice
-  "engine-cli" "buildx" "compose-cli" "model-cli" "mcp-cli"
-  "sandbox-cli" "offload-cli" "scout-cli" "desktop-cli"
-  "init-cli" "debug-cli" "secrets-engine"
--}}
+{{- range $folder, $files := site.Data.cli -}}
+  {{- range $name, $data := $files -}}
+    {{- /* Skip hidden commands */ -}}
+    {{- if $data.hidden -}}
+      {{- continue -}}
+    {{- end -}}
 
-{{- range $folder := $folders -}}
-  {{- with index site.Data $folder -}}
-    {{- range $name, $data := . -}}
-      {{- /* Skip hidden commands */ -}}
-      {{- if $data.hidden -}}
-        {{- continue -}}
-      {{- end -}}
-
-      {{- /* Skip alias/shortcut commands: if any alias has more words than
-             the command, a longer canonical form exists elsewhere. */ -}}
-      {{- $cmdWords := len (split $data.command " ") -}}
-      {{- $isAlias := false -}}
-      {{- with $data.aliases -}}
-        {{- range (split . ", ") -}}
-          {{- if gt (len (split . " ")) $cmdWords -}}
-            {{- $isAlias = true -}}
-          {{- end -}}
+    {{- /* Skip alias/shortcut commands: if any alias has more words than
+           the command, a longer canonical form exists elsewhere. */ -}}
+    {{- $cmdWords := len (split $data.command " ") -}}
+    {{- $isAlias := false -}}
+    {{- with $data.aliases -}}
+      {{- range (split . ", ") -}}
+        {{- if gt (len (split . " ")) $cmdWords -}}
+          {{- $isAlias = true -}}
         {{- end -}}
       {{- end -}}
-      {{- if $isAlias -}}
-        {{- continue -}}
-      {{- end -}}
-
-      {{- $path := replace $data.command " " "/" -}}
-      {{- $kind := "page" -}}
-      {{- with $data.cname -}}
-        {{- $kind = "section" -}}
-      {{- end -}}
-
-      {{- $.AddPage (dict
-        "path" $path
-        "title" $data.command
-        "kind" $kind
-        "params" (dict "datafolder" $folder "datafile" $name)
-      ) -}}
     {{- end -}}
+    {{- if $isAlias -}}
+      {{- continue -}}
+    {{- end -}}
+
+    {{- $path := replace $data.command " " "/" -}}
+    {{- $kind := "page" -}}
+    {{- with $data.cname -}}
+      {{- $kind = "section" -}}
+    {{- end -}}
+
+    {{- $.AddPage (dict
+      "path" $path
+      "title" $data.command
+      "kind" $kind
+      "params" (dict "datafolder" $folder "datafile" $name)
+    ) -}}
   {{- end -}}
 {{- end -}}
 

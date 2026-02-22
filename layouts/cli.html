@@ -1,5 +1,5 @@
 {{ define "article" }}
-  {{ $data := index (index site.Data .Params.datafolder) .Params.datafile }}
+  {{ $data := index site.Data.cli .Params.datafolder .Params.datafile }}
 
   {{ .Store.Set "headings" slice }}
   {{ .Store.Set "subheadings" slice }}
@@ -185,7 +185,7 @@ can be removed entirely in a future release.
             {{- if and .Params.datafolder .Params.datafile }}
               <tr>
                 <td class="text-left"><a class="link" href="{{ .Permalink }}"><code>{{ .Title }}</code></a></th>
-                {{ $data := index (index site.Data .Params.datafolder) .Params.datafile }}
+                {{ $data := index site.Data.cli .Params.datafolder .Params.datafile }}
                 <td class="text-left">{{ $data.short }}</th>
               </tr>
             {{- end }}

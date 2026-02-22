@@ -1,4 +1,4 @@
-{{- $data := index (index site.Data .Params.datafolder) .Params.datafile -}}
+{{- $data := index site.Data.cli .Params.datafolder .Params.datafile -}}
 # {{ .Title }}
 
 {{ with $data.short }}**Description:** {{ . }}{{ end }}
@@ -44,6 +44,6 @@
 
 | Command | Description |
 |---------|-------------|
-{{ range .Pages }}{{ if and .Params.datafolder .Params.datafile }}{{ $subdata := index (index site.Data .Params.datafolder) .Params.datafile }}| [`{{ .Title }}`]({{ .Permalink }}) | {{ $subdata.short }} |
+{{ range .Pages }}{{ if and .Params.datafolder .Params.datafile }}{{ $subdata := index site.Data.cli .Params.datafolder .Params.datafile }}| [`{{ .Title }}`]({{ .Permalink }}) | {{ $subdata.short }} |
 {{ end }}{{ end }}
 {{ end }}
