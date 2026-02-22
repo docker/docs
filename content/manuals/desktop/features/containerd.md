@@ -5,21 +5,21 @@ description: How to activate the containerd integration feature in Docker Deskto
 keywords: Docker, containerd, engine, image store, lazy-pull
 toc_max: 3
 aliases:
-- /desktop/containerd/
+  - /desktop/containerd/
 ---
 
-Docker Desktop is transitioning to use containerd for image and filesystem management. This page outlines the benefits, setup process, and new capabilities enabled by the containerd image store.
+Docker Desktop uses containerd for image and filesystem management. This page outlines the benefits, setup process, and new capabilities enabled by the containerd image store.
 
 > [!NOTE]
-> 
+>
 > Docker Desktop maintains separate image stores for the classic and containerd image stores.
 > When switching between them, images and containers from the inactive store remain on disk but are hidden until you switch back.
 
 ## What is `containerd`?
 
-`containerd` is a container runtime that provides a lightweight, consistent interface for container lifecycle management. It is already used under the hood by Docker Engine for creating, starting, and stopping containers.
+`containerd` is a container runtime that provides a lightweight, consistent interface for container lifecycle management. It is used under the hood by Docker Engine for creating, starting, and stopping containers.
 
-Docker Desktop’s ongoing integration of containerd now extends to the image store, offering more flexibility and modern image support.
+Docker Desktop's integration of containerd extends to the image store, offering more flexibility and modern image support.
 
 ## What is the `containerd` image store?
 
