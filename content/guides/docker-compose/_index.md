@@ -13,7 +13,7 @@ params:
   time: 10 minutes
   resource_links:
     - title: Overview of Docker Compose CLI
-      url: /compose/reference/
+      url: /reference/cli/docker/compose/
     - title: Overview of Docker Compose
       url: /compose/
     - title: How Compose works

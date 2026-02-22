@@ -66,7 +66,7 @@ Using the **Exec** tab is the same as running one of the following commands:
 - `docker exec -it <container-id> /bin/sh`
 - `docker exec -it <container-id> cmd.exe` when accessing Windows containers
 
-For more details, see the [`docker exec` CLI reference](/reference/cli/docker/exec/).
+For more details, see the [`docker exec` CLI reference](/reference/cli/docker/container/exec/).
 
 If you have enabled Docker Debug in settings, or toggled on **Debug mode** to the right of the tab options, the **Debug** tab displays. 
 
