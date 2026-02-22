@@ -1,6 +1,6 @@
 ---
 title: Docker MCP Catalog
-linkTitle: MCP Catalog
+linkTitle: Catalog
 description: Learn about the benefits of the MCP Catalog, how you can use it, and how you can contribute
 keywords: docker hub, mcp, mcp servers, ai agents, catalog, docker
 weight: 20
@@ -8,79 +8,64 @@ weight: 20
 
 {{< summary-bar feature_name="Docker MCP Catalog" >}}
 
-The [Docker MCP Catalog](https://hub.docker.com/mcp) is a centralized, trusted
-registry for discovering, sharing, and running MCP-compatible tools. Integrated
-with Docker Hub, it offers verified, versioned, and curated MCP servers
-packaged as Docker images. The catalog is also available in Docker Desktop.
+The [Docker MCP Catalog](https://hub.docker.com/mcp) is a curated collection of
+verified MCP servers, packaged as Docker images and distributed through Docker
+Hub. It solves common challenges with running MCP servers locally: environment
+conflicts, setup complexity, and security concerns.
 
-The catalog solves common MCP server challenges:
-
-- Environment conflicts. Tools often need specific runtimes that might clash
-  with existing setups.
-- Lack of isolation. Traditional setups risk exposing the host system.
-- Setup complexity. Manual installation and configuration slow adoption.
-- Inconsistency across platforms. Tools might behave unpredictably on different
-  operating systems.
-
-With Docker, each MCP server runs as a self-contained container. This makes it
-portable, isolated, and consistent. You can launch tools instantly using the
-Docker CLI or Docker Desktop, without worrying about dependencies or
-compatibility.
-
-## Key features
-
-- Extensive collection of verified MCP servers in one place.
-- Publisher verification and versioned releases.
-- Pull-based distribution using Docker infrastructure.
-- Tools provided by partners such as New Relic, Stripe, Grafana, and more.
+The catalog serves as the source of available MCP servers. Each server runs as
+an isolated container, making it portable and consistent across different
+environments.
 
 > [!NOTE]
 > E2B sandboxes now include direct access to the Docker MCP Catalog, giving developers
 > access to over 200 tools and services to seamlessly build and run AI agents. For
 > more information, see [E2B Sandboxes](sandboxes.md).
 
-## How it works
+## What's in the catalog
 
-Each tool in the MCP Catalog is packaged as a Docker image with metadata.
+The Docker MCP Catalog includes:
 
-- Discover tools on Docker Hub under the `mcp/` namespace.
-- Connect tools to your preferred agents with simple configuration through the
-  [MCP Toolkit](toolkit.md).
-- Pull and run tools using Docker Desktop or the CLI.
+- Verified servers: All local servers are versioned with full provenance and SBOM
+  metadata
+- Partner tools: Servers from New Relic, Stripe, Grafana, and other trusted
+  partners
+- Docker-built servers: Locally-running servers built and digitally signed by
+  Docker for enhanced security
+- Remote services: Cloud-hosted servers that connect to external services like
+  GitHub, Notion, and Linear
 
-Each catalog entry displays:
+You can browse the catalog at [hub.docker.com/mcp](https://hub.docker.com/mcp)
+or through the **Catalog** tab in Docker Desktop's MCP Toolkit.
 
-- Tool description and metadata.
-- Version history.
-- List of tools provided by the MCP server.
-- Example configuration for agent integration.
+### Local versus remote servers
 
-## Server deployment types
+The catalog contains two types of servers based on where they run:
 
-The Docker MCP Catalog supports both local and remote server deployments, each optimized for different use cases and requirements.
+Local servers run as containers on your machine. They work offline once
+downloaded and offer predictable performance and complete data privacy. Docker
+builds and signs all local servers in the catalog.
 
-### Local MCP servers
+Remote servers run on the provider's infrastructure and connect to external
+services. Many remote servers use OAuth authentication, which the MCP Toolkit
+handles automatically through your browser.
 
-Local MCP servers are containerized applications that run directly on your machine. All local servers are built and digitally signed by Docker, providing enhanced security through verified provenance and integrity. These servers run as containers on your local environment and function without internet connectivity once downloaded. Local servers display a Docker icon {{< inline-image src="../../desktop/images/whale-x.svg" alt="docker whale icon" >}} to indicate they are built by Docker.
+## Using servers from the catalog
 
-Local servers offer predictable performance, complete data privacy, and independence from external service availability. They work well for development workflows, sensitive data processing, and scenarios requiring offline functionality.
+To start using MCP servers from the catalog:
 
-### Remote MCP servers
+1. Browse servers in the [MCP Catalog](https://hub.docker.com/mcp) or in Docker
+   Desktop
+2. Enable servers through the MCP Toolkit
+3. Configure any required authentication (OAuth is handled automatically)
+4. Connect your AI applications to use the servers
 
-Remote MCP servers are hosted services that run on the provider's
-infrastructure and connect to external services like GitHub, Notion, and
-Linear. Many remote servers use OAuth authentication. When a remote server
-requires OAuth, the MCP Toolkit handles authentication automatically - you
-authorize access through your browser, and the Toolkit manages credentials
-securely. You don't need to manually create API tokens or configure
-authentication.
+For detailed step-by-step instructions, see:
 
-Remote servers display a cloud icon in the catalog. For setup instructions, see
-[MCP Toolkit](toolkit.md#oauth-authentication).
-
-## Use an MCP server from the catalog
-
-To use an MCP server from the catalog, see [MCP Toolkit](toolkit.md).
+- [Get started with MCP Toolkit](/ai/mcp-catalog-and-toolkit/get-started/) -
+  Quick start guide
+- [MCP Toolkit](/ai/mcp-catalog-and-toolkit/toolkit/) - Detailed usage
+  instructions
 
 ## Contribute an MCP server to the catalog
 
@@ -95,3 +80,119 @@ within 24 hours on:
 - The [Docker MCP Catalog](https://hub.docker.com/mcp).
 - The [Docker Hub](https://hub.docker.com/u/mcp) `mcp` namespace (for MCP
   servers built by Docker).
+
+## Custom catalogs
+
+Custom catalogs let you curate focused collections of recommended servers. You
+can package custom server implementations alongside public servers, distribute
+curated lists to your team, and define what agents can discover when using
+Dynamic MCP.
+
+Common use cases:
+
+- Curate a subset of servers from the Docker MCP Catalog that your organization
+  approves
+- Include community registry servers that aren't in the Docker catalog
+- Add your organization's private MCP servers
+- Control which versions of servers your team uses
+
+### Custom catalogs with Dynamic MCP
+
+Custom catalogs work particularly well with
+[Dynamic MCP](/ai/mcp-catalog-and-toolkit/dynamic-mcp/), where agents
+discover and add MCP servers on-demand during conversations. When you specify a
+custom catalog with the gateway, the `mcp-find` tool searches only within your
+curated catalog. If your catalog contains 20 servers instead of 300+, agents
+work within that focused set and can dynamically add servers as needed without
+manual configuration each time.
+
+This gives agents the autonomy to discover and use tools while keeping their
+options within boundaries your team defines.
+
+### Create and curate a catalog
+
+The most practical way to create a custom catalog is to fork the Docker catalog
+and then curate which servers to keep:
+
+```console
+$ docker mcp catalog fork docker-mcp my-catalog
+```
+
+This creates a copy of the Docker catalog with all available servers. Export it
+to a file where you can edit which servers to include:
+
+```console
+$ docker mcp catalog export my-catalog ./my-catalog.yaml
+```
+
+Edit `my-catalog.yaml` to remove servers you don't want, keeping only the ones
+your team needs. Each server is listed in the `registry` section. Import the
+edited catalog back:
+
+```console
+$ docker mcp catalog import ./my-catalog.yaml
+```
+
+View your curated catalog:
+
+```console
+$ docker mcp catalog show my-catalog
+```
+
+#### Alternative: Build incrementally
+
+You can also build a catalog from scratch. Start with an empty catalog or a
+template:
+
+```console
+$ docker mcp catalog create my-catalog
+```
+
+Or create a starter template with example servers:
+
+```console
+$ docker mcp catalog bootstrap ./starter-catalog.yaml
+```
+
+Add servers from other catalog files:
+
+```console
+$ docker mcp catalog add my-catalog notion ./other-catalog.yaml
+```
+
+### Use a custom catalog
+
+Use your custom catalog when running the MCP gateway. For static server
+configuration, specify which servers to enable:
+
+```console
+$ docker mcp gateway run --catalog my-catalog.yaml --servers notion,brave
+```
+
+For Dynamic MCP, where agents discover and add servers during conversations,
+specify just the catalog:
+
+```console
+$ docker mcp gateway run --catalog my-catalog.yaml
+```
+
+Agents can then use `mcp-find` to search for servers within your catalog and
+`mcp-add` to enable them dynamically.
+
+The `--catalog` flag points to a catalog file in `~/.docker/mcp/catalogs/`.
+
+### Share your catalog
+
+Share your catalog with your team by distributing the YAML file or hosting it
+at a URL:
+
+```console
+$ docker mcp catalog export my-catalog ./team-catalog.yaml
+```
+
+Team members can import it:
+
+```console
+$ docker mcp catalog import ./team-catalog.yaml
+$ docker mcp catalog import https://example.com/team-catalog.yaml
+```

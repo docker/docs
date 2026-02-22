@@ -687,6 +687,26 @@ Builders settings lets you manage Buildx builder instances for advanced image-bu
     - Settings Management: `enableInferenceGPUVariant` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
     - Settings Management: **Enable GPU-backed inference** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
+### MCP Policy
+
+| Default value     | Accepted values                  | Format      |
+| ----------------- | -------------------------------- | ----------- |
+| Empty (allow all) | JSON object following policy DSL | JSON object |
+
+- **Description:** Define allow/deny rules for MCP servers and tools.
+  Control which MCP servers users can load and which tools they can
+  invoke based on server type, source, transport, and other criteria.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Use case:** Enforce organizational security policies by restricting
+  access to approved MCP servers, blocking untrusted sources, or limiting
+  tool invocation capabilities.
+- **Configure this setting with:**
+  - Settings Management: **MCP Policy** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+  - [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md): `mcpPolicy` field
+
+For complete policy documentation including structure, examples, and best
+practices, see [MCP governance and policy controls](/manuals/ai/mcp-catalog-and-toolkit/governance.md).
+
 ## Kubernetes settings
 
 ### Enable Kubernetes
