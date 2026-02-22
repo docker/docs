@@ -1,11 +1,11 @@
 ---
 title: Virtual Machine Manager for Docker Desktop on Mac
-linkTitle: Virtual Machine Manager 
+linkTitle: Virtual Machine Manager
 keywords: virtualization software, resource allocation, mac, docker desktop, vm monitoring, vm performance, apple silicon
-description: Discover Docker Desktop for Mac's Virtual Machine Manager (VMM) options, including the new Docker VMM for Apple Silicon, offering enhanced performance and efficiency
+description: Discover Docker Desktop for Mac's Virtual Machine Manager (VMM) options, including Docker VMM for Apple Silicon, offering enhanced performance and efficiency
 weight: 110
 aliases:
-- /desktop/vmm/
+  - /desktop/vmm/
 ---
 
 Docker Desktop supports multiple Virtual Machine Managers (VMMs) to power the Linux VM that runs containers. You can choose the most suitable option based on your system architecture (Intel or Apple Silicon), performance needs, and feature requirements. This page provides an overview of the available options.
@@ -16,11 +16,12 @@ To change the VMM, go to **Settings** > **General** > **Virtual Machine Manager*
 
 {{< summary-bar feature_name="VMM" >}}
 
-Docker VMM is a new, container-optimized hypervisor. By optimizing both the Linux kernel and hypervisor layers, Docker VMM delivers significant performance enhancements across common developer tasks.
+Docker VMM is a container-optimized hypervisor. By optimizing both the Linux kernel and hypervisor layers, Docker VMM delivers significant performance enhancements across common developer tasks.
 
 Some key performance enhancements provided by Docker VMM include:
- - Faster I/O operations: With a cold cache, iterating over a large shared filesystem with `find` is 2x faster than when the Apple Virtualization framework is used.
- - Improved caching: With a warm cache, performance can improve by as much as 25x, even surpassing native Mac operations.
+
+- Faster I/O operations: With a cold cache, iterating over a large shared filesystem with `find` is 2x faster than when the Apple Virtualization framework is used.
+- Improved caching: With a warm cache, performance can improve by as much as 25x, even surpassing native Mac operations.
 
 These improvements directly impact developers who rely on frequent file access and overall system responsiveness during containerized development. Docker VMM marks a significant leap in speed, enabling smoother workflows and faster iteration cycles.
 
@@ -43,9 +44,9 @@ The Apple Virtualization framework is a stable and well-established option for m
 
 > [!NOTE]
 >
-> QEMU has been deprecated in versions 4.44 and later. For more information, see the [blog announcement](https://www.docker.com/blog/docker-desktop-for-mac-qemu-virtualization-option-to-be-deprecated-in-90-days/) 
+> QEMU has been deprecated in versions 4.44 and later. For more information, see the [blog announcement](https://www.docker.com/blog/docker-desktop-for-mac-qemu-virtualization-option-to-be-deprecated-in-90-days/)
 
-QEMU is a legacy virtualization option for Apple Silicon Macs, primarily supported for older use cases. 
+QEMU is a legacy virtualization option for Apple Silicon Macs, primarily supported for older use cases.
 
 Docker recommends transitioning to newer alternatives, such as Docker VMM or the Apple Virtualization framework, as they offer superior performance and ongoing support. Docker VMM, in particular, offers substantial speed improvements and a more efficient development environment, making it a compelling choice for developers working with Apple Silicon.
 
