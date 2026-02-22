@@ -120,8 +120,8 @@ The default gateway is selected by Docker, and may change whenever a
 container's network connections change.
 To make Docker choose a specific default gateway when creating the container
 or connecting a new network, set a gateway priority. See option `gw-priority`
-for the [`docker run`](/reference/cli/docker/container/run.md) and
-[`docker network connect`](/reference/cli/docker/network/connect.md) commands.
+for the [`docker run`](/reference/cli/docker/container/run/) and
+[`docker network connect`](/reference/cli/docker/network/connect/) commands.
 
 The default `gw-priority` is `0` and the gateway in the network with the
 highest priority is the default gateway. So, when a network should always
@@ -284,7 +284,7 @@ Your container will have lines in `/etc/hosts` which define the hostname of the
 container itself, as well as `localhost` and a few other common things. Custom
 hosts, defined in `/etc/hosts` on the host machine, aren't inherited by
 containers. To pass additional hosts into a container, refer to [add entries to
-container hosts file](/reference/cli/docker/container/run.md#add-host) in the
+container hosts file](/reference/cli/docker/container/run/#add-host) in the
 `docker run` reference documentation.
 
 ## Container networks

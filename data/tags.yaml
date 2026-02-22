@@ -1,0 +1,38 @@
+admin:
+  title: Administration
+ai:
+  title: AI
+app-dev:
+  title: App development
+best-practices:
+  title: Best practices
+cloud-services:
+  title: Cloud services
+data-science:
+  title: Data science
+databases:
+  title: Databases
+deploy:
+  title: Deployment
+devops:
+  title: DevOps
+dhi:
+  title: Docker Hardened Images
+distributed-systems:
+  title: Distributed systems
+faq:
+  title: FAQ
+frameworks:
+  title: Frameworks
+networking:
+  title: Networking
+observability:
+  title: Observability
+product-demo:
+  title: Product demo
+release-notes:
+  title: Release notes
+secrets:
+  title: Secrets
+troubleshooting:
+  title: Troubleshooting

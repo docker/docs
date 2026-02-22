@@ -79,6 +79,8 @@
   - /go/buildx/
 "/reference/cli/docker/compose/build/":
   - /go/compose-native-build/
+  - /compose/reference/build/
+  - /engine/reference/commandline/compose_build/
 "/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user":
   # Details about how to give "non-root" users access to a privileged Docker
   # Daemon/ This redirect is currently in the installation script at "get.docker.com"
@@ -282,6 +284,7 @@
 # Docker Debug
 "/reference/cli/docker/debug/":
   - /go/debug-cli/
+  - /engine/reference/commandline/debug/
 "/desktop/use-desktop/container/#execdebug":
   - /go/debug-gui/
 
@@ -420,3 +423,830 @@
 # Scout CLI release notes
 "https://github.com/docker/scout-cli/releases":
   - /scout/release-notes/cli/
+
+# CLI reference redirects (migrated from front matter aliases)
+"/reference/cli/docker/":
+  - /edge/engine/reference/commandline/
+  - /engine/reference/commandline/
+  - /engine/reference/commandline/cli/
+  - /engine/reference/commandline/docker/
+"/reference/cli/docker/builder/":
+  - /engine/reference/commandline/builder/
+"/reference/cli/docker/builder/prune/":
+  - /engine/reference/commandline/builder_prune/
+"/reference/cli/docker/buildx/":
+  - /engine/reference/commandline/buildx/
+"/reference/cli/docker/buildx/bake/":
+  - /engine/reference/commandline/buildx_bake/
+"/reference/cli/docker/buildx/build/":
+  - /engine/reference/commandline/builder_build/
+  - /engine/reference/commandline/buildx_build/
+  - /reference/cli/docker/build/
+  - /reference/cli/docker/builder/build/
+"/reference/cli/docker/image/build/":
+  - /edge/engine/reference/commandline/image_build/
+  - /engine/reference/commandline/build/
+  - /engine/reference/commandline/image_build/
+  - /reference/cli/docker/build-legacy/
+"/reference/cli/docker/buildx/create/":
+  - /engine/reference/commandline/buildx_create/
+"/reference/cli/docker/buildx/dap/":
+  - /engine/reference/commandline/buildx_dap/
+"/reference/cli/docker/buildx/dap/attach/":
+  - /engine/reference/commandline/buildx_dap_attach/
+"/reference/cli/docker/buildx/dap/build/":
+  - /engine/reference/commandline/buildx_dap_build/
+"/reference/cli/docker/buildx/debug/":
+  - /engine/reference/commandline/buildx_debug-shell/
+  - /engine/reference/commandline/buildx_debug/
+"/reference/cli/docker/buildx/debug/build/":
+  - /engine/reference/commandline/buildx_debug_build/
+"/reference/cli/docker/buildx/du/":
+  - /engine/reference/commandline/buildx_du/
+"/reference/cli/docker/buildx/history/":
+  - /engine/reference/commandline/buildx_history/
+"/reference/cli/docker/buildx/history/export/":
+  - /engine/reference/commandline/buildx_history_export/
+"/reference/cli/docker/buildx/history/import/":
+  - /engine/reference/commandline/buildx_history_import/
+"/reference/cli/docker/buildx/history/inspect/":
+  - /engine/reference/commandline/buildx_history_inspect/
+"/reference/cli/docker/buildx/history/inspect/attachment/":
+  - /engine/reference/commandline/buildx_history_inspect_attachment/
+"/reference/cli/docker/buildx/history/logs/":
+  - /engine/reference/commandline/buildx_history_logs/
+"/reference/cli/docker/buildx/history/ls/":
+  - /engine/reference/commandline/buildx_history_ls/
+"/reference/cli/docker/buildx/history/open/":
+  - /engine/reference/commandline/buildx_history_open/
+"/reference/cli/docker/buildx/history/rm/":
+  - /engine/reference/commandline/buildx_history_rm/
+"/reference/cli/docker/buildx/history/trace/":
+  - /engine/reference/commandline/buildx_history_trace/
+"/reference/cli/docker/buildx/imagetools/":
+  - /engine/reference/commandline/buildx_imagetools/
+"/reference/cli/docker/buildx/imagetools/create/":
+  - /engine/reference/commandline/buildx_imagetools_create/
+"/reference/cli/docker/buildx/imagetools/inspect/":
+  - /engine/reference/commandline/buildx_imagetools_inspect/
+"/reference/cli/docker/buildx/inspect/":
+  - /engine/reference/commandline/buildx_inspect/
+"/reference/cli/docker/buildx/ls/":
+  - /engine/reference/commandline/buildx_ls/
+"/reference/cli/docker/buildx/prune/":
+  - /engine/reference/commandline/buildx_prune/
+"/reference/cli/docker/buildx/rm/":
+  - /engine/reference/commandline/buildx_rm/
+"/reference/cli/docker/buildx/stop/":
+  - /engine/reference/commandline/buildx_stop/
+"/reference/cli/docker/buildx/use/":
+  - /engine/reference/commandline/buildx_use/
+"/reference/cli/docker/buildx/version/":
+  - /engine/reference/commandline/buildx_version/
+"/reference/cli/docker/checkpoint/":
+  - /edge/engine/reference/commandline/checkpoint/
+  - /engine/reference/commandline/checkpoint/
+"/reference/cli/docker/checkpoint/create/":
+  - /edge/engine/reference/commandline/checkpoint_create/
+  - /engine/reference/commandline/checkpoint_create/
+"/reference/cli/docker/checkpoint/ls/":
+  - /edge/engine/reference/commandline/checkpoint_ls/
+  - /engine/reference/commandline/checkpoint_ls/
+"/reference/cli/docker/checkpoint/rm/":
+  - /edge/engine/reference/commandline/checkpoint_rm/
+  - /engine/reference/commandline/checkpoint_rm/
+"/reference/cli/docker/compose/":
+  - /compose/reference/
+  - /compose/reference/docker-compose/
+  - /compose/reference/help/
+  - /engine/reference/commandline/compose/
+"/reference/cli/docker/compose/alpha/":
+  - /engine/reference/commandline/compose_alpha/
+"/reference/cli/docker/compose/alpha/dry-run/":
+  - /engine/reference/commandline/compose_alpha_dry-run/
+"/reference/cli/docker/compose/alpha/scale/":
+  - /engine/reference/commandline/compose_alpha_scale/
+"/reference/cli/docker/compose/alpha/viz/":
+  - /engine/reference/commandline/compose_alpha_viz/
+"/reference/cli/docker/compose/config/":
+  - /compose/config/
+  - /compose/reference/config/
+  - /engine/reference/commandline/compose_config/
+  - /engine/reference/commandline/compose_convert/
+"/reference/cli/docker/compose/cp/":
+  - /engine/reference/commandline/compose_cp/
+"/reference/cli/docker/compose/create/":
+  - /compose/reference/create/
+  - /engine/reference/commandline/compose_create/
+"/reference/cli/docker/compose/down/":
+  - /compose/reference/down/
+  - /engine/reference/commandline/compose_down/
+"/reference/cli/docker/compose/events/":
+  - /compose/reference/events/
+  - /engine/reference/commandline/compose_events/
+"/reference/cli/docker/compose/exec/":
+  - /compose/reference/exec/
+  - /engine/reference/commandline/compose_exec/
+"/reference/cli/docker/compose/images/":
+  - /compose/reference/images/
+  - /engine/reference/commandline/compose_images/
+"/reference/cli/docker/compose/kill/":
+  - /compose/reference/kill/
+  - /engine/reference/commandline/compose_kill/
+"/reference/cli/docker/compose/logs/":
+  - /compose/reference/logs/
+  - /engine/reference/commandline/compose_logs/
+"/reference/cli/docker/compose/ls/":
+  - /engine/reference/commandline/compose_ls/
+"/reference/cli/docker/compose/pause/":
+  - /compose/reference/pause/
+  - /engine/reference/commandline/compose_pause/
+"/reference/cli/docker/compose/port/":
+  - /compose/reference/port/
+  - /engine/reference/commandline/compose_port/
+"/reference/cli/docker/compose/ps/":
+  - /compose/reference/ps/
+  - /engine/reference/commandline/compose_ps/
+"/reference/cli/docker/compose/publish/":
+  - /engine/reference/commandline/compose_alpha_publish/
+  - /reference/cli/docker/compose/alpha/publish/
+"/reference/cli/docker/compose/pull/":
+  - /compose/reference/pull/
+  - /engine/reference/commandline/compose_pull/
+"/reference/cli/docker/compose/push/":
+  - /compose/reference/push/
+  - /engine/reference/commandline/compose_push/
+"/reference/cli/docker/compose/restart/":
+  - /compose/reference/restart/
+  - /engine/reference/commandline/compose_restart/
+"/reference/cli/docker/compose/rm/":
+  - /compose/reference/rm/
+  - /engine/reference/commandline/compose_rm/
+"/reference/cli/docker/compose/run/":
+  - /compose/reference/run/
+  - /engine/reference/commandline/compose_run/
+"/reference/cli/docker/compose/start/":
+  - /compose/reference/start/
+  - /engine/reference/commandline/compose_start/
+"/reference/cli/docker/compose/stop/":
+  - /compose/reference/stop/
+  - /engine/reference/commandline/compose_stop/
+"/reference/cli/docker/compose/top/":
+  - /compose/reference/top/
+  - /engine/reference/commandline/compose_top/
+"/reference/cli/docker/compose/unpause/":
+  - /compose/reference/unpause/
+  - /engine/reference/commandline/compose_unpause/
+"/reference/cli/docker/compose/up/":
+  - /compose/reference/scale/
+  - /compose/reference/up/
+  - /engine/reference/commandline/compose_up/
+"/reference/cli/docker/compose/version/":
+  - /engine/reference/commandline/compose_version/
+"/reference/cli/docker/compose/wait/":
+  - /engine/reference/commandline/compose_wait/
+"/reference/cli/docker/compose/watch/":
+  - /engine/reference/commandline/compose_watch/
+"/reference/cli/docker/config/":
+  - /edge/engine/reference/commandline/config/
+  - /engine/reference/commandline/config/
+"/reference/cli/docker/config/create/":
+  - /edge/engine/reference/commandline/config_create/
+  - /engine/reference/commandline/config_create/
+"/reference/cli/docker/config/inspect/":
+  - /edge/engine/reference/commandline/config_inspect/
+  - /engine/reference/commandline/config_inspect/
+"/reference/cli/docker/config/ls/":
+  - /edge/engine/reference/commandline/config_ls/
+  - /engine/reference/commandline/config_ls/
+"/reference/cli/docker/config/rm/":
+  - /edge/engine/reference/commandline/config_rm/
+  - /engine/reference/commandline/config_rm/
+"/reference/cli/docker/container/":
+  - /edge/engine/reference/commandline/container/
+  - /engine/reference/commandline/container/
+"/reference/cli/docker/container/attach/":
+  - /edge/engine/reference/commandline/container_attach/
+  - /engine/reference/commandline/attach/
+  - /engine/reference/commandline/container_attach/
+"/reference/cli/docker/container/commit/":
+  - /edge/engine/reference/commandline/container_commit/
+  - /engine/reference/commandline/commit/
+  - /engine/reference/commandline/container_commit/
+"/reference/cli/docker/container/cp/":
+  - /edge/engine/reference/commandline/container_cp/
+  - /engine/reference/commandline/container_cp/
+  - /engine/reference/commandline/cp/
+"/reference/cli/docker/container/create/":
+  - /edge/engine/reference/commandline/container_create/
+  - /engine/reference/commandline/container_create/
+  - /engine/reference/commandline/create/
+"/reference/cli/docker/container/diff/":
+  - /edge/engine/reference/commandline/container_diff/
+  - /engine/reference/commandline/container_diff/
+  - /engine/reference/commandline/diff/
+"/reference/cli/docker/container/exec/":
+  - /edge/engine/reference/commandline/container_exec/
+  - /engine/reference/commandline/container_exec/
+  - /engine/reference/commandline/exec/
+  - /reference/cli/docker/exec/
+"/reference/cli/docker/container/export/":
+  - /edge/engine/reference/commandline/container_export/
+  - /engine/reference/commandline/container_export/
+  - /engine/reference/commandline/export/
+"/reference/cli/docker/container/inspect/":
+  - /edge/engine/reference/commandline/container_inspect/
+  - /engine/reference/commandline/container_inspect/
+"/reference/cli/docker/container/kill/":
+  - /edge/engine/reference/commandline/container_kill/
+  - /engine/reference/commandline/container_kill/
+  - /engine/reference/commandline/kill/
+"/reference/cli/docker/container/logs/":
+  - /edge/engine/reference/commandline/container_logs/
+  - /engine/reference/commandline/container_logs/
+  - /engine/reference/commandline/logs/
+  - /reference/cli/docker/logs/
+"/reference/cli/docker/container/ls/":
+  - /edge/engine/reference/commandline/container_ls/
+  - /engine/reference/commandline/container_ls/
+  - /engine/reference/commandline/ps/
+  - /reference/cli/docker/container/ps/
+  - /reference/cli/docker/ps/
+"/reference/cli/docker/container/pause/":
+  - /edge/engine/reference/commandline/container_pause/
+  - /engine/reference/commandline/container_pause/
+  - /engine/reference/commandline/pause/
+"/reference/cli/docker/container/port/":
+  - /edge/engine/reference/commandline/container_port/
+  - /engine/reference/commandline/container_port/
+  - /engine/reference/commandline/port/
+"/reference/cli/docker/container/prune/":
+  - /edge/engine/reference/commandline/container_prune/
+  - /engine/reference/commandline/container_prune/
+"/reference/cli/docker/container/rename/":
+  - /edge/engine/reference/commandline/container_rename/
+  - /engine/reference/commandline/container_rename/
+  - /engine/reference/commandline/rename/
+"/reference/cli/docker/container/restart/":
+  - /edge/engine/reference/commandline/container_restart/
+  - /engine/reference/commandline/container_restart/
+  - /engine/reference/commandline/restart/
+"/reference/cli/docker/container/rm/":
+  - /edge/engine/reference/commandline/container_rm/
+  - /engine/reference/commandline/container_rm/
+  - /engine/reference/commandline/rm/
+"/reference/cli/docker/container/run/":
+  - /engine/reference/commandline/container_run/
+  - /engine/reference/commandline/run/
+  - /reference/cli/docker/run/
+"/reference/cli/docker/container/start/":
+  - /edge/engine/reference/commandline/container_start/
+  - /engine/reference/commandline/container_start/
+  - /engine/reference/commandline/start/
+"/reference/cli/docker/container/stats/":
+  - /edge/engine/reference/commandline/container_stats/
+  - /engine/reference/commandline/container_stats/
+  - /engine/reference/commandline/stats/
+"/reference/cli/docker/container/stop/":
+  - /edge/engine/reference/commandline/container_stop/
+  - /engine/reference/commandline/container_stop/
+  - /engine/reference/commandline/stop/
+"/reference/cli/docker/container/top/":
+  - /edge/engine/reference/commandline/container_top/
+  - /engine/reference/commandline/container_top/
+  - /engine/reference/commandline/top/
+"/reference/cli/docker/container/unpause/":
+  - /edge/engine/reference/commandline/container_unpause/
+  - /engine/reference/commandline/container_unpause/
+  - /engine/reference/commandline/unpause/
+"/reference/cli/docker/container/update/":
+  - /edge/engine/reference/commandline/container_update/
+  - /engine/reference/commandline/container_update/
+  - /engine/reference/commandline/update/
+"/reference/cli/docker/container/wait/":
+  - /edge/engine/reference/commandline/container_wait/
+  - /engine/reference/commandline/container_wait/
+  - /engine/reference/commandline/wait/
+"/reference/cli/docker/context/":
+  - /engine/reference/commandline/context/
+"/reference/cli/docker/context/create/":
+  - /engine/reference/commandline/context_create/
+"/reference/cli/docker/context/export/":
+  - /engine/reference/commandline/context_export/
+"/reference/cli/docker/context/import/":
+  - /engine/reference/commandline/context_import/
+"/reference/cli/docker/context/inspect/":
+  - /engine/reference/commandline/context_inspect/
+"/reference/cli/docker/context/ls/":
+  - /engine/reference/commandline/context_ls/
+"/reference/cli/docker/context/rm/":
+  - /engine/reference/commandline/context_rm/
+"/reference/cli/docker/context/show/":
+  - /engine/reference/commandline/context_show/
+"/reference/cli/docker/context/update/":
+  - /engine/reference/commandline/context_update/
+"/reference/cli/docker/context/use/":
+  - /engine/reference/commandline/context_use/
+"/reference/cli/docker/image/":
+  - /edge/engine/reference/commandline/image/
+  - /engine/reference/commandline/image/
+"/reference/cli/docker/image/history/":
+  - /edge/engine/reference/commandline/image_history/
+  - /engine/reference/commandline/history/
+  - /engine/reference/commandline/image_history/
+"/reference/cli/docker/image/import/":
+  - /edge/engine/reference/commandline/image_import/
+  - /engine/reference/commandline/image_import/
+  - /engine/reference/commandline/import/
+"/reference/cli/docker/image/inspect/":
+  - /edge/engine/reference/commandline/image_inspect/
+  - /engine/reference/commandline/image_inspect/
+"/reference/cli/docker/image/load/":
+  - /edge/engine/reference/commandline/image_load/
+  - /engine/reference/commandline/image_load/
+  - /engine/reference/commandline/load/
+"/reference/cli/docker/image/ls/":
+  - /edge/engine/reference/commandline/image_ls/
+  - /engine/reference/commandline/image_ls/
+  - /engine/reference/commandline/images/
+  - /reference/cli/docker/images/
+"/reference/cli/docker/image/prune/":
+  - /edge/engine/reference/commandline/image_prune/
+  - /engine/reference/commandline/image_prune/
+"/reference/cli/docker/image/pull/":
+  - /edge/engine/reference/commandline/image_pull/
+  - /engine/reference/commandline/image_pull/
+  - /engine/reference/commandline/pull/
+  - /reference/cli/docker/pull/
+"/reference/cli/docker/image/push/":
+  - /edge/engine/reference/commandline/image_push/
+  - /engine/reference/commandline/image_push/
+  - /engine/reference/commandline/push/
+  - /reference/cli/docker/push/
+"/reference/cli/docker/image/rm/":
+  - /edge/engine/reference/commandline/image_rm/
+  - /engine/reference/commandline/image_rm/
+  - /engine/reference/commandline/rmi/
+  - /reference/cli/docker/rmi/
+"/reference/cli/docker/image/save/":
+  - /edge/engine/reference/commandline/image_save/
+  - /engine/reference/commandline/image_save/
+  - /engine/reference/commandline/save/
+  - /reference/cli/docker/save/
+"/reference/cli/docker/image/tag/":
+  - /edge/engine/reference/commandline/image_tag/
+  - /engine/reference/commandline/image_tag/
+  - /engine/reference/commandline/tag/
+"/reference/cli/docker/init/":
+  - /engine/reference/commandline/init/
+"/reference/cli/docker/inspect/":
+  - /edge/engine/reference/commandline/inspect/
+  - /engine/reference/commandline/inspect/
+"/reference/cli/docker/login/":
+  - /edge/engine/reference/commandline/login/
+  - /engine/reference/commandline/login/
+"/reference/cli/docker/logout/":
+  - /edge/engine/reference/commandline/logout/
+  - /engine/reference/commandline/logout/
+"/reference/cli/docker/manifest/":
+  - /edge/engine/reference/commandline/manifest/
+  - /engine/reference/commandline/manifest/
+"/reference/cli/docker/manifest/annotate/":
+  - /edge/engine/reference/commandline/manifest_annotate/
+  - /engine/reference/commandline/manifest_annotate/
+"/reference/cli/docker/manifest/create/":
+  - /edge/engine/reference/commandline/manifest_create/
+  - /engine/reference/commandline/manifest_create/
+"/reference/cli/docker/manifest/inspect/":
+  - /edge/engine/reference/commandline/manifest_inspect/
+  - /engine/reference/commandline/manifest_inspect/
+"/reference/cli/docker/manifest/push/":
+  - /edge/engine/reference/commandline/manifest_push/
+  - /engine/reference/commandline/manifest_push/
+"/reference/cli/docker/manifest/rm/":
+  - /engine/reference/commandline/manifest_rm/
+"/reference/cli/docker/mcp/catalog/add/":
+  - /reference/cli/docker/mcp/catalog/catalog_add/
+"/reference/cli/docker/mcp/catalog/bootstrap/":
+  - /reference/cli/docker/mcp/catalog/catalog_bootstrap/
+"/reference/cli/docker/mcp/catalog/create/":
+  - /reference/cli/docker/mcp/catalog/catalog_create/
+"/reference/cli/docker/mcp/catalog/export/":
+  - /reference/cli/docker/mcp/catalog/catalog_export/
+"/reference/cli/docker/mcp/catalog/fork/":
+  - /reference/cli/docker/mcp/catalog/catalog_fork/
+"/reference/cli/docker/mcp/catalog/import/":
+  - /reference/cli/docker/mcp/catalog/catalog_import/
+"/reference/cli/docker/mcp/catalog/init/":
+  - /reference/cli/docker/mcp/catalog/catalog_init/
+"/reference/cli/docker/mcp/catalog/ls/":
+  - /reference/cli/docker/mcp/catalog/catalog_ls/
+"/reference/cli/docker/mcp/catalog/reset/":
+  - /reference/cli/docker/mcp/catalog/catalog_reset/
+"/reference/cli/docker/mcp/catalog/rm/":
+  - /reference/cli/docker/mcp/catalog/catalog_rm/
+"/reference/cli/docker/mcp/catalog/show/":
+  - /reference/cli/docker/mcp/catalog/catalog_show/
+"/reference/cli/docker/mcp/catalog/update/":
+  - /reference/cli/docker/mcp/catalog/catalog_update/
+"/reference/cli/docker/mcp/client/connect/":
+  - /reference/cli/docker/mcp/client/client_connect/
+"/reference/cli/docker/mcp/client/disconnect/":
+  - /reference/cli/docker/mcp/client/client_disconnect/
+"/reference/cli/docker/mcp/client/ls/":
+  - /reference/cli/docker/mcp/client/client_ls/
+"/reference/cli/docker/mcp/client/manual-instructions/":
+  - /reference/cli/docker/mcp/client/client_manual-instructions/
+"/reference/cli/docker/mcp/config/dump/":
+  - /reference/cli/docker/mcp/config/config_dump/
+"/reference/cli/docker/mcp/config/read/":
+  - /reference/cli/docker/mcp/config/config_read/
+"/reference/cli/docker/mcp/config/reset/":
+  - /reference/cli/docker/mcp/config/config_reset/
+"/reference/cli/docker/mcp/config/restore/":
+  - /reference/cli/docker/mcp/config/config_restore/
+"/reference/cli/docker/mcp/config/write/":
+  - /reference/cli/docker/mcp/config/config_write/
+"/reference/cli/docker/mcp/feature/disable/":
+  - /reference/cli/docker/mcp/feature/feature_disable/
+"/reference/cli/docker/mcp/feature/enable/":
+  - /reference/cli/docker/mcp/feature/feature_enable/
+"/reference/cli/docker/mcp/feature/ls/":
+  - /reference/cli/docker/mcp/feature/feature_ls/
+  - /reference/cli/docker/mcp/feature/list/
+"/reference/cli/docker/mcp/gateway/run/":
+  - /reference/cli/docker/mcp/gateway/gateway_run/
+"/reference/cli/docker/mcp/oauth/authorize/":
+  - /reference/cli/docker/mcp/oauth/oauth_authorize/
+"/reference/cli/docker/mcp/oauth/ls/":
+  - /reference/cli/docker/mcp/oauth/oauth_ls/
+"/reference/cli/docker/mcp/oauth/revoke/":
+  - /reference/cli/docker/mcp/oauth/oauth_revoke/
+"/reference/cli/docker/mcp/policy/dump/":
+  - /reference/cli/docker/mcp/policy/policy_dump/
+"/reference/cli/docker/mcp/policy/set/":
+  - /reference/cli/docker/mcp/policy/policy_set/
+"/reference/cli/docker/mcp/secret/":
+  - /reference/cli/docker/mcp/secrets/
+"/reference/cli/docker/mcp/secret/export/":
+  - /reference/cli/docker/mcp/secrets/secret_export/
+"/reference/cli/docker/mcp/secret/ls/":
+  - /reference/cli/docker/mcp/secrets/secret_ls/
+"/reference/cli/docker/mcp/secret/rm/":
+  - /reference/cli/docker/mcp/secrets/secret_rm/
+"/reference/cli/docker/mcp/secret/set/":
+  - /reference/cli/docker/mcp/secrets/secret_set/
+"/reference/cli/docker/mcp/server/disable/":
+  - /reference/cli/docker/mcp/server/server_disable/
+"/reference/cli/docker/mcp/server/enable/":
+  - /reference/cli/docker/mcp/server/server_enable/
+"/reference/cli/docker/mcp/server/inspect/":
+  - /reference/cli/docker/mcp/server/server_inspect/
+"/reference/cli/docker/mcp/server/list/":
+  - /reference/cli/docker/mcp/server/server_ls/
+"/reference/cli/docker/mcp/server/reset/":
+  - /reference/cli/docker/mcp/server/server_reset/
+"/reference/cli/docker/mcp/tools/call/":
+  - /reference/cli/docker/mcp/tools/tools_call/
+"/reference/cli/docker/mcp/tools/count/":
+  - /reference/cli/docker/mcp/tools/tools_count/
+"/reference/cli/docker/mcp/tools/disable/":
+  - /reference/cli/docker/mcp/tools/tools_disable/
+"/reference/cli/docker/mcp/tools/enable/":
+  - /reference/cli/docker/mcp/tools/tools_enable/
+"/reference/cli/docker/mcp/tools/inspect/":
+  - /reference/cli/docker/mcp/tools/tools_inspect/
+"/reference/cli/docker/mcp/tools/ls/":
+  - /reference/cli/docker/mcp/tools/list/
+  - /reference/cli/docker/mcp/tools/tools_ls/
+"/reference/cli/docker/model/inspect/":
+  - /engine/reference/commandline/model_inspect/
+"/reference/cli/docker/model/install-runner/":
+  - /engine/reference/commandline/model_install-runner/
+"/reference/cli/docker/model/list/":
+  - /engine/reference/commandline/model_list/
+"/reference/cli/docker/model/logs/":
+  - /engine/reference/commandline/model_logs/
+"/reference/cli/docker/model/package/":
+  - /engine/reference/commandline/model_package/
+"/reference/cli/docker/model/pull/":
+  - /engine/reference/commandline/model_pull/
+"/reference/cli/docker/model/push/":
+  - /engine/reference/commandline/model_push/
+"/reference/cli/docker/model/rm/":
+  - /engine/reference/commandline/model_rm/
+"/reference/cli/docker/model/run/":
+  - /engine/reference/commandline/model_run/
+"/reference/cli/docker/model/status/":
+  - /engine/reference/commandline/model_status/
+"/reference/cli/docker/model/tag/":
+  - /engine/reference/commandline/model_tag/
+"/reference/cli/docker/model/uninstall-runner/":
+  - /engine/reference/commandline/model_uninstall-runner/
+"/reference/cli/docker/model/version/":
+  - /engine/reference/commandline/model_version/
+"/reference/cli/docker/network/":
+  - /edge/engine/reference/commandline/network/
+  - /engine/reference/commandline/network/
+"/reference/cli/docker/network/connect/":
+  - /edge/engine/reference/commandline/network_connect/
+  - /engine/reference/commandline/network_connect/
+"/reference/cli/docker/network/create/":
+  - /edge/engine/reference/commandline/network_create/
+  - /engine/reference/commandline/network_create/
+"/reference/cli/docker/network/disconnect/":
+  - /edge/engine/reference/commandline/network_disconnect/
+  - /engine/reference/commandline/network_disconnect/
+"/reference/cli/docker/network/inspect/":
+  - /edge/engine/reference/commandline/network_inspect/
+  - /engine/reference/commandline/network_inspect/
+"/reference/cli/docker/network/ls/":
+  - /edge/engine/reference/commandline/network_ls/
+  - /engine/reference/commandline/network_ls/
+"/reference/cli/docker/network/prune/":
+  - /edge/engine/reference/commandline/network_prune/
+  - /engine/reference/commandline/network_prune/
+"/reference/cli/docker/network/rm/":
+  - /edge/engine/reference/commandline/network_rm/
+  - /engine/reference/commandline/network_rm/
+"/reference/cli/docker/node/":
+  - /edge/engine/reference/commandline/node/
+  - /engine/reference/commandline/node/
+"/reference/cli/docker/node/demote/":
+  - /edge/engine/reference/commandline/node_demote/
+  - /engine/reference/commandline/node_demote/
+"/reference/cli/docker/node/inspect/":
+  - /edge/engine/reference/commandline/node_inspect/
+  - /engine/reference/commandline/node_inspect/
+"/reference/cli/docker/node/ls/":
+  - /edge/engine/reference/commandline/node_ls/
+  - /engine/reference/commandline/node_ls/
+"/reference/cli/docker/node/promote/":
+  - /edge/engine/reference/commandline/node_promote/
+  - /engine/reference/commandline/node_promote/
+"/reference/cli/docker/node/ps/":
+  - /edge/engine/reference/commandline/node_ps/
+  - /engine/reference/commandline/node_ps/
+"/reference/cli/docker/node/rm/":
+  - /edge/engine/reference/commandline/node_rm/
+  - /engine/reference/commandline/node_rm/
+"/reference/cli/docker/node/update/":
+  - /edge/engine/reference/commandline/node_update/
+  - /engine/reference/commandline/node_update/
+"/reference/cli/docker/plugin/":
+  - /edge/engine/reference/commandline/plugin/
+  - /engine/reference/commandline/plugin/
+"/reference/cli/docker/plugin/create/":
+  - /edge/engine/reference/commandline/plugin_create/
+  - /engine/reference/commandline/plugin_create/
+"/reference/cli/docker/plugin/disable/":
+  - /edge/engine/reference/commandline/plugin_disable/
+  - /engine/reference/commandline/plugin_disable/
+"/reference/cli/docker/plugin/enable/":
+  - /edge/engine/reference/commandline/plugin_enable/
+  - /engine/reference/commandline/plugin_enable/
+"/reference/cli/docker/plugin/inspect/":
+  - /edge/engine/reference/commandline/plugin_inspect/
+  - /engine/reference/commandline/plugin_inspect/
+"/reference/cli/docker/plugin/install/":
+  - /edge/engine/reference/commandline/plugin_install/
+  - /engine/reference/commandline/plugin_install/
+"/reference/cli/docker/plugin/ls/":
+  - /edge/engine/reference/commandline/plugin_ls/
+  - /engine/reference/commandline/plugin_ls/
+"/reference/cli/docker/plugin/push/":
+  - /edge/engine/reference/commandline/plugin_push/
+  - /engine/reference/commandline/plugin_push/
+"/reference/cli/docker/plugin/rm/":
+  - /edge/engine/reference/commandline/plugin_rm/
+  - /engine/reference/commandline/plugin_rm/
+"/reference/cli/docker/plugin/set/":
+  - /edge/engine/reference/commandline/plugin_set/
+  - /engine/reference/commandline/plugin_set/
+"/reference/cli/docker/plugin/upgrade/":
+  - /edge/engine/reference/commandline/plugin_upgrade/
+  - /engine/reference/commandline/plugin_upgrade/
+"/reference/cli/docker/scout/":
+  - /engine/reference/commandline/scout/
+"/reference/cli/docker/scout/attestation/":
+  - /engine/reference/commandline/scout_attestation/
+"/reference/cli/docker/scout/attestation/add/":
+  - /engine/reference/commandline/scout_attestation_add/
+"/reference/cli/docker/scout/cache/":
+  - /engine/reference/commandline/scout_cache/
+"/reference/cli/docker/scout/cache/df/":
+  - /engine/reference/commandline/scout_cache_df/
+"/reference/cli/docker/scout/cache/prune/":
+  - /engine/reference/commandline/scout_cache_prune/
+"/reference/cli/docker/scout/compare/":
+  - /engine/reference/commandline/scout_compare/
+"/reference/cli/docker/scout/config/":
+  - /engine/reference/commandline/scout_config/
+"/reference/cli/docker/scout/cves/":
+  - /engine/reference/commandline/scout_cves/
+"/reference/cli/docker/scout/enroll/":
+  - /engine/reference/commandline/scout_enroll/
+"/reference/cli/docker/scout/environment/":
+  - /engine/reference/commandline/scout_environment/
+"/reference/cli/docker/scout/integration/":
+  - /engine/reference/commandline/scout_integration/
+"/reference/cli/docker/scout/integration/configure/":
+  - /engine/reference/commandline/scout_integration_configure/
+"/reference/cli/docker/scout/integration/delete/":
+  - /engine/reference/commandline/scout_integration_delete/
+"/reference/cli/docker/scout/integration/list/":
+  - /engine/reference/commandline/scout_integration_list/
+"/reference/cli/docker/scout/policy/":
+  - /engine/reference/commandline/scout_policy/
+"/reference/cli/docker/scout/quickview/":
+  - /engine/reference/commandline/scout_quickview/
+"/reference/cli/docker/scout/recommendations/":
+  - /engine/reference/commandline/scout_recommendations/
+"/reference/cli/docker/scout/repo/":
+  - /engine/reference/commandline/scout_repo/
+"/reference/cli/docker/scout/repo/disable/":
+  - /engine/reference/commandline/scout_repo_disable/
+"/reference/cli/docker/scout/repo/enable/":
+  - /engine/reference/commandline/scout_repo_enable/
+"/reference/cli/docker/scout/repo/list/":
+  - /engine/reference/commandline/scout_repo_list/
+"/reference/cli/docker/scout/sbom/":
+  - /engine/reference/commandline/scout_sbom/
+"/reference/cli/docker/scout/stream/":
+  - /engine/reference/commandline/scout_stream/
+"/reference/cli/docker/scout/version/":
+  - /engine/reference/commandline/scout_version/
+"/reference/cli/docker/scout/watch/":
+  - /engine/reference/commandline/scout_watch/
+"/reference/cli/docker/search/":
+  - /edge/engine/reference/commandline/search/
+  - /engine/reference/commandline/search/
+"/reference/cli/docker/secret/":
+  - /edge/engine/reference/commandline/secret/
+  - /engine/reference/commandline/secret/
+"/reference/cli/docker/secret/create/":
+  - /edge/engine/reference/commandline/secret_create/
+  - /engine/reference/commandline/secret_create/
+"/reference/cli/docker/secret/inspect/":
+  - /edge/engine/reference/commandline/secret_inspect/
+  - /engine/reference/commandline/secret_inspect/
+"/reference/cli/docker/secret/ls/":
+  - /edge/engine/reference/commandline/secret_ls/
+  - /engine/reference/commandline/secret_ls/
+"/reference/cli/docker/secret/rm/":
+  - /edge/engine/reference/commandline/secret_rm/
+  - /engine/reference/commandline/secret_rm/
+"/reference/cli/docker/service/":
+  - /edge/engine/reference/commandline/service/
+  - /engine/reference/commandline/service/
+"/reference/cli/docker/service/create/":
+  - /edge/engine/reference/commandline/service_create/
+  - /engine/reference/commandline/service_create/
+"/reference/cli/docker/service/inspect/":
+  - /edge/engine/reference/commandline/service_inspect/
+  - /engine/reference/commandline/service_inspect/
+"/reference/cli/docker/service/logs/":
+  - /edge/engine/reference/commandline/service_logs/
+  - /engine/reference/commandline/service_logs/
+"/reference/cli/docker/service/ls/":
+  - /edge/engine/reference/commandline/service_ls/
+  - /engine/reference/commandline/service_ls/
+"/reference/cli/docker/service/ps/":
+  - /edge/engine/reference/commandline/service_ps/
+  - /engine/reference/commandline/service_ps/
+"/reference/cli/docker/service/rm/":
+  - /edge/engine/reference/commandline/service_rm/
+  - /engine/reference/commandline/service_rm/
+"/reference/cli/docker/service/rollback/":
+  - /edge/engine/reference/commandline/service_rollback/
+  - /engine/reference/commandline/service_rollback/
+"/reference/cli/docker/service/scale/":
+  - /edge/engine/reference/commandline/service_scale/
+  - /engine/reference/commandline/service_scale/
+"/reference/cli/docker/service/update/":
+  - /edge/engine/reference/commandline/service_update/
+  - /engine/reference/commandline/service_update/
+"/reference/cli/docker/stack/":
+  - /edge/engine/reference/commandline/stack/
+  - /engine/reference/commandline/stack/
+"/reference/cli/docker/stack/config/":
+  - /engine/reference/commandline/stack_config/
+"/reference/cli/docker/stack/deploy/":
+  - /compose/bundles/
+  - /edge/engine/reference/commandline/deploy/
+  - /edge/engine/reference/commandline/stack_deploy/
+  - /engine/reference/commandline/deploy/
+  - /engine/reference/commandline/stack_deploy/
+"/reference/cli/docker/stack/ls/":
+  - /edge/engine/reference/commandline/stack_ls/
+  - /engine/reference/commandline/stack_ls/
+"/reference/cli/docker/stack/ps/":
+  - /edge/engine/reference/commandline/stack_ps/
+  - /edge/engine/reference/commandline/stack_tasks/
+  - /engine/reference/commandline/stack_tasks/
+"/reference/cli/docker/stack/rm/":
+  - /edge/engine/reference/commandline/stack_rm/
+  - /engine/reference/commandline/stack_rm/
+"/reference/cli/docker/stack/services/":
+  - /edge/engine/reference/commandline/stack_services/
+  - /engine/reference/commandline/stack_services/
+"/reference/cli/docker/swarm/":
+  - /edge/engine/reference/commandline/swarm/
+  - /engine/reference/commandline/swarm/
+"/reference/cli/docker/swarm/ca/":
+  - /edge/engine/reference/commandline/swarm_ca/
+  - /engine/reference/commandline/swarm_ca/
+"/reference/cli/docker/swarm/init/":
+  - /edge/engine/reference/commandline/swarm_init/
+  - /engine/reference/commandline/swarm_init/
+"/reference/cli/docker/swarm/join-token/":
+  - /edge/engine/reference/commandline/swarm_join-token/
+  - /edge/engine/reference/commandline/swarm_join_token/
+  - /engine/reference/commandline/swarm_join-token/
+  - /engine/reference/commandline/swarm_join_token/
+"/reference/cli/docker/swarm/join/":
+  - /edge/engine/reference/commandline/swarm_join/
+  - /engine/reference/commandline/swarm_join/
+"/reference/cli/docker/swarm/leave/":
+  - /edge/engine/reference/commandline/swarm_leave/
+  - /engine/reference/commandline/swarm_leave/
+"/reference/cli/docker/swarm/unlock-key/":
+  - /edge/engine/reference/commandline/swarm_unlock-key/
+  - /engine/reference/commandline/swarm_unlock-key/
+"/reference/cli/docker/swarm/unlock/":
+  - /edge/engine/reference/commandline/swarm_unlock/
+  - /engine/reference/commandline/swarm_unlock/
+"/reference/cli/docker/swarm/update/":
+  - /edge/engine/reference/commandline/swarm_update/
+  - /engine/reference/commandline/swarm_update/
+"/reference/cli/docker/system/":
+  - /edge/engine/reference/commandline/system/
+  - /engine/reference/commandline/system/
+"/reference/cli/docker/system/df/":
+  - /edge/engine/reference/commandline/system_df/
+  - /engine/reference/commandline/system_df/
+"/reference/cli/docker/system/events/":
+  - /edge/engine/reference/commandline/system_events/
+  - /engine/reference/commandline/events/
+  - /engine/reference/commandline/system_events/
+"/reference/cli/docker/system/info/":
+  - /edge/engine/reference/commandline/system_info/
+  - /engine/reference/commandline/info/
+  - /engine/reference/commandline/system_info/
+  - /reference/cli/docker/info/
+"/reference/cli/docker/system/prune/":
+  - /edge/engine/reference/commandline/system_prune/
+  - /engine/reference/commandline/system_prune/
+"/reference/cli/docker/trust/":
+  - /edge/engine/reference/commandline/trust/
+  - /engine/reference/commandline/trust/
+"/reference/cli/docker/trust/inspect/":
+  - /edge/engine/reference/commandline/trust_inspect/
+  - /engine/reference/commandline/trust_inspect/
+"/reference/cli/docker/trust/key/":
+  - /edge/engine/reference/commandline/trust_key/
+  - /engine/reference/commandline/trust_key/
+"/reference/cli/docker/trust/key/generate/":
+  - /edge/engine/reference/commandline/trust_key_generate/
+  - /engine/reference/commandline/trust_key_generate/
+"/reference/cli/docker/trust/key/load/":
+  - /edge/engine/reference/commandline/trust_key_load/
+  - /engine/reference/commandline/trust_key_load/
+"/reference/cli/docker/trust/revoke/":
+  - /edge/engine/reference/commandline/trust_revoke/
+  - /engine/reference/commandline/trust_revoke/
+"/reference/cli/docker/trust/sign/":
+  - /edge/engine/reference/commandline/trust_sign/
+  - /engine/reference/commandline/trust_sign/
+"/reference/cli/docker/trust/signer/":
+  - /edge/engine/reference/commandline/trust_signer/
+  - /engine/reference/commandline/trust_signer/
+"/reference/cli/docker/trust/signer/add/":
+  - /edge/engine/reference/commandline/trust_signer_add/
+  - /engine/reference/commandline/trust_signer_add/
+"/reference/cli/docker/trust/signer/remove/":
+  - /edge/engine/reference/commandline/trust_signer_remove/
+  - /engine/reference/commandline/trust_signer_remove/
+"/reference/cli/docker/version/":
+  - /edge/engine/reference/commandline/version/
+  - /engine/reference/commandline/version/
+"/reference/cli/docker/volume/":
+  - /edge/engine/reference/commandline/volume/
+  - /engine/reference/commandline/volume/
+"/reference/cli/docker/volume/create/":
+  - /edge/engine/reference/commandline/volume_create/
+  - /engine/reference/commandline/volume_create/
+"/reference/cli/docker/volume/inspect/":
+  - /edge/engine/reference/commandline/volume_inspect/
+  - /engine/reference/commandline/volume_inspect/
+"/reference/cli/docker/volume/ls/":
+  - /edge/engine/reference/commandline/volume_ls/
+  - /engine/reference/commandline/volume_ls/
+"/reference/cli/docker/volume/prune/":
+  - /edge/engine/reference/commandline/volume_prune/
+  - /engine/reference/commandline/volume_prune/
+"/reference/cli/docker/volume/rm/":
+  - /edge/engine/reference/commandline/volume_rm/
+  - /engine/reference/commandline/volume_rm/
+"/reference/cli/docker/volume/update/":
+  - /engine/reference/commandline/volume_update/

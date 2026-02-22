@@ -221,9 +221,9 @@ Now that you have an image built, it's time to push the image to a registry.
 To learn more about building, tagging, and publishing images, visit the following resources:
 
 * [What is a build context?](/build/concepts/context/#what-is-a-build-context)
-* [docker build reference](/engine/reference/commandline/image_build/)
-* [docker image tag reference](/engine/reference/commandline/image_tag/)
-* [docker push reference](/engine/reference/commandline/image_push/)
+* [docker build reference](/reference/cli/docker/buildx/build/)
+* [docker image tag reference](/reference/cli/docker/image/tag/)
+* [docker push reference](/reference/cli/docker/image/push/)
 * [What is a registry?](/get-started/docker-concepts/the-basics/what-is-a-registry/)
 
 ## Next steps

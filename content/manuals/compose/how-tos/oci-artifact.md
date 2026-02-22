@@ -146,5 +146,5 @@ $ docker compose publish -y username/my-compose-app:latest
 ## Next steps
 
 - [Learn about OCI artifacts in Docker Hub](/manuals/docker-hub/repos/manage/hub-images/oci-artifacts.md)
-- [Compose publish command](/reference/cli/docker/compose/publish.md)
+- [Compose publish command](/reference/cli/docker/compose/publish/)
 - [Understand `include`](/reference/compose-file/include.md)

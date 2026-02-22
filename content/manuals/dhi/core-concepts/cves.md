@@ -83,7 +83,7 @@ Example output:
     ...
 ```
 
-For more detailed filtering and JSON output, see [Docker Scout CLI reference](../../../reference/cli/docker/scout/_index.md).
+For more detailed filtering and JSON output, see [Docker Scout CLI reference](/reference/cli/docker/scout/).
 
 ### Grype
 

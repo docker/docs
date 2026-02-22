@@ -1,33 +1,19 @@
-{{- /*
-  Renders a sidebar for pages in the `/guides` section.
-  - Detects if the current page is part of a multipage guide (`.Store.Set "multipage"`).
-  - Displays the section's title, summary, languages, tags, and estimated time (`Params.time`).
-  - Includes a stepper navigation (`guides-stepper.html`) for multipage guides.
-  - Optionally lists resource links from `Params.resource_links`.
-  - Provides a link back to the main `/guides/` index.
-  */
--}}
+{{- $guide := cond (eq .CurrentSection .FirstSection) . .CurrentSection -}}
 <div class="flex flex-col gap-4 px-4 pt-2">
-  {{- $root := . }}
-  {{- .Store.Set "multipage" false }}
-  {{- if ne .CurrentSection .FirstSection }}
-    {{- $root = .CurrentSection }}
-    {{- .Store.Set "multipage" true }}
-  {{- end }}
   <div class="font-semibold">
-    <a href="{{ $root.Permalink }}">{{ $root.Title }}</a>
+    <a href="{{ $guide.Permalink }}">{{ $guide.Title }}</a>
   </div>
-  <div>{{ $root.Summary }}</div>
+  <div>{{ $guide.Summary }}</div>
   <div class="space-y-4">
     <div class="flex flex-wrap gap-2">
-      {{- with ($root.GetTerms "languages") }}
-        {{ partial "languages.html" . }}
+      {{- with $guide.Params.languages }}
+        {{ partial "guide-languages.html" . }}
       {{- end }}
-      {{- with ($root.GetTerms "tags") }}
-        {{ partial "tags.html" . }}
+      {{- with $guide.Params.tags }}
+        {{ partial "guide-tags.html" . }}
       {{- end }}
     </div>
-    {{- with ($root.Params.time) }}
+    {{- with $guide.Params.time }}
       <div class="flex gap-2 text-gray-400 dark:text-gray-400">
         <span class="icon-svg"
           >{{ partialCached "icon" "schedule" "schedule" }}</span
@@ -36,10 +22,10 @@
       </div>
     {{- end -}}
   </div>
-  {{- if (.Store.Get "multipage") }}
+  {{- if gt (len $guide.Pages) 0 }}
     {{- partial "guides-stepper.html" . }}
   {{- end }}
-  {{- with $root.Params.resource_links }}
+  {{- with $guide.Params.resource_links }}
     <div class="space-y-2">
       <p>Resources:</p>
       <ul class="ml-4 space-y-2">
@@ -49,5 +35,5 @@
       </ul>
     </div>
   {{- end }}
-  <a href="/guides/" class="link mt-2">« Back to all guides</a>
+  <a href="/guides/" class="link mt-2">&laquo; Back to all guides</a>
 </div>

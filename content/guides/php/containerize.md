@@ -118,7 +118,7 @@ $ docker compose down
 ```
 
 For more information about Compose commands, see the [Compose CLI
-reference](/reference/cli/docker/compose/_index.md).
+reference](/reference/cli/docker/compose/).
 
 ## Summary
 
@@ -127,7 +127,7 @@ application using Docker.
 
 Related information:
 
-- [docker init reference](/reference/cli/docker/init.md)
+- [docker init reference](/reference/cli/docker/init/)
 
 ## Next steps
 

@@ -111,4 +111,4 @@ $ docker scout policy \
 ```
 
 For more information about the command, refer to the [CLI
-reference](/reference/cli/docker/scout/policy.md).
+reference](/reference/cli/docker/scout/policy/).

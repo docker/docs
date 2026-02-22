@@ -18,6 +18,12 @@
   {{- $schema = merge $schema (dict "dateModified" (time.Format "2006-01-02T15:04:05Z07:00" .)) -}}
 {{- end -}}
 
+{{- /* Add mainEntityOfPage and language */ -}}
+{{- $schema = merge $schema (dict
+  "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+  "inLanguage" site.Language.Lang
+) -}}
+
 {{- /* Add author and publisher */ -}}
 {{- $logoUrl := printf "%sassets/images/docker-logo.png" (strings.TrimSuffix "/" site.BaseURL | printf "%s/") -}}
 {{- $org := dict
@@ -35,6 +41,16 @@
 {{- /* Add keywords if present */ -}}
 {{- with $keywords -}}
   {{- $schema = merge $schema (dict "keywords" .) -}}
+{{- end -}}
+
+{{- /* Add proficiency level if specified in frontmatter */ -}}
+{{- with .Params.proficiencyLevel -}}
+  {{- $schema = merge $schema (dict "proficiencyLevel" .) -}}
+{{- end -}}
+
+{{- /* Add prerequisites if specified in frontmatter */ -}}
+{{- with .Params.prerequisites -}}
+  {{- $schema = merge $schema (dict "dependencies" .) -}}
 {{- end -}}
 
 {{- /* Add time required if specified in frontmatter */ -}}

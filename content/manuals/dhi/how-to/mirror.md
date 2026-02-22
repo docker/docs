@@ -157,7 +157,7 @@ ECR, Google Artifact Registry, GitHub Container Registry, or a private Harbor
 instance.
 
 You can use any standard workflow to mirror the image, such as the
-[Docker CLI](/reference/cli/docker/_index.md), [Docker Hub Registry
+[Docker CLI](/reference/cli/docker/), [Docker Hub Registry
 API](/reference/api/registry/latest/), third-party registry tools, or CI/CD
 automation.
 

@@ -1,16 +1,11 @@
-{{ define "left" }}
-  {{ partial "sidebar/mainnav.html" . }}
-  {{ partial "sidebar/sections.html" . }}
-{{ end }}
-
-{{ define "main" }}
-  {{ partial "breadcrumbs.html" . }}
+{{ define "article" }}
   <article class="prose max-w-none dark:prose-invert">
+    {{ partial "breadcrumbs.html" . }}
     {{ with .Title }}
     <h1 class="scroll-mt-36">{{ . }}</h1>
     {{ end }}
     {{ with .Content }}
-      {{ .  }}
+      {{ . }}
     {{ end }}
     <table>
       <thead>
@@ -32,8 +27,4 @@
       </tbody>
     </table>
   </article>
-{{ end }}
-
-{{ define "right" }}
-  {{ partial "aside.html" . }}
 {{ end }}
