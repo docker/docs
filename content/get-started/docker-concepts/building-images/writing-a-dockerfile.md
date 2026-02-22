@@ -152,7 +152,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 > The `docker init` command will analyze your project and quickly create 
 > a Dockerfile, a `compose.yaml`, and a `.dockerignore`, helping you get
 > up and going. Since you're learning about Dockerfiles specifically here, 
-> you won't use it now. But, [learn more about it here](/engine/reference/commandline/init/).
+> you won't use it now. But, [learn more about it here](/reference/cli/docker/init/).
 
 ## Additional resources
 

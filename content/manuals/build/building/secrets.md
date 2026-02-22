@@ -85,7 +85,7 @@ builds, such as API tokens, passwords, or SSH keys.
 
 The source of a secret can be either a
 [file](/reference/cli/docker/buildx/build/#file) or an
-[environment variable](/reference/cli/docker/buildx/build/#env).
+[environment variable](/reference/cli/docker/buildx/build/#typeenv).
 When you use the CLI or Bake, the type can be detected automatically. You can
 also specify it explicitly with `type=file` or `type=env`.
 

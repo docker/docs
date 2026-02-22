@@ -138,5 +138,5 @@ This page was a brief introduction to Compose. In the following resources, you c
 
 
 * [Overview of Docker Compose](/compose/)
-* [Overview of Docker Compose CLI](/compose/reference/)
+* [Overview of Docker Compose CLI](/reference/cli/docker/compose/)
 * [How Compose works](/compose/intro/compose-application-model/)
