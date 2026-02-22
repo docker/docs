@@ -35,6 +35,17 @@ file, and configuring your app to use those models and tools.
 | 6 | Putting It All Together | Build a complete agentic application |
 | 7 | Conclusion | Summary and next steps |
 
+## Prerequisites
+
+- Install Docker Desktop (latest version)
+- Enable **Docker Model Runner** (Settings → AI → Docker Model Runner)
+- The lab uses the Gemma 3 model. Pre-pull it before launching:
+```console
+$ docker model pull ai/gemma3
+```
+
+
+
 ## Launch the lab
 
 1. Clone the repository:
