@@ -8,7 +8,7 @@ long: |-
     > This configuration is only relevant if you're building Windows containers.
     >
     > For information about the default `docker build`, using Buildx,
-    > see [`docker buildx build`](/reference/cli/docker/build/).
+    > see [`docker buildx build`](/reference/cli/docker/buildx/build/).
 
     When building with legacy builder, images are created from a Dockerfile by
     running a sequence of [commits](/reference/cli/docker/container/commit/). This process is
