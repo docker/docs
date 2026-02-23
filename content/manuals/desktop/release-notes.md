@@ -30,7 +30,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-02-23" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.62.0" build_path="//" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.62.0" build_path="/219486/" >}}
 
 ### Updates
 
@@ -40,11 +40,11 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- Fixed an issue where background update checks did not respect the Automatically check for updates setting when disabled. Fixes [docker/for-mac#3908](https://github.com/docker/for-mac/issues/3908).
+- Fixed an issue where background update checks did not respect the **Automatically check for updates** setting when disabled. Fixes [docker/for-mac#3908](https://github.com/docker/for-mac/issues/3908).
 
 #### For Mac
 
-- Added support for vllm-metal in Docker Model Runner.
+- Added support for vLLM Metal in Docker Model Runner.
 
 #### For Linux 
 
