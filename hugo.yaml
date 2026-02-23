@@ -351,10 +351,3 @@ module:
         - source: docs/reference
           target: data/model-cli
           files: ["*.yaml"]
-
-    # MCP CLI
-    - path: github.com/docker/mcp-gateway
-      mounts:
-        - source: docs/generator/reference
-          target: data/mcp-cli
-          files: ["*.yaml"]

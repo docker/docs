@@ -1,0 +1,43 @@
+command: docker mcp profile show
+short: Show profile
+long: Show profile
+usage: docker mcp profile show <profile-id>
+pname: docker mcp profile
+plink: docker_mcp_profile.yaml
+options:
+    - option: clients
+      value_type: bool
+      default_value: "false"
+      description: Include client information in output
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: format
+      value_type: string
+      default_value: human
+      description: 'Supported: json, yaml, human.'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: yq
+      value_type: string
+      description: YQ expression to apply to the output
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

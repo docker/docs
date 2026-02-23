@@ -1,0 +1,13 @@
+command: docker mcp profile pull
+short: Pull profile from OCI registry
+long: Pull profile from OCI registry
+usage: docker mcp profile pull <oci-reference>
+pname: docker mcp profile
+plink: docker_mcp_profile.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

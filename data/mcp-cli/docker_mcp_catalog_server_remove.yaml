@@ -1,0 +1,31 @@
+command: docker mcp catalog server remove
+aliases: docker mcp catalog server remove, docker mcp catalog server rm
+short: Remove MCP servers from a catalog
+long: Remove MCP servers from a catalog by server name.
+usage: docker mcp catalog server remove <oci-reference> --name <name1> --name <name2> ...
+pname: docker mcp catalog server
+plink: docker_mcp_catalog_server.yaml
+options:
+    - option: name
+      value_type: stringArray
+      default_value: '[]'
+      description: Server name to remove (can be specified multiple times)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+examples: |4-
+      # Remove servers by name
+      docker mcp catalog server remove mcp/my-catalog:latest --name github --name slack
+
+      # Remove a single server
+      docker mcp catalog server remove mcp/my-catalog:latest --name github
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+
