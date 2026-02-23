@@ -10,6 +10,7 @@ cname:
     - docker model df
     - docker model inspect
     - docker model install-runner
+    - docker model launch
     - docker model list
     - docker model logs
     - docker model package
@@ -22,6 +23,9 @@ cname:
     - docker model restart-runner
     - docker model rm
     - docker model run
+    - docker model search
+    - docker model show
+    - docker model skills
     - docker model start-runner
     - docker model status
     - docker model stop-runner
@@ -34,6 +38,7 @@ clink:
     - docker_model_df.yaml
     - docker_model_inspect.yaml
     - docker_model_install-runner.yaml
+    - docker_model_launch.yaml
     - docker_model_list.yaml
     - docker_model_logs.yaml
     - docker_model_package.yaml
@@ -46,6 +51,9 @@ clink:
     - docker_model_restart-runner.yaml
     - docker_model_rm.yaml
     - docker_model_run.yaml
+    - docker_model_search.yaml
+    - docker_model_show.yaml
+    - docker_model_skills.yaml
     - docker_model_start-runner.yaml
     - docker_model_status.yaml
     - docker_model_stop-runner.yaml

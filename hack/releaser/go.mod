@@ -1,6 +1,6 @@
 module github.com/docker/docs/hack/releaser
 
-go 1.25.0
+go 1.25.6
 
 require (
 	github.com/alecthomas/kong v1.4.0

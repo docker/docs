@@ -60,6 +60,8 @@ github.com/docker/cli v29.1.5+incompatible h1:GckbANUt3j+lsnQ6eCcQd70mNSOismSHWt
 github.com/docker/cli v29.1.5+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v29.2.0+incompatible h1:9oBd9+YM7rxjZLfyMGxjraKBKE4/nVyvVfN4qNl9XRM=
 github.com/docker/cli v29.2.0+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v29.2.1+incompatible h1:n3Jt0QVCN65eiVBoUTZQM9mcQICCJt3akW4pKAbKdJg=
+github.com/docker/cli v29.2.1+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/compose/v5 v5.0.0 h1:J2uMCzJ/5xLcoIVVXvMmPe6HBzVQpmJThKa7Qk7Xldc=
 github.com/docker/compose/v5 v5.0.0/go.mod h1:BurapGv8zmYnsbSmlpCz5EU2Pi3YFV/PjeUnoFpcw64=
 github.com/docker/compose/v5 v5.0.1 h1:5yCjDJbwUqcuI+6WNFHNWz2/3vyBDsNnfe8LlFjyxEc=
@@ -84,6 +86,8 @@ github.com/docker/model-runner v1.0.3 h1:04qSAOsFvxOYIejMOc2XGug+WQSTax0RO0OMA7D
 github.com/docker/model-runner v1.0.3/go.mod h1:qRIuXMeZ5dnL4A9e/+BUtQOSZAS0PBxUkLN51XYpLOE=
 github.com/docker/model-runner/cmd/cli v1.0.3 h1:oycm6fHwhFBNM47Y2Ka7nUSsrbSG3FL7NMShjTRuxak=
 github.com/docker/model-runner/cmd/cli v1.0.3/go.mod h1:86LCLsk93vuevYRDKoBxwGusyGlW+UnKCnbXJ7m6Zjo=
+github.com/docker/model-runner/cmd/cli v1.0.12 h1:iYDX/xhhDBAYuzBn3aD9pIGM0se9lVYDOURWpJJXBBs=
+github.com/docker/model-runner/cmd/cli v1.0.12/go.mod h1:7ll9IiT8yUflPPgZl5a0Wv7qcA/6DKrqbeR9+kBmM5c=
 github.com/docker/model-runner/pkg/go-containerregistry v0.0.0-20251121150728-6951a2a36575 h1:N2yLWYSZFTVLkLTh8ux1Z0Nug/F78pXsl2KDtbWhe+Y=
 github.com/docker/model-runner/pkg/go-containerregistry v0.0.0-20251121150728-6951a2a36575/go.mod h1:gbdiY0X8gr0J88OfUuRD29JXCWT9jgHzPmrqTlO15BM=
 github.com/elastic/go-sysinfo v1.15.4 h1:A3zQcunCxik14MgXu39cXFXcIw2sFXZ0zL886eyiv1Q=

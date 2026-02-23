@@ -1,14 +1,28 @@
 command: docker model configure
-short: Configure runtime options for a model
-long: Configure runtime options for a model
-usage: docker model configure [--context-size=<n>] [--speculative-draft-model=<model>] [--hf_overrides=<json>] [--reasoning-budget=<n>] MODEL
+aliases: docker model configure, docker model config
+short: Manage model runtime configurations
+long: Manage model runtime configurations
+usage: docker model configure [--context-size=<n>] [--speculative-draft-model=<model>] [--hf_overrides=<json>] [--gpu-memory-utilization=<float>] [--mode=<mode>] [--think] [--keep-alive=<duration>] MODEL [-- <runtime-flags...>]
 pname: docker model
 plink: docker_model.yaml
+cname:
+    - docker model configure show
+clink:
+    - docker_model_configure_show.yaml
 options:
     - option: context-size
-      value_type: int64
-      default_value: "-1"
+      value_type: int32
       description: context size (in tokens)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: gpu-memory-utilization
+      value_type: float64
+      description: |
+        fraction of GPU memory to use for the model executor (0.0-1.0) - vLLM only
       deprecated: false
       hidden: false
       experimental: false
@@ -24,10 +38,20 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: reasoning-budget
-      value_type: int64
-      default_value: "0"
-      description: reasoning budget for reasoning models - llama.cpp only
+    - option: keep-alive
+      value_type: string
+      description: |
+        duration to keep model loaded (e.g., '5m', '1h', '0' to unload immediately, '-1' to never unload)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: mode
+      value_type: string
+      description: |
+        backend operation mode (completion, embedding, reranking, image-generation)
       deprecated: false
       hidden: false
       experimental: false
@@ -57,6 +81,15 @@ options:
       value_type: int
       default_value: "0"
       description: number of tokens to predict speculatively
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: think
+      value_type: bool
+      description: enable reasoning mode for thinking models
       deprecated: false
       hidden: false
       experimental: false

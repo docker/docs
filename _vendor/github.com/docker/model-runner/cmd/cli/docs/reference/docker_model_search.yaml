@@ -1,0 +1,57 @@
+command: docker model search
+short: Search for models on Docker Hub and HuggingFace
+long: |-
+    Search for models from Docker Hub (ai/ namespace) and HuggingFace.
+
+    When no search term is provided, lists all available models.
+    When a search term is provided, filters models by name/description.
+
+    Examples:
+      docker model search                       # List available models from Docker Hub
+      docker model search llama                 # Search for models containing "llama"
+      docker model search --source=all          # Search both Docker Hub and HuggingFace
+      docker model search --source=huggingface  # Only search HuggingFace
+      docker model search --limit=50 phi        # Search with custom limit
+      docker model search --json llama          # Output as JSON
+usage: docker model search [OPTIONS] [TERM]
+pname: docker model
+plink: docker_model.yaml
+options:
+    - option: json
+      value_type: bool
+      default_value: "false"
+      description: Output results as JSON
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: limit
+      shorthand: "n"
+      value_type: int
+      default_value: "32"
+      description: Maximum number of results to show
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: source
+      value_type: string
+      default_value: all
+      description: 'Source to search: all, dockerhub, huggingface'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

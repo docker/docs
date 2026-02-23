@@ -1,45 +1,46 @@
-command: docker model list
-aliases: docker model list, docker model ls
-short: List the models pulled to your local environment
-long: List the models pulled to your local environment
-usage: docker model list [OPTIONS] [MODEL]
+command: docker model launch
+short: Launch an app configured to use Docker Model Runner
+long: |-
+    Launch an app configured to use Docker Model Runner.
+
+    Supported apps: anythingllm, claude, codex, openclaw, opencode, openwebui
+usage: docker model launch APP [-- APP_ARGS...]
 pname: docker model
 plink: docker_model.yaml
 options:
-    - option: json
+    - option: detach
       value_type: bool
       default_value: "false"
-      description: List models in a JSON format
+      description: Run containerized app in background
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: openai
+    - option: dry-run
       value_type: bool
       default_value: "false"
-      description: List models in an OpenAI format
+      description: Print what would be executed without running it
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: openaiurl
+    - option: image
       value_type: string
-      description: OpenAI-compatible API endpoint URL to list models from
+      description: Override container image for containerized apps
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: quiet
-      shorthand: q
-      value_type: bool
-      default_value: "false"
-      description: Only show model IDs
+    - option: port
+      value_type: int
+      default_value: "0"
+      description: Host port to expose (web UIs)
       deprecated: false
       hidden: false
       experimental: false
