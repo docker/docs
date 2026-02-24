@@ -1,7 +1,7 @@
 ---
 title: Use MCP Toolkit from the CLI
 linkTitle: Use with CLI
-description: Manage MCP profiles, servers, and catalogs using the Docker MCP CLI.
+description: Manage MCP profiles, servers, and catalogs using Docker MCP CLI.
 keywords: docker mcp, cli, profiles, servers, catalog, gateway
 weight: 35
 ---
@@ -73,12 +73,12 @@ select a server, and check the **Server ID** field.
 Servers are referenced by URI. The URI format depends on where the server
 comes from:
 
-| Format | Source |
-| --- | --- |
-| `catalog://<catalog-ref>/<server-id>` | An OCI catalog |
-| `docker://<image>:<tag>` | A Docker image |
-| `https://<url>/v0/servers/<uuid>` | The MCP community registry |
-| `file://<path>` | A local YAML or JSON file |
+| Format                                | Source                     |
+| ------------------------------------- | -------------------------- |
+| `catalog://<catalog-ref>/<server-id>` | An OCI catalog             |
+| `docker://<image>:<tag>`              | A Docker image             |
+| `https://<url>/v0/servers/<uuid>`     | The MCP community registry |
+| `file://<path>`                       | A local YAML or JSON file  |
 
 The most common format is `catalog://`, where `<catalog-ref>` matches the
 **Catalog** field and `<server-id>` matches the **Server ID** field shown in
@@ -222,39 +222,53 @@ $ echo ".vscode/mcp.json" >> .gitignore
 
 ## Share profiles
 
+Share profiles with your team using OCI registries or version control.
+
+### Share via OCI registry
+
 Profiles are shared as OCI artifacts via any OCI-compatible registry.
 Credentials are not included for security reasons. Team members configure
-OAuth separately after pulling.
+authentication credentials separately after pulling.
 
-### Push a profile
-
-```console
-$ docker mcp profile push <profile-id> <registry-reference>
-```
-
-For example:
+To push an existing profile called `web-dev` to an OCI registry:
 
 ```console
 $ docker mcp profile push web-dev registry.example.com/profiles/web-dev:v1
 ```
 
-### Pull a profile
-
-```console
-$ docker mcp profile pull <registry-reference>
-```
-
-For example:
+To pull the same profile:
 
 ```console
 $ docker mcp profile pull registry.example.com/profiles/team-standard:latest
 ```
 
+### Share via version control
+
+For project-specific profiles, you can use the `export` and `import` commands
+and store the profiles in version control alongside your code. Team members can
+import the file to get the same configuration.
+
+To export a profile to your project directory:
+
+```console
+$ mkdir -p .docker
+$ docker mcp profile export web-dev .docker/mcp-profile.json
+```
+
+Team members who clone the repository can import the profile:
+
+```console
+$ docker mcp profile import .docker/mcp-profile.json
+```
+
+This creates a profile with the servers and configuration defined in the
+file. Any authentication credentials must be configured separately if needed.
+
 ## Custom catalogs
 
-Custom catalogs let you curate a focused collection of servers for your team or
-organization. For an overview of what custom catalogs are and when to use them,
-see [Custom catalogs](/manuals/ai/mcp-catalog-and-toolkit/catalog.md#custom-catalogs).
+Custom catalogs let you curate a focused collection of servers for your team
+or organization. For an overview of what custom catalogs are and when to use
+them, see [Custom catalogs](/manuals/ai/mcp-catalog-and-toolkit/catalog.md#custom-catalogs).
 
 Catalogs are referenced by OCI reference, for example
 `registry.example.com/mcp/my-catalog:latest`. Servers within a catalog use
@@ -267,7 +281,8 @@ Use the Docker catalog as a base, then add or remove servers to fit your
 organization's needs. Copy it first:
 
 ```console
-$ docker mcp catalog tag mcp/docker-mcp-catalog registry.example.com/mcp/company-tools:latest
+$ docker mcp catalog tag mcp/docker-mcp-catalog \
+  registry.example.com/mcp/company-tools:latest
 ```
 
 List the servers it contains:
@@ -279,7 +294,8 @@ $ docker mcp catalog server ls registry.example.com/mcp/company-tools:latest
 Remove servers your organization doesn't approve:
 
 ```console
-$ docker mcp catalog server remove registry.example.com/mcp/company-tools:latest \
+$ docker mcp catalog server remove \
+  registry.example.com/mcp/company-tools:latest \
   --name <server-name>
 ```
 
@@ -357,7 +373,8 @@ can find to your curated set.
 To enable specific servers from your catalog without using a profile:
 
 ```console
-$ docker mcp gateway run --catalog <oci-reference> --servers <name1> --servers <name2>
+$ docker mcp gateway run --catalog <oci-reference> \
+  --servers <name1> --servers <name2>
 ```
 
 ## Further reading
