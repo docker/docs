@@ -32,6 +32,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.62.0" build_path="/219486/" >}}
 
+### New
+
+- With Docker MCP Toolkit, you can now use [profiles](/manuals/ai/mcp-catalog-and-toolkit/profiles.md) to organize your MCP servers into named collections. You can also create custom catalogs — curated collections of servers for your team or organization.
+
 ### Updates
 
 - Linux kernel `v6.12.69`
