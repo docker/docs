@@ -84,7 +84,7 @@ Follow the instructions to search and pull a Docker image using CLI to view its 
 
 ### Search for and download an image
 
-1. Open a terminal and search for images using the [`docker search`](/reference/cli/docker/search.md) command:
+1. Open a terminal and search for images using the [`docker search`](/reference/cli/docker/search/) command:
 
    ```console
    docker search docker/welcome-to-docker
@@ -99,7 +99,7 @@ Follow the instructions to search and pull a Docker image using CLI to view its 
 
    This output shows you information about relevant images available on Docker Hub.
 
-2. Pull the image using the [`docker pull`](/reference/cli/docker/image/pull.md) command.
+2. Pull the image using the [`docker pull`](/reference/cli/docker/image/pull/) command.
 
    ```console
    docker pull docker/welcome-to-docker
@@ -127,7 +127,7 @@ Follow the instructions to search and pull a Docker image using CLI to view its 
 
 ### Learn about the image
 
-1. List your downloaded images using the [`docker image ls`](/reference/cli/docker/image/ls.md) command:
+1. List your downloaded images using the [`docker image ls`](/reference/cli/docker/image/ls/) command:
 
    ```console
    docker image ls
@@ -146,7 +146,7 @@ Follow the instructions to search and pull a Docker image using CLI to view its 
    >
    > The image size represented here reflects the uncompressed size of the image, not the download size of the layers.
 
-2. List the image's layers using the [`docker image history`](/reference/cli/docker/image/history.md) command:
+2. List the image's layers using the [`docker image history`](/reference/cli/docker/image/history/) command:
 
    ```console
    docker image history docker/welcome-to-docker

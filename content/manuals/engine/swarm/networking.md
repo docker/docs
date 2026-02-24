@@ -394,7 +394,7 @@ order to delete an existing bridge. The package name is `bridge-utils`.
 
 4.  Create or re-create the `docker_gwbridge` bridge with your custom settings.
     This example uses the subnet `10.11.0.0/16`. For a full list of customizable
-    options, see [Bridge driver options](/reference/cli/docker/network/create.md#bridge-driver-options).
+    options, see [Bridge driver options](/reference/cli/docker/network/create/#bridge-driver-options).
 
     ```console
     $ docker network create \

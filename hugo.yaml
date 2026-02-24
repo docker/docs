@@ -8,9 +8,28 @@ disableHugoGeneratorInject: true
 ignoreLogs:
   - cascade-pattern-with-extension
 
-taxonomies:
-  tag: tags
-  language: languages
+taxonomies: {}
+
+# Cascade layout and type settings to content subtrees.
+# See https://gohugo.io/configuration/cascade/#target
+cascade:
+  # Guide sections use the series layout (metadata card + modules list)
+  - target:
+      path: /guides/**
+      kind: section
+    layout: series
+  # Sample pages use the samples type (routes to layouts/samples/)
+  - target:
+      path: /reference/samples/**
+      kind: page
+    type: samples
+  # CLI reference pages use the cli layout (data-driven from YAML)
+  - target:
+      path: /reference/cli/docker
+    layout: cli
+  - target:
+      path: /reference/cli/docker/**
+    layout: cli
 
 # Remove the /manuals prefix for content in the manuals section
 permalinks:
@@ -92,10 +111,6 @@ outputs:
   section:
     - html
     - markdown
-  taxonomy:
-    - html
-  term:
-    - html
 
 languages:
   en:
@@ -342,12 +357,12 @@ module:
     - path: github.com/docker/compose/v5
       mounts:
         - source: docs/reference
-          target: data/compose-cli
+          target: data/cli/compose
           files: ["*.yaml"]
 
     # Model CLI
     - path: github.com/docker/model-runner/cmd/cli
       mounts:
         - source: docs/reference
-          target: data/model-cli
+          target: data/cli/model
           files: ["*.yaml"]

@@ -191,7 +191,7 @@ In this section, you took a look at running containers. You also took a look at 
 
 Related information:
 
-- [docker run CLI reference](/reference/cli/docker/container/run.md)
+- [docker run CLI reference](/reference/cli/docker/container/run/)
 
 ## Next steps
 

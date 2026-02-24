@@ -146,11 +146,11 @@ detailed information for analysis.
 > [!WARNING]
 >
 > Note that `mode=max` exposes the values of
-> [build arguments](/reference/cli/docker/buildx/build.md#build-arg).
+> [build arguments](/reference/cli/docker/buildx/build/#build-arg).
 >
 > If you're misusing build arguments to pass credentials, authentication
 > tokens, or other secrets, you should refactor your build to pass the secrets using
-> [secret mounts](/reference/cli/docker/buildx/build.md#secret) instead.
+> [secret mounts](/reference/cli/docker/buildx/build/#secret) instead.
 > Secret mounts don't leak outside of the build and are never included in provenance attestations.
 
 ## Version
@@ -173,7 +173,7 @@ difference between SLSA v0.2 and v1 provenance attestations, refer to
 ## Inspecting Provenance
 
 To explore created Provenance exported through the `image` exporter, you can
-use [`imagetools inspect`](/reference/cli/docker/buildx/imagetools/inspect.md).
+use [`imagetools inspect`](/reference/cli/docker/buildx/imagetools/inspect/).
 
 Using the `--format` option, you can specify a template for the output. All
 provenance-related data is available under the `.Provenance` attribute. For

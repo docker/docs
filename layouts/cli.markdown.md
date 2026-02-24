@@ -1,9 +1,4 @@
-{{- $data := "" }}
-{{- if .Params.datafolder }}
-  {{- $data = index (index site.Data .Params.datafolder) .Params.datafile }}
-{{- else }}
-  {{- $data = index site.Data .Params.datafile }}
-{{- end -}}
+{{- $data := index site.Data.cli .Params.datafolder .Params.datafile -}}
 # {{ .Title }}
 
 {{ with $data.short }}**Description:** {{ . }}{{ end }}
@@ -11,8 +6,6 @@
 {{ with $data.usage }}**Usage:** `{{ . }}`{{ end }}
 
 {{ with $data.aliases }}{{ $aliases := strings.Replace . (printf "%s, " $.Title) "" }}**Aliases:** {{ range $i, $alias := (strings.Split $aliases ", ") }}{{ if $i }}, {{ end }}`{{ $alias }}`{{ end }}{{ end }}
-
-{{ .Content }}
 
 {{ if $data.deprecated }}> [!WARNING]
 > **Deprecated**
@@ -51,6 +44,6 @@
 
 | Command | Description |
 |---------|-------------|
-{{ range .Pages }}{{ if and .Params.datafolder .Params.datafile }}{{ $subdata := index (index site.Data .Params.datafolder) .Params.datafile }}| [`{{ .Title }}`]({{ .Permalink }}) | {{ $subdata.short }} |
+{{ range .Pages }}{{ if and .Params.datafolder .Params.datafile }}{{ $subdata := index site.Data.cli .Params.datafolder .Params.datafile }}| [`{{ .Title }}`]({{ .Permalink }}) | {{ $subdata.short }} |
 {{ end }}{{ end }}
 {{ end }}

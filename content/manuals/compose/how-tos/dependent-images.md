@@ -165,5 +165,5 @@ Bake can also be selected as the default builder by editing your `$HOME/.docker/
 
 ## Additional resources
 
-- [Docker Compose build reference](/reference/cli/docker/compose/build.md)
+- [Docker Compose build reference](/reference/cli/docker/compose/build/)
 - [Learn about multi-stage Dockerfiles](/manuals/build/building/multi-stage.md)

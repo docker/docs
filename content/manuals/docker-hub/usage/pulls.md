@@ -82,15 +82,15 @@ the on-screen instructions to complete the sign-in process.
 
 If you're using a standalone version of Docker Engine, run the `docker login`
 command from a terminal to authenticate with Docker Hub. For information on how
-to use the command, see [docker login](/reference/cli/docker/login.md).
+to use the command, see [docker login](/reference/cli/docker/login/).
 
 #### Docker Swarm
 
 If you're running Docker Swarm, you must use the `--with-registry-auth` flag to
 authenticate with Docker Hub. For more information, see [Create a
-service](/reference/cli/docker/service/create.md#with-registry-auth). If you
+service](/reference/cli/docker/service/create/#with-registry-auth). If you
 are using a Docker Compose file to deploy an application stack, see [docker
-stack deploy](/reference/cli/docker/stack/deploy.md).
+stack deploy](/reference/cli/docker/stack/deploy/).
 
 #### GitHub Actions
 

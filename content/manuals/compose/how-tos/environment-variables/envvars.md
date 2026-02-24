@@ -66,7 +66,7 @@ underscores, and must begin with a lowercase letter or decimal digit. If the
 `basename` of the project directory or current directory violates this
 constraint, you must use one of the other mechanisms.
 
-See also the [command-line options overview](/reference/cli/docker/compose/_index.md#command-options-overview-and-help) and [using `-p` to specify a project name](/reference/cli/docker/compose/_index.md#use--p-to-specify-a-project-name).
+See also [using `-p` to specify a project name](/reference/cli/docker/compose/#use--p-to-specify-a-project-name).
 
 #### COMPOSE\_FILE
 
@@ -83,7 +83,7 @@ Specifies the path to a Compose file. Specifying multiple Compose files is suppo
       ```  
    The path separator can also be customized using [`COMPOSE_PATH_SEPARATOR`](#compose_path_separator).  
 
-See also the [command-line options overview](/reference/cli/docker/compose/_index.md#command-options-overview-and-help) and [using `-f` to specify name and path of one or more Compose files](/reference/cli/docker/compose/_index.md#use--f-to-specify-the-name-and-path-of-one-or-more-compose-files).
+See also [using `-f` to specify name and path of one or more Compose files](/reference/cli/docker/compose/#use--f-to-specify-the-name-and-path-of-one-or-more-compose-files).
 
 #### COMPOSE\_PROFILES
 
@@ -102,7 +102,7 @@ The following example enables all services matching both the `frontend` and `deb
 COMPOSE_PROFILES=frontend,debug
 ```
 
-See also [Using profiles with Compose](../profiles.md) and the [`--profile` command-line option](/reference/cli/docker/compose/_index.md#use-profiles-to-enable-optional-services).
+See also [Using profiles with Compose](../profiles.md) and the [`--profile` command-line option](/reference/cli/docker/compose/#use-profiles-to-enable-optional-services).
 
 #### COMPOSE\_PATH\_SEPARATOR
 
@@ -203,7 +203,7 @@ Default is `auto`.
 
 {{< summary-bar feature_name="Compose menu" >}}
 
-When enabled, Compose displays a navigation menu where you can choose to open the Compose stack in Docker Desktop, switch on [`watch` mode](../file-watch.md), or use [Docker Debug](/reference/cli/docker/debug.md).
+When enabled, Compose displays a navigation menu where you can choose to open the Compose stack in Docker Desktop, switch on [`watch` mode](../file-watch.md), or use [Docker Debug](/reference/cli/docker/debug/).
 
 - Supported values:
    - `true` or `1`, to enable

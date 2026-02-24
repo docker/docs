@@ -49,7 +49,7 @@ When the status indicator displays **Watching for filesystem changes**, your fil
 
 > [!NOTE]
 >
-> When you create a new service, setting the [bind mount option consistency](/reference/cli/docker/service/create.md#options-for-bind-mounts) to `:consistent` bypasses Synchronized file shares. 
+> When you create a new service, setting the [bind mount option consistency](/reference/cli/docker/service/create/#options-for-bind-mounts) to `:consistent` bypasses Synchronized file shares. 
 
 > [!TIP]
 >

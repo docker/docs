@@ -9,7 +9,7 @@ aliases:
 ---
 
 By default Compose sets up a single
-[network](/reference/cli/docker/network/create.md) for your app. Each
+[network](/reference/cli/docker/network/create/) for your app. Each
 container for a service joins the default network and is both reachable by
 other containers on that network, and discoverable by the service's name.
 
@@ -17,7 +17,7 @@ other containers on that network, and discoverable by the service's name.
 >
 > Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
-> project name with either the [`--project-name` flag](/reference/cli/docker/compose.md)
+> project name with either the [`--project-name` flag](/reference/cli/docker/compose/)
 > or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
 
 For example, suppose your app is in a directory called `myapp`, and your `compose.yaml` looks like this:

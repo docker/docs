@@ -145,7 +145,7 @@ Devices:
  Automatically allowed: false
 ```
 
-To allow the device, you can use the [`--allow` flag](/reference/cli/docker/buildx/build.md#allow)
+To allow the device, you can use the [`--allow` flag](/reference/cli/docker/buildx/build/#allow)
 with the `docker buildx build` command:
 
 ```console
@@ -206,7 +206,7 @@ was injected into the build environment as specified in the CDI specification.
 In this section, we will show you how to set up a [container builder](../builders/drivers/docker-container.md)
 using NVIDIA GPUs. Since Buildx v0.22, when creating a new container builder, a
 GPU request is automatically added to the container builder if the host has GPU
-drivers installed in the kernel. This is similar to using [`--gpus=all` with the `docker run`](/reference/cli/docker/container/run.md#gpus)
+drivers installed in the kernel. This is similar to using [`--gpus=all` with the `docker run`](/reference/cli/docker/container/run/#gpus)
 command.
 
 Now let's create a container builder named `gpubuilder` using Buildx:

@@ -1858,7 +1858,7 @@ Optionally, limit the number of restart retries the Docker daemon attempts.
 ```
 
 You can find more detailed information on restart policies in the
-[Restart Policies (--restart)](/reference/cli/docker/container/run.md#restart)
+[Restart Policies (--restart)](/reference/cli/docker/container/run/#restart)
 section of the Docker run reference page.
 
 ### `runtime`
@@ -1962,7 +1962,7 @@ security_opt:
   - label=role:ROLE
 ```
 
-For further default labeling schemes you can override, see [Security configuration](/reference/cli/docker/container/run.md#security-opt).
+For further default labeling schemes you can override, see [Security configuration](/reference/cli/docker/container/run/#security-opt).
 
 ### `shm_size`
 
@@ -1972,7 +1972,7 @@ It's specified as a [byte value](extension.md#specifying-byte-values).
 ### `stdin_open`
 
 `stdin_open` configures a service's container to run with an allocated stdin. This is the same as running a container with the
-`-i` flag. For more information, see [Keep stdin open](/reference/cli/docker/container/run.md#interactive).
+`-i` flag. For more information, see [Keep stdin open](/reference/cli/docker/container/run/#interactive).
 
 Supported values are `true` or `false`.
 
@@ -2027,7 +2027,7 @@ sysctls:
 You can only use sysctls that are namespaced in the kernel. Docker does not
 support changing sysctls inside a container that also modify the host system.
 For an overview of supported sysctls, refer to [configure namespaced kernel
-parameters (sysctls) at runtime](/reference/cli/docker/container/run.md#sysctl).
+parameters (sysctls) at runtime](/reference/cli/docker/container/run/#sysctl).
 
 ### `tmpfs`
 
@@ -2059,7 +2059,7 @@ services:
 ### `tty`
 
 `tty` configures a service's container to run with a TTY. This is the same as running a container with the
-`-t` or `--tty` flag. For more information, see [Allocate a pseudo-TTY](/reference/cli/docker/container/run.md#tty).
+`-t` or `--tty` flag. For more information, see [Allocate a pseudo-TTY](/reference/cli/docker/container/run/#tty).
 
 Supported values are `true` or `false`.
 

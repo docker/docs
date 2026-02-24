@@ -4,13 +4,13 @@ keywords: Docker, CVEs, security, notice, Log4J 2, Log4Shell, Text4Shell, announ
 title: Docker security announcements
 linkTitle: Security announcements
 outputs: ["HTML", "markdown", "RSS"]
-type: "security-announcements"
+layout: security-announcements
 weight: 80
 toc_min: 1
 toc_max: 2
 ---
 
-{{< rss-button feed="/security/security-announcements/index.xml" text="Subscribe to security RSS feed" >}}
+[Subscribe to security RSS feed](/security/security-announcements/index.xml)
 
 ## Docker Desktop 4.54.0 security update: CVE-2025-13743
 
@@ -94,7 +94,7 @@ _Last updated June, 2024_
 
 Docker is pleased to announce that we have received our SOC 2 Type 2 attestation and ISO 27001 certification with no exceptions or major non-conformities.
 
-Security is a fundamental pillar to Docker’s operations, which is embedded into our overall mission and company strategy. Docker’s products are core to our user community and our SOC 2 Type 2 attestation and ISO 27001 certification demonstrate Docker’s ongoing commitment to security to our user base.
+Security is a fundamental pillar to Docker's operations, which is embedded into our overall mission and company strategy. Docker's products are core to our user community and our SOC 2 Type 2 attestation and ISO 27001 certification demonstrate Docker's ongoing commitment to security to our user base.
 
 For more information, see the [Blog announcement](https://www.docker.com/blog/docker-announces-soc-2-type-2-attestation-iso-27001-certification/).
 
@@ -104,7 +104,7 @@ _Last updated February 2, 2024_
 
 We at Docker prioritize the security and integrity of our software and the trust of our users. Security researchers at Snyk Labs identified and reported four security vulnerabilities in the container ecosystem. One of the vulnerabilities, [CVE-2024-21626](https://scout.docker.com/v/CVE-2024-21626), concerns the runc container runtime, and the other three affect BuildKit ([CVE-2024-23651](https://scout.docker.com/v/CVE-2024-23651), [CVE-2024-23652](https://scout.docker.com/v/CVE-2024-23652), and [CVE-2024-23653](https://scout.docker.com/v/CVE-2024-23653)). We want to assure our community that our team, in collaboration with the reporters and open source maintainers, has been diligently working on coordinating and implementing necessary remediations.
 
-We are committed to maintaining the highest security standards. We have published patched versions of runc, BuildKit, and Moby on January 31 and released an update for Docker Desktop on February 1 to address these vulnerabilities. Additionally, our latest BuildKit and Moby releases included fixes for [CVE-2024-23650](https://scout.docker.com/v/CVE-2024-23650) and [CVE-2024-24557](https://scout.docker.com/v/CVE-2024-24557), discovered respectively by an independent researcher and through Docker’s internal research initiatives.
+We are committed to maintaining the highest security standards. We have published patched versions of runc, BuildKit, and Moby on January 31 and released an update for Docker Desktop on February 1 to address these vulnerabilities. Additionally, our latest BuildKit and Moby releases included fixes for [CVE-2024-23650](https://scout.docker.com/v/CVE-2024-23650) and [CVE-2024-24557](https://scout.docker.com/v/CVE-2024-24557), discovered respectively by an independent researcher and through Docker's internal research initiatives.
 
 |                        | Versions Impacted         |
 |:-----------------------|:--------------------------|
@@ -113,7 +113,7 @@ We are committed to maintaining the highest security standards. We have publishe
 | `Moby (Docker Engine)` | <= 25.0.1 and <= 24.0.8   |
 | `Docker Desktop`       | <= 4.27.0                 |
 
-### What should I do if I’m on an affected version?
+### What should I do if I'm on an affected version?
 
 If you are using affected versions of runc, BuildKit, Moby, or Docker Desktop, make sure to update to the latest versions, linked in the following table:
 
@@ -128,7 +128,7 @@ If you are using affected versions of runc, BuildKit, Moby, or Docker Desktop, m
 If you are unable to update to an unaffected version promptly, follow these best practices to mitigate risk:
 
 * Only use trusted Docker images (such as [Docker Official Images](../docker-hub/image-library/trusted-content.md#docker-official-images)).
-* Don’t build Docker images from untrusted sources or untrusted Dockerfiles.
+* Don't build Docker images from untrusted sources or untrusted Dockerfiles.
 * If you are a Docker Business customer using Docker Desktop and unable to update to v4.27.1, make sure to enable [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/_index.md) features such as:
   * [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md), which mitigates the impact of CVE-2024-21626 in the case of running containers from malicious images.
   * [Image Access Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md), and [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md), which give organizations control over which images and repositories their users can access.

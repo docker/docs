@@ -12,9 +12,9 @@ summary: |
   commands, image creation, and container orchestration.
 layout: series
 params:
-  skill: Beginner
+  proficiencyLevel: Beginner
   time: 15 minutes
-  prereq: None
+  prerequisites: None
 aliases:
   - /guides/getting-started/
 ---

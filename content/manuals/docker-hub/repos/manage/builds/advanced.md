@@ -119,7 +119,7 @@ $ docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 > A `hooks/build` file overrides the basic `docker build` command used by the builder, so you must include a similar build command in the hook or
 the automated build fails.
 
-Refer to the [docker build documentation](/reference/cli/docker/buildx/build.md#build-arg)
+Refer to the [docker build documentation](/reference/cli/docker/buildx/build/#build-arg)
 to learn more about Docker build-time variables.
 
 #### Push to multiple repositories
