@@ -12,7 +12,7 @@ aliases:
   - /labs/docker-for-ai/cagent/
 params:
   tags: [ai, labs]
-  time: 45 minutes
+  time: 20 minutes
   resource_links:
     - title: cagent documentation
       url: https://github.com/docker/cagent
