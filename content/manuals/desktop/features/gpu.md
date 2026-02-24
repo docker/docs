@@ -11,7 +11,7 @@ aliases:
 
 > [!NOTE]
 >
-> Currently GPU support in Docker Desktop is only available on Windows with the WSL2 backend.
+> GPU support in Docker Desktop is only available on Windows with the WSL2 backend.
 
 Docker Desktop for Windows supports NVIDIA GPU Paravirtualization (GPU-PV) on NVIDIA GPUs, allowing containers to access GPU resources for compute-intensive workloads like AI, machine learning, or video processing.
 
