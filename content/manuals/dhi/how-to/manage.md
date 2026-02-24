@@ -12,6 +12,9 @@ On the **Manage** screen in Docker Hub, you can manage your mirrored Docker
 Hardened Image (DHI) repositories, mirrored DHI chart repositories, and
 customizations in your organization.
 
+Alternatively, you can use the [DHI CLI](./cli.md) to manage mirrored
+repositories and customizations from the command line.
+
 Mirrored DHI repositories are standard Docker Hub repositories in your
 organization's namespace. They behave exactly like any other Hub repository,
 which means you can manage access and permissions, configure webhooks, and use

@@ -1,0 +1,24 @@
+command: docker dhi customization create
+short: Create a new customization from YAML file
+long: |
+    Create a new Docker Hardened Images customization using a YAML file as input. The file should contain the complete customization structure without an 'id' field.
+usage: docker dhi customization create <file>
+pname: docker dhi customization
+plink: docker_dhi_customization.yaml
+inherited_options:
+    - option: org
+      value_type: string
+      description: Docker Hub organization (overrides config)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

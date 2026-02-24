@@ -1,0 +1,49 @@
+command: docker dhi mirror stop
+short: Stop mirroring a Docker Hardened Image
+long: |-
+    Stop mirroring a Docker Hardened Image repository.
+
+    The repository can be specified as:
+      - Just the repository name (e.g., dhi-python) - uses --org flag or config
+      - Full path with org (e.g., myorg/dhi-python) - org must match --org flag or config
+
+    Examples:
+      # Stop mirroring using --org flag
+      dhictl mirror stop dhi-python --org myorg
+
+      # Stop mirroring with full path (org must match)
+      dhictl mirror stop myorg/dhi-python --org myorg
+
+      # Stop mirroring and delete the repository
+      dhictl mirror stop dhi-python --org myorg --delete
+usage: docker dhi mirror stop <repository>
+pname: docker dhi mirror
+plink: docker_dhi_mirror.yaml
+options:
+    - option: delete
+      value_type: bool
+      default_value: "false"
+      description: Delete the repository after stopping mirroring
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: org
+      value_type: string
+      description: Docker Hub organization (overrides config)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

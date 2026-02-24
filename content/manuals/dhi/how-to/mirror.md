@@ -8,9 +8,9 @@ keywords: mirror docker image, private container registry, docker hub automation
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
 
-Mirroring requires a DHI Enterprise subscription. Without a DHI Enterprise
+Mirroring requires a DHI Select or Enterprise subscription. Without a
 subscription, you can pull Docker Hardened Images directly from `dhi.io` without
-mirroring. With a DHI Enterprise subscription, you must mirror to get:
+mirroring. With a DHI Select or Enterprise subscription, you must mirror to get:
 
 - Compliance variants (FIPS-enabled or STIG-ready images)
 - Extended Lifecycle Support (ELS) variants (requires add-on)
@@ -55,7 +55,25 @@ Only organization owners can perform mirroring. Once mirrored, the repository
 becomes available in your organization's namespace, and you can customize it as
 needed.
 
-To mirror a Docker Hardened Image repository:
+You can mirror repositories using either the Docker Hub web interface or the DHI CLI.
+
+### Mirror using the DHI CLI
+
+The DHI CLI provides a command-line interface for managing Docker Hardened
+Images, including mirroring operations. For installation instructions and usage
+details, see [Use the DHI CLI](./cli.md#mirror-dhi-images).
+
+### Stop mirroring with the CLI
+
+```console
+$ docker dhi mirror stop --org my-org dhi-golang
+```
+
+After stopping mirroring, the repository remains but will no longer receive updates.
+
+### Mirror using the Docker Hub web interface
+
+To mirror a Docker Hardened Image repository using the web interface:
 
 1. Go to [Docker Hub](https://hub.docker.com) and sign in.
 2. Select **My Hub**.

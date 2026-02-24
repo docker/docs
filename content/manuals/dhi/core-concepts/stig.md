@@ -1,5 +1,5 @@
 ---
-title: 'STIG <span class="not-prose bg-blue-500 dark:bg-blue-400 rounded-sm px-1 text-xs text-white whitespace-nowrap">DHI Enterprise</span>'
+title: 'STIG <span class="not-prose bg-blue-500 dark:bg-blue-400 rounded-sm px-1 text-xs text-white whitespace-nowrap">DHI Select & Enterprise</span>'
 linkTitle: STIG
 description: Learn how Docker Hardened Images provide STIG-ready container images with verifiable security scan attestations for government and enterprise compliance requirements.
 keywords: docker stig, stig-ready images, stig guidance, openscap docker, secure container images

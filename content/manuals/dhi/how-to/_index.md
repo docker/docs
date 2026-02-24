@@ -9,6 +9,10 @@ params:
       icon: travel_explore
       link: /dhi/how-to/explore/
   grid_adopt:
+    - title: Use the DHI CLI
+      description: Use the dhictl command-line tool to manage and interact with Docker Hardened Images.
+      icon: terminal
+      link: /dhi/how-to/cli/
     - title: Mirror a Docker Hardened Image repository
       description: Learn how to mirror an image into your organization's namespace and optionally push it to another private registry.
       icon: compare_arrows
@@ -17,6 +21,10 @@ params:
       description: Learn how to customize Docker Hardened Images and charts.
       icon: settings
       link: /dhi/how-to/customize/
+    - title: Use hardened system packages
+      description: Learn how to use Docker's hardened system packages in your images.
+      icon: inventory_2
+      link: /dhi/how-to/hardened-packages/
     - title: Use a Docker Hardened Image
       description: Learn how to pull, run, and reference Docker Hardened Images in Dockerfiles, CI pipelines, and standard development workflows.
       icon: play_arrow

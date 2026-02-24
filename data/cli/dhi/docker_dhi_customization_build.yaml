@@ -1,0 +1,30 @@
+command: docker dhi customization build
+short: Manage customization builds
+long: Commands to manage Docker Hardened Images customization builds
+pname: docker dhi customization
+plink: docker_dhi_customization.yaml
+cname:
+    - docker dhi customization build get
+    - docker dhi customization build list
+    - docker dhi customization build logs
+clink:
+    - docker_dhi_customization_build_get.yaml
+    - docker_dhi_customization_build_list.yaml
+    - docker_dhi_customization_build_logs.yaml
+inherited_options:
+    - option: org
+      value_type: string
+      description: Docker Hub organization (overrides config)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

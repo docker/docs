@@ -1,0 +1,64 @@
+command: docker dhi customization list
+short: List all customizations
+long: List all Docker Hardened Images customizations
+usage: docker dhi customization list
+pname: docker dhi customization
+plink: docker_dhi_customization.yaml
+options:
+    - option: filter
+      shorthand: f
+      value_type: string
+      description: Filter by customization name (case-insensitive substring match)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: json
+      value_type: bool
+      default_value: "false"
+      description: Output in JSON format
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: repo
+      shorthand: r
+      value_type: string
+      description: |
+        Filter by destination repository (case-insensitive substring match)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: source
+      value_type: string
+      description: Filter by DHI source repository (case-insensitive substring match)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: org
+      value_type: string
+      description: Docker Hub organization (overrides config)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

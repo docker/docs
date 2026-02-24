@@ -1,5 +1,5 @@
 ---
-title: 'Customize a Docker Hardened Image or chart <span class="not-prose bg-blue-500 dark:bg-blue-400 rounded-sm px-1 text-xs text-white whitespace-nowrap">DHI Enterprise</span>'
+title: 'Customize a Docker Hardened Image or chart <span class="not-prose bg-blue-500 dark:bg-blue-400 rounded-sm px-1 text-xs text-white whitespace-nowrap">DHI Select & Enterprise</span>'
 linkTitle: Customize an image or chart
 weight: 25
 keywords: hardened images, DHI, customize, certificate, artifact, helm chart
@@ -8,11 +8,12 @@ description: Learn how to customize Docker Hardened Images (DHI) and charts.
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
 
-When you have a Docker Hardened Images subscription, you can customize Docker
+When you have a DHI Select or DHI Enterprise subscription, you can customize Docker
 Hardened Images (DHI) and charts to suit your specific needs using the Docker
 Hub web interface. For images, this lets you select a base image, add packages,
 add OCI artifacts (such as custom certificates or additional tools), and
 configure settings. For charts, this lets you customize the image references.
+
 
 Your customizations stay secure automatically. When the base Docker Hardened
 Image or chart receives a security patch or your OCI artifacts are updated,
@@ -29,9 +30,37 @@ owner must first [mirror](./mirror.md) the DHI repository to your organization
 on Docker Hub. Once the repository is mirrored, any user with access to the
 mirrored DHI repository can create a customized image.
 
-### Create an image customization
+You can create customizations using either the DHI CLI or the Docker Hub web interface.
 
-To customize a Docker Hardened Image, follow these steps:
+### Customize using the DHI CLI
+
+The DHI CLI provides a command-line interface for managing Docker Hardened Image
+customizations. For installation instructions and usage details, see [Use
+the DHI CLI](./cli.md#customize-dhi-images).
+
+#### Monitor customization builds
+
+List builds for a customization:
+
+```console
+$ docker dhi customization build list --org my-org my-org/dhi-golang "golang with git"
+```
+
+Get details of a specific build:
+
+```console
+$ docker dhi customization build get --org my-org my-org/dhi-golang "golang with git" <build-id>
+```
+
+View build logs:
+
+```console
+$ docker dhi customization build logs --org my-org my-org/dhi-golang "golang with git" <build-id>
+```
+
+### Customize using the Docker Hub web interface
+
+To customize a Docker Hardened Image using the web interface, follow these steps:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 1. Select **My Hub**.
@@ -48,13 +77,15 @@ To customize a Docker Hardened Image, follow these steps:
 1. Select the image version you want to customize.
 1. Optional. Add packages.
 
-   1. In the **Packages** drop-down, select the packages you want to add to the
-      image.
+   1. In the packages drop-down (labeled **Hardened packages** for Alpine
+      distributions or **Packages** for Debian distributions), select the
+      packages you want to add to the image.
 
       The packages available in the drop-down are OS system packages for the
-      selected image variant. For example, if you are customizing the Alpine
-      variant of the Python DHI, the list will include all Alpine system
-      packages.
+      selected image variant. For Alpine-based images, these are hardened
+      packages that have been built from source by Docker with cryptographic
+      signatures and full supply chain security. For Debian-based images,
+      these are standard Debian system packages.
 
    1. In the **OCI artifacts** drop-down, first, select the repository that
       contains the OCI artifact image. Then, select the tag you want to use from

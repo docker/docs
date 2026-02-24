@@ -172,7 +172,7 @@ Docker Desktop CLI kubernetes:
 Docker Desktop CLI diagnose:
   requires: Docker Desktop 4.60 and later
 Docker Hardened Images:
-  subscription: [Docker Hardened Images Enterprise]
+  subscription: [Docker Hardened Images Select or Enterprise]
 Docker Init:
   requires: Docker Desktop [4.27](/manuals/desktop/release-notes.md#4270) and later
 Docker Model Runner:
