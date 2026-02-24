@@ -12,7 +12,7 @@ aliases:
   - /labs/docker-for-ai/agentic-apps/
 params:
   tags: [ai, labs]
-  time: 45 minutes
+  time: 20 minutes
   resource_links:
     - title: Docker Model Runner docs
       url: /ai/model-runner/
