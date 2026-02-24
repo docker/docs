@@ -12,7 +12,7 @@ aliases:
   - /labs/docker-for-ai/fine-tuning/
 params:
   tags: [ai, labs]
-  time: 60 minutes
+  time: 20 minutes
   resource_links:
     - title: Docker Model Runner docs
       url: /ai/model-runner/
