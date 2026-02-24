@@ -54,6 +54,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Fixed a networking crash on QEMU 10.2.0 and later.
 
+### Security
+
+- Addressed [CVE-2026-2664](https://www.cve.org/cverecord?id=CVE-2026-2664), out of bounds read in grpcfuse kernel module.
+
 ## 4.61.0
 
 {{< release-date date="2026-02-18" >}}
