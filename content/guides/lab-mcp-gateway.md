@@ -12,7 +12,7 @@ aliases:
   - /labs/docker-for-ai/mcp-gateway/
 params:
   tags: [ai, labs]
-  time: 30 minutes
+  time: 20 minutes
   resource_links:
     - title: Docker MCP Gateway docs
       url: /ai/mcp-gateway/
