@@ -16,7 +16,7 @@ toc_max: 2
 
 A vulnerability in Docker Desktop was fixed on February 23 in the [4.62.0](/manuals/desktop/release-notes.md#4620) release:
 
-- Fixed [CVE-2026-2664](https://www.cve.org/cverecord?id=CVE-2026-2664), out of bounds read in grpcfuse kernel module.
+- Fixed [CVE-2026-2664](https://www.cve.org/cverecord?id=CVE-2026-2664), out of bounds read in gRPC-FUSE kernel module.
 
 ## Docker Desktop 4.54.0 security update: CVE-2025-13743
 
