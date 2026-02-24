@@ -17,7 +17,7 @@ params:
     - title: cagent documentation
       url: https://github.com/docker/cagent
     - title: Docker MCP Toolkit
-      url: https://hub.docker.com/extensions/docker/labs-ai-tools-for-devs
+      url: https://docs.docker.com/ai/mcp-catalog-and-toolkit/toolkit/
     - title: Labspace repository
       url: https://github.com/ajeetraina/labspace-cagent
 ---
