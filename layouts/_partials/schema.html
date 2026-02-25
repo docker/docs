@@ -1,5 +1,5 @@
 {{- $description := partial "utils/description.html" . -}}
-{{- $keywords := delimit (partialCached "utils/keywords.html" . .) ", " -}}
+{{- $keywords := partialCached "utils/keywords.html" . . -}}
 
 {{- /* Build TechArticle schema for content pages */ -}}
 {{- $schema := dict
