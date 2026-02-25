@@ -111,7 +111,7 @@ Finally, create the Docker Compose file (`docker-compose.yml`):
 ```yaml
 services:
   postgres:
-    image: postgres:17.7
+    image: postgres:18
     container_name: postgres
     environment:
       POSTGRES_USER: postgres
