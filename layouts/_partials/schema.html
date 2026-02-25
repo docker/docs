@@ -5,7 +5,7 @@
 {{- $schema := dict
   "@context" "https://schema.org"
   "@type" "TechArticle"
-  "headline" .LinkTitle
+  "headline" (truncate 110 .LinkTitle)
   "description" $description
   "url" .Permalink
 -}}
@@ -76,7 +76,7 @@
     {{- $isPartOf := dict
       "@type" "WebPage"
       "@id" .Permalink
-      "name" .LinkTitle
+      "name" (truncate 110 .LinkTitle)
     -}}
     {{- $schema = merge $schema (dict "isPartOf" $isPartOf) -}}
   {{- end -}}
@@ -95,7 +95,7 @@
       "position" $position
       "item" (dict
         "@id" .Permalink
-        "name" .LinkTitle
+        "name" (truncate 110 .LinkTitle)
       )
     -}}
     {{- $breadcrumbs = $breadcrumbs | append $item -}}
@@ -109,7 +109,7 @@
   "position" $position
   "item" (dict
     "@id" .Permalink
-    "name" .LinkTitle
+    "name" (truncate 110 .LinkTitle)
   )
 -}}
 {{- $breadcrumbs = $breadcrumbs | append $currentItem -}}
