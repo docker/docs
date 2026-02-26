@@ -34,8 +34,9 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
+- Added a new **Logs** view where you can explore logs from all sources in one unified view.
 - Added SLSA v1 provenance support in the **Builds** view. 
-- Added a new **Logs** view where you can explore your containers logs in details 
+ 
 
 ### Upgrades
 
@@ -49,6 +50,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Enhanced the proxy settings UI and added a separate proxy for containers.
 - Fixed an issue where community registry MCP catalogs failed to load when a server's config object contained `"required": null`.
 - Fixed an issue where `mcp-gateway` would hang when fetching secrets from the Secrets Engine while the Docker Desktop VM was in Resource Saver mode. 
+- Rebranded "Docker AI" references to "Gordon".
 
 #### For Windows
 
