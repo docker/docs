@@ -14,7 +14,7 @@ params:
 {{< summary-bar feature_name="Desktop logs" >}}
 
 
-The **Logs** view provides a unified, real-time log stream from all running containers and Kubernetes nodes in Docker Desktop. Unlike the logs accessible from the [**Containers** view](container.md), the **Logs** view lets you monitor and search log output across your entire environment from a single interface. You can also use Ask Gordon to analyse log output with AI-assisted prompts.
+The **Logs** view provides a unified, real-time log stream from all running containers and Kubernetes nodes in Docker Desktop. Unlike the logs accessible from the [**Containers** view](container.md), the **Logs** view lets you monitor and search log output across your entire environment from a single interface. You can also use Ask Gordon to analyze log output with AI-assisted prompts.
 
 ## Log entries
 
@@ -26,7 +26,7 @@ Each log entry in the table view shows:
 | **Object** | The container or node that produced the log line. |
 | **Message** | The full log message, including any status codes such as `[ OK ]`. |
 
-Selecting the expand arrow to the left of a row reveals the full, untruncated message for that entry.
+Selecting the expand arrow to the left of a row reveals the full message for that entry.
 
 ## Search and filter logs
 
@@ -47,9 +47,9 @@ To refine the log stream further, select the **Filter** icon in the toolbar to o
 
 The Logs view integrates with [Ask Gordon](/manuals/ai/gordon/_index.md), Docker's AI assistant. Select the **Ask Gordon** button in the top-right corner of the view to open the Gordon panel, then choose a scope:
 
-- **All visible logs** — Gordon analyses the complete log stream currently visible on screen
-- **Container** — Gordon analyses logs from a specific container
-- **Build** — Gordon analyses build-related log output
+- **All visible logs**: Gordon analyzes the complete log stream currently visible on screen
+- **Container**: Gordon analyzes logs from a specific container
+- **Build**: Gordon analyzes build-related log output
 
 You can type a free-form question or select one of the suggested prompts.
 
@@ -64,4 +64,4 @@ The table view is useful when you need to correlate events across multiple conta
 
 ## Feedback
 
-The Logs view is in active development. Select **Give feedback** at the top of the view to share suggestions or report issues directly with the Docker team.
+The Logs view is in active development. Select **Give feedback** at the top of the view to share suggestions or report issues.
