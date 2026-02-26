@@ -14,12 +14,13 @@ specific image as an example, they can be applied to any DHI.
 Docker Hardened Images are freely available to everyone with no subscription
 required, no usage restrictions, and no vendor lock-in. This quickstart covers
 free DHI images pulled from `dhi.io`. If you have a DHI Enterprise subscription
-or have started a trial, you must [mirror DHI repositories](./how-to/mirror.md)
-to your organization's namespace on Docker Hub to access compliance variants
-(FIPS), customization capabilities, and SLA-backed updates. You then pull
-mirrored images from `docker.io` (not `dhi.io`) using your organization's
-namespace path. For example, `docker pull docker.io/<yourorg>/dhi-python:3.13`
-instead of `docker pull dhi.io/python:3.13`.
+or have started a trial and need compliance variants (FIPS), customization
+capabilities, or SLA-backed updates, you must [mirror DHI
+repositories](./how-to/mirror.md) to your organization's namespace on Docker
+Hub. You then pull mirrored images from `docker.io` (not `dhi.io`) using your
+organization's namespace path. For example, `docker pull
+docker.io/<yourorg>/dhi-python:3.13` instead of `docker pull
+dhi.io/python:3.13`.
 
 ## Step 1: Find an image to use
 
