@@ -312,3 +312,4 @@ Zsh
 [Rr]erank(ing|ed)?
 [Ee]vals?
 [Ll]abspaces?
+[Uu]nsloth
