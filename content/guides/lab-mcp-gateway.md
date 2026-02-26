@@ -30,7 +30,7 @@ how to configure, secure, and connect MCP servers to your agentic applications.
 
 - Learn about the Docker MCP Gateway and its architecture
 - Run the MCP Gateway with a simple MCP server
-- Securely inject secrets into MCP servers
+- Inject secrets securely into MCP servers
 - Filter tools to reduce noise and save tokens
 - Connect the MCP Gateway to your application using popular agentic frameworks
 - Configure and use custom MCP servers
@@ -49,7 +49,7 @@ how to configure, secure, and connect MCP servers to your agentic applications.
 
 ## Prerequisites
 
-- Docker Desktop (latest version) with Docker Model Runner enabled
+- The latest version of Docker Desktop with Docker Model Runner enabled
 - Basic familiarity with Docker and Docker Compose
 
 ## Launch the lab

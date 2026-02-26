@@ -30,15 +30,15 @@ understanding AI models to building complete agentic applications.
 
 This lab covers three core areas of agentic application development:
 
-**Models** — What models are, how to interact with them, configuring Docker
-Model Runner in Compose, and writing code that connects to the Model Runner.
+**Models**: What models are, how to interact with them, configuring Docker
+Model Runner in Compose, and writing code that connects to the Model Runner
 
-**Tools** — Understanding tools and how they work, how MCP (Model Context
+**Tools**: Understanding tools and how they work, how MCP (Model Context
 Protocol) fits in, configuring the Docker MCP Gateway, and connecting to the
-MCP Gateway in code.
+MCP Gateway in code
 
-**Code** — What agentic frameworks are, defining models and tools in a Compose
-file, and configuring your app to use those models and tools.
+**Code**: What agentic frameworks are, defining models and tools in a Compose
+file, and configuring your app to use those models and tools
 
 ## Modules
 
@@ -54,9 +54,9 @@ file, and configuring your app to use those models and tools.
 
 ## Prerequisites
 
-- Install Docker Desktop (latest version)
-- Enable **Docker Model Runner** (Settings → AI → Docker Model Runner)
-- The lab uses the Gemma 3 model. Pre-pull it before launching:
+- Install the latest version of Docker Desktop
+- Enable **Docker Model Runner** by going into Settings in Docker Desktop, choosing AI, then selecting Docker Model Runner
+- Pull the Gemma 3 model before launching by running this command:
 
 ```console
 $ docker model pull ai/gemma3

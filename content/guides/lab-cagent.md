@@ -22,8 +22,8 @@ params:
       url: https://github.com/ajeetraina/labspace-cagent
 ---
 
-This lab walks you through building intelligent agents using cagent — from basic
-agent concepts to building sophisticated multi-agent teams that handle complex
+This lab walks you through building intelligent agents with cagent. You'll learn beginner
+agent concepts, then build sophisticated multi-agent teams that handle complex
 real-world tasks. Learn how to create, share, and orchestrate AI agents with
 Docker.
 
@@ -50,7 +50,7 @@ Docker.
 
 ## Prerequisites
 
-- Docker Desktop (latest version)
+- Latest version of Docker Desktop
 - Basic familiarity with Docker
 
 ## Launch the lab

@@ -43,7 +43,7 @@ your specific use case, validate the results, and share them via Docker Hub.
 ## Prerequisites
 
 - Docker Desktop with Docker Offload enabled
-- GPU access (via Docker Offload cloud resources)
+- GPU access with Docker Offload cloud resources
 
 ## Launch the lab
 
