@@ -35,13 +35,15 @@ jobs:
       - name: Ensure cache directory exists
         run: mkdir -p "${{ github.workspace }}/.cache"
 
-      - name: Restore scanner memory
+      - name: Restore scanner state
         uses: actions/cache/restore@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
         with:
-          path: ${{ github.workspace }}/.cache/scanner-memory.db
-          key: docs-scanner-memory-${{ github.repository }}-${{ github.run_id }}
+          path: |
+            ${{ github.workspace }}/.cache/scanner-memory.db
+            ${{ github.workspace }}/.cache/scan-history.json
+          key: docs-scanner-state-${{ github.repository }}-${{ github.run_id }}
           restore-keys: |
-            docs-scanner-memory-${{ github.repository }}-
+            docs-scanner-state-${{ github.repository }}-
 
       - name: Generate GitHub App token
         if: env.HAS_APP_SECRETS == 'true'
@@ -63,9 +65,11 @@ jobs:
           github-token: ${{ steps.app-token.outputs.token || github.token }}
           timeout: 1200
 
-      - name: Save scanner memory
+      - name: Save scanner state
         uses: actions/cache/save@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
         if: always()
         with:
-          path: ${{ github.workspace }}/.cache/scanner-memory.db
-          key: docs-scanner-memory-${{ github.repository }}-${{ github.run_id }}
+          path: |
+            ${{ github.workspace }}/.cache/scanner-memory.db
+            ${{ github.workspace }}/.cache/scan-history.json
+          key: docs-scanner-state-${{ github.repository }}-${{ github.run_id }}

@@ -21,16 +21,42 @@ agents:
 
       ## Setup
 
-      1. Call `get_memories` to get the list of already-scanned paths.
-         Each entry has the form `scanned: <path> YYYY-MM-DD`.
-      2. Use `list_directory` to explore `content/manuals/` and find a leaf
-         directory (no subdirectories) whose path does NOT appear in memory.
-         Skip: content/reference/, content/languages/, content/tags/,
-         content/includes/. If all leaves have been scanned, pick the one
-         with the oldest date.
-      3. Call `directory_tree` on that leaf and read all its files
-      4. File issues for what you find (max 3 per run)
-      5. Call `add_memory` with `scanned: <path> YYYY-MM-DD`
+      1. Read `.cache/scan-history.json` using `read_file`.
+         This file tracks every previously scanned directory as a JSON object:
+         ```json
+         {
+           "scanned": {
+             "content/manuals/desktop/networking/": "2026-02-24",
+             "content/manuals/build/cache/": "2026-02-23"
+           }
+         }
+         ```
+         If the file does not exist or is empty, treat it as `{"scanned": {}}`.
+
+      2. Call `get_memories` to load any learned patterns from previous scans
+         (false positives to skip, codebase context, human feedback).
+
+      3. Use `list_directory` to explore `content/manuals/` and find all leaf
+         directories (no subdirectories). Skip these top-level paths entirely:
+         content/reference/, content/languages/, content/tags/,
+         content/includes/.
+
+      4. Pick a leaf directory to scan:
+         - FIRST CHOICE: a directory that does NOT appear in scan-history.json
+         - FALLBACK: if every leaf directory has been scanned, pick the one
+           with the OLDEST date in scan-history.json
+
+      5. Call `directory_tree` on the selected leaf and read all its files.
+
+      6. Analyze and file issues for what you find (max 3 per run).
+
+      7. After scanning, update `.cache/scan-history.json` using `write_file`.
+         Read the current content, add or update the scanned path with today's
+         date (YYYY-MM-DD), and write the full updated JSON back.
+
+      8. If you learn anything useful for future scans (false positive patterns,
+         codebase context), call `add_memory` to store it. Do NOT use
+         `add_memory` for scan tracking — that is what scan-history.json is for.
 
       ## What good issues look like
 
@@ -107,6 +133,7 @@ agents:
         tools:
           - read_file
           - read_multiple_files
+          - write_file
           - list_directory
           - directory_tree
       - type: memory
