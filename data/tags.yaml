@@ -24,6 +24,8 @@ faq:
   title: FAQ
 frameworks:
   title: Frameworks
+labs:
+  title: Labs
 networking:
   title: Networking
 observability:
