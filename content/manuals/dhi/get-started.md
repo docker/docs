@@ -18,7 +18,7 @@ or have started a trial, you must [mirror DHI repositories](./how-to/mirror.md)
 to your organization's namespace on Docker Hub to access compliance variants
 (FIPS), customization capabilities, and SLA-backed updates. You then pull
 mirrored images from `docker.io` (not `dhi.io`) using your organization's
-namespace path. For example, `docker pull docker.io/yourorg/dhi-python:3.13`
+namespace path. For example, `docker pull docker.io/<yourorg>/dhi-python:3.13`
 instead of `docker pull dhi.io/python:3.13`.
 
 ## Step 1: Find an image to use
