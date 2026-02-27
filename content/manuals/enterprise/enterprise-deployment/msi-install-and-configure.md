@@ -71,9 +71,7 @@ Non-interactive installations are silent and any additional configuration must b
 
 ### Common installation commands
 
-> [!IMPORTANT]
->
-> Admin rights are required to run any of the following commands.
+Admin rights are required to run any of the following commands.
 
 #### Install interactively with verbose logging
 
@@ -199,9 +197,7 @@ msiexec /x "DockerDesktop.msi" /quiet
 
 ### Configuration options
 
-> [!IMPORTANT]
->
-> In addition to the following custom properties, the Docker Desktop MSI installer also supports the standard [Windows Installer command line options](https://learn.microsoft.com/en-us/windows/win32/msi/standard-installer-command-line-options).
+In addition to the following custom properties, the Docker Desktop MSI installer also supports the standard [Windows Installer command line options](https://learn.microsoft.com/en-us/windows/win32/msi/standard-installer-command-line-options).
 
 | Property | Description | Default |
 | :--- | :--- | :--- |
