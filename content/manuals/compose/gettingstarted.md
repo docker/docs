@@ -133,16 +133,16 @@ Compose simplifies the control of your entire application stack, making it easy 
 
    ```yaml
    services:
-      web:
-         build: .
-         ports:
-            - "${APP_PORT}:5000"
-         environment:
-            - REDIS_HOST=${REDIS_HOST}
-            - REDIS_PORT=${REDIS_PORT}
+     web:
+       build: .
+       ports:
+         - "${APP_PORT}:5000"
+       environment:
+         - REDIS_HOST=${REDIS_HOST}
+         - REDIS_PORT=${REDIS_PORT}
 
-      redis:
-         image: redis:alpine
+     redis:
+       image: redis:alpine
    ```
 
    This Compose file defines two services: `web` and `redis`. 
@@ -195,25 +195,25 @@ starting `web`.
 
    ```yaml
    services:
-      web:
-         build: .
-         ports:
-            - "${APP_PORT}:5000"
-         environment:
-            - REDIS_HOST=${REDIS_HOST}
-            - REDIS_PORT=${REDIS_PORT}
-         depends_on:
-            redis:
-               condition: service_healthy
+     web:
+       build: .
+       ports:
+         - "${APP_PORT}:5000"
+       environment:
+         - REDIS_HOST=${REDIS_HOST}
+         - REDIS_PORT=${REDIS_PORT}
+       depends_on:
+         redis:
+           condition: service_healthy
 
-      redis:
-         image: redis:alpine
-         healthcheck:
-            test: ["CMD", "redis-cli", "ping"]
-            interval: 5s
-            timeout: 3s
-            retries: 5
-            start_period: 10s
+     redis:
+       image: redis:alpine
+       healthcheck:
+         test: ["CMD", "redis-cli", "ping"]
+         interval: 5s
+         timeout: 3s
+         retries: 5
+         start_period: 10s
    ```
 
    The `healthcheck` block tells Compose how to test whether Redis is ready:
@@ -257,32 +257,32 @@ running container automatically.
    
    ```yaml
    services:
-      web:
-         build: .
-         ports:
-            - "${APP_PORT}:5000"
-         environment:
-            - REDIS_HOST=${REDIS_HOST}
-            - REDIS_PORT=${REDIS_PORT}
-         depends_on:
-            redis:
-               condition: service_healthy
-         develop:
-            watch:
-               - action: sync+restart
-                  path: .
-                  target: /code
-               - action: rebuild
-                  path: requirements.txt
+     web:
+       build: .
+       ports:
+         - "${APP_PORT}:5000"
+       environment:
+         - REDIS_HOST=${REDIS_HOST}
+         - REDIS_PORT=${REDIS_PORT}
+       depends_on:
+         redis:
+           condition: service_healthy
+       develop:
+         watch:
+           - action: sync+restart
+             path: .
+             target: /code
+           - action: rebuild
+             path: requirements.txt
 
-      redis:
-         image: redis:alpine
-         healthcheck:
-            test: ["CMD", "redis-cli", "ping"]
-            interval: 5s
-            timeout: 3s
-            retries: 5
-            start_period: 10s
+     redis:
+       image: redis:alpine
+       healthcheck:
+         test: ["CMD", "redis-cli", "ping"]
+         interval: 5s
+         timeout: 3s
+         retries: 5
+         start_period: 10s
    ```
 
    The `watch` block defines two rules. The `sync+restart` action syncs any changes
@@ -315,7 +315,7 @@ running container automatically.
 
    > [!NOTE]
    >
-   > For this example to work, the `--debug` flag is is passed to `flask run` in the `CMD` instruction of the Dockerfile. The
+   > For this example to work, the `--debug` flag is passed to `flask run` in the `CMD` instruction of the Dockerfile. The
    > `--debug` flag in Flask enables automatic code reload, making it possible to work
    > on the backend API without the need to restart or rebuild the container.
    > After changing the `.py` file, subsequent API calls will use the new code, but the
@@ -340,37 +340,37 @@ volume fixes this by storing the data on the host, outside the container lifecyc
 
    ```yaml
    services:
-      web:
-         build: .
-         ports:
-            - "${APP_PORT}:5000"
-         environment:
-            - REDIS_HOST=${REDIS_HOST}
-            - REDIS_PORT=${REDIS_PORT}
-         depends_on:
-            redis:
-               condition: service_healthy
-         develop:
-            watch:
-               - action: sync+restart
-                  path: .
-                  target: /code
-               - action: rebuild
-                  path: requirements.txt
+     web:
+       build: .
+       ports:
+         - "${APP_PORT}:5000"
+       environment:
+         - REDIS_HOST=${REDIS_HOST}
+         - REDIS_PORT=${REDIS_PORT}
+       depends_on:
+         redis:
+           condition: service_healthy
+       develop:
+         watch:
+           - action: sync+restart
+             path: .
+             target: /code
+           - action: rebuild
+             path: requirements.txt
 
-      redis:
-         image: redis:alpine
-         volumes:
-            - redis-data:/data
-         healthcheck:
-            test: ["CMD", "redis-cli", "ping"]
-            interval: 5s
-            timeout: 3s
-            retries: 5
-            start_period: 10s
+     redis:
+       image: redis:alpine
+       volumes:
+         - redis-data:/data
+       healthcheck:
+         test: ["CMD", "redis-cli", "ping"]
+         interval: 5s
+         timeout: 3s
+         retries: 5
+         start_period: 10s
 
    volumes:
-      redis-data:
+     redis-data:
    ```
 
    The `redis-data:/data` entry under `redis.volumes` mounts the named volume at `/data`, the path where Redis
@@ -399,7 +399,6 @@ you want to reuse infrastructure definitions across projects.
 1. Create a new file in your project directory called `infra.yaml` and move the Redis service and volume into it:
 
    ```yaml
-   services:
      redis:
        image: redis:alpine
        volumes:
@@ -412,15 +411,12 @@ you want to reuse infrastructure definitions across projects.
          start_period: 10s
 
    volumes:
-      redis-data:
+     redis-data:
    ```
 
 2. Update `compose.yaml` to include `infra.yaml`:
 
    ```yaml
-   include:
-    - path: ./infra.yaml
-
    services:
      web:
        build: .
@@ -434,11 +430,11 @@ you want to reuse infrastructure definitions across projects.
            condition: service_healthy
        develop:
          watch:
-            - action: sync+restart
-               path: .
-               target: /code
-            - action: rebuild
-               path: requirements.txt
+           - action: sync+restart
+             path: .
+             target: /code
+           - action: rebuild
+             path: requirements.txt
    ```
 
 3. Run the application to confirm everything still works:
