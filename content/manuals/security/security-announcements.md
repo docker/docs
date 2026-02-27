@@ -12,6 +12,12 @@ toc_max: 2
 
 [Subscribe to security RSS feed](/security/security-announcements/index.xml)
 
+## Docker Desktop 4.62.0 security update: CVE-2026-28400
+
+A vulnerability in Docker Desktop was fixed on February 23 in the [4.62.0](/manuals/desktop/release-notes.md#4620) release:
+
+- Addressed [CVE-2026-28400](https://www.cve.org/cverecord?id=CVE-2026-28400), runtime flag injection in Docker Model Runner.
+
 ## Docker Desktop 4.62.0 security update: CVE-2026-2664
 
 A vulnerability in Docker Desktop was fixed on February 23 in the [4.62.0](/manuals/desktop/release-notes.md#4620) release:
