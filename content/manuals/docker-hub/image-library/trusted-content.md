@@ -186,8 +186,7 @@ on Docker Hub, making it easier to identify trusted DHI content.
 
 To browse available repositories, see the [Docker Hardened Images
 catalog](https://hub.docker.com/hardened-images/catalog). For implementation
-guidance, see [Docker Hardened Images](/dhi/) and [Use a Docker Hardened Image
-chart](/dhi/how-to/helm/).
+guidance, see [Docker Hardened Images](/dhi/).
 
 ## Verified Publisher images
 
