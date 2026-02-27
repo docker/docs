@@ -134,7 +134,7 @@ To dive deeper into comparing images see [Compare Docker Hardened Images](./how-
 You've pulled and run your first Docker Hardened Image. Here are a few ways to keep going:
 
 - [Migrate existing applications to DHIs](./migration/migrate-with-ai.md): Use
-  Docker's AI assistant to update your Dockerfiles to use Docker Hardened Images
+  Gordon to update your Dockerfiles to use Docker Hardened Images
   as the base.
 
 - [Start a trial](https://hub.docker.com/hardened-images/start-free-trial) to
