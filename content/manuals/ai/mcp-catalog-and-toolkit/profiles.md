@@ -6,7 +6,7 @@ keywords: Docker MCP, profiles, MCP servers, configuration, sharing
 weight: 25
 ---
 
-{{< summary-bar feature_name="Docker MCP Toolkit" >}}
+{{< summary-bar feature_name="MCP Profiles" >}}
 
 > [!NOTE]
 > This page describes the MCP Toolkit interface in Docker Desktop 4.62 and

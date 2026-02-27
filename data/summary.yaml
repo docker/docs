@@ -184,6 +184,9 @@ Docker MCP Catalog:
   availability: Beta
 Docker MCP Toolkit:
   availability: Beta
+MCP Profiles:
+  availability: Early Access
+  requires: Docker Desktop 4.63 and later
 Docker Pass:
   requires: Docker Desktop 4.54 and later
   availability: Beta
