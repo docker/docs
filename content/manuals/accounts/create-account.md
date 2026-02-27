@@ -3,11 +3,12 @@ title: Create a Docker account
 linkTitle: Create an account
 weight: 10
 description: Learn how to register for a Docker ID and sign in to your account
-keywords: accounts, docker ID, billing, paid plans, support, Hub, Store, Forums, knowledge
+keywords:
+  accounts, docker ID, billing, paid plans, support, Hub, Store, Forums, knowledge
   base, beta access, email, activation, verification
 aliases:
-- /docker-hub/accounts/
-- /docker-id/
+  - /docker-hub/accounts/
+  - /docker-id/
 ---
 
 You can create a free Docker account with your email address or by signing up
@@ -28,15 +29,13 @@ Signing up with an email address, Google, or GitHub account requires additional 
 - If you sign up with Google or GitHub, you must first verify your email address with that provider.
 - If you sign up with an email address, Docker sends a verification email. Follow the procedures in that email to verify your account and complete the sign-up process.
 
-Docker blocks sign-in until you've verified your account. 
+Docker blocks sign-in until you've verified your account.
 
 ### Sign up with your email
 
 1. Go to the [Docker sign-up page](https://app.docker.com/signup/) and enter a unique, valid email address.
 1. Enter a username to use as your Docker ID. Once you create your Docker ID
-you can't reuse it in the future if you deactivate this account. Your username:
-    - Must be between 4 and 30 characters long
-    - Can only contain numbers and lowercase letters
+   you can't reuse it in the future if you deactivate this account. Your username: - Must be between 4 and 30 characters long - Can only contain numbers and lowercase letters
 1. Choose a password that's at least 9 characters long, then select **Sign Up**.
 1. Verify your email address when you receive the Docker verification email. This completes the registration process.
 
@@ -46,10 +45,10 @@ you can't reuse it in the future if you deactivate this account. Your username:
 1. Select your social provider, Google or GitHub.
 1. Select the social account you want to link to your Docker account.
 1. Select **Authorize Docker** to let Docker access your social account
-information. You will be re-routed to the sign-up page.
+   information. You will be re-routed to the sign-up page.
 1. Enter a username to use as your Docker ID. Your username:
-    - Must be between 4 and 30 characters long
-    - Can only contain numbers and lowercase letters
+   - Must be between 4 and 30 characters long
+   - Can only contain numbers and lowercase letters
 1. Select **Sign up**.
 
 ## Sign in to your account
@@ -73,7 +72,7 @@ accounts are automatically linked.
 
 If no Docker ID exists, Docker creates a new account for you.
 
-Docker doesn't currently support linking multiple sign-in methods
+Docker doesn't support linking multiple sign-in methods
 to the same Docker ID.
 
 ### Sign in using the CLI
@@ -108,5 +107,6 @@ If you have a paid Docker subscription,
 All Docker users can seek troubleshooting information and support through the
 following resources, where Docker or the community respond on a best effort
 basis:
-   - [Docker Community Forums](https://forums.docker.com/)
-   - [Docker Community Slack](http://dockr.ly/comm-slack)
+
+- [Docker Community Forums](https://forums.docker.com/)
+- [Docker Community Slack](http://dockr.ly/comm-slack)
