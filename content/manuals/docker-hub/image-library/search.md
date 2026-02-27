@@ -20,7 +20,7 @@ suited to your project.
 
 ### Products
 
-Docker Hub's content library features three products, each designed to meet
+Docker Hub's content library features various products, each designed to meet
 specific needs of developers and organizations. These products include:
 
 - Images
@@ -77,7 +77,7 @@ Helm charts in Docker Hub provide a streamlined way to package, configure, and
 deploy Kubernetes applications. Helm is the package manager for Kubernetes, and
 charts are pre-configured templates that define the resources needed to run an
 application in a Kubernetes cluster. Docker Hub hosts a variety of Helm charts
-that simplify complex deployments by:
+that provide:
 
 - Application packaging: Bundle Kubernetes manifests, configurations, and
   dependencies into a single, reusable chart.
@@ -128,8 +128,9 @@ environments. These containerized AI models provide:
 - Framework support: Find models built with popular frameworks like TensorFlow,
   PyTorch, scikit-learn, and others.
 
-Containerized AI models accelerate AI adoption by removing infrastructure
-complexity and enabling teams to focus on building intelligent applications.
+Containerized AI models remove the need to manage infrastructure dependencies,
+let you deploy models across different environments, and enable scaling as
+application demands change.
 
 #### Plugins
 
