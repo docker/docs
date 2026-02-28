@@ -260,12 +260,12 @@ You can find more details in [this Docker Blog post](https://www.docker.com/blog
 
 ## Claude Code
 
-[Claude Code](https://claude.com/product/claude-code) is [Anthropic's](https://www.anthropic.com/) command-line tool for agentic coding. It lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows through natural language commands.
+[Claude Code](https://claude.com/product/claude-code) is [Anthropic's](https://www.anthropic.com/) command-line tool for agentic coding. It lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling Git workflows through natural language commands.
 
 ### Configuration
 
 1. Install Claude Code (see [docs](https://code.claude.com/docs/en/quickstart#step-1-install-claude-code))
-2. Use the `ANTHROPIC_BASE_URL` environment varialbe to point Claude Code at DMR. On Mac or Linux you can do this e.g. like this if you want to use the `gpt-oss:32k` model:
+2. Use the `ANTHROPIC_BASE_URL` environment variable to point Claude Code at DMR. On Mac or Linux you can do this e.g. like this if you want to use the `gpt-oss:32k` model:
     ```bash
     ANTHROPIC_BASE_URL=http://localhost:12434 claude --model gpt-oss:32k
     ```
