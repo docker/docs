@@ -1,10 +1,11 @@
 # syntax=docker/dockerfile:1
 
-ARG GO_VERSION=1.25
+ARG GO_VERSION=1.25.6
+ARG GO_ALPINE_VERSION=3.22
 
 FROM scratch AS sitedir
 
-FROM golang:${GO_VERSION}-alpine AS base
+FROM golang:${GO_VERSION}-alpine${GO_ALPINE_VERSION} AS base
 RUN apk add --no-cache openssl
 ENV CGO_ENABLED=0
 WORKDIR /src

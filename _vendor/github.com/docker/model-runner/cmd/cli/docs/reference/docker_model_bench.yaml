@@ -5,7 +5,7 @@ long: |-
 
     This command runs a series of benchmarks with 1, 2, 4, and 8 concurrent requests by default,
     measuring the tokens per second (TPS) that the model can generate.
-usage: docker model bench [MODEL]
+usage: docker model bench MODEL
 pname: docker model
 plink: docker_model.yaml
 options:

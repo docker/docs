@@ -1,0 +1,79 @@
+command: docker model skills
+short: Install Docker Model Runner skills for AI coding assistants
+long: |-
+    Install Docker Model Runner skills for AI coding assistants.
+
+    Skills are configuration files that help AI coding assistants understand
+    how to use Docker Model Runner effectively for local model inference.
+
+    Supported targets:
+      --codex     Install to ~/.codex/skills (OpenAI Codex CLI)
+      --claude    Install to ~/.claude/skills (Claude Code)
+      --opencode  Install to ~/.config/opencode/skills (OpenCode)
+      --dest      Install to a custom directory
+
+    Example:
+      docker model skills --claude
+      docker model skills --codex --claude
+      docker model skills --dest /path/to/skills
+usage: docker model skills
+pname: docker model
+plink: docker_model.yaml
+options:
+    - option: claude
+      value_type: bool
+      default_value: "false"
+      description: Install skills for Claude Code (~/.claude/skills)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: codex
+      value_type: bool
+      default_value: "false"
+      description: Install skills for OpenAI Codex CLI (~/.codex/skills)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: dest
+      value_type: string
+      description: Install skills to a custom directory
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: force
+      shorthand: f
+      value_type: bool
+      default_value: "false"
+      description: Overwrite existing skills without prompting
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: opencode
+      value_type: bool
+      default_value: "false"
+      description: Install skills for OpenCode (~/.config/opencode/skills)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

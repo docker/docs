@@ -41,11 +41,9 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: ignore-runtime-memory-check
-      value_type: bool
-      default_value: "false"
-      description: |
-        Do not block pull if estimated runtime memory for model exceeds system resources.
+    - option: openaiurl
+      value_type: string
+      description: OpenAI-compatible API endpoint URL to chat with
       deprecated: false
       hidden: false
       experimental: false

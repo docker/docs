@@ -5,18 +5,6 @@ long: |
 usage: docker model pull MODEL
 pname: docker model
 plink: docker_model.yaml
-options:
-    - option: ignore-runtime-memory-check
-      value_type: bool
-      default_value: "false"
-      description: |
-        Do not block pull if estimated runtime memory for model exceeds system resources.
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
 examples: |-
     ### Pulling a model from Docker Hub
 

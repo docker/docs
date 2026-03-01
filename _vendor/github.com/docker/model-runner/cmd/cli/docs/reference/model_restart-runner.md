@@ -12,6 +12,7 @@ Restart Docker Model Runner (Docker Engine only)
 | `--gpu`          | `string` | `auto`      | Specify GPU support (none\|auto\|cuda\|rocm\|musa\|cann)                                               |
 | `--host`         | `string` | `127.0.0.1` | Host address to bind Docker Model Runner                                                               |
 | `--port`         | `uint16` | `0`         | Docker container port for Docker Model Runner (default: 12434 for Docker Engine, 12435 for Cloud mode) |
+| `--proxy-cert`   | `string` |             | Path to a CA certificate file for proxy SSL inspection                                                 |
 
 
 <!---MARKER_GEN_END-->

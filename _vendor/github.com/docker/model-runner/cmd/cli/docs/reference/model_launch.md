@@ -2,6 +2,7 @@
 
 <!---MARKER_GEN_START-->
 Launch an app configured to use Docker Model Runner.
+
 Supported apps: anythingllm, claude, codex, openclaw, opencode, openwebui
 
 ### Options
@@ -15,3 +16,4 @@ Supported apps: anythingllm, claude, codex, openclaw, opencode, openwebui
 
 
 <!---MARKER_GEN_END-->
+
