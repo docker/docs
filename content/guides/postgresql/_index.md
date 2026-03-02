@@ -13,5 +13,4 @@ params:
   time: 20 minutes
 ---
 
-- Networking and Connectivity
 - Companions for PostfgreSQL
