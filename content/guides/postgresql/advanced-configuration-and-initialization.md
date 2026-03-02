@@ -36,7 +36,7 @@ When the container starts, it checks whether the data directory (`/var/lib/postg
 | `.sql.gz` | Gzip-compressed SQL files |
 | `.sh` | Shell scripts executed with bash |
 
-> **Important:** Initialization scripts only run when the PostgreSQL data directory (`/var/lib/postgresql/data`) is empty. If you mount a volume containing existing data, initialization is skipped. This behavior prevents overwriting existing databases.
+> **Important:** Initialization scripts only run when the PostgreSQL data directory is empty. If you mount a volume containing existing data, initialization is skipped. This behavior prevents overwriting existing databases.
 
 ## Mounting initialization scripts
 
