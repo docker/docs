@@ -35,6 +35,7 @@ This error may indicate:
   running the command again.
 - Your Docker client is attempting to connect to a Docker daemon on a different
   host, and that host is unreachable.
+- You have multiple Docker engine that run on your system (eg. snap & docker-ce).
 
 ### Check whether Docker is running
 
