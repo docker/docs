@@ -350,7 +350,7 @@ $ docker service rm devtest-service
 ```
 
 Removing the service doesn't remove any volumes created by the service.
-Volume removal is a separate step.
+Note volume removal is a separate step.
 
 ### Populate a volume using a container
 
