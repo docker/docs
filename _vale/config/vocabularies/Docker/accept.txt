@@ -283,6 +283,7 @@ Zsh
 [Pp]roxied
 [Pp]roxying
 [pP]yright
+[Rr]eadme
 [Rr]eal-time
 [Rr]egex(es)?
 [Rr]untimes?
