@@ -30,13 +30,11 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-03-02" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.63.0" build_path="//" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.63.0" build_path="/220185/" >}}
 
 ### New
 
-- Added a new **Logs** view where you can explore logs from all sources in one unified view.
 - Added SLSA v1 provenance support in the **Builds** view. 
- 
 
 ### Upgrades
 
