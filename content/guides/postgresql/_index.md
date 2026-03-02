@@ -13,7 +13,6 @@ params:
   time: 20 minutes
 ---
 
-- Immediate Setup & Data Persistence
 - Advanced Configuration and Initialization
 - Networking and Connectivity
 - Companions for PostfgreSQL
