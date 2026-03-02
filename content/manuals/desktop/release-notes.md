@@ -26,6 +26,34 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.63.0
+
+{{< release-date date="2026-03-02" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.63.0" build_path="/220185/" >}}
+
+### New
+
+- Added SLSA v1 provenance support in the **Builds** view. 
+
+### Upgrades
+
+- [Kubernetes v1.34.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.3)
+- Linux kernel `v6.12.72`
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Enhanced the proxy settings UI and added a separate proxy for containers.
+- Fixed an issue where community registry MCP catalogs failed to load when a server's config object contained `"required": null`.
+- Fixed an issue where `mcp-gateway` would hang when fetching secrets from the Secrets Engine while the Docker Desktop VM was in Resource Saver mode. 
+- Rebranded "Docker AI" references to "Gordon".
+
+#### For Windows
+
+- Improved startup time on Windows.
+
 ## 4.62.0
 
 {{< release-date date="2026-02-23" >}}
