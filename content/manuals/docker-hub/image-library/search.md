@@ -26,7 +26,7 @@ specific needs of developers and organizations. These products include:
 - Images
 - Extensions
 - Helm charts
-- Compose
+- Compose files
 - AI models
 - Plugins
 
