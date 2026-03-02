@@ -793,6 +793,8 @@ Compose does not automatically import these referenced resources into the extend
 
 Circular references with `extends` are not supported, Compose returns an error when one is detected.
 
+`extends` in not supported in `docker stack`, only in `docker compose`, for obscure reasons.
+
 #### Finding referenced service
 
 `file` value can be:
