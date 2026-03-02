@@ -2,7 +2,7 @@
 title: PostgreSQL specific guide
 linkTitle: PostgreSQL
 description: Containerize PostgreSQL databases using Docker
-keywords: Docker, getting started, postgresql, languag
+keywords: Docker, getting started, postgresql, language
 summary: |
   This guide explains how to containerize PostgreSQL databases using
   Docker.
