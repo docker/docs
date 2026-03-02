@@ -19,42 +19,34 @@ You can add or remove seats from your Docker Team or Business subscription at an
 
 ## Add seats to your subscription
 
+If you have a sales-assisted Docker Business subscription, contact your account manager to add seats to your subscription.
+
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
-
-> [!IMPORTANT]
->
-> If you have a sales-assisted Docker Business subscription, contact your account manager to add seats to your subscription.
 
 To add seats:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
 organization.
 1. Select **Billing**.
+   - If you choose to pay using a US bank account, you must verify the account. 
+   - For more information, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
 1. Select **Add seats** and follow the on-screen instructions to complete
-adding seats. Note, you can't use pay by invoice for purchasing additional
-seats. You must use a card or US bank account.
-
-> [!NOTE]
->
-> If you choose to pay using a US bank account, you must verify the account. For
-> more information, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
+adding seats.
+   - You can't use pay by invoice for purchasing additional seats.
+   - You must use a card or US bank account.
 
 You can now add more members to your organization. For more information, see [Manage organization members](../admin/organization/members.md).
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
 
-> [!IMPORTANT]
->
-> If you have a sales-assisted Docker Business subscription, contact your account manager to add seats to your subscription.
-
 To add seats to your Legacy Docker subscription:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-1. Select your organization, then select **Billing**.
-1. On the Billing page, select **Add seats**.
-1. Select the number of seats you want to add, then select **Purchase**.
+2. Select your organization, then select **Billing**.
+3. On the Billing page, select **Add seats**.
+4. Select the number of seats you want to add, then select **Purchase**.
 
 To add seats to Docker Build Cloud:
 
@@ -75,14 +67,11 @@ You can remove seats from your Team or Business subscription at any time. Change
 
 For example, if you're billed on the 8th of every month for 10 seats and remove 2 seats on the 15th, the 2 seats remain available until your next billing cycle. Your payment for 8 seats begins on the next billing cycle.
 
+
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
-> [!IMPORTANT]
->
-> If you have a sales-assisted Docker Business subscription, contact your account manager to remove seats from your subscription.
-
-To remove seats:
+ If you have a sales-assisted Docker Business subscription, contact your account manager to remove seats from your subscription. To remove seats:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
 organization.
@@ -95,11 +84,7 @@ You can cancel the removal of seats before your next billing cycle. To do so, se
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
 
-> [!IMPORTANT]
->
-> If you have a sales-assisted Docker Business subscription, contact your account manager to remove seats from your subscription.
-
-To remove seats from your Legacy Docker subscription:
+ If you have a sales-assisted Docker Business subscription, contact your account manager to remove seats from your subscription. To remove seats from your Legacy Docker subscription:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 1. Select your organization, then select **Billing**.
