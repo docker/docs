@@ -14,9 +14,9 @@ workflows, making it easier to share and collaborate.
 In this section, learn about:
 
 - [Search](./search.md): Discover how to browse and search Docker Hub's extensive resources.
-- [Trusted content](./trusted-content.md): Dive into Docker Official Images,
-  Verified Publisher content, and Sponsored Open Source images, all vetted for
-  security and reliability to streamline your workflows.
-- [Catalogs](./catalogs.md): Explore specialized collections like the generative AI catalog.
+- [Trusted content](./trusted-content.md): Dive into Docker Hardened Images,
+  Docker Official Images, Verified Publisher content, and Sponsored Open Source
+  images, all vetted for security and reliability to streamline your workflows.
+- [Catalogs](./catalogs.md): Explore specialized collections like the generative AI catalogs.
 - [Mirroring](./mirror.md): Learn how to create a mirror of Docker Hub's
   container image library as a pull-through cache.

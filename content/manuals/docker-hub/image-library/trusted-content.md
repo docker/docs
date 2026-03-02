@@ -12,9 +12,9 @@ Docker Hub's trusted content provides a curated selection of high-quality,
 secure images designed to give developers confidence in the reliability and
 security of the resources they use. These images are stable, regularly updated,
 and adhere to industry best practices, making them a strong foundation for
-building and deploying applications. Docker Hub's trusted content includes,
-Docker Official Images, Verified Publisher images, and Docker-Sponsored Open
-Source Software images.
+building and deploying applications. Docker Hub's trusted content includes
+Docker Official Images, Docker Hardened Images and charts, Verified Publisher
+images, and Docker-Sponsored Open Source Software images.
 
 ## Docker Official Images
 
@@ -164,6 +164,29 @@ August 2025, Docker Content Trust signing certificates for Docker Official
 Images began expiring. To resolve pull failures, unset the `DOCKER_CONTENT_TRUST`
 environment variable. For more details, see the
 [DCT retirement blog post](https://www.docker.com/blog/retiring-docker-content-trust/).
+
+## Docker Hardened Images
+
+Docker Hardened Images (DHI) are minimal, secure, and production-ready
+container base and application images maintained by Docker. DHI also includes
+Docker-provided hardened Helm charts built from upstream sources and published
+as OCI artifacts in Docker Hub.
+
+DHI is designed to reduce vulnerabilities and simplify compliance while fitting
+into existing Docker workflows with little to no retooling required. Docker
+maintains near-zero CVEs in DHI images, and DHI images and charts include
+signed security metadata such as SBOMs and provenance attestations.
+
+Image and chart repositories have special badges
+on Docker Hub, making it easier to identify trusted DHI content.
+
+![Docker Hardened Image badge](../images/dhi-image-label.png)
+
+![Docker Hardened Chart badge](../images/dhi-chart-label.png)
+
+To browse available repositories, see the [Docker Hardened Images
+catalog](https://hub.docker.com/hardened-images/catalog). For implementation
+guidance, see [Docker Hardened Images](/dhi/).
 
 ## Verified Publisher images
 
