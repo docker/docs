@@ -217,7 +217,7 @@ Direct connections require PostgreSQL to spawn a new process for each client. Pg
 
 Try increasing the client count (`-c` parameter) gradually: 50, 100, 150, 200. At some point, direct connections will fail with "too many clients already" while PgBouncer continues handling requests. This is PgBouncer's primary value: **it prevents connection exhaustion**.
 
-**3. Throughput varies by environment**
+#### 3. Throughput varies by environment
 
 On some systems, direct connections show higher transactions per second (TPS) at low concurrency. On others, PgBouncer wins even with few clients. The difference depends on:
 - CPU and memory available
