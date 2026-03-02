@@ -13,4 +13,3 @@ params:
   time: 20 minutes
 ---
 
-- Companions for PostfgreSQL
