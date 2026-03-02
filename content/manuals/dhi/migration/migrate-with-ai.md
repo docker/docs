@@ -1,7 +1,7 @@
 --- 
-title: Migrate using Docker's AI-powered assistant
+title: Migrate using Gordon
 linktitle: AI-assisted migration
-description: Use Docker's AI-powered assistant to automatically migrate your Dockerfile to Docker Hardened Images
+description: Use Gordon to automatically migrate your Dockerfile to Docker Hardened Images
 weight: 15
 keywords: ai assistant, migrate dockerfile, docker hardened images, automated migration
 params:
@@ -13,10 +13,10 @@ params:
 
 {{< summary-bar feature_name="Ask Gordon DHI migration" >}}
 
-You can use Docker's AI-powered assistant to automatically migrate your
+You can use Gordon to automatically migrate your
 Dockerfile to use Docker Hardened Images (DHI).
 
-1. Ensure Docker's AI-powered assistant is [enabled](/manuals/ai/gordon.md#enable-ask-gordon).
+1. Ensure Gordon is [enabled](/manuals/ai/gordon.md#enable-ask-gordon).
 2. In the terminal, navigate to the directory containing your Dockerfile.
 3. Start a conversation with the assistant:
    ```bash

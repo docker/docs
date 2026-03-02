@@ -14,7 +14,7 @@ aliases:
 > Looking for a definition that's not listed or need a more context-aware
 > explanation?
 >
-> Try <a role="button" tabindex="0" class="open-kapa-widget">Ask AI</a>.
+> Try <a role="button" tabindex="0" class="open-kapa-widget">Ask Gordon</a>.
 
 
 <!--

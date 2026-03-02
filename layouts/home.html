@@ -36,7 +36,7 @@
               <input
                 x-model="query"
                 type="text"
-                placeholder="Ask anything about Docker and get instant answers…"
+                placeholder="Ask Gordon anything about Docker and get instant answers…"
                 @keydown.enter="if (query.trim()) { $store.gordon.open(query.trim(), true); query = ''; }"
                 class="flex-1 bg-transparent text-lg text-gray-900 placeholder-gray-500 focus:outline-none dark:text-white dark:placeholder-gray-400"
               />

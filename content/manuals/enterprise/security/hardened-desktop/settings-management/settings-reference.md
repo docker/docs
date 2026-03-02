@@ -880,26 +880,26 @@ third-party or unvetted plugins from being installed.
 >
 > For Docker Desktop versions 4.41 and earlier, these settings were under the **Experimental features** tab on the **Features in development** page.
 
-### Enable Docker AI
+### Enable Gordon
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
 | `false`       | Individual users: `true`, `false`<br>Business tier: `"Disabled"`, `"Enabled"`, `"Always Enabled"` | Boolean for individuals<br>Toggle in Admin Console |
 
 
-- **Description:** Docker AI features including "Ask Gordon" functionality.
+- **Description:** Enable the Gordon AI agent, including the "Ask Gordon" interface
 - **OS:** {{< badge color=blue text="All" >}}
 - **Use case:** Turn on AI-powered assistance and recommendations within Docker Desktop.
 - **Configure this setting with:**
     - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Enable Docker AI** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+    - Settings Management: **Enable Gordon** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 > [!IMPORTANT]
 >
 > Docker Business customers must set this to `"Enabled"` or `"Always Enabled"`
 in the Admin Console. Setting to `"User Defined"` alone will not activate
-Docker AI features. This secure-by-default approach prevents unintended
+Gordon features. This secure-by-default approach prevents unintended
 deployment of AI features in security-conscious organizations.
 
 ### Enable Docker MCP Toolkit

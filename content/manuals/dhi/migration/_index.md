@@ -7,8 +7,8 @@ aliases:
   - /dhi/how-to/migrate/
 params:
   grid_migration_paths:
-    - title: Migrate with Docker's AI assistant
-      description: Use Docker's AI assistant to automatically migrate your Dockerfile to Docker Hardened Images with guidance and recommendations.
+    - title: Migrate with Gordon
+      description: Use Gordon to automatically migrate your Dockerfile to Docker Hardened Images with guidance and recommendations.
       icon: smart_toy
       link: /dhi/migration/migrate-with-ai/
     - title: Migrate from Alpine or Debian images
