@@ -40,6 +40,11 @@ coding agents, see [Comparison to alternatives](./architecture.md#comparison-to-
 > can use legacy container-based sandboxes with
 > [Docker Desktop 4.57](/desktop/release-notes/#4570).
 
+> [!NOTE]
+> For Windows users: On Windows Docker Sandboxes only work inside of a `cmd` or `PowerShell` window.
+> At this time there is no support for WSL 2
+
+
 ## How to use sandboxes
 
 To create and run a sandbox:
