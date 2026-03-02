@@ -33,6 +33,26 @@ Compose Bridge also supports applications that use LLMs via Docker Model Runner.
 
 For more details, see [Use Model Runner](use-model-runner.md).
 
+## Apply organizational standards at scale 
+
+
+Compose Bridge supports custom transformation templates, which lets platform teams encode
+organizational standards once and apply them consistently whenever a `compose.yaml` file
+is converted to Kubernetes manifests.
+
+Developers continue to write standard Compose files. During conversion, Compose Bridge
+runs your custom transformation and automatically injects the required security contexts,
+resource limits, labels, and network policies into the output manifests — without
+requiring developers to know or manage those details.
+
+When your requirements change, update the transformation template in one place. Every team
+picks up the changes on their next conversion, with no edits to individual Compose files.
+
+This separation of concerns keeps developers focused on application configuration, while
+platform teams control governance and enforce policy through the transformation layer.
+
+To get started, see [Customize Compose Bridge](/manuals/compose/bridge/customize.md).
+
 ## What's next?
 
 - [Use Compose Bridge](usage.md)
