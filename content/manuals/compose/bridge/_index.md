@@ -35,7 +35,6 @@ For more details, see [Use Model Runner](use-model-runner.md).
 
 ## Apply organizational standards at scale 
 
-## Apply organizational standards at scale
 
 Compose Bridge supports custom transformation templates, which lets platform teams encode
 organizational standards once and apply them consistently whenever a `compose.yaml` file
