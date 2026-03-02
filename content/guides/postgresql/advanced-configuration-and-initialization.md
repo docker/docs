@@ -26,7 +26,7 @@ The official PostgreSQL Docker image supports running initialization scripts aut
 
 ### How initialization works
 
-When the container starts, it checks whether the data directory (`/var/lib/postgresql/data`) is empty. If the directory already contains data, PostgreSQL starts immediately without running any initialization. If the directory is empty, the container runs `initdb` to create a new database cluster, then executes all scripts in `/docker-entrypoint-initdb.d/` in alphabetical order before starting PostgreSQL.
+When the container starts, it checks whether the PostgreSQL data directory is empty. If the directory already contains data, PostgreSQL starts immediately without running any initialization. If the directory is empty, the container runs `initdb` to create a new database cluster, then executes all scripts in `/docker-entrypoint-initdb.d/` in alphabetical order before starting PostgreSQL.
 
 ### Supported file formats
 
