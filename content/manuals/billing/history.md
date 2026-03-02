@@ -4,7 +4,7 @@ weight: 40
 description: Learn how to view invoices and your billing history
 keywords: payments, billing, subscription, invoices, renewals, invoice management, billing administration, pay invoice
 aliases:
-    - /billing/core-billing/history/
+  - /billing/core-billing/history/
 ---
 
 Learn how to view and pay invoices, view your billing history, and verify
@@ -25,7 +25,7 @@ Your invoice includes the following:
 - Amount due (in USD)
 - Pay online: Select this link to pay your invoice online
 - Description of your order, quantity if applicable, unit price, and
-amount (in USD)
+  amount (in USD)
 - Subtotal, discount (if applicable), and total
 
 The information listed in the "Bill to" section of your invoice is based on
@@ -35,7 +35,7 @@ includes the following:
 - Name (required): The name of the administrator or company
 - Address (required)
 - Email address (required): The email address that receives all billing-related
-emails for the account
+  emails for the account
 - Phone number
 - Tax ID or VAT
 
@@ -53,7 +53,7 @@ For more information, see [Update billing information](details.md).
 > [!NOTE]
 >
 > Pay by invoice is only available for subscribers on an annual billing cycle.
-To change your billing cycle, see [Change your billing cycle](/manuals/billing/cycle.md).
+> To change your billing cycle, see [Change your billing cycle](/manuals/billing/cycle.md).
 
 If you've selected pay by invoice for your subscription, you'll receive email
 reminders to pay your invoice at 10 days before the due date, on the due date,
@@ -71,7 +71,7 @@ When your payment has processed, the invoice's **Status** column will update to
 **Paid** and you will receive a confirmation email.
 
 If you choose to pay using a US bank account, you must verify the account. For
-more information, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
+more information, see [Verify a bank account](/manuals/billing/payment-method.md#verify-a-bank-account).
 
 ### View renewal date
 
@@ -92,7 +92,7 @@ date:
 1. Select your user avatar to open the drop-down menu.
 1. Select **Billing**.
 1. Select the user or organization account to view the billing details. Here
-you can find your renewal date and the renewal amount.
+   you can find your renewal date and the renewal amount.
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -102,8 +102,8 @@ you can find your renewal date and the renewal amount.
 > [!NOTE]
 >
 > If the VAT number field is not available, complete the
-[Contact Support form](https://hub.docker.com/support/contact/). This field
-may need to be manually added.
+> [Contact Support form](https://hub.docker.com/support/contact/). This field
+> may need to be manually added.
 
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
@@ -111,17 +111,17 @@ may need to be manually added.
 To add or update your VAT number:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and choose your
-organization.
+   organization.
 1. Select **Billing**.
 1. Select **Billing information** from the left-hand menu.
 1. Select **Change** on your billing information card.
 1. Ensure the **I'm purchasing as a business** checkbox is checked.
 1. Enter your VAT number in the Tax ID section.
 
-    > [!IMPORTANT]
-    >
-    > Your VAT number must include your country prefix. For example, if you are
-    entering a VAT number for Germany, you would enter `DE123456789`.
+   > [!IMPORTANT]
+   >
+   > Your VAT number must include your country prefix. For example, if you are
+   > entering a VAT number for Germany, you would enter `DE123456789`.
 
 1. Select **Update**.
 
@@ -138,10 +138,10 @@ To add or update your VAT number:
 1. In the **Billing Information** section, select **Update information**.
 1. Enter your VAT number in the Tax ID section.
 
-    > [!IMPORTANT]
-    >
-    > Your VAT number must include your country prefix. For example, if you are
-    entering a VAT number for Germany, you would enter `DE123456789`.
+   > [!IMPORTANT]
+   >
+   > Your VAT number must include your country prefix. For example, if you are
+   > entering a VAT number for Germany, you would enter `DE123456789`.
 
 1. Select **Save**.
 
@@ -163,7 +163,7 @@ account or organization.
 To view billing history:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and choose your
-organization.
+   organization.
 1. Select **Billing**.
 1. Select **Invoices** from the left-hand menu.
 1. Optional. Select the **Invoice number** to open invoice details.
@@ -194,7 +194,7 @@ You must be an owner of the organization to view the billing history.
 To view billing history:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
-organization.
+   organization.
 1. Select **Billing**.
 1. Select **Invoices** from the left-hand menu.
 1. Optional. Select the **invoice number** to open invoice details.
