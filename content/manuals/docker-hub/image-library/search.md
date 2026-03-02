@@ -28,7 +28,7 @@ specific needs of developers and organizations. These products include:
 - Helm charts
 - Compose files
 - AI models
-- Plugins
+- Docker Engine plugins
 
 #### Images
 
