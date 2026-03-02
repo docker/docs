@@ -16,7 +16,7 @@ This guide helps you resolve common issues when using Docker Sandboxes with AI c
 
 When you run `docker sandbox`, you see an error saying the command doesn't exist.
 
-This means the CLI plugin isn't installed or isn't in the correct location. To fix:
+This means the CLI plugin isn't installed in the expected location. To fix:
 
 1. Verify the plugin exists:
 
@@ -26,7 +26,10 @@ This means the CLI plugin isn't installed or isn't in the correct location. To f
 
    The file should exist and be executable.
 
-2. If using Docker Desktop, restart it to detect the plugin.
+2. If the `DOCKER_CONFIG` environment variable is set to a path other than
+   `~/.docker`, unset it.
+
+3. Restart Docker Desktop to detect the plugin.
 
 ## "Experimental Features" needs to be enabled by your administrator
 
