@@ -15,11 +15,7 @@ aliases:
 
 This tutorial aims to introduce fundamental concepts of Docker Compose by guiding you through the development of a basic Python web application. 
 
-Using the Flask framework, the application features a hit counter in Redis, providing a practical example of how Docker Compose can be applied in web development scenarios. 
-
-The concepts demonstrated here should be understandable even if you're not familiar with Python. 
-
-This is a non-normative example that demonstrates core Compose functionality. 
+Using the Flask framework, the application features a hit counter in Redis, providing a practical example of how Docker Compose can be applied in web development scenarios. The concepts demonstrated here should be understandable even if you're not familiar with Python. 
 
 ## Prerequisites
 
@@ -28,77 +24,56 @@ Make sure you have:
 - [Installed the latest version of Docker Compose](/manuals/compose/install/_index.md)
 - A basic understanding of Docker concepts and how Docker works
 
-## Step 1: Set up
+## Step 1: Set up the project
 
 1. Create a directory for the project:
 
    ```console
-   $ mkdir composetest
-   $ cd composetest
+   $ mkdir compose-demo
+   $ cd compose-demo
    ```
 
-2. Create a file called `app.py` in your project directory and paste the following code in:
+2. Create `app.py` in your project directory and add the following:
 
    ```python
-   import time
-
+   import os
    import redis
    from flask import Flask
 
    app = Flask(__name__)
-   cache = redis.Redis(host='redis', port=6379)
+   cache = redis.Redis(
+       host=os.getenv("REDIS_HOST", "redis"),
+       port=int(os.getenv("REDIS_PORT", "6379")),
+   )
 
-   def get_hit_count():
-       retries = 5
-       while True:
-           try:
-               return cache.incr('hits')
-           except redis.exceptions.ConnectionError as exc:
-               if retries == 0:
-                   raise exc
-               retries -= 1
-               time.sleep(0.5)
-
-   @app.route('/')
+   @app.route("/")
    def hello():
-       count = get_hit_count()
-       return f'Hello World! I have been seen {count} times.\n'
-    ```
+       count = cache.incr("hits")
+       return f"Hello from Docker! I have been seen {count} time(s).\n"
+   ```
 
-   In this example, `redis` is the hostname of the redis container on the
-   application's network and the default port, `6379` is used.
+   The app reads its Redis connection details from environment variables, with sensible defaults so it works out of the box.
 
-   > [!NOTE]
-   >
-   > Note the way the `get_hit_count` function is written. This basic retry
-   > loop attempts the request multiple times if the Redis service is
-   > not available. This is useful at startup while the application comes
-   > online, but also makes the application more resilient if the Redis
-   > service needs to be restarted anytime during the app's lifetime. In a
-   > cluster, this also helps handling momentary connection drops between
-   > nodes.
-
-3. Create another file called `requirements.txt` in your project directory and
-   paste the following code in:
+3. Create `requirements.txt` in your project directory and add the following:
 
    ```text
    flask
    redis
    ```
 
-4. Create a `Dockerfile` and paste the following code in:
+4. Create a `Dockerfile`:
 
    ```dockerfile
    # syntax=docker/dockerfile:1
-   FROM python:3.10-alpine
+   FROM python:3.12-alpine
    WORKDIR /code
    ENV FLASK_APP=app.py
    ENV FLASK_RUN_HOST=0.0.0.0
    RUN apk add --no-cache gcc musl-dev linux-headers
-   COPY requirements.txt requirements.txt
+   COPY requirements.txt .
    RUN pip install -r requirements.txt
-   EXPOSE 5000
    COPY . .
+   EXPOSE 5000
    CMD ["flask", "run", "--debug"]
    ```
 
@@ -106,12 +81,12 @@ Make sure you have:
 
    This tells Docker to:
 
-   * Build an image starting with the Python 3.10 image.
+   * Build an image starting with the Python 3.12 image.
    * Set the working directory to `/code`.
    * Set environment variables used by the `flask` command.
-   * Install gcc and other dependencies
+   * Install `gcc` and other dependencies.
    * Copy `requirements.txt` and install the Python dependencies.
-   * Add metadata to the image to describe that the container is listening on port 5000
+   * Add metadata to the image to describe that the container is listening on port 5000.
    * Copy the current directory `.` in the project to the workdir `.` in the image.
    * Set the default command for the container to `flask run --debug`.
 
@@ -119,239 +94,462 @@ Make sure you have:
 
    > [!IMPORTANT]
    >
-   >Check that the `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically which results in an error when you run the application.
+   > Make sure the file is named `Dockerfile` with no extension. Some editors add `.txt`
+   > automatically, which causes the build to fail.
 
    For more information on how to write Dockerfiles, see the [Dockerfile reference](/reference/dockerfile/).
 
-## Step 2: Define services in a Compose file
-
-Compose simplifies the control of your entire application stack, making it easy to manage services, networks, and volumes in a single, comprehensible YAML configuration file.
-
-Create a file called `compose.yaml` in your project directory and paste
-the following:
-
-```yaml
-services:
-  web:
-    build: .
-    ports:
-      - "8000:5000"
-  redis:
-    image: "redis:alpine"
-```
-
-This Compose file defines two services: `web` and `redis`. 
-
-The `web` service uses an image that's built from the `Dockerfile` in the current directory.
-It then binds the container and the host machine to the exposed port, `8000`. This example service uses the default port for the Flask web server, `5000`.
-
-The `redis` service uses a public [Redis](https://registry.hub.docker.com/_/redis/) 
-image pulled from the Docker Hub registry.
-
-For more information on the `compose.yaml` file, see [How Compose works](compose-application-model.md).
-
-## Step 3: Build and run your app with Compose
-
-With a single command, you create and start all the services from your configuration file.
-
-1. From your project directory, start up your application by running `docker compose up`.
-
-   ```console
-   $ docker compose up
-
-   Creating network "composetest_default" with the default driver
-   Creating composetest_web_1 ...
-   Creating composetest_redis_1 ...
-   Creating composetest_web_1
-   Creating composetest_redis_1 ... done
-   Attaching to composetest_web_1, composetest_redis_1
-   web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
-   redis_1  | 1:C 17 Aug 22:11:10.480 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
-   redis_1  | 1:C 17 Aug 22:11:10.480 # Redis version=4.0.1, bits=64, commit=00000000, modified=0, pid=1, just started
-   redis_1  | 1:C 17 Aug 22:11:10.480 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
-   web_1    |  * Restarting with stat
-   redis_1  | 1:M 17 Aug 22:11:10.483 * Running mode=standalone, port=6379.
-   redis_1  | 1:M 17 Aug 22:11:10.483 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
-   web_1    |  * Debugger is active!
-   redis_1  | 1:M 17 Aug 22:11:10.483 # Server initialized
-   redis_1  | 1:M 17 Aug 22:11:10.483 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
-   web_1    |  * Debugger PIN: 330-787-903
-   redis_1  | 1:M 17 Aug 22:11:10.483 * Ready to accept connections
-   ```
-
-   Compose pulls a Redis image, builds an image for your code, and starts the
-   services you defined. In this case, the code is statically copied into the image at build time.
-
-2. Enter `http://localhost:8000/` in a browser to see the application running.
-
-   If this doesn't resolve, you can also try `http://127.0.0.1:8000`.
-
-   You should see a message in your browser saying:
+5. Create a `.env` file to hold configuration values:
 
    ```text
-   Hello World! I have been seen 1 times.
+   APP_PORT=8000
+   REDIS_HOST=redis
+   REDIS_PORT=6379
    ```
 
-   ![hello world in browser](images/quick-hello-world-1.png)
+   Compose automatically reads `.env` and makes these values available for interpolation
+   in your `compose.yaml`. For this example the gains are modest, but in practice,
+   keeping configuration out of the Compose file makes it easier to change values across environments without editing YAML, to avoid committing secrets to version control, and to reuse values across multiple services.
 
-3. Refresh the page.
-
-   The number should increment.
+6. Create a `.dockerignore` file to keep unnecessary files out of your build context:
 
    ```text
-   Hello World! I have been seen 2 times.
+   .env
+   *.pyc
+   __pycache__
+   redis-data
    ```
 
-   ![hello world in browser](images/quick-hello-world-2.png)
+   Docker sends everything in your project directory to the daemon when it builds an image.
+   Without `.dockerignore`, that includes your `.env` file (which may contain secrets) and
+   any cached Python bytecode. Excluding them keeps builds fast and avoids accidentally
+   baking sensitive values into an image layer.
 
-4. Switch to another terminal window, and type `docker image ls` to list local images.
+## Step 2: Define and start your services
 
-   Listing images at this point should return `redis` and `web`.
+Compose simplifies the control of your entire application stack, making it easy to manage services, networks, and volumes in a single YAML configuration file. 
 
-   ```console
-   $ docker image ls
-
-   REPOSITORY        TAG           IMAGE ID      CREATED        SIZE
-   composetest_web   latest        e2c21aa48cc1  4 minutes ago  93.8MB
-   python            3.4-alpine    84e6077c7ab6  7 days ago     82.5MB
-   redis             alpine        9d8fa9aa0e5b  3 weeks ago    27.5MB
-   ```
-
-   You can inspect images with `docker inspect <tag or id>`.
-
-5. Stop the application, either by running `docker compose down`
-   from within your project directory in the second terminal, or by
-   hitting `CTRL+C` in the original terminal where you started the app.
-
-## Step 4: Edit the Compose file to use Compose Watch
-
-Edit the `compose.yaml` file in your project directory to use `watch` so you can preview your running Compose services which are automatically updated as you edit and save your code:
-
-```yaml
-services:
-  web:
-    build: .
-    ports:
-      - "8000:5000"
-    develop:
-      watch:
-        - action: sync
-          path: .
-          target: /code
-  redis:
-    image: "redis:alpine"
-```
-
-Whenever a file is changed, Compose syncs the file to the corresponding location under `/code` inside the container. Once copied, the bundler updates the running application without a restart.
-
-For more information on how Compose Watch works, see [Use Compose Watch](/manuals/compose/how-tos/file-watch.md). Alternatively, see [Manage data in containers](/manuals/engine/storage/volumes.md) for other options.
-
-> [!NOTE]
->
-> For this example to work, the `--debug` option is added to the `Dockerfile`. The `--debug` option in Flask enables automatic code reload, making it possible to work on the backend API without the need to restart or rebuild the container.
-> After changing the `.py` file, subsequent API calls will use the new code, but the browser UI will not automatically refresh in this small example. Most frontend development servers include native live reload support that works with Compose.
-
-## Step 5: Re-build and run the app with Compose
-
-From your project directory, type `docker compose watch` or `docker compose up --watch` to build and launch the app and start the file watch mode.
-
-```console
-$ docker compose watch
-[+] Running 2/2
- ✔ Container docs-redis-1 Created                                                                                                                                                                                                        0.0s
- ✔ Container docs-web-1    Recreated                                                                                                                                                                                                      0.1s
-Attaching to redis-1, web-1
-         ⦿ watch enabled
-...
-```
-
-Check the `Hello World` message in a web browser again, and refresh to see the
-count increment.
-
-## Step 6: Update the application
-
-To see Compose Watch in action:
-
-1. Change the greeting in `app.py` and save it. For example, change the `Hello World!`
-message to `Hello from Docker!`:
-
-   ```python
-   return f'Hello from Docker! I have been seen {count} times.\n'
-   ```
-
-2. Refresh the app in your browser. The greeting should be updated, and the
-counter should still be incrementing.
-
-   ![hello world in browser](images/quick-hello-world-3.png)
-
-3. Once you're done, run `docker compose down`.
-
-## Step 7: Split up your services
-
-Using multiple Compose files lets you customize a Compose application for different environments or workflows. This is useful for large applications that may use dozens of containers, with ownership distributed across multiple teams. 
-
-1. In your project folder, create a new Compose file called `infra.yaml`.
-
-2. Cut the Redis service from your `compose.yaml` file and paste it into your new `infra.yaml` file. Make sure you add the `services` top-level attribute at the top of your file. Your `infra.yaml` file should now look like this:
+1. Create `compose.yaml` in your project directory and paste the following:
 
    ```yaml
-   services:
-     redis:
-       image: "redis:alpine"
-   ```
-
-3. In your `compose.yaml` file, add the `include` top-level attribute along with the path to the `infra.yaml` file.
-
-   ```yaml
-   include:
-      - infra.yaml
    services:
      web:
        build: .
        ports:
-         - "8000:5000"
+         - "${APP_PORT}:5000"
+       environment:
+         - REDIS_HOST=${REDIS_HOST}
+         - REDIS_PORT=${REDIS_PORT}
+
+     redis:
+       image: redis:alpine
+   ```
+
+   This Compose file defines two services: `web` and `redis`. 
+
+   The `web` service uses an image that's built from the `Dockerfile` in the current directory.
+   It maps port `8000` on the host to port `5000` on the container (taken from your `.env` file), where Flask listens by default.
+
+   The `redis` service uses a public [Redis](https://registry.hub.docker.com/_/redis/) image pulled from the Docker Hub registry.
+
+   For more information on the `compose.yaml` file, see [How Compose works](compose-application-model.md).
+
+2. Start up your application: 
+
+   ```console
+   $ docker compose up
+   ```
+
+   With a single command, you create and start all the services from your configuration file. Compose builds your web image, pulls the Redis image, and starts both containers. 
+
+3. Open `http://localhost:8000`. You should see:
+
+   ```text
+   Hello from Docker! I have been seen 1 time(s).
+   ```
+
+   Refresh the page — the counter increments on each visit.
+
+   This minimal setup works, but it has two problems you'll fix in the next steps:
+
+   - Startup race: `web` starts at the same time as `redis`. If Redis isn't ready yet,
+   the Flask app fails to connect and crashes.
+   - No persistence: If you run `docker compose down` followed by `docker compose up`, the
+   counter resets to zero. `docker compose down` removes the containers, and with them
+   any data written to the container's writable layer. `docker compose stop` preserves
+   the containers so data survives, but you can't rely on that in production where
+   containers are regularly replaced.
+
+4. Stop the stack before moving on:
+
+   ```console
+   $ docker compose down
+   ```
+
+## Step 3: Fix the startup race with health checks
+
+To fix the startup race, Compose needs to wait until `redis` is confirmed healthy before
+starting `web`.
+
+1. Update `compose.yaml`:
+
+   ```yaml
+   services:
+     web:
+       build: .
+       ports:
+         - "${APP_PORT}:5000"
+       environment:
+         - REDIS_HOST=${REDIS_HOST}
+         - REDIS_PORT=${REDIS_PORT}
+       depends_on:
+         redis:
+           condition: service_healthy
+
+     redis:
+       image: redis:alpine
+       healthcheck:
+         test: ["CMD", "redis-cli", "ping"]
+         interval: 5s
+         timeout: 3s
+         retries: 5
+         start_period: 10s
+   ```
+
+   The `healthcheck` block tells Compose how to test whether Redis is ready:
+
+   - `test` is the command Compose runs inside the container to check its health.
+     `redis-cli ping` connects to Redis and expects a `PONG` response — if it gets one,
+     the container is healthy.
+   - `start_period` gives Redis 10 seconds to initialise before health checks begin.
+     Any failures during this window don't count toward the retry limit.
+   - `interval` runs the check every 5 seconds after the start period has elapsed.
+   - `timeout` gives each check 3 seconds to respond before treating it as a failure.
+   - `retries` sets how many consecutive failures are allowed before Compose marks the
+     container as unhealthy. With `interval: 5s` and `retries: 5`, Compose will wait up
+     to 25 seconds before giving up.
+
+2. Start the stack to confirm the ordering is fixed:
+
+   ```console
+   $ docker compose up
+   ```
+
+   You should see something similar to:
+
+   ```text
+   [+] Running 2/2
+   ✔ Container compose-demo-redis-1  Healthy                       0.0s
+   ```
+
+3. Open `http://localhost:8000` to confirm the app is still working, then stop the stack before moving on:
+
+   ```console
+   $ docker compose down
+   ```
+
+## Step 4: Enable Compose Watch for live updates
+
+Now that startup order is handled, add Compose Watch so that code changes sync into the
+running container automatically.
+
+1. Update `compose.yaml` to add the `develop.watch` block to the `web` service:
+   
+   ```yaml
+   services:
+     web:
+       build: .
+       ports:
+         - "${APP_PORT}:5000"
+       environment:
+         - REDIS_HOST=${REDIS_HOST}
+         - REDIS_PORT=${REDIS_PORT}
+       depends_on:
+         redis:
+           condition: service_healthy
        develop:
          watch:
-           - action: sync
+           - action: sync+restart
              path: .
              target: /code
+           - action: rebuild
+             path: requirements.txt
+
+     redis:
+       image: redis:alpine
+       healthcheck:
+         test: ["CMD", "redis-cli", "ping"]
+         interval: 5s
+         timeout: 3s
+         retries: 5
+         start_period: 10s
    ```
 
-4. Run `docker compose up` to build the app with the updated Compose files, and run it. You should see the `Hello world` message in your browser. 
+   The `watch` block defines two rules. The `sync+restart` action syncs any changes
+   under `.` into `/code` inside the running container, then restarts the Flask process
+   so it picks up the new files — this is more reliable than depending on Flask's
+   reloader to detect the change itself. The `rebuild` action on `requirements.txt`
+   triggers a full image rebuild whenever you add a new dependency, since that can't be
+   handled by a simple file sync.
 
-This is a simplified example, but it demonstrates the basic principle of `include` and how it can make it easier to modularize complex applications into sub-Compose files. For more information on `include` and working with multiple Compose files, see [Working with multiple Compose files](/manuals/compose/how-tos/multiple-compose-files/_index.md).
-
-## Step 8: Experiment with some other commands
-
-- If you want to run your services in the background, you can pass the `-d` flag (for "detached" mode) to `docker compose up` and use `docker compose ps` to see what is currently running:
+2. Start the stack with Watch enabled:
 
    ```console
-   $ docker compose up -d
-
-   Starting composetest_redis_1...
-   Starting composetest_web_1...
-
-   $ docker compose ps
-
-          Name                      Command               State           Ports         
-   -------------------------------------------------------------------------------------
-   composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp              
-   composetest_web_1     flask run                        Up      0.0.0.0:8000->5000/tcp
+   $ docker compose up --watch
    ```
 
-- Run `docker compose --help` to see other available commands.
+3. Make a live change. Open `app.py` and update the greeting:
 
-- If you started Compose with `docker compose up -d`, stop your services once you've finished with them:
+   ```python
+   return f"Hello from Compose Watch! I have been seen {count} time(s).\n"
+   ```
+
+4. Save the file. Compose Watch detects the change and syncs it immediately:
+
+   ```text
+   Syncing service "web" after changes were detected
+   ```
+
+5. Refresh `http://localhost:8000`. The updated greeting appears without any restart
+   and the counter should still be incrementing.
+
+   > [!NOTE]
+   >
+   > For this example to work, the `--debug` flag is passed to `flask run` in the `CMD` instruction of the Dockerfile. The
+   > `--debug` flag in Flask enables automatic code reload, making it possible to work
+   > on the backend API without the need to restart or rebuild the container.
+   > After changing the `.py` file, subsequent API calls will use the new code, but the
+   > browser UI will not automatically refresh in this small example. Most frontend
+   > development servers include native live reload support that works with Compose.
+
+6. Stop the stack before moving on:
 
    ```console
-   $ docker compose stop
+   $ docker compose down
    ```
 
-- You can bring everything down, removing the containers entirely, with the `docker compose down` command. 
+   For more information on how Compose Watch works, see [Use Compose Watch](/manuals/compose/how-tos/file-watch.md).
+
+## Step 5: Persist data with named volumes
+
+Each time you stop and restart the stack the visit counter resets to zero. Redis data
+lives inside the container, so it disappears when the container is removed. A named
+volume fixes this by storing the data on the host, outside the container lifecycle.
+
+1. Update `compose.yaml`:
+
+   ```yaml
+   services:
+     web:
+       build: .
+       ports:
+         - "${APP_PORT}:5000"
+       environment:
+         - REDIS_HOST=${REDIS_HOST}
+         - REDIS_PORT=${REDIS_PORT}
+       depends_on:
+         redis:
+           condition: service_healthy
+       develop:
+         watch:
+           - action: sync+restart
+             path: .
+             target: /code
+           - action: rebuild
+             path: requirements.txt
+
+     redis:
+       image: redis:alpine
+       volumes:
+         - redis-data:/data
+       healthcheck:
+         test: ["CMD", "redis-cli", "ping"]
+         interval: 5s
+         timeout: 3s
+         retries: 5
+         start_period: 10s
+
+   volumes:
+     redis-data:
+   ```
+
+   The `redis-data:/data` entry under `redis.volumes` mounts the named volume at `/data`, the path where Redis
+   writes its data files. The top-level `volumes` key registers it with Docker so it
+   persists between `compose down` and `compose up` cycles.
+
+2. Start the stack with `docker compose up --watch` and refresh `http://localhost:8000` a few times to build up a count.
+
+3. Tear down the stack with `docker compose down` and then bring it back up again with `docker compose up --watch`.
+
+4. Open `http://localhost:8000` — the counter continues from where it left off.
+
+5. Now reset the counter with `docker compose down -v`. 
+
+   The `-v` flag removes named volumes along with the containers. Use this intentionally — it permanently deletes the stored data.
+
+## Step 6: Structure your project with multiple Compose files
+
+As applications grow, a single `compose.yaml` becomes harder to maintain. The `include`
+top-level element lets you split services across multiple files while keeping them part of the
+same application.
+
+This is especially useful when different teams own different parts of the stack, or when
+you want to reuse infrastructure definitions across projects.
+
+1. Create a new file in your project directory called `infra.yaml` and move the Redis service and volume into it:
+
+   ```yaml
+    services:
+     redis:
+       image: redis:alpine
+       volumes:
+         - redis-data:/data
+       healthcheck:
+         test: ["CMD", "redis-cli", "ping"]
+         interval: 5s
+         timeout: 3s
+         retries: 5
+         start_period: 10s
+
+   volumes:
+     redis-data:
+   ```
+
+2. Update `compose.yaml` to include `infra.yaml`:
+
+   ```yaml
+   include:
+      - path: ./infra.yaml
+   services:
+     web:
+       build: .
+       ports:
+         - "${APP_PORT}:5000"
+       environment:
+         - REDIS_HOST=${REDIS_HOST}
+         - REDIS_PORT=${REDIS_PORT}
+       depends_on:
+         redis:
+           condition: service_healthy
+       develop:
+         watch:
+           - action: sync+restart
+             path: .
+             target: /code
+           - action: rebuild
+             path: requirements.txt
+   ```
+
+3. Run the application to confirm everything still works:
+
+   ```console
+   $ docker compose up --watch
+   ```
+
+   Compose merges both files at startup. The `web` service can still reference `redis`
+   by name because all included services share the same default network.
+
+   This is a simplified example, but it demonstrates the basic principle of `include` and how it can make it easier to modularize complex applications into sub-Compose files. For more information on `include` and working with multiple Compose files, see [Working with multiple Compose files](/manuals/compose/how-tos/multiple-compose-files/_index.md).
+
+4. Stop the stack before moving on:
+
+   ```console
+   $ docker compose down
+   ```
+
+## Step 7: Inspect and debug your running stack
+
+With a fully configured stack, you can observe what's happening inside your containers
+without stopping anything. This step covers the core commands for inspecting the resolved configuration, streaming logs, and running commands
+inside a running container.
+
+Before starting the stack, verify that Compose has resolved your `.env` variables and
+merged all files correctly:
+
+```console
+$ docker compose config
+```
+
+`docker compose config` doesn't require the stack to be running — it works purely from
+your files. A few things worth noting in the output:
+
+- `${APP_PORT}`, `${REDIS_HOST}`, and `${REDIS_PORT}` have all been replaced with the
+  values from your `.env` file.
+- Short-form port notation (`"8000:5000"`) is expanded into its canonical fields
+  (`target`, `published`, `protocol`).
+- The default network and volume names are made explicit, prefixed with the project name
+  `compose-demo`.
+- The output is the fully resolved configuration, with any files
+  brought in via `include` merged into a single view.
+
+Use `docker compose config` any time you want to confirm what Compose will actually
+apply, especially when debugging variable substitution or working with multiple Compose files.
+
+Now start the stack in detached mode so the terminal stays free for the commands that
+follow:
+
+```console
+$ docker compose up -d
+```
+
+### Stream logs from all services
+
+```console
+$ docker compose logs -f
+```
+
+The `-f` flag follows the log stream in real time, interleaving output from both
+containers with color-coded service name prefixes. Refresh `http://localhost:8000` a
+few times and watch the Flask request logs appear. To follow logs for a single service,
+pass its name:
+
+```console
+$ docker compose logs -f web
+```
+
+Press `Ctrl+C` to stop following logs. The containers keep running.
+
+### Run commands inside a running container
+
+`docker compose exec` runs a command inside an already-running container without
+starting a new one. This is the primary tool for live debugging.
+
+#### Verify environment variables are set correctly
+
+```console
+$ docker compose exec web env | grep REDIS
+```
+
+```text
+REDIS_HOST=redis
+REDIS_PORT=6379
+```
+
+#### Test that the `web` container can reach Redis using the service name as the hostname
+
+```console
+$ docker compose exec web python -c "import redis; r = redis.Redis(host='redis'); print(r.ping())"
+```
+
+```text
+True
+```
+
+This uses the same `redis` library your app uses, so a `True` response confirms that
+service discovery, networking, and the Redis connection are all working end to end.
+
+#### Inspect the live value of the hit counter in Redis
+
+```console
+$ docker compose exec redis redis-cli GET hits
+```
 
 ## Where to go next
 
-- Try the [Sample apps with Compose](https://github.com/docker/awesome-compose)
 - [Explore the full list of Compose commands](/reference/cli/docker/compose/)
 - [Explore the Compose file reference](/reference/compose-file/_index.md)
 - [Check out the Learning Docker Compose video on LinkedIn Learning](https://www.linkedin.com/learning/learning-docker-compose/)
+- [Learn how to set environment variables in Compose](/compose/how-tos/environment-variables/set-environment-variables/)
+- [Learn how to package and distribute your Compose app](/compose/how-tos/oci-artifact/)
+
+
