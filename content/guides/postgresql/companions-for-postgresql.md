@@ -213,7 +213,7 @@ When comparing direct connections versus PgBouncer, you'll typically notice:
 
 Direct connections require PostgreSQL to spawn a new process for each client. PgBouncer reuses existing connections. Watch the "initial connection time" metric in your results—PgBouncer often shows dramatically faster connection setup.
 
-**2. Behavior under pressure reveals the real difference**
+#### 2. Behavior under pressure reveals the real difference
 
 Try increasing the client count (`-c` parameter) gradually: 50, 100, 150, 200. At some point, direct connections will fail with "too many clients already" while PgBouncer continues handling requests. This is PgBouncer's primary value: **it prevents connection exhaustion**.
 
