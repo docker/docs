@@ -41,7 +41,7 @@ see [Add organizations to a company](./organizations.md#add-organizations-to-a-c
 ## Next steps
 
 - [Manage organizations](./organizations.md)
-- [Manage company users](./users.md)
+- [Manage company members](./users.md)
 - [Manage company owners](./owners.md)
 
 ## More resources
