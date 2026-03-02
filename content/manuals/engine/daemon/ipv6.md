@@ -1,4 +1,4 @@
----
+<img width="551" height="460" alt="image" src="https://github.com/user-attachments/assets/2273bb84-8412-41f4-a7e0-bb2feb2505f4" />---
 title: Use IPv6 networking
 weight: 20
 description: How to enable IPv6 support in the Docker daemon
@@ -23,6 +23,9 @@ IPv6 is only supported on Docker daemons running on Linux hosts.
   ```console
   $ docker network create --ipv6 --subnet 2001:db8::/64 ip6net
   ```
+> ⚠️ **Note:** The IPv6 prefix `2001:db8::/64` is reserved for documentation and examples only.  
+> When configuring real environments, replace it with a valid IPv6 subnet allocated to your network.
+
 
 - Using a Docker Compose file:
 
