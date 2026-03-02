@@ -13,6 +13,5 @@ params:
   time: 20 minutes
 ---
 
-- Advanced Configuration and Initialization
 - Networking and Connectivity
 - Companions for PostfgreSQL
