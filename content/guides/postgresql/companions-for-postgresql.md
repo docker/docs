@@ -209,7 +209,7 @@ When you run these benchmarks, you'll observe patterns rather than specific numb
 
 When comparing direct connections versus PgBouncer, you'll typically notice:
 
-**1. Connection overhead differs significantly**
+#### 1. Connection overhead differs significantly
 
 Direct connections require PostgreSQL to spawn a new process for each client. PgBouncer reuses existing connections. Watch the "initial connection time" metric in your results—PgBouncer often shows dramatically faster connection setup.
 
