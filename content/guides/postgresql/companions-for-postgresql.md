@@ -205,7 +205,7 @@ Does PgBouncer actually make a difference? Run the benchmarks yourself to find o
 
 When you run these benchmarks, you'll observe patterns rather than specific numbers. Think of it like comparing two different routes to work: the "faster" route depends on traffic conditions, time of day, and your vehicle.
 
-### Key Observations
+### Key observations
 
 When comparing direct connections versus PgBouncer, you'll typically notice:
 
