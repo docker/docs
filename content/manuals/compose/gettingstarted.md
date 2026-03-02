@@ -399,6 +399,7 @@ you want to reuse infrastructure definitions across projects.
 1. Create a new file in your project directory called `infra.yaml` and move the Redis service and volume into it:
 
    ```yaml
+    services:
      redis:
        image: redis:alpine
        volumes:
@@ -417,6 +418,8 @@ you want to reuse infrastructure definitions across projects.
 2. Update `compose.yaml` to include `infra.yaml`:
 
    ```yaml
+   include:
+      - path: ./infra.yaml
    services:
      web:
        build: .
