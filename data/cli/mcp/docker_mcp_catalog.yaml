@@ -1,0 +1,31 @@
+command: docker mcp catalog
+aliases: docker mcp catalog, docker mcp catalogs, docker mcp catalog-next
+short: Manage MCP server OCI catalogs
+long: Manage MCP server OCI catalogs
+pname: docker mcp
+plink: docker_mcp.yaml
+cname:
+    - docker mcp catalog create
+    - docker mcp catalog list
+    - docker mcp catalog pull
+    - docker mcp catalog push
+    - docker mcp catalog remove
+    - docker mcp catalog server
+    - docker mcp catalog show
+    - docker mcp catalog tag
+clink:
+    - docker_mcp_catalog_create.yaml
+    - docker_mcp_catalog_list.yaml
+    - docker_mcp_catalog_pull.yaml
+    - docker_mcp_catalog_push.yaml
+    - docker_mcp_catalog_remove.yaml
+    - docker_mcp_catalog_server.yaml
+    - docker_mcp_catalog_show.yaml
+    - docker_mcp_catalog_tag.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

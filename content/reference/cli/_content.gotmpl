@@ -1,0 +1,80 @@
+{{- /*
+  Content adapter for CLI reference pages.
+
+  Generates pages from YAML data files in site.Data, replacing the ~386 stub
+  Markdown files that previously lived under content/reference/cli/docker/.
+
+  For each data file it creates a page at the command path (spaces → slashes).
+  Files with `cname` (subcommands list) become Hugo sections; others become
+  regular pages.
+
+  Skips:
+  - Alias/shortcut commands — if any alias is longer (more words) than the
+    command itself, a canonical version exists elsewhere (e.g. `docker ps`
+    is a shortcut for `docker container ls`).
+  - Hidden commands (hidden: true in the YAML).
+
+  Also creates 8 sidebar-redirect pages for common shortcuts (ps, run, …)
+  so they still appear in the sidebar navigation.
+*/ -}}
+
+{{- range $folder, $files := site.Data.cli -}}
+  {{- range $name, $data := $files -}}
+    {{- /* Skip hidden commands */ -}}
+    {{- if $data.hidden -}}
+      {{- continue -}}
+    {{- end -}}
+
+    {{- /* Skip alias/shortcut commands: if any alias has more words than
+           the command, a longer canonical form exists elsewhere. */ -}}
+    {{- $cmdWords := len (split $data.command " ") -}}
+    {{- $isAlias := false -}}
+    {{- with $data.aliases -}}
+      {{- range (split . ", ") -}}
+        {{- if gt (len (split . " ")) $cmdWords -}}
+          {{- $isAlias = true -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if $isAlias -}}
+      {{- continue -}}
+    {{- end -}}
+
+    {{- $path := replace $data.command " " "/" -}}
+    {{- $kind := "page" -}}
+    {{- with $data.cname -}}
+      {{- $kind = "section" -}}
+    {{- end -}}
+
+    {{- $.AddPage (dict
+      "path" $path
+      "title" $data.command
+      "kind" $kind
+      "params" (dict "datafolder" $folder "datafile" $name)
+    ) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Sidebar redirect pages for common shortcuts.
+       These aren't rendered — they exist so the sidebar can display entries
+       like "docker ps" linking to the canonical page. */ -}}
+{{- $redirects := dict
+  "docker/ps"     "/reference/cli/docker/container/ls/"
+  "docker/run"    "/reference/cli/docker/container/run/"
+  "docker/exec"   "/reference/cli/docker/container/exec/"
+  "docker/build"  "/reference/cli/docker/buildx/build/"
+  "docker/images" "/reference/cli/docker/image/ls/"
+  "docker/pull"   "/reference/cli/docker/image/pull/"
+  "docker/push"   "/reference/cli/docker/image/push/"
+  "docker/info"   "/reference/cli/docker/system/info/"
+-}}
+
+{{- range $path, $goto := $redirects -}}
+  {{- $title := replace $path "/" " " -}}
+  {{- $.AddPage (dict
+    "path" $path
+    "title" $title
+    "params" (dict "sidebar" (dict "goto" $goto))
+    "build" (dict "render" "link" "list" "always")
+  ) -}}
+{{- end -}}

@@ -8,9 +8,28 @@ disableHugoGeneratorInject: true
 ignoreLogs:
   - cascade-pattern-with-extension
 
-taxonomies:
-  tag: tags
-  language: languages
+taxonomies: {}
+
+# Cascade layout and type settings to content subtrees.
+# See https://gohugo.io/configuration/cascade/#target
+cascade:
+  # Guide sections use the series layout (metadata card + modules list)
+  - target:
+      path: /guides/**
+      kind: section
+    layout: series
+  # Sample pages use the samples type (routes to layouts/samples/)
+  - target:
+      path: /reference/samples/**
+      kind: page
+    type: samples
+  # CLI reference pages use the cli layout (data-driven from YAML)
+  - target:
+      path: /reference/cli/docker
+    layout: cli
+  - target:
+      path: /reference/cli/docker/**
+    layout: cli
 
 # Remove the /manuals prefix for content in the manuals section
 permalinks:
@@ -92,10 +111,6 @@ outputs:
   section:
     - html
     - markdown
-  taxonomy:
-    - html
-  term:
-    - html
 
 languages:
   en:
@@ -272,7 +287,7 @@ module:
   proxy: https://proxy.golang.org,direct
   hugoVersion:
     extended: false
-    min: "0.141.0"
+    min: "0.156.0"
   mounts:
     # Mount the assets directory so it doesn't get overwritten
     - source: assets
@@ -297,7 +312,7 @@ module:
           target: content/reference/api/engine/version-history.md
         - source: docs
           target: content/reference/api/engine/version
-          includeFiles: "*.yaml"
+          files: ["*.yaml"]
 
     # BuildKit
     - path: github.com/moby/buildkit
@@ -306,7 +321,7 @@ module:
           target: content/reference/dockerfile.md
         - source: frontend/dockerfile/docs/rules
           target: content/reference/build-checks
-          includeFiles: "*.md"
+          files: ["*.md"]
         - source: docs/buildkitd.toml.md
           target: content/manuals/build/buildkit/toml-configuration.md
         - source: docs/attestations/slsa-definitions.md
@@ -327,10 +342,10 @@ module:
       mounts:
         - source: docs/extend
           target: content/manuals/engine/extend
-          excludeFiles:
-            - "EBS_volume.md"
-            - "plugins_metrics.md"
-            - "plugins_services.md"
+          files:
+            - "! EBS_volume.md"
+            - "! plugins_metrics.md"
+            - "! plugins_services.md"
         - source: docs/deprecated.md
           target: content/manuals/engine/deprecated.md
         - source: docs/reference/run.md
@@ -342,19 +357,12 @@ module:
     - path: github.com/docker/compose/v5
       mounts:
         - source: docs/reference
-          target: data/compose-cli
-          includeFiles: "*.yaml"
+          target: data/cli/compose
+          files: ["*.yaml"]
 
     # Model CLI
-    - path: github.com/docker/model-runner/cmd/cli
+    - path: github.com/docker/model-runner
       mounts:
-        - source: docs/reference
-          target: data/model-cli
-          includeFiles: "*.yaml"
-
-    # MCP CLI
-    - path: github.com/docker/mcp-gateway
-      mounts:
-        - source: docs/generator/reference
-          target: data/mcp-cli
-          includeFiles: "*.yaml"
+        - source: cmd/cli/docs/reference
+          target: data/cli/model
+          files: ["*.yaml"]

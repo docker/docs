@@ -18,6 +18,25 @@ both base and customized images is backed by SLA commitments, including a 7-day
 SLA for critical and high severity vulnerabilities. Only DHI Enterprise includes
 SLAs. DHI Free offers a secure baseline but no guaranteed remediation timelines.
 
+## Build transparency
+
+Docker Hardened Images provide transparency into how images are built through
+publicly available definitions and verifiable attestations.
+
+### Image definitions
+
+All image definitions are publicly available in the [catalog
+repository](https://github.com/docker-hardened-images/catalog).
+
+Each image definition is a declarative YAML specification that includes metadata,
+contents, build pipeline steps, security configurations, and runtime settings.
+
+### SLSA attestations
+
+Every Docker Hardened Image includes a SLSA Build Level 3 attestation that
+provides verifiable build provenance. For details on SLSA attestations and how to
+verify them, see [SLSA](../core-concepts/slsa.md).
+
 ## Build triggers
 
 Builds start automatically. You don't trigger them manually. The system monitors

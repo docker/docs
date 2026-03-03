@@ -60,6 +60,8 @@ When multiple policies exist, Docker Desktop applies them in this order:
 
 ## Set up Settings Management
 
+You can create settings management policies at any time, but your organization needs to verify a domain before the policies take effect. 
+
 1. Check that you have [added and verified](/manuals/enterprise/security/domain-management.md#add-and-verify-a-domain) your organization's domain.
 2. [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) to
 ensure all developers authenticate with your organization.

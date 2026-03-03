@@ -1,0 +1,66 @@
+command: docker mcp profile config
+short: Update the configuration of a profile
+long: Update the configuration of a profile
+usage: docker mcp profile config <profile-id> [--set <config-arg1> <config-arg2> ...] [--get <config-key1> <config-key2> ...] [--del <config-arg1> <config-arg2> ...]
+pname: docker mcp profile
+plink: docker_mcp_profile.yaml
+options:
+    - option: del
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Delete configuration values: <key> (can be specified multiple times)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: format
+      value_type: string
+      default_value: human
+      description: 'Supported: json, yaml, human.'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: get
+      value_type: stringArray
+      default_value: '[]'
+      description: 'Get configuration values: <key> (can be specified multiple times)'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: get-all
+      value_type: bool
+      default_value: "false"
+      description: Get all configuration values
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: set
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Set configuration values: <key>=<value> (repeatable). Value may be JSON to set typed values (arrays, numbers, booleans, objects).
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

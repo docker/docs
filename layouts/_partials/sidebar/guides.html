@@ -1,0 +1,39 @@
+{{- $guide := cond (eq .CurrentSection .FirstSection) . .CurrentSection -}}
+<div class="flex flex-col gap-4 px-4 pt-2">
+  <div class="font-semibold">
+    <a href="{{ $guide.Permalink }}">{{ $guide.Title }}</a>
+  </div>
+  <div>{{ $guide.Summary }}</div>
+  <div class="space-y-4">
+    <div class="flex flex-wrap gap-2">
+      {{- with $guide.Params.languages }}
+        {{ partial "guide-languages.html" . }}
+      {{- end }}
+      {{- with $guide.Params.tags }}
+        {{ partial "guide-tags.html" . }}
+      {{- end }}
+    </div>
+    {{- with $guide.Params.time }}
+      <div class="flex gap-2 text-gray-400 dark:text-gray-400">
+        <span class="icon-svg"
+          >{{ partialCached "icon" "schedule" "schedule" }}</span
+        >
+        <span>{{ . }}</span>
+      </div>
+    {{- end -}}
+  </div>
+  {{- if gt (len $guide.Pages) 0 }}
+    {{- partial "guides-stepper.html" . }}
+  {{- end }}
+  {{- with $guide.Params.resource_links }}
+    <div class="space-y-2">
+      <p>Resources:</p>
+      <ul class="ml-4 space-y-2">
+        {{- range . }}
+          <li><a href="{{ .url }}" class="link">{{ .title }}</a></li>
+        {{- end }}
+      </ul>
+    </div>
+  {{- end }}
+  <a href="/guides/" class="link mt-2">&laquo; Back to all guides</a>
+</div>

@@ -107,7 +107,7 @@ runners using a matrix strategy, you can drastically reduce build durations and
 streamline your CI pipeline. These examples demonstrate how to allocate each
 platform build to a dedicated runner, including ARM-native runners where
 applicable, and create a unified manifest list using the
-[`buildx imagetools create` command](/reference/cli/docker/buildx/imagetools/create.md).
+[`buildx imagetools create` command](/reference/cli/docker/buildx/imagetools/create/).
 
 The following workflow will build the image for each platform on a dedicated
 runner using a matrix strategy and push by digest. Then, the `merge` job will

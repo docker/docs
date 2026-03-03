@@ -7,16 +7,6 @@ aliases:
   - /scout/artifactory/
 ---
 
-{{% experimental %}}
-
-The `docker scout watch` command is experimental.
-
-Experimental features are intended for testing and feedback as their
-functionality or design may change between releases without warning or
-can be removed entirely in a future release.
-
-{{% /experimental %}}
-
 Integrating Docker Scout with JFrog Artifactory lets you index and analyze
 images from Artifactory. This integration is powered by a long-running
 `docker scout watch` process. It pulls images from your selected repositories
@@ -156,7 +146,16 @@ Scout.
 8. Continuously watch for new or updated images.
 
    Run `docker scout watch` with the `--refresh-registry` option to watch for
-   new images to index. The following is an example command:
+   new images to index.
+
+   The `docker scout watch` command is a long-running process that must
+   continue running indefinitely in the background to receive webhooks and
+   watch for new images. If you run it directly in a terminal and close the
+   session, the process will stop.
+
+   The following is an example command. You can run the process as a system
+   service, for example using `systemd` or `nohup`, to ensure it continues
+   running in the background.
 
    ```console
    $ docker scout watch --registry \

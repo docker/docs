@@ -148,7 +148,7 @@ decentralized manner. For instance, an engine could have a label to indicate
 that it has a certain type of disk device, which may not be relevant to security
 directly. These labels are more easily "trusted" by the swarm orchestrator.
 
-Refer to the `docker service create` [CLI reference](/reference/cli/docker/service/create.md)
+Refer to the `docker service create` [CLI reference](/reference/cli/docker/service/create/)
 for more information about service constraints.
 
 ### Promote or demote a node

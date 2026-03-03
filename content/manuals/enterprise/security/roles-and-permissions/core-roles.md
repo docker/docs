@@ -35,6 +35,7 @@ These permissions apply organization-wide, including all repositories in your or
 | Create and publish an extension                       | ✅     | ✅     | ✅    |
 | Become a Verified, Official, or Open Source publisher | ❌     | ❌     | ✅    |
 | Edit and delete publisher repository logos            | ❌     | ✅     | ✅    |
+| Configure DVP analytics settings                      | ❌     | ✅     | ✅    |
 | Observe content engagement as a publisher             | ❌     | ❌     | ✅    |
 | Create public and private repositories                | ❌     | ✅     | ✅    |
 | Disable public repositories                           | ❌     | ✅     | ✅    |

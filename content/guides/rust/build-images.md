@@ -344,8 +344,8 @@ Related information:
 
 - [Dockerfile reference](/reference/dockerfile.md)
 - [.dockerignore file](/reference/dockerfile.md#dockerignore-file)
-- [docker init CLI reference](/reference/cli/docker/init.md)
-- [docker build CLI reference](/reference/cli/docker/buildx/build.md)
+- [docker init CLI reference](/reference/cli/docker/init/)
+- [docker build CLI reference](/reference/cli/docker/buildx/build/)
 - [Docker Hardened Images](/dhi/)
 
 ## Next steps

@@ -13,9 +13,9 @@ summary: |
   deep dive into the secrets of images, how they are built and best practices.
 layout: series
 params:
-  skill: Beginner
+  proficiencyLevel: Beginner
   time: 25 minutes
-  prereq: None
+  prerequisites: None
 ---
 
 ## About this series

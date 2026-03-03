@@ -3,6 +3,8 @@ description: Learn about settings in Docker Hub
 keywords: Docker Hub, Hub, repositories, settings
 title: Settings
 weight: 25
+aliases:
+  - /docker-hub/repos/settings/
 ---
 
 You can configure the following settings in Docker Hub:

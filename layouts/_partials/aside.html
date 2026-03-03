@@ -1,0 +1,8 @@
+<aside
+  class="sticky top-16 h-[calc(100vh-64px)] min-w-52 space-y-4 overflow-y-auto py-4 w-full"
+>
+  {{ partial "github-links.html" . }}
+  <div id="TableOfContents" class="overflow-x-auto">
+    {{ partialCached "pagemeta.html" . . }}
+  </div>
+</aside>

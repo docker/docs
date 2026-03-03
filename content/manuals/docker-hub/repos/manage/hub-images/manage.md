@@ -26,6 +26,10 @@ The following objects are shown in the diagram.
 
 ## Manage repository images and image indexes
 
+Use the following steps to delete one or more items via the graphical user
+interface. To delete in bulk, see the [deletion API
+endpoint](/reference/api/registry/latest/#tag/delete).
+
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select **My Hub** > **Repositories**.
 3. In the list, select a repository.
@@ -51,7 +55,9 @@ The following objects are shown in the diagram.
       amount of storage you will reclaim.
    4. Select **Delete forever**.
 
-  
    > [!NOTE]
    >
-   > If you would like to delete in bulk, you can use the [deletion API endpoint](/reference/api/registry/latest/#tag/delete).
+   > Deletion operations may take some time to complete. Timeout errors may
+   > occur during the deletion process. The system automatically retries the
+   > deletion in the background, and the items will be removed without requiring
+   > any action from you.

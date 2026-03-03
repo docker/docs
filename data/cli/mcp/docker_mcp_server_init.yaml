@@ -1,0 +1,36 @@
+command: docker mcp server init
+short: Initialize a new MCP server project
+long: |
+    Initialize a new MCP server project in the specified directory with boilerplate code, Dockerfile, and compose.yaml
+usage: docker mcp server init <directory>
+pname: docker mcp server
+plink: docker_mcp_server.yaml
+options:
+    - option: language
+      value_type: string
+      default_value: go
+      description: |
+        Programming language for the server (currently only 'go' is supported)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: template
+      value_type: string
+      default_value: basic
+      description: Template to use (basic, chatgpt-app-basic)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

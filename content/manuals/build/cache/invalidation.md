@@ -77,7 +77,7 @@ To force a re-execution of the `RUN` instruction, you can:
 
 - Make sure that a layer before it has changed
 - Clear the build cache ahead of the build using
-  [`docker builder prune`](/reference/cli/docker/builder/prune.md)
+  [`docker builder prune`](/reference/cli/docker/builder/prune/)
 - Use the `--no-cache` or `--no-cache-filter` options
 
 The `--no-cache-filter` option lets you specify a specific build stage to

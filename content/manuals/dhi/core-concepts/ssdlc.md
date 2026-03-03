@@ -36,7 +36,7 @@ organizations can shift left and reduce both cost and complexity.
 Docker provides tools and secure content that make SSDLC practices easier to
 adopt across the container lifecycle. With [Docker Hardened
 Images](../_index.md) (DHIs), [Docker
-Debug](../../../reference/cli/docker/debug.md), and [Docker
+Debug](/reference/cli/docker/debug/), and [Docker
 Scout](../../../manuals/scout/_index.md), teams can add security without losing
 velocity.
 
@@ -61,7 +61,7 @@ Hardened Images support secure-by-default development:
 - Minimal runtime variants reduce attack surface in final images
 - Multi-stage builds let you separate build-time tools from runtime environments
 
-[Docker Debug](../../../reference/cli/docker/debug.md) helps developers:
+[Docker Debug](/reference/cli/docker/debug/) helps developers:
 
 - Temporarily inject debugging tools into minimal containers
 - Avoid modifying base images during troubleshooting

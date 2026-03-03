@@ -39,4 +39,4 @@ docker desktop COMMAND [OPTIONS]
 | `kubernetes`         | List Kubernetes images used by Docker Desktop or restart the cluster. Available with Docker Desktop version 4.44 and later.          |
 | `diagnose`.          | Diagnose Docker Desktop and upload the diagnostics. Available with Docker Desktop 4.60 and later. |
 
-For more details on each command, see the [Docker Desktop CLI reference](/reference/cli/docker/desktop/_index.md).
+For more details on each command, see the [Docker Desktop CLI reference](/reference/cli/docker/desktop/).

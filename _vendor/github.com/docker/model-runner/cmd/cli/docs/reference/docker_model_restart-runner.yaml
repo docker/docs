@@ -59,6 +59,15 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: proxy-cert
+      value_type: string
+      description: Path to a CA certificate file for proxy SSL inspection
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 deprecated: false
 hidden: false
 experimental: false

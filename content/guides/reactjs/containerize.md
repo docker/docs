@@ -518,7 +518,7 @@ $ docker compose down
 
 > [!NOTE]
 > For more information about Compose commands, see the [Compose CLI
-> reference](/reference/cli/docker/compose/_index.md).
+> reference](/reference/cli/docker/compose/).
 
 ---
 
@@ -547,8 +547,8 @@ Explore official references and best practices to sharpen your Docker workflow:
 - [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/) – Write efficient, maintainable, and secure Dockerfiles.  
 - [Build context in Docker](/build/concepts/context/) – Learn how context affects image builds.  
 - [`docker init` CLI reference](/reference/cli/docker/init/) – Scaffold Docker assets automatically.
-- [`docker build` CLI reference](/reference/cli/docker/build/) – Build Docker images from a Dockerfile.
-- [`docker images` CLI reference](/reference/cli/docker/images/) – Manage and inspect local Docker images.
+- [`docker build` CLI reference](/reference/cli/docker/image/build/) – Build Docker images from a Dockerfile.
+- [`docker images` CLI reference](/reference/cli/docker/image/ls/) – Manage and inspect local Docker images.
 - [`docker compose up` CLI reference](/reference/cli/docker/compose/up/) – Start and run multi-container applications.
 - [`docker compose down` CLI reference](/reference/cli/docker/compose/down/) – Stop and remove containers, networks, and volumes.
 

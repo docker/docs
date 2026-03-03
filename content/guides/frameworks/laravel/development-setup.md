@@ -119,7 +119,7 @@ A workspace container provides a dedicated shell for asset compilation, Artisan/
 ```dockerfile
 # docker/development/workspace/Dockerfile
 # Use the official PHP CLI image as the base
-FROM php:8.4-cli
+FROM php:8.5-cli
 
 # Set environment variables for user and group ID
 ARG UID=1000
@@ -141,13 +141,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     pdo_mysql \
     pdo_pgsql \
     pgsql \
-    opcache \
     intl \
     zip \
     bcmath \
     soap \
-    && pecl install redis xdebug \
-    && docker-php-ext-enable redis xdebug\
+    && pecl install redis \
+    && docker-php-ext-enable redis \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -161,6 +160,7 @@ ARG XDEBUG_LOG_LEVEL
 
 # Configure Xdebug if enabled
 RUN if [ "${XDEBUG_ENABLED}" = "true" ]; then \
+    pecl install xdebug && \
     docker-php-ext-enable xdebug && \
     echo "xdebug.mode=${XDEBUG_MODE}" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
     echo "xdebug.idekey=${XDEBUG_IDE_KEY}" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \

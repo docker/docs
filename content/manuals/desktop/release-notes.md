@@ -26,6 +26,96 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.63.0
+
+{{< release-date date="2026-03-02" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.63.0" build_path="/220185/" >}}
+
+### New
+
+- Added SLSA v1 provenance support in the **Builds** view. 
+
+### Upgrades
+
+- [Kubernetes v1.34.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.3)
+- Linux kernel `v6.12.72`
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Enhanced the proxy settings UI and added a separate proxy for containers.
+- Fixed an issue where community registry MCP catalogs failed to load when a server's config object contained `"required": null`.
+- Fixed an issue where `mcp-gateway` would hang when fetching secrets from the Secrets Engine while the Docker Desktop VM was in Resource Saver mode. 
+- Rebranded "Docker AI" references to "Gordon".
+
+#### For Windows
+
+- Improved startup time on Windows.
+
+## 4.62.0
+
+{{< release-date date="2026-02-23" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.62.0" build_path="/219486/" >}}
+
+### New
+
+- With Docker MCP Toolkit, you can now use [profiles](/manuals/ai/mcp-catalog-and-toolkit/profiles.md) to organize your MCP servers into named collections. You can also create custom catalogs — curated collections of servers for your team or organization.
+
+### Updates
+
+- Linux kernel `v6.12.69`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where background update checks did not respect the **Automatically check for updates** setting when disabled. Fixes [docker/for-mac#3908](https://github.com/docker/for-mac/issues/3908).
+
+#### For Mac
+
+- Added support for vLLM Metal in Docker Model Runner.
+
+#### For Linux 
+
+- Fixed a networking crash on QEMU 10.2.0 and later.
+
+### Security
+
+- Addressed [CVE-2026-2664](https://www.cve.org/cverecord?id=CVE-2026-2664), out of bounds read in grpcfuse kernel module.
+- Addressed [CVE-2026-28400](https://www.cve.org/cverecord?id=CVE-2026-28400), runtime flag injection in Docker Model Runner.
+
+## 4.61.0
+
+{{< release-date date="2026-02-18" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.61.0" build_path="/219004/" >}}
+
+### New
+
+- You can now customize the left-hand navigation to show only the tabs that matter to you, and hide the ones that don’t.
+
+### Updates
+
+- Linux kernel `v6.12.68`
+- [Docker Engine v29.2.1](https://docs.docker.com/engine/release-notes/29/#2921)
+- Docker Sandbox `v0.12.0`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Docker Sandboxes:
+   - Added automated image caching to prevent re-downloading images unnecessarily.
+   - Added Shell mode for blank coding agent sandboxes.
+   - Added support for OpenCode.
+   - Added support for mounting multiple workspaces.
+   - Added experimental Linux support (single user only, UID 1000).
+   - Added support for running in WSL 2.
+   - Sandboxes now start in the current working directory if no path is provided.
+
 ## 4.60.1
 
 {{< release-date date="2026-02-10" >}}
@@ -393,7 +483,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### New 
 
 - [cagent](/manuals/ai/cagent/_index.md) is now available through Docker Desktop. 
-- [Docker Debug](/reference/cli/docker/debug.md) is now free for all users. 
+- [Docker Debug](/reference/cli/docker/debug/) is now free for all users. 
 
 ### Upgrades
 
@@ -998,7 +1088,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 ### New
 
 - The [Docker Desktop CLI](/manuals/desktop/features/desktop-cli.md) is now generally available. You can now also print logs with the new `docker desktop logs` command.
-- Docker Desktop now supports the `--platform` flag on [`docker load`](/reference/cli/docker/image/load.md) and [`docker save`](/reference/cli/docker/image/save.md). This helps you import and export a subset of multi-platform images.
+- Docker Desktop now supports the `--platform` flag on [`docker load`](/reference/cli/docker/image/load/) and [`docker save`](/reference/cli/docker/image/save/). This helps you import and export a subset of multi-platform images.
 
 ### Upgrades
 
@@ -1054,7 +1144,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 - Installing Docker Desktop via the PKG installer is now generally available.
 - Enforcing sign-in via configuration profiles is now generally available.
 - Docker Compose, Docker Scout, the Docker CLI, and Ask Gordon can now be updated independently of Docker Desktop and without a full restart (Beta).
-- The new [`update` command](/reference/cli/docker/desktop/update.md) has been added to the Docker Desktop CLI (Mac only).
+- The new [`update` command](/reference/cli/docker/desktop/update/) has been added to the Docker Desktop CLI (Mac only).
 - [Bake](/manuals//build/bake/_index.md) is now generally available, with support for entitlements and composable attributes.
 - You can now create [multi-node Kubernetes clusters](/manuals/desktop/settings-and-maintenance/settings.md#kubernetes) in Docker Desktop.
 - [Ask Gordon](/manuals/ai/gordon/_index.md) is more widely available. It is still in Beta.
@@ -1529,7 +1619,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 ### New
 
-- [Docker Debug](/reference/cli/docker/debug.md) is now generally available.
+- [Docker Debug](/reference/cli/docker/debug/) is now generally available.
 - BuildKit now evaluates Dockerfile rules to inform you of potential issues.
 - **Resource Allocation** settings can now be accessed directly from the resource usage data displayed in the Dashboard footer.
 - New and improved experience for [troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md).
@@ -2057,7 +2147,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - [Synchronized File Shares](/manuals/desktop/features/synchronized-file-sharing.md) provides fast and flexible host-to-VM file sharing within Docker Desktop. Utilizing the technology behind [Docker’s acquisition of Mutagen](https://www.docker.com/blog/mutagen-acquisition/), this feature provides an alternative to virtual bind mounts that uses synchronized filesystem caches, improving performance for developers working with large codebases.
 - Organization admins can now [configure Docker socket mount permissions](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md) when ECI is enabled.
 - [Containerd Image Store](/manuals/desktop/features/containerd.md) support is now generally available to all users.
-- Get a debug shell into any container or image with the new [`docker debug` command](/reference/cli/docker/debug.md) (Beta).
+- Get a debug shell into any container or image with the new [`docker debug` command](/reference/cli/docker/debug/) (Beta).
 - Organization admins, with a Docker Business subscription, can now configure a custom list of extensions with [Private Extensions Marketplace](/manuals/extensions/private-marketplace.md) enabled (Beta)
 
 ### Upgrades
@@ -2076,7 +2166,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 #### For all platforms
 
-- The `docker scan` command has been removed. To continue learning about the vulnerabilities of your images, and many other features, use the [`docker scout` command](/reference/cli/docker/scout/_index.md).
+- The `docker scan` command has been removed. To continue learning about the vulnerabilities of your images, and many other features, use the [`docker scout` command](/reference/cli/docker/scout/).
 - Fixed a bug where automatic updates would not download when the **Always download updates** checkbox was selected.
 - Fixed typo in the dashboard tooltip. Fixes [docker/for-mac#7132](https://github.com/docker/for-mac/issues/7132)
 - Improved signal handling behavior (e.g. when pressing Ctrl-C in the terminal while running a `docker` command).
@@ -2434,7 +2524,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ### New
 
 - Added support for new Wasm runtimes: wws and lunatic.
-- [`docker init`](/reference/cli/docker/init.md) now supports ASP.NET
+- [`docker init`](/reference/cli/docker/init/) now supports ASP.NET
 - Increased performance of exposed ports on macOS, for example with `docker run -p`.
 
 ### Removed
@@ -2685,7 +2775,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### Removed
 
-- Removed `docker scan` command. To continue learning about the vulnerabilities of your images, and many other features, use the new `docker scout` command. Run `docker scout --help`, or [read the docs to learn more](/reference/cli/docker/scout/_index.md).
+- Removed `docker scan` command. To continue learning about the vulnerabilities of your images, and many other features, use the new `docker scout` command. Run `docker scout --help`, or [read the docs to learn more](/reference/cli/docker/scout/).
 
 ### Upgrades
 
@@ -3982,7 +4072,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/).
 
 Docker Desktop Dashboard incorrectly displays the container memory usage as zero on
 Hyper-V based machines.
-You can use the [`docker stats`](/reference/cli/docker/container/stats.md)
+You can use the [`docker stats`](/reference/cli/docker/container/stats/)
 command on the command line as a workaround to view the
 actual memory usage. See
 [docker/for-mac#6076](https://github.com/docker/for-mac/issues/6076).

@@ -213,8 +213,8 @@ define a configuration at service creation, you can also update an existing
 service's configuration in a similar way.
 
 See the command-line references for
-[`docker service create`](/reference/cli/docker/service/create.md) and
-[`docker service update`](/reference/cli/docker/service/update.md), or run
+[`docker service create`](/reference/cli/docker/service/create/) and
+[`docker service update`](/reference/cli/docker/service/update/), or run
 one of those commands with the `--help` flag.
 
 ### Configure the runtime environment
@@ -670,7 +670,7 @@ Service constraints let you set criteria for a node to meet before the scheduler
 deploys a service to the node. You can apply constraints to the
 service based upon node attributes and metadata or engine metadata. For more
 information on constraints, refer to the `docker service create`
-[CLI reference](/reference/cli/docker/service/create.md).
+[CLI reference](/reference/cli/docker/service/create/).
 
 #### Reserve memory or CPUs for a service
 
@@ -733,7 +733,7 @@ and CPU/memory constraints. Be careful not to use settings that are not
 possible to fulfill.
 
 For more information on constraints, refer to the `docker service create`
-[CLI reference](/reference/cli/docker/service/create.md).
+[CLI reference](/reference/cli/docker/service/create/).
 
 #### Placement preferences
 

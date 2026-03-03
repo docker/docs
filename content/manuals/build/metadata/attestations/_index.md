@@ -43,39 +43,27 @@ to see if images you are already using are exposed to vulnerabilities.
 
 ## Creating attestations
 
-When you build an image with `docker buildx build`, you can add attestation
-records to the resulting image using the `--provenance` and `--sbom` options.
-You can opt in to add either the SBOM or provenance attestation type, or both.
+BuildKit generates the attestations when building the image. Provenance
+attestations with the `mode=min` level are added to images by default. The
+attestation records are wrapped in the in-toto JSON format and attached to the
+image index in a manifest for the final image.
 
-```console
-$ docker buildx build --sbom=true --provenance=true .
+You can customize attestation behavior using the `--provenance` and `--sbom`
+flags:
+
+```bash
+# Opt in to SBOM attestations:
+docker buildx build --sbom=true .
+# Opt in to max-level provenance attestations:
+docker buildx build --provenance=mode=max .
+# Opt out of provenance attestations:
+docker buildx build --provenance=false .
 ```
 
-> [!NOTE]
->
-> The default image store doesn't support attestations. If you're using the
-> default image store and you build an image using the default `docker` driver,
-> or using a different driver with the `--load` flag, the attestations are
-> lost.
->
-> To make sure the attestations are preserved, you can:
->
-> - Use a `docker-container` driver with the `--push` flag to push the image to
->   a registry directly.
-> - Enable the [containerd image store](/manuals/desktop/features/containerd.md).
-
-> [!NOTE]
->
-> Provenance attestations are enabled by default, with the `mode=min` option.
-> You can disable provenance attestations using the `--provenance=false` flag,
-> or by setting the [`BUILDX_NO_DEFAULT_ATTESTATIONS`](/manuals/build/building/variables.md#buildx_no_default_attestations) environment variable.
->
-> Using the `--provenance=true` flag attaches provenance attestations with `mode=min`
-> by default. See [Provenance attestation](./slsa-provenance.md) for more details.
-
-BuildKit generates the attestations when building the image. The attestation
-records are wrapped in the in-toto JSON format and attached to the image
-index in a manifest for the final image.
+You can also disable default provenance attestations by setting the
+[`BUILDX_NO_DEFAULT_ATTESTATIONS`](/manuals/build/building/variables.md#buildx_no_default_attestations)
+environment variable. See [Provenance attestation](./slsa-provenance.md) for
+more details about provenance modes and options.
 
 ## Storage
 

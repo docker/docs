@@ -4,7 +4,7 @@ publish = "public"
 [context.deploy-preview.environment]
 NODE_VERSION = "22"
 NODE_ENV = "production"
-HUGO_VERSION = "0.154.2"
+HUGO_VERSION = "0.156.0"
 HUGO_ENABLEGITINFO = "true"
 HUGO_ENVIRONMENT = "preview"
 SECRETS_SCAN_OMIT_PATHS = "public/contribute/file-conventions/index.html"

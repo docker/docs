@@ -1,0 +1,15 @@
+{{- range . -}}
+  {{- $lang := index site.Data.languages . -}}
+  {{- with $lang }}
+  <span class="chip">
+    <img
+      class="py-1"
+      height="18"
+      width="18"
+      title="{{ .title }}"
+      src="{{ .icon }}"
+    />
+    <span>{{ .title }}</span>
+  </span>
+  {{- end -}}
+{{- end -}}

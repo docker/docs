@@ -75,6 +75,6 @@ Because Docker Hardened Images strip out many common tools, they may not work ou
 
 - Use multi-stage builds to compile code or install dependencies in a `-dev` image and copy the output into a hardened runtime image
 - Replace shell scripts with equivalent entrypoint binaries or explicitly include a shell if needed
-- Use [Docker Debug](../../../reference/cli/docker/debug.md) to temporarily inspect or troubleshoot containers without altering the base image
+- Use [Docker Debug](/reference/cli/docker/debug/) to temporarily inspect or troubleshoot containers without altering the base image
 
 These trade-offs are intentional and help support best practices for building secure, reproducible, and production-ready containers.

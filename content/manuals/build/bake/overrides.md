@@ -177,7 +177,7 @@ $ docker buildx bake -f docker-bake.hcl -f overrides.hcl --print
 ## Command line
 
 You can also override target configurations from the command line with the
-[`--set` flag](/reference/cli/docker/buildx/bake.md#set):
+[`--set` flag](/reference/cli/docker/buildx/bake/#set):
 
 ```hcl
 # docker-bake.hcl

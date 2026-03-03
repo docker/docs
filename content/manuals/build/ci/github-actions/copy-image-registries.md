@@ -6,7 +6,7 @@ keywords: ci, github actions, gha, buildkit, buildx, registry
 ---
 
 [Multi-platform images](../../building/multi-platform.md) built using Buildx can
-be copied from one registry to another using the [`buildx imagetools create` command](/reference/cli/docker/buildx/imagetools/create.md):
+be copied from one registry to another using the [`buildx imagetools create` command](/reference/cli/docker/buildx/imagetools/create/):
 
 ```yaml
 name: ci
