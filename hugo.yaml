@@ -361,8 +361,8 @@ module:
           files: ["*.yaml"]
 
     # Model CLI
-    - path: github.com/docker/model-runner/cmd/cli
+    - path: github.com/docker/model-runner
       mounts:
-        - source: docs/reference
+        - source: cmd/cli/docs/reference
           target: data/cli/model
           files: ["*.yaml"]
