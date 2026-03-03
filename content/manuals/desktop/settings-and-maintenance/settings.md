@@ -121,90 +121,61 @@ the host while running and testing the code in a container.
 
 ### Proxies
 
-Docker Desktop supports the use of HTTP/HTTPS and SOCKS5 proxies (Requires a business subscription).
-
-HTTP/HTTPS and SOCKS5 proxies can be used when:
-
-- Signing in to Docker
-- Pulling or pushing images
-- Fetching artifacts during image builds
-- Containers interact with the external network
-- Scanning images
-
-For more details on how it works, see [Using Docker Desktop with a proxy](/manuals/desktop/features/networking/index.md#useing-docker-desktop-with-a-proxy).
-
-If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration (PAC)), Docker Desktop reads
-this configuration
-and automatically uses these settings for signing in to Docker, for pulling and pushing images, and for
-container Internet access. If the proxy requires authorization then Docker Desktop dynamically asks
-the developer for a username and password. All passwords are stored securely in the OS credential store.
-Note that only the `Basic` proxy authentication method is supported so we recommend using an `https://`
-URL of your HTTP/HTTPS proxies to protect passwords while in transit on the network. Docker Desktop
-supports TLS 1.3 when communicating with proxies.
-
-To set a different proxy for Docker Desktop, turn on **Manual proxy configuration** and enter a single
-upstream proxy URL of the form `http://proxy:port` or `https://proxy:port`.
+Docker Desktop supports HTTP/HTTPS and SOCKS5 proxies. SOCKS5 requires a Business subscription.
 
 To prevent developers from accidentally changing the proxy settings, see
 [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md#what-features-can-i-configure-with-settings-management).
 
-The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY` environment variable.
+#### Docker Desktop proxy
+
+Used for signing in to Docker, pulling and pushing images, fetching artifacts during image builds, and reporting error diagnostics.
+
+| Proxy mode | Description |
+|------------|-------------|
+| **System proxy** | Use the proxy configured on the host (static or Proxy Auto-Configuration (PAC)). Docker Desktop reads this automatically. |
+| **No proxy** | Connect directly without a proxy. |
+| **Manual configuration** | Enter a **Web Server (HTTP)** and **Secure Web Server (HTTPS)** URL manually. Use the format `http://proxy:port` or `https://proxy:port`. |
+
+You can also specify hosts and domains that should bypass the proxy, for example: `registry-1.docker.com,*.docker.com,10.0.0.0/8`.
 
 > [!NOTE]
->
-> If you are using a PAC file hosted on a web server, make sure to add the MIME type `application/x-ns-proxy-autoconfig` for the `.pac` file extension on the server or website. Without this configuration, the PAC file may not be parsed correctly. For more details on PAC files and Docker Desktop, see [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/air-gapped-containers.md#proxy-auto-configuration-files)
+> If you use a PAC file hosted on a web server, add the MIME type `application/x-ns-proxy-autoconfig` for the `.pac` extension. Without this, the PAC file may not parse correctly. See [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/air-gapped-containers.md#proxy-auto-configuration-files).
 
-> [!IMPORTANT]
-> You cannot configure the proxy settings using the Docker daemon configuration
-> file (`daemon.json`), and we recommend you do not configure the proxy
-> settings via the Docker CLI configuration file (`config.json`).
->
-> To manage proxy configurations for Docker Desktop, configure the settings in
-> the Docker Desktop app or use [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md).
+#### Containers proxy
+
+Used for outbound traffic from running containers.
+
+| Proxy mode | Description |
+|------------|-------------|
+| **Same as host proxy** | Use the same proxy configuration as the Docker Desktop proxy. |
+| **System proxy** | Use the proxy configured on the host. |
+| **No proxy** | Connect directly without a proxy. |
+| **Manual configuration** | Enter a **Web Server (HTTP)** and **Secure Web Server (HTTPS)** URL manually. |
+
+You can also specify hosts and domains that should bypass the proxy.
+
+> [!NOTE]
+> The HTTPS proxy used for image scanning is configured using the `HTTPS_PROXY` environment variable.
 
 #### Proxy authentication
 
-##### Basic authentication
-
-If your proxy uses Basic authentication, Docker Desktop prompts developers for a username and password and caches the credentials. All passwords are stored securely in the OS credential store. It will request re-authentication if that cache is removed.
-
-It's recommended that you use an `https://` URL of HTTP/HTTPS proxies to protect passwords during network transit. Docker Desktop also supports TLS 1.3 for communication with proxies.
-
-##### Kerberos and NTLM authentication
-
-> [!NOTE]
->
-> Available for Docker Business subscribers with Docker Desktop for Windows version 4.30 and later.
-
-Developers are no longer interrupted by prompts for proxy credentials as authentication is centralized. This also reduces the risk of account lockouts due to incorrect sign in attempts.
-
-If your proxy offers multiple authentication schemes in 407 (Proxy Authentication Required) response, Docker Desktop by default selects the Basic authentication scheme.
-
-For Docker Desktop version 4.30 to 4.31: 
-
-To enable Kerberos or NTLM proxy authentication, no additional configuration is needed beyond specifying the proxy IP address and port.
-
-For Docker Desktop version 4.32 and later: 
-
-To enable Kerberos or NTLM proxy authentication you must pass the `--proxy-enable-kerberosntlm` installer flag during installation via the command line, and ensure your proxy server is properly configured for Kerberos or NTLM authentication.
+| Method |  Behavior | Notes |
+|--------|-----------| ----- |
+| **Basic** | Docker Desktop prompts for credentials and caches them in the OS credential store. | Use an `https://` proxy URL to protect passwords in transit. Supports TLS 1.3. |
+| **Kerberos / NTLM** |  Centralizes authentication — developers aren't prompted for credentials, reducing the risk of account lockouts. If the proxy returns multiple schemes in a 407 response, Docker Desktop defaults to Basic. | Requires a Business subscription. To enable Kerberos or NTLM proxy authentication you must pass the `--proxy-enable-kerberosntlm` installer flag during installation via the command line, and ensure your proxy server is properly configured for Kerberos or NTLM authentication. |
 
 ### Network
 
 > [!NOTE]
->
-> On Windows, the **Network** tab isn't available in the Windows container mode because
-> Windows manages networking.
+> On Windows, the **Network** tab is not available in Windows container mode because Windows manages networking.
 
-| Setting             | Description                               | Platform                                |
-| ------------------- | ----------------------------------------- | ------------------------------------- |
-
-Docker Desktop uses a private IPv4 network for internal services such as a DNS server and an HTTP proxy. In case Docker Desktop's choice of subnet clashes with IPs in your environment, you can specify a custom subnet using the **Network** setting.
+| Setting | Description | Platform |
+|---------|-------------|----------|
+| **Docker subnet** | Set a custom subnet to avoid conflicts with IPs in your environment. Docker Desktop uses a private IPv4 network for internal services, including a DNS server and HTTP proxy. Default: `192.168.65.0/24`. | All |
+| **Use kernel networking for UDP** | Use a more efficient kernel networking path for UDP traffic. May not be compatible with VPN software. | Mac |
+| **Enable host networking** | Allows containers started with `--net=host` to use `localhost` to connect to TCP and UDP services on the host. Also allows host software to use `localhost` to connect to TCP and UDP services in the container. | Mac |
 
 On Windows and Mac, you can also set the default networking mode and DNS resolution behavior. For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
-
-On Mac, you can also select the **Use kernel networking for UDP** setting. This lets you use a more efficient kernel networking path for UDP. This may not be compatible with your VPN software.
-
-You can also define the behavior of port bindings. By default Docker Desktop binds all ports on containers to `0.0.0.0` on the host, though this can be overridden by providing a specific IP. You can change this default behavior by changing the **Port binding behavior** setting, allowing you to either bind to `localhost` (`127.0.0.1`) by default, or only allow containers to bind to `localhost` under any circumstances, even if requested otherwise.
 
 ### WSL Integration
 
