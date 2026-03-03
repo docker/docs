@@ -15,11 +15,11 @@ weight: 20
 
 You can add or remove seats from your Docker Team or Business subscription at any time to accommodate team changes. When you add seats mid-billing cycle, you're charged a prorated amount for the additional seats.
 
-{{% include "tax-compliance.md" %}}
+> [!IMPORTANT]
+> If you have a sales-assisted Docker Business subscription, 
+> contact your account manager to add seats to your subscription.
 
 ## Add seats to your subscription
-
-If you have a sales-assisted Docker Business subscription, contact your account manager to add seats to your subscription.
 
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
@@ -31,7 +31,7 @@ organization.
 1. Select **Billing**.
    - If you choose to pay using a US bank account, you must verify the account. 
    - For more information, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
-1. Select **Add seats** and follow the on-screen instructions to complete
+2. Select **Add seats** and follow the on-screen instructions to complete
 adding seats.
    - You can't use pay by invoice for purchasing additional seats.
    - You must use a card or US bank account.
