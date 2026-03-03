@@ -245,9 +245,7 @@ Create the `registry.json` file (UTF-8 without BOM) at the appropriate location:
 1. Restart Docker Desktop.
 1. Verify the `Sign in required!` prompt appears in Docker Desktop.
 
-> [!TIP]
->
-> If users have issues starting Docker Desktop after enforcing sign-in,
+If users have issues starting Docker Desktop after enforcing sign-in,
 they may need to update to the latest version.
 
 {{< /tab >}}
