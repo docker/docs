@@ -12,98 +12,46 @@ aliases:
 weight: 10
 ---
 
+Customize Docker Desktop behavior and optimize performance and resource usage with Docker Desktop's settings.
+
 To navigate to **Settings** either:
 
 - Select the Docker menu {{< inline-image src="../images/whale-x.svg" alt="whale menu" >}} and then **Settings**
 - Select the **Settings** icon from the Docker Desktop Dashboard.
 
-You can also locate the `settings-store.json` file (or `settings.json` for Docker Desktop versions 4.34 and earlier) at:
+You can also locate the `settings-store.json` file at:
  - Mac: `~/Library/Group\ Containers/group.com.docker/settings-store.json`
  - Windows: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings-store.json`
  - Linux: `~/.docker/desktop/settings-store.json`
 
-For additional information on settings that can be set in the Docker Desktop Dashboard and by administrators via the Admin Console, see the [Settings reference](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md).
+For additional information on enforcing these settings at an organization level by administrators, see [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md).
 
 ## General
 
-On the **General** tab, you can configure when to start Docker and specify other settings:
+| Setting                                                           | Description                                                                | Default            | Platform     | Notes                                 |
+| ----------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------ | ------------ | ------------------------------------- |
+| **Start Docker Desktop when you sign in to your computer**        | Automatically start Docker Desktop when you sign in to your machine        | Disabled           | All          | Recommended for frequent users        |
+| **Open Docker Dashboard when Docker Desktop starts**              | Automatically open the dashboard when starting Docker Desktop              | Disabled           | All          |                                       |
+| **Choose theme for Docker Desktop**                               | Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. | **Use system settings**. | All |                                   |
+| **Configure shell completions**.                                  | Automatically edits your shell configuration and gives you word completion for commands, flags, and Docker objects (such as container and volume names) when you hit `<Tab>` as you type into your terminal. For more information, see [Completion](/manuals/engine/cli/completion.md). | Disabled | All | | 
+| **Choose container terminal** | Determines which terminal is launched when opening the terminal from a container. If you choose the integrated terminal, you can run commands in a running container straight from the Docker Desktop Dashboard. For more information, see [Explore containers](/manuals/desktop/use-desktop/container.md). | Disabled | All | |
+| **Enable Docker terminal**.                                       | Interact with your host machine and execute commands directly from Docker Desktop.  | Disabled | All | | 
+| **Enable Docker Debug by default**                                | use Docker Debug by default when accessing the integrated terminal. For more information, see [Explore containers](/manuals/desktop/use-desktop/container.md#integrated-terminal).   | Disabled | All | |
+| **Include VM in Time Machine backups**                            | Back up the Docker Desktop virtual machine. | Disabled | Mac | | 
+| **Use containerd for pulling and storing images**     | Uses containerd image store instead of classic image store. For more information, see [containerd image store](/manuals/desktop/features/containerd.md)| Enabled  | All   |           |
+| **Expose daemon on tcp://localhost:2375 without TLS** | Allow legacy clients to connect to the Docker daemon. Use with caution as exposing the daemon without TLS can result in remote code execution attacks. | Disabled                  | Windows (Hyper-V backend only) | |
+| **Use the WSL 2 based engine** | WSL 2 provides better performance than the Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](/manuals/desktop/features/wsl/_index.md). | Disabled | Windows | |
+| **Add *.docker.internal to host file**                | Adds internal DNS entries                                  | Enabled                   | Windows                        | Helps resolve Docker-internal domains |
+| **Choose Virtual Machine Manager (VMM)**              | Choose the Virtual Machine Manager for creating and managing the Docker Desktop Linux VM. For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md). | | Mac | Select **Docker VMM** for the latest and most performant Hypervisor/Virtual Machine Manager. This option is available only on Apple Silicon Macs running macOS 12.5 or later and is currently in Beta.| 
+| **Choose file sharing implementation for your containers** | | Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs (Legacy)** | **VirtioFS** | Mac | | Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206). It is the only file sharing implementation supported by Docker VMM. |
+|**Use Rosetta for x86_64/amd64 emulation on Apple Silicon** | Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have selected **Apple Virtualization framework** as the Virtual Machine Manager. | Disabled | Mac | |
+| **Send usage statistics** | Docker Desktop sends diagnostics, crash reports, and usage data. This information helps Docker improve and troubleshoot the application. Docker may periodically prompt you for more information. | Enabled | All | |
+| **Use Enhanced Container Isolation** | Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md). | Disabled | All | Must be signed in and have a Docker Business subscription. |
+| **Show CLI hints**                                   | Displays helpful CLI suggestions in terminal               | Enabled                  | All        | Improves discoverability              |
+| **Enable Docker Scout image analysis**                | inspecting an image in Docker Desktop shows a **Start analysis** button that, when selected, analyzes the image with Docker Scout            | Enabled                   | All   | |
+| **Enable background SBOM indexing** | Automatically analyzes images that you build or pull | Disabled | All | |
+| **Automatically check configuration** | Regularly checks your configuration to ensure no unexpected changes have been made by another application. You are notified if changes are found and are able to restore the configuration directly from the notification. For more information, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/macfaqs.md#why-do-i-keep-getting-a-notification-telling-me-an-application-has-changed-my-desktop-configurations). | Enabled | Mac | Docker Desktop checks if your setup, configured during installation, has been altered by external apps like Orbstack. Docker Desktop checks the symlinks of Docker binaries to `/usr/local/bin` and the symlink of the default Docker socket. Additionally, Docker Desktop ensures that the context is switched to `desktop-linux` on startup.|
 
-- **Start Docker Desktop when you sign in to your computer**. Select to automatically start Docker
-  Desktop when you sign in to your machine.
-
-- **Open Docker Dashboard when Docker Desktop starts**. Select to automatically open the
-  dashboard when starting Docker Desktop.
-
-- **Choose theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use system settings**.
-
-- **Configure shell completions**. Automatically edits your shell configuration and gives you word completion for commands, flags, and Docker objects (such as container and volume names) when you hit `<Tab>` as you type into your terminal. For more information, see [Completion](/manuals/engine/cli/completion.md).
-
-- **Choose container terminal**. Determines which terminal is launched when opening the terminal from a container.
-If you choose the integrated terminal, you can run commands in a running container straight from the Docker Desktop Dashboard. For more information, see [Explore containers](/manuals/desktop/use-desktop/container.md).
-
-- **Enable Docker terminal**. Interact with your host machine and execute commands directly from Docker Desktop.
-
-- **Enable Docker Debug by default**. Check this option to use Docker Debug by default when accessing the integrated terminal. For more information, see [Explore containers](/manuals/desktop/use-desktop/container.md#integrated-terminal).
-
-- {{< badge color=blue text="Mac only" >}}**Include VM in Time Machine backups**. Select to back up the Docker Desktop
-  virtual machine. This option is turned off by default.
-
-- **Use containerd for pulling and storing images**.
-  Turns on the containerd image store.
-  This brings new features like faster container startup performance by lazy-pulling images,
-  and the ability to run Wasm applications with Docker.
-  For more information, see [containerd image store](/manuals/desktop/features/containerd.md).
-
-- {{< badge color=blue text="Windows only" >}}**Expose daemon on tcp://localhost:2375 without TLS**. Check this option to
-  enable legacy clients to connect to the Docker daemon. You must use this option
-  with caution as exposing the daemon without TLS can result in remote code
-  execution attacks.
-
-- {{< badge color=blue text="Windows only" >}}**Use the WSL 2 based engine**. WSL 2 provides better performance than the
-  Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](/manuals/desktop/features/wsl/_index.md).
-
-- {{< badge color=blue text="Windows only" >}}**Add the `*.docker.internal` names to the host's `/etc/hosts` file (Password required)**. Lets you resolve `*.docker.internal` DNS names from both the host and your containers.
-
-- {{< badge color=blue text="Mac only" >}} **Choose Virtual Machine Manager (VMM)**. Choose the Virtual Machine Manager for creating and managing the Docker Desktop Linux VM.
-  - Select **Docker VMM** for the latest and most performant Hypervisor/Virtual Machine Manager. This option is available only on Apple Silicon Macs running macOS 12.5 or later and is currently in Beta.
-    > [!TIP]
-    >
-    > Turn this setting on to make Docker Desktop run faster.
-  - Alternatively, you can choose **Apple Virtualization framework**, **QEMU** (for Apple Silicon  in Docker Desktop version 4.43 and earlier), or **HyperKit** (for Intel Macs). For macOS 12.5 and later, Apple Virtualization framework is the default setting.
-
-   For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md).
-
-- {{< badge color=blue text="Mac only" >}}**Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs (Legacy)**. VirtioFS is only available for macOS 12.5 and later, and is turned on by default.
-    > [!TIP]
-    >
-    > Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206). It is the only file sharing implementation supported by Docker VMM.
-
-- {{< badge color=blue text="Mac only" >}}**Use Rosetta for x86_64/amd64 emulation on Apple Silicon**. Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have selected **Apple Virtualization framework** as the Virtual Machine Manager. You must also be on macOS 13 or later.
-
-- **Send usage statistics**. Select so Docker Desktop sends diagnostics,
-  crash reports, and usage data. This information helps Docker improve and
-  troubleshoot the application. Clear the checkbox to opt out. Docker may
-  periodically prompt you for more information.
-
-- **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md).
-    > [!NOTE]
-    >
-    > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
-
-- **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively.
-
-- **Enable Scout image analysis**. When this option is enabled, inspecting an image in Docker Desktop shows a **Start analysis** button that, when selected, analyzes the image with Docker Scout.
-
-- **Enable background SBOM indexing**. When this option is enabled, Docker Scout automatically analyzes images that you build or pull.
-
-- {{< badge color=blue text="Mac only" >}}**Automatically check configuration**. Regularly checks your configuration to ensure no unexpected changes have been made by another application.
-
-  Docker Desktop checks if your setup, configured during installation, has been altered by external apps like Orbstack. Docker Desktop checks:
-    - The symlinks of Docker binaries to `/usr/local/bin`.
-    - The symlink of the default Docker socket. 
-  Additionally, Docker Desktop ensures that the context is switched to `desktop-linux` on startup.
-  
-  You are notified if changes are found and are able to restore the configuration directly from the notification. For more information, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/macfaqs.md#why-do-i-keep-getting-a-notification-telling-me-an-application-has-changed-my-desktop-configurations).
 
 ## Resources
 
