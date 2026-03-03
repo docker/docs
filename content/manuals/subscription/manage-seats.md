@@ -31,7 +31,7 @@ organization.
 1. Select **Billing**.
    - If you choose to pay using a US bank account, you must verify the account. 
    - For more information, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
-2. Select **Add seats** and follow the on-screen instructions to complete
+1. Select **Add seats** and follow the on-screen instructions to complete
 adding seats.
    - You can't use pay by invoice for purchasing additional seats.
    - You must use a card or US bank account.
@@ -44,9 +44,9 @@ You can now add more members to your organization. For more information, see [Ma
 To add seats to your Legacy Docker subscription:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select your organization, then select **Billing**.
-3. On the Billing page, select **Add seats**.
-4. Select the number of seats you want to add, then select **Purchase**.
+1. Select your organization, then select **Billing**.
+1. On the Billing page, select **Add seats**.
+1. Select the number of seats you want to add, then select **Purchase**.
 
 To add seats to Docker Build Cloud:
 
