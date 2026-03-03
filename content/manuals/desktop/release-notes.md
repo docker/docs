@@ -34,8 +34,8 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Updates
 
-- [Docker Compose v5.1.0](https://github.com/docker/compose/releases/tag/v5.01.0)
-- [Docker Scout CLI v1.18.3](https://github.com/docker/scout-cli/releases/tag/v1.20.0)
+- [Docker Compose v5.1.0](https://github.com/docker/compose/releases/tag/v5.1.0)
+- [Docker Scout CLI v1.20.0](https://github.com/docker/scout-cli/releases/tag/v1.20.0)
 
 ## 4.63.0
 
