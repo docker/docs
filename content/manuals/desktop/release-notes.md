@@ -26,6 +26,17 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.64.0
+
+{{< release-date date="2026-03-09" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.64.0" build_path="//" >}}
+
+### Updates
+
+- [Docker Compose v5.1.0](https://github.com/docker/compose/releases/tag/v5.01.0)
+- [Docker Scout CLI v1.18.3](https://github.com/docker/scout-cli/releases/tag/v1.20.0)
+
 ## 4.63.0
 
 {{< release-date date="2026-03-02" >}}
@@ -36,7 +47,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Added SLSA v1 provenance support in the **Builds** view. 
 
-### Upgrades
+### Updates
 
 - [Kubernetes v1.34.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.3)
 - Linux kernel `v6.12.72`
