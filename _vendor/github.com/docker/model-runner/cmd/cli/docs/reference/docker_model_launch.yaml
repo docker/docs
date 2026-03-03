@@ -1,47 +1,64 @@
-command: docker model restart-runner
-short: Restart Docker Model Runner (Docker Engine only)
+command: docker model launch
+short: Launch an app configured to use Docker Model Runner
 long: |-
-    This command restarts the Docker Model Runner without pulling container images. Use this command to restart the runner when you already have the required images locally.
+    Launch an app configured to use Docker Model Runner.
 
-    For the first-time setup or to ensure you have the latest images, use `docker model install-runner` instead.
-usage: docker model restart-runner
+    Without arguments, lists all supported apps.
+
+    Supported apps: anythingllm, claude, codex, openclaw, opencode, openwebui
+
+    Examples:
+      docker model launch
+      docker model launch opencode
+      docker model launch claude -- --help
+      docker model launch openwebui --port 3000
+      docker model launch claude --config
+usage: docker model launch [APP] [-- APP_ARGS...]
 pname: docker model
 plink: docker_model.yaml
 options:
-    - option: debug
+    - option: config
       value_type: bool
       default_value: "false"
-      description: Enable debug logging
+      description: Print configuration without launching
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: do-not-track
+    - option: detach
       value_type: bool
       default_value: "false"
-      description: Do not track models usage in Docker Model Runner
+      description: Run containerized app in background
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: gpu
-      value_type: string
-      default_value: auto
-      description: Specify GPU support (none|auto|cuda|rocm|musa|cann)
+    - option: dry-run
+      value_type: bool
+      default_value: "false"
+      description: Print what would be executed without running it
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: host
+    - option: image
       value_type: string
-      default_value: 127.0.0.1
-      description: Host address to bind Docker Model Runner
+      description: Override container image for containerized apps
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: model
+      value_type: string
+      description: Model to use (for opencode)
       deprecated: false
       hidden: false
       experimental: false
@@ -49,19 +66,9 @@ options:
       kubernetes: false
       swarm: false
     - option: port
-      value_type: uint16
+      value_type: int
       default_value: "0"
-      description: |
-        Docker container port for Docker Model Runner (default: 12434 for Docker Engine, 12435 for Cloud mode)
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: proxy-cert
-      value_type: string
-      description: Path to a CA certificate file for proxy SSL inspection
+      description: Host port to expose (web UIs)
       deprecated: false
       hidden: false
       experimental: false

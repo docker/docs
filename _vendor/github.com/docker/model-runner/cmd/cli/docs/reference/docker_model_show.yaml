@@ -1,0 +1,25 @@
+command: docker model show
+short: Show information for a model
+long: Display detailed information about a model in a human-readable format.
+usage: docker model show MODEL
+pname: docker model
+plink: docker_model.yaml
+options:
+    - option: remote
+      shorthand: r
+      value_type: bool
+      default_value: "false"
+      description: Show info for remote models
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+
