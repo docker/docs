@@ -1,0 +1,39 @@
+command: docker dhi customization
+short: Manage Docker Hardened Images customizations
+long: |
+    Commands to list, create, edit, and delete Docker Hardened Images customizations
+pname: docker dhi
+plink: docker_dhi.yaml
+cname:
+    - docker dhi customization build
+    - docker dhi customization create
+    - docker dhi customization delete
+    - docker dhi customization edit
+    - docker dhi customization get
+    - docker dhi customization list
+    - docker dhi customization prepare
+clink:
+    - docker_dhi_customization_build.yaml
+    - docker_dhi_customization_create.yaml
+    - docker_dhi_customization_delete.yaml
+    - docker_dhi_customization_edit.yaml
+    - docker_dhi_customization_get.yaml
+    - docker_dhi_customization_list.yaml
+    - docker_dhi_customization_prepare.yaml
+options:
+    - option: org
+      value_type: string
+      description: Docker Hub organization (overrides config)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

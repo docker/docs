@@ -1,0 +1,24 @@
+command: docker dhi
+short: CLI for managing Docker Hardened Images
+long: |-
+    command-line interface for administering Docker Hardened Images.
+    It provides commands to browse the DHI catalog, mirror images into your organisations and manage customizations.
+pname: docker
+plink: docker.yaml
+cname:
+    - docker dhi auth
+    - docker dhi catalog
+    - docker dhi customization
+    - docker dhi mirror
+clink:
+    - docker_dhi_auth.yaml
+    - docker_dhi_catalog.yaml
+    - docker_dhi_customization.yaml
+    - docker_dhi_mirror.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

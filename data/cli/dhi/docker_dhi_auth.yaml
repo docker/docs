@@ -1,0 +1,16 @@
+command: docker dhi auth
+short: Authenticate with Docker Hub
+long: Commands to authenticate with Docker Hub
+pname: docker dhi
+plink: docker_dhi.yaml
+cname:
+    - docker dhi auth apk
+clink:
+    - docker_dhi_auth_apk.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

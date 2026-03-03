@@ -1,0 +1,77 @@
+command: docker dhi mirror start
+short: Start mirroring Docker Hardened Images
+long: |-
+    Start mirroring one or more Docker Hardened Images to your organization's registry.
+
+    Repository mappings are specified using the -r flag. The following formats are supported:
+
+      source                  Only the source repository; destination is auto-generated as
+                              <org>/dhi-<source-name>
+      source,destination      Source and destination; namespaces are filled from config if omitted
+      ns/source,ns/dest       Fully qualified source and destination
+
+    The source namespace defaults to "dhi" when not specified.
+    The destination namespace defaults to the configured organization (--org or config).
+
+    Examples:
+      # These are all equivalent (assuming --org myorg):
+      dhictl mirror start --org myorg -r dhi/golang,myorg/dhi-golang
+      dhictl mirror start --org myorg -r golang,dhi-golang
+      dhictl mirror start --org myorg -r golang
+
+      # Mirror multiple repositories
+      dhictl mirror start --org myorg -r golang -r python
+usage: docker dhi mirror start
+pname: docker dhi mirror
+plink: docker_dhi_mirror.yaml
+options:
+    - option: dependencies
+      shorthand: d
+      value_type: bool
+      default_value: "false"
+      description: Mirrors any existing dependencies
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: json
+      value_type: bool
+      default_value: "false"
+      description: Output in JSON format
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: repo
+      shorthand: r
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Repository mapping in format source,destination (can be specified multiple times)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: org
+      value_type: string
+      description: Docker Hub organization (overrides config)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

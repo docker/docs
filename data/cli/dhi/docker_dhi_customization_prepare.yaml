@@ -1,0 +1,72 @@
+command: docker dhi customization prepare
+short: Prepare a new customization YAML file from a DHI base image tag
+long: |-
+    Prepare a new customization YAML file by fetching tag details from a Docker Hardened Images repository.
+    This creates a scaffold YAML file that can be used with the create command.
+
+    The repository argument must be a DHI source repository name, not a mirrored destination repository.
+    Supported formats:
+      - golang
+      - dhi/golang
+      - dhi.io/golang
+usage: docker dhi customization prepare <dhi-repository> <tag>
+pname: docker dhi customization
+plink: docker_dhi_customization.yaml
+options:
+    - option: destination
+      shorthand: d
+      value_type: string
+      description: Destination repository (e.g. myorg/dhi-golang)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: name
+      shorthand: "n"
+      value_type: string
+      description: Name for the customization
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: output
+      shorthand: o
+      value_type: string
+      description: Output file path (if not specified, outputs to stdout)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: tag-suffix
+      shorthand: t
+      value_type: string
+      description: Tag suffix for the customized image
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: org
+      value_type: string
+      description: Docker Hub organization (overrides config)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

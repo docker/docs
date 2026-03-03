@@ -1,0 +1,72 @@
+command: docker dhi mirror list
+short: List all mirrored Docker Hardened Images
+long: |-
+    List all Docker Hardened Images currently being mirrored to your organization's registry.
+
+    Shows the source repositories, destination repositories, and mirroring status.
+
+    Examples:
+      # List all mirrored repositories
+      dhictl mirror list --org myorg
+
+      # List only image repositories
+      dhictl mirror list --org myorg --type image
+
+      # List only helm chart repositories
+      dhictl mirror list --org myorg --type helm-chart
+
+      # Search for a specific repository by name
+      dhictl mirror list --org myorg --filter dhi-python
+
+      # Output in JSON format
+      dhictl mirror list --org myorg --json
+usage: docker dhi mirror list
+pname: docker dhi mirror
+plink: docker_dhi_mirror.yaml
+options:
+    - option: filter
+      shorthand: f
+      value_type: string
+      description: Filter by repository name (partial match)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: json
+      value_type: bool
+      default_value: "false"
+      description: Output in JSON format
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: type
+      value_type: string
+      description: Filter by repository type (image or helm-chart)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: org
+      value_type: string
+      description: Docker Hub organization (overrides config)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

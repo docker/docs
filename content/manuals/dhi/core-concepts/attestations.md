@@ -90,6 +90,21 @@ For more details, see [Verify image attestations](../how-to/verify.md#verify-ima
 | FIPS compliance            | An attestation that verifies the image uses FIPS 140-validated cryptographic modules.                              |
 | DHI Image Sources          | Links to a corresponding source image containing all materials used to build the image, including package source code, Git repositories, and local files, ensuring compliance with open source license requirements. |
 
+## Package attestations
+
+In addition to image-level attestations, Docker hardened packages also include
+their own attestations. These package-level attestations provide provenance and
+build information for individual packages within an image, allowing you to
+trace the supply chain at a granular level.
+
+Package attestations include similar information as image attestations, such as
+SLSA provenance, showing how each package was built and what materials were
+used. You can extract package information from an image's attestations and then
+retrieve the package's own attestations recursively.
+
+For detailed instructions on how to access and verify package attestations, see
+[Package attestations](../how-to/hardened-packages.md#package-attestations).
+
 ## Helm chart attestations
 
 Docker Hardened Image (DHI) charts also include comprehensive signed attestations

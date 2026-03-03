@@ -294,6 +294,16 @@ Example output:
 > $ cosign verify ...
 > ```
 
+## Verify package attestations
+
+In addition to image attestations, individual hardened packages have their own
+attestations. These package-level attestations allow you to verify the
+provenance and build information for specific packages within an image.
+
+For instructions on how to extract package information from image attestations
+and retrieve package-level attestations, see [Package
+attestations](./hardened-packages.md#package-attestations).
+
 ## Verify Helm chart attestations with Docker Scout
 
 Docker Hardened Image Helm charts include the same comprehensive attestations

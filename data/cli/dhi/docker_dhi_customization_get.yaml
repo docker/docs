@@ -1,0 +1,35 @@
+command: docker dhi customization get
+short: Get details of a specific customization
+long: |
+    Get detailed information about a Docker Hardened Images customization by repository and name. Outputs YAML to stdout by default, or to file if --output is specified.
+usage: docker dhi customization get <repository> <name>
+pname: docker dhi customization
+plink: docker_dhi_customization.yaml
+options:
+    - option: output
+      shorthand: o
+      value_type: string
+      description: Output file path (if not specified, outputs to stdout)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: org
+      value_type: string
+      description: Docker Hub organization (overrides config)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

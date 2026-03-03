@@ -241,11 +241,11 @@ This pattern separates the build environment from the runtime environment,
 helping reduce image size and improve security by removing unnecessary tooling
 from the final image.
 
-## Use compliance variants {tier="DHI Enterprise"}
+## Use compliance variants {tier="DHI Select & Enterprise"}
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
 
-When you have a Docker Hardened Images Enterprise subscription, you can access
+When you have a DHI Select or DHI Enterprise subscription, you can access
 compliance variants such as FIPS-enabled and STIG-ready images. These
 variants help meet regulatory and compliance requirements for secure
 deployments.
