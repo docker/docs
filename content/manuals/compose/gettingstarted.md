@@ -148,7 +148,7 @@ Compose simplifies the control of your entire application stack, making it easy 
    This Compose file defines two services: `web` and `redis`. 
 
    The `web` service uses an image that's built from the `Dockerfile` in the current directory.
-   It maps port `8000` on the host to port `5000` on the container (taken from your `.env` file), where Flask listens by default.
+   It maps port `8000` on the host to port `5000` on the container where Flask listens by default.
 
    The `redis` service uses a public [Redis](https://registry.hub.docker.com/_/redis/) image pulled from the Docker Hub registry.
 
@@ -312,15 +312,6 @@ running container automatically.
 
 5. Refresh `http://localhost:8000`. The updated greeting appears without any restart
    and the counter should still be incrementing.
-
-   > [!NOTE]
-   >
-   > For this example to work, the `--debug` flag is passed to `flask run` in the `CMD` instruction of the Dockerfile. The
-   > `--debug` flag in Flask enables automatic code reload, making it possible to work
-   > on the backend API without the need to restart or rebuild the container.
-   > After changing the `.py` file, subsequent API calls will use the new code, but the
-   > browser UI will not automatically refresh in this small example. Most frontend
-   > development servers include native live reload support that works with Compose.
 
 6. Stop the stack before moving on:
 
