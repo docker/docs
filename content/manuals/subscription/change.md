@@ -36,7 +36,7 @@ you want to upgrade.
 1. Select **Billing**.
 1. Optional. If you're upgrading from a free Personal subscription to a Team subscription and want to keep your username, [convert your user account into an organization](../admin/organization/convert-account.md).
 1. Select **Upgrade**.
-2. Follow the on-screen instructions to complete your upgrade. If you choose to pay using a US bank account, you must verify the account. For more information, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
+1. Follow the on-screen instructions to complete your upgrade. If you choose to pay using a US bank account, you must verify the account. For more information, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
@@ -69,8 +69,8 @@ To downgrade your subscription:
 1. Sign in to [Docker Home](https://app.docker.com/) and select
 the organization you want to downgrade.
 1. Select **Billing**.
-2. Select the action icon and then **Cancel subscription**.
-3. Fill out the feedback survey to continue with cancellation.
+1. Select the action icon and then **Cancel subscription**.
+1. Fill out the feedback survey to continue with cancellation.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
@@ -78,10 +78,10 @@ the organization you want to downgrade.
 To downgrade your legacy Docker subscription:
 
 1. Sign in to [Docker Hub](https://hub.docker.com/billing).
-2. Select the organization you want to downgrade, then select **Billing**.
-3. To downgrade, you must navigate to the upgrade plan page. Select **Upgrade**.
-4. On the upgrade page, select **Downgrade** in the **Free Team** plan card.
-5. Follow the on-screen instructions to complete your downgrade.
+1. Select the organization you want to downgrade, then select **Billing**.
+1. To downgrade, you must navigate to the upgrade plan page. Select **Upgrade**.
+1. On the upgrade page, select **Downgrade** in the **Free Team** plan card.
+1. Follow the on-screen instructions to complete your downgrade.
 
 To downgrade your Docker Build Cloud subscription:
 
