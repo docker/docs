@@ -38,7 +38,7 @@ For more details, see [Use Model Runner](use-model-runner.md).
 
 Compose Bridge supports custom transformation templates, which lets platform teams encode
 organizational standards once and apply them consistently whenever a `compose.yaml` file
-is converted to Kubernetes manifests.
+is converted to Kubernetes manifests or other formats.
 
 Developers continue to write standard Compose files. During conversion, Compose Bridge
 runs your custom transformation and automatically injects the required security contexts,
