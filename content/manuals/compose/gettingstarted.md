@@ -65,32 +65,17 @@ Make sure you have:
 
    ```dockerfile
    # syntax=docker/dockerfile:1
-   FROM python:3.12-alpine
-   WORKDIR /code
-   ENV FLASK_APP=app.py
+   FROM python:3.12-alpine  # Builds an image with the Python 3.12 image
+   WORKDIR /code  # Sets the working directory to `/code`
+   ENV FLASK_APP=app.py  # Sets environment variables used by the `flask` command
    ENV FLASK_RUN_HOST=0.0.0.0
-   RUN apk add --no-cache gcc musl-dev linux-headers
-   COPY requirements.txt .
-   RUN pip install -r requirements.txt
-   COPY . .
+   RUN apk add --no-cache gcc musl-dev linux-headers  # Installs `gcc` and other dependencies
+   COPY requirements.txt .  # Copies `requirements.txt`
+   RUN pip install -r requirements.txt  # Installs the Python dependencies
+   COPY . .  # Copies the current directory `.` in the project to the workdir `.` in the image
    EXPOSE 5000
-   CMD ["flask", "run", "--debug"]
+   CMD ["flask", "run", "--debug"]  # Sets the default command for the container to `flask run --debug`
    ```
-
-   {{< accordion title="Understand the Dockerfile" >}}
-
-   This tells Docker to:
-
-   * Build an image starting with the Python 3.12 image.
-   * Set the working directory to `/code`.
-   * Set environment variables used by the `flask` command.
-   * Install `gcc` and other dependencies.
-   * Copy `requirements.txt` and install the Python dependencies.
-   * Add metadata to the image to describe that the container is listening on port 5000.
-   * Copy the current directory `.` in the project to the workdir `.` in the image.
-   * Set the default command for the container to `flask run --debug`.
-
-   {{< /accordion >}}
 
    > [!IMPORTANT]
    >
@@ -109,7 +94,10 @@ Make sure you have:
 
    Compose automatically reads `.env` and makes these values available for interpolation
    in your `compose.yaml`. For this example the gains are modest, but in practice,
-   keeping configuration out of the Compose file makes it easier to change values across environments without editing YAML, to avoid committing secrets to version control, and to reuse values across multiple services.
+   keeping configuration out of the Compose file makes it easier to:
+   - Change values across environments without editing YAML
+   - Avoid committing secrets to version control
+   - Reuse values across multiple services
 
 6. Create a `.dockerignore` file to keep unnecessary files out of your build context:
 
@@ -145,12 +133,11 @@ Compose simplifies the control of your entire application stack, making it easy 
        image: redis:alpine
    ```
 
-   This Compose file defines two services: `web` and `redis`. 
+   This Compose file defines two services: 
 
-   The `web` service uses an image that's built from the `Dockerfile` in the current directory.
-   It maps port `8000` on the host to port `5000` on the container where Flask listens by default.
+   - The `web` service uses an image that's built from the `Dockerfile` in the current directory. It maps port `8000` on the host to port `5000` on the container where Flask listens by default.
 
-   The `redis` service uses a public [Redis](https://registry.hub.docker.com/_/redis/) image pulled from the Docker Hub registry.
+   - The `redis` service uses a public [Redis](https://registry.hub.docker.com/_/redis/) image pulled from the Docker Hub registry.
 
    For more information on the `compose.yaml` file, see [How Compose works](compose-application-model.md).
 
@@ -221,7 +208,7 @@ starting `web`.
    - `test` is the command Compose runs inside the container to check its health.
      `redis-cli ping` connects to Redis and expects a `PONG` response — if it gets one,
      the container is healthy.
-   - `start_period` gives Redis 10 seconds to initialise before health checks begin.
+   - `start_period` gives Redis 10 seconds to initialize before health checks begin.
      Any failures during this window don't count toward the retry limit.
    - `interval` runs the check every 5 seconds after the start period has elapsed.
    - `timeout` gives each check 3 seconds to respond before treating it as a failure.
@@ -250,8 +237,7 @@ starting `web`.
 
 ## Step 4: Enable Compose Watch for live updates
 
-Now that startup order is handled, add Compose Watch so that code changes sync into the
-running container automatically.
+Without Compose Watch, every code change requires you to stop the stack, rebuild the image, and restart the containers. Compose Watch eliminates that cycle by automatically syncing changes into your running container as you save files.
 
 1. Update `compose.yaml` to add the `develop.watch` block to the `web` service:
    
@@ -285,13 +271,10 @@ running container automatically.
          start_period: 10s
    ```
 
-   The `watch` block defines two rules. The `sync+restart` action syncs any changes
-   under `.` into `/code` inside the running container, then restarts the Flask process
-   so it picks up the new files — this is more reliable than depending on Flask's
-   reloader to detect the change itself. The `rebuild` action on `requirements.txt`
-   triggers a full image rebuild whenever you add a new dependency, since that can't be
-   handled by a simple file sync.
-
+   The `watch` block defines two rules:
+   - The `sync+restart` action watches your project directory (`.`) on the host. When a file changes, Compose copies any changed files into `/code` inside the running container, then restarts the container. Because the container restarts with the updated files already in place, Flask starts up reading the new code directly — no manual rebuild or restart needed. 
+   - The `rebuild` action on `requirements.txt` triggers a full image rebuild whenever you add a new dependency, since installing packages requires rebuilding the image, not just syncing files.
+   
 2. Start the stack with Watch enabled:
 
    ```console
