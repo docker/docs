@@ -37,6 +37,12 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Compose v5.1.0](https://github.com/docker/compose/releases/tag/v5.1.0)
 - [Docker Scout CLI v1.20.0](https://github.com/docker/scout-cli/releases/tag/v1.20.0)
 
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Fixed a bug in MCP Toolkit where disabling all tools in a profile would enable all tools.
+
 ## 4.63.0
 
 {{< release-date date="2026-03-02" >}}
