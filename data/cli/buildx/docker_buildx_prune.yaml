@@ -81,6 +81,16 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: timeout
+      value_type: duration
+      default_value: 20s
+      description: Override the default timeout for loading builder status
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: verbose
       value_type: bool
       default_value: "false"
