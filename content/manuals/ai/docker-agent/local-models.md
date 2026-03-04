@@ -2,7 +2,7 @@
 title: Local models with Docker Model Runner
 linkTitle: Local models
 description: Run AI models locally using Docker Model Runner - no API keys required
-keywords: [cagent, docker model runner, dmr, local models, embeddings, offline]
+keywords: [docker agent, docker model runner, dmr, local models, embeddings, offline]
 weight: 20
 ---
 
@@ -67,19 +67,19 @@ agents:
       - type: filesystem
 ```
 
-When you first run your agent, cagent prompts you to pull the model if it's
+When you first run your agent, Docker Agent prompts you to pull the model if it's
 not already available locally:
 
 ```console
-$ cagent run agent.yaml
+$ docker agent run agent.yaml
 Model not found locally. Do you want to pull it now? ([y]es/[n]o)
 ```
 
 ## How it works
 
-When you configure an agent to use DMR, cagent automatically connects to your
+When you configure an agent to use DMR, Docker Agent automatically connects to your
 local Docker Model Runner and routes inference requests to it. If a model isn't
-available locally, cagent prompts you to pull it on first use. No API keys or
+available locally, Docker Agent prompts you to pull it on first use. No API keys or
 authentication are required.
 
 ## Advanced configuration
@@ -183,7 +183,7 @@ Native DMR reranking is the fastest option for reranking RAG results.
 
 ## Troubleshooting
 
-If cagent can't find Docker Model Runner:
+If Docker Agent can't find Docker Model Runner:
 
 1. Verify Docker Model Runner status:
 

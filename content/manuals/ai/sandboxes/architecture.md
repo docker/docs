@@ -166,7 +166,7 @@ inside the sandbox VM. The agent makes API requests without credentials, and
 the proxy injects them transparently. When the sandbox is removed, no
 credentials remain inside.
 
-For multi-provider agents (OpenCode, cagent), the proxy automatically selects
+For multi-provider agents (OpenCode, Docker Agent), the proxy automatically selects
 the correct credentials based on the API endpoint being called. See individual
 [agent configuration](agents/) for credential setup instructions.
 

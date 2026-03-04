@@ -1,12 +1,12 @@
 ---
 title: A2A mode
 linkTitle: A2A
-description: Expose cagent agents via the Agent-to-Agent protocol
-keywords: [cagent, a2a, agent-to-agent, multi-agent, protocol]
+description: Expose Docker Agent agents via the Agent-to-Agent protocol
+keywords: [docker agent, a2a, agent-to-agent, multi-agent, protocol]
 weight: 40
 ---
 
-A2A mode runs your cagent agent as an HTTP server that other systems can call
+A2A mode runs your Docker Agent agent as an HTTP server that other systems can call
 using the Agent-to-Agent protocol. This lets you expose your agent as a service
 that other agents or applications can discover and invoke over the network.
 
@@ -29,7 +29,7 @@ Before starting an A2A server, you need:
 Basic usage:
 
 ```console
-$ cagent a2a ./agent.yaml
+$ docker agent a2a ./agent.yaml
 ```
 
 Your agent is now accessible via HTTP. Other A2A systems can discover your
@@ -38,19 +38,19 @@ agent's capabilities and call it.
 Custom port:
 
 ```console
-$ cagent a2a ./agent.yaml --port 8080
+$ docker agent a2a ./agent.yaml --port 8080
 ```
 
 Specific agent in a team:
 
 ```console
-$ cagent a2a ./agent.yaml --agent engineer
+$ docker agent a2a ./agent.yaml --agent engineer
 ```
 
 From OCI registry:
 
 ```console
-$ cagent a2a agentcatalog/pirate --port 9000
+$ docker agent a2a agentcatalog/pirate --port 9000
 ```
 
 ## HTTP endpoints
@@ -142,7 +142,7 @@ Here's a concrete scenario where A2A is useful. You have two agents:
 Run the specialist as an A2A server:
 
 ```console
-$ cagent a2a ./code-reviewer.yaml --port 8080
+$ docker agent a2a ./code-reviewer.yaml --port 8080
 Listening on 127.0.0.1:8080
 ```
 
@@ -198,7 +198,7 @@ agents:
 
 ## What's next
 
-- Review the [CLI reference](../reference/cli.md#a2a) for all `cagent a2a`
+- Review the [CLI reference](../reference/cli.md#a2a) for all `docker agent a2a`
   options
 - Learn about [MCP mode](./mcp.md) to expose agents as tools in MCP clients
 - Learn about [ACP mode](./acp.md) for editor integration

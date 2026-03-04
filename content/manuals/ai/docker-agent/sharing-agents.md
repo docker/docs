@@ -1,7 +1,7 @@
 ---
 title: Sharing agents
 description: Distribute agent configurations through OCI registries
-keywords: [cagent, oci, registry, docker hub, sharing, distribution]
+keywords: [docker agent, oci, registry, docker hub, sharing, distribution]
 weight: 50
 ---
 
@@ -27,7 +27,7 @@ For other registries, use their authentication method.
 Push your agent configuration to a registry:
 
 ```console
-$ cagent push ./agent.yml myusername/agent-name
+$ docker agent push ./agent.yml myusername/agent-name
 ```
 
 Push creates the repository if it doesn't exist yet. Use Docker Hub or
@@ -36,8 +36,8 @@ any OCI-compatible registry.
 Tag specific versions:
 
 ```console
-$ cagent push ./agent.yml myusername/agent-name:v1.0.0
-$ cagent push ./agent.yml myusername/agent-name:latest
+$ docker agent push ./agent.yml myusername/agent-name:v1.0.0
+$ docker agent push ./agent.yml myusername/agent-name:latest
 ```
 
 ## Using published agents
@@ -45,7 +45,7 @@ $ cagent push ./agent.yml myusername/agent-name:latest
 Pull an agent to inspect it locally:
 
 ```console
-$ cagent pull agentcatalog/pirate
+$ docker agent pull agentcatalog/pirate
 ```
 
 This saves the configuration as a local YAML file.
@@ -53,7 +53,7 @@ This saves the configuration as a local YAML file.
 Run agents directly from the registry:
 
 ```console
-$ cagent run agentcatalog/pirate
+$ docker agent run agentcatalog/pirate
 ```
 
 Or reference it directly in integrations:

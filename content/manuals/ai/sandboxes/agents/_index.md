@@ -18,7 +18,7 @@ inside microVMs with private Docker daemons.
 | Codex       | `codex`    | Experimental | In development                            |
 | Copilot     | `copilot`  | Experimental | In development                            |
 | Gemini      | `gemini`   | Experimental | In development                            |
-| cagent      | `cagent`   | Experimental | In development                            |
+| Docker Agent | `cagent`   | Experimental | In development                            |
 | Kiro        | `kiro`     | Experimental | In development                            |
 | OpenCode    | `opencode` | Experimental | In development                            |
 | Custom shell | `shell`   | Experimental | Minimal environment for manual setup      |

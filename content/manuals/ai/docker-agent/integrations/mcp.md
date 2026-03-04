@@ -1,7 +1,7 @@
 ---
 title: MCP mode
 linkTitle: MCP
-description: Expose cagent agents as tools to MCP clients like Claude Desktop and Claude Code
+description: Expose Docker Agent agents as tools to MCP clients like Claude Desktop and Claude Code
 keywords:
   [
     cagent,
@@ -76,7 +76,7 @@ Before configuring MCP integration, you need:
 
 ## MCP client configuration
 
-Your MCP client needs to know how to start cagent and communicate with it. This
+Your MCP client needs to know how to start Docker Agent and communicate with it. This
 typically involves adding cagent as an MCP server in your client's
 configuration.
 
@@ -142,7 +142,7 @@ Command breakdown:
 - `myagent`: Name for this MCP server in Claude Code
 - `--env`: Pass environment variables (repeat for each variable)
 - `--`: Separates Claude Code options from the MCP server command
-- `cagent mcp /path/to/agent.yml`: The cagent MCP command with the path to your
+- `docker agent mcp /path/to/agent.yml`: The cagent MCP command with the path to your
   agent configuration
 - `--working-dir $(pwd)`: Set the working directory for agent execution
 
@@ -153,8 +153,8 @@ sessions.
 
 For other MCP-compatible clients, you need to:
 
-1. Start cagent with `cagent mcp /path/to/agent.yml --working-dir /project/path`
-2. Configure the client to communicate with cagent over stdio
+1. Start cagent with `docker agent mcp /path/to/agent.yml --working-dir /project/path`
+2. Configure the client to communicate with Docker Agent over stdio
 3. Pass required environment variables (API keys, etc.)
 
 Consult your MCP client's documentation for specific configuration steps.
@@ -166,11 +166,11 @@ reference:
 
 ```console
 # Local file path
-$ cagent mcp ./agent.yml
+$ docker agent mcp ./agent.yml
 
 # OCI registry reference
-$ cagent mcp agentcatalog/pirate
-$ cagent mcp dockereng/myagent:v1.0.0
+$ docker agent mcp agentcatalog/pirate
+$ docker agent mcp dockereng/myagent:v1.0.0
 ```
 
 Use the same syntax in MCP client configurations:
@@ -193,7 +193,7 @@ managing local files. See [Sharing agents](../sharing-agents.md) for details.
 
 MCP clients see each of your agents as a separate tool and can call any of them
 directly. This changes how you should think about agent design compared to
-running agents with `cagent run`.
+running agents with `docker agent run`.
 
 ### Write good descriptions
 
@@ -235,7 +235,7 @@ If an agent needs others to work properly, say so in the description:
 MCP clients call agents individually, so test them that way:
 
 ```console
-$ cagent run agent.yml --agent engineer
+$ docker agent run agent.yml --agent engineer
 ```
 
 Make sure the agent works without going through root first. Check that it has
@@ -272,7 +272,7 @@ it finds. You stay in Claude's interface the whole time.
 Your configuration has a coordinator that delegates to designer and engineer
 agents. Ask Claude Code "Use the coordinator to implement a login form" and the
 coordinator hands off UI work to the designer and code to the engineer. You get
-a complete implementation without running `cagent run` yourself.
+a complete implementation without running `docker agent run` yourself.
 
 ### Run domain-specific tools
 
@@ -299,7 +299,7 @@ around.
 - Explore the [toolsets reference](../reference/toolsets.md) to learn what tools
   agents can use
 - Add [RAG for codebase search](../rag.md) to your agent
-- Check the [CLI reference](../reference/cli.md) for all `cagent mcp` options
+- Check the [CLI reference](../reference/cli.md) for all `docker agent mcp` options
 - Browse [example
   configurations](https://github.com/docker/cagent/tree/main/examples) for
   different agent types

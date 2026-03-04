@@ -35,9 +35,9 @@ ai-development:
 - title: MCP Toolkit
   description: Set up, manage, and run containerized MCP servers to power your AI agents.
   link: /ai/mcp-catalog-and-toolkit/toolkit/
-- title: Build AI agents with cagent
+- title: Build AI agents with Docker Agent
   description: Create teams of specialized AI agents that collaborate to solve complex problems.
-  link: /ai/cagent/
+  link: /ai/docker-agent/
 - title: Use AI models in Compose
   description: Define AI model dependencies in your Docker Compose applications.
   link: /compose/how-tos/model-runner/

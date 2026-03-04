@@ -1,7 +1,7 @@
 ---
 title: Building a coding agent
 description: Create a coding agent that can read, write, and validate code changes in your projects
-keywords: [cagent, tutorial, coding agent, ai assistant]
+keywords: [docker agent, tutorial, coding agent, ai assistant]
 weight: 30
 ---
 
@@ -25,7 +25,7 @@ A coding agent that can:
 
 ## What you'll learn
 
-- How to configure cagent agents in YAML
+- How to configure Docker Agent agents in YAML
 - How to give agents access to tools (filesystem, shell, etc.)
 - How to write effective agent instructions
 - How to compose multiple agents for specialized tasks
@@ -35,7 +35,7 @@ A coding agent that can:
 
 Before starting, you need:
 
-- **cagent installed** - See the [installation guide](_index.md#installation)
+- **Docker Agent installed** - See the [installation guide](_index.md#installation)
 - **API key configured** - Set `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` in your
   environment. Get keys from [Anthropic](https://console.anthropic.com/) or
   [OpenAI](https://platform.openai.com/api-keys)
@@ -43,7 +43,7 @@ Before starting, you need:
 
 ## Creating your first agent
 
-A cagent agent is defined in a YAML configuration file. The minimal agent needs
+A Docker Agent agent is defined in a YAML configuration file. The minimal agent needs
 just a model and instructions that define its purpose.
 
 Create a file named `agents.yml`:
@@ -61,7 +61,7 @@ agents:
 Run your agent:
 
 ```console
-$ cagent run agents.yml
+$ docker agent run agents.yml
 ```
 
 Try asking it: "How do I read a file in Python?"
@@ -267,7 +267,7 @@ The best way to improve your agent is to use it. When you notice issues:
 
 You now know how to:
 
-- Create a basic cagent configuration
+- Create a basic Docker Agent configuration
 - Add tools to enable agent capabilities
 - Write structured instructions for consistent behavior
 - Compose multiple agents for specialized tasks
@@ -277,7 +277,7 @@ You now know how to:
 
 - Learn [best practices](best-practices.md) for handling large outputs,
   structuring agent teams, and optimizing performance
-- Integrate cagent with your [editor](integrations/acp.md) or use agents as
+- Integrate Docker Agent with your [editor](integrations/acp.md) or use agents as
   [tools in MCP clients](integrations/mcp.md)
 - Review the [Configuration reference](reference/config.md) for all available
   options
@@ -288,4 +288,4 @@ You now know how to:
   different use cases
 - See the full
   [golang_developer.yaml](https://github.com/docker/cagent/blob/main/golang_developer.yaml)
-  that the Docker team uses to develop cagent
+  that the Docker team uses to develop Docker Agent

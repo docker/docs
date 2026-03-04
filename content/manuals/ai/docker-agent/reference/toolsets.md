@@ -1,12 +1,12 @@
 ---
 title: Toolsets reference
 linkTitle: Toolsets
-description: Complete reference for cagent toolsets and their capabilities
+description: Complete reference for Docker Agent toolsets and their capabilities
 keywords: [ai, agent, cagent, tools, toolsets]
 weight: 20
 ---
 
-This reference documents the toolsets available in cagent and what each one
+This reference documents the toolsets available in Docker Agent and what each one
 does. Tools give agents the ability to take action—interacting with files,
 executing commands, accessing external resources, and managing state.
 

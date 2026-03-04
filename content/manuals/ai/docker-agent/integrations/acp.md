@@ -1,12 +1,12 @@
 ---
 linkTitle: ACP
 title: ACP integration
-description: Configure your editor or IDE to use cagent agents as coding assistants
-keywords: [cagent, acp, editor, ide, neovim, zed, integration]
+description: Configure your editor or IDE to use Docker Agent agents as coding assistants
+keywords: [docker agent, acp, editor, ide, neovim, zed, integration]
 weight: 40
 ---
 
-Run cagent agents directly in your editor using the Agent Client Protocol (ACP).
+Run Docker Agent agents directly in your editor using the Agent Client Protocol (ACP).
 Your agent gets access to your editor's filesystem context and can read and
 modify files as you work. The editor handles file operations while cagent
 provides the AI capabilities.
@@ -26,7 +26,7 @@ to "add error handling" and it edits the code right in your editor. The agent
 works with your editor's view of the project, not some external file system it
 has to navigate.
 
-The difference from running cagent in a terminal: file operations go through
+The difference from running Docker Agent in a terminal: file operations go through
 your editor instead of the agent directly accessing your filesystem. When the
 agent needs to read or write a file, it requests it from your editor. This keeps
 the agent's view of your code synchronized with yours - same working directory,
@@ -74,12 +74,12 @@ Zed has built-in ACP support.
 
 2. Start a new external agent thread. Select your agent in the drop-down list.
 
-   ![New external thread with cagent in Zed](../images/cagent-acp-zed.avif)
+   ![New external thread with Docker Agent in Zed](../images/cagent-acp-zed.avif)
 
 ### Neovim
 
 Use the [CodeCompanion](https://github.com/olimorris/codecompanion.nvim) plugin,
-which has native support for cagent through a built-in adapter:
+which has native support for Docker Agent through a built-in adapter:
 
 1. [Install CodeCompanion](https://codecompanion.olimorris.dev/installation)
    through your plugin manager.
@@ -131,11 +131,11 @@ reference:
 
 ```console
 # Local file path
-$ cagent acp ./agent.yml
+$ docker agent acp ./agent.yml
 
 # OCI registry reference
-$ cagent acp agentcatalog/pirate
-$ cagent acp dockereng/myagent:v1.0.0
+$ docker agent acp agentcatalog/pirate
+$ docker agent acp dockereng/myagent:v1.0.0
 ```
 
 Use the same syntax in your editor configuration:
@@ -177,7 +177,7 @@ If the agent starts but can't access files or perform other actions, check:
 - Explore the [toolsets reference](../reference/toolsets.md) to learn what tools
   are available
 - Add [RAG for codebase search](../rag.md) to your agent
-- Check the [CLI reference](../reference/cli.md) for all `cagent acp` options
+- Check the [CLI reference](../reference/cli.md) for all `docker agent acp` options
 - Browse [example
   configurations](https://github.com/docker/cagent/tree/main/examples) for
   inspiration

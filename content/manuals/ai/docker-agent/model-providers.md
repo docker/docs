@@ -1,7 +1,7 @@
 ---
 title: Model providers
-description: Get API keys and configure cloud model providers for cagent
-keywords: [cagent, model providers, api keys, anthropic, openai, google, gemini]
+description: Get API keys and configure cloud model providers for Docker Agent
+keywords: [docker agent, model providers, api keys, anthropic, openai, google, gemini]
 weight: 10
 ---
 

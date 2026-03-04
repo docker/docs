@@ -6,7 +6,7 @@ keywords: [ai, agent, cagent, configuration, yaml]
 weight: 10
 ---
 
-This reference documents the YAML configuration file format for cagent agents.
+This reference documents the YAML configuration file format for Docker Agent agents.
 It covers file structure, agent parameters, model configuration, toolset setup,
 and RAG sources.
 
@@ -137,7 +137,7 @@ commands:
   analyze: "Analyze ${env.PROJECT_NAME || 'demo'}"
 ```
 
-Run with: `cagent run config.yaml /greet`
+Run with: `docker agent run config.yaml /greet`
 
 ### Structured output
 
