@@ -28,6 +28,8 @@ For information on enforcing settings at an organization level, see [Settings Ma
 
 ## General
 
+Configure startup behavior, UI appearance, terminal preferences, and feature defaults for Docker Desktop.
+
 | Setting                                                           | Description                                                                | Default            | Platform     | Notes                                 |
 | ----------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------ | ------------ | ------------------------------------- |
 | **Start Docker Desktop when you sign in to your computer**        | Automatically start Docker Desktop when you sign in to your machine.        | Disabled           | All          | Recommended for frequent users.        |
@@ -53,6 +55,8 @@ For information on enforcing settings at an organization level, see [Settings Ma
 | **Automatically check configuration** | Regularly check your configuration to ensure no unexpected changes have been made by another application. Notifies you if changes are found with the option to restore the configuration directly from the notification. For more information, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/macfaqs.md#why-do-i-keep-getting-a-notification-telling-me-an-application-has-changed-my-desktop-configurations). | Enabled | Mac | Docker Desktop checks if your setup, configured during installation, has been altered by external apps like Orbstack. Docker Desktop checks the symlinks of Docker binaries to `/usr/local/bin` and the symlink of the default Docker socket. Additionally, Docker Desktop ensures that the context is switched to `desktop-linux` on startup. |
 
 ## Resources
+
+Control the CPU, memory, disk, file sharing, proxy, and network resources available to Docker Desktop.
 
 ### Advanced
 
@@ -255,6 +259,8 @@ You can only start and stop builders using the `docker-container` driver.
 >
 > On Windows the **Kubernetes** tab is not available in Windows container mode.
 
+Enable and configure the built-in standalone Kubernetes cluster for testing container deployments.
+
 | Setting             | Description                               |
 | ------------------- | ----------------------------------------- |
 | **Enable Kubernetes** | Install and run a standalone Kubernetes server as a Docker container for testing deployments. |
@@ -267,6 +273,8 @@ see [Explore the Kubernetes view](/manuals/desktop/use-desktop/kubernetes.md).
 
 ## Software updates
 
+Manage how and when Docker Desktop checks for and downloads updates.
+
 | Setting             | Description                               | Default                             |
 | ------------------- | ----------------------------------------- | ------------------------------------- |
 | **Automatically check for updates** | Notifies you of available updates in the Docker menu and Dashboard footer. | Enabled |
@@ -274,6 +282,8 @@ see [Explore the Kubernetes view](/manuals/desktop/use-desktop/kubernetes.md).
 | **Automatically update components** | Update Docker Desktop components (such as Docker Compose, Docker Scout, and the Docker CLI) independently, without a full restart. | Enabled |
 
 ## Extensions
+
+Enable Docker Extensions and control which extensions are available to install and run.
 
 | Setting             | Description                               |
 | ------------------- | ----------------------------------------- |
@@ -297,6 +307,8 @@ For a list of current experimental features in the Docker CLI, see [Docker CLI E
 
 ## Notifications
 
+Choose which types of Docker Desktop notifications you want to receive.
+
 | Notification type | Default|
 | ----------------- | ------ |
 | Status updates on tasks and processes | Enabled |
@@ -310,6 +322,8 @@ Notifications appear briefly in the lower-right of the Docker Desktop Dashboard,
 
 ## Advanced (Mac only)
 
+Reconfigure CLI tool installation paths and privileged system permissions set during initial install.
+
 | Setting             | Description                               | Notes                               |
 | ------------------- | ----------------------------------------- | ------------------------------------- |
 | CLI tools installation — **System** | Install Docker CLI tools to `/usr/local/bin`. | |
@@ -318,6 +332,8 @@ Notifications appear briefly in the lower-right of the Docker Desktop Dashboard,
 | **Allow privileged port mapping** | Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#binding-privileged-ports). | Requires password |
 
 ## Docker Offload
+
+Enable Docker Offload and configure idle timeout and GPU support for cloud-based workloads.
 
 | Setting             | Description                               | Notes                                 |
 | ------------------- | ----------------------------------------- | ------------------------------------- |
