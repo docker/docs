@@ -1,12 +1,12 @@
 ---
 title: A2A mode
 linkTitle: A2A
-description: Expose Docker Agent agents via the Agent-to-Agent protocol
+description: Expose agents via the Agent-to-Agent protocol
 keywords: [docker agent, a2a, agent-to-agent, multi-agent, protocol]
 weight: 40
 ---
 
-A2A mode runs your Docker Agent agent as an HTTP server that other systems can call
+A2A mode runs your agent as an HTTP server that other systems can call
 using the Agent-to-Agent protocol. This lets you expose your agent as a service
 that other agents or applications can discover and invoke over the network.
 

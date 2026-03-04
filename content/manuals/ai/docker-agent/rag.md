@@ -1,6 +1,6 @@
 ---
 title: RAG
-description: How RAG gives your Docker Agent agents access to codebases and documentation
+description: How RAG gives your agents access to codebases and documentation
 keywords: [docker agent, rag, retrieval, embeddings, semantic search]
 weight: 70
 ---

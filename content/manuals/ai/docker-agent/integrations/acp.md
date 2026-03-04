@@ -1,12 +1,12 @@
 ---
 linkTitle: ACP
 title: ACP integration
-description: Configure your editor or IDE to use Docker Agent agents as coding assistants
+description: Configure your editor or IDE to use agents as coding assistants
 keywords: [docker agent, acp, editor, ide, neovim, zed, integration]
 weight: 40
 ---
 
-Run Docker Agent agents directly in your editor using the Agent Client Protocol (ACP).
+Run agents directly in your editor using the Agent Client Protocol (ACP).
 Your agent gets access to your editor's filesystem context and can read and
 modify files as you work. The editor handles file operations while cagent
 provides the AI capabilities.
@@ -36,7 +36,7 @@ same files, same state.
 
 Before configuring your editor, you need:
 
-- **cagent installed** - See the [installation guide](../_index.md#installation)
+- **Docker Agent installed** - See the [installation guide](../_index.md#installation)
 - **Agent configuration** - A YAML file defining your agent. See the
   [tutorial](../tutorial.md) or [example
   configurations](https://github.com/docker/cagent/tree/main/examples)

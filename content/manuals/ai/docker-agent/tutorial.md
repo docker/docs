@@ -25,7 +25,7 @@ A coding agent that can:
 
 ## What you'll learn
 
-- How to configure Docker Agent agents in YAML
+- How to configure agents in YAML with Docker Agents
 - How to give agents access to tools (filesystem, shell, etc.)
 - How to write effective agent instructions
 - How to compose multiple agents for specialized tasks
@@ -43,7 +43,7 @@ Before starting, you need:
 
 ## Creating your first agent
 
-A Docker Agent agent is defined in a YAML configuration file. The minimal agent needs
+An agent is defined in a YAML configuration file. The minimal agent needs
 just a model and instructions that define its purpose.
 
 Create a file named `agents.yml`:
@@ -288,4 +288,4 @@ You now know how to:
   different use cases
 - See the full
   [golang_developer.yaml](https://github.com/docker/cagent/blob/main/golang_developer.yaml)
-  that the Docker team uses to develop Docker Agent
+  that the Docker Team uses to develop Docker Agent

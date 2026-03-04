@@ -1,7 +1,7 @@
 ---
 title: MCP mode
 linkTitle: MCP
-description: Expose Docker Agent agents as tools to MCP clients like Claude Desktop and Claude Code
+description: Expose agents as tools to MCP clients like Claude Desktop and Claude Code
 keywords:
   [
     cagent,
@@ -65,7 +65,7 @@ manage MCP servers interactively.
 
 Before configuring MCP integration, you need:
 
-- **cagent installed** - See the [installation guide](../_index.md#installation)
+- **Docker Agent installed** - See the [installation guide](../_index.md#installation)
 - **Agent configuration** - A YAML file defining your agent. See the
   [tutorial](../tutorial.md) or [example
   configurations](https://github.com/docker/cagent/tree/main/examples)
@@ -93,7 +93,7 @@ Example configuration:
 {
   "mcpServers": {
     "myagent": {
-      "command": "/usr/local/bin/docker",
+      "command": "docker",
       "args": [
         "agent", 
         "serve",
@@ -113,7 +113,7 @@ Example configuration:
 
 Configuration breakdown:
 
-- `command`: Full path to your `docker` binary (use `which docker` to find it), or path to docker-agent if not using the docker CLI plugin
+- `command`: Full path to your `docker` binary (use `which docker` to find it), or path to `docker-agent` if not using the Docker CLI plugin
 - `args`: MCP command arguments:
   - `mcp`: The subcommand to run cagent in MCP mode
   - `dockereng/myagent`: Your agent configuration (local file path or OCI
@@ -181,7 +181,7 @@ Use the same syntax in MCP client configurations:
 {
   "mcpServers": {
     "myagent": {
-      "command": "/usr/local/bin/docker",
+      "command": "docker",
       "args": ["agent", "serve", "mcp", "agentcatalog/pirate"]
     }
   }

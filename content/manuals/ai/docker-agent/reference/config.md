@@ -6,7 +6,7 @@ keywords: [ai, agent, cagent, configuration, yaml]
 weight: 10
 ---
 
-This reference documents the YAML configuration file format for Docker Agent agents.
+This reference documents the YAML configuration file format for agents suing Docker Agent.
 It covers file structure, agent parameters, model configuration, toolset setup,
 and RAG sources.
 
