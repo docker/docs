@@ -15,15 +15,12 @@ weight: 10
 
 Enhanced Container Isolation (ECI) prevents malicious containers from compromising Docker Desktop or the host system. It applies advanced security techniques automatically while maintaining full developer productivity and workflow compatibility.
 
-ECI strengthens container isolation and locks in security configurations created by administrators, such as [Registry Access Management policies](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) and [Settings Management](../settings-management/_index.md) controls.
-
-> [!NOTE]
->
-> ECI works alongside other Docker security features like reduced Linux capabilities, seccomp, and AppArmor.
+- ECI strengthens container isolation and locks in security configurations created by administrators, such as [Registry Access Management policies](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) and [Settings Management](../settings-management/_index.md) controls. 
+- ECI works alongside other Docker security features like reduced Linux capabilities, seccomp, and AppArmor.
 
 ## Who should use Enhanced Container Isolation?
 
-Enhanced Container Isolation is designed for:
+ECI is designed for:
 
 - Organizations that want to prevent container-based attacks and reduce security vulnerabilities in developer environments
 - Security teams that need stronger container isolation without impacting developer workflows
@@ -32,15 +29,10 @@ Enhanced Container Isolation is designed for:
 ## How Enhanced Container Isolation works
 
 Docker implements ECI using the [Sysbox container runtime](https://github.com/nestybox/sysbox), a
-security-enhanced fork of the standard OCI runc runtime. When ECI is turned on, containers created through `docker run` or `docker create` automatically use Sysbox instead of runc without requiring any changes to developer workflows.
+security-enhanced fork of the standard OCI runc runtime. When ECI is turned on, containers created through `docker run` or `docker create` automatically use Sysbox instead of runc without requiring any changes to developer workflows. Docker's default runtime remains runc, but all user containers
+implicitly launch with Sysbox. 
 
-Even containers using the `--privileged` flag run securely with Enhanced Container Isolation, preventing them from breaching the Docker Desktop virtual machine or other containers.
-
-> [!NOTE]
->
-> When ECI is turned on, the Docker CLI `--runtime` flag is ignored.
-Docker's default runtime remains runc, but all user containers
-implicitly launch with Sysbox.
+When ECI is turned on, the Docker CLI `--runtime` flag is ignored. Even containers using the `--privileged` flag run securely with ECI, preventing them from breaching the Docker Desktop virtual machine or other containers.
 
 ## Key security features
 

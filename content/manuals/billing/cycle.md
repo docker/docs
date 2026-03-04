@@ -32,9 +32,7 @@ When you change your billing cycle:
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
-> [!IMPORTANT]
->
-> Pay by invoice is not available for subscription upgrades or changes.
+Pay by invoice is not available for subscription upgrades or changes.
 
 To change your billing cycle:
 
@@ -44,13 +42,7 @@ To change your billing cycle:
 1. On the plans and usage page, select **Switch to annual billing**.
 1. Verify your billing information.
 1. Select **Continue to payment**.
-1. Verify payment information and select **Upgrade subscription**.
-
-> [!NOTE]
->
-> If you choose to pay using a US bank account, you must verify the account. For
-> more information, see
-> [Verify a bank account](/manuals/billing/payment-method.md#verify-a-bank-account).
+1. Verify payment information and select **Upgrade subscription**. If you choose to pay using a US bank account, you must verify the account. For more information, see [Verify a bank account](/manuals/billing/payment-method.md#verify-a-bank-account).
 
 The billing plans and usage page will now reflect your new annual plan details.
 
@@ -76,9 +68,7 @@ You must be an organization owner to make changes to the payment information.
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
-> [!IMPORTANT]
->
-> Pay by invoice is not available for subscription upgrades or changes.
+Pay by invoice is not available for subscription upgrades or changes.
 
 Follow these steps to switch from a monthly to annual billing cycle for your
 organization's Docker subscription:
@@ -89,13 +79,8 @@ organization's Docker subscription:
 1. On the plans and usage page, select **Switch to annual billing**.
 1. Verify your billing information.
 1. Select **Continue to payment**.
-1. Verify payment information and select **Upgrade subscription**.
+1. Verify payment information and select **Upgrade subscription**. If you choose to pay using a US bank account, you must verify the account. For more information, see [Verify a bank account](/manuals/billing/payment-method.md#verify-a-bank-account).
 
-> [!NOTE]
->
-> If you choose to pay using a US bank account, you must verify the account. For
-> more information, see
-> [Verify a bank account](/manuals/billing/payment-method.md#verify-a-bank-account).
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
