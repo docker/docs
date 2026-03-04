@@ -75,7 +75,7 @@ Get details of a specific image, including available tags and CVE counts:
 dhictl catalog get <image-name>
 ```
 
-### Mirror DHI Images
+### Mirror DHI Images {tier="DHI Select & DHI Enterprise"}
 
 Start mirroring one or more DHI images to your Docker Hub organization:
 
