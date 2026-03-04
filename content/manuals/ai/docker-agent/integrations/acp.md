@@ -131,11 +131,11 @@ reference:
 
 ```console
 # Local file path
-$ docker agent acp ./agent.yml
+$ docker agent serve acp ./agent.yml
 
 # OCI registry reference
-$ docker agent acp agentcatalog/pirate
-$ docker agent acp dockereng/myagent:v1.0.0
+$ docker agent serve acp agentcatalog/pirate
+$ docker agent serve acp dockereng/myagent:v1.0.0
 ```
 
 Use the same syntax in your editor configuration:
@@ -177,7 +177,7 @@ If the agent starts but can't access files or perform other actions, check:
 - Explore the [toolsets reference](../reference/toolsets.md) to learn what tools
   are available
 - Add [RAG for codebase search](../rag.md) to your agent
-- Check the [CLI reference](../reference/cli.md) for all `docker agent acp` options
+- Check the [CLI reference](../reference/cli.md) for all `docker agent serve acp` options
 - Browse [example
   configurations](https://github.com/docker/cagent/tree/main/examples) for
   inspiration

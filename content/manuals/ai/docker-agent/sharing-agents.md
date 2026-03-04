@@ -82,8 +82,8 @@ Agents can be exposed as tools in MCP clients:
 {
   "mcpServers": {
     "myagent": {
-      "command": "/usr/local/bin/cagent",
-      "args": ["mcp", "agentcatalog/pirate"]
+      "command": "/usr/local/bin/docker",
+      "args": ["agent", "serve", "mcp", "agentcatalog/pirate"]
     }
   }
 }

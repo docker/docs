@@ -29,7 +29,7 @@ Before starting an A2A server, you need:
 Basic usage:
 
 ```console
-$ docker agent a2a ./agent.yaml
+$ docker agent serve a2a ./agent.yaml
 ```
 
 Your agent is now accessible via HTTP. Other A2A systems can discover your
@@ -38,19 +38,19 @@ agent's capabilities and call it.
 Custom port:
 
 ```console
-$ docker agent a2a ./agent.yaml --port 8080
+$ docker agent serve a2a ./agent.yaml --port 8080
 ```
 
 Specific agent in a team:
 
 ```console
-$ docker agent a2a ./agent.yaml --agent engineer
+$ docker agent serve a2a ./agent.yaml --agent engineer
 ```
 
 From OCI registry:
 
 ```console
-$ docker agent a2a agentcatalog/pirate --port 9000
+$ docker agent serve a2a agentcatalog/pirate --port 9000
 ```
 
 ## HTTP endpoints
@@ -142,7 +142,7 @@ Here's a concrete scenario where A2A is useful. You have two agents:
 Run the specialist as an A2A server:
 
 ```console
-$ docker agent a2a ./code-reviewer.yaml --port 8080
+$ docker agent serve a2a ./code-reviewer.yaml --port 8080
 Listening on 127.0.0.1:8080
 ```
 
@@ -198,7 +198,7 @@ agents:
 
 ## What's next
 
-- Review the [CLI reference](../reference/cli.md#a2a) for all `docker agent a2a`
+- Review the [CLI reference](../reference/cli.md#a2a) for all `docker agent serve a2a`
   options
 - Learn about [MCP mode](./mcp.md) to expose agents as tools in MCP clients
 - Learn about [ACP mode](./acp.md) for editor integration

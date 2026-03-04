@@ -93,8 +93,10 @@ Example configuration:
 {
   "mcpServers": {
     "myagent": {
-      "command": "/usr/local/bin/cagent",
+      "command": "/usr/local/bin/docker",
       "args": [
+        "agent", 
+        "serve",
         "mcp",
         "/path/to/agent.yml",
         "--working-dir",
@@ -111,7 +113,7 @@ Example configuration:
 
 Configuration breakdown:
 
-- `command`: Full path to your `cagent` binary (use `which cagent` to find it)
+- `command`: Full path to your `docker` binary (use `which docker` to find it), or path to docker-agent if not using the docker CLI plugin
 - `args`: MCP command arguments:
   - `mcp`: The subcommand to run cagent in MCP mode
   - `dockereng/myagent`: Your agent configuration (local file path or OCI
@@ -142,7 +144,7 @@ Command breakdown:
 - `myagent`: Name for this MCP server in Claude Code
 - `--env`: Pass environment variables (repeat for each variable)
 - `--`: Separates Claude Code options from the MCP server command
-- `docker agent mcp /path/to/agent.yml`: The cagent MCP command with the path to your
+- `docker agent serve mcp /path/to/agent.yml`: The cagent MCP command with the path to your
   agent configuration
 - `--working-dir $(pwd)`: Set the working directory for agent execution
 
@@ -153,7 +155,7 @@ sessions.
 
 For other MCP-compatible clients, you need to:
 
-1. Start cagent with `docker agent mcp /path/to/agent.yml --working-dir /project/path`
+1. Start cagent with `docker agent serve mcp /path/to/agent.yml --working-dir /project/path`
 2. Configure the client to communicate with Docker Agent over stdio
 3. Pass required environment variables (API keys, etc.)
 
@@ -166,11 +168,11 @@ reference:
 
 ```console
 # Local file path
-$ docker agent mcp ./agent.yml
+$ docker agent serve mcp ./agent.yml
 
 # OCI registry reference
-$ docker agent mcp agentcatalog/pirate
-$ docker agent mcp dockereng/myagent:v1.0.0
+$ docker agent serve mcp agentcatalog/pirate
+$ docker agent serve mcp dockereng/myagent:v1.0.0
 ```
 
 Use the same syntax in MCP client configurations:
@@ -179,8 +181,8 @@ Use the same syntax in MCP client configurations:
 {
   "mcpServers": {
     "myagent": {
-      "command": "/usr/local/bin/cagent",
-      "args": ["mcp", "agentcatalog/pirate"]
+      "command": "/usr/local/bin/docker",
+      "args": ["agent", "serve", "mcp", "agentcatalog/pirate"]
     }
   }
 }
@@ -299,7 +301,7 @@ around.
 - Explore the [toolsets reference](../reference/toolsets.md) to learn what tools
   agents can use
 - Add [RAG for codebase search](../rag.md) to your agent
-- Check the [CLI reference](../reference/cli.md) for all `docker agent mcp` options
+- Check the [CLI reference](../reference/cli.md) for all `docker agent serve mcp` options
 - Browse [example
   configurations](https://github.com/docker/cagent/tree/main/examples) for
   different agent types

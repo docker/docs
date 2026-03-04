@@ -53,7 +53,7 @@ systems to discover and interact with your agent. Auto-selects an available
 port if not specified.
 
 ```console
-$ docker agent a2a agent-file|registry-ref
+$ docker agent serve a2a agent-file|registry-ref
 ```
 
 > [!NOTE]
@@ -77,8 +77,8 @@ Supports [runtime flags](#runtime-flags).
 Examples:
 
 ```console
-$ docker agent a2a ./agent.yaml --port 8080
-$ docker agent a2a agentcatalog/pirate --port 9000
+$ docker agent serve a2a ./agent.yaml --port 8080
+$ docker agent serve a2a agentcatalog/pirate --port 9000
 ```
 
 ### acp
@@ -87,7 +87,7 @@ Start agent as ACP (Agent Client Protocol) server on stdio for editor integratio
 See [ACP integration](../integrations/acp.md) for setup guides.
 
 ```console
-$ docker agent acp agent-file|registry-ref
+$ docker agent serve acp agent-file|registry-ref
 ```
 
 Arguments:
@@ -146,7 +146,7 @@ Arguments:
 HTTP API server.
 
 ```console
-$ docker agent api agent-file|agents-dir
+$ docker agent serve api agent-file|agents-dir
 ```
 
 Arguments:
@@ -166,9 +166,9 @@ Supports [runtime flags](#runtime-flags).
 Examples:
 
 ```console
-$ docker agent api ./agent.yaml
-$ docker agent api ./agents/ --listen :9000
-$ docker agent api docker.io/user/agent --pull-interval 10
+$ docker agent serve api ./agent.yaml
+$ docker agent serve api ./agents/ --listen :9000
+$ docker agent serve api docker.io/user/agent --pull-interval 10
 ```
 
 The `--pull-interval` flag works only with OCI references. Automatically pulls and reloads at the specified interval.
@@ -304,7 +304,7 @@ MCP (Model Context Protocol) server on stdio. Exposes agents as tools to MCP
 clients. See [MCP integration](../integrations/mcp.md) for setup guides.
 
 ```console
-$ docker agent mcp agent-file|registry-ref
+$ docker agent serve mcp agent-file|registry-ref
 ```
 
 Arguments:
@@ -316,8 +316,8 @@ Supports [runtime flags](#runtime-flags).
 Examples:
 
 ```console
-$ docker agent mcp ./agent.yaml
-$ docker agent mcp docker.io/user/agent:latest
+$ docker agent serve mcp ./agent.yaml
+$ docker agent serve mcp docker.io/user/agent:latest
 ```
 
 ### new
