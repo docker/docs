@@ -61,7 +61,7 @@ its specialty.
 
 ## Installation
 
-Docker Agent is included in Docker Desktop 4.49 and later.
+Docker Agent is included in Docker Desktop 4.63 and later. In Docker Desktop versions 4.49 through 4.62, this feature was called cagent.
 
 For Docker Engine users or custom installations:
 
@@ -71,6 +71,8 @@ For Docker Engine users or custom installations:
   releases](https://github.com/docker/cagent/releases)
 - **From source**: See the [Docker Agent
   repository](https://github.com/docker/cagent?tab=readme-ov-file#build-from-source)
+
+The `docker-agent` binary should be copied to `~/.docker/cli-plugins` and then can be used with the `docker agent` command. Alternatively, it can be used as a standalone binary.
 
 ## Get started
 
