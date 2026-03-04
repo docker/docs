@@ -33,7 +33,7 @@ For information on enforcing settings at an organization level, see [Settings Ma
 | **Start Docker Desktop when you sign in to your computer**        | Automatically start Docker Desktop when you sign in to your machine.        | Disabled           | All          | Recommended for frequent users.        |
 | **Open Docker Dashboard when Docker Desktop starts**              | Automatically open the dashboard when starting Docker Desktop.              | Disabled           | All          |                                       |
 | **Choose theme for Docker Desktop**                               | Apply a **Light** or **Dark** theme to Docker Desktop. | **Use system settings**. | All |                                   |
-| **Configure shell completions**.                                  | Edits your shell configuration to enable word completion for commands, flags, and Docker objects when you press `<Tab>` in your terminal. For more information, see [Completion](/manuals/engine/cli/completion.md). | Disabled | All | | 
+| **Configure shell completions**                                  | Edits your shell configuration to enable word completion for commands, flags, and Docker objects when you press `<Tab>` in your terminal. For more information, see [Completion](/manuals/engine/cli/completion.md). | Disabled | All | | 
 | **Choose container terminal** | Sets which terminal opens when you select a container terminal. Use the integrated terminal to run commands in a running container from the Dashboard. For more information, see [Explore containers](/manuals/desktop/use-desktop/container.md). | Disabled | All | |
 | **Enable Docker terminal**.                                       | Interact with your host machine and execute commands directly from Docker Desktop.  | Disabled | All | | 
 | **Enable Docker Debug by default**                                | Use Docker Debug by default opening the integrated terminal. For more information, see [Explore containers](/manuals/desktop/use-desktop/container.md#integrated-terminal).   | Disabled | All | |
@@ -41,7 +41,7 @@ For information on enforcing settings at an organization level, see [Settings Ma
 | **Use containerd for pulling and storing images**     | Uses containerd image store instead of classic image store. For more information, see [containerd image store](/manuals/desktop/features/containerd.md).| Enabled  | All   |           |
 | **Expose daemon on tcp://localhost:2375 without TLS** | Allow legacy clients to connect to the Docker daemon. Use with caution as exposing the daemon without TLS can result in remote code execution attacks. | Disabled                  | Windows (Hyper-V backend only) | |
 | **Use the WSL 2 based engine** | WSL 2 provides better performance than the Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](/manuals/desktop/features/wsl/_index.md). | Disabled | Windows | |
-| **Add *.docker.internal to host file**                | Adds internal DNS entries.                                  | Enabled                   | Windows                        | Helps resolve Docker-internal domains |
+| **Add \*.docker.internal to host file**                | Adds internal DNS entries.                                  | Enabled                   | Windows                        | Helps resolve Docker-internal domains |
 | **Choose Virtual Machine Manager (VMM)**              | Choose the VMM for creating and managing the Docker Desktop Linux VM. For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md). | | Mac | Select **Docker VMM** for the latest and most performant Hypervisor/Virtual Machine Manager. This option is available only on Apple Silicon Macs and is currently in Beta.| 
 | **Choose file sharing implementation for your containers** | Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs (Legacy)** | **VirtioFS** | Mac | Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206). It is the only file sharing implementation supported by Docker VMM. |
 |**Use Rosetta for x86_64/amd64 emulation on Apple Silicon** | Accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have selected **Apple Virtualization framework** as the Virtual Machine Manager. | Disabled | Mac | |
@@ -56,18 +56,16 @@ For information on enforcing settings at an organization level, see [Settings Ma
 
 ### Advanced
 
-> [!NOTE]
->
-> On Windows, the **Resource allocation** options in the **Advanced** tab are only available in Hyper-V mode. Windows manages resources in WSL 2 mode and Windows container mode. In WSL 2 mode, configure memory, CPU, and swap limits on the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
+| Setting             | Description                               | Platform | Notes                                 |
+| ------------------- | ----------------------------------------- | -------- | ------------------------------------- |
+| **CPU limit** | Specify the maximum number of CPUs to be used by Docker Desktop. | Mac, Linux, Windows Hyper-V | |
+| **Memory limit** | RAM allocated to the Docker VM | Mac, Linux, Windows Hyper-V | Defaults to 50% of your host's memory. |
+| **Swap** | Configure swap file size as needed. | Mac, Linux, Windows Hyper-V | 1 GB default. |
+| **Disk usage limit** | Specify the maximum amount of disk space the engine can use. | Mac, Linux, Windows Hyper-V | |
+|  **Disk image location** | Specify the location of the Linux volume where containers and images are stored. On the **Advanced** tab, you can limit resources available to the Docker Linux VM. | Mac, Linux, Windows Hyper-V | You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you are asked if you want to use the existing image or replace it. |
+| **Resource Saver** | Enable or disable [Resource Saver mode](/manuals/desktop/use-desktop/resource-saver.md), which significantly reduces CPU and memory utilization on the host by automatically turning off the Linux VM when Docker Desktop is idle. | Mac, Linux, Windows Hyper-V | Restarts automatically when containers run. Restart may take 3–10 seconds. |
 
-| Setting             | Description                               | Notes                                 |
-| ------------------- | ----------------------------------------- | ------------------------------------- |
-| **CPU limit** | Specify the maximum number of CPUs to be used by Docker Desktop. | |
-| **Memory limit** | RAM allocated to the Docker VM | Defaults to 50% of your host's memory. |
-| **Swap** | Configure swap file size as needed. | 1 GB default. |
-| **Disk usage limit** | Specify the maximum amount of disk space the engine can use. | |
-|  **Disk image location** | Specify the location of the Linux volume where containers and images are stored. On the **Advanced** tab, you can limit resources available to the Docker Linux VM. | You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you are asked if you want to use the existing image or replace it. |
-| **Resource Saver** | Enable or disable [Resource Saver mode](/manuals/desktop/use-desktop/resource-saver.md), which significantly reduces CPU and memory utilization on the host by automatically turning off the Linux VM when Docker Desktop is idle. | Restarts automatically when containers run. Restart may take 3–10 seconds. |
+In WSL 2 mode, configure memory, CPU, and swap limits on the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
 
 > [!TIP]
 >
@@ -76,47 +74,41 @@ For information on enforcing settings at an organization level, see [Settings Ma
 
 ### File sharing
 
-> [!NOTE]
->
-> On Windows, the **File sharing** tab is only available in Hyper-V mode because the files
-> are automatically shared in WSL 2 mode and Windows container mode.
-
 Use File sharing to allow local directories on your machine to be shared with
 Linux containers. This is especially useful for editing source code in an IDE on
 the host while running and testing the code in a container.
 
-| Setting             | Description                               | Notes                                 |
-| ------------------- | ----------------------------------------- | ------------------------------------- |
-| **Synchronized file shares** | Fast and flexible host-to-VM file sharing, enhancing bind mount performance through the use of synchronized filesystem caches. To learn more, see [Synchronized file share](/manuals/desktop/features/synchronized-file-sharing.md). | Available with Pro, Team, and Business subscriptions. |
-| **Virtual file shares** | Share local directories with Linux containers. By default the `/Users`, `/Volumes`, `/private`, `/tmp` and `/var/folders` directory are shared. If your project is outside this directory then it must be added to the list, otherwise you may get `Mounts denied` or `cannot start service` errors at runtime. | |
+| Setting             | Description                               | Platform | Notes                                 |
+| ------------------- | ----------------------------------------- | -------- | ------------------------------------- |
+| **Synchronized file shares** | Fast and flexible host-to-VM file sharing, enhancing bind mount performance through the use of synchronized filesystem caches. To learn more, see [Synchronized file share](/manuals/desktop/features/synchronized-file-sharing.md). | Mac, Linux, Windows Hyper-V | Available with Pro, Team, and Business subscriptions. |
+| **Virtual file shares** | Share local directories with Linux containers. By default the `/Users`, `/Volumes`, `/private`, `/tmp` and `/var/folders` directory are shared. If your project is outside this directory then it must be added to the list, otherwise you may get `Mounts denied` or `cannot start service` errors at runtime. | Mac, Linux, Windows Hyper-V | |
 
-> [!TIP]
->
-> - Share only the directories that you need with the container. File sharing
->   introduces overhead as any changes to the files on the host need to be notified
->   to the Linux VM. Sharing too many files can lead to high CPU load and slow
->   filesystem performance.
-> - Shared folders are designed to allow application code to be edited
->   on the host while being executed in containers. For non-code items
->   such as cache directories or databases, the performance will be much
->   better if they are stored in the Linux VM, using a [data volume](/manuals/engine/storage/volumes.md)
->   (named volume) or [data container](/manuals/engine/storage/volumes.md).
-> - If you share the whole of your home directory into a container, MacOS may
->   prompt you to give Docker access to personal areas of your home directory such as
->   your Reminders or Downloads.
-> - By default, Mac file systems are case-insensitive while Linux is case-sensitive.
->   On Linux, it is possible to create two separate files: `test` and `Test`,
->   while on Mac these filenames would actually refer to the same underlying
->   file. This can lead to problems where an app works correctly on a developer's
->   machine (where the file contents are shared) but fails when run in Linux in
->   production (where the file contents are distinct). To avoid this, Docker Desktop
->   insists that all shared files are accessed as their original case. Therefore,
->   if a file is created called `test`, it must be opened as `test`. Attempts to
->   open `Test` will fail with the error "No such file or directory". Similarly,
->   once a file called `test` is created, attempts to create a second file called
->   `Test` will fail.
->
-> For more information, see [Volume mounting requires file sharing for any project directories outside of `/Users`](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md).
+
+- Share only the directories that you need with the container. File sharing
+introduces overhead as any changes to the files on the host need to be notified
+to the Linux VM. Sharing too many files can lead to high CPU load and slow
+filesystem performance.
+- Shared folders are designed to allow application code to be edited
+on the host while being executed in containers. For non-code items
+such as cache directories or databases, the performance will be much
+better if they are stored in the Linux VM, using a [data volume](/manuals/engine/storage/volumes.md)
+(named volume) or [data container](/manuals/engine/storage/volumes.md).
+- If you share the whole of your home directory into a container, Mac may
+prompt you to give Docker access to personal areas of your home directory such as
+your Reminders or Downloads.
+- By default, Mac file systems are case-insensitive while Linux is case-sensitive.
+On Linux, it is possible to create two separate files: `test` and `Test`,
+while on Mac these filenames would actually refer to the same underlying
+file. This can lead to problems where an app works correctly on a developer's
+machine (where the file contents are shared) but fails when run in Linux in
+production (where the file contents are distinct). To avoid this, Docker Desktop
+insists that all shared files are accessed as their original case. Therefore,
+if a file is created called `test`, it must be opened as `test`. Attempts to
+open `Test` will fail with the error "No such file or directory". Similarly,
+once a file called `test` is created, attempts to create a second file called
+`Test` will fail.
+
+For more information, see [Volume mounting requires file sharing for any project directories outside of `/Users`](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md).
 
 ### Proxies
 
@@ -133,9 +125,7 @@ Used for signing in to Docker, pulling and pushing images, fetching artifacts du
 |------------|-------------|
 | **System proxy** | Use the proxy configured on the host (static or Proxy Auto-Configuration (PAC)). Docker Desktop reads this automatically. |
 | **No proxy** | Connect directly without a proxy. |
-| **Manual configuration** | Enter a **Web Server (HTTP)** and **Secure Web Server (HTTPS)** URL manually. Use the format `http://proxy:port` or `https://proxy:port`. |
-
-You can also specify hosts and domains that should bypass the proxy, for example: `registry-1.docker.com,*.docker.com,10.0.0.0/8`.
+| **Manual configuration** | Enter a **Web Server (HTTP)** and **Secure Web Server (HTTPS)** URL manually. Use the format `http://proxy:port` or `https://proxy:port`. You can also specify hosts and domains that should bypass the proxy, for example: `registry-1.docker.com,*.docker.com,10.0.0.0/8`. |
 
 > [!NOTE]
 >
@@ -150,9 +140,7 @@ Used for outbound traffic from running containers.
 | **Same as host proxy** | Use the same proxy configuration as the Docker Desktop proxy. |
 | **System proxy** | Use the proxy configured on the host. |
 | **No proxy** | Connect directly without a proxy. |
-| **Manual configuration** | Enter a **Web Server (HTTP)** and **Secure Web Server (HTTPS)** URL manually. |
-
-You can also specify hosts and domains that should bypass the proxy.
+| **Manual configuration** | Enter a **Web Server (HTTP)** and **Secure Web Server (HTTPS)** URL manually. Use the format `http://proxy:port` or `https://proxy:port`. You can also specify hosts and domains that should bypass the proxy, for example: `registry-1.docker.com,*.docker.com,10.0.0.0/8`. |
 
 > [!NOTE]
 >
@@ -177,13 +165,9 @@ You can also specify hosts and domains that should bypass the proxy.
 | **Use kernel networking for UDP** | Use a more efficient kernel networking path for UDP traffic. May not be compatible with VPN software. | Mac |
 | **Enable host networking** | Allows containers started with `--net=host` to use `localhost` to connect to TCP and UDP services on the host. Also allows host software to use `localhost` to connect to TCP and UDP services in the container. | Mac |
 
-On Windows and Mac, you can also set the default networking mode and DNS resolution behavior. For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
+On Windows and Mac, you can also set the default networking mode and DNS resolution behavior. For more information, see [Networking](/manuals/desktop/features/networking/networking-how-tos.md#network-how-tos-for-mac-and-windows).
 
 ### WSL integration (Windows only)
-
-> [!NOTE]
->
-> Only available on Windows in WSL 2 mode.
 
 | Setting             | Description                               | Notes                               |
 | ------------------- | ----------------------------------------- | ------------------------------------- |
