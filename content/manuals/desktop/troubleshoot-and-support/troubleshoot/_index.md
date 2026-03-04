@@ -53,6 +53,9 @@ If you are a Mac or Linux user, you also have the option to **Uninstall** Docker
 ### Diagnose from the app
 
 1. From **Troubleshoot**, select **Get support**. This opens the in-app Support page and starts collecting the diagnostics.
+   > [!NOTE]
+   >
+   > Gathering diagnostics may take several minutes. Don't close Docker Desktop while the diagnostics are being collected.
 2. When the diagnostics collection process is complete, select **Upload to get a Diagnostic ID**.
 3. When the diagnostics are uploaded, Docker Desktop prints a diagnostic ID. Copy this ID.
 4. Use your diagnostics ID to get help:
@@ -65,6 +68,9 @@ If you are a Mac or Linux user, you also have the option to **Uninstall** Docker
 ### Diagnose from an error message
 
 1. When an error message appears, select **Gather diagnostics**.
+   > [!NOTE]
+   >
+   > Gathering diagnostics may take several minutes. Don't close Docker Desktop while the diagnostics are being collected.
 2. When the diagnostics are uploaded, Docker Desktop prints a diagnostic ID. Copy this ID.
 3. Use your diagnostics ID to get help:
    - If you have a paid Docker subscription, select **Contact support**. This opens the Docker Desktop support form. Fill in the information required and add the ID you copied in step three to the **Diagnostics ID field**. Then, select **Submit ticket** to request Docker Desktop support.
@@ -77,6 +83,10 @@ If you are a Mac or Linux user, you also have the option to **Uninstall** Docker
 
 In some cases, it's useful to run the diagnostics yourself, for instance, if
 Docker Desktop cannot start.
+
+> [!NOTE]
+>
+> Gathering diagnostics may take several minutes. Wait for the process to complete before closing the terminal.
 
 {{< tabs group="os" >}}
 {{< tab name="Windows" >}}
