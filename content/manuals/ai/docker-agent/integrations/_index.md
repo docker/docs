@@ -5,7 +5,7 @@ keywords: [docker agent, integration, acp, mcp, a2a, editor, protocol]
 weight: 60
 ---
 
-cagent agents can integrate with different environments depending on how you
+Agents created with Docker Agent can integrate with different environments depending on how you
 want to use them. Each integration type serves a specific purpose.
 
 ## Integration types

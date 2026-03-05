@@ -58,7 +58,7 @@ agents:
     rag: [codebase]
 ```
 
-When you reference `rag: [codebase]`, cagent:
+When you reference `rag: [codebase]`, Docker Agent:
 
 1. **At startup** - Indexes your documents (first run only, blocks until complete)
 2. **During conversation** - Gives the agent a search tool
@@ -70,7 +70,7 @@ what goes in context - the agent does.
 
 ### The indexing process
 
-On first run, cagent:
+On first run, Docker Agent:
 
 - Reads files from configured paths
 - Respects `.gitignore` patterns (can be disabled)
@@ -78,13 +78,13 @@ On first run, cagent:
 - Creates searchable representations using your chosen strategy
 - Stores everything in a local database
 
-Subsequent runs reuse the index. If files change, cagent detects this and
+Subsequent runs reuse the index. If files change, Docker Agent detects this and
 re-indexes only what changed, keeping your knowledge base up to date without
 manual intervention.
 
 ## Retrieval strategies
 
-Different content requires different retrieval approaches. cagent supports
+Different content requires different retrieval approaches. Docker Agent supports
 three strategies, each optimized for different use cases. The defaults work
 well, but understanding the trade-offs helps you choose the right approach.
 

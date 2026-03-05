@@ -1,7 +1,7 @@
 ---
 title: Configuration file reference
 linkTitle: Configuration file
-description: Complete reference for the cagent YAML configuration file format
+description: Complete reference for the Docker Agent YAML configuration file format
 keywords: [ai, agent, cagent, configuration, yaml]
 weight: 10
 ---
@@ -210,7 +210,7 @@ thinking_budget: 0       # Disabled
 
 ### Docker Model Runner (DMR)
 
-Run local models. If `base_url` is omitted, cagent auto-discovers via Docker
+Run local models. If `base_url` is omitted, Docker Agent auto-discovers via Docker
 Model plugin.
 
 ```yaml

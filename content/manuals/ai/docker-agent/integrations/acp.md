@@ -8,16 +8,16 @@ weight: 40
 
 Run agents directly in your editor using the Agent Client Protocol (ACP).
 Your agent gets access to your editor's filesystem context and can read and
-modify files as you work. The editor handles file operations while cagent
+modify files as you work. The editor handles file operations while Docker Agent
 provides the AI capabilities.
 
-This guide shows you how to configure Neovim, or Zed to run cagent agents. If
-you're looking to expose cagent agents as tools to MCP clients like Claude
+This guide shows you how to configure Neovim, or Zed to run agents with Docker Agent. If
+you're looking to expose agents as tools to MCP clients like Claude
 Desktop or Claude Code, see [MCP integration](./mcp.md) instead.
 
 ## How it works
 
-When you run cagent with ACP, it becomes part of your editor's environment. You
+When you run Docker Agent with ACP, it becomes part of your editor's environment. You
 select code, highlight a function, or reference a file - the agent sees what you
 see. No copying file paths or switching to a terminal.
 
@@ -52,21 +52,21 @@ launching your editor.
 
 Zed has built-in ACP support.
 
-1. Add cagent to your agent servers in `settings.json`:
+1. Add `docker agent` to your agent servers in `settings.json`:
 
    ```json
    {
      "agent_servers": {
-       "my-cagent-team": {
-         "command": "cagent",
-         "args": ["acp", "agent.yml"]
+       "my-agent-team": {
+         "command": "docker",
+         "args": ["agent", "serve", "acp", "agent.yml"]
        }
      }
    }
    ```
 
    Replace:
-   - `my-cagent-team` with the name you want to use for the agent
+   - `my-agent-team` with the name you want to use for the agent
    - `agent.yml` with the path to your agent configuration file.
 
    If you have multiple agent files that you like to run separately, you can
@@ -83,17 +83,19 @@ which has native support for Docker Agent through a built-in adapter:
 
 1. [Install CodeCompanion](https://codecompanion.olimorris.dev/installation)
    through your plugin manager.
-2. Extend the `cagent` adapter in your CodeCompanion config:
+2. Extend the `dockeragent` adapter in your CodeCompanion config:
 
    ```lua
    require("codecompanion").setup({
      adapters = {
        acp = {
-         cagent = function()
-           return require("codecompanion.adapters").extend("cagent", {
+         dockeragent = function()
+           return require("codecompanion.adapters").extend("dockeragent", {
              commands = {
                default = {
-                 "cagent",
+                 "docker",
+                 "agent", 
+                 "serve",
                  "acp",
                  "agent.yml",
                },
@@ -115,7 +117,7 @@ which has native support for Docker Agent through a built-in adapter:
    :CodeCompanion
    ```
 
-4. Switch to the cagent adapter (keymap `ga` in the CodeCompanion buffer, by
+4. Switch to the Docker Agent adapter (keymap `ga` in the CodeCompanion buffer, by
    default).
 
 See the [CodeCompanion ACP
@@ -144,8 +146,8 @@ Use the same syntax in your editor configuration:
 {
   "agent_servers": {
     "myagent": {
-      "command": "cagent",
-      "args": ["acp", "agentcatalog/pirate"]
+      "command": "docker",
+      "args": ["agent", "serve", "acp", "agentcatalog/pirate"]
     }
   }
 }
@@ -159,7 +161,7 @@ agents](../sharing-agents.md) for details on using OCI registries.
 
 Verify your configuration works:
 
-1. Start the cagent ACP server using your editor's configured method
+1. Start the Docker Agent ACP server using your editor's configured method
 2. Send a test prompt through your editor's interface
 3. Check that the agent responds
 4. Verify filesystem operations work by asking the agent to read a file

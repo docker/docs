@@ -18,7 +18,7 @@ tools in MCP clients, see [MCP integration](./mcp.md).
 
 Before starting an A2A server, you need:
 
-- cagent installed - See the [installation guide](../_index.md#installation)
+- Docker Agent installed - See the [installation guide](../_index.md#installation)
 - Agent configuration - A YAML file defining your agent. See the
   [tutorial](../tutorial.md)
 - API keys configured - If using cloud model providers (see [Model
@@ -74,7 +74,7 @@ $ curl http://localhost:8080/.well-known/agent-card
       "id": "agent_root",
       "name": "root",
       "description": "A helpful coding assistant",
-      "tags": ["llm", "cagent"]
+      "tags": ["llm", "dockeragent"]
     }
   ],
   "preferredTransport": "jsonrpc",
@@ -165,7 +165,7 @@ specialist has access to the codebase tools it needs.
 
 ## Calling other A2A agents
 
-Your cagent agents can call remote A2A agents as tools. Configure the A2A
+Your agents can call remote A2A agents as tools. Configure the A2A
 toolset with the remote agent's URL:
 
 ```yaml

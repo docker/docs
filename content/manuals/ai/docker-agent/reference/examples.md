@@ -6,7 +6,7 @@ weight: 40
 ---
 
 Get inspiration from the following agent examples.
-See more examples in the [cagent GitHub repository](https://github.com/docker/cagent/tree/main/examples).
+See more examples in the [Docker Agent GitHub repository](https://github.com/docker/cagent/tree/main/examples).
 
 ## Development team
 

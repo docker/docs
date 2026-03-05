@@ -23,7 +23,7 @@ Tool invocation flow:
 
 1. Agent analyzes the task and determines which tool to use
 2. Agent constructs tool parameters based on requirements
-3. cagent executes the tool and returns results
+3. Docker Agent executes the tool and returns results
 4. Agent processes results and decides next steps
 
 Agents can call multiple tools in sequence or make decisions based on tool
@@ -32,10 +32,10 @@ task and available capabilities.
 
 ## Tool types
 
-cagent supports three types of toolsets:
+Docker Agent supports three types of toolsets:
 
 Built-in toolsets
-: Core functionality built directly into cagent (`filesystem`, `shell`,
+: Core functionality built directly into Docker Agent (`filesystem`, `shell`,
 `memory`, etc.). These provide essential capabilities for file operations,
 command execution, and state management.
 MCP toolsets
@@ -224,7 +224,7 @@ processes, interact with CLI tools, or perform system operations. The agent can
 run commands in the foreground or background.
 
 Commands execute in the current working directory and inherit environment
-variables from the cagent process. This toolset is powerful but should be used
+variables from the Docker Agent process. This toolset is powerful but should be used
 with appropriate security considerations.
 
 #### Configuration
@@ -283,7 +283,7 @@ relationships between tasks, and automatically track which tasks are blocked by
 incomplete dependencies. Tasks are sorted by priority and blocking status,
 making it easy to identify the next actionable work.
 
-Tasks are stored in a JSON file and persist across cagent sessions.
+Tasks are stored in a JSON file and persist across Docker Agent sessions.
 
 #### Configuration
 
@@ -331,7 +331,7 @@ context, previous decisions, and other information that should persist. Useful
 for agents that interact with users over time or need to maintain state about
 a project or environment.
 
-Memories are stored in a local database file and persist across cagent
+Memories are stored in a local database file and persist across Docker Agent
 sessions.
 
 #### Configuration

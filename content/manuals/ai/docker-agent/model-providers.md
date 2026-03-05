@@ -5,7 +5,7 @@ keywords: [docker agent, model providers, api keys, anthropic, openai, google, g
 weight: 10
 ---
 
-To run cagent, you need a model provider. You can either use a cloud provider
+To run Docker Agent, you need a model provider. You can either use a cloud provider
 with an API key or run models locally with [Docker Model
 Runner](local-models.md).
 
@@ -14,7 +14,7 @@ models with Docker Model Runner](local-models.md).
 
 ## Supported providers
 
-cagent supports these cloud model providers:
+Docker Agent supports these cloud model providers:
 
 - Anthropic - Claude models
 - OpenAI - GPT models
@@ -134,7 +134,7 @@ agents:
       base_url: https://your-provider.example.com/v1
 ```
 
-By default, cagent uses the `OPENAI_API_KEY` environment variable for
+By default, Docker Agent uses the `OPENAI_API_KEY` environment variable for
 authentication. If your provider uses a different variable, specify it with
 `token_key`:
 

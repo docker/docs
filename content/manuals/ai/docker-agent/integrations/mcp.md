@@ -14,7 +14,7 @@ keywords:
 weight: 50
 ---
 
-When you run cagent in MCP mode, your agents show up as tools in Claude Desktop
+When you run Docker Agent in MCP mode, your agents show up as tools in Claude Desktop
 and other MCP clients. Instead of switching to a terminal to run your security
 agent, you ask Claude to use it and Claude calls it for you.
 
@@ -23,7 +23,7 @@ embedded in your editor instead, see [ACP integration](./acp.md).
 
 ## How it works
 
-You configure Claude Desktop (or another MCP client) to connect to cagent. Your
+You configure Claude Desktop (or another MCP client) to connect to Docker Agent. Your
 agents appear in Claude's tool list. When you ask Claude to use one, it calls
 that agent through the MCP protocol.
 
@@ -40,7 +40,7 @@ coordinator—depends on your agent descriptions and what you ask for.
 ## MCP Gateway
 
 Docker provides an [MCP Gateway](/ai/mcp-catalog-and-toolkit/mcp-gateway/) that
-gives cagent agents access to a catalog of pre-configured MCP servers. Instead
+gives agents access to a catalog of pre-configured MCP servers. Instead
 of configuring individual MCP servers, agents can use the gateway to access
 tools like web search, database queries, and more.
 
@@ -54,7 +54,7 @@ agents:
         ref: docker:duckduckgo # Uses Docker MCP Gateway
 ```
 
-The `docker:` prefix tells cagent to use the MCP Gateway for this server. See
+The `docker:` prefix tells Docker Agent to use the MCP Gateway for this server. See
 the [MCP Gateway documentation](/ai/mcp-catalog-and-toolkit/mcp-gateway/) for
 available servers and configuration options.
 
@@ -77,12 +77,12 @@ Before configuring MCP integration, you need:
 ## MCP client configuration
 
 Your MCP client needs to know how to start Docker Agent and communicate with it. This
-typically involves adding cagent as an MCP server in your client's
+typically involves adding Docker Agent as an MCP server in your client's
 configuration.
 
 ### Claude Desktop
 
-Add cagent to your Claude Desktop MCP settings file:
+Add Docker Agent to your Claude Desktop MCP settings file:
 
 - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
@@ -115,7 +115,7 @@ Configuration breakdown:
 
 - `command`: Full path to your `docker` binary (use `which docker` to find it), or path to `docker-agent` if not using the Docker CLI plugin
 - `args`: MCP command arguments:
-  - `mcp`: The subcommand to run cagent in MCP mode
+  - `mcp`: The subcommand to run `docker agent` in MCP mode
   - `dockereng/myagent`: Your agent configuration (local file path or OCI
     reference)
   - `--working-dir`: Optional working directory for agent execution
@@ -128,13 +128,13 @@ appear as available tools.
 
 ### Claude Code
 
-Add cagent as an MCP server using the `claude mcp add` command:
+Add Docker Agent as an MCP server using the `claude mcp add` command:
 
 ```console
 $ claude mcp add --transport stdio myagent \
   --env OPENAI_API_KEY=$OPENAI_API_KEY \
   --env ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY \
-  -- cagent mcp /path/to/agent.yml --working-dir $(pwd)
+  -- docker agent serve mcp /path/to/agent.yml --working-dir $(pwd)
 ```
 
 Command breakdown:
@@ -144,7 +144,7 @@ Command breakdown:
 - `myagent`: Name for this MCP server in Claude Code
 - `--env`: Pass environment variables (repeat for each variable)
 - `--`: Separates Claude Code options from the MCP server command
-- `docker agent serve mcp /path/to/agent.yml`: The cagent MCP command with the path to your
+- `docker agent serve mcp /path/to/agent.yml`: The Docker Agent MCP command with the path to your
   agent configuration
 - `--working-dir $(pwd)`: Set the working directory for agent execution
 
@@ -155,7 +155,7 @@ sessions.
 
 For other MCP-compatible clients, you need to:
 
-1. Start cagent with `docker agent serve mcp /path/to/agent.yml --working-dir /project/path`
+1. Start Docker Agent with `docker agent serve mcp /path/to/agent.yml --working-dir /project/path`
 2. Configure the client to communicate with Docker Agent over stdio
 3. Pass required environment variables (API keys, etc.)
 
@@ -248,13 +248,13 @@ the right tools and that its instructions make sense when it's called directly.
 Verify your MCP integration works:
 
 1. Restart your MCP client after configuration changes
-2. Check that cagent agents appear as available tools
+2. Check that agents appear as available tools
 3. Invoke an agent with a simple test prompt
 4. Verify the agent can access its configured tools (filesystem, shell, etc.)
 
 If agents don't appear or fail to execute, check:
 
-- `cagent` binary path is correct and executable
+- `docker agent` command is available and executable
 - Agent configuration file exists and is valid
 - All required API keys are set in environment variables
 - Working directory path exists and has appropriate permissions

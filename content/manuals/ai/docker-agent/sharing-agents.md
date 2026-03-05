@@ -67,8 +67,8 @@ the latest version:
 {
   "agent_servers": {
     "myagent": {
-      "command": "cagent",
-      "args": ["acp", "agentcatalog/pirate"]
+      "command": "docker",
+      "args": ["agent", "aserve", "acp", "agentcatalog/pirate"]
     }
   }
 }
