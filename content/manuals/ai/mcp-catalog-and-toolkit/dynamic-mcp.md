@@ -4,11 +4,6 @@ linkTitle: Dynamic discovery
 description: Discover and add MCP servers on-demand using natural language with Dynamic MCP servers
 keywords: dynamic mcps, mcp discovery, mcp-find, mcp-add, code-mode, ai agents, model context protocol
 weight: 40
-params:
-  sidebar:
-    badge:
-      color: green
-      text: New
 ---
 
 Dynamic MCP enables AI agents to discover and add MCP servers on-demand during
