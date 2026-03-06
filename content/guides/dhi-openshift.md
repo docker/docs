@@ -1,17 +1,17 @@
------
-
-## title: Use Docker Hardened Images with OpenShift
+---
+title: Use Docker Hardened Images with Red Hat OpenShift
 description: Deploy Docker Hardened Images on Red Hat OpenShift Container Platform, covering Security Context Constraints, arbitrary user ID assignment, file permissions, and best practices.
-keywords: docker hardened images, dhi, openshift, OCP, SCC, security context constraints, nonroot, distroless, containers, red hat
-tags: [“Docker Hardened Images”, “dhi”]
+keywords: docker hardened images, dhi, openshift, OCP, SCC, security context constraints, non-root, distroless, containers, red hat
+tags: ["Docker Hardened Images", "dhi"]
 params:
-proficiencyLevel: Intermediate
-time: 30 minutes
-prerequisites: |
-- An OpenShift cluster (version 4.11 or later recommended)
-- The `oc` CLI authenticated to your cluster
-- A Docker Hub account with access to Docker Hardened Images
-- Familiarity with OpenShift Security Context Constraints (SCCs)
+  proficiencyLevel: Intermediate
+  time: 30 minutes
+  prerequisites:
+    - An OpenShift cluster (version 4.11 or later recommended)
+    - The oc CLI authenticated to your cluster
+    - A Docker Hub account with access to Docker Hardened Images
+    - Familiarity with OpenShift Security Context Constraints (SCCs)
+---
 
 Docker Hardened Images (DHI) can be deployed on Red Hat OpenShift Container
 Platform, but OpenShift’s security model differs from standard Kubernetes in
@@ -38,8 +38,8 @@ The key differences that affect DHI deployments:
 arbitrarily assigned user ID (UID) from a range allocated to each project. The
 default `restricted-v2` SCC (introduced in OpenShift 4.11) uses the
 `MustRunAsRange` strategy, which overrides the `USER` directive in the container
-image with a UID from the project’s allocated range (typically starting above
-1000000000). This means even though a DHI image specifies a nonroot user
+image with a UID from the project’s allocated range (typically starting higher than
+1000000000). This means even though a DHI image specifies a non-root user
 (UID 65532), OpenShift will run the container as a different, unpredictable UID.
 
 **Root group requirement.** OpenShift assigns the arbitrary UID to the root
@@ -254,7 +254,7 @@ This can cause issues with applications that:
 - Write to directories owned by a specific UID
 - Check `/etc/passwd` for the running user
 
-### Add a passwd entry for the arbitrary UID
+### Add a `passwd` entry for the arbitrary UID
 
 Some applications (notably those using certain Python or Java libraries) require
 a valid `/etc/passwd` entry for the running user. You can handle this with a
@@ -293,12 +293,12 @@ CMD ["python", "app/main.py"]
 > [!NOTE]
 > 
 > For distroless runtime images (no shell), the passwd-injection pattern is not
-> possible. Instead, use the `nonroot` SCC (described below) to run with the
+> possible. Instead, use the `nonroot` SCC (described in the following section) to run with the
 > image’s built-in UID so the existing `/etc/passwd` entry matches the running
 > process. Alternatively, OpenShift 4.x automatically injects the arbitrary UID
 > into `/etc/passwd` in most cases, which resolves this for many applications.
 
-## Use the nonroot SCC for fixed UIDs
+## Use the non-root SCC for fixed UIDs
 
 If your application requires running as the specific UID defined in the image
 (typically 65532 for DHI), you can use the `nonroot` SCC instead of the default
@@ -389,7 +389,7 @@ CMD ["node", "dist/index.js"]
 The final runtime image is non-root and distroless, fully compatible with
 `restricted-v2`.
 
-### Option 2: Grant the anyuid SCC for debugging
+### Option 2: Grant the `anyuid` SCC for debugging
 
 If you need to run a `-dev` variant directly in OpenShift for debugging, grant
 the `anyuid` SCC to a dedicated service account:
@@ -421,7 +421,7 @@ spec:
 > The `anyuid` SCC allows running as any UID including root. Only use this for
 > temporary debugging — never in production workloads.
 
-### Option 3: Use oc debug or ephemeral containers
+### Option 3: Use `oc debug` or ephemeral containers
 
 For distroless runtime images with no shell, use OpenShift-native debugging
 tools instead of `docker debug` (which only works with Docker Engine, not with
@@ -576,7 +576,7 @@ automatically injects the arbitrary UID into `/etc/passwd` in most cases. If
 your application still fails, use the passwd-injection pattern (requires a `-dev`
 variant) or use the `nonroot` SCC to run with the image’s built-in UID.
 
-**Pod fails to bind to port 80 or 443.** Ports below 1024 require root
+**Pod fails to bind to port 80 or 443.** Ports lower than 1024 require root
 privileges. DHI images use unprivileged ports by default (for example, Nginx
 uses 8080). Configure your OpenShift Service to map the external port to the
 container’s unprivileged port:
@@ -611,7 +611,7 @@ and use `COPY --chown` to transfer results.
 |Non-root by default          |Yes (UID 65532)                  |No (root)           |Yes (configurable UID)           |
 |Arbitrary UID support        |Yes, with `chown <UID>:0`        |Yes                 |Yes, with `chown <UID>:0`        |
 |Distroless (no shell)        |Yes — no `RUN` in Dockerfile     |No                  |Yes — no `RUN` in Dockerfile     |
-|Unprivileged ports           |Yes (above 1024)                 |Configurable        |Yes (above 1024)                 |
+|Unprivileged ports           |Yes (higher than 1024)                 |Configurable        |Yes (higher than 1024)                 |
 |SLSA Build Level 3           |Yes                              |Yes                 |Yes                              |
 |Debug on cluster             |`oc debug` / ephemeral containers|`oc exec` with shell|`oc debug` / ephemeral containers|
 
