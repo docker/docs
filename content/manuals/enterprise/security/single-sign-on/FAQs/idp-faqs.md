@@ -27,7 +27,10 @@ To turn on SSO in Docker, you need the following from your IdP:
 
 ## What happens if my existing certificate expires?
 
-If your certificate expires, contact your identity provider to retrieve a new X.509 certificate. Then update the certificate in the [SSO configuration settings](/manuals/enterprise/security/single-sign-on/manage.md#manage-sso-connections) in the Docker Admin Console.
+Docker recommends that you contact your identity provider to retrieve a new X.509 certificate, then update the certificate in the [SSO configuration settings](/manuals/enterprise/security/single-sign-on/manage.md#manage-sso-connections) in the Docker Admin Console.
+
+- If your organization doesn't enforce SSO, your users can log in with their username and password credentials.
+- If your organization enforces SSO and credentials won't work, then Docker recommends you [contact us](https://app.docker.com/support/contact) for additional support. 
 
 ## What happens if my IdP goes down when SSO is turned on?
 
