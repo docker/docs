@@ -29,7 +29,7 @@ By default, the following actions require approval before Gordon can use them:
 To change the default permission settings for Gordon:
 
 1. Open Docker Desktop.
-2. Select **Ask Gordon** in the sidebar.
+2. Select **Gordon** in the sidebar.
 3. Select the settings icon at the bottom of text input.
 
    ![Session settings icon](../images/perm_settings.avif)
