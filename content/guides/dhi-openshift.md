@@ -528,7 +528,7 @@ oc exec <pod-name> -- id
 
 With the `restricted-v2` SCC, you should see output like:
 
-```
+```text
 uid=1000650000 gid=0(root) groups=0(root),1000650000
 ```
 
