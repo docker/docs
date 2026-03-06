@@ -14,13 +14,13 @@ explains what Gordon can do and the tools it uses.
 
 Gordon uses five capabilities to take action on your behalf:
 
-- Specialized agents for specific Docker tasks
+- Specialized sub-agents for specific Docker tasks
 - Shell access to run commands
 - Filesystem access to read and write files
 - Knowledge base of Docker documentation and best practices
 - Web access to fetch external resources
 
-## Agent architecture
+## Internal architecture
 
 Gordon uses a primary agent that handles most tasks, with a specialized
 sub-agent for specific workflows:
