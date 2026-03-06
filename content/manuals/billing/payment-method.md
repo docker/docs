@@ -237,8 +237,7 @@ verification email and enter the amount of this deposit to verify your account.
 
 ## Failed payments
 
-You can't manually retry a failed payment. Docker will retry failed payments
-based on the retry schedule.
+If your payment fails, you can select **Pay now**, which redirects you from Docker Hub to the invoice in Stripe. You can then manually retry the payment through Stripe.  
 
 If your subscription payment fails, there is a grace period of 15 days,
 including the due date. Docker retries to collect the payment 3 times using the
