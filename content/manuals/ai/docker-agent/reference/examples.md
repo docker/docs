@@ -12,7 +12,7 @@ See more examples in the [Docker Agent GitHub repository](https://github.com/doc
 
 {{% cagent-example.inline "dev-team.yaml" %}}
 {{- $example := .Get 0 }}
-{{- $baseUrl := "https://raw.githubusercontent.com/docker/cagent/refs/heads/main/examples" }}
+{{- $baseUrl := "https://raw.githubusercontent.com/docker/docker-agent/refs/heads/main/examples" }}
 {{- $url := fmt.Printf "%s/%s" $baseUrl $example }}
 {{- with resources.GetRemote $url }}
 {{ $data := .Content | transform.Unmarshal }}
