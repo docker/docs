@@ -3,15 +3,19 @@ title: Docker Agent sandbox
 description: |
   Use Docker Agent in Docker Sandboxes with multi-provider authentication
   supporting OpenAI, Anthropic, and more.
-keywords: docker, sandboxes, docker agent, ai agent, multi-provider, authentication
+keywords: docker, sandboxes, docker agent, multi-provider, authentication
+aliases:
+  - /ai/sandboxes/agents/cagent/
+  - /manuals/ai/sandboxes/agents/cagent/
 weight: 60
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes" >}}
 
-This guide covers authentication, configuration, and usage of Docker Agent in
-a sandboxed environment. [Docker Agent](/ai/docker-agent/) is Docker's open source coding
-agent that supports multiple providers.
+This page covers running [Docker Agent](/ai/docker-agent/) inside Docker
+Sandboxes. Docker Agent is also available as a standalone CLI tool. See the
+full documentation for standalone usage, configuration reference, and building
+agent teams.
 
 ## Quick start
 

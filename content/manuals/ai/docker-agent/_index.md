@@ -16,10 +16,15 @@ keywords: [ai, agent, docker agent, cagent]
 
 {{< summary-bar feature_name="Docker Agent" >}}
 
-[Docker Agent](https://github.com/docker/cagent) is an open source tool for building
-teams of specialized AI agents. Instead of prompting one generalist model, you
-define agents with specific roles and instructions that collaborate to solve
-problems. Run these agent teams from your terminal using any LLM provider.
+[Docker Agent](https://github.com/docker/cagent) is an open-source framework
+for building teams of specialized AI agents. Instead of prompting one
+generalist model, you define agents with specific roles and instructions that
+collaborate to solve problems. Run these agent teams from your terminal using
+any LLM provider.
+
+> [!NOTE]
+> Docker Agent is a framework for building and running custom agent teams.
+> For Docker's built-in AI assistant, see [Gordon](/ai/gordon/) (`docker ai`).
 
 ## Why agent teams
 

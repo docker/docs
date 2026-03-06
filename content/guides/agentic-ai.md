@@ -12,8 +12,8 @@ params:
 > [!TIP]
 >
 > This guide uses the familiar Docker Compose workflow to orchestrate agentic AI
-> applications. For a smoother development experience, check out [Docker
-> Docker Agent](../manuals/ai/docker-agent/_index.md), a purpose-built agent runtime that
+> applications. For a smoother development experience, check out
+> [Docker Agent](../manuals/ai/docker-agent/_index.md), a purpose-built agent runtime that
 > simplifies running and managing AI agents.
 
 ## Introduction
@@ -65,11 +65,11 @@ all works together.
 
 To follow this guide, you need to:
 
- - [Install Docker Desktop 4.43 or later](../get-started/get-docker.md)
- - [Enable Docker Model Runner](/manuals/ai/model-runner.md#enable-dmr-in-docker-desktop)
- - At least the following hardware specifications:
-    - VRAM: 3.5 GB
-    - Storage: 2.31 GB
+- [Install Docker Desktop 4.43 or later](../get-started/get-docker.md)
+- [Enable Docker Model Runner](/manuals/ai/model-runner.md#enable-dmr-in-docker-desktop)
+- At least the following hardware specifications:
+  - VRAM: 3.5 GB
+  - Storage: 2.31 GB
 
 ## Step 1: Clone the sample application
 
@@ -90,8 +90,9 @@ run in the cloud. This particular example uses the [Gemma 3 4B
 model](https://hub.docker.com/r/ai/gemma3) with a context size of `10000`.
 
 Hardware requirements:
- - VRAM: 3.5 GB
- - Storage: 2.31 GB
+
+- VRAM: 3.5 GB
+- Storage: 2.31 GB
 
 If your machine exceeds those requirements, consider running the application with a larger
 context size or a larger model to improve the agents performance. You can easily
@@ -113,7 +114,7 @@ To run the application locally, follow these steps:
    incorrect fact in the prompt and hit enter. An agent searches DuckDuckGo to
    verify it and another agent revises the output.
 
-    ![Screenshot of the application](./images/agentic-ai-app.png)
+   ![Screenshot of the application](./images/agentic-ai-app.png)
 
 3. Press ctrl-c in the terminal to stop the application when you're done.
 
@@ -136,7 +137,7 @@ services:
     depends_on:
       - mcp-gateway
     models:
-      gemma3 :
+      gemma3:
         endpoint_var: MODEL_RUNNER_URL
         model_var: MODEL_RUNNER_MODEL
 
@@ -160,16 +161,16 @@ models:
 
 The app consists of three main components:
 
- - The `adk` service, which is the web application that runs the agentic AI
-   application. This service talks to the MCP gateway and model.
- - The `mcp-gateway` service, which is the MCP gateway that connects the app
-   to external tools and services.
- - The `models` block, which defines the model to use with the application.
+- The `adk` service, which is the web application that runs the agentic AI
+  application. This service talks to the MCP gateway and model.
+- The `mcp-gateway` service, which is the MCP gateway that connects the app
+  to external tools and services.
+- The `models` block, which defines the model to use with the application.
 
 When you examine the `compose.yaml` file, you'll notice two notable elements for the model:
 
- - A service‑level `models` block in the `adk` service
- - A top-level `models` block
+- A service‑level `models` block in the `adk` service
+- A top-level `models` block
 
 These two blocks together let Docker Compose automatically start and connect
 your ADK web app to the specified LLM.
@@ -189,7 +190,7 @@ example, it uses the [`duckduckgo` MCP
 server](https://hub.docker.com/mcp/server/duckduckgo/overview) to perform web
 searches.
 
->  [!TIP]
+> [!TIP]
 >
 > Looking for more MCP servers to use? Check out the [Docker MCP
 > Catalog](https://hub.docker.com/catalogs/mcp/).
