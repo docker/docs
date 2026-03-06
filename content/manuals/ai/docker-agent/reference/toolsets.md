@@ -511,4 +511,4 @@ agent to transfer the entire conversation to a different agent.
 - Read the [Configuration file reference](./config.md) for YAML file structure
 - Review the [CLI reference](./cli.md) for running agents
 - Explore [MCP servers](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md) for extended capabilities
-- Browse [example configurations](https://github.com/docker/cagent/tree/main/examples)
+- Browse [example configurations](https://github.com/docker/docker-agent/tree/main/examples)

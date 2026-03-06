@@ -59,7 +59,7 @@ jobs:
             Fixes #${{ github.event.issue.number }}
 
             ---
-            🤖 Generated with [cagent](https://github.com/docker/cagent)
+            🤖 Generated with [Docker Agent](https://github.com/docker/docker-agent)
 
             Keep the PR body brief and practical. Don't over-explain or add sections
             that aren't needed.
