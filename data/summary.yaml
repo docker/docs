@@ -68,7 +68,7 @@ Buildx no default:
   requires: Docker Buildx [0.10.4](https://github.com/docker/buildx/releases/tag/v0.10.4) and later
 Cache backend API:
   availability: Experimental
-cagent:
+Docker Agent:
   availability: Experimental
 Company:
   subscription: [Business]

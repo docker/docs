@@ -91,7 +91,7 @@ Docker Sandboxes works with multiple AI coding agents:
 - **Copilot** - GitHub Copilot agent (in development)
 - **Gemini** - Google's Gemini agent (in development)
 - **OpenCode** - Multi-provider agent with TUI interface (in development)
-- **cagent** - Docker's multi-provider coding agent (in development)
+- **Docker Agent** - Docker's multi-provider coding agent (in development)
 - **Kiro** - Interactive agent with device flow auth (in development)
 - **Shell** - Minimal sandbox for manual agent installation
 

@@ -1,8 +1,8 @@
 ---
 title: CLI reference
 linkTitle: CLI
-description: Complete reference for cagent command-line interface
-keywords: [ai, agent, cagent, cli, command line]
+description: Complete reference for Docker Agent command-line interface
+keywords: [ai, agent, docker agent, cli, command line]
 weight: 30
 ---
 
@@ -15,7 +15,7 @@ reference](./toolsets.md).
 ## Synopsis
 
 ```console
-$ cagent [command] [flags]
+$ docker agent [command] [flags]
 ```
 
 ## Global flags
@@ -53,7 +53,7 @@ systems to discover and interact with your agent. Auto-selects an available
 port if not specified.
 
 ```console
-$ cagent a2a agent-file|registry-ref
+$ docker agent serve a2a agent-file|registry-ref
 ```
 
 > [!NOTE]
@@ -77,8 +77,8 @@ Supports [runtime flags](#runtime-flags).
 Examples:
 
 ```console
-$ cagent a2a ./agent.yaml --port 8080
-$ cagent a2a agentcatalog/pirate --port 9000
+$ docker agent serve a2a ./agent.yaml --port 8080
+$ docker agent serve a2a agentcatalog/pirate --port 9000
 ```
 
 ### acp
@@ -87,7 +87,7 @@ Start agent as ACP (Agent Client Protocol) server on stdio for editor integratio
 See [ACP integration](../integrations/acp.md) for setup guides.
 
 ```console
-$ cagent acp agent-file|registry-ref
+$ docker agent serve acp agent-file|registry-ref
 ```
 
 Arguments:
@@ -101,7 +101,7 @@ Supports [runtime flags](#runtime-flags).
 Create alias for agent.
 
 ```console
-$ cagent alias add name target
+$ docker agent alias add name target
 ```
 
 Arguments:
@@ -112,20 +112,20 @@ Arguments:
 Examples:
 
 ```console
-$ cagent alias add dev ./dev-agent.yaml
-$ cagent alias add prod docker.io/user/prod-agent:latest
-$ cagent alias add default ./agent.yaml
+$ docker agent alias add dev ./dev-agent.yaml
+$ docker agent alias add prod docker.io/user/prod-agent:latest
+$ docker agent alias add default ./agent.yaml
 ```
 
-Setting alias name to "default" lets you run `cagent run` without arguments.
+Setting alias name to "default" lets you run `docker agent run` without arguments.
 
 ### alias list
 
 List all aliases.
 
 ```console
-$ cagent alias list
-$ cagent alias ls
+$ docker agent alias list
+$ docker agent alias ls
 ```
 
 ### alias remove
@@ -133,8 +133,8 @@ $ cagent alias ls
 Remove alias.
 
 ```console
-$ cagent alias remove name
-$ cagent alias rm name
+$ docker agent alias remove name
+$ docker agent alias rm name
 ```
 
 Arguments:
@@ -146,7 +146,7 @@ Arguments:
 HTTP API server.
 
 ```console
-$ cagent api agent-file|agents-dir
+$ docker agent serve api agent-file|agents-dir
 ```
 
 Arguments:
@@ -166,9 +166,9 @@ Supports [runtime flags](#runtime-flags).
 Examples:
 
 ```console
-$ cagent api ./agent.yaml
-$ cagent api ./agents/ --listen :9000
-$ cagent api docker.io/user/agent --pull-interval 10
+$ docker agent serve api ./agent.yaml
+$ docker agent serve api ./agents/ --listen :9000
+$ docker agent serve api docker.io/user/agent --pull-interval 10
 ```
 
 The `--pull-interval` flag works only with OCI references. Automatically pulls and reloads at the specified interval.
@@ -178,7 +178,7 @@ The `--pull-interval` flag works only with OCI references. Automatically pulls a
 Build Docker image for agent.
 
 ```console
-$ cagent build agent-file|registry-ref [image-name]
+$ docker agent build agent-file|registry-ref [image-name]
 ```
 
 Arguments:
@@ -198,8 +198,8 @@ Flags:
 Example:
 
 ```console
-$ cagent build ./agent.yaml myagent:latest
-$ cagent build ./agent.yaml --dry-run
+$ docker agent build ./agent.yaml myagent:latest
+$ docker agent build ./agent.yaml --dry-run
 ```
 
 ### catalog list
@@ -207,7 +207,7 @@ $ cagent build ./agent.yaml --dry-run
 List catalog agents.
 
 ```console
-$ cagent catalog list [org]
+$ docker agent catalog list [org]
 ```
 
 Arguments:
@@ -221,7 +221,7 @@ Queries Docker Hub for agent repositories.
 Show resolved agent configuration.
 
 ```console
-$ cagent debug config agent-file|registry-ref
+$ docker agent debug config agent-file|registry-ref
 ```
 
 Arguments:
@@ -237,7 +237,7 @@ Shows canonical configuration in YAML after all processing and defaults.
 List agent tools.
 
 ```console
-$ cagent debug toolsets agent-file|registry-ref
+$ docker agent debug toolsets agent-file|registry-ref
 ```
 
 Arguments:
@@ -253,7 +253,7 @@ Lists all tools for each agent in the configuration.
 Run evaluation tests.
 
 ```console
-$ cagent eval agent-file|registry-ref [eval-dir]
+$ docker agent eval agent-file|registry-ref [eval-dir]
 ```
 
 Arguments:
@@ -268,7 +268,7 @@ Supports [runtime flags](#runtime-flags).
 Single message execution without TUI.
 
 ```console
-$ cagent exec agent-file|registry-ref [message|-]
+$ docker agent exec agent-file|registry-ref [message|-]
 ```
 
 Arguments:
@@ -283,9 +283,9 @@ Supports [runtime flags](#runtime-flags).
 Examples:
 
 ```console
-$ cagent exec ./agent.yaml
-$ cagent exec ./agent.yaml "Check for security issues"
-$ echo "Instructions" | cagent exec ./agent.yaml -
+$ docker agent exec ./agent.yaml
+$ docker agent exec ./agent.yaml "Check for security issues"
+$ echo "Instructions" | docker agent exec ./agent.yaml -
 ```
 
 ### feedback
@@ -293,7 +293,7 @@ $ echo "Instructions" | cagent exec ./agent.yaml -
 Submit feedback.
 
 ```console
-$ cagent feedback
+$ docker agent feedback
 ```
 
 Shows link to submit feedback.
@@ -304,7 +304,7 @@ MCP (Model Context Protocol) server on stdio. Exposes agents as tools to MCP
 clients. See [MCP integration](../integrations/mcp.md) for setup guides.
 
 ```console
-$ cagent mcp agent-file|registry-ref
+$ docker agent serve mcp agent-file|registry-ref
 ```
 
 Arguments:
@@ -316,8 +316,8 @@ Supports [runtime flags](#runtime-flags).
 Examples:
 
 ```console
-$ cagent mcp ./agent.yaml
-$ cagent mcp docker.io/user/agent:latest
+$ docker agent serve mcp ./agent.yaml
+$ docker agent serve mcp docker.io/user/agent:latest
 ```
 
 ### new
@@ -325,7 +325,7 @@ $ cagent mcp docker.io/user/agent:latest
 Create agent configuration interactively.
 
 ```console
-$ cagent new [message...]
+$ docker agent new [message...]
 ```
 
 Flags:
@@ -344,7 +344,7 @@ Opens interactive TUI to configure and generate agent YAML.
 Pull agent from OCI registry.
 
 ```console
-$ cagent pull registry-ref
+$ docker agent pull registry-ref
 ```
 
 Arguments:
@@ -360,7 +360,7 @@ Flags:
 Example:
 
 ```console
-$ cagent pull docker.io/user/agent:latest
+$ docker agent pull docker.io/user/agent:latest
 ```
 
 Saves to local YAML file.
@@ -370,7 +370,7 @@ Saves to local YAML file.
 Push agent to OCI registry.
 
 ```console
-$ cagent push agent-file registry-ref
+$ docker agent push agent-file registry-ref
 ```
 
 Arguments:
@@ -381,7 +381,7 @@ Arguments:
 Example:
 
 ```console
-$ cagent push ./agent.yaml docker.io/myuser/myagent:latest
+$ docker agent push ./agent.yaml docker.io/myuser/myagent:latest
 ```
 
 ### run
@@ -389,7 +389,7 @@ $ cagent push ./agent.yaml docker.io/myuser/myagent:latest
 Interactive terminal UI for agent sessions.
 
 ```console
-$ cagent run [agent-file|registry-ref] [message|-]
+$ docker agent run [agent-file|registry-ref] [message|-]
 ```
 
 Arguments:
@@ -413,11 +413,11 @@ Supports [runtime flags](#runtime-flags).
 Examples:
 
 ```console
-$ cagent run ./agent.yaml
-$ cagent run ./agent.yaml "Analyze this codebase"
-$ cagent run ./agent.yaml --agent researcher
-$ echo "Instructions" | cagent run ./agent.yaml -
-$ cagent run
+$ docker agent run ./agent.yaml
+$ docker agent run ./agent.yaml "Analyze this codebase"
+$ docker agent run ./agent.yaml --agent researcher
+$ echo "Instructions" | docker agent run ./agent.yaml -
+$ docker agent run
 ```
 
 Running without arguments uses the default agent or a "default" alias if configured.
@@ -441,10 +441,10 @@ TUI slash commands:
 Print version information.
 
 ```console
-$ cagent version
+$ docker agent version
 ```
 
-Shows cagent version and commit hash.
+Shows Docker Agent version and commit hash.
 
 ## Environment variables
 
@@ -466,15 +466,15 @@ Without an agent name, the model applies to all agents. With an agent name, it a
 Apply to all agents:
 
 ```console
-$ cagent run ./agent.yaml --model gpt-5
-$ cagent run ./agent.yaml --model anthropic/claude-sonnet-4-5
+$ docker agent run ./agent.yaml --model gpt-5
+$ docker agent run ./agent.yaml --model anthropic/claude-sonnet-4-5
 ```
 
 Apply to specific agents only:
 
 ```console
-$ cagent run ./agent.yaml --model researcher=gpt-5
-$ cagent run ./agent.yaml --model "agent1=gpt-5,agent2=claude-sonnet-4-5"
+$ docker agent run ./agent.yaml --model researcher=gpt-5
+$ docker agent run ./agent.yaml --model "agent1=gpt-5,agent2=claude-sonnet-4-5"
 ```
 
 Providers: `openai`, `anthropic`, `google`, `dmr`

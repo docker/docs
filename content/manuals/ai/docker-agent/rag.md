@@ -1,16 +1,16 @@
 ---
 title: RAG
-description: How RAG gives your cagent agents access to codebases and documentation
-keywords: [cagent, rag, retrieval, embeddings, semantic search]
+description: How RAG gives your agents access to codebases and documentation
+keywords: [docker agent, rag, retrieval, embeddings, semantic search]
 weight: 70
 ---
 
-When you configure a RAG source in cagent, your agent automatically gains a
+When you configure a RAG source in Docker Agent, your agent automatically gains a
 search tool for that knowledge base. The agent decides when to search, retrieves
 only relevant information, and uses it to answer questions or complete tasks -
 all without you manually managing what goes in the prompt.
 
-This guide explains how cagent's RAG system works, when to use it, and how to
+This guide explains how Docker Agent's RAG system works, when to use it, and how to
 configure it effectively for your content.
 
 > [!NOTE]
@@ -37,9 +37,9 @@ RAG indexes your content ahead of time and enables semantic search. The agent
 searches pre-indexed content by meaning, not exact words. It retrieves only
 relevant chunks that respect code structure. No wasted context on exploration.
 
-## How RAG works in cagent
+## How RAG works in Docker Agent
 
-Configure a RAG source in your cagent config:
+Configure a RAG source in your Docker Agent config:
 
 ```yaml
 rag:
@@ -58,7 +58,7 @@ agents:
     rag: [codebase]
 ```
 
-When you reference `rag: [codebase]`, cagent:
+When you reference `rag: [codebase]`, Docker Agent:
 
 1. **At startup** - Indexes your documents (first run only, blocks until complete)
 2. **During conversation** - Gives the agent a search tool
@@ -70,7 +70,7 @@ what goes in context - the agent does.
 
 ### The indexing process
 
-On first run, cagent:
+On first run, Docker Agent:
 
 - Reads files from configured paths
 - Respects `.gitignore` patterns (can be disabled)
@@ -78,13 +78,13 @@ On first run, cagent:
 - Creates searchable representations using your chosen strategy
 - Stores everything in a local database
 
-Subsequent runs reuse the index. If files change, cagent detects this and
+Subsequent runs reuse the index. If files change, Docker Agent detects this and
 re-indexes only what changed, keeping your knowledge base up to date without
 manual intervention.
 
 ## Retrieval strategies
 
-Different content requires different retrieval approaches. cagent supports
+Different content requires different retrieval approaches. Docker Agent supports
 three strategies, each optimized for different use cases. The defaults work
 well, but understanding the trade-offs helps you choose the right approach.
 

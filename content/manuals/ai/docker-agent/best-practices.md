@@ -1,11 +1,11 @@
 ---
 title: Best practices
-description: Patterns and techniques for building effective cagent agents
-keywords: [cagent, best practices, patterns, agent design, optimization]
+description: Patterns and techniques for building effective agents
+keywords: [docker agent, best practices, patterns, agent design, optimization]
 weight: 40
 ---
 
-Patterns you learn from building and running cagent agents. These aren't
+Patterns you learn from building and running agents with Docker Agent. These aren't
 features or configuration options - they're approaches that work well in
 practice.
 

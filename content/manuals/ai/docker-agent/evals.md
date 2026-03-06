@@ -1,7 +1,7 @@
 ---
 title: Evals
 description: Test your agents with saved conversations
-keywords: [cagent, evaluations, testing, evals]
+keywords: [docker agent, evaluations, testing, evals]
 weight: 80
 ---
 
@@ -12,7 +12,7 @@ tell you if behavior changed, not whether it's right or wrong.
 
 ## What are evals
 
-An eval is a saved conversation you can replay. When you run evals, cagent
+An eval is a saved conversation you can replay. When you run evals, Docker Agent
 replays the user messages and compares the new responses against the original
 saved conversation. High scores mean the agent behaved similarly; low scores
 mean behavior changed.
@@ -48,7 +48,7 @@ bad.
 Save a conversation from an interactive session:
 
 ```console
-$ cagent run ./agent.yaml
+$ docker agent run ./agent.yaml
 ```
 
 Have a conversation with your agent, then save it as an eval:
@@ -66,25 +66,25 @@ directory. You can organize eval files in subdirectories if needed.
 Run all evals in the default directory:
 
 ```console
-$ cagent eval ./agent.yaml
+$ docker agent eval ./agent.yaml
 ```
 
 Use a custom eval directory:
 
 ```console
-$ cagent eval ./agent.yaml ./my-evals
+$ docker agent eval ./agent.yaml ./my-evals
 ```
 
 Run evals against an agent from a registry:
 
 ```console
-$ cagent eval agentcatalog/myagent
+$ docker agent eval agentcatalog/myagent
 ```
 
 Example output:
 
 ```console
-$ cagent eval ./agent.yaml
+$ docker agent eval ./agent.yaml
 --- 0
 First message: tell me something interesting about kil
 Eval file: c7e556c5-dae5-4898-a38c-73cc8e0e6abe
@@ -96,7 +96,7 @@ Output tokens: 177
 
 ## Understanding results
 
-For each eval, cagent shows:
+For each eval, Docker Agent shows:
 
 - **First message** - The initial user message from the saved conversation
 - **Eval file** - The UUID of the eval file being run
@@ -156,7 +156,7 @@ see what shifted.
 
 ## What's next
 
-- Check the [CLI reference](reference/cli.md#eval) for all `cagent eval`
+- Check the [CLI reference](reference/cli.md#eval) for all `docker agent eval`
   options
 - Learn [best practices](best-practices.md) for building effective agents
 - Review [example configurations](https://github.com/docker/cagent/tree/main/examples)

@@ -1,19 +1,22 @@
 ---
-title: cagent
-description: cagent lets you build, orchestrate, and share AI agents that work together as a team.
+title: Docker Agent
+description: Docker Agent lets you build, orchestrate, and share AI agents that work together as a team.
 weight: 60
+aliases:
+  - /ai/cagent/
+  - /manuals/ai/cagent/
 params:
   sidebar:
     group: Open source
     badge:
       color: violet
       text: Experimental
-keywords: [ai, agent, cagent]
+keywords: [ai, agent, docker agent, cagent]
 ---
 
-{{< summary-bar feature_name="cagent" >}}
+{{< summary-bar feature_name="Docker Agent" >}}
 
-[cagent](https://github.com/docker/cagent) is an open source tool for building
+[Docker Agent](https://github.com/docker/cagent) is an open source tool for building
 teams of specialized AI agents. Instead of prompting one generalist model, you
 define agents with specific roles and instructions that collaborate to solve
 problems. Run these agent teams from your terminal using any LLM provider.
@@ -21,7 +24,7 @@ problems. Run these agent teams from your terminal using any LLM provider.
 ## Why agent teams
 
 One agent handling complex work means constant context-switching. Split the work
-across focused agents instead - each handles what it's best at. cagent manages
+across focused agents instead - each handles what it's best at. Docker Agent manages
 the coordination.
 
 Here's a two-agent team that debugs problems:
@@ -58,7 +61,7 @@ its specialty.
 
 ## Installation
 
-cagent is included in Docker Desktop 4.49 and later.
+Docker Agent is included in Docker Desktop 4.63 and later. In Docker Desktop versions 4.49 through 4.62, this feature was called cagent.
 
 For Docker Engine users or custom installations:
 
@@ -66,8 +69,10 @@ For Docker Engine users or custom installations:
 - **Winget**: `winget install Docker.Cagent`
 - **Pre-built binaries**: [GitHub
   releases](https://github.com/docker/cagent/releases)
-- **From source**: See the [cagent
+- **From source**: See the [Docker Agent
   repository](https://github.com/docker/cagent?tab=readme-ov-file#build-from-source)
+
+The `docker-agent` binary should be copied to `~/.docker/cli-plugins` and then can be used with the `docker agent` command. Alternatively, it can be used as a standalone binary.
 
 ## Get started
 
@@ -86,7 +91,7 @@ Try the bug analyzer team:
 3. Run your agent team:
 
    ```console
-   $ cagent run debugger.yaml
+   $ docker agent run debugger.yaml
    ```
 
 You'll see a prompt where you can describe bugs or paste error messages. The
@@ -138,8 +143,8 @@ Agent configurations are packaged as OCI artifacts. Push and pull them like
 container images:
 
 ```console
-$ cagent push ./debugger.yaml myusername/debugger
-$ cagent pull myusername/debugger
+$ docker agent push ./debugger.yaml myusername/debugger
+$ docker agent pull myusername/debugger
 ```
 
 Use Docker Hub or any OCI-compatible registry. Pushing creates the repository if
@@ -149,11 +154,11 @@ it doesn't exist yet.
 
 - Follow the [tutorial](./tutorial.md) to build your first coding agent
 - Learn [best practices](./best-practices.md) for building effective agents
-- Integrate cagent with your [editor](./integrations/acp.md) or use agents as
+- Integrate Docker Agent with your [editor](./integrations/acp.md) or use agents as
   [tools in MCP clients](./integrations/mcp.md)
-- Browse example agent configurations in the [cagent
+- Browse example agent configurations in the [Docker Agent
   repository](https://github.com/docker/cagent/tree/main/examples)
-- Use `cagent new` to generate agent teams with AI <!-- TODO: link to some page
+- Use `docker agent new` to generate agent teams with AI <!-- TODO: link to some page
   where we explain this, probably a CLI reference? -->
 - Connect agents to external tools via the [Docker MCP
   Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)

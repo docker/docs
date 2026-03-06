@@ -1,21 +1,21 @@
 ---
-title: cagent sandbox
+title: Docker Agent sandbox
 description: |
-  Use Docker cagent in Docker Sandboxes with multi-provider authentication
+  Use Docker Agent in Docker Sandboxes with multi-provider authentication
   supporting OpenAI, Anthropic, and more.
-keywords: docker, sandboxes, cagent, ai agent, multi-provider, authentication
+keywords: docker, sandboxes, docker agent, ai agent, multi-provider, authentication
 weight: 60
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes" >}}
 
-This guide covers authentication, configuration, and usage of Docker cagent in
-a sandboxed environment. [cagent](/ai/cagent/) is Docker's open source coding
+This guide covers authentication, configuration, and usage of Docker Agent in
+a sandboxed environment. [Docker Agent](/ai/docker-agent/) is Docker's open source coding
 agent that supports multiple providers.
 
 ## Quick start
 
-Create a sandbox and run cagent for a project directory:
+Create a sandbox and run Docker Agent for a project directory:
 
 ```console
 $ docker sandbox run cagent ~/my-project
@@ -30,7 +30,7 @@ $ docker sandbox run cagent
 
 ## Authentication
 
-cagent uses proxy-managed authentication for all supported providers. Docker
+Docker Agent uses proxy-managed authentication for all supported providers. Docker
 Sandboxes intercepts API requests and injects credentials transparently. You
 provide your API keys through environment variables, and the sandbox handles
 credential management.
@@ -48,7 +48,7 @@ export NEBIUS_API_KEY=xxxxx
 export MISTRAL_API_KEY=xxxxx
 ```
 
-You only need to configure the providers you want to use. cagent detects
+You only need to configure the providers you want to use. Docker Agent detects
 available credentials and routes requests to the appropriate provider.
 
 ### Environment variable setup
@@ -72,25 +72,25 @@ The sandbox detects the environment variables and uses them automatically.
 
 ## Configuration
 
-cagent supports YOLO mode that disables safety checks and approval prompts.
+Docker Agent supports YOLO mode that disables safety checks and approval prompts.
 This mode grants the agent full access to your sandbox environment without
 interactive confirmation.
 
 ### Pass options at runtime
 
-Pass cagent CLI options after the sandbox name and a `--` separator:
+Pass Docker Agent CLI options after the sandbox name and a `--` separator:
 
 ```console
 $ docker sandbox run <sandbox-name> -- run --yolo
 ```
 
-The `run --yolo` command starts cagent with approval prompts disabled.
+The `run --yolo` command starts Docker Agent with approval prompts disabled.
 
 ## Base image
 
 Template: `docker/sandbox-templates:cagent`
 
-cagent supports multiple LLM providers with automatic credential injection
+Docker Agent supports multiple LLM providers with automatic credential injection
 through the sandbox proxy. Launches with `run --yolo` by default.
 
 See [Custom templates](../templates.md) to build your own agent images.

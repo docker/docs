@@ -32,10 +32,10 @@ params:
     description: Run containers programmatically in your preferred programming language.
     icon: /icons/Testcontainers.svg
     link: /testcontainers/
-  - title: Cagent
+  - title: Docker Agent
     description: The open-source multi-agent solution to assist you in your tasks.
     icon: /icons/cagent.svg
-    link: /ai/cagent
+    link: /ai/docker-agent
   ai:
   - title: Ask Gordon
     description: Streamline your workflow and get the most out of the Docker ecosystem with your personal AI assistant.

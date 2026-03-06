@@ -256,7 +256,7 @@ $ docker sandbox ls
 SANDBOX   AGENT    STATUS    WORKSPACE
 sb1       claude   running   /Users/bob/src/project-a
 sb2       claude   running   /Users/bob/src/project-a, /Users/bob/src/project-b
-sb3       cagent   running   /Users/bob/src/project-a
+sb3       Docker Agent running   /Users/bob/src/project-a
 ```
 
 Each sandbox runs in isolation with separate configurations while sharing the

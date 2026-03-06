@@ -13,7 +13,7 @@ params:
 >
 > This guide uses the familiar Docker Compose workflow to orchestrate agentic AI
 > applications. For a smoother development experience, check out [Docker
-> cagent](../manuals/ai/cagent/_index.md), a purpose-built agent runtime that
+> Docker Agent](../manuals/ai/docker-agent/_index.md), a purpose-built agent runtime that
 > simplifies running and managing AI agents.
 
 ## Introduction
