@@ -66,7 +66,7 @@ scan results.
 
 > **Why provenance attestation is required**
 >
-> Docker Scout uses max-mode provenance attestations — not image labels — to
+> Docker Scout uses max-mode provenance attestations, not image labels to
 > identify the DHI base image. This is by design. Image labels such as
 > `com.docker.dhi.chain-id` can be modified or stripped during a build, making
 > them unsuitable as a trust anchor for VEX lookup. A cryptographically signed
