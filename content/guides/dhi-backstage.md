@@ -303,7 +303,7 @@ After you mirror the Node.js DHI repository to your organization's namespace:
 4. Under **OCI artifacts**, select your mirrored `dhi-python` repository and include the `/opt/python` path to layer the Python runtime into the image.
 5. Create the customization.
 
-For more information, see [Customize an image](#).
+For more information, see [Customize an image](/dhi/how-to/customize/).
 
 ### Using the `dhictl` CLI
 
@@ -416,7 +416,7 @@ docker exec -it <container-id> sh
 OCI runtime exec failed: exec failed: unable to start container process: ...
 ```
 
-Use [Docker Debug](#) if you need to troubleshoot a running distroless container.
+Use [Docker Debug](/dhi/how-to/debug/) if you need to troubleshoot a running distroless container.
 
 > **Note**
 >
