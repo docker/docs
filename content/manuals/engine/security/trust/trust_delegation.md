@@ -360,7 +360,7 @@ Successfully removed ben from registry.example.com/admin/demo
    ```
 
 2) If you have added additional delegations already and are seeing an error 
-   message that there are no valid signatures in `targest/releases`, you will need
+   message that there are no valid signatures in `targets/releases`, you will need
    to resign the `targets/releases` delegation file with the Notary CLI.
 
    ```text
