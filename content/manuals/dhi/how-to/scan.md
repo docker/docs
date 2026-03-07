@@ -53,6 +53,47 @@ Example output:
 
 For more detailed filtering and JSON output, see [Docker Scout CLI reference](/reference/cli/docker/scout/).
 
+#### Build child images with provenance attestations
+
+When you build a custom image that uses a Docker Hardened Image as its base,
+you must build with `--provenance=mode=max` so that Docker Scout can trace the base
+image lineage and correctly apply VEX statements.
+
+Without `--provenance=mode=max`, Docker Scout cannot identify the DHI base image in
+the provenance chain. As a result, it reports CVEs that are already suppressed
+by VEX statements in the base image, producing **false CVE positives** in your
+scan results.
+
+> **Why provenance attestation is required**
+>
+> Docker Scout uses max-mode provenance attestations — not image labels — to
+> identify the DHI base image. This is by design. Image labels such as
+> `com.docker.dhi.chain-id` can be modified or stripped during a build, making
+> them unsuitable as a trust anchor for VEX lookup. A cryptographically signed
+> provenance attestation cannot be tampered with after the fact, ensuring that
+> base image lineage is verified rather than assumed.
+
+To build with maximum provenance, use the `--provenance=mode=max` flag with
+`docker buildx build` and push the image to a registry:
+
+```console
+$ docker buildx build \
+    --provenance=mode=max \
+    --push \
+    -t docker.io/<namespace>/<image>:<tag> .
+```
+
+> **Important**
+>
+> The `--provenance=mode=max` flag requires BuildKit with the `docker-container` or
+> `kubernetes` driver. It is not supported with the default `docker` driver. Use
+> `docker buildx create --use` to set up a compatible builder if needed.
+
+After building with `--provenance=mode=max`, Docker Scout reads the full provenance
+chain, matches the DHI base image, and applies its VEX statements. Scans of
+your child image then reflect the correct suppressed CVEs, giving you an
+accurate vulnerability assessment.
+
 ### Automate DHI scanning in CI/CD with Docker Scout
 
 Integrating Docker Scout into your CI/CD pipeline enables you to automatically
