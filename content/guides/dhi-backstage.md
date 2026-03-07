@@ -101,7 +101,7 @@ CMD ["node", "packages/backend", "--config", "app-config.yaml"]
 
 Run this image and inspect what's available inside the container:
 
-```
+```console
 docker build -t backstage:init .
 docker run -d \
     -e APP_CONFIG_backend_database_client='better-sqlite3' \
