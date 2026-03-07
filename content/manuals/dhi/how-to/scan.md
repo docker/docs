@@ -79,6 +79,7 @@ To build with maximum provenance, use the `--provenance=mode=max` flag with
 ```console
 $ docker buildx build \
     --provenance=mode=max \
+    --sbom=true \
     --push \
     -t docker.io/<namespace>/<image>:<tag> .
 ```
