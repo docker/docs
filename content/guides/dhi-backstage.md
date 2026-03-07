@@ -117,7 +117,7 @@ docker run -d \
 
 This works, but the runtime container has a shell, a package manager, and yarn. None of these are needed to run Backstage. Run `docker exec` to see what's accessible inside:
 
-```
+```console
 docker exec -it <container-id> sh
 $ cat /etc/shells
 # /etc/shells: valid login shells
@@ -195,7 +195,7 @@ CMD ["node", "packages/backend", "--config", "app-config.yaml"]
 
 Build and tag this version:
 
-```
+```console
 docker build -t backstage:dhi-dev .
 ```
 
@@ -205,7 +205,7 @@ docker build -t backstage:dhi-dev .
 
 The DHI images come with attestations that the original `node:24-trixie-slim` images don't have. Check what's attached:
 
-```
+```console
 docker scout attest list dhi.io/node:24-alpine3.23
 ```
 
@@ -268,7 +268,7 @@ CMD ["node", "packages/backend", "--config", "app-config.yaml"]
 
 Build this version:
 
-```
+```console
 docker build -t backstage:dhi-sfw-dev .
 ```
 
@@ -311,7 +311,7 @@ For more information, see [Customize an image](#).
 
 Rather than writing the customization YAML by hand, use `dhictl` to scaffold a starting point:
 
-```
+```console
 dhictl customization prepare --org YOUR_ORG node 24-alpine3.23 \
     --destination YOUR_ORG/dhi-node \
     --name "backstage" \
@@ -361,13 +361,13 @@ cmd:
 
 Then create the customization:
 
-```
+```console
 dhictl customization create --org YOUR_ORG node-backstage.yaml
 ```
 
 Monitor the build progress:
 
-```
+```console
 dhictl customization build list --org YOUR_ORG YOUR_ORG/dhi-node "backstage"
 ```
 
@@ -397,7 +397,7 @@ CMD ["node", "packages/backend", "--config", "app-config.yaml"]
 
 Since the customization includes only runtime libraries and OCI artifacts — no build tools, no package manager, no shell — the resulting image is distroless:
 
-```
+```console
 docker run --rm YOUR_ORG/dhi-node:24-alpine3.23_backstage sh -c "echo hello"
 docker: Error response from daemon: ... exec: "sh": executable file not found in $PATH
 ```
@@ -411,7 +411,7 @@ With the Enterprise customization:
 
 Confirm the container no longer has shell access:
 
-```
+```console
 docker exec -it <container-id> sh
 OCI runtime exec failed: exec failed: unable to start container process: ...
 ```
@@ -426,7 +426,7 @@ Use [Docker Debug](#) if you need to troubleshoot a running distroless container
 
 Compare the DHI-based image against the original using Docker Scout:
 
-```
+```console
 docker scout compare backstage:dhi \
     --to backstage:init \
     --platform linux/amd64 \
@@ -451,7 +451,7 @@ A typical comparison across the approaches shows results similar to the followin
 
 For a more thorough assessment, scan with multiple tools:
 
-```
+```console
 trivy image backstage:dhi
 grype backstage:dhi
 docker scout quickview backstage:dhi
