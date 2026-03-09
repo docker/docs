@@ -17,7 +17,7 @@ find out how many users have Docker Desktop installed. If your organization
 doesn't use this software, you can run an internal survey
 to find out who is using Docker Desktop.
 
-For more information, see [Identify your Docker users and their Docker accounts](../../admin/organization/onboard.md#step-1-identify-your-docker-users-and-their-docker-accounts).
+For more information, see [Identify your Docker users and their Docker accounts](../../admin/organization/onboard.md#step-one-identify-your-docker-users).
 
 ### Do users need to authenticate with Docker before an owner can add them to an organization?
 
