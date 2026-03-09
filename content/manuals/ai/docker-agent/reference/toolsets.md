@@ -161,6 +161,52 @@ Useful for tools that return large JSON responses (API results, file listings,
 search results). The compression is transparent to the agent but can
 significantly reduce context consumption for verbose tool outputs.
 
+### Auto-installation of tool binaries
+
+MCP and LSP toolsets that require a binary command can be auto-installed if the
+command isn't on your system. Docker Agent uses the
+[aqua registry](https://github.com/aquaproj/aqua-registry), a curated index of
+CLI tool packages, to resolve and download binaries.
+
+When a toolset with a `command` property is loaded, Docker Agent:
+
+1. Checks if the command exists in your `PATH`.
+2. Checks the Docker Agent tools directory (`~/.cagent/tools/bin/`).
+3. If still not found, looks up the command in the aqua registry and installs it.
+
+Installed binaries are stored under `~/.cagent/tools/`. You can override this
+location with the `DOCKER_AGENT_TOOLS_DIR` environment variable.
+
+Use the `version` property to pin a specific package and version:
+
+```yaml
+toolsets:
+  - type: lsp
+    command: gopls
+    version: "golang/tools@v0.21.0"
+    file_types: [".go"]
+
+  - type: mcp
+    command: some-mcp-server
+    version: "owner/repo@v1.2.3"
+```
+
+The format is `owner/repo` or `owner/repo@version`. Without a version tag,
+Docker Agent uses the latest release. Without the `version` property entirely,
+Docker Agent tries to auto-detect the package from the command name.
+
+To disable auto-installation for a single toolset, set `version` to `"false"`:
+
+```yaml
+toolsets:
+  - type: mcp
+    command: my-custom-server
+    version: "false"
+```
+
+To disable auto-installation globally, set the `DOCKER_AGENT_AUTO_INSTALL`
+environment variable to `false`.
+
 ### Per-agent tool configuration
 
 Different agents can have different toolsets:
@@ -215,6 +261,85 @@ toolsets:
   - type: filesystem
     tools: [read_file, write_file, edit_file]
 ```
+
+### LSP
+
+The `lsp` toolset connects your agent to
+[Language Server Protocol](https://microsoft.github.io/language-server-protocol/)
+servers, providing code intelligence like go-to-definition, find references,
+diagnostics, rename, formatting, and more.
+
+You can configure multiple LSP servers for different programming languages,
+giving your agent code intelligence across your project.
+
+#### Configuration
+
+```yaml
+toolsets:
+  - type: lsp
+    command: gopls
+    file_types: [".go"]
+
+  - type: lsp
+    command: typescript-language-server
+    args: ["--stdio"]
+    file_types: [".ts", ".tsx", ".js", ".jsx"]
+
+  - type: lsp
+    command: pylsp
+    file_types: [".py"]
+```
+
+If an LSP server binary isn't in your PATH, Docker Agent can
+[auto-install it](#auto-installation-of-tool-binaries) using the `version`
+property.
+
+#### Properties
+
+| Property     | Type             | Required | Description                                                                                                         |
+| ------------ | ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------- |
+| `command`    | string           | Yes      | LSP server executable command                                                                                       |
+| `args`       | array of strings | No       | Command-line arguments for the LSP server                                                                           |
+| `env`        | object           | No       | Environment variables for the LSP server process                                                                    |
+| `file_types` | array of strings | No       | File extensions this server handles (e.g., `[".go", ".mod"]`)                                                       |
+| `version`    | string           | No       | Package reference for auto-installing the server binary (e.g., `"golang/tools@v0.21.0"`). Set `"false"` to disable. |
+
+#### Available tools
+
+| Tool                    | Description                                   | Read-only |
+| ----------------------- | --------------------------------------------- | --------- |
+| `lsp_workspace`         | Get workspace info and available capabilities | Yes       |
+| `lsp_hover`             | Get type info and documentation for a symbol  | Yes       |
+| `lsp_definition`        | Find where a symbol is defined                | Yes       |
+| `lsp_references`        | Find all references to a symbol               | Yes       |
+| `lsp_document_symbols`  | List all symbols in a file                    | Yes       |
+| `lsp_workspace_symbols` | Search symbols across the workspace           | Yes       |
+| `lsp_diagnostics`       | Get errors and warnings for a file            | Yes       |
+| `lsp_code_actions`      | Get available quick fixes and refactorings    | Yes       |
+| `lsp_rename`            | Rename a symbol across the workspace          | No        |
+| `lsp_format`            | Format a file                                 | No        |
+| `lsp_call_hierarchy`    | Find incoming and outgoing calls              | Yes       |
+| `lsp_type_hierarchy`    | Find supertypes and subtypes                  | Yes       |
+| `lsp_implementations`   | Find interface implementations                | Yes       |
+| `lsp_signature_help`    | Get function signature at call site           | Yes       |
+| `lsp_inlay_hints`       | Get type annotations and parameter names      | Yes       |
+
+Not all LSP servers support all features. The agent uses `lsp_workspace` to
+discover the capabilities of each configured server.
+
+#### Language server examples
+
+The following examples show configurations for common languages:
+
+| Language              | Command                      | `file_types`                     |
+| --------------------- | ---------------------------- | -------------------------------- |
+| Go                    | `gopls`                      | `[".go"]`                        |
+| TypeScript/JavaScript | `typescript-language-server` | `[".ts", ".tsx", ".js", ".jsx"]` |
+| Python                | `pylsp`                      | `[".py"]`                        |
+| Rust                  | `rust-analyzer`              | `[".rs"]`                        |
+| C/C++                 | `clangd`                     | `[".c", ".cpp", ".h", ".hpp"]`   |
+
+For TypeScript/JavaScript, pass `args: ["--stdio"]` to the language server.
 
 ### Shell
 
