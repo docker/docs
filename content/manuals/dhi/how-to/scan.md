@@ -62,6 +62,7 @@ the provenance chain. As a result, it reports CVEs that are already suppressed
 by VEX statements in the base image, producing false CVE positives in your
 scan results.
 
+> [!NOTE]
 > **Why provenance attestation is required**
 >
 > Docker Scout uses max-mode provenance attestations to identify the DHI base image
