@@ -15,12 +15,12 @@ inside microVMs with private Docker daemons.
 | Agent                             | Command    | Status       | Notes                                |
 | --------------------------------- | ---------- | ------------ | ------------------------------------ |
 | Claude Code                       | `claude`   | Experimental | Most tested implementation           |
-| Codex                             | `codex`    | Experimental | In development                       |
-| Copilot                           | `copilot`  | Experimental | In development                       |
-| Gemini                            | `gemini`   | Experimental | In development                       |
+| Codex                             | `codex`    | Experimental |                                      |
+| Copilot                           | `copilot`  | Experimental |                                      |
+| Gemini                            | `gemini`   | Experimental |                                      |
 | [Docker Agent](/ai/docker-agent/) | `cagent`   | Experimental | Also available as a standalone tool  |
-| Kiro                              | `kiro`     | Experimental | In development                       |
-| OpenCode                          | `opencode` | Experimental | In development                       |
+| Kiro                              | `kiro`     | Experimental |                                      |
+| OpenCode                          | `opencode` | Experimental |                                      |
 | Custom shell                      | `shell`    | Experimental | Minimal environment for manual setup |
 
 ## Experimental status
