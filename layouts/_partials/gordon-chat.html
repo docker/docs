@@ -341,7 +341,7 @@
       class="flex items-center justify-between rounded-t-lg border-b border-gray-200 bg-blue-600 px-6 py-3 dark:border-gray-700"
     >
       <div class="flex items-center gap-3">
-        {{ partial "utils/svg.html" "images/ask-ai-logo.svg" }}
+        {{ partial "utils/svg.html" "images/gordon-logo.svg" }}
       </div>
       <div class="flex items-center gap-2">
         <button
@@ -615,30 +615,6 @@
         </div>
         <div class="flex items-center justify-between" x-data="{ showTooltip: false }">
           <div class="relative">
-            <button
-              @click="includePageContext = !includePageContext"
-              @mouseenter="showTooltip = true"
-              @mouseleave="showTooltip = false"
-              type="button"
-              :class="includePageContext
-								? 'bg-blue-100 text-blue-600 dark:bg-blue-800 dark:text-blue-200'
-								: 'bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-400'"
-              class="cursor-pointer rounded-md px-2 py-1 text-xs font-medium transition-colors hover:opacity-80"
-            >
-              <span class="flex items-center gap-1">
-                <template x-if="includePageContext">
-                  <span class="icon-svg icon-xs">
-                    {{ partialCached "icon" "link" "link" }}
-                  </span>
-                </template>
-                <template x-if="!includePageContext">
-                  <span class="icon-svg icon-xs">
-                    {{ partialCached "icon" "link_off" "link_off" }}
-                  </span>
-                </template>
-                <span>Context</span>
-              </span>
-            </button>
             <!-- Tooltip -->
             <div
               x-show="showTooltip"

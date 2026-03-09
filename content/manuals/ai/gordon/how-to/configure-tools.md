@@ -23,7 +23,7 @@ Tool configuration provides an additional layer of control:
 To configure Gordon's tools:
 
 1. Open Docker Desktop.
-2. Select **Ask Gordon** in the sidebar.
+2. Select **Gordon** in the sidebar.
 3. Select the settings icon at the bottom of the text input area.
 
    ![Session settings icon](../images/perm_settings.avif?border=true)
