@@ -95,7 +95,7 @@ When `docker scout cves` runs against your child image, Scout reads VEX attestat
 
 For example, if you add a `requests` layer to a DHI Python base image and attach a VEX statement suppressing `CVE-2024-47081`, Scout applies both VEX attestations independently and attributes each to its respective author:
 
-```
+```text
 ✓ VEX statements obtained from attestation
 CVE-2024-47081  VEX: not affected [vulnerable code not present] : <your-namespace>
 ```
