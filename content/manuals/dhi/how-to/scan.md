@@ -135,7 +135,8 @@ docker scout attestation add \
   docker.io/<your-namespace>/<image>:<tag>
 ```
 
-> **Note:** This is only possible because you built with `--provenance=mode=max`. Without the full
+> [!NOTE]
+> This is only possible because you built with `--provenance=mode=max`. Without the full
 > provenance chain, Scout cannot traverse back to the base image to retrieve its VEX attestations.
 
 ### Automate DHI scanning in CI/CD with Docker Scout
