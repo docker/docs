@@ -1,45 +1,47 @@
 ---
-description: Find the latest recommended version of the Docker Compose file format
+description:
+  Find the latest recommended version of the Docker Compose file format
   for defining multi-container applications.
-keywords: docker compose file, docker compose yml, docker compose reference, docker
+keywords:
+  docker compose file, docker compose yml, docker compose reference, docker
   compose cmd, docker compose user, docker compose image, yaml spec, docker compose
   syntax, yaml specification, docker compose specification
 title: Compose file reference
 toc_max: 4
 toc_min: 1
 grid:
-- title: Version and name top-level element
-  description: Understand version and name attributes for Compose.
-  icon: text_snippet
-  link: /reference/compose-file/version-and-name/
-- title: Services top-level element
-  description: Explore all services attributes for Compose.
-  icon: construction
-  link: /reference/compose-file/services/
-- title: Networks top-level element
-  description: Find all networks attributes for Compose.
-  icon: lan
-  link: /reference/compose-file/networks/
-- title: Volumes top-level element
-  description: Explore all volumes attributes for Compose.
-  icon: database
-  link: /reference/compose-file/volumes/
-- title: Configs top-level element
-  description: Find out about configs in Compose.
-  icon: settings
-  link: /reference/compose-file/configs/
-- title: Secrets top-level element
-  description: Learn about secrets in Compose.
-  icon: lock
-  link: /reference/compose-file/secrets/
+  - title: Version and name top-level element
+    description: Understand version and name attributes for Compose.
+    icon: text_snippet
+    link: /reference/compose-file/version-and-name/
+  - title: Services top-level element
+    description: Explore all services attributes for Compose.
+    icon: construction
+    link: /reference/compose-file/services/
+  - title: Networks top-level element
+    description: Find all networks attributes for Compose.
+    icon: lan
+    link: /reference/compose-file/networks/
+  - title: Volumes top-level element
+    description: Explore all volumes attributes for Compose.
+    icon: database
+    link: /reference/compose-file/volumes/
+  - title: Configs top-level element
+    description: Find out about configs in Compose.
+    icon: settings
+    link: /reference/compose-file/configs/
+  - title: Secrets top-level element
+    description: Learn about secrets in Compose.
+    icon: lock
+    link: /reference/compose-file/secrets/
 aliases:
- - /compose/yaml/
- - /compose/compose-file/compose-file-v1/
- - /compose/compose-file/
- - /compose/reference/overview/
+  - /compose/yaml/
+  - /compose/compose-file/compose-file-v1/
+  - /compose/compose-file/
+  - /compose/reference/overview/
 ---
 
->**New to Docker Compose?**
+> **New to Docker Compose?**
 >
 > Find more information about the [key features and use cases of Docker Compose](/manuals/compose/intro/features-uses.md) or [try the quickstart guide](/manuals/compose/gettingstarted.md).
 
@@ -49,11 +51,11 @@ Legacy versions 2.x and 3.x of the Compose file format were merged into the Comp
 
 The Compose Specification on Docker Docs is the Docker Compose implementation. If you wish to implement your own version of the Compose Specification, see the [Compose Specification repository](https://github.com/compose-spec/compose-spec).
 
-Use the following links to navigate key sections of the Compose Specification. 
+Use the following links to navigate key sections of the Compose Specification.
 
 > [!TIP]
 >
 > Want a better editing experience for Compose files in VS Code?
-> Check out the [Docker VS Code Extension (Beta)](https://marketplace.visualstudio.com/items?itemName=docker.docker) for linting, code navigation, and vulnerability scanning.
+> Check out the [Docker DX](https://marketplace.visualstudio.com/items?itemName=docker.docker) extension for linting, code navigation, and vulnerability scanning.
 
 {{< grid >}}
