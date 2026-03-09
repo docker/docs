@@ -150,14 +150,14 @@ params:
   # Latest BuildKit version
   buildkit_version: "0.27.0"
   # Latest actions version
-  bake_action_version: "v6"
-  build_push_action_version: "v6"
-  login_action_version: "v3"
-  metadata_action_version: "v5"
-  setup_buildx_action_version: "v3"
-  setup_compose_action_version: "v1"
-  setup_docker_action_version: "v4"
-  setup_qemu_action_version: "v3"
+  bake_action_version: "v7"
+  build_push_action_version: "v7"
+  login_action_version: "v4"
+  metadata_action_version: "v6"
+  setup_buildx_action_version: "v4"
+  setup_compose_action_version: "v2"
+  setup_docker_action_version: "v5"
+  setup_qemu_action_version: "v4"
 
   # Example runtime/library/os versions
   example_go_version: "1.25"
