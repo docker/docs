@@ -284,8 +284,8 @@ You now know how to:
 - Explore the [Tools reference](reference/toolsets.md) to see what capabilities
   you can enable
 - Check out [example
-  configurations](https://github.com/docker/cagent/tree/main/examples) for
+  configurations](https://github.com/docker/docker-agent/tree/main/examples) for
   different use cases
 - See the full
-  [golang_developer.yaml](https://github.com/docker/cagent/blob/main/golang_developer.yaml)
+  [golang_developer.yaml](https://github.com/docker/docker-agent/blob/main/golang_developer.yaml)
   that the Docker Team uses to develop Docker Agent
