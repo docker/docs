@@ -190,7 +190,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.SHA }} .
+          docker build \
+          --provenance=mode=max \
+          --sbom=true \
+          --push \
+          -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.SHA }} .
 
       - name: Run Docker Scout CVE scan
         uses: docker/scout-action@v1
@@ -204,6 +208,15 @@ jobs:
 The `exit-code: true` parameter ensures that the workflow fails if any critical or
 high-severity vulnerabilities are detected, preventing the deployment of
 insecure images.
+
+> [!NOTE]
+>
+> The `--provenance=mode=max` and `--sbom=true` flags are required so that
+> Docker Scout can trace the DHI base image lineage and correctly apply its
+> VEX statements. The `--push` flag is also required, as attestations can
+> only be attached when pushing directly to a registry. Without these flags,
+> Scout cannot suppress known non-applicable CVEs from the base image,
+> resulting in false CVE positives in your scan results.
 
 For more details on using Docker Scout in CI, see [Integrating Docker
 Scout with other systems](/manuals/scout/integrations/_index.md).
