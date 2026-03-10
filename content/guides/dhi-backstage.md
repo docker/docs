@@ -348,9 +348,6 @@ accounts:
     - name: node
       gid: 1000
 
-environment:
-  PYTHON: /opt/python/bin/python3
-
 cmd:
   - node
 ```
