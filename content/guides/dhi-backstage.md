@@ -386,10 +386,6 @@ COPY --from=build --chown=node:node /app/packages/backend/dist/bundle/ ./
 CMD ["node", "packages/backend", "--config", "app-config.yaml"]
 ```
 
-> **Important**
->
-> When the Python runtime is added as an OCI artifact, it installs under `/opt/python/` instead of `/usr/bin/`. Set `ENV PYTHON=/opt/python/bin/python3` so that any Node.js packages requiring Python at runtime can locate the binary. If you omitted the Python OCI artifact, remove this `ENV` line.
-
 Since the customization includes only runtime libraries and OCI artifacts — no build tools, no package manager, no shell — the resulting image is distroless:
 
 ```console
