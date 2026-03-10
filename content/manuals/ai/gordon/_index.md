@@ -52,7 +52,7 @@ Before you begin:
 {{< tab name="Docker Desktop" >}}
 
 1. Open Docker Desktop.
-2. Select **Ask Gordon** in the sidebar.
+2. Select **Gordon** in the sidebar.
 3. Select your project directory.
 4. Type a question: "What containers are running?"
 

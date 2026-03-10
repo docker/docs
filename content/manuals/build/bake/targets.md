@@ -54,6 +54,18 @@ $ docker buildx bake
 The properties you can set for a target closely resemble the CLI flags for
 `docker build`, with a few additional properties that are specific to Bake.
 
+The `dockerfile` property specifies the path to the Dockerfile for a target.
+If you also set a `context`, the `dockerfile` path resolves relative to that
+context.
+
+```hcl {title=docker-bake.hcl}
+target "default" {
+  context = "app"
+  # resolves to app/src/www/Dockerfile
+  dockerfile = "src/www/Dockerfile"
+}
+```
+
 For all the properties you can set for a target, see the [Bake reference](/build/bake/reference#target).
 
 ## Grouping targets
@@ -112,7 +124,7 @@ Supported patterns:
 > Always wrap wildcard patterns in quotes. Without quotes, your shell will expand the
 > wildcard to match files in the current directory, which usually causes errors.
 
-Examples: 
+Examples:
 
 ```console
 # Match all targets starting with 'foo-'
@@ -129,7 +141,7 @@ $ docker buildx bake "[fb]oo-bar"
 
 # Matches: mtx-a-b-d, mtx-a-b-e, mtx-a-b-f
 $ docker buildx bake "mtx-a-b-*"
-``` 
+```
 
 You can also combine multiple patterns:
 

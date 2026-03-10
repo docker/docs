@@ -37,7 +37,7 @@ params:
     icon: /icons/cagent.svg
     link: /ai/docker-agent
   ai:
-  - title: Ask Gordon
+  - title: Gordon
     description: Streamline your workflow and get the most out of the Docker ecosystem with your personal AI assistant.
     icon: note_add
     link: /ai/gordon/
