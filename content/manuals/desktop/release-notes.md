@@ -55,6 +55,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For Mac
 
 - Improved update error reporting with more descriptive diagnostics.
+- Improved update reliability by preparing the updated `Docker.app` under `Application Support` instead of `/tmp`.
 
 ## 4.63.0
 
