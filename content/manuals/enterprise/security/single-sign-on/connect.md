@@ -1,43 +1,110 @@
 ---
-title: Connect single sign-on
+title: Set up single sign-on
 linkTitle: Connect
 description: Connect Docker and your identity provider, test the setup, and enable enforcement
 keywords: configure sso, set up sso, docker sso setup, docker identity provider, sso enforcement, docker hub, security
 aliases:
- - /security/for-admins/single-sign-on/connect/
+    - /security/for-admins/single-sign-on/connect/
+    - /docker-hub/domains/
+    - /docker-hub/sso-connection/
+    - /docker-hub/enforcing-sso/
+    - /single-sign-on/configure/
+    - /admin/company/settings/sso-configuration/
+    - /admin/organization/security-settings/sso-configuration/
+    - /security/for-admins/single-sign-on/configure/
+    - /enterprise/security/single-sign-on/configure
 ---
 
 {{< summary-bar feature_name="SSO" >}}
 
-Setting up a single sign-on (SSO) connection involves configuring both Docker
-and your identity provider (IdP). This guide walks you through set-up
-in Docker, setup in your IdP, and final connection. 
+To set up a single sign-on (SSO), you need to establish a connection between Docker
+and your identity provider (IdP). This guide walks you through adding and verifying your domain, setting up Docker and your IdP for an SSO connection, and finalizing and testing the connection. 
+
+## Overview 
+
+Docker supports any SAML 2.0 or OIDC-compatible identity provider. While this guide
+focuses on detailed set-up instructions for Okta and Microsoft Entra ID, the general process remains the same for other IdPs. 
+
+You will:
+
+- Add and verify a domain.
+- Configure the connection in Docker.
+- Set up the application in your IdP with the values from Docker.
+- Complete the connection by entering your IdP's values back into Docker.
+- Test the connection.
 
 ## Prerequisites
 
-Before you begin:
+Before you begin, make sure the following conditions are met:
 
-- Verify your domain. You must [verify at least one domain](/manuals/enterprise/security/single-sign-on/configure.md) before creating an SSO connection.
-- Set up an account with your identity provider (IdP).
-- Complete the steps in the [Configure single sign-on](configure.md) guide.
+- Notify your company about the upcoming SSO sign-in process.
+- Ensure all users have Docker Desktop version 4.42 or later installed.
+- Confirm that each Docker user has a valid IdP account using the same
+email address as their Unique Primary Identifier (UPN).
+- If you plan to [enforce SSO](/manuals/enterprise/security/single-sign-on/connect.md#optional-enforce-sso),
+users accessing Docker through the CLI must [create a personal access token (PAT)](/docker-hub/access-tokens/). The PAT replaces their username and password for authentication.
+- Ensure CI/CD pipelines use PATs or OATs instead of passwords.
 
-## Set up SSO for Docker 
-
-Docker supports any SAML 2.0 or OIDC-compatible identity provider. This guide
-provides detailed setup instructions for the most commonly
-used providers: Okta and Microsoft Entra ID. 
-
-If you're using a different IdP, the general process remains the same:
-
-- Configure the connection in Docker.
-- Set up the application in your IdP using the values from Docker.
-- Complete the connection by entering your IdP's values back into Docker.
-- Test the connection.
+## Set up an SSO connection 
 
 > [!TIP]
 > These procedures have you copy and paste values between Docker and your IdP. Complete this guide in one session with separate browser windows open for Docker and your IdP. 
 
-### Step 1. Create an SSO connection in Docker
+### Step 1: Add a domain
+
+To add a domain:
+
+1. Sign in to [Docker Home](https://app.docker.com), then choose your
+organization. If your organization is part of a company, then select the company to manage
+the domain at the company level.
+1. Select **Admin Console**, then **Domain management**.
+2. Select **Add a domain**.
+3. Enter your domain in the text box and select **Add domain**.
+4. In the modal, copy the **TXT Record Value** provided for domain verification.
+
+### Step 2: Verify your domain
+
+To confirm domain ownership, add a TXT record to your Domain Name System (DNS)
+host using the TXT Record Value from Docker. DNS propagation can take up to
+72 hours. Docker automatically checks for the record during this time.
+
+> [!TIP]
+>
+> When adding a record name, **use `@` or leave it empty** for root domains like `example.com`. **Avoid common values** like `docker`, `docker-verification`, `www`, or your domain name itself. Always **check your DNS provider's documentation** to verify their specific record name requirements.
+
+{{< tabs >}}
+{{< tab name="AWS Route 53" >}}
+
+1. To add your TXT record to AWS, see [Creating records by using the Amazon Route 53 console](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html).
+1. Wait up to 72 hours for TXT record verification.
+1. After the record is live, go to **Domain management** in the [Admin Console](https://app.docker.com/admin) and select **Verify**.
+
+{{< /tab >}}
+{{< tab name="Google Cloud DNS" >}}
+
+1. To add your TXT record to Google Cloud DNS, see [Verifying your domain with a TXT record](https://cloud.google.com/identity/docs/verify-domain-txt).
+1. Wait up to 72 hours for TXT record verification.
+1. After the record is live, go to **Domain management** in the [Admin Console](https://app.docker.com/admin) and select **Verify**.
+
+{{< /tab >}}
+{{< tab name="GoDaddy" >}}
+
+1. To add your TXT record to GoDaddy, see [Add a TXT record](https://www.godaddy.com/help/add-a-txt-record-19232).
+1. Wait up to 72 hours for TXT record verification.
+1. After the record is live, go to **Domain management** in the [Admin Console](https://app.docker.com/admin) and select **Verify**.
+
+{{< /tab >}}
+{{< tab name="Other providers" >}}
+
+1. Sign in to your domain host.
+1. Add a TXT record to your DNS settings and save the record.
+1. Wait up to 72 hours for TXT record verification.
+1. After the record is live, go to **Domain management** in the [Admin Console](https://app.docker.com/admin) and select **Verify**.
+
+{{< /tab >}}
+{{< /tabs >}}
+
+### Step 3. Create an SSO connection in Docker
 
 1. From [Docker Home](https://app.docker.com), choose your
 organization and toggle the **Admin Console** dropdown. Select **SSO and SCIM** from the **Security** section. 
@@ -48,7 +115,7 @@ organization and toggle the **Admin Console** dropdown. Select **SSO and SCIM** 
 
 Keep this window open to paste values from your IdP later.
 
-### Step 2. Create an SSO connection in your IdP
+### Step 4. Create an SSO connection in your IdP
 
 Use the following tabs based on your IdP provider.
 
@@ -93,11 +160,11 @@ The following procedures reproduce instructions from Microsoft Learn documentati
 #### Register the app
 
 1. Sign in to [Microsoft Entra admin center](https://entra.microsoft.com/).
-2. Go to **App Registration** and select **New Registration**.
-3. Name the application "Docker".
-4. Set account types and paste the **Redirect URI** from Docker.
-5. Select **Register**.
-6. Copy the **Client ID**.
+1. Go to **App Registration** and select **New Registration**.
+1. Name the application "Docker".
+1. Set account types and paste the **Redirect URI** from Docker.
+1. Select **Register**.
+1. Copy the **Client ID**.
 
 #### Create client secrets
 
@@ -116,7 +183,7 @@ The following procedures reproduce instructions from Microsoft Learn documentati
 {{< /tab >}}
 {{< /tabs >}}
 
-### Step 3. Connect Docker to your IdP
+### Step 5. Connect Docker to your IdP
 
 Complete the integration by pasting your IdP values into Docker.
 
@@ -158,7 +225,7 @@ Complete the integration by pasting your IdP values into Docker.
 {{< /tab >}}
 {{< /tabs >}}
 
-### Step 4. Test the connection
+### Step 6. Test the connection
 
 IdPs like Microsoft Entra and Okta may require that you assign a user to an application before testing SSO. You can review [Microsoft Entra](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/add-application-portal-setup-sso#test-single-sign-on)'s documentation and [Okta](https://help.okta.com/wf/en-us/content/topics/workflows/connector-reference/okta/actions/assignusertoapplicationforsso.htm)'s documentation to learn how to assign yourself or other users to an app.
 
@@ -171,11 +238,14 @@ If you have multiple IdPs, choose the sign-in option **Continue with SSO**. If y
 
 ## Configure multiple IdPs
 
-Docker supports multiple IdP configurations. To use multiple IdPs with one domain:
+Docker supports multiple identity provider (IdP) configurations by letting you associate one domain with more than one IdP. Each connection must use the same domain, which lets users choose their IdP when they select **Continue with SSO** at login. 
 
-- Repeat Steps 1-4 on this page for each IdP.
-- Each connection must use the same domain.
-- Users will select **Continue with SSO** to choose their IdP at sign in.
+To add multiple IdPs:
+
+1. Use the same domain for each connection. 
+1. Repeat steps 3-6 from the [Set up an SSO connection] procedures on this page. Repeat these steps for each IdP your organization intends to use.
+
+Because you must use the same domain for each IdP, you don't need to repeat steps 1 and 2. 
 
 ## Enforce SSO
 
@@ -184,9 +254,9 @@ If SSO is not enforced, users can still sign in using Docker usernames and passw
 1. Sign in to [Docker Home](https://app.docker.com/) and select
 your organization or company.
 1. Select **Admin Console**, then **SSO and SCIM**.
-2. In the SSO connections table, select the **Action** menu, then **Enable enforcement**.
-3. Follow the on-screen instructions.
-4. Select **Turn on enforcement**.
+1. In the SSO connections table, select the **Action** menu, then **Enable enforcement**.
+1. Follow the on-screen instructions.
+1. Select **Turn on enforcement**.
 
 When you enforce SSO, your users cannot modify their email address and
 password, convert a user account to an organization, or set up 2FA through

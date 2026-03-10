@@ -33,7 +33,7 @@ Yes, you can convert existing users to SSO accounts. Ensure users have:
 - Personal access tokens created to replace passwords for CLI access
 - CI/CD pipelines updated to use PATs instead of passwords
 
-For detailed instructions, see [Configure single sign-on](/manuals/enterprise/security/single-sign-on/configure.md).
+For detailed instructions, see [Configure single sign-on](/manuals/enterprise/security/single-sign-on/connect.md).
 
 ## Is Docker SSO fully synced with the IdP?
 

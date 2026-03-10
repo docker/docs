@@ -183,7 +183,7 @@ Ensure that the IdP SSO connection is returning the correct UPN value in the ass
 
 **Add and verify all domains**
 
-Add and verify all domains and subdomains used as UPN by your IdP and associate them with your Docker SSO connection. For details, see [Configure single sign-on](/manuals/enterprise/security/single-sign-on/configure.md).
+Add and verify all domains and subdomains used as UPN by your IdP and associate them with your Docker SSO connection. For details, see [Configure single sign-on](/manuals/enterprise/security/single-sign-on/connect.md).
 
 ## Unable to find session
 

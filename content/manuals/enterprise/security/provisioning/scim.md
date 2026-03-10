@@ -227,7 +227,7 @@ This value is required in your identity provider when creating custom SCIM attri
 
 ### Step one: Set up role mapping in Okta
 
-1. Setup [SSO](../single-sign-on/configure/_index.md) and SCIM first.
+1. Setup [SSO](../single-sign-on/connect.md) and SCIM first.
 1. In the Okta admin portal, go to **Directory**, select **Profile Editor**,
    and then **User (Default)**.
 1. Select **Add Attribute** and configure the values for the role, organization,
