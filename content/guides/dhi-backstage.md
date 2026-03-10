@@ -1,6 +1,7 @@
 ---
 title: Secure a Backstage application with Docker Hardened Images
 description: Secure a Backstage developer portal container using Docker Hardened Images, covering native module compilation, multi-stage builds, Socket Firewall protection, and distroless runtime images.
+summary: Learn how to secure a Backstage developer portal using Docker Hardened Images (DHI), handle native module compilation with better-sqlite3, add Socket Firewall protection during dependency installation, and produce a distroless runtime image using DHI Enterprise customizations.
 keywords: docker hardened images, dhi, backstage, CNCF, developer portal, node.js, native modules, sqlite, better-sqlite3, distroless, socket firewall, dhictl, multi-stage build
 tags: ["Docker Hardened Images", "dhi"]
 params:
