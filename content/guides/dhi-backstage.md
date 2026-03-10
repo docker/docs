@@ -349,8 +349,6 @@ accounts:
     - name: node
       gid: 1000
 
-cmd:
-  - node
 ```
 
 Then create the customization:
