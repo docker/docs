@@ -186,8 +186,8 @@ jobs:
             {
               "features": {
                  "containerd-snapshotter": true
+              }
             }
-          }
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
@@ -231,7 +231,7 @@ insecure images.
 > VEX statements. Enabling the containerd image store via
 > `docker/setup-docker-action` allows BuildKit to store attestations locally
 > without pushing to a registry first. Without the containerd image store,
-> Docker Engine rejects the build with: `Attestation is not supported for the docker driver`. 
+> Docker Engine rejects the build with: `Attestation is not supported for the docker driver. 
 > Switch to a different driver, or turn on the containerd image store, and try again.`
 > The `Push image` step runs only if the scan passes, using `if: success()`
 > to ensure images are only pushed to the registry when they are free of
