@@ -150,8 +150,7 @@ lifecycle.
 
 #### Example GitHub Actions workflow
 
-The following is a sample GitHub Actions workflow that builds an image and scans
-it using Docker Scout:
+The following is a sample GitHub Actions workflow that builds an image, scans it and pushes to the registry only if the scan passes:
 
 ```yaml {collapse="true"}
 name: DHI Vulnerability Scan
