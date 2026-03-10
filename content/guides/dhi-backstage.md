@@ -289,7 +289,7 @@ The previous steps still use the `-dev` or `-sfw-dev` variant as the runtime ima
 For Backstage, the runtime image needs:
 
 - **sqlite-libs** — the shared library that the compiled `better-sqlite3` native module links against (added as a system package).
-- **Python** — if your Backstage plugins or configuration require Python at runtime. Added as an OCI artifact using the hardened `dhi.io/python` image, which layers the Python runtime onto the Node.js base without introducing a package manager or shell.
+- **Python** — if your Backstage plugins or configuration require Python at runtime. Added as the `python-3.14` system package, which installs Python from the hardened DHI package feed.
 
 Docker will continuously build with SLSA Level 3 compliance and patch these customized images within the guaranteed SLA for CVE patching.
 
@@ -299,9 +299,8 @@ After you mirror the Node.js DHI repository to your organization's namespace:
 
 1. Open the mirrored Node.js repository in Docker Hub.
 2. Select **Customize** and choose the `node:24-alpine3.23` tag.
-3. Under **Packages**, add `sqlite-libs`.
-4. Under **OCI artifacts**, select your mirrored `dhi-python` repository and include the `/opt/python` path to layer the Python runtime into the image.
-5. Create the customization.
+3. Under **Packages**, add `sqlite-libs` and `python-3.14`.
+4. Create the customization.
 
 For more information, see [Customize an image](/dhi/how-to/customize/).
 
@@ -337,10 +336,7 @@ platforms:
 contents:
   packages:
     - sqlite-libs
-  artifacts:
-    - name: YOUR_ORG/dhi-python:3.14-alpine3.23
-      includes:
-        - /opt/python
+    - python-3.14
 
 accounts:
   root: true
@@ -384,7 +380,6 @@ Update only the final stage of your Dockerfile to use the customized image:
 ```dockerfile
 # Final Stage: create the runtime image
 FROM YOUR_ORG/dhi-node:24-alpine3.23_backstage
-ENV PYTHON=/opt/python/bin/python3
 WORKDIR /app
 COPY --from=build --chown=node:node /app/node_modules ./node_modules
 COPY --from=build --chown=node:node /app/packages/backend/dist/bundle/ ./
