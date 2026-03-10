@@ -371,7 +371,7 @@ Docker builds the customized image on its secure infrastructure and publishes it
 
 > **Note**
 >
-> If your Backstage configuration does not require Python at runtime, you can omit the `artifacts` and `environment` sections from the YAML. The `sqlite-libs` package alone is sufficient to run Backstage with `better-sqlite3`.
+> If your Backstage configuration does not require Python at runtime, you can omit the `python-3.14` from the packages list. The `sqlite-libs` package alone is sufficient to run Backstage with `better-sqlite3`.
 
 ### Updated Dockerfile
 
