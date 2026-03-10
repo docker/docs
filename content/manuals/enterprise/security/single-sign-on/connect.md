@@ -1,6 +1,6 @@
 ---
 title: Set up single sign-on
-linkTitle: Connect
+linkTitle: Set up SSO
 description: Connect Docker and your identity provider, test the setup, and enable enforcement
 keywords: configure sso, set up sso, docker sso setup, docker identity provider, sso enforcement, docker hub, security
 aliases:
