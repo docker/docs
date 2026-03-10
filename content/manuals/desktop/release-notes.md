@@ -32,10 +32,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.64.0" build_path="/221278/" >}}
 
-### New
-
-- Profile templates have been added to Docker MCP Toolkit.
-
 ### Updates
 
 - [Docker Compose v5.1.0](https://github.com/docker/compose/releases/tag/v5.1.0)
