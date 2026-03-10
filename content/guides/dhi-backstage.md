@@ -318,7 +318,7 @@ dhictl customization prepare --org YOUR_ORG node 24-alpine3.23 \
     --output node-backstage.yaml
 ```
 
-Edit the generated file to add the runtime library and the Python OCI artifact:
+Edit the generated file to add the runtime libraries:
 
 ```yaml
 name: backstage
@@ -393,7 +393,7 @@ docker: Error response from daemon: ... exec: "sh": executable file not found in
 With the Enterprise customization:
 
 - The runtime image is distroless — no shell, no package manager.
-- Docker automatically rebuilds your customized image when the base Node.js image or the Python OCI artifact receives a security patch.
+- Docker automatically rebuilds your customized image when the base Node.js image or any of its packages receive a security patch.
 - The full chain of trust is maintained, including SLSA Build Level 3 provenance.
 - Both the Node.js and Python runtimes are tracked in the image SBOM.
 
