@@ -19,31 +19,18 @@ aliases:
 {{< summary-bar feature_name="SSO" >}}
 
 To set up a single sign-on (SSO), you need to establish a connection between Docker
-and your identity provider (IdP). This guide walks you through adding and verifying your domain, setting up Docker and your IdP for an SSO connection, and finalizing and testing the connection. 
+and your identity provider (IdP). While this guide
+uses Okta and Microsoft Entra ID as a working example, the general process remains the same for other IdPs. 
 
-## Overview 
-
-Docker supports any SAML 2.0 or OIDC-compatible identity provider. While this guide
-focuses on detailed set-up instructions for Okta and Microsoft Entra ID, the general process remains the same for other IdPs. 
-
-You will:
-
-- Add and verify a domain.
-- Configure the connection in Docker.
-- Set up the application in your IdP with the values from Docker.
-- Complete the connection by entering your IdP's values back into Docker.
-- Test the connection.
+If you're unfamiliar with the SSO process, first review the [SSO overview](/enterprise/security/single-sign-on/) doc to learn about how SSO works. 
 
 ## Prerequisites
 
-Before you begin, make sure the following conditions are met:
+Docker supports any SAML 2.0 or OIDC-compatible identity provider. Before you begin, make sure the following conditions are met:
 
 - Notify your company about the upcoming SSO sign-in process.
-- Ensure all users have Docker Desktop version 4.42 or later installed.
 - Confirm that each Docker user has a valid IdP account using the same
 email address as their Unique Primary Identifier (UPN).
-- If you plan to [enforce SSO](/manuals/enterprise/security/single-sign-on/connect.md#optional-enforce-sso),
-users accessing Docker through the CLI must [create a personal access token (PAT)](/docker-hub/access-tokens/). The PAT replaces their username and password for authentication.
 - Ensure CI/CD pipelines use PATs or OATs instead of passwords.
 
 ## Set up an SSO connection 
@@ -55,13 +42,13 @@ users accessing Docker through the CLI must [create a personal access token (PAT
 
 To add a domain:
 
-1. Sign in to [Docker Home](https://app.docker.com), then choose your
+1. Sign in to [app.docker.com](https://app.docker.com), then choose your
 organization. If your organization is part of a company, then select the company to manage
 the domain at the company level.
 1. Select **Admin Console**, then **Domain management**.
-2. Select **Add a domain**.
-3. Enter your domain in the text box and select **Add domain**.
-4. In the modal, copy the **TXT Record Value** provided for domain verification.
+1. Select **Add a domain**.
+1. Enter your domain in the text box and select **Add domain**.
+1. In the modal, copy the **TXT Record Value** provided for domain verification.
 
 ### Step 2: Verify your domain
 
@@ -107,14 +94,14 @@ host using the TXT Record Value from Docker. DNS propagation can take up to
 
 ### Step 3. Create an SSO connection in Docker
 
-1. From [Docker Home](https://app.docker.com), choose your
-organization and toggle the **Admin Console** dropdown. Select **SSO and SCIM** from the **Security** section. 
+1. From [app.docker.com](https://app.docker.com), choose your
+organization then select **Admin Console**. Select **SSO and SCIM** from the **Security** section. 
 1. Select **Create Connection** and name the connection. Choose either **SAML** or **Azure AD (OIDC)** for your authentication method.
 1. Copy the required values for your IdP and store these values in a text editor:
     - Okta SAML: **Entity ID**, **ACS URL**
     - Azure OIDC: **Redirect URL**
 
-Keep this window open to paste values from your IdP later.
+Keep this window open. You will use it later when you paste values from your IdP.
 
 ### Step 4. Create an SSO connection in your IdP
 
@@ -251,6 +238,8 @@ Because you must use the same domain for each IdP, you don't need to repeat step
 ## Enforce SSO
 
 If SSO is not enforced, users can still sign in using Docker usernames and passwords. Enforcing SSO requires users to use SSO when signing into Docker, which centralizes authentication and enforces policies set by the IdP.
+
+Before enforcing SSO, users accessing Docker through the CLI must [create a personal access token (PAT)](/docker-hub/access-tokens/). The PAT replaces their username and password for authentication.
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select
 your organization or company.

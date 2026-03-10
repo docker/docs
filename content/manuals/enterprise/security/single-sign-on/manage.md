@@ -1,6 +1,6 @@
 ---
-title: Manage single sign-on
-linkTitle: Manage domains and SSO
+title: Manage SSO domains and connections
+linkTitle: Manage SSO connections
 weight: 2
 description: Learn how to manage Single Sign-On for your organization or company.
 keywords: manage, single sign-on, SSO, sign-on, admin console, admin, security, domains, connections, users, provisioning
