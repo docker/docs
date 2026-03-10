@@ -70,8 +70,8 @@ Docker Agent is included in Docker Desktop 4.63 and later. In Docker Desktop ver
 
 For Docker Engine users or custom installations:
 
-- **Homebrew**: `brew install cagent`
-- **Winget**: `winget install Docker.Cagent`
+- **Homebrew**: `brew install docker-agent`
+- **Winget**: `winget install Docker.Agent`
 - **Pre-built binaries**: [GitHub
   releases](https://github.com/docker/docker-agent/releases)
 - **From source**: See the [Docker Agent
