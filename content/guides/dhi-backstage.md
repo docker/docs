@@ -429,7 +429,7 @@ A typical comparison across the approaches shows results similar to the followin
 | Shell in runtime | Yes | Yes | Yes | No |
 | Package manager | Yes | Yes | Yes | No |
 | Non-root default | No | No | No | Yes |
-| Socket Firewall | No | No | Yes (build) | No |
+| Socket Firewall | No | No | Yes (build) | Yes (build) / No (runtime) |
 | SLSA provenance | No | Base only | Base only | Full (Level 3) |
 
 > **Note**
