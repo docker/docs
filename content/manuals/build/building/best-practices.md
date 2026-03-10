@@ -287,7 +287,7 @@ to create an efficient and maintainable Dockerfile.
 
 Whenever possible, use current official images as the basis for your
 images. Docker recommends the [Alpine image](https://hub.docker.com/_/alpine/) as it
-is tightly controlled and small in size (currently under 6 MB), while still
+is tightly controlled and small in size (under 6 MB), while still
 being a full Linux distribution.
 
 For more information about the `FROM` instruction, see [Dockerfile reference for the FROM instruction](/reference/dockerfile.md#from).
