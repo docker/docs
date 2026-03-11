@@ -9,7 +9,7 @@ params:
 grid_subscriptions:
 - title: Compare Docker subscriptions
   description: Visit the pricing page to see what's included in different Docker subscriptions.
-  link: "https://www.docker.com/pricing/"
+  link: "https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscription"
   icon: feature_search
 - title: Set up your subscription
   description: Get started setting up a personal or organization subscription.

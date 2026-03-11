@@ -30,7 +30,7 @@ pushing to the registry. You can use these tests to create a continuous
 integration workflow where a build that fails its tests doesn't push the built
 image. Automated tests don't push images to the registry on their own. [Learn about automated image testing](automated-testing.md).
 
-Depending on your [subscription](https://www.docker.com/pricing),
+Depending on your [subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsHubRepoBuilds),
 you may get concurrent builds, which means that `N` autobuilds can be run at the
 same time. `N` is configured according to your subscription. Once `N+1` builds
 are running, any additional builds go into a queue to be run later.

@@ -127,7 +127,7 @@ product line.
 
 > [!NOTE]  
 > For information about enterprise-level features offered by Docker today,
-> see the [Docker Business subscription](https://www.docker.com/pricing/).
+> see the [Docker Business subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsRetired).
 
 ### Docker Data Center and Docker Trusted Registry
 
