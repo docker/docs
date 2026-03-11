@@ -21,9 +21,9 @@ params:
     - title: Registry Access Management
       url: /security/for-admins/hardened-desktop/registry-access-management/
     - title: Image Access Management
-      url: /security/for-admins/hardened-desktop/image-access-management/
+      url: /security/for-admins/hardened-deskatop/image-access-management/
     - title: Docker subscription information
-      url: "https://www.docker.com/pricing?ref=DocsGuides&refAction=DocsGuidesCTAClicked"
+      url: "https://www.docker.com/pricing?ref=Docs&refAction=DocsGuidesAdminSetup"
 ---
 
 Docker's tools provide a scalable, secure platform that empowers your
