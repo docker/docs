@@ -39,7 +39,7 @@ that was installed directly inside a WSL Linux distribution. Running both can ca
 2. Follow the usual installation instructions to install Docker Desktop. Depending on which version of Windows you are using, Docker Desktop may prompt you to turn on WSL 2 during installation. Read the information displayed on the screen and turn on the WSL 2 feature to continue.
 3. Start Docker Desktop from the **Windows Start** menu.
 4. Navigate to **Settings**.
-5. From the **Resources** tab, select **Use WSL 2 based engine**.
+5. From the **General** tab, select **Use WSL 2 based engine**.
 
     If you have installed Docker Desktop on a system that supports WSL 2, this option is turned on by default.
 6. Select **Apply**.
