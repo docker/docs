@@ -125,7 +125,7 @@ Mirantis Kubernetes Engine or other products offered by Mirantis. Much of the
 technology and features found in Docker EE have been absorbed into the Mirantis
 product line.
 
-> [!NOTE]  
+> [!TIP]  
 > For information about enterprise-level features offered by Docker today,
 > see the [Docker Business subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsRetired).
 
