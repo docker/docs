@@ -24,7 +24,7 @@ You can upgrade or downgrade your Docker subscription at any time to match your 
 
 When you upgrade your Docker subscription, you immediately get access to all features and entitlements in your new subscription tier. 
 
-For detailed feature information, see [Docker Pricing](https://www.docker.com/pricing).
+For detailed feature information, see [Docker Pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscriptionChange).
 
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
@@ -58,7 +58,7 @@ Consider the following before downgrading:
 - SSO and SCIM: If downgrading from Docker Business and your organization uses single sign-on, remove your SSO connection and verified domains first. Organization members who were auto-provisioned through SCIM need to reset their passwords to sign in without SSO.
 - Private repository collaborators: Personal subscriptions don't include collaborators for private repositories. When downgrading from Pro to Personal, all collaborators are removed and additional private repositories are locked.
 
-For feature limits in each tier, see [Docker Pricing](https://www.docker.com/pricing).
+For feature limits in each tier, see [Docker Pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscriptionChange).
 
 
 {{< tabs >}}

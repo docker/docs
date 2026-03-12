@@ -30,7 +30,7 @@ Build Cloud-compatible client (buildx) and it works with both commands.
 
 ### How many minutes are included in Docker Build Cloud Team plans?
 
-Pricing details for Docker Build Cloud can be found on the [pricing page](https://www.docker.com/pricing/).
+Pricing details for Docker Build Cloud can be found on the [pricing page](https://www.docker.com/pricing?ref=Docs&refAction=DocsGuidesBuildCloudFaq).
 
 ### I’m a Docker personal user. Can I try Docker Build Cloud?
 

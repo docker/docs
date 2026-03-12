@@ -19,7 +19,7 @@ aliases:
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees or more than $10 million USD in annual revenue) requires a [paid
-> subscription](https://www.docker.com/pricing/).
+> subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopLinuxInstall).
 
 This page contains information about general system requirements, supported platforms, and instructions on how to install Docker Desktop for Linux.
 
@@ -33,7 +33,7 @@ This page contains information about general system requirements, supported plat
 
 > [!IMPORTANT]
 >
-> For commercial use of Docker Engine obtained via Docker Desktop within larger enterprises (exceeding 250 employees or with annual revenue surpassing $10 million USD), a [paid subscription](https://www.docker.com/pricing/) is required.
+> For commercial use of Docker Engine obtained via Docker Desktop within larger enterprises (exceeding 250 employees or with annual revenue surpassing $10 million USD), a [paid subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopLinuxInstall) is required.
 
 Docker Desktop for Linux provides a user-friendly graphical interface that simplifies the management of containers and services. It includes Docker Engine as this is the core technology that powers Docker containers. Docker Desktop for Linux also comes with additional features like Docker Scout and Docker Extensions.
 

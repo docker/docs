@@ -21,7 +21,7 @@ aliases:
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees or more than $10 million USD in annual revenue) requires a [paid
-> subscription](https://www.docker.com/pricing/).
+> subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopUbuntuInstall).
 
 This page contains information on how to install, launch and upgrade Docker Desktop on an Ubuntu distribution.
 
@@ -87,7 +87,7 @@ $ sudo apt install ./docker-desktop-amd64.deb
 
 ## Next steps
 
-- Review [Docker's subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
+- Review [Docker's subscriptions](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopUbuntuInstall) to see what Docker can offer you.
 - Follow the [Docker workshop](/get-started/workshop/_index.md) to learn how to build an image and run it as a containerized application.
 - [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and all its features.
 - [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.

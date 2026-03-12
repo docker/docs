@@ -21,7 +21,7 @@ We’d love to hear your feedback! To submit feedback:
 
 To get community support, use the [Docker Community Slack](https://dockr.ly/comm-slack). Personalized support is available
 through the Docker Pro, Team, and Business subscriptions. See [Docker
-Pricing](https://www.docker.com/pricing) for details.
+Pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsReadme) for details.
 
 If you have an idea for a new feature or behavior change in a specific aspect of
 Docker or have found a product bug, file an issue in the project's
