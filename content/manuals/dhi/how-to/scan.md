@@ -150,8 +150,7 @@ lifecycle.
 
 #### Example GitHub Actions workflow
 
-The following is a sample GitHub Actions workflow that builds an image and scans
-it using Docker Scout:
+The following is a sample GitHub Actions workflow that builds an image, scans it and pushes to the registry only if the scan passes:
 
 ```yaml {collapse="true"}
 name: DHI Vulnerability Scan
@@ -179,6 +178,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Set up Docker with containerd image store
+        uses: docker/setup-docker-action@v4
+        with:
+          daemon-config: |
+            {
+              "features": {
+                 "containerd-snapshotter": true
+              }
+            }
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 
@@ -190,7 +199,10 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.SHA }} .
+          docker build \
+             --provenance=mode=max \
+             --sbom=true \
+             -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.SHA }} .
 
       - name: Run Docker Scout CVE scan
         uses: docker/scout-action@v1
@@ -199,11 +211,30 @@ jobs:
           image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.SHA }}
           only-severities: critical,high
           exit-code: true
+
+      - name: Push image
+        if: success()
+        run: |
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.SHA }}
+
 ```
 
 The `exit-code: true` parameter ensures that the workflow fails if any critical or
 high-severity vulnerabilities are detected, preventing the deployment of
 insecure images.
+
+> [!NOTE]
+>
+> The `--provenance=mode=max` and `--sbom=true` flags are required so that
+> Docker Scout can trace the DHI base image lineage and correctly apply its
+> VEX statements. Enabling the containerd image store via
+> `docker/setup-docker-action` allows BuildKit to store attestations locally
+> without pushing to a registry first. Without the containerd image store,
+> Docker Engine rejects the build with: `Attestation is not supported for the docker driver. 
+> Switch to a different driver, or turn on the containerd image store, and try again.`
+> The `Push image` step runs only if the scan passes, using `if: success()`
+> to ensure images are only pushed to the registry when they are free of
+> critical or high-severity vulnerabilities.
 
 For more details on using Docker Scout in CI, see [Integrating Docker
 Scout with other systems](/manuals/scout/integrations/_index.md).
