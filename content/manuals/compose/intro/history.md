@@ -41,7 +41,7 @@ Three major versions of the Compose file format for Compose v1 were released:
 - Compose file format 3.x with Compose 1.10.0 in 2017
 
 Compose file format 1 is substantially different to all the following formats as it lacks a top-level `services` key.
-Its usage is historical and files written in this format don't run with Compose v2.
+Its usage is historical and files written in this format don't run with Compose v2 or v5.
 
 Compose file format 2.x and 3.x are very similar to each other, but the latter introduced many new options targeted at Swarm deployments.
 
