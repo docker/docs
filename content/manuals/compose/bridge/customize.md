@@ -56,8 +56,8 @@ This canonical YAML output serves as the input for Compose Bridge transformation
   # access a nested attribute using dot notation
   {{ if eq $service.deploy.mode "global" }}
 kind: DaemonSet
-  {{ end }}
-{{ end }}
+  {{ end }}
+{{ end }}
 ```
 
 You can check the [Compose Specification JSON schema](https://github.com/compose-spec/compose-go/blob/main/schema/compose-spec.json) for a full overview of the Compose model. This schema outlines all possible configurations and their data types in the Compose model. 
@@ -125,13 +125,18 @@ $ docker compose bridge convert --transformations mycompany/transform
 
 The default transformation also includes templates for applications that use LLMs:
 
-- `model-runner-deployment.tmpl`
-- `model-runner-service.tmpl`
-- `model-runner-pvc.tmpl`
-- `/overlays/model-runner/kustomization.yaml`
-- `/overlays/desktop/deployment.tmpl`
+- `model-runner-deployment.tmpl`: Generates the Kubernetes Deployment for Docker Model Runner. Customize it to change replica counts, image tags, resource requests and limits, GPU scheduling settings, tolerations, or additional environment variables.
+- `model-runner-service.tmpl`: Builds the Service that exposes Docker Model Runner. Update it to switch between ClusterIP, NodePort, or LoadBalancer types, adjust ports, or add annotations for ingress and service meshes.
+- `model-runner-pvc.tmpl`: Defines the persistent volume claim used to store downloaded models. Edit it to set storage size, storage class, access modes, or volume annotations required by your storage provider.
+- `/overlays/model-runner/kustomization.yaml`: Kustomize overlay applied when you deploy Model Runner to a standalone Kubernetes cluster. Extend it to add patches for labels and annotations, attach NetworkPolicies, or include extra manifests such as PodDisruptionBudgets.
+- `/overlays/desktop/deployment.tmpl`: Desktop-specific deployment template that keeps the in-cluster Model Runner scaled down and points workloads to the host endpoint. Adjust it if you change the Desktop endpoint or want to deploy Model Runner on Desktop instead of relying on the host service.
 
-These templates can be extended or replaced to change how Docker Model Runner is deployed or configured.
+Common customization scenarios:
+
+- Enable GPU support by adding vendor-specific resource requests, limits, and node selectors in `model-runner-deployment.tmpl`.
+- Increase or tune storage for model artifacts by editing `model-runner-pvc.tmpl` to set the desired size, storage class, or access mode.
+- Expose Model Runner outside the cluster by switching the service type in `model-runner-service.tmpl` or adding ingress annotations in the model-runner overlay.
+- Align cluster policies by adding labels, annotations, PodSecurity settings, or NetworkPolicies through `/overlays/model-runner/kustomization.yaml`.
 
 For more details, see [Use Model Runner](use-model-runner.md).
 
