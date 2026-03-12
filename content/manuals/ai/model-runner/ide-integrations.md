@@ -274,7 +274,20 @@ You can find more details in [this Docker Blog post](https://www.docker.com/blog
     $env:ANTHROPIC_BASE_URL="http://localhost:12434"
     claude --model gpt-oss:32k
     ```
+
+> [!TIP]
+>
+> To avoid setting the variable each time, add it to your shell profile (`~/.bashrc`, `~/.zshrc`, or equivalent):
+>
+> ```shell
+> export ANTHROPIC_BASE_URL=http://localhost:12434
+> ```
+
 You can find more details in [this Docker Blog post](https://www.docker.com/blog/run-claude-code-locally-docker-model-runner/)
+
+> [!NOTE]
+>
+> While the other integrations on this page use the [OpenAI-compatible API](/ai/model-runner/api-reference/#openai-compatible-api), DMR also exposes a [Anthropic-compatible API](/ai/model-runner/api-reference/#anthropic-compatible-api) used here.
 
 ## Common issues
 
