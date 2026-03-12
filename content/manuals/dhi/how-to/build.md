@@ -13,9 +13,22 @@ metadata. The DHI build system produces a signed image containing only the requi
 packages, with a Software Bill of Materials (SBOM) and SLSA Build Level 3
 provenance.
 
+This guide is for teams building private custom images and developers who want
+to contribute new image definitions to the DHI catalog.
+
 This page explains how to write a DHI definition file, build images locally, and
 use advanced patterns such as build stages, third-party repositories, file
 paths, and dev variants.
+
+> [!NOTE]
+>
+> When you build your own hardened images using this guide, you benefit from
+> SBOM generation, a declarative build approach, and security-focused tooling.
+> However, self-built images don't carry the same guarantees as images pulled
+> from the DHI catalog, such as Docker's continuous vulnerability remediation,
+> full attestation chain, and SLSA Build Level 3 provenance from Docker's
+> secure build service.
+
 
 > [!IMPORTANT]
 >
@@ -785,12 +798,11 @@ Measure the security improvement against an equivalent non-hardened image:
 
 ```console
 $ docker scout compare my-image:latest \
-    --to <non-hardened-equivalent>:<tag> \
+    --to <current-image>:<tag> \
     --platform linux/amd64
 ```
 
-Replace `<non-hardened-equivalent>` with the Docker Official Image or
-community image you're comparing against.
+Replace `<curent-image>` with the image you're replacing.
 
 ### Inspect with Docker Debug
 
