@@ -208,7 +208,7 @@ To authenticate using an OAT:
 2. Select **Admin Console**, then **Access tokens**.
 3. Select **Generate access token**.
 4. Give the token a descriptive name, for example `dhi-pull-automation`.
-5. Under **Repository access**, select **Read public repositories**.
+5. Expand the **Repository** drop-down and select **Read public repositories**.
 6. Select **Generate token**, then copy and save the token. You won't be able
    to retrieve it after closing the screen.
 7. Sign in to `dhi.io` using your organization name as the username and the OAT
