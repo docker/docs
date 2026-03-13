@@ -12,26 +12,32 @@ reference them in your Dockerfile, and run containers with `docker run`.
 
 The key difference is that DHIs are security-focused and intentionally minimal
 to reduce the attack surface. This means some variants don't include a shell or
-package manager, and may run as a nonroot user by default.
+package manager, and may run as a non-root user by default.
 
 > [!IMPORTANT]
 >
 > You must authenticate to the Docker Hardened Images registry (`dhi.io`) to
-> pull images. Use your Docker ID credentials (the same username and password
-> you use for Docker Hub) when signing in. If you don't have a Docker account,
-> [create one](../../accounts/create-account.md) for free.
+> pull images. You can authenticate using either of the following:
+>
+> - **Docker ID (personal credentials):** Use the same username and password
+>   you use for Docker Hub. If you don't have a Docker account,
+>   [create one](../../accounts/create-account.md) for free.
+> - **Organization access token (OAT):** Use your organization name as the
+>   username and an OAT as the password. OATs are recommended for CI/CD
+>   pipelines and automated workflows. See
+>   [Organization access tokens](../../enterprise/security/access-tokens.md).
 >
 > Run `docker login dhi.io` to authenticate.
 
 ## Considerations when adopting DHIs
 
-Docker Hardened Images are intentionally minimal to improve security. If you're updating existing Dockerfiles or frameworks to use DHIs, keep the following considerations in mind:
+Docker Hardened Images are intentionally minimal to improve security. If you're updating existing Dockerfiles or frameworks to use DHIs, keep the considerations in mind:
 
 | Feature            | Details                                                                                                                                                                                                                                               |
 |--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | No shell or package manager | Runtime images don’t include a shell or package manager. Use `-dev` or `-sdk` variants in build stages to run shell commands or install packages, and then copy artifacts to a minimal runtime image.                                         |
 | Non-root runtime    | Runtime DHIs default to running as a non-root user. Ensure your application doesn't require privileged access and that all needed files are readable and executable by a non-root user.                                                             |
-| Ports               | Applications running as non-root users can't bind to ports below 1024 in older versions of Docker or in some Kubernetes configurations. Use ports above 1024 for compatibility.                                             |
+| Ports               | Applications running as non-root users can't bind to ports lower than 1024 in older versions of Docker or in some Kubernetes configurations. Use ports higher than 1024 for compatibility.                                             |
 | Entry point         | DHIs may not include a default entrypoint or might use a different one than the original image you're familiar with. Check the image configuration and update your `CMD` or `ENTRYPOINT` directives accordingly.                                        |
 | Multi-stage builds  | Always use multi-stage builds for frameworks: a `-dev` image for building or installing dependencies, and a minimal runtime image for the final stage.                                                                                                              |
 | TLS certificates    | DHIs include standard TLS certificates. You do not need to manually install CA certs.                                                                                                                                                               |
