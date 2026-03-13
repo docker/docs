@@ -207,10 +207,12 @@ same steps to a non-mirrored image by updating the the `SRC_ATT_REPO` and
    In this example, you use a Docker username to represent a member of the Docker
    Hub organization that the DHI repositories are mirrored in. Prepare a
    [personal access token (PAT)](../../security/access-tokens.md) for the user
-   with `read only` access. Alternatively, you can use an organization namespace and
+   with `read only` access. Alternatively, you can use an organization name and
    an [organization access token
-   (OAT)](../../enterprise/security/access-tokens.md) to sign in to Docker Hub, but OATs
-   are not yet supported for `registry.scout.docker.com`.
+   (OAT)](../../enterprise/security/access-tokens.md) to authenticate with `docker.io`.
+   Note that OATs are not supported for `registry.scout.docker.com`. If your workflow
+   requires authenticating to the Scout registry, use a personal access token (PAT)
+   for that step.
 
    ```console
    $ export DOCKER_USERNAME="YOUR_DOCKER_USERNAME"
@@ -225,7 +227,7 @@ same steps to a non-mirrored image by updating the the `SRC_ATT_REPO` and
    $ export TAG="3.13-alpine3.21"
    ```
 
-2. Sign in via `regctl` to Docker Hub, the Scout registry that contains
+3. Sign in via `regctl` to Docker Hub, the Scout registry that contains
    the attestations, and your destination registry.
 
    ```console
@@ -234,7 +236,7 @@ same steps to a non-mirrored image by updating the the `SRC_ATT_REPO` and
    $ echo $DEST_REG_TOKEN | regctl registry login -u "$DEST_REG_USERNAME" --pass-stdin "$DEST_REG"
    ```
 
-3. Mirror the image and attestations using `--referrers` and referrer endpoints:
+4. Mirror the image and attestations using `--referrers` and referrer endpoints:
 
    ```console
    $ regctl image copy \
@@ -246,7 +248,7 @@ same steps to a non-mirrored image by updating the the `SRC_ATT_REPO` and
         --force-recursive
    ```
 
-4. Verify that artifacts were preserved.
+5. Verify that artifacts were preserved.
 
    First, get a digest for a specific tag and platform. For example, `linux/amd64`.
 
