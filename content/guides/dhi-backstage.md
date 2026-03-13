@@ -288,7 +288,7 @@ The previous steps still use the `-dev` or `-sfw-dev` variant as the runtime ima
 > When creating a customization, only add what your application needs at runtime:
 >
 > - **System packages** - add shared libraries (such as `sqlite-libs`) and
->   language runtimes from the DHI hardened package feed (such as `python-3.14`).
+>   language runtimes from the DHI catalog (such as `python-3.14`).
 >   Do not add build tools (such as `g++`, `make`, or `python3` from Alpine).
 > - **Build tools** - keep these in the `-dev` build stage only. Never add them
 >   to the runtime customization.
@@ -301,7 +301,7 @@ The previous steps still use the `-dev` or `-sfw-dev` variant as the runtime ima
 For Backstage, the runtime image needs:
 
 - **sqlite-libs** - the shared library that the compiled `better-sqlite3` native module links against (added as a system package).
-- **Python** - if your Backstage plugins or configuration require Python at runtime. Added as the `python-3.14` system package, which installs Python from the hardened DHI package feed.
+- **Python** - if your Backstage plugins or configuration require Python at runtime. Added as the `python-3.14` system package from the DHI catalog. Unlike `python3` installed via `apk`, this package is patched by Docker and tracked in the image SBOM.
 
 Docker will continuously build with SLSA Level 3 compliance and patch these customized images within the guaranteed SLA for CVE patching.
 
