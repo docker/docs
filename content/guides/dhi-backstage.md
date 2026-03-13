@@ -200,7 +200,7 @@ Build and tag this version:
 docker build -t backstage:dhi-dev .
 ```
 
-> **Note**
+> [!NOTE]
 >
 > The `-dev` variant includes a shell and package manager, which is why `apk add` works. Backstage requires `python3` and native build tools in the runtime image because `yarn workspaces focus --all --production` recompiles native modules during the production install. This is specific to Backstage's build process — most Node.js applications can use the standard (non-dev) DHI runtime variant without additional packages.
 
@@ -275,7 +275,7 @@ docker build -t backstage:dhi-sfw-dev .
 
 When you build, you'll see Socket Firewall messages in the build output: `Protected by Socket Firewall` for any `yarn` and `npm` commands executed in the Dockerfile or in the running containers.
 
-> **Tip**
+> [!TIP]
 >
 > The `-sfw-dev` variant is larger (1.9 GB versus 1.72 GB) because Socket Firewall adds monitoring tooling. The security benefit during `yarn install` outweighs the size increase.
 
@@ -365,7 +365,7 @@ dhictl customization build list --org YOUR_ORG YOUR_ORG/dhi-node "backstage"
 
 Docker builds the customized image on its secure infrastructure and publishes it as `YOUR_ORG/dhi-node:24-alpine3.23_backstage`.
 
-> **Note**
+> [!NOTE]
 >
 > If your Backstage configuration does not require Python at runtime, you can omit the `python-3.14` from the packages list. The `sqlite-libs` package alone is sufficient to run Backstage with `better-sqlite3`.
 
@@ -405,7 +405,7 @@ OCI runtime exec failed: exec failed: unable to start container process: ...
 
 Use [Docker Debug](/dhi/how-to/debug/) if you need to troubleshoot a running distroless container.
 
-> **Note**
+> [!NOTE]
 >
 > If your organization requires FIPS/STIG compliant images, that's also an option in DHI Enterprise.
 
@@ -432,7 +432,7 @@ A typical comparison across the approaches shows results similar to the followin
 | Socket Firewall | No | No | Yes (build) | Yes (build) / No (runtime) |
 | SLSA provenance | No | Base only | Base only | Full (Level 3) |
 
-> **Note**
+> [!NOTE]
 >
 > The `-sfw-dev` variant is larger because Socket Firewall adds monitoring tooling to the image. This is expected — the additional size is in the build stages, and the security benefit during `yarn install` outweighs the size increase.
 
