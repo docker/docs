@@ -318,7 +318,7 @@ For more information, see [Customize an image](/dhi/how-to/customize/).
 
 ### Using the `dhictl` CLI
 
-`dhictl` is Docker's command-line tool for managing Docker Hardened Images. It lets you browse the DHI catalog, mirror images, and create customizations directly from your terminal for integrating DHI into CI/CD pipelines and infrastructure-as-code workflows. You can install `dhictl` as a standalone binary or as a Docker CLI plugin (`docker dhi`); it will also be available by default in Docker Desktop soon.
+`dhictl` is Docker's command-line tool for managing Docker Hardened Images. It lets you browse the DHI catalog, mirror images, and create customizations directly from your terminal. You can integrate `dhictl` into CI/CD pipelines and infrastructure-as-code workflows. You can install `dhictl` as a standalone binary or as a Docker CLI plugin (`docker dhi`); for installation instructions, see [Use the DHI CLI](/dhi/how-to/cli/).
 
 Rather than writing the customization YAML by hand, use `dhictl` to scaffold a starting point:
 
