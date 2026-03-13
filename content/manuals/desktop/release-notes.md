@@ -42,6 +42,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - [Docker Scout CLI v1.20.1](https://github.com/docker/scout-cli/releases/tag/v1.20.1)
 - [cagent v1.29.0](https://github.com/docker/cagent/releases/tag/v1.29.0)
+- [Docker Buildx v0.32.1](https://github.com/docker/buildx/releases/tag/v0.32.1)
 
 ### Bug fixes and minor changes
 
