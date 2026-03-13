@@ -213,19 +213,22 @@ To authenticate using an OAT:
    to retrieve it after closing the screen.
 1. Sign in to `dhi.io` using your organization name as the username and the OAT
    as the password:
-```console
-   $ oras login dhi.io -u <YOUR_ORGANIZATION_NAME>
-```
+
+    ```console
+    $ oras login dhi.io -u <YOUR_ORGANIZATION_NAME>
+    ```
 
    Or non-interactively in a CI/CD pipeline:
-```console
+
+   ```console
    $ echo $OAT | oras login dhi.io -u "$DOCKER_ORG" --password-stdin
-```
+   ```
 
 1. Verify access by discovering attestations on a DHI image:
-```console
+
+   ```console
    $ oras discover dhi.io/node:24-dev --platform linux/amd64
-```
+   ```
 
    > [!NOTE]
    >
