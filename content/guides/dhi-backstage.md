@@ -283,14 +283,25 @@ When you build, you'll see Socket Firewall messages in the build output: `Protec
 
 The previous steps still use the `-dev` or `-sfw-dev` variant as the runtime image, which includes a shell and package manager. DHI Enterprise customizations let you start from the base (non-dev) image — which has no shell and no package manager — and add only the runtime libraries and language runtimes your application needs.
 
-> **Important**
+> [!IMPORTANT]
 >
-> Only add runtime libraries to the customization, not build tools or language runtimes as system packages. Compile everything in the build stage (which uses the `-dev` variant), copy the pre-built `node_modules` into the runtime image, and use an OCI artifact for any language runtimes needed at runtime.
+> When creating a customization, only add what your application needs at runtime:
+>
+> - **System packages** - add shared libraries (such as `sqlite-libs`) and
+>   language runtimes from the DHI hardened package feed (such as `python-3.14`).
+>   Do not add build tools (such as `g++`, `make`, or `python3` from Alpine).
+> - **Build tools** - keep these in the `-dev` build stage only. Never add them
+>   to the runtime customization.
+>
+> Language runtimes installed from the DHI hardened package feed are patched and
+> tracked in the image SBOM, which is why they are acceptable as system packages.
+> Build tools from Alpine or Debian package feeds are not hardened and should
+> never appear in the runtime image.
 
 For Backstage, the runtime image needs:
 
-- **sqlite-libs** — the shared library that the compiled `better-sqlite3` native module links against (added as a system package).
-- **Python** — if your Backstage plugins or configuration require Python at runtime. Added as the `python-3.14` system package, which installs Python from the hardened DHI package feed.
+- **sqlite-libs** - the shared library that the compiled `better-sqlite3` native module links against (added as a system package).
+- **Python** - if your Backstage plugins or configuration require Python at runtime. Added as the `python-3.14` system package, which installs Python from the hardened DHI package feed.
 
 Docker will continuously build with SLSA Level 3 compliance and patch these customized images within the guaranteed SLA for CVE patching.
 
