@@ -200,7 +200,7 @@ which makes them better suited for CI/CD pipelines and automated workflows.
 >
 > When using an OAT, use your **organization name** as the username, not your
 > personal Docker ID. OATs are org-scoped and will return a `401 Unauthorized`
-> error if presented under an individual user's account name.
+> error if presented under an individual username.
 
 To authenticate using an OAT:
 
@@ -211,7 +211,7 @@ To authenticate using an OAT:
 5. Under **Repository access**, select **Read public repositories**.
 6. Select **Generate token**, then copy and save the token. You won't be able
    to retrieve it after closing the screen.
-7. Log in to `dhi.io` using your organization name as the username and the OAT
+7. Sign in to `dhi.io` using your organization name as the username and the OAT
    as the password:
 ```console
    $ oras login dhi.io -u <YOUR_ORGANIZATION_NAME>
