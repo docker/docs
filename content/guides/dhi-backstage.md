@@ -445,7 +445,7 @@ A typical comparison across the approaches shows results similar to the followin
 
 > [!NOTE]
 >
-> The `-sfw-dev` variant is larger because Socket Firewall adds monitoring tooling to the image. This is expected — the additional size is in the build stages, and the security benefit during `yarn install` outweighs the size increase.
+> The `-sfw-dev` variant is larger because Socket Firewall adds monitoring tooling to the image. The additional size is in the build stages, and the security benefit during `yarn install` outweighs the size increase.
 
 For a more thorough assessment, scan with multiple tools:
 
