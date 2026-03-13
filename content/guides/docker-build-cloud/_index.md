@@ -19,7 +19,7 @@ params:
     - title: Docker Build Cloud overview
       url: /build-cloud/
     - title: Subscriptions and features
-      url: "https://www.docker.com/pricing/"
+      url: "https://www.docker.com/pricing?ref=Docs&refAction=DocsGuidesBuildCloud"
     - title: Using Docker Build Cloud
       url: /build-cloud/usage/
 ---

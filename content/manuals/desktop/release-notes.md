@@ -26,6 +26,37 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.64.0
+
+{{< release-date date="2026-03-11" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.64.0" build_path="/221278/" >}}
+
+### Updates
+
+- [Docker Compose v5.1.0](https://github.com/docker/compose/releases/tag/v5.1.0)
+- [Docker Scout CLI v1.20.0](https://github.com/docker/scout-cli/releases/tag/v1.20.0)
+- [cagent v1.27.1](https://github.com/docker/cagent/releases/tag/v1.27.1)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Fixed a bug in MCP Toolkit where disabling all tools in a profile would enable all tools.
+- Fixed the `docker ai` command stopping after a Docker Agent update.
+- Fixed Gordon session title flickering when hover buttons appeared.
+- Improved Gordon summary rendering and reduced narrative verbosity.
+- Fixed a bug where `docker ai` CLI commands did not correctly shell out to cagent.
+- Fixed the **OAuth** tab in Docker MCP Toolkit not showing entries from all catalogs.
+- Improved MCP Catalog search.
+- Fixed the **Build logs** tab not retaining search terms and filters when switching tabs.
+- Fixed Kind container startup to be more reliable.
+
+#### For Mac
+
+- Improved update error reporting with more descriptive diagnostics.
+- Improved update reliability by preparing the updated `Docker.app` under `Application Support` instead of `/tmp`.
+
 ## 4.63.0
 
 {{< release-date date="2026-03-02" >}}
@@ -36,7 +67,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Added SLSA v1 provenance support in the **Builds** view. 
 
-### Upgrades
+### Updates
 
 - [Kubernetes v1.34.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.3)
 - Linux kernel `v6.12.72`

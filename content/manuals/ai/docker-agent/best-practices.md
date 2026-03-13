@@ -249,6 +249,6 @@ complex reasoning needed, and Haiku is faster and cheaper.
 - Check [toolsets reference](./reference/toolsets.md) to understand what tools
   agents can use
 - See [example
-  configurations](https://github.com/docker/cagent/tree/main/examples) for
+  configurations](https://github.com/docker/docker-agent/tree/main/examples) for
   complete working agents
 - Read the [RAG guide](./rag.md) for detailed retrieval optimization

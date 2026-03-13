@@ -52,9 +52,9 @@ The following diagram shows the relationship between a registry, repositories, a
 +---------------------------------------+
 ```
 
-> [!NOTE]
+> [!TIP]
 >
-> You can create one private repository and unlimited public repositories using the free version of Docker Hub. For more information, visit the [Docker Hub subscription page](https://www.docker.com/pricing/).
+>A Docker Personal plan gives you one private repository and unlimited public repositories. To get unlimited private repositories, upgrade to the [Docker Team plan](https://www.docker.com/pricing?ref=Docs&refAction=DocsConceptsRegistry).
 
 ## Try it out
 

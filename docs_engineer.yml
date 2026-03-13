@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/docker/cagent/refs/heads/main/cagent-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/docker/docker-agent/refs/heads/main/cagent-schema.json
 agents:
   root:
     model: opus

@@ -32,4 +32,4 @@ You can also join the [Developer Preview Program](https://www.docker.com/communi
 
 > [!TIP]
 > 
-> Need to upgrade? <a href="https://www.docker.com/pricing/" id="pricing-link" class="link" rel="noopener">Compare Docker Team and Docker Business</a> to choose the plan that best fits your team's needs.
+> Need to upgrade? <a href="https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscriptionFaq" id="pricing-link" class="link" rel="noopener">Compare Docker Team and Docker Business</a> to choose the plan that best fits your team's needs.

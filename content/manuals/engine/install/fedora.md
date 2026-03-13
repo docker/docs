@@ -28,7 +28,6 @@ Fedora versions:
 
 - Fedora 43
 - Fedora 42
-- Fedora 41
 
 ### Uninstall old versions
 

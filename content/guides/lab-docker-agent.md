@@ -16,7 +16,7 @@ params:
   time: 20 minutes
   resource_links:
     - title: Docker Agent documentation
-      url: https://github.com/docker/cagent
+      url: https://github.com/docker/docker-agent
     - title: Docker MCP Toolkit
       url: https://docs.docker.com/ai/mcp-catalog-and-toolkit/toolkit/
     - title: Labspace repository

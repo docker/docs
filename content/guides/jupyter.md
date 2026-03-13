@@ -352,7 +352,7 @@ To share your image and data, you'll use [Docker Hub](https://hub.docker.com/). 
 
 ### Share your image
 
-1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) or sign in to [Docker Hub](https://hub.docker.com).
+1. [Sign up](https://www.docker.com/pricing?ref=Docs&refAction=DocsGuidesJupyter) or sign in to [Docker Hub](https://hub.docker.com).
 
 2. Rename your image so that Docker knows which repository to push it to. Open a
    terminal and run the following `docker tag` command. Replace `YOUR-USER-NAME`

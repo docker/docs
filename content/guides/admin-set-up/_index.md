@@ -23,7 +23,7 @@ params:
     - title: Image Access Management
       url: /security/for-admins/hardened-desktop/image-access-management/
     - title: Docker subscription information
-      url: "https://www.docker.com/pricing/"
+      url: "https://www.docker.com/pricing?ref=Docs&refAction=DocsGuidesAdminSetup"
 ---
 
 Docker's tools provide a scalable, secure platform that empowers your
@@ -46,7 +46,7 @@ policies.
 - Organizations seeking to optimize their use of Docker products for greater
   scalability and efficiency
 - Organizations with a
-  [Docker Business subscription](https://www.docker.com/pricing/)
+  [Docker Business subscription](https://www.docker.com/pricing?ref=DocsGuides&refAction=DocsGuidesCTAClicked)
 
 ## What you’ll learn
 

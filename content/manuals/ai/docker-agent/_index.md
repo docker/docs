@@ -16,7 +16,7 @@ keywords: [ai, agent, docker agent, cagent]
 
 {{< summary-bar feature_name="Docker Agent" >}}
 
-[Docker Agent](https://github.com/docker/cagent) is an open-source framework
+[Docker Agent](https://github.com/docker/docker-agent) is an open-source framework
 for building teams of specialized AI agents. Instead of prompting one
 generalist model, you define agents with specific roles and instructions that
 collaborate to solve problems. Run these agent teams from your terminal using
@@ -70,12 +70,12 @@ Docker Agent is included in Docker Desktop 4.63 and later. In Docker Desktop ver
 
 For Docker Engine users or custom installations:
 
-- **Homebrew**: `brew install cagent`
-- **Winget**: `winget install Docker.Cagent`
+- **Homebrew**: `brew install docker-agent`
+- **Winget**: `winget install Docker.Agent`
 - **Pre-built binaries**: [GitHub
-  releases](https://github.com/docker/cagent/releases)
+  releases](https://github.com/docker/docker-agent/releases)
 - **From source**: See the [Docker Agent
-  repository](https://github.com/docker/cagent?tab=readme-ov-file#build-from-source)
+  repository](https://github.com/docker/docker-agent?tab=readme-ov-file#build-from-source)
 
 The `docker-agent` binary should be copied to `~/.docker/cli-plugins` and then can be used with the `docker agent` command. Alternatively, it can be used as a standalone binary.
 
@@ -162,11 +162,11 @@ it doesn't exist yet.
 - Integrate Docker Agent with your [editor](./integrations/acp.md) or use agents as
   [tools in MCP clients](./integrations/mcp.md)
 - Browse example agent configurations in the [Docker Agent
-  repository](https://github.com/docker/cagent/tree/main/examples)
+  repository](https://github.com/docker/docker-agent/tree/main/examples)
 - Use `docker agent new` to generate agent teams with AI <!-- TODO: link to some page
   where we explain this, probably a CLI reference? -->
 - Connect agents to external tools via the [Docker MCP
   Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)
 - Read the full [configuration
-  reference](https://github.com/docker/cagent?tab=readme-ov-file#-configuration-reference)
+  reference](https://github.com/docker/docker-agent?tab=readme-ov-file#-configuration-reference)
   <!-- TODO: move to this site/repo -->

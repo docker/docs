@@ -3,8 +3,8 @@ description: Discover the benefits and typical use cases of Docker Compose for c
 keywords: docker compose, compose use cases, compose benefits, container orchestration, development environments, testing containers, yaml file
 title: Why use Compose?
 weight: 20
-aliases: 
-- /compose/features-uses/
+aliases:
+  - /compose/features-uses/
 ---
 
 ## Key benefits of Docker Compose
@@ -55,8 +55,9 @@ $ docker compose down
 
 ### Single host deployments
 
-Compose has traditionally been focused on development and testing workflows,
-but with each release we're making progress on more production-oriented features.
+Compose supports production deployments on single hosts. You can use
+Compose to deploy applications to remote Docker hosts and manage
+production-specific configurations.
 
 For details on using production-oriented features, see
 [Compose in production](/manuals/compose/how-tos/production.md).

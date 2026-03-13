@@ -617,5 +617,5 @@ rag:
   documentation
 - Review the [CLI reference](./cli.md) for command-line options
 - Browse [example
-  configurations](https://github.com/docker/cagent/tree/main/examples)
+  configurations](https://github.com/docker/docker-agent/tree/main/examples)
 - Learn about [sharing agents](../sharing-agents.md)

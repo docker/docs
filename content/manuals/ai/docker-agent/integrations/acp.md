@@ -39,7 +39,7 @@ Before configuring your editor, you need:
 - **Docker Agent installed** - See the [installation guide](../_index.md#installation)
 - **Agent configuration** - A YAML file defining your agent. See the
   [tutorial](../tutorial.md) or [example
-  configurations](https://github.com/docker/cagent/tree/main/examples)
+  configurations](https://github.com/docker/docker-agent/tree/main/examples)
 - **Editor with ACP support** - Neovim, Intellij, Zed, etc.
 
 Your agents will use model provider API keys from your shell environment
@@ -181,5 +181,5 @@ If the agent starts but can't access files or perform other actions, check:
 - Add [RAG for codebase search](../rag.md) to your agent
 - Check the [CLI reference](../reference/cli.md) for all `docker agent serve acp` options
 - Browse [example
-  configurations](https://github.com/docker/cagent/tree/main/examples) for
+  configurations](https://github.com/docker/docker-agent/tree/main/examples) for
   inspiration

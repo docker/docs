@@ -5,11 +5,11 @@ weight: 40
 description: Introduction to what multi-platform builds are and how to execute them using Docker Buildx.
 keywords: build, buildx, buildkit, multi-platform, cross-platform, cross-compilation, emulation, QEMU, ARM, x86, Windows, Linux, macOS
 aliases:
-- /build/buildx/multiplatform-images/
-- /desktop/multi-arch/
-- /docker-for-mac/multi-arch/
-- /mackit/multi-arch/
-- /build/guide/multi-platform/
+  - /build/buildx/multiplatform-images/
+  - /desktop/multi-arch/
+  - /docker-for-mac/multi-arch/
+  - /mackit/multi-arch/
+  - /build/guide/multi-platform/
 ---
 
 A multi-platform build refers to a single build invocation that targets
@@ -55,40 +55,26 @@ selects the `linux/amd64` variant (if you're using Linux containers).
 
 ## Prerequisites
 
-To build multi-platform images, you first need to make sure that your Docker
-environment is set up to support it. There are two ways you can do that:
+Multi-platform images require an image store that supports manifest lists.
+Docker Desktop and Docker Engine 29.0+ use the
+[containerd image store](/manuals/desktop/features/containerd.md) by default,
+which supports multi-platform images out of the box. If you're using one of
+these versions, no additional setup is needed.
 
-- You can switch from the "classic" image store to the containerd image store.
-- You can create and use a custom builder.
+If you're using an older version of Docker Engine, or if you upgraded from an
+older version that still uses classic storage drivers, you have two options:
 
-The "classic" image store of the Docker Engine does not support multi-platform
-images. Switching to the containerd image store ensures that your Docker Engine
-can push, pull, and build multi-platform images.
+- Enable the containerd image store using the
+  [daemon configuration file](/manuals/engine/storage/containerd.md).
+- Create a custom builder using the `docker-container` driver (see the following section).
 
-Creating a custom builder that uses a driver with multi-platform support,
-such as the `docker-container` driver, will let you build multi-platform images
-without switching to a different image store. However, you still won't be able
-to load the multi-platform images you build into your Docker Engine image
-store. But you can push them to a container registry directly with `docker
-build --push`.
+### Custom builder
 
-{{< tabs >}}
-{{< tab name="containerd image store" >}}
-
-The steps for enabling the containerd image store depends on whether you're
-using Docker Desktop or Docker Engine standalone:
-
-- If you're using Docker Desktop, enable the containerd image store in the
-  [Docker Desktop settings](/manuals/desktop/features/containerd.md).
-
-- If you're using Docker Engine standalone, enable the containerd image store
-  using the [daemon configuration file](/manuals/engine/storage/containerd.md).
-
-{{< /tab >}}
-{{< tab name="Custom builder" >}}
-
-To create a custom builder, use the `docker buildx create` command to create a
-builder that uses the `docker-container` driver.
+As an alternative to using the containerd image store, you can create a custom
+builder that uses the `docker-container` driver. This driver supports
+multi-platform builds, but the resulting images aren't loaded into your Docker
+Engine image store. You can push them to a container registry directly with
+`docker build --push`.
 
 ```console
 $ docker buildx create \
@@ -101,9 +87,6 @@ $ docker buildx create \
 > Builds with the `docker-container` driver aren't automatically loaded to your
 > Docker Engine image store. For more information, see [Build
 > drivers](/manuals/build/builders/drivers/_index.md).
-
-{{< /tab >}}
-{{< /tabs >}}
 
 If you're using Docker Engine standalone and you need to build multi-platform
 images using emulation, you also need to install QEMU, see [Install QEMU
@@ -257,7 +240,6 @@ architecture of the container.
 Prerequisites:
 
 - Docker Desktop, or Docker Engine with [QEMU installed](#install-qemu-manually)
-- containerd image store enabled
 
 Steps:
 
@@ -331,7 +313,7 @@ Steps:
        unzip
    ADD https://github.com/neovim/neovim.git#stable .
    RUN make CMAKE_BUILD_TYPE=RelWithDebInfo
-   
+
    FROM scratch
    COPY --from=build /work/build/bin/nvim /
    ```
@@ -358,7 +340,7 @@ Steps:
    │   └── nvim
    └── linux_arm64
        └── nvim
-   
+
    3 directories, 2 files
    ```
 
@@ -399,7 +381,7 @@ Steps:
    WORKDIR /app
    ADD https://github.com/dvdksn/buildme.git#eb6279e0ad8a10003718656c6867539bd9426ad8 .
    RUN go build -o server .
-   
+
    FROM alpine
    COPY --from=build /app/server /server
    ENTRYPOINT ["/server"]
@@ -412,7 +394,6 @@ Steps:
 
 3. To add cross-compilation support, update the Dockerfile to use the
    pre-defined `BUILDPLATFORM`, `TARGETOS` and `TARGETARCH` build arguments.
-
    - Pin the `golang` image to the platform of the builder using the
      `--platform=$BUILDPLATFORM` option.
    - Add `ARG` instructions for the Go compilation stages to make the
@@ -433,7 +414,7 @@ Steps:
    WORKDIR /app
    ADD https://github.com/dvdksn/buildme.git#eb6279e0ad8a10003718656c6867539bd9426ad8 .
    RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o server .
-   
+
    FROM alpine
    COPY --from=build /app/server /server
    ENTRYPOINT ["/server"]
@@ -448,7 +429,7 @@ Steps:
    WORKDIR /app
    ADD https://github.com/dvdksn/buildme.git#eb6279e0ad8a10003718656c6867539bd9426ad8 .
    RUN go build -o server .
-   
+
    FROM alpine
    COPY --from=build /app/server /server
    ENTRYPOINT ["/server"]
@@ -467,7 +448,7 @@ Steps:
    ADD https://github.com/dvdksn/buildme.git#eb6279e0ad8a10003718656c6867539bd9426ad8 .
    -RUN go build -o server .
    +RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o server .
-   
+
    FROM alpine
    COPY --from=build /app/server /server
    ENTRYPOINT ["/server"]
