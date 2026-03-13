@@ -227,7 +227,7 @@ same steps to a non-mirrored image by updating the `SRC_ATT_REPO` and
    $ export TAG="3.13-alpine3.21"
    ```
 
-3. Sign in via `regctl` to Docker Hub, the Scout registry that contains
+2. Sign in via `regctl` to Docker Hub, the Scout registry that contains
    the attestations, and your destination registry.
 
    ```console
@@ -236,7 +236,7 @@ same steps to a non-mirrored image by updating the `SRC_ATT_REPO` and
    $ echo $DEST_REG_TOKEN | regctl registry login -u "$DEST_REG_USERNAME" --pass-stdin "$DEST_REG"
    ```
 
-4. Mirror the image and attestations using `--referrers` and referrer endpoints:
+3. Mirror the image and attestations using `--referrers` and referrer endpoints:
 
    ```console
    $ regctl image copy \
@@ -248,7 +248,7 @@ same steps to a non-mirrored image by updating the `SRC_ATT_REPO` and
         --force-recursive
    ```
 
-5. Verify that artifacts were preserved.
+4. Verify that artifacts were preserved.
 
    First, get a digest for a specific tag and platform. For example, `linux/amd64`.
 
