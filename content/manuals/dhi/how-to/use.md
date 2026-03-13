@@ -17,9 +17,15 @@ package manager, and may run as a nonroot user by default.
 > [!IMPORTANT]
 >
 > You must authenticate to the Docker Hardened Images registry (`dhi.io`) to
-> pull images. Use your Docker ID credentials (the same username and password
-> you use for Docker Hub) when signing in. If you don't have a Docker account,
-> [create one](../../accounts/create-account.md) for free.
+> pull images. You can authenticate using either of the following:
+>
+> - **Docker ID (personal credentials):** Use the same username and password
+>   you use for Docker Hub. If you don't have a Docker account,
+>   [create one](../../accounts/create-account.md) for free.
+> - **Organization access token (OAT):** Use your organization name as the
+>   username and an OAT as the password. OATs are recommended for CI/CD
+>   pipelines and automated workflows. See
+>   [Organization access tokens](../../enterprise/security/access-tokens.md).
 >
 > Run `docker login dhi.io` to authenticate.
 
