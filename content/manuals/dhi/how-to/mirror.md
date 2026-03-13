@@ -154,7 +154,7 @@ repository.
 
 > [!NOTE]
 >
-> If you only want to stop mirroring ELS versions, you can uncheck the ELS
+> If you only want to stop mirroring ELS versions, you can clear the ELS
 > option in the mirrored repository's **Settings** tab. For more details, see
 > [Disable ELS for a repository](./els.md#disable-els-for-a-repository).
 
@@ -198,7 +198,7 @@ attestations using `regctl`. You must [install
 
 The example assumes you have mirrored the DHI repository to your organization's
 namespace on Docker Hub as described in the previous section. You can apply the
-same steps to a non-mirrored image by updating the the `SRC_ATT_REPO` and
+same steps to a non-mirrored image by updating the `SRC_ATT_REPO` and
 `SRC_REPO` variables accordingly.
 
 1. Set environment variables for your specific environment. Replace the
