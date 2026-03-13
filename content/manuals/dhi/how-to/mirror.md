@@ -189,7 +189,7 @@ OCI-aware CLI that supports mirroring images along with attached artifacts such
 as SBOMs, vulnerability reports, and SLSA provenance. For ongoing synchronization,
 you can use [`regsync`](https://regclient.org/cli/regsync/).
 
-### Authenticate to dhi.io with an organization access token
+### Authenticate to `dhi.io` with an organization access token
 
 You can authenticate to `dhi.io` using an [organization access token
 (OAT)](../../enterprise/security/access-tokens.md) instead of a personal access
