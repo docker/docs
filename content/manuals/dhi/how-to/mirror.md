@@ -198,7 +198,7 @@ which makes them better suited for CI/CD pipelines and automated workflows.
 
 > [!NOTE]
 >
-> When using an OAT, use your **organization name** as the username — not your
+> When using an OAT, use your organization name as the username, not your
 > personal Docker ID. OATs are org-scoped and will return a `401 Unauthorized`
 > error if presented under an individual user's username.
 
