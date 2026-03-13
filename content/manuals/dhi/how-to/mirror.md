@@ -205,13 +205,13 @@ which makes them better suited for CI/CD pipelines and automated workflows.
 To authenticate using an OAT:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your organization.
-1. Select **Admin Console**, then **Access tokens**.
-1. Select **Generate access token**.
-1. Give the token a descriptive name, for example `dhi-pull-automation`.
-1. Under **Repository access**, select **Read public repositories**.
-1. Select **Generate token**, then copy and save the token. You won't be able
+2. Select **Admin Console**, then **Access tokens**.
+3. Select **Generate access token**.
+4. Give the token a descriptive name, for example `dhi-pull-automation`.
+5. Under **Repository access**, select **Read public repositories**.
+6. Select **Generate token**, then copy and save the token. You won't be able
    to retrieve it after closing the screen.
-1. Sign in to `dhi.io` using your organization name as the username and the OAT
+7. Sign in to `dhi.io` using your organization name as the username and the OAT
    as the password:
 
     ```console
@@ -224,7 +224,7 @@ To authenticate using an OAT:
    $ echo $OAT | oras login dhi.io -u "$DOCKER_ORG" --password-stdin
    ```
 
-1. Verify access by discovering attestations on a DHI image:
+8. Verify access by discovering attestations on a DHI image:
 
    ```console
    $ oras discover dhi.io/node:24-dev --platform linux/amd64
