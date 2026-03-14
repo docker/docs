@@ -27,7 +27,7 @@ Before configuring any tool:
 
 > [!TIP]
 > 
-> The default context size for many models, e.g. `gpt-oss` is 4,096 tokens, which is limiting for coding tasks.
+> The default context size for many models (such as `gpt-oss`) is 4,096 tokens, which is limiting for coding tasks.
 > You can repackage it with a larger context window:
 >
 > ```console
