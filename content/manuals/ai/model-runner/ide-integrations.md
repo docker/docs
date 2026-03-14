@@ -267,7 +267,7 @@ You can find more details in [this Docker Blog post](https://www.docker.com/blog
 1. Install Claude Code (see [docs](https://code.claude.com/docs/en/quickstart#step-1-install-claude-code))
 2. Use the `ANTHROPIC_BASE_URL` environment variable to point Claude Code at DMR. On Mac or Linux, you can do this, for example if you want to use the `gpt-oss:32k` model:
     ```bash
-    ANTHROPIC_BASE_URL=http://localhost:12434 claude --model gpt-oss:32k
+    ANTHROPIC_BASE_URL=http://localhost:12434 claude --model qwen2.5-coder
     ```
     On Windows (PowerShell) you can do it like this:
     ```powershell
