@@ -2,7 +2,7 @@
 title: IDE and tool integrations
 description: Configure popular AI coding assistants and tools to use Docker Model Runner as their backend.
 weight: 40
-keywords: Docker, ai, model runner, cline, continue, cursor, vscode, ide, integration, openai, ollama
+keywords: Docker, ai, model runner, cline, continue, cursor, vscode, ide, integration, openai, ollama, claude, anthropic, claude-code
 ---
 
 Docker Model Runner can serve as a local backend for popular AI coding assistants
@@ -257,6 +257,37 @@ print(response.text)
 3. Select the model you want in OpenCode
 
 You can find more details in [this Docker Blog post](https://www.docker.com/blog/opencode-docker-model-runner-private-ai-coding/)
+
+## Claude Code
+
+[Claude Code](https://claude.com/product/claude-code) is [Anthropic's](https://www.anthropic.com/) command-line tool for agentic coding. It lives in your terminal, understands your codebase, and executes routine tasks, explains complex code, and handles Git workflows through natural language commands.
+
+### Configuration
+
+1. Install Claude Code (see [docs](https://code.claude.com/docs/en/quickstart#step-1-install-claude-code))
+2. Use the `ANTHROPIC_BASE_URL` environment variable to point Claude Code at DMR. On Mac or Linux, you can do this, for example if you want to use the `gpt-oss:32k` model:
+    ```bash
+    ANTHROPIC_BASE_URL=http://localhost:12434 claude --model qwen2.5-coder
+    ```
+    On Windows (PowerShell) you can do it like this:
+    ```powershell
+    $env:ANTHROPIC_BASE_URL="http://localhost:12434"
+    claude --model gpt-oss:32k
+    ```
+
+> [!TIP]
+>
+> To avoid setting the variable each time, add it to your shell profile (`~/.bashrc`, `~/.zshrc`, or equivalent):
+>
+> ```shell
+> export ANTHROPIC_BASE_URL=http://localhost:12434
+> ```
+
+You can find more details in [this Docker Blog post](https://www.docker.com/blog/run-claude-code-locally-docker-model-runner/)
+
+> [!NOTE]
+>
+> While the other integrations on this page use the [OpenAI-compatible API](/ai/model-runner/api-reference/#openai-compatible-api), DMR also exposes a [Anthropic-compatible API](/ai/model-runner/api-reference/#anthropic-compatible-api) used here.
 
 ## Common issues
 
