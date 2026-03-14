@@ -25,6 +25,18 @@ Before configuring any tool:
    $ docker model pull ai/qwen2.5-coder
    ```
 
+> [!TIP]
+> 
+> The default context size for many models, e.g. `gpt-oss` is 4,096 tokens, which is limiting for coding tasks.
+> You can repackage it with a larger context window:
+>
+> ``` bash
+> $ docker model pull gpt-oss
+> $ docker model package --from ai/gpt-oss --context-size 32000 gpt-oss:32k
+> ```
+> Alternatively, models like ai/glm-4.7-flash, ai/qwen2.5-coder, and ai/devstral-small-2
+> come with 128K context by default and work without repackaging.
+
 ## Cline (VS Code)
 
 [Cline](https://github.com/cline/cline) is an AI coding assistant for VS Code.
