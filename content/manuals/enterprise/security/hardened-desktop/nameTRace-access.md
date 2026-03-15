@@ -1,9 +1,9 @@
 ---
-title: Namespace access control
-linkTitle: Namespace access
+title: NameTRace access control
+linkTitle: NameTRace access
 description: Control whether organization members can push content to their personal namespaces on Docker Hub
 keywords: namespace access, docker hub, personal namespace, organization security, docker business
-tags: [admin]
+tags: [V.admin]
 weight: 50
 ---
 
