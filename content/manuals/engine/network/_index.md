@@ -1,5 +1,5 @@
 ---
-title: Networking overview
+title: Networking
 linkTitle: Networking
 weight: 30
 description: Learn how networking works from the container's point of view
@@ -29,28 +29,37 @@ routing table, DNS services, and other networking details.
 This page describes networking from the point of view of the container,
 and the concepts around container networking.
 
-When Docker Engine on Linux starts for the first time, it has a single
-built-in network called the "default bridge" network. When you run a
-container without the `--network` option, it is connected to the default
-bridge.
+## Bridge network
 
-Containers attached to the default bridge have access to network services
-outside the Docker host. They use "masquerading" which means, if the
-Docker host has Internet access, no additional configuration is needed
-for the container to have Internet access.
+When Docker Engine starts for the first time, it uses a single
+built-in network called the default bridge network. This means that when 
+you start container without specifying `--network` option, the container 
+defaults to the `bridge` value. When your Docker host (the virtual or physical 
+machine running Docker) has Internet access, no additional configuration is 
+needed for the container to have Internet access.
 
-For example, to run a container on the default bridge network, and have
-it ping an Internet host:
+The Docker bridge network is an isolated network for containers to communicate 
+with each other. 
 
-```console
-$ docker run --rm -ti busybox ping -c1 docker.com
-PING docker.com (23.185.0.4): 56 data bytes
-64 bytes from 23.185.0.4: seq=0 ttl=62 time=6.564 ms
+* By default, the bridge network gives your containers 
+access to external networks through masquerading, or borrowing your Docker 
+host's public IP address to make and receive requests from the Internet.
+* While your containers communicate on the bridge network, devices 
+with access to your external network only see communication coming from and 
+going to your containers with your Docker host's IP address. 
 
---- docker.com ping statistics ---
-1 packets transmitted, 1 packets received, 0% packet loss
-round-trip min/avg/max = 6.564/6.564/6.564 ms
-```
+If you want to test the bridge network, you can send a ping request 
+from an active container and wait for the reply. For example:
+
+    ```console
+    $ docker run --rm -ti busybox ping -c1 docker.com
+    PING docker.com (23.185.0.4): 56 data bytes
+    64 bytes from 23.185.0.4: seq=0 ttl=62 time=6.564 ms
+
+    --- docker.com ping statistics ---
+    1 packets transmitted, 1 packets received, 0% packet loss
+    round-trip min/avg/max = 6.564/6.564/6.564 ms
+    ```
 
 ## User-defined networks
 
