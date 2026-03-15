@@ -83,7 +83,7 @@ Docker from the repository.
 #### Set up the repository
 
 ```console
-$ sudo dnf config-manager addrepo --from-repofile {{% param "download-url-base" %}}/docker-ce.repo
+$ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce.repo
 ```
 
 #### Install Docker Engine
