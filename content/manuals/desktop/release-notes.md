@@ -26,6 +26,35 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.65.0
+
+{{< release-date date="2026-03-16" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.65.0" build_path="//" >}}
+
+### New
+
+- Gordon hints now appear when `docker build`, `docker run`, or `docker compose` commands fail, offering contextual suggestions.
+- Community MCP servers now support OAuth authentication directly in the UI.
+- Added the `dhictl` CLI plugin for managing Docker Hardened Images.
+
+### Updates
+
+- [Docker Scout CLI v1.20.1](https://github.com/docker/scout-cli/releases/tag/v1.20.1)
+- [cagent v1.29.0](https://github.com/docker/cagent/releases/tag/v1.29.0)
+- [Docker Buildx v0.32.1](https://github.com/docker/buildx/releases/tag/v0.32.1)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Kubernetes now defaults to kind for new clusters.
+- Fixed update progress bar not resuming correctly.
+
+#### For Windows 
+
+- Improved startup time by skipping docker-users group check when using WSL2 backend.
+
 ## 4.64.0
 
 {{< release-date date="2026-03-11" >}}
