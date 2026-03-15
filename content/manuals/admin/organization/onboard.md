@@ -125,7 +125,7 @@ subscription, see [Change your subscription](/manuals/subscription/change.md).
 Use your identity provider (IdP) to manage members and provision them to Docker
 automatically via SSO and SCIM. See the following for more details:
 
-   - [Configure SSO](/manuals/enterprise/security/single-sign-on/configure.md)
+   - [Configure SSO](/manuals/enterprise/security/single-sign-on/connect.md)
    to authenticate and add members when they sign in to Docker through your
    identity provider.
    - Optional.

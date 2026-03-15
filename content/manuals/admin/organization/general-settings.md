@@ -29,7 +29,7 @@ To edit this information:
 
 After configuring your organization information, you can:
 
-- [Configure single sign-on (SSO)](/manuals/enterprise/security/single-sign-on/configure.md)
+- [Configure single sign-on (SSO)](/manuals/enterprise/security/single-sign-on/connect.md)
 - [Set up SCIM provisioning](/manuals/enterprise/security/provisioning/scim.md)
 - [Manage domains](/manuals/enterprise/security/domain-management.md)
 - [Create a company](/manuals/admin/company/new-company.md)
