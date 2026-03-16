@@ -99,13 +99,13 @@ docker run --rm -it \
 
 When connecting from your application container, use these PostgreSQL connection strings:
 
-- **PostgreSQL URI format**: 
+- **PostgreSQL URI format**:
   This is the standard PostgreSQL connection URI format that combines all connection parameters into a single string, widely supported by PostgreSQL clients and libraries.
 
   ```bash
   postgresql://postgres:mysecretpassword@postgres-dev:5432/postgres
   ```
-  
+
   This command demonstrates passing a PostgreSQL URI connection string as an environment variable to a container, which your application can then read to connect to the database.
 
   Example usage in a Docker run command:
@@ -116,9 +116,9 @@ When connecting from your application container, use these PostgreSQL connection
     alpine:latest \
     sh -c 'echo "DATABASE_URL is set to: $DATABASE_URL"'
   ```
-  
 
-- **PostgreSQL connection parameters**: 
+
+- **PostgreSQL connection parameters**:
   This format uses key-value pairs separated by spaces, which many PostgreSQL client libraries accept as an alternative to URI format.
   ```bash
   host=postgres-dev
@@ -127,7 +127,7 @@ When connecting from your application container, use these PostgreSQL connection
   password=mysecretpassword
   dbname=postgres
   ```
-  
+
   Example usage in application code (Python with psycopg2):
   ```python
   conn = psycopg2.connect(
@@ -139,21 +139,21 @@ When connecting from your application container, use these PostgreSQL connection
   )
   ```
 
-- **Connecting to a specific database**: 
+- **Connecting to a specific database**:
   Replace the database name in the connection string to connect to a specific database instead of the default `postgres` database.
   If you created a custom database (e.g., `testdb`), use:
   ```bash
   postgresql://postgres:mysecretpassword@postgres-dev:5432/testdb
   ```
-  
+
   Example with SSL disabled (common in Docker networks):
   Add `?sslmode=disable` to the connection string when connecting within a private Docker network where SSL encryption isn't required.
   ```bash
   postgresql://postgres:mysecretpassword@postgres-dev:5432/testdb?sslmode=disable
   ```
 
-> [!NOTE] 
-> 
+> [!NOTE]
+>
 > The default port `5432` is used in these examples. If you're connecting to a different PostgreSQL instance or have changed the port, update the connection string accordingly. The container name (`postgres-dev`) is resolved by Docker DNS to the container's IP address on the network.
 
 
@@ -211,7 +211,7 @@ docker run -d --name postgres-dev \
 ```
 
 > [!WARNING]
-> 
+>
 > Exposing PostgreSQL to all network interfaces (`0.0.0.0:5432`) makes it accessible from any device that can reach your host. Only use this in trusted network environments or behind a firewall. For production, consider using a reverse proxy or VPN instead.
 
 ### PostgreSQL security considerations for external access
@@ -274,7 +274,7 @@ PostgreSQL connection details for the app service:
 - User: `postgres` (or a custom user you've created)
 
 > [!NOTE]
-> 
+>
 > Docker Compose automatically creates a network for your project. Services can reach each other by service name without explicit network configuration, but defining a custom network gives you more control. For PostgreSQL, this means your application can always connect using the service name, regardless of container restarts or IP changes.
 
 ## Troubleshooting
@@ -293,33 +293,33 @@ This section covers common PostgreSQL connection issues and their solutions when
 - **PostgreSQL may still be initializing**: PostgreSQL takes a few seconds to start and initialize the database cluster. Wait 5-10 seconds after container start and retry.
 - **Check if the PostgreSQL container is running**:
 
-```bash
-docker ps --filter name=postgres-dev
-```
+  ```bash
+  docker ps --filter name=postgres-dev
+  ```
 
 - **Check PostgreSQL logs for initialization or connection errors**:
 
-```bash
-docker logs postgres-dev
-```
+  ```bash
+  docker logs postgres-dev
+  ```
 
-Look for messages like "database system is ready to accept connections" to confirm PostgreSQL is fully started.
+  Look for messages like "database system is ready to accept connections" to confirm PostgreSQL is fully started.
 
-- **Verify the port mapping is correct**: 
+- **Verify the port mapping is correct**:
 
-```bash
-docker port postgres-dev
-```
+  ```bash
+  docker port postgres-dev
+  ```
 
-This should show `5432/tcp -> 127.0.0.1:5432` (or `0.0.0.0:5432` if bound to all interfaces).
+  This should show `5432/tcp -> 127.0.0.1:5432` (or `0.0.0.0:5432` if bound to all interfaces).
 
 - **Test PostgreSQL connectivity from inside the container**:
 
-```bash
-docker exec -it postgres-dev psql -U postgres -c "SELECT version();"
-```
+  ```bash
+  docker exec -it postgres-dev psql -U postgres -c "SELECT version();"
+  ```
 
-If this works but external connections fail, the issue is with port publishing, not PostgreSQL itself.
+  If this works but external connections fail, the issue is with port publishing, not PostgreSQL itself.
 
 ### "Password authentication failed" or "FATAL: password authentication failed for user"
 
