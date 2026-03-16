@@ -1,6 +1,5 @@
 ---
-title: Immediate Setup & Data Persistence
-linkTitle: Immediate Setup & Data Persistence
+title: Immediate setup & data persistence
 description: Get PostgreSQL running in Docker in under five minutes. Learn how to configure named volumes and bind mounts to persist your database across container restarts.
 keywords:
   - PostgreSQL Docker
@@ -20,7 +19,7 @@ Running PostgreSQL in Docker requires understanding one critical concept: contai
 - Configuring volumes for persistent storage
 - Translating your setup to Docker Compose
 
-## Quick Start (Minimal Viable Container)
+## Quick start (minimal viable container)
 
 > [!NOTE]
 >
@@ -84,7 +83,7 @@ postgres=#
 
 You now have a working PostgreSQL instance. But there's a problem—stop this container and your data disappears.
 
-## The Data Persistence Problem
+## The data persistence problem
 
 Containers use an ephemeral filesystem. When a container is removed, everything inside it, including your database files, is deleted.
 
@@ -140,7 +139,7 @@ $ docker exec postgres-dev psql -U postgres -c "\l" | grep testdb
 
 Your `testdb` database vanished because the new container started with a fresh filesystem. This is expected behavior—and exactly why volumes exist.
 
-## Named Volumes
+## Named volumes
 
 Named volumes are Docker-managed storage locations that persist independently of containers. Docker handles the filesystem location, permissions, and lifecycle.
 
@@ -177,7 +176,9 @@ $ docker run --rm --name postgres-dev \
 
 The `-v postgres_data:/var/lib/postgresql` flag mounts a named volume called `postgres_data` to PostgreSQL's data directory. If the volume doesn't exist, Docker creates it automatically.
 
-> **Note:** PostgreSQL 18+ stores data in a version-specific subdirectory under `/var/lib/postgresql`. Mounting at this level (rather than `/var/lib/postgresql/data`) allows for easier upgrades using `pg_upgrade --link`.
+> [!NOTE]
+>
+> PostgreSQL 18+ stores data in a version-specific subdirectory under `/var/lib/postgresql`. Mounting at this level (rather than `/var/lib/postgresql/data`) allows for easier upgrades using `pg_upgrade --link`.
 
 ### Verify persistence works
 
@@ -222,6 +223,7 @@ $ docker run --rm --name postgres-dev \
 
 $ docker exec postgres-dev psql -U postgres -c "\l" | grep testdb
  testdb    | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           |
+```
 
 {{< /tab >}}
 
@@ -262,7 +264,7 @@ Remove an unused volume (warning: this deletes all data):
 $ docker volume rm postgres_data
 ```
 
-## Bind Mounts (Alternative)
+## Bind mounts (alternative)
 
 Bind mounts map a specific host directory to a container path. Unlike named volumes, you control exactly where data lives on the host filesystem.
 

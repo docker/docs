@@ -1,6 +1,5 @@
 ---
-title: Advanced configuration and initialization
-linkTitle: Advanced Configuration and Initialization
+title: Advanced Configuration and Initialization
 weight: 20
 description: Configure PostgreSQL initialization scripts, tune performance parameters, and set timezone and locale settings for containerized deployments.
 keywords:
@@ -36,7 +35,9 @@ When the container starts, it checks whether the PostgreSQL data directory is em
 | `.sql.gz` | Gzip-compressed SQL files |
 | `.sh` | Shell scripts executed with bash |
 
-> **Important:** Initialization scripts only run when the PostgreSQL data directory is empty. If you mount a volume containing existing data, initialization is skipped. This behavior prevents overwriting existing databases.
+> [!IMPORTANT]
+>
+> Initialization scripts only run when the PostgreSQL data directory (`/var/lib/postgresql/data`) is empty. If you mount a volume containing existing data, initialization is skipped. This behavior prevents overwriting existing databases.
 
 ## Mounting initialization scripts
 
@@ -80,7 +81,9 @@ CREATE TABLE users (
 
 This script runs automatically when the container starts for the first time, creating your initial database schema.
 
-> **Note:** Ensure initialization scripts have proper read permissions. If you encounter "Permission denied" errors, run `chmod 644 init-db/*.sql` to make the files readable by the container.
+> [!NOTE]
+>
+> Ensure initialization scripts have proper read permissions. If you encounter "Permission denied" errors, run `chmod 644 init-db/*.sql` to make the files readable by the container.
 
 ## Performance tuning
 
@@ -133,7 +136,9 @@ The following tables list important `postgresql.conf` parameters for containeriz
 | `maintenance_work_mem` | Memory for VACUUM, CREATE INDEX | 64MB - 256MB |
 | `effective_cache_size` | Planner's cache size estimate | 50-75% of container memory |
 
-> **Docker memory limits:** When tuning memory parameters, set explicit memory limits on your container using `deploy.resources.limits.memory` in Compose or `--memory` with `docker run`. Without limits, PostgreSQL sees the host's total RAM and may allocate more than intended. For example, if your container should use 4GB maximum, set `shared_buffers` to approximately 1GB (25%).
+#### Docker memory limits
+
+When tuning memory parameters, set explicit memory limits on your container using `deploy.resources.limits.memory` in Compose or `--memory` with `docker run`. Without limits, PostgreSQL sees the host's total RAM and may allocate more than intended. For example, if your container should use 4GB maximum, set `shared_buffers` to approximately 1GB (25%).
 
 ### I/O settings
 
@@ -150,7 +155,9 @@ The following tables list important `postgresql.conf` parameters for containeriz
 | `deadlock_timeout` | Time before checking for deadlock | `1s` |
 | `transaction_timeout` | Max time for a transaction | `0` (disabled) |
 
-> **Note:** Setting `shared_buffers` too high in a container can exceed kernel shared memory limits. Use no more than 25-30% of the container's memory limit.
+> [!NOTE]
+>
+> Setting `shared_buffers` too high in a container can exceed kernel shared memory limits. Use no more than 25-30% of the container's memory limit.
 
 ## Timezone and locale configuration
 
