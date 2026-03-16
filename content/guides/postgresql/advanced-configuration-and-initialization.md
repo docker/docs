@@ -1,5 +1,5 @@
 ---
-title: Advanced Configuration and Initialization
+title: Advanced configuration and initialization
 linkTitle: Advanced Configuration and Initialization
 weight: 20
 description: Configure PostgreSQL initialization scripts, tune performance parameters, and set timezone and locale settings for containerized deployments.
