@@ -8,7 +8,7 @@ aliases:
 - /desktop/wsl/best-practices/
 ---
 
-This page covers recommended configurations and habits for running Docker Desktop on Windows using WSL 2, including version requirements, file system performance, storage management, and resource limits.
+This page covers recommended configurations and habits for running Docker Desktop on Windows using WSL 2, including version requirements, file system performance, and resource limits.
 
 ## Keep WSL up to date
 
