@@ -136,6 +136,7 @@ End-to-end developer solutions for innovative teams.
 Documentation related to the Docker platform, such as administration and
 subscription management.
 
+
 {{< grid items=platform >}}
 
 ## Enterprise
