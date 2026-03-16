@@ -30,7 +30,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-03-16" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.65.0" build_path="//" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.65.0" build_path="/221669/" >}}
 
 ### New
 
@@ -54,6 +54,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For Windows 
 
 - Improved startup time by skipping docker-users group check when using WSL2 backend.
+
+### Known issues
+
+- The Windows MSI installer cannot update an existing Docker Desktop installation when the current version is 4.59 or later. As a workaround, uninstall the existing version before reinstalling. Note that uninstalling removes all associated data. A fix will be provided in a future MSI release.
 
 ## 4.64.0
 
@@ -85,6 +89,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Improved update error reporting with more descriptive diagnostics.
 - Improved update reliability by preparing the updated `Docker.app` under `Application Support` instead of `/tmp`.
+
+### Known issues
+
+- The Windows MSI installer cannot update an existing Docker Desktop installation when the current version is 4.59 or later. As a workaround, uninstall the existing version before reinstalling. Note that uninstalling removes all associated data. A fix will be provided in a future MSI release.
 
 ## 4.63.0
 
