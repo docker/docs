@@ -1,6 +1,5 @@
 ---
 title: Networking and Connectivity
-linkTitle: Networking and Connectivity
 description: This module shows how to connect to PostgreSQL in Docker in two common ways; from another container (internal network) and from your host machine (external access).
 keywords:
   - Networking PostgreSQL Docker
@@ -14,15 +13,17 @@ This guide covers two common ways to connect to PostgreSQL running in Docker:
 
 **Prerequisite**: This guide assumes you have PostgreSQL running with persistent storage. If you don't, follow the [Immediate Setup & Data Persistence](/guides/postgresql/immediate-setup-and-data-persistence/) guide first.
 
-## Internal Network Access (container-to-container)
+## Internal network access (container-to-container)
 
 When your application runs in another container, connecting to PostgreSQL through a user-defined bridge network is the recommended approach. This setup provides automatic DNS resolution, so your application can connect to PostgreSQL using the container name as the hostname, without needing to track IP addresses.
 
 > **Why not use the default bridge network?** While containers on the default bridge network can communicate, they can only do so by IP address. Since container IP addresses change when containers restart, this would require updating your PostgreSQL connection strings each time. User-defined bridge networks solve this by providing automatic DNS resolution, ensuring your PostgreSQL connection strings remain stable even if containers restart and receive new IP addresses.
 
-**Here's a quick comparison:**
+Here's a quick comparison:
 
-> **Note**: The following examples show the difference in approach. To actually test this, follow the steps in this guide to set up containers on the appropriate networks first.
+> [!NOTE]
+>
+> The following examples show the difference in approach. To actually test this, follow the steps in this guide to set up containers on the appropriate networks first.
 
 With the default bridge network, you'd need to find the IP address first:
 ```bash
@@ -38,7 +39,7 @@ docker run --rm -it \
   psql -h 172.17.0.2 -U postgres
 ```
 
-With a **user-defined network**, you simply use the container name:
+With a user-defined network, you simply use the container name:
 ```bash
 # Container name works directly - no IP lookup needed
 docker run --rm -it \
@@ -151,7 +152,9 @@ When connecting from your application container, use these PostgreSQL connection
   postgresql://postgres:mysecretpassword@postgres-dev:5432/testdb?sslmode=disable
   ```
 
-> **PostgreSQL connection note**: The default port `5432` is used in these examples. If you're connecting to a different PostgreSQL instance or have changed the port, update the connection string accordingly. The container name (`postgres-dev`) is resolved by Docker DNS to the container's IP address on the network.
+> [!NOTE] 
+> 
+> The default port `5432` is used in these examples. If you're connecting to a different PostgreSQL instance or have changed the port, update the connection string accordingly. The container name (`postgres-dev`) is resolved by Docker DNS to the container's IP address on the network.
 
 
 ## Connecting from the Host (external access)
@@ -207,7 +210,9 @@ docker run -d --name postgres-dev \
   postgres:18
 ```
 
-> **Warning**: Exposing PostgreSQL to all network interfaces (`0.0.0.0:5432`) makes it accessible from any device that can reach your host. Only use this in trusted network environments or behind a firewall. For production, consider using a reverse proxy or VPN instead.
+> [!WARNING]
+> 
+> Exposing PostgreSQL to all network interfaces (`0.0.0.0:5432`) makes it accessible from any device that can reach your host. Only use this in trusted network environments or behind a firewall. For production, consider using a reverse proxy or VPN instead.
 
 ### PostgreSQL security considerations for external access
 
@@ -219,7 +224,7 @@ When exposing PostgreSQL to external access, follow these PostgreSQL-specific se
 - **Consider SSL/TLS**: For production, configure PostgreSQL to require SSL connections. The [Advanced Configuration and Initialization](/guides/postgresql/advanced-configuration-and-initialization/) guide shows how to configure PostgreSQL settings.
 - **Create application-specific users**: Use initialization scripts to create users with limited privileges. For example, a read-only user for reporting or a user that can only access specific databases.
 
-The [Advanced Configuration and Initialization](/guides/postgresql/advanced-configuration-and-initialization/) guide shows how to use initialization scripts to create users and roles automatically.
+The [Advanced configuration and initialization](/guides/postgresql/advanced-configuration-and-initialization/) guide shows how to use initialization scripts to create users and roles automatically.
 
 ## Using Docker Compose for networking
 
@@ -262,13 +267,15 @@ In this PostgreSQL-focused setup:
 - Both services are isolated on a custom network, providing network-level security
 - The `depends_on` directive ensures PostgreSQL starts before your application
 
-**PostgreSQL connection details for the app service**:
+PostgreSQL connection details for the app service:
 - Hostname: `db` (resolved by Docker DNS)
 - Port: `5432` (PostgreSQL default port)
 - Database: `mydb` (as specified in the connection string)
 - User: `postgres` (or a custom user you've created)
 
-> **Note**: Docker Compose automatically creates a network for your project. Services can reach each other by service name without explicit network configuration, but defining a custom network gives you more control. For PostgreSQL, this means your application can always connect using the service name, regardless of container restarts or IP changes.
+> [!NOTE]
+> 
+> Docker Compose automatically creates a network for your project. Services can reach each other by service name without explicit network configuration, but defining a custom network gives you more control. For PostgreSQL, this means your application can always connect using the service name, regardless of container restarts or IP changes.
 
 ## Troubleshooting
 

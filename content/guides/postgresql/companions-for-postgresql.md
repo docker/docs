@@ -10,26 +10,26 @@ weight: 40
 ---
 
 
-## PostgreSQL Ecosystem Companions: pgAdmin, PgBouncer, and Performance Testing
+## PostgreSQL Ecosystem companions: pgAdmin, PgBouncer, and Performance Testing
 
 Running a standalone PostgreSQL container is often just the beginning. What happens when thousands of connections arrive, or when you need a visual interface to manage your database?
 
 This is where **companion tools** come into play. These applications extend PostgreSQL with capabilities the core database engine doesn't provide natively: visual administration, connection pooling, and performance benchmarking. This guide covers how to deploy pgAdmin 4, PgBouncer, Pgpool-II, and `pgbench` in Docker, when to use each tool, and real-world benchmark results demonstrating their performance impact.
 
-## pgAdmin 4: Visual Management Platform
+## pgAdmin 4: Visual management platform
 
 pgAdmin 4 is the industry-standard open source management tool for PostgreSQL. When deployed in Docker, it typically runs in **Server Mode**, providing a multi-user web interface to manage one or more database instances.
 
 While you can accomplish everything from the command line using `psql`, a visual interface significantly simplifies writing complex queries, visualizing table structures, and exploring database objects.
 
-### Key Considerations
+### Key considerations
 
 When running pgAdmin in Docker, keep these points in mind:
 
 - **Image**: Use the official `dpage/pgadmin4` image
 - **Networking**: In a Docker Compose environment, pgAdmin connects to the database using the internal service name (for example, `db:5432`) rather than `localhost`
 
-### Docker Compose Configuration
+### Docker Compose configuration
 
 To quickly deploy pgAdmin:
 
@@ -47,27 +47,29 @@ pgadmin:
 
 With this configuration, access the pgAdmin interface at `http://localhost:8080`. Use the email and password specified in the environment variables for initial sign in.
 
-> **Important**: In production environments, pass `PGADMIN_DEFAULT_PASSWORD` as an external environment variable or use Docker secrets. Storing passwords in plain text within `docker-compose.yml` poses a security risk.
+> [!IMPORTANT]
+>
+> In production environments, pass `PGADMIN_DEFAULT_PASSWORD` as an external environment variable or use Docker secrets. Storing passwords in plain text within `docker-compose.yml` poses a security risk.
 
 Now that you have visual database management in place, the next challenge in production environments is handling connection load. The following section explains how to manage high-volume database traffic.
 
-## PgBouncer: Lightweight Connection Pooling
+## PgBouncer: Lightweight connection pooling
 
 PostgreSQL creates a new process for every client connection, which consumes significant RAM. What happens when you have 1,000 concurrent users? PgBouncer solves exactly this problem.
 
 PgBouncer is a lightweight proxy that pools connections, allowing thousands of applications to share a small number of actual database backends. Think of it as a traffic controller: everyone wants to pass through simultaneously, but the controller regulates the flow to prevent congestion.
 
-### Pooling Modes
+### Pooling modes
 
 PgBouncer offers three distinct pooling modes:
 
-| Mode | Description | Use Case |
+| Mode | Description | Use case |
 |------|-------------|----------|
 | **Session** | Connection assigned for entire session duration | Long-lived connections, session variables |
 | **Transaction** | Connection returned after each transaction ends | Web applications, microservices (most common) |
 | **Statement** | Connection returned after every SQL statement | Simple queries, no multi-statement transactions |
 
-### When to Use PgBouncer
+### When to use PgBouncer
 
 PgBouncer becomes essential when you encounter:
 
@@ -76,7 +78,7 @@ PgBouncer becomes essential when you encounter:
 - Many short-lived connections (web applications, serverless functions)
 - Need to serve thousands of clients with limited database connections
 
-### Complete Docker Compose Setup
+### Complete Docker Compose setup
 
 To run PostgreSQL and PgBouncer together, you need three files: `docker-compose.yml`, `pgbouncer.ini`, and `userlist.txt`.
 
@@ -160,16 +162,18 @@ Key configuration notes:
 - The [Percona PgBouncer image](https://hub.docker.com/r/percona/percona-pgbouncer) requires mounted configuration files (without the `:ro` flag, as the entrypoint script needs to modify them)
 - This example uses `trust` authentication for simplicity. In production, configure proper SCRAM-SHA-256 authentication
 
-> **Note**: The `Percona PgBouncer` entrypoint script processes the configuration files on startup. Mount them without the read-only flag to avoid permission errors.
+> [!NOTE]
+>
+> The `Percona PgBouncer` entrypoint script processes the configuration files on startup. Mount them without the read-only flag to avoid permission errors.
 
 
 
 
-## `pgbench`: Performance Benchmarking
+## `pgbench`: Performance benchmarking
 
 `pgbench` is a benchmarking utility included with the official PostgreSQL image. It allows you to simulate heavy workloads and verify how your Docker configuration performs under pressure.
 
-### Initialize Benchmark Tables
+### Initialize benchmark tables
 
 First, create the test tables. The `-s` (scale) parameter determines data sizeâ€”scale factor 50 creates approximately 5 million rows:
 
@@ -177,7 +181,7 @@ First, create the test tables. The `-s` (scale) parameter determines data sizeâ€
 docker exec postgres pgbench -i -s 50 -U postgres benchmark
 ```
 
-### Run Stress Tests
+### Run stress tests
 
 Key parameters:
 
@@ -197,7 +201,7 @@ Test through PgBouncer:
 docker exec postgres pgbench -h pgbouncer -p 6432 -U postgres -c 50 -j 4 -T 60 benchmark
 ```
 
-## Understanding Benchmark Results
+## Understanding benchmark results
 
 Does PgBouncer actually make a difference? Run the benchmarks yourself to find out. Your results will vary based on your hardware, Docker configuration, network setup, and system load.
 
