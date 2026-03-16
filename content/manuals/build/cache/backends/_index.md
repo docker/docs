@@ -181,4 +181,4 @@ $ docker buildx build --push -t <registry>/<image> \
 ```
 
 > [!NOTE]
-> Since BuildKit v0.21, `image-manifest` is enabled by default.
+> The `image-manifest` parameter is enabled by default. For BuildKit versions earlier than v0.21, set this parameter explicitly.
