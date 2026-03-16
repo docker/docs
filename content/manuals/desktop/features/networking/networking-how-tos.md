@@ -16,7 +16,7 @@ aliases:
 
 This page explains how to configure and use networking features, connect containers to host services, work behind proxies or VPNs, and troubleshoot common issues.
 
-For details on how Docker Desktop routes network traffic and file I/O between containers, the VM, and the host, see [Network overview](/manuals/desktop/features/networking/index.md#overview).
+For details on how Docker Desktop routes network traffic and file I/O between containers, the VM, and the host, see [Network overview](/manuals/desktop/features/networking/_index.md#overview).
 
 ## Core networking how-tos
 
@@ -77,7 +77,7 @@ See the [run command](/reference/cli/docker/container/run/) for more details on
 publish options used with `docker run`.
 
 All inbound connections pass through the Docker Desktop backend process (`com.docker.backend` (Mac), `com.docker.backend` (Windows), or `qemu` (Linux), which handles port forwarding into the VM.
-For more details, see [How exposed ports work](/manuals/desktop/features/networking/index.md#how-exposed-ports-work)
+For more details, see [How exposed ports work](/manuals/desktop/features/networking/_index.md#how-exposed-ports-work)
 
 ### Working with VPNs
 
@@ -86,7 +86,7 @@ Docker Desktop networking can work when attached to a VPN.
 To do this, Docker Desktop intercepts traffic from the containers and injects it into
 the host as if it originated from the Docker application.
 
-For details about how this traffic appears to host firewalls and endpoint detection systems, see [Firewalls and endpoint visibility](/manuals/desktop/features/networking/index.md#firewalls-and-endpoint-visibility).
+For details about how this traffic appears to host firewalls and endpoint detection systems, see [Firewalls and endpoint visibility](/manuals/desktop/features/networking/_index.md#firewalls-and-endpoint-visibility).
 
 ### Working with proxies
 
