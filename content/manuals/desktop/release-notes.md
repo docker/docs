@@ -41,7 +41,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### Updates
 
 - [Docker Scout CLI v1.20.1](https://github.com/docker/scout-cli/releases/tag/v1.20.1)
-- [cagent v1.29.0](https://github.com/docker/cagent/releases/tag/v1.29.0)
+- [Docker Agent v1.29.0](https://github.com/docker/docker-agent/releases/tag/v1.29.0)
 - [Docker Buildx v0.32.1](https://github.com/docker/buildx/releases/tag/v0.32.1)
 
 ### Bug fixes and minor changes
@@ -69,7 +69,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - [Docker Compose v5.1.0](https://github.com/docker/compose/releases/tag/v5.1.0)
 - [Docker Scout CLI v1.20.0](https://github.com/docker/scout-cli/releases/tag/v1.20.0)
-- [cagent v1.27.1](https://github.com/docker/cagent/releases/tag/v1.27.1)
+- [Docker Agent v1.27.1](https://github.com/docker/docker-agent/releases/tag/v1.27.1)
 
 ### Bug fixes and minor changes
 
@@ -79,7 +79,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed the `docker ai` command stopping after a Docker Agent update.
 - Fixed Gordon session title flickering when hover buttons appeared.
 - Improved Gordon summary rendering and reduced narrative verbosity.
-- Fixed a bug where `docker ai` CLI commands did not correctly shell out to cagent.
+- Fixed a bug where `docker ai` CLI commands did not correctly shell out to Docker Agent.
 - Fixed the **OAuth** tab in Docker MCP Toolkit not showing entries from all catalogs.
 - Improved MCP Catalog search.
 - Fixed the **Build logs** tab not retaining search terms and filters when switching tabs.
@@ -379,7 +379,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - [containerd v2.2.1](https://github.com/containerd/containerd/releases/tag/v2.2.1)
 - [Docker Compose v5.0.0](https://github.com/docker/compose/releases/tag/v5.0.0)
-- [cagent v1.18.6](https://github.com/docker/cagent/releases/tag/v1.18.6)
+- [Docker Agent v1.18.6](https://github.com/docker/docker-agent/releases/tag/v1.18.6)
 
 ### Bug fixes and enhancements
 
@@ -411,7 +411,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### Updates
 
 - [Docker Engine v29.1.3](https://docs.docker.com/engine/release-notes/29/#2913)
-- [cagent v1.15.1](https://github.com/docker/cagent/releases/tag/v1.15.1)
+- [Docker Agent v1.15.1](https://github.com/docker/docker-agent/releases/tag/v1.15.1)
 
 ### Bug fixes and enhancements
 
