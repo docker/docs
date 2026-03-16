@@ -229,7 +229,7 @@ $ docker exec postgres-dev psql -U postgres -c "\l" | grep testdb
 
 {{< /tabs >}}
 
-If you see "testdb" in the output, persistence works: The database survived because the volume preserved the data directory.
+If you see `testdb` in the output, persistence works: The database survived because the volume preserved the data directory.
 
 ### Managing volumes
 
