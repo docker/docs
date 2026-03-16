@@ -125,10 +125,10 @@ $ docker compose bridge convert --transformations mycompany/transform
 
 The default transformation also includes templates for applications that use LLMs:
 
-- `model-runner-deployment.tmpl`: Generates the Kubernetes Deployment for Docker Model Runner. Customize it to change replica counts, image tags, resource requests and limits, GPU scheduling settings, tolerations, or additional environment variables.
-- `model-runner-service.tmpl`: Builds the Service that exposes Docker Model Runner. Update it to switch between ClusterIP, NodePort, or LoadBalancer types, adjust ports, or add annotations for ingress and service meshes.
+- `model-runner-deployment.tmpl`: Generates the Kubernetes deployment for Docker Model Runner. Customize it to change replica counts, image tags, resource requests and limits, GPU scheduling settings, tolerations, or additional environment variables.
+- `model-runner-service.tmpl`: Builds the service that exposes Docker Model Runner. Update it to switch between `ClusterIP`, `NodePort`, or `LoadBalancer` types, adjust ports, or add annotations for ingress and service meshes.
 - `model-runner-pvc.tmpl`: Defines the persistent volume claim used to store downloaded models. Edit it to set storage size, storage class, access modes, or volume annotations required by your storage provider.
-- `/overlays/model-runner/kustomization.yaml`: Kustomize overlay applied when you deploy Model Runner to a standalone Kubernetes cluster. Extend it to add patches for labels and annotations, attach NetworkPolicies, or include extra manifests such as PodDisruptionBudgets.
+- `/overlays/model-runner/kustomization.yaml`: Kustomize overlay applied when you deploy Model Runner to a standalone Kubernetes cluster. Extend it to add patches for labels and annotations, attach NetworkPolicies, or include extra manifests.
 - `/overlays/desktop/deployment.tmpl`: Desktop-specific deployment template that keeps the in-cluster Model Runner scaled down and points workloads to the host endpoint. Adjust it if you change the Desktop endpoint or want to deploy Model Runner on Desktop instead of relying on the host service.
 
 Common customization scenarios:
