@@ -26,6 +26,35 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.66.0
+
+{{< release-date date="2026-03-23" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.66.0" build_path="//" >}}
+
+### New 
+
+- Added a new **Logs** view where you can explore logs from all sources in one unified view. (Beta)
+
+### Updates
+
+- [Docker Engine v29.3.0](https://docs.docker.com/engine/release-notes/29/#2930)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Gordon improvements:
+   - Provides pre-filled prompts when deeplinking from command-line failure hints.
+   - Prevents Docker Hub rate limiting by authenticating before making requests.
+- Fixed a Kubernetes pod discovery hang when the kube context is broken or unreachable.
+- Fixed a terminal crash caused by an undefined dimensions error during terminal resize.
+- Fixed volume backup export error handling for file, image, and registry export operations.
+
+#### For Windows
+
+- Fixed high CPU usage in the Windows API proxy caused by unnecessary process enumeration.
+
 ## 4.65.0
 
 {{< release-date date="2026-03-16" >}}
