@@ -143,7 +143,10 @@ The `node:24-trixie-slim` image ships with three shells (`dash`, `bash`, and `rb
 
 ## Step 2: Switch the build stages to DHI
 
-Replace all three stages with DHI equivalents. DHI Node.js images use Alpine, so the package installation commands change from `apt-get` to `apk`:
+Replace all three stages with DHI equivalents. DHI Node.js images are available in both 
+Alpine and Debian variants. This guide uses the Alpine variant (`dhi.io/node:24-alpine3.23`) 
+because it produces a smaller image. If you need to stay on Debian for compatibility reasons, 
+use `dhi.io/node:24-bookworm` and keep `apt-get` instead of `apk`.
 
 ```dockerfile
 # Stage 1: prepare packages
