@@ -1956,6 +1956,17 @@ secrets:
 
 `security_opt` overrides the default labeling scheme for each container.
 
+Options accept either `option=value` or `option:value` syntax. For boolean options
+such as `no-new-privileges`, the value may be omitted entirely, in which case the
+option is treated as enabled. The following syntaxes are all equivalent:
+
+```yml
+security_opt:
+  - no-new-privileges
+  - no-new-privileges=true
+  - no-new-privileges:true
+```
+
 ```yml
 security_opt:
   - label=user:USER
