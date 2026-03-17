@@ -403,6 +403,12 @@ COPY --from=build --chown=node:node /app/packages/backend/dist/bundle/ ./
 CMD ["node", "packages/backend", "--config", "app-config.yaml"]
 ```
 
+Build this version:
+
+```console
+docker build -t backstage:dhi .
+```
+
 Since the customization includes only runtime libraries and OCI artifacts — no build tools, no package manager, no shell — the resulting image is distroless:
 
 ```console
