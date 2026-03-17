@@ -1,7 +1,7 @@
 ---
 title: Secure a Backstage application with Docker Hardened Images
 description: Secure a Backstage developer portal using Docker Hardened Images, covering native module compilation, Socket Firewall protection, and distroless runtime images.
-summary: Learn how to secure a Backstage developer portal using Docker Hardened Images (DHI), handle native module compilation with better-sqlite3, add Socket Firewall protection during dependency installation, and produce a distroless runtime image using DHI Enterprise customizations.
+summary: Learn how to secure a Backstage developer portal using Docker Hardened Images (DHI), handle native module compilation with better-sqlite3, add Socket Firewall protection during dependency installation, and produce a distroless runtime image using DHI customizations.
 keywords: docker hardened images, dhi, backstage, CNCF, developer portal, node.js, native modules, sqlite, better-sqlite3, distroless, socket firewall, dhictl, multi-stage build
 tags: ["Docker Hardened Images", "dhi"]
 params:
@@ -282,9 +282,9 @@ When you build, you'll see Socket Firewall messages in the build output: `Protec
 >
 > The `-sfw-dev` variant is larger (1.9 GB versus 1.72 GB) because Socket Firewall adds monitoring tooling. The security benefit during `yarn install` outweighs the size increase.
 
-## Step 4: Remove the shell and the package manager with DHI Enterprise customizations
+## Step 4: Remove the shell and the package manager with DHI customizations
 
-The previous steps still use the `-dev` or `-sfw-dev` variant as the runtime image, which includes a shell and package manager. DHI Enterprise customizations let you start from the base (non-dev) image — which has no shell and no package manager — and add only the runtime libraries and language runtimes your application needs.
+The previous steps still use the `-dev` or `-sfw-dev` variant as the runtime image, which includes a shell and package manager. DHI customizations let you start from the base (non-dev) image — which has no shell and no package manager — and add only the runtime libraries and language runtimes your application needs.
 
 > [!IMPORTANT]
 >
