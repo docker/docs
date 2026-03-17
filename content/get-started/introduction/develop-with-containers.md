@@ -4,9 +4,9 @@ keywords: concepts, build, images, container, docker desktop
 description: This concept page will teach you how to develop with containers
 summary: |
   Learn how to run your first container, gaining hands-on experience with
-  Docker's powerful features. We'll cover making real-time changes to both
-  backend and frontend code within the containerized environment, ensuring
-  seamless integration and testing.
+  Docker's powerful features. This guide covers making real-time changes to both
+  backend and frontend code within the containerized environment, keeping
+  integration and testing aligned.
 weight: 2
 aliases:
  - /guides/getting-started/develop-with-containers/
@@ -16,7 +16,7 @@ aliases:
 
 ## Explanation
 
-Now that you have Docker Desktop installed, you are ready to do some application development. Specifically, you will do the following:
+After installing Docker Desktop, you are ready to do some application development. Specifically, you will do the following:
 
 1. Clone and start a development project
 2. Make changes to the backend and frontend
@@ -60,7 +60,7 @@ In this hands-on guide, you'll learn how to develop with containers.
 
 ### What's in the environment?
 
-Now that the environment is up and running, what's actually in it? At a high-level, there are several containers (or processes) that each serve a specific need for the application:
+With the environment up and running, what's actually in it? At a high-level, there are several containers (or processes) that each serve a specific need for the application:
 
 - React frontend - a Node container that's running the React dev server, using [Vite](https://vitejs.dev/).
 - Node backend - the backend provides an API that provides the ability to retrieve, create, and delete to-do items.
@@ -68,16 +68,18 @@ Now that the environment is up and running, what's actually in it? At a high-lev
 - phpMyAdmin - a web-based interface to interact with the database that is accessible at [http://db.localhost](http://db.localhost).
 - Traefik proxy - [Traefik](https://traefik.io/traefik/) is an application proxy that routes requests to the right service. It sends all requests for `localhost/api/*` to the backend, requests for `localhost/*` to the frontend, and then requests for `db.localhost` to phpMyAdmin. This provides the ability to access all applications using port 80 (instead of different ports for each service).
 
-With this environment, you as the developer don’t need to install or configure any services, populate a database schema, configure database credentials, or anything. You only need Docker Desktop. The rest just works.
+With this environment, you as the developer don't need to install or configure any services, populate a database schema, configure database credentials, or anything. You only need Docker Desktop. Docker handles the rest.
 
 
 ## Make changes to the app
 
-With this environment up and running, you’re ready to make a few changes to the application and see how Docker helps provide a fast feedback loop.
+With this environment up and running, you're ready to make a few changes to the application and see how Docker helps provide a fast feedback loop.
+
+All of the code lives on your machine in the `getting-started-todo-app` folder you cloned. Docker Compose mounts that folder into the running containers and watches for changes, so open and edit the files locally with your editor. You don't need to exec into a container to change the code. The paths in the steps below are relative to `getting-started-todo-app`.
 
 ### Change the greeting
 
-The greeting at the top of the page is populated by an API call at `/api/greeting`. Currently, it always returns "Hello world!". You’ll now modify it to return one of three randomized messages (that you'll get to choose).
+The greeting at the top of the page is populated by an API call at `/api/greeting`. Currently, it always returns "Hello world!". You'll now modify it to return one of three randomized messages (that you'll get to choose).
 
 1. Open the `backend/src/routes/getGreeting.js` file in a text editor. This file provides the handler for the API endpoint.
 
@@ -104,7 +106,7 @@ The greeting at the top of the page is populated by an API call at `/api/greetin
 
 ### Change the placeholder text
 
-When you look at the app, you'll see the placeholder text is simply "New Item". You’ll now make that a little more descriptive and fun. You’ll also make a few changes to the styling of the app too.
+When you look at the app, you'll see the placeholder text reads "New Item". You'll now make that a little more descriptive and fun. You'll also make a few changes to the styling of the app too.
 
 1. Open the `client/src/components/AddNewItemForm.jsx` file. This provides the component to add a new item to the to-do list.
 
@@ -120,7 +122,7 @@ When you look at the app, you'll see the placeholder text is simply "New Item". 
     />
     ```
 
-3. Save the file and go back to your browser. You should see the change already hot-reloaded into your browser. If you don't like it, feel free to tweak it until it looks just right.
+3. Save the file and go back to your browser. You should see the change already hot-reloaded into your browser. If you don't like it, feel free to tweak it until it looks the way you want.
 
 ![Screenshot of the to-do app with an updated placeholder in the add item text field"](images/develop-app-with-updated-placeholder.webp)
 
@@ -159,11 +161,11 @@ Before you move on, take a moment and reflect on what happened here. Within a fe
 
 - Make changes and see them immediately. This was made possible because 1) the processes running in each container are watching and responding to file changes and 2) the files are shared with the containerized environment.
 
-Docker Desktop enables all of this and so much more. Once you start thinking with containers, you can create almost any environment and easily share it with your team.
+Docker Desktop makes this possible and more. Once you start thinking with containers, you can create almost any environment and share it with your team.
 
 ## Next steps
 
-Now that the application has been updated, you’re ready to learn about packaging it as a container image and pushing it to a registry, specifically Docker Hub.
+After updating the application, you're ready to learn about packaging it as a container image and pushing it to a registry, specifically Docker Hub.
 
 {{< button text="Build and push your first image" url="build-and-push-first-image" >}}
 
