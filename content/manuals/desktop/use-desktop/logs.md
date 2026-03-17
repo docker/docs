@@ -14,7 +14,7 @@ params:
 {{< summary-bar feature_name="Desktop logs" >}}
 
 
-The **Logs** view provides a unified, real-time log stream from all running containers and Kubernetes nodes in Docker Desktop. Unlike the logs accessible from the [**Containers** view](container.md), the **Logs** view lets you monitor and search log output across your entire environment from a single interface. You can also use Ask Gordon to analyze log output with AI-assisted prompts.
+The **Logs** view provides a unified, real-time log stream from all running containers and Kubernetes nodes in Docker Desktop. Unlike the logs accessible from the [**Containers** view](container.md), the **Logs** view lets you monitor and search log output across your entire environment from a single interface. 
 
 ## Log entries
 
@@ -42,16 +42,6 @@ To refine the log stream further, select the **Filter** icon in the toolbar to o
 - Check individual running containers to show only their output
 - Check **Running containers** or **Stopped containers** to show or hide entire groups
 - Use **Select all** or **Clear all** to quickly toggle every container at once
-
-## Ask Gordon
-
-The Logs view integrates with [Ask Gordon](/manuals/ai/gordon/_index.md), Docker's AI assistant. Select the **Ask Gordon** button in the top-right corner of the view to open the Gordon panel, then choose a scope:
-
-- **All visible logs**: Gordon analyzes the complete log stream currently visible on screen
-- **Container**: Gordon analyzes logs from a specific container
-- **Build**: Gordon analyzes build-related log output
-
-You can type a free-form question or select one of the suggested prompts.
 
 ## Display options
 
