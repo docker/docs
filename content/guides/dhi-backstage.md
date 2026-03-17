@@ -305,7 +305,10 @@ For Backstage, the runtime image needs:
 
 Docker will continuously build with SLSA Level 3 compliance and patch these customized images within the guaranteed SLA for CVE patching.
 
-### Using the Docker Hub UI
+To create the customization, use one of the following methods.
+
+{{< tabs >}}
+{{< tab name="Docker Hub UI" >}}
 
 After you mirror the Node.js DHI repository to your organization's namespace:
 
@@ -316,7 +319,8 @@ After you mirror the Node.js DHI repository to your organization's namespace:
 
 For more information, see [Customize an image](/dhi/how-to/customize/).
 
-### Using the `dhictl` CLI
+{{< /tab >}}
+{{< tab name="dhictl CLI" >}}
 
 `dhictl` is Docker's command-line tool for managing Docker Hardened Images. It lets you browse the DHI catalog, mirror images, and create customizations directly from your terminal. You can integrate `dhictl` into CI/CD pipelines and infrastructure-as-code workflows. You can install `dhictl` as a standalone binary or as a Docker CLI plugin (`docker dhi`); for installation instructions, see [Use the DHI CLI](/dhi/how-to/cli/).
 
@@ -380,7 +384,10 @@ Docker builds the customized image on its secure infrastructure and publishes it
 >
 > If your Backstage configuration does not require Python at runtime, you can omit the `python-3.14` from the packages list. The `sqlite-libs` package alone is sufficient to run Backstage with `better-sqlite3`.
 
-### Updated Dockerfile
+{{< /tab >}}
+{{< /tabs >}}
+
+### Update the Dockerfile
 
 Update only the final stage of your Dockerfile to use the customized image:
 
