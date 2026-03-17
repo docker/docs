@@ -73,3 +73,4 @@ you don't make that mistake again."
 - Don't bold product names or for emphasis — only bold UI elements
 - Don't use time-relative language: "currently", "new", "recently", "now"
 - Don't edit vendored content in `_vendor/` or `data/cli/`
+- Don't try to run apply_patch through a shell pipeline; call the apply_patch tool directly to avoid Powershell errors
