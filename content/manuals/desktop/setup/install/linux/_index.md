@@ -205,6 +205,37 @@ Sign out and sign back in so that your group membership is re-evaluated.
 
 Docker Desktop for Linux uses a per-user socket instead of the system-wide `/var/run/docker.sock`. Docker SDKs and tools that connect directly to the Docker daemon need the `DOCKER_HOST` environment variable set to connect to Docker Desktop. For configuration details, see [How do I use Docker SDKs with Docker Desktop for Linux?](/manuals/desktop/troubleshoot-and-support/faqs/linuxfaqs.md#how-do-i-use-docker-sdks-with-docker-desktop-for-linux).
 
+## Verify your installation
+
+After installing Docker Desktop, verify it is working correctly:
+
+1. Open a terminal and check the Docker version:
+```console
+   $ docker --version
+```
+
+   You should see output similar to:
+```
+   Docker version 27.x.x, build xxxxxxx
+```
+
+2. Run the hello-world container to confirm Docker Desktop is working end-to-end:
+```console
+   $ docker run hello-world
+```
+
+   If successful, you should see:
+```
+   Hello from Docker!
+   This message shows that your installation appears to be working correctly.
+```
+
+3. Check that Docker Desktop is using the correct context:
+```console
+   $ docker context ls
+```
+
+   The `desktop-linux` context should be marked with an asterisk (`*`) as the active context.
 ## Where to go next
 
 - Install Docker Desktop for Linux for your specific Linux distribution:
