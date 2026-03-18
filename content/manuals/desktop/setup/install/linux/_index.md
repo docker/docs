@@ -215,11 +215,11 @@ After installing Docker Desktop, verify it is working correctly:
 ```
 
    You should see output similar to:
-```
+```text
    Docker version 27.x.x, build xxxxxxx
 ```
 
-2. Run the hello-world container to confirm Docker Desktop is working end-to-end:
+1. Run the hello-world container to confirm Docker Desktop is working end-to-end:
 ```console
    $ docker run hello-world
 ```
@@ -230,12 +230,13 @@ After installing Docker Desktop, verify it is working correctly:
    This message shows that your installation appears to be working correctly.
 ```
 
-3. Check that Docker Desktop is using the correct context:
+1. Check that Docker Desktop is using the correct context:
 ```console
    $ docker context ls
 ```
 
    The `desktop-linux` context should be marked with an asterisk (`*`) as the active context.
+
 ## Where to go next
 
 - Install Docker Desktop for Linux for your specific Linux distribution:
