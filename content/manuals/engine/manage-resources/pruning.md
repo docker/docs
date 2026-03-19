@@ -55,6 +55,45 @@ Other filtering expressions are available. See the
 [`docker image prune` reference](/reference/cli/docker/image/prune/)
 for more examples.
 
+## Prune build cache
+
+When you build images, Docker uses a build cache to speed up the build process.
+Over time, the build cache can accumulate and take up significant disk space.
+You can use the `docker builder prune` command to clean up the build cache.
+
+By default, `docker builder prune` removes all dangling build cache. Dangling
+build cache refers to cache that isn't referenced by any image:
+
+```console
+$ docker builder prune
+
+WARNING! This will remove all dangling build cache.
+Are you sure you want to continue? [y/N] y
+```
+
+To remove all build cache, not just dangling cache, use the `-a` flag:
+
+```console
+$ docker builder prune -a
+
+WARNING! This will remove all build cache.
+Are you sure you want to continue? [y/N] y
+```
+
+By default, you're prompted to continue. To bypass the prompt, use the `-f` or
+`--force` flag.
+
+You can limit which cache is pruned using filtering expressions with the
+`--filter` flag. For example, to only remove build cache older than 24 hours:
+
+```console
+$ docker builder prune --filter "until=24h"
+```
+
+Other filtering expressions are available. See the
+[`docker builder prune` reference](/reference/cli/docker/builder/prune/)
+for more examples.
+
 ## Prune containers
 
 When you stop a container, it isn't automatically removed unless you started it
