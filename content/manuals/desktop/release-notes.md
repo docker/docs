@@ -36,7 +36,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Gordon hints now appear when `docker build`, `docker run`, or `docker compose` commands fail, offering contextual suggestions.
 - Community MCP servers now support OAuth authentication directly in the UI.
-- Added the `docker dhi` CLI plugin for managing Docker Hardened Images, learn more at https://github.com/docker-hardened-images/dhictl.
+- Added the [`docker dhi` CLI plugin](https://github.com/docker-hardened-images/dhictl) for managing Docker Hardened Images.
 
 ### Updates
 
