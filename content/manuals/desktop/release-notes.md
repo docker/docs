@@ -32,13 +32,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.66.0" build_path="//" >}}
 
-### New 
-
-- Added a new **Logs** view where you can explore logs from all sources in one unified view. (Beta)
-
 ### Updates
 
 - [Docker Engine v29.3.0](https://docs.docker.com/engine/release-notes/29/#2930)
+- [NVIDIA Container Toolkit v1.19.0](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.19.0)
 
 ### Bug fixes and minor changes
 
@@ -63,6 +60,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
+- Added a new **Logs** view where you can explore logs from all sources in one unified view. (Beta)
 - Gordon hints now appear when `docker build`, `docker run`, or `docker compose` commands fail, offering contextual suggestions.
 - Community MCP servers now support OAuth authentication directly in the UI.
 - Added the `dhictl` CLI plugin for managing Docker Hardened Images.
