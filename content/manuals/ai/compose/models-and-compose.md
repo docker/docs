@@ -7,11 +7,6 @@ aliases:
   - /compose/how-tos/model-runner/
   - /ai/compose/model-runner/
 weight: 10
-params:
-  sidebar:
-    badge:
-      color: green
-      text: New
 ---
 
 {{< summary-bar feature_name="Compose models" >}}
@@ -21,8 +16,7 @@ Compose lets you define AI models as core components of your application, so you
 ## Prerequisites
 
 - Docker Compose v2.38 or later
-- A platform that supports Compose models such as Docker Model Runner (DMR) or compatible cloud providers.
-  If you are using DMR, see the [requirements](/manuals/ai/model-runner/_index.md#requirements).
+- A platform that supports Compose models such as [Docker Model Runner (DMR)](/manuals/ai/model-runner/_index.md#requirements).
 
 ## What are Compose models?
 
@@ -50,6 +44,7 @@ models:
 ```
 
 This example defines:
+
 - A service called `chat-app` that uses a model named `llm`
 - A model definition for `llm` that references the `ai/smollm2` model image
 
@@ -68,16 +63,17 @@ models:
 ```
 
 Common configuration options include:
+
 - `model` (required): The OCI artifact identifier for the model. This is what Compose pulls and runs via the model runner.
 - `context_size`: Defines the maximum token context size for the model.
 
-   > [!NOTE]
-   > Each model has its own maximum context size. When increasing the context length,
-   > consider your hardware constraints. In general, try to keep context size
-   > as small as feasible for your specific needs.
+  > [!NOTE]
+  > Each model has its own maximum context size. When increasing the context length,
+  > consider your hardware constraints. In general, try to keep context size
+  > as small as feasible for your specific needs.
 
 - `runtime_flags`: A list of raw command-line flags passed to the inference engine when the model is started.
-   For example, if you use llama.cpp, you can pass any of [the available parameters](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md).
+  See [Configuration options](/manuals/ai/model-runner/configuration.md) for commonly used parameters and examples.
 - Platform-specific options may also be available via extension attributes `x-*`
 
 > [!TIP]
@@ -107,6 +103,7 @@ models:
 ```
 
 With short syntax, the platform automatically generates environment variables based on the model name:
+
 - `LLM_URL` - URL to access the LLM model
 - `LLM_MODEL` - Model identifier for the LLM model
 - `EMBEDDING_MODEL_URL` - URL to access the embedding-model
@@ -136,6 +133,7 @@ models:
 ```
 
 With this configuration, your service receives:
+
 - `AI_MODEL_URL` and `AI_MODEL_NAME` for the LLM model
 - `EMBEDDING_URL` and `EMBEDDING_NAME` for the embedding model
 
@@ -165,13 +163,14 @@ models:
 ```
 
 Docker Model Runner will:
+
 - Pull and run the specified model locally
 - Provide endpoint URLs for accessing the model
 - Inject environment variables into the service
 
 ### Cloud providers
 
-The same Compose file can run on cloud providers that support Compose models:
+The Compose models specification is designed to be portable. Platforms that implement the Compose specification can support the `models` top-level element, allowing the same Compose file to run on different infrastructure. Cloud-specific behavior can be configured using extension attributes (`x-*`):
 
 ```yaml
 services:
@@ -189,9 +188,10 @@ models:
       - "cloud.region=us-west-2"
 ```
 
-Cloud providers might:
+How a platform handles model definitions depends on its implementation. A platform might:
+
 - Use managed AI services instead of running models locally
-- Apply cloud-specific optimizations and scaling
+- Apply platform-specific optimizations and scaling
 - Provide additional monitoring and logging capabilities
 - Handle model versioning and updates automatically
 
@@ -215,11 +215,11 @@ models:
     model: ai/model
     context_size: 4096
     runtime_flags:
-      - "--verbose"                       # Set verbosity level to infinity
-      - "--verbose-prompt"                # Print a verbose prompt before generation
-      - "--log-prefix"                    # Enable prefix in log messages
-      - "--log-timestamps"                # Enable timestamps in log messages
-      - "--log-colors"                    # Enable colored logging
+      - "--verbose" # Set verbosity level to infinity
+      - "--verbose-prompt" # Print a verbose prompt before generation
+      - "--log-prefix" # Enable prefix in log messages
+      - "--log-timestamps" # Enable timestamps in log messages
+      - "--log-colors" # Enable colored logging
 ```
 
 ### Conservative with disabled reasoning
@@ -238,11 +238,11 @@ models:
     model: ai/model
     context_size: 4096
     runtime_flags:
-      - "--temp"                # Temperature
+      - "--temp" # Temperature
       - "0.1"
-      - "--top-k"               # Top-k sampling
+      - "--top-k" # Top-k sampling
       - "1"
-      - "--reasoning-budget"    # Disable reasoning
+      - "--reasoning-budget" # Disable reasoning
       - "0"
 ```
 
@@ -262,9 +262,9 @@ models:
     model: ai/model
     context_size: 4096
     runtime_flags:
-      - "--temp"                # Temperature
+      - "--temp" # Temperature
       - "1"
-      - "--top-p"               # Top-p sampling
+      - "--top-p" # Top-p sampling
       - "0.9"
 ```
 
@@ -284,9 +284,9 @@ models:
     model: ai/model
     context_size: 4096
     runtime_flags:
-      - "--temp"                # Temperature
+      - "--temp" # Temperature
       - "0"
-      - "--top-k"               # Top-k sampling
+      - "--top-k" # Top-k sampling
       - "1"
 ```
 
@@ -306,9 +306,9 @@ models:
     model: ai/model
     context_size: 2048
     runtime_flags:
-      - "--threads"             # Number of threads to use during generation
+      - "--threads" # Number of threads to use during generation
       - "8"
-      - "--mlock"               # Lock memory to prevent swapping
+      - "--mlock" # Lock memory to prevent swapping
 ```
 
 ### Rich vocabulary model
@@ -327,10 +327,31 @@ models:
     model: ai/model
     context_size: 4096
     runtime_flags:
-      - "--temp"                # Temperature
+      - "--temp" # Temperature
       - "0.1"
-      - "--top-p"               # Top-p sampling
+      - "--top-p" # Top-p sampling
       - "0.9"
+```
+
+### Embeddings
+
+When using embedding models with the `/v1/embeddings` endpoint, you must include the `--embeddings` runtime flag for the model to be properly configured.
+
+```yaml
+services:
+  app:
+    image: app
+    models:
+      embedding_model:
+        endpoint_var: EMBEDDING_URL
+        model_var: EMBEDDING_MODEL
+
+models:
+  embedding_model:
+    model: ai/all-minilm
+    context_size: 2048
+    runtime_flags:
+      - "--embeddings" # Required for embedding models
 ```
 
 ## Alternative configuration with provider services
@@ -364,5 +385,7 @@ services:
 
 - [`models` top-level element](/reference/compose-file/models.md)
 - [`models` attribute](/reference/compose-file/services.md#models)
-- [Docker Model Runner documentation](/manuals/ai/model-runner.md)
-- [Compose Model Runner documentation](/manuals/ai/compose/models-and-compose.md)
+- [Docker Model Runner documentation](/manuals/ai/model-runner/_index.md)
+- [Configuration options](/manuals/ai/model-runner/configuration.md) - Context size and runtime parameters
+- [Inference engines](/manuals/ai/model-runner/inference-engines.md) - llama.cpp and vLLM details
+- [API reference](/manuals/ai/model-runner/api-reference.md) - OpenAI and Ollama-compatible APIs
