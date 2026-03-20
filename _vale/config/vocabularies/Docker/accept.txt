@@ -96,6 +96,7 @@ Git
 GitHub
 GitHub Actions
 Google
+Gradle
 Grafana
 Gravatar
 gRPC
@@ -130,6 +131,7 @@ Laravel
 libseccomp
 Linux
 LinuxKit
+logback
 Loggly
 Logstash
 lookup

@@ -52,7 +52,7 @@ These are the 21 guides from testcontainers.com/guides/ and their source repos:
 | 20 | Getting started for Python | tc-guide-getting-started-with-testcontainers-for-python | python | getting-started |
 | 21 | Keycloak with Spring Boot | tc-guide-securing-spring-boot-microservice-using-keycloak-and-testcontainers | java | keycloak-spring-boot |
 
-Already migrated: **#13 (Go getting-started)**, **#20 (Python getting-started)**
+Already migrated: **#2 (Java getting-started)**, **#13 (Go getting-started)**, **#20 (Python getting-started)**
 
 ## Step 0: Pre-flight
 
@@ -137,8 +137,9 @@ For each language, check the cloned repo's existing code, then update to the lat
 - No `TearDownSuite()` needed if `CleanupContainer` is registered in the helper
 - Go version prerequisite: 1.25+
 
-**Java** (testcontainers-java):
-- Check the latest BOM version at https://java.testcontainers.org/
+**Java** (testcontainers-java 2.0.4):
+- Artifacts renamed in 2.x: `org.testcontainers:postgresql` → `org.testcontainers:testcontainers-postgresql`
+- Check the latest version at https://java.testcontainers.org/
 - Use `@Testcontainers` and `@Container` annotations for JUnit 5 lifecycle
 - Prefer module-specific containers (e.g. `PostgreSQLContainer`) over `GenericContainer`
 - Use `@DynamicPropertySource` for Spring Boot integration
