@@ -36,5 +36,7 @@ release-notes:
   title: Release notes
 secrets:
   title: Secrets
+testing-with-docker:
+  title: Testing with Docker
 troubleshooting:
   title: Troubleshooting
