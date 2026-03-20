@@ -167,6 +167,7 @@ Paketo
 PAT
 perl
 pgAdmin
+pgx
 PKG
 plaintext
 plist
