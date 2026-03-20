@@ -274,11 +274,23 @@ If any test fails, debug and fix the code in both the temporary project AND the 
 
 ## Step 8: Validate
 
+**IMPORTANT**: Run ALL validation locally before committing. Vale checks run on CI and will block the PR if they fail — fixing after push wastes CI cycles and review time.
+
 1. `npx prettier --write content/guides/testcontainers-{LANG}-{GUIDE_ID}/`
 2. `npx prettier --write content/manuals/testcontainers.md`
-3. `docker buildx bake lint` — must pass
-4. `docker buildx bake vale` — check `tmp/vale.out` for errors in new files
-   - Spelling errors for tech terms: add to `_vale/config/vocabularies/Docker/accept.txt`
+3. `docker buildx bake lint` — must pass with no errors
+4. `docker buildx bake vale` — then check for errors in the new files:
+   ```bash
+   grep -A2 "testcontainers-{LANG}-{GUIDE_ID}" tmp/vale.out
+   ```
+   Fix ALL errors before proceeding. Common issues:
+   - **Vale.Spelling**: tech terms (library names, tools) not in the dictionary → add to `_vale/config/vocabularies/Docker/accept.txt` (alphabetical order)
+   - **Vale.Terms**: wrong casing (e.g. "python" → "Python") → fix in the markdown. Watch for package names like `testcontainers-python` triggering false positives — rephrase to "Testcontainers for Python" in prose.
+   - **Docker.Avoid**: hedge words like "very", "simply" → reword
+   - **Docker.We**: first-person plural → rewrite to "you" or imperative
+   - Info-level suggestions (e.g. "VS Code" → "versus") are not blocking but review them
+
+   Re-run `docker buildx bake vale` after fixes until no errors remain in the new files.
 5. Verify in local dev server (`HUGO_PORT=1314 docker compose watch`):
    - Guide appears when filtering by its language
    - Guide appears when filtering by `Testing with Docker` tag
