@@ -71,8 +71,8 @@ Here's what the fixtures do:
 
 - The `setup` fixture has `scope="module"`, so it runs once for all tests in
   the file. It starts a PostgreSQL container, sets environment variables with
-  the connection details, and creates the `customers` table. A finalizer
-  removes the container after all tests complete.
+  the connection details, and creates the `customers` table. A cleanup
+  function removes the container after all tests complete.
 - The `setup_data` fixture has `scope="function"`, so it runs before every
   test. It deletes all records to give each test a clean database.
 

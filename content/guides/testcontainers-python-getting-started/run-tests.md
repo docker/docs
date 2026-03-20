@@ -36,7 +36,7 @@ same type of database (Postgres) that you use in production, instead of mocks.
 Because you aren't using mocks and instead talk to real services, you're free
 to refactor code and still verify that the application works as expected.
 
-In addition to PostgreSQL, testcontainers-python provides modules for many
+In addition to PostgreSQL, Testcontainers for Python provides modules for many
 SQL databases, NoSQL databases, messaging queues, and more. You can use
 Testcontainers to run any containerized dependency for your tests.
 
