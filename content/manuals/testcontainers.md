@@ -2,7 +2,8 @@
 title: Testcontainers
 weight: 40
 description: Learn how to use Testcontainers to run containers programmatically in your preferred programming language.
-keywords: docker APIs, docker, testcontainers documentation, testcontainers, testcontainers oss, testcontainers oss documentation,
+keywords:
+  docker APIs, docker, testcontainers documentation, testcontainers, testcontainers oss, testcontainers oss documentation,
   docker compose, docker-compose, java, golang, go
 params:
   sidebar:
@@ -31,6 +32,13 @@ Testcontainers is a set of open source libraries that provides easy and lightwei
 Using Testcontainers, you can write tests that depend on the same services you use in production without mocks or in-memory services.
 
 {{< grid items=intro >}}
+
+## Guides
+
+Explore hands-on Testcontainers guides to learn how to use Testcontainers
+with different languages and popular frameworks:
+
+- [Getting started with Testcontainers for Go](/guides/testcontainers-go-getting-started/)
 
 ## Quickstart
 
