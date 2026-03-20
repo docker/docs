@@ -40,6 +40,7 @@ with different languages and popular frameworks:
 
 - [Getting started with Testcontainers for Go](/guides/testcontainers-go-getting-started/)
 - [Getting started with Testcontainers for Java](/guides/testcontainers-java-getting-started/)
+- [Getting started with Testcontainers for Node.js](/guides/testcontainers-nodejs-getting-started/)
 - [Getting started with Testcontainers for Python](/guides/testcontainers-python-getting-started/)
 
 ## Quickstart
