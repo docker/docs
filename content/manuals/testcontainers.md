@@ -43,6 +43,7 @@ with different languages and popular frameworks:
 - [Getting started with Testcontainers for Java](/guides/testcontainers-java-getting-started/)
 - [Getting started with Testcontainers for Node.js](/guides/testcontainers-nodejs-getting-started/)
 - [Getting started with Testcontainers for Python](/guides/testcontainers-python-getting-started/)
+- [Testing a Spring Boot REST API with Testcontainers](/guides/testcontainers-java-spring-boot-rest-api/)
 
 ## Quickstart
 
