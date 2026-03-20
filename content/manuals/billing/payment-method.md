@@ -237,9 +237,6 @@ verification email and enter the amount of this deposit to verify your account.
 
 ## Failed payments
 
-You can't manually retry a failed payment. Docker will retry failed payments
-based on the retry schedule.
-
 If your subscription payment fails, there is a grace period of 15 days,
 including the due date. Docker retries to collect the payment 3 times using the
 following schedule:
@@ -251,6 +248,18 @@ following schedule:
 Docker also sends an email notification
 `Action Required - Credit Card Payment Failed` with an attached unpaid invoice
 after each failed payment attempt.
+
+### Manual payment retry
+
+If you want to resolve a failed payment immediately instead of waiting for the automatic retry schedule, you can manually retry the payment:
+
+1. Access the unpaid invoice from the email notification or from your billing history.
+2. Select **Pay online** on the invoice.
+3. You'll be redirected to Stripe to complete the payment with your current payment method or a different one.
+
+This allows you to resolve payment issues immediately without waiting for the automatic retry schedule.
+
+### Subscription downgrade
 
 Once the grace period is over and the invoice is still not paid, the
 subscription downgrades to a free subscription and all paid features are
