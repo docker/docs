@@ -9,23 +9,23 @@ params:
   sidebar:
     group: Open source
 intro:
-- title: What is Testcontainers?
-  description: Learn about what Testcontainers does and its key benefits
-  icon: feature_search
-  link: https://testcontainers.com/getting-started/#what-is-testcontainers
-- title: The Testcontainers workflow
-  description: Understand the Testcontainers workflow
-  icon: explore
-  link: https://testcontainers.com/getting-started/#testcontainers-workflow
+  - title: What is Testcontainers?
+    description: Learn about what Testcontainers does and its key benefits
+    icon: feature_search
+    link: https://testcontainers.com/getting-started/#what-is-testcontainers
+  - title: The Testcontainers workflow
+    description: Understand the Testcontainers workflow
+    icon: explore
+    link: https://testcontainers.com/getting-started/#testcontainers-workflow
 quickstart:
-- title: Testcontainers for Go
-  description: A Go package that makes it simple to create and clean up container-based dependencies for automated integration/smoke tests.
-  icon: /icons/go.svg
-  link: https://golang.testcontainers.org/quickstart/
-- title: Testcontainers for Java
-  description: A Java library that supports JUnit tests, providing lightweight, throwaway instances of anything that can run in a Docker container.
-  icon: /icons/java.svg
-  link: https://java.testcontainers.org/
+  - title: Testcontainers for Go
+    description: A Go package that makes it simple to create and clean up container-based dependencies for automated integration/smoke tests.
+    icon: /icons/go.svg
+    link: https://golang.testcontainers.org/quickstart/
+  - title: Testcontainers for Java
+    description: A Java library that supports JUnit tests, providing lightweight, throwaway instances of anything that can run in a Docker container.
+    icon: /icons/java.svg
+    link: https://java.testcontainers.org/
 ---
 
 Testcontainers is a set of open source libraries that provides easy and lightweight APIs for bootstrapping local development and test dependencies with real services wrapped in Docker containers.
@@ -63,6 +63,6 @@ However, these are not actively tested in the main development workflow, so not 
 and additional manual configuration might be necessary.
 
 If you have further questions about configuration details for your setup or whether it supports running Testcontainers-based tests,
- contact the Testcontainers team and other users from the Testcontainers community on [Slack](https://slack.testcontainers.org/).
+contact the Testcontainers team and other users from the Testcontainers community on [Slack](https://slack.testcontainers.org/).
 
- {{< grid items=quickstart >}}
+{{< grid items=quickstart >}}
