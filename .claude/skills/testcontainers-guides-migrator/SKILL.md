@@ -52,7 +52,7 @@ These are the 21 guides from testcontainers.com/guides/ and their source repos:
 | 20 | Getting started for Python | tc-guide-getting-started-with-testcontainers-for-python | python | getting-started |
 | 21 | Keycloak with Spring Boot | tc-guide-securing-spring-boot-microservice-using-keycloak-and-testcontainers | java | keycloak-spring-boot |
 
-Already migrated: **#13 (Go getting-started)**
+Already migrated: **#13 (Go getting-started)**, **#20 (Python getting-started)**
 
 ## Step 0: Pre-flight
 
