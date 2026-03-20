@@ -38,6 +38,7 @@ Using Testcontainers, you can write tests that depend on the same services you u
 Explore hands-on Testcontainers guides to learn how to use Testcontainers
 with different languages and popular frameworks:
 
+- [Getting started with Testcontainers for .NET](/guides/testcontainers-dotnet-getting-started/)
 - [Getting started with Testcontainers for Go](/guides/testcontainers-go-getting-started/)
 - [Getting started with Testcontainers for Java](/guides/testcontainers-java-getting-started/)
 - [Getting started with Testcontainers for Node.js](/guides/testcontainers-nodejs-getting-started/)
