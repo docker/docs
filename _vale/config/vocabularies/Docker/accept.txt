@@ -8,6 +8,7 @@ exfiltration
 sandboxing
 Adreno
 Aleksandrov
+Awaitility
 Amazon
 Anchore
 Apple
@@ -48,6 +49,7 @@ CouchDB
 Crowdstrike
 [Cc]ybersecurity
 datacenter
+datasource
 Datadog
 Ddosify
 Debootstrap
@@ -104,6 +106,7 @@ Groq
 Grype
 HyperKit
 inferencing
+Initializr
 inotify
 Intel
 Intune
@@ -231,6 +234,7 @@ uncaptured
 Uncaptured
 undeterminable
 Unix
+unmarshalling
 unmanaged
 Visual Studio Code
 VMware

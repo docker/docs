@@ -47,6 +47,10 @@ with different languages and popular frameworks:
 - [Testcontainers container lifecycle management](/guides/testcontainers-java-lifecycle/)
 - [Replace H2 with a real database for testing](/guides/testcontainers-java-replace-h2/)
 - [Configuration of services running in a container](/guides/testcontainers-java-service-configuration/)
+- [Testing an ASP.NET Core web app](/guides/testcontainers-dotnet-aspnet-core/)
+- [Testing Spring Boot Kafka Listener](/guides/testcontainers-java-spring-boot-kafka/)
+- [Testing REST API integrations using MockServer](/guides/testcontainers-java-mockserver/)
+- [Testing AWS service integrations using LocalStack](/guides/testcontainers-java-aws-localstack/)
 
 ## Quickstart
 
