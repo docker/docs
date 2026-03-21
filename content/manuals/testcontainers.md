@@ -45,6 +45,7 @@ with different languages and popular frameworks:
 - [Getting started with Testcontainers for Python](/guides/testcontainers-python-getting-started/)
 - [Testing a Spring Boot REST API with Testcontainers](/guides/testcontainers-java-spring-boot-rest-api/)
 - [Testcontainers container lifecycle management](/guides/testcontainers-java-lifecycle/)
+- [Replace H2 with a real database for testing](/guides/testcontainers-java-replace-h2/)
 
 ## Quickstart
 
