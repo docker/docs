@@ -46,6 +46,7 @@ with different languages and popular frameworks:
 - [Testing a Spring Boot REST API with Testcontainers](/guides/testcontainers-java-spring-boot-rest-api/)
 - [Testcontainers container lifecycle management](/guides/testcontainers-java-lifecycle/)
 - [Replace H2 with a real database for testing](/guides/testcontainers-java-replace-h2/)
+- [Configuration of services running in a container](/guides/testcontainers-java-service-configuration/)
 
 ## Quickstart
 
