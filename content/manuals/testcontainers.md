@@ -51,6 +51,12 @@ with different languages and popular frameworks:
 - [Testing Spring Boot Kafka Listener](/guides/testcontainers-java-spring-boot-kafka/)
 - [Testing REST API integrations using MockServer](/guides/testcontainers-java-mockserver/)
 - [Testing AWS service integrations using LocalStack](/guides/testcontainers-java-aws-localstack/)
+- [Testing Quarkus applications with Testcontainers](/guides/testcontainers-java-quarkus/)
+- [Working with jOOQ and Flyway using Testcontainers](/guides/testcontainers-java-jooq-flyway/)
+- [Testing REST API integrations using WireMock](/guides/testcontainers-java-wiremock/)
+- [Securing Spring Boot with Keycloak and Testcontainers](/guides/testcontainers-java-keycloak-spring-boot/)
+- [Testing Micronaut REST API with WireMock](/guides/testcontainers-java-micronaut-wiremock/)
+- [Testing Micronaut Kafka Listener](/guides/testcontainers-java-micronaut-kafka/)
 
 ## Quickstart
 
