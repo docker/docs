@@ -21,7 +21,8 @@ github_notes=$(mktemp -t old)
 grep -A 10000 "## ${version}" "content/manuals/engine/release-notes/${major_version}.md" | \
     grep -m 2 -A 0 -B 10000 '^## ' | \
     sed '$d' | \
-    sed '/{{< release-date /{N;d;}' \
+    sed '/{{< release-date /{N;d;}' | \
+    sed '/^---$/,$d' \
     > "$docs_notes" || { echo "Release notes for ${version} not found" && exit 1; }
 
 release_json=$(gh api repos/moby/moby/releases -q ".[] | select(.name==\"v${version}\" or .tag_name==\"$moby_tag\")")
