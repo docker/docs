@@ -8,7 +8,7 @@
     <div class="flex items-start justify-between gap-4">
       <h1>{{ .Title }}</h1>
       <div class="md-dropdown ml-auto mr-4 hidden lg:block">
-        {{ partial "md-dropdown.html" . }}
+        {{ partialCached "md-dropdown.html" "-" "-" }}
       </div>
     </div>
     <div class="overflow-x-auto">

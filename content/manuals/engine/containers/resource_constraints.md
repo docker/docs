@@ -1,8 +1,8 @@
 ---
 title: Resource constraints
 weight: 30
-description: Specify the runtime options for a container
-keywords: docker, daemon, configuration, runtime
+description: Limit container memory and CPU usage with runtime configuration flags
+keywords: resource constraints, memory limits, CPU limits, cgroups, OOM, swap, docker run, memory swap
 aliases:
   - /engine/admin/resource_constraints/
   - /config/containers/resource_constraints/
@@ -265,84 +265,5 @@ If the kernel or Docker daemon isn't configured correctly, an error occurs.
 
 ## GPU
 
-### Access an NVIDIA GPU
-
-#### Prerequisites
-
-Visit the official [NVIDIA drivers page](https://www.nvidia.com/Download/index.aspx)
-to download and install the proper drivers. Reboot your system once you have
-done so.
-
-Verify that your GPU is running and accessible.
-
-#### Install nvidia-container-toolkit
-
-Follow the official NVIDIA Container Toolkit [installation instructions](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
-
-#### Expose GPUs for use
-
-Include the `--gpus` flag when you start a container to access GPU resources.
-Specify how many GPUs to use. For example:
-
-```console
-$ docker run -it --rm --gpus all ubuntu nvidia-smi
-```
-
-Exposes all available GPUs and returns a result akin to the following:
-
-```bash
-+-------------------------------------------------------------------------------+
-| NVIDIA-SMI 384.130            	Driver Version: 384.130               	|
-|-------------------------------+----------------------+------------------------+
-| GPU  Name 	   Persistence-M| Bus-Id    	Disp.A | Volatile Uncorr. ECC   |
-| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M.   |
-|===============================+======================+========================|
-|   0  GRID K520       	Off  | 00000000:00:03.0 Off |                  N/A      |
-| N/A   36C	P0    39W / 125W |  	0MiB /  4036MiB |      0%  	Default |
-+-------------------------------+----------------------+------------------------+
-+-------------------------------------------------------------------------------+
-| Processes:                                                       GPU Memory   |
-|  GPU   	PID   Type   Process name                         	Usage  	|
-|===============================================================================|
-|  No running processes found                                                   |
-+-------------------------------------------------------------------------------+
-```
-
-Use the `device` option to specify GPUs. For example:
-
-```console
-$ docker run -it --rm --gpus device=GPU-3a23c669-1f69-c64e-cf85-44e9b07e7a2a ubuntu nvidia-smi
-```
-
-Exposes that specific GPU.
-
-```console
-$ docker run -it --rm --gpus '"device=0,2"' ubuntu nvidia-smi
-```
-
-Exposes the first and third GPUs.
-
-> [!NOTE]
->
-> NVIDIA GPUs can only be accessed by systems running a single engine.
-
-#### Set NVIDIA capabilities
-
-You can set capabilities manually. For example, on Ubuntu you can run the
-following:
-
-```console
-$ docker run --gpus 'all,capabilities=utility' --rm ubuntu nvidia-smi
-```
-
-This enables the `utility` driver capability which adds the `nvidia-smi` tool to
-the container.
-
-Capabilities as well as other configurations can be set in images via
-environment variables. More information on valid variables can be found in the
-[nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/docker-specialized.html)
-documentation. These variables can be set in a Dockerfile.
-
-You can also use CUDA images, which set these variables automatically. See the
-official [CUDA images](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/cuda)
-NGC catalog page.
+For information on how to access NVIDIA GPUs from a container, see
+[GPU access](gpu.md).

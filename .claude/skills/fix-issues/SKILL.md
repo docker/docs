@@ -68,21 +68,7 @@ Re-read the changed file to verify:
 
 #### f. Commit
 
-Stage only the changed files (not `git add -A`), then commit:
-
-```bash
-git add <specific-files>
-git commit -m "$(cat <<'EOF'
-<Short summary of fix>
-
-<Brief explanation of why>
-
-Closes #<issue-number>
-
-Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
-EOF
-)"
-```
+Stage only the changed files (not `git add -A`).
 
 #### g. Push and create PR
 
@@ -139,5 +125,3 @@ Present a summary table:
   reorganization before giving up (files move around in this repo)
 - Validation commands (`docker buildx bake lint vale`) are available but slow;
   only run them if the user asks or the changes are complex enough to warrant it
-- The `/manuals` prefix is removed from URLs in the live site — keep this in
-  mind when verifying link paths

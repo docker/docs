@@ -175,7 +175,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@{{% param "checkout_action_version" %}}
 
       - name: Set up Docker with containerd image store
         uses: docker/setup-docker-action@{{% param "setup_docker_action_version" %}}

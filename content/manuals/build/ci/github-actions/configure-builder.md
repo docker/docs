@@ -266,7 +266,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@{{% param "checkout_action_version" %}}
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}

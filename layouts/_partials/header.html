@@ -47,16 +47,29 @@
     </div>
     <div id="buttons" class="flex min-w-0 items-center justify-end flex-shrink-0">
       <div class="flex items-center gap-2">
-        <button
-          x-data
-          @click="$store.gordon.toggle()"
-          class="cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-blue-700 border border-blue-500 text-white transition-colors focus:outline-none focus:ring focus:ring-blue-400 shimmer open-kapa-widget"
-        >
-          <span class="icon-svg">
-            {{ partial "utils/svg.html" "/icons/sparkle.svg" }}
-          </span>
-          <span class="hidden px-1 lg:inline">Gordon</span>
-        </button>
+        <div data-tooltip-wrapper class="relative">
+          <button
+            x-data
+            @click="$store.gordon.toggle()"
+            aria-label="Ask Gordon, AI assistant"
+            aria-describedby="gordon-tooltip"
+            class="cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-blue-700 border border-blue-500 text-white transition-colors focus:outline-none focus:ring focus:ring-blue-400 shimmer open-kapa-widget"
+          >
+            <span class="icon-svg">
+              {{ partial "utils/svg.html" "/icons/sparkle.svg" }}
+            </span>
+            <span class="hidden px-1 lg:inline">Gordon</span>
+          </button>
+          <div
+            id="gordon-tooltip"
+            data-tooltip-body
+            class="absolute top-0 left-0 hidden whitespace-nowrap rounded-sm bg-gray-900 p-2 text-sm text-white"
+            role="tooltip"
+          >
+            Ask Gordon — AI assistant for Docker docs
+            <div data-tooltip-arrow class="absolute h-2 w-2 rotate-45 bg-gray-900"></div>
+          </div>
+        </div>
 
         <div id="search-bar-container">
            {{ partialCached "search-bar.html" "-" }}

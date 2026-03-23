@@ -306,7 +306,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@{{% param "checkout_action_version" %}}
       - uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
       - name: Test build with policy
         run: docker buildx build --policy strict=true .

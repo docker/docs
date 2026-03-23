@@ -344,7 +344,7 @@ Opens interactive TUI to configure and generate agent YAML.
 Pull agent from OCI registry.
 
 ```console
-$ docker agent pull registry-ref
+$ docker agent share pull registry-ref
 ```
 
 Arguments:
@@ -360,7 +360,7 @@ Flags:
 Example:
 
 ```console
-$ docker agent pull docker.io/user/agent:latest
+$ docker agent share pull docker.io/user/agent:latest
 ```
 
 Saves to local YAML file.
@@ -370,7 +370,7 @@ Saves to local YAML file.
 Push agent to OCI registry.
 
 ```console
-$ docker agent push agent-file registry-ref
+$ docker agent share push agent-file registry-ref
 ```
 
 Arguments:
@@ -381,7 +381,7 @@ Arguments:
 Example:
 
 ```console
-$ docker agent push ./agent.yaml docker.io/myuser/myagent:latest
+$ docker agent share push ./agent.yaml docker.io/myuser/myagent:latest
 ```
 
 ### run

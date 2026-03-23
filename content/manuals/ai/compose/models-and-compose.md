@@ -349,33 +349,6 @@ models:
       - "--embeddings"          # Required for embedding models
 ```
 
-## Alternative configuration with provider services
-
-> [!IMPORTANT]
->
-> This approach is deprecated. Use the [`models` top-level element](#basic-model-definition) instead.
-
-You can also use the `provider` service type, which allows you to declare platform capabilities required by your application.
-For AI models, you can use the `model` type to declare model dependencies.
-
-To define a model provider:
-
-```yaml
-services:
-  chat:
-    image: my-chat-app
-    depends_on:
-      - ai_runner
-
-  ai_runner:
-    provider:
-      type: model
-      options:
-        model: ai/smollm2
-        context-size: 1024
-        runtime-flags: "--no-prefill-assistant"
-```
-
 ## Reference
 
 - [`models` top-level element](/reference/compose-file/models.md)

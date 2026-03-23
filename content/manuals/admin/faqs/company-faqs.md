@@ -6,8 +6,8 @@ description: Company FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, company, administration, company management
 tags: [FAQ]
 aliases:
-- /docker-hub/company-faqs/
-- /faq/admin/company-faqs/
+  - /docker-hub/company-faqs/
+  - /faq/admin/company-faqs/
 ---
 
 ### Some of my organizations don’t have a Docker Business subscription. Can I still use a parent company?
@@ -27,7 +27,7 @@ outside of the company.
 Company owners do not occupy a seat unless one of the following is true:
 
 - They are added as a member of an organization under your company
-- SSO is enabled
+- SSO is enabled and the company owner signs in via SSO, which automatically adds them as an organization member
 
 Although company owners have the same access as organization owners across all
 organizations in the company, it's not necessary to add them to any

@@ -159,6 +159,9 @@ params:
   setup_docker_action_version: "v5"
   setup_qemu_action_version: "v4"
   github_builder_version: "v1"
+  # Generic actions
+  checkout_action_version: "v6"
+  cache_action_version: "v5"
 
   # Example runtime/library/os versions
   example_go_version: "1.25"

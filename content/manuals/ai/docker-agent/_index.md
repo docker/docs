@@ -148,8 +148,8 @@ Agent configurations are packaged as OCI artifacts. Push and pull them like
 container images:
 
 ```console
-$ docker agent push ./debugger.yaml myusername/debugger
-$ docker agent pull myusername/debugger
+$ docker agent share push ./debugger.yaml myusername/debugger
+$ docker agent share pull myusername/debugger
 ```
 
 Use Docker Hub or any OCI-compatible registry. Pushing creates the repository if

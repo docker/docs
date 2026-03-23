@@ -167,11 +167,14 @@ Paketo
 PAT
 perl
 pgAdmin
+pgx
 PKG
 plaintext
 plist
 pluggable
 Postgres
+psycopg
+pytest
 PowerShell
 Python
 Qualcomm

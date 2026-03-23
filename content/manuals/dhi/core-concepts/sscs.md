@@ -17,9 +17,9 @@ ensuring the integrity and security of these elements is paramount
 
 ## Why is SSCS important?
 
-The significance of SSCS has escalated due to the rise in sophisticated
-cyberattacks targeting software supply chains. Recent incidents and the
-exploitation of vulnerabilities in open-source components have underscored the
+The significance of SSCS has escalated due to sophisticated cyberattacks
+targeting software supply chains. High-profile supply chain attacks and the
+exploitation of vulnerabilities in open-source components underscore the
 critical need for robust supply chain security measures. Compromises at any
 stage of the software lifecycle can lead to widespread vulnerabilities, data
 breaches, and significant financial losses.

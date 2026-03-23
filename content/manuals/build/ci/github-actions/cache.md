@@ -246,7 +246,7 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
 
       - name: Go Build Cache for Docker
-        uses: actions/cache@v4
+        uses: actions/cache@{{% param "cache_action_version" %}}
         with:
           path: go-build-cache
           key: ${{ runner.os }}-go-build-cache-${{ hashFiles('**/go.sum') }}
@@ -303,7 +303,7 @@ jobs:
         uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 
       - name: Cache Docker layers
-        uses: actions/cache@v4
+        uses: actions/cache@{{% param "cache_action_version" %}}
         with:
           path: ${{ runner.temp }}/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}

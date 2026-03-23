@@ -5,16 +5,16 @@ weight: 30
 description: Learn how networking works from the container's point of view
 keywords: networking, container, standalone, IP address, DNS resolution
 aliases:
-- /articles/networking/
-- /config/containers/container-networking/
-- /engine/tutorials/networkingcontainers/
-- /engine/userguide/networking/
-- /engine/userguide/networking/configure-dns/
-- /engine/userguide/networking/default_network/binding/
-- /engine/userguide/networking/default_network/configure-dns/
-- /engine/userguide/networking/default_network/container-communication/
-- /engine/userguide/networking/dockernetworks/
-- /network/
+  - /articles/networking/
+  - /config/containers/container-networking/
+  - /engine/tutorials/networkingcontainers/
+  - /engine/userguide/networking/
+  - /engine/userguide/networking/configure-dns/
+  - /engine/userguide/networking/default_network/binding/
+  - /engine/userguide/networking/default_network/configure-dns/
+  - /engine/userguide/networking/default_network/container-communication/
+  - /engine/userguide/networking/dockernetworks/
+  - /network/
 ---
 
 Container networking refers to the ability for containers to connect to and
@@ -79,7 +79,7 @@ Docker Engine has a number of network drivers, as well as the default "bridge".
 On Linux, the following built-in network drivers are available:
 
 | Driver                          | Description                                                         |
-|:--------------------------------|:--------------------------------------------------------------------|
+| :------------------------------ | :------------------------------------------------------------------ |
 | [bridge](./drivers/bridge.md)   | The default network driver.                                         |
 | [host](./drivers/host.md)       | Remove network isolation between the container and the Docker host. |
 | [none](./drivers/none.md)       | Completely isolate a container from the host and other containers.  |
@@ -192,13 +192,13 @@ These pools can be configured in `/etc/docker/daemon.json`. Docker's built-in de
 ```json
 {
   "default-address-pools": [
-    {"base":"172.17.0.0/16","size":16},
-    {"base":"172.18.0.0/16","size":16},
-    {"base":"172.19.0.0/16","size":16},
-    {"base":"172.20.0.0/14","size":16},
-    {"base":"172.24.0.0/14","size":16},
-    {"base":"172.28.0.0/14","size":16},
-    {"base":"192.168.0.0/16","size":20}
+    { "base": "172.17.0.0/16", "size": 16 },
+    { "base": "172.18.0.0/16", "size": 16 },
+    { "base": "172.19.0.0/16", "size": 16 },
+    { "base": "172.20.0.0/14", "size": 16 },
+    { "base": "172.24.0.0/14", "size": 16 },
+    { "base": "172.28.0.0/14", "size": 16 },
+    { "base": "192.168.0.0/16", "size": 20 }
   ]
 }
 ```
@@ -206,7 +206,7 @@ These pools can be configured in `/etc/docker/daemon.json`. Docker's built-in de
 - `base`: The subnet that can be allocated from.
 - `size`: The prefix length used for each allocated subnet.
 
-When an IPv6 subnet is required and there are no IPv6 addresses in  `default-address-pools`, Docker allocates
+When an IPv6 subnet is required and there are no IPv6 addresses in `default-address-pools`, Docker allocates
 subnets from a Unique Local Address (ULA) prefix. To use specific IPv6 subnets instead, add them to your
 `default-address-pools`. See [Dynamic IPv6 subnet allocation](../daemon/ipv6.md#dynamic-ipv6-subnet-allocation)
 for more information.
@@ -222,9 +222,7 @@ Docker will allocate subnets `172.17.0.0/24`, `172.17.1.0/24`, and so on, up to 
 
 ```json
 {
-  "default-address-pools": [
-    {"base": "172.17.0.0/16", "size": 24}
-  ]
+  "default-address-pools": [{ "base": "172.17.0.0/16", "size": 24 }]
 }
 ```
 
@@ -265,6 +263,9 @@ Containers that attach to a
 [custom network](drivers/bridge.md#use-user-defined-bridge-networks)
 use Docker's embedded DNS server.
 The embedded DNS server forwards external DNS lookups to the DNS servers configured on the host.
+The embedded DNS server address is `127.0.0.11`.
+There is no IPv6 equivalent; the IPv4 address works even in IPv6-only containers.
+If an application requires an explicit DNS server address, use `127.0.0.11`.
 
 You can configure DNS resolution on a per-container basis, using flags for the
 `docker run` or `docker create` command used to start the container.
@@ -272,7 +273,7 @@ The following table describes the available `docker run` flags related to DNS
 configuration.
 
 | Flag           | Description                                                                                                                                                                                                                                           |
-| -------------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--dns`        | The IP address of a DNS server. To specify multiple DNS servers, use multiple `--dns` flags. DNS requests will be forwarded from the container's network namespace so, for example, `--dns=127.0.0.1` refers to the container's own loopback address. |
 | `--dns-search` | A DNS search domain to search non-fully qualified hostnames. To specify multiple DNS search prefixes, use multiple `--dns-search` flags.                                                                                                              |
 | `--dns-opt`    | A key-value pair representing a DNS option and its value. See your operating system's documentation for `resolv.conf` for valid options.                                                                                                              |

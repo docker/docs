@@ -784,6 +784,9 @@ To automatically remove anonymous volumes, use the `--rm` option. For example,
 this command creates an anonymous `/foo` volume. When you remove the container,
 the Docker Engine removes the `/foo` volume but not the `awesome` volume.
 
+The `--rm` option works with both foreground and detached (`-d`) containers.
+The anonymous volumes are cleaned up when the container exits.
+
 ```console
 $ docker run --rm -v /foo -v awesome:/bar busybox top
 ```

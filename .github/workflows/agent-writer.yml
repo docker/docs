@@ -1,8 +1,7 @@
 name: Agent writer
 
 on:
-  issues:
-    types: [labeled]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -11,8 +10,6 @@ permissions:
 
 jobs:
   run-agent:
-    # Only run when the "agent/fix" label is added
-    if: github.event.label.name == 'agent/fix'
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout

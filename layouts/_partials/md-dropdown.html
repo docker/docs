@@ -7,10 +7,10 @@
       class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 flex cursor-pointer items-center gap-2 px-3 py-2 text-sm transition-colors whitespace-nowrap text-gray-900 dark:text-white"
     >
       <span class="icon-svg icon-sm">
-        {{ partial "icon" "content_copy" }}
+        {{ partialCached "icon" "content_copy" "content_copy" }}
       </span>
       <span class="icon-svg icon-sm hidden">
-        {{ partial "icon" "check_circle" }}
+        {{ partialCached "icon" "check_circle" "check_circle" }}
       </span>
       <span>Copy as Markdown</span>
     </button>
