@@ -3,7 +3,7 @@ title: Swarm task states
 description: Learn about tasks that are scheduled on your swarm.
 keywords: swarm, task, service
 aliases:
-- /datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-task-state/
+  - /datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-task-state/
 ---
 
 Docker lets you create services, which can start tasks. A service is a
@@ -59,4 +59,4 @@ j91iahr8s74p    \_ webserver.1   nginx    UbuntuVM    Shutdown       Failed 50 s
 
 ## Where to go next
 
-- [Learn about swarm tasks](https://github.com/docker/swarmkit/blob/master/design/task_model.md)
+- [Learn about swarm tasks](https://github.com/moby/swarmkit/blob/master/design/task_model.md)
