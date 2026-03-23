@@ -43,8 +43,16 @@ Before you begin:
 
 > [!NOTE]
 > Gordon is enabled by default for Personal, Pro, and Team subscriptions. For
-> Business subscriptions, an administrator must enable Gordon for the
-> organization before users can access it.
+> Business subscriptions, two steps are required before users can access Gordon:
+>
+> 1. Contact Docker support or your Docker account representative to request
+>    Gordon activation for your organization. Docker must enable it on their end
+>    first.
+> 2. After activation, an organization admin sets the Gordon setting to
+>    **Enabled** or **Always Enabled** (not **User Defined**) in the Admin
+>    Console. See the
+>    [settings reference](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference/)
+>    for details.
 
 ### Quick start
 
