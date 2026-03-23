@@ -15,11 +15,11 @@ When you create a service, you specify which container image to use and which
 commands to execute inside running containers. You also define options for the
 service including:
 
-* The port where the swarm makes the service available outside the swarm
-* An overlay network for the service to connect to other services in the swarm
-* CPU and memory limits and reservations
-* A rolling update policy
-* The number of replicas of the image to run in the swarm
+- The port where the swarm makes the service available outside the swarm
+- An overlay network for the service to connect to other services in the swarm
+- CPU and memory limits and reservations
+- A rolling update policy
+- The number of replicas of the image to run in the swarm
 
 ## Services, tasks, and containers
 
@@ -53,7 +53,7 @@ fails its health check or crashes, the orchestrator creates a new replica task
 that spawns a new container.
 
 A task is a one-directional mechanism. It progresses monotonically through a
-series of states: assigned, prepared, running, etc. If the task fails, the
+series of states: assigned, preparing, running, etc. If the task fails, the
 orchestrator removes the task and its container and then creates a new task to
 replace it according to the desired state specified by the service.
 
@@ -121,5 +121,5 @@ in black.
 
 ## Learn more
 
-* Read about how Swarm mode [nodes](nodes.md) work.
-* Learn how [PKI](pki.md) works in Swarm mode.
+- Read about how Swarm mode [nodes](nodes.md) work.
+- Learn how [PKI](pki.md) works in Swarm mode.
