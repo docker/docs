@@ -47,7 +47,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For all platforms
 
 - Docker Model Runner now supports Qwen3.5.
-- With the new **Logs (Beta)** view, you can now filter container logs by Compose stack. Also added per-session log files.
+- With the new **Logs (Beta)** view, you can now filter container logs by Compose stack.
 - Improved interaction with **Settings** while the Docker engine or Kubernetes is starting or stopping.
 - Fixed a bug where random UDP port bindings reported port `0` instead of the actual assigned port.
 - Fixed an issue with the Docker Desktop shortcut not reopening the Dashboard when Docker Desktop was already running.
