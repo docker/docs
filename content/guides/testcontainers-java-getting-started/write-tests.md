@@ -16,8 +16,8 @@ Add the Testcontainers PostgreSQL module as a test dependency in `pom.xml`:
 ```xml
 <dependency>
     <groupId>org.testcontainers</groupId>
-    <artifactId>testcontainers-postgresql</artifactId>
-    <version>2.0.4</version>
+    <artifactId>postgresql</artifactId>
+    <version>1.21.3</version>
     <scope>test</scope>
 </dependency>
 ```

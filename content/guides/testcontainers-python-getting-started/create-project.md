@@ -24,7 +24,7 @@ running a PostgreSQL database in a container.
 Install the dependencies:
 
 ```console
-$ pip install psycopg pytest testcontainers[postgres]
+$ pip install "psycopg[binary]" pytest testcontainers[postgres]
 $ pip freeze > requirements.txt
 ```
 
