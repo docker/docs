@@ -26,6 +26,45 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.67.0
+
+{{< release-date date="2026-03-30" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.67.0" build_path="//" >}}
+
+### New
+
+- Docker MCP Toolkit now has MCP profile template cards and an onboarding tour accessible via the **Profiles** tab.
+
+### Updates
+
+- [Docker Compose v5.1.1](https://github.com/docker/compose/releases/tag/v5.1.1)
+- [Docker Agent v1.34.0](https://github.com/docker/docker-agent/releases/tag/v1.34.0)
+- [Docker Scout CLI v1.20.3](https://github.com/docker/scout-cli/releases/tag/v1.20.3)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Docker Model Runner now supports Qwen3.5.
+- With the new **Logs (Beta)** view, you can now filter container logs by Compose stack. Also added per-session log files.
+- Improved interaction with **Settings** while the Docker engine or Kubernetes is starting or stopping.
+- Fixed a bug where random UDP port bindings reported port `0` instead of the actual assigned port.
+- Fixed an issue with the Docker Desktop shortcut not reopening the Dashboard when Docker Desktop was already running.
+- Fixed an issue where the **Add to existing profile** dialog showed profiles that already contained all selected MCP servers in the dropdown.
+
+#### For Mac
+
+- Fixed intermittent `exec format error` when starting amd64 containers on Apple Silicon Macs due to a race condition between Rosetta `binfmt` registration and `virtiofs` device availability.
+
+#### For Windows
+
+- Fixed Hyper-V being silently re-enabled on every EXE upgrade for WSL 2 users.
+- Fixed an MSI installer bug where Docker Desktop processes could be left running after uninstall.
+- Fixed an issue on Windows where installations or updates using `--installation-dir` would fail due to the installer archive being extracted into the custom installation directory.
+- Improved Docker Desktop startup time on Windows by several seconds when using WSL 2.
+- Fixed a bug on the **Models** > **Logs** screen which caused `docker-model` processes to accumulate on Windows each time the screen was visited.
+
 ## 4.66.1
 
 {{< release-date date="2026-03-26" >}}
