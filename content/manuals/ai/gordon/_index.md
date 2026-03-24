@@ -50,8 +50,8 @@ Before you begin:
 > 2. Once confirmed, an organization administrator must set **Enable Gordon** to
 >    **Enabled** or **Always Enabled** in the
 >    [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md).
->    Setting it to **User Defined** (which delegates the decision to individual
->    users) will not activate Gordon organization-wide.
+>    Do not leave the setting at its default value, as this will not activate
+>    Gordon organization-wide.
 
 ### Quick start
 
