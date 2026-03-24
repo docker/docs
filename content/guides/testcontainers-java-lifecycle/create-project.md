@@ -29,14 +29,14 @@ Create a Java project with Maven and add the required dependencies:
     </dependency>
     <dependency>
         <groupId>org.testcontainers</groupId>
-        <artifactId>junit-jupiter</artifactId>
-        <version>1.21.4</version>
+        <artifactId>testcontainers-junit-jupiter</artifactId>
+        <version>2.0.4</version>
         <scope>test</scope>
     </dependency>
     <dependency>
         <groupId>org.testcontainers</groupId>
-        <artifactId>postgresql</artifactId>
-        <version>1.21.4</version>
+        <artifactId>testcontainers-postgresql</artifactId>
+        <version>2.0.4</version>
         <scope>test</scope>
     </dependency>
 </dependencies>

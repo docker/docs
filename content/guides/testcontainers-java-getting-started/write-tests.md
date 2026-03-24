@@ -16,8 +16,8 @@ Add the Testcontainers PostgreSQL module as a test dependency in `pom.xml`:
 ```xml
 <dependency>
     <groupId>org.testcontainers</groupId>
-    <artifactId>postgresql</artifactId>
-    <version>1.21.3</version>
+    <artifactId>testcontainers-postgresql</artifactId>
+    <version>2.0.4</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -39,11 +39,11 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.postgresql.PostgreSQLContainer;
 
 class CustomerServiceTest {
 
-  static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
+  static PostgreSQLContainer postgres = new PostgreSQLContainer(
     "postgres:16-alpine"
   );
 

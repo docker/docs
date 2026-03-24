@@ -7,7 +7,7 @@ weight: 30
 
 The Testcontainers library provides a JUnit 5 extension that simplifies
 starting and stopping containers using annotations. To use it, add the
-`org.testcontainers:junit-jupiter` test dependency.
+`org.testcontainers:testcontainers-junit-jupiter` test dependency.
 
 ```java
 package com.testcontainers.demo;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.postgresql.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -27,7 +27,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 class CustomerServiceWithJUnit5ExtensionTest {
 
   @Container
-  static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
+  static PostgreSQLContainer postgres = new PostgreSQLContainer(
     "postgres:16-alpine"
   );
 

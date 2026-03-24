@@ -19,7 +19,7 @@ The key dependencies in `pom.xml` are:
 
 ```xml
 <properties>
-    <quarkus.platform.version>3.0.3.Final</quarkus.platform.version>
+    <quarkus.platform.version>3.22.3</quarkus.platform.version>
 </properties>
 <dependencies>
     <dependency>

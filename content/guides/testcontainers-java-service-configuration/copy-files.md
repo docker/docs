@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.postgresql.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.MountableFile;
@@ -43,7 +43,7 @@ import org.testcontainers.utility.MountableFile;
 class CustomerServiceTest {
 
   @Container
-  static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
+  static PostgreSQLContainer postgres = new PostgreSQLContainer(
     "postgres:16-alpine"
   )
     .withCopyFileToContainer(

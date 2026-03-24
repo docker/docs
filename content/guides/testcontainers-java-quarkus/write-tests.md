@@ -112,7 +112,6 @@ CockroachDB Testcontainers module dependency:
 <dependency>
     <groupId>org.testcontainers</groupId>
     <artifactId>cockroachdb</artifactId>
-    <version>1.18.1</version>
     <scope>test</scope>
 </dependency>
 ```

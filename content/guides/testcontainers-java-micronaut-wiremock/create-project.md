@@ -66,7 +66,7 @@ are:
     </dependency>
     <dependency>
         <groupId>org.testcontainers</groupId>
-        <artifactId>junit-jupiter</artifactId>
+        <artifactId>testcontainers-junit-jupiter</artifactId>
         <scope>test</scope>
     </dependency>
     <dependency>
@@ -81,9 +81,9 @@ are:
         <scope>test</scope>
     </dependency>
     <dependency>
-        <groupId>com.github.wiremock</groupId>
-        <artifactId>wiremock-testcontainers-java</artifactId>
-        <version>1.0-alpha-7</version>
+        <groupId>org.wiremock.integrations.testcontainers</groupId>
+        <artifactId>wiremock-testcontainers-module</artifactId>
+        <version>1.0-alpha-13</version>
         <scope>test</scope>
     </dependency>
 </dependencies>

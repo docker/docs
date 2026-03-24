@@ -90,7 +90,7 @@ Add the `testcontainers-jooq-codegen-maven-plugin` to `pom.xml`:
 
 ```xml
 <properties>
-    <testcontainers.version>1.21.4</testcontainers.version>
+    <testcontainers.version>2.0.4</testcontainers.version>
     <testcontainers-jooq-codegen-maven-plugin.version>0.0.4</testcontainers-jooq-codegen-maven-plugin.version>
 </properties>
 
@@ -103,7 +103,7 @@ Add the `testcontainers-jooq-codegen-maven-plugin` to `pom.xml`:
             <dependencies>
                 <dependency>
                     <groupId>org.testcontainers</groupId>
-                    <artifactId>postgresql</artifactId>
+                    <artifactId>testcontainers-postgresql</artifactId>
                     <version>${testcontainers.version}</version>
                 </dependency>
                 <dependency>

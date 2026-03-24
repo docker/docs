@@ -23,7 +23,7 @@ The key dependencies in `pom.xml` are:
 ```xml
 <properties>
     <java.version>17</java.version>
-    <testcontainers.version>1.21.4</testcontainers.version>
+    <testcontainers.version>2.0.4</testcontainers.version>
 </properties>
 <dependencies>
     <dependency>
@@ -51,17 +51,17 @@ The key dependencies in `pom.xml` are:
     </dependency>
     <dependency>
         <groupId>org.testcontainers</groupId>
-        <artifactId>junit-jupiter</artifactId>
+        <artifactId>testcontainers-junit-jupiter</artifactId>
         <scope>test</scope>
     </dependency>
     <dependency>
         <groupId>org.testcontainers</groupId>
-        <artifactId>kafka</artifactId>
+        <artifactId>testcontainers-kafka</artifactId>
         <scope>test</scope>
     </dependency>
     <dependency>
         <groupId>org.testcontainers</groupId>
-        <artifactId>mysql</artifactId>
+        <artifactId>testcontainers-mysql</artifactId>
         <scope>test</scope>
     </dependency>
     <dependency>

@@ -18,8 +18,8 @@ Testcontainers JUnit 5 extension:
 class ProductRepositoryTest {
 
   @Container
-  static PostgreSQLContainer<?> postgres =
-    new PostgreSQLContainer<>("postgres:16-alpine")
+  static PostgreSQLContainer postgres =
+    new PostgreSQLContainer("postgres:16-alpine")
       .withCopyFileToContainer(
         MountableFile.forClasspathResource("sql/init-db.sql"),
         "/docker-entrypoint-initdb.d/init-db.sql");

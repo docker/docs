@@ -59,17 +59,17 @@ The key dependencies in `pom.xml` are:
     </dependency>
     <dependency>
         <groupId>org.testcontainers</groupId>
-        <artifactId>junit-jupiter</artifactId>
+        <artifactId>testcontainers-junit-jupiter</artifactId>
         <scope>test</scope>
     </dependency>
     <dependency>
         <groupId>org.testcontainers</groupId>
-        <artifactId>kafka</artifactId>
+        <artifactId>testcontainers-kafka</artifactId>
         <scope>test</scope>
     </dependency>
     <dependency>
         <groupId>org.testcontainers</groupId>
-        <artifactId>mysql</artifactId>
+        <artifactId>testcontainers-mysql</artifactId>
         <scope>test</scope>
     </dependency>
 </dependencies>

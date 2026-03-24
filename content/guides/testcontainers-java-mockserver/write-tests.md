@@ -38,10 +38,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
-import org.testcontainers.containers.MockServerContainer;
+import org.testcontainers.mockserver.MockServerContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Testcontainers
@@ -51,9 +50,8 @@ class AlbumControllerTest {
   private Integer port;
 
   @Container
-  static MockServerContainer mockServerContainer = new MockServerContainer(
-    DockerImageName.parse("mockserver/mockserver:5.15.0")
-  );
+  static MockServerContainer mockServerContainer =
+    new MockServerContainer("mockserver/mockserver:5.15.0");
 
   static MockServerClient mockServerClient;
 

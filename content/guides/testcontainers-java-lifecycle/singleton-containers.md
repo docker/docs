@@ -17,16 +17,15 @@ initializer:
 ```java
 package com.testcontainers.demo;
 
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.containers.KafkaContainer;
-import org.testcontainers.utility.DockerImageName;
+import org.testcontainers.postgresql.PostgreSQLContainer;
+import org.testcontainers.kafka.ConfluentKafkaContainer;
 
 public abstract class AbstractIntegrationTest {
 
-   static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
-           DockerImageName.parse("postgres:16-alpine"));
-   static KafkaContainer kafka = new KafkaContainer(
-           DockerImageName.parse("confluentinc/cp-kafka:7.6.1"));
+   static PostgreSQLContainer postgres = new PostgreSQLContainer(
+           "postgres:16-alpine");
+   static ConfluentKafkaContainer kafka = new ConfluentKafkaContainer(
+           "confluentinc/cp-kafka:7.8.0");
 
    static {
        postgres.start();
