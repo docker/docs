@@ -37,6 +37,7 @@ Chrome DevTools
 CI
 CI/CD
 Citrix
+classpath
 cli
 CLI
 CloudFront
@@ -56,7 +57,7 @@ Debootstrap
 denylist
 deprovisioning
 deserialization
-deserialize
+deserialize[d]?
 Dev
 Dev Environments?
 Dex
@@ -106,6 +107,7 @@ Groq
 Grype
 HyperKit
 inferencing
+initializer
 Initializr
 inotify
 Intel
@@ -134,6 +136,7 @@ Laradock
 Laravel
 libseccomp
 Linux
+Liquibase
 LinuxKit
 logback
 Loggly
@@ -144,8 +147,10 @@ macOS
 macvlan
 Mail(chimp|gun)
 mfsymlinks
+Micronaut
 Microsoft
 minikube
+misconfiguration
 monorepos?
 musl
 MySQL
@@ -229,15 +234,18 @@ Traefik
 Trivy
 Trixie
 Turtlesim
+typesafe
 Ubuntu
 ufw
 umask
 uncaptured
 Uncaptured
+unconfigured
 undeterminable
 Unix
 unmarshalling
 unmanaged
+upsert
 Visual Studio Code
 VMware
 vpnkit
