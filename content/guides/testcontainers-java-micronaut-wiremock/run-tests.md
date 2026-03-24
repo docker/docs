@@ -40,4 +40,4 @@ To learn more about Testcontainers, visit the
 - [Testcontainers WireMock module](https://testcontainers.com/modules/wiremock/)
 - [WireMock documentation](https://wiremock.org/docs/)
 - [Testcontainers JUnit 5 quickstart](https://java.testcontainers.org/quickstart/junit_5_quickstart/)
-- [Testing REST API integrations in Spring Boot using WireMock](/guides/testcontainers-java-spring-boot-wiremock/)
+- [Testing REST API integrations in Spring Boot using WireMock](/guides/testcontainers-java-wiremock/)

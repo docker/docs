@@ -121,6 +121,7 @@ JetBrains
 JFrog
 JUnit
 Kata
+Keycloak
 Kerberos
 Kiro
 Kitematic
@@ -152,6 +153,7 @@ nameserver
 namespaced?
 namespacing
 Neovim
+Npgsql
 netfilter
 netlabel
 netlink
@@ -250,6 +252,7 @@ WireMock
 workdir
 WORKDIR
 Xdebug
+xUnit
 XQuartz
 youki
 Yubikey
