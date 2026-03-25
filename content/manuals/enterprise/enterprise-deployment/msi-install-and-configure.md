@@ -220,7 +220,7 @@ In addition to the following custom properties, the Docker Desktop MSI installer
 | `WINDOWSCONTAINERSDEFAULTDATAROOT` | Specifies the default location for Windows containers.                                                                                                                                                                                                                                        | None                    |
 | `WSLDEFAULTDATAROOT`               | Specifies the default location for the WSL distribution disk.                                                                                                                                                                                                                                 | None                    |
 | `DISABLEANALYTICS`                 | When set to 1, analytics collection will be disabled for the MSI. For more information, see [Analytics](#analytics).                                                                                                                                                                          | 0                       |
-| `REMOVEEXISTINGINSTALL`            | When set to 1, any existing EXE installations are removed. Existing settings and content are preserved.      | 1 |
+| `REMOVEEXISTINGINSTALL`            | When set to 1, any existing EXE installations are removed. Existing settings and content are preserved. Available with Docker Desktop version 4.61 and later.   | 1 |
 
 Additionally, you can also use `/norestart` or `/forcerestart` to control reboot behaviour.
 
