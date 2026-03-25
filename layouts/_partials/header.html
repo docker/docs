@@ -100,13 +100,13 @@
           "
           @click="theme = (theme === 'light' ? 'dark' : theme === 'dark' ? 'auto' : 'light')"
         >
-          <span class="icon-svg" x-show="theme === 'light'"
+          <span x-cloak class="icon-svg" x-show="theme === 'light'"
             >{{ partialCached "icon" "icons/sun.svg" "sun" }}
           </span>
-          <span class="icon-svg" x-show="theme === 'dark'">
+          <span x-cloak class="icon-svg" x-show="theme === 'dark'">
             {{ partialCached "icon" "icons/moon.svg" "moon" }}
           </span>
-          <span class="icon-svg" x-show="theme === 'auto'">
+          <span x-cloak class="icon-svg" x-show="theme === 'auto'">
             {{ partialCached "icon" "contrast" "contrast" }}
           </span>
         </button>
