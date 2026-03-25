@@ -38,8 +38,8 @@ You can save your search terms for easy-access later.
 
 To refine the log stream further, select the **Filter** icon in the toolbar to open the container filter panel. From here you can:
 
-- Check individual running containers to show only their output
-- Check **Running containers** or **Stopped containers** to show or hide entire groups
+- Check individual containers to show only their output
+- Check Compose stacks to show or hide entire groups
 - Use **Select all** or **Clear all** to quickly toggle every container at once
 
 ## Display options
