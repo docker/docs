@@ -224,7 +224,7 @@ the image's top layer plus a new directory for the container. The image's
 layers are the `lowerdirs` in the overlay and are read-only. The new directory for
 the container is the `upperdir` and is writable.
 
-### Image and container layers on-disk
+### Example: Viewing image and container layers
 
 The following `docker pull` command shows a Docker host downloading a Docker
 image comprising five layers.
