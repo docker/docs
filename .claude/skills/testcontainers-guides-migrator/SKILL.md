@@ -247,17 +247,90 @@ If compilation fails, fix the code and update the guide markdown to match.
 
 ### 6d: Run tests in a container with Docker socket mounted
 
-Run tests in the same kind of container, but **mount the Docker socket** so Testcontainers can create sibling containers:
+Run tests in the same kind of container, but **mount the Docker socket** so Testcontainers can create sibling containers.
+
+#### macOS Docker Desktop workarounds
+
+When running on macOS with Docker Desktop, these environment variables and flags are **required**:
+
+- **`TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal`** — On macOS, containers can't reach sibling containers via the Docker bridge IP (`172.17.0.x`). This tells Testcontainers (including Ryuk) to connect via `host.docker.internal` instead. **Do NOT disable Ryuk** — it is a core Testcontainers feature and the guides must demonstrate proper usage.
+- **`docker-java.properties`** with `api.version=1.47` — Docker Desktop's minimum API version is 1.44, but docker-java defaults to 1.24. Create this file in the project root and mount it to `/root/.docker-java.properties` inside Java containers.
+- **`-Dspotless.check.skip=true`** — The Spotless Maven plugin in the source repos is incompatible with JDK 21. Skip it since it's a code formatter, not part of the test.
+- **`-Dmicronaut.test.resources.enabled=false`** — Micronaut's Test Resources service starts a separate process that can't connect to Docker from inside a container. The guide tests use Testcontainers directly, not Test Resources. Only needed for Micronaut guides.
+#### Java guide test command
+
+```bash
+# Create docker-java.properties in the project root
+echo "api.version=1.47" > <tmpdir>/{REPO_NAME}/docker-java.properties
+
+docker run --rm \
+  -v "<tmpdir>/{REPO_NAME}":/app \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v "<tmpdir>/{REPO_NAME}/docker-java.properties":/root/.docker-java.properties \
+  -e DOCKER_HOST=unix:///var/run/docker.sock \
+  -e TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal \
+  -w /app \
+  maven:3.9-eclipse-temurin-21 \
+  mvn -B test -Dspotless.check.skip=true -Dspotless.apply.skip=true
+```
+
+For Quarkus guides, use `maven:3.9-eclipse-temurin-17` instead (Quarkus 3.22.3 compiles for Java 17).
+
+#### Go guide test command
 
 ```bash
 docker run --rm \
   -v "<tmpdir>/{REPO_NAME}":/app \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -w /app <language-image> \
-  sh -c "<test command>"
+  -e DOCKER_HOST=unix:///var/run/docker.sock \
+  -e TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal \
+  -w /app \
+  golang:1.25-alpine \
+  sh -c "apk add --no-cache gcc musl-dev && go test -v -count=1 ./..."
 ```
 
-The key is `-v /var/run/docker.sock:/var/run/docker.sock` — this lets Testcontainers inside the container talk to the host's Docker daemon and create sibling containers.
+#### Python guide test command
+
+```bash
+docker run --rm \
+  -v "<tmpdir>/{REPO_NAME}":/app \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -e DOCKER_HOST=unix:///var/run/docker.sock \
+  -e TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal \
+  -w /app \
+  python:3.13-slim \
+  sh -c "pip install -r requirements.txt && python -m pytest"
+```
+
+#### .NET guide test command
+
+```bash
+docker run --rm \
+  -v "<tmpdir>/{REPO_NAME}":/app \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -e DOCKER_HOST=unix:///var/run/docker.sock \
+  -e TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal \
+  -w /app \
+  mcr.microsoft.com/dotnet/sdk:9.0 \
+  dotnet test
+```
+
+#### Node.js guide test command
+
+```bash
+docker run --rm \
+  -v "<tmpdir>/{REPO_NAME}":/app \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -e DOCKER_HOST=unix:///var/run/docker.sock \
+  -e TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal \
+  -w /app \
+  node:22-alpine \
+  sh -c "npm install && npm test"
+```
+
+#### Important: run tests sequentially
+
+Run guide tests **one at a time**. Running multiple concurrent DinD or sibling-container tests can overwhelm Docker Desktop's containerd store and cause `meta.db: input/output error` corruption, requiring a Docker Desktop restart.
 
 ### 6e: Fix until green
 
