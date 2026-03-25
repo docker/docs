@@ -7,3 +7,4 @@ document.firstElementChild.className =
     : prefersDark
       ? "dark"
       : "light";
+document.firstElementChild.dataset.themePreference = storedTheme || "auto";

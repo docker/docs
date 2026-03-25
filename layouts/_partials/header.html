@@ -92,6 +92,7 @@
                 localStorage.setItem('theme-preference', val);
                 document.firstElementChild.className = val;
               }
+              document.firstElementChild.dataset.themePreference = val;
             }
             let handler = e => { if (theme === 'auto') document.firstElementChild.className = e.matches ? 'dark' : 'light'; };
             mql.addEventListener('change', handler);
@@ -100,13 +101,13 @@
           "
           @click="theme = (theme === 'light' ? 'dark' : theme === 'dark' ? 'auto' : 'light')"
         >
-          <span x-cloak class="icon-svg" x-show="theme === 'light'"
+          <span class="theme-icon-sun icon-svg" x-show="theme === 'light'"
             >{{ partialCached "icon" "icons/sun.svg" "sun" }}
           </span>
-          <span x-cloak class="icon-svg" x-show="theme === 'dark'">
+          <span class="theme-icon-moon icon-svg" x-show="theme === 'dark'">
             {{ partialCached "icon" "icons/moon.svg" "moon" }}
           </span>
-          <span x-cloak class="icon-svg" x-show="theme === 'auto'">
+          <span class="theme-icon-auto icon-svg" x-show="theme === 'auto'">
             {{ partialCached "icon" "contrast" "contrast" }}
           </span>
         </button>
