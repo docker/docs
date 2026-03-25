@@ -14,7 +14,7 @@ This page covers recommendations when running Docker Desktop on Windows using WS
 
 Always use the latest version of WSL. 
 
-At a minimum you must use WSL version 2.1.5, otherwise Docker Desktop may not work as expected. Testing, development, and documentation is based on the newest kernel versions. Older versions of WSL can cause:
+At a minimum you must use WSL version 2.1.5, otherwise Docker Desktop may not work as expected. Additionally, if you intend to use Enhanced Container Isolation feature, the Linux kernel used by WSL must be version 6.3.0 or newer. Testing, development, and documentation is based on the newest kernel versions. Older versions of WSL can cause:
 - Docker Desktop to hang periodically or when upgrading
 - Deployment via SCCM to fail
 - The `vmmem.exe` to consume all memory 
