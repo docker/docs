@@ -93,20 +93,21 @@
                 document.firstElementChild.className = val;
               }
             }
-            applyTheme(theme);
-            mql.addEventListener('change', e => { if (theme === 'auto') document.firstElementChild.className = e.matches ? 'dark' : 'light'; });
+            let handler = e => { if (theme === 'auto') document.firstElementChild.className = e.matches ? 'dark' : 'light'; };
+            mql.addEventListener('change', handler);
             $watch('theme', val => applyTheme(val));
+            return () => mql.removeEventListener('change', handler);
           "
           @click="theme = (theme === 'light' ? 'dark' : theme === 'dark' ? 'auto' : 'light')"
         >
           <span class="icon-svg" x-show="theme === 'light'"
             >{{ partialCached "icon" "icons/sun.svg" "sun" }}
           </span>
-          <span class="icon-svg" x-show="theme === 'dark'">
+          <span class="icon-svg" x-show="theme === 'dark'" hidden>
             {{ partialCached "icon" "icons/moon.svg" "moon" }}
           </span>
-          <span class="icon-svg" x-show="theme === 'auto'">
-            {{ partialCached "icon" "contrast" "contrast" }}
+          <span class="icon-svg" x-show="theme === 'auto'" hidden>
+            {{ partialCached "icon" "icons/contrast.svg" "contrast" }}
           </span>
         </button>
       </div>
