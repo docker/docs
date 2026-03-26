@@ -26,6 +26,16 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.66.1
+
+{{< release-date date="2026-03-26" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.66.1" build_path="//" >}}
+
+### Updates
+
+- Docker Engine v29.3.1
+
 ## 4.66.0
 
 {{< release-date date="2026-03-23" >}}
