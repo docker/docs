@@ -38,7 +38,7 @@ The following actions are also triggered in the Docker Desktop backend and VM:
 
 - Generation of certificates and cluster configuration
 - Download and installation of Kubernetes internal components
-- Cluster bootup
+- Cluster boot-up
 - Installation of additional controllers for networking and storage
 
 When Kubernetes is enabled, its status is displayed in the Docker Desktop Dashboard footer and the Docker menu.
