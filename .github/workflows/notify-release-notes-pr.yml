@@ -1,0 +1,32 @@
+name: Notify Slack on Desktop Release Notes PR
+
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - content/manuals/desktop/release-notes.md
+
+jobs:
+  notify:
+    runs-on: ubuntu-24.04
+    if: github.repository_owner == 'docker'
+    steps:
+      - name: Notify Slack
+        uses: slackapi/slack-github-action@af78098f536edbc4de71162a307590698245be95 # v3.0.1
+        with:
+          method: chat.postMessage
+          token: ${{ secrets.SLACK_BOT_TOKEN }}
+          payload: |
+            {
+              "channel": "${{ secrets.SLACK_RELEASE_CHANNEL_ID }}",
+              "text": "Desktop release notes",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":memo: *Desktop release notes*:\n<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}> by <https://github.com/${{ github.event.pull_request.user.login }}|${{ github.event.pull_request.user.login }}>"
+                  }
+                }
+              ]
+            }
