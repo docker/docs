@@ -48,7 +48,7 @@ _For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
 {{< tab name="WSL 2 backend, x86_64" >}}
 
 - WSL version 2.1.5 or later. To check your version, see [WSL: Verification and setup](#wsl-verification-and-setup)
-- The Linux kernel used by WSL must be version 6.3.0 or newer to support the Enhanced Container Isolation feature. If your current kernel is below 6.3.0, running `wsl --update` will upgrade both WSL and the Linux kernel to the latest available versions.
+- If you intend to use Enhanced Container Isolation, ensure you’re using WSL version 2.6 or later. This is required because ECI depends on a Linux kernel version of at least 6.3.0, and WSL 2.6+ bundles Linux kernel version 6.6.
 - Windows 10 64-bit: Enterprise, Pro, or Education version 22H2 (build 19045).
 - Windows 11 64-bit: Enterprise, Pro, or Education version 23H2 (build 22631) or higher.
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
