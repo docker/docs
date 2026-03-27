@@ -110,18 +110,19 @@ Docker from the repository.
    ```bash
    # Add Docker's official GPG key:
    sudo apt update
-   sudo apt install ca-certificates curl
    sudo install -m 0755 -d /etc/apt/keyrings
-   sudo curl -fsSL {{% param "download-url-base" %}}/gpg -o /etc/apt/keyrings/docker.asc
-   sudo chmod a+r /etc/apt/keyrings/docker.asc
+   wget -qO- {{% param "download-url-base" %}}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+   sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
-   # Add the repository to Apt sources:
+   # Add the repository to Apt sources. This command uses Bash syntax.
+   # If you are using different shell, please run `bash` to switch to Bash
+   # before running the following command.
    sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
    Types: deb
    URIs: {{% param "download-url-base" %}}
    Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")
    Components: stable
-   Signed-By: /etc/apt/keyrings/docker.asc
+   Signed-By: /etc/apt/keyrings/docker.gpg
    EOF
 
    sudo apt update
