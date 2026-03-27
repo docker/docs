@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   review:
-    uses: docker/cagent-action/.github/workflows/review-pr.yml@dba0ca51938c78afb363625363c50582243218d6 # v1.3.1
+    uses: docker/cagent-action/.github/workflows/review-pr.yml@b4ccf4cc94f5b34d1760709012c40975f6def2d1 # v1.3.2
     permissions:
       contents: read # Read repo files and PR diffs
       pull-requests: write # Post review comments, approve / request changes
