@@ -5,8 +5,8 @@ summary: |
   Connect OpenCode to Docker Model Runner with an OpenAI-compatible endpoint,
   choose coding models, and package `gpt-oss` with a larger context window.
 keywords: ai, opencode, docker model runner, local models, coding assistant
+tags: [ai]
 params:
-  tags: [ai]
   time: 10 minutes
 ---
 
@@ -14,6 +14,17 @@ This guide shows how to connect OpenCode to Docker Model Runner so OpenCode can
 use local models for coding tasks. You'll configure an `opencode.json` file,
 verify the API endpoint, and run OpenCode against models served from your local
 Docker environment.
+
+Unlike the [OpenCode sandbox guide](../manuals/ai/sandboxes/agents/opencode.md),
+this guide focuses on using OpenCode as a local coding tool backed by Docker
+Model Runner rather than running OpenCode in a containerized sandbox.
+
+In this guide, you'll learn how to:
+
+- Pull coding models for OpenCode
+- Configure OpenCode to use Docker Model Runner
+- Verify the local API endpoint and start OpenCode
+- Package `gpt-oss` with a larger context window when you need it
 
 ## Prerequisites
 
@@ -116,6 +127,9 @@ To switch models from the TUI, run:
 Then select the model from the `dmr` provider.
 
 ## Step 5: Package `gpt-oss` with a larger context window
+
+This step is optional. Use it if you need a larger context window for
+repository-scale tasks.
 
 `gpt-oss` defaults to a smaller context window than coding-focused models. If
 you want to use it for repository-scale tasks, package a larger variant:

@@ -240,6 +240,10 @@ print(response.text)
 
 [OpenCode](https://opencode.ai/) is an open-source coding assistant designed to integrate directly into developer workflows. It supports multiple model providers and exposes a flexible configuration system that makes it easy to switch between them.
 
+See [Use OpenCode with Docker Model Runner](../../../guides/opencode-model-runner.md)
+for a task-focused guide that walks through model setup, configuration, and
+troubleshooting.
+
 ### Configuration
 
 1. Install OpenCode (see [docs](https://opencode.ai/docs/#install))
