@@ -5,8 +5,8 @@ summary: |
   Connect Claude Code to Docker Model Runner with the Anthropic-compatible API,
   package `gpt-oss` with a larger context window, and inspect requests.
 keywords: ai, claude code, docker model runner, anthropic, local models, coding assistant
+tags: [ai]
 params:
-  tags: [ai]
   time: 10 minutes
 ---
 
@@ -14,6 +14,13 @@ This guide shows how to run Claude Code with Docker Model Runner as the backend
 model provider. You'll point Claude Code at the local Anthropic-compatible API,
 run a coding model, and package `gpt-oss` with a larger context window for
 longer repository prompts.
+
+In this guide, you'll learn how to:
+
+- Pull a coding model and start Claude Code with Docker Model Runner
+- Make the endpoint configuration persistent
+- Verify the local API endpoint and inspect requests
+- Package `gpt-oss` with a larger context window for longer prompts
 
 ## Prerequisites
 
@@ -61,7 +68,24 @@ claude --model ai/devstral-small-2
 Claude Code now sends requests to Docker Model Runner instead of Anthropic's
 hosted API.
 
-## Step 3: Make the endpoint persistent
+## Step 3: Troubleshoot your first launch
+
+If Claude Code can't connect, check Docker Model Runner status:
+
+```console
+$ docker model status
+```
+
+If Claude Code can't find the model, list local models:
+
+```console
+$ docker model ls
+```
+
+If the model is missing, pull it first. If needed, use the fully qualified
+model name, such as `ai/devstral-small-2`.
+
+## Step 4: Make the endpoint persistent
 
 To avoid setting the environment variable each time, add it to your shell
 profile:
@@ -70,26 +94,16 @@ profile:
 export ANTHROPIC_BASE_URL=http://localhost:12434
 ```
 
+On Windows PowerShell, add it to your PowerShell profile:
+
+```powershell {title="$PROFILE"}
+$env:ANTHROPIC_BASE_URL = "http://localhost:12434"
+```
+
 After you reload your shell, you can run Claude Code with only the model flag:
 
 ```console
 $ claude --model ai/devstral-small-2
-```
-
-## Step 4: Package `gpt-oss` with a larger context window
-
-`ai/gpt-oss` defaults to a smaller context window than coding-focused models. If
-you want to use it for repository-scale prompts, package a larger variant:
-
-```console
-$ docker model pull ai/gpt-oss
-$ docker model package --from ai/gpt-oss --context-size 32000 gpt-oss:32k
-```
-
-Then run Claude Code with the packaged model:
-
-```console
-$ ANTHROPIC_BASE_URL=http://localhost:12434 claude --model gpt-oss:32k
 ```
 
 ## Step 5: Verify the API endpoint
@@ -114,27 +128,26 @@ For more details about the request format, see the
 To inspect the requests Claude Code sends to Docker Model Runner, run:
 
 ```console
-$ docker model requests --model gpt-oss:32k | jq .
+$ docker model requests --model ai/devstral-small-2 | jq .
 ```
 
 This helps you debug prompts, context usage, and compatibility issues.
 
-## Troubleshooting
+## Step 7: Package `gpt-oss` with a larger context window
 
-If Claude Code can't connect, check Docker Model Runner status:
-
-```console
-$ docker model status
-```
-
-If Claude Code can't find the model, list local models:
+`ai/gpt-oss` defaults to a smaller context window than coding-focused models. If
+you want to use it for repository-scale prompts, package a larger variant:
 
 ```console
-$ docker model ls
+$ docker model pull ai/gpt-oss
+$ docker model package --from ai/gpt-oss --context-size 32000 gpt-oss:32k
 ```
 
-If the model is missing, pull it first. If needed, use the fully qualified
-model name, such as `ai/devstral-small-2`.
+Then run Claude Code with the packaged model:
+
+```console
+$ ANTHROPIC_BASE_URL=http://localhost:12434 claude --model gpt-oss:32k
+```
 
 ## Learn more
 

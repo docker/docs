@@ -350,7 +350,8 @@ If using browser-based tools, add the origin to CORS allowed origins:
 
 | Use case | Recommended model | Notes |
 |----------|-------------------|-------|
-| Code completion | `ai/qwen2.5-coder` | Optimized for coding tasks |
+| Code completion | `ai/qwen3-coder` | Optimized for coding tasks with a large context window |
+| Agentic coding | `ai/devstral-small-2` | Good fit for tools such as Claude Code and OpenCode |
 | General assistant | `ai/llama3.2` | Good balance of capabilities |
 | Small/fast | `ai/smollm2` | Low resource usage |
 | Embeddings | `ai/all-minilm` | For RAG and semantic search |
