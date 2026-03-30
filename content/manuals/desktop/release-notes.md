@@ -26,6 +26,45 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.68.0
+
+{{< release-date date="2026-04-06" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.68.0" build_path="//" >}}
+
+### Updates
+
+- [Docker Agent v1.39.0](https://github.com/docker/docker-agent/releases/tag/v1.39.0)
+- [Docker Model v1.1.28](https://github.com/docker/model-cli/releases/tag/v1.1.28)
+
+### Bug fixes and enhancements
+
+#### For all platforms 
+
+- Fixed a deadlock in Enhanced Container Isolation that caused containers to hang indefinitely during creation when ECI was enabled.
+- Added a warning banner to alert when an MCP erver is community-provided and has not been verified by Docker.
+- Added a persistent **Show timestamps** toggle to the **Logs** view, allowing timestamps to be hidden in both table and visualiser views across sessions.
+- Fixed an issue where Docker Desktop frontend processes were not properly terminated on quit.
+- Fixed a deadlock when settings controlled by admins reload that could cause Docker Desktop to become unresponsive during sign in or sign out operations.
+- Fixed a bug where Docker Desktop could fail to start due to uncorrectable filesystem errors on the disk image not being repaired.
+- Fixed a bug that caused Enhanced Container Isolation (ECI) to inadvertently block startup of Kubernetes clusters.
+- Fixed an issue where a failed volume size fetch could make the **Volumes** view inaccessible; container counts on volumes now correctly exclude bind mounts.
+- Fixed race conditions in volume backup that could cause containers to be incorrectly restarted, export logs to be corrupted, or runtime panics when scheduling tasks.
+- Fixed a crash in the API cache that occurred when containers with no names caused a panic disrupting container listing.
+- Fixed a bug where starting a container could fail with `ENOENT` if a bind-mount parent directory was deleted while no container was using it.
+
+#### For Mac
+
+- Fixed a security vulnerability where tampered user-deployed config profiles could bypass organization sign-in enforcement.
+- Fixed a bug where a failed `vmnetd` handshake could dispatch a bogus command on a broken connection, causing unexpected networking errors.
+- Fixed a bug where the Docker Desktop Dashboard could be prematurely displayed when restoring to a fullscreen state on launch.
+
+#### For Windows
+
+- Fixed an issue where the installer extraction did not update the progress bar and could take around 5 minutes, depending on the machine. Extraction is now ~60% faster and includes proper progress updates.
+- Fixed a race condition where container ports would sometimes not be published correctly after container start, affecting ephemeral ports, `--publish-all`, and gateway IP bindings.
+- Fixed an issue where a failed WSL distro move could leave the distro unregistered.
+
 ## 4.67.0
 
 {{< release-date date="2026-03-30" >}}
