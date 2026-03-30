@@ -30,7 +30,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-03-30" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.67.0" build_path="//" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.67.0" build_path="/222858/" >}}
 
 ### New
 
@@ -41,6 +41,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Compose v5.1.1](https://github.com/docker/compose/releases/tag/v5.1.1)
 - [Docker Agent v1.34.0](https://github.com/docker/docker-agent/releases/tag/v1.34.0)
 - [Docker Scout CLI v1.20.3](https://github.com/docker/scout-cli/releases/tag/v1.20.3)
+- [Docker Model v1.1.25](https://github.com/docker/model-cli/releases/tag/v1.1.25)
 
 ### Bug fixes and minor changes
 
@@ -73,7 +74,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Updates
 
-- Docker Engine v29.3.1
+- [Docker Engine v29.3.1](/manuals/engine/release-notes/29.md#2931)
 
 ## 4.66.0
 
