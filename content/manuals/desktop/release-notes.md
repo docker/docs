@@ -66,6 +66,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Improved Docker Desktop startup time on Windows by several seconds when using WSL 2.
 - Fixed a bug on the **Models** > **Logs** screen which caused `docker-model` processes to accumulate on Windows each time the screen was visited.
 
+### Security
+
+- Addressed [CVE-2026-33990](https://www.cve.org/cverecord?id=CVE-2026-33990), SSRF in Docker Model Runner OCI Registry Client
+
 ## 4.66.1
 
 {{< release-date date="2026-03-26" >}}
