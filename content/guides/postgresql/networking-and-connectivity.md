@@ -75,7 +75,7 @@ docker run -d --name postgres-dev \
   -v postgres_data:/var/lib/postgresql \
   postgres:18
 
-  # Outout
+  # Output
 CONTAINER ID  IMAGE        COMMAND                 CREATED         STATUS        PORTS     NAMES
 6d351ed89efc  postgres:18  "docker-entrypoint.s…"  9 seconds ago   Up 8 seconds  5432/tcp  postgres-dev
 
