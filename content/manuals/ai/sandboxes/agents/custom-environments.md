@@ -86,9 +86,11 @@ CLI, and common development tools like Node.js, Python, Go, and Java.
 
 Each variant also has a `-docker` version (for example,
 `claude-code-docker`) that includes a full Docker Engine running inside the
-sandbox. The `-docker` variants are the defaults used by `sbx run` on macOS
-and Linux. They run in privileged mode with a dedicated block volume at
-`/var/lib/docker`, and `dockerd` starts automatically.
+sandbox — no local Docker daemon required. The `-docker` variants are the
+defaults used by `sbx run` on macOS and Linux. These variants run in
+privileged mode inside the microVM (not on your host), with a dedicated block
+volume at `/var/lib/docker`, and `dockerd` starts automatically inside the
+sandbox.
 
 The block volume defaults to 50 GB and uses a sparse file, so it only
 consumes disk space as Docker writes to it. On Windows, the volume is not
