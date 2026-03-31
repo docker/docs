@@ -27,10 +27,10 @@ You can enable DMR using Docker Desktop or Docker Engine. Follow the instruction
 You can now use the `docker model` command in the CLI and view and interact
 with your local models in the **Models** tab in the Docker Desktop Dashboard.
 
-> [!IMPORTANT]
+> [!NOTE]
 >
-> For Docker Desktop versions 4.45 and earlier, this setting was under the
-> **Beta features** tab.
+> In Docker Desktop 4.45 and earlier, this setting is located under the
+> **Beta features** tab. In version 4.46 and later, it is under the **AI** tab.
 
 ### Docker Engine
 
