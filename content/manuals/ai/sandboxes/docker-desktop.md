@@ -31,7 +31,8 @@ CLI instead.
    export ANTHROPIC_API_KEY=sk-ant-api03-xxxxx
    ```
 
-   Restart Docker Desktop so the daemon picks up the variable.
+   Source your shell configuration and restart Docker Desktop so the daemon
+   picks up the variable.
 
 2. Create and run a sandbox:
 
