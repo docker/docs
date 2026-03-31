@@ -159,9 +159,8 @@ variants.
 ### Troubleshooting failed pulls
 
 If you're experiencing failed pulls of Docker Official Images, check whether
-the `DOCKER_CONTENT_TRUST` environment variable is set to `1`. Starting in
-August 2025, Docker Content Trust signing certificates for Docker Official
-Images began expiring. To resolve pull failures, unset the `DOCKER_CONTENT_TRUST`
+the `DOCKER_CONTENT_TRUST` environment variable is set to `1`. Docker Content
+Trust signing certificates for Docker Official Images expired in August 2025. To resolve pull failures, unset the `DOCKER_CONTENT_TRUST`
 environment variable. For more details, see the
 [DCT retirement blog post](https://www.docker.com/blog/retiring-docker-content-trust/).
 
