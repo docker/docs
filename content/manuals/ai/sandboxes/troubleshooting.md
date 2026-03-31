@@ -83,6 +83,7 @@ an unprivileged user without `CAP_CHOWN`, so the operation is denied.
 Use the tar exporter and extract the archive instead:
 
 ```console
+$ mkdir -p ./result
 $ docker build --output type=tar,dest=- . | tar xf - -C ./result
 ```
 

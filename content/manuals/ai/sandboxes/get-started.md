@@ -15,8 +15,8 @@ system.
 ## Prerequisites
 
 - macOS (Apple silicon) or Windows (x86_64, Windows 11 required)
-- If you're on Windows, enable Windows Hypervisor Platform (requires
-  elevated permissions):
+- If you're on Windows, enable Windows Hypervisor Platform. Open an elevated
+  PowerShell prompt (Run as Administrator) and run:
   ```powershell
   Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -All
   ```
