@@ -16,7 +16,7 @@ connected to the same cloud builder.
 
 > [!NOTE]
 >
-> When building Windows container images using the `docker build` command, the legacy builder is used which does not populate the **Builds** view. To switch to using BuildKit, you can either:
+> When building Windows container images, the `docker build` command uses a legacy builder that does not populate the **Builds** view. To use BuildKit and see builds in this view, you can either:
 > - Set `DOCKER_BUILDKIT=1` in the build command, such as `DOCKER_BUILDKIT=1 docker build .` or
 > - Use the `docker buildx build` command
 
