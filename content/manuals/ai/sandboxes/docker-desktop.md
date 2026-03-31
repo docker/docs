@@ -115,11 +115,6 @@ native virtualization (macOS virtualization.framework, Windows Hyper-V). The
 default agent templates include a private Docker daemon, so `docker build` and
 `docker compose up` run inside the sandbox without affecting your host.
 
-> [!NOTE]
-> On Windows, the Docker daemon is not included by default. See
-> [Troubleshooting](troubleshooting.md#docker-not-available-inside-the-sandbox-on-windows)
-> for a workaround.
-
 ```plaintext
 Host system
   ├── Your containers and images
