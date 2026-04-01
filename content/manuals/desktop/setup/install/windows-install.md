@@ -43,7 +43,7 @@ Docker Desktop supports two installation modes. Per-user installation is recomme
 | | Per-user (recommended) | All users |
 |---|---|---|
 | Install location | `%LOCALAPPDATA%\Programs\DockerDesktop` | `C:\Program Files\Docker\Docker` |
-| Registry keys** | Current User (HKCU) | Local Machine (HKLM) |
+| Registry keys | Current User (HKCU) | Local Machine (HKLM) |
 | Admin rights to install | Not required | Required |
 | Admin rights to update | Not required | Required |
 | Linux containers backend | WSL 2 only | WSL 2 or Hyper-V |
