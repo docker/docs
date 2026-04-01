@@ -2,7 +2,7 @@
 title: Trust model for Compose files
 weight: 70
 description: Learn how Docker Compose treats Compose files as trusted input and what this means when using files you did not author.
-keywords: compose, security, trust model, oci, remote, registry, include, extends, supplu chain, trust, best practices
+keywords: compose, security, trust model, oci, remote, registry, include, extends, supply chain, trust, best practices
 ---
 
 Docker Compose treats every Compose file as trusted input. When a Compose file
