@@ -17,7 +17,7 @@ Docker Extensions' private marketplace is designed specifically for organization
 
 ## Prerequisites
 
-- [Download and install Docker Desktop](https://docs.docker.com/desktop/release-notes/). Private marketplace support was introduced in Docker Desktop 4.26.0.
+- [Download and install Docker Desktop](https://docs.docker.com/desktop/release-notes/).
 - You must be an administrator for your organization.
 - You have the ability to push the `extension-marketplace` folder and `admin-settings.json` file to the locations specified below through device management software such as [Jamf](https://www.jamf.com/).
 
