@@ -73,13 +73,13 @@ receive your Docker subscription benefits.
 
 1. Identify the Docker users in your organization.
    - If your organization uses device management software, like MDM or Jamf,
-     you can use the device management software to help identify Docker users.
-     See your device management software's documentation for details. You can
-     identify Docker users by checking if Docker Desktop is installed at the
-     following location on each user's machine:
-     - Mac: `/Applications/Docker.app`
-     - Windows: `C:\Program Files\Docker\Docker`
-     - Linux: `/opt/docker-desktop`
+   you can use the device management software to help identify Docker users.
+   See your device management software's documentation for details. You can
+   identify Docker users by checking if Docker Desktop is installed at the
+   following location on each user's machine:
+      - Mac: `/Applications/Docker.app`
+      - Windows: `C:\Program Files\Docker\Docker`(all-user installation) or `%LOCALAPPDATA%\Programs\DockerDesktop` (per-user installation)
+      - Linux: `/opt/docker-desktop`
    - If your organization doesn't use device management software or your
      users haven't installed Docker Desktop yet, you can survey your users to
      identify who is using Docker Desktop.
