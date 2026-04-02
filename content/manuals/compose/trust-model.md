@@ -41,8 +41,7 @@ Your command
 Each level has the same capabilities. The top-level file you inspect may appear
 safe while a nested `include` or `extends` introduces services with elevated
 privileges, host bind mounts, or untrusted images. These dependencies can also
-change independently. For example, a tag you trusted last week may point to different
-content today. Risky settings can be introduced by a nested dependency that you never
+change independently. Risky settings can be introduced by a nested dependency that you never
 see unless you inspect the fully resolved output.
 
 > [!IMPORTANT]
@@ -96,9 +95,21 @@ access to credentials, cloud provider tokens, or Docker sockets.
 
 - Avoid referencing public or unverified Compose configurations in automated
   pipelines.
-- Pin all remote references to reviewed digests, not tags. Tags are mutable; digests are immutable. 
 - Gate updates behind your normal code review process.
 - Use read-only Docker socket mounts where possible to limit your risk.
+
+## Pin remote references to digests
+
+Tags are mutable meaning anyone with push access to a registry can overwrite a tag silently, so a reference you reviewed last week may point to different content today.
+
+Digests are immutable. Instead of referencing by tag, pin to the digest. 
+
+```yaml
+include:
+  - oci://registry.example.com/base@sha256:a1b2c3d4...
+```
+
+Treat any update to a pinned digest as a code change. Make sure you review the new content before updating the reference.
 
 ### Other
 
