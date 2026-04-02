@@ -48,7 +48,9 @@ Docker Desktop supports two installation modes. Per-user installation is recomme
 | Admin rights to update | Not required | Required |
 | Linux containers backend | WSL 2 only | WSL 2 or Hyper-V |
 | Windows containers | Not supported | Supported |
+| Security | Smaller attack surface; no privileged system service installed | Requires privileged system service; broader access to host resources |
 
+For more information, see [Understand permission requirements for Windows](windows-install.md).
 
 ## System requirements
 
@@ -145,11 +147,11 @@ For more information, see [Running Docker Desktop in a VM or VDI environment](/m
 
 1. Download the installer using the download button at the top of the page, or from the [release notes](/manuals/desktop/release-notes.md).
 
-2. Double-click `Docker Desktop Installer.exe` to run the installer. Docker Desktop installs in per-user mode by default, to `%LOCALAPPDATA%\Programs\DockerDesktop`.
+2. Double-click `Docker Desktop Installer.exe` to run the installer. The installer will ask which installation mode you prefer. Choosing per-user installs to `%LOCALAPPDATA%\Programs\DockerDesktop` and requires no administrator privileges. This is the default. Choosing all users will prompt for elevation.
 
    > [!NOTE]
    >
-   > To install for all users instead, run the installer from an administrator command prompt. See [Install from the command line](#install-from-the-command-line).
+   >If you want to switch installation mode at a later date, you need to uninstall and reinstall Docker Desktop.
 
 3. When prompted, ensure the **Use WSL 2 instead of Hyper-V** option on the Configuration page is selected or not depending on your choice of backend.
 
@@ -204,6 +206,10 @@ $ net localgroup docker-users <user> /add
 ```
 
 See the [Installer flags](#installer-flags) section to see what flags the `install` command accepts.
+
+> [!NOTE]
+>
+>If you want to switch installation mode at a later date, you need to uninstall and reinstall Docker Desktop.
 
 ## Start Docker Desktop
 

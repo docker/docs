@@ -12,7 +12,7 @@ weight: 40
 
 This page contains information about the permission requirements for running and installing Docker Desktop on Windows, the functionality of the privileged helper process `com.docker.service`, and the reasoning behind this approach.
 
-It also provides clarity on running containers as `root` as opposed to having `Administrator` access on the host and the privileges of the Windows Docker engine and Windows containers.
+It also provides clarity on running containers as `root` as opposed to having `Administrator` access on the host and the privileges of Docker Engine and Windows containers.
 
 Docker Desktop on Windows is designed with security in mind. Administrative rights are only required when absolutely necessary.
 
@@ -26,7 +26,7 @@ In per-user mode, Docker Desktop installs to `%LOCALAPPDATA%\Programs\DockerDesk
  
 - No administrator privileges are required to install or update Docker Desktop.
 - After installation, Docker Desktop can be run without administrator privileges.
-- Some settings marked **Requires password** in the Settings UI still require elevation. When you change one of these settings and select **Apply**, Docker Desktop prompts for administrator credentials.
+- Some settings marked **Requires password** in **Settings** still require elevation. When you change one of these settings and select **Apply**, Docker Desktop opens a UAC prompt for administrator access.
  
 Per-user installation does not install the privileged helper service `com.docker.service` automatically. As a result, features that depend on it, such as the Hyper-V backend and Windows containers, are not available. For most users this is not a limitation, as the WSL 2 backend covers the majority of use cases.
  
@@ -52,7 +52,7 @@ When Docker Desktop launches, all non-privileged named pipes are created so that
 The following require administrator privileges regardless of installation mode.
  
 - Enabling WSL 2 for the first time: WSL 2 must be enabled on the machine before Docker Desktop can run. This is a one-time, per-machine operation. Once WSL 2 is enabled, it does not need to be enabled again for subsequent Docker Desktop installs or updates.
-- Settings marked **Requires password**: Certain Docker Desktop settings affect system-level configuration and require administrator credentials to apply. These are clearly marked **Requires password** in the Settings UI. When you change one of these settings and click **Apply**, Docker Desktop prompts for administrator credentials.
+- Settings marked **Requires password**: Certain Docker Desktop settings affect system-level configuration and require administrator credentials to apply. These are clearly marked **Requires password**. When you change one of these settings and click **Apply**, Docker Desktop prompts for administrator credentials.
 
 ## Privileged helper
 
