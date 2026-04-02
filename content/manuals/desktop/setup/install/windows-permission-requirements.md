@@ -52,7 +52,7 @@ When Docker Desktop launches, all non-privileged named pipes are created so that
 The following require administrator privileges regardless of installation mode.
  
 - Enabling WSL 2 for the first time: WSL 2 must be enabled on the machine before Docker Desktop can run. This is a one-time, per-machine operation. Once WSL 2 is enabled, it does not need to be enabled again for subsequent Docker Desktop installs or updates.
-- Settings marked **Requires password**: Certain Docker Desktop settings affect system-level configuration and require administrator credentials to apply. These are clearly marked **Requires password**. When you change one of these settings and click **Apply**, Docker Desktop prompts for administrator credentials.
+- Settings marked **Requires password**: Certain Docker Desktop settings affect system-level configuration and require administrator credentials to apply. These are clearly marked **Requires password**. When you change one of these settings and select **Apply**, Docker Desktop prompts for administrator credentials.
 
 ## Privileged helper
 
