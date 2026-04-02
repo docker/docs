@@ -98,7 +98,7 @@ access to credentials, cloud provider tokens, or Docker sockets.
 - Gate updates behind your normal code review process.
 - Use read-only Docker socket mounts where possible to limit your risk.
 
-## Pin remote references to digests
+### Pin remote references to digests
 
 Tags are mutable meaning anyone with push access to a registry can overwrite a tag silently, so a reference you reviewed last week may point to different content today.
 
