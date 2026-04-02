@@ -165,7 +165,7 @@ Docker Model Runner will:
 
 ### Cloud providers
 
-The Compose models specification is designed to be portable. Platforms that implement the Compose specification can support the `models` top-level element, allowing the same Compose file to run on different infrastructure. Cloud-specific behavior can be configured using extension attributes (`x-*`):
+The Compose models specification is portable. Platforms that implement the Compose specification can support the `models` top-level element, allowing the same Compose file to run on different infrastructure. Cloud-specific behavior can be configured using extension attributes (`x-*`):
 
 ```yaml
 services:
