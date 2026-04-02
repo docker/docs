@@ -14,7 +14,6 @@ Hub web interface. For images, this lets you select a base image, add packages,
 add OCI artifacts (such as custom certificates or additional tools), and
 configure settings. For charts, this lets you customize the image references.
 
-
 Your customizations stay secure automatically. When the base Docker Hardened
 Image or chart receives a security patch or your OCI artifacts are updated,
 Docker automatically rebuilds your customizations in the background. This
@@ -32,35 +31,8 @@ mirrored DHI repository can create a customized image.
 
 You can create customizations using either the DHI CLI or the Docker Hub web interface.
 
-### Customize using the DHI CLI
-
-The DHI CLI provides a command-line interface for managing Docker Hardened Image
-customizations. For installation instructions and usage details, see [Use
-the DHI CLI](./cli.md#customize-dhi-images).
-
-#### Monitor customization builds
-
-List builds for a customization:
-
-```console
-$ docker dhi customization build list --org my-org my-org/dhi-golang "golang with git"
-```
-
-Get details of a specific build:
-
-```console
-$ docker dhi customization build get --org my-org my-org/dhi-golang "golang with git" <build-id>
-```
-
-View build logs:
-
-```console
-$ docker dhi customization build logs --org my-org my-org/dhi-golang "golang with git" <build-id>
-```
-
-### Customize using the Docker Hub web interface
-
-To customize a Docker Hardened Image using the web interface, follow these steps:
+{{< tabs >}}
+{{< tab name="Docker Hub" >}}
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 1. Select **My Hub**.
@@ -157,6 +129,86 @@ To customize a Docker Hardened Image using the web interface, follow these steps
    A summary of the customization appears. It may take some time for the image
    to build. Once built, it will appear in the **Tags** tab of the repository,
    and your team members can pull it like any other image.
+
+{{< /tab >}}
+{{< tab name="CLI" >}}
+
+Authenticate with `docker login` using your Docker credentials or a [personal
+access token (PAT)](../../security/access-tokens.md) with **Read & Write**
+permissions. [Organization access tokens
+(OATs)](../../enterprise/security/access-tokens.md) are not supported.
+
+Use the [`docker dhi customization`](/reference/cli/docker/dhi/customization/) command:
+
+```console
+# Prepare a customization scaffold
+$ docker dhi customization prepare golang 1.25 \
+  --org my-org \
+  --destination my-org/dhi-golang \
+  --name "golang with git" \
+  --output my-customization.yaml
+
+# Create a customization
+$ docker dhi customization create my-customization.yaml --org my-org
+
+# List customizations
+$ docker dhi customization list --org my-org
+
+# Filter customizations by name, repository, or source
+$ docker dhi customization list --org my-org --filter git
+$ docker dhi customization list --org my-org --repo dhi-golang
+$ docker dhi customization list --org my-org --source golang
+
+# Get a customization
+$ docker dhi customization get my-org/dhi-golang "golang with git" --org my-org --output my-customization.yaml
+
+# Update a customization
+$ docker dhi customization edit my-customization.yaml --org my-org
+
+# Delete a customization
+$ docker dhi customization delete my-org/dhi-golang "golang with git" --org my-org
+
+# Delete without confirmation prompt
+$ docker dhi customization delete my-org/dhi-golang "golang with git" --org my-org --yes
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
+### Monitor customization builds
+
+{{< tabs >}}
+{{< tab name="Docker Hub" >}}
+
+1. Sign in to [Docker Hub](https://hub.docker.com).
+2. Select **My Hub**.
+3. In the namespace drop-down, select your organization.
+4. Select **Hardened Images** > **Manage**.
+5. Select the **Customizations** tab.
+
+{{< /tab >}}
+{{< tab name="CLI" >}}
+
+List builds for a customization:
+
+```console
+$ docker dhi customization build list my-org/dhi-golang "golang with git" --org my-org
+```
+
+Get details of a specific build:
+
+```console
+$ docker dhi customization build get my-org/dhi-golang "golang with git" <build-id> --org my-org
+```
+
+View build logs:
+
+```console
+$ docker dhi customization build logs my-org/dhi-golang "golang with git" <build-id> --org my-org
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ### Create an OCI artifact image for image customization
 

@@ -76,7 +76,7 @@ docker dhi mirror start --org my-org \
 Mirror with dependencies:
 
 ```bash
-docker dhi mirror start --org my-org -r golang --dependencies
+docker dhi mirror start --org my-org -r dhi/golang,my-org/dhi-golang --dependencies
 ```
 
 List mirrored images in your organization:

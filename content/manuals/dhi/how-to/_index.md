@@ -2,6 +2,8 @@
 title: How-tos
 description: Step-by-step guidance for working with Docker Hardened Images, from discovery to governance.
 weight: 20
+aliases:
+  - /dhi/how-to/manage/
 params:
   grid_discover:
     - title: Search and evaluate Docker Hardened Images
@@ -37,10 +39,6 @@ params:
       description: Learn how to use a Docker Hardened Image chart.
       icon: leaderboard
       link: /dhi/how-to/helm/
-    - title: Manage Docker Hardened Images and charts
-      description: Learn how to manage your mirrored and customized Docker Hardened Images in your organization.
-      icon: reorder
-      link: /dhi/how-to/manage/
   grid_verify:
     - title: Verify a Docker Hardened Image or chart
       description: Use Docker Scout or cosign to verify signed attestations like SBOMs, provenance, and vulnerability data for Docker Hardened Images and charts.
