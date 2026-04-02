@@ -28,7 +28,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ## 4.68.0
 
-{{< release-date date="2026-04-06" >}}
+{{< release-date date="2026-04-07" >}}
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.68.0" build_path="//" >}}
 
@@ -39,7 +39,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Bug fixes and enhancements
 
-#### For all platforms 
+#### For all platforms
 
 - Fixed a deadlock in Enhanced Container Isolation that caused containers to hang indefinitely during creation when ECI was enabled.
 - Added a warning banner to alert when an MCP erver is community-provided and has not been verified by Docker.
