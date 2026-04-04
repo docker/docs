@@ -56,7 +56,7 @@ AWS Client ID
 "services.serviceA.environment.AWS_ACCESS_KEY_ID": xxxxxxxxxx
 AWS Secret Key
 "services.serviceA.environment.AWS_SECRET_ACCESS_KEY": aws"xxxx/xxxx+xxxx+"
-Github authentication
+GitHub authentication
 "GITHUB_TOKEN": ghp_xxxxxxxxxx
 JSON Web Token
 "": xxxxxxx.xxxxxxxx.xxxxxxxx
