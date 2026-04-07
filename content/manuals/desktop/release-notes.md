@@ -32,6 +32,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.68.0" build_path="//" >}}
 
+### New
+
+- Gordon now has persistent local memory, allowing it to remember your preferences and context across sessions.
+
 ### Updates
 
 - [Docker Agent v1.39.0](https://github.com/docker/docker-agent/releases/tag/v1.39.0)
@@ -58,6 +62,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a security vulnerability where tampered user-deployed config profiles could bypass organization sign-in enforcement.
 - Fixed a bug where a failed `vmnetd` handshake could dispatch a bogus command on a broken connection, causing unexpected networking errors.
 - Fixed a bug where the Docker Desktop Dashboard could be prematurely displayed when restoring to a fullscreen state on launch.
+- Fixed nested bind mounts showing empty child mount content on VirtioFS when using Docker Compose with multiple services sharing a volume. Fixes [docker/desktop-feedback#264](https://github.com/docker/desktop-feedback/issues/264).
 
 #### For Windows
 
