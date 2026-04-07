@@ -105,7 +105,7 @@ Prevents the onboarding survey from being shown to new users.
 | JSON key | `displayedOnboarding` |
 | Admin Console | **Hide onboarding survey** |
 
-### Enable Docker terminal `All platforms`
+### Enable Docker terminal
 
 Allows or restricts access to the built-in terminal for host system interaction. When set to `false`, users cannot use the Docker terminal to interact with the host machine or execute commands directly from Docker Desktop.
 
@@ -118,7 +118,7 @@ Allows or restricts access to the built-in terminal for host system interaction.
 | JSON key | `desktopTerminalEnabled` |
 | Admin Console | Not available |
 
-### Expose Docker API on TCP 2375 {{< badge color=blue text="Windos only" >}}
+### Expose Docker API on TCP 2375 {{< badge color=blue text="Windows only" >}}
 
 Exposes the Docker API over an unauthenticated TCP socket on port 2375. Only recommended for isolated and protected environments. Supports legacy integrations that require TCP API access.
 
@@ -134,18 +134,6 @@ Exposes the Docker API over an unauthenticated TCP socket on port 2375. Only rec
 >
 > In hardened environments, disable and lock this setting. This ensures the
 Docker API is only reachable via the secure internal socket.
-
-### Enable Docker terminal
-
-Allows or restricts access to the built-in terminal for host system interaction. When set to `false`, users cannot use the Docker terminal to interact with the host machine or execute commands directly from Docker Desktop.
-
-| Property | Value |
-|---|---|
-| Default | `false` |
-| Accepted values | `true`, `false` |
-| Format | Boolean |
-| JSON key | `desktopTerminalEnabled` |
-| Admin Console | Not availabe |
 
 ## Extensions 
 
@@ -357,7 +345,7 @@ Specifies a PAC file URL for Docker Desktop to use when routing network traffic.
 | JSON key | `pac` |
 | Admin Console | **PAC file** |
 
-### Override Windows "dockerd" port {{< badge color=blue text="Mac only" >}}
+### Override Windows "dockerd" port {{< badge color=blue text="Windows only" >}}
 
 Exposes Docker Desktop's internal proxy locally on this port for the Windows Docker daemon to connect to. If it is set to 0, a random free port is chosen. If the value is greater than 0, use that exact value for the port.
 
@@ -462,7 +450,7 @@ Sets the network subnet used for Docker Desktop's internal VPNKit DHCP/DNS servi
 
 ### Docker daemon options 
 
-Overrides the Docker daemon configuration used inWindows containers, without modifying local configuration files.
+Overrides the Docker daemon configuration used in Windows containers, without modifying local configuration files.
 
 | Property | Value |
 |---|---|
