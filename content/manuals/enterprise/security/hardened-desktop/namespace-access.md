@@ -16,7 +16,7 @@ outside of approved, governed locations.
 
 When namespace access control is enabled, organization members can still view and pull images
 from their personal namespaces and continue accessing all existing repositories
-and content. However, they are no longer able to create new repositories or
+and content. However, they're unable to create new repositories or
 push new images to their personal namespace.
 
 > [!IMPORTANT]

@@ -19,7 +19,7 @@ Docker Desktop can configure container network traffic to accept connections, re
 
 Use air-gapped containers if:
 
-- Your organisation requires containers to communicate only with approved internal services
+- Your organization requires containers to communicate only with approved internal services
 - You need to meet compliance standards that mandate network isolation (such as SOC 2, ISO 27001, or PCI DSS)
 - You want to prevent containers from leaking data or reaching unapproved external endpoints during builds or at runtime
 
@@ -140,8 +140,8 @@ function FindProxyForURL(url, host) {
 
 ### General considerations
 
- - `FindProxyForURL` function URL parameter format is http://host_or_ip:port or https://host_or_ip:port
- - If you have an internal container trying to access https://docs.docker.com/enterprise/security/hardened-desktop/air-gapped-containers the Docker proxy service will submit docs.docker.com for the host value and https://docs.docker.com:443 for the url value to `FindProxyForURL`, if you are using `shExpMatch` function in your PAC file as follows:
+ - `FindProxyForURL` function URL parameter format is `http://host_or_ip:port` or `https://host_or_ip:port`
+ - If you have an internal container trying to access `https://docs.docker.com/enterprise/security/hardened-desktop/air-gapped-containers` the Docker proxy service will submit docs.docker.com for the host value and https://docs.docker.com:443 for the url value to `FindProxyForURL`, if you are using `shExpMatch` function in your PAC file as follows:
 
    ```console
    if(shExpMatch(url, "https://docs.docker.com:443/enterprise/security/*")) return "DIRECT";

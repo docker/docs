@@ -54,7 +54,7 @@ Before configuring Image Access Management, you must:
 
 > [!NOTE]
 >
-> Image Access Management is turned off by default. Organization owners have access to all images regardless of policy settings.
+> Image Access Management is turned off by default for organization members. Organization owners always have access to all images regardless of policy settings.
 
 To configure Image Access Management:
 
