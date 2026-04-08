@@ -26,6 +26,42 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.69.0
+
+{{< release-date date="2026-04-13" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.69.0" build_path="//" >}}
+
+### Updates
+
+- [Docker Agent v1.42.0](https://github.com/docker/docker-agent/releases/tag/v1.42.0)
+- [Docker Model v1.1.29](https://github.com/docker/model-cli/releases/tag/v1.1.29)
+- [containerd v2.2.2](https://github.com/containerd/containerd/releases/tag/v2.2.2)
+- [Docker Buildx v0.33.0](https://github.com/docker/buildx/releases/tag/v0.33.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Redesigned the Gordon chat interface to display the final response prominently, with intermediate tool calls and reasoning steps collapsed into an expandable **Activity** section, and long messages truncated with a sticky header.
+- Fixed an issue where `docker logout` from the CLI was ignored by Docker Desktop when OAuth tokens remained in the credential store, leaving the user unexpectedly signed in.
+- Fixed an issue where Docker Desktop could unexpectedly sign users out when unrelated credential updates, `docker login`, or transient network errors triggered a sign-out.
+- Fixed a data loss issue where backup data could be deleted during a failed restore operation, leaving users with no data.
+- Fixed an issue where sign-in credentials (`login-info.json`) were included in diagnostic bundles, improving privacy and security.
+- Fixed the footer update label incorrectly showing **Downloading** during the prepare/unpack phase of an update. It now correctly displays **Preparing**.
+- Fixed an issue where Docker Desktop would not start when the internal storage disk was full.
+
+#### For Mac
+
+- Fixed an issue where the in-app update button was not disabled when `Docker.app` was installed in a non-user-writable directory, preventing failed update attempts.
+
+#### For Windows
+
+- Fixed an unexpected WSL terminal popup appearing for Windows users using the Hyper-V backend during Docker Desktop installation or uninstallation.
+- Fixed an issue on Windows where factory reset deleted CLI plugins from `~/.docker/cli-plugins`, causing `docker build` to fall back to the legacy builder.
+- Fixed a bug where Kubernetes failed to start when WSL integration was enabled alongside another distro using cgroup v1 controllers.
+- Fixed a race condition that caused Kubernetes to fail to start when a Registry Access Management policy change occurred during startup.
+
 ## 4.68.0
 
 {{< release-date date="2026-04-07" >}}
@@ -40,6 +76,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - [Docker Agent v1.39.0](https://github.com/docker/docker-agent/releases/tag/v1.39.0)
 - [Docker Model v1.1.28](https://github.com/docker/model-cli/releases/tag/v1.1.28)
+- [Docker Offload v0.5.81](https://github.com/docker/cloud/releases/tag/v0.5.81)
 
 ### Bug fixes and enhancements
 
