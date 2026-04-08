@@ -3,6 +3,7 @@ title: Settings reference
 linkTitle: Settings reference
 description: Complete reference for all Docker Desktop settings and configuration options
 keywords: docker desktop settings, configuration reference, admin controls, settings management
+toc_max: 2
 aliases:
  - /security/for-admins/hardened-desktop/settings-management/settings-reference/
 ---
@@ -11,7 +12,7 @@ This reference documents Docker Desktop settings that administrators can configu
  
 > [!NOTE]
 >
-> This page covers admin-configurable settings only. Settings that are only available to end users via the Docker Desktop GUI are not included here. For the full list of Docker Desktop user-facing settings, see [Change settings](/manuals/desktop/settings-and-maintenance/settings.md).
+> This page only covers configurable settings for administrators who are deploying Docker Desktop to their organization. For the full list of Docker Desktop user-facing settings, see [Change settings](/manuals/desktop/settings-and-maintenance/settings.md).
 
 ## General
 
@@ -74,7 +75,9 @@ Allows Docker Desktop to automatically update components that do not require a r
 | JSON key | `enableDockerAI` |
 | Admin Console | **Enable Gordon** |
 
-> **Important:** Docker Business customers must set this to `"Enabled"` or `"Always Enabled"` in the Admin Console. Setting to `"User Defined"` alone will not activate Gordon.
+> [!IMPORTANT]
+>
+> Docker Business customers must set this to `"Enabled"` or `"Always Enabled"` in the Admin Console. Setting to `"User Defined"` alone will not activate Gordon.
 
 ### Block `docker load`
 
@@ -407,6 +410,8 @@ Configures an HTTP/HTTPS proxy for containers in air-gapped environments, provid
   "transparentPorts": ""
 }
 ```
+
+For more information, see [Air-gapped containers](/manuals/enterprise/security/hardened-desktop/air-gapped-containers.md).
 
 ## LinuxVM
 
