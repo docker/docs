@@ -22,8 +22,8 @@ RAM works with all registry types including cloud services, on-premises registri
 
 Registry Access Management works with any container registry, including:
 
- - Docker Hub (allowed by default)
-- Cloud registries: Amazon ECR, Google Container Registry, Azure Container Registry
+- Docker Hub (allowed by default)
+- Cloud registries: Amazon ECR, Cloudsmith, Google Container Registry, Azure Container Registry
 - Git-based registries: GitHub Container Registry, GitLab Container Registry
 - On-premises solutions: Nexus, Artifactory, Harbor
 - Registry mirrors: Including Docker Hub mirrors
