@@ -8,7 +8,8 @@ Admin orgs:
   subscription: [Team, Business]
   for: Administrators
 Air-gapped containers:
-  requires: Docker Desktop [4.29.0](/manuals/desktop/release-notes.md#4290) and later
+  subscription: [Business]
+  for: Administrators
 Allow list:
   for: Administrators
 Amazon S3 cache:

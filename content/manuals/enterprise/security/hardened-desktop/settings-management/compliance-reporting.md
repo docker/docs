@@ -16,15 +16,11 @@ Desktop settings reporting tracks user compliance with Docker Desktop settings p
 
 Before you can use Docker Desktop settings reporting, make sure you have:
 
-- [Docker Desktop 4.37.1 or later](/manuals/desktop/release-notes.md) installed across your organization
+- [Docker Desktop](/manuals/desktop/release-notes.md) installed across your organization
 - [A verified domain](/manuals/enterprise/security/single-sign-on/connect.md)
 - [Enforced sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) for your organization
 - A Docker Business subscription
 - At least one settings policy configured
-
-> [!WARNING]
->
-> Users on Docker Desktop versions older than 4.40 may appear non-compliant because older versions can't report compliance status. For accurate reporting, update users to Docker Desktop version 4.40 or later.
 
 ## Access the reporting dashboard
 

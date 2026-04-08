@@ -16,7 +16,7 @@ Use the Docker Admin Console to create and manage settings policies for Docker D
 
 Before you begin, make sure you have:
 
-- [Docker Desktop 4.37.1 or later](/manuals/desktop/release-notes.md) installed
+- [Docker Desktop](/manuals/desktop/release-notes.md) installed
 - [A verified domain](/enterprise/security/single-sign-on/connect/#step-1-add-a-domain)
 - [Enforced sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) for your organization
 - A Docker Business subscription
