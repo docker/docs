@@ -21,7 +21,7 @@ Use air-gapped containers if:
 
 - Your organisation requires containers to communicate only with approved internal services
 - You need to meet compliance standards that mandate network isolation (such as SOC 2, ISO 27001, or PCI DSS)
-- You want to prevent containers from exfiltrating data or reaching unapproved external endpoints during builds or at runtime
+- You want to prevent containers from leaking data or reaching unapproved external endpoints during builds or at runtime
 
 ## How air-gapped containers work
 

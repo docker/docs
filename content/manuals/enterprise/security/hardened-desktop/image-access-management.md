@@ -107,7 +107,7 @@ Image access restrictions apply to all Docker Hub operations including pulls, bu
    3. Carefully evaluate community images only for specific, vetted use cases
    4. Use the repository allowlist sparingly. Only add repositories that have been thoroughly vetted and approved through your organization's security review process
 - Monitor usage patterns: Review which images developers are attempting to pull, identify legitimate requests for additional image types, regularly audit approved image categories for continued relevance, and use Docker Desktop analytics to monitor usage patterns.
-- Regularly review the repository allow ist: Periodically audit the repositories in your allowlist to ensure they remain necessary and trustworthy, and remove any that are no longer needed or maintained.
+- Regularly review the repository allow list: Periodically audit the repositories in your allowlist to ensure they remain necessary and trustworthy, and remove any that are no longer needed or maintained.
 
 ## Scope and bypass considerations
 
