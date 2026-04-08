@@ -255,7 +255,6 @@ Load by default:
   requires: Docker Buildx [0.14.0](https://github.com/docker/buildx/releases/tag/v0.14.0) and later
 MSI installer:
   subscription: [Business]
-  requires: Docker Desktop [4.32](/manuals/desktop/release-notes.md#4320) and later
   for: Administrators
 OATs:
   subscription: [Team, Business]
@@ -263,7 +262,6 @@ Pay by invoice:
   subscription: [Team, Business]
 PKG installer:
   subscription: [Business]
-  requires: Docker Desktop [4.36](/manuals/desktop/release-notes.md#4360) and later
   for: Administrators
 Private marketplace:
   availability: Beta

@@ -15,11 +15,11 @@ Microsoft Dev Box provides cloud-based, pre-configured developer workstations th
 
 ## Key benefits
 
-- Pre-configured environment: Docker Desktop, WSL2, and other requirements come pre-installed and configured
-- Consistent development: Ensure all team members work with the same Docker environment
-- Powerful resources: Access more compute power and storage than might be available on local machines
-- State persistence: Dev Box maintains your state between sessions, similar to hibernating a local machine
-- Seamless licensing: Use your existing Docker subscription or purchase a new one directly through Azure Marketplace
+- Docker Desktop, WSL2, and dependencies pre-installed
+- Identical environment for every team member
+- More compute and storage than a typical local machine
+- Session state persists between uses
+- Works with your existing Docker subscription
 
 ## Setup
 
