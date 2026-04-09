@@ -54,6 +54,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For Mac
 
 - Fixed an issue where the in-app update button was not disabled when `Docker.app` was installed in a non-user-writable directory, preventing failed update attempts.
+- Fixed update failure for users who installed Docker Desktop via Homebrew on Mac.
 
 #### For Windows
 
