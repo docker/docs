@@ -237,6 +237,14 @@ same steps to a non-mirrored image by updating the `SRC_ATT_REPO` and
    workflow requires authenticating to the Scout registry, use a personal access
    token (PAT) for that step.
 
+   > [!WARNING]
+   >
+   > The following examples export credentials directly on the command line for
+   > demonstration purposes. This exposes sensitive tokens in your shell history
+   > and process list. In production environments, use secure methods such as
+   > reading from files with restricted permissions, environment files loaded
+   > at runtime, or secret management tools.
+
    ```console
    $ export DOCKER_USERNAME="YOUR_DOCKER_USERNAME"
    $ export DOCKER_PAT="YOUR_DOCKER_PAT"
