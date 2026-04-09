@@ -17,6 +17,7 @@ aliases:
   - /cloud/ecs-compose-examples/
   - /cloud/ecs-compose-features/
   - /cloud/ecs-integration/
+  - /compose/migrate/
   - /engine/context/aci-integration/
   - /engine/context/ecs-integration/
   - /machine/
