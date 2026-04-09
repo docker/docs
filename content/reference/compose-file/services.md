@@ -1651,10 +1651,9 @@ in the form:
 - `CONTAINER` is `port | range`.
 - `PROTOCOL` restricts ports to a specified protocol either `tcp` or `udp`(optional). Default is `tcp`.
 
->[!CAUTION]
+> [!WARNING]
 >
->If you do not specify an IP address (such as 127.0.0.1) and it binds to all interfaces then any machine on the same network could
->potentially have access to the container. This could be especially dangerous if the container is exposed to the internet.
+> If you do not specify a host IP (such as `127.0.0.1`), Docker binds to all interfaces (`0.0.0.0`), bypassing host firewall rules. This can expose the container directly to the internet if the host has a public IP address. For more information, see [Port publishing and mapping](/manuals/engine/network/port-publishing.md).
 
 Ports can be either a single value or a range. `HOST` and `CONTAINER` must use equivalent ranges.
 
