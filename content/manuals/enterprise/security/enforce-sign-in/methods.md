@@ -17,13 +17,13 @@ You can enforce sign-in for Docker Desktop using several methods. Choose the met
 | Method | Platform |
 |:-------|:---------|
 | Registry key | Windows only |
-| Configuration profiles | macOS only |
-| `plist` file | macOS only |
+| Configuration profiles | Mac only |
+| `plist` file | Mac only |
 | `registry.json` | All platforms |
 
 > [!TIP]
 >
-> For macOS, configuration profiles offer the highest security because they're
+> For Mac, configuration profiles offer the highest security because they're
 protected by Apple's System Integrity Protection (SIP).
 
 ## Windows: Registry key method
@@ -39,18 +39,12 @@ To configure the registry key method manually:
    $ HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop
    ```
 1. Create a multi-string value name `allowedOrgs`.
-1. Use your organization names as string data:
+1. Use your organization names as string data. You can add multiple organizations:
    - Use lowercase letters only
    - Add each organization on a separate line
    - Do not use spaces or commas as separators
 1. Restart Docker Desktop.
 1. Verify the `Sign in required!` prompt appears in Docker Desktop.
-
-> [!IMPORTANT]
->
-> You can add multiple organizations with Docker Desktop version 4.36 and later.
-With version 4.35 and earlier, adding multiple organizations causes sign-in
-enforcement to fail silently.
 
 {{< /tab >}}
 {{< tab name="Group Policy deployment" >}}
@@ -73,25 +67,20 @@ Deploy the registry key across your organization using Group Policy:
 {{< /tab >}}
 {{< /tabs >}}
 
-## macOS: Configuration profiles method (recommended)
+## Mac: Configuration profiles method (recommended)
 
-{{< summary-bar feature_name="Config profiles" >}}
-
-Configuration profiles provide the most secure enforcement method for macOS, as they're protected by Apple's System Integrity Protection.
+Configuration profiles provide the most secure enforcement method for Mac, as they're protected by Apple's System Integrity Protection.
 
 The payload is a dictionary of key-values. Docker Desktop supports the following keys:
 
 - `allowedOrgs`: Sets a list of organizations in one single string, where each organization is separated by a semi-colon.
-
-In Docker Desktop version 4.48 and later, the following keys are also supported: 
-
 - `overrideProxyHTTP`: Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests.
 - `overrideProxyHTTPS`: Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests.
 - `overrideProxyExclude`: Bypasses proxy settings for the specified hosts and domains. Uses a comma-separated list.
 - `overrideProxyPAC`: Sets the file path where the PAC file is located. It has precedence over the remote PAC file on the selected proxy.
 - `overrideProxyEmbeddedPAC`: Sets the content of an in-memory PAC file. It has precedence over `overrideProxyPAC`.
 
-Overriding at least one of the proxy settings via Configuration profiles will automatically lock the settings as they're managed by macOS.
+Overriding at least one of the proxy settings via Configuration profiles will automatically lock the settings as they're managed by Mac.
 
 
 1. Create a file named `docker.mobileconfig` and include the following content:
@@ -164,9 +153,7 @@ Some MDM solutions let you specify the payload as a plain dictionary of key-valu
 </dict>
 ```
 
-## macOS: plist file method
-
-Use this alternative method for macOS with Docker Desktop version 4.32 and later.
+## Mac: plist file method
 
 {{< tabs >}}
 {{< tab name="Manual creation" >}}
@@ -259,7 +246,7 @@ Create the `registry.json` file (UTF-8 without BOM) at the appropriate location:
 Set-Content /ProgramData/DockerDesktop/registry.json '{"allowedOrgs":["myorg1","myorg2"]}'
 ```
 
-#### macOS
+#### Mac
 
 ```console
 sudo mkdir -p "/Library/Application Support/com.docker.docker"
@@ -288,7 +275,7 @@ Start-Process '.\Docker Desktop Installer.exe' -Wait 'install --allowed-org=myor
 "Docker Desktop Installer.exe" install --allowed-org=myorg
 ```
 
-#### macOS
+#### Mac
 
 ```console
 sudo hdiutil attach Docker.dmg
@@ -304,8 +291,8 @@ sudo hdiutil detach /Volumes/Docker
 When multiple configuration methods exist on the same system, Docker Desktop uses this precedence order:
 
 1. Registry key (Windows only)
-1. Configuration profiles (macOS only)
-1. plist file (macOS only)
+1. Configuration profiles (Mac only)
+1. plist file (Mac only)
 1. registry.json file
 
 ## Troubleshoot sign-in enforcement

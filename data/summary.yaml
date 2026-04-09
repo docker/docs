@@ -83,8 +83,6 @@ Compose attach:
   requires: Docker Compose [2.20.0](https://github.com/docker/compose/releases/tag/v2.20.0) and later
 Compose bridge:
   requires: Docker Desktop 4.43.0 and later
-Config profiles:
-  requires: Docker Desktop 4.36 and later
 Compose dependent images:
   requires: Docker Compose [2.22.0](https://github.com/docker/compose/releases/tag/v2.22.0) and later
 Compose cgroup:
