@@ -437,7 +437,7 @@ Overrides the Docker daemon configuration used in containers, without modifying 
 | Accepted values | JSON object |
 | Format | Stringified JSON |
 | JSON key | `linuxVM.dockerDaemonOptions` |
-| Admin Console | **Docker Deamon options** in the LinuxVM dropdown |
+| Admin Console | **Docker Daemon options** in the LinuxVM dropdown |
 
 ### VPNKit CIDR {{< badge color=blue text="Mac only" >}}
 
