@@ -43,7 +43,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- Redesigned the Gordon chat interface to display the final response prominently, with intermediate tool calls and reasoning steps collapsed into an expandable **Activity** section, and long messages truncated with a sticky header.
 - Fixed an issue where `docker logout` from the CLI was ignored by Docker Desktop when OAuth tokens remained in the credential store, leaving the user unexpectedly signed in.
 - Fixed an issue where Docker Desktop could unexpectedly sign users out when unrelated credential updates, `docker login`, or transient network errors triggered a sign-out.
 - Fixed a data loss issue where backup data could be deleted during a failed restore operation, leaving users with no data.
