@@ -1,4 +1,4 @@
----
+Arch Linux---
 description: Troubleshooting the Rootless mode
 keywords: security, namespaces, rootless, troubleshooting
 title: Troubleshooting
@@ -7,7 +7,8 @@ weight: 30
 
 ### Distribution-specific hint
 
-{{< tabs >}}
+{{< tabs >
+}}
 {{< tab name="Ubuntu" >}}
 - Ubuntu 24.04 and later enables restricted unprivileged user namespaces by
   default, which prevents unprivileged processes in creating user namespaces
