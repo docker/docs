@@ -90,7 +90,7 @@ jobs:
           driver-opts: image=${{ env.SETUP_BUILDKIT_IMAGE }}
       -
         name: Validate
-        uses: docker/bake-action@82490499d2e5613fcead7e128237ef0b0ea210f7 # v7
+        uses: docker/bake-action@a66e1c87e2eca0503c343edf1d208c716d54b8a8 # v7
         with:
           source: .
           files: |
