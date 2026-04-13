@@ -42,7 +42,7 @@ services:
       service: webapp
 ```
 
-This instructs Compose to re-use only the properties of the `webapp` service
+This instructs Compose to reuse only the properties of the `webapp` service
 defined in the `common-services.yml` file. The `webapp` service itself is not part of the final project.
 
 If `common-services.yml`
