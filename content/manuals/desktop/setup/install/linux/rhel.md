@@ -23,11 +23,19 @@ This page contains information on how to install, launch and upgrade Docker Desk
 To install Docker Desktop successfully, you must:
 
 - Meet the [general system requirements](_index.md#general-system-requirements).
-- Have a 64-bit version of either RHEL 8 or RHEL 9.
+- Have a 64-bit version of either RHEL 8, RHEL 9, or RHEL 10
 
 - If `pass` is not installed, or it can't be installed, you must enable [CodeReady Linux Builder (CRB) repository](https://access.redhat.com/articles/4348511) and [Extra Packages for Enterprise Linux (EPEL)](https://docs.fedoraproject.org/en-US/epel/).
 
    {{< tabs group="os_version" >}}
+   {{< tab name="RHEL 10" >}}
+   ```console
+   $ sudo subscription-manager repos --enable codeready-builder-for-rhel-10-$(arch)-rpms
+   $ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm
+   $ sudo dnf install pass
+   ```
+
+   {{< /tab >}}
    {{< tab name="RHEL 9" >}}
    ```console
    $ sudo subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms
@@ -49,6 +57,14 @@ To install Docker Desktop successfully, you must:
 - For a GNOME desktop environment you must install AppIndicator and KStatusNotifierItem [GNOME extensions](https://extensions.gnome.org/extension/615/appindicator-support/). You must also enable EPEL.
 
    {{< tabs group="os_version" >}}
+   {{< tab name="RHEL 10" >}}
+   ```console
+   $ # enable EPEL as described above
+   $ sudo dnf install gnome-shell-extension-appindicator
+   $ sudo gnome-extensions enable appindicatorsupport@rgcjonas.gmail.com
+   ```
+
+   {{< /tab >}}
    {{< tab name="RHEL 9" >}}
    ```console
    $ # enable EPEL as described above
