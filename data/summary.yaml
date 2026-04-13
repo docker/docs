@@ -160,16 +160,6 @@ Docker Debug:
   requires: Docker Desktop 4.49 and later. For Docker Desktop versions 4.48.0 and earlier, you must have a Pro, Team, or Business subscription
 Docker Desktop Archlinux:
   availability: Experimental
-Docker Desktop CLI:
-  requires: Docker Desktop [4.37](/manuals/desktop/release-notes.md#4370) and later
-Docker Desktop CLI update:
-  requires: Docker Desktop 4.39 and later
-Docker Desktop CLI logs:
-  requires: Docker Desktop 4.39 and later
-Docker Desktop CLI kubernetes:
-  requires: Docker Desktop 4.44 and later
-Docker Desktop CLI diagnose:
-  requires: Docker Desktop 4.60 and later
 Desktop logs:
   availability: Beta
   requires: Docker Desktop [4.65](/manuals/desktop/release-notes.md#4650) or later
@@ -279,10 +269,8 @@ SSO:
 Synchronized file sharing:
   subscription: [Pro, Team, Business]
 USB/IP support:
-  requires: Docker Desktop [4.35.0](/manuals/desktop/release-notes.md#4350) and later
   for: Docker Desktop for Mac, Linux, and Windows with the Hyper-V backend
 VMM:
-  requires: Docker Desktop [4.35.0](/manuals/desktop/release-notes.md#4350) and later
   for: Docker Desktop on Mac with Apple Silicon
 Wasm workloads:
   availability: Beta
