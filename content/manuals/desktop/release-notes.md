@@ -46,7 +46,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed an issue where `docker logout` from the CLI was ignored by Docker Desktop when OAuth tokens remained in the credential store, leaving the user unexpectedly signed in.
 - Fixed an issue where Docker Desktop could unexpectedly sign users out when unrelated credential updates, `docker login`, or transient network errors triggered a sign-out.
 - Fixed a data loss issue where backup data could be deleted during a failed restore operation, leaving users with no data.
-- Fixed an issue where sign-in credentials (`login-info.json`) could be included in diagnostic bundles, improving privacy and security. Note that this file contains an encoded organisation name, plan name, username, and email only - no passwords or credentials.
+- Fixed an issue where sign-in credentials (`login-info.json`) could be included in diagnostic bundles, improving privacy and security. Note that this file contains an encoded organisation(s) name, plan name, encoded username, and encoded email only. No passwords or credentials are included.
 - Fixed the footer update label incorrectly showing **Downloading** during the prepare/unpack phase of an update. It now correctly displays **Preparing**.
 - Fixed an issue where Docker Desktop would not start when the internal storage disk was full.
 
