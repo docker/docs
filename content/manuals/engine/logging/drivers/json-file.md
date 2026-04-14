@@ -28,6 +28,28 @@ only one container.
 > with external tools may interfere with Docker's logging system and result in
 > unexpected behavior, and should be avoided.
 
+## Log file location
+
+By default, Docker stores log files in the Docker data directory
+(`/var/lib/docker` on Linux). The log file for a container is located at:
+
+```text
+/var/lib/docker/containers/<container-id>/<container-id>-json.log
+```
+
+If you configured the daemon to use a different
+[data root directory](/manuals/engine/daemon/_index.md#configure-the-data-directory-location),
+the log files are stored under that directory instead.
+
+On Docker Desktop, log files are stored inside the Docker Desktop VM and
+aren't directly accessible from the host filesystem.
+
+To find the log file path for a specific container, run:
+
+```console
+$ docker inspect --format='{{.LogPath}}' <container>
+```
+
 ## Usage
 
 To use the `json-file` driver as the default logging driver, set the `log-driver`
