@@ -61,6 +61,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed an issue on Windows where factory reset deleted CLI plugins from `~/.docker/cli-plugins`, causing `docker build` to fall back to the legacy builder.
 - Fixed a bug where Kubernetes failed to start when WSL integration was enabled alongside another distro using cgroup v1 controllers.
 - Fixed a race condition that caused Kubernetes to fail to start when a Registry Access Management policy change occurred during startup.
+- Prevent Docker Desktop from fatally failing due to transient 'Access is denied' errors during file operations on Windows.
 
 ## 4.68.0
 
