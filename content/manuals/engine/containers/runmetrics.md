@@ -139,15 +139,14 @@ container, take a look at the following paths:
 
 ### Metrics from cgroups: memory, CPU, block I/O
 
-> [!NOTE]
->
-> This section isn't yet updated for cgroup v2.
-> For further information about cgroup v2, refer to [the kernel documentation](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html).
-
 For each subsystem (memory, CPU, and block I/O), one or
-more pseudo-files exist and contain statistics.
+more pseudo-files exist and contain statistics. The metrics
+available depend on your cgroup version. The following sections
+describe both cgroup v1 and v2 formats.
 
-#### Memory metrics: `memory.stat`
+#### Memory metrics
+
+##### cgroup v1: `memory.stat`
 
 Memory metrics are found in the `memory` cgroup. The memory
 control group adds a little overhead, because it does very fine-grained
@@ -270,12 +269,127 @@ maximum amount of RAM+swap.
 Accounting for memory in the page cache is very complex. If two
 processes in different control groups both read the same file
 (ultimately relying on the same blocks on disk), the corresponding
-memory charge is split between the control groups. It's nice, but
-it also means that when a cgroup is terminated, it could increase the
+memory charge is split between the control groups. It's nice, but it
+also means that when a cgroup is terminated, it could increase the
 memory usage of another cgroup, because they're not splitting the cost
 anymore for those memory pages.
 
-### CPU metrics: `cpuacct.stat`
+##### cgroup v2: `memory.stat`, `memory.current`, `memory.max`
+
+On cgroup v2, the memory controller interface has been redesigned.
+Instead of separate controllers for memory and swap, a single unified
+`memory` controller manages both. Key interface files:
+
+- **`memory.current`** — Current total memory usage (in bytes).
+- **`memory.max`** — Memory limit (in bytes, or `max` for unlimited).
+  This replaces the v1 `memory.limit_in_bytes` file.
+- **`memory.high`** — Throttling threshold. Memory usage above this
+  limit is throttled and put under heavy reclaim pressure. Setting this
+  is useful for preventing sudden spikes before hitting the hard `memory.max` limit.
+- **`memory.low`** — Best-effort memory protection. If memory usage
+  is below this threshold, the cgroup's memory won't be reclaimed
+  unless there's no unprotected reclaimable memory available.
+- **`memory.min`** — Hard memory protection. Memory usage below this
+  value is never reclaimed.
+- **`memory.swap.current`** — Current swap usage (in bytes).
+- **`memory.swap.max`** — Swap limit (in bytes, or `max` for unlimited).
+- **`memory.events`** — Event counters including `low`, `high`, `max`,
+  `oom`, and `oom_kill`. These are useful for monitoring memory pressure.
+
+The `memory.stat` file contains detailed breakdowns. Here is an example:
+
+```
+anon 1639297024
+file 2166460416
+kernel 939536384
+kernel_stack 4882432
+pagetables 46481408
+sock 65536
+shmem 7659520
+file_mapped 621125632
+file_dirty 126976
+swapcached 7847936
+inactive_anon 1168683008
+active_anon 459481088
+inactive_file 1667866624
+active_file 481972224
+unevictable 32133120
+slab_reclaimable 864874760
+slab_unreclaimable 18258176
+slab 883132936
+workingset_refault_anon 7578
+workingset_refault_file 99782
+workingset_activate_anon 2203
+workingset_activate_file 54321
+pgfault 728281223
+pgmajfault 1724
+```
+
+Notable differences from cgroup v1:
+
+- `anon` replaces `rss` — anonymous memory (stacks, heaps, not backed by files).
+- `file` replaces `cache` — file-backed memory (page cache).
+- `kernel` — total kernel memory usage (not separately tracked in v1).
+- `slab` — total slab memory (sum of `slab_reclaimable` + `slab_unreclaimable`).
+- `shmem` — shared memory (previously included in `cache` in v1).
+- `file_mapped` replaces `mapped_file`.
+- `file_dirty` — file cache pages awaiting writeback to disk.
+- There is no `total_` prefix. In cgroup v2, `memory.stat` always
+  includes the cgroup's entire subtree, equivalent to the v1 `total_*` counters.
+- `hierarchical_memory_limit` and `hierarchical_memsw_limit` are removed.
+  Use `memory.max` and `memory.swap.max` instead.
+
+`anon`
+: Anonymous memory — the amount of memory not backed by files.
+  This includes process stacks, heaps, and anonymous `mmap` regions.
+  This is the cgroup v2 equivalent of the v1 `rss` counter.
+
+`file`
+: File-backed memory — the amount of memory used by the page cache,
+  including files read from and written to disk. This is the cgroup v2
+  equivalent of the v1 `cache` counter.
+
+`kernel`
+: Total kernel memory usage by the cgroup, including kernel stacks,
+  page tables, and other kernel data structures. This was not separately
+  trackable in cgroup v1.
+
+`shmem`
+: Shared memory usage, including `tmpfs` mounts and shared memory segments.
+  In v1, this was included within `cache`.
+
+`inactive_anon`, `active_anon`
+: Anonymous memory that the kernel has classified as _inactive_ and _active_,
+  respectively. The kernel uses this classification to decide which pages
+  to swap out under memory pressure (inactive pages are reclaimed first).
+
+`inactive_file`, `active_file`
+: File-backed memory classified as _inactive_ and _active_.
+  The formula `file` ≈ `inactive_file` + `active_file` approximately holds.
+  Under memory pressure, inactive file pages are reclaimed before active ones.
+
+`slab_reclaimable`, `slab_unreclaimable`
+: Slab allocator memory that can (`reclaimable`) or cannot (`unreclaimable`)
+  be freed under memory pressure.
+
+`pgfault`, `pgmajfault`
+: Page fault counters, same meaning as in cgroup v1.
+  `pgfault` counts all page faults, `pgmajfault` counts those requiring disk I/O.
+
+`unevictable`
+: Memory that cannot be reclaimed (e.g., `mlock`ed pages).
+
+Accounting for memory in the page cache is very complex. If two
+processes in different control groups both read the same file
+(ultimately relying on the same blocks on disk), the corresponding
+memory charge is split between the control groups. It's nice, but it
+also means that when a cgroup is terminated, it could increase the
+memory usage of another cgroup, because they're not splitting the cost
+anymore for those memory pages.
+
+#### CPU metrics
+
+##### cgroup v1: `cpuacct.stat`
 
 Now that we've covered memory metrics, everything else is
 simple in comparison. CPU metrics are in the
@@ -297,7 +411,50 @@ jiffies". There are `USER_HZ` _"jiffies"_ per second, and on x86 systems,
 [tickless kernels](https://lwn.net/Articles/549580/) have made the number of
 ticks irrelevant.
 
+##### cgroup v2: `cpu.stat`
+
+On cgroup v2, the `cpu` and `cpuacct` controllers are unified into a single
+`cpu` controller. CPU usage statistics are available in `cpu.stat`:
+
+```
+usage_usec 9593743878
+user_usec 7111219927
+system_usec 2482523950
+nr_periods 0
+nr_throttled 0
+throttled_usec 0
+```
+
+`usage_usec`
+: Total CPU time consumed by the cgroup (in microseconds).
+  This is the sum of `user_usec` and `system_usec`.
+
+`user_usec`
+: Time spent in user mode (in microseconds).
+  Equivalent to the v1 `user` field, but in microseconds instead of jiffies.
+
+`system_usec`
+: Time spent in kernel mode (in microseconds).
+  Equivalent to the v1 `system` field, but in microseconds instead of jiffies.
+
+`nr_periods`, `nr_throttled`, `throttled_usec`
+: CFS bandwidth throttling statistics. These are only meaningful if a
+  CPU limit (`cpu.max`) is set.
+  - `nr_periods`: number of enforcement periods elapsed.
+  - `nr_throttled`: number of periods where the cgroup was throttled.
+  - `throttled_usec`: total time the cgroup was throttled (in microseconds).
+
+Additional interface files:
+
+- **`cpu.max`** — CPU bandwidth limit, in the format `"<quota> <period>"`.
+  For example, `"10000 100000"` means 10ms per 100ms period (10% of one CPU).
+  Use `"max"` for no limit (the default).
+- **`cpu.weight`** — Relative weight for CPU sharing (1–10000, default 100).
+  This replaces the v1 `cpu.shares` interface.
+
 #### Block I/O metrics
+
+##### cgroup v1: `blkio` controller
 
 Block I/O is accounted in the `blkio` controller.
 Different metrics are scattered across different files. While you can
@@ -329,6 +486,61 @@ without queuing. Also, while it's helpful to figure out which cgroup is
 putting stress on the I/O subsystem, keep in mind that it's a relative
 quantity. Even if a process group doesn't perform more I/O, its queue size can
 increase just because the device load increases because of other devices.
+
+##### cgroup v2: `io.stat`
+
+On cgroup v2, the `blkio` controller is replaced by the `io` controller.
+All I/O statistics are consolidated into a single `io.stat` file, with
+one line per device:
+
+```
+8:0 rbytes=17408 wbytes=0 rios=14 wios=0 dbytes=0 dios=0
+8:16 rbytes=8260728320 wbytes=167597064192 rios=472549 wios=16323808 dbytes=84085252096 dios=37547
+```
+
+Each line starts with the device's `major:minor` number, followed by key-value
+pairs:
+
+`rbytes`
+: Number of bytes read from the device.
+  Equivalent to the v1 `blkio.io_service_bytes` read counters.
+
+`wbytes`
+: Number of bytes written to the device.
+  Equivalent to the v1 `blkio.io_service_bytes` write counters.
+
+`rios`
+: Number of read I/O operations.
+  Equivalent to the v1 `blkio.io_serviced` read counter.
+
+`wios`
+: Number of write I/O operations.
+  Equivalent to the v1 `blkio.io_serviced` write counter.
+
+`dbytes`
+: Number of bytes discarded (trim/unmap operations).
+
+`dios`
+: Number of discard I/O operations.
+
+Additional interface files:
+
+- **`io.max`** — Per-device I/O rate limits. The format is
+  `"<major>:<minor> rbps=<limit> wbps=<limit> riops=<limit> wiops=<limit>"`.
+  For example:
+  ```
+  8:0 rbps=max wbps=10485760 riops=max wiops=100
+  ```
+
+Notable differences from cgroup v1:
+
+- All I/O stats are in a single file instead of scattered across multiple
+  `blkio.*` files.
+- Per-device stats are identified by `major:minor` numbers rather than
+  separate stat files per device.
+- Byte values are in bytes (not sectors like `blkio.sectors`).
+- The `io.max` interface replaces `blkio.throttle.*` with a unified
+  per-device per-limit format.
 
 ### Network metrics
 
