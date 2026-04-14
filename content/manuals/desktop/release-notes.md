@@ -26,6 +26,44 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.70.0
+
+{{< release-date date="2026-04-20" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.70.0" build_path="//" >}}
+
+### New
+
+- Added a CLI hint that surfaces the **Logs** view when running `logs`, `compose logs`, `compose attach`, or `compose up` commands, giving you quick access to logs across all running containers. Available with the **Logs** (Beta) feature enabled.
+
+### Updates
+
+- [Docker Compose v5.1.2](https://github.com/docker/compose/releases/tag/v5.1.2)
+- [Docker Engine v29.4.0](/manuals/engine/release-notes/29.md#2940)
+- [Docker Agent v1.43.0](https://github.com/docker/docker-agent/releases/tag/v1.43.0)
+- [Docker Model v1.1.33](https://github.com/docker/model-cli/releases/tag/v1.1.33)
+- [Docker Scout CLI v1.20.4](https://github.com/docker/scout-cli/releases/tag/v1.20.4)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where `docker login` could fail silently in CI environments due to slow Docker Hub responses causing credential store update timeouts.
+- Fixed an issue where disabling Beta features also disabled Docker Model Runner.
+- Fixed `docker desktop start` causing the Docker AI agent API daemon to fail due to an inherited CLI plugin environment variable.
+
+#### For Mac
+
+- Fixed a crash loop where Docker Desktop repeatedly failed to start with exit status `42` after an update due to a corrupted `DockerAppLaunchPath` setting.
+- Fixed an issue where a failed update could leave Docker Desktop in a broken state. The installer now automatically reverts to the previous version and shows a clear error message.
+- Fixed a bug where stopping one container could disrupt active Unix socket forwards belonging to other running containers.
+
+#### For Windows
+
+- Fixed an issue where a failed update could leave Docker Desktop in a broken state. The installer now automatically reverts to the previous version and shows a clear error message.
+- Fixed a bug where a failed switch to Windows containers could leave Docker Desktop in a broken state, requiring a restart.
+- Fixed an issue where Docker Desktop failed to launch for users with `DEVHOME` set in their environment.
+
 ## 4.69.0
 
 {{< release-date date="2026-04-13" >}}
