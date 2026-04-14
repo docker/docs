@@ -534,7 +534,7 @@ in order to forward broadcast and multicast packets.
 $ docker network create -d ipvlan \
     --subnet=192.168.110.0/24 \
     --subnet=192.168.112.0/24 \
-    --subnet=2001:db8:abc6::/64 \
+    --ipv6 --subnet=2001:db8:abc6::/64 \
     -o parent=eth0 \
     -o ipvlan_mode=l3 ipnet110
 
