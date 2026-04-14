@@ -71,18 +71,18 @@ $ docker buildx build --network=host .
 
 ## Docker Desktop Kubernetes not protected in Kubeadm mode
 
-The integrated Kubernetes feature, when used with the legacy "kubeadm" provisioner, doesn't benefit from ECI protection. Malicious or privileged pods can compromise the Docker Desktop VM and bypass security controls.
+The integrated Kubernetes feature, when used with the legacy Kubeadm provisioner, doesn't benefit from ECI protection. Malicious or privileged pods can compromise the Docker Desktop VM and bypass security controls.
 
 ### Recommendation
 
-Use the newer Docker Desktop Kubernetes "KinD" provisioner (see [Cluster provisioning method](../../../../desktop/use-desktop/kubernetes.md#cluster-provisioning-method)). In this mode, and with ECI turned on, each Kubernetes node runs in an ECI-protected container, providing stronger isolation from the Docker Desktop VM. The KinD provisioner is also faster and allows for multi-node Kubernetes clusters.
+Use the newer Docker Desktop Kubernetes "KinD" provisioner (see [Cluster provisioning method](/manuals/desktop/use-desktop/kubernetes.md#cluster-provisioning-method)). In this mode, and with ECI turned on, each Kubernetes node runs in an ECI-protected container, providing stronger isolation from the Docker Desktop VM. The KinD provisioner is also faster and allows for multi-node Kubernetes clusters.
 
 ## Unprotected container types
 
 These container types currently don't benefit from ECI protection:
 
 - Docker Extensions: Extension containers run without ECI protection
-- Kubernetes pods: When using Docker Desktop's integrated Kubernetes with the old kubeadm provisioner.
+- Kubernetes pods: When using Docker Desktop's integrated Kubernetes with the old Kubeadm provisioner.
 
 ### Recommendation
 
