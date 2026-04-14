@@ -69,31 +69,24 @@ $ docker buildx create --driver docker-container --use
 $ docker buildx build --network=host .
 ```
 
-## Docker Desktop Kubernetes not protected
+## Docker Desktop Kubernetes not protected in Kubeadm mode
 
-The integrated Kubernetes feature doesn't benefit from ECI protection. Malicious or privileged pods can compromise the Docker Desktop VM and bypass security controls.
+The integrated Kubernetes feature, when used with the legacy "kubeadm" provisioner, doesn't benefit from ECI protection. Malicious or privileged pods can compromise the Docker Desktop VM and bypass security controls.
 
 ### Recommendation
 
-Use Kubernetes in Docker (KinD) for ECI-protected Kubernetes:
-
-```console
-$ kind create cluster
-```
-
-With ECI turned on, each Kubernetes node runs in an ECI-protected container, providing stronger isolation from the Docker Desktop VM.
+Use the newer Docker Desktop Kubernetes "KinD" provisioner (see [Cluster provisioning method](../../../../desktop/use-desktop/kubernetes.md#cluster-provisioning-method)). In this mode, and with ECI turned on, each Kubernetes node runs in an ECI-protected container, providing stronger isolation from the Docker Desktop VM. The KinD provisioner is also faster and allows for multi-node Kubernetes clusters.
 
 ## Unprotected container types
 
 These container types currently don't benefit from ECI protection:
 
 - Docker Extensions: Extension containers run without ECI protection
-- Docker Debug: Docker Debug containers bypass ECI restrictions
-- Kubernetes pods: When using Docker Desktop's integrated Kubernetes
+- Kubernetes pods: When using Docker Desktop's integrated Kubernetes with the old kubeadm provisioner.
 
 ### Recommendation
 
-Only use extensions from trusted sources and avoid Docker Debug in security-sensitive environments.
+Only use extensions from trusted sources in security-sensitive environments.
 
 ## Global command restrictions
 
