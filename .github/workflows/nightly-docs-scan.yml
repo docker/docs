@@ -36,7 +36,7 @@ jobs:
         run: mkdir -p "${{ github.workspace }}/.cache"
 
       - name: Restore scanner state
-        uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+        uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: |
             ${{ github.workspace }}/.cache/scanner-memory.db
@@ -66,7 +66,7 @@ jobs:
           timeout: 1200
 
       - name: Save scanner state
-        uses: actions/cache/save@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+        uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         if: always()
         with:
           path: |
