@@ -1,0 +1,143 @@
+# Reusable workflow for syncing CLI reference YAML from upstream repositories.
+#
+# Upstream repos call this after generating their CLI reference YAML files.
+# The workflow copies the YAML to data/cli/<tool>/ and opens a PR.
+#
+# Example caller (in upstream repo):
+#
+#   jobs:
+#     generate:
+#       runs-on: ubuntu-latest
+#       steps:
+#         - uses: actions/checkout@v5
+#         - run: make generate-yaml-docs
+#         - uses: actions/upload-artifact@v4
+#           with:
+#             name: cli-yaml
+#             path: docs/yaml/*.yaml
+#
+#     sync:
+#       needs: generate
+#       uses: docker/docs/.github/workflows/sync-upstream-cli.yml@main
+#       with:
+#         tool: buildx
+#         version: ${{ github.ref_name }}
+#         data-files-id: cli-yaml
+#       secrets:
+#         token: ${{ secrets.DOCS_GITHUB_TOKEN }}
+
+name: sync-upstream-cli
+
+on:
+  workflow_call:
+    inputs:
+      tool:
+        description: "CLI tool name — subfolder under data/cli/ (e.g., buildx, compose, model)"
+        required: true
+        type: string
+      version:
+        description: "Version string for commit message and PR title (e.g., v0.33.0)"
+        required: true
+        type: string
+      data-files-id:
+        description: "Name of the uploaded artifact containing YAML reference files"
+        required: true
+        type: string
+    secrets:
+      token:
+        description: "GitHub token with contents:write and pull-requests:write on docker/docs"
+        required: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-24.04
+    env:
+      BRANCH: "bot/sync-${{ inputs.tool }}-cli"
+    steps:
+      - name: Checkout docker/docs
+        uses: actions/checkout@v5
+        with:
+          repository: docker/docs
+          token: ${{ secrets.token }}
+          fetch-depth: 0
+
+      - name: Download data files
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.data-files-id }}
+          path: /tmp/cli-data
+
+      - name: Copy data files
+        run: |
+          mkdir -p "data/cli/${{ inputs.tool }}"
+          rm -f "data/cli/${{ inputs.tool }}"/*.yaml
+          cp /tmp/cli-data/*.yaml "data/cli/${{ inputs.tool }}/"
+
+      - name: Check for changes
+        id: diff
+        run: |
+          git add "data/cli/${{ inputs.tool }}/"
+          if git diff --cached --quiet; then
+            echo "changes=false" >> "$GITHUB_OUTPUT"
+            echo "No changes detected" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "changes=true" >> "$GITHUB_OUTPUT"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            git diff --cached --stat >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Commit and push
+        if: steps.diff.outputs.changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git commit -m "cli(${{ inputs.tool }}): sync docs ${{ inputs.version }}"
+          git push -u origin "$BRANCH" --force
+
+      - name: Create or update PR
+        if: steps.diff.outputs.changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.token }}
+        run: |
+          TITLE="cli(${{ inputs.tool }}): sync docs ${{ inputs.version }}"
+
+          EXISTING=$(gh pr list --repo docker/docs --state open \
+            --head "$BRANCH" --json url --jq '.[0].url // empty')
+
+          if [ -n "$EXISTING" ]; then
+            echo "Updating existing PR: $EXISTING" >> "$GITHUB_STEP_SUMMARY"
+            gh pr edit "$EXISTING" --repo docker/docs \
+              --title "$TITLE" \
+              --body "$(cat <<EOF
+          ## Summary
+
+          Automated sync of CLI reference docs.
+
+          | | |
+          |---|---|
+          | **Tool** | \`${{ inputs.tool }}\` |
+          | **Version** | \`${{ inputs.version }}\` |
+          | **Source** | ${{ github.repository }}@\`$(echo ${{ github.sha }} | head -c 12)\` |
+          EOF
+          )"
+          else
+            echo "Creating new PR" >> "$GITHUB_STEP_SUMMARY"
+            gh pr create --repo docker/docs \
+              --title "$TITLE" \
+              --base main \
+              --head "$BRANCH" \
+              --body "$(cat <<EOF
+          ## Summary
+
+          Automated sync of CLI reference docs.
+
+          | | |
+          |---|---|
+          | **Tool** | \`${{ inputs.tool }}\` |
+          | **Version** | \`${{ inputs.version }}\` |
+          | **Source** | ${{ github.repository }}@\`$(echo ${{ github.sha }} | head -c 12)\` |
+          EOF
+          )"
+          fi
