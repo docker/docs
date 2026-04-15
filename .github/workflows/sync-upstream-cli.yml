@@ -43,9 +43,21 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { repo: docker/buildx,      folder: buildx,  target: update-docs, files: "",                        yaml_glob: "out/reference" }
-          - { repo: docker/compose,      folder: compose, target: docs-update, files: "",                        yaml_glob: "out/reference" }
-          - { repo: docker/model-runner, folder: model,   target: update-docs, files: "cmd/cli/docker-bake.hcl", yaml_glob: "." }
+          - repo: docker/buildx
+            folder: buildx
+            target: update-docs
+            yaml_glob: out/reference
+
+          - repo: docker/compose
+            folder: compose
+            target: docs-update
+            yaml_glob: out/reference
+
+          - repo: docker/model-runner
+            folder: model
+            target: update-docs
+            files: cmd/cli/docker-bake.hcl
+            yaml_glob: "."
     env:
       BRANCH: "bot/sync-${{ matrix.folder }}-cli"
     steps:
