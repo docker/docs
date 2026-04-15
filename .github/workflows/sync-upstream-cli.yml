@@ -1,18 +1,12 @@
 # Syncs CLI reference YAML from upstream repositories.
 #
 # Runs on a schedule to auto-detect new releases, or manually via workflow_dispatch.
-# For each configured upstream repo, runs the `docs-release` bake target via git
-# context to generate YAML, copies it to data/cli/<folder>/, and opens a PR.
+# For each configured upstream repo, runs its docs bake target via git context
+# to generate YAML, copies it to data/cli/<folder>/, and opens a PR.
 #
-# Upstream contract: define a `docs-release` bake target that outputs YAML files
-# to an `out/` directory. Example (in docker-bake.hcl):
-#
-#   target "docs-release" {
-#     target = "docs-release"
-#     output = ["out"]
-#   }
-#
-# The Dockerfile stage should produce *.yaml CLI reference files in /out/.
+# Upstream contract: a bake target that outputs *.yaml CLI reference files.
+# Target names and output paths are configured per-repo in the `repos` array below.
+# Long-term goal: standardize on a common `docs-release` target name across repos.
 
 name: sync-upstream-cli
 
@@ -29,7 +23,6 @@ on:
         options:
           - docker/buildx
           - docker/compose
-          - docker/cli
           - docker/model-runner
       version:
         description: "Git tag to sync (e.g., v0.33.0). Leave empty to use latest release."
@@ -40,16 +33,11 @@ permissions:
   contents: write
   pull-requests: write
 
-# Each upstream repo and its corresponding data/cli/ subfolder.
-# Add new entries here when onboarding a repo.
 env:
   SETUP_BUILDX_VERSION: "edge"
   SETUP_BUILDKIT_IMAGE: "moby/buildkit:latest"
 
 jobs:
-  # Build the matrix of repos to sync.
-  # On workflow_dispatch: sync only the selected repo.
-  # On schedule: sync all configured repos.
   prepare:
     runs-on: ubuntu-24.04
     outputs:
@@ -60,25 +48,43 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            // Upstream repos and their data/cli/ subfolder + hugo.yaml version key
+            // Each upstream repo with its bake configuration.
+            // - target: the bake target name that generates CLI YAML
+            // - files: bake file path (empty = root docker-bake.hcl)
+            // - yaml_glob: where the YAML ends up in the bake output
             const repos = [
-              { repo: "docker/buildx",        folder: "buildx" },
-              { repo: "docker/compose",        folder: "compose" },
-              { repo: "docker/cli",            folder: "engine" },
-              { repo: "docker/model-runner",   folder: "model" },
+              {
+                repo: "docker/buildx",
+                folder: "buildx",
+                target: "update-docs",
+                files: "",
+                yaml_glob: "out/reference",
+              },
+              {
+                repo: "docker/compose",
+                folder: "compose",
+                target: "docs-update",
+                files: "",
+                yaml_glob: "out/reference",
+              },
+              {
+                repo: "docker/model-runner",
+                folder: "model",
+                target: "update-docs",
+                files: "cmd/cli/docker-bake.hcl",
+                yaml_glob: ".",
+              },
             ];
 
-            const input_repo = context.payload.inputs?.repo || "";
-            const input_version = context.payload.inputs?.version || "";
+            const inputRepo = context.payload.inputs?.repo || "";
+            const inputVersion = context.payload.inputs?.version || "";
 
             let matrix = [];
             for (const r of repos) {
-              if (input_repo && r.repo !== input_repo) continue;
+              if (inputRepo && r.repo !== inputRepo) continue;
 
-              // Get the version to sync
-              let version = input_version;
+              let version = inputVersion;
               if (!version) {
-                // Fetch latest release from GitHub
                 try {
                   const { data: release } = await github.rest.repos.getLatestRelease({
                     owner: r.repo.split("/")[0],
@@ -115,11 +121,12 @@ jobs:
 
       - name: Check if already synced
         id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          # Check if a closed PR already exists for this version
           EXISTING=$(gh pr list --state all \
             --search "cli(${{ matrix.folder }}): sync docs ${{ matrix.version }} in:title" \
-            --json state,url --jq '.[0].state // empty')
+            --json state --jq '.[0].state // empty')
 
           if [ "$EXISTING" = "MERGED" ] || [ "$EXISTING" = "CLOSED" ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
@@ -127,8 +134,6 @@ jobs:
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
-        env:
-          GH_TOKEN: ${{ github.token }}
 
       - name: Set up Docker Buildx
         if: steps.check.outputs.skip != 'true'
@@ -142,17 +147,20 @@ jobs:
         uses: docker/bake-action@v7
         with:
           source: "${{ github.server_url }}/${{ matrix.repo }}.git#${{ matrix.version }}"
-          targets: docs-release
+          files: ${{ matrix.files || '' }}
+          targets: ${{ matrix.target }}
           provenance: false
           set: |
             *.output=/tmp/docs-release
+        env:
+          DOCS_FORMATS: yaml
 
       - name: Copy data files
         if: steps.check.outputs.skip != 'true'
         run: |
           mkdir -p "data/cli/${{ matrix.folder }}"
           rm -f "data/cli/${{ matrix.folder }}"/*.yaml
-          cp /tmp/docs-release/out/*.yaml "data/cli/${{ matrix.folder }}/"
+          cp /tmp/docs-release/${{ matrix.yaml_glob }}/*.yaml "data/cli/${{ matrix.folder }}/"
 
       - name: Check for changes
         if: steps.check.outputs.skip != 'true'
@@ -203,7 +211,6 @@ jobs:
 
           if [ -n "$EXISTING" ]; then
             echo "Updating existing PR: $EXISTING" >> "$GITHUB_STEP_SUMMARY"
-            git push -u origin "$BRANCH" --force
             gh pr edit "$EXISTING" --title "$TITLE" --body "$BODY"
           else
             echo "Creating new PR" >> "$GITHUB_STEP_SUMMARY"
