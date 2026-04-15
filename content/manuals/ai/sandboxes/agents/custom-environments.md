@@ -174,3 +174,58 @@ Because this template extends the `claude-code` base image, you run it with
 Template images are cached locally. The first use pulls from the registry;
 subsequent sandboxes reuse the cache. Cached images persist across sandbox
 creation and deletion, and are cleared when you run `sbx reset`.
+
+## Saving a sandbox as a template
+
+Instead of writing a Dockerfile, you can save a running sandbox's state as a
+template. This captures installed packages, configuration changes, and files
+into a reusable image — useful when you've set up an environment interactively
+and want to preserve it.
+
+### Save and reuse
+
+Stop the sandbox (or let the CLI prompt you), then save it with a name and
+tag:
+
+```console
+$ sbx save my-sandbox my-template:v1
+```
+
+The image is stored in the sandbox runtime's local image store. Create a new
+sandbox from it with the `-t` flag:
+
+```console
+$ sbx run -t my-template:v1 claude
+```
+
+### Export and import
+
+To share a saved template or move it to another machine, export it as a tar
+file:
+
+```console
+$ sbx save my-sandbox my-template:v1 --output my-template.tar
+```
+
+On the other machine, load the tar file and use it:
+
+```console
+$ sbx load my-template.tar
+$ sbx run -t my-template:v1 claude
+```
+
+### Limitations
+
+Agent configuration files are always recreated when a sandbox is created.
+Changes to user-level agent configuration files, such as
+`/home/agent/.claude/settings.json` and `/home/agent/.claude.json`, do not
+persist in saved templates.
+
+If the saved template was built for a different agent than the one you
+specify in `sbx run`, you get a warning. For example, saving a Claude
+sandbox and running it with `codex` produces:
+
+```text
+⚠ WARNING: template "my-template:v1" was built for the "claude" agent but you are using "codex".
+  The sandbox may not work correctly. Consider using: sbx run -t my-template:v1 claude
+```

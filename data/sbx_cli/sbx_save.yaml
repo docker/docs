@@ -3,8 +3,11 @@ synopsis: Save a snapshot of the sandbox as a template
 description: |-
     Save a snapshot of the sandbox as a template.
 
-    By default, the image is loaded into the host's Docker daemon (requires Docker to be running).
-    Use --output to save the image to a tar file instead.
+    The saved image is stored in the sandbox runtime's image store and can be
+    used as a template for new sandboxes with: sbx run -t TAG AGENT [WORKSPACE]
+
+    Use --output to also export the image to a tar file that can be shared
+    and loaded on another host with: sbx load FILE
 usage: sbx save SANDBOX TAG [flags]
 options:
     - name: help
@@ -13,18 +16,17 @@ options:
       usage: help for save
     - name: output
       shorthand: o
-      usage: |
-        Save image to specified tar file instead of loading into host Docker
+      usage: Also export the image to a tar file
 inherited_options:
     - name: debug
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
 example: |4-
-      # Load into host Docker (requires host Docker running)
+      # Save as a template for new sandboxes on this host
       sbx save my-sandbox myimage:v1.0
 
-      # Save to file (works without host Docker)
+      # Also export to a shareable tar file
       sbx save my-sandbox myimage:v1.0 --output /tmp/myimage.tar
 see_also:
     - sbx - Manage AI coding agent sandboxes.

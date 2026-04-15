@@ -18,6 +18,7 @@ see_also:
     - sbx completion - Generate the autocompletion script for the specified shell
     - sbx create - Create a sandbox for an agent
     - sbx exec - Execute a command inside a sandbox
+    - sbx load - Load an image from a tar file into the sandbox runtime
     - sbx login - Sign in to Docker
     - sbx logout - Sign out of Docker
     - sbx ls - List sandboxes
