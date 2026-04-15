@@ -4,10 +4,16 @@
 # The workflow copies the YAML to data/cli/<folder>/ and opens a PR.
 #
 # Uses the same input names as validate-upstream.yml so upstream repos
-# can share the generate step and swap validate/sync based on trigger:
+# can share the generate step and swap validate/sync based on trigger.
+#
+# Auth: uses a GitHub App (docker-docs-sync) installed on docker/docs.
+# The calling workflow mints a short-lived token and passes it as a secret.
+# App credentials are stored as org secrets (DOCS_SYNC_APP_ID, DOCS_SYNC_APP_PRIVATE_KEY).
+#
+# Example caller (e.g., in docker/buildx .github/workflows/docs-release.yml):
 #
 #   jobs:
-#     generate:
+#     docs-yaml:
 #       runs-on: ubuntu-latest
 #       steps:
 #         - uses: actions/checkout@v5
@@ -17,9 +23,23 @@
 #             name: cli-yaml
 #             path: docs/yaml/*.yaml
 #
+#     # Mint a short-lived token from the GitHub App
+#     token:
+#       runs-on: ubuntu-latest
+#       outputs:
+#         token: ${{ steps.app.outputs.token }}
+#       steps:
+#         - uses: actions/create-github-app-token@v2
+#           id: app
+#           with:
+#             app-id: ${{ vars.DOCS_SYNC_APP_ID }}
+#             private-key: ${{ secrets.DOCS_SYNC_APP_PRIVATE_KEY }}
+#             owner: docker
+#             repositories: docs
+#
 #     # On PR — validate that docs still build
 #     validate:
-#       needs: generate
+#       needs: docs-yaml
 #       uses: docker/docs/.github/workflows/validate-upstream.yml@main
 #       with:
 #         module-name: docker/buildx
@@ -28,14 +48,14 @@
 #
 #     # On release — sync to docker/docs
 #     sync:
-#       needs: generate
+#       needs: [docs-yaml, token]
 #       uses: docker/docs/.github/workflows/sync-upstream-cli.yml@main
 #       with:
 #         data-files-id: cli-yaml
 #         data-files-folder: buildx
 #         version: ${{ github.ref_name }}
 #       secrets:
-#         token: ${{ secrets.DOCS_GITHUB_TOKEN }}
+#         token: ${{ needs.token.outputs.token }}
 
 name: sync-upstream-cli
 
