@@ -58,8 +58,6 @@ jobs:
             target: update-docs
             files: cmd/cli/docker-bake.hcl
             yaml_glob: "."
-    env:
-      BRANCH: "bot/sync-${{ matrix.folder }}-cli"
     steps:
       - name: Resolve version
         id: version
@@ -122,62 +120,21 @@ jobs:
           rm -f "data/cli/${{ matrix.folder }}"/*.yaml
           cp /tmp/docs-release/${{ matrix.yaml_glob }}/*.yaml "data/cli/${{ matrix.folder }}/"
 
-      - name: Check for changes
+      - name: Create pull request
         if: steps.check.outputs.skip != 'true'
-        id: diff
-        env:
-          VERSION: ${{ steps.version.outputs.tag }}
-        run: |
-          git add "data/cli/${{ matrix.folder }}/"
-          if git diff --cached --quiet; then
-            echo "changes=false" >> "$GITHUB_OUTPUT"
-            echo "No changes for ${{ matrix.repo }} $VERSION" >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "changes=true" >> "$GITHUB_OUTPUT"
-            echo '```' >> "$GITHUB_STEP_SUMMARY"
-            git diff --cached --stat >> "$GITHUB_STEP_SUMMARY"
-            echo '```' >> "$GITHUB_STEP_SUMMARY"
-          fi
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: bot/sync-${{ matrix.folder }}-cli
+          title: "cli(${{ matrix.folder }}): sync docs ${{ steps.version.outputs.tag }}"
+          commit-message: "cli(${{ matrix.folder }}): sync docs ${{ steps.version.outputs.tag }}"
+          body: |
+            ## Summary
 
-      - name: Commit and push
-        if: steps.check.outputs.skip != 'true' && steps.diff.outputs.changes == 'true'
-        env:
-          VERSION: ${{ steps.version.outputs.tag }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -b "$BRANCH"
-          git commit -m "cli(${{ matrix.folder }}): sync docs $VERSION"
-          git push -u origin "$BRANCH" --force
+            Automated sync of CLI reference docs.
 
-      - name: Create or update PR
-        if: steps.check.outputs.skip != 'true' && steps.diff.outputs.changes == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          VERSION: ${{ steps.version.outputs.tag }}
-        run: |
-          TITLE="cli(${{ matrix.folder }}): sync docs $VERSION"
-
-          EXISTING=$(gh pr list --state open \
-            --head "$BRANCH" --json url --jq '.[0].url // empty')
-
-          BODY=$(cat <<EOF
-          ## Summary
-
-          Automated sync of CLI reference docs.
-
-          | | |
-          |---|---|
-          | **Tool** | \`${{ matrix.folder }}\` |
-          | **Version** | \`$VERSION\` |
-          | **Source** | [${{ matrix.repo }}@$VERSION](${{ github.server_url }}/${{ matrix.repo }}/tree/$VERSION) |
-          EOF
-          )
-
-          if [ -n "$EXISTING" ]; then
-            echo "Updating existing PR: $EXISTING" >> "$GITHUB_STEP_SUMMARY"
-            gh pr edit "$EXISTING" --title "$TITLE" --body "$BODY"
-          else
-            echo "Creating new PR" >> "$GITHUB_STEP_SUMMARY"
-            gh pr create --title "$TITLE" --base main --head "$BRANCH" --body "$BODY"
-          fi
+            | | |
+            |---|---|
+            | **Tool** | `${{ matrix.folder }}` |
+            | **Version** | `${{ steps.version.outputs.tag }}` |
+            | **Source** | [${{ matrix.repo }}@${{ steps.version.outputs.tag }}](${{ github.server_url }}/${{ matrix.repo }}/tree/${{ steps.version.outputs.tag }}) |
+          delete-branch: true
