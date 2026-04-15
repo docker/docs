@@ -1,9 +1,10 @@
 # Reusable workflow for syncing CLI reference YAML from upstream repositories.
 #
 # Upstream repos call this after generating their CLI reference YAML files.
-# The workflow copies the YAML to data/cli/<tool>/ and opens a PR.
+# The workflow copies the YAML to data/cli/<folder>/ and opens a PR.
 #
-# Example caller (in upstream repo):
+# Uses the same input names as validate-upstream.yml so upstream repos
+# can share the generate step and swap validate/sync based on trigger:
 #
 #   jobs:
 #     generate:
@@ -16,13 +17,23 @@
 #             name: cli-yaml
 #             path: docs/yaml/*.yaml
 #
+#     # On PR — validate that docs still build
+#     validate:
+#       needs: generate
+#       uses: docker/docs/.github/workflows/validate-upstream.yml@main
+#       with:
+#         module-name: docker/buildx
+#         data-files-id: cli-yaml
+#         data-files-folder: buildx
+#
+#     # On release — sync to docker/docs
 #     sync:
 #       needs: generate
 #       uses: docker/docs/.github/workflows/sync-upstream-cli.yml@main
 #       with:
-#         tool: buildx
-#         version: ${{ github.ref_name }}
 #         data-files-id: cli-yaml
+#         data-files-folder: buildx
+#         version: ${{ github.ref_name }}
 #       secrets:
 #         token: ${{ secrets.DOCS_GITHUB_TOKEN }}
 
@@ -31,16 +42,16 @@ name: sync-upstream-cli
 on:
   workflow_call:
     inputs:
-      tool:
-        description: "CLI tool name — subfolder under data/cli/ (e.g., buildx, compose, model)"
+      data-files-folder:
+        description: "Subfolder under data/cli/ (e.g., buildx, compose, model). Same as validate-upstream."
+        required: true
+        type: string
+      data-files-id:
+        description: "Name of the uploaded artifact containing YAML reference files. Same as validate-upstream."
         required: true
         type: string
       version:
         description: "Version string for commit message and PR title (e.g., v0.33.0)"
-        required: true
-        type: string
-      data-files-id:
-        description: "Name of the uploaded artifact containing YAML reference files"
         required: true
         type: string
     secrets:
@@ -52,7 +63,7 @@ jobs:
   sync:
     runs-on: ubuntu-24.04
     env:
-      BRANCH: "bot/sync-${{ inputs.tool }}-cli"
+      BRANCH: "bot/sync-${{ inputs.data-files-folder }}-cli"
     steps:
       - name: Checkout docker/docs
         uses: actions/checkout@v5
@@ -69,14 +80,14 @@ jobs:
 
       - name: Copy data files
         run: |
-          mkdir -p "data/cli/${{ inputs.tool }}"
-          rm -f "data/cli/${{ inputs.tool }}"/*.yaml
-          cp /tmp/cli-data/*.yaml "data/cli/${{ inputs.tool }}/"
+          mkdir -p "data/cli/${{ inputs.data-files-folder }}"
+          rm -f "data/cli/${{ inputs.data-files-folder }}"/*.yaml
+          cp /tmp/cli-data/*.yaml "data/cli/${{ inputs.data-files-folder }}/"
 
       - name: Check for changes
         id: diff
         run: |
-          git add "data/cli/${{ inputs.tool }}/"
+          git add "data/cli/${{ inputs.data-files-folder }}/"
           if git diff --cached --quiet; then
             echo "changes=false" >> "$GITHUB_OUTPUT"
             echo "No changes detected" >> "$GITHUB_STEP_SUMMARY"
@@ -93,7 +104,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$BRANCH"
-          git commit -m "cli(${{ inputs.tool }}): sync docs ${{ inputs.version }}"
+          git commit -m "cli(${{ inputs.data-files-folder }}): sync docs ${{ inputs.version }}"
           git push -u origin "$BRANCH" --force
 
       - name: Create or update PR
@@ -101,7 +112,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.token }}
         run: |
-          TITLE="cli(${{ inputs.tool }}): sync docs ${{ inputs.version }}"
+          TITLE="cli(${{ inputs.data-files-folder }}): sync docs ${{ inputs.version }}"
 
           EXISTING=$(gh pr list --repo docker/docs --state open \
             --head "$BRANCH" --json url --jq '.[0].url // empty')
@@ -117,7 +128,7 @@ jobs:
 
           | | |
           |---|---|
-          | **Tool** | \`${{ inputs.tool }}\` |
+          | **Tool** | \`${{ inputs.data-files-folder }}\` |
           | **Version** | \`${{ inputs.version }}\` |
           | **Source** | ${{ github.repository }}@\`$(echo ${{ github.sha }} | head -c 12)\` |
           EOF
@@ -135,7 +146,7 @@ jobs:
 
           | | |
           |---|---|
-          | **Tool** | \`${{ inputs.tool }}\` |
+          | **Tool** | \`${{ inputs.data-files-folder }}\` |
           | **Version** | \`${{ inputs.version }}\` |
           | **Source** | ${{ github.repository }}@\`$(echo ${{ github.sha }} | head -c 12)\` |
           EOF
