@@ -363,16 +363,5 @@ module:
         - source: docs/reference/dockerd.md
           target: content/reference/cli/dockerd.md
 
-    # Compose
-    - path: github.com/docker/compose/v5
-      mounts:
-        - source: docs/reference
-          target: data/cli/compose
-          files: ["*.yaml"]
-
-    # Model CLI
-    - path: github.com/docker/model-runner
-      mounts:
-        - source: cmd/cli/docs/reference
-          target: data/cli/model
-          files: ["*.yaml"]
+    # Compose and Model Runner CLI reference YAML is synced to data/cli/
+    # by the sync-upstream-cli workflow. No Hugo module mounts needed.
