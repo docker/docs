@@ -4,9 +4,7 @@
 # For each configured upstream repo, runs its docs bake target via git context
 # to generate YAML, copies it to data/cli/<folder>/, and opens a PR.
 #
-# Upstream contract: a bake target that outputs *.yaml CLI reference files.
-# Target names and output paths are configured per-repo in the `repos` array below.
-# Long-term goal: standardize on a common `docs-release` target name across repos.
+# To add a new repo: add an entry to the matrix and to the workflow_dispatch options.
 
 name: sync-upstream-cli
 
@@ -17,7 +15,7 @@ on:
   workflow_dispatch:
     inputs:
       repo:
-        description: "Upstream repo (e.g., docker/buildx)"
+        description: "Upstream repo"
         required: true
         type: choice
         options:
@@ -25,7 +23,7 @@ on:
           - docker/compose
           - docker/model-runner
       version:
-        description: "Git tag to sync (e.g., v0.33.0). Leave empty to use latest release."
+        description: "Git tag (e.g., v0.33.0). Leave empty for latest release."
         required: false
         type: string
 
@@ -38,82 +36,31 @@ env:
   SETUP_BUILDKIT_IMAGE: "moby/buildkit:latest"
 
 jobs:
-  prepare:
-    runs-on: ubuntu-24.04
-    outputs:
-      matrix: ${{ steps.matrix.outputs.result }}
-    steps:
-      - name: Build matrix
-        id: matrix
-        uses: actions/github-script@v7
-        with:
-          script: |
-            // Each upstream repo with its bake configuration.
-            // - target: the bake target name that generates CLI YAML
-            // - files: bake file path (empty = root docker-bake.hcl)
-            // - yaml_glob: where the YAML ends up in the bake output
-            const repos = [
-              {
-                repo: "docker/buildx",
-                folder: "buildx",
-                target: "update-docs",
-                files: "",
-                yaml_glob: "out/reference",
-              },
-              {
-                repo: "docker/compose",
-                folder: "compose",
-                target: "docs-update",
-                files: "",
-                yaml_glob: "out/reference",
-              },
-              {
-                repo: "docker/model-runner",
-                folder: "model",
-                target: "update-docs",
-                files: "cmd/cli/docker-bake.hcl",
-                yaml_glob: ".",
-              },
-            ];
-
-            const inputRepo = context.payload.inputs?.repo || "";
-            const inputVersion = context.payload.inputs?.version || "";
-
-            let matrix = [];
-            for (const r of repos) {
-              if (inputRepo && r.repo !== inputRepo) continue;
-
-              let version = inputVersion;
-              if (!version) {
-                try {
-                  const { data: release } = await github.rest.repos.getLatestRelease({
-                    owner: r.repo.split("/")[0],
-                    repo: r.repo.split("/")[1],
-                  });
-                  version = release.tag_name;
-                } catch (e) {
-                  core.warning(`Could not fetch latest release for ${r.repo}: ${e.message}`);
-                  continue;
-                }
-              }
-
-              matrix.push({ ...r, version });
-            }
-
-            core.info(JSON.stringify(matrix, null, 2));
-            return matrix;
-
   sync:
-    needs: prepare
-    if: ${{ fromJSON(needs.prepare.outputs.matrix).length > 0 }}
     runs-on: ubuntu-24.04
+    if: ${{ !inputs.repo || inputs.repo == matrix.repo }}
     strategy:
       fail-fast: false
       matrix:
-        include: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+        include:
+          - { repo: docker/buildx,      folder: buildx,  target: update-docs, files: "",                        yaml_glob: "out/reference" }
+          - { repo: docker/compose,      folder: compose, target: docs-update, files: "",                        yaml_glob: "out/reference" }
+          - { repo: docker/model-runner, folder: model,   target: update-docs, files: "cmd/cli/docker-bake.hcl", yaml_glob: "." }
     env:
       BRANCH: "bot/sync-${{ matrix.folder }}-cli"
     steps:
+      - name: Resolve version
+        id: version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "${{ inputs.version }}" ]; then
+            echo "tag=${{ inputs.version }}" >> "$GITHUB_OUTPUT"
+          else
+            TAG=$(gh api "repos/${{ matrix.repo }}/releases/latest" --jq '.tag_name')
+            echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout docker/docs
         uses: actions/checkout@v5
         with:
@@ -123,14 +70,15 @@ jobs:
         id: check
         env:
           GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.tag }}
         run: |
           EXISTING=$(gh pr list --state all \
-            --search "cli(${{ matrix.folder }}): sync docs ${{ matrix.version }} in:title" \
+            --search "cli(${{ matrix.folder }}): sync docs $VERSION in:title" \
             --json state --jq '.[0].state // empty')
 
           if [ "$EXISTING" = "MERGED" ] || [ "$EXISTING" = "CLOSED" ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
-            echo "Already synced ${{ matrix.repo }} ${{ matrix.version }}" >> "$GITHUB_STEP_SUMMARY"
+            echo "Already synced ${{ matrix.repo }} $VERSION" >> "$GITHUB_STEP_SUMMARY"
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
@@ -146,7 +94,7 @@ jobs:
         if: steps.check.outputs.skip != 'true'
         uses: docker/bake-action@v7
         with:
-          source: "${{ github.server_url }}/${{ matrix.repo }}.git#${{ matrix.version }}"
+          source: "${{ github.server_url }}/${{ matrix.repo }}.git#${{ steps.version.outputs.tag }}"
           files: ${{ matrix.files || '' }}
           targets: ${{ matrix.target }}
           provenance: false
@@ -165,11 +113,13 @@ jobs:
       - name: Check for changes
         if: steps.check.outputs.skip != 'true'
         id: diff
+        env:
+          VERSION: ${{ steps.version.outputs.tag }}
         run: |
           git add "data/cli/${{ matrix.folder }}/"
           if git diff --cached --quiet; then
             echo "changes=false" >> "$GITHUB_OUTPUT"
-            echo "No changes detected for ${{ matrix.repo }} ${{ matrix.version }}" >> "$GITHUB_STEP_SUMMARY"
+            echo "No changes for ${{ matrix.repo }} $VERSION" >> "$GITHUB_STEP_SUMMARY"
           else
             echo "changes=true" >> "$GITHUB_OUTPUT"
             echo '```' >> "$GITHUB_STEP_SUMMARY"
@@ -179,19 +129,22 @@ jobs:
 
       - name: Commit and push
         if: steps.check.outputs.skip != 'true' && steps.diff.outputs.changes == 'true'
+        env:
+          VERSION: ${{ steps.version.outputs.tag }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$BRANCH"
-          git commit -m "cli(${{ matrix.folder }}): sync docs ${{ matrix.version }}"
+          git commit -m "cli(${{ matrix.folder }}): sync docs $VERSION"
           git push -u origin "$BRANCH" --force
 
       - name: Create or update PR
         if: steps.check.outputs.skip != 'true' && steps.diff.outputs.changes == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.tag }}
         run: |
-          TITLE="cli(${{ matrix.folder }}): sync docs ${{ matrix.version }}"
+          TITLE="cli(${{ matrix.folder }}): sync docs $VERSION"
 
           EXISTING=$(gh pr list --state open \
             --head "$BRANCH" --json url --jq '.[0].url // empty')
@@ -204,8 +157,8 @@ jobs:
           | | |
           |---|---|
           | **Tool** | \`${{ matrix.folder }}\` |
-          | **Version** | \`${{ matrix.version }}\` |
-          | **Source** | [${{ matrix.repo }}@${{ matrix.version }}](${{ github.server_url }}/${{ matrix.repo }}/tree/${{ matrix.version }}) |
+          | **Version** | \`$VERSION\` |
+          | **Source** | [${{ matrix.repo }}@$VERSION](${{ github.server_url }}/${{ matrix.repo }}/tree/$VERSION) |
           EOF
           )
 
