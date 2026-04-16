@@ -92,16 +92,15 @@ system outside the workspace, the usual reasons for approval prompts (preventing
 destructive commands, network access, file modifications) are handled by the
 sandbox isolation layers instead.
 
-If you prefer to re-enable approval prompts for a specific agent, pass the
-agent's own CLI flags after the `--` separator. For example, to run Claude
-Code with its default permission checks instead of auto-approve:
+If you prefer to re-enable approval prompts, you have two options:
 
-```console
-$ sbx run claude --name my-sandbox -- --permission-mode default
-```
-
-The flags vary by agent. Refer to each agent's own documentation for the
-available permission or approval options.
+- **Change the permission mode inside the session.** Most agents let you
+  switch permission modes after startup. In Claude Code, use the
+  `/permissions` command to change the mode interactively.
+- **Build a custom template.** Create a
+  [custom environment](agents/custom-environments.md) that launches the
+  agent with different default flags. This is useful if your team wants a
+  consistent permission policy across sandboxes.
 
 ## How do I know if my agent is running in a sandbox?
 
