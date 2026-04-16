@@ -83,6 +83,26 @@ $ sbx exec -it <sandbox-name> bash
 $ echo $BRAVE_API_KEY
 ```
 
+## Why do agents run without approval prompts?
+
+The sandbox itself is the safety boundary. Because agents run inside an
+isolated microVM with [network policies](security/policy.md),
+[credential isolation](security/credentials.md), and no access to your host
+system outside the workspace, the usual reasons for approval prompts (preventing
+destructive commands, network access, file modifications) are handled by the
+sandbox isolation layers instead.
+
+If you prefer to re-enable approval prompts for a specific agent, pass the
+agent's own CLI flags after the `--` separator. For example, to run Claude
+Code with its default permission checks instead of auto-approve:
+
+```console
+$ sbx run claude --name my-sandbox -- --permission-mode default
+```
+
+The flags vary by agent. Refer to each agent's own documentation for the
+available permission or approval options.
+
 ## How do I know if my agent is running in a sandbox?
 
 Ask the agent. The agent can see whether or not it's running inside a sandbox.
