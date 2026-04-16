@@ -92,15 +92,10 @@ system outside the workspace, the usual reasons for approval prompts (preventing
 destructive commands, network access, file modifications) are handled by the
 sandbox isolation layers instead.
 
-If you prefer to re-enable approval prompts, you have two options:
-
-- **Change the permission mode inside the session.** Most agents let you
-  switch permission modes after startup. In Claude Code, use the
-  `/permissions` command to change the mode interactively.
-- **Build a custom template.** Create a
-  [custom environment](agents/custom-environments.md) that launches the
-  agent with different default flags. This is useful if your team wants a
-  consistent permission policy across sandboxes.
+If you prefer to re-enable approval prompts, change the permission mode
+inside the session. Most agents let you switch permission modes after
+startup. In Claude Code, use the `/permissions` command to change the mode
+interactively.
 
 ## How do I know if my agent is running in a sandbox?
 
