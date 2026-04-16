@@ -39,11 +39,7 @@ $ sbx policy allow network "**"
 Sandbox network isolation only proxies HTTP and HTTPS traffic. Non-HTTP
 protocols, including SSH, raw TCP, UDP, and ICMP, are blocked at the network
 layer. Adding an allow rule with `sbx policy allow` does not unblock these
-protocols because the allow list only applies to HTTP/HTTPS requests routed
-through the proxy.
-
-If `sbx policy log` shows entries with a **PROXY** value of `network`, the
-traffic is non-HTTP and is blocked regardless of your allow rules.
+protocols because policy rules only apply to HTTP/HTTPS requests.
 
 For Git operations over SSH, use HTTPS URLs instead:
 
