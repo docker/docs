@@ -63,6 +63,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed an issue where a failed update could leave Docker Desktop in a broken state. The installer now automatically reverts to the previous version and shows a clear error message.
 - Fixed a bug where a failed switch to Windows containers could leave Docker Desktop in a broken state, requiring a restart.
 - Fixed an issue where Docker Desktop failed to launch for users with `DEVHOME` set in their environment.
+- Temporarily rolled back process hardening that caused Electron crashes on Windows. Fixes [docker/desktop-feedback#245](https://github.com/docker/desktop-feedback/issues/245).
 
 ## 4.69.0
 
