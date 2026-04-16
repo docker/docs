@@ -184,6 +184,3 @@ The bundle contains daemon logs, diagnostic check results, and basic system
 information. When `--upload` is confirmed, the bundle is uploaded to Docker
 support and the command prints a diagnostics ID. Include this ID in your
 issue so the team can correlate it with the uploaded bundle.
-
-If you'd rather not upload, omit `--upload` to save the bundle locally as a
-ZIP archive, which you can inspect or attach to the issue manually.
