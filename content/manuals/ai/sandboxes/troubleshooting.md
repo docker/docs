@@ -36,12 +36,23 @@ $ sbx policy allow network "**"
 
 ## SSH and other non-HTTP connections fail
 
-Sandbox network isolation only proxies HTTP and HTTPS traffic. Non-HTTP
-protocols, including SSH, raw TCP, UDP, and ICMP, are blocked at the network
-layer. Adding an allow rule with `sbx policy allow` does not unblock these
-protocols because policy rules only apply to HTTP/HTTPS requests.
+Non-HTTP TCP connections like SSH can be allowed by adding a policy rule for
+the destination IP address and port. For example, to allow SSH to a specific
+host:
 
-For Git operations over SSH, use HTTPS URLs instead:
+```console
+$ sbx policy allow network "10.1.2.3:22"
+```
+
+Hostname-based rules (for example, `myhost:22`) don't work for non-HTTP
+connections because the proxy can't resolve the hostname to an IP address in
+this context. Use the IP address directly.
+
+UDP and ICMP traffic is blocked at the network layer and can't be unblocked
+with policy rules.
+
+For Git operations over SSH, you can either add an allow rule for the Git
+server's IP address or use HTTPS URLs instead:
 
 ```console
 $ git clone https://github.com/owner/repo.git

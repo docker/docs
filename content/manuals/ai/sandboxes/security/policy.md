@@ -15,9 +15,12 @@ to all sandboxes on the machine.
 ## Network policies
 
 The only way traffic can leave a sandbox is through an HTTP/HTTPS proxy on
-your host, which enforces access rules on every outbound request. Non-HTTP
-protocols such as SSH, raw TCP, UDP, and ICMP are blocked at the network
-layer and can't be unblocked with policy rules.
+your host, which enforces access rules on every outbound request.
+
+Non-HTTP TCP traffic, including SSH, can be allowed by adding a policy rule
+for the destination IP address and port (for example,
+`sbx policy allow network "10.1.2.3:22"`). UDP and ICMP traffic is blocked
+at the network layer and can't be unblocked with policy rules.
 
 ### Initial policy selection
 
@@ -173,11 +176,11 @@ my-sandbox   network  registry.npmjs.org     transparent  policykit  10:15:20 29
 
 The **PROXY** column shows how the request left the sandbox:
 
-| Value         | Description                                                                                         |
-| ------------- | --------------------------------------------------------------------------------------------------- |
-| `forward`     | Routed through the forward proxy. Supports [credential injection](credentials.md).                  |
-| `transparent` | Intercepted by the transparent proxy. Policy is enforced but credential injection is not available. |
-| `network`     | Non-HTTP traffic (raw TCP, UDP, ICMP). Always blocked.                                              |
+| Value         | Description                                                                                                    |
+| ------------- | -------------------------------------------------------------------------------------------------------------- |
+| `forward`     | Routed through the forward proxy. Supports [credential injection](credentials.md).                             |
+| `transparent` | Intercepted by the transparent proxy. Policy is enforced but credential injection is not available.            |
+| `network`     | Non-HTTP traffic (raw TCP, UDP, ICMP). TCP can be allowed with a policy rule; UDP and ICMP are always blocked. |
 
 Filter by sandbox name by passing it as an argument:
 
