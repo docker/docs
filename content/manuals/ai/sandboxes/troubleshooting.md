@@ -34,6 +34,23 @@ To allow all outbound traffic instead:
 $ sbx policy allow network "**"
 ```
 
+## SSH and other non-HTTP connections fail
+
+Sandbox network isolation only proxies HTTP and HTTPS traffic. Non-HTTP
+protocols, including SSH, raw TCP, UDP, and ICMP, are blocked at the network
+layer. Adding an allow rule with `sbx policy allow` does not unblock these
+protocols because the allow list only applies to HTTP/HTTPS requests routed
+through the proxy.
+
+If `sbx policy log` shows entries with a **PROXY** value of `network`, the
+traffic is non-HTTP and is blocked regardless of your allow rules.
+
+For Git operations over SSH, use HTTPS URLs instead:
+
+```console
+$ git clone https://github.com/owner/repo.git
+```
+
 ## Can't reach a service running on the host
 
 If a request to `127.0.0.1` or a local network IP returns "connection refused"

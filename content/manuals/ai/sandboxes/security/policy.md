@@ -15,7 +15,9 @@ to all sandboxes on the machine.
 ## Network policies
 
 The only way traffic can leave a sandbox is through an HTTP/HTTPS proxy on
-your host, which enforces access rules on every outbound request.
+your host, which enforces access rules on every outbound request. Non-HTTP
+protocols such as SSH, raw TCP, UDP, and ICMP are blocked at the network
+layer and can't be unblocked with policy rules.
 
 ### Initial policy selection
 
