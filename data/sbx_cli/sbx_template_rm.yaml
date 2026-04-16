@@ -1,0 +1,20 @@
+name: sbx template rm
+synopsis: Remove a template image
+description: |
+    Remove a template image from the sandbox runtime's image store.
+usage: sbx template rm TAG [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for rm
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      # Remove a template image
+      sbx template rm myimage:v1.0
+see_also:
+    - sbx template - Manage sandbox templates

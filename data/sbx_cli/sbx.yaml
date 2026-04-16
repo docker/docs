@@ -18,7 +18,6 @@ see_also:
     - sbx completion - Generate the autocompletion script for the specified shell
     - sbx create - Create a sandbox for an agent
     - sbx exec - Execute a command inside a sandbox
-    - sbx load - Load an image from a tar file into the sandbox runtime
     - sbx login - Sign in to Docker
     - sbx logout - Sign out of Docker
     - sbx ls - List sandboxes
@@ -27,7 +26,7 @@ see_also:
     - sbx reset - Reset all sandboxes and clean up state
     - sbx rm - Remove one or more sandboxes
     - sbx run - Run an agent in a sandbox
-    - sbx save - Save a snapshot of the sandbox as a template
     - sbx secret - Manage stored secrets
     - sbx stop - Stop one or more sandboxes without removing them
+    - sbx template - Manage sandbox templates
     - sbx version - Show Docker Sandboxes version information
