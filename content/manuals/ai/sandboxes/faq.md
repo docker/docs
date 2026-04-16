@@ -65,6 +65,17 @@ sandbox instead of on your host.
 > the sandbox. The agent process can read it directly. Only use this for
 > credentials where proxy-based injection isn't available.
 
+Variables in `/etc/sandbox-persistent.sh` are sourced automatically during
+interactive shell sessions (for example, `sbx exec -it <name> bash`) and by
+agents started with `sbx run`. If you run a command directly with
+`sbx exec <name> <command>`, the persistent environment file is not sourced
+because no login shell is started. To run a command with the persistent
+environment loaded, wrap it in a login shell:
+
+```console
+$ sbx exec -it <sandbox-name> bash -lc "your-command"
+```
+
 To verify the variable is set, open a shell in the sandbox:
 
 ```console
