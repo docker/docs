@@ -141,7 +141,7 @@ available in the default BuildKit image. But you can create your own image that
 includes CNI support.
 
 The following Dockerfile example shows a custom BuildKit image with CNI support.
-It uses the [CNI config for integration tests](https://github.com/moby/buildkit/blob/master//hack/fixtures/cni.json)
+It uses the [CNI config for integration tests](https://github.com/moby/buildkit/blob/master/hack/fixtures/cni.json)
 in BuildKit as an example. Feel free to include your own CNI configuration.
 
 ```dockerfile
