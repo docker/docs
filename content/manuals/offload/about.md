@@ -58,7 +58,7 @@ using environments such as virtual desktops, cloud-hosted development machines,
 or older hardware.
 
 Despite running remotely, features like bind mounts and port forwarding continue
-to work seamlessly, providing a local-like experience from within Docker Desktop
+to work, providing a local-like experience from within Docker Desktop
 and the CLI.
 
 ### Cloud resources

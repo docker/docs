@@ -43,7 +43,7 @@ aliases:
 
 Docker Hardened Images (DHI) are minimal, secure, and production-ready container
 base and application images maintained by Docker. Designed to reduce
-vulnerabilities and simplify compliance, DHI integrates easily into your
+vulnerabilities and simplify compliance, DHI integrates into your
 existing Docker-based workflows with little to no retooling required.
 
 This section helps you understand what Docker Hardened Images are, how they're
@@ -54,5 +54,6 @@ capabilities, see [Features](/dhi/features/).
 ## Learn more about Docker Hardened Images
 
 {{< grid
-  items="grid_about"
->}}
+items="grid_about"
+
+> }}
