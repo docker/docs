@@ -118,7 +118,7 @@ significant limitations:
   CVEs; scanners must implement proprietary feeds rather than using open
   standards that work with all images
 - No transparency: Proprietary feeds act as "black boxes" - vulnerabilities
-  simply disappear from vendor tools with no explanation
+  disappear from vendor tools with no explanation
 - Limited verifiability: Security teams have no way to independently verify
   why vulnerabilities are excluded or whether the reasoning is sound
 - Maintenance challenges: If you scan older image versions with standard
@@ -171,4 +171,3 @@ exceptions. This requires:
 
 Learn how to [scan Docker Hardened Images](/manuals/dhi/how-to/scan.md) with
 VEX-compliant scanners.
-

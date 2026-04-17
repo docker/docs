@@ -37,7 +37,7 @@ Each DHI undergoes rigorous checks to meet the following standards:
   ensure they are free from known Common Vulnerabilities and Exposures (CVEs).
 - Multi-architecture support: DHIs are built for multiple architectures
   (`linux/amd64` and `linux/arm64`) to ensure broad compatibility.
-- Kubernetes compatibility: Images are tested to run seamlessly within
+- Kubernetes compatibility: Images are tested to run within
   Kubernetes clusters, ensuring they meet the requirements for container
   orchestration environments.
 
@@ -101,23 +101,23 @@ You can view and verify this attestation using the Docker Scout CLI.
 
    Example output:
 
-    ```console
-        v SBOM obtained from attestation, 101 packages found
-        v Provenance obtained from attestation
-        {
-          "reportFormat": "CTRF",
-          "results": {
-            "summary": {
-              "failed": 0,
-              "passed": 1,
-              "skipped": 0,
-              "start": 1749216533,
-              "stop": 1749216574,
-              "tests": 1
-            },
-            "tests": [
-              {
-                ...
+   ```console
+       v SBOM obtained from attestation, 101 packages found
+       v Provenance obtained from attestation
+       {
+         "reportFormat": "CTRF",
+         "results": {
+           "summary": {
+             "failed": 0,
+             "passed": 1,
+             "skipped": 0,
+             "start": 1749216533,
+             "stop": 1749216574,
+             "tests": 1
+           },
+           "tests": [
+             {
+               ...
    ```
 
 2. Verify the test attestation signature. To ensure the attestation is authentic
@@ -131,7 +131,7 @@ You can view and verify this attestation using the Docker Scout CLI.
    ```
 
    Example output:
-   
+
    ```console
     v SBOM obtained from attestation, 101 packages found
     v Provenance obtained from attestation
@@ -146,7 +146,7 @@ You can view and verify this attestation using the Docker Scout CLI.
 
     i Signature payload
     ...
-    ```
+   ```
 
 If the attestation is valid, Docker Scout will confirm the signature and show
 the matching `cosign verify` command.

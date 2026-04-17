@@ -3,18 +3,18 @@ title: Design guidelines for Docker extensions
 linkTitle: Guidelines
 description: Docker extension design
 keywords: Docker, extensions, design
-aliases: 
- - /desktop/extensions-sdk/design/design-guidelines/
+aliases:
+  - /desktop/extensions-sdk/design/design-guidelines/
 weight: 10
 ---
 
 At Docker, we aim to build tools that integrate into a user's existing workflows rather than requiring them to adopt new ones. We strongly recommend that you follow these guidelines when creating extensions. We review and approve your Marketplace publication based on these requirements.
 
 Here is a simple checklist to go through when creating your extension:
+
 - Is it easy to get started?
 - Is it easy to use?
 - Is it easy to get help when needed?
-
 
 ## Create a consistent experience with Docker Desktop
 
@@ -32,7 +32,7 @@ Use the [Docker Material UI Theme](https://www.npmjs.com/package/@docker/docker-
 
   ![Header that sets the context](images/header.webp)
 
-- Avoid embedding terminal windows. The advantage we have with Docker Desktop over the CLI is that we have the opportunity to provide rich information to users. Make use of this interface as much as possible. 
+- Avoid embedding terminal windows. The advantage we have with Docker Desktop over the CLI is that we have the opportunity to provide rich information to users. Make use of this interface as much as possible.
 
   ![Terminal window used incorrectly](images/terminal_window_dont.webp)
 
@@ -58,10 +58,10 @@ Use the [Docker Material UI Theme](https://www.npmjs.com/package/@docker/docker-
 
 ## Onboarding new users
 
-When creating your extension, ensure that first time users of the extension and your product can understand its value-add and adopt it easily. Ensure you include contextual help within the extension.
+When creating your extension, ensure that first time users of the extension and your product can understand its value-add and adopt it. Ensure you include contextual help within the extension.
 
 - Ensure that all necessary information is added to the extensions Marketplace as well as the extensions detail page. This should include:
-  - Screenshots of the extension. Note that the recommended size for screenshots is 2400x1600 pixels. 
+  - Screenshots of the extension. Note that the recommended size for screenshots is 2400x1600 pixels.
   - A detailed description that covers what the purpose of the extension is, who would find it useful and how it works.
   - Link to necessary resources such as documentation.
 - If your extension has particularly complex functionality, add a demo or video to the start page. This helps onboard a first time user quickly.

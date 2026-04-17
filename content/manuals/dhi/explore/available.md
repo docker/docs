@@ -19,7 +19,7 @@ available images, tags, and metadata from the command line.
 
 DHI includes a selection of popular frameworks and application images, each
 hardened and maintained to ensure security and compliance. These images
-integrate seamlessly into existing workflows, allowing developers to focus on
+integrate into existing workflows, allowing developers to focus on
 building applications without compromising on security.
 
 For example, you might find repositories like the following in the DHI catalog:
@@ -63,13 +63,13 @@ To accommodate different stages of the application lifecycle, DHI offers all
 language framework images and select application images in two variants:
 
 - Development (dev) images: Equipped with necessary development tools and
-libraries, these images facilitate the building and testing of applications in a
-secure environment. They include a shell, package manager, a root user, and
-other tools needed for development.
+  libraries, these images facilitate the building and testing of applications in a
+  secure environment. They include a shell, package manager, a root user, and
+  other tools needed for development.
 
 - Runtime images: Stripped of development tools, these images contain only the
-essential components needed to run applications, ensuring a minimal attack
-surface in production.
+  essential components needed to run applications, ensuring a minimal attack
+  surface in production.
 
 This separation supports multi-stage builds, enabling developers to compile code
 in a secure build environment and deploy it using a lean runtime image.
@@ -95,6 +95,7 @@ environments.
 You can recognize FIPS variants by their tag that includes `-fips`.
 
 For example:
+
 - `3.13-fips`: FIPS variant of the Python 3.13 image
 - `3.9.23-debian12-fips`: FIPS variant of the Debian-based Python 3.9.23 image
 
