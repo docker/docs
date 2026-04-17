@@ -24,10 +24,33 @@ Rootless mode does not use binaries with `SETUID` bits or file capabilities,
 except `newuidmap` and `newgidmap`, which are needed to allow multiple
 UIDs/GIDs to be used in the user namespace.
 
+### User ID mapping
+
+The UID mapping in rootless mode differs from `userns-remap` mode. In rootless
+mode, UID 0 (root) inside the container maps to the host UID of the user
+running the Docker daemon, not the first subordinate UID. Non-zero UIDs map
+to the subordinate UIDs from `/etc/subuid`.
+
+For example, if the user `testuser` has UID `1001` and `/etc/subuid` contains
+`testuser:231072:65536`:
+
+| UID in container | Host UID   | Notes                                           |
+| ---------------- | ---------- | ----------------------------------------------- |
+| 0 (root)         | 1001       | Maps to the host UID of the user running Docker |
+| 1                | 231072     | First subordinate UID from `/etc/subuid`        |
+| 2                | 231073     |                                                 |
+| n                | 231071 + n |                                                 |
+
+In `userns-remap` mode, UID 0 maps to the first subordinate UID (231072 in
+this example), not to the user's own UID.
+
+This distinction matters when configuring bind mount permissions. To grant a
+non-root container user access to host files, map the file permissions to the
+corresponding subordinate UID on the host.
 
 ## Prerequisites
 
--  You must install `newuidmap` and `newgidmap` on the host. These commands
+- You must install `newuidmap` and `newgidmap` on the host. These commands
   are provided by the `uidmap` package on most distributions.
 
 - `/etc/subuid` and `/etc/subgid` should contain at least 65,536 subordinate
@@ -53,13 +76,15 @@ when the prerequisites are not satisfied.
 > [!NOTE]
 >
 > If the system-wide Docker daemon is already running, consider disabling it:
->```console
->$ sudo systemctl disable --now docker.service docker.socket
->$ sudo rm /var/run/docker.sock
->```
+>
+> ```console
+> $ sudo systemctl disable --now docker.service docker.socket
+> $ sudo rm /var/run/docker.sock
+> ```
+>
 > Should you choose not to shut down the `docker` service and socket, you will need to use the `--force`
 > parameter in the next section. There are no known issues, but until you shutdown and disable you're
-> still running rootful Docker. 
+> still running rootful Docker.
 
 {{< tabs >}}
 {{< tab name="With packages (RPM/DEB)" >}}
@@ -128,6 +153,7 @@ The binaries will be installed at `~/bin`.
 {{< /tabs >}}
 
 Run `docker info` to confirm that the `docker` client is connecting to the Rootless daemon:
+
 ```console
 $ docker info
 Client: Docker Engine - Community
