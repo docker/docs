@@ -199,7 +199,7 @@ The following steps explain each part of the `Dockerfile`. For more details, see
    The `COPY` command transfers the `requirements.txt` file from
    your local machine into the Docker image. This file lists all Python
    dependencies required by the application. Copying it into the container
-   lets the next command (`RUN pip install`) to install these dependencies
+   lets the next command (`RUN pip install`) install these dependencies
    inside the image environment.
 
 4. Install the Python dependencies in the image.
@@ -270,7 +270,6 @@ To run the application using Docker:
    ```
 
    The following is a break down of the command:
-
    - `docker build`: This is the primary command used to build a Docker image
      from a Dockerfile and a context. The context is typically a set of files at
      a specified location, often the directory containing the Dockerfile.
@@ -301,7 +300,6 @@ To run the application using Docker:
    ```
 
    The following is a break down of the command:
-
    - `docker run`: This is the primary command used to run a new container from
      a Docker image.
    - `-it`: This is a combination of two options:
