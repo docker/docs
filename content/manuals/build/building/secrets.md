@@ -194,6 +194,13 @@ To authenticate the builder to the Git server, set the `GIT_AUTH_TOKEN`
 environment variable to contain a valid GitLab access token, and pass it as a
 secret to the build:
 
+> [!NOTE]
+>
+> `GIT_AUTH_TOKEN` and `GIT_AUTH_HEADER` are not compatible with GitLab's
+> `CI_JOB_TOKEN`. GitLab CI job tokens require Basic authentication with the
+> username `gitlab-ci-token`, but BuildKit always uses `x-access-token` as the
+> username for Basic auth. Use a Personal Access Token instead.
+
 ```console
 $ GIT_AUTH_TOKEN=$(cat gitlab-token.txt) docker build \
   --secret id=GIT_AUTH_TOKEN \
