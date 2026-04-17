@@ -8,7 +8,7 @@ Before you begin setting up Laravel with Docker Compose, make sure you meet the 
 
 ## Docker and Docker Compose
 
-You need Docker and Docker Compose installed on your system. Docker allows you to containerize applications, and Docker Compose helps you manage multi-container applications.
+You need Docker and Docker Compose installed on your system. Docker lets you containerize applications, and Docker Compose helps you manage multi-container applications.
 
 - Docker: Make sure Docker is installed and running on your machine. Refer to the [Docker installation guide](/get-docker/) to install Docker.
 - Docker Compose: Docker Compose is included with Docker Desktop, but you can also follow the [Docker Compose installation guide](/compose/install/) if needed.
