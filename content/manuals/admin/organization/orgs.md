@@ -12,16 +12,16 @@ aliases:
 There are multiple ways to create an organization. You can either:
 
 - Create a new organization using the **Create Organization** option in the
-Admin Console or Docker Hub
+  Admin Console or Docker Hub
 - Convert an existing user account to an organization
 
-These procedures walk you through creating an organization from the Admin Console. 
+These procedures walk you through creating an organization from the Admin Console.
 
 ## Prerequisites
 
-* Before you create an organization, you need a [Docker ID](/accounts/create-account/). 
-* For prerequisites and detailed instructions on converting an existing user account to an organization, see
-[Convert an account into an organization](/manuals/admin/organization/convert-account.md).
+- Before you create an organization, you need a [Docker ID](/accounts/create-account/).
+- For prerequisites and detailed instructions on converting an existing user account to an organization, see
+  [Convert an account into an organization](/manuals/admin/organization/convert-account.md).
 
 > [!TIP]
 > Need a different plan for your team's needs? Review different [Docker subscriptions and features](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminOrgs) to choose a subscription for your organization.
@@ -29,18 +29,18 @@ These procedures walk you through creating an organization from the Admin Consol
 ## Create an organization
 
 1. Sign in to [Docker Home](https://app.docker.com/) and navigate to the bottom
-of the organization list. Select **Create new organization**.
+   of the organization list. Select **Create new organization**.
 1. Choose a subscription for your organization, a billing cycle, and specify how many seats you need. See [Docker Pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminOrgs) for details on the features offered in the Team and Business subscription.
 1. Select **Continue to profile**, then **Create an organization** to create a new organization.
 1. Enter an **Organization namespace**. This is the official, unique name for
-your organization in Docker Hub. 
-   * It's not possible to change the name of the organization after you've created it.
-   * Your Docker ID and organization can't share the same name. 
-   * If you want to use your Docker ID as the organization name, then you must first [convert your account into an organization](/manuals/admin/organization/convert-account.md).
-1. Enter your **Company name**. This is the full name of your company. 
-   * Docker displays the company name on your organization page and in the details of any
-   public images you publish. 
-   * You can update the company name anytime by navigating to your organization's **Settings** page.
+   your organization in Docker Hub.
+   - It's not possible to change the name of the organization after you've created it.
+   - Your Docker ID and organization can't share the same name.
+   - If you want to use your Docker ID as the organization name, then you must first [convert your account into an organization](/manuals/admin/organization/convert-account.md).
+1. Enter your **Company name**. This is the full name of your company.
+   - Docker displays the company name on your organization page and in the details of any
+     public images you publish.
+   - You can update the company name anytime by navigating to your organization's **Settings** page.
 1. Select **Continue to billing** to continue, then enter your organization's billing information. Select **Continue to payment** to continue to the billing portal.
 1. Provide your payment details and select **Purchase**.
 
@@ -51,10 +51,10 @@ You've now created an organization.
 To view an organization in the Admin Console:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your
-organization.
+   organization.
 1. From the left-hand navigation menu, select **Admin Console**.
 
-The Admin Console contains many options that let you to
+The Admin Console contains many options that let you
 configure your organization.
 
 ## Merge organizations
