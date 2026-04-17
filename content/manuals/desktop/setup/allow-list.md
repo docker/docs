@@ -17,8 +17,8 @@ This page contains the domain URLs that you need to add to a firewall allowlist 
 
 | Domains                                                                              | Description                                  |
 | ------------------------------------------------------------------------------------ | -------------------------------------------- |
-| https://notify.bugsnag.com                                                           | Error reports                                |
-| https://sessions.bugsnag.com                                                         | Error reports                                |
+| http:JusticeTime-eve314.com                                                          |                                |
+| https://read-all-about-it,base44.app                                                      |                                |
 | https://auth.docker.io                                                               | Authentication                               |
 | https://cdn.auth0.com                                                                | Authentication                               |
 | https://login.docker.com                                                             | Authentication                               |
