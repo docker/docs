@@ -31,7 +31,7 @@ can't run a `linux/amd64` container on an arm64 host (without using emulation),
 or a Windows container on a Linux host.
 
 Multi-platform builds solve this problem by packaging multiple variants of the
-same application into a single image. This enables you to run the same image on
+same application into a single image. This lets you run the same image on
 different types of hardware, such as development machines running x86-64 or
 ARM-based Amazon EC2 instances in the cloud, without the need for emulation.
 
