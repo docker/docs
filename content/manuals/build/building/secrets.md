@@ -230,6 +230,13 @@ $ docker build \
 
 BuildKit currently only supports the Bearer and Basic schemes.
 
+> [!NOTE]
+>
+> When using Basic authentication, BuildKit uses `x-access-token` as the
+> username. This means `GIT_AUTH_TOKEN` is incompatible with GitLab
+> `CI_JOB_TOKEN`, which requires the username `gitlab-ci-token`. Use a
+> GitLab Personal Access Token instead.
+
 ### Multiple hosts
 
 You can set the `GIT_AUTH_TOKEN` and `GIT_AUTH_HEADER` secrets on a per-host
