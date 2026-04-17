@@ -152,13 +152,13 @@ $ sudo dnf config-manager addrepo --from-repofile {{% param "download-url-base" 
 
    > [!NOTE]
    >
-   > If the Docker service fails to start with `failed to find iptables`
-   > in the logs, set the `iptables` alternative to `iptables-nft` and
-   > start Docker again:
+   > If the Docker service fails to start and `journalctl -u docker`
+   > shows `failed to find iptables`, point the `iptables` command to
+   > `iptables-nft` using `alternatives` and restart the service:
    >
    > ```console
-   > $ sudo alternatives --set iptables /usr/sbin/iptables-nft
-   > $ sudo systemctl enable --now docker
+   > $ sudo alternatives --set iptables /usr/bin/iptables-nft
+   > $ sudo systemctl restart docker
    > ```
 
 3. Verify that the installation is successful by running the `hello-world` image:
