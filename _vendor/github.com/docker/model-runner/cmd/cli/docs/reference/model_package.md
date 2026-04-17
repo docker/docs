@@ -42,17 +42,18 @@ Packaging behavior:
 
 ### Options
 
-| Name                | Type          | Default | Description                                                                            |
-|:--------------------|:--------------|:--------|:---------------------------------------------------------------------------------------|
-| `--chat-template`   | `string`      |         | absolute path to chat template file (must be Jinja format)                             |
-| `--context-size`    | `uint64`      | `0`     | context size in tokens                                                                 |
-| `--dduf`            | `string`      |         | absolute path to DDUF archive file (Diffusers Unified Format)                          |
-| `--from`            | `string`      |         | reference to an existing model to repackage                                            |
-| `--gguf`            | `string`      |         | absolute path to gguf file                                                             |
-| `-l`, `--license`   | `stringArray` |         | absolute path to a license file                                                        |
-| `--mmproj`          | `string`      |         | absolute path to multimodal projector file                                             |
-| `--push`            | `bool`        |         | push to registry (if not set, the model is loaded into the Model Runner content store) |
-| `--safetensors-dir` | `string`      |         | absolute path to directory containing safetensors files and config                     |
+| Name                | Type          | Default  | Description                                                                            |
+|:--------------------|:--------------|:---------|:---------------------------------------------------------------------------------------|
+| `--chat-template`   | `string`      |          | absolute path to chat template file (must be Jinja format)                             |
+| `--context-size`    | `uint64`      | `0`      | context size in tokens                                                                 |
+| `--dduf`            | `string`      |          | absolute path to DDUF archive file (Diffusers Unified Format)                          |
+| `--format`          | `string`      | `docker` | output artifact format: "docker" (default) or "cncf" (CNCF ModelPack spec)             |
+| `--from`            | `string`      |          | reference to an existing model to repackage                                            |
+| `--gguf`            | `string`      |          | absolute path to gguf file                                                             |
+| `-l`, `--license`   | `stringArray` |          | absolute path to a license file                                                        |
+| `--mmproj`          | `string`      |          | absolute path to multimodal projector file                                             |
+| `--push`            | `bool`        |          | push to registry (if not set, the model is loaded into the Model Runner content store) |
+| `--safetensors-dir` | `string`      |          | absolute path to directory containing safetensors files and config                     |
 
 
 <!---MARKER_GEN_END-->

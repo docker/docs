@@ -1,0 +1,14 @@
+command: docker model context rm
+aliases: docker model context rm, docker model context remove
+short: Remove one or more Model Runner contexts
+long: Remove one or more Model Runner contexts
+usage: docker model context rm NAME [NAME...]
+pname: docker model context
+plink: docker_model_context.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+
