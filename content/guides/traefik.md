@@ -1,6 +1,6 @@
 ---
 title: HTTP routing with Traefik
-description: &desc Use Traefik to easily route traffic between multiple containers or non-containerized workloads
+description: &desc Use Traefik to route traffic between multiple containers or non-containerized workloads
 keywords: traefik, container-supported development
 linktitle: HTTP routing with Traefik
 summary: *desc
@@ -288,41 +288,41 @@ With this file, the only change is to the Compose configuration for Traefik. The
 1. The configuration file is mounted into the Traefik container (the exact destination path is up to you)
 2. The `command` is updated to add the file provider and point to the location of the configuration file
 
-  {{< tabs >}}
-  {{< tab name="Using DHI image" >}}
+{{< tabs >}}
+{{< tab name="Using DHI image" >}}
 
-  ```yaml
-  services:
-    proxy:
-      image: dhi.io/traefik:3.6.2
-      command: --providers.docker --providers.file.filename=/config/traefik-config.yaml --api.insecure
-      ports:
-        - 80:80
-        - 8080:8080
-      volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-        - ./dev/traefik-config.yaml:/config/traefik-config.yaml
-  ```
+```yaml
+services:
+  proxy:
+    image: dhi.io/traefik:3.6.2
+    command: --providers.docker --providers.file.filename=/config/traefik-config.yaml --api.insecure
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./dev/traefik-config.yaml:/config/traefik-config.yaml
+```
 
-  {{< /tab >}}
+{{< /tab >}}
 
-  {{< tab name="Using official image" >}}
+{{< tab name="Using official image" >}}
 
-  ```yaml
-  services:
-    proxy:
-      image: traefik:v3.6.2
-      command: --providers.docker --providers.file.filename=/config/traefik-config.yaml --api.insecure
-      ports:
-        - 80:80
-        - 8080:8080
-      volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-        - ./dev/traefik-config.yaml:/config/traefik-config.yaml
-  ```
+```yaml
+services:
+  proxy:
+    image: traefik:v3.6.2
+    command: --providers.docker --providers.file.filename=/config/traefik-config.yaml --api.insecure
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./dev/traefik-config.yaml:/config/traefik-config.yaml
+```
 
-  {{< /tab >}}
-  {{< /tabs >}}
+{{< /tab >}}
+{{< /tabs >}}
 
 ### Starting the example app
 
@@ -364,4 +364,4 @@ To run the example app that forwards requests from Traefik to native-running app
 
 ## Recap
 
-Running multiple services doesn’t have to require tricky port configuration and a good memory. With tools like Traefik, it’s easy to launch the services you need and easily access them - whether they’re for the app itself (such as the frontend and backend) or for additional development tooling (such as phpMyAdmin).
+Running multiple services doesn’t have to require tricky port configuration and a good memory. With tools like Traefik, you can launch the services you need and access them - whether they’re for the app itself (such as the frontend and backend) or for additional development tooling (such as phpMyAdmin).

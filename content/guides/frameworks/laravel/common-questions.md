@@ -18,7 +18,7 @@ To debug your Laravel application in a Docker environment, use **Xdebug**. In th
 
 ## 3. Can I use Docker Compose with databases other than PostgreSQL?
 
-Yes, Docker Compose supports various database services for Laravel. While PostgreSQL is used in the examples, you can easily substitute **MySQL**, **MariaDB**, or even **SQLite**. Update the `compose.*.yaml` file to specify the required Docker image and adjust your `.env` file to reflect the new database configuration.
+Yes, Docker Compose supports various database services for Laravel. While PostgreSQL is used in the examples, you can substitute **MySQL**, **MariaDB**, or even **SQLite**. Update the `compose.*.yaml` file to specify the required Docker image and adjust your `.env` file to reflect the new database configuration.
 
 ## 4. How can I persist data in development and production?
 

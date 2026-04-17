@@ -4,7 +4,6 @@ linkTitle: Develop your app
 weight: 30
 keywords: angular, development, node
 description: Learn how to develop your Angular application locally using containers.
-
 ---
 
 ## Prerequisites
@@ -18,6 +17,7 @@ Complete [Containerize Angular application](containerize.md).
 In this section, you'll learn how to set up both production and development environments for your containerized Angular application using Docker Compose. This setup allows you to serve a static production build via Nginx and to develop efficiently inside containers using a live-reloading dev server with Compose Watch.
 
 You’ll learn how to:
+
 - Configure separate containers for production and development
 - Enable automatic file syncing using Compose Watch in development
 - Debug and live-preview your changes in real-time without manual rebuilds
@@ -68,7 +68,6 @@ CMD ["npm", "start", "--", "--host=0.0.0.0"]
 
 This file sets up a lightweight development environment for your Angular application using the dev server.
 
-
 ### Step 2: Update your `compose.yaml` file
 
 Open your `compose.yaml` file and define two services: one for production (`angular-prod`) and one for development (`angular-dev`).
@@ -97,6 +96,7 @@ services:
           path: .
           target: /app
 ```
+
 - The `angular-prod` service builds and serves your static production app using Nginx.
 - The `angular-dev` service runs your Angular development server with live reload and hot module replacement.
 - `watch` triggers file sync with Compose Watch.
@@ -132,15 +132,15 @@ To verify that Compose Watch is working correctly:
 
 2. Locate the following line:
 
-    ```html
-    <h1>Docker Angular Sample Application</h1>
-    ```
+   ```html
+   <h1>Docker Angular Sample Application</h1>
+   ```
 
 3. Change it to:
 
-    ```html
-    <h1>Hello from Docker Compose Watch</h1>
-    ```
+   ```html
+   <h1>Hello from Docker Compose Watch</h1>
+   ```
 
 4. Save the file.
 
@@ -155,10 +155,11 @@ You should see the updated text appear instantly, without needing to rebuild the
 In this section, you set up a complete development and production workflow for your Angular application using Docker and Docker Compose.
 
 Here’s what you accomplished:
-- Created a `Dockerfile.dev` to streamline local development with hot reloading  
-- Defined separate `angular-dev` and `angular-prod` services in your `compose.yaml` file  
-- Enabled real-time file syncing using Compose Watch for a smoother development experience  
-- Verified that live updates work seamlessly by modifying and previewing a component
+
+- Created a `Dockerfile.dev` to streamline local development with hot reloading
+- Defined separate `angular-dev` and `angular-prod` services in your `compose.yaml` file
+- Enabled real-time file syncing using Compose Watch for a smoother development experience
+- Verified that live updates work by modifying and previewing a component
 
 With this setup, you're now equipped to build, run, and iterate on your Angular app entirely within containers—efficiently and consistently across environments.
 
@@ -168,11 +169,11 @@ With this setup, you're now equipped to build, run, and iterate on your Angular 
 
 Deepen your knowledge and improve your containerized development workflow with these guides:
 
-- [Using Compose Watch](/manuals/compose/how-tos/file-watch.md) – Automatically sync source changes during development  
-- [Multi-stage builds](/manuals/build/building/multi-stage.md) – Create efficient, production-ready Docker images  
+- [Using Compose Watch](/manuals/compose/how-tos/file-watch.md) – Automatically sync source changes during development
+- [Multi-stage builds](/manuals/build/building/multi-stage.md) – Create efficient, production-ready Docker images
 - [Dockerfile best practices](/build/building/best-practices/) – Write clean, secure, and optimized Dockerfiles.
 - [Compose file reference](/compose/compose-file/) – Learn the full syntax and options available for configuring services in `compose.yaml`.
-- [Docker volumes](/storage/volumes/) – Persist and manage data between container runs  
+- [Docker volumes](/storage/volumes/) – Persist and manage data between container runs
 
 ## Next steps
 

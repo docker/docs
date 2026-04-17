@@ -36,7 +36,7 @@ efficient management.
 Docker Compose solves the problem of managing multi-container Docker
 applications by providing a simple way to define, configure, and run all the
 containers needed for an application using a single YAML file. This approach
-helps developers to easily set up, share, and maintain consistent development,
+helps developers set up, share, and maintain consistent development,
 testing, and production environments, ensuring that complex applications can be
 deployed with all their dependencies and services properly configured and
 orchestrated.

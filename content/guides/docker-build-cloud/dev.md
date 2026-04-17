@@ -4,7 +4,7 @@ description: Learn how to use Docker Build Cloud for local builds.
 weight: 20
 ---
 
-With Docker Build Cloud, you can easily shift the build workload from local machines
+With Docker Build Cloud, you can shift the build workload from local machines
 to the cloud, helping you achieve faster build times, especially for multi-platform builds.
 
 In this demo, you'll see:

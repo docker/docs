@@ -95,7 +95,7 @@ Hardware requirements:
 - Storage: 2.31 GB
 
 If your machine exceeds those requirements, consider running the application with a larger
-context size or a larger model to improve the agents performance. You can easily
+context size or a larger model to improve the agents performance. You can
 update model and context size in the `compose.yaml` file.
 
 To run the application locally, follow these steps:
@@ -268,7 +268,7 @@ The `entrypoint.sh` has five key environment variables:
 - `OPENAI_MODEL_NAME`: When falling back to Model Runner, the model is prefixed
   with `openai/` so the client picks up the right model alias.
 
-Together, these variables let the same ADK web server code seamlessly target either:
+Together, these variables let the same ADK web server code target either:
 
 - Hosted OpenAI: if you supply `OPENAI_API_KEY` (and optionally `OPENAI_MODEL_NAME`)
 - Model Runner: by remapping `MODEL_RUNNER_URL` and `MODEL_RUNNER_MODEL` into the OpenAI client’s expected variables

@@ -15,8 +15,7 @@ projects with multiple services.
 [Docker Buildx Bake](/manuals/build/bake/_index.md) is a build orchestration
 tool that enables declarative configuration for your builds, much like Docker
 Compose does for defining runtime stacks. For projects where Docker Compose is
-used to spin up services for local development, Bake offers a way of seamlessly
-extending the project with a production-ready build configuration.
+used to spin up services for local development, Bake offers a way of extending the project with a production-ready build configuration.
 
 ## Prerequisites
 
@@ -160,31 +159,26 @@ represents a single build.
 {
   "group": {
     "default": {
-      "targets": [
-        "vote",
-        "result",
-        "worker",
-        "seed"
-      ]
+      "targets": ["vote", "result", "worker", "seed"]
     }
   },
   "target": {
     "result": {
       "context": "result",
-      "dockerfile": "Dockerfile",
+      "dockerfile": "Dockerfile"
     },
     "seed": {
       "context": "seed-data",
-      "dockerfile": "Dockerfile",
+      "dockerfile": "Dockerfile"
     },
     "vote": {
       "context": "vote",
       "dockerfile": "Dockerfile",
-      "target": "dev",
+      "target": "dev"
     },
     "worker": {
       "context": "worker",
-      "dockerfile": "Dockerfile",
+      "dockerfile": "Dockerfile"
     }
   }
 }

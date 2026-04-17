@@ -26,6 +26,7 @@ Here's a quick comparison:
 > The following examples show the difference in approach. To actually test this, follow the steps in this guide to set up containers on the appropriate networks first.
 
 With the default bridge network, you'd need to find the IP address first:
+
 ```bash
 # Get the container's IP address (changes on restart)
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres-dev
@@ -39,7 +40,8 @@ docker run --rm -it \
   psql -h 172.17.0.2 -U postgres
 ```
 
-With a user-defined network, you simply use the container name:
+With a user-defined network, you use the container name:
+
 ```bash
 # Container name works directly - no IP lookup needed
 docker run --rm -it \
@@ -109,6 +111,7 @@ When connecting from your application container, use these PostgreSQL connection
   This command demonstrates passing a PostgreSQL URI connection string as an environment variable to a container, which your application can then read to connect to the database.
 
   Example usage in a Docker run command:
+
   ```bash
   docker run --rm -it \
     --network my-app-net \
@@ -117,9 +120,9 @@ When connecting from your application container, use these PostgreSQL connection
     sh -c 'echo "DATABASE_URL is set to: $DATABASE_URL"'
   ```
 
-
 - **PostgreSQL connection parameters**:
   This format uses key-value pairs separated by spaces, which many PostgreSQL client libraries accept as an alternative to URI format.
+
   ```bash
   host=postgres-dev
   port=5432
@@ -129,6 +132,7 @@ When connecting from your application container, use these PostgreSQL connection
   ```
 
   Example usage in application code (Python with psycopg2):
+
   ```python
   conn = psycopg2.connect(
       host="postgres-dev",
@@ -142,12 +146,14 @@ When connecting from your application container, use these PostgreSQL connection
 - **Connecting to a specific database**:
   Replace the database name in the connection string to connect to a specific database instead of the default `postgres` database.
   If you created a custom database (e.g., `testdb`), use:
+
   ```bash
   postgresql://postgres:mysecretpassword@postgres-dev:5432/testdb
   ```
 
   Example with SSL disabled (common in Docker networks):
   Add `?sslmode=disable` to the connection string when connecting within a private Docker network where SSL encryption isn't required.
+
   ```bash
   postgresql://postgres:mysecretpassword@postgres-dev:5432/testdb?sslmode=disable
   ```
@@ -155,7 +161,6 @@ When connecting from your application container, use these PostgreSQL connection
 > [!NOTE]
 >
 > The default port `5432` is used in these examples. If you're connecting to a different PostgreSQL instance or have changed the port, update the connection string accordingly. The container name (`postgres-dev`) is resolved by Docker DNS to the container's IP address on the network.
-
 
 ## Connecting from the Host (external access)
 
@@ -179,11 +184,13 @@ Now connect from your host:
 - **Port**: `5432`
 
 If you have `psql` installed on your host:
+
 ```bash
 psql -h localhost -p 5432 -U postgres
 ```
 
 You'll be prompted for the password. Alternatively, you can use the `PGPASSWORD` environment variable:
+
 ```bash
 PGPASSWORD=mysecretpassword psql -h localhost -p 5432 -U postgres
 ```
@@ -240,7 +247,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql
     ports:
-      - "127.0.0.1:5432:5432"  # Expose to localhost only
+      - "127.0.0.1:5432:5432" # Expose to localhost only
     networks:
       - app-network
 
@@ -262,12 +269,14 @@ networks:
 ```
 
 In this PostgreSQL-focused setup:
+
 - The `app` service connects to PostgreSQL using the service name (`db`) as the hostname in the connection string
 - PostgreSQL is accessible from your host at `localhost:5432` for external tools
 - Both services are isolated on a custom network, providing network-level security
 - The `depends_on` directive ensures PostgreSQL starts before your application
 
 PostgreSQL connection details for the app service:
+
 - Hostname: `db` (resolved by Docker DNS)
 - Port: `5432` (PostgreSQL default port)
 - Database: `mydb` (as specified in the connection string)

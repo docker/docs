@@ -203,8 +203,8 @@ CONTAINER ID   IMAGE            COMMAND             CREATED          STATUS     
 3bbc6a3102ea   docker-gs-ping   "/docker-gs-ping"   25 seconds ago   Up 24 seconds   0.0.0.0:8080->8080/tcp   rest-server
 ```
 
-Now, you can easily identify your container based on the name.
+Now, you can identify your container based on the name.
 
 ## Next steps
 
-In this module, you learned how to run containers and publish ports. You also learned to manage the lifecycle of containers. You then learned the importance of naming your containers so that they're more easily identifiable. In the next module, you’ll learn how to run a database in a container and connect it to your application.
+In this module, you learned how to run containers and publish ports. You also learned to manage the lifecycle of containers. You then learned the importance of naming your containers so that they're identifiable. In the next module, you’ll learn how to run a database in a container and connect it to your application.

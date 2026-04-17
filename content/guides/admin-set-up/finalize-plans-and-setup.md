@@ -57,7 +57,7 @@ containers on your local machine.
 
 [Docker Hardened Images](/manuals/dhi/_index.md) are minimal, secure, and production-ready container base and application images maintained by Docker.
 Designed to reduce vulnerabilities and simplify compliance, DHIs integrate
-easily into your existing Docker-based workflows with little to no retooling
+into your existing Docker-based workflows with little to no retooling
 required.
 
 ### Ensure you're running a supported version of Docker Desktop

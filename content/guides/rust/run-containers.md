@@ -183,11 +183,11 @@ CONTAINER ID   IMAGE                   COMMAND                  CREATED         
 219b2e3c7c38   docker-rust-image-dhi   "/server"                6 seconds ago   Up 5 seconds   0.0.0.0:3001->8000/tcp, [::]:3001->8000/tcp   docker-rust-container
 ```
 
-That’s better! You can now easily identify your container based on the name.
+That’s better! You can now identify your container based on the name.
 
 ## Summary
 
-In this section, you took a look at running containers. You also took a look at managing containers by starting, stopping, and restarting them. And finally, you looked at naming your containers so they are more easily identifiable.
+In this section, you took a look at running containers. You also took a look at managing containers by starting, stopping, and restarting them. And finally, you looked at naming your containers so they are identifiable.
 
 Related information:
 

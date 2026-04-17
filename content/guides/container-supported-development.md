@@ -12,7 +12,7 @@ params:
   resource_links: []
 ---
 
-Containers offer a consistent way to build, share, and run applications across different environments. While containers are typically used to containerize your application, they also make it incredibly easy to run essential services needed for development. Instead of installing or connecting to a remote database, you can easily launch your own database. But the possibilities don't stop there.
+Containers offer a consistent way to build, share, and run applications across different environments. While containers are typically used to containerize your application, they also make it straightforward to run essential services needed for development. Instead of installing or connecting to a remote database, you can launch your own database. But the possibilities don't stop there.
 
 With container-supported development, you use containers to enhance your development environment by emulating or running your own instances of the services your app needs. This provides faster feedback loops, less coupling with remote services, and a greater ability to test error states.
 
@@ -31,7 +31,6 @@ And best of all, you can have these benefits regardless of whether the main app 
 - Teams that want to reduce the complexity and costs associated with using cloud services directly during development
 - Developers that want to make it easier to visualize what's going on in their databases, queues, etc.
 - Teams that want to reduce the complexity of setting up their development environment without impacting the development of the app itself
-
 
 ## Tools integration
 
@@ -69,7 +68,7 @@ This demo will demonstrate how using WireMock can make it easy to develop and te
 
 ### Demo: developing the cloud locally
 
-When developing apps, it's often easier to outsource aspects of the application to cloud services, such as Amazon S3. However, connecting to those services in local development introduces IAM policies, networking constraints, and provisioning complications. While these requirements are important in a production setting, they complicate development environments significantly. 
+When developing apps, it's often easier to outsource aspects of the application to cloud services, such as Amazon S3. However, connecting to those services in local development introduces IAM policies, networking constraints, and provisioning complications. While these requirements are important in a production setting, they complicate development environments significantly.
 
 With container-supported development, you can run local instances of these services during development and testing, removing the need for complex setups. In this demo, you'll see how LocalStack makes it easy to develop and test applications entirely from the developer's workstation.
 
