@@ -80,7 +80,7 @@ What MCP servers can I use for working with SQL databases?
 Given this prompt, your agent will use the `mcp-find` tool provided by MCP
 Toolkit to search for SQL-related servers in the [MCP Catalog](./catalog.md).
 
-And to add a server to a session, simply write a prompt and the MCP Toolkit
+And to add a server to a session, write a prompt and the MCP Toolkit
 takes care of installing and running the server:
 
 ```plaintext

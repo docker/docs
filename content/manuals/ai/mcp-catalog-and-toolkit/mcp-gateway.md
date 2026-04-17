@@ -26,7 +26,7 @@ server lifecycle, routing, and authentication across all servers in your
 
 > [!TIP]
 > E2B sandboxes now include direct access to the Docker MCP Catalog, giving developers
-> access to over 200 tools and services to seamlessly build and run AI agents. For
+> access to over 200 tools and services to build and run AI agents. For
 > more information, see [E2B Sandboxes](sandboxes.md).
 
 ## How it works

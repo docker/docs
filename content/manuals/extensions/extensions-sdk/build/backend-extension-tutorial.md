@@ -3,10 +3,10 @@ title: Add a backend to your extension
 description: Learn how to add a backend to your extension.
 keywords: Docker, extensions, sdk, build
 aliases:
- - /desktop/extensions-sdk/tutorials/minimal-backend-extension/
- - /desktop/extensions-sdk/build/minimal-backend-extension/
- - /desktop/extensions-sdk/build/set-up/backend-extension-tutorial/
- - /desktop/extensions-sdk/build/backend-extension-tutorial/
+  - /desktop/extensions-sdk/tutorials/minimal-backend-extension/
+  - /desktop/extensions-sdk/build/minimal-backend-extension/
+  - /desktop/extensions-sdk/build/set-up/backend-extension-tutorial/
+  - /desktop/extensions-sdk/build/backend-extension-tutorial/
 ---
 
 Your extension can ship a backend part with which the frontend can interact with. This page provides information on why and how to add a backend.
@@ -24,6 +24,7 @@ directly from [the frontend](frontend-extension-tutorial.md#use-the-extension-ap
 
 Nonetheless, there are some cases where you might need to add a backend to your extension. So far, extension
 builders have used the backend to:
+
 - Store data in a local database and serve them back with a REST API.
 - Store the extension state, for example when a button starts a long-running process, so that if you navigate away from the extension user interface and comes back, the frontend can pick up where it left off.
 
@@ -59,7 +60,7 @@ it is highly recommended that you start from the `docker extension init` command
 > The `docker extension init` generates a Go backend. But you can still use it as a starting point for
 > your own extension and use any other language like Node.js, Python, Java, .Net, or any other language and framework.
 
-In this tutorial, the backend service simply exposes one route that returns a JSON payload that says "Hello".
+In this tutorial, the backend service exposes one route that returns a JSON payload that says "Hello".
 
 ```json
 { "Message": "Hello" }
@@ -172,14 +173,15 @@ type HTTPMessageBody struct {
 {{< tab name="Go" >}}
 
 To deploy your Go backend when installing the extension, you need first to configure the `Dockerfile`, so that it:
+
 - Builds the backend application
 - Copies the binary in the extension's container filesystem
 - Starts the binary when the container starts listening on the extension socket
 
 > [!TIP]
-> 
+>
 > To ease version management, you can reuse the same image to build the frontend, build the
-backend service, and package the extension.
+> backend service, and package the extension.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -273,9 +275,8 @@ extension.vm.service.get` that returns the body of the response.
 Replace the `ui/src/App.tsx` file with the following code:
 
 ```tsx
-
 // ui/src/App.tsx
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { createDockerDesktopClient } from "@docker/extension-api-client";
 
 //obtain docker desktop extension client
@@ -287,17 +288,14 @@ export function App() {
 
   useEffect(() => {
     const getHello = async () => {
-      const result = await ddClient.extension.vm?.service?.get('/hello');
+      const result = await ddClient.extension.vm?.service?.get("/hello");
       setHello(JSON.stringify(result));
-    }
-    getHello()
+    };
+    getHello();
   }, []);
 
-  return (
-    <Typography>{hello}</Typography>
-  );
+  return <Typography>{hello}</Typography>;
 }
-
 ```
 
 {{< /tab >}}
