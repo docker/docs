@@ -4,7 +4,6 @@ linkTitle: Run your tests
 weight: 40
 keywords: vue.js, vue, test, vitest
 description: Learn how to run your vue.js tests in a container.
-
 ---
 
 ## Prerequisites
@@ -38,7 +37,7 @@ This test uses Vitest and Vue Test Utils to verify the behavior of the HelloWorl
 
 ### Step 1: Update compose.yaml
 
-Add a new service named `vuejs-test` to your `compose.yaml` file. This service allows you to run your test suite in an isolated containerized environment.
+Add a new service named `vuejs-test` to your `compose.yaml` file. This service lets you run your test suite in an isolated containerized environment.
 
 ```yaml {hl_lines="22-26",linenos=true}
 services:
@@ -61,7 +60,7 @@ services:
         - action: sync
           path: .
           target: /app
-          
+
   vuejs-test:
     build:
       context: .
@@ -70,7 +69,6 @@ services:
 ```
 
 The vuejs-test service reuses the same `Dockerfile.dev` used for [development](develop.md) and overrides the default command to run tests with `npm run test`. This setup ensures a consistent test environment that matches your local development configuration.
-
 
 After completing the previous steps, your project directory should contain the following files:
 
@@ -93,6 +91,7 @@ $ docker compose run --rm vuejs-test
 ```
 
 This command will:
+
 - Start the `vuejs-test` service defined in your `compose.yaml` file.
 - Execute the `npm run test` script using the same environment as development.
 - Automatically remove the container after the tests complete [`docker compose run --rm`](/reference/cli/docker/compose/run/) command.
@@ -117,6 +116,7 @@ Duration:   718ms
 In this section, you learned how to run unit tests for your Vue.js application inside a Docker container using Vitest and Docker Compose.
 
 What you accomplished:
+
 - Created a `vuejs-test` service in `compose.yaml` to isolate test execution.
 - Reused the development `Dockerfile.dev` to ensure consistency between dev and test environments.
 - Ran tests inside the container using `docker compose run --rm vuejs-test`.
@@ -130,8 +130,9 @@ Explore official references and best practices to sharpen your Docker testing wo
 
 - [Dockerfile reference](/reference/dockerfile/) – Understand all Dockerfile instructions and syntax.
 - [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/) – Write efficient, maintainable, and secure Dockerfiles.
-- [Compose file reference](/compose/compose-file/) – Learn the full syntax and options available for configuring services in `compose.yaml`.  
+- [Compose file reference](/compose/compose-file/) – Learn the full syntax and options available for configuring services in `compose.yaml`.
 - [`docker compose run` CLI reference](/reference/cli/docker/compose/run/) – Run one-off commands in a service container.
+
 ---
 
 ## Next steps

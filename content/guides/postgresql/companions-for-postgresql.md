@@ -9,7 +9,6 @@ keywords:
 weight: 40
 ---
 
-
 ## PostgreSQL Ecosystem companions: pgAdmin, PgBouncer, and Performance Testing
 
 Running a standalone PostgreSQL container is often just the beginning. What happens when thousands of connections arrive, or when you need a visual interface to manage your database?
@@ -63,11 +62,11 @@ PgBouncer is a lightweight proxy that pools connections, allowing thousands of a
 
 PgBouncer offers three distinct pooling modes:
 
-| Mode | Description | Use case |
-|------|-------------|----------|
-| **Session** | Connection assigned for entire session duration | Long-lived connections, session variables |
-| **Transaction** | Connection returned after each transaction ends | Web applications, microservices (most common) |
-| **Statement** | Connection returned after every SQL statement | Simple queries, no multi-statement transactions |
+| Mode            | Description                                     | Use case                                        |
+| --------------- | ----------------------------------------------- | ----------------------------------------------- |
+| **Session**     | Connection assigned for entire session duration | Long-lived connections, session variables       |
+| **Transaction** | Connection returned after each transaction ends | Web applications, microservices (most common)   |
+| **Statement**   | Connection returned after every SQL statement   | Simple queries, no multi-statement transactions |
 
 ### When to use PgBouncer
 
@@ -166,12 +165,9 @@ Key configuration notes:
 >
 > The `Percona PgBouncer` entrypoint script processes the configuration files on startup. Mount them without the read-only flag to avoid permission errors.
 
-
-
-
 ## `pgbench`: Performance benchmarking
 
-`pgbench` is a benchmarking utility included with the official PostgreSQL image. It allows you to simulate heavy workloads and verify how your Docker configuration performs under pressure.
+`pgbench` is a benchmarking utility included with the official PostgreSQL image. It lets you simulate heavy workloads and verify how your Docker configuration performs under pressure.
 
 ### Initialize benchmark tables
 
@@ -224,8 +220,8 @@ Try increasing the client count (`-c` parameter) gradually: 50, 100, 150, 200. A
 #### 3. Throughput varies by environment
 
 On some systems, direct connections show higher transactions per second (TPS) at low concurrency. On others, PgBouncer wins even with few clients. The difference depends on:
+
 - CPU and memory available
 - Docker networking overhead
 - Disk I/O speed
 - Whether connections are being rapidly opened and closed
-

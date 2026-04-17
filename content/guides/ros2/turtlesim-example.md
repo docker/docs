@@ -94,7 +94,7 @@ A window should appear on your desktop showing a turtle in a grid.
    $ ros2 run turtlesim turtle_teleop_key
    ```
 
-   This node allows you to control the turtle using your keyboard. Use the arrow keys to move the turtle forward, backward, left, and right. Press `Ctrl+C` to stop the teleop node.
+   This node lets you control the turtle using your keyboard. Use the arrow keys to move the turtle forward, backward, left, and right. Press `Ctrl+C` to stop the teleop node.
 
 2. Move the turtle around the window. You should see it draw a path as it moves.
 

@@ -4,12 +4,12 @@ linkTitle: Test your deployment
 weight: 70
 keywords: deploy, kubernetes, next.js
 description: Learn how to deploy locally to test and debug your Kubernetes deployment
-
 ---
 
 ## Prerequisites
 
 Before you begin, make sure you've completed the following:
+
 - Complete all the previous sections of this guide, starting with [Containerize Next.js application](containerize.md).
 - [Enable Kubernetes](/manuals/desktop/use-desktop/kubernetes.md#enable-kubernetes) in Docker Desktop.
 
@@ -20,7 +20,7 @@ Before you begin, make sure you've completed the following:
 
 ## Overview
 
-This section guides you through deploying your containerized Next.js application locally using [Docker Desktop's built-in Kubernetes](/desktop/kubernetes/). Running your app in a local Kubernetes cluster allows you to closely simulate a real production environment, enabling you to test, validate, and debug your workloads with confidence before promoting them to staging or production.
+This section guides you through deploying your containerized Next.js application locally using [Docker Desktop's built-in Kubernetes](/desktop/kubernetes/). Running your app in a local Kubernetes cluster lets you closely simulate a real production environment, letting you test, validate, and debug your workloads with confidence before promoting them to staging or production.
 
 ---
 
@@ -33,7 +33,6 @@ Follow these steps to define your deployment configuration:
 2. Open the file in your IDE or preferred text editor.
 
 3. Add the following configuration, and be sure to replace `{DOCKER_USERNAME}` and `{DOCKERHUB_PROJECT_NAME}` with your actual Docker Hub username and repository name from the previous [Automate your builds with GitHub Actions](configure-github-actions.md).
-
 
 ```yaml
 apiVersion: apps/v1
@@ -85,7 +84,7 @@ This manifest defines two key Kubernetes resources, separated by `---`:
   (refer to [Automate your builds with GitHub Actions](configure-github-actions.md)).  
   The container listens on port `3000`, which is the default port for Next.js applications.
 
-- Service (NodePort) 
+- Service (NodePort)
   Exposes the deployed pod to your local machine.  
   It forwards traffic from port `30001` on your host to port `3000` inside the container.  
   This lets you access the application in your browser at [http://localhost:30001](http://localhost:30001).
@@ -113,13 +112,13 @@ If everything is configured properly, you'll see confirmation that both the Depl
   deployment.apps/nextjs-sample created
   service/nextjs-sample-service created
 ```
-   
+
 This output means that both the Deployment and the Service were successfully created and are now running inside your local cluster.
 
 ### Step 2. Check the Deployment status
 
 Run the following command to check the status of your deployment:
-   
+
 ```console
   $ kubectl get deployments
 ```
@@ -172,18 +171,18 @@ Expected output:
 ```
 
 This ensures your cluster stays clean and ready for the next deployment.
-   
+
 ---
 
 ## Summary
 
-In this section, you learned how to deploy your Next.js application to a local Kubernetes cluster using Docker Desktop. This setup allows you to test and debug your containerized app in a production-like environment before deploying it to the cloud.
+In this section, you learned how to deploy your Next.js application to a local Kubernetes cluster using Docker Desktop. This setup lets you test and debug your containerized app in a production-like environment before deploying it to the cloud.
 
 What you accomplished:
 
-- Created a Kubernetes Deployment and NodePort Service for your Next.js app  
-- Used `kubectl apply` to deploy the application locally  
-- Verified the app was running and accessible at `http://localhost:30001`  
+- Created a Kubernetes Deployment and NodePort Service for your Next.js app
+- Used `kubectl apply` to deploy the application locally
+- Verified the app was running and accessible at `http://localhost:30001`
 - Cleaned up your Kubernetes resources after testing
 
 ---
@@ -192,8 +191,8 @@ What you accomplished:
 
 Explore official references and best practices to sharpen your Kubernetes deployment workflow:
 
-- [Kubernetes documentation](https://kubernetes.io/docs/home/) – Learn about core concepts, workloads, services, and more.  
+- [Kubernetes documentation](https://kubernetes.io/docs/home/) – Learn about core concepts, workloads, services, and more.
 - [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/use-desktop/kubernetes.md) – Use Docker Desktop's built-in Kubernetes support for local testing and development.
-- [`kubectl` CLI reference](https://kubernetes.io/docs/reference/kubectl/) – Manage Kubernetes clusters from the command line.  
-- [Kubernetes Deployment resource](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) – Understand how to manage and scale applications using Deployments.  
+- [`kubectl` CLI reference](https://kubernetes.io/docs/reference/kubectl/) – Manage Kubernetes clusters from the command line.
+- [Kubernetes Deployment resource](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) – Understand how to manage and scale applications using Deployments.
 - [Kubernetes Service resource](https://kubernetes.io/docs/concepts/services-networking/service/) – Learn how to expose your application to internal and external traffic.

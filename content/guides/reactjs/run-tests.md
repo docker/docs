@@ -4,7 +4,6 @@ linkTitle: Run your tests
 weight: 40
 keywords: react.js, react, test, vitest
 description: Learn how to run your React.js tests in a container.
-
 ---
 
 ## Prerequisites
@@ -78,15 +77,16 @@ export default defineConfig({
 
 > [!NOTE]
 > The `test` options in `vitest.config.ts` are essential for reliable testing inside Docker:
-> - `environment: "jsdom"` simulates a browser-like environment for rendering and DOM interactions.  
-> - `setupFiles: "./src/setupTests.ts"` loads global configuration or mocks before each test file (optional but recommended).  
+>
+> - `environment: "jsdom"` simulates a browser-like environment for rendering and DOM interactions.
+> - `setupFiles: "./src/setupTests.ts"` loads global configuration or mocks before each test file (optional but recommended).
 > - `globals: true` enables global test functions like `describe`, `it`, and `expect` without importing them.
 >
 > For more details, see the official [Vitest configuration docs](https://vitest.dev/config/).
 
 ### Step 3: Update compose.yaml
 
-Add a new service named `react-test` to your `compose.yaml` file. This service allows you to run your test suite in an isolated containerized environment.
+Add a new service named `react-test` to your `compose.yaml` file. This service lets you run your test suite in an isolated containerized environment.
 
 ```yaml {hl_lines="22-26",linenos=true}
 services:
@@ -115,11 +115,9 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     command: ["npm", "run", "test"]
-
 ```
 
 The react-test service reuses the same `Dockerfile.dev` used for [development](develop.md) and overrides the default command to run tests with `npm run test`. This setup ensures a consistent test environment that matches your local development configuration.
-
 
 After completing the previous steps, your project directory should contain the following files:
 
@@ -142,6 +140,7 @@ $ docker compose run --rm react-test
 ```
 
 This command will:
+
 - Start the `react-test` service defined in your `compose.yaml` file.
 - Execute the `npm run test` script using the same environment as development.
 - Automatically remove the container after the tests complete [`docker compose run --rm`](/reference/cli/docker/compose/run/) command.
@@ -157,6 +156,7 @@ This command will:
 In this section, you learned how to run unit tests for your React.js application inside a Docker container using Vitest and Docker Compose.
 
 What you accomplished:
+
 - Installed and configured Vitest and React Testing Library for testing React components.
 - Created a `react-test` service in `compose.yaml` to isolate test execution.
 - Reused the development `Dockerfile.dev` to ensure consistency between dev and test environments.
@@ -171,8 +171,9 @@ Explore official references and best practices to sharpen your Docker testing wo
 
 - [Dockerfile reference](/reference/dockerfile/) – Understand all Dockerfile instructions and syntax.
 - [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/) – Write efficient, maintainable, and secure Dockerfiles.
-- [Compose file reference](/compose/compose-file/) – Learn the full syntax and options available for configuring services in `compose.yaml`.  
+- [Compose file reference](/compose/compose-file/) – Learn the full syntax and options available for configuring services in `compose.yaml`.
 - [`docker compose run` CLI reference](/reference/cli/docker/compose/run/) – Run one-off commands in a service container.
+
 ---
 
 ## Next steps

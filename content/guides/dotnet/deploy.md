@@ -20,7 +20,7 @@ aliases:
 
 In this section, you'll learn how to use Docker Desktop to deploy your
 application to a fully-featured Kubernetes environment on your development
-machine. This allows you to test and debug your workloads on Kubernetes locally
+machine. This lets you test and debug your workloads on Kubernetes locally
 before deploying.
 
 ## Create a Kubernetes YAML file

@@ -37,7 +37,7 @@ perform face detection. In this guide, you'll explore how to:
 ## What is TensorFlow.js?
 
 [TensorFlow.js](https://www.tensorflow.org/js) is an open-source JavaScript
-library for machine learning that enables you to train and deploy ML models in
+library for machine learning that lets you train and deploy ML models in
 the browser or on Node.js. It supports creating new models from scratch or using
 pre-trained models, facilitating a wide range of ML applications directly in web
 environments. TensorFlow.js offers efficient computation, making sophisticated
