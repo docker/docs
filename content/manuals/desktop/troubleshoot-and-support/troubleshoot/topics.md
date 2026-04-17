@@ -4,11 +4,11 @@ keywords: Linux, Mac, Windows, troubleshooting, topics, Docker Desktop
 title: Troubleshoot topics for Docker Desktop
 linkTitle: Common topics
 toc_max: 3
-tags: [ Troubleshooting ]
-weight: 10 
+tags: [Troubleshooting]
+weight: 10
 aliases:
- - /desktop/troubleshoot/topics/
- - /manuals/desktop/troubleshoot-and-support/troubleshoot/workarounds/
+  - /desktop/troubleshoot/topics/
+  - /manuals/desktop/troubleshoot-and-support/troubleshoot/workarounds/
 ---
 
 > [!TIP]
@@ -17,9 +17,9 @@ aliases:
 
 ## Topics for all platforms
 
-### Certificates not set up correctly 
+### Certificates not set up correctly
 
-#### Error message 
+#### Error message
 
 When attempting to pull from a registry using `docker run`, you may encounter the following error:
 
@@ -34,12 +34,12 @@ Additionally, logs from the registry may show:
 2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52883: tls: first record does not look like a TLS handshake
 ```
 
-#### Possible causes 
+#### Possible causes
 
 - Docker Desktop ignores certificates listed under insecure registries.
 - Client certificates are not sent to insecure registries, causing handshake failures.
 
-#### Solution 
+#### Solution
 
 - Ensure that your registry is properly configured with valid SSL certificates.
 - If your registry is self-signed, configure Docker to trust the certificate by adding it to Docker’s certificates directory (/etc/docker/certs.d/ on Linux).
@@ -56,15 +56,14 @@ Docker Desktop uses hardware-accelerated graphics by default, which may cause pr
 Disable hardware acceleration:
 
 1. Edit Docker Desktop's `settings-store.json` file. You can find this file at:
-
    - Mac: `~/Library/Group Containers/group.com.docker/settings-store.json`
    - Windows: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings-store.json`
    - Linux: `~/.docker/desktop/settings-store.json.`
 
 2. Add the following entry:
 
-   ```JSON
-   $ "disableHardwareAcceleration": true
+   ```json
+   "disableHardwareAcceleration": true
    ```
 
 3. Save the file and restart Docker Desktop.
@@ -84,7 +83,7 @@ Enable file sharing in Docker Desktop for Mac and Linux:
 
 Enable file sharing in Docker Desktop for Windows:
 
-1. From **Settings**, select **Shared Folders**. 
+1. From **Settings**, select **Shared Folders**.
 2. Share the folder that contains the Dockerfile and volume mount paths.
 
 ### `port already allocated` errors
@@ -111,9 +110,10 @@ listen tcp:0.0.0.0:8080: bind: address is already in use
 #### Solution
 
 To discover the identity of this software, either:
+
 - Use the `resmon.exe` GUI, select **Network** and then **Listening Ports**
 - In PowerShell, use `netstat -aon | find /i "listening "` to discover the PID of the process
-currently using the port (the PID is the number in the rightmost column). 
+  currently using the port (the PID is the number in the rightmost column).
 
 Then, decide whether to shut the other process down, or to use a different port in your
 Docker app.
@@ -122,7 +122,7 @@ Docker app.
 
 ### Docker Desktop fails to start on Mac or Linux platforms
 
-#### Error message 
+#### Error message
 
 Docker fails to start due to Unix domain socket path length limitations:
 
@@ -139,22 +139,24 @@ Docker fails to start due to Unix domain socket path length limitations:
 On Mac and Linux, Docker Desktop creates Unix domain sockets used for inter-process communication. These sockets are created under the user's home directory.
 
 Unix domain sockets have a maximum path length:
- - 104 characters on Mac
- - 108 characters on Linux
+
+- 104 characters on Mac
+- 108 characters on Linux
 
 If your home directory path is too long, Docker Desktop fails to create necessary sockets.
 
 #### Solution
 
 Ensure your username is short enough to keep paths within the allowed limit:
- - Mac: Username should be ≤ 33 characters
- - Linux: Username should be ≤ 55 characters
+
+- Mac: Username should be ≤ 33 characters
+- Linux: Username should be ≤ 55 characters
 
 ## Topics for Mac
 
 ### Upgrade requires administrator privileges
 
-#### Cause 
+#### Cause
 
 On macOS, users without administrator privileges cannot perform in-app upgrades from the Docker Desktop Dashboard.
 
@@ -171,7 +173,7 @@ To upgrade Docker Desktop:
 
 ### Persistent notification telling me an application has changed my Desktop configurations
 
-#### Cause 
+#### Cause
 
 You receive this notification because the Configuration integrity check feature has detected that a third-party application has altered your Docker Desktop configuration. This usually happens due to incorrect or missing symlinks. The notification ensures you are aware of these changes so you can review and repair any potential issues to maintain system reliability.
 
@@ -181,7 +183,7 @@ Opening the notification presents a pop-up window which provides detailed inform
 
 If you choose to ignore the notification, it will be shown again only at the next Docker Desktop startup. If you choose to repair your configuration, you won't be prompted again.
 
-If you want to switch off Configuration integrity check notifications, navigate to Docker Desktop's settings and in the **General** tab, clear the **Automatically check configuration** setting. 
+If you want to switch off Configuration integrity check notifications, navigate to Docker Desktop's settings and in the **General** tab, clear the **Automatically check configuration** setting.
 
 ### `com.docker.vmnetd` is still running after I quit the app
 
@@ -199,18 +201,18 @@ framework](https://developer.apple.com/library/mac/documentation/DriversKernelHa
 
 #### Solution
 
-Check that: 
+Check that:
 
- - You've installed the correct Docker Desktop for your architecture
- - Your Mac supports Apple's Hypervisor framework. To check if your Mac supports the Hypervisor framework, run the following command in a terminal window.
+- You've installed the correct Docker Desktop for your architecture
+- Your Mac supports Apple's Hypervisor framework. To check if your Mac supports the Hypervisor framework, run the following command in a terminal window.
 
-   ```console
-   $ sysctl kern.hv_support
-   ```
+  ```console
+  $ sysctl kern.hv_support
+  ```
 
-   If your Mac supports the Hypervisor Framework, the command prints `kern.hv_support: 1`.
+  If your Mac supports the Hypervisor Framework, the command prints `kern.hv_support: 1`.
 
-   If not, the command prints `kern.hv_support: 0`.
+  If not, the command prints `kern.hv_support: 0`.
 
 See also, [Hypervisor Framework
 Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
@@ -234,24 +236,25 @@ add Docker to the exclusions/exceptions in your antivirus software.
 
 ### Permissions errors on data directories for shared volumes
 
-#### Cause 
+#### Cause
 
 When sharing files from Windows, Docker Desktop sets permissions on [shared volumes](/manuals/desktop/settings-and-maintenance/settings.md#file-sharing)
 to a default value of [0777](https://chmodcommand.com/chmod-0777/)
 (`read`, `write`, `execute` permissions for `user` and for `group`).
 
-The default permissions on shared volumes are not configurable. 
+The default permissions on shared volumes are not configurable.
 
 #### Solution
 
 If you are
 working with applications that require different permissions, either:
- - Use non-host-mounted volumes  
- - Find a way to make the applications work with the default file permissions
+
+- Use non-host-mounted volumes
+- Find a way to make the applications work with the default file permissions
 
 ### Unexpected syntax errors, use Unix style line endings for files in containers
 
-#### Cause 
+#### Cause
 
 Docker containers expect Unix-style line `\n` endings, not Windows style: `\r\n`. This includes files referenced at the command line for builds and in RUN commands in Docker files.
 
@@ -261,13 +264,14 @@ commands ultimately get passed to Unix commands inside a Unix based container
 (for example, a shell script passed to `/bin/sh`). If Windows style line endings
 are used, `docker run` fails with syntax errors.
 
-#### Solution 
+#### Solution
 
- - Convert files to Unix-style line endings using:
-   
-   ```console
-   $ dos2unix script.sh
-   ```
+- Convert files to Unix-style line endings using:
+
+  ```console
+  $ dos2unix script.sh
+  ```
+
 - In VS Code, set line endings to `LF` (Unix) instead of `CRLF` (Windows).
 
 ### Path conversion errors on Windows
@@ -275,7 +279,6 @@ are used, `docker run` fails with syntax errors.
 #### Cause
 
 Unlike Linux, Windows requires explicit path conversion for volume mounting.
-
 
 On Linux, the system takes care of mounting a path to another path. For example, when you run the following command on Linux:
 
@@ -287,7 +290,7 @@ It adds a `/work` directory to the target container to mirror the specified path
 
 #### Solution
 
-Update the source path. For example, if you are using 
+Update the source path. For example, if you are using
 the legacy Windows shell (`cmd.exe`), you can use the following command:
 
 ```console
@@ -320,21 +323,21 @@ docker: Error response from daemon: OCI runtime create failed: invalid mount {De
 #### Cause
 
 Git Bash (or MSYS) provides a Unix-like environment on Windows. These tools apply their own
-preprocessing on the command line. 
+preprocessing on the command line.
 
 This affects `$(pwd)`, colon-separated paths, and tilde (`~`)
 
-Also, the `\` character has a special meaning in Git Bash. 
+Also, the `\` character has a special meaning in Git Bash.
 
 #### Solution
 
- - Disable Git Bash path conversion temporarily. For example, run the command with MSYS path conversion disable:
-    ```console
-    $ MSYS_NO_PATHCONV=1 docker run --rm -ti -v $(pwd):/work alpine
-    ```
- - Use proper path formatting:
-    - Use double forward and backslashes (`\\` `//`) instead of single (`\` `/`).
-    - If referencing `$(pwd)`, add an extra `/`:
+- Disable Git Bash path conversion temporarily. For example, run the command with MSYS path conversion disable:
+  ```console
+  $ MSYS_NO_PATHCONV=1 docker run --rm -ti -v $(pwd):/work alpine
+  ```
+- Use proper path formatting:
+  - Use double forward and backslashes (`\\` `//`) instead of single (`\` `/`).
+  - If referencing `$(pwd)`, add an extra `/`:
 
 Portability of the scripts is not affected as Linux treats multiple `/` as a single entry.
 
@@ -400,7 +403,7 @@ it for you.
 
 Docker Desktop also needs two CPU hardware features to use Hyper-V: Virtualization and Second Level Address Translation (SLAT), which is also called Rapid Virtualization Indexing (RVI). On some systems, Virtualization must be enabled in the BIOS. The steps required are vendor-specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or something similar. Run the command `systeminfo` to check all required Hyper-V features. See [Pre-requisites for Hyper-V on Windows 10](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/reference/hyper-v-requirements) for more details.
 
-To install Hyper-V manually, see [Install Hyper-V on Windows 10](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install). A reboot is *required* after installation. If you install Hyper-V without rebooting, Docker Desktop does not work correctly.
+To install Hyper-V manually, see [Install Hyper-V on Windows 10](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install). A reboot is _required_ after installation. If you install Hyper-V without rebooting, Docker Desktop does not work correctly.
 
 From the start menu, type **Turn Windows features on or off** and press enter.
 In the subsequent screen, verify that Hyper-V is enabled.
@@ -413,7 +416,7 @@ Performance tab on the Task Manager. Alternatively, you can type `systeminfo` in
 ![Task Manager](../../images/virtualization-enabled.png)
 
 If you manually uninstall Hyper-V, WSL 2 or turn off virtualization,
-Docker Desktop cannot start. 
+Docker Desktop cannot start.
 
 To turn on nested virtualization, see [Run Docker Desktop for Windows in a VM or VDI environment](/manuals/desktop/setup/vm-vdi.md#turn-on-nested-virtualization).
 
@@ -421,7 +424,7 @@ To turn on nested virtualization, see [Run Docker Desktop for Windows in a VM or
 
 If you have completed the previous steps and are still experiencing
 Docker Desktop startup issues, this could be because the Hypervisor is installed,
-but not launched during Windows startup. Some tools (such as older versions of 
+but not launched during Windows startup. Some tools (such as older versions of
 Virtual Box) and video game installers turn off hypervisor on boot. To turn it back on:
 
 1. Open an administrative console prompt.
