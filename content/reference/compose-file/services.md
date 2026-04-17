@@ -4,7 +4,7 @@ title: Define services in Docker Compose
 description: Explore all the attributes the services top-level element can have.
 keywords: compose, compose specification, services, compose file reference
 aliases:
- - /compose/compose-file/05-services/
+  - /compose/compose-file/05-services/
 weight: 20
 ---
 
@@ -112,22 +112,22 @@ services:
   foo:
     image: busybox
     blkio_config:
-       weight: 300
-       weight_device:
-         - path: /dev/sda
-           weight: 400
-       device_read_bps:
-         - path: /dev/sdb
-           rate: '12mb'
-       device_read_iops:
-         - path: /dev/sdb
-           rate: 120
-       device_write_bps:
-         - path: /dev/sdb
-           rate: '1024k'
-       device_write_iops:
-         - path: /dev/sdb
-           rate: 30
+      weight: 300
+      weight_device:
+        - path: /dev/sda
+          weight: 400
+      device_read_bps:
+        - path: /dev/sdb
+          rate: "12mb"
+      device_read_iops:
+        - path: /dev/sdb
+          rate: 120
+      device_write_bps:
+        - path: /dev/sdb
+          rate: "1024k"
+      device_write_iops:
+        - path: /dev/sdb
+          rate: 30
 ```
 
 #### `device_read_bps`, `device_write_bps`
@@ -458,7 +458,7 @@ expressed in the short form.
   - `service_completed_successfully`: Specifies that a dependency is expected to run
     to successful completion before starting a dependent service.
 - `required`: When set to `false` Compose only warns you when the dependency service isn't started or available. If it's not defined
-    the default value of `required` is `true`. Introduced in Docker Compose version [2.20.0](https://github.com/docker/compose/releases/tag/v2.20.0).
+  the default value of `required` is `true`. Introduced in Docker Compose version [2.20.0](https://github.com/docker/compose/releases/tag/v2.20.0).
 
 Service dependencies cause the following behaviors:
 
@@ -511,8 +511,8 @@ Device Whitelist Controller](https://www.kernel.org/doc/html/latest/admin-guide/
 
 ```yml
 device_cgroup_rules:
-  - 'c 1:3 mr'
-  - 'a 7:* rmw'
+  - "c 1:3 mr"
+  - "a 7:* rmw"
 ```
 
 ### `devices`
@@ -604,6 +604,7 @@ instruction in the Dockerfile.
 See also [`command`](#command) to set or override the default command to be executed by the entrypoint process.
 
 In its short form, the value can be defined as a string:
+
 ```yml
 entrypoint: /code/entrypoint.sh
 ```
@@ -883,7 +884,7 @@ now points to the new volume name and `ro` flag was applied.
 ```yaml
 image: busybox
 volumes:
-- cli-volume:/var/lib/backup/data:ro
+  - cli-volume:/var/lib/backup/data:ro
 ```
 
 If the referenced service definition contains `extends` mapping, the items under it
@@ -944,8 +945,8 @@ Produces the following configuration for the `cli` service.
 ```yaml
 image: busybox
 security_opt:
-- label=role:ROLE
-- label=user:USER
+  - label=role:ROLE
+  - label=user:USER
 ```
 
 In case list syntax is used, the following keys should also be treated as sequences:
@@ -1069,7 +1070,7 @@ For more information on `HEALTHCHECK`, see the [Dockerfile reference](/reference
 
 ```yml
 healthcheck:
-  test: ["CMD", "curl", "-f", "http://localhost"]
+  test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
   interval: 1m30s
   timeout: 10s
   retries: 3
@@ -1326,9 +1327,9 @@ The long syntax gives you more control over the environment variable names.
 
 If either is omitted, Compose automatically generates the environment variable names based on the model key using the following rules:
 
- - Convert the model key to uppercase
- - Replace any '-' characters with '_'
- - Append `_URL` for the endpoint variable
+- Convert the model key to uppercase
+- Replace any '-' characters with '\_'
+- Append `_URL` for the endpoint variable
 
 ### `network_mode`
 
@@ -1361,6 +1362,7 @@ services:
       - some-network
       - other-network
 ```
+
 For more information about the `networks` top-level element, see [Networks](networks.md).
 
 #### Implicit default network
@@ -1373,6 +1375,7 @@ services:
   some-service:
     image: foo
 ```
+
 This example is actually equivalent to:
 
 ```yml
@@ -1663,8 +1666,6 @@ the container runtime automatically allocates any unassigned port of the host.
 `HOST:CONTAINER` should always be specified as a (quoted) string, to avoid conflicts
 with [YAML base-60 float](https://yaml.org/type/float.html).
 
-
-
 IPv6 addresses can be enclosed in square brackets.
 
 Examples:
@@ -1785,16 +1786,16 @@ services:
 `provider` can be used to define a service that Compose won't manage directly. Compose delegated the service lifecycle to a dedicated or third-party component.
 
 ```yaml
-  database:
-    provider:
-      type: awesomecloud
-      options:
-        type: mysql
-        foo: bar
-  app:
-    image: myapp
-    depends_on:
-       - database
+database:
+  provider:
+    type: awesomecloud
+    options:
+      type: mysql
+      foo: bar
+app:
+  image: myapp
+  depends_on:
+    - database
 ```
 
 As Compose runs the application, the `awesomecloud` binary is used to manage the `database` service setup.
@@ -1824,9 +1825,9 @@ events.
 
 - `always`: Compose always pulls the image from the registry.
 - `never`: Compose doesn't pull the image from a registry and relies on the platform cached image.
-   If there is no cached image, a failure is reported.
+  If there is no cached image, a failure is reported.
 - `missing`: Compose pulls the image only if it's not available in the platform cache.
-   This is the default option if you are not also using the [Compose Build Specification](build.md).
+  This is the default option if you are not also using the [Compose Build Specification](build.md).
   `if_not_present` is considered an alias for this value for backward compatibility. The `latest` tag is always pulled even when the `missing` pull policy is used.
 - `build`: Compose builds the image. Compose rebuilds the image if it's already present.
 - `daily`: Compose checks the registry for image updates if the last pull took place more than 24 hours ago.
@@ -1851,7 +1852,7 @@ services:
 - `no`: The default restart policy. It does not restart the container under any circumstances.
 - `always`: The policy always restarts the container until its removal.
 - `on-failure[:max-retries]`: The policy restarts the container if the exit code indicates an error.
-Optionally, limit the number of restart retries the Docker daemon attempts.
+  Optionally, limit the number of restart retries the Docker daemon attempts.
 - `unless-stopped`: The policy restarts the container irrespective of the exit code but stops
   restarting when the service is stopped or removed.
 
@@ -2011,7 +2012,7 @@ stop_signal: SIGUSR1
 
 ```yml
 storage_opt:
-  size: '1G'
+  size: "1G"
 ```
 
 ### `sysctls`
@@ -2041,8 +2042,8 @@ parameters (sysctls) at runtime](/reference/cli/docker/container/run/#sysctl).
 
 ```yml
 tmpfs:
- - <path>
- - <path>:<options>
+  - <path>
+  - <path>:<options>
 ```
 
 - `path`: The path inside the container where the tmpfs will be mounted.
@@ -2111,7 +2112,7 @@ it is the runtime's decision to assign a UTS namespace, if supported. Available 
 - `'host'`: Results in the container using the same UTS namespace as the host.
 
 ```yml
-    uts: "host"
+uts: "host"
 ```
 
 ### `volumes`
