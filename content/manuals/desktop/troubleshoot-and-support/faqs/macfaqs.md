@@ -5,9 +5,9 @@ title: FAQs for Docker Desktop for Mac
 linkTitle: Mac
 tags: [FAQ]
 aliases:
-- /desktop/mac/space/
-- /docker-for-mac/space/
-- /desktop/faqs/macfaqs/
+  - /desktop/mac/space/
+  - /docker-for-mac/space/
+  - /desktop/faqs/macfaqs/
 weight: 20
 ---
 
@@ -22,7 +22,7 @@ VirtualBox or VMware Fusion.
 
 HyperKit is thinner than VirtualBox and VMware fusion, and the version included is customized for Docker workloads on Mac.
 
-### Where does Docker Desktop store Linux containers and images? 
+### Where does Docker Desktop store Linux containers and images?
 
 Docker Desktop stores Linux containers and images in a single, large "disk image" file in the Mac filesystem. This is different from Docker on Linux, which usually stores containers and images in the `/var/lib/docker` directory.
 
@@ -44,7 +44,7 @@ If the disk image file is too big, you can:
 
 To move the disk image file to a different location:
 
-1. Select **Settings** then  **Advanced** from the **Resources** tab.
+1. Select **Settings** then **Advanced** from the **Resources** tab.
 
 2. In the **Disk image location** section, select **Browse** and choose a new location for the disk image.
 
@@ -108,9 +108,9 @@ In this example, the actual size of the disk is `2333548` KB, whereas the maximu
 
 To reduce the maximum size of the disk image file:
 
-1. Select **Settings** then  **Advanced** from the **Resources** tab.
+1. Select **Settings** then **Advanced** from the **Resources** tab.
 
-2. The **Disk image size** section contains a slider that allows you to change the maximum size of the disk image. Adjust the slider to set a lower limit.
+2. The **Disk image size** section contains a slider that lets you change the maximum size of the disk image. Adjust the slider to set a lower limit.
 
 3. Select **Apply**.
 
@@ -168,11 +168,10 @@ Desktop `xhyve` virtual machine).
 
 > [!NOTE]
 >
-> * You need to restart Docker Desktop after making any changes to the keychain
+> - You need to restart Docker Desktop after making any changes to the keychain
 >   or to the `~/.docker/certs.d` directory in order for the changes to take
 >   effect.
->
-> * The registry cannot be listed as an _insecure registry_. Docker Desktop ignores certificates listed
+> - The registry cannot be listed as an _insecure registry_. Docker Desktop ignores certificates listed
 >   under insecure registries, and does not send client certificates. Commands
 >   like `docker run` that attempt to pull from the registry produce error
 >   messages on the command line, as well as on the registry.

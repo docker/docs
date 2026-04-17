@@ -4,14 +4,14 @@ keywords: docker desktop, networking, vpn, proxy, port mapping, dns
 title: Explore networking how-tos on Docker Desktop
 linkTitle: How-tos
 aliases:
-- /desktop/linux/networking/
-- /docker-for-mac/networking/
-- /mackit/networking/
-- /desktop/mac/networking/
-- /docker-for-win/networking/
-- /docker-for-windows/networking/
-- /desktop/windows/networking/
-- /desktop/networking/
+  - /desktop/linux/networking/
+  - /docker-for-mac/networking/
+  - /mackit/networking/
+  - /desktop/mac/networking/
+  - /docker-for-win/networking/
+  - /docker-for-windows/networking/
+  - /desktop/windows/networking/
+  - /desktop/networking/
 ---
 
 This page explains how to configure and use networking features, connect containers to host services, work behind proxies or VPNs, and troubleshoot common issues.
@@ -28,7 +28,6 @@ The host has a changing IP address, or none if you have no network access. To co
 | ------------------------- | ------------------------------------------------ |
 | `host.docker.internal`    | Resolves to the internal IP address of your host |
 | `gateway.docker.internal` | Resolves to the gateway IP of the Docker VM      |
-
 
 #### Example
 
@@ -56,7 +55,7 @@ $ docker run -d -p 80:80 --name webserver nginx
 ```
 
 Docker Desktop makes whatever is running on port `80` in the container, in
-this case, `nginx`, available on port `80` of `localhost`. 
+this case, `nginx`, available on port `80` of `localhost`.
 
 > [!TIP]
 >
@@ -68,7 +67,7 @@ container to random ports on the host.
 
 ```console
 $ docker run -d -P --name webserver nginx
-``` 
+```
 
 Alternatively, you can also use [host networking](/manuals/engine/network/drivers/host.md#docker-desktop)
 to give the container direct access to the network stack of the host.
@@ -81,7 +80,7 @@ For more details, see [How exposed ports work](/manuals/desktop/features/network
 
 ### Working with VPNs
 
-Docker Desktop networking can work when attached to a VPN. 
+Docker Desktop networking can work when attached to a VPN.
 
 To do this, Docker Desktop intercepts traffic from the containers and injects it into
 the host as if it originated from the Docker application.
@@ -93,7 +92,7 @@ For details about how this traffic appears to host firewalls and endpoint detect
 Docker Desktop can use your system proxy or a manual configuration.
 To configure proxies:
 
-1. Navigate to the **Resources** tab in **Settings**. 
+1. Navigate to the **Resources** tab in **Settings**.
 2. From the dropdown menu select **Proxies**.
 3. Switch on the **Manual proxy configuration** toggle.
 4. Enter your HTTP, HTTPS or SOCKS5 proxy URLS.
@@ -112,7 +111,7 @@ You can set the following settings on the **Network** tab in the Docker Desktop 
 
 ### Default networking mode
 
-Choose the default IP protocol used when Docker creates new networks. This allows you to align Docker with your host’s network capabilities or organizational requirements, such as enforcing IPv6-only access.
+Choose the default IP protocol used when Docker creates new networks. This lets you align Docker with your host’s network capabilities or organizational requirements, such as enforcing IPv6-only access.
 
 | Mode                         | Description                                 |
 | ---------------------------- | ------------------------------------------- |
@@ -120,7 +119,7 @@ Choose the default IP protocol used when Docker creates new networks. This allow
 | **IPv4 only**                | Uses only IPv4 addressing.                  |
 | **IPv6 only**                | Uses only IPv6 addressing.                  |
 
-### DNS resolution behavior 
+### DNS resolution behavior
 
 Control how Docker filters DNS records returned to containers, improving reliability in environments where only IPv4 or IPv6 is supported. This setting is especially useful for preventing apps from trying to connect using IP families that aren't actually available, which can cause avoidable delays or failures.
 
@@ -149,13 +148,13 @@ Docker Desktop for Mac and Linux lets you use the host’s SSH agent inside a co
 
 2. Add the `SSH_AUTH_SOCK` environment variable in your container:
 
-    ```console
-    $ -e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"
-    ```
+   ```console
+   $ -e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"
+   ```
 
 To enable the SSH agent in Docker Compose, add the following flags to your service:
 
- ```yaml
+```yaml
 services:
   web:
     image: nginx:alpine
@@ -165,7 +164,7 @@ services:
         target: /run/host-services/ssh-auth.sock
     environment:
       - SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
- ```
+```
 
 ## Known limitations
 

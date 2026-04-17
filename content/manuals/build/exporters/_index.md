@@ -152,7 +152,7 @@ $ docker buildx build --output type=local,dest=<path/to/output> .
 ```
 
 The `local` exporter is useful in [multi-stage builds](../building/multi-stage.md)
-since it allows you to export only a minimal number of build artifacts, such as
+since it lets you export only a minimal number of build artifacts, such as
 self-contained binaries.
 
 ### Cache-only export

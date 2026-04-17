@@ -6,12 +6,12 @@ description: How to use USB/IP in Docker Desktop
 keywords: usb, usbip, docker desktop, macos, windows, linux
 toc_max: 3
 aliases:
-- /desktop/usbip/
+  - /desktop/usbip/
 ---
 
 {{< summary-bar feature_name="USB/IP support" >}}
 
-USB/IP enables you to share USB devices over the network, which can then be accessed from within Docker containers. This page focuses on sharing USB devices connected to the machine you run Docker Desktop on. You can repeat the following process to attach and use additional USB devices as needed.
+USB/IP lets you share USB devices over the network, which can then be accessed from within Docker containers. This page focuses on sharing USB devices connected to the machine you run Docker Desktop on. You can repeat the following process to attach and use additional USB devices as needed.
 
 > [!NOTE]
 >
@@ -25,16 +25,16 @@ To use USB/IP, you need to run a USB/IP server. For this guide, the implementati
 
 1. Clone the repository.
 
-    ```console
-    $ git clone https://github.com/jiegec/usbip
-    $ cd usbip
-    ```
+   ```console
+   $ git clone https://github.com/jiegec/usbip
+   $ cd usbip
+   ```
 
 2. Run the emulated Human Interface Device (HID) device example.
 
-    ```console
-    $ env RUST_LOG=info cargo run --example hid_keyboard
-    ```
+   ```console
+   $ env RUST_LOG=info cargo run --example hid_keyboard
+   ```
 
 ### Step two: Start a privileged Docker container
 
@@ -106,32 +106,32 @@ While the initial container remains running to keep the USB device operational, 
 
 1. Start a new container with the attached device.
 
-    ```console
-    $ docker run --rm -it --device "/dev/input/event0" alpine
-    ```
+   ```console
+   $ docker run --rm -it --device "/dev/input/event0" alpine
+   ```
 
 2. Install a tool like `evtest` to test the emulated keyboard.
 
-    ```console
-    $ apk add evtest
-    $ evtest /dev/input/event0
-    ```
+   ```console
+   $ apk add evtest
+   $ evtest /dev/input/event0
+   ```
 
 3. Interact with the device, and observe the output.
 
-    Example output:
+   Example output:
 
-    ```console
-    Input driver version is 1.0.1
-    Input device ID: bus 0x3 vendor 0x0 product 0x0 version 0x111
-    ...
-    Properties:
-    Testing ... (interrupt to exit)
-    Event: time 1717575532.881540, type 4 (EV_MSC), code 4 (MSC_SCAN), value 7001e
-    Event: time 1717575532.881540, type 1 (EV_KEY), code 2 (KEY_1), value 1
-    Event: time 1717575532.881540, -------------- SYN_REPORT ------------
-    ...
-    ```
+   ```console
+   Input driver version is 1.0.1
+   Input device ID: bus 0x3 vendor 0x0 product 0x0 version 0x111
+   ...
+   Properties:
+   Testing ... (interrupt to exit)
+   Event: time 1717575532.881540, type 4 (EV_MSC), code 4 (MSC_SCAN), value 7001e
+   Event: time 1717575532.881540, type 1 (EV_KEY), code 2 (KEY_1), value 1
+   Event: time 1717575532.881540, -------------- SYN_REPORT ------------
+   ...
+   ```
 
 > [!IMPORTANT]
 >
