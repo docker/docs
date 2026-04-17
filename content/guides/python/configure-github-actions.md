@@ -27,7 +27,7 @@ If you didn't create a [GitHub repository](https://github.com/new) for your proj
 
 ## Overview
 
-GitHub Actions is a CI/CD (Continuous Integration and Continuous Deployment) automation tool built into GitHub. It allows you to define custom workflows for building, testing, and deploying your code when specific events occur (e.g., pushing code, creating a pull request, etc.). A workflow is a YAML-based automation script that defines a sequence of steps to be executed when triggered. Workflows are stored in the `.github/workflows/` directory of a repository.
+GitHub Actions is a CI/CD (Continuous Integration and Continuous Deployment) automation tool built into GitHub. It lets you define custom workflows for building, testing, and deploying your code when specific events occur (e.g., pushing code, creating a pull request, etc.). A workflow is a YAML-based automation script that defines a sequence of steps to be executed when triggered. Workflows are stored in the `.github/workflows/` directory of a repository.
 
 In this section, you'll learn how to set up and use GitHub Actions to build your Docker image as well as push it to Docker Hub. You will complete the following steps:
 
@@ -64,11 +64,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@{{% param "checkout_action_version" %}}
-      
+
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.14'
+          python-version: "3.14"
 
       - name: Install dependencies
         run: |
@@ -133,4 +133,3 @@ Related information:
 ## Next steps
 
 In the next section, you'll learn how you can develop locally using kubernetes.
-
