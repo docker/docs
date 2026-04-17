@@ -38,7 +38,7 @@ Configuring the daemon directly takes precedence over environment variables.
 ## Daemon configuration
 
 You may configure proxy behavior for the daemon in the `daemon.json` file,
-or using CLI flags for the `--http-proxy` or `--https-proxy` flags for the
+or using the `--http-proxy` or `--https-proxy` CLI flags for the
 `dockerd` command. Configuration using `daemon.json` is recommended.
 
 ```json
@@ -76,7 +76,7 @@ systemd drop-in file that sets the variables for the `docker` service.
 
 > **Note for rootless mode**
 >
-> The location of systemd configuration files are different when running Docker
+> The location of systemd configuration files is different when running Docker
 > in [rootless mode](/manuals/engine/security/rootless.md). When running in
 > rootless mode, Docker is started as a user-mode systemd service, and uses
 > files stored in each users' home directory in
