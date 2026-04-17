@@ -17,6 +17,7 @@ options:
 see_also:
     - sbx completion - Generate the autocompletion script for the specified shell
     - sbx create - Create a sandbox for an agent
+    - sbx diagnose - Diagnose common issues with your sbx installation
     - sbx exec - Execute a command inside a sandbox
     - sbx login - Sign in to Docker
     - sbx logout - Sign out of Docker

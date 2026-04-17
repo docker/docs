@@ -6,6 +6,23 @@ description: Resolve common issues when using Docker Sandboxes.
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
+## Run diagnostics
+
+Before digging into a specific issue, run
+[`sbx diagnose`](/reference/cli/sbx/diagnose/) to check for common problems
+with your installation, such as a missing CLI binary, an unresponsive daemon,
+a CLI/daemon version mismatch, missing storage directories, or broken
+authentication.
+
+```console
+$ sbx diagnose
+```
+
+The command prints a summary of checks that passed, warned, or failed, along
+with suggested fixes. Use `--output json` to get machine-readable output, or
+`--output github-issue` to generate a Markdown snippet suitable for pasting
+into a GitHub issue.
+
 ## Resetting sandboxes
 
 If you hit persistent issues or corrupted state, run
@@ -155,3 +172,18 @@ Windows:
 
 If you've exhausted the steps above and the problem persists, file a GitHub
 issue at [github.com/docker/sbx-releases/issues](https://github.com/docker/sbx-releases/issues).
+
+To help the Docker team investigate, generate a diagnostics bundle and share
+it when reporting the issue:
+
+```console
+$ sbx diagnose --upload
+```
+
+The bundle contains daemon logs, diagnostic check results, and basic system
+information. When `--upload` is confirmed, the bundle is uploaded to Docker
+support and the command prints a diagnostics ID. Include this ID in your
+issue so the team can correlate it with the uploaded bundle.
+
+If you'd rather not upload, omit `--upload` to save the bundle locally as a
+ZIP archive, which you can inspect or attach to the issue manually.
