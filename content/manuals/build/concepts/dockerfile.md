@@ -36,7 +36,7 @@ start simple and grow with your needs to support more complex scenarios.
 ### Filename
 
 The default filename to use for a Dockerfile is `Dockerfile`, without a file
-extension. Using the default name allows you to run the `docker build` command
+extension. Using the default name lets you run the `docker build` command
 without having to specify additional command flags.
 
 Some projects may need distinct Dockerfiles for specific purposes. A common

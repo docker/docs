@@ -517,7 +517,7 @@ with the prompt. The user can:
 ### API
 
 The `api` toolset lets you define custom tools that call HTTP APIs. Similar to
-`script` but for web services, this allows you to expose REST APIs,
+`script` but for web services, this lets you expose REST APIs,
 webhooks, or any HTTP endpoint as a tool your agent can use. The agent sees
 these as typed tools with automatic parameter validation.
 
@@ -571,7 +571,7 @@ Supported argument types: `string`, `number`, `boolean`, `array`, `object`.
 ### Script
 
 The `script` toolset lets you define custom tools by wrapping shell
-commands with typed parameters. This allows you to expose domain-specific
+commands with typed parameters. This lets you expose domain-specific
 operations to your agent as first-class tools. The agent sees these custom
 tools just like built-in tools, with parameter validation and type checking
 handled automatically.
