@@ -34,7 +34,7 @@ $ docker build --build-arg BUILDKIT_SYNTAX=docker/dockerfile:1 .
 ```
 
 This defines the location of the Dockerfile syntax that is used to build the
-Dockerfile. The BuildKit backend allows seamlessly using external
+Dockerfile. The BuildKit backend allows using external
 implementations that are distributed as Docker images and execute inside a
 container sandbox environment.
 

@@ -5,7 +5,7 @@ title: Repository information
 toc_max: 3
 weight: 40
 aliases:
-- /docker-hub/repos/categories/
+  - /docker-hub/repos/categories/
 ---
 
 Each repository can include a description, an overview, and categories to help
@@ -107,7 +107,7 @@ Consider the following repository overview best practices.
 ## Repository categories
 
 You can tag Docker Hub repositories with categories, representing the primary
-intended use cases for your images. This lets users more easily find and
+intended use cases for your images. This lets users find and
 explore content for the problem domain that they're interested in.
 
 ### Available categories

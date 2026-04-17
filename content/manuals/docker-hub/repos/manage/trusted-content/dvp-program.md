@@ -2,18 +2,18 @@
 description: Learn what the Docker Verified Publisher Program is and how it works
 title: Docker Verified Publisher Program
 aliases:
-- /docker-hub/publish/publish/
-- /docker-hub/publish/customer_faq/
-- /docker-hub/publish/publisher_faq/
-- /docker-hub/publish/certify-images/
-- /docker-hub/publish/certify-plugins-logging/
-- /docker-hub/publish/trustchain/
-- /docker-hub/publish/byol/
-- /docker-hub/publish/publisher-center-migration/
-- /docker-hub/publish/
-- /docker-hub/publish/repository-logos/
-- /docker-hub/dvp-program/
-- /trusted-content/dvp-program/
+  - /docker-hub/publish/publish/
+  - /docker-hub/publish/customer_faq/
+  - /docker-hub/publish/publisher_faq/
+  - /docker-hub/publish/certify-images/
+  - /docker-hub/publish/certify-plugins-logging/
+  - /docker-hub/publish/trustchain/
+  - /docker-hub/publish/byol/
+  - /docker-hub/publish/publisher-center-migration/
+  - /docker-hub/publish/
+  - /docker-hub/publish/repository-logos/
+  - /docker-hub/dvp-program/
+  - /trusted-content/dvp-program/
 toc_max: 2
 ---
 
@@ -74,7 +74,7 @@ benefits from:
 - Durability: Docker maintains a documented backup policy and performs full
   daily backups of production data.
 
-You simply push your images to Docker Hub as usual, and Docker takes care of the
+Push your images to Docker Hub as usual, and Docker takes care of the
 rest, serving your image to millions of developers worldwide.
 
 ![DVP flow in Docker Hub](./images/dvp-hub-flow.svg)
@@ -152,8 +152,8 @@ Only a user with an owner or editor role for the organization can change the rep
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Go to the page of the repository that you want to change the logo for.
 3. Select the upload logo button, represented by a camera icon ({{< inline-image
-   src="../../../images/upload_logo_sm.png" alt="camera icon" >}}) overlaying the
-current repository logo.
+      src="../../../images/upload_logo_sm.png" alt="camera icon" >}}) overlaying the
+   current repository logo.
 4. In the dialog that opens, select the PNG image that you want to upload to
    set it as the logo for the repository.
 
