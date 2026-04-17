@@ -257,6 +257,9 @@
 "/offload/about/":
   # Onboarding - enable GPU
   - /go/docker-cloud-gpu/
+"/offload/about/#session-management-and-idle-state":
+  - /go/offload-idle-inactivity/
+  - /go/offload-idle-long-session/
 "/ai/compose/models-and-compose/":
   # Onboarding - enable GPU - compose for agents
   - /go/compose-for-agents/
