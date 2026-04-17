@@ -5,21 +5,21 @@ title: Docker Engine security
 linkTitle: Security
 weight: 80
 aliases:
-- /articles/security/
-- /engine/articles/security/
-- /engine/security/security/
-- /security/security/
+  - /articles/security/
+  - /engine/articles/security/
+  - /engine/security/security/
+  - /security/security/
 ---
 
 There are four major areas to consider when reviewing Docker security:
 
- - The intrinsic security of the kernel and its support for
-   namespaces and cgroups
- - The attack surface of the Docker daemon itself
- - Loopholes in the container configuration profile, either by default,
-   or when customized by users.
- - The "hardening" security features of the kernel and how they
-   interact with containers.
+- The intrinsic security of the kernel and its support for
+  namespaces and cgroups
+- The attack surface of the Docker daemon itself
+- Loopholes in the container configuration profile, either by default,
+  or when customized by users.
+- The "hardening" security features of the kernel and how they
+  interact with containers.
 
 ## Kernel namespaces
 
@@ -55,8 +55,7 @@ This means that since July 2008 (date of the 2.6.26 release
 ), namespace code has been exercised and scrutinized on a large
 number of production systems. And there is more: the design and
 inspiration for the namespaces code are even older. Namespaces are
-actually an effort to reimplement the features of [OpenVZ](
-https://en.wikipedia.org/wiki/OpenVZ) in such a way that they could be
+actually an effort to reimplement the features of [OpenVZ](https://en.wikipedia.org/wiki/OpenVZ) in such a way that they could be
 merged within the mainstream kernel. And OpenVZ was initially released
 in 2005, so both the design and the implementation are pretty mature.
 
@@ -88,8 +87,8 @@ some important details.
 
 First of all, only trusted users should be allowed to control your
 Docker daemon. This is a direct consequence of some powerful Docker
-features. Specifically, Docker allows you to share a directory between
-the Docker host and a guest container; and it allows you to do so
+features. Specifically, Docker lets you share a directory between
+the Docker host and a guest container; and lets you do so
 without limiting the access rights of the container. This means that you
 can start a container where the `/host` directory is the `/` directory
 on your host; and the container can alter your host filesystem
@@ -113,10 +112,10 @@ socket.
 
 You can also expose the REST API over HTTP if you explicitly decide to do so.
 However, if you do that, be aware of the above mentioned security implications.
-Note that even if you have a firewall to limit accesses to the REST API 
+Note that even if you have a firewall to limit accesses to the REST API
 endpoint from other hosts in the network, the endpoint can be still accessible
 from containers, and it can easily result in the privilege escalation.
-Therefore it is *mandatory* to secure API endpoints with 
+Therefore it is _mandatory_ to secure API endpoints with
 [HTTPS and certificates](protect-access.md).
 Exposing the daemon API over HTTP without TLS is not permitted,
 and such a configuration causes the daemon to fail early on startup, see
@@ -158,34 +157,34 @@ Typical servers run several processes as `root`, including the SSH daemon,
 and more. A container is different, because almost all of those tasks are
 handled by the infrastructure around the container:
 
- - SSH access are typically managed by a single server running on
-   the Docker host
- - `cron`, when necessary, should run as a user
-   process, dedicated and tailored for the app that needs its
-   scheduling service, rather than as a platform-wide facility
- - Log management is also typically handed to Docker, or to
-   third-party services like Loggly or Splunk
- - Hardware management is irrelevant, meaning that you never need to
-   run `udevd` or equivalent daemons within
-   containers
- - Network management happens outside of the containers, enforcing
-   separation of concerns as much as possible, meaning that a container
-   should never need to perform `ifconfig`,
-   `route`, or ip commands (except when a container
-   is specifically engineered to behave like a router or firewall, of
-   course)
+- SSH access are typically managed by a single server running on
+  the Docker host
+- `cron`, when necessary, should run as a user
+  process, dedicated and tailored for the app that needs its
+  scheduling service, rather than as a platform-wide facility
+- Log management is also typically handed to Docker, or to
+  third-party services like Loggly or Splunk
+- Hardware management is irrelevant, meaning that you never need to
+  run `udevd` or equivalent daemons within
+  containers
+- Network management happens outside of the containers, enforcing
+  separation of concerns as much as possible, meaning that a container
+  should never need to perform `ifconfig`,
+  `route`, or ip commands (except when a container
+  is specifically engineered to behave like a router or firewall, of
+  course)
 
 This means that in most cases, containers do not need "real" root
-privileges at all* And therefore, containers can run with a reduced
+privileges at all\* And therefore, containers can run with a reduced
 capability set; meaning that "root" within a container has much less
 privileges than the real "root". For instance, it is possible to:
 
- - Deny all "mount" operations
- - Deny access to raw sockets (to prevent packet spoofing)
- - Deny access to some filesystem operations, like creating new device
-   nodes, changing the owner of files, or altering attributes (including
-   the immutable flag)
- - Deny module loading
+- Deny all "mount" operations
+- Deny access to raw sockets (to prevent packet spoofing)
+- Deny access to some filesystem operations, like creating new device
+  nodes, changing the owner of files, or altering attributes (including
+  the immutable flag)
+- Deny module loading
 
 This means that even if an intruder manages to escalate to root within a
 container, it is much harder to do serious damage, or to escalate
@@ -212,17 +211,17 @@ those explicitly required for their processes.
 
 ## Docker Content Trust signature verification
 
-Docker Engine can be configured to only run signed images. The Docker Content 
+Docker Engine can be configured to only run signed images. The Docker Content
 Trust signature verification feature is built directly into the `dockerd` binary.  
-This is configured in the Dockerd configuration file. 
+This is configured in the Dockerd configuration file.
 
-To enable this feature, trustpinning can be configured in `daemon.json`, whereby 
+To enable this feature, trustpinning can be configured in `daemon.json`, whereby
 only repositories signed with a user-specified root key can be pulled and run.
-  
-This feature provides more insight to administrators than previously available with
-the CLI for enforcing and performing image signature verification. 
 
-For more information on configuring Docker Content Trust Signature Verification, go to 
+This feature provides more insight to administrators than previously available with
+the CLI for enforcing and performing image signature verification.
+
+For more information on configuring Docker Content Trust Signature Verification, go to
 [Content trust in Docker](trust/_index.md).
 
 ## Other kernel security features
@@ -236,18 +235,18 @@ While Docker currently only enables capabilities, it doesn't interfere
 with the other systems. This means that there are many different ways to
 harden a Docker host. Here are a few examples.
 
- - You can run a kernel with GRSEC and PAX. This adds many safety
-   checks, both at compile-time and run-time; it also defeats many
-   exploits, thanks to techniques like address randomization. It doesn't
-   require Docker-specific configuration, since those security features
-   apply system-wide, independent of containers.
- - If your distribution comes with security model templates for
-   Docker containers, you can use them out of the box. For instance, we
-   ship a template that works with AppArmor and Red Hat comes with SELinux
-   policies for Docker. These templates provide an extra safety net (even
-   though it overlaps greatly with capabilities).
- - You can define your own policies using your favorite access control
-   mechanism.
+- You can run a kernel with GRSEC and PAX. This adds many safety
+  checks, both at compile-time and run-time; it also defeats many
+  exploits, thanks to techniques like address randomization. It doesn't
+  require Docker-specific configuration, since those security features
+  apply system-wide, independent of containers.
+- If your distribution comes with security model templates for
+  Docker containers, you can use them out of the box. For instance, we
+  ship a template that works with AppArmor and Red Hat comes with SELinux
+  policies for Docker. These templates provide an extra safety net (even
+  though it overlaps greatly with capabilities).
+- You can define your own policies using your favorite access control
+  mechanism.
 
 Just as you can use third-party tools to augment Docker containers, including
 special network topologies or shared filesystems, tools exist to harden Docker
@@ -278,8 +277,8 @@ pull requests, or comments on the Docker community forums.
 
 ## Related information
 
-* [Use trusted images](trust/_index.md)
-* [Seccomp security profiles for Docker](seccomp.md)
-* [AppArmor security profiles for Docker](apparmor.md)
-* [On the Security of Containers (2014)](https://medium.com/@ewindisch/on-the-security-of-containers-2c60ffe25a9e)
-* [Docker swarm mode overlay network security model](/manuals/engine/network/drivers/overlay.md)
+- [Use trusted images](trust/_index.md)
+- [Seccomp security profiles for Docker](seccomp.md)
+- [AppArmor security profiles for Docker](apparmor.md)
+- [On the Security of Containers (2014)](https://medium.com/@ewindisch/on-the-security-of-containers-2c60ffe25a9e)
+- [Docker swarm mode overlay network security model](/manuals/engine/network/drivers/overlay.md)

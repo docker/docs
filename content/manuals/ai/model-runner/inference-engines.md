@@ -12,17 +12,17 @@ your use case.
 
 ## Engine comparison
 
-| Feature | llama.cpp | vLLM | Diffusers                           |
-|---------|-----------|------|-------------------------------------|
-| **Model formats** | GGUF | Safetensors, HuggingFace | DDUF                                |
-| **Platforms** | All (macOS, Windows, Linux) | Linux x86_64 only | Linux (x86_64, ARM64)               |
-| **GPU support** | NVIDIA, AMD, Apple Silicon, Vulkan | NVIDIA CUDA only | NVIDIA CUDA only                    |
-| **CPU inference** | Yes | No | No                                  |
-| **Quantization** | Built-in (Q4, Q5, Q8, etc.) | Limited | Limited                             |
-| **Memory efficiency** | High (with quantization) | Moderate | Moderate                            |
-| **Throughput** | Good | High (with batching) | Good                                |
-| **Best for** | Local development, resource-constrained environments | Production, high throughput | Image generation                    |
-| **Use case** | Text generation (LLMs) | Text generation (LLMs) | Image generation (Stable Diffusion) |
+| Feature               | llama.cpp                                            | vLLM                        | Diffusers                           |
+| --------------------- | ---------------------------------------------------- | --------------------------- | ----------------------------------- |
+| **Model formats**     | GGUF                                                 | Safetensors, HuggingFace    | DDUF                                |
+| **Platforms**         | All (macOS, Windows, Linux)                          | Linux x86_64 only           | Linux (x86_64, ARM64)               |
+| **GPU support**       | NVIDIA, AMD, Apple Silicon, Vulkan                   | NVIDIA CUDA only            | NVIDIA CUDA only                    |
+| **CPU inference**     | Yes                                                  | No                          | No                                  |
+| **Quantization**      | Built-in (Q4, Q5, Q8, etc.)                          | Limited                     | Limited                             |
+| **Memory efficiency** | High (with quantization)                             | Moderate                    | Moderate                            |
+| **Throughput**        | Good                                                 | High (with batching)        | Good                                |
+| **Best for**          | Local development, resource-constrained environments | Production, high throughput | Image generation                    |
+| **Use case**          | Text generation (LLMs)                               | Text generation (LLMs)      | Image generation (Stable Diffusion) |
 
 ## llama.cpp
 
@@ -32,13 +32,13 @@ supports a wide range of hardware configurations.
 
 ### Platform support
 
-| Platform | GPU support | Notes |
-|----------|-------------|-------|
-| macOS (Apple Silicon) | Metal | Automatic GPU acceleration |
-| Windows (x64) | NVIDIA CUDA | Requires NVIDIA drivers 576.57+ |
-| Windows (ARM64) | Adreno OpenCL | Qualcomm 6xx series and later |
-| Linux (x64) | NVIDIA, AMD, Vulkan | Multiple backend options |
-| Linux | CPU only | Works on any x64/ARM64 system |
+| Platform              | GPU support         | Notes                           |
+| --------------------- | ------------------- | ------------------------------- |
+| macOS (Apple Silicon) | Metal               | Automatic GPU acceleration      |
+| Windows (x64)         | NVIDIA CUDA         | Requires NVIDIA drivers 576.57+ |
+| Windows (ARM64)       | Adreno OpenCL       | Qualcomm 6xx series and later   |
+| Linux (x64)           | NVIDIA, AMD, Vulkan | Multiple backend options        |
+| Linux                 | CPU only            | Works on any x64/ARM64 system   |
 
 ### Model format: GGUF
 
@@ -47,15 +47,15 @@ memory usage without significant quality loss.
 
 #### Quantization levels
 
-| Quantization | Bits per weight | Memory usage | Quality |
-|--------------|-----------------|--------------|---------|
-| Q2_K | ~2.5 | Lowest | Reduced |
-| Q3_K_M | ~3.5 | Minimal | Acceptable |
-| Q4_K_M | ~4.5 | Low | Good |
-| Q5_K_M | ~5.5 | Moderate | Excellent |
-| Q6_K | ~6.5 | Higher | Excellent |
-| Q8_0 | 8 | High | Near-original |
-| F16 | 16 | Highest | Original |
+| Quantization | Bits per weight | Memory usage | Quality       |
+| ------------ | --------------- | ------------ | ------------- |
+| Q2_K         | ~2.5            | Lowest       | Reduced       |
+| Q3_K_M       | ~3.5            | Minimal      | Acceptable    |
+| Q4_K_M       | ~4.5            | Low          | Good          |
+| Q5_K_M       | ~5.5            | Moderate     | Excellent     |
+| Q6_K         | ~6.5            | Higher       | Excellent     |
+| Q8_0         | 8               | High         | Near-original |
+| F16          | 16              | Highest      | Original      |
 
 **Recommended**: Q4_K_M offers the best balance of quality and memory usage for
 most use cases.
@@ -103,13 +103,13 @@ engine optimized for production workloads with high throughput requirements.
 
 ### Platform support
 
-| Platform | GPU | Support status |
-|----------|-----|----------------|
-| Linux x86_64 | NVIDIA CUDA | Supported |
+| Platform          | GPU         | Support status                   |
+| ----------------- | ----------- | -------------------------------- |
+| Linux x86_64      | NVIDIA CUDA | Supported                        |
 | Windows with WSL2 | NVIDIA CUDA | Supported (Docker Desktop 4.54+) |
-| macOS | - | Not supported |
-| Linux ARM64 | - | Not supported |
-| AMD GPUs | - | Not supported |
+| macOS             | -           | Not supported                    |
+| Linux ARM64       | -           | Not supported                    |
+| AMD GPUs          | -           | Not supported                    |
 
 > [!IMPORTANT]
 > vLLM requires an NVIDIA GPU with CUDA support. It does not support CPU-only
@@ -188,39 +188,39 @@ $ docker model configure --hf_overrides '{"max_model_len": 8192}' ai/model-vllm
 
 #### Common vLLM settings
 
-| Setting | Description | Example |
-|---------|-------------|---------|
-| `max_model_len` | Maximum context length | 8192 |
-| `gpu_memory_utilization` | Fraction of GPU memory to use | 0.9 |
-| `tensor_parallel_size` | GPUs for tensor parallelism | 2 |
+| Setting                  | Description                   | Example |
+| ------------------------ | ----------------------------- | ------- |
+| `max_model_len`          | Maximum context length        | 8192    |
+| `gpu_memory_utilization` | Fraction of GPU memory to use | 0.9     |
+| `tensor_parallel_size`   | GPUs for tensor parallelism   | 2       |
 
 ### vLLM and llama.cpp performance comparison
 
-| Scenario | Recommended engine |
-|----------|-------------------|
-| Single user, local development | llama.cpp |
-| Multiple concurrent requests | vLLM |
-| Limited GPU memory | llama.cpp (with quantization) |
-| Maximum throughput | vLLM |
-| CPU-only system | llama.cpp |
-| Apple Silicon Mac | llama.cpp |
-| Production deployment | vLLM (if hardware supports it) |
+| Scenario                       | Recommended engine             |
+| ------------------------------ | ------------------------------ |
+| Single user, local development | llama.cpp                      |
+| Multiple concurrent requests   | vLLM                           |
+| Limited GPU memory             | llama.cpp (with quantization)  |
+| Maximum throughput             | vLLM                           |
+| CPU-only system                | llama.cpp                      |
+| Apple Silicon Mac              | llama.cpp                      |
+| Production deployment          | vLLM (if hardware supports it) |
 
 ## Diffusers
 
 [Diffusers](https://github.com/huggingface/diffusers) is an inference engine
 for image generation models, including Stable Diffusion. Unlike llama.cpp and
-vLLM which focus on text generation with LLMs, Diffusers enables you to generate
+vLLM which focus on text generation with LLMs, Diffusers lets you generate
 images from text prompts.
 
 ### Platform support
 
-| Platform | GPU | Support status |
-|----------|-----|----------------|
-| Linux x86_64 | NVIDIA CUDA | Supported |
-| Linux ARM64 | NVIDIA CUDA | Supported |
-| Windows | - | Not supported |
-| macOS | - | Not supported |
+| Platform     | GPU         | Support status |
+| ------------ | ----------- | -------------- |
+| Linux x86_64 | NVIDIA CUDA | Supported      |
+| Linux ARM64  | NVIDIA CUDA | Supported      |
+| Windows      | -           | Not supported  |
+| macOS        | -           | Not supported  |
 
 > [!IMPORTANT]
 > Diffusers requires an NVIDIA GPU with CUDA support. It does not support
@@ -271,6 +271,7 @@ $ curl -s -X POST http://localhost:12434/engines/diffusers/v1/images/generations
 ```
 
 This command:
+
 1. Sends a POST request to the Diffusers image generation endpoint
 2. Specifies the model, prompt, and output image size
 3. Extracts the base64-encoded image from the response
@@ -286,11 +287,11 @@ POST /engines/diffusers/v1/images/generations
 
 ### Supported parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `model` | string | Required. The model identifier (e.g., `stable-diffusion:Q4`). |
-| `prompt` | string | Required. The text description of the image to generate. |
-| `size` | string | Image dimensions in `WIDTHxHEIGHT` format (e.g., `512x512`). |
+| Parameter | Type   | Description                                                   |
+| --------- | ------ | ------------------------------------------------------------- |
+| `model`   | string | Required. The model identifier (e.g., `stable-diffusion:Q4`). |
+| `prompt`  | string | Required. The text description of the image to generate.      |
+| `size`    | string | Image dimensions in `WIDTHxHEIGHT` format (e.g., `512x512`).  |
 
 ## Running multiple engines
 
@@ -313,12 +314,12 @@ diffusers: running diffusers version: 0.36.0
 
 ### Engine-specific API paths
 
-| Engine | API path | Use case |
-|--------|----------|----------|
-| llama.cpp | `/engines/llama.cpp/v1/chat/completions` | Text generation |
-| vLLM | `/engines/vllm/v1/chat/completions` | Text generation |
-| Diffusers | `/engines/diffusers/v1/images/generations` | Image generation |
-| Auto-select | `/engines/v1/chat/completions` | Text generation (auto-selects engine) |
+| Engine      | API path                                   | Use case                              |
+| ----------- | ------------------------------------------ | ------------------------------------- |
+| llama.cpp   | `/engines/llama.cpp/v1/chat/completions`   | Text generation                       |
+| vLLM        | `/engines/vllm/v1/chat/completions`        | Text generation                       |
+| Diffusers   | `/engines/diffusers/v1/images/generations` | Image generation                      |
+| Auto-select | `/engines/v1/chat/completions`             | Text generation (auto-selects engine) |
 
 ## Managing inference engines
 
@@ -329,6 +330,7 @@ $ docker model install-runner --backend <engine> [--gpu <type>]
 ```
 
 Options:
+
 - `--backend`: `llama.cpp`, `vllm`, or `diffusers`
 - `--gpu`: `cuda`, `rocm`, `vulkan`, or `metal` (depends on platform)
 
@@ -369,11 +371,13 @@ $ docker model package --safetensors ./model/ --push myorg/mymodel-vllm
 ### vLLM won't start
 
 1. Verify NVIDIA GPU is available:
+
    ```console
    $ nvidia-smi
    ```
 
 2. Check Docker has GPU access:
+
    ```console
    $ docker run --rm --gpus all nvidia/cuda:12.0-base nvidia-smi
    ```
@@ -385,6 +389,7 @@ $ docker model package --safetensors ./model/ --push myorg/mymodel-vllm
 1. Ensure GPU acceleration is working (check logs for Metal/CUDA messages).
 
 2. Try a more aggressive quantization:
+
    ```console
    $ docker model pull ai/model:Q4_K_M
    ```

@@ -44,6 +44,7 @@ models:
 ```
 
 This example defines:
+
 - A service called `chat-app` that uses a model named `llm`
 - A model definition for `llm` that references the `ai/smollm2` model image
 
@@ -62,16 +63,17 @@ models:
 ```
 
 Common configuration options include:
+
 - `model` (required): The OCI artifact identifier for the model. This is what Compose pulls and runs via the model runner.
 - `context_size`: Defines the maximum token context size for the model.
 
-   > [!NOTE]
-   > Each model has its own maximum context size. When increasing the context length,
-   > consider your hardware constraints. In general, try to keep context size
-   > as small as feasible for your specific needs.
+  > [!NOTE]
+  > Each model has its own maximum context size. When increasing the context length,
+  > consider your hardware constraints. In general, try to keep context size
+  > as small as feasible for your specific needs.
 
 - `runtime_flags`: A list of raw command-line flags passed to the inference engine when the model is started.
-   See [Configuration options](/manuals/ai/model-runner/configuration.md) for commonly used parameters and examples.
+  See [Configuration options](/manuals/ai/model-runner/configuration.md) for commonly used parameters and examples.
 - Platform-specific options may also be available via extension attributes `x-*`
 
 > [!TIP]
@@ -101,6 +103,7 @@ models:
 ```
 
 With short syntax, the platform automatically generates environment variables based on the model name:
+
 - `LLM_URL` - URL to access the LLM model
 - `LLM_MODEL` - Model identifier for the LLM model
 - `EMBEDDING_MODEL_URL` - URL to access the embedding-model
@@ -108,7 +111,7 @@ With short syntax, the platform automatically generates environment variables ba
 
 ### Long syntax
 
-The long syntax allows you to customize environment variable names:
+The long syntax lets you customize environment variable names:
 
 ```yaml
 services:
@@ -130,6 +133,7 @@ models:
 ```
 
 With this configuration, your service receives:
+
 - `AI_MODEL_URL` and `AI_MODEL_NAME` for the LLM model
 - `EMBEDDING_URL` and `EMBEDDING_NAME` for the embedding model
 
@@ -159,6 +163,7 @@ models:
 ```
 
 Docker Model Runner will:
+
 - Pull and run the specified model locally
 - Provide endpoint URLs for accessing the model
 - Inject environment variables into the service
@@ -210,11 +215,11 @@ models:
     model: ai/model
     context_size: 4096
     runtime_flags:
-      - "--verbose"                       # Set verbosity level to infinity
-      - "--verbose-prompt"                # Print a verbose prompt before generation
-      - "--log-prefix"                    # Enable prefix in log messages
-      - "--log-timestamps"                # Enable timestamps in log messages
-      - "--log-colors"                    # Enable colored logging
+      - "--verbose" # Set verbosity level to infinity
+      - "--verbose-prompt" # Print a verbose prompt before generation
+      - "--log-prefix" # Enable prefix in log messages
+      - "--log-timestamps" # Enable timestamps in log messages
+      - "--log-colors" # Enable colored logging
 ```
 
 ### Conservative with disabled reasoning
@@ -233,11 +238,11 @@ models:
     model: ai/model
     context_size: 4096
     runtime_flags:
-      - "--temp"                # Temperature
+      - "--temp" # Temperature
       - "0.1"
-      - "--top-k"               # Top-k sampling
+      - "--top-k" # Top-k sampling
       - "1"
-      - "--reasoning-budget"    # Disable reasoning
+      - "--reasoning-budget" # Disable reasoning
       - "0"
 ```
 
@@ -257,9 +262,9 @@ models:
     model: ai/model
     context_size: 4096
     runtime_flags:
-      - "--temp"                # Temperature
+      - "--temp" # Temperature
       - "1"
-      - "--top-p"               # Top-p sampling
+      - "--top-p" # Top-p sampling
       - "0.9"
 ```
 
@@ -279,9 +284,9 @@ models:
     model: ai/model
     context_size: 4096
     runtime_flags:
-      - "--temp"                # Temperature
+      - "--temp" # Temperature
       - "0"
-      - "--top-k"               # Top-k sampling
+      - "--top-k" # Top-k sampling
       - "1"
 ```
 
@@ -301,9 +306,9 @@ models:
     model: ai/model
     context_size: 2048
     runtime_flags:
-      - "--threads"             # Number of threads to use during generation
+      - "--threads" # Number of threads to use during generation
       - "8"
-      - "--mlock"               # Lock memory to prevent swapping
+      - "--mlock" # Lock memory to prevent swapping
 ```
 
 ### Rich vocabulary model
@@ -322,9 +327,9 @@ models:
     model: ai/model
     context_size: 4096
     runtime_flags:
-      - "--temp"                # Temperature
+      - "--temp" # Temperature
       - "0.1"
-      - "--top-p"               # Top-p sampling
+      - "--top-p" # Top-p sampling
       - "0.9"
 ```
 
@@ -346,7 +351,7 @@ models:
     model: ai/all-minilm
     context_size: 2048
     runtime_flags:
-      - "--embeddings"          # Required for embedding models
+      - "--embeddings" # Required for embedding models
 ```
 
 ## Reference

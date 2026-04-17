@@ -144,7 +144,7 @@ docker scout attestation add \
 
 ### Automate DHI scanning in CI/CD with Docker Scout
 
-Integrating Docker Scout into your CI/CD pipeline enables you to automatically
+Integrating Docker Scout into your CI/CD pipeline lets you automatically
 verify that images built from Docker Hardened Images remain free from known
 vulnerabilities during the build process. This proactive approach ensures the
 continued security integrity of your images throughout the development
@@ -202,7 +202,7 @@ jobs:
           context: .
           sbom: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.SHA }}
-      
+
       - name: Run Docker Scout CVE scan
         uses: docker/scout-action@v1
         with:
@@ -229,7 +229,7 @@ insecure images.
 > `docker/setup-docker-action` allows BuildKit to store attestations locally
 > without pushing to a registry first. Without the containerd image store,
 > Docker Engine rejects the build with: `Attestation is not supported for the docker driver. 
-> Switch to a different driver, or turn on the containerd image store, and try again.`
+Switch to a different driver, or turn on the containerd image store, and try again.`
 > The `Push image` step runs only if the scan passes, using `if: success()`
 > to ensure images are only pushed to the registry when they are free of
 > critical or high-severity vulnerabilities.
@@ -425,4 +425,3 @@ $ docker scout vex get dhi.io/<image>:<tag> --output vex.json
 >
 > If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
 > `registry://docs/dhi-python:3.13` instead of `docs/dhi-python:3.13`.
-

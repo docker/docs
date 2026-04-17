@@ -2,10 +2,10 @@
 title: Troubleshoot your autobuilds
 description: How to troubleshoot Automated builds
 keywords: docker hub, troubleshoot, automated builds, autobuilds
-tags: [ Troubleshooting ]
+tags: [Troubleshooting]
 linkTitle: Troubleshoot
 aliases:
-- /docker-hub/builds/troubleshoot/
+  - /docker-hub/builds/troubleshoot/
 ---
 
 > [!NOTE]
@@ -35,7 +35,6 @@ automatically cancelled, and the build logs display the following message:
 This log message is the same as when you actively cancel a build. To identify
 whether a build was automatically cancelled, check the build duration.
 
-
 ## Build repositories with linked private submodules
 
 Docker Hub sets up a deploy key in your source code repository that allows it
@@ -58,7 +57,7 @@ system access to the repositories.
 
 1. Generate a SSH keypair that you use for builds only, and add the public key to your source code provider account.
 
-    This step is optional, but allows you to revoke the build-only keypair without removing other access.
+   This step is optional, but lets you revoke the build-only keypair without removing other access.
 
 2. Copy the private half of the keypair to your clipboard.
 3. In Docker Hub, navigate to the build page for the repository that has linked private submodules. (If necessary, [follow the steps here](index.md#configure-automated-builds) to configure the automated build.)

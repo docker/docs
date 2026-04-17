@@ -12,7 +12,6 @@ version-controlled, and easy to share. This section covers key image management
 tasks, including tagging, pushing images, transferring images between
 repositories, and supported software artifacts.
 
-
 - [Tags](./tags.md): Tags help you version and organize different iterations of
   your images within a single repository. This topic explains tagging and
   provides guidance on how to create, view, and delete tags in Docker Hub.
@@ -23,7 +22,7 @@ repositories, and supported software artifacts.
   a range of content beyond standard Docker images, including Helm charts,
   vulnerability reports, and more. This section provides an overview of OCI
   artifacts as well as some examples of pushing them to Docker Hub.
-- [Push images to Hub](./push.md): Docker Hub enables you to push local images
+- [Push images to Hub](./push.md): Docker Hub lets you push local images
   to it, making them available for your team or the Docker community. Learn how
   to configure your images and use the `docker push` command to upload them to
   Docker Hub.

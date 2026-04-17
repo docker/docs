@@ -8,7 +8,7 @@ weight: 112
 {{< summary-bar feature_name="Compose provider services" >}}
 
 Docker Compose supports provider services, which allow integration with services whose lifecycles are managed by third-party components rather than by Compose itself.  
-This feature enables you to define and utilize platform-specific services without the need for manual setup or direct lifecycle management.
+This feature lets you define and utilize platform-specific services without the need for manual setup or direct lifecycle management.
 
 ## What are provider services?
 
@@ -36,11 +36,11 @@ services:
       type: awesomecloud
       options:
         type: mysql
-        foo: bar  
+        foo: bar
   app:
-    image: myapp 
+    image: myapp
     depends_on:
-       - database
+      - database
 ```
 
 Notice the dedicated `provider` attribute in the `database` service.
@@ -86,7 +86,7 @@ For example, if you specify `type: model`, Compose will look for a Docker CLI pl
 services:
   ai-runner:
     provider:
-      type: model  # Looks for docker-model plugin or model binary
+      type: model # Looks for docker-model plugin or model binary
       options:
         model: ai/example-model
 ```
@@ -115,8 +115,8 @@ Using provider services in your Compose applications offers several benefits:
 
 If you want to create your own provider to extend Compose with custom capabilities, you can implement a Compose plugin that registers provider types.
 
-For detailed information on how to create and implement your own provider, refer to the [Compose Extensions documentation](https://github.com/docker/compose/blob/main/docs/extension.md).   
-This guide explains the extension mechanism that allows you to add new provider types to Compose.
+For detailed information on how to create and implement your own provider, refer to the [Compose Extensions documentation](https://github.com/docker/compose/blob/main/docs/extension.md).  
+This guide explains the extension mechanism that lets you add new provider types to Compose.
 
 ## Reference
 
