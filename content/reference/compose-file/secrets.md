@@ -39,6 +39,13 @@ secrets:
     environment: "OAUTH_TOKEN"
 ```
 
+> [!IMPORTANT]
+>
+> The `environment` source isn't supported by `docker stack deploy`:
+> the command fails to read the secret. Use the `file` source, or an
+> [`external`](/manuals/engine/swarm/secrets.md) secret created with
+> `docker secret create`.
+
 ## Additional resources
 
 For more information, see [How to use secrets in Compose](/manuals/compose/how-tos/use-secrets.md).

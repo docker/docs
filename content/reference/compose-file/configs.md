@@ -87,4 +87,10 @@ configs:
     environment: "SIMPLE_CONFIG_VALUE"
 ```
 
+> [!IMPORTANT]
+>
+> The `environment` source isn't supported by `docker stack deploy`:
+> the command fails to read the config. Use the `file` source, or an
+> `external` config created with `docker config create`.
+
 If `external` is set to `true`, all other attributes apart from `name` are irrelevant. If Compose detects any other attribute, it rejects the Compose file as invalid.
