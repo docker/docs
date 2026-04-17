@@ -34,7 +34,7 @@ Launch a quick demo of Postgres by using the following steps:
 
 1. Open the terminal and run the following command to start a Postgres container.
 
-   This example will launch a Postgres container, expose port `5432` onto the host to let a native-running application to connect to it with the password `mysecretpassword`.
+   This example will launch a Postgres container, expose port `5432` onto the host to let a native-running application connect to it with the password `mysecretpassword`.
 
    ```console
    $ docker run -d --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword postgres
