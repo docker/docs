@@ -1,14 +1,15 @@
 ---
 description: Setting-up a local mirror for Docker Hub images
-keywords: registry, on-prem, images, tags, repository, distribution, mirror, Hub,
+keywords:
+  registry, on-prem, images, tags, repository, distribution, mirror, Hub,
   recipe, advanced
 title: Mirror the Docker Hub library
 linkTitle: Mirror
 weight: 80
 aliases:
-- /engine/admin/registry_mirror/
-- /registry/recipes/mirror/
-- /docker-hub/mirror/
+  - /engine/admin/registry_mirror/
+  - /registry/recipes/mirror/
+  - /docker-hub/mirror/
 ---
 
 ## Use-case
@@ -26,7 +27,7 @@ there, to avoid this extra internet traffic.
 ### Alternatives
 
 Alternatively, if the set of images you are using is well delimited, you can
-simply pull them manually and push them to a simple, local, private registry.
+pull them manually and push them to a simple, local, private registry.
 
 Furthermore, if your images are all built in-house, not using the Hub at all and
 relying entirely on your local registry is the simplest scenario.
@@ -50,11 +51,13 @@ responds to all normal docker pull requests but stores all content locally.
 If Docker Hub access is restricted via your Registry Access Management (RAM) configuration, you will not be able to pull images originating from Docker Hub even if the images are available in your registry mirror.
 
 You will encounter the following error:
+
 ```console
 Error response from daemon: Access to docker.io has been restricted by your administrators.
 ```
 
 If you are unable to allow access to Docker Hub, you can manually pull from your registry mirror and optionally, retag the image. For example:
+
 ```console
 docker pull <your-registry-mirror>[:<port>]/library/busybox
 docker tag <your-registry-mirror>[:<port>]/library/busybox:latest busybox:latest

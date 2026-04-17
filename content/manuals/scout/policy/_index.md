@@ -37,8 +37,7 @@ In Docker Scout, policies are designed to help you ratchet forward your
 security and supply chain stature. Where other tools focus on providing a pass
 or fail status, Docker Scout policies visualizes how small, incremental changes
 affect policy status, even when your artifacts don't meet the policy
-requirements (yet). By tracking how the fail gap changes over time, you more
-easily see whether your artifact is improving or deteriorating relative to
+requirements (yet). By tracking how the fail gap changes over time, you can see whether your artifact is improving or deteriorating relative to
 policy.
 
 Policies don't necessarily have to be related to application security and
@@ -48,7 +47,7 @@ image up-to-dateness.
 
 ## Policy types
 
-In Docker Scout, a *policy* is derived from a *policy type*. Policy types are
+In Docker Scout, a _policy_ is derived from a _policy type_. Policy types are
 templates that define the core parameters of a policy. You can compare policy
 types to classes in object-oriented programming, with each policy acting as an
 instance created from its corresponding policy type.
@@ -104,6 +103,7 @@ The following policy parameters are configurable in a custom version:
   fail until you've had a chance to address them.
 
 <!-- vale Vale.Spelling = NO -->
+
 - **Severities**: Severity levels to consider (default: `Critical, High`)
 <!-- vale Vale.Spelling = YES -->
 
@@ -184,7 +184,7 @@ The **Supply Chain Attestations** policy type checks whether your images have
 [provenance](/manuals/build/metadata/attestations/slsa-provenance.md) attestations.
 
 Images are considered non-compliant if they lack either an SBOM attestation or
-a provenance attestation with *max mode* provenance. To ensure compliance,
+a provenance attestation with _max mode_ provenance. To ensure compliance,
 update your build command to attach these attestations at build-time:
 
 ```console

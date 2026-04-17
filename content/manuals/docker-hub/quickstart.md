@@ -74,7 +74,7 @@ To search or browse for content on Docker Hub:
    > [!TIP]
    >
    > The Docker Desktop Dashboard contains a built-in terminal. At the bottom of
-   > the Dashboard, select **>_ Terminal** to open it.
+   > the Dashboard, select **>\_ Terminal** to open it.
 
 2. In the terminal, run the following command.
 
@@ -120,7 +120,6 @@ You can run images from Docker Hub using the CLI or Docker Desktop Dashboard.
 6. In the Docker Desktop Dashboard, select the **Stop** button to stop the
    container.
 
-
 {{< /tab >}}
 {{< tab name="CLI" >}}
 
@@ -129,7 +128,7 @@ You can run images from Docker Hub using the CLI or Docker Desktop Dashboard.
    > [!TIP]
    >
    > The Docker Desktop Dashboard contains a built-in terminal. At the bottom of
-   > the Dashboard, select **>_ Terminal** to open it.
+   > the Dashboard, select **>\_ Terminal** to open it.
 
 2. In your terminal, run the following command to pull and run the Nginx image.
 
@@ -193,7 +192,6 @@ existing software.
 You can also extend images from Docker Hub, letting you quickly build and
 customize your own images to suit specific needs.
 
-
 ## Step 3: Build and push an image to Docker Hub
 
 1. Create a [Dockerfile](/reference/dockerfile.md) to specify your application:
@@ -204,7 +202,7 @@ customize your own images to suit specific needs.
    ```
 
    This Dockerfile extends the Nginx image from Docker Hub to create a
-   simple website. With just a few lines, you can easily set up, customize, and
+   simple website. With just a few lines, you can set up, customize, and
    share a static website using Docker.
 
 2. Run the following command to build your image. Replace `<YOUR-USERNAME>` with your Docker ID.
@@ -255,9 +253,9 @@ customize your own images to suit specific needs.
    $ docker push <YOUR-USERNAME>/nginx-custom
    ```
 
-    > [!NOTE]
-    >
-    > You must be signed in to Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, as per the above steps.
+   > [!NOTE]
+   >
+   > You must be signed in to Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, as per the above steps.
 
    The command pushes the image to Docker Hub and automatically
    creates the repository if it doesn't exist. To learn more about the command,
@@ -279,8 +277,8 @@ customize your own images to suit specific needs.
    latest: digest: sha256:7f5223ae866e725a7f86b856c30edd3b86f60d76694df81d90b08918d8de1e3f size: 1985
    ```
 
-  Now that you've created a repository and pushed your image, it's time to view
-  your repository and explore its options.
+Now that you've created a repository and pushed your image, it's time to view
+your repository and explore its options.
 
 ## Step 4: View your repository on Docker Hub and explore options
 

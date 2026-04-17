@@ -32,7 +32,7 @@ allowing the Docker CLI and Docker Desktop Dashboard to interact with
 cloud-based resources as if they were local. When you run a container, Docker
 provisions a secure, isolated, and ephemeral cloud environment connected to
 Docker Desktop via an SSH tunnel. Despite running remotely, features like bind
-mounts and port forwarding continue to work seamlessly, providing a local-like
+mounts and port forwarding continue to work, providing a local-like
 experience. To use Docker Offload:
 
 For more information, see the [Docker Offload product

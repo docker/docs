@@ -121,8 +121,7 @@ environments. These containerized AI models provide:
 - Pre-trained models: Access ready-to-use machine learning models for common
   tasks such as image recognition, natural language processing, and predictive
   analytics.
-- Model serving: Deploy models as containerized services that can be easily
-  integrated into applications and scaled as needed.
+- Model serving: Deploy models as containerized services that can be integrated into applications and scaled as needed.
 - Reproducible environments: Package models with their dependencies, ensuring
   consistent behavior across development and production environments.
 - Framework support: Find models built with popular frameworks like TensorFlow,
@@ -151,7 +150,6 @@ and workflows.
 
 To learn more about plugins, see [Docker Engine managed plugin
 system](/manuals/engine/extend/_index.md).
-
 
 ### Trusted content
 
