@@ -18,7 +18,7 @@ of the convenience script:
 - The script requires `root` or `sudo` privileges to run.
 - The script attempts to detect your Linux distribution and version and
   configure your package management system for you.
-- The script doesn't allow you to customize most installation parameters.
+- The script doesn't let you customize most installation parameters.
 - The script installs dependencies and recommendations without asking for
   confirmation. This may install a large number of packages, depending on the
   current configuration of your host machine.
