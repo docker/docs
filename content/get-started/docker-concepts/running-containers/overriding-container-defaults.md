@@ -3,8 +3,8 @@ title: Overriding container defaults
 weight: 2
 keywords: concepts, build, images, container, docker desktop
 description: This concept page will teach you how to override the container defaults using the `docker run` command.
-aliases: 
- - /guides/docker-concepts/running-containers/overriding-container-defaults/
+aliases:
+  - /guides/docker-concepts/running-containers/overriding-container-defaults/
 ---
 
 {{< youtube-embed PFszWK3BB8I >}}
@@ -15,7 +15,7 @@ When a Docker container starts, it executes an application or command. The conta
 
 For example, if you have an existing database container that listens on the standard port and you want to run a new instance of the same database container, then you might want to change the port settings the new container listens on so that it doesn’t conflict with the existing container. Sometimes you might want to increase the memory available to the container if the program needs more resources to handle a heavy workload or set the environment variables to provide specific configuration details the program needs to function properly.
 
-The `docker run` command offers a powerful way to override these defaults and tailor the container's behavior to your liking. The command offers several flags that let you to customize container behavior on the fly.
+The `docker run` command offers a powerful way to override these defaults and tailor the container's behavior to your liking. The command offers several flags that let you customize container behavior on the fly.
 
 Here's a few ways you can achieve this.
 
@@ -45,6 +45,7 @@ foo=bar
 > [!TIP]
 >
 > The `.env` file acts as a convenient way to set environment variables for your Docker containers without cluttering your command line with numerous `-e` flags. To use a `.env` file, you can pass `--env-file` option with the `docker run` command.
+>
 > ```console
 > $ docker run --env-file .env postgres env
 > ```
@@ -55,7 +56,7 @@ You can use the `--memory` and `--cpus` flags with the `docker run` command to r
 
 ```console
 $ docker run -e POSTGRES_PASSWORD=secret --memory="512m" --cpus="0.5" postgres
- ```
+```
 
 This command limits container memory usage to 512 MB and defines the CPU quota of 0.5 for half a core.
 
@@ -74,14 +75,14 @@ In this hands-on guide, you'll see how to use the `docker run` command to overri
 ### Run multiple instances of the Postgres database
 
 1.  Start a container using the [Postgres image](https://hub.docker.com/_/postgres) with the following command:
-    
+
     ```console
     $ docker run -d -e POSTGRES_PASSWORD=secret -p 5432:5432 postgres
     ```
 
     This will start the Postgres database in the background, listening on the standard container port `5432` and mapped to port `5432` on the host machine.
 
-2. Start a second Postgres container mapped to a different port. 
+2.  Start a second Postgres container mapped to a different port.
 
     ```console
     $ docker run -d -e POSTGRES_PASSWORD=secret -p 5433:5432 postgres
@@ -89,7 +90,7 @@ In this hands-on guide, you'll see how to use the `docker run` command to overri
 
     This will start another Postgres container in the background, listening on the standard postgres port `5432` in the container, but mapped to port `5433` on the host machine. You override the host port just to ensure that this new container doesn't conflict with the existing running container.
 
-3. Verify that both containers are running by going to the **Containers** view in the Docker Desktop Dashboard.
+3.  Verify that both containers are running by going to the **Containers** view in the Docker Desktop Dashboard.
 
     ![A screenshot of the Docker Desktop Dashboard showing the running instances of Postgres containers](images/running-postgres-containers.webp?border=true)
 
@@ -103,31 +104,30 @@ Follow the steps to see how to connect a Postgres container to a custom network.
 
 1. Create a new custom network by using the following command:
 
-    ```console
-    $ docker network create mynetwork
-    ```
+   ```console
+   $ docker network create mynetwork
+   ```
 
 2. Verify the network by running the following command:
 
-    ```console
-    $ docker network ls
-    ```
+   ```console
+   $ docker network ls
+   ```
 
-    This command lists all networks, including the newly created "mynetwork".
+   This command lists all networks, including the newly created "mynetwork".
 
 3. Connect Postgres to the custom network by using the following command:
 
-    ```console
-    $ docker run -d -e POSTGRES_PASSWORD=secret -p 5434:5432 --network mynetwork postgres
-    ```
+   ```console
+   $ docker run -d -e POSTGRES_PASSWORD=secret -p 5434:5432 --network mynetwork postgres
+   ```
 
-    This will start Postgres container in the background, mapped to the host port 5434 and attached to the `mynetwork` network. You passed the `--network` parameter to override the container default by connecting the container to custom Docker network for better isolation and communication with other containers. You can use `docker network inspect` command to see if the container is tied to this new bridge network.
+   This will start Postgres container in the background, mapped to the host port 5434 and attached to the `mynetwork` network. You passed the `--network` parameter to override the container default by connecting the container to custom Docker network for better isolation and communication with other containers. You can use `docker network inspect` command to see if the container is tied to this new bridge network.
 
-
-    > **Key difference between default bridge and custom networks**
-    >
-    > 1. DNS resolution: By default, containers connected to the default bridge network can communicate with each other, but only by IP address. (unless you use `--link` option which is considered legacy). It is not recommended for production use due to the various [technical shortcomings](/engine/network/drivers/bridge/#differences-between-user-defined-bridges-and-the-default-bridge). On a custom network, containers can resolve each other by name or alias.
-    > 2. Isolation: All containers without a `--network` specified are attached to the default bridge network, hence can be a risk, as unrelated containers are then able to communicate. Using a custom network provides a scoped network in which only containers attached to that network are able to communicate, hence providing better isolation.
+   > **Key difference between default bridge and custom networks**
+   >
+   > 1. DNS resolution: By default, containers connected to the default bridge network can communicate with each other, but only by IP address. (unless you use `--link` option which is considered legacy). It is not recommended for production use due to the various [technical shortcomings](/engine/network/drivers/bridge/#differences-between-user-defined-bridges-and-the-default-bridge). On a custom network, containers can resolve each other by name or alias.
+   > 2. Isolation: All containers without a `--network` specified are attached to the default bridge network, hence can be a risk, as unrelated containers are then able to communicate. Using a custom network provides a scoped network in which only containers attached to that network are able to communicate, hence providing better isolation.
 
 ### Manage the resources
 
@@ -143,67 +143,61 @@ The `--cpus` flag specifies the CPU quota for the container. Here, it's set to h
 
 ### Override the default CMD and ENTRYPOINT in Docker Compose
 
-
-
 Sometimes, you might need to override the default commands (`CMD`) or entry points (`ENTRYPOINT`) defined in a Docker image, especially when using Docker Compose.
 
 1. Create a `compose.yml` file with the following content:
 
-    ```yaml
-    services:
-      postgres:
-        image: postgres:18
-        entrypoint: ["docker-entrypoint.sh", "postgres"]
-        command: ["-h", "localhost", "-p", "5432"]
-        environment:
-          POSTGRES_PASSWORD: secret 
-    ```
+   ```yaml
+   services:
+     postgres:
+       image: postgres:18
+       entrypoint: ["docker-entrypoint.sh", "postgres"]
+       command: ["-h", "localhost", "-p", "5432"]
+       environment:
+         POSTGRES_PASSWORD: secret
+   ```
 
-
-    The Compose file defines a service named `postgres` that uses the official Postgres image, sets an entrypoint script, and starts the container with password authentication.
+   The Compose file defines a service named `postgres` that uses the official Postgres image, sets an entrypoint script, and starts the container with password authentication.
 
 2. Bring up the service by running the following command:
 
-    ```console
-    $ docker compose up -d
-    ```
+   ```console
+   $ docker compose up -d
+   ```
 
-    This command starts the Postgres service defined in the Docker Compose file.
+   This command starts the Postgres service defined in the Docker Compose file.
 
 3. Verify the authentication with Docker Desktop Dashboard.
 
-    Open the Docker Desktop Dashboard, select the **Postgres** container and select **Exec** to enter into the container shell. You can type the following command to connect to the Postgres database:
+   Open the Docker Desktop Dashboard, select the **Postgres** container and select **Exec** to enter into the container shell. You can type the following command to connect to the Postgres database:
 
-    ```console
-    # psql -U postgres
-    ```
+   ```console
+   # psql -U postgres
+   ```
 
-    ![A screenshot of the Docker Desktop Dashboard selecting the Postgres container and entering into its shell using EXEC button](images/exec-into-postgres-container.webp?border=true)
+   ![A screenshot of the Docker Desktop Dashboard selecting the Postgres container and entering into its shell using EXEC button](images/exec-into-postgres-container.webp?border=true)
 
-
-    > [!NOTE]
-    > 
-    > The PostgreSQL image sets up trust authentication locally so you may notice a password isn't required when connecting from localhost (inside the same container). However, a password will be required if connecting from a different host/container.
+   > [!NOTE]
+   >
+   > The PostgreSQL image sets up trust authentication locally so you may notice a password isn't required when connecting from localhost (inside the same container). However, a password will be required if connecting from a different host/container.
 
 ### Override the default CMD and ENTRYPOINT with `docker run`
 
 You can also override defaults directly using the `docker run` command with the following command:
 
-```console 
+```console
 $ docker run -e POSTGRES_PASSWORD=secret postgres docker-entrypoint.sh -h localhost -p 5432
 ```
 
 This command runs a Postgres container, sets an environment variable for password authentication, overrides the default startup commands and configures hostname and port mapping.
 
-
 ## Additional resources
 
-* [Ways to set environment variables with Compose](/compose/how-tos/environment-variables/set-environment-variables/)
-* [What is a container](/get-started/docker-concepts/the-basics/what-is-a-container/)
+- [Ways to set environment variables with Compose](/compose/how-tos/environment-variables/set-environment-variables/)
+- [What is a container](/get-started/docker-concepts/the-basics/what-is-a-container/)
 
 ## Next steps
 
 Now that you have learned about overriding container defaults, it's time to learn how to persist container data.
 
 {{< button text="Persisting container data" url="persisting-container-data" >}}
-

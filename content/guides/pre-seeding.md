@@ -1,6 +1,6 @@
 ---
 title: Pre-seeding database with schema and data at startup for development environment
-linktitle: Pre-seeding database  
+linktitle: Pre-seeding database
 description: &desc Pre-seeding database with schema and data at startup for development environment
 keywords: Pre-seeding, database, postgres, container-supported development
 summary: *desc
@@ -26,7 +26,7 @@ The [official Docker image for Postgres](https://hub.docker.com/_/postgres) prov
 
 The following prerequisites are required to follow along with this how-to guide:
 
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) 
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ## Launching Postgres
 
@@ -44,7 +44,7 @@ Launch a quick demo of Postgres by using the following steps:
 
    ```plaintext
    PostgreSQL Database directory appears to contain a database; Skipping initialization
- 
+
    2024-09-08 09:09:47.136 UTC [1] LOG:  starting PostgreSQL 16.4 (Debian 16.4-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
    2024-09-08 09:09:47.137 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
    2024-09-08 09:09:47.137 UTC [1] LOG:  listening on IPv6 address "::", port 5432
@@ -87,7 +87,7 @@ Assuming that you have an existing Postgres database instance up and running, fo
    INSERT INTO users (name, email) VALUES
      ('Alpha', 'alpha@example.com'),
      ('Beta', 'beta@example.com'),
-     ('Gamma', 'gamma@example.com');  
+     ('Gamma', 'gamma@example.com');
    ```
 
    The SQL script creates a new database called `sampledb`, connects to it, and creates a `users` table. The table includes an auto-incrementing `id` as the primary key, a `name` field with a maximum length of 50 characters, and a unique `email` field with up to 100 characters.
@@ -96,7 +96,7 @@ Assuming that you have an existing Postgres database instance up and running, fo
 
 2. Seed the database.
 
-   It’s time to feed the content of the `seed.sql` directly into the database by using the `<` operator. The command is used to execute a SQL script named `seed.sql` against a Postgres database named `sampledb`. 
+   It’s time to feed the content of the `seed.sql` directly into the database by using the `<` operator. The command is used to execute a SQL script named `seed.sql` against a Postgres database named `sampledb`.
 
    ```console
    $ cat seed.sql | docker exec -i postgres psql -h localhost -U postgres -f-
@@ -111,7 +111,7 @@ Assuming that you have an existing Postgres database instance up and running, fo
    INSERT 0 3
    ```
 
-3. Run the following `psql` command to verify if the table named users is populated in the database `sampledb` or not. 
+3. Run the following `psql` command to verify if the table named users is populated in the database `sampledb` or not.
 
    ```console
    $ docker exec -it postgres psql -h localhost -U postgres sampledb
@@ -144,12 +144,12 @@ Assuming that you have an existing Postgres database instance up and running, fo
     3 | Gamma | gamma@example.com
    (3 rows)
    ```
-  
+
    Use `\q` or `\quit` to exit from the Postgres interactive shell.
 
 ## Pre-seed the database by bind-mounting a SQL script
 
-In Docker, mounting refers to making files or directories from the host system accessible within a container. This let you to share data or configuration files between the host and the container, enabling greater flexibility and persistence.
+In Docker, mounting refers to making files or directories from the host system accessible within a container. This lets you share data or configuration files between the host and the container, enabling greater flexibility and persistence.
 
 Now that you have learned how to launch Postgres and pre-seed the database using an SQL script, it’s time to learn how to mount an SQL file directly into the Postgres containers’ initialization directory (`/docker-entrypoint-initdb.d`). The `/docker-entrypoint-initdb.d` is a special directory in PostgreSQL Docker containers that is used for initializing the database when the container is first started
 
@@ -174,7 +174,7 @@ $ docker container stop postgres
     ('Gamma', 'gamma@example.com')
    ON CONFLICT (email) DO NOTHING;
    ```
-   
+
 2. Create a text file named `Dockerfile` and copy the following content.
 
    ```plaintext
@@ -184,11 +184,10 @@ $ docker container stop postgres
    ```
 
    This Dockerfile copies the `seed.sql` script directly into the PostgreSQL container's initialization directory.
-   
 
 3. Use Docker Compose.
-   
-   Using Docker Compose makes it even easier to manage and deploy the PostgreSQL container with the seeded database. This compose.yml file defines a Postgres service named `db` using the latest Postgres image, which sets up a database with the name `sampledb`, along with a user `postgres` and a password `mysecretpassword`. 
+
+   Using Docker Compose makes it even easier to manage and deploy the PostgreSQL container with the seeded database. This compose.yml file defines a Postgres service named `db` using the latest Postgres image, which sets up a database with the name `sampledb`, along with a user `postgres` and a password `mysecretpassword`.
 
    ```yaml
    services:
@@ -204,47 +203,45 @@ $ docker container stop postgres
        ports:
          - "5432:5432"
        volumes:
-         - data_sql:/var/lib/postgresql   # Persistent data storage
+         - data_sql:/var/lib/postgresql # Persistent data storage
 
    volumes:
      data_sql:
-    ```
-  
-    It maps port `5432` on the host to the container's `5432`, let you access to the Postgres database from outside the container. It also define `data_sql` for persisting the database data, ensuring that data is not lost when the container is stopped.
+   ```
 
-    It is important to note that the port mapping to the host is only necessary if you want to connect to the database from non-containerized programs. If you containerize the service that connects to the DB, you should connect to the database over a custom bridge network.
+   It maps port `5432` on the host to the container's `5432`, let you access to the Postgres database from outside the container. It also define `data_sql` for persisting the database data, ensuring that data is not lost when the container is stopped.
 
-4.  Bring up the Compose service.
+   It is important to note that the port mapping to the host is only necessary if you want to connect to the database from non-containerized programs. If you containerize the service that connects to the DB, you should connect to the database over a custom bridge network.
 
-    Assuming that you've placed the `seed.sql` file in the same directory as the Dockerfile, execute the following command:
+4. Bring up the Compose service.
 
-    ```console
-    $ docker compose up -d --build
-    ```
+   Assuming that you've placed the `seed.sql` file in the same directory as the Dockerfile, execute the following command:
 
-5.  It’s time to verify if the table `users` get populated with the data. 
+   ```console
+   $ docker compose up -d --build
+   ```
 
-    ```console
-    $ docker exec -it my_postgres_db psql -h localhost -U postgres sampledb
-    ```
+5. It’s time to verify if the table `users` get populated with the data.
 
-    ```sql 
-    sampledb=# SELECT * FROM users;
-      id | name  |       email
-    ----+-------+-------------------
-       1 | Alpha | alpha@example.com
-       2 | Beta  | beta@example.com
-       3 | Gamma | gamma@example.com
-     (3 rows)
+   ```console
+   $ docker exec -it my_postgres_db psql -h localhost -U postgres sampledb
+   ```
 
-    sampledb=#
-    ```
+   ```sql
+   sampledb=# SELECT * FROM users;
+     id | name  |       email
+   ----+-------+-------------------
+      1 | Alpha | alpha@example.com
+      2 | Beta  | beta@example.com
+      3 | Gamma | gamma@example.com
+    (3 rows)
 
+   sampledb=#
+   ```
 
 ## Pre-seed the database using JavaScript code
 
-
-Now that you have learned how to seed the database using various methods like SQL script, mounting volumes etc., it's time to try to achieve it using JavaScript code. 
+Now that you have learned how to seed the database using various methods like SQL script, mounting volumes etc., it's time to try to achieve it using JavaScript code.
 
 1. Create a .env file with the following:
 
@@ -258,12 +255,12 @@ Now that you have learned how to seed the database using various methods like SQ
 
 2. Create a new JavaScript file called seed.js with the following content:
 
-   The following JavaScript code imports the `dotenv` package which is used to load environment variables from an `.env` file. The `.config()` method reads the `.env` file and sets the environment variables as properties of the `process.env` object. This let you to securely store sensitive information like database credentials outside of your code.
+   The following JavaScript code imports the `dotenv` package which is used to load environment variables from an `.env` file. The `.config()` method reads the `.env` file and sets the environment variables as properties of the `process.env` object. This lets you securely store sensitive information like database credentials outside of your code.
 
    Then, it creates a new Pool instance from the pg library, which provides a connection pool for efficient database interactions. The `seedData` function is defined to perform the database seeding operations.
-It is called at the end of the script to initiate the seeding process. The try...catch...finally block is used for error handling. 
+   It is called at the end of the script to initiate the seeding process. The try...catch...finally block is used for error handling.
 
-   ```plaintext
+   ````plaintext
    require('dotenv').config();  // Load environment variables from .env file
    const { Pool } = require('pg');
 
@@ -309,35 +306,36 @@ It is called at the end of the script to initiate the seeding process. The try..
      seedData();
      ```
 
-3.  Kick off the seeding process
+   ````
 
-    ```console
-    $ node seed.js
-    ```
+3. Kick off the seeding process
 
-    You should see the following command:
+   ```console
+   $ node seed.js
+   ```
 
-    ```plaintext
-    Database seeded successfully!
-    ```
+   You should see the following command:
 
-4.  Verify if the database is seeded correctly:
+   ```plaintext
+   Database seeded successfully!
+   ```
 
-    ```console
-    $ docker exec -it postgres psql -h localhost -U postgres sampledb
-    ```
+4. Verify if the database is seeded correctly:
 
-    ```console
-    sampledb=# SELECT * FROM todos;
-    id |      task      | completed
-    ----+----------------+-----------
-    1 | Watch netflix  | f
-    2 | Finish podcast | f
-    3 | Pick up kid    | f
-    (3 rows)  
-    ```
+   ```console
+   $ docker exec -it postgres psql -h localhost -U postgres sampledb
+   ```
+
+   ```console
+   sampledb=# SELECT * FROM todos;
+   id |      task      | completed
+   ----+----------------+-----------
+   1 | Watch netflix  | f
+   2 | Finish podcast | f
+   3 | Pick up kid    | f
+   (3 rows)
+   ```
 
 ## Recap
 
-Pre-seeding a database with schema and data at startup is essential for creating a consistent and realistic testing environment, which helps in identifying issues early in development and aligning frontend and backend work. This guide has equipped you with the knowledge and practical steps to achieve pre-seeding using various methods, including SQL script, Docker integration, and JavaScript code. 
-
+Pre-seeding a database with schema and data at startup is essential for creating a consistent and realistic testing environment, which helps in identifying issues early in development and aligning frontend and backend work. This guide has equipped you with the knowledge and practical steps to achieve pre-seeding using various methods, including SQL script, Docker integration, and JavaScript code.
