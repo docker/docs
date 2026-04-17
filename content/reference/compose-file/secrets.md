@@ -3,7 +3,7 @@ title: Secrets
 description: Explore all the attributes the secrets top-level element can have.
 keywords: compose, compose specification, secrets, compose file reference
 aliases:
- - /compose/compose-file/09-secrets/
+  - /compose/compose-file/09-secrets/
 weight: 60
 ---
 
@@ -16,6 +16,8 @@ application. The source of the secret is either `file` or `environment`.
 
 - `file`: The secret is created with the contents of the file at the specified path.
 - `environment`: The secret is created with the value of an environment variable on the host.
+  The `environment` source is only supported by `docker compose` and is not supported when deploying
+  with `docker stack deploy`.
 
 ## Example 1
 
