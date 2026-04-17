@@ -16,7 +16,7 @@ Testcontainers Cloud supports any containers you would typically use with the Te
 
 ### Do I need to change my existing test code to use Testcontainers Cloud?
 
-No, you don't need to change your existing test code. Testcontainers Cloud integrates seamlessly with the open-source Testcontainers framework. Once the cloud configuration is set up, it automatically manages the containers in the cloud without requiring code changes.
+No, you don't need to change your existing test code. Testcontainers Cloud integrates with the open-source Testcontainers framework. Once the cloud configuration is set up, it automatically manages the containers in the cloud without requiring code changes.
 
 ### How do I integrate Testcontainers Cloud into my project?
 
@@ -36,7 +36,7 @@ Testcontainers Cloud supports any language that works with the open-source Testc
 
 ### How is container cleanup handled in Testcontainers Cloud?
 
-While Testcontainers library automatically handles container lifecycle management, Testcontainers Cloud manages the allocated cloud worker lifetime. This means that containers are spun up, monitored, and cleaned up after tests are completed by Testcontainers library, and the worker where these containers have being running will be removed automatically after the ~35 min idle period by Testcontainers Cloud. This approach frees developers from manually managing containers and associated cloud resources. 
+While Testcontainers library automatically handles container lifecycle management, Testcontainers Cloud manages the allocated cloud worker lifetime. This means that containers are spun up, monitored, and cleaned up after tests are completed by Testcontainers library, and the worker where these containers have being running will be removed automatically after the ~35 min idle period by Testcontainers Cloud. This approach frees developers from manually managing containers and associated cloud resources.
 
 ### Is there a free tier or pricing model for Testcontainers Cloud?
 

@@ -343,7 +343,7 @@ In the terminal, press `ctrl`+ `c` to stop the container.
 ## Share your work
 
 By sharing your image and notebook, you create a portable and replicable
-research environment that can be easily accessed and used by other data
+research environment that can be accessed and used by other data
 scientists. This process not only facilitates collaboration but also ensures
 that your work is preserved in an environment where it can be run without
 compatibility issues.
@@ -414,11 +414,11 @@ Other users can now download and import your volume. To import the volume and th
    `YOUR-USERNAME/jupyter-data:latest`.
 10. Select **Import**.
 11. In a terminal, run `docker run` to run your image with the imported volume.
-   Replace `YOUR-USER-NAME` with your Docker ID.
+    Replace `YOUR-USER-NAME` with your Docker ID.
 
-   ```console
-   $ docker run --rm -p 8889:8888 -v jupyter-data-2:/home/jovyan/work YOUR-USER-NAME/my-jupyter-image start-notebook.py --NotebookApp.token='my-token'
-   ```
+```console
+$ docker run --rm -p 8889:8888 -v jupyter-data-2:/home/jovyan/work YOUR-USER-NAME/my-jupyter-image start-notebook.py --NotebookApp.token='my-token'
+```
 
 ## Summary
 

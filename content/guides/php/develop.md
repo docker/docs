@@ -185,7 +185,7 @@ Press `ctrl+c` in the terminal to stop your application.
 
 ## Add phpMyAdmin to interact with the database
 
-You can easily add services to your application stack by updating the `compose.yaml` file.
+You can add services to your application stack by updating the `compose.yaml` file.
 
 Update your `compose.yaml` to add a new service for phpMyAdmin. For more details, see the [phpMyAdmin Official Docker Image](https://hub.docker.com/_/phpmyadmin). The following is the updated `compose.yaml` file.
 

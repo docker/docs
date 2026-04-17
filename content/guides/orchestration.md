@@ -14,7 +14,7 @@ params:
 
 Containerization provides an opportunity to move and scale applications to
 clouds and data centers. Containers effectively guarantee that those applications run the
-same way anywhere, allowing you to quickly and easily take advantage of all
+same way anywhere, letting you take advantage of all
 these environments. Additionally, as you scale your applications up, you need some
 tooling to help automate the maintenance of those applications, enable the
 replacement of failed containers automatically, and manage the roll-out of
@@ -32,7 +32,7 @@ The advanced modules teach you how to:
 
 ## Turn on Kubernetes
 
-Docker Desktop sets up Kubernetes for you quickly and easily. Follow the setup and validation instructions appropriate for your operating system:
+Docker Desktop sets up Kubernetes for you. Follow the setup and validation instructions appropriate for your operating system:
 
 {{< tabs group="os" >}}
 {{< tab name="Mac and Linux" >}}

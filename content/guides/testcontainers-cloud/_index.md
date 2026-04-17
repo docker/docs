@@ -25,7 +25,7 @@ params:
       url: https://www.docker.com/search/?_sf_s=testcontainers%20cloud
 ---
 
-Testcontainers Cloud is a cloud-based solution designed to streamline and enhance the process of running integration tests using Testcontainers. Testcontainers is the open source framework, which allows developers to easily spin up containerized dependencies such as databases, message brokers, and other services required for testing. By shifting the management of Testcontainers-based services to the cloud, Testcontainers Cloud optimizes performance, reduces resource constraints on local machines or CI servers, and ensures consistent test environments. This solution is particularly beneficial for teams working on complex, distributed systems, as it allows for scalable, isolated, and reliable testing without the typical overhead of managing containers locally.
+Testcontainers Cloud is a cloud-based solution designed to streamline and enhance the process of running integration tests using Testcontainers. Testcontainers is the open source framework, which lets developers spin up containerized dependencies such as databases, message brokers, and other services required for testing. By shifting the management of Testcontainers-based services to the cloud, Testcontainers Cloud optimizes performance, reduces resource constraints on local machines or CI servers, and ensures consistent test environments. This solution is particularly beneficial for teams working on complex, distributed systems, as it allows for scalable, isolated, and reliable testing without the typical overhead of managing containers locally.
 
 ## What you'll learn
 

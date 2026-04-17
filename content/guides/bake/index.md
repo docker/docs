@@ -87,7 +87,7 @@ line. Here's a quick summary of the options for the `default` target:
 
 - `platforms`: Platform variants to build.
 
-To execute this build, simply run the following command in the root of the
+To execute this build, run the following command in the root of the
 repository:
 
 ```console
@@ -185,7 +185,7 @@ And in the Dockerfile, add the build stage. This stage will use the official
 > [!TIP]
 > Because this stage relies on executing an external dependency, it's generally
 > a good idea to define the version you want to use as a build argument. This
-> lets you more easily manage version upgrades in the future by collocating
+> lets you manage version upgrades in the future by collocating
 > dependency versions to the beginning of the Dockerfile.
 
 ```dockerfile {hl_lines=[2,"6-8"]}
@@ -497,7 +497,7 @@ build/
 Docker Buildx Bake streamlines complex build workflows, enabling efficient
 multi-platform builds, testing, and artifact export. By integrating Buildx Bake
 into your projects, you can simplify your Docker builds, make your build
-configuration portable, and wrangle complex configurations more easily.
+configuration portable, and wrangle complex configurations.
 
 Experiment with different configurations and extend your Bake files to suit
 your project's needs. You might consider integrating Bake into your CI/CD

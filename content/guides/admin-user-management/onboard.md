@@ -39,7 +39,7 @@ SSO:
 
 - Simplifies sign in, as users sign in with their organizational credentials.
 - Reduces password-related vulnerabilities.
-- Simplifies onboarding as it works seamlessly with SCIM and group mapping for automated provisioning.
+- Simplifies onboarding as it works with SCIM and group mapping for automated provisioning.
 
 For more information, see the [SSO documentation](/manuals/enterprise/security/single-sign-on/_index.md).
 

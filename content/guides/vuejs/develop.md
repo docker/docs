@@ -4,7 +4,6 @@ linkTitle: Develop your app
 weight: 30
 keywords: vuejs, development, node
 description: Learn how to develop your Vue.js application locally using containers.
-
 ---
 
 ## Prerequisites
@@ -18,6 +17,7 @@ Complete [Containerize Vue.js application](containerize.md).
 In this section, you'll set up both production and development environments for your Vue.js application using Docker Compose. This approach streamlines your workflow—delivering a lightweight, static site via Nginx in production, and providing a fast, live-reloading dev server with Compose Watch for efficient local development.
 
 You’ll learn how to:
+
 - Configure isolated environments: Set up separate containers optimized for production and development use cases.
 - Live-reload in development: Use Compose Watch to automatically sync file changes, enabling real-time updates without manual intervention.
 - Preview and debug with ease: Develop inside containers with a seamless preview and debug experience—no rebuilds required after every change.
@@ -108,6 +108,7 @@ services:
           target: /app/vite.config.js
           action: restart
 ```
+
 - The `vuejs-prod` service builds and serves your static production app using Nginx.
 - The `vuejs-dev` service runs your Vue.js development server with live reload and hot module replacement.
 - `watch` triggers file sync with Compose Watch.
@@ -143,15 +144,15 @@ To confirm that Compose Watch is functioning correctly:
 
 2. Locate the following line:
 
-    ```html
-    <HelloWorld msg="You did it!" />
-    ```
+   ```html
+   <HelloWorld msg="You did it!" />
+   ```
 
 3. Change it to:
 
-    ```html
-    <HelloWorld msg="Hello from Docker Compose Watch" />
-    ```
+   ```html
+   <HelloWorld msg="Hello from Docker Compose Watch" />
+   ```
 
 4. Save the file.
 
@@ -166,10 +167,11 @@ You should see the updated text appear instantly, without needing to rebuild the
 In this section, you set up a complete development and production workflow for your Vue.js application using Docker and Docker Compose.
 
 Here’s what you accomplished:
-- Created a `Dockerfile.dev` to streamline local development with hot reloading  
-- Defined separate `vuejs-dev` and `vuejs-prod` services in your `compose.yaml` file  
-- Enabled real-time file syncing using Compose Watch for a smoother development experience  
-- Verified that live updates work seamlessly by modifying and previewing a component
+
+- Created a `Dockerfile.dev` to streamline local development with hot reloading
+- Defined separate `vuejs-dev` and `vuejs-prod` services in your `compose.yaml` file
+- Enabled real-time file syncing using Compose Watch for a smoother development experience
+- Verified that live updates work by modifying and previewing a component
 
 With this setup, you're now equipped to build, run, and iterate on your Vue.js app entirely within containers—efficiently and consistently across environments.
 
@@ -179,11 +181,11 @@ With this setup, you're now equipped to build, run, and iterate on your Vue.js a
 
 Deepen your knowledge and improve your containerized development workflow with these guides:
 
-- [Using Compose Watch](/manuals/compose/how-tos/file-watch.md) – Automatically sync source changes during development  
-- [Multi-stage builds](/manuals/build/building/multi-stage.md) – Create efficient, production-ready Docker images  
+- [Using Compose Watch](/manuals/compose/how-tos/file-watch.md) – Automatically sync source changes during development
+- [Multi-stage builds](/manuals/build/building/multi-stage.md) – Create efficient, production-ready Docker images
 - [Dockerfile best practices](/build/building/best-practices/) – Write clean, secure, and optimized Dockerfiles.
 - [Compose file reference](/compose/compose-file/) – Learn the full syntax and options available for configuring services in `compose.yaml`.
-- [Docker volumes](/storage/volumes/) – Persist and manage data between container runs  
+- [Docker volumes](/storage/volumes/) – Persist and manage data between container runs
 
 ## Next steps
 
