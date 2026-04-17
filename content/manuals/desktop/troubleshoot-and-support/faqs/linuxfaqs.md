@@ -209,7 +209,7 @@ To reduce the maximum size of the disk image file:
 
 1. From Docker Desktop Dashboard select **Settings** then **Advanced** from the **Resources** tab.
 
-2. The **Disk image size** section contains a slider that allows you to change the maximum size of the disk image. Adjust the slider to set a lower limit.
+2. The **Disk image size** section contains a slider that lets you change the maximum size of the disk image. Adjust the slider to set a lower limit.
 
 3. Select **Apply**.
 
