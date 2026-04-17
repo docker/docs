@@ -43,7 +43,7 @@ Beginning with [Kafka 3.3](https://www.confluent.io/blog/apache-kafka-3-3-0-new-
 
 ### Starting Kafka
 
-Start a basic Kafka cluster by doing the following steps. This example will launch a cluster, exposing port 9092 onto the host to let a native-running application to connect to it.
+Start a basic Kafka cluster by doing the following steps. This example will launch a cluster, exposing port 9092 onto the host to let a native-running application connect to it.
 
 1. Start a Kafka container by running the following command:
 

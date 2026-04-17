@@ -12,7 +12,7 @@ params:
   time: 20 minutes
 ---
 
-In modern application development, testing cloud applications locally before deploying them to a live environment helps you ship faster and with more confidence. This approach involves simulating services locally, identifying and fixing issues early, and iterating quickly without incurring costs or facing the complexities of a full cloud environment. Tools like [LocalStack](https://www.localstack.cloud/) have become invaluable in this process, enabling you to emulate AWS services and containerize applications for consistent, isolated testing environments. 
+In modern application development, testing cloud applications locally before deploying them to a live environment helps you ship faster and with more confidence. This approach involves simulating services locally, identifying and fixing issues early, and iterating quickly without incurring costs or facing the complexities of a full cloud environment. Tools like [LocalStack](https://www.localstack.cloud/) have become invaluable in this process, enabling you to emulate AWS services and containerize applications for consistent, isolated testing environments.
 
 In this guide, you'll learn how to:
 
@@ -22,7 +22,7 @@ In this guide, you'll learn how to:
 
 ## What is LocalStack?
 
-LocalStack is a cloud service emulator that runs in a single container on your laptop. It provides a powerful, flexible, and cost-effective way to test and develop AWS-based applications locally. 
+LocalStack is a cloud service emulator that runs in a single container on your laptop. It provides a powerful, flexible, and cost-effective way to test and develop AWS-based applications locally.
 
 ## Why use LocalStack?
 
@@ -40,7 +40,7 @@ The [official Docker image for LocalStack](https://hub.docker.com/r/localstack/l
 
 The following prerequisites are required to follow along with this how-to guide:
 
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) 
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [Node.js](https://nodejs.org/en/download/package-manager)
 - [Python and pip](https://www.python.org/downloads/)
 - Basic knowledge of Docker
@@ -58,7 +58,7 @@ Launch a quick demo of LocalStack by using the following steps:
 
 2. Bring up LocalStack
 
-   Run the following command to bring up LocalStack.   
+   Run the following command to bring up LocalStack.
 
    ```console
    $ docker compose -f compose-native.yml up -d
@@ -78,21 +78,21 @@ Launch a quick demo of LocalStack by using the following steps:
 
    To create Local Amazon S3 bucket, install the [`awscli-local` CLI](https://github.com/localstack/awscli-local) on your system. The `awslocal` command is a thin wrapper around the AWS command line interface for use with LocalStack. It lets you to test and develop against a simulated environment on your local machine without needing to access the real AWS services.
 
-    ```console
-    $ pip install awscli-local
-    ```
+   ```console
+   $ pip install awscli-local
+   ```
 
-    Create a new S3 bucket within the LocalStack environment with the following command:
+   Create a new S3 bucket within the LocalStack environment with the following command:
 
-    ```console
-    $ awslocal s3 mb s3://mysamplebucket
-    ```
+   ```console
+   $ awslocal s3 mb s3://mysamplebucket
+   ```
 
-    The command `s3 mb s3://mysamplebucket` tells the AWS CLI to create a new S3 bucket (mb stands for `make bucket`) named `mysamplebucket`.
+   The command `s3 mb s3://mysamplebucket` tells the AWS CLI to create a new S3 bucket (mb stands for `make bucket`) named `mysamplebucket`.
 
-    You can verify if the S3 bucket gets created or not by selecting the LocalStack container on the Docker Desktop Dashboard and viewing the logs. The logs indicates that your LocalStack environment is configured correctly and you can now use the `mysamplebucket` for storing and retrieving objects.
+   You can verify if the S3 bucket gets created or not by selecting the LocalStack container on the Docker Desktop Dashboard and viewing the logs. The logs indicates that your LocalStack environment is configured correctly and you can now use the `mysamplebucket` for storing and retrieving objects.
 
-    ![Diagram showing the logs of LocalStack that highlights the S3 bucket being created successfully ](./images/localstack-s3put.webp)
+   ![Diagram showing the logs of LocalStack that highlights the S3 bucket being created successfully ](./images/localstack-s3put.webp)
 
 ## Using LocalStack in development
 
@@ -101,10 +101,9 @@ Now that you've familiarized yourself with LocalStack, it's time to see it in ac
 - React: A user-friendly frontend for accessing the todo-list application
 - Node: A backend responsible for handling the HTTP requests.
 - MongoDB: A database to store all the to-do list data
-- LocalStack: Emulates the Amazon S3 service and stores and retrieve images.
+- LocalStack: Emulates the Amazon S3 service and stores and retrieves images.
 
 ![Diagram showing the tech stack of the sample todo-list application that includes LocalStack, frontend and backend services ](images/localstack-arch.webp)
-
 
 ## Connecting to LocalStack from a non-containerized app
 
@@ -125,19 +124,18 @@ Let’s see it in action. Start by launching the Node.js backend service.
    ```
 
 2. Install the required dependencies:
-  
+
    ```console
    $ npm install
    ```
 
 3. Setting up AWS environment variables
 
-
    The `.env` file located in the backend/ directory already contains placeholder credentials and configuration values that LocalStack uses to emulate AWS services. The `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are placeholder credentials, while `S3_BUCKET_NAME` and `S3_ENDPOINT_URL` are configuration settings. No changes are needed as these values are already correctly set for LocalStack.
 
    > [!TIP]
    >
-   > Given that you’re running Mongo in a Docker container and the backend Node app is running natively on your host, ensure that  `MONGODB_URI=mongodb://localhost:27017/todos` is set in your `.env` file.
+   > Given that you’re running Mongo in a Docker container and the backend Node app is running natively on your host, ensure that `MONGODB_URI=mongodb://localhost:27017/todos` is set in your `.env` file.
 
    ```plaintext
    MONGODB_URI=mongodb://localhost:27017/todos
@@ -148,14 +146,15 @@ Let’s see it in action. Start by launching the Node.js backend service.
    AWS_REGION=us-east-1
    ```
 
-   While the AWS SDK might typically use environment variables starting with `AWS_`, this specific application directly references the following `S3_*` variables in the index.js file (under the `backend/` directory) to configure the S3Client. 
+   While the AWS SDK might typically use environment variables starting with `AWS_`, this specific application directly references the following `S3_*` variables in the index.js file (under the `backend/` directory) to configure the S3Client.
 
    ```js
    const s3 = new S3Client({
      endpoint: process.env.S3_ENDPOINT_URL, // Use the provided endpoint or fallback to defaults
      credentials: {
-       accessKeyId: process.env.AWS_ACCESS_KEY_ID || 'default_access_key', // Default values for development
-       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || 'default_secret_key',  
+       accessKeyId: process.env.AWS_ACCESS_KEY_ID || "default_access_key", // Default values for development
+       secretAccessKey:
+         process.env.AWS_SECRET_ACCESS_KEY || "default_secret_key",
      },
    });
    ```
@@ -166,7 +165,7 @@ Let’s see it in action. Start by launching the Node.js backend service.
    $ node index.js
    ```
 
-    You will see the message that the backend service has successfully started at port 5000.
+   You will see the message that the backend service has successfully started at port 5000.
 
 ## Start the frontend service
 
@@ -179,7 +178,7 @@ To start the frontend service, open a new terminal and follow these steps:
    ```
 
 2. Install the required dependencies
-  
+
    ```console
    $ npm install
    ```
@@ -189,7 +188,7 @@ To start the frontend service, open a new terminal and follow these steps:
    ```console
    $ npm run dev
    ```
-   
+
    By now, you should see the following message:
 
    ```console
@@ -207,8 +206,7 @@ To start the frontend service, open a new terminal and follow these steps:
 
    ![Diagram showing the logs of the LocalStack that highlights image uploaded to the emulated S3 bucket](images/localstack-todolist-s3put.webp)
 
-   The `200` status code signifies that the `putObject` operation, which involves uploading an object to the S3 bucket, was executed successfully within the LocalStack environment. LocalStack logs this entry to provide visibility into the operations being performed. It helps debug and confirm that your application is interacting correctly with the emulated AWS services. 
-
+   The `200` status code signifies that the `putObject` operation, which involves uploading an object to the S3 bucket, was executed successfully within the LocalStack environment. LocalStack logs this entry to provide visibility into the operations being performed. It helps debug and confirm that your application is interacting correctly with the emulated AWS services.
 
    Since LocalStack is designed to simulate AWS services locally, this log entry shows that your application is functioning as expected when performing cloud operations in a local sandbox environment.
 
@@ -216,7 +214,7 @@ To start the frontend service, open a new terminal and follow these steps:
 
 Now that you have learnt how to connect a non-containerized Node.js application to LocalStack, it's time to explore the necessary changes to run the complete application stack in a containerized environment. To achieve this, you will create a Compose file specifying all required services - frontend, backend, database, and LocalStack.
 
-1. Examine the Docker Compose file. 
+1. Examine the Docker Compose file.
 
    The following Docker Compose file defines four services: `backend`, `frontend`, `mongodb`, and `localstack`. The `backend` and `frontend` services are your Node.js applications, while `mongodb` provides a database and `localstack` simulates AWS services like S3.
 
@@ -274,7 +272,7 @@ Now that you have learnt how to connect a non-containerized Node.js application 
 
    > [!TIP]
    > Given the previous Compose file, the app would connect to LocalStack using the hostname `localstack` while Mongo would connect using the hostname `mongodb`.
- 
+
    ```plaintext
    MONGODB_URI=mongodb://mongodb:27017/todos
    AWS_ACCESS_KEY_ID=test
@@ -286,8 +284,7 @@ Now that you have learnt how to connect a non-containerized Node.js application 
 
 3. Stop the running services
 
-   Ensure that you stop the Node frontend and backend service from the previous step by pressing “Ctrl+C” in the terminal. Also, you'll need to stop the LocalStack and Mongo containers by selecting them in the Docker Desktop Dashboard and selecting the "Delete" button. 
-
+   Ensure that you stop the Node frontend and backend service from the previous step by pressing “Ctrl+C” in the terminal. Also, you'll need to stop the LocalStack and Mongo containers by selecting them in the Docker Desktop Dashboard and selecting the "Delete" button.
 
 4. Start the application stack by executing the following command at the root of your cloned project directory:
 
@@ -301,18 +298,16 @@ Now that you have learnt how to connect a non-containerized Node.js application 
 
    The AWS S3 bucket is not created beforehand by the Compose file. Run the following command to create a new bucket within the LocalStack environment:
 
-
    ```console
    $ awslocal s3 mb s3://mysamplebucket
    ```
 
    The command creates an S3 bucket named `mysamplebucket`.
 
-   Open [http://localhost:5173](http://localhost:5173) to access the complete to-do list application and start uploading images to the Amazon S3 bucket. 
+   Open [http://localhost:5173](http://localhost:5173) to access the complete to-do list application and start uploading images to the Amazon S3 bucket.
 
    > [!TIP]
    > To optimize performance and reduce upload times during development, consider uploading smaller image files. Larger images may take longer to process and could impact the overall responsiveness of the application.
-
 
 ## Recap
 
