@@ -4,7 +4,6 @@ linkTitle: Run your tests
 weight: 40
 keywords: angular, test, jasmine
 description: Learn how to run your Angular tests in a container.
-
 ---
 
 ## Prerequisites
@@ -18,7 +17,6 @@ Testing is a critical part of the development process. In this section, you'll l
 - Run Jasmine unit tests using the Angular CLI inside a Docker container.
 - Use Docker Compose to isolate your test environment.
 - Ensure consistency between local and container-based testing.
-
 
 The `docker-angular-sample` project comes pre-configured with Jasmine, so you can get started quickly without extra setup.
 
@@ -36,7 +34,7 @@ This test uses Jasmine to validate the AppComponent logic.
 
 ### Step 1: Update compose.yaml
 
-Add a new service named `angular-test` to your `compose.yaml` file. This service allows you to run your test suite in an isolated, containerized environment.
+Add a new service named `angular-test` to your `compose.yaml` file. This service lets you run your test suite in an isolated, containerized environment.
 
 ```yaml {hl_lines="22-26",linenos=true}
 services:
@@ -65,11 +63,9 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     command: ["npm", "run", "test"]
-
 ```
 
 The angular-test service reuses the same `Dockerfile.dev` used for [development](develop.md) and overrides the default command to run tests with `npm run test`. This setup ensures a consistent test environment that matches your local development configuration.
-
 
 After completing the previous steps, your project directory should contain the following files:
 
@@ -92,6 +88,7 @@ $ docker compose run --rm angular-test
 ```
 
 This command will:
+
 - Start the `angular-test` service defined in your `compose.yaml` file.
 - Execute the `npm run test` script using the same environment as development.
 - Automatically removes the container after tests complete, using the [`docker compose run --rm`](/reference/cli/docker/compose/run/) command.
@@ -116,6 +113,7 @@ Time:        1.529 s
 In this section, you learned how to run unit tests for your Angular application inside a Docker container using Jasmine and Docker Compose.
 
 What you accomplished:
+
 - Created a `angular-test` service in `compose.yaml` to isolate test execution.
 - Reused the development `Dockerfile.dev` to ensure consistency between dev and test environments.
 - Ran tests inside the container using `docker compose run --rm angular-test`.
@@ -129,8 +127,9 @@ Explore official references and best practices to sharpen your Docker testing wo
 
 - [Dockerfile reference](/reference/dockerfile/) – Understand all Dockerfile instructions and syntax.
 - [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/) – Write efficient, maintainable, and secure Dockerfiles.
-- [Compose file reference](/compose/compose-file/) – Learn the full syntax and options available for configuring services in `compose.yaml`.  
+- [Compose file reference](/compose/compose-file/) – Learn the full syntax and options available for configuring services in `compose.yaml`.
 - [`docker compose run` CLI reference](/reference/cli/docker/compose/run/) – Run one-off commands in a service container.
+
 ---
 
 ## Next steps

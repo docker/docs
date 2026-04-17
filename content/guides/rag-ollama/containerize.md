@@ -52,7 +52,7 @@ Containerizing an application involves packaging it along with its dependencies 
 
 1. Dockerfile: A Dockerfile that contains instructions on how to build a Docker image for your application. It specifies the base image, dependencies, configuration files, and the command to run your application.
 
-2. Docker Compose File: Docker Compose is a tool for defining and running multi-container Docker applications. A Compose file allows you to configure your application's services, networks, and volumes in a single file.
+2. Docker Compose File: Docker Compose is a tool for defining and running multi-container Docker applications. A Compose file lets you configure your application's services, networks, and volumes in a single file.
 
 ## Run the application
 
@@ -105,4 +105,3 @@ application using Docker.
 ## Next steps
 
 In the next section, you'll learn how to properly configure the application with your preferred LLM model, completely locally, using Docker.
-

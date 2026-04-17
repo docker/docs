@@ -5,8 +5,8 @@ weight: 5
 keywords: C++, containerize, multi-stage
 description: Learn how to create a multi-stage build for a C++ application.
 aliases:
-- /language/cpp/multistage/
-- /guides/language/cpp/multistage/
+  - /language/cpp/multistage/
+  - /guides/language/cpp/multistage/
 ---
 
 ## Prerequisites
@@ -16,7 +16,7 @@ aliases:
 ## Overview
 
 This section walks you through creating a multi-stage Docker build for a C++ application.
-A multi-stage build is a Docker feature that allows you to use different base images for different stages of the build process,
+A multi-stage build is a Docker feature that lets you use different base images for different stages of the build process,
 so you can optimize the size of your final image and separate build dependencies from runtime dependencies.
 
 The standard practice for compiled languages like C++ is to have a build stage that compiles the code and a runtime stage that runs the compiled binary,
