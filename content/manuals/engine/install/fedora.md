@@ -210,6 +210,17 @@ download a new file each time you want to upgrade Docker Engine.
    boot your system. If you don't want Docker to start automatically, use `sudo
    systemctl start docker` instead.
 
+   > [!NOTE]
+   >
+   > If the Docker service fails to start and `journalctl -u docker`
+   > shows `failed to find iptables`, point the `iptables` command to
+   > `iptables-nft` using `alternatives` and restart the service:
+   >
+   > ```console
+   > $ sudo alternatives --set iptables /usr/bin/iptables-nft
+   > $ sudo systemctl restart docker
+   > ```
+
 4. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
