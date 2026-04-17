@@ -33,7 +33,7 @@ the host into the build container to test, lint, or compile a project.
 
 ## Bind-mounting over existing data
 
-If you bind mount file or directory into a directory in the container in which
+If you bind mount a file or directory into a directory in the container in which
 files or directories exist, the pre-existing files are obscured by the mount.
 This is similar to if you were to save files into `/mnt` on a Linux host, and
 then mounted a USB drive into `/mnt`. The contents of `/mnt` would be obscured
@@ -115,8 +115,8 @@ $ docker run --mount type=bind,src=<host-path>,dst=<container-path>[,<key>=<valu
 
 Valid options for `--mount type=bind` include:
 
-| Option                         | Description                                                                                                                                                          |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Option                         | Description                                                                                                                                                         |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `source`, `src`                | The location of the file or directory on the host. This can be an absolute or relative path.                                                                        |
 | `destination`, `dst`, `target` | The path where the file or directory is mounted in the container. Must be an absolute path.                                                                         |
 | `readonly`, `ro`               | If present, causes the bind mount to be [mounted into the container as read-only](#use-a-read-only-bind-mount).                                                     |
@@ -168,7 +168,7 @@ on your development host. Use the following command to bind-mount the `target/`
 directory into your container at `/app/`. Run the command from within the
 `source` directory. The `$(pwd)` sub-command expands to the current working
 directory on Linux or macOS hosts.
-If you're on Windows, see also [Path conversions on Windows](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md).
+If you're on Windows, see also [Path conversions on Windows](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md#path-conversion-errors-on-windows).
 
 The following `--mount` and `-v` examples produce the same result. You can't
 run them both unless you remove the `devtest` container after running the first
