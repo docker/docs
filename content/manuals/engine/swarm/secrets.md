@@ -1,7 +1,8 @@
 ---
 title: Manage sensitive data with Docker secrets
 description: How to securely store, retrieve, and use sensitive data with Docker services
-keywords: swarm, secrets, credentials, sensitive strings, sensitive data, security,
+keywords:
+  swarm, secrets, credentials, sensitive strings, sensitive data, security,
   encryption, encryption at rest
 tags: [Secrets]
 ---
@@ -59,7 +60,7 @@ examples below. Keep the following notable differences in mind:
   container as an image using `docker commit` or similar commands.
 
 - On Windows, we recommend enabling
-  [BitLocker](https://technet.microsoft.com/en-us/library/cc732774(v=ws.11).aspx)
+  [BitLocker](<https://technet.microsoft.com/en-us/library/cc732774(v=ws.11).aspx>)
   on the volume containing the Docker root directory on the host machine to
   ensure that secrets for running containers are encrypted at rest.
 
@@ -174,7 +175,7 @@ real-world example, continue to
     $ docker service ps redis
 
     ID            NAME     IMAGE         NODE              DESIRED STATE  CURRENT STATE          ERROR  PORTS
-    bkna6bpn8r1a  redis.1  redis:alpine  ip-172-31-46-109  Running        Running 8 seconds ago  
+    bkna6bpn8r1a  redis.1  redis:alpine  ip-172-31-46-109  Running        Running 8 seconds ago
     ```
 
     If there were an error, and the task were failing and repeatedly restarting,
@@ -184,10 +185,10 @@ real-world example, continue to
     $ docker service ps redis
 
     NAME                      IMAGE         NODE  DESIRED STATE  CURRENT STATE          ERROR                      PORTS
-    redis.1.siftice35gla      redis:alpine  moby  Running        Running 4 seconds ago                             
-     \_ redis.1.whum5b7gu13e  redis:alpine  moby  Shutdown       Failed 20 seconds ago      "task: non-zero exit (1)"  
-     \_ redis.1.2s6yorvd9zow  redis:alpine  moby  Shutdown       Failed 56 seconds ago      "task: non-zero exit (1)"  
-     \_ redis.1.ulfzrcyaf6pg  redis:alpine  moby  Shutdown       Failed about a minute ago  "task: non-zero exit (1)"  
+    redis.1.siftice35gla      redis:alpine  moby  Running        Running 4 seconds ago
+     \_ redis.1.whum5b7gu13e  redis:alpine  moby  Shutdown       Failed 20 seconds ago      "task: non-zero exit (1)"
+     \_ redis.1.2s6yorvd9zow  redis:alpine  moby  Shutdown       Failed 56 seconds ago      "task: non-zero exit (1)"
+     \_ redis.1.ulfzrcyaf6pg  redis:alpine  moby  Shutdown       Failed about a minute ago  "task: non-zero exit (1)"
      \_ redis.1.wrny5v4xyps6  redis:alpine  moby  Shutdown       Failed 2 minutes ago       "task: non-zero exit (1)"
     ```
 
@@ -276,7 +277,9 @@ This example assumes that you have PowerShell installed.
 
     ```html
     <html lang="en">
-      <head><title>Hello Docker</title></head>
+      <head>
+        <title>Hello Docker</title>
+      </head>
       <body>
         <p>Hello Docker! You have deployed a HTML page.</p>
       </body>
@@ -390,7 +393,7 @@ generate the site key and certificate, name the files `site.key` and
               -subj '/C=US/ST=CA/L=San Francisco/O=Docker/CN=localhost'
     ```
 
-7.  Configure the site certificate. Edit a new file  called `site.cnf` and
+7.  Configure the site certificate. Edit a new file called `site.cnf` and
     paste the following contents into it. This constrains the site
     certificate so that it can only be used to authenticate a server and
     can't be used to sign certificates.
@@ -442,7 +445,7 @@ generate the site key and certificate, name the files `site.key` and
 
 2.  Create three secrets, representing the key, the certificate, and the
     `site.conf`. You can store any file as a secret as long as it is smaller
-    than 500 KB. This allows you to decouple the key, certificate, and
+    than 500 KB. This lets you decouple the key, certificate, and
     configuration from the services that use them. In each of these
     commands, the last argument represents the path to the file to read the
     secret from on the host machine's filesystem. In these examples, the secret
@@ -511,11 +514,10 @@ generate the site key and certificate, name the files `site.key` and
          sh -c "exec nginx -g 'daemon off;'"
     ```
 
-    The `site.key` and `site.crt` secrets use the short-hand syntax, without a 
+    The `site.key` and `site.crt` secrets use the short-hand syntax, without a
     custom `target` location set. The short syntax mounts the secrets in `/run/secrets/
     with the same name as the secret. Within the running containers, the following
     three files now exist:
-
     - `/run/secrets/site.key`
     - `/run/secrets/site.crt`
     - `/etc/nginx/conf.d/site.conf`
@@ -700,7 +702,6 @@ line.
 
 3.  Create the MySQL service. The MySQL service has the following
     characteristics:
-
     - Because the scale is set to `1`, only a single MySQL task runs.
       Load-balancing MySQL is left as an exercise to the reader and involves
       more than just scaling the service.
@@ -751,7 +752,6 @@ line.
 
 5.  Now that MySQL is set up, create a WordPress service that connects to the
     MySQL service. The WordPress service has the following characteristics:
-
     - Because the scale is set to `1`, only a single WordPress task runs.
       Load-balancing WordPress is left as an exercise to the reader, because of
       limitations with storing WordPress session data on the container
@@ -773,7 +773,7 @@ line.
       password in `/run/secrets/wp_db_password` and creates the `wordpress`
       database if it does not yet exist.
     - Stores its data, such as themes and plugins, in a volume called `wpdata`
-      so these files  persist when the service restarts.
+      so these files persist when the service restarts.
 
     ```console
     $ docker service create \
@@ -805,7 +805,7 @@ line.
     $ docker service ps wordpress
 
     ID            NAME         IMAGE             NODE  DESIRED STATE  CURRENT STATE           ERROR  PORTS
-    aukx6hgs9gwc  wordpress.1  wordpress:latest  moby  Running        Running 52 seconds ago   
+    aukx6hgs9gwc  wordpress.1  wordpress:latest  moby  Running        Running 52 seconds ago
     ```
 
     At this point, you could actually revoke the WordPress service's access to
@@ -914,7 +914,7 @@ use it, then remove the old secret.
     $ docker service update \
          --secret-rm mysql_password \
          --secret-add source=mysql_password_v2,target=wp_db_password \
-         wordpress    
+         wordpress
     ```
 
 5.  Verify that WordPress works by browsing to http://localhost:30000/ on any
@@ -934,7 +934,6 @@ use it, then remove the old secret.
 
     $ docker secret rm mysql_password
     ```
-
 
 7.  Run the following commands to remove the WordPress service, the MySQL container,
     the `mydata` and `wpdata` volumes, and the Docker secrets:
@@ -977,43 +976,41 @@ the information from a Docker-managed secret instead of being passed directly.
 ## Use Secrets in Compose
 
 ```yaml
-
 services:
-   db:
-     image: mysql:latest
-     volumes:
-       - db_data:/var/lib/mysql
-     environment:
-       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
-       MYSQL_DATABASE: wordpress
-       MYSQL_USER: wordpress
-       MYSQL_PASSWORD_FILE: /run/secrets/db_password
-     secrets:
-       - db_root_password
-       - db_password
+  db:
+    image: mysql:latest
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_root_password
+      - db_password
 
-   wordpress:
-     depends_on:
-       - db
-     image: wordpress:latest
-     ports:
-       - "8000:80"
-     environment:
-       WORDPRESS_DB_HOST: db:3306
-       WORDPRESS_DB_USER: wordpress
-       WORDPRESS_DB_PASSWORD_FILE: /run/secrets/db_password
-     secrets:
-       - db_password
-
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password
 
 secrets:
-   db_password:
-     file: db_password.txt
-   db_root_password:
-     file: db_root_password.txt
+  db_password:
+    file: db_password.txt
+  db_root_password:
+    file: db_root_password.txt
 
 volumes:
-    db_data:
+  db_data:
 ```
 
 This example creates a simple WordPress site using two secrets in

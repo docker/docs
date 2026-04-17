@@ -2,7 +2,7 @@
 description: Integrate Docker Compose directly into your applications with the Compose SDK.
 keywords: docker compose sdk, compose api, Docker developer SDK
 title: Using the Compose SDK
-linkTitle: Compose SDK 
+linkTitle: Compose SDK
 weight: 60
 params:
   sidebar:
@@ -16,7 +16,7 @@ params:
 The `docker/compose` package can be used as a Go library by third-party applications to programmatically manage
 containerized applications defined in Compose files. This SDK provides a comprehensive API that lets you
 integrate Compose functionality directly into your applications, allowing you to load, validate, and manage
-multi-container environments without relying on the Compose CLI. 
+multi-container environments without relying on the Compose CLI.
 
 Whether you need to orchestrate containers as part of
 a deployment pipeline, build custom management tools, or embed container orchestration into your application, the
@@ -32,7 +32,7 @@ management, allowing you to focus on your application logic.
 
 ### Requirements
 
-Before using the SDK, make sure you're using a compatible version of the Docker CLI. 
+Before using the SDK, make sure you're using a compatible version of the Docker CLI.
 
 ```go
 require (
@@ -70,7 +70,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to initialize docker CLI: %v", err)
 	}
-	
+
     // Create a new Compose service instance
     service, err := compose.NewComposeService(dockerCLI)
     if err != nil {
@@ -139,7 +139,7 @@ scenarios including CLI tools, web services, automation scripts, and testing env
 
 ## Tracking operations with `EventProcessor`
 
-The `EventProcessor` interface allows you to monitor Compose operations in real-time by receiving events about changes
+The `EventProcessor` interface lets you monitor Compose operations in real-time by receiving events about changes
 applied to Docker resources such as images, containers, volumes, and networks. This is particularly useful for building
 user interfaces, logging systems, or monitoring tools that need to track the progress of Compose operations.
 

@@ -1,23 +1,24 @@
 ---
 description: Learn how to connect Docker containers together.
-keywords: Examples, Usage, user guide, links, linking, docker, documentation, examples,
+keywords:
+  Examples, Usage, user guide, links, linking, docker, documentation, examples,
   names, name, container naming, port, map, network port, network
 title: Legacy container links
 aliases:
-- /userguide/dockerlinks/
-- /engine/userguide/networking/default_network/dockerlinks/
-- /network/links/
+  - /userguide/dockerlinks/
+  - /engine/userguide/networking/default_network/dockerlinks/
+  - /network/links/
 ---
 
 > [!WARNING]
 >
 > The `--link` flag is a legacy feature of Docker. It may eventually
-be removed. Unless you absolutely need to continue using it, we recommend that you use
-user-defined networks to facilitate communication between two containers instead of using
-`--link`. One feature that user-defined networks do not support that you can do
-with `--link` is sharing environment variables between containers. However,
-you can use other mechanisms such as volumes to share environment variables
-between containers in a more controlled way.
+> be removed. Unless you absolutely need to continue using it, we recommend that you use
+> user-defined networks to facilitate communication between two containers instead of using
+> `--link`. One feature that user-defined networks do not support that you can do
+> with `--link` is sharing environment variables between containers. However,
+> you can use other mechanisms such as volumes to share environment variables
+> between containers in a more controlled way.
 >
 > See [Differences between user-defined bridges and the default bridge](drivers/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge)
 > for some alternatives to using `--link`.
@@ -45,8 +46,8 @@ $ docker run -d -P training/webapp python app.py
 ```
 
 When that container was created, the `-P` flag was used to automatically map
-any network port inside it to a random high port within an *ephemeral port
-range* on your Docker host. Next, when `docker ps` was run, you saw that port
+any network port inside it to a random high port within an _ephemeral port
+range_ on your Docker host. Next, when `docker ps` was run, you saw that port
 5000 in the container was bound to port 49155 on the host.
 
 ```console
@@ -68,7 +69,7 @@ And you saw why this isn't such a great idea because it constrains you to
 only one container on that specific port.
 
 Instead, you may specify a range of host ports to bind a container port to
-that is different than the default *ephemeral port range*:
+that is different than the default _ephemeral port range_:
 
 ```console
 $ docker run -d -p 8000-9000:5000 training/webapp python app.py
@@ -126,7 +127,7 @@ $ docker port nostalgic_morse 5000
 > for more information on links in user-defined networks.
 
 Network port mappings are not the only way Docker containers can connect to one
-another. Docker also has a linking system that allows you to link multiple
+another. Docker also has a linking system that lets you link multiple
 containers together and send connection information from one to another. When
 containers are linked, information about a source container can be sent to a
 recipient container. This allows the recipient to see selected data describing
@@ -165,7 +166,6 @@ aed84ee21bde  training/webapp:latest python app.py  12 hours ago  Up 2 seconds 0
 ```
 
 You can also use `docker inspect` to return the container's name.
-
 
 > [!NOTE]
 >
@@ -224,13 +224,11 @@ $ docker run -d -P --name web --link db training/webapp python app.py
 
 Next, inspect your linked containers with `docker inspect`:
 
-
 ```console
 $ docker inspect -f "{{ .HostConfig.Links }}" web
 
 [/db:/web/db]
 ```
-
 
 You can see that the `web` container is now linked to the `db` container
 `web/db`. Which allows it to access information about the `db` container.
@@ -247,8 +245,8 @@ the network.
 Docker exposes connectivity information for the source container to the
 recipient container in two ways:
 
-* Environment variables,
-* Updating the `/etc/hosts` file.
+- Environment variables,
+- Updating the `/etc/hosts` file.
 
 ### Environment variables
 
@@ -257,9 +255,9 @@ automatically creates environment variables in the target container based on
 the `--link` parameters. It also exposes all environment variables
 originating from Docker from the source container. These include variables from:
 
-* the `ENV` commands in the source container's Dockerfile
-* the `-e`, `--env`, and `--env-file` options on the `docker run`
-command when the source container is started
+- the `ENV` commands in the source container's Dockerfile
+- the `-e`, `--env`, and `--env-file` options on the `docker run`
+  command when the source container is started
 
 These environment variables enable programmatic discovery from within the
 target container of information related to the source container.
@@ -281,18 +279,18 @@ source container. Each variable has a unique prefix in the form `<name>_PORT_<po
 
 The components in this prefix are:
 
-* the alias `<name>` specified in the `--link` parameter (for example, `webdb`)
-* the `<port>` number exposed
-* a `<protocol>` which is either TCP or UDP
+- the alias `<name>` specified in the `--link` parameter (for example, `webdb`)
+- the `<port>` number exposed
+- a `<protocol>` which is either TCP or UDP
 
 Docker uses this prefix format to define three distinct environment variables:
 
-* The `prefix_ADDR` variable contains the IP Address from the URL, for
-example `WEBDB_PORT_5432_TCP_ADDR=172.17.0.82`.
-* The `prefix_PORT` variable contains just the port number from the URL of
-example `WEBDB_PORT_5432_TCP_PORT=5432`.
-* The `prefix_PROTO` variable contains just the protocol from the URL of
-example `WEBDB_PORT_5432_TCP_PROTO=tcp`.
+- The `prefix_ADDR` variable contains the IP Address from the URL, for
+  example `WEBDB_PORT_5432_TCP_ADDR=172.17.0.82`.
+- The `prefix_PORT` variable contains just the port number from the URL of
+  example `WEBDB_PORT_5432_TCP_PORT=5432`.
+- The `prefix_PROTO` variable contains just the protocol from the URL of
+  example `WEBDB_PORT_5432_TCP_PROTO=tcp`.
 
 If the container exposes multiple ports, an environment variable set is
 defined for each one. This means, for example, if a container exposes 4 ports
@@ -392,7 +390,7 @@ to make use of your `db` container.
 >
 > You can link multiple recipient containers to a single source. For
 > example, you could have multiple (differently named) web containers attached to your
->`db` container.
+> `db` container.
 
 If you restart the source container, the `/etc/hosts` files on the linked containers
 are automatically updated with the source container's new IP address,

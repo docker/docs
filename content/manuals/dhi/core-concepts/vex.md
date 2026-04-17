@@ -42,7 +42,7 @@ configuration.
 To enhance vulnerability management, Docker Hardened Images (DHI) incorporate
 VEX reports, providing context-specific assessments of known vulnerabilities.
 
-This integration allows you to:
+This integration lets you:
 
 - Consume producer assertions: Review Docker's assertions about whether known
   vulnerabilities in the image's components are exploitable in the product as

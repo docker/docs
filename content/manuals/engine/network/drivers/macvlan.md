@@ -69,7 +69,7 @@ trunk bridge mode.
 - In bridge mode, Macvlan traffic goes through a physical device on the host.
 
 - In 802.1Q trunk bridge mode, traffic goes through an 802.1Q sub-interface
-  which Docker creates on the fly. This allows you to control routing and
+  which Docker creates on the fly. This lets you control routing and
   filtering at a more granular level.
 
 ### Bridge mode

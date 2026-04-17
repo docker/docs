@@ -80,7 +80,7 @@ For more details about image tag resolution, see
 >
 > This example only works for a Windows container.
 
-Swarm now allows using a Docker config as a gMSA credential spec - a requirement for Active Directory-authenticated applications. This reduces the burden of distributing credential specs to the nodes they're used on. 
+Swarm now allows using a Docker config as a gMSA credential spec - a requirement for Active Directory-authenticated applications. This reduces the burden of distributing credential specs to the nodes they're used on.
 
 The following example assumes a gMSA and its credential spec (called credspec.json) already exists, and that the nodes being deployed to are correctly configured for the gMSA.
 
@@ -120,24 +120,24 @@ nodes are able to log into the registry and pull the image.
 
 ### Provide credential specs for managed service accounts
 
- In Enterprise Edition 3.0, security is improved through the centralized distribution and management of Group Managed Service Account(gMSA) credentials using Docker config functionality. Swarm now allows using a Docker config as a gMSA credential spec, which reduces the burden of distributing credential specs to the nodes on which they are used. 
+In Enterprise Edition 3.0, security is improved through the centralized distribution and management of Group Managed Service Account(gMSA) credentials using Docker config functionality. Swarm now allows using a Docker config as a gMSA credential spec, which reduces the burden of distributing credential specs to the nodes on which they are used.
 
 > [!NOTE]
 >
 > This option is only applicable to services using Windows containers.
 
- Credential spec files are applied at runtime, eliminating the need for host-based credential spec files or registry entries - no gMSA credentials are written to disk on worker nodes. You can make credential specs available to Docker Engine running swarm kit worker nodes before a container starts. When deploying a service using a gMSA-based config, the credential spec is passed directly to the runtime of containers in that service.
+Credential spec files are applied at runtime, eliminating the need for host-based credential spec files or registry entries - no gMSA credentials are written to disk on worker nodes. You can make credential specs available to Docker Engine running swarm kit worker nodes before a container starts. When deploying a service using a gMSA-based config, the credential spec is passed directly to the runtime of containers in that service.
 
- The `--credential-spec` must be in one of the following formats:
+The `--credential-spec` must be in one of the following formats:
 
- - `file://<filename>`: The referenced file must be present in the `CredentialSpecs` subdirectory in the docker data directory, which defaults to `C:\ProgramData\Docker\` on Windows. For example, specifying `file://spec.json` loads `C:\ProgramData\Docker\CredentialSpecs\spec.json`.
-- `registry://<value-name>`: The credential spec is read from the Windows registry on the daemon’s host. 
-- `config://<config-name>`: The config name is automatically converted to the config ID in the CLI. 
-The credential spec contained in the specified `config` is used.
+- `file://<filename>`: The referenced file must be present in the `CredentialSpecs` subdirectory in the docker data directory, which defaults to `C:\ProgramData\Docker\` on Windows. For example, specifying `file://spec.json` loads `C:\ProgramData\Docker\CredentialSpecs\spec.json`.
+- `registry://<value-name>`: The credential spec is read from the Windows registry on the daemon’s host.
+- `config://<config-name>`: The config name is automatically converted to the config ID in the CLI.
+  The credential spec contained in the specified `config` is used.
 
- The following simple example retrieves the gMSA name and JSON contents from your Active Directory (AD) instance:
+The following simple example retrieves the gMSA name and JSON contents from your Active Directory (AD) instance:
 
- ```console
+```console
 $ name="mygmsa"
 $ contents="{...}"
 $ echo $contents > contents.json
@@ -145,8 +145,8 @@ $ echo $contents > contents.json
 
 Make sure that the nodes to which you are deploying are correctly configured for the gMSA.
 
- To use a config as a credential spec, create a Docker config in a credential spec file named `credpspec.json`. 
- You can specify any name for the name of the `config`. 
+To use a config as a credential spec, create a Docker config in a credential spec file named `credpspec.json`.
+You can specify any name for the name of the `config`.
 
 ```console
 $ docker config create --label com.docker.gmsa.name=mygmsa credspec credspec.json
@@ -158,7 +158,7 @@ Now you can create a service using this credential spec. Specify the `--credenti
 $ docker service create --credential-spec="config://credspec" <your image>
 ```
 
- Your service uses the gMSA credential spec when it starts, but unlike a typical Docker config (used by passing the --config flag), the credential spec is not mounted into the container.
+Your service uses the gMSA credential spec when it starts, but unlike a typical Docker config (used by passing the --config flag), the credential spec is not mounted into the container.
 
 ## Update a service
 
@@ -222,9 +222,9 @@ one of those commands with the `--help` flag.
 You can configure the following options for the runtime environment in the
 container:
 
-* Environment variables using the `--env` flag
-* The working directory inside the container using the `--workdir` flag
-* The username or UID using the `--user` flag
+- Environment variables using the `--env` flag
+- The working directory inside the container using the `--workdir` flag
+- The username or UID using the `--user` flag
 
 The following service's containers have an environment variable `$MYVAR`
 set to `myvalue`, run from the `/tmp/` directory, and run as the
@@ -360,7 +360,7 @@ points to and updates the service tasks to use that digest.
 >
 > If you use [content trust](../security/trust/_index.md), the Docker
 > client resolves image and the swarm manager receives the image and digest,
->  rather than a tag.
+> rather than a tag.
 
 Usually, the manager can resolve the tag to a new digest and the service
 updates, redeploying each task to use the new image. If the manager can't
@@ -375,7 +375,6 @@ worker nodes to redeploy the tasks and use the image at that digest.
 - If a worker has cached the image at that digest, it uses it.
 
 - If not, it attempts to pull the image from Docker Hub or the private registry.
-
   - If it succeeds, the task is deployed using the new image.
 
   - If the worker fails to pull the image, the service fails to deploy on that
@@ -395,7 +394,6 @@ If the swarm manager cannot resolve the image to a digest, all is not lost:
 - If the worker does not have a locally cached image that resolves to the tag,
   the worker tries to connect to Docker Hub or the private registry to pull the
   image at that tag.
-
   - If this succeeds, the worker uses that image.
 
   - If this fails, the task fails to deploy and the manager tries again to deploy
@@ -570,7 +568,7 @@ flag. For more information, see
 >
 > This setting applies to Windows hosts only and is ignored for Linux hosts.
 
-Docker allows you to specify a swarm service's isolation
+Docker lets you specify a swarm service's isolation
 mode. The isolation mode can be one of the following:
 
 - `default`: Use the default isolation mode configured for the Docker host, as
@@ -631,7 +629,6 @@ placement of services on different nodes.
   your service is configured to run N+1 replicas, the +1 is scheduled on a
   node that doesn't already have the service on it if there is one, regardless
   of whether that node has the `rack` label or not.
-
 
 #### Replicated or global services
 
@@ -802,7 +799,6 @@ appends a new placement preference after all existing placement preferences.
 `--placement-pref-rm` removes an existing placement preference that matches the
 argument.
 
-
 ### Configure a service's update behavior
 
 When you create a service, you can specify a rolling update behavior for how the
@@ -885,7 +881,7 @@ one or more of the following flags at service creation or update. If you do not
 set a value, the default is used.
 
 | Flag                           | Default | Description                                                                                                                                                                                                                                                                                                             |
-|:-------------------------------|:--------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :----------------------------- | :------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--rollback-delay`             | `0s`    | Amount of time to wait after rolling back a task before rolling back the next one. A value of `0` means to roll back the second task immediately after the first rolled-back task deploys.                                                                                                                              |
 | `--rollback-failure-action`    | `pause` | When a task fails to roll back, whether to `pause` or `continue` trying to roll back other tasks.                                                                                                                                                                                                                       |
 | `--rollback-max-failure-ratio` | `0`     | The failure rate to tolerate during a rollback, specified as a floating-point number between 0 and 1. For instance, given 5 tasks, a failure ratio of `.2` would tolerate one task failing to roll back. A value of `0` means no failure are tolerated, while a value of `1` means any number of failure are tolerated. |
@@ -939,7 +935,7 @@ $ docker service create \
 
 If a volume with the name `<VOLUME-NAME>` doesn't exist when a task is
 scheduled to a particular host, then one is created. The default volume
-driver is `local`.  To use a different volume driver with this create-on-demand
+driver is `local`. To use a different volume driver with this create-on-demand
 pattern, specify the driver and its options with the `--mount` flag:
 
 ```console
@@ -951,7 +947,6 @@ $ docker service create \
 
 For more information on how to create data volumes and the use of volume
 drivers, see [Use volumes](/manuals/engine/storage/volumes.md).
-
 
 #### Bind mounts
 
@@ -991,10 +986,8 @@ The following examples show bind mount syntax:
 >   must exist on every swarm node. The Docker swarm mode scheduler can schedule
 >   containers on any machine that meets resource availability requirements
 >   and satisfies all constraints and placement preferences you specify.
->
 > - The Docker swarm mode scheduler may reschedule your running service
 >   containers at any time if they become unhealthy or unreachable.
->
 > - Host bind mounts are non-portable. When you use bind mounts, there is no
 >   guarantee that your application runs the same way in development as it does
 >   in production.
@@ -1014,7 +1007,7 @@ The following flags are supported:
 Valid placeholders for the Go template are:
 
 | Placeholder       | Description    |
-|:------------------|:---------------|
+| :---------------- | :------------- |
 | `.Service.ID`     | Service ID     |
 | `.Service.Name`   | Service name   |
 | `.Service.Labels` | Service labels |
@@ -1028,13 +1021,11 @@ Valid placeholders for the Go template are:
 This example sets the template of the created containers based on the
 service's name and the ID of the node where the container is running:
 
-
 ```console
 $ docker service create --name hosttempl \
                         --hostname="{{.Node.ID}}-{{.Service.Name}}"\
                          busybox top
 ```
-
 
 To see the result of using the template, use the `docker service ps` and
 `docker inspect` commands.
@@ -1046,14 +1037,12 @@ ID            NAME         IMAGE                                                
 wo41w8hg8qan  hosttempl.1  busybox:latest@sha256:29f5d56d12684887bdfa50dcd29fc31eea4aaf4ad3bec43daf19026a7ce69912  2e7a8a9c4da2  Running        Running about a minute ago
 ```
 
-
 ```console
 $ docker inspect --format="{{.Config.Hostname}}" hosttempl.1.wo41w8hg8qanxwjwsg4kxpprj
 ```
 
-
 ## Learn More
 
-* [Swarm administration guide](admin_guide.md)
-* [Docker Engine command line reference](/reference/cli/docker/)
-* [Swarm mode tutorial](swarm-tutorial/_index.md)
+- [Swarm administration guide](admin_guide.md)
+- [Docker Engine command line reference](/reference/cli/docker/)
+- [Swarm mode tutorial](swarm-tutorial/_index.md)

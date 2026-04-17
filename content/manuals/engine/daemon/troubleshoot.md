@@ -292,7 +292,7 @@ configuration file is `/etc/docker/daemon.json`.
 
    If the file has existing contents, you only need to add or edit the `dns`
    line. If your internal DNS server can't resolve public IP addresses, include
-   at least one DNS server that can. Doing so allows you to connect to Docker
+   at least one DNS server that can. Doing so lets you connect to Docker
    Hub, and your containers to resolve internet domain names.
 
    Save and close the file.

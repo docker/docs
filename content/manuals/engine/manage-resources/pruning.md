@@ -19,7 +19,7 @@ how to use these `prune` commands.
 
 ## Prune images
 
-The `docker image prune` command allows you to clean up unused images. By
+The `docker image prune` command lets you clean up unused images. By
 default, `docker image prune` only cleans up _dangling_ images. A dangling image
 is one that isn't tagged, and isn't referenced by any container. To remove
 dangling images:

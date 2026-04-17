@@ -398,7 +398,7 @@ containers_. To accomplish this, you can run an executable from the host
 environment within the network namespace of a container using **ip-netns
 magic**.
 
-The `ip-netns exec` command allows you to execute any
+The `ip-netns exec` command lets you execute any
 program (present in the host system) within any network namespace
 visible to the current process. This means that your host can
 enter the network namespace of your containers, but your containers

@@ -11,7 +11,7 @@ aliases:
 The Docker CLI supports [OpenTelemetry](https://opentelemetry.io/docs/) instrumentation
 for emitting metrics about command invocations. This is disabled by default.
 You can configure the CLI to start emitting metrics to the endpoint that you
-specify. This allows you to capture information about your `docker` command
+specify. This lets you capture information about your `docker` command
 invocations for more insight into your Docker usage.
 
 Exporting metrics is opt-in, and you control where data is being sent by

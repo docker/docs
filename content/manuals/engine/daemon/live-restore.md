@@ -29,7 +29,6 @@ when the daemon becomes unavailable. **Only do one of the following**.
   defaults to `/etc/docker/daemon.json`. On Docker Desktop for Mac or Docker
   Desktop for Windows, select the Docker icon from the task bar, then click
   **Settings** -> **Docker Engine**.
-
   - Use the following JSON to enable `live-restore`.
 
     ```json
@@ -50,7 +49,7 @@ when the daemon becomes unavailable. **Only do one of the following**.
 
 ## Live restore during upgrades
 
-Live restore allows you to keep containers running across Docker daemon updates,
+Live restore lets you keep containers running across Docker daemon updates,
 but is only supported when installing patch releases (`YY.MM.x`), not for
 major (`YY.MM`) daemon upgrades.
 

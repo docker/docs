@@ -3,11 +3,11 @@ description: Play in a trust sandbox
 keywords: trust, security, root,  keys, repository, sandbox
 title: Play in a content trust sandbox
 aliases:
-- /security/trust/trust_sandbox/
+  - /security/trust/trust_sandbox/
 ---
 
 This page explains how to set up and use a sandbox for experimenting with trust.
-The sandbox allows you to configure and try trust operations locally without
+The sandbox lets you configure and try trust operations locally without
 impacting your production images.
 
 Before working through this sandbox, you should have read through the
@@ -31,11 +31,11 @@ If you are just using trust out-of-the-box you only need your Docker Engine
 client and access to the Docker Hub. The sandbox mimics a
 production trust environment, and sets up these additional components.
 
-| Container       | Description                                                                                                                                 |
-|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| Container       | Description                                                                                                                                                                         |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | trustsandbox    | A container with the latest version of Docker Engine and with some preconfigured certificates. This is your sandbox where you can use the `docker` client to test trust operations. |
-| Registry server | A local registry service.                                                                                                                 |
-| Notary server   | The service that does all the heavy-lifting of managing trust                                                                               |
+| Registry server | A local registry service.                                                                                                                                                           |
+| Notary server   | The service that does all the heavy-lifting of managing trust                                                                                                                       |
 
 This means you run your own content trust (Notary) server and registry.
 If you work exclusively with the Docker Hub, you would not need these components.
@@ -61,7 +61,6 @@ and can be destroyed after you destroy the container.
 In this section, you use Docker Compose to specify how to set up and link together
 the `trustsandbox` container, the Notary server, and the Registry server.
 
-
 1. Create a new `trustsandbox` directory and change into it.
 
    ```console
@@ -69,7 +68,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
    $ cd trustsandbox
    ```
 
-2. Create a file called `compose.yaml` with your favorite editor.  For example, using vim:
+2. Create a file called `compose.yaml` with your favorite editor. For example, using vim:
 
    ```console
    $ touch compose.yaml
@@ -105,10 +104,10 @@ the `trustsandbox` container, the Notary server, and the Registry server.
        container_name: trustsandbox
        entrypoint: ""
        command: |-
-           sh -c '
-               cp /notarycerts/root-ca.crt /usr/local/share/ca-certificates/root-ca.crt &&
-               update-ca-certificates &&
-               dockerd-entrypoint.sh --insecure-registry sandboxregistry:5000'
+         sh -c '
+             cp /notarycerts/root-ca.crt /usr/local/share/ca-certificates/root-ca.crt &&
+             update-ca-certificates &&
+             dockerd-entrypoint.sh --insecure-registry sandboxregistry:5000'
    volumes:
      notarycerts:
        external: false
@@ -116,6 +115,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
      sandbox:
        external: false
    ```
+
 4. Save and close the file.
 
 5. Run the containers on your local system.
@@ -126,7 +126,6 @@ the `trustsandbox` container, the Notary server, and the Registry server.
 
    The first time you run this, the `docker-in-docker`, Notary server, and registry
    images are downloaded from Docker Hub.
-
 
 ## Play in the sandbox
 
@@ -149,7 +148,7 @@ Now, pull some images from within the `trustsandbox` container.
    / # docker pull docker/trusttest
    docker pull docker/trusttest
    Using default tag: latest
-   latest: Pulling from docker/trusttest   
+   latest: Pulling from docker/trusttest
    b3dbab3810fc: Pull complete
    a9539b34a6ab: Pull complete
    Digest: sha256:d149ab53f8718e987c3a3024bb8aa0e2caadf6c0328f1d9d850b2a2a67f2819a
@@ -174,8 +173,8 @@ Now, pull some images from within the `trustsandbox` container.
    / # export DOCKER_CONTENT_TRUST_SERVER=https://notaryserver:4443
    ```
 
-    This step is only necessary because the sandbox is using its own server.
-    Normally, if you are using the Docker Public Hub this step isn't necessary.
+   This step is only necessary because the sandbox is using its own server.
+   Normally, if you are using the Docker Public Hub this step isn't necessary.
 
 5. Pull the test image.
 
@@ -184,9 +183,11 @@ Now, pull some images from within the `trustsandbox` container.
    Using default tag: latest
    Error: remote trust data does not exist for sandboxregistry:5000/test/trusttest: notaryserver:4443 does not have trust data for      sandboxregistry:5000/test/trusttest
    ```
-      You see an error, because this content doesn't exist on the `notaryserver` yet.
+
+   You see an error, because this content doesn't exist on the `notaryserver` yet.
 
 6. Push and sign the trusted image.
+
    ```console
    / # docker push sandboxregistry:5000/test/trusttest:latest
    The push refers to a repository [sandboxregistry:5000/test/trusttest]
@@ -208,10 +209,10 @@ Now, pull some images from within the `trustsandbox` container.
    Successfully signed "sandboxregistry:5000/test/trusttest":latest
    ```
 
-    Because you are pushing this repository for the first time, Docker creates
-    new root and repository keys and asks you for passphrases with which to
-    encrypt them. If you push again after this, it only asks you for repository
-    passphrase so it can decrypt the key and sign again.
+   Because you are pushing this repository for the first time, Docker creates
+   new root and repository keys and asks you for passphrases with which to
+   encrypt them. If you push again after this, it only asks you for repository
+   passphrase so it can decrypt the key and sign again.
 
 7. Try pulling the image you just pushed:
 
@@ -224,7 +225,6 @@ Now, pull some images from within the `trustsandbox` container.
    Status: Downloaded newer image for sandboxregistry:5000/test/trusttest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
    Tagging sandboxregistry:5000/test/trusttest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926 as sandboxregistry:5000   test/trusttest:latest
    ```
-
 
 ### Test with malicious images
 
@@ -244,13 +244,13 @@ data. Then, you try and pull it.
 
 3. List the layers for the `test/trusttest` image you pushed:
 
-    ```console
-    root@65084fc6f047:/# ls -l /var/lib/registry/docker/registry/v2/repositories/test/trusttest/_layers/sha256
-    total 12
-    drwxr-xr-x 2 root root 4096 Jun 10 17:26 a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
-    drwxr-xr-x 2 root root 4096 Jun 10 17:26 aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
-    drwxr-xr-x 2 root root 4096 Jun 10 17:26 cc7629d1331a7362b5e5126beb5bf15ca0bf67eb41eab994c719a45de53255cd
-    ```
+   ```console
+   root@65084fc6f047:/# ls -l /var/lib/registry/docker/registry/v2/repositories/test/trusttest/_layers/sha256
+   total 12
+   drwxr-xr-x 2 root root 4096 Jun 10 17:26 a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
+   drwxr-xr-x 2 root root 4096 Jun 10 17:26 aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
+   drwxr-xr-x 2 root root 4096 Jun 10 17:26 cc7629d1331a7362b5e5126beb5bf15ca0bf67eb41eab994c719a45de53255cd
+   ```
 
 4. Change into the registry storage for one of those layers (this is in a different directory):
 
@@ -314,13 +314,12 @@ Now, you have a full Docker content trust sandbox on your local system,
 feel free to play with it and see how it behaves. If you find any security
 issues with Docker, feel free to send us an email at <security@docker.com>.
 
-
 ## Clean up your sandbox
 
 When you are done, and want to clean up all the services you've started and any
 anonymous volumes that have been created, just run the following command in the
 directory where you've created your Docker Compose file:
 
-   ```console
-   $ docker compose down -v
-   ```
+```console
+$ docker compose down -v
+```
