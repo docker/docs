@@ -141,8 +141,17 @@ container, take a look at the following paths:
 
 > [!NOTE]
 >
-> This section isn't yet updated for cgroup v2.
-> For further information about cgroup v2, refer to [the kernel documentation](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html).
+> The following section documents cgroup v1 metrics. Cgroup v2 uses a unified
+> hierarchy with different file names. On cgroup v2, metrics for a container
+> are under the container's cgroup path (for example,
+> `/sys/fs/cgroup/system.slice/docker-<longid>.scope/`):
+>
+> - Memory: `memory.current`, `memory.stat`, `memory.swap.current`
+> - CPU: `cpu.stat`
+> - Block I/O: `io.stat`
+>
+> For full details on cgroup v2 metrics, refer to the
+> [kernel documentation](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html).
 
 For each subsystem (memory, CPU, and block I/O), one or
 more pseudo-files exist and contain statistics.
