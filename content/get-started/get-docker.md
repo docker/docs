@@ -1,24 +1,26 @@
 ---
-description: Download and install Docker on the platform of your choice, including
+description:
+  Download and install Docker on the platform of your choice, including
   Mac, Linux, or Windows.
-keywords: install docker, docker download, download docker, docker installation, how
+keywords:
+  install docker, docker download, download docker, docker installation, how
   to install docker, get docker, docker locally
 title: Get Docker
 weight: 10
 aliases:
- - /install/
- - /install/overview/
- - /installation/
- - /get-docker/
- - /desktop/install/
- - /desktop/setup/install/
+  - /install/
+  - /install/overview/
+  - /installation/
+  - /get-docker/
+  - /desktop/install/
+  - /desktop/setup/install/
 ---
 
 Docker is an open platform for developing, shipping, and running applications.
 
-Docker allows you to separate your applications from your infrastructure so you
+Docker lets you separate your applications from your infrastructure so you
 can deliver software quickly. With Docker, you can manage your infrastructure in
-the same ways you manage your applications. 
+the same ways you manage your applications.
 
 By taking advantage of Docker’s
 methodologies for shipping, testing, and deploying code quickly, you can
@@ -51,6 +53,7 @@ section and choose the best installation path for you.
   description="A native Linux application that delivers all Docker tools to your Linux computer."
   link="/desktop/setup/install/linux/"
   icon="/icons/Linux.svg" >}}
+
 </div>
 
 > [!NOTE]

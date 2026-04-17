@@ -1,23 +1,25 @@
 ---
-description: Get an in-depth overview of the Docker platform including what it can
+description:
+  Get an in-depth overview of the Docker platform including what it can
   be used for, the architecture it employs, and its underlying technology.
-keywords: what is a docker, docker daemon, why use docker, docker architecture, what
+keywords:
+  what is a docker, docker daemon, why use docker, docker architecture, what
   to use docker for, docker client, what is docker for, why docker, uses for docker,
   what is docker container used for, what are docker containers used for
 title: What is Docker?
 weight: 20
 aliases:
- - /introduction/understanding-docker/
- - /engine/userguide/basics/
- - /engine/introduction/understanding-docker/
- - /engine/understanding-docker/
- - /engine/docker-overview/
- - /get-started/overview/
- - /guides/docker-overview/
+  - /introduction/understanding-docker/
+  - /engine/userguide/basics/
+  - /engine/introduction/understanding-docker/
+  - /engine/understanding-docker/
+  - /engine/docker-overview/
+  - /get-started/overview/
+  - /guides/docker-overview/
 ---
 
 Docker is an open platform for developing, shipping, and running applications.
-Docker enables you to separate your applications from your infrastructure so
+Docker lets you separate your applications from your infrastructure so
 you can deliver software quickly. With Docker, you can manage your infrastructure
 in the same ways you manage your applications. By taking advantage of Docker's
 methodologies for shipping, testing, and deploying code, you can
@@ -35,9 +37,9 @@ same way.
 
 Docker provides tooling and a platform to manage the lifecycle of your containers:
 
-* Develop your application and its supporting components using containers.
-* The container becomes the unit for distributing and testing your application.
-* When you're ready, deploy your application into your production environment,
+- Develop your application and its supporting components using containers.
+- The container becomes the unit for distributing and testing your application.
+- When you're ready, deploy your application into your production environment,
   as a container or an orchestrated service. This works the same whether your
   production environment is a local data center, a cloud provider, or a hybrid
   of the two.
@@ -107,7 +109,7 @@ Docker API. The Docker client can communicate with more than one daemon.
 
 ### Docker Desktop
 
-Docker Desktop is an easy-to-install application for your Mac, Windows, or Linux environment that enables you to build and share containerized applications and microservices. Docker Desktop includes the Docker daemon (`dockerd`), the Docker client (`docker`), Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper. For more information, see [Docker Desktop](/manuals/desktop/_index.md).
+Docker Desktop is an easy-to-install application for your Mac, Windows, or Linux environment that lets you build and share containerized applications and microservices. Docker Desktop includes the Docker daemon (`dockerd`), the Docker client (`docker`), Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper. For more information, see [Docker Desktop](/manuals/desktop/_index.md).
 
 ### Docker registries
 
@@ -128,7 +130,7 @@ of those objects.
 
 An image is a read-only template with instructions for creating a Docker
 container. Often, an image is based on another image, with some additional
-customization. For example, you may build an image that is based on the Ubuntu image 
+customization. For example, you may build an image that is based on the Ubuntu image
 but includes the Apache web server and your application, as well as the
 configuration details needed to make your application run.
 
