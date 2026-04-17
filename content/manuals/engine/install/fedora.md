@@ -150,6 +150,17 @@ $ sudo dnf config-manager addrepo --from-repofile {{% param "download-url-base" 
    boot your system. If you don't want Docker to start automatically, use `sudo
    systemctl start docker` instead.
 
+   > [!NOTE]
+   >
+   > If the Docker service fails to start with `failed to find iptables`
+   > in the logs, set the `iptables` alternative to `iptables-nft` and
+   > start Docker again:
+   >
+   > ```console
+   > $ sudo alternatives --set iptables /usr/sbin/iptables-nft
+   > $ sudo systemctl enable --now docker
+   > ```
+
 3. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
