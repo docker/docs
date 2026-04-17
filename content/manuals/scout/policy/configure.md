@@ -32,7 +32,6 @@ To add a policy:
 2. Select the **Add policy** button to open the policy configuration screen.
 3. On the policy configuration screen, locate the policy type that you want to
    configure, and select **Configure** to open the policy configuration page.
-
    - If the **Configure** button is grayed out, it means the current policy
      has no configurable parameters.
    - If the button reads **Integrate**, it indicates that setup is required
@@ -41,7 +40,6 @@ To add a policy:
 
 4. Update the policy parameters.
 5. Save the changes:
-
    - Select **Save policy** to commit the changes and enable the policy for
      your current organization.
    - Select **Save and disable** to save the policy configuration without enabling
@@ -49,8 +47,8 @@ To add a policy:
 
 ## Edit a policy
 
-Editing a policy lets you to modify its configuration without creating 
-a new one from scratch. This can be useful when policy parameters need adjustments 
+Editing a policy lets you modify its configuration without creating
+a new one from scratch. This can be useful when policy parameters need adjustments
 due to evolving requirements or changes in your organization's compliance goals.
 
 To edit a policy:
