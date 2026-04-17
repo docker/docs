@@ -729,7 +729,7 @@ CMD ["postgres"]
 
 This script lets you interact with Postgres in several ways.
 
-It can simply start Postgres:
+It can start Postgres:
 
 ```console
 $ docker run postgres

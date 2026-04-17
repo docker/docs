@@ -52,7 +52,7 @@ remainder of 6GB, meaning the 2nd policy does not need to clear any more cache.
 
 The default GC policies are (approximately):
 
-1. Remove cache that can be easily regenerated, such as build contexts from
+1. Remove cache that can be regenerated, such as build contexts from
    local directories or remote Git repositories, and cache mounts, if hasn't
    been used for more than 48 hours.
 2. Remove cache that hasn't been used in a build for more than 60 days.
@@ -171,7 +171,7 @@ following policies:
 > `==`:
 >
 > | `daemon.json`       | `buildkitd.toml`     |
-> |---------------------|----------------------|
+> | ------------------- | -------------------- |
 > | `type=source.local` | `type==source.local` |
 > | `private=true`      | `private==true`      |
 > | `shared=true`       | `shared==true`       |
