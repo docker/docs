@@ -310,11 +310,11 @@ Now that you have learnt how to connect a non-containerized Node.js application 
 
    > [!TIP]
    >
-   > You can automate this step by placing an executable script (for example,
-   > `chmod +x ./localstack/init.sh`) under the local `./localstack`
-   > directory. LocalStack runs files mounted in `/etc/localstack/init/ready.d`
-   > after it is ready. See
-   > [LocalStack init hooks](https://docs.localstack.cloud/references/init-hooks/)
+   > You can automate this step by placing a shell script (for example,
+   > `init.sh`) under the local `./localstack` directory. Make sure the
+   > script is executable (`chmod +x ./localstack/init.sh`). LocalStack
+   > runs files mounted in `/etc/localstack/init/ready.d` once it is ready.
+   > See [LocalStack init hooks](https://docs.localstack.cloud/references/init-hooks/)
    > for more details.
 
    Open [http://localhost:5173](http://localhost:5173) to access the complete to-do list application and start uploading images to the Amazon S3 bucket. 
