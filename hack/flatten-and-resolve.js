@@ -15,10 +15,22 @@
 const fs = require('fs');
 const path = require('path');
 
-const PUBLIC_DIR = path.resolve(process.argv[2] || 'public');
+const inputDir = process.argv[2] ?? 'public';
+const PUBLIC_DIR = path.resolve(process.cwd(), inputDir);
 
-if (!fs.existsSync(PUBLIC_DIR)) {
-  console.error(`Error: Directory ${PUBLIC_DIR} does not exist`);
+try {
+  const stat = fs.statSync(PUBLIC_DIR);
+
+  if (!stat.isDirectory()) {
+    console.error(`Error: ${PUBLIC_DIR} is not a directory`);
+    process.exit(1);
+  }
+} catch (err) {
+  if (err.code === 'ENOENT') {
+    console.error(`Error: Directory ${PUBLIC_DIR} does not exist`);
+  } else {
+    console.error(`Error accessing ${PUBLIC_DIR}:`, err.message);
+  }
   process.exit(1);
 }
 
