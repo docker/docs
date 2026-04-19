@@ -35,7 +35,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### Updates
 
 - [Docker Agent v1.42.0](https://github.com/docker/docker-agent/releases/tag/v1.42.0)
-- [Docker Model v1.1.29](https://github.com/docker/model-cli/releases/tag/v1.1.29)
+- [Docker Model v1.1.29](https://github.com/docker/model-runner/releases/tag/v1.1.29)
 - [containerd v2.2.2](https://github.com/containerd/containerd/releases/tag/v2.2.2)
 - [Docker Buildx v0.33.0](https://github.com/docker/buildx/releases/tag/v0.33.0)
 
@@ -76,7 +76,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### Updates
 
 - [Docker Agent v1.39.0](https://github.com/docker/docker-agent/releases/tag/v1.39.0)
-- [Docker Model v1.1.28](https://github.com/docker/model-cli/releases/tag/v1.1.28)
+- [Docker Model v1.1.28](https://github.com/docker/model-runner/releases/tag/v1.1.28)
 - [Docker Offload v0.5.81](https://github.com/docker/cloud/releases/tag/v0.5.81)
 
 ### Bug fixes and enhancements
@@ -123,7 +123,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Compose v5.1.1](https://github.com/docker/compose/releases/tag/v5.1.1)
 - [Docker Agent v1.34.0](https://github.com/docker/docker-agent/releases/tag/v1.34.0)
 - [Docker Scout CLI v1.20.3](https://github.com/docker/scout-cli/releases/tag/v1.20.3)
-- [Docker Model v1.1.25](https://github.com/docker/model-cli/releases/tag/v1.1.25)
+- [Docker Model v1.1.25](https://github.com/docker/model-runner/releases/tag/v1.1.25)
 
 ### Bug fixes and minor changes
 
