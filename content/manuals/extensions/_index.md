@@ -29,4 +29,4 @@ Docker Extensions run with elevated privileges on your host machine. They have d
 
 Docker reviews extensions submitted to the Marketplace, but does not guarantee the security of any extension. Extensions installed outside the Marketplace have not been reviewed at all. Only install extensions from publishers you trust. 
 
-If you're an organisation admin, see [Configure a private marketplace](private-marketplace.md) to control which extensions your team can install.
+If you're an organization admin, see [Configure a private marketplace](private-marketplace.md) to control which extensions your team can install.
