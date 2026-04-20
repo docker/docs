@@ -48,7 +48,6 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
 
 1. Select the image version you want to customize.
 1. Optional. Add packages.
-
    1. In the packages drop-down, select the packages you want to add to the
       image.
 
@@ -66,16 +65,17 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
 
       The OCI artifacts are images that you have previously
       built and pushed to a repository in the same namespace as the mirrored
-      DHI. For example, you can add a custom root CA certificate or a another
+      DHI. For example, you can add a custom root CA certificate or another
       image that contains a tool you need, like adding Python to a Node.js
       image. For more details on how to create an OCI artifact image, see
       [Create an OCI artifact image](#create-an-oci-artifact-image-for-image-customization).
 
-      When combining images that contain directories and files with the same
-      path, images later in the list will overwrite files from earlier images.
-      To manage this, you must select paths to include and optionally exclude
-      from each OCI artifact image. This allows you to control which files are
-      included in the final customized image.
+      You can add multiple OCI artifact images to a customization. When
+      combining images that contain directories and files with the same path,
+      images added later overwrite files from earlier images. To manage this,
+      you must select paths to include and optionally exclude from each OCI
+      artifact image. This lets you control which files are included in the
+      final customized image.
 
       By default, no files are included from the OCI artifact image. You must
       explicitly include the paths you want. After including a path, you can
@@ -94,14 +94,12 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
       file writes to directories like `/var/lock` or `/out`.
 
       You must specify the following:
-
       - The path where the script will be placed
       - The script content
       - The UID and GID ownership of the script
       - The octal file permissions of the script
 
 1. Select **Next: Configure** to configure the following image settings:
-
    1. Specify the [environment variables](/reference/dockerfile/#env) and their
       values that the image will contain.
    1. Add [labels](/reference/dockerfile/#label) to the image.
@@ -396,7 +394,6 @@ To edit or delete a DHI or chart customization, follow these steps:
 
 6. For the customized DHI repository you want to manage, select the menu icon in the far right column.
    From here, you can:
-
    - **Edit**: Edit the customization.
    - **Create new**: Create a new customization based on the source repository.
    - **Delete**: Delete the customization.
