@@ -73,11 +73,11 @@ Docker Offload implements session management and idle state policies to ensure
 fair use across all users.
 
 When Docker Desktop shows it is in an **Offload idle** state it waits for activity on
-the docker API and only connects to a cloud environment when required. A user can only 
+the Docker API and only connects to a cloud environment when required. A user can only 
 maintain one Docker Offload session at a time. Once connected and in a **Offload running** 
 state it will remain connected as long as it detects continued activity. 
 
-While using Docker Offload you will recieve notifications and prompts in the Docker Desktop
+While using Docker Offload you will receive notifications and prompts in the Docker Desktop
 Dashboard to determine if you are still active in these two cases:
 
 1. If no activity is detected for more than 3 minutes.
@@ -90,7 +90,7 @@ When the prompt appears, you can choose to:
    - Do nothing and it will automatically return to an idle state.
 
 After returning to an idle state there is a 5 minute grace period where the session
-can be resumed by triggering new docker activity. If the idle period exceeds 5 minutes 
+can be resumed by triggering new Docker activity. If the idle period exceeds 5 minutes 
 without resuming, the session is terminated and the remote environment and any containers, 
 images, or volumes are deleted.
 
