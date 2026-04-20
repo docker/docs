@@ -62,54 +62,71 @@ and [install a different version](/manuals/desktop/release-notes.md) or reset Do
 
 To restore volume data, refer to [backup, restore, or migrate data volumes](/manuals/engine/storage/volumes.md#back-up-restore-or-migrate-data-volumes). 
 
-## If Docker Desktop fails to start 
+## Back up the Docker Desktop VM
 
-If Docker Desktop cannot launch and must be reinstalled, you can back up its VM disk and image data directly from disk. Docker Desktop must be fully stopped before backing up these files.
+You can also back up Docker Desktop's disk image directly from disk. This is
+useful to:
+
+- Include Docker Desktop's data in a system-level backup (such as Time Machine
+  on macOS).
+- Migrate your whole Docker Desktop environment, including images, containers,
+  and volumes, to a new computer in one step.
+- Recover when Docker Desktop fails to start and must be reinstalled.
+
+> [!IMPORTANT]
+>
+> Docker Desktop must be fully stopped before backing up these files. Copying
+> them while Docker Desktop is running may produce a corrupted backup.
 
 {{< tabs >}}
 {{< tab name="Windows" >}}
 
-1. Back up Docker containers/images.
+1. Back up the Docker Desktop disk image.
 
-   Backup the following file:
+   Back up the following file:
 
    ```console
    %LOCALAPPDATA%\Docker\wsl\data\docker_data.vhdx
    ```
 
-   Copy it to a safe location. 
+   Copy it to a safe location.
 
 1. Back up WSL distributions.
 
-   If you're running any WSL Linux distributions (Ubuntu, Alpine, etc.), back them up using [Microsoft's guide](https://learn.microsoft.com/en-us/windows/wsl/faq#how-can-i-back-up-my-wsl-distributions-).
+   If you're running any WSL Linux distributions (Ubuntu, Alpine, etc.), back
+   them up using [Microsoft's guide](https://learn.microsoft.com/en-us/windows/wsl/faq#how-can-i-back-up-my-wsl-distributions-).
 
-1. Restore. 
+1. Restore.
 
-   After reinstalling Docker Desktop, restore the `docker_data.vhdx` to the same location and re-import your WSL distributions if needed.
+   After reinstalling Docker Desktop, restore the `docker_data.vhdx` to the
+   same location and re-import your WSL distributions if needed.
 
 {{< /tab >}}
 {{< tab name="Mac" >}}
 
-1. Back up Docker containers/images.
+1. Back up the Docker Desktop disk image.
 
-   Backup the following file:
+   Back up the following file:
 
    ```console
    ~/Library/Containers/com.docker.docker/Data/vms/0/data/Docker.raw
    ```
 
-   Copy it to a safe location. 
+   Copy it to a safe location. You can also include the parent directory
+   (`~/Library/Containers/com.docker.docker`) in your Time Machine backup to
+   capture it automatically.
 
-1. Restore. 
+1. Restore.
 
-   After reinstalling Docker Desktop, restore the `Docker.raw` to the same location.
+   After reinstalling Docker Desktop, restore the `Docker.raw` to the same
+   location.
 
 {{< /tab >}}
 {{< tab name="Linux" >}}
 
-1. Back up Docker containers/images:
+1. Back up the Docker Desktop disk image.
 
-   Backup the following file:
+   Back up the following file:
 
    ```console
    ~/.docker/desktop/vms/0/data/Docker.raw
@@ -117,9 +134,10 @@ If Docker Desktop cannot launch and must be reinstalled, you can back up its VM 
 
    Copy it to a safe location.
 
-1. Restore. 
+1. Restore.
 
-   After reinstalling Docker Desktop, restore the `Docker.raw` to the same location.
+   After reinstalling Docker Desktop, restore the `Docker.raw` to the same
+   location.
 
 {{< /tab >}}
 {{< /tabs >}}
