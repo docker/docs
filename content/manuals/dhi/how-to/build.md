@@ -19,9 +19,9 @@ paths, and dev variants.
 
 > [!IMPORTANT]
 >
-> You must authenticate to the Docker Hardened Images registry (`dhi.io`) to
-> pull base images and build tools. Use your Docker ID credentials (the same
-> username and password you use for Docker Hub) when signing in.
+> The DHI build system pulls base images and build tools from `dhi.io`. You
+> must authenticate using your Docker ID credentials (the same username and
+> password you use for Docker Hub).
 >
 > Run `docker login dhi.io` to authenticate.
 
@@ -41,12 +41,12 @@ processes YAML definitions instead of the default Dockerfile parser:
 
 The frontend version corresponds to the base distribution:
 
-| Distribution        | Syntax directive                       |
-|---------------------|----------------------------------------|
-| Alpine 3.22         | `# syntax=dhi.io/build:2-alpine3.22`  |
-| Alpine 3.23         | `# syntax=dhi.io/build:2-alpine3.23`  |
-| Debian 12 (Bookworm)| `# syntax=dhi.io/build:2-debian12`    |
-| Debian 13 (Trixie)  | `# syntax=dhi.io/build:2-debian13`    |
+| Distribution         | Syntax directive                     |
+| -------------------- | ------------------------------------ |
+| Alpine 3.22          | `# syntax=dhi.io/build:2-alpine3.22` |
+| Alpine 3.23          | `# syntax=dhi.io/build:2-alpine3.23` |
+| Debian 12 (Bookworm) | `# syntax=dhi.io/build:2-debian12`   |
+| Debian 13 (Trixie)   | `# syntax=dhi.io/build:2-debian13`   |
 
 The DHI build system reads the YAML, resolves packages from the specified
 repositories, assembles the filesystem, creates user accounts, sets metadata,
@@ -151,53 +151,53 @@ The following sections describe the fields available in a DHI definition file.
 
 Every definition must include these top-level fields:
 
-| Field       | Description                                                         |
-|-------------|---------------------------------------------------------------------|
-| `name`      | Human-readable name for the image.                                  |
-| `image`     | Full registry path, such as `dhi.io/my-image`.                      |
-| `variant`   | Image variant type: `runtime` or `dev`.                             |
-| `tags`      | List of image tags.                                                 |
-| `platforms`  | Target architectures, such as `linux/amd64` and `linux/arm64`.     |
-| `contents`  | Package repositories and packages to install.                       |
+| Field       | Description                                                    |
+| ----------- | -------------------------------------------------------------- |
+| `name`      | Human-readable name for the image.                             |
+| `image`     | Full registry path, such as `dhi.io/my-image`.                 |
+| `variant`   | Image variant type: `runtime` or `dev`.                        |
+| `tags`      | List of image tags.                                            |
+| `platforms` | Target architectures, such as `linux/amd64` and `linux/arm64`. |
+| `contents`  | Package repositories and packages to install.                  |
 
 ### Image metadata
 
 These fields add metadata to the image:
 
 | Field         | Description                                                       |
-|---------------|-------------------------------------------------------------------|
+| ------------- | ----------------------------------------------------------------- |
 | `os-release`  | Defines the `/etc/os-release` contents inside the image.          |
 | `annotations` | OCI image annotations such as description and license.            |
 | `dates`       | Release date and end-of-life date.                                |
 | `vars`        | Build-time variables for templating.                              |
-| `flavor`      | Image flavor modifier, such as `compat` for compatibility images.|
+| `flavor`      | Image flavor modifier, such as `compat` for compatibility images. |
 
 ### Container configuration
 
 These fields control how the container runs:
 
-| Field         | Description                                                       |
-|---------------|-------------------------------------------------------------------|
-| `accounts`    | Users, groups, and the `run-as` user.                             |
-| `environment` | Environment variables.                                            |
-| `entrypoint`  | Container entrypoint command.                                     |
-| `cmd`         | Default command arguments.                                        |
-| `work-dir`    | Working directory inside the container.                           |
-| `volumes`     | Volume mount points.                                              |
-| `ports`       | Exposed network ports.                                            |
-| `paths`       | Directories, files, and symlinks to create.                       |
+| Field         | Description                                 |
+| ------------- | ------------------------------------------- |
+| `accounts`    | Users, groups, and the `run-as` user.       |
+| `environment` | Environment variables.                      |
+| `entrypoint`  | Container entrypoint command.               |
+| `cmd`         | Default command arguments.                  |
+| `work-dir`    | Working directory inside the container.     |
+| `volumes`     | Volume mount points.                        |
+| `ports`       | Exposed network ports.                      |
+| `paths`       | Directories, files, and symlinks to create. |
 
 ### Advanced fields
 
 These fields support more complex build patterns:
 
-| Field                | Description                                                  |
-|----------------------|--------------------------------------------------------------|
-| `contents.builds`    | Build stages with shell pipelines.                           |
-| `contents.keyring`   | Signing keys for third-party package repositories.           |
-| `contents.artifacts` | Pre-built OCI artifacts to include.                          |
-| `contents.mappings`  | Package URL (purl) mappings for SBOM accuracy.               |
-| `contents.files`     | Source files fetched from Git URLs with checksums.            |
+| Field                | Description                                        |
+| -------------------- | -------------------------------------------------- |
+| `contents.builds`    | Build stages with shell pipelines.                 |
+| `contents.keyring`   | Signing keys for third-party package repositories. |
+| `contents.artifacts` | Pre-built OCI artifacts to include.                |
+| `contents.mappings`  | Package URL (purl) mappings for SBOM accuracy.     |
+| `contents.files`     | Source files fetched from Git URLs with checksums. |
 
 ## Create a minimal image
 
@@ -278,13 +278,14 @@ $ docker buildx build . -f base.yaml \
     --tag my-base:latest \
     --load
 ```
+
 > [!NOTE]
 >
 > The `tags` field in the spec file defines the image metadata (variant and
 > version labels embedded in the image manifest). The `--tag` flag on the CLI
 > sets the OCI image reference used to push or load the image. These serve
-> different purposes - the spec file tags describe *what the image is*, while
-> the CLI tag determines *where it's stored*.
+> different purposes - the spec file tags describe _what the image is_, while
+> the CLI tag determines _where it's stored_.
 
 ## Use a Debian base with third-party repositories
 
@@ -313,9 +314,9 @@ contents:
   keyring:
     - https://packages.redis.io/gpg
   packages:
-    - '!libelogind0'
-    - '!mawk'
-    - '!original-awk'
+    - "!libelogind0"
+    - "!mawk"
+    - "!original-awk"
     - base-files
     - libpcre2-8-0
     - libssl3t64
@@ -435,11 +436,11 @@ paths:
 
 Three path types are available:
 
-| Type        | Required fields                  | Description                          |
-|-------------|----------------------------------|--------------------------------------|
-| `directory` | `path`, `uid`, `gid`, `mode`     | Creates an empty directory.          |
+| Type        | Required fields                         | Description                         |
+| ----------- | --------------------------------------- | ----------------------------------- |
+| `directory` | `path`, `uid`, `gid`, `mode`            | Creates an empty directory.         |
 | `file`      | `path`, `content`, `uid`, `gid`, `mode` | Creates a file with inline content. |
-| `symlink`   | `path`, `source`, `uid`, `gid`   | Creates a symbolic link.             |
+| `symlink`   | `path`, `source`, `uid`, `gid`          | Creates a symbolic link.            |
 
 The `mode` field uses a string representation of the octal permission bits,
 such as `"0755"` for read-write-execute by owner or `"0555"` for read-execute
@@ -564,13 +565,13 @@ ports:
 
 Key patterns in this definition:
 
-| Element     | Description                                                                |
-|-------------|----------------------------------------------------------------------------|
-| `contents`  | Each build stage has its own `contents` section. Include packages needed only during the build, such as `bash`. |
-| `pipeline`  | Contains named steps that run shell commands. Always start scripts with `set -eux -o pipefail`. |
-| `outputs`   | Copies results from the build stage into the final image. Setting `diff: true` copies only files that changed, keeping the image minimal. |
-| `accounts`  | Nginx uses a dedicated `nginx` user (UID 65532) instead of `nonroot`. The `www-data` group (GID 82) is also created for web server compatibility. |
-| `musl-utils` | Required in both the main and build packages for Alpine-based Nginx images. |
+| Element      | Description                                                                                                                                       |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `contents`   | Each build stage has its own `contents` section. Include packages needed only during the build, such as `bash`.                                   |
+| `pipeline`   | Contains named steps that run shell commands. Always start scripts with `set -eux -o pipefail`.                                                   |
+| `outputs`    | Copies results from the build stage into the final image. Setting `diff: true` copies only files that changed, keeping the image minimal.         |
+| `accounts`   | Nginx uses a dedicated `nginx` user (UID 65532) instead of `nonroot`. The `www-data` group (GID 82) is also created for web server compatibility. |
+| `musl-utils` | Required in both the main and build packages for Alpine-based Nginx images.                                                                       |
 
 ## Use OCI artifacts as package sources
 
@@ -609,12 +610,12 @@ contents:
       gid: 0
 ```
 
-| Field      | Description                                                                  |
-|------------|------------------------------------------------------------------------------|
-| `name`     | Full OCI reference with digest pin. Always use `@sha256:` for reproducibility. |
-| `includes` | Glob patterns for files to extract from the artifact. Paths are resolved from the filesystem root; `opt/**` includes everything under the `/opt` path. |
-| `excludes` | Glob patterns for files to skip. Useful for removing headers, docs, or unused binaries. |
-| `uid`, `gid` | Ownership for extracted files.                                             |
+| Field        | Description                                                                                                                                            |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `name`       | Full OCI reference with digest pin. Always use `@sha256:` for reproducibility.                                                                         |
+| `includes`   | Glob patterns for files to extract from the artifact. Paths are resolved from the filesystem root; `opt/**` includes everything under the `/opt` path. |
+| `excludes`   | Glob patterns for files to skip. Useful for removing headers, docs, or unused binaries.                                                                |
+| `uid`, `gid` | Ownership for extracted files.                                                                                                                         |
 
 Available DHI packages are in the
 [`package/`](https://github.com/docker-hardened-images/catalog/tree/main/package)
