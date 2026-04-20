@@ -66,16 +66,18 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
 
       The OCI artifacts are images that you have previously
       built and pushed to a repository in the same namespace as the mirrored
-      DHI. For example, you can add a custom root CA certificate or a another
+      DHI. For example, you can add a custom root CA certificate or another
       image that contains a tool you need, like adding Python to a Node.js
       image. For more details on how to create an OCI artifact image, see
       [Create an OCI artifact image](#create-an-oci-artifact-image-for-image-customization).
 
-      When combining images that contain directories and files with the same
-      path, images later in the list will overwrite files from earlier images.
-      To manage this, you must select paths to include and optionally exclude
-      from each OCI artifact image. This allows you to control which files are
-      included in the final customized image.
+      You can add multiple OCI artifact images to a single customization. When
+      you add more than one, they're applied in the order you add them in the
+      **OCI artifacts** drop-down. If multiple images contain directories or
+      files with the same path, images added later overwrite files from images
+      added earlier. To manage this, you must select paths to include and
+      optionally exclude from each OCI artifact image. This allows you to
+      control which files are included in the final customized image.
 
       By default, no files are included from the OCI artifact image. You must
       explicitly include the paths you want. After including a path, you can
