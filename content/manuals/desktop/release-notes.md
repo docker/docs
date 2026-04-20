@@ -41,7 +41,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Compose v5.1.2](https://github.com/docker/compose/releases/tag/v5.1.2)
 - [Docker Engine v29.4.0](/manuals/engine/release-notes/29.md#2940)
 - [Docker Agent v1.43.0](https://github.com/docker/docker-agent/releases/tag/v1.43.0)
-- [Docker Model v1.1.33](https://github.com/docker/model-runner/releases/tag/v1.1.33)
+- [Docker Model Runner v1.1.33](https://github.com/docker/model-runner/releases/tag/v1.1.33)
 - [Docker Scout CLI v1.20.4](https://github.com/docker/scout-cli/releases/tag/v1.20.4)
 
 ### Bug fixes and enhancements
