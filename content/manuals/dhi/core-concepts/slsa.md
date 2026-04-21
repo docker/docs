@@ -101,5 +101,4 @@ $ docker scout attest get dhi.io/node:20.19-debian12 \
 
 ## Resources
 
-For more details about SLSA definitions and Docker Build, see [SLSA
-definitions](/build/metadata/attestations/slsa-definitions/).
+For more details about SLSA definitions and Docker Build, see [Provenance attestations](/build/metadata/provenance/).

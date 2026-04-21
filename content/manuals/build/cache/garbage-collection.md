@@ -171,7 +171,7 @@ following policies:
 > `==`:
 >
 > | `daemon.json`       | `buildkitd.toml`     |
-> |---------------------|----------------------|
+> | ------------------- | -------------------- |
 > | `type=source.local` | `type==source.local` |
 > | `private=true`      | `private==true`      |
 > | `shared=true`       | `shared==true`       |
@@ -183,7 +183,7 @@ following policies:
 ### BuildKit configuration file
 
 For build drivers other than `docker`, GC is configured using a
-[`buildkitd.toml`](../buildkit/toml-configuration.md) configuration file. This
+[`buildkitd.toml`](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md) configuration file. This
 file uses the following high-level configuration options that you can use to
 tweak the thresholds for how much disk space BuildKit should use for cache:
 

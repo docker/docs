@@ -332,12 +332,6 @@ module:
         - source: frontend/dockerfile/docs/rules
           target: content/reference/build-checks
           files: ["*.md"]
-        - source: docs/buildkitd.toml.md
-          target: content/manuals/build/buildkit/toml-configuration.md
-        - source: docs/attestations/slsa-definitions.md
-          target: content/manuals/build/metadata/attestations/slsa-definitions.md
-        - source: docs/attestations/attestation-storage.md
-          target: content/manuals/build/metadata/attestations/attestation-storage.md
 
     # Buildx CLI plugin
     - path: github.com/docker/buildx

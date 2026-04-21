@@ -54,7 +54,7 @@ jobs:
         uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         with:
           buildkitd-flags: --debug
-      
+
       - name: Build
         uses: docker/build-push-action@{{% param "build_push_action_version" %}}
 ```
@@ -65,7 +65,7 @@ Logs will be available at the end of a job:
 
 ## BuildKit Daemon configuration
 
-You can provide a [BuildKit configuration](../../buildkit/toml-configuration.md)
+You can provide a [BuildKit configuration](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md)
 to your builder if you're using the [`docker-container` driver](/manuals/build/builders/drivers/docker-container.md)
 (default) with the `config` or `buildkitd-config-inline` inputs:
 
@@ -138,8 +138,8 @@ It takes input in the form of a YAML string document to remove limitations
 intrinsically linked to GitHub Actions: you can only use strings in the input
 fields:
 
-| Name              | Type   | Description                                                                                                                                                                                                                                                             |
-| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name              | Type   | Description                                                                                                                                                                                                                                           |
+| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `name`            | String | [Name of the node](/reference/cli/docker/buildx/create/#node). If empty, it's the name of the builder it belongs to, with an index number suffix. This is useful to set it if you want to modify/remove a node in an underlying step of you workflow. |
 | `endpoint`        | String | [Docker context or endpoint](/reference/cli/docker/buildx/create/#description) of the node to add to the builder                                                                                                                                      |
 | `driver-opts`     | List   | List of additional [driver-specific options](/reference/cli/docker/buildx/create/#driver-opt)                                                                                                                                                         |
@@ -207,7 +207,7 @@ jobs:
           host: graviton2
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           private-key-name: aws_graviton2
-      
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         with:
@@ -267,12 +267,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@{{% param "checkout_action_version" %}}
-      
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         with:
           driver: kubernetes
-      
+
       - name: Build
         run: |
           buildx build .
@@ -305,17 +305,17 @@ jobs:
       - name: Set up builder1
         uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         id: builder1
-      
+
       - name: Set up builder2
         uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         id: builder2
-      
+
       - name: Build against builder1
         uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           builder: ${{ steps.builder1.outputs.name }}
           target: mytarget1
-      
+
       - name: Build against builder2
         uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:

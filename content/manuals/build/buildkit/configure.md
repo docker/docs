@@ -5,7 +5,7 @@ keywords: build, buildkit, configuration, buildx, network, cni, registry
 ---
 
 If you create a `docker-container` or `kubernetes` builder with Buildx, you can
-apply a custom [BuildKit configuration](toml-configuration.md) by passing the
+apply a custom [BuildKit configuration](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md) by passing the
 [`--buildkitd-config` flag](/reference/cli/docker/buildx/create/#buildkitd-config)
 to the `docker buildx create` command.
 
@@ -182,7 +182,7 @@ $ docker buildx create --use --bootstrap \
 ### Max parallelism
 
 You can limit the parallelism of the BuildKit solver, which is particularly useful
-for low-powered machines, using a [BuildKit configuration](toml-configuration.md)
+for low-powered machines, using a [BuildKit configuration](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md)
 while creating a builder with the [`--buildkitd-config` flag](/reference/cli/docker/buildx/create/#buildkitd-config).
 
 ```toml
