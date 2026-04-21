@@ -46,7 +46,7 @@ The following table describes the available parameters that you can pass to
 [2]: _index.md#oci-media-types
 [3]: #annotations
 [4]: https://github.com/moby/buildkit/blob/master/docs/build-repro.md
-[5]: /manuals/build/metadata/attestations/_index.md#attestations-as-oci-artifacts
+[5]: /manuals/build/metadata/_index.md#attestations-as-oci-artifacts
 
 ## Annotations
 

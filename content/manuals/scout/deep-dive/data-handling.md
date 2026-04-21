@@ -5,8 +5,7 @@ keywords: |
   materials, config, ports, labels, os, registry, timestamp, digest, layers,
   architecture, license, dependencies, base image
 title: Data collection and storage in Docker Scout
-aliases:
-  /scout/data-handling/
+aliases: /scout/data-handling/
 ---
 
 Docker Scout's image analysis works by collecting metadata from the container
@@ -85,7 +84,7 @@ Docker Scout platform; it's only used to run the analysis.
 
 ### Provenance
 
-For images with [provenance attestations](/manuals/build/metadata/attestations/slsa-provenance.md),
+For images with [provenance attestations](/manuals/build/metadata/provenance.md),
 Docker Scout stores the following data in addition to the SBOM:
 
 - Materials

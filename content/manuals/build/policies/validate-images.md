@@ -310,10 +310,10 @@ The `labels` field is a map, so you access values with bracket notation.
 
 ## Require attestations and provenance
 
-Modern images include [attestations](/build/metadata/attestations/):
+Modern images include [attestations](/build/metadata/):
 machine-readable metadata about how the image was built.
-[Provenance](/build/metadata/attestations/slsa-provenance/) attestations
-describe the build process, and [SBOMs](/build/metadata/attestations/sbom/)
+[Provenance](/build/metadata/provenance/) attestations
+describe the build process, and [SBOMs](/build/metadata/sbom/)
 list the software inside.
 
 Require provenance:
@@ -333,7 +333,7 @@ decision := {"allow": allow}
 ```
 
 The `hasProvenance` field is `true` when the image has provenance or SBOM
-[attestations](../metadata/attestations/_index.md).
+[attestations](../metadata/_index.md).
 
 ## Verify GitHub Actions signatures
 

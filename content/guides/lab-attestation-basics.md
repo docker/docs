@@ -14,11 +14,11 @@ params:
   time: 45 minutes
   resource_links:
     - title: Build attestations
-      url: /build/metadata/attestations/
+      url: /build/metadata/
     - title: SBOM attestations
-      url: /build/metadata/attestations/sbom/
+      url: /build/metadata/sbom/
     - title: Provenance attestations
-      url: /build/metadata/attestations/slsa-provenance/
+      url: /build/metadata/provenance/
     - title: Labspace repository
       url: https://github.com/dockersamples/labspace-attestation-basics
 ---

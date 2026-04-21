@@ -3,8 +3,8 @@ title: Docker Scout SBOMs
 description: Use Docker Scout to extract the SBOM for your project.
 keywords: scout, supply chain, sbom, software bill of material, spdx, cli, attestations, file
 aliases:
-- /engine/sbom/
-- /scout/sbom/
+  - /engine/sbom/
+  - /scout/sbom/
 ---
 
 [Image analysis](/manuals/scout/explore/analysis.md) uses image SBOMs to understand what packages and versions an image contains.
@@ -62,7 +62,7 @@ reference](/reference/cli/docker/scout/sbom/).
 ## Attach as build attestation {#attest}
 
 You can generate the SBOM and attach it to the image at build-time as an
-[attestation](/manuals/build/metadata/attestations/_index.md). BuildKit provides a default
+[attestation](/manuals/build/metadata/_index.md). BuildKit provides a default
 SBOM generator which is different from what Docker Scout uses.
 You can configure BuildKit to use the Docker Scout SBOM generator
 using the `--attest` flag for the `docker build` command.

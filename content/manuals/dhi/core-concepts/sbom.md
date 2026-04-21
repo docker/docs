@@ -30,7 +30,6 @@ vulnerabilities and complicate compliance efforts. SBOMs address these
 challenges by providing a detailed inventory of all components within an
 application.
 
-
 The significance of SBOMs is underscored by several key factors:
 
 - Enhanced transparency: SBOMs offer a comprehensive view of all components that
@@ -89,6 +88,6 @@ $ docker scout attest get dhi.io/node:20.19-debian12 \
 ## Resources
 
 For more details about SBOM attestations and Docker Build, see [SBOM
-attestations](/build/metadata/attestations/sbom/).
+attestations](/build/metadata/sbom/).
 
 To learn more about Docker Scout and working with SBOMs, see [Docker Scout SBOMs](../../scout/how-tos/view-create-sboms.md).

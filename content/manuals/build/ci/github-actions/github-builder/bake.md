@@ -107,7 +107,7 @@ jobs:
 This form fits repositories that already use Bake groups, target inheritance,
 and variable expansion. The reusable workflow takes care of Buildx setup,
 [GitHub Actions cache export](../../../cache/backends/gha.md),
-[Provenance defaults](../../../metadata/attestations/slsa-provenance.md),
+[Provenance defaults](../../../metadata/provenance.md),
 signing behavior, and the final multi-platform manifest. Metadata labels and
 annotations can be merged into the Bake definition without adding a separate
 metadata step to your workflow.

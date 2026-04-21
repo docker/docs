@@ -19,6 +19,7 @@ following policy types:
 - [Supply Chain Attestations](#supply-chain-attestations-remediation)
 
 <!-- TODO(dvdksn): verify the following -->
+
 > [!NOTE]
 > Guided remediation is not supported for custom policies.
 
@@ -75,7 +76,7 @@ information available about the image.
 ### No provenance attestations
 
 For Docker Scout to be able to evaluate this policy, you must add [provenance
-attestations](/manuals/build/metadata/attestations/slsa-provenance.md) to your image. If
+attestations](/manuals/build/metadata/provenance.md) to your image. If
 your image doesn't have provenance attestations, compliance is undeterminable.
 
 <!--
@@ -146,4 +147,4 @@ The recommendations available in the remediation side panel helps guide you to
 what action you need to take to address the issues. For example, if your image
 has a provenance attestation, but the attestation doesn't contain enough
 information, you're recommended to re-build your image with
-[`mode=max`](/manuals/build/metadata/attestations/slsa-provenance.md#max) provenance.
+[`mode=max`](/manuals/build/metadata/provenance.md#max) provenance.

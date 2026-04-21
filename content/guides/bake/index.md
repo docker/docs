@@ -78,7 +78,7 @@ line. Here's a quick summary of the options for the `default` target:
 
 - `target`: The target build stage in the Dockerfile.
 - `tags`: Tags to assign to the image.
-- `attest`: [Attestations](/manuals/build/metadata/attestations/_index.md) to attach to the image.
+- `attest`: [Attestations](/manuals/build/metadata/_index.md) to attach to the image.
 
   > [!TIP]
   > The attestations provide metadata such as build provenance, which tracks

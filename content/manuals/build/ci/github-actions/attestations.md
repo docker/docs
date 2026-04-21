@@ -6,7 +6,7 @@ keywords: ci, github actions, gha, buildkit, buildx, attestations, sbom, provena
 ---
 
 Software Bill of Material (SBOM) and provenance
-[attestations](../../metadata/attestations/_index.md) add metadata about the contents of
+[attestations](../../metadata/_index.md) add metadata about the contents of
 your image, and how it was built.
 
 Attestations are supported with version 4 and later of the
@@ -67,7 +67,7 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 

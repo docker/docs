@@ -5,9 +5,9 @@ weight: 20
 description: Using build arguments and environment variables to configure builds
 keywords: build, args, variables, parameters, env, environment variables, config
 aliases:
-- /build/buildkit/color-output-controls/
-- /build/building/env-vars/
-- /build/guide/build-args/
+  - /build/buildkit/color-output-controls/
+  - /build/building/env-vars/
+  - /build/guide/build-args/
 ---
 
 In Docker Build, build arguments (`ARG`) and environment variables (`ENV`)
@@ -304,30 +304,30 @@ Note that these variables aren't used to configure the build container;
 they aren't available inside the build and they have no relation to the `ENV` instruction.
 They're used to configure the Buildx client, or the BuildKit daemon.
 
-| Variable                                                                    | Type              | Description                                                      |
-|-----------------------------------------------------------------------------|-------------------|------------------------------------------------------------------|
-| [BUILDKIT_COLORS](#buildkit_colors)                                         | String            | Configure text color for the terminal output.                    |
-| [BUILDKIT_HOST](#buildkit_host)                                             | String            | Specify host to use for remote builders.                         |
-| [BUILDKIT_PROGRESS](#buildkit_progress)                                     | String            | Configure type of progress output.                               |
-| [BUILDKIT_TTY_LOG_LINES](#buildkit_tty_log_lines)                           | String            | Number of log lines (for active steps in TTY mode).              |
-| [BUILDX_BAKE_FILE](#buildx_bake_file)                                       | String            | Specify the build definition file(s) for `docker buildx bake`.   |
-| [BUILDX_BAKE_FILE_SEPARATOR](#buildx_bake_file_separator)                   | String            | Specify the file-path separator for `BUILDX_BAKE_FILE`.          |
-| [BUILDX_BAKE_GIT_AUTH_HEADER](#buildx_bake_git_auth_header)                 | String            | HTTP authentication scheme for remote Bake files.                |
-| [BUILDX_BAKE_GIT_AUTH_TOKEN](#buildx_bake_git_auth_token)                   | String            | HTTP authentication token for remote Bake files.                 |
-| [BUILDX_BAKE_GIT_SSH](#buildx_bake_git_ssh)                                 | String            | SSH authentication for remote Bake files.                        |
-| [BUILDX_BUILDER](#buildx_builder)                                           | String            | Specify the builder instance to use.                             |
-| [BUILDX_CONFIG](#buildx_config)                                             | String            | Specify location for configuration, state, and logs.             |
-| [BUILDX_CPU_PROFILE](#buildx_cpu_profile)                                   | String            | Generate a `pprof` CPU profile at the specified location.        |
-| [BUILDX_EXPERIMENTAL](#buildx_experimental)                                 | Boolean           | Turn on experimental features.                                   |
-| [BUILDX_GIT_CHECK_DIRTY](#buildx_git_check_dirty)                           | Boolean           | Enable dirty Git checkout detection.                             |
-| [BUILDX_GIT_INFO](#buildx_git_info)                                         | Boolean           | Remove Git information in provenance attestations.               |
-| [BUILDX_GIT_LABELS](#buildx_git_labels)                                     | String \| Boolean | Add Git provenance labels to images.                             |
-| [BUILDX_MEM_PROFILE](#buildx_mem_profile)                                   | String            | Generate a `pprof` memory profile at the specified location.     |
-| [BUILDX_METADATA_PROVENANCE](#buildx_metadata_provenance)                   | String \| Boolean | Customize provenance information included in the metadata file.  |
-| [BUILDX_METADATA_WARNINGS](#buildx_metadata_warnings)                       | String            | Include build warnings in the metadata file.                     |
-| [BUILDX_NO_DEFAULT_ATTESTATIONS](#buildx_no_default_attestations)           | Boolean           | Turn off default provenance attestations.                        |
-| [BUILDX_NO_DEFAULT_LOAD](#buildx_no_default_load)                           | Boolean           | Turn off loading images to image store by default.               |
-| [EXPERIMENTAL_BUILDKIT_SOURCE_POLICY](#experimental_buildkit_source_policy) | String            | Specify a BuildKit source policy file.                           |
+| Variable                                                                    | Type              | Description                                                     |
+| --------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------------- |
+| [BUILDKIT_COLORS](#buildkit_colors)                                         | String            | Configure text color for the terminal output.                   |
+| [BUILDKIT_HOST](#buildkit_host)                                             | String            | Specify host to use for remote builders.                        |
+| [BUILDKIT_PROGRESS](#buildkit_progress)                                     | String            | Configure type of progress output.                              |
+| [BUILDKIT_TTY_LOG_LINES](#buildkit_tty_log_lines)                           | String            | Number of log lines (for active steps in TTY mode).             |
+| [BUILDX_BAKE_FILE](#buildx_bake_file)                                       | String            | Specify the build definition file(s) for `docker buildx bake`.  |
+| [BUILDX_BAKE_FILE_SEPARATOR](#buildx_bake_file_separator)                   | String            | Specify the file-path separator for `BUILDX_BAKE_FILE`.         |
+| [BUILDX_BAKE_GIT_AUTH_HEADER](#buildx_bake_git_auth_header)                 | String            | HTTP authentication scheme for remote Bake files.               |
+| [BUILDX_BAKE_GIT_AUTH_TOKEN](#buildx_bake_git_auth_token)                   | String            | HTTP authentication token for remote Bake files.                |
+| [BUILDX_BAKE_GIT_SSH](#buildx_bake_git_ssh)                                 | String            | SSH authentication for remote Bake files.                       |
+| [BUILDX_BUILDER](#buildx_builder)                                           | String            | Specify the builder instance to use.                            |
+| [BUILDX_CONFIG](#buildx_config)                                             | String            | Specify location for configuration, state, and logs.            |
+| [BUILDX_CPU_PROFILE](#buildx_cpu_profile)                                   | String            | Generate a `pprof` CPU profile at the specified location.       |
+| [BUILDX_EXPERIMENTAL](#buildx_experimental)                                 | Boolean           | Turn on experimental features.                                  |
+| [BUILDX_GIT_CHECK_DIRTY](#buildx_git_check_dirty)                           | Boolean           | Enable dirty Git checkout detection.                            |
+| [BUILDX_GIT_INFO](#buildx_git_info)                                         | Boolean           | Remove Git information in provenance attestations.              |
+| [BUILDX_GIT_LABELS](#buildx_git_labels)                                     | String \| Boolean | Add Git provenance labels to images.                            |
+| [BUILDX_MEM_PROFILE](#buildx_mem_profile)                                   | String            | Generate a `pprof` memory profile at the specified location.    |
+| [BUILDX_METADATA_PROVENANCE](#buildx_metadata_provenance)                   | String \| Boolean | Customize provenance information included in the metadata file. |
+| [BUILDX_METADATA_WARNINGS](#buildx_metadata_warnings)                       | String            | Include build warnings in the metadata file.                    |
+| [BUILDX_NO_DEFAULT_ATTESTATIONS](#buildx_no_default_attestations)           | Boolean           | Turn off default provenance attestations.                       |
+| [BUILDX_NO_DEFAULT_LOAD](#buildx_no_default_load)                           | Boolean           | Turn off loading images to image store by default.              |
+| [EXPERIMENTAL_BUILDKIT_SOURCE_POLICY](#experimental_buildkit_source_policy) | String            | Specify a BuildKit source policy file.                          |
 
 BuildKit also supports a few additional configuration parameters. Refer to
 [BuildKit built-in build args](/reference/dockerfile.md#buildkit-built-in-build-args).
@@ -428,7 +428,9 @@ Example:
         "identifier": "https://raw.githubusercontent.com/moby/buildkit/v0.10.1/README.md"
       },
       "updates": {
-        "attrs": {"http.checksum": "sha256:6e4b94fc270e708e1068be28bd3551dc6917a4fc5a61293d51bb36e6b75c4b53"}
+        "attrs": {
+          "http.checksum": "sha256:6e4b94fc270e708e1068be28bd3551dc6917a4fc5a61293d51bb36e6b75c4b53"
+        }
       }
     },
     {
@@ -445,7 +447,7 @@ Example:
 
 {{< summary-bar feature_name="Buildx bake file" >}}
 
-Specify one or more build definition files for `docker buildx bake`. 
+Specify one or more build definition files for `docker buildx bake`.
 
 This environment variable provides an alternative to the `-f` / `--file` command-line flag.
 
@@ -462,7 +464,7 @@ export BUILDX_BAKE_FILE_SEPARATOR=@
 export BUILDX_BAKE_FILE=file1.hcl@file2.hcl
 ```
 
-If both `BUILDX_BAKE_FILE` and the `-f` flag are set, only the files provided via `-f` are used. 
+If both `BUILDX_BAKE_FILE` and the `-f` flag are set, only the files provided via `-f` are used.
 
 If a listed file does not exist or is invalid, bake returns an error.
 
@@ -470,7 +472,7 @@ If a listed file does not exist or is invalid, bake returns an error.
 
 {{< summary-bar feature_name="Buildx bake file separator" >}}
 
-Controls the separator used between file paths in the `BUILDX_BAKE_FILE` environment variable. 
+Controls the separator used between file paths in the `BUILDX_BAKE_FILE` environment variable.
 
 This is useful if your file paths contain the default separator character or if you want to standardize separators across different platforms.
 
@@ -584,7 +586,7 @@ $ export BUILDX_EXPERIMENTAL=1
 {{< summary-bar feature_name="Buildx Git check dirty" >}}
 
 When set to true, checks for dirty state in source control information for
-[provenance attestations](/manuals/build/metadata/attestations/slsa-provenance.md).
+[provenance attestations](/manuals/build/metadata/provenance.md).
 
 Usage:
 
@@ -597,7 +599,7 @@ $ export BUILDX_GIT_CHECK_DIRTY=1
 {{< summary-bar feature_name="Buildx Git info" >}}
 
 When set to false, removes source control information from
-[provenance attestations](/manuals/build/metadata/attestations/slsa-provenance.md).
+[provenance attestations](/manuals/build/metadata/provenance.md).
 
 Usage:
 
@@ -659,9 +661,10 @@ By default, Buildx includes minimal provenance information in the metadata file
 through [`--metadata-file` flag](/reference/cli/docker/buildx/build/#metadata-file).
 This environment variable allows you to customize the provenance information
 included in the metadata file:
-* `min` sets minimal provenance (default).
-* `max` sets full provenance.
-* `disabled`, `false` or `0` does not set any provenance.
+
+- `min` sets minimal provenance (default).
+- `max` sets full provenance.
+- `disabled`, `false` or `0` does not set any provenance.
 
 ### BUILDX_METADATA_WARNINGS
 
@@ -676,7 +679,7 @@ You can set this environment variable to `1` or `true` to include them.
 {{< summary-bar feature_name="Buildx no default" >}}
 
 By default, BuildKit v0.11 and later adds
-[provenance attestations](/manuals/build/metadata/attestations/slsa-provenance.md) to images you
+[provenance attestations](/manuals/build/metadata/provenance.md) to images you
 build. Set `BUILDX_NO_DEFAULT_ATTESTATIONS=1` to disable the default provenance
 attestations.
 

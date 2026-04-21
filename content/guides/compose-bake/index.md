@@ -160,31 +160,26 @@ represents a single build.
 {
   "group": {
     "default": {
-      "targets": [
-        "vote",
-        "result",
-        "worker",
-        "seed"
-      ]
+      "targets": ["vote", "result", "worker", "seed"]
     }
   },
   "target": {
     "result": {
       "context": "result",
-      "dockerfile": "Dockerfile",
+      "dockerfile": "Dockerfile"
     },
     "seed": {
       "context": "seed-data",
-      "dockerfile": "Dockerfile",
+      "dockerfile": "Dockerfile"
     },
     "vote": {
       "context": "vote",
       "dockerfile": "Dockerfile",
-      "target": "dev",
+      "target": "dev"
     },
     "worker": {
       "context": "worker",
-      "dockerfile": "Dockerfile",
+      "dockerfile": "Dockerfile"
     }
   }
 }
@@ -323,7 +318,7 @@ are pushed to a registry, it's often a good idea to build for multiple
 platforms, arm64 and amd64 in particular.
 
 Attestations
-: [Attestations](/manuals/build/metadata/attestations/_index.md) are manifests
+: [Attestations](/manuals/build/metadata/_index.md) are manifests
 attached to the image that describe how the image was created and what
 components it contains. Attaching attestations to your images helps ensure that
 your images follow software supply chain best practices.

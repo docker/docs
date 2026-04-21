@@ -66,6 +66,6 @@ With image signatures, you can:
 
 ## Additional resources
 
-- [Provenance attestations](/build/metadata/attestations/slsa-provenance/)
+- [Provenance attestations](/build/metadata/provenance/)
 - [Image signatures](./signatures.md)
 - [Attestations overview](./attestations.md)

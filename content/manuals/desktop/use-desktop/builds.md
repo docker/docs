@@ -38,7 +38,7 @@ Docker Desktop settings.
 The **Import builds** button lets you import build records for builds by other
 people, or builds in a CI environment. When you've imported a build record, it
 gives you full access to the logs, traces, and other data for that build,
-directly in Docker Desktop. 
+directly in Docker Desktop.
 
 The [build summary](/manuals/build/ci/github-actions/build-summary.md)
 for the `docker/build-push-action` and `docker/bake-action` GitHub Actions
@@ -82,8 +82,8 @@ operations are defined as follows:
 | HTTP                 | Remote artifact downloads using `ADD`.                                                                                                                                          |
 | Git                  | Same as **HTTP** but for Git URLs.                                                                                                                                              |
 | Result exports       | Time spent exporting the build results.                                                                                                                                         |
-| SBOM                 | Time spent generating the [SBOM attestation](/manuals/build/metadata/attestations/sbom.md).                                                                                                 |
-| Idle                 | Idle time for build workers, which can happen if you have configured a [max parallelism limit](/manuals/build/buildkit/configure.md#max-parallelism).                              |
+| SBOM                 | Time spent generating the [SBOM attestation](/manuals/build/metadata/sbom.md).                                                                                                  |
+| Idle                 | Idle time for build workers, which can happen if you have configured a [max parallelism limit](/manuals/build/buildkit/configure.md#max-parallelism).                           |
 
 ### Build dependencies
 
@@ -112,7 +112,7 @@ including image manifest details, attestations, and build traces.
 Attestations are metadata records attached to a container image.
 The metadata describes something about the image,
 for example how it was built or what packages it contains.
-For more information about attestations, see [Build attestations](/manuals/build/metadata/attestations/_index.md).
+For more information about attestations, see [Build attestations](/manuals/build/metadata/_index.md).
 
 Build traces capture information about the build execution steps in Buildx and
 BuildKit. The traces are available in two formats: OTLP and Jaeger. You can

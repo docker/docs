@@ -143,7 +143,7 @@ jobs:
 This is a Dockerfile build, so the inputs map closely to
 `docker/build-push-action`. The difference is that the reusable workflow owns
 Buildx setup, [BuildKit](../../../buildkit/_index.md) configuration,
-[SLSA provenance](../../../metadata/attestations/slsa-provenance.md) mode,
+[SLSA provenance](../../../metadata/provenance.md) mode,
 [GitHub Actions cache backend](../../../cache/backends/gha.md) wiring, signing,
 and manifest creation. If you need more background on metadata or platform
 distribution, see [Manage tags and labels](../manage-tags-labels.md) and

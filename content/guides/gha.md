@@ -126,11 +126,11 @@ can push your built image to the registry.
 To authenticate with Docker Hub, add the following step to your workflow:
 
 ```yaml
-      - name: Log in to Docker Hub
-        uses: docker/login-action@{{% param "login_action_version" %}}
-        with:
-          username: ${{ vars.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+- name: Log in to Docker Hub
+  uses: docker/login-action@{{% param "login_action_version" %}}
+  with:
+    username: ${{ vars.DOCKER_USERNAME }}
+    password: ${{ secrets.DOCKER_PASSWORD }}
 ```
 
 This step uses the Docker credentials [configured in the repository settings](#configure-your-github-repository).
@@ -141,12 +141,12 @@ Finally, build the final production image and push it to your registry. The
 following configuration builds the image and pushes it directly to a registry.
 
 ```yaml
-      - name: Build and push Docker image
-        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
-        with:
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          annotations: ${{ steps.meta.outputs.annotations }}
+- name: Build and push Docker image
+  uses: docker/build-push-action@{{% param "build_push_action_version" %}}
+  with:
+    push: ${{ github.event_name != 'pull_request' }}
+    tags: ${{ steps.meta.outputs.tags }}
+    annotations: ${{ steps.meta.outputs.annotations }}
 ```
 
 In this configuration:
@@ -181,21 +181,21 @@ workflow:
 Here's the updated snippet:
 
 ```yaml
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
-      
-      - name: Build and push Docker image
-        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
-        with:
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          annotations: ${{ steps.meta.outputs.annotations }}
-          provenance: true
-          sbom: true
+- name: Set up Docker Buildx
+  uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
+
+- name: Build and push Docker image
+  uses: docker/build-push-action@{{% param "build_push_action_version" %}}
+  with:
+    push: ${{ github.event_name != 'pull_request' }}
+    tags: ${{ steps.meta.outputs.tags }}
+    annotations: ${{ steps.meta.outputs.annotations }}
+    provenance: true
+    sbom: true
 ```
 
 For more details about attestations, refer to
-[the documentation](/manuals/build/metadata/attestations/_index.md).
+[the documentation](/manuals/build/metadata/_index.md).
 
 ## Conclusion
 
@@ -232,7 +232,7 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
-      
+
       - name: Build and push Docker image
         uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:

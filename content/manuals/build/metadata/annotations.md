@@ -3,7 +3,7 @@ title: Annotations
 description: Annotations specify additional metadata about OCI images
 keywords: build, buildkit, annotations, metadata
 aliases:
-- /build/building/annotations/
+  - /build/building/annotations/
 ---
 
 <!-- vale Docker.Spacing = NO -->
@@ -153,7 +153,7 @@ The following types are supported:
 - `manifest`: annotates manifests.
 - `index`: annotates the root index.
 - `manifest-descriptor`: annotates manifest descriptors in the index.
-- `index-descriptor`:  annotates the index descriptor in the image layout.
+- `index-descriptor`: annotates the index descriptor in the image layout.
 
 For example, to build an image with the annotation `foo=bar` attached to the
 image index:
@@ -211,7 +211,7 @@ Reference information:
 <!-- links -->
 
 [specification]: https://github.com/opencontainers/image-spec/blob/main/annotations.md
-[attestations]: /manuals/build/metadata/attestations/_index.md
+[attestations]: /manuals/build/metadata/_index.md
 [config]: https://github.com/opencontainers/image-spec/blob/main/config.md
 [descriptors]: https://github.com/opencontainers/image-spec/blob/main/descriptor.md
 [indexes]: https://github.com/opencontainers/image-spec/blob/main/image-index.md

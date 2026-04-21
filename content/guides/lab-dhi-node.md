@@ -19,7 +19,7 @@ params:
     - title: Docker Scout docs
       url: /scout/
     - title: Build attestations
-      url: /build/metadata/attestations/
+      url: /build/metadata/
     - title: Labspace repository
       url: https://github.com/dockersamples/labspace-dhi-node
 ---

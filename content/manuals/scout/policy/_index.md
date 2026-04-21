@@ -48,7 +48,7 @@ image up-to-dateness.
 
 ## Policy types
 
-In Docker Scout, a *policy* is derived from a *policy type*. Policy types are
+In Docker Scout, a _policy_ is derived from a _policy type_. Policy types are
 templates that define the core parameters of a policy. You can compare policy
 types to classes in object-oriented programming, with each policy acting as an
 instance created from its corresponding policy type.
@@ -104,6 +104,7 @@ The following policy parameters are configurable in a custom version:
   fail until you've had a chance to address them.
 
 <!-- vale Vale.Spelling = NO -->
+
 - **Severities**: Severity levels to consider (default: `Critical, High`)
 <!-- vale Vale.Spelling = YES -->
 
@@ -180,11 +181,11 @@ For more information on policy configuration, see [Configure policies](./configu
 ### Supply Chain Attestations
 
 The **Supply Chain Attestations** policy type checks whether your images have
-[SBOM](/manuals/build/metadata/attestations/sbom.md) and
-[provenance](/manuals/build/metadata/attestations/slsa-provenance.md) attestations.
+[SBOM](/manuals/build/metadata/sbom.md) and
+[provenance](/manuals/build/metadata/provenance.md) attestations.
 
 Images are considered non-compliant if they lack either an SBOM attestation or
-a provenance attestation with *max mode* provenance. To ensure compliance,
+a provenance attestation with _max mode_ provenance. To ensure compliance,
 update your build command to attach these attestations at build-time:
 
 ```console
@@ -192,7 +193,7 @@ $ docker buildx build --provenance=true --sbom=true -t <IMAGE> --push .
 ```
 
 For more information about building with attestations, see
-[Attestations](/manuals/build/metadata/attestations/_index.md).
+[Attestations](/manuals/build/metadata/_index.md).
 
 If you're using GitHub Actions to build and push your images,
 learn how you can [configure the action](/manuals/build/ci/github-actions/attestations.md)
@@ -345,7 +346,7 @@ SonarQube evaluates your source code against the quality gates you've defined
 in SonarQube. Docker Scout surfaces the SonarQube assessment as a Docker Scout
 policy.
 
-Docker Scout uses [provenance](/manuals/build/metadata/attestations/slsa-provenance.md)
+Docker Scout uses [provenance](/manuals/build/metadata/provenance.md)
 attestations or the `org.opencontainers.image.revision` OCI annotation to link
 SonarQube analysis results with container images. In addition to enabling the
 SonarQube integration, you must also make sure that your images have either the
@@ -397,6 +398,6 @@ This "no data" state occurs when:
   of date
 
 To make sure that Docker Scout always knows about your base image, you can
-attach [provenance attestations](/manuals/build/metadata/attestations/slsa-provenance.md)
+attach [provenance attestations](/manuals/build/metadata/provenance.md)
 at build-time. Docker Scout uses provenance attestations to find out the base
 image version.

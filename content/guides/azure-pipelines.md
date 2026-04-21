@@ -56,9 +56,9 @@ pr:
 
 # Define variables for reuse across the pipeline
 variables:
-  imageName: 'docker.io/$(dockerUsername)/my-image'
-  buildTag: '$(Build.BuildId)'
-  latestTag: 'latest'
+  imageName: "docker.io/$(dockerUsername)/my-image"
+  buildTag: "$(Build.BuildId)"
+  latestTag: "latest"
 
 stages:
   - stage: BuildAndPush
@@ -78,7 +78,7 @@ stages:
             displayName: Docker Login
             inputs:
               command: login
-              containerRegistry: 'my-docker-registry'  # Service connection name
+              containerRegistry: "my-docker-registry" # Service connection name
 
           - task: Docker@2
             displayName: Build Docker Image
@@ -88,7 +88,7 @@ stages:
               tags: |
                 $(buildTag)
                 $(latestTag)
-              dockerfile: './Dockerfile'
+              dockerfile: "./Dockerfile"
               arguments: |
                 --sbom=true
                 --attest type=provenance
@@ -122,10 +122,9 @@ This pipeline automates the Docker image build and deployment process for the ma
 - Pushes both buildId and latest tags to Docker Hub.
 - Logs out from Docker if running on a self-hosted Linux agent.
 
-
 ## How the pipeline works
 
-### Step 1: Define pipeline triggers 
+### Step 1: Define pipeline triggers
 
 ```yaml
 trigger:
@@ -136,6 +135,7 @@ pr:
 ```
 
 This pipeline is triggered automatically on:
+
 - Commits pushed to the `main` branch
 - Pull requests targeting `main` main branch
 
@@ -146,9 +146,9 @@ This pipeline is triggered automatically on:
 
 ```yaml
 variables:
-  imageName: 'docker.io/$(dockerUsername)/my-image'
-  buildTag: '$(Build.BuildId)'
-  latestTag: 'latest'
+  imageName: "docker.io/$(dockerUsername)/my-image"
+  buildTag: "$(Build.BuildId)"
+  latestTag: "latest"
 ```
 
 These variables ensure consistent naming, versioning, and reuse throughout the pipeline steps:
@@ -160,12 +160,13 @@ These variables ensure consistent naming, versioning, and reuse throughout the p
 > [!IMPORTANT]
 >
 > The variable `dockerUsername` is not set automatically.  
-> Set it securely in your Azure DevOps pipeline variables:  
->   1. Go to **Pipelines > Edit > Variables**  
->   2. Add `dockerUsername` with your Docker Hub username  
+> Set it securely in your Azure DevOps pipeline variables:
+>
+> 1. Go to **Pipelines > Edit > Variables**
+> 2. Add `dockerUsername` with your Docker Hub username
 >
 > Learn more: [Define and use variables in Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch)
- 
+
 ### Step 3: Define pipeline stages and jobs
 
 ```yaml
@@ -179,7 +180,6 @@ This stage executes only if the source branch is `main`.
 > [!TIP]
 >
 > Learn more: [Stage conditions in Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/stages?view=azure-devops&tabs=yaml)
-
 
 ### Step 4: Job configuration
 
@@ -220,7 +220,7 @@ This step pulls your repository code into the build agent, so the pipeline can a
   displayName: Docker Login
   inputs:
     command: login
-    containerRegistry: 'my-docker-registry'  # Replace with your service connection name
+    containerRegistry: "my-docker-registry" # Replace with your service connection name
 ```
 
 Uses a pre-configured Azure DevOps Docker registry service connection to authenticate securely without exposing credentials directly.
@@ -259,9 +259,10 @@ This builds the image with:
 
 > [!TIP]
 >
-> Learn more: 
+> Learn more:
+>
 > - [Docker task for Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/docker-v2?view=azure-pipelines&tabs=yaml)
-> - [Docker SBOM Attestations](/manuals/build/metadata/attestations/slsa-provenance.md)
+> - [Docker SBOM Attestations](/manuals/build/metadata/provenance.md)
 
 #### Step 4.4: Push the Docker image
 
@@ -270,20 +271,21 @@ This builds the image with:
   displayName: Push Docker Image
   condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
   inputs:
-      command: push
-      repository: $(imageName)
-      tags: |
-        $(buildTag)
-        $(latestTag)
+    command: push
+    repository: $(imageName)
+    tags: |
+      $(buildTag)
+      $(latestTag)
 ```
 
 By applying this condition, the pipeline builds the Docker image on every run to ensure early detection of issues, but only pushes the image to the registry when changes are merged into the main branch—keeping your Docker Hub clean and focused
 
 This uploads both tags to Docker Hub:
+
 - `$(buildTag)` ensures traceability per run.
 - `latest` is used for most recent image references.
 
-#### Step 4.5  Logout of Docker (self-hosted agents)
+#### Step 4.5 Logout of Docker (self-hosted agents)
 
 ```yaml
 - script: docker logout

@@ -35,7 +35,7 @@ Both self-managed SonarQube instances and SonarCloud are supported.
 To integrate Docker Scout with SonarQube, ensure that:
 
 - Your image repository is [integrated with Docker Scout](../_index.md#container-registries).
-- Your images are built with [provenance attestations](/manuals/build/metadata/attestations/slsa-provenance.md),
+- Your images are built with [provenance attestations](/manuals/build/metadata/provenance.md),
   or the `org.opencontainers.image.revision` annotation,
   containing information about the Git repository.
 

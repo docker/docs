@@ -42,10 +42,10 @@ jobs:
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@{{% param "setup_qemu_action_version" %}}
-      
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
-        
+
       - name: Docker meta
         uses: docker/metadata-action@{{% param "metadata_action_version" %}}
         id: meta
@@ -85,7 +85,7 @@ jobs:
 This model gives you a build pipeline that is maintained in the Docker
 organization, uses a pinned [BuildKit](../../../buildkit/_index.md) environment,
 distributes [multi-platform builds](../../../building/multi-platform.md) across
-runners when that helps, and emits signed [SLSA provenance](../../../metadata/attestations/slsa-provenance.md)
+runners when that helps, and emits signed [SLSA provenance](../../../metadata/provenance.md)
 that records both the source commit and the builder identity.
 
 That tradeoff is intentional. You keep control of when the build runs and which
@@ -100,7 +100,7 @@ overrides, and variables to stay as the source of truth.
 
 Both workflows support image output, local output, cache export to the
 [GitHub Actions cache backend](../../../cache/backends/gha.md),
-[SBOM generation](../../../metadata/attestations/sbom.md), and signing. The
+[SBOM generation](../../../metadata/sbom.md), and signing. The
 Bake workflow adds Bake definition validation and builds one target per workflow
 call.
 

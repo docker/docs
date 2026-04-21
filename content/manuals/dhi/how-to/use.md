@@ -50,7 +50,7 @@ Docker Hardened Images use different image references depending on your
 subscription:
 
 | Subscription        | Image reference            | Authentication        |
-|---------------------|----------------------------|-----------------------|
+| ------------------- | -------------------------- | --------------------- |
 | Community           | `dhi.io/<image>:<tag>`     | `docker login dhi.io` |
 | Select & Enterprise | `<your-org>/<image>:<tag>` | `docker login`        |
 
@@ -73,6 +73,7 @@ CMD ["python", "/app/main.py"]
 ```
 
 For multi-stage builds:
+
 - Use a `-dev` tag for build stages that need a shell or package manager. See
   [Use dev variants for framework-based
   applications](#use-dev-variants-for-framework-based-applications).
@@ -100,7 +101,7 @@ verify its integrity, and enable downstream validation and policy enforcement
 using tools like Docker Scout.
 
 To learn how to attach attestations during the build process, see [Docker Build
-Attestations](/manuals/build/metadata/attestations.md).
+Attestations](/manuals/build/metadata/_index.md).
 
 ### Discover attestations with ORAS
 
@@ -135,9 +136,9 @@ To discover attestations with ORAS:
    > reading from files with restricted permissions, environment files loaded
    > at runtime, or secret management tools.
 
-    ```console
-    $ oras login dhi.io -u <YOUR_ORGANIZATION_NAME>
-    ```
+   ```console
+   $ oras login dhi.io -u <YOUR_ORGANIZATION_NAME>
+   ```
 
    Or non-interactively in a CI/CD pipeline, set your organization name and token:
 
@@ -200,6 +201,7 @@ switch to a smaller runtime variant to reduce the attack surface and image size.
 
 For detailed multi-stage Dockerfile examples using dev variants, see the
 migration examples:
+
 - [Go](../migration/examples/go.md)
 - [Python](../migration/examples/python.md)
 - [Node.js](../migration/examples/node.md)
@@ -234,6 +236,7 @@ your own third-party registry.
 You can create an image pull secret using either an access token or Docker Desktop credentials.
 
 For the `--docker-server` value:
+
 - Use `dhi.io` for community images pulled directly from Docker Hardened Images
 - Use `docker.io` for mirrored repositories on Docker Hub
 - Use your registry's hostname for third-party registries
