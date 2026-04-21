@@ -5,6 +5,7 @@ description: |
   SBOM attestations describe what software artifacts an image contains and the artifacts used to create the image.
 aliases:
   - /build/attestations/sbom/
+  - /build/metadata/attestations/sbom/
 ---
 
 SBOM attestations help ensure [software supply chain transparency](/guides/docker-scout/s3c.md) by verifying the software artifacts an image contains and the artifacts used to create the image. Metadata included in an [SBOM](/guides/docker-scout/sbom.md) for describing software artifacts may include:

@@ -5,6 +5,7 @@ description: >
   Provenance build attestations describe how and where your image was built.
 aliases:
   - /build/attestations/slsa-provenance/
+  - /build/metadata/attestations/slsa-provenance/
 ---
 
 The provenance attestations include facts about the build process, including
