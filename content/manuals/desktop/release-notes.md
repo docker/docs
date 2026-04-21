@@ -32,6 +32,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.71.0" build_path="//" >}}
 
+> [!IMPORTANT]
+>
+> Support for RHEL 8 has ended. Installing Docker Desktop will require RHEL 9 or RHEL 10 in the next release.
+
 ### Updates
 
 - [Docker Model Runner v1.1.36](https://github.com/docker/model-runner/releases/tag/v1.1.36)
@@ -50,7 +54,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Added a **Switch to local Docker context** button on the sign-in screen, allowing users in a cloud context to switch back to their local context without signing in.
 - Added a dedicated **Stopped** status screen for the cloud engine so users see a clear stopped state instead of an error screen when transitioning away from Docker Offload.
 
-#### For Mac
+#### For Mac
 
 - Fixed issue where error tracking would temporarily continue sending session data directly after user disabled analytics. Fixes [docker/for-mac#7768](https://github.com/docker/for-mac/issues/7768).
 
