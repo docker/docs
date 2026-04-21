@@ -426,3 +426,11 @@ $ docker scout vex get dhi.io/<image>:<tag> --output vex.json
 > If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
 > `registry://docs/dhi-python:3.13` instead of `docs/dhi-python:3.13`.
 
+## Explore the VEX file
+
+After exporting the VEX attestation, you can inspect its contents to
+understand what each statement means and filter by status. For a guided
+walkthrough of the VEX document structure, status values, and `jq` filtering
+commands, see [Explore VEX statements in Docker Hardened
+Images](/guides/dhi-vex-walkthrough/).
+
