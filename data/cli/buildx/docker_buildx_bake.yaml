@@ -523,12 +523,13 @@ examples: |-
     ```
 
     > [!NOTE]
-    > Build record [provenance](/build/metadata/attestations/slsa-provenance/#provenance-attestation-example)
-    > (`buildx.build.provenance`) includes minimal provenance by default. Set the
-    > `BUILDX_METADATA_PROVENANCE` environment variable to customize this behavior:
-    > * `min` sets minimal provenance (default).
-    > * `max` sets full provenance.
-    > * `disabled`, `false` or `0` does not set any provenance.
+    > Build record provenance (`buildx.build.provenance`) includes minimal
+    > provenance by default. Set the `BUILDX_METADATA_PROVENANCE` environment
+    > variable to customize this behavior:
+    >
+    > - `min` sets minimal provenance (default).
+    > - `max` sets full provenance.
+    > - `disabled`, `false` or `0` doesn't set any provenance.
 
     > [!NOTE]
     > Build warnings (`buildx.build.warnings`) are not included by default. Set the

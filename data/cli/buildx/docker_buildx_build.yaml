@@ -616,15 +616,14 @@ examples: |-
     --attest=type=provenance,...
     ```
 
-    Create [image attestations](/build/metadata/attestations/).
-    BuildKit currently supports:
+    Create image attestations. BuildKit currently supports:
 
     - `sbom` - Software Bill of Materials.
 
       Use `--attest=type=sbom` to generate an SBOM for an image at build-time.
       Alternatively, you can use the [`--sbom` shorthand](#sbom).
 
-      For more information, see [here](/build/metadata/attestations/sbom/).
+      For more information, see [here](/build/metadata/sbom/).
 
     - `provenance` - SLSA Provenance
 
@@ -634,7 +633,7 @@ examples: |-
       By default, a minimal provenance attestation will be created for the build
       result, which will only be attached for images pushed to registries.
 
-      For more information, see [here](/build/metadata/attestations/slsa-provenance/).
+      For more information, see [here](/build/metadata/provenance/).
 
     ### Allow extra privileged entitlement (--allow) {#allow}
 
@@ -1098,9 +1097,9 @@ examples: |-
     ```
 
     > [!NOTE]
-    > Build record [provenance](/build/metadata/attestations/slsa-provenance/#provenance-attestation-example)
-    > (`buildx.build.provenance`) includes minimal provenance by default. Set the
-    > `BUILDX_METADATA_PROVENANCE` environment variable to customize this behavior:
+    > Build record provenance (`buildx.build.provenance`) includes minimal
+    > provenance by default. Set the `BUILDX_METADATA_PROVENANCE` environment
+    > variable to customize this behavior:
     >
     > - `min` sets minimal provenance (default).
     > - `max` sets full provenance.
