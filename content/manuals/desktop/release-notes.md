@@ -26,6 +26,40 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.71.0
+
+{{< release-date date="2026-04-27" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.71.0" build_path="//" >}}
+
+### Updates
+
+- [Docker Model Runner v1.1.36](https://github.com/docker/model-runner/releases/tag/v1.1.36)
+- containerd to [v2.2.3](https://github.com/containerd/containerd/releases/tag/v2.2.3)
+- [Runc v1.3.5](https://github.com/opencontainers/runc/releases/tag/v1.3.5)
+- [Docker Compose v5.1.3](https://github.com/docker/compose/releases/tag/v5.1.3)
+- [Docker Agent v1.44.0](https://github.com/docker/docker-agent/releases/tag/v1.44.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Docker Model Runner is now disabled by default and must be explicitly enabled in **Settings**. When enabled, TCP host-side support is automatically active.
+- Fixed an issue where downloading a Docker Desktop update would fail without a clear error if the disk had insufficient free space.
+- Fixed an issue where Docker Scout tag recommendations when inspecting an image failed when the base image digest or repository name was empty.
+- Added a **Switch to local Docker context** button on the sign-in screen, allowing users in a cloud context to switch back to their local context without signing in.
+- Added a dedicated **Stopped** status screen for the cloud engine so users see a clear stopped state instead of an error screen when transitioning away from Docker Offload.
+
+#### For Mac
+
+- Fixed issue where error tracking would temporarily continue sending session data directly after user disabled analytics. Fixes [docker/for-mac#7768](https://github.com/docker/for-mac/issues/7768).
+
+#### For Windows
+
+- Fixed a critical issue where Docker Desktop Dashboard failed to open with `ERR_FAILED` errors caused by process hardening policies conflicting with Chromium.
+- Fixed a bug where Kubernetes could fail to start on WSL 2 when `HTTP_PROXY` environment variables are set in WSL 2 itself.
+- Fixed a bug in Enhanced Container Isolation (ECI) that was causing loss of container `rootfs` persistence across Docker Desktop restarts, when using WSL.
+
 ## 4.70.0
 
 {{< release-date date="2026-04-20" >}}
