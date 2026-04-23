@@ -73,6 +73,22 @@ $ docker network create -d bridge my-net
 $ docker run --network=my-net -it busybox
 ```
 
+### External networks
+
+A Docker network persists until you remove it with `docker network rm`. Any container,
+Compose project, or Swarm service can attach to a pre-existing network without
+creating it. A network whose lifecycle is managed outside the application that uses
+it is often called an *external network*. Compose references one using the
+[`external: true`](/reference/compose-file/networks.md#external) flag.
+
+```console
+$ docker network create shared-net
+$ docker run --network=shared-net -d nginx
+```
+
+Any other container, Compose project, or Swarm service on the same host can then
+attach to `shared-net` without re-creating it.
+
 ### Drivers
 
 Docker Engine has a number of network drivers, as well as the default "bridge".
