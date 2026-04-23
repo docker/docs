@@ -25,28 +25,28 @@ compromising the overall security of the container.
 ### Post-start hooks
 
 Post-start hooks are commands that run after the container has started, but there's no 
-set time for when exactly they will execute. The hook execution timing is not assured during 
-the execution of the container's `entrypoint`.
+set time for when exactly they will execute. The hook runs in parallel with the 
+container's `entrypoint`, so avoid using it for tasks the application depends on 
+during startup.
 
-In the example provided:
+Use a post-start hook for side tasks that happen once the container is up, such as 
+registering the container with an external system or emitting an audit event. The 
+hook can run with higher privileges than the application, which lets it touch 
+resources the application user cannot.
 
-- The hook is used to change the ownership of a volume to a non-root user (because volumes 
-are created with root ownership by default).
-- After the container starts, the `chown` command changes the ownership of the `/data` directory to user `1001`.
+In the following example, the hook registers the container with an internal service 
+discovery endpoint. The application runs as user `1001`, and the hook runs as `root`:
 
 ```yaml
 services:
   app:
     image: backend
     user: 1001
-    volumes:
-      - data:/data    
+    environment:
+      SERVICE_NAME: backend
     post_start:
-      - command: chown -R 1001:1001 /data
+      - command: wget -q -O - "http://registry.internal/register?name=$${SERVICE_NAME}"
         user: root
-
-volumes:
-  data: {} # a Docker volume is created with root ownership
 ```
 
 ### Pre-stop hooks
@@ -55,15 +55,22 @@ Pre-stop hooks are commands that run before the container is stopped by a specif
 command (like `docker compose down` or stopping it manually with `Ctrl+C`). 
 These hooks won't run if the container stops by itself or gets killed suddenly.
 
-In the following example, before the container stops, the `./data_flush.sh` script is 
-run to perform any necessary cleanup.
+Use a pre-stop hook for shutdown steps the application itself cannot perform, such as 
+notifying an external system that the container is draining. Avoid using it to flush 
+application state: the application's own shutdown handlers already cover that on a 
+graceful stop, and pre-stop hooks don't run on abrupt termination.
+
+In the following example, the hook de-registers the service from an external 
+discovery endpoint before the container stops:
 
 ```yaml
 services:
   app:
     image: backend
+    environment:
+      SERVICE_NAME: backend
     pre_stop:
-      - command: ./data_flush.sh
+      - command: wget -q -O - "http://registry.internal/deregister?name=$${SERVICE_NAME}"
 ```
 
 ## Reference information
