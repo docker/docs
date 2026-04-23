@@ -31,8 +31,8 @@ during startup.
 
 Use a post-start hook for side tasks that happen once the container is up, such as 
 registering the container with an external system or emitting an audit event. The 
-hook can run with higher privileges than the application, which lets it touch 
-resources the application user cannot.
+hook can run with higher privileges than the application, which lets it reach 
+resources the application user does not have access to.
 
 In the following example, the hook registers the container with an internal service 
 discovery endpoint. The application runs as user `1001`, and the hook runs as `root`:
@@ -42,10 +42,8 @@ services:
   app:
     image: backend
     user: 1001
-    environment:
-      SERVICE_NAME: backend
     post_start:
-      - command: wget -q -O - "http://registry.internal/register?name=$${SERVICE_NAME}"
+      - command: wget -q -O - "http://registry.internal/register?name=backend"
         user: root
 ```
 
@@ -57,8 +55,8 @@ These hooks won't run if the container stops by itself or gets killed suddenly.
 
 Use a pre-stop hook for shutdown steps the application itself cannot perform, such as 
 notifying an external system that the container is draining. Avoid using it to flush 
-application state: the application's own shutdown handlers already cover that on a 
-graceful stop, and pre-stop hooks don't run on abrupt termination.
+application state: a well-written application already handles that on a graceful 
+stop, and pre-stop hooks don't run on abrupt termination.
 
 In the following example, the hook de-registers the service from an external 
 discovery endpoint before the container stops:
@@ -67,10 +65,8 @@ discovery endpoint before the container stops:
 services:
   app:
     image: backend
-    environment:
-      SERVICE_NAME: backend
     pre_stop:
-      - command: wget -q -O - "http://registry.internal/deregister?name=$${SERVICE_NAME}"
+      - command: wget -q -O - "http://registry.internal/deregister?name=backend"
 ```
 
 ## Reference information
