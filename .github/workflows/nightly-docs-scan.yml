@@ -55,7 +55,7 @@ jobs:
           private_key: ${{ secrets.CAGENT_REVIEWER_APP_PRIVATE_KEY }}
 
       - name: Run documentation scan
-        uses: docker/cagent-action@3a12dbd0c6cd7dda3d4e05f24f0143c9701456de # latest
+        uses: docker/cagent-action@f3b82c50bfaca431899c1fcd8f9d2fdd4fe40300 # latest
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token || github.token }}
         with:
