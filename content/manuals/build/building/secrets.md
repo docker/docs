@@ -210,7 +210,7 @@ ADD https://github.com/example/todo-app.git /src
 
 ### HTTP authentication scheme
 
-BuildKit supports two types of Git authentication secrets, and you should use either one or the other, not both:
+BuildKit supports two Git authentication secrets:
 
 - **`GIT_AUTH_TOKEN`**: Uses Basic authentication with a fixed username of `x-access-token` (GitHub-specific)
 - **`GIT_AUTH_HEADER`**: Uses the raw authorization header value you provide (works with any Git provider)
