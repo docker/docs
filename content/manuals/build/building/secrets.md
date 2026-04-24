@@ -232,7 +232,7 @@ $ docker build \
   https://github.com/example/todo-app.git
 ```
 
-#### Using GIT_AUTH_HEADER (Any Git provider)
+#### Using GIT_AUTH_HEADER (custom authorization header)
 
 When you use `GIT_AUTH_HEADER`, BuildKit uses the exact value you provide as the authorization header:
 
