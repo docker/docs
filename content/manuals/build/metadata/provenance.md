@@ -169,7 +169,7 @@ $ docker buildx build --tag <namespace>/<image>:<version> \
 For more information about SLSA Provenance v1, see the
 [SLSA specification](https://slsa.dev/spec/v1.1/provenance). To see the
 difference between SLSA v0.2 and v1 provenance attestations, refer to
-[SLSA definitions](https://github.com/moby/buildkit/blob/master/docs/attestations/slsa-definitions.md)
+[SLSA definitions](https://github.com/moby/buildkit/blob/master/docs/attestations/slsa-definitions.md).
 
 ## Inspecting Provenance
 

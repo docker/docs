@@ -1,6 +1,8 @@
 ---
 title: Configure BuildKit
 description: Learn how to configure BuildKit for your builder.
+aliases:
+  - /build/buildkit/toml-configuration/
 keywords: build, buildkit, configuration, buildx, network, cni, registry
 ---
 
