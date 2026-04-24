@@ -234,7 +234,7 @@ $ docker build \
 
 #### Using GIT_AUTH_HEADER (custom authorization header)
 
-When you use `GIT_AUTH_HEADER`, BuildKit uses the exact value you provide as the authorization header:
+When you use `GIT_AUTH_HEADER`, BuildKit uses the exact value you provide as the `Authorization` header:
 
 ```http
 Authorization: <GIT_AUTH_HEADER>
