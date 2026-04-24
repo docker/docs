@@ -223,7 +223,7 @@ When you use `GIT_AUTH_TOKEN`, BuildKit constructs a Basic authentication header
 Authorization: Basic <base64("x-access-token:<GIT_AUTH_TOKEN>")>
 ```
 
-This method works with GitHub. Example usage:
+This method works for providers that accept the `x-access-token` Basic auth pattern, such as GitHub. Example usage:
 
 ```console
 $ export GIT_AUTH_TOKEN=$(gh auth token)
