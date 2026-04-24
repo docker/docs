@@ -215,7 +215,7 @@ BuildKit supports two Git authentication secrets:
 - **`GIT_AUTH_TOKEN`**: Uses Basic authentication with a fixed username of `x-access-token` (the GitHub-style default)
 - **`GIT_AUTH_HEADER`**: Uses the raw authorization header value you provide (works with any Git provider)
 
-#### Using GIT_AUTH_TOKEN (f.ex. GitHub)
+#### Using GIT_AUTH_TOKEN (for example, GitHub)
 
 When you use `GIT_AUTH_TOKEN`, BuildKit automatically constructs a Basic authentication header using `x-access-token` as the user:
 
