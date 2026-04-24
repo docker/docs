@@ -157,10 +157,18 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
 {{< /tab >}}
 {{< tab name="CLI" >}}
 
-Authenticate with `docker login` using your Docker credentials or a [personal
+Authenticate with `docker login` using your Docker credentials, a [personal
 access token (PAT)](../../security/access-tokens.md) with **Read & Write**
-permissions. [Organization access tokens
-(OATs)](../../enterprise/security/access-tokens.md) are not supported.
+permissions, or an [organization access token
+(OAT)](../../enterprise/security/access-tokens.md). When using an OAT, the
+available operations depend on the token's permission scope:
+
+- To list or get customizations, or to view build logs, the OAT must have read
+  (pull) access to the destination repository. Results are scoped to
+  repositories the OAT can access.
+- To create, update, or delete a customization, the OAT must have push access to
+  the destination repository. Bulk operations require push access to every
+  referenced destination repository.
 
 Use the [`docker dhi customization`](/reference/cli/docker/dhi/customization/) command:
 
