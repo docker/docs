@@ -34,7 +34,9 @@ repositories:
 
 ## Mirror a DHI repository to your organization
 
-To mirror repositories, you must be an organization owner or editor, or use a personal access token (PAT) or organization access token (OAT). See the CLI and Terraform tabs below for required permission scopes.
+To mirror repositories, you must be an organization owner or editor, or use a
+personal access token (PAT) or organization access token (OAT). See the CLI and
+Terraform tabs in the following sections for required permission scopes.
 
 - Image repositories: Mirroring lets you customize images by adding packages,
   OCI artifacts (such as custom certificates or additional tools), environment
@@ -77,8 +79,8 @@ available operations depend on the token's permission scope:
 - To create a mirror to an existing destination repository, the OAT must have
   push access to that repository. To create a mirror to a new destination
   repository that doesn't yet exist, the OAT must have org-wide repository
-  access (for example, `<org>/*` with pull or push). Repo-scoped access to the
-  future repository name is not sufficient.
+  access (for example, `<org>/*` with pull or push). Repository-scoped access to
+  the future repository name is not sufficient.
 - To stop mirroring, the OAT must have push access to the relevant repository.
 - OATs with public repository read-only access cannot list or manage mirrored
   repositories.
