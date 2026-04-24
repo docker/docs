@@ -212,7 +212,7 @@ ADD https://github.com/example/todo-app.git /src
 
 BuildKit supports two Git authentication secrets:
 
-- **`GIT_AUTH_TOKEN`**: Uses Basic authentication with a fixed username of `x-access-token` (GitHub-specific)
+- **`GIT_AUTH_TOKEN`**: Uses Basic authentication with a fixed username of `x-access-token` (the GitHub-style default)
 - **`GIT_AUTH_HEADER`**: Uses the raw authorization header value you provide (works with any Git provider)
 
 #### Using GIT_AUTH_TOKEN (f.ex. GitHub)
