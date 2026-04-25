@@ -56,11 +56,11 @@ pushes, but requires additional disk capacity.
 
 This difference is particularly noticeable with multiple images sharing the
 same base layers. With legacy storage drivers, shared base layers were stored
-once locally, and reused images that depended on them. With containerd, each
-image stores its own compressed version of shared layers, even though the
-uncompressed layers are still de-duplicated through snapshotters. The
-compressed storage adds overhead proportional to the number of images using
-those layers.
+once locally and reused by images that depended on them. With containerd, the
+compressed content store still deduplicates identical layer blobs by digest, so
+the same compressed layer is stored only once. Disk usage can still grow when
+similar layers have different digests, and containerd still keeps both the
+compressed blobs and the extracted filesystem contents on disk.
 
 If disk space is constrained, consider the following:
 
