@@ -35,8 +35,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### New
 
 - The **Logs** view is now generally available.
-- Docker Desktop for Windows users now have the choice between a per-user or all-users installation type.
-
 ### Updates
 
 - [Docker Agent v1.50.0](https://github.com/docker/docker-agent/releases/tag/v1.50.0)
