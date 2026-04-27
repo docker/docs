@@ -42,7 +42,7 @@ services:
     volumes:
       - data:/data    
     post_start:
-      - command: chown -R /data 1001:1001
+      - command: chown -R 1001:1001 /data
         user: root
 
 volumes:
