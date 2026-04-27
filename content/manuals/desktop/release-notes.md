@@ -57,7 +57,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For Mac
 
-- Fixed issue where error tracking would temporarily continue sending session data directly after user disabled analytics. Fixes [docker/for-mac#7768](https://github.com/docker/for-mac/issues/7768).
+- Fixed an issue where error tracking would temporarily continue sending session data directly after a user disabled analytics. Fixes [docker/for-mac#7768](https://github.com/docker/for-mac/issues/7768).
 
 #### For Windows
 
