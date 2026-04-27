@@ -35,6 +35,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### New
 
 - The **Logs** view is now generally available.
+
 ### Updates
 
 - [Docker Agent v1.50.0](https://github.com/docker/docker-agent/releases/tag/v1.50.0)
