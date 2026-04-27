@@ -51,7 +51,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Docker Model Runner is now disabled by default and must be explicitly enabled in **Settings**. When enabled, TCP host-side support is automatically active.
 - Fixed an issue where downloading a Docker Desktop update would fail without a clear error if the disk had insufficient free space.
-- Fixed an issue where Docker Scout tag recommendations when inspecting an image failed when the base image digest or repository name was empty.
+- Fixed an issue where Docker Scout tag recommendations, when inspecting an image, failed when the base image digest or repository name was empty.
 - Added a **Switch to local Docker context** button on the sign-in screen, allowing users in a cloud context to switch back to their local context without signing in.
 - Added a dedicated **Stopped** status screen for the cloud engine so users see a clear stopped state instead of an error screen when transitioning away from Docker Offload.
 
