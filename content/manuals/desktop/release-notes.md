@@ -26,6 +26,49 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.72.0
+
+{{< release-date date="2026-05-04" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.72.0" build_path="//" >}}
+
+### New
+
+- The **Logs** view is now generally available.
+- Docker Desktop for Windows users now have the choice between a per-user or all-users installation type.
+
+### Updates
+
+- [Docker Agent v1.50.0](https://github.com/docker/docker-agent/releases/tag/v1.50.0)
+- [Docker DHI (`dhictl`) v0.0.3](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.3)
+- [Docker Model Runner v1.1.37](https://github.com/docker/model-cli/releases/tag/v1.1.37)
+- [credential helpers v0.9.6](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.6)
+
+### Security
+
+- Added a security warning banner to the Extensions settings page informing users that extensions run with host-level privileges and are not security-audited by Docker.
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Improvements to Docker Offload idle notifications.
+- Fixed the **Open Gordon in TUI**  button not working due to a missing `run` subcommand in Docker Agent command arguments.
+- Fixed an issue where transient network errors or Docker Hub server errors during sign-in would unexpectedly sign users out instead of retrying automatically.
+- Improved data refresh for the Containers, Images, and Volumes screens by fetching up-to-date data on demand when navigating to those screens, reducing background polling load.
+- Fixed a kernel crash that could occur when changing filesharing technology after significant container file activity.
+- Enable the OpenAI Responses API (`/responses`) endpoint in Docker Model Runner.
+- Fixed a bug where users were unexpectedly signed out of Docker Desktop mid-flow when signing in via `docker login` using OAuth.
+
+#### For Windows
+
+- Fixed a bug on Windows where selecting the Docker Desktop taskbar icon multiple times could spawn multiple backend processes. Re-selecting the icon while Docker Desktop is running now brings the dashboard to focus.
+- Fixed a race condition on Windows that caused a false-positive "processes still running" dialog to appear when Docker Desktop starts or exits normally.
+
+### For Linux
+
+- Support for RHEL 8 has been dropped.
+
 ## 4.71.0
 
 {{< release-date date="2026-04-27" >}}
