@@ -161,7 +161,6 @@ Docker Debug:
 Docker Desktop Archlinux:
   availability: Experimental
 Desktop logs:
-  availability: Beta
   requires: Docker Desktop [4.65](/manuals/desktop/release-notes.md#4650) or later
 Docker Hardened Images:
   subscription: [Docker Hardened Images Select or Enterprise]
