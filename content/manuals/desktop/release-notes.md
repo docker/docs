@@ -39,7 +39,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### Updates
 
 - [Docker Model Runner v1.1.36](https://github.com/docker/model-runner/releases/tag/v1.1.36)
-- containerd to [v2.2.3](https://github.com/containerd/containerd/releases/tag/v2.2.3)
+- [containerd to v2.2.3](https://github.com/containerd/containerd/releases/tag/v2.2.3)
 - [Runc v1.3.5](https://github.com/opencontainers/runc/releases/tag/v1.3.5)
 - [Docker Compose v5.1.3](https://github.com/docker/compose/releases/tag/v5.1.3)
 - [Docker Agent v1.44.0](https://github.com/docker/docker-agent/releases/tag/v1.44.0)
