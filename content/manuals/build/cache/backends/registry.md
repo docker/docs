@@ -29,8 +29,8 @@ configuration parameters:
 
 ```console
 $ docker buildx build --push -t <registry>/<image> \
-  --cache-to type=registry,ref=<registry>/<cache-image>[,parameters...] \
-  --cache-from type=registry,ref=<registry>/<cache-image> .
+  --cache-to=type=registry,ref=<registry>/<cache-image>[,parameters...] \
+  --cache-from=type=registry,ref=<registry>/<cache-image> .
 ```
 
 The following table describes the available CSV parameters that you can pass to
