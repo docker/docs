@@ -1,11 +1,14 @@
 ---
-title: Docker Desktop sandboxes (deprecated)
+title: Docker Desktop sandbox integration
 linkTitle: Docker Desktop
 description: Run sandboxed AI coding agents using Docker Desktop and the docker sandbox CLI.
 keywords: docker desktop, docker sandbox, ai agents, sandboxes, deprecated
 weight: 80
-sitemap: false
-notoc: true
+params:
+  sidebar:
+    badge:
+      color: gray
+      text: Deprecated
 ---
 
 > [!WARNING]
