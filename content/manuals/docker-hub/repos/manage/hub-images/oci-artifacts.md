@@ -78,7 +78,7 @@ Steps:
 
    ```console
    $ helm package demo
-   Successfully packaged chart and saved it to: /Users/<YOUR_DOCKER_USERNAME>/demo-0.1.0.tgz
+   Successfully packaged chart and saved it to: demo-0.1.0.tgz
    ```
 
 3. Sign in to Docker Hub with Helm, using your Docker credentials.
@@ -94,7 +94,8 @@ Steps:
    ```
 
    This uploads the Helm chart tarball to a `demo` repository in the `<YOUR_DOCKER_USERNAME>`
-   namespace. It will create a `<YOUR_DOCKER_USERNAME>/demo` repository.
+   namespace. Running this command creates a `<YOUR_DOCKER_USERNAME>/demo` repository
+   if one does not already exist.
 
 5. Go to the repository page on Docker Hub. The **Tags** section of the page
    shows the Helm chart tag.
