@@ -37,7 +37,7 @@ To refine the log stream further, select the **Filter** icon in the toolbar to o
 - Check Compose stacks to show or hide entire groups
 - Use **Select all** or **Clear all** to quickly toggle every container at once
 
-## Display options
+## Display settings
 
 Select the **Display settings** icon in the toolbar to toggle the following:
 
