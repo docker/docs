@@ -1069,7 +1069,7 @@ For more information on `HEALTHCHECK`, see the [Dockerfile reference](/reference
 
 ```yml
 healthcheck:
-  test: ["CMD", "curl", "-f", "http://localhost"]
+  test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
   interval: 1m30s
   timeout: 10s
   retries: 3
@@ -1085,7 +1085,7 @@ If it's a string, it's equivalent to specifying `CMD-SHELL` followed by that str
 
 ```yml
 # Hit the local web app
-test: ["CMD", "curl", "-f", "http://localhost"]
+test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
 ```
 
 Using `CMD-SHELL` runs the command configured as a string using the container's default shell
