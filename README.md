@@ -38,3 +38,6 @@ We welcome contributions! To get started:
 ## Copyright and license
 
 Copyright 2013-2026 Docker, Inc., released under the [Apache 2.0 license](https://github.com/docker/docs/blob/main/LICENSE).
+
+
+> **Note:** Please refer to the official documentation for the latest configuration details and examples.
