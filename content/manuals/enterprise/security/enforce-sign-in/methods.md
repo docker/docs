@@ -277,24 +277,41 @@ echo '{"allowedOrgs":["myorg1","myorg2"]}' | sudo tee /usr/share/docker-desktop/
 {{< tab name="Installation-time setup" >}}
 
 Create the registry.json file during Docker Desktop installation:
-
 #### Windows
 
 ```shell
-# PowerShell
+# PowerShell - single organization
 Start-Process '.\Docker Desktop Installer.exe' -Wait 'install --allowed-org=myorg'
 
-# Command Prompt
+# PowerShell - multiple organizations
+Start-Process '.\Docker Desktop Installer.exe' -Wait 'install --allowed-org=myorg1 --allowed-org=myorg2'
+
+# Command Prompt - single organization
 "Docker Desktop Installer.exe" install --allowed-org=myorg
+
+# Command Prompt - multiple organizations
+"Docker Desktop Installer.exe" install --allowed-org=myorg1 --allowed-org=myorg2
 ```
 
 #### macOS
 
 ```console
+# Single organization
 sudo hdiutil attach Docker.dmg
 sudo /Volumes/Docker/Docker.app/Contents/MacOS/install --allowed-org=myorg
 sudo hdiutil detach /Volumes/Docker
+
+# Multiple organizations
+sudo hdiutil attach Docker.dmg
+sudo /Volumes/Docker/Docker.app/Contents/MacOS/install --allowed-org=myorg1 --allowed-org=myorg2
+sudo hdiutil detach /Volumes/Docker
 ```
+
+> [!NOTE]
+>
+> To specify multiple organizations at installation time, repeat the
+> `--allowed-org` flag for each organization. Requires Docker Desktop
+> version 4.36 or later.
 
 {{< /tab >}}
 {{< /tabs >}}
