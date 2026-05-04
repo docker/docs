@@ -54,7 +54,7 @@ For more information on roles, see
    organization.
 1. Select **Teams**.
 1. Select **Create team**.
-1. Provide a team name and an optional description, then select **Create**.
+1. Provide the team's information, then select **Create**.
 
 ## Set team repository permissions
 
