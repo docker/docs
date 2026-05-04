@@ -52,9 +52,9 @@ To configure the registry key method manually:
 Deploy the registry key across your organization using Group Policy:
 
 1. Create a registry script with the following structure:
-   - Key: `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop`
+   - Path: `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop`
    - Value name: `allowedOrgs` (multi-string)
-   - Value data: Your organization names, one per line, in lowercase only.
+   - Value data: Your organization names, one per line, in lowercase only
 1. In Group Policy Management, create or edit a GPO.
 1. Navigate to **Computer Configuration** > **Preferences** > **Windows Settings** > **Registry**.
 1. Right-click **Registry** > **New** > **Registry Item**.
