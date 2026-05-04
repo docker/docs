@@ -21,6 +21,10 @@ You can enforce sign-in for Docker Desktop using several methods. Choose the met
 | `plist` file | Mac only |
 | `registry.json` | All platforms |
 
+> [!NOTE]
+>
+> Whichever method you choose, organization names must use lowercase letters only.
+
 > [!TIP]
 >
 > For Mac, configuration profiles offer the highest security because they're
