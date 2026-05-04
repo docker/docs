@@ -134,7 +134,7 @@ Overriding at least one of the proxy settings via Configuration profiles will au
 1. Replace placeholders:
    - Change `com.yourcompany.docker.config` to your company identifier
    - Replace `Your Company Name` with your organization name
-   - Replace `PayloadUUID` with a randomly generated UUID
+   - Replace both `PayloadUUID` values with randomly generated UUIDs (each value must be unique)
    - Update the `allowedOrgs` value with your organization names (separated by semicolons)
    - Replace `company.proxy:port` with http/https proxy server host(or IP address) and port
 1. Deploy the profile using your MDM solution.
