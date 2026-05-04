@@ -299,10 +299,10 @@ When multiple configuration methods exist on the same system, Docker Desktop use
 
 To remove enforcement, undo the configuration for the method you used:
 
-- **Windows registry key**: Delete the `allowedOrgs` value, or remove the entire `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop` key. If the key was deployed with Group Policy, remove it from the GPO and run `gpupdate /force` on target machines.
+- **Windows registry key**: Delete the `allowedOrgs` value, or remove the entire `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop` key.
 - **Mac configuration profiles**: Remove the profile through your MDM solution, or from **System Settings** > **General** > **Device Management**.
 - **Mac plist file**: Delete `/Library/Application Support/com.docker.docker/desktop.plist`.
-- **registry.json**: Delete the `registry.json` file from the location used during setup:
+- **registry.json**: Delete the `registry.json` file at:
   - Windows: `/ProgramData/DockerDesktop/registry.json`
   - Mac: `/Library/Application Support/com.docker.docker/registry.json`
   - Linux: `/usr/share/docker-desktop/registry/registry.json`
