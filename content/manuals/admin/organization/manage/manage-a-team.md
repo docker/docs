@@ -53,6 +53,8 @@ For more information on roles, see
 1. Sign in to [Docker Home](https://app.docker.com) and select your
    organization.
 1. Select **Teams**.
+1. Select **Create team**.
+1. Provide a team name and an optional description, then select **Create**.
 
 ## Set team repository permissions
 
