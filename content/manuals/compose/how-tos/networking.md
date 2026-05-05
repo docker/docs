@@ -8,16 +8,13 @@ aliases:
   - /compose/networking/
 ---
 
-By default Compose sets up a single
-[network](/reference/cli/docker/network/create/) for your app. Each
-container for a service joins the default network and is both reachable by
-other containers on that network, and discoverable by the service's name.
-
-For most development setups the default network is sufficient. You'll want to define custom networks when you need to isolate services from each other, or when connecting to infrastructure that's managed outside of Compose.
+Compose handles networking for you by default, but gives you fine-grained control when you need it. This page explains how the default network works and how containers discover each other by name. It also covers when and how to define custom networks, choose between network drivers, connect services across separate Compose projects, map custom hostnames, and debug connectivity issues.
 
 ## Default network and service discovery
 
-When you run `docker compose up`, Compose creates a network named `<project-name>_default` and attaches all services to it. Each service registers its name with an internal DNS server, so containers can reach each other using the service name directly. No IP addresses or manual configuration is needed.
+By default, Compose sets up a single [network](/reference/cli/docker/network/create/) for your app. Each container for a service joins the default network and is both reachable by other containers on that network, and discoverable by its service name. This network uses the `bridge` driver. To understand when you'd use a different driver, see [Network drivers: bridge vs host](#network-drivers-bridge-vs-host).
+
+For most development setups, the default network is sufficient. When you run `docker compose up`, Compose creates a network named `<project-name>_default` and attaches all services to it. Each service registers its name with an internal DNS server, so containers can reach each other using the service name directly. No IP addresses or manual configuration is needed.
 
 For example, suppose your app is in a directory called `myapp`, and your `compose.yaml` looks like this:
 
@@ -28,90 +25,115 @@ services:
     ports:
       - "8000:8000"
   db:
-    image: postgres:18
+    image: postgres:latest
     ports:
       - "8001:5432"
 ```
 
+Since `networks` is empty or absent from the Compose file, Compose considers an implicit definition for the service to be connected to the default network.
+
 When you run `docker compose up`, the following happens:
 
-1.  A network called `myapp_default` is created.
-2.  A container is created using `web`'s configuration. It joins the network
-    `myapp_default` under the name `web`.
-3.  A container is created using `db`'s configuration. It joins the network
-    `myapp_default` under the name `db`.
+1. A network called `myapp_default` is created.
+2. A container is created using `web`'s configuration. It joins `myapp_default` under the name `web`.
+3. A container is created using `db`'s configuration. It joins `myapp_default` under the name `db`.
 
-Each container can now look up the service name `web` or `db` and
-get back the appropriate container's IP address. For example, `web`'s
-application code could connect to the URL `postgres://db:5432` and start
-using the Postgres database.
+Each container can now look up the service name `web` or `db` and get back the appropriate container's IP address. The `web` service can connect to the database at `postgres://db:5432`. From the host machine, the same database is accessible at `postgres://localhost:8001` if your container is running locally.
 
 > [!TIP]
 >
-> Reference containers by name, not IP, whenever possible. Otherwise you’ll need to constantly update the IP address you use.
+> Always reference services by name, not IP address. When containers are recreated, for example after a configuration change, they receive a new IP address. The service name stays stable.
 
-It is important to note the distinction between `HOST_PORT` and `CONTAINER_PORT`.
-In the above example, for `db`, the `HOST_PORT` is `8001` and the container port is
-`5432` (Postgres default). Networked service-to-service
-communication uses the `CONTAINER_PORT`. The host port only comes into play when accessing the service from outside the network.
+Your app's network is given a name based on the "project name", which is based on the name of the directory it lives in. You can override the project name with either the [`--project-name` flag](/reference/cli/docker/compose/) or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
 
-Within the `web` container, your connection string to `db` would look like
-`postgres://db:5432`, and from the host machine, the connection string would
-look like `postgres://{DOCKER_IP}:8001` for example `postgres://localhost:8001` if your container is running locally.
-
-> [!NOTE]
->
-> Your app's network is given a name based on the "project name",
-> which is based on the name of the directory it lives in. You can override the
-> project name with either the [`--project-name` flag](/reference/cli/docker/compose/)
-> or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
+It is important to note the distinction between `HOST_PORT` and `CONTAINER_PORT`. In the example above, for `db`, the `HOST_PORT` is `8001` and the container port is `5432` (the Postgres default). Networked service-to-service communication uses the `CONTAINER_PORT`. The host port is only used when accessing the service from outside the network.
 
 ### Updating containers on the network
 
 If you make a configuration change to a service and run `docker compose up` to update it, the old container is removed and the new one joins the network under a different IP address but the same name. Running containers can look up that name and connect to the new address, but the old address stops working.
 
-If any containers have connections open to the old container, they are closed. It is a container's responsibility to detect this condition, look up the name again and reconnect.
+If any containers have connections open to the old container, they are closed. It is each container's responsibility to detect this condition, look up the name again, and reconnect.
 
-## Use an existing external network
+## Network drivers: bridge vs host
 
-If you've manually created a bridge network outside of Compose using the `docker network create` command, you can connect your Compose services to it by marking the network as [`external`](/reference/compose-file/networks.md#external).
+Compose supports multiple network drivers. The two most common are `bridge` and `host`.
+
+### Bridge (default)
+
+Bridge is the default driver and the most secure option. If you don't specify [`network_mode`](/reference/compose-file/services.md#network_mode), this is the type of network you are creating. Each container gets its own network namespace, and containers communicate with each other using service names:
 
 ```yaml
 services:
-  # ...
-networks:
-  network1:
-    name: my-pre-existing-network
-    external: true
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
+  db:
+    image: postgres:latest
 ```
 
-Instead of attempting to create a network called `<project-name>_default`, Compose looks for a network called `my-pre-existing-network` and connects your app's containers to it.
+Port mapping is required to expose a service outside the network. Inside the network, containers use service names (`web`, `db`); outside the network, you use the mapped host port.
 
-External networks are particularly useful when services in separate Compose projects need to communicate. Create a shared network once, then reference it as external in each project. Services on the same external network can reach each other by service name, just like services within a single project.
+For more information, see [Bridge network driver](/manuals/engine/network/drivers/bridge.md).
 
-Hybrid networking
-A service can connect to both an external shared network and its own project-internal network. This is useful when you want a service to be reachable across projects while keeping other services — like a database — fully isolated:
-yamlservices:
-  api:
-    image: myapp-api
+### Host
+
+With [`network_mode: host`](/reference/compose-file/services.md#network_mode), the container shares the host's network stack entirely. There is no network isolation:
+
+```yaml
+services:
+  monitoring:
+    image: prometheus/node-exporter
+    network_mode: host   # No port mapping needed. Uses host ports directly
+```
+
+The container can access all host network interfaces directly, which means no port mapping is required, but also that there is no container-level network isolation.
+
+> [!WARNING]
+> 
+> `host` mode carries security implications. A container using `network_mode: host` can access all host ports and observe all network traffic on the host. Use it only when genuinely required.
+
+| Feature | Bridge | Host |
+|---|---|---|
+| Port mapping | Required | Not needed |
+| Network isolation | Yes | No |
+| Container DNS | Service names work | Use `localhost` or IPs |
+| Performance | Small overhead | Native speed |
+| Security | Better isolation | Less isolation |
+
+Use bridge for application services, databases, and web servers; anything where you want controlled, isolated communication.
+
+Use host for system-level tools that need direct access to the host network, such as network monitors or performance-critical workloads like game servers.
+
+You can mix both modes in a single project:
+
+```yaml
+services:
+  app:
+    image: myapp
     networks:
-      - shared    # Reachable from other projects
-      - internal  # Can reach the database
+      - isolated
+    ports:
+      - "3000:3000"
 
-  database:
-    image: postgres:18
-    networks:
-      - internal  # Not exposed on the shared network
+  monitoring:
+    image: netdata/netdata
+    network_mode: host   # Can monitor host system and all host ports
 
 networks:
-  shared:
-    name: shared-network
-    external: true
-  internal: {}    # Project-specific, isolated
+  isolated:
+    driver: bridge
+```
 
-Troubleshooting
-If a service can't reach another service on an external network, verify that both containers are actually attached to it:
-bashdocker network inspect shared-network
+With this example, you can test network isolation by running the following:
+
+```bash
+# Bridge mode: can't access host services directly
+$ docker compose exec app curl localhost:5432  # Fails
+
+# Host mode: full access
+$ docker compose exec monitoring curl localhost:5432  # Works
+```
 
 ## Specify custom networks
 
@@ -133,19 +155,17 @@ services:
       - frontend
       - backend
   db:
-    image: postgres:18
+    image: postgres:latest
     networks:
       - backend
 
 networks:
   frontend:
-    # Specify driver options
-    driver: bridge
+    driver: bridge   # Specify driver options
     driver_opts:
       com.docker.network.bridge.host_binding_ipv4: "127.0.0.1"
   backend:
-    # Use a custom driver
-    driver: custom-driver
+    driver: custom-driver  # Use a custom driver
 ```
 
 Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](/reference/compose-file/services.md#ipv4_address-ipv6_address) for each attached network.
@@ -161,7 +181,32 @@ networks:
     driver: custom-driver-1
 ```
 
-## Configure the default network
+### Internal networks
+
+Setting `internal: true` on a network creates it without a connection to the host's network interfaces. It has no default gateway for external connectivity. This is useful for services like databases that should be completely unreachable from outside the container network:
+
+```yaml
+services:
+  cache:
+    image: redis
+    networks:
+      - internal
+
+  worker:
+    image: myworker
+    networks:
+      - internal
+      - public
+
+networks:
+  internal:
+    internal: true   # No external connectivity
+  public: # Regular network connected to host
+```
+
+Note that a service connected to both an internal and a non-internal network (like `worker` above) can still reach the internet via the non-internal network `public`.
+
+### Configure the default network
 
 Instead of, or as well as, specifying your own networks, you can also change the settings of the app-wide default network by defining an entry under `networks` named `default`:
 
@@ -172,43 +217,152 @@ services:
     ports:
       - "8000:8000"
   db:
-    image: postgres:18
+    image: postgres:latest
 
 networks:
   default:
-    # Use a custom driver
-    driver: custom-driver-1
+    driver: custom-driver-1   # Use a custom driver
+```
+
+## Use an existing external network
+
+If you've manually created a bridge network using `docker network create`, you can connect your Compose services to it by marking the network as [`external`](/reference/compose-file/networks.md#external):
+
+```yaml
+services:
+  # ...
+networks:
+  network1:
+    name: my-pre-existing-network
+    external: true
+```
+
+Instead of creating `<project-name>_default`, Compose looks for a network called `my-pre-existing-network` and connects your containers to it.
+
+### Connecting multiple Compose projects
+
+External networks are particularly useful when services in separate Compose projects need to communicate. Create a shared network once, then reference it as external in each project:
+
+```bash
+docker network create shared-network
+```
+
+backend-compose.yaml:
+
+```yaml
+services:
+  api:
+    image: myapi:latest
+    networks:
+      - shared
+      - default   # Also keep the project's internal network
+
+networks:
+  shared:
+    external: true
+    name: shared-network
+```
+
+frontend-compose.yaml:
+
+```yaml
+services:
+  web:
+    image: myfrontend:latest
+    environment:
+      API_URL: http://api:8080   # Reference by service name
+    networks:
+      - shared
+
+networks:
+  shared:
+    external: true
+    name: shared-network
+```
+
+Services on the same external network can reach each other by service name, just like services within a single project.
+
+> [!IMPORTANT]
+>
+> The external network must exist before you run `docker compose up`. If it doesn't, Compose fails with a **network not found** error. Always create it first with `docker network create`.
+
+## Hybrid networking
+
+A service can belong to both an external shared network and its own project-internal network. This lets you expose only the services that need to be reachable from other projects, while keeping everything else, such as databases, fully isolated:
+
+```yaml
+services:
+  api:
+    image: myapp-api
+    networks:
+      - shared     # Reachable from other projects
+      - internal   # Can also reach the database
+
+  database:
+    image: postgres:latest
+    networks:
+      - internal   # Not exposed on the shared network
+
+networks:
+  shared:
+    name: shared-network
+    external: true
+  internal: {}     # Project-specific, isolated
 ```
 
 ## Custom DNS with `extra_hosts`
 
-You can add custom hostname-to-IP mappings to a container's /etc/hosts file using extra_hosts. This is useful when a service needs to resolve a hostname that isn't registered in the default DNS — for example, a staging API endpoint or a service on a fixed IP:
-yamlservices:
+You can add custom hostname-to-IP mappings to a container's `/etc/hosts` file using [`extra_hosts`](/reference/compose-file/services.md#extra_hosts). This is useful when a service needs to resolve a hostname that isn't registered in Docker's internal DNS. For example, a fixed-IP dependency or a staging endpoint:
+
+```yaml
+services:
   app:
     image: myapp
     extra_hosts:
       - "api.staging:192.168.1.100"
       - "cache.internal:192.168.1.101"
-To map a hostname to the host machine's IP dynamically, use the special host-gateway value:
-yamlservices:
+```
+
+To map a hostname dynamically to the host machine's IP, use the special `host-gateway` value:
+
+```yaml
+services:
   app:
     image: myapp
     extra_hosts:
       - "host.docker.internal:host-gateway"
+```
+
+On Linux, `host-gateway` resolves to the host's IP on the default bridge network. On Mac and Windows, Docker automatically provides this - `host-gateway` resolves to the same internal IP address as `host.docker.internal`.
+
+You can also drive `extra_hosts` from environment variables, which makes it easy to point services at different targets per environment:
+
+```yaml
+services:
+  app:
+    image: myapp
+    extra_hosts:
+      - "api.service:${API_HOST:-127.0.0.1}"
+      - "auth.service:${AUTH_HOST:-127.0.0.1}"
+```
+
+Where `.env.development` might set `API_HOST=localhost` and a production env file might set `API_HOST=10.0.1.50`.
+
+To verify what has been injected, inspect the hosts file inside the container:
+
+```bash
+$ docker compose exec app cat /etc/hosts
+```
 
 ## Multi-host networking
 
-When deploying a Compose application on a Docker Engine with [Swarm mode enabled](/manuals/engine/swarm/_index.md),
-you can make use of the built-in `overlay` driver to enable multi-host communication.
+When deploying a Compose application on a Docker Engine with [Swarm mode enabled](/manuals/engine/swarm/_index.md), you can use the built-in `overlay` driver to enable multi-host communication. Overlay networks are always created as `attachable`. You can optionally set the [`attachable`](/reference/compose-file/networks.md#attachable) property to `false`.
 
-Overlay networks are always created as `attachable`. You can optionally set the [`attachable`](/reference/compose-file/networks.md#attachable) property to `false`.
-
-See the [overlay network driver documentation](/manuals/engine/network/drivers/overlay.md)
-to learn about multi-host overlay networks.
+To learn more, see the [overlay network driver documentation](/manuals/engine/network/drivers/overlay.md).
 
 ## Link containers
 
-Links allow you to define extra aliases by which a service is reachable from another service. They are not required to enable services to communicate. By default, any service can reach any other service at that service's name. In the following example, `db` is reachable from `web` at the hostnames `db` and `database`:
+Links allow you to define extra aliases by which a service is reachable from another service. They are not required for basic service-to-service communication — by default, any service can reach any other service at that service's name. In the following example, `db` is reachable from `web` at both the hostnames `db` and `database`:
 
 ```yaml
 services:
@@ -217,26 +371,61 @@ services:
     links:
       - "db:database"
   db:
-    image: postgres:18
+    image: postgres:latest
 ```
 
 See the [links reference](/reference/compose-file/services.md#links) for more information.
 
 ## Debugging
 
-To find out which host port maps to a container port, use docker compose port:
+### Inspect port mappings
 
-bash# Which host port maps to container port 5432 on db?
-docker compose port db 5432
+To find out which host port maps to a container port, use `docker compose port`:
+
+```bash
+# Which host port maps to container port 5432 on db?
+$ docker compose port db 5432
 # Output: 0.0.0.0:8001
-This is particularly useful when you use dynamic port mapping and the host port changes on every docker compose up:
-yamlservices:
+```
+
+This is especially useful when using dynamic port mapping, where the host port changes on every `docker compose up`:
+
+```yaml
+services:
   web:
     image: nginx
     ports:
-      - "80"  # Docker assigns the host port dynamically
-bashdocker compose port web 80
+      - "80"   # Docker assigns the host port dynamically
+```
+
+```bash
+$ docker compose port web 80
 # Output: 0.0.0.0:55432
+```
+
+When you scale a service, each replica gets its own dynamic port. Use `--index` to query a specific replica:
+
+```bash
+$ docker compose up -d --scale web=3
+
+$ docker compose port --index=1 web 80   # Output: 0.0.0.0:55001
+$ docker compose port --index=2 web 80   # Output: 0.0.0.0:55002
+$ docker compose port --index=3 web 80   # Output: 0.0.0.0:55003
+```
+
+By default, `docker compose port` looks for TCP mappings. If a service exposes both TCP and UDP on the same port, use `--protocol`:
+
+```bash
+$ docker compose port --protocol=udp myservice 53
+```
+
+### Verify network membership
+
+To check which containers are attached to a network (useful when troubleshooting connectivity across external or custom networks):
+
+```bash
+$ docker network inspect <network-name>
+```
 
 ## Further reference information
 
