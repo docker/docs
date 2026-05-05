@@ -51,7 +51,6 @@ explaining why the vulnerability does not apply:
 
 ### Why DHI does not use `fixed`
 
-<<<<<<< HEAD
 DHI does not use `fixed`. VEX-enabled scanners may not handle `fixed`
 consistently, so when Docker backports an upstream patch where the version
 number alone would not reflect the fix, it uses `not_affected` with
