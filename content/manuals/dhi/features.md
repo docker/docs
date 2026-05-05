@@ -75,8 +75,8 @@ Every image includes complete, verifiable security metadata:
 ### Continuous maintenance
 
 - Automatic patching: Images are rebuilt and updated when upstream security
-  patches become available, with no SLA-backed time commitments for non-DHI
-  Enterprise users
+  patches become available, with no SLA-backed time commitments for DHI
+  Community users
 - Scanner integration: Direct integration with scanners and other security platforms
 
 ### Kubernetes and Helm chart support
