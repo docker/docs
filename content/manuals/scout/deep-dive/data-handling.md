@@ -29,6 +29,14 @@ Docker Scout collects the following image metadata:
 - Order of image layers
 - Hardware architecture
 - Operating system type and version
+- Registry URL and type- Image creation timestamp
+- Image digest
+- Ports exposed by the image
+- Environment variable names and values
+- Name and value of image labels
+- Order of image layers
+- Hardware architecture
+- Operating system type and version
 - Registry URL and type
 
 Image digests are created for each layer of an image when the image is built
