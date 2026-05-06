@@ -5,7 +5,6 @@ title: Automated builds
 weight: 90
 params:
   sidebar:
-    group: Products
     badge:
       color: gray
       text: Deprecated
