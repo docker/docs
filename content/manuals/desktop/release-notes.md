@@ -35,7 +35,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### New
 
 - The **Logs** view is now generally available.
-- New installations of Docker Desktop for Windows have a choice between per-user or all-user installs.
+- New installations of Docker Desktop for Windows have a choice between per-user (Beta) or all-user installs.
 
 ### Updates
 
