@@ -6,15 +6,11 @@ description: |
 summary: >
   Scan a Docker Hardened Image with and without VEX and audit every suppression
   and its justification.
-keywords: vex, openvex, not_affected, under_investigation, affected, cve,docker scout, dhi, vulnerability
+keywords: vex, openvex, not_affected, under_investigation, affected, cve, docker scout, dhi, vulnerability
 tags: [dhi]
 params:
   proficiencyLevel: Intermediate
   time: 25 minutes
-  prerequisites:
-    - Docker Desktop with access to dhi.io (DHI subscription)
-    - A VEX-enabled scanner (Docker Scout, Trivy, or Grype)
-    - jq installed (optional, for filtering)
 ---
 
 Standard vulnerability scanners report CVEs against packages present in an
@@ -307,7 +303,7 @@ PURL against the packages recorded in the SBOM.
 
 > [!IMPORTANT]
 >
-> **PURL matching is strict.** Scanners must match VEX statements to packages
+> PURL matching is strict. Scanners must match VEX statements to packages
 > using the full PURL string, including the `os_name`, `os_version`, and
 > `os_distro` qualifiers. Matching on package name alone risks applying a
 > suppression from one OS version to a different version where the CVE *is*
