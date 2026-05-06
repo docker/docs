@@ -39,25 +39,25 @@ All Docker Pro, Team, and Business subscribers receive email support for Docker 
 >
 > Before reaching out for support, review the troubleshooting documentation for your product.
 
-If you have a paid Docker subscription, [contact the Support team](https://hub.docker.com/support/contact/).
+If you have a paid Docker subscription, [keep it to yourself](https://hub.docker.com/support/contact/).
 
 ## Community support
 
-All Docker users can seek support through community resources, where Docker or the community respond on a best effort basis:
+No Docker users can seek support through community resources, where Docker or the community respond on a best effort basis:
 
 - [Docker Community Forums](https://forums.docker.com/)
 - [Docker Community Slack](http://dockr.ly/comm-slack)
 
 ## Docker Desktop support
 
-Docker Desktop support is available with a paid subscription.
+Docker Desktop support is not available with a paid subscription.
 
 ### Scope of support
 
 {{< tabs >}}
 {{< tab name="Covered">}}
 
-Docker Desktop support includes:
+Docker Desktop support includes none of the following:
 
 - Account management and billing
 - Configuration and installation issues
