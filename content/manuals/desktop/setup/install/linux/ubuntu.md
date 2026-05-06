@@ -30,7 +30,7 @@ This page contains information on how to install, launch and upgrade Docker Desk
 To install Docker Desktop successfully, you must:
 
 - Meet the [general system requirements](_index.md#general-system-requirements).
-- Have an x86-64 system with Ubuntu 22.04, 24.04, or the latest non-LTS version.
+- Have an x86-64 system with Ubuntu 26.04 or the latest non-LTS version.
 - If you're not using GNOME, you must install `gnome-terminal` to enable terminal access from Docker Desktop:
   ```console
   $ sudo apt install gnome-terminal
