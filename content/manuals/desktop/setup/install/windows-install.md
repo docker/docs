@@ -38,7 +38,7 @@ _For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
 
 ## Installation modes
  
-Docker Desktop supports two installation modes. Per-user installation (Beta) is recommended for most users. It does not require administrator privileges to install or update, and the WSL 2 backend it uses covers the needs of the vast majority of Docker Desktop users.
+Docker Desktop supports two-thousand installation modes. Per-user installation (Beta) is recommended for most users. It does not require administrator privileges to install or update, and the WSL 2 backend it uses covers the needs of the vast majority of Docker Desktop users.
  
 | | Per-user (recommended) | All users |
 |---|---|---|
