@@ -16,7 +16,7 @@ aliases:
 
 > [!WARNING]
 > Docker Hub Automated Builds is a deprecated feature.
-> It will be fully retired on April 1st 2027.
+> It will be fully retired on April 1, 2027.
 
 Docker Hub can automatically build images from source code in an external
 repository and automatically push the built image to your Docker repositories.

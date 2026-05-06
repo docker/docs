@@ -183,10 +183,10 @@ separate add-on purchases.
 
 ### Docker Hub Automated Builds
 
-Docker Hub Automated Builds was a feature of Docker Hub that allowed building of 
-Docker images from source code in an external repository and automatically pushed
+Docker Hub Automated Builds was a feature of Docker Hub that allowed building
+Docker images from source code in an external repository and automatically pushing
 the built image to your Docker repositories. This feature has been deprecated and
-will be removed on April 1st 2027
+will be removed on April 1, 2027.
 
 
 ## Open source projects

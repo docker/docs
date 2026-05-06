@@ -8,7 +8,7 @@ weight: 80
 
 > [!WARNING]
 > Docker Hub Automated Builds is a deprecated feature.
-> It will be fully retired on April 1st 2027.
+> It will be fully retired on April 1, 2027.
 
 This guide explains how to migrate your Docker Hub Autobuilds setup to
 Continuous Integration (CI) workflows, focusing on GitHub Actions and Bitbucket
