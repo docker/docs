@@ -14,6 +14,15 @@ tags: [Release notes]
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+## 2026-05-06
+
+### Deprecation notice
+
+- [Docker Hub Automated Builds](https://docs.docker.com/docker-hub/repos/manage/builds/) 
+  is being deprecated. Existing accounts will have access until April 1st 2027. 
+  See [migration options](https://docs.docker.com/docker-hub/repos/manage/builds/migrate/)
+  for guides on migrating to GitHub Actions or Bitbucket Pipelines.
+
 ## 2026-02-13
 
 ### New

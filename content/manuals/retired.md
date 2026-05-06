@@ -181,6 +181,14 @@ expiration, and better security auditing. OATs are included with Docker Team
 and Business subscriptions and offer similar functionality without requiring
 separate add-on purchases.
 
+### Docker Hub Automated Builds
+
+Docker Hub Automated Builds was a feature of Docker Hub that allowed building of 
+Docker images from source code in an external repository and automatically pushed
+the built image to your Docker repositories. This feature has been deprecated and
+will be removed on April 1st 2027
+
+
 ## Open source projects
 
 Several open-source projects originally maintained by Docker have been
