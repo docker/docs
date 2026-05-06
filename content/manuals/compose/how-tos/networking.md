@@ -30,7 +30,7 @@ services:
       - "8001:5432"
 ```
 
-Since `networks` is empty or absent from the Compose file, Compose considers an implicit definition for the service to be connected to the default network.
+Since `networks` is empty or absent from the Compose file, Compose automatically connects all services to the default network.
 
 When you run `docker compose up`, the following happens:
 
@@ -46,7 +46,7 @@ Each container can now look up the service name `web` or `db` and get back the a
 
 Your app's network is given a name based on the "project name", which is based on the name of the directory it lives in. You can override the project name with either the [`--project-name` flag](/reference/cli/docker/compose/) or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
 
-It is important to note the distinction between `HOST_PORT` and `CONTAINER_PORT`. In the example above, for `db`, the `HOST_PORT` is `8001` and the container port is `5432` (the Postgres default). Networked service-to-service communication uses the `CONTAINER_PORT`. The host port is only used when accessing the service from outside the network.
+The `HOST_PORT` and `CONTAINER_PORT` serve different purposes. In the example above, for `db`, the `HOST_PORT` is `8001` and the container port is `5432` (the Postgres default). Networked service-to-service communication uses the `CONTAINER_PORT`. The host port is only used when accessing the service from outside the network.
 
 ### Updating containers on the network
 
@@ -54,58 +54,18 @@ If you make a configuration change to a service and run `docker compose up` to u
 
 If any containers have connections open to the old container, they are closed. It is each container's responsibility to detect this condition, look up the name again, and reconnect.
 
-## Network drivers: bridge vs host
+## Change the network mode
 
-Compose supports multiple network drivers. The two most common are `bridge` and `host`.
+By default, each service joins the project's bridge network. It is the most secure networking mode. If you don't specify [`network_mode`](/reference/compose-file/services.md#network_mode), this is the type of network you are creating.
 
-### Bridge (default)
+You can override the networking mode on a per-service basis. `Network_mode` option accepts the following values:
 
-Bridge is the default driver and the most secure option. If you don't specify [`network_mode`](/reference/compose-file/services.md#network_mode), this is the type of network you are creating. Each container gets its own network namespace, and containers communicate with each other using service names:
+- `host`: The container shares the host's network stack. No port mapping is needed or supported, and service name DNS resolution does not work. Use for system-level tools like network monitors that require direct access to host interfaces. A container using `network_mode: host` can access all host ports and observe all network traffic on the host. Use it only when genuinely required.
+- `none`: Turns off all container networking.
+- `service:{name}`: Gives the container access to the specified container by referring to its service name.
+- `container:{name}`: Gives the container access to the specified container by referring to its container ID.
 
-```yaml
-services:
-  web:
-    image: nginx
-    ports:
-      - "8080:80"
-  db:
-    image: postgres:latest
-```
-
-Port mapping is required to expose a service outside the network. Inside the network, containers use service names (`web`, `db`); outside the network, you use the mapped host port.
-
-For more information, see [Bridge network driver](/manuals/engine/network/drivers/bridge.md).
-
-### Host
-
-With [`network_mode: host`](/reference/compose-file/services.md#network_mode), the container shares the host's network stack entirely. There is no network isolation:
-
-```yaml
-services:
-  monitoring:
-    image: prometheus/node-exporter
-    network_mode: host   # No port mapping needed. Uses host ports directly
-```
-
-The container can access all host network interfaces directly, which means no port mapping is required, but also that there is no container-level network isolation.
-
-> [!WARNING]
-> 
-> `host` mode carries security implications. A container using `network_mode: host` can access all host ports and observe all network traffic on the host. Use it only when genuinely required.
-
-| Feature | Bridge | Host |
-|---|---|---|
-| Port mapping | Required | Not needed |
-| Network isolation | Yes | No |
-| Container DNS | Service names work | Use `localhost` or IPs |
-| Performance | Small overhead | Native speed |
-| Security | Better isolation | Less isolation |
-
-Use bridge for application services, databases, and web servers; anything where you want controlled, isolated communication.
-
-Use host for system-level tools that need direct access to the host network, such as network monitors or performance-critical workloads like game servers.
-
-You can mix both modes in a single project:
+You can mix modes in a single project:
 
 ```yaml
 services:
@@ -123,16 +83,6 @@ services:
 networks:
   isolated:
     driver: bridge
-```
-
-With this example, you can test network isolation by running the following:
-
-```bash
-# Bridge mode: can't access host services directly
-$ docker compose exec app curl localhost:5432  # Fails
-
-# Host mode: full access
-$ docker compose exec monitoring curl localhost:5432  # Works
 ```
 
 ## Specify custom networks
@@ -284,7 +234,7 @@ Services on the same external network can reach each other by service name, just
 
 > [!IMPORTANT]
 >
-> The external network must exist before you run `docker compose up`. If it doesn't, Compose fails with a **network not found** error. Always create it first with `docker network create`.
+> The external network must exist before you run `docker compose up`. If it doesn't, Compose fails with a `Network not found` error. Always create it first with `docker network create`.
 
 ## Hybrid networking
 
