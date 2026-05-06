@@ -8,6 +8,8 @@ aliases:
  - /desktop/troubleshoot/known-issues/
 ---
 
+TEST NOTE CHANGE
+
 {{< tabs >}}
 {{< tab name="For Mac with Intel chip" >}}
 - The Mac Activity Monitor reports that Docker is using twice the amount of memory it's actually using. This is due to a [bug in macOS](https://docs.google.com/document/d/17ZiQC1Tp9iH320K-uqVLyiJmk4DHJ3c4zgQetJiKYQM/edit?usp=sharing).
