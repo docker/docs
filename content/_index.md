@@ -8,12 +8,12 @@ grid:
     description: |
       Manage containers, applications, and images directly from your machine.
     links:
-      - text: "Overview"
+      - text: "BECK"
         url: "/desktop/"
-      - text: "Explore Docker Desktop"
+      - text: "WAS"
         url: "/desktop/use-desktop/"
       - text: "Release notes"
-        url: "/desktop/release-notes/"
+        url: "HERE"
   - title: Docker Engine
     icon: developer_board
     description: |
