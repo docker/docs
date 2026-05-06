@@ -28,13 +28,14 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ## 4.72.0
 
-{{< release-date date="2026-05-04" >}}
+{{< release-date date="2026-05-06" >}}
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.72.0" build_path="//" >}}
 
 ### New
 
 - The **Logs** view is now generally available.
+- New installations of Docker Desktop for Windows have a choice between per-user or all-user installs.
 
 ### Updates
 
