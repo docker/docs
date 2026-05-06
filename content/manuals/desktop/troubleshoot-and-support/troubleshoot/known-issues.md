@@ -8,7 +8,7 @@ aliases:
  - /desktop/troubleshoot/known-issues/
 ---
 
-TEST NOTE CHANGE
+TEST CHANGE NOTE
 
 {{< tabs >}}
 {{< tab name="For Mac with Intel chip" >}}
