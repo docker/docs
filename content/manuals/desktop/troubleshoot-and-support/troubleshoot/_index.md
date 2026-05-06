@@ -94,13 +94,21 @@ Docker Desktop cannot start.
 1. Locate the `com.docker.diagnose` tool:
 
    ```console
+   # For all-user installations
    $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
+
+   # For all-user installations
+   $ %LOCALAPPDATA%\Programs\DockerDesktop\resources\com.docker.diagnose.exe
    ```
 
 2. Create and upload the diagnostics ID. In PowerShell, run:
 
    ```console
+   # For all-user installations
    $ & "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" gather -upload
+
+   # For all-user installations
+   $ & %LOCALAPPDATA%\Programs\DockerDesktop\resources\com.docker.diagnose.exe" gather -upload
    ```
 
 After the diagnostics have finished, the terminal displays your diagnostics ID and the path to the diagnostics file. The diagnostics ID is composed of your user ID and a timestamp. For example `BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051`.

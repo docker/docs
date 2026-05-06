@@ -43,7 +43,11 @@ Docker Extensions' private marketplace is designed specifically for organization
    {{< tab name="Windows" >}}
 
    ```console
+   # For all-user installations
    $ C:\Program Files\Docker\Docker\resources\bin\extension-admin init
+
+   # For per-user installations
+   $ %LOCALAPPDATA%\Programs\DockerDesktop\resources\bin\extension-admin init
    ```
 
    {{< /tab >}}
@@ -128,7 +132,11 @@ $ /Applications/Docker.app/Contents/Resources/bin/extension-admin generate
 {{< tab name="Windows" >}}
 
 ```console
+# For all-user installations
 $ C:\Program Files\Docker\Docker\resources\bin\extension-admin generate
+
+# For per-user installations
+$ %LOCALAPPDATA%\Programs\DockerDesktop\resources\bin\extension-admin generate
 ```
 
 {{< /tab >}}
@@ -166,7 +174,11 @@ It's recommended that you try the private marketplace on your Docker Desktop ins
    {{< tab name="Windows (run as admin)" >}}
 
    ```console
+   # For all-user installations
    $ C:\Program Files\Docker\Docker\resources\bin\extension-admin apply
+
+   # For per-user installations
+   $ %LOCALAPPDATA%\Programs\DockerDesktop\resources\bin\extension-admin apply
    ```
 
    {{< /tab >}}
