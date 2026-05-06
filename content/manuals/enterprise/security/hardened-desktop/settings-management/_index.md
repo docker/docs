@@ -51,12 +51,13 @@ For a complete list of settings you can enforce, see the [Settings reference](/m
 
 ## Policy precedence
 
-When multiple policies exist, Docker Desktop applies them in this order:
+When multiple Settings Management policies exist, Docker Desktop applies them in this order:
 
 1. User-specific policies: Highest priority
 1. Organization default policy: Applied when no user-specific policy exists
 1. Local `admin-settings.json` file: Lowest priority, overridden by Admin Console policies
-1. [Configuration profiles](/manuals/enterprise/security/enforce-sign-in/methods.md#configuration-profiles-method-mac-only): Super-set of Docker Admin Console policies.
+
+[Configuration profiles](/manuals/enterprise/security/enforce-sign-in/methods.md#configuration-profiles-method-mac-only) are a separate Mac enforcement method for sign-in and supported proxy settings.
 
 ## Set up Settings Management
 
