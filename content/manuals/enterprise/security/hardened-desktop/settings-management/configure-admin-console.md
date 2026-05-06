@@ -55,6 +55,16 @@ To create a new settings policy:
    - **Always disabled**: Setting is off and locked.
    - **Disabled**: Setting is off but can be changed.
 
+     For on/off settings, Admin Console states correspond to `admin-settings.json` values as follows:
+
+     | Admin Console state | JSON equivalent                     |
+     | :------------------ | :---------------------------------- |
+     | **User-defined**    | Omit the setting                    |
+     | **Always enabled**  | `"locked": true`, `"value": true`   |
+     | **Enabled**         | `"locked": false`, `"value": true`  |
+     | **Always disabled** | `"locked": true`, `"value": false`  |
+     | **Disabled**        | `"locked": false`, `"value": false` |
+
      > [!TIP]
      >
      > For a complete list of configurable settings, supported platforms, and configuration methods, see the [Settings reference](settings-reference.md).
