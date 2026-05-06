@@ -46,7 +46,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Security
 
-- Added a security warning banner to the Extensions settings page informing users that extensions run with host-level privileges and are not security-audited by Docker.
+- The Extensions settings page now includes a security notice that extensions run with host-level privileges and are not audited by Docker.
 
 ### Bug fixes and enhancements
 
