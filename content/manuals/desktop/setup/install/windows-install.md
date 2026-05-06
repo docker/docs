@@ -38,7 +38,7 @@ _For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
 
 ## Installation modes
  
-Docker Desktop supports two installation modes. Per-user installation is recommended for most users. It does not require administrator privileges to install or update, and the WSL 2 backend it uses covers the needs of the vast majority of Docker Desktop users.
+Docker Desktop supports two installation modes. Per-user installation (Beta) is recommended for most users. It does not require administrator privileges to install or update, and the WSL 2 backend it uses covers the needs of the vast majority of Docker Desktop users.
  
 | | Per-user (recommended) | All users |
 |---|---|---|
@@ -147,7 +147,7 @@ For more information, see [Running Docker Desktop in a VM or VDI environment](/m
 
 1. Download the installer using the download button at the top of the page, or from the [release notes](/manuals/desktop/release-notes.md).
 
-2. Double-click `Docker Desktop Installer.exe` to run the installer. The installer will ask which installation mode you prefer. Choosing per-user installs to `%LOCALAPPDATA%\Programs\DockerDesktop` and requires no administrator privileges. This is the default. Choosing all users will prompt for elevation.
+2. Double-click `Docker Desktop Installer.exe` to run the installer. The installer will ask which installation mode you prefer. Choosing per-user installs to `%LOCALAPPDATA%\Programs\DockerDesktop` and requires no administrator privileges. Choosing all users will prompt for elevation.
 
    > [!NOTE]
    >
@@ -167,7 +167,7 @@ For more information, see [Running Docker Desktop in a VM or VDI environment](/m
 
 After downloading `Docker Desktop Installer.exe`, run the following command in a terminal to install Docker Desktop to `%LOCALAPPDATA%\Programs\DockerDesktop`.
 
-By default, the installer runs in per-user mode and does not require administrator privileges:
+For per-user installation, run:
 
 ```console
 $ "Docker Desktop Installer.exe" install --user

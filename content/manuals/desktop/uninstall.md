@@ -28,7 +28,7 @@ weight: 210
    # all-user installation
    $ C:\Program Files\Docker\Docker\Docker Desktop Installer.exe
 
-   # per-user installation 
+   # per-user installation (Beta)
    $ %LOCALAPPDATA%\Programs\DockerDesktop\Docker Desktop Installer.exe
    ```
 2. Uninstall Docker Desktop. 

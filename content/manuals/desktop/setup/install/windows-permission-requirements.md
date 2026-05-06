@@ -20,7 +20,7 @@ Docker Desktop on Windows is designed with security in mind. Administrative righ
 
 The permissions required to install and run Docker Desktop depend on which [installation mode](/manuals/desktop/setup/install/windows-install.md#installation-modes) you use.
  
-### Per-user installation
+### Per-user installation (Beta)
  
 In per-user mode, Docker Desktop installs to `%LOCALAPPDATA%\Programs\DockerDesktop` and writes only to current-user registry keys (`HKCU`). This means:
  

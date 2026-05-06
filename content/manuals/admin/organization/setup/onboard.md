@@ -78,7 +78,7 @@ receive your Docker subscription benefits.
    identify Docker users by checking if Docker Desktop is installed at the
    following location on each user's machine:
       - Mac: `/Applications/Docker.app`
-      - Windows: `C:\Program Files\Docker\Docker`(all-user installation) or `%LOCALAPPDATA%\Programs\DockerDesktop` (per-user installation)
+      - Windows: `C:\Program Files\Docker\Docker`(all-user installation) or `%LOCALAPPDATA%\Programs\DockerDesktop` (per-user installation (Beta))
       - Linux: `/opt/docker-desktop`
    - If your organization doesn't use device management software or your
      users haven't installed Docker Desktop yet, you can survey your users to
