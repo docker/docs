@@ -66,7 +66,7 @@ jobs:
           echo "GITHUB_APP_TOKEN=$PAT" >> "$GITHUB_ENV"
 
       - name: Run documentation scan
-        uses: docker/cagent-action@3a12dbd0c6cd7dda3d4e05f24f0143c9701456de # latest
+        uses: docker/cagent-action@c22076b8856ee12d9b4c4685bb49cf26eb974079 # latest
         env:
           GH_TOKEN: ${{ env.GITHUB_APP_TOKEN || github.token }}
         with:
