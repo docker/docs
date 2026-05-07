@@ -47,6 +47,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### Security
 
 - The Extensions settings page now includes a security notice that extensions run with host-level privileges and are not audited by Docker.
+- [Fixed CVE-2026-31431 ("copy.fail")](https://xint.io/blog/copy-fail-linux-distributions) by backporting an upstream Linux kernel patch that prevents an unprivileged container user from gaining root inside the container via a controlled write into the host VM page cache.
 
 ### Bug fixes and enhancements
 
