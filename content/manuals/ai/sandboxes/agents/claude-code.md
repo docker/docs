@@ -71,3 +71,11 @@ The sandbox uses `docker/sandbox-templates:claude-code` and launches Claude Code
 with `--dangerously-skip-permissions` by default. See
 [Templates](../customize/templates.md) to build your own image on top of
 this base.
+
+## Use a local model
+
+To run Claude Code in a sandbox against a local model on your host through
+Docker Model Runner, see
+[Run Claude Code in a Docker Sandbox with Docker Model Runner](/guides/claude-code-sandbox-model-runner/).
+For the host-only version without a sandbox, see
+[Use Claude Code with Docker Model Runner](/guides/claude-code-model-runner/).
