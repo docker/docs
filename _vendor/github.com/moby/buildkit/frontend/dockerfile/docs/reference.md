@@ -2062,7 +2062,7 @@ COPY --exclude=*.txt hom* /mydir/
 ```
 
 You can specify the `--exclude` option multiple times for a `COPY` instruction.
-Multiple `--excludes` are files matching its patterns not to be copied,
+Multiple `--exclude` are files matching its patterns not to be copied,
 even if the files paths match the pattern specified in `<src>`.
 To add all files starting with "hom", excluding files with either `.txt` or `.md` extensions:
 
