@@ -56,7 +56,7 @@ When multiple policies exist, Docker Desktop applies them in this order:
 1. User-specific policies: Highest priority
 1. Organization default policy: Applied when no user-specific policy exists
 1. Local `admin-settings.json` file: Lowest priority, overridden by Admin Console policies
-1. [Configuration profiles](/manuals/enterprise/security/enforce-sign-in/methods.md#configuration-profiles-method-mac-only): Super-set of Docker Admin Console policies.
+1. [Configuration profiles](/manuals/enterprise/security/enforce-sign-in/methods.md#configuration-profiles-method-mac-only) when used to control proxy settings
 
 ## Set up Settings Management
 

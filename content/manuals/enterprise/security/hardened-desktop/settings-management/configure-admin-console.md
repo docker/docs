@@ -49,11 +49,14 @@ To create a new settings policy:
      > User-specific policies override global default policies. Test your policy with a small group before applying it organization-wide.
 
 1. Configure each setting using a state:
-   - **User-defined**: Users can change the setting.
-   - **Always enabled**: Setting is on and locked.
-   - **Enabled**: Setting is on but can be changed.
-   - **Always disabled**: Setting is off and locked.
-   - **Disabled**: Setting is off but can be changed.
+
+     | Admin Console state | Description                        | `admin-settings.json` equivalent   |
+     | :------------------ | :--------------------------------- |:---------------------------------- |
+     | **User-defined**    | Users can change the setting       | Omit the setting                   |
+     | **Always enabled**  | Setting is on and locked           | `"value": true`, `"locked": true`  |
+     | **Enabled**         | Setting is on but can be changed   | `"value": true`, `"locked": false` |
+     | **Always disabled** | Setting is off and locked          | `"value": false`, `"locked": true` |
+     | **Disabled**        | Setting is off but can be changed  | `"value": false`, `"locked": false`|
 
      > [!TIP]
      >
