@@ -97,7 +97,7 @@ Docker Desktop cannot start.
    # For all-user installations
    $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
 
-   # For all-user installations
+   # For per-user installations
    $ %LOCALAPPDATA%\Programs\DockerDesktop\resources\com.docker.diagnose.exe
    ```
 
@@ -107,7 +107,7 @@ Docker Desktop cannot start.
    # For all-user installations
    $ & "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" gather -upload
 
-   # For all-user installations
+   # For per-user installations
    $ & %LOCALAPPDATA%\Programs\DockerDesktop\resources\com.docker.diagnose.exe" gather -upload
    ```
 
