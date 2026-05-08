@@ -130,7 +130,7 @@ Docker from the repository.
 
    > [!NOTE]
    >
-   > If you use a derivative distribution, such as Kali Linux,
+   > If you use a debian testing or derivative distribution, such as Kali Linux,
    > you may need to substitute the part of this command that's expected to
    > print the version codename:
    >
@@ -139,7 +139,7 @@ Docker from the repository.
    > ```
    >
    > Replace this part with the codename of the corresponding Debian release,
-   > such as `bookworm`.
+   > such as `trixie`.
 
 2. Install the Docker packages.
 
