@@ -130,7 +130,7 @@ Docker from the repository.
 
    > [!NOTE]
    >
-   > If you use a debian testing or derivative distribution, such as Kali Linux,
+   > If you use Debian testing or a derivative distribution such as Kali Linux,
    > you may need to substitute the part of this command that's expected to
    > print the version codename:
    >
