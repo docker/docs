@@ -1,15 +1,16 @@
 ---
 title: Isolation layers
 weight: 10
-description: How Docker Sandboxes isolate AI agents using hypervisor, network, Docker Engine, and credential boundaries.
-keywords: docker sandboxes, isolation, hypervisor, network, credentials
+description: How Docker Sandboxes isolate AI agents using hypervisor, network, Docker Engine, source-repository, and credential boundaries.
+keywords: docker sandboxes, isolation, hypervisor, network, credentials, git
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 AI coding agents need to execute code, install packages, and run tools on
-your behalf. Docker Sandboxes run each agent in its own microVM with four
-isolation layers: hypervisor, network, Docker Engine, and credential proxy.
+your behalf. Docker Sandboxes run each agent in its own microVM with five
+isolation layers: hypervisor, network, Docker Engine, source-repository
+(in branch mode), and credential proxy.
 
 ## Hypervisor isolation
 
@@ -72,6 +73,64 @@ Host system
       └── [VM] Agent container — sandbox 2
            └── [VM] Containers created by agent
 ```
+
+## Source-repository isolation
+
+When you start a sandbox with `--branch` (see the
+[branch-mode workflow](../usage.md#branch-mode)), the agent never works
+directly against your host repository. Even with full root inside the VM,
+it cannot corrupt your local Git state.
+
+The boundary works like this:
+
+- Your repository's Git root is bind-mounted into the sandbox at
+  `/run/sandbox/source` as a read-only mount. The agent — and anything it
+  spawns — cannot write to your `.git` directory, your working tree, or
+  any tracked file via that mount.
+- The agent's working copy is a private `git clone --reference` populated
+  on the sandbox's overlay filesystem. The clone has its own index, its
+  own refs, and its own working tree. Object storage is shared via
+  `.git/objects/info/alternates`, so the clone is space-efficient and
+  full history is walkable, but writes to the clone never reach your
+  host's object database.
+- Your host pulls the agent's commits over a `git-daemon` exposed by the
+  sandbox on `127.0.0.1:<ephemeral-port>`. The CLI registers it as a
+  `sandbox-<sandbox-name>` remote on your host repository. Fetching from that
+  remote uses the same trust model as fetching from any third-party
+  remote: nothing is integrated until you explicitly merge or check out
+  the fetched refs.
+
+```plaintext
+Host repository                            Sandbox VM
+  .git/                                      /run/sandbox/source/  (RO bind mount)
+    objects/  ◄─────── alternates ─────────  clone/.git/objects/
+    refs/                                    clone/.git/refs/      (private)
+    HEAD                                     clone/.git/HEAD       (private)
+    working tree                             clone/working tree    (overlay FS)
+    remote sandbox-<name>  ──── git:// ────► git-daemon :9418
+                                             (published 127.0.0.1:<ephemeral>)
+```
+
+The practical guarantees:
+
+- Index and ref corruption can't happen — concurrent `git` commands on the
+  host and inside the sandbox don't race on a shared `.git/index` or shared
+  refs because there is no shared writable state.
+- The agent can't write back to your working tree. A compromised or buggy
+  agent can't drop a `.git/hooks/pre-commit`, modify `.github/workflows/`,
+  or edit any other tracked file in a way that affects your host until you
+  fetch and merge from the `sandbox-<name>` remote.
+- Credentials, signing keys, and global settings declared in your
+  repository's `.git/config` stay on the host. The agent's clone has its
+  own independent configuration.
+- Cleanup is automatic: `sbx rm` deletes the clone, the published port,
+  and the `sandbox-<name>` remote on your host. Nothing leaks outside the
+  sandbox lifecycle.
+
+In direct mode (no `--branch`), the agent edits your working tree directly
+and this isolation does not apply. Use branch mode whenever you want a
+strong boundary between the agent's Git activity and your host
+repository.
 
 ## Credential isolation
 

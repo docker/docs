@@ -77,21 +77,29 @@ time, they may step on each other's changes. See
 
 ### Branch mode
 
-Pass `--branch <name>` to give the agent its own
-[Git worktree](https://git-scm.com/docs/git-worktree) and branch. This
-prevents conflicts when multiple agents, or you and an agent, write to the
-same files at the same time. You can set `--branch` on `create`, `run`, or
-both.
+Pass `--branch <name>` to give the agent its own branch and an isolated clone
+of your repository inside the sandbox. This prevents conflicts when multiple
+agents, or you and an agent, write to the same files at the same time. You
+can set `--branch` on `create` or, equivalently, on `run` at create time.
 
-The CLI creates worktrees under `.sbx/` in your repository root. The
-worktree is a separate working directory, so the agent doesn't touch your main
-working tree. This means:
+When `--branch` is active:
 
-- The worktree branches off your latest commit when you create it.
-  Uncommitted changes in your working tree are not included (`sbx` warns you
-  if it detects any).
-- Files you add or change in your main working tree won't be visible to the
-  agent, and vice versa. The two directories are independent.
+- The agent works on a private clone living entirely inside the sandbox.
+  Your repository's `.git` directory is bind-mounted as read-only into the
+  sandbox, serving as a reference for the clone's object database, so the
+  agent reuses your local history without consuming extra disk space.
+- The CLI creates the new branch on your host repository and checks it out
+  if your working tree is clean. If it's dirty, the branch ref is still
+  created but the checkout is skipped with a warning, so your uncommitted
+  changes are preserved.
+- The sandbox runs a `git-daemon` over a `127.0.0.1`-bound ephemeral port
+  that exports the in-container clone. The CLI registers it as a Git remote
+  named `sandbox-<sandbox-name>` on your host repository, so you can pull
+  the agent's commits with `git fetch`.
+- The agent's clone has its own index, refs, and working tree. Concurrent
+  Git operations on the host and inside the sandbox can't corrupt each
+  other. See [Source-repository isolation](security/isolation.md#source-repository-isolation)
+  for the security implications.
 
 #### Starting a branch
 
@@ -105,77 +113,67 @@ Use `--branch auto` to let the CLI generate a branch name for you:
 $ sbx run claude --branch auto
 ```
 
-You can also create the sandbox first and add a branch at run time:
-
-```console
-$ sbx create --name my-sandbox claude .
-$ sbx run --branch my-feature my-sandbox
-```
-
-Or set the branch at create time and reuse it on subsequent runs:
+You can also create the sandbox first and attach later:
 
 ```console
 $ sbx create --name my-sandbox --branch my-feature claude .
-$ sbx run my-sandbox                       # resumes in the my-feature worktree
-$ sbx run --branch my-feature my-sandbox   # same — reuses the existing worktree
+$ sbx run my-sandbox                       # resumes in the my-feature clone
 ```
 
-#### Multiple branches per sandbox
-
-You can run multiple worktrees in the same sandbox by passing different branch
-names:
-
-```console
-$ sbx run --branch feature-a my-sandbox
-$ sbx run --branch feature-b my-sandbox
-```
+> [!NOTE]
+> A sandbox is bound to the branch chosen at create time. To work on a
+> different branch, create a new sandbox with `sbx create --branch
+> other-feature ...`. Running `sbx run --branch ...` on an existing sandbox
+> with a different branch is rejected.
 
 #### Reviewing and pushing changes
 
-To review the agent's work, find the worktree with `git worktree list`, then
-push or open a PR from there:
+The CLI wires the agent's in-container clone as a `sandbox-<sandbox-name>`
+Git remote on your host repository. Review the agent's work with the same
+commands you'd use for any other remote — no `cd` into a worktree, no extra
+tooling:
 
 ```console
-$ git worktree list                          # find the worktree path
-$ cd .sbx/<sandbox-name>-worktrees/my-feature
-$ git log                                    # see what the agent did
+$ git fetch sandbox-my-sandbox                            # pull the agent's commits
+$ git log sandbox-my-sandbox/my-feature                   # see what the agent did
+$ git diff main..sandbox-my-sandbox/my-feature            # full diff
+$ git checkout my-feature && git merge --ff-only \
+    sandbox-my-sandbox/my-feature                         # fast-forward your local branch
 $ git push -u origin my-feature
 $ gh pr create
 ```
 
-Some agents don't commit automatically and leave changes uncommitted in the
-worktree. If that happens, commit from the worktree directory before pushing.
+Some agents don't commit automatically. If `git log sandbox-<name>/<branch>`
+shows nothing new, open a shell in the sandbox and commit from there before
+fetching. `sbx exec` drops you into the in-container clone, so plain `git`
+commands work without changing directory:
+
+```console
+$ sbx exec -it my-sandbox bash
+$ git commit -am "save work"
+```
 
 See [Workspace trust](security/workspace.md) for security considerations when
 reviewing agent changes.
 
 #### Cleanup
 
-`sbx rm` removes the sandbox and all of its worktrees and branches.
+`sbx rm` deletes the sandbox, its in-container clone, the published Git
+port, and the `sandbox-<sandbox-name>` remote on your host repository. The
+local branch the agent worked on stays on your host so you don't lose any
+commits you've already fetched.
 
-#### Ignoring the `.sbx/` directory
+#### Restrictions
 
-Branch mode stores worktrees under `.sbx/` in your repository root. To keep
-this directory out of `git status`, add it to your project's `.gitignore`:
+A few configurations are incompatible with branch mode and are rejected at
+create time:
 
-```console
-$ echo '.sbx/' >> .gitignore
-```
-
-Or, to ignore it across all repositories, add `.sbx/` to your global gitignore:
-
-```console
-$ echo '.sbx/' >> "$(git config --global core.excludesFile)"
-```
-
-> [!TIP]
-> If `git config --global core.excludesFile` is empty, set one first:
-> `git config --global core.excludesFile ~/.gitignore`.
-
-You can also create Git worktrees yourself and run an agent directly in one,
-but the sandbox won't have access to the `.git` directory in the parent
-repository. This means the agent can't commit, push, or use Git. `--branch`
-solves this by setting up the worktree so that Git works inside the sandbox.
+- `--branch` together with `--workspace-volume`: the source-repository
+  isolation relies on bind-mounting your Git root, which is incompatible
+  with a volume-backed workspace.
+- `--branch` from inside a host Git worktree: the bind mount can't resolve
+  the worktree's `.git` pointer file. Run `sbx create --branch ...` from
+  the main repository instead.
 
 ### Signed commits
 
@@ -250,8 +248,8 @@ $ sbx run claude-my-project
 
 You can mount extra directories into a sandbox alongside the main workspace.
 The first path is the primary workspace — the agent starts here, and the
-sandbox's Git worktree is created from this directory if you use `--branch`.
-Extra workspaces are always mounted directly.
+sandbox's branch-mode clone is created from this directory if you use
+`--branch`. Extra workspaces are always mounted directly.
 
 All workspaces appear inside the sandbox at their absolute host paths. Append
 `:ro` to mount an extra workspace read-only — useful for reference material or

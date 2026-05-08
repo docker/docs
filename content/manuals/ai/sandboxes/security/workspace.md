@@ -37,9 +37,16 @@ includes:
 
 ## Branch mode
 
-The `--branch` flag lets the agent work on a separate branch. This is a
-workflow convenience, not a security boundary: the agent still mounts the full
-repository. See the [usage guide](../usage.md) for details.
+The `--branch` flag isolates the agent from your host repository: it works
+on a private clone inside the sandbox, with your `.git` directory
+bind-mounted as a read-only reference. This means the agent cannot modify
+any tracked file or any byte under `.git/` on your host, no matter how
+unconstrained the agent runs. You see the agent's commits only after
+explicitly running `git fetch sandbox-<name>`.
+
+See [Source-repository isolation](isolation.md#source-repository-isolation)
+for the full boundary, and the [usage guide](../usage.md#branch-mode) for
+the workflow.
 
 ## Reviewing changes
 
@@ -52,10 +59,12 @@ With the default direct mount, changes are in your working tree:
 $ git diff
 ```
 
-If you used `--branch`, the agent's changes are on a separate branch:
+If you used `--branch`, the agent's changes are on the `sandbox-<name>`
+remote until you fetch and merge them:
 
 ```console
-$ git diff main..my-feature
+$ git fetch sandbox-my-sandbox
+$ git diff main..sandbox-my-sandbox/my-feature
 ```
 
 Pay particular attention to:
