@@ -34,7 +34,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Updates
 
-- [Docker Engine v29.4.2](https://docs.docker.com/engine/release-notes/29/#2942)
+- [Docker Engine v29.4.3](https://docs.docker.com/engine/release-notes/29/#2943)
 - [Docker Agent v1.54.0](https://github.com/docker/docker-agent/releases/tag/v1.54.0)
 
 ### Bug fixes and enhancements
