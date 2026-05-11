@@ -272,11 +272,15 @@ Create the registry.json file during Docker Desktop installation:
 
 ```shell
 # PowerShell
-Start-Process '.\Docker Desktop Installer.exe' -Wait 'install --allowed-org=myorg1;myorg2'
+Start-Process '.\Docker Desktop Installer.exe' -Wait 'install --allowed-org=myorg'
 
 # Command Prompt
-"Docker Desktop Installer.exe" install --allowed-org=myorg1;myorg2
+"Docker Desktop Installer.exe" install --allowed-org=myorg1
 ```
+
+> [!NOTE]
+>
+> The `--allowed-org` flag accepts only one organization. To enforce sign-in for multiple organizations on Mac, configure the `registry.json` file after installation.
 
 #### Mac
 
