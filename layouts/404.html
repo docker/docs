@@ -2,46 +2,165 @@
 {{ end }}
 
 {{ define "main" }}
-  <article class="prose max-w-none dark:prose-invert">
-    <h1>404</h1>
-    <p>
-      There might be a mistake in the URL or you might've clicked a link to
-      content that no longer exists. If you think it's the latter, please file
-      an issue in our issue tracker on GitHub.
+  <div class="flex min-h-[60vh] flex-col items-center justify-center py-16 text-center">
+
+    <div class="mb-6 text-red-500 dark:text-red-400" style="width: 2.5rem; height: 2.5rem;">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+        <path d="M12 8.00008V12.0001M12 16.0001H12.01M3 7.94153V16.0586C3 16.4013 3 16.5726 3.05048 16.7254C3.09515 16.8606 3.16816 16.9847 3.26463 17.0893C3.37369 17.2077 3.52345 17.2909 3.82297 17.4573L11.223 21.5684C11.5066 21.726 11.6484 21.8047 11.7985 21.8356C11.9315 21.863 12.0685 21.863 12.2015 21.8356C12.3516 21.8047 12.4934 21.726 12.777 21.5684L20.177 17.4573C20.4766 17.2909 20.6263 17.2077 20.7354 17.0893C20.8318 16.9847 20.9049 16.8606 20.9495 16.7254C21 16.5726 21 16.4013 21 16.0586V7.94153C21 7.59889 21 7.42756 20.9495 7.27477C20.9049 7.13959 20.8318 7.01551 20.7354 6.91082C20.6263 6.79248 20.4766 6.70928 20.177 6.54288L12.777 2.43177C12.4934 2.27421 12.3516 2.19543 12.2015 2.16454C12.0685 2.13721 11.9315 2.13721 11.7985 2.16454C11.6484 2.19543 11.5066 2.27421 11.223 2.43177L3.82297 6.54288C3.52345 6.70928 3.37369 6.79248 3.26463 6.91082C3.16816 7.01551 3.09515 7.13959 3.05048 7.27477C3 7.42756 3 7.59889 3 7.94153Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1 class="mb-3 text-3xl font-bold text-gray-900 dark:text-white">Page not found</h1>
+
+    <p class="mb-6 max-w-sm text-gray-500 dark:text-gray-400">
+      There might be a mistake in the URL or you might've clicked a broken link.
+      Use the navigation, or try the following suggestions from Gordon.
+      If you followed a link from a Docker product, consider filing an issue.
     </p>
 
-    <a
-      id="newissue"
-      class="link"
-      href="{{ site.Params.repo }}/issues/new"
-    >
-      <strong>Create a new issue</strong></a
-    >
+    <div class="mb-8 flex flex-wrap justify-center gap-3" x-data>
+      <button
+        @click="$store.gordon.open(window.location.pathname + ' was not found. Suggest alternative pages.', true)"
+        class="cursor-pointer rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-600 transition hover:border-blue-500 hover:text-blue-600 dark:border-gray-700 dark:text-gray-300 dark:hover:border-blue-500 dark:hover:text-blue-400"
+      >
+        Ask Gordon for help
+      </button>
+      <a
+        id="newissue"
+        href="{{ site.Params.repo }}/issues/new"
+        class="rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-600 transition hover:border-blue-500 hover:text-blue-600 dark:border-gray-700 dark:text-gray-300 dark:hover:border-blue-500 dark:hover:text-blue-400"
+      >
+        Create an issue
+      </a>
+    </div>
 
-    <a href="{{ site.BaseURL }}">
-      <figure>
-        <img src="/assets/images/404-docs.png" alt="404 page not found" />
-        <figcaption class="link">Go to the homepage</figcaption>
-      </figure>
-    </a>
+    <div class="w-full max-w-sm" x-data="gordon404()">
+      <p class="mb-3 text-base font-semibold text-gray-700 dark:text-gray-300">
+        Suggested pages
+      </p>
 
-    <script>
-    let el = document.querySelector("#newissue");
-    if (el) {
-        let url = new URL("{{ site.Params.repo }}/issues/new");
-        url.searchParams.set("title", "404 at " + window.location.pathname);
-        let body = "I found a broken link : " + window.location.href;
-        if (document.referrer !== "") {
-            body += "\nI arrived on this page through: " + document.referrer
+      <ul x-show="isLoading || links.length > 0" class="space-y-2">
+        <template x-for="i in 5" :key="i">
+          <li class="flex h-6 items-center justify-center">
+            <template x-if="links[i - 1]">
+              <a
+                :href="links[i - 1].url"
+                x-text="links[i - 1].text"
+                class="text-sm text-blue-600 hover:underline dark:text-blue-400"
+              ></a>
+            </template>
+            <template x-if="!links[i - 1] && isLoading">
+              <div class="h-3.5 w-2/3 animate-pulse rounded bg-gray-200 dark:bg-gray-700"></div>
+            </template>
+          </li>
+        </template>
+      </ul>
+
+      <p x-show="!isLoading && links.length === 0" class="text-sm text-gray-500 dark:text-gray-400">
+        No suggestions found. Try asking Gordon for help.
+      </p>
+    </div>
+
+  </div>
+
+  <script>
+  function gordon404() {
+    return {
+      links: [],
+      isLoading: true,
+
+      async init() {
+        const path = window.location.pathname;
+        try {
+          const gordonResponse = await fetch(window.GORDON_BASE_URL + '/public/ask', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              messages: [{
+                role: 'user',
+                content: `The page "${path}" was not found. Suggest alternative pages.`,
+                copilot_references: [{
+                  data: {
+                    origin: 'docs-website',
+                    email: 'docs@docker.com',
+                    uuid: `docs-404-${Date.now()}`,
+                    action: 'AskGordon',
+                    page_url: window.location.href,
+                    page_title: '404 Not Found'
+                  }
+                }]
+              }]
+            })
+          });
+
+          if (!gordonResponse.ok) return;
+
+          // Drain the full stream into a buffer
+          const reader = gordonResponse.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '';
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            for (const line of decoder.decode(value, { stream: true }).split('\n')) {
+              if (!line.startsWith('data: ')) continue;
+              const data = line.slice(6);
+              if (data === '[DONE]') continue;
+              try {
+                const parsed = JSON.parse(data);
+                if (parsed.choices?.[0]?.delta?.content) {
+                  buffer += parsed.choices[0].delta.content;
+                }
+              } catch {}
+            }
+          }
+
+          // Parse only the Sources section — structured, reliable URLs
+          const sourcesSection = buffer.split(/\n+\*{0,2}Sources:?\*{0,2}\s*\n/i)[1] ?? '';
+          const seen = new Set();
+          for (const match of sourcesSection.matchAll(/https?:\/\/[^\s<>()\[\]"']+/g)) {
+            const rawUrl = match[0].replace(/[.,;]+$/, '');
+            // Rewrite domain to current origin so links work locally too
+            const url = rawUrl.replace(/^https?:\/\/[^/]+/, window.location.origin);
+            if (!seen.has(url)) {
+              seen.add(url);
+              this.links.push({ url, text: this.titleFromUrl(url) });
+              if (this.links.length >= 5) break;
+            }
+          }
+        } catch {}
+        finally {
+          this.isLoading = false;
         }
-        url.searchParams.set("body", body);
-        url.searchParams.set("template", "broken_link.yml")
-        url.searchParams.set("title", "[404]: " + window.location.pathname);
-        url.searchParams.set("target", window.location.href);
-        url.searchParams.set("location", document.referrer);
-        url.searchParams.set("labels", "status/triage");
-        el.setAttribute("href", url.toString());
-    }
-    </script>
-  </article>
+      },
+
+      titleFromUrl(url) {
+        try {
+          return new URL(url).pathname
+            .split('/').filter(Boolean)
+            .map(s => s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()))
+            .join(' / ');
+        } catch {
+          return url;
+        }
+      },
+
+    };
+  }
+
+  const issueLink = document.querySelector('#newissue');
+  if (issueLink) {
+    const url = new URL('{{ site.Params.repo }}/issues/new');
+    url.searchParams.set('title', '[404]: ' + window.location.pathname);
+    let body = 'I found a broken link: ' + window.location.href;
+    if (document.referrer) body += '\nI arrived via: ' + document.referrer;
+    url.searchParams.set('body', body);
+    url.searchParams.set('template', 'broken_link.yml');
+    url.searchParams.set('target', window.location.href);
+    url.searchParams.set('location', document.referrer);
+    url.searchParams.set('labels', 'status/triage');
+    issueLink.href = url.toString();
+  }
+  </script>
 {{ end }}
