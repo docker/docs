@@ -38,7 +38,7 @@ When Docker Desktop detects a registry key, `.plist` file, or
   to try again with a different account.
 - When users sign in with organization member accounts, they can use Docker
   Desktop normally.
-- When users sign out, the `Sign in required!` prompt reappears and they can
+- When users sign out, the **Sign in required!** prompt reappears and they can
   no longer use Docker Desktop unless they sign back in.
 
 > [!NOTE]
@@ -51,7 +51,7 @@ When enforcement is first deployed, users who are already running Docker Desktop
 
 On the next Docker Desktop restart:
 
-- Users signed in with their an organization member account are automatically re-authenticated and continue working uninterrupted.
+- Users signed in with an organization member account are automatically re-authenticated and continue working uninterrupted.
 - Users signed in with a non-member account are immediately signed out on startup and see the **Sign in required!** prompt. 
 
 ## Enforcing sign-in versus enforcing single sign-on (SSO)
