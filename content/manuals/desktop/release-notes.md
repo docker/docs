@@ -41,10 +41,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- Fixed a bug where canceling `docker load` (e.g. `Ctrl+C`) left a containerd ref lock held, causing subsequent loads of the same image to fail.
-- Fixed `Cmd+Q` (Mac) and `Ctrl+Q` (Windows/Linux) not fully quitting Docker Desktop — the backend process and tray icon were left running after the dashboard closed. Fixes [docker/for-mac#7833](https://github.com/docker/for-mac/issues/7833).
+- Fixed `Cmd+Q` (Mac) and `Ctrl+Q` (Windows/Linux) not fully quitting Docker Desktop. Fixes [docker/for-mac#7833](https://github.com/docker/for-mac/issues/7833).
+- Fixed a bug where canceling `docker load` left a containerd ref lock held, causing subsequent loads of the same image to fail.
 - Fixed an issue where Docker Desktop made unnecessary network requests to `mcp.docker.com` on sign-in when MCP Toolkit was disabled, causing unexpected proxy authentication prompts.
-- Fixed an issue where the search input in Gordon's session sidebar did not close when clicking outside with an empty query.
+- Fixed an issue where the search input in Gordon's session sidebar would not close if it was left empty.
 
 #### For Mac
 
