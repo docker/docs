@@ -269,7 +269,7 @@ maximum amount of RAM+swap.
 Accounting for memory in the page cache is very complex. If two
 processes in different control groups both read the same file
 (ultimately relying on the same blocks on disk), the corresponding
-memory charge is split between the control groups. It's nice, but it
+memory charge is split between the control groups. This behavior is useful, but it
 also means that when a cgroup is terminated, it could increase the
 memory usage of another cgroup, because they're not splitting the cost
 anymore for those memory pages.
@@ -285,7 +285,7 @@ Instead of separate controllers for memory and swap, a single unified
   This replaces the v1 `memory.limit_in_bytes` file.
 - **`memory.high`** — Throttling threshold. Memory usage above this
   limit is throttled and put under heavy reclaim pressure. Setting this
-  is useful for preventing sudden spikes before hitting the hard `memory.max` limit.
+  is useful for preventing sudden spikes before reaching the hard `memory.max` limit.
 - **`memory.low`** — Best-effort memory protection. If memory usage
   is below this threshold, the cgroup's memory won't be reclaimed
   unless there's no unprotected reclaimable memory available.
@@ -296,9 +296,9 @@ Instead of separate controllers for memory and swap, a single unified
 - **`memory.events`** — Event counters including `low`, `high`, `max`,
   `oom`, and `oom_kill`. These are useful for monitoring memory pressure.
 
-The `memory.stat` file contains detailed breakdowns. Here is an example:
+The `memory.stat` file contains detailed breakdowns. The following example shows part of the `memory.stat` output:
 
-```
+```text
 anon 1639297024
 file 2166460416
 kernel 939536384
@@ -333,7 +333,7 @@ Notable differences from cgroup v1:
 - `slab` — total slab memory (sum of `slab_reclaimable` + `slab_unreclaimable`).
 - `shmem` — shared memory (previously included in `cache` in v1).
 - `file_mapped` replaces `mapped_file`.
-- `file_dirty` — file cache pages awaiting writeback to disk.
+- `file_dirty` — file cache pages awaiting write-back to disk.
 - There is no `total_` prefix. In cgroup v2, `memory.stat` always
   includes the cgroup's entire subtree, equivalent to the v1 `total_*` counters.
 - `hierarchical_memory_limit` and `hierarchical_memsw_limit` are removed.
@@ -382,7 +382,7 @@ Notable differences from cgroup v1:
 Accounting for memory in the page cache is very complex. If two
 processes in different control groups both read the same file
 (ultimately relying on the same blocks on disk), the corresponding
-memory charge is split between the control groups. It's nice, but it
+memory charge is split between the control groups. This behavior is useful, but it
 also means that when a cgroup is terminated, it could increase the
 memory usage of another cgroup, because they're not splitting the cost
 anymore for those memory pages.
@@ -416,7 +416,7 @@ ticks irrelevant.
 On cgroup v2, the `cpu` and `cpuacct` controllers are unified into a single
 `cpu` controller. CPU usage statistics are available in `cpu.stat`:
 
-```
+```text
 usage_usec 9593743878
 user_usec 7111219927
 system_usec 2482523950
@@ -493,7 +493,7 @@ On cgroup v2, the `blkio` controller is replaced by the `io` controller.
 All I/O statistics are consolidated into a single `io.stat` file, with
 one line per device:
 
-```
+```text
 8:0 rbytes=17408 wbytes=0 rios=14 wios=0 dbytes=0 dios=0
 8:16 rbytes=8260728320 wbytes=167597064192 rios=472549 wios=16323808 dbytes=84085252096 dios=37547
 ```
@@ -528,7 +528,8 @@ Additional interface files:
 - **`io.max`** — Per-device I/O rate limits. The format is
   `"<major>:<minor> rbps=<limit> wbps=<limit> riops=<limit> wiops=<limit>"`.
   For example:
-  ```
+
+  ```text
   8:0 rbps=max wbps=10485760 riops=max wiops=100
   ```
 
