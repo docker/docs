@@ -33,10 +33,10 @@ To upgrade your subscription:
    you want to upgrade.
 1. Select **Billing** to view your current plans.
 1. Select **Browse products**.
-1. Choose **View plans** from the Docker tile on the products catalog page. 
+1. Choose **View plans** from the Docker tile on the products catalog page.
 1. Choose a Docker Team or Business subscription for the organization.
-1. Follow the on-screen instructions to complete your upgrade. 
-   - If you choose to pay using a US bank account, you must verify the account. 
+1. Follow the on-screen instructions to complete your upgrade.
+   - If you choose to pay using a US bank account, you must verify the account.
    - For more information, see [Verify a bank account](/manuals/billing/payment-method.md#verify-a-bank-account).
 
 For detailed feature information, see [Docker Pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscriptionChange).

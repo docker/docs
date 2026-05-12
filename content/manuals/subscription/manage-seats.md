@@ -17,7 +17,7 @@ You can add or remove seats from your Docker Team or Business subscription at an
 
 > [!IMPORTANT]
 > If you have a sales-assisted Docker Business subscription,
-> contact your account manager to add or remove seats to your subscription.
+> contact your account manager to add or remove seats from your subscription.
 
 ## Add seats to your subscription
 

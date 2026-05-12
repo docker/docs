@@ -30,7 +30,7 @@ You can subscribe a new or existing organization to Docker Team or Business subs
 
 Docker Hardened Images (DHI) Select lets organization admins assign DHI repositories to organization accounts. When you add repositories for your organization, all members gain access to those DHI repositories. Members you add to the organization after setup inherit the same access.
 
-To purchase repositories with DHI Select: 
+To purchase repositories with DHI Select:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your organization.
 1. Select **Billing**, then **Browse products**.
@@ -44,5 +44,5 @@ To purchase repositories with DHI Select:
 ## What's next
 
 - To upgrade an existing organization's subscription, see [Upgrade your subscription](./change.md#upgrade-your-subscription).
-- To add more repositories to your Select plan, see [Add repositories with Select](./scale.md#add-repositories-with-select).
-- To learn about DHI Select, see [Get started with DHI Select and Enterprise](/manuals/dhi/how-to/select-enterprise.md)
+- To add more repositories to your Select plan, see [Add DHI repositories](./scale.md#add-dhi-repositories).
+- To learn about DHI Select, see [Get started with DHI Select and Enterprise](/manuals/dhi/how-to/select-enterprise.md).
