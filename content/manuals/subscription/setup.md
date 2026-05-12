@@ -43,4 +43,4 @@ To purchase repositories with Docker Select, sign in to [Docker Home](https://ap
 ## What's next
 
 - To upgrade an existing organization's subscription, see [Upgrade your subscription](./change.md#upgrade-your-subscription).
-- To add more repositories to your Select plan, see [Manage repositories with Select](./scale.md#manage-repositories-with-select).
+- To add more repositories to your Select plan, see [Add repositories with Select](./scale.md#add-repositories-with-select).

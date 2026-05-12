@@ -7,10 +7,12 @@ weight: 20
 ---
 
 Docker subscriptions let you scale consumption as your needs grow. All paid Docker subscriptions include base amounts of Docker Build Cloud build minutes and Testcontainers Cloud runtime minutes that you can supplement with additional capacity.
+
 You can scale consumption for:
 
 - Docker Build Cloud build minutes
 - Testcontainers Cloud runtime minutes
+- Docker Hardened Images (DHI) repositories with Docker Select
 
 To understand your usage patterns, [view your consumption](../admin/organization/manage/manage-products.md#monitor-product-usage-for-your-organization) at any time.
 
@@ -47,10 +49,10 @@ You can add Testcontainers Cloud runtime minutes in two ways:
 
 On-demand usage is billed at higher rates than pre-purchased capacity. To avoid higher on-demand charges, pre-purchase additional minutes if you expect consistent usage over your subscription's included minutes.
 
-## Manage repositories with Select
+## Add repositories with Select
 
-To add or remove mirrored repositories, or to turn off auto-renewal, sign in to [Docker Home](https://app.docker.com/) and select your organization:
+To add repositories, sign in to [Docker Home](https://app.docker.com/) and select your organization:
 
 1. Select **Billing**.
 1. On the Overview page, select **Manage** next to **Hardened Images**.
-1. From the opened pane, choose if you want to add or remove repositories, or turn off auto-renewal.
+1. Add more repositories from the menu.
