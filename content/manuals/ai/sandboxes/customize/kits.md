@@ -505,11 +505,121 @@ credentials:
 | -------------------------- | ------------------------------------------------------------- |
 | `sources`                  | Map of service identifier to credential source.               |
 | `sources.<id>.env`         | Environment variables to read on the host, in priority order. |
-| `sources.<id>.file.path`   | Path on host. `~` expands to home.                            |
-| `sources.<id>.file.parser` | How to extract the value (for example, `"json:apiKey"`).      |
+| `sources.<id>.file.path`   | Path on host. `~` expands to home directory.                  |
+| `sources.<id>.file.parser` | How to extract the credential value from the file.            |
 | `sources.<id>.priority`    | `env-first` (default) or `file-first`.                        |
 
 Service identifiers link credentials to [network rules](#network).
+
+#### file.parser
+
+`file.parser` controls how the proxy extracts a credential value from the file at
+`file.path`. Three forms are supported:
+
+| Parser value      | Behavior                                                                             |
+| ----------------- | ------------------------------------------------------------------------------------ |
+| omitted or empty  | Reads the entire file as the credential. Leading and trailing whitespace is trimmed. |
+| `json:<dot.path>` | Parses the file as JSON and extracts the value at the given dot-separated path.      |
+| anything else     | Rejected with `unsupported parser: <value>`.                                         |
+
+`json:` is the only supported structured-file format.
+
+**JSON path rules**
+
+- Path segments are separated by `.` — for example, `json:credentials.github.token`.
+- Only JSON objects can be navigated. Arrays are not supported; there is no `[0]`-style indexing.
+- Keys that contain a literal `.` cannot be referenced — the dot is always treated as a separator.
+- The value at the resolved path must be a string, number, or boolean. Numbers and booleans are
+  converted to strings. Objects, arrays, and null are rejected with
+  `field '<path>' is not a string value`.
+
+**Priority and missing files**
+
+When a source has both `env` and `file`, `priority` controls which is tried first. If the
+preferred source is unavailable (environment variable unset, or file missing or inaccessible),
+the proxy falls back to the other source automatically. A missing file is not an error on its
+own — the source is silently skipped.
+
+**Examples**
+
+Plain-text token file — no parser needed:
+
+```yaml
+credentials:
+  sources:
+    openai:
+      file:
+        path: "~/.openai/token"
+```
+
+Top-level JSON field:
+
+```yaml
+credentials:
+  sources:
+    anthropic:
+      file:
+        path: "~/.claude/settings.json"
+        parser: "json:primaryApiKey"
+```
+
+Given `~/.claude/settings.json`:
+
+```json
+{ "primaryApiKey": "sk-ant-...", "secondaryApiKey": "sk-ant-..." }
+```
+
+The proxy resolves the credential to the value of `primaryApiKey`.
+
+Nested JSON field:
+
+```yaml
+credentials:
+  sources:
+    github:
+      file:
+        path: "~/.config/myapp/creds.json"
+        parser: "json:credentials.github.token"
+```
+
+Given `~/.config/myapp/creds.json`:
+
+```json
+{
+  "credentials": {
+    "github": { "token": "ghp_xyz", "expires": "2026-12-31" }
+  }
+}
+```
+
+The proxy resolves the credential to `ghp_xyz`.
+
+File-first with env fallback:
+
+```yaml
+credentials:
+  sources:
+    anthropic:
+      env:
+        - ANTHROPIC_API_KEY
+      file:
+        path: "~/.claude/settings.json"
+        parser: "json:primaryApiKey"
+      priority: file-first
+```
+
+Tries the JSON file first; falls back to the environment variable if the file is
+missing or the field is absent.
+
+**Common errors**
+
+| Error message                                 | Cause                                                               |
+| --------------------------------------------- | ------------------------------------------------------------------- |
+| `field 'X' not found in JSON`                 | The path doesn't exist in the file.                                 |
+| `cannot navigate to field 'X': not an object` | A path segment hit a string, array, or scalar instead of an object. |
+| `field 'X' is not a string value`             | The resolved value is an object, array, or null.                    |
+| `failed to parse JSON: ...`                   | The file is not valid JSON.                                         |
+| `unsupported parser: <value>`                 | The parser string doesn't start with `json:` and isn't empty.       |
 
 ### Network
 
