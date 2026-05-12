@@ -1,8 +1,8 @@
 ---
 description: Set up Docker subscriptions for personal accounts and organizations
 keywords: subscription setup, docker pro, docker team, docker business, organization setup
-title: Set up your subscription
-weight: 15
+title: Setup
+weight: 10
 ---
 
 Docker subscriptions provide features and benefits for individual developers, teams, and enterprise businesses. This page explains how to set up subscriptions for personal accounts and organizations.
@@ -21,6 +21,25 @@ You can subscribe a new or existing organization to Docker Team or Business subs
 
 1. [Create your Docker ID](../accounts/create-account.md) if you don't already have one.
 1. [Create your organization](../admin/organization/setup/orgs.md) or use an existing organization you own.
-1. Choose and purchase a Docker Team or Business subscription for the organization.
+1. Select **Billing** to view your current plans, then select **Browse products**.
+1. From the products catalog page, select **View plans** from the Docker tile. Choose a Docker Team or Business subscription for the organization.
+1. Fill in plan entitlements, verify your billing details, then continue to payment to complete checkout.
 
-To upgrade an existing organization's subscription, see [Upgrade your subscription](./change.md#upgrade-your-subscription).
+## Set up Docker Select for an organization 
+
+You can add Docker Hardened Images repositories to your organization with the Docker Select plan. When you add repositories for your organization, Docker gives access to mirrored hardened image repositories for all organization members. Members who join later inherit the same access.
+
+To purchase repositories with Docker Select, sign in to [Docker Home](https://app.docker.com/) and select your organization:
+
+1. Select **Billing**, then **Browse products**.  
+1. Choose Hardened Images Select from the products page, then select which account should receive the Hardened Images Select entitlement.  
+1. Select your organization account in step one, then **Continue**. You can add repositories for one account at a time.  
+1. Choose how many mirrored repositories the account can use. 
+   - You can select between one and seven mirrors. 
+   - For eight or more, [contact Docker sales](https://www.docker.com/pricing/contact-sales/) to discuss an Enterprise plan.  
+1. Verify your billing details, continue to payment, and complete checkout.
+
+## What's next
+
+- To upgrade an existing organization's subscription, see [Upgrade your subscription](./change.md#upgrade-your-subscription).
+- To add more repositories to your Select plan, see [Scale your subscription](/manuals/subscription/scale.md).
