@@ -1,7 +1,7 @@
 ---
-title: Manage company members
+title: Manage organization members
 linkTitle: Users
-description: Learn how to manage company members in the Docker Admin Console.
+description: Learn how to manage members in your company's organizations using the Docker Admin Console.
 keywords: company, company members, members, admin, Admin Console, member management, organization management, company management, bulk invite, resend invites
 aliases:
   - /admin/company/users/
