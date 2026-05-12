@@ -123,6 +123,28 @@ To make this permanent, add the export command to your shell profile (`~/.bashrc
 echo 'export DOCKER_HOST=unix://$HOME/.docker/desktop/docker.sock' >> ~/.bashrc
 ```
 
+> [!NOTE]
+>
+> `~/.docker/desktop/docker.sock` is only for connecting SDKs and tools to the Docker daemon from the host. It cannot be bind-mounted into a container. See [How do I bind-mount the Docker socket into a container?](#how-do-i-bind-mount-the-docker-socket-into-a-container)
+
+### How do I bind-mount the Docker socket into a container?
+
+Use `/var/run/docker.sock` as the host path:
+
+```console
+$ docker run -v /var/run/docker.sock:/var/run/docker.sock <image>
+```
+
+Even though `docker context list` shows `~/.docker/desktop/docker.sock` as the
+active socket, do not use that path for bind mounts. Docker Desktop
+automatically rewrites `/var/run/docker.sock` to the correct socket inside the
+VM. `~/.docker/desktop/docker.sock` is the host-side proxy socket and cannot be
+shared into the VM, so mounting it directly produces a
+non-functional socket inside the container.
+
+`~/.docker/run/docker.sock` is also accepted and receives the same rewrite. All
+other paths are not rewritten.
+
 ### Where does Docker Desktop store Linux containers?
 
 Docker Desktop stores Linux containers and images in a single, large "disk image" file in the Linux filesystem. This is different from Docker on Linux, which usually stores containers and images in the `/var/lib/docker` directory on the host's filesystem.
