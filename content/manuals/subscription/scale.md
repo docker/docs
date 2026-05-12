@@ -1,5 +1,6 @@
 ---
-title: Scale
+title: Scale your subscription
+linkTitle: Scale
 description: Scale Docker Build Cloud and Testcontainers Cloud consumption for your subscription
 keywords: scale subscription, docker build cloud minutes, testcontainers cloud minutes, usage scaling
 weight: 20
@@ -28,7 +29,7 @@ For example, with an annual Docker Team subscription (500 included minutes), if 
 Purchase additional build minutes through the Docker Build Cloud Dashboard:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and choose
-your organization.
+   your organization.
 1. Select **Build Cloud**, then **Build minutes**.
 1. Select **Add prepaid minutes**.
 1. Select your additional minute amount, then **Continue to payment**.
@@ -46,10 +47,10 @@ You can add Testcontainers Cloud runtime minutes in two ways:
 
 On-demand usage is billed at higher rates than pre-purchased capacity. To avoid higher on-demand charges, pre-purchase additional minutes if you expect consistent usage over your subscription's included minutes.
 
-## Add Docker Select repositories 
+## Manage repositories with Select
 
 To add or remove mirrored repositories, or to turn off auto-renewal, sign in to [Docker Home](https://app.docker.com/) and select your organization:
 
-1. Select **Billing**.   
-1. On the Overview page, select **Manage** next to Hardened Images Select.  
-1. From the opened pane, choose if you want to add or delete repositories, or cancel an automatic subscription.
+1. Select **Billing**.
+1. On the Overview page, select **Manage** next to **Hardened Images**.
+1. From the opened pane, choose if you want to add or remove repositories, or turn off auto-renewal.

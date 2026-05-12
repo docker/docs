@@ -24,7 +24,7 @@ The **Organizations** view displays all organizations under your company.
 If you have a [self-serve](../../../subscription/details.md#self-serve)
 subscription that has no pending subscription changes, you can add seats using
 Docker Home. For more information about adding seats,
-see [Manage seats](/manuals/subscription/manage-seats.md#add-seats).
+see [Manage seats](/manuals/subscription/manage-seats.md#add-seats-to-your-subscription).
 
 If you have a sales-assisted subscription, you must contact Docker support or
 sales to add seats.
