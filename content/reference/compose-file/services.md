@@ -1922,7 +1922,7 @@ the service's containers.
 
 - `source`: The name of the secret as it exists on the platform.
 - `target`: The name of the file to be mounted in `/run/secrets/` in the
-  service's task container, or absolute path of the file if an alternate location is required. Defaults to `source` if not specified.
+  service's task container. Defaults to `source` if not specified.
 - `uid` and `gid`: The numeric uid or gid that owns the file within
   `/run/secrets/` in the service's task containers.
 - `mode`: The [permissions](https://wintelguy.com/permissions-calc.pl) for the file to be mounted in `/run/secrets/`
