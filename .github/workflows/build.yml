@@ -67,6 +67,17 @@ jobs:
           AWS_REGION: us-east-1
           AWS_CLOUDFRONT_ID: 0123456789ABCD
           AWS_LAMBDA_FUNCTION: DockerDocsRedirectFunction-dummy
+      -
+        name: Check Cloudfront Function config
+        uses: docker/bake-action@82490499d2e5613fcead7e128237ef0b0ea210f7 # v7
+        with:
+          source: .
+          targets: aws-cloudfront-function-update
+        env:
+          DRY_RUN: true
+          AWS_REGION: us-east-1
+          AWS_CLOUDFRONT_FUNCTION_NAME: DockerDocsRedirectFunction-dummy
+          AWS_CLOUDFRONT_KVS_ARN: arn:aws:cloudfront::000000000000:key-value-store/dummy
 
   validate:
     runs-on: ubuntu-24.04

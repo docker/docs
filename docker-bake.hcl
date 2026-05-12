@@ -107,6 +107,12 @@ variable "AWS_CLOUDFRONT_ID" {
 variable "AWS_LAMBDA_FUNCTION" {
   default = ""
 }
+variable "AWS_CLOUDFRONT_FUNCTION_NAME" {
+  default = ""
+}
+variable "AWS_CLOUDFRONT_KVS_ARN" {
+  default = ""
+}
 
 target "_common-aws" {
   args = {
@@ -116,6 +122,8 @@ target "_common-aws" {
     AWS_S3_CONFIG = AWS_S3_CONFIG
     AWS_CLOUDFRONT_ID = AWS_CLOUDFRONT_ID
     AWS_LAMBDA_FUNCTION = AWS_LAMBDA_FUNCTION
+    AWS_CLOUDFRONT_FUNCTION_NAME = AWS_CLOUDFRONT_FUNCTION_NAME
+    AWS_CLOUDFRONT_KVS_ARN = AWS_CLOUDFRONT_KVS_ARN
   }
   secret = [
     "id=AWS_ACCESS_KEY_ID,env=AWS_ACCESS_KEY_ID",
@@ -141,6 +149,17 @@ target "aws-cloudfront-update" {
     sitedir = DOCS_SITE_DIR
   }
   no-cache-filter = ["aws-cloudfront-update"]
+  output = ["type=cacheonly"]
+}
+
+target "aws-cloudfront-function-update" {
+  inherits = ["_common-aws"]
+  context = "hack/releaser"
+  target = "aws-cloudfront-function-update"
+  contexts = {
+    sitedir = DOCS_SITE_DIR
+  }
+  no-cache-filter = ["aws-cloudfront-function-update"]
   output = ["type=cacheonly"]
 }
 

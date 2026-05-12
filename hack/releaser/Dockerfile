@@ -40,3 +40,19 @@ RUN --mount=type=bind,target=. \
   --mount=type=secret,id=AWS_SECRET_ACCESS_KEY \
   --mount=type=secret,id=AWS_SESSION_TOKEN \
   releaser aws cloudfront-update
+
+FROM base AS aws-cloudfront-function-update
+ARG DRY_RUN=false
+ARG AWS_REGION
+ARG AWS_CLOUDFRONT_FUNCTION_NAME
+ARG AWS_CLOUDFRONT_KVS_ARN
+ARG AWS_CLOUDFRONT_FUNCTION_FILE="cloudfront-function-redirects.js"
+ARG REDIRECTS_FILE="/site/redirects.json"
+ARG REDIRECTS_PREFIXES_FILE="redirects-prefixes.json"
+RUN --mount=type=bind,target=. \
+  --mount=type=bind,from=sitedir,target=/site \
+  --mount=type=bind,from=releaser,source=/out/releaser,target=/usr/bin/releaser \
+  --mount=type=secret,id=AWS_ACCESS_KEY_ID \
+  --mount=type=secret,id=AWS_SECRET_ACCESS_KEY \
+  --mount=type=secret,id=AWS_SESSION_TOKEN \
+  releaser aws cloudfront-function-update

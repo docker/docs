@@ -126,6 +126,19 @@ jobs:
           AWS_CLOUDFRONT_ID: ${{ env.DOCS_CLOUDFRONT_ID }}
           AWS_LAMBDA_FUNCTION: ${{ env.DOCS_LAMBDA_FUNCTION_REDIRECTS }}
       -
+        name: Update CloudFront Function redirects
+        if: ${{ env.DOCS_CLOUDFRONT_KVS_ARN != '' && env.DOCS_CLOUDFRONT_FUNCTION_NAME != '' }}
+        uses: docker/bake-action@82490499d2e5613fcead7e128237ef0b0ea210f7 # v7
+        with:
+          source: .
+          files: |
+            docker-bake.hcl
+          targets: aws-cloudfront-function-update
+        env:
+          AWS_REGION: us-east-1 # cloudfront and KVS are only available in us-east-1
+          AWS_CLOUDFRONT_FUNCTION_NAME: ${{ env.DOCS_CLOUDFRONT_FUNCTION_NAME }}
+          AWS_CLOUDFRONT_KVS_ARN: ${{ env.DOCS_CLOUDFRONT_KVS_ARN }}
+      -
         name: Invalidate Cloudfront cache
         if: ${{ env.DOCS_CLOUDFRONT_ID != '' }}
         run: |

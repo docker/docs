@@ -20,8 +20,9 @@ import (
 )
 
 type AwsCmd struct {
-	LambdaInvoke     AwsLambdaInvokeCmd     `kong:"cmd,name=lambda-invoke"`
-	CloudfrontUpdate AwsCloudfrontUpdateCmd `kong:"cmd,name=cloudfront-update"`
+	LambdaInvoke             AwsLambdaInvokeCmd             `kong:"cmd,name=lambda-invoke"`
+	CloudfrontUpdate         AwsCloudfrontUpdateCmd         `kong:"cmd,name=cloudfront-update"`
+	CloudfrontFunctionUpdate AwsCloudfrontFunctionUpdateCmd `kong:"cmd,name=cloudfront-function-update"`
 }
 
 type AwsLambdaInvokeCmd struct {
