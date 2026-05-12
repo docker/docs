@@ -527,9 +527,11 @@ Only object keys can be navigated — arrays are not supported and there is no `
 Keys that contain a literal `.` cannot be referenced. The resolved value must be a string, number,
 or boolean; numbers and booleans are converted to strings. Objects, arrays, and null are rejected.
 
-When a source has both `env` and `file` defined, `priority` controls which is tried first. If the
-preferred source is unavailable — file missing, field absent, or environment variable unset — the
-proxy falls back to the other source automatically.
+When a source has both `env` and `file` defined, `priority` controls which is tried first. The
+preferred source is used when it exists — the environment variable is set, or the file is
+present on disk. If it doesn't, the other source is used instead. The choice is made once at
+discovery time, so parser errors (missing JSON field, wrong value type, invalid JSON) surface
+as errors rather than triggering a fallback.
 
 Plain-text token file:
 
@@ -566,7 +568,8 @@ Given `~/.config/myapp/creds.json`:
 ```
 
 The proxy resolves the credential to `ghp_xyz`, falling back to `GH_TOKEN` if the file is
-missing or the path doesn't resolve.
+missing. If the file exists but the JSON path doesn't resolve, the request fails with the
+parser error below instead of falling back.
 
 Common errors when using `json:` parsers:
 
