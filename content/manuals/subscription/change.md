@@ -33,16 +33,15 @@ To upgrade your subscription:
    you want to upgrade.
 1. Select **Billing** to view your current plans.
 1. Select **Browse products**.
-1. From the products catalog page, select **View plans** from the Docker tile. Choose a Docker Team or Business subscription for the organization.
-1. Follow the on-screen instructions to complete your upgrade. If you choose to pay using a US bank account, you must verify the account. For more information, see [Verify a bank account](/manuals/billing/payment-method.md#verify-a-bank-account).
+1. Choose **View plans** from the Docker tile on the products catalog page. 
+1. Choose a Docker Team or Business subscription for the organization.
+1. Follow the on-screen instructions to complete your upgrade. 
+   - If you choose to pay using a US bank account, you must verify the account. 
+   - For more information, see [Verify a bank account](/manuals/billing/payment-method.md#verify-a-bank-account).
 
 For detailed feature information, see [Docker Pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscriptionChange).
 
-## Downgrade your subscription
-
-You can downgrade your Docker subscription at any time before the renewal date. The unused portion isn't refundable, but you retain access to paid features until the next billing cycle.
-
-### Downgrade considerations
+## Downgrade considerations
 
 Consider the following before downgrading:
 
@@ -51,6 +50,10 @@ Consider the following before downgrading:
 - Private repository collaborators: Personal subscriptions don't include collaborators for private repositories. When downgrading from Pro to Personal, all collaborators are removed and additional private repositories are locked.
 
 For feature limits in each tier, see [Docker Pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscriptionChange).
+
+## Downgrade your subscription
+
+You can downgrade your Docker subscription at any time before the renewal date. The unused portion isn't refundable, but you retain access to paid features until the next billing cycle.
 
 To downgrade your subscription:
 

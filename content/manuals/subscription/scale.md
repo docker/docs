@@ -33,7 +33,7 @@ Purchase additional build minutes through the Docker Build Cloud Dashboard:
 1. Sign in to [Docker Home](https://app.docker.com/) and choose
    your organization.
 1. Select **Build Cloud**, then **Build minutes**.
-1. Select **Add prepaid minutes**.
+1. Select **Add minutes**.
 1. Select your additional minute amount, then **Continue to payment**.
 1. Enter your payment details and billing address.
 1. Review your order and select **Pay**.
@@ -49,9 +49,9 @@ You can add Testcontainers Cloud runtime minutes in two ways:
 
 On-demand usage is billed at higher rates than pre-purchased capacity. To avoid higher on-demand charges, pre-purchase additional minutes if you expect consistent usage over your subscription's included minutes.
 
-## Add repositories with Select
+## Add DHI repositories
 
-To add more mirrored repositories to your Docker Select plan:
+To add more DHI repositories to your Docker Select plan:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.
