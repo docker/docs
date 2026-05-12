@@ -635,13 +635,13 @@ network:
       valueFormat: <format>
 ```
 
-| Field                     | Description                                                      |
-| ------------------------- | ---------------------------------------------------------------- |
-| `allowedDomains`          | Domains the sandbox can reach. Wildcards supported.              |
-| `deniedDomains`           | Domains the sandbox can't reach. Deny rules take precedence.     |
-| `serviceDomains`          | Map of domain to service identifier from `credentials.sources`.  |
-| `serviceAuth.headerName`  | HTTP header the proxy sets (for example, `Authorization`).       |
-| `serviceAuth.valueFormat` | Format string for the header value (for example, `"Bearer %s"`). |
+| Field                     | Description                                                                                                                          |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `allowedDomains`          | Domains the sandbox can reach. Wildcards supported.                                                                                  |
+| `deniedDomains`           | Domains the sandbox is blocked from reaching. Deny rules take precedence over allow rules, including those from other composed kits. |
+| `serviceDomains`          | Map of domain to service identifier from `credentials.sources`.                                                                      |
+| `serviceAuth.headerName`  | HTTP header the proxy sets (for example, `Authorization`).                                                                           |
+| `serviceAuth.valueFormat` | Format string for the header value (for example, `"Bearer %s"`).                                                                     |
 
 ### Environment
 
