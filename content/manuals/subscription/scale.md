@@ -60,3 +60,11 @@ To add more DHI repositories to your Docker Select plan:
 1. Select how many mirrored repositories the account can use.
    - You can select between one and seven mirrors.
    - For eight or more, [contact Docker sales](https://www.docker.com/pricing/contact-sales/) to discuss an Enterprise plan.
+
+## What's next
+
+To learn more, see:
+
+- [Testcontainers overview](/manuals/testcontainers.md)
+- [Docker Build Cloud overview](/manuals/build-cloud/_index.md)
+- [DHI Select and Enterprise quickstart](/manuals/dhi/how-to/select-enterprise.md)
