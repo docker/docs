@@ -513,36 +513,25 @@ Service identifiers link credentials to [network rules](#network).
 
 #### file.parser
 
-`file.parser` controls how the proxy extracts a credential value from the file at
-`file.path`. Three forms are supported:
+`file.parser` tells the proxy how to extract a credential from the file at `file.path`.
+Omit it for plain-text files; set it to `json:<dot.path>` to extract a field from a JSON file.
 
-| Parser value      | Behavior                                                                             |
+| Value             | Behavior                                                                             |
 | ----------------- | ------------------------------------------------------------------------------------ |
 | omitted or empty  | Reads the entire file as the credential. Leading and trailing whitespace is trimmed. |
-| `json:<dot.path>` | Parses the file as JSON and extracts the value at the given dot-separated path.      |
-| anything else     | Rejected with `unsupported parser: <value>`.                                         |
+| `json:<dot.path>` | Parses the file as JSON and returns the value at the dot-separated path.             |
+| any other value   | Rejected — `unsupported parser: <value>`.                                            |
 
-`json:` is the only supported structured-file format.
+For `json:` paths, segments are separated by `.` (for example, `json:credentials.github.token`).
+Only object keys can be navigated — arrays are not supported and there is no `[0]`-style indexing.
+Keys that contain a literal `.` cannot be referenced. The resolved value must be a string, number,
+or boolean; numbers and booleans are converted to strings. Objects, arrays, and null are rejected.
 
-**JSON path rules**
+When a source has both `env` and `file` defined, `priority` controls which is tried first. If the
+preferred source is unavailable — file missing, field absent, or environment variable unset — the
+proxy falls back to the other source automatically.
 
-- Path segments are separated by `.` — for example, `json:credentials.github.token`.
-- Only JSON objects can be navigated. Arrays are not supported; there is no `[0]`-style indexing.
-- Keys that contain a literal `.` cannot be referenced — the dot is always treated as a separator.
-- The value at the resolved path must be a string, number, or boolean. Numbers and booleans are
-  converted to strings. Objects, arrays, and null are rejected with
-  `field '<path>' is not a string value`.
-
-**Priority and missing files**
-
-When a source has both `env` and `file`, `priority` controls which is tried first. If the
-preferred source is unavailable (environment variable unset, or file missing or inaccessible),
-the proxy falls back to the other source automatically. A missing file is not an error on its
-own — the source is silently skipped.
-
-**Examples**
-
-Plain-text token file — no parser needed:
+Plain-text token file:
 
 ```yaml
 credentials:
@@ -552,34 +541,18 @@ credentials:
         path: "~/.openai/token"
 ```
 
-Top-level JSON field:
-
-```yaml
-credentials:
-  sources:
-    anthropic:
-      file:
-        path: "~/.claude/settings.json"
-        parser: "json:primaryApiKey"
-```
-
-Given `~/.claude/settings.json`:
-
-```json
-{ "primaryApiKey": "sk-ant-...", "secondaryApiKey": "sk-ant-..." }
-```
-
-The proxy resolves the credential to the value of `primaryApiKey`.
-
-Nested JSON field:
+Nested JSON field, with an environment variable as fallback:
 
 ```yaml
 credentials:
   sources:
     github:
+      env:
+        - GH_TOKEN
       file:
         path: "~/.config/myapp/creds.json"
         parser: "json:credentials.github.token"
+      priority: file-first
 ```
 
 Given `~/.config/myapp/creds.json`:
@@ -592,26 +565,10 @@ Given `~/.config/myapp/creds.json`:
 }
 ```
 
-The proxy resolves the credential to `ghp_xyz`.
+The proxy resolves the credential to `ghp_xyz`, falling back to `GH_TOKEN` if the file is
+missing or the path doesn't resolve.
 
-File-first with env fallback:
-
-```yaml
-credentials:
-  sources:
-    anthropic:
-      env:
-        - ANTHROPIC_API_KEY
-      file:
-        path: "~/.claude/settings.json"
-        parser: "json:primaryApiKey"
-      priority: file-first
-```
-
-Tries the JSON file first; falls back to the environment variable if the file is
-missing or the field is absent.
-
-**Common errors**
+Common errors when using `json:` parsers:
 
 | Error message                                 | Cause                                                               |
 | --------------------------------------------- | ------------------------------------------------------------------- |
@@ -619,7 +576,6 @@ missing or the field is absent.
 | `cannot navigate to field 'X': not an object` | A path segment hit a string, array, or scalar instead of an object. |
 | `field 'X' is not a string value`             | The resolved value is an object, array, or null.                    |
 | `failed to parse JSON: ...`                   | The file is not valid JSON.                                         |
-| `unsupported parser: <value>`                 | The parser string doesn't start with `json:` and isn't empty.       |
 
 ### Network
 
