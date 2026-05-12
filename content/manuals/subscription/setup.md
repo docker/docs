@@ -26,7 +26,7 @@ You can subscribe a new or existing organization to Docker Team or Business subs
 1. From the products catalog page, select **View plans** from the Docker tile. Choose a Docker Team or Business subscription for the organization.
 1. Fill in plan entitlements, verify your billing details, then continue to payment to complete checkout.
 
-## Set up DHI Select for an organization
+## Set up Docker Hardened Images Select for an organization
 
 Docker Hardened Images (DHI) Select lets organization admins assign DHI repositories to organization accounts. When you add repositories for your organization, all members gain access to those DHI repositories. Members you add to the organization after setup inherit the same access.
 

@@ -19,8 +19,8 @@ To use this workflow, you need:
 - Organization owner access in your Docker Hub namespace.
 - One of the following:
   - A DHI Select or Enterprise subscription. [Contact Docker
-    sales](https://www.docker.com/products/hardened-images/#compare) to purchase
-    or [learn more about these subscriptions](/manuals/subscription/setup/#set-up-docker-select-for-an-organization).
+    sales](https://www.docker.com/products/hardened-images/#compare) to purchase DHI Enterprise
+    or [learn more about DHI Select](../../subscription/setup.md#set-up-docker-hardened-images-select-for-an-organization).
   - An active DHI trial. [Start a free DHI
     trial](https://hub.docker.com/hardened-images/start-free-trial).
 - [Docker Desktop](../../desktop/release-notes.md) 4.65 or later to use the
