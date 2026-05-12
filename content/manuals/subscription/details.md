@@ -1,7 +1,7 @@
 ---
 title: Compare subscription
 linkTitle: Compare
-weight: 30
+weight: 10
 params:
   sidebar:
     goto: "https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscriptionDetails"

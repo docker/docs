@@ -3,7 +3,7 @@ description: Set up Docker subscriptions for personal accounts and organizations
 keywords: subscription setup, docker pro, docker team, docker business, organization setup
 title: Set up your subscription
 linkTitle: Setup
-weight: 10
+weight: 20
 ---
 
 Docker subscriptions provide features and benefits for individual developers, teams, and enterprise businesses. This page explains how to set up subscriptions for personal accounts and organizations.
@@ -33,9 +33,9 @@ Docker Select lets organization admins assign Docker Hardened Images repositorie
 To purchase repositories with Docker Select, sign in to [Docker Home](https://app.docker.com/) and select your organization:
 
 1. Select **Billing**, then **Browse products**.
-1. Choose **Hardened Images** from the products page, then select which account should receive the **Hardened Images** entitlement.
-1. Select your organization account, then **Continue**. You can add repositories for one account at a time.
-1. Choose how many mirrored repositories the account can use.
+1. Select **Hardened Images** from the products page.
+1. Select the organization account that should receive the **Hardened Images** entitlement, then **Continue**. You can add repositories for one account at a time.
+1. Select how many mirrored repositories the account can use.
    - You can select between one and seven mirrors.
    - For eight or more, [contact Docker sales](https://www.docker.com/pricing/contact-sales/) to discuss an Enterprise plan.
 1. Verify your billing details, continue to payment, and complete checkout.

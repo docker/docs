@@ -3,7 +3,7 @@ title: Scale your subscription
 linkTitle: Scale
 description: Scale Docker Build Cloud and Testcontainers Cloud consumption for your subscription
 keywords: scale subscription, docker build cloud minutes, testcontainers cloud minutes, usage scaling
-weight: 20
+weight: 30
 ---
 
 Docker subscriptions let you scale consumption as your needs grow. All paid Docker subscriptions include base amounts of Docker Build Cloud build minutes and Testcontainers Cloud runtime minutes that you can supplement with additional capacity.
@@ -51,8 +51,12 @@ On-demand usage is billed at higher rates than pre-purchased capacity. To avoid 
 
 ## Add repositories with Select
 
-To add repositories, sign in to [Docker Home](https://app.docker.com/) and select your organization:
+To add more mirrored repositories to your Docker Select plan:
 
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+   organization.
 1. Select **Billing**.
 1. On the Overview page, select **Manage** next to **Hardened Images**.
-1. Add more repositories from the menu.
+1. Select how many mirrored repositories the account can use.
+   - You can select between one and seven mirrors.
+   - For eight or more, [contact Docker sales](https://www.docker.com/pricing/contact-sales/) to discuss an Enterprise plan.

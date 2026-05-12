@@ -38,9 +38,11 @@ To upgrade your subscription:
 
 For detailed feature information, see [Docker Pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscriptionChange).
 
-## Downgrade considerations
+## Downgrade your subscription
 
 You can downgrade your Docker subscription at any time before the renewal date. The unused portion isn't refundable, but you retain access to paid features until the next billing cycle.
+
+### Downgrade considerations
 
 Consider the following before downgrading:
 
@@ -49,8 +51,6 @@ Consider the following before downgrading:
 - Private repository collaborators: Personal subscriptions don't include collaborators for private repositories. When downgrading from Pro to Personal, all collaborators are removed and additional private repositories are locked.
 
 For feature limits in each tier, see [Docker Pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscriptionChange).
-
-## Downgrade your subscription
 
 To downgrade your subscription:
 
