@@ -41,12 +41,24 @@ $ docker login dhi.io
 Then pull the image:
 
 ```console
-$ docker pull dhi.io/python:3.13 --platform linux/amd64
+$ docker pull dhi.io/python:3.13
 ```
 
 Then scan without VEX to see the raw CVE count. Docker Scout automatically
 applies VEX on Docker Hardened Images and can't show this unfiltered baseline.
 Use Trivy or Grype for the before/after comparison.
+
+> [!NOTE]
+>
+> On Windows, the `-v /var/run/docker.sock:/var/run/docker.sock` socket mount
+> used in the containerized scanner commands throughout this guide does not work
+> on Docker Desktop for Windows. Instead, in Docker Desktop go to **Settings >
+> General** and enable **Expose daemon on tcp://localhost:2375 without TLS**,
+> then replace `-v /var/run/docker.sock:/var/run/docker.sock` with `-e
+> DOCKER_HOST=tcp://host.docker.internal:2375` in every containerized scanner
+> command. Exposing the daemon on TCP without TLS makes your system vulnerable
+> to remote code execution attacks. Use at your own risk and disable the setting
+> when you are done testing.
 
 {{< tabs >}}
 {{< tab name="Trivy" >}}
@@ -111,7 +123,7 @@ question, and that's exactly what VEX answers.
 Export the VEX attestation to a local file:
 
 ```console
-$ docker scout vex get dhi.io/python:3.13 --platform linux/amd64 --output python-vex.json
+$ docker scout vex get dhi.io/python:3.13 --output python-vex.json
 ```
 
 This fetches a signed OpenVEX document from `registry.scout.docker.com`,
@@ -130,7 +142,7 @@ image's SBOM.
 > rather than the local image store:
 >
 > ```console
-> $ docker scout vex get registry://dhi.io/python:3.13 --platform linux/amd64 --output python-vex.json
+> $ docker scout vex get registry://dhi.io/python:3.13 --output python-vex.json
 > ```
 
 ## Step 3: Scan with VEX applied
