@@ -12,7 +12,7 @@ You can scale consumption for:
 
 - Docker Build Cloud build minutes
 - Testcontainers Cloud runtime minutes
-- Docker Hardened Images (DHI) repositories with Docker Select
+- Docker Hardened Images (DHI) repositories
 
 To understand your usage patterns, [view your consumption](../admin/organization/manage/manage-products.md#monitor-product-usage-for-your-organization) at any time.
 
@@ -51,13 +51,13 @@ On-demand usage is billed at higher rates than pre-purchased capacity. To avoid 
 
 ## Add DHI repositories
 
-To add more DHI repositories to your Docker Select plan:
+To add more hardened repositories to your DHI Select plan:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.
 1. Select **Billing**.
 1. On the Overview page, select **Manage** next to **Hardened Images**.
-1. Select how many mirrored repositories the account can use.
+1. Select how many repositories the account can mirror.
    - You can select between one and seven mirrors.
    - For eight or more, [contact Docker sales](https://www.docker.com/pricing/contact-sales/) to discuss an Enterprise plan.
 

@@ -24,7 +24,7 @@ You can upgrade or downgrade your Docker subscription at any time to match your 
 When you upgrade your Docker subscription, you immediately get access to all features and entitlements in your new subscription tier.
 
 > [!TIP]
-> If you're upgrading from a free Personal subscription to a Team subscription
+> If you're upgrading from a Personal subscription to a Team subscription
 > and want to keep your username, [convert your user account into an organization](../admin/organization/setup/convert-account.md).
 
 To upgrade your subscription:
@@ -33,8 +33,8 @@ To upgrade your subscription:
    you want to upgrade.
 1. Select **Billing** to view your current plans.
 1. Select **Browse products**.
-1. Choose **View plans** from the Docker tile on the products catalog page.
-1. Choose a Docker Team or Business subscription for the organization.
+1. Choose **View plans** from the Docker product tile on the products catalog page.
+1. Choose a Docker Team or Docker Business plan for the organization.
 1. Follow the on-screen instructions to complete your upgrade.
    - If you choose to pay using a US bank account, you must verify the account.
    - For more information, see [Verify a bank account](/manuals/billing/payment-method.md#verify-a-bank-account).
@@ -53,7 +53,7 @@ For feature limits in each tier, see [Docker Pricing](https://www.docker.com/pri
 
 ## Downgrade your subscription
 
-You can downgrade your Docker subscription at any time before the renewal date. The unused portion isn't refundable, but you retain access to paid features until the next billing cycle.
+You can downgrade your Docker subscription at any time before the renewal date. The unused portion isn't refundable, but you retain access to paid features until the end of the current billing cycle.
 
 To downgrade your subscription:
 
