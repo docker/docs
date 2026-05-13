@@ -123,8 +123,13 @@ question, and that's exactly what VEX answers.
 Export the VEX attestation to a local file:
 
 ```console
-$ docker scout vex get dhi.io/python:3.13 --output python-vex.json
+$ docker scout vex get registry://dhi.io/python:3.13 --output python-vex.json
 ```
+
+The `registry://` prefix tells Scout to fetch the attestation from the registry
+rather than the local image store. Because you pulled the image in Step 1, it
+already exists locally, and without this prefix Scout would find no attestation
+there.
 
 This fetches a signed OpenVEX document from `registry.scout.docker.com`,
 Docker's supply chain metadata registry for all Docker Hardened Images. The
@@ -134,16 +139,8 @@ image's SBOM.
 > [!NOTE]
 >
 > Docker Scout fetches this file automatically when scanning. You only need to
-> download it explicitly for scanners that don't natively integrate it, or to run the `jq` queries in
-> Steps 5 and 6.
->
-> If the image exists locally on your device, prefix the image name with
-> `registry://` to force Scout to look up the attestation from the registry
-> rather than the local image store:
->
-> ```console
-> $ docker scout vex get registry://dhi.io/python:3.13 --output python-vex.json
-> ```
+> download it explicitly for scanners that don't natively integrate it, or to
+> run the `jq` queries in Steps 5 and 6.
 
 ## Step 3: Scan with VEX applied
 
