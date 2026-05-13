@@ -57,9 +57,11 @@ To add more hardened repositories to your DHI Select plan:
    organization.
 1. Select **Billing**.
 1. On the Overview page, select **Manage** next to **Hardened Images**.
-1. Select how many repositories the account can mirror.
-   - You can select between one and seven mirrors.
-   - For eight or more, [contact Docker sales](https://www.docker.com/pricing/contact-sales/) to discuss an Enterprise plan.
+1. Select how many repositories the account can use.
+
+> [!TIP]
+>
+> Purchasing eight or more hardened repositories? [Contact Docker sales](https://www.docker.com/pricing/contact-sales/) to discuss an Enterprise plan.
 
 ## What's next
 
