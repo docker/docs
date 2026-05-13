@@ -28,7 +28,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ## 4.73.1
 
-{{< release-date date="2026-05-12" >}}
+{{< release-date date="2026-05-13" >}}
 
 {{< desktop-install-v2 win=true version="4.73.1" build_path="/226574/" >}}
 
