@@ -379,7 +379,7 @@ Notable differences from cgroup v1:
 `unevictable`
 : Memory that cannot be reclaimed (e.g., `mlock`ed pages).
 
-Accounting for memory in the page cache is very complex. If two
+Accounting for memory in the page cache is complex. If two
 processes in different control groups both read the same file
 (ultimately relying on the same blocks on disk), the corresponding
 memory charge is split between the control groups. This behavior is useful, but it
