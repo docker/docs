@@ -341,7 +341,7 @@
       class="z-10 flex items-center justify-between bg-blue-500 px-6 py-3 shadow-lg/30 dark:shadow-lg/60"
     >
       <div class="flex items-center gap-3">
-        {{ partial "utils/svg.html" "images/gordon-logo.svg" }}
+        {{ partialCached "icon" "images/gordon-logo.svg" "images/gordon-logo.svg" }}
       </div>
       <div class="flex items-center gap-2">
         <div data-tooltip-wrapper class="relative">
@@ -352,7 +352,7 @@
             :disabled="messages.length === 0"
           >
             <span class="icon-svg">
-              {{ partialCached "icon" "replay" "replay" }}
+              {{ partialCached "icon" "arrow-path" "arrow-path" }}
             </span>
           </button>
           <div
@@ -376,7 +376,7 @@
           aria-label="Close chat"
         >
           <span class="icon-svg">
-            {{ partialCached "icon" "close" "close" }}
+            {{ partialCached "icon" "x-mark" "x-mark" }}
           </span>
         </button>
       </div>
@@ -398,7 +398,7 @@
             <div
               class="motion-safe:animate-[robotFloat_5s_ease-in-out_infinite]"
             >
-              {{ partial "utils/svg.html" "images/gordon-robot.svg" }}
+              {{ partialCached "icon" "images/gordon-robot.svg" "images/gordon-robot.svg" }}
             </div>
           </div>
           <div class="flex w-full flex-col items-center justify-start gap-3">
@@ -420,7 +420,7 @@
               (dict
               "title" "Get started with Docker"
               "question" "Help me get started with Docker. What should I do first?"
-              "icon" "icons/rocket.svg")
+              "icon" "rocket-launch")
               (dict
               "title" "Docker Hardened Images"
               "question" "How do Docker Hardened Images work?"
@@ -497,7 +497,7 @@
                       class="flex items-center gap-1.5 text-gray-600 dark:text-gray-400"
                     >
                       <span class="icon-svg icon-sm">
-                        {{ partialCached "icon" "icons/gordon.svg" "icons/gordon.svg" }}
+                        {{ partialCached "icon" "gordon" "gordon" }}
                       </span>
                       <span class="font-medium">Was this helpful?</span>
                     </div>
@@ -514,7 +514,7 @@
                         title="Helpful"
                       >
                         <span class="icon-svg icon-sm transition-transform">
-                          {{ partialCached "icon" "thumb_up" "thumb_up" }}
+                          {{ partialCached "icon" "hand-thumb-up" "hand-thumb-up" }}
                         </span>
                         <span class="hidden font-medium sm:inline"
                           >Helpful</span
@@ -531,7 +531,7 @@
                         title="Not quite"
                       >
                         <span class="icon-svg icon-sm transition-transform">
-                          {{ partialCached "icon" "thumb_down" "thumb_down" }}
+                          {{ partialCached "icon" "hand-thumb-down" "hand-thumb-down" }}
                         </span>
                         <span class="hidden font-medium sm:inline"
                           >Not quite</span
@@ -552,13 +552,13 @@
                         x-show="message.copied !== true"
                         class="icon-svg icon-sm"
                       >
-                        {{ partialCached "icon" "content_copy" "content_copy" }}
+                        {{ partialCached "icon" "document-duplicate" "document-duplicate" }}
                       </span>
                       <span
                         x-show="message.copied === true"
                         class="icon-svg icon-sm"
                       >
-                        {{ partialCached "icon" "check_circle" "check_circle" }}
+                        {{ partialCached "icon" "check-circle" "check-circle" }}
                       </span>
                       <span class="hidden font-medium sm:inline">Copy</span>
                     </button>
@@ -650,12 +650,12 @@
         >
           <template x-if="!isLoading">
             <span class="icon-svg">
-              {{ partialCached "icon" "send" "send" }}
+              {{ partialCached "icon" "paper-airplane" "paper-airplane" }}
             </span>
           </template>
           <template x-if="isLoading">
             <span class="icon-svg animate-spin">
-              {{ partialCached "icon" "progress_activity" "progress_activity" }}
+              {{ partialCached "icon" "arrow-path" "arrow-path" }}
             </span>
           </template>
         </button>

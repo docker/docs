@@ -10,35 +10,35 @@ params:
 grid_admins:
   - title: Settings Management
     description: Learn how Settings Management can secure your developers' workflows.
-    icon: shield_locked
+    icon: shield-check
     link: /enterprise/security/hardened-desktop/settings-management/
   - title: Enhanced Container Isolation
     description: Understand how Enhanced Container Isolation can prevent container attacks.
-    icon: security
+    icon: shield-check
     link: /enterprise/security/hardened-desktop/enhanced-container-isolation/
   - title: Registry Access Management
     description: Control the registries developers can access while using Docker Desktop.
-    icon: home_storage
+    icon: server
     link: /enterprise/security/hardened-desktop/registry-access-management/
   - title: Image Access Management
     description: Control the images developers can pull from Docker Hub.
-    icon: photo_library
+    icon: photo
     link: /enterprise/security/hardened-desktop/image-access-management/
   - title: "Air-Gapped Containers"
     description: Restrict containers from accessing unwanted network resources.
-    icon: "vpn_lock"
+    icon: lock-closed
     link: /enterprise/security/hardened-desktop/air-gapped-containers/
   - title: Enforce sign-in
     description: Configure sign-in for members of your teams and organizations.
     link: /enterprise/security/enforce-sign-in/
-    icon: passkey
+    icon: finger-print
   - title: Domain management
     description: Identify uncaptured users in your organization.
     link: /enterprise/security/domain-management/
-    icon: person_search
+    icon: magnifying-glass
   - title: Docker Scout
     description: Explore how Docker Scout can help you create a more secure software supply chain.
-    icon: query_stats
+    icon: chart-bar
     link: /scout/
   - title: SSO
     description: Learn how to configure SSO for your company or organization.
@@ -46,20 +46,20 @@ grid_admins:
     link: /enterprise/security/single-sign-on/
   - title: SCIM
     description: Set up SCIM to automatically provision and deprovision users.
-    icon: checklist
+    icon: clipboard-document-check
     link: /enterprise/security/provisioning/scim/
   - title: Roles and permissions
     description: Assign roles to individuals giving them different permissions within an organization.
-    icon: badge
+    icon: identification
     link: /enterprise/security/roles-and-permissions/
   - title: Private marketplace for Extensions (Beta)
     description: Learn how to configure and set up a private marketplace with a curated list of extensions for your Docker Desktop users.
-    icon: storefront
+    icon: building-storefront
     link: /desktop/extensions/private-marketplace/
   - title: Organization access tokens
     description: Create organization access tokens as an alternative to a password.
     link: /enterprise/security/access-tokens/
-    icon: password
+    icon: lock-closed
 ---
 
 Docker provides security guardrails for both administrators and developers.

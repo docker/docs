@@ -9,27 +9,27 @@ params:
 grid:
 - title: Create a Docker ID
   description: Get started with Docker and create an account.
-  icon: fingerprint
+  icon: finger-print
   link: /accounts/create-account/
 - title: Manage account
   description: Learn how to manage the settings for your account.
-  icon: manage_accounts
+  icon: cog
   link: /accounts/manage-account/
 - title: Personal access tokens
   description: Learn how to create and manage access tokens for your account.
-  icon: password
+  icon: lock-closed
   link: /security/access-tokens/
 - title: Set up two-factor authentication
   description: Add an extra layer of authentication to your Docker account.
   link: /security/2fa/
-  icon: mobile_lock_portrait
+  icon: device-phone-mobile
 - title: Deactivate an account
   description: Learn how to deactivate a Docker user account.
   link: /accounts/deactivate-user-account/
-  icon: disabled_by_default
+  icon: no-symbol
 - title: Account FAQ
   description: Explore frequently asked questions about Docker accounts.
-  icon: help
+  icon: question-mark-circle
   link: /accounts/general-faqs/
 ---
 

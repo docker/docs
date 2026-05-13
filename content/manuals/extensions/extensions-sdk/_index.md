@@ -9,27 +9,27 @@ aliases:
 grid:
   - title: "The build and publish process"
     description: Understand the process for building and publishing an extension.
-    icon: "checklist"
+    icon: clipboard-document-check
     link: "/extensions/extensions-sdk/process/"
   - title: "Quickstart guide"
     description: Follow the quickstart guide to create a basic Docker extension quickly.
-    icon: "explore"
+    icon: magnifying-glass-plus
     link: "/extensions/extensions-sdk/quickstart/"
   - title: "View the design guidelines"
     description: Ensure your extension aligns to Docker's design guidelines and principles.
-    icon: "design_services"
+    icon: paint-brush
     link: "/extensions/extensions-sdk/design/design-guidelines/"
   - title: "Publish your extension"
     description: Understand how to publish your extension to the Marketplace.
-    icon: "publish"
+    icon: arrow-up-tray
     link: "/extensions/extensions-sdk/extensions/"
   - title: "Interacting with Kubernetes"
     description: Find information on how to interact indirectly with a Kubernetes cluster from your Docker extension.
-    icon: "multiple_stop"
+    icon: arrows-right-left
     link: "/extensions/extensions-sdk/guides/kubernetes/"
   - title: "Multi-arch extensions"
     description: Build your extension for multiple architectures.
-    icon: "content_copy"
+    icon: document-duplicate
     link: "/extensions/extensions-sdk/extensions/multi-arch/"
 ---
 
