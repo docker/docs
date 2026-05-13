@@ -83,7 +83,7 @@
                   data: {
                     origin: 'docs-website',
                     email: 'docs@docker.com',
-                    uuid: `docs-404-${Date.now()}`,
+                    uuid: crypto.randomUUID(),
                     action: 'AskGordon',
                     page_url: window.location.href,
                     page_title: '404 Not Found'
@@ -99,11 +99,15 @@
           const reader = gordonResponse.body.getReader();
           const decoder = new TextDecoder();
           let buffer = '';
+          let sseBuffer = '';
 
           while (true) {
             const { done, value } = await reader.read();
             if (done) break;
-            for (const line of decoder.decode(value, { stream: true }).split('\n')) {
+            sseBuffer += decoder.decode(value, { stream: true });
+            const lines = sseBuffer.split('\n');
+            sseBuffer = lines.pop(); // retain any incomplete trailing line for the next chunk
+            for (const line of lines) {
               if (!line.startsWith('data: ')) continue;
               const data = line.slice(6);
               if (data === '[DONE]') continue;
