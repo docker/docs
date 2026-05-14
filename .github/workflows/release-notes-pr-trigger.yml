@@ -6,6 +6,8 @@ on:
     paths:
       - content/manuals/desktop/release-notes.md
 
+permissions: {}
+
 jobs:
   trigger:
     runs-on: ubuntu-24.04

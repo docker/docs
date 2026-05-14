@@ -5,6 +5,10 @@ on:
     workflows: ["Release Notes PR Trigger"]
     types: [completed]
 
+permissions:
+  contents: read
+  actions: read # download-artifact across runs needs actions:read
+
 jobs:
   notify:
     runs-on: ubuntu-24.04
