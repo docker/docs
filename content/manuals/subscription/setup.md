@@ -22,7 +22,9 @@ If you need additional features like Docker Build Cloud minutes and more Docker 
 > If you purchase Gordon Plus while signed in with an org account, 
 > the subscription will apply to your personal account automatically.
 
-Gordon Plus, Max, and Ultra plans increase your maximum Gordon allowance on your personal account. You can add a Gordon plan to your Docker account from Docker Home:   
+Gordon Plus, Max, and Ultra plans increase your maximum Gordon allowance on your personal account. Gordon is billed at a monthly rate at the first of the month. If you purchase a Gordon subscription after the first of the month, you will be billed on a prorated basis. 
+
+You can add a Gordon plan to your Docker account from Docker Home:   
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your Docker personal account.
 1. Select **Billing**, then **Browse products**.

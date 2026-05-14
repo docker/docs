@@ -51,7 +51,7 @@ On-demand usage is billed at higher rates than pre-purchased capacity. To avoid 
 You can upgrade your Gordon plan at any time so your new usage rates are applied immediately. Upgrades to your existing Gordon plan are prorated and you'll be billed for the new plan at the first of the month. To upgrade your Gordon plan:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
-   organization.
+   personal account.
 1. Select **Billing**.
 1. On the Overview page, select **Manage** from the Gordon tile under your active plans. 
 1. Select **Upgrade plan**.
