@@ -16,6 +16,8 @@ Use this procedure to back up and restore your images and container data. This i
 
 ## If Docker Desktop is functioning normally
 
+You can back up your Docker environment using either the Docker CLI or by copying the VM disk file directly.
+
 ### Save your data
 
 1. Commit your containers to an image with [`docker container commit`](/reference/cli/docker/container/commit/).
@@ -62,7 +64,7 @@ and [install a different version](/manuals/desktop/release-notes.md) or reset Do
 
 To restore volume data, refer to [backup, restore, or migrate data volumes](/manuals/engine/storage/volumes.md#back-up-restore-or-migrate-data-volumes). 
 
-## If Docker Desktop fails to start 
+## If Docker Desktop fails to start or you want to backup the whole Docker Desktop VM
 
 If Docker Desktop cannot launch and must be reinstalled, you can back up its VM disk and image data directly from disk. Docker Desktop must be fully stopped before backing up these files.
 
@@ -99,6 +101,10 @@ If Docker Desktop cannot launch and must be reinstalled, you can back up its VM 
    ```
 
    Copy it to a safe location. 
+
+   > [!TIP]
+   >
+   > To include Docker Desktop data in Time Machine backups, make sure the ~/Library/Containers/com.docker.docker directory is not excluded from your Time Machine backup configuration.
 
 1. Restore. 
 
