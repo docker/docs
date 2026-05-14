@@ -104,7 +104,7 @@ If Docker Desktop cannot launch and must be reinstalled, you can back up its VM 
 
    > [!TIP]
    >
-   > To include Docker Desktop data in Time Machine backups, make sure the ~/Library/Containers/com.docker.docker directory is not excluded from your Time Machine backup configuration.
+   > To include Docker Desktop data in Time Machine backups, make sure the `~/Library/Containers/com.docker.docker` directory is not excluded from your Time Machine backup configuration.
 
 1. Restore. 
 
