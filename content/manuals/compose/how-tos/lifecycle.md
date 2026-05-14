@@ -53,9 +53,7 @@ command (like `docker compose down` or stopping it manually with `Ctrl+C`).
 These hooks won't run if the container stops by itself or gets killed suddenly.
 
 Because the pre-stop hook runs before the stop signal is sent to the container, it is
-suited for actions that must complete while the application is still fully running. For
-example, deregistering from a load balancer so that no new requests are routed to the
-container before it begins shutting down.
+suited for actions that must complete while the application is still fully running.
 
 In the following example, the hook backs up a data file before the container receives the stop signal.
 

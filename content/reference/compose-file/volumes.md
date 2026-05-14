@@ -80,7 +80,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /srv/app-data # must be the abosolute host path and already exist
+      device: /srv/app-data # must be the absolute host path and already exist
 ```
 
 The `type`, `o`, and `device` keys are passed through to the local driver. For a one-off host-path mount on a single service, see [bind mounts](/manuals/engine/storage/bind-mounts.md).
