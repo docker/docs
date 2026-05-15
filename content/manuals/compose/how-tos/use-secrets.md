@@ -109,6 +109,7 @@ secrets:
 
 ## Resources
 
+- [Familiarize yourself with Compose's trust model](/manuals/compose/trust-model.md)
 - [Secrets top-level element](/reference/compose-file/secrets.md)
 - [Secrets attribute for services top-level element](/reference/compose-file/services.md#secrets)
 - [Build secrets](https://docs.docker.com/build/building/secrets/)

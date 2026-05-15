@@ -8,7 +8,7 @@ summary: |
 toc_min: 1
 toc_max: 2
 languages: [js]
-tags: [frameworks]
+tags: [frameworks, dhi]
 aliases:
   - /frameworks/vue/
 params:

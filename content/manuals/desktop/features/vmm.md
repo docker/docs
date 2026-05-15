@@ -56,6 +56,6 @@ Note that this is not related to using QEMU to emulate non-native architectures 
 
 > [!NOTE]
 >
-> HyperKit will be deprecated in a future release.
+> HyperKit is deprecated. Docker recommends switching to the Apple Virtualization framework.
 
-HyperKit is another legacy virtualization option, specifically for Intel-based Macs. Like QEMU, it is still available but considered deprecated. Docker recommends switching to modern alternatives for better performance and to future-proof your setup.
+HyperKit is a legacy virtualization option for Intel-based Macs. Docker recommends switching to modern alternatives for better performance and to future-proof your setup.

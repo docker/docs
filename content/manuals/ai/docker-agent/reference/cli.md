@@ -57,9 +57,9 @@ $ docker agent serve a2a agent-file|registry-ref
 ```
 
 > [!NOTE]
-> A2A support is currently experimental and needs further work. Tool calls are
+> A2A support is experimental. Tool calls are
 > handled internally and not exposed as separate ADK events. Some ADK features
-> are not yet integrated.
+> are not integrated.
 
 Arguments:
 

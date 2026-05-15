@@ -26,11 +26,11 @@ for each file and a default count of 5 for the number of such files (to account 
 ## Usage
 
 To use the `local` driver as the default logging driver, set the `log-driver`
-and `log-opt` keys to appropriate values in the `daemon.json` file, which is
-located in `/etc/docker/` on Linux hosts or
-`C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
-configuring Docker using `daemon.json`, see
+and `log-opt` keys to appropriate values in the `daemon.json` file. For more
+about configuring Docker using `daemon.json`, see
 [daemon.json](/reference/cli/dockerd.md#daemon-configuration-file).
+
+{{% include "daemon-cfg-desktop.md" %}}
 
 The following example sets the log driver to `local` and sets the `max-size`
 option.

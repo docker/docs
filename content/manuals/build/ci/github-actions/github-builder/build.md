@@ -1,9 +1,9 @@
 ---
 title: Build with Docker GitHub Builder
-linkTitle: Build
+linkTitle: Build workflow
 description: Use the Docker GitHub Builder build.yml reusable workflow to build images and local artifacts from a Dockerfile.
 keywords: ci, github actions, gha, buildkit, buildx, reusable workflow, dockerfile
-weight: 10
+weight: 20
 ---
 
 The [`build.yml` reusable workflow](https://github.com/docker/github-builder?tab=readme-ov-file#build-reusable-workflow)

@@ -1,0 +1,23 @@
+{
+  "serverInfo": {
+    "name": "llms-txt",
+    "version": "1.26.0",
+    "description": "Official Docker documentation MCP server. Exposes a fetch_docker_docs tool that returns the docs.docker.com content index."
+  },
+  "transport": {
+    "type": "http",
+    "url": "https://mcp-docs.docker.com/mcp"
+  },
+  "capabilities": {
+    "prompts": {
+      "listChanged": false
+    },
+    "resources": {
+      "subscribe": false,
+      "listChanged": false
+    },
+    "tools": {
+      "listChanged": false
+    }
+  }
+}

@@ -7,32 +7,32 @@ params:
   sidebar:
     group: Enterprise
 grid:
-- title: Company administration
-  description: Explore how to manage a company.
-  icon: apartment
-  link: /admin/company/
-- title: Organization administration
-  description: Learn about organization administration.
-  icon: store
-  link: /admin/organization/
-- title: Onboard your organization
-  description: Learn how to onboard and secure your organization.
-  icon: explore
-  link: /admin/organization/onboard
-- title: Company FAQ
-  description: Discover common questions and answers about companies.
-  icon: help
-  link: /faq/admin/company-faqs/
-- title: Organization FAQ
-  description: Explore popular FAQ topics about organizations.
-  icon: help
-  link: /faq/admin/organization-faqs/
-- title: Security
-  description: Explore security features for administrators.
-  icon: shield_locked
-  link: /security/
+  - title: Company administration
+    description: Explore how to manage a company.
+    icon: apartment
+    link: /admin/company/
+  - title: Organization administration
+    description: Learn about organization administration.
+    icon: store
+    link: /admin/organization/
+  - title: Onboard your organization
+    description: Learn how to onboard and secure your organization.
+    icon: explore
+    link: /admin/organization/setup/onboard
+  - title: Company FAQ
+    description: Discover common questions and answers about companies.
+    icon: help
+    link: /faq/admin/company-faqs/
+  - title: Organization FAQ
+    description: Explore popular FAQ topics about organizations.
+    icon: help
+    link: /faq/admin/organization-faqs/
+  - title: Security
+    description: Explore security features for administrators.
+    icon: shield_locked
+    link: /security/
 aliases:
-- /docker-hub/admin-overview
+  - /docker-hub/admin-overview
 ---
 
 Administrators can manage companies and organizations using the
@@ -48,23 +48,22 @@ The [Docker Admin Console](https://app.docker.com/admin) provides administrators
 
 ### Company
 
-A company groups multiple Docker organizations for centralized configuration. Companies have the company owner administrator role available. 
+A company groups multiple Docker organizations for centralized configuration. Companies have the company owner administrator role available.
 
-The company owner: 
+The company owner:
 
 - Can view and manage all organizations within the company
 - Has full access to company-wide settings and inherits the same permissions as organization owners
-- Do not occupy a seat
+- Does not occupy a seat
 
 Companies are only available for Docker Business subscribers.
 
 ### Organization
 
-Organization owners have the organization owner administrator role available. They can manage organization settings, users, and access controls, but occupy a [seat](/admin/faqs/organization-faqs/#what-is-the-difference-between-user-invitee-seat-and-member). 
+Organization owners have the organization owner administrator role available. They can manage organization settings, users, and access controls, but occupy a [seat](/manuals/admin/organization/organization-faqs.md#what-is-the-difference-between-user-invitee-seat-and-member).
 
-- An organization contains teams and repositories. 
+- An organization contains teams and repositories.
 - All Docker Team and Business subscribers must have at least one organization.
-
 
 > [!TIP]
 > [Upgrading to a Docker Business plan](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdmin) grants you the company owner role so you can manage multiple organizations.
@@ -88,7 +87,7 @@ Docker's [Admin Console](https://app.docker.com/admin) allows you to:
 - Assign roles and permissions to members
 - Group members into teams to manage access by project or role
 - Set company-wide policies, including SCIM provisioning and security
-enforcement
+  enforcement
 
 ## Manage companies and organizations
 

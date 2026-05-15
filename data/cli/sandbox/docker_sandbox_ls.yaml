@@ -1,7 +1,14 @@
 command: docker sandbox ls
 aliases: docker sandbox ls, docker sandbox list
 short: List VMs
-long: List all VMs managed by sandboxd with their sandboxes
+long: |-
+    > [!WARNING]
+    > The Docker Desktop-integrated `docker sandbox` commands are deprecated and
+    > replaced by the standalone [`sbx` CLI](/manuals/ai/sandboxes/_index.md).
+    > This deprecation applies only to the Docker Desktop integration, not to Docker
+    > Sandboxes.
+
+    List all VMs managed by sandboxd with their sandboxes
 usage: docker sandbox ls [OPTIONS]
 pname: docker sandbox
 plink: docker_sandbox.yaml

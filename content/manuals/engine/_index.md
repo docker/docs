@@ -5,7 +5,7 @@ description: Find a comprehensive overview of Docker Engine, including how to in
 keywords: Engine
 params:
   sidebar:
-    group: Open source
+    group: Application development
 grid:
 - title: Install Docker Engine
   description: Learn how to install the open source Docker Engine for your distribution.

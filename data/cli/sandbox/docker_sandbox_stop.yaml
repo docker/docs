@@ -1,6 +1,12 @@
 command: docker sandbox stop
 short: Stop one or more sandboxes without removing them
 long: |
+    > [!WARNING]
+    > The Docker Desktop-integrated `docker sandbox` commands are deprecated and
+    > replaced by the standalone [`sbx` CLI](/manuals/ai/sandboxes/_index.md).
+    > This deprecation applies only to the Docker Desktop integration, not to Docker
+    > Sandboxes.
+
     Stop one or more sandboxes without removing them. The sandboxes can be restarted later.
 usage: docker sandbox stop SANDBOX [SANDBOX...]
 pname: docker sandbox

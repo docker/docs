@@ -7,13 +7,15 @@ keywords: cloud, troubleshooting, cloud mode, Docker Desktop, cloud builder, usa
 tags: [Troubleshooting]
 ---
 
+{{< summary-bar feature_name="Docker Offload" >}}
+
 Docker Offload requires:
 
 - Authentication
 - An active internet connection
 - No restrictive proxy or firewall blocking traffic to Docker Cloud
 - Access to Docker Offload
-- Docker Desktop 4.50 or later
+- Docker Desktop 4.68 or later
 
 Docker Desktop uses Offload to run both builds and containers in the cloud.
 If builds or containers are failing to run, falling back to local, or reporting
@@ -52,4 +54,4 @@ session errors, use the following steps to help resolve the issue.
    $ docker login
    ```
 
-7. Verify your usage and billing. For more information, see [Docker Offload usage](/offload/usage/).
+7. Verify your usage. For more information, see [Docker Offload usage](/offload/usage/).

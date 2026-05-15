@@ -11,6 +11,7 @@ Run a model and interact with it using a submitted prompt or chat mode
 | `--debug`        | `bool`   |         | Enable debug logging                                 |
 | `-d`, `--detach` | `bool`   |         | Load the model in the background without interaction |
 | `--openaiurl`    | `string` |         | OpenAI-compatible API endpoint URL to chat with      |
+| `--websearch`    | `bool`   |         | Enable web search tool during chat                   |
 
 
 <!---MARKER_GEN_END-->

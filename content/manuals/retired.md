@@ -4,9 +4,10 @@ linkTitle: Deprecated products and features
 description: |
   Explore deprecated and retired Docker features, products, and open source
   projects, including details on transitioned tools and archived initiatives.
+keywords: deprecated, retired, docker products, docker features, legacy
 params:
   sidebar:
-    group: Products
+    group: Application development
 aliases:
   - /docker-hub/service-accounts/
   - /cloud/
@@ -17,6 +18,7 @@ aliases:
   - /cloud/ecs-compose-examples/
   - /cloud/ecs-compose-features/
   - /cloud/ecs-integration/
+  - /compose/migrate/
   - /engine/context/aci-integration/
   - /engine/context/ecs-integration/
   - /machine/
@@ -146,6 +148,16 @@ developers to spin up development environments quickly. It was deprecated and re
 Docker Compose or by creating custom configurations tailored to specific
 project requirements.
 
+### Docker Desktop sandboxes
+
+Docker Desktop sandboxes let users run AI coding agents in isolated microVMs
+through the `docker sandbox` command. The Docker Desktop integration is
+deprecated. Use the standalone [`sbx` CLI](/manuals/ai/sandboxes/_index.md)
+instead.
+
+You can still view the
+[Docker Desktop sandboxes documentation](/manuals/ai/sandboxes/docker-desktop.md).
+
 ### GitHub Copilot extension
 
 The Docker for GitHub Copilot extension integrated Docker capabilities with
@@ -168,6 +180,14 @@ programmatic access to Docker Hub with granular repository permissions, token
 expiration, and better security auditing. OATs are included with Docker Team
 and Business subscriptions and offer similar functionality without requiring
 separate add-on purchases.
+
+### Docker Hub Automated Builds
+
+Docker Hub Automated Builds was a feature of Docker Hub that allowed building
+Docker images from source code in an external repository and automatically pushing
+the built image to your Docker repositories. This feature has been deprecated and
+will be removed on April 1, 2027.
+
 
 ## Open source projects
 

@@ -1,9 +1,5 @@
-<header
-  class="sticky top-0 z-20 h-16 w-full bg-blue-600 text-white"
->
-  <div
-    class="flex h-full justify-between gap-2 mx-auto px-4"
-  >
+<header class="sticky top-0 z-20 h-16 w-full bg-blue-600 text-white">
+  <div class="mx-auto flex h-full justify-between gap-2 px-4">
     <div class="flex h-full items-center gap-2 lg:gap-8">
       {{- if not .IsHome }}
         <button
@@ -45,7 +41,10 @@
         </ul>
       </nav>
     </div>
-    <div id="buttons" class="flex min-w-0 items-center justify-end flex-shrink-0">
+    <div
+      id="buttons"
+      class="flex min-w-0 flex-shrink-0 items-center justify-end"
+    >
       <div class="flex items-center gap-2">
         <div data-tooltip-wrapper class="relative">
           <button
@@ -53,44 +52,66 @@
             @click="$store.gordon.toggle()"
             aria-label="Ask Gordon, AI assistant"
             aria-describedby="gordon-tooltip"
-            class="cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-blue-700 border border-blue-500 text-white transition-colors focus:outline-none focus:ring focus:ring-blue-400 shimmer open-kapa-widget"
+            class="group shimmer flex cursor-pointer items-center gap-2 rounded-lg border border-blue-500 bg-blue-700 p-2 text-white transition-colors focus:ring focus:ring-blue-400 focus:outline-none"
           >
-            <span class="icon-svg">
-              {{ partial "utils/svg.html" "/icons/sparkle.svg" }}
+            <span class="icon-svg group-hover:hidden">
+              {{ partialCached "icon" "icons/gordon.svg" "icons/gordon.svg" }}
+            </span>
+            <span class="icon-svg hidden group-hover:block">
+              {{ partialCached "icon" "icons/gordon-happy.svg" "icons/gordon-happy.svg" }}
             </span>
             <span class="hidden px-1 lg:inline">Gordon</span>
           </button>
           <div
             id="gordon-tooltip"
             data-tooltip-body
-            class="absolute top-0 left-0 hidden whitespace-nowrap rounded-sm bg-gray-900 p-2 text-sm text-white"
+            class="absolute top-0 left-0 hidden rounded-sm bg-gray-900 p-2 text-sm whitespace-nowrap text-white"
             role="tooltip"
           >
-            Ask Gordon — AI assistant for Docker docs
-            <div data-tooltip-arrow class="absolute h-2 w-2 rotate-45 bg-gray-900"></div>
+            Gordon, your AI assistant for Docker docs
+            <div
+              data-tooltip-arrow
+              class="absolute h-2 w-2 rotate-45 bg-gray-900"
+            ></div>
           </div>
         </div>
 
         <div id="search-bar-container">
-           {{ partialCached "search-bar.html" "-" }}
+          {{ partialCached "search-bar.html" "-" }}
         </div>
 
         <button
           aria-label="Theme switch"
           id="theme-switch"
-          class="cursor-pointer p-2 rounded-lg bg-blue-700 border border-blue-500 hover:bg-blue-800 hover:border-blue-400 transition-colors focus:outline-none focus:ring focus:ring-blue-400"
-          x-data="{ theme: localStorage.getItem('theme-preference') }"
-          x-init="$watch('theme', value => {
-                localStorage.setItem('theme-preference', value);
-                document.firstElementChild.className = value;
-              })"
-          @click="theme = (theme === 'dark' ? 'light' : 'dark')"
+          class="cursor-pointer rounded-lg border border-blue-500 bg-blue-700 p-2 transition-colors hover:border-blue-400 hover:bg-blue-800 focus:ring focus:ring-blue-400 focus:outline-none"
+          x-data="{ theme: localStorage.getItem('theme-preference') || 'auto' }"
+          x-init="
+            let mql = window.matchMedia('(prefers-color-scheme: dark)');
+            function applyTheme(val) {
+              if (val === 'auto') {
+                localStorage.removeItem('theme-preference');
+                document.firstElementChild.className = mql.matches ? 'dark' : 'light';
+              } else {
+                localStorage.setItem('theme-preference', val);
+                document.firstElementChild.className = val;
+              }
+              document.firstElementChild.dataset.themePreference = val;
+            }
+            let handler = e => { if (theme === 'auto') document.firstElementChild.className = e.matches ? 'dark' : 'light'; };
+            mql.addEventListener('change', handler);
+            $watch('theme', val => applyTheme(val));
+            return () => mql.removeEventListener('change', handler);
+          "
+          @click="theme = (theme === 'light' ? 'dark' : theme === 'dark' ? 'auto' : 'light')"
         >
-          <span class="icon-svg dark:hidden"
+          <span class="theme-icon-sun icon-svg" x-show="theme === 'light'"
             >{{ partialCached "icon" "icons/sun.svg" "sun" }}
           </span>
-          <span class="icon-svg hidden dark:block">
+          <span class="theme-icon-moon icon-svg" x-show="theme === 'dark'">
             {{ partialCached "icon" "icons/moon.svg" "moon" }}
+          </span>
+          <span class="theme-icon-auto icon-svg" x-show="theme === 'auto'">
+            {{ partialCached "icon" "contrast" "contrast" }}
           </span>
         </button>
       </div>

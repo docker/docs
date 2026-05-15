@@ -1,6 +1,6 @@
 {{- /*
   Utility template to extract a description for the current page.
-  - Prioritizes `.Description` or falls back to front matter in `site.Data.frontmatter`.
+  - Prioritizes `.Description` or falls back to front matter in `hugo.Data.frontmatter`.
   - Replaces newlines with spaces and trims trailing spaces.
   - Designed for reuse via `partial` calls to generate meta descriptions or similar content.
 */ -}}
@@ -9,7 +9,7 @@
   {{ $desc = strings.Replace .Description "\n" " " }}
 {{ else }}
   {{ with .File }}
-    {{ with (index (site.Data.frontmatter) .Path) }}
+    {{ with (index (hugo.Data.frontmatter) .Path) }}
       {{ with .description }}
         {{ $desc = strings.Replace . "\n" " " | strings.TrimRight " " }}
       {{ end }}

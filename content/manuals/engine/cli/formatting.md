@@ -110,7 +110,7 @@ $ docker image list --format '{{truncate .Repository 15}}'
 
 This example displays the image repository name, truncating it to the first 15 characters if it's longer.
 
-## println
+## `println`
 
 `println` prints each value on a new line.
 

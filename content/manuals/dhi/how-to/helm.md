@@ -3,7 +3,7 @@ title: Use a Docker Hardened Image chart
 linktitle: Use a Helm chart
 description: Learn how to use a Docker Hardened Image chart.
 keywords: use hardened image, helm, k8s, kubernetes, dhi chart, chart
-weight: 32
+weight: 31
 ---
 
 Docker Hardened Image (DHI) charts are Docker-provided [Helm

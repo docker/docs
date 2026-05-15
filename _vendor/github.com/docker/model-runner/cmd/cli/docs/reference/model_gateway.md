@@ -1,0 +1,150 @@
+# docker model gateway
+
+<!---MARKER_GEN_START-->
+Run an OpenAI-compatible LLM gateway that routes requests to configured providers.
+
+Supported providers include Docker Model Runner, Ollama, OpenAI, Anthropic,
+Groq, Mistral, Azure OpenAI, and many more OpenAI-compatible endpoints.
+
+### Options
+
+| Name              | Type     | Default   | Description                         |
+|:------------------|:---------|:----------|:------------------------------------|
+| `-c`, `--config`  | `string` |           | Path to the YAML configuration file |
+| `--host`          | `string` | `0.0.0.0` | Host address to bind to             |
+| `-p`, `--port`    | `uint16` | `4000`    | Port to listen on                   |
+| `-v`, `--verbose` | `bool`   |           | Enable verbose (debug) logging      |
+
+
+<!---MARKER_GEN_END-->
+
+## Description
+
+`docker model gateway` starts a local OpenAI-compatible HTTP gateway that routes
+requests to one or more configured LLM providers. It supports Docker Model Runner
+as a first-class provider, alongside Ollama, OpenAI, Anthropic, Groq, Mistral,
+Azure OpenAI, and many other OpenAI-compatible endpoints.
+
+The gateway is configured through a YAML file that declares the model list,
+provider routing, load-balancing, retries, and fallbacks.
+
+### Configuration file format
+
+```yaml
+model_list:
+  - model_name: <alias exposed to clients>
+    params:
+      model: <provider>/<upstream-model-name>
+      api_base: <optional base URL override>
+      api_key: <optional key or os.environ/VAR_NAME>
+
+general_settings:
+  master_key: <optional API key required by clients>
+  num_retries: <optional integer, default 0>
+  fallbacks:
+    - <primary-alias>: [<fallback-alias>, ...]
+```
+
+The `model` field under `params` uses the format `provider/model-name`.
+Supported provider prefixes include: `docker_model_runner`, `openai`,
+`anthropic`, `ollama`, `groq`, `mistral`, `together_ai`, `deepseek`,
+`fireworks_ai`, `openrouter`, `perplexity`, `xai`, `nvidia_nim`,
+`cerebras`, `sambanova`, `deepinfra`, `azure`, `azure_ai`, `vllm`,
+`lm_studio`, `huggingface`.
+
+API keys can be supplied inline, as `os.environ/VAR_NAME` references, or as
+`${VAR_NAME}` references. The gateway resolves well-known environment variables
+automatically (for example, `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`).
+
+## Examples
+
+### Route requests to Docker Model Runner
+
+```yaml
+model_list:
+  - model_name: smollm2
+    params:
+      model: docker_model_runner/ai/smollm2
+      api_base: http://localhost:12434/engines/llama.cpp/v1
+```
+
+```console
+$ docker model gateway --config config.yaml
+```
+
+The gateway starts on `http://0.0.0.0:4000`. Send requests using any
+OpenAI-compatible client:
+
+```console
+$ curl http://localhost:4000/v1/chat/completions \
+    -H "Content-Type: application/json" \
+    -d '{
+      "model": "smollm2",
+      "messages": [{"role": "user", "content": "Hello"}]
+    }'
+```
+
+### Route requests to multiple providers with fallback
+
+```yaml
+model_list:
+  - model_name: fast
+    params:
+      model: groq/llama-3.1-8b-instant
+      api_key: os.environ/GROQ_API_KEY
+  - model_name: smart
+    params:
+      model: openai/gpt-4o
+      api_key: os.environ/OPENAI_API_KEY
+  - model_name: local
+    params:
+      model: docker_model_runner/ai/smollm2
+      api_base: http://localhost:12434/engines/llama.cpp/v1
+
+general_settings:
+  num_retries: 2
+  fallbacks:
+    - fast: [local]
+    - smart: [fast, local]
+```
+
+```console
+$ docker model gateway --config config.yaml --port 8080
+```
+
+### Secure the gateway with an API key
+
+```yaml
+model_list:
+  - model_name: smollm2
+    params:
+      model: docker_model_runner/ai/smollm2
+      api_base: http://localhost:12434/engines/llama.cpp/v1
+
+general_settings:
+  master_key: os.environ/GATEWAY_API_KEY
+```
+
+```console
+$ GATEWAY_API_KEY=my-secret docker model gateway --config config.yaml
+```
+
+Clients must then pass the key as a Bearer token or via the `x-api-key` header:
+
+```console
+$ curl http://localhost:4000/v1/chat/completions \
+    -H "Content-Type: application/json" \
+    -d '{"model": "smollm2", "messages": [{"role": "user", "content": "Hi"}]}'
+```
+
+### Use a custom host and port
+
+```console
+$ docker model gateway --config config.yaml --host 127.0.0.1 --port 9000
+```
+
+### Enable debug logging
+
+```console
+$ docker model gateway --config config.yaml --verbose
+```

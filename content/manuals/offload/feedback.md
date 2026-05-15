@@ -5,7 +5,6 @@ title: Give feedback
 weight: 900
 ---
 
-
 There are several ways you can provide feedback on Docker Offload.
 
 ## Quick survey
@@ -13,7 +12,7 @@ There are several ways you can provide feedback on Docker Offload.
 The fastest way to share your thoughts is to fill out this short
 [Docker Offload feedback
 survey](https://docker.qualtrics.com/jfe/form/SV_br8Ki4CCdqeIYl0). It only takes
-a minute and helps the Docker team improve your experience.
+a minute and helps the Docker Team improve your experience.
 
 ## In-product feedback
 

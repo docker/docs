@@ -1,0 +1,36 @@
+name: sbx cp
+synopsis: Copy files or directories between a sandbox and the host
+description: |-
+    Either SRC or DST must be a sandbox path, written as SANDBOX:PATH.
+    The other must be a local path. Copying between two sandboxes is not supported.
+
+    When copying a directory, the directory itself is placed at the destination.
+    If the destination path does not exist it is created; if it already exists
+    as a directory, the source is placed inside it.
+usage: sbx cp [flags] SRC DST
+options:
+    - name: follow-link
+      shorthand: L
+      default_value: "false"
+      usage: |
+        Follow symbolic links in the source path when copying from host to sandbox
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for cp
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      # Copy a file from host to sandbox
+      sbx cp ./config.json my-sandbox:/home/user/
+
+      # Copy a file from sandbox to host
+      sbx cp my-sandbox:/home/user/output.log ./
+
+      # Copy a directory
+      sbx cp ./src/ my-sandbox:/home/user/src
+see_also:
+    - sbx - Manage AI coding agent sandboxes.

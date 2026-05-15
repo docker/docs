@@ -5,8 +5,8 @@ description: Learn about the benefits of and  how to setup Docker Desktop in Mic
 keywords: desktop, docker, windows, microsoft dev box
 weight: 60
 aliases:
- - /desktop/features/dev-box/
- - /desktop/setup/install/enterprise-deployment/dev-box/
+  - /desktop/features/dev-box/
+  - /desktop/setup/install/enterprise-deployment/dev-box/
 ---
 
 Docker Desktop is available as a pre-configured image in the Microsoft Azure Marketplace for use with Microsoft Dev Box, allowing developers to quickly set up consistent development environments in the cloud.
@@ -15,22 +15,22 @@ Microsoft Dev Box provides cloud-based, pre-configured developer workstations th
 
 ## Key benefits
 
-- Pre-configured environment: Docker Desktop, WSL2, and other requirements come pre-installed and configured
-- Consistent development: Ensure all team members work with the same Docker environment
-- Powerful resources: Access more compute power and storage than might be available on local machines
-- State persistence: Dev Box maintains your state between sessions, similar to hibernating a local machine
-- Seamless licensing: Use your existing Docker subscription or purchase a new one directly through Azure Marketplace
+- Docker Desktop, WSL2, and dependencies pre-installed
+- Identical environment for every team member
+- More compute and storage than a typical local machine
+- Session state persists between uses
+- Works with your existing Docker subscription
 
 ## Setup
 
-### Prerequisites 
+### Prerequisites
 
 - An Azure subscription
 - Access to Microsoft Dev Box
 - A Docker subscription (Pro, Team, or Business). You can use Docker Desktop in Microsoft Dev Box with any of the following subscription options:
-   - An existing or new Docker subscription 
-   - A new Docker subscription purchased through Azure Marketplace
-   - A Docker Business subscription with SSO configured for your organization
+  - An existing or new Docker subscription
+  - A new Docker subscription purchased through Azure Marketplace
+  - A Docker Business subscription with SSO configured for your organization
 
 ### Set up Docker Desktop in Dev Box
 
@@ -44,7 +44,7 @@ Microsoft Dev Box provides cloud-based, pre-configured developer workstations th
 Once your Dev Box is provisioned with the Docker Desktop image:
 
 1. Start your Dev Box instance.
-2. Launch Docker Desktop. 
+2. Launch Docker Desktop.
 3. Sign in with your Docker ID.
 
 ## Support
@@ -56,5 +56,5 @@ For issues related to:
 
 ## Limitations
 
-- Microsoft Dev Box is currently only available on Windows 10 and 11 (Linux VMs are not supported).
+- Microsoft Dev Box is only available on Windows 10 and 11 (Linux VMs are not supported).
 - Performance may vary based on your Dev Box configuration and network conditions.

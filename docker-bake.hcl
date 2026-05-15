@@ -40,7 +40,7 @@ target "release" {
 }
 
 group "validate" {
-  targets = ["lint", "test", "unused-media", "test-go-redirects", "dockerfile-lint", "path-warnings", "validate-vendor"]
+  targets = ["lint", "test", "unused-media", "test-go-redirects", "dockerfile-lint", "validate-vendor"]
 }
 
 target "test" {
@@ -78,11 +78,6 @@ target "test-go-redirects" {
 
 target "dockerfile-lint" {
   call = "check"
-}
-
-target "path-warnings" {
-  target = "path-warnings"
-  output = ["type=cacheonly"]
 }
 
 #

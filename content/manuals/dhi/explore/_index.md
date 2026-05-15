@@ -25,6 +25,10 @@ params:
       description: See how Docker Hardened Images are automatically tested for standards compliance, functionality, and security.
       icon: science
       link: /dhi/explore/test/
+    - title: Malware scanning
+      description: Learn how Docker scans Docker Hardened Images for viruses and malware, and how to view and verify the scan attestation.
+      icon: bug_report
+      link: /dhi/explore/malware-scanning/
     - title: Responsibility overview
       description: Understand Docker's role and your responsibilities when using Docker Hardened Images as part of your secure software supply chain.
       icon: group

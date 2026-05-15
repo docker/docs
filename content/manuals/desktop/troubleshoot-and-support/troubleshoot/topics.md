@@ -55,7 +55,7 @@ Docker Desktop uses hardware-accelerated graphics by default, which may cause pr
 
 Disable hardware acceleration:
 
-1. Edit Docker Desktop's `settings-store.json` file (or `settings.json` for Docker Desktop versions 4.34 and earlier). You can find this file at:
+1. Edit Docker Desktop's `settings-store.json` file. You can find this file at:
 
    - Mac: `~/Library/Group Containers/group.com.docker/settings-store.json`
    - Windows: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings-store.json`
@@ -216,24 +216,6 @@ See also, [Hypervisor Framework
 Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
 in the Apple documentation, and Docker Desktop [Mac system requirements](/manuals/desktop/setup/install/mac-install.md#system-requirements).
 
-### VPNKit keeps breaking
-
-#### Cause
-
-In Docker Desktop version 4.19, gVisor replaced VPNKit to enhance the performance of VM networking when using the Virtualization framework on macOS 13 and later.
-
-#### Solution
-
-To continue using VPNKit:
-
-1. Open your `settings-store.json` file located at `~/Library/Group Containers/group.com.docker/settings-store.json`
-2. Add:
-
-   ```JSON
-   $ "networkType":"vpnkit"
-   ```
-3. Save the file and restart Docker Desktop.
-
 ## Topics for Windows
 
 ### Docker Desktop fails to start when anti-virus software is installed
@@ -241,7 +223,7 @@ To continue using VPNKit:
 #### Cause
 
 Some anti-virus software may be incompatible with Hyper-V and Microsoft
-Windows 10 builds. The conflict
+Windows builds. The conflict
 typically occurs after a Windows update and
 manifests as an error response from the Docker daemon and a Docker Desktop start failure.
 

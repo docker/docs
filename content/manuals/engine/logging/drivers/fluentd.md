@@ -33,10 +33,11 @@ Some options are supported by specifying `--log-opt` as many times as needed:
 - `tag`: specify a tag for Fluentd messages. Supports some Go template markup, ex `{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`.
 
 To use the `fluentd` driver as the default logging driver, set the `log-driver`
-and `log-opt` keys to appropriate values in the `daemon.json` file, which is
-located in `/etc/docker/` on Linux hosts or
-`C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
-configuring Docker using `daemon.json`, see [daemon.json](/reference/cli/dockerd.md#daemon-configuration-file).
+and `log-opt` keys to appropriate values in the `daemon.json` file. For more
+about configuring Docker using `daemon.json`, see
+[daemon.json](/reference/cli/dockerd.md#daemon-configuration-file).
+
+{{% include "daemon-cfg-desktop.md" %}}
 
 The following example sets the log driver to `fluentd` and sets the
 `fluentd-address` option.

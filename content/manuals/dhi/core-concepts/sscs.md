@@ -17,9 +17,9 @@ ensuring the integrity and security of these elements is paramount
 
 ## Why is SSCS important?
 
-The significance of SSCS has escalated due to the rise in sophisticated
-cyberattacks targeting software supply chains. Recent incidents and the
-exploitation of vulnerabilities in open-source components have underscored the
+The significance of SSCS has escalated due to sophisticated cyberattacks
+targeting software supply chains. High-profile supply chain attacks and the
+exploitation of vulnerabilities in open-source components underscore the
 critical need for robust supply chain security measures. Compromises at any
 stage of the software lifecycle can lead to widespread vulnerabilities, data
 breaches, and significant financial losses.
@@ -47,6 +47,6 @@ following features:
   assess and mitigate risks effectively.
 
 - Continuous maintenance and rapid CVE remediation: Docker maintains DHIs with
-  regular updates and security patches, backed by an SLA for addressing critical
-  and high-severity vulnerabilities. This proactive approach helps ensure that
+  regular updates and security patches, backed by an [SLA for addressing critical
+  and high-severity vulnerabilities](https://docs.docker.com/go/dhi-sla/). This proactive approach helps ensure that
   images remain secure and compliant with enterprise standards.

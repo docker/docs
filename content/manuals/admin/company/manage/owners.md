@@ -1,0 +1,39 @@
+---
+title: Manage company owners
+linkTitle: Owners
+description: Learn how to add and remove company owners.
+keywords: company, owners, add company owner, remove company owner, company management, company owner permissions
+aliases:
+  - /admin/company/owners/
+  - /docker-hub/company-owner/
+---
+
+{{< summary-bar feature_name="Company" >}}
+
+A company can have multiple owners. Company owners have visibility across the
+entire company and can manage settings that apply to all organizations under
+that company. They also have the same access rights as organization owners but
+don’t need to be members of any individual organization.
+
+> [!IMPORTANT]
+>
+> Company owners do not occupy a seat unless they are added as a member of an
+> organization under your company, or SSO is enabled and the company owner signs
+> in via SSO (which automatically adds them as an organization member).
+
+## Add a company owner
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your company from
+   the top-left account drop-down.
+1. Select **Admin Console**, then **Company owners**.
+1. Select **Add owner**.
+1. Specify the user's Docker ID to search for the user.
+1. After you find the user, select **Add company owner**.
+
+## Remove a company owner
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your company from
+   the top-left account drop-down.
+1. Select **Admin Console**, then **Company owners**.
+1. Locate the company owner you want to remove and select the **Actions** menu.
+1. Select **Remove as company owner**.

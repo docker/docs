@@ -31,19 +31,28 @@ This page provides an overview of how sign-in enforcement works.
 When Docker Desktop detects a registry key, `.plist` file, or
 `registry.json` file:
 
-- A `Sign in required!` prompt appears, requiring users to sign
+- A **Sign in required!** prompt appears, requiring users to sign
   in as organization members to use Docker Desktop.
 - If users sign in with accounts that aren't organization members, they're
   automatically signed out and can't use Docker Desktop. They can select **Sign in**
   to try again with a different account.
 - When users sign in with organization member accounts, they can use Docker
   Desktop normally.
-- When users sign out, the `Sign in required!` prompt reappears and they can
+- When users sign out, the **Sign in required!** prompt reappears and they can
   no longer use Docker Desktop unless they sign back in.
 
 > [!NOTE]
 >
 > Enforcing sign-in for Docker Desktop doesn't affect Docker CLI access. CLI access is only restricted for organizations that enforce single sign-on (SSO).
+
+### Impact on already-signed-in users
+
+When enforcement is first deployed, users who are already running Docker Desktop are not immediately affected. Docker Desktop only re-evaluates enforcement on restart.
+
+On the next Docker Desktop restart:
+
+- Users signed in with an organization member account are automatically re-authenticated and continue working uninterrupted.
+- Users signed in with a non-member account are immediately signed out on startup and see the **Sign in required!** prompt. 
 
 ## Enforcing sign-in versus enforcing single sign-on (SSO)
 

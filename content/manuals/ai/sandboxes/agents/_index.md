@@ -1,84 +1,25 @@
 ---
 title: Supported agents
 linkTitle: Agents
-description: AI coding agents supported by Docker Sandboxes with experimental status and configuration details.
-weight: 50
+weight: 30
+description: AI coding agents supported by Docker Sandboxes.
+keywords: docker sandboxes, ai agents, claude code, codex, cursor, gemini
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes" >}}
+{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-Docker Sandboxes supports multiple AI coding agents. All agents run isolated
-inside microVMs with private Docker daemons.
+Docker Sandboxes runs the following agents out of the box:
 
-## Supported agents
+- [Claude Code](claude-code/)
+- [Codex](codex/)
+- [Copilot](copilot/)
+- [Cursor](cursor/)
+- [Droid](droid/)
+- [Gemini](gemini/)
+- [Kiro](kiro/)
+- [OpenCode](opencode/)
+- [Docker Agent](docker-agent/)
+- [Shell](shell/) — agent-less sandbox for manual setup or testing
 
-| Agent                             | Command    | Status       | Notes                                |
-| --------------------------------- | ---------- | ------------ | ------------------------------------ |
-| Claude Code                       | `claude`   | Experimental | Most tested implementation           |
-| Codex                             | `codex`    | Experimental |                                      |
-| Copilot                           | `copilot`  | Experimental |                                      |
-| Gemini                            | `gemini`   | Experimental |                                      |
-| [Docker Agent](/ai/docker-agent/) | `cagent`   | Experimental | Also available as a standalone tool  |
-| Kiro                              | `kiro`     | Experimental |                                      |
-| OpenCode                          | `opencode` | Experimental |                                      |
-| Custom shell                      | `shell`    | Experimental | Minimal environment for manual setup |
-
-## Experimental status
-
-All agents are experimental features. This means:
-
-- Breaking changes may occur between Docker Desktop versions
-- Features may be incomplete or change significantly
-- Stability and performance are not production-ready
-- Limited support and documentation
-
-Use sandboxes for development and testing, not production workloads.
-
-## Using different agents
-
-The agent type is specified when creating a sandbox:
-
-```console
-$ docker sandbox create AGENT [PATH] [PATH...]
-```
-
-Each agent runs in its own isolated sandbox. The agent type is bound to the
-sandbox when created and cannot be changed later.
-
-## Template environment
-
-All agent templates share a common base environment:
-
-- Ubuntu 25.10 base
-- Development tools: Docker CLI (with Buildx and Compose), Git, GitHub CLI, Node.js, Go, Python 3, uv, make, jq, ripgrep
-- Non-root `agent` user with sudo access
-- Private Docker daemon for running additional containers
-- Package managers: apt, pip, npm
-
-Individual agents add their specific CLI tools on top of this base. See
-[Custom templates](../templates.md) to build your own agent images.
-
-## Agent-specific configuration
-
-Each agent has its own credential requirements and authentication flow.
-Credentials are scoped per agent and must be provided specifically for that
-agent (no fallback authentication methods are used).
-
-See the agent-specific documentation:
-
-- [Claude Code](./claude-code.md)
-- [Docker Agent](./docker-agent.md)
-- [Codex](./codex.md)
-- [Copilot](./copilot.md)
-- [Gemini](./gemini.md)
-- [Kiro](./kiro.md)
-- [OpenCode](./opencode.md)
-- [Custom shell](./shell.md)
-
-## Requirements
-
-- Docker Desktop 4.58 or later
-- Platform support:
-  - macOS with virtualization.framework
-  - Windows with Hyper-V {{< badge color=violet text=Experimental >}}
-- API keys or credentials for your chosen agent
+Want to pre-install tools or customize an agent's environment?
+See [Customize](../customize/).

@@ -5,7 +5,7 @@
 {{- $schema := dict
   "@context" "https://schema.org"
   "@type" "TechArticle"
-  "headline" (truncate 110 .LinkTitle)
+  "headline" (truncate 110 .Title)
   "description" $description
   "url" .Permalink
 -}}
@@ -22,7 +22,8 @@
 {{- $schema = merge $schema (dict
   "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
   "inLanguage" site.Language.Lang
-) -}}
+  )
+-}}
 
 {{- /* Add author and publisher */ -}}
 {{- $logoUrl := printf "%sassets/images/docker-logo.png" (strings.TrimSuffix "/" site.BaseURL | printf "%s/") -}}
@@ -84,7 +85,6 @@
 
 {{- /* Output the schema as JSON-LD */ -}}
 <script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
-
 {{- /* Add BreadcrumbList schema */ -}}
 {{- $breadcrumbs := slice -}}
 {{- $position := 1 -}}
@@ -94,8 +94,8 @@
       "@type" "ListItem"
       "position" $position
       "item" (dict
-        "@id" .Permalink
-        "name" (truncate 110 .LinkTitle)
+      "@id" .Permalink
+      "name" (truncate 110 .LinkTitle)
       )
     -}}
     {{- $breadcrumbs = $breadcrumbs | append $item -}}
@@ -108,8 +108,8 @@
   "@type" "ListItem"
   "position" $position
   "item" (dict
-    "@id" .Permalink
-    "name" (truncate 110 .LinkTitle)
+  "@id" .Permalink
+  "name" (truncate 110 .Title)
   )
 -}}
 {{- $breadcrumbs = $breadcrumbs | append $currentItem -}}

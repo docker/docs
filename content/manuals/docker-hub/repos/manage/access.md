@@ -105,7 +105,7 @@ access.
 
 You must create a team before you are able to configure repository permissions.
 For more details, see [Create and manage a
-team](/manuals/admin/organization/manage-a-team.md).
+team](/manuals/admin/organization/manage/manage-a-team.md).
 
 To configure team repository permissions:
 

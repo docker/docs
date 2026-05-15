@@ -11,6 +11,7 @@ aliases:
   - /language/rust/
   - /guides/language/rust/
 languages: [rust]
+tags: [dhi]
 params:
   time: 20 minutes
 ---

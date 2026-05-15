@@ -30,30 +30,31 @@ $ docker buildx create \
 The following table describes the available driver-specific options that you
 can pass to `--driver-opt`:
 
-| Parameter                    | Type         | Default                                 | Description                                                                                                                          |
-| ---------------------------- | ------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `image`                      | String       |                                         | Sets the image to use for running BuildKit.                                                                                          |
-| `namespace`                  | String       | Namespace in current Kubernetes context | Sets the Kubernetes namespace.                                                                                                       |
-| `default-load`               | Boolean      | `false`                                 | Automatically load images to the Docker Engine image store.                                                                          |
-| `replicas`                   | Integer      | 1                                       | Sets the number of Pod replicas to create. See [scaling BuildKit][1]                                                                 |
-| `requests.cpu`               | CPU units    |                                         | Sets the request CPU value specified in units of Kubernetes CPU. For example `requests.cpu=100m` or `requests.cpu=2`                 |
-| `requests.memory`            | Memory size  |                                         | Sets the request memory value specified in bytes or with a valid suffix. For example `requests.memory=500Mi` or `requests.memory=4G` |
-| `requests.ephemeral-storage` | Storage size |                                         | Sets the request ephemeral-storage value specified in bytes or with a valid suffix. For example `requests.ephemeral-storage=2Gi`     |
-| `limits.cpu`                 | CPU units    |                                         | Sets the limit CPU value specified in units of Kubernetes CPU. For example `requests.cpu=100m` or `requests.cpu=2`                   |
-| `limits.memory`              | Memory size  |                                         | Sets the limit memory value specified in bytes or with a valid suffix. For example `requests.memory=500Mi` or `requests.memory=4G`   |
-| `limits.ephemeral-storage`   | Storage size |                                         | Sets the limit ephemeral-storage value specified in bytes or with a valid suffix. For example `requests.ephemeral-storage=100M`      |
-| `buildkit-root-volume-memory`| Memory size  | Using regular file system               | Mounts `/var/lib/buildkit` on an `emptyDir` memory-backed volume, with `SizeLimit` as the value. For example, `buildkit-root-folder-memory=6G`     |
-| `nodeselector`               | CSV string   |                                         | Sets the pod's `nodeSelector` label(s). See [node assignment][2].                                                                    |
-| `annotations`                | CSV string   |                                         | Sets additional annotations on the deployments and pods.                                                                             |
-| `labels`                     | CSV string   |                                         | Sets additional labels on the deployments and pods.                                                                                  |
-| `tolerations`                | CSV string   |                                         | Configures the pod's taint toleration. See [node assignment][2].                                                                     |
-| `serviceaccount`             | String       |                                         | Sets the pod's `serviceAccountName`.                                                                                                 |
-| `schedulername`              | String       |                                         | Sets the scheduler responsible for scheduling the pod.                                                                               |
-| `timeout`                    | Time         | `120s`                                  | Set the timeout limit that determines how long Buildx will wait for pods to be provisioned before a build.                           |
-| `rootless`                   | Boolean      | `false`                                 | Run the container as a non-root user. See [rootless mode][3].                                                                        |
-| `loadbalance`                | String       | `sticky`                                | Load-balancing strategy (`sticky` or `random`). If set to `sticky`, the pod is chosen using the hash of the context path.            |
-| `qemu.install`               | Boolean      | `false`                                 | Install QEMU emulation for multi platforms support. See [QEMU][4].                                                                   |
-| `qemu.image`                 | String       | `tonistiigi/binfmt:latest`              | Sets the QEMU emulation image. See [QEMU][4].                                                                                        |
+| Parameter                                  | Type         | Default                                 | Description                                                                                                                                                                                                   |
+| ------------------------------------------ | ------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `image`                                    | String       |                                         | Sets the image to use for running BuildKit.                                                                                                                                                                   |
+| `namespace`                                | String       | Namespace in current Kubernetes context | Sets the Kubernetes namespace.                                                                                                                                                                                |
+| `default-load`                             | Boolean      | `false`                                 | Automatically load images to the Docker Engine image store.                                                                                                                                                   |
+| `replicas`                                 | Integer      | 1                                       | Sets the number of Pod replicas to create. See [scaling BuildKit][1]                                                                                                                                          |
+| `requests.cpu`                             | CPU units    |                                         | Sets the request CPU value specified in units of Kubernetes CPU. For example `requests.cpu=100m` or `requests.cpu=2`                                                                                          |
+| `requests.memory`                          | Memory size  |                                         | Sets the request memory value specified in bytes or with a valid suffix. For example `requests.memory=500Mi` or `requests.memory=4G`                                                                          |
+| `requests.ephemeral-storage`               | Storage size |                                         | Sets the request ephemeral-storage value specified in bytes or with a valid suffix. For example `requests.ephemeral-storage=2Gi`                                                                              |
+| `persistent-volume-claim.requests.storage` | Storage size |                                         | Sets the requested size for a persistent volume claim. When set, Buildx creates a `StatefulSet` and stores the BuildKit build cache in the claim. For example `persistent-volume-claim.requests.storage=20Gi` |
+| `limits.cpu`                               | CPU units    |                                         | Sets the limit CPU value specified in units of Kubernetes CPU. For example `requests.cpu=100m` or `requests.cpu=2`                                                                                            |
+| `limits.memory`                            | Memory size  |                                         | Sets the limit memory value specified in bytes or with a valid suffix. For example `requests.memory=500Mi` or `requests.memory=4G`                                                                            |
+| `limits.ephemeral-storage`                 | Storage size |                                         | Sets the limit ephemeral-storage value specified in bytes or with a valid suffix. For example `requests.ephemeral-storage=100M`                                                                               |
+| `buildkit-root-volume-memory`              | Memory size  | Using regular file system               | Mounts `/var/lib/buildkit` on an `emptyDir` memory-backed volume, with `SizeLimit` as the value. For example, `buildkit-root-folder-memory=6G`                                                                |
+| `nodeselector`                             | CSV string   |                                         | Sets the pod's `nodeSelector` label(s). See [node assignment][2].                                                                                                                                             |
+| `annotations`                              | CSV string   |                                         | Sets additional annotations on the `Deployment` or `StatefulSet` and pods.                                                                                                                                    |
+| `labels`                                   | CSV string   |                                         | Sets additional labels on the `Deployment` or `StatefulSet` and pods.                                                                                                                                         |
+| `tolerations`                              | CSV string   |                                         | Configures the pod's taint toleration. See [node assignment][2].                                                                                                                                              |
+| `serviceaccount`                           | String       |                                         | Sets the pod's `serviceAccountName`.                                                                                                                                                                          |
+| `schedulername`                            | String       |                                         | Sets the scheduler responsible for scheduling the pod.                                                                                                                                                        |
+| `timeout`                                  | Time         | `120s`                                  | Set the timeout limit that determines how long Buildx will wait for pods to be provisioned before a build.                                                                                                    |
+| `rootless`                                 | Boolean      | `false`                                 | Run the container as a non-root user. See [rootless mode][3].                                                                                                                                                 |
+| `loadbalance`                              | String       | `sticky`                                | Load-balancing strategy (`sticky` or `random`). If set to `sticky`, the pod is chosen using the hash of the context path.                                                                                     |
+| `qemu.install`                             | Boolean      | `false`                                 | Install QEMU emulation for multi platforms support. See [QEMU][4].                                                                                                                                            |
+| `qemu.image`                               | String       | `tonistiigi/binfmt:latest`              | Sets the QEMU emulation image. See [QEMU][4].                                                                                                                                                                 |
 
 [1]: #scaling-buildkit
 [2]: #node-assignment
@@ -111,6 +112,27 @@ multiple times to the same node each time, ensuring better use of local cache.
 For more information on scalability, see the options for
 [`docker buildx create`](/reference/cli/docker/buildx/create/#driver-opt).
 
+## Persistent storage
+
+Set the `persistent-volume-claim.requests.storage` driver option to store the
+BuildKit build cache in a persistent volume claim instead of the pod
+filesystem.
+When you set this option, Buildx creates a `StatefulSet` instead of a
+`Deployment`.
+
+If you also set `replicas`, each replica gets its own persistent volume claim.
+This keeps the build cache local to each pod across restarts.
+
+For example, to create a builder with 20 GiB of persistent storage per replica:
+
+```console
+$ docker buildx create \
+  --bootstrap \
+  --name=kube \
+  --driver=kubernetes \
+  --driver-opt=namespace=buildkit,replicas=4,persistent-volume-claim.requests.storage=20Gi
+```
+
 ## Node assignment
 
 The Kubernetes driver allows you to control the scheduling of BuildKit pods
@@ -118,7 +140,8 @@ using the `nodeSelector` and `tolerations` driver options.
 You can also set the `schedulername` option if you want to use a custom scheduler altogether.
 
 You can use the `annotations` and `labels` driver options to apply additional
-metadata to the deployments and pods that's hosting your builders.
+metadata to the `Deployment` or `StatefulSet` and the pods hosting your
+builders.
 
 The value of the `nodeSelector` parameter is a comma-separated string of
 key-value pairs, where the key is the node label and the value is the label

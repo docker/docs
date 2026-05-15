@@ -9,13 +9,50 @@ params:
   icon: description
   sidebar:
     groups:
-      - Open source
-      - AI
-      - Products
+      - AI and agents
+      - Application development
+      - Supply chain security
       - Platform
       - Enterprise
   notoc: true
-  open-source:
+  ai-and-agents:
+  - title: Docker Sandboxes
+    description: Run AI coding agents in isolated environments.
+    icon: terminal
+    link: /ai/sandboxes/
+  - title: MCP Catalog and Toolkit
+    description: Augment your AI workflow with MCP servers.
+    icon: /icons/toolkit.svg
+    link: /ai/mcp-catalog-and-toolkit/
+  - title: Gordon
+    description: Streamline your workflow and get the most out of the Docker ecosystem with your personal AI assistant.
+    icon: note_add
+    link: /ai/gordon/
+  - title: Docker Model Runner
+    description: View and manage your local models.
+    icon: /icons/models.svg
+    link: /ai/model-runner/
+  - title: Docker Agent
+    description: The open-source multi-agent solution to assist you in your tasks.
+    icon: /icons/cagent.svg
+    link: /ai/docker-agent
+  application-development:
+  - title: Docker Desktop
+    description: Your command center for container development.
+    icon: /icons/Whale.svg
+    link: /desktop/
+  - title: Docker Offload
+    description: Build and run containers in the cloud.
+    icon: cloud
+    link: /offload/
+  - title: Docker Build Cloud
+    description: Build your images faster in the cloud.
+    icon: /icons/logo-build-cloud.svg
+    link: /build-cloud/
+  - title: Testcontainers
+    description: Run containers programmatically in your preferred programming language.
+    icon: /icons/Testcontainers.svg
+    link: /testcontainers/
   - title: Docker Build
     description: Build and ship any application anywhere.
     icon: build
@@ -28,60 +65,19 @@ params:
     description: Define and run multi-container applications.
     icon: /icons/Compose.svg
     link: /compose/
-  - title: Testcontainers
-    description: Run containers programmatically in your preferred programming language.
-    icon: /icons/Testcontainers.svg
-    link: /testcontainers/
-  - title: Docker Agent
-    description: The open-source multi-agent solution to assist you in your tasks.
-    icon: /icons/cagent.svg
-    link: /ai/docker-agent
-  ai:
-  - title: Gordon
-    description: Streamline your workflow and get the most out of the Docker ecosystem with your personal AI assistant.
-    icon: note_add
-    link: /ai/gordon/
-  - title: Docker Model Runner
-    description: View and manage your local models.
-    icon: /icons/models.svg
-    link: /ai/model-runner/
-  - title: MCP Catalog and Toolkit
-    description: Augment your AI workflow with MCP servers.
-    icon: /icons/toolkit.svg
-    link: /ai/mcp-catalog-and-toolkit/
-  products:
-  - title: Docker Desktop
-    description: Your command center for container development.
-    icon: /icons/Whale.svg
-    link: /desktop/
-  - title: Docker Hardened Images
-    description: Secure, minimal images for trusted software delivery.
-    icon: /icons/dhi.svg
-    link: /dhi/
-  - title: Docker Offload
-    description: Build and run containers in the cloud.
-    icon: cloud
-    link: /offload/
-  - title: Build Cloud
-    description: Build your images faster in the cloud.
-    icon: /icons/logo-build-cloud.svg
-    link: /build-cloud/
+  supply-chain-security:
   - title: Docker Hub
     description: Discover, share, and integrate container images.
     icon: hub
     link: /docker-hub/
+  - title: Docker Hardened Images
+    description: Secure, minimal images for trusted software delivery.
+    icon: /icons/dhi.svg
+    link: /dhi/
   - title: Docker Scout
     description: Image analysis and policy evaluation.
     icon: /icons/Scout.svg
     link: /scout/
-  - title: Docker Extensions
-    description: Customize your Docker Desktop workflow.
-    icon: extension
-    link: /extensions/
-  - title: Testcontainers Cloud
-    description: Run integration tests, with real dependencies, in the cloud.
-    icon: package_2
-    link: https://testcontainers.com/cloud/docs/
   platform:
   - title: Administration
     description: Centralized observability for companies and organizations.
@@ -113,23 +109,23 @@ params:
 This section contains user guides on how to install, set up, configure, and use
 Docker products.
 
-## Open source
-
-Open source development and containerization technologies.
-
-{{< grid items=open-source >}}
-
-## AI
+## AI and agents
 
 All the Docker AI tools in one easy-to-access location.
 
-{{< grid items=ai >}}
+{{< grid items=ai-and-agents >}}
 
-## Products
+## Application development
 
 End-to-end developer solutions for innovative teams.
 
-{{< grid items=products >}}
+{{< grid items=application-development >}}
+
+## Supply chain security
+
+Security guardrails and image analysis for your software supply chain.
+
+{{< grid items=supply-chain-security >}}
 
 ## Platform
 
@@ -143,3 +139,4 @@ subscription management.
 Targeted at IT administrators with help on deploying Docker Desktop at scale with configuration guidance on security related features.
 
 {{< grid items=enterprise >}}
+

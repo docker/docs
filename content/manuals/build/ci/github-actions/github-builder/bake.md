@@ -1,9 +1,9 @@
 ---
 title: Bake with Docker GitHub Builder
-linkTitle: Bake
+linkTitle: Bake workflow
 description: Use the Docker GitHub Builder bake.yml reusable workflow to build images and local artifacts from a Bake definition.
 keywords: ci, github actions, gha, buildkit, buildx, bake, reusable workflow
-weight: 20
+weight: 30
 ---
 
 The [`bake.yml` reusable workflow](https://github.com/docker/github-builder?tab=readme-ov-file#bake-reusable-workflow)

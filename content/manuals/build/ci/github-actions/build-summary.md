@@ -31,8 +31,6 @@ message that caused the build to fail:
 
 ## Import build records to Docker Desktop
 
-{{< summary-bar feature_name="Import builds" >}}
-
 The job summary includes a link for downloading a build record archive for the
 run. The build record archive is a ZIP file containing the details about a build
 (or builds, if you use `docker/bake-action` to build multiple targets). You can

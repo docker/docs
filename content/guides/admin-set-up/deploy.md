@@ -30,6 +30,6 @@ for Docker.
 
 To continue optimizing your Docker environment:
 
-- Review your [organization's usage data](/manuals/admin/organization/insights.md) to track adoption
+- Review your [organization's usage data](/manuals/admin/insights.md) to track adoption
 - Monitor [Docker Scout findings](/manuals/scout/explore/analysis.md) for security insights
 - Explore [additional security features](/manuals/enterprise/security/_index.md) to enhance your configuration

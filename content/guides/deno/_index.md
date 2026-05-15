@@ -6,7 +6,7 @@ summary: |
   Learn how to containerize JavaScript applications with the Deno runtime using Docker.
 linkTitle: Deno
 languages: [js]
-tags: []
+tags: [dhi]
 params:
   time: 10 minutes
 ---

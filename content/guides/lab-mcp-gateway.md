@@ -23,8 +23,12 @@ params:
 ---
 
 This lab provides a comprehensive, hands-on overview of the Docker MCP Gateway,
-which enables you to run containerized MCP servers safely and securely. Learn
+which lets you run containerized MCP servers safely and securely. Learn
 how to configure, secure, and connect MCP servers to your agentic applications.
+
+## Launch the lab
+
+{{< labspace-launch image="dockersamples/labspace-mcp-gateway" >}}
 
 ## What you'll learn
 
@@ -46,18 +50,3 @@ how to configure, secure, and connect MCP servers to your agentic applications.
 | 5 | Connecting MCP Gateway to Your App | Integrate the MCP Gateway with agentic frameworks |
 | 6 | Using a Custom MCP Server | Build and run your own custom MCP server |
 | 7 | Conclusion | Summary and next steps |
-
-## Prerequisites
-
-- The latest version of Docker Desktop with Docker Model Runner enabled
-- Basic familiarity with Docker and Docker Compose
-
-## Launch the lab
-
-Start the labspace:
-
-```console
-$ docker compose -f oci://dockersamples/labspace-mcp-gateway up -d
-```
-
-Then open your browser to [http://localhost:3030](http://localhost:3030).

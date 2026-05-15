@@ -1,13 +1,13 @@
 ---
-title: Codex sandbox
+title: Codex
+weight: 20
 description: |
   Use OpenAI Codex in Docker Sandboxes with API key authentication and YOLO
   mode configuration.
-keywords: docker, sandboxes, codex, openai, ai agent, authentication, yolo mode
-weight: 20
+keywords: docker sandboxes, codex, openai, ai agent, sbx
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes" >}}
+{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 This guide covers authentication, configuration, and usage of Codex in a
 sandboxed environment.
@@ -19,75 +19,63 @@ Official documentation: [Codex CLI](https://developers.openai.com/codex/cli)
 Create a sandbox and run Codex for a project directory:
 
 ```console
-$ docker sandbox run codex ~/my-project
+$ sbx run codex ~/my-project
 ```
 
 The workspace parameter is optional and defaults to the current directory:
 
 ```console
 $ cd ~/my-project
-$ docker sandbox run codex
+$ sbx run codex
 ```
 
 ## Authentication
 
-Codex requires an OpenAI API key. Credentials are scoped per sandbox.
+Codex supports two authentication methods: an API key or OAuth.
 
-Set the `OPENAI_API_KEY` environment variable in your shell configuration file.
-
-Docker Sandboxes use a daemon process that doesn't inherit environment
-variables from your current shell session. To make your API key available to
-sandboxes, set it globally in your shell configuration file.
-
-Add the API key to your shell configuration file:
-
-```plaintext {title="~/.bashrc or ~/.zshrc"}
-export OPENAI_API_KEY=sk-xxxxx
-```
-
-Apply the changes:
-
-1. Source your shell configuration: `source ~/.bashrc` (or `~/.zshrc`)
-2. Restart Docker Desktop so the daemon picks up the new environment variable
-3. Create and run your sandbox:
+**API key**: Store your OpenAI API key using
+[stored secrets](../security/credentials.md#stored-secrets):
 
 ```console
-$ docker sandbox create codex ~/project
-$ docker sandbox run <sandbox-name>
+$ sbx secret set -g openai
 ```
 
-The sandbox detects the environment variable and uses it automatically.
+Alternatively, export the `OPENAI_API_KEY` environment variable in your shell
+before running the sandbox.
+
+**OAuth**: If you prefer not to use an API key, start the OAuth flow on your
+host with:
+
+```console
+$ sbx secret set -g openai --oauth
+```
+
+This opens a browser window for authentication and stores the resulting tokens
+in your OS keychain. The OAuth flow runs on the host, not inside the sandbox,
+so browser-based authentication works without any extra setup.
+
+See [Credentials](../security/credentials.md) for more details.
 
 ## Configuration
 
-Codex supports a YOLO mode that disables safety checks and approval prompts.
-This mode grants the agent full access to your sandbox environment without
-interactive confirmation.
+Sandboxes don't pick up user-level configuration from your host, such as
+`~/.codex`. Only project-level configuration in the working directory is
+available inside the sandbox. See
+[Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
+for workarounds.
 
-Configure YOLO mode in `~/.codex/config.toml`:
-
-```toml
-approval_policy = "never"
-sandbox_mode = "danger-full-access"
-```
-
-With these settings, Codex runs without approval prompts.
-
-### Pass options at runtime
-
-Pass Codex CLI options after the sandbox name and a `--` separator:
+The sandbox runs Codex without approval prompts by default. Pass additional
+Codex CLI options after `--`:
 
 ```console
-$ docker sandbox run <sandbox-name> -- --dangerously-bypass-approvals-and-sandbox
+$ sbx run codex --name <sandbox-name> -- <codex-options>
 ```
-
-This flag enables YOLO mode for a single session without modifying the
-configuration file.
 
 ## Base image
 
 Template: `docker/sandbox-templates:codex`
 
-Codex launches with `--dangerously-bypass-approvals-and-sandbox` by default when YOLO mode is configured.
+Preconfigured to run without approval prompts.
 
-See [Custom templates](../templates.md) to build your own agent images.
+See [Customize](../customize/) to pre-install tools or customize this
+environment.

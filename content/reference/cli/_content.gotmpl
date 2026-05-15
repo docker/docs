@@ -1,7 +1,7 @@
 {{- /*
   Content adapter for CLI reference pages.
 
-  Generates pages from YAML data files in site.Data, replacing the ~386 stub
+  Generates pages from YAML data files in hugo.Data, replacing the ~386 stub
   Markdown files that previously lived under content/reference/cli/docker/.
 
   For each data file it creates a page at the command path (spaces → slashes).
@@ -18,7 +18,7 @@
   so they still appear in the sidebar navigation.
 */ -}}
 
-{{- range $folder, $files := site.Data.cli -}}
+{{- range $folder, $files := hugo.Data.cli -}}
   {{- range $name, $data := $files -}}
     {{- /* Skip hidden commands */ -}}
     {{- if $data.hidden -}}

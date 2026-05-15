@@ -5,8 +5,8 @@ tags: [admin]
 title: Settings Management
 linkTitle: Settings Management
 aliases:
- - /desktop/hardened-desktop/settings-management/
- - /security/for-admins/hardened-desktop/settings-management/
+  - /desktop/hardened-desktop/settings-management/
+  - /security/for-admins/hardened-desktop/settings-management/
 weight: 10
 ---
 
@@ -27,11 +27,11 @@ Settings Management is designed for organizations that:
 Administrators can define settings using one of these methods:
 
 - [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md): Create and assign settings policies through the
-Docker Admin Console. This provides a web-based interface for managing settings
-across your organization.
+  Docker Admin Console. This provides a web-based interface for managing settings
+  across your organization.
 - [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md): Place a configuration file on the
-user's machine to enforce settings. This method works well for automated
-deployments and scripted installations.
+  user's machine to enforce settings. This method works well for automated
+  deployments and scripted installations.
 
 Enforced settings override user-defined configurations and can't be modified by developers.
 
@@ -56,19 +56,19 @@ When multiple policies exist, Docker Desktop applies them in this order:
 1. User-specific policies: Highest priority
 1. Organization default policy: Applied when no user-specific policy exists
 1. Local `admin-settings.json` file: Lowest priority, overridden by Admin Console policies
-1. [Configuration profiles](/manuals/enterprise/security/enforce-sign-in/methods.md#configuration-profiles-method-mac-only): Super-set of Docker Admin Console policies. Available with Docker Desktop version 4.48 and later.
+1. [Configuration profiles](/manuals/enterprise/security/enforce-sign-in/methods.md#configuration-profiles-method-mac-only) when used to control proxy settings
 
 ## Set up Settings Management
 
-You can create settings management policies at any time, but your organization needs to verify a domain before the policies take effect. 
+You can create settings management policies at any time, but your organization needs to verify a domain before the policies take effect.
 
 1. Check that you have [added and verified](/manuals/enterprise/security/domain-management.md#add-and-verify-a-domain) your organization's domain.
 2. [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) to
-ensure all developers authenticate with your organization.
+   ensure all developers authenticate with your organization.
 3. Choose a configuration method:
-    - Use the `--admin-settings` installer flag on [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) or [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json`.
-    - Manually create and configure the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md).
-    - Create a settings policy in the [Docker Admin Console](configure-admin-console.md).
+   - Use the `--admin-settings` installer flag on [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) or [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json`.
+   - Manually create and configure the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md).
+   - Create a settings policy in the [Docker Admin Console](configure-admin-console.md).
 
 After configuration, developers receive the enforced settings when they:
 
@@ -99,9 +99,9 @@ apply via the Admin Console.
 As a workaround, you can check the `settings-store.json` file to view all
 applied settings:
 
-  - Mac: `~/Library/Application Support/Docker/settings-store.json`
-  - Windows: `%APPDATA%\Docker\settings-store.json`
-  - Linux: `~/.docker/desktop/settings-store.json`
+- Mac: `~/Library/Application Support/Docker/settings-store.json`
+- Windows: `%APPDATA%\Docker\settings-store.json`
+- Linux: `~/.docker/desktop/settings-store.json`
 
 The `settings-store.json` file contains all settings, including those that
 may not appear in the Docker Desktop GUI.
@@ -119,4 +119,3 @@ Get started with Settings Management:
 
 - [Configure Settings Management with the `admin-settings.json` file](configure-json-file.md)
 - [Configure Settings Management with the Docker Admin Console](configure-admin-console.md)
-

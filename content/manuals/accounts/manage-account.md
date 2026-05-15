@@ -39,26 +39,18 @@ It may take some time for your avatar to update in Docker.
 To update your email address:
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
-1. Select your avatar in the top-right corner and select **Account settings**.
-1. Select **Email**.
-1. Enter your new email address and your password to confirm the change.
-1. Select **Send verification email**. Docker sends a verification
-link to your new email.
+1. Go to **Settings**, then choose **Email**.
+1. Enter your new email address and confirm your identity with your password. Select **Verify email**.
+1. Go to the new Docker email and copy the 6-digit verification code.
+1. Paste the verification code to complete updating your email.
 
-Your new email address will appear as unverified until you complete the
-verification process. You can:
-
-- Resend the verification email if needed.
-- Remove the unverified email address at any time before verification.
-
-To verify your email, open your email client and follow the instructions
-in the Docker verification email.
+Your verification session expires after 15 minutes.
 
 > [!NOTE]
 >
 > Docker accounts only support one verified email address at a time, which
-is used for account notifications and security-related communications. You
-can't add multiple verified email addresses to your account.
+> is used for account notifications and security-related communications. You
+> can't add multiple verified email addresses to your account.
 
 ## Change your password
 
@@ -68,7 +60,7 @@ You can change your password by initiating a password reset via email. To change
 1. Select your avatar in the top-right corner and select **Account settings**.
 1. Select **Password**, then **Reset password**.
 1. Docker will send you a password reset email with instructions to reset
-your password.
+   your password.
 
 ## Manage two-factor authentication
 
@@ -110,7 +102,7 @@ or GitHub. See Google or GitHub's documentation for more information:
 ## Convert your account
 
 For information on converting your account into an organization, see
-[Convert an account into an organization](../admin/organization/convert-account.md).
+[Convert an account into an organization](../admin/organization/setup/convert-account.md).
 
 ## Deactivate your account
 

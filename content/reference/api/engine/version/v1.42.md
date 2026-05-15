@@ -1,0 +1,6 @@
+---
+linkTitle: v1.42
+title: Docker Engine API v1.42 reference
+aliases:
+  - /engine/api/v1.42/
+---

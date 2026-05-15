@@ -75,8 +75,8 @@ Every image includes complete, verifiable security metadata:
 ### Continuous maintenance
 
 - Automatic patching: Images are rebuilt and updated when upstream security
-  patches become available, with no SLA-backed time commitments for non-DHI
-  Enterprise users
+  patches become available, with no SLA-backed time commitments for DHI
+  Community users
 - Scanner integration: Direct integration with scanners and other security platforms
 
 ### Kubernetes and Helm chart support
@@ -116,18 +116,20 @@ advanced security needs.
 For a detailed comparison, see [Docker Hardened Images subscription
 comparison](https://www.docker.com/products/hardened-images/#compare).
 
-### SLA-backed security {tier="DHI Select & DHI Enterprise"}
+### SLA-backed security {tier="DHI Select or DHI Enterprise"}
 
 - CVE remediation SLA: 7-day SLA for critical and high severity vulnerabilities
 - Continuous patching: Regular security updates backed by SLA commitments
 - Enterprise support: Access to Docker's support team for mission-critical applications
 
-### Compliance variants {tier="DHI Select & DHI Enterprise"}
+For complete details, see the [Support Service Level Agreement](https://docs.docker.com/go/dhi-sla/).
+
+### Compliance variants {tier="DHI Select or DHI Enterprise"}
 
 - FIPS-enabled images: For regulated industries and government systems
 - STIG-ready images: Meet DoD Security Technical Implementation Guide requirements
 
-### Customization and control {tier="DHI Select & DHI Enterprise"}
+### Customization and control {tier="DHI Select or DHI Enterprise"}
 
 - Build custom images: Add your own packages, tools, certificates, and configurations
   - DHI Select: Up to 5 customizations

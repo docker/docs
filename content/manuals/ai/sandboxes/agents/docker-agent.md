@@ -1,100 +1,73 @@
 ---
-title: Docker Agent sandbox
+title: Docker Agent
+weight: 70
 description: |
   Use Docker Agent in Docker Sandboxes with multi-provider authentication
   supporting OpenAI, Anthropic, and more.
-keywords: docker, sandboxes, docker agent, multi-provider, authentication
-aliases:
-  - /ai/sandboxes/agents/cagent/
-  - /manuals/ai/sandboxes/agents/cagent/
-weight: 60
+keywords: docker sandboxes, docker agent, openai, anthropic, sbx
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes" >}}
+{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-This page covers running [Docker Agent](/ai/docker-agent/) inside Docker
-Sandboxes. Docker Agent is also available as a standalone CLI tool. See the
-full documentation for standalone usage, configuration reference, and building
-agent teams.
+Official documentation: [Docker Agent](https://docs.docker.com/ai/docker-agent/)
 
 ## Quick start
 
 Create a sandbox and run Docker Agent for a project directory:
 
 ```console
-$ docker sandbox run cagent ~/my-project
+$ sbx run docker-agent ~/my-project
 ```
 
-The workspace parameter is optional and defaults to the current directory:
-
-```console
-$ cd ~/my-project
-$ docker sandbox run cagent
-```
+The workspace parameter defaults to the current directory, so
+`sbx run docker-agent` from inside your project works too.
 
 ## Authentication
 
-Docker Agent uses proxy-managed authentication for all supported providers. Docker
-Sandboxes intercepts API requests and injects credentials transparently. You
-provide your API keys through environment variables, and the sandbox handles
-credential management.
+Docker Agent supports multiple providers. Store keys for the providers you want
+to use with [stored secrets](../security/credentials.md#stored-secrets):
 
-### Supported providers
-
-Configure one or more providers by setting environment variables:
-
-```plaintext {title="~/.bashrc or ~/.zshrc"}
-export OPENAI_API_KEY=sk-xxxxx
-export ANTHROPIC_API_KEY=sk-ant-xxxxx
-export GOOGLE_API_KEY=AIzaSyxxxxx
-export XAI_API_KEY=xai-xxxxx
-export NEBIUS_API_KEY=xxxxx
-export MISTRAL_API_KEY=xxxxx
+```console
+$ sbx secret set -g openai
+$ sbx secret set -g anthropic
+$ sbx secret set -g google
+$ sbx secret set -g xai
+$ sbx secret set -g nebius
+$ sbx secret set -g mistral
 ```
 
 You only need to configure the providers you want to use. Docker Agent detects
 available credentials and routes requests to the appropriate provider.
 
-### Environment variable setup
-
-Docker Sandboxes use a daemon process that doesn't inherit environment
-variables from your current shell session. To make your API keys available to
-sandboxes, set them globally in your shell configuration file.
-
-Apply the changes:
-
-1. Source your shell configuration: `source ~/.bashrc` (or `~/.zshrc`)
-2. Restart Docker Desktop so the daemon picks up the new environment variables
-3. Create and run your sandbox:
-
-```console
-$ docker sandbox create cagent ~/project
-$ docker sandbox run <sandbox-name>
-```
-
-The sandbox detects the environment variables and uses them automatically.
+Alternatively, export the environment variables (`OPENAI_API_KEY`,
+`ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`, `XAI_API_KEY`, `NEBIUS_API_KEY`,
+`MISTRAL_API_KEY`) in your shell before running the sandbox. See
+[Credentials](../security/credentials.md) for details on both methods.
 
 ## Configuration
 
-Docker Agent supports YOLO mode that disables safety checks and approval prompts.
-This mode grants the agent full access to your sandbox environment without
-interactive confirmation.
+Sandboxes don't pick up user-level configuration from your host. Only
+project-level configuration in the working directory is available inside the
+sandbox. See
+[Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
+for workarounds.
 
-### Pass options at runtime
-
-Pass Docker Agent CLI options after the sandbox name and a `--` separator:
+The sandbox runs Docker Agent without approval prompts by default. Pass
+additional CLI options after `--`:
 
 ```console
-$ docker sandbox run <sandbox-name> -- run --yolo
+$ sbx run docker-agent --name my-sandbox -- <options>
 ```
 
-The `run --yolo` command starts Docker Agent with approval prompts disabled.
+For example, to specify a custom `agent.yml` configuration file:
+
+```console
+$ sbx run docker-agent -- agent.yml
+```
 
 ## Base image
 
-Template: `docker/sandbox-templates:cagent`
-
-Docker Agent supports multiple LLM providers with automatic credential injection
-through the sandbox proxy. Launches with `run --yolo` by default.
-
-See [Custom templates](../templates.md) to build your own agent images.
+The sandbox uses `docker/sandbox-templates:docker-agent` and launches Docker
+Agent without approval prompts by default. See
+[Templates](../customize/templates.md) to build your own image on top of
+this base.

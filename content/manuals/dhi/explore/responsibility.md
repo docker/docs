@@ -39,7 +39,7 @@ securely.
   including fixing vulnerabilities in libraries and dependencies.
 - Docker: Rebuilds and re-releases images with upstream patches applied. Docker
   monitors for vulnerabilities and publishes updates to affected images. DHI Select
-  and DHI Enterprise include SLA commitments. DHI Community offers a secure baseline but no
+  and DHI Enterprise include [SLA commitments](https://docs.docker.com/go/dhi-sla/). DHI Community offers a secure baseline but no
   guaranteed remediation timelines.
 - You: Apply DHI updates in your environments and patch any software or
   dependencies you install on top of the base image.

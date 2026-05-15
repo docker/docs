@@ -8,7 +8,8 @@ Admin orgs:
   subscription: [Team, Business]
   for: Administrators
 Air-gapped containers:
-  requires: Docker Desktop [4.29.0](/manuals/desktop/release-notes.md#4290) and later
+  subscription: [Business]
+  for: Administrators
 Allow list:
   for: Administrators
 Amazon S3 cache:
@@ -20,6 +21,7 @@ Gordon DHI migration:
   availability: Experimental
   requires: Docker Desktop [4.38.0](/manuals/desktop/release-notes.md#4380) or later
 Automated builds:
+  availability: Deprecated
   subscription: [Pro, Team, Business]
 Azure blob:
   availability: Experimental
@@ -68,8 +70,6 @@ Buildx no default:
   requires: Docker Buildx [0.10.4](https://github.com/docker/buildx/releases/tag/v0.10.4) and later
 Cache backend API:
   availability: Experimental
-Docker Agent:
-  availability: Experimental
 Company:
   subscription: [Business]
   for: Administrators
@@ -82,8 +82,6 @@ Compose attach:
   requires: Docker Compose [2.20.0](https://github.com/docker/compose/releases/tag/v2.20.0) and later
 Compose bridge:
   requires: Docker Desktop 4.43.0 and later
-Config profiles:
-  requires: Docker Desktop 4.36 and later
 Compose dependent images:
   requires: Docker Compose [2.22.0](https://github.com/docker/compose/releases/tag/v2.22.0) and later
 Compose cgroup:
@@ -153,26 +151,20 @@ Docker Build Cloud:
 Docker CLI OpenTelemetry:
   requires: Docker Engine [26.1.0](/manuals/engine/release-notes/26.1.md#2610) and later
 Docker Offload:
-  availability: Early Access
-  requires: Docker Desktop 4.50 and later
+  subscription: [Docker Offload]
+  requires: Docker Desktop 4.68 or later
 docker compose alpha:
   availability: Experimental
 Docker Debug:
   requires: Docker Desktop 4.49 and later. For Docker Desktop versions 4.48.0 and earlier, you must have a Pro, Team, or Business subscription
 Docker Desktop Archlinux:
   availability: Experimental
-Docker Desktop CLI:
-  requires: Docker Desktop [4.37](/manuals/desktop/release-notes.md#4370) and later
-Docker Desktop CLI update:
-  requires: Docker Desktop 4.39 and later
-Docker Desktop CLI logs:
-  requires: Docker Desktop 4.39 and later
-Docker Desktop CLI kubernetes:
-  requires: Docker Desktop 4.44 and later
-Docker Desktop CLI diagnose:
-  requires: Docker Desktop 4.60 and later
+Desktop logs:
+  requires: Docker Desktop [4.65](/manuals/desktop/release-notes.md#4650) or later
 Docker Hardened Images:
   subscription: [Docker Hardened Images Select or Enterprise]
+Docker Hardened Images Enterprise:
+  subscription: [Docker Hardened Images Enterprise]
 Docker Init:
   requires: Docker Desktop [4.27](/manuals/desktop/release-notes.md#4270) and later
 Docker Model Runner:
@@ -192,6 +184,8 @@ Docker Pass:
   availability: Beta
 Docker Projects:
   availability: Beta
+Docker Sandboxes sbx:
+  availability: Early Access
 Docker Sandboxes:
   availability: Experimental
   requires: Docker Desktop [4.58](/manuals/desktop/release-notes.md#4580) or later
@@ -236,9 +230,6 @@ Namespace access:
   for: Administrators
 Immutable tags:
   availability: Beta
-Import builds:
-  availability: Beta
-  requires: Docker Desktop [4.31](/manuals/desktop/release-notes.md#4310) and later
 Insights:
   subscription: [Business]
   for: Administrators
@@ -250,7 +241,6 @@ Load by default:
   requires: Docker Buildx [0.14.0](https://github.com/docker/buildx/releases/tag/v0.14.0) and later
 MSI installer:
   subscription: [Business]
-  requires: Docker Desktop [4.32](/manuals/desktop/release-notes.md#4320) and later
   for: Administrators
 OATs:
   subscription: [Team, Business]
@@ -258,7 +248,6 @@ Pay by invoice:
   subscription: [Team, Business]
 PKG installer:
   subscription: [Business]
-  requires: Docker Desktop [4.36](/manuals/desktop/release-notes.md#4360) and later
   for: Administrators
 Private marketplace:
   availability: Beta
@@ -273,14 +262,11 @@ SOCKS5 proxy support:
 SSO:
   subscription: [Business]
   for: Administrators
-  requires: Docker Desktop [4.42](/manuals/desktop/release-notes.md#4420) and later
 Synchronized file sharing:
   subscription: [Pro, Team, Business]
 USB/IP support:
-  requires: Docker Desktop [4.35.0](/manuals/desktop/release-notes.md#4350) and later
   for: Docker Desktop for Mac, Linux, and Windows with the Hyper-V backend
 VMM:
-  requires: Docker Desktop [4.35.0](/manuals/desktop/release-notes.md#4350) and later
   for: Docker Desktop on Mac with Apple Silicon
 Wasm workloads:
   availability: Beta

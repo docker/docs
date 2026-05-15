@@ -1,11 +1,12 @@
 ---
 title: Air-gapped containers
-description: Control container network access with air-gapped containers using custom proxy rules and network restrictions
-keywords: air gapped containers, network security, proxy configuration, container isolation, docker desktop
+description: Restrict outbound container traffic using proxy rules, PAC files, and network isolation with Docker Desktop air-gapped containers
+keywords: air gapped containers, network security, proxy configuration, container isolation, docker desktop, PAC file, network isolation
 aliases:
  - /desktop/hardened-desktop/settings-management/air-gapped-containers/
  - /desktop/hardened-desktop/air-gapped-containers/
  - /security/for-admins/hardened-desktop/air-gapped-containers/
+weight: 30
 ---
 
 {{< summary-bar feature_name="Air-gapped containers" >}}
@@ -14,17 +15,13 @@ Air-gapped containers let you restrict container network access by controlling w
 
 Docker Desktop can configure container network traffic to accept connections, reject connections, or tunnel through HTTP or SOCKS proxies. You control which TCP ports the policy applies to and whether to use a single proxy or per-destination policies via Proxy Auto-Configuration (PAC) files.
 
-This page provides an overview of air-gapped containers and configuration steps.
-
 ## Who should use air-gapped containers?
 
-Air-gapped containers help organizations maintain security in restricted environments:
+Use air-gapped containers if:
 
-- Secure development environments: Prevent containers from accessing unauthorized external services
-- Compliance requirements: Meet regulatory standards that require network isolation
-- Data loss prevention: Block containers from uploading sensitive data to external services
-- Supply chain security: Control which external resources containers can access during builds
-- Corporate network policies: Enforce existing network security policies for containerized applications
+- Your organization requires containers to communicate only with approved internal services
+- You need to meet compliance standards that mandate network isolation (such as SOC 2, ISO 27001, or PCI DSS)
+- You want to prevent containers from leaking data or reaching unapproved external endpoints during builds or at runtime
 
 ## How air-gapped containers work
 
@@ -47,8 +44,7 @@ Before configuring air-gapped containers, you must have:
 
 - [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) enabled to ensure users authenticate with your organization
 - A Docker Business subscription
-- Configured [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) to manage organization policies
-- Downloaded Docker Desktop 4.29 or later
+- Configured [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) with the `admin-settings.json` file to manage organization policies
 
 ## Configure air-gapped containers
 
@@ -144,8 +140,8 @@ function FindProxyForURL(url, host) {
 
 ### General considerations
 
- - `FindProxyForURL` function URL parameter format is http://host_or_ip:port or https://host_or_ip:port
- - If you have an internal container trying to access https://docs.docker.com/enterprise/security/hardened-desktop/air-gapped-containers the docker proxy service will submit docs.docker.com for the host value and https://docs.docker.com:443 for the url value to FindProxyForURL, if you are using `shExpMatch` function in your PAC file as follows:
+ - `FindProxyForURL` function URL parameter format is `http://host_or_ip:port` or `https://host_or_ip:port`
+ - If you have an internal container trying to access `https://docs.docker.com/enterprise/security/hardened-desktop/air-gapped-containers` the Docker proxy service will submit docs.docker.com for the host value and https://docs.docker.com:443 for the url value to `FindProxyForURL`, if you are using `shExpMatch` function in your PAC file as follows:
 
    ```console
    if(shExpMatch(url, "https://docs.docker.com:443/enterprise/security/*")) return "DIRECT";
@@ -230,3 +226,7 @@ $ docker run --rm alpine wget -O- https://docker.io
 - PAC file management: Host PAC files on reliable internal infrastructure. Failed PAC downloads result in blocked container network access.
 - Performance considerations: Complex PAC files with many rules may impact container network performance. Keep rules simple and efficient.
 
+## Next steps
+
+- [Explore Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md) to further restrict what containers can do at runtime
+- [Understand how Docker Desktop handles host and container networking](/manuals/desktop/features/networking/_index.md)

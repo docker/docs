@@ -26,6 +26,7 @@ To get started with Docker Engine on Fedora, make sure you
 To install Docker Engine, you need a maintained version of one of the following
 Fedora versions:
 
+- Fedora 44
 - Fedora 43
 - Fedora 42
 
@@ -149,6 +150,17 @@ $ sudo dnf config-manager addrepo --from-repofile {{% param "download-url-base" 
    boot your system. If you don't want Docker to start automatically, use `sudo
    systemctl start docker` instead.
 
+   > [!NOTE]
+   >
+   > If the Docker service fails to start and `journalctl -u docker`
+   > shows `failed to find iptables`, point the `iptables` command to
+   > `iptables-nft` using `alternatives` and restart the service:
+   >
+   > ```console
+   > $ sudo alternatives --set iptables /usr/bin/iptables-nft
+   > $ sudo systemctl restart docker
+   > ```
+
 3. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
@@ -197,6 +209,17 @@ download a new file each time you want to upgrade Docker Engine.
    This configures the Docker systemd service to start automatically when you
    boot your system. If you don't want Docker to start automatically, use `sudo
    systemctl start docker` instead.
+
+   > [!NOTE]
+   >
+   > If the Docker service fails to start and `journalctl -u docker`
+   > shows `failed to find iptables`, point the `iptables` command to
+   > `iptables-nft` using `alternatives` and restart the service:
+   >
+   > ```console
+   > $ sudo alternatives --set iptables /usr/bin/iptables-nft
+   > $ sudo systemctl restart docker
+   > ```
 
 4. Verify that the installation is successful by running the `hello-world` image:
 

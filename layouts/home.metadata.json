@@ -5,7 +5,7 @@
   {{- $kwd := partialCached "utils/keywords.html" . . -}}
   {{- $tags := slice -}}
   {{- range (.Params.tags | default slice) -}}
-    {{- $tagData := index site.Data.tags . -}}
+    {{- $tagData := index hugo.Data.tags . -}}
     {{- with $tagData -}}
       {{ $tags = $tags | append .title }}
     {{- end -}}

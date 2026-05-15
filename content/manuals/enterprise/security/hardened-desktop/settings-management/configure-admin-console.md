@@ -5,7 +5,7 @@ description: Configure and enforce Docker Desktop settings across your organizat
 keywords: admin console, settings management, policy configuration, enterprise controls, docker desktop
 weight: 20
 aliases:
- - /security/for-admins/hardened-desktop/settings-management/configure-admin-console/
+  - /security/for-admins/hardened-desktop/settings-management/configure-admin-console/
 ---
 
 {{< summary-bar feature_name="Admin Console" >}}
@@ -16,48 +16,51 @@ Use the Docker Admin Console to create and manage settings policies for Docker D
 
 Before you begin, make sure you have:
 
-- [Docker Desktop 4.37.1 or later](/manuals/desktop/release-notes.md) installed
-- [A verified domain](/manuals/enterprise/security/single-sign-on/configure.md#step-one-add-and-verify-your-domain)
+- [Docker Desktop](/manuals/desktop/release-notes.md) installed
+- [A verified domain](/enterprise/security/single-sign-on/connect/#step-1-add-a-domain)
 - [Enforced sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) for your organization
 - A Docker Business subscription
 
 > [!IMPORTANT]
 >
-> You can create settings management policies at any time, but your organization needs to verify a domain before the policies take effect. 
+> You can create settings management policies at any time, but your organization needs to verify a domain before the policies take effect.
 
 ## Create a settings policy
 
 To create a new settings policy:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select
-your organization.
+   your organization.
 1. Select **Admin Console**, then **Desktop Settings Management**.
 1. Select **Create a settings policy**.
 1. Provide a name and optional description.
 
-      > [!TIP]
-      >
-      > You can upload an existing `admin-settings.json` file to pre-fill the form.
-      Admin Console policies override local `admin-settings.json` files.
+   > [!TIP]
+   >
+   > You can upload an existing `admin-settings.json` file to pre-fill the form.
+   > Admin Console policies override local `admin-settings.json` files.
 
 1. Choose who the policy applies to:
    - All users
    - Specific users
 
-      > [!NOTE]
-      >
-      > User-specific policies override global default policies. Test your policy with a small group before applying it organization-wide.
+     > [!NOTE]
+     >
+     > User-specific policies override global default policies. Test your policy with a small group before applying it organization-wide.
 
 1. Configure each setting using a state:
-   - **User-defined**: Users can change the setting.
-   - **Always enabled**: Setting is on and locked.
-   - **Enabled**: Setting is on but can be changed.
-   - **Always disabled**: Setting is off and locked.
-   - **Disabled**: Setting is off but can be changed.
 
-      > [!TIP]
-      >
-      > For a complete list of configurable settings, supported platforms, and configuration methods, see the [Settings reference](settings-reference.md).
+     | Admin Console state | Description                        | `admin-settings.json` equivalent   |
+     | :------------------ | :--------------------------------- |:---------------------------------- |
+     | **User-defined**    | Users can change the setting       | Omit the setting                   |
+     | **Always enabled**  | Setting is on and locked           | `"value": true`, `"locked": true`  |
+     | **Enabled**         | Setting is on but can be changed   | `"value": true`, `"locked": false` |
+     | **Always disabled** | Setting is off and locked          | `"value": false`, `"locked": true` |
+     | **Disabled**        | Setting is off but can be changed  | `"value": false`, `"locked": false`|
+
+     > [!TIP]
+     >
+     > For a complete list of configurable settings, supported platforms, and configuration methods, see the [Settings reference](settings-reference.md).
 
 1. Select **Create** to save your policy.
 
@@ -87,9 +90,9 @@ After you apply policies:
 
 - Docker Desktop displays most settings as greyed out
 - Some settings, particularly Enhanced Container Isolation configurations,
-may not appear in the GUI
+  may not appear in the GUI
 - You can verify all applied settings by checking the [`settings-store.json`
-file](/manuals/desktop/settings-and-maintenance/settings.md) on your system
+  file](/manuals/desktop/settings-and-maintenance/settings.md) on your system
 
 ## Manage existing policies
 

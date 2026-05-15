@@ -202,7 +202,7 @@ base-passwd@3.5.47
 
 ## SBOM generator
 
-BuildKit generates the SBOM using a scanner plugin. By default, it uses is the
+BuildKit generates the SBOM using a scanner plugin. By default, it uses the
 [BuildKit Syft scanner](https://github.com/docker/buildkit-syft-scanner)
 plugin. This plugin is built on top of
 [Anchore's Syft](https://github.com/anchore/syft),

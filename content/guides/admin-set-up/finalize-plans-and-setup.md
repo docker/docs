@@ -20,7 +20,7 @@ settings, along with your chosen method for [enforcing sign-in](/manuals/enterpr
 ## Manage your organizations
 
 If you have more than one organization, consider either [consolidating them
-into one organization](/manuals/admin/organization/orgs.md) or creating a
+into one organization](/manuals/admin/organization/setup/orgs.md) or creating a
 [Docker company](/manuals/admin/company/_index.md) to manage multiple
 organizations.
 
@@ -33,7 +33,7 @@ providers (IdPs) to access Docker. SSO is available for a whole company and all 
 Business subscription. For more information, see the
 [documentation](/manuals/enterprise/security/single-sign-on/_index.md).
 
-You can also enable [SCIM](/manuals/enterprise/security/provisioning/scim.md)
+You can also enable [SCIM](/manuals/enterprise/security/provisioning/scim/_index.md)
 for further automation of provisioning and deprovisioning of users.
 
 ### Set up Docker product entitlements included in the subscription

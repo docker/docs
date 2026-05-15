@@ -122,7 +122,7 @@ Supported patterns:
 > [!NOTE]
 >
 > Always wrap wildcard patterns in quotes. Without quotes, your shell will expand the
-> wildcard to match files in the current directory, which usually causes errors.
+> wildcard to match files in the current directory, causing errors.
 
 Examples:
 

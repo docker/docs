@@ -14,7 +14,7 @@ This page explains the build process for both base DHI images and customized
 images available with DHI Select and DHI Enterprise subscriptions.
 
 With DHI Select or DHI Enterprise subscriptions, the automated security update pipeline for
-both base and customized images is backed by SLA commitments, including a 7-day
+both base and customized images is backed by [SLA commitments](https://docs.docker.com/go/dhi-sla/), including a 7-day
 SLA for critical and high severity vulnerabilities. DHI Community offers a secure baseline
 but no guaranteed remediation timelines.
 
@@ -72,7 +72,7 @@ dependencies. When a package update is detected (for example, a security patch
 for a library), Docker automatically identifies and rebuilds all images within
 the support window that use that package.
 
-### Customization changes {tier="DHI Select and Enterprise"}
+### Customization changes
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
 
@@ -118,8 +118,10 @@ Each Docker Hardened Image is built through an automated pipeline:
    projects, improving the code for the entire community. When fixes are accepted
    upstream, the DHI build pipeline applies the patch immediately to protect
    customers while the fix moves through the upstream release process.
-5. Testing: Images undergo comprehensive testing for compatibility and
-   functionality.
+5. Testing and scanning: Images undergo comprehensive
+   [testing](test.md) for compatibility and functionality, and are
+   [scanned for malware](malware-scanning.md), secrets, and
+   vulnerabilities.
 6. Signing and attestations: Docker signs each image and generates
    attestations (SBOMs, VEX documents, build provenance).
 7. Publishing: The signed image is published to the DHI registry and the
@@ -131,8 +133,8 @@ Docker responds quickly to critical vulnerabilities. By building essential
 components from source rather than waiting for packaged updates, Docker can
 patch critical and high severity CVEs within days of upstream fixes and publish
 updated images with new attestations. For DHI Enterprise subscriptions, this
-rapid response is backed by a 7-day SLA for critical and high severity
-vulnerabilities.
+rapid response is backed by a [7-day SLA for critical and high severity
+vulnerabilities](https://docs.docker.com/go/dhi-sla/).
 
 The following diagram shows the base image build flow:
 
@@ -144,12 +146,12 @@ The following diagram shows the base image build flow:
                                                                                            |
                                                                                            v
 .-------------------.      .-------------------.      .-------------------.      .-------------------.
-| Cascade rebuilds  |<-----| Publish to        |<-----| Sign & generate   |<-----| Testing           |
-| (if needed)       |      | DHI registry      |      | attestations      |      |                   |
+| Cascade rebuilds  |<-----| Publish to        |<-----| Sign & generate   |<-----| Testing &         |
+| (if needed)       |      | DHI registry      |      | attestations      |      | scanning          |
 '-------------------'      '-------------------'      '-------------------'      '-------------------'
 ```
 
-### Customized image pipeline {tier="DHI Select and Enterprise"}
+### Customized image pipeline
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
 
@@ -160,9 +162,11 @@ When you customize a DHI image with DHI Select or DHI Enterprise, the build proc
    DHI image is updated, an automated rebuild starts.
 3. Fetch base image: The latest base DHI image is fetched.
 4. Apply customizations: Your OCI artifacts are applied to the base image.
-5. Signing and attestations: Docker signs the customized image and generates
+5. Scanning: The customized image is [scanned for
+   malware](malware-scanning.md), secrets, and vulnerabilities.
+6. Signing and attestations: Docker signs the customized image and generates
    attestations (SBOMs, VEX documents, build provenance).
-6. Publishing: The signed customized image is published to Docker Hub and the
+7. Publishing: The signed customized image is published to Docker Hub and the
    attestations are published to the Docker Scout registry.
 
 Docker handles the entire process automatically, so you don't need to manage
@@ -172,14 +176,14 @@ customized images and managing any CVEs introduced by your OCI artifacts.
 The following diagram shows the customized image build flow:
 
 ```goat {class="text-sm"}
-.-------------------.      .-------------------.      .-------------------.
-| Docker monitors   |----->| Trigger rebuild   |----->| Fetch base        |
-| OCI artifacts     |      |                   |      | DHI image         |
-'-------------------'      '-------------------'      '-------------------'
-                                                               |
-                                                               v
-.-------------------.      .-------------------.      .-------------------.
-| Publish to        |<-----| Sign & generate   |<-----| Apply             |
-| Docker Hub        |      | attestations      |      | customizations    |
-'-------------------'      '-------------------'      '-------------------'
+.-------------------.      .-------------------.      .-------------------.      .-------------------.
+| Docker monitors   |----->| Trigger rebuild   |----->| Fetch base        |----->| Apply             |
+| OCI artifacts     |      |                   |      | DHI image         |      | customizations    |
+'-------------------'      '-------------------'      '-------------------'      '-------------------'
+                                                                                           |
+                                                                                           v
+                           .-------------------.      .-------------------.      .-------------------.
+                           | Publish to        |<-----| Sign & generate   |<-----| Scanning          |
+                           | Docker Hub        |      | attestations      |      |                   |
+                           '-------------------'      '-------------------'      '-------------------'
 ```

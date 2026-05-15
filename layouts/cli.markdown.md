@@ -1,4 +1,4 @@
-{{- $data := index site.Data.cli .Params.datafolder .Params.datafile -}}
+{{- $data := index hugo.Data.cli .Params.datafolder .Params.datafile -}}
 # {{ .Title }}
 
 {{ with $data.short }}**Description:** {{ . }}{{ end }}
@@ -44,6 +44,6 @@
 
 | Command | Description |
 |---------|-------------|
-{{ range .Pages }}{{ if and .Params.datafolder .Params.datafile }}{{ $subdata := index site.Data.cli .Params.datafolder .Params.datafile }}| [`{{ .Title }}`]({{ .Permalink }}) | {{ $subdata.short }} |
+{{ range .Pages }}{{ if and .Params.datafolder .Params.datafile }}{{ $subdata := index hugo.Data.cli .Params.datafolder .Params.datafile }}| [`{{ .Title }}`]({{ .Permalink }}) | {{ $subdata.short }} |
 {{ end }}{{ end }}
 {{ end }}

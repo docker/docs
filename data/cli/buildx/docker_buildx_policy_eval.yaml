@@ -15,10 +15,30 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: file
+      shorthand: f
+      value_type: string
+      default_value: Dockerfile
+      description: Policy filename to evaluate
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: filename
       value_type: string
       default_value: Dockerfile
       description: Policy filename to evaluate
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: platform
+      value_type: string
+      description: Target platform for policy evaluation
       deprecated: false
       hidden: false
       experimental: false

@@ -1,126 +1,85 @@
-<div class="ml-3 relative inline-block" x-data="{ open: false }" @click.outside="open = false">
-  <div class="flex shadow rounded-sm overflow-hidden border border-gray-200 dark:border-gray-700">
-    <!-- Primary copy button -->
+<div class="not-prose mt-4">
+  <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+    <button
+      onclick="askGordon()"
+      data-heap-id="ask-gordon-button"
+      class="inline-flex cursor-pointer items-center gap-1.5 text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+    >
+      <span class="icon-svg icon-sm -translate-y-px">
+        {{ partialCached "icon" "icons/gordon.svg" "icons/gordon.svg" }}
+      </span>
+      <span>Ask Gordon</span>
+    </button>
+
     <button
       onclick="copyMarkdown()"
       data-heap-id="copy-markdown-button"
-      class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 flex cursor-pointer items-center gap-2 px-3 py-2 text-sm transition-colors whitespace-nowrap text-gray-900 dark:text-white"
+      class="inline-flex cursor-pointer items-center gap-1.5 text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
     >
-      <span class="icon-svg icon-sm">
+      <span class="icon-svg icon-sm -translate-y-px">
         {{ partialCached "icon" "content_copy" "content_copy" }}
       </span>
-      <span class="icon-svg icon-sm hidden">
+      <span class="icon-svg icon-sm hidden -translate-y-px">
         {{ partialCached "icon" "check_circle" "check_circle" }}
       </span>
-      <span>Copy as Markdown</span>
+      <span>Copy Markdown</span>
     </button>
 
-    <!-- Dropdown toggle -->
-    <button
-      @click="open = !open"
-      type="button"
-      data-heap-id="markdown-dropdown-toggle"
-      class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center justify-center px-2 border-l border-gray-200 dark:border-gray-700 transition-colors text-gray-900 dark:text-white"
-      aria-label="More options"
-    >
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-      </svg>
-    </button>
-  </div>
-
-  <!-- Dropdown menu -->
-  <div
-    x-show="open"
-    x-collapse
-    x-cloak
-    class="absolute right-0 top-full mt-1 min-w-full bg-white dark:bg-gray-800 rounded-sm shadow-lg overflow-hidden z-50 border border-gray-200 dark:border-gray-700"
-    data-heap-id="markdown-dropdown-menu"
-  >
     <button
       onclick="viewPlainText()"
       data-heap-id="view-markdown-button"
-      class="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
+      class="inline-flex cursor-pointer items-center gap-1.5 text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
     >
-      <span class="icon-svg icon-sm">
+      <span class="icon-svg icon-sm -translate-y-px">
         {{ partialCached "icon" "open_in_new" "open_in_new" }}
       </span>
-      <span>Open Markdown</span>
-    </button>
-
-    <button
-      onclick="openInDocsAI()"
-      data-heap-id="search-docs-ai-button"
-      class="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-    >
-      <span class="icon-svg icon-sm">
-        {{ partialCached "icon" "search" "search" }}
-      </span>
-      <span>Ask Docs AI</span>
-    </button>
-    <button
-      onclick="openInClaude()"
-      data-heap-id="open-claude-button"
-      class="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 whitespace-nowrap"
-    >
-      <span class="icon-svg icon-sm">
-        {{ partialCached "icon" "/icons/claude.svg" "claude" }}
-      </span>
-      <span>Open in Claude</span>
+      <span>View Markdown</span>
     </button>
   </div>
+  <hr class="mt-4 mb-6 border-t border-gray-200 dark:border-gray-700" />
 </div>
 
 <script>
-    function getCurrentPlaintextUrl() {
-      const url = window.location.href.split("#")[0].replace(/\/$/, "");
-      return `${url}.md`;
-    }
+  function getCurrentPlaintextUrl() {
+    const url = window.location.href.split("#")[0].replace(/\/$/, "");
+    return `${url}.md`;
+  }
 
-    function copyMarkdown() {
-      fetch(getCurrentPlaintextUrl())
-        .then((response) => response.text())
-        .then((text) => {
-          navigator.clipboard.writeText(text).then(() => {
-            const button = document.querySelector('[data-heap-id="copy-markdown-button"]');
-            if (!button) return;
+  function copyMarkdown() {
+    fetch(getCurrentPlaintextUrl())
+      .then((response) => response.text())
+      .then((text) => {
+        navigator.clipboard.writeText(text).then(() => {
+          const button = document.querySelector(
+            '[data-heap-id="copy-markdown-button"]',
+          );
+          if (!button) return;
 
-            const icons = button.querySelectorAll(".icon-svg");
-            const copyIcon = icons[0];
-            const checkIcon = icons[1];
+          const icons = button.querySelectorAll(".icon-svg");
+          const copyIcon = icons[0];
+          const checkIcon = icons[1];
 
-            copyIcon.classList.add("hidden");
-            checkIcon.classList.remove("hidden");
+          copyIcon.classList.add("hidden");
+          checkIcon.classList.remove("hidden");
 
-            setTimeout(() => {
-              copyIcon.classList.remove("hidden");
-              checkIcon.classList.add("hidden");
-            }, 2000);
-          });
-        })
-        .catch((err) => {
-          console.error("Error copying markdown:", err);
+          setTimeout(() => {
+            copyIcon.classList.remove("hidden");
+            checkIcon.classList.add("hidden");
+          }, 2000);
         });
-    }
+      })
+      .catch((err) => {
+        console.error("Error copying markdown:", err);
+      });
+  }
 
-    function viewPlainText() {
-      window.open(getCurrentPlaintextUrl(), "_blank");
-    }
+  function viewPlainText() {
+    window.open(getCurrentPlaintextUrl(), "_blank");
+  }
 
-    function openInDocsAI() {
-      const kapaButton = document.querySelector(".open-kapa-widget");
-      if (kapaButton) {
-        kapaButton.click();
-      } else {
-        alert("Couldn't find Docs AI.");
-      }
+  function askGordon() {
+    if (window.Alpine && window.Alpine.store("gordon")) {
+      window.Alpine.store("gordon").toggle();
     }
-
-    function openInClaude() {
-      const markdownUrl = getCurrentPlaintextUrl();
-      const prompt = `Read ${markdownUrl} so I can ask questions about it.`;
-      const encodedText = encodeURIComponent(prompt);
-      const claudeUrl = `https://claude.ai/new?q=${encodedText}`;
-      window.open(claudeUrl, '_blank');
-    }
-  </script>
+  }
+</script>

@@ -3,17 +3,17 @@ module github.com/docker/docs
 go 1.26.0
 
 // This go.mod file is used by hugo to vendor documentation from upstream
-// reposities. Use the "require" section to specify the version of the
+// repositories. Use the "require" section to specify the version of the
 // upstream repository.
 //
 // Make sure to add an entry in the "tools" section when adding a new repository.
 require (
-	github.com/docker/buildx v0.32.1
-	github.com/docker/cli v29.2.1+incompatible
-	github.com/docker/compose/v5 v5.0.2
-	github.com/docker/model-runner v1.1.9-0.20260303081710-59280ed7abd5
-	github.com/moby/buildkit v0.28.0
-	github.com/moby/moby/api v1.53.0
+	github.com/docker/buildx v0.34.0
+	github.com/docker/cli v29.4.3+incompatible
+	github.com/docker/compose/v5 v5.1.2
+	github.com/docker/model-runner v1.1.36
+	github.com/moby/buildkit v0.30.0
+	github.com/moby/moby/api v1.54.2
 )
 
 tool (

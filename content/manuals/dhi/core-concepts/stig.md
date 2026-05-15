@@ -1,6 +1,5 @@
 ---
-title: 'STIG <span class="not-prose bg-blue-500 dark:bg-blue-400 rounded-sm px-1 text-xs text-white whitespace-nowrap">DHI Select & Enterprise</span>'
-linkTitle: STIG
+title: STIG
 description: Learn how Docker Hardened Images provide STIG-ready container images with verifiable security scan attestations for government and enterprise compliance requirements.
 keywords: docker stig, stig-ready images, stig guidance, openscap docker, secure container images
 ---
@@ -59,7 +58,7 @@ Docker Hardened Images that include STIG scan results are labeled as **STIG** in
 the Docker Hardened Images catalog.
 
 To find DHI repositories with STIG image variants, [explore
-images](../how-to/explore.md) and:
+images](../how-to/explore.md#image-variants) and:
 
 - Use the **STIG** filter on the catalog page
 - Look for **STIG** labels on individual image listings

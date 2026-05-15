@@ -1,6 +1,13 @@
 command: docker sandbox version
 short: Show sandbox version information
-long: Show sandbox version information
+long: |-
+    > [!WARNING]
+    > The Docker Desktop-integrated `docker sandbox` commands are deprecated and
+    > replaced by the standalone [`sbx` CLI](/manuals/ai/sandboxes/_index.md).
+    > This deprecation applies only to the Docker Desktop integration, not to Docker
+    > Sandboxes.
+
+    Show sandbox version information
 usage: docker sandbox version
 pname: docker sandbox
 plink: docker_sandbox.yaml

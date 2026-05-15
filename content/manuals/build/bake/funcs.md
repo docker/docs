@@ -109,8 +109,6 @@ $ docker buildx bake --print webapp
 You can make references to [variables](./variables) and standard library
 functions inside your functions.
 
-You can't reference user-defined functions from other functions.
-
 The following example uses a global variable (`REPO`) in a custom function.
 
 ```hcl {title=docker-bake.hcl}

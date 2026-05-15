@@ -1,0 +1,24 @@
+name: sbx template
+synopsis: Manage sandbox templates
+description: |-
+    Manage sandbox templates.
+
+    Templates are saved snapshots of sandboxes that can be reused to create new
+    sandboxes with: sbx run -t TAG AGENT [WORKSPACE]
+usage: sbx template COMMAND
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for template
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx - Manage AI coding agent sandboxes.
+    - sbx template load - Load an image from a tar file into the sandbox runtime
+    - sbx template ls - List template images
+    - sbx template rm - Remove a template image
+    - sbx template save - Save a snapshot of the sandbox as a template

@@ -1,7 +1,7 @@
 ---
 title: Use Hardened System Packages
 linkTitle: Use hardened packages
-weight: 30
+weight: 32
 keywords: hardened images, DHI, hardened packages, packages, alpine
 description: Learn how to use and verify Docker's hardened system packages in your images.
 ---
@@ -34,7 +34,9 @@ the same security standards as the base images themselves.
 
 You can add hardened packages to your own images in the following two ways.
 
-### Add packages through image customization {tier="DHI Select & DHI Enterprise"}
+### Add packages through image customization
+
+{{< summary-bar feature_name="Docker Hardened Images" >}}
 
 When customizing Docker Hardened Images with DHI Select or DHI Enterprise, you
 can add hardened packages for Alpine-based images through the customization
@@ -97,7 +99,9 @@ This ensures all packages are installed from Docker's hardened repository.
 All packages installed from the Docker Hardened Images repository are built from
 source by Docker and include full provenance.
 
-#### Enterprise repository {tier="DHI Enterprise"}
+#### Enterprise repository
+
+{{< summary-bar feature_name="Docker Hardened Images Enterprise" >}}
 
 With DHI Enterprise, you have access to an additional package
 repository that includes hardened packages for compliance variants such as FIPS,

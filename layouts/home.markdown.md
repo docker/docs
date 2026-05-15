@@ -1,0 +1,3 @@
+# Docker Documentation
+
+{{ .RenderShortcodes }}

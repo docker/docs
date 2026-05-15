@@ -23,10 +23,11 @@ In GELF, every log message is a dict with the following fields:
 ## Usage
 
 To use the `gelf` driver as the default logging driver, set the `log-driver` and
-`log-opt` keys to appropriate values in the `daemon.json` file, which is located
-in `/etc/docker/` on Linux hosts or `C:\ProgramData\docker\config\daemon.json`
-on Windows Server. For more about configuring Docker using `daemon.json`, see
+`log-opt` keys to appropriate values in the `daemon.json` file. For more about
+configuring Docker using `daemon.json`, see
 [daemon.json](/reference/cli/dockerd.md#daemon-configuration-file).
+
+{{% include "daemon-cfg-desktop.md" %}}
 
 The following example sets the log driver to `gelf` and sets the `gelf-address`
 option.

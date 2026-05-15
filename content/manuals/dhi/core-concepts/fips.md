@@ -1,6 +1,5 @@
 ---
-title: 'FIPS <span class="not-prose bg-blue-500 dark:bg-blue-400 rounded-sm px-1 text-xs text-white whitespace-nowrap">DHI Select & Enterprise</span>'
-linkTitle: FIPS
+title: FIPS
 description: Learn how Docker Hardened Images support FIPS 140 through validated cryptographic modules to help organizations meet compliance requirements.
 keywords: docker fips, fips 140 images, fips docker images, docker compliance, secure container images
 ---
@@ -52,6 +51,9 @@ compliance requirements by incorporating components that meet the standard.
 - Docker provides signed test attestations that document the use of validated
   cryptographic modules. These attestations can support internal audits and
   compliance reporting.
+- Entropy sources (random number generation for cryptographic operations) vary
+  by base image. Debian-based images use the OpenSSL entropy source, while
+  Alpine-based images source entropy from the host kernel.
 
 > [!NOTE]
 >
@@ -64,7 +66,7 @@ compliance requirements by incorporating components that meet the standard.
 Docker Hardened Images that support FIPS are marked as **FIPS** compliant
 in the Docker Hardened Images catalog.
 
-To find DHI repositories with FIPS image variants, [explore images](../how-to/explore.md) and:
+To find DHI repositories with FIPS image variants, [search the catalog](../how-to/explore.md) and:
 
 - Use the **FIPS** filter on the catalog page
 - Look for **FIPS** compliant on individual image listings

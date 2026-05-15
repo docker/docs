@@ -30,6 +30,13 @@ cascade:
   - target:
       path: /reference/cli/docker/**
     layout: cli
+  # sbx CLI reference pages use the sbx-cli layout (cobra/doc YAML)
+  - target:
+      path: /reference/cli/sbx
+    layout: sbx-cli
+  - target:
+      path: /reference/cli/sbx/**
+    layout: sbx-cli
 
 # Remove the /manuals prefix for content in the manuals section
 permalinks:
@@ -95,16 +102,24 @@ outputFormats:
     mediaType: "text/plain"
     notAlternative: true
     permalinkable: false
+  llmsfull:
+    baseName: llms-full
+    isPlainText: true
+    mediaType: "text/plain"
+    notAlternative: true
+    permalinkable: false
 
 # Enable custom output formats
 # (only generate the custom output files once)
 outputs:
   home:
     - html
+    - markdown
     - redirects
     - metadata
     - robots
     - llms
+    - llmsfull
   page:
     - html
     - markdown
@@ -114,14 +129,12 @@ outputs:
 
 languages:
   en:
-    languageName: English
+    label: English
 
 # Site-wide parameters
 # Can be accessed in content with {{% param "param_name" %}}
 # Or in layouts/partials with site.Params.param_name
 params:
-  kapa:
-    id: ba5c2cbc-6535-4334-a72e-050f7a681c8a
   analytics:
     hotjar:
       prod: 3169877
@@ -139,16 +152,16 @@ params:
   # Use `grep` to figure out how they might be used.
 
   # Latest version of the Docker Engine API
-  latest_engine_api_version: "1.53"
+  latest_engine_api_version: "1.54"
   # Latest version of Docker Engine
-  docker_ce_version: "29.2.1"
+  docker_ce_version: "29.5.0"
   # Previous version of the Docker Engine
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
-  docker_ce_version_prev: "29.2.0"
+  docker_ce_version_prev: "29.4.3"
   # Latest Docker Compose version
-  compose_version: "v5.0.1"
+  compose_version: "v5.1.2"
   # Latest BuildKit version
-  buildkit_version: "0.27.0"
+  buildkit_version: "0.28.0"
   # Latest actions version
   bake_action_version: "v7"
   build_push_action_version: "v7"
@@ -171,18 +184,18 @@ params:
 menus:
   # Site header menu
   main:
-  - name: Get started
-    pageRef: /get-started/
-    weight: 1
-  - name: Guides
-    pageRef: /guides/
-    weight: 2
-  - name: Manuals
-    pageRef: /manuals/
-    weight: 3
-  - name: Reference
-    pageRef: /reference/
-    weight: 4
+    - name: Get started
+      pageRef: /get-started/
+      weight: 1
+    - name: Guides
+      pageRef: /guides/
+      weight: 2
+    - name: Manuals
+      pageRef: /manuals/
+      weight: 3
+    - name: Reference
+      pageRef: /reference/
+      weight: 4
 
   # Footer links
   footer:
@@ -308,7 +321,6 @@ module:
       target: assets/css/highlight-github-dark.css
 
   imports:
-
     # Docker Engine API
     - path: github.com/moby/moby/api
       mounts:

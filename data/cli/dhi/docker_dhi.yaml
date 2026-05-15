@@ -6,11 +6,13 @@ long: |-
 pname: docker
 plink: docker.yaml
 cname:
+    - docker dhi attestation
     - docker dhi auth
     - docker dhi catalog
     - docker dhi customization
     - docker dhi mirror
 clink:
+    - docker_dhi_attestation.yaml
     - docker_dhi_auth.yaml
     - docker_dhi_catalog.yaml
     - docker_dhi_customization.yaml

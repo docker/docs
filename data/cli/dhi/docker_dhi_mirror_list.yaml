@@ -7,19 +7,19 @@ long: |-
 
     Examples:
       # List all mirrored repositories
-      dhictl mirror list --org myorg
+      docker dhi mirror list --org myorg
 
       # List only image repositories
-      dhictl mirror list --org myorg --type image
+      docker dhi mirror list --org myorg --type image
 
       # List only helm chart repositories
-      dhictl mirror list --org myorg --type helm-chart
+      docker dhi mirror list --org myorg --type helm-chart
 
       # Search for a specific repository by name
-      dhictl mirror list --org myorg --filter dhi-python
+      docker dhi mirror list --org myorg --filter dhi-python
 
       # Output in JSON format
-      dhictl mirror list --org myorg --json
+      docker dhi mirror list --org myorg --json
 usage: docker dhi mirror list
 pname: docker dhi mirror
 plink: docker_dhi_mirror.yaml

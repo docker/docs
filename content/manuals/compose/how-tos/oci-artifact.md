@@ -145,6 +145,7 @@ $ docker compose publish -y username/my-compose-app:latest
 
 ## Next steps
 
+- [Familiarize yourself with Compose's trust model](/manuals/compose/trust-model.md)
 - [Learn about OCI artifacts in Docker Hub](/manuals/docker-hub/repos/manage/hub-images/oci-artifacts.md)
 - [Compose publish command](/reference/cli/docker/compose/publish/)
 - [Understand `include`](/reference/compose-file/include.md)

@@ -91,7 +91,7 @@ maintained so you don't have to. They offer:
 
 
 - Images built for peace of mind: Ultra-minimal and distroless, DHIs eliminate up to 95% of the traditional container attack surface.
-- No more patch panic: With continuous CVE scanning and SLA-backed remediation, Docker helps you stay ahead of threats.
+- No more patch panic: With continuous CVE scanning and [SLA-backed remediation](https://docs.docker.com/go/dhi-sla/), Docker helps you stay ahead of threats.
 - Audit-ready images: All DHIs include signed SBOMs, VEX, and provenance that support security and compliance workflows.
 - Images that work with your stack: Available in Alpine and Debian flavors, DHIs drop into your existing Dockerfiles and pipelines.
 - Images backed by enterprise support: Get peace of mind with Docker's support and rapid response to critical vulnerabilities.

@@ -2,10 +2,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 {{ partial "meta.html" . }}
 {{- range .AlternativeOutputFormats -}}
-  <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" />
+  {{- if eq .Name "markdown" -}}
+    <link
+      rel="{{ .Rel }}"
+      type="{{ .MediaType.Type }}"
+      href="{{ partial "utils/markdown-url.html" $ }}"
+    />
+  {{- else -}}
+    <link
+      rel="{{ .Rel }}"
+      type="{{ .MediaType.Type }}"
+      href="{{ .Permalink }}"
+    />
+  {{- end -}}
 {{ end -}}
 {{ partialCached "utils/css.html" "-" "-" }}
-<link href="/pagefind/pagefind-component-ui.css" rel="stylesheet">
+<link href="/pagefind/pagefind-component-ui.css" rel="stylesheet" />
 {{- if hugo.IsProduction -}}
   <script
     src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"

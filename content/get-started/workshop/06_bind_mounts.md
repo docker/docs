@@ -79,7 +79,7 @@ filesystem you can share with containers. For details about accessing the settin
    {{< tab name="Git Bash" >}}
 
    ```console
-   $ docker run -it --mount type=bind,src="/.",target=/src ubuntu bash
+   $ docker run -it --mount type=bind,src="./",target=/src ubuntu bash
    ```
    
    {{< /tab >}}
@@ -318,7 +318,7 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
 
    ```console
    $ docker run -dp 127.0.0.1:3000:3000 \
-       -w //app --mount type=bind,src="/.",target=/app \
+       -w //app --mount type=bind,src="./",target=/app \
        node:24-alpine \
        sh -c "npm install && npm run dev"
    ```

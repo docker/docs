@@ -25,12 +25,7 @@ When you change your billing cycle:
   and you're used value is $5, when you switch to an annual cycle ($100), the
   final charge is $95 ($100-$5).
 
-{{% include "tax-compliance.md" %}}
-
 ## Change personal account to an annual cycle
-
-{{< tabs >}}
-{{< tab name="Docker subscription" >}}
 
 Pay by invoice is not available for subscription upgrades or changes.
 
@@ -46,27 +41,9 @@ To change your billing cycle:
 
 The billing plans and usage page will now reflect your new annual plan details.
 
-{{< /tab >}}
-{{< tab name="Legacy Docker subscription" >}}
-
-Follow these steps to switch from a monthly to annual billing cycle for
-a legacy Docker subscription:
-
-1. Sign in to [Docker Hub](https://hub.docker.com).
-1. Select your organization, then select **Billing**.
-1. In the bottom-right of the **Plan** tab, select **Switch to annual billing**.
-1. Review the information displayed on the **Change to an Annual subscription**
-   page and select **Accept Terms and Purchase** to confirm.
-
-{{< /tab >}}
-{{< /tabs >}}
-
 ## Change organization to an annual cycle
 
 You must be an organization owner to make changes to the payment information.
-
-{{< tabs >}}
-{{< tab name="Docker subscription" >}}
 
 Pay by invoice is not available for subscription upgrades or changes.
 
@@ -80,19 +57,3 @@ organization's Docker subscription:
 1. Verify your billing information.
 1. Select **Continue to payment**.
 1. Verify payment information and select **Upgrade subscription**. If you choose to pay using a US bank account, you must verify the account. For more information, see [Verify a bank account](/manuals/billing/payment-method.md#verify-a-bank-account).
-
-
-{{< /tab >}}
-{{< tab name="Legacy Docker subscription" >}}
-
-Follow these steps to switch from a monthly to annual billing cycle for a
-legacy Docker organization subscription:
-
-1. Sign in to [Docker Hub](https://hub.docker.com).
-1. Select your organization, then select **Billing**.
-1. Select **Switch to annual billing**.
-1. Review the information displayed on the **Change to an Annual subscription**
-   page and select **Accept Terms and Purchase** to confirm.
-
-{{< /tab >}}
-{{< /tabs >}}

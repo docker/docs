@@ -31,7 +31,7 @@ pipeline {
                 sh 'echo $DOCKER_HUB_PSW | docker login -u $DOCKER_HUB_USR --password-stdin'
 
                 // Analyze and fail on critical or high vulnerabilities
-                sh 'docker-scout cves $IMAGE_TAG --exit-code --only-severity critical,high'
+                sh 'docker scout cves $IMAGE_TAG --exit-code --only-severity critical,high'
             }
         }
     }

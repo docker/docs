@@ -4,7 +4,7 @@ description: Secure, minimal, and production-ready base images
 weight: 8
 params:
   sidebar:
-    group: Products
+    group: Supply chain security
     badge:
       color: green
       text: New
@@ -34,7 +34,7 @@ params:
       icon: help_center
       link: /dhi/troubleshoot/
     - title: Additional resources
-      description: Links to blog posts, Docker Hub catalog, GitHub repositories, and more.
+      description: Guides, blog posts, Docker Hub catalog, GitHub repositories, and more.
       icon: link
       link: /dhi/resources/
 ---
@@ -59,10 +59,10 @@ DHI is available in the following three subscriptions.
 | Upstream cadence for Docker-released patches | ✅ | ✅ | ✅ |
 | FIPS/STIG variants | ❌ | ✅ | ✅ |
 | Critical CVE fixes < 7 days with SLA-backed continuous patching | ❌ | ✅ | ✅ |
-| Customizations | ❌ | Up to 5 | Unlimited |
+| Customizations | ❌ | ✅ Up to 5 | ✅ Unlimited |
 | Access to Hardened System Packages repository | ❌ | ❌ | ✅ |
 | Full catalog access available | ❌ | ❌ | ✅ |
-| Extended Lifecycle Support add-on available | ❌ | ❌ | ✅<br><br>Includes:<br>✅ +5 years of hardened updates<br>✅ Maintains security updates after upstream EOL<br>✅ SBOMs & provenance<br>✅ Protects long-lived workloads |
+| Extended Lifecycle Support add-on available | ❌ | ❌ | ✅ +5 years of hardened updates |
 
 For pricing and more details, see the [Docker Hardened Images subscription
 comparison](https://www.docker.com/products/hardened-images/#compare).

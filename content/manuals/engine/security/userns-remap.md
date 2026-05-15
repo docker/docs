@@ -16,6 +16,12 @@ can re-map this user to a less-privileged user on the Docker host. The mapped
 user is assigned a range of UIDs which function within the namespace as normal
 UIDs from 0 to 65536, but have no privileges on the host machine itself.
 
+> [!NOTE]
+>
+> With `userns-remap`, the Docker daemon still runs as root. To run both the
+> daemon and containers without root privileges, see [Rootless mode](rootless/_index.md)
+> instead.
+
 ## About remapping and subordinate user and group IDs
 
 The remapping itself is handled by two files: `/etc/subuid` and `/etc/subgid`.

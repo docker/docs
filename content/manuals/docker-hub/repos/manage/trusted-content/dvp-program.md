@@ -55,8 +55,6 @@ on participation tier:
   with Docker Scout
 - [Priority search ranking](#priority-search-ranking): Enhanced discoverability
   in Docker Hub search results
-- [Removal of rate limiting](#removal-of-rate-limiting): Unrestricted pulls for
-  development teams
 - [Co-marketing opportunities](#co-marketing-opportunities): Joint promotional
   activities with Docker
 
@@ -69,10 +67,9 @@ benefits from:
 - High availability and uptime: Docker's systems are designed for failover
   across multiple availability zones, with load-balanced autoscaling, enabling
   99.9% uptime.
-- Global delivery and fast downloads: Docker leverages Cloudflare's CDN and
-  caching (with Cache Reserve) to achieve cache hit ratios more than 99%,
-  reducing reliance on origin traffic and ensuring fast access for developers
-  everywhere.
+- Global delivery and fast downloads: Docker leverages a global CDN and caching
+  infrastructure to achieve cache hit ratios more than 99%, reducing reliance
+  on origin traffic and ensuring fast access for developers everywhere.
 - Durability: Docker maintains a documented backup policy and performs full
   daily backups of production data.
 
@@ -118,20 +115,6 @@ Verified publisher images receive enhanced visibility in Docker Hub search
 results, making it easier for developers to discover your content. This improved
 discoverability helps drive adoption of your images within the developer
 community.
-
-### Removal of rate limiting
-
-Verified publisher images are exempt from standard [Docker Hub rate
-limits](../../../usage/_index.md), ensuring developers can pull your images
-without restrictions. **This applies to all users, including unauthenticated users**,
-who get unlimited pulls for DVP images. This eliminates potential barriers to adoption and
-provides a seamless experience for users of your content.
-
-DVP partners can verify this unlimited access by checking the absence of rate
-limiting headers when pulling their images. When pulling DVP images, users won't
-see `ratelimit-limit` or `ratelimit-remaining` headers, indicating unlimited
-access. For more details on checking rate limits, see [View pull rate and
-limit](../../../usage/pulls.md#view-pull-rate-and-limit).
 
 ### Co-marketing opportunities
 

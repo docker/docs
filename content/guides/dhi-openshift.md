@@ -620,6 +620,6 @@ and use `COPY --chown` to transfer results.
 
 - [Use an image in Kubernetes](/dhi/how-to/k8s/) — general DHI Kubernetes deployment guide.
 - [Customize an image](/dhi/how-to/customize/) — add packages to DHI images using Enterprise customization.
-- [Debug a container](/dhi/how-to/debug/) — troubleshoot distroless containers with Docker Debug (local development).
+- [Debug a container](/dhi/troubleshoot/#general-debugging) — troubleshoot distroless containers with Docker Debug (local development).
 - [Managing SCCs](https://docs.openshift.com/container-platform/4.14/authentication/managing-security-context-constraints.html) — Red Hat’s reference documentation on Security Context Constraints.
 - [Creating images for OpenShift](https://docs.openshift.com/container-platform/4.14/openshift_images/create-images.html) — Red Hat’s guidelines for building OpenShift-compatible container images.

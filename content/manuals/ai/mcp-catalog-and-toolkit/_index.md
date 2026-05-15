@@ -3,11 +3,11 @@ title: Docker MCP Catalog and Toolkit
 linkTitle: MCP Catalog and Toolkit
 params:
   sidebar:
-    group: AI
+    group: AI and agents
     badge:
       color: blue
       text: Beta
-weight: 10
+weight: 20
 description: Learn about Docker's MCP catalog on Docker Hub
 keywords: Docker, ai, mcp servers, ai agents, extension, docker desktop, llm, docker hub
 grid:

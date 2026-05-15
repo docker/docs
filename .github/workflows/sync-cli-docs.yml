@@ -28,7 +28,7 @@ jobs:
     steps:
       -
         name: Checkout docs repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           fetch-depth: 0
       -
@@ -45,7 +45,7 @@ jobs:
           echo "Docker CLI version: **$VERSION**" | tee -a "$GITHUB_STEP_SUMMARY"
       -
         name: Checkout docker/cli repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           repository: docker/cli
           path: cli-source

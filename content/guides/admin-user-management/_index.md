@@ -13,13 +13,13 @@ params:
     - title: Single sign-on
       url: /security/for-admins/single-sign-on/
     - title: Onboard your organization
-      url: /admin/organization/onboard/
+      url: /admin/organization/setup/onboard/
     - title: Roles and permissions
       url: /security/for-admins/roles-and-permissions/
     - title: Insights
-      url: /admin/organization/insights/
+      url: /admin/insights/
     - title: Activity logs
-      url: /admin/organization/activity-logs/
+      url: /admin/activity-logs/
 ---
 
 Managing roles and permissions is key to securing your Docker environment while enabling easy collaboration and operational efficiency. This guide walks IT administrators through the essentials of user and access management, offering strategies for assigning roles, provisioning users, and using tools like activity logs and Insights to monitor and optimize Docker usage.

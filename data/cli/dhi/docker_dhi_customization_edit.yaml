@@ -6,6 +6,17 @@ long: |
 usage: docker dhi customization edit <file>
 pname: docker dhi customization
 plink: docker_dhi_customization.yaml
+options:
+    - option: json
+      value_type: bool
+      default_value: "false"
+      description: Output in JSON format
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 inherited_options:
     - option: org
       value_type: string
