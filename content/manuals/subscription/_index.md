@@ -17,6 +17,10 @@ params:
   sidebar:
     group: Platform
 grid_subscriptions:
+  - title: Create an account
+    description: Create your first Docker account.
+    link: /accounts/
+    icon: group_add
   - title: Set up your subscription
     description: Get started setting up a personal or organization subscription.
     link: /subscription/setup/
@@ -25,10 +29,6 @@ grid_subscriptions:
     description: Scale your subscription to fit your needs.
     link: /subscription/scale/
     icon: leaderboard
-  - title: Manage seats
-    description: Learn how to add or remove seats from your subscription.
-    link: /subscription/manage-seats/
-    icon: group_add
 aliases:
   - /docker-hub/billing/
   - /docker-hub/billing/faq/
@@ -90,20 +90,22 @@ Docker Team and Docker Business are subscription types that serve organizations.
 
 You can purchase Docker Team and Docker Business subscriptions on a per-organization basis. To learn more about managing organizations through Docker Team or Docker Business, see [Administration overview](/manuals/admin/_index.md).
 
-## Scale your subscription
-
-You can scale your subscriptions with self-served add ons:
-
-- For organization accounts, you can purchase hardened repos with DHI Select
-- For personal accounts, you can add Gordon subscriptions to multiply your Gordon usage
-
-Products available for add-ons can be found by signing into [Docker Home]((https://app.docker.com/admin)) from your personal or organization account, then selecting **Billing**. To add build minutes to your Docker Build Cloud and Testcontainers Cloud subscription, [reach out to sales](https://www.docker.com/pricing/contact-sales/).  
-
-## Docker Enterprise
+### Docker Enterprise
 
 Docker Enterprise covers sales-led agreements for large organizations that need tailored commercial terms, deployment programs, and coordinated support beyond standard self-serve subscriptions.
 
 Engage Docker through your procurement process or reach out using [Contact sales](https://www.docker.com/pricing/contact-sales/).
+
+## Scaling your subscription
+
+You can scale your subscriptions with self-served add ons:
+
+- For organization accounts, you can purchase hardened repos with DHI Select.
+- For personal accounts, you can add Gordon Plus, Max, or Ultra as a subscription layer that multiplies your Gordon usage.
+
+Products available for add-ons can be found by signing into [Docker Home](https://app.docker.com/) from your personal or organization account, then selecting **Billing > Browse Products**.
+
+To add build minutes to your Docker Build Cloud and Testcontainers Cloud subscription, [reach out to sales](https://www.docker.com/pricing/contact-sales/).  
 
 ## What's next
 
