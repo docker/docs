@@ -73,21 +73,21 @@ support, use `docker version`:
 ```console
 $ docker version
 Client: Docker Engine - Community
- Version:           29.4.0
+ Version:           29.5.0
  API version:       1.54
- Go version:        go1.26.1
- Git commit:        9d7ad9f
- Built:             Tue Apr  7 08:34:32 2026
+ Go version:        go1.26.3
+ Git commit:        98f1464
+ Built:             Thu May 14 14:41:41 2026
  OS/Arch:           darwin/arm64
  Context:           desktop-linux
 
 Server: Docker Engine - Community
  Engine:
-  Version:          29.4.0
+  Version:          29.5.0
   API version:      1.54 (minimum version 1.40)
-  Go version:       go1.26.1
-  Git commit:       daa0cb7
-  Built:            Tue Apr  7 08:36:25 2026
+  Go version:       go1.26.3
+  Git commit:       ff8d90a
+  Built:            Thu May 14 14:41:41 2026
   OS/Arch:          linux/arm64
   ...
 ```
