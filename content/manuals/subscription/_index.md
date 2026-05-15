@@ -35,29 +35,29 @@ aliases:
   - /subscription/overview/
 ---
 
-This page summarizes Docker subscription plans and optional add-ons for personal accounts, organization accounts, and sales-led enterprise programs. 
+This page summarizes Docker subscription plans and optional add-ons for personal accounts, organization accounts, and sales-led enterprise programs.
 
 > [!TIP]
-> For complete tier comparisons and commercial terms, see 
+> For complete tier comparisons and commercial terms, see
 > [Docker pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscription).
 
 ## Docker subscription types
 
-Personal accounts serve users developing with Docker for smaller-scale projects. When you upgrade to a Pro account or purchase add-ons, your billing details are tied to an individual Docker ID. 
+Personal accounts serve users developing with Docker for smaller-scale projects. When you upgrade to a Pro account or purchase add-ons, your billing details are tied to an individual Docker ID.
 
 - Docker Personal is the no-cost tier on a personal account.
 - Docker Pro is a paid, per-user subscription on the same account type.
 
-Docker also offers organization accounts that groups individual members, repositories, and billing under a Docker Hub organization. 
+Docker also offers organization accounts that group individual members, repositories, and billing under a Docker Hub organization.
 
 - Docker Team is an organization subscription that improves collaboration across small developer teams.
 - Docker Business adds security and governance capabilities for larger regulated environments.
 
-Whether you're developing with personal or organization accounts, Docker offers a suite of products that enhances your development workflows. 
+Whether you're developing with personal or organization accounts, Docker offers a suite of products that enhances your development workflows.
 
 ### Docker Personal and Docker Pro
 
-The table provides an abridged comparison of Docker Personal and Docker Pro accounts. 
+The table provides an abridged comparison of Docker Personal and Docker Pro accounts.
 
 | Feature                                                        | Personal                    | Pro                                                                                                             |
 | -------------------------------------------------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------- |
@@ -74,9 +74,9 @@ The table provides an abridged comparison of Docker Personal and Docker Pro acco
 
 To learn more about creating a Docker account, see [Accounts overview](/manuals/accounts/_index.md).
 
-### Docker Team and Docker Business 
+### Docker Team and Docker Business
 
-Docker Team and Docker Business are subscription types that serve organizations. They allow administrators to oversee identity management, security, and subscriptions across scalable teams.  
+Docker Team and Docker Business are subscription types that serve organizations. Administrators can oversee identity management, security, and subscriptions across scalable teams.
 
 | Feature                                         | Team                 | Business             |
 | ----------------------------------------------- | -------------------- | -------------------- |
@@ -98,14 +98,14 @@ Engage Docker through your procurement process or reach out using [Contact sales
 
 ## Scaling your subscription
 
-You can scale your subscriptions with self-served add ons:
+You can scale your subscriptions with self-serve add-ons:
 
 - For organization accounts, you can purchase hardened repos with DHI Select.
 - For personal accounts, you can add Gordon Plus, Max, or Ultra as a subscription layer that multiplies your Gordon usage.
 
 Products available for add-ons can be found by signing into [Docker Home](https://app.docker.com/) from your personal or organization account, then selecting **Billing > Browse Products**.
 
-To add build minutes to your Docker Build Cloud and Testcontainers Cloud subscription, [reach out to sales](https://www.docker.com/pricing/contact-sales/).  
+To add build minutes to your Docker Build Cloud and Testcontainers Cloud subscription, [reach out to sales](https://www.docker.com/pricing/contact-sales/).
 
 ## What's next
 
