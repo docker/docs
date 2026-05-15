@@ -45,19 +45,19 @@ $ docker pull dhi.io/python:3.13
 ```
 
 Then scan without VEX to see the raw CVE count. Docker Scout automatically
-applies VEX on Docker Hardened Images and can't show this unfiltered baseline.
-Use Trivy or Grype for the before/after comparison.
+applies VEX on Docker Hardened Images. To see the unfiltered CVE baseline,
+use Trivy or Grype.
 
 > [!NOTE]
 >
 > On Windows, the `-v /var/run/docker.sock:/var/run/docker.sock` socket mount
 > used in the containerized scanner commands throughout this guide does not work
 > on Docker Desktop for Windows. Instead, in Docker Desktop go to **Settings >
-> General** and enable **Expose daemon on tcp://localhost:2375 without TLS**,
+> General** and turn on **Expose daemon on tcp://localhost:2375 without TLS**,
 > then replace `-v /var/run/docker.sock:/var/run/docker.sock` with `-e
 > DOCKER_HOST=tcp://host.docker.internal:2375` in every containerized scanner
 > command. Exposing the daemon on TCP without TLS makes your system vulnerable
-> to remote code execution attacks. Use at your own risk and disable the setting
+> to remote code execution attacks. Use at your own risk and turn off the setting
 > when you are done testing.
 
 {{< tabs >}}
