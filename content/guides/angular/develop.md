@@ -112,8 +112,7 @@ After completing the previous steps, your project directory should now contain t
 │ ├── Dockerfile.dev
 │ ├── .dockerignore
 │ ├── compose.yaml
-│ ├── nginx.conf
-│ └── README.Docker.md
+│ └── nginx.conf
 ```
 
 ### Step 4: Start Compose Watch

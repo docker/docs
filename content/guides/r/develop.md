@@ -119,7 +119,6 @@ directory.
 │ ├── .dockerignore
 │ ├── compose.yaml
 │ ├── Dockerfile
-│ ├── README.Docker.md
 │ └── README.md
 ```
 

@@ -201,8 +201,7 @@ After completing the previous steps, your project directory should contain:
 │ ├── compose.yaml
 │ ├── vitest.config.ts
 │ ├── vitest.setup.ts
-│ ├── next.config.ts
-│ └── README.Docker.md
+│ └── next.config.ts
 ```
 
 ### Step 4: Run the tests
