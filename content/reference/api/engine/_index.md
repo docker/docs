@@ -178,11 +178,7 @@ to provide full compatibility, some functionality may not be available.
 
 API versions before v1.40 are deprecated and no longer supported by current
 versions of the Docker Engine and CLI. You can find archived documentation
-for deprecated versions of the API in the code repository on GitHub:
-
-- [Documentation for API versions 1.24–1.43](https://github.com/moby/moby/tree/28.x/docs/api).
-- [Documentation for API versions 1.18–1.23](https://github.com/moby/moby/tree/v25.0.0/docs/api).
-- [Documentation for API versions 1.17 and before](https://github.com/moby/moby/tree/v1.9.1/docs/reference/api).
+for deprecated versions [on GitHub](https://github.com/moby/moby/tree/master/api/docs).
 
 | Docker version | Maximum API version | Minimum API version | Change log                                                         |
 |:---------------|:--------------------|:--------------------|:-------------------------------------------------------------------|
