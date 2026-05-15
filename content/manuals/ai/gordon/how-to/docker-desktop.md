@@ -30,12 +30,23 @@ to change it during a conversation:
 1. Select the directory icon in the Gordon input area.
 2. Browse and select a different directory.
 
+## Contextual help
+
+The Gordon icon appears throughout Docker Desktop. Selecting it opens Gordon
+pre-loaded with context about the item you are working with, such as container
+logs or build output.
+
+## Usage indicator
+
+Docker Desktop shows a usage indicator so you can see how close you are to
+your tier limit. See [Usage limits and tiers](../usage-limits.md) for details.
+
 ## Disabling Gordon
 
 To disable Gordon:
 
 1. Open Docker Desktop Settings.
-2. Navigate to the **Beta features** section.
+2. Navigate to the **AI** section.
 3. Clear the **Enable Gordon** option.
 4. Select **Apply**.
 
