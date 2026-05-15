@@ -17,10 +17,6 @@ params:
   sidebar:
     group: Platform
 grid_subscriptions:
-  - title: Compare Docker subscriptions
-    description: Visit the pricing page to see what's included in different Docker subscriptions.
-    link: "https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscription"
-    icon: feature_search
   - title: Set up your subscription
     description: Get started setting up a personal or organization subscription.
     link: /subscription/setup/
@@ -29,58 +25,58 @@ grid_subscriptions:
     description: Scale your subscription to fit your needs.
     link: /subscription/scale/
     icon: leaderboard
-  - title: Change your subscription
-    description: Learn how to upgrade or downgrade your subscription.
-    link: /subscription/change/
-    icon: upgrade
   - title: Manage seats
     description: Learn how to add or remove seats from your subscription.
     link: /subscription/manage-seats/
     icon: group_add
-  - title: Docker Desktop license agreement
-    description: Review the terms of the Docker Subscription Service Agreement.
-    link: /subscription/desktop-license/
-    icon: license
-  - title: Subscription FAQs
-    description: Find the answers you need and explore common questions.
-    link: /subscription/faq/
-    icon: help
 aliases:
   - /docker-hub/billing/
   - /docker-hub/billing/faq/
   - /subscription/overview/
 ---
 
-This page summarizes Docker subscription plans and optional add-ons for personal accounts, organization accounts, and sales-led enterprise programs. For complete tier comparisons and commercial terms, see [Docker pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscription).
+This page summarizes Docker subscription plans and optional add-ons for personal accounts, organization accounts, and sales-led enterprise programs. 
 
-## Docker personal accounts
+> [!TIP]
+> For complete tier comparisons and commercial terms, see 
+> [Docker pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscription).
 
-Personal accounts suit single-user development workflows. Billing and upgrades for these subscriptions are tied to an individual Docker ID.
+## Docker subscription types
+
+Personal accounts serve users developing with Docker for smaller-scale projects. When you upgrade to a Pro account or purchase add-ons, your billing details are tied to an individual Docker ID. 
 
 - Docker Personal is the no-cost tier on a personal account.
 - Docker Pro is a paid, per-user subscription on the same account type.
 
-### Docker Personal and Docker Pro
-
-| Feature                                                        | Personal                       | Pro                                                                                                             |
-| -------------------------------------------------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------- |
-| Hub pull rate                                                  | 200 pulls per 6 hours per user | Unlimited                                                                                                       |
-| Private repositories                                           | 1                              | Unlimited                                                                                                       |
-| Scout-enabled repositories                                     | 1                              | 2                                                                                                               |
-| Scout SDLC integrations                                        | None                           | Up to 5                                                                                                         |
-| Docker Build Cloud included build minutes per month            | Trial (no paid pool)           | 200                                                                                                             |
-| Docker Build Cloud included cache                              | None                           | 50 GB                                                                                                           |
-| Docker Build Cloud maximum parallel builds                     | None                           | 4                                                                                                               |
-| Docker Build Cloud extra build minutes                         | None                           | Additional Docker Build Cloud build minutes (prepaid, expire when the subscription ends)                        |
-| Docker Testcontainers Cloud included runtime minutes per month | Trial                          | 100                                                                                                             |
-| Docker Testcontainers Cloud extra runtime minutes              | None                           | Additional Testcontainers Cloud runtime minutes (prepaid through Docker sales or on-demand on the monthly bill) |
-
-## Docker organization accounts
-
-Organization accounts group members, repositories, and billing under a Docker Hub organization.
+Docker also offers organization accounts that groups individual members, repositories, and billing under a Docker Hub organization. 
 
 - Docker Team is an organization subscription that improves collaboration across small developer teams.
 - Docker Business adds security and governance capabilities for larger regulated environments.
+
+Whether you're developing with personal or organization accounts, Docker offers a suite of products that enhances your development workflows. 
+
+### Docker Personal and Docker Pro
+
+The table provides an abridged comparison of Docker Personal and Docker Pro accounts. 
+
+| Feature                                                        | Personal                    | Pro                                                                                                             |
+| -------------------------------------------------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Hub pull rate                                                  | 100 pulls per hour per user | Unlimited                                                                                                       |
+| Private repositories                                           | 1                           | Unlimited                                                                                                       |
+| Scout-enabled repositories                                     | 1                           | 2                                                                                                               |
+| Scout SDLC integrations                                        | None                        | Up to 5                                                                                                         |
+| Docker Build Cloud included build minutes per month            | Trial (no paid pool)        | 200                                                                                                             |
+| Docker Build Cloud included cache                              | None                        | 50 GB                                                                                                           |
+| Docker Build Cloud maximum parallel builds                     | None                        | 4                                                                                                               |
+| Docker Build Cloud extra build minutes                         | None                        | Additional Docker Build Cloud build minutes (prepaid, expire when the subscription ends)                        |
+| Docker Testcontainers Cloud included runtime minutes per month | Trial                       | 100                                                                                                             |
+| Docker Testcontainers Cloud extra runtime minutes              | None                        | Additional Testcontainers Cloud runtime minutes (prepaid through Docker sales or on-demand on the monthly bill) |
+
+To learn more about creating a Docker account, see [Accounts overview](/manuals/accounts/_index.md).
+
+### Docker Team and Docker Business 
+
+Docker Team and Docker Business are subscription types that serve organizations. They allow administrators to oversee identity management, security, and subscriptions across scalable teams.  
 
 | Feature                                         | Team                 | Business             |
 | ----------------------------------------------- | -------------------- | -------------------- |
@@ -92,14 +88,16 @@ Organization accounts group members, repositories, and billing under a Docker Hu
 | Build Cloud capacity add-ons                    | Contact Docker sales | Contact Docker sales |
 | Testcontainers Cloud included minutes per month | 500                  | 1500                 |
 
-You can purchase Docker Team and Docker Business subscriptions on a per-organization basis.
+You can purchase Docker Team and Docker Business subscriptions on a per-organization basis. To learn more about managing organizations through Docker Team or Docker Business, see [Administration overview](/manuals/admin/_index.md).
 
 ## Scale your subscription
 
-- Docker Build Cloud: Purchase prepaid build minutes
-- Testcontainers Cloud: Use on-demand runtime minutes with billing at the end of each monthly cycle
+You can scale your subscriptions with self-served add ons:
 
-[Contact sales](https://www.docker.com/pricing/contact-sales/) to add prepaid Testcontainers Cloud runtime minutes or Docker Build Cloud capacity add-ons to your base subscriptions.
+- For organization accounts, you can purchase hardened repos with DHI Select
+- For personal accounts, you can add Gordon subscriptions to multiply your Gordon usage
+
+Products available for add-ons can be found by signing into [Docker Home]((https://app.docker.com/admin)) from your personal or organization account, then selecting **Billing**. To add build minutes to your Docker Build Cloud and Testcontainers Cloud subscription, [reach out to sales](https://www.docker.com/pricing/contact-sales/).  
 
 ## Docker Enterprise
 
@@ -107,8 +105,6 @@ Docker Enterprise covers sales-led agreements for large organizations that need 
 
 Engage Docker through your procurement process or reach out using [Contact sales](https://www.docker.com/pricing/contact-sales/).
 
-## Manage your subscription
-
-Use these guides to compare plans, set up billing, adjust seats, and find answers to common questions.
+## What's next
 
 {{< grid items="grid_subscriptions" >}}
