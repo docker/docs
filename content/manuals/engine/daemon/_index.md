@@ -37,11 +37,12 @@ This page shows you how to customize the Docker daemon, `dockerd`.
 
 ## Configure the Docker daemon
 
-There are two ways to configure the Docker daemon:
+There are three ways to configure the Docker daemon:
 
 - Use a JSON configuration file. This is the preferred option, since it keeps
   all configurations in a single place.
 - Use flags when starting `dockerd`.
+- Use environment variables to set daemon options.
 
 You can use both of these options together as long as you don't specify the same
 option both as a flag and in the JSON file. If that happens, the Docker daemon
@@ -90,6 +91,32 @@ running:
 
 ```console
 $ dockerd --help
+```
+
+### Configuration using environment variables
+
+You can configure the Docker daemon using environment variables. This is useful
+in systemd service overrides or init scripts.
+
+To set environment variables for the Docker daemon using systemd, create a
+drop-in override file:
+
+````````console
+$ sudo systemctl edit docker
+```````
+
+Add the following:
+
+``````ini
+[Service]
+Environment="DOCKER_OPTS=--debug --tls=true"
+`````
+
+Then reload and restart the daemon:
+
+````console
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart docker
 ```
 
 ## Daemon data directory
