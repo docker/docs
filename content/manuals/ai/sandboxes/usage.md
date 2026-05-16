@@ -17,21 +17,26 @@ The basic workflow is [`run`](/reference/cli/sbx/run/) to start,
 ```console
 $ sbx run claude                    # start an agent
 $ sbx ls                            # see what's running
-$ sbx stop my-sandbox               # pause it
-$ sbx rm my-sandbox                 # delete it entirely
+$ sbx stop claude-my-project        # pause it
+$ sbx rm claude-my-project          # delete it entirely
 ```
+
+Sandboxes are auto-named `<agent>-<directory>` when you don't pass `--name` —
+running `sbx run claude` from `~/my-project` creates a sandbox named
+`claude-my-project`. Run `sbx ls` to see the names of your existing sandboxes,
+or see [Reconnecting and naming](#reconnecting-and-naming) for more.
 
 To get a shell inside a running sandbox — useful for inspecting the environment,
 checking Docker containers, or manually installing something:
 
 ```console
-$ sbx exec -it <sandbox-name> bash
+$ sbx exec -it claude-my-project bash
 ```
 
 If you need a clean slate, remove the sandbox and re-run:
 
 ```console
-$ sbx rm my-sandbox
+$ sbx rm claude-my-project
 $ sbx run claude
 ```
 
@@ -137,7 +142,7 @@ push or open a PR from there:
 
 ```console
 $ git worktree list                          # find the worktree path
-$ cd .sbx/<sandbox-name>-worktrees/my-feature
+$ cd .sbx/my-sandbox-worktrees/my-feature
 $ git log                                    # see what the agent did
 $ git push -u origin my-feature
 $ gh pr create
@@ -215,15 +220,21 @@ For common signing failures, see
 
 ## Reconnecting and naming
 
+When you don't pass `--name`, the sandbox is auto-named `<agent>-<directory>`,
+where `<directory>` is the workspace folder name. For example, running
+`sbx run claude` from `~/my-project` creates a sandbox named
+`claude-my-project`. Use this name with commands like `sbx stop`, `sbx rm`,
+and `sbx exec`. Run `sbx ls` to see the names of your existing sandboxes.
+
 Sandboxes persist after the agent exits. Running the same workspace path again
 reconnects to the existing sandbox rather than creating a new one:
 
 ```console
-$ sbx run claude ~/my-project  # creates sandbox
-$ sbx run claude ~/my-project  # reconnects to same sandbox
+$ sbx run claude ~/my-project  # creates sandbox claude-my-project
+$ sbx run claude ~/my-project  # reconnects to claude-my-project
 ```
 
-Use `--name` to make this explicit and avoid ambiguity:
+Use `--name` to set a custom name and avoid ambiguity:
 
 ```console
 $ sbx run claude --name my-project
@@ -267,7 +278,7 @@ side-by-side. Remove unused sandboxes when you're done to reclaim disk space:
 ```console
 $ sbx run claude ~/project-a
 $ sbx run claude ~/project-b
-$ sbx rm <sandbox-name>       # when finished
+$ sbx rm claude-project-a       # when finished
 ```
 
 ## Copying files between host and sandbox
@@ -277,9 +288,9 @@ your host and a sandbox. This is useful for one-off files that aren't part of a
 mounted workspace, such as generated output, logs, or setup files.
 
 ```console
-$ sbx cp ./config.json my-sandbox:/home/user/
-$ sbx cp my-sandbox:/home/user/output.log ./
-$ sbx cp ./src/ my-sandbox:/home/user/src
+$ sbx cp ./config.json claude-my-project:/home/user/
+$ sbx cp claude-my-project:/home/user/output.log ./
+$ sbx cp ./src/ claude-my-project:/home/user/src
 ```
 
 One side of the copy must use `SANDBOX:PATH`. Copying directly between two
@@ -308,15 +319,15 @@ The common case: an agent has started a dev server or API, and you want to open
 it in your browser or run tests against it.
 
 ```console
-$ sbx ports my-sandbox --publish 8080:3000   # host 8080 → sandbox port 3000
+$ sbx ports claude-my-project --publish 8080:3000   # host 8080 → sandbox port 3000
 $ open http://localhost:8080
 ```
 
 To let the OS pick a free host port instead of choosing one yourself:
 
 ```console
-$ sbx ports my-sandbox --publish 3000        # ephemeral host port
-$ sbx ports my-sandbox                       # check which port was assigned
+$ sbx ports claude-my-project --publish 3000        # ephemeral host port
+$ sbx ports claude-my-project                       # check which port was assigned
 ```
 
 `sbx ls` shows active port mappings alongside each sandbox, and `sbx ports`
@@ -324,14 +335,14 @@ lists them in detail:
 
 ```console
 $ sbx ls
-SANDBOX         AGENT   STATUS   PORTS                    WORKSPACE
-my-sandbox      claude  running  127.0.0.1:8080->3000/tcp /home/user/proj
+SANDBOX             AGENT   STATUS   PORTS                    WORKSPACE
+claude-my-project   claude  running  127.0.0.1:8080->3000/tcp /home/user/proj
 ```
 
 To stop forwarding a port:
 
 ```console
-$ sbx ports my-sandbox --unpublish 8080:3000
+$ sbx ports claude-my-project --unpublish 8080:3000
 ```
 
 A few things to keep in mind:
@@ -346,7 +357,7 @@ A few things to keep in mind:
   option on `sbx run` or `sbx create`. Ports can only be published after the
   sandbox is running.
 - **Unpublish requires the host port** — `--unpublish 3000` is rejected; you
-  must use `--unpublish 8080:3000`. Run `sbx ports my-sandbox` first if you
+  must use `--unpublish 8080:3000`. Run `sbx ports claude-my-project` first if you
   used an ephemeral port and need to find the assigned host port.
 
 ## Accessing host services from a sandbox

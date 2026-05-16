@@ -93,8 +93,8 @@ $ sbx policy deny network -g ads.example.com
 Pass a sandbox name to scope a rule to one sandbox:
 
 ```console
-$ sbx policy allow network my-sandbox api.example.com
-$ sbx policy deny network my-sandbox ads.example.com
+$ sbx policy allow network claude-my-project api.example.com
+$ sbx policy deny network claude-my-project ads.example.com
 ```
 
 Specify multiple hosts in one command with a comma-separated list:
@@ -107,11 +107,11 @@ List all active policy rules with `sbx policy ls`:
 
 ```console
 $ sbx policy ls
-NAME                  TYPE      ORIGIN               DECISION   STATUS   RESOURCES
-balanced-dev          network   local                allow      active   api.anthropic.com
-ads-block             network   local                deny       active   ads.example.com
-kit:my-sandbox        network   sandbox:my-sandbox   allow      active   api.example.com
-kit:my-sandbox:deny   network   sandbox:my-sandbox   deny       active   telemetry.example.com
+NAME                         TYPE      ORIGIN                      DECISION   STATUS   RESOURCES
+balanced-dev                 network   local                       allow      active   api.anthropic.com
+ads-block                    network   local                       deny       active   ads.example.com
+kit:claude-my-project        network   sandbox:claude-my-project   allow      active   api.example.com
+kit:claude-my-project:deny   network   sandbox:claude-my-project   deny       active   telemetry.example.com
 ```
 
 The columns are:
@@ -131,7 +131,7 @@ Use `--type network` to show only network policies. Without a sandbox argument,
 filter the list to global rules and rules scoped to that sandbox only:
 
 ```console
-$ sbx policy ls my-sandbox
+$ sbx policy ls claude-my-project
 ```
 
 Remove a policy by resource or by rule ID:
@@ -144,7 +144,7 @@ $ sbx policy rm network -g --id 2d3c1f0e-4a73-4e05-bc9d-f2f9a4b50d67
 To remove a sandbox-scoped policy, include the sandbox name:
 
 ```console
-$ sbx policy rm network my-sandbox --resource api.example.com
+$ sbx policy rm network claude-my-project --resource api.example.com
 ```
 
 ### Resetting to defaults
@@ -210,14 +210,14 @@ Use `sbx policy log` to see which hosts your sandboxes have contacted:
 ```console
 $ sbx policy log
 Blocked requests:
-SANDBOX      TYPE     HOST                   PROXY        RULE            REASON         LAST SEEN        COUNT
-my-sandbox   network  blocked.example.com    transparent  domain-blocked  default-deny   10:15:25 29-Jan  1
+SANDBOX             TYPE     HOST                   PROXY        RULE            REASON         LAST SEEN        COUNT
+claude-my-project   network  blocked.example.com    transparent  domain-blocked  default-deny   10:15:25 29-Jan  1
 
 Allowed requests:
-SANDBOX      TYPE     HOST                   PROXY          RULE             REASON   LAST SEEN        COUNT
-my-sandbox   network  api.anthropic.com      forward        domain-allowed            10:15:23 29-Jan  42
-my-sandbox   network  registry.npmjs.org     forward-bypass domain-allowed            10:15:20 29-Jan  18
-my-sandbox   network  app.example.com        browser-open                             10:15:10 29-Jan  1
+SANDBOX             TYPE     HOST                   PROXY          RULE             REASON   LAST SEEN        COUNT
+claude-my-project   network  api.anthropic.com      forward        domain-allowed            10:15:23 29-Jan  42
+claude-my-project   network  registry.npmjs.org     forward-bypass domain-allowed            10:15:20 29-Jan  18
+claude-my-project   network  app.example.com        browser-open                             10:15:10 29-Jan  1
 ```
 
 The **PROXY** column shows how the request left the sandbox:
@@ -236,7 +236,7 @@ The **RULE** column identifies the policy rule that matched the request. The
 Filter by sandbox name by passing it as an argument:
 
 ```console
-$ sbx policy log my-sandbox
+$ sbx policy log claude-my-project
 ```
 
 Use `--limit N` to show only the last `N` entries, `--json` for

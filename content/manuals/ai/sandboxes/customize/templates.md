@@ -179,7 +179,7 @@ Stop the sandbox (or let the CLI prompt you), then save it with a name and
 tag:
 
 ```console
-$ sbx template save my-sandbox my-template:v1
+$ sbx template save claude-my-project my-template:v1
 ```
 
 The image is stored in the sandbox runtime's local image store. Create a
@@ -209,7 +209,7 @@ To share a saved template or move it to another machine, export it as a
 tar file:
 
 ```console
-$ sbx template save my-sandbox my-template:v1 --output my-template.tar
+$ sbx template save claude-my-project my-template:v1 --output my-template.tar
 ```
 
 On the other machine, load the tar file and use it:
