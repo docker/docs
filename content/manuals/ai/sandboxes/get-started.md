@@ -1,159 +1,270 @@
 ---
 title: Get started with Docker Sandboxes
 linkTitle: Get started
-description: Run AI coding agents in isolated sandboxes. Quick setup guide using Claude Code as an example.
-weight: 20
+weight: 10
+description: Install the sbx CLI, configure credentials, and work through your first sandbox session.
+keywords: sandbox, sbx, get started, install, credentials, branch mode, network policy
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes" >}}
+{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
-This guide shows how to run an AI coding agent in an isolated sandbox for the
-first time, using Claude Code as an example. The same concepts apply to
-[other supported agents](agents/).
+Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
+sandbox gets its own Docker daemon, filesystem, and network — the agent can
+build containers, install packages, and modify files without touching your host
+system.
 
-> [!NOTE]
-> Upgrading from an earlier version of Docker Desktop? See the
-> [migration guide](migration.md) for information about the new microVM
-> architecture.
+This page walks through a typical first session: installing the CLI,
+authenticating your agent, running a sandbox, working with branches, and
+cleaning up.
 
 ## Prerequisites
 
-Before you begin, ensure you have:
+{{< tabs group="os" >}}
+{{< tab name="macOS" >}}
 
-- Docker Desktop 4.58 or later
-- macOS or Windows {{< badge color=violet text=Experimental >}}
-- A Claude API key (can be provided via environment variable or interactively)
+- macOS Sonoma (version 14) or later
+- Apple silicon
+
+{{< /tab >}}
+{{< tab name="Windows" >}}
+
+- 64-bit Intel or AMD (x86_64)
+- Windows 11
+- Windows Hypervisor Platform enabled. Open an elevated PowerShell prompt (Run
+  as Administrator) and run:
+  ```powershell
+  Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -All
+  ```
+
+{{< /tab >}}
+{{< tab name="Linux (Ubuntu)" >}}
+
+- Ubuntu 24.04 or later
+- 64-bit Intel or AMD (x86_64)
+- KVM hardware virtualization supported and enabled by the CPU. If you're
+  running inside a VM, nested virtualization must be turned on. Verify that KVM
+  is available:
+  ```console
+  $ lsmod | grep kvm
+  ```
+  A working setup shows `kvm_intel` or `kvm_amd` in the output. If the output
+  is empty, run `kvm-ok` for diagnostics. If KVM is unavailable, `sbx` will
+  not start.
+- Your user in the `kvm` group:
+  ```console
+  $ sudo usermod -aG kvm $USER
+  ```
+  Log out and back in (or run `newgrp kvm`) for the group change to take effect.
+
+{{< /tab >}}
+{{< /tabs >}}
+
+An API key or authentication method for the agent you want to use. Most agents
+require an API key for their model provider (Anthropic, OpenAI, Google, and
+others). See the [agent pages](agents/) for provider-specific instructions.
+
+Docker Desktop is not required to use `sbx`.
+
+## Install and sign in
+
+{{< tabs group="os" >}}
+{{< tab name="macOS" >}}
+
+```console
+$ brew install docker/tap/sbx
+$ sbx login
+```
+
+{{< /tab >}}
+{{< tab name="Windows" >}}
+
+```powershell
+> winget install -h Docker.sbx
+> sbx login
+```
+
+{{< /tab >}}
+{{< tab name="Linux (Ubuntu)" >}}
+
+```console
+$ curl -fsSL https://get.docker.com | sudo REPO_ONLY=1 sh
+$ sudo apt-get install docker-sbx
+$ sbx login
+```
+
+The first command adds Docker's `apt` repository to your system.
+
+{{< /tab >}}
+{{< /tabs >}}
+
+If you need to install `sbx` manually, download a binary directly from the
+[sbx-releases](https://github.com/docker/sbx-releases/releases) repository.
+
+`sbx login` opens a browser for Docker OAuth. On first login (and after `sbx
+policy reset`), the CLI prompts you to choose a default network policy for your
+sandboxes:
+
+```plaintext
+Choose a default network policy:
+
+     1. Open         — All network traffic allowed, no restrictions.
+     2. Balanced     — Default deny, with common dev sites allowed.
+     3. Locked Down  — All network traffic blocked unless you allow it.
+
+Use ↑/↓ to navigate, Enter to select, or press 1–3.
+```
+
+**Balanced** is a good starting point — it permits traffic to common
+development services while blocking everything else. You can adjust individual
+rules later. See [Policies](security/policy.md) for a full description of each
+option.
+
+> [!NOTE]
+> See the [FAQ](faq.md) for details on why sign-in is required and what
+> happens with your data.
+
+## Authenticate your agent
+
+Agents need credentials for their model provider. How you provide them depends
+on the agent.
+
+For Claude Code with a Claude subscription (Max, Team, or Enterprise), no
+upfront setup is needed — use the `/login` command inside the sandbox to sign
+in with OAuth. The session token stays on your host and is injected by a
+proxy, not stored inside the sandbox.
+
+For agents that use API keys (or if you prefer API key authentication for
+Claude Code), store the key before starting a sandbox:
+
+```console
+$ sbx secret set -g anthropic
+```
+
+This prompts for the secret value and stores it in your OS keychain. A proxy on
+your host injects the key into outbound API requests so it's never exposed
+inside the sandbox. See [Credentials](security/credentials.md) for details on
+scoping, supported services, and alternative methods.
+
+To give the agent access to GitHub for creating pull requests or interacting
+with repositories:
+
+```console
+$ sbx secret set -g github -t "$(gh auth token)"
+```
 
 ## Run your first sandbox
 
-Follow these steps to run a sandbox with Claude Code:
-
-1. (Optional but recommended) Set your Anthropic API key as an environment variable.
-
-   Add the API key to your shell configuration file:
-
-   ```plaintext {title="~/.bashrc or ~/.zshrc"}
-   export ANTHROPIC_API_KEY=sk-ant-api03-xxxxx
-   ```
-
-   Docker Sandboxes use a daemon process that runs independently of your
-   current shell session. This means setting the environment variable inline or
-   in your current session will not work. You must set it globally in your
-   shell configuration file to ensure the daemon can access it.
-
-   Apply the changes:
-   1. Source your shell configuration.
-   2. Restart Docker Desktop so the daemon picks up the new environment variable.
-
-   Alternatively, you can skip this step and authenticate interactively when
-   Claude Code starts. Interactive authentication is less secure and requires
-   you to re-authenticate for each workspace. See
-   [Credential security](workflows.md#credential-security) for details.
-
-2. Create and run a sandbox for Claude Code for your workspace:
-
-   ```console
-   $ docker sandbox run claude [PATH]
-   ```
-
-   This creates a microVM sandbox. Docker assigns it a name automatically based
-   on the agent and workspace directory (`claude-somedir`). If that name is
-   already in use, Docker appends a number.
-
-   The workspace parameter is optional and defaults to your current directory
-   if omitted:
-
-   ```console
-   $ cd ~/my-project
-   $ docker sandbox run claude
-   ```
-
-   You can also mount multiple workspaces. Append `:ro` for read-only access:
-
-   ```console
-   $ docker sandbox run claude ~/my-project ~/docs:ro
-   ```
-
-3. Claude Code starts and you can begin working. The first run takes longer
-   while Docker initializes the microVM and pulls the template image.
-
-## What just happened?
-
-When you ran `docker sandbox run`:
-
-- Docker created a lightweight microVM with a private Docker daemon
-- The sandbox was assigned a name based on the workspace path
-- Your workspace synced into the VM
-- Docker started the Claude Code agent as a container inside the sandbox VM
-
-The sandbox persists until you remove it. Installed packages and configuration
-remain available. Run `docker sandbox run <sandbox-name>` again to reconnect.
-
-> [!NOTE]
-> Agents can modify files in your workspace. Review changes before executing
-> code or performing actions that auto-run scripts. See
-> [Security considerations](workflows.md#security-considerations) for details.
-
-## Basic commands
-
-Here are essential commands to manage your sandboxes:
-
-### List sandboxes
+Pick a project directory and launch an agent with
+[`sbx run`](/reference/cli/sbx/run/):
 
 ```console
-$ docker sandbox ls
+$ cd ~/my-project
+$ sbx run claude
 ```
 
-Shows all your sandboxes with their IDs, names, status, workspace paths, and
-creation time. Workspace paths are shown for both running and stopped sandboxes.
+Replace `claude` with the agent you want to use — see [Agents](agents/) for the
+full list.
 
-> [!NOTE]
-> Sandboxes don't appear in `docker ps` because they're microVMs, not
-> containers. Use `docker sandbox ls` to see them.
+The first run takes a little longer while the agent image is pulled. Subsequent
+runs reuse the cached image and start in seconds.
 
-### Access a running sandbox
+You can check what's running at any time:
 
 ```console
-$ docker sandbox exec -it <sandbox-name> bash
+$ sbx ls
+SANDBOX              AGENT    STATUS    PORTS   WORKSPACE
+claude-my-project    claude   running           ~/my-project
 ```
 
-Executes a command inside the container in the sandbox. Use `-it` to open an
-interactive shell for debugging or installing additional tools.
+You can also run `sbx` with no arguments to open an interactive dashboard.
+The dashboard shows your sandboxes with live status, lets you attach to
+agents, open shells, and manage network rules from one place. See
+[Interactive mode](usage.md#interactive-mode) for details.
 
-### Remove a sandbox
+![The interactive dashboard showing sandbox status, resource usage, and network governance controls.](images/sbx-dashboard.png)
+
+## Use branch mode
+
+By default, the agent edits your working tree directly. To give it its own
+Git branch, use `--branch`:
 
 ```console
-$ docker sandbox rm <sandbox-name>
+$ sbx run claude --branch my-feature
 ```
 
-Deletes the sandbox VM and all installed packages inside it. You can remove
-multiple sandboxes at once by specifying multiple names:
+This creates a [Git worktree](https://git-scm.com/docs/git-worktree) under
+`.sbx/` in your repository root. The agent works on its own branch and
+directory without touching your main working tree.
+
+When the session ends, review what the agent did from the worktree:
 
 ```console
-$ docker sandbox rm <sandbox-1> <sandbox-2>
+$ cd .sbx/<sandbox-name>-worktrees/my-feature
+$ git log
+$ git diff main
 ```
 
-### Recreate a sandbox
-
-To start fresh with a clean environment, remove and recreate the sandbox:
+If you're satisfied, push the branch and open a pull request:
 
 ```console
-$ docker sandbox rm <sandbox-name>
-$ docker sandbox run claude [PATH]
+$ git push -u origin my-feature
+$ gh pr create
 ```
 
-Configuration like custom templates and workspace paths are set when you create
-the sandbox. To change these settings, remove and recreate.
+Branch mode is especially useful when running multiple agents on the same
+repository — each gets its own branch and can't overwrite the other's changes.
+See [Branch mode](usage.md#branch-mode) for more options, including
+`--branch auto` and multiple branches per sandbox.
 
-For a complete list of commands and options, see the
-[CLI reference](/reference/cli/docker/sandbox/).
+## Manage network access
+
+Your network policy controls what the sandbox can reach. If the agent fails to
+connect to an API or service, it's likely blocked by the policy.
+
+Check which rules are in effect:
+
+```console
+$ sbx policy ls
+```
+
+To allow a specific host:
+
+```console
+$ sbx policy allow network -g registry.npmjs.org
+```
+
+With **Locked Down**, even your model provider API is blocked unless you
+explicitly allow it. With **Balanced**, common development services are
+permitted by default. See [Policies](security/policy.md) for the full rule
+set and how to customize it.
+
+## Clean up
+
+Sandboxes persist after the agent exits. To stop a sandbox without deleting it:
+
+```console
+$ sbx stop my-sandbox
+```
+
+Installed packages, Docker images, and configuration changes are preserved
+across restarts. When you're done with a sandbox, remove it to reclaim disk
+space:
+
+```console
+$ sbx rm my-sandbox
+```
+
+Removing a sandbox deletes everything inside it — installed packages, Docker
+images, and any branch mode worktrees under `.sbx/`. Files in your main
+working tree are unaffected.
 
 ## Next steps
 
-Now that you have an agent running in a sandbox, learn more about:
-
-- [Supported agents](agents/_index.md)
-- [Using sandboxes effectively](workflows.md)
-- [Custom templates](templates.md)
-- [Network policies](network-policies.md)
-- [Troubleshooting](troubleshooting.md)
+- [Usage guide](usage.md) — sandbox management, reconnecting, multiple
+  workspaces, port forwarding, and more
+- [Agents](agents/) — supported agents and configuration
+- [Customize](customize/) — build reusable templates or declare capabilities
+  with kits
+- [Credentials](security/credentials.md) — credential storage and management
+- [Workspace trust](security/workspace.md) — review agent changes safely
+- [Policies](security/policy.md) — control outbound access

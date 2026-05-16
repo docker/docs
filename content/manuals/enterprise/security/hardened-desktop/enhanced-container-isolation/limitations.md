@@ -17,7 +17,10 @@ Enhanced Container Isolation has some platform-specific limitations and feature 
 
 > [!NOTE]
 >
-> Docker Desktop requires WSL 2 version 2.1.5 or later. Check your version with `wsl --version` and update with `wsl --update` if needed.
+> Docker Desktop requires WSL 2 version 2.1.5 or later. ECI on the WSL 2 backend
+> requires WSL version 2.6 or later because ECI depends on a Linux kernel version
+> of at least 6.3.0. Check your version with `wsl --version` and update with
+> `wsl --update` if needed.
 
 Enhanced Container Isolation provides different security levels depending on your Windows backend configuration.
 
@@ -69,31 +72,24 @@ $ docker buildx create --driver docker-container --use
 $ docker buildx build --network=host .
 ```
 
-## Docker Desktop Kubernetes not protected
+## Docker Desktop Kubernetes not protected in Kubeadm mode
 
-The integrated Kubernetes feature doesn't benefit from ECI protection. Malicious or privileged pods can compromise the Docker Desktop VM and bypass security controls.
+The integrated Kubernetes feature, when used with the legacy Kubeadm provisioner, doesn't benefit from ECI protection. Malicious or privileged pods can compromise the Docker Desktop VM and bypass security controls.
 
 ### Recommendation
 
-Use Kubernetes in Docker (KinD) for ECI-protected Kubernetes:
-
-```console
-$ kind create cluster
-```
-
-With ECI turned on, each Kubernetes node runs in an ECI-protected container, providing stronger isolation from the Docker Desktop VM.
+Use the newer Docker Desktop Kubernetes "KinD" provisioner (see [Cluster provisioning method](/manuals/desktop/use-desktop/kubernetes.md#cluster-provisioning-method)). In this mode, and with ECI turned on, each Kubernetes node runs in an ECI-protected container, providing stronger isolation from the Docker Desktop VM. The KinD provisioner is also faster and allows for multi-node Kubernetes clusters.
 
 ## Unprotected container types
 
 These container types currently don't benefit from ECI protection:
 
 - Docker Extensions: Extension containers run without ECI protection
-- Docker Debug: Docker Debug containers bypass ECI restrictions
-- Kubernetes pods: When using Docker Desktop's integrated Kubernetes
+- Kubernetes pods: When using Docker Desktop's integrated Kubernetes with the old Kubeadm provisioner.
 
 ### Recommendation
 
-Only use extensions from trusted sources and avoid Docker Debug in security-sensitive environments.
+Only use extensions from trusted sources in security-sensitive environments.
 
 ## Global command restrictions
 
@@ -141,17 +137,6 @@ When allowed images are updated in registries, local containers may be unexpecte
 $ docker image rm <image>
 $ docker pull <image>
 ```
-
-## Version compatibility
-
-ECI features have been introduced across different Docker Desktop versions:
-
-- Docker Desktop 4.36 and later: Wildcard allowlist support (`"*"`) and improved derived images handling
-- Docker Desktop 4.34 and later: Derived images support (`allowDerivedImages`)
-- Docker Desktop 4.30 and later: Docker Build protection with default driver (except WSL 2)
-- Docker Desktop 4.13 and later: Core ECI functionality
-
-For the latest feature availability, use the most recent Docker Desktop version.
 
 ## Production compatibility
 

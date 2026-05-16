@@ -1,6 +1,12 @@
 command: docker sandbox run
 short: Run an agent in a sandbox
 long: |-
+    > [!WARNING]
+    > The Docker Desktop-integrated `docker sandbox` commands are deprecated and
+    > replaced by the standalone [`sbx` CLI](/manuals/ai/sandboxes/_index.md).
+    > This deprecation applies only to the Docker Desktop integration, not to Docker
+    > Sandboxes.
+
     Run an agent in a sandbox. Create the sandbox if it does not exist.
 
     Pass agent arguments after the "--" separator.

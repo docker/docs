@@ -1,23 +1,30 @@
 name: PR Review
-
 on:
   issue_comment:
     types: [created]
-  pull_request_review_comment:
-    types: [created]
-  pull_request_target:
-    types: [ready_for_review, opened]
+  workflow_run:
+    workflows: ["PR Review - Trigger"]
+    types: [completed]
 
 permissions:
-  contents: read
-  pull-requests: write
-  issues: write
+  contents: read # Required at top-level to give `issue_comment` events access to the secrets below.
 
 jobs:
   review:
-    uses: docker/cagent-action/.github/workflows/review-pr.yml@latest
-    secrets: inherit
+    if: |
+      github.event_name == 'issue_comment' ||
+      github.event.workflow_run.conclusion == 'success'
+    uses: docker/cagent-action/.github/workflows/review-pr.yml@f208610469d69f20983cad64c577949a132caa33 # v1.5.3
+    # Scoped to the job so other jobs in this workflow aren't over-permissioned
+    permissions:
+      contents: read # Read repository files and PR diffs
+      pull-requests: write # Post review comments
+      issues: write # Create security incident issues if secrets detected
+      checks: write # (Optional) Show review progress as a check run
+      id-token: write # Required for OIDC authentication to AWS Secrets Manager
+      actions: read # Download artifacts from trigger workflow
     with:
+      trigger-run-id: ${{ github.event_name == 'workflow_run' && format('{0}', github.event.workflow_run.id) || '' }}
       add-prompt-files: STYLE.md,COMPONENTS.md
       additional-prompt: |
         ## Documentation Review Focus

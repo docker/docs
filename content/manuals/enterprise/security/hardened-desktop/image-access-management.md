@@ -1,7 +1,7 @@
 ---
 title: Image Access Management
 description: Control which Docker Hub images developers can access with Image Access Management for enhanced supply chain security
-keywords: image access management, docker official images, verified publisher, supply chain security, docker business, allow list
+keywords: image access management, docker official images, verified publisher, supply chain security, docker business, allow list, image restrictions, pull restrictions
 tags: [admin]
 aliases:
  - /docker-hub/image-access-management/
@@ -9,7 +9,7 @@ aliases:
  - /admin/organization/image-access/
  - /security/for-admins/image-access-management/
  - /security/for-admins/hardened-desktop/image-access-management/
-weight: 40
+weight: 50
 ---
 
 {{< summary-bar feature_name="Hardened Docker Desktop" >}}
@@ -23,7 +23,7 @@ With Image Access Management, you can restrict access to:
 - Organization images: Your organization's private repositories
 - Community images: Public images from individual developers
 
-You can also use a repository allow list to approve specific repositories that bypass all other access controls.
+You can also use a repository allowlist to approve specific repositories that bypass all other access controls.
 
 ## Who should use Image Access Management?
 
@@ -36,7 +36,7 @@ Common security scenarios include:
 - Control access to commercial third-party images
 - Maintain consistent security standards across development teams
 
-Use the repository allow list when you need to:
+Use the repository allowlist when you need to:
 
 - Grant access to specific vetted community images
 - Allow essential third-party tools that don't fall under official categories
@@ -46,15 +46,15 @@ Use the repository allow list when you need to:
 
 Before configuring Image Access Management, you must:
 
-- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) to ensure users authenticate with your organization
+- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md). Image Access Management only takes effect when users are signed in to Docker Desktop with organization credentials.
 - Use [personal access tokens (PATs)](/manuals/security/access-tokens.md) for authentication (Organization access tokens aren't supported)
 - Have a Docker Business subscription
 
-> [!IMPORTANT]
->
-> Image Access Management only takes effect when users are signed in to Docker Desktop with organization credentials.
-
 ## Configure image access
+
+> [!NOTE]
+>
+> Image Access Management is turned off by default for organization members. Organization owners always have access to all images regardless of policy settings.
 
 To configure Image Access Management:
 
@@ -66,22 +66,18 @@ To configure Image Access Management:
     - **Community images**: Images contributed by various users that may pose security risks. This category includes Docker-Sponsored Open Source images and is turned off by default.
     - **Docker Verified Publisher Images**: Images from Docker partners in the Verified Publisher program, qualified for secure supply chains.
     - **Docker Official Images**: Curated Docker repositories that provide OS repositories, best practices for Dockerfiles, drop-in solutions, and timely security updates.
-    - **Repository allow list**: A list of specific repositories that should be
+    - **Repository allowlist**: A list of specific repositories that should be
       allowed. Configure in the next step.
-1. Optionally, when **Repository allow list** is enabled in the previous step,
+1. If **Repository allowlist** is enabled in the previous step,
    you can add or remove specific repositories in the allow list:
-    - To add repositories, in the **Repository allow list** section, select
-      **Add repositories to allow list** and follow the on-screen instructions.
-    - To remove a repository, in the **Repository allow list** section, select
+    - To add repositories, in the **Repository allowlist** section, select
+      **Add repositories to allowlist** and follow the on-screen instructions.
+    - To remove a repository, in the **Repository allowlist** section, select
       the trashcan icon next to it.
 
     Repositories in the allow list are accessible to all organization members regardless of the image type restrictions configured in the previous steps.
 
-Once restrictions are applied, organization members can view the permissions page in read-only format.
-
-> [!NOTE]
->
-> Image Access Management is turned off by default. Organization owners have access to all images regardless of policy settings.
+After restrictions are applied, organization members can view the permissions page in read-only format.
 
 ## Verify access restrictions
 
@@ -103,23 +99,22 @@ Error response from daemon: image access denied: community images not allowed
 
 Image access restrictions apply to all Docker Hub operations including pulls, builds using `FROM` instructions, and Docker Compose services.
 
-## Security implementation
+## Best practices
 
-Start with the most restrictive policy and gradually expand based on legitimate business needs:
-
-1. Start with: Docker Official Images and Organization images
-2. Add if needed: Docker Verified Publisher Images for commercial tools
-3. Carefully evaluate: Community images only for specific, vetted use cases
-4. Use the repository allow list sparingly: Only add repositories that have been thoroughly vetted and approved through your organization's security review process
-
-Other security recommendations include:
-
+- Start with the most restrictive policy and gradually expand based on legitimate business needs:
+   1. Start with Docker Official Images and Organization images
+   2. If needed, add Docker Verified Publisher Images for commercial tools
+   3. Carefully evaluate community images only for specific, vetted use cases
+   4. Use the repository allowlist sparingly. Only add repositories that have been thoroughly vetted and approved through your organization's security review process
 - Monitor usage patterns: Review which images developers are attempting to pull, identify legitimate requests for additional image types, regularly audit approved image categories for continued relevance, and use Docker Desktop analytics to monitor usage patterns.
-- Regularly review the repository allow list: Periodically audit the repositories in your allow list to ensure they remain necessary and trustworthy, and remove any that are no longer needed or maintained.
-- Layer security controls: Image Access Management works best with Registry Access Management to control which registries developers can access, Enhanced Container Isolation to secure containers at runtime, and Settings Management to control Docker Desktop configuration.
+- Regularly review the repository allow list: Periodically audit the repositories in your allowlist to ensure they remain necessary and trustworthy, and remove any that are no longer needed or maintained.
 
 ## Scope and bypass considerations
 
 - Image Access Management only controls access to Docker Hub images. Images from other registries aren't affected by these policies. Use [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) to control access to other registries.
 - Users can potentially bypass Image Access Management by signing out of Docker Desktop (unless sign-in is enforced), using images from other registries that aren't restricted, or using registry mirrors or proxies. Enforce sign-in and combine with Registry Access Management for comprehensive control.
 - Image restrictions apply to Dockerfile `FROM` instructions, Docker Compose services using restricted images will fail, multi-stage builds may be affected if intermediate images are restricted, and CI/CD pipelines using diverse image types may be impacted.
+
+## Next steps
+
+- Layer security controls: Image Access Management works best with [Registry Access Management](registry-access-management.md) to control which registries developers can access, [Enhanced Container Isolation](enhanced-container-isolation/_index.md) to secure containers at runtime, and [Settings Management](settings-management/_index.md) to control Docker Desktop configuration.

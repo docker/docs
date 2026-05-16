@@ -71,16 +71,9 @@ Terms](https://www.docker.com/legal/docker-ai-supplemental-terms/).
 
 ## Organizational data policies
 
-For Business subscriptions, administrators can control Gordon access for their
-organization using Settings Management.
-
-Available controls:
-
-- Enable or disable Gordon for the organization
-- Set usage limits by subscription tier
-
-Administrators should review their organization's data handling requirements
-before enabling Gordon.
+For Business subscriptions, administrators can enable or disable Gordon for
+their organization using Settings Management. Review your organization's data
+handling requirements before enabling Gordon.
 
 See [Settings Management](/enterprise/security/hardened-desktop/settings-management/)
 for configuration details.

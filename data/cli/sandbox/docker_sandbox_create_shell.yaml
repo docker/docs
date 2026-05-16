@@ -1,6 +1,12 @@
 command: docker sandbox create shell
 short: Create a sandbox for shell
 long: |-
+    > [!WARNING]
+    > The Docker Desktop-integrated `docker sandbox` commands are deprecated and
+    > replaced by the standalone [`sbx` CLI](/manuals/ai/sandboxes/_index.md).
+    > This deprecation applies only to the Docker Desktop integration, not to Docker
+    > Sandboxes.
+
     Create a sandbox with access to a host workspace for shell.
 
     The workspace path is required and will be exposed inside the sandbox at the same path as on the host.

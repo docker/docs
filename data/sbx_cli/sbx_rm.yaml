@@ -1,0 +1,30 @@
+name: sbx rm
+synopsis: Remove one or more sandboxes
+description: |-
+    Remove one or more sandboxes and all associated resources.
+
+    Stops running sandboxes, removes their containers, cleans up any Git
+    worktrees, and deletes sandbox state. This action cannot be undone.
+
+    Use --all to remove every sandbox (requires confirmation).
+    Use --force to skip confirmation prompts (for non-interactive scripts).
+usage: sbx rm [SANDBOX...] [flags]
+options:
+    - name: all
+      default_value: "false"
+      usage: Remove all sandboxes
+    - name: force
+      shorthand: f
+      default_value: "false"
+      usage: Skip confirmation prompts
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for rm
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx - Manage AI coding agent sandboxes.

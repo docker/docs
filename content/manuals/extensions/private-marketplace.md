@@ -17,7 +17,7 @@ Docker Extensions' private marketplace is designed specifically for organization
 
 ## Prerequisites
 
-- [Download and install Docker Desktop 4.26.0 or later](https://docs.docker.com/desktop/release-notes/).
+- [Download and install Docker Desktop](https://docs.docker.com/desktop/release-notes/).
 - You must be an administrator for your organization.
 - You have the ability to push the `extension-marketplace` folder and `admin-settings.json` file to the locations specified below through device management software such as [Jamf](https://www.jamf.com/).
 
@@ -43,7 +43,11 @@ Docker Extensions' private marketplace is designed specifically for organization
    {{< tab name="Windows" >}}
 
    ```console
+   # For all-user installations
    $ C:\Program Files\Docker\Docker\resources\bin\extension-admin init
+
+   # For per-user installations
+   $ %LOCALAPPDATA%\Programs\DockerDesktop\resources\bin\extension-admin init
    ```
 
    {{< /tab >}}
@@ -128,7 +132,11 @@ $ /Applications/Docker.app/Contents/Resources/bin/extension-admin generate
 {{< tab name="Windows" >}}
 
 ```console
+# For all-user installations
 $ C:\Program Files\Docker\Docker\resources\bin\extension-admin generate
+
+# For per-user installations
+$ %LOCALAPPDATA%\Programs\DockerDesktop\resources\bin\extension-admin generate
 ```
 
 {{< /tab >}}
@@ -166,7 +174,11 @@ It's recommended that you try the private marketplace on your Docker Desktop ins
    {{< tab name="Windows (run as admin)" >}}
 
    ```console
+   # For all-user installations
    $ C:\Program Files\Docker\Docker\resources\bin\extension-admin apply
+
+   # For per-user installations
+   $ %LOCALAPPDATA%\Programs\DockerDesktop\resources\bin\extension-admin apply
    ```
 
    {{< /tab >}}
@@ -184,7 +196,7 @@ It's recommended that you try the private marketplace on your Docker Desktop ins
 
 > [!IMPORTANT]
 >
-> > If your org is managing settings via the [Admin Console](manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console/_index.md), with Docker Desktop version 4.59 and earlier you need to manually delete the `admin-settings.json` file that has been created in the target folder by the `apply` command before step 2. 
+> > If your org is managing settings via the [Admin Console](manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console/_index.md), in Docker Desktop 4.59 and earlier, you must manually delete the `admin-settings.json` file created in the target folder by the `apply` command before step 2. In Docker Desktop 4.60 and later, this step is no longer necessary. 
 
 When you select the **Extensions** tab, you should see the private marketplace listing only the extensions you have allowed in `extensions.txt`.
 

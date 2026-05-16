@@ -7,14 +7,9 @@ aliases:
   - /manuals/ai/cagent/
 params:
   sidebar:
-    group: Open source
-    badge:
-      color: violet
-      text: Experimental
+    group: AI and agents
 keywords: [ai, agent, docker agent, cagent]
 ---
-
-{{< summary-bar feature_name="Docker Agent" >}}
 
 [Docker Agent](https://github.com/docker/docker-agent) is an open-source framework
 for building teams of specialized AI agents. Instead of prompting one

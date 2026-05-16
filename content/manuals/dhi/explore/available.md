@@ -79,7 +79,7 @@ For example, you might find tags like the following in a DHI repository:
 - `3.9.23-debian12`: runtime image for Python 3.9.23
 - `3.9.23-debian12-dev`: development image for Python 3.9.23
 
-## FIPs and STIG variants {tier="DHI Select & Enterprise"}
+## FIPs and STIG variants
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
 

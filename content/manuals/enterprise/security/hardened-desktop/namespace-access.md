@@ -4,7 +4,7 @@ linkTitle: Namespace access
 description: Control whether organization members can push content to their personal namespaces on Docker Hub
 keywords: namespace access, docker hub, personal namespace, organization security, docker business
 tags: [admin]
-weight: 50
+weight: 60
 ---
 
 {{< summary-bar feature_name="Namespace access" >}}
@@ -16,7 +16,7 @@ outside of approved, governed locations.
 
 When namespace access control is enabled, organization members can still view and pull images
 from their personal namespaces and continue accessing all existing repositories
-and content. However, they will no longer be able to create new repositories or
+and content. However, they're unable to create new repositories or
 push new images to their personal namespace.
 
 > [!IMPORTANT]
@@ -36,7 +36,7 @@ To configure namespace access control:
 4. Select **Save changes**.
 
 Once namespace access control is enabled, organization members can still view their
-personal namespace and existing repositories but they will not be able to create
+personal namespace and existing repositories but they are not able to create
 any new repositories or push any new images to existing repositories.
 
 ### Verify access restrictions

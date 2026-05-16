@@ -55,7 +55,7 @@ steps:
   - run:
       name: Scan image for CVEs
       command: |
-        docker-scout cves $IMAGE_TAG --exit-code --only-severity critical,high
+        docker scout cves $IMAGE_TAG --exit-code --only-severity critical,high
 ```
 
 This checks out the repository files and then sets up a separate Docker

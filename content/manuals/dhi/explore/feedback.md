@@ -3,7 +3,7 @@ title: Give feedback
 linkTitle: Feedback
 description: How to interact with the DHI team
 keywords: software supply chain security, feedback, bugs, discussion, questions
-weight: 50
+weight: 999
 aliases:
   - /dhi/about/feedback/
 ---

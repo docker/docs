@@ -35,6 +35,13 @@ IPv6 is only supported on Docker daemons running on Linux hosts.
            - subnet: 2001:db8::/64
   ```
 
+> [!NOTE]
+>
+> The address `2001:db8::/64` in these examples is
+> [reserved for use in documentation][wikipedia-ipv6-reserved].
+> Replace it with a valid IPv6 network, for example a
+> [Unique Local Address (ULA)][wikipedia-ipv6-ula] subnet from `fd00::/8`.
+
 You can now run containers that attach to the `ip6net` network.
 
 ```console
@@ -73,6 +80,13 @@ The following steps show you how to use IPv6 on the default bridge network.
      "fixed-cidr-v6": "2001:db8:1::/64"
    }
    ```
+
+   > [!NOTE]
+   >
+   > The address `2001:db8:1::/64` in this example is
+   > [reserved for use in documentation][wikipedia-ipv6-reserved].
+   > Replace it with a valid IPv6 network, for example a
+   > [Unique Local Address (ULA)][wikipedia-ipv6-ula] subnet from `fd00::/8`.
 
    - `ipv6` enables IPv6 networking on the default network.
    - `fixed-cidr-v6` assigns a subnet to the default bridge network,

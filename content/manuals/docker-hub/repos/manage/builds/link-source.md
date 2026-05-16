@@ -11,6 +11,10 @@ aliases:
 - /docker-hub/builds/link-source/
 ---
 
+> [!WARNING]
+> Docker Hub Automated Builds is a deprecated feature.
+> It will be fully retired on April 1, 2027.
+
 > [!NOTE]
 >
 > Automated builds require a Docker Pro, Team, or Business subscription.
@@ -21,7 +25,7 @@ code service to Docker Hub so that it can access your source code
 repositories. You can configure this link for user accounts or
 organizations.
 
-If you are linking a source code provider to create autobuilds for a team, follow the instructions to [create a service account](index.md#service-users-for-team-autobuilds) for the team before linking the account as described below.
+If you are linking a source code provider to create autobuilds for a team, follow the instructions to [create a service account](setup.md#service-users-for-team-autobuilds) for the team before linking the account as described below.
 
 ## Link to a GitHub user account
 

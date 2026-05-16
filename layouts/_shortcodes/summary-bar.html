@@ -1,5 +1,5 @@
 {{ $featureName := .Get "feature_name" }}
-{{ $feature := index site.Data.summary $featureName }}
+{{ $feature := index hugo.Data.summary $featureName }}
 {{ if not $feature }}
   {{ errorf "[summary-bar] invalid feature: %s %v" $featureName .Position }}
 {{ end }}
@@ -12,6 +12,7 @@
     "Available to all" "public"
     "Docker Hardened Images Enterprise" "/icons/dhi.svg"
     "Docker Hardened Images Select or Enterprise" "/icons/dhi.svg"
+    "Docker Offload" "cloud"
   }}
   {{ $availabilityIcons := dict
     "Experimental" "science"

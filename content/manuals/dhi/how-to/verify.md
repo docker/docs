@@ -63,6 +63,14 @@ This command shows all available attestations, including SBOMs, provenance, vuln
 First, authenticate to both registries. Prepare a [personal access token
 (PAT)](../../security/access-tokens.md) for your user with `read only` access:
 
+> [!WARNING]
+>
+> The following examples export credentials directly on the command line for
+> demonstration purposes. This exposes sensitive tokens in your shell history
+> and process list. In production environments, use secure methods such as
+> reading from files with restricted permissions, environment files loaded
+> at runtime, or secret management tools.
+
 ```console
 $ export DOCKER_USERNAME="YOUR_DOCKER_USERNAME"
 $ export DOCKER_PAT="YOUR_DOCKER_PAT"
@@ -384,7 +392,7 @@ list of attestations available for each DHI chart.
 ## Explore attestations on Docker Hub
 
 You can also browse attestations visually when [exploring an image
-variant](./explore.md#view-image-variant-details). The **Attestations** section
+variant](./explore.md#image-variant-details). The **Attestations** section
 lists each available attestation with its:
 
 - Type (e.g. SBOM, VEX)

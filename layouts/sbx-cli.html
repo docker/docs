@@ -1,0 +1,179 @@
+{{ define "article" }}
+  {{ $data := index hugo.Data.sbx_cli .Params.datafile }}
+
+  {{ .Store.Set "headings" slice }}
+  <article class="prose min-w-0 max-w-4xl dark:prose-invert">
+    {{ partial "breadcrumbs.html" . }}
+    <div class="flex items-start justify-between gap-4">
+      <h1>{{ .Title }}</h1>
+    </div>
+
+    {{- /* Summary table */ -}}
+    <div class="overflow-x-auto">
+      <table>
+        <tbody>
+          {{ with $data.synopsis }}
+          <tr>
+            <th class="text-left w-32">Description</th>
+            <td>{{ . }}</td>
+          </tr>
+          {{ end }}
+          {{ with $data.usage }}
+          <tr>
+            <th class="text-left w-32">Usage</th>
+            <td><code>{{ . }}</code></td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
+
+    {{- /* Description */ -}}
+    {{ with $data.description }}
+      {{ $heading := dict "level" 2 "text" "Description" }}
+      {{ partialCached "heading.html" $heading "sbx-cli-description" }}
+      {{ $.Store.Add "headings" $heading }}
+      {{ . | $.RenderString (dict "display" "block") }}
+    {{ end }}
+
+    {{- /* Subcommands (for section pages) */ -}}
+    {{ if eq .Kind "section" }}
+      {{ $heading := dict "level" 2 "text" "Commands" }}
+      {{ partialCached "heading.html" $heading "sbx-cli-commands" }}
+      {{ $.Store.Add "headings" $heading }}
+      <table>
+        <thead>
+          <tr>
+            <th class="text-left">Command</th>
+            <th class="text-left">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range .Pages }}
+            {{ if .Params.datafile }}
+              {{ $child := index hugo.Data.sbx_cli .Params.datafile }}
+              <tr>
+                <td class="text-left"><a class="link" href="{{ .Permalink }}"><code>{{ .Title }}</code></a></td>
+                <td class="text-left">{{ $child.synopsis }}</td>
+              </tr>
+            {{ end }}
+          {{ end }}
+        </tbody>
+      </table>
+    {{ end }}
+
+    {{- /* Options */ -}}
+    {{ with $data.options }}
+      {{ $opts := where . "name" "ne" "help" }}
+      {{ with $opts }}
+        {{ $heading := dict "level" 2 "text" "Options" }}
+        {{ partialCached "heading.html" $heading "sbx-cli-options" }}
+        {{ $.Store.Add "headings" $heading }}
+        <div class="overflow-x-auto">
+          <table>
+            <thead class="bg-gray-100 dark:bg-gray-800">
+              <tr>
+                <th class="p-2">Option</th>
+                <th class="p-2">Default</th>
+                <th class="p-2">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ range . }}
+                <tr>
+                  <td>
+                    <code>{{ with .shorthand }}-{{ . }}, {{ end }}--{{ .name }}</code>
+                  </td>
+                  {{ $skipDefault := `[],false,` }}
+                  <td>
+                    {{ with .default_value }}
+                      {{ cond (in $skipDefault .) "" (printf "<code>%s</code>" . | safeHTML) }}
+                    {{ end }}
+                  </td>
+                  <td>
+                    {{ with .usage }}
+                      {{ strings.TrimSpace . }}
+                    {{ end }}
+                  </td>
+                </tr>
+              {{ end }}
+            </tbody>
+          </table>
+        </div>
+      {{ end }}
+    {{ end }}
+
+    {{- /* Inherited (global) options */ -}}
+    {{ with $data.inherited_options }}
+      {{ $opts := where . "name" "ne" "help" }}
+      {{ with $opts }}
+        {{ $heading := dict "level" 2 "text" "Global options" }}
+        {{ partialCached "heading.html" $heading "sbx-cli-global-options" }}
+        {{ $.Store.Add "headings" $heading }}
+        <div class="overflow-x-auto">
+          <table>
+            <thead class="bg-gray-100 dark:bg-gray-800">
+              <tr>
+                <th class="p-2">Option</th>
+                <th class="p-2">Default</th>
+                <th class="p-2">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ range . }}
+                <tr>
+                  <td>
+                    <code>{{ with .shorthand }}-{{ . }}, {{ end }}--{{ .name }}</code>
+                  </td>
+                  {{ $skipDefault := `[],false,` }}
+                  <td>
+                    {{ with .default_value }}
+                      {{ cond (in $skipDefault .) "" (printf "<code>%s</code>" . | safeHTML) }}
+                    {{ end }}
+                  </td>
+                  <td>
+                    {{ with .usage }}
+                      {{ strings.TrimSpace . }}
+                    {{ end }}
+                  </td>
+                </tr>
+              {{ end }}
+            </tbody>
+          </table>
+        </div>
+      {{ end }}
+    {{ end }}
+
+    {{- /* Examples */ -}}
+    {{ with $data.example }}
+      {{ $heading := dict "level" 2 "text" "Examples" }}
+      {{ partialCached "heading.html" $heading "sbx-cli-examples" }}
+      {{ $.Store.Add "headings" $heading }}
+      {{- /* Dedent: strip up to 6 leading spaces from each line */ -}}
+      {{ $dedented := replaceRE `(?m)^ {2,6}` "" . }}
+      {{ $code := printf "```console\n%s\n```" (strings.TrimSpace $dedented) }}
+      {{ $code | $.RenderString (dict "display" "block") }}
+    {{ end }}
+
+  </article>
+{{ end }}
+
+{{ define "right" }}
+  <div class="hidden min-w-52 flex-1 lg:block">
+    <aside class="sticky top-16 h-[calc(100vh-64px)] min-w-52 space-y-4 overflow-y-auto py-4 w-full">
+      <div id="TableOfContents">
+        <div class="text-lg pb-2">{{ T "tableOfContents" }}</div>
+        <nav class="toc">
+          <ul>
+            {{ range (.Store.Get "headings") }}
+              {{ $text := .text }}
+              <li{{ with .level }} class="pl-{{ . }}"{{ end }}>
+                <a href="#{{ $text | anchorize }}">{{ markdownify $text }}</a>
+              </li>
+            {{ end }}
+          </ul>
+        </nav>
+      </div>
+    </aside>
+  </div>
+{{ end }}

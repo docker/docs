@@ -24,13 +24,16 @@
             How can we help?
           </h1>
           <!-- AI Search Input -->
-          <div class="py-6 mx-auto max-w-2xl" x-data="{ query: '' }">
+          <div class="mx-auto max-w-2xl py-6" x-data="{ query: '' }">
             <div
-              class="flex items-center gap-3 rounded-2xl border-2 border-gray-200 bg-white p-4 shadow-lg transition focus-within:scale-[1.02] focus-within:border-blue-500 hover:border-blue-500 dark:border-gray-700 dark:bg-gray-900"
+              class="group flex items-center gap-3 rounded-2xl border-2 border-gray-200 bg-white p-4 shadow-lg transition focus-within:scale-[1.02] focus-within:border-blue-500 hover:border-blue-500 dark:border-gray-700 dark:bg-gray-900"
             >
-              <div class="shrink-0 rounded-xl bg-blue-500 p-2 text-white">
-                <span class="icon-svg-stroke">
-                  {{ partial "icon" "icons/sparkle.svg" }}
+              <div class="shrink-0 rounded-xl text-blue-500">
+                <span class="icon-svg group-hover:hidden">
+                  {{ partialCached "icon" "icons/gordon.svg" "icons/gordon.svg" }}
+                </span>
+                <span class="icon-svg hidden group-hover:block">
+                  {{ partialCached "icon" "icons/gordon-happy.svg" "icons/gordon-happy.svg" }}
                 </span>
               </div>
               <input
@@ -56,7 +59,7 @@
           <div class="mt-6 flex flex-wrap justify-center gap-3" x-data>
             {{ range slice
               "How do I get started with Docker?"
-			  "Can I run my AI agent in a sandbox?"
+              "Can I run my AI agent in a sandbox?"
               "What is a container?"
               "What are Docker Hardened Images?"
               "Why should I use Docker Compose?"

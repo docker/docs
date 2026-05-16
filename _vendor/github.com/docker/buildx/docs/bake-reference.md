@@ -1350,11 +1350,17 @@ to define them.
 
 ### Use environment variable as default
 
-You can set a Bake variable to use the value of an environment variable as a default value:
+If an environment variable exists with the same name as a declared Bake
+variable, Bake uses that environment variable value instead of the declared
+default.
+
+To disable this environment-based variable lookup, set
+`BUILDX_BAKE_DISABLE_VARS_ENV_LOOKUP=1`.
+
 
 ```hcl
 variable "HOME" {
-  default = "$HOME"
+  default = "/root"
 }
 ```
 

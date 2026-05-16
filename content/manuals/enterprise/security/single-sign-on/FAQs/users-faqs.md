@@ -5,9 +5,9 @@ description: Frequently asked questions about managing users with Docker single 
 keywords: SSO user management, user provisioning, SCIM, just-in-time provisioning, organization members
 tags: [FAQ]
 aliases:
-- /single-sign-on/users-faqs/
-- /faq/security/single-sign-on/users-faqs/
-- /security/faqs/single-sign-on/users-faqs/
+  - /single-sign-on/users-faqs/
+  - /faq/security/single-sign-on/users-faqs/
+  - /security/faqs/single-sign-on/users-faqs/
 ---
 
 ## Do I need to manually add users to my organization?
@@ -33,15 +33,15 @@ Yes, you can convert existing users to SSO accounts. Ensure users have:
 - Personal access tokens created to replace passwords for CLI access
 - CI/CD pipelines updated to use PATs instead of passwords
 
-For detailed instructions, see [Configure single sign-on](/manuals/enterprise/security/single-sign-on/configure.md).
+For detailed instructions, see [Configure single sign-on](/manuals/enterprise/security/single-sign-on/connect.md).
 
 ## Is Docker SSO fully synced with the IdP?
 
-Docker SSO provides Just-in-Time (JIT) provisioning by default. Users are provisioned when they authenticate with SSO. If users leave the organization, administrators must manually [remove the user](/manuals/admin/organization/members.md#remove-a-member-or-invitee) from the organization.
+Docker SSO provides Just-in-Time (JIT) provisioning by default. Users are provisioned when they authenticate with SSO. If users leave the organization, administrators must manually [remove the user](/manuals/admin/organization/manage/members.md#remove-members-from-teams) from the organization.
 
-[SCIM](/manuals/enterprise/security/provisioning/scim.md) provides full synchronization with users and groups. When using SCIM, the recommended configuration is to turn off JIT so all auto-provisioning is handled by SCIM.
+[SCIM](/manuals/enterprise/security/provisioning/scim/_index.md) provides full synchronization with users and groups. When using SCIM, the recommended configuration is to turn off JIT so all auto-provisioning is handled by SCIM.
 
-Additionally, you can use the [Docker Hub API](/reference/api/hub/latest/) to complete this process.
+Additionally, you can use the [Docker Hub API](/reference/api/hub/latest.md) to complete this process.
 
 ## How does turning off Just-in-Time provisioning affect user sign-in?
 

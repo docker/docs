@@ -13,10 +13,6 @@ The following is a complete `buildkitd.toml` configuration example.
 Note that some configuration options are only useful in edge cases.
 
 ```toml
-# debug enables additional debug logging
-debug = true
-# trace enables additional trace logging (very verbose, with potential performance impacts)
-trace = true
 # root is where all buildkit state is stored.
 root = "/var/lib/buildkit"
 # insecure-entitlements allows insecure entitlements, disabled by default.
@@ -30,6 +26,9 @@ provenanceEnvDir = "/etc/buildkit/provenance.d"
 [log]
   # log formatter: json or text
   format = "text"
+
+  # log level (error/warn/info/debug/trace)
+  level = "info"
 
 [dns]
   nameservers=["1.1.1.1","8.8.8.8"]

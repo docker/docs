@@ -4,7 +4,6 @@ description: Control access to content, registry, and organization management wi
 keywords: members, teams, organization, company, roles, access, docker hub, admin console, security, permissions
 aliases:
   - /docker-hub/roles-and-permissions/
-  - /security/for-admins/roles-and-permissions/
   - /enterprise/security/roles-and-permissions/
 ---
 
@@ -21,11 +20,11 @@ Docker organizations have three core roles:
 - **Editor**: Partial administrative access. Editors can create, edit, and delete repositories. They can also manage team permissions for repositories.
 - **Owner**: Full administrative access. Owners can manage all organization settings, including repositories, teams, members, billing, and security features.
 
-A company owner has the same organization management permissions as an organization owner, but there are some content and registry permissions that company owners don't have (for example, repository pull/push). For more information, see [Company overview](/admin/company/).
+A company owner has the same organization management permissions as an organization owner, but there are some content and registry permissions that company owners don't have (for example, repository pull/push). For more information, see [Company overview](/manuals/admin/company/_index.md).
 
 ### Content and registry permissions
 
-These permissions apply organization-wide, including all repositories in your organization's namespace.
+These permissions apply organization-wide.
 
 | Permission                                            | Member | Editor | Owner |
 | :---------------------------------------------------- | :----- | :----- | :---- |
@@ -47,11 +46,13 @@ These permissions apply organization-wide, including all repositories in your or
 | View teams                                            | ✅     | ✅     | ✅    |
 | Assign team permissions to repositories               | ❌     | ✅     | ✅    |
 
-When you add members to teams, you can grant additional repository permissions
+You can grant repository permissions to members
 beyond their organization role:
 
-1. Role permissions: Applied organization-wide (member or editor)
-2. Team permissions: Additional permissions for specific repositories
+- Role permissions: Applied organization-wide (member or editor)
+- Team permissions: Additional permissions for specific repositories
+
+To extend access to private repositories, assign a custom role to organization members or configure team permissions.
 
 ### Organization management permissions
 
@@ -79,11 +80,10 @@ beyond their organization role:
 | Upgrade and downgrade plans                                       | ❌     | ❌     | ✅    |
 
 > [!TIP]
-> 
+>
 > If you want more granular access control, you can
 > [upgrade to a Docker Business plan](https://www.docker.com/pricing?ref=Docs&refAction=DocsEnterpriseCoreRoles)
 > for custom roles and advanced permissions.
-
 
 _\* If not part of a company_
 

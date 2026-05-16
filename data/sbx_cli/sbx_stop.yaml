@@ -1,0 +1,19 @@
+name: sbx stop
+synopsis: Stop one or more sandboxes without removing them
+description: |-
+    Stop one or more running sandboxes without removing them.
+
+    Stopped sandboxes retain their state and can be restarted with "sbx run".
+usage: sbx stop SANDBOX [SANDBOX...]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for stop
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx - Manage AI coding agent sandboxes.

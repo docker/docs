@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .agents/hooks/enforce-vendored.sh"
+          }
+        ],
+        "description": "Block edits to vendored content (_vendor/, data/cli/)"
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .agents/hooks/enforce-git-hygiene.sh"
+          }
+        ],
+        "description": "Block git add . and dangerous patterns"
+      }
+    ]
+  }
+}

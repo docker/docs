@@ -11,7 +11,7 @@ grid_developers:
 - title: Set up two-factor authentication
   description: Add an extra layer of authentication to your Docker account.
   link: /security/2fa/
-  icon: phonelink_lock
+  icon: mobile_lock_portrait
 - title: Manage access tokens
   description: Create personal access tokens as an alternative to your password.
   icon: password

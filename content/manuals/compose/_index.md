@@ -6,7 +6,7 @@ description: Learn how to use Docker Compose to define and run multi-container a
 keywords: docker compose, docker-compose, compose.yaml, docker compose command, multi-container applications, container orchestration, docker cli
 params:
   sidebar:
-    group: Open source
+    group: Application development
 grid:
 - title: Why use Compose?
   description: Understand Docker Compose's key benefits

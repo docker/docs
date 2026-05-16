@@ -5,17 +5,9 @@ keywords: glossary, docker, terms, definitions
 notoc: true
 layout: glossary
 aliases:
-- /engine/reference/glossary/
-- /glossary/
+  - /engine/reference/glossary/
+  - /glossary/
 ---
-
-> [!TIP]
->
-> Looking for a definition that's not listed or need a more context-aware
-> explanation?
->
-> Try <a role="button" tabindex="0" class="open-kapa-widget">Gordon</a>.
-
 
 <!--
 To edit/add/remove glossary entries, visit the YAML file at:

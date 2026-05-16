@@ -105,7 +105,7 @@ models:
 With the `docker model configure` command:
 
 ```console
-$ docker model configure --runtime-flag "--temp" --runtime-flag "0.7" --runtime-flag "--top-p" --runtime-flag "0.9" ai/qwen2.5-coder
+$ docker model configure ai/qwen2.5-coder -- --temp 0.7 --top-p 0.9
 ```
 
 ### Common llama.cpp parameters

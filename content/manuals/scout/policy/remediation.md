@@ -18,7 +18,6 @@ following policy types:
 - [Up-to-Date Base Images](#up-to-date-base-images-remediation)
 - [Supply Chain Attestations](#supply-chain-attestations-remediation)
 
-<!-- TODO(dvdksn): verify the following -->
 > [!NOTE]
 > Guided remediation is not supported for custom policies.
 
@@ -78,20 +77,6 @@ For Docker Scout to be able to evaluate this policy, you must add [provenance
 attestations](/manuals/build/metadata/attestations/slsa-provenance.md) to your image. If
 your image doesn't have provenance attestations, compliance is undeterminable.
 
-<!--
-  TODO(dvdksn): no support for the following, yet
-
-  When provenance attestations are unavailable, Docker Scout provides generic,
-  best-effort recommendations in the remediation side panel. These
-  recommendations estimate your base using information from image analysis
-  results. The base image version is unknown, but you can manually select the
-  version you use in the remediation side panel. This lets Docker Scout evaluate
-  whether the base image detected in the image analysis is up-to-date with the
-  version you selected.
-
-  https://github.com/docker/docs/pull/18961#discussion_r1447186845
--->
-
 ### Provenance attestations available
 
 With provenance attestations added, Docker Scout can correctly detect the base
@@ -124,17 +109,6 @@ changes from making their way into your supply chain.
 
 For more information about base image pinning, see [Pin base image
 versions](/manuals/build/building/best-practices.md#pin-base-image-versions).
-
-<!--
-  TODO(dvdksn): no support for the following, yet
-
-  Enabling the GitHub integration also allows Docker Scout to visualize the
-  remediation workflow in the Docker Scout Dashboard. Each step, from the pull
-  request being raised to the image being deployed to an environment, is
-  displayed in the remediation sidebar when inspecting the image.
-
-  https://github.com/docker/docs/pull/18961#discussion_r1447189475
--->
 
 ## Supply Chain Attestations remediation
 

@@ -41,7 +41,7 @@ CVE mitigation:
   95% smaller than traditional images, limits the number of potential
   vulnerabilities, making it harder for attackers to exploit unneeded software.
 
-- Faster CVE remediation: Maintained by Docker with an enterprise-grade SLA,
+- Faster CVE remediation: Maintained by Docker with an [enterprise-grade SLA](https://docs.docker.com/go/dhi-sla/),
   DHIs are continuously updated to address known vulnerabilities. Critical and
   high-severity CVEs are patched quickly, ensuring that your containers remain
   secure without manual intervention.
@@ -159,9 +159,6 @@ $ docker scout vex get dhi.io/<image>:<tag> --output vex.json
 ```
 
 > [!NOTE]
->
-> The `docker scout vex get` command requires [Docker Scout
-> CLI](https://github.com/docker/scout-cli/) version 1.18.3 or later.
 >
 > If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
 > `registry://dhi.io/python:3.13` instead of `dhi.io/python:3.13`.

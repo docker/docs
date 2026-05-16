@@ -1,0 +1,15 @@
+{{ $image := .Get "image" }}
+{{ $modelDownload := .Get "model-download" | default "false" }}
+{{ $browserUrl := .Get "browserUrl" | default "http://localhost:3030"}}
+
+{{ $step1 := printf "1. Start the labspace:\n\n   ```console\n   $ docker compose -p labspace -f oci://%s up -d\n   ```" $image }}
+
+{{ if eq $modelDownload "true" }}
+  {{ $step1 = printf "%s\n\n   > [!NOTE]\n   >\n   > The lab may take a few minutes to launch, as this lab requires an AI model that will need to be downloaded." $step1 }}
+{{ end }}
+
+{{ $step2 := printf "2. Open your browser to [%s](%s)." $browserUrl $browserUrl }}
+
+{{ $step3 := "3. When you're done, tear down the labspace:\n\n   ```console\n   $ docker compose -p labspace down\n   ```" }}
+
+{{ printf "%s\n\n%s\n\n%s" $step1 $step2 $step3 | .Page.RenderString (dict "display" "block") }}

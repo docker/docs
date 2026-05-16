@@ -190,14 +190,13 @@ Docker from the repository.
 
     > [!NOTE]
     >
-    > The Docker service starts automatically after installation. To verify that
-    > Docker is running, use:
-    > 
+    > After installation, verify that Docker is running:
+    >
     > ```console
     > $ sudo systemctl status docker
     > ```
     >
-    > Some systems may have this behavior disabled and will require a manual start:
+    > If Docker is not running, start it manually:
     >
     > ```console
     > $ sudo systemctl start docker
@@ -258,14 +257,13 @@ download a new file each time you want to upgrade Docker Engine.
 
     > [!NOTE]
     >
-    > The Docker service starts automatically after installation. To verify that
-    > Docker is running, use:
-    > 
+    > After installation, verify that Docker is running:
+    >
     > ```console
     > $ sudo systemctl status docker
     > ```
     >
-    > Some systems may have this behavior disabled and will require a manual start:
+    > If Docker is not running, start it manually:
     >
     > ```console
     > $ sudo systemctl start docker

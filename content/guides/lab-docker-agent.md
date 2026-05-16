@@ -28,6 +28,10 @@ agent concepts, then build sophisticated multi-agent teams that handle complex
 real-world tasks. Learn how to create, share, and orchestrate AI agents with
 Docker.
 
+## Launch the lab
+
+{{< labspace-launch image="dockersamples/labspace-cagent" >}}
+
 ## What you'll learn
 
 - Create simple agents with Docker Agent
@@ -48,18 +52,3 @@ Docker.
 | 5 | Sharing Agents | Package and share agents via Docker Registry |
 | 6 | Introduction to Sub-agents | Build multi-agent systems with sub-agent orchestration |
 | 7 | Conclusion | Summary and next steps |
-
-## Prerequisites
-
-- Latest version of Docker Desktop
-- Basic familiarity with Docker
-
-## Launch the lab
-
-Start the labspace:
-
-```console
-$ docker compose -f oci://dockersamples/labspace-cagent up -d
-```
-
-Then open your browser to [http://localhost:3030](http://localhost:3030).

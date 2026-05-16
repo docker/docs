@@ -9,6 +9,18 @@
     display: none !important;
   }
 }
+/* Theme toggle icon visibility — driven by data-theme-preference on <html>,
+   set synchronously by theme.js before first paint. x-show handles updates
+   after Alpine initialises; these rules cover the pre-Alpine window. */
+:root[data-theme-preference="light"] .theme-icon-moon,
+:root[data-theme-preference="light"] .theme-icon-auto,
+:root[data-theme-preference="dark"] .theme-icon-sun,
+:root[data-theme-preference="dark"] .theme-icon-auto,
+:root[data-theme-preference="auto"] .theme-icon-sun,
+:root[data-theme-preference="auto"] .theme-icon-moon {
+  display: none;
+}
+
 :root {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -93,6 +105,6 @@ input[type="search"]::-ms-clear {
   }
 }
 
-code{
-  font-size:0.9em;
+code {
+  font-size: 0.9em;
 }

@@ -1,6 +1,12 @@
 command: docker sandbox reset
 short: Reset all VM sandboxes and clean up state
 long: |-
+    > [!WARNING]
+    > The Docker Desktop-integrated `docker sandbox` commands are deprecated and
+    > replaced by the standalone [`sbx` CLI](/manuals/ai/sandboxes/_index.md).
+    > This deprecation applies only to the Docker Desktop integration, not to Docker
+    > Sandboxes.
+
     Reset all VM sandboxes and permanently delete all VM data.
 
     This command will:

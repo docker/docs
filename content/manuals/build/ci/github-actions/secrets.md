@@ -57,6 +57,13 @@ jobs:
             "github_token=${{ secrets.GITHUB_TOKEN }}"
 ```
 
+> [!NOTE]
+> Secrets are mounted as files in the build container.
+> By default, they're available at `/run/secrets/<id>`.
+> You can also use the `env` option to load a secret into an environment variable,
+> or the `target` option to customize the mount path.
+> For details on secret mounts, see [Build secrets](/manuals/build/building/secrets.md).
+
 ### Using secret files
 
 The `secret-files` input lets you mount existing files as secrets in your build.

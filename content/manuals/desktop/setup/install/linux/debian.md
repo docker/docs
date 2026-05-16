@@ -60,7 +60,7 @@ Recommended approach to install Docker Desktop on Debian:
 
    By default, Docker Desktop is installed at `/opt/docker-desktop`.
 
-The RPM package includes a post-install script that completes additional setup steps automatically.
+The DEB package includes a post-install script that completes additional setup steps automatically.
 
 The post-install script:
 

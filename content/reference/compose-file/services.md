@@ -785,6 +785,8 @@ extends:
 - `service`: Defines the name of the service being referenced as a base, for example `web` or `database`.
 - `file`: The location of a Compose configuration file defining that service.
 
+`extends` is not supported when deploying with `docker stack deploy`.
+
 #### Restrictions
 
 When a service is referenced using `extends`, it can declare dependencies on other resources. These dependencies may be explicitly defined through attributes like `volumes`, `networks`, `configs`, `secrets`, `links`, `volumes_from`, or `depends_on`. Alternatively, dependencies can reference another service using the `service:{name}` syntax in namespace declarations such as `ipc`, `pid`, or `network_mode`.
@@ -1334,6 +1336,9 @@ If either is omitted, Compose automatically generates the environment variable n
 
 `network_mode` sets a service container's network mode.
 
+- `bridge`: Connects the container to Docker's default bridge network instead of
+  a project-specific network. Containers on the default bridge network cannot
+  resolve each other by service name . Instead, use a user-defined network for DNS resolution.
 - `none`: Turns off all container networking.
 - `host`: Gives the container raw access to the host's network interface.
 - `service:{name}`: Gives the container access to the specified container by referring to its service name.
@@ -1342,6 +1347,7 @@ If either is omitted, Compose automatically generates the environment variable n
 For more information container networks, see the [Docker Engine documentation](/manuals/engine/network/_index.md#container-networks).
 
 ```yml
+    network_mode: "bridge"
     network_mode: "host"
     network_mode: "none"
     network_mode: "service:[service name]"
@@ -1651,6 +1657,10 @@ in the form:
 - `CONTAINER` is `port | range`.
 - `PROTOCOL` restricts ports to a specified protocol either `tcp` or `udp`(optional). Default is `tcp`.
 
+> [!WARNING]
+>
+> If you do not specify a host IP (such as `127.0.0.1`), Docker binds to all interfaces (`0.0.0.0`), bypassing host firewall rules. This can expose the container directly to the internet if the host has a public IP address. For more information, see [Port publishing and mapping](/manuals/engine/network/port-publishing.md).
+
 Ports can be either a single value or a range. `HOST` and `CONTAINER` must use equivalent ranges.
 
 You can either specify both ports (`HOST:CONTAINER`), or just the container port. In the latter case,
@@ -1658,6 +1668,8 @@ the container runtime automatically allocates any unassigned port of the host.
 
 `HOST:CONTAINER` should always be specified as a (quoted) string, to avoid conflicts
 with [YAML base-60 float](https://yaml.org/type/float.html).
+
+
 
 IPv6 addresses can be enclosed in square brackets.
 
@@ -1930,31 +1942,40 @@ the service's containers.
   The default value is world-readable permissions (mode `0444`).
   The writable bit must be ignored if set. The executable bit may be set.
 
-Note that support for `uid`, `gid`, and `mode` attributes are not implemented in Docker Compose when the source of the secret is a [`file`](secrets.md). This is because bind-mounts used under the hood don't allow uid remapping.
+Note that support for `uid`, `gid`, and `mode` attributes are only implemented in Docker Compose when the source of the secret is [`environment`](secrets.md). When the source is a [`file`](secrets.md), Compose uses a bind-mount under the hood which doesn't allow `uid` remapping, and these attributes are silently ignored.
 
-The following example sets the name of the `server-certificate` secret file to `server.cert`
-within the container, sets the mode to `0440` (group-readable), and sets the user and group
-to `103`. The value of `server-certificate` is set
-to the contents of the file `./server.cert`.
+The following example sets the name of the `my-token` secret file within the container,
+sets the mode to `0440` (group-readable), and sets the user and group to `103`.
+The value of `my-token` is read from the `MY_TOKEN` environment variable.
 
 ```yml
 services:
   frontend:
     image: example/webapp
     secrets:
-      - source: server-certificate
-        target: server.cert
+      - source: my-token
         uid: "103"
         gid: "103"
         mode: 0o440
 secrets:
-  server-certificate:
-    file: ./server.cert
+  my-token:
+    environment: "MY_TOKEN"
 ```
 
 ### `security_opt`
 
 `security_opt` overrides the default labeling scheme for each container.
+
+Options accept either `option=value` or `option:value` syntax. For boolean options
+such as `no-new-privileges`, the value may be omitted entirely, in which case the
+option is treated as enabled. The following syntaxes are all equivalent:
+
+```yml
+security_opt:
+  - no-new-privileges
+  - no-new-privileges=true
+  - no-new-privileges:true
+```
 
 ```yml
 security_opt:

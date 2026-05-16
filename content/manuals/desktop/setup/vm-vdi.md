@@ -35,8 +35,9 @@ Docker Desktop via an SSH tunnel. Despite running remotely, features like bind
 mounts and port forwarding continue to work seamlessly, providing a local-like
 experience. To use Docker Offload:
 
-To get started using Docker Offload, see the [Docker Offload
-quickstart](/offload/quickstart/).
+For more information, see the [Docker Offload product
+page](https://www.docker.com/products/docker-offload/) and the [Docker Offload
+documentation](/offload/).
 
 ## Virtual desktop support when using nested virtualization
 

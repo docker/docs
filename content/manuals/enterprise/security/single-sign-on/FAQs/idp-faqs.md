@@ -5,9 +5,9 @@ description: Frequently asked questions about Docker SSO and identity provider c
 keywords: identity providers, SSO IdP, SAML, Azure AD, Entra ID, certificate management
 tags: [FAQ]
 aliases:
-- /single-sign-on/idp-faqs/
-- /faq/security/single-sign-on/idp-faqs/
-- /security/faqs/single-sign-on/idp-faqs/
+  - /single-sign-on/idp-faqs/
+  - /faq/security/single-sign-on/idp-faqs/
+  - /security/faqs/single-sign-on/idp-faqs/
 ---
 
 ## Can I use multiple identity providers with Docker SSO?
@@ -27,7 +27,12 @@ To turn on SSO in Docker, you need the following from your IdP:
 
 ## What happens if my existing certificate expires?
 
-If your certificate expires, contact your identity provider to retrieve a new X.509 certificate. Then update the certificate in the [SSO configuration settings](/manuals/enterprise/security/single-sign-on/manage.md#manage-sso-connections) in the Docker Admin Console.
+Contact your identity provider to retrieve a new X.509 certificate. Update with the new certificate in [SSO configuration settings](/manuals/enterprise/security/single-sign-on/manage.md#manage-sso-connections) from Docker Admin Console.
+
+- If your organization enforces SSO, username and password credentials won't work.
+- If your organization doesn't enforce SSO, users can sign in with their username and password credentials.
+
+If you need additional help, contact [Docker support](https://app.docker.com/support/contact).
 
 ## What happens if my IdP goes down when SSO is turned on?
 
@@ -41,7 +46,7 @@ Yes, bot accounts need seats like regular users, requiring a non-aliased domain 
 
 ## Does SAML SSO use Just-in-Time provisioning?
 
-The SSO implementation uses Just-in-Time (JIT) provisioning by default. You can optionally turn off JIT in the Admin Console if you turn on auto-provisioning using SCIM. See [Just-in-Time provisioning](/security/for-admins/provisioning/just-in-time/).
+The SSO implementation uses Just-in-Time (JIT) provisioning by default. You can optionally turn off JIT in the Admin Console if you turn on auto-provisioning using SCIM. See [Just-in-Time provisioning](/manuals/enterprise/security/provisioning/just-in-time.md).
 
 ## My Entra ID SSO connection isn't working and shows an error. How can I troubleshoot this?
 

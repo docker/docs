@@ -3,7 +3,7 @@ description: Frequently asked questions about Docker single sign-on
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, administration, security
 title: General SSO FAQs
 linkTitle: General
-weight: 10
+weight: 20
 tags: [FAQ]
 aliases:
 - /single-sign-on/faqs/

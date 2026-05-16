@@ -1,6 +1,12 @@
 command: docker sandbox save
 short: Save a snapshot of the sandbox as a template
 long: |-
+    > [!WARNING]
+    > The Docker Desktop-integrated `docker sandbox` commands are deprecated and
+    > replaced by the standalone [`sbx` CLI](/manuals/ai/sandboxes/_index.md).
+    > This deprecation applies only to the Docker Desktop integration, not to Docker
+    > Sandboxes.
+
     Save a snapshot of the sandbox as a template.
 
     By default, the image is loaded into the host's Docker daemon (requires Docker to be running).

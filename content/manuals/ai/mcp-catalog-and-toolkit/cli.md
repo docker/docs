@@ -324,8 +324,8 @@ Create a catalog and specify which servers to include:
 ```console
 $ docker mcp catalog create registry.example.com/mcp/data-tools:latest \
   --title "Data Analysis Tools" \
-  --server catalog://mcp/docker-mcp-catalog/postgres \
-  --server catalog://mcp/docker-mcp-catalog/brave-search \
+  --server catalog://mcp/docker-mcp-catalog/sequentialthinking \
+  --server catalog://mcp/docker-mcp-catalog/brave \
   --server docker://registry.example.com/mcp/analytics:latest
 ```
 

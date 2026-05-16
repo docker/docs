@@ -126,7 +126,7 @@ examples: |-
       rotated CA certificates:   [>                                                  ] 0/2 nodes
     ```
 
-    Once the rotation os finished (all the progress bars have completed) the now-current
+    Once the rotation is finished (all the progress bars have completed) the now-current
     CA certificate will be printed:
 
     ```console

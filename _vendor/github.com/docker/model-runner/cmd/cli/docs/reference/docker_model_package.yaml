@@ -71,6 +71,17 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: format
+      value_type: string
+      default_value: docker
+      description: |
+        output artifact format: "docker" (default) or "cncf" (CNCF ModelPack spec)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: from
       value_type: string
       description: reference to an existing model to repackage

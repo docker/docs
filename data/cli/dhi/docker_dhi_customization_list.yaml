@@ -5,6 +5,15 @@ usage: docker dhi customization list
 pname: docker dhi customization
 plink: docker_dhi_customization.yaml
 options:
+    - option: bulk-id
+      value_type: string
+      description: Filter by bulk customization ID (exact match)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: filter
       shorthand: f
       value_type: string

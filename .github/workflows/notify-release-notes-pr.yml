@@ -1,0 +1,45 @@
+name: Notify Slack on Desktop Release Notes PR
+
+on:
+  workflow_run:
+    workflows: ["Release Notes PR Trigger"]
+    types: [completed]
+
+jobs:
+  notify:
+    runs-on: ubuntu-24.04
+    if: github.repository_owner == 'docker' && github.event.workflow_run.conclusion == 'success'
+    steps:
+      - name: Download PR details
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: pr-details
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Read PR details
+        id: pr
+        run: |
+          echo "url=$(jq -r .url pr-details.json)" >> "$GITHUB_OUTPUT"
+          echo "title=$(jq -r .title pr-details.json)" >> "$GITHUB_OUTPUT"
+          echo "author=$(jq -r .author pr-details.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Notify Slack
+        uses: slackapi/slack-github-action@45a88b9581bfab2566dc881e2cd66d334e621e2c # v3.0.3
+        with:
+          method: chat.postMessage
+          token: ${{ secrets.SLACK_BOT_TOKEN }}
+          payload: |
+            {
+              "channel": "${{ secrets.SLACK_RELEASE_CHANNEL_ID }}",
+              "text": "Desktop release notes",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":memo: *Desktop release notes*:\n<${{ steps.pr.outputs.url }}|${{ steps.pr.outputs.title }}> by <https://github.com/${{ steps.pr.outputs.author }}|${{ steps.pr.outputs.author }}>"
+                  }
+                }
+              ]
+            }

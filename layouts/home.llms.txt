@@ -1,19 +1,81 @@
-{{- $pages := where site.RegularPages "Params.sitemap" "!=" false -}}
-{{- $sorted := sort $pages "RelPermalink" -}}
-{{- $grouped := $sorted.GroupBy "Section" -}}
+{{- $home := site.Home -}}
+{{- $manuals := site.GetPage "/manuals" -}}
+{{- $getStarted := site.GetPage "/get-started" -}}
+{{- $reference := site.GetPage "/reference" -}}
 
 # Docker Documentation
-{{- range $grouped }}
 
-## {{ humanize .Key }}
-{{- range .Pages }}
-{{- template "pageItem" . }}
+{{ with $home.Description -}}
+{{ chomp (replace . "\n" " ") }}
+{{- else -}}
+Docker Documentation is the official documentation site for Docker products,
+including Docker Desktop, Docker Engine, Docker Build, Docker Compose, Docker
+Hub, Docker Scout, and Docker AI features.
 {{- end }}
-{{- end -}}
 
-{{- define "pageItem" }}
-{{- if and .Title .Permalink }}
-- [{{ .Title }}]({{ .Permalink }})
-  {{- with .Description }}: {{ chomp (replace . "\n" " ") }}{{- end }}
+Use this file as a generated discovery guide for the docs site. For the complete
+page index, use [llms-full.txt](https://docs.docker.com/llms-full.txt).
+
+> MCP endpoint for structured agent access: https://mcp-docs.docker.com/mcp
+> Bulk text corpus for offline indexing: https://docs.docker.com/llms-full.txt
+
+## Primary sections
+
+{{- range sort (where site.Sections "Title" "!=" "") "Weight" }}
+{{- if not (in (slice "includes" "tags") .Section) }}
+- [{{ .LinkTitle | default .Title }}]({{ .Permalink }}): {{ with .Description }}{{ chomp (replace . "\n" " ") }}{{ else }}{{ .Title }} documentation.{{ end }}
+  Markdown: {{ partial "utils/markdown-url.html" . }}
 {{- end }}
 {{- end }}
+
+{{ with $getStarted }}
+## Starter paths
+
+{{- range index .Params "get-started" }}
+- [{{ .title }}]({{ .link | absURL }}): {{ .description }}
+{{- end }}
+{{- range index .Params "get-started2" }}
+- [{{ .title }}]({{ .link | absURL }}): {{ .description }}
+{{- end }}
+{{- end }}
+
+{{ with $manuals }}
+## Product documentation
+
+{{- range .Params.sidebar.groups }}
+{{- $group := . }}
+{{- $items := index $manuals.Params ($group | anchorize) }}
+{{- with $items }}
+
+### {{ $group }}
+{{- range . }}
+- [{{ .title }}]({{ .link | absURL }}): {{ .description }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{ with $reference }}
+## Reference entry points
+
+### File formats
+{{- range .Params.grid_files }}
+- [{{ .title }}]({{ .link | absURL }}): {{ .description }}
+{{- end }}
+
+### Command-line interfaces
+{{- range .Params.grid_clis }}
+- [{{ .title }}]({{ .link | absURL }}): {{ .description }}
+{{- end }}
+
+### APIs
+{{- range .Params.grid_apis }}
+- [{{ .title }}]({{ .link | absURL }}): {{ .description }}
+{{- end }}
+{{- end }}
+
+## Retrieval guidance
+
+- Prefer section landing pages above for navigation and scope selection.
+- Use [llms-full.txt](https://docs.docker.com/llms-full.txt) when you need the complete documentation corpus.
+- Use page-level markdown routes such as `https://docs.docker.com/engine/install.md` for clean per-page retrieval.

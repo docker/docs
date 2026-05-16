@@ -16,8 +16,7 @@ Compose lets you define AI models as core components of your application, so you
 ## Prerequisites
 
 - Docker Compose v2.38 or later
-- A platform that supports Compose models such as Docker Model Runner (DMR) or compatible cloud providers.
-  If you are using DMR, see the [requirements](/manuals/ai/model-runner/_index.md#requirements).
+- A platform that supports Compose models such as [Docker Model Runner (DMR)](/manuals/ai/model-runner/_index.md#requirements).
 
 ## What are Compose models?
 
@@ -166,7 +165,7 @@ Docker Model Runner will:
 
 ### Cloud providers
 
-The same Compose file can run on cloud providers that support Compose models:
+The Compose models specification is portable. Platforms that implement the Compose specification can support the `models` top-level element, allowing the same Compose file to run on different infrastructure. Cloud-specific behavior can be configured using extension attributes (`x-*`):
 
 ```yaml
 services:
@@ -184,9 +183,10 @@ models:
       - "cloud.region=us-west-2"
 ```
 
-Cloud providers might:
+How a platform handles model definitions depends on its implementation. A platform might:
+
 - Use managed AI services instead of running models locally
-- Apply cloud-specific optimizations and scaling
+- Apply platform-specific optimizations and scaling
 - Provide additional monitoring and logging capabilities
 - Handle model versioning and updates automatically
 
@@ -347,33 +347,6 @@ models:
     context_size: 2048
     runtime_flags:
       - "--embeddings"          # Required for embedding models
-```
-
-## Alternative configuration with provider services
-
-> [!IMPORTANT]
->
-> This approach is deprecated. Use the [`models` top-level element](#basic-model-definition) instead.
-
-You can also use the `provider` service type, which allows you to declare platform capabilities required by your application.
-For AI models, you can use the `model` type to declare model dependencies.
-
-To define a model provider:
-
-```yaml
-services:
-  chat:
-    image: my-chat-app
-    depends_on:
-      - ai_runner
-
-  ai_runner:
-    provider:
-      type: model
-      options:
-        model: ai/smollm2
-        context-size: 1024
-        runtime-flags: "--no-prefill-assistant"
 ```
 
 ## Reference

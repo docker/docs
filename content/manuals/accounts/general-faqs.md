@@ -6,10 +6,10 @@ description: Frequently asked questions about Docker accounts
 keywords: onboarding, docker, teams, orgs, user accounts, organization accounts
 tags: [FAQ]
 aliases:
-- /docker-hub/general-faqs/
-- /docker-hub/onboarding-faqs/
-- /faq/admin/general-faqs/
-- /admin/faqs/general-faqs/
+  - /docker-hub/general-faqs/
+  - /docker-hub/onboarding-faqs/
+  - /faq/admin/general-faqs/
+  - /admin/faqs/general-faqs/
 ---
 
 ### What is a Docker ID?
@@ -24,7 +24,7 @@ products. To create a Docker ID you need one of the following:
 Your Docker ID must be between 4 and 30 characters long, and can only contain
 numbers and lowercase letters. You can't use any special characters or spaces.
 
-For more information, see [Create a Docker ID](/accounts/create-account/).
+For more information, see [Create a Docker ID](/manuals/accounts/create-account.md).
 
 ### Can I change my Docker ID?
 

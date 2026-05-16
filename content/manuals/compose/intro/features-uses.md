@@ -15,7 +15,7 @@ Using Docker Compose offers several benefits that streamline the development, de
 
 - Efficient collaboration: Shareable YAML files support smooth collaboration between developers and operations, improving workflows and issue resolution, leading to increased overall efficiency.
 
-- Rapid application development: Compose caches the configuration used to create a container. When you restart a service that has not changed, Compose re-uses the existing containers. Re-using containers means that you can make changes to your environment very quickly.
+- Rapid application development: Compose caches the configuration used to create a container. When you restart a service that has not changed, Compose reuses the existing containers. Reusing containers means that you can make changes to your environment quickly.
 
 - Portability across environments: Compose supports variables in the Compose file. You can use these variables to customize your composition for different environments, or different users.
 

@@ -3,6 +3,10 @@
 <!---MARKER_GEN_START-->
 Unload running models
 
+### Aliases
+
+`docker model unload`, `docker model stop`
+
 ### Options
 
 | Name        | Type     | Default | Description                |

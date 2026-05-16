@@ -1,14 +1,11 @@
 ---
 title: Docker Offload
 weight: 15
-description: Find documentation on Docker Offload to help you build and run your container images faster, both locally and in CI
+description: Find documentation on Docker Offload to help you offload containers to the cloud.
 keywords: build, cloud, cloud build, remote builder
 params:
   sidebar:
-    group: Products
-    badge:
-      color: violet
-      text: Early Access
+    group: Application development
 
 grid:
 
@@ -23,12 +20,12 @@ grid:
   link: /offload/about/
 
 - title: Configure
-  description: Set up and customize your cloud build environments.
+  description: Configure Docker Offload settings for your organization and Docker Desktop.
   icon: tune
   link: /offload/configuration/
 
-- title: Usage and billing
-  description: Learn about Docker Offload usage and billing, and how to monitor your cloud resources.
+- title: Usage
+  description: Learn about Docker Offload usage and how to monitor your cloud resources.
   icon: monitor_heart
   link: /offload/usage/
 

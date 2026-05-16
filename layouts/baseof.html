@@ -93,7 +93,7 @@
 
     {{/* Load the YouTube player if the page embeds a YouTube video */}}
     {{ with .Store.Get "youtube" }}
-      {{ partial "youtube-script.html" . }}
+      {{ partialCached "youtube-script.html" "-" "-" }}
     {{ end }}
   </body>
 </html>

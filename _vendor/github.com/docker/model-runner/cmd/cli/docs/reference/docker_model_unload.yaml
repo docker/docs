@@ -1,4 +1,5 @@
 command: docker model unload
+aliases: docker model unload, docker model stop
 short: Unload running models
 long: Unload running models
 usage: docker model unload (MODEL [MODEL ...] [--backend BACKEND] | --all)

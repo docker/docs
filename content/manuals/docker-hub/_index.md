@@ -5,7 +5,7 @@ title: Docker Hub
 weight: 30
 params:
   sidebar:
-    group: Products
+    group: Supply chain security
 grid:
 - title: Quickstart
   description: Step-by-step instructions on getting started on Docker Hub.

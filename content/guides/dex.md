@@ -87,7 +87,7 @@ or use CLI tools like [htpasswd](https://httpd.apache.org/docs/2.4/programs/htpa
 
 With Docker Compose configured, start Dex:
 ```yaml
-# docker-compose.yaml
+# compose.yaml
 
 services:
   dex:

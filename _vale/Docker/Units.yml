@@ -3,7 +3,7 @@ message: "Use '%s' instead of '%s'"
 link: https://docs.docker.com/contribute/style/recommended-words/
 level: error
 swap:
-  (?:kilobytes?|KB): kB
+  kilobytes?: kB
   gigabytes?: GB
   megabytes?: MB
   petabytes?: PB

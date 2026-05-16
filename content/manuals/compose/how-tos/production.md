@@ -68,5 +68,6 @@ commands work with no further configuration.
 
 ## Next steps
 
+- [Familiarize yourself with Compose's trust model](/manuals/compose/trust-model.md)
 - [Using multiple Compose files](multiple-compose-files/_index.md)
 

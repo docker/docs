@@ -1,5 +1,5 @@
 {{- range . -}}
-  {{- $lang := index site.Data.languages . -}}
+  {{- $lang := index hugo.Data.languages . -}}
   {{- with $lang }}
   <span class="chip">
     <img

@@ -22,7 +22,7 @@ grid:
 - title: Set up two-factor authentication
   description: Add an extra layer of authentication to your Docker account.
   link: /security/2fa/
-  icon: phonelink_lock
+  icon: mobile_lock_portrait
 - title: Deactivate an account
   description: Learn how to deactivate a Docker user account.
   link: /accounts/deactivate-user-account/
