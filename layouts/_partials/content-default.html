@@ -1,9 +1,7 @@
 {{ partial "breadcrumbs.html" . }}
-<div class="flex items-start justify-between">
-  <h1 data-pagefind-weight="10">{{ .Title | safeHTML }}</h1>
-  <div class="md-dropdown ml-auto hidden lg:block">
-    {{ partialCached "md-dropdown.html" "-" "-" }}
-  </div>
+<h1 data-pagefind-weight="10">{{ .Title | safeHTML }}</h1>
+<div class="hidden lg:block">
+  {{ partialCached "md-dropdown.html" "-" "-" }}
 </div>
 <div class="block lg:hidden">
   {{ partialCached "pagemeta.html" . . }}

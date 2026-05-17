@@ -6,8 +6,15 @@ description: |-
     RESOURCES is a comma-separated list of hostnames, domains, or IP addresses.
     Supports exact domains (example.com), wildcard subdomains (*.example.com),
     and optional port suffixes (example.com:443). Use "**" to allow all hosts.
-usage: sbx policy allow network RESOURCES [flags]
+
+    Use -g/--global to apply the rule globally to all sandboxes, or provide
+    SANDBOX before RESOURCES to scope the rule to a specific sandbox.
+usage: sbx policy allow network [-g | SANDBOX] RESOURCES [flags]
 options:
+    - name: global
+      shorthand: g
+      default_value: "false"
+      usage: Apply the rule globally to all sandboxes
     - name: help
       shorthand: h
       default_value: "false"
@@ -18,16 +25,19 @@ inherited_options:
       default_value: "false"
       usage: Enable debug logging
 example: |4-
-      # Allow access to a single host
-      sbx policy allow network api.example.com
+      # Allow access to a single host globally
+      sbx policy allow network -g api.example.com
 
-      # Allow access to multiple hosts
-      sbx policy allow network "api.example.com,cdn.example.com"
+      # Allow access to multiple hosts globally
+      sbx policy allow network -g "api.example.com,cdn.example.com"
+
+      # Allow a host only for a specific sandbox
+      sbx policy allow network my-sandbox api.example.com
 
       # Allow all subdomains of a host
-      sbx policy allow network "*.npmjs.org"
+      sbx policy allow network -g "*.npmjs.org"
 
-      # Allow all outbound traffic
-      sbx policy allow network "**"
+      # Allow all outbound traffic globally
+      sbx policy allow network -g "**"
 see_also:
     - sbx policy allow - Add an allow policy for sandboxes

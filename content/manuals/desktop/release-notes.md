@@ -26,6 +26,18 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.73.1
+
+{{< release-date date="2026-05-13" >}}
+
+{{< desktop-install-v2 win=true version="4.73.1" build_path="/226574/" >}}
+
+### Bug fixes and enhancements
+
+#### For Windows
+
+- Fixed a bug where Docker Desktop's own Electron processes were incorrectly killed when launching from the Start menu. Fixes [docker/desktop-feedback#367](https://github.com/docker/desktop-feedback/issues/367).
+
 ## 4.73.0
 
 {{< release-date date="2026-05-11" >}}

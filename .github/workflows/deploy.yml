@@ -68,7 +68,7 @@ jobs:
       -
         name: Configure AWS Credentials
         if: ${{ env.DOCS_AWS_IAM_ROLE != '' }}
-        uses: aws-actions/configure-aws-credentials@61815dcd50bd041e203e49132bacad1fd04d2708 # v5
+        uses: aws-actions/configure-aws-credentials@d979d5b3a71173a29b74b5b88418bfda9437d885 # v6.1.1
         with:
           role-to-assume: ${{ env.DOCS_AWS_IAM_ROLE }}
           aws-region: ${{ env.DOCS_AWS_REGION }}

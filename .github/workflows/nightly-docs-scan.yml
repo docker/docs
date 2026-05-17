@@ -50,7 +50,7 @@ jobs:
       - name: Configure AWS credentials
         id: aws-credentials
         continue-on-error: true
-        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4
+        uses: aws-actions/configure-aws-credentials@d979d5b3a71173a29b74b5b88418bfda9437d885 # v6.1.1
         with:
           role-to-assume: arn:aws:iam::710015040892:role/docker-agent-action-20260409141318957000000001
           aws-region: us-east-1
@@ -66,7 +66,7 @@ jobs:
           echo "GITHUB_APP_TOKEN=$PAT" >> "$GITHUB_ENV"
 
       - name: Run documentation scan
-        uses: docker/cagent-action@0498757af1c50b084f763d626f571918cf317509 # latest
+        uses: docker/cagent-action@f208610469d69f20983cad64c577949a132caa33 # v1.5.3
         env:
           GH_TOKEN: ${{ env.GITHUB_APP_TOKEN || github.token }}
         with:

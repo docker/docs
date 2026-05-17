@@ -785,6 +785,8 @@ extends:
 - `service`: Defines the name of the service being referenced as a base, for example `web` or `database`.
 - `file`: The location of a Compose configuration file defining that service.
 
+`extends` is not supported when deploying with `docker stack deploy`.
+
 #### Restrictions
 
 When a service is referenced using `extends`, it can declare dependencies on other resources. These dependencies may be explicitly defined through attributes like `volumes`, `networks`, `configs`, `secrets`, `links`, `volumes_from`, or `depends_on`. Alternatively, dependencies can reference another service using the `service:{name}` syntax in namespace declarations such as `ipc`, `pid`, or `network_mode`.
@@ -1940,26 +1942,24 @@ the service's containers.
   The default value is world-readable permissions (mode `0444`).
   The writable bit must be ignored if set. The executable bit may be set.
 
-Note that support for `uid`, `gid`, and `mode` attributes are not implemented in Docker Compose when the source of the secret is a [`file`](secrets.md). This is because bind-mounts used under the hood don't allow uid remapping.
+Note that support for `uid`, `gid`, and `mode` attributes are only implemented in Docker Compose when the source of the secret is [`environment`](secrets.md). When the source is a [`file`](secrets.md), Compose uses a bind-mount under the hood which doesn't allow `uid` remapping, and these attributes are silently ignored.
 
-The following example sets the name of the `server-certificate` secret file to `server.cert`
-within the container, sets the mode to `0440` (group-readable), and sets the user and group
-to `103`. The value of `server-certificate` is set
-to the contents of the file `./server.cert`.
+The following example sets the name of the `my-token` secret file within the container,
+sets the mode to `0440` (group-readable), and sets the user and group to `103`.
+The value of `my-token` is read from the `MY_TOKEN` environment variable.
 
 ```yml
 services:
   frontend:
     image: example/webapp
     secrets:
-      - source: server-certificate
-        target: server.cert
+      - source: my-token
         uid: "103"
         gid: "103"
         mode: 0o440
 secrets:
-  server-certificate:
-    file: ./server.cert
+  my-token:
+    environment: "MY_TOKEN"
 ```
 
 ### `security_opt`

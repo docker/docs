@@ -77,10 +77,15 @@ weight: 30
   - Exposing SCTP ports
 - To use the `ping` command, see [Routing ping packets](./tips.md#routing-ping-packets).
 - To expose privileged TCP/UDP ports (< 1024), see [Exposing privileged ports](./tips.md#exposing-privileged-ports).
+- NFS mounts as the docker "data-root" is not supported. This limitation is not specific to rootless mode.
+
+### Historical limitations
+
+#### Until Docker Engine v29.5
+
 - `IPAddress` shown in `docker inspect` is namespaced inside RootlessKit's network namespace.
   This means the IP address is not reachable from the host without `nsenter`-ing into the network namespace.
 - Host network (`docker run --net=host`) is also namespaced inside RootlessKit.
-- NFS mounts as the docker "data-root" is not supported. This limitation is not specific to rootless mode.
 
 ## Troubleshooting
 
@@ -223,14 +228,18 @@ of network and port driver you use. If you're experiencing unexpected behavior
 or performance related to networking, review the following table which shows
 the configurations supported by RootlessKit, and how they compare:
 
-| Network driver | Port driver    | Net throughput | Port throughput | Source IP propagation | No SUID | Note                                                                         |
-| -------------- | -------------- | -------------- | --------------- | --------------------- | ------- | ---------------------------------------------------------------------------- |
-| `slirp4netns`  | `builtin`      | Slow           | Fast ✅         | ❌                    | ✅      | Default in a typical setup                                                   |
-| `vpnkit`       | `builtin`      | Slow           | Fast ✅         | ❌                    | ✅      | Default when `slirp4netns` isn't installed                                   |
-| `slirp4netns`  | `slirp4netns`  | Slow           | Slow            | ✅                    | ✅      |                                                                              |
-| `pasta`        | `implicit`     | Slow           | Fast ✅         | ✅                    | ✅      | Experimental; Needs pasta version 2023_12_04 or later                        |
-| `lxc-user-nic` | `builtin`      | Fast ✅        | Fast ✅         | ❌                    | ❌      | Experimental                                                                 |
-| `bypass4netns` | `bypass4netns` | Fast ✅        | Fast ✅         | ✅                    | ✅      | **Note:** Not integrated to RootlessKit as it needs a custom seccomp profile |
+| Network driver | Port driver          | Net throughput | Port throughput | Source IP propagation | No SUID | Note                                                                         |
+| -------------- | -------------------- | -------------- | --------------- | --------------------- | ------- | ---------------------------------------------------------------------------- |
+| `gvisor-tap-vsock`| `builtin`         | Slow           | Fast ✅         | ✅ (*)                | ✅      | Default when slirp4netns is not installed                                    |
+| `slirp4netns`     | `builtin`         | Slow           | Fast ✅         | ✅ (*)                | ✅      | Default when slirp4netns is installed                                        |
+| `vpnkit`          | `builtin`         | Slow           | Fast ✅         | ✅ (*)                | ✅      | Legacy                                                                       |
+| `gvisor-tap-vsock`| `gvisor-tap-vsock`| Slow           | Slow            | ❌                    | ✅      | Not recommended. Use `builtin` port driver instead.                          |
+| `slirp4netns`     | `slirp4netns`     | Slow           | Slow            | ✅                    | ✅      |                                                                              |
+| `pasta`           | `implicit`        | Slow           | Fast ✅         | ✅                    | ✅      | Experimental; Needs pasta version 2023_12_04 or later                        |
+| `lxc-user-nic`    | `builtin`         | Fast ✅        | Fast ✅         | ✅ (*)                | ❌      | Experimental                                                                 |
+| `bypass4netns`    | `bypass4netns`    | Fast ✅        | Fast ✅         | ✅                    | ✅      | **Note:** Not integrated to RootlessKit as it needs a custom seccomp profile |
+
+(*) Applicable since RootlessKit v3.0. Also requires `userland-proxy` to be disabled.
 
 For information about troubleshooting specific networking issues, see:
 
@@ -271,13 +280,13 @@ For details, see [Routing ping packets](./tips.md#routing-ping-packets).
 
 #### `IPAddress` shown in `docker inspect` is unreachable
 
-This is an expected behavior, as the daemon is namespaced inside RootlessKit's
-network namespace. Use `docker run -p` instead.
+This was an expected behavior until Docker Engine v29.5, as the daemon was namespaced inside RootlessKit's
+network namespace. Use `docker run -p` instead, or upgrade to Docker Engine v29.5 or later.
 
 #### `--net=host` doesn't listen ports on the host network namespace
 
-This is an expected behavior, as the daemon is namespaced inside RootlessKit's
-network namespace. Use `docker run -p` instead.
+This was an expected behavior until Docker Engine v29.5, as the daemon was namespaced inside RootlessKit's
+network namespace. Use `docker run -p` instead, or upgrade to Docker Engine v29.5 or later.
 
 #### Network is slow
 
@@ -286,7 +295,7 @@ If slirp4netns is not installed, Docker falls back to [VPNKit](https://github.co
 Installing slirp4netns may improve the network throughput.
 
 For more information about network drivers for RootlessKit, see
-[RootlessKit documentation](https://github.com/rootless-containers/rootlesskit/blob/v2.0.0/docs/network.md).
+[RootlessKit documentation](https://github.com/rootless-containers/rootlesskit/blob/v3.0.0/docs/network.md).
 
 Also, changing MTU value may improve the throughput.
 The MTU value can be specified by creating `~/.config/systemd/user/docker.service.d/override.conf` with the following content:
@@ -304,8 +313,34 @@ $ systemctl --user restart docker
 
 #### `docker run -p` does not propagate source IP addresses
 
-This is because Docker in rootless mode uses RootlessKit's `builtin` port
-driver by default, which doesn't support source IP propagation. To enable
+{{< tabs >}}
+{{< tab name="RootlessKit v3.0 or later" >}}
+This is because Docker Engine's `userland-proxy` is incompatible with RootlessKit's source IP propagation.
+
+To disable userland-proxy, add the following configuration to `~/.config/docker/daemon.json`:
+
+```json
+{"userland-proxy": false}
+```
+
+Then restart the daemon:
+
+```bash
+systemctl --user restart docker
+```
+
+You may also need to load `br_netfilter` kernel module:
+
+```bash
+sudo tee /etc/modules-load.d/docker.conf <<EOF >/dev/null
+br_netfilter
+EOF
+
+sudo systemctl restart systemd-modules-load.service
+```
+{{< /tab >}}
+{{< tab name="Prior versions" >}}
+This is because RootlessKit's `builtin` port didn't support source IP propagation until v3.0. To enable
 source IP propagation, you can:
 
 - Use the `slirp4netns` RootlessKit port driver
@@ -342,11 +377,13 @@ To change the RootlessKit networking configuration:
    $ systemctl --user daemon-reload
    $ systemctl --user restart docker
    ```
+{{< /tab >}}
+{{< /tabs >}}
 
 For more information about networking options for RootlessKit, see:
 
-- [Network drivers](https://github.com/rootless-containers/rootlesskit/blob/v2.0.0/docs/network.md)
-- [Port drivers](https://github.com/rootless-containers/rootlesskit/blob/v2.0.0/docs/port.md)
+- [Network drivers](https://github.com/rootless-containers/rootlesskit/blob/v3.0.0/docs/network.md)
+- [Port drivers](https://github.com/rootless-containers/rootlesskit/blob/v3.0.0/docs/port.md)
 
 ### Tips for debugging
 
