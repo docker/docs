@@ -382,9 +382,9 @@ Key features of this Dockerfile:
 - Straightforward port usage — The app runs on port 3000 internally, exposed externally as port 8080.
 - Memory-optimized runtime — Node.js is configured to run with a smaller memory limit than the default.
 
-### Step 2: Create the compose.yml file
+### Step 2: Create the compose.yaml file
 
-Create a file named `compose.yml` in your project root:
+Create a file named `compose.yaml` in your project root:
 
 ```yaml
 # ========================================
@@ -621,7 +621,7 @@ Thumbs.db
 docs/
 
 # Deployment configs
-compose.yml
+compose.yaml
 Taskfile.yml
 nodejs-sample-kubernetes.yaml
 
@@ -642,7 +642,7 @@ After creating all the configuration files, your project directory should now co
 ├── docker-nodejs-sample/
 │ ├── Dockerfile
 │ ├── .dockerignore
-│ ├── compose.yml
+│ ├── compose.yaml
 │ └── .env
 ```
 
@@ -777,7 +777,7 @@ In this guide, you learned how to containerize, build, and run a Node.js applica
 What you accomplished:
 
 - Created a `Dockerfile` with a multi-stage build optimized for TypeScript and React.
-- Created a `compose.yml` file with development, production, and database services.
+- Created a `compose.yaml` file with development, production, and database services.
 - Set up environment configuration with a `.env` file for flexible deployment settings.
 - Created a `.dockerignore` file to exclude unnecessary files and keep the image clean and efficient.
 - Built your Docker image using `docker build`.

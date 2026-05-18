@@ -49,7 +49,7 @@ $ git clone https://github.com/kristiyan-velkov/docker-nextjs-sample
 
 ## Build the Docker image
 
-Next.js has specific requirements for production deployments. This guide shows two approaches: **standalone** output (Node.js server) and **export** output (static files with NGINX).
+Next.js has specific requirements for production deployments. This guide shows two approaches: **standalone** output (Node.js server) and **export** output (static files with Nginx).
 
 > [!TIP]
 >
@@ -364,7 +364,7 @@ Choose either a Docker Hardened Image or the Docker Official Image, then create 
 {{< tabs >}}
 {{< tab name="Using Docker Hardened Images" >}}
 
-Docker Hardened Images (DHIs) are available for Node.js and NGINX in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog). For more information, see the [DHI quickstart](/dhi/get-started/) guide.
+Docker Hardened Images (DHIs) are available for Node.js and Nginx in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog). For more information, see the [DHI quickstart](/dhi/get-started/) guide.
 
 1. Sign in to the DHI registry:
    ```console
@@ -579,7 +579,7 @@ CMD ["-g", "daemon off;"]
 ```
 
 > [!NOTE]
-> We use [nginx-unprivileged](https://hub.docker.com/r/nginxinc/nginx-unprivileged) instead of the standard NGINX image to run as a non-root user, following security best practices.
+> We use [nginx-unprivileged](https://hub.docker.com/r/nginxinc/nginx-unprivileged) instead of the standard Nginx image to run as a non-root user, following security best practices.
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -654,11 +654,11 @@ CMD ["-g", "daemon off;"]
     ```
 
       > [!NOTE]
-      > Export uses **port 8080**. For more details, see the [Next.js output configuration](https://nextjs.org/docs/app/api-reference/config/next-config-js/output) and [NGINX documentation](https://nginx.org/en/docs/).
+      > Export uses **port 8080**. For more details, see the [Next.js output configuration](https://nextjs.org/docs/app/api-reference/config/next-config-js/output) and [Nginx documentation](https://nginx.org/en/docs/).
 
 ### Step 2: Create the compose.yaml file
 
-Create a file named `compose.yaml` with the following contents. Use port `3000` for standalone output or port `8080` for export output:
+Create a file named `compose.yaml` with the following contents:
 
 ```yaml {collapse=true,title=compose.yaml}
 services:
@@ -668,6 +668,9 @@ services:
     ports:
       - 3000:3000
 ```
+
+> [!NOTE]
+> If using export output (Nginx), change the port mapping to `8080:8080`.
 
 ### Step 3: Create the .dockerignore file
 
@@ -795,7 +798,7 @@ With your custom configuration in place, you're now ready to build the Docker im
 The setup includes:
 
 - Multi-stage builds for optimized image size  
-- Standalone: Node.js server on port 3000; Export: NGINX serving static files on port 8080  
+- Standalone: Node.js server on port 3000; Export: Nginx serving static files on port 8080  
 - Non-root user for enhanced security  
 - Proper file permissions and ownership  
 
@@ -922,7 +925,7 @@ $ docker stop nextjs-app
 In this guide, you learned how to containerize, build, and run a Next.js application using Docker. By following best practices, you created a secure, optimized, and production-ready setup.
 
 What you accomplished:
-- Configured Next.js for either standalone output (Node.js server) or export output (static files with NGINX).
+- Configured Next.js for either standalone output (Node.js server) or export output (static files with Nginx).
 - Added a multi-stage Dockerfile for your chosen approach: standalone (port 3000) or export (port 8080, with `nginx.conf`).
 - Created a `.dockerignore` file to exclude unnecessary files and keep the image clean and efficient.
 - Built your Docker image using `docker build`.

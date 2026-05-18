@@ -153,13 +153,13 @@ For the sample application, you'll use a variation of the backend from the react
    CMD ["/bin/server"]
    ```
 
-4. In the cloned repository's directory, run `docker build` to build the image.
+3. In the cloned repository's directory, run `docker build` to build the image.
 
    ```console
    $ docker build -t rust-backend-image .
    ```
 
-5. Run `docker run` with the following options to run the image as a container on the same network as the database.
+4. Run `docker run` with the following options to run the image as a container on the same network as the database.
 
    ```console
    $ docker run \
@@ -176,7 +176,7 @@ For the sample application, you'll use a variation of the backend from the react
      rust-backend-image
    ```
 
-6. Curl the application to verify that it connects to the database.
+5. Curl the application to verify that it connects to the database.
 
    ```console
    $ curl http://localhost:3001/users
