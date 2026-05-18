@@ -69,33 +69,32 @@ Docker](https://www.docker.com/pricing/contact-sales/) to explore options.
 
 ### Session management and idle state
 
-Docker Offload implements session management and idle state policies to ensure
-fair use across all users.
+Docker Offload uses session management and idle state policies to ensure fair use of cloud resources across all users.
 
-When Docker Desktop shows it is in an **Offload idle** state it waits for activity on
-the Docker API and only connects to a cloud environment when required. A user can only 
-maintain one Docker Offload session at a time. Once connected and in a **Offload running** 
-state it will remain connected as long as it detects continued activity. 
+Each user can run one Docker Offload session at a time. When Docker Desktop is in an **Offload idle** state, it waits for activity on the Docker API and only connects to a cloud environment when needed. Once connected, the session moves to an **Offload running** state and stays connected as long as Docker detects activity. Activity includes any Docker API call, a running container, or an active build.
 
-While using Docker Offload you will receive notifications and prompts in the Docker Desktop
-Dashboard to determine if you are still active in these two cases:
+#### When you'll see a prompt
 
-1. If no activity is detected for more than 3 minutes.
-2. If the session has been running for a long time.
+While Docker Offload is running, Docker Desktop shows prompts in the Dashboard to check if you're still active. Prompts appear in two cases:
 
-When the prompt appears, you can choose to:
-   - Select **Ask me again later** in the prompt to confirm you're still active and
-     continue your session.
-   - Select **Idle now** in the prompt to immediately return to an idle state.
-   - Do nothing and it will automatically return to an idle state.
+1. No activity is detected for more than 3 minutes.
+2. The session has been running for a long time.
 
-After returning to an idle state there is a 5 minute grace period where the session
-can be resumed by triggering new Docker activity. If the idle period exceeds 5 minutes 
-without resuming, the session is terminated and the remote environment and any containers, 
-images, or volumes are deleted.
+When a prompt appears, you can:
+   - Select **Ask me again later** to confirm you're still active and continue your session.
+   - Select **Idle now** to return to an idle state immediately.
+   - Do nothing, and the session returns to an idle state automatically.
 
-Long session prompts are triggered every 3 hours during a session. After 8 hours of cumulative
-usage, the prompts are triggered every hour.
+#### What happens when your session goes idle
+
+After your session returns to an idle state, there is a 5-minute grace period. You can resume the session during this time by running any Docker command.
+
+> [!IMPORTANT]
+> If the idle period exceeds 5 minutes without activity, the session is terminated. Docker Offload environments are ephemeral, so the remote environment and any containers, images, or volumes in it are deleted. To keep work between sessions, push images to a registry such as [Docker Hub](https://docs.docker.com/docker-hub/) before your session ends.
+
+#### Long session prompts
+
+Long session prompts appear every 3 hours during a session. After 8 hours of cumulative usage in a day, prompts appear every hour. The 8-hour counter resets at the start of each day.
 
 ## What's next
 
