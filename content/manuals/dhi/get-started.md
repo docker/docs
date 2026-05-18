@@ -82,19 +82,18 @@ You can quickly compare DHIs with other images to see the security
 improvements and differences. This comparison helps you understand the value of
 using hardened images.
 
-Run the following command to see a summary comparison between the Docker
-Hardened Image for Python and the non-hardened Docker Official Image for Python
-from Docker Hub:
+Run the following command to compare the Docker Hardened Image for Python with
+the non-hardened Docker Official Image for Python from Docker Hub. Look for the
+`## Overview` section in the output for a summary comparison.
 
 ```console
 $ docker scout compare dhi.io/python:3.13 \
     --to python:3.13 \
     --platform linux/amd64 \
-    --ignore-unchanged \
-    2>/dev/null | sed -n '/## Overview/,/^  ## /p' | head -n -1
+    --ignore-unchanged
 ```
 
-Example output:
+The `## Overview` section of the output looks similar to the following:
 
 ```plaintext
   ## Overview

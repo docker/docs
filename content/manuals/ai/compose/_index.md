@@ -5,5 +5,5 @@ title: AI and Docker Compose
 weight: 50
 params:
   sidebar:
-    group: AI
+    group: AI and agents
 ---

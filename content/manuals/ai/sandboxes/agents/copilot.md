@@ -4,6 +4,7 @@ weight: 30
 description: |
   Use GitHub Copilot in Docker Sandboxes with GitHub token authentication and
   trusted folder configuration.
+keywords: docker sandboxes, github copilot, ai agent, github token, sbx
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
@@ -66,5 +67,5 @@ Template: `docker/sandbox-templates:copilot`
 
 Preconfigured to trust the workspace directory and run without approval prompts.
 
-See [Custom environments](custom-environments.md) to pre-install tools or
-customize this environment.
+See [Customize](../customize/) to pre-install tools or customize this
+environment.

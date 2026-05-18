@@ -16,6 +16,7 @@ options:
       usage: help for sbx
 see_also:
     - sbx completion - Generate the autocompletion script for the specified shell
+    - sbx cp - Copy files or directories between a sandbox and the host
     - sbx create - Create a sandbox for an agent
     - sbx diagnose - Diagnose common issues with your sbx installation
     - sbx exec - Execute a command inside a sandbox

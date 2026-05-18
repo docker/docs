@@ -6,7 +6,7 @@ keywords: how to use docker desktop, what is docker desktop used for, what does 
   desktop do, using docker desktop
 params:
   sidebar:
-    group: Products
+    group: Application development
 grid:
 - title: Install Docker Desktop
   description: |

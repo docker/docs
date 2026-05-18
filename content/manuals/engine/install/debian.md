@@ -130,7 +130,7 @@ Docker from the repository.
 
    > [!NOTE]
    >
-   > If you use a derivative distribution, such as Kali Linux,
+   > If you use Debian testing or a derivative distribution such as Kali Linux,
    > you may need to substitute the part of this command that's expected to
    > print the version codename:
    >
@@ -139,7 +139,7 @@ Docker from the repository.
    > ```
    >
    > Replace this part with the codename of the corresponding Debian release,
-   > such as `bookworm`.
+   > such as `trixie`.
 
 2. Install the Docker packages.
 
@@ -178,14 +178,13 @@ Docker from the repository.
 
     > [!NOTE]
     >
-    > The Docker service starts automatically after installation. To verify that
-    > Docker is running, use:
-    > 
+    > After installation, verify that Docker is running:
+    >
     > ```console
     > $ sudo systemctl status docker
     > ```
     >
-    > Some systems may have this behavior disabled and will require a manual start:
+    > If Docker is not running, start it manually:
     >
     > ```console
     > $ sudo systemctl start docker
@@ -246,14 +245,13 @@ download a new file each time you want to upgrade Docker Engine.
 
     > [!NOTE]
     >
-    > The Docker service starts automatically after installation. To verify that
-    > Docker is running, use:
-    > 
+    > After installation, verify that Docker is running:
+    >
     > ```console
     > $ sudo systemctl status docker
     > ```
     >
-    > Some systems may have this behavior disabled and will require a manual start:
+    > If Docker is not running, start it manually:
     >
     > ```console
     > $ sudo systemctl start docker

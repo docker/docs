@@ -2,6 +2,7 @@
 title: Usage
 weight: 20
 description: Common patterns for working with sandboxes.
+keywords: docker sandboxes, sbx, usage, run, policy, secrets, branches, git, workspaces, ssh
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
@@ -176,6 +177,42 @@ but the sandbox won't have access to the `.git` directory in the parent
 repository. This means the agent can't commit, push, or use Git. `--branch`
 solves this by setting up the worktree so that Git works inside the sandbox.
 
+### Signed commits
+
+Sandboxes can sign Git commits with SSH keys from your host agent. The private
+key stays on your host.
+
+On the host, load the key into your SSH agent:
+
+```console
+$ ssh-add ~/.ssh/id_ed25519
+```
+
+Inside the sandbox, check that the forwarded agent exposes the key:
+
+```console
+$ ssh-add -L
+```
+
+Configure Git globally inside the sandbox to use SSH commit signing. This
+writes to the sandbox user's Git config, not your repository's `.git/config`.
+Use an inline public key instead of a key file path, because host paths such as
+`~/.ssh/id_ed25519.pub` might not exist in the sandbox:
+
+```console
+$ git config --global gpg.format ssh
+$ git config --global user.signingkey "key::$(ssh-add -L | head -n 1)"
+```
+
+Then commit as usual:
+
+```console
+$ git commit -S
+```
+
+For common signing failures, see
+[Sandbox commits aren't signed](troubleshooting.md#sandbox-commits-arent-signed).
+
 ## Reconnecting and naming
 
 Sandboxes persist after the agent exits. Running the same workspace path again
@@ -233,12 +270,26 @@ $ sbx run claude ~/project-b
 $ sbx rm <sandbox-name>       # when finished
 ```
 
+## Copying files between host and sandbox
+
+Use [`sbx cp`](/reference/cli/sbx/cp/) to copy files or directories between
+your host and a sandbox. This is useful for one-off files that aren't part of a
+mounted workspace, such as generated output, logs, or setup files.
+
+```console
+$ sbx cp ./config.json my-sandbox:/home/user/
+$ sbx cp my-sandbox:/home/user/output.log ./
+$ sbx cp ./src/ my-sandbox:/home/user/src
+```
+
+One side of the copy must use `SANDBOX:PATH`. Copying directly between two
+sandboxes isn't supported.
+
 ## Installing dependencies and using Docker
 
 Ask the agent to install what's needed — it has sudo access, and installed
 packages persist for the sandbox's lifetime. For teams or repeated setups,
-[custom templates](agents/custom-environments.md) let you pre-install tools
-into a reusable image.
+see [Customize](customize/) for reusable templates and declarative kits.
 
 Agents can also build Docker images, run containers, and use
 [Compose](https://docs.docker.com/compose/). Everything runs inside the sandbox's private Docker
@@ -303,14 +354,14 @@ A few things to keep in mind:
 Services running on your host are reachable from inside a sandbox using the
 hostname `host.docker.internal`.
 Use this instead of `127.0.0.1` or your machine's local network IP address,
-which are not routable from inside the sandbox.
+which are not reachable from inside the sandbox.
 
 The sandbox proxy translates `host.docker.internal` to `localhost` before
 forwarding the request, so you must add the `localhost` address with the
 specific port to your network policy allowlist:
 
 ```console
-$ sbx policy allow network localhost:11434
+$ sbx policy allow network -g localhost:11434
 ```
 
 Then use `host.docker.internal` in any configuration or request that points at
@@ -320,10 +371,26 @@ the host service. For example, to verify connectivity from a sandbox shell:
 $ curl http://host.docker.internal:11434
 ```
 
+## Rolling out to a team
+
+When rolling sandboxes out across a team, two features handle different
+needs:
+
+- [Custom templates and kits](customize/) let you package reusable agent
+  configurations, MCP servers, base images, and per-project policies. Every
+  developer pulls them down with their workspace.
+- [Organization governance](security/governance.md) lets admins define
+  network and filesystem rules in the Docker Admin Console. The rules apply
+  across every developer's sandboxes and take precedence over local policy.
+  Available on a separate paid subscription.
+
+Customization gives developers shared starting points. Governance gives
+admins centralized enforcement.
+
 ## What persists
 
 While a sandbox exists, installed packages, Docker images, configuration
 changes, and command history all persist across stops and restarts. When you
 remove a sandbox, everything inside is deleted — only your workspace files
 remain on your host. To preserve a configured environment, create a
-[custom template](agents/custom-environments.md).
+[custom template](customize/templates.md).

@@ -2215,7 +2215,7 @@ examples: |-
     `--rm` flag:
 
     ```text
-    --rm: Automatically remove the container when it exits
+    --rm: Automatically remove the container and its associated anonymous volumes when it exits
     ```
 
     > [!NOTE]

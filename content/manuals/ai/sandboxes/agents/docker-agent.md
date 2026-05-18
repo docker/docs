@@ -4,6 +4,7 @@ weight: 70
 description: |
   Use Docker Agent in Docker Sandboxes with multi-provider authentication
   supporting OpenAI, Anthropic, and more.
+keywords: docker sandboxes, docker agent, openai, anthropic, sbx
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
@@ -68,5 +69,5 @@ $ sbx run docker-agent -- agent.yml
 
 The sandbox uses `docker/sandbox-templates:docker-agent` and launches Docker
 Agent without approval prompts by default. See
-[Custom environments](custom-environments.md) to build your own image on top of
+[Templates](../customize/templates.md) to build your own image on top of
 this base.

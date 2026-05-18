@@ -1,0 +1,83 @@
+command: docker dhi attestation list
+short: List attestations for a Docker Hardened Image
+long: |-
+    List all attestations attached to a Docker Hardened Image.
+
+    The image can be specified as:
+      - name:tag (e.g., nginx:1.27)
+      - namespace/name:tag (e.g., dhi/nginx:1.27)
+      - name@sha256:digest (e.g., nginx@sha256:abc123...)
+
+    When a tag is provided, the digest is resolved from the container registry.
+    Use --platform to select a specific platform manifest when the image is a multi-platform index.
+
+    Attestations are retrieved via the OCI Referrers API from the Docker Scout referrer registry.
+
+    Examples:
+      # List attestations for an image by tag
+      docker dhi attestation list dhi/nginx:1.27
+
+      # List attestations for a specific platform
+      docker dhi attestation list dhi/nginx:1.27 --platform linux/amd64
+
+      # List attestations for an image by digest
+      docker dhi attestation list dhi/nginx@sha256:abc123...
+
+      # Filter by predicate type
+      docker dhi attestation list dhi/nginx:1.27 --predicate-type https://spdx.dev/Document
+
+      # Filter by multiple predicate types
+      docker dhi attestation list dhi/nginx:1.27 --predicate-type https://spdx.dev/Document --predicate-type https://slsa.dev/provenance/v1
+
+      # Output in JSON format
+      docker dhi attestation list dhi/nginx:1.27 --json
+usage: docker dhi attestation list <image>
+pname: docker dhi attestation
+plink: docker_dhi_attestation.yaml
+options:
+    - option: json
+      value_type: bool
+      default_value: "false"
+      description: Output in JSON format
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: platform
+      value_type: string
+      description: |
+        Platform to filter by (e.g., linux/amd64). Defaults to the Docker daemon platform
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: predicate-type
+      value_type: stringArray
+      default_value: '[]'
+      description: Filter by predicate type (can be specified multiple times)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: org
+      value_type: string
+      description: Docker Hub organization (overrides config)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

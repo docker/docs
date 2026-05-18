@@ -26,6 +26,165 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.73.1
+
+{{< release-date date="2026-05-13" >}}
+
+{{< desktop-install-v2 win=true version="4.73.1" build_path="/226574/" >}}
+
+### Bug fixes and enhancements
+
+#### For Windows
+
+- Fixed a bug where Docker Desktop's own Electron processes were incorrectly killed when launching from the Start menu. Fixes [docker/desktop-feedback#367](https://github.com/docker/desktop-feedback/issues/367).
+
+## 4.73.0
+
+{{< release-date date="2026-05-11" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.73.0" build_path="/226246/" >}}
+
+### Updates
+
+- [Docker Engine v29.4.3](https://docs.docker.com/engine/release-notes/29/#2943)
+- [Docker Agent v1.54.0](https://github.com/docker/docker-agent/releases/tag/v1.54.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed `Cmd+Q` (Mac) and `Ctrl+Q` (Windows/Linux) not fully quitting Docker Desktop. Fixes [docker/for-mac#7833](https://github.com/docker/for-mac/issues/7833).
+- Fixed a bug where canceling `docker load` left a containerd ref lock held, causing subsequent loads of the same image to fail.
+- Fixed an issue where Docker Desktop made unnecessary network requests to `mcp.docker.com` on sign-in when MCP Toolkit was disabled, causing unexpected proxy authentication prompts.
+- Fixed an issue where the search input in Gordon's session sidebar would not close if it was left empty.
+
+#### For Mac
+
+- Fixed excessive memory usage on Apple Silicon Macs by improving the Linux VM's ability to return freed container memory back to the host OS.
+- Fixed a bug where containers received connections with a corrupted source IP when another container had an active outbound connection to an IP in the same subnet range. Fixes [docker/for-mac#7824](https://github.com/docker/for-mac/issues/7824).
+
+## 4.72.0
+
+{{< release-date date="2026-05-06" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.72.0" build_path="/225998/" >}}
+
+### New
+
+- The **Logs** view is now generally available.
+- New installations of Docker Desktop for Windows have a choice between per-user (Beta) or all-user installs.
+
+### Updates
+
+- [Docker Agent v1.50.0](https://github.com/docker/docker-agent/releases/tag/v1.50.0)
+- [Docker DHI (`dhictl`) v0.0.3](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.3)
+- [Docker Model Runner v1.1.37](https://github.com/docker/model-cli/releases/tag/v1.1.37)
+- [credential helpers v0.9.6](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.6)
+
+### Security
+
+- The Extensions settings page now includes a security notice that extensions run with host-level privileges and are not audited by Docker.
+- [Fixed CVE-2026-31431 ("copy.fail")](https://xint.io/blog/copy-fail-linux-distributions) by backporting an upstream Linux kernel patch that prevents an unprivileged container user from gaining root inside the container via a controlled write into the host VM page cache.
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Improvements to Docker Offload idle notifications.
+- Fixed the **Open Gordon in TUI**  button not working due to a missing `run` subcommand in Docker Agent command arguments.
+- Fixed an issue where transient network errors or Docker Hub server errors during sign-in would unexpectedly sign users out instead of retrying automatically.
+- Improved data refresh for the Containers, Images, and Volumes screens by fetching up-to-date data on demand when navigating to those screens, reducing background polling load.
+- Fixed a kernel crash that could occur when changing filesharing technology after significant container file activity.
+- Enable the OpenAI Responses API (`/responses`) endpoint in Docker Model Runner.
+- Fixed a bug where users were unexpectedly signed out of Docker Desktop mid-flow when signing in via `docker login` using OAuth.
+
+#### For Windows
+
+- Fixed a bug on Windows where selecting the Docker Desktop taskbar icon multiple times could spawn multiple backend processes. Re-selecting the icon while Docker Desktop is running now brings the dashboard to focus.
+- Fixed a race condition on Windows that caused a false-positive "processes still running" dialog to appear when Docker Desktop starts or exits normally.
+
+### For Linux
+
+- Support for RHEL 8 has been dropped.
+
+## 4.71.0
+
+{{< release-date date="2026-04-27" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.71.0" build_path="/225177/" >}}
+
+> [!IMPORTANT]
+>
+> Support for RHEL 8 has ended. Installing Docker Desktop will require RHEL 9 or RHEL 10 in the next release.
+
+### Updates
+
+- [Docker Model Runner v1.1.36](https://github.com/docker/model-runner/releases/tag/v1.1.36)
+- [containerd to v2.2.3](https://github.com/containerd/containerd/releases/tag/v2.2.3)
+- [Runc v1.3.5](https://github.com/opencontainers/runc/releases/tag/v1.3.5)
+- [Docker Compose v5.1.3](https://github.com/docker/compose/releases/tag/v5.1.3)
+- [Docker Agent v1.44.0](https://github.com/docker/docker-agent/releases/tag/v1.44.0)
+- [Docker Engine v29.4.1](/manuals/engine/release-notes/29.md#2941)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Docker Model Runner is now disabled by default and must be explicitly enabled in **Settings**. When enabled, TCP host-side support is automatically active.
+- Fixed an issue where downloading a Docker Desktop update would fail without a clear error if the disk had insufficient free space.
+- Fixed an issue where Docker Scout tag recommendations, when inspecting an image, failed when the base image digest or repository name was empty.
+- Added a **Switch to local Docker context** button on the sign-in screen, allowing users in a cloud context to switch back to their local context without signing in.
+- Added a dedicated **Stopped** status screen for the cloud engine so users see a clear stopped state instead of an error screen when transitioning away from Docker Offload.
+
+#### For Mac
+
+- Fixed an issue where error tracking would temporarily continue sending session data directly after a user disabled analytics. Fixes [docker/for-mac#7768](https://github.com/docker/for-mac/issues/7768).
+
+#### For Windows
+
+- Fixed a critical issue where Docker Desktop Dashboard failed to open with `ERR_FAILED` errors caused by process hardening policies conflicting with Chromium.
+- Fixed a bug where Kubernetes could fail to start on WSL 2 when `HTTP_PROXY` environment variables are set in WSL 2 itself.
+- Fixed a bug in Enhanced Container Isolation (ECI) that was causing loss of container `rootfs` persistence across Docker Desktop restarts, when using WSL.
+
+## 4.70.0
+
+{{< release-date date="2026-04-20" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.70.0" build_path="/224270/" >}}
+
+### New
+
+- Added a CLI hint that surfaces the **Logs** view when running `logs`, `compose logs`, `compose attach`, or `compose up` commands, giving you quick access to logs across all running containers. Available with the **Logs** (Beta) feature enabled.
+
+### Updates
+
+- [Docker Compose v5.1.2](https://github.com/docker/compose/releases/tag/v5.1.2)
+- [Docker Engine v29.4.0](/manuals/engine/release-notes/29.md#2940)
+- [Docker Agent v1.43.0](https://github.com/docker/docker-agent/releases/tag/v1.43.0)
+- [Docker Model Runner v1.1.33](https://github.com/docker/model-runner/releases/tag/v1.1.33)
+- [Docker Scout CLI v1.20.4](https://github.com/docker/scout-cli/releases/tag/v1.20.4)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where `docker login` could fail silently in CI environments due to slow Docker Hub responses causing credential store update timeouts.
+- Fixed an issue where disabling Beta features also disabled Docker Model Runner.
+- Fixed `docker desktop start` causing the Docker AI agent API daemon to fail due to an inherited CLI plugin environment variable.
+
+#### For Mac
+
+- Fixed a crash loop where Docker Desktop repeatedly failed to start with exit status `42` after an update due to a corrupted `DockerAppLaunchPath` setting.
+- Fixed an issue where a failed update could leave Docker Desktop in a broken state. The installer now automatically reverts to the previous version and shows a clear error message.
+- Fixed a bug where stopping one container could disrupt active Unix socket forwards belonging to other running containers.
+
+#### For Windows
+
+- Fixed an issue where a failed update could leave Docker Desktop in a broken state. The installer now automatically reverts to the previous version and shows a clear error message.
+- Fixed a bug where a failed switch to Windows containers could leave Docker Desktop in a broken state, requiring a restart.
+- Fixed an issue where Docker Desktop failed to launch for users with `DEVHOME` set in their environment.
+- Temporarily rolled back process hardening that caused Electron crashes on Windows. Fixes [docker/desktop-feedback#245](https://github.com/docker/desktop-feedback/issues/245).
+
 ## 4.69.0
 
 {{< release-date date="2026-04-13" >}}

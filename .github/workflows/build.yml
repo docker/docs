@@ -80,7 +80,6 @@ jobs:
           - unused-media
           - test-go-redirects
           - dockerfile-lint
-          - path-warnings
           - validate-vendor
     steps:
       -

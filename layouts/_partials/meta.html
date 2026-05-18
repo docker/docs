@@ -3,7 +3,7 @@
   <title>{{ site.Title }}</title>
 {{ else }}
   <title>
-    {{ printf "%s | %s" .LinkTitle site.Title }}
+    {{ printf "%s | %s" .Title site.Title }}
   </title>
 {{ end }}
 {{ if or (eq .Params.sitemap false) (not hugo.IsProduction) }}
@@ -20,11 +20,11 @@
 <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" />
 <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<link rel="shortcut icon" href="/favicon.ico">
+<link rel="shortcut icon" href="/favicon.ico" />
 <meta name="theme-color" content="#2496ed" />
 
 <!-- SEO -->
-<meta name="twitter:title" itemprop="title name" content="{{ .LinkTitle }}" />
+<meta name="twitter:title" itemprop="title name" content="{{ .Title }}" />
 <meta
   name="twitter:description"
   property="og:description"
@@ -40,7 +40,7 @@
   content="{{ (resources.Get "images/thumbnail.webp").Permalink }}"
 />
 <meta name="twitter:image:alt" content="Docker Documentation" />
-<meta property="og:title" content="{{ .LinkTitle }}" />
+<meta property="og:title" content="{{ .Title }}" />
 <meta property="og:description" content="{{ $description }}" />
 <meta property="og:type" content="website" />
 <meta

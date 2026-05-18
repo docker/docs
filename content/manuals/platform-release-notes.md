@@ -86,7 +86,7 @@ This page provides details on new features, enhancements, known issues, and bug 
 
 ### New
 
-- Administrators can now view [organization Insights](/manuals/admin/organization/insights.md).
+- Administrators can now view [organization Insights](/manuals/admin/insights.md).
 
 ## 2024-07-17
 

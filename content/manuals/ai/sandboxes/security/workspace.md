@@ -4,6 +4,7 @@ weight: 40
 description: |
   How sandboxed agents interact with your workspace files and what to review
   after an agent session.
+keywords: docker sandboxes, workspace trust, file access, review, sbx
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}

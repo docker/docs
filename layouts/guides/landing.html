@@ -40,7 +40,7 @@
     >
       <div class="pl-2"><strong>Tags</strong></div>
       <fieldset class="flex flex-col gap-2">
-        {{- range $name, $data := site.Data.tags }}
+        {{- range $name, $data := hugo.Data.tags }}
           {{- if where $.Pages "Params.tags" "intersect" (slice $name) }}
             {{- $id := anchorize (fmt.Printf "tag-%s" $name) }}
             <div class="flex gap-2 pl-2">
@@ -60,7 +60,7 @@
       </fieldset>
       <div class="pl-2"><strong>Languages</strong></div>
       <fieldset class="flex flex-wrap gap-2 pl-2">
-        {{- range $name, $data := site.Data.languages }}
+        {{- range $name, $data := hugo.Data.languages }}
           {{- if where $.Pages "Params.languages" "intersect" (slice $name) }}
             {{- $id := anchorize (fmt.Printf "lang-%s" $name) }}
             <button
@@ -193,12 +193,12 @@
             </p>
           </div>
           <div class="flex items-center gap-2 pl-4">
-            {{- range $name, $data := site.Data.tags }}
+            {{- range $name, $data := hugo.Data.tags }}
               <div x-show="filters.tags.includes('{{ $name }}')">
                 {{ template "termchip" $data.title }}
               </div>
             {{- end }}
-            {{- range $name, $data := site.Data.languages }}
+            {{- range $name, $data := hugo.Data.languages }}
               <div
                 x-show="filters.languages.includes('{{ $name }}')"
                 class="border-divider-light dark:border-divider-dark inline-flex items-center gap-1 rounded-full border bg-gray-100 px-2 text-sm text-gray-200 select-none dark:bg-gray-800 dark:text-gray-300"

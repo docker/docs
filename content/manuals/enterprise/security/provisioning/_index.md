@@ -7,18 +7,18 @@ weight: 20
 aliases:
  - /security/for-admins/provisioning/
 grid:
-  - title: "Just-in-Time (JIT) provisioning"
-    description: "Set up automatic user creation on first sign-in. Ideal for smaller teams with minimal setup requirements."
-    icon: "schedule"
-    link: "just-in-time/"
   - title: "SCIM provisioning"
     description: "Enable continuous user data synchronization between your IdP and Docker. Best for larger organizations."
     icon: "sync"
     link: "scim/"
-  - title: "Group mapping"
-    description: "Configure role-based access control using IdP groups. Perfect for strict access control requirements."
+  - title: "Just-in-Time (JIT) provisioning"
+    description: "Set up automatic user creation on first sign-in. Ideal for smaller teams with minimal setup requirements."
+    icon: "schedule"
+    link: "just-in-time/"
+  - title: "Auto-provisioning"
+    description: "Associate members to an organization when email addresses match a verified domain."
     icon: "group"
-    link: "group-mapping/"
+    link: "auto-provisioning/"
 ---
 
 {{< summary-bar feature_name="SSO" >}}
@@ -29,13 +29,14 @@ This page provides an overview of user provisioning and the supported provisioni
 
 ## What is provisioning?
 
-Provisioning helps manage users by automating tasks like account creation, updates, and deactivation based on data from your identity provider (IdP). There are three methods for user provisioning, each offering benefits for different organizational needs:
+Provisioning helps manage users by automating tasks like account creation, updates, and deactivation based on data from your identity provider (IdP). There are several methods for user provisioning, each offering benefits for different organizational needs:
 
 | Provisioning method | Description | Default setting in Docker | Recommended for |
 | :--- | :--- | :------------- | :--- |
-| Just-in-Time (JIT) | Automatically creates and provisions user accounts when they first sign in via SSO | Enabled by default | Organizations needing minimal setup, smaller teams, or low-security environments |
 | System for Cross-domain Identity Management (SCIM) | Continuously syncs user data between your IdP and Docker, ensuring user attributes remain updated without manual intervention | Disabled by default | Larger organizations or environments with frequent changes in user information or roles |
 | Group mapping | Maps user groups from your IdP to specific roles and permissions within Docker, enabling fine-grained access control based on group membership | Disabled by default | Organizations requiring strict access control and role-based user management |
+| Just-in-Time (JIT) | Automatically creates and provisions user accounts when they first sign in via SSO | Enabled by default | Organizations needing minimal setup, smaller teams, or low-security environments |
+| Auto-provision | Adds users when email addresses match a verified domain | Disabled by default | Orgs without SSO that need to add existing Docker users by domain |
 
 ## Default provisioning setup
 

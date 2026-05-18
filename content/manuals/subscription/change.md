@@ -29,7 +29,7 @@ To upgrade your subscription:
 1. Sign in to [Docker Home](https://app.docker.com/) and select the organization
    you want to upgrade.
 1. Select **Billing**.
-1. Optional. If you're upgrading from a free Personal subscription to a Team subscription and want to keep your username, [convert your user account into an organization](../admin/organization/convert-account.md).
+1. Optional. If you're upgrading from a free Personal subscription to a Team subscription and want to keep your username, [convert your user account into an organization](../admin/organization/setup/convert-account.md).
 1. Select **Upgrade**.
 1. Follow the on-screen instructions to complete your upgrade. If you choose to pay using a US bank account, you must verify the account. For more information, see [Verify a bank account](/manuals/billing/payment-method.md#verify-a-bank-account).
 

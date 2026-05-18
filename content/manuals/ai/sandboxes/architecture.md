@@ -2,6 +2,7 @@
 title: Architecture
 weight: 40
 description: Technical architecture of Docker Sandboxes; workspace mounting, storage, networking, and sandbox lifecycle.
+keywords: docker sandboxes, architecture, microVM, workspace mounting, sandbox lifecycle
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}

@@ -1,0 +1,205 @@
+# This workflow warns and then closes issues and PRs that have had no activity for a specified amount of time.
+# It also handles lifecycle slash commands for managing stale labels.
+# For more information, see: https://github.com/actions/stale
+#
+# Security: Actions are pinned to full commit SHA to prevent supply chain attacks.
+# To update, check releases and update both the SHA and version comment.
+#
+# Debug mode:
+# - Lifecycle commands: Set DEBUG_ONLY to 'true' in the lifecycle-commands job env
+# - Stale action: Set debug-only to true in the stale job configuration
+name: Mark stale issues and pull requests
+
+on:
+  schedule:
+    - cron: '30 1 * * *'  # Daily at 1:30 AM UTC
+  issue_comment:
+    types: [created]
+
+jobs:
+  lifecycle-commands:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'issue_comment'
+    permissions:
+      issues: write
+      pull-requests: write
+    
+    steps:
+      - name: Handle lifecycle commands
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        env:
+          # Set to 'true' to test without making actual changes
+          DEBUG_ONLY: 'false'
+        with:
+          script: |
+            const comment = context.payload.comment.body.toLowerCase().trim();
+            const debugOnly = process.env.DEBUG_ONLY === 'true';
+            
+            if (debugOnly) {
+              console.log('🔍 DEBUG MODE: No changes will be made');
+            }
+            
+            // Define commands and their required permissions
+            const commands = {
+              '/lifecycle frozen': { label: 'lifecycle/frozen', requiresWrite: true },
+              '/lifecycle stale': { label: 'lifecycle/stale', requiresWrite: true },
+              '/lifecycle active': { action: 'remove-stale', requiresWrite: false },
+              '/remove-lifecycle frozen': { action: 'remove-frozen', requiresWrite: true },
+              '/remove-lifecycle stale': { action: 'remove-stale', requiresWrite: false }
+            };
+            
+            // Check if comment contains a lifecycle command
+            const commandKey = Object.keys(commands).find(cmd => 
+              comment === cmd || comment.startsWith(cmd + ' ')
+            );
+            
+            if (!commandKey) {
+              console.log('No lifecycle command found in comment');
+              return;
+            }
+            
+            const commandConfig = commands[commandKey];
+            const issue_number = context.issue.number;
+            
+            // Check user permissions for restricted commands
+            if (commandConfig.requiresWrite) {
+              if (debugOnly) {
+                console.log(`Would check permissions for user ${context.payload.comment.user.login} for ${commandKey}`);
+              } else {
+                try {
+                  const { data: userPermission } = await github.rest.repos.getCollaboratorPermissionLevel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    username: context.payload.comment.user.login
+                  });
+                  
+                  const hasWriteAccess = ['admin', 'write', 'maintain'].includes(userPermission.permission);
+                  
+                  if (!hasWriteAccess) {
+                    console.log(`User ${context.payload.comment.user.login} does not have permission for ${commandKey}`);
+                    await github.rest.reactions.createForIssueComment({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      comment_id: context.payload.comment.id,
+                      content: '-1'
+                    });
+                    return;
+                  }
+                  console.log(`User ${context.payload.comment.user.login} has ${userPermission.permission} access`);
+                } catch (error) {
+                  console.log('Error checking permissions:', error.message);
+                  return;
+                }
+              }
+            }
+            
+            // Handle remove commands
+            if (commandConfig.action && commandConfig.action.startsWith('remove-')) {
+              const labelToRemove = commandConfig.action === 'remove-stale' ? 'lifecycle/stale' : 'lifecycle/frozen';
+              
+              if (debugOnly) {
+                console.log(`Would remove ${labelToRemove} label from issue #${issue_number}`);
+                console.log('Would react with 👍 to comment');
+              } else {
+                try {
+                  await github.rest.issues.removeLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue_number,
+                    name: labelToRemove
+                  });
+                  console.log(`Removed ${labelToRemove} label`);
+                  
+                  await github.rest.reactions.createForIssueComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    comment_id: context.payload.comment.id,
+                    content: '+1'
+                  });
+                } catch (error) {
+                  console.log(`Label ${labelToRemove} not found or already removed`);
+                }
+              }
+            }
+            // Handle add label commands
+            else if (commandConfig.label) {
+              if (debugOnly) {
+                console.log(`Would add ${commandConfig.label} label to issue #${issue_number}`);
+                console.log('Would react with 👍 to comment');
+              } else {
+                try {
+                  await github.rest.issues.addLabels({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue_number,
+                    labels: [commandConfig.label]
+                  });
+                  console.log(`Added ${commandConfig.label} label`);
+                  
+                  await github.rest.reactions.createForIssueComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    comment_id: context.payload.comment.id,
+                    content: '+1'
+                  });
+                } catch (error) {
+                  console.log(`Error adding label: ${error.message}`);
+                }
+              }
+            }
+
+  stale:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/stale@b5d41d4e1d5dceea10e7104786b73624c18a190f # v10.2.0
+        with:
+          ascending: false
+          operations-per-run: 30
+          
+          # Exempt labels - issues/PRs with these labels will never be marked stale
+          exempt-issue-labels: 'kind/help-wanted,status/need-more-info,status/needs-analysis,lifecycle/frozen'
+          exempt-pr-labels: 'kind/help-wanted,status/need-more-info,status/needs-analysis,lifecycle/frozen'
+          
+          # Use lifecycle/stale label to match existing convention
+          stale-issue-label: 'lifecycle/stale'
+          stale-pr-label: 'lifecycle/stale'
+          
+          # Stale messages
+          stale-issue-message: |
+            There hasn't been any activity on this issue for a long time. If the problem is still relevant, **add a comment** to keep it open. Otherwise, this issue will be automatically closed in 14 days.
+            
+            **To remove the stale label:** Comment `/lifecycle active`
+            **To freeze (requires write access):** Comment `/lifecycle frozen`
+          stale-pr-message: |
+            Thanks for the PR. We'd like to make our product docs better, but haven't been able to review all the suggestions. As our docs change often and quickly diverge, we do not have the bandwidth to review and rebase old PRs.
+            
+            If the updates are still relevant, please rebase your PR against the latest version of the docs and **add a comment** when it's ready. This helps our maintainers focus on active contributions. If there's no activity, this PR will be closed in 30 days.
+            
+            **To remove the stale label:** Comment `/lifecycle active`
+            **To freeze (requires write access):** Comment `/lifecycle frozen`
+          
+          # Close messages
+          close-issue-message: |
+            Closing this issue as there hasn't been any activity for a long time. 
+            
+            If the problem is still relevant, please **open a new issue** and complete the issue template so we can capture the details required to investigate further. This helps our maintainers focus on active issues.
+          close-pr-message: |
+            Closing this PR as there hasn't been any activity for a long time. 
+            
+            If the updates are still relevant, please review our [contribution guidelines](https://github.com/docker/docs/blob/main/CONTRIBUTING.md) and **create a new PR** against the latest version of our docs.
+          
+          # Timing configuration NOTE: If you change days-before-issue-close or
+          # days-before-pr-close, also update the hardcoded values in the
+          # stale-issue-message and stale-pr-message above to match.
+          days-before-issue-stale: 180  # 6 months
+          days-before-pr-stale: 180     # 6 months
+          days-before-issue-close: 14   # 2 weeks after stale
+          days-before-pr-close: 30      # 1 month after stale
+          
+          # Debug mode - set to true for dry-run testing (no actual changes)
+          debug-only: false

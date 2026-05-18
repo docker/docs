@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        {{ range site.Data.samples.samples }}
+        {{ range hugo.Data.samples.samples }}
           {{ if in .services $.Params.service }}
             <tr>
               <td>{{ printf "[%s](%s)" .title .url | markdownify }}</td>

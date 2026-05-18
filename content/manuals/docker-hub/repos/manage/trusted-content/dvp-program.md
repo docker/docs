@@ -67,10 +67,9 @@ benefits from:
 - High availability and uptime: Docker's systems are designed for failover
   across multiple availability zones, with load-balanced autoscaling, enabling
   99.9% uptime.
-- Global delivery and fast downloads: Docker leverages Cloudflare's CDN and
-  caching (with Cache Reserve) to achieve cache hit ratios more than 99%,
-  reducing reliance on origin traffic and ensuring fast access for developers
-  everywhere.
+- Global delivery and fast downloads: Docker leverages a global CDN and caching
+  infrastructure to achieve cache hit ratios more than 99%, reducing reliance
+  on origin traffic and ensuring fast access for developers everywhere.
 - Durability: Docker maintains a documented backup policy and performs full
   daily backups of production data.
 

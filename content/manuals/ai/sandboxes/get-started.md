@@ -22,7 +22,7 @@ cleaning up.
 {{< tabs group="os" >}}
 {{< tab name="macOS" >}}
 
-- macOS Tahoe (26) or later
+- macOS Sonoma (version 14) or later
 - Apple silicon
 
 {{< /tab >}}
@@ -39,7 +39,7 @@ cleaning up.
 {{< /tab >}}
 {{< tab name="Linux (Ubuntu)" >}}
 
-- Ubuntu 22.04 or later
+- Ubuntu 24.04 or later
 - 64-bit Intel or AMD (x86_64)
 - KVM hardware virtualization supported and enabled by the CPU. If you're
   running inside a VM, nested virtualization must be turned on. Verify that KVM
@@ -181,7 +181,7 @@ The dashboard shows your sandboxes with live status, lets you attach to
 agents, open shells, and manage network rules from one place. See
 [Interactive mode](usage.md#interactive-mode) for details.
 
-![The sbx interactive dashboard showing sandbox status, resource usage, and network governance controls.](images/sbx-dashboard.png)
+![The interactive dashboard showing sandbox status, resource usage, and network governance controls.](images/sbx-dashboard.png)
 
 ## Use branch mode
 
@@ -230,7 +230,7 @@ $ sbx policy ls
 To allow a specific host:
 
 ```console
-$ sbx policy allow network registry.npmjs.org
+$ sbx policy allow network -g registry.npmjs.org
 ```
 
 With **Locked Down**, even your model provider API is blocked unless you
@@ -263,8 +263,8 @@ working tree are unaffected.
 - [Usage guide](usage.md) — sandbox management, reconnecting, multiple
   workspaces, port forwarding, and more
 - [Agents](agents/) — supported agents and configuration
-- [Custom environments](agents/custom-environments.md) — build your own sandbox
-  images
+- [Customize](customize/) — build reusable templates or declare capabilities
+  with kits
 - [Credentials](security/credentials.md) — credential storage and management
 - [Workspace trust](security/workspace.md) — review agent changes safely
 - [Policies](security/policy.md) — control outbound access

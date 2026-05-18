@@ -5,20 +5,20 @@ description: Frequently asked questions about Docker single sign-on enforcement 
 keywords: SSO enforcement, single sign-on, personal access tokens, CLI authentication, guest users
 tags: [FAQ]
 aliases:
-- /single-sign-on/enforcement-faqs/
-- /faq/security/single-sign-on/enforcement-faqs/
-- /security/faqs/single-sign-on/enforcement-faqs/
+  - /single-sign-on/enforcement-faqs/
+  - /faq/security/single-sign-on/enforcement-faqs/
+  - /security/faqs/single-sign-on/enforcement-faqs/
 ---
 
 ## Does Docker SSO support authenticating through the command line?
 
-When SSO is enforced, [passwords are prevented from accessing the Docker CLI](/security/security-announcements/#deprecation-of-password-logins-on-cli-when-sso-enforced). You must use a personal access token (PAT) for CLI authentication instead.
+When SSO is enforced, [passwords are prevented from accessing the Docker CLI](/manuals/security/security-announcements.md#deprecation-of-password-logins-on-cli-when-sso-enforced). You must use a personal access token (PAT) for CLI authentication instead.
 
-Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Manage personal access tokens](/security/access-tokens/). Users who already used a PAT before SSO enforcement can continue using that PAT.
+Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Manage personal access tokens](/manuals/security/access-tokens.md). Users who already used a PAT before SSO enforcement can continue using that PAT.
 
 ## How does SSO affect automation systems and CI/CD pipelines?
 
-Before enforcing SSO, you must [create personal access tokens](/security/access-tokens/) to replace passwords in automation systems and CI/CD pipelines.
+Before enforcing SSO, you must [create personal access tokens](/manuals/security/access-tokens.md) to replace passwords in automation systems and CI/CD pipelines.
 
 ## Can I turn on SSO without enforcing it immediately?
 

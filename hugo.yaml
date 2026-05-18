@@ -102,16 +102,24 @@ outputFormats:
     mediaType: "text/plain"
     notAlternative: true
     permalinkable: false
+  llmsfull:
+    baseName: llms-full
+    isPlainText: true
+    mediaType: "text/plain"
+    notAlternative: true
+    permalinkable: false
 
 # Enable custom output formats
 # (only generate the custom output files once)
 outputs:
   home:
     - html
+    - markdown
     - redirects
     - metadata
     - robots
     - llms
+    - llmsfull
   page:
     - html
     - markdown
@@ -121,14 +129,12 @@ outputs:
 
 languages:
   en:
-    languageName: English
+    label: English
 
 # Site-wide parameters
 # Can be accessed in content with {{% param "param_name" %}}
 # Or in layouts/partials with site.Params.param_name
 params:
-  kapa:
-    id: ba5c2cbc-6535-4334-a72e-050f7a681c8a
   analytics:
     hotjar:
       prod: 3169877
@@ -148,10 +154,10 @@ params:
   # Latest version of the Docker Engine API
   latest_engine_api_version: "1.54"
   # Latest version of Docker Engine
-  docker_ce_version: "29.4.0"
+  docker_ce_version: "29.5.0"
   # Previous version of the Docker Engine
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
-  docker_ce_version_prev: "29.3.1"
+  docker_ce_version_prev: "29.4.3"
   # Latest Docker Compose version
   compose_version: "v5.1.2"
   # Latest BuildKit version

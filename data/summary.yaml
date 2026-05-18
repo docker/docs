@@ -21,6 +21,7 @@ Gordon DHI migration:
   availability: Experimental
   requires: Docker Desktop [4.38.0](/manuals/desktop/release-notes.md#4380) or later
 Automated builds:
+  availability: Deprecated
   subscription: [Pro, Team, Business]
 Azure blob:
   availability: Experimental
@@ -68,8 +69,6 @@ Buildx metadata warnings:
 Buildx no default:
   requires: Docker Buildx [0.10.4](https://github.com/docker/buildx/releases/tag/v0.10.4) and later
 Cache backend API:
-  availability: Experimental
-Docker Agent:
   availability: Experimental
 Company:
   subscription: [Business]
@@ -161,7 +160,6 @@ Docker Debug:
 Docker Desktop Archlinux:
   availability: Experimental
 Desktop logs:
-  availability: Beta
   requires: Docker Desktop [4.65](/manuals/desktop/release-notes.md#4650) or later
 Docker Hardened Images:
   subscription: [Docker Hardened Images Select or Enterprise]
@@ -187,7 +185,7 @@ Docker Pass:
 Docker Projects:
   availability: Beta
 Docker Sandboxes sbx:
-  availability: Experimental
+  availability: Early Access
 Docker Sandboxes:
   availability: Experimental
   requires: Docker Desktop [4.58](/manuals/desktop/release-notes.md#4580) or later
@@ -264,7 +262,6 @@ SOCKS5 proxy support:
 SSO:
   subscription: [Business]
   for: Administrators
-  requires: Docker Desktop [4.42](/manuals/desktop/release-notes.md#4420) and later
 Synchronized file sharing:
   subscription: [Pro, Team, Business]
 USB/IP support:

@@ -5,9 +5,9 @@ description: Frequently asked questions about Docker SSO and identity provider c
 keywords: identity providers, SSO IdP, SAML, Azure AD, Entra ID, certificate management
 tags: [FAQ]
 aliases:
-- /single-sign-on/idp-faqs/
-- /faq/security/single-sign-on/idp-faqs/
-- /security/faqs/single-sign-on/idp-faqs/
+  - /single-sign-on/idp-faqs/
+  - /faq/security/single-sign-on/idp-faqs/
+  - /security/faqs/single-sign-on/idp-faqs/
 ---
 
 ## Can I use multiple identity providers with Docker SSO?
@@ -46,7 +46,7 @@ Yes, bot accounts need seats like regular users, requiring a non-aliased domain 
 
 ## Does SAML SSO use Just-in-Time provisioning?
 
-The SSO implementation uses Just-in-Time (JIT) provisioning by default. You can optionally turn off JIT in the Admin Console if you turn on auto-provisioning using SCIM. See [Just-in-Time provisioning](/security/for-admins/provisioning/just-in-time/).
+The SSO implementation uses Just-in-Time (JIT) provisioning by default. You can optionally turn off JIT in the Admin Console if you turn on auto-provisioning using SCIM. See [Just-in-Time provisioning](/manuals/enterprise/security/provisioning/just-in-time.md).
 
 ## My Entra ID SSO connection isn't working and shows an error. How can I troubleshoot this?
 

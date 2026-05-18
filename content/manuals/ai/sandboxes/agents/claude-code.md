@@ -4,6 +4,7 @@ weight: 10
 description: |
   Use Claude Code in Docker Sandboxes with authentication, configuration, and
   YOLO mode for AI-assisted development.
+keywords: docker sandboxes, claude code, anthropic, ai agent, sbx
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
@@ -68,5 +69,13 @@ for available options.
 
 The sandbox uses `docker/sandbox-templates:claude-code` and launches Claude Code
 with `--dangerously-skip-permissions` by default. See
-[Custom environments](custom-environments.md) to build your own image on
-top of this base.
+[Templates](../customize/templates.md) to build your own image on top of
+this base.
+
+## Use a local model
+
+To run Claude Code in a sandbox against a local model on your host through
+Docker Model Runner, see
+[Run Claude Code in a Docker Sandbox with Docker Model Runner](/guides/claude-code-sandbox-model-runner/).
+For the host-only version without a sandbox, see
+[Use Claude Code with Docker Model Runner](/guides/claude-code-model-runner/).

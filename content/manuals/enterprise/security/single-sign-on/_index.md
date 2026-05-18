@@ -4,10 +4,10 @@ linkTitle: Single sign-on
 description: Learn how single sign-on works, how to set it up, and the required SSO attributes.
 keywords: Single Sign-On, SSO, sign-in, admin, docker hub, admin console, security, identity provider, SSO configuration, enterprise login, Docker Business, user authentication
 aliases:
-- /single-sign-on/
-- /admin/company/settings/sso/
-- /admin/organization/security-settings/sso-management/
-- /security/for-admins/single-sign-on/
+  - /single-sign-on/
+  - /admin/company/settings/sso/
+  - /admin/organization/security-settings/sso-management/
+  - /security/for-admins/single-sign-on/
 weight: 10
 ---
 
@@ -49,11 +49,11 @@ assigned to an organization, and added to a team.
 > [!IMPORTANT]
 >
 > Docker plans to deprecate CLI password-based sign-in in future releases.
-Using a PAT ensures continued CLI access. For more information, see the
-[security announcement](/manuals/security/security-announcements.md#deprecation-of-password-logins-on-cli-when-sso-enforced).
+> Using a PAT ensures continued CLI access. For more information, see the
+> [security announcement](/manuals/security/security-announcements.md#deprecation-of-password-logins-on-cli-when-sso-enforced).
 
 ## Next steps
 
 - Start [configuring SSO](connect.md).
-- Read the [FAQs](/manuals/enterprise/security/single-sign-on/faqs/general.md).
-- [Troubleshoot](/manuals/enterprise/troubleshoot/troubleshoot-sso.md) SSO issues.
+- Read the [FAQs](/manuals/enterprise/security/single-sign-on/FAQs/general.md).
+- [Troubleshoot](/manuals/enterprise/security/single-sign-on/troubleshoot-sso.md) SSO issues.

@@ -1,55 +1,44 @@
 ---
 name: create-lab-guide
-description: >
-  Create a guide page for a Labspace. This includes writing the markdown content for the guide, 
-  structuring it according to Docker docs conventions, and ensuring it provides clear instructions 
-  and information about the Labspace. Includes learning about the lab itself, extracting out its
-  learning objectives, and combining all of that into a well-structured guide markdown file.
+description: "Clone a dockersamples Labspace repo, extract learning objectives and module structure from labspace.yaml, and produce a Hugo guide page under content/guides/ with correct frontmatter, labspace-launch shortcode, and Docker docs style compliance. Use when asked to create a lab guide, write a Labspace page, add a Docker lab tutorial, migrate a lab to docs, or document a hands-on lab."
 ---
 
 # Create Lab Guide
 
-You are creating a new guide page for a labspace. The guide should be structured according to Docker docs conventions, 
-with clear sections, learning objectives, and instructions for users to get the most out of the lab.
+Create a guide page for a Docker Labspace: clone the source repo, extract
+structure from `labspace.yaml`, write the Hugo markdown page, and validate.
 
 ## Inputs
-
-The user provides one or more guides to migrate. Resolve these from the inventory below:
 
 - **REPO_NAME**: GitHub repo in the `dockersamples` org (e.g. `labspace-ai-fundamentals`)
 
 ## Step 1: Clone the labspace repo
 
-Clone the guide repo to a temporary directory. This gives you all source files locally — no HTTP calls needed.
-
 ```bash
-git clone --depth 1 https://github.com/dockersamples/{REPO_NAME}.git <tmpdir>/{REPO_NAME}
+TMPDIR=$(mktemp -d)
+git clone --depth 1 https://github.com/dockersamples/{REPO_NAME}.git "$TMPDIR/{REPO_NAME}"
 ```
 
-Where `<tmpdir>` is a temporary directory on your system (e.g. the output of `mktemp -d`).
+## Step 2: Extract key information
 
-## Step 2: Learn and extract key information about the lab
+Read these files from the cloned repo:
 
-The repo structure is:
+| File | Purpose |
+|------|---------|
+| `README.md` | Lab purpose and overview |
+| `labspace/labspace.yaml` | Module structure and content paths |
+| `labspace/*.md` | Module content (only files listed in `labspace.yaml`) |
+| `.github/workflows/*.yml` | Published Compose file URL for the launch command |
+| `compose.override.yaml` | Check for top-level `model` specs (triggers `model-download` param) |
 
-- `<tmpdir>/{REPO_NAME}/README.md` — the main README for the lab
-- `<tmpdir>/{REPO_NAME}/labspace/labspace.yaml` — a YAML document outlining details of the lab, including the sections/modules and the path to their content
-- `<tmpdir>/{REPO_NAME}/labspace/*.md` — the content for each section/module (only reference the files specified in `labspace.yaml`)
-- `<tmpdir>/{REPO_NAME}/.github/workflows/` — the GHA workflow that publishes the labspace. It includes the repo URL for the published Compose file, which will be useful for the "launch" command
-- `<tmpdir>/{REPO_NAME}/compose.override.yaml` - lab-specific Compose customizations
+Extract:
+1. A short description for the `description` and `summary` frontmatter fields.
+2. Learning objectives from the module content.
+3. Whether a model download is required (`compose.override.yaml` → top-level `model` key).
 
-1. Read `README.md` to understand the purpose of the lab.
-2. Read the `labspace/labspace.yaml` to understand the structure of the lab and its sections/modules.
-3. Read the `labspace/*.md` files to extract the learning objectives, instructions, and any code snippets.
-4. Extract a short description that can be used for the `description` and `summary` fields in the guide markdown.
-5. Determine if a model will be pulled when starting the lab by looking at the `compose.override.yaml` file and looking for the any top-level `model` specifications.
+## Step 3: Write the guide markdown
 
-
-## Step 2: Write the guide markdown
-
-The markdown file must be located in the `guides/` directory and have a filename of `lab-{GUIDE_ID}.md`.
-
-Sample markdown structure, including frontmatter and content:
+Place the file at `content/guides/lab-{GUIDE_ID}.md`.
 
 ```markdown
 ---
@@ -60,7 +49,7 @@ description: |
 summary: |
   A short summary of the lab for the guides listing page. 2-3 lines.
 keywords: AI, Docker, Model Runner, agentic apps, lab, labspace
-aliases: # Include if the lab is an AI-related lab
+aliases: # Include only for AI-related labs
   - /labs/docker-for-ai/{REPO_NAME_WITHOUT_LABSPACE_PREFIX}/
 params:
   tags: [ai, labs]
@@ -85,7 +74,6 @@ By the end of this Labspace, you will have completed the following:
 - Objective #1
 - Objective #2
 - Objective #3
-- Objective #4
 
 ## Modules
 
@@ -94,33 +82,35 @@ By the end of this Labspace, you will have completed the following:
 | 1 | Module #1 | Description of module #1 |
 | 2 | Module #2 | Description of module #2 |
 | 3 | Module #3 | Description of module #3 |
-| 4 | Module #4 | Description of module #4 |
-| 5 | Module #5 | Description of module #5 |
-| 6 | Module #6 | Description of module #6 |
 ```
 
-Important notes:
+Conditional rules:
+- All lab guides **must** include `labs` in `params.tags`.
+- AI-related labs: also add `ai` tag and an alias under `/labs/docker-for-ai/`.
+- If a model download is required: add `model-download: true` to the `labspace-launch` shortcode.
 
-- The learning objectives should be based on the content of the labspace as a whole.
-- The modules should be based on the sections/modules outlined in `labspace.yaml`.
-- All lab guides _must_ have a tag of `labs`
-- If the lab is AI-related, it should also have a tag of `ai` and aliases for `/labs/docker-for-ai/{REPO_NAME}/`
-- If the lab pulls a model, add a `model-download: true` parameter to the `labspace-launch` shortcode to show a warning about model downloads.
+## Step 4: Apply Docker docs style rules
 
+Follow STYLE.md and COMPONENTS.md. Key rules:
 
-## Step 3: Apply Docker docs style rules
+| Avoid | Use instead |
+|-------|-------------|
+| "we", "let's" | Imperative voice or "you" |
+| "simply", "easily", "just" | Remove the hedge word |
+| "allows you to" / "enables you to" | "lets you" or rephrase |
+| "click" | "select" |
+| Bold for emphasis / product names | Bold only for UI elements |
+| "currently", "new", "recently" | Remove time-relative language |
 
-These are mandatory (from STYLE.md and AGENTS.md):
+Use `console` as the language hint for shell blocks with `$` prompts.
+Use contractions ("it's", "you're", "don't").
 
-- **No "we"**: "We are going to create" → "Create" or "Start by creating"
-- **No "let us" / "let's"**: → imperative voice or "You can..."
-- **No hedge words**: remove "simply", "easily", "just", "seamlessly"
-- **No meta-commentary**: remove "it's worth noting", "it's important to understand"
-- **No "allows you to" / "enables you to"**: → "lets you" or rephrase
-- **No "click"**: → "select"
-- **No bold for emphasis or product names**: only bold UI elements
-- **No time-relative language**: remove "currently", "new", "recently", "now"
-- **No exclamations**: remove "Voila!!!" etc.
-- Use `console` language hint for interactive shell blocks with `$` prompts
-- Use contractions: "it's", "you're", "don't"
+## Step 5: Validate
+
+1. Confirm frontmatter has `title`, `description`, `keywords`, and `params.tags` including `labs`.
+2. Run `npx prettier --write <file>` to format.
+3. Run `docker buildx bake lint vale` and fix any errors.
+4. Re-read the file and verify: correct shortcode syntax, objectives match source content, modules match `labspace.yaml`, no vendored paths edited.
+
+Do not proceed to commit until validation passes.
 

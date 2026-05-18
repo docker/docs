@@ -55,7 +55,7 @@ Attribution is based on the following:
 - Single organization membership:
   - If the owner of the verified domain is a company and the user is part of
     only one organization within that
-    [company](../../admin/faqs/company-faqs.md#what-features-are-supported-at-the-company-level),
+    [company](../../admin/company/company-faqs.md),
     the pull is attributed to that specific organization.
   - If the user is part of only one organization, the pull is attributed to
     that specific organization.

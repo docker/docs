@@ -6,7 +6,7 @@ weight: 1
 keywords: docker, ai, gordon, docker agent, sandboxes, model runner, mcp
 params:
   sidebar:
-    group: AI
+    group: AI and agents
 ---
 
 Docker provides tools for working with AI across your development workflow.

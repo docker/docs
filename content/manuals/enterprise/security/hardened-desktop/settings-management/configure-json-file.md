@@ -34,7 +34,7 @@ You can create the `admin-settings.json` file in two ways:
   - [Mac](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) installation guide
   - [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) installation guide
 - Create it manually (UTF-8 without BOM) and place it in the following locations:
-  - Mac: `/Library/Application\ Support/com.docker.docker/admin-settings.json`
+  - Mac: `/Library/Application Support/com.docker.docker/admin-settings.json`
   - Windows: `C:\ProgramData\DockerDesktop\admin-settings.json`
   - Linux: `/usr/share/docker-desktop/admin-settings.json`
 
@@ -328,19 +328,19 @@ The following tables describe all available settings in the `admin-settings.json
 
 ### Linux VM settings
 
-| Parameter                                        | OS           | Description                                                                                                                                                                                                                                                                                              | Version |
-| :----------------------------------------------- | ------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `linuxVM`                                        |              | Parameters and settings related to Linux VM options - grouped together here for convenience.                                                                                                                                                                                                             |         |
-| &nbsp; &nbsp; &nbsp; &nbsp;`wslEngineEnabled`    | Windows only | If `value` is set to true, Docker Desktop uses the WSL 2 based engine. This overrides anything that may have been set at installation using the `--backend=<backend name>` flag.                                                                                                                         |         |
-| &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` |              | If `value` is set to true, it overrides the options in the Docker Engine config file. See the [Docker Engine reference](/reference/cli/dockerd/#daemon-configuration-file). Note that for added security, a few of the config attributes may be overridden when Enhanced Container Isolation is enabled. |         |
-| &nbsp; &nbsp; &nbsp; &nbsp;`vpnkitCIDR`          |              | Overrides the network range used for vpnkit DHCP/DNS for `*.docker.internal`                                                                                                                                                                                                                             |         |
+| Parameter                                        | OS           | Description                                                                                                                                                                                                                                                                                                | Version |
+| :----------------------------------------------- | ------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `linuxVM`                                        |              | Parameters and settings related to Linux VM options - grouped together here for convenience.                                                                                                                                                                                                               |         |
+| &nbsp; &nbsp; &nbsp; &nbsp;`wslEngineEnabled`    | Windows only | If `value` is set to true, Docker Desktop uses the WSL 2 based engine. This overrides anything that may have been set at installation using the `--backend=<backend name>` flag.                                                                                                                           |         |
+| &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` |              | If `value` is set to true, it overrides the options in the Docker Engine config file. See the [Docker Engine reference](/reference/cli/dockerd.md#daemon-configuration-file). Note that for added security, a few of the config attributes may be overridden when Enhanced Container Isolation is enabled. |         |
+| &nbsp; &nbsp; &nbsp; &nbsp;`vpnkitCIDR`          |              | Overrides the network range used for vpnkit DHCP/DNS for `*.docker.internal`                                                                                                                                                                                                                               |         |
 
 ### Windows containers
 
-| Parameter                                        | OS  | Description                                                                                                                                  | Version |
-| :----------------------------------------------- | --- | :------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `windowsContainers`                              |     | Parameters and settings related to `windowsContainers` options - grouped together here for convenience.                                      |         |
-| &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` |     | Overrides the options in the Linux daemon config file. See the [Docker Engine reference](/reference/cli/dockerd/#daemon-configuration-file). |         |
+| Parameter                                        | OS  | Description                                                                                                                                    | Version |
+| :----------------------------------------------- | --- | :--------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `windowsContainers`                              |     | Parameters and settings related to `windowsContainers` options - grouped together here for convenience.                                        |         |
+| &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` |     | Overrides the options in the Linux daemon config file. See the [Docker Engine reference](/reference/cli/dockerd.md#daemon-configuration-file). |         |
 
 > [!NOTE]
 >

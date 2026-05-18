@@ -8,7 +8,7 @@ aliases:
   - /engine/scan/
 params:
   sidebar:
-    group: Products
+    group: Supply chain security
 grid:
   - title: Quickstart
     link: /scout/quickstart/

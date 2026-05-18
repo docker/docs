@@ -26,7 +26,7 @@ at any time. All charges are in United States dollars (USD). The following payme
 Certain payment methods require additional steps before selecting them as a payment method:
 
 - You must [verify a bank account](/manuals/billing/payment-method.md#verify-a-bank-account) before choosing a bank account.
-- You must have a Docker Business or Docker Team plan to [pay by invoice](/billing/payment-method/#enable-and-disable-pay-by-invoice).
+- You must have a Docker Business or Docker Team plan to [pay by invoice](/manuals/billing/payment-method.md#enable-and-disable-pay-by-invoice).
 - You must be an existing Stripe Link customer, or fill out the card information form to use Link payments.
 
 ## Manage payment method
@@ -66,7 +66,7 @@ To remove a single payment method:
 1. Find the payment method you want to remove from the **Payment method** table.
 1. Select the three dots, then choose **Remove**.
 
-To remove your default payment method, first set a different payment method as default, or [downgrade to a free subscription](/subscription/change).
+To remove your default payment method, first set a different payment method as default, or [downgrade to a free subscription](/manuals/subscription/change.md).
 
 ## Enable and disable pay by invoice
 

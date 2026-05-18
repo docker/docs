@@ -44,14 +44,17 @@ To configure the registry key method manually:
    - Add each organization on a separate line
    - Do not use spaces or commas as separators
 1. Restart Docker Desktop.
-1. Verify the `Sign in required!` prompt appears in Docker Desktop.
+1. Verify the **Sign in required!** prompt appears in Docker Desktop.
 
 {{< /tab >}}
 {{< tab name="Group Policy deployment" >}}
 
 Deploy the registry key across your organization using Group Policy:
 
-1. Create a registry script with the required key structure.
+1. Create a registry script with the following structure:
+   - Path: `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop`
+   - Value name: `allowedOrgs` (multi-string)
+   - Value data: Your organization names, one per line, in lowercase only
 1. In Group Policy Management, create or edit a GPO.
 1. Navigate to **Computer Configuration** > **Preferences** > **Windows Settings** > **Registry**.
 1. Right-click **Registry** > **New** > **Registry Item**.
@@ -73,7 +76,7 @@ Configuration profiles provide the most secure enforcement method for Mac, as th
 
 The payload is a dictionary of key-values. Docker Desktop supports the following keys:
 
-- `allowedOrgs`: Sets a list of organizations in one single string, where each organization is separated by a semi-colon.
+- `allowedOrgs`: Sets a list of organizations in one single string, where each organization is in lowercase only and is separated by a semi-colon. 
 - `overrideProxyHTTP`: Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests.
 - `overrideProxyHTTPS`: Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests.
 - `overrideProxyExclude`: Bypasses proxy settings for the specified hosts and domains. Uses a comma-separated list.
@@ -105,7 +108,7 @@ Overriding at least one of the proxy settings via Configuration profiles will au
             <key>PayloadDescription</key>
             <string>Configuration profile to manage Docker Desktop settings.</string>
             <key>PayloadOrganization</key>
-            <string>Your Company Name</string>
+            <string>Your company name</string>
             <key>allowedOrgs</key>
             <string>first_org;second_org</string>
             <key>overrideProxyHTTP</key>
@@ -127,13 +130,13 @@ Overriding at least one of the proxy settings via Configuration profiles will au
       <key>PayloadDescription</key>
       <string>Config profile to enforce Docker Desktop settings for allowed organizations.</string>
       <key>PayloadOrganization</key>
-      <string>Your Company Name</string>
+      <string>Your company name</string>
    </dict>
    </plist>
    ```
 1. Replace placeholders:
    - Change `com.yourcompany.docker.config` to your company identifier
-   - Replace `Your Company Name` with your organization name
+   - Replace `Your company name` with your organization name making sure it is all lowercase
    - Replace `PayloadUUID` with a randomly generated UUID
    - Update the `allowedOrgs` value with your organization names (separated by semicolons)
    - Replace `company.proxy:port` with http/https proxy server host(or IP address) and port
@@ -159,7 +162,7 @@ Some MDM solutions let you specify the payload as a plain dictionary of key-valu
 {{< tab name="Manual creation" >}}
 
 1. Create the file `/Library/Application Support/com.docker.docker/desktop.plist`.
-1. Add this content, replacing `myorg1` and `myorg2` with your organization names:
+1. Add this content, replacing `myorg1` and `myorg2` with your organization names and making sure they have lowercase letters only:
    ```xml
    <?xml version="1.0" encoding="UTF-8"?>
    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -222,7 +225,7 @@ Create the `registry.json` file (UTF-8 without BOM) at the appropriate location:
 
 1. Ensure users are members of your Docker organization.
 1. Create the `registry.json` file at the appropriate location for your platform.
-1. Add this content, replacing organization names with your own:
+1. Add this content, replacing organization names with your own and making sure they have lowercase letters only:
       ```json
       {
          "allowedOrgs": ["myorg1", "myorg2"]
@@ -272,8 +275,12 @@ Create the registry.json file during Docker Desktop installation:
 Start-Process '.\Docker Desktop Installer.exe' -Wait 'install --allowed-org=myorg'
 
 # Command Prompt
-"Docker Desktop Installer.exe" install --allowed-org=myorg
+"Docker Desktop Installer.exe" install --allowed-org=myorg1
 ```
+
+> [!NOTE]
+>
+> The `--allowed-org` flag accepts only one organization. To enforce sign-in for multiple organizations on Mac, configure the `registry.json` file after installation.
 
 #### Mac
 
@@ -282,6 +289,9 @@ sudo hdiutil attach Docker.dmg
 sudo /Volumes/Docker/Docker.app/Contents/MacOS/install --allowed-org=myorg
 sudo hdiutil detach /Volumes/Docker
 ```
+> [!NOTE]
+>
+> The `--allowed-org` flag accepts only one organization. To enforce sign-in for multiple organizations on Mac, configure the `registry.json` file after installation.
 
 {{< /tab >}}
 {{< /tabs >}}

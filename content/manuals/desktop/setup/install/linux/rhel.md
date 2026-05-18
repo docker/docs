@@ -23,7 +23,7 @@ This page contains information on how to install, launch and upgrade Docker Desk
 To install Docker Desktop successfully, you must:
 
 - Meet the [general system requirements](_index.md#general-system-requirements).
-- Have a 64-bit version of either RHEL 8, RHEL 9, or RHEL 10.
+- Have a 64-bit version of either RHEL 9 or RHEL 10.
 
 - If `pass` is not installed, or it can't be installed, you must enable [CodeReady Linux Builder (CRB) repository](https://access.redhat.com/articles/4348511) and [Extra Packages for Enterprise Linux (EPEL)](https://docs.fedoraproject.org/en-US/epel/).
 
@@ -40,14 +40,6 @@ To install Docker Desktop successfully, you must:
    ```console
    $ sudo subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms
    $ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
-   $ sudo dnf install pass
-   ```
-
-   {{< /tab >}}
-   {{< tab name="RHEL 8" >}}
-   ```console
-   $ sudo subscription-manager repos --enable codeready-builder-for-rhel-8-$(arch)-rpms
-   $ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
    $ sudo dnf install pass
    ```
 
@@ -70,15 +62,6 @@ To install Docker Desktop successfully, you must:
    $ # enable EPEL as described above
    $ sudo dnf install gnome-shell-extension-appindicator
    $ sudo gnome-extensions enable appindicatorsupport@rgcjonas.gmail.com
-   ```
-
-   {{< /tab >}}
-   {{< tab name="RHEL 8" >}}
-   ```console
-   $ # enable EPEL as described above
-   $ sudo dnf install gnome-shell-extension-appindicator
-   $ sudo dnf install gnome-shell-extension-desktop-icons
-   $ sudo gnome-shell-extension-tool -e appindicatorsupport@rgcjonas.gmail.com
    ```
 
    {{< /tab >}}

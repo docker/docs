@@ -117,7 +117,7 @@ tags:
     description: |
       The Audit Logs API endpoints allow you to query audit log events across a namespace.
 
-      For more information, see [Audit Logs](https://docs.docker.com/admin/organization/activity-logs/).
+      For more information, see [Audit Logs](https://docs.docker.com/admin/activity-logs/).
   - name: org-settings
     x-displayName: Org Settings
     description: |
@@ -139,14 +139,14 @@ tags:
     description: |
       The groups endpoints allow you to manage your organization's teams and their members.
 
-      For more information, see [Create and manage a team](https://docs.docker.com/admin/organization/manage-a-team/).
+      For more information, see [Create and manage a team](https://docs.docker.com/admin/organization/manage/manage-a-team/).
   - name: invites
     x-displayName: Invites
     x-audience: public
     description: |
       The invites endpoints allow you to manage invites for users to join your Docker organization.
 
-      For more information, see [Invite members](https://docs.docker.com/admin/organization/members/#invite-members).
+      For more information, see [Invite members](https://docs.docker.com/admin/organization/manage/members/#invite-members).
   - name: scim
     x-displayName: SCIM
     x-audience: public
@@ -1533,7 +1533,7 @@ paths:
         - `last_seen_at`
         - `last_desktop_version`
 
-        To make visible, please see [View Insights for organization users](https://docs.docker.com/admin/organization/insights/#view-insights-for-organization-users).
+        To make visible, please see [View Insights for organization users](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
 
         <span class="oat"></span>
       tags:
@@ -3639,20 +3639,20 @@ components:
           format: date-time
           description: |
             Last time the user logged in. To access this field, you must have insights visible for your organization. See 
-            [Insights](https://docs.docker.com/admin/organization/insights/#view-insights-for-organization-users).
+            [Insights](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
           example: "2021-01-05T21:06:53.506400Z"
         last_seen_at:
           type: string
           format: date-time
           description: |
             Last time the user was seen. To access this field, you must have insights visible for your organization. See 
-            [Insights](https://docs.docker.com/admin/organization/insights/#view-insights-for-organization-users).
+            [Insights](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
           example: "2021-01-05T21:06:53.506400Z"
         last_desktop_version:
           type: string
           description: |
             Last desktop version the user used. To access this field, you must have insights visible for your organization. See 
-            [Insights](https://docs.docker.com/admin/organization/insights/#view-insights-for-organization-users).
+            [Insights](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
           example: 4.29.0
 
     org_member_paginated:

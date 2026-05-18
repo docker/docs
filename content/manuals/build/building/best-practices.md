@@ -700,7 +700,7 @@ For example, the [Postgres Official Image](https://hub.docker.com/_/postgres/)
 uses the following script as its `ENTRYPOINT`:
 
 ```bash
-#!/bin/bash
+#!/bin/sh
 set -e
 
 if [ "$1" = 'postgres' ]; then
@@ -716,7 +716,7 @@ fi
 exec "$@"
 ```
 
-This script uses [the `exec` Bash command](https://wiki.bash-hackers.org/commands/builtin/exec) so that the final running application becomes the container's PID 1. This allows the application to receive any Unix signals sent to the container. For more information, see the [`ENTRYPOINT` reference](/reference/dockerfile.md#entrypoint).
+This script uses [the `exec` builtin](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#exec) so that the final running application becomes the container's PID 1. This allows the application to receive any Unix signals sent to the container. For more information, see the [`ENTRYPOINT` reference](/reference/dockerfile.md#entrypoint).
 
 In the following example, a helper script is copied into the container and run via `ENTRYPOINT` on
 container start:

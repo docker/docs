@@ -2,6 +2,7 @@
 title: Isolation layers
 weight: 10
 description: How Docker Sandboxes isolate AI agents using hypervisor, network, Docker Engine, and credential boundaries.
+keywords: docker sandboxes, isolation, hypervisor, network, credentials
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}

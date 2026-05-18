@@ -25,6 +25,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: kit
+      default_value: '[]'
+      usage: |
+        Kit reference (directory, ZIP, or OCI). Can be specified multiple times
     - name: memory
       shorthand: m
       usage: |

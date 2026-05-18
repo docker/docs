@@ -1,45 +1,48 @@
 ---
-title: Company administration overview
+title: Company overview
+linkTitle: Company
 weight: 20
 description: Learn how to manage multiple organizations using companies, including managing users, owners, and security.
 keywords: company, multiple organizations, manage companies, admin console, Docker Business settings
 grid:
-- title: Create a company
-  description: Get started by learning how to create a company.
-  icon: apartment
-  link: /admin/company/new-company/
-- title: Manage organizations
-  description: Learn how to add and manage organizations as well as seats within your
-    company.
-  icon: store
-  link: /admin/company/organizations/
-- title: Manage company owners
-  description: Find out more about company owners and how to manage them.
-  icon: supervised_user_circle
-  link: /admin/company/owners/
-- title: Manage users
-  description: Explore how to manage users in all organizations.
-  icon: group_add
-  link: /admin/company/users/
-- title: Configure single sign-on
-  description: Discover how to configure SSO for your entire company.
-  icon: key
-  link: /security/for-admins/single-sign-on/
-- title: Set up SCIM
-  description: Set up SCIM to automatically provision and deprovision users in your
-    company.
-  icon: checklist
-  link: /security/for-admins/provisioning/scim/
-- title: Domain management
-  description: Add and verify your company's domains.
-  icon: domain_verification
-  link: /security/for-admins/domain-management/
-- title: FAQs
-  description: Explore frequently asked questions about companies.
-  link: /faq/admin/company-faqs/
-  icon: help
+  - title: Create a company
+    description: Get started by learning how to create a company.
+    icon: apartment
+    link: /admin/company/new-company/
+  - title: Manage organizations
+    description:
+      Learn how to add and manage organizations as well as seats within your
+      company.
+    icon: store
+    link: /admin/company/manage/organizations/
+  - title: Manage company owners
+    description: Find out more about company owners and how to manage them.
+    icon: supervised_user_circle
+    link: /admin/company/manage/owners/
+  - title: Manage users
+    description: Explore how to manage users in all organizations.
+    icon: group_add
+    link: /admin/company/manage/users/
+  - title: Configure single sign-on
+    description: Discover how to configure SSO for your entire company.
+    icon: key
+    link: /enterprise/security/single-sign-on/
+  - title: Set up SCIM
+    description:
+      Set up SCIM to automatically provision and deprovision users in your
+      company.
+    icon: checklist
+    link: /enterprise/security/provisioning/scim/
+  - title: Domain management
+    description: Add and verify your company's domains.
+    icon: domain_verification
+    link: /enterprise/security/domain-management/
+  - title: FAQs
+    description: Explore frequently asked questions about companies.
+    link: /faq/admin/company-faqs/
+    icon: help
 aliases:
-- /docker-hub/creating-companies/
+  - /docker-hub/creating-companies/
 ---
 
 {{< summary-bar feature_name="Company" >}}

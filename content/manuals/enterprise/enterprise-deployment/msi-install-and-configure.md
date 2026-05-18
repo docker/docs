@@ -22,7 +22,7 @@ The MSI package supports various MDM (Mobile Device Management) solutions, makin
 2. Select **Admin Console**, then **Enterprise deployment**.
 3. From the **Windows OS** tab, select the **Download MSI installer** button.
 4. Once downloaded, double-click `Docker Desktop Installer.msi` to run the installer.
-5. After accepting the license agreement, choose the install location. By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
+5. After accepting the license agreement, choose the install location. By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`(all-user installations) or `%LOCALAPPDATA%\Programs\DockerDesktop` (per-user installations)
 6. Configure the Docker Desktop installation. You can:
    - Create a desktop shortcut
 

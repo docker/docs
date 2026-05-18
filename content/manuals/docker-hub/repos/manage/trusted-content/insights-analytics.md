@@ -3,9 +3,9 @@ title: Insights and analytics
 description: Discover how to access usage statistics of your images on Docker Hub
 keywords: docker hub, hub, insights, analytics, api, verified publisher
 aliases:
-- /docker-hub/publish/insights-analytics/
-- /docker-hub/insights-analytics/
-- /trusted-content/insights-analytics/
+  - /docker-hub/publish/insights-analytics/
+  - /docker-hub/insights-analytics/
+  - /trusted-content/insights-analytics/
 ---
 
 Insights and analytics provides usage analytics for [Docker Verified Publisher
@@ -91,16 +91,16 @@ To access the report:
 
 The summary report is a CSV file that contains the following data points:
 
-| Field | Description |
-|-------|-------------|
-| `DATE_GRANULARITY` | Weekly or monthly granularity of the data. Indicates whether the data is aggregated by week or month. |
-| `DATE_REFERENCE` | The start date of the week or month in YYYY-MM-DD format (e.g., `2025-09-29` for the week starting September 29, 2025). |
-| `PUBLISHER_NAME` | The name of the Docker organization that owns the repository (e.g., `demonstrationorg`). |
-| `LEVEL` | The aggregation level of the data - either `repository` (summary for entire repository), `tag` (summary for specific tag), or `digest` (summary for specific digest). |
-| `REFERENCE` | The specific reference being summarized - the repository name, tag name, or digest hash depending on the level. |
-| `DATA_DOWNLOADS` | The number of actual image downloads. |
-| `VERSION_CHECKS` | The number of version checks performed (HEAD requests to check for updates without downloading the full image). |
-| `EVENT_COUNT` | The total number of events, calculated as the sum of data downloads and version checks. |
+| Field              | Description                                                                                                                                                           |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DATE_GRANULARITY` | Weekly or monthly granularity of the data. Indicates whether the data is aggregated by week or month.                                                                 |
+| `DATE_REFERENCE`   | The start date of the week or month in YYYY-MM-DD format (e.g., `2025-09-29` for the week starting September 29, 2025).                                               |
+| `PUBLISHER_NAME`   | The name of the Docker organization that owns the repository (e.g., `demonstrationorg`).                                                                              |
+| `LEVEL`            | The aggregation level of the data - either `repository` (summary for entire repository), `tag` (summary for specific tag), or `digest` (summary for specific digest). |
+| `REFERENCE`        | The specific reference being summarized - the repository name, tag name, or digest hash depending on the level.                                                       |
+| `DATA_DOWNLOADS`   | The number of actual image downloads.                                                                                                                                 |
+| `VERSION_CHECKS`   | The number of version checks performed (HEAD requests to check for updates without downloading the full image).                                                       |
+| `EVENT_COUNT`      | The total number of events, calculated as the sum of data downloads and version checks.                                                                               |
 
 ### Trends report
 
@@ -126,22 +126,22 @@ To access the report:
 
 The trends report is a CSV file that contains the following data points:
 
-| Field | Description |
-|-------|-------------|
-| `DATE_GRANULARITY` | Weekly or monthly granularity of the data. |
-| `DATE_REFERENCE` | The start date of the week or month. |
-| `PUBLISHER_NAME` | The name of the organization that owns the repository. |
-| `IMAGE_REPOSITORY` | The full name of the image repository (e.g., `demonstrationorg/scout-demo`). |
-| `NAMESPACE` | The Docker organization or namespace that owns the repository. |
-| `IP_COUNTRY` | The country code (ISO 3166-1 alpha-2) where the pull request originated from (e.g., `US`, `CA`). |
-| `CLOUD_SERVICE_PROVIDER` | The cloud service provider used for the pull request (e.g., `gcp`, `aws`, `azure`) or `no csp` for non-cloud providers. |
-| `USER_AGENT` | The client application or tool used to pull the image (e.g., `docker`, `docker-scout`, `node-fetch`, `regclient`). |
-| `TAG` | The specific image tag that was pulled, or `\\N` if no specific tag was used. |
-| `DATA_DOWNLOADS` | The number of data downloads for the specified criteria. |
-| `VERSION_CHECKS` | The number of version checks (HEAD requests) performed without downloading the full image. |
-| `PULLS` | The total number of pull requests (data downloads + version checks). |
-| `UNIQUE_AUTHENTICATED_USERS` | The number of unique authenticated users who performed pulls. |
-| `UNIQUE_UNAUTHENTICATED_USERS` | The number of unique unauthenticated users who performed pulls. |
+| Field                          | Description                                                                                                             |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| `DATE_GRANULARITY`             | Weekly or monthly granularity of the data.                                                                              |
+| `DATE_REFERENCE`               | The start date of the week or month.                                                                                    |
+| `PUBLISHER_NAME`               | The name of the organization that owns the repository.                                                                  |
+| `IMAGE_REPOSITORY`             | The full name of the image repository (e.g., `demonstrationorg/scout-demo`).                                            |
+| `NAMESPACE`                    | The Docker organization or namespace that owns the repository.                                                          |
+| `IP_COUNTRY`                   | The country code (ISO 3166-1 alpha-2) where the pull request originated from (e.g., `US`, `CA`).                        |
+| `CLOUD_SERVICE_PROVIDER`       | The cloud service provider used for the pull request (e.g., `gcp`, `aws`, `azure`) or `no csp` for non-cloud providers. |
+| `USER_AGENT`                   | The client application or tool used to pull the image (e.g., `docker`, `docker-scout`, `node-fetch`, `regclient`).      |
+| `TAG`                          | The specific image tag that was pulled, or `\\N` if no specific tag was used.                                           |
+| `DATA_DOWNLOADS`               | The number of data downloads for the specified criteria.                                                                |
+| `VERSION_CHECKS`               | The number of version checks (HEAD requests) performed without downloading the full image.                              |
+| `PULLS`                        | The total number of pull requests (data downloads + version checks).                                                    |
+| `UNIQUE_AUTHENTICATED_USERS`   | The number of unique authenticated users who performed pulls.                                                           |
+| `UNIQUE_UNAUTHENTICATED_USERS` | The number of unique unauthenticated users who performed pulls.                                                         |
 
 ### Technographic report
 
@@ -170,20 +170,20 @@ To access the report:
 
 The technographic report is a CSV file that contains the following data points:
 
-| Field | Description |
-|-------|-------------|
-| `DATE_GRANULARITY` | Weekly or monthly granularity of the data. |
-| `DATE_REFERENCE` | The start date of the week or month in YYYY-MM-DD format. |
-| `PUBLISHER_ID` | The unique identifier for the publisher organization. |
-| `PUBLISHER_NAME` | The name of the organization that owns the DVP repository. |
-| `DVPP_IMAGE` | Your Docker Verified Publisher image repository name. |
-| `PAIRED_IMAGE` | The other image repository that is commonly used together with your DVP image. |
-| `USERS` | The number of unique users who pulled both your DVP image and the paired image within the time period. |
-| `TOTAL_PULLERS` | The total number of unique users who pulled your DVP image during the time period. |
-| `PCT_USERS` | The percentage of your image's users who also use the paired image (users/total_pullers). |
-| `DOMAINS` | The number of unique company domains that pulled both your DVP image and the paired image. |
-| `TOTAL_DOMAINS` | The total number of unique company domains that pulled your DVP image. |
-| `PCT_DOMAINS` | The percentage of company domains using your image that also use the paired image (domains/total_domains). |
+| Field              | Description                                                                                                |
+| ------------------ | ---------------------------------------------------------------------------------------------------------- |
+| `DATE_GRANULARITY` | Weekly or monthly granularity of the data.                                                                 |
+| `DATE_REFERENCE`   | The start date of the week or month in YYYY-MM-DD format.                                                  |
+| `PUBLISHER_ID`     | The unique identifier for the publisher organization.                                                      |
+| `PUBLISHER_NAME`   | The name of the organization that owns the DVP repository.                                                 |
+| `DVPP_IMAGE`       | Your Docker Verified Publisher image repository name.                                                      |
+| `PAIRED_IMAGE`     | The other image repository that is commonly used together with your DVP image.                             |
+| `USERS`            | The number of unique users who pulled both your DVP image and the paired image within the time period.     |
+| `TOTAL_PULLERS`    | The total number of unique users who pulled your DVP image during the time period.                         |
+| `PCT_USERS`        | The percentage of your image's users who also use the paired image (users/total_pullers).                  |
+| `DOMAINS`          | The number of unique company domains that pulled both your DVP image and the paired image.                 |
+| `TOTAL_DOMAINS`    | The total number of unique company domains that pulled your DVP image.                                     |
+| `PCT_DOMAINS`      | The percentage of company domains using your image that also use the paired image (domains/total_domains). |
 
 > [!NOTE]
 >
@@ -223,14 +223,14 @@ To access the report:
 The technographic companies report is a CSV file that contains the following
 data points:
 
-| Field | Description |
-|-------|-------------|
-| `DATE_GRANULARITY` | Weekly or monthly granularity of the data. |
-| `DATE_REFERENCE` | The start date of the week or month in YYYY-MM-DD format. |
-| `PUBLISHER_NAME` | The name of the organization that owns the DVP repository. |
-| `DOMAIN` | The company domain that pulled both your DVP image and the paired image (e.g., `example.com`). |
-| `DVPP_IMAGE` | Your Docker Verified Publisher image repository name. |
-| `PAIRED_IMAGE` | The other image repository that was used together with your DVP image by this company. |
+| Field              | Description                                                                                    |
+| ------------------ | ---------------------------------------------------------------------------------------------- |
+| `DATE_GRANULARITY` | Weekly or monthly granularity of the data.                                                     |
+| `DATE_REFERENCE`   | The start date of the week or month in YYYY-MM-DD format.                                      |
+| `PUBLISHER_NAME`   | The name of the organization that owns the DVP repository.                                     |
+| `DOMAIN`           | The company domain that pulled both your DVP image and the paired image (e.g., `example.com`). |
+| `DVPP_IMAGE`       | Your Docker Verified Publisher image repository name.                                          |
+| `PAIRED_IMAGE`     | The other image repository that was used together with your DVP image by this company.         |
 
 Each row represents a unique combination of a company domain, your DVP image,
 and another image that were used together during the specified time period.
@@ -268,21 +268,21 @@ To access the report:
 The tracked companies report is a CSV file that contains the following data
 points:
 
-| Field | Description |
-|-------|-------------|
-| `DATE_GRANULARITY` | Weekly or monthly granularity of the data. |
-| `DATE_REFERENCE` | The start date of the week or month in YYYY-MM-DD format. |
-| `PUBLISHER_NAME` | The name of the organization that owns the DVP repository. |
-| `DOMAIN` | The company domain (e.g., `docker.com`) associated with the image pulls. |
-| `IP_COUNTRY` | The country code (ISO 3166-1 alpha-2) where the pull request originated from. |
-| `CLOUD_SERVICE_PROVIDER` | The cloud service provider used for the pull request or `no csp` for non-cloud providers. |
-| `USER_AGENT` | The client application or tool used to pull the image. |
-| `INFERRED_USE_CASE` | The inferred deployment environment based on user agent and cloud provider analysis. Values include: <br>• `Local Dev`: Local development environment (e.g., Docker Desktop, direct `docker` commands) <br>• `CI/CD`: Continuous integration/deployment pipelines (e.g., containerd, build tools, registry mirroring) <br>• `Prod`: Production environments (e.g., Kubernetes, container orchestration platforms) <br>• `Unknown`: Unable to determine the use case from available data |
-| `IMAGE_REPOSITORY` | The specific DVP image repository that was pulled. |
-| `DATA_DOWNLOADS` | The number of actual image layer downloads for this combination. |
-| `VERSION_CHECKS` | The number of version checks (HEAD requests) performed without downloading the full image. |
-| `PULLS` | The total number of pull requests (data downloads + version checks). |
-| `UNIQUE_AUTHENTICATED_USERS` | The number of unique authenticated users from this domain who performed pulls. |
+| Field                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DATE_GRANULARITY`           | Weekly or monthly granularity of the data.                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `DATE_REFERENCE`             | The start date of the week or month in YYYY-MM-DD format.                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `PUBLISHER_NAME`             | The name of the organization that owns the DVP repository.                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `DOMAIN`                     | The company domain (e.g., `docker.com`) associated with the image pulls.                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `IP_COUNTRY`                 | The country code (ISO 3166-1 alpha-2) where the pull request originated from.                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `CLOUD_SERVICE_PROVIDER`     | The cloud service provider used for the pull request or `no csp` for non-cloud providers.                                                                                                                                                                                                                                                                                                                                                                                               |
+| `USER_AGENT`                 | The client application or tool used to pull the image.                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `INFERRED_USE_CASE`          | The inferred deployment environment based on user agent and cloud provider analysis. Values include: <br>• `Local Dev`: Local development environment (e.g., Docker Desktop, direct `docker` commands) <br>• `CI/CD`: Continuous integration/deployment pipelines (e.g., containerd, build tools, registry mirroring) <br>• `Prod`: Production environments (e.g., Kubernetes, container orchestration platforms) <br>• `Unknown`: Unable to determine the use case from available data |
+| `IMAGE_REPOSITORY`           | The specific DVP image repository that was pulled.                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `DATA_DOWNLOADS`             | The number of actual image layer downloads for this combination.                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `VERSION_CHECKS`             | The number of version checks (HEAD requests) performed without downloading the full image.                                                                                                                                                                                                                                                                                                                                                                                              |
+| `PULLS`                      | The total number of pull requests (data downloads + version checks).                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `UNIQUE_AUTHENTICATED_USERS` | The number of unique authenticated users from this domain who performed pulls.                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 > [!NOTE]
 >
@@ -394,7 +394,7 @@ represents an image pull.
 | Data point                    | Description                                                                                                  | Date added        |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------ | ----------------- |
 | Action                        | Request type, see [Action classification rules][1]. One of `pull_by_tag`, `pull_by_digest`, `version_check`. | January 1, 2022   |
-| Action day                    | The date part of the timestamp: `YYYY-MM-DD`.                                                                 | January 1, 2022   |
+| Action day                    | The date part of the timestamp: `YYYY-MM-DD`.                                                                | January 1, 2022   |
 | Country                       | Request origin country.                                                                                      | January 1, 2022   |
 | Digest                        | Image digest.                                                                                                | January 1, 2022   |
 | HTTP method                   | HTTP method used in the request, see [registry API documentation][2] for details.                            | January 1, 2022   |
@@ -403,8 +403,8 @@ represents an image pull.
 | Reference                     | Image digest or tag used in the request.                                                                     | January 1, 2022   |
 | Repository                    | Docker [repository][4] (image name).                                                                         | January 1, 2022   |
 | Tag (included when available) | Tag name that's only available if the request referred to a tag.                                             | January 1, 2022   |
-| Timestamp                     | Date and time of the request: `YYYY-MM-DD 00:00:00`.                                                          | January 1, 2022   |
-| Type                          | The industry from which the event originates. One of `business`, `isp`, `hosting`, `education`, `null`.       | January 1, 2022   |
+| Timestamp                     | Date and time of the request: `YYYY-MM-DD 00:00:00`.                                                         | January 1, 2022   |
+| Type                          | The industry from which the event originates. One of `business`, `isp`, `hosting`, `education`, `null`.      | January 1, 2022   |
 | User agent tool               | The application a user used to pull an image (for example, `docker` or `containerd`).                        | January 1, 2022   |
 | User agent version            | The version of the application used to pull an image.                                                        | January 1, 2022   |
 | Domain                        | Request origin domain, see [Privacy](#privacy).                                                              | October 11, 2022  |
@@ -412,7 +412,7 @@ represents an image pull.
 
 [1]: #image-pulls-action-classification-rules
 [2]: /registry/spec/api/
-[3]: /admin/organization/orgs/
+[3]: /admin/organization/setup/orgs/
 [4]: /docker-hub/repos/
 
 ### Image pulls summary data
@@ -476,13 +476,13 @@ There are two levels of extension summary data available:
 The core-summary-data file contains the following data points for the selected time
 span:
 
-| Data point        | Description                                             | Date added        |
-| ----------------- | ------------------------------------------------------- | ----------------- |
-| Installs          | Number of installs for the extension                    | Feb 1, 2024       |
-| TotalInstalls     | Number of installs for the extension all times          | Feb 1, 2024       |
-| Uninstalls        | Number of uninstalls for the extension                  | Feb 1, 2024       |
-| TotalUninstalls   | Number of uninstalls for the extension all times        | Feb 1, 2024       |
-| Updates           | Number of updates for the extension                     | Feb 1, 2024       |
+| Data point      | Description                                      | Date added  |
+| --------------- | ------------------------------------------------ | ----------- |
+| Installs        | Number of installs for the extension             | Feb 1, 2024 |
+| TotalInstalls   | Number of installs for the extension all times   | Feb 1, 2024 |
+| Uninstalls      | Number of uninstalls for the extension           | Feb 1, 2024 |
+| TotalUninstalls | Number of uninstalls for the extension all times | Feb 1, 2024 |
+| Updates         | Number of updates for the extension              | Feb 1, 2024 |
 
 - Premium summary, with advanced extension usage information: installs,
   uninstalls by unique users, extension opening by unique users.
@@ -490,14 +490,14 @@ span:
 The core-summary-data file contains the following data points for the selected time
 span:
 
-| Data point        | Description                                             | Date added        |
-| ----------------- | ------------------------------------------------------- | ----------------- |
-| Installs          | Number of installs for the extension                    | Feb 1, 2024       |
-| UniqueInstalls    | Number of unique users installing the extension         | Feb 1, 2024       |
-| Uninstalls        | Number of uninstalls for the extension                  | Feb 1, 2024       |
-| UniqueUninstalls  | Number of unique users uninstalling the extension       | Feb 1, 2024       |
-| Usage             | Number of openings of the extension tab                 | Feb 1, 2024       |
-| UniqueUsers       | Number of unique users openings the extension tab       | Feb 1, 2024       |
+| Data point       | Description                                       | Date added  |
+| ---------------- | ------------------------------------------------- | ----------- |
+| Installs         | Number of installs for the extension              | Feb 1, 2024 |
+| UniqueInstalls   | Number of unique users installing the extension   | Feb 1, 2024 |
+| Uninstalls       | Number of uninstalls for the extension            | Feb 1, 2024 |
+| UniqueUninstalls | Number of unique users uninstalling the extension | Feb 1, 2024 |
+| Usage            | Number of openings of the extension tab           | Feb 1, 2024 |
+| UniqueUsers      | Number of unique users openings the extension tab | Feb 1, 2024 |
 
 ## Changes in data over time
 

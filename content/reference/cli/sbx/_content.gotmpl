@@ -1,13 +1,13 @@
 {{- /*
   Content adapter for sbx CLI reference pages.
 
-  Generates pages from YAML data files in site.Data.sbx_cli (cobra/doc format).
+  Generates pages from YAML data files in hugo.Data.sbx_cli (cobra/doc format).
   For each YAML file it creates a page at the command path (spaces → slashes).
   Commands with child entries in see_also become Hugo sections; others become
   regular pages.
 */ -}}
 
-{{- range $name, $data := site.Data.sbx_cli -}}
+{{- range $name, $data := hugo.Data.sbx_cli -}}
   {{- if not $data.name -}}
     {{- continue -}}
   {{- end -}}

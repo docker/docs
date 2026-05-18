@@ -5,7 +5,7 @@
     <description>Docker security announcements and updates</description>
     <link>{{ .Permalink }}</link>
     <generator>Hugo -- gohugo.io</generator>
-    <language>{{ .Site.LanguageCode | default "en" }}</language>
+    <language>{{ .Site.Language.Locale | default "en" }}</language>
     <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
     <atom:link href="{{ .Permalink }}index.xml" rel="self" type="application/rss+xml" />
     {{- range (index .Fragments.Headings 0).Headings }}

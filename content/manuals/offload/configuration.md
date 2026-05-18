@@ -17,7 +17,7 @@ settings when allowed by their organization.
 
 For organization owners, you can manage Docker Offload settings for all users in
 your organization. For more details, see [Manage Docker
-products](../admin/organization/manage-products.md). To view usage for Docker
+products](../admin/organization/manage/manage-products.md). To view usage for Docker
 Offload, see [Docker Offload usage](/offload/usage/).
 
 ## Configure settings in Docker Desktop

@@ -4,7 +4,6 @@ description: Control access to content, registry, and organization management wi
 keywords: members, teams, organization, company, roles, access, docker hub, admin console, security, permissions
 aliases:
   - /docker-hub/roles-and-permissions/
-  - /security/for-admins/roles-and-permissions/
   - /enterprise/security/roles-and-permissions/
 ---
 
@@ -21,7 +20,7 @@ Docker organizations have three core roles:
 - **Editor**: Partial administrative access. Editors can create, edit, and delete repositories. They can also manage team permissions for repositories.
 - **Owner**: Full administrative access. Owners can manage all organization settings, including repositories, teams, members, billing, and security features.
 
-A company owner has the same organization management permissions as an organization owner, but there are some content and registry permissions that company owners don't have (for example, repository pull/push). For more information, see [Company overview](/admin/company/).
+A company owner has the same organization management permissions as an organization owner, but there are some content and registry permissions that company owners don't have (for example, repository pull/push). For more information, see [Company overview](/manuals/admin/company/_index.md).
 
 ### Content and registry permissions
 

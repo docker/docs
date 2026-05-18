@@ -4,11 +4,6 @@ keywords: Docker Dashboard, manage, logs, gui, build logs, container logs, debug
 title: Explore the Logs view in Docker Desktop
 linkTitle: Logs
 weight: 60
-params:
-  sidebar:
-    badge:
-      color: blue
-      text: Beta
 ---
 
 {{< summary-bar feature_name="Desktop logs" >}}
@@ -42,14 +37,13 @@ To refine the log stream further, select the **Filter** icon in the toolbar to o
 - Check Compose stacks to show or hide entire groups
 - Use **Select all** or **Clear all** to quickly toggle every container at once
 
-## Display options
+## Display settings
 
-Select the **Display options** icon in the toolbar to toggle the following:
+Select the **Display settings** icon in the toolbar to toggle the following:
 
 - **View build logs**: Include or exclude build-related log output in the stream
-- **Table view**: Switch between a structured table layout and a plain log stream
-
-The table view is useful when you need to correlate events across multiple containers because each row clearly shows which container emitted a given message and when.
+- **Wrap lines**
+- **Show timestamps**
 
 ## Feedback
 

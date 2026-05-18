@@ -23,8 +23,10 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    env:
-      HAS_APP_SECRETS: ${{ secrets.CAGENT_REVIEWER_APP_ID != '' }}
+    permissions:
+      id-token: write
+      contents: read
+      issues: write
 
     steps:
       - name: Checkout repository
@@ -45,24 +47,33 @@ jobs:
           restore-keys: |
             docs-scanner-state-${{ github.repository }}-
 
-      - name: Generate GitHub App token
-        if: env.HAS_APP_SECRETS == 'true'
-        id: app-token
+      - name: Configure AWS credentials
+        id: aws-credentials
         continue-on-error: true
-        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2
+        uses: aws-actions/configure-aws-credentials@d979d5b3a71173a29b74b5b88418bfda9437d885 # v6.1.1
         with:
-          app_id: ${{ secrets.CAGENT_REVIEWER_APP_ID }}
-          private_key: ${{ secrets.CAGENT_REVIEWER_APP_PRIVATE_KEY }}
+          role-to-assume: arn:aws:iam::710015040892:role/docker-agent-action-20260409141318957000000001
+          aws-region: us-east-1
+
+      - name: Fetch bot PAT
+        if: steps.aws-credentials.outcome == 'success'
+        run: |
+          PAT=$(aws secretsmanager get-secret-value \
+            --secret-id docker-agent-action/github-app \
+            --query SecretString \
+            --output text | jq -r '.pat')
+          echo "::add-mask::$PAT"
+          echo "GITHUB_APP_TOKEN=$PAT" >> "$GITHUB_ENV"
 
       - name: Run documentation scan
-        uses: docker/cagent-action@3a12dbd0c6cd7dda3d4e05f24f0143c9701456de # latest
+        uses: docker/cagent-action@f208610469d69f20983cad64c577949a132caa33 # v1.5.3
         env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token || github.token }}
+          GH_TOKEN: ${{ env.GITHUB_APP_TOKEN || github.token }}
         with:
           agent: ${{ github.workspace }}/.github/agents/docs-scanner.yaml
-          prompt: "${{ inputs['dry-run'] && 'DRY RUN MODE: Do not create any GitHub issues. Report what you would create but skip the gh issue create commands.' || 'Run the nightly documentation scan as described in your instructions.' }}"
+          prompt: "${{ inputs.dry-run == true && 'DRY RUN MODE: Do not create any GitHub issues. Report what you would create but skip the gh issue create commands.' || 'Run the nightly documentation scan as described in your instructions.' }}"
           anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
-          github-token: ${{ steps.app-token.outputs.token || github.token }}
+          github-token: ${{ env.GITHUB_APP_TOKEN || github.token }}
           timeout: 1200
 
       - name: Save scanner state

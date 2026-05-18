@@ -4,6 +4,7 @@ weight: 50
 description: |
   Use Kiro in Docker Sandboxes with device flow authentication for interactive
   AI-assisted development.
+keywords: docker sandboxes, kiro, ai agent, authentication, sbx
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
@@ -94,5 +95,5 @@ Template: `docker/sandbox-templates:kiro`
 Preconfigured to run without approval prompts. Authentication state is
 persisted across sandbox restarts.
 
-See [Custom environments](custom-environments.md) to pre-install tools or
-customize this environment.
+See [Customize](../customize/) to pre-install tools or customize this
+environment.

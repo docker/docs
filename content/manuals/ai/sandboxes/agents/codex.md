@@ -4,6 +4,7 @@ weight: 20
 description: |
   Use OpenAI Codex in Docker Sandboxes with API key authentication and YOLO
   mode configuration.
+keywords: docker sandboxes, codex, openai, ai agent, sbx
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
@@ -76,5 +77,5 @@ Template: `docker/sandbox-templates:codex`
 
 Preconfigured to run without approval prompts.
 
-See [Custom environments](custom-environments.md) to pre-install tools or
-customize this environment.
+See [Customize](../customize/) to pre-install tools or customize this
+environment.

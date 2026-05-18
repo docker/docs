@@ -146,8 +146,7 @@ Create a file named `Dockerfile` with the following contents.
 
 # Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
 
-# This Dockerfile uses Docker Hardened Images (DHI) for enhanced security.
-# For more information, see https://docs.docker.com/dhi/
+# This Dockerfile uses Python Docker Official Image
 ARG PYTHON_VERSION=3.12
 FROM python:${PYTHON_VERSION}-slim
 

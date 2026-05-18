@@ -69,7 +69,7 @@ Docker](https://www.docker.com/pricing/contact-sales/) to explore options.
 
 ### Session management and idle state
 
-Docker Offload uses session management and idle state policies to ensure fair use of cloud resources across all users.
+Docker Offload uses session management and idle state policies to ensure fair use of cloud resources across all users, see [Fair use](#fair-use).
 
 Each user can run one Docker Offload session at a time. When Docker Desktop is in an **Offload idle** state, it waits for activity on the Docker API and only connects to a cloud environment when needed. Once connected, the session moves to an **Offload running** state and stays connected as long as Docker detects activity. Activity includes any Docker API call, a running container, or an active build.
 
@@ -95,6 +95,13 @@ After your session returns to an idle state, there is a 5-minute grace period. Y
 #### Long session prompts
 
 Long session prompts appear every 3 hours during a session. After 8 hours of cumulative usage in a day, prompts appear every hour. The 8-hour counter resets at the start of each day.
+
+## Fair use
+
+Docker Offload enforces a fair use policy to prevent resource abuse. Fair use is
+defined as up to 8 compute hours per named user per day, totaled across all user
+sessions. Usage in excess of this threshold may be subject to session management
+at Docker's discretion.
 
 ## What's next
 

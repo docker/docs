@@ -5,7 +5,7 @@ description: Find documentation on Docker Build Cloud to help you build your con
 keywords: build, cloud, cloud build, remote builder
 params:
   sidebar:
-    group: Products
+    group: Application development
 aliases:
   - /build/cloud/faq/
   - /build/cloud/

@@ -5,7 +5,7 @@ description: Find documentation on Docker Offload to help you offload containers
 keywords: build, cloud, cloud build, remote builder
 params:
   sidebar:
-    group: Products
+    group: Application development
 
 grid:
 

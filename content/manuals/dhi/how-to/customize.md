@@ -46,7 +46,19 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
    customization process. You can continue with the following steps for more
    details.
 
-1. Select the image version you want to customize.
+1. Select one or more images or Helm charts and versions you want to customize.
+
+   When selecting multiple images and versions, all selections must share the
+   same distribution and distribution version. For example, you can select
+   `dhi-node:22_alpine3.23` and `dhi-python:3.13_alpine3.23` together (both
+   Alpine 3.23), but you cannot mix `dhi-node:22_debian` with Alpine images, or
+   mix different Alpine versions like `alpine3.23` and `alpine3.22`.
+
+   Alternatively, you can select multiple Helm chart versions to apply the same
+   customization to all of them. You cannot mix images and Helm charts in the
+   same customization.
+
+1. Select **Next**.
 1. Optional. Add packages.
 
    1. In the packages drop-down, select the packages you want to add to the
@@ -66,16 +78,18 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
 
       The OCI artifacts are images that you have previously
       built and pushed to a repository in the same namespace as the mirrored
-      DHI. For example, you can add a custom root CA certificate or a another
+      DHI. For example, you can add a custom root CA certificate or another
       image that contains a tool you need, like adding Python to a Node.js
       image. For more details on how to create an OCI artifact image, see
       [Create an OCI artifact image](#create-an-oci-artifact-image-for-image-customization).
 
-      When combining images that contain directories and files with the same
-      path, images later in the list will overwrite files from earlier images.
-      To manage this, you must select paths to include and optionally exclude
-      from each OCI artifact image. This allows you to control which files are
-      included in the final customized image.
+      You can add multiple OCI artifact images to a single customization. When
+      you add more than one, they're applied in the order you add them in the
+      **OCI artifacts** drop-down. If multiple images contain directories or
+      files with the same path, images added later overwrite files from images
+      added earlier. To manage this, you must select paths to include and
+      optionally exclude from each OCI artifact image. This allows you to
+      control which files are included in the final customized image.
 
       By default, no files are included from the OCI artifact image. You must
       explicitly include the paths you want. After including a path, you can
@@ -102,11 +116,17 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
 
 1. Select **Next: Configure** to configure the following image settings:
 
+   > [!NOTE]
+   >
+   > When customizing multiple images at once, many of these configuration
+   > options are limited by default and may not be available.
+
    1. Specify the [environment variables](/reference/dockerfile/#env) and their
       values that the image will contain.
    1. Add [labels](/reference/dockerfile/#label) to the image.
    1. Add [annotations](/build/metadata/annotations/) to the image.
-   1. Specify the users to add to the image.
+   1. Specify the users to add to the image. When you add a user, a home
+      directory is automatically created for that user with 0755 permissions.
    1. Specify the user groups to add to the image.
    1. Select which [user](/reference/dockerfile/#user) to run the images as.
    1. Add [`ENTRYPOINT`](/reference/dockerfile/#entrypoint) arguments to the
@@ -119,6 +139,11 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
       customized image's tag. For example, if you specify `custom` when
       customizing the `dhi-python:3.13` image, the customized image will be
       tagged as `dhi-python:3.13_custom`.
+   1. Select the compression format for the image layers. You can choose between
+      **ZSTD** (default) or **GZIP** compression. **ZSTD** typically provides
+      faster image pulls and better compression ratios, but may have
+      compatibility issues with older software. If you need compatibility with
+      older Docker versions, use **GZIP**.
    1. Select the platforms you want to build the image for. You must select at
       least one platform.
 
@@ -133,10 +158,18 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
 {{< /tab >}}
 {{< tab name="CLI" >}}
 
-Authenticate with `docker login` using your Docker credentials or a [personal
+Authenticate with `docker login` using your Docker credentials, a [personal
 access token (PAT)](../../security/access-tokens.md) with **Read & Write**
-permissions. [Organization access tokens
-(OATs)](../../enterprise/security/access-tokens.md) are not supported.
+permissions, or an [organization access token
+(OAT)](../../enterprise/security/access-tokens.md). When using an OAT, the
+available operations depend on the token's permission scope:
+
+- To list or get customizations, or to view build logs, the OAT must have read
+  (pull) access to the destination repository. Results are scoped to
+  repositories the OAT can access.
+- To create, update, or delete a customization, the OAT must have push access to
+  the destination repository. Bulk operations require push access to every
+  referenced destination repository.
 
 Use the [`docker dhi customization`](/reference/cli/docker/dhi/customization/) command:
 

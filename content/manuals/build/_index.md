@@ -5,7 +5,7 @@ description: Get an overview of Docker Build to package and bundle your code and
 keywords: build, buildx, buildkit
 params:
   sidebar:
-    group: Open source
+    group: Application development
 grid:
 - title: Packaging your software
   description: 'Build and package your application to run it anywhere: locally or

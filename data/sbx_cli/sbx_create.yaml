@@ -16,6 +16,10 @@ options:
       shorthand: h
       default_value: "false"
       usage: help for create
+    - name: kit
+      default_value: '[]'
+      usage: |
+        Kit reference (directory, ZIP, or OCI). Can be specified multiple times
     - name: memory
       shorthand: m
       usage: |
@@ -53,7 +57,9 @@ see_also:
     - sbx create claude - Create a sandbox for claude
     - sbx create codex - Create a sandbox for codex
     - sbx create copilot - Create a sandbox for copilot
+    - sbx create cursor - Create a sandbox for cursor
     - sbx create docker-agent - Create a sandbox for docker-agent
+    - sbx create droid - Create a sandbox for droid
     - sbx create gemini - Create a sandbox for gemini
     - sbx create kiro - Create a sandbox for kiro
     - sbx create opencode - Create a sandbox for opencode

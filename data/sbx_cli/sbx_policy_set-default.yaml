@@ -33,6 +33,6 @@ example: |4-
 
       # Block everything, then allow specific sites
       sbx policy set-default deny-all
-      sbx policy allow network api.example.com:443
+      sbx policy allow network -g api.example.com:443
 see_also:
     - sbx policy - Manage sandbox policies

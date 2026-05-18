@@ -3,7 +3,7 @@ title: Docker Model Runner
 linkTitle: Model Runner
 params:
   sidebar:
-    group: AI
+    group: AI and agents
 weight: 30
 description: Learn how to use Docker Model Runner to manage and run AI models.
 keywords: Docker, ai, model runner, docker desktop, docker engine, llm, openai, ollama, llama.cpp, vllm, diffusers, cpu, nvidia, cuda, amd, rocm, vulkan, cline, continue, cursor, image generation, stable diffusion

@@ -1,0 +1,16 @@
+{{- $pages := where site.RegularPages "Params.sitemap" "!=" false -}}
+{{- $sorted := sort $pages "RelPermalink" -}}
+
+# Docker Documentation full text
+
+> Source index: https://docs.docker.com/llms.txt
+> This file contains page metadata and stable markdown URLs for bulk ingestion.
+{{- range $sorted }}
+
+## {{ .Title }}
+URL: {{ .Permalink }}
+Markdown: {{ partial "utils/markdown-url.html" . }}
+{{- with .Description }}
+Description: {{ chomp (replace . "\n" " ") }}
+{{- end }}
+{{- end }}

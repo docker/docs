@@ -28,6 +28,12 @@ configuration. Tracking which fragment of a service is relative to which path is
 difficult and confusing, so to keep paths easier to understand, all paths must
 be defined relative to the base file. 
 
+> [!NOTE]
+>
+> `extends` is not supported when deploying with `docker stack deploy`. Running
+> `docker stack config` on a Compose file that uses `extends` returns the error:
+> `Configuration contains forbidden properties`.
+
 ## How the `extends` attribute works
 
 ### Extending services from another file

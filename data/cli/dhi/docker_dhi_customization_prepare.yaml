@@ -1,14 +1,21 @@
 command: docker dhi customization prepare
 short: Prepare a new customization YAML file from a DHI base image tag
 long: |-
-    Prepare a new customization YAML file by fetching tag details from a Docker Hardened Images repository.
+    Prepare a new single or bulk customization YAML file by fetching tag details from Docker Hardened Images.
     This creates a scaffold YAML file that can be used with the create command.
 
-    The repository argument must be a DHI source repository name, not a mirrored destination repository.
-    Supported formats:
-      - golang
-      - dhi/golang
-      - dhi.io/golang
+    Single customization — provide the DHI source repository and tag as positional arguments:
+      docker dhi customization prepare golang 1.24-dev --destination myorg/dhi-golang
+
+    Bulk customization — pipe a JSON array of {destination, tag-definition-id} objects via stdin:
+      echo '[{"destination":"myorg/dhi-golang","tag-definition-id":"golang/alpine-3.23/1.24-dev"}]' \
+        | docker dhi customization prepare --name my-custo
+
+    The scaffold is written to stdout; redirect to a file if needed:
+      docker dhi customization prepare golang 1.24-dev > customization.yaml
+
+    Run 'docker dhi customization list' to see available source repositories,
+    or use shell completion to discover repository names and tags.
 usage: docker dhi customization prepare <dhi-repository> <tag>
 pname: docker dhi customization
 plink: docker_dhi_customization.yaml
@@ -33,16 +40,6 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: output
-      shorthand: o
-      value_type: string
-      description: Output file path (if not specified, outputs to stdout)
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
 inherited_options:
     - option: org
       value_type: string
@@ -59,4 +56,3 @@ experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
-

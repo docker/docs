@@ -3,6 +3,7 @@ title: Security model
 linkTitle: Security model
 weight: 50
 description: Trust boundaries, isolation layers, and security properties of Docker Sandboxes.
+keywords: docker sandboxes, security model, isolation, trust boundaries, microVM
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
@@ -38,7 +39,7 @@ Everything else is blocked. The agent cannot access your host filesystem
 localhost, other sandboxes, or any domain not in the allow list. Raw TCP, UDP,
 and ICMP are blocked at the network layer.
 
-![Sandbox security model showing the hypervisor boundary between the sandbox VM and the host system. The workspace directory is shared read-write. The agent process, Docker engine, packages, and VM filesystem are inside the VM. Host filesystem, processes, Docker engine, and network are outside the VM and not accessible. A proxy enforces allow/deny policies and injects credentials into outbound requests.](../images/sbx-security.png)
+![Sandbox security model showing the hypervisor boundary between the sandbox VM and the host system. The workspace directory is shared read-write. The agent process, Docker Engine, packages, and VM filesystem are inside the VM. Host filesystem, processes, Docker Engine, and network are outside the VM and not accessible. A proxy enforces allow/deny policies and injects credentials into outbound requests.](../images/sbx-security.png)
 
 ## Isolation layers
 
@@ -80,6 +81,18 @@ See [Workspace trust](workspace/).
 see the full list of active rules, and remove entries you don't need. See
 [Default security posture](defaults/).
 
+## Organization-wide control
+
+On a single developer's machine, network and filesystem policies are
+configured locally with `sbx policy`. Admins can also centrally define those
+policies in the Docker Admin Console. When organization governance is active,
+the centrally defined rules apply uniformly across every sandbox in the
+organization and take precedence over local rules. Admins can optionally
+delegate specific rule types back to local control so developers can add
+additional allow rules.
+
+See [Organization governance](governance/) for details.
+
 ## Learn more
 
 - [Isolation layers](isolation/): how hypervisor, network, Docker, and
@@ -88,4 +101,6 @@ see the full list of active rules, and remove entries you don't need. See
   blocks
 - [Credentials](credentials/): how to provide and manage API keys
 - [Policies](policy/): how to customize network access rules
+- [Organization governance](governance/): centrally manage policies across
+  an organization
 - [Workspace trust](workspace/): what to review after an agent session

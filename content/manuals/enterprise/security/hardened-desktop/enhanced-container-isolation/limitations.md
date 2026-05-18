@@ -17,7 +17,10 @@ Enhanced Container Isolation has some platform-specific limitations and feature 
 
 > [!NOTE]
 >
-> Docker Desktop requires WSL 2 version 2.1.5 or later. Check your version with `wsl --version` and update with `wsl --update` if needed.
+> Docker Desktop requires WSL 2 version 2.1.5 or later. ECI on the WSL 2 backend
+> requires WSL version 2.6 or later because ECI depends on a Linux kernel version
+> of at least 6.3.0. Check your version with `wsl --version` and update with
+> `wsl --update` if needed.
 
 Enhanced Container Isolation provides different security levels depending on your Windows backend configuration.
 

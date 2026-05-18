@@ -40,9 +40,9 @@ To update your email address:
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
 1. Go to **Settings**, then choose **Email**.
-1. Enter your new email address and confirm your identity with your password. Select **Verify email**. 
+1. Enter your new email address and confirm your identity with your password. Select **Verify email**.
 1. Go to the new Docker email and copy the 6-digit verification code.
-1. Paste the verification code to complete updating your email. 
+1. Paste the verification code to complete updating your email.
 
 Your verification session expires after 15 minutes.
 
@@ -60,7 +60,7 @@ You can change your password by initiating a password reset via email. To change
 1. Select your avatar in the top-right corner and select **Account settings**.
 1. Select **Password**, then **Reset password**.
 1. Docker will send you a password reset email with instructions to reset
-your password.
+   your password.
 
 ## Manage two-factor authentication
 
@@ -102,7 +102,7 @@ or GitHub. See Google or GitHub's documentation for more information:
 ## Convert your account
 
 For information on converting your account into an organization, see
-[Convert an account into an organization](../admin/organization/convert-account.md).
+[Convert an account into an organization](../admin/organization/setup/convert-account.md).
 
 ## Deactivate your account
 

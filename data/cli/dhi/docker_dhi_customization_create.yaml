@@ -1,10 +1,56 @@
 command: docker dhi customization create
 short: Create a new customization from YAML file
-long: |
-    Create a new Docker Hardened Images customization using a YAML file as input. The file should contain the complete customization structure without an 'id' field.
+long: |-
+    Create a new Docker Hardened Images customization using a YAML file as input.
+    The file should contain the complete customization structure without an 'id' field.
+
+    Flags can override values from the YAML file (see --help for details).
+    Shell completions are available for --destination and --tag-definition-id flags.
+    Run 'docker dhi completion --help' to set up shell completions.
 usage: docker dhi customization create <file>
 pname: docker dhi customization
 plink: docker_dhi_customization.yaml
+options:
+    - option: destination
+      shorthand: d
+      value_type: string
+      description: Override the destination repository (e.g. myorg/dhi-golang)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: json
+      value_type: bool
+      default_value: "false"
+      description: Output in JSON format
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: name
+      shorthand: "n"
+      value_type: string
+      description: Override the customization name from the YAML file
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: tag-definition-id
+      shorthand: t
+      value_type: string
+      description: Override the tag definition ID (single-target only)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 inherited_options:
     - option: org
       value_type: string
@@ -21,4 +67,3 @@ experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
-

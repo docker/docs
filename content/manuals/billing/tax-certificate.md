@@ -9,7 +9,7 @@ If you're a customer in the United States and are exempt from sales tax, you
 can submit a valid tax exemption certificate to Docker Support.
 
 If you're a global customer subject to VAT, make sure to include your
-[VAT number](/billing/history/#include-your-vat-number-on-your-invoice)
+[VAT number](/manuals/billing/history.md#include-your-vat-number-on-your-invoice)
 along with your country prefix when you update your billing profile.
 
 ## Prerequisites
@@ -18,10 +18,10 @@ Before submitting your certificate:
 
 - The customer name must match the name on the certificate.
 - The certificate must list Docker Inc. as the Seller or Vendor, with all
-relevant fields completed.
+  relevant fields completed.
 - The certificate must be signed, dated, and not expired.
 - You must include the Docker ID or namespace(s) for all accounts to
-apply the certificate to.
+  apply the certificate to.
 
 > [!IMPORTANT]
 >
@@ -44,7 +44,7 @@ Palo Alto, CA 94306
 1. Instructions will populate on how to submit a tax certificate.
 1. Fill out all required fields on the support form.
 1. In the file upload section, add the tax certificate by dragging and dropping
-the file, or selecting **Browse files**.
+   the file, or selecting **Browse files**.
 1. Select **Submit**.
 
 Docker's support team will reach out to you if any additional information is

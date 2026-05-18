@@ -1,8 +1,12 @@
 name: sbx template rm
 synopsis: Remove a template image
-description: |
+description: |-
     Remove a template image from the sandbox runtime's image store.
-usage: sbx template rm TAG [flags]
+
+    The image can be identified by tag (e.g. "myimage:v1.0") or by image ID
+    (full or prefix, e.g. "abc123"). Use "sbx template ls" to see available
+    images and their IDs.
+usage: sbx template rm TAG|ID [flags]
 options:
     - name: help
       shorthand: h
@@ -14,7 +18,10 @@ inherited_options:
       default_value: "false"
       usage: Enable debug logging
 example: |4-
-      # Remove a template image
+      # Remove by tag
       sbx template rm myimage:v1.0
+
+      # Remove by image ID (prefix)
+      sbx template rm abc123
 see_also:
     - sbx template - Manage sandbox templates

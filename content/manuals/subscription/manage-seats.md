@@ -33,7 +33,7 @@ To add seats:
    - You can't use pay by invoice for purchasing additional seats.
    - You must use a card or US bank account.
 
-You can now add more members to your organization. For more information, see [Manage organization members](../admin/organization/members.md).
+You can now add more members to your organization. For more information, see [Manage organization members](../admin/organization/manage/members.md).
 
 ## Volume pricing
 

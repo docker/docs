@@ -2,6 +2,7 @@
 title: FAQ
 weight: 70
 description: Frequently asked questions about Docker Sandboxes.
+keywords: docker sandboxes, sbx, faq, sign in, telemetry
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
@@ -14,19 +15,33 @@ Signing in gives each sandbox a verified identity, which lets Docker:
 - **Tie sandboxes to a real person.** Governance matters when agents can build
   containers, install packages, and push code. Your Docker identity is the
   anchor.
-- **Enable team features down the road.** Shared environments, org-level
-  policies, audit logs. These all need a concept of "who," and building that in
-  later would be worse for everyone.
+- **Enable team features.** Team-scale features like
+  [organization governance](security/governance.md), shared environments, and
+  audit logs need a concept of "who," and adding that later would be worse for
+  everyone.
 - **Authenticate against Docker infrastructure.** Sandboxes pull images, run
   daemons, and talk to Docker services. A Docker account makes that seamless.
 
 Your Docker account email is only used for authentication, not marketing.
 
+## Can I enforce sandbox policies across my organization?
+
+Yes. Admins can centrally manage network and filesystem policies from the
+Docker Admin Console. Rules defined there apply to every sandbox in the
+organization and take precedence over local rules set with `sbx policy`.
+Admins can optionally delegate specific rule types back to local control so
+developers can add additional allow rules.
+
+See [Organization governance](security/governance.md). This feature requires
+a separate paid subscription —
+[contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
+to get started.
+
 ## Does the CLI collect telemetry?
 
 The `sbx` CLI collects basic usage data about CLI invocations:
 
-- Which subcommand you ran
+- Which command you ran
 - Whether it succeeded or failed
 - How long it took
 - If you're signed in, your Docker username is included
@@ -43,7 +58,7 @@ $ export SBX_NO_TELEMETRY=1
 ## How do I set custom environment variables inside a sandbox?
 
 The [`sbx secret`](/reference/cli/sbx/secret/) command only supports a fixed set
-of [services](security/credentials.md#supported-services) (Anthropic, OpenAI,
+of [services](security/credentials.md#built-in-services) (Anthropic, OpenAI,
 GitHub, and others). If your agent needs an environment variable that isn't
 tied to a supported service, such as `BRAVE_API_KEY` or a custom internal
 token, write it to `/etc/sandbox-persistent.sh` inside the sandbox. This
@@ -96,6 +111,24 @@ If you prefer to re-enable approval prompts, change the permission mode
 inside the session. Most agents let you switch permission modes after
 startup. In Claude Code, use the `/permissions` command to change the mode
 interactively.
+
+To make approval prompts the default for every session, define a custom
+agent kit that overrides the agent's entrypoint to drop the
+permission-skipping flag. For example, a kit that launches Claude Code
+without `--dangerously-skip-permissions`:
+
+```yaml {title="claude-safe/spec.yaml"}
+schemaVersion: "1"
+kind: agent
+name: claude-safe
+agent:
+  image: "docker/sandbox-templates:claude-code-docker"
+  entrypoint:
+    run: [claude]
+```
+
+Run it with `sbx run claude-safe --kit ./claude-safe/`. See
+[Agent kits](customize/kits.md#agent-kits) for the full pattern.
 
 ## How do I know if my agent is running in a sandbox?
 

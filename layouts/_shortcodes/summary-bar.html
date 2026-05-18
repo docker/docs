@@ -1,5 +1,5 @@
 {{ $featureName := .Get "feature_name" }}
-{{ $feature := index site.Data.summary $featureName }}
+{{ $feature := index hugo.Data.summary $featureName }}
 {{ if not $feature }}
   {{ errorf "[summary-bar] invalid feature: %s %v" $featureName .Position }}
 {{ end }}
