@@ -32,6 +32,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.74.0" build_path="//" >}}
 
+### New
+
+- Ask Gordon is now generally available. There are also new usage plans available as well. Paid Gordon plans unlock higher usage limits.
+
 ### Updates
 
 - [Docker Offload v0.5.89](https://github.com/docker/cloud/releases/tag/v0.5.89)
