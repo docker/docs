@@ -4,24 +4,18 @@ keywords: mcp, grafana, docker, gemini, devops
 title: Connect Gemini to Grafana via MCP
 summary: |
   Learn how to leverage the Model Context Protocol (MCP) to interact with Grafana dashboards and datasources directly from your terminal.
-levels: [intermediate]
-subjects: [devops]
-aliases:
-  - /guides/use-case/devops/
 params:
+  proficiencyLevel: Intermediate
   time: 15 minutes
 ---
-
-# Integrating Gemini CLI with Grafana via Docker MCP Toolkit
 
 This guide shows how to connect Gemini CLI to a Grafana instance using the **Docker MCP Toolkit**.
 
 ## Prerequisites
 
-* **Gemini CLI** installed and authenticated.
-* **Docker Desktop** with the **MCP Toolkit** extension enabled.
-* An active **Grafana** instance.
-
+- **Gemini CLI** installed and authenticated.
+- **Docker Desktop** with the **MCP Toolkit** extension enabled.
+- An active **Grafana** instance.
 
 ## 1. Provisioning Grafana Access
 
@@ -30,11 +24,9 @@ The MCP server requires a **Service Account Token** to interact with the Grafana
 1. Navigate to **Administration > Users and access > Service accounts** in your Grafana dashboard.
 2. Create a new Service Account (e.g., `gemini-mcp-connector`).
 3. Assign the **Viewer** role (or **Editor** if you require alert management capabilities).
-4. Generate a new token. Copy the token immediately—you won't be able to view it again.
+4. Generate a new token. Copy the token immediately — you won't be able to view it again.
 
 ![Create a service account in Grafana](images/create-sa-grafana.webp)
-
-
 
 ## 2. MCP Server Configuration
 
@@ -43,12 +35,11 @@ The Docker MCP Toolkit provides a pre-configured Grafana catalog item. This conn
 1. Open the **MCP Toolkit** in Docker Desktop.
 2. Locate **Grafana** in the Catalog and add it to your active servers.
 3. In the **Configuration** view, define the following:
-* **Grafana URL:** The endpoint or URL of your instance.
-* **Service Account Token:** The token generated in the previous step.
+
+- **Grafana URL:** The endpoint or URL of your instance.
+- **Service Account Token:** The token generated in the previous step.
 
 ![Configure mcp grafana in docker](images/configure-mcp-grafana.webp)
-
-
 
 ## 3. Gemini CLI Integration
 
@@ -61,17 +52,11 @@ Ensure the `mcpServers` object includes the following entry:
   "mcpServers": {
     "MCP_DOCKER": {
       "command": "docker",
-      "args": [
-        "mcp",
-        "gateway",
-        "run"
-      ]
+      "args": ["mcp", "gateway", "run"]
     }
   }
 }
-
 ```
-
 
 ## 4. Operational Validation
 
@@ -84,7 +69,7 @@ Restart your Gemini CLI session to load the new configuration. Verify the status
 
 ![MCP Docker added to gemini cli](images/mcp-docker-gemini.webp)
 
-A successful connection will show `MCP_DOCKER` as **Ready**, exposing over 61 tools for data fetching, dashboard searching, and alert inspection.
+A successful connection will show `MCP_DOCKER` as **Ready**, exposing dozens tools for data fetching, dashboard searching, and alert inspection.
 
 ## Use Cases
 
@@ -94,18 +79,13 @@ _List all Prometheus and Loki datasources._
 
 ![List datasources](images/gemini-grafana-list-datasources.webp)
 
-
-
 ![List datasources](images/list-datasources-result.webp)
-
 
 ### Logs Inspection
 
-Gemini performs intent parsing and translates the request into a LogQL query: `{device_name="edge-device-01"} |= "nginx"`. This query targets specific logs, extracting raw OpenTelemetry (OTel) data that includes container metadata and system labels, which Gemini then uses to identify the source of the issue.
+Gemini performs intent parsing and translates the user's request into a precise LogQL query: `{device_name="edge-device-01"} |= "nginx"`. Once the system identifies Loki as the active datasource, the AI autonomously constructs this command to bridge the gap between human intent and complex syntax. This query targets specific Kubernetes pod logs, extracting raw OpenTelemetry (OTel) data—including pod UIDs, container metadata, and system labels—which Gemini then uses to identify the root cause of the issue within the containerized environment.
 
 ![Filter logs based on loki labels](images/mcp-docker-grafana-loki-1.webp)
-
-Once the system identifies Loki as the active datasource, it translates the human intent into a precise technical command. The AI autonomously constructs a LogQL `query: {device_name="edge-device-01"} |= "nginx"`. This query targets the specific Kubernetes pod logs, extracting raw OpenTelemetry (OTel) data that includes pod UIDs and container metadata. Instead of the user writing complex syntax, the prompt acts as the bridge to pull structured data from the containerized environment
 
 
 ![Gemini gets the Grafana's logs from MCP docker](images/mcp-docker-grafana-loki-2.webp)
@@ -114,17 +94,13 @@ In the final step, Gemini performs reasoning over the raw telemetry. After filte
 
 ![Gemini gives an overall about the findings](images/mcp-docker-grafana-loki-3.webp)
 
+### Dashboard Navigation
 
-
-### Dashboard Navigation 
-
-_How many dashboards we have?_
+_How many dashboards do we have?_
 
 ![List datasources](images/mcp-grafana-dashboards.webp)
 
-
 _Tell me the summary of X dashboard_
-
 
 ![List datasources](images/mcp-grafana-summary-dashboard.webp)
 
@@ -132,11 +108,11 @@ _Tell me the summary of X dashboard_
 
 Imagine you get a page that an application is slow. You could:
 
-   1. Use list_alert_rules to see which alert is firing.
-   2. Use search_dashboards to find the relevant application dashboard.
-   3. Use get_panel_image on a key panel to see the performance spike visually.
-   4. Use query_loki_logs to search for "error" or "timeout" messages during the time of the spike.
-   5. If you find the root cause, use create_incident to start the formal response and add_activity_to_incident to log your findings.
+1.  Use `list_alert_rules` to see which alert is firing.
+2.  Use `search_dashboards` to find the relevant application dashboard.
+3.  Use `get_panel_image` on a key panel to see the performance spike visually.
+4.  Use `query_loki_logs` to search for "error" or "timeout" messages during the time of the spike.
+5.  If you find the root cause, use create_incident to start the formal response and `add_activity_to_incident` to log your findings.
 
 ## Next steps
 
@@ -145,4 +121,4 @@ Imagine you get a page that an application is slow. You could:
 - Explore [Grafana alerting with MCP](https://github.com/grafana/mcp-grafana)
 - Get help in the [Docker Community Forums](https://forums.docker.com)
 
-Need help setting up your Docker MCP environment or customizing your Gemini prompts? Visit the [Docker Community Forums](https://forums.docker.com) or see the [MCP Troubleshooting Guide](https://docs.docker.com/guides/grafana-mcp-server-gemini).
+Need help setting up your Docker MCP environment or customizing your Gemini prompts? Visit the [Docker Community Forums](https://forums.docker.com) or see the [Get Started Guide](https://docs.docker.com/ai/mcp-catalog-and-toolkit/get-started/).
