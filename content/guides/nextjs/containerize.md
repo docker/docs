@@ -579,7 +579,7 @@ CMD ["-g", "daemon off;"]
 ```
 
 > [!NOTE]
-> We use [nginx-unprivileged](https://hub.docker.com/r/nginxinc/nginx-unprivileged) instead of the standard Nginx image to run as a non-root user, following security best practices.
+> This guide uses [nginx-unprivileged](https://hub.docker.com/r/nginxinc/nginx-unprivileged) instead of the standard Nginx image to run as a non-root user, following security best practices.
 
 {{< /tab >}}
 {{< /tabs >}}
