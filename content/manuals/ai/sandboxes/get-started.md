@@ -22,7 +22,7 @@ cleaning up.
 {{< tabs group="os" >}}
 {{< tab name="macOS" >}}
 
-- macOS Tahoe (26) or later
+- macOS Sonoma (version 14) or later
 - Apple silicon
 
 {{< /tab >}}
