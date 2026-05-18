@@ -17,7 +17,7 @@ This guide shows how to connect Gemini CLI to a Grafana instance using the **Doc
 - **Docker Desktop** with the **MCP Toolkit** extension enabled.
 - An active **Grafana** instance.
 
-## 1. Provisioning Grafana Access
+## Step 1: Provision Grafana access
 
 The MCP server requires a **Service Account Token** to interact with the Grafana API. Service Account Tokens are preferred over personal API keys because they can be revoked independently without affecting user access, and permissions can be scoped more narrowly.
 
@@ -28,7 +28,7 @@ The MCP server requires a **Service Account Token** to interact with the Grafana
 
 ![Create a service account in Grafana](images/create-sa-grafana.webp)
 
-## 2. MCP Server Configuration
+## Step 2: Configure the MCP server
 
 The Docker MCP Toolkit provides a pre-configured Grafana catalog item. This connects the LLM to the Grafana API.
 
@@ -41,7 +41,7 @@ The Docker MCP Toolkit provides a pre-configured Grafana catalog item. This conn
 
 ![Configure mcp grafana in docker](images/configure-mcp-grafana.webp)
 
-## 3. Gemini CLI Integration
+## Step 3: Integrate Gemini CLI
 
 To register the Docker MCP gateway within Gemini, update your global configuration file located at `~/.gemini/settings.json`.
 
@@ -58,7 +58,7 @@ Ensure the `mcpServers` object includes the following entry:
 }
 ```
 
-## 4. Operational Validation
+## Step 4: Validate the setup
 
 Restart your Gemini CLI session to load the new configuration. Verify the status of the MCP tools by running:
 
