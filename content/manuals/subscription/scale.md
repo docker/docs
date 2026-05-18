@@ -46,7 +46,7 @@ You can add Testcontainers Cloud runtime minutes in two ways:
 
 On-demand usage is billed at higher rates than pre-purchased capacity. To avoid higher on-demand charges, pre-purchase additional minutes if you expect consistent usage over your subscription's included minutes.
 
-## Upgrade Gordon plan
+## Add Gordon plan
 
 You can upgrade your Gordon plan at any time so your new usage rates are applied immediately. Upgrades to your existing Gordon plan are prorated and you'll be billed for the new plan at the first of the month. To upgrade your Gordon plan:
 
