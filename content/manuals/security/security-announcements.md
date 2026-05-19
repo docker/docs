@@ -16,13 +16,13 @@ toc_max: 2
 
 A vulnerability in Docker Desktop was fixed on April 27 in the [4.71.0](/manuals/desktop/release-notes.md#4710) release:
 
-- Addressed [CVE-2026-5843](https://www.cve.org/cverecord?id=CVE-2026-5843), container-to-host code execution in the Docker Model Runner MLX inference backend via MLX-LM `model_file` importlib loading.
+- Addressed [CVE-2026-5843](https://www.cve.org/cverecord?id=CVE-2026-5843), container-to-host code execution in the Docker Model Runner MLX inference backend.
 
 ## Docker Desktop 4.68.0 security update: CVE-2026-5817
 
 A vulnerability in Docker Desktop was fixed on April 7 in the [4.68.0](/manuals/desktop/release-notes.md#4680) release:
 
-- Addressed [CVE-2026-5817](https://www.cve.org/cverecord?id=CVE-2026-5817), container-to-host code execution in the Docker Model Runner vllm-metal inference backend via unsandboxed `trust_remote_code` tokenizer loading.
+- Addressed [CVE-2026-5817](https://www.cve.org/cverecord?id=CVE-2026-5817), container-to-host code execution in the Docker Model Runner vllm-metal inference backend.
 
 ## Docker Desktop 4.67.0 security update: CVE-2026-33990
 
