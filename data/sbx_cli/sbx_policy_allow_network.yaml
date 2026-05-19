@@ -8,7 +8,8 @@ description: |-
     and optional port suffixes (example.com:443). Use "**" to allow all hosts.
 
     Use -g/--global to apply the rule globally to all sandboxes, or provide
-    SANDBOX before RESOURCES to scope the rule to a specific sandbox.
+    SANDBOX before RESOURCES to add the rule to policy "local" scoped to that
+    sandbox.
 usage: sbx policy allow network [-g | SANDBOX] RESOURCES [flags]
 options:
     - name: global
@@ -40,4 +41,4 @@ example: |4-
       # Allow all outbound traffic globally
       sbx policy allow network -g "**"
 see_also:
-    - sbx policy allow - Add an allow policy for sandboxes
+    - sbx policy allow - Add an allow rule for sandboxes

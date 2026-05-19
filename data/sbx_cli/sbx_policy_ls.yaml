@@ -1,10 +1,10 @@
 name: sbx policy ls
-synopsis: List sandbox policies
+synopsis: List sandbox policy rules
 description: |-
-    List all active policies.
+    List all active policy rules.
 
-    Displays the policy name (or ID if no name is set), type, decision
-    (allow/deny), and the associated resources for each rule.
+    Displays the provenance, scope, rule name (or ID if no name is set), type,
+    decision (allow/deny), and the associated resources for each rule.
 
     When SANDBOX is specified, only policies that apply to that sandbox are shown
     (global rules plus rules scoped to that sandbox).
