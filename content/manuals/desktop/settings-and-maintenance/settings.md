@@ -253,6 +253,13 @@ Running a build automatically starts the container if it's stopped.
 
 You can only start and stop builders using the `docker-container` driver.
 
+## AI
+
+From the AI tab, you can configure settings for:
+
+- [Gordon](/manuals/ai/gordon/_index.md), the AI-powered assistant that takes action on your Docker workflows.
+- [Docker Model Runner](/manuals/ai/model-runner/_index.md), which makes it easy to manage, run, and deploy AI models using Docker.
+
 ## Kubernetes
 
 > [!NOTE]
@@ -287,7 +294,7 @@ Enable Docker Extensions and control which extensions are available to install a
 
 | Setting             | Description                               |
 | ------------------- | ----------------------------------------- |
-| **Enable Docker Extensions** | Turn Docker Extensions on or off. |
+| **Enable Docker Extensions** | Turn Docker Extensions on or off. Turned off by default. |
 | **Allow only extensions distributed through the Docker Marketplace** | Restrict extensions to Marketplace-approved sources only. |
 | **Show Docker Extensions system containers** | Show containers used by Docker Extensions. |
 
