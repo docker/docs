@@ -7,27 +7,27 @@ keywords: organizations, admin, overview, manage teams, roles
 grid:
   - title: Onboard your organization
     description: Learn how to onboard and secure your organization.
-    icon: explore
+    icon: magnifying-glass-plus
     link: /admin/organization/setup/onboard
   - title: Manage members
     description: Explore how to manage members.
-    icon: group_add
+    icon: user-plus
     link: /admin/organization/manage/members/
   - title: Activity logs
     description: Learn how to audit the activities of your members.
-    icon: text_snippet
+    icon: document-text
     link: /admin/activity-logs/
   - title: Image Access Management
     description: Control which types of images your developers can pull.
-    icon: photo_library
+    icon: photo
     link: /admin/organization/image-access/
   - title: Registry Access Management
     description: Define which registries your developers can access.
-    icon: home_storage
+    icon: server
     link: /admin/organization/registry-access/
   - title: Organization settings
     description: Configure information for your organization and manage settings.
-    icon: settings
+    icon: cog-6-tooth
     link: /admin/organization/setup/general-settings/
   - title: SSO and SCIM
     description:
@@ -37,11 +37,11 @@ grid:
   - title: Domain management
     description: Add, verify, and audit your domains.
     link: /enterprise/security/domain-management/
-    icon: domain_verification
+    icon: check-badge
   - title: FAQs
     description: Explore common organization FAQs.
     link: /faq/admin/organization-faqs/
-    icon: help
+    icon: question-mark-circle
 ---
 
 A Docker organization is a collection of teams and repositories with centralized

@@ -30,10 +30,10 @@
             >
               <div class="shrink-0 rounded-xl text-blue-500">
                 <span class="icon-svg group-hover:hidden">
-                  {{ partialCached "icon" "icons/gordon.svg" "icons/gordon.svg" }}
+                  {{ partialCached "icon" "gordon" "gordon" }}
                 </span>
                 <span class="icon-svg hidden group-hover:block">
-                  {{ partialCached "icon" "icons/gordon-happy.svg" "icons/gordon-happy.svg" }}
+                  {{ partialCached "icon" "gordon-happy" "gordon-happy" }}
                 </span>
               </div>
               <input
@@ -49,7 +49,7 @@
                 class="shrink-0 rounded-xl bg-blue-500 p-2 text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-gray-300 dark:disabled:bg-gray-700"
               >
                 <span class="icon-svg">
-                  {{ partialCached "icon" "arrow_forward" "arrow_forward" }}
+                  {{ partialCached "icon" "arrow-right" "arrow-right" }}
                 </span>
               </button>
             </div>
@@ -80,10 +80,10 @@
         <div class="container mx-auto px-4 xl:max-w-[1200px]">
           <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             {{ range slice
-              (dict "url" "/get-started/" "icon" "rocket" "title" "Get started" "description" "Learn Docker basics.")
-              (dict "url" "/guides/" "icon" "menu_book" "title" "Guides" "description" "Optimize your development workflows with Docker.")
-              (dict "url" "/manuals/" "icon" "description" "title" "Manuals" "description" "Install, set up, configure, and use Docker products.")
-              (dict "url" "/reference/" "icon" "terminal" "title" "Reference" "description" "Browse the CLI and API documentation.")
+              (dict "url" "/get-started/" "icon" "rocket-launch" "title" "Get started" "description" "Learn Docker basics.")
+              (dict "url" "/guides/" "icon" "book-open" "title" "Guides" "description" "Optimize your development workflows with Docker.")
+              (dict "url" "/manuals/" "icon" "document-text" "title" "Manuals" "description" "Install, set up, configure, and use Docker products.")
+              (dict "url" "/reference/" "icon" "command-line" "title" "Reference" "description" "Browse the CLI and API documentation.")
             }}
               <a
                 href="{{ .url }}"
@@ -146,7 +146,7 @@
                 <span
                   class="icon-svg text-gray-400 transition group-hover:translate-x-1 dark:text-gray-500"
                 >
-                  {{ partialCached "icon" "arrow_forward" "arrow_forward" }}
+                  {{ partialCached "icon" "arrow-right" "arrow-right" }}
                 </span>
               </a>
             {{ end }}

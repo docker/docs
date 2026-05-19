@@ -12,27 +12,27 @@ toc_min: 1
 grid:
   - title: Version and name top-level element
     description: Understand version and name attributes for Compose.
-    icon: text_snippet
+    icon: document-text
     link: /reference/compose-file/version-and-name/
   - title: Services top-level element
     description: Explore all services attributes for Compose.
-    icon: construction
+    icon: wrench-screwdriver
     link: /reference/compose-file/services/
   - title: Networks top-level element
     description: Find all networks attributes for Compose.
-    icon: lan
+    icon: server-stack
     link: /reference/compose-file/networks/
   - title: Volumes top-level element
     description: Explore all volumes attributes for Compose.
-    icon: database
+    icon: circle-stack
     link: /reference/compose-file/volumes/
   - title: Configs top-level element
     description: Find out about configs in Compose.
-    icon: settings
+    icon: cog-6-tooth
     link: /reference/compose-file/configs/
   - title: Secrets top-level element
     description: Learn about secrets in Compose.
-    icon: lock
+    icon: lock-closed
     link: /reference/compose-file/secrets/
 aliases:
   - /compose/yaml/

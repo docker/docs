@@ -9,27 +9,27 @@ params:
 grid:
   - title: Company administration
     description: Explore how to manage a company.
-    icon: apartment
+    icon: building-office-2
     link: /admin/company/
   - title: Organization administration
     description: Learn about organization administration.
-    icon: store
+    icon: building-storefront
     link: /admin/organization/
   - title: Onboard your organization
     description: Learn how to onboard and secure your organization.
-    icon: explore
+    icon: magnifying-glass-plus
     link: /admin/organization/setup/onboard
   - title: Company FAQ
     description: Discover common questions and answers about companies.
-    icon: help
+    icon: question-mark-circle
     link: /faq/admin/company-faqs/
   - title: Organization FAQ
     description: Explore popular FAQ topics about organizations.
-    icon: help
+    icon: question-mark-circle
     link: /faq/admin/organization-faqs/
   - title: Security
     description: Explore security features for administrators.
-    icon: shield_locked
+    icon: shield-check
     link: /security/
 aliases:
   - /docker-hub/admin-overview

@@ -8,17 +8,9 @@
       {{ end }}
       {{ with .icon }}
       <div class="card-icon">
-        {{ if (in . ".svg") }}
-         <span class="card-img svg">
-            {{ partial "utils/svg" . }}
-          </span>
-        {{ else if (in . "/") }}
-          <img class="card-img" src="{{ . }}" alt="">
-        {{ else }}
-          <span class="card-img svg">
-            {{ partial "icon" . }}
-          </span>
-        {{ end }}
+        <span class="card-img svg">
+          {{ partialCached "icon" . . }}
+        </span>
       </div>
       {{ end }}
       <h3 class="card-title">{{ markdownify .title }}</h3>

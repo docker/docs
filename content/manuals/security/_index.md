@@ -11,39 +11,39 @@ grid_developers:
 - title: Set up two-factor authentication
   description: Add an extra layer of authentication to your Docker account.
   link: /security/2fa/
-  icon: mobile_lock_portrait
+  icon: device-phone-mobile
 - title: Manage access tokens
   description: Create personal access tokens as an alternative to your password.
-  icon: password
+  icon: lock-closed
   link: /security/access-tokens/
 - title: Static vulnerability scanning
   description: Automatically run a point-in-time scan on your Docker images for vulnerabilities.
-  icon: image_search
+  icon: magnifying-glass
   link: /docker-hub/repos/manage/vulnerability-scanning/
 - title: Docker Engine security
   description: Understand how to keep Docker Engine secure.
-  icon: security
+  icon: shield-check
   link: /engine/security/
 - title: Secrets in Docker Compose
   description: Learn how to use secrets in Docker Compose.
-  icon: privacy_tip
+  icon: shield-exclamation
   link: /compose/how-tos/use-secrets/
 grid_resources:
 - title: Security FAQs
   description: Explore common security FAQs.
-  icon: help
+  icon: question-mark-circle
   link: /faq/security/general/
 - title: Security best practices
   description: Understand the steps you can take to improve the security of your container.
-  icon: category
+  icon: squares-2x2
   link: /develop/security-best-practices/
 - title: Suppress CVEs with VEX
   description: Learn how to suppress non-applicable or fixed vulnerabilities found in your images.
-  icon: query_stats
+  icon: chart-bar
   link: /scout/guides/vex/
 - title: Docker Hardened Images
   description: Learn how to use Docker Hardened Images to enhance your software supply security.
-  icon: encrypted_add_circle
+  icon: lock-closed
   link: /dhi/
 ---
 

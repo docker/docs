@@ -54,15 +54,6 @@
     fill: currentColor;
   }
 }
-@utility icon-svg-stroke {
-  svg {
-    font-size: 24px;
-    width: 1em;
-    height: 1em;
-    display: inline-block;
-    stroke: currentColor;
-  }
-}
 
 @utility icon-xs {
   svg {

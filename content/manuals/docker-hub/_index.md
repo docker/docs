@@ -9,11 +9,11 @@ params:
 grid:
 - title: Quickstart
   description: Step-by-step instructions on getting started on Docker Hub.
-  icon: explore
+  icon: magnifying-glass-plus
   link: /docker-hub/quickstart
 - title: Library
   description: Explore the content library, featuring millions of images for operating systems, frameworks, databases, and more.
-  icon: book
+  icon: book-open
   link: /docker-hub/image-library/
 - title: Repositories
   description: Create a repository to share your images with your team, customers,
@@ -22,19 +22,19 @@ grid:
   link: /docker-hub/repos
 - title: Settings
   description: Learn about settings in Docker Hub.
-  icon: settings
+  icon: cog-6-tooth
   link: /docker-hub/settings
 - title: Organizations
   description: Learn about organization administration.
-  icon: store
+  icon: building-storefront
   link: /admin/
 - title: Usage and limits
   description: Explore usage limits and how to better utilize Docker Hub.
-  icon: leaderboard
+  icon: chart-bar
   link: /docker-hub/usage/
 - title: Release notes
   description: Find out about new features, improvements, and bug fixes.
-  icon: note_add
+  icon: document-plus
   link: /docker-hub/release-notes
 aliases:
   - /docker-hub/overview/
