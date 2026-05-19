@@ -30,7 +30,7 @@ that version of the image to the `staging` environment.
 
 To add environments to Docker Scout, you can:
 
-- Use the `docker scout env <environment> <image>` CLI command to record images to environments manually
+- Use the `docker scout environment <environment> <image>` CLI command to record images to environments manually
 - Enable a runtime integration to automatically detect images in your environments.
 
 Docker Scout supports the following runtime integrations:
@@ -52,7 +52,7 @@ To see all of the available environments for an organization, you can use the
 `docker scout env` command.
 
 ```console
-$ docker scout env
+$  docker scout environment
 ```
 
 By default, this prints all environments for your personal Docker organization.
@@ -60,7 +60,7 @@ To list environments for another organization that you're a part of, use the
 `--org` flag.
 
 ```console
-$ docker scout env --org <org>
+$ docker scout environment --org <org>
 ```
 
 You can use the `docker scout config` command to change the default
@@ -101,7 +101,7 @@ environment, all versions of the image appear in the list.
 Alternatively, you can use the `docker scout env` command to view the images from the terminal.
 
 ```console
-$ docker scout env production
+$ docker scout environment production
 docker/scout-demo-service:main@sha256:ef08dca54c4f371e7ea090914f503982e890ec81d22fd29aa3b012351a44e1bc
 ```
 
