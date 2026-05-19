@@ -26,7 +26,7 @@ To configure Gordon's tools:
 2. Select **Gordon** in the sidebar.
 3. Select the settings icon at the bottom of the text input area.
 
-   ![Session settings icon](../images/perm_settings.avif?border=true)
+   ![Session settings icon](../images/gordon_permission_settings.avif)
 
 The tool settings dialog opens with two tabs: **Basic** and **Advanced**.
 
@@ -61,7 +61,7 @@ To configure:
 2. Add commands to **Allow rules** or **Deny rules**.
 3. Select **Save**.
 
-![Advanced tool configuration](../images/gordon_advanced_tool_config.avif?w=500px&border=true)
+![Advanced tool configuration](../images/gordon_advanced_tool_config.avif)
 
 Gordon still requests approval before running allow-listed tools, unless YOLO
 mode (auto-approve mode that bypasses permission checks) is enabled.

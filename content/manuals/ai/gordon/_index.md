@@ -6,9 +6,6 @@ description:
 weight: 40
 params:
   sidebar:
-    badge:
-      color: blue
-      text: Beta
     group: AI and agents
 aliases:
   - /desktop/features/gordon/
@@ -38,12 +35,13 @@ Gordon proposes every action before executing. You approve what it does.
 
 Before you begin:
 
-- Docker Desktop 4.61.0 or later
+- Docker Desktop 4.74 or later
 - Sign in to your Docker account
 
 > [!NOTE]
-> Gordon is enabled by default for Personal, Pro, and Team subscriptions.
-> Business subscribers must complete two steps before users can access Gordon:
+> Gordon is enabled by default for signed-in Docker users. If your account
+> belongs to an organization with a Business subscription, access requires two
+> additional steps:
 >
 > 1. Contact Docker Support to activate Gordon for your organization. Docker
 >    will confirm when activation is complete.
@@ -80,7 +78,7 @@ Before you begin:
 
 2. Type a question: "what containers are running?" and press <kbd>Enter</kbd>.
 
-   ![Gordon running in the terminal](./images/gordon_tui.avif?border=true)
+   ![Gordon running in the terminal](./images/gordon_tui.avif)
 
 3. Review Gordon's proposed actions and approve by typing `y`.
 
@@ -92,7 +90,7 @@ Before you begin:
 By default, Gordon asks for approval before executing actions. You can approve
 individual actions or allow all actions for the current session.
 
-![Gordon permission request](./images/permissions.avif)
+![Gordon permission request](./images/gordon_permissions_prompt.avif)
 
 Permissions reset for each session. To configure default permissions or enable
 auto-approve mode, see [Permissions](./how-to/permissions.md).
