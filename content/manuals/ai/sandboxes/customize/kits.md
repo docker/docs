@@ -21,6 +21,7 @@ A kit packages a set of capabilities a sandbox can use, such as:
 - Network rules to allow or deny domains
 - Files to drop in
 - Startup commands to run
+- Memory instructions to give the agent
 
 You declare these in a single `spec.yaml` file, point the CLI at the
 directory (or a ZIP, OCI artifact, or Git URL), and the sandbox applies
@@ -174,6 +175,40 @@ secret never enters the VM.
 See [Credentials](../security/credentials.md) for how to provide the
 credential value on your host, other approaches for cases the example
 above doesn't fit, and what the proxy does at request time.
+
+### Inject agent memory
+
+A kit can append content to the agent's memory file, such as `CLAUDE.md`
+or `AGENTS.md`. The agent reads this file at startup. Use it to give
+the agent project conventions, usage tips for a tool the kit installs,
+or other guidance that should be in scope when the sandbox runs.
+
+```yaml
+memory: |
+  Ruff is installed. Run `ruff check` before committing.
+  Shared config lives at `/workspace/ruff.toml`.
+```
+
+Both mixin and agent kits can declare `memory:`. The content is written
+only when the active agent kit sets [`agent.aiFilename`](#agent-block),
+which determines the memory file's name.
+
+When more than one loaded kit declares a `memory:` block, each kit's
+content is written to its own `<kit-name>.md` file under a sibling
+`kits-memory/` directory. The main memory file gets a `## Kits` section
+that points to each kit file:
+
+```text
+/Users/you/
+├── myproject/         # workspace
+├── AGENTS.md          # main memory file with a "## Kits" index
+└── kits-memory/
+    ├── ruff-lint.md
+    ├── vale.md
+    └── git-ssh-sign.md
+```
+
+See [`memory`](#memory) in the spec reference for the full field schema.
 
 ### Define an agent
 
@@ -569,6 +604,35 @@ Parent directories are created automatically. Existing files are
 overwritten. Absolute paths and path-traversal sequences (`../../`) are
 rejected.
 
+### Memory
+
+```yaml
+memory: |
+  <markdown>
+```
+
+Top-level field. Available in both mixin and agent kits. Markdown
+appended to the agent's memory file at sandbox creation. The agent reads
+this content at startup. Write it as instructions or notes the agent
+should follow when working in the sandbox. Applied only when the active
+agent kit sets [`agent.aiFilename`](#agent-block).
+
+The file is written to the parent of the workspace path inside the
+sandbox, not to the workspace itself. For a workspace mounted at
+`/Users/you/myproject`, the memory file lands at
+`/Users/you/AGENTS.md` (or whatever `aiFilename` is set to). It exists
+only inside the sandbox. Nothing is written to the host.
+
+When several loaded kits declare `memory:` blocks, the content is split
+across files instead of being concatenated into the main one:
+
+- Each kit's memory is written to `<kit-name>.md` in a sibling
+  `kits-memory/` directory next to the main memory file.
+- The main memory file gets a `## Kits` section listing every kit with
+  a pointer to its file. The section is delimited by
+  `<!-- sbx:kits-section start -->` and `<!-- sbx:kits-section end -->`
+  markers so it can be regenerated when kits are added or removed.
+
 ### Agent block
 
 Required for `kind: agent`.
@@ -604,24 +668,6 @@ The agent's container image must provide:
 
 Build on top of `docker/sandbox-templates:shell-docker` to get these for
 free.
-
-#### Memory
-
-```yaml
-memory: |
-  <markdown>
-```
-
-Top-level field. Markdown appended to the agent's memory file at sandbox
-creation. The agent reads this content at startup, so write it as
-instructions or notes the agent should follow when working in the
-sandbox. Applied only when `agent.aiFilename` is set.
-
-The file is written to the parent of the workspace path inside the
-sandbox, not to the workspace itself. For a workspace mounted at
-`/Users/you/myproject`, the memory file lands at
-`/Users/you/AGENTS.md` (or whatever `aiFilename` is set to). It exists
-only inside the sandbox — nothing is written to the host.
 
 ## Debugging
 
