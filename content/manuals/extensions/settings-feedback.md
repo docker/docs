@@ -12,7 +12,7 @@ aliases:
 
 ### Turn on or turn off extensions
 
-Docker Extensions is switched on by default. To change your settings:
+Docker Extensions is switched off by default. To change your settings:
 
 1. Navigate to **Settings**.
 2. Select the **Extensions** tab.
