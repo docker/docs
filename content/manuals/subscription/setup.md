@@ -16,6 +16,26 @@ When you [create your Docker ID](../accounts/create-account.md), you automatical
 
 If you need additional features like Docker Build Cloud minutes and more Docker Scout repositories, see [Upgrade your subscription](./change.md#upgrade-your-subscription).
 
+### Set up Gordon Plus, Max, and Ultra for a personal account
+
+> [!IMPORTANT] 
+> Gordon subscriptions apply to personal Docker accounts only. 
+> If you purchase Gordon Plus while signed in with an org account, 
+> the subscription will apply to your personal account automatically.
+
+Gordon Plus, Max, and Ultra plans increase your maximum Gordon allowance on your personal account. Gordon is billed at a monthly rate at the first of the month. If you purchase a Gordon subscription after the first of the month, you will be billed on a prorated basis.
+
+You can add a Gordon plan to your Docker account from Docker Home:
+
+1. Sign in to [Docker Home](https://app.docker.com/) and select your Docker personal account.  
+1. Select **Billing**, then **Browse products**.  
+1. Select **View plans** from the **Upgrade Gordon** section of the products page.  
+1. Choose the Gordon subscription plan you want to apply to your personal account:  
+   - Gordon Plus gives users 2× the base usage.  
+   - Gordon Max gives users 5× the base usage.  
+   - Gordon Ultra gives users 20× the base usage.  
+1. Verify your billing details, continue to payment, and complete checkout.
+
 ## Set up a Docker subscription for an organization
 
 You can subscribe a new or existing organization to Docker Team or Business subscriptions. Only organization owners can manage billing for the organization.
@@ -26,7 +46,7 @@ You can subscribe a new or existing organization to Docker Team or Business subs
 1. From the products catalog page, select **View plans** from the Docker tile. Choose a Docker Team or Business subscription for the organization.
 1. Fill in plan entitlements, verify your billing details, then continue to payment to complete checkout.
 
-## Set up Docker Hardened Images Select for an organization
+### Set up Docker Hardened Images Select for an organization
 
 Docker Hardened Images (DHI) Select lets organization admins assign DHI repositories to organization accounts. When you add repositories for your organization, all members gain access to those DHI repositories. Members you add to the organization after setup inherit the same access.
 
