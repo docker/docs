@@ -212,6 +212,15 @@ v1 is no longer maintained, and users should migrate to Compose v2.
 
 [Compose v2 Documentation](/manuals/compose/_index.md)
 
+### Docker SBOM CLI plugin
+
+The Docker SBOM CLI plugin provided the `docker sbom` command for generating
+and viewing software bill of materials (SBOMs) for container images. The plugin
+is discontinued. Use [`docker scout sbom`](/reference/cli/docker/scout/sbom/)
+for SBOM generation and inspection.
+
+[See Docker SBOM CLI plugin release notes for migration guidance](https://github.com/docker/sbom-cli-plugin/releases/tag/v0.7.0)
+
 ### InfraKit
 
 InfraKit was an open-source toolkit designed to manage declarative
