@@ -154,10 +154,10 @@ params:
   # Latest version of the Docker Engine API
   latest_engine_api_version: "1.54"
   # Latest version of Docker Engine
-  docker_ce_version: "29.4.3"
+  docker_ce_version: "29.5.1"
   # Previous version of the Docker Engine
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
-  docker_ce_version_prev: "29.4.2"
+  docker_ce_version_prev: "29.5.0"
   # Latest Docker Compose version
   compose_version: "v5.1.2"
   # Latest BuildKit version
@@ -314,7 +314,7 @@ module:
       source: hugo_stats.json
       target: assets/notwatching/hugo_stats.json
     # Mount the icon files to assets so we can access them with resources.Get
-    - source: node_modules/@material-symbols/svg-400/rounded
+    - source: node_modules/heroicons/24/solid
       target: assets/icons
     # Mount highlight.js theme for Gordon chat syntax highlighting
     - source: node_modules/highlight.js/styles/github-dark.css

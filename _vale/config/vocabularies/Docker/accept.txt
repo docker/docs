@@ -215,6 +215,7 @@ Sigstore
 Snyk
 Solr
 SonarQube
+Sonoma
 Splunk
 SQLite
 stargz

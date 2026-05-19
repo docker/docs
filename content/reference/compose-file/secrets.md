@@ -15,7 +15,8 @@ The top-level `secrets` declaration defines or references sensitive data that is
 application. The source of the secret is either `file` or `environment`.
 
 - `file`: The secret is created with the contents of the file at the specified path.
-- `environment`: The secret is created with the value of an environment variable on the host.
+- `environment`: The secret is created with the value of an environment variable on the host. This is only supported by Docker Compose. It is not supported when deploying with [`docker stack deploy`](/manuals/engine/swarm/stack-deploy.md).
+ 
 
 ## Example 1
 
@@ -38,6 +39,10 @@ secrets:
   token:
     environment: "OAUTH_TOKEN"
 ```
+
+> [!NOTE]
+> `environment` secrets are not supported when deploying with `docker stack deploy`.
+> Use `file` or `external` as the secret source instead.
 
 ## Additional resources
 

@@ -11,37 +11,37 @@ grid:
 
 - title: Quickstart
   description: Get up and running with Docker Offload in just a few steps.
-  icon: rocket_launch
+  icon: rocket-launch
   link: /offload/quickstart/
 
 - title: About
   description: Learn about Docker Offload and how it works.
-  icon: info
+  icon: information-circle
   link: /offload/about/
 
 - title: Configure
   description: Configure Docker Offload settings for your organization and Docker Desktop.
-  icon: tune
+  icon: adjustments-horizontal
   link: /offload/configuration/
 
 - title: Usage
   description: Learn about Docker Offload usage and how to monitor your cloud resources.
-  icon: monitor_heart
+  icon: heart
   link: /offload/usage/
 
 - title: Optimize
   description: Improve performance and cost efficiency in Docker Offload.
-  icon: speed
+  icon: bolt
   link: /offload/optimize/
 
 - title: Troubleshoot
   description: Learn how to troubleshoot issues with Docker Offload.
-  icon: bug_report
+  icon: bug-ant
   link: /offload/troubleshoot/
 
 - title: Feedback
   description: Provide feedback on Docker Offload.
-  icon: feedback
+  icon: chat-bubble-left
   link: /offload/feedback/
 
 aliases:

@@ -361,7 +361,7 @@ forwarding the request, so you must add the `localhost` address with the
 specific port to your network policy allowlist:
 
 ```console
-$ sbx policy allow network localhost:11434
+$ sbx policy allow network -g localhost:11434
 ```
 
 Then use `host.docker.internal` in any configuration or request that points at

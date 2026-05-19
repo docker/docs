@@ -9,29 +9,29 @@ params:
   grid_migration_paths:
     - title: Migrate with Gordon
       description: Use Gordon to automatically migrate your Dockerfile to Docker Hardened Images with guidance and recommendations.
-      icon: smart_toy
+      icon: sparkles
       link: /dhi/migration/migrate-with-ai/
     - title: Migrate from Alpine or Debian images
       description: Manual migration guide for moving from Docker Official Images (Alpine or Debian-based) to Docker Hardened Images.
-      icon: code
+      icon: code-bracket
       link: /dhi/migration/migrate-from-doi/
     - title: Migrate from Ubuntu
       description: Manual migration guide for transitioning from Ubuntu-based images to Docker Hardened Images.
-      icon: upgrade
+      icon: arrow-up-circle
       link: /dhi/migration/migrate-from-ubuntu/
     - title: Migrate from Wolfi
       description: Manual migration guide for transitioning from Wolfi-based images to Docker Hardened Images.
-      icon: transform
+      icon: arrow-path
       link: /dhi/migration/migrate-from-wolfi/
   
   grid_migration_resources:
     - title: Migration checklist
       description: A comprehensive checklist of migration considerations to ensure successful transition to Docker Hardened Images.
-      icon: checklist
+      icon: clipboard-document-check
       link: /dhi/migration/checklist/
     - title: Examples
       description: Example Dockerfile migrations for different programming languages and frameworks to guide your migration process.
-      icon: preview
+      icon: eye
       link: /dhi/migration/examples/
 ---
 

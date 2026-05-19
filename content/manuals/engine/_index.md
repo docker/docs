@@ -9,39 +9,39 @@ params:
 grid:
 - title: Install Docker Engine
   description: Learn how to install the open source Docker Engine for your distribution.
-  icon: download
+  icon: arrow-down-tray
   link: /engine/install
 - title: Storage
   description: Use persistent data with Docker containers.
-  icon: database
+  icon: circle-stack
   link: /storage
 - title: Networking
   description: Manage network connections between containers.
-  icon: network_node
+  icon: server-stack
   link: /network
 - title: Container logs
   description: Learn how to view and read container logs.
-  icon: text_snippet
+  icon: document-text
   link: /config/containers/logging/
 - title: Prune
   description: Tidy up unused resources.
-  icon: content_cut
+  icon: scissors
   link: /config/pruning
 - title: Configure the daemon
   description: Delve into the configuration options of the Docker daemon.
-  icon: tune
+  icon: adjustments-horizontal
   link: /config/daemon
 - title: Rootless mode
   description: Run Docker without root privileges.
-  icon: security
+  icon: shield-check
   link: /engine/security/rootless
 - title: Deprecated features
   description: Find out what features of Docker Engine you should stop using.
-  icon: folder_delete
+  icon: folder-minus
   link: /engine/deprecated/
 - title: Release notes
   description: Read the release notes for the latest version.
-  icon: note_add
+  icon: document-plus
   link: /engine/release-notes
 aliases:
 - /edge/

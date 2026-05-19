@@ -77,9 +77,9 @@ org-level wildcard deny covers it.
 For example, given an organization policy that allows `api.anthropic.com`
 and denies `*.corp.internal`:
 
-- `sbx policy allow network api.example.com` — works, because the
+- `sbx policy allow network -g api.example.com` — works, because the
   organization hasn't denied `api.example.com`
-- `sbx policy allow network build.corp.internal` — no effect, because the
+- `sbx policy allow network -g build.corp.internal` — no effect, because the
   organization denies `*.corp.internal`
 
 #### Blocked values in delegated rules

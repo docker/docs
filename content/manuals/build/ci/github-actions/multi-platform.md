@@ -140,10 +140,13 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 ```
 
-With `runner: auto` and `distribute: true`, which are the defaults, the
-workflow splits the build into one platform per runner and assembles the final
-multi-platform image in its finalize phase. If you need to control the Docker
-build inputs directly, see [Build with Docker GitHub Builder build.yml](github-builder/build.md).
+With `distribute: true`, which is the default, the workflow splits the build
+into one platform per runner and assembles the final multi-platform image in
+its finalize phase. The default `runner` mapping sends Linux Arm platforms to
+`ubuntu-24.04-arm` and uses `ubuntu-24.04` for other platforms. To customize
+the mapping, see [runner selection](github-builder/architecture.md#runner-selection).
+If you need to control the Docker build inputs directly, see
+[Build with Docker GitHub Builder build.yml](github-builder/build.md).
 
 ### With Bake
 

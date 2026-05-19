@@ -142,7 +142,7 @@ Unless you use the permissive `allow-all` network policy, you may also need
 to allow-list any domains that your custom tools depend on:
 
 ```console
-$ sbx policy allow network "*.example.com:443,example.com:443"
+$ sbx policy allow network -g "*.example.com:443,example.com:443"
 ```
 
 Then run a sandbox with your template. The agent you specify must match

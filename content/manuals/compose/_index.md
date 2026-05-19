@@ -10,37 +10,37 @@ params:
 grid:
 - title: Why use Compose?
   description: Understand Docker Compose's key benefits
-  icon: feature_search
+  icon: magnifying-glass
   link: /compose/intro/features-uses/
 - title: How Compose works 
   description: Understand how Compose works
-  icon: category
+  icon: squares-2x2
   link: /compose/intro/compose-application-model/
 - title: Install Compose
   description: Follow the instructions on how to install Docker Compose.
-  icon: download
+  icon: arrow-down-tray
   link: /compose/install
 - title: Quickstart
   description: Learn the key concepts of Docker Compose whilst building a simple Python
     web application.
-  icon: explore
+  icon: magnifying-glass-plus
   link: /compose/gettingstarted
 - title: View the release notes
   description: Find out about the latest enhancements and bug fixes.
-  icon: note_add
+  icon: document-plus
   link: "https://github.com/docker/compose/releases"
 - title: Explore the Compose file reference
   description: Find information on defining services, networks, and volumes for a
     Docker application.
-  icon: polyline
+  icon: arrows-right-left
   link: /reference/compose-file
 - title: Use Compose Bridge
   description: Transform your Compose configuration file into configuration files for different platforms, such as Kubernetes.
-  icon: move_down
+  icon: arrow-down
   link: /compose/bridge
 - title: Browse common FAQs
   description: Explore general FAQs and find out how to give feedback.
-  icon: help
+  icon: question-mark-circle
   link: /compose/faq
 aliases:
 - /compose/cli-command/

@@ -5,24 +5,24 @@
 {{ end }}
 {{ if $feature }}
   {{ $subscriptionIcons := dict
-    "Business" "domain"
-    "Team" "groups"
-    "Pro" "person_add"
-    "Personal" "person"
-    "Available to all" "public"
+    "Business" "building-office"
+    "Team" "user-group"
+    "Pro" "user-plus"
+    "Personal" "user"
+    "Available to all" "globe-alt"
     "Docker Hardened Images Enterprise" "/icons/dhi.svg"
     "Docker Hardened Images Select or Enterprise" "/icons/dhi.svg"
     "Docker Offload" "cloud"
   }}
   {{ $availabilityIcons := dict
-    "Experimental" "science"
+    "Experimental" "beaker"
     "Beta" "bolt"
-    "Early Access" "rocket_launch"
-    "GA" "check_circle"
-    "Retired" "package_2"
+    "Early Access" "rocket-launch"
+    "GA" "check-circle"
+    "Retired" "archive-box"
   }}
-  {{ $requiresIcon := "browser_updated" }}
-  {{ $forIcon := "admin_panel_settings" }}
+  {{ $requiresIcon := "arrow-down-circle" }}
+  {{ $forIcon := "shield-check" }}
 
 
   <div
@@ -33,12 +33,12 @@
         <span class="font-bold">Subscription:</span>
         {{ range . }}
           <span>{{ . }}</span>
-          <span class="icon-svg">
+          <span class="icon-svg icon-sm">
             {{ $icon := index $subscriptionIcons . }}
             {{ if $icon }}
-              {{ partial "icon" $icon }}
+              {{ partialCached "icon" $icon $icon }}
             {{ else }}
-              {{ partial "icon" "default_icon" }}
+              {{ partialCached "icon" "question-mark-circle" "question-mark-circle" }}
             {{ end }}
           </span>
         {{ end }}
@@ -53,7 +53,7 @@
           {{ $availabilityText }}
           {{ range $key, $icon := $availabilityIcons }}
             {{ if in $availabilityText $key }}
-              <span class="icon-svg">{{ partial "icon" $icon }}</span>
+              <span class="icon-svg icon-sm">{{ partialCached "icon" $icon $icon }}</span>
             {{ end }}
           {{ end }}
         </span>
@@ -64,8 +64,8 @@
       <div class="flex flex-wrap gap-1">
         <span class="font-bold">Requires:</span>
         <span>{{ . | markdownify }}</span>
-        <span class="icon-svg">
-          {{ partial "icon" $requiresIcon }}
+        <span class="icon-svg icon-sm">
+          {{ partialCached "icon" $requiresIcon $requiresIcon }}
         </span>
       </div>
     {{ end }}
@@ -75,8 +75,8 @@
         <span class="font-bold">For:</span>
         <span>{{ . }}</span>
         {{ if eq . "Administrators" }}
-          <span class="icon-svg">
-            {{ partial "icon" $forIcon }}
+          <span class="icon-svg icon-sm">
+            {{ partialCached "icon" $forIcon $forIcon }}
           </span>
         {{ end }}
       </div>

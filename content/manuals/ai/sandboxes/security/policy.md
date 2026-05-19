@@ -11,7 +11,8 @@ Sandboxes are [network-isolated](isolation.md) from your host and from each
 other. A policy system controls what a sandbox can access over the network.
 
 Use the `sbx policy` command to configure network access rules. Rules apply
-to all sandboxes on the machine.
+to all sandboxes on the machine when you use the global scope. Network allow,
+deny, list, and remove commands can also target one sandbox.
 
 If your organization manages sandbox policies centrally, organization rules
 take precedence over the local rules described on this page. See
@@ -24,7 +25,7 @@ your host, which enforces access rules on every outbound request.
 
 Non-HTTP TCP traffic, including SSH, can be allowed by adding a policy rule
 for the destination IP address and port (for example,
-`sbx policy allow network "10.1.2.3:22"`). UDP and ICMP traffic is blocked
+`sbx policy allow network -g "10.1.2.3:22"`). UDP and ICMP traffic is blocked
 at the network layer and can't be unblocked with policy rules.
 
 ### Initial policy selection
@@ -44,7 +45,7 @@ Choose a default network policy:
 
 | Policy      | Description                                                                                                                                                                                    |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Open        | All outbound traffic is allowed. No restrictions. Equivalent to adding a wildcard allow rule with `sbx policy allow network "**"`.                                                             |
+| Open        | All outbound traffic is allowed. No restrictions. Equivalent to adding a wildcard allow rule with `sbx policy allow network -g "**"`.                                                          |
 | Balanced    | Default deny, with a baseline allowlist covering AI provider APIs, package managers, code hosts, container registries, and common cloud services. You can extend this with `sbx policy allow`. |
 | Locked Down | All outbound traffic is blocked, including model provider APIs (for example, `api.anthropic.com`). You must explicitly allow everything you need.                                              |
 
@@ -81,35 +82,69 @@ services. Run `sbx policy ls` to see the active rules for your installation.
 
 Use [`sbx policy allow`](/reference/cli/sbx/policy/allow/) and
 [`sbx policy deny`](/reference/cli/sbx/policy/deny/) to add network access
-rules. Changes take effect immediately and apply to all sandboxes:
+rules. Changes take effect immediately. Pass `-g` to apply a rule to all
+sandboxes:
 
 ```console
-$ sbx policy allow network api.anthropic.com
-$ sbx policy deny network ads.example.com
+$ sbx policy allow network -g api.anthropic.com
+$ sbx policy deny network -g ads.example.com
+```
+
+Pass a sandbox name to scope a rule to one sandbox:
+
+```console
+$ sbx policy allow network my-sandbox api.example.com
+$ sbx policy deny network my-sandbox ads.example.com
 ```
 
 Specify multiple hosts in one command with a comma-separated list:
 
 ```console
-$ sbx policy allow network "api.anthropic.com,*.npmjs.org,*.pypi.org"
+$ sbx policy allow network -g "api.anthropic.com,*.npmjs.org,*.pypi.org"
 ```
 
 List all active policy rules with `sbx policy ls`:
 
 ```console
 $ sbx policy ls
-ID                                     TYPE      DECISION   RESOURCES
-a1b2c3d4-e5f6-7890-abcd-ef1234567890   network   allow      api.anthropic.com, *.npmjs.org
-f9e8d7c6-b5a4-3210-fedc-ba0987654321   network   deny       ads.example.com
+NAME                  TYPE      ORIGIN               DECISION   STATUS   RESOURCES
+balanced-dev          network   local                allow      active   api.anthropic.com
+ads-block             network   local                deny       active   ads.example.com
+kit:my-sandbox        network   sandbox:my-sandbox   allow      active   api.example.com
+kit:my-sandbox:deny   network   sandbox:my-sandbox   deny       active   telemetry.example.com
 ```
 
-Use `--type network` to show only network policies.
+The columns are:
+
+- `NAME`: the rule name.
+- `TYPE`: the rule type, such as `network`.
+- `ORIGIN`: where the rule applies. `local` means the rule is global and
+  applies to all sandboxes. `sandbox:<name>` means the rule is scoped to the
+  named sandbox.
+- `DECISION`: whether the rule allows or denies the resource.
+- `STATUS`: whether the rule is currently in effect. A rule may be inactive if
+  it's overridden by another rule, for example.
+- `RESOURCES`: the hosts or patterns the rule applies to.
+
+Use `--type network` to show only network policies. Without a sandbox argument,
+`sbx policy ls` shows every rule across all sandboxes. Pass a sandbox name to
+filter the list to global rules and rules scoped to that sandbox only:
+
+```console
+$ sbx policy ls my-sandbox
+```
 
 Remove a policy by resource or by rule ID:
 
 ```console
-$ sbx policy rm network --resource ads.example.com
-$ sbx policy rm network --id 2d3c1f0e-4a73-4e05-bc9d-f2f9a4b50d67
+$ sbx policy rm network -g --resource ads.example.com
+$ sbx policy rm network -g --id 2d3c1f0e-4a73-4e05-bc9d-f2f9a4b50d67
+```
+
+To remove a sandbox-scoped policy, include the sandbox name:
+
+```console
+$ sbx policy rm network my-sandbox --resource api.example.com
 ```
 
 ### Resetting to defaults
@@ -136,7 +171,7 @@ If you prefer a permissive policy where all outbound traffic is allowed, add
 a wildcard allow rule:
 
 ```console
-$ sbx policy allow network "**"
+$ sbx policy allow network -g "**"
 ```
 
 This lets agents install packages and call any external API without additional
@@ -155,7 +190,7 @@ match the root domain. Specify both to cover both.
 Allow access to package managers so agents can install dependencies:
 
 ```console
-$ sbx policy allow network "*.npmjs.org,*.pypi.org,files.pythonhosted.org,github.com"
+$ sbx policy allow network -g "*.npmjs.org,*.pypi.org,files.pythonhosted.org,github.com"
 ```
 
 The **Balanced** policy already includes AI provider APIs, package managers,
@@ -211,7 +246,8 @@ machine-readable output, or `--type network` to filter by policy type.
 
 All outbound traffic is blocked by default unless an explicit rule allows it.
 If a domain matches both an allow and a deny rule, the deny rule wins
-regardless of specificity.
+regardless of specificity. A sandbox-scoped deny rule can block a domain for
+one sandbox even when a global rule permits the same domain.
 
 To unblock a domain, find the deny rule with `sbx policy ls` and remove it
 with `sbx policy rm`.

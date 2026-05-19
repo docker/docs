@@ -3,7 +3,7 @@ title: Docker guides
 linkTitle: Guides
 description: Explore the Docker guides
 params:
-  icon: developer_guide
+  icon: book-open
 layout: landing
 aliases:
   - /guides/language/

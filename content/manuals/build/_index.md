@@ -10,33 +10,33 @@ grid:
 - title: Packaging your software
   description: 'Build and package your application to run it anywhere: locally or
     in the cloud.'
-  icon: inventory_2
+  icon: archive-box
   link: /build/concepts/overview/
 - title: Multi-stage builds
   description: Keep your images small and secure with minimal dependencies.
-  icon: stairs
+  icon: arrow-trending-up
   link: /build/building/multi-stage/
 - title: Multi-platform images
   description: Build, push, pull, and run images seamlessly on different computer
     architectures.
-  icon: content_copy
+  icon: document-duplicate
   link: /build/building/multi-platform/
 - title: BuildKit
   description: Explore BuildKit, the open source build engine.
-  icon: construction
+  icon: wrench-screwdriver
   link: /build/buildkit/
 - title: Build drivers
   description: Configure where and how you run your builds.
-  icon: engineering
+  icon: wrench-screwdriver
   link: /build/builders/drivers/
 - title: Exporters
   description: Export any artifact you like, not just Docker images.
-  icon: output
+  icon: arrow-up-on-square
   link: /build/exporters/
 - title: Build caching
   description: Avoid unnecessary repetitions of costly operations, such as package
     installs.
-  icon: cycle
+  icon: arrow-path
   link: /build/cache/
 - title: Bake
   description: Orchestrate your builds with Bake.

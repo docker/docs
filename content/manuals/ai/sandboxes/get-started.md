@@ -22,7 +22,7 @@ cleaning up.
 {{< tabs group="os" >}}
 {{< tab name="macOS" >}}
 
-- macOS Tahoe (26) or later
+- macOS Sonoma (version 14) or later
 - Apple silicon
 
 {{< /tab >}}
@@ -230,7 +230,7 @@ $ sbx policy ls
 To allow a specific host:
 
 ```console
-$ sbx policy allow network registry.npmjs.org
+$ sbx policy allow network -g registry.npmjs.org
 ```
 
 With **Locked Down**, even your model provider API is blocked unless you
