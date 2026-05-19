@@ -1,8 +1,8 @@
 ---
 title: Scale your subscription
 linkTitle: Scale
-description: Scale Docker Build Cloud and Testcontainers Cloud consumption for your subscription
-keywords: scale subscription, docker build cloud minutes, testcontainers cloud minutes, usage scaling
+description: Scale Docker Build Cloud, Testcontainers Cloud, Gordon, and DHI consumption for your subscription
+keywords: scale subscription, docker build cloud minutes, testcontainers cloud minutes, gordon plan, docker hardened images, dhi repositories, usage scaling
 weight: 30
 ---
 
@@ -12,7 +12,8 @@ You can scale consumption for:
 
 - Docker Build Cloud build minutes
 - Testcontainers Cloud runtime minutes
-- Docker Hardened Images (DHI) repositories
+- Gordon Plus, Max, and Ultra plans (personal accounts)
+- Docker Hardened Images (DHI) Select repositories (organization accounts)
 
 To understand your usage patterns, [view your consumption](../admin/organization/manage/manage-products.md#monitor-product-usage-for-your-organization) at any time.
 
@@ -51,17 +52,16 @@ On-demand usage is billed at higher rates than pre-purchased capacity. To avoid 
 
 ## Add Gordon plan
 
-You can upgrade your Gordon plan at any time so your new usage rates are applied immediately. Upgrades to your existing Gordon plan are prorated and you'll be billed for the new plan at the first of the month. To upgrade your Gordon plan:
+If you do not have a Gordon plan yet, see [Set up Gordon Plus, Max, and Ultra for a personal account](./setup.md#set-up-gordon-plus-max-and-ultra-for-a-personal-account).
+
+When you upgrade your Gordon plan, your new usage allowance takes effect immediately. You pay a prorated charge for the higher tier for the rest of the current billing period. To upgrade your Gordon plan:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    personal account.
 1. Select **Billing**.
-1. On the Overview page, select **Manage** from the Gordon tile under your active plans. 
+1. On the Overview page, select **Manage** from the Gordon tile under your active plans.
 1. Select **Upgrade plan**.
 1. Choose the new plan you want to upgrade to:
-   - Gordon Plus gives users 2× the base usage.
-   - Gordon Max gives users 5× the base usage. 
-   - Gordon Ultra gives users 20× the base usage.
 1. Verify your billing details, continue to payment, and complete checkout.
 
 ## Add DHI repositories

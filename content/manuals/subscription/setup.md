@@ -1,6 +1,6 @@
 ---
 description: Set up Docker subscriptions for personal accounts and organizations
-keywords: subscription setup, docker pro, docker team, docker business, organization setup
+keywords: subscription setup, docker pro, docker team, docker business, organization setup, gordon plan
 title: Set up your subscription
 linkTitle: Setup
 weight: 20
@@ -18,22 +18,22 @@ If you need additional features like Docker Build Cloud minutes and more Docker 
 
 ### Set up Gordon Plus, Max, and Ultra for a personal account
 
-> [!IMPORTANT] 
-> Gordon subscriptions apply to personal Docker accounts only. 
-> If you purchase Gordon Plus while signed in with an org account, 
-> the subscription will apply to your personal account automatically.
+> [!IMPORTANT]
+> Gordon subscriptions apply to personal Docker accounts only.
+> If you purchase a Gordon plan while signed in with an org account,
+> the subscription applies to your personal account automatically.
 
-Gordon Plus, Max, and Ultra plans increase your maximum Gordon allowance on your personal account. Gordon is billed at a monthly rate at the first of the month. If you purchase a Gordon subscription after the first of the month, you will be billed on a prorated basis.
+Gordon Plus, Max, and Ultra plans increase your maximum Gordon allowance on your personal account. Gordon is billed at a monthly rate at the first of the month. If you purchase a Gordon subscription after the first of the month, you are billed on a prorated basis.
 
 You can add a Gordon plan to your Docker account from Docker Home:
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your Docker personal account.  
-1. Select **Billing**, then **Browse products**.  
-1. Select **View plans** from the **Upgrade Gordon** section of the products page.  
-1. Choose the Gordon subscription plan you want to apply to your personal account:  
-   - Gordon Plus gives users 2× the base usage.  
-   - Gordon Max gives users 5× the base usage.  
-   - Gordon Ultra gives users 20× the base usage.  
+1. Sign in to [Docker Home](https://app.docker.com/) and select your Docker personal account.
+1. Select **Billing**, then **Browse products**.
+1. Select **View plans** from the **Upgrade Gordon** section of the products page.
+1. Choose the Gordon subscription plan you want to apply to your personal account:
+   - Gordon Plus gives users 2× the base usage.
+   - Gordon Max gives users 5× the base usage.
+   - Gordon Ultra gives users 20× the base usage.
 1. Verify your billing details, continue to payment, and complete checkout.
 
 ## Set up a Docker subscription for an organization
@@ -56,7 +56,7 @@ To purchase hardened repositories with DHI Select:
 1. Select **Billing**, then **Browse products**.
 1. Select **Hardened Images** from the products page.
 1. Choose the organization account that should receive the DHI repository, then **Continue**. You can add repositories for one account at a time.
-1. Select how many repositories the account can mirror. 
+1. Select how many repositories the account can mirror.
 1. Verify your billing details, continue to payment, and complete checkout.
 
 > [!TIP]
@@ -66,5 +66,6 @@ To purchase hardened repositories with DHI Select:
 ## What's next
 
 - To upgrade an existing organization's subscription, see [Upgrade your subscription](./change.md#upgrade-your-subscription).
+- To upgrade your Gordon plan, see [Add Gordon plan](./scale.md#add-gordon-plan).
 - To add more repositories to your DHI Select plan, see [Add DHI repositories](./scale.md#add-dhi-repositories).
 - To learn about DHI Select, see [Get started with DHI Select and Enterprise](/manuals/dhi/how-to/select-enterprise.md).
