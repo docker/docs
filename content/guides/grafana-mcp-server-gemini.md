@@ -68,13 +68,13 @@ A successful connection will show `MCP_DOCKER` as **Ready**, exposing dozens too
 
 ## Use Cases
 
-### Datasource Discovery
+###  Data source Discovery
 
-_List all Prometheus and Loki datasources._
+_List all Prometheus and Loki data sources._
 
-![List datasources](images/gemini-grafana-list-datasources.webp)
+![List data sources; permission prompt](images/gemini-grafana-list-datasources.webp)
 
-![List datasources](images/list-datasources-result.webp)
+![List data sources; result](images/list-datasources-result.webp)
 
 ### Logs Inspection
 
@@ -93,11 +93,11 @@ In the final step, Gemini performs reasoning over the raw telemetry. After filte
 
 _How many dashboards do we have?_
 
-![List datasources](images/mcp-grafana-dashboards.webp)
+![How many dashboards do we have?](images/mcp-grafana-dashboards.webp)
 
 _Tell me the summary of X dashboard_
 
-![List datasources](images/mcp-grafana-summary-dashboard.webp)
+![Summary of X dashboard](images/mcp-grafana-summary-dashboard.webp)
 
 ### Other scenarios
 
