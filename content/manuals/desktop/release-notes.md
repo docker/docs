@@ -26,6 +26,41 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.74.0
+
+{{< release-date date="2026-05-19" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.74.0" build_path="/227015/" >}}
+
+### New
+
+- [Gordon](/ai/gordon) is now generally available. New usage plans are also available. Paid Gordon plans unlock higher usage limits.
+
+### Updates
+
+- [Docker Offload v0.5.89](https://github.com/docker/cloud/releases/tag/v0.5.89)
+- [Docker Agent v1.57.0](https://github.com/docker/docker-agent/releases/tag/v1.57.0)
+- [Credential helpers v0.9.7](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.7)
+- `docker pass` v0.0.26
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where Docker Desktop's own Electron helper processes (GPU, renderer, utility) were incorrectly detected and killed as lingering processes on startup when launching from the Start menu, causing a crash loop.
+- Fixed an issue where the **View build logs** toggle in Logs view display settings was reset after restarting Docker Desktop instead of persisting the user's preference.
+- Docker Extensions is now disabled by default.
+
+#### For Mac
+
+- Fixed published ports being inaccessible when a container is also connected to a Swarm overlay network. Fixes [docker/for-mac#7854](https://github.com/docker/for-mac/issues/7854).
+- Fixed dashboard TLS failures in some corporate environments.
+- Improved GUI security via content hash validation.
+
+#### For Linux
+
+- Added support for Ubuntu 26.04.
+
 ## 4.73.1
 
 {{< release-date date="2026-05-13" >}}
