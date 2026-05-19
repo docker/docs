@@ -1,5 +1,6 @@
 ---
 title: Compare subscription
+linkTitle: Compare
 weight: 10
 params:
   sidebar:
