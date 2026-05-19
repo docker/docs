@@ -60,6 +60,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For Linux
 
 - Added support for Ubuntu 26.04.
+
 ## 4.73.1
 
 {{< release-date date="2026-05-13" >}}
