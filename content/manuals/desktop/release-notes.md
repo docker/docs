@@ -28,7 +28,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ## 4.74.0
 
-{{< release-date date="2026-05-18" >}}
+{{< release-date date="2026-05-19" >}}
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.74.0" build_path="//" >}}
 
@@ -49,6 +49,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Fixed a bug where Docker Desktop's own Electron helper processes (GPU, renderer, utility) were incorrectly detected and killed as lingering processes on startup when launching from the Start menu, causing a crash loop.
 - Fixed an issue where the **View build logs** toggle in Logs view display settings was reset after restarting Docker Desktop instead of persisting the user's preference.
+- Docker Extensions is now disabled by default.
 
 #### For Mac
 
