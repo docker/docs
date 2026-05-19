@@ -34,7 +34,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
-- Ask Gordon is now generally available. There are also new usage plans available as well. Paid Gordon plans unlock higher usage limits.
+- Ask Gordon is now generally available. New usage plans are also available. Paid Gordon plans unlock higher usage limits.
 
 ### Updates
 
