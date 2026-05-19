@@ -11,27 +11,27 @@ params:
   grid_sections:
     - title: Quickstart
       description: Follow a step-by-step guide to explore and run a Docker Hardened Image.
-      icon: rocket_launch
+      icon: rocket-launch
       link: /dhi/get-started/
     - title: Explore
       description: Learn what Docker Hardened Images are, how they're built, and what sets them apart from typical base images.
-      icon: info
+      icon: information-circle
       link: /dhi/explore/
     - title: Features
       description: Discover the security, compliance, and enterprise-readiness features built into Docker Hardened Images.
-      icon: lock
+      icon: lock-closed
       link: /dhi/features/
     - title: How-tos
       description: Step-by-step guides for using, verifying, scanning, and migrating to Docker Hardened Images.
-      icon: play_arrow
+      icon: play
       link: /dhi/how-to/
     - title: Core concepts
       description: Understand the secure supply chain principles that make Docker Hardened Images production-ready.
-      icon: fact_check
+      icon: clipboard-document-check
       link: /dhi/core-concepts/
     - title: Troubleshoot
       description: Resolve common issues with building, running, or debugging Docker Hardened Images.
-      icon: help_center
+      icon: question-mark-circle
       link: /dhi/troubleshoot/
     - title: Additional resources
       description: Guides, blog posts, Docker Hub catalog, GitHub repositories, and more.
@@ -59,10 +59,10 @@ DHI is available in the following three subscriptions.
 | Upstream cadence for Docker-released patches | ✅ | ✅ | ✅ |
 | FIPS/STIG variants | ❌ | ✅ | ✅ |
 | Critical CVE fixes < 7 days with SLA-backed continuous patching | ❌ | ✅ | ✅ |
-| Customizations | ❌ | Up to 5 | Unlimited |
+| Customizations | ❌ | ✅ Up to 5 | ✅ Unlimited |
 | Access to Hardened System Packages repository | ❌ | ❌ | ✅ |
 | Full catalog access available | ❌ | ❌ | ✅ |
-| Extended Lifecycle Support add-on available | ❌ | ❌ | ✅<br><br>Includes:<br>✅ +5 years of hardened updates<br>✅ Maintains security updates after upstream EOL<br>✅ SBOMs & provenance<br>✅ Protects long-lived workloads |
+| Extended Lifecycle Support add-on available | ❌ | ❌ | ✅ +5 years of hardened updates |
 
 For pricing and more details, see the [Docker Hardened Images subscription
 comparison](https://www.docker.com/products/hardened-images/#compare).

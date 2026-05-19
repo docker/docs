@@ -45,7 +45,7 @@ Prettier runs automatically after each edit via the PostToolUse hook.
 Run lint manually after all edits are complete:
 
 ```bash
-${CLAUDE_SKILL_DIR}/scripts/lint.sh <changed-files>
+scripts/lint.sh <changed-files>
 ```
 
 The lint script runs markdownlint and vale on only the files you pass it,

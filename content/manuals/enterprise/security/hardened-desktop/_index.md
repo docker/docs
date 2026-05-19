@@ -10,27 +10,27 @@ aliases:
 grid:
   - title: "Settings Management"
     description: Learn how Settings Management can secure your developers' workflows.
-    icon: shield_locked
+    icon: shield-check
     link: /enterprise/security/hardened-desktop/settings-management/
   - title: "Enhanced Container Isolation"
     description: Understand how Enhanced Container Isolation can prevent container attacks.
-    icon: "security"
+    icon: shield-check
     link: /enterprise/security/hardened-desktop/enhanced-container-isolation/
   - title: "Registry Access Management"
     description: Control the registries developers can access while using Docker Desktop.
-    icon: "home_storage"
+    icon: server
     link: /enterprise/security/hardened-desktop/registry-access-management/
   - title: "Image Access Management"
     description: Control the images developers can pull from Docker Hub.
-    icon: "photo_library"
+    icon: photo
     link: /enterprise/security/hardened-desktop/image-access-management/
   - title: "Air-Gapped Containers"
     description: Restrict containers from accessing unwanted network resources.
-    icon: "vpn_lock"
+    icon: lock-closed
     link: /enterprise/security/hardened-desktop/air-gapped-containers/
   - title: "Namespace access"
     description: Control whether organization members can push content to their personal namespaces.
-    icon: "folder_managed"
+    icon: folder-open
     link: /enterprise/security/hardened-desktop/namespace-access/
 weight: 60
 ---

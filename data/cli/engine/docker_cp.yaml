@@ -29,7 +29,7 @@ options:
       shorthand: L
       value_type: bool
       default_value: "false"
-      description: Always follow symbol link in SRC_PATH
+      description: Always follow symlinks in SRC_PATH
       deprecated: false
       hidden: false
       experimental: false

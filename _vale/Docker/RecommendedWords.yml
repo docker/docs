@@ -10,9 +10,8 @@ swap:
   '\b(?:ie|i\.e\.)[\s,]': that is
   (?:account name|accountname|user name): username
   (?:drop down|dropdown): drop-down
-  (?:log out|logout): sign out
-  (?:sign on|log on|log in|logon|login): sign in
-  above: previous
+  \blog out\b: sign out
+  \b(?:sign on|log on|log in)\b: sign in
   adaptor: adapter
   administrate: administer
   afterwards: afterward
@@ -25,7 +24,6 @@ swap:
   anti-virus: antivirus
   appendixes: appendices
   assembler: assembly
-  below: following
   check box: checkbox
   check boxes: checkboxes
   click: select
@@ -37,5 +35,5 @@ swap:
   repo: repository
   scroll: navigate
   url: URL
-  vs: versus
+  '\bvs\b(?!\.|\s+Code)': versus
   wish: want

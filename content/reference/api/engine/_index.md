@@ -73,22 +73,14 @@ support, use `docker version`:
 ```console
 $ docker version
 Client: Docker Engine - Community
- Version:           29.4.0
- API version:       1.54
- Go version:        go1.26.1
- Git commit:        9d7ad9f
- Built:             Tue Apr  7 08:34:32 2026
- OS/Arch:           darwin/arm64
- Context:           desktop-linux
+ Version:           {{% param "docker_ce_version" %}}
+ API version:       {{% param "latest_engine_api_version" %}}
+ ...
 
 Server: Docker Engine - Community
  Engine:
-  Version:          29.4.0
-  API version:      1.54 (minimum version 1.40)
-  Go version:       go1.26.1
-  Git commit:       daa0cb7
-  Built:            Tue Apr  7 08:36:25 2026
-  OS/Arch:          linux/arm64
+  Version:          {{% param "docker_ce_version" %}}
+  API version:      {{% param "latest_engine_api_version" %}} (minimum version 1.40)
   ...
 ```
 
@@ -148,6 +140,7 @@ to provide full compatibility, some functionality may not be available.
 
 | Docker version | Maximum API version                          | Minimum API version                          | Change log                                                         |
 |:---------------|:---------------------------------------------|:---------------------------------------------|:-------------------------------------------------------------------|
+| 29.5           | [1.54](/reference/api/engine/version/v1.54/) | [1.40](/reference/api/engine/version/v1.40/) | [changes](/reference/api/engine/version-history/#v154-api-changes) |
 | 29.4           | [1.54](/reference/api/engine/version/v1.54/) | [1.40](/reference/api/engine/version/v1.40/) | [changes](/reference/api/engine/version-history/#v154-api-changes) |
 | 29.3           | [1.54](/reference/api/engine/version/v1.54/) | [1.40](/reference/api/engine/version/v1.40/) | [changes](/reference/api/engine/version-history/#v154-api-changes) |
 | 29.2           | [1.53](/reference/api/engine/version/v1.53/) | [1.44](/reference/api/engine/version/v1.44/) | [changes](/reference/api/engine/version-history/#v153-api-changes) |
@@ -177,11 +170,7 @@ to provide full compatibility, some functionality may not be available.
 
 API versions before v1.40 are deprecated and no longer supported by current
 versions of the Docker Engine and CLI. You can find archived documentation
-for deprecated versions of the API in the code repository on GitHub:
-
-- [Documentation for API versions 1.24–1.43](https://github.com/moby/moby/tree/28.x/docs/api).
-- [Documentation for API versions 1.18–1.23](https://github.com/moby/moby/tree/v25.0.0/docs/api).
-- [Documentation for API versions 1.17 and before](https://github.com/moby/moby/tree/v1.9.1/docs/reference/api).
+for deprecated versions of the API [in the code repository on GitHub](https://github.com/moby/moby/tree/docker-v{{% param "docker_ce_version" %}}/api/docs):
 
 | Docker version | Maximum API version | Minimum API version | Change log                                                         |
 |:---------------|:--------------------|:--------------------|:-------------------------------------------------------------------|

@@ -36,10 +36,10 @@
         <span
           :class="{ 'group-hover:block' : !copying }"
           class="icon-svg hidden"
-          >{{ partialCached "icon" "content_copy" "content_copy" }}</span
+          >{{ partialCached "icon" "document-duplicate" "document-duplicate" }}</span
         >
         <span :class="{ 'group-hover:block' : copying }" class="icon-svg hidden"
-          >{{ partialCached "icon" "check_circle" "check_circle" }}</span
+          >{{ partialCached "icon" "check-circle" "check-circle" }}</span
         >
       </button>
       {{ with .Attributes.collapse }}
@@ -55,7 +55,7 @@
             <button @click="collapse = false" class="chip">
               <span>Show more</span>
               <span class="icon-svg"
-                >{{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}</span
+                >{{ partialCached "icon" "chevron-down" "chevron-down" }}</span
               >
             </button>
           </div>
@@ -68,7 +68,7 @@
             >
               <span>Hide</span>
               <span class="icon-svg"
-                >{{ partialCached "icon" "arrow_drop_up" "arrow_drop_up" }}</span
+                >{{ partialCached "icon" "chevron-up" "chevron-up" }}</span
               >
             </button>
           </div>

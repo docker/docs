@@ -80,6 +80,25 @@ introduced, which is permanently true.
 
 - Use lowercase "config" in prose — `vale.Terms` flags a capital-C "Config"
 
+### Updating the vocabulary
+
+If Vale flags a legitimate tech term, product name, or compound identifier
+as a misspelling, add it to `_vale/config/vocabularies/Docker/accept.txt`.
+This is optional — only update when a real new term is missing, not to
+silence individual violations.
+
+- Use the canonical form for case-sensitive product names (`PyTorch`,
+  `GitHub`, `Kubernetes`, `BuildKit`). `Vale.Terms` enforces that exact
+  case across the docs.
+- Use `[Aa]bcd` character-class regex for words that legitimately appear
+  in multiple cases (e.g., sentence-starting capitalization, or a name
+  that's also a generic noun). This covers spelling without enforcing
+  a single canonical form.
+- Avoid broad regex patterns — entries that match many words at once
+  (especially with `(?i)`) suppress other rule checks on every match.
+- Don't add a wrong-cased entry to silence one false positive — it
+  cascades into `Vale.Terms` violations on every correct usage.
+
 ## Alpine.js patterns
 
 Do not combine Alpine's `x-show` with the HTML `hidden` attribute on the
@@ -111,11 +130,16 @@ produces broken HTML — always check COMPONENTS.md for correct syntax.
 
 ```sh
 npx prettier --write <file>        # Format before committing
+scripts/lint.sh <file>...          # Lint specific files (markdownlint + vale)
 docker buildx bake validate        # Run all validation checks
 docker buildx bake lint            # Markdown linting only
 docker buildx bake vale            # Style guide checks only
 docker buildx bake test            # HTML and link checking
 ```
+
+For incremental work, prefer `scripts/lint.sh` over the `bake` targets —
+it runs the same checks on just the files you pass, so the output stays
+scoped to your changes instead of the whole repo.
 
 ### Validation in git worktrees
 
@@ -128,8 +152,13 @@ and `validate-vendor` targets run correctly in CI.
 
 1. Make changes
 2. Format with prettier: `npx prettier --write <file>`
-3. Run `docker buildx bake lint vale`
+3. Lint the changed files: `scripts/lint.sh <file>...`
 4. Run a full build with `docker buildx bake` (optional for small changes)
+
+Always lint the specific files you changed before committing. Use
+`scripts/lint.sh` rather than the `bake` targets so the output is scoped
+to your changes — bake runs across the entire repo and the noise makes
+real issues easy to miss.
 
 ## Git hygiene
 

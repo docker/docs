@@ -1,9 +1,9 @@
 #!/bin/bash
 # Run markdownlint and vale on specific files.
-# Usage: .agents/skills/write/scripts/lint.sh <file> [file...]
+# Usage: scripts/lint.sh <file> [file...]
 #
-# Designed for agent workflows — scoped output, no repo-wide noise.
-# For full repo validation, use: docker buildx bake validate
+# Scoped output — no repo-wide noise. For full repo validation, use:
+#   docker buildx bake validate
 set -uo pipefail
 
 if [ $# -eq 0 ]; then

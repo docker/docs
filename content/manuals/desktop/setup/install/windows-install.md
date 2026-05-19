@@ -67,6 +67,7 @@ For more information, see [Understand permission requirements for Windows](windo
 - If you intend to use Enhanced Container Isolation, ensure you’re using WSL version 2.6 or later. This is required because ECI depends on a Linux kernel version of at least 6.3.0, and WSL 2.6+ bundles Linux kernel version 6.6.
 - Windows 10 64-bit: Enterprise, Pro, or Education version 22H2 (build 19045).
 - Windows 11 64-bit: Enterprise, Pro, or Education version 23H2 (build 22631) or higher.
+- The Windows Server service (LanmanServer) must be enabled and its start mode set to **Automatic**.
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
   [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 - The following hardware prerequisites are required to successfully run
@@ -92,6 +93,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 
 - Windows 10 64-bit: Enterprise, Pro, or Education version 22H2 (build 19045).
 - Windows 11 64-bit: Enterprise, Pro, or Education version 23H2 (build 22631) or higher.
+- The Windows Server service (LanmanServer) must be enabled and its start mode set to **Automatic**.
 - Turn on Hyper-V and Containers Windows features.
 - The following hardware prerequisites are required to successfully run Client
   Hyper-V on Windows 10:
@@ -117,6 +119,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 - WSL version 2.1.5 or later. To check your version, see [WSL: Verification and setup](#wsl-verification-and-setup)
 - Windows 10 64-bit: Enterprise, Pro, or Education version 22H2 (build 19045).
 - Windows 11 64-bit: Enterprise, Pro, or Education version 23H2 (build 22631) or higher.
+- The Windows Server service (LanmanServer) must be enabled and its start mode set to **Automatic**.
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
   [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 - The following hardware prerequisites are required to successfully run

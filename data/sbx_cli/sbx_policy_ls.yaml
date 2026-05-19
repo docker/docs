@@ -5,7 +5,10 @@ description: |-
 
     Displays the policy name (or ID if no name is set), type, decision
     (allow/deny), and the associated resources for each rule.
-usage: sbx policy ls [flags]
+
+    When SANDBOX is specified, only policies that apply to that sandbox are shown
+    (global rules plus rules scoped to that sandbox).
+usage: sbx policy ls [SANDBOX] [flags]
 options:
     - name: help
       shorthand: h
@@ -25,5 +28,8 @@ example: |4-
 
       # List only network policies
       sbx policy ls --type network
+
+      # List policies that apply to a specific sandbox
+      sbx policy ls my-sandbox
 see_also:
     - sbx policy - Manage sandbox policies

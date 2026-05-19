@@ -122,6 +122,17 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: policy
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Global policy evaluation options (format: `[disabled=true|false][,strict=true|false][,log-level=level]`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: print
       value_type: bool
       default_value: "false"

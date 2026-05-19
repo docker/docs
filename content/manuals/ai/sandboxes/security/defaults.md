@@ -18,7 +18,7 @@ it (deny-by-default). All non-HTTP protocols (raw TCP, UDP including DNS, and
 ICMP) are blocked at the network layer. Traffic to private IP ranges, loopback
 addresses, and link-local addresses is also blocked.
 
-Run `sbx policy ls` to see the active allow rules for your installation. To
+Run `sbx policy ls` to see the active network rules for your installation. To
 customize network access, see [Policies](policy.md). If your organization
 manages sandbox policies centrally, those rules apply on top of the defaults
 described here. See [Organization governance](governance.md).

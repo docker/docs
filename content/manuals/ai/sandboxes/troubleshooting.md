@@ -43,13 +43,13 @@ $ sbx policy log
 Then allow the domains your workflow needs:
 
 ```console
-$ sbx policy allow network "*.npmjs.org,*.pypi.org,files.pythonhosted.org"
+$ sbx policy allow network -g "*.npmjs.org,*.pypi.org,files.pythonhosted.org"
 ```
 
 To allow all outbound traffic instead:
 
 ```console
-$ sbx policy allow network "**"
+$ sbx policy allow network -g "**"
 ```
 
 If `sbx policy allow` doesn't unblock the request, your organization may
@@ -63,7 +63,7 @@ the destination IP address and port. For example, to allow SSH to a specific
 host:
 
 ```console
-$ sbx policy allow network "10.1.2.3:22"
+$ sbx policy allow network -g "10.1.2.3:22"
 ```
 
 Hostname-based rules (for example, `myhost:22`) don't work for non-HTTP
@@ -204,6 +204,28 @@ $ sbx run <sandbox-name>
 ```
 
 Restarting the sandbox re-syncs the VM clock with the host.
+
+## Daemon fails to start after downgrading
+
+If you downgrade `sbx` to a version older than the one that last managed your
+local state, the daemon may fail to start with a database version mismatch:
+
+```text
+ERROR: failed to start backend in-process: start backend: creating containerd
+server: ... database is at major version 6, but this binary only supports up
+to major version 1
+```
+
+A newer version of `sbx` upgraded the local database to a schema that older
+binaries don't understand. To recover, reset all sandbox state:
+
+```console
+$ sbx reset --preserve-secrets
+```
+
+This stops all VMs and deletes all sandbox data. You'll need to create new
+sandboxes afterwards. The `--preserve-secrets` flag keeps any secrets you've
+set so you don't have to reconfigure them.
 
 ## Removing all state
 

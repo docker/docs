@@ -113,10 +113,10 @@ agent can't reach it.
 
 ## Allow network access
 
-The network block does two things: it lists the hosts the sandbox is
-allowed to reach (`allowedDomains`), and it wires the kit-side half of
-the auth flow from [Plan authentication](#plan-authentication)
-(`serviceDomains` + `serviceAuth`).
+The network block does two things: it lists the hosts the sandbox can
+reach (`allowedDomains`), and it wires the kit-side half of the auth flow
+from [Plan authentication](#plan-authentication) with `serviceDomains` and
+`serviceAuth`.
 
 ```yaml
 network:
@@ -135,6 +135,10 @@ network:
 install/CDN subdomains (`*.ampcode.com`). Treat it as a starting point;
 Amp may reach other domains (model providers, analytics, updates) that
 you'll discover by watching `sbx policy log` while testing.
+
+Kits can also declare `deniedDomains` for hosts the sandbox should not
+reach, such as telemetry endpoints. Deny rules take precedence over
+allow rules and apply only to sandboxes that use the kit.
 
 For the auth wiring, when the agent makes an outbound request to
 `ampcode.com`, the proxy looks up the host in `serviceDomains` to find
@@ -279,6 +283,8 @@ Two loops help:
 
 - Watch the network policy log (`sbx policy log`) to catch blocked
   requests, then add their domains to `allowedDomains`.
+- Add domains to `deniedDomains` when the agent should stay blocked from
+  a host even if another policy permits it.
 - Edit the spec and re-run `sbx run --kit ./amp/ amp` to pick up changes.
   Remove the sandbox first (`sbx rm <name>`) for a clean start.
 
@@ -304,7 +310,8 @@ the same decisions for your agent:
   into a custom image. Pick install if it's a one-line script; bake if
   the install is slow or you need a pinned version.
 - **Network mapping**: list only the API host in `serviceDomains`, not
-  a wildcard. Keep install/CDN paths out of TLS-intercepting mode.
+  a wildcard. Keep install/CDN paths out of TLS-intercepting mode. Use
+  `deniedDomains` for hosts the agent should not reach.
 - **Credential injection**: if the agent validates the API key's format
   locally, register with `sbx secret set-custom` and pick a matching
   placeholder. If it accepts the env var as-is, declare

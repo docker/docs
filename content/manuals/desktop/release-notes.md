@@ -60,6 +60,17 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For Linux
 
 - Added support for Ubuntu 26.04.
+## 4.73.1
+
+{{< release-date date="2026-05-13" >}}
+
+{{< desktop-install-v2 win=true version="4.73.1" build_path="/226574/" >}}
+
+### Bug fixes and enhancements
+
+#### For Windows
+
+- Fixed a bug where Docker Desktop's own Electron processes were incorrectly killed when launching from the Start menu. Fixes [docker/desktop-feedback#367](https://github.com/docker/desktop-feedback/issues/367).
 
 ## 4.73.0
 

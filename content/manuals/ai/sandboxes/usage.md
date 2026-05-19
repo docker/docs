@@ -149,6 +149,34 @@ worktree. If that happens, commit from the worktree directory before pushing.
 See [Workspace trust](security/workspace.md) for security considerations when
 reviewing agent changes.
 
+#### Cleanup
+
+`sbx rm` removes the sandbox and all of its worktrees and branches.
+
+#### Ignoring the `.sbx/` directory
+
+Branch mode stores worktrees under `.sbx/` in your repository root. To keep
+this directory out of `git status`, add it to your project's `.gitignore`:
+
+```console
+$ echo '.sbx/' >> .gitignore
+```
+
+Or, to ignore it across all repositories, add `.sbx/` to your global gitignore:
+
+```console
+$ echo '.sbx/' >> "$(git config --global core.excludesFile)"
+```
+
+> [!TIP]
+> If `git config --global core.excludesFile` is empty, set one first:
+> `git config --global core.excludesFile ~/.gitignore`.
+
+You can also create Git worktrees yourself and run an agent directly in one,
+but the sandbox won't have access to the `.git` directory in the parent
+repository. This means the agent can't commit, push, or use Git. `--branch`
+solves this by setting up the worktree so that Git works inside the sandbox.
+
 ### Signed commits
 
 Sandboxes can sign Git commits with SSH keys from your host agent. The private
@@ -184,34 +212,6 @@ $ git commit -S
 
 For common signing failures, see
 [Sandbox commits aren't signed](troubleshooting.md#sandbox-commits-arent-signed).
-
-#### Cleanup
-
-`sbx rm` removes the sandbox and all of its worktrees and branches.
-
-#### Ignoring the `.sbx/` directory
-
-Branch mode stores worktrees under `.sbx/` in your repository root. To keep
-this directory out of `git status`, add it to your project's `.gitignore`:
-
-```console
-$ echo '.sbx/' >> .gitignore
-```
-
-Or, to ignore it across all repositories, add `.sbx/` to your global gitignore:
-
-```console
-$ echo '.sbx/' >> "$(git config --global core.excludesFile)"
-```
-
-> [!TIP]
-> If `git config --global core.excludesFile` is empty, set one first:
-> `git config --global core.excludesFile ~/.gitignore`.
-
-You can also create Git worktrees yourself and run an agent directly in one,
-but the sandbox won't have access to the `.git` directory in the parent
-repository. This means the agent can't commit, push, or use Git. `--branch`
-solves this by setting up the worktree so that Git works inside the sandbox.
 
 ## Reconnecting and naming
 
@@ -361,7 +361,7 @@ forwarding the request, so you must add the `localhost` address with the
 specific port to your network policy allowlist:
 
 ```console
-$ sbx policy allow network localhost:11434
+$ sbx policy allow network -g localhost:11434
 ```
 
 Then use `host.docker.internal` in any configuration or request that points at

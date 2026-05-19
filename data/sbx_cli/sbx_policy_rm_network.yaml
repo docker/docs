@@ -3,9 +3,16 @@ synopsis: Remove a network policy
 description: |-
     Remove a network policy by rule ID, resource, or both.
 
+    Use -g/--global to remove from the global policy, or provide SANDBOX to
+    remove from a sandbox-scoped policy.
+
     Use "sbx policy ls" to see active policies and their IDs/resources.
-usage: sbx policy rm network [flags]
+usage: sbx policy rm network [-g | SANDBOX] [flags]
 options:
+    - name: global
+      shorthand: g
+      default_value: "false"
+      usage: Remove from the global policy
     - name: help
       shorthand: h
       default_value: "false"
@@ -23,13 +30,13 @@ example: |4-
       # List policies to find the ID or resource to remove
       sbx policy ls
 
-      # Remove a rule by resource
-      sbx policy rm network --resource api.example.com
+      # Remove a global rule by resource
+      sbx policy rm network -g --resource api.example.com
 
-      # Remove a rule by ID
-      sbx policy rm network --id 2d3c1f0e-4a73-4e05-bc9d-f2f9a4b50d67
+      # Remove a global rule by ID
+      sbx policy rm network -g --id 2d3c1f0e-4a73-4e05-bc9d-f2f9a4b50d67
 
-      # Remove by ID and resource using one filter
-      sbx policy rm network --id 2d3c1f0e-4a73-4e05-bc9d-f2f9a4b50d67 --resource "api.example.com,cdn.example.com"
+      # Remove a sandbox-scoped rule by resource
+      sbx policy rm network my-sandbox --resource api.example.com
 see_also:
     - sbx policy rm - Remove a policy

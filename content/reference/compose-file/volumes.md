@@ -71,6 +71,20 @@ volumes:
       device: ":/docker/example"
 ```
 
+If you want a named bind mount, use the `local` driver with `driver_opts`. This pattern gives a Compose volume a stable name while mapping it to a specific host path:
+
+```yaml
+volumes:
+  app-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /srv/app-data # must be the absolute host path and already exist
+```
+
+The `type`, `o`, and `device` keys are passed through to the local driver. For a one-off host-path mount on a single service, see [bind mounts](/manuals/engine/storage/bind-mounts.md).
+
 ### `external`
 
 If set to `true`:

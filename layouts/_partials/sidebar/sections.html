@@ -85,19 +85,19 @@
       <!-- Expand group button -->
       <button
         @click="expanded = !expanded"
-        class="rounded-sm hover:bg-gray-200 hover:dark:bg-gray-800"
+        class="rounded-sm px-1 hover:bg-gray-200 hover:dark:bg-gray-800"
       >
         <span
           :class="{ 'hidden' : expanded }"
-          class="icon-svg {{ if $expanded }}hidden{{ end }}"
+          class="icon-svg icon-sm {{ if $expanded }}hidden{{ end }}"
         >
-          {{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}
+          {{ partialCached "icon" "chevron-down" "chevron-down" }}
         </span>
         <span
           :class="{ 'hidden' : !expanded }"
-          class="icon-svg {{ if not $expanded }}hidden{{ end }}"
+          class="icon-svg icon-sm {{ if not $expanded }}hidden{{ end }}"
         >
-          {{ partialCached "icon" "arrow_drop_up" "arrow_drop_up" }}
+          {{ partialCached "icon" "chevron-up" "chevron-up" }}
         </span>
       </button>
       {{- end }}

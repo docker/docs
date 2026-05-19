@@ -4,47 +4,47 @@ linkTitle: Reference
 layout: wide
 description: Find reference documentation for the Docker platform’s various APIs, CLIs, and file formats
 params:
-  icon: terminal
+  icon: command-line
   notoc: true
   grid_files:
   - title: Dockerfile
     description: Defines the contents and startup behavior of a single container.
-    icon: edit_document
+    icon: pencil-square
     link: /reference/dockerfile/
   - title: Compose file
     description: Defines a multi-container application.
-    icon: polyline
+    icon: rectangle-stack
     link: /reference/compose-file/
   grid_clis:
   - title: Docker CLI
     description: The main Docker CLI, includes all `docker` commands.
-    icon: terminal
+    icon: command-line
     link: /reference/cli/docker/
   - title: Compose CLI
     description: The CLI for Docker Compose, for building and running multi-container
       applications.
-    icon: subtitles
+    icon: server-stack
     link: /reference/cli/docker/compose/
   - title: Daemon CLI (dockerd)
     description: Persistent process that manages containers.
-    icon: developer_board
+    icon: cpu-chip
     link: /reference/cli/dockerd/
   grid_apis:
   - title: Engine API
     description: The main API for Docker, provides programmatic access to a daemon.
-    icon: api
+    icon: code-bracket
     link: /reference/api/engine/
   - title: Docker Hub API
     description: API to interact with Docker Hub.
-    icon: communities
+    icon: cloud
     link: /reference/api/hub/latest/
   - title: DVP Data API
     description: API for Docker Verified Publishers to fetch analytics data.
-    icon: area_chart
+    icon: chart-bar
     link: /reference/api/dvp/latest/
   - title: Registry API
     description: API for Docker Registry.
-    icon: database
+    icon: circle-stack
     link: /reference/api/registry/latest/
 ---
 

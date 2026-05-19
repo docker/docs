@@ -7,21 +7,21 @@ keywords: company, multiple organizations, manage companies, admin console, Dock
 grid:
   - title: Create a company
     description: Get started by learning how to create a company.
-    icon: apartment
+    icon: building-office-2
     link: /admin/company/new-company/
   - title: Manage organizations
     description:
       Learn how to add and manage organizations as well as seats within your
       company.
-    icon: store
+    icon: building-storefront
     link: /admin/company/manage/organizations/
   - title: Manage company owners
     description: Find out more about company owners and how to manage them.
-    icon: supervised_user_circle
+    icon: user-group
     link: /admin/company/manage/owners/
   - title: Manage users
     description: Explore how to manage users in all organizations.
-    icon: group_add
+    icon: user-plus
     link: /admin/company/manage/users/
   - title: Configure single sign-on
     description: Discover how to configure SSO for your entire company.
@@ -31,16 +31,16 @@ grid:
     description:
       Set up SCIM to automatically provision and deprovision users in your
       company.
-    icon: checklist
+    icon: clipboard-document-check
     link: /enterprise/security/provisioning/scim/
   - title: Domain management
     description: Add and verify your company's domains.
-    icon: domain_verification
+    icon: check-badge
     link: /enterprise/security/domain-management/
   - title: FAQs
     description: Explore frequently asked questions about companies.
     link: /faq/admin/company-faqs/
-    icon: help
+    icon: question-mark-circle
 aliases:
   - /docker-hub/creating-companies/
 ---
