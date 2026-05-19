@@ -55,7 +55,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Fixed published ports being inaccessible when a container is also connected to a Swarm overlay network. Fixes [docker/for-mac#7854](https://github.com/docker/for-mac/issues/7854).
 - Fixed dashboard TLS failures in some corporate environments.
-- Improved GUI security via content hash validation
+- Improved GUI security via content hash validation.
 
 #### For Linux
 
