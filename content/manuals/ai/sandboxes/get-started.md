@@ -123,20 +123,6 @@ option.
 > See the [FAQ](faq.md) for details on why sign-in is required and what
 > happens with your data.
 
-### Non-interactive login
-
-For CI environments and scripts where a browser is not available, use a
-Docker Personal Access Token (PAT) with `--username` and `--password-stdin`:
-
-```console
-$ echo "$DOCKER_PAT" | sbx login --username <your-docker-id> --password-stdin
-```
-
-`--password-stdin` reads the token from standard input to keep it out of
-your shell history. Generate a PAT from your
-[Docker account settings](https://app.docker.com/settings/personal-access-tokens)
-with at least **Read** scope.
-
 ## Authenticate your agent
 
 Agents need credentials for their model provider. How you provide them depends
