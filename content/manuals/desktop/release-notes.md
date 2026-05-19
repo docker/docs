@@ -34,7 +34,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
-- Ask Gordon is now generally available. New usage plans are also available. Paid Gordon plans unlock higher usage limits.
+- [Gordon](/ai/gordon) is now generally available. New usage plans are also available. Paid Gordon plans unlock higher usage limits.
 
 ### Updates
 
