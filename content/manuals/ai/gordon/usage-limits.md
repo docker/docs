@@ -47,10 +47,3 @@ month at 00:00 UTC.
 
 Docker Desktop shows a usage indicator so you can see how close you are to
 your limit. To get more usage, upgrade your tier.
-
-## Gordon on docs.docker.com
-
-Gordon is also available on [docs.docker.com](https://docs.docker.com) to
-answer documentation questions. It's free for all users with its own separate
-usage limit. It only answers questions about Docker documentation and does not
-include tool use or access to your Docker environment.
