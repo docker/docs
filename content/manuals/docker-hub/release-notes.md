@@ -24,13 +24,14 @@ known issues for each Docker Hub release.
   this domain are issued by Amazon Trust Services.
 
   Most users are unaffected. You may need to take action if your environment
-  uses an egress firewall with a domain allowlist, a TLS inspection proxy, or
-  a managed CA trust store. See the [Docker Desktop allowlist](/manuals/desktop/setup/allow-list.md)
-  for updated domain requirements. If you see TLS errors, ensure your trust
-  store includes the
-  [Amazon Trust Services Root CAs](https://www.amazontrust.com/repository/).
-  Paid subscribers can [contact Docker Support](https://hub.docker.com/support/contact/)
-  if you need updated TLS certificate details or the issue persists.
+  uses an egress firewall with a domain allowlist, a TLS inspection proxy, or a
+  managed CA trust store. See the [Docker Desktop
+  allowlist](/manuals/desktop/setup/allow-list.md) for updated domain
+  requirements. If you see TLS errors, ensure your trust store includes the
+  [Amazon Trust Services Root CAs](https://www.amazontrust.com/repository/). If
+  you're a paid subscriber, you can [contact Docker
+  Support](https://hub.docker.com/support/contact/) if you need updated TLS
+  certificate details or the issue persists.
 
 ## 2026-05-06
 
