@@ -35,7 +35,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### Updates
 
 - [Docker Offload v0.5.92](https://github.com/docker/cloud/releases/tag/v0.5.92)
-- [Docker Engine v29.5.0](https://docs.docker.com/engine/release-notes/29/#2950)
+- [Docker Engine v29.5.1](https://docs.docker.com/engine/release-notes/29/#2951)
 - [Docker Buildx v0.34.0](https://github.com/docker/buildx/releases/tag/v0.34.0)
 
 ### Bug fixes and enhancements
@@ -56,6 +56,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - WSL integration with the default distribution has been disabled. To change this, visit **Settings**. 
 - Fixed a bug where `docker compose up` failed with an `EOF` error on Windows with a Hyper-V backend, when accepting a file-sharing consent prompt.
+- Fixed Windows installer bugs that could cause incorrect backend mode detection or unexpected directory creation during installation.
 
 ## 4.74.0
 
