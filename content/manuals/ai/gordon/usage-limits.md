@@ -3,7 +3,7 @@ title: Gordon usage limits and tiers
 linkTitle: Usage limits
 description: Gordon subscription tiers and usage limits for Docker Desktop and the CLI
 weight: 50
-keywords: [gordon, usage, limits, tiers, base, plus, max, ultra, subscription]
+keywords: [gordon, usage, limits, tiers, base, plus, subscription]
 ---
 
 {{< summary-bar feature_name="Gordon" >}}
@@ -17,8 +17,6 @@ plans unlock higher usage limits.
 | ----- | -------------------------------- |
 | Base  | Included with any Docker account |
 | Plus  | 2× Base                          |
-| Max   | 5× Base                          |
-| Ultra | 20× Base                         |
 
 For more information about Gordon tiers and how to upgrade, go to
 [docker.com](https://www.docker.com/products/gordon).
@@ -33,8 +31,6 @@ count more toward your limit.
 | ----- | ----------- | ------- | --------- |
 | Base  | ~40         | ~100    | ~180      |
 | Plus  | ~80         | ~200    | ~360      |
-| Max   | ~200        | ~500    | ~900      |
-| Ultra | ~800        | ~2,000  | ~3,600    |
 
 These are estimates and vary based on question complexity.
 
