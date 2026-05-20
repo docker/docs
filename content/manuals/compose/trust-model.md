@@ -14,7 +14,7 @@ This means that any Compose file you run, whether it lives on your local
 filesystem, in a Git repository, or in an OCI registry, has full control over
 how containers interact with your host. The security boundary is not where the file comes from but whether you trust the author.
 
-Evaluating trust means asking: do you know who authored this file, can you verify it hasn't changed since you last reviewed it, and do you understand every privilege it requests?
+Evaluating trust means asking: Who authored this file? Has it changed since you last reviewed it? Do you understand every privilege it requests?
 
 ## The dependency chain
 
@@ -100,7 +100,7 @@ access to credentials, cloud provider tokens, or Docker sockets.
 
 ### Pin remote references to digests
 
-Tags are mutable meaning anyone with push access to a registry can overwrite a tag silently, so a reference you reviewed last week may point to different content today.
+Tags are mutable, meaning anyone with push access to a registry can overwrite a tag silently, so a reference you reviewed last week may point to different content today.
 
 Digests are immutable. Instead of referencing by tag, pin to the digest. 
 
