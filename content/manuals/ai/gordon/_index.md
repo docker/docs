@@ -13,9 +13,9 @@ aliases:
 
 {{< summary-bar feature_name="Gordon" >}}
 
-Gordon is an AI-powered assistant that takes action on your Docker workflows. It analyzes
-your environment, proposes solutions, and executes commands with your
-permission. Available in Docker Desktop and via the `docker ai` CLI command.
+Gordon is an AI-powered assistant that takes action on your Docker workflows.
+It analyzes your environment, proposes solutions, and executes commands with
+your permission.
 
 ## What Gordon does
 
@@ -28,6 +28,27 @@ Gordon takes action to help you with Docker tasks:
 - Manages containers, images, volumes, and networks
 
 Gordon proposes every action before executing. You approve what it does.
+
+## Where to use Gordon
+
+Gordon is available on four surfaces:
+
+- Open the Gordon view from the Docker Desktop sidebar to run Docker commands
+  with your approval. See [Using Gordon in Docker
+  Desktop](./how-to/docker-desktop.md).
+- Run `docker ai` in the terminal to use the full assistant from the command
+  line. See [Using Gordon via CLI](./how-to/cli.md).
+- Select the Gordon icon on any repository page at
+  [hub.docker.com](https://hub.docker.com) to ask about a repository's
+  images, tags, and metadata. Hand off to Docker Desktop to take action.
+- Select the Gordon icon on any page at
+  [docs.docker.com](https://docs.docker.com) to ask Docker questions.
+
+Docker Desktop and the CLI count against your Gordon plan's [usage
+limits](./usage-limits.md). Gordon on Docker Hub and docs.docker.com is free
+and does not require a Docker account or a Docker Desktop install. It has
+its own shared public usage limit and does not access your Docker
+environment.
 
 ## Get started
 
