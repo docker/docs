@@ -98,7 +98,8 @@ The list displays all images that have been assigned to the selected
 environment. If you've deployed multiple versions of the same image in an
 environment, all versions of the image appear in the list.
 
-Alternatively, you can use the `docker scout env` command to view the images from the terminal.
+Alternatively, you can Use the `docker scout environment` command to view the images from the terminal.
+use the `docker scout environment` command to view the images from the terminal.
 
 ```console
 $ docker scout environment production
