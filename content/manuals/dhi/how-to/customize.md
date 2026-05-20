@@ -307,7 +307,7 @@ targets:
 
 | Field | Description |
 |:---|:---|
-| `name` | Human-readable name. Lowercased and hyphenated, it becomes the image tag suffix. For example, `golang with git` produces tags ending in `_golang-with-git`. |
+| `name` | Human-readable name. Converted to lowercase and hyphenated, it becomes the image tag suffix. For example, `golang with git` produces tags ending in `_golang-with-git`. |
 | `targets[].destination` | Destination repository in Docker Hub, such as `my-org/dhi-golang`. |
 | `targets[].tag_definition_id` | Tag definition to customize, such as `golang/alpine-3.23/1.25`. Use `docker dhi customization prepare` with tab completion to find valid values. |
 
@@ -373,7 +373,7 @@ paths:
 | Field | Description |
 |:---|:---|
 | `path` | Absolute path where the file will be placed in the image. |
-| `contents` | File content. Use a YAML block scalar (`\|`) for multiline content. |
+| `contents` | File content. Use a YAML block scalar (`\|`) for multi-line content. |
 | `mode` | Octal file permissions, such as `"0644"`. Quote the value to prevent YAML from treating the leading zero as octal notation. |
 | `uid` | User ID of the file owner. |
 | `gid` | Group ID of the file owner. |
