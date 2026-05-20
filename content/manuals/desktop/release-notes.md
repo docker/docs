@@ -26,6 +26,37 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.75.0
+
+{{< release-date date="2026-05-25" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.75.0" build_path="//" >}}
+
+### Updates
+
+- [Docker Offload v0.5.92](https://github.com/docker/cloud/releases/tag/v0.5.92)
+- [Docker Engine v29.5.0](https://docs.docker.com/engine/release-notes/29/#2950)
+- [Docker Buildx v0.34.0](https://github.com/docker/buildx/releases/tag/v0.34.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms 
+
+- Removed the Docker Scout view and disabled Scout-related OS notifications and notification popups.
+- Added support for time namespacing in ECI protected containers.
+- Fixed a bug where the `http_proxy` environment variable could prevent kind clusters from pulling local images.
+- Fixed a `500 Internal Server Error` that could occur on the first Docker API call right after the VM wakes up from idle shutdown. 
+- Fixed broken images in Docker Hub image descriptions caused by relative URLs being resolved to invalid `app://` scheme URLs.
+
+#### For Mac
+
+- Added a warning dialog that appears at startup when Docker Desktop is running from a staging directory due to a failed update. Also adds a link to download a fresh install.
+
+#### For Windows 
+
+- WSL integration with the default distribution has been disabled. To change this, visit **Settings**. 
+- Fixed a bug where `docker compose up` failed with an `EOF` error on Windows with a Hyper-V backend, when accepting a file-sharing consent prompt.
+
 ## 4.74.0
 
 {{< release-date date="2026-05-19" >}}
