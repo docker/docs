@@ -27,15 +27,21 @@ if (!fs.existsSync(PUBLIC_DIR)) {
  */
 function findFiles(dir, predicate) {
   const results = [];
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
 
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      results.push(...findFiles(fullPath, predicate));
-    } else if (entry.isFile() && predicate(entry.name)) {
-      results.push(fullPath);
+  try {
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
+
+      if (entry.isDirectory()) {
+        results.push(...findFiles(fullPath, predicate));
+      } else if (entry.isFile() && predicate(entry.name)) {
+        results.push(fullPath);
+      }
     }
+  } catch (err) {
+    console.error(`Error reading directory ${dir}: ${err.message}`);
   }
 
   return results;
