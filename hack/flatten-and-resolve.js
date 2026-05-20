@@ -28,25 +28,25 @@ if (!fs.existsSync(PUBLIC_DIR)) {
 function findFiles(dir, predicate) {
   const results = [];
 
+  let entries;
   try {
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
-
-    for (const entry of entries) {
-      const fullPath = path.join(dir, entry.name);
-
-      if (entry.isDirectory()) {
-        results.push(...findFiles(fullPath, predicate));
-      } else if (entry.isFile() && predicate(entry.name)) {
-        results.push(fullPath);
-      }
-    }
+    entries = fs.readdirSync(dir, { withFileTypes: true });
   } catch (err) {
     console.error(`Error reading directory ${dir}: ${err.message}`);
+    return results; 
+  }
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      results.push(...findFiles(fullPath, predicate));
+    } else if (entry.isFile() && predicate(entry.name)) {
+      results.push(fullPath);
+    }
   }
 
   return results;
 }
-
 /**
  * Step 1: Flatten index.md files
  * Move path/to/section/index.md -> path/to/section.md
