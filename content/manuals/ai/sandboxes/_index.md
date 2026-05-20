@@ -25,6 +25,9 @@ developer's machine. Available on a separate paid subscription.
 
 ## Get started
 
+For complete system requirements, see the
+[get started prerequisites](get-started.md#prerequisites).
+
 Install the `sbx` CLI and sign in:
 
 {{< tabs >}}
