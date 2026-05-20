@@ -146,8 +146,7 @@ After completing the previous steps, your project directory should now contain t
 │ ├── Dockerfile.dev
 │ ├── .dockerignore
 │ ├── compose.yaml
-│ ├── next.config.ts
-│ └── README.Docker.md
+│ └── next.config.ts
 ```
 
 ### Step 4: Start Compose Watch

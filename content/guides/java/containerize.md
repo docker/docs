@@ -35,54 +35,14 @@ $ git clone https://github.com/spring-projects/spring-petclinic.git
 
 The sample application is a Spring Boot application built using Maven. For more details, see `readme.md` in the repository.
 
-## Initialize Docker assets
+## Create Docker assets
 
 Now that you have an application, you can create the necessary Docker assets to
-containerize your application. You can use Docker Desktop's built-in Docker Init
-feature to help streamline the process, or you can manually create the assets.
+containerize your application.
 
-{{< tabs >}}
-{{< tab name="Use Docker Init" >}}
-
-Inside the `spring-petclinic` directory, run the `docker init` command. `docker
-init` provides some default configuration, but you'll need to answer a few
-questions about your application. Refer to the following example to answer the
-prompts from `docker init` and use the same answers for your prompts.
-
-The sample application already contains Docker assets. You'll be prompted to overwrite the existing Docker assets. To continue with this guide, select `y` to overwrite them.
-
-```console
-$ docker init
-Welcome to the Docker Init CLI!
-
-This utility will walk you through creating the following files with sensible defaults for your project:
-  - .dockerignore
-  - Dockerfile
-  - compose.yaml
-  - README.Docker.md
-
-Let's get started!
-
-WARNING: The following Docker files already exist in this directory:
-  - docker-compose.yml
-? Do you want to overwrite them? Yes
-? What application platform does your project use? Java
-? What's the relative directory (with a leading .) for your app? ./src
-? What version of Java do you want to use? 21
-? What port does your server listen on? 8080
-```
-
-In the previous example, notice the `WARNING`. `docker-compose.yaml` already
-exists, so `docker init` overwrites that file rather than creating a new
-`compose.yaml` file. This prevents having multiple Compose files in the
-directory. Both names are supported, but Compose prefers the canonical
-`compose.yaml`.
-
-{{< /tab >}}
-{{< tab name="Manually create assets" >}}
-
-If you don't have Docker Desktop installed or prefer creating the assets
-manually, you can create the following files in your project directory.
+> [!TIP]
+>
+> [Gordon](/ai/gordon/), Docker's AI assistant, can generate Docker assets for your project. Ask Gordon to create a Dockerfile, Compose file, and `.dockerignore` tailored to your application.
 
 Create a file named `Dockerfile` with the following contents.
 
@@ -92,8 +52,6 @@ Create a file named `Dockerfile` with the following contents.
 # Comments are provided throughout this file to help you get started.
 # If you need more help, visit the Dockerfile reference guide at
 # https://docs.docker.com/go/dockerfile-reference/
-
-# Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
 
 ################################################################################
 
@@ -181,9 +139,12 @@ EXPOSE 8080
 ENTRYPOINT [ "java", "org.springframework.boot.loader.launch.JarLauncher" ]
 ```
 
-The sample already contains a Compose file. Overwrite this file to follow along with the guide. Update the`docker-compose.yaml` with the following contents.
+> [!NOTE]
+> The sample repository includes a `docker-compose.yml` file. The following instructions use the preferred `compose.yaml` filename — both are supported by Docker Compose.
 
-```yaml {collapse=true,title=docker-compose.yaml}
+Create a file named `compose.yaml` with the following contents.
+
+```yaml {collapse=true,title=compose.yaml}
 # Comments are provided throughout this file to help you get started.
 # If you need more help, visit the Docker Compose reference guide at
 # https://docs.docker.com/go/compose-spec-reference/
@@ -273,15 +234,12 @@ LICENSE
 README.md
 ```
 
-{{< /tab >}}
-{{< /tabs >}}
-
 You should now have the following three files in your `spring-petclinic`
 directory.
 
 - [Dockerfile](/reference/dockerfile/)
 - [.dockerignore](/reference/dockerfile/#dockerignore-file)
-- [docker-compose.yaml](/reference/compose-file/_index.md)
+- [compose.yaml](/reference/compose-file/_index.md)
 
 ## Run the application
 
@@ -323,10 +281,6 @@ For more information about Compose commands, see the
 
 In this section, you learned how you can containerize and run a Java
 application using Docker.
-
-Related information:
-
-- [docker init reference](/reference/cli/docker/init/)
 
 ## Next steps
 
