@@ -10,10 +10,10 @@ params:
     group: Enterprise
 ---
 
-{{% restricted title="About unassociated machines" %}}
+{{< restricted title="About unassociated machines" >}}
 Unassociated machines is a private feature that may not be available to all
 accounts.
-{{% /restricted %}}
+{{< /restricted >}}
 
 Docker administrators can identify, view, and manage Docker Desktop machines
 that are likely associated with their organization but aren't currently linked
