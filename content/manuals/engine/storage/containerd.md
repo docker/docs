@@ -54,14 +54,6 @@ from the registry) and also extracts them to disk. This dual storage means
 each layer occupies more space. The compressed format enables faster pulls and
 pushes, but requires additional disk capacity.
 
-This difference is particularly noticeable with multiple images sharing the
-same base layers. With legacy storage drivers, shared base layers were stored
-once locally, and reused images that depended on them. With containerd, each
-image stores its own compressed version of shared layers, even though the
-uncompressed layers are still de-duplicated through snapshotters. The
-compressed storage adds overhead proportional to the number of images using
-those layers.
-
 > [!IMPORTANT]
 > containerd uses a separate storage path from the Docker data directory.
 > If you previously configured a custom data directory for Docker (for example,
