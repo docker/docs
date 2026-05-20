@@ -5,7 +5,6 @@ description: Configure and enforce Docker Desktop settings using an admin-settin
 keywords: admin controls, settings management, configuration, enterprise, docker desktop, json file
 weight: 10
 aliases:
-  - /desktop/hardened-desktop/settings-management/configure/
   - /security/for-admins/hardened-desktop/settings-management/configure/
   - /security/for-admins/hardened-desktop/settings-management/configure-json-file/
 ---

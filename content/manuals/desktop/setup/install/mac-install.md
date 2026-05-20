@@ -11,7 +11,6 @@ aliases:
 - /desktop/mac/install/
 - /docker-for-mac/install/
 - /engine/installation/mac/
-- /docker-for-mac/apple-silicon/
 - /desktop/install/mac-install/
 - /desktop/install/mac/
 ---

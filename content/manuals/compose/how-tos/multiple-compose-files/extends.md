@@ -6,7 +6,6 @@ linkTitle: Extend
 weight: 20
 aliases:
 - /compose/extends/
-- /compose/multiple-compose-files/extends/
 ---
 
 Docker Compose's [`extends` attribute](/reference/compose-file/services.md#extends)

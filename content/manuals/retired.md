@@ -11,12 +11,9 @@ params:
 aliases:
   - /docker-hub/service-accounts/
   - /cloud/
-  - /cloud/aci-compose-features/
   - /cloud/aci-container-features/
   - /cloud/aci-integration/
   - /cloud/ecs-architecture/
-  - /cloud/ecs-compose-examples/
-  - /cloud/ecs-compose-features/
   - /cloud/ecs-integration/
   - /compose/migrate/
   - /engine/context/aci-integration/
@@ -66,11 +63,6 @@ aliases:
   - /toolbox/toolbox_install_mac/
   - /toolbox/toolbox_install_windows/
   - /desktop/features/dev-environments/
-  - /desktop/features/dev-environments/create-dev-env/
-  - /desktop/features/dev-environments/set-up/
-  - /desktop/features/dev-environments/share/
-  - /desktop/features/dev-environments/dev-cli/
-  - /desktop/dev-environments/
 ---
 
 This document provides an overview of Docker features, products, and

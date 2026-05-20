@@ -3,7 +3,6 @@ title: Core roles
 description: Control access to content, registry, and organization management with roles in your organization.
 keywords: members, teams, organization, company, roles, access, docker hub, admin console, security, permissions
 aliases:
-  - /docker-hub/roles-and-permissions/
   - /enterprise/security/roles-and-permissions/
 ---
 

@@ -6,7 +6,6 @@ title: Understand permission requirements for Docker Desktop on Mac
 linkTitle: Mac permission requirements
 aliases:
 - /desktop/mac/permission-requirements/
-- /desktop/install/mac-permission-requirements/
 weight: 20
 ---
 

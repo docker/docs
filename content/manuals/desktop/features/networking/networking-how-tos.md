@@ -4,9 +4,6 @@ keywords: docker desktop, networking, vpn, proxy, port mapping, dns
 title: Explore networking how-tos on Docker Desktop
 linkTitle: How-tos
 aliases:
-- /desktop/linux/networking/
-- /docker-for-mac/networking/
-- /desktop/mac/networking/
 - /desktop/networking/
 ---
 

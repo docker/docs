@@ -5,8 +5,6 @@ keywords: domain management, domain verification, auto-provisioning, user manage
 weight: 10
 aliases:
   - /security/for-admins/domain-management/
-  - /docker-hub/domain-audit/
-  - /enterprise/security/provisioning/domain-management/
 ---
 
 {{< summary-bar feature_name="Domain management" >}}

@@ -5,7 +5,6 @@ weight: 10
 description: How to set, use, and manage environment variables with Compose
 keywords: compose, orchestration, environment, environment variables, container environment variables
 aliases:
-- /compose/link-env-deprecated/
 - /compose/environment-variables/set-environment-variables/
 ---
 

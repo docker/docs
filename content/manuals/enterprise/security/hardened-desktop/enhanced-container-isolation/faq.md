@@ -5,7 +5,6 @@ description: Frequently asked questions about Enhanced Container Isolation
 keywords: enhanced container isolation, faq, troubleshooting, docker desktop
 toc_max: 2
 aliases:
- - /desktop/hardened-desktop/enhanced-container-isolation/faq/
  - /security/for-admins/hardened-desktop/enhanced-container-isolation/faq/
 weight: 40
 ---

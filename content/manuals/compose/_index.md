@@ -43,10 +43,8 @@ grid:
   icon: question-mark-circle
   link: /compose/faq
 aliases:
-- /compose/cli-command/
 - /compose/overview/
 - /compose/swarm/
-- /compose/completion/
 - /compose/releases/migrate/
 ---
 
