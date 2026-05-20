@@ -5,7 +5,6 @@ description: Learn how to define and use AI models in Docker Compose application
 keywords: compose, docker compose, models, ai, machine learning, cloud providers, specification
 aliases:
   - /compose/how-tos/model-runner/
-  - /ai/compose/model-runner/
 weight: 10
 ---
 

@@ -44,7 +44,6 @@ grid:
   link: /compose/faq
 aliases:
 - /compose/cli-command/
-- /compose/networking/swarm/
 - /compose/overview/
 - /compose/swarm/
 - /compose/completion/

@@ -4,8 +4,6 @@ keywords: Docker Desktop for Mac, edge, release notes
 title: Docker Desktop for Mac Edge release notes
 toc_min: 1
 toc_max: 2
-aliases:
-  - /desktop/mac/release-notes/edge-releases/
 sitemap: false
 ---
 

@@ -6,11 +6,7 @@ linkTitle: How-tos
 aliases:
 - /desktop/linux/networking/
 - /docker-for-mac/networking/
-- /mackit/networking/
 - /desktop/mac/networking/
-- /docker-for-win/networking/
-- /docker-for-windows/networking/
-- /desktop/windows/networking/
 - /desktop/networking/
 ---
 

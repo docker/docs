@@ -7,7 +7,6 @@ linkTitle: Fedora
 weight: 30
 toc_max: 4
 aliases:
-- /desktop/linux/install/fedora/
 - /desktop/install/fedora/
 - /desktop/install/linux/fedora/
 ---

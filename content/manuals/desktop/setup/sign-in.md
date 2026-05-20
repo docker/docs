@@ -8,25 +8,10 @@ linkTitle: Sign in
 weight: 40
 aliases:
 - /desktop/linux/
-- /desktop/linux/index/
 - /desktop/mac/
-- /desktop/mac/index/
 - /desktop/windows/
-- /desktop/windows/index/
 - /docker-for-mac/
-- /docker-for-mac/index/
-- /docker-for-mac/osx/
-- /docker-for-mac/started/
 - /docker-for-windows/
-- /docker-for-windows/index/
-- /docker-for-windows/started/
-- /mac/
-- /mackit/
-- /mackit/getting-started/
-- /win/
-- /windows/
-- /winkit/
-- /winkit/getting-started/
 - /desktop/get-started/
 ---
 

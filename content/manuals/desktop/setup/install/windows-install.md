@@ -9,15 +9,11 @@ linkTitle: Windows
 weight: 30
 aliases:
 - /desktop/windows/install/
-- /docker-ee-for-windows/install/
 - /docker-for-windows/install-windows-home/
 - /docker-for-windows/install/
 - /ee/docker-ee/windows/docker-ee/
 - /engine/installation/windows/
 - /engine/installation/windows/docker-ee/
-- /install/windows/docker-ee/
-- /install/windows/ee-preview/
-- /installation/windows/
 - /desktop/win/configuring-wsl/
 - /desktop/install/windows-install/
 ---

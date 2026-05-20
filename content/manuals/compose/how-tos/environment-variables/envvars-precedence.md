@@ -6,7 +6,6 @@ description: Scenario overview illustrating how environment variables are resolv
 keywords: compose, environment, env file
 weight: 20
 aliases:
-- /compose/envvars-precedence/
 - /compose/environment-variables/envvars-precedence/
 ---
 
