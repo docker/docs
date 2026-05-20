@@ -19,8 +19,8 @@ To use this workflow, you need:
 - Organization owner access in your Docker Hub namespace.
 - One of the following:
   - A DHI Select or Enterprise subscription. [Contact Docker
-    sales](https://www.docker.com/products/hardened-images/#compare) to purchase DHI Enterprise
-    or [learn more about DHI Select](../../subscription/setup.md#set-up-docker-hardened-images-select-for-an-organization).
+    sales](https://www.docker.com/products/hardened-images/#compare) to purchase
+    or learn more about these subscriptions.
   - An active DHI trial. [Start a free DHI
     trial](https://hub.docker.com/hardened-images/start-free-trial).
 - [Docker Desktop](../../desktop/release-notes.md) 4.65 or later to use the
@@ -103,8 +103,7 @@ CLI](cli.md#configuration).
    `<your-org>` with your organization name.
 
    ```console
-   $ docker dhi mirror start --org <your-org> \
-       -r dhi/python,<your-org>/dhi-python
+   $ docker dhi mirror start --org <your-org> dhi/python,<your-org>/dhi-python
    ```
 
 2. Wait for images to finish mirroring. This can take a few minutes.
@@ -163,7 +162,7 @@ CLI](cli.md#configuration).
    $ docker dhi customization prepare --org <your-org> python 3-alpine3.23 \
        --destination <your-org>/dhi-python \
        --name "python with curl" \
-       --output my-customization.yaml
+       > my-customization.yaml
    ```
 
 2. Add the `curl` package to the customization. You can edit the file with any
