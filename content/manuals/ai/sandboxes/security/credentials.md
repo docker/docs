@@ -69,7 +69,7 @@ secret globally so it's available to all sandboxes. To scope a secret to a
 specific sandbox instead:
 
 ```console
-$ sbx secret set openai-my-project openai
+$ sbx secret set my-sandbox openai
 ```
 
 > [!NOTE]

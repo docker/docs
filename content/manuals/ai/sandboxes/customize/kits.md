@@ -337,7 +337,7 @@ While iterating on a kit, apply changes to a running sandbox with
 `sbx kit add` instead of recreating it:
 
 ```console
-$ sbx kit add claude-my-project ./my-kit/
+$ sbx kit add my-sandbox ./my-kit/
 ```
 
 `kit add` re-runs install commands and re-copies files. Kits can't be

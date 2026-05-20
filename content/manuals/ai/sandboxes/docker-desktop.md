@@ -143,7 +143,7 @@ traffic is allowed except private networks and localhost.
 Allow mode (block specific destinations):
 
 ```console
-$ docker sandbox network proxy claude-my-project \
+$ docker sandbox network proxy my-sandbox \
   --policy allow \
   --block-cidr 10.0.0.0/8
 ```
@@ -151,7 +151,7 @@ $ docker sandbox network proxy claude-my-project \
 Deny mode (allow specific destinations):
 
 ```console
-$ docker sandbox network proxy claude-my-project \
+$ docker sandbox network proxy my-sandbox \
   --policy deny \
   --allow-host api.anthropic.com \
   --allow-host "*.npmjs.org"
