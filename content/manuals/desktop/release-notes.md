@@ -181,6 +181,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a bug where Kubernetes could fail to start on WSL 2 when `HTTP_PROXY` environment variables are set in WSL 2 itself.
 - Fixed a bug in Enhanced Container Isolation (ECI) that was causing loss of container `rootfs` persistence across Docker Desktop restarts, when using WSL.
 
+### Security
+
+- Addressed [CVE-2026-5843](https://www.cve.org/cverecord?id=CVE-2026-5843), container-to-host code execution in the Docker Model Runner MLX inference backend via MLX-LM `model_file` importlib loading.
+
 ## 4.70.0
 
 {{< release-date date="2026-04-20" >}}
@@ -301,6 +305,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed an issue where the installer extraction did not update the progress bar and could take around 5 minutes, depending on the machine. Extraction is now ~60% faster and includes proper progress updates.
 - Fixed a race condition where container ports would sometimes not be published correctly after container start, affecting ephemeral ports, `--publish-all`, and gateway IP bindings.
 - Fixed an issue where a failed WSL distro move could leave the distro unregistered.
+
+### Security
+
+- Addressed [CVE-2026-5817](https://www.cve.org/cverecord?id=CVE-2026-5817), container-to-host code execution in the Docker Model Runner vllm-metal inference backend via unsandboxed `trust_remote_code` tokenizer loading.
 
 ## 4.67.0
 
