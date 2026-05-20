@@ -40,7 +40,7 @@ ai-development:
   link: /ai/docker-agent/
 - title: Use AI models in Compose
   description: Define AI model dependencies in your Docker Compose applications.
-  link: /compose/how-tos/model-runner/
+  link: /ai/compose/models-and-compose/
 
 language-guides:
 - title: Node.js
