@@ -624,12 +624,12 @@ example to point a chart's image references at your mirrored DHIs.
 name: use mirrored images
 
 targets:
-  - destination: my-org/dhi-nginx-chart
-    tag_definition_id: nginx-chart/1.0
+  - destination: my-org/dhi-haproxy-chart
+    tag_definition_id: haproxy/helm/1
 
 reference_mappings:
-  - from: docker.io/library/nginx
-    to: my-org/dhi-nginx
+  - from: dhi/haproxy
+    to: my-org/dhi-haproxy
 ```
 
 | Field | Description |
