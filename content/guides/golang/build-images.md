@@ -195,7 +195,7 @@ This should be familiar. The result of that command will be a static application
 binary named `docker-gs-ping` and located in the root of the filesystem of the
 image that you are building. You could have put the binary into any other place
 you desire inside that image, the root directory has no special meaning in this
-regard. It's just convenient to use it to keep the file paths short for improved
+regard. It's convenient to use it to keep the file paths short for improved
 readability.
 
 Now, all that is left to do is to tell Docker what command to run when your
@@ -275,7 +275,7 @@ $ docker build --tag docker-gs-ping .
 ```
 
 The build process will print some diagnostic messages as it goes through the build steps.
-The following is just an example of what these messages may look like.
+The following is an example of what these messages may look like.
 
 ```console
 [+] Building 2.2s (15/15) FINISHED
@@ -310,7 +310,7 @@ successfully built your image named `docker-gs-ping`.
 
 To see the list of images you have on your local machine, you have two options.
 One is to use the CLI and the other is to use [Docker
-Desktop](/manuals/desktop/_index.md). Since you're currently working in the
+Desktop](/manuals/desktop/_index.md). Since you're working in the
 terminal, take a look at listing images with the CLI.
 
 To list images, run the `docker image ls`command (or the `docker images` shorthand):
@@ -350,7 +350,7 @@ $ docker image tag docker-gs-ping:latest docker-gs-ping:v1.0
 ```
 
 The Docker `tag` command creates a new tag for the image. It doesn't create a
-new image. The tag points to the same image and is just another way to reference
+new image. The tag points to the same image and is another way to reference
 the image.
 
 Now run the `docker image ls` command again to see the updated list of local
@@ -459,7 +459,7 @@ ENTRYPOINT ["/docker-gs-ping"]
 Since you have two Dockerfiles now, you have to tell Docker what Dockerfile
 you'd like to use to build the image. Tag the new image with `multistage`. This
 tag (like any other, apart from `latest`) has no special meaning for Docker,
-it's just something you chose.
+it's something you chose.
 
 ```console
 $ docker build -t docker-gs-ping:multistage -f Dockerfile.multistage .
