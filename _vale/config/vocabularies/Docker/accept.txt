@@ -53,6 +53,7 @@ Crowdstrike
 datacenter
 datasource
 Datadog
+DBeaver
 Ddosify
 Debootstrap
 denylist

@@ -262,7 +262,7 @@ After you've added your workflow file, it's time to trigger and observe the CI/C
 2. Monitor the workflow execution
 
    1. Go to the Actions tab in your GitHub repository.
-   2. Click into the workflow run to follow each step: `build`, `test`, and (if successful) `push`.
+   2. Select the workflow run to follow each step: `build`, `test`, and (if successful) `push`.
 
 3. Verify the Docker image on Docker Hub
 
