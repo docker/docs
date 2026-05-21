@@ -21,6 +21,12 @@ absolute paths means error messages, configuration files, and build outputs all
 reference paths you can find on your host. The agent sees exactly the directory
 structure you see, which reduces confusion when debugging or reviewing changes.
 
+> [!WARNING]
+> Avoid mounting network-attached or remote storage (network drives, SMB/NFS
+> shares, or cloud-synced folders) as a workspace. The sandbox accesses
+> workspaces through a filesystem passthrough, so every file read and write
+> goes over the network. This adds latency and slows agent performance.
+
 ## Storage and persistence
 
 When you create a sandbox, everything inside it persists until you remove it:
