@@ -41,7 +41,7 @@ and ICMP are blocked at the network layer.
 
 ## Isolation layers
 
-The sandbox security model has four layers. See
+The sandbox security model has five layers. See
 [Isolation layers](isolation/) for technical details on each.
 
 - **Hypervisor isolation:** separate kernel per sandbox. No shared memory or
@@ -50,6 +50,9 @@ The sandbox security model has four layers. See
   [Deny-by-default policy](defaults/). Non-HTTP protocols blocked entirely.
 - **Docker Engine isolation:** each sandbox has its own Docker Engine with no
   path to the host daemon.
+- **Source-repository isolation (clone mode):** the agent works on a private
+  in-VM clone with your `.git` mounted read-only. Even an unconstrained
+  agent cannot corrupt your host repository.
 - **Credential isolation:** API keys are injected into HTTP headers by the
   host-side proxy. Credential values never enter the VM.
 

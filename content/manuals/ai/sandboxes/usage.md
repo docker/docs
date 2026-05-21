@@ -77,117 +77,131 @@ When your workspace is a Git repository, the agent edits your working tree
 directly by default. Changes appear in your working tree immediately, the same
 as working in a normal terminal.
 
-If you run multiple agents on the same repository at once, use [branch
-mode](#branch-mode) to give each agent its own branch and working directory.
+If you want the agent to work in isolation from your host repository — for
+example to run multiple agents in parallel, or to prevent any chance of an
+agent rewriting your local Git state — use [clone mode](#clone-mode). The
+agent runs against a private Git clone inside the sandbox; your host repository
+sees the agent's commits only after you explicitly fetch them.
 
 ### Direct mode (default)
 
 The agent edits your working tree directly. Stage, commit, and push as you
 normally would. If you run multiple agents on the same repository at the same
 time, they may step on each other's changes. See
-[branch mode](#branch-mode) for an alternative.
+[clone mode](#clone-mode) for an alternative.
 
-### Branch mode
+### Clone mode
 
-Pass `--branch <name>` to give the agent its own
-[Git worktree](https://git-scm.com/docs/git-worktree) and branch. This
-prevents conflicts when multiple agents, or you and an agent, write to the
-same files at the same time. You can set `--branch` on `create`, `run`, or
-both.
+Pass `--clone` to run the agent on a private Git clone living entirely
+inside the sandbox, instead of bind-mounting your working tree. Your host
+repository is mounted read-only as the clone's reference, so the agent — even
+with full root inside the VM — cannot modify any byte of your `.git`
+directory or working tree. You can set `--clone` on `create` or, equivalently,
+on `run` at create time.
 
-The CLI creates worktrees under `.sbx/` in your repository root. The
-worktree is a separate working directory, so the agent doesn't touch your main
-working tree. This means:
+When `--clone` is active:
 
-- The worktree branches off your latest commit when you create it.
-  Uncommitted changes in your working tree are not included (`sbx` warns you
-  if it detects any).
-- Files you add or change in your main working tree won't be visible to the
-  agent, and vice versa. The two directories are independent.
+- The agent works on a private clone populated by
+  `git clone --reference` from your repository, on the sandbox's overlay
+  filesystem. The clone has its own index, refs, and working tree.
+  Object storage is shared via `.git/objects/info/alternates`, so the
+  clone is space-efficient and full history is walkable, but writes to
+  the clone never reach your host's object database.
+- Your repository's Git root is bind-mounted at `/run/sandbox/source` as a
+  read-only mount. The agent's `git clone --reference` reads from this
+  mount; nothing on the host is writable from inside the sandbox.
+- The clone follows whatever HEAD your host repository is on at create time.
+  No branch is created automatically — if you want the agent to work on a
+  dedicated branch, instruct the agent to `git checkout -b my-feature`
+  inside the sandbox before it starts editing.
+- The sandbox runs a `git-daemon` over a `127.0.0.1`-bound ephemeral port
+  that exports the in-container clone. The CLI registers it as a Git remote
+  named `sandbox-<sandbox-name>` on your host repository, so you can pull
+  the agent's commits with `git fetch`.
+- Forge remotes you have on the host (`origin`, `upstream`, …) are
+  propagated into the in-container clone with their existing URLs, so the
+  agent can `git push origin …` to your GitHub fork as you would on the
+  host. Local-path remotes (`file://`, paths) are skipped because they
+  aren't reachable from inside the sandbox.
 
-#### Starting a branch
+See [Source-repository isolation](security/isolation.md#source-repository-isolation)
+for the security boundary.
 
-```console
-$ sbx run claude --branch my-feature   # agent works on the my-feature branch
-```
-
-Use `--branch auto` to let the CLI generate a branch name for you:
-
-```console
-$ sbx run claude --branch auto
-```
-
-You can also create the sandbox first and add a branch at run time:
-
-```console
-$ sbx create --name my-sandbox claude .
-$ sbx run --branch my-feature my-sandbox
-```
-
-Or set the branch at create time and reuse it on subsequent runs:
-
-```console
-$ sbx create --name my-sandbox --branch my-feature claude .
-$ sbx run my-sandbox                       # resumes in the my-feature worktree
-$ sbx run --branch my-feature my-sandbox   # same — reuses the existing worktree
-```
-
-#### Multiple branches per sandbox
-
-You can run multiple worktrees in the same sandbox by passing different branch
-names:
+#### Starting a sandbox in clone mode
 
 ```console
-$ sbx run --branch feature-a my-sandbox
-$ sbx run --branch feature-b my-sandbox
+$ sbx run --clone claude   # private clone of the current repository
 ```
+
+You can also create the sandbox first and attach later:
+
+```console
+$ sbx create --clone --name my-sandbox claude .
+$ sbx run my-sandbox                       # resumes in the in-container clone
+```
+
+> [!NOTE]
+> Clone mode is fixed at create time. Recreate the sandbox with
+> `sbx create --clone ...` to switch an existing sandbox into clone mode.
 
 #### Reviewing and pushing changes
 
-To review the agent's work, find the worktree with `git worktree list`, then
-push or open a PR from there:
+The CLI wires the agent's in-container clone as a `sandbox-<sandbox-name>`
+Git remote on your host repository. Review the agent's work with the same
+commands you'd use for any other remote — no extra tooling, no `cd` into
+a separate directory:
 
 ```console
-$ git worktree list                          # find the worktree path
-$ cd .sbx/<sandbox-name>-worktrees/my-feature
-$ git log                                    # see what the agent did
+$ git fetch sandbox-my-sandbox                            # pull the agent's commits
+$ git log sandbox-my-sandbox/<branch-the-agent-used>      # see what the agent did
+$ git diff main..sandbox-my-sandbox/<branch-the-agent-used>
+$ git checkout -b my-feature sandbox-my-sandbox/<branch-the-agent-used>
 $ git push -u origin my-feature
 $ gh pr create
 ```
 
-Some agents don't commit automatically and leave changes uncommitted in the
-worktree. If that happens, commit from the worktree directory before pushing.
+If the agent committed on a dedicated branch (because you asked it to
+`git checkout -b ...`), that branch name appears on the `sandbox-<name>`
+remote. If it stayed on the HEAD it inherited at create time, its commits
+extend that branch instead — you'll see them by fetching and diffing.
+
+Some agents don't commit automatically. If `git log sandbox-<name>/...`
+shows nothing new, open a shell in the sandbox and commit from there
+before fetching. `sbx exec` drops you into the in-container clone:
+
+```console
+$ sbx exec -it my-sandbox bash
+$ git commit -am "save work"
+```
 
 See [Workspace trust](security/workspace.md) for security considerations when
 reviewing agent changes.
 
 #### Cleanup
 
-`sbx rm` removes the sandbox and all of its worktrees and branches.
+`sbx rm` deletes the sandbox, its in-container clone, the published Git
+port, and the `sandbox-<sandbox-name>` remote on your host repository.
 
-#### Ignoring the `.sbx/` directory
+> [!WARNING]
+> Any commits the agent made inside the sandbox that you have not yet
+> fetched (via `git fetch sandbox-<name>`) or pushed to an upstream
+> remote will be lost — the in-container clone lives on the sandbox's
+> overlay filesystem and is dropped with it. `sbx rm` prints a warning
+> for clone-mode sandboxes; review it before confirming the removal.
 
-Branch mode stores worktrees under `.sbx/` in your repository root. To keep
-this directory out of `git status`, add it to your project's `.gitignore`:
+#### Restrictions
 
-```console
-$ echo '.sbx/' >> .gitignore
-```
+A few configurations are incompatible with clone mode and are rejected at
+create time:
 
-Or, to ignore it across all repositories, add `.sbx/` to your global gitignore:
-
-```console
-$ echo '.sbx/' >> "$(git config --global core.excludesFile)"
-```
-
-> [!TIP]
-> If `git config --global core.excludesFile` is empty, set one first:
-> `git config --global core.excludesFile ~/.gitignore`.
-
-You can also create Git worktrees yourself and run an agent directly in one,
-but the sandbox won't have access to the `.git` directory in the parent
-repository. This means the agent can't commit, push, or use Git. `--branch`
-solves this by setting up the worktree so that Git works inside the sandbox.
+- `--clone` together with `--workspace-volume`: the source-repository
+  isolation relies on bind-mounting your Git root, which is incompatible
+  with a volume-backed workspace.
+- `--clone` from inside a host Git worktree: the bind mount can't resolve
+  the worktree's `.git` pointer file. Run `sbx create --clone ...` from
+  the main repository instead.
+- `--clone` on a non-Git workspace: clone mode requires a Git repository.
+  Run `sbx create` without `--clone` for non-Git workspaces.
 
 ### Signed commits
 
@@ -251,7 +265,7 @@ $ sbx create claude .
 ```
 
 Unlike `run`, `create` requires an explicit workspace path. It uses direct
-mode by default, or pass `--branch` for [branch mode](#branch-mode). Attach
+mode by default, or pass `--clone` for [clone mode](#clone-mode). Attach
 later with `sbx run`:
 
 ```console
@@ -262,8 +276,8 @@ $ sbx run claude-my-project
 
 You can mount extra directories into a sandbox alongside the main workspace.
 The first path is the primary workspace — the agent starts here, and the
-sandbox's Git worktree is created from this directory if you use `--branch`.
-Extra workspaces are always mounted directly.
+sandbox's in-container Git clone is populated from this directory if you
+use `--clone`. Extra workspaces are always mounted directly.
 
 All workspaces appear inside the sandbox at their absolute host paths. Append
 `:ro` to mount an extra workspace read-only — useful for reference material or
