@@ -332,8 +332,8 @@ contents:
 #### Add OCI artifacts
 
 To layer additional files into your customized image, such as custom
-certificates, internal tools, or configuration files, reference an OCI
-artifact image under `contents.artifacts`.
+certificates, internal tools, or configuration files, list OCI artifact
+images under `contents.artifacts`.
 
 ```yaml
 contents:
@@ -404,7 +404,7 @@ accounts:
 
 | Field | Description |
 |:---|:---|
-| `root` | Whether to enable the root user. |
+| `root` | Whether to enable the root user. Default is `false`. Required if `runs-as` is set to `root`. |
 | `runs-as` | The default user the container runs as. |
 | `users[].name` | Username. |
 | `users[].uid` | User ID. |
