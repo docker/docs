@@ -42,6 +42,7 @@ classpath
 cli
 CLI
 CloudFront
+composable
 Codefresh
 Codespaces
 config

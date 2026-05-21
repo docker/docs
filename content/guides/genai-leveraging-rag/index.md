@@ -130,7 +130,7 @@ You can now access the interface at [http://localhost:8501/](http://localhost:85
 
 When those lines appear in the logs, the web apps are ready to use.
 
-Since the goal is to teach AI about things it does not yet know, begin by asking it a simple question about Nifi at
+Since the goal is to teach AI about things it does not yet know, begin by asking it a simple question about NiFi at
 [http://localhost:8501/](http://localhost:8501/).
 ![alt text](image.png)
 
