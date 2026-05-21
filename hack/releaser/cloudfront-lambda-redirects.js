@@ -22,7 +22,7 @@ exports.handler = (event, context, callback) => {
                 }],
             },
         }
-        callback(null, response);
+        callback(null, response); return;
         return
     }
 
@@ -71,7 +71,7 @@ exports.handler = (event, context, callback) => {
             // Markdown files are flattened: /path/to/page.md not /path/to/page/index.md.
             // The homepage markdown output remains at /index.md.
             const stripped = uri.replace(/\/$/, '');
-            uri = stripped === '' ? '/index.md' : stripped + '.md';
+            uri = stripped === '' ? '/index.md' : `${stripped}.md`;
         } else {
             // HTML uses directory structure with index.html
             if (!uri.endsWith("/")) {
