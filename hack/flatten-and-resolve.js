@@ -86,7 +86,7 @@ function flattenIndexFiles() {
 
     // Move file up one level
     const parentDir = path.dirname(dir);
-    const newPath = path.join(parentDir, `${dirname}.md`);
+    const newPath = path.join(parentDir === PUBLIC_DIR ? PUBLIC_DIR : parentDir, `${dirname}.md`);
     fs.renameSync(file, newPath);
 
     count++;
@@ -133,104 +133,4 @@ function fixIndexReferences() {
     }
   }
 
-  console.log(`Fixed _index.md references in ${count} files`);
-  return count;
-}
-
-/**
- * Step 3: Resolve all relative links to absolute HTML paths
- */
-function resolveLinks() {
-  const mdFiles = findFiles(PUBLIC_DIR, name => name.endsWith('.md'));
-  let count = 0;
-
-  for (const file of mdFiles) {
-    let content = fs.readFileSync(file, 'utf8');
-    const original = content;
-
-    // Process inline links: [text](path)
-    content = content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, link) => {
-      const resolved = resolveLinkPath(link, file);
-      return `[${text}](${resolved})`;
-    });
-
-    // Process reference-style links: [ref]: path
-    content = content.replace(/^\[([^\]]+)\]:\s+(.+)$/gm, (match, ref, link) => {
-      const resolved = resolveLinkPath(link, file);
-      return `[${ref}]: ${resolved}`;
-    });
-
-    if (content !== original) {
-      fs.writeFileSync(file, content, 'utf8');
-      count++;
-    }
-  }
-
-  console.log(`Resolved links in ${count} files`);
-  return count;
-}
-
-/**
- * Resolve a link path to absolute HTML format
- */
-function resolveLinkPath(linkPath, currentFile) {
-  // Skip external URLs and mailto
-  if (linkPath.startsWith('http://') || linkPath.startsWith('https://') ||
-      linkPath.startsWith('mailto:')) {
-    return linkPath;
-  }
-
-  // Skip same-page anchors
-  if (linkPath.startsWith('#')) {
-    return linkPath;
-  }
-
-  // Split path and anchor
-  const hashIndex = linkPath.indexOf('#');
-  const pathPart = hashIndex >= 0 ? linkPath.substring(0, hashIndex) : linkPath;
-  const anchorPart = hashIndex >= 0 ? linkPath.substring(hashIndex) : '';
-
-  if (!pathPart) {
-    // Just an anchor
-    return linkPath;
-  }
-
-  // Handle absolute paths - just convert to HTML format
-  if (pathPart.startsWith('/')) {
-    return toHtmlPath(pathPart) + anchorPart;
-  }
-
-  // Resolve relative path to absolute
-  const currentDir = path.dirname(currentFile);
-  const absolutePath = path.resolve(currentDir, pathPart);
-  const relativePath = path.relative(PUBLIC_DIR, absolutePath);
-
-  // Convert to URL path (forward slashes)
-  const urlPath = '/' + relativePath.split(path.sep).join('/');
-
-  return toHtmlPath(urlPath) + anchorPart;
-}
-
-/**
- * Convert a path to HTML format (strip .md, add trailing /)
- */
-function toHtmlPath(urlPath) {
-  if (urlPath.endsWith('.md')) {
-    return urlPath.slice(0, -3) + '/';
-  }
-  return urlPath;
-}
-
-// Main execution
-console.log('Starting markdown flattening and link resolution...');
-console.log('');
-
-const flattenCount = flattenIndexFiles();
-const fixCount = fixIndexReferences();
-const resolveCount = resolveLinks();
-
-console.log('');
-console.log('Done!');
-console.log(`- Flattened: ${flattenCount} files`);
-console.log(`- Fixed references: ${fixCount} files`);
-console.log(`- Resolved links: ${resolveCount} files`);
+  console.log(`Fi
