@@ -92,6 +92,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a bug where canceling `docker load` left a containerd ref lock held, causing subsequent loads of the same image to fail.
 - Fixed an issue where Docker Desktop made unnecessary network requests to `mcp.docker.com` on sign-in when MCP Toolkit was disabled, causing unexpected proxy authentication prompts.
 - Fixed an issue where the search input in Gordon's session sidebar would not close if it was left empty.
+- Improved Docker Desktop handling of transient rename failures caused by antivirus software accessing those files simultaneously.
 
 #### For Mac
 
