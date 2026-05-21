@@ -7,8 +7,6 @@ description: |
 keywords: docker sandboxes, gemini, google, ai agent, sbx
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 This guide covers authentication, configuration, and usage of Google Gemini in
 a sandboxed environment.
 

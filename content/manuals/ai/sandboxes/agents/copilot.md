@@ -7,8 +7,6 @@ description: |
 keywords: docker sandboxes, github copilot, ai agent, github token, sbx
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 This guide covers authentication, configuration, and usage of GitHub Copilot
 in a sandboxed environment.
 

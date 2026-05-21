@@ -6,8 +6,6 @@ description: What a sandbox permits and blocks before you change any settings.
 keywords: docker sandboxes, security defaults, network policy, credentials, sbx
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 A sandbox created with `sbx run` and no additional flags has the following
 security posture.
 

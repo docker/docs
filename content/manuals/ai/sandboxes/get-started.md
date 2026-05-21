@@ -6,8 +6,6 @@ description: Install the sbx CLI, configure credentials, and work through your f
 keywords: sandbox, sbx, get started, install, credentials, branch mode, network policy
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
 sandbox gets its own Docker daemon, filesystem, and network — the agent can
 build containers, install packages, and modify files without touching your host

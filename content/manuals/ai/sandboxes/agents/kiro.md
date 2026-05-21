@@ -7,8 +7,6 @@ description: |
 keywords: docker sandboxes, kiro, ai agent, authentication, sbx
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 This guide covers authentication, configuration, and usage of Kiro in a
 sandboxed environment.
 

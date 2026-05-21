@@ -5,8 +5,6 @@ description: How Docker Sandboxes isolate AI agents using hypervisor, network, D
 keywords: docker sandboxes, isolation, hypervisor, network, credentials
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 AI coding agents need to execute code, install packages, and run tools on
 your behalf. Docker Sandboxes run each agent in its own microVM with four
 isolation layers: hypervisor, network, Docker Engine, and credential proxy.

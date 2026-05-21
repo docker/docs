@@ -6,12 +6,7 @@ weight: 10
 params:
   sidebar:
     group: AI and agents
-    badge:
-      color: blue
-      text: Early Access
 ---
-
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
 sandbox gets its own Docker daemon, filesystem, and network — the agent can

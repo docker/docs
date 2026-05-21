@@ -6,8 +6,6 @@ description: AI coding agents supported by Docker Sandboxes.
 keywords: docker sandboxes, ai agents, claude code, codex, cursor, gemini
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 Docker Sandboxes runs the following agents out of the box:
 
 - [Claude Code](claude-code/)

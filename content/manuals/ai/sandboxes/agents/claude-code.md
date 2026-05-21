@@ -7,8 +7,6 @@ description: |
 keywords: docker sandboxes, claude code, anthropic, ai agent, sbx
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 Official documentation: [Claude Code](https://code.claude.com/docs)
 
 ## Quick start

@@ -5,8 +5,6 @@ description: Resolve common issues when using Docker Sandboxes.
 keywords: docker sandboxes, sbx, troubleshooting, diagnostics, reset, network policy, git, ssh
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 ## Run diagnostics
 
 Before digging into a specific issue, run
