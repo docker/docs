@@ -5,8 +5,6 @@ description: Configure network access rules for sandboxes.
 keywords: docker sandboxes, policies, network access, allow rules, deny rules
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 Sandboxes are [network-isolated](isolation.md) from your host and from each
 other. A policy system controls what a sandbox can access over the network.
 

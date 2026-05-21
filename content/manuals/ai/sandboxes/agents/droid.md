@@ -6,8 +6,6 @@ description: |
 keywords: docker sandboxes, droid, factory, ai agent, sbx
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 This guide covers authentication, configuration, and usage of Droid, an AI
 coding agent by Factory, in a sandboxed environment.
 

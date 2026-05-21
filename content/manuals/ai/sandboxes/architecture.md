@@ -5,8 +5,6 @@ description: Technical architecture of Docker Sandboxes; workspace mounting, sto
 keywords: docker sandboxes, architecture, microVM, workspace mounting, sandbox lifecycle
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 This page explains how Docker Sandboxes work under the hood. For the security
 properties of the architecture, see [Sandbox isolation](security/isolation.md).
 

@@ -5,8 +5,6 @@ description: How Docker Sandboxes handle API keys and authentication credentials
 keywords: docker sandboxes, credentials, api keys, authentication, proxy, ssh agent, secrets
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 Most agents need an API key for their model provider. An HTTP/HTTPS proxy on
 your host intercepts outbound requests from the sandbox, looks up the matching
 credential on the host, and overwrites the auth header before forwarding. The

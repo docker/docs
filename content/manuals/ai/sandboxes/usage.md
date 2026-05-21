@@ -5,8 +5,6 @@ description: Common patterns for working with sandboxes.
 keywords: docker sandboxes, sbx, usage, run, policy, secrets, branches, git, workspaces, ssh
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 ## Working with sandboxes
 
 The basic workflow is [`run`](/reference/cli/sbx/run/) to start,

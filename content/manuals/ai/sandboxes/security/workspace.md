@@ -7,8 +7,6 @@ description: |
 keywords: docker sandboxes, workspace trust, file access, review, sbx
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 Agents running in sandboxes have full access to the workspace directory without
 prompting. With the default direct mount, changes the agent makes appear on
 your host immediately. Treat sandbox-modified workspace files the same way

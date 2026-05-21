@@ -5,8 +5,6 @@ description: Frequently asked questions about Docker Sandboxes.
 keywords: docker sandboxes, sbx, faq, sign in, telemetry
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 ## Why do I need to sign in?
 
 Docker Sandboxes is built around the idea that you and your agents are a team.

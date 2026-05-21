@@ -6,8 +6,6 @@ description: Trust boundaries, isolation layers, and security properties of Dock
 keywords: docker sandboxes, security model, isolation, trust boundaries, microVM
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 Docker Sandboxes run AI agents in microVMs so they can execute code, install
 packages, and use tools without accessing your host system. Multiple isolation
 layers protect your host system.
