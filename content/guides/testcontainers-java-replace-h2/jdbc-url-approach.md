@@ -2,6 +2,7 @@
 title: Replace H2 with the Testcontainers JDBC URL
 linkTitle: JDBC URL approach
 description: Use the Testcontainers special JDBC URL to swap H2 for a real PostgreSQL database.
+keywords: testcontainers, java, h2, postgresql, jdbc, integration testing
 weight: 20
 ---
 

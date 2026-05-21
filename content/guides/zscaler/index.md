@@ -5,6 +5,7 @@ summary: |
   This guide explains how to embed Zscaler’s root certificate into Docker
   images, allowing containers to operate securely with Zscaler proxies and
   avoid SSL errors.
+keywords: zscaler, proxy, ssl certificates, corporate network, https, root certificate
 params:
   time: 10 minutes
 ---

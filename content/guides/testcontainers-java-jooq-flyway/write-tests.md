@@ -2,6 +2,7 @@
 title: Write tests with Testcontainers
 linkTitle: Write tests
 description: Test jOOQ repositories using Testcontainers with the @JooqTest slice and @SpringBootTest.
+keywords: testcontainers, java, spring boot, jooq, flyway, postgresql, integration testing
 weight: 20
 ---
 

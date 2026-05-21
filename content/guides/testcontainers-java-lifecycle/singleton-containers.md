@@ -2,6 +2,7 @@
 title: Singleton containers pattern
 linkTitle: Singleton containers
 description: Share containers across multiple test classes using the singleton containers pattern.
+keywords: testcontainers, java, lifecycle, singleton, container reuse, junit
 weight: 40
 ---
 

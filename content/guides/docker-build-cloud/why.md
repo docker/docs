@@ -1,6 +1,7 @@
 ---
 title: Why Docker Build Cloud?
 description: Learn how Docker Build Cloud makes your builds faster.
+keywords: docker build cloud, cloud builds, shared cache, multi-architecture, build performance
 weight: 10
 ---
 

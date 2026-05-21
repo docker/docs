@@ -2,6 +2,7 @@
 title: Write tests with Testcontainers
 linkTitle: Write tests
 description: Write integration tests using Testcontainers for Node.js and Jest with a real PostgreSQL database.
+keywords: testcontainers, node.js, nodejs, postgresql, jest, integration testing
 weight: 20
 ---
 

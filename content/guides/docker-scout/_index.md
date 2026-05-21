@@ -8,6 +8,7 @@ description: |
   Learn how to use Docker Scout to enhance container security by automating
   vulnerability detection and remediation, ensuring compliance, and protecting
   your development workflow.
+keywords: docker scout, container security, vulnerability scanning, sbom, supply chain, remediation
 tags: [product-demo]
 aliases:
   - /learning-paths/docker-scout/

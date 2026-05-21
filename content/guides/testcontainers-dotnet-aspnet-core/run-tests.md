@@ -2,6 +2,7 @@
 title: Run tests and next steps
 linkTitle: Run tests
 description: Run the Testcontainers-based integration tests and explore next steps.
+keywords: testcontainers, dotnet, asp.net core, integration testing, run tests
 weight: 30
 ---
 

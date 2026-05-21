@@ -1,6 +1,7 @@
 ---
 title: Laravel Development Setup with Docker Compose
 description: Set up a Laravel development environment using Docker Compose.
+keywords: laravel, php, docker compose, development, xdebug, php-fpm, nginx
 weight: 30
 ---
 

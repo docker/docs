@@ -1,6 +1,7 @@
 ---
 title: Common Questions on Using Laravel with Docker
 description: Find answers to common questions about setting up and managing Laravel environments with Docker Compose, including troubleshooting and best practices.
+keywords: laravel, php, docker compose, faq, troubleshooting, best practices
 weight: 40
 ---
 

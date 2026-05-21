@@ -2,6 +2,7 @@
 title: Set up the project
 linkTitle: Create the project
 description: Set up an ASP.NET Core Razor Pages project with integration test dependencies.
+keywords: testcontainers, dotnet, asp.net core, getting started, project setup
 weight: 10
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: Prerequisites for Setting Up Laravel with Docker Compose
 description: Ensure you have the required tools and knowledge before setting up Laravel with Docker Compose.
+keywords: laravel, php, docker compose, prerequisites, requirements, setup
 weight: 10
 ---
 

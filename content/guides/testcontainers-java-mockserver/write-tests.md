@@ -2,6 +2,7 @@
 title: Write tests with Testcontainers MockServer
 linkTitle: Write tests
 description: Test external REST API integrations using the Testcontainers MockServer module and REST Assured.
+keywords: testcontainers, java, spring boot, mockserver, rest assured, integration testing
 weight: 20
 ---
 

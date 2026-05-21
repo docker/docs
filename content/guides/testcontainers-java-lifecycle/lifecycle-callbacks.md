@@ -2,6 +2,7 @@
 title: JUnit 5 lifecycle callbacks
 linkTitle: Lifecycle callbacks
 description: Manage Testcontainers container lifecycle using JUnit 5 @BeforeAll and @AfterAll callbacks.
+keywords: testcontainers, java, lifecycle, junit, callbacks, beforeall, afterall
 weight: 20
 ---
 

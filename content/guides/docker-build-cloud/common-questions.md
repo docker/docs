@@ -1,6 +1,7 @@
 ---
 title: Common challenges and questions
 description: Explore common challenges and questions related to Docker Build Cloud.
+keywords: docker build cloud, faq, troubleshooting, cloud builds, pricing
 weight: 40
 ---
 

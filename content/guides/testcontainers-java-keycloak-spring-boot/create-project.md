@@ -2,6 +2,7 @@
 title: Create the Spring Boot project
 linkTitle: Create the project
 description: Set up a Spring Boot OAuth 2.0 Resource Server with Keycloak, PostgreSQL, and Testcontainers.
+keywords: testcontainers, java, spring boot, keycloak, oauth2, postgresql, project setup
 weight: 10
 ---
 

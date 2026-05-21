@@ -1,6 +1,7 @@
 ---
 title: Common challenges and questions
 description: Explore common challenges and questions related to Docker Scout.
+keywords: docker scout, faq, container security, vulnerability scanning, troubleshooting
 ---
 
 <!-- vale Docker.HeadingLength = NO -->

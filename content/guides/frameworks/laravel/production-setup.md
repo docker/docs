@@ -1,6 +1,7 @@
 ---
 title: Laravel Production Setup with Docker Compose
 description: Set up a production-ready environment for Laravel using Docker Compose.
+keywords: laravel, php, docker compose, production, deployment, php-fpm
 weight: 20
 ---
 

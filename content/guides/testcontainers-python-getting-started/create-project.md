@@ -2,6 +2,7 @@
 title: Create the Python project
 linkTitle: Create the project
 description: Set up a Python project with a PostgreSQL-backed customer service.
+keywords: testcontainers, python, postgresql, getting started, project setup
 weight: 10
 ---
 

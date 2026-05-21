@@ -2,6 +2,7 @@
 title: JUnit 5 extension annotations
 linkTitle: Extension annotations
 description: Manage Testcontainers container lifecycle using @Testcontainers and @Container annotations.
+keywords: testcontainers, java, lifecycle, junit, annotations, container management
 weight: 30
 ---
 
