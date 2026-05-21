@@ -31,7 +31,7 @@ In this section, you'll set up a CI/CD pipeline using [GitHub Actions](https://d
 
 To enable GitHub Actions to build and push Docker images, you’ll securely store your Docker Hub credentials in your new GitHub repository.
 
-### Step 1: Generate Docker Hub Credentials and Set GitHub Secrets"
+### Step 1: Generate Docker Hub credentials and set GitHub secrets
 
 1. Create a Personal Access Token (PAT) from [Docker Hub](https://hub.docker.com)
    1. Go to your **Docker Hub account → Account Settings → Security**.

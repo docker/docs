@@ -24,7 +24,7 @@ You’ll learn how to:
 
 ---
 
-## Automatically update services (Development Mode)
+## Automatically update services (development mode)
 
 Use Compose Watch to automatically sync source file changes into your containerized development environment. This provides a seamless, efficient development experience without restarting or rebuilding containers manually.
 

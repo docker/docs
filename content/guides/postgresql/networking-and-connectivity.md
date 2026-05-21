@@ -158,7 +158,7 @@ When connecting from your application container, use these PostgreSQL connection
 > The default port `5432` is used in these examples. If you're connecting to a different PostgreSQL instance or have changed the port, update the connection string accordingly. The container name (`postgres-dev`) is resolved by Docker DNS to the container's IP address on the network.
 
 
-## Connecting from the Host (external access)
+## Connecting from the host (external access)
 
 To connect to PostgreSQL from your host machine using tools like `psql`, `pgAdmin`, `DBeaver`, or database management scripts, you need to publish PostgreSQL's port (`5432`) to the host. This allows external tools to reach the PostgreSQL container.
 

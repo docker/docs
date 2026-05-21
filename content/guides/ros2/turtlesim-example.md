@@ -62,7 +62,7 @@ $ docker compose up -d
 $ docker compose exec ros2 /bin/bash
 ```
 
-## Install and Run Turtlesim
+## Install and run Turtlesim
 
 Inside the container, install the Turtlesim package:
 

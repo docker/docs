@@ -24,7 +24,7 @@ You’ll learn how to:
 
 ---
 
-## Automatically update services (Development Mode)
+## Automatically update services (development mode)
 
 Leverage Compose Watch to enable real-time file synchronization between your local machine and the containerized Vue.js development environment. This powerful feature eliminates the need to manually rebuild or restart containers, providing a fast, seamless, and efficient development workflow.
 

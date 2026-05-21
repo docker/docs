@@ -10,7 +10,7 @@ weight: 40
 ---
 
 
-## PostgreSQL Ecosystem companions: pgAdmin, PgBouncer, and Performance Testing
+## PostgreSQL ecosystem companions: pgAdmin, PgBouncer, and performance testing
 
 Running a standalone PostgreSQL container is often just the beginning. What happens when thousands of connections arrive, or when you need a visual interface to manage your database?
 

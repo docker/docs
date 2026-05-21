@@ -354,7 +354,7 @@ $ npm run db:start    # Start PostgreSQL container
 $ npm run dev         # Start both server and client
 ```
 
-### Using Task Runner (alternative)
+### Using Task runner (alternative)
 
 The project includes a Taskfile.yml for advanced workflows:
 
