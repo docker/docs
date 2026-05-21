@@ -1,6 +1,6 @@
 ---
 title: "Lab: Building an AI Product Reviewer"
-linkTitle: "Lab: Building an AI Product Reviewer"
+linkTitle: "Lab: AI product reviewer"
 description: |
   Build a complete AI-powered feedback analysis pipeline — sentiment analysis,
   semantic clustering with embeddings, and response generation — all running

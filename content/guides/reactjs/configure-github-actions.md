@@ -1,6 +1,6 @@
 ---
 title: Automate your builds with GitHub Actions
-linkTitle: Automate your builds with GitHub Actions
+linkTitle: GitHub Actions CI
 weight: 60
 keywords: CI/CD, GitHub( Actions), React.js, Next.js
 description: Learn how to configure CI/CD using GitHub Actions for your React.js application.

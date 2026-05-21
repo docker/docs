@@ -1,6 +1,6 @@
 ---
 title: Automate your builds with GitHub Actions
-linkTitle: Automate your builds with GitHub Actions
+linkTitle: GitHub Actions CI
 weight: 50
 keywords: CI/CD, GitHub Actions, Node.js, Docker
 description: Learn how to configure CI/CD using GitHub Actions for your Node.js application.

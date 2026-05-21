@@ -1,6 +1,6 @@
 ---
 title: Develop and Deploy Laravel applications with Docker Compose
-linkTitle: Laravel applications with Docker Compose
+linkTitle: Laravel
 summary: Learn how to efficiently set up Laravel development and production environments using Docker Compose.
 description: A guide on using Docker Compose to manage Laravel applications for development and production, covering container configurations and service management.
 keywords: laravel, php, docker compose, web framework, development, production

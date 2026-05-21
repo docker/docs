@@ -1,6 +1,6 @@
 ---
 title: Automate your builds with GitHub Actions
-linkTitle: Automate your builds with GitHub Actions
+linkTitle: GitHub Actions CI
 weight: 40
 keywords: ci/cd, github actions, python, flask
 description: Learn how to configure CI/CD using GitHub Actions for your Python application.

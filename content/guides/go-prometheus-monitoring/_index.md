@@ -4,7 +4,7 @@ keywords: golang, prometheus, grafana, monitoring, containerize
 title: Monitor a Golang application with Prometheus and Grafana
 summary: |
   Learn how to containerize a Golang application and monitor it with Prometheus and Grafana.
-linkTitle: Monitor with Prometheus and Grafana
+linkTitle: Prometheus and Grafana
 languages: [go]
 params:
   time: 45 minutes

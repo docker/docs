@@ -1,6 +1,6 @@
 ---
 title: "Faster development and testing with container-supported development"
-linkTitle: Container-supported development
+linkTitle: Container-supported dev
 summary: |
   Containers don't have to be just for your app. Learn how to run your app's dependent services and other debugging tools to enhance your development environment.
 description: |
