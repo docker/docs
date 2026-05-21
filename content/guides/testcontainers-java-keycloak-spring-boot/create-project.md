@@ -291,7 +291,7 @@ Then set up the realm:
 2. Under the `keycloaktcdemo` realm, create a client with the following
    settings:
    - **Client ID**: `product-service`
-   - **Client Authentication**: **On**
+   - **Client Authentication**: `On`
    - **Authentication flow**: select only **Service accounts roles**
 3. On the **Client details** screen, go to the **Credentials** tab and copy the
    **Client secret** value.

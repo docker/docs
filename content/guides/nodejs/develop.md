@@ -320,12 +320,12 @@ services:
 
 Key features of the development configuration:
 
-- **Multi-port exposure**: API server (3000), Vite dev server (5173), and debugger (9229)
-- **Comprehensive bind mounts**: Source code, configuration files, and package files for hot reloading
-- **Environment variables**: Configurable through `.env` file or defaults
-- **PostgreSQL database**: Production-ready database with persistent storage
-- **Docker Compose watch**: Automatic file synchronization and container rebuilds
-- **Health checks**: Database health monitoring with automatic dependency management
+- Multi-port exposure: API server (3000), Vite dev server (5173), and debugger (9229)
+- Comprehensive bind mounts: Source code, configuration files, and package files for hot reloading
+- Environment variables: Configurable through `.env` file or defaults
+- PostgreSQL database: Production-ready database with persistent storage
+- Docker Compose watch: Automatic file synchronization and container rebuilds
+- Health checks: Database health monitoring with automatic dependency management
 
 ### Run your development container and debug your application
 
@@ -387,9 +387,9 @@ $ task logs             # View container logs
 
 The application will start with both the Express API server and Vite development server:
 
-- **API Server**: [http://localhost:3000](http://localhost:3000) - Express.js backend with REST API
-- **Frontend**: [http://localhost:5173](http://localhost:5173) - Vite dev server with hot module replacement
-- **Health Check**: [http://localhost:3000/health](http://localhost:3000/health) - Application health status
+- API Server: [http://localhost:3000](http://localhost:3000) - Express.js backend with REST API
+- Frontend: [http://localhost:5173](http://localhost:5173) - Vite dev server with hot module replacement
+- Health Check: [http://localhost:3000/health](http://localhost:3000/health) - Application health status
 
 Any changes to the application's source files on your local machine will now be immediately reflected in the running container thanks to the bind mounts.
 
@@ -409,7 +409,7 @@ Try making a change to test hot reloading:
 
 1. Save the file and the Vite dev server will automatically reload the page with your changes.
 
-**Debugging support:**
+Debugging support:
 
 You can connect a debugger to your application on port 9229. The Node.js inspector is enabled with `--inspect=0.0.0.0:9230` in the development script (`dev:server`).
 
@@ -473,9 +473,9 @@ You can also use Chrome DevTools for debugging:
 
 The debugger configuration:
 
-- **Container port**: 9230 (internal debugger port)
-- **Host port**: 9229 (mapped external port)
-- **Script**: `tsx watch --inspect=0.0.0.0:9230 src/server/index.ts`
+- Container port: 9230 (internal debugger port)
+- Host port: 9229 (mapped external port)
+- Script: `tsx watch --inspect=0.0.0.0:9230 src/server/index.ts`
 
 The debugger listens on all interfaces (`0.0.0.0`) inside the container on port 9230 and is accessible on port 9229 from your host machine.
 

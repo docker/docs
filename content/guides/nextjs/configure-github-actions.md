@@ -19,7 +19,7 @@ You must also have:
 
 ## Overview
 
-In this section, you'll set up a **CI/CD pipeline** using [GitHub Actions](https://docs.github.com/en/actions) to automatically:
+In this section, you'll set up a CI/CD pipeline using [GitHub Actions](https://docs.github.com/en/actions) to automatically:
 
 - Build your Next.js application inside a Docker container.
 - Run tests in a consistent environment.
@@ -273,7 +273,7 @@ After you've added your workflow file, it's time to trigger and observe the CI/C
 2. Monitor the workflow execution
 
    1. Go to the Actions tab in your GitHub repository.
-   2. Click into the workflow run to follow each step: **build**, **test**, and (if successful) **push**.
+   2. Click into the workflow run to follow each step: `build`, `test`, and (if successful) `push`.
 
 3. Verify the Docker image on Docker Hub
 

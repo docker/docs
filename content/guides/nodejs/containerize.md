@@ -19,8 +19,8 @@ Before you begin, make sure the following tools are installed and available on y
 - You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
 - You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
 
-> **New to Docker?**  
-> Start with the [Docker basics](/get-started/docker-concepts/the-basics/what-is-a-container.md) guide to get familiar with key concepts like images, containers, and Dockerfiles.
+> [!NOTE]
+> New to Docker? Start with the [Docker basics](/get-started/docker-concepts/the-basics/what-is-a-container.md) guide to get familiar with key concepts like images, containers, and Dockerfiles.
 
 ---
 
@@ -531,11 +531,11 @@ networks:
 
 This Docker Compose configuration includes:
 
-- **Development service** (`app-dev`): Full development environment with hot reload, debugging support, and bind mounts
-- **Production service** (`app-prod`): Optimized production deployment with resource limits and security hardening
-- **Database service** (`db`): PostgreSQL 18 with persistent storage and health checks
-- **Networking**: Isolated network for secure service communication
-- **Volumes**: Persistent storage for database data
+- Development service (`app-dev`): Full development environment with hot reload, debugging support, and bind mounts
+- Production service (`app-prod`): Optimized production deployment with resource limits and security hardening
+- Database service (`db`): PostgreSQL 18 with persistent storage and health checks
+- Networking: Isolated network for secure service communication
+- Volumes: Persistent storage for database data
 
 ### Step 3: Create environment configuration
 
@@ -683,11 +683,11 @@ docker-nodejs-sample     latest           423525528038   14 seconds ago  237.46M
 
 This output provides key details about your images:
 
-- **Repository** – The name assigned to the image.
-- **Tag** – A version label that helps identify different builds (e.g., latest).
-- **Image ID** – A unique identifier for the image.
-- **Created** – The timestamp indicating when the image was built.
-- **Size** – The total disk space used by the image.
+- Repository – The name assigned to the image.
+- Tag – A version label that helps identify different builds (e.g., latest).
+- Image ID – A unique identifier for the image.
+- Created – The timestamp indicating when the image was built.
+- Size – The total disk space used by the image.
 
 If the build was successful, you should see `docker-nodejs-sample` image listed.
 
@@ -705,9 +705,9 @@ $ docker compose up app-dev --build
 
 The development application will start with both servers:
 
-- **API Server**: [http://localhost:3000](http://localhost:3000) - Express.js backend with REST API
-- **Frontend**: [http://localhost:5173](http://localhost:5173) - Vite dev server with React frontend
-- **Health Check**: [http://localhost:3000/health](http://localhost:3000/health) - Application health status
+- API Server: [http://localhost:3000](http://localhost:3000) - Express.js backend with REST API
+- Frontend: [http://localhost:5173](http://localhost:5173) - Vite dev server with React frontend
+- Health Check: [http://localhost:3000/health](http://localhost:3000/health) - Application health status
 
 For production deployment, you can use:
 

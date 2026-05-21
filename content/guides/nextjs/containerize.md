@@ -14,8 +14,8 @@ Before you begin, make sure the following tools are installed and available on y
 - You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
 - You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
 
-> **New to Docker?**  
-> Start with the [Docker basics](/get-started/docker-concepts/the-basics/what-is-a-container.md) guide to get familiar with key concepts like images, containers, and Dockerfiles.
+> [!NOTE]
+> New to Docker? Start with the [Docker basics](/get-started/docker-concepts/the-basics/what-is-a-container.md) guide to get familiar with key concepts like images, containers, and Dockerfiles.
 
 ---
 
@@ -49,7 +49,7 @@ $ git clone https://github.com/kristiyan-velkov/docker-nextjs-sample
 
 ## Build the Docker image
 
-Next.js has specific requirements for production deployments. This guide shows two approaches: **standalone** output (Node.js server) and **export** output (static files with Nginx).
+Next.js has specific requirements for production deployments. This guide shows two approaches: `standalone` output (Node.js server) and `export` output (static files with Nginx).
 
 > [!TIP]
 >
@@ -66,11 +66,11 @@ Before creating a Dockerfile, choose a base image: the [Node.js Official Image](
 
 #### 1.1 Next.js with standalone output
 
-**Standalone output** (`output: "standalone"`) makes Next.js build a self-contained output that includes only the files and dependencies needed to run the application. A single `node server.js` can serve the app, which is ideal for Docker and supports server-side rendering, API routes, and incremental static regeneration. For details, see the [Next.js output configuration documentation](https://nextjs.org/docs/app/api-reference/config/next-config-js/output) (including the "standalone" option).
+Standalone output (`output: "standalone"`) makes Next.js build a self-contained output that includes only the files and dependencies needed to run the application. A single `node server.js` can serve the app, which is ideal for Docker and supports server-side rendering, API routes, and incremental static regeneration. For details, see the [Next.js output configuration documentation](https://nextjs.org/docs/app/api-reference/config/next-config-js/output) (including the "standalone" option).
 
-The container runs the Next.js server with Node.js on **port 3000**.
+The container runs the Next.js server with Node.js on port 3000.
 
-**Configure Next.js** — Open or create `next.config.ts` in your project root:
+Configure Next.js — Open or create `next.config.ts` in your project root:
 
 ```ts
 import type { NextConfig } from "next";
@@ -332,7 +332,7 @@ Create a file named `Dockerfile` with the following contents (uses `node`):
 ```
 
 > [!NOTE]
-> This Dockerfile uses three stages: **dependencies**, **builder**, and **runner**. The final image runs `node server.js` and listens on port 3000.
+> This Dockerfile uses three stages: `dependencies`, `builder`, and `runner`. The final image runs `node server.js` and listens on port 3000.
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -341,9 +341,9 @@ Create a file named `Dockerfile` with the following contents (uses `node`):
 
 #### 1.2 Next.js with export output
 
-**Output export** (`output: "export"`) makes Next.js build a fully static site at build time. It generates HTML, CSS, and JavaScript into an `out` directory that can be served by any static host or CDN—no Node.js server at runtime. Use this when you don't need server-side rendering or API routes. For details, see the [Next.js output configuration documentation](https://nextjs.org/docs/app/api-reference/config/next-config-js/output).
+Output export (`output: "export"`) makes Next.js build a fully static site at build time. It generates HTML, CSS, and JavaScript into an `out` directory that can be served by any static host or CDN—no Node.js server at runtime. Use this when you don't need server-side rendering or API routes. For details, see the [Next.js output configuration documentation](https://nextjs.org/docs/app/api-reference/config/next-config-js/output).
 
-**Configure Next.js** — Open  `next.config.ts` in your project root and add the following code:
+Configure Next.js — Open  `next.config.ts` in your project root and add the following code:
 
 ```ts
 import type { NextConfig } from "next";
@@ -584,7 +584,7 @@ CMD ["-g", "daemon off;"]
 {{< /tab >}}
 {{< /tabs >}}
 
-1. **Create `nginx.conf`** (required for export output only) — Create a file named `nginx.conf` in the root of your project:
+1. Create `nginx.conf` (required for export output only) — Create a file named `nginx.conf` in the root of your project:
 
     ```nginx
     # Minimal Nginx config for static Next.js app
@@ -654,7 +654,7 @@ CMD ["-g", "daemon off;"]
     ```
 
       > [!NOTE]
-      > Export uses **port 8080**. For more details, see the [Next.js output configuration](https://nextjs.org/docs/app/api-reference/config/next-config-js/output) and [Nginx documentation](https://nginx.org/en/docs/).
+      > Export uses port 8080. For more details, see the [Next.js output configuration](https://nextjs.org/docs/app/api-reference/config/next-config-js/output) and [Nginx documentation](https://nginx.org/en/docs/).
 
 ### Step 2: Create the compose.yaml file
 
@@ -848,11 +848,11 @@ nextjs-sample             latest            8c5fc80f098e   14 seconds ago   130M
 
 This output provides key details about your images:
 
-- **Repository** – The name assigned to the image.
-- **Tag** – A version label that helps identify different builds (e.g., latest).
-- **Image ID** – A unique identifier for the image.
-- **Created** – The timestamp indicating when the image was built.
-- **Size** – The total disk space used by the image.
+- Repository – The name assigned to the image.
+- Tag – A version label that helps identify different builds (e.g., latest).
+- Image ID – A unique identifier for the image.
+- Created – The timestamp indicating when the image was built.
+- Size – The total disk space used by the image.
 
 If the build was successful, you should see `nextjs-sample` image listed. 
 
@@ -862,19 +862,19 @@ If the build was successful, you should see `nextjs-sample` image listed.
 
 In the previous step, you created a Dockerfile for your Next.js application and built a Docker image using the docker build command. Now it's time to run that image in a container and verify that your application works as expected.
 
-Run the following command in a terminal. Use the port that matches your setup: **standalone** uses port 3000, **export** uses port 8080.
+Run the following command in a terminal. Use the port that matches your setup: standalone uses port 3000, export uses port 8080.
 
 ```console
 $ docker run -p 3000:3000 nextjs-sample
 ```
 
-For **export** output, use port 8080 instead:
+For export output, use port 8080 instead:
 
 ```console
 $ docker run -p 8080:8080 nextjs-sample
 ```
 
-Open a browser and view the application: [http://localhost:3000](http://localhost:3000) for **standalone** or [http://localhost:8080](http://localhost:8080) for **export**. You should see your Next.js web application.
+Open a browser and view the application: [http://localhost:3000](http://localhost:3000) for standalone or [http://localhost:8080](http://localhost:8080) for export. You should see your Next.js web application.
 
 Press `ctrl+c` in the terminal to stop your application.
 
@@ -886,13 +886,13 @@ You can run the application detached from the terminal by adding the `-d` option
 $ docker run -d -p 3000:3000 --name nextjs-app nextjs-sample
 ```
 
-For **export** output, use port 8080:
+For export output, use port 8080:
 
 ```console
 $ docker run -d -p 8080:8080 --name nextjs-app nextjs-sample
 ```
 
-Open a browser and view the application: [http://localhost:3000](http://localhost:3000) for **standalone** or [http://localhost:8080](http://localhost:8080) for **export**. You should see your web application.
+Open a browser and view the application: [http://localhost:3000](http://localhost:3000) for standalone or [http://localhost:8080](http://localhost:8080) for export. You should see your web application.
 
 To confirm that the container is running, use the `docker ps` command:
 

@@ -22,7 +22,7 @@ You must also have:
 
 ## Overview
 
-In this section, you'll set up a **CI/CD pipeline** using [GitHub Actions](https://docs.github.com/en/actions) to automatically:
+In this section, you'll set up a CI/CD pipeline using [GitHub Actions](https://docs.github.com/en/actions) to automatically:
 
 - Build your Node.js application inside a Docker container.
 - Run unit and integration tests, and make sure your application meets solid code quality standards.
@@ -285,7 +285,7 @@ After adding your workflow file, trigger the CI/CD process.
 
 2. Monitor the workflow execution
    1. From your GitHub repository, go to the **Actions** tab.
-   2. Select the workflow run to follow each step: **test**, **build**, **security**, and (if successful) **push** and **deploy**.
+   2. Select the workflow run to follow each step: `test`, `build`, `security`, and (if successful) `push` and `deploy`.
 
 3. Verify the Docker image on Docker Hub
    - After a successful workflow run, visit your [Docker Hub repositories](https://hub.docker.com/repositories).
