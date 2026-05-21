@@ -89,15 +89,15 @@ Use the [`docker dhi mirror`](/reference/cli/docker/dhi/mirror/) command:
 
 ```console
 $ docker dhi mirror start --org my-org \
-  -r dhi/golang,my-org/dhi-golang \
-  -r dhi/nginx,my-org/dhi-nginx \
-  -r dhi/prometheus-chart,my-org/dhi-prometheus-chart
+  dhi/golang,my-org/dhi-golang \
+  dhi/nginx,my-org/dhi-nginx \
+  dhi/prometheus-chart,my-org/dhi-prometheus-chart
 ```
 
 Mirror with dependencies:
 
 ```console
-$ docker dhi mirror start --org my-org -r dhi/golang,my-org/dhi-golang --dependencies
+$ docker dhi mirror start --org my-org dhi/golang,my-org/dhi-golang --dependencies
 ```
 
 List mirrored images in your organization:
