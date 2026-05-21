@@ -118,15 +118,21 @@ $ docker build -t my-org/my-template:v1 --push .
 > daemon on the host.
 
 > [!IMPORTANT]
-> Private templates are only supported on Docker Hub. `sbx` reuses your
-> `sbx login` session to pull private images from Docker Hub. Other
-> registries (such as GitHub Container Registry, ECR, or a self-hosted
-> registry like Nexus) are pulled anonymously, so private images on those
-> registries fail to pull.
+> For Docker Hub, `sbx` reuses your `sbx login` session to pull private
+> images. For other registries (GitHub Container Registry, ECR, ACR, a
+> self-hosted Nexus, and so on), store pull credentials with
+> [`sbx secret set --registry`](../security/credentials.md#registry-credentials)
+> before running the sandbox:
+>
+> ```console
+> $ gh auth token | sbx secret set --registry ghcr.io --password-stdin
+> ```
+>
+> Without stored credentials, pulls from non-Docker Hub registries are
+> anonymous and private images fail to pull.
 
-For locally-built images or private images on registries that `sbx`
-can't authenticate against, save the image to a tar and load it
-directly into the sandbox runtime instead of pulling from a registry:
+For locally-built images, save the image to a tar and load it directly
+into the sandbox runtime instead of pulling from a registry:
 
 ```console
 $ docker image save my-org/my-template:v1 -o my-template.tar
