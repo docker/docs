@@ -68,7 +68,7 @@ A successful connection will show `MCP_DOCKER` as **Ready**, exposing dozens too
 
 ## Use Cases
 
-###  Data source Discovery
+### Data source Discovery
 
 _List all Prometheus and Loki data sources._
 
