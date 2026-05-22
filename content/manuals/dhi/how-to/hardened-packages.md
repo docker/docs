@@ -121,7 +121,7 @@ RUN echo "deb [signed-by=/usr/share/keyrings/dhi-deb.gpg] https://dhi.io/deb/deb
     > /etc/apt/sources.list.d/dhi.list
 
 # Update and install packages
-RUN apt-get update && apt-get install -y curl \
+RUN apt-get update && apt-get install -y jq \
     && rm -rf /var/lib/apt/lists/*
 ```
 
@@ -144,7 +144,7 @@ it over the upstream Debian version automatically. You can confirm this with
 `apt-cache policy <package>`, which shows a candidate with a `+dhi` or `dhi`
 version suffix sourced from `https://dhi.io/deb/debian/main`.
 
-Not every Debian package is yet available as a hardened system package. When a
+Not every Debian package is available as a hardened system package. When a
 package is not in the DHI repository, `apt` transparently falls back to the
 upstream Debian mirrors configured in the base image.
 
@@ -244,7 +244,7 @@ Build the image, passing credentials securely as a build secret through an
 environment variable:
 
 ```console
-$ NETRC=$(docker dhi auth deb) docker buildx build \
+$ NETRC=$(docker dhi auth deb) docker build \
     --secret id=netrc,env=NETRC \
     -t myapp-enterprise:latest .
 ```
@@ -264,7 +264,7 @@ infrastructure.
 
 ### View package metadata
 
-To view information about a hardened package, including its provenance:
+To view information about a hardened package:
 
 {{< tabs group="os" >}}
 {{< tab name="Alpine" >}}
