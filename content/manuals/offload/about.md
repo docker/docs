@@ -90,7 +90,7 @@ When a prompt appears, you can:
 After your session returns to an idle state, there is a 5-minute grace period. You can resume the session during this time by running any Docker command.
 
 > [!IMPORTANT]
-> If the idle period exceeds 5 minutes without activity, the session is terminated. Docker Offload environments are ephemeral, so the remote environment and any containers, images, or volumes in it are deleted. To keep work between sessions, push images to a registry such as [Docker Hub](https://docs.docker.com/docker-hub/) before your session ends.
+> If the idle period exceeds 5 minutes without activity, the session is terminated. Docker Offload environments are ephemeral, so the remote environment and any containers, images, or volumes in it are deleted. To keep work between sessions, push images to a registry such as [Docker Hub](/docker-hub/) before your session ends.
 
 #### Long session prompts
 
