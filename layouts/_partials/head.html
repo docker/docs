@@ -82,11 +82,7 @@
   {{- end -}}
   {{- if and $apiKey $endpoint -}}
     <script>
-      window.__marlinConfig = {
-        apiKey: {{ $apiKey | jsonify }},
-        endpoint: {{ $endpoint | jsonify }},
-        environment: {{ $env | jsonify }}
-      };
+      window.__marlinConfig = {{ dict "apiKey" $apiKey "endpoint" $endpoint "environment" $env | jsonify | safeJS }};
     </script>
   {{- end -}}
 {{- end -}}
