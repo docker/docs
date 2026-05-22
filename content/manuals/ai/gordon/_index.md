@@ -66,11 +66,11 @@ Before you begin:
 >
 > 1. Contact Docker Support to activate Gordon for your organization. Docker
 >    will confirm when activation is complete.
-> 2. Once confirmed, an organization administrator must set **Enable Gordon** to
->    **Enabled** or **Always enabled** in the
->    [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md).
->    Do not leave the setting at its default value, as this will not activate
->    Gordon organization-wide.
+> 2. Once confirmed, an organization administrator must enable Gordon via
+>    [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/).
+>    Set **Enable Gordon** to **Enabled** or **Always enabled**. Ensure all
+>    Settings Management prerequisites are met, otherwise the setting will not
+>    take effect on Docker Desktop clients.
 
 ### Quick start
 
