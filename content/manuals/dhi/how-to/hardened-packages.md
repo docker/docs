@@ -2,7 +2,7 @@
 title: Use Hardened System Packages
 linkTitle: Use hardened packages
 weight: 32
-keywords: hardened images, DHI, hardened packages, packages, alpine
+keywords: hardened images, DHI, hardened packages, packages, alpine, apk, debian, apt
 description: Learn how to use and verify Docker's hardened system packages in your images.
 ---
 
@@ -51,14 +51,18 @@ repositories. This lets you install hardened packages in your own images.
 
 #### Public repository
 
-To use Docker's public hardened package repository in your own images, configure
-the Alpine package manager in your Dockerfile.
+To use Docker's public hardened package repository in your own images,
+configure your package manager in your Dockerfile to install the DHI signing
+key and add the DHI repository.
 
 The configuration process involves three steps:
 
 1. Install the [signing key](https://github.com/docker-hardened-images/keyring)
 2. Configure the package repository
 3. Update and install packages
+
+{{< tabs group="os" >}}
+{{< tab name="Alpine" >}}
 
 The following example shows how to configure the Alpine package manager in your
 Dockerfile to use Docker's public hardened package repository:
@@ -96,6 +100,57 @@ https://dhi.io/apk/alpine/v3.23/main
 
 This ensures all packages are installed from Docker's hardened repository.
 
+{{< /tab >}}
+{{< tab name="Debian" >}}
+
+The following example shows how to configure the Debian package manager in your
+Dockerfile to use Docker's public hardened package repository:
+
+```dockerfile
+FROM debian:trixie-slim
+
+# Install the signing key
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates curl gnupg \
+    && rm -rf /var/lib/apt/lists/*
+RUN curl -fsSL https://dhi.io/keyring/dhi-deb-gpg.D46852F6925E9F71.key \
+    | gpg --dearmor -o /usr/share/keyrings/dhi-deb.gpg
+
+# Add the hardened package repository
+RUN echo "deb [signed-by=/usr/share/keyrings/dhi-deb.gpg] https://dhi.io/deb/debian/main trixie main" \
+    > /etc/apt/sources.list.d/dhi.list
+
+# Update and install packages
+RUN apt-get update && apt-get install -y curl \
+    && rm -rf /var/lib/apt/lists/*
+```
+
+To verify the configuration, build and run the image:
+
+```console
+$ docker build -t myapp:latest .
+$ docker run -it myapp:latest bash
+```
+
+Inside the container, check the configured repository:
+
+```console
+root@myapp:/# cat /etc/apt/sources.list.d/dhi.list
+deb [signed-by=/usr/share/keyrings/dhi-deb.gpg] https://dhi.io/deb/debian/main trixie main
+```
+
+When the DHI repository carries a hardened version of a package, `apt` prefers
+it over the upstream Debian version automatically. You can confirm this with
+`apt-cache policy <package>`, which shows a candidate with a `+dhi` or `dhi`
+version suffix sourced from `https://dhi.io/deb/debian/main`.
+
+Not every Debian package is yet available as a hardened system package. When a
+package is not in the DHI repository, `apt` transparently falls back to the
+upstream Debian mirrors configured in the base image.
+
+{{< /tab >}}
+{{< /tabs >}}
+
 All packages installed from the Docker Hardened Images repository are built from
 source by Docker and include full provenance.
 
@@ -109,16 +164,14 @@ as well as additional security patches.
 
 The configuration process involves five steps:
 
-1. Install the [signing key](https://github.com/docker-hardened-images/keyring)
+1. Install the [signing keys](https://github.com/docker-hardened-images/keyring)
 2. Configure the base package repository
-3. Install the enterprise configuration package
+3. Add the enterprise security repository
 4. Configure package installation with authentication
 5. Build the image passing credentials as a secret using the DHI CLI
 
-  > [!NOTE]
-  >
-  > You must have the Docker Hardened Images CLI installed and configured. For
-  > more information, see [Use the DHI CLI](./cli.md).
+{{< tabs group="os" >}}
+{{< tab name="Alpine" >}}
 
 The following example shows how to configure the Alpine package manager in your
 Dockerfile to use Docker's enterprise hardened package repository:
@@ -147,13 +200,60 @@ RUN --mount=type=secret,id=http_auth \
 Build the image with authentication passed securely as a build secret:
 
 ```console
-$ dhictl auth apk > http_auth.txt
+$ docker dhi auth apk > http_auth.txt
 $ docker build --secret id=http_auth,src=http_auth.txt -t myapp-enterprise:latest .
 $ rm http_auth.txt
 ```
 
 The `--secret` flag securely mounts the authentication credentials during build
 without storing them in the image layers or metadata.
+
+{{< /tab >}}
+{{< tab name="Debian" >}}
+
+The following example shows how to configure the Debian package manager in your
+Dockerfile to use Docker's enterprise hardened package repository. Mount
+credentials at `/etc/apt/auth.conf.d/dhi.conf`; `apt` reads files in
+`/etc/apt/auth.conf.d/` automatically when they have mode `0600`:
+
+```dockerfile
+FROM debian:trixie-slim
+
+# Install the signing keys
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates curl gnupg \
+    && rm -rf /var/lib/apt/lists/*
+RUN curl -fsSL https://dhi.io/keyring/dhi-deb-gpg.D46852F6925E9F71.key \
+    | gpg --dearmor -o /usr/share/keyrings/dhi-deb.gpg
+RUN curl -fsSL https://dhi.io/keyring/dhi-deb-sec-gpg.D46852F6925E9F71.key \
+    | gpg --dearmor -o /usr/share/keyrings/dhi-deb-sec.gpg
+
+# Add the hardened package repository and the enterprise security repository
+RUN echo "deb [signed-by=/usr/share/keyrings/dhi-deb.gpg] https://dhi.io/deb/debian/main trixie main" \
+    > /etc/apt/sources.list.d/dhi.list
+RUN echo "deb [signed-by=/usr/share/keyrings/dhi-deb-sec.gpg] https://dhi.io/deb/debian/security trixie main" \
+    > /etc/apt/sources.list.d/dhi-sec.list
+
+# Install packages from the security repository with authentication
+RUN --mount=type=secret,id=netrc,target=/etc/apt/auth.conf.d/dhi.conf,mode=0600 \
+    apt-get update && apt-get install -y openssl \
+    && rm -rf /var/lib/apt/lists/*
+```
+
+Build the image, passing credentials securely as a build secret through an
+environment variable:
+
+```console
+$ NETRC=$(docker dhi auth deb) docker buildx build \
+    --secret id=netrc,env=NETRC \
+    -t myapp-enterprise:latest .
+```
+
+The `--secret id=netrc,env=NETRC` form securely mounts the authentication
+credentials during build without storing them in the image layers or metadata.
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Verify packages
 
@@ -166,9 +266,22 @@ infrastructure.
 
 To view information about a hardened package, including its provenance:
 
+{{< tabs group="os" >}}
+{{< tab name="Alpine" >}}
+
 ```console
 $ apk info -L <package-name>
 ```
+
+{{< /tab >}}
+{{< tab name="Debian" >}}
+
+```console
+$ dpkg -L <package-name>
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 This shows the files included in the package and its metadata.
 
@@ -188,15 +301,42 @@ verifiable metadata and cryptographic signatures.
 
 To view this metadata for an installed package:
 
+{{< tabs group="os" >}}
+{{< tab name="Alpine" >}}
+
 ```console
 $ apk info -a <package-name>
 ```
 
+{{< /tab >}}
+{{< tab name="Debian" >}}
+
+```console
+$ apt-cache show <package-name>
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
 Or to view metadata for a package before installing:
+
+{{< tabs group="os" >}}
+{{< tab name="Alpine" >}}
 
 ```console
 $ apk fetch --stdout <package-name> | tar -xzO .PKGINFO
 ```
+
+{{< /tab >}}
+{{< tab name="Debian" >}}
+
+```console
+$ apt-get download <package-name>
+$ dpkg-deb -I <package-name>_*.deb
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 The package signing keys ensure that packages haven't been tampered with after
 being built. When you install the signing key and configure your package manager,

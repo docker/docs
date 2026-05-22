@@ -201,13 +201,21 @@ For a complete reference of all YAML fields, see
 {{< summary-bar feature_name="Docker Hardened Images Enterprise" >}}
 
 Generate authentication credentials for accessing the enterprise hardened
-package repository. This is used when configuring your package manager to
-install compliance-specific packages in your own images. For detailed
+package repository. These credentials are used when configuring your package
+manager to install compliance-specific packages in your own images. For detailed
 instructions, see [Enterprise
 repository](./hardened-packages.md#enterprise-repository).
 
+For Alpine-based images:
+
 ```console
 $ docker dhi auth apk
+```
+
+For Debian-based images:
+
+```console
+$ docker dhi auth deb
 ```
 
 ### Monitor customization builds
