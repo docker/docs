@@ -1,8 +1,8 @@
 ---
 title: Scan Docker Hardened Images
 linktitle: Scan an image
-description: Learn how to scan Docker Hardened Images for known vulnerabilities using Docker Scout, Grype, Trivy, Wiz, or Mend.io.
-keywords: scan container image, docker scout cves, grype scanner, trivy container scanner, mend.io, vex attestation
+description: Learn how to scan Docker Hardened Images for known vulnerabilities using Docker Scout, Grype, Trivy, Wiz, Mend.io, or Black Duck.
+keywords: scan container image, docker scout cves, grype scanner, trivy container scanner, mend.io, black duck, vex attestation
 weight: 46
 ---
 
@@ -22,6 +22,8 @@ read and apply the VEX statements included with Docker Hardened Images:
 - [Wiz](#wiz): Automatically applies VEX statements with
   zero configuration
 - [Mend.io](#mendio): Automatically applies VEX statements with
+  zero configuration
+- [Black Duck](#black-duck): Automatically applies VEX statements with
   zero configuration
 
 For guidance on choosing the right scanner and understanding the differences
@@ -400,6 +402,14 @@ as Not Affected, Fixed, or Under Investigation.
 
 For more information, see the [Mend.io Docker Hardened Images
 documentation](https://docs.mend.io/platform/latest/docker-hardened-images).
+
+## Black Duck
+
+[Black Duck](https://www.blackduck.com/) identifies Docker Hardened Images and
+applies their VEX statements without additional configuration.
+
+For more information, see the [Black Duck
+documentation](https://documentation.blackduck.com/bundle/bd-hub/page/Reporting/vexReport_global.html).
 
 ## Export VEX attestations
 
