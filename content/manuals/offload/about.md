@@ -69,28 +69,32 @@ Docker](https://www.docker.com/pricing/contact-sales/) to explore options.
 
 ### Session management and idle state
 
-Docker Offload implements session management and idle state policies to ensure
-fair use across all users. For more information, see [Fair use](#fair-use).
+Docker Offload uses session management and idle state policies to ensure fair use of cloud resources across all users, see [Fair use](#fair-use).
 
-Here's how session management works:
+Each user can run one Docker Offload session at a time. When Docker Desktop is in an **Offload idle** state, it waits for activity on the Docker API and only connects to a cloud environment when needed. Once connected, the session moves to an **Offload running** state and stays connected as long as Docker detects activity. Activity includes any Docker API call, a running container, or an active build.
 
-1. You start a new Docker Offload session. You can only have one session active
-   at a time.
-2. You receive periodic prompts (every 1 to 3 hours) in the Docker Desktop Dashboard
-   to determine if you are still active. When the prompt appears, you can choose to:
-   - Select **Resume** in the prompt to confirm you're still active and
-     continue your session.
-   - Do nothing, select **Cancel**, or dismiss the prompt. You have a
-     5-minute grace period. After the grace period, if you still haven't
-     responded, your session enters a 5-minute idle timeout period. During
-     either period, you can select **Resume** to continue your session and
-     preserve all containers, images, and volumes.
-3. If the idle timeout period exceeds 5 minutes without resuming, the session
-   is suspended (the remote connection is suspended and containers stop
-   running).
-4. After 8 hours of cumulative usage, the periodic prompts become more frequent.
-   If you do not respond to a prompt and the idle timeout expires, your session
-   ends and any containers, images, or volumes are deleted.
+#### When you'll see a prompt
+
+While Docker Offload is running, Docker Desktop shows prompts in the Dashboard to check if you're still active. Prompts appear in two cases:
+
+1. No activity is detected for more than 3 minutes.
+2. The session has been running for a long time.
+
+When a prompt appears, you can:
+   - Select **Ask me again later** to confirm you're still active and continue your session.
+   - Select **Idle now** to return to an idle state immediately.
+   - Do nothing, and the session returns to an idle state automatically.
+
+#### What happens when your session goes idle
+
+After your session returns to an idle state, there is a 5-minute grace period. You can resume the session during this time by running any Docker command.
+
+> [!IMPORTANT]
+> If the idle period exceeds 5 minutes without activity, the session is terminated. Docker Offload environments are ephemeral, so the remote environment and any containers, images, or volumes in it are deleted. To keep work between sessions, push images to a registry such as [Docker Hub](/docker-hub/) before your session ends.
+
+#### Long session prompts
+
+Long session prompts appear every 3 hours during a session. After 8 hours of cumulative usage in a day, prompts appear every hour. The 8-hour counter resets at the start of each day.
 
 ## Fair use
 
