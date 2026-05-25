@@ -1,10 +1,10 @@
 name: sbx policy rm network
-synopsis: Remove a network policy
+synopsis: Remove a network rule
 description: |-
-    Remove a network policy by rule ID, resource, or both.
+    Remove a network rule by rule ID, resource, or both.
 
     Use -g/--global to remove from the global policy, or provide SANDBOX to
-    remove from a sandbox-scoped policy.
+    remove from policy "local" scoped to that sandbox.
 
     Use "sbx policy ls" to see active policies and their IDs/resources.
 usage: sbx policy rm network [-g | SANDBOX] [flags]
@@ -39,4 +39,4 @@ example: |4-
       # Remove a sandbox-scoped rule by resource
       sbx policy rm network my-sandbox --resource api.example.com
 see_also:
-    - sbx policy rm - Remove a policy
+    - sbx policy rm - Remove a policy rule

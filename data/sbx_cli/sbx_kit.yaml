@@ -1,0 +1,26 @@
+name: sbx kit
+synopsis: Manage kit artifacts
+description: |-
+    Manage kit artifacts.
+
+    Kits are declarative YAML artifacts that extend sandbox agents with additional
+    credentials, network policies, environment variables, startup commands, and files.
+usage: sbx kit COMMAND
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for kit
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx - Manage AI coding agent sandboxes.
+    - sbx kit add - Add a kit to a running sandbox
+    - sbx kit inspect - Display details about a kit artifact
+    - sbx kit pack - Package a directory as a kit artifact
+    - sbx kit pull - Pull a kit artifact from an OCI registry
+    - sbx kit push - Push a kit artifact to an OCI registry
+    - sbx kit validate - Validate a kit artifact

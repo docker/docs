@@ -1,0 +1,19 @@
+name: sbx kit validate
+synopsis: Validate a kit artifact
+description: |-
+    Validate that a directory or ZIP file is a valid kit artifact.
+
+    The reference can be a local directory, ZIP file path, or git repository.
+usage: sbx kit validate REFERENCE [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for validate
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx kit - Manage kit artifacts

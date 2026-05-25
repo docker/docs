@@ -1,0 +1,22 @@
+name: sbx kit push
+synopsis: Push a kit artifact to an OCI registry
+description: |-
+    Package and push a kit artifact directory to an OCI registry.
+
+    The directory must contain a valid spec.yaml. The reference should be
+    in the format "registry/repo:tag" (e.g., "ghcr.io/myorg/my-plugin:1.0").
+
+    Authentication uses your Docker credential store.
+usage: sbx kit push DIRECTORY REFERENCE [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for push
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx kit - Manage kit artifacts

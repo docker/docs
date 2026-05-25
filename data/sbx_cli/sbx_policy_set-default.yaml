@@ -8,7 +8,7 @@ description: |-
 
     Available policies:
       allow-all   All outbound network traffic is allowed
-      balanced    Common dev traffic allowed (AI services, package registries, etc.)
+      balanced    Typical development traffic is allowed (AI services, package registries, etc.)
       deny-all    All outbound network traffic is blocked
 
     After setting defaults, use "sbx policy allow/deny" to add custom rules.

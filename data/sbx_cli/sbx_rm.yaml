@@ -6,8 +6,8 @@ description: |-
     Stops running sandboxes, removes their containers, cleans up any Git
     worktrees, and deletes sandbox state. This action cannot be undone.
 
-    Use --all to remove every sandbox (requires confirmation).
-    Use --force to skip confirmation prompts (for non-interactive scripts).
+    Removal requires confirmation; use --force to skip confirmation prompts
+    (for non-interactive scripts). Use --all to remove every sandbox.
 usage: sbx rm [SANDBOX...] [flags]
 options:
     - name: all
