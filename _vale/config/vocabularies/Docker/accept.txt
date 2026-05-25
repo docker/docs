@@ -295,6 +295,7 @@ Zsh
 [Ff]iletypes?
 [GgCc]oroutine
 [Hh]ealthcheck
+[Hh]eredoc
 [Hh]ostname
 [Ii]nfosec
 [Ii]nline
