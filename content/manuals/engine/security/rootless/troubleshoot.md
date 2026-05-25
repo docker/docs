@@ -290,25 +290,59 @@ network namespace. Use `docker run -p` instead, or upgrade to Docker Engine v29.
 
 #### Network is slow
 
-Docker with rootless mode uses [slirp4netns](https://github.com/rootless-containers/slirp4netns) as the default network stack if slirp4netns v0.4.0 or later is installed.
-If slirp4netns is not installed, Docker falls back to [VPNKit](https://github.com/moby/vpnkit).
-Installing slirp4netns may improve the network throughput.
+Docker with rootless mode uses a TCP/IP stack running in user mode, such as:
+- [slirp4netns](https://github.com/rootless-containers/slirp4netns) (default when slirp4netns is installed)
+- [pasta](https://passt.top/passt/about/)
+- [VPNKit](https://github.com/moby/vpnkit)
+- [gvisor-tap-vsock](https://github.com/containers/gvisor-tap-vsock) (default when none of the above is installed)
 
-For more information about network drivers for RootlessKit, see
-[RootlessKit documentation](https://github.com/rootless-containers/rootlesskit/blob/v3.0.0/docs/network.md).
+The TCP/IP stack in user mode is generally slower than the one in kernel mode, and the performance may vary depending on the network driver used.
 
-Also, changing MTU value may improve the throughput.
-The MTU value can be specified by creating `~/.config/systemd/user/docker.service.d/override.conf` with the following content:
+See [RootlessKit documentation](https://github.com/rootless-containers/rootlesskit/blob/v3.0.0/docs/network.md)
+for more information.
+
+##### Workaround 1: bypass user-mode TCP/IP stack
+
+Use `docker run --net=host` to bypass the user-mode TCP/IP stack.
+This is applicable since Docker Engine v29.5.
+However, this requires the container to share the host network namespace, which may not be desirable for security reasons.
+
+##### Workaround 2: disable user-mode TCP/IP stack
+
+Alternatively, you can use the `lxc-user-nic` network driver (experimental) to disable the user-mode TCP/IP stack entirely.
+However, this requires configuring `/etc/lxc/lxc-usernet` for enabling the privileged helper.
+
+```bash
+sudo apt-get install -y lxc
+sudo mkdir -p /etc/lxc
+cat <<EOF | sudo tee /etc/lxc/lxc-usernet
+# USERNAME TYPE BRIDGE COUNT
+$USER veth lxcbr0 10
+EOF
+```
+
+Also, make sure that the rootful daemon is not running, as its iptables rules may interfere with the `lxc-user-nic` driver.
+```console
+$ systemctl is-active docker.service
+inactive
+
+$ systemctl is-active docker.socket
+inactive
+```
+
+The network driver can be specified by creating `~/.config/systemd/user/docker.service.d/override.conf` with the following content:
 
 ```systemd
 [Service]
-Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_MTU=<INTEGER>"
+Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_NET=lxc-user-nic"
+# Optional: specify MTU (may affect throughput)
+# Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_MTU=<INTEGER>"
 ```
 
 And then restart the daemon:
-```console
-$ systemctl --user daemon-reload
-$ systemctl --user restart docker
+```bash
+systemctl --user daemon-reload
+systemctl --user restart docker
 ```
 
 #### `docker run -p` does not propagate source IP addresses
