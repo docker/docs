@@ -45,7 +45,7 @@ command, or using the Docker Desktop settings GUI.
    $ docker login
    ```
 
-2. Add the cloud builder endpoint.
+2. Connect Buildx to your cloud builder.
 
    ```console
    $ docker buildx create --driver cloud <ORG>/<BUILDER_NAME>
@@ -53,15 +53,21 @@ command, or using the Docker Desktop settings GUI.
 
    Replace `<ORG>` with the Docker Hub namespace of your Docker organization (or your username if you are using a personal account), and `<BUILDER_NAME>` with the name you chose when creating the builder in the dashboard.
 
-   This creates a local instance of the cloud builder named `cloud-ORG-BUILDER_NAME`.
+   This registers a local endpoint for the cloud builder named `cloud-ORG-BUILDER_NAME`.
+
+   > [!NOTE]
+   >
+   > This command connects Buildx to an existing Docker Build Cloud builder. It
+   > does not create a new cloud builder. To add a new builder, use the
+   > [Docker Build Cloud Dashboard](https://app.docker.com/build/).
 
    > [!NOTE]
    >
    > If your organization is `acme` and you named your builder `default`, use:
+   >
    > ```console
    > $ docker buildx create --driver cloud acme/default
    > ```
-
 
 {{< /tab >}}
 {{< tab name="Docker Desktop" >}}
