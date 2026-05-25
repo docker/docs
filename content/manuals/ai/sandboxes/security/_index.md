@@ -96,7 +96,7 @@ organization and take precedence over local rules. Admins can optionally
 delegate specific rule types back to local control so developers can add
 additional allow rules.
 
-See [Organization governance](governance/) for details.
+See [Organization policy](../governance/org.md) for details.
 
 ## Learn more
 
@@ -105,6 +105,5 @@ See [Organization governance](governance/) for details.
 - [Default security posture](defaults/): what a fresh sandbox permits and
   blocks
 - [Credentials](credentials/): how to provide and manage API keys
-- [Policies](policy/): how to customize network access rules
-- [Organization governance](governance/): centrally manage policies across
-  an organization
+- [Governance](../governance/): configure network and filesystem access rules,
+  locally or across your organization

@@ -114,7 +114,7 @@ Use ↑/↓ to navigate, Enter to select, or press 1–3.
 
 **Balanced** is a good starting point — it permits traffic to common
 development services while blocking everything else. You can adjust individual
-rules later. See [Policies](security/policy.md) for a full description of each
+rules later. See [Policies](governance/local.md) for a full description of each
 option.
 
 > [!NOTE]
@@ -233,7 +233,7 @@ $ sbx policy allow network -g registry.npmjs.org
 
 With **Locked Down**, even your model provider API is blocked unless you
 explicitly allow it. With **Balanced**, common development services are
-permitted by default. See [Policies](security/policy.md) for the full rule
+permitted by default. See [Policies](governance/local.md) for the full rule
 set and how to customize it.
 
 ## Clean up
@@ -270,4 +270,4 @@ working tree are unaffected.
 - [Credentials](security/credentials.md) — credential storage and management
 - [Workspace isolation](security/isolation.md#workspace-isolation) — what
   the agent can affect on your host, and how to review changes
-- [Policies](security/policy.md) — control outbound access
+- [Policies](governance/local.md) — control outbound access

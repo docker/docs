@@ -1,0 +1,26 @@
+{{/* Resolve a possibly-$ref'd OpenAPI node against the spec root.
+
+  Input dict:
+  api  — the unmarshaled spec root (plain map from transform.Unmarshal)
+  node — the node to resolve; may be a map, slice, primitive, or nil
+
+  Returns:
+  - if node is a map containing a "$ref" key, returns the target node
+  reached by walking the JSON-Pointer fragment (only internal "#/" refs
+  are supported)
+  - otherwise returns node unchanged
+*/}}
+{{- $node := .node -}}
+{{- if reflect.IsMap $node -}}
+  {{- with index $node "$ref" -}}
+    {{- if hasPrefix . "#/" -}}
+      {{- $parts := after 1 (split . "/") -}}
+      {{- $cur := $.api -}}
+      {{- range $parts -}}
+        {{- $cur = index $cur . -}}
+      {{- end -}}
+      {{- $node = $cur -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $node -}}

@@ -1,22 +1,21 @@
 ---
-title: Organization governance
-linkTitle: Org governance
-weight: 35
+title: Organization policy
+linkTitle: Org policy
+weight: 20
 description: Centrally manage sandbox network and filesystem policies for your organization.
 keywords: docker sandboxes, governance, organization policy, AI governance, admin console, network access, filesystem access
+aliases:
+  - /ai/sandboxes/security/governance/
 ---
 
-This page covers how to configure organization policies in the Docker Admin
-Console under AI governance settings. For local sandbox policies that
-individual users configure on their own machine, see [Policies](policy.md).
+[Local policies](local.md) give individual developers control over what their
+sandboxes can access. Organization policy extends this to the admin level:
+rules defined in the [Docker Admin Console](https://app.docker.com/admin) apply
+uniformly to every sandbox in the organization, take precedence over local
+`sbx policy` rules, and can't be overridden by individual users.
 
-Sandbox network and filesystem policies defined in the
-[Docker Admin Console](https://app.docker.com/admin) apply uniformly to every
-sandbox in the organization. Rules are enforced across all developers'
-machines, take precedence over local `sbx policy` rules, and can't be
-overridden by individual users. Admins can optionally
-[delegate](#delegate-rules-to-local-policy) specific rule types back to local
-control so developers can add additional allow rules.
+Admins can manage organization policies through the Admin Console UI or
+programmatically using the [Governance API](api.md).
 
 > [!NOTE]
 > Sandbox organization governance is available on a separate paid
@@ -29,42 +28,25 @@ control so developers can add additional allow rules.
 ### Configuring org-level network rules
 
 Define network allow and deny rules in the Admin Console under
-**AI governance > Network access**. Each rule takes a network target (domain,
-wildcard, or CIDR range) and an action (allow or deny). You can add multiple
-entries at once, one per line.
+**AI governance > Network access**. Each rule takes a network target and an
+action (allow or deny). You can add multiple entries at once, one per line.
 
-Rules support exact domains (`example.com`), wildcard subdomains
-(`*.example.com`), and optional port suffixes (`example.com:443`).
-
-`example.com` doesn't match subdomains, and `*.example.com` doesn't match
-the root domain. Specify both to cover both.
+For the full syntax reference (exact hostnames, wildcard subdomains, port
+suffixes, and CIDR ranges), see [Policy concepts](concepts.md#network-rules).
 
 ### Delegate rules to local policy
 
-When organization governance is active, local rules are ignored by default —
-only the organization policy is in effect. Admins can delegate a rule type
+When organization governance is active, local rules are ignored by default.
+Only the organization policy is in effect. Admins can delegate a rule type
 back to local policy by turning on the **User defined** setting for that
 rule type in AI governance settings. Turning the setting on delegates the
 rule type: local `sbx policy` rules of that type are evaluated alongside
 organization rules, letting users add hosts to the allowlist from their own
 machine.
 
-If a rule type isn't delegated, local rules of that type still appear in
-`sbx policy ls` but with an `inactive` status and a note that the
-organization hasn't delegated the rule type to local policy:
-
-```console
-$ sbx policy ls
-NAME                  TYPE      ORIGIN               DECISION   STATUS                                                  RESOURCES
-balanced-dev          network   local                allow      inactive — corporate policy takes precedence and does   api.anthropic.com
-                                                                not delegate this rule type to local policy.
-allow AI services     network   remote               allow      active                                                  api.anthropic.com
-                                                                                                                        api.openai.com
-allow Docker services network   remote               allow      active                                                  *.docker.com
-                                                                                                                        *.docker.io
-```
-
-Organization rules show up with `remote` in the `ORIGIN` column.
+When a rule type isn't delegated, local rules of that type still appear in
+`sbx policy ls` but with an `inactive` status. See [Monitoring](monitoring.md)
+for how to read the combined rule view.
 
 Delegated local rules can expand access for domains the organization hasn't
 explicitly denied, but can't override organization-level deny rules. This
@@ -75,9 +57,9 @@ org-level wildcard deny covers it.
 For example, given an organization policy that allows `api.anthropic.com`
 and denies `*.corp.internal`:
 
-- `sbx policy allow network -g api.example.com` — works, because the
+- `sbx policy allow network -g api.example.com`: works, because the
   organization hasn't denied `api.example.com`
-- `sbx policy allow network -g build.corp.internal` — no effect, because the
+- `sbx policy allow network -g build.corp.internal`: no effect, because the
   organization denies `*.corp.internal`
 
 #### Blocked values in delegated rules
@@ -101,12 +83,8 @@ Admins can restrict which paths are mountable by defining filesystem allow
 and deny rules in the Admin Console under **AI governance > Filesystem
 access**. Each rule takes a path pattern and an action (allow or deny).
 
-> [!CAUTION]
-> Use `**` (double wildcard) rather than `*` (single wildcard) when writing
-> path patterns to match path segments recursively. A single `*` only matches
-> within a single path segment. For example, `~/**` matches all paths under
-> the user's home directory, whereas `~/*` matches only paths directly
-> under `~`.
+For path pattern syntax including the difference between `*` and `**`, see
+[Policy concepts](concepts.md#filesystem-rules).
 
 ## Precedence
 
@@ -129,7 +107,7 @@ precedence over local behavior.
 
 To unblock a domain, identify where the deny rule comes from. For local
 rules, remove it with `sbx policy rm`. For organization-level rules, update
-the rule in the Admin Console.
+the rule in the Admin Console or via the [API](api.md).
 
 ## Troubleshooting
 
