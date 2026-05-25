@@ -50,22 +50,23 @@ sandbox. See
 [Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
-The sandbox runs Docker Agent without approval prompts by default. Pass
-additional CLI options after `--`:
+### Default startup command
 
-```console
-$ sbx run docker-agent --name my-sandbox -- <options>
+Without extra args, the sandbox runs:
+
+```text
+docker-agent run --yolo
 ```
 
-For example, to specify a custom `agent.yml` configuration file:
+Args after `--` replace these defaults rather than being appended. To keep
+`run --yolo`, include them yourself:
 
 ```console
-$ sbx run docker-agent -- agent.yml
+$ sbx run docker-agent -- run --yolo agent.yml
 ```
 
 ## Base image
 
-The sandbox uses `docker/sandbox-templates:docker-agent` and launches Docker
-Agent without approval prompts by default. See
+The sandbox uses `docker/sandbox-templates:docker-agent`. See
 [Templates](../customize/templates.md) to build your own image on top of
 this base.

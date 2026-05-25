@@ -54,12 +54,22 @@ available inside the sandbox. See
 [Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
-The sandbox runs Gemini without approval prompts by default and disables
-Gemini's built-in sandbox tool (since the sandbox itself provides isolation).
-Pass additional Gemini CLI options after `--`:
+The sandbox disables Gemini's built-in sandbox tool (since the sandbox itself
+provides isolation).
+
+### Default startup command
+
+Without extra args, the sandbox runs:
+
+```text
+gemini --yolo
+```
+
+Args after `--` replace these defaults rather than being appended. To keep
+`--yolo`, include it yourself:
 
 ```console
-$ sbx run gemini --name <sandbox-name> -- <gemini-options>
+$ sbx run gemini -- --yolo -p "explain this"
 ```
 
 ## Base image
@@ -67,8 +77,7 @@ $ sbx run gemini --name <sandbox-name> -- <gemini-options>
 Template: `docker/sandbox-templates:gemini`
 
 Gemini is configured to disable its built-in OAuth flow. Authentication is
-managed through the proxy with API keys. Preconfigured to run without
-approval prompts.
+managed through the proxy with API keys.
 
 See [Customize](../customize/) to pre-install tools or customize this
 environment.

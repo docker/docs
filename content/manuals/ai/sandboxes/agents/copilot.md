@@ -51,19 +51,26 @@ for workarounds.
 Copilot is configured to trust the workspace directory by default, so it
 operates without repeated confirmations for workspace files.
 
-### Pass options at runtime
+### Default startup command
 
-Pass Copilot CLI options after `--`:
+Without extra args, the sandbox runs:
+
+```text
+copilot --yolo
+```
+
+Args after `--` replace these defaults rather than being appended. To keep
+`--yolo`, include it yourself:
 
 ```console
-$ sbx run copilot --name <sandbox-name> -- <copilot-options>
+$ sbx run copilot -- --yolo -p "review this PR"
 ```
 
 ## Base image
 
 Template: `docker/sandbox-templates:copilot`
 
-Preconfigured to trust the workspace directory and run without approval prompts.
+Preconfigured to trust the workspace directory.
 
 See [Customize](../customize/) to pre-install tools or customize this
 environment.

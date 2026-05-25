@@ -54,10 +54,19 @@ available inside the sandbox. See
 [Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
-Any Claude Code CLI options can be passed after the `--` separator:
+### Default startup command
+
+Without extra args, the sandbox runs:
+
+```text
+claude --dangerously-skip-permissions
+```
+
+Args after `--` replace these defaults rather than being appended. To keep
+`--dangerously-skip-permissions`, include it yourself:
 
 ```console
-$ sbx run claude --name my-sandbox -- --continue
+$ sbx run claude -- --dangerously-skip-permissions -c
 ```
 
 See the [Claude Code CLI reference](https://code.claude.com/docs/en/cli-reference)
@@ -65,8 +74,7 @@ for available options.
 
 ## Base image
 
-The sandbox uses `docker/sandbox-templates:claude-code` and launches Claude Code
-with `--dangerously-skip-permissions` by default. See
+The sandbox uses `docker/sandbox-templates:claude-code`. See
 [Templates](../customize/templates.md) to build your own image on top of
 this base.
 
