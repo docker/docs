@@ -202,7 +202,7 @@ For a complete reference of all YAML fields, see
 
 Generate authentication credentials for accessing the enterprise hardened
 package repository. These credentials are used when configuring your package
-manager to install compliance-specific packages in your own images. For detailed
+manager to install compliance and security-patched packages in your own images. For detailed
 instructions, see [Enterprise
 repository](./hardened-packages.md#enterprise-repository).
 
