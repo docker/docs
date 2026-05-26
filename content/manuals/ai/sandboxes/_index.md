@@ -72,8 +72,8 @@ the [usage guide](usage.md) for common patterns.
   extending or tailoring sandboxes
 - [Architecture](architecture.md) — microVM isolation, workspace mounting,
   networking
-- [Security](security/) — isolation model, credential handling, network
-  policies, workspace trust
+- [Security](security/) — isolation model, credential handling, and
+  network policies
 - [CLI reference](/reference/cli/sbx/) — full list of `sbx` commands and options
 - [Troubleshooting](troubleshooting.md) — common issues and fixes
 - [FAQ](faq.md) — login requirements, telemetry, etc

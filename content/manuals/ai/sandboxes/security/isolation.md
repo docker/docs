@@ -1,14 +1,14 @@
 ---
 title: Isolation layers
 weight: 10
-description: How Docker Sandboxes isolate AI agents using hypervisor, network, Docker Engine, source-repository, and credential boundaries.
-keywords: docker sandboxes, isolation, hypervisor, network, credentials, git
+description: How Docker Sandboxes isolate AI agents using hypervisor, network, Docker Engine, workspace, and credential boundaries.
+keywords: docker sandboxes, isolation, hypervisor, network, credentials, workspace, git
 ---
 
 AI coding agents need to execute code, install packages, and run tools on
-your behalf. Docker Sandboxes run each agent in its own microVM with five
-isolation layers: hypervisor, network, Docker Engine, source-repository
-(in clone mode), and credential proxy.
+your behalf. Docker Sandboxes run each agent in its own microVM. Five
+isolation layers protect your host: hypervisor, network, Docker Engine,
+workspace, and credential proxy.
 
 ## Hypervisor isolation
 
@@ -72,64 +72,97 @@ Host system
            └── [VM] Containers created by agent
 ```
 
-## Source-repository isolation
+## Workspace isolation
 
-When you start a sandbox with `--clone` (see the
-[clone-mode workflow](../usage.md#clone-mode)), the agent never works
-directly against your host repository. Even with full root inside the VM,
-it cannot corrupt your local Git state.
+A sandbox mounts your workspace one of two ways. The mount mode determines
+whether there is a security boundary between the agent's edits and your
+host filesystem. The mode is fixed at create time; see
+[Git workflow](../usage.md#git-workflow) for the workflow side of each.
 
-The boundary works like this:
+### Direct mount (default)
 
-- Your repository's Git root is bind-mounted into the sandbox at
-  `/run/sandbox/source` as a read-only mount. The agent — and anything it
-  spawns — cannot write to your `.git` directory, your working tree, or
-  any tracked file via that mount.
-- The agent's working copy is a private `git clone --reference` populated
-  on the sandbox's overlay filesystem. The clone has its own index, its
-  own refs, and its own working tree. Object storage is shared via
-  `.git/objects/info/alternates`, so the clone is space-efficient and
-  full history is walkable, but writes to the clone never reach your
-  host's object database.
-- Your host pulls the agent's commits over a `git-daemon` exposed by the
-  sandbox on `127.0.0.1:<ephemeral-port>`. The CLI registers it as a
-  `sandbox-<sandbox-name>` remote on your host repository. Fetching from
-  that remote uses the same trust model as fetching from any third-party
-  remote: nothing is integrated until you explicitly merge or check out
-  the fetched refs.
+By default, the sandbox bind-mounts your workspace read-write into the VM.
+The agent and the host see the same files, and changes the agent makes
+appear on your host as soon as they're written.
+
+There is no isolation between the agent and your workspace in this mode.
+The agent can create, modify, or delete any file in the workspace,
+including:
+
+- Source code and configuration files
+- Build files (`Makefile`, `package.json`, `Cargo.toml`)
+- Git hooks (`.git/hooks/`)
+- CI configuration (`.github/workflows/`, `.gitlab-ci.yml`)
+- IDE configuration (`.vscode/tasks.json`, `.idea/` run configurations)
+- Hidden files, shell scripts, and executables
+
+Some of these files execute code when you trigger normal development
+actions — committing, pushing, building, or opening the project in an IDE.
+Review them after any agent session before performing those actions:
+
+- **Git hooks** (`.git/hooks/`) run on commit, push, and other Git actions.
+  These are inside `.git/` and **do not appear in `git diff` output** —
+  check them separately with `ls -la .git/hooks/`.
+- **CI configuration** (`.github/workflows/`, `.gitlab-ci.yml`) runs on
+  push.
+- **Build files** (`Makefile`, `package.json` scripts, `Cargo.toml`) run
+  during build or install steps.
+- **IDE configuration** (`.vscode/tasks.json`, `.idea/`) can run tasks
+  when you open the project.
+
+Treat sandbox-modified workspace files the same way you would treat a pull
+request from an untrusted contributor: review before you trust them on
+your host.
+
+### Clone mode
+
+When you start a sandbox with [`--clone`](../usage.md#clone-mode), the agent
+never works directly against your host repository. Even with full root
+inside the VM, it cannot modify your `.git` directory, your working tree,
+or any tracked file on your host.
 
 ```plaintext
-Host repository                            Sandbox VM
-  .git/                                      /run/sandbox/source/  (RO bind mount)
-    objects/  ◄─────── alternates ─────────  clone/.git/objects/
-    refs/                                    clone/.git/refs/      (private)
-    HEAD                                     clone/.git/HEAD       (private)
-    working tree                             clone/working tree    (overlay FS)
-    remote sandbox-<name>  ──── git:// ────► git-daemon :9418
-                                             (published 127.0.0.1:<ephemeral>)
+Host repository                          Sandbox VM
+  .git/  (untouched)                       private clone  (RW, in VM)
+  working tree  (untouched)                  ↑ agent edits here
+                                             │
+  /run/sandbox/source (RO bind mount) ←──────┘
+  (read-only view of your repo)
+
+  remote sandbox-<name>  ──── git fetch ───► git-daemon (inside VM)
 ```
+
+How the boundary is enforced:
+
+- Your repository's Git root is bind-mounted at `/run/sandbox/source` as
+  read-only. Nothing the agent does inside the VM can write back through
+  that mount.
+- The agent works on a private clone that lives inside the sandbox. The
+  clone has its own index, its own refs, and its own working tree. Writes
+  to the clone never reach your host.
+- The sandbox publishes the clone over a Git daemon bound to localhost on
+  the host. The CLI wires it up as a `sandbox-<sandbox-name>` Git remote on
+  your host repository. Fetching from that remote uses the same trust
+  model as fetching from any third-party remote — nothing is integrated
+  until you explicitly merge or check out the fetched refs.
 
 The practical guarantees:
 
-- Index and ref corruption can't happen — concurrent `git` commands on the
-  host and inside the sandbox don't race on a shared `.git/index` or shared
-  refs because there is no shared writable state.
-- The agent can't write back to your working tree. A compromised or buggy
-  agent can't drop a `.git/hooks/pre-commit`, modify `.github/workflows/`,
-  or edit any other tracked file in a way that affects your host until you
-  fetch and merge from the `sandbox-<name>` remote.
-- Credentials, signing keys, and global settings declared in your
-  repository's `.git/config` stay on the host. The agent's clone has its
-  own independent configuration.
-- Cleanup is automatic: `sbx rm` deletes the clone, the published port,
-  and the `sandbox-<name>` remote on your host. Any in-container commits
-  that have not been fetched or pushed to an upstream remote are dropped
-  with the sandbox — `sbx rm` prints a warning before doing so.
+- The agent cannot modify any tracked file or any byte under `.git/` on
+  your host. A compromised or buggy agent cannot drop a
+  `.git/hooks/pre-commit`, alter `.github/workflows/`, or sneak changes
+  into your working tree.
+- Concurrent `git` commands on the host and inside the sandbox cannot
+  race on a shared `.git/index` or shared refs — there is no shared
+  writable state.
+- Credentials, signing keys, and any settings in your repository's
+  `.git/config` stay on the host. The agent's clone has its own
+  independent configuration.
 
-In direct mode (no `--clone`), the agent edits your working tree directly
-and this isolation does not apply. Use clone mode whenever you want a
-strong boundary between the agent's Git activity and your host
-repository.
+Use clone mode whenever you want a strong boundary between the agent's
+Git activity and your host repository — for example when running an
+unfamiliar agent, running multiple agents on the same repository at once,
+or keeping your working tree clean while the agent works.
 
 ## Credential isolation
 

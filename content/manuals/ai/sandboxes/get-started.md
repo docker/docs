@@ -268,5 +268,6 @@ working tree are unaffected.
 - [Customize](customize/) — build reusable templates or declare capabilities
   with kits
 - [Credentials](security/credentials.md) — credential storage and management
-- [Workspace trust](security/workspace.md) — review agent changes safely
+- [Workspace isolation](security/isolation.md#workspace-isolation) — what
+  the agent can affect on your host, and how to review changes
 - [Policies](security/policy.md) — control outbound access

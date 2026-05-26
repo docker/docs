@@ -73,135 +73,165 @@ hosts, and add custom network rules. Press `?` to see all keyboard shortcuts.
 
 ## Git workflow
 
-When your workspace is a Git repository, the agent edits your working tree
-directly by default. Changes appear in your working tree immediately, the same
-as working in a normal terminal.
+When your workspace is a Git repository, a sandbox mounts it one of two
+ways. The mode is set at create time and determines how the agent interacts
+with your repository:
 
-If you want the agent to work in isolation from your host repository — for
-example to run multiple agents in parallel, or to prevent any chance of an
-agent rewriting your local Git state — use [clone mode](#clone-mode). The
-agent runs against a private Git clone inside the sandbox; your host repository
-sees the agent's commits only after you explicitly fetch them.
+- **Direct mode (default)** — the sandbox bind-mounts your working tree
+  read-write. The agent edits your files in place; changes appear on your
+  host immediately. Best when you're collaborating turn-by-turn with the
+  agent on a single repository.
+- **[Clone mode](#clone-mode) (`--clone`)** — the agent works on a private
+  Git clone inside the sandbox, and your host repository is mounted
+  read-only. The sandbox exposes its clone as a Git remote on your host, so
+  you fetch the agent's commits the same way you'd fetch from any other
+  remote. Best when you want the agent isolated from your host repository —
+  for running multiple agents in parallel, working with untrusted code, or
+  keeping your working tree clean while the agent works.
+
+See [Workspace isolation](security/isolation.md#workspace-isolation) for the
+security model behind each mode.
 
 ### Direct mode (default)
 
 The agent edits your working tree directly. Stage, commit, and push as you
-normally would. If you run multiple agents on the same repository at the same
-time, they may step on each other's changes. See
-[clone mode](#clone-mode) for an alternative.
+normally would. If you run multiple agents on the same repository at the
+same time, they may step on each other's changes — use
+[clone mode](#clone-mode) to give each agent its own isolated workspace.
 
 ### Clone mode
 
-Pass `--clone` to run the agent on a private Git clone living entirely
-inside the sandbox, instead of bind-mounting your working tree. Your host
-repository is mounted read-only as the clone's reference, so the agent — even
-with full root inside the VM — cannot modify any byte of your `.git`
-directory or working tree. You can set `--clone` on `create` or, equivalently,
-on `run` at create time.
-
-When `--clone` is active:
-
-- The agent works on a private clone populated by
-  `git clone --reference` from your repository, on the sandbox's overlay
-  filesystem. The clone has its own index, refs, and working tree.
-  Object storage is shared via `.git/objects/info/alternates`, so the
-  clone is space-efficient and full history is walkable, but writes to
-  the clone never reach your host's object database.
-- Your repository's Git root is bind-mounted at `/run/sandbox/source` as a
-  read-only mount. The agent's `git clone --reference` reads from this
-  mount; nothing on the host is writable from inside the sandbox.
-- The clone follows whatever HEAD your host repository is on at create time.
-  No branch is created automatically — if you want the agent to work on a
-  dedicated branch, instruct the agent to `git checkout -b my-feature`
-  inside the sandbox before it starts editing.
-- The sandbox runs a `git-daemon` over a `127.0.0.1`-bound ephemeral port
-  that exports the in-container clone. The CLI registers it as a Git remote
-  named `sandbox-<sandbox-name>` on your host repository, so you can pull
-  the agent's commits with `git fetch`.
-- Forge remotes you have on the host (`origin`, `upstream`, …) are
-  propagated into the in-container clone with their existing URLs, so the
-  agent can `git push origin …` to your GitHub fork as you would on the
-  host. Local-path remotes (`file://`, paths) are skipped because they
-  aren't reachable from inside the sandbox.
-
-See [Source-repository isolation](security/isolation.md#source-repository-isolation)
-for the security boundary.
-
-#### Starting a sandbox in clone mode
+In clone mode, the sandbox becomes a Git remote on your host. The agent
+commits inside the sandbox; you pull its work back out by fetching from
+that remote.
 
 ```console
-$ sbx run --clone claude   # private clone of the current repository
+$ sbx run --clone claude
 ```
 
-You can also create the sandbox first and attach later:
+You can also create the sandbox in the background and attach later:
 
 ```console
 $ sbx create --clone --name my-sandbox claude .
-$ sbx run my-sandbox                       # resumes in the in-container clone
+$ sbx run my-sandbox
 ```
 
+The clone follows whichever ref your host repository has checked out at
+create time. No new branch is created automatically. If you want the agent
+to work on a dedicated branch, instruct it (or open a shell with `sbx exec`
+yourself) to run `git checkout -b my-feature` inside the sandbox before it
+starts editing.
+
 > [!NOTE]
-> Clone mode is fixed at create time. Recreate the sandbox with
-> `sbx create --clone ...` to switch an existing sandbox into clone mode.
+> Clone mode is fixed at create time. To switch an existing sandbox to
+> clone mode, remove it and recreate it with `sbx create --clone`.
 
-#### Reviewing and pushing changes
+#### Reviewing and merging the agent's commits
 
-The CLI wires the agent's in-container clone as a `sandbox-<sandbox-name>`
-Git remote on your host repository. Review the agent's work with the same
-commands you'd use for any other remote — no extra tooling, no `cd` into
-a separate directory:
+The CLI wires the in-sandbox clone as a `sandbox-<sandbox-name>` Git remote
+on your host. Pull the agent's commits the same way you'd fetch any other
+remote — no `cd` into a separate directory, no extra tooling:
 
 ```console
-$ git fetch sandbox-my-sandbox                            # pull the agent's commits
-$ git log sandbox-my-sandbox/<branch-the-agent-used>      # see what the agent did
-$ git diff main..sandbox-my-sandbox/<branch-the-agent-used>
-$ git checkout -b my-feature sandbox-my-sandbox/<branch-the-agent-used>
+$ git fetch sandbox-my-sandbox
+$ git log sandbox-my-sandbox/<branch>
+$ git diff main..sandbox-my-sandbox/<branch>
+$ git checkout -b my-feature sandbox-my-sandbox/<branch>
 $ git push -u origin my-feature
 $ gh pr create
 ```
 
-If the agent committed on a dedicated branch (because you asked it to
-`git checkout -b ...`), that branch name appears on the `sandbox-<name>`
-remote. If it stayed on the HEAD it inherited at create time, its commits
-extend that branch instead — you'll see them by fetching and diffing.
+If you asked the agent to work on a dedicated branch, `<branch>` is that
+branch name. Otherwise it's whatever ref your host repository was on at
+create time.
 
-Some agents don't commit automatically. If `git log sandbox-<name>/...`
-shows nothing new, open a shell in the sandbox and commit from there
-before fetching. `sbx exec` drops you into the in-container clone:
+Some agents don't commit automatically. If `git log sandbox-<name>/<branch>`
+shows nothing new, open a shell in the sandbox and commit from there:
 
 ```console
 $ sbx exec -it my-sandbox bash
 $ git commit -am "save work"
 ```
 
-See [Workspace trust](security/workspace.md) for security considerations when
-reviewing agent changes.
+#### Pushing to your fork from inside the sandbox
 
-#### Cleanup
+When the sandbox starts, the CLI copies the Git remotes from your host
+repository (`origin`, `upstream`, and so on) into the in-sandbox clone with
+their existing URLs. The agent can push to your fork on GitHub the same way
+you would on the host:
 
-`sbx rm` deletes the sandbox, its in-container clone, the published Git
-port, and the `sandbox-<sandbox-name>` remote on your host repository.
+```console
+$ sbx exec -it my-sandbox bash
+$ git push origin my-feature
+$ gh pr create
+```
+
+This is interchangeable with fetching to your host first and pushing from
+there. Pick whichever fits your workflow — or do both.
+
+Local-path remotes (`file://` URLs, filesystem paths) aren't copied, since
+they aren't reachable from inside the sandbox.
+
+#### Running multiple branches in parallel
+
+To work on several branches with one sandbox, have the agent create them
+inside the sandbox:
+
+```console
+$ sbx exec -it my-sandbox bash
+$ git checkout -b feature-a
+# ...agent works on feature-a, commits...
+$ git checkout -b feature-b main
+# ...agent works on feature-b, commits...
+```
+
+Each branch appears on the `sandbox-<name>` remote, and you can pull them
+independently:
+
+```console
+$ git fetch sandbox-my-sandbox
+$ git log sandbox-my-sandbox/feature-a
+$ git log sandbox-my-sandbox/feature-b
+```
+
+The sandbox is one VM with one working tree, so checking out a different
+branch inside it changes what the agent sees. Committed branches stay on
+the remote regardless of which branch the sandbox is currently on.
+
+#### Sandbox lifecycle and the Git remote
+
+The Git daemon that exposes the in-sandbox clone runs as part of the
+sandbox itself. It's only reachable while the sandbox is running:
+
+- `sbx stop` shuts down the daemon. `git fetch sandbox-<name>` fails until
+  the sandbox starts again.
+- Restarting the sandbox assigns a new ephemeral port to the daemon. The
+  CLI updates the `sandbox-<name>` remote URL in your host repository's
+  Git config automatically, so fetching continues to work without manual
+  reconfiguration.
+- `sbx rm` removes the sandbox, the daemon, the published port, and the
+  `sandbox-<name>` remote entry from your host repository.
 
 > [!WARNING]
-> Any commits the agent made inside the sandbox that you have not yet
-> fetched (via `git fetch sandbox-<name>`) or pushed to an upstream
-> remote will be lost — the in-container clone lives on the sandbox's
-> overlay filesystem and is dropped with it. `sbx rm` prints a warning
-> for clone-mode sandboxes; review it before confirming the removal.
+> Removing a clone-mode sandbox drops the in-sandbox clone along with it.
+> Any commits you haven't fetched (`git fetch sandbox-<name>`) or pushed
+> to an upstream remote are lost. `sbx rm` prints a warning before
+> deleting a clone-mode sandbox — review it before confirming.
 
 #### Restrictions
 
-A few configurations are incompatible with clone mode and are rejected at
-create time:
+Clone mode requires a Git repository as the primary workspace, and is
+rejected at create time in two cases:
 
-- `--clone` together with `--workspace-volume`: the source-repository
-  isolation relies on bind-mounting your Git root, which is incompatible
-  with a volume-backed workspace.
-- `--clone` from inside a host Git worktree: the bind mount can't resolve
-  the worktree's `.git` pointer file. Run `sbx create --clone ...` from
-  the main repository instead.
-- `--clone` on a non-Git workspace: clone mode requires a Git repository.
-  Run `sbx create` without `--clone` for non-Git workspaces.
+- `--clone` on a non-Git workspace. Omit `--clone` for non-Git workspaces.
+- `--clone` from inside a Git worktree (other than the main one). The
+  read-only bind mount can't resolve the worktree's `.git` pointer file.
+  Run `sbx create --clone` from the main repository checkout instead.
+
+You can also create a Git worktree yourself and run an agent inside it
+without `--clone`, but the sandbox won't have access to the `.git`
+directory in the parent repository, so the agent can't use Git at all.
+Clone mode is the supported alternative for working on a separate branch.
 
 ### Signed commits
 
