@@ -1,6 +1,6 @@
 ---
-title: API reference
-linkTitle: API reference
+title: AI Governance API
+linkTitle: AI Governance
 description: Programmatic management of Docker AI Governance policies and rules via HTTP+JSON.
 weight: 30
 build:
