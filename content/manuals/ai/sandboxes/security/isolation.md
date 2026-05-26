@@ -74,14 +74,22 @@ Host system
 
 ## Workspace isolation
 
-A sandbox mounts your workspace one of two ways. The mount mode determines
-whether there is a security boundary between the agent's edits and your
-host filesystem. The mode is fixed at create time; see
-[Git workflow](../usage.md#git-workflow) for the workflow side of each.
+When you create a sandbox, you choose one of two ways to share your
+workspace with it:
+
+- **Direct mount** (the default): the agent has read-write access to
+  your working tree. There is no boundary between the agent's edits and
+  your host filesystem.
+- **Clone mode** (`--clone`): your repository is mounted read-only into
+  the VM and the agent works on a private clone inside the VM. The
+  agent's edits never reach your host until you fetch them.
+
+See [Git workflow](../usage.md#git-workflow) for the workflow side of
+each.
 
 ### Direct mount (default)
 
-By default, the sandbox bind-mounts your workspace read-write into the VM.
+By default, your workspace is shared into the VM as a read-write mount.
 The agent and the host see the same files, and changes the agent makes
 appear on your host as soon as they're written.
 
@@ -134,7 +142,7 @@ Host repository                          Sandbox VM
 
 How the boundary is enforced:
 
-- Your repository's Git root is bind-mounted at `/run/sandbox/source` as
+- Your repository's Git root is mounted at `/run/sandbox/source` as
   read-only. Nothing the agent does inside the VM can write back through
   that mount.
 - The agent works on a private clone that lives inside the sandbox. The
