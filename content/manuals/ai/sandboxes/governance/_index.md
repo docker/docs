@@ -35,5 +35,5 @@ See [Organization policy](org.md).
   your organization from the Admin Console
 - [Monitoring](monitoring.md): inspect active rules and monitor sandbox
   network traffic with `sbx policy ls` and `sbx policy log`
-- [API reference](api.md): manage org policies programmatically via the
-  Governance API
+- [API reference](/reference/api/ai-governance/): manage org policies
+  programmatically via the Governance API
