@@ -14,7 +14,7 @@ lets individual developers customize which domains their sandboxes can reach.
 See [Local policy](local.md).
 
 **Organization policy** is configured centrally in the Docker Admin Console or
-via the [Governance API](api.md). Rules defined at the org level apply
+via the [Governance API](/reference/api/ai-governance/). Rules defined at the org level apply
 uniformly across every sandbox in the organization and take precedence over
 local rules. Admins can optionally delegate specific rule types back to local
 control so developers can extend the org policy with additional allow rules.

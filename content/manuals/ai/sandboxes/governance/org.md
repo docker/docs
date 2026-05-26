@@ -15,7 +15,7 @@ uniformly to every sandbox in the organization, take precedence over local
 `sbx policy` rules, and can't be overridden by individual users.
 
 Admins can manage organization policies through the Admin Console UI or
-programmatically using the [Governance API](api.md).
+programmatically using the [Governance API](/reference/api/ai-governance/).
 
 > [!NOTE]
 > Sandbox organization governance is available on a separate paid
@@ -107,7 +107,7 @@ precedence over local behavior.
 
 To unblock a domain, identify where the deny rule comes from. For local
 rules, remove it with `sbx policy rm`. For organization-level rules, update
-the rule in the Admin Console or via the [API](api.md).
+the rule in the Admin Console or via the [API](/reference/api/ai-governance/).
 
 ## Troubleshooting
 

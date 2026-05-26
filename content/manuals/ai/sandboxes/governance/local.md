@@ -155,5 +155,5 @@ rule may be covering it. [Delegation](org.md#delegate-rules-to-local-policy)
 lets local rules expand access, but org deny rules always take precedence. Run `sbx policy ls` to check whether a rule
 with `remote` origin and `deny` decision matches the domain. If so, the block
 can only be lifted by updating the org policy in the Admin Console or via the
-[API](api.md).
+[API](/reference/api/ai-governance/).
 

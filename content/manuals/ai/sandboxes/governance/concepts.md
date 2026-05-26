@@ -16,7 +16,7 @@ Policies exist at different levels:
 - **Local**: configured per machine using the `sbx policy` CLI. Applies to
   sandboxes on that machine only.
 - **Organization**: configured in the Docker Admin Console or via the
-  [Governance API](api.md). Applies uniformly across every sandbox in the
+  [Governance API](/reference/api/ai-governance/). Applies uniformly across every sandbox in the
   organization.
 - **Team**: applies to sandboxes used by a specific team within an
   organization. Coming soon.
