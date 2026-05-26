@@ -185,9 +185,8 @@ $ git log sandbox-my-sandbox/feature-b
 A few common ways to have the agent start each task on its own branch:
 
 - A subagent orchestrator such as Claude Code's
-  [agents view](https://code.claude.com/docs/en/agent-view) dispatches
-  each task to a subagent that creates its own worktree inside the
-  clone.
+  [agents view](agents/claude-code.md#agents-view) dispatches each task
+  to a subagent that creates its own worktree inside the clone.
 - Agent-level instructions in `CLAUDE.md`, an orchestration skill, or a
   system prompt include a rule to start each task on a new branch.
 - For one-off tasks, ask the agent to switch to a new branch before it

@@ -72,6 +72,29 @@ $ sbx run claude -- --dangerously-skip-permissions -c
 See the [Claude Code CLI reference](https://code.claude.com/docs/en/cli-reference)
 for available options.
 
+## Agents view
+
+Claude Code's [agents view](https://code.claude.com/docs/en/agent-view)
+dispatches tasks to subagents that work in parallel, each in its own
+Git worktree. Pair it with [clone mode](../usage.md#clone-mode) for an
+isolated multi-agent workflow:
+
+```console
+$ sbx run --clone claude -- agents
+```
+
+The subagents' worktrees live inside the sandbox's private clone — none
+of them touches your host repository. Each subagent commits to its own
+branch, and you review the work from the host by fetching the
+`sandbox-<sandbox-name>` remote:
+
+```console
+$ git fetch sandbox-<sandbox-name>
+$ git diff main..sandbox-<sandbox-name>/<branch>
+```
+
+See [Git workflow](../usage.md#git-workflow) for clone-mode details.
+
 ## Base image
 
 The sandbox uses `docker/sandbox-templates:claude-code`. See
