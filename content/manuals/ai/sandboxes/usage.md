@@ -172,29 +172,26 @@ they aren't reachable from inside the sandbox.
 
 #### Running multiple branches in parallel
 
-To work on several branches with one sandbox, the agent — not you —
-should create them inside the sandbox. How depends on how your agent is
-set up:
-
-- **Orchestrators that delegate to subagents** can have each subagent
-  create its own worktree and branch inside the clone. Claude Code's
-  [agents view](https://code.claude.com/docs/en/agent-view) is one
-  example. With clone mode, those worktrees live entirely inside the
-  sandbox.
-- **Persistent agent instructions** — an agent-level `CLAUDE.md`, an
-  orchestration skill, or a system prompt — can tell the agent to start
-  each task on a fresh branch before editing.
-- **Ad-hoc prompting** works for one-off tasks: ask the agent to switch
-  to a new branch before it starts.
-
-Each branch the agent commits to appears on the `sandbox-<name>` remote
-on your host. Fetch them independently:
+A single sandbox can hold several branches at once. Each branch the
+agent commits to appears as a separate ref on the `sandbox-<name>`
+remote, so you can fetch them independently from the host:
 
 ```console
 $ git fetch sandbox-my-sandbox
 $ git log sandbox-my-sandbox/feature-a
 $ git log sandbox-my-sandbox/feature-b
 ```
+
+A few common ways to have the agent start each task on its own branch:
+
+- A subagent orchestrator such as Claude Code's
+  [agents view](https://code.claude.com/docs/en/agent-view) dispatches
+  each task to a subagent that creates its own worktree inside the
+  clone.
+- Agent-level instructions in `CLAUDE.md`, an orchestration skill, or a
+  system prompt include a rule to start each task on a new branch.
+- For one-off tasks, ask the agent to switch to a new branch before it
+  starts.
 
 #### Sandbox lifecycle and the Git remote
 
