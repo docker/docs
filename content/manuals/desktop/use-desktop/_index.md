@@ -23,7 +23,7 @@ In addition, the Docker Desktop Dashboard lets you:
   For a more detailed guide about getting started, see [Get started](/get-started/introduction/_index.md).
 - Access [Docker Hub](/manuals/docker-hub/_index.md) to search, browse, pull, run, or view details
   of images.
-- Navigate to [Docker Extensions](/manuals/extensions/_index.md) is you have enabled them.
+- Navigate to [Docker Extensions](/manuals/extensions/_index.md) if you have enabled it.
 
 > [!TIP]
 >
