@@ -1,12 +1,11 @@
-{{/*
-  Build a curl command for an OpenAPI operation.
+{{/* Build a curl command for an OpenAPI operation.
 
   Input dict:
-    api          — unmarshaled spec root
-    op           — operation object
-    method       — http method (lowercase string)
-    path         — path string (e.g. "/orgs/{org_name}/policies")
-    sharedParams — already-resolved path-level parameters
+  api          — unmarshaled spec root
+  op           — operation object
+  method       — http method (lowercase string)
+  path         — path string (e.g. "/orgs/{org_name}/policies")
+  sharedParams — already-resolved path-level parameters
 
   Output: a multi-line curl command string (line-continued with " \\\n  ").
   Path placeholders are filled from parameter examples when available;
@@ -38,12 +37,16 @@
     {{- with .examples -}}
       {{- $picked := false -}}
       {{- with index . "default" -}}
-        {{- with .value -}}{{- $val = . | string -}}{{- $picked = true -}}{{- end -}}
+        {{- with .value -}}
+          {{- $val = . | string -}}{{- $picked = true -}}
+        {{- end -}}
       {{- end -}}
       {{- if not $picked -}}
         {{- range . -}}
           {{- if not $picked -}}
-            {{- with .value -}}{{- $val = . | string -}}{{- $picked = true -}}{{- end -}}
+            {{- with .value -}}
+              {{- $val = . | string -}}{{- $picked = true -}}
+            {{- end -}}
           {{- end -}}
         {{- end -}}
       {{- end -}}
@@ -61,17 +64,23 @@
     {{- with .examples -}}
       {{- $picked := false -}}
       {{- with index . "default" -}}
-        {{- with .value -}}{{- $val = . | string -}}{{- $picked = true -}}{{- end -}}
+        {{- with .value -}}
+          {{- $val = . | string -}}{{- $picked = true -}}
+        {{- end -}}
       {{- end -}}
       {{- if not $picked -}}
         {{- range . -}}
           {{- if not $picked -}}
-            {{- with .value -}}{{- $val = . | string -}}{{- $picked = true -}}{{- end -}}
+            {{- with .value -}}
+              {{- $val = . | string -}}{{- $picked = true -}}
+            {{- end -}}
           {{- end -}}
         {{- end -}}
       {{- end -}}
     {{- end -}}
-    {{- if $val -}}{{- $qs = $qs | append (printf "%s=%s" .name $val) -}}{{- end -}}
+    {{- if $val -}}
+      {{- $qs = $qs | append (printf "%s=%s" .name $val) -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 {{- if $qs -}}{{- $url = printf "%s?%s" $url (delimit $qs "&") -}}{{- end -}}
@@ -98,13 +107,18 @@
   {{- $lines = $lines | append "-H 'Authorization: Bearer $TOKEN'" -}}
 {{- end -}}
 
-{{/* Request body example. */}}
+{{/* Request body example. Picks the first content type declared. */}}
 {{- with $op.requestBody -}}
   {{- $body := partial "api-ref/resolve.html" (dict "api" $api "node" .) -}}
-  {{- with index $body.content "application/json" -}}
-    {{- $lines = $lines | append "-H 'Content-Type: application/json'" -}}
+  {{- $ct := "" -}}
+  {{- $media := dict -}}
+  {{- range $name, $m := $body.content -}}
+    {{- if not $ct -}}{{- $ct = $name -}}{{- $media = $m -}}{{- end -}}
+  {{- end -}}
+  {{- if $ct -}}
+    {{- $lines = $lines | append (printf "-H 'Content-Type: %s'" $ct) -}}
     {{- $example := "" -}}
-    {{- with .examples -}}
+    {{- with $media.examples -}}
       {{- with index . "default" -}}
         {{- with .value -}}{{- $example = . | jsonify -}}{{- end -}}
       {{- end -}}

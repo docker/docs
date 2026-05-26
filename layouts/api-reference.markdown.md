@@ -78,9 +78,16 @@
   {{- $body := partial "api-ref/resolve.html" (dict "api" $api "node" .) }}
 **Request body**{{ with $body.description }} — {{ . | strings.TrimSpace }}{{ end }}
 
-{{ with index $body.content "application/json" -}}
-{{- template "api-ref-md-schema-link" (dict "schema" .schema) }}
-{{ range $exName, $ex := .examples }}{{ with $ex.value }}
+{{- $ct := "" -}}
+{{- $media := dict -}}
+{{- range $n, $m := $body.content -}}
+  {{- if not $ct -}}{{- $ct = $n -}}{{- $media = $m -}}{{- end -}}
+{{- end -}}
+{{ if $ct }}
+Content type: `{{ $ct }}`
+
+{{ template "api-ref-md-schema-link" (dict "schema" $media.schema) }}
+{{ range $exName, $ex := $media.examples }}{{ with $ex.value }}
 ```json
 {{ . | jsonify (dict "indent" "  ") }}
 ```
@@ -94,9 +101,14 @@
 {{ range $code, $resp := . -}}
 {{- $r := partial "api-ref/resolve.html" (dict "api" $api "node" $resp) }}
 `{{ $code }}` — {{ with $r.description }}{{ . | strings.TrimSpace }}{{ end }}
-{{ with index $r.content "application/json" }}
-{{ template "api-ref-md-schema-link" (dict "schema" .schema) }}
-{{ range $exName, $ex := .examples }}{{ with $ex.value }}
+{{- $ct := "" -}}
+{{- $media := dict -}}
+{{- range $n, $m := $r.content -}}
+  {{- if not $ct -}}{{- $ct = $n -}}{{- $media = $m -}}{{- end -}}
+{{- end }}
+{{ if $ct }}
+{{ template "api-ref-md-schema-link" (dict "schema" $media.schema) }}
+{{ range $exName, $ex := $media.examples }}{{ with $ex.value }}
 ```json
 {{ . | jsonify (dict "indent" "  ") }}
 ```

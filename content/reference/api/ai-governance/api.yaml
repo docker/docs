@@ -277,7 +277,7 @@ paths:
         description: Fields to update. Absent fields are left unchanged.
         required: true
         content:
-          application/json:
+          application/merge-patch+json:
             schema:
               $ref: "#/components/schemas/UpdateRuleRequest"
             examples:
@@ -512,7 +512,8 @@ components:
             The access-control domain shared by all rules in this allowlist.
             Derived from rule actions: network actions (`connect:tcp`,
             `connect:udp`) produce `network`; filesystem actions (`read`,
-            `write`) produce `filesystem`. Omitted for empty allowlists.
+            `write`) produce `filesystem`. Present when `rules` is non-empty;
+            absent when the allowlist has no rules.
           enum: [network, filesystem]
           examples:
             - network

@@ -387,10 +387,21 @@
           {{ . | markdownify }}
         </p>
       {{- end }}
-      {{- with index $body.content "application/json" }}
-        {{ template "api-ref-schema-link" (dict "api" $api "schema" .schema) }}
+      {{- $ct := "" -}}
+      {{- $media := dict -}}
+      {{- range $name, $m := $body.content -}}
+        {{- if not $ct -}}{{- $ct = $name -}}{{- $media = $m -}}{{- end -}}
+      {{- end -}}
+      {{- if $ct }}
+        <p class="mb-2 text-xs text-gray-500 dark:text-gray-400">
+          Content type:
+          <code class="rounded bg-gray-100 px-1 dark:bg-gray-800"
+            >{{ $ct }}</code
+          >
+        </p>
+        {{ template "api-ref-schema-link" (dict "api" $api "schema" $media.schema) }}
         {{ template "api-ref-examples" (dict
-          "examples" .examples
+          "examples" $media.examples
           "prefix" "req"
           )
         }}
@@ -443,11 +454,18 @@
                 >{{ $r.description }}</span
               >
             </summary>
-            {{- with index $r.content "application/json" }}
+            {{- $ct := "" -}}
+            {{- $media := dict -}}
+            {{- range $name, $m := $r.content -}}
+              {{- if not $ct -}}
+                {{- $ct = $name -}}{{- $media = $m -}}
+              {{- end -}}
+            {{- end -}}
+            {{- if $ct }}
               <div class="px-3 pt-2 pb-3">
-                {{ template "api-ref-schema-link" (dict "api" $api "schema" .schema) }}
+                {{ template "api-ref-schema-link" (dict "api" $api "schema" $media.schema) }}
                 {{ template "api-ref-examples" (dict
-                  "examples" .examples
+                  "examples" $media.examples
                   "prefix" (printf "resp-%s" $code)
                   )
                 }}
