@@ -370,8 +370,8 @@ components:
         | Personal Access Token (PAT) | `dckr_pat_*` | Recommended over passwords. Create one under Account Settings → Security. |
         | Organization Access Token (OAT) | `dckr_oat_*` | Scoped to an organization. Create one under Organization Settings → Access Tokens. |
 
-        Note: PAT and OAT strings cannot be used directly as a bearer token —
-        they must be exchanged at the login endpoint first.
+        PAT and OAT strings can't be used directly as a bearer token. They must
+        be exchanged at the login endpoint first.
 
         See [Docker Hub authentication](https://docs.docker.com/reference/api/hub/latest/#tag/authentication-api/operation/AuthCreateAccessToken)
         for full details.
@@ -444,8 +444,8 @@ components:
         type:
           type: string
           description: >
-            Identifies the rule-set format. Currently always `allowlist_v0`,
-            corresponding to the `allowlist_v0` property on the full Policy object.
+            Identifies the rule-set format. Always `allowlist_v0`, corresponding
+            to the `allowlist_v0` property on the full Policy object.
           examples:
             - allowlist_v0
 
