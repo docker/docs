@@ -62,18 +62,24 @@ available inside the sandbox. See
 [Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
-The sandbox runs Codex without approval prompts by default. Pass additional
-Codex CLI options after `--`:
+### Default startup command
+
+Without extra args, the sandbox runs:
+
+```text
+codex --dangerously-bypass-approvals-and-sandbox
+```
+
+Args after `--` replace these defaults rather than being appended. To keep
+the flag, include it yourself:
 
 ```console
-$ sbx run codex --name <sandbox-name> -- <codex-options>
+$ sbx run codex -- --dangerously-bypass-approvals-and-sandbox "fix the build"
 ```
 
 ## Base image
 
 Template: `docker/sandbox-templates:codex`
-
-Preconfigured to run without approval prompts.
 
 See [Customize](../customize/) to pre-install tools or customize this
 environment.

@@ -56,11 +56,13 @@ sandbox. See
 [Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
-The sandbox runs Droid without approval prompts by default. Pass additional
-`droid` CLI options after `--`:
+### Default startup command
+
+The sandbox runs `droid` with no implicit flags. Args after `--` are passed
+straight through:
 
 ```console
-$ sbx run droid --name <sandbox-name> -- <droid-options>
+$ sbx run droid -- exec "fix the build"
 ```
 
 ## Base image
