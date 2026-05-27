@@ -97,6 +97,17 @@ commands:
 
 See [`initFiles`](#initfiles) in the spec reference for all fields.
 
+Sandboxes seed settings files for some built-in agents during setup.
+For example, the sandbox writes `/home/agent/.claude/settings.json`
+for the `claude` agent. This happens after the kit's static files and
+`initFiles`, so kit-injected files at those paths get overwritten.
+Workspace files (such as `<workspace>/.claude/settings.local.json`)
+aren't affected, and you can ship them under `files/workspace/` as
+usual. To override a path the sandbox writes to, use a
+[`commands.startup`](#startup) script instead. See
+[Override agent settings](kit-examples.md#override-agent-settings) for
+an example.
+
 ### Set environment variables
 
 Environment variables set by the kit are available to the agent at

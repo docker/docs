@@ -181,6 +181,33 @@ See the
 [FAQ](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for details.
 
+## Override agent settings
+
+Sandboxes seed settings files for some built-in agents during setup.
+For example, the sandbox writes `/home/agent/.claude/settings.json`
+for the `claude` agent. This happens after the kit's static files and
+`initFiles`, so a kit can't override those paths with either mechanism.
+Use `commands.startup` instead, which runs after the sandbox seeds its
+files:
+
+```yaml
+commands:
+  startup:
+    - command:
+        - sh
+        - -c
+        - |
+          mkdir -p /home/agent/.claude
+          cat > /home/agent/.claude/settings.json <<'JSON'
+          {"permissions": {"allow": ["Bash(echo:*)"]}}
+          JSON
+      user: "1000"
+      description: Write user-scope claude settings
+```
+
+Startup commands replay on every sandbox start, so the script must be
+idempotent. The heredoc pattern overwrites cleanly each time.
+
 ## Fork an existing agent
 
 Agent kits (`kind: agent`) define a full agent from scratch. The most
