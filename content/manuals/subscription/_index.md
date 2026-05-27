@@ -27,10 +27,6 @@ grid_subscriptions:
     description: Learn how to add or remove seats from your subscription.
     link: /admin/organization/manage/manage-seats/
     icon: user-plus
-  - title: Licenses
-    description: Purchase and assign product licenses for Docker Offload and AI governance.
-    link: /subscription/licenses/
-    icon: key
   - title: Docker Desktop license agreement
     description: Review the terms of the Docker Subscription Service Agreement.
     link: /subscription/desktop-license/

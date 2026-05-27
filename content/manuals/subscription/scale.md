@@ -14,19 +14,44 @@ You can scale consumption for:
 - Testcontainers Cloud runtime minutes
 - Docker Hardened Images (DHI) repositories
 
-To understand your usage patterns, [view your consumption](../admin/organization/manage/manage-products.md#monitor-product-usage-for-your-organization) at any time.
+## Add licenses
 
-> [!NOTE]
->
-> Legacy Docker subscribers must upgrade to new Docker subscriptions to access scaling options. Legacy subscriptions apply to subscribers who last purchased or renewed before December 10, 2024. For details, see [Announcing Upgraded Docker Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
+Licenses add a layer to your Docker subscriptions, letting you assign products to select members of your
+organization. You can purchase licenses for some Docker products:
 
-## Usage considerations
+- AI Governance
+- Docker Offload 
+
+Once you've purchased licenses for your organization, you can [manage license assignment](/manuals/admin/organization/manage/manage-licenses.md) from the **Members** page in Docker Home.
+
+> [!TIP]
+> To purchase licenses for AI Governance and Docker Offload, [contact sales](https://www.docker.com/pricing/contact-sales/). 
+
+### AI Governance licenses
+
+AI Governance licenses let admins create and apply organization-wide AI Governance policies for license-holding members.
+
+- AI Governance licenses are separate from Docker Team or Business. 
+- You can purchase AI Governance licenses without an existing subscription.
+- When you purchase AI Governance licenses, you may assign them to organization members without a Docker subscription seat. 
+
+When a member who holds an AI governance license uses AI products like Docker Sandbox, the organization policy overrides the member’s local policy rules. Members without AI Governance licenses can still use AI products. 
+
+### Docker Offload licenses 
+
+Docker Offload lets developers offload building and running containers to the cloud. 
+
+- You must have a Docker Team or Docker Business subscription.
+- You can only assign Docker Offload licenses to members with Docker Team or Docker Business.
+
+
+## Add minutes
 
 Minutes don't roll over. Base subscription minutes reset each billing period and don't accumulate. Additional purchased minutes expire at the end of your subscription period.
 
 For example, with an annual Docker Team subscription (500 included minutes), if you purchase 500 additional minutes, only the additional 500 minutes roll over until your annual renewal.
 
-## Add Docker Build Cloud build minutes
+### Docker Build Cloud build minutes
 
 Purchase additional build minutes through the Docker Build Cloud Dashboard:
 
@@ -40,7 +65,7 @@ Purchase additional build minutes through the Docker Build Cloud Dashboard:
 
 Your additional minutes appear on the Build minutes page immediately.
 
-## Add Docker Testcontainers Cloud runtime minutes
+### Docker Testcontainers Cloud runtime minutes
 
 You can add Testcontainers Cloud runtime minutes in two ways:
 
@@ -59,14 +84,16 @@ To add more hardened repositories to your DHI Select plan:
 1. On the Overview page, select **Manage** next to **Hardened Images**.
 1. Select how many repositories the account can use.
 
-> [!TIP]
->
-> Purchasing eight or more hardened repositories? [Contact Docker sales](https://www.docker.com/pricing/contact-sales/) to discuss an Enterprise plan.
+Purchasing eight or more hardened repositories? [Contact Docker sales](https://www.docker.com/pricing/contact-sales/) to discuss an Enterprise plan.
 
 ## What's next
 
-To learn more, see:
-
-- [Testcontainers overview](/manuals/testcontainers.md)
+- [Manage licenses](/manuals/admin/organization/manage/manage-licenses.md)
+- [Manage seats](/manuals/admin/organization/manage/manage-seats.md)
+- [View your consumption](../admin/organization/manage/manage-products.md#monitor-product-usage-for-your-organization) 
 - [Docker Build Cloud overview](/manuals/build-cloud/_index.md)
 - [DHI Select and Enterprise quickstart](/manuals/dhi/how-to/select-enterprise.md)
+- [Testcontainers overview](/manuals/testcontainers.md)
+
+
+
