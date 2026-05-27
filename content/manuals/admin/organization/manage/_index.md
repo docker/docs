@@ -2,5 +2,5 @@
 build:
   render: never
 title: Manage
-weight: 20
+weight: 10
 ---
