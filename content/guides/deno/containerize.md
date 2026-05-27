@@ -83,7 +83,6 @@ Create a file named `compose.yml` with the following contents:
 ```yaml {title="compose.yml"}
 services:
   server:
-    image: deno-server
     build:
       context: .
       dockerfile: Dockerfile
