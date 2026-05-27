@@ -10,30 +10,33 @@ aliases:
 
 ## Prerequisites
 
-Complete [Develop your app](develop.md).
+Complete [Develop your app](develop.md). This topic requires a local Python
+installation because the tools and Git hooks introduced here run on your
+host. If you don't want to install Python locally, skip this topic. The same
+checks run in CI in the [next topic](configure-github-actions.md).
 
 ## Overview
 
-In this section, you'll learn how to set up code quality tools for your Python application. This includes:
+Linting, formatting, and type checking are automated ways to catch bugs,
+enforce style, and spot type errors before code runs. Running them on every
+commit, in CI, and in your editor catches problems early when they're cheap
+to fix.
 
-- Linting and formatting with Ruff
-- Static type checking with Pyright
-- Automating checks with pre-commit hooks
+In this section, you'll configure three tools for your Python application.
+Ruff handles linting and formatting in a single fast pass. Pyright statically
+checks your code for type errors. Pre-commit hooks run both of these
+automatically before each Git commit so problems never reach your remote
+branch.
 
 ## Linting and formatting with Ruff
 
 Ruff is an extremely fast Python linter and formatter written in Rust. It replaces multiple tools like flake8, isort, and black with a single unified tool.
 
-Before using Ruff, install it in your Python environment:
+Create a `pyproject.toml` file in your `python-docker-example` directory:
 
-```bash
-pip install ruff
-```
+{{< files name="python-docker-example" >}}
 
-If you're using a virtual environment, make sure it is activated so the `ruff` command is available when you run the commands below.
-
-Create a `pyproject.toml` file:
-
+{{< file path="pyproject.toml" status="new" >}}
 ```toml
 [tool.ruff]
 target-version = "py312"
@@ -56,61 +59,107 @@ ignore = [
     "B904",  # Allow raising exceptions without from e, for HTTPException
 ]
 ```
+{{< /file >}}
 
-### Using Ruff
+{{< /files >}}
+
+Install Ruff:
+
+```console
+$ pip install ruff
+```
+
+If you're using a virtual environment, make sure it is activated so the `ruff`
+command is available.
 
 Run these commands to check and format your code:
 
-```bash
+```console
 # Check for errors
-ruff check .
+$ ruff check .
 
 # Automatically fix fixable errors
-ruff check --fix .
+$ ruff check --fix .
 
 # Format code
-ruff format .
+$ ruff format .
 ```
 
 ## Type checking with Pyright
 
 Pyright is a fast static type checker for Python that works well with modern Python features.
 
-Add `Pyright` configuration in `pyproject.toml`:
+Update `pyproject.toml` to add the Pyright configuration at the bottom.
 
+{{< files name="python-docker-example" >}}
+
+{{< file path="pyproject.toml" status="modified" hl_lines="21-25" >}}
 ```toml
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+    "ARG001", # unused arguments in functions
+]
+ignore = [
+    "E501",  # line too long, handled by black
+    "B008",  # do not perform function calls in argument defaults
+    "W191",  # indentation contains tabs
+    "B904",  # Allow raising exceptions without from e, for HTTPException
+]
+
 [tool.pyright]
 typeCheckingMode = "strict"
 pythonVersion = "3.12"
 exclude = [".venv"]
 ```
+{{< /file >}}
 
-### Running Pyright
+{{< /files >}}
 
-To check your code for type errors:
+Install Pyright and run it:
 
-```bash
-pyright
+```console
+$ pip install pyright
+$ pyright
 ```
 
 ## Setting up pre-commit hooks
 
-Pre-commit hooks automatically run checks before each commit. The following `.pre-commit-config.yaml` snippet sets up Ruff:
+Pre-commit hooks run checks automatically before each commit on your local
+machine. Create a `.pre-commit-config.yaml` file in your `python-docker-example`
+directory to set up Ruff hooks:
 
+{{< files name="python-docker-example" >}}
+
+{{< file path=".pre-commit-config.yaml" status="new" >}}
 ```yaml
-  https: https://github.com/charliermarsh/ruff-pre-commit
-  rev: v0.2.2
-  hooks:
-    - id: ruff
-      args: [--fix]
-    - id: ruff-format
+repos:
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.2.2
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
 ```
+{{< /file >}}
+
+{{< /files >}}
 
 To install and use:
 
-```bash
-pre-commit install
-git commit -m "Test commit"  # Automatically runs checks
+```console
+$ pip install pre-commit
+$ pre-commit install
+$ git commit -m "Test commit"  # Automatically runs checks
 ```
 
 ## Summary
@@ -122,6 +171,12 @@ In this section, you learned how to:
 - Automate checks with pre-commit hooks
 
 These tools help maintain code quality and catch errors early in development.
+
+Related information:
+
+- [Ruff documentation](https://docs.astral.sh/ruff/)
+- [Pyright documentation](https://microsoft.github.io/pyright/)
+- [pre-commit framework](https://pre-commit.com/)
 
 ## Next steps
 
