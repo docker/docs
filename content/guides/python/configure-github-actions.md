@@ -27,12 +27,14 @@ If you didn't create a [GitHub repository](https://github.com/new) for your proj
 
 ## Overview
 
-GitHub Actions is a CI/CD (Continuous Integration and Continuous Deployment) automation tool built into GitHub. It allows you to define custom workflows for building, testing, and deploying your code when specific events occur (e.g., pushing code, creating a pull request, etc.). A workflow is a YAML-based automation script that defines a sequence of steps to be executed when triggered. Workflows are stored in the `.github/workflows/` directory of a repository.
+GitHub Actions is a CI/CD automation tool built into GitHub. A workflow is a
+YAML file that tells GitHub which jobs to run when something happens in your
+repository, like a push to a branch or a pull request opening. Workflows live
+in the `.github/workflows/` directory of your repository.
 
-In this section, you'll learn how to set up and use GitHub Actions to build your Docker image as well as push it to Docker Hub. You will complete the following steps:
-
-1. Define the GitHub Actions workflow.
-2. Run the workflow.
+In this section, you'll add a workflow that runs your linting, formatting, and
+type checks on every push to the main branch, then builds your Docker image
+and pushes it to Docker Hub.
 
 ## 1. Define the GitHub Actions workflow
 
@@ -45,12 +47,15 @@ If you prefer to use the GitHub web interface, follow these steps:
 2. Select **set up a workflow yourself**.
 
    This takes you to a page for creating a new GitHub Actions workflow file in
-   your repository. By default, the file is created under `.github/workflows/main.yml`, let's change it name to `build.yml`.
+   your repository. By default, the file is created under `.github/workflows/main.yml`. Change the file name to `build.yml`.
 
 If you prefer to use your text editor, create a new file named `build.yml` in the `.github/workflows/` directory of your repository.
 
 Add the following content to the file:
 
+{{< files name="python-docker-example" >}}
+
+{{< file path=".github/workflows/build.yml" status="new" >}}
 ```yaml
 name: Build and push Docker image
 
@@ -64,7 +69,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@{{% param "checkout_action_version" %}}
-      
+
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
@@ -99,6 +104,9 @@ jobs:
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
 ```
+{{< /file >}}
+
+{{< /files >}}
 
 Each GitHub Actions workflow includes one or several jobs. Each job consists of steps. Each step can either run a set of commands or use already [existing actions](https://github.com/marketplace?type=actions). The action above has three steps:
 
@@ -132,5 +140,5 @@ Related information:
 
 ## Next steps
 
-In the next section, you'll learn how you can develop locally using kubernetes.
+In the next section, you'll learn how you can develop locally using Kubernetes.
 

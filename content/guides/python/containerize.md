@@ -14,159 +14,65 @@ aliases:
 ## Prerequisites
 
 - You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
-- You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
 
 ## Overview
 
-This section walks you through containerizing and running a Python application.
+Containerizing your application means packaging it together with its
+dependencies, configuration, and runtime into a single portable unit called a
+container image. Running that image creates a container, an isolated process
+that behaves the same on any machine, whether it's your laptop, a CI runner, or
+a production server.
 
-## Get the sample application
+In this section, you'll containerize a simple
+[FastAPI](https://fastapi.tiangolo.com) web application. You'll write a
+`Dockerfile` that describes how to build the image, add a `compose.yaml` file
+that defines how Docker runs your container, and then build and start the
+application with one command.
 
-The sample application uses the popular [FastAPI](https://fastapi.tiangolo.com) framework.
+You'll use [Docker Hardened Images](/dhi/) as the base. These are minimal,
+secure Python images maintained by Docker.
 
-Clone the sample application to use with this guide. Open a terminal, change directory to a directory that you want to work in, and run the following command to clone the repository:
+## Create the application
 
-```console
-$ git clone https://github.com/estebanx64/python-docker-example && cd python-docker-example
+The sample application is a minimal FastAPI service with a single endpoint
+that returns a JSON greeting. Create the following files in a new
+`python-docker-example` directory. To create all the files at once, switch to
+the **Scaffold script** tab in the file browser and copy the shell command.
+
+{{< files name="python-docker-example" >}}
+
+{{< file path="app.py" status="new" >}}
+```python
+# A minimal FastAPI application.
+# The root endpoint (GET /) returns a JSON "Hello World" response.
+# See https://fastapi.tiangolo.com/ for the framework reference.
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
 ```
+{{< /file >}}
 
-## Create Docker assets
+{{< file path="requirements.txt" status="new" >}}
+```text
+# Python package dependencies for the application, pinned for reproducible builds.
+# See https://pip.pypa.io/en/stable/reference/requirements-file-format/
 
-Now that you have an application, you can create the necessary Docker assets to
-containerize your application.
-
-> [!TIP]
->
-> [Gordon](/ai/gordon/), Docker's AI assistant, can generate Docker assets for your project. Ask Gordon to create a Dockerfile, Compose file, and `.dockerignore` tailored to your application.
-
-Before creating your Dockerfile, you need to choose a base image. You can use the [Python Docker Official Image](https://hub.docker.com/_/python),
-or a [Docker Hardened Image (DHI)](https://hub.docker.com/hardened-images/catalog/dhi/python).
-
-Docker Hardened Images (DHIs) are minimal, secure, and production-ready base images maintained by Docker.
-They help reduce vulnerabilities and simplify compliance. For more details, see [Docker Hardened Images](/dhi/).
-
-{{< tabs >}}
-{{< tab name="Using the official Docker image" >}}
-
-Create the following files in your project directory.
-
-Create a file named `Dockerfile` with the following contents.
-
-```dockerfile {collapse=true,title=Dockerfile}
-# syntax=docker/dockerfile:1
-
-# Comments are provided throughout this file to help you get started.
-# If you need more help, visit the Dockerfile reference guide at
-# https://docs.docker.com/go/dockerfile-reference/
-
-# This Dockerfile uses Python Docker Official Image
-ARG PYTHON_VERSION=3.12
-FROM python:${PYTHON_VERSION}-slim
-
-# Prevents Python from writing pyc files.
-ENV PYTHONDONTWRITEBYTECODE=1
-
-# Keeps Python from buffering stdout and stderr to avoid situations where
-# the application crashes without emitting any logs due to buffering.
-ENV PYTHONUNBUFFERED=1
-
-WORKDIR /app
-
-# Create a non-privileged user that the app will run under.
-# See https://docs.docker.com/go/dockerfile-user-best-practices/
-ARG UID=10001
-RUN adduser \
-    --disabled-password \
-    --gecos "" \
-    --home "/nonexistent" \
-    --shell "/sbin/nologin" \
-    --no-create-home \
-    --uid "${UID}" \
-    appuser
-
-# Download dependencies as a separate step to take advantage of Docker's caching.
-# Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
-# Leverage a bind mount to requirements.txt to avoid having to copy them into
-# into this layer.
-RUN --mount=type=cache,target=/root/.cache/pip \
-    --mount=type=bind,source=requirements.txt,target=requirements.txt \
-    python -m pip install -r requirements.txt
-
-# Switch to the non-privileged user to run the application.
-USER appuser
-
-# Copy the source code into the container.
-COPY . .
-
-# Expose the port that the application listens on.
-EXPOSE 8000
-
-# Run the application.
-CMD ["python3", "-m", "uvicorn", "app:app", "--host=0.0.0.0", "--port=8000"]
+fastapi==0.115.12
 ```
+{{< /file >}}
 
-Create a file named `compose.yaml` with the following contents.
+{{< file path=".gitignore" status="new" >}}
+```text
+# Files and directories that Git should ignore. This is the standard Python
+# template covering bytecode, build artifacts, virtual environments, and IDE
+# settings. See https://git-scm.com/docs/gitignore for syntax reference.
 
-```yaml {collapse=true,title=compose.yaml}
-# Comments are provided throughout this file to help you get started.
-# If you need more help, visit the Docker Compose reference guide at
-# https://docs.docker.com/go/compose-spec-reference/
-
-# Here the instructions define your application as a service called "server".
-# This service is built from the Dockerfile in the current directory.
-# You can add other services your application may depend on here, such as a
-# database or a cache. For examples, see the Awesome Compose repository:
-# https://github.com/docker/awesome-compose
-services:
-  server:
-    build:
-      context: .
-    ports:
-      - 8000:8000
-```
-
-Create a file named `.dockerignore` with the following contents.
-
-```text {collapse=true,title=".dockerignore"}
-# Include any files or directories that you don't want to be copied to your
-# container here (e.g., local build artifacts, temporary files, etc.).
-#
-# For more help, visit the .dockerignore file reference guide at
-# https://docs.docker.com/go/build-context-dockerignore/
-
-**/.DS_Store
-**/__pycache__
-**/.venv
-**/.classpath
-**/.dockerignore
-**/.env
-**/.git
-**/.gitignore
-**/.project
-**/.settings
-**/.toolstarget
-**/.vs
-**/.vscode
-**/*.*proj.user
-**/*.dbmdl
-**/*.jfm
-**/bin
-**/charts
-**/docker-compose*
-**/compose.y*ml
-**/Dockerfile*
-**/node_modules
-**/npm-debug.log
-**/obj
-**/secrets.dev.yaml
-**/values.dev.yaml
-LICENSE
-README.md
-```
-
-Create a file named `.gitignore` with the following contents.
-
-```text {collapse=true,title=".gitignore"}
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -222,27 +128,80 @@ ENV/
 env.bak/
 venv.bak/
 ```
+{{< /file >}}
 
-{{< /tab >}}
-{{< tab name="Using Docker Hardened Image" >}}
+{{< /files >}}
 
-Docker Hardened Images (DHIs) are available for Python in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/python). Docker Hardened Images are freely available to everyone with no subscription required. You can pull and use them like any other Docker image after signing in to the DHI registry. For more information, see the [DHI quickstart](/dhi/get-started/) guide.
+If you already have Python installed and want to verify the app works before
+containerizing it, you can run it locally:
 
-1. Sign in to the DHI registry:
+```console
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+$ pip install -r requirements.txt
+$ uvicorn app:app --reload
+```
 
-   ```console
-   $ docker login dhi.io
-   ```
+> [!NOTE]
+>
+> On Windows, activate the virtual environment with `.venv\Scripts\activate`
+> instead of `source .venv/bin/activate`.
 
-2. Pull the Python DHI (check the catalog for available versions):
+If you don't have Python installed, skip ahead to the next section. The
+remaining steps run the application in a container, with no local Python
+required.
 
-   ```console
-   $ docker pull dhi.io/python:3.12.12-debian13-fips-dev
-   ```
+## Create the Docker assets
 
-Create a file named `Dockerfile` with the following contents.
+Sign in to the DHI registry so Docker can pull the Python base images during
+the build. The available Python images are listed in the
+[catalog](https://hub.docker.com/hardened-images/catalog/dhi/python).
 
-```dockerfile {collapse=true,title=Dockerfile}
+```console
+$ docker login dhi.io
+```
+
+Add the following three files to your `python-docker-example` directory. The
+`Dockerfile` describes how to build the image, `compose.yaml` defines how
+Docker runs the container, and `.dockerignore` keeps unwanted files out of the
+build context.
+
+> [!TIP]
+>
+> [Gordon](/ai/gordon/), Docker's AI assistant, can generate Docker assets for
+> your project. Ask Gordon to create a Dockerfile, Compose file, and
+> `.dockerignore` tailored to your application.
+
+{{< files name="python-docker-example" >}}
+
+{{< file path="app.py" >}}
+```python
+# A minimal FastAPI application.
+# The root endpoint (GET /) returns a JSON "Hello World" response.
+# See https://fastapi.tiangolo.com/ for the framework reference.
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+```
+{{< /file >}}
+
+{{< file path="requirements.txt" >}}
+```text
+# Python package dependencies for the application, pinned for reproducible builds.
+# See https://pip.pypa.io/en/stable/reference/requirements-file-format/
+
+fastapi==0.115.12
+```
+{{< /file >}}
+
+{{< file path="Dockerfile" status="new" >}}
+```dockerfile
 # syntax=docker/dockerfile:1
 
 # Comments are provided throughout this file to help you get started.
@@ -251,43 +210,30 @@ Create a file named `Dockerfile` with the following contents.
 
 # This Dockerfile uses Docker Hardened Images (DHI) for enhanced security.
 # For more information, see https://docs.docker.com/dhi/
-ARG PYTHON_VERSION=3.12.12-debian13-fips-dev
-FROM dhi.io/python:${PYTHON_VERSION}
 
-# Prevents Python from writing pyc files.
-ENV PYTHONDONTWRITEBYTECODE=1
-
-# Keeps Python from buffering stdout and stderr to avoid situations where
-# the application crashes without emitting any logs due to buffering.
-ENV PYTHONUNBUFFERED=1
-
-#Add dependencies for adduser
-RUN apt update -y && apt install adduser -y
+# Use the dev image to build and install dependencies.
+FROM dhi.io/python:3.12-dev AS builder
 
 WORKDIR /app
 
-# Create a non-privileged user that the app will run under.
-# See https://docs.docker.com/go/dockerfile-user-best-practices/
-ARG UID=10001
-RUN adduser \
-    --disabled-password \
-    --gecos "" \
-    --home "/nonexistent" \
-    --shell "/sbin/nologin" \
-    --no-create-home \
-    --uid "${UID}" \
-    appuser
+RUN python3 -m venv /venv
+ENV PATH="/venv/bin:$PATH"
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
-# into this layer.
+# this layer.
 RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
-    python -m pip install -r requirements.txt
+    pip install -r requirements.txt
 
-# Switch to the non-privileged user to run the application.
-USER appuser
+# Use the minimal runtime image. It runs as nonroot by default.
+FROM dhi.io/python:3.12
+
+WORKDIR /app
+
+COPY --from=builder /venv /venv
+ENV PATH="/venv/bin:$PATH"
 
 # Copy the source code into the container.
 COPY . .
@@ -296,12 +242,12 @@ COPY . .
 EXPOSE 8000
 
 # Run the application.
-CMD ["python3", "-m", "uvicorn", "app:app", "--host=0.0.0.0", "--port=8000"]
+CMD ["/venv/bin/python3", "-m", "uvicorn", "app:app", "--host=0.0.0.0", "--port=8000"]
 ```
+{{< /file >}}
 
-Create a file named `compose.yaml` with the following contents.
-
-```yaml {collapse=true,title=compose.yaml}
+{{< file path="compose.yaml" status="new" >}}
+```yaml
 # Comments are provided throughout this file to help you get started.
 # If you need more help, visit the Docker Compose reference guide at
 # https://docs.docker.com/go/compose-spec-reference/
@@ -318,10 +264,10 @@ services:
     ports:
       - 8000:8000
 ```
+{{< /file >}}
 
-Create a file named `.dockerignore` with the following contents.
-
-```text {collapse=true,title=".dockerignore"}
+{{< file path=".dockerignore" status="new" >}}
+```text
 # Include any files or directories that you don't want to be copied to your
 # container here (e.g., local build artifacts, temporary files, etc.).
 #
@@ -357,10 +303,14 @@ Create a file named `.dockerignore` with the following contents.
 LICENSE
 README.md
 ```
+{{< /file >}}
 
-Create a file named `.gitignore` with the following contents.
+{{< file path=".gitignore" >}}
+```text
+# Files and directories that Git should ignore. This is the standard Python
+# template covering bytecode, build artifacts, virtual environments, and IDE
+# settings. See https://git-scm.com/docs/gitignore for syntax reference.
 
-```text {collapse=true,title=".gitignore"}
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -416,29 +366,14 @@ ENV/
 env.bak/
 venv.bak/
 ```
+{{< /file >}}
 
-{{< /tab >}}
-{{< /tabs >}}
+{{< /files >}}
 
-You should now have the following contents in your `python-docker-example`
-directory.
-
-```text
-├── python-docker-example/
-│ ├── app.py
-│ ├── requirements.txt
-│ ├── .dockerignore
-│ ├── .gitignore
-│ ├── compose.yaml
-│ ├── Dockerfile
-│ └── README.md
-```
-
-To learn more about the files, see the following:
+To learn more about each file, see the following:
 
 - [Dockerfile](/reference/dockerfile.md)
 - [.dockerignore](/reference/dockerfile.md#dockerignore-file)
-- [.gitignore](https://git-scm.com/docs/gitignore)
 - [compose.yaml](/reference/compose-file/_index.md)
 
 ## Run the application

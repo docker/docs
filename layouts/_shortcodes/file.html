@@ -1,0 +1,145 @@
+{{/*
+  file shortcode — child of the `files` shortcode.
+
+  Usage (body wrapped in a fenced code block — preferred):
+    {{< file path="app.py" >}}
+    ```python
+    from fastapi import FastAPI
+    ```
+    {{< /file >}}
+
+  Usage (body as plain text — legacy, still supported):
+    {{< file path="app.py" lang="python" >}}
+    from fastapi import FastAPI
+    {{< /file >}}
+
+  Wrapping the body in a code fence is preferred: markdownlint and Vale treat
+  the fence content as code and skip it, so neither needs special config to
+  avoid false positives on `#` lines inside Python/Dockerfile/etc. comments.
+
+  Attributes:
+    path      required. File path within the project, can include folders (e.g. "db/password.txt").
+    lang      optional. Language for syntax highlighting. Inferred from the fence
+              info string when the body is fenced; otherwise auto-detected from
+              the file extension. An explicit lang attribute always wins.
+    status    optional. One of "modified" or "new". Shows a colored badge in the file tree.
+    hl_lines  optional. Line numbers/ranges to highlight (e.g. "8" or "6,8-11"). Passed to chroma.
+*/}}
+
+{{ if ne .Parent.Name "files" }}
+  {{- errorf "file shortcode missing its 'files' parent: %s" .Position -}}
+{{ end }}
+
+{{ $path := trim (.Get "path") " " }}
+{{ if not $path }}
+  {{- errorf "file shortcode requires a path attribute: %s" .Position -}}
+{{ end }}
+
+{{ if not (.Parent.Store.Get "files") }}
+  {{ .Parent.Store.Set "files" slice }}
+{{ end }}
+
+{{/* Normalize line endings so CRLF source files behave identically to LF,
+     then trim leading/trailing whitespace so the body lines up cleanly and
+     any fence marker on the first line can be detected. */}}
+{{ $content := .Inner }}
+{{ $content = replace $content "\r\n" "\n" }}
+{{ $content = replace $content "\r" "\n" }}
+{{ $content = strings.TrimLeft "\n\t " $content }}
+{{ $content = strings.TrimRight "\n\t " $content }}
+
+{{/* If the body is wrapped in a fenced code block (preferred form), strip the
+     opening and closing fences and adopt the fence's language as the default. */}}
+{{ $fenceLang := "" }}
+{{ if hasPrefix $content "```" }}
+  {{ $lines := split $content "\n" }}
+  {{ $lineCount := len $lines }}
+  {{ if gt $lineCount 1 }}
+    {{ $lastLine := index $lines (sub $lineCount 1) }}
+    {{ if eq (trim $lastLine " \t") "```" }}
+      {{ $firstLine := index $lines 0 }}
+      {{ $fenceLang = trim (strings.TrimPrefix "```" $firstLine) " \t" }}
+      {{/* Drop first and last lines. */}}
+      {{ $inner := after 1 (first (sub $lineCount 1) $lines) }}
+      {{ $content = delimit $inner "\n" }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* Resolve language:
+       1. explicit lang= attribute always wins
+       2. otherwise, the fence info string if present
+       3. otherwise, auto-detect from the file extension */}}
+{{ $lang := .Get "lang" }}
+{{ if not $lang }}
+  {{ $lang = $fenceLang }}
+{{ end }}
+{{ if not $lang }}
+  {{ $base := path.Base $path }}
+  {{ $ext := path.Ext $path }}
+  {{ if eq $base "Dockerfile" }}
+    {{ $lang = "dockerfile" }}
+  {{ else if eq $base ".dockerignore" }}
+    {{ $lang = "text" }}
+  {{ else if eq $base ".gitignore" }}
+    {{ $lang = "text" }}
+  {{ else if eq $ext ".py" }}
+    {{ $lang = "python" }}
+  {{ else if eq $ext ".js" }}
+    {{ $lang = "javascript" }}
+  {{ else if eq $ext ".ts" }}
+    {{ $lang = "typescript" }}
+  {{ else if eq $ext ".jsx" }}
+    {{ $lang = "jsx" }}
+  {{ else if eq $ext ".tsx" }}
+    {{ $lang = "tsx" }}
+  {{ else if eq $ext ".go" }}
+    {{ $lang = "go" }}
+  {{ else if eq $ext ".rs" }}
+    {{ $lang = "rust" }}
+  {{ else if eq $ext ".rb" }}
+    {{ $lang = "ruby" }}
+  {{ else if eq $ext ".java" }}
+    {{ $lang = "java" }}
+  {{ else if eq $ext ".cs" }}
+    {{ $lang = "csharp" }}
+  {{ else if eq $ext ".php" }}
+    {{ $lang = "php" }}
+  {{ else if eq $ext ".sh" }}
+    {{ $lang = "bash" }}
+  {{ else if or (eq $ext ".yaml") (eq $ext ".yml") }}
+    {{ $lang = "yaml" }}
+  {{ else if eq $ext ".toml" }}
+    {{ $lang = "toml" }}
+  {{ else if eq $ext ".json" }}
+    {{ $lang = "json" }}
+  {{ else if eq $ext ".md" }}
+    {{ $lang = "markdown" }}
+  {{ else if eq $ext ".html" }}
+    {{ $lang = "html" }}
+  {{ else if eq $ext ".css" }}
+    {{ $lang = "css" }}
+  {{ else }}
+    {{ $lang = "text" }}
+  {{ end }}
+{{ end }}
+
+{{/* Normalize optional status attribute. */}}
+{{ $status := lower (.Get "status" | default "") }}
+{{ if and $status (not (in (slice "" "modified" "new") $status)) }}
+  {{- errorf "file shortcode 'status' must be \"modified\", \"new\", or empty: %s" .Position -}}
+{{ end }}
+
+{{/* hl_lines: accept either "8" or "8-10" or "6,8-10,12"; chroma expects spaces. */}}
+{{ $hlLines := .Get "hl_lines" | default "" }}
+{{ if $hlLines }}
+  {{ $hlLines = replace $hlLines "," " " }}
+{{ end }}
+
+{{ $.Parent.Store.Add "files" (dict
+  "path" $path
+  "lang" $lang
+  "content" $content
+  "status" $status
+  "hl_lines" $hlLines
+) }}

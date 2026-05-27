@@ -1,0 +1,376 @@
+{{/*
+  files shortcode — renders a VS Code-style file browser with scaffolding commands.
+
+  Usage:
+    {{< files name="my-project" >}}
+      {{< file path="app.py" >}}
+      ...contents...
+      {{< /file >}}
+      {{< file path="db/password.txt" >}}
+      secretpassword
+      {{< /file >}}
+    {{< /files >}}
+
+  Attributes:
+    name  required. Project name. Used as the window title and as the
+          top-level directory in the scaffolding commands.
+*/}}
+
+{{ with .Inner }}{{/* trigger child rendering */}}{{ end }}
+
+{{ $name := trim (.Get "name") " " }}
+{{ if not $name }}
+  {{- errorf "files shortcode requires a name attribute: %s" .Position -}}
+{{ end }}
+
+{{ $files := .Store.Get "files" }}
+{{ if not $files }}
+  {{- errorf "files shortcode is empty: %s" .Position -}}
+{{ end }}
+
+{{/* Collect unique parent directories (relative to project root) for mkdir. */}}
+{{ $dirs := slice }}
+{{ range $files }}
+  {{ $d := path.Dir .path }}
+  {{ if and (ne $d ".") (not (in $dirs $d)) }}
+    {{ $dirs = $dirs | append $d }}
+  {{ end }}
+{{ end }}
+
+{{/* Build the bash scaffolding command. */}}
+{{ $bashLines := slice }}
+{{ if $dirs }}
+  {{ $mkdirPaths := slice }}
+  {{ range $d := $dirs }}
+    {{ $mkdirPaths = $mkdirPaths | append (printf "%s/%s" $name $d) }}
+  {{ end }}
+  {{ $bashLines = $bashLines | append (printf "mkdir -p %s && cd %s" (delimit $mkdirPaths " ") $name) }}
+{{ else }}
+  {{ $bashLines = $bashLines | append (printf "mkdir %s && cd %s" $name $name) }}
+{{ end }}
+{{ range $files }}
+  {{ $bashLines = $bashLines | append (printf "cat > %s <<'EOF'" .path) }}
+  {{ $bashLines = $bashLines | append .content }}
+  {{ $bashLines = $bashLines | append "EOF" }}
+{{ end }}
+{{ $bashScript := delimit $bashLines "\n" }}
+
+{{/* Build the PowerShell scaffolding command. */}}
+{{ $psLines := slice }}
+{{ $psLines = $psLines | append (printf "New-Item -ItemType Directory -Force -Path %s | Out-Null" $name) }}
+{{ range $d := $dirs }}
+  {{ $psLines = $psLines | append (printf "New-Item -ItemType Directory -Force -Path %s/%s | Out-Null" $name $d) }}
+{{ end }}
+{{ $psLines = $psLines | append (printf "Set-Location %s" $name) }}
+{{ range $files }}
+  {{ $psLines = $psLines | append "@'" }}
+  {{ $psLines = $psLines | append .content }}
+  {{ $psLines = $psLines | append (printf "'@ | Set-Content -Encoding utf8 -Path %s" .path) }}
+{{ end }}
+{{ $psScript := delimit $psLines "\n" }}
+
+{{/*
+  Build a tree-friendly view of the file list.
+  - $rootFiles: files at project root (dict with "index" and "name")
+  - $folderPaths: ordered, deduped list of folder paths (parents auto-included)
+  - $folderFiles: map of folder path -> slice of files in that folder
+
+  We then sort $folderPaths lexicographically so parents naturally come
+  before their children when iterating.
+*/}}
+{{ $rootFiles := slice }}
+{{ $folderPaths := slice }}
+{{ $folderFiles := dict }}
+{{ range $i, $f := $files }}
+  {{ $dir := path.Dir $f.path }}
+  {{ $entry := dict "index" $i "name" (path.Base $f.path) "path" $f.path "status" ($f.status | default "") }}
+  {{ if eq $dir "." }}
+    {{ $rootFiles = $rootFiles | append $entry }}
+  {{ else }}
+    {{/* Make sure every parent folder along the path is registered. */}}
+    {{ $parts := split $dir "/" }}
+    {{ $prefix := "" }}
+    {{ range $part := $parts }}
+      {{ if $prefix }}
+        {{ $prefix = printf "%s/%s" $prefix $part }}
+      {{ else }}
+        {{ $prefix = $part }}
+      {{ end }}
+      {{ if not (in $folderPaths $prefix) }}
+        {{ $folderPaths = $folderPaths | append $prefix }}
+      {{ end }}
+    {{ end }}
+    {{ $existing := index $folderFiles $dir | default slice }}
+    {{ $existing = $existing | append $entry }}
+    {{ $folderFiles = merge $folderFiles (dict $dir $existing) }}
+  {{ end }}
+{{ end }}
+{{ $folderPaths = sort $folderPaths }}
+
+<div
+  data-pagefind-ignore
+  class="not-prose my-6"
+  x-data="{
+    view: 'files',
+    shell: 'bash',
+    selected: 0,
+    scaffoldCopied: false,
+    fileCopied: -1,
+    bashScript: atob('{{ encoding.Base64Encode $bashScript }}'),
+    psScript: atob('{{ encoding.Base64Encode $psScript }}'),
+    fileContents: [
+      {{- range $i, $f := $files -}}
+        {{- if $i }},{{ end -}}
+        atob('{{ encoding.Base64Encode $f.content }}')
+      {{- end -}}
+    ],
+    copyScaffold() {
+      const script = this.shell === 'bash' ? this.bashScript : this.psScript;
+      window.navigator.clipboard.writeText(script);
+      this.scaffoldCopied = true;
+      setTimeout(() => this.scaffoldCopied = false, 2000);
+    },
+    copyFile(i) {
+      window.navigator.clipboard.writeText(this.fileContents[i]);
+      this.fileCopied = i;
+      setTimeout(() => { if (this.fileCopied === i) this.fileCopied = -1; }, 2000);
+    }
+  }"
+>
+  <div
+    class="overflow-x-auto [&::-webkit-scrollbar]:h-3 [&::-webkit-scrollbar-thumb]:rounded [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-track]:bg-gray-100 dark:[&::-webkit-scrollbar-thumb]:bg-gray-600 dark:[&::-webkit-scrollbar-track]:bg-gray-800"
+    style="touch-action: pan-x pan-y;"
+  >
+  <div
+    class="min-w-[40rem] overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900"
+  >
+    {{/* Window title bar */}}
+    <div
+      class="flex flex-wrap items-center gap-3 border-b border-gray-200 bg-gray-100 px-3 py-2 dark:border-gray-800 dark:bg-gray-800"
+    >
+      <div class="flex items-center gap-2">
+        <div class="flex gap-1.5">
+          <span class="h-3 w-3 rounded-full bg-red-400"></span>
+          <span class="h-3 w-3 rounded-full bg-yellow-400"></span>
+          <span class="h-3 w-3 rounded-full bg-green-400"></span>
+        </div>
+        <span
+          class="ml-2 font-mono text-sm text-gray-700 dark:text-gray-200"
+          >{{ $name }}</span
+        >
+      </div>
+      {{/* Primary view toggle: Files | Scaffold script */}}
+      <div
+        class="ml-auto flex gap-0.5 rounded border border-gray-300 bg-white p-0.5 text-xs dark:border-gray-700 dark:bg-gray-900"
+        role="tablist"
+      >
+        <button
+          type="button"
+          role="tab"
+          class="rounded px-2 py-1 font-medium"
+          :class="view === 'files' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'"
+          @click="view = 'files'"
+        >
+          Files
+        </button>
+        <button
+          type="button"
+          role="tab"
+          class="rounded px-2 py-1 font-medium"
+          :class="view === 'scaffold' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'"
+          @click="view = 'scaffold'; scaffoldCopied = false"
+        >
+          Scaffold script
+        </button>
+      </div>
+    </div>
+
+    {{/* Files view: sidebar + content (fixed height with internal scroll) */}}
+    <div class="flex h-[28rem]" x-show="view === 'files'">
+      {{/* Sidebar */}}
+      <aside
+        class="w-56 shrink-0 overflow-y-auto border-r border-gray-200 bg-gray-50 py-2 dark:border-gray-800 dark:bg-gray-950"
+      >
+        <ul class="text-sm" role="tablist">
+          {{/* Project root folder header — always at the top. */}}
+          <li>
+            <div
+              class="flex items-center gap-2 py-1 pr-3 font-mono font-medium text-gray-700 dark:text-gray-200"
+              style="padding-left: 12px"
+            >
+              <span class="icon-svg icon-sm shrink-0 text-gray-500 dark:text-gray-400"
+                >{{ partialCached "icon" "folder-open" "folder-open" }}</span
+              >
+              <span class="truncate">{{ $name }}</span>
+            </div>
+          </li>
+          {{/* Folders first (sorted so parents precede children), then root files. All shifted one level deeper because the project root is depth 0. */}}
+          {{ range $folderPath := $folderPaths }}
+            {{ $parts := split $folderPath "/" }}
+            {{ $depth := len $parts }}
+            {{ $basename := index $parts (sub (len $parts) 1) }}
+            <li>
+              <div
+                class="flex items-center gap-2 py-1 pr-3 font-mono text-gray-500 dark:text-gray-400"
+                style="padding-left: {{ add 12 (mul $depth 16) }}px"
+              >
+                <span class="icon-svg icon-sm shrink-0 text-gray-400"
+                  >{{ partialCached "icon" "folder" "folder" }}</span
+                >
+                <span class="truncate">{{ $basename }}</span>
+              </div>
+            </li>
+            {{ $filesInFolder := index $folderFiles $folderPath | default slice }}
+            {{ range $entry := $filesInFolder }}
+              <li>
+                <button
+                  type="button"
+                  role="tab"
+                  class="flex w-full items-center gap-2 py-1 pr-3 text-left font-mono"
+                  :class="selected === {{ $entry.index }} ? 'bg-gray-200 text-blue-700 dark:bg-gray-800 dark:text-blue-400' : 'text-gray-700 hover:bg-gray-100 hover:text-blue-700 dark:text-gray-200 dark:hover:bg-gray-900 dark:hover:text-blue-400'"
+                  @click="selected = {{ $entry.index }}"
+                  title="{{ $entry.path }}"
+                  style="padding-left: {{ add 12 (mul (add $depth 1) 16) }}px"
+                >
+                  <span class="icon-svg icon-sm shrink-0 text-gray-400"
+                    >{{ partialCached "icon" "document-text" "document-text" }}</span
+                  >
+                  <span class="truncate">{{ $entry.name }}</span>
+                  {{ if eq $entry.status "modified" }}
+                    <span class="ml-auto shrink-0 text-xs font-bold text-amber-600 dark:text-amber-400" title="Modified">M</span>
+                  {{ else if eq $entry.status "new" }}
+                    <span class="ml-auto shrink-0 text-xs font-bold text-green-600 dark:text-green-400" title="Added">A</span>
+                  {{ end }}
+                </button>
+              </li>
+            {{ end }}
+          {{ end }}
+          {{ range $entry := $rootFiles }}
+            <li>
+              <button
+                type="button"
+                role="tab"
+                class="flex w-full items-center gap-2 py-1 pr-3 text-left font-mono"
+                :class="selected === {{ $entry.index }} ? 'bg-gray-200 text-blue-700 dark:bg-gray-800 dark:text-blue-400' : 'text-gray-700 hover:bg-gray-100 hover:text-blue-700 dark:text-gray-200 dark:hover:bg-gray-900 dark:hover:text-blue-400'"
+                @click="selected = {{ $entry.index }}"
+                title="{{ $entry.path }}"
+                style="padding-left: 28px"
+              >
+                <span class="icon-svg icon-sm shrink-0 text-gray-400"
+                  >{{ partialCached "icon" "document-text" "document-text" }}</span
+                >
+                <span class="truncate">{{ $entry.name }}</span>
+                {{ if eq $entry.status "modified" }}
+                  <span class="ml-auto shrink-0 text-xs font-bold text-amber-600 dark:text-amber-400" title="Modified">M</span>
+                {{ else if eq $entry.status "new" }}
+                  <span class="ml-auto shrink-0 text-xs font-bold text-green-600 dark:text-green-400" title="Added">A</span>
+                {{ end }}
+              </button>
+            </li>
+          {{ end }}
+        </ul>
+      </aside>
+
+      {{/* Content pane. The outer `main` is the positioning context for the
+           copy button and stays fixed; the inner div is the scroll container
+           so content scrolls independently of the button. The chroma
+           `.highlight` wrapper's own overflow-x is disabled so the scroll
+           container owns both axes and scrollbars sit at the window edges. */}}
+      <main class="group relative min-w-0 flex-1 overflow-hidden">
+        {{/* Per-file copy button. Matches the codeblock copy style: icon-only,
+             hover-revealed, swaps to a check icon for two seconds on copy. */}}
+        <button
+          type="button"
+          class="absolute top-2 right-5 z-10 text-gray-300 dark:text-gray-500"
+          title="Copy file contents"
+          @click="copyFile(selected)"
+        >
+          <span :class="{ 'group-hover:block' : fileCopied !== selected }" class="icon-svg hidden"
+            >{{ partialCached "icon" "document-duplicate" "document-duplicate" }}</span
+          >
+          <span :class="{ 'group-hover:block' : fileCopied === selected }" class="icon-svg hidden"
+            >{{ partialCached "icon" "check-circle" "check-circle" }}</span
+          >
+        </button>
+
+        <div class="h-full overflow-auto [&_.highlight]:overflow-visible">
+          {{ range $i, $f := $files }}
+            {{ $opts := "" }}
+            {{ with $f.hl_lines }}
+              {{ $opts = printf "hl_lines=%s" . }}
+            {{ end }}
+            <div
+              role="tabpanel"
+              x-show="selected === {{ $i }}"
+              class="syntax-light dark:syntax-dark"
+            >
+              {{ (transform.Highlight $f.content $f.lang $opts) | safeHTML }}
+            </div>
+          {{ end }}
+        </div>
+      </main>
+    </div>
+
+    {{/* Scaffold script view, with Bash | PowerShell secondary toggle (fixed height with internal scroll) */}}
+    <div class="flex h-[28rem] flex-col" x-show="view === 'scaffold'" x-cloak>
+      {{/* Yellow callout: warning + shell selector */}}
+      <div class="flex flex-wrap items-center gap-3 border-b border-yellow-200 bg-yellow-50 px-3 py-2 text-xs text-yellow-900 dark:border-yellow-900/40 dark:bg-yellow-950/40 dark:text-yellow-200">
+        <div class="flex items-center gap-2">
+          <span class="icon-svg icon-sm shrink-0"
+            >{{ partialCached "icon" "exclamation-triangle" "exclamation-triangle" }}</span
+          >
+          <span>Overwrites existing files with the same names. Run from the parent of your project directory.</span>
+        </div>
+        <div
+          class="ml-auto flex gap-0.5 rounded border border-yellow-300 bg-white p-0.5 dark:border-yellow-900/60 dark:bg-gray-900"
+          role="tablist"
+        >
+          <button
+            type="button"
+            role="tab"
+            class="rounded px-2 py-0.5 font-medium"
+            :class="shell === 'bash' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'"
+            @click="shell = 'bash'; scaffoldCopied = false"
+          >
+            Bash
+          </button>
+          <button
+            type="button"
+            role="tab"
+            class="rounded px-2 py-0.5 font-medium"
+            :class="shell === 'powershell' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'"
+            @click="shell = 'powershell'; scaffoldCopied = false"
+          >
+            PowerShell
+          </button>
+        </div>
+      </div>
+      {{/* Code area. Outer div is the positioning context for the copy
+           button and stays fixed; inner div is the scroll container. */}}
+      <div class="group relative flex-1 overflow-hidden">
+        <button
+          type="button"
+          class="absolute top-2 right-5 z-10 text-gray-300 dark:text-gray-500"
+          title="Copy scaffold script"
+          @click="copyScaffold()"
+        >
+          <span :class="{ 'group-hover:block' : !scaffoldCopied }" class="icon-svg hidden"
+            >{{ partialCached "icon" "document-duplicate" "document-duplicate" }}</span
+          >
+          <span :class="{ 'group-hover:block' : scaffoldCopied }" class="icon-svg hidden"
+            >{{ partialCached "icon" "check-circle" "check-circle" }}</span
+          >
+        </button>
+        <div class="h-full overflow-auto [&_.highlight]:overflow-visible">
+          <div x-show="shell === 'bash'" class="syntax-light dark:syntax-dark">
+            {{ (transform.Highlight $bashScript "bash" "") | safeHTML }}
+          </div>
+          <div x-show="shell === 'powershell'" x-cloak class="syntax-light dark:syntax-dark">
+            {{ (transform.Highlight $psScript "powershell" "") | safeHTML }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
