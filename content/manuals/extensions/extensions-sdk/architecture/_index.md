@@ -97,7 +97,7 @@ Shipping those executables with the extension ensure that the CLI tool is always
 the users' machine.
 
 When Docker Desktop installs the extension, it copies the executables on the host as defined by the `host` section in
-the `metadata.json`. See the [host metadata section](metadata.md#host-section) for more details.
+the `metadata.json`. See the [`host` metadata section](metadata.md#host-section) for more details.
 
 ![Executable and frontend communication](images/extensions-arch-3.png?w=250h=300)
 
