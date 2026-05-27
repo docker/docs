@@ -127,9 +127,10 @@ Review them after any agent session before performing those actions:
 - **IDE configuration** (`.vscode/tasks.json`, `.idea/`) can run tasks
   when you open the project.
 
-Treat sandbox-modified workspace files the same way you would treat a pull
-request from an untrusted contributor: review before you trust them on
-your host.
+> [!WARNING]
+> Treat sandbox-modified workspace files the same way you would treat a pull
+> request from an untrusted contributor: review before you trust them on
+> your host.
 
 ### Clone mode
 
