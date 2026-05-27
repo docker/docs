@@ -25,7 +25,7 @@ grid_subscriptions:
     icon: arrow-up-circle
   - title: Manage seats
     description: Learn how to add or remove seats from your subscription.
-    link: /subscription/manage-seats/
+    link: /admin/organization/manage/manage-seats/
     icon: user-plus
   - title: Licenses
     description: Purchase and assign product licenses for Docker Offload and AI governance.

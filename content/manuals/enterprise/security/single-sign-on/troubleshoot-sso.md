@@ -162,7 +162,7 @@ This error occurs when the organization has no available seats for the user when
 
 **Add more seats to the organization**
 
-Purchase additional Docker Business subscription seats. For details, see [Manage subscription seats](/manuals/subscription/manage-seats.md).
+Purchase additional Docker Business subscription seats. For details, see [Manage subscription seats](/manuals/admin/organization/manage/manage-seats.md).
 
 **Remove users or pending invitations**
 

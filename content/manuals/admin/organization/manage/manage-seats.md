@@ -1,6 +1,6 @@
 ---
 title: Manage subscription seats
-linkTitle: Manage seats
+linkTitle: Seats
 description: Add or remove seats for Docker Team and Business subscriptions
 keywords: manage seats, add seats, remove seats, subscription billing, team members
 aliases:
@@ -10,6 +10,7 @@ aliases:
   - /subscription/remove-seats/
   - /subscription/core-subscription/add-seats/
   - /subscription/core-subscription/remove-seats/
+  - /subscription/manage-seats/
 weight: 80
 ---
 
@@ -31,7 +32,7 @@ To add seats:
    - You can't use pay by invoice for purchasing additional seats.
    - You must use a card or US bank account.
 
-You can add more members to your organization. For more information, see [Manage organization members](../admin/organization/manage/members.md).
+You can add more members to your organization. For more information, see [Manage organization members](./members.md).
 
 ## Volume pricing
 
