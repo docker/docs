@@ -58,13 +58,13 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a bug where CPU and RAM resource totals could get stuck showing 0 in the Docker Desktop Dashboard after stopping or starting Docker Offload.
 - Fixed double separator in the tray menu when running in Windows container mode.
 - Fixed a flicker in Gordon where the final answer text would briefly appear inside the 'Working' group before jumping to the response bubble.
--  Fixed a daemon panic that could occur during concurrent sing-out and token refresh operations.
+-  Fixed a daemon panic that could occur during concurrent sign-out and token refresh operations.
 - Fixed a bug where the **Volumes** view showed incorrect mount targets for containers with multiple volumes.
 - Fixed garbled taskkill error messages in logs on non-English Windows systems (e.g. Chinese Windows using GBK encoding).
 - `docker pass` now has a `--force` flag on the `set` command. 
 - `docker --help` now shows `docker pass`.
 - Fixed stale API cache responses (synthetic 404s) for containers, images, networks, volumes, and plugins after restarting an idle-stopped engine via external API calls.
-- Fixed a bug where the **delete** button on the **Builds** view might not be visible immediately after selecting a build Fixes [docker/desktop-feedback#329](https://github.com/docker/desktop-feedback/issues/329) and fixes [docker/desktop-feedback#330](https://github.com/docker/desktop-feedback/issues/330).
+- Fixed a bug where the **delete** button on the **Builds** view might not be visible immediately after selecting a build. Fixes [docker/desktop-feedback#329](https://github.com/docker/desktop-feedback/issues/329) and fixes [docker/desktop-feedback#330](https://github.com/docker/desktop-feedback/issues/330).
 - Fixed time-namespaces being unavailable when Enhanced Container Isolation (ECI) is enabled.
 
 #### For Windows
@@ -77,7 +77,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Deprecation
 
-The `docker sbom` command is deprecated and will be removed in a future release. Use the [docker scout sbom command](https://docs.docker.com/reference/cli/docker/scout/sbom/) instead.
+The `docker sbom` command is deprecated and will be removed in a future release. Use the [`docker scout sbom command`](/reference/cli/docker/scout/sbom/) instead.
 
 ## 4.75.0
 
