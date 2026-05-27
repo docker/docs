@@ -6,55 +6,40 @@ keywords: licenses, organization, members, Docker Offload, AI governance, licens
 weight: 30
 ---
 
-You can manage licenses on the Members page from Docker Home. The Members page gives admins a bird’s eye view of pending invites, roles, and membership. You can use this page to manually or automatically assign licenses, or revoke licenses on a per-member basis.
+Licenses let you selectively choose which of your organization members have access to supported Docker products. Admin owners can oversee who on their team has active licenses, or configure licenses to assign automatically when members access supported Docker products. 
 
 ## Prerequisites
 
-You can manage licenses for Docker Offload or AI Governance. Each product has its own requirements to get started:
+- You can purchase licenses for AI Governance or Docker Offload by [contacting sales](https://www.docker.com/pricing/contact-sales/). 
+- To learn more about licenses, see [scale your subscription](/manuals/subscription/scale.md).
 
-- To purchase Docker Offload licenses, you must have a Docker Team or Docker Business subscription.
-- AI Governance licenses are currently available by contacting sales.
+## Manage licenses
 
-You can purchase licenses for both products by [contacting sales](https://www.docker.com/pricing/contact-sales/).
+The **Members** page lets you track the number of available licenses for your organization and who currently holds a license. You can also assign or revoke licenses from this page. 
 
-## License Management
+To manage licenses for your organization: 
 
-You manage licenses from the [Members page in the Admin Console](/manuals/admin/organization/manage/members.md). After purchasing a license-based product, each product appears on the Members page with information about the number of total licenses and licenses used by members.
+1. Sign in to [Docker Home](https://app.docker.com), then choose your organization.
+1. Select **Members** from the left navigation.
+1. Select the action menu at the end of the row to assign or revoke an active license.
+1. Optional. To manage automatic license assignment, enable or disable on a per-product basis with the **Automatically assign licenses** toggle. 
 
-- Inviting a member may consume a seat, but doesn’t auto-assign product licenses by default.
-- Only admin owners can view details about organization licenses.
-
-## Assign and revoke licenses
-
-1. Sign in to [Docker Home](https://app.docker.com), then select your organization.
-2. Go to **Members** to view all your organization members.
-3. Assign or revoke licenses to members.
-
-- You can search individual members from the members table or filtering for their username, email, or full name.
-- You can bulk invite members by selecting multiple members.
+You must assign licenses manually, or configure automatic license assignment to consume a license. Inviting a new member to your organization may consume a seat for your Docker Team or Docker Business subscription, but won't auto-assign product licenses by default. Conversely, purchasing a set of licenses doesn't automatically assign licenses to existing members.
 
 ## Automated license assignment
 
-Automatic assignment gives members a product license from your pool the first time they use a supported product, instead of assigning licenses manually on **Members**.
+Automated license assignment gives members a product license when they use a supported product for the first time.
 
-### Prerequisites
+- For AI Governance and Docker Offload licenses, invoking `sbx` or signing into Docker Desktop (respectively) triggers an event that provisions licenses on a first come, first serve basis.
+- Licenses are assigned until exhausted. At that point, no more licenses will be assigned or added to your available license pool. 
+- Members may still use Docker Sandbox or Docker Desktop, but won't be held to the policies of those product licenses. 
 
-Before the automatic assignment toggle can assign licenses, members must already be in your organization through **SSO and user provisioning** (Just-in-Time, SCIM, or your configured provisioning flow). Automatic assignment does not invite users or create accounts—it only assigns licenses to existing members.
+Automated license assignment requires [setting up SSO](/manuals/enterprise/security/single-sign-on/connect.md), then [provisioning with SCIM or JIT](/manuals/enterprise/security/provisioning/_index.md). 
 
-- **AI Governance** — SSO and provisioning capabilities are included when you purchase AI Governance. Set up [SSO](/manuals/enterprise/security/single-sign-on/connect.md) and [provisioning](/manuals/enterprise/security/provisioning/_index.md) before relying on automatic assignment for `sbx`.
-- **Docker Core** — On Team and Business subscriptions, SSO and provisioning are already part of your subscription. Complete the same setup before automatic Docker Core assignment applies on Desktop or CLI sign-in.
-
-Automatic assignment applies to **AI Governance** and **Docker Core** only, not Docker Offload.
-
-### Configure
-
-On **Members**, each license pool tile has an automatic assignment toggle (**on** by default). When an org member without a license uses:
-
-- **AI Governance** — Docker Sandboxes (`sbx`) (policy check)
-- **Docker Core** — Docker Desktop or the CLI (entitlement check)
-
-Docker assigns a seat from the pool if one is available. If the pool is exhausted, no license is issued and org owners see a notice on **Members**.
-
-Turning the toggle off stops new automatic assignments; it does not revoke existing licenses.
+> [!NOTE]
+> AI Governance licenses include SSO and provisioning features regardless of your Docker subscription status.  
 
 ## What’s next
+
+- AI Governance
+- Docker Offload

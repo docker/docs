@@ -34,6 +34,7 @@ AI Governance licenses let admins create and apply organization-wide AI Governan
 - AI Governance licenses are separate from Docker Team or Business. 
 - You can purchase AI Governance licenses without an existing subscription.
 - When you purchase AI Governance licenses, you may assign them to organization members without a Docker subscription seat. 
+- AI Governance licenses currently applies to Docker Sandbox usage.
 
 When a member who holds an AI governance license uses AI products like Docker Sandbox, the organization policy overrides the member’s local policy rules. Members without AI Governance licenses can still use AI products. 
 
@@ -43,7 +44,6 @@ Docker Offload lets developers offload building and running containers to the cl
 
 - You must have a Docker Team or Docker Business subscription.
 - You can only assign Docker Offload licenses to members with Docker Team or Docker Business.
-
 
 ## Add minutes
 
