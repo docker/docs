@@ -95,5 +95,9 @@
     {{ with .Store.Get "youtube" }}
       {{ partialCached "youtube-script.html" "-" "-" }}
     {{ end }}
+    {{/* Load mermaid if the page contains a mermaid code block */}}
+    {{ with .Store.Get "mermaid" }}
+      {{ partialCached "mermaid-script.html" "-" "-" }}
+    {{ end }}
   </body>
 </html>
