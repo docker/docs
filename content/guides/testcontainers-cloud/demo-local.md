@@ -1,6 +1,7 @@
 ---
 title: Setting up Testcontainers Cloud by Docker
 description: Set up Testcontainers Cloud by Docker in a local development environment.
+keywords: testcontainers cloud, local development, testcontainers desktop, integration testing, setup
 weight: 20
 ---
 

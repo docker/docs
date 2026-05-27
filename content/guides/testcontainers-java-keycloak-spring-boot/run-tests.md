@@ -2,6 +2,7 @@
 title: Run tests and next steps
 linkTitle: Run tests
 description: Run your Testcontainers-based Spring Boot Keycloak integration tests and explore next steps.
+keywords: testcontainers, java, spring boot, keycloak, oauth2, integration testing
 weight: 30
 ---
 

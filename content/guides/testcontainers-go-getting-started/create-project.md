@@ -2,6 +2,7 @@
 title: Create the Go project
 linkTitle: Create the project
 description: Set up a Go project with a PostgreSQL-backed repository.
+keywords: testcontainers, go, golang, postgresql, getting started, project setup
 weight: 10
 ---
 

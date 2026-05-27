@@ -2,6 +2,7 @@
 title: Copy files into containers
 linkTitle: Copy files
 description: Initialize containers by copying files into specific locations.
+keywords: testcontainers, java, service configuration, copy files, container initialization
 weight: 10
 ---
 

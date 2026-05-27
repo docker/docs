@@ -2,6 +2,7 @@
 title: Create the project and business logic
 linkTitle: Create the project
 description: Set up a Java project with a PostgreSQL-backed customer service for lifecycle testing.
+keywords: testcontainers, java, lifecycle, postgresql, junit, project setup
 weight: 10
 ---
 

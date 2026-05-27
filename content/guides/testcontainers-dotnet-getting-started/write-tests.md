@@ -2,6 +2,7 @@
 title: Write tests with Testcontainers
 linkTitle: Write tests
 description: Write integration tests using Testcontainers for .NET and xUnit with a real PostgreSQL database.
+keywords: testcontainers, dotnet, postgresql, xunit, integration testing
 weight: 20
 ---
 

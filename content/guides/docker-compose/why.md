@@ -1,6 +1,7 @@
 ---
 title: Why Docker Compose?
 description: Learn how Docker Compose can help you simplify app development.
+keywords: docker compose, multi-container, yaml, services, orchestration, application
 weight: 10
 ---
 

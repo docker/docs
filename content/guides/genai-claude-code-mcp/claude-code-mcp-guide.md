@@ -30,13 +30,13 @@ In this guide, you’ll learn how to:
 ## Use Claude Code and Docker MCP Toolkit to generate a Docker Compose file from natural language
 
 
-- **Setup**: Enable MCP Toolkit → Add Docker Hub MCP server → Connect Claude Code  
-- **Use Claude**: Describe your stack in plain English  
-- **Automate**: Claude queries Docker Hub via MCP and builds a complete `docker-compose.yaml`  
-- **Deploy**: Run `docker compose up` → Node.js + PostgreSQL live on `localhost:3000`  
-- **Benefit**: Zero YAML authoring. Zero image searching. Describe once → Claude builds it.
+- Setup: Enable MCP Toolkit → Add Docker Hub MCP server → Connect Claude Code  
+- Use Claude: Describe your stack in plain English  
+- Automate: Claude queries Docker Hub via MCP and builds a complete `docker-compose.yaml`  
+- Deploy: Run `docker compose up` → Node.js + PostgreSQL live on `localhost:3000`  
+- Benefit: Zero YAML authoring. Zero image searching. Describe once → Claude builds it.
 
-**Estimated time**: ~15 minutes
+Estimated time: ~15 minutes
 
 ---
 
@@ -46,7 +46,7 @@ The goal is simple: use Claude Code together with the Docker MCP Toolkit to sear
 
 The Model Context Protocol (MCP) bridges Claude Code and Docker Desktop, giving Claude real-time access to Docker's tools. Instead of context-switching between Docker, terminal commands, and YAML editors, you describe your requirements once and Claude handles the infrastructure details.
 
-**Why this matters:** This pattern scales to complex multi-service setups, database migrations, networking, security policies — all through conversational prompts.
+Why this matters: This pattern scales to complex multi-service setups, database migrations, networking, security policies — all through conversational prompts.
 
 ---
 
@@ -63,7 +63,7 @@ Make sure you have:
 
 ## 3. Install the Docker Hub MCP server
 
-1. Open **Docker Desktop**  
+1. Open Docker Desktop  
 1. Select **MCP Toolkit**  
 1. Go to the **Catalog** tab  
 1. Search for **Docker Hub**  
@@ -90,7 +90,7 @@ You can connect from Docker Desktop or using the CLI.
 
 1. Open **MCP Toolkit**  
 1. Go to the **Clients** tab  
-1. Locate **Claude Code**  
+1. Locate Claude Code  
 1. Select **Connect**
 
 ![Docker Connection](./Images/docker-connect-claude.avif)
@@ -292,6 +292,6 @@ The future of development is not about switching between tools. It is about tool
 
 ## Learn more
 
-- **[Explore the MCP Catalog](https://hub.docker.com/mcp):** Discover containerized, security-hardened MCP servers  
-- **[Get started with MCP Toolkit in Docker Desktop](https://hub.docker.com/open-desktop?url=https://open.docker.com/dashboard/mcp):** Requires version 4.48 or newer to launch automatically  
-- **[Read the MCP Horror Stories series](https://www.docker.com/blog/mcp-horror-stories-the-supply-chain-attack/):** Learn about common MCP security pitfalls and how to avoid them  
+- [Explore the MCP Catalog](https://hub.docker.com/mcp): Discover containerized, security-hardened MCP servers  
+- [Get started with MCP Toolkit in Docker Desktop](https://hub.docker.com/open-desktop?url=https://open.docker.com/dashboard/mcp): Requires version 4.48 or newer to launch automatically  
+- [Read the MCP Horror Stories series](https://www.docker.com/blog/mcp-horror-stories-the-supply-chain-attack/): Learn about common MCP security pitfalls and how to avoid them  

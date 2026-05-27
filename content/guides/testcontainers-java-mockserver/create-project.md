@@ -2,6 +2,7 @@
 title: Create the Spring Boot project
 linkTitle: Create the project
 description: Set up a Spring Boot project with an external REST API integration using declarative HTTP clients.
+keywords: testcontainers, java, spring boot, mockserver, rest api, project setup
 weight: 10
 ---
 

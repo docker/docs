@@ -1,6 +1,7 @@
 ---
 title: Common challenges and questions
 description: Explore common challenges and questions related to Docker Compose.
+keywords: docker compose, faq, troubleshooting, environments, multi-container
 weight: 30
 ---
 

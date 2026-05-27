@@ -3,6 +3,7 @@ title: Building Compose projects with Bake
 description: Learn how to build Docker Compose projects with Docker Buildx Bake
 summary: |
   This guide demonstrates how you can use Bake to build production-grade images for Docker Compose projects.
+keywords: docker compose, bake, buildx, multi-service, production builds, build configuration
 languages: []
 tags: [devops]
 params:

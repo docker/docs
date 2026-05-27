@@ -1,6 +1,6 @@
 ---
 title: Create a multi-stage build for your C++ application
-linkTitle: Containerize your app using a multi-stage build
+linkTitle: Multi-stage build
 weight: 5
 keywords: C++, containerize, multi-stage
 description: Learn how to create a multi-stage build for a C++ application.

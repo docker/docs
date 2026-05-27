@@ -3,6 +3,7 @@ title: Build a code quality check workflow
 linkTitle: Build workflow
 summary: Learn to use GitHub and SonarQube MCP servers in E2B sandboxes through progressive examples.
 description: Create E2B sandboxes, discover MCP tools, test individual operations, and build complete quality-gated PR workflows.
+keywords: sonarqube, e2b, mcp, github, code quality, pull requests, workflow
 weight: 10
 ---
 

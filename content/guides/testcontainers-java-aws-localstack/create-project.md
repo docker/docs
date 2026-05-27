@@ -2,6 +2,7 @@
 title: Create the Spring Boot project
 linkTitle: Create the project
 description: Set up a Spring Boot project with Spring Cloud AWS, S3, and SQS.
+keywords: testcontainers, java, spring boot, aws, localstack, s3, sqs, project setup
 weight: 10
 ---
 

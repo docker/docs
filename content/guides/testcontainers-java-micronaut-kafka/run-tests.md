@@ -2,6 +2,7 @@
 title: Run tests and next steps
 linkTitle: Run tests
 description: Run your Testcontainers-based Micronaut Kafka integration tests and explore next steps.
+keywords: testcontainers, java, micronaut, kafka, mysql, integration testing
 weight: 30
 ---
 

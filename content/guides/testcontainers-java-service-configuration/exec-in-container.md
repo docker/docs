@@ -2,6 +2,7 @@
 title: Execute commands inside containers
 linkTitle: Execute commands
 description: Run commands inside running containers to initialize services for testing.
+keywords: testcontainers, java, service configuration, exec, container initialization
 weight: 20
 ---
 

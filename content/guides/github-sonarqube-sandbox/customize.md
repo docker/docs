@@ -3,6 +3,7 @@ title: Customize a code quality check workflow
 linkTitle: Customize workflow
 summary: Adapt your GitHub and SonarQube workflow to focus on specific quality issues, integrate with CI/CD, and set custom thresholds.
 description: Learn how to customize prompts for specific quality issues, filter by file patterns, set quality thresholds, and integrate your workflow with GitHub Actions for automated code quality checks.
+keywords: sonarqube, e2b, mcp, github actions, code quality, customization, ci/cd
 weight: 20
 ---
 

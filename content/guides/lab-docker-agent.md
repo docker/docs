@@ -1,6 +1,6 @@
 ---
 title: "Lab: Getting Started with Docker Agent"
-linkTitle: "Lab: Getting Started with Docker Agent"
+linkTitle: "Lab: Docker Agent"
 description: |
   Build intelligent multi-agent teams with Docker Agent and Docker in this hands-on
   interactive lab.

@@ -2,6 +2,7 @@
 title: Write tests with Testcontainers
 linkTitle: Write tests
 description: Write your first integration test using testcontainers-go and PostgreSQL.
+keywords: testcontainers, go, golang, postgresql, integration testing
 weight: 20
 ---
 

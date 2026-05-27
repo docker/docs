@@ -2,6 +2,7 @@
 title: Run tests and next steps
 linkTitle: Run tests
 description: Run your Testcontainers-based Quarkus integration tests and explore next steps.
+keywords: testcontainers, java, quarkus, postgresql, integration testing
 weight: 30
 ---
 

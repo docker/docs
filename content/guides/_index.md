@@ -2,6 +2,7 @@
 title: Docker guides
 linkTitle: Guides
 description: Explore the Docker guides
+keywords: docker, guides, tutorials, learning paths, getting started
 params:
   icon: book-open
 layout: landing

@@ -2,6 +2,7 @@
 title: Reuse containers with test suites
 linkTitle: Test suites
 description: Share a single Postgres container across multiple tests using testify suites.
+keywords: testcontainers, go, golang, testify, test suites, container reuse
 weight: 30
 ---
 

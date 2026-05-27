@@ -2,6 +2,7 @@
 title: Write tests with Testcontainers
 linkTitle: Write tests
 description: Test the Quarkus REST API using Dev Services with Testcontainers, and test with services not supported by Dev Services.
+keywords: testcontainers, java, quarkus, dev services, rest api, integration testing
 weight: 20
 ---
 

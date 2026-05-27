@@ -2,6 +2,7 @@
 title: Create the Java project
 linkTitle: Create the project
 description: Set up a Java project with Maven and implement a PostgreSQL-backed customer service.
+keywords: testcontainers, java, maven, postgresql, getting started, project setup
 weight: 10
 ---
 

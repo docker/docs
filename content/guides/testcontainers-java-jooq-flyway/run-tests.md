@@ -2,6 +2,7 @@
 title: Run tests and next steps
 linkTitle: Run tests
 description: Run the jOOQ and Flyway integration tests and explore next steps.
+keywords: testcontainers, java, spring boot, jooq, flyway, integration testing
 weight: 30
 ---
 

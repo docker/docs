@@ -27,7 +27,7 @@ The official [Docker image for Dex](https://hub.docker.com/r/dexidp/dex/) provid
 
 [Docker Compose](/compose/): Recommended for managing multi-container Docker applications.
 
-### Setting Up Dex with Docker
+### Setting up Dex with Docker
 
 Begin by creating a directory for your Dex project:
 

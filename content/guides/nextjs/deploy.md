@@ -116,7 +116,7 @@ If everything is configured properly, you'll see confirmation that both the Depl
    
 This output means that both the Deployment and the Service were successfully created and are now running inside your local cluster.
 
-### Step 2. Check the Deployment status
+### Step 2. Check the deployment status
 
 Run the following command to check the status of your deployment:
    
@@ -133,7 +133,7 @@ You should see an output similar to:
 
 This confirms that your pod is up and running with one replica available.
 
-### Step 3. Verify the Service exposure
+### Step 3. Verify the service exposure
 
 Check if the NodePort service is exposing your app to your local machine:
 

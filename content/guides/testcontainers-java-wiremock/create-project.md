@@ -2,6 +2,7 @@
 title: Create the Spring Boot project
 linkTitle: Create the project
 description: Set up a Spring Boot project with an external REST API integration using WireMock and Testcontainers.
+keywords: testcontainers, java, spring boot, wiremock, rest api, project setup
 weight: 10
 ---
 

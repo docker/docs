@@ -1,6 +1,7 @@
 ---
 title: Why Docker Scout?
 description: Learn how Docker Scout can help you secure your supply chain.
+keywords: docker scout, supply chain security, vulnerability detection, sbom, container security
 weight: 10
 ---
 

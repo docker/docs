@@ -2,6 +2,7 @@
 title: Create the Micronaut project
 linkTitle: Create the project
 description: Set up a Micronaut project with Kafka, Micronaut Data JPA, and MySQL.
+keywords: testcontainers, java, micronaut, kafka, mysql, project setup
 weight: 10
 ---
 

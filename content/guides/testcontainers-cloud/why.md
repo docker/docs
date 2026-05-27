@@ -1,6 +1,7 @@
 ---
 title: Why Testcontainers Cloud?
 description: Learn how Testcontainers Cloud by Docker can help you optimize integration testing.
+keywords: testcontainers cloud, integration testing, scalable testing, ci/cd, cloud testing
 weight: 10
 ---
 

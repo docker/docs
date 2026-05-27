@@ -2,6 +2,7 @@
 title: Write tests with WireMock and Testcontainers
 linkTitle: Write tests
 description: Test external REST API integrations using WireMock with both the JUnit 5 extension and the Testcontainers WireMock module.
+keywords: testcontainers, java, spring boot, wiremock, junit, rest api, integration testing
 weight: 20
 ---
 

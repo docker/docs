@@ -2,6 +2,7 @@
 title: Write tests with Testcontainers
 linkTitle: Write tests
 description: Write integration tests using testcontainers-python and pytest with a real PostgreSQL database.
+keywords: testcontainers, python, postgresql, pytest, integration testing
 weight: 20
 ---
 

@@ -2,6 +2,7 @@
 title: Write tests with WireMock and Testcontainers
 linkTitle: Write tests
 description: Test external REST API integrations using WireMock and the Testcontainers WireMock module.
+keywords: testcontainers, java, micronaut, wiremock, rest api, integration testing
 weight: 20
 ---
 

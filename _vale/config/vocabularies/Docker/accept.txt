@@ -42,6 +42,7 @@ classpath
 cli
 CLI
 CloudFront
+composable
 Codefresh
 Codespaces
 config
@@ -53,6 +54,7 @@ Crowdstrike
 datacenter
 datasource
 Datadog
+DBeaver
 Ddosify
 Debootstrap
 denylist

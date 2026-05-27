@@ -2,6 +2,7 @@
 title: Create the Micronaut project
 linkTitle: Create the project
 description: Set up a Micronaut project with an external REST API integration using declarative HTTP clients.
+keywords: testcontainers, java, micronaut, wiremock, rest api, project setup
 weight: 10
 ---
 

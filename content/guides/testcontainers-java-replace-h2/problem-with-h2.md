@@ -2,6 +2,7 @@
 title: The problem with H2 for testing
 linkTitle: The H2 problem
 description: Understand why using H2 in-memory databases for testing gives false confidence.
+keywords: testcontainers, java, h2, in-memory database, integration testing
 weight: 10
 ---
 

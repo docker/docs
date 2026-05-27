@@ -2,6 +2,7 @@
 title: Create the Spring Boot project
 linkTitle: Create the project
 description: Set up a Spring Boot project with jOOQ, Flyway, PostgreSQL, and Testcontainers code generation.
+keywords: testcontainers, java, spring boot, jooq, flyway, postgresql, project setup
 weight: 10
 ---
 

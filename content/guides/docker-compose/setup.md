@@ -1,6 +1,7 @@
 ---
 title: "Demo: set up and use Docker Compose"
 description: Learn how to get started with Docker Compose.
+keywords: docker compose, getting started, multi-container, demo, orchestration
 weight: 20
 ---
 

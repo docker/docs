@@ -3,6 +3,7 @@ title: Introduction to GitHub Actions with Docker
 linkTitle: GitHub Actions and Docker
 summary: |
   Learn how to automate image build and push with GitHub Actions.
+keywords: github actions, ci/cd, docker hub, build and push, automation, workflows
 params:
   tags: [devops]
   time: 10 minutes

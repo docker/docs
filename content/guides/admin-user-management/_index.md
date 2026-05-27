@@ -2,6 +2,7 @@
 title: Mastering user and access management
 summary: Simplify user access while ensuring security and efficiency in Docker.
 description: A guide for managing roles, provisioning users, and optimizing Docker access with tools like SSO and activity logs.
+keywords: admin, user management, roles, permissions, sso, provisioning, access control
 tags: [admin]
 params:
   featured: false

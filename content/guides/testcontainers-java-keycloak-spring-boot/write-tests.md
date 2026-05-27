@@ -2,6 +2,7 @@
 title: Write tests with Testcontainers
 linkTitle: Write tests
 description: Test the secured Spring Boot API endpoints using Testcontainers Keycloak and PostgreSQL modules.
+keywords: testcontainers, java, spring boot, keycloak, oauth2, postgresql, integration testing
 weight: 20
 ---
 
