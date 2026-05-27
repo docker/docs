@@ -26,6 +26,59 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.76.0
+
+{{< release-date date="2026-06-01" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.76.0" build_path="//" >}}
+
+### New
+
+- Docker Model Runner now supports registry mirrors.
+
+### Updates
+
+- [Docker Desktop Build v0.35.0](https://github.com/docker/desktop-build/releases/tag/v0.35.0)
+- [Docker Agent v1.62.0](https://github.com/docker/docker-agent/releases/tag/v1.62.0)
+- [NVIDIA Container Toolkit v1.19.1](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.19.1)
+- [Docker Compose v5.1.4](https://github.com/docker/compose/releases/tag/v5.1.4)
+- [Docker Offload v0.5.93](https://github.com/docker/cloud/releases/tag/v0.5.93)
+- [Docker Scout CLI v1.21.0](https://github.com/docker/scout-cli/releases/tag/v1.21.0)
+- `docker pass` v0.0.29
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a race condition in Docker Engine when Resource Saver was active.
+- Fixed a bug where anonymous Docker volumes were leaked each time a kind cluster was deleted, causing orphaned volumes to accumulate.
+- Fixed column resizing in the **All Logs** grid so that **Timestamp** and **Object** columns no longer expand unexpectedly, and column widths are now preserved across navigation sessions.
+- Fixed an issue where Docker Desktop failed to start when a VM disk resize operation encountered an error, even if the underlying filesystem was healthy.
+- Fixed a hang on application quit caused by backend services that ignored context cancellation, by adding a 5-second shutdown timeout.
+- Fixed a bug where CPU and RAM resource totals could get stuck showing 0 in the Docker Desktop Dashboard after stopping or starting Docker Offload.
+- Fixed double separator in the tray menu when running in Windows container mode.
+- Fixed a flicker in Gordon where the final answer text would briefly appear inside the 'Working' group before jumping to the response bubble.
+-  Fixed a daemon panic that could occur during concurrent sing-out and token refresh operations.
+- Fixed a bug where the **Volumes** view showed incorrect mount targets for containers with multiple volumes.
+- Fixed garbled taskkill error messages in logs on non-English Windows systems (e.g. Chinese Windows using GBK encoding).
+- `docker pass` now has a `--force` flag on the `set` command. 
+- `docker --help` now shows `docker pass`.
+- Fixed stale API cache responses (synthetic 404s) for containers, images, networks, volumes, and plugins after restarting an idle-stopped engine via external API calls.
+- Fixed a bug where the **delete** button on the **Builds** view might not be visible immediately after selecting a build Fixes [docker/desktop-feedback#329](https://github.com/docker/desktop-feedback/issues/329) and fixes [docker/desktop-feedback#330](https://github.com/docker/desktop-feedback/issues/330).
+- Fixed time-namespaces being unavailable when Enhanced Container Isolation (ECI) is enabled.
+
+#### For Windows
+
+- Fixed a regression where the `--quiet` installer flag did not suppress the install-type dialog during silent installation.
+- Fixed a bug on Windows where a stale PID file with a trailing newline prevented the lingering daemon from being killed, leaving Windows Containers mode unconfigurable.
+- Fixed an issue on Windows where triggering an update while another installer instance was already running showed a generic error instead of a specific message.
+- Fixed an issue on Windows where the installer and updater executables incorrectly triggered UAC elevation prompts due to Windows heuristic installer detection.
+- Fixed port-binding failures on Windows Hyper-V where `docker run -p 0:N` could allocate HNS-reserved ports, causing bind errors.
+
+### Deprecation
+
+The `docker sbom` command is deprecated and will be removed in a future release. Use the [docker scout sbom command](https://docs.docker.com/reference/cli/docker/scout/sbom/) instead.
+
 ## 4.75.0
 
 {{< release-date date="2026-05-25" >}}
