@@ -60,9 +60,9 @@ your host. When the agent runs `docker build` or `docker compose up`, those
 commands execute against that engine. The agent has no path to your host Docker
 daemon.
 
-Each sandbox VM runs its own Docker Engine. The agent runs as root inside
-the VM, alongside that engine — not as a container managed by it — and
-drives it to create containers, all within the VM:
+Each sandbox VM runs its own Docker Engine. The agent runs inside the VM,
+alongside that engine, and drives it to create containers, all within the
+VM:
 
 ```mermaid
 flowchart TB
@@ -70,21 +70,15 @@ flowchart TB
     subgraph hostd["Host Docker daemon"]
       hc["Your containers and images"]
     end
-    subgraph vm1["Sandbox 1 (microVM)"]
-      a1["Agent (runs as root)"]
-      subgraph e1["Sandbox Docker engine"]
-        c1["Containers created by agent"]
+    subgraph vm["Sandbox (microVM)"]
+      a["Agent"]
+      subgraph e["Sandbox Docker engine"]
+        c["Containers created by agent"]
       end
-      a1 -->|"docker build / compose up"| e1
-    end
-    subgraph vm2["Sandbox 2 (microVM)"]
-      a2["Agent (runs as root)"]
-      subgraph e2["Sandbox Docker engine"]
-        c2["Containers created by agent"]
-      end
-      a2 -->|"docker build / compose up"| e2
+      a -->|"docker build / compose up"| e
     end
   end
+  style host fill:#3b82f622,stroke:#3b82f6
 ```
 
 ## Workspace isolation
