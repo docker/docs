@@ -129,15 +129,23 @@ never works directly against your host repository. Even with full root
 inside the VM, it cannot modify your `.git` directory, your working tree,
 or any tracked file on your host.
 
-```plaintext
-Host repository                          Sandbox VM
-  .git/  (untouched)                       private clone  (RW, in VM)
-  working tree  (untouched)                  ↑ agent edits here
-                                             │
-  /run/sandbox/source (RO bind mount) ←──────┘
-  (read-only view of your repo)
-
-  remote sandbox-<name>  ──── git fetch ───► git-daemon (inside VM)
+```mermaid
+flowchart LR
+  subgraph host["Host repository (untouched)"]
+    direction TB
+    repo[".git/ + working tree"]
+    remote["remote sandbox-&lt;name&gt;"]
+  end
+  subgraph vm["Sandbox VM"]
+    direction TB
+    mount["/run/sandbox/source<br/>(read-only bind mount)"]
+    clone["private clone (RW)<br/>agent edits here"]
+    daemon["git-daemon"]
+  end
+  repo -->|"read-only bind mount"| mount
+  mount -->|"git clone"| clone
+  clone --> daemon
+  daemon -->|"git fetch"| remote
 ```
 
 How the boundary is enforced:
