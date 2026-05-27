@@ -20,241 +20,241 @@ In this section, you'll learn how to set up a development environment for your c
 - Adding a local database and persisting data
 - Configuring Compose to automatically update your running Compose services as you edit and save your code
 
-## Get the sample application
+## Update the application
 
-You'll need to clone a new repository to get a sample application that includes logic to connect to the database.
+You'll update your application to connect to a PostgreSQL database. Continue
+working in your `python-docker-example` directory.
 
-1. Change to a directory where you want to clone the repository and run the following command.
+Replace the contents of `app.py` with the following:
 
-   ```console
-   $ git clone https://github.com/estebanx64/python-docker-dev-example
-   ```
+```python {title="app.py"}
+from collections.abc import AsyncIterator, Sequence
+from contextlib import asynccontextmanager
 
-2. In the cloned repository's directory, create the necessary Docker assets.
+from fastapi import FastAPI
+from sqlmodel import Field, Session, SQLModel, create_engine, select
 
-   Create the following files in your project directory.
+from config import settings
 
-   Create a file named `Dockerfile` with the following contents.
 
-   ```dockerfile {collapse=true,title=Dockerfile}
-   # syntax=docker/dockerfile:1
+class Hero(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str = Field(index=True)
+    secret_name: str
+    age: int | None = Field(default=None, index=True)
 
-   # Comments are provided throughout this file to help you get started.
-   # If you need more help, visit the Dockerfile reference guide at
-   # https://docs.docker.com/go/dockerfile-reference/
 
-   ARG PYTHON_VERSION=3.12
-   FROM python:${PYTHON_VERSION}-slim
+engine = create_engine(str(settings.SQLALCHEMY_DATABASE_URI))
 
-   # Prevents Python from writing pyc files.
-   ENV PYTHONDONTWRITEBYTECODE=1
 
-   # Keeps Python from buffering stdout and stderr to avoid situations where
-   # the application crashes without emitting any logs due to buffering.
-   ENV PYTHONUNBUFFERED=1
+def create_db_and_tables() -> None:
+    SQLModel.metadata.create_all(engine)
 
-   WORKDIR /app
 
-   # Create a non-privileged user that the app will run under.
-   # See https://docs.docker.com/go/dockerfile-user-best-practices/
-   ARG UID=10001
-   RUN adduser \
-       --disabled-password \
-       --gecos "" \
-       --home "/nonexistent" \
-       --shell "/sbin/nologin" \
-       --no-create-home \
-       --uid "${UID}" \
-       appuser
+@asynccontextmanager
+async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
+    create_db_and_tables()
+    yield
 
-   # Download dependencies as a separate step to take advantage of Docker's    caching.
-   # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
-   # Leverage a bind mount to requirements.txt to avoid having to copy them into
-   # into this layer.
-   RUN --mount=type=cache,target=/root/.cache/pip \
-       --mount=type=bind,source=requirements.txt,target=requirements.txt \
-       python -m pip install -r requirements.txt
 
-   # Switch to the non-privileged user to run the application.
-   USER appuser
+app = FastAPI(lifespan=lifespan)
 
-   # Copy the source code into the container.
-   COPY . .
 
-   # Expose the port that the application listens on.
-   EXPOSE 8001
+@app.get("/")
+def hello() -> str:
+    return "Hello, Docker!"
 
-   # Run the application.
-   CMD ["python3", "-m", "uvicorn", "app:app", "--host=0.0.0.0", "--port=8001"]
-   ```
 
-   Create a file named `compose.yaml` with the following contents.
+@app.post("/heroes/")
+def create_hero(hero: Hero) -> Hero:
+    with Session(engine) as session:
+        session.add(hero)
+        session.commit()
+        session.refresh(hero)
+        return hero
 
-   ```yaml {collapse=true,title=compose.yaml}
-   # Comments are provided throughout this file to help you get started.
-   # If you need more help, visit the Docker Compose reference guide at
-   # https://docs.docker.com/go/compose-spec-reference/
 
-   # Here the instructions define your application as a service called "server".
-   # This service is built from the Dockerfile in the current directory.
-   # You can add other services your application may depend on here, such as a
-   # database or a cache. For examples, see the Awesome Compose repository:
-   # https://github.com/docker/awesome-compose
-   services:
-     server:
-       build:
-         context: .
-       ports:
-         - 8001:8001
-   # The commented out section below is an example of how to define a PostgreSQL
-   # database that your application can use. `depends_on` tells Docker Compose to
-   # start the database before your application. The `db-data` volume persists the
-   # database data between container restarts. The `db-password` secret is used
-   # to set the database password. You must create `db/password.txt` and add
-   # a password of your choosing to it before running `docker compose up`.
-   #     depends_on:
-   #       db:
-   #         condition: service_healthy
-   #   db:
-   #     image: postgres:18
-   #     restart: always
-   #     user: postgres
-   #     secrets:
-   #       - db-password
-   #     volumes:
-   #       - db-data:/var/lib/postgresql
-   #     environment:
-   #       - POSTGRES_DB=example
-   #       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-   #     expose:
-   #       - 5432
-   #     healthcheck:
-   #       test: [ "CMD", "pg_isready" ]
-   #       interval: 10s
-   #       timeout: 5s
-   #       retries: 5
-   # volumes:
-   #   db-data:
-   # secrets:
-   #   db-password:
-   #     file: db/password.txt
-   ```
+@app.get("/heroes/")
+def read_heroes() -> Sequence[Hero]:
+    with Session(engine) as session:
+        heroes = session.exec(select(Hero)).all()
+        return heroes
+```
 
-   Create a file named `.dockerignore` with the following contents.
+Create a new file named `config.py` with the following contents:
 
-   ```text {collapse=true,title=".dockerignore"}
-   # Include any files or directories that you don't want to be copied to your
-   # container here (e.g., local build artifacts, temporary files, etc.).
-   #
-   # For more help, visit the .dockerignore file reference guide at
-   # https://docs.docker.com/go/build-context-dockerignore/
+```python {title="config.py"}
+import os
+from typing import Any
 
-   **/.DS_Store
-   **/__pycache__
-   **/.venv
-   **/.classpath
-   **/.dockerignore
-   **/.env
-   **/.git
-   **/.gitignore
-   **/.project
-   **/.settings
-   **/.toolstarget
-   **/.vs
-   **/.vscode
-   **/*.*proj.user
-   **/*.dbmdl
-   **/*.jfm
-   **/bin
-   **/charts
-   **/docker-compose*
-   **/compose.y*ml
-   **/Dockerfile*
-   **/node_modules
-   **/npm-debug.log
-   **/obj
-   **/secrets.dev.yaml
-   **/values.dev.yaml
-   LICENSE
-   README.md
-   ```
+from pydantic import (
+    PostgresDsn,
+    computed_field,
+    field_validator,
+    model_validator,
+)
+from pydantic_core import MultiHostUrl
+from pydantic_settings import BaseSettings
 
-   Create a file named `.gitignore` with the following contents.
 
-   ```text {collapse=true,title=".gitignore"}
-   # Byte-compiled / optimized / DLL files
-   __pycache__/
-   *.py[cod]
-   *$py.class
+class Settings(BaseSettings):
+    POSTGRES_SERVER: str
+    POSTGRES_PORT: int = 5432
+    POSTGRES_USER: str
+    POSTGRES_PASSWORD: str | None = None
+    POSTGRES_PASSWORD_FILE: str | None = None
+    POSTGRES_DB: str
 
-   # C extensions
-   *.so
+    @model_validator(mode="before")
+    @classmethod
+    def check_postgres_password(cls, data: Any) -> Any:
+        """Validate that either POSTGRES_PASSWORD or POSTGRES_PASSWORD_FILE is set."""
+        if isinstance(data, dict):
+            password_file: str | None = data.get("POSTGRES_PASSWORD_FILE")  # type: ignore
+            password: str | None = data.get("POSTGRES_PASSWORD")  # type: ignore
+            if password_file is None and password is None:
+                raise ValueError(
+                    "At least one of POSTGRES_PASSWORD_FILE and POSTGRES_PASSWORD must be set."
+                )
+        return data  # type: ignore
 
-   # Distribution / packaging
-   .Python
-   build/
-   develop-eggs/
-   dist/
-   downloads/
-   eggs/
-   .eggs/
-   lib/
-   lib64/
-   parts/
-   sdist/
-   var/
-   wheels/
-   share/python-wheels/
-   *.egg-info/
-   .installed.cfg
-   *.egg
-   MANIFEST
+    @field_validator("POSTGRES_PASSWORD_FILE", mode="before")
+    @classmethod
+    def read_password_from_file(cls, v: str | None) -> str | None:
+        if v is not None:
+            file_path = v
+            if os.path.exists(file_path):
+                with open(file_path) as file:
+                    return file.read().strip()
+            raise ValueError(f"Password file {file_path} does not exist.")
+        return v
 
-   # Unit test / coverage reports
-   htmlcov/
-   .tox/
-   .nox/
-   .coverage
-   .coverage.*
-   .cache
-   nosetests.xml
-   coverage.xml
-   *.cover
-   *.py,cover
-   .hypothesis/
-   .pytest_cache/
-   cover/
+    @computed_field
+    @property
+    def SQLALCHEMY_DATABASE_URI(self) -> PostgresDsn:
+        url = MultiHostUrl.build(
+            scheme="postgresql+psycopg",
+            username=self.POSTGRES_USER,
+            password=self.POSTGRES_PASSWORD
+            if self.POSTGRES_PASSWORD
+            else self.POSTGRES_PASSWORD_FILE,
+            host=self.POSTGRES_SERVER,
+            port=self.POSTGRES_PORT,
+            path=self.POSTGRES_DB,
+        )
+        return PostgresDsn(url)
 
-   # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
-   __pypackages__/
 
-   # Environments
-   .env
-   .venv
-   env/
-   venv/
-   ENV/
-   env.bak/
-   venv.bak/
-   ```
+settings = Settings()  # type: ignore
+```
 
-## Add a local database and persist data
+Replace the contents of `requirements.txt` with the following:
 
-You can use containers to set up local services, like a database. In this section, you'll update the `compose.yaml` file to define a database service and a volume to persist data.
+```text {title="requirements.txt"}
+fastapi==0.115.12
+sqlmodel==0.0.24
+psycopg[binary]==3.2.9
+pydantic-settings==2.9.1
+uvicorn==0.34.3
+```
 
-In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor and update it for your unique application.
+## Update Docker assets
 
-In the `compose.yaml` file, you need to uncomment all of the database instructions. In addition, you need to add the database password file as an environment variable to the server service and specify the secret file to use .
+Replace the contents of `Dockerfile` with the following. This version adds
+`COPY` and `CMD` to the builder stage so that Compose can target it directly
+during development.
 
-The following is the updated `compose.yaml` file.
+```dockerfile {collapse=true,title=Dockerfile}
+# syntax=docker/dockerfile:1
 
-```yaml {hl_lines="7-43"}
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Dockerfile reference guide at
+# https://docs.docker.com/go/dockerfile-reference/
+
+# This Dockerfile uses Docker Hardened Images (DHI) for enhanced security.
+# For more information, see https://docs.docker.com/dhi/
+
+# Use the dev image to build and install dependencies.
+# The builder stage is also used directly in development (see compose.yaml).
+FROM dhi.io/python:3.12-dev AS builder
+
+WORKDIR /app
+
+RUN python3 -m venv /venv
+ENV PATH="/venv/bin:$PATH"
+
+# Download dependencies as a separate step to take advantage of Docker's caching.
+# Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
+# Leverage a bind mount to requirements.txt to avoid having to copy them into
+# into this layer.
+RUN --mount=type=cache,target=/root/.cache/pip \
+    --mount=type=bind,source=requirements.txt,target=requirements.txt \
+    pip install -r requirements.txt
+
+# Copy the source code into the container.
+COPY . .
+
+# Expose the port that the application listens on.
+EXPOSE 8000
+
+# Run the application.
+CMD ["/venv/bin/python3", "-m", "uvicorn", "app:app", "--host=0.0.0.0", "--port=8000"]
+
+
+# Use the minimal runtime image for production. It runs as nonroot by default.
+FROM dhi.io/python:3.12
+
+WORKDIR /app
+
+COPY --from=builder /venv /venv
+ENV PATH="/venv/bin:$PATH"
+
+COPY --from=builder /app .
+
+EXPOSE 8000
+
+CMD ["/venv/bin/python3", "-m", "uvicorn", "app:app", "--host=0.0.0.0", "--port=8000"]
+```
+
+Update `compose.yaml` to add `target: builder` so that Compose uses the dev
+image during development.
+
+```yaml {collapse=true,title=compose.yaml}
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker Compose reference guide at
+# https://docs.docker.com/go/compose-spec-reference/
+
+# Here the instructions define your application as a service called "server".
+# This service is built from the Dockerfile in the current directory.
+# You can add other services your application may depend on here, such as a
+# database or a cache. For examples, see the Awesome Compose repository:
+# https://github.com/docker/awesome-compose
 services:
   server:
     build:
       context: .
+      target: builder
     ports:
-      - 8001:8001
+      - 8000:8000
+```
+
+## Add a local database and persist data
+
+You can use containers to set up local services, like a database. In this
+section, you'll update the `compose.yaml` file to define a database service
+and a volume to persist data.
+
+In the `python-docker-example` directory, open the `compose.yaml` file in an
+IDE or text editor and update it with the following.
+
+```yaml {hl_lines="8-40"}
+services:
+  server:
+    build:
+      context: .
+      target: builder
+    ports:
+      - 8000:8000
     environment:
       - POSTGRES_SERVER=db
       - POSTGRES_USER=postgres
@@ -266,7 +266,7 @@ services:
     secrets:
       - db-password
   db:
-    image: postgres:18
+    image: dhi.io/postgres:18
     restart: always
     user: postgres
     secrets:
@@ -297,7 +297,7 @@ secrets:
 
 Before you run the application using Compose, notice that this Compose file specifies a `password.txt` file to hold the database's password. You must create this file as it's not included in the source repository.
 
-In the cloned repository's directory, create a new directory named `db` and inside that directory create a file named `password.txt` that contains the password for the database. Using your favorite IDE or text editor, add the following contents to the `password.txt` file.
+In the `python-docker-example` directory, create a new directory named `db` and inside that directory create a file named `password.txt` that contains the password for the database. Using your favorite IDE or text editor, add the following contents to the `password.txt` file.
 
 ```text
 mysecretpassword
@@ -305,11 +305,11 @@ mysecretpassword
 
 Save and close the `password.txt` file.
 
-You should now have the following contents in your `python-docker-dev-example`
+You should now have the following contents in your `python-docker-example`
 directory.
 
 ```text
-├── python-docker-dev-example/
+├── python-docker-example/
 │ ├── db/
 │ │ └── password.txt
 │ ├── app.py
@@ -318,8 +318,7 @@ directory.
 │ ├── .dockerignore
 │ ├── .gitignore
 │ ├── compose.yaml
-│ ├── Dockerfile
-│ └── README.md
+│ └── Dockerfile
 ```
 
 Now, run the following `docker compose up` command to start your application.
@@ -334,7 +333,7 @@ Let's create an object with a post method
 
 ```console
 $ curl -X 'POST' \
-  'http://localhost:8001/heroes/' \
+  'http://localhost:8000/heroes/' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -360,7 +359,7 @@ Let's make a get request with the next curl command:
 
 ```console
 curl -X 'GET' \
-  'http://localhost:8001/heroes/' \
+  'http://localhost:8000/heroes/' \
   -H 'accept: application/json'
 ```
 
@@ -386,13 +385,14 @@ Watch](/manuals/compose/how-tos/file-watch.md).
 Open your `compose.yaml` file in an IDE or text editor and then add the Compose
 Watch instructions. The following is the updated `compose.yaml` file.
 
-```yaml {hl_lines="17-20"}
+```yaml {hl_lines="18-21"}
 services:
   server:
     build:
       context: .
+      target: builder
     ports:
-      - 8001:8001
+      - 8000:8000
     environment:
       - POSTGRES_SERVER=db
       - POSTGRES_USER=postgres
@@ -408,7 +408,7 @@ services:
         - action: rebuild
           path: .
   db:
-    image: postgres:18
+    image: dhi.io/postgres:18
     restart: always
     user: postgres
     secrets:
@@ -441,13 +441,13 @@ $ docker compose watch
 In a terminal, curl the application to get a response.
 
 ```console
-$ curl http://localhost:8001
+$ curl http://localhost:8000
 Hello, Docker!
 ```
 
 Any changes to the application's source files on your local machine will now be immediately reflected in the running container.
 
-Open `python-docker-dev-example/app.py` in an IDE or text editor and update the `Hello, Docker!` string by adding a few more exclamation marks.
+Open `python-docker-example/app.py` in an IDE or text editor and update the `Hello, Docker!` string by adding a few more exclamation marks.
 
 ```diff
 -    return 'Hello, Docker!'
@@ -457,7 +457,7 @@ Open `python-docker-dev-example/app.py` in an IDE or text editor and update the 
 Save the changes to `app.py` and then wait a few seconds for the application to rebuild. Curl the application again and verify that the updated text appears.
 
 ```console
-$ curl http://localhost:8001
+$ curl http://localhost:8000
 Hello, Docker!!!
 ```
 

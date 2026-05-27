@@ -10,7 +10,7 @@ aliases:
 
 ## Prerequisites
 
-* You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
+- You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
 
 ## Overview
 
@@ -29,52 +29,48 @@ dependencies. Also, as it's fairly a new runtime, getting a consistent
 development environment for Bun can be challenging. Docker can help you set up
 a consistent development environment for Bun.
 
-## Get the sample application
+## Create the application
 
-Clone the sample application to use with this guide. Open a terminal, change
-directory to a directory that you want to work in, and run the following
-command to clone the repository:
+Create a new directory for your project and navigate into it:
 
 ```console
-$ git clone https://github.com/dockersamples/bun-docker.git && cd bun-docker
+$ mkdir bun-docker && cd bun-docker
 ```
 
-You should now have the following contents in your `bun-docker` directory.
+Create a file named `server.js` with the following contents:
 
-```text
-├── bun-docker/
-│ ├── compose.yml
-│ ├── Dockerfile
-│ ├── LICENSE
-│ ├── server.js
-│ └── README.md
+```js {title="server.js"}
+import { serve } from "bun";
+
+serve({
+  fetch(request) {
+    const url = new URL(request.url);
+    if (url.pathname === "/") {
+      return new Response(JSON.stringify({ Status: "OK" }), {
+        headers: { "content-type": "application/json" },
+      });
+    }
+    return new Response("Not found", { status: 404 });
+  },
+  port: 3000,
+});
+
+console.log("Server is running.");
 ```
 
-## Create a Dockerfile
+## Create Docker assets
 
-Before creating a Dockerfile, you need to choose a base image. You can either use the [Bun Docker Official Image](https://hub.docker.com/r/oven/bun) or a Docker Hardened Image (DHI) from the [Hardened Image catalog](https://hub.docker.com/hardened-images/catalog).
+This guide uses [Docker Hardened Images (DHI)](/dhi/) as the base image. Docker Hardened Images are minimal, secure, and production-ready base images maintained by Docker.
 
-Choosing DHI offers the advantage of a production-ready image that is lightweight and secure. For more information, see [Docker Hardened Images](https://docs.docker.com/dhi/).
+Docker Hardened Images (DHIs) are available for Bun in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/bun). Sign in to the DHI registry before pulling:
 
-{{< tabs >}}
-{{< tab name="Using Docker Hardened Images" >}}
+```console
+$ docker login dhi.io
+```
 
-Docker Hardened Images (DHIs) are available for Bun in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/bun). You can pull DHIs directly from the `dhi.io` registry.
+Create a file named `Dockerfile` with the following contents:
 
-1. Sign in to the DHI registry:
-   ```console
-   $ docker login dhi.io
-   ```
-
-2. Pull the Bun DHI as `dhi.io/bun:1`. The tag (`1`) in this example refers to the version to the latest 1.x version of Bun.
-
-   ```console
-   $ docker pull dhi.io/bun:1
-   ```
-
-For other available versions, refer to the [catalog](https://hub.docker.com/hardened-images/catalog/dhi/bun).
-
-```dockerfile
+```dockerfile {title="Dockerfile"}
 # Use the DHI Bun image as the base image
 FROM dhi.io/bun:1
 
@@ -91,39 +87,27 @@ EXPOSE 3000
 CMD ["bun", "server.js"]
 ```
 
-{{< /tab >}}
-{{< tab name="Using the official image" >}}
+Create a file named `compose.yml` with the following contents:
 
-Using the Docker Official Image is straightforward. In the following Dockerfile, you'll notice that the `FROM` instruction uses `oven/bun` as the base image.
-
-You can find the image on [Docker Hub](https://hub.docker.com/r/oven/bun). This is the Docker Official Image for Bun created by Oven, the company behind Bun, and it's available on Docker Hub.
-
-```dockerfile
-# Use the official Bun image
-FROM oven/bun:latest
-
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the current directory contents into the container at /app
-COPY . .
-
-# Expose the port on which the API will listen
-EXPOSE 3000
-
-# Run the server when the container launches
-CMD ["bun", "server.js"]
+```yaml {title="compose.yml"}
+services:
+  server:
+    image: bun-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
 ```
 
-{{< /tab >}}
-{{< /tabs >}}
+You should now have the following files in your `bun-docker` directory:
 
-In addition to specifying the base image, the Dockerfile also:
-
-- Sets the working directory in the container to `/app`.
-- Copies the content of the current directory to the `/app` directory in the container.
-- Exposes port 3000, where the API is listening for requests.
-- And finally, starts the server when the container launches with the command `bun server.js`.
+```text
+├── bun-docker/
+│   ├── compose.yml
+│   ├── Dockerfile
+│   └── server.js
+```
 
 ## Run the application
 

@@ -20,21 +20,16 @@ In this section, you'll learn how to set up code quality tools for your Python a
 - Static type checking with Pyright
 - Automating checks with pre-commit hooks
 
+You can run these tools locally, or inside a Docker Hardened Image container
+using a bind mount — no local Python installation required.
+
 ## Linting and formatting with Ruff
 
 Ruff is an extremely fast Python linter and formatter written in Rust. It replaces multiple tools like flake8, isort, and black with a single unified tool.
 
-Before using Ruff, install it in your Python environment:
+Create a `pyproject.toml` file in your `python-docker-example` directory:
 
-```bash
-pip install ruff
-```
-
-If you're using a virtual environment, make sure it is activated so the `ruff` command is available when you run the commands below.
-
-Create a `pyproject.toml` file:
-
-```toml
+```toml {title="pyproject.toml"}
 [tool.ruff]
 target-version = "py312"
 
@@ -59,6 +54,18 @@ ignore = [
 
 ### Using Ruff
 
+{{< tabs >}}
+{{< tab name="Local" >}}
+
+Install Ruff:
+
+```bash
+pip install ruff
+```
+
+If you're using a virtual environment, make sure it is activated so the `ruff`
+command is available.
+
 Run these commands to check and format your code:
 
 ```bash
@@ -72,11 +79,38 @@ ruff check --fix .
 ruff format .
 ```
 
+{{< /tab >}}
+{{< tab name="Container (DHI)" >}}
+
+Run Ruff inside the DHI dev image with your project directory mounted in:
+
+```console
+# Check for errors
+$ docker run --rm -v $PWD:/app -w /app dhi.io/python:3.12-dev \
+  sh -c "pip install --quiet ruff && ruff check ."
+
+# Automatically fix fixable errors
+$ docker run --rm -v $PWD:/app -w /app dhi.io/python:3.12-dev \
+  sh -c "pip install --quiet ruff && ruff check --fix ."
+
+# Format code
+$ docker run --rm -v $PWD:/app -w /app dhi.io/python:3.12-dev \
+  sh -c "pip install --quiet ruff && ruff format ."
+```
+
+> [!NOTE]
+>
+> On Windows, replace `$PWD` with `${PWD}` in PowerShell or `%cd%` in
+> Command Prompt.
+
+{{< /tab >}}
+{{< /tabs >}}
+
 ## Type checking with Pyright
 
 Pyright is a fast static type checker for Python that works well with modern Python features.
 
-Add `Pyright` configuration in `pyproject.toml`:
+Add `Pyright` configuration to your `pyproject.toml`:
 
 ```toml
 [tool.pyright]
@@ -87,15 +121,39 @@ exclude = [".venv"]
 
 ### Running Pyright
 
-To check your code for type errors:
+{{< tabs >}}
+{{< tab name="Local" >}}
+
+Install Pyright and run it:
 
 ```bash
+pip install pyright
 pyright
 ```
 
+{{< /tab >}}
+{{< tab name="Container (DHI)" >}}
+
+Run Pyright inside the DHI dev image. The command also installs your project's
+dependencies so Pyright can fully resolve all imports:
+
+```console
+$ docker run --rm -v $PWD:/app -w /app dhi.io/python:3.12-dev \
+  sh -c "pip install --quiet -r requirements.txt pyright && pyright"
+```
+
+> [!NOTE]
+>
+> On Windows, replace `$PWD` with `${PWD}` in PowerShell or `%cd%` in
+> Command Prompt.
+
+{{< /tab >}}
+{{< /tabs >}}
+
 ## Setting up pre-commit hooks
 
-Pre-commit hooks automatically run checks before each commit. The following `.pre-commit-config.yaml` snippet sets up Ruff:
+Pre-commit hooks run checks automatically before each commit on your local
+machine. The following `.pre-commit-config.yaml` snippet sets up Ruff:
 
 ```yaml
   https: https://github.com/charliermarsh/ruff-pre-commit
@@ -109,6 +167,7 @@ Pre-commit hooks automatically run checks before each commit. The following `.pr
 To install and use:
 
 ```bash
+pip install pre-commit
 pre-commit install
 git commit -m "Test commit"  # Automatically runs checks
 ```

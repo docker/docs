@@ -18,9 +18,21 @@ aliases:
 
 In this section, you'll learn how to use Docker Desktop to deploy your application to a fully-featured Kubernetes environment on your development machine. This allows you to test and debug your workloads on Kubernetes locally before deploying.
 
+## Registry authentication
+
+The Docker Hardened Images used in this guide are hosted on `dhi.io`. Docker
+Desktop's Kubernetes shares credentials with Docker Desktop, so the `docker login dhi.io`
+you completed earlier is all that's needed. No additional image pull secret is required.
+
+> [!NOTE]
+>
+> If you're deploying to a Kubernetes cluster outside of Docker Desktop, you'll
+> need to create an image pull secret and reference it in your pod specs. See
+> [Use a Docker Hardened Image](/dhi/how-to/use/#use-with-kubernetes) for instructions.
+
 ## Create a Kubernetes YAML file
 
-In your `python-docker-dev-example` directory, create a file named `docker-postgres-kubernetes.yaml`. Open the file in an IDE or text editor and add
+In your `python-docker-example` directory, create a file named `docker-postgres-kubernetes.yaml`. Open the file in an IDE or text editor and add
 the following contents.
 
 ```yaml
@@ -41,7 +53,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:18
+          image: dhi.io/postgres:18
           ports:
             - containerPort: 5432
           env:
@@ -95,7 +107,7 @@ data:
   POSTGRES_PASSWORD: cG9zdGdyZXNfcGFzc3dvcmQ= # Base64 encoded password (e.g., 'postgres_password')
 ```
 
-In your `python-docker-dev-example` directory, create a file named
+In your `python-docker-example` directory, create a file named
 `docker-python-kubernetes.yaml`. Replace `DOCKER_USERNAME/REPO_NAME` with your
 Docker username and the repository name that you created in [Configure CI/CD for
 your Python application](./configure-github-actions.md).
@@ -135,7 +147,7 @@ spec:
             - name: POSTGRES_PORT
               value: "5432"
           ports:
-            - containerPort: 8001
+            - containerPort: 8000
 ---
 apiVersion: v1
 kind: Service
@@ -147,8 +159,8 @@ spec:
   selector:
     service: fastapi
   ports:
-    - port: 8001
-      targetPort: 8001
+    - port: 8000
+      targetPort: 8000
       nodePort: 30001
 ```
 
@@ -163,7 +175,7 @@ In these Kubernetes YAML file, there are various objects, separated by the `---`
 - A PersistentVolumeClaim, to define a storage that will be persistent through restarts for the database.
 - A Secret, Keeping the database password as an example using secret kubernetes resource.
 - A NodePort service, which will route traffic from port 30001 on your host to
-  port 8001 inside the pods it routes to, allowing you to reach your app
+  port 8000 inside the pods it routes to, allowing you to reach your app
   from the network.
 
 To learn more about Kubernetes objects, see the [Kubernetes documentation](https://kubernetes.io/docs/home/).
@@ -174,7 +186,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
 
 ## Deploy and check your application
 
-1. In a terminal, navigate to `python-docker-dev-example` and deploy your database to
+1. In a terminal, navigate to `python-docker-example` and deploy your database to
    Kubernetes.
 
    ```console
@@ -193,7 +205,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
    Now, deploy your python application.
 
    ```console
-   kubectl apply -f docker-python-kubernetes.yaml
+   $ kubectl apply -f docker-python-kubernetes.yaml
    ```
 
    You should see output that looks like the following, indicating your Kubernetes objects were created successfully.
@@ -229,17 +241,17 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
    NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
    kubernetes           ClusterIP   10.43.0.1      <none>        443/TCP          13h
    postgres             ClusterIP   10.43.209.25   <none>        5432/TCP         3m10s
-   service-entrypoint   NodePort    10.43.67.120   <none>        8001:30001/TCP   79s
+   service-entrypoint   NodePort    10.43.67.120   <none>        8000:30001/TCP   79s
    ```
 
    In addition to the default `kubernetes` service, you can see your `service-entrypoint` service, accepting traffic on port 30001/TCP and the internal `ClusterIP` `postgres` with the port `5432` open to accept connections from you python app.
 
-3. In a terminal, curl the service. Note that a database was not deployed in
-   this example.
+3. In a terminal, curl the service. This hits the root endpoint, which doesn't
+   interact with the database.
 
    ```console
    $ curl http://localhost:30001/
-   Hello, Docker!!!
+   Hello, Docker!
    ```
 
 4. Run the following commands to tear down your application.

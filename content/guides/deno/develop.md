@@ -18,14 +18,6 @@ In this section, you'll learn how to set up a development environment for your c
 
 - Configuring Compose to automatically update your running Compose services as you edit and save your code
 
-## Get the sample application
-
-Clone the sample application to use with this guide. Open a terminal, change directory to a directory that you want to work in, and run the following command to clone the repository:
-
-```console
-$ git clone https://github.com/dockersamples/docker-deno.git && cd docker-deno
-```
-
 ## Automatically update services
 
 Use Compose Watch to automatically update your running Compose services as you

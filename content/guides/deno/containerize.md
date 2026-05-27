@@ -10,7 +10,7 @@ aliases:
 
 ## Prerequisites
 
-* You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
+- You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
 
 ## Overview
 
@@ -18,39 +18,22 @@ For a long time, Node.js has been the go-to runtime for server-side JavaScript a
 
 Why develop Deno applications with Docker? Having a choice of runtimes is exciting, but managing multiple runtimes and their dependencies consistently across environments can be tricky. This is where Docker proves invaluable. Using containers to create and destroy environments on demand simplifies runtime management and ensures consistency. Additionally, as Deno continues to grow and evolve, Docker helps establish a reliable and reproducible development environment, minimizing setup challenges and streamlining the workflow.
 
-## Get the sample application
+## Create the application
 
-Clone the sample application to use with this guide. Open a terminal, change
-directory to a directory that you want to work in, and run the following
-command to clone the repository:
+Create a new directory for your project and navigate into it:
 
 ```console
-$ git clone https://github.com/dockersamples/docker-deno.git && cd docker-deno
+$ mkdir deno-docker && cd deno-docker
 ```
 
-You should now have the following contents in your `deno-docker` directory.
+Create a file named `server.ts` with the following contents:
 
-```text
-├── deno-docker/
-│ ├── compose.yml
-│ ├── Dockerfile
-│ ├── LICENSE
-│ ├── server.ts
-│ └── README.md
-```
-
-## Understand the sample application
-
-The sample application is a simple Deno application that uses the Oak framework to create a simple API that returns a JSON response. The application listens on port 8000 and returns a message `{"Status" : "OK"}` when you access the application in a browser.
-
-```typescript
-// server.ts
+```typescript {title="server.ts"}
 import { Application, Router } from "https://deno.land/x/oak@v12.0.0/mod.ts";
 
 const app = new Application();
 const router = new Router();
 
-// Define a route that returns JSON
 router.get("/", (context) => {
   context.response.body = { Status: "OK" };
   context.response.type = "application/json";
@@ -63,32 +46,19 @@ console.log("Server running on http://localhost:8000");
 await app.listen({ port: 8000 });
 ```
 
-## Create a Dockerfile
+## Create Docker assets
 
-Before creating a Dockerfile, you need to choose a base image. You can either use the [Deno Docker Official Image](https://hub.docker.com/r/denoland/deno) or a Docker Hardened Image (DHI) from the [Hardened Image catalog](https://hub.docker.com/hardened-images/catalog).
+This guide uses [Docker Hardened Images (DHI)](/dhi/) as the base image. Docker Hardened Images are minimal, secure, and production-ready base images maintained by Docker.
 
-Choosing DHI offers the advantage of a production-ready image that is lightweight and secure. For more information, see [Docker Hardened Images](https://docs.docker.com/dhi/).
+Docker Hardened Images (DHIs) are available for Deno in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/deno). Sign in to the DHI registry before pulling:
 
-{{< tabs >}}
-{{< tab name="Using Docker Hardened Images" >}}
+```console
+$ docker login dhi.io
+```
 
-Docker Hardened Images (DHIs) are available for Deno in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/deno). You can pull DHIs directly from the `dhi.io` registry.
+Create a file named `Dockerfile` with the following contents:
 
-1. Sign in to the DHI registry:
-
-   ```console
-   $ docker login dhi.io
-   ```
-
-2. Pull the Deno DHI as `dhi.io/deno:2`. The tag (`2`) in this example refers to the version to the latest 2.x version of Deno.
-
-   ```console
-   $ docker pull dhi.io/deno:2
-   ```
-
-For other available versions, refer to the [catalog](https://hub.docker.com/hardened-images/catalog/dhi/deno).
-
-```dockerfile
+```dockerfile {title="Dockerfile"}
 # Use the DHI Deno image as the base image
 FROM dhi.io/deno:2
 
@@ -108,48 +78,31 @@ EXPOSE 8000
 CMD ["run", "--allow-net", "server.ts"]
 ```
 
-{{< /tab >}}
-{{< tab name="Using the official image" >}}
+Create a file named `compose.yml` with the following contents:
 
-Using the Docker Official Image is straightforward. In the following Dockerfile, you'll notice that the `FROM` instruction uses `denoland/deno:latest` as the base image.
-
-This is the official image for Deno. This image is [available on the Docker Hub](https://hub.docker.com/r/denoland/deno).
-
-```dockerfile
-# Use the official Deno image
-FROM denoland/deno:latest
-
-# Set the working directory
-WORKDIR /app
-
-# Copy server code into the container
-COPY server.ts .
-
-# Set permissions (optional but recommended for security)
-USER deno
-
-# Expose port 8000
-EXPOSE 8000
-
-# Run the Deno server
-CMD ["run", "--allow-net", "server.ts"]
+```yaml {title="compose.yml"}
+services:
+  server:
+    image: deno-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
 ```
 
-{{< /tab >}}
-{{< /tabs >}}
+You should now have the following files in your `deno-docker` directory:
 
-In addition to specifying the base image, the Dockerfile also:
-
-- Sets the working directory in the container to `/app`.
-- Copies `server.ts` into the container.
-- Sets the user to `deno` to run the application as a non-root user.
-- Exposes port 8000 to allow traffic to the application.
-- Runs the Deno server using the `CMD` instruction.
-- Uses the `--allow-net` flag to allow network access to the application. The `server.ts` file uses the Oak framework to create a simple API that listens on port 8000.
+```text
+├── deno-docker/
+│   ├── compose.yml
+│   ├── Dockerfile
+│   └── server.ts
+```
 
 ## Run the application
 
-Make sure you are in the `deno-docker` directory. Run the following command in a terminal to build and run the application.
+From the `deno-docker` directory, run the following command in a terminal.
 
 ```console
 $ docker compose up --build
@@ -170,7 +123,6 @@ $ docker compose up --build -d
 ```
 
 Open a browser and view the application at [http://localhost:8000](http://localhost:8000).
-
 
 In the terminal, run the following command to stop the application.
 
