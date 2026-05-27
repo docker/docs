@@ -241,12 +241,12 @@ directory.
 
 ```text
 ├── python-docker-example/
-│ ├── app.py
-│ ├── requirements.txt
-│ ├── .dockerignore
-│ ├── .gitignore
-│ ├── compose.yaml
-│ └── Dockerfile
+│   ├── app.py
+│   ├── requirements.txt
+│   ├── .dockerignore
+│   ├── .gitignore
+│   ├── compose.yaml
+│   └── Dockerfile
 ```
 
 To learn more about the files, see the following:

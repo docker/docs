@@ -310,15 +310,15 @@ directory.
 
 ```text
 ├── python-docker-example/
-│ ├── db/
-│ │ └── password.txt
-│ ├── app.py
-│ ├── config.py
-│ ├── requirements.txt
-│ ├── .dockerignore
-│ ├── .gitignore
-│ ├── compose.yaml
-│ └── Dockerfile
+│   ├── db/
+│   │   └── password.txt
+│   ├── app.py
+│   ├── config.py
+│   ├── requirements.txt
+│   ├── .dockerignore
+│   ├── .gitignore
+│   ├── compose.yaml
+│   └── Dockerfile
 ```
 
 Now, run the following `docker compose up` command to start your application.
@@ -358,7 +358,7 @@ You should receive the following response:
 Let's make a get request with the next curl command:
 
 ```console
-curl -X 'GET' \
+$ curl -X 'GET' \
   'http://localhost:8000/heroes/' \
   -H 'accept: application/json'
 ```

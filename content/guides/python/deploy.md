@@ -175,7 +175,7 @@ In these Kubernetes YAML file, there are various objects, separated by the `---`
 - A PersistentVolumeClaim, to define a storage that will be persistent through restarts for the database.
 - A Secret, Keeping the database password as an example using secret kubernetes resource.
 - A NodePort service, which will route traffic from port 30001 on your host to
-  port 8000 inside the pods it routes to, allowing you to reach your app
+  port 8000 inside the pods it routes to, so you can reach your app
   from the network.
 
 To learn more about Kubernetes objects, see the [Kubernetes documentation](https://kubernetes.io/docs/home/).

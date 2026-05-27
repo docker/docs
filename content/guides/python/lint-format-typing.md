@@ -156,12 +156,13 @@ Pre-commit hooks run checks automatically before each commit on your local
 machine. The following `.pre-commit-config.yaml` snippet sets up Ruff:
 
 ```yaml
-  https: https://github.com/charliermarsh/ruff-pre-commit
-  rev: v0.2.2
-  hooks:
-    - id: ruff
-      args: [--fix]
-    - id: ruff-format
+repos:
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.2.2
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
 ```
 
 To install and use:
