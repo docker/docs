@@ -21,7 +21,7 @@ New features and enhancements released in the fourth quarter of 2024.
 
 ### 2024-10-09
 
-Policy Evaluation has graduated form Early Access to General Availability.
+Policy Evaluation has graduated from Early Access to General Availability.
 
 Docker Scout Dashboard UI changes:
 
@@ -43,7 +43,7 @@ customize policies either by editing the default policy from a **policy type**
 which acts as a template. The default policies in Docker Scout are also
 implemented based on these types.
 
-For more information, refer to [policy types](/manuals/scout/policy/_index.md#policy-types).
+For more information, refer to [policy types](../policy/_index.md#policy-types).
 
 ### 2024-09-09
 
@@ -132,7 +132,7 @@ making the now-removed **All critical vulnerabilities** policy redundant.
 
 **Azure Container Registry** integration graduated from
 [Early Access](../../release-lifecycle.md#early-access-ea) to
-[General Availability](../../release-lifecycle.md#genera-availability-ga).
+[General Availability](../../release-lifecycle.md#general-availability-ga).
 
 For more information and setup instructions, see
 [Integrate Azure Container Registry](../integrations/registry/acr.md).
