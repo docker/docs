@@ -22,6 +22,7 @@ To manage licenses for your organization:
 1. Sign in to [Docker Home](https://app.docker.com), then choose your organization.
 1. Select **Members** from the left navigation.
 1. Select the action menu at the end of the row to assign or revoke an active license.
+1. Optional. To bulk assign or revoke licenses, choose the members you want to bulk manage, then select the **Bulk** menu. 
 1. Optional. To manage automatic license assignment, turn on or turn off on a per-product basis with the **Automatically assign licenses** toggle. 
 
 You must assign licenses manually, or configure automatic license assignment to consume a license. Inviting a new member to your organization may consume a seat for your Docker Team or Docker Business subscription, but won't auto-assign product licenses by default. Conversely, purchasing a set of licenses doesn't automatically assign licenses to existing members.
