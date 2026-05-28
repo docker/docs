@@ -60,8 +60,13 @@ This command shows all available attestations, including SBOMs, provenance, vuln
 {{< /tab >}}
 {{< tab name="regctl" >}}
 
-First, authenticate to both registries. Prepare a [personal access token
-(PAT)](../../security/access-tokens.md) for your user with `read only` access:
+First, authenticate to both registries. This example authenticates as your
+Docker organization using an [organization access token
+(OAT)](../../enterprise/security/access-tokens.md). The OAT must have at least
+pull access to the DHI repositories you want to verify; only repositories in
+the token's scope are accessible. Alternatively, you can authenticate as a
+Docker Hub user with a [personal access token
+(PAT)](../../security/access-tokens.md) that has `read only` access.
 
 > [!WARNING]
 >
@@ -72,11 +77,10 @@ First, authenticate to both registries. Prepare a [personal access token
 > at runtime, or secret management tools.
 
 ```console
-$ export DOCKER_USERNAME="YOUR_DOCKER_USERNAME"
-$ export DOCKER_PAT="YOUR_DOCKER_PAT"
 $ export DOCKER_ORG="YOUR_DOCKER_ORG"
-$ echo $DOCKER_PAT | regctl registry login -u "$DOCKER_USERNAME" --pass-stdin docker.io
-$ echo $DOCKER_PAT | regctl registry login -u "$DOCKER_USERNAME" --pass-stdin registry.scout.docker.com
+$ export DOCKER_OAT="YOUR_DOCKER_OAT"
+$ echo $DOCKER_OAT | regctl registry login -u "$DOCKER_ORG" --pass-stdin docker.io
+$ echo $DOCKER_OAT | regctl registry login -u "$DOCKER_ORG" --pass-stdin registry.scout.docker.com
 ```
 
 Then list attestations using the `--external` flag. DHI repositories store image

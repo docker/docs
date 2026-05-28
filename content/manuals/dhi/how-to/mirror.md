@@ -315,15 +315,13 @@ same steps to a non-mirrored image by updating the `SRC_ATT_REPO` and
 1. Set environment variables for your specific environment. Replace the
    placeholders with your actual values.
 
-   In this example, you use a Docker username to represent a member of the Docker
-   Hub organization that the DHI repositories are mirrored in. Prepare a
-   [personal access token (PAT)](../../security/access-tokens.md) for the user
-   with `read only` access. Alternatively, you can use your organization name and
-   an [organization access token
-   (OAT)](../../enterprise/security/access-tokens.md) to authenticate with `docker.io`.
-   Note that OATs are not supported for `registry.scout.docker.com`. If your
-   workflow requires authenticating to the Scout registry, use a personal access
-   token (PAT) for that step.
+   In this example, you authenticate as your Docker organization using an
+   [organization access token
+   (OAT)](../../enterprise/security/access-tokens.md). The OAT must have at
+   least pull access to every DHI repository you want to mirror; only
+   repositories in the token's scope are accessible. Alternatively, you can
+   authenticate as a Docker Hub user with a [personal access token
+   (PAT)](../../security/access-tokens.md) that has `read only` access.
 
    > [!WARNING]
    >
@@ -334,9 +332,8 @@ same steps to a non-mirrored image by updating the `SRC_ATT_REPO` and
    > at runtime, or secret management tools.
 
    ```console
-   $ export DOCKER_USERNAME="YOUR_DOCKER_USERNAME"
-   $ export DOCKER_PAT="YOUR_DOCKER_PAT"
    $ export DOCKER_ORG="YOUR_DOCKER_ORG"
+   $ export DOCKER_OAT="YOUR_DOCKER_OAT"
    $ export DEST_REG="registry.example.com"
    $ export DEST_REPO="mirror/dhi-python"
    $ export DEST_REG_USERNAME="YOUR_DESTINATION_REGISTRY_USERNAME"
@@ -350,8 +347,8 @@ same steps to a non-mirrored image by updating the `SRC_ATT_REPO` and
    the attestations, and your destination registry.
 
    ```console
-   $ echo $DOCKER_PAT | regctl registry login -u "$DOCKER_USERNAME" --pass-stdin docker.io
-   $ echo $DOCKER_PAT | regctl registry login -u "$DOCKER_USERNAME" --pass-stdin registry.scout.docker.com
+   $ echo $DOCKER_OAT | regctl registry login -u "$DOCKER_ORG" --pass-stdin docker.io
+   $ echo $DOCKER_OAT | regctl registry login -u "$DOCKER_ORG" --pass-stdin registry.scout.docker.com
    $ echo $DEST_REG_TOKEN | regctl registry login -u "$DEST_REG_USERNAME" --pass-stdin "$DEST_REG"
    ```
 
@@ -401,11 +398,11 @@ version: 1
 # Optional: inline creds if not relying on prior CLI logins
 # creds:
 #   - registry: docker.io
-#     user: <your-docker-username>
-#     pass: "{{file \"/run/secrets/docker_token\"}}"
+#     user: <your-docker-org>
+#     pass: "{{file \"/run/secrets/docker_oat\"}}"
 #   - registry: registry.scout.docker.com
-#     user: <your-docker-username>
-#     pass: "{{file \"/run/secrets/docker_token\"}}"
+#     user: <your-docker-org>
+#     pass: "{{file \"/run/secrets/docker_oat\"}}"
 #   - registry: registry.example.com
 #     user: <service-user>
 #     pass: "{{file \"/run/secrets/dest_token\"}}"
