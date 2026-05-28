@@ -23,10 +23,6 @@ grid_subscriptions:
     description: Learn how to upgrade or downgrade your subscription.
     link: /subscription/change/
     icon: arrow-up-circle
-  - title: Manage seats
-    description: Learn how to add or remove seats from your subscription.
-    link: /admin/organization/manage/manage-seats/
-    icon: user-plus
   - title: Docker Desktop license agreement
     description: Review the terms of the Docker Subscription Service Agreement.
     link: /subscription/desktop-license/
