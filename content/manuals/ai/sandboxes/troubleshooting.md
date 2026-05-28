@@ -119,37 +119,13 @@ SDKs trust certificates signed by the proxy. Certificate errors can stop a
 request before the credential proxy can inject credentials.
 
 For repeatable setup, create a [sandbox kit](customize/kits.md) that installs
-the CA when the sandbox is created:
-
-```text
-internal-ca/
-|-- spec.yaml
-`-- files/
-    `-- home/
-        `-- internal-ca.crt
-```
+the CA when the sandbox is created. See
+[Install an internal CA certificate](customize/kit-examples.md#install-an-internal-ca-certificate)
+for an example kit.
 
 Use a PEM-encoded certificate with a `.crt` extension. If traffic can be signed
-by more than one internal proxy, include each proxy's root CA in the kit and
-install each certificate before running `update-ca-certificates`.
-
-Add this `spec.yaml`:
-
-```yaml {title="internal-ca/spec.yaml"}
-schemaVersion: "1"
-kind: mixin
-name: internal-ca
-
-environment:
-  variables:
-    NODE_EXTRA_CA_CERTS: /usr/local/share/ca-certificates/internal-ca.crt
-
-commands:
-  install:
-    - command: "install -m 0644 /home/agent/internal-ca.crt /usr/local/share/ca-certificates/internal-ca.crt && update-ca-certificates"
-      user: "0"
-      description: Install internal CA certificate
-```
+by more than one internal proxy, install each proxy's root CA before running
+`update-ca-certificates`.
 
 Create a sandbox with the kit:
 

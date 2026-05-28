@@ -72,6 +72,44 @@ step should run as the agent user — for example, `npm install -g`
 against a user-scoped prefix, or anything that writes to
 `/home/agent/`.
 
+## Install an internal CA certificate
+
+If your organization uses a proxy that inspects HTTPS traffic, install
+the proxy's internal root CA in the sandbox trust store. This helps
+agents and SDKs trust certificates signed by the proxy.
+
+```text
+internal-ca/
+├── spec.yaml
+└── files/
+    └── home/
+        └── internal-ca.crt
+```
+
+Use a PEM-encoded certificate with a `.crt` extension. If traffic can
+be signed by more than one internal proxy, include each proxy's root
+CA in the kit and install each certificate before running
+`update-ca-certificates`.
+
+```yaml {title="internal-ca/spec.yaml"}
+schemaVersion: "1"
+kind: mixin
+name: internal-ca
+
+environment:
+  variables:
+    NODE_EXTRA_CA_CERTS: /usr/local/share/ca-certificates/internal-ca.crt
+
+commands:
+  install:
+    - command: "install -m 0644 /home/agent/internal-ca.crt /usr/local/share/ca-certificates/internal-ca.crt && update-ca-certificates"
+      user: "0"
+      description: Install internal CA certificate
+```
+
+`NODE_EXTRA_CA_CERTS` helps Node.js-based agents and SDKs use the same
+internal CA as the system trust store.
+
 ## Run a background service
 
 <!-- TODO: follow up on commands.startup[].background.
