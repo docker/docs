@@ -11,9 +11,10 @@ description: |-
     Available agents: claude, codex, copilot, cursor, docker-agent, droid, gemini, kiro, opencode, shell
 usage: sbx run [flags] SANDBOX | AGENT [PATH...] [-- AGENT_ARGS...]
 options:
-    - name: branch
+    - name: clone
+      default_value: "false"
       usage: |
-        Create a Git worktree on the given branch (use --branch auto to auto-generate)
+        Run the agent on a private in-container clone of the host Git repository; must be set at sandbox creation time (no-op when re-attaching to an existing clone-mode sandbox)
     - name: cpus
       default_value: "0"
       usage: |
@@ -24,8 +25,13 @@ options:
       usage: help for run
     - name: kit
       default_value: '[]'
+      experimental: true
       usage: |
         Kit reference (directory, ZIP, or OCI). Can be specified multiple times
+    - name: mcp
+      default_value: '[]'
+      usage: |
+        MCP server name to enable (use 'all' for all registered servers). Can be specified multiple times
     - name: memory
       shorthand: m
       usage: |

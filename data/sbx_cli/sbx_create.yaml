@@ -6,8 +6,10 @@ description: |-
     Use "sbx run SANDBOX" to attach to the agent after creation.
 usage: sbx create [flags] AGENT PATH [PATH...]
 options:
-    - name: branch
-      usage: Create a Git worktree on the given branch
+    - name: clone
+      default_value: "false"
+      usage: |
+        Run the agent on a private in-container clone of the host Git repository (mounted read-only) instead of bind-mounting the workspace; the agent's commits are accessible via the sandbox-<name> git remote on the host
     - name: cpus
       default_value: "0"
       usage: |
@@ -18,8 +20,13 @@ options:
       usage: help for create
     - name: kit
       default_value: '[]'
+      experimental: true
       usage: |
         Kit reference (directory, ZIP, or OCI). Can be specified multiple times
+    - name: mcp
+      default_value: '[]'
+      usage: |
+        MCP server name to enable (use 'all' for all registered servers). Can be specified multiple times
     - name: memory
       shorthand: m
       usage: |
@@ -50,8 +57,8 @@ example: |4-
       # Create with additional read-only workspaces
       sbx create claude . /path/to/docs:ro
 
-      # Create with a Git worktree for isolated changes
-      sbx create --branch=feature/login claude .
+      # Run the agent on an in-container clone of the host repo, wired back via a git-daemon
+      sbx create --clone claude .
 see_also:
     - sbx - Manage AI coding agent sandboxes.
     - sbx create claude - Create a sandbox for claude

@@ -1,5 +1,6 @@
 name: sbx kit validate
 synopsis: Validate a kit artifact
+experimental: true
 description: |-
     Validate that a directory or ZIP file is a valid kit artifact.
 

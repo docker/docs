@@ -1,12 +1,13 @@
 name: sbx kit pull
 synopsis: Pull a kit artifact from an OCI registry
+experimental: true
 description: |-
     Pull a kit artifact from an OCI registry and save it as a ZIP file.
 
     The reference should be in the format "registry/repo:tag" or
     "registry/repo@sha256:digest" (e.g., "ghcr.io/myorg/my-plugin:1.0").
 
-    Authentication uses your Docker credential store.
+    Authentication: sbx registry secrets (sbx secret set --registry) take priority, falling back to the Docker credential store.
 usage: sbx kit pull REFERENCE [flags]
 options:
     - name: help

@@ -15,8 +15,10 @@ options:
       default_value: "false"
       usage: help for droid
 inherited_options:
-    - name: branch
-      usage: Create a Git worktree on the given branch
+    - name: clone
+      default_value: "false"
+      usage: |
+        Run the agent on a private in-container clone of the host Git repository (mounted read-only) instead of bind-mounting the workspace; the agent's commits are accessible via the sandbox-<name> git remote on the host
     - name: cpus
       default_value: "0"
       usage: |
@@ -27,8 +29,13 @@ inherited_options:
       usage: Enable debug logging
     - name: kit
       default_value: '[]'
+      experimental: true
       usage: |
         Kit reference (directory, ZIP, or OCI). Can be specified multiple times
+    - name: mcp
+      default_value: '[]'
+      usage: |
+        MCP server name to enable (use 'all' for all registered servers). Can be specified multiple times
     - name: memory
       shorthand: m
       usage: |

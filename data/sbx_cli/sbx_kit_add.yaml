@@ -1,5 +1,6 @@
 name: sbx kit add
 synopsis: Add a kit to a running sandbox
+experimental: true
 description: |-
     Inject a kit artifact into an already-running sandbox.
 
