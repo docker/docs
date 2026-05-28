@@ -1,5 +1,6 @@
 name: sbx kit inspect
 synopsis: Display details about a kit artifact
+experimental: true
 description: |-
     Load and display details about a kit artifact.
 

@@ -1,5 +1,6 @@
 name: sbx kit
 synopsis: Manage kit artifacts
+experimental: true
 description: |-
     Manage kit artifacts.
 

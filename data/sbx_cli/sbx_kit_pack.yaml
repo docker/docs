@@ -1,5 +1,6 @@
 name: sbx kit pack
 synopsis: Package a directory as a kit artifact
+experimental: true
 description: |-
     Validate and package a kit artifact directory as a ZIP file.
 
