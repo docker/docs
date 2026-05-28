@@ -18,9 +18,10 @@ anything on your host except what is explicitly shared.
 
 What crosses the boundary into the VM:
 
-- **Workspace directory:** mounted into the VM with read-write access. With
-  the default direct mount, changes the agent makes appear on your host
-  immediately.
+- **Workspace directory:** mounted into the VM. The default direct mount is
+  read-write — the agent edits your working tree in place. With
+  [`--clone`](../usage.md#clone-mode), your repository is mounted read-only
+  and the agent works on a private clone.
 - **Credentials:** the host-side proxy injects authentication headers into
   outbound HTTP requests. The raw credential values never enter the VM.
 - **Network access:** HTTP and HTTPS requests to
@@ -41,7 +42,7 @@ and ICMP are blocked at the network layer.
 
 ## Isolation layers
 
-The sandbox security model has four layers. See
+The sandbox security model has five layers. See
 [Isolation layers](isolation/) for technical details on each.
 
 - **Hypervisor isolation:** separate kernel per sandbox. No shared memory or
@@ -50,6 +51,10 @@ The sandbox security model has four layers. See
   [Deny-by-default policy](defaults/). Non-HTTP protocols blocked entirely.
 - **Docker Engine isolation:** each sandbox has its own Docker Engine with no
   path to the host daemon.
+- **Workspace isolation** (opt-in via `--clone`): the agent works on a
+  private in-VM clone and your repository is mounted read-only. The default
+  direct mode applies no workspace boundary — the agent edits your working
+  tree in place.
 - **Credential isolation:** API keys are injected into HTTP headers by the
   host-side proxy. Credential values never enter the VM.
 
@@ -66,15 +71,17 @@ permitted and what is blocked.
 The sandbox isolates the agent from your host system, but the agent's actions
 can still affect you through the shared workspace and allowed network channels.
 
-**Workspace changes are live on your host.** The agent edits the same files you
-see on your host. This includes files that execute implicitly during normal
-development: Git hooks, CI configuration, IDE task configs, `Makefile`,
-`package.json` scripts, and similar build files. Review changes before running
-any modified code. Note that Git hooks live inside `.git/` and do not appear in
-`git diff` output. Check them separately.
-See [Workspace trust](workspace/).
+In direct mode, workspace changes are live on your host. With the default
+direct mount, the agent edits the same files you see on your host. This
+includes files that execute implicitly during normal development: Git hooks,
+CI configuration, IDE task configs, `Makefile`, `package.json` scripts, and
+similar build files. Review changes before running any modified code. Note
+that Git hooks live inside `.git/` and do not appear in `git diff` output —
+check them separately. See
+[Workspace isolation](isolation/#workspace-isolation) for the full list and
+for the alternative clone-mode boundary.
 
-**Default allowed domains include broad wildcards.** Some defaults like
+The default allowed domains include broad wildcards. Some defaults like
 `*.googleapis.com` cover many services beyond AI APIs. Run `sbx policy ls` to
 see the full list of active rules, and remove entries you don't need. See
 [Default security posture](defaults/).
@@ -93,12 +100,11 @@ See [Organization governance](governance/) for details.
 
 ## Learn more
 
-- [Isolation layers](isolation/): how hypervisor, network, Docker, and
-  credential isolation work
+- [Isolation layers](isolation/): how hypervisor, network, Docker,
+  workspace, and credential isolation work
 - [Default security posture](defaults/): what a fresh sandbox permits and
   blocks
 - [Credentials](credentials/): how to provide and manage API keys
 - [Policies](policy/): how to customize network access rules
 - [Organization governance](governance/): centrally manage policies across
   an organization
-- [Workspace trust](workspace/): what to review after an agent session
