@@ -106,6 +106,11 @@ In clone mode, the sandbox becomes a Git remote on your host. The agent
 commits inside the sandbox; you pull its work back out by fetching from
 that remote.
 
+> [!NOTE]
+> Clone mode was introduced in `sbx` v0.31.0 and replaces the `--branch`
+> flag used in earlier versions. If your CLI doesn't recognize `--clone`,
+> update to the latest version.
+
 ```console
 $ sbx run --clone claude
 ```
