@@ -109,6 +109,72 @@ configured to use the forward proxy. See
 [Monitoring network activity](security/policy.md#monitoring)
 for details.
 
+## API calls fail with a certificate error
+
+If your organization uses a proxy that inspects HTTPS traffic, agent requests
+can fail with a certificate error such as
+`SSL certificate problem: self-signed certificate in certificate chain`. Install
+your organization's internal root CA inside the sandbox so the agent and its
+SDKs trust certificates signed by the proxy. Certificate errors can stop a
+request before the credential proxy can inject credentials.
+
+For repeatable setup, create a [sandbox kit](customize/kits.md) that installs
+the CA when the sandbox is created:
+
+```text
+internal-ca/
+|-- spec.yaml
+`-- files/
+    `-- home/
+        `-- internal-ca.crt
+```
+
+Use a PEM-encoded certificate with a `.crt` extension. If traffic can be signed
+by more than one internal proxy, include each proxy's root CA in the kit and
+install each certificate before running `update-ca-certificates`.
+
+Add this `spec.yaml`:
+
+```yaml {title="internal-ca/spec.yaml"}
+schemaVersion: "1"
+kind: mixin
+name: internal-ca
+
+environment:
+  variables:
+    NODE_EXTRA_CA_CERTS: /usr/local/share/ca-certificates/internal-ca.crt
+
+commands:
+  install:
+    - command: "install -m 0644 /home/agent/internal-ca.crt /usr/local/share/ca-certificates/internal-ca.crt && update-ca-certificates"
+      user: "0"
+      description: Install internal CA certificate
+```
+
+Create a sandbox with the kit:
+
+```console
+$ sbx run claude --kit ./internal-ca/
+```
+
+To update an existing sandbox, copy the certificate into the sandbox and update
+the trust store:
+
+```console
+$ sbx cp ./internal-ca.crt <sandbox-name>:/tmp/internal-ca.crt
+$ sbx exec <sandbox-name> -- sudo install -m 0644 /tmp/internal-ca.crt /usr/local/share/ca-certificates/internal-ca.crt
+$ sbx exec <sandbox-name> -- sudo update-ca-certificates
+```
+
+Some Node.js-based agents and SDKs use their own certificate store. Set
+`NODE_EXTRA_CA_CERTS` inside the sandbox, as shown in the kit example, so those
+clients also trust the internal CA.
+
+If API calls still fail after installing the CA, run `sbx policy log` and check
+whether the request used `forward`, `forward-bypass`, or `transparent` in the
+**PROXY** column. That can help identify whether the request is eligible for
+credential injection or is reaching an upstream proxy directly.
+
 ## Docker build export fails with an ownership error
 
 Running `docker build` with the local exporter (`--output=type=local` or `-o
