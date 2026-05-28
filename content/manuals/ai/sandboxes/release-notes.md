@@ -15,6 +15,74 @@ the full release history, including pre-releases and downloads, see the
 
 <!-- BEGIN GENERATED RELEASES -->
 
+## 0.31.0
+
+{{< release-date date="2026-05-28" >}}
+
+[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.31.0)
+
+### Highlights
+
+#### Clone mode: `--clone`
+
+The `--branch` flag has been removed in favor of `--clone` (clone mode). Using `--branch` now fails with:
+
+```console
+$ sbx run claude --branch foo
+ERROR: --branch is no longer supported; use --clone instead
+```
+
+Clone mode does not create a branch or worktree on your behalf — instead of a host-side worktree, the sandbox now runs against an in-container read-only clone.
+
+- Your source repository is mounted into the sandbox read-only, and the shallow clone sets that mount as a Git remote. The agent only ever writes to the in-container clone, never to your working tree or .git/
+- The clone lives on the sandbox's filesystem and is exposed back to the host as a `sandbox-<name>` Git remote served by `git-daemon` (no more `.sbx/<name>-worktrees/...` on the host).
+- Forge remotes (`origin`, `upstream`, etc.) on the host are propagated into the in-container clone, so the agent can `git push origin` directly, the same way you would. Local-path remotes are skipped.
+- Fetched sandbox refs are mirrored into `refs/sandboxes/<name>/*` on the host and persist after the sandbox is removed. Restore a branch from a removed sandbox with `git branch <local-name> refs/sandboxes/<name>/<branch>`. Commits that were never fetched, or uncommitted changes, are still lost on `sbx rm`.
+- The `sandbox-<name>` remote is added to your host on `sbx create --clone` / `sbx run --clone` and removed on `sbx rm`, including across stop and restart.
+
+### What's New
+
+#### CLI
+
+- `sbx create` auto-starts the daemon when it isn't already running.
+- `sbx logout` now stops the daemon and running sandboxes.
+- Unify terminal environment variables across `sbx run` and `sbx exec`.
+
+#### Policies
+
+- Show policy and rule names in CLI list output and TUI details.
+- Add filters to the policies listing.
+
+#### Kits
+
+- Mark kits as experimental.
+- Verbose error reporting for kit apply failures.
+
+#### Sandboxes
+
+- Opt a sandbox into virtiofs caching at create time via `DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=1` (off by default; the choice is persisted in the spec and survives daemon restarts).
+
+#### Networking
+
+- Allow public-CA CRL/OCSP/AIA endpoints in the balanced proxy preset. Applies to new installations or after `sbx policy reset` (which removes any user-added rules).
+
+#### Telemetry
+
+- Surface `port_publish_failed` inner error detail.
+
+#### Bug Fixes
+
+- Sort `template ls` output by repository, then tag.
+- Retry `ExecResize` to keep the agent TUI in sync.
+- Set `TERM=xterm-256color` when exec'ing with `-t`.
+- Move the state directory symlink from `/tmp` to `~/.sbx/run/`.
+- Stop `storageRootsGone` from locking the storagekit singleton.
+- Use `engineError` and add retry debug logging in sandboxd.
+- Retry transient shim start closures.
+- Make Cursor session bootstrap proxy-local.
+- Add bracketed `[::1]` to `NO_PROXY` for IPv6 loopback.
+- Backdate proxy CA `NotBefore` to match the goproxy leaf cert window.
+
 ## 0.30.0
 
 {{< release-date date="2026-05-19" >}}
@@ -119,51 +187,6 @@ This release brings **per-sandbox network policies**, giving callers fine-graine
 - Explain how to configure OpenAI credentials in no-creds warning
 - Allow MCR layer-blob CDN in default-code-and-containers policy
 - Improve empty state of `sbx ls` with actionable guidance
-
-## 0.28.2
-
-{{< release-date date="2026-04-29" >}}
-
-[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.28.2)
-
-### What's New
-
-#### CLI
-
-- Auto-open browser during login flow
-
-#### Templates
-
-- Install `ssh-add` and SSH client tools in the `main` template
-
-#### Bug Fixes
-
-- Prefer Codex OAuth over discovered API-key credentials
-- Propagate host TTY size when running `sbx exec -it`
-- Reveal trailing characters in masked secrets
-
-## 0.28.1
-
-{{< release-date date="2026-04-28" >}}
-
-[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.28.1)
-
-### Highlights
-
-A small release that wires **custom agent kits** through the CLI — discoverable in `--help` and invocable via `--kit` — and brings
-**in-process sandbox run/exec** with launch-mode and settings dialogs to the TUI. Two bug fixes round it out: private Docker Hub image pulls work again via `--template`, and the secrets-masking path is tightened.
-
-### What's New
-
-#### CLI
-
-- Make custom agent kits invocable and surface `--kit` in help
-- TUI: in-process sandbox run/exec with launch mode dialog, settings dialog + misc fixes
-
-#### Bug Fixes
-
-- Enable private Docker Hub image pulls via `--template`
-- Tighten secrets masking and emphasize `set-custom` warning
 
 <!-- END GENERATED RELEASES -->
 
