@@ -6,7 +6,7 @@ keywords: licenses, organization, members, Docker Offload, AI governance, licens
 weight: 30
 ---
 
-Licenses let you selectively choose which of your organization members have access to supported Docker products. Admin owners can oversee who on their team has active licenses, or configure licenses to assign automatically when members access supported Docker products. 
+Licenses let you selectively choose which of your organization members have access to supported Docker products. Organization owners can oversee who on their team has active licenses, or configure licenses to assign automatically when members access supported Docker products. 
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ To manage licenses for your organization:
 1. Sign in to [Docker Home](https://app.docker.com), then choose your organization.
 1. Select **Members** from the left navigation.
 1. Select the action menu at the end of the row to assign or revoke an active license.
-1. Optional. To manage automatic license assignment, enable or disable on a per-product basis with the **Automatically assign licenses** toggle. 
+1. Optional. To manage automatic license assignment, turn on or turn off on a per-product basis with the **Automatically assign licenses** toggle. 
 
 You must assign licenses manually, or configure automatic license assignment to consume a license. Inviting a new member to your organization may consume a seat for your Docker Team or Docker Business subscription, but won't auto-assign product licenses by default. Conversely, purchasing a set of licenses doesn't automatically assign licenses to existing members.
 

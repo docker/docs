@@ -34,7 +34,7 @@ AI Governance licenses let admins create and apply organization-wide AI Governan
 - AI Governance licenses are separate from Docker Team or Business. 
 - You can purchase AI Governance licenses without an existing subscription.
 - When you purchase AI Governance licenses, you may assign them to organization members without a Docker subscription seat. 
-- AI Governance licenses currently applies to Docker Sandbox usage.
+- AI Governance licenses currently apply to Docker Sandbox usage.
 
 When a member who holds an AI governance license uses Docker Sandbox, the organization policy overrides the member’s local policy rules. Members without AI Governance licenses can still use Docker Sandbox, but organization policies will not govern their usage. 
 
