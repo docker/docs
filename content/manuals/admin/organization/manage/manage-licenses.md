@@ -30,8 +30,8 @@ You must assign licenses manually, or configure automatic license assignment to 
 
 Automated license assignment gives members a product license when they use a supported product for the first time.
 
-- For AI Governance and Docker Offload licenses, invoking `sbx` or signing into Docker Desktop (respectively) triggers an event that provisions licenses on a first come, first serve basis.
-- Licenses are assigned until exhausted. At that point, no more licenses will be assigned or added to your available license pool. 
+- For AI Governance and Docker Core licenses, invoking `sbx` or signing into Docker Desktop (respectively) triggers an event that provisions licenses on a first come, first serve basis.
+- Licenses are assigned until exhausted. Once the available licenses are exhausted, automatic license assignment will stop until more licenses are purchased or assigned licenses are revoked.
 - Members may still use Docker Sandbox or Docker Desktop, but won't be held to the policies of those product licenses. 
 
 Automated license assignment requires [setting up SSO](/manuals/enterprise/security/single-sign-on/connect.md), then [provisioning with SCIM or JIT](/manuals/enterprise/security/provisioning/_index.md). 
