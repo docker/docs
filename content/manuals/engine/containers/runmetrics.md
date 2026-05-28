@@ -68,6 +68,14 @@ cgroup v2 is used by default on the following distributions:
 - Debian GNU/Linux (since 11)
 - Ubuntu (since 21.10)
 
+> [!IMPORTANT]
+>
+> The detailed metrics examples later in this page describe the cgroup v1 file
+> layout. On cgroup v2 hosts, use this page to find the container's cgroup
+> directory and then inspect the controller files in that directory (for
+> example, `memory.*`, `cpu.*`, and `io.*`). For controller semantics, refer to
+> the [cgroup v2 kernel documentation](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html).
+
 #### cgroup v1
 
 You can look into `/proc/cgroups` to see the different control group subsystems
@@ -137,12 +145,14 @@ container, take a look at the following paths:
 - `/sys/fs/cgroup/docker/<longid>/` on cgroup v2, `cgroupfs` driver
 - `/sys/fs/cgroup/system.slice/docker-<longid>.scope/` on cgroup v2, `systemd` driver
 
-### Metrics from cgroups: memory, CPU, block I/O
+### Metrics from cgroups: memory, CPU, block I/O (cgroup v1)
 
 > [!NOTE]
 >
-> This section isn't yet updated for cgroup v2.
-> For further information about cgroup v2, refer to [the kernel documentation](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html).
+> This section documents the cgroup v1 metric files and formats.
+> For cgroup v2, inspect the relevant controller files in the container's
+> cgroup directory and refer to
+> [the kernel documentation](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html).
 
 For each subsystem (memory, CPU, and block I/O), one or
 more pseudo-files exist and contain statistics.
