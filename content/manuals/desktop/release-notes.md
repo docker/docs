@@ -6,12 +6,9 @@ linkTitle: Release notes
 tags: [Release notes]
 toc_max: 2
 aliases:
-- /docker-for-mac/release-notes/
 - /docker-for-mac/edge-release-notes/
 - /desktop/mac/release-notes/
 - /docker-for-windows/edge-release-notes/
-- /docker-for-windows/release-notes/
-- /desktop/windows/release-notes/
 - /desktop/linux/release-notes/
 - /mackit/release-notes/
 weight: 220

@@ -6,7 +6,6 @@ aliases:
  - /compose/compose-file/compose-versioning/
  - /compose/compose-file/compose-file-v3/
  - /compose/compose-file/compose-file-v2/
- - /compose/compose-file/legacy-versions/
 ---
 
 The legacy versions of the Compose file reference has moved to the [V1 branch of the Compose repository](https://github.com/docker/compose/tree/v1/docs). They are no longer being actively maintained. 

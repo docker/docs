@@ -5,8 +5,6 @@ toc_max: 3
 title: Install the Docker Compose plugin
 linkTitle: Plugin
 aliases:
-- /compose/compose-plugin/
-- /compose/compose-linux/
 - /compose/install/compose-plugin/
 weight: 10
 ---

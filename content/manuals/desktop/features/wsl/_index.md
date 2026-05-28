@@ -8,7 +8,6 @@ linkTitle: WSL
 weight: 120
 aliases:
 - /docker-for-windows/wsl/
-- /docker-for-windows/wsl-tech-preview/
 - /desktop/windows/wsl/
 - /desktop/wsl/
 ---

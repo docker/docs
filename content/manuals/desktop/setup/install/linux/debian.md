@@ -7,7 +7,6 @@ linkTitle: Debian
 weight: 20
 toc_max: 4
 aliases:
-- /desktop/linux/install/debian/
 - /desktop/install/debian/
 - /desktop/install/linux/debian/
 ---

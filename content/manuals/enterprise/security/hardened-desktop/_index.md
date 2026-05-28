@@ -5,7 +5,6 @@ description: Security features that help organizations secure developer environm
 keywords: security, hardened desktop, enhanced container isolation, registry access management, settings management, admins, docker desktop, image access management, air-gapped containers
 tags: [admin]
 aliases:
- - /desktop/hardened-desktop/
  - /security/for-admins/hardened-desktop/
 grid:
   - title: "Settings Management"

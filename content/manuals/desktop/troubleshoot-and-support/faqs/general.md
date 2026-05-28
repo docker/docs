@@ -5,10 +5,6 @@ title: General FAQs for Desktop
 linkTitle: General
 tags: [FAQ]
 aliases:
-- /mackit/faqs/
-- /docker-for-mac/faqs/
-- /docker-for-windows/faqs/
-- /desktop/faqs/
 - /desktop/faqs/general/
 weight: 10
 ---

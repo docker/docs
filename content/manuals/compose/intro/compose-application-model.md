@@ -5,7 +5,6 @@ description: Learn how Docker Compose works, from the application model to Compo
 keywords: docker compose, compose.yaml, docker compose model, compose cli, multi-container application, compose example 
 aliases:
 - /compose/compose-file/02-model/
-- /compose/compose-yaml-file/
 - /compose/compose-application-model/
 ---
 

@@ -5,7 +5,6 @@ tags: [admin]
 title: Settings Management
 linkTitle: Settings Management
 aliases:
-  - /desktop/hardened-desktop/settings-management/
   - /security/for-admins/hardened-desktop/settings-management/
 weight: 10
 ---

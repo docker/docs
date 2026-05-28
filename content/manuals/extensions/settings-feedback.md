@@ -4,8 +4,6 @@ keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows, feedback
 title: Settings and feedback for Docker Extensions
 linkTitle: Settings and feedback
 weight: 40
-aliases:
- - /desktop/extensions/settings-feedback/
 ---
 
 ## Settings

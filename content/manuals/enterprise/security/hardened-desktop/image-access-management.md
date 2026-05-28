@@ -4,8 +4,6 @@ description: Control which Docker Hub images developers can access with Image Ac
 keywords: image access management, docker official images, verified publisher, supply chain security, docker business, allow list, image restrictions, pull restrictions
 tags: [admin]
 aliases:
- - /docker-hub/image-access-management/
- - /desktop/hardened-desktop/image-access-management/
  - /admin/organization/image-access/
  - /security/for-admins/image-access-management/
  - /security/for-admins/hardened-desktop/image-access-management/

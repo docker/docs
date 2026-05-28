@@ -3,8 +3,6 @@ description: Extensions
 keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows,
 title: Non-marketplace extensions
 weight: 20
-aliases:
- - /desktop/extensions/non-marketplace/
 ---
 
 ## Install an extension not available in the Marketplace

@@ -5,7 +5,6 @@ title: FAQs for Docker Desktop for Linux
 linkTitle: Linux
 tags: [FAQ]
 aliases:
-  - /desktop/linux/space/
   - /desktop/faqs/linuxfaqs/
 weight: 40
 ---

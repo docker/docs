@@ -6,7 +6,6 @@ linkTitle: Mac
 tags: [FAQ]
 aliases:
 - /desktop/mac/space/
-- /docker-for-mac/space/
 - /desktop/faqs/macfaqs/
 weight: 20
 ---

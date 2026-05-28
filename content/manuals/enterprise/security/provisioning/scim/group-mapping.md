@@ -5,7 +5,6 @@ keywords: Group Mapping, SCIM, Docker Admin, admin, security, team management, u
 aliases:
 - /admin/company/settings/group-mapping/
 - /admin/organization/security-settings/group-mapping/
-- /docker-hub/group-mapping/
 - /security/for-admins/group-mapping/
 - /security/for-admins/provisioning/scim/group-mapping/
 - /enterprise/security/provisioning/group-mapping/

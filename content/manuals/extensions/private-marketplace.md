@@ -5,8 +5,6 @@ title: Configure a private marketplace for extensions
 tags: [admin]
 linkTitle: Configure a private marketplace
 weight: 30
-aliases:
- - /desktop/extensions/private-marketplace/
 ---
 
 {{< summary-bar feature_name="Private marketplace" >}}

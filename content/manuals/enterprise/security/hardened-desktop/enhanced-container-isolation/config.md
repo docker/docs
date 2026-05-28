@@ -4,7 +4,6 @@ linkTitle: Configure advanced settings
 description: Configure Docker socket exceptions and advanced settings for Enhanced Container Isolation
 keywords: enhanced container isolation, docker socket, configuration, testcontainers, admin settings
 aliases:
- - /desktop/hardened-desktop/enhanced-container-isolation/config/
  - /security/for-admins/hardened-desktop/enhanced-container-isolation/config/
 weight: 20
 ---

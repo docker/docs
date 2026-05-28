@@ -8,7 +8,6 @@ tags: [ Troubleshooting ]
 weight: 10 
 aliases:
  - /desktop/troubleshoot/topics/
- - /manuals/desktop/troubleshoot-and-support/troubleshoot/workarounds/
 ---
 
 > [!TIP]

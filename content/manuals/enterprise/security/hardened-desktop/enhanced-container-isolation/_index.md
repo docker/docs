@@ -6,8 +6,6 @@ keywords: enhanced container isolation, container security, sysbox runtime, linu
 aliases:
  - /desktop/hardened-desktop/enhanced-container-isolation/
  - /security/for-admins/hardened-desktop/enhanced-container-isolation/
- - /security/hardened-desktop/enhanced-container-isolation/how-eci-works
- - /security/hardened-desktop/enhanced-container-isolation/features-benefits
 weight: 10
 ---
 

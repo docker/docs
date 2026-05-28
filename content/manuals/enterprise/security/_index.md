@@ -55,7 +55,7 @@ grid_admins:
   - title: Private marketplace for Extensions (Beta)
     description: Learn how to configure and set up a private marketplace with a curated list of extensions for your Docker Desktop users.
     icon: building-storefront
-    link: /desktop/extensions/private-marketplace/
+    link: /extensions/private-marketplace/
   - title: Organization access tokens
     description: Create organization access tokens as an alternative to a password.
     link: /enterprise/security/access-tokens/

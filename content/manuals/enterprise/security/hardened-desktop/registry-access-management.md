@@ -4,9 +4,7 @@ description: Control access to approved container registries with Registry Acces
 keywords: registry access management, container registry, security controls, docker business, admin controls
 tags: [admin]
 aliases:
- - /desktop/hardened-desktop/registry-access-management/
  - /admin/organization/registry-access/
- - /docker-hub/registry-access-management/
  - /security/for-admins/registry-access-management/
  - /security/for-admins/hardened-desktop/registry-access-management/
 weight: 40

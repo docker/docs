@@ -3,8 +3,6 @@ title: Air-gapped containers
 description: Restrict outbound container traffic using proxy rules, PAC files, and network isolation with Docker Desktop air-gapped containers
 keywords: air gapped containers, network security, proxy configuration, container isolation, docker desktop, PAC file, network isolation
 aliases:
- - /desktop/hardened-desktop/settings-management/air-gapped-containers/
- - /desktop/hardened-desktop/air-gapped-containers/
  - /security/for-admins/hardened-desktop/air-gapped-containers/
 weight: 30
 ---

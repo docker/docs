@@ -7,7 +7,6 @@ keywords: authentication, registry.json, configure, enforce sign-in, docker desk
 tags: [admin]
 aliases:
  - /security/for-admins/configure-sign-in/
- - /docker-hub/configure-sign-in/
  - /security/for-admins/enforce-sign-in/
 weight: 30
 ---
