@@ -17,7 +17,7 @@ aliases:
 Before you begin, make sure the following tools are installed and available on your system:
 
 - You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
-- You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
+- You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
 
 > [!NOTE]
 > New to Docker? Start with the [Docker basics](/get-started/docker-concepts/the-basics/what-is-a-container.md) guide to get familiar with key concepts like images, containers, and Dockerfiles.
@@ -40,7 +40,7 @@ By the end of this guide, you will:
 
 Clone the sample application to use with this guide. Open a terminal, change
 directory to a directory that you want to work in, and run the following command
-to clone the git repository:
+to clone the Git repository:
 
 ```console
 $ git clone https://github.com/kristiyan-velkov/docker-nodejs-sample
@@ -70,6 +70,7 @@ Choosing DHI offers the advantage of a production-ready image that is lightweigh
 Docker Hardened Images (DHIs) are available for Node.js in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/node). Docker Hardened Images are freely available to everyone with no subscription required. You can pull and use them like any other Docker image after signing in to the DHI registry. For more information, see the [DHI quickstart](/dhi/get-started/) guide.
 
 1. Sign in to the DHI registry:
+
    ```console
    $ docker login dhi.io
    ```
@@ -79,7 +80,7 @@ Docker Hardened Images (DHIs) are available for Node.js in the [Docker Hardened 
    $ docker pull dhi.io/node:24-alpine3.22-dev
    ```
 
-Create a file named `Dockerfile` with the following contents. The `FROM` instruction uses `dhi.io/node:24-alpine3.22-dev` as the base image.
+Create a file named `Dockerfile` in your project root with the following contents. The `FROM` instruction uses `dhi.io/node:24-alpine3.22-dev` as the base image.
 
 ```dockerfile
 # ========================================
@@ -225,7 +226,7 @@ CMD ["npm", "run", "test:coverage"]
 {{< /tab >}}
 {{< tab name="Using the Docker Official Image" >}}
 
-Create a file named `Dockerfile` with the following contents:
+Create a file named `Dockerfile` in your project root with the following contents:
 
 ```dockerfile
 # ========================================
@@ -369,11 +370,13 @@ USER nodejs
 # Run tests with coverage
 CMD ["npm", "run", "test:coverage"]
 ```
+
 {{< /tab >}}
 
 {{< /tabs >}}
 
 Key features of this Dockerfile:
+
 - Multi-stage structure — Separate stages for dependencies, build, development, production, and testing to keep each phase clean and efficient.
 - Lean production image — Optimized layering reduces size and keeps only what’s required to run the app.
 - Security-minded setup — Uses a dedicated non-root user and excludes unnecessary packages.
@@ -403,18 +406,18 @@ services:
       target: development
     container_name: todoapp-dev
     ports:
-      - '${APP_PORT:-3000}:3000' # API server
-      - '${VITE_PORT:-5173}:5173' # Vite dev server
-      - '${DEBUG_PORT:-9229}:9229' # Node.js debugger
+      - "${APP_PORT:-3000}:3000" # API server
+      - "${VITE_PORT:-5173}:5173" # Vite dev server
+      - "${DEBUG_PORT:-9229}:9229" # Node.js debugger
     environment:
       NODE_ENV: development
-      DOCKER_ENV: 'true'
+      DOCKER_ENV: "true"
       POSTGRES_HOST: db
       POSTGRES_PORT: 5432
       POSTGRES_DB: todoapp
       POSTGRES_USER: todoapp
-      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-todoapp_password}'
-      ALLOWED_ORIGINS: '${ALLOWED_ORIGINS:-http://localhost:3000,http://localhost:5173}'
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-todoapp_password}"
+      ALLOWED_ORIGINS: "${ALLOWED_ORIGINS:-http://localhost:3000,http://localhost:5173}"
     volumes:
       - ./src:/app/src:ro
       - ./package.json:/app/package.json
@@ -430,8 +433,8 @@ services:
           path: ./src
           target: /app/src
           ignore:
-            - '**/*.test.*'
-            - '**/__tests__/**'
+            - "**/*.test.*"
+            - "**/__tests__/**"
         - action: rebuild
           path: ./package.json
         - action: sync
@@ -457,15 +460,15 @@ services:
       target: production
     container_name: todoapp-prod
     ports:
-      - '${PROD_PORT:-8080}:3000'
+      - "${PROD_PORT:-8080}:3000"
     environment:
       NODE_ENV: production
       POSTGRES_HOST: db
       POSTGRES_PORT: 5432
       POSTGRES_DB: todoapp
       POSTGRES_USER: todoapp
-      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-todoapp_password}'
-      ALLOWED_ORIGINS: '${ALLOWED_ORIGINS:-https://yourdomain.com}'
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-todoapp_password}"
+      ALLOWED_ORIGINS: "${ALLOWED_ORIGINS:-https://yourdomain.com}"
     depends_on:
       db:
         condition: service_healthy
@@ -473,11 +476,11 @@ services:
     deploy:
       resources:
         limits:
-          memory: '${PROD_MEMORY_LIMIT:-2G}'
-          cpus: '${PROD_CPU_LIMIT:-1.0}'
+          memory: "${PROD_MEMORY_LIMIT:-2G}"
+          cpus: "${PROD_CPU_LIMIT:-1.0}"
         reservations:
-          memory: '${PROD_MEMORY_RESERVATION:-512M}'
-          cpus: '${PROD_CPU_RESERVATION:-0.25}'
+          memory: "${PROD_MEMORY_RESERVATION:-512M}"
+          cpus: "${PROD_CPU_RESERVATION:-0.25}"
     security_opt:
       - no-new-privileges:true
     read_only: true
@@ -495,16 +498,20 @@ services:
     image: postgres:18-alpine
     container_name: todoapp-db
     environment:
-      POSTGRES_DB: '${POSTGRES_DB:-todoapp}'
-      POSTGRES_USER: '${POSTGRES_USER:-todoapp}'
-      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-todoapp_password}'
+      POSTGRES_DB: "${POSTGRES_DB:-todoapp}"
+      POSTGRES_USER: "${POSTGRES_USER:-todoapp}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-todoapp_password}"
     volumes:
       - postgres_data:/var/lib/postgresql
     ports:
-      - '${DB_PORT:-5432}:5432'
+      - "${DB_PORT:-5432}:5432"
     restart: unless-stopped
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-todoapp} -d ${POSTGRES_DB:-todoapp}']
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-todoapp} -d ${POSTGRES_DB:-todoapp}",
+        ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -580,8 +587,8 @@ The `.dockerignore` file tells Docker which files and folders to exclude when bu
 > [!NOTE]
 > This helps:
 >
-> - Reduce image size  
-> - Speed up the build process  
+> - Reduce image size
+> - Speed up the build process
 > - Prevent sensitive or unnecessary files (like `.env`, `.git`, or `node_modules`) from being added to the final image.
 >
 > To learn more, visit the [.dockerignore reference](/reference/dockerfile.md#dockerignore-file).
@@ -695,7 +702,7 @@ If the build was successful, you should see `docker-nodejs-sample` image listed.
 
 ## Run the containerized application
 
-In the previous step, you created a Dockerfile for your Node.js application and built a Docker image using the docker build command. Now it’s time to run that image in a container and verify that your application works as expected.
+In the previous step, you created a Dockerfile for your Node.js application and built a Docker image using the `docker build` command. Now it’s time to run that image in a container and verify that your application works as expected.
 
 Inside the `docker-nodejs-sample` directory, run the following command in a terminal.
 
