@@ -119,9 +119,9 @@ $ sbx run my-sandbox
 
 The clone follows whichever ref your host repository has checked out at
 create time. No new branch is created automatically. If you want the agent
-to work on a dedicated branch, instruct it (or open a shell with `sbx exec`
-yourself) to run `git checkout -b my-feature` inside the sandbox before it
-starts editing.
+to work on a dedicated branch, instruct it to run `git checkout -b
+my-feature` inside the sandbox before it starts editing. Alternatively,
+open a shell with `sbx exec` and create the branch yourself.
 
 > [!NOTE]
 > Clone mode is fixed at create time. To switch an existing sandbox to

@@ -86,13 +86,12 @@ $ sbx run --clone claude -- agents
 This invocation replaces the
 [default startup command](#default-startup-command), so it doesn't
 include `--dangerously-skip-permissions` and you can't switch to
-bypass-permissions mode inside the sandbox. Either pass the flag too:
+bypass-permissions mode inside the sandbox. To work around this, either
+use Claude Code's auto mode or pass the flag explicitly:
 
 ```console
 $ sbx run --clone claude -- --dangerously-skip-permissions agents
 ```
-
-or use Claude Code's auto mode.
 
 The subagents' worktrees live inside the sandbox's private clone — none
 of them touches your host repository. Each subagent commits to its own

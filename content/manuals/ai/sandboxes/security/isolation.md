@@ -3,6 +3,8 @@ title: Isolation layers
 weight: 10
 description: How Docker Sandboxes isolate AI agents using hypervisor, network, Docker Engine, workspace, and credential boundaries.
 keywords: docker sandboxes, isolation, hypervisor, network, credentials, workspace, git
+aliases:
+  - /ai/sandboxes/security/workspace/
 ---
 
 AI coding agents need to execute code, install packages, and run tools on
@@ -117,14 +119,14 @@ Some of these files execute code when you trigger normal development
 actions — committing, pushing, building, or opening the project in an IDE.
 Review them after any agent session before performing those actions:
 
-- **Git hooks** (`.git/hooks/`) run on commit, push, and other Git actions.
-  These are inside `.git/` and **do not appear in `git diff` output** —
+- Git hooks (`.git/hooks/`) run on commit, push, and other Git actions.
+  These are inside `.git/` and don't appear in `git diff` output —
   check them separately with `ls -la .git/hooks/`.
-- **CI configuration** (`.github/workflows/`, `.gitlab-ci.yml`) runs on
+- CI configuration (`.github/workflows/`, `.gitlab-ci.yml`) runs on
   push.
-- **Build files** (`Makefile`, `package.json` scripts, `Cargo.toml`) run
+- Build files (`Makefile`, `package.json` scripts, `Cargo.toml`) run
   during build or install steps.
-- **IDE configuration** (`.vscode/tasks.json`, `.idea/`) can run tasks
+- IDE configuration (`.vscode/tasks.json`, `.idea/`) can run tasks
   when you open the project.
 
 > [!WARNING]

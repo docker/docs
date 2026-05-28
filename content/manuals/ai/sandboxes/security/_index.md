@@ -51,10 +51,10 @@ The sandbox security model has five layers. See
   [Deny-by-default policy](defaults/). Non-HTTP protocols blocked entirely.
 - **Docker Engine isolation:** each sandbox has its own Docker Engine with no
   path to the host daemon.
-- **Workspace isolation:** with `--clone`, the agent works on a private
-  in-VM clone and your repository is mounted read-only. In direct mode
-  (default), the agent edits your working tree directly — no boundary
-  applies.
+- **Workspace isolation** (opt-in via `--clone`): the agent works on a
+  private in-VM clone and your repository is mounted read-only. The default
+  direct mode applies no workspace boundary — the agent edits your working
+  tree in place.
 - **Credential isolation:** API keys are injected into HTTP headers by the
   host-side proxy. Credential values never enter the VM.
 
@@ -71,7 +71,7 @@ permitted and what is blocked.
 The sandbox isolates the agent from your host system, but the agent's actions
 can still affect you through the shared workspace and allowed network channels.
 
-**Workspace changes are live on your host in direct mode.** With the default
+In direct mode, workspace changes are live on your host. With the default
 direct mount, the agent edits the same files you see on your host. This
 includes files that execute implicitly during normal development: Git hooks,
 CI configuration, IDE task configs, `Makefile`, `package.json` scripts, and
@@ -81,7 +81,7 @@ check them separately. See
 [Workspace isolation](isolation/#workspace-isolation) for the full list and
 for the alternative clone-mode boundary.
 
-**Default allowed domains include broad wildcards.** Some defaults like
+The default allowed domains include broad wildcards. Some defaults like
 `*.googleapis.com` cover many services beyond AI APIs. Run `sbx policy ls` to
 see the full list of active rules, and remove entries you don't need. See
 [Default security posture](defaults/).
