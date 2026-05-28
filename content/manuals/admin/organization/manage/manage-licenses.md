@@ -38,9 +38,14 @@ Automated license assignment gives members a product license when they use a sup
 Automated license assignment requires [setting up SSO](/manuals/enterprise/security/single-sign-on/connect.md), then [provisioning with SCIM or JIT](/manuals/enterprise/security/provisioning/_index.md). 
 
 > [!NOTE]
-> AI Governance licenses include SSO and provisioning features regardless of your Docker subscription status.  
+> AI Governance licenses include SSO and 
+> provisioning features regardless of 
+> your Docker Core subscription.  
 
 ## What’s next
 
-- AI Governance
-- Docker Offload
+To learn more about Docker products:
+
+- Learn more about [AI Governance](/manuals/ai/sandboxes/security/governance.md).
+- Learn more about [Docker Offload](/manuals/offload/about.md).
+- Enable [SSO](/manuals/enterprise/security/single-sign-on/_index.md) and set up [provisioning](/manuals/enterprise/security/provisioning/_index.md).
