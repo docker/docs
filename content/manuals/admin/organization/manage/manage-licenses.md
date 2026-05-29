@@ -6,10 +6,10 @@ keywords: licenses, organization, members, Docker Offload, AI governance, licens
 weight: 30
 ---
 
-Licenses let you selectively choose which of your organization members have access to supported Docker products. Organization owners can oversee who on their team has active licenses, or configure licenses to assign automatically when members access supported Docker products. 
+Licenses let you selectively choose which of your organization members have access to supported Docker products. Organization owners can oversee who on their team has active licenses, or configure licenses to assign automatically when members access supported Docker products. Like Docker Core seats, licenses can be configured on a per member basis. 
 
 > [!TIP]
-> To learn more about licenses, see [scale your subscription](/manuals/subscription/scale.md), 
+> To learn more about product licenses, Docker Core seats, and other Docker add-ons see [scale your subscription](/manuals/subscription/scale.md), 
 > or [contact sales](https://www.docker.com/pricing/contact-sales/) to purchase licenses.
 
 ## Manage licenses
@@ -24,23 +24,25 @@ To manage licenses for your organization:
 1. Optional. To bulk assign or revoke licenses, choose the members you want to bulk manage, then select the **Bulk** menu. 
 1. Optional. To manage automatic license assignment, turn off or turn on on a per-product basis with the **Automatically assign licenses** toggle. 
 
-You must assign licenses manually, or configure automatic license assignment to consume a license. Inviting a new member to your organization may consume a seat for your Docker Team or Docker Business subscription, but won't auto-assign product licenses by default. Conversely, purchasing a set of licenses doesn't automatically assign licenses to existing members.
+You must assign licenses manually, or configure automatic license assignment to consume a license. Inviting a new member to your organization may consume a seat for your Docker Core subscription, but won't auto-assign product licenses by default. Conversely, purchasing a set of licenses won't trigger automatic assignment to existing members.
 
 ## Automatic license assignment
 
-Automatic license assignment gives members a product license when they use a supported product for the first time.
+Automatic license assignment gives members a product license when they use a supported product for the first time. Automatic license assignment is available for AI Governance licenses. 
 
-- For AI Governance and Docker Core seats, invoking `sbx` or signing into Docker Desktop (respectively) triggers an event that provisions licenses on a first-come, first served basis.
+- When you purchase AI Governance, signing into Docker Sandboxes with `sbx login` automatically provisions AI Governance licenses on a first-come, first served basis. 
+- Similarly, logins to Docker Desktop will automatically provision Docker Core licenses for AI Governance license-holding organizations that have available Docker Core seats.
 - Licenses are assigned until exhausted. 
    - Once the available licenses are exhausted, automatic license assignment will stop until you purchase more licenses or revoke assigned licenses.
    - Members can still use Docker Sandbox or Docker Desktop, but organization policies for those products won't affect their usage. 
 
-Automatic license assignment requires [setting up SSO](/manuals/enterprise/security/single-sign-on/connect.md), then [provisioning with SCIM or JIT](/manuals/enterprise/security/provisioning/_index.md). AI Governance licenses include SSO and provisioning features regardless of your Docker Core subscription. 
+AI Governance licenses include SSO and provisioning features regardless of your Docker Core subscription. Automatic license assignment requires [setting up SSO](/manuals/enterprise/security/single-sign-on/connect.md), then [provisioning with SCIM or JIT](/manuals/enterprise/security/provisioning/_index.md).
 
 ## What's next
 
-To learn more about Docker products, see:
+See these docs to explore Docker Core add-ons, or products that need licenses:
 
-- [AI Governance](/manuals/ai/sandboxes/security/governance.md)
-- [Docker Offload](/manuals/offload/about.md)
-- [SSO enablement](/manuals/enterprise/security/single-sign-on/_index.md) or [organization provisioning](/manuals/enterprise/security/provisioning/_index.md)
+- [Scale your subscription](/manuals/subscription/scale.md) to learn about different add-ons
+- [Manage seats](/manuals/admin/organization/manage/manage-seats.md) to add more seats to your Docker Core subscription
+- [AI Governance](/manuals/ai/sandboxes/security/governance.md) to set up organization policies for your organization members
+- [Docker Offload](/manuals/offload/about.md) to let your developers offload building and running containers to the cloud

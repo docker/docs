@@ -6,13 +6,13 @@ keywords: scale subscription, docker build cloud minutes, testcontainers cloud m
 weight: 30
 ---
 
-Docker subscriptions let you scale consumption as your needs grow. All paid Docker subscriptions include base amounts of Docker Build Cloud build minutes and Testcontainers Cloud runtime minutes that you can supplement with additional capacity.
+Docker Core subscriptions include basic entitlements for your organizations that you can scale with additional add-ons as your needs grow. You can purchase different add-ons that extend usage for your organizations:
 
-You can scale consumption for:
-
-- Docker Build Cloud build minutes
-- Testcontainers Cloud runtime minutes
-- Docker Hardened Images (DHI) repositories
+- Seats for Docker Core subscriptions like Docker Team and Docker Business
+- Licenses for individual products, like AI Governance (available for Docker Sandboxes) and Docker Offload
+- Build minutes for Docker Build Cloud
+- Cloud runtime minutes for Testcontainers
+- Repositories for Docker Hardened Images (DHI) Select 
 
 ## Add licenses
 
@@ -31,10 +31,9 @@ Once you've purchased licenses for your organization, you can [manage license as
 
 AI Governance licenses let admins create and apply organization-wide AI Governance policies for license-holding members.
 
-- AI Governance licenses are separate from Docker Team or Business. 
-- You can purchase AI Governance licenses without an existing subscription.
-- When you purchase AI Governance licenses, you may assign them to organization members without a Docker subscription seat. 
 - AI Governance licenses currently apply to Docker Sandbox usage.
+- AI Governance licenses are separate from Docker Team or Business, so you can purchase AI Governance licenses without an existing subscription.
+- When you purchase AI Governance licenses, you may assign them to organization members without a Docker Core seat. 
 
 When a member who holds an AI Governance license uses Docker Sandbox, the organization policy overrides the member’s local policy rules. Members without AI Governance licenses can still use Docker Sandbox, but organization policies will not govern their usage. 
 
