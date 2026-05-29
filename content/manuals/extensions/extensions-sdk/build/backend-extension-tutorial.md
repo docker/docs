@@ -275,7 +275,7 @@ Replace the `ui/src/App.tsx` file with the following code:
 ```tsx
 
 // ui/src/App.tsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createDockerDesktopClient } from "@docker/extension-api-client";
 
 //obtain docker desktop extension client
