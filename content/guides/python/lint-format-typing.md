@@ -154,8 +154,8 @@ directory to set up Ruff hooks:
 # `git commit`. See https://pre-commit.com/
 
 repos:
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.2.2
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.15
     hooks:
       - id: ruff
         args: [--fix]

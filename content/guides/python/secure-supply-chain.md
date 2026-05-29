@@ -106,17 +106,18 @@ so look up both:
 
 ```console
 $ docker buildx imagetools inspect dhi.io/python:3.12-dev --format "{{ .Manifest.Digest }}"
-sha256:dev123...
+sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945
 $ docker buildx imagetools inspect dhi.io/python:3.12 --format "{{ .Manifest.Digest }}"
-sha256:prod123...
+sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ```
 
-Update your `Dockerfile` to reference each digest on the matching `FROM` line:
+Each digest is a 64-character hex string. Update your `Dockerfile` to reference
+each digest on the matching `FROM` line:
 
 ```dockerfile
-FROM dhi.io/python:3.12-dev@sha256:dev123... AS builder
+FROM dhi.io/python:3.12-dev@sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945 AS builder
 # ...
-FROM dhi.io/python:3.12@sha256:prod123...
+FROM dhi.io/python:3.12@sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ```
 
 > [!TIP]

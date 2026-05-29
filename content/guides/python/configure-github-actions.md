@@ -156,5 +156,6 @@ Related information:
 
 ## Next steps
 
-In the next section, you'll learn how you can develop locally using Kubernetes.
+In the next section, you'll learn how to inspect and generate supply chain
+attestations for your image. See [Secure your supply chain](secure-supply-chain.md).
 

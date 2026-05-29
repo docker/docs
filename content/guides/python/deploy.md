@@ -207,7 +207,7 @@ In these Kubernetes YAML files, there are various objects, separated by the `---
   your Python application](configure-github-actions.md).
 - A Service, which will define how the ports are mapped in the containers.
 - A PersistentVolumeClaim, to define a storage that will be persistent through restarts for the database.
-- A Secret, Keeping the database password as an example using secret Kubernetes resource.
+- A Secret, which stores the database password as a Kubernetes Secret resource.
 - A NodePort service, which will route traffic from port 30001 on your host to
   port 8000 inside the pods it routes to, so you can reach your app
   from the network.
