@@ -270,4 +270,4 @@ working tree are unaffected.
 - [Credentials](security/credentials.md) — credential storage and management
 - [Workspace isolation](security/isolation.md#workspace-isolation) — what
   the agent can affect on your host, and how to review changes
-- [Policies](governance/local.md) — control outbound access
+- [Governance](governance/) — control outbound access

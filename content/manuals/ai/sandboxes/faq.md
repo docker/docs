@@ -99,7 +99,7 @@ $ echo $BRAVE_API_KEY
 ## Why do agents run without approval prompts?
 
 The sandbox itself is the safety boundary. Because agents run inside an
-isolated microVM with [network policies](governance/local.md),
+isolated microVM with [network policies](governance/),
 [credential isolation](security/credentials.md), and no access to your host
 system outside the workspace, the usual reasons for approval prompts (preventing
 destructive commands, network access, file modifications) are handled by the
