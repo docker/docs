@@ -42,7 +42,7 @@ layers, and volumes, and this grows as you build images and install packages.
 
 All outbound traffic from the sandbox routes through an HTTP/HTTPS proxy on
 your host. Agents are configured to use the proxy automatically. The proxy
-enforces [network access policies](governance/local.md) and handles
+enforces [network access policies](governance/) and handles
 [credential injection](security/credentials.md). See
 [Network isolation](security/isolation.md#network-isolation) for how this
 works and [Default security posture](security/defaults.md) for what is
