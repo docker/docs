@@ -395,6 +395,9 @@
   - /go/permissions/
 "/desktop/setup/install/mac-permission-requirements/#binding-privileged-ports":
   - /go/port-mapping/
+"/desktop/release-notes/":
+  # Link to the Docker Desktop release notes. Used for in-product linkage.
+  - /go/desktop-release-notes/
 
 # Docker Hardened Images (DHI)
 "/dhi/how-to/customize/":
