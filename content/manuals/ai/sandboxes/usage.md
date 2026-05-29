@@ -391,10 +391,18 @@ $ sbx ports my-sandbox --unpublish 8080:3000
 
 A few things to keep in mind:
 
-- **Services must bind to `0.0.0.0`** — a service listening on `127.0.0.1`
-  inside the sandbox won't be reachable through a published port. Most dev
+- **Services must listen on all interfaces** — a service listening only on
+  `127.0.0.1` inside the sandbox won't be reachable through a published port.
+  Bind to `0.0.0.0` for IPv4, or `[::]` to accept both IPv4 and IPv6. Most dev
   servers default to `127.0.0.1`, so you'll usually need to pass a flag like
-  `--host 0.0.0.0` when starting them.
+  `--host 0.0.0.0` or `--host '[::]'` when starting them.
+- **`localhost` on the host can resolve to IPv6** — by default, `--publish`
+  listens on both `127.0.0.1` and `::1`. Your browser or client may pick IPv6
+  when resolving `localhost`. If the sandboxed service only listens on IPv4,
+  the IPv6 connection fails with "connection reset by peer" — even though
+  `http://127.0.0.1:<port>/` works. To fix it, bind the sandboxed service to
+  `[::]` so it accepts both families, or restrict the published port to one
+  family with `--publish 8080:3000/tcp4` (IPv4) or `/tcp6` (IPv6).
 - **Not persistent** — published ports are lost when the sandbox stops or the
   daemon restarts. Re-publish after restarting.
 - **No create-time flag** — unlike `docker run -p`, there's no `--publish`
