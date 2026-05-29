@@ -9,6 +9,7 @@ aliases:
 - /docker-for-mac/edge-release-notes/
 - /desktop/mac/release-notes/
 - /docker-for-windows/edge-release-notes/
+- /desktop/windows/release-notes/
 - /desktop/linux/release-notes/
 - /mackit/release-notes/
 weight: 220
