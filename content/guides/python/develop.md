@@ -668,13 +668,13 @@ db/password.txt
 
 ### About these changes
 
-**`Dockerfile`**: The builder stage now includes `COPY . .` and a `CMD`
+The `Dockerfile` builder stage now includes `COPY . .` and a `CMD`
 instruction, which makes it directly runnable. This lets Compose target the
-builder stage during development without rebuilding the production stage.
-The production stage at the bottom is unchanged and still produces a minimal,
+builder stage during development without rebuilding the production stage. The
+production stage at the bottom is unchanged and still produces a minimal,
 nonroot runtime image for shipping.
 
-**`compose.yaml`**: The new `target: builder` line tells Compose to build and
+In `compose.yaml`, the new `target: builder` line tells Compose to build and
 run the builder stage of the Dockerfile during development. Unlike the minimal
 production image, the development image includes a shell and additional tools
 that make debugging easier. If you need a shell in a running production
@@ -1505,4 +1505,4 @@ Related information:
 
 ## Next steps
 
-In the next section, you'll learn how you can set up linting, formatting and type checking to follow the best practices in Python apps.
+In the next section, you'll learn how you can set up linting, formatting, and type checking to follow the best practices in Python apps.

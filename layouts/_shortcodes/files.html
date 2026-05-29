@@ -48,24 +48,39 @@
 {{ else }}
   {{ $bashLines = $bashLines | append (printf "mkdir %s && cd %s" $name $name) }}
 {{ end }}
+{{/* Use an unlikely heredoc delimiter so a file whose content contains a
+     bare `EOF` line (for example, a Dockerfile that itself has a `RUN <<EOF`
+     block) doesn't close the scaffold's heredoc early and leak the rest of
+     the file as shell commands. */}}
 {{ range $files }}
-  {{ $bashLines = $bashLines | append (printf "cat > %s <<'EOF'" .path) }}
+  {{ $bashLines = $bashLines | append (printf "cat > %s <<'__DOCKER_DOCS_SCAFFOLD_EOF__'" .path) }}
   {{ $bashLines = $bashLines | append .content }}
-  {{ $bashLines = $bashLines | append "EOF" }}
+  {{ $bashLines = $bashLines | append "__DOCKER_DOCS_SCAFFOLD_EOF__" }}
 {{ end }}
 {{ $bashScript := delimit $bashLines "\n" }}
 
 {{/* Build the PowerShell scaffolding command. */}}
+{{/* Write files via [System.IO.File]::WriteAllText with an explicit
+     UTF8Encoding($false), so output is UTF-8 without BOM in both Windows
+     PowerShell 5.1 and PowerShell 7+. The built-in `Set-Content -Encoding utf8`
+     emits a BOM on 5.1, which can break Dockerfile `# syntax=` directives and
+     some YAML parsers. */}}
 {{ $psLines := slice }}
+{{ $psLines = $psLines | append "# Write files as UTF-8 without BOM. Works on Windows PowerShell 5.1 and PowerShell 7+." }}
+{{ $psLines = $psLines | append "function WriteFile([string]$Path, [string]$Content) {" }}
+{{ $psLines = $psLines | append "    $full = Join-Path -Path (Get-Location).ProviderPath -ChildPath $Path" }}
+{{ $psLines = $psLines | append "    [System.IO.File]::WriteAllText($full, $Content, [System.Text.UTF8Encoding]::new($false))" }}
+{{ $psLines = $psLines | append "}" }}
+{{ $psLines = $psLines | append "" }}
 {{ $psLines = $psLines | append (printf "New-Item -ItemType Directory -Force -Path %s | Out-Null" $name) }}
 {{ range $d := $dirs }}
   {{ $psLines = $psLines | append (printf "New-Item -ItemType Directory -Force -Path %s/%s | Out-Null" $name $d) }}
 {{ end }}
 {{ $psLines = $psLines | append (printf "Set-Location %s" $name) }}
 {{ range $files }}
-  {{ $psLines = $psLines | append "@'" }}
+  {{ $psLines = $psLines | append (printf "WriteFile '%s' @'" .path) }}
   {{ $psLines = $psLines | append .content }}
-  {{ $psLines = $psLines | append (printf "'@ | Set-Content -Encoding utf8 -Path %s" .path) }}
+  {{ $psLines = $psLines | append "'@" }}
 {{ end }}
 {{ $psScript := delimit $psLines "\n" }}
 
