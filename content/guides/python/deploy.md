@@ -52,6 +52,11 @@ your Python application](./configure-github-actions.md).
 
 {{< file path="docker-postgres-kubernetes.yaml" status="new" >}}
 ```yaml
+# Kubernetes manifests for the PostgreSQL database used by the FastAPI app.
+# Contains a Deployment, Service, PersistentVolumeClaim, and Secret.
+
+# Deployment: runs one PostgreSQL pod. The image, port, env vars, and the
+# persistent volume mount are all defined here.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -90,6 +95,8 @@ spec:
           persistentVolumeClaim:
             claimName: postgres-pvc
 ---
+# Service: exposes PostgreSQL inside the cluster on port 5432 so the
+# application pod can reach it by the DNS name `postgres`.
 apiVersion: v1
 kind: Service
 metadata:
@@ -101,6 +108,7 @@ spec:
   selector:
     app: postgres
 ---
+# PersistentVolumeClaim: storage that survives pod restarts.
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -113,6 +121,8 @@ spec:
     requests:
       storage: 1Gi
 ---
+# Secret: holds the database password (base64-encoded). Referenced by both
+# the postgres Deployment and the application Deployment.
 apiVersion: v1
 kind: Secret
 metadata:
@@ -126,6 +136,12 @@ data:
 
 {{< file path="docker-python-kubernetes.yaml" status="new" >}}
 ```yaml
+# Kubernetes manifests for the FastAPI application.
+# Contains a Deployment and a NodePort Service.
+
+# Deployment: runs the FastAPI app. Connection details to the postgres
+# service are passed in via environment variables, and the database
+# password comes from the shared postgres-secret.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -162,6 +178,8 @@ spec:
           ports:
             - containerPort: 8000
 ---
+# Service: exposes the FastAPI app on port 30001 of the cluster node so
+# you can reach it from your host with `curl http://localhost:30001/`.
 apiVersion: v1
 kind: Service
 metadata:

@@ -38,6 +38,10 @@ Create a `pyproject.toml` file in your `python-docker-example` directory:
 
 {{< file path="pyproject.toml" status="new" >}}
 ```toml
+# Configuration for code-quality tools.
+# - [tool.ruff]: linting and formatting (https://docs.astral.sh/ruff/)
+# - [tool.pyright]: static type checking (https://microsoft.github.io/pyright/)
+
 [tool.ruff]
 target-version = "py312"
 
@@ -93,8 +97,12 @@ Update `pyproject.toml` to add the Pyright configuration at the bottom.
 
 {{< files name="python-docker-example" >}}
 
-{{< file path="pyproject.toml" status="modified" hl_lines="21-25" >}}
+{{< file path="pyproject.toml" status="modified" hl_lines="25-29" >}}
 ```toml
+# Configuration for code-quality tools.
+# - [tool.ruff]: linting and formatting (https://docs.astral.sh/ruff/)
+# - [tool.pyright]: static type checking (https://microsoft.github.io/pyright/)
+
 [tool.ruff]
 target-version = "py312"
 
@@ -142,6 +150,9 @@ directory to set up Ruff hooks:
 
 {{< file path=".pre-commit-config.yaml" status="new" >}}
 ```yaml
+# Pre-commit hook configuration. Runs Ruff (lint + format) on every
+# `git commit`. See https://pre-commit.com/
+
 repos:
   - repo: https://github.com/charliermarsh/ruff-pre-commit
     rev: v0.2.2

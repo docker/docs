@@ -44,6 +44,11 @@ following contents.
 
 {{< file path="app.py" status="modified" >}}
 ```python
+# FastAPI application backed by a PostgreSQL database via SQLModel.
+# The FastAPI lifespan handler creates database tables at startup.
+# Endpoints: GET / (greeting), POST /heroes/ (create), GET /heroes/ (list).
+# See https://fastapi.tiangolo.com/ and https://sqlmodel.tiangolo.com/
+
 from collections.abc import AsyncGenerator, Sequence
 from contextlib import asynccontextmanager
 
@@ -100,6 +105,11 @@ def read_heroes() -> Sequence[Hero]:
 
 {{< file path="config.py" status="new" >}}
 ```python
+# Pydantic settings that read PostgreSQL connection details from the
+# environment. Supports a password file (Docker secrets) via
+# POSTGRES_PASSWORD_FILE in addition to POSTGRES_PASSWORD.
+# See https://docs.pydantic.dev/latest/concepts/pydantic_settings/
+
 import os
 from typing import Any
 
@@ -359,6 +369,11 @@ Replace `Dockerfile` and `compose.yaml` with the following.
 
 {{< file path="app.py" >}}
 ```python
+# FastAPI application backed by a PostgreSQL database via SQLModel.
+# The FastAPI lifespan handler creates database tables at startup.
+# Endpoints: GET / (greeting), POST /heroes/ (create), GET /heroes/ (list).
+# See https://fastapi.tiangolo.com/ and https://sqlmodel.tiangolo.com/
+
 from collections.abc import AsyncGenerator, Sequence
 from contextlib import asynccontextmanager
 
@@ -415,6 +430,11 @@ def read_heroes() -> Sequence[Hero]:
 
 {{< file path="config.py" >}}
 ```python
+# Pydantic settings that read PostgreSQL connection details from the
+# environment. Supports a password file (Docker secrets) via
+# POSTGRES_PASSWORD_FILE in addition to POSTGRES_PASSWORD.
+# See https://docs.pydantic.dev/latest/concepts/pydantic_settings/
+
 import os
 from typing import Any
 
@@ -547,9 +567,12 @@ CMD ["/venv/bin/python3", "-m", "uvicorn", "app:app", "--host=0.0.0.0", "--port=
 ```
 {{< /file >}}
 
-{{< file path="compose.yaml" status="modified" hl_lines="5" >}}
+{{< file path="compose.yaml" status="modified" hl_lines="8" >}}
 ```yaml
 services:
+  # Application service. The `target: builder` line builds the development
+  # image (includes a shell and tools); the production stage of the
+  # Dockerfile is unused in development.
   server:
     build:
       context: .
@@ -691,6 +714,11 @@ database password.
 
 {{< file path="app.py" >}}
 ```python
+# FastAPI application backed by a PostgreSQL database via SQLModel.
+# The FastAPI lifespan handler creates database tables at startup.
+# Endpoints: GET / (greeting), POST /heroes/ (create), GET /heroes/ (list).
+# See https://fastapi.tiangolo.com/ and https://sqlmodel.tiangolo.com/
+
 from collections.abc import AsyncGenerator, Sequence
 from contextlib import asynccontextmanager
 
@@ -747,6 +775,11 @@ def read_heroes() -> Sequence[Hero]:
 
 {{< file path="config.py" >}}
 ```python
+# Pydantic settings that read PostgreSQL connection details from the
+# environment. Supports a password file (Docker secrets) via
+# POSTGRES_PASSWORD_FILE in addition to POSTGRES_PASSWORD.
+# See https://docs.pydantic.dev/latest/concepts/pydantic_settings/
+
 import os
 from typing import Any
 
@@ -879,9 +912,12 @@ CMD ["/venv/bin/python3", "-m", "uvicorn", "app:app", "--host=0.0.0.0", "--port=
 ```
 {{< /file >}}
 
-{{< file path="compose.yaml" status="modified" hl_lines="8-40" >}}
+{{< file path="compose.yaml" status="modified" hl_lines="11-46" >}}
 ```yaml
 services:
+  # Application service. The `target: builder` line builds the development
+  # image (includes a shell and tools); the production stage of the
+  # Dockerfile is unused in development.
   server:
     build:
       context: .
@@ -898,6 +934,9 @@ services:
         condition: service_healthy
     secrets:
       - db-password
+  # Database service. Reads the password from a Docker secret mounted at
+  # /run/secrets/db-password. Compose waits for the healthcheck to pass
+  # before starting the server, via the server's depends_on.
   db:
     image: dhi.io/postgres:18
     restart: always
@@ -1110,6 +1149,11 @@ Compose Watch instructions.
 
 {{< file path="app.py" >}}
 ```python
+# FastAPI application backed by a PostgreSQL database via SQLModel.
+# The FastAPI lifespan handler creates database tables at startup.
+# Endpoints: GET / (greeting), POST /heroes/ (create), GET /heroes/ (list).
+# See https://fastapi.tiangolo.com/ and https://sqlmodel.tiangolo.com/
+
 from collections.abc import AsyncGenerator, Sequence
 from contextlib import asynccontextmanager
 
@@ -1166,6 +1210,11 @@ def read_heroes() -> Sequence[Hero]:
 
 {{< file path="config.py" >}}
 ```python
+# Pydantic settings that read PostgreSQL connection details from the
+# environment. Supports a password file (Docker secrets) via
+# POSTGRES_PASSWORD_FILE in addition to POSTGRES_PASSWORD.
+# See https://docs.pydantic.dev/latest/concepts/pydantic_settings/
+
 import os
 from typing import Any
 
@@ -1298,9 +1347,12 @@ CMD ["/venv/bin/python3", "-m", "uvicorn", "app:app", "--host=0.0.0.0", "--port=
 ```
 {{< /file >}}
 
-{{< file path="compose.yaml" status="modified" hl_lines="18-21" >}}
+{{< file path="compose.yaml" status="modified" hl_lines="21-24" >}}
 ```yaml
 services:
+  # Application service. The `target: builder` line builds the development
+  # image (includes a shell and tools); the production stage of the
+  # Dockerfile is unused in development.
   server:
     build:
       context: .

@@ -57,6 +57,10 @@ Add the following content to the file:
 
 {{< file path=".github/workflows/build.yml" status="new" >}}
 ```yaml
+# GitHub Actions workflow that runs on every push to main.
+# - lint-test: runs pre-commit hooks (Ruff) and Pyright type checks.
+# - build_and_push: signs in to Docker Hub and the DHI registry, then
+#   builds and pushes the image (with SBOM and provenance attestations).
 name: Build and push Docker image
 
 on:
