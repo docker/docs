@@ -34,7 +34,10 @@ Hardened Images. Each example includes five variations:
 ```dockerfile
 #syntax=docker/dockerfile:1
 
-FROM ubuntu/node:18-24.04_edge
+FROM ubuntu:24.04
+
+RUN apt-get update && apt-get install -y nodejs npm --no-install-recommends && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /usr/src/app
 
 COPY package*.json ./
@@ -64,7 +67,7 @@ RUN npm install
 
 COPY . .
 
-CMD ["node", "index.js"]
+CMD ["index.js"]
 ```
 
 {{< /tab >}}
@@ -95,7 +98,7 @@ CMD ["node", "index.js"]
 #syntax=docker/dockerfile:1
 
 # === Build stage: Install dependencies and build application ===
-FROM dhi.io/node:23-alpine3.21-dev AS builder
+FROM dhi.io/node:22-alpine3.23-dev AS builder
 WORKDIR /usr/src/app
 
 COPY package*.json ./
@@ -108,7 +111,7 @@ RUN npm install
 COPY . .
 
 # === Final stage: Create minimal runtime image ===
-FROM dhi.io/node:23-alpine3.21
+FROM dhi.io/node:22-alpine3.23
 ENV PATH=/app/node_modules/.bin:$PATH
 
 COPY --from=builder --chown=node:node /usr/src/app /app
@@ -124,7 +127,7 @@ CMD ["index.js"]
 ```dockerfile
 #syntax=docker/dockerfile:1
 
-FROM dhi.io/node:23-alpine3.21-dev
+FROM dhi.io/node:22-alpine3.23-dev
 WORKDIR /usr/src/app
 
 COPY package*.json ./

@@ -34,7 +34,9 @@ Hardened Images. Each example includes five variations:
 ```dockerfile
 #syntax=docker/dockerfile:1
 
-FROM ubuntu/python:3.13-24.04_stable AS builder
+FROM ubuntu:24.04 AS builder
+
+RUN apt-get update && apt-get install -y python3 python3-pip python3-venv --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 ENV LANG=C.UTF-8
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -43,12 +45,14 @@ ENV PATH="/app/venv/bin:$PATH"
 
 WORKDIR /app
 
-RUN python -m venv /app/venv
+RUN python3 -m venv /app/venv
 COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-FROM ubuntu/python:3.13-24.04_stable
+FROM ubuntu:24.04
+
+RUN apt-get update && apt-get install -y python3 --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -58,7 +62,7 @@ ENV PATH="/app/venv/bin:$PATH"
 COPY app.py ./
 COPY --from=builder /app/venv /app/venv
 
-ENTRYPOINT [ "python", "/app/app.py" ]
+ENTRYPOINT [ "python3", "/app/app.py" ]
 ```
 
 {{< /tab >}}
@@ -140,7 +144,7 @@ ENTRYPOINT [ "python", "/app/app.py" ]
 #syntax=docker/dockerfile:1
 
 # === Build stage: Install dependencies and create virtual environment ===
-FROM dhi.io/python:3.13-alpine3.21-dev AS builder
+FROM dhi.io/python:3.13-alpine3.23-dev AS builder
 
 ENV LANG=C.UTF-8
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -158,7 +162,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # === Final stage: Create minimal runtime image ===
-FROM dhi.io/python:3.13-alpine3.21
+FROM dhi.io/python:3.13-alpine3.23
 
 WORKDIR /app
 
@@ -177,7 +181,7 @@ ENTRYPOINT [ "python", "/app/app.py" ]
 ```dockerfile
 #syntax=docker/dockerfile:1
 
-FROM dhi.io/python:3.13-alpine3.21-dev
+FROM dhi.io/python:3.13-alpine3.23-dev
 
 ENV LANG=C.UTF-8
 ENV PYTHONDONTWRITEBYTECODE=1
