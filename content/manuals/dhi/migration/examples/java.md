@@ -34,17 +34,18 @@ Hardened Images. Each example includes five variations:
 ```dockerfile
 #syntax=docker/dockerfile:1
 
-FROM ubuntu/jre:21-24.04 AS builder
+FROM ubuntu:24.04 AS builder
 
 WORKDIR /app
 COPY . ./
 
-# Install any additional packages if needed using apt
-# RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y default-jdk maven --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 RUN mvn -B package -DskipTests
 
-FROM ubuntu/jre:21-24.04
+FROM ubuntu:24.04
+
+RUN apt-get update && apt-get install -y default-jre --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 COPY --from=builder /app/target/app.jar /app/app.jar
@@ -107,7 +108,7 @@ ENTRYPOINT ["java", "-jar", "/app/app.jar"]
 #syntax=docker/dockerfile:1
 
 # === Build stage: Compile and package the Java application with Maven ===
-FROM dhi.io/maven:3-alpine3.21-dev AS builder
+FROM dhi.io/maven:3-jdk21-alpine3.22-dev AS builder
 
 WORKDIR /app
 COPY . ./
@@ -118,7 +119,7 @@ COPY . ./
 RUN mvn -B package -DskipTests
 
 # === Final stage: Create minimal runtime image ===
-FROM dhi.io/eclipse-temurin:21-alpine3.21
+FROM dhi.io/eclipse-temurin:21-alpine3.22
 
 WORKDIR /app
 COPY --from=builder /app/target/app.jar /app/app.jar
@@ -132,7 +133,7 @@ ENTRYPOINT ["java", "-jar", "/app/app.jar"]
 ```dockerfile
 #syntax=docker/dockerfile:1
 
-FROM dhi.io/maven:3-alpine3.21-dev
+FROM dhi.io/maven:3-jdk21-alpine3.22-dev
 
 WORKDIR /app
 COPY . ./

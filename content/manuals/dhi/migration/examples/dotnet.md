@@ -8,9 +8,8 @@ keywords: dotnet, .net, csharp, aspnet, migration, dhi
 This example shows how to migrate a .NET application to Docker Hardened Images.
 
 The following examples show Dockerfiles before and after migration to Docker
-Hardened Images. Each example includes five variations:
+Hardened Images. Each example includes four variations:
 
-- Before (Ubuntu): A sample Dockerfile using Ubuntu-based images, before migrating to DHI
 - Before (Wolfi): A sample Dockerfile using Wolfi distribution images, before migrating to DHI
 - Before (DOI): A sample Dockerfile using Docker Official Images, before migrating to DHI
 - After (multi-stage): A sample Dockerfile after migrating to DHI with multi-stage builds (recommended for minimal, secure images)
@@ -29,31 +28,6 @@ Hardened Images. Each example includes five variations:
 > Run `docker login dhi.io` to authenticate.
 
 {{< tabs >}}
-{{< tab name="Before (Ubuntu)" >}}
-
-```dockerfile
-#syntax=docker/dockerfile:1
-
-FROM ubuntu/dotnet-sdk:8.0-24.04 AS builder
-
-WORKDIR /src
-COPY . ./
-
-# Install any additional packages if needed using apt
-# RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
-
-RUN dotnet restore
-RUN dotnet publish -c Release -o /app --no-restore
-
-FROM ubuntu/dotnet-aspnet:8.0-24.04
-
-WORKDIR /app
-COPY --from=builder /app ./
-
-ENTRYPOINT ["dotnet", "app.dll"]
-```
-
-{{< /tab >}}
 {{< tab name="Before (Wolfi)" >}}
 
 ```dockerfile
@@ -68,12 +42,12 @@ COPY . ./
 # RUN apk add --no-cache git
 
 RUN dotnet restore
-RUN dotnet publish -c Release -o /app --no-restore
+RUN dotnet publish -c Release -o /src/out --no-restore
 
 FROM cgr.dev/chainguard/aspnet-runtime:latest
 
 WORKDIR /app
-COPY --from=builder /app ./
+COPY --from=builder /src/out ./
 
 ENTRYPOINT ["dotnet", "app.dll"]
 ```
@@ -110,7 +84,7 @@ ENTRYPOINT ["dotnet", "app.dll"]
 #syntax=docker/dockerfile:1
 
 # === Build stage: Restore, build, and publish the .NET application ===
-FROM dhi.io/dotnet-sdk:8-alpine3.21-dev AS builder
+FROM dhi.io/dotnet:8-sdk-alpine3.22 AS builder
 
 WORKDIR /src
 COPY . ./
@@ -122,7 +96,7 @@ RUN dotnet restore
 RUN dotnet publish -c Release -o /app --no-restore
 
 # === Final stage: Create minimal runtime image ===
-FROM dhi.io/dotnet-aspnet:8-alpine3.21
+FROM dhi.io/aspnetcore:8-alpine3.22
 
 WORKDIR /app
 COPY --from=builder /app ./
@@ -136,7 +110,7 @@ ENTRYPOINT ["dotnet", "app.dll"]
 ```dockerfile
 #syntax=docker/dockerfile:1
 
-FROM dhi.io/dotnet-sdk:8-alpine3.21-dev
+FROM dhi.io/dotnet:8-sdk-alpine3.22
 
 WORKDIR /src
 COPY . ./
@@ -148,7 +122,6 @@ RUN dotnet restore
 RUN dotnet publish -c Release -o /app --no-restore
 
 WORKDIR /app
-RUN cp -r /src/bin/Release/net8.0/publish/* /app/ 2>/dev/null || true
 
 ENTRYPOINT ["dotnet", "/app/app.dll"]
 ```
