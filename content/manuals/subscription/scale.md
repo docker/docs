@@ -17,7 +17,7 @@ Docker Core subscriptions include basic entitlements for your organizations that
 ## Add licenses
 
 Licenses add a layer to your Docker subscriptions, letting you assign products to select members of your
-organization. You can purchase licenses for some Docker products:
+organization without consuming a Docker Core seat. You can purchase licenses for some Docker products:
 
 - AI Governance
 - Docker Offload 
