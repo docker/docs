@@ -29,6 +29,11 @@ info:
     **Propagation.** Policy changes take up to five minutes to reach developer
     machines after being written.
 
+    **Routing.** This is the public-facing API. Requests are received by the
+    Docker Hub gateway and forwarded to the governance service; the paths
+    documented here (`/v2/orgs/{org_name}/governance/...`) are the public
+    routes, which differ from the internal service routes.
+
     See https://docs.docker.com/ai/sandboxes/governance/ for product
     documentation.
   contact:
@@ -42,13 +47,13 @@ tags:
     description: Rule management within an allowlist policy
 
 servers:
-  - url: https://hub.docker.com/api/governance/v1
+  - url: https://hub.docker.com/v2
 
 security:
   - bearerAuth: []
 
 paths:
-  /orgs/{org_name}/policies:
+  /orgs/{org_name}/governance/policies:
     parameters:
       - $ref: "#/components/parameters/OrgName"
     get:
@@ -133,7 +138,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalError"
 
-  /orgs/{org_name}/policies/{policy_id}:
+  /orgs/{org_name}/governance/policies/{policy_id}:
     parameters:
       - $ref: "#/components/parameters/OrgName"
       - $ref: "#/components/parameters/PolicyID"
@@ -176,7 +181,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalError"
 
-  /orgs/{org_name}/policies/{policy_id}/rules:
+  /orgs/{org_name}/governance/policies/{policy_id}/rules:
     parameters:
       - $ref: "#/components/parameters/OrgName"
       - $ref: "#/components/parameters/PolicyID"
@@ -256,7 +261,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalError"
 
-  /orgs/{org_name}/policies/{policy_id}/rules/{rule_id}:
+  /orgs/{org_name}/governance/policies/{policy_id}/rules/{rule_id}:
     parameters:
       - $ref: "#/components/parameters/OrgName"
       - $ref: "#/components/parameters/PolicyID"
@@ -667,8 +672,9 @@ components:
                 exists. `invalid_argument`: the request body is malformed or
                 fails validation. `unauthenticated`: missing or invalid
                 credentials. `permission_denied`: the caller lacks the required
-                permission. `unimplemented`: the endpoint or feature is not yet
-                available. `internal`: unexpected server error.
+                permission, or the org is not entitled to use governance.
+                `unimplemented`: the endpoint or feature is not yet available.
+                `internal`: unexpected server error.
               enum:
                 - not_found
                 - conflict
@@ -734,7 +740,9 @@ components:
                   message: unauthenticated
 
     PermissionDenied:
-      description: Caller lacks the required permission for this org
+      description: >
+        Caller lacks the required permission for this org, or the org is not
+        entitled to use governance.
       content:
         application/json:
           schema:
