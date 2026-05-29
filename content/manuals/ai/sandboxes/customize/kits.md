@@ -412,10 +412,17 @@ For Docker Hub, include the full `docker.io` prefix. See
 [Packaging and distribution](#packaging-and-distribution) for publishing.
 
 > [!IMPORTANT]
-> Private kits are only supported on Docker Hub. `sbx` reuses your
-> `sbx login` session to pull private artifacts from Docker Hub. Other
-> registries are pulled anonymously, so private kits hosted on
-> registries other than Docker Hub fail to pull.
+> For Docker Hub, `sbx` reuses your `sbx login` session to pull private
+> kits. For other registries, store pull credentials with
+> [`sbx secret set --registry`](../security/credentials.md#registry-credentials)
+> before running the sandbox:
+>
+> ```console
+> $ gh auth token | sbx secret set --registry ghcr.io --password-stdin
+> ```
+>
+> Without stored credentials, pulls from non-Docker Hub registries are
+> anonymous and private kits fail to pull.
 
 ## Packaging and distribution
 
@@ -434,6 +441,12 @@ The `sbx kit` subcommands validate, inspect, and publish kits:
 
 For Docker Hub, include the full `docker.io` prefix — `sbx` doesn't add it
 automatically.
+
+`sbx kit pull` prefers credentials stored with
+[`sbx secret set --registry`](../security/credentials.md#registry-credentials),
+falling back to the Docker credential store. `sbx kit push` only uses the
+Docker credential store, so pushing to a private registry requires a prior
+`docker login`.
 
 ## Spec reference
 
