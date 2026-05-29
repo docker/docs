@@ -73,7 +73,7 @@ You can add Testcontainers Cloud runtime minutes in two ways:
 
 On-demand usage is billed at higher rates than pre-purchased capacity. To avoid higher on-demand charges, pre-purchase additional minutes if you expect consistent usage over your subscription's included minutes.
 
-## Add DHI repositories
+## Add DHI repositories to DHI Select
 
 To add more hardened repositories to your DHI Select plan:
 
