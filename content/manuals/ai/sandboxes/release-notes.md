@@ -15,6 +15,16 @@ the full release history, including pre-releases and downloads, see the
 
 <!-- BEGIN GENERATED RELEASES -->
 
+## 0.31.1
+
+{{< release-date date="2026-05-29" >}}
+
+[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.31.1)
+
+### Bug fixes
+
+- Fixes a bug introduced in v0.31.0 where sandboxes from earlier versions were not listed by sbx ls and could fail to run. Upgrading to v0.31.1 restores them.
+
 ## 0.31.0
 
 {{< release-date date="2026-05-28" >}}
@@ -22,6 +32,9 @@ the full release history, including pre-releases and downloads, see the
 [GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.31.0)
 
 ### Highlights
+
+> [!IMPORTANT]
+> This release has a known issue where sandboxes from earlier versions may not be listed by sbx ls and can fail to run. This is fixed in [v0.31.1](https://github.com/docker/sbx-releases/releases/tag/v0.31.1) — please upgrade.
 
 #### Clone mode: `--clone`
 
