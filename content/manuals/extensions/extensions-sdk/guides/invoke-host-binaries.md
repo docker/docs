@@ -1,3 +1,9 @@
+
+
+
+
+
+
 ---
 title: Invoke host binaries
 description: Add invocations to host binaries from the frontend with the extension
@@ -70,8 +76,12 @@ In this example, the binary returns a string as result, obtained by `result?.std
 {{< tab name="React" >}}
 
 ```typescript
+import React, { useState, useEffect } from 'react';
+import { createDockerDesktopClient } from '@docker/extension-api-client';
+
+const ddClient = createDockerDesktopClient();
+
 export function App() {
-  const ddClient = createDockerDesktopClient();
   const [hello, setHello] = useState("");
 
   useEffect(() => {
