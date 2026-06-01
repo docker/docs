@@ -77,7 +77,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Deprecation
 
-The `docker sbom` command is deprecated. Use the [`docker scout sbom command`](/reference/cli/docker/scout/sbom/) instead.
+The `docker sbom` command has been removed. Use the [`docker scout sbom command`](/reference/cli/docker/scout/sbom/) instead.
 
 ## 4.75.0
 
