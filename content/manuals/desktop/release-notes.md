@@ -30,7 +30,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-06-01" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.76.0" build_path="//" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.76.0" build_path="/228118/" >}}
 
 ### New
 
@@ -50,21 +50,19 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- Fixed a race condition in Docker Engine when Resource Saver was active.
-- Fixed a bug where anonymous Docker volumes were leaked each time a kind cluster was deleted, causing orphaned volumes to accumulate.
+- Fixed a race condition in Docker Engine when **Resource Saver** was active.
+- Fixed a bug where anonymous Docker volumes were leaked each time a `kind` cluster was deleted, causing orphaned volumes to accumulate.
 - Fixed column resizing in the **All Logs** grid so that **Timestamp** and **Object** columns no longer expand unexpectedly, and column widths are now preserved across navigation sessions.
 - Fixed an issue where Docker Desktop failed to start when a VM disk resize operation encountered an error, even if the underlying filesystem was healthy.
-- Fixed a hang on application quit caused by backend services that ignored context cancellation, by adding a 5-second shutdown timeout.
+- Fixed an issue that caused Docker Desktop to hang when quit.
 - Fixed a bug where CPU and RAM resource totals could get stuck showing 0 in the Docker Desktop Dashboard after stopping or starting Docker Offload.
-- Fixed double separator in the tray menu when running in Windows container mode.
-- Fixed a flicker in Gordon where the final answer text would briefly appear inside the 'Working' group before jumping to the response bubble.
--  Fixed a daemon panic that could occur during concurrent sign-out and token refresh operations.
+- Fixed a flicker in Gordon where the final answer text would briefly appear inside the working group before jumping to the response bubble.
+- Fixed a daemon panic that could occur during concurrent sign-out and token refresh operations.
 - Fixed a bug where the **Volumes** view showed incorrect mount targets for containers with multiple volumes.
-- Fixed garbled taskkill error messages in logs on non-English Windows systems (e.g. Chinese Windows using GBK encoding).
 - `docker pass` now has a `--force` flag on the `set` command. 
 - `docker --help` now shows `docker pass`.
 - Fixed stale API cache responses (synthetic 404s) for containers, images, networks, volumes, and plugins after restarting an idle-stopped engine via external API calls.
-- Fixed a bug where the **delete** button on the **Builds** view might not be visible immediately after selecting a build. Fixes [docker/desktop-feedback#329](https://github.com/docker/desktop-feedback/issues/329) and fixes [docker/desktop-feedback#330](https://github.com/docker/desktop-feedback/issues/330).
+- Fixed a bug where the **Delete** button on the **Builds** view might not be visible immediately after selecting a build. Fixes [docker/desktop-feedback#329](https://github.com/docker/desktop-feedback/issues/329) and fixes [docker/desktop-feedback#330](https://github.com/docker/desktop-feedback/issues/330).
 - Fixed time-namespaces being unavailable when Enhanced Container Isolation (ECI) is enabled.
 
 #### For Windows
@@ -73,7 +71,9 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a bug on Windows where a stale PID file with a trailing newline prevented the lingering daemon from being killed, leaving Windows Containers mode unconfigurable.
 - Fixed an issue on Windows where triggering an update while another installer instance was already running showed a generic error instead of a specific message.
 - Fixed an issue on Windows where the installer and updater executables incorrectly triggered UAC elevation prompts due to Windows heuristic installer detection.
+- Fixed double separator in the tray menu when running in Windows container mode.
 - Fixed port-binding failures on Windows Hyper-V where `docker run -p 0:N` could allocate HNS-reserved ports, causing bind errors.
+- Fixed garbled taskkill error messages in logs on non-English Windows systems (For example, Chinese Windows using GBK encoding).
 
 ### Deprecation
 
