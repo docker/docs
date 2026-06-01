@@ -157,7 +157,7 @@ Pick a project directory and launch an agent with
 
 ```console
 $ cd ~/my-project
-$ sbx run claude
+$ sbx run --name my-sandbox claude
 ```
 
 Replace `claude` with the agent you want to use — see [Agents](agents/) for the
@@ -170,8 +170,8 @@ You can check what's running at any time:
 
 ```console
 $ sbx ls
-SANDBOX              AGENT    STATUS    PORTS   WORKSPACE
-claude-my-project    claude   running           ~/my-project
+SANDBOX       AGENT    STATUS    PORTS   WORKSPACE
+my-sandbox    claude   running           ~/my-project
 ```
 
 You can also run `sbx` with no arguments to open an interactive dashboard.
@@ -188,8 +188,8 @@ isolated copy of your repository, use `--clone`. Because `--clone` is a
 create-time flag, remove the existing sandbox first:
 
 ```console
-$ sbx rm claude-my-project
-$ sbx run --clone claude
+$ sbx rm my-sandbox
+$ sbx run --clone --name my-sandbox claude
 ```
 
 In clone mode, the sandbox keeps a private Git clone inside the microVM and
@@ -198,15 +198,15 @@ mounts your host repository read-only. The sandbox exposes its clone as a
 commits the same way you'd fetch from any other remote:
 
 ```console
-$ git fetch sandbox-claude-my-project
-$ git log sandbox-claude-my-project/main
-$ git diff main..sandbox-claude-my-project/main
+$ git fetch sandbox-my-sandbox
+$ git log sandbox-my-sandbox/main
+$ git diff main..sandbox-my-sandbox/main
 ```
 
 When you're ready to create a pull request:
 
 ```console
-$ git checkout -b my-feature sandbox-claude-my-project/main
+$ git checkout -b my-feature sandbox-my-sandbox/main
 $ git push -u origin my-feature
 $ gh pr create
 ```
@@ -216,7 +216,7 @@ For Claude Code, pair `--clone` with the
 subagents that each work on their own branch inside the same sandbox:
 
 ```console
-$ sbx run --clone claude -- --dangerously-skip-permissions agents
+$ sbx run --clone --name my-sandbox claude -- agents
 ```
 
 Clone mode is especially useful when running multiple agents on the same
@@ -252,19 +252,15 @@ set and how to customize it.
 Sandboxes persist after the agent exits. To stop a sandbox without deleting it:
 
 ```console
-$ sbx stop claude-my-project
+$ sbx stop my-sandbox
 ```
-
-The sandbox name comes from the agent and workspace directory — see
-[Reconnecting and naming](usage.md#reconnecting-and-naming) for details, or run
-`sbx ls` to see the names of your existing sandboxes.
 
 Installed packages, Docker images, and configuration changes are preserved
 across restarts. When you're done with a sandbox, remove it to reclaim disk
 space:
 
 ```console
-$ sbx rm claude-my-project
+$ sbx rm my-sandbox
 ```
 
 Removing a sandbox deletes everything inside it — installed packages, Docker
