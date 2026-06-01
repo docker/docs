@@ -43,7 +43,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Agent v1.62.0](https://github.com/docker/docker-agent/releases/tag/v1.62.0)
 - [NVIDIA Container Toolkit v1.19.1](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.19.1)
 - [Docker Compose v5.1.4](https://github.com/docker/compose/releases/tag/v5.1.4)
-- [Docker Offload v0.5.93](https://github.com/docker/cloud/releases/tag/v0.5.93)
+- Docker Offload v0.5.93
 - [Docker Scout CLI v1.21.0](https://github.com/docker/scout-cli/releases/tag/v1.21.0)
 - `docker pass` v0.0.29
 
@@ -78,13 +78,13 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ## 4.75.0
 
-{{< release-date date="2026-05-25" >}}
+{{< release-date date="2026-05-26" >}}
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.75.0" build_path="/227598/" >}}
 
 ### Updates
 
-- [Docker Offload v0.5.92](https://github.com/docker/cloud/releases/tag/v0.5.92)
+- Docker Offload v0.5.92
 - [Docker Engine v29.5.2](https://docs.docker.com/engine/release-notes/29/#2952)
 - [Docker Buildx v0.34.0](https://github.com/docker/buildx/releases/tag/v0.34.0)
 
@@ -120,7 +120,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Updates
 
-- [Docker Offload v0.5.89](https://github.com/docker/cloud/releases/tag/v0.5.89)
+- Docker Offload v0.5.89
 - [Docker Agent v1.57.0](https://github.com/docker/docker-agent/releases/tag/v1.57.0)
 - [Credential helpers v0.9.7](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.7)
 - `docker pass` v0.0.26
@@ -358,7 +358,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - [Docker Agent v1.39.0](https://github.com/docker/docker-agent/releases/tag/v1.39.0)
 - [Docker Model v1.1.28](https://github.com/docker/model-runner/releases/tag/v1.1.28)
-- [Docker Offload v0.5.81](https://github.com/docker/cloud/releases/tag/v0.5.81)
+- Docker Offload v0.5.81
 
 ### Bug fixes and enhancements
 
@@ -879,8 +879,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-12-04" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.54.0" build_path="/212467/" >}}
-
 ### New
 
 - Added support for vLLM in Docker Model Runner on Windows with WSL2 and NVIDIA GPUs.
@@ -906,8 +904,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-11-27" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.53.0" build_path="/211793/" >}}
-
 ### Bug fixes and enhancements
 
 #### For all platforms
@@ -921,8 +917,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.52.0
 
 {{< release-date date="2025-11-20" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.52.0" build_path="/210994/" >}}
 
 ### New
 
@@ -957,8 +951,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-11-13" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.51.0" build_path="/210443/" >}}
-
 ### New
 
 - You can now set up your Kubernetes resources from the **Kubernetes** view. This new view also provides a real-time display of your pods, services, and deployments. 
@@ -977,8 +969,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.50.0
 
 {{< release-date date="2025-11-06" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.50.0" build_path="/209931/" >}}
 
 ### New
 
@@ -1002,8 +992,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.49.0
 
 {{< release-date date="2025-10-23" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.49.0" build_path="/208700/" >}}
 
 > [!IMPORTANT]
 >
@@ -1043,8 +1031,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-10-09" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.48.0" build_path="/207573/" >}}
-
 > [!IMPORTANT]
 >
 > Support for macOS 13 has ended. Installing Docker Desktop will require macOS 14 in the next release.
@@ -1081,8 +1067,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.47.0
 
 {{< release-date date="2025-09-25" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.47.0" build_path="/206054/" >}}
 
 ### Security
 
@@ -1128,8 +1112,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-09-11" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.46.0" build_path="/204649/" >}}
-
 ### New
 
 - Added a new Learning center walkthrough for Docker MCP Toolkit and other onboarding improvements.
@@ -1164,8 +1146,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.45.0
 
 {{< release-date date="2025-08-28" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.45.0" build_path="/203075/" >}}
 
 ### New
 
@@ -1202,8 +1182,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-08-20" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.44.3" build_path="/202357/" >}}
-
 ### Security
 
 - Fixed [CVE-2025-9074](https://www.cve.org/CVERecord?id=CVE-2025-9074) where a malicious container running on Docker Desktop could access the Docker Engine and launch additional containers without requiring the Docker socket to be mounted. This could allow unauthorized access to user files on the host system. Enhanced Container Isolation (ECI) does not mitigate this vulnerability.
@@ -1215,8 +1193,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.44.2
 
 {{< release-date date="2025-08-15" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.44.2" build_path="/202017/" >}}
 
 ### Bug fixes and enhancements
 
@@ -1243,8 +1219,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.44.0
 
 {{< release-date date="2025-08-07" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.44.0" build_path="/201307/" >}}
 
 ### New
 
@@ -1309,8 +1283,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 {{< release-date date="2025-07-15" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.43.2" build_path="/199162/" >}}
-
 ### Upgrades
 
 - [Docker Compose v2.38.2](https://github.com/docker/compose/releases/tag/v2.38.2)
@@ -1320,8 +1292,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 ## 4.43.1
 
 {{< release-date date="2025-07-04" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.43.1" build_path="/198352/" >}}
 
 ### Bug fixes and enhancements
 
