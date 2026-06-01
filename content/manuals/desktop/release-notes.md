@@ -35,6 +35,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### New
 
 - Docker Model Runner now supports registry mirrors.
+- The `docker sbom` command has been removed. Use the [`docker scout sbom command`](/reference/cli/docker/scout/sbom/) instead.
 
 ### Updates
 
@@ -74,10 +75,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed double separator in the tray menu when running in Windows container mode.
 - Fixed port-binding failures on Windows Hyper-V where `docker run -p 0:N` could allocate HNS-reserved ports, causing bind errors.
 - Fixed garbled taskkill error messages in logs on non-English Windows systems (For example, Chinese Windows using GBK encoding).
-
-### Deprecation
-
-The `docker sbom` command has been removed. Use the [`docker scout sbom command`](/reference/cli/docker/scout/sbom/) instead.
 
 ## 4.75.0
 
