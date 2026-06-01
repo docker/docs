@@ -3,7 +3,7 @@ title: Get started with Docker Sandboxes
 linkTitle: Get started
 weight: 10
 description: Install the sbx CLI, configure credentials, and work through your first sandbox session.
-keywords: sandbox, sbx, get started, install, credentials, branch mode, network policy
+keywords: sandbox, sbx, get started, install, credentials, clone mode, network policy
 ---
 
 Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
@@ -12,8 +12,8 @@ build containers, install packages, and modify files without touching your host
 system.
 
 This page walks through a typical first session: installing the CLI,
-authenticating your agent, running a sandbox, working with branches, and
-cleaning up.
+authenticating your agent, running a sandbox, isolating the agent's workspace,
+and cleaning up.
 
 ## Prerequisites
 
@@ -181,38 +181,49 @@ agents, open shells, and manage network rules from one place. See
 
 ![The interactive dashboard showing sandbox status, resource usage, and network governance controls.](images/sbx-dashboard.png)
 
-## Use branch mode
+## Use clone mode
 
-By default, the agent edits your working tree directly. To give it its own
-Git branch, use `--branch`:
+By default, the agent edits your working tree directly. To give the agent an
+isolated copy of your repository, use `--clone`. Because `--clone` is a
+create-time flag, remove the existing sandbox first:
 
 ```console
-$ sbx run claude --branch my-feature
+$ sbx rm claude-my-project
+$ sbx run --clone claude
 ```
 
-This creates a [Git worktree](https://git-scm.com/docs/git-worktree) under
-`.sbx/` in your repository root. The agent works on its own branch and
-directory without touching your main working tree.
-
-When the session ends, review what the agent did from the worktree:
+In clone mode, the sandbox keeps a private Git clone inside the microVM and
+mounts your host repository read-only. The sandbox exposes its clone as a
+`sandbox-<sandbox-name>` remote on your host, so you review the agent's
+commits the same way you'd fetch from any other remote:
 
 ```console
-$ cd .sbx/claude-my-project-worktrees/my-feature
-$ git log
-$ git diff main
+$ git fetch sandbox-claude-my-project
+$ git log sandbox-claude-my-project/main
+$ git diff main..sandbox-claude-my-project/main
 ```
 
-If you're satisfied, push the branch and open a pull request:
+When you're ready to create a pull request:
 
 ```console
+$ git checkout -b my-feature sandbox-claude-my-project/main
 $ git push -u origin my-feature
 $ gh pr create
 ```
 
-Branch mode is especially useful when running multiple agents on the same
-repository — each gets its own branch and can't overwrite the other's changes.
-See [Branch mode](usage.md#branch-mode) for more options, including
-`--branch auto` and multiple branches per sandbox.
+For Claude Code, pair `--clone` with the
+[agents view](agents/claude-code.md#agents-view) to dispatch tasks to
+subagents that each work on their own branch inside the same sandbox:
+
+```console
+$ sbx run --clone claude -- --dangerously-skip-permissions agents
+```
+
+Clone mode is especially useful when running multiple agents on the same
+repository in parallel — each works in its own isolated clone without
+touching your host working tree. See [Clone mode](usage.md#clone-mode) for
+the full workflow, including how to have the agent commit to a dedicated
+branch.
 
 ## Manage network access
 
@@ -257,8 +268,8 @@ $ sbx rm claude-my-project
 ```
 
 Removing a sandbox deletes everything inside it — installed packages, Docker
-images, and any branch mode worktrees under `.sbx/`. Files in your main
-working tree are unaffected.
+images, and the in-sandbox Git clone if you used clone mode. Files in your
+host working tree are unaffected.
 
 ## Next steps
 
