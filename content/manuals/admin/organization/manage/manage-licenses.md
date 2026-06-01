@@ -2,7 +2,7 @@
 title: Manage license assignment
 linkTitle: License assignment
 description: Manage product licenses for your organization, including assignment, revocation, and automatic assignment.
-keywords: licenses, organization, members, Docker Offload, AI governance, license assignment, admin console
+keywords: licenses, organization, members, Docker Core, Docker Offload, AI governance, license assignment, admin console
 weight: 30
 ---
 
@@ -24,14 +24,14 @@ To manage licenses for your organization:
 1. Optional. To bulk assign or revoke licenses, choose the members you want to bulk manage, then select the **Bulk actions** menu. 
 1. Optional. To manage automatic license assignment, turn off or turn on with the **Automatically assign licenses** toggle. 
 
-You must assign licenses manually, or configure automatic license assignment to consume a license. Inviting a new member to your organization may consume a seat for your Docker Core subscription, but won't auto-assign product licenses by default. Conversely, purchasing a set of licenses won't trigger automatic assignment to existing members.
+You must assign licenses manually, or configure automatic license assignment to consume a license. Inviting a new member to your organization consumes a seat or license if you select a product in **Licenses (optional)** during the [invite flow](/manuals/admin/organization/manage/members.md), but won't auto-assign product licenses by default. Conversely, purchasing a set of licenses won't trigger automatic assignment to existing members.
 
 ## Automatic license assignment
 
-Automatic license assignment gives members a product license when they use a supported product for the first time. Automatic license assignment is available for AI Governance licenses. 
+Automatic license assignment gives members a product license when they use a supported product for the first time. Automatic license assignment is available for AI Governance licenses. Only organizations that purchase AI Governance can set up auto-assignment for Docker Core as well. 
 
 - When you purchase AI Governance, signing into [Docker Sandboxes](https://docs.docker.com/ai/sandboxes/) with `login` command in `sbx` CLI (`sbx login`) automatically provisions AI Governance licenses on a first-come, first served basis. 
-- Similarly, logins to Docker Desktop will automatically provision Docker Core licenses for AI Governance license-holding organizations that have available Docker Core seats.
+- Similarly, logins to Docker Desktop will automatically provision Docker Core for AI Governance license-holding organizations that have available Docker Core seats.
 - Licenses are assigned until exhausted. 
    - Once the available licenses are exhausted, automatic license assignment will stop until you purchase more licenses or revoke assigned licenses.
    - Members can still use Docker Sandbox or Docker Desktop, but organization policies for those products won't affect their usage. 
