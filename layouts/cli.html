@@ -53,17 +53,18 @@
       }}
     {{ end }}
     {{ if or $data.experimental $data.experimentalcli }}
-      {{ markdownify `
-{{% experimental %}}
-
-**This command is experimental.**
-
-Experimental features are intended for testing and feedback as their
-functionality or design may change between releases without warning or
-can be removed entirely in a future release.
-
-{{% /experimental %}}`
-      }}
+      <div class="px-4 border-l-2 border-l-magenta-light dark:border-l-magenta-dark">
+        <p class="not-prose flex gap-2 items-center text-magenta-light dark:text-magenta-dark">
+          <span class="icon-svg pb-1">{{ partialCached "icon" "beaker" "beaker" }}</span>
+          <strong>{{ i18n "experimental" }}</strong>
+        </p>
+        <p><strong>This command is experimental.</strong></p>
+        <p>
+          Experimental features are intended for testing and feedback as their
+          functionality or design may change between releases without warning or
+          can be removed entirely in a future release.
+        </p>
+      </div>
     {{ end }}
     {{ with $data.kubernetes }}
       <p>
