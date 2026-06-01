@@ -2,6 +2,7 @@
 title: Docker Scout demo
 linkTitle: Demo
 description: Learn about Docker Scout's powerful features for enhanced supply chain security.
+keywords: docker scout, demo, supply chain, vulnerability scanning, container security
 weight: 20
 ---
 

@@ -5,8 +5,10 @@ pname: docker dhi
 plink: docker_dhi.yaml
 cname:
     - docker dhi auth apk
+    - docker dhi auth deb
 clink:
     - docker_dhi_auth_apk.yaml
+    - docker_dhi_auth_deb.yaml
 deprecated: false
 hidden: false
 experimental: false

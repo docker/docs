@@ -5,10 +5,6 @@ description: Frequently asked questions for deploying Docker Desktop at scale
 keywords: msi, deploy, docker desktop, faqs, pkg, mdm, jamf, intune, windows, mac, enterprise, admin
 tags: [FAQ, admin]
 weight: 70
-aliases:
- - /desktop/install/msi/faq/
- - /desktop/setup/install/msi/faq/
- - /desktop/setup/install/enterprise-deployment/faq/
 ---
 
 ## MSI

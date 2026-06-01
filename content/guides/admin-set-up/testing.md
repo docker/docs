@@ -1,6 +1,7 @@
 ---
 title: Testing
 description: Test your Docker setup.
+keywords: admin, onboarding, testing, sso, scim, verification
 weight: 30
 ---
 

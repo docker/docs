@@ -15,8 +15,7 @@ Allow list:
 Amazon S3 cache:
   availability: Experimental
 Gordon:
-  availability: Beta
-  requires: Docker Desktop [4.61.0](/manuals/desktop/release-notes.md#4610) or later
+  requires: Docker Desktop [4.74.0](/manuals/desktop/release-notes.md#4740) or later
 Gordon DHI migration:
   availability: Experimental
   requires: Docker Desktop [4.38.0](/manuals/desktop/release-notes.md#4380) or later

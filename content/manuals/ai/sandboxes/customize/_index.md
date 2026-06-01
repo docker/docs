@@ -6,6 +6,11 @@ keywords: sandboxes, sbx, customize, templates, kits, mixins, custom agents
 weight: 35
 aliases:
   - /ai/sandboxes/agents/custom-environments/
+params:
+  sidebar:
+    badge:
+      color: blue
+      text: Early Access
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}

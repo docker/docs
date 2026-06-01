@@ -6,12 +6,7 @@ weight: 10
 params:
   sidebar:
     group: AI and agents
-    badge:
-      color: blue
-      text: Early Access
 ---
-
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
 sandbox gets its own Docker daemon, filesystem, and network — the agent can
@@ -24,6 +19,9 @@ from the Docker Admin Console, so the same rules apply uniformly across every
 developer's machine. Available on a separate paid subscription.
 
 ## Get started
+
+For complete system requirements, see the
+[get started prerequisites](get-started.md#prerequisites).
 
 Install the `sbx` CLI and sign in:
 
@@ -74,8 +72,8 @@ the [usage guide](usage.md) for common patterns.
   extending or tailoring sandboxes
 - [Architecture](architecture.md) — microVM isolation, workspace mounting,
   networking
-- [Security](security/) — isolation model, credential handling, network
-  policies, workspace trust
+- [Security](security/) — isolation model, credential handling, and
+  network policies
 - [CLI reference](/reference/cli/sbx/) — full list of `sbx` commands and options
 - [Troubleshooting](troubleshooting.md) — common issues and fixes
 - [FAQ](faq.md) — login requirements, telemetry, etc

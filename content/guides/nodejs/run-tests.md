@@ -63,10 +63,10 @@ services:
 
 This test service configuration:
 
-- **Builds from test stage**: Uses the `test` target from your multi-stage Dockerfile
-- **Isolated test database**: Uses a separate `todoapp_test` database for testing
-- **Profile-based**: Uses the `test` profile so it only runs when explicitly requested
-- **Health dependency**: Waits for the database to be healthy before starting tests
+- Builds from test stage: Uses the `test` target from your multi-stage Dockerfile
+- Isolated test database: Uses a separate `todoapp_test` database for testing
+- Profile-based: Uses the `test` profile so it only runs when explicitly requested
+- Health dependency: Waits for the database to be healthy before starting tests
 
 ### Run tests in a container
 
@@ -123,12 +123,12 @@ You should see output like the following:
 
 The test suite covers:
 
-- **Client Components** (`src/client/components/__tests__/`): React component testing with React Testing Library
-- **Custom Hooks** (`src/client/hooks/__tests__/`): React hooks testing with proper mocking
-- **Server Routes** (`src/server/__tests__/routes/`): API endpoint testing
-- **Database Layer** (`src/server/database/__tests__/`): PostgreSQL database operations testing
-- **Utility Functions** (`src/shared/utils/__tests__/`): Validation and helper function testing
-- **Integration Tests** (`src/client/__tests__/`): Full application integration testing
+- Client Components (`src/client/components/__tests__/`): React component testing with React Testing Library
+- Custom Hooks (`src/client/hooks/__tests__/`): React hooks testing with proper mocking
+- Server Routes (`src/server/__tests__/routes/`): API endpoint testing
+- Database Layer (`src/server/database/__tests__/`): PostgreSQL database operations testing
+- Utility Functions (`src/shared/utils/__tests__/`): Validation and helper function testing
+- Integration Tests (`src/client/__tests__/`): Full application integration testing
 
 ## Run tests when building
 
@@ -156,10 +156,10 @@ CMD ["npm", "run", "test:coverage"]
 
 This test stage:
 
-- **Test environment**: Sets `NODE_ENV=test` and `CI=true` for proper test execution
-- **Non-root user**: Runs tests as the `nodejs` user for security
-- **Flexible execution**: Uses `CMD` instead of `RUN` to allow running tests during build or as a separate container
-- **Coverage support**: Configured to run tests with coverage reporting
+- Test environment: Sets `NODE_ENV=test` and `CI=true` for proper test execution
+- Non-root user: Runs tests as the `nodejs` user for security
+- Flexible execution: Uses `CMD` instead of `RUN` to allow running tests during build or as a separate container
+- Coverage support: Configured to run tests with coverage reporting
 
 ### Build and run tests during image build
 

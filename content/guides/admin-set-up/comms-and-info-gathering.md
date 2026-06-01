@@ -1,6 +1,7 @@
 ---
 title: Communication and information gathering
 description: Gather your company's requirements from key stakeholders and communicate to your developers.
+keywords: admin, onboarding, stakeholders, communication, mdm, requirements
 weight: 10
 ---
 

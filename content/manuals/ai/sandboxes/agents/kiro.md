@@ -7,8 +7,6 @@ description: |
 keywords: docker sandboxes, kiro, ai agent, authentication, sbx
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 This guide covers authentication, configuration, and usage of Kiro in a
 sandboxed environment.
 
@@ -77,23 +75,30 @@ sandbox. See
 for workarounds.
 
 Kiro requires minimal configuration. The agent runs with trust-all-tools mode
-by default, which lets it execute commands without repeated approval
-prompts.
+by default, which lets it execute commands without repeated approval prompts.
 
-### Pass options at runtime
+### Default startup command
 
-Pass Kiro CLI options after `--`:
+Without extra args, the sandbox runs:
+
+```text
+kiro chat --trust-all-tools
+```
+
+Args after `--` replace these defaults rather than being appended. This is
+why `sbx run kiro -- login --use-device-flow` works for the login subcommand.
+To keep `chat --trust-all-tools` alongside your own args, include them
+yourself:
 
 ```console
-$ sbx run kiro --name <sandbox-name> -- <kiro-options>
+$ sbx run kiro -- chat --trust-all-tools --resume
 ```
 
 ## Base image
 
 Template: `docker/sandbox-templates:kiro`
 
-Preconfigured to run without approval prompts. Authentication state is
-persisted across sandbox restarts.
+Authentication state is persisted across sandbox restarts.
 
 See [Customize](../customize/) to pre-install tools or customize this
 environment.

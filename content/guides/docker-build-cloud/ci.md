@@ -1,11 +1,12 @@
 ---
 title: "Demo: Using Docker Build Cloud in CI"
 description: Learn how to use Docker Build Cloud to build your app faster in CI.
+keywords: docker build cloud, ci/cd, github actions, cloud builds, build performance
 weight: 30
 ---
 
 Docker Build Cloud can significantly decrease the time it takes for your CI builds
-take to run, saving you time and money. 
+take to run, saving you time and money.
 
 Since the builds run remotely, your CI runner can still use the Docker tooling CLI
 without needing elevated permissions, making your builds more secure by default.

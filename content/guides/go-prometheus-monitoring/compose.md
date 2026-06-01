@@ -1,6 +1,6 @@
 ---
 title: Connecting services with Docker Compose
-linkTitle: Connecting services with Docker Compose
+linkTitle: Connect with Compose
 weight: 30 #
 keywords: go, golang, prometheus, grafana, containerize, monitor
 description: Learn how to connect services with Docker Compose to monitor a Golang application with Prometheus and Grafana.

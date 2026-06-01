@@ -1,6 +1,6 @@
 ---
 title: Containerize a C++ application
-linkTitle: Build and run a C++ application using Docker Compose
+linkTitle: Containerize
 weight: 10
 keywords: C++, containerize, initialize
 description: Learn how to use Docker Compose to build and run a C++ application.

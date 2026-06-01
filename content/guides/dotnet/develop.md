@@ -67,7 +67,6 @@ You should now have the following in your `docker-dotnet-sample` directory.
 │ ├── .gitignore
 │ ├── compose.yaml
 │ ├── Dockerfile
-│ ├── README.Docker.md
 │ └── README.md
 ```
 
@@ -152,7 +151,6 @@ You should now have the following in your `docker-dotnet-sample` directory.
 │ ├── .gitignore
 │ ├── compose.yaml
 │ ├── Dockerfile
-│ ├── README.Docker.md
 │ └── README.md
 ```
 

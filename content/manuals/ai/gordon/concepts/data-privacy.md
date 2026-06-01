@@ -51,8 +51,8 @@ processed are not stored.
 
 ### Personal (free) subscription
 
-Conversation threads are stored for 30 days to improve the service. Individual
-queries and responses are retained as part of your conversation history.
+Anonymized conversation threads are stored for 30 days to improve the service.
+Individual queries and responses are retained as part of your conversation history.
 
 ### All subscriptions
 
@@ -85,7 +85,7 @@ You can disable Gordon at any time:
 Individual users:
 
 1. Open Docker Desktop Settings.
-2. Navigate to the **Beta features** section.
+2. Navigate to the **AI** section.
 3. Clear the **Enable Gordon** option.
 4. Select **Apply**.
 

@@ -1,10 +1,11 @@
 name: sbx policy allow
-synopsis: Add an allow policy for sandboxes
+synopsis: Add an allow rule for sandboxes
 description: |-
-    Add a policy that permits sandboxes to access specified resources.
+    Add a rule that permits sandboxes to access specified resources.
 
-    Allowed resources are accessible to all sandboxes. If a resource matches both
-    an allow and a deny rule, the deny rule takes precedence.
+    Allowed resources are accessible within the selected policy scope. If a
+    resource matches both an allow and a deny rule, the deny rule takes
+    precedence.
 usage: sbx policy allow COMMAND
 options:
     - name: help

@@ -13,23 +13,17 @@ aliases:
 
 - You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
 - You have a Docker Desktop installed, with containerd enabled for pulling and storing images (it's a checkbox in **Settings** > **General**). Otherwise, if you use Docker Engine:
-  - You have the [Docker SBOM CLI plugin](https://github.com/docker/sbom-cli-plugin) installed. To install it on Docker Engine, use the following command:
-
-    ```bash
-    $ curl -sSfL https://raw.githubusercontent.com/docker/sbom-cli-plugin/main/install.sh | sh -s --
-    ```
-
   - You have the [Docker Scout CLI plugin](https://docs.docker.com/scout/install/) installed. To install it on Docker Engine, use the following command:
 
     ```bash
     $ curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s --
     ```
-    
+
   - You have [containerd enabled](https://docs.docker.com/engine/storage/containerd/) for Docker Engine.
 
 ## Overview
 
-This section walks you through extracting Software Bill of Materials (SBOMs) from a C++ Docker image using the Docker SBOM CLI plugin. SBOMs provide a detailed list of all the components in a software package, including their versions and licenses. You can use SBOMs to track the provenance of your software and ensure that it complies with your organization's security and licensing policies.
+This section walks you through extracting Software Bill of Materials (SBOMs) from a C++ Docker image using Docker Scout. SBOMs provide a detailed list of all the components in a software package, including their versions and licenses. You can use SBOMs to track the provenance of your software and ensure that it complies with your organization's security and licensing policies.
 
 ## Generate an SBOM
 
@@ -37,17 +31,10 @@ Here we will use the Docker image that we built in the [Create a multi-stage bui
 The image is named `hello`. To generate an SBOM for the `hello` image, run the following command:
 
 ```bash
-$ docker sbom hello
+$ docker scout sbom --format list hello
 ```
 
 The command will say "No packages discovered". This is because the final image is a scratch image and doesn't have any packages.
-Let's try again with Docker Scout:
-
-```bash
-$ docker scout sbom --format=list hello
-```
-
-This command will tell you the same thing.
 
 ## Generate an SBOM attestation
 
@@ -85,12 +72,13 @@ $ docker buildx build --sbom=true -t hello:sbom .
 This command will build the image and generate an SBOM attestation. You can verify that the SBOM is attached to the image by running the following command:
 
 ```bash
-$ docker scout sbom --format=list hello:sbom
+$ docker scout sbom --format list hello:sbom
 ```
 
-Note that the normal `docker sbom` command will not load the SBOM attestation.
+Docker Scout reads the SBOM attestation when one is available, so this command reports packages from the build-stage metadata instead of indexing only the final scratch image filesystem.
 
 ## Summary
 
 In this section, you learned how to generate SBOM attestation for a C++ Docker image during the build process.
-The normal image scanners will not be able to generate SBOMs from scratch images.
+Image scanners that inspect only the final filesystem may not identify packages in scratch images.
+Use SBOM attestations to preserve package metadata from the build.

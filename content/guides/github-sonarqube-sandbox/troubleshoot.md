@@ -3,6 +3,7 @@ title: Troubleshoot code quality workflows
 linkTitle: Troubleshoot
 summary: Resolve common issues with E2B sandboxes, MCP server connections, and GitHub/SonarQube integration.
 description: Solutions for MCP tools not loading, authentication errors, permission issues, workflow timeouts, and other common problems when building code quality workflows with E2B.
+keywords: sonarqube, e2b, mcp, troubleshooting, debugging, authentication, code quality
 weight: 30
 ---
 
@@ -298,7 +299,6 @@ Solution:
 
    {{< /tab >}}
    {{< tab name="Python" >}}
-
    1. Ensure `dotenv` is loaded at the top of your file:
 
       ```python

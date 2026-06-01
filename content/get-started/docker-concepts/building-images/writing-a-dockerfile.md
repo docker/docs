@@ -147,13 +147,6 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 > build cache, run as a non-root user, and multi-stage builds.
 
 
-> **Containerize new projects quickly with `docker init`**
->
-> The `docker init` command will analyze your project and quickly create 
-> a Dockerfile, a `compose.yaml`, and a `.dockerignore`, helping you get
-> up and going. Since you're learning about Dockerfiles specifically here, 
-> you won't use it now. But, [learn more about it here](/reference/cli/docker/init/).
-
 ## Additional resources
 
 To learn more about writing a Dockerfile, visit the following resources:
@@ -161,7 +154,7 @@ To learn more about writing a Dockerfile, visit the following resources:
 * [Dockerfile reference](/reference/dockerfile/)
 * [Dockerfile best practices](/develop/develop-images/dockerfile_best-practices/)
 * [Base images](/build/building/base-images/)
-* [Getting started with Docker Init](/reference/cli/docker/init/)
+* [Gordon](/ai/gordon/) — Docker's AI assistant can generate a Dockerfile for your project. Ask Gordon to analyze your code and suggest a Dockerfile optimized for your language and framework.
 
 ## Next steps
 

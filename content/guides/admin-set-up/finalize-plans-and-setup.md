@@ -1,6 +1,7 @@
 ---
 title: Finalize plans and begin setup
 description: Collaborate with your MDM team to distribute configurations and set up SSO and Docker product trials.
+keywords: admin, onboarding, mdm, settings management, sso, configuration
 weight: 20
 ---
 

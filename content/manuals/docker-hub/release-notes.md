@@ -14,6 +14,25 @@ tags: [Release notes]
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+## 2026-05-20
+
+### Infrastructure updates
+
+- Docker Hub has added Amazon CloudFront as a CDN for image pushes and pulls,
+  improving reliability. You may see a new domain,
+  `production.cloudfront.docker.com`, in your network logs. TLS certificates for
+  this domain are issued by Amazon Trust Services.
+
+  Most users are unaffected. You may need to take action if your environment
+  uses an egress firewall with a domain allowlist, a TLS inspection proxy, or a
+  managed CA trust store. See the [Docker Desktop
+  allowlist](/manuals/desktop/setup/allow-list.md) for updated domain
+  requirements. If you see TLS errors, ensure your trust store includes the
+  [Amazon Trust Services Root CAs](https://www.amazontrust.com/repository/). If
+  you're a paid subscriber, you can [contact Docker
+  Support](https://hub.docker.com/support/contact/) if you need updated TLS
+  certificate details or the issue persists.
+
 ## 2026-05-06
 
 ### Deprecation notice

@@ -67,6 +67,25 @@
   })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
   </script>
 {{ end }}
+{{- with site.Params.analytics.marlin -}}
+  {{- $apiKey := "" -}}
+  {{- $endpoint := "" -}}
+  {{- $env := "" -}}
+  {{- if hugo.IsProduction -}}
+    {{- $apiKey = .apiKey.prod -}}
+    {{- $endpoint = .endpoint.prod -}}
+    {{- $env = "prod" -}}
+  {{- else if eq hugo.Environment "staging" -}}
+    {{- $apiKey = .apiKey.stage -}}
+    {{- $endpoint = .endpoint.stage -}}
+    {{- $env = "staging" -}}
+  {{- end -}}
+  {{- if and $apiKey $endpoint -}}
+    <script>
+      window.__marlinConfig = {{ dict "apiKey" $apiKey "endpoint" $endpoint "environment" $env | jsonify | safeJS }};
+    </script>
+  {{- end -}}
+{{- end -}}
 {{/* preload Roboto Flex as it's a critical font: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/preload */}}
 <link
   href="/assets/fonts/RobotoFlex.woff2"

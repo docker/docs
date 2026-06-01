@@ -1,6 +1,6 @@
 ---
 title: "Lab: Getting Started with Docker"
-linkTitle: "Lab: Getting Started with Docker"
+linkTitle: "Lab: Docker basics"
 description: |
   Learn Docker fundamentals by running containers, exploring the container
   lifecycle, and packaging a real Node.js app into your own custom image.

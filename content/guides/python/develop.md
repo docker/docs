@@ -30,96 +30,9 @@ You'll need to clone a new repository to get a sample application that includes 
    $ git clone https://github.com/estebanx64/python-docker-dev-example
    ```
 
-2. In the cloned repository's directory, manually create the Docker assets or run `docker init` to create the necessary Docker assets.
+2. In the cloned repository's directory, create the necessary Docker assets.
 
-   {{< tabs >}}
-   {{< tab name="Use Docker Init" >}}
-
-   In the cloned repository's directory, run `docker init`. Refer to the
-   following example to answer the prompts from `docker init`.
-
-   ```console
-   $ docker init
-   Welcome to the Docker Init CLI!
-
-   This utility will walk you through creating the following files with sensible defaults for your project:
-     - .dockerignore
-     - Dockerfile
-     - compose.yaml
-     - README.Docker.md
-
-   Let's get started!
-
-   ? What application platform does your project use? Python
-   ? What version of Python do you want to use? 3.12
-   ? What port do you want your app to listen on? 8001
-   ? What is the command to run your app? python3 -m uvicorn app:app --host=0.0.0.0 --port=8001
-   ```
-
-   Create a file named `.gitignore` with the following contents.
-
-   ```text {collapse=true,title=".gitignore"}
-   # Byte-compiled / optimized / DLL files
-   __pycache__/
-   *.py[cod]
-   *$py.class
-
-   # C extensions
-   *.so
-
-   # Distribution / packaging
-   .Python
-   build/
-   develop-eggs/
-   dist/
-   downloads/
-   eggs/
-   .eggs/
-   lib/
-   lib64/
-   parts/
-   sdist/
-   var/
-   wheels/
-   share/python-wheels/
-   *.egg-info/
-   .installed.cfg
-   *.egg
-   MANIFEST
-
-   # Unit test / coverage reports
-   htmlcov/
-   .tox/
-   .nox/
-   .coverage
-   .coverage.*
-   .cache
-   nosetests.xml
-   coverage.xml
-   *.cover
-   *.py,cover
-   .hypothesis/
-   .pytest_cache/
-   cover/
-
-   # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
-   __pypackages__/
-
-   # Environments
-   .env
-   .venv
-   env/
-   venv/
-   ENV/
-   env.bak/
-   venv.bak/
-   ```
-
-   {{< /tab >}}
-   {{< tab name="Manually create assets" >}}
-
-   If you don't have Docker Desktop installed or prefer creating the assets
-   manually, you can create the following files in your project directory.
+   Create the following files in your project directory.
 
    Create a file named `Dockerfile` with the following contents.
 
@@ -129,8 +42,6 @@ You'll need to clone a new repository to get a sample application that includes 
    # Comments are provided throughout this file to help you get started.
    # If you need more help, visit the Dockerfile reference guide at
    # https://docs.docker.com/go/dockerfile-reference/
-
-   # Want to help us make this template better? Share your feedback here: https://   forms.gle/ybq9Krt8jtBL3iCk7
 
    ARG PYTHON_VERSION=3.12
    FROM python:${PYTHON_VERSION}-slim
@@ -327,14 +238,11 @@ You'll need to clone a new repository to get a sample application that includes 
    venv.bak/
    ```
 
-   {{< /tab >}}
-   {{< /tabs >}}
-
 ## Add a local database and persist data
 
 You can use containers to set up local services, like a database. In this section, you'll update the `compose.yaml` file to define a database service and a volume to persist data.
 
-In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor. `docker init` handled creating most of the instructions, but you'll need to update it for your unique application.
+In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor and update it for your unique application.
 
 In the `compose.yaml` file, you need to uncomment all of the database instructions. In addition, you need to add the database password file as an environment variable to the server service and specify the secret file to use .
 
@@ -411,7 +319,6 @@ directory.
 │ ├── .gitignore
 │ ├── compose.yaml
 │ ├── Dockerfile
-│ ├── README.Docker.md
 │ └── README.md
 ```
 

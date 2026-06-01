@@ -2,6 +2,7 @@
 title: Create the Spring Boot project
 linkTitle: Create the project
 description: Set up a Spring Boot project with Kafka, Spring Data JPA, and MySQL.
+keywords: testcontainers, java, spring boot, kafka, mysql, project setup
 weight: 10
 ---
 

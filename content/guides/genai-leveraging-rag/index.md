@@ -35,7 +35,7 @@ The system operates as follows:
 2. These patterns help find matching information in a database
 3. The LLM generates responses that blend the model's inherent knowledge with the this extra information.
 
-To hold this vector information in an efficient manner, we need a special type of database.
+To hold this vector information in an efficient manner, you need a special type of database.
 
 ## Introduction to Graph databases
 
@@ -110,7 +110,7 @@ The first startup may take some time because the system needs to download a larg
 
 ### Monitoring progress
 
-We can monitor the download and initialization progress by viewing the logs. Run the following command to view the logs:
+You can monitor the download and initialization progress by viewing the logs. Run the following command to view the logs:
 
 ```bash
 docker compose logs
@@ -128,9 +128,9 @@ Wait for specific lines in the logs indicating that the download is complete and
 
 You can now access the interface at [http://localhost:8501/](http://localhost:8501/) to ask questions. For example, you can try the sample question:
 
-When we see those lines in the logs, web apps are ready to be used.
+When those lines appear in the logs, the web apps are ready to use.
 
-Since our goal is to teach AI about things it does not yet know, we begin by asking it a simple question about Nifi at
+Since the goal is to teach AI about things it does not yet know, begin by asking it a simple question about NiFi at
 [http://localhost:8501/](http://localhost:8501/).
 ![alt text](image.png)
 
@@ -140,13 +140,13 @@ RAG: Disabled
 Hello! I'm here to help you with your question about Apache NiFi. Unfortunately, I don't know the answer to that question. I'm just an AI and my knowledge cutoff is December 2022, so I may not be familiar with the latest technologies or software. Can you please provide more context or details about Apache NiFi? Maybe there's something I can help you with related to it.
 ```
 
-As we can see, AI does not know anything about this subject because it did not exist during the time of its training, also known as the information cutoff point.
+As shown, the AI does not know anything about this subject because it did not exist during the time of its training, also known as the information cutoff point.
 
 Now it's time to teach the AI some new tricks. First, connect to [http://localhost:8502/](http://localhost:8502/). Instead of using the "neo4j" tag, change it to the "apache-nifi" tag, then select the **Import** button.
 
 ![alt text](image-1.png)
 
-After the import is successful, we can access Neo4j to verify the data.
+After the import is successful, you can access Neo4j to verify the data.
 
 After logging in to [http://localhost:7474/](http://localhost:7474/) using the credentials from the `.env` file, you can run queries on Neo4j. Using the Neo4j Cypher query language, you can check for the data stored in the database.
 
@@ -162,7 +162,7 @@ To execute this query, write in the box on the top and select the blue run butto
 
 ![alt text](image-2.png)
 
-Results will appear below. What we are seeing here is the information system downloaded from Stack Overflow and saved in the graph database. RAG will utilize this information to enhance its responses.
+Results will appear below. The information shown is downloaded from Stack Overflow and saved in the graph database. RAG will utilize this information to enhance its responses.
 
 You can also run the following query to visualize the data:
 
@@ -176,7 +176,7 @@ To check the relationships in the database, run the following query:
 CALL db.relationshipTypes()
 ```
 
-Now, we are ready to enable our LLM to use this information. Go back to [http://localhost:8501/](http://localhost:8501/), enable the **RAG** checkbox, and ask the same question again. The LLM will now provide a more detailed answer.
+You're ready to enable the LLM to use this information. Go back to [http://localhost:8501/](http://localhost:8501/), enable the **RAG** checkbox, and ask the same question again. The LLM will provide a more detailed answer.
 
 ![alt text](image-3.png)
 
@@ -209,7 +209,7 @@ For optimal results, choose a tag that the LLM is not familiar with.
 
 ### When to leverage RAG for optimal results
 
-Retrieval-Augmented Generation (RAG) is particularly effective in scenarios where standard Large Language Models (LLMs) fall short. The three key areas where RAG excels are knowledge limitations, business requirements, and cost efficiency. Below, we explore these aspects in more detail.
+Retrieval-Augmented Generation (RAG) is particularly effective in scenarios where standard Large Language Models (LLMs) fall short. The three key areas where RAG excels are knowledge limitations, business requirements, and cost efficiency. The following sections explore these aspects in more detail.
 
 #### Overcoming knowledge limitations
 

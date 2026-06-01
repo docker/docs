@@ -124,17 +124,6 @@ set. For more information, see the [Notary GitHub repository](https://github.com
 A prerequisite for signing an image is a Docker Registry with a Notary server (such as Docker Hub) attached.
 Refer to [Deploying Notary](/engine/security/trust/deploying_notary/) for instructions.
 
-> [!NOTE]
->
-> Docker is retiring DCT for Docker Official Images
-> (DOI). You should start planning to transition to a different image signing
-> and verification solution (like [Sigstore](https://www.sigstore.dev/) or
-> [Notation](https://github.com/notaryproject/notation#readme)). Timelines for the
-> complete deprecation of DCT are being finalized and will be published soon.
->
-> For more information, see [Retiring Docker Content Trust](https://www.docker.com/blog/retiring-docker-content-trust/).
-
-
 To sign a Docker Image you will need a delegation key pair. These keys
 can be generated locally using `$ docker trust key generate` or generated
 by a certificate authority.

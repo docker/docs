@@ -1,6 +1,7 @@
 ---
 title: Migrate to DHI from Wolfi
 summary: Step-by-step guide to migrate from Wolfi to Docker Hardened Images
+keywords: docker hardened images, dhi, wolfi, migration, secure images, distroless
 type: redirect
 target: /dhi/migration/migrate-from-wolfi/
 tags: [dhi]

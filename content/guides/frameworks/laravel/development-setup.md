@@ -1,6 +1,7 @@
 ---
 title: Laravel Development Setup with Docker Compose
 description: Set up a Laravel development environment using Docker Compose.
+keywords: laravel, php, docker compose, development, xdebug, php-fpm, nginx
 weight: 30
 ---
 
@@ -209,7 +210,7 @@ CMD ["bash"]
 > [!NOTE]
 > If you prefer a **one-service-per-container** approach, simply omit the workspace container and run separate containers for each task. For example, you could use a dedicated `php-cli` container for your PHP scripts, and a `node` container to handle the asset building.
 
-## Create a Docker Compose Configuration for development
+## Create a Docker Compose configuration for development
 
 Here's the `compose.yaml` file to set up the development environment:
 

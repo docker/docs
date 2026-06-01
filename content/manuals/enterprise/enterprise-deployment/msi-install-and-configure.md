@@ -4,12 +4,6 @@ description: Understand how to use the MSI installer. Also explore additional co
 keywords: msi, windows, docker desktop, install, deploy, configure, admin, mdm
 tags: [admin]
 weight: 10
-aliases:
-  - /desktop/install/msi/install-and-configure/
-  - /desktop/setup/install/msi/install-and-configure/
-  - /desktop/install/msi/
-  - /desktop/setup/install/msi/
-  - /desktop/setup/install/enterprise-deployment/msi-install-and-configure/
 ---
 
 {{< summary-bar feature_name="MSI installer" >}}

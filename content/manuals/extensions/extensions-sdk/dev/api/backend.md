@@ -20,7 +20,7 @@ ddClient.extension.vm.service
  .then((value: any) => console.log(value)
 ```
 
-See [Service API Reference](/reference/api/extensions-sdk/HttpService.md) for other methods such as POST, UPDATE, and DELETE.
+See [Service API Reference](/reference/api/extensions-sdk/HttpService.md) for other HTTP methods.
 
 > Deprecated extension backend communication
 >

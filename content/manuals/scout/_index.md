@@ -52,7 +52,7 @@ By analyzing your images, Docker Scout compiles an inventory of components, also
 The SBOM is matched against a continuously updated vulnerability database to pinpoint security weaknesses.
 
 Docker Scout is a standalone service and platform that you can interact with
-using Docker Desktop, Docker Hub, the Docker CLI, and the Docker Scout Dashboard.
+using Docker Hub, the Docker CLI, and the Docker Scout Dashboard.
 Docker Scout also facilitates integrations with third-party systems, such as container registries and CI platforms.
 
 {{< grid >}}

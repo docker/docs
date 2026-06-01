@@ -2,6 +2,7 @@
 title: Write tests with Testcontainers
 linkTitle: Write tests
 description: Write your first integration test using Testcontainers for Java and PostgreSQL.
+keywords: testcontainers, java, postgresql, junit, integration testing
 weight: 20
 ---
 

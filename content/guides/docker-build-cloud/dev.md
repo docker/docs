@@ -1,6 +1,7 @@
 ---
 title: "Demo: set up and use Docker Build Cloud in development"
 description: Learn how to use Docker Build Cloud for local builds.
+keywords: docker build cloud, local development, cloud builds, multi-platform, build performance
 weight: 20
 ---
 

@@ -2,6 +2,7 @@
 title: Create the .NET project
 linkTitle: Create the project
 description: Set up a .NET solution with a PostgreSQL-backed customer service.
+keywords: testcontainers, dotnet, postgresql, getting started, project setup
 weight: 10
 ---
 

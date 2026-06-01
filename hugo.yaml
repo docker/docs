@@ -142,6 +142,14 @@ params:
     google: GTM-WL2QLG5
     onetrust: 65425fb0-7b36-4317-9f10-7b3e08039af0
     vwo: 723167
+    marlin:
+      # Public-write API keys for the Marlin analytics SDK.
+      apiKey:
+        prod: mrl_2nuEKUo5bzRv8GcDKeYjij4J4U--OLdN
+        stage: mrl_W14SGEQ7nYmBsAyjZPyOM-nlgE53E-vX
+      endpoint:
+        prod: https://marlin-2.docker.com
+        stage: https://marlin-2-stage.docker.com
 
   # Docs repository URL
   repo: https://github.com/docker/docs
@@ -154,10 +162,10 @@ params:
   # Latest version of the Docker Engine API
   latest_engine_api_version: "1.54"
   # Latest version of Docker Engine
-  docker_ce_version: "29.5.1"
+  docker_ce_version: "29.5.2"
   # Previous version of the Docker Engine
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
-  docker_ce_version_prev: "29.5.0"
+  docker_ce_version_prev: "29.5.1"
   # Latest Docker Compose version
   compose_version: "v5.1.2"
   # Latest BuildKit version

@@ -7,8 +7,6 @@ description: |
 keywords: docker sandboxes, cursor, cursor agent, ai agent, sbx
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 This guide covers authentication, configuration, and usage of Cursor in a
 sandboxed environment.
 
@@ -59,21 +57,28 @@ for workarounds.
 
 Cursor reads `AGENTS.md` from the workspace for agent-specific instructions.
 
-The sandbox runs Cursor in YOLO mode by default, which executes commands
-without approval prompts. Pass additional `cursor-agent` CLI options after
-`--`:
+### Default startup command
+
+Without extra args, the sandbox runs:
+
+```text
+cursor-agent --yolo
+```
+
+Args after `--` replace these defaults rather than being appended. To keep
+`--yolo`, include it yourself:
 
 ```console
-$ sbx run cursor --name <sandbox-name> -- <cursor-options>
+$ sbx run cursor -- --yolo -p "refactor this"
 ```
 
 ## Base image
 
 Template: `docker/sandbox-templates:cursor-agent-docker`
 
-Preconfigured to run in YOLO mode with HTTP/1.1 and server-sent events for
-agent traffic so requests flow through the host proxy. Authentication state
-is persisted across sandbox restarts.
+Preconfigured with HTTP/1.1 and server-sent events for agent traffic so
+requests flow through the host proxy. Authentication state is persisted across
+sandbox restarts.
 
 See [Customize](../customize/) to pre-install tools or customize this
 environment.

@@ -54,7 +54,7 @@ Gordon CLI is part of Docker Desktop. To disable it, disable Gordon in Docker
 Desktop Settings:
 
 1. Open Docker Desktop Settings.
-2. Navigate to the **Beta features** section.
+2. Navigate to the **AI** section.
 3. Clear the **Enable Gordon** option.
 4. Select **Apply**.
 

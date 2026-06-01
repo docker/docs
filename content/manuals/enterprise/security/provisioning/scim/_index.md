@@ -6,7 +6,6 @@ description: Learn how System for Cross-domain Identity Management works and how
 keywords: SCIM, SSO, user provisioning, de-provisioning, role mapping, assign users
 aliases:
   - /security/for-admins/scim/
-  - /docker-hub/scim/
   - /security/for-admins/provisioning/scim/
 ---
 

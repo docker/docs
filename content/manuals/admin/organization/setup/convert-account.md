@@ -75,6 +75,7 @@ an organization:
    account.
 1. Enter a **Username of new owner** to set an organization owner. The new
    Docker ID you specify becomes the organization’s owner. You cannot use the
-   same Docker ID as the account you are trying to convert.
+   same Docker ID as the account you are trying to convert. The Docker ID is
+   case-sensitive.
 1. Select **Confirm**. The new owner receives a notification email. Use that
    owner account to sign in and manage the new organization.

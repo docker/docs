@@ -582,7 +582,7 @@ The exact value doesn't really matter for this example, because you run Cockroac
 
 ### Merging Compose files
 
-The file name `compose.yaml` is the default file name which `docker compose` command recognizes if no `-f` flag is provided. This means you can have multiple Docker Compose files if your environment has such requirements. Furthermore, Docker Compose files are... composable (pun intended), so multiple files can be specified on the command line to merge parts of the configuration together. The following list is just a few examples of scenarios where such a feature would be very useful:
+The filename `compose.yaml` is the default filename which `docker compose` command recognizes if no `-f` flag is provided. This means you can have multiple Docker Compose files if your environment has such requirements. Furthermore, Docker Compose files are composable, so multiple files can be specified on the command line to merge parts of the configuration together. The following list shows a few examples of scenarios where such a feature would be useful:
 
 - Using a bind mount for the source code for local development but not when running the CI tests;
 - Switching between using a pre-built image for the frontend for some API application vs creating a bind mount for source code;

@@ -2,6 +2,7 @@
 title: Write tests with Testcontainers
 linkTitle: Write tests
 description: Test the Spring Boot REST API using Testcontainers and REST Assured.
+keywords: testcontainers, java, spring boot, rest api, rest assured, integration testing
 weight: 20
 ---
 

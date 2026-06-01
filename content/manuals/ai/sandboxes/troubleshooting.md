@@ -5,8 +5,6 @@ description: Resolve common issues when using Docker Sandboxes.
 keywords: docker sandboxes, sbx, troubleshooting, diagnostics, reset, network policy, git, ssh
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 ## Run diagnostics
 
 Before digging into a specific issue, run
@@ -186,24 +184,6 @@ isn't configured, use one of these workarounds:
 
   This replays each commit on the branch and re-signs it with your local
   signing key.
-
-## Clock drift after sleep/wake
-
-If your laptop sleeps and wakes while a sandbox is running, the VM clock can
-fall behind the host clock. This causes problems such as:
-
-- External API calls failing because of timestamp validation.
-- Git commits with incorrect timestamps.
-- TLS certificate errors due to time mismatches.
-
-To fix the issue, stop and restart the sandbox:
-
-```console
-$ sbx stop <sandbox-name>
-$ sbx run <sandbox-name>
-```
-
-Restarting the sandbox re-syncs the VM clock with the host.
 
 ## Daemon fails to start after downgrading
 

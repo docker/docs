@@ -12,7 +12,6 @@ linkTitle: Ubuntu
 weight: 10
 toc_max: 4
 aliases:
-  - /desktop/linux/install/ubuntu/
   - /desktop/install/ubuntu/
   - /desktop/install/linux/ubuntu/
 ---

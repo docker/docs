@@ -24,7 +24,7 @@ You’ll learn how to:
 
 ---
 
-## Automatically update services (Development Mode)
+## Automatically update services (development mode)
 
 Use Compose Watch to automatically sync source file changes into your containerized development environment. This provides a seamless, efficient development experience without restarting or rebuilding containers manually.
 
@@ -112,8 +112,7 @@ After completing the previous steps, your project directory should now contain t
 │ ├── Dockerfile.dev
 │ ├── .dockerignore
 │ ├── compose.yaml
-│ ├── nginx.conf
-│ └── README.Docker.md
+│ └── nginx.conf
 ```
 
 ### Step 4: Start Compose Watch

@@ -2,6 +2,7 @@
 title: Create the Spring Boot project
 linkTitle: Create the project
 description: Set up a Spring Boot project with Spring Data JPA, PostgreSQL, and a REST API.
+keywords: testcontainers, java, spring boot, rest api, postgresql, project setup
 weight: 10
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: Deploy your Docker setup
 description: Deploy your Docker setup across your company.
+keywords: admin, onboarding, deployment, sso, rollout, organization
 weight: 40
 ---
 

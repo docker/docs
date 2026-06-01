@@ -8,7 +8,6 @@ linkTitle: WSL
 weight: 120
 aliases:
 - /docker-for-windows/wsl/
-- /docker-for-windows/wsl-tech-preview/
 - /desktop/windows/wsl/
 - /desktop/wsl/
 ---
@@ -41,7 +40,7 @@ that was installed directly inside a WSL Linux distribution. Running both can ca
 4. Navigate to **Settings**.
 5. From the **General** tab, select **Use WSL 2 based engine**.
 
-    If you have installed Docker Desktop on a system that supports WSL 2, this option is turned on by default.
+    If you have installed Docker Desktop on a system that supports WSL 2, this option is turned on by default and the setting is not visible. 
 6. Select **Apply**.
 
 `docker` commands are now available from any Windows terminal using the WSL 2 engine.

@@ -2,6 +2,7 @@
 title: Write tests with Testcontainers
 linkTitle: Write tests
 description: Test the Micronaut Kafka listener using Testcontainers Kafka and MySQL modules with Awaitility.
+keywords: testcontainers, java, micronaut, kafka, mysql, awaitility, integration testing
 weight: 20
 ---
 

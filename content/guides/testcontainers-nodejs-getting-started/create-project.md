@@ -2,6 +2,7 @@
 title: Create the Node.js project
 linkTitle: Create the project
 description: Set up a Node.js project with a PostgreSQL-backed customer repository.
+keywords: testcontainers, node.js, nodejs, postgresql, getting started, project setup
 weight: 10
 ---
 

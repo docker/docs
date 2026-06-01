@@ -103,8 +103,7 @@ CLI](cli.md#configuration).
    `<your-org>` with your organization name.
 
    ```console
-   $ docker dhi mirror start --org <your-org> \
-       -r dhi/python,<your-org>/dhi-python
+   $ docker dhi mirror start --org <your-org> dhi/python,<your-org>/dhi-python
    ```
 
 2. Wait for images to finish mirroring. This can take a few minutes.
@@ -163,7 +162,7 @@ CLI](cli.md#configuration).
    $ docker dhi customization prepare --org <your-org> python 3-alpine3.23 \
        --destination <your-org>/dhi-python \
        --name "python with curl" \
-       --output my-customization.yaml
+       > my-customization.yaml
    ```
 
 2. Add the `curl` package to the customization. You can edit the file with any

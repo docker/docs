@@ -35,8 +35,6 @@ grid:
     icon: lock-closed
     link: /reference/compose-file/secrets/
 aliases:
-  - /compose/yaml/
-  - /compose/compose-file/compose-file-v1/
   - /compose/compose-file/
   - /compose/reference/overview/
 ---

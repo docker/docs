@@ -6,8 +6,6 @@ description: What a sandbox permits and blocks before you change any settings.
 keywords: docker sandboxes, security defaults, network policy, credentials, sbx
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 A sandbox created with `sbx run` and no additional flags has the following
 security posture.
 
@@ -30,7 +28,8 @@ working tree directly, and changes appear on your host immediately.
 
 The agent can read, write, and delete any file within the workspace directory,
 including hidden files, configuration files, build scripts, and Git hooks.
-See [Workspace trust](workspace.md) for what to review after an agent session.
+See [Workspace isolation](isolation.md#workspace-isolation) for what to
+review after an agent session.
 
 ## Credential defaults
 

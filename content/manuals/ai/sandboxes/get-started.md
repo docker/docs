@@ -6,8 +6,6 @@ description: Install the sbx CLI, configure credentials, and work through your f
 keywords: sandbox, sbx, get started, install, credentials, branch mode, network policy
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
 sandbox gets its own Docker daemon, filesystem, and network — the agent can
 build containers, install packages, and modify files without touching your host
@@ -199,7 +197,7 @@ directory without touching your main working tree.
 When the session ends, review what the agent did from the worktree:
 
 ```console
-$ cd .sbx/<sandbox-name>-worktrees/my-feature
+$ cd .sbx/claude-my-project-worktrees/my-feature
 $ git log
 $ git diff main
 ```
@@ -243,15 +241,19 @@ set and how to customize it.
 Sandboxes persist after the agent exits. To stop a sandbox without deleting it:
 
 ```console
-$ sbx stop my-sandbox
+$ sbx stop claude-my-project
 ```
+
+The sandbox name comes from the agent and workspace directory — see
+[Reconnecting and naming](usage.md#reconnecting-and-naming) for details, or run
+`sbx ls` to see the names of your existing sandboxes.
 
 Installed packages, Docker images, and configuration changes are preserved
 across restarts. When you're done with a sandbox, remove it to reclaim disk
 space:
 
 ```console
-$ sbx rm my-sandbox
+$ sbx rm claude-my-project
 ```
 
 Removing a sandbox deletes everything inside it — installed packages, Docker
@@ -266,5 +268,6 @@ working tree are unaffected.
 - [Customize](customize/) — build reusable templates or declare capabilities
   with kits
 - [Credentials](security/credentials.md) — credential storage and management
-- [Workspace trust](security/workspace.md) — review agent changes safely
+- [Workspace isolation](security/isolation.md#workspace-isolation) — what
+  the agent can affect on your host, and how to review changes
 - [Policies](security/policy.md) — control outbound access

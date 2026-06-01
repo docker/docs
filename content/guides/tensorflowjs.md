@@ -43,7 +43,7 @@ pre-trained models, facilitating a wide range of ML applications directly in web
 environments. TensorFlow.js offers efficient computation, making sophisticated
 ML tasks accessible to web developers without deep ML expertise.
 
-## Why Use TensorFlow.js and Docker together?
+## Why use TensorFlow.js and Docker together?
 
 - Environment consistency and simplified deployment: Docker packages
   TensorFlow.js applications and their dependencies into containers, ensuring

@@ -1,0 +1,36 @@
+name: sbx kit add
+synopsis: Add a kit to a running sandbox
+experimental: true
+description: |-
+    Inject a kit artifact into an already-running sandbox.
+
+    The kit's files, init files, and startup commands are applied to the
+    running container. This allows extending a sandbox without recreating it.
+
+    The sandbox must already exist (created or running). The reference can be a local directory,
+    ZIP file path, OCI registry reference, or git repository.
+usage: sbx kit add SANDBOX REFERENCE [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for add
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      # Add a local kit directory to a sandbox
+      sbx kit add my-sandbox ./mcp-postgres/
+
+      # Add a kit from a ZIP file
+      sbx kit add my-sandbox ./mcp-postgres.zip
+
+      # Add a kit from an OCI registry
+      sbx kit add my-sandbox ghcr.io/myorg/mcp-postgres:1.0
+
+      # Add a kit from a git repository
+      sbx kit add my-sandbox git+https://github.com/org/kits.git#dir=mcp-postgres
+see_also:
+    - sbx kit - Manage kit artifacts

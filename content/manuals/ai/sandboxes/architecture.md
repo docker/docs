@@ -5,8 +5,6 @@ description: Technical architecture of Docker Sandboxes; workspace mounting, sto
 keywords: docker sandboxes, architecture, microVM, workspace mounting, sandbox lifecycle
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 This page explains how Docker Sandboxes work under the hood. For the security
 properties of the architecture, see [Sandbox isolation](security/isolation.md).
 
@@ -20,6 +18,12 @@ Your workspace is mounted at the same absolute path as on your host. Preserving
 absolute paths means error messages, configuration files, and build outputs all
 reference paths you can find on your host. The agent sees exactly the directory
 structure you see, which reduces confusion when debugging or reviewing changes.
+
+> [!WARNING]
+> Avoid mounting network-attached or remote storage (network drives, SMB/NFS
+> shares, or cloud-synced folders) as a workspace. The sandbox accesses
+> workspaces through a filesystem passthrough, so every file read and write
+> goes over the network. This adds latency and slows agent performance.
 
 ## Storage and persistence
 

@@ -6,8 +6,6 @@ description: Centrally manage sandbox network and filesystem policies for your o
 keywords: docker sandboxes, governance, organization policy, AI governance, admin console, network access, filesystem access
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 This page covers how to configure organization policies in the Docker Admin
 Console under AI governance settings. For local sandbox policies that
 individual users configure on their own machine, see [Policies](policy.md).

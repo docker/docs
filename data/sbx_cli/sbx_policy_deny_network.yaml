@@ -7,7 +7,8 @@ description: |-
     Deny rules always take precedence over allow rules.
 
     Use -g/--global to apply the rule globally to all sandboxes, or provide
-    SANDBOX before RESOURCES to scope the rule to a specific sandbox.
+    SANDBOX before RESOURCES to add the rule to policy "local" scoped to that
+    sandbox.
 usage: sbx policy deny network [-g | SANDBOX] RESOURCES [flags]
 options:
     - name: global
@@ -33,4 +34,4 @@ example: |4-
       # Block all outbound traffic globally
       sbx policy deny network -g "**"
 see_also:
-    - sbx policy deny - Add a deny policy for sandboxes
+    - sbx policy deny - Add a deny rule for sandboxes

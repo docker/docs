@@ -156,7 +156,6 @@ You should now have the following in your `docker-php-sample` directory.
 │ ├── composer.json
 │ ├── composer.lock
 │ ├── Dockerfile
-│ ├── README.Docker.md
 │ └── README.md
 ```
 

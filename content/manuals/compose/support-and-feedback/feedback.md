@@ -3,8 +3,6 @@ description: Find a way to provide feedback on Docker Compose that's right for y
 keywords: Feedback, Docker Compose, Community forum, bugs, problems, issues
 title: Give feedback
 weight: 20
-aliases:
-- /compose/feedback/
 ---
 
 There are many ways you can provide feedback on Docker Compose.

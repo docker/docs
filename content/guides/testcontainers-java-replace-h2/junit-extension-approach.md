@@ -2,6 +2,7 @@
 title: Use the JUnit 5 extension for more control
 linkTitle: JUnit 5 extension
 description: Use the Testcontainers JUnit 5 extension for more control over the PostgreSQL container.
+keywords: testcontainers, java, h2, postgresql, junit, integration testing
 weight: 30
 ---
 

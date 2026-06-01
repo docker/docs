@@ -80,28 +80,7 @@ For the sample application, you'll use a variation of the backend from the react
    $ git clone https://github.com/docker/docker-rust-postgres
    ```
 
-2. In the cloned repository's directory, run `docker init` to create the necessary Docker files. Refer to the following example to answer the prompts from `docker init`.
-
-   ```console
-   $ docker init
-   Welcome to the Docker Init CLI!
-
-   This utility will walk you through creating the following files with sensible defaults for your project:
-     - .dockerignore
-     - Dockerfile
-     - compose.yaml
-     - README.Docker.md
-
-   Let's get started!
-
-   ? What application platform does your project use? Rust
-   ? What version of Rust do you want to use? 1.70.0
-   ? What port does your server listen on? 8000
-   ```
-
-3. In the cloned repository's directory, open the `Dockerfile` in an IDE or text editor to update it.
-
-   `docker init` handled creating most of the instructions in the Dockerfile, but you'll need to update it for your unique application. In addition to a `src` directory, this application includes a `migrations` directory to initialize the database. Add a bind mount for the `migrations` directory to the build stage in the Dockerfile. The following is the updated Dockerfile.
+2. In the cloned repository's directory, create a `Dockerfile`. This application includes a `migrations` directory (in addition to `src`) to initialize the database, so the Dockerfile includes a bind mount for that directory in the build stage.
 
    ```dockerfile {hl_lines="28"}
    # syntax=docker/dockerfile:1
@@ -174,13 +153,13 @@ For the sample application, you'll use a variation of the backend from the react
    CMD ["/bin/server"]
    ```
 
-4. In the cloned repository's directory, run `docker build` to build the image.
+3. In the cloned repository's directory, run `docker build` to build the image.
 
    ```console
    $ docker build -t rust-backend-image .
    ```
 
-5. Run `docker run` with the following options to run the image as a container on the same network as the database.
+4. Run `docker run` with the following options to run the image as a container on the same network as the database.
 
    ```console
    $ docker run \
@@ -197,7 +176,7 @@ For the sample application, you'll use a variation of the backend from the react
      rust-backend-image
    ```
 
-6. Curl the application to verify that it connects to the database.
+5. Curl the application to verify that it connects to the database.
 
    ```console
    $ curl http://localhost:3001/users
@@ -211,11 +190,7 @@ For the sample application, you'll use a variation of the backend from the react
 
 ## Use Compose to develop locally
 
-When you run `docker init`, in addition to a `Dockerfile`, it also creates a `compose.yaml` file.
-
-This Compose file is super convenient as you don't have to type all the parameters to pass to the `docker run` command. You can declaratively do that using a Compose file.
-
-In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor. `docker init` handled creating most of the instructions, but you'll need to update it for your unique application.
+In the cloned repository's directory, create a `compose.yaml` file. Using Compose, you don't have to type all the parameters to pass to the `docker run` command — you can declare them in the file instead.
 
 You need to update the following items in the `compose.yaml` file:
 

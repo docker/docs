@@ -2,6 +2,7 @@
 title: Write tests with Testcontainers
 linkTitle: Write tests
 description: Test Spring Cloud AWS S3 and SQS integration using Testcontainers and LocalStack.
+keywords: testcontainers, java, spring boot, aws, localstack, s3, sqs, integration testing
 weight: 20
 ---
 

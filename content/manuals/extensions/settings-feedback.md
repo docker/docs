@@ -4,15 +4,13 @@ keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows, feedback
 title: Settings and feedback for Docker Extensions
 linkTitle: Settings and feedback
 weight: 40
-aliases:
- - /desktop/extensions/settings-feedback/
 ---
 
 ## Settings
 
 ### Turn on or turn off extensions
 
-Docker Extensions is switched on by default. To change your settings:
+Docker Extensions is switched off by default. To change your settings:
 
 1. Navigate to **Settings**.
 2. Select the **Extensions** tab.

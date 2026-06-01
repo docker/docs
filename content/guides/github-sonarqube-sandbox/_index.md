@@ -1,8 +1,9 @@
 ---
 title: How to build an AI-powered code quality workflow with SonarQube and E2B
-linkTitle: Build an AI-powered code quality workflow
+linkTitle: AI-powered code quality
 summary: Build AI-powered code quality workflows using E2B sandboxes with Docker's MCP catalog to automate GitHub and SonarQube integration.
 description: Learn how to create E2B sandboxes with MCP servers, analyze code quality with SonarQube, and generate quality-gated pull requests using GitHub—all through natural language interactions with Claude.
+keywords: sonarqube, e2b, sandboxes, mcp, github, code quality, ai workflow, claude
 tags: [devops]
 params:
   time: 40 minutes

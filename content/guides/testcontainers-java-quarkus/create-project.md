@@ -2,6 +2,7 @@
 title: Create the Quarkus project
 linkTitle: Create the project
 description: Set up a Quarkus project with Hibernate ORM with Panache, PostgreSQL, Flyway, and REST API endpoints.
+keywords: testcontainers, java, quarkus, postgresql, hibernate, flyway, project setup
 weight: 10
 ---
 

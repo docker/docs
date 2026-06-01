@@ -376,13 +376,13 @@ spec:
 
 Before deploying, you need to customize the deployment file for your environment:
 
-1. **Image reference**: Replace `your-username` with your GitHub username or Docker Hub username:
+1. Image reference: Replace `your-username` with your GitHub username or Docker Hub username:
 
    ```yaml
    image: ghcr.io/your-username/docker-nodejs-sample:latest
    ```
 
-2. **Domain name**: Replace `yourdomain.com` with your actual domain in two places:
+2. Domain name: Replace `yourdomain.com` with your actual domain in two places:
 
    ```yaml
    # In ConfigMap
@@ -392,7 +392,7 @@ Before deploying, you need to customize the deployment file for your environment
    - host: yourdomain.com
    ```
 
-3. **Database password** (optional): The default password is already base64 encoded. To change it:
+3. Database password (optional): The default password is already base64 encoded. To change it:
 
    ```console
    $ echo -n "your-new-password" | base64
@@ -405,7 +405,7 @@ Before deploying, you need to customize the deployment file for your environment
      postgres-password: <your-base64-encoded-password>
    ```
 
-4. **Storage class**: Adjust based on your cluster (current: `standard`)
+4. Storage class: Adjust based on your cluster (current: `standard`)
 
 ## Understanding the deployment
 
@@ -415,10 +415,10 @@ The deployment file creates a complete application stack with multiple component
 
 The deployment includes:
 
-- **Node.js application**: Runs 3 replicas of your containerized Todo app
-- **PostgreSQL database**: Single instance with 10Gi of persistent storage
-- **Services**: Kubernetes services handle load balancing across application replicas
-- **Ingress**: External access through an ingress controller with SSL/TLS support
+- Node.js application: Runs 3 replicas of your containerized Todo app
+- PostgreSQL database: Single instance with 10Gi of persistent storage
+- Services: Kubernetes services handle load balancing across application replicas
+- Ingress: External access through an ingress controller with SSL/TLS support
 
 ### Security
 
@@ -538,26 +538,26 @@ Open your browser and visit [http://localhost:8080](http://localhost:8080) to se
 
 Test that your application is working correctly:
 
-1. **Add some todos** through the web interface
-2. **Check application pods**:
+1. Add some todos through the web interface
+2. Check application pods:
 
    ```console
    $ kubectl get pods -n todoapp -l app=todoapp
    ```
 
-3. **View application logs**:
+3. View application logs:
 
    ```console
    $ kubectl logs -f deployment/todoapp-deployment -n todoapp
    ```
 
-4. **Check database connectivity**:
+4. Check database connectivity:
 
    ```console
    $ kubectl get pods -n todoapp -l app=todoapp-postgres
    ```
 
-5. **Monitor auto-scaling**:
+5. Monitor auto-scaling:
    ```console
    $ kubectl describe hpa todoapp-hpa -n todoapp
    ```

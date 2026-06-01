@@ -80,8 +80,7 @@ After completing the previous steps, your project directory should contain the f
 │ ├── Dockerfile.dev
 │ ├── .dockerignore
 │ ├── compose.yaml
-│ ├── nginx.conf
-│ └── README.Docker.md
+│ └── nginx.conf
 ```
 
 ### Step 2: Run the tests

@@ -236,7 +236,7 @@ To run a container using the GUI:
 
 6. Select `Run`.
 7. In the **Containers** view, verify that the port is mapped under the
-   **Port(s)** column. You should see **3307:3306** for the **my-mysql**
+   **Port(s)** column. You should see `3307:3306` for the `my-mysql`
    container.
 
 {{< /tab >}}

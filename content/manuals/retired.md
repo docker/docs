@@ -11,12 +11,9 @@ params:
 aliases:
   - /docker-hub/service-accounts/
   - /cloud/
-  - /cloud/aci-compose-features/
   - /cloud/aci-container-features/
   - /cloud/aci-integration/
   - /cloud/ecs-architecture/
-  - /cloud/ecs-compose-examples/
-  - /cloud/ecs-compose-features/
   - /cloud/ecs-integration/
   - /compose/migrate/
   - /engine/context/aci-integration/
@@ -66,11 +63,6 @@ aliases:
   - /toolbox/toolbox_install_mac/
   - /toolbox/toolbox_install_windows/
   - /desktop/features/dev-environments/
-  - /desktop/features/dev-environments/create-dev-env/
-  - /desktop/features/dev-environments/set-up/
-  - /desktop/features/dev-environments/share/
-  - /desktop/features/dev-environments/dev-cli/
-  - /desktop/dev-environments/
 ---
 
 This document provides an overview of Docker features, products, and
@@ -211,6 +203,15 @@ compose`), which is written in Go and integrates with the Docker CLI. Compose
 v1 is no longer maintained, and users should migrate to Compose v2.
 
 [Compose v2 Documentation](/manuals/compose/_index.md)
+
+### Docker SBOM CLI plugin
+
+The Docker SBOM CLI plugin provided the `docker sbom` command for generating
+and viewing software bill of materials (SBOMs) for container images. The plugin
+is discontinued. Use [`docker scout sbom`](/reference/cli/docker/scout/sbom/)
+for SBOM generation and inspection.
+
+[See Docker SBOM CLI plugin release notes for migration guidance](https://github.com/docker/sbom-cli-plugin/releases/tag/v0.7.0)
 
 ### InfraKit
 

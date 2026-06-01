@@ -173,7 +173,7 @@ Run the `docker ps --all` command again to see that Docker removed all container
 
 Now, it's time to address the random naming issue. Standard practice is to name your containers for the simple reason that it's easier to identify what's running in the container and what application or service it's associated with.
 
-To name a container, you just need to pass the `--name` flag to the `docker run` command.
+To name a container, pass the `--name` flag to the `docker run` command.
 
 ```console
 $ docker run -d -p 3001:8000 --name docker-rust-container docker-rust-image-dhi
@@ -183,11 +183,11 @@ CONTAINER ID   IMAGE                   COMMAND                  CREATED         
 219b2e3c7c38   docker-rust-image-dhi   "/server"                6 seconds ago   Up 5 seconds   0.0.0.0:3001->8000/tcp, [::]:3001->8000/tcp   docker-rust-container
 ```
 
-That’s better! You can now easily identify your container based on the name.
+Now you can identify your container based on the name.
 
 ## Summary
 
-In this section, you took a look at running containers. You also took a look at managing containers by starting, stopping, and restarting them. And finally, you looked at naming your containers so they are more easily identifiable.
+In this section, you took a look at running containers. You also took a look at managing containers by starting, stopping, and restarting them. And finally, you looked at naming your containers so they are more identifiable.
 
 Related information:
 

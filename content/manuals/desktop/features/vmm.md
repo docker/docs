@@ -4,8 +4,6 @@ linkTitle: Virtual Machine Manager
 keywords: virtualization software, resource allocation, mac, docker desktop, vm monitoring, vm performance, apple silicon
 description: Discover Docker Desktop for Mac's Virtual Machine Manager (VMM) options, including Docker VMM for Apple Silicon, offering enhanced performance and efficiency
 weight: 110
-aliases:
-  - /desktop/vmm/
 ---
 
 Docker Desktop supports multiple Virtual Machine Managers (VMMs) to power the Linux VM that runs containers. You can choose the most suitable option based on your system architecture (Intel or Apple Silicon), performance needs, and feature requirements. This page provides an overview of the available options.

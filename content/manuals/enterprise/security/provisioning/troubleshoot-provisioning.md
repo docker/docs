@@ -6,7 +6,6 @@ keywords: SCIM troubleshooting, user provisioning, JIT provisioning, group mappi
 tags: [Troubleshooting]
 toc_max: 2
 aliases:
-    - /security/troubleshoot/troubleshoot-provisioning/
     - /enterprise/troubleshoot/troubleshoot-provisioning/
 ---
 

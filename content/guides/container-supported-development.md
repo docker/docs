@@ -1,10 +1,11 @@
 ---
 title: "Faster development and testing with container-supported development"
-linkTitle: Container-supported development
+linkTitle: Container-supported dev
 summary: |
   Containers don't have to be just for your app. Learn how to run your app's dependent services and other debugging tools to enhance your development environment.
 description: |
   Use containers in your local development loop to develop and test faster… even if your main app isn't running in containers.
+keywords: containers, local development, dependent services, testing, debugging, development environment
 tags: [app-dev]
 params:
   image: images/learning-paths/container-supported-development.png
@@ -31,7 +32,6 @@ And best of all, you can have these benefits regardless of whether the main app 
 - Teams that want to reduce the complexity and costs associated with using cloud services directly during development
 - Developers that want to make it easier to visualize what's going on in their databases, queues, etc.
 - Teams that want to reduce the complexity of setting up their development environment without impacting the development of the app itself
-
 
 ## Tools integration
 
@@ -69,7 +69,7 @@ This demo will demonstrate how using WireMock can make it easy to develop and te
 
 ### Demo: developing the cloud locally
 
-When developing apps, it's often easier to outsource aspects of the application to cloud services, such as Amazon S3. However, connecting to those services in local development introduces IAM policies, networking constraints, and provisioning complications. While these requirements are important in a production setting, they complicate development environments significantly. 
+When developing apps, it's often easier to outsource aspects of the application to cloud services, such as Amazon S3. However, connecting to those services in local development introduces IAM policies, networking constraints, and provisioning complications. While these requirements are important in a production setting, they complicate development environments significantly.
 
 With container-supported development, you can run local instances of these services during development and testing, removing the need for complex setups. In this demo, you'll see how LocalStack makes it easy to develop and test applications entirely from the developer's workstation.
 

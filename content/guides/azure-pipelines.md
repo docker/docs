@@ -3,6 +3,7 @@ title: Introduction to Azure Pipelines with Docker
 linkTitle: Azure Pipelines and Docker
 summary: |
   Learn how to automate Docker image build and push using Azure Pipelines.
+keywords: azure pipelines, azure devops, ci/cd, docker hub, build and push, automation
 params:
   tags: [devops]
   time: 10 minutes
