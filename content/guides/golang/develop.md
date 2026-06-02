@@ -524,8 +524,6 @@ In this section, you'll create a Docker Compose file to start your `docker-gs-pi
 In your application's directory, create a new text file named `compose.yaml` with the following content.
 
 ```yaml
-version: "3.8"
-
 services:
   docker-gs-ping-roach:
     depends_on:
