@@ -34,7 +34,7 @@ The columns are:
 - `DECISION`: whether the rule allows or denies the resource.
 - `STATUS`: whether the rule is in effect. A rule may be `inactive` if it's
   overridden or suppressed (for example, when organization governance is
-  active and hasn't delegated that rule type to local control).
+  active, local rules are not evaluated and show as `inactive`).
 - `RESOURCES`: the hosts or patterns the rule applies to.
 
 When organization governance is active, the output starts with a governance
@@ -45,8 +45,8 @@ $ sbx policy ls
 Governance: managed by my-org
 [OK] last synced 13:54:21
 NAME                  TYPE      ORIGIN               DECISION   STATUS                                                  RESOURCES
-balanced-dev          network   local                allow      inactive — corporate policy takes precedence and does   api.anthropic.com
-                                                                not delegate this rule type to local policy.
+balanced-dev          network   local                allow      inactive — organization policy takes precedence; local  api.anthropic.com
+                                                                rules are not evaluated.
 allow AI services     network   remote               allow      active                                                  api.anthropic.com
                                                                                                                         api.openai.com
 allow Docker services network   remote               allow      active                                                  *.docker.com

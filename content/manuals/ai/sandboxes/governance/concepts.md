@@ -85,22 +85,20 @@ denied regardless of any matching allow rules.
 **Default deny.** Outbound traffic is blocked unless an explicit allow rule
 matches.
 
-These principles apply within each policy level independently. A deny in an
-organization policy can't be overridden by a local allow.
+These principles apply within whichever policy is active. When organization
+governance is active, only organization rules are evaluated; local rules have
+no effect.
 
 ## Precedence
 
-When only local policies are active, local rules determine what sandboxes can
-access.
+Local and organization policies don't combine. Which one applies depends on
+whether your organization has governance enabled:
 
-When organization governance is active:
+- **No organization governance**: local rules determine what sandboxes can
+  access.
+- **Organization governance active**: organization rules apply across all
+  developer machines, and local rules are not evaluated. Local rules still
+  appear in `sbx policy ls`, but with an `inactive` status.
 
-- Organization rules take effect across all developer machines.
-- Local rules are not evaluated by default.
-- Admins can [delegate](org.md#delegate-rules-to-local-policy) specific rule
-  types back to local control. Delegated local rules can expand access for
-  targets the organization hasn't explicitly denied, but can't override
-  organization-level deny rules.
-
-Within any level, deny rules beat allow rules regardless of specificity or
-order.
+Within the active policy, deny rules beat allow rules regardless of specificity
+or order.

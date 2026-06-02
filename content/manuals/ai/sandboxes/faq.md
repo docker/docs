@@ -26,9 +26,8 @@ Your Docker account email is only used for authentication, not marketing.
 
 Yes. Admins can centrally manage network and filesystem policies from the
 Docker Admin Console. Rules defined there apply to every sandbox in the
-organization and take precedence over local rules set with `sbx policy`.
-Admins can optionally delegate specific rule types back to local control so
-developers can add additional allow rules.
+organization. When organization governance is active, it replaces local rules
+set with `sbx policy` — local rules are no longer evaluated.
 
 See [Organization governance](governance/org.md). This feature requires
 a separate paid subscription —

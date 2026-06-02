@@ -6,8 +6,8 @@ keywords: docker sandboxes, governance, policy, network access, filesystem acces
 ---
 
 Sandbox governance covers the policy system that controls what sandboxes can
-access over the network and on the filesystem. It operates at two layers that
-build on each other:
+access over the network and on the filesystem. It operates at two layers, and
+only one applies at a time:
 
 **Local policy** is configured per machine using the `sbx policy` CLI. It
 lets individual developers customize which domains their sandboxes can reach.
@@ -15,10 +15,9 @@ See [Local policy](local.md).
 
 **Organization policy** is configured centrally in the Docker Admin Console or
 via the [Governance API](/reference/api/ai-governance/). Rules defined at the org level apply
-uniformly across every sandbox in the organization and take precedence over
-local rules. Admins can optionally delegate specific rule types back to local
-control so developers can extend the org policy with additional allow rules.
-See [Organization policy](org.md).
+uniformly across every sandbox in the organization. When organization
+governance is active, it replaces local policy entirely: local `sbx policy`
+rules are no longer evaluated. See [Organization policy](org.md).
 
 > [!NOTE]
 > Organization governance is available on a separate paid subscription.

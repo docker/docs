@@ -11,17 +11,15 @@ The `sbx policy` command manages network access rules on your local machine.
 Rules apply to all sandboxes on the machine when you use the global scope, or
 to a single sandbox when scoped by name.
 
-Local rules work differently depending on whether your organization uses
-governance:
+Local rules apply only when your organization doesn't enforce governance:
 
 - **No org governance**: local rules fully control what sandboxes can access.
-- **Org governance, delegation enabled**: local rules of the delegated type
-  are evaluated alongside org rules. You can extend access for domains your org
-  hasn't explicitly denied, but org-level denials still take precedence.
-- **Org governance, no delegation**: local rules are inactive. `sbx policy
-  allow` and `sbx policy deny` have no effect for that rule type.
+- **Org governance active**: the organization policy replaces local policy.
+  Local rules are inactive, and `sbx policy allow` and `sbx policy deny` have
+  no effect. Local rules still appear in `sbx policy ls` with an `inactive`
+  status.
 
-See [Organization policy](org.md) for how admins configure delegation.
+See [Organization policy](org.md) for how organization governance works.
 
 For domain patterns, wildcards, CIDR ranges, and filesystem path syntax, see
 [Policy concepts](concepts.md#rule-syntax).
@@ -138,22 +136,20 @@ $ sbx policy reset --force
 ### Local rules have no effect
 
 If rules you add with `sbx policy allow` or `sbx policy deny` don't change
-sandbox behavior, your organization likely has governance enabled without
-delegating that rule type to local control. Run `sbx policy ls` to check: if
-the output starts with a `Governance: managed by <org>` header, org governance
-is active. If your rules appear with `inactive` status, org governance is
-suppressing them.
+sandbox behavior, your organization likely has governance enabled. Run `sbx
+policy ls` to check: if the output starts with a `Governance: managed by <org>`
+header, org governance is active. When it's active, the organization policy
+replaces local policy, so your rules appear with `inactive` status and have no
+effect.
 
-To use local rules alongside org rules, ask your admin to enable delegation for
-the relevant rule type in the Admin Console. See
-[Delegate rules to local policy](org.md#delegate-rules-to-local-policy).
+Organization policy can't be supplemented from your machine. To change what
+your sandboxes can access, ask your admin to update the organization policy in
+the Admin Console.
 
 ### A domain is still blocked after adding an allow rule
 
-If a domain remains blocked after you add a local allow rule, an org-level deny
-rule may be covering it. [Delegation](org.md#delegate-rules-to-local-policy)
-lets local rules expand access, but org deny rules always take precedence. Run `sbx policy ls` to check whether a rule
-with `remote` origin and `deny` decision matches the domain. If so, the block
-can only be lifted by updating the org policy in the Admin Console or via the
-[API](/reference/api/ai-governance/).
-
+If a domain remains blocked after you add a local allow rule, your organization
+likely enforces governance, which makes local rules inactive. Run `sbx policy
+ls` to check whether org governance is active and whether your rule shows an
+`inactive` status. If so, the block can only be lifted by updating the org
+policy in the Admin Console or via the [API](/reference/api/ai-governance/).

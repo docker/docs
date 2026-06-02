@@ -9,10 +9,12 @@ aliases:
 ---
 
 [Local policies](local.md) give individual developers control over what their
-sandboxes can access. Organization policy extends this to the admin level:
+sandboxes can access. Organization policy moves that control to the admin level:
 rules defined in the [Docker Admin Console](https://app.docker.com/admin) apply
-uniformly to every sandbox in the organization, take precedence over local
-`sbx policy` rules, and can't be overridden by individual users.
+uniformly to every sandbox in the organization. When organization governance is
+active, it replaces local `sbx policy` rules entirely — local rules are no
+longer evaluated and can't be used to supplement or override the organization
+policy.
 
 Admins can manage organization policies through the Admin Console UI or
 programmatically using the [Governance API](/reference/api/ai-governance/).
@@ -34,44 +36,10 @@ action (allow or deny). You can add multiple entries at once, one per line.
 For the full syntax reference (exact hostnames, wildcard subdomains, port
 suffixes, and CIDR ranges), see [Policy concepts](concepts.md#network-rules).
 
-### Delegate rules to local policy
-
-When organization governance is active, local rules are ignored by default.
-Only the organization policy is in effect. Admins can delegate a rule type
-back to local policy by turning on the **User defined** setting for that
-rule type in AI governance settings. Turning the setting on delegates the
-rule type: local `sbx policy` rules of that type are evaluated alongside
-organization rules, letting users add hosts to the allowlist from their own
-machine.
-
-When a rule type isn't delegated, local rules of that type still appear in
-`sbx policy ls` but with an `inactive` status. See [Monitoring](monitoring.md)
-for how to read the combined rule view.
-
-Delegated local rules can expand access for domains the organization hasn't
-explicitly denied, but can't override organization-level deny rules. This
-applies to exact matches and wildcard matches alike; if the organization denies
-`*.example.com`, a local allow for `api.example.com` has no effect because the
-org-level wildcard deny covers it.
-
-For example, given an organization policy that allows `api.anthropic.com`
-and denies `*.corp.internal`:
-
-- `sbx policy allow network -g api.example.com`: works, because the
-  organization hasn't denied `api.example.com`
-- `sbx policy allow network -g build.corp.internal`: no effect, because the
-  organization denies `*.corp.internal`
-
-#### Blocked values in delegated rules
-
-To prevent overly broad rules from undermining the organization's policy,
-certain catch-all values are blocked in delegated local rules:
-
-- Domain patterns: `*`, `**`, `*.com`, `**.com`, `*.*`, `**.**`
-- CIDR ranges: `0.0.0.0/0`, `::/0`
-
-Scoped wildcards like `*.example.com` are still allowed. If a user attempts
-to use a blocked value, `sbx policy` returns an error immediately.
+When organization governance is active, local network rules are not evaluated.
+The organization policy is the only policy in effect. Local rules still appear
+in `sbx policy ls` but with an `inactive` status. See [Monitoring](monitoring.md)
+for how to read the rule view.
 
 ## Filesystem policies
 
@@ -88,26 +56,19 @@ For path pattern syntax including the difference between `*` and `**`, see
 
 ## Precedence
 
-Within any layer, deny rules beat allow rules. If a domain matches both, it's
-blocked regardless of specificity. Outbound traffic is blocked unless a rule
-allows it.
+Within the active policy, deny rules beat allow rules. If a domain matches both,
+it's blocked regardless of specificity. Outbound traffic is blocked unless a
+rule allows it.
 
 When organization governance is active, local rules are not evaluated. Only
 organization rules set in the Admin Console determine what is allowed or
-denied. Organization-level denials can't be overridden locally.
+denied, and they can't be supplemented or overridden from a developer's machine.
+The same model applies to filesystem policies: organization rules replace local
+behavior entirely.
 
-If the admin [delegates](#delegate-rules-to-local-policy) a rule type to
-local policy by turning on the **User defined** setting, local rules of
-that type are also evaluated alongside organization rules. Delegated local
-rules can expand access for domains the organization hasn't explicitly
-denied, but can't override organization-level denials.
-
-The same model applies to filesystem policies: organization-level rules take
-precedence over local behavior.
-
-To unblock a domain, identify where the deny rule comes from. For local
-rules, remove it with `sbx policy rm`. For organization-level rules, update
-the rule in the Admin Console or via the [API](/reference/api/ai-governance/).
+To unblock a domain when organization governance is active, update the rule in
+the Admin Console or via the [API](/reference/api/ai-governance/). Without
+organization governance, remove the local rule with `sbx policy rm`.
 
 ## Troubleshooting
 

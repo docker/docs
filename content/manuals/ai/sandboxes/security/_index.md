@@ -92,9 +92,7 @@ On a single developer's machine, network and filesystem policies are
 configured locally with `sbx policy`. Admins can also centrally define those
 policies in the Docker Admin Console. When organization governance is active,
 the centrally defined rules apply uniformly across every sandbox in the
-organization and take precedence over local rules. Admins can optionally
-delegate specific rule types back to local control so developers can add
-additional allow rules.
+organization and replace local rules, which are no longer evaluated.
 
 See [Organization policy](../governance/org.md) for details.
 
