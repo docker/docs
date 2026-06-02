@@ -12,13 +12,13 @@ Sandboxes support three approaches for working with Git repositories. The
 right choice depends on whether you want branch isolation and whether you
 plan to run tasks in parallel:
 
-| | Direct mode | Clone mode (`--clone`) | Host worktree |
-|---|---|---|---|
-| Branch management | You, on the host | Agent, inside the clone | You, on the host |
-| Changes visible on host | Immediately | After fetch or agent push | Immediately |
-| Agent can use Git | Yes | Yes | No |
-| Parallelism | No | Multiple agents, one sandbox | One sandbox per parallel task |
-| Mode fixed at create time | No | Yes | — |
+|                           | Direct mode      | Clone mode (`--clone`)       | Host worktree                 |
+| ------------------------- | ---------------- | ---------------------------- | ----------------------------- |
+| Branch management         | You, on the host | Agent, inside the clone      | You, on the host              |
+| Changes visible on host   | Immediately      | After fetch or agent push    | Immediately                   |
+| Agent can use Git         | Yes              | Yes                          | No                            |
+| Parallelism               | No               | Multiple agents, one sandbox | One sandbox per parallel task |
+| Mode fixed at create time | No               | Yes                          | —                             |
 
 ### Direct mode
 
@@ -195,9 +195,10 @@ host.
    $ git commit -S -m "feat: my change"
    ```
 
-To apply this configuration automatically to every sandbox, put the `git
-config` commands in a [kit](customize/kits.md) init script rather than
-running them by hand each time.
+To apply this configuration automatically to every sandbox, use the
+[`git-ssh-sign`](https://github.com/docker/sbx-kits-contrib/tree/main/git-ssh-sign)
+community kit, which handles all of the above setup. See [Kits](customize/kits.md)
+if you want to package it alongside other sandbox customizations.
 
 For troubleshooting, see
 [Sandbox commits aren't signed](troubleshooting.md#sandbox-commits-arent-signed).
@@ -245,7 +246,8 @@ credentials on your host. The agent can then run `docker build` and
 `docker push` without any extra authentication:
 
 ```console
-$ gh auth token | sbx secret set --registry ghcr.io --password-stdin
+$ gh auth token | sbx secret set --registry ghcr.io \
+    --username <github-username> --password-stdin
 $ echo "$ACR_PASSWORD" | sbx secret set --registry myregistry.azurecr.io \
     --username myuser --password-stdin
 ```
@@ -286,7 +288,7 @@ Create the sandbox in the background with `sbx create`, run agent tasks with
 `sbx exec`, and clean up with `sbx rm`:
 
 ```console
-$ sbx create --name ci-task --clone claude .
+$ sbx create --name ci-task --clone claude
 $ sbx run ci-task  # attach and give instructions, or use sbx exec for one-off commands
 $ git fetch sandbox-ci-task
 $ sbx rm ci-task
