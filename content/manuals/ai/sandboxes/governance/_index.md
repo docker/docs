@@ -34,5 +34,7 @@ rules are no longer evaluated. See [Organization policy](org.md).
   your organization from the Admin Console
 - [Monitoring](monitoring.md): inspect active rules and monitor sandbox
   network traffic with `sbx policy ls` and `sbx policy log`
+- [Audit logs](audit.md): capture a durable, structured record of every
+  policy decision for SIEM ingestion and compliance
 - [API reference](/reference/api/ai-governance/): manage org policies
   programmatically via the Governance API

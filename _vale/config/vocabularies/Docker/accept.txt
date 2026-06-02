@@ -92,6 +92,7 @@ Ethernet
 [Ff]ailover
 Fargate
 Fedora
+Filebeat
 firewalld
 Flink
 Fluentd
