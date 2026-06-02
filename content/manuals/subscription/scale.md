@@ -50,7 +50,7 @@ You can add Testcontainers Cloud runtime minutes in two ways:
 
 On-demand usage is billed at higher rates than pre-purchased capacity. To avoid higher on-demand charges, pre-purchase additional minutes if you expect consistent usage over your subscription's included minutes.
 
-## Add Gordon plan
+## Add a Gordon plan
 
 If you do not have a Gordon plan yet, see [Set up Gordon Plus, Max, and Ultra for a personal account](./setup.md#set-up-gordon-plus-max-and-ultra-for-a-personal-account).
 
@@ -59,7 +59,7 @@ When you upgrade your Gordon plan, your new usage allowance takes effect immedia
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    personal account.
 1. Select **Billing**.
-1. On the Overview page, select **Manage** from the Gordon tile under your active plans.
+1. On the overview page, select **Manage** from the Gordon tile under your active plans.
 1. Select **Upgrade plan**.
 1. Choose the new plan you want to upgrade to:
 1. Verify your billing details, continue to payment, and complete checkout.

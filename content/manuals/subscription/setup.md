@@ -30,10 +30,7 @@ You can add a Gordon plan to your Docker account from Docker Home:
 1. Sign in to [Docker Home](https://app.docker.com/) and select your Docker personal account.
 1. Select **Billing**, then **Browse products**.
 1. Select **View plans** from the **Upgrade Gordon** section of the products page.
-1. Choose the Gordon subscription plan you want to apply to your personal account:
-   - Gordon Plus gives users 2× the base usage.
-   - Gordon Max gives users 5× the base usage.
-   - Gordon Ultra gives users 20× the base usage.
+1. Choose the Gordon subscription plan you want to apply to your personal account.
 1. Verify your billing details, continue to payment, and complete checkout.
 
 ## Set up a Docker subscription for an organization
