@@ -78,6 +78,8 @@ paths:
           $ref: "#/components/responses/Unauthenticated"
         "403":
           $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/NotFound"
         "500":
           $ref: "#/components/responses/InternalError"
 
@@ -124,6 +126,8 @@ paths:
           $ref: "#/components/responses/Unauthenticated"
         "403":
           $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/NotFound"
         "409":
           $ref: "#/components/responses/Conflict"
         "500":
@@ -249,6 +253,8 @@ paths:
           $ref: "#/components/responses/PermissionDenied"
         "404":
           $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
         "500":
           $ref: "#/components/responses/InternalError"
 
@@ -310,6 +316,8 @@ paths:
           $ref: "#/components/responses/PermissionDenied"
         "404":
           $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
         "500":
           $ref: "#/components/responses/InternalError"
 
@@ -353,11 +361,11 @@ components:
       bearerFormat: JWT
       description: |
         Short-lived JWT obtained by exchanging Docker Hub credentials at
-        `POST https://hub.docker.com/v2/users/login`. Pass the JWT in the
+        `POST https://hub.docker.com/v2/auth/token`. Pass the JWT in the
         `Authorization: Bearer <token>` header. Tokens expire after a short
         period; request a fresh one when you receive a `401`.
 
-        The `password` field of the login request accepts any of the following
+        The `password` field of the token request accepts any of the following
         credential types:
 
         | Type | Format | Notes |
@@ -367,7 +375,7 @@ components:
         | Organization Access Token (OAT) | `dckr_oat_*` | Scoped to an organization. Create one under Organization Settings → Access Tokens. |
 
         PAT and OAT strings can't be used directly as a bearer token. They must
-        be exchanged at the login endpoint first.
+        be exchanged at the token endpoint first.
 
         See [Docker Hub authentication](https://docs.docker.com/reference/api/hub/latest/#tag/authentication-api/operation/AuthCreateAccessToken)
         for full details.
@@ -659,13 +667,14 @@ components:
               type: string
               description: >
                 Machine-readable error code. `not_found`: the requested resource
-                does not exist. `conflict`: a resource with the same name already
-                exists. `invalid_argument`: the request body is malformed or
-                fails validation. `unauthenticated`: missing or invalid
-                credentials. `permission_denied`: the caller lacks the required
-                permission, or the org is not entitled to use governance.
-                `unimplemented`: the endpoint or feature is not yet available.
-                `internal`: unexpected server error.
+                does not exist, the org does not exist, or the caller is not a
+                member of the org (the org's existence is not revealed to callers
+                who cannot access it). `conflict`: a resource with the same name
+                already exists. `invalid_argument`: the request body is malformed
+                or fails validation. `unauthenticated`: missing or invalid
+                credentials. `permission_denied`: the org is not entitled to use
+                governance. `unimplemented`: the endpoint or feature is not yet
+                available. `internal`: unexpected server error.
               enum:
                 - not_found
                 - conflict
