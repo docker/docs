@@ -86,19 +86,18 @@ internal-ca/
         └── internal-ca.crt
 ```
 
-Use a PEM-encoded certificate with a `.crt` extension. If traffic can
-be signed by more than one internal proxy, include each proxy's root
-CA in the kit and install each certificate before running
+Use a PEM-encoded certificate with a `.crt` extension. Files under
+`files/home/` land in `/home/agent/` in the sandbox, so
+`files/home/internal-ca.crt` becomes `/home/agent/internal-ca.crt` —
+which is the path the install command reads from. If traffic can be
+signed by more than one internal proxy, include each proxy's root CA in
+the kit and install each certificate before running
 `update-ca-certificates`.
 
 ```yaml {title="internal-ca/spec.yaml"}
 schemaVersion: "1"
 kind: mixin
 name: internal-ca
-
-environment:
-  variables:
-    NODE_EXTRA_CA_CERTS: /usr/local/share/ca-certificates/internal-ca.crt
 
 commands:
   install:
@@ -107,8 +106,9 @@ commands:
       description: Install internal CA certificate
 ```
 
-`NODE_EXTRA_CA_CERTS` helps Node.js-based agents and SDKs use the same
-internal CA as the system trust store.
+`update-ca-certificates` adds the certificate to the system trust
+store, so tools and SDKs that read the system bundle trust the proxy's
+certificates without further configuration.
 
 ## Run a background service
 
