@@ -18,6 +18,11 @@ machines work out of the box. An organization policy should do the opposite:
 allow only the destinations your organization actually wants its sandboxes to
 reach. Treat each recipe as a baseline and remove anything you don't need.
 
+To work out exactly which hosts a workflow needs, run it in a sandbox and watch
+the requests it makes with `sbx policy log`. Blocked destinations show up there,
+so you can add the ones you want and leave the rest denied. See
+[Monitoring](monitoring.md).
+
 For the exact matching rules behind the resource patterns used here (exact
 hostnames, single- and multi-level wildcards, port suffixes, and CIDR ranges),
 see
@@ -98,8 +103,9 @@ from. Start with this block and layer a language and agent recipe on top.
 | --------- | --------------------------------------------------------- |
 | GitHub    | `github.com`, `**.github.com`, `**.githubusercontent.com` |
 
-Add `gitlab.com`, `**.gitlab.com`, or `bitbucket.org` only if your developers
-host code there.
+If your developers host code elsewhere, swap GitHub for the equivalent hosts —
+for example `gitlab.com` and `**.gitlab.com` for GitLab, or `bitbucket.org` for
+Bitbucket.
 
 ### Certificate validation
 
