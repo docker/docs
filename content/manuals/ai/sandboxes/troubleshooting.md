@@ -142,10 +142,6 @@ $ sbx exec <sandbox-name> -- sudo install -m 0644 /tmp/internal-ca.crt /usr/loca
 $ sbx exec <sandbox-name> -- sudo update-ca-certificates
 ```
 
-Some Node.js-based agents and SDKs use their own certificate store. Set
-`NODE_EXTRA_CA_CERTS` inside the sandbox, as shown in the kit example, so those
-clients also trust the internal CA.
-
 If API calls still fail after installing the CA, run `sbx policy log` and check
 whether the request used `forward`, `forward-bypass`, or `transparent` in the
 **PROXY** column. That can help identify whether the request is eligible for
