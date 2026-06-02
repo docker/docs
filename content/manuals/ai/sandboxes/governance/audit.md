@@ -14,16 +14,16 @@ tools can collect them. The records stay on the machine that produced them.
 Docker doesn't collect or ingest audit data.
 
 Audit logging complements [monitoring](monitoring.md). Monitoring with `sbx
-policy ls` and `sbx policy log` is for live, interactive debugging; audit
+policy ls` and `sbx policy log` is for live, interactive debugging. Audit
 logging produces a durable trail for security review and compliance.
 
 ## What gets recorded
 
 The daemon writes two categories of record:
 
-- **Evaluation records** capture each policy decision: the resource, the
+- Evaluation records capture each policy decision: the resource, the
   action, the verdict, and the reason for a denial.
-- **Session lifecycle records** mark the start and end of each daemon run.
+- Session lifecycle records mark the start and end of each daemon run.
   Evaluation records share the run's `audit_session_id`, so you can correlate
   every decision back to a single daemon session.
 
@@ -79,11 +79,14 @@ record to its own audit directory.
 
 The default location depends on your operating system:
 
-| OS      | Default path                                                                      |
-| ------- | --------------------------------------------------------------------------------- |
-| macOS   | `~/Library/Logs/com.docker.sandboxes/sandboxes/auditkit/`                         |
-| Linux   | `${XDG_STATE_HOME:-~/.local/state}/com.docker.sandboxes/logs/sandboxes/auditkit/` |
-| Windows | `%LOCALAPPDATA%\com.docker.sandboxes\logs\sandboxes\auditkit\`                    |
+| OS      | Default path                                                      |
+| ------- | ----------------------------------------------------------------- |
+| macOS   | `~/Library/Logs/com.docker.sandboxes/sandboxes/auditkit/`         |
+| Linux   | `${XDG_STATE_HOME:-~/.local/state}/sandboxes/sandboxes/auditkit/` |
+| Windows | `%LOCALAPPDATA%\DockerSandboxes\sandboxes\logs\auditkit\`         |
+
+The directory layout differs by platform because each operating system places
+application logs in its own conventional location.
 
 Files are named `audit-<utc-timestamp>-<process-uuid>-<seq>.jsonl`.
 
@@ -91,7 +94,7 @@ The daemon writes in-progress records to a temporary `.tmp` file and seals it
 into a final `.jsonl` file by atomic rename. Sealing happens at a rotation
 threshold (by default 5 minutes, 1000 events, or 50 MiB, whichever comes
 first) or when the daemon shuts down cleanly. Only sealed `.jsonl` files are
-complete; treat `.tmp` files as incomplete and do not collect them.
+complete. Treat `.tmp` files as incomplete and don't collect them.
 
 Sandboxes never delete sealed files. Retention and cleanup are the
 responsibility of your log shipper or your own housekeeping.
@@ -100,7 +103,7 @@ responsibility of your log shipper or your own housekeeping.
 
 Point your log shipper at the audit directory and configure it to collect
 sealed `.jsonl` files only. Tools such as the Splunk Universal Forwarder,
-Filebeat, and Crowdstrike Falcon LogScale read the directory and forward each
+Filebeat, and CrowdStrike Falcon LogScale read the directory and forward each
 line as an event. Because in-progress records live in `.tmp` files until they
 are sealed, collectors never see partial records.
 
@@ -109,10 +112,10 @@ are sealed, collectors never see partial records.
 Two environment variables change where records are written. Set them on the
 daemon process, not the CLI.
 
-| Variable                             | Effect                                                                                                                                 |
-| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `SANDBOXES_STORAGE_ROOT=<dir>`       | Override the base storage directory. The audit path becomes `<dir>/logs/com.docker.sandboxes/sandboxes/auditkit/`.                     |
-| `DOCKER_SANDBOXES_APP_NAME=<suffix>` | Append a suffix to the app name (`sandboxes` becomes `sandboxes-<suffix>`). Useful for running multiple daemon instances side by side. |
+| Variable                             | Effect                                                                                                                                          |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SANDBOXES_STORAGE_ROOT=<dir>`       | Override the base storage directory. Audit records move under `<dir>/logs/`, keeping the same platform-specific namespace as the default paths. |
+| `DOCKER_SANDBOXES_APP_NAME=<suffix>` | Append a suffix to the app name (`sandboxes` becomes `sandboxes-<suffix>`). Useful for running multiple daemon instances side by side.          |
 
 The CLI starts the daemon automatically when none is running, so exporting
 either variable in your shell propagates to the daemon it spawns. If a daemon

@@ -49,7 +49,7 @@ config
 containerd
 Couchbase
 CouchDB
-Crowdstrike
+CrowdStrike
 [Cc]ybersecurity
 datacenter
 datasource
