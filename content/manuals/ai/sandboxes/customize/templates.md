@@ -179,6 +179,15 @@ a template. This captures installed packages, configuration changes, and
 files into a reusable image — useful when you've set up an environment
 interactively and want to preserve it.
 
+> [!WARNING]
+> Saving a sandbox captures its entire filesystem, including any secrets
+> stored on it. If you manually added API keys, tokens, or other
+> credentials to the sandbox, they're embedded in the saved template and
+> shared with anyone you distribute it to. To keep credentials out of
+> templates, manage them with `sbx secret set` instead — the proxy injects
+> them at runtime so they're never written to the filesystem. For more
+> information, see [Manage credentials](../security/credentials.md).
+
 ### Save and reuse
 
 Stop the sandbox (or let the CLI prompt you), then save it with a name and
