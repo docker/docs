@@ -14,7 +14,7 @@ Signing in gives each sandbox a verified identity, which lets Docker:
   containers, install packages, and push code. Your Docker identity is the
   anchor.
 - **Enable team features.** Team-scale features like
-  [organization governance](security/governance.md), shared environments, and
+  [organization governance](governance/org.md), shared environments, and
   audit logs need a concept of "who," and adding that later would be worse for
   everyone.
 - **Authenticate against Docker infrastructure.** Sandboxes pull images, run
@@ -26,11 +26,10 @@ Your Docker account email is only used for authentication, not marketing.
 
 Yes. Admins can centrally manage network and filesystem policies from the
 Docker Admin Console. Rules defined there apply to every sandbox in the
-organization and take precedence over local rules set with `sbx policy`.
-Admins can optionally delegate specific rule types back to local control so
-developers can add additional allow rules.
+organization. When organization governance is active, it replaces local rules
+set with `sbx policy` — local rules are no longer evaluated.
 
-See [Organization governance](security/governance.md). This feature requires
+See [Organization governance](governance/org.md). This feature requires
 a separate paid subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
 to get started.
@@ -99,7 +98,7 @@ $ echo $BRAVE_API_KEY
 ## Why do agents run without approval prompts?
 
 The sandbox itself is the safety boundary. Because agents run inside an
-isolated microVM with [network policies](security/policy.md),
+isolated microVM with [network policies](governance/),
 [credential isolation](security/credentials.md), and no access to your host
 system outside the workspace, the usual reasons for approval prompts (preventing
 destructive commands, network access, file modifications) are handled by the
