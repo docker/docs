@@ -89,6 +89,18 @@
   <body>
     <main>
       <article class="redoc-container">
+        <noscript>
+          <p style="padding: 32px 24px; max-width: 72ch">
+            This reference uses JavaScript for the interactive explorer. View
+            the
+            <a href="{{ partial "utils/markdown-url.html" . }}">Markdown page</a>
+            or
+            <a href="{{ $specURL.String | absURL }}"
+              >download the OpenAPI specification</a
+            >
+            if JavaScript is unavailable.
+          </p>
+        </noscript>
         {{ if or (strings.HasPrefix .RelPermalink "/reference/api/hub/") (strings.HasPrefix .RelPermalink "/reference/api/registry/") }}
           <redoc
             spec-url="{{ $specURL.String }}"
