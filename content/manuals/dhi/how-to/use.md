@@ -204,6 +204,33 @@ migration examples:
 - [Python](../migration/examples/python.md)
 - [Node.js](../migration/examples/node.md)
 
+## Use Socket Firewall variants to monitor package installations
+
+If you want supply chain protection during dependency installation, use a Socket
+Firewall variant in place of the standard `-dev` variant in your build stage.
+These variants come with [Socket](https://socket.dev/) preinstalled to monitor
+package manager activity and block malicious packages before they reach your
+image.
+
+Two tiers are available. Use `-sfw-dev` for Socket Firewall Free, or
+`-sfw-ent-dev` for Socket Firewall Enterprise (requires an API key from Socket).
+The runtime stage stays the same regardless of which build stage variant you
+use.
+
+```dockerfile
+FROM dhi.io/python:3.13-alpine3.23-sfw-dev AS build
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+FROM dhi.io/python:3.13-alpine3.23
+COPY --from=build /app /app
+CMD ["python", "app.py"]
+```
+
+For more information on Socket Firewall variants, see [Available image
+types](../explore/available.md).
+
 ## Use compliance and ELS variants
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}

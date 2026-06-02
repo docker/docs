@@ -12,7 +12,7 @@ Docker Hardened Images (DHI) is a comprehensive catalog of
 security-hardened container images built to meet diverse
 development and production needs.
 
-You can explore the DHI catalog on [Docker Hub](https://hub.docker.com/search?q=&image_filter=store%2Cdhi) or use the [DHI CLI](../how-to/cli.md) to browse
+You can explore the DHI catalog on [Docker Hub](https://hub.docker.com/hardened-images/catalog) or use the [DHI CLI](../how-to/cli.md) to browse
 available images, tags, and metadata from the command line.
 
 ## Framework and application images
@@ -133,3 +133,28 @@ You can recognize compatibility variants by their tag that includes `-compat`.
 Use compatibility variants when your deployment requires additional tools beyond
 the minimal runtime, such as when using Helm charts or applications with
 specific tooling requirements.
+
+## Socket Firewall variants
+
+Some Docker Hardened Images include Socket Firewall variants. These are `dev`
+variants that come with [Socket](https://socket.dev/) preinstalled to monitor
+package manager activity and block malicious packages during development and CI
+builds.
+
+Two tiers are available, identified by their tag suffix:
+
+- `-sfw-dev`: Socket Firewall Free. No API key required.
+- `-sfw-ent-dev`: Socket Firewall Enterprise. Requires an API key from Socket.
+
+Not all images offer both tiers.
+
+## Image-specific variants
+
+Some images include variants that go beyond the general `dev`, `compat`, and
+`sfw` patterns. These represent distinct editions, bundled tooling, or
+runtime configurations specific to that image. Examples include a PHP-FPM variant
+for web server integration, a native binary build for faster startup, or a
+specific edition of a database.
+
+You can identify these variants by their tag suffix. The image name in the tag
+suffix typically reflects what's included or different.
