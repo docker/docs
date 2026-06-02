@@ -464,6 +464,12 @@ _1. Optional. Enter a description for the job._
 | use                                   | utilize                |
 | help                                  | facilitate             |
 
+Use "turn on" and "turn off" for UI toggles, switches, and settings a user
+flips in the interface. In general prose, "enable" and "disable" are
+acceptable when describing a feature or capability becoming available — for
+example, "When you enable auto-log-out, your users are logged out." Don't
+treat every "enable" or "disable" as a violation.
+
 ### Version numbers
 
 - Use "earlier" not "lower": Docker Desktop 4.1 and earlier
