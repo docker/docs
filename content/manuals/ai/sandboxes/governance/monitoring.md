@@ -44,13 +44,12 @@ header showing which organization manages the policy and when it last synced:
 $ sbx policy ls
 Governance: managed by my-org
 [OK] last synced 13:54:21
-NAME                  TYPE      ORIGIN               DECISION   STATUS                                                  RESOURCES
-balanced-dev          network   local                allow      inactive — organization policy takes precedence; local  api.anthropic.com
-                                                                rules are not evaluated.
-allow AI services     network   remote               allow      active                                                  api.anthropic.com
-                                                                                                                        api.openai.com
-allow Docker services network   remote               allow      active                                                  *.docker.com
-                                                                                                                        *.docker.io
+NAME                  TYPE      ORIGIN               DECISION   STATUS     RESOURCES
+balanced-dev          network   local                allow      inactive   api.anthropic.com
+allow AI services     network   remote               allow      active     api.anthropic.com
+                                                                           api.openai.com
+allow Docker services network   remote               allow      active     *.docker.com
+                                                                           *.docker.io
 ```
 
 The governance header shows which organization is managing the policy and
