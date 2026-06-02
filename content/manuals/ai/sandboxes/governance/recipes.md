@@ -84,11 +84,12 @@ into the `name` and `resources` fields of a request like the one above. Policy
 changes take up to five minutes to reach developer machines.
 
 > [!NOTE]
-> The only egress path out of a sandbox is the host HTTP/HTTPS proxy, so the
-> resources below are all hostnames on ports 80 and 443. Where a host is
-> reached over plain HTTP (OS package mirrors and certificate revocation
-> endpoints), the port `:80` variant is listed explicitly; HTTPS-only hosts are
-> listed without a port suffix.
+> A rule without a port suffix matches the host on any port. Add a `:port`
+> suffix (for example, `example.com:443`) only when you want to restrict a host
+> to a specific port. The recipes below use bare hostnames, which covers both
+> the HTTP and HTTPS ports the sandbox proxy handles, so plain-HTTP services
+> such as OS package mirrors and certificate endpoints work without listing
+> `:80` separately.
 
 ## Developer essentials
 
@@ -110,22 +111,23 @@ Bitbucket.
 ### Certificate validation
 
 TLS clients fetch revocation and chain data from certificate authority
-endpoints, many of which are served over plain HTTP on port 80. Without these,
-some HTTPS handshakes stall or fail. This is a trimmed set covering the most
-common authorities:
+endpoints, many of which are served over plain HTTP. Without these, some HTTPS
+handshakes stall or fail. This is a trimmed set covering the most common
+authorities:
 
-| Rule name              | Resources                                                                                                                                                            |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Certificate validation | `**.lencr.org`, `**.lencr.org:80`, `ocsp.digicert.com:80`, `cacerts.digicert.com:80`, `**.pki.goog`, `**.pki.goog:80`, `**.amazontrust.com`, `**.amazontrust.com:80` |
+| Rule name              | Resources                                                                                        |
+| ---------------------- | ------------------------------------------------------------------------------------------------ |
+| Certificate validation | `**.lencr.org`, `ocsp.digicert.com`, `cacerts.digicert.com`, `**.pki.goog`, `**.amazontrust.com` |
 
 ### Operating system packages
 
-The default sandbox base image is Ubuntu, so `apt` reaches the Ubuntu mirrors
-over both HTTP and HTTPS:
+The default sandbox base image is Ubuntu, so `apt` reaches the Ubuntu mirrors.
+`ports.ubuntu.com` is the mirror for non-x86 architectures, so ARM-based
+sandboxes need it:
 
-| Rule name       | Resources                                                                                                                                               |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ubuntu packages | `archive.ubuntu.com`, `archive.ubuntu.com:80`, `security.ubuntu.com`, `security.ubuntu.com:80`, `ports.ubuntu.com`, `ports.ubuntu.com:80`, `ubuntu.com` |
+| Rule name       | Resources                                                                     |
+| --------------- | ----------------------------------------------------------------------------- |
+| Ubuntu packages | `archive.ubuntu.com`, `security.ubuntu.com`, `ports.ubuntu.com`, `ubuntu.com` |
 
 If you build on a Debian base instead, add `debian.org` and `**.debian.org`.
 
@@ -217,9 +219,9 @@ add_rule() {
 add_rule "GitHub" \
   '["github.com","**.github.com","**.githubusercontent.com"]'
 add_rule "Certificate validation" \
-  '["**.lencr.org","**.lencr.org:80","ocsp.digicert.com:80","cacerts.digicert.com:80","**.pki.goog","**.pki.goog:80","**.amazontrust.com","**.amazontrust.com:80"]'
+  '["**.lencr.org","ocsp.digicert.com","cacerts.digicert.com","**.pki.goog","**.amazontrust.com"]'
 add_rule "Ubuntu packages" \
-  '["archive.ubuntu.com","archive.ubuntu.com:80","security.ubuntu.com","security.ubuntu.com:80","ports.ubuntu.com","ports.ubuntu.com:80","ubuntu.com"]'
+  '["archive.ubuntu.com","security.ubuntu.com","ports.ubuntu.com","ubuntu.com"]'
 add_rule "npm registry" \
   '["registry.npmjs.org","npmjs.com","npmjs.org","nodejs.org","nodesource.com"]'
 add_rule "Anthropic APIs" \
