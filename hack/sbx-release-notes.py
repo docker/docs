@@ -4,12 +4,13 @@
 # dependencies = ["jinja2"]
 # ///
 """
-Fetch recent stable releases from docker/sbx-releases and splice them into
-content/manuals/ai/sandboxes/release-notes.md between the BEGIN/END markers.
+Fetch recent stable releases from a GitHub releases page and splice them into
+a docs markdown file between the BEGIN/END markers.
 
 Usage (from repo root):
 
     ./hack/sbx-release-notes.py
+    ./hack/sbx-release-notes.py --preset dhi
     GITHUB_TOKEN=$(gh auth token) ./hack/sbx-release-notes.py
     ./hack/sbx-release-notes.py --minor-releases 3
 """
@@ -29,8 +30,18 @@ from pathlib import Path
 
 from jinja2 import Template
 
-DEFAULT_REPO = "docker/sbx-releases"
-DEFAULT_FILE = Path("content/manuals/ai/sandboxes/release-notes.md")
+PRESETS: dict[str, dict] = {
+    "sbx": {
+        "repo": "docker/sbx-releases",
+        "file": Path("content/manuals/ai/sandboxes/release-notes.md"),
+    },
+    "dhi": {
+        "repo": "docker-hardened-images/dhictl",
+        "file": Path("content/manuals/dhi/release-notes/cli.md"),
+    },
+}
+
+DEFAULT_PRESET = "sbx"
 DEFAULT_MINOR_RELEASES = 3
 
 BEGIN = "<!-- BEGIN GENERATED RELEASES -->"
@@ -89,7 +100,7 @@ def parse_stable(raw: list[dict]) -> list[dict]:
                 "version": f"{major}.{minor}.{patch}",
                 "date": r["published_at"][:10],
                 "url": r["html_url"],
-                "body": shift_headings(body),
+                "body": normalize_body(shift_headings(body)),
             }
         )
     out.sort(key=lambda r: (r["major"], r["minor"], r["patch"]), reverse=True)
@@ -123,6 +134,41 @@ def shift_headings(body: str) -> str:
     return "\n".join(lines)
 
 
+def normalize_body(body: str) -> str:
+    """Fix markdownlint issues in release body content:
+    - Ensure a blank line follows each heading (MD022).
+    - Add 'console' language tag to fenced code blocks that have none (MD040).
+    Safe to run on content that already complies — no double blank lines are added."""
+    lines = body.splitlines()
+    result: list[str] = []
+    in_fence = False
+
+    for i, line in enumerate(lines):
+        stripped = line.lstrip(" \t")
+
+        if stripped.startswith(("```", "~~~")):
+            if not in_fence:
+                # Opening fence: add language tag if missing
+                fence_marker = "```" if stripped.startswith("```") else "~~~"
+                lang = stripped[len(fence_marker):].strip()
+                if not lang:
+                    indent = line[: len(line) - len(stripped)]
+                    line = f"{indent}{fence_marker}console"
+            in_fence = not in_fence
+            result.append(line)
+            continue
+
+        result.append(line)
+
+        # Outside fences: insert blank line after a heading if the next line is non-empty
+        if not in_fence and stripped.startswith("#"):
+            next_line = lines[i + 1] if i + 1 < len(lines) else ""
+            if next_line.strip():
+                result.append("")
+
+    return "\n".join(result)
+
+
 def splice(path: Path, generated: str) -> None:
     src = path.read_text()
     try:
@@ -135,20 +181,30 @@ def splice(path: Path, generated: str) -> None:
 
 def main() -> None:
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--repo", default=DEFAULT_REPO)
-    p.add_argument("--file", type=Path, default=DEFAULT_FILE)
+    p.add_argument(
+        "--preset",
+        choices=list(PRESETS),
+        default=DEFAULT_PRESET,
+        help="Named preset that sets --repo and --file defaults (default: %(default)s)",
+    )
+    p.add_argument("--repo", default=None, help="GitHub repo (owner/name), overrides preset")
+    p.add_argument("--file", type=Path, default=None, help="Target markdown file, overrides preset")
     p.add_argument("--minor-releases", type=int, default=DEFAULT_MINOR_RELEASES)
     args = p.parse_args()
 
-    releases = pick_minor_releases(parse_stable(fetch(args.repo)), args.minor_releases)
+    preset = PRESETS[args.preset]
+    repo = args.repo or preset["repo"]
+    file = args.file or preset["file"]
+
+    releases = pick_minor_releases(parse_stable(fetch(repo)), args.minor_releases)
     if not releases:
         sys.exit("no stable releases found")
 
     generated = TEMPLATE.render(releases=releases)
-    splice(args.file, generated)
+    splice(file, generated)
     if shutil.which("npx"):
-        subprocess.run(["npx", "--no-install", "prettier", "--write", str(args.file)], check=False)
-    print(f"Wrote {len(releases)} releases (latest {args.minor_releases} minor releases) to {args.file}")
+        subprocess.run(["npx", "--no-install", "prettier", "--write", str(file)], check=False)
+    print(f"Wrote {len(releases)} releases (latest {args.minor_releases} minor releases) to {file}")
 
 
 if __name__ == "__main__":
