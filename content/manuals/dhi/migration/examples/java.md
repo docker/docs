@@ -5,10 +5,6 @@ weight: 50
 keywords: java, jvm, jdk, jre, maven, migration, dhi
 ---
 
-> **Acknowledgment**
->
-> Docker would like to thank [Naga Santhosh Reddy Vootukuri](https://github.com/sunnynagavo) for his contribution to this guide.
-
 This example shows how to migrate a Java application to Docker Hardened Images.
 
 The following examples show Dockerfiles before and after migration to Docker
