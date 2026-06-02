@@ -19,20 +19,11 @@ info:
     `deny` always wins: if any rule matches with `decision: deny`, the request
     is denied regardless of any `allow` rules.
 
-    **Enforcement and delegation.** Organization policies take precedence over
-    local sandbox policies and cannot be overridden by individual users. When
-    an administrator enables delegation for a rule type, users may supplement
-    the organization policy with local allow rules; organization-level deny
-    rules remain binding regardless of delegation. Delegation is configured
-    through the governance settings API, not through this API.
+    **Enforcement.** Organization policies take precedence over local sandbox
+    policies and cannot be overridden by individual users.
 
     **Propagation.** Policy changes take up to five minutes to reach developer
     machines after being written.
-
-    **Routing.** This is the public-facing API. Requests are received by the
-    Docker Hub gateway and forwarded to the governance service; the paths
-    documented here (`/v2/orgs/{org_name}/governance/...`) are the public
-    routes, which differ from the internal service routes.
 
     See https://docs.docker.com/ai/sandboxes/governance/ for product
     documentation.
