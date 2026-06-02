@@ -25,8 +25,8 @@ to fix.
 In this section, you'll configure three tools for your Python application.
 Ruff handles linting and formatting in a single fast pass. Pyright statically
 checks your code for type errors. Pre-commit hooks run both of these
-automatically before each Git commit so problems never reach your remote
-branch.
+automatically before each Git commit so problems are caught locally before
+they're committed.
 
 ## Linting and formatting with Ruff
 
