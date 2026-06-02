@@ -219,7 +219,7 @@ add_rule "GitHub" \
 add_rule "Certificate validation" \
   '["**.lencr.org","**.lencr.org:80","ocsp.digicert.com:80","cacerts.digicert.com:80","**.pki.goog","**.pki.goog:80","**.amazontrust.com","**.amazontrust.com:80"]'
 add_rule "Ubuntu packages" \
-  '["archive.ubuntu.com","archive.ubuntu.com:80","security.ubuntu.com","security.ubuntu.com:80","ubuntu.com"]'
+  '["archive.ubuntu.com","archive.ubuntu.com:80","security.ubuntu.com","security.ubuntu.com:80","ports.ubuntu.com","ports.ubuntu.com:80","ubuntu.com"]'
 add_rule "npm registry" \
   '["registry.npmjs.org","npmjs.com","npmjs.org","nodejs.org","nodesource.com"]'
 add_rule "Anthropic APIs" \
