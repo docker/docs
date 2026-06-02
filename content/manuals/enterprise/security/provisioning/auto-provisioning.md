@@ -20,20 +20,20 @@ When auto-provisioning is enabled for a verified domain:
 - Auto-provisioning only adds existing Docker users to your organization, it doesn't create new accounts.
 - Users experience no changes to their sign-in process.
 - Company and organization owners receive email notifications when new users are added.
-- You may need to [manage seats](/manuals/subscription/manage-seats.md) to accommodate new users.
+- You may need to [manage seats](/manuals/admin/organization/manage/manage-seats.md) to accommodate new users.
 
 ### Enable auto-provisioning
 
 Auto-provisioning is configured per domain. To enable it:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select
-your company or organization.
+   your company or organization.
 1. Select **Admin Console**, then **Domain management**.
 1. Select the **Actions menu** next to the domain you want to enable
-auto-provisioning for.
+   auto-provisioning for.
 1. Select **Enable auto-provisioning**.
 1. Optional. If enabling auto-provisioning at the company level, select an
-organization.
+   organization.
 1. Select **Enable** to confirm.
 
 The **Auto-provisioning** column will update to **Enabled** for the domain.
@@ -43,8 +43,8 @@ The **Auto-provisioning** column will update to **Enabled** for the domain.
 To disable auto-provisioning for a user:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select
-your organization. If your organization is part of a company, select the company
-and configure the domain for the organization at the company level.
+   your organization. If your organization is part of a company, select the company
+   and configure the domain for the organization at the company level.
 1. Select **Admin Console**, then **Domain management**.
 1. Select the **Actions menu** next to your domain.
 1. Select **Disable auto-provisioning**.
