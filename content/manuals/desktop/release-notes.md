@@ -45,6 +45,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Scout CLI v1.21.0](https://github.com/docker/scout-cli/releases/tag/v1.21.0)
 - `docker pass` v0.0.29
 
+### Security
+
+- Addressed [CVE-2026-8936](https://www.cve.org/CVERecord?id=CVE-2026-8936), a VM panic caused by unbounded recursion in the `grpcfuse` kernel module when a container created deeply nested directories on a bind-mounted host folder and triggered a `dentry` invalidation event.
+
 ### Bug fixes and enhancements
 
 #### For all platforms
