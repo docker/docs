@@ -80,45 +80,6 @@
         margin-right: 5px;
       }
 
-      .api-shell {
-        border-bottom: 1px solid #d9e2ec;
-        padding: 32px 24px;
-      }
-
-      .api-shell article {
-        margin: 0 auto;
-        max-width: 960px;
-      }
-
-      .api-shell h1 {
-        font-size: 2rem;
-        line-height: 1.2;
-        margin: 0 0 12px;
-      }
-
-      .api-shell p {
-        margin: 0 0 16px;
-        max-width: 72ch;
-      }
-
-      .api-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      .api-links a {
-        color: #086dd7;
-        text-decoration: none;
-      }
-
-      .api-links a:hover {
-        text-decoration: underline;
-      }
-
       .redoc-container {
         min-height: calc(100vh - 220px);
       }
@@ -127,31 +88,6 @@
 
   <body>
     <main>
-      <section class="api-shell">
-        <article>
-          <h1>{{ .Title }}</h1>
-          <p>{{ .Description }}</p>
-          <ul class="api-links">
-            <li>
-              <a href="{{ partial "utils/markdown-url.html" . }}"
-                >Open Markdown</a
-              >
-            </li>
-            <li>
-              <a href="{{ $specURL.String | absURL }}"
-                >Download OpenAPI specification</a
-              >
-            </li>
-          </ul>
-          <noscript>
-            <p>
-              This reference uses JavaScript for the interactive explorer. Use
-              the Markdown page or download the OpenAPI specification if
-              JavaScript is unavailable.
-            </p>
-          </noscript>
-        </article>
-      </section>
       <article class="redoc-container">
         {{ if or (strings.HasPrefix .RelPermalink "/reference/api/hub/") (strings.HasPrefix .RelPermalink "/reference/api/registry/") }}
           <redoc
