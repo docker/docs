@@ -1,11 +1,11 @@
 name: labeler
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 on:
-  pull_request_target:
+  pull_request_target: # zizmor: ignore[dangerous-triggers] safe here, this workflow only applies labels and never checks out or executes PR code
 
 jobs:
   labeler:
