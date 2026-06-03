@@ -10,9 +10,8 @@ aliases:
 
 [Local policies](local.md) give individual developers control over what their
 sandboxes can access. Organization policy moves that control to the admin level:
-rules defined in the [Docker Admin Console](https://app.docker.com/admin) apply
-to sandboxes across the organization, either to every member or to specific
-teams. When organization governance is active, it replaces local `sbx policy`
+rules defined in **Admin Console** apply to sandboxes across the organization,
+either to every member or to specific teams. When organization governance is active, it replaces local `sbx policy`
 rules entirely — local rules are no longer evaluated and can't be used to
 supplement or override the organization policy.
 
@@ -27,18 +26,21 @@ programmatically using the [Governance API](/reference/api/ai-governance/).
 
 ## Create a policy
 
-Manage policies in the [Docker Admin Console](https://app.docker.com/admin)
-under **AI governance**. Network and filesystem policies are managed
-separately, under **Network access** and **Filesystem access**.
+Manage policies under **Admin Console**, a section in the left-hand navigation
+of [Docker Home](https://app.docker.com). Network and filesystem policies are
+managed separately, under **Network access** and **Filesystem access**.
 
 To create a policy:
 
-1. Under **AI governance**, select **Network access** or **Filesystem access**.
-2. Select **Create policy** and enter a **Policy name**.
-3. Set the **Scope** to **Organization** or **Teams**. If you select **Teams**,
+1. Sign in to [Docker Home](https://app.docker.com) and select your
+   organization.
+1. Select **Admin Console**, then **AI governance**.
+1. Select **Network access** or **Filesystem access**, then **Create policy**.
+1. Enter a **Policy name**.
+1. Set the **Scope** to **Organization** or **Teams**. If you select **Teams**,
    choose the teams the policy applies to. See
    [Scope policies to teams](#scope-policies-to-teams).
-4. Select **Add rule** to add each rule. For rule syntax, see
+1. Select **Add rule** to add each rule. For rule syntax, see
    [Policy concepts](concepts.md#rule-syntax).
 
 Existing policies are listed with their name, scope, rule count, and last
