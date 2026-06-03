@@ -19,6 +19,13 @@ Docker doesn't collect or ingest audit data.
 > [Contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
 > to request access.
 
+Audit logging is active only while your organization enforces a centralized
+governance policy. The subscription alone doesn't produce records. If your
+organization hasn't configured and enforced an [organization policy](org.md),
+the daemon writes no audit logs. To confirm governance is active, run `sbx
+policy ls` — the output begins with a `Governance: managed by <org>` header
+when an organization policy is in effect.
+
 Audit logging complements [monitoring](monitoring.md). Monitoring with `sbx
 policy ls` and `sbx policy log` is for live, interactive debugging. Audit
 logging produces a durable trail for security review and compliance.
