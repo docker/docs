@@ -36,7 +36,7 @@ either `network` or `filesystem`.
 ## Policy scope
 
 Each organization policy applies either across the whole organization or only
-to specific teams. The policy's scope determines which members it applies to:
+to specific teams:
 
 - Org-wide: with no teams assigned, the policy applies to every member of the
   organization.
@@ -44,15 +44,12 @@ to specific teams. The policy's scope determines which members it applies to:
   members of those teams.
 
 Teams are the same [teams](/manuals/admin/organization/manage/manage-a-team.md)
-you manage for your organization. A team-scoped policy references the teams it
-applies to, and Docker matches those teams against each user's team membership.
-Because assignment follows team membership, you manage policies by team rather
-than per user.
-
-An organization can mix org-wide and team-scoped policies. A user's effective
-policy set is every org-wide policy plus every team-scoped policy for a team
-the user belongs to. See [Rule evaluation](#rule-evaluation) for how those
-policies combine.
+you manage for your organization; Docker matches a policy's teams against each
+user's team membership. Because an organization can mix org-wide and team-scoped
+policies, a single user is often subject to several at once. The policies that
+apply to a given user are their _effective policies_: every org-wide policy,
+plus every team-scoped policy for a team they belong to. See
+[Rule evaluation](#rule-evaluation) for how a user's effective policies combine.
 
 ## Rule syntax
 
@@ -97,38 +94,33 @@ matches only direct children of `~`.
 ## Rule evaluation
 
 When organization governance is active, the rules from all of a user's
-effective policies (every org-wide policy plus every matching team-scoped
-policy) are combined and evaluated together against each request. Evaluation
-follows two principles:
+[effective policies](#policy-scope) are combined and evaluated together against
+each request, following two principles:
 
-**Deny wins.** If any rule matches with `decision: deny`, the request is
-denied regardless of any matching allow rules.
+- Deny wins: if any rule matches with `decision: deny`, the request is denied,
+  regardless of any matching allow rules.
+- Default deny: outbound traffic is blocked unless an explicit allow rule
+  matches.
 
-**Default deny.** Outbound traffic is blocked unless an explicit allow rule
-matches.
+Because every effective policy feeds the same evaluation, allows are additive (a
+request is allowed if any effective policy allows it) and denies are absolute (a
+request is blocked if any effective policy denies it). A deny rule in an
+org-wide policy therefore applies to everyone and can't be overridden by a
+team-scoped policy, which makes org-wide deny rules useful as guardrails.
 
-Because rules combine across policies, allows are additive (a request is
-allowed if any effective policy allows it) and denies are absolute (a request
-is blocked if any effective policy denies it). A deny rule in an org-wide
-policy therefore acts as a guardrail that no team-scoped policy can override.
-
-These principles apply within whichever policy is active. When organization
-governance is active, only organization rules are evaluated; local rules have
-no effect.
+Local rules take no part in this evaluation; see [Precedence](#precedence).
 
 ## Precedence
 
 Local and organization policies don't combine. Which one applies depends on
 whether your organization has governance enabled:
 
-- **No organization governance**: local rules and any
+- No organization governance: local rules and any
   [kit-defined network rules](../customize/kits.md#control-network-access)
   determine what sandboxes can access.
-- **Organization governance active**: organization rules apply across all
-  developer machines, and local and kit-defined rules are not evaluated. They
-  still appear in `sbx policy ls`, but with an `inactive` status.
+- Organization governance active: organization rules apply across all developer
+  machines, and local and kit-defined rules are not evaluated. They still appear
+  in `sbx policy ls`, but with an `inactive` status.
 
-When organization governance is active, all of a user's effective
-organization policies combine into a single rule set, where deny rules beat
-allow rules regardless of which policy they come from, their specificity, or
-their order. See [Rule evaluation](#rule-evaluation).
+When organization governance is active, a user's organization policies are
+evaluated together, as described in [Rule evaluation](#rule-evaluation).

@@ -74,9 +74,8 @@ For path pattern syntax including the difference between `*` and `**`, see
 ## Scope policies to teams
 
 An organization can have more than one policy, and each policy applies either
-to the whole organization or to specific teams. Use scoping to give different
-parts of the organization different rules: for example, a permissive policy for
-a security research team alongside a stricter default for everyone else.
+to the whole organization or to specific teams. Scoping lets you apply different
+rules to different parts of the organization.
 
 A policy's [**Scope**](#create-a-policy) controls who it applies to. Set it to
 **Organization** to apply the policy to every member, or to **Teams** to apply
@@ -96,43 +95,33 @@ in one of two ways:
   organization. Group mapping creates teams that don't already exist and keeps
   their membership in step with your IdP groups.
 
-Policy assignment follows team membership, so you manage policies by team rather
-than per user. When a user's team membership changes — whether you edit it
-directly or it syncs from your IdP — the policies they receive change with it.
+Because policies apply by team, a user's policies update automatically as their
+team membership changes, including changes synced from your IdP.
 
 ### How org-wide and team-scoped policies combine
 
-A user receives every org-wide policy plus every team-scoped policy for a team
-they belong to. The rules from all of these policies are combined and evaluated
-together:
+A user is governed by all of their
+[effective policies](concepts.md#policy-scope) at once — every org-wide policy,
+plus the team-scoped policies for the teams they belong to. The rules combine
+into a single evaluation in which deny always wins, so a team-scoped policy can
+grant access on top of the org-wide policies but can't loosen a restriction they
+impose. For the full evaluation model, see
+[Rule evaluation](concepts.md#rule-evaluation).
 
-- Allows are additive: a request is allowed if any of the user's effective
-  policies allow it.
-- Denies are absolute: a request is blocked if any of the user's effective
-  policies deny it.
-
-Because deny always wins, a deny rule in an organization-scoped policy acts as a
-guardrail that team-scoped policies can't override. Keep rules that must apply
-everywhere in an organization-scoped policy, and use team-scoped policies to
-grant extra access to specific teams.
-
-For example, an organization-scoped policy can deny a category of domains for
-everyone, while a team-scoped policy grants a research team access to additional
-package mirrors. Research-team members receive both policies: they get the extra
-access, but the organization-wide deny still applies and can't be undone by the
-team policy.
+This makes org-wide policies the natural home for guardrails that must hold
+everywhere. For example, an org-wide policy can deny a category of domains for
+all members, while a team-scoped policy grants a research team access to extra
+package mirrors. Research-team members get the extra access, but the org-wide
+deny still applies.
 
 ## Precedence
 
-Deny rules beat allow rules. If a resource matches both an allow and a deny, in
-the same policy or across a user's effective policies, it's blocked regardless
-of specificity. Outbound traffic is blocked unless a rule allows it.
-
 When organization governance is active, local rules are not evaluated. Only
-organization rules set in the Admin Console determine what is allowed or
-denied, and they can't be supplemented or overridden from a developer's machine.
-The same model applies to filesystem policies: organization rules replace local
-behavior entirely.
+organization rules set in the Admin Console determine what is allowed or denied,
+and they can't be supplemented or overridden from a developer's machine. The
+same applies to filesystem policies: organization rules replace local behavior
+entirely. For how a user's organization policies are evaluated together, see
+[Policy concepts](concepts.md#rule-evaluation).
 
 To unblock a domain when organization governance is active, update the rule in
 the Admin Console or via the [API](/reference/api/ai-governance/). Without
