@@ -5,9 +5,6 @@ weight: 8
 params:
   sidebar:
     group: Supply chain security
-    badge:
-      color: green
-      text: New
   grid_sections:
     - title: Quickstart
       description: Follow a step-by-step guide to explore and run a Docker Hardened Image.
