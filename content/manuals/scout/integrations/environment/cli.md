@@ -113,7 +113,7 @@ stages:
 {{< tab name="Jenkins" >}}
 
 ```groovy
-stage('Analyze image') {
+stage('Record environment') {
     steps {
         // Install Docker Scout
         sh 'curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s -- -b /usr/local/bin'
@@ -121,8 +121,8 @@ stage('Analyze image') {
         // Log into Docker Hub
         sh 'echo $DOCKER_SCOUT_HUB_PASSWORD | docker login -u $DOCKER_SCOUT_HUB_USER --password-stdin'
 
-        // Analyze and fail on critical or high vulnerabilities
-        sh 'docker-scout environment --org "<MY_DOCKER_ORG>" "<ENVIRONMENT>" $IMAGE_TAG
+        // Record image to environment
+        sh 'docker-scout environment --org "<MY_DOCKER_ORG>" "<ENVIRONMENT>" $IMAGE_TAG'
     }
 }
 ```
