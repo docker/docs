@@ -39,22 +39,22 @@ A network evaluation record looks like this:
 {
   "audit_event_id": "95e7257f-93c9-4f29-bde7-88830e2dae80",
   "timestamp": "2026-05-28T19:15:00.728933Z",
-  "schema_version": "1.80.0",
+  "schema_version": "1.82.0",
   "category": "AUDIT_CATEGORY_EVALUATION",
-  "audit_session_id": "8a3bc076-79d0-4502-baf3-cc6ad35fb578",
+  "decision": "AUDIT_DECISION_DENY",
   "username": "5f3e3556-ed49-4431-bdd8-24958cdc4340",
   "user_email": "jordan@example.com",
-  "action_type": "network_egress",
-  "resource_id": "example.com",
-  "decision": "AUDIT_DECISION_DENY",
-  "deny_reason": [
-    "no applicable policies for op(action=net:connect:tcp, resource=net:domain:example.com)"
-  ],
-  "network_egress": { "protocol": "tcp" },
+  "audit_session_id": "8a3bc076-79d0-4502-baf3-cc6ad35fb578",
+  "resource_id": "example.com:443",
   "os": "macos",
-  "hostname": "host-machine",
+  "app_version": "v0.31.0",
   "client_name": "sbx",
-  "app_version": "v0.30.0"
+  "hostname": "host-machine",
+  "deny_reason": [
+    "no applicable policies for op(action=net:connect:tcp, resource=net:domain:example.com:443)"
+  ],
+  "action_type": "network_egress",
+  "network_egress": { "protocol": "tcp" }
 }
 ```
 
@@ -69,7 +69,7 @@ Common fields include:
 | `username`         | The signed-in Docker user's account UUID.                                                                    |
 | `user_email`       | The signed-in Docker user's email address.                                                                   |
 | `action_type`      | The kind of access evaluated, such as `network_egress`.                                                      |
-| `resource_id`      | The target of the evaluation, such as a hostname.                                                            |
+| `resource_id`      | The target of the evaluation, such as a host and port.                                                       |
 | `decision`         | `AUDIT_DECISION_ALLOW` or `AUDIT_DECISION_DENY`.                                                             |
 | `deny_reason`      | Why a denied request was blocked. Present on deny decisions.                                                 |
 
