@@ -68,14 +68,17 @@ The store backing `sbx secret set` depends on your operating system:
 - macOS: the system Keychain.
 - Windows: the Windows Credential Manager.
 - Linux: the Secret Service exposed by your desktop keyring, such as GNOME
-  Keyring or KDE Wallet. The Ubuntu package depends on GNOME Keyring, so a
-  standard desktop install needs no extra setup.
+  Keyring or KDE Wallet.
+
+The Ubuntu package depends on GNOME Keyring, so a standard desktop install
+needs no extra setup.
 
 On Linux hosts without a running Secret Service — headless servers and some
 WSL setups — `sbx` falls back to an encrypted file under your user config
-directory (`$XDG_CONFIG_HOME/com.docker.sandboxes`, usually
-`~/.config/com.docker.sandboxes`). The fallback is automatic and needs no
-configuration. When you store a secret this way, `sbx` prints a notice:
+directory `$XDG_CONFIG_HOME/com.docker.sandboxes`, which defaults to
+`~/.config/com.docker.sandboxes` when `$XDG_CONFIG_HOME` is unset. The fallback
+is automatic and needs no configuration. When you store a secret this way,
+`sbx` prints a notice:
 
 ```text
 No keychain detected - this secret will be stored in an encrypted file on disk
