@@ -112,18 +112,3 @@ sealed `.jsonl` files only. Tools such as the Splunk Universal Forwarder,
 Filebeat, and CrowdStrike Falcon LogScale read the directory and forward each
 line as an event. Because in-progress records live in `.tmp` files until they
 are sealed, collectors never see partial records.
-
-## Override the storage location
-
-Two environment variables change where records are written. Set them on the
-daemon process, not the CLI.
-
-| Variable                             | Effect                                                                                                                                          |
-| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `SANDBOXES_STORAGE_ROOT=<dir>`       | Override the base storage directory. Audit records move under `<dir>/logs/`, keeping the same platform-specific namespace as the default paths. |
-| `DOCKER_SANDBOXES_APP_NAME=<suffix>` | Append a suffix to the app name (`sandboxes` becomes `sandboxes-<suffix>`). Useful for running multiple daemon instances side by side.          |
-
-The CLI starts the daemon automatically when none is running, so exporting
-either variable in your shell propagates to the daemon it spawns. If a daemon
-is already running, stop it first with `sbx daemon stop` so the next `sbx`
-command starts a daemon that picks up the new value.
