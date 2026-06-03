@@ -166,7 +166,7 @@ desktop keyring, such as GNOME Keyring or KDE Wallet. Headless servers and some
 WSL setups have no running Secret Service, so `sbx` falls back to an encrypted
 file under `$XDG_CONFIG_HOME/com.docker.sandboxes`, which defaults to
 `~/.config/com.docker.sandboxes` when `$XDG_CONFIG_HOME` is unset. No setup is
-required — when you store a secret on such a host, `sbx` prints a notice:
+required. When you store a secret on such a host, `sbx` prints a notice:
 
 ```text
 No keychain detected - this secret will be stored in an encrypted file on disk
@@ -177,8 +177,8 @@ the same posture as `~/.docker/config.json`. It's weaker than an OS keychain,
 which also mediates access per application.
 
 To keep secrets in a keyring instead, run a Secret Service on the host before
-storing them. A common setup installs `gnome-keyring` and starts
-`dbus-run-session`, or runs the keyring daemon under a login session that
-unlocks it. Once a working Secret Service is available, `sbx` stores new
+storing them: install `gnome-keyring` and start `dbus-run-session`, or run the
+keyring daemon under a login session that unlocks it. Once a working Secret
+Service is available, `sbx` stores new
 secrets in the keychain again. For where each platform keeps secrets, see
 [Where secrets are stored](security/credentials.md#where-secrets-are-stored).
