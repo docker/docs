@@ -90,9 +90,11 @@ exist before you can scope a policy to it. Create teams and manage their members
 in one of two ways:
 
 - Manually, in the Admin Console.
-- Automatically, by syncing them from your identity provider with
-  [SSO group mapping](/manuals/enterprise/security/single-sign-on/manage.md), so
-  that team membership follows your IdP groups.
+- Automatically, by using
+  [group mapping](/manuals/enterprise/security/provisioning/scim/group-mapping.md)
+  to synchronize your identity provider's groups with the teams in your
+  organization. Group mapping creates teams that don't already exist and keeps
+  their membership in step with your IdP groups.
 
 Policy assignment follows team membership, so you manage policies by team rather
 than per user. When a user's team membership changes — whether you edit it
