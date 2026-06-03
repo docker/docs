@@ -37,20 +37,13 @@ Docker hosts must be part of a swarm to use overlay networks, even when
 connecting standalone containers. The following ports must be open between
 participating hosts:
 
-- `2377/tcp`: Swarm control plane (configurable)
-- `4789/udp`: Overlay traffic (configurable)
-- `7946/tcp` and `7946/udp`: Node communication (not configurable)
-
-## Create an overlay network
-
-The following table lists the ports that need to be open to each host
-participating in an overlay network:
-
 | Ports                  | Description                                                                                                                                             |
 | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `2377/tcp`             | The default Swarm control plane port, is configurable with [`docker swarm join --listen-addr`](/reference/cli/docker/swarm/join/#listen-addr) |
 | `4789/udp`             | The default overlay traffic port, configurable with [`docker swarm init --data-path-addr`](/reference/cli/docker/swarm/init/#data-path-port)          |
 | `7946/tcp`, `7946/udp` | Used for communication among nodes, not configurable                                                                                                    |
+
+## Create an overlay network
 
 To create an overlay network that containers on other Docker hosts can connect to,
 run the following command:
