@@ -33,7 +33,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### New
 
 - Docker Model Runner now supports registry mirrors.
-- The `docker sbom` command has been removed. Use the [`docker scout sbom command`](/reference/cli/docker/scout/sbom/) instead.
 
 ### Updates
 
@@ -53,6 +52,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
+- The `docker sbom` command has been deprecated and will be removed in a future release. Use the [`docker scout sbom command`](/reference/cli/docker/scout/sbom/) instead.
 - Fixed a race condition in Docker Engine when **Resource Saver** was active.
 - Fixed a bug where anonymous Docker volumes were leaked each time a `kind` cluster was deleted, causing orphaned volumes to accumulate.
 - Fixed column resizing in the **All Logs** grid so that **Timestamp** and **Object** columns no longer expand unexpectedly, and column widths are now preserved across navigation sessions.
@@ -77,6 +77,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed double separator in the tray menu when running in Windows container mode.
 - Fixed port-binding failures on Windows Hyper-V where `docker run -p 0:N` could allocate HNS-reserved ports, causing bind errors.
 - Fixed garbled taskkill error messages in logs on non-English Windows systems (For example, Chinese Windows using GBK encoding).
+- Fixed unbounded growth of the WSL2 ISO cache. Old `docker-desktop.iso` and `docker-wsl-cli.iso` entries are now removed when a new version is installed. Fixes [docker/desktop-feedback#419](https://github.com/docker/desktop-feedback/issues/419).
 
 ## 4.75.0
 
