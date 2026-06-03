@@ -143,6 +143,35 @@ The setting is persisted in the sandbox spec and applies for the lifetime of
 that sandbox. If you experience Git index corruption or unexpected file content
 after enabling the cache, remove the sandbox and recreate it without the flag.
 
+## Clone mode reports "not in a Git repository" on WSL
+
+On Windows, running [`sbx run --clone`](usage.md#clone-mode) against a
+repository on a WSL filesystem (a `\\wsl.localhost\...` path) can fail even
+though the directory is a valid Git repository:
+
+```console
+> sbx run --clone claude \\wsl.localhost\Ubuntu\home\you\repo
+ERROR: --clone requires a Git repository, but \\wsl.localhost\Ubuntu\home\you\repo is not in a Git repository
+```
+
+The cause is Git's dubious ownership check. When Git on Windows accesses a
+repository owned by a different user across the WSL boundary, it refuses to
+operate on it, so the underlying repository detection fails:
+
+```console
+> git -C \\wsl.localhost\Ubuntu\home\you\repo rev-parse --show-toplevel
+fatal: detected dubious ownership in repository at '//wsl.localhost/Ubuntu/home/you/repo'
+```
+
+Add the repository to Git's `safe.directory` list to allow access, then run
+the command again:
+
+```console
+> git config --global --add safe.directory '%(prefix)///wsl.localhost/Ubuntu/home/you/repo'
+> sbx run --clone claude \\wsl.localhost\Ubuntu\home\you\repo
+✓ Git repository detected: \\wsl.localhost\Ubuntu\home\you\repo
+```
+
 ## Stale Git worktree after removing a sandbox
 
 If you used `--branch`, worktree cleanup during `sbx rm` is best-effort. If
