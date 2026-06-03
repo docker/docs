@@ -94,10 +94,9 @@ in one of two ways:
   [SSO group mapping](/manuals/enterprise/security/single-sign-on/manage.md), so
   that team membership follows your IdP groups.
 
-Because policy assignment follows team membership, you can govern an
-organization with thousands of users without per-user configuration. When a
-user's team membership changes — whether you edit it directly or it syncs from
-your IdP — the policies they receive change with it.
+Policy assignment follows team membership, so you manage policies by team rather
+than per user. When a user's team membership changes — whether you edit it
+directly or it syncs from your IdP — the policies they receive change with it.
 
 ### How org-wide and team-scoped policies combine
 

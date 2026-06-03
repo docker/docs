@@ -46,8 +46,8 @@ to specific teams. The policy's scope determines which members it applies to:
 Teams are the same [teams](/manuals/admin/organization/manage/manage-a-team.md)
 you manage for your organization. A team-scoped policy references the teams it
 applies to, and Docker matches those teams against each user's team membership.
-Because assignment follows team membership, you can govern an organization with
-thousands of users without configuring policies per user.
+Because assignment follows team membership, you manage policies by team rather
+than per user.
 
 An organization can mix org-wide and team-scoped policies. A user's effective
 policy set is every org-wide policy plus every team-scoped policy for a team
