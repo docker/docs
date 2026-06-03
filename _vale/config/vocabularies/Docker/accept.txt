@@ -85,6 +85,7 @@ dockerignore
 Dockerize
 Dockerized
 Dockerizing
+Dependabot
 DuckDuckGo
 Entra
 EPERM
@@ -203,6 +204,7 @@ Quickview
 rebalance
 reimplement
 reloader
+repinning
 Rego
 Rekor
 ROCm

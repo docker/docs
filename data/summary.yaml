@@ -240,6 +240,8 @@ Jamf Pro:
   for: Administrators
 Load by default:
   requires: Docker Buildx [0.14.0](https://github.com/docker/buildx/releases/tag/v0.14.0) and later
+Evaluate policies:
+  availability: Experimental
 MSI installer:
   subscription: [Business]
   for: Administrators

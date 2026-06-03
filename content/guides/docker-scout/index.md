@@ -247,7 +247,7 @@ control over your image's security.
 
 {{< youtube-embed jM9zLBf8M-8 >}}
 
-Docker Scout's [remediation feature](/manuals/scout/policy/remediation.md)
+Docker Scout's [remediation feature](/manuals/scout/policy/dashboard.md)
 helps you address supply chain and security issues by offering tailored
 recommendations based on policy evaluations. These recommendations guide you in
 improving policy compliance or enhancing image metadata, allowing Docker Scout
