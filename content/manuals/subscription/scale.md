@@ -6,7 +6,7 @@ keywords: scale subscription, docker build cloud minutes, testcontainers cloud m
 weight: 40
 ---
 
-Docker Core subscriptions include basic entitlements for your organizations that you can scale with additional add-ons as your needs grow. You can purchase different add-ons that extend usage for your organizations:
+Docker subscriptions include basic entitlements that you can scale with additional add-ons as your needs grow. You can purchase different add-ons that extend usage for your personal or organization accounts:
 
 - Docker Hardened Images (DHI) Select repositories for organization accounts
 - Gordon Plus, Max, and Ultra plans for personal accounts
@@ -32,9 +32,9 @@ To manage the repositories in your active DHI Select plan:
 
 1. From the Billing overview page, select **Manage** next to **Hardened Images**.
 1. Choose from the available actions:
-    - **Add repositories** lets you add additional repositories to your active plan. You will verify your billing details, continue to payment, and complete checkout.
-    - **Remove repositories** lets you remove repositories.
-    - **Disable auto-renewal** cancels your DHI Select plan at the end of the currrent billing cycle.
+   - **Add repositories** lets you add additional repositories to your active plan. You will verify your billing details, continue to payment, and complete checkout.
+   - **Remove repositories** lets you remove repositories.
+   - **Disable auto-renewal** cancels your DHI Select plan at the end of the current billing cycle.
 
 To learn more about DHI Select, see [Get started with DHI Select and Enterprise](/manuals/dhi/how-to/select-enterprise.md). Purchasing eight or more hardened repositories? [Contact Docker sales](https://www.docker.com/pricing/contact-sales/) to discuss an Enterprise plan.
 
@@ -45,7 +45,7 @@ To learn more about DHI Select, see [Get started with DHI Select and Enterprise]
 > If you purchase a Gordon plan while signed in with an organization account,
 > the subscription applies to your personal account automatically.
 
-Gordon Plus, Max, and Ultra plans increase your maximum Gordon usage allowance for your personal account. Gordon plans are billed at a monthly rate at the first of the month. If you purchase a Gordon plan after the first of the month, you'll be billed on a prorated basis. 
+Gordon Plus, Max, and Ultra plans increase your maximum Gordon usage allowance for your personal account. Gordon plans are billed at a monthly rate at the first of the month. If you purchase a Gordon plan after the first of the month, you'll be billed on a prorated basis.
 
 To add a new Gordon plan to your account:
 
@@ -55,12 +55,12 @@ To add a new Gordon plan to your account:
 1. Choose the Gordon subscription plan you want to apply to your personal account.
 1. Verify your billing details, continue to payment, and complete checkout.
 
-If you have an active Gordon plan and want to upgrade to a higher tier, your new usage allowance takes effect immediately. You pay a prorated charge for the higher tier for the rest of the current billing period. 
+If you have an active Gordon plan and want to upgrade to a higher tier, your new usage allowance takes effect immediately. You pay a prorated charge for the higher tier for the rest of the current billing period.
 
 To upgrade your Gordon plan:
 
 1. From the Billing overview page, select **Manage** from the Gordon tile under your active plans.
-1. Select **Upgrade plan** and choose the new plan you want to upgrade to. 
+1. Select **Upgrade plan** and choose the new plan you want to upgrade to.
 1. Verify your billing details, continue to payment, and complete checkout.
 
 To learn about Gordon usage, see [Gordon usage limits and tiers](/manuals/ai/gordon/usage-limits.md).
@@ -71,26 +71,26 @@ Licenses add a layer to your Docker subscriptions, letting you assign products t
 organization without consuming a Docker Core seat. You can purchase licenses for some Docker products:
 
 - AI Governance
-- Docker Offload 
+- Docker Offload
 
 Once you've purchased licenses for your organization, you can [manage license assignment](/manuals/admin/organization/manage/manage-licenses.md) from the **Members** page in Docker Home.
 
 > [!TIP]
-> To purchase licenses for AI Governance and Docker Offload, [contact sales](https://www.docker.com/pricing/contact-sales/). 
+> To purchase licenses for AI Governance and Docker Offload, [contact sales](https://www.docker.com/pricing/contact-sales/).
 
 ### AI Governance licenses
 
 AI Governance licenses let admins create and apply organization-wide AI Governance policies for license-holding members.
 
-- AI Governance licenses currently apply to Docker Sandbox usage.
+- AI Governance licenses apply to Docker Sandbox usage.
 - AI Governance licenses are separate from Docker Team or Business, so you can purchase AI Governance licenses without an existing subscription.
-- When you purchase AI Governance licenses, you may assign them to organization members without a Docker Core seat. 
+- When you purchase AI Governance licenses, you may assign them to organization members without a Docker Core seat.
 
-When a member who holds an AI Governance license uses Docker Sandbox, the organization policy overrides the member’s local policy rules. Members without AI Governance licenses can still use Docker Sandbox, but organization policies will not govern their usage. 
+When a member who holds an AI Governance license uses Docker Sandbox, the organization policy overrides the member’s local policy rules. Members without AI Governance licenses can still use Docker Sandbox, but organization policies will not govern their usage.
 
-### Docker Offload licenses 
+### Docker Offload licenses
 
-Docker Offload lets developers offload building and running containers to the cloud. 
+Docker Offload lets developers offload building and running containers to the cloud.
 
 - You must have a Docker Team or Docker Business subscription.
 - You can only assign Docker Offload licenses to members with Docker Team or Docker Business.
@@ -128,10 +128,7 @@ On-demand usage is billed at higher rates than pre-purchased capacity. To avoid 
 
 - [Manage licenses](/manuals/admin/organization/manage/manage-licenses.md)
 - [Manage seats](/manuals/admin/organization/manage/manage-seats.md)
-- [View your consumption](../admin/organization/manage/manage-products.md#monitor-product-usage-for-your-organization) 
+- [View your consumption](../admin/organization/manage/manage-products.md#monitor-product-usage-for-your-organization)
 - [Docker Build Cloud overview](/manuals/build-cloud/_index.md)
 - [DHI Select and Enterprise quickstart](/manuals/dhi/how-to/select-enterprise.md)
 - [Testcontainers overview](/manuals/testcontainers.md)
-
-
-
