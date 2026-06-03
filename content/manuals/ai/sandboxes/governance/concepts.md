@@ -94,11 +94,12 @@ no effect.
 Local and organization policies don't combine. Which one applies depends on
 whether your organization has governance enabled:
 
-- **No organization governance**: local rules determine what sandboxes can
-  access.
+- **No organization governance**: local rules and any
+  [kit-defined network rules](../customize/kits.md#control-network-access)
+  determine what sandboxes can access.
 - **Organization governance active**: organization rules apply across all
-  developer machines, and local rules are not evaluated. Local rules still
-  appear in `sbx policy ls`, but with an `inactive` status.
+  developer machines, and local and kit-defined rules are not evaluated. They
+  still appear in `sbx policy ls`, but with an `inactive` status.
 
 Within the active policy, deny rules beat allow rules regardless of specificity
 or order.
