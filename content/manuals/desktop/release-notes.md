@@ -33,7 +33,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### New
 
 - Docker Model Runner now supports registry mirrors.
-- The `docker sbom` command has been removed. Use the [`docker scout sbom command`](/reference/cli/docker/scout/sbom/) instead.
 
 ### Updates
 
@@ -53,6 +52,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
+- The `docker sbom` command has been deprecated and will be removed in a future release. Use the [`docker scout sbom command`](/reference/cli/docker/scout/sbom/) instead.
 - Fixed a race condition in Docker Engine when **Resource Saver** was active.
 - Fixed a bug where anonymous Docker volumes were leaked each time a `kind` cluster was deleted, causing orphaned volumes to accumulate.
 - Fixed column resizing in the **All Logs** grid so that **Timestamp** and **Object** columns no longer expand unexpectedly, and column widths are now preserved across navigation sessions.
