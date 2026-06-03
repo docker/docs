@@ -73,9 +73,7 @@ Common fields include:
 | `decision`         | `AUDIT_DECISION_ALLOW` or `AUDIT_DECISION_DENY`.                                                             |
 | `deny_reason`      | Why a denied request was blocked. Present on deny decisions.                                                 |
 
-Identity is resolved from the signed-in Docker user at daemon startup. If no
-user is signed in when the daemon starts, records still ship, but with empty
-`username` and `user_email` fields.
+Each record is attributed to the signed-in Docker user.
 
 ## Where records are stored
 
