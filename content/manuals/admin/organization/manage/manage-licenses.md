@@ -44,5 +44,5 @@ See these docs to explore Docker Core add-ons, or products that need licenses:
 
 - [Scale your subscription](/manuals/subscription/scale.md) to learn about different add-ons
 - [Manage seats](/manuals/admin/organization/manage/manage-seats.md) to add more seats to your Docker Core subscription
-- [AI Governance](/manuals/ai/sandboxes/security/governance.md) to set up organization policies for your organization members
+- [AI Governance](/manuals/ai/sandboxes/governance/org.md) to set up organization policies for your organization members
 - [Docker Offload](/manuals/offload/about.md) to let your developers offload building and running containers to the cloud
