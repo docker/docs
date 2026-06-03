@@ -22,7 +22,7 @@ Each log entry in the table view shows:
 
 Selecting the expand arrow to the right of a row reveals the full message for that entry.
 
-## Search and filter logs
+## Search, filter and export logs
 
 Use the **Search** field at the top of the Logs view to find specific entries. The search bar supports:
 
@@ -36,6 +36,8 @@ To refine the log stream further, select the **Filter** icon in the toolbar to o
 - Check individual containers to show only their output
 - Check Compose stacks to show or hide entire groups
 - Use **Select all** or **Clear all** to quickly toggle every container at once
+
+With the **Export** button in the top-right corner (available with Docker Desktop version 4.77 and later), you can export all logs or only the logs that match your filters. 
 
 ## Display settings
 
