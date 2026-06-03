@@ -50,7 +50,6 @@ jobs:
 
         ### 3. Markdown Formatting
         - Poor markdown syntax (unclosed code blocks, broken lists, indentation issues, etc.)
-        - Line wrapping over 80 characters (except links, code blocks, tables)
 
         ### 4. AI-Generated Patterns (HIGH PRIORITY)
         Flag AI-isms from STYLE.md:
