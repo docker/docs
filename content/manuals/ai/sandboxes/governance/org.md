@@ -105,15 +105,15 @@ A user receives every org-wide policy plus every team-scoped policy for a team
 they belong to. The rules from all of these policies are combined and evaluated
 together:
 
-- **Allows are additive.** A request is allowed if any of the user's effective
+- Allows are additive: a request is allowed if any of the user's effective
   policies allow it.
-- **Denies are absolute.** A request is blocked if any of the user's effective
+- Denies are absolute: a request is blocked if any of the user's effective
   policies deny it.
 
-Because deny always wins, a deny rule in an **Organization**-scoped policy acts
-as a guardrail that **Teams**-scoped policies can't override. Keep rules that
-must apply everywhere in an organization-scoped policy, and use team-scoped
-policies to grant extra access to specific teams.
+Because deny always wins, a deny rule in an organization-scoped policy acts as a
+guardrail that team-scoped policies can't override. Keep rules that must apply
+everywhere in an organization-scoped policy, and use team-scoped policies to
+grant extra access to specific teams.
 
 For example, an organization-scoped policy can deny a category of domains for
 everyone, while a team-scoped policy grants a research team access to additional

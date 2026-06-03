@@ -38,9 +38,9 @@ either `network` or `filesystem`.
 Each organization policy applies either across the whole organization or only
 to specific teams. The policy's scope determines which members it applies to:
 
-- **Org-wide**: with no teams assigned, the policy applies to every member of
-  the organization.
-- **Team-scoped**: with one or more teams assigned, the policy applies only to
+- Org-wide: with no teams assigned, the policy applies to every member of the
+  organization.
+- Team-scoped: with one or more teams assigned, the policy applies only to
   members of those teams.
 
 Teams are the same [teams](/manuals/admin/organization/manage/manage-a-team.md)
