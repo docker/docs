@@ -442,7 +442,7 @@ needs:
 - [Custom templates and kits](customize/) let you package reusable agent
   configurations, MCP servers, base images, and per-project policies. Every
   developer pulls them down with their workspace.
-- [Organization governance](security/governance.md) lets admins define
+- [Organization governance](governance/org.md) lets admins define
   network and filesystem rules in the Docker Admin Console. The rules apply
   across every developer's sandboxes and take precedence over local policy.
   Available on a separate paid subscription.

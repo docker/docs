@@ -14,7 +14,7 @@ build containers, install packages, and modify files without touching your host
 system.
 
 Organization admins can
-[centrally manage sandbox network and filesystem policies](security/governance.md)
+[centrally manage sandbox network and filesystem policies](governance/org.md)
 from the Docker Admin Console, so the same rules apply uniformly across every
 developer's machine. Available on a separate paid subscription.
 

@@ -14,7 +14,7 @@ aliases:
   - /docker-hub/billing/downgrade/
   - /billing/scout-billing/
   - /billing/subscription-management/
-weight: 40
+weight: 30
 ---
 
 You can upgrade or downgrade your Docker subscription at any time to match your changing needs. This page explains how to make subscription changes and what to expect with billing and feature access.

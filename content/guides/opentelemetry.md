@@ -133,8 +133,6 @@ service:
 Create the `docker-compose.yaml` file:
 
 ```yaml
-version: '3.9'
-
 services:
   app:
     build: ./app

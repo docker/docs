@@ -37,7 +37,7 @@ each other and cannot reach your host's localhost. There is no shared network
 between sandboxes or between a sandbox and your host.
 
 All HTTP and HTTPS traffic leaving a sandbox passes through a proxy on your
-host that enforces the [network policy](policy.md). The sandbox routes
+host that enforces the [network policy](../governance/). The sandbox routes
 traffic through either a forward proxy or a transparent proxy depending on the
 client's configuration. Both enforce the network policy; only the forward proxy
 [injects credentials](credentials.md) for AI services.
