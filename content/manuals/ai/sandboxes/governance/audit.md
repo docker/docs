@@ -13,6 +13,12 @@ written to disk as JSON Lines (`.jsonl`) so existing SIEM and log-shipping
 tools can collect them. The records stay on the machine that produced them.
 Docker doesn't collect or ingest audit data.
 
+> [!NOTE]
+> Audit logging is part of Docker AI Governance and requires a separate paid
+> subscription.
+> [Contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
+> to request access.
+
 Audit logging complements [monitoring](monitoring.md). Monitoring with `sbx
 policy ls` and `sbx policy log` is for live, interactive debugging. Audit
 logging produces a durable trail for security review and compliance.
