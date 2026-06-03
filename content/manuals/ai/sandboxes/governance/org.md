@@ -54,11 +54,48 @@ access**. Each rule takes a path pattern and an action (allow or deny).
 For path pattern syntax including the difference between `*` and `**`, see
 [Policy concepts](concepts.md#filesystem-rules).
 
+## Scope policies to teams
+
+An organization can have more than one policy, and each policy applies either
+to the whole organization or to specific teams. Use scoping to give different
+parts of the organization different rules: for example, a permissive policy for
+a security research team alongside a stricter default for everyone else.
+
+When you create or edit a policy in the Admin Console, the **Scope** setting
+controls who it applies to:
+
+- Leave the team list empty to make the policy org-wide. It applies to every
+  member of the organization.
+- Add one or more teams to scope the policy to those teams. It applies only to
+  members of the listed teams.
+
+Teams are the same [teams](/manuals/admin/organization/manage/manage-a-team.md)
+you manage for your organization, so assignment follows existing team
+membership. This lets you manage policies for an organization with thousands of
+users without configuring anything per user. When team membership changes in
+your identity provider, the policies a user receives change with it.
+
+### How org-wide and team-scoped policies combine
+
+A user receives every org-wide policy plus every team-scoped policy for a team
+they belong to. The rules from all of these policies are combined and evaluated
+together:
+
+- **Allows are additive.** A request is allowed if any of the user's effective
+  policies allow it.
+- **Denies are absolute.** A request is blocked if any of the user's effective
+  policies deny it.
+
+Because deny always wins, a deny rule in an org-wide policy acts as a guardrail
+that team-scoped policies can't override. Use org-wide policies for rules that
+must apply everywhere, and team-scoped policies to grant additional access to
+specific teams.
+
 ## Precedence
 
-Within the active policy, deny rules beat allow rules. If a domain matches both,
-it's blocked regardless of specificity. Outbound traffic is blocked unless a
-rule allows it.
+Deny rules beat allow rules. If a resource matches both an allow and a deny, in
+the same policy or across a user's effective policies, it's blocked regardless
+of specificity. Outbound traffic is blocked unless a rule allows it.
 
 When organization governance is active, local rules are not evaluated. Only
 organization rules set in the Admin Console determine what is allowed or
