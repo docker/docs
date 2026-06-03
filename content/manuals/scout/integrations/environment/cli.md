@@ -38,12 +38,12 @@ jobs:
     steps:
       - run: |
           if [[ -z "$CIRCLE_TAG" ]]; then
+            tag="$CIRCLE_BRANCH"
+            echo "Running on branch '$CIRCLE_BRANCH'"
+          else
             tag="$CIRCLE_TAG"
             echo "Running tag '$CIRCLE_TAG'"
-          else
-            tag="$CIRCLE_BRANCH"
-            echo "Running on branch '$CI_COMMIT_BRANCH'"
-          fi    
+          fi
           echo "tag = $tag"
       - run: docker run -it \
           -e DOCKER_SCOUT_HUB_USER=$DOCKER_SCOUT_HUB_USER \
@@ -67,12 +67,12 @@ record_environment:
   script:
     - |
       if [[ -z "$CI_COMMIT_TAG" ]]; then
-        tag="latest"
-        echo "Running tag '$CI_COMMIT_TAG'"
-      else
         tag="$CI_COMMIT_REF_SLUG"
         echo "Running on branch '$CI_COMMIT_BRANCH'"
-      fi    
+      else
+        tag="$CI_COMMIT_TAG"
+        echo "Running tag '$CI_COMMIT_TAG'"
+      fi
       echo "tag = $tag"
     - environment --org <MY_DOCKER_ORG> "PRODUCTION" ${image}:${tag}
 ```
