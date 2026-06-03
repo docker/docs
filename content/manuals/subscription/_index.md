@@ -7,37 +7,33 @@ params:
   sidebar:
     group: Platform
 grid_subscriptions:
-- title: Compare Docker subscriptions
-  description: Visit the pricing page to see what's included in different Docker subscriptions.
-  link: "https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscription"
-  icon: magnifying-glass
-- title: Set up your subscription
-  description: Get started setting up a personal or organization subscription.
-  link: /subscription/setup/
-  icon: shopping-cart
-- title: Scale your subscription
-  description: Scale your subscription to fit your needs.
-  link: /subscription/scale/
-  icon: chart-bar
-- title: Change your subscription
-  description: Learn how to upgrade or downgrade your subscription.
-  link: /subscription/change/
-  icon: arrow-up-circle
-- title: Manage seats
-  description: Learn how to add or remove seats from your subscription.
-  link: /subscription/manage-seats/
-  icon: user-plus
-- title: Docker Desktop license agreement
-  description: Review the terms of the Docker Subscription Service Agreement.
-  link: /subscription/desktop-license/
-  icon: document-text
-- title: Subscription FAQs
-  description: Find the answers you need and explore common questions.
-  link: /subscription/faq/
-  icon: question-mark-circle
+  - title: Compare Docker subscriptions
+    description: Visit the pricing page to see what's included in different Docker subscriptions.
+    link: "https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscription"
+    icon: magnifying-glass
+  - title: Set up your subscription
+    description: Get started setting up a personal or organization subscription.
+    link: /subscription/setup/
+    icon: shopping-cart
+  - title: Scale your subscription
+    description: Scale your subscription to fit your needs.
+    link: /subscription/scale/
+    icon: chart-bar
+  - title: Change your subscription
+    description: Learn how to upgrade or downgrade your subscription.
+    link: /subscription/change/
+    icon: arrow-up-circle
+  - title: Docker Desktop license agreement
+    description: Review the terms of the Docker Subscription Service Agreement.
+    link: /subscription/desktop-license/
+    icon: document-text
+  - title: Subscription FAQs
+    description: Find the answers you need and explore common questions.
+    link: /subscription/faq/
+    icon: question-mark-circle
 aliases:
-- /docker-hub/billing/
-- /docker-hub/billing/faq/
+  - /docker-hub/billing/
+  - /docker-hub/billing/faq/
 ---
 
 Docker subscriptions provide licensing for commercial use of Docker products including Docker Desktop, Docker Hub, Docker Build Cloud, Docker Scout, and Testcontainers Cloud.

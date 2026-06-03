@@ -125,6 +125,24 @@ $ docker build --output type=tar,dest=- . | tar xf - -C ./result
 
 Extracting the tar archive as the current user avoids the `chown` call.
 
+## Filesystem operations are slow in large repositories
+
+Filesystem operations such as `git status`, `git log`, or directory scans can
+be noticeably slow when the sandbox workspace is mounted in direct mode (the
+default for workspaces without `--clone`). The slowness occurs because virtiofs
+caching is disabled by default to prevent data corruption.
+
+To speed up filesystem-intensive workloads, opt into virtiofs caching when
+creating the sandbox:
+
+```console
+$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=1 sbx run <template>
+```
+
+The setting is persisted in the sandbox spec and applies for the lifetime of
+that sandbox. If you experience Git index corruption or unexpected file content
+after enabling the cache, remove the sandbox and recreate it without the flag.
+
 ## Stale Git worktree after removing a sandbox
 
 If you used `--branch`, worktree cleanup during `sbx rm` is best-effort. If

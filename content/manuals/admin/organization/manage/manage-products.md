@@ -1,6 +1,6 @@
 ---
 title: Docker products
-weight: 30
+weight: 50
 description: Learn how to manage access and usage for Docker products for your organization
 keywords: organization, tools, products, product access, organization management
 aliases:

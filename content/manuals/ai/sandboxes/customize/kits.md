@@ -143,6 +143,13 @@ registries, install endpoints, or external APIs. Use `deniedDomains` for
 hosts the agent should not reach, such as telemetry endpoints. If a domain
 matches both an allow rule and a deny rule, the deny rule wins.
 
+> [!IMPORTANT]
+> Kit network rules don't apply when organization governance is active. In
+> that case, only organization rules are evaluated, so kit-defined allow and
+> deny rules are ignored — including any domains a kit allows for the agent
+> to reach. For details, see
+> [Policy precedence](../governance/concepts.md#precedence).
+
 For authenticated services, see
 [Authenticate to external services](#authenticate-to-external-services).
 

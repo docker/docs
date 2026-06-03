@@ -64,7 +64,7 @@ Let's try to push the image to Docker Hub.
    docker image ls
    ```
 
-2. To fix this, first sign in to Docker Hub using your Docker ID: `docker login YOUR-USER-NAME`.
+2. To fix this, first sign in to Docker Hub using your Docker ID: `docker login -u YOUR-USER-NAME`.
 3. Use the `docker tag` command to give the `getting-started` image a new name. Replace `YOUR-USER-NAME` with your Docker ID.
 
    ```console
