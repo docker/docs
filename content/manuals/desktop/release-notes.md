@@ -28,11 +28,11 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-06-08" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.76.0" build_path="//" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.77.0" build_path="//" >}}
 
 ### New
 
-- You now export log data from the **Logs** view.
+- You can now export log data from the **Logs** view.
 
 ### Updates
 
@@ -42,7 +42,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker MCP gateway v0.42.2](https://github.com/docker/mcp-gateway/releases/tag/v0.42.2)
 - `docker pass` v0.1.2 
 - [containerd v2.2.4](https://github.com/containerd/containerd/releases/tag/v2.2.4)
-- [Docker DHI (dhictl) v0.0.4 release notes](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.4))
+- [Docker DHI (dhictl) v0.0.4 release notes](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.4)
 
 ### Bug fixes and enhancements
 
@@ -50,11 +50,14 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Marketplace extensions are now installed and updated by pinned manifest digest, instead of by tag, protecting against tag mutation after publication.
 - Added Buildx version information to the About window.
-- Added a case-sensitivity toggle to the **Logs** search bar, allowing users to switch between case-insensitive (default) and case-sensitive log filtering.
+- Added a case-sensitivity toggle to the **Logs** search bar which lets you switch between case-insensitive (default) and case-sensitive log filtering.
 - Fixed a bug where the mouse wheel scroll was not working in the **Logs** view grid.
 - Fixed an issue where the backend incorrectly exited with error code 150 on clean shutdown via SIGINT or SIGTERM, causing false failure signals.
 - Removed the bundled `hub-tool` binary from Docker Desktop.
-- Added working **Authenticate** and **Cancel** buttons to the MCP OAuth authorization chat bubble in Gordon, allowing users to complete or decline OAuth sign-in flows from MCP servers.
+- Added working **Authenticate** and **Cancel** buttons to the MCP OAuth authorization chat bubble in Gordon, letting you complete or decline OAuth sign-in flows from MCP servers.
+- Added two new commands to `docker pass`:
+   - Use `docker pass run` to inject secrets into host commands.
+   - Use `docker pass plugins` for dynamic plugin management.
 
 #### For Windows
 
