@@ -142,6 +142,14 @@ $ sbx exec <sandbox-name> -- sudo install -m 0644 /tmp/internal-ca.crt /usr/loca
 $ sbx exec <sandbox-name> -- sudo update-ca-certificates
 ```
 
+> [!IMPORTANT]
+> Install the CA into the system trust store with `update-ca-certificates`, as
+> shown above. Don't override the sandbox's TLS trust variables (such as
+> `SSL_CERT_FILE`) to point at only your internal CA. Doing so replaces the
+> system bundle
+> and breaks the trust the credential proxy depends on, so requests on the
+> `forward` egress path fail.
+
 If API calls still fail after installing the CA, run `sbx policy log` and check
 whether the request used `forward`, `forward-bypass`, or `transparent` in the
 **PROXY** column. That can help identify whether the request is eligible for
