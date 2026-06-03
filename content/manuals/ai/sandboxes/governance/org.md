@@ -11,10 +11,10 @@ aliases:
 [Local policies](local.md) give individual developers control over what their
 sandboxes can access. Organization policy moves that control to the admin level:
 rules defined in the [Docker Admin Console](https://app.docker.com/admin) apply
-uniformly to every sandbox in the organization. When organization governance is
-active, it replaces local `sbx policy` rules entirely — local rules are no
-longer evaluated and can't be used to supplement or override the organization
-policy.
+to sandboxes across the organization, either to every member or to specific
+teams. When organization governance is active, it replaces local `sbx policy`
+rules entirely — local rules are no longer evaluated and can't be used to
+supplement or override the organization policy.
 
 Admins can manage organization policies through the Admin Console UI or
 programmatically using the [Governance API](/reference/api/ai-governance/).
@@ -25,13 +25,31 @@ programmatically using the [Governance API](/reference/api/ai-governance/).
 > [Contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
 > to request access.
 
+## Create a policy
+
+Manage policies in the [Docker Admin Console](https://app.docker.com/admin)
+under **AI governance**. Network and filesystem policies are managed
+separately, under **Network access** and **Filesystem access**.
+
+To create a policy:
+
+1. Under **AI governance**, select **Network access** or **Filesystem access**.
+2. Select **Create policy** and enter a **Policy name**.
+3. Set the **Scope** to **Organization** or **Teams**. If you select **Teams**,
+   choose the teams the policy applies to. See
+   [Scope policies to teams](#scope-policies-to-teams).
+4. Select **Add rule** to add each rule. For rule syntax, see
+   [Policy concepts](concepts.md#rule-syntax).
+
+Existing policies are listed with their name, scope, rule count, and last
+update. Use the action menu (⋮) to edit or delete a policy.
+
 ## Network policies
 
 ### Configuring org-level network rules
 
-Define network allow and deny rules in the Admin Console under
-**AI governance > Network access**. Each rule takes a network target and an
-action (allow or deny). You can add multiple entries at once, one per line.
+A network rule takes a network target and an action (allow or deny). You can
+add multiple entries at once, one per line.
 
 For the full syntax reference (exact hostnames, wildcard subdomains, port
 suffixes, and CIDR ranges), see [Policy concepts](concepts.md#network-rules).
@@ -47,9 +65,8 @@ Filesystem policies control which host paths a sandbox can mount as
 workspaces. By default, sandboxes can mount any directory the user has
 access to.
 
-Admins can restrict which paths are mountable by defining filesystem allow
-and deny rules in the Admin Console under **AI governance > Filesystem
-access**. Each rule takes a path pattern and an action (allow or deny).
+Admins can restrict which paths are mountable with filesystem allow and deny
+rules. Each rule takes a path pattern and an action (allow or deny).
 
 For path pattern syntax including the difference between `*` and `**`, see
 [Policy concepts](concepts.md#filesystem-rules).
@@ -61,19 +78,26 @@ to the whole organization or to specific teams. Use scoping to give different
 parts of the organization different rules: for example, a permissive policy for
 a security research team alongside a stricter default for everyone else.
 
-When you create or edit a policy in the Admin Console, the **Scope** setting
-controls who it applies to:
+A policy's [**Scope**](#create-a-policy) controls who it applies to. Set it to
+**Organization** to apply the policy to every member, or to **Teams** to apply
+it only to members of the teams you select.
 
-- Leave the team list empty to make the policy org-wide. It applies to every
-  member of the organization.
-- Add one or more teams to scope the policy to those teams. It applies only to
-  members of the listed teams.
+### Before you start
 
-Teams are the same [teams](/manuals/admin/organization/manage/manage-a-team.md)
-you manage for your organization, so assignment follows existing team
-membership. This lets you manage policies for an organization with thousands of
-users without configuring anything per user. When team membership changes in
-your identity provider, the policies a user receives change with it.
+Team scoping targets your organization's existing
+[teams](/manuals/admin/organization/manage/manage-a-team.md), so a team must
+exist before you can scope a policy to it. Create teams and manage their members
+in one of two ways:
+
+- Manually, in the Admin Console.
+- Automatically, by syncing them from your identity provider with
+  [SSO group mapping](/manuals/enterprise/security/single-sign-on/manage.md), so
+  that team membership follows your IdP groups.
+
+Because policy assignment follows team membership, you can govern an
+organization with thousands of users without per-user configuration. When a
+user's team membership changes — whether you edit it directly or it syncs from
+your IdP — the policies they receive change with it.
 
 ### How org-wide and team-scoped policies combine
 
@@ -86,10 +110,16 @@ together:
 - **Denies are absolute.** A request is blocked if any of the user's effective
   policies deny it.
 
-Because deny always wins, a deny rule in an org-wide policy acts as a guardrail
-that team-scoped policies can't override. Use org-wide policies for rules that
-must apply everywhere, and team-scoped policies to grant additional access to
-specific teams.
+Because deny always wins, a deny rule in an **Organization**-scoped policy acts
+as a guardrail that **Teams**-scoped policies can't override. Keep rules that
+must apply everywhere in an organization-scoped policy, and use team-scoped
+policies to grant extra access to specific teams.
+
+For example, an organization-scoped policy can deny a category of domains for
+everyone, while a team-scoped policy grants a research team access to additional
+package mirrors. Research-team members receive both policies: they get the extra
+access, but the organization-wide deny still applies and can't be undone by the
+team policy.
 
 ## Precedence
 
