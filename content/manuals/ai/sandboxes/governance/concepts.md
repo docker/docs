@@ -99,8 +99,9 @@ each request, following two principles:
 
 - Deny wins: if any rule matches with `decision: deny`, the request is denied,
   regardless of any matching allow rules.
-- Default deny: outbound traffic is blocked unless an explicit allow rule
-  matches.
+- Default deny: anything an allow rule doesn't match is blocked. Outbound
+  network traffic is blocked unless a network rule allows the destination, and a
+  host path can't be mounted unless a filesystem rule allows it.
 
 Because every effective policy feeds the same evaluation, allows are additive (a
 request is allowed if any effective policy allows it) and denies are absolute (a
