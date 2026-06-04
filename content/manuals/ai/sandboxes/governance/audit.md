@@ -49,8 +49,10 @@ A network evaluation record looks like this:
   "schema_version": "1.82.0",
   "category": "AUDIT_CATEGORY_EVALUATION",
   "decision": "AUDIT_DECISION_DENY",
-  "username": "5f3e3556-ed49-4431-bdd8-24958cdc4340",
-  "user_email": "jordan@example.com",
+  "username": "jordandoe",
+  "user_email": "jordandoe@example.com",
+  "org_id": "9f8e7d6c-5b4a-3210-fedc-ba9876543210",
+  "org_name": "Acme Inc",
   "audit_session_id": "8a3bc076-79d0-4502-baf3-cc6ad35fb578",
   "resource_id": "example.com:443",
   "os": "macos",
@@ -73,14 +75,17 @@ Common fields include:
 | `schema_version`   | Version of the record schema. Pin your SIEM field mappings to it, as the format is a stable contract.        |
 | `category`         | `AUDIT_CATEGORY_EVALUATION` for policy decisions, `AUDIT_CATEGORY_MANAGEMENT` for session lifecycle records. |
 | `audit_session_id` | Identifies the daemon run that produced the record.                                                          |
-| `username`         | The signed-in Docker user's account UUID.                                                                    |
+| `username`         | The signed-in Docker user's Docker Hub username.                                                             |
 | `user_email`       | The signed-in Docker user's email address.                                                                   |
+| `org_id`           | ID of the organization whose governance policy is in effect.                                                 |
+| `org_name`         | Display name of the organization whose governance policy is in effect.                                       |
 | `action_type`      | The kind of access evaluated, such as `network_egress`.                                                      |
 | `resource_id`      | The target of the evaluation, such as a host and port.                                                       |
 | `decision`         | `AUDIT_DECISION_ALLOW` or `AUDIT_DECISION_DENY`.                                                             |
 | `deny_reason`      | Why a denied request was blocked. Present on deny decisions.                                                 |
 
-Each record is attributed to the signed-in Docker user.
+Each record is attributed to the signed-in Docker user and the organization
+whose governance policy is in effect.
 
 ## Where records are stored
 
