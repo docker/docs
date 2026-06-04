@@ -56,24 +56,29 @@ paths:
         The rule set is not included; use GetPolicy to fetch the full object.
       responses:
         "200":
-          description: Array of policy summaries. Rule sets are not included; use GetPolicy to fetch a full policy.
+          description: Object wrapping an array of policy summaries under `data`. Rule sets are not included; use GetPolicy to fetch a full policy.
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/PolicySummary"
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/PolicySummary"
               examples:
                 default:
                   value:
-                    - id: pol_06evsmp24r1pg71cm8500546pkbn
-                      name: "Security Research — hardened"
-                      org: my-org
-                      scope:
-                        profiles: [security]
-                      created_at: "2026-04-22T00:00:00Z"
-                      updated_at: "2026-04-22T00:00:00Z"
-                      type: allowlist_v0
+                    data:
+                      - id: pol_06evsmp24r1pg71cm8500546pkbn
+                        name: "Security Research — hardened"
+                        org: my-org
+                        scope:
+                          teams: [d290f1ee-6c54-4b01-90e6-d701748f0851]
+                        created_at: "2026-04-22T00:00:00Z"
+                        updated_at: "2026-04-22T00:00:00Z"
+                        type: allowlist_v0
         "401":
           $ref: "#/components/responses/Unauthenticated"
         "403":
@@ -102,7 +107,7 @@ paths:
                 value:
                   name: "Security Research — hardened"
                   scope:
-                    profiles: [security]
+                    teams: [d290f1ee-6c54-4b01-90e6-d701748f0851]
       responses:
         "201":
           description: Policy created. Returns the new policy without its rule set.
@@ -117,7 +122,7 @@ paths:
                     name: "Security Research — hardened"
                     org: my-org
                     scope:
-                      profiles: [security]
+                      teams: [d290f1ee-6c54-4b01-90e6-d701748f0851]
                     created_at: "2026-04-22T00:00:00Z"
                     updated_at: "2026-04-22T00:00:00Z"
         "400":
@@ -156,7 +161,7 @@ paths:
                     name: "Security Research — hardened"
                     org: my-org
                     scope:
-                      profiles: [security]
+                      teams: [d290f1ee-6c54-4b01-90e6-d701748f0851]
                     created_at: "2026-04-22T00:00:00Z"
                     updated_at: "2026-04-22T00:00:00Z"
                     allowlist_v0:
@@ -167,6 +172,134 @@ paths:
                           actions: [connect:tcp, connect:udp]
                           resources: [research.mitre.org, cve.mitre.org]
                           decision: allow
+        "401":
+          $ref: "#/components/responses/Unauthenticated"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
+    patch:
+      operationId: updatePolicy
+      tags: [policies]
+      summary: Update policy
+      description: |
+        Partially updates a policy's metadata. Only fields present in the
+        request body are updated; absent fields are left unchanged. The `scope`
+        object is patched per sub-field: sending `teams` replaces that list,
+        while an omitted sub-field is left untouched and an empty list clears
+        it (org-wide).
+
+        The rule set is not modified here — use the rule endpoints for that.
+        At least one field must be present. Returns the policy in both its old
+        and new states. Changes may take up to five minutes to reach developer
+        machines.
+      requestBody:
+        description: Fields to update. Absent fields are left unchanged.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePolicyRequest"
+            examples:
+              rename:
+                summary: Rename the policy
+                value:
+                  name: Security Research
+              scope:
+                summary: Restrict to a team
+                value:
+                  scope:
+                    teams: [d290f1ee-6c54-4b01-90e6-d701748f0851]
+      responses:
+        "200":
+          description: Policy updated, returns old and new states.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdatePolicyResponse"
+              examples:
+                default:
+                  value:
+                    old:
+                      id: pol_06evsmp24r1pg71cm8500546pkbn
+                      name: "Security Research — hardened"
+                      org: my-org
+                      scope:
+                        teams: [d290f1ee-6c54-4b01-90e6-d701748f0851]
+                      created_at: "2026-04-22T00:00:00Z"
+                      updated_at: "2026-04-22T00:00:00Z"
+                      allowlist_v0:
+                        domain: network
+                        rules:
+                          - id: rule_06evsm9qjm1pdsk0a8nkfaxy7jna
+                            name: allow research mirrors
+                            actions: [connect:tcp, connect:udp]
+                            resources: [research.mitre.org, cve.mitre.org]
+                            decision: allow
+                    new:
+                      id: pol_06evsmp24r1pg71cm8500546pkbn
+                      name: Security Research
+                      org: my-org
+                      scope:
+                        teams: [d290f1ee-6c54-4b01-90e6-d701748f0851]
+                      created_at: "2026-04-22T00:00:00Z"
+                      updated_at: "2026-04-22T10:00:00Z"
+                      allowlist_v0:
+                        domain: network
+                        rules:
+                          - id: rule_06evsm9qjm1pdsk0a8nkfaxy7jna
+                            name: allow research mirrors
+                            actions: [connect:tcp, connect:udp]
+                            resources: [research.mitre.org, cve.mitre.org]
+                            decision: allow
+        "400":
+          $ref: "#/components/responses/InvalidArgument"
+        "401":
+          $ref: "#/components/responses/Unauthenticated"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "500":
+          $ref: "#/components/responses/InternalError"
+    delete:
+      operationId: deletePolicy
+      tags: [policies]
+      summary: Delete policy
+      description: |
+        Permanently deletes the policy and its rule set. Returns the deleted
+        policy as a courtesy; its `updated_at` is unchanged by the deletion.
+        Changes may take up to five minutes to reach developer machines.
+      responses:
+        "200":
+          description: Policy deleted, returns the deleted policy.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeletePolicyResponse"
+              examples:
+                default:
+                  value:
+                    deleted:
+                      id: pol_06evsmp24r1pg71cm8500546pkbn
+                      name: "Security Research — hardened"
+                      org: my-org
+                      scope:
+                        teams: [d290f1ee-6c54-4b01-90e6-d701748f0851]
+                      created_at: "2026-04-22T00:00:00Z"
+                      updated_at: "2026-04-22T00:00:00Z"
+                      allowlist_v0:
+                        domain: network
+                        rules:
+                          - id: rule_06evsm9qjm1pdsk0a8nkfaxy7jna
+                            name: allow research mirrors
+                            actions: [connect:tcp, connect:udp]
+                            resources: [research.mitre.org, cve.mitre.org]
+                            decision: allow
         "401":
           $ref: "#/components/responses/Unauthenticated"
         "403":
@@ -268,9 +401,9 @@ paths:
       tags: [rules]
       summary: Update rule
       description: |
-        Partially updates a rule using JSON Merge Patch semantics (RFC 7396).
-        Only fields present in the request body are updated; absent fields are
-        left unchanged. Returns the rule in both its old and new states.
+        Partially updates a rule. Only fields present in the request body are
+        updated; absent fields are left unchanged. Returns the rule in both its
+        old and new states.
 
         Changing `actions` across domains (for example, from network actions to
         filesystem actions) is rejected. Changes may take up to five minutes to
@@ -279,7 +412,7 @@ paths:
         description: Fields to update. Absent fields are left unchanged.
         required: true
         content:
-          application/merge-patch+json:
+          application/json:
             schema:
               $ref: "#/components/schemas/UpdateRuleRequest"
             examples:
@@ -488,18 +621,15 @@ components:
 
     Scope:
       type: object
-      description: Restricts the policy to specific profiles or teams. Empty or absent lists mean the policy applies org-wide.
+      description: Restricts the policy to specific teams. An empty or absent list means the policy applies org-wide.
       properties:
-        profiles:
-          type: array
-          items:
-            type: string
-          examples:
-            - ["security"]
         teams:
           type: array
           items:
             type: string
+          description: Team UUIDs the policy applies to. Each must be a valid team in the org.
+          examples:
+            - ["d290f1ee-6c54-4b01-90e6-d701748f0851"]
 
     AllowlistV0:
       type: object
@@ -579,7 +709,7 @@ components:
 
     UpdateRuleRequest:
       type: object
-      description: JSON Merge Patch (RFC 7396). Only present fields are updated.
+      description: Partial update. Only fields present in the body are updated; absent fields are left unchanged.
       properties:
         name:
           type: string
@@ -610,6 +740,54 @@ components:
       properties:
         deleted:
           $ref: "#/components/schemas/Rule"
+
+    UpdatePolicyRequest:
+      type: object
+      description: >
+        Partial update of a policy's metadata. Only fields present in the body
+        are updated; the rule set is not modified here. At least one field must
+        be present.
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Policy name, unique within the organization.
+          examples:
+            - Security Research
+        scope:
+          $ref: "#/components/schemas/ScopePatch"
+
+    ScopePatch:
+      type: object
+      description: >
+        Per-sub-field patch of a policy's scope. An omitted sub-field is left
+        unchanged; a present list replaces that dimension, and an empty list
+        clears it (making the policy org-wide for that dimension).
+      properties:
+        teams:
+          type: array
+          items:
+            type: string
+          examples:
+            - ["d290f1ee-6c54-4b01-90e6-d701748f0851"]
+
+    UpdatePolicyResponse:
+      type: object
+      description: The full policy before and after the update.
+      required: [old, new]
+      properties:
+        old:
+          $ref: "#/components/schemas/Policy"
+        new:
+          $ref: "#/components/schemas/Policy"
+
+    DeletePolicyResponse:
+      type: object
+      description: The full deleted policy.
+      required: [deleted]
+      properties:
+        deleted:
+          $ref: "#/components/schemas/Policy"
 
     RuleActions:
       type: array
