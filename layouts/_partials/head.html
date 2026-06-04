@@ -16,7 +16,7 @@
     />
   {{- end -}}
 {{ end -}}
-{{ partialCached "utils/css.html" "-" "-" }}
+{{ partial "utils/css.html" . }}
 <link href="/pagefind/pagefind-component-ui.css" rel="stylesheet" />
 {{- if hugo.IsProduction -}}
   <script
