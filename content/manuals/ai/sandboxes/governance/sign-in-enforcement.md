@@ -1,7 +1,7 @@
 ---
 title: Sign-in enforcement
 linkTitle: Sign-in enforcement
-weight: 35
+weight: 22
 description: Require Docker Sandboxes users to sign in as members of your organization, enforced through endpoint management.
 keywords: docker sandboxes, sign-in enforcement, organization enforcement, sbx login, MDM, configuration profile, registry key, allowedOrgs
 ---
@@ -42,17 +42,17 @@ Other commands require a valid signed-in session, so they fail after a denied
 login until the user signs in with an allowed account.
 
 Enforcement applies at login time only. There's no per-command or per-request
-check. A few key consequences follow from this:
+check. This has a few key consequences:
 
-- **Fail-closed.** If the Docker Hub API is unreachable or returns an error,
-  login is denied. Users can't bypass enforcement by going offline.
-- **Already signed-in users aren't affected immediately.** If a user was signed
-  in before the configuration was deployed, they keep their session until it
-  ends. To re-trigger the check, they run `sbx login` again.
-- **Automatic sign-in is also checked.** If a user's Docker session expires
-  while they use the CLI from an interactive terminal, the CLI starts the
-  sign-in flow automatically, and the enforcement check runs against that
-  sign-in the same way it does for an explicit `sbx login`.
+- Enforcement is fail-closed. If the Docker Hub API is unreachable or returns
+  an error, login is denied. Users can't bypass enforcement by going offline.
+- Users who are already signed in aren't affected immediately. If a user was
+  signed in before the configuration was deployed, they keep their session
+  until it ends. To re-trigger the check, they run `sbx login` again.
+- Automatic sign-in is also checked. If a user's Docker session expires while
+  they use the CLI from an interactive terminal, the CLI starts the sign-in
+  flow automatically, and the enforcement check runs against that sign-in the
+  same way it does for an explicit `sbx login`.
 
 > [!NOTE]
 > A denied user is signed out, so they can't run `sbx ls` or `sbx rm` to clean
