@@ -153,4 +153,4 @@ For complete details, see the [Support Service Level Agreement](https://docs.doc
 
 - [Explore how DHI images are built and more](/dhi/explore/)
 - [Get started using DHIs](/dhi/get-started/)
-- [Contact Docker for DHI Enterprise](https://www.docker.com/pricing/contact-sales/)
+- <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_dhi_features" class="link" rel="noopener">Contact Docker for DHI Enterprise</a>

@@ -41,7 +41,7 @@ To purchase hardened repositories with DHI Select:
 
 > [!TIP]
 >
-> Purchasing eight or more hardened repositories? [Contact Docker sales](https://www.docker.com/pricing/contact-sales/) to discuss an Enterprise plan.
+> Purchasing eight or more hardened repositories? <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_subscription_setup" class="link" rel="noopener">Contact Docker sales</a> to discuss an Enterprise plan.
 
 ## What's next
 

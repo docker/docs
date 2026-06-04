@@ -36,7 +36,7 @@ You can add more members to your organization. For more information, see [Manage
 
 ## Volume pricing
 
-Docker offers volume pricing for Docker Business subscriptions starting at 25 seats. Contact the [Docker Sales Team](https://www.docker.com/pricing/contact-sales/) for more information.
+Docker offers volume pricing for Docker Business subscriptions starting at 25 seats. Contact the <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_volume_pricing" class="link" rel="noopener">Docker Sales Team</a> for more information.
 
 ## Remove seats from your subscription
 

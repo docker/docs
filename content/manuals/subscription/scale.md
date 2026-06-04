@@ -25,7 +25,7 @@ organization without consuming a Docker Core seat. You can purchase licenses for
 Once you've purchased licenses for your organization, you can [manage license assignment](/manuals/admin/organization/manage/manage-licenses.md) from the **Members** page in Docker Home.
 
 > [!TIP]
-> To purchase licenses for AI Governance and Docker Offload, [contact sales](https://www.docker.com/pricing/contact-sales/). 
+> To purchase licenses for AI Governance and Docker Offload, <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_subscription_scale_licenses" class="link" rel="noopener">contact sales</a>. 
 
 ### AI Governance licenses
 
@@ -68,7 +68,7 @@ Your additional minutes appear on the Build minutes page immediately.
 
 You can add Testcontainers Cloud runtime minutes in two ways:
 
-- [Contact sales](https://www.docker.com/pricing/contact-sales/) to pre-purchase runtime minutes at discounted rates
+- <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_subscription_scale_runtime" class="link" rel="noopener">Contact sales</a> to pre-purchase runtime minutes at discounted rates
 - Use unlimited runtime minutes on-demand with billing at the end of each monthly cycle
 
 On-demand usage is billed at higher rates than pre-purchased capacity. To avoid higher on-demand charges, pre-purchase additional minutes if you expect consistent usage over your subscription's included minutes.
@@ -83,7 +83,7 @@ To add more hardened repositories to your DHI Select plan:
 1. On the Overview page, select **Manage** next to **Hardened Images**.
 1. Select how many repositories the account can use.
 
-Purchasing eight or more hardened repositories? [Contact Docker sales](https://www.docker.com/pricing/contact-sales/) to discuss an Enterprise plan.
+Purchasing eight or more hardened repositories? <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_subscription_scale_dhi" class="link" rel="noopener">Contact Docker sales</a> to discuss an Enterprise plan.
 
 ## What's next
 
