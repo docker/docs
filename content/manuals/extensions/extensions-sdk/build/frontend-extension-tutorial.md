@@ -208,7 +208,7 @@ Replace the `ui/src/App.tsx` file with the following code:
 ```tsx
 
 // ui/src/App.tsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Paper,
   Stack,
@@ -226,7 +226,7 @@ import { createDockerDesktopClient } from "@docker/extension-api-client";
 const ddClient = createDockerDesktopClient();
 
 export function App() {
-  const [containers, setContainers] = React.useState<any[]>([]);
+  const [containers, setContainers] = useState<any[]>([]);
 
   useEffect(() => {
     // List all containers
