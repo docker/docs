@@ -11,6 +11,7 @@ Aleksandrov
 Awaitility
 Amazon
 Anchore
+Ansible
 Apple
 Artifactory
 armhf
@@ -127,6 +128,7 @@ JavaScript
 JetBrains
 JFrog
 JUnit
+Kandji
 Kata
 Keycloak
 Kerberos
@@ -157,6 +159,7 @@ minikube
 misconfiguration
 [Mm]ixins?
 monorepos?
+Mosyle
 musl
 MySQL
 nameserver
