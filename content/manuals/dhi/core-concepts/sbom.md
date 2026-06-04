@@ -51,7 +51,7 @@ The significance of SBOMs is underscored by several key factors:
 
 ## Docker Hardened Image SBOMs
 
-Docker Hardened Images come with built-in SBOMs, ensuring that every component
+Docker Hardened Images have SBOMs, ensuring that every component
 in the image is documented and verifiable. These SBOMs are cryptographically
 signed, providing a tamper-evident record of the image's contents. This
 integration simplifies audits and enhances trust in the software supply chain.
