@@ -151,9 +151,17 @@ $ sbx exec <sandbox-name> -- sudo update-ca-certificates
 > `forward` egress path fail.
 
 If API calls still fail after installing the CA, run `sbx policy log` and check
-whether the request used `forward`, `forward-bypass`, or `transparent` in the
-**PROXY** column. That can help identify whether the request is eligible for
-credential injection or is reaching an upstream proxy directly.
+the egress path in the **PROXY** column:
+
+- `forward`: the credential proxy terminates TLS and presents its own
+  certificate, which the sandbox already trusts. Requests on this path don't
+  need the internal CA, and overriding the sandbox's trust variables breaks
+  them, as described above.
+- `forward-bypass` and `transparent`: the proxy forwards packets to the
+  upstream proxy without terminating TLS, so the sandbox sees your
+  organization's certificate directly. These paths are where installing the
+  internal CA applies. The only difference between them is whether the client
+  knows it's talking to a proxy.
 
 ## Docker build export fails with an ownership error
 
