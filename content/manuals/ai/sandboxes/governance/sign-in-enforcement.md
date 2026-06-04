@@ -7,7 +7,7 @@ keywords: docker sandboxes, sign-in enforcement, organization enforcement, sbx l
 ---
 
 Sign-in enforcement restricts Docker Sandboxes to users who are members of
-specific Docker Hub organizations. An administrator deploys an enforcement
+specific Docker organizations. An administrator deploys an enforcement
 configuration to managed endpoints, and `sbx login` verifies organization
 membership after the user authenticates. If the check fails, credentials are
 immediately revoked and the user can't run sandboxes.
@@ -17,46 +17,27 @@ bypass organization [governance policies](org.md). Sign-in enforcement closes
 that gap at the endpoint, where users can't override it.
 
 > [!NOTE]
-> Sandbox organization governance is available on a separate paid
-> subscription.
+> Sign-in enforcement is part of Docker's AI Governance offering.
 > [Contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
-> to request access.
+> to learn more.
 
 ## How it works
 
 1. An administrator deploys an enforcement configuration to managed endpoints
    through MDM, Group Policy, or configuration management, specifying one or
-   more allowed Docker Hub organization slugs.
-2. When a user runs `sbx login`, they authenticate with Docker Hub. Credentials
-   are saved temporarily, then Docker Sandboxes calls the Docker Hub API to
+   more allowed Docker organization slugs.
+2. When a user runs `sbx login`, they authenticate with Docker. Credentials
+   are saved temporarily, then Docker Sandboxes calls the Docker API to
    verify organization membership.
 3. If the user belongs to at least one allowed organization, login succeeds and
    the credentials are kept.
 4. If not, Docker Sandboxes immediately revokes the saved credentials and the
    user receives an [error message](#error-messages) listing the required
-   organizations. If the revocation fails, for example due to a keychain error,
-   the user is instructed to run `sbx logout` manually.
+   organizations.
 
 `sbx login` and `sbx logout` always run regardless of organization membership.
 Other commands require a valid signed-in session, so they fail after a denied
 login until the user signs in with an allowed account.
-
-Enforcement applies at login time only. There's no per-command or per-request
-check. This has a few key consequences:
-
-- Enforcement is fail-closed. If the Docker Hub API is unreachable or returns
-  an error, login is denied. Users can't bypass enforcement by going offline.
-- Users who are already signed in aren't affected immediately. If a user was
-  signed in before the configuration was deployed, they keep their session
-  until it ends. To re-trigger the check, they run `sbx login` again.
-- Automatic sign-in is also checked. If a user's Docker session expires while
-  they use the CLI from an interactive terminal, the CLI starts the sign-in
-  flow automatically, and the enforcement check runs against that sign-in the
-  same way it does for an explicit `sbx login`.
-
-> [!NOTE]
-> A denied user is signed out, so they can't run `sbx ls` or `sbx rm` to clean
-> up existing sandboxes until they sign in with an allowed account.
 
 ## Enforcement configuration
 
@@ -72,12 +53,12 @@ representation:
 }
 ```
 
-| Field         | Type            | Required | Description                                                                                             |
-| ------------- | --------------- | -------- | ------------------------------------------------------------------------------------------------------- |
-| `allowedOrgs` | list of strings | Yes      | Docker Hub organization slugs. The user must be a member of at least one. Matching is case-insensitive. |
-| `adminName`   | string          | No       | Administrator or team display name shown in the denial message.                                         |
-| `adminEmail`  | string          | No       | Contact email shown in the denial message.                                                              |
-| `adminURL`    | string          | No       | Help desk or access-request URL shown in the denial message.                                            |
+| Field         | Type            | Required | Description                                                                                         |
+| ------------- | --------------- | -------- | --------------------------------------------------------------------------------------------------- |
+| `allowedOrgs` | list of strings | Yes      | Docker organization slugs. The user must be a member of at least one. Matching is case-insensitive. |
+| `adminName`   | string          | No       | Administrator or team display name shown in the denial message.                                     |
+| `adminEmail`  | string          | No       | Contact email shown in the denial message.                                                          |
+| `adminURL`    | string          | No       | Help desk or access-request URL shown in the denial message.                                        |
 
 If `allowedOrgs` is empty or missing, enforcement is inactive and any
 authenticated user can use Docker Sandboxes.
@@ -96,10 +77,10 @@ platform reads it from a native location that ordinary users can't modify.
 
 On macOS, the configuration is a managed preferences domain, `com.docker.sbx`.
 
-Deploy it through any MDM solution, such as Jamf, Mosyle, Kandji, Intune, or
-Fleet, as a custom configuration profile. MDM-deployed profiles take precedence
-over user-level preferences and can only be removed by removing the device from
-MDM management, so users can't override them.
+Deploy it through any MDM solution, such as Jamf or Intune, as a custom
+configuration profile. MDM-deployed profiles take precedence over user-level
+preferences and can only be removed by removing the device from MDM management,
+so users can't override them.
 
 The following `.mobileconfig` payload sets the allowed organization and admin
 contact details:
@@ -176,10 +157,6 @@ settings in the same domain are ignored.
 {{< /tab >}}
 {{< tab name="Windows" >}}
 
-On Windows, the configuration is the registry key
-`HKLM\SOFTWARE\Policies\Docker\SBX`. The `HKLM\SOFTWARE\Policies\` hive is
-writable only by administrators.
-
 Deploy it through Group Policy, Intune, or any endpoint management tool that can
 write registry values.
 
@@ -248,11 +225,6 @@ The Linux loader fails closed if the file is a symlink, isn't a regular file,
 isn't owned by root, or is writable by group or other. Any deviation is treated
 as a configuration error and `sbx login` is denied with a descriptive message.
 Deploying with the commands above passes these checks.
-
-> [!NOTE]
-> Linux enforcement is weaker than macOS and Windows because users with sudo
-> access can modify or delete the file. This is an industry-wide limitation for
-> developer workstations.
 
 {{< /tab >}}
 {{< /tabs >}}
