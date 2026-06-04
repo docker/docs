@@ -148,6 +148,10 @@ Refer to the following section for a list of events and their descriptions:
 
 ### Offload events
 
+> [!NOTE]
+>
+> Event descriptions show the Docker username of the actor and details about the lease.
+
 | Event                                                          | Description                                   |
 |:------------------------------------------------------------------|:------------------------------------------------|
 | Offload Lease Start | Occurs when an Offload lease is started in your organization. |
