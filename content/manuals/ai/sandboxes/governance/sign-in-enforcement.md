@@ -293,5 +293,5 @@ For access, contact ACME IT Security:
   filesystem rules from the Docker Admin Console
 - [Governance overview](_index.md): how local and organization governance fit
   together
-- [Enforce sign-in for Docker Desktop](/manuals/enterprise/security/enforce-sign-in/):
+- [Enforce sign-in for Docker Desktop](/manuals/enterprise/security/enforce-sign-in/_index.md):
   the equivalent control for Docker Desktop
