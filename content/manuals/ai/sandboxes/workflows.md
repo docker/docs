@@ -259,8 +259,10 @@ the full reference.
 
 ### Sourcing credentials from 1Password
 
-If you store credentials in 1Password, use `op read` to populate `sbx` secrets
-without pasting values manually:
+#### Populating stored secrets with `op read`
+
+Use `op read` to populate stored secrets without pasting values manually. Store
+the value once and it's available to all future sandboxes:
 
 ```console
 $ op read "op://Work/GitHub/token" | sbx secret set -g github
@@ -269,6 +271,37 @@ $ op read "op://Work/Anthropic/credential" | sbx secret set -g anthropic
 
 The real value stays on your host; the sandbox sees the proxy-managed
 placeholder as usual.
+
+#### Per-launch injection with `op run`
+
+To resolve credentials fresh from your vault on each launch without storing
+them via `sbx secret set`, use `op run`:
+
+```console
+$ ANTHROPIC_API_KEY="op://Work/Anthropic/credential" op run -- sbx run claude
+$ OPENAI_API_KEY="op://Work/OpenAI/key" op run -- sbx run codex
+$ GEMINI_API_KEY="op://Work/Google/key" op run -- sbx run gemini
+```
+
+`op run` resolves each `op://` reference in the environment before executing
+`sbx`. The sandbox reads the
+[built-in service environment variables](security/credentials.md#built-in-services)
+at launch and routes them through its proxy — the credential is never stored in
+sbx's state and never appears inside the sandbox container.
+
+This only applies to those specific credential variables. The sandbox does not
+forward arbitrary environment variables from the host into the sandbox.
+
+For multiple credentials at once, use `--env-file` with a file of `op://`
+references:
+
+```console
+$ cat .sbx-secrets.env
+ANTHROPIC_API_KEY=op://Work/Anthropic/credential
+GITHUB_TOKEN=op://Work/GitHub/token
+
+$ op run --env-file=.sbx-secrets.env -- sbx run claude
+```
 
 ## CI and headless use
 
