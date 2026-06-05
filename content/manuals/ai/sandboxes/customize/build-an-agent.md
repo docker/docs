@@ -328,6 +328,4 @@ the host to `sbx secret rm`:
 $ sbx secret rm -g --host ampcode.com
 ```
 
-The `--host` flag on `sbx secret rm` isn't listed in
-`sbx secret rm --help`, but it's the only way to remove entries
-created with `set-custom`. It's experimental and may change.
+The `--host` flag is part of the experimental `set-custom` surface and doesn't appear in `sbx secret rm --help`.
