@@ -289,7 +289,7 @@ $ GEMINI_API_KEY="op://Work/Google/key" op run -- sbx run gemini
 at launch and routes them through its proxy — the credential is never stored in
 sbx's state and never appears inside the sandbox container.
 
-This only applies to those specific credential variables. Sandboxes does not
+This only applies to those specific credential variables. The sandbox does not
 forward arbitrary environment variables from the host into the sandbox.
 
 For multiple credentials at once, use `--env-file` with a file of `op://`
