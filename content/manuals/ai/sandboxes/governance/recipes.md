@@ -35,10 +35,10 @@ Console or through the [Governance API](/reference/api/ai-governance/).
 
 ### Admin Console
 
-In the [Admin Console](https://app.docker.com/admin), go to
-**AI governance > Network access** and add the listed hostnames as allow rules.
-You can paste multiple hostnames at once, one per line. Group related hosts into
-a single rule with a descriptive name so the rule list stays readable.
+Follow the steps in [Create a policy](org.md#create-a-policy) to open the
+**Network access** policy form. Add the listed hostnames as allow rules — you
+can paste multiple hostnames at once, one per line. Group related hosts into a
+single rule with a descriptive name so the rule list stays readable.
 
 ### API
 
