@@ -505,11 +505,80 @@ credentials:
 | -------------------------- | ------------------------------------------------------------- |
 | `sources`                  | Map of service identifier to credential source.               |
 | `sources.<id>.env`         | Environment variables to read on the host, in priority order. |
-| `sources.<id>.file.path`   | Path on host. `~` expands to home.                            |
-| `sources.<id>.file.parser` | How to extract the value (for example, `"json:apiKey"`).      |
+| `sources.<id>.file.path`   | Path on host. `~` expands to home directory.                  |
+| `sources.<id>.file.parser` | How to extract the credential value from the file.            |
 | `sources.<id>.priority`    | `env-first` (default) or `file-first`.                        |
 
 Service identifiers link credentials to [network rules](#network).
+
+#### file.parser
+
+`file.parser` tells the proxy how to extract a credential from the file at `file.path`.
+Omit it for plain-text files; set it to `json:<dot.path>` to extract a field from a JSON file.
+
+| Value             | Behavior                                                                             |
+| ----------------- | ------------------------------------------------------------------------------------ |
+| omitted or empty  | Reads the entire file as the credential. Leading and trailing whitespace is trimmed. |
+| `json:<dot.path>` | Parses the file as JSON and returns the value at the dot-separated path.             |
+| any other value   | Rejected — `unsupported parser: <value>`.                                            |
+
+For `json:` paths, segments are separated by `.` (for example, `json:credentials.github.token`).
+Only object keys can be navigated — arrays are not supported and there is no `[0]`-style indexing.
+Keys that contain a literal `.` cannot be referenced. The resolved value must be a string, number,
+or boolean; numbers and booleans are converted to strings. Objects, arrays, and null are rejected.
+
+When a source has both `env` and `file` defined, `priority` controls which is tried first. The
+preferred source is used when it exists — the environment variable is set, or the file is
+present on disk. If it doesn't, the other source is used instead. The choice is made once at
+discovery time, so parser errors (missing JSON field, wrong value type, invalid JSON) surface
+as errors rather than triggering a fallback.
+
+Plain-text token file:
+
+```yaml
+credentials:
+  sources:
+    openai:
+      file:
+        path: "~/.openai/token"
+```
+
+Nested JSON field, with an environment variable as fallback:
+
+```yaml
+credentials:
+  sources:
+    github:
+      env:
+        - GH_TOKEN
+      file:
+        path: "~/.config/myapp/creds.json"
+        parser: "json:credentials.github.token"
+      priority: file-first
+```
+
+Given `~/.config/myapp/creds.json`:
+
+```json
+{
+  "credentials": {
+    "github": { "token": "ghp_xyz", "expires": "2026-12-31" }
+  }
+}
+```
+
+The proxy resolves the credential to `ghp_xyz`, falling back to `GH_TOKEN` if the file is
+missing. If the file exists but the JSON path doesn't resolve, the request fails with the
+parser error below instead of falling back.
+
+Common errors when using `json:` parsers:
+
+| Error message                                 | Cause                                                               |
+| --------------------------------------------- | ------------------------------------------------------------------- |
+| `field 'X' not found in JSON`                 | The path doesn't exist in the file.                                 |
+| `cannot navigate to field 'X': not an object` | A path segment hit a string, array, or scalar instead of an object. |
+| `field 'X' is not a string value`             | The resolved value is an object, array, or null.                    |
+| `failed to parse JSON: ...`                   | The file is not valid JSON.                                         |
 
 ### Network
 
@@ -525,13 +594,13 @@ network:
       valueFormat: <format>
 ```
 
-| Field                     | Description                                                      |
-| ------------------------- | ---------------------------------------------------------------- |
-| `allowedDomains`          | Domains the sandbox can reach. Wildcards supported.              |
-| `deniedDomains`           | Domains the sandbox can't reach. Deny rules take precedence.     |
-| `serviceDomains`          | Map of domain to service identifier from `credentials.sources`.  |
-| `serviceAuth.headerName`  | HTTP header the proxy sets (for example, `Authorization`).       |
-| `serviceAuth.valueFormat` | Format string for the header value (for example, `"Bearer %s"`). |
+| Field                     | Description                                                                                                                          |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `allowedDomains`          | Domains the sandbox can reach. Wildcards supported.                                                                                  |
+| `deniedDomains`           | Domains the sandbox is blocked from reaching. Deny rules take precedence over allow rules, including those from other composed kits. |
+| `serviceDomains`          | Map of domain to service identifier from `credentials.sources`.                                                                      |
+| `serviceAuth.headerName`  | HTTP header the proxy sets (for example, `Authorization`).                                                                           |
+| `serviceAuth.valueFormat` | Format string for the header value (for example, `"Bearer %s"`).                                                                     |
 
 ### Environment
 
