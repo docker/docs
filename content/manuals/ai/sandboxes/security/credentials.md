@@ -173,9 +173,8 @@ network policy. For details, see
 ## Custom secrets
 
 > [!IMPORTANT]
-> Custom secrets are experimental. The `set-custom` command is hidden
-> from `sbx --help`, and behavior, flags, and the placeholder format may
-> change.
+> Custom secrets are experimental. Behavior, flags, and the placeholder format may
+> change without notice.
 
 For credentials that don't fit the service-identifier model — for example,
 when an agent validates the environment variable format at boot, or when the
