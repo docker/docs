@@ -41,13 +41,13 @@ $ sbx policy log
 Then allow the domains your workflow needs:
 
 ```console
-$ sbx policy allow network -g "*.npmjs.org,*.pypi.org,files.pythonhosted.org"
+$ sbx policy allow network "*.npmjs.org,*.pypi.org,files.pythonhosted.org"
 ```
 
 To allow all outbound traffic instead:
 
 ```console
-$ sbx policy allow network -g "**"
+$ sbx policy allow network "**"
 ```
 
 If `sbx policy allow` doesn't unblock the request, your organization may
@@ -61,7 +61,7 @@ the destination IP address and port. For example, to allow SSH to a specific
 host:
 
 ```console
-$ sbx policy allow network -g "10.1.2.3:22"
+$ sbx policy allow network "10.1.2.3:22"
 ```
 
 Hostname-based rules (for example, `myhost:22`) don't work for non-HTTP

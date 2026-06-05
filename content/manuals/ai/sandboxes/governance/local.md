@@ -29,9 +29,9 @@ For domain patterns, wildcards, CIDR ranges, and filesystem path syntax, see
 The only way traffic can leave a sandbox is through an HTTP/HTTPS proxy on
 your host, which enforces access rules on every outbound request. Non-HTTP TCP
 traffic, including SSH, can be allowed by adding a policy rule for the
-destination IP and port (for example, `sbx policy allow network -g
-"10.1.2.3:22"`). UDP and ICMP are blocked at the network layer and can't be
-unblocked with policy rules.
+destination IP and port (for example, `sbx policy allow network "10.1.2.3:22"`).
+UDP and ICMP are blocked at the network layer and can't be unblocked with policy
+rules.
 
 On first start, and after running `sbx policy reset`, the daemon prompts you
 to choose a network preset:
@@ -46,10 +46,10 @@ Choose a default network policy:
   Use ↑/↓ to navigate, Enter to select, or press 1–3.
 ```
 
-| Preset | Description |
-| ------ | ----------- |
-| Open | All outbound traffic is allowed. Equivalent to adding a wildcard allow rule with `sbx policy allow network -g "**"`. |
-| Balanced | Default deny, with a baseline allowlist covering AI provider APIs, package managers, code hosts, container registries, and common cloud services. |
+| Preset      | Description                                                                                                                                       |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Open        | All outbound traffic is allowed. Equivalent to adding a wildcard allow rule with `sbx policy allow network "**"`.                                 |
+| Balanced    | Default deny, with a baseline allowlist covering AI provider APIs, package managers, code hosts, container registries, and common cloud services. |
 | Locked Down | All outbound traffic is blocked, including model provider APIs (for example, `api.anthropic.com`). You must explicitly allow everything you need. |
 
 The **Balanced** preset's baseline allowlist is a good starting point for most
@@ -76,38 +76,38 @@ Available values are `allow-all`, `balanced`, and `deny-all`.
 
 Use [`sbx policy allow`](/reference/cli/sbx/policy/allow/) and
 [`sbx policy deny`](/reference/cli/sbx/policy/deny/) to add or restrict access
-on top of the active preset. Changes take effect immediately. Pass `-g` to
-apply a rule globally to all sandboxes:
+on top of the active preset. Changes take effect immediately. Rules apply to
+all sandboxes by default:
 
 ```console
-$ sbx policy allow network -g api.anthropic.com
-$ sbx policy deny network -g ads.example.com
+$ sbx policy allow network api.anthropic.com
+$ sbx policy deny network ads.example.com
 ```
 
-Pass a sandbox name to scope a rule to one sandbox:
+Pass `--sandbox <name>` to scope a rule to one sandbox:
 
 ```console
-$ sbx policy allow network my-sandbox api.example.com
-$ sbx policy deny network my-sandbox ads.example.com
+$ sbx policy allow network --sandbox my-sandbox api.example.com
+$ sbx policy deny network --sandbox my-sandbox ads.example.com
 ```
 
 Specify multiple hosts in one command with a comma-separated list:
 
 ```console
-$ sbx policy allow network -g "api.anthropic.com,*.npmjs.org,*.pypi.org"
+$ sbx policy allow network "api.anthropic.com,*.npmjs.org,*.pypi.org"
 ```
 
 Remove a rule by resource or by rule ID:
 
 ```console
-$ sbx policy rm network -g --resource ads.example.com
-$ sbx policy rm network -g --id 2d3c1f0e-4a73-4e05-bc9d-f2f9a4b50d67
+$ sbx policy rm network --resource ads.example.com
+$ sbx policy rm network --id 2d3c1f0e-4a73-4e05-bc9d-f2f9a4b50d67
 ```
 
-To remove a sandbox-scoped rule, include the sandbox name:
+To remove a sandbox-scoped rule, pass `--sandbox <name>`:
 
 ```console
-$ sbx policy rm network my-sandbox --resource api.example.com
+$ sbx policy rm network --sandbox my-sandbox --resource api.example.com
 ```
 
 To inspect which rules are active and where they come from, use

@@ -239,7 +239,7 @@ $ sbx policy ls
 To allow a specific host:
 
 ```console
-$ sbx policy allow network -g registry.npmjs.org
+$ sbx policy allow network registry.npmjs.org
 ```
 
 With **Locked Down**, even your model provider API is blocked unless you
