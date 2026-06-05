@@ -28,10 +28,6 @@ options:
       experimental: true
       usage: |
         Kit reference (directory, ZIP, or OCI). Can be specified multiple times
-    - name: mcp
-      default_value: '[]'
-      usage: |
-        MCP server name to enable (use 'all' for all registered servers). Can be specified multiple times
     - name: memory
       shorthand: m
       usage: |

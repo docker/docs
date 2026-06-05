@@ -2,10 +2,16 @@ name: sbx kit pull
 synopsis: Pull a kit artifact from an OCI registry
 experimental: true
 description: |-
-    Pull a kit artifact from an OCI registry and save it as a ZIP file.
+    Pull a kit artifact from an OCI registry and save its layer payload to a file.
 
     The reference should be in the format "registry/repo:tag" or
     "registry/repo@sha256:digest" (e.g., "ghcr.io/myorg/my-plugin:1.0").
+
+    The file extension is chosen automatically based on the kit's format:
+      schemaVersion: "1"  → <name>.zip      (legacy ZIP archive)
+      schemaVersion: "2"  → <name>.tar.gz   (standard OCI tar+gzip layer)
+
+    The registry must support HTTPS.
 
     Authentication: sbx registry secrets (sbx secret set --registry) take priority, falling back to the Docker credential store.
 usage: sbx kit pull REFERENCE [flags]
@@ -16,11 +22,11 @@ options:
       usage: help for pull
     - name: output
       shorthand: o
-      usage: 'Output ZIP file path (default: derived from reference)'
+      usage: 'Output file path (default: derived from reference + format)'
 inherited_options:
     - name: debug
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
 see_also:
-    - sbx kit - Manage kit artifacts
+    - sbx kit - (Experimental) Manage kit artifacts

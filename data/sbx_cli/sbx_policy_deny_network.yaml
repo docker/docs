@@ -6,32 +6,30 @@ description: |-
     RESOURCES is a comma-separated list of hostnames, domains, or IP addresses.
     Deny rules always take precedence over allow rules.
 
-    Use -g/--global to apply the rule globally to all sandboxes, or provide
-    SANDBOX before RESOURCES to add the rule to policy "local" scoped to that
-    sandbox.
-usage: sbx policy deny network [-g | SANDBOX] RESOURCES [flags]
+    The rule applies globally to all sandboxes by default. Use --sandbox to add
+    the rule to policy "local" scoped to a single sandbox instead.
+usage: sbx policy deny network [--sandbox SANDBOX] RESOURCES [flags]
 options:
-    - name: global
-      shorthand: g
-      default_value: "false"
-      usage: Apply the rule globally to all sandboxes
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for network
+    - name: sandbox
+      usage: |
+        Scope the rule to a specific sandbox (default: all sandboxes)
 inherited_options:
     - name: debug
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
 example: |4-
-      # Block access to a host globally
-      sbx policy deny network -g ads.example.com
+      # Block access to a host (all sandboxes)
+      sbx policy deny network ads.example.com
 
       # Block a host only for a specific sandbox
-      sbx policy deny network my-sandbox ads.example.com
+      sbx policy deny network --sandbox my-sandbox ads.example.com
 
-      # Block all outbound traffic globally
-      sbx policy deny network -g "**"
+      # Block all outbound traffic
+      sbx policy deny network "**"
 see_also:
     - sbx policy deny - Add a deny rule for sandboxes

@@ -33,4 +33,4 @@ example: |4-
       # Add a kit from a git repository
       sbx kit add my-sandbox git+https://github.com/org/kits.git#dir=mcp-postgres
 see_also:
-    - sbx kit - Manage kit artifacts
+    - sbx kit - (Experimental) Manage kit artifacts

@@ -7,6 +7,13 @@ description: |-
     The directory must contain a valid spec.yaml. The reference should be
     in the format "registry/repo:tag" (e.g., "ghcr.io/myorg/my-plugin:1.0").
 
+    The OCI artifact format is selected from the kit's spec.yaml:
+      schemaVersion: "1"  → legacy ZIP-based artifact
+      schemaVersion: "2"  → v2 tar+gzip layer with the spec in the manifest
+                            config blob and standard OCI annotations (so
+                            distribution tooling can read kit metadata
+                            without pulling layers)
+
     Authentication uses the Docker credential store.
 usage: sbx kit push DIRECTORY REFERENCE [flags]
 options:
@@ -20,4 +27,4 @@ inherited_options:
       default_value: "false"
       usage: Enable debug logging
 see_also:
-    - sbx kit - Manage kit artifacts
+    - sbx kit - (Experimental) Manage kit artifacts

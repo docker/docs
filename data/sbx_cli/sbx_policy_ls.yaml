@@ -1,10 +1,13 @@
 name: sbx policy ls
 synopsis: List sandbox policy rules
 description: |-
-    List all active policy rules.
+    List active policy rules.
 
     Displays the provenance, scope, rule name (or ID if no name is set), type,
     decision (allow/deny), and the associated resources for each rule.
+
+    When remote governance is active, inactive policy rules are hidden by default.
+    Use --include-inactive to show inactive rules for troubleshooting.
 
     When SANDBOX is specified, only policies that apply to that sandbox are shown
     (global rules plus rules scoped to that sandbox).
@@ -14,6 +17,9 @@ options:
       shorthand: h
       default_value: "false"
       usage: help for ls
+    - name: include-inactive
+      default_value: "false"
+      usage: Show inactive policy rules hidden by remote governance
     - name: type
       default_value: all
       usage: 'Filter policies by type: "all" or "network" (default "all")'
@@ -31,5 +37,8 @@ example: |4-
 
       # List policies that apply to a specific sandbox
       sbx policy ls my-sandbox
+
+      # Include inactive rules hidden by remote governance
+      sbx policy ls --include-inactive
 see_also:
     - sbx policy - Manage sandbox policies
