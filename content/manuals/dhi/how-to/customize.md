@@ -561,8 +561,8 @@ these rules:
 - Your customization's environment settings take precedence. An artifact's
   variable is only applied if the corresponding key is absent or empty in your
   customization.
-- `PATH` is an exception. Artifact `PATH` entries are prepended to the
-  existing `PATH`, giving them runtime precedence.
+- `PATH` is an exception. Artifact `PATH` entries are added to the front of
+  the existing `PATH`, giving them runtime precedence.
 
 This differs from `COPY --from` in a Dockerfile, which copies files without
 inheriting environment variables from the source image. To include files from
