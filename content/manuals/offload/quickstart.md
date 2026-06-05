@@ -17,8 +17,7 @@ This quickstart covers the steps developers need to get started with Docker Offl
 
 > [!NOTE]
 >
-> If you're an organization owner, to get started you must [contact
-> sales](https://www.docker.com/pricing/contact-sales/) and subscribe your
+> If you're an organization owner, to get started you must <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_offload_quickstart" class="link" rel="noopener">contact sales</a> and subscribe your
 > organization to use Docker Offload. After subscribing, see [Manage Docker
 > products](../admin/organization/manage/manage-products.md) to learn how to manage
 > access for the developers in your organization.

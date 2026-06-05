@@ -88,7 +88,7 @@ addresses:
    > To invite members, you can purchase more seats, or remove some email
    > addresses from the CSV file and re-select the new file. To purchase more
    > seats, see [Add seats to your subscription](/manuals/admin/organization/manage/manage-seats.md#add-seats-to-your-subscription) or
-   > [Contact sales](https://www.docker.com/pricing/contact-sales/).
+   > <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_admin_invite_users" class="link" rel="noopener">Contact sales</a>.
 
 1. After the CSV file has been uploaded, select **Review**.
 

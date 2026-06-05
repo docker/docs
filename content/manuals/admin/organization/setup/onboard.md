@@ -93,7 +93,7 @@ receive your Docker subscription benefits.
      with your organization's domain. Ensure your users verify their email address.
 1. Identify Docker accounts associated with your organization's domain:
    - Ask your Docker sales representative or
-     [contact sales](https://www.docker.com/pricing/contact-sales/) to get a list
+     <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_org_onboarding" class="link" rel="noopener">contact sales</a> to get a list
      of Docker accounts that use an email address in your organization's domain.
 
 ### Step two: Invite owners

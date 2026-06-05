@@ -10,7 +10,7 @@ Licenses let you selectively choose which of your organization members have acce
 
 > [!TIP]
 > To learn more about product licenses, Docker Core seats, and other Docker add-ons see [scale your subscription](/manuals/subscription/scale.md), 
-> or [contact sales](https://www.docker.com/pricing/contact-sales/) to purchase licenses.
+> or <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_admin_licenses" class="link" rel="noopener">contact sales</a> to purchase licenses.
 
 ## Manage licenses
 

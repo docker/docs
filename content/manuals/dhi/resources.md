@@ -84,7 +84,7 @@ organization:
   personalized demo and information about DHI Select and Enterprise subscriptions
 - [Request an image](https://github.com/docker-hardened-images/catalog/issues):
   Submit a request for a specific Docker Hardened Image
-- [Contact Sales](https://www.docker.com/pricing/contact-sales/): Connect with
+- <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_dhi_resources" class="link" rel="noopener">Contact Sales</a>: Connect with
   Docker sales team for enterprise inquiries
 - [Docker Support](https://www.docker.com/support/): Access support resources
   for DHI Select and Enterprise customers
