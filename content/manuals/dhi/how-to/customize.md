@@ -101,9 +101,7 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
       > image build still succeeds, but you may have issues when running the
       > image.
 
-      To learn more about OCI artifacts, including how to create them, best
-      practices, and how environment variables behave, see
-      [OCI artifacts](#oci-artifacts).
+      For more details, see [OCI artifacts](#oci-artifacts).
 
    1. In the **Scripts** section, you can add, edit, or remove scripts.
 
@@ -489,8 +487,7 @@ compression: ZSTD
 
 In DHI customization, OCI artifacts are Docker images containing files you
 want to layer into your image, such as custom certificates, internal tools, or
-configuration files. This section covers how to build these artifact images and
-how they interact with your customization.
+configuration files.
 
 ### Create an OCI artifact image
 
@@ -565,10 +562,9 @@ these rules:
   the existing `PATH`, giving them runtime precedence.
 
 This differs from `COPY --from` in a Dockerfile, which copies files without
-inheriting environment variables from the source image. To include files from
-an OCI artifact without inheriting its environment variables, build the
-artifact using a `FROM scratch` final stage, as described in
-[Create an OCI artifact image](#create-an-oci-artifact-image).
+inheriting environment variables from the source image. To avoid inheriting
+environment variables, build the artifact using a `FROM scratch` final stage.
+See [Create an OCI artifact image](#create-an-oci-artifact-image).
 
 ### Best practices
 
