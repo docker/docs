@@ -311,6 +311,9 @@ The proxy reads the variable from your terminal session. See individual
 - For Claude Code and Codex, OAuth is another secure option: the flow runs on
   the host, so the token is never exposed inside the sandbox. For Claude Code,
   use `/login` inside the agent. For Codex, run `sbx secret set -g openai --oauth`.
+- If you store credentials in 1Password, see
+  [Sourcing credentials from 1Password](../workflows.md#sourcing-credentials-from-1password)
+  for how to use `op read` and `op run` with `sbx`.
 
 ## Custom templates and placeholder values
 
