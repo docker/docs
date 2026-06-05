@@ -109,6 +109,60 @@ configured to use the forward proxy. See
 [Monitoring network activity](governance/monitoring.md)
 for details.
 
+## API calls fail with a certificate error
+
+If your organization uses a proxy that inspects HTTPS traffic, agent requests
+can fail with a certificate error such as
+`SSL certificate problem: self-signed certificate in certificate chain`. Install
+your organization's internal root CA inside the sandbox so the agent and its
+SDKs trust certificates signed by the proxy. Certificate errors can stop a
+request before the credential proxy can inject credentials.
+
+For repeatable setup, create a [sandbox kit](customize/kits.md) that installs
+the CA when the sandbox is created. See
+[Install an internal CA certificate](customize/kit-examples.md#install-an-internal-ca-certificate)
+for an example kit.
+
+Use a PEM-encoded certificate with a `.crt` extension. If traffic can be signed
+by more than one internal proxy, install each proxy's root CA before running
+`update-ca-certificates`.
+
+Create a sandbox with the kit:
+
+```console
+$ sbx run claude --kit ./internal-ca/
+```
+
+To update an existing sandbox, copy the certificate into the sandbox and update
+the trust store:
+
+```console
+$ sbx cp ./internal-ca.crt <sandbox-name>:/tmp/internal-ca.crt
+$ sbx exec <sandbox-name> -- sudo install -m 0644 /tmp/internal-ca.crt /usr/local/share/ca-certificates/internal-ca.crt
+$ sbx exec <sandbox-name> -- sudo update-ca-certificates
+```
+
+> [!IMPORTANT]
+> Install the CA into the system trust store with `update-ca-certificates`, as
+> shown above. Don't override the sandbox's TLS trust variables (such as
+> `SSL_CERT_FILE`) to point at only your internal CA. Doing so replaces the
+> system bundle
+> and breaks the trust the credential proxy depends on, so requests on the
+> `forward` egress path fail.
+
+If API calls still fail after installing the CA, run `sbx policy log` and check
+the egress path in the **PROXY** column:
+
+- `forward`: the credential proxy terminates TLS and presents its own
+  certificate, which the sandbox already trusts. Requests on this path don't
+  need the internal CA, and overriding the sandbox's trust variables breaks
+  them, as described above.
+- `forward-bypass` and `transparent`: the proxy forwards packets to the
+  upstream proxy without terminating TLS, so the sandbox sees your
+  organization's certificate directly. These paths are where installing the
+  internal CA applies. The only difference between them is whether the client
+  knows it's talking to a proxy.
+
 ## Docker build export fails with an ownership error
 
 Running `docker build` with the local exporter (`--output=type=local` or `-o
