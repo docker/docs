@@ -49,9 +49,9 @@ exchanging Docker Hub credentials. The examples use
 
 ```bash
 # 1. Exchange a Docker Hub PAT or OAT for a bearer token.
-TOKEN=$(curl -s -X POST https://hub.docker.com/v2/users/login \
+TOKEN=$(curl -s -X POST https://hub.docker.com/v2/auth/token \
   -H "Content-Type: application/json" \
-  -d '{"username":"my-user","password":"dckr_pat_xxxxxxxx"}' | jq -r .token)
+  -d '{"identifier":"my-user","secret":"dckr_pat_xxxxxxxx"}' | jq -r .access_token)
 
 # 2. Create an empty policy for the org and capture its ID.
 POLICY_ID=$(curl -s -X POST \
@@ -197,9 +197,9 @@ essentials, the npm registry, and the Claude Code agent block.
 
 ```bash
 # Authenticate and create the policy.
-TOKEN=$(curl -s -X POST https://hub.docker.com/v2/users/login \
+TOKEN=$(curl -s -X POST https://hub.docker.com/v2/auth/token \
   -H "Content-Type: application/json" \
-  -d '{"username":"my-user","password":"dckr_pat_xxxxxxxx"}' | jq -r .token)
+  -d '{"identifier":"my-user","secret":"dckr_pat_xxxxxxxx"}' | jq -r .access_token)
 
 POLICY_ID=$(curl -s -X POST \
   https://hub.docker.com/v2/orgs/my-org/governance/policies \
