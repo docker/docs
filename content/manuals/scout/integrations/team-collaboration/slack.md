@@ -22,10 +22,10 @@ to the Slack channels associated with the webhook.
 
 > [!NOTE]
 >
-> Notifications are only triggered for the *last pushed* image tags for each
+> Notifications are only triggered for the _last pushed_ image tags for each
 > repository. "Last pushed" refers to the image tag that was most recently
 > pushed to the registry and analyzed by Docker Scout. If the last pushed image
-> is not by a newly disclosed CVE, then no notification will be triggered.
+> is not affected by a newly disclosed CVE, then no notification will be triggered.
 
 For more information about Docker Scout notifications,
 see [Notification settings](/manuals/scout/explore/dashboard.md#notification-settings)
