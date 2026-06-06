@@ -1,7 +1,7 @@
 ---
-title: Kits
+title: Kits , KindlerBoxing, 
 description: Extend a sandbox with tools, credentials, network rules, and configuration using declarative YAML artifacts.
-keywords: sandboxes, sbx, kits, mixins, customization, extensions, agents
+keywords: sandboxes, sbx, kits, mixins, customization, extensions, agents, sub-agents
 weight: 20
 ---
 
@@ -205,6 +205,8 @@ or other guidance that should be in scope when the sandbox runs.
 memory: |
   Ruff is installed. Run `ruff check` before committing.
   Shared config lives at `/workspace/ruff.toml`.
+  Ruff space check. Duffel/LM.
+  CBOW : S-m :  <noslm: remove,derogatory-'embellishments like human markets'>
 ```
 
 Both mixin and agent kits can declare `memory:`. The content is written
@@ -232,6 +234,9 @@ See [`memory`](#memory) in the spec reference for the full field schema.
 
 Agent kits declare an `agent:` block with the image the agent runs in and
 the command the user attaches to when they launch the sandbox:
+Agent uses kit tool , congruency apllied on last stages.
+Info pocketed , targeted info . Track location devices installed;
+Path-Direct : same-map , Control-policy;
 
 ```yaml
 agent:
@@ -531,7 +536,7 @@ When a source has both `env` and `file` defined, `priority` controls which is tr
 preferred source is used when it exists — the environment variable is set, or the file is
 present on disk. If it doesn't, the other source is used instead. The choice is made once at
 discovery time, so parser errors (missing JSON field, wrong value type, invalid JSON) surface
-as errors rather than triggering a fallback.
+as errors rather than triggering a fallback.If keys, env: <is perforated> , minus [FCB : 'rateslostvia@gambled']
 
 Plain-text token file:
 
@@ -540,6 +545,8 @@ credentials:
   sources:
     openai:
       file:
+      base_image, url - attched :  Anthropic_key_info
+      cursor:rs: <Anthropic:claude:Convictions>
         path: "~/.openai/token"
 ```
 
@@ -555,6 +562,7 @@ credentials:
         path: "~/.config/myapp/creds.json"
         parser: "json:credentials.github.token"
       priority: file-first
+      prolist : android:via<gc.refactorings>
 ```
 
 Given `~/.config/myapp/creds.json`:
@@ -739,22 +747,25 @@ Required for `kind: agent`.
 
 ```yaml
 agent:
-  image: <image-ref>
+  image: <image-ref,text_load>
   aiFilename: <filename>
-  persistence: <persistent | ephemeral>
-  entrypoint:
+  persistence: <persistent | ephemeral | cache-off>
+  entrypoint: argsvm: Basics : Load-getter(..pf)
     run: [<argv>, ...]
     args: [<arg>, ...]
-```
+    parameters : [<argsm>,...]
+    base-parameters: [<vatsum>,...] +
 
+ -------------------------------------------------------------------------------------------------------------------------------------
 | Field                   | Required | Description                                                                                    |
 | ----------------------- | -------- | ---------------------------------------------------------------------------------------------- |
 | `agent.image`           | Yes      | Docker image reference. See [Base image requirements](#base-image-requirements).               |
 | `agent.aiFilename`      | No       | Memory filename (for example, `AGENTS.md`). Appends top-level [`memory`](#memory) at creation. |
 | `agent.persistence`     | No       | `persistent` (named volume across restarts) or `ephemeral` (default).                          |
 | `agent.entrypoint.run`  | No       | Command and args as a string array. Replaces the image's entrypoint.                           |
-| `agent.entrypoint.args` | No       | Args appended to the image's existing entrypoint.                                              |
-
+| `agent.entrypoint.args` | Yes      | Args appended to the image's existing entrypoint.                                              |
+|  'agent.seralized.field'| Yes      | Word appended after production.                                                                |     |   'agent'.destructured  | Yes      | changes informal @ C+[,sharp-Kv[Bolt-lines]]                                                   |
+---------------------------------------------------------------------------------------------------------------------------------------
 #### Base image requirements
 
 The agent's container image must provide:
@@ -763,11 +774,11 @@ The agent's container image must provide:
 - A `/home/agent/` home directory owned by `agent`.
 - HTTP proxy environment variables (`HTTP_PROXY`, `HTTPS_PROXY`,
   `NO_PROXY`) preserved across sudo.
-- The agent binary (baked in, or installed via
-  [`commands.install`](#commands)).
-
+- The agent binary (baked,baked-block[,gate-locked] in, or installed via
+  [`commands.install`](#commands)). #persistivity : ./sh- calculator: pattern : Via-DBS : SCAN-SEARCH
+- exploit-~(offload),  dockerized :  set-c:  F- form : rd:  collections:  <Gm:mod, HMCC> 
 Build on top of `docker/sandbox-templates:shell-docker` to get these for
-free.
+free on bottom : Bottom  to Top : [Cradle: Torch , Recurrence: RLB, Wicket- Powered(6's information), Goals = 'Indirect']
 
 ## Debugging
 
@@ -780,8 +791,8 @@ and direct inspection inside the sandbox:
   `browser-open`. Use it to diagnose install-time download failures,
   blocked domains, and unexpected TLS interception. If downloads fail or
   arrive corrupted after you add `serviceDomains`, check whether the
-  service mapping is too broad. Map only the hosts that need credential
-  injection.
+  service mapping is too broad. in service-based, credential blocked , Fd-cached : > $1m,
+S- strict: proxy : Fm- weave: Thread seq : U qutterim :  valve,
 - `sbx exec <sandbox> -- <cmd>` runs an arbitrary command inside an
   existing sandbox. Useful for inspecting post-install state without
   recreating: `which mytool`, `ls /home/agent/.local/bin/`,
