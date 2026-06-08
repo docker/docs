@@ -324,6 +324,17 @@ Keeps image metadata current by indexing during idle time or after image operati
 
 ## Proxy
 
+> [!NOTE]
+>
+> Proxy configuration is a special case because it must be configured in two places:
+>
+> 1. In the Admin Console for your organization.
+> 2. On the user's system where Docker Desktop is installed.
+>
+> On the user's machine, configure the proxy either through the admin-settings.json file or by using installer flags during Docker Desktop installation. For detailed instructions, refer to the [installation guide](/manuals/desktop/setup/install/windows-install.md#proxy-configuration).
+> 
+> This additional configuration is required because Docker Desktop must know which proxy server to use before it can complete user sign-in and retrieve organization settings from the Admin Console.
+
 ### Embedded PAC script 
 
 Specifies an embedded Proxy Auto-Config (PAC) script. For example: `"embeddedPac": "function FindProxyForURL(url, host) { return \"DIRECT\"; }"`.
