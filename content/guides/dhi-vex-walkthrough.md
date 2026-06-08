@@ -30,6 +30,23 @@ suppression.
   Trivy and Grype can also run as Docker containers with no installation needed.
 - `jq` (optional), for filtering the VEX file.
 
+## Expose daemon for Windows users
+
+The `-v /var/run/docker.sock:/var/run/docker.sock` socket mount used in the
+containerized scanner commands throughout this guide does not work on Docker
+Desktop for Windows. To use containerized scanners on Windows, go to
+**Settings > General** in Docker Desktop and turn on **Expose daemon on
+tcp://localhost:2375 without TLS**. Then replace
+`-v /var/run/docker.sock:/var/run/docker.sock` with
+`-e DOCKER_HOST=tcp://host.docker.internal:2375` in every containerized
+scanner command.
+
+> [!WARNING]
+>
+> Exposing the daemon on TCP without TLS makes your system vulnerable to
+> remote code execution attacks. Turn off the setting when you are done
+> testing.
+
 ## Step 1: Scan without VEX
 
 Sign in to the Docker Hardened Images registry:
@@ -47,18 +64,6 @@ $ docker pull dhi.io/python:3.13
 Then scan without VEX to see the raw CVE count. Docker Scout automatically
 applies VEX on Docker Hardened Images. To see the unfiltered CVE baseline,
 use Trivy or Grype.
-
-> [!NOTE]
->
-> On Windows, the `-v /var/run/docker.sock:/var/run/docker.sock` socket mount
-> used in the containerized scanner commands throughout this guide does not work
-> on Docker Desktop for Windows. Instead, in Docker Desktop go to **Settings >
-> General** and turn on **Expose daemon on tcp://localhost:2375 without TLS**,
-> then replace `-v /var/run/docker.sock:/var/run/docker.sock` with `-e
-> DOCKER_HOST=tcp://host.docker.internal:2375` in every containerized scanner
-> command. Exposing the daemon on TCP without TLS makes your system vulnerable
-> to remote code execution attacks. Use at your own risk and turn off the setting
-> when you are done testing.
 
 {{< tabs >}}
 {{< tab name="Trivy" >}}
