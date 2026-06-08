@@ -1,0 +1,78 @@
+{{/*
+  file shortcode — child of the `files` shortcode.
+
+  The body must be a fenced code block. The fence's info string is used as
+  the syntax-highlighting language. Wrapping the body in a fence keeps
+  markdownlint and Vale happy (they treat fence content as code and skip
+  lint rules that would otherwise fire on `#` comment lines).
+
+  Usage:
+    {{< file path="app.py" >}}
+    ```python
+    from fastapi import FastAPI
+    ```
+    {{< /file >}}
+
+  Attributes:
+    path      required. File path within the project, can include folders (e.g. "db/password.txt").
+    lang      optional. Overrides the fence info string for syntax highlighting.
+    status    optional. One of "modified" or "new". Shows a colored badge in the file tree.
+    hl_lines  optional. Line numbers/ranges to highlight (e.g. "8" or "6,8-11"). Passed to chroma.
+*/}}
+
+{{ if ne .Parent.Name "files" }}
+  {{- errorf "file shortcode missing its 'files' parent: %s" .Position -}}
+{{ end }}
+
+{{ $path := trim (.Get "path") " " }}
+{{ if not $path }}
+  {{- errorf "file shortcode requires a path attribute: %s" .Position -}}
+{{ end }}
+
+{{ if not (.Parent.Store.Get "files") }}
+  {{ .Parent.Store.Set "files" slice }}
+{{ end }}
+
+{{/* Normalize line endings so CRLF source files behave identically to LF,
+     then trim leading/trailing whitespace so the fence on the first line
+     can be detected. */}}
+{{ $content := .Inner }}
+{{ $content = replace $content "\r\n" "\n" }}
+{{ $content = replace $content "\r" "\n" }}
+{{ $content = strings.TrimLeft "\n\t " $content }}
+{{ $content = strings.TrimRight "\n\t " $content }}
+
+{{/* Body must be wrapped in a fenced code block. Strip the fence and adopt
+     the info string as the default language. */}}
+{{ $lines := split $content "\n" }}
+{{ $lineCount := len $lines }}
+{{ $firstLine := index $lines 0 }}
+{{ $lastLine := index $lines (sub $lineCount 1) }}
+{{ if or (lt $lineCount 2) (not (hasPrefix $firstLine "```")) (ne (trim $lastLine " \t") "```") }}
+  {{- errorf "file %q: body must be a fenced code block (```language ... ```): %s" $path .Position -}}
+{{ end }}
+{{ $fenceLang := trim (strings.TrimPrefix "```" $firstLine) " \t" }}
+{{ $content = delimit (after 1 (first (sub $lineCount 1) $lines)) "\n" }}
+
+{{/* Language: explicit lang= attribute wins; otherwise use the fence info string. */}}
+{{ $lang := .Get "lang" | default $fenceLang }}
+
+{{/* Normalize optional status attribute. */}}
+{{ $status := lower (.Get "status" | default "") }}
+{{ if and $status (not (in (slice "" "modified" "new") $status)) }}
+  {{- errorf "file shortcode 'status' must be \"modified\", \"new\", or empty: %s" .Position -}}
+{{ end }}
+
+{{/* hl_lines: accept either "8" or "8-10" or "6,8-10,12"; chroma expects spaces. */}}
+{{ $hlLines := .Get "hl_lines" | default "" }}
+{{ if $hlLines }}
+  {{ $hlLines = replace $hlLines "," " " }}
+{{ end }}
+
+{{ $.Parent.Store.Add "files" (dict
+  "path" $path
+  "lang" $lang
+  "content" $content
+  "status" $status
+  "hl_lines" $hlLines
+) }}
