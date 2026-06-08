@@ -80,16 +80,36 @@ Both IPv4 and IPv6 notation are supported: `10.0.0.0/8`, `192.168.1.0/24`,
 Filesystem rules use the actions `read` and `write`. Resources are host paths
 that sandboxes can mount as workspaces.
 
+`~` expands to the user's home directory on every platform, including Windows,
+where it resolves to `%USERPROFILE%`. A single `~/**` rule therefore matches
+each user's home tree on macOS, Linux, and Windows. The policy engine expands
+only `~`: it does not expand environment variables, so a pattern such as
+`%USERPROFILE%\**` or `$HOME/**` matches nothing.
+
+For a path outside the home directory, write it in the format the user's
+operating system uses. A rule matches only the format it's written in, so a
+location that several platforms share needs a rule for each:
+
+| Operating system | Example path                               |
+| ---------------- | ------------------------------------------ |
+| macOS, Linux     | `/data/project/**`                         |
+| Windows          | `C:\data\project\**`                       |
+| WSL              | `\\wsl.localhost\<distro>\data\project\**` |
+
+On Windows, `*:` matches any drive letter, so `*:\data\**` matches the path on
+any drive.
+
+Wildcards behave the same way in every path format:
+
 | Pattern            | Example    | Matches                                                    |
 | ------------------ | ---------- | ---------------------------------------------------------- |
 | Exact path         | `/data`    | `/data` only                                               |
 | Segment wildcard   | `/data/*`  | `/data/project`, one path segment only, not subdirectories |
 | Recursive wildcard | `/data/**` | `/data/project`, `/data/project/src`, any depth            |
 
-Use `**` when you intend to match a directory tree recursively. A single `*`
-only matches within one path segment and won't cross directory boundaries.
-For example, `~/**` matches all paths under the home directory, while `~/*`
-matches only direct children of `~`.
+Use `**` to match a directory tree recursively. A single `*` matches within one
+path segment and won't cross a path separator. For example, `~/**` matches all
+paths under the home directory, while `~/*` matches only its direct children.
 
 ## Rule evaluation
 
