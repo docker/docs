@@ -103,20 +103,24 @@ $ docker build --pull -t my-image:my-tag .
 
 The `--pull` flag forces Docker to check for and download a newer
 version of the base image, even if you have a version cached locally.
+It only affects the `FROM` instruction — cached `RUN` layers are still
+reused.
 
 ### Use --no-cache for clean builds
 
 The `--no-cache` flag disables the build cache, forcing Docker to
-rebuild all layers from scratch:
+re-execute all `RUN` instructions from scratch:
 
 ```console
 $ docker build --no-cache -t my-image:my-tag .
 ```
 
 This gets the latest available versions of dependencies from package
-managers like `apt-get` or `npm`. However, `--no-cache` doesn't pull a
-fresh base image - it only prevents reusing cached layers. For a
-completely fresh build with the latest base image, combine both flags:
+managers like `apt-get` or `npm`. It does not pull a fresh base image —
+for that, use `--pull`.
+
+The two flags serve distinct purposes and can be combined. Use both
+together to get a fresh base image and re-execute all build steps:
 
 ```console
 $ docker build --pull --no-cache -t my-image:my-tag .
