@@ -7,6 +7,7 @@ tags: [admin]
 aliases:
   - /admin/organization/roles/
   - /security/for-admins/roles-and-permissions/
+  - /docker-hub/roles-and-permissions/
 grid:
   - title: "Core roles"
     description: Learn about Docker's built-in Member, Editor, and Owner roles with predefined permissions.
