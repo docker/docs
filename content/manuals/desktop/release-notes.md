@@ -36,7 +36,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Updates
 
-- Docker Offload v0.6.0
+- Docker Offload v0.6.3
 - [Docker Buildx v0.34.1](https://github.com/docker/buildx/releases/tag/v0.34.1)
 - [Docker Agent v1.70.0](https://github.com/docker/docker-agent/releases/tag/v1.70.0)
 - [Docker MCP gateway v0.42.2](https://github.com/docker/mcp-gateway/releases/tag/v0.42.2)
