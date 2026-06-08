@@ -28,7 +28,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-06-08" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.77.0" build_path="//" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.77.0" build_path="/228796/" >}}
 
 ### New
 
@@ -42,7 +42,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker MCP gateway v0.42.2](https://github.com/docker/mcp-gateway/releases/tag/v0.42.2)
 - `docker pass` v0.1.2 
 - [containerd v2.2.4](https://github.com/containerd/containerd/releases/tag/v2.2.4)
-- [Docker DHI (dhictl) v0.0.4 release notes](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.4)
+- [Docker DHI (`dhictl`) v0.0.4](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.4)
 
 ### Bug fixes and enhancements
 
@@ -58,12 +58,12 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Added two new commands to `docker pass`:
    - Use `docker pass run` to inject secrets into host commands.
    - Use `docker pass plugins` for dynamic plugin management.
+- Fixed a regression where `docker cp` into a container with Enhanced Container Isolation (ECI) enabled set file ownership to `nobody:nogroup`.
 
 #### For Windows
 
 - Fixed an issue on Windows where Docker Desktop would get stuck on **Starting the Docker Engine...** after a failed WSL distro registration left a VHDX on disk.
 - Fixed a backend shutdown hang in Windows Containers mode that caused Docker Desktop to take a long time or fail to exit cleanly.
-- Fixed unbounded growth of the WSL2 ISO cache. Old `docker-desktop.iso` and `docker-wsl-cli.iso` entries are now removed when a new version is installed. Fixes [docker/desktop-feedback#419](https://github.com/docker/desktop-feedback/issues/419).
 
 ## 4.76.0
 
