@@ -314,6 +314,14 @@ round robin (DNSRR). You can configure this per service.
   `--endpoint-mode dnsrr` when creating a new service or updating an existing
   one.
 
+### Container discovery
+
+For most situations, connect to the service name. Docker load-balances
+requests across all running tasks ("containers") backing the service. To
+resolve the IP addresses of all individual tasks backing a service directly,
+perform a DNS lookup for `tasks.<service-name>`. Docker returns a list of
+all task IP addresses for that service, one per running replica.
+
 ## Customize the ingress network {#customize-ingress}
 
 Most users never need to configure the `ingress` network, but Docker allows you
