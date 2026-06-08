@@ -13,6 +13,14 @@ in a workflow using the [actions/upload-artifact](https://github.com/actions/upl
 and [actions/download-artifact](https://github.com/actions/download-artifact)
 actions:
 
+> [!NOTE]
+>
+> This approach only works for single-platform images. The `type=docker` exporter
+> produces a tar archive that `docker load` can import, but multi-platform image
+> indexes cannot be exported or loaded this way. For multi-platform builds, use a
+> registry to push and pull the image between jobs, or share build cache using the
+> [GitHub Actions cache or registry cache exporters](cache.md).
+
 ```yaml
 name: ci
 
