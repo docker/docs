@@ -24,6 +24,48 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.77.0
+
+{{< release-date date="2026-06-08" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.77.0" build_path="/228796/" >}}
+
+### New
+
+- You can now export log data from the **Logs** view.
+
+### Updates
+
+- Docker Offload v0.6.3
+- [Docker Buildx v0.34.1](https://github.com/docker/buildx/releases/tag/v0.34.1)
+- [Docker Agent v1.70.0](https://github.com/docker/docker-agent/releases/tag/v1.70.0)
+- [Docker MCP gateway v0.42.2](https://github.com/docker/mcp-gateway/releases/tag/v0.42.2)
+- `docker pass` v0.1.2 
+- [containerd v2.2.4](https://github.com/containerd/containerd/releases/tag/v2.2.4)
+- [DHI CLI (`dhictl`) v0.0.4](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.4)
+- [Docker Engine v29.5.3](https://docs.docker.com/engine/release-notes/29/#2953)
+
+### Bug fixes and enhancements
+
+#### For all platforms 
+
+- Marketplace extensions are now installed and updated by pinned manifest digest, instead of by tag, protecting against tag mutation after publication.
+- Added Buildx version information to the About window.
+- Added a case-sensitivity toggle to the **Logs** search bar which lets you switch between case-insensitive (default) and case-sensitive log filtering.
+- Fixed a bug where the mouse wheel scroll was not working in the **Logs** view grid.
+- Fixed an issue where the backend incorrectly exited with error code 150 on clean shutdown via SIGINT or SIGTERM, causing false failure signals.
+- Removed the bundled `hub-tool` binary from Docker Desktop.
+- Added working **Authenticate** and **Cancel** buttons to the MCP OAuth authorization chat bubble in Gordon, letting you complete or decline OAuth sign-in flows from MCP servers.
+- Added two new commands to `docker pass`:
+   - Use `docker pass run` to inject secrets into host commands.
+   - Use `docker pass plugins` for dynamic plugin management.
+- Fixed a regression where `docker cp` into a container with Enhanced Container Isolation (ECI) enabled set file ownership to `nobody:nogroup`.
+
+#### For Windows
+
+- Fixed an issue on Windows where Docker Desktop would get stuck on **Starting the Docker Engine...** after a failed WSL distro registration left a VHDX on disk.
+- Fixed a backend shutdown hang in Windows Containers mode that caused Docker Desktop to take a long time or fail to exit cleanly.
+
 ## 4.76.0
 
 {{< release-date date="2026-06-01" >}}
