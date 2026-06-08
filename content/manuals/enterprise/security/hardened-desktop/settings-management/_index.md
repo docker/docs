@@ -48,17 +48,6 @@ Settings Management supports a wide range of Docker Desktop features, including:
 
 For a complete list of settings you can enforce, see the [Settings reference](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md).
 
-> [!NOTE]
->
-> Proxy configuration is a special case because it must be configured in two places:
->
-> 1. In the Admin Console for your organization.
-> 2. On the user's system where Docker Desktop is installed.
->
-> On the user's machine, configure the proxy either through the admin-settings.json file or by using installer flags during Docker Desktop installation. For detailed instructions, refer to the [installation guide](/manuals/desktop/setup/install/windows-install.md#proxy-configuration).
->
-> This additional configuration is required because Docker Desktop must know which proxy server to use before it can complete user sign-in and retrieve organization settings from the Admin Console.
-
 ## Policy precedence
 
 When multiple policies exist, Docker Desktop applies them in this order:
