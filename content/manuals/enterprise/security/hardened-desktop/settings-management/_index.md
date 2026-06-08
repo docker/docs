@@ -47,6 +47,7 @@ Settings Management supports a wide range of Docker Desktop features, including:
 - Cloud policies
 
 For a complete list of settings you can enforce, see the [Settings reference](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md).
+
 > [!NOTE]
 >
 > Proxy configuration is a special case because it must be configured in two places:
