@@ -729,6 +729,19 @@ paths:
                         timestamp: "2021-02-19T01:34:35Z"
                         action_description: |
                           pushed the tag latest with the digest sha256:c1ae9c435032a to the repository docker/example
+                      - account: docker
+                        action: offload.lease.end
+                        name: docker
+                        actor: docker
+                        data:
+                          lease_id: l_3EgPuRCjtUqT279CFPOQWcO8zOf
+                          resource_type: run_4cpu_8mem
+                          started_at: "2026-06-04T18:24:21Z"
+                          updated_at: "2026-06-04T18:36:43Z"
+                          org_id: b908ca6e-b9a9-4a53-a9a5-6bec96f72432
+                          user_id: ecae6747-e42c-43cb-925d-cfce1ab32b02
+                        timestamp: "2026-06-04T18:36:43Z"
+                        action_description: "offload lease 'l_3EgPuRCjtUqT279CFPOQWcO8zOf' ended, ran for '12m22s'"
         "429":
           description: ""
           content:
