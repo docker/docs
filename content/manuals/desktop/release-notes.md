@@ -42,7 +42,8 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker MCP gateway v0.42.2](https://github.com/docker/mcp-gateway/releases/tag/v0.42.2)
 - `docker pass` v0.1.2 
 - [containerd v2.2.4](https://github.com/containerd/containerd/releases/tag/v2.2.4)
-- [Docker DHI (`dhictl`) v0.0.4](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.4)
+- [DHI CLI (`dhictl`) v0.0.4](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.4)
+- [Docker Engine v29.5.3](https://docs.docker.com/engine/release-notes/29/#2953)
 
 ### Bug fixes and enhancements
 
