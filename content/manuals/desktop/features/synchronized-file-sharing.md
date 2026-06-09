@@ -29,7 +29,7 @@ After creating a file share instance, any container using a bind mount that poin
 
 > [!IMPORTANT]
 >
-> Synchronized file shares isn't available on WSL or when using Windows containers. 
+> Synchronized file shares isn't available when using Windows containers. 
 
 ## Create a file share instance 
 
