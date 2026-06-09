@@ -19,6 +19,12 @@ uniformly across every sandbox in the organization. When organization
 governance is active, it replaces local policy entirely: local `sbx policy`
 rules are no longer evaluated. See [Organization policy](org.md).
 
+Alongside this access-control policy, admins can require developers to sign in
+as members of their organization before using sandboxes at all.
+[Sign-in enforcement](sign-in-enforcement.md) is deployed through endpoint
+management and ensures developers can't bypass organization policy by using a
+personal account.
+
 > [!NOTE]
 > Organization governance is available on a separate paid subscription.
 > [Contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
@@ -32,6 +38,8 @@ rules are no longer evaluated. See [Organization policy](org.md).
   machine with the `sbx policy` CLI
 - [Organization policy](org.md): centrally manage sandbox policies across
   your organization from the Admin Console
+- [Sign-in enforcement](sign-in-enforcement.md): require developers to sign in
+  as organization members, enforced through endpoint management
 - [Monitoring](monitoring.md): inspect active rules and monitor sandbox
   network traffic with `sbx policy ls` and `sbx policy log`
 - [API reference](/reference/api/ai-governance/): manage org policies

@@ -11,6 +11,7 @@ Aleksandrov
 Awaitility
 Amazon
 Anchore
+Ansible
 Apple
 Artifactory
 armhf
