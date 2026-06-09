@@ -130,7 +130,7 @@ paths:
         "401":
           $ref: "#/components/responses/Unauthenticated"
         "403":
-          $ref: "#/components/responses/PermissionDenied"
+          $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
         "409":
@@ -259,7 +259,7 @@ paths:
         "401":
           $ref: "#/components/responses/Unauthenticated"
         "403":
-          $ref: "#/components/responses/PermissionDenied"
+          $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
         "409":
@@ -383,7 +383,7 @@ paths:
         "401":
           $ref: "#/components/responses/Unauthenticated"
         "403":
-          $ref: "#/components/responses/PermissionDenied"
+          $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
         "409":
@@ -851,7 +851,9 @@ components:
                 already exists. `invalid_argument`: the request body is malformed
                 or fails validation. `unauthenticated`: missing or invalid
                 credentials. `permission_denied`: the org is not entitled to use
-                governance. `unimplemented`: the endpoint or feature is not yet
+                governance. `limit_exceeded`: the org has reached its maximum
+                number of policies, or the policy has reached its maximum number
+                of rules. `unimplemented`: the endpoint or feature is not yet
                 available. `internal`: unexpected server error.
               enum:
                 - not_found
@@ -859,6 +861,7 @@ components:
                 - invalid_argument
                 - unauthenticated
                 - permission_denied
+                - limit_exceeded
                 - unimplemented
                 - internal
             message:
@@ -931,6 +934,29 @@ components:
                 error:
                   code: permission_denied
                   message: permission denied
+
+    Forbidden:
+      description: >
+        Caller lacks the required permission for this org, the org is not
+        entitled to use governance (`permission_denied`), or a creation limit
+        has been reached (`limit_exceeded`): the org already has the maximum
+        number of policies, or the policy already has the maximum number of
+        rules.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          examples:
+            permission_denied:
+              value:
+                error:
+                  code: permission_denied
+                  message: permission denied
+            limit_exceeded:
+              value:
+                error:
+                  code: limit_exceeded
+                  message: organization has reached the maximum of 100 policies
 
     InternalError:
       description: Internal server error
