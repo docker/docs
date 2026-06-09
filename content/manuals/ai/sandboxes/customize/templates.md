@@ -82,7 +82,7 @@ $ sbx run claude --template docker.io/docker/sandbox-templates:claude-code
 ### Build a custom template
 
 Building a custom template requires
-[Docker Desktop](https://docs.docker.com/desktop/).
+[Docker Desktop](/manuals/desktop/_index.md).
 
 Write a Dockerfile that extends one of the base images. Pick the variant
 that matches the agent you plan to run. For example, extend `claude-code`

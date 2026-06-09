@@ -7,7 +7,7 @@ description: |
 keywords: docker sandboxes, docker agent, openai, anthropic, sbx
 ---
 
-Official documentation: [Docker Agent](https://docs.docker.com/ai/docker-agent/)
+Official documentation: [Docker Agent](/manuals/ai/docker-agent/_index.md)
 
 ## Quick start
 
