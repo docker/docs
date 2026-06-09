@@ -32,6 +32,7 @@ $ sbx secret set -g google
 $ sbx secret set -g xai
 $ sbx secret set -g nebius
 $ sbx secret set -g mistral
+$ sbx secret set -g openrouter
 ```
 
 You only need to configure the providers you want to use. Docker Agent detects
@@ -39,7 +40,8 @@ available credentials and routes requests to the appropriate provider.
 
 Alternatively, export the environment variables (`OPENAI_API_KEY`,
 `ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`, `XAI_API_KEY`, `NEBIUS_API_KEY`,
-`MISTRAL_API_KEY`) in your shell before running the sandbox. See
+`MISTRAL_API_KEY`, `OPENROUTER_API_KEY`) in your shell before running the
+sandbox. See
 [Credentials](../security/credentials.md) for details on both methods.
 
 ## Configuration
