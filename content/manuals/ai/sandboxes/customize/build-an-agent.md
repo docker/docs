@@ -249,8 +249,7 @@ outbound requests to `ampcode.com`.
 > rejected.
 
 > [!NOTE]
-> `sbx secret set-custom` is an experimental command and isn't listed
-> in `sbx secret --help`. It works today but may change in future
+> `sbx secret set-custom` is experimental and may change in future
 > releases. This tutorial surfaces it because there's no other path to
 > register a custom-format placeholder.
 
@@ -329,7 +328,4 @@ the host to `sbx secret rm`:
 $ sbx secret rm -g --host ampcode.com
 ```
 
-The `--host` flag on `sbx secret rm` isn't listed in
-`sbx secret rm --help`, but it's the only way to remove entries
-created with `set-custom`. Like `set-custom` itself, it's experimental
-and may change.
+The `--host` flag is part of the experimental `set-custom` surface and doesn't appear in `sbx secret rm --help`.
