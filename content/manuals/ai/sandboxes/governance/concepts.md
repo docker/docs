@@ -140,8 +140,9 @@ whether your organization has governance enabled:
   [kit-defined network rules](../customize/kits.md#control-network-access)
   determine what sandboxes can access.
 - Organization governance active: organization rules apply across all developer
-  machines, and local and kit-defined rules are not evaluated. They still appear
-  in `sbx policy ls`, but with an `inactive` status.
+  machines, and local and kit-defined rules are not evaluated. `sbx policy ls`
+  hides these inactive rules by default; see
+  [Monitoring](monitoring.md#showing-inactive-rules) for how to list them.
 
 When organization governance is active, a user's organization policies are
 evaluated together, as described in [Rule evaluation](#rule-evaluation).
