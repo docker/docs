@@ -17,4 +17,4 @@ inherited_options:
       default_value: "false"
       usage: Enable debug logging
 see_also:
-    - sbx kit - Manage kit artifacts
+    - sbx kit - (Experimental) Manage kit artifacts

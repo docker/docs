@@ -7,38 +7,36 @@ description: |-
     Supports exact domains (example.com), wildcard subdomains (*.example.com),
     and optional port suffixes (example.com:443). Use "**" to allow all hosts.
 
-    Use -g/--global to apply the rule globally to all sandboxes, or provide
-    SANDBOX before RESOURCES to add the rule to policy "local" scoped to that
-    sandbox.
-usage: sbx policy allow network [-g | SANDBOX] RESOURCES [flags]
+    The rule applies globally to all sandboxes by default. Use --sandbox to add
+    the rule to policy "local" scoped to a single sandbox instead.
+usage: sbx policy allow network [--sandbox SANDBOX] RESOURCES [flags]
 options:
-    - name: global
-      shorthand: g
-      default_value: "false"
-      usage: Apply the rule globally to all sandboxes
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for network
+    - name: sandbox
+      usage: |
+        Scope the rule to a specific sandbox (default: all sandboxes)
 inherited_options:
     - name: debug
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
 example: |4-
-      # Allow access to a single host globally
-      sbx policy allow network -g api.example.com
+      # Allow access to a single host (all sandboxes)
+      sbx policy allow network api.example.com
 
-      # Allow access to multiple hosts globally
-      sbx policy allow network -g "api.example.com,cdn.example.com"
+      # Allow access to multiple hosts
+      sbx policy allow network "api.example.com,cdn.example.com"
 
       # Allow a host only for a specific sandbox
-      sbx policy allow network my-sandbox api.example.com
+      sbx policy allow network --sandbox my-sandbox api.example.com
 
       # Allow all subdomains of a host
-      sbx policy allow network -g "*.npmjs.org"
+      sbx policy allow network "*.npmjs.org"
 
-      # Allow all outbound traffic globally
-      sbx policy allow network -g "**"
+      # Allow all outbound traffic
+      sbx policy allow network "**"
 see_also:
     - sbx policy allow - Add an allow rule for sandboxes
