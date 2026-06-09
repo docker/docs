@@ -57,9 +57,10 @@ For the full syntax reference (exact hostnames, wildcard subdomains, port
 suffixes, and CIDR ranges), see [Policy concepts](concepts.md#network-rules).
 
 When organization governance is active, local network rules are not evaluated.
-The organization policy is the only policy in effect. Local rules still appear
-in `sbx policy ls` but with an `inactive` status. See [Monitoring](monitoring.md)
-for how to read the rule view.
+The organization policy is the only policy in effect. `sbx policy ls` hides
+these inactive local rules by default. See
+[Monitoring](monitoring.md#showing-inactive-rules) for how to list them and read
+the rule view.
 
 ## Filesystem policies
 

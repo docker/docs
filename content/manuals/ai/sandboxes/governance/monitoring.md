@@ -33,8 +33,10 @@ The columns are:
   the named sandbox. `remote` means the rule was set by your organization.
 - `DECISION`: whether the rule allows or denies the resource.
 - `STATUS`: whether the rule is in effect. A rule may be `inactive` if it's
-  overridden or suppressed (for example, when organization governance is
-  active, local rules are not evaluated and show as `inactive`).
+  overridden or suppressed — for example, when organization governance is
+  active, local rules are not evaluated. Inactive rules are hidden by default;
+  pass `--include-inactive` to list them. See
+  [Showing inactive rules](#showing-inactive-rules).
 - `RESOURCES`: the hosts or patterns the rule applies to.
 
 When organization governance is active, the output starts with a governance
@@ -42,6 +44,29 @@ header showing which organization manages the policy and when it last synced:
 
 ```console
 $ sbx policy ls
+Governance: managed by my-org
+[OK] last synced 13:54:21
+NAME                  TYPE      ORIGIN               DECISION   STATUS   RESOURCES
+allow AI services     network   remote               allow      active   api.anthropic.com
+                                                                         api.openai.com
+allow Docker services network   remote               allow      active   *.docker.com
+                                                                         *.docker.io
+```
+
+The governance header shows which organization is managing the policy and
+confirms the daemon has successfully pulled the latest rules. If the sync
+status shows an error or a stale timestamp, the daemon may not have the most
+recent org policy. Run `sbx policy reset` to force a fresh pull.
+
+### Showing inactive rules
+
+When organization governance is active, local and kit-defined rules are not
+evaluated, so `sbx policy ls` hides them by default. To list them too — for
+example, to confirm which local rules the organization policy overrides — pass
+`--include-inactive`:
+
+```console
+$ sbx policy ls --include-inactive
 Governance: managed by my-org
 [OK] last synced 13:54:21
 NAME                  TYPE      ORIGIN               DECISION   STATUS     RESOURCES
@@ -52,10 +77,8 @@ allow Docker services network   remote               allow      active     *.doc
                                                                            *.docker.io
 ```
 
-The governance header shows which organization is managing the policy and
-confirms the daemon has successfully pulled the latest rules. If the sync
-status shows an error or a stale timestamp, the daemon may not have the most
-recent org policy. Run `sbx policy reset` to force a fresh pull.
+Inactive rules show with an `inactive` status. They have no effect while
+organization governance is active.
 
 Use `--type network` to show only network rules. Without a sandbox argument,
 `sbx policy ls` shows every rule across all sandboxes. Pass a sandbox name to
