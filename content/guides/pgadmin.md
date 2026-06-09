@@ -129,7 +129,7 @@ Fortunately, there is an ability to auto-connect to the database.
     Add the following config to your `compose.yaml` file to define a pgpass file:
 
     ```yaml
-    config:
+    configs:
       pgadmin-pgpass:
         content: |
           postgres:5432:*:postgres:secret
