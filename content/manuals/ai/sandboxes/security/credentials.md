@@ -61,6 +61,36 @@ provider-specific details.
 identifier. Built-in agents declare a fixed set of services. Custom kits can
 declare their own. The same `sbx secret set` flow works for both.
 
+### Where secrets are stored
+
+The store backing `sbx secret set` depends on your operating system:
+
+- macOS: the system Keychain.
+- Windows: the Windows Credential Manager.
+- Linux: the Secret Service exposed by your desktop keyring, such as GNOME
+  Keyring or KDE Wallet.
+
+The Ubuntu package depends on GNOME Keyring, so a standard desktop install
+needs no extra setup.
+
+On Linux hosts without a running Secret Service — headless servers and some
+WSL setups — `sbx` falls back to an encrypted file under your user config
+directory `$XDG_CONFIG_HOME/com.docker.sandboxes`, which defaults to
+`~/.config/com.docker.sandboxes` when `$XDG_CONFIG_HOME` is unset. The fallback
+is automatic and needs no configuration. When you store a secret this way,
+`sbx` prints a notice:
+
+```text
+No keychain detected - this secret will be stored in an encrypted file on disk
+```
+
+The file is encrypted at rest and protected by `0700` directory permissions,
+the same posture as `~/.docker/config.json`. This is weaker than an OS
+keychain, which also mediates access per application. If you start a Secret
+Service on the host later, `sbx` stores new secrets in the keychain again. For
+more on running sandboxes without a desktop keyring, see
+[Can I use Docker Sandboxes on headless Linux?](../faq.md#can-i-use-docker-sandboxes-on-headless-linux)
+
 ### Store a secret
 
 ```console
@@ -302,9 +332,10 @@ The proxy reads the variable from your terminal session. See individual
 
 ## Best practices
 
-- Use [stored secrets](#stored-secrets) over environment variables. The OS
-  keychain encrypts credentials at rest and controls access, while environment
-  variables are plaintext in your shell.
+- Use [stored secrets](#stored-secrets) over environment variables. Stored
+  secrets are encrypted at rest in the OS keychain (or an encrypted file on
+  Linux hosts without a keychain), while environment variables are plaintext in
+  your shell. See [Where secrets are stored](#where-secrets-are-stored).
 - Don't set API keys manually inside the sandbox. Sandbox agents are
   pre-configured to use proxy-managed credentials.
 - For Claude Code and Codex, OAuth is another secure option: the flow runs on
