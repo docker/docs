@@ -45,9 +45,15 @@ must go to the source repository:
 | Model Runner reference | docker/model-runner |
 | Dockerfile reference | moby/buildkit |
 | Engine API reference | moby/moby |
+| AI Governance API (`content/reference/api/ai-governance/api.yaml`) | docker/governor-services (private) |
 
 If a validation failure or broken link traces back to vendored content, note
 the upstream repo that needs fixing. Do not attempt to fix it locally.
+
+`content/reference/api/ai-governance/api.yaml` is a verbatim copy of the
+upstream `openapi.yaml` — do not edit it by hand. Re-vendor it with
+`hack/sync-governance-api.sh`, which fetches the latest spec from the private
+`docker/governor-services` repo (using your own `gh` auth).
 
 ## Writing guidelines
 

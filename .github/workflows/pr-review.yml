@@ -42,6 +42,7 @@ jobs:
         - Any YAML file in `data/*/*.yaml` subdirectories (CLI reference data generated from upstream)
           - Examples: `data/engine-cli/*.yaml`, `data/buildx/*.yaml`, `data/scout-cli/*.yaml`
           - Exception: root-level data/ files are manually maintained (allow edits)
+        - `content/reference/api/ai-governance/api.yaml` (verbatim copy of the upstream OpenAPI spec, vendored from the private docker/governor-services repo via `hack/sync-governance-api.sh`)
 
         ### 2. Missing Redirects When Removing/Moving Pages (HIGH)
         When a PR removes or moves a page:
