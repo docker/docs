@@ -183,8 +183,9 @@ Extracting the tar archive as the current user avoids the `chown` call.
 
 Filesystem operations such as `git status`, `git log`, or directory scans can
 be noticeably slow when the sandbox workspace is mounted in direct mode (the
-default for workspaces without `--clone`). The slowness occurs because virtiofs
-caching is disabled by default to prevent data corruption.
+default for workspaces without `--clone`). In direct mode, virtiofs caching is
+disabled by default to prevent data corruption. Clone-mode sandboxes enable
+virtiofs caching automatically, so this tuning applies only to direct mode.
 
 To speed up filesystem-intensive workloads, opt into virtiofs caching when
 creating the sandbox:
