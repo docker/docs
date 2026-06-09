@@ -112,17 +112,23 @@ certificates without further configuration.
 
 ## Run a background service
 
-<!-- TODO: follow up on commands.startup[].background.
-     `background: true` on its own isn't enough to keep a
-     long-running service alive — the process exits shortly after start.
-     Using `nohup … &` inside a shell command is the current workaround
-     and what this section teaches. If background ever actually daemonizes
-     the command, this section can be simplified. -->
+`commands.startup` runs on every sandbox start. To keep a long-running
+service such as a dev server or daemon alive, set `background: true`. The
+sandbox runs the command in the background and replays startup commands on
+each start, so the service comes back after a stop/start cycle:
 
-`commands.startup` runs at every sandbox start. For long-running
-services, background them inside a shell command and redirect output to
-a log file. Relying on the `background: true` field alone can leave
-the service attached to a shell that exits, which silently kills it.
+```yaml
+commands:
+  startup:
+    - command: ["my-service", "--port", "8080"]
+      user: "1000"
+      background: true
+```
+
+A background service doesn't write to your terminal. To capture its output
+for debugging, wrap the command in a shell and redirect to a log file. Let
+`background: true` run the command in the background rather than adding a
+trailing `&` yourself:
 
 ```yaml
 commands:
@@ -130,14 +136,13 @@ commands:
     - command:
         - sh
         - -c
-        - nohup my-service --port 8080 > /tmp/my-service.log 2>&1 &
+        - my-service --port 8080 > /tmp/my-service.log 2>&1
       user: "1000"
+      background: true
 ```
 
-The log file is worth the extra flag: if the service exits early, its
-stderr goes to a parent shell that isn't attached to anything you can
-read. An empty log file tells you the wrapper ran; a populated one
-tells you why it failed.
+An empty log file tells you the wrapper ran; a populated one tells you why
+the service failed.
 
 ## Bake runtime values into a file with initFiles
 

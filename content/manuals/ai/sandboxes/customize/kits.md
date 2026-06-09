@@ -60,7 +60,8 @@ idempotent — see the [`startup`](#startup) spec reference:
 ```yaml
 commands:
   startup:
-    - command: ["sh", "-c", "my-daemon &"]
+    - command: ["my-daemon"]
+      background: true
 ```
 
 ### Inject files
