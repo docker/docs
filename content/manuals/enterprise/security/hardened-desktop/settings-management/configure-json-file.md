@@ -317,6 +317,17 @@ The following tables describe all available settings in the `admin-settings.json
 | `pac`                |              | Specifies a PAC file URL. For example, `"pac": "http://proxy/proxy.pac"`.                                                                                                                                                                                                                                                                                                                                                                                               |                                        |
 | `embeddedPac`        |              | Specifies an embedded PAC (Proxy Auto-config) script. For example, `"embeddedPac": "function FindProxyForURL(url, host) { return \"DIRECT\"; }"`. This setting takes precedence over HTTP, HTTPS, Proxy bypass and PAC server URL.                                                                                                                                                                                                                                      |  |
 
+> [!NOTE]
+>
+> Proxy configuration is a special case because it must be configured in two places:
+>
+> 1. In the Admin Console for your organization.
+> 2. On the user's system where Docker Desktop is installed.
+>
+> On the user's machine, configure the proxy either through the `admin-settings.json` file or by using installer flags during Docker Desktop installation. For detailed instructions, refer to the [installation guide](/manuals/desktop/setup/install/windows-install.md#proxy-configuration).
+> 
+> This additional configuration is required because Docker Desktop must know which proxy server to use before it can complete user sign-in and retrieve organization settings from the Admin Console.
+
 ### Container proxy
 
 | Parameter         | OS  | Description                                                                                                                                                                                                                                         | Version                                |
