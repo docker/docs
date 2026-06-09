@@ -50,7 +50,7 @@ config
 containerd
 Couchbase
 CouchDB
-Crowdstrike
+CrowdStrike
 [Cc]ybersecurity
 datacenter
 datasource
@@ -93,6 +93,7 @@ Ethernet
 [Ff]ailover
 Fargate
 Fedora
+Filebeat
 firewalld
 Flink
 Fluentd
