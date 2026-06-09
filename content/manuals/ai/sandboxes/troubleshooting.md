@@ -241,7 +241,7 @@ $ git branch -D <branch-name>
 ## Sandbox commits aren't signed
 
 Docker Sandboxes can sign Git commits with SSH keys from your host agent.
-For setup steps, see [Signed commits](usage.md#signed-commits).
+For setup steps, see [Commit signing](workflows.md#commit-signing).
 
 If `ssh-add -L` prints `The agent has no identities.`, the sandbox can reach
 the forwarded agent, but the host agent doesn't have a loaded key. Load the

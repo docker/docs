@@ -198,7 +198,7 @@ Use SSH agent forwarding for Git operations over SSH and SSH-based commit
 signing. The signing key must be loaded in the host SSH agent for sandboxed
 commit signing to work. Outbound SSH connections are still subject to sandbox
 network policy. For details, see
-[Signed commits](../usage.md#signed-commits).
+[Commit signing](../workflows.md#commit-signing).
 
 ## Custom secrets
 
