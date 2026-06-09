@@ -339,8 +339,12 @@ The proxy reads the variable from your terminal session. See individual
 - Don't set API keys manually inside the sandbox. Sandbox agents are
   pre-configured to use proxy-managed credentials.
 - For Claude Code and Codex, OAuth is another secure option: the flow runs on
-  the host, so the token is never exposed inside the sandbox. For Claude Code,
-  use `/login` inside the agent. For Codex, run `sbx secret set -g openai --oauth`.
+  the host, so the token is never exposed inside the sandbox. If you haven't
+  stored a credential, both agents prompt you to authenticate before the
+  sandbox launches — Codex prompts on the host from `sbx run codex`, and Claude
+  Code prompts inside the agent. To authenticate ahead of time, run
+  `sbx secret set -g openai --oauth` for Codex, or use `/login` inside Claude
+  Code.
 - If you store credentials in 1Password, see
   [Sourcing credentials from 1Password](../workflows.md#sourcing-credentials-from-1password)
   for how to use `op read` and `op run` with `sbx`.
