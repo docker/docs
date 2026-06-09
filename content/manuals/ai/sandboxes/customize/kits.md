@@ -293,8 +293,9 @@ select = ["E", "F", "I"]
 ```
 
 > [!TIP]
-> The templates for the built-in agents (`claude`, `codex`, etc) already
-> includes `uv`, so this mixin can use it without installing it separately.
+> The templates for the built-in agents (`claude`, `codex`, and so on)
+> already include `uv`, so this mixin can use it without installing it
+> separately.
 
 To start a new sandbox with this mixin:
 
