@@ -226,18 +226,6 @@ the command again:
 ✓ Git repository detected: \\wsl.localhost\Ubuntu\home\you\repo
 ```
 
-## Stale Git worktree after removing a sandbox
-
-If you used `--branch`, worktree cleanup during `sbx rm` is best-effort. If
-it fails, the sandbox is removed but the branch and worktree are left behind.
-If `git worktree list` shows a stale worktree in `.sbx/` after removing a
-sandbox, clean it up manually:
-
-```console
-$ git worktree remove .sbx/<sandbox-name>-worktrees/<branch-name>
-$ git branch -D <branch-name>
-```
-
 ## Sandbox commits aren't signed
 
 Docker Sandboxes can sign Git commits with SSH keys from your host agent.
