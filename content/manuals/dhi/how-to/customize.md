@@ -81,8 +81,7 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
       built and pushed to a repository in the same namespace as the mirrored
       DHI. For example, you can add a custom root CA certificate or another
       image that contains a tool you need, like adding Python to a Node.js
-      image. For more details on how to create an OCI artifact image, see
-      [Create an OCI artifact image](#create-an-oci-artifact-image).
+      image.
 
       You can add multiple OCI artifact images to a single customization. When
       you add more than one, they're applied in the order you add them in the
@@ -101,6 +100,8 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
       > When files necessary for runtime are overwritten by OCI artifacts, the
       > image build still succeeds, but you may have issues when running the
       > image.
+
+      For more details, see [OCI artifacts](#oci-artifacts).
 
    1. In the **Scripts** section, you can add, edit, or remove scripts.
 
@@ -351,8 +352,9 @@ contents:
 | `includes` | Paths to copy from the artifact. No files are included by default. You must list at least one path. |
 | `excludes` | Paths to exclude after applying `includes`. |
 
-For instructions on building an OCI artifact image, see
-[Create an OCI artifact image](#create-an-oci-artifact-image).
+To learn more about OCI artifacts, including how to create them, best
+practices, and how environment variables behave, see
+[OCI artifacts](#oci-artifacts).
 
 #### Inject files into the image
 
@@ -481,14 +483,16 @@ tooling.
 compression: ZSTD
 ```
 
+## OCI artifacts
+
+In DHI customization, OCI artifacts are Docker images containing files you
+want to layer into your image, such as custom certificates, internal tools, or
+configuration files.
+
 ### Create an OCI artifact image
 
-An OCI artifact image is a Docker image that contains files or directories that
-you want to include in your customized Docker Hardened Image (DHI). This can
-include additional tools, libraries, or configuration files.
-
-When creating an image to use as an OCI artifact, it should ideally be as
-minimal as possible and contain only the necessary files.
+Keep artifact images as minimal as possible and include only the necessary
+files.
 
 For example, to distribute a custom root CA certificate as part of a trusted CA
 bundle, you can use a multi-stage build. This approach registers your
@@ -545,13 +549,31 @@ Once pushed to a repository in your organization's namespace, the OCI artifact
 automatically appears in the customization workflow when you select OCI
 artifacts to add to your customized Docker Hardened Image.
 
-#### Best practices for OCI artifacts
+### Environment variables
+
+When you include OCI artifacts in a customization, the environment variables
+defined in those artifacts are merged into the final image. The merge follows
+these rules:
+
+- Your customization's environment settings take precedence. An artifact's
+  variable is only applied if the corresponding key is absent or empty in your
+  customization.
+- `PATH` is an exception. Artifact `PATH` entries are added to the front of
+  the existing `PATH`, giving them runtime precedence.
+
+This differs from `COPY --from` in a Dockerfile, which copies files without
+inheriting environment variables from the source image. To avoid inheriting
+environment variables, build the artifact using a `FROM scratch` final stage.
+See [Create an OCI artifact image](#create-an-oci-artifact-image).
+
+### Best practices
 
 Follow these best practices when creating OCI artifacts for DHI customizations:
 
 - Use multi-stage builds: Build or install dependencies in a builder stage,
   then copy only the necessary files to a `FROM scratch` final stage. This keeps
-  the OCI artifact minimal and free of unnecessary build tools.
+  the OCI artifact minimal and avoids inheriting environment variables from the
+  builder image into your customization.
 
 - Include only essential files: OCI artifacts should contain only the files
   you need to add to the customized image. Avoid including package managers,
