@@ -282,7 +282,6 @@ import { createDockerDesktopClient } from "@docker/extension-api-client";
 const ddClient = createDockerDesktopClient();
 
 export function App() {
-  const ddClient = createDockerDesktopClient();
   const [hello, setHello] = useState<string>();
 
   useEffect(() => {
