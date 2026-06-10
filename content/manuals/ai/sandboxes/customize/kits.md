@@ -60,7 +60,8 @@ idempotent — see the [`startup`](#startup) spec reference:
 ```yaml
 commands:
   startup:
-    - command: ["sh", "-c", "my-daemon &"]
+    - command: ["my-daemon"]
+      background: true
 ```
 
 ### Inject files
@@ -292,8 +293,9 @@ select = ["E", "F", "I"]
 ```
 
 > [!TIP]
-> The templates for the built-in agents (`claude`, `codex`, etc) already
-> includes `uv`, so this mixin can use it without installing it separately.
+> The templates for the built-in agents (`claude`, `codex`, and so on)
+> already include `uv`, so this mixin can use it without installing it
+> separately.
 
 To start a new sandbox with this mixin:
 

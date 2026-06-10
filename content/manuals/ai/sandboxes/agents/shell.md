@@ -21,7 +21,7 @@ command instead of an interactive shell, pass it after `--`:
 $ sbx run shell -- -c "echo 'Hello from sandbox'"
 ```
 
-### Default startup command
+## Default startup command
 
 Without extra args, the sandbox runs `bash -l`. Args after `--` replace `-l`
 rather than being appended. To preserve login-shell behavior, include `-l`

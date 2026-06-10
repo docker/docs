@@ -57,7 +57,7 @@ Mounting your host Docker socket into a container would give the agent full
 access to your environment.
 
 Docker Sandboxes avoid this by running a separate [Docker
-Engine](https://docs.docker.com/engine/) inside the sandbox environment, isolated from
+Engine](/manuals/engine/_index.md) inside the sandbox environment, isolated from
 your host. When the agent runs `docker build` or `docker compose up`, those
 commands execute against that engine. The agent has no path to your host Docker
 daemon.

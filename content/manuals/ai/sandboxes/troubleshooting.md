@@ -183,8 +183,9 @@ Extracting the tar archive as the current user avoids the `chown` call.
 
 Filesystem operations such as `git status`, `git log`, or directory scans can
 be noticeably slow when the sandbox workspace is mounted in direct mode (the
-default for workspaces without `--clone`). The slowness occurs because virtiofs
-caching is disabled by default to prevent data corruption.
+default for workspaces without `--clone`). In direct mode, virtiofs caching is
+disabled by default to prevent data corruption. Clone-mode sandboxes enable
+virtiofs caching automatically, so this tuning applies only to direct mode.
 
 To speed up filesystem-intensive workloads, opt into virtiofs caching when
 creating the sandbox:
@@ -226,22 +227,10 @@ the command again:
 ✓ Git repository detected: \\wsl.localhost\Ubuntu\home\you\repo
 ```
 
-## Stale Git worktree after removing a sandbox
-
-If you used `--branch`, worktree cleanup during `sbx rm` is best-effort. If
-it fails, the sandbox is removed but the branch and worktree are left behind.
-If `git worktree list` shows a stale worktree in `.sbx/` after removing a
-sandbox, clean it up manually:
-
-```console
-$ git worktree remove .sbx/<sandbox-name>-worktrees/<branch-name>
-$ git branch -D <branch-name>
-```
-
 ## Sandbox commits aren't signed
 
 Docker Sandboxes can sign Git commits with SSH keys from your host agent.
-For setup steps, see [Signed commits](usage.md#signed-commits).
+For setup steps, see [Commit signing](workflows.md#commit-signing).
 
 If `ssh-add -L` prints `The agent has no identities.`, the sandbox can reach
 the forwarded agent, but the host agent doesn't have a loaded key. Load the

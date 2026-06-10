@@ -246,7 +246,7 @@ packages persist for the sandbox's lifetime. For teams or repeated setups,
 see [Customize](customize/) for reusable templates and declarative kits.
 
 Agents can also build Docker images, run containers, and use
-[Compose](https://docs.docker.com/compose/). Everything runs inside the sandbox's private Docker
+[Compose](/manuals/compose/_index.md). Everything runs inside the sandbox's private Docker
 daemon, so containers started by the agent never appear in your host's
 `docker ps`. When you remove the sandbox, all images, containers, and volumes
 inside it are deleted with it.

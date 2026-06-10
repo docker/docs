@@ -18,7 +18,8 @@ Signing in gives each sandbox a verified identity, which lets Docker:
   audit logs need a concept of "who," and adding that later would be worse for
   everyone.
 - **Authenticate against Docker infrastructure.** Sandboxes pull images, run
-  daemons, and talk to Docker services. A Docker account makes that seamless.
+  daemons, and talk to Docker services. A Docker account authenticates those
+  requests.
 
 Your Docker account email is only used for authentication, not marketing.
 

@@ -57,7 +57,8 @@ installed packages and Docker images.
 Sandboxes persist until explicitly removed. Stopping an agent doesn't delete
 the VM; environment setup carries over between runs. Use `sbx rm` to delete
 the sandbox, its VM, and all of its contents. If the sandbox used
-`--branch`, the worktree directories and their branches are also removed.
+[`--clone`](usage.md#clone-mode), the `sandbox-<name>` Git remote is also
+removed from your host repository.
 
 ## Comparison to alternatives
 
