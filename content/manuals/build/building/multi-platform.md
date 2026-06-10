@@ -90,10 +90,7 @@ $ docker buildx create \
 
 If you're using Docker Engine standalone and you need to build multi-platform
 images using emulation, official BuildKit releases bundle QEMU user-mode
-emulators, so in most cases you don't need to install QEMU manually. See
-[Install QEMU manually](#install-qemu-manually) if emulation fails, for
-example with a third-party BuildKit package that doesn't ship the bundled
-emulators.
+emulators, so you don't need to install QEMU manually.
 
 ## Build multi-platform images
 
@@ -131,34 +128,6 @@ architectures that are available for emulation.
 Docker Desktop supports running and building multi-platform images under
 emulation by default. No configuration is necessary as the builder uses the
 QEMU that's bundled within the Docker Desktop VM.
-
-#### Install QEMU manually
-
-If the QEMU emulators bundled with BuildKit don't work for your build, for
-example with a third-party BuildKit package that doesn't ship them, you can
-install QEMU and register the executable types on the host OS. The
-prerequisites for installing QEMU are:
-
-- Linux kernel version 4.8 or later
-- `binfmt-support` version 2.1.7 or later
-- The QEMU binaries must be statically compiled and registered with the
-  `fix_binary` flag
-
-Use the [`tonistiigi/binfmt`](https://github.com/tonistiigi/binfmt) image to
-install QEMU and register the executable types on the host with a single
-command:
-
-```console
-$ docker run --privileged --rm tonistiigi/binfmt --install all
-```
-
-This installs the QEMU binaries and registers them with
-[`binfmt_misc`](https://en.wikipedia.org/wiki/Binfmt_misc), enabling QEMU to
-execute non-native file formats for emulation.
-
-Once QEMU is installed and the executable types are registered on the host OS,
-they work transparently inside containers. You can verify your registration by
-checking if `F` is among the flags in `/proc/sys/fs/binfmt_misc/qemu-*`.
 
 ### Multiple native nodes
 
@@ -242,7 +211,7 @@ architecture of the container.
 
 Prerequisites:
 
-- Docker Desktop, or Docker Engine with [QEMU installed](#install-qemu-manually)
+- Docker Desktop or Docker Engine
 
 Steps:
 
