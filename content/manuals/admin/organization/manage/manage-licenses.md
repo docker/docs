@@ -36,7 +36,7 @@ Automatic license assignment gives members a product license when they use a sup
    - Once the available licenses are exhausted, automatic license assignment will stop until you purchase more licenses or revoke assigned licenses.
    - Members can still use Docker Sandbox or Docker Desktop, but organization policies for those products won't affect their usage. 
 
-AI Governance licenses include single sign-on (SSO) and provisioning features regardless of your Docker Core subscription. Automatic license assignment requires [setting up SSO](/manuals/enterprise/security/single-sign-on/connect.md), then [provisioning with System for Cross-domain Identity Management (SCIM) or Just-in-Time (JIT)](/manuals/enterprise/security/provisioning/_index.md).
+AI Governance licenses include single sign-on (SSO) and provisioning features regardless of your Docker Core subscription. Automatic license assignment requires [setting up SSO](/manuals/enterprise/security/single-sign-on/connect.md), then [provisioning](/manuals/enterprise/security/provisioning/_index.md) with System for Cross-domain Identity Management (SCIM) or Just-in-Time (JIT).
 
 ## What's next
 
