@@ -264,7 +264,7 @@ Now that you have learnt how to connect a non-containerized Node.js application 
          - SERVICES=s3
          - GATEWAY_LISTEN=0.0.0.0:4566
        volumes:
-         - ./localstack:/docker-entrypoint-initaws.d"
+         - ./localstack:/etc/localstack/init/ready.d
 
    volumes:
      mongodbdata:
@@ -307,6 +307,15 @@ Now that you have learnt how to connect a non-containerized Node.js application 
    ```
 
    The command creates an S3 bucket named `mysamplebucket`.
+
+   > [!TIP]
+   >
+   > You can automate this step by placing a shell script (for example,
+   > `init.sh`) under the local `./localstack` directory. Make sure the
+   > script is executable (`chmod +x ./localstack/init.sh`). LocalStack
+   > runs files mounted in `/etc/localstack/init/ready.d` once it is ready.
+   > See [LocalStack init hooks](https://docs.localstack.cloud/references/init-hooks/)
+   > for more details.
 
    Open [http://localhost:5173](http://localhost:5173) to access the complete to-do list application and start uploading images to the Amazon S3 bucket. 
 
