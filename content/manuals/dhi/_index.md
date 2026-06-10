@@ -34,6 +34,10 @@ params:
       description: Guides, blog posts, Docker Hub catalog, GitHub repositories, and more.
       icon: link
       link: /dhi/resources/
+    - title: Release notes
+      description: New features, improvements, and changes in Docker Hardened Images.
+      icon: newspaper
+      link: /dhi/release-notes/platform/
 ---
 
 Docker Hardened Images (DHI) provide minimal, secure, and production-ready
