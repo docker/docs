@@ -35,7 +35,9 @@ Before deactivating your Docker account, ensure you meet the following requireme
 - If you have an active Docker subscription, [downgrade it to a Docker Personal subscription](../subscription/change.md).
 - Download any images and tags you want to keep. Use `docker pull -a <image>`
   to pull all tags, or `docker pull <image>:<tag>` to pull a specific tag.
-- Unlink your [GitHub and account](../docker-hub/repos/manage/builds/link-source.md#unlink-a-github-user-account).
+- If you linked a GitHub or Bitbucket account for automated builds, unlink it.
+  See [Unlink a GitHub user account](../docker-hub/repos/manage/builds/link-source.md#unlink-a-github-user-account)
+  or [Unlink a Bitbucket user account](../docker-hub/repos/manage/builds/link-source.md#unlink-a-bitbucket-user-account).
 
 ## Deactivate
 
