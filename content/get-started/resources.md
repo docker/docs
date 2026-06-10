@@ -16,6 +16,7 @@ Learn Docker and containerization fundamentals through self-paced, [hands-on tra
 If books are your preferred learning style, check out these written by the [Docker Captains](https://www.docker.com/community/captains). Docker Captain is a distinction that Docker awards to select members of the community that are both experts in their field and are committed to sharing their Docker knowledge with others.
 
 * [Operational AI with Docker](https://www.amazon.com/Operational-AI-Docker-services-Kubernetes/dp/1807301095),  Ajeet Singh Raina & Harsh Manvar, April 2026
+* [Docker and Kubernetes Security](https://www.dockersecurity.io/), Mohammad-Ali A'râbi, October 2025. Get 50% discount on PDF version with the code `AHOYCAPTAIN` on [buy.DockerSecurity.io](https://buy.dockersecurity.io/).
 * [Learn Docker in a Month of Lunches](https://www.manning.com/books/learn-docker-in-a-month-of-lunches), Elton Stoneman. Use the code `stonemanpc` for a 40% discount.
 * [Docker on Windows: From 101 to Production with Docker on Windows](https://www.amazon.com/Docker-Windows-Elton-Stoneman-ebook/dp/B0711Y4J9K/), Elton Stoneman
 * [Learn Kubernetes in a Month of Lunches](https://www.manning.com/books/learn-kubernetes-in-a-month-of-lunches), Elton Stoneman. Use the code `stonemanpc` for a 40% discount.
