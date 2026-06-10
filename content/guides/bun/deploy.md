@@ -11,7 +11,7 @@ aliases:
 ## Prerequisites
 
 - Complete all the previous sections of this guide, starting with [Containerize a Bun application](containerize.md).
-- [Turn on Kubernetes](/manuals//desktop/use-desktop/kubernetes.md#enable-kubernetes) in Docker Desktop.
+- [Turn on Kubernetes](/manuals/desktop/use-desktop/kubernetes.md#enable-kubernetes) in Docker Desktop.
 
 ## Overview
 
