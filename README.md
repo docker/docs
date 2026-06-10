@@ -18,6 +18,13 @@ Welcome to the Docker Documentation repository. This is the source for the [Dock
 
 Feel free to open pull requests or issues. Our docs are completely open source, and we deeply appreciate contributions from the Docker community!
 
+
+## Table of Contents
+
+- [Provide feedback](#provide-feedback)
+- [Contribute to Docker docs](#contribute-to-docker-docs)
+- [Copyright and license](#copyright-and-license)
+
 ## Provide feedback
 
 We’d love to hear your feedback! To submit feedback:
