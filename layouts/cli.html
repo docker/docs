@@ -133,10 +133,10 @@
                       {{ partialCached "components/badge.html" (dict "color" "red" "content" "Deprecated") "deprecated" }}
                     {{ end }}
                     {{ with .experimental }}
-                      {{ partialCached "components/badge.html" (dict "color" "amber" "content" "experimental (daemon)") "exp" }}
+                      {{ partialCached "components/badge.html" (dict "color" "violet" "content" "experimental (daemon)") "exp" }}
                     {{ end }}
                     {{ with .experimentalcli }}
-                      {{ partialCached "components/badge.html" (dict "color" "amber" "content" "experimental (CLI)") "exp-cli" }}
+                      {{ partialCached "components/badge.html" (dict "color" "violet" "content" "experimental (CLI)") "exp-cli" }}
                     {{ end }}
                     {{ with .kubernetes }}
                       {{ partialCached "components/badge.html" (dict "color" "blue" "content" "Kubernetes") "k8s" }}

@@ -28,6 +28,22 @@
       </table>
     </div>
 
+    {{- /* Experimental callout (command-level) */ -}}
+    {{ if $data.experimental }}
+      <div class="px-4 border-l-2 border-l-magenta-light dark:border-l-magenta-dark">
+        <p class="not-prose flex gap-2 items-center text-magenta-light dark:text-magenta-dark">
+          <span class="icon-svg pb-1">{{ partialCached "icon" "beaker" "beaker" }}</span>
+          <strong>{{ i18n "experimental" }}</strong>
+        </p>
+        <p><strong>This command is experimental.</strong></p>
+        <p>
+          Experimental features are intended for testing and feedback as their
+          functionality or design may change between releases without warning or
+          can be removed entirely in a future release.
+        </p>
+      </div>
+    {{ end }}
+
     {{- /* Description */ -}}
     {{ with $data.description }}
       {{ $heading := dict "level" 2 "text" "Description" }}
@@ -54,7 +70,14 @@
               {{ $child := index hugo.Data.sbx_cli .Params.datafile }}
               <tr>
                 <td class="text-left"><a class="link" href="{{ .Permalink }}"><code>{{ .Title }}</code></a></td>
-                <td class="text-left">{{ $child.synopsis }}</td>
+                <td class="text-left">
+                  <span class="inline-flex items-center gap-2">
+                    {{ if $child.experimental }}
+                      {{ partialCached "components/badge.html" (dict "color" "violet" "content" "experimental") "sbx-exp" }}
+                    {{ end }}
+                    {{ $child.synopsis }}
+                  </span>
+                </td>
               </tr>
             {{ end }}
           {{ end }}
@@ -91,9 +114,14 @@
                     {{ end }}
                   </td>
                   <td>
-                    {{ with .usage }}
-                      {{ strings.TrimSpace . }}
-                    {{ end }}
+                    <span class="inline-flex items-center gap-2">
+                      {{ with .experimental }}
+                        {{ partialCached "components/badge.html" (dict "color" "violet" "content" "experimental") "sbx-exp" }}
+                      {{ end }}
+                      {{ with .usage }}
+                        {{ strings.TrimSpace . }}
+                      {{ end }}
+                    </span>
                   </td>
                 </tr>
               {{ end }}
@@ -132,9 +160,14 @@
                     {{ end }}
                   </td>
                   <td>
-                    {{ with .usage }}
-                      {{ strings.TrimSpace . }}
-                    {{ end }}
+                    <span class="inline-flex items-center gap-2">
+                      {{ with .experimental }}
+                        {{ partialCached "components/badge.html" (dict "color" "violet" "content" "experimental") "sbx-exp" }}
+                      {{ end }}
+                      {{ with .usage }}
+                        {{ strings.TrimSpace . }}
+                      {{ end }}
+                    </span>
                   </td>
                 </tr>
               {{ end }}
