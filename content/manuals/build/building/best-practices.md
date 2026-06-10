@@ -109,7 +109,7 @@ reused.
 ### Use --no-cache for clean builds
 
 The `--no-cache` flag disables the build cache, forcing Docker to
-re-execute all `RUN` instructions from scratch:
+rebuild all layers from scratch:
 
 ```console
 $ docker build --no-cache -t my-image:my-tag .
