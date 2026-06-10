@@ -241,10 +241,12 @@ The token is never stored in plaintext inside the sandbox. See
 
 ### Docker registry
 
-To push or pull private images, including [templates](customize/templates.md),
-configure registry credentials for `sbx` to use. The agent can then run `docker
-build` and `docker push`, and `sbx` can resolve private image references,
-without any extra authentication:
+When using Docker Hub, authentication is handled automatically; `sbx` reuses
+your existing login session. For other registries, you need to configure
+credentials for `sbx` so you can push or pull private images, including
+[templates](customize/templates.md). The agent can then run `docker build` and
+`docker push`, and `sbx` can resolve private image references, without any
+extra authentication:
 
 ```console
 $ gh auth token | sbx secret set --registry ghcr.io \
@@ -256,8 +258,7 @@ $ echo "$ACR_PASSWORD" | sbx secret set --registry myregistry.azurecr.io \
 Images and containers built inside the sandbox run on the sandbox's private
 Docker daemon, not your host's. They're deleted when the sandbox is removed.
 
-Docker Hub needs no registry credentials; `sbx` reuses your `sbx login`
-session. For information on how registry credentials differ from other secrets,
+For information on how registry credentials differ from other secrets,
 per-registry username requirements, and global versus per-sandbox scoping, see
 [Registry credentials](security/credentials.md#registry-credentials).
 
