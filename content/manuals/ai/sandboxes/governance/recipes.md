@@ -7,48 +7,57 @@ keywords: docker sandboxes, governance, organization policy, network policy, all
 ---
 
 Organization policies start deny-by-default: outbound traffic is blocked unless
-an explicit allow rule matches, so every host or wildcard a workflow depends on
-has to be added by hand. The recipes on this page are minimal starting points
-you can copy, combine, and trim to fit your organization.
+an explicit allow rule matches. The recipes on this page are minimal building
+blocks for the hosts common workflows depend on — look up the ones you need,
+check the hostnames, and copy them into a policy.
 
-These recipes are intentionally narrower than the local
-[Balanced preset](local.md#default-preset). The Balanced preset is a catch-all
-profile that allows a wide range of common developer destinations so individual
-machines work out of the box. An organization policy should do the opposite:
-allow only the destinations your organization actually wants its sandboxes to
-reach. Treat each recipe as a baseline and remove anything you don't need.
+Treat each recipe as a baseline, not a complete answer. They're intentionally
+narrower than the local [Balanced preset](local.md#default-preset), which allows
+a wide range of destinations so individual machines work out of the box. An
+organization policy should do the opposite: allow only what your sandboxes
+actually need, and remove anything you don't. To find the exact hosts a workflow
+needs, run it in a sandbox and watch `sbx policy log` for blocked destinations.
+See [Monitoring](monitoring.md).
 
-To work out exactly which hosts a workflow needs, run it in a sandbox and watch
-the requests it makes with `sbx policy log`. Blocked destinations show up there,
-so you can add the ones you want and leave the rest denied. See
-[Monitoring](monitoring.md).
+## Find a recipe
 
-For the exact matching rules behind the resource patterns used here (exact
-hostnames, single- and multi-level wildcards, port suffixes, and CIDR ranges),
-see
-[Policy concepts](concepts.md#network-rules).
+- **Developer essentials**: [GitHub](#github) ·
+  [Certificate validation](#certificate-validation) ·
+  [Ubuntu packages](#ubuntu-packages)
+- **Package registries**: [Node.js and npm](#nodejs-and-npm) ·
+  [Python and pip](#python-and-pip) · [Go modules](#go-modules) ·
+  [Rust and Cargo](#rust-and-cargo)
+- **Container images**: [Docker Hub](#docker-hub) ·
+  [Other registries](#other-container-registries)
+- **Coding agents**: [Claude Code](#claude-code) · [Codex](#codex)
 
-## How to apply a recipe
+Most sandboxes need the developer essentials regardless of language or agent: a
+place to clone source from, certificate infrastructure for TLS, and OS package
+mirrors. Layer a language registry and an agent recipe on top.
 
-Each recipe is a set of network allow rules. Apply them either from the Admin
-Console or through the [Governance API](/reference/api/ai-governance/).
+## Apply a recipe
+
+Each recipe is a single network allow rule: a name and a list of host
+resources. Apply them from the Admin Console or through the
+[Governance API](/reference/api/ai-governance/). Policy changes take up to five
+minutes to reach developer machines.
 
 ### Admin Console
 
-Follow the steps in [Create a policy](org.md#create-a-policy) to open the
-**Network access** policy form. Add the listed hostnames as allow rules — you
-can paste multiple hostnames at once, one per line. Group related hosts into a
-single rule with a descriptive name so the rule list stays readable.
+Follow [Create a policy](org.md#create-a-policy) to open the **Network access**
+policy form, then paste the hostnames from any recipe below as allow rules — one
+per line. Group a recipe's hosts into a single rule and give it the recipe's
+name so the rule list stays readable.
 
 ### API
 
-With the API, create a policy once, then add each block as a rule. The base URL
-is `https://hub.docker.com/v2` and requests use a short-lived JWT obtained by
-exchanging Docker Hub credentials. The examples use
-[`jq`](https://jqlang.github.io/jq/) to extract IDs from the responses.
+Run the setup block once to get a token, create a policy, and define an
+`add_rule` helper. Each recipe below is then a single call to that helper. The
+base URL is `https://hub.docker.com/v2`, and the examples use
+[`jq`](https://jqlang.github.io/jq/) to read IDs out of the responses.
 
 ```bash
-# 1. Exchange a Docker Hub PAT or OAT for a bearer token.
+# 1. Exchange a Docker Hub PAT or OAT for a short-lived bearer token.
 TOKEN=$(curl -s -X POST https://hub.docker.com/v2/auth/token \
   -H "Content-Type: application/json" \
   -d '{"identifier":"my-user","secret":"dckr_pat_xxxxxxxx"}' | jq -r .access_token)
@@ -58,76 +67,63 @@ POLICY_ID=$(curl -s -X POST \
   https://hub.docker.com/v2/orgs/my-org/governance/policies \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
-  -d '{"name":"Claude Code — Node.js"}' | jq -r .id)
+  -d '{"name":"Sandbox network policy"}' | jq -r .id)
+
+# 3. Helper that adds one network allow rule. Each recipe calls this.
+add_rule() {
+  curl -s -X POST \
+    "https://hub.docker.com/v2/orgs/my-org/governance/policies/$POLICY_ID/rules" \
+    -H "Authorization: Bearer $TOKEN" \
+    -H "Content-Type: application/json" \
+    -d "{\"name\":\"$1\",\"actions\":[\"connect:tcp\",\"connect:udp\"],\"resources\":$2,\"decision\":\"allow\"}"
+}
 ```
-
-Each rule is then a single `POST` to the policy's `rules` sub-resource. Network
-allow rules use the actions `connect:tcp` and `connect:udp` with
-`"decision": "allow"`:
-
-```bash
-curl -s -X POST \
-  "https://hub.docker.com/v2/orgs/my-org/governance/policies/$POLICY_ID/rules" \
-  -H "Authorization: Bearer $TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Anthropic APIs",
-    "actions": ["connect:tcp", "connect:udp"],
-    "resources": ["api.anthropic.com", "statsig.anthropic.com",
-                  "platform.claude.com", "downloads.claude.ai", "claude.com"],
-    "decision": "allow"
-  }'
-```
-
-The rest of the recipes list only the rule name and resources. Substitute them
-into the `name` and `resources` fields of a request like the one above. Policy
-changes take up to five minutes to reach developer machines.
 
 > [!NOTE]
-> A rule without a port suffix matches the host on any port. Add a `:port`
-> suffix (for example, `example.com:443`) only when you want to restrict a host
-> to a specific port. The recipes below use bare hostnames, which covers both
-> the HTTP and HTTPS ports the sandbox proxy handles, so plain-HTTP services
-> such as OS package mirrors and certificate endpoints work without listing
-> `:80` separately.
+> The recipes use bare hostnames, with no `:port` suffix. A rule without a port
+> suffix matches the host on any port, which covers both the HTTP and HTTPS
+> ports the sandbox proxy handles — so plain-HTTP services such as OS package
+> mirrors and certificate endpoints work without listing `:80` separately. Add a
+> `:port` suffix (for example, `example.com:443`) only when you want to restrict
+> a host to a specific port. For the full matching rules behind these patterns
+> (exact hostnames, single- and multi-level wildcards, port suffixes, and CIDR
+> ranges), see [Policy concepts](concepts.md#network-rules).
 
 ## Developer essentials
 
-Most sandboxes need a small baseline regardless of which agent or language they
-run: a place to clone source from, the certificate infrastructure that TLS
-handshakes validate against, and the OS package mirrors the base image installs
-from. Start with this block and layer a language and agent recipe on top.
+### GitHub
 
-### Source and version control
+Clone and fetch source hosted on GitHub.
 
-| Rule name | Resources                                                 |
-| --------- | --------------------------------------------------------- |
-| GitHub    | `github.com`, `**.github.com`, `**.githubusercontent.com` |
+```bash
+add_rule "GitHub" \
+  '["github.com","**.github.com","**.githubusercontent.com"]'
+```
 
-If your developers host code elsewhere, swap GitHub for the equivalent hosts —
-for example `gitlab.com` and `**.gitlab.com` for GitLab, or `bitbucket.org` for
+If your developers host code elsewhere, swap in the equivalent hosts — for
+example `gitlab.com` and `**.gitlab.com` for GitLab, or `bitbucket.org` for
 Bitbucket.
 
 ### Certificate validation
 
-TLS clients fetch revocation and chain data from certificate authority
-endpoints, many of which are served over plain HTTP. Without these, some HTTPS
-handshakes stall or fail. This is a trimmed set covering the most common
-authorities:
+Revocation and chain data that TLS clients fetch from certificate authorities,
+much of it served over plain HTTP. Without these, some HTTPS handshakes stall or
+fail. This is a trimmed set covering the most common authorities.
 
-| Rule name              | Resources                                                                                        |
-| ---------------------- | ------------------------------------------------------------------------------------------------ |
-| Certificate validation | `**.lencr.org`, `ocsp.digicert.com`, `cacerts.digicert.com`, `**.pki.goog`, `**.amazontrust.com` |
+```bash
+add_rule "Certificate validation" \
+  '["**.lencr.org","ocsp.digicert.com","cacerts.digicert.com","**.pki.goog","**.amazontrust.com"]'
+```
 
-### Operating system packages
+### Ubuntu packages
 
-The default sandbox base image is Ubuntu, so `apt` reaches the Ubuntu mirrors.
-`ports.ubuntu.com` is the mirror for non-x86 architectures, so ARM-based
-sandboxes need it:
+`apt` mirrors for the default Ubuntu base image. `ports.ubuntu.com` is the
+mirror for non-x86 architectures, so ARM-based sandboxes need it.
 
-| Rule name       | Resources                                                                     |
-| --------------- | ----------------------------------------------------------------------------- |
-| Ubuntu packages | `archive.ubuntu.com`, `security.ubuntu.com`, `ports.ubuntu.com`, `ubuntu.com` |
+```bash
+add_rule "Ubuntu packages" \
+  '["archive.ubuntu.com","security.ubuntu.com","ports.ubuntu.com","ubuntu.com"]'
+```
 
 If you build on a Debian base instead, add `debian.org` and `**.debian.org`.
 
@@ -137,85 +133,96 @@ Add only the registries for the languages your projects use.
 
 ### Node.js and npm
 
-| Rule name    | Resources                                                                      |
-| ------------ | ------------------------------------------------------------------------------ |
-| npm registry | `registry.npmjs.org`, `npmjs.com`, `npmjs.org`, `nodejs.org`, `nodesource.com` |
+npm package installs and the Node.js runtime.
+
+```bash
+add_rule "npm registry" \
+  '["registry.npmjs.org","npmjs.com","npmjs.org","nodejs.org","nodesource.com"]'
+```
 
 ### Python and pip
 
-| Rule name       | Resources                                                                                |
-| --------------- | ---------------------------------------------------------------------------------------- |
-| Python packages | `pypi.org`, `files.pythonhosted.org`, `pythonhosted.org`, `pypa.io`, `bootstrap.pypa.io` |
+pip installs and Python build backends.
+
+```bash
+add_rule "Python packages" \
+  '["pypi.org","files.pythonhosted.org","pythonhosted.org","pypa.io","bootstrap.pypa.io"]'
+```
 
 ### Go modules
 
-| Rule name  | Resources                                                        |
-| ---------- | ---------------------------------------------------------------- |
-| Go modules | `proxy.golang.org`, `sum.golang.org`, `golang.org`, `pkg.go.dev` |
+`go` module downloads and checksum verification.
+
+```bash
+add_rule "Go modules" \
+  '["proxy.golang.org","sum.golang.org","golang.org","pkg.go.dev"]'
+```
 
 ### Rust and Cargo
 
-| Rule name   | Resources                                                                                  |
-| ----------- | ------------------------------------------------------------------------------------------ |
-| Rust crates | `crates.io`, `index.crates.io`, `static.crates.io`, `static.rust-lang.org`, `sh.rustup.rs` |
+Cargo crate downloads and `rustup` toolchain installs.
+
+```bash
+add_rule "Rust crates" \
+  '["crates.io","index.crates.io","static.crates.io","static.rust-lang.org","sh.rustup.rs"]'
+```
 
 ## Container images
 
-If sandboxes pull container images, allow the registries you use. This block
-covers Docker Hub and the most common public registries:
+Add only the registries your sandboxes pull from.
 
-| Rule name        | Resources                                                                                                                             |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Docker Hub       | `docker.io`, `**.docker.io`, `docker.com`, `**.docker.com`, `production.cloudflare.docker.com`, `**.production.cloudflare.docker.com` |
-| Other registries | `ghcr.io`, `gcr.io`, `**.gcr.io`, `mcr.microsoft.com`, `**.data.mcr.microsoft.com`, `quay.io`, `registry.k8s.io`, `public.ecr.aws`    |
+### Docker Hub
 
-## Agent rules
+Pull images from Docker Hub.
 
-Each coding agent talks to its own provider APIs. Add the block for the agents
+```bash
+add_rule "Docker Hub" \
+  '["docker.io","**.docker.io","docker.com","**.docker.com","production.cloudflare.docker.com","**.production.cloudflare.docker.com"]'
+```
+
+### Other container registries
+
+Common public registries: GitHub, Google, Microsoft, Quay, Kubernetes, and AWS
+public ECR.
+
+```bash
+add_rule "Other registries" \
+  '["ghcr.io","gcr.io","**.gcr.io","mcr.microsoft.com","**.data.mcr.microsoft.com","quay.io","registry.k8s.io","public.ecr.aws"]'
+```
+
+## Coding agents
+
+Each coding agent talks to its own provider APIs. Add the recipe for the agents
 your developers run, on top of the developer essentials and the relevant
 language registries.
 
 ### Claude Code
 
-| Rule name      | Resources                                                                                                |
-| -------------- | -------------------------------------------------------------------------------------------------------- |
-| Anthropic APIs | `api.anthropic.com`, `statsig.anthropic.com`, `platform.claude.com`, `downloads.claude.ai`, `claude.com` |
+Anthropic's Claude Code authenticates and streams completions through these
+hosts.
+
+```bash
+add_rule "Anthropic APIs" \
+  '["api.anthropic.com","statsig.anthropic.com","platform.claude.com","downloads.claude.ai","claude.com"]'
+```
 
 ### Codex
 
-OpenAI's Codex CLI authenticates and streams completions through OpenAI hosts:
+OpenAI's Codex CLI authenticates and streams completions through OpenAI hosts.
 
-| Rule name   | Resources                                                                                                            |
-| ----------- | -------------------------------------------------------------------------------------------------------------------- |
-| OpenAI APIs | `**.openai.com`, `chatgpt.com`, `**.chatgpt.com`, `**.oaistatic.com`, `**.oaiusercontent.com`, `cdn.openaimerge.com` |
+```bash
+add_rule "OpenAI APIs" \
+  '["**.openai.com","chatgpt.com","**.chatgpt.com","**.oaistatic.com","**.oaiusercontent.com","cdn.openaimerge.com"]'
+```
 
 ## Worked example: Claude Code on a Node.js project
 
-The following script builds a complete, minimal policy for developers running
-Claude Code against Node.js projects hosted on GitHub. It combines the developer
-essentials, the npm registry, and the Claude Code agent block.
+A complete, minimal policy for developers running Claude Code against Node.js
+projects hosted on GitHub combines the developer essentials, the npm registry,
+and the Claude Code agent recipe. Run the [setup block](#api), then apply those
+recipes:
 
 ```bash
-# Authenticate and create the policy.
-TOKEN=$(curl -s -X POST https://hub.docker.com/v2/auth/token \
-  -H "Content-Type: application/json" \
-  -d '{"identifier":"my-user","secret":"dckr_pat_xxxxxxxx"}' | jq -r .access_token)
-
-POLICY_ID=$(curl -s -X POST \
-  https://hub.docker.com/v2/orgs/my-org/governance/policies \
-  -H "Authorization: Bearer $TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Claude Code — Node.js"}' | jq -r .id)
-
-# Add each block as a named rule.
-add_rule() {
-  curl -s -X POST \
-    "https://hub.docker.com/v2/orgs/my-org/governance/policies/$POLICY_ID/rules" \
-    -H "Authorization: Bearer $TOKEN" \
-    -H "Content-Type: application/json" \
-    -d "{\"name\":\"$1\",\"actions\":[\"connect:tcp\",\"connect:udp\"],\"resources\":$2,\"decision\":\"allow\"}"
-}
-
 add_rule "GitHub" \
   '["github.com","**.github.com","**.githubusercontent.com"]'
 add_rule "Certificate validation" \
@@ -244,5 +251,3 @@ $ curl -s -H "Authorization: Bearer $TOKEN" \
 - [AI Governance API](/reference/api/ai-governance/): full API reference
 - [Monitoring](monitoring.md): inspect active rules and traffic with
   `sbx policy ls` and `sbx policy log`
-  </content>
-  </invoke>
