@@ -6,11 +6,8 @@ keywords: use hardened image, helm, k8s, kubernetes, dhi chart, chart
 weight: 31
 ---
 
-Docker Hardened Image (DHI) charts are Docker-provided [Helm
-charts](https://helm.sh/docs/) built from upstream sources, designed for
-compatibility with Docker Hardened Images. These charts are available as OCI
-artifacts within the DHI catalog on Docker Hub. For more details, see [Docker
-Hardened Image charts](/dhi/features/helm/).
+Docker Hardened Image (DHI) charts are Docker-provided Helm charts built from upstream sources, designed for
+compatibility with Docker Hardened Images. These charts are available in the [DHI catalog on Docker Hub](https://hub.docker.com/hardened-images/catalog?types=helmChart).
 
 DHI charts incorporate multiple layers of supply chain security that aren't present in upstream charts:
 
@@ -25,15 +22,6 @@ When you have a Docker Hardened Images subscription, you can also customize DHI
 charts to reference customized images and mirrored repositories. The customized
 chart build pipeline ensures that your customizations are built securely, use
 the latest base charts, and include attestations.
-
-## Find a Docker Helm chart
-
-To find a Docker Helm chart for DHI:
-
-1. Go to the Hardened Images catalog in [Docker Hub](https://hub.docker.com/hardened-images/catalog) and sign in.
-2. In the left sidebar, select **Hardened Images** > **Catalog**.
-3. Select **Filter by** for **Helm Charts**.
-4. Select a Helm chart repository to view its details.
 
 ## Mirror a Helm chart and/or its images to a third-party registry
 
