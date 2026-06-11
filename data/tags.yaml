@@ -1,14 +1,21 @@
 admin:
   title: Admin
+  description: Manage Docker organizations, users, and access controls.
 ai:
   title: AI
+  description: Build AI-powered apps, agents, and integrations with Docker.
 cicd:
   title: CI/CD
+  description: Automate builds, tests, and deployments in your pipelines.
 databases:
   title: Databases
+  description: Run and connect to databases in containers.
 deployment:
   title: Deployment
+  description: Deploy containerized apps to Kubernetes and other platforms.
 security:
   title: Security
+  description: Harden images, scan vulnerabilities, and secure your supply chain.
 testing:
   title: Testing
+  description: Integration testing with real databases and services.
