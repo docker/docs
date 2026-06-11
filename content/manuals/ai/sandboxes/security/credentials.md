@@ -209,13 +209,25 @@ network policy. For details, see
 For credentials that don't fit the service-identifier model — for example,
 when an agent validates the environment variable format at boot, or when the
 credential lands in a request body rather than a header — use
-`sbx secret set-custom`. The secret is keyed on a target domain, an
+`sbx secret set-custom`. The secret is keyed on one or more target domains, an
 environment variable name, and an optional placeholder string, instead of a
 service identifier.
 
 ```console
 $ sbx secret set-custom -g \
     --host api.example.com \
+    --env API_KEY \
+    --value <secret>
+```
+
+Repeat `--host` to cover multiple domains with the same secret — useful when
+an API is split across related hostnames or when two unrelated endpoints share
+a credential:
+
+```console
+$ sbx secret set-custom -g \
+    --host api.example.com \
+    --host uploads.example.com \
     --env API_KEY \
     --value <secret>
 ```
@@ -228,8 +240,8 @@ $ sbx secret set-custom -g \
 > on the command line.
 
 Inside the sandbox, `API_KEY` is set to a generated placeholder (for example,
-`sbx-cs-<rand>`). When a sandboxed process sends a request to
-`api.example.com` and the placeholder appears anywhere in the request, the
+`sbx-cs-<rand>`). When a sandboxed process sends a request to any of the
+configured hosts and the placeholder appears anywhere in the request, the
 proxy replaces it with the real value. The agent never sees the real secret.
 
 Prefer the [service-based flow](#stored-secrets) whenever it's an option —
