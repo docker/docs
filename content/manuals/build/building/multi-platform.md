@@ -131,10 +131,15 @@ QEMU that's bundled within the Docker Desktop VM.
 
 #### Install QEMU manually
 
-If you're using a builder outside of Docker Desktop, such as if you're using
-Docker Engine on Linux, or a custom remote builder, you need to install QEMU
-and register the executable types on the host OS. The prerequisites for
-installing QEMU are:
+If the QEMU emulators bundled with BuildKit aren't available for your build,
+manual installation may be required. This is typically only necessary when:
+
+- You're using a third-party BuildKit package that doesn't bundle QEMU emulators
+- You're using an older Docker Engine version without bundled QEMU support
+- You're running a custom BuildKit installation where emulators aren't included
+
+In these situations, install QEMU and register the executable types on the host
+OS. The prerequisites for installing QEMU are:
 
 - Linux kernel version 4.8 or later
 - `binfmt-support` version 2.1.7 or later
