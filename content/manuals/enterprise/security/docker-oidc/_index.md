@@ -11,7 +11,7 @@ weight: 35
 
 Docker OIDC creates a trust relationship between GitHub and Docker so you don’t have to maintain long-lived credentials. When you create an OIDC connection, Docker and GitHub exchange short-lived tokens that still grant fine-grained access to your Docker resources.
 
-Docker OIDC is available for organizations with Docker Core subscriptions. You receive 10 OIDC connections out of the box. To upgrade your subscription, see [Change your subscription](/manuals/subscription/details.md).
+Docker OIDC is available for organizations with Docker Core subscriptions. You receive 10 OIDC connections out of the box. To upgrade your subscription, see [Change your subscription](/manuals/subscription/change.md).
 
 ## Prerequisites
 

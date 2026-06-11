@@ -50,7 +50,7 @@ You can create new OIDC connections or manage existing ones from Admin Console i
 
    ```yaml
    - name: Login to Docker Hub
-     uses: docker/login-action@v3
+     uses: docker/login-action@{{% param "login_action_version" %}}
      with:
        username: <YOUR_ORGANIZATION_NAME>
        password: ${{ steps.docker_oidc.outputs.token }}
@@ -75,7 +75,7 @@ jobs:
           connection_id: <YOUR_CONNECTION_ID>
 
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
           username: <YOUR_ORGANIZATION_NAME>
           password: ${{ steps.docker_oidc.outputs.token }}
@@ -83,7 +83,7 @@ jobs:
 
 ### Step 3 (optional): Test
 
-Test the workflow in **Stage** from GitHub. If successful, the job signs in to Docker and then completes.
+After both phases, open the workflow run in GitHub Actions and select **Stage** to test the job.
 
 ## Manage OIDC connections
 

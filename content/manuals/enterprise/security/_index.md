@@ -35,7 +35,7 @@ grid_admins:
   - title: Docker OIDC
     description: Configure OpenID Connect connections for automated workload authentication.
     link: /enterprise/security/docker-oidc/
-    icon: key
+    icon: link
   - title: Domain management
     description: Identify uncaptured users in your organization.
     link: /enterprise/security/domain-management/
