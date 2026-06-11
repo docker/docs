@@ -35,15 +35,12 @@ ensure that the images they pull are signed. Publishers could be individuals
 or organizations manually signing their content or automated software supply
 chains signing content as part of their release process.
 
-> [!NOTE]
+> [!WARNING]
 >
-> Docker is retiring DCT for Docker Official Images
-> (DOI). You should start planning to transition to a different image signing
-> and verification solution (like [Sigstore](https://www.sigstore.dev/) or
-> [Notation](https://github.com/notaryproject/notation#readme)). Timelines for the
-> complete deprecation of DCT are being finalized and will be published soon.
->
-> For more information, see [Retiring Docker Content Trust](https://www.docker.com/blog/retiring-docker-content-trust/).
+> Docker Content Trust (DCT) is being retired. The Notary v1 service at
+> `notary.docker.io` will shut down on December 8, 2026. For the retirement
+> timeline, migration guidance, and alternatives, see
+> [Docker Content Trust (DCT)](/manuals/retired/#docker-content-trust-dct).
 
 ### Image tags and DCT
 
