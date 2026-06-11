@@ -63,7 +63,8 @@ A network evaluation record looks like this:
     "no applicable policies for op(action=net:connect:tcp, resource=net:domain:example.com:443)"
   ],
   "action_type": "network_egress",
-  "network_egress": { "protocol": "tcp" }
+  "network_egress": { "protocol": "tcp" },
+  "agent": "claude"
 }
 ```
 
@@ -83,6 +84,7 @@ Common fields include:
 | `resource_id`      | The target of the evaluation, such as a host and port.                                                       |
 | `decision`         | `AUDIT_DECISION_ALLOW` or `AUDIT_DECISION_DENY`.                                                             |
 | `deny_reason`      | Why a denied request was blocked. Present on deny decisions.                                                 |
+| `agent`            | The AI agent driving the sandbox (for example, `claude`, `codex`). Omitted when the agent is unknown.       |
 
 Each record is attributed to the signed-in Docker user and the organization
 whose governance policy is in effect.
