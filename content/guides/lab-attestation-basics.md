@@ -10,16 +10,8 @@ summary: |
   attach OpenVEX statements to declare vulnerability exploitability status.
 keywords: Docker, supply chain, SBOM, provenance, SLSA, Cosign, VEX, attestations, security, lab, labspace
 params:
-  tags: [labs]
+  tags: [security]
   time: 45 minutes
-  resource_links:
-    - title: Build attestations
-      url: /build/metadata/attestations/
-    - title: SBOM attestations
-      url: /build/metadata/attestations/sbom/
-    - title: Provenance attestations
-      url: /build/metadata/attestations/slsa-provenance/
-    - title: Labspace repository
       url: https://github.com/dockersamples/labspace-attestation-basics
 ---
 

@@ -11,16 +11,8 @@ summary: |
   builds with DHI, and explore SBOMs, VEX, and compliance attestations.
 keywords: Docker, Hardened Images, DHI, Node.js, Docker Scout, CVE, security, SBOM, lab, labspace
 params:
-  tags: [labs, dhi]
+  tags: [security]
   time: 30 minutes
-  resource_links:
-    - title: Docker Hardened Images
-      url: /dhi/
-    - title: Docker Scout docs
-      url: /scout/
-    - title: Build attestations
-      url: /build/metadata/attestations/
-    - title: Labspace repository
       url: https://github.com/dockersamples/labspace-dhi-node
 ---
 

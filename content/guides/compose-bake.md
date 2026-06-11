@@ -4,9 +4,8 @@ description: Learn how to build Docker Compose projects with Docker Buildx Bake
 summary: |
   This guide demonstrates how you can use Bake to build production-grade images for Docker Compose projects.
 keywords: docker compose, bake, buildx, multi-service, production builds, build configuration
-languages: []
-tags: [devops]
 params:
+  tags: [cicd]
   time: 20 minutes
 ---
 
@@ -211,7 +210,7 @@ $ docker buildx bake
 Start by redefining the default build group that Bake executes. The current
 default group includes a `seed` target — a Compose service used solely to
 populate the database with mock data. Since this target doesn't produce a
-production image, it doesn’t need to be included in the build group.
+production image, it doesn't need to be included in the build group.
 
 To customize the build configuration that Bake uses, create a new file at the
 root of the repository, alongside your `compose.yaml` file, named
@@ -399,5 +398,5 @@ For more information about how to use Bake, check out these resources:
 - [Bake documentation](/manuals/build/bake/_index.md)
 - [Building with Bake from a Compose file](/manuals/build/bake/compose-file.md)
 - [Bake file reference](/manuals/build/bake/reference.md)
-- [Mastering multi-platform builds, testing, and more with Docker Buildx Bake](/guides/bake/index.md)
+- [Mastering multi-platform builds, testing, and more with Docker Buildx Bake](/guides/bake/)
 - [Bake GitHub Action](https://github.com/docker/bake-action)

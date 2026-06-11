@@ -1,42 +1,14 @@
 admin:
-  title: Administration
+  title: Admin
 ai:
   title: AI
-app-dev:
-  title: App development
-best-practices:
-  title: Best practices
-cloud-services:
-  title: Cloud services
-data-science:
-  title: Data science
+cicd:
+  title: CI/CD
 databases:
   title: Databases
-deploy:
+deployment:
   title: Deployment
-devops:
-  title: DevOps
-dhi:
-  title: Docker Hardened Images
-distributed-systems:
-  title: Distributed systems
-faq:
-  title: FAQ
-frameworks:
-  title: Frameworks
-labs:
-  title: Labs
-networking:
-  title: Networking
-observability:
-  title: Observability
-product-demo:
-  title: Product demo
-release-notes:
-  title: Release notes
-secrets:
-  title: Secrets
-testing-with-docker:
-  title: Testing with Docker
-troubleshooting:
-  title: Troubleshooting
+security:
+  title: Security
+testing:
+  title: Testing

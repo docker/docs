@@ -11,14 +11,8 @@ summary: |
   with containers at every stage of the SDLC.
 keywords: Docker, Compose, Testcontainers, Kubernetes, CI/CD, SDLC, lab, labspace
 params:
-  tags: [labs]
+  tags: [cicd]
   time: 60 minutes
-  resource_links:
-    - title: Docker Compose docs
-      url: /compose/
-    - title: Testcontainers docs
-      url: https://testcontainers.com/
-    - title: Labspace repository
       url: https://github.com/dockersamples/labspace-containerized-sdlc
 ---
 

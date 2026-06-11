@@ -4,8 +4,8 @@ linktitle: Pre-seeding database
 description: &desc Pre-seeding database with schema and data at startup for development environment
 keywords: Pre-seeding, database, postgres, container-supported development
 summary: *desc
-tags: [app-dev, databases]
 params:
+  tags: [databases]
   time: 20 minutes
 ---
 
@@ -123,7 +123,8 @@ Assuming that you have an existing Postgres database instance up and running, fo
    sampledb=# \l
                                                 List of databases
    Name    |  Owner   | Encoding |  Collate   |   Ctype    | ICU Locale | Locale Provider |   Access privileges
-   -----------+----------+----------+------------+------------+------------+-----------------+-----------------------
+   -----------+----------+----------+------------+------------+------------+-----------------+--------------------
+---
    postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            |
    sampledb  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            |
    template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            | =c/postgres          +
@@ -138,7 +139,8 @@ Assuming that you have an existing Postgres database instance up and running, fo
    ```console
    sampledb=# SELECT * FROM users;
    id | name  |       email
-   ----+-------+-------------------
+   ----+-------+----------------
+---
     1 | Alpha | alpha@example.com
     2 | Beta  | beta@example.com
     3 | Gamma | gamma@example.com
@@ -231,7 +233,8 @@ $ docker container stop postgres
     ```sql 
     sampledb=# SELECT * FROM users;
       id | name  |       email
-    ----+-------+-------------------
+    ----+-------+----------------
+---
        1 | Alpha | alpha@example.com
        2 | Beta  | beta@example.com
        3 | Gamma | gamma@example.com
@@ -330,7 +333,8 @@ It is called at the end of the script to initiate the seeding process. The try..
     ```console
     sampledb=# SELECT * FROM todos;
     id |      task      | completed
-    ----+----------------+-----------
+    ----+----------------+--------
+---
     1 | Watch netflix  | f
     2 | Finish podcast | f
     3 | Pick up kid    | f

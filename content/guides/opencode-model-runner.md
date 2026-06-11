@@ -5,8 +5,8 @@ summary: |
   Connect OpenCode to Docker Model Runner with an OpenAI-compatible endpoint,
   choose coding models, and package `gpt-oss` with a larger context window.
 keywords: ai, opencode, docker model runner, local models, coding assistant
-tags: [ai]
 params:
+  tags: [ai]
   time: 10 minutes
 ---
 

@@ -11,14 +11,8 @@ summary: |
   visualizer — all without installing anything on the host.
 keywords: Docker, Compose, local development, PostgreSQL, pgAdmin, containers, lab, labspace
 params:
-  tags: [labs]
+  tags: [cicd]
   time: 30 minutes
-  resource_links:
-    - title: Docker Compose docs
-      url: /compose/
-    - title: Bind mounts
-      url: /engine/storage/bind-mounts/
-    - title: Labspace repository
       url: https://github.com/dockersamples/labspace-container-supported-development
 ---
 

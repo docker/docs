@@ -5,11 +5,10 @@ title: Data science with JupyterLab
 toc_max: 2
 summary: |
   Use Docker to run Jupyter notebooks.
-tags: [data-science]
-languages: [python]
 aliases:
   - /guides/use-case/jupyter/
 params:
+  tags: [ai]
   time: 20 minutes
 ---
 

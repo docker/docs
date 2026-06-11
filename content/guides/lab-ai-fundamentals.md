@@ -12,12 +12,8 @@ keywords: AI, Docker, Model Runner, prompt engineering, RAG, tool calling, lab, 
 aliases:
   - /labs/docker-for-ai/ai-fundamentals/
 params:
-  tags: [ai, labs]
+  tags: [ai]
   time: 45 minutes
-  resource_links:
-    - title: Docker Model Runner docs
-      url: /ai/model-runner/
-    - title: Labspace repository
       url: https://github.com/dockersamples/labspace-ai-fundamentals
 ---
 

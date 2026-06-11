@@ -11,14 +11,8 @@ summary: |
   with watch mode, data persistence, and modular Compose file composition.
 keywords: Docker, Compose, multi-container, Flask, Redis, watch mode, volumes, lab, labspace
 params:
-  tags: [labs]
+  tags: [cicd]
   time: 45 minutes
-  resource_links:
-    - title: Docker Compose docs
-      url: /compose/
-    - title: Compose watch mode
-      url: /compose/how-tos/file-watch/
-    - title: Labspace repository
       url: https://github.com/dockersamples/labspace-compose-quickstart
 ---
 

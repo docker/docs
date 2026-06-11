@@ -7,8 +7,8 @@ summary: >
   Scan a Docker Hardened Image with and without VEX and audit every suppression
   and its justification.
 keywords: vex, openvex, not_affected, under_investigation, affected, cve, docker scout, dhi, vulnerability
-tags: [dhi]
 params:
+  tags: [security]
   proficiencyLevel: Intermediate
   time: 25 minutes
 ---

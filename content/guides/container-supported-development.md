@@ -6,12 +6,11 @@ summary: |
 description: |
   Use containers in your local development loop to develop and test faster… even if your main app isn't running in containers.
 keywords: containers, local development, dependent services, testing, debugging, development environment
-tags: [app-dev]
 params:
+  tags: [cicd]
   image: images/learning-paths/container-supported-development.png
   time: 20 minutes
-  resource_links: []
----
+  resource_links: []---
 
 Containers offer a consistent way to build, share, and run applications across different environments. While containers are typically used to containerize your application, they also make it incredibly easy to run essential services needed for development. Instead of installing or connecting to a remote database, you can easily launch your own database. But the possibilities don't stop there.
 

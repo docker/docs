@@ -12,14 +12,8 @@ aliases:
   - /labs/docker-for-ai/cagent/
   - /guides/lab-cagent/
 params:
-  tags: [ai, labs]
+  tags: [ai]
   time: 20 minutes
-  resource_links:
-    - title: Docker Agent documentation
-      url: https://github.com/docker/docker-agent
-    - title: Docker MCP Toolkit
-      url: https://docs.docker.com/ai/mcp-catalog-and-toolkit/toolkit/
-    - title: Labspace repository
       url: https://github.com/ajeetraina/labspace-cagent
 ---
 

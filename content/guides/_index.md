@@ -9,6 +9,12 @@ layout: landing
 aliases:
   - /guides/language/
   - /language/
+  - /guides/dhi-from-doi/
+  - /guides/dhi-from-wolfi/
+  - /guides/dhi-go-example/
+  - /guides/dhi-nodejs-example/
+  - /guides/dhi-python-example/
+  - /guides/lab-docker-for-ai-redirect/
   - /learning-paths/
 ---
 

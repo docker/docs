@@ -6,8 +6,8 @@ summary: |
   isolated microVM that talks to a local model on your host through the
   Anthropic-compatible API.
 keywords: ai, claude code, docker model runner, docker sandboxes, sbx, anthropic, local models, coding assistant
-tags: [ai]
 params:
+  tags: [ai]
   time: 15 minutes
 ---
 

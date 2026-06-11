@@ -6,9 +6,8 @@ description: >
 summary: >
   Learn to automate Docker builds and testing with declarative configurations using Buildx Bake.
 keywords: bake, buildx, multi-platform, build configuration, hcl, automation
-tags: [devops]
-languages: [go]
 params:
+  tags: [cicd]
   time: 30 minutes
   image: /images/guides/bake.webp
 ---
@@ -441,9 +440,9 @@ build/
 └── bin
     ├── bakeme
     ├── linux_amd64
-    │   └── bakeme
+    │   └── bakeme
     ├── linux_arm64
-    │   └── bakeme
+    │   └── bakeme
     └── linux_riscv64
         └── bakeme
 
@@ -476,17 +475,17 @@ $ tree build/
 build/
 └── bin
     ├── debug
-    │   ├── linux_amd64
-    │   │   └── bakeme
-    │   ├── linux_arm64
-    │   │   └── bakeme
-    │   └── linux_riscv64
-    │       └── bakeme
+    │   ├── linux_amd64
+    │   │   └── bakeme
+    │   ├── linux_arm64
+    │   │   └── bakeme
+    │   └── linux_riscv64
+    │       └── bakeme
     └── release
         ├── linux_amd64
-        │   └── bakeme
+        │   └── bakeme
         ├── linux_arm64
-        │   └── bakeme
+        │   └── bakeme
         └── linux_riscv64
             └── bakeme
 

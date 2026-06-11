@@ -5,10 +5,10 @@ title: Generate Docker Compose Files with Claude Code and Docker MCP Toolkit
 summary: |
   This guide shows how to wire Claude Code to the Docker MCP Toolkit so it can search Docker Hub images and generate complete Docker Compose stacks from natural language.
   You’ll enable the Docker Hub MCP server, connect Claude Code, verify MCP access, and create a Node.js + PostgreSQL stack with a conversational prompt.
-tags: [ai]
 aliases:
   - /guides/use-case/genai-claude-code-mcp/
 params:
+  tags: [ai]
   time: 15 minutes
 ---
 
