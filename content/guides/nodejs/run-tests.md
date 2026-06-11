@@ -2,7 +2,7 @@
 title: Run Node.js tests in a container
 linkTitle: Run your tests
 weight: 30
-keywords: node.js, node, test
+keywords: node.js, node, test, vitest
 description: Learn how to run your Node.js tests in a container.
 aliases:
   - /language/nodejs/run-tests/
@@ -15,214 +15,250 @@ Complete all the previous sections of this guide, starting with [Containerize a 
 
 ## Overview
 
-Testing is a core part of building reliable software. Whether you're writing unit tests, integration tests, or end-to-end tests, running them consistently across environments matters. Docker makes this easy by giving you the same setup locally, in CI/CD, and during image builds.
+Testing is a core part of building reliable software. Docker makes it easy to
+run your tests in the same environment used in CI and production, so failures
+are caught before they reach your users.
 
-## Run tests when developing locally
+In this section, you'll add [Vitest](https://vitest.dev/) to the project and
+run tests both locally and inside a container.
 
-The sample application uses Vitest for testing, and it already includes tests for React components, custom hooks, API routes, database operations, and utility functions.
+## Update the application
 
-### Run tests locally (without Docker)
+You'll refactor `src/index.ts` to export the Express `app` instance so tests
+can import it without starting a server. Add a test file and update
+`package.json` to add Vitest and a test runner for HTTP requests. The file browser shows only the files that change in this step.
+
+{{< files name="nodejs-docker-example" >}}
+
+{{< file path="src/index.ts" status="modified" hl_lines="10,31,70-75" >}}
+```typescript
+// Express application backed by a PostgreSQL database.
+// Creates a heroes table at startup.
+// Endpoints: GET / (greeting), GET /health (health check), POST /heroes/ (create), GET /heroes/ (list).
+// See https://expressjs.com/ and https://node-postgres.com/
+
+import express, { type Request, type Response } from 'express';
+import { Pool } from 'pg';
+import { readFileSync } from 'fs';
+
+export const app = express();
+const port = parseInt(process.env.PORT ?? '3000', 10);
+
+app.use(express.json());
+
+function getPassword(): string {
+  const passwordFile = process.env.POSTGRES_PASSWORD_FILE;
+  if (passwordFile) {
+    return readFileSync(passwordFile, 'utf8').trim();
+  }
+  return process.env.POSTGRES_PASSWORD ?? '';
+}
+
+const pool = new Pool({
+  host: process.env.POSTGRES_SERVER,
+  port: 5432,
+  database: process.env.POSTGRES_DB,
+  user: process.env.POSTGRES_USER,
+  password: getPassword(),
+});
+
+if (process.env.POSTGRES_SERVER) {
+  pool
+    .query(
+      `CREATE TABLE IF NOT EXISTS heroes (
+        id SERIAL PRIMARY KEY,
+        name TEXT NOT NULL,
+        secret_name TEXT NOT NULL,
+        age INTEGER
+      )`,
+    )
+    .catch(console.error);
+}
+
+app.get('/', (_req: Request, res: Response) => {
+  res.json({ message: 'Hello World' });
+});
+
+app.get('/health', (_req: Request, res: Response) => {
+  res.json({ status: 'ok' });
+});
+
+app.post('/heroes/', async (req: Request, res: Response) => {
+  const { name, secret_name, age } = req.body as {
+    name: string;
+    secret_name: string;
+    age?: number;
+  };
+  const result = await pool.query(
+    'INSERT INTO heroes (name, secret_name, age) VALUES ($1, $2, $3) RETURNING *',
+    [name, secret_name, age],
+  );
+  res.json(result.rows[0]);
+});
+
+app.get('/heroes/', async (_req: Request, res: Response) => {
+  const result = await pool.query('SELECT * FROM heroes');
+  res.json(result.rows);
+});
+
+// Only start the server when this file is run directly.
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
+  });
+}
+```
+{{< /file >}}
+
+{{< file path="src/index.test.ts" status="new" >}}
+```typescript
+// Unit tests for the Express application.
+// Tests the root endpoint without starting a server.
+// See https://vitest.dev/ for the test framework reference.
+
+import { describe, it, expect } from 'vitest';
+import request from 'supertest';
+import { app } from './index';
+
+describe('GET /', () => {
+  it('returns a JSON greeting', async () => {
+    const response = await request(app).get('/');
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({ message: 'Hello World' });
+  });
+});
+```
+{{< /file >}}
+
+{{< file path="package.json" status="modified" hl_lines="10,20-22" >}}
+```json
+{
+  "name": "nodejs-docker-example",
+  "version": "1.0.0",
+  "description": "A minimal Node.js TypeScript application.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.16.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.0.0",
+    "@types/pg": "^8.11.0",
+    "supertest": "^7.0.0",
+    "@types/supertest": "^6.0.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3",
+    "vitest": "^3.0.0"
+  }
+}
+```
+{{< /file >}}
+
+{{< /files >}}
+
+## Run tests locally
+
+Run the following command to run the tests locally:
 
 ```console
-$ npm run test
-```
-
-### Add test service to Docker Compose
-
-To run tests in a containerized environment, you need to add a dedicated test service to your `compose.yml` file. Add the following service configuration:
-
-```yaml
-services:
-  # ... existing services ...
-
-  # ========================================
-  # Test Service
-  # ========================================
-  app-test:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: test
-    container_name: todoapp-test
-    environment:
-      NODE_ENV: test
-      POSTGRES_HOST: db
-      POSTGRES_PORT: 5432
-      POSTGRES_DB: todoapp_test
-      POSTGRES_USER: todoapp
-      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-todoapp_password}'
-    depends_on:
-      db:
-        condition: service_healthy
-    command: ['npm', 'run', 'test:coverage']
-    networks:
-      - todoapp-network
-    profiles:
-      - test
-```
-
-This test service configuration:
-
-- Builds from test stage: Uses the `test` target from your multi-stage Dockerfile
-- Isolated test database: Uses a separate `todoapp_test` database for testing
-- Profile-based: Uses the `test` profile so it only runs when explicitly requested
-- Health dependency: Waits for the database to be healthy before starting tests
-
-### Run tests in a container
-
-You can run tests using the dedicated test service:
-
-```console
-$ docker compose up app-test --build
-```
-
-Or run tests against the development service:
-
-```console
-$ docker compose run --rm app-dev npm run test
-```
-
-For a one-off test run with coverage:
-
-```console
-$ docker compose run --rm app-dev npm run test:coverage
-```
-
-### Run tests with coverage
-
-To generate a coverage report:
-
-```console
-$ npm run test:coverage
+$ npm install
+$ npm test
 ```
 
 You should see output like the following:
 
 ```console
-> docker-nodejs-sample@1.0.0 test
-> vitest --run
+ RUN  v3.0.0 /app
 
- ✓ src/server/__tests__/routes/todos.test.ts (5 tests) 16ms
- ✓ src/shared/utils/__tests__/validation.test.ts (15 tests) 6ms
- ✓ src/client/components/__tests__/LoadingSpinner.test.tsx (8 tests) 67ms
- ✓ src/server/database/__tests__/postgres.test.ts (13 tests) 136ms
- ✓ src/client/components/__tests__/ErrorMessage.test.tsx (8 tests) 127ms
- ✓ src/client/components/__tests__/TodoList.test.tsx (8 tests) 147ms
- ✓ src/client/components/__tests__/TodoItem.test.tsx (8 tests) 218ms
- ✓ src/client/__tests__/App.test.tsx (13 tests) 259ms
- ✓ src/client/components/__tests__/AddTodoForm.test.tsx (12 tests) 323ms
- ✓ src/client/hooks/__tests__/useTodos.test.ts (11 tests) 569ms
+ ✓ src/index.test.ts (1)
+   ✓ GET / (1)
+     ✓ returns a JSON greeting
 
- Test Files  9 passed (9)
-      Tests  88 passed (88)
-   Start at  20:57:19
-   Duration  4.41s (transform 1.79s, setup 2.66s, collect 5.38s, tests 4.61s, environment 14.07s, prepare 4.34s)
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  12:00:00
+   Duration  500ms
 ```
 
-### Test structure
+## Run tests in a container
 
-The test suite covers:
+Run the tests using the dev stage of your Dockerfile:
 
-- Client Components (`src/client/components/__tests__/`): React component testing with React Testing Library
-- Custom Hooks (`src/client/hooks/__tests__/`): React hooks testing with proper mocking
-- Server Routes (`src/server/__tests__/routes/`): API endpoint testing
-- Database Layer (`src/server/database/__tests__/`): PostgreSQL database operations testing
-- Utility Functions (`src/shared/utils/__tests__/`): Validation and helper function testing
-- Integration Tests (`src/client/__tests__/`): Full application integration testing
+```console
+$ docker compose run --build --rm --no-deps server npm test
+```
+
+The `--no-deps` flag skips starting the database, since the unit tests don't require it. The `--rm` flag removes the container when the tests finish.
+
+You should see the same test output as when running locally.
 
 ## Run tests when building
 
-To run tests during the Docker build process, you need to add a dedicated test stage to your Dockerfile. If you haven't already added this stage, add the following to your multi-stage Dockerfile:
+To run tests during the Docker build process, add a `test` stage to your Dockerfile that runs after the dev stage.
 
-```dockerfile
-# ========================================
-# Test Stage
-# ========================================
-FROM build-deps AS test
+```dockerfile {hl_lines="32-36"}
+FROM dhi.io/node:24-alpine3.23-dev AS dev
 
-# Set environment
-ENV NODE_ENV=test \
-    CI=true
+WORKDIR /app
 
-# Copy source files
-COPY --chown=nodejs:nodejs . .
+RUN --mount=type=cache,target=/root/.npm \
+    --mount=type=bind,source=package.json,target=package.json \
+    npm install
 
-# Switch to non-root user
-USER nodejs
+COPY . .
+RUN npm run build
 
-# Run tests with coverage
-CMD ["npm", "run", "test:coverage"]
+EXPOSE 3000
+CMD ["npm", "run", "dev"]
+
+
+FROM dhi.io/node:24-alpine3.23-dev AS deps
+WORKDIR /app
+RUN --mount=type=cache,target=/root/.npm \
+    --mount=type=bind,source=package.json,target=package.json \
+    npm install --omit=dev
+
+FROM dhi.io/node:24-alpine3.23 AS runner
+ENV PATH=/app/node_modules/.bin:$PATH
+WORKDIR /app
+COPY --from=deps --chown=node:node /app/node_modules ./node_modules
+COPY --from=dev --chown=node:node /app/dist ./dist
+
+EXPOSE 3000
+CMD ["node", "dist/index.js"]
+
+
+FROM dev AS test
+
+ENV CI=true
+
+CMD ["npm", "test"]
 ```
 
-This test stage:
-
-- Test environment: Sets `NODE_ENV=test` and `CI=true` for proper test execution
-- Non-root user: Runs tests as the `nodejs` user for security
-- Flexible execution: Uses `CMD` instead of `RUN` to allow running tests during build or as a separate container
-- Coverage support: Configured to run tests with coverage reporting
-
-### Build and run tests during image build
-
-To build an image that runs tests during the build process, you can create a custom Dockerfile or modify the existing one temporarily:
+Then build and run the test stage:
 
 ```console
-$ docker build --target test -t node-docker-image-test .
-```
-
-### Run tests in a dedicated test container
-
-The recommended approach is to use the test service defined in `compose.yml`:
-
-```console
-$ docker compose --profile test up app-test --build
-```
-
-Or run it as a one-off container:
-
-```console
-$ docker compose run --rm app-test
-```
-
-### Run tests with coverage in CI/CD
-
-For continuous integration, you can run tests with coverage:
-
-```console
-$ docker build --target test --progress=plain --no-cache -t test-image .
-$ docker run --rm test-image npm run test:coverage
-```
-
-You should see output containing the following:
-
-```console
- ✓ src/server/__tests__/routes/todos.test.ts (5 tests) 16ms
- ✓ src/shared/utils/__tests__/validation.test.ts (15 tests) 6ms
- ✓ src/client/components/__tests__/LoadingSpinner.test.tsx (8 tests) 67ms
- ✓ src/server/database/__tests__/postgres.test.ts (13 tests) 136ms
- ✓ src/client/components/__tests__/ErrorMessage.test.tsx (8 tests) 127ms
- ✓ src/client/components/__tests__/TodoList.test.tsx (8 tests) 147ms
- ✓ src/client/components/__tests__/TodoItem.test.tsx (8 tests) 218ms
- ✓ src/client/__tests__/App.test.tsx (13 tests) 259ms
- ✓ src/client/components/__tests__/AddTodoForm.test.tsx (12 tests) 323ms
- ✓ src/client/hooks/__tests__/useTodos.test.ts (11 tests) 569ms
-
- Test Files  9 passed (9)
-      Tests  88 passed (88)
-   Start at  20:57:19
-   Duration  4.41s (transform 1.79s, setup 2.66s, collect 5.38s, tests 4.61s, environment 14.07s, prepare 4.34s)
+$ docker build --target test -t nodejs-app-test .
+$ docker run --rm nodejs-app-test
 ```
 
 ## Summary
 
-In this section, you learned how to run tests when developing locally using Docker Compose and how to run tests when building your image.
+In this section, you learned how to run tests when developing locally and inside a container.
 
 Related information:
 
-- [Dockerfile reference](/reference/dockerfile/) – Understand all Dockerfile instructions and syntax.
-- [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/) – Write efficient, maintainable, and secure Dockerfiles.
-- [Compose file reference](/compose/compose-file/) – Learn the full syntax and options available for configuring services in `compose.yaml`.
-- [`docker compose run` CLI reference](/reference/cli/docker/compose/run/) – Run one-off commands in a service container.
+- [Dockerfile reference](/reference/dockerfile/)
+- [Compose file reference](/compose/compose-file/)
+- [`docker compose run` CLI reference](/reference/cli/docker/compose/run/)
 
 ## Next steps
 
-Next, you’ll learn how to set up a CI/CD pipeline using GitHub Actions.
+In the next section, you'll learn how to set up a CI/CD pipeline using GitHub Actions.
