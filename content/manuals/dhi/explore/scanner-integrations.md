@@ -20,7 +20,7 @@ Hardened Images:
 | [Docker Scout](/scout/) | Automatic, zero configuration |
 | [Trivy](https://trivy.dev/) | VEX Hub (recommended) or local VEX file |
 | [Grype](https://github.com/anchore/grype) | Via `--vex` flag with local VEX file |
-| [Wiz](https://www.wiz.io/) | Automatic, zero configuration |
+| [Wiz](https://docs.wiz.io/) | Automatic, zero configuration |
 | [Mend.io](https://www.mend.io/) | Automatic, zero configuration |
 | [Black Duck](https://www.blackduck.com/) | Automatic, zero configuration |
 | [Aikido](https://www.aikido.dev/) | Automatic, zero configuration |
