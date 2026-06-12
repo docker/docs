@@ -90,7 +90,7 @@ After both phases, open the workflow run in GitHub Actions and select **Stage** 
 You can view, edit, deactivate, or delete your connections from the **OIDC connection** page.
 
 1. From the **Admin Console**, go to **OIDC connections**.
-1. From the **OIDC Connections** page, find the row with your target connection ID.
+1. From the **OIDC connections** page, find the row with your target connection ID.
 1. Select the action menu icon for your options.
    - **Edit** opens the **Edit OIDC connection** page where you can copy your connection ID, update rulesets, or view the **Failures** table.
    - **Deactivate** temporarily disables access to your GitHub workflow.
@@ -108,5 +108,5 @@ Unlike deactivation, deleting an OIDC connection is permanent. Any workflow whos
 
 ## What’s next
 
-- To update your Docker OIDC connection, see [Manage OIDC connections](#manage-oidc-connections).
-- For reference documentation about Docker OIDC rulesets and behaviors, see [Docker OIDC rulesets and subject claims](/manuals/enterprise/security/docker-oidc/rulesets-claims.md).
+- To update your Docker OIDC connection, see [Manage OIDC connections](#manage-oidc-connections)
+- For reference documentation about Docker OIDC rulesets and behaviors, see [Docker OIDC rulesets and subject claims](/manuals/enterprise/security/docker-oidc/rulesets-claims.md)

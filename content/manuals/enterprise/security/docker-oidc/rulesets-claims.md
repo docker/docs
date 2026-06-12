@@ -9,7 +9,7 @@ weight: 20
 
 {{< summary-bar feature_name="Docker OIDC" >}}
 
-Rulesets and subject claims define what actions your GitHub workflows can take with your Docker resources. This doc explains how to configure rulesets and set subject claims to authorize GitHub Workflow behaviors.
+Rulesets and subject claims define what actions your GitHub workflows can take with your Docker resources. This page explains how to configure rulesets and set subject claims to authorize GitHub Workflow behaviors.
 
 ## Rulesets
 
@@ -50,7 +50,7 @@ repo:octo-org/octo-repo:ref:refs/heads/main
 The exact format varies and depends on what triggered the workflow.
 
 - A branch push, pull request, tag, or environment deployment each produces a different `sub` value.
-- Refer to [GitHub's subject claim examples](https://docs.github.com/en/actions/reference/security/oidc) for the full list of formats.
+- Refer to [GitHub's OpenID Connect Reference](https://docs.github.com/en/actions/reference/security/oidc) for the full list of formats.
 
 You can use wildcards to match across repositories or branches:
 
@@ -64,9 +64,9 @@ You can use wildcards to match across repositories or branches:
 
 Resources define what Docker resources a workflow can access when a ruleset matches. You specify resources per ruleset, alongside the scopes that determine the level of access granted.
 
-Docker Hub repositories are supported resources. 
+Docker Hub repositories are supported resources.
 
 ## What’s next
 
-- Learn about [Docker OIDC](/manuals/enterprise/security/docker-oidc/_index.md).
-- [Create or manage Docker OIDC connections](/manuals/enterprise/security/docker-oidc/create-manage.md).
+- Learn about [Docker OIDC](/manuals/enterprise/security/docker-oidc/_index.md)
+- [Create or manage Docker OIDC connections](/manuals/enterprise/security/docker-oidc/create-manage.md)

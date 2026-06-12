@@ -11,7 +11,7 @@ weight: 35
 
 Docker OIDC creates a trust relationship between GitHub and Docker so you don’t have to maintain long-lived credentials. When you create an OIDC connection, Docker and GitHub exchange short-lived tokens that still grant fine-grained access to your Docker resources.
 
-Docker OIDC is available for organizations with Docker Team or Business subscriptions. 
+Docker OIDC is available for organizations with Docker Team or Business subscriptions.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ To create an OIDC connection, you need:
 
 ## How Docker OIDC works
 
-Docker OIDC mirrors implementations of the OIDC standard. Establishing the trust relationship between GitHub and Docker involves broad phases:
+Docker OIDC mirrors implementations of the OIDC standard. Establishing the trust relationship between GitHub and Docker involves creating the connection, configuring the workflow, and testing.
 
 - GitHub issues a JWT ID token for the workflow run.
 - During the authentication process, Docker then:
@@ -30,7 +30,7 @@ Docker OIDC mirrors implementations of the OIDC standard. Establishing the trust
   - Matches subject claims against specified rulesets created in the Admin Console.
 - Docker returns an access token, allowing the GitHub Action login to Docker to access resources.
 
-All tokens created and exchanged during an OIDC workflow are short-lived and issued on a per-GitHub Action basis.
+All tokens created and exchanged during an OIDC workflow are short-lived and issued on a per-workflow basis.
 
 ## Docker OIDC and OATs
 
@@ -38,9 +38,9 @@ Organization access tokens (OATs) programmatically extend organization-level acc
 
 Docker OIDC doesn’t replace OATs. Rather, Docker OIDC authenticates a workflow process as if it were a user, then extends authorization after authentication.
 
-While OATs govern access to your Docker resources through organization membership, Docker OIDC authenticates GitHub Action workflows when they request a change to your Docker resources.
+While OATs govern access to your Docker resources through organization membership, Docker OIDC authenticates GitHub Actions workflows when they request a change to your Docker resources.
 
 ## What’s next
 
 - [Create an OIDC connection](/manuals/enterprise/security/docker-oidc/create-manage.md)
-- [Docker OIDC rulesets](/manuals/enterprise/security/docker-oidc/rulesets-claims.md).
+- [Docker OIDC rulesets](/manuals/enterprise/security/docker-oidc/rulesets-claims.md)
