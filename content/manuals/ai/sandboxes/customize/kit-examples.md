@@ -266,7 +266,7 @@ name: claude-safe
 displayName: Claude Code (with approval prompts)
 description: Claude Code without --dangerously-skip-permissions
 
-agent:
+sandbox:
   image: "docker/sandbox-templates:claude-code-docker"
   aiFilename: CLAUDE.md
   entrypoint:

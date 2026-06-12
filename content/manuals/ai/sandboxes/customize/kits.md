@@ -209,7 +209,7 @@ agentContext: |
 ```
 
 Both mixin and sandbox kits can declare `agentContext:`. The content is written
-only when the active sandbox kit sets [`agent.aiFilename`](kit-reference.md#agent-block),
+only when the active sandbox kit sets [`sandbox.aiFilename`](kit-reference.md#sandbox-block),
 which determines the memory file's name.
 
 When more than one loaded kit declares an `agentContext:` block, each kit's
@@ -231,11 +231,11 @@ See [`agentContext`](kit-reference.md#agent-context) in the spec reference for t
 
 ### Define an agent
 
-Sandbox kits declare an `agent:` block with the image the agent runs in and
+Sandbox kits declare a `sandbox:` block with the image the agent runs in and
 the command the user attaches to when they launch the sandbox:
 
 ```yaml
-agent:
+sandbox:
   image: "my-registry/my-agent:latest"
   entrypoint:
     run: [my-agent, "--yolo"]
@@ -318,21 +318,21 @@ everything the agent needs. Common use cases:
 - Prototype a new agent integration
 
 Sandbox kits declare everything a mixin kit can, plus an
-[`agent:` block](kit-reference.md#agent-block) that tells the sandbox how to launch the
+[`sandbox:` block](kit-reference.md#sandbox-block) that tells the sandbox how to launch the
 agent. For a step-by-step walkthrough, see
 [Build your own agent kit](build-an-agent.md).
 
 ### Example: the built-in `claude` agent
 
 The `claude` agent you get from `sbx run claude` is defined as a kit. Here
-is an abbreviated version of its spec, showing how the agent block combines
+is an abbreviated version of its spec, showing how the sandbox block combines
 with network, credentials, environment, and commands:
 
 ```yaml {title="claude/spec.yaml"}
 schemaVersion: "1"
 kind: sandbox
 name: claude
-agent:
+sandbox:
   image: "docker/sandbox-templates:claude-code-docker"
   aiFilename: CLAUDE.md
   entrypoint:
@@ -460,7 +460,7 @@ Docker credential store, so pushing to a private registry requires a prior
 
 For a field-by-field reference of every `spec.yaml` block — top-level
 fields, credentials, network, environment, commands, static files,
-agent context, and the agent block — see [Kit spec reference](kit-reference.md).
+agent context, and the sandbox block — see [Kit spec reference](kit-reference.md).
 
 ## Debugging
 

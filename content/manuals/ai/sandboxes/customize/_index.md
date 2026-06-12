@@ -45,7 +45,7 @@ agent runs in. Use kits for things that vary per agent or per team:
 shared linter config, project-specific install steps, credential
 injection for a service the agent talks to.
 
-Templates and kits work together. A sandbox kit's `agent.image` field
+Templates and kits work together. A sandbox kit's `sandbox.image` field
 points at a template: the template provides the base environment, the
 kit layers config, secrets, and runtime behavior on top. A team can ship
 one heavy template and several thin kits without rebuilding the image

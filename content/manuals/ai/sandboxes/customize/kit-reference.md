@@ -1,7 +1,7 @@
 ---
 title: Kit spec reference
 linkTitle: Spec reference
-description: Field-by-field reference for a kit's spec.yaml — credentials, network rules, environment, commands, files, agent context, and the agent block.
+description: Field-by-field reference for a kit's spec.yaml — credentials, network rules, environment, commands, files, agent context, and the sandbox block.
 keywords: sandboxes, sbx, kits, spec.yaml, reference, schema, fields
 weight: 22
 ---
@@ -45,8 +45,8 @@ description: <text>
 | `displayName`   | No       | Human-readable name.                                                       |
 | `description`   | No       | Short description.                                                         |
 
-The sections below apply to both kinds. Sandbox kits also declare an
-[`agent:` block](#agent-block).
+The sections below apply to both kinds. Sandbox kits also declare a
+[`sandbox:` block](#sandbox-block).
 
 ## Credentials
 
@@ -275,7 +275,7 @@ Top-level field. Available in both mixin and sandbox kits. Markdown
 appended to the agent's memory file at sandbox creation. The agent reads
 this content at startup. Write it as instructions or notes the agent
 should follow when working in the sandbox. Applied only when the active
-sandbox kit sets [`agent.aiFilename`](#agent-block).
+sandbox kit sets [`sandbox.aiFilename`](#sandbox-block).
 
 The file is written to the parent of the workspace path inside the
 sandbox, not to the workspace itself. For a workspace mounted at
@@ -293,12 +293,12 @@ across files instead of being concatenated into the main one:
   `<!-- sbx:kits-section start -->` and `<!-- sbx:kits-section end -->`
   markers so it can be regenerated when kits are added or removed.
 
-## Agent block
+## Sandbox block
 
 Required for `kind: sandbox`.
 
 ```yaml
-agent:
+sandbox:
   image: <image-ref>
   aiFilename: <filename>
   entrypoint:
@@ -306,12 +306,12 @@ agent:
     args: [<arg>, ...]
 ```
 
-| Field                   | Required | Description                                                                                                 |
-| ----------------------- | -------- | ----------------------------------------------------------------------------------------------------------- |
-| `agent.image`           | Yes      | Docker image reference. See [Base image requirements](#base-image-requirements).                            |
-| `agent.aiFilename`      | No       | Memory filename (for example, `AGENTS.md`). Appends top-level [`agentContext`](#agent-context) at creation. |
-| `agent.entrypoint.run`  | No       | Command and args as a string array. Replaces the image's entrypoint.                                        |
-| `agent.entrypoint.args` | No       | Args appended to the image's existing entrypoint.                                                           |
+| Field                     | Required | Description                                                                                                 |
+| ------------------------- | -------- | ----------------------------------------------------------------------------------------------------------- |
+| `sandbox.image`           | Yes      | Docker image reference. See [Base image requirements](#base-image-requirements).                            |
+| `sandbox.aiFilename`      | No       | Memory filename (for example, `AGENTS.md`). Appends top-level [`agentContext`](#agent-context) at creation. |
+| `sandbox.entrypoint.run`  | No       | Command and args as a string array. Replaces the image's entrypoint.                                        |
+| `sandbox.entrypoint.args` | No       | Args appended to the image's existing entrypoint.                                                           |
 
 ### Base image requirements
 

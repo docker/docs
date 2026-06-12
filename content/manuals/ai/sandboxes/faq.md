@@ -119,7 +119,7 @@ without `--dangerously-skip-permissions`:
 schemaVersion: "1"
 kind: sandbox
 name: claude-safe
-agent:
+sandbox:
   image: "docker/sandbox-templates:claude-code-docker"
   entrypoint:
     run: [claude]

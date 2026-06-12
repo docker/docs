@@ -65,9 +65,9 @@ substitutes the real key on outbound requests to the API host, so the
 secret never enters the sandbox. A later section walks through the
 specific command for storing the key.
 
-## Write the agent block
+## Write the sandbox block
 
-The `agent:` block tells the sandbox how to launch Amp when the user
+The `sandbox:` block tells the sandbox how to launch Amp when the user
 attaches.
 
 ```yaml {title="amp/spec.yaml"}
@@ -77,7 +77,7 @@ name: amp
 displayName: Amp
 description: The frontier coding agent.
 
-agent:
+sandbox:
   image: "docker/sandbox-templates:shell-docker"
   aiFilename: AGENTS.md
   entrypoint:
@@ -181,7 +181,7 @@ name: amp
 displayName: Amp
 description: The frontier coding agent.
 
-agent:
+sandbox:
   image: "docker/sandbox-templates:shell-docker"
   aiFilename: AGENTS.md
   entrypoint:
