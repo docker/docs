@@ -21,9 +21,9 @@ Hardened Images:
 | [Trivy](https://trivy.dev/) | VEX Hub (recommended) or local VEX file |
 | [Grype](https://github.com/anchore/grype) | Via `--vex` flag with local VEX file |
 | [Wiz](https://docs.wiz.io/) | Automatic, zero configuration |
-| [Mend.io](https://www.mend.io/) | Automatic, zero configuration |
-| [Black Duck](https://www.blackduck.com/) | Automatic, zero configuration |
-| [Aikido](https://www.aikido.dev/) | Automatic, zero configuration |
+| [Mend.io](https://docs.mend.io/platform/latest/docker-hardened-images) | Automatic, zero configuration |
+| [Black Duck](https://documentation.blackduck.com/bundle/bd-hub/page/Reporting/vexReport_global.html) | Automatic, zero configuration |
+| [Aikido](https://help.aikido.dev/container-image-scanning/standalone-registries/docker-hub-images) | Automatic, zero configuration |
 
 For step-by-step instructions for Docker Scout, Trivy, and Grype, see [Scan Docker Hardened Images](/manuals/dhi/how-to/scan.md). For Wiz, Mend.io, Black Duck, and Aikido, refer to their respective documentation.
 
