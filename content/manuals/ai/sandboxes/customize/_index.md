@@ -58,7 +58,7 @@ each time something changes.
 | Pre-install tools and packages into a reusable base image | [Template](templates.md)                                      |
 | Capture a configured running sandbox for reuse            | [Saved template](templates.md#saving-a-sandbox-as-a-template) |
 | Add a tool, credential, or config to agent runs via YAML  | [Kit (mixin)](kits.md)                                        |
-| Define a new agent from scratch                           | [Kit (agent)](kits.md#defining-an-agent)                      |
+| Define a new agent from scratch                           | [Kit (agent)](kits.md#define-an-agent)                        |
 
 Templates and kits can be used together. A template bakes heavy tools into
 the image for fast sandbox startup; a kit layered on top adds per-run
