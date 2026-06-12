@@ -1,7 +1,7 @@
 ---
 title: Kit spec reference
 linkTitle: Spec reference
-description: Field-by-field reference for a kit's spec.yaml — credentials, network rules, environment, commands, files, memory, and the agent block.
+description: Field-by-field reference for a kit's spec.yaml — credentials, network rules, environment, commands, files, agent context, and the agent block.
 keywords: sandboxes, sbx, kits, spec.yaml, reference, schema, fields
 weight: 22
 ---
@@ -264,10 +264,10 @@ Parent directories are created automatically. Existing files are
 overwritten. Absolute paths and path-traversal sequences (`../../`) are
 rejected.
 
-## Memory
+## Agent context
 
 ```yaml
-memory: |
+agentContext: |
   <markdown>
 ```
 
@@ -283,10 +283,10 @@ sandbox, not to the workspace itself. For a workspace mounted at
 `/Users/you/AGENTS.md` (or whatever `aiFilename` is set to). It exists
 only inside the sandbox. Nothing is written to the host.
 
-When several loaded kits declare `memory:` blocks, the content is split
+When several loaded kits declare `agentContext:` blocks, the content is split
 across files instead of being concatenated into the main one:
 
-- Each kit's memory is written to `<kit-name>.md` in a sibling
+- Each kit's agent context is written to `<kit-name>.md` in a sibling
   `kits-memory/` directory next to the main memory file.
 - The main memory file gets a `## Kits` section listing every kit with
   a pointer to its file. The section is delimited by
@@ -306,12 +306,12 @@ agent:
     args: [<arg>, ...]
 ```
 
-| Field                   | Required | Description                                                                                    |
-| ----------------------- | -------- | ---------------------------------------------------------------------------------------------- |
-| `agent.image`           | Yes      | Docker image reference. See [Base image requirements](#base-image-requirements).               |
-| `agent.aiFilename`      | No       | Memory filename (for example, `AGENTS.md`). Appends top-level [`memory`](#memory) at creation. |
-| `agent.entrypoint.run`  | No       | Command and args as a string array. Replaces the image's entrypoint.                           |
-| `agent.entrypoint.args` | No       | Args appended to the image's existing entrypoint.                                              |
+| Field                   | Required | Description                                                                                                 |
+| ----------------------- | -------- | ----------------------------------------------------------------------------------------------------------- |
+| `agent.image`           | Yes      | Docker image reference. See [Base image requirements](#base-image-requirements).                            |
+| `agent.aiFilename`      | No       | Memory filename (for example, `AGENTS.md`). Appends top-level [`agentContext`](#agent-context) at creation. |
+| `agent.entrypoint.run`  | No       | Command and args as a string array. Replaces the image's entrypoint.                                        |
+| `agent.entrypoint.args` | No       | Args appended to the image's existing entrypoint.                                                           |
 
 ### Base image requirements
 

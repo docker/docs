@@ -85,7 +85,7 @@ agent:
 ```
 
 - `aiFilename: AGENTS.md` tells the sandbox to create `AGENTS.md` at launch
-  and append the [`memory`](#prime-amp-with-memory) block to it. Amp reads
+  and append the [`agentContext`](#prime-amp-with-memory) block to it. Amp reads
   this file for instructions.
 - `entrypoint.run` runs `amp` in "YOLO-mode" when the sandbox starts. Adjust if
   you want to pass different args on startup.
@@ -153,12 +153,12 @@ pick any name.
 
 ## Prime Amp with memory
 
-The `memory` field appends markdown to `AGENTS.md` at sandbox creation.
+The `agentContext` field appends markdown to `AGENTS.md` at sandbox creation.
 Use it to tell Amp about the sandbox environment so it knows the
 conventions when it starts.
 
 ```yaml
-memory: |
+agentContext: |
   ## Sandbox environment
 
   You are running inside a Docker sandbox. The workspace is mounted at
@@ -204,7 +204,7 @@ commands:
       user: "1000"
       description: Install Amp
 
-memory: |
+agentContext: |
   ## Sandbox environment
 
   You are running inside a Docker sandbox. The workspace is mounted at
@@ -282,7 +282,7 @@ Two loops help:
 - Edit the spec and re-run `sbx run --kit ./amp/ amp` to pick up changes.
   Remove the sandbox first (`sbx rm <name>`) for a clean start.
 
-Flesh out the `memory` block as you refine how Amp should behave in the
+Flesh out the `agentContext` block as you refine how Amp should behave in the
 sandbox.
 
 ## Publish
@@ -311,7 +311,7 @@ the same decisions for your agent:
   placeholder. If it accepts the env var as-is, declare
   `environment.proxyManaged` in the kit and skip the user-side step.
 
-The rest — memory block, network-policy iteration, packaging — is the
+The rest — agent-context block, network-policy iteration, packaging — is the
 same regardless of agent.
 
 ## Remove the stored secret

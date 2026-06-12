@@ -203,16 +203,16 @@ the agent project conventions, usage tips for a tool the kit installs,
 or other guidance that should be in scope when the sandbox runs.
 
 ```yaml
-memory: |
+agentContext: |
   Ruff is installed. Run `ruff check` before committing.
   Shared config lives at `/workspace/ruff.toml`.
 ```
 
-Both mixin and agent kits can declare `memory:`. The content is written
+Both mixin and agent kits can declare `agentContext:`. The content is written
 only when the active agent kit sets [`agent.aiFilename`](kit-reference.md#agent-block),
 which determines the memory file's name.
 
-When more than one loaded kit declares a `memory:` block, each kit's
+When more than one loaded kit declares an `agentContext:` block, each kit's
 content is written to its own `<kit-name>.md` file under a sibling
 `kits-memory/` directory. The main memory file gets a `## Kits` section
 that points to each kit file:
@@ -227,7 +227,7 @@ that points to each kit file:
     └── git-ssh-sign.md
 ```
 
-See [`memory`](kit-reference.md#memory) in the spec reference for the full field schema.
+See [`agentContext`](kit-reference.md#agent-context) in the spec reference for the full field schema.
 
 ### Define an agent
 
@@ -460,7 +460,7 @@ Docker credential store, so pushing to a private registry requires a prior
 
 For a field-by-field reference of every `spec.yaml` block — top-level
 fields, credentials, network, environment, commands, static files,
-memory, and the agent block — see [Kit spec reference](kit-reference.md).
+agent context, and the agent block — see [Kit spec reference](kit-reference.md).
 
 ## Debugging
 
