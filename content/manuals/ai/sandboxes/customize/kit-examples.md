@@ -17,7 +17,7 @@ weight: 25
 Each section below shows one `spec.yaml` snippet that demonstrates a
 single kit pattern. These aren't complete, distributable kits — they're
 small, focused examples you can lift into your own kit. For the full
-spec reference, see [Kits](kits.md).
+spec reference, see [Kit spec reference](kit-reference.md).
 
 ## Drop a shared config file
 

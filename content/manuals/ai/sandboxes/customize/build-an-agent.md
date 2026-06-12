@@ -18,8 +18,8 @@ This tutorial walks through building an agent kit for the
 [Amp](https://ampcode.com/) coding agent. Each step explains the decision
 behind a part of the spec, so you can apply the same reasoning to other agents.
 
-For reference on every field, see the [Kits](kits.md) page. This tutorial
-focuses on the journey.
+For reference on every field, see the [Kit spec reference](kit-reference.md).
+This tutorial focuses on the journey.
 
 The finished kit is also published as a runnable sample at
 [docker/sbx-kits-contrib](https://github.com/docker/sbx-kits-contrib/tree/main/amp) —
@@ -28,7 +28,7 @@ useful as a reference while you follow along.
 ## Choose a base image
 
 An agent kit needs a container image that satisfies the
-[base image requirements](kits.md#base-image-requirements): non-root
+[base image requirements](kit-reference.md#base-image-requirements): non-root
 `agent` user at UID 1000, passwordless sudo, `/home/agent/` home, and HTTP
 proxy environment variable forwarding.
 
