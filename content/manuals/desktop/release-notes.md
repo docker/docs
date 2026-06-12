@@ -33,7 +33,8 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### Updates
 
 - [Docker Agent v1.73.0](https://github.com/docker/docker-agent/releases/tag/v1.73.0)
-- `docker pass` v0.1.3
+- `docker pass` v0.1.4
+- [Credential helpers v0.9.8](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.8)
 
 ### Bug fixes and enhancements
 
@@ -59,6 +60,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a bug where Docker Desktop was not restarted after a failed update was reverted to the previous version.
 - Fixed delta updates failing to prepare.
 - Fixed an issue on Hyper-V where Docker commands (e.g. `docker login`) would fail on the first attempt after the engine had been idle-shut-down or paused.
+- Fixed an issue on Windows where Docker Desktop showed a generic engine-start failure instead of a clear, actionable error message when WSL is not installed.
 
 ## 4.77.0
 
