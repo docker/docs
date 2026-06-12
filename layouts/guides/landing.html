@@ -3,7 +3,7 @@
 {{ end }}
 
 {{ define "main" }}
-  {{- $tagOrder := slice "ai" "testing" "cicd" "security" "databases" "deployment" "admin" }}
+  {{- $tagOrder := slice "languages" "ai" "testing" "cicd" "security" "databases" "deployment" "admin" "labs" }}
 
   <div class="not-prose">
     {{- partial "breadcrumbs.html" . }}
@@ -26,7 +26,7 @@
     <div
       class="flex gap-12"
       x-data="{
-        activeTag: 'ai',
+        activeTag: 'languages',
         init() {
           const obs = new IntersectionObserver(
             entries => entries.forEach(e => { if (e.isIntersecting) this.activeTag = e.target.id }),

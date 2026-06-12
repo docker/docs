@@ -19,7 +19,7 @@ aliases:
   - /guides/rust/develop/
   - /guides/rust/run-containers/
 params:
-  tags: [cicd]
+  tags: [languages]
   time: 20 minutes
 ---
 
@@ -344,7 +344,7 @@ In the next section learn how to run your image as a container.
 
 ### Prerequisite
 
-You have completed [Build your Rust image](build-images.md) and you have built an image.
+You have completed [Build your Rust image](./) and you have built an image.
 
 ### Overview
 
@@ -354,7 +354,7 @@ To run an image inside of a container, you use the `docker run` command. The `do
 
 ### Run an image
 
-Use `docker run` to run the image you built in [Build your Rust image](build-images.md).
+Use `docker run` to run the image you built in [Build your Rust image](./).
 
 ```console
 $ docker run docker-rust-image-dhi
@@ -790,7 +790,7 @@ In the cloned repository's directory, create a new directory named `db` and insi
 mysecretpassword
 ```
 
-If you have any other containers running from the previous sections, [stop](./run-containers.md#stop-start-and-name-containers) them now.
+If you have any other containers running from the previous sections, [stop](#stop-start-and-name-containers) them now.
 
 Now, run the following `docker compose up` command to start your application.
 
@@ -966,7 +966,7 @@ In your `docker-rust-postgres` directory, create a file named
 `docker-rust-kubernetes.yaml`. Open the file in an IDE or text editor and add
 the following contents. Replace `DOCKER_USERNAME/REPO_NAME` with your Docker
 username and the name of the repository that you created in [Configure CI/CD for
-your Rust application](configure-ci-cd.md).
+your Rust application](./).
 
 ```yaml
 apiVersion: apps/v1
@@ -1100,7 +1100,7 @@ In this Kubernetes YAML file, there are four objects, separated by the `---`. In
   you'll get just one replica, or copy of your pod. That pod, which is
   described under `template`, has just one container in it. The container is
   created from the image built by GitHub Actions in [Configure CI/CD for your
-  Rust application](configure-ci-cd.md).
+  Rust application](./).
 - A NodePort service, which will route traffic from port 30001 on your host to
   port 5000 inside the pods it routes to, allowing you to reach your app
   from the network.

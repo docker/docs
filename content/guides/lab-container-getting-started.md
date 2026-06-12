@@ -9,9 +9,8 @@ summary: |
   image from a Node.js app, and optionally push it to Docker Hub.
 keywords: Docker, containers, Dockerfile, images, getting started, lab, labspace
 params:
-  tags: [cicd]
+  tags: [labs]
   time: 30 minutes
-      url: https://github.com/dockersamples/labspace-container-getting-started
 ---
 
 Start from zero and learn Docker's core building blocks. You'll run pre-built

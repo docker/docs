@@ -11,7 +11,7 @@ aliases:
   - /guides/deno/deploy/
   - /guides/deno/develop/
 params:
-  tags: [cicd]
+  tags: [languages]
   time: 10 minutes
 ---
 
@@ -233,7 +233,7 @@ containers.
 
 ### Prerequisites
 
-Complete [Containerize a Deno application](containerize.md).
+Complete [Containerize a Deno application](./).
 
 ### Overview
 
@@ -301,7 +301,7 @@ In the next section, you'll take a look at how to set up a CI/CD pipeline using 
 
 ### Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize a Deno application](containerize.md). You must have a [GitHub](https://github.com/signup) account and a verified [Docker](https://hub.docker.com/signup) account to complete this section.
+Complete all the previous sections of this guide, starting with [Containerize a Deno application](./). You must have a [GitHub](https://github.com/signup) account and a verified [Docker](https://hub.docker.com/signup) account to complete this section.
 
 ### Overview
 
@@ -425,7 +425,7 @@ Next, learn how you can locally test and debug your workloads on Kubernetes befo
 
 ### Prerequisites
 
-- Complete all the previous sections of this guide, starting with [Containerize a Deno application](containerize.md).
+- Complete all the previous sections of this guide, starting with [Containerize a Deno application](./).
 - [Turn on Kubernetes](/manuals//desktop/use-desktop/kubernetes.md#enable-kubernetes) in Docker Desktop.
 
 ### Overview
@@ -438,7 +438,7 @@ In your `deno-docker` directory, create a file named
 `docker-kubernetes.yml`. Open the file in an IDE or text editor and add
 the following contents. Replace `DOCKER_USERNAME/REPO_NAME` with your Docker
 username and the name of the repository that you created in [Configure CI/CD for
-your Deno application](configure-ci-cd.md).
+your Deno application](./).
 
 ```yaml
 apiVersion: apps/v1
@@ -482,7 +482,7 @@ In this Kubernetes YAML file, there are two objects, separated by the `---`:
    you'll get just one replica, or copy of your pod. That pod, which is
    described under `template`, has just one container in it. The
     container is created from the image built by GitHub Actions in [Configure CI/CD for
-    your Deno application](configure-ci-cd.md).
+    your Deno application](./).
  - A NodePort service, which will route traffic from port 30001 on your host to
    port 8000 inside the pods it routes to, allowing you to reach your app
    from the network.

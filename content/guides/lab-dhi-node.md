@@ -11,9 +11,8 @@ summary: |
   builds with DHI, and explore SBOMs, VEX, and compliance attestations.
 keywords: Docker, Hardened Images, DHI, Node.js, Docker Scout, CVE, security, SBOM, lab, labspace
 params:
-  tags: [security]
+  tags: [labs]
   time: 30 minutes
-      url: https://github.com/dockersamples/labspace-dhi-node
 ---
 
 Migrate a Node.js application from a standard `node:24-trixie-slim` base image

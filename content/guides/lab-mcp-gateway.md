@@ -11,9 +11,8 @@ keywords: AI, Docker, MCP, MCP Gateway, MCP servers, lab, labspace
 aliases:
   - /labs/docker-for-ai/mcp-gateway/
 params:
-  tags: [ai]
+  tags: [labs]
   time: 20 minutes
-      url: https://github.com/dockersamples/labspace-mcp-gateway
 ---
 
 This lab provides a comprehensive, hands-on overview of the Docker MCP Gateway,

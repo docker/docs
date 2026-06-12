@@ -16,7 +16,6 @@ params:
   tags: [testing]
   image: images/learning-paths/testcontainers-cloud-learning-path.png
   time: 12 minutes
-      url: https://www.docker.com/search/?_sf_s=testcontainers%20cloud
 ---
 
 

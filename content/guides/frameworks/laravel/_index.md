@@ -11,9 +11,8 @@ aliases:
   - /guides/frameworks/laravel/prerequisites/
   - /guides/frameworks/laravel/production-setup/
 params:
-  tags: [cicd]
+  tags: [languages]
   time: 30 minutes
-      url: https://github.com/dockersamples/laravel-docker-examples
 ---
 
 

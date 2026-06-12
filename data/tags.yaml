@@ -13,6 +13,12 @@ databases:
 deployment:
   title: Deployment
   description: Deploy containerized apps to Kubernetes and other platforms.
+labs:
+  title: Hands-on labs
+  description: Interactive, guided labs you can run directly in your browser.
+languages:
+  title: Languages & frameworks
+  description: Containerize and develop apps in your language of choice.
 security:
   title: Security
   description: Harden images, scan vulnerabilities, and secure your supply chain.

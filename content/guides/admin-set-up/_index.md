@@ -13,7 +13,6 @@ params:
   tags: [admin]
   time: 20 minutes
   image:
-      url: "https://www.docker.com/pricing?ref=Docs&refAction=DocsGuidesAdminSetup"
 ---
 
 

@@ -21,7 +21,7 @@ aliases:
   - /guides/java/develop/
   - /guides/java/run-tests/
 params:
-  tags: [cicd]
+  tags: [languages]
   time: 20 minutes
 ---
 
@@ -320,7 +320,7 @@ Docker containers.
 
 ### Prerequisites
 
-Work through the steps to containerize your application in [Containerize your app](containerize.md).
+Work through the steps to containerize your application in [Containerize your app](./).
 
 ### Overview
 
@@ -715,7 +715,7 @@ In the next section, you’ll take a look at how to run unit tests in Docker.
 
 ### Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize a Java application](containerize.md).
+Complete all the previous sections of this guide, starting with [Containerize a Java application](./).
 
 ### Overview
 
@@ -832,7 +832,7 @@ GitHub Actions.
 
 ### Prerequisites
 
-Complete the previous sections of this guide, starting with [Containerize your app](containerize.md). You must have a [GitHub](https://github.com/signup) account and a verified [Docker](https://hub.docker.com/signup) account to complete this section.
+Complete the previous sections of this guide, starting with [Containerize your app](./). You must have a [GitHub](https://github.com/signup) account and a verified [Docker](https://hub.docker.com/signup) account to complete this section.
 
 ### Overview
 
@@ -967,7 +967,7 @@ Next, learn how you can locally test and debug your workloads on Kubernetes befo
 
 ### Prerequisites
 
-- Complete all the previous sections of this guide, starting with [Containerize your app](containerize.md).
+- Complete all the previous sections of this guide, starting with [Containerize your app](./).
 - [Turn on Kubernetes](/manuals/desktop/use-desktop/kubernetes.md#enable-kubernetes) in Docker Desktop.
 
 ### Overview
@@ -983,7 +983,7 @@ In your `spring-petclinic` directory, create a file named
 `docker-java-kubernetes.yaml`. Open the file in an IDE or text editor and add
 the following contents. Replace `DOCKER_USERNAME/REPO_NAME` with your Docker
 username and the name of the repository that you created in [Configure CI/CD for
-your Java application](configure-ci-cd.md).
+your Java application](./).
 
 ```yaml
 apiVersion: apps/v1
@@ -1027,7 +1027,7 @@ In this Kubernetes YAML file, there are two objects, separated by the `---`:
   you'll get just one replica, or copy of your pod. That pod, which is
   described under `template`, has just one container in it. The
   container is created from the image built by GitHub Actions in [Configure CI/CD for
-  your Java application](configure-ci-cd.md).
+  your Java application](./).
 - A NodePort service, which will route traffic from port 30001 on your host to
   port 8080 inside the pods it routes to, allowing you to reach your app
   from the network.

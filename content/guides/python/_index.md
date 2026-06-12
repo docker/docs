@@ -22,7 +22,7 @@ aliases:
   - /guides/python/lint-format-typing/
   - /guides/python/secure-supply-chain/
 params:
-  tags: [cicd]
+  tags: [languages]
   time: 20 minutes
 ---
 
@@ -476,7 +476,7 @@ In the next section, you'll take a look at how to set up a local development env
 
 ### Prerequisites
 
-Complete [Containerize a Python application](containerize.md).
+Complete [Containerize a Python application](./).
 
 ### Overview
 
@@ -2031,7 +2031,7 @@ In the next section, you'll learn how you can set up linting, formatting, and ty
 Complete [Develop your app](develop.md). This topic requires a local Python
 installation because the tools and Git hooks introduced here run on your
 host. If you don't want to install Python locally, skip this topic. The same
-checks run in CI in the [next topic](configure-github-actions.md).
+checks run in CI in the [next topic](./).
 
 ### Overview
 
@@ -2209,7 +2209,7 @@ Related information:
 
 ### Next steps
 
-- [Configure GitHub Actions](configure-github-actions.md) to run these checks automatically
+- [Configure GitHub Actions](./) to run these checks automatically
 - Customize linting rules to match your team's style preferences
 - Explore advanced type checking features
 
@@ -2217,7 +2217,7 @@ Related information:
 
 ### Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize a Python application](containerize.md). You must have a [GitHub](https://github.com/signup) account and a verified [Docker](https://hub.docker.com/signup) account to complete this section.
+Complete all the previous sections of this guide, starting with [Containerize a Python application](./). You must have a [GitHub](https://github.com/signup) account and a verified [Docker](https://hub.docker.com/signup) account to complete this section.
 
 If you didn't create a [GitHub repository](https://github.com/new) for your project yet, it is time to do it. After creating the repository, don't forget to [add a remote](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories) and ensure you can commit and [push your code](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push) to GitHub.
 
@@ -2362,13 +2362,13 @@ Related information:
 ### Next steps
 
 In the next section, you'll learn how to inspect and generate supply chain
-attestations for your image. See [Secure your supply chain](secure-supply-chain.md).
+attestations for your image. See [Secure your supply chain](./).
 
 ## Secure your Python image supply chain
 
 ### Prerequisites
 
-Complete [Configure CI/CD for your Python application](configure-github-actions.md).
+Complete [Configure CI/CD for your Python application](./).
 
 ### Overview
 
@@ -2542,7 +2542,7 @@ Create the following two Kubernetes manifest files in your
 `python-docker-example` directory. Before applying
 `docker-python-kubernetes.yaml`, replace `DOCKER_USERNAME/REPO_NAME` with your
 Docker username and the repository name that you created in [Configure CI/CD for
-your Python application](./configure-github-actions.md).
+your Python application](./).
 
 {{< files name="python-docker-example" >}}
 
@@ -2700,7 +2700,7 @@ In these Kubernetes YAML files, there are various objects, separated by the `---
   you'll get just one replica, or copy of your pod. That pod, which is
   described under `template`, has just one container in it. The
   container is created from the image built by GitHub Actions in [Configure CI/CD for
-  your Python application](configure-github-actions.md).
+  your Python application](./).
 - A Service, which will define how the ports are mapped in the containers.
 - A PersistentVolumeClaim, to define a storage that will be persistent through restarts for the database.
 - A Secret, which stores the database password as a Kubernetes Secret resource.

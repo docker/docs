@@ -14,7 +14,7 @@ aliases:
   - /guides/nextjs/develop/
   - /guides/nextjs/run-tests/
 params:
-  tags: [cicd]
+  tags: [languages]
   time: 20 minutes
 ---
 
@@ -1016,7 +1016,7 @@ In the next section, you'll learn how to develop your application using Docker c
 
 ### Prerequisites
 
-Complete [Containerize Next.js application](containerize.md).
+Complete [Containerize Next.js application](./).
 
 ---
 
@@ -1219,7 +1219,7 @@ In the next section, you'll learn how to run unit tests for your Next.js applica
 
 ### Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize Next.js application](containerize.md).
+Complete all the previous sections of this guide, starting with [Containerize Next.js application](./).
 
 ### Overview
 
@@ -1480,7 +1480,7 @@ Next, you'll learn how to set up a CI/CD pipeline using GitHub Actions to automa
 
 ### Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize Next.js application](containerize.md).
+Complete all the previous sections of this guide, starting with [Containerize Next.js application](./).
 
 You must also have:
 - A [GitHub](https://github.com/signup) account.
@@ -1807,7 +1807,7 @@ Next, learn how you can locally test and debug your Next.js workloads on Kuberne
 ### Prerequisites
 
 Before you begin, make sure you've completed the following:
-- Complete all the previous sections of this guide, starting with [Containerize Next.js application](containerize.md).
+- Complete all the previous sections of this guide, starting with [Containerize Next.js application](./).
 - [Enable Kubernetes](/manuals/desktop/use-desktop/kubernetes.md#enable-kubernetes) in Docker Desktop.
 
 > **New to Kubernetes?**  
@@ -1829,7 +1829,7 @@ Follow these steps to define your deployment configuration:
 
 2. Open the file in your IDE or preferred text editor.
 
-3. Add the following configuration, and be sure to replace `{DOCKER_USERNAME}` and `{DOCKERHUB_PROJECT_NAME}` with your actual Docker Hub username and repository name from the previous [Automate your builds with GitHub Actions](configure-github-actions.md).
+3. Add the following configuration, and be sure to replace `{DOCKER_USERNAME}` and `{DOCKERHUB_PROJECT_NAME}` with your actual Docker Hub username and repository name from the previous [Automate your builds with GitHub Actions](./).
 
 
 ```yaml
@@ -1879,7 +1879,7 @@ This manifest defines two key Kubernetes resources, separated by `---`:
 
 - Deployment
   Deploys a single replica of your Next.js application inside a pod. The pod uses the Docker image built and pushed by your GitHub Actions CI/CD workflow  
-  (refer to [Automate your builds with GitHub Actions](configure-github-actions.md)).  
+  (refer to [Automate your builds with GitHub Actions](./)).  
   The container listens on port `3000`, which is the default port for Next.js applications.
 
 - Service (NodePort) 

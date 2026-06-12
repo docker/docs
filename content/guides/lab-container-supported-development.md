@@ -11,9 +11,8 @@ summary: |
   visualizer — all without installing anything on the host.
 keywords: Docker, Compose, local development, PostgreSQL, pgAdmin, containers, lab, labspace
 params:
-  tags: [cicd]
+  tags: [labs]
   time: 30 minutes
-      url: https://github.com/dockersamples/labspace-container-supported-development
 ---
 
 Use containers to run the services your app depends on — databases, caches,

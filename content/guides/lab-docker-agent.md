@@ -12,9 +12,8 @@ aliases:
   - /labs/docker-for-ai/cagent/
   - /guides/lab-cagent/
 params:
-  tags: [ai]
+  tags: [labs]
   time: 20 minutes
-      url: https://github.com/ajeetraina/labspace-cagent
 ---
 
 This lab walks you through building intelligent agents with Docker Agent. You'll learn beginner

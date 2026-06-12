@@ -11,9 +11,8 @@ keywords: AI, Docker, Model Runner, MCP Gateway, agentic apps, lab, labspace
 aliases:
   - /labs/docker-for-ai/agentic-apps/
 params:
-  tags: [ai]
+  tags: [labs]
   time: 20 minutes
-      url: https://github.com/dockersamples/labspace-agentic-apps-with-docker
 ---
 
 Get up and running with building agentic applications using Compose, Docker

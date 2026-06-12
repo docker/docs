@@ -21,7 +21,7 @@ aliases:
   - /guides/ruby/deploy/
   - /guides/ruby/develop/
 params:
-  tags: [cicd]
+  tags: [languages]
   time: 20 minutes
 ---
 
@@ -420,7 +420,7 @@ In the next section, you'll take a look at how to set up a CI/CD pipeline using 
 
 ### Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize a Ruby on Rails application](containerize.md). You must have a [GitHub](https://github.com/signup) account and a verified [Docker](https://hub.docker.com/signup) account to complete this section.
+Complete all the previous sections of this guide, starting with [Containerize a Ruby on Rails application](./). You must have a [GitHub](https://github.com/signup) account and a verified [Docker](https://hub.docker.com/signup) account to complete this section.
 
 If you didn't create a [GitHub repository](https://github.com/new) for your project yet, it is time to do it. After creating the repository, don't forget to [add a remote](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories) and ensure you can commit and [push your code](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push) to GitHub.
 
@@ -521,7 +521,7 @@ In the next section, you'll learn how you can develop your application using con
 
 ### Prerequisites
 
-Complete [Containerize a Ruby on Rails application](containerize.md).
+Complete [Containerize a Ruby on Rails application](./).
 
 ### Overview
 
@@ -716,7 +716,7 @@ In the next section, you'll learn how you can locally test and debug your worklo
 
 ### Prerequisites
 
-- Complete all the previous sections of this guide, starting with [Containerize a Ruby on Rails application](containerize.md).
+- Complete all the previous sections of this guide, starting with [Containerize a Ruby on Rails application](./).
 - [Turn on Kubernetes](/manuals/desktop/use-desktop/kubernetes.md#enable-kubernetes) in Docker Desktop.
 
 ### Overview
@@ -729,7 +729,7 @@ In your `docker-ruby-on-rails` directory, create a file named
 `docker-ruby-on-rails-kubernetes.yaml`. Open the file in an IDE or text editor and add
 the following contents. Replace `DOCKER_USERNAME/REPO_NAME` with your Docker
 username and the name of the repository that you created in [Configure CI/CD for
-your Ruby on Rails application](configure-github-actions.md).
+your Ruby on Rails application](./).
 
 ```yaml
 apiVersion: apps/v1
@@ -773,7 +773,7 @@ In this Kubernetes YAML file, there are two objects, separated by the `---`:
   you'll get just one replica, or copy of your pod. That pod, which is
   described under `template`, has just one container in it. The
   container is created from the image built by GitHub Actions in [Configure CI/CD for
-  your Ruby on Rails application](configure-github-actions.md).
+  your Ruby on Rails application](./).
 - A NodePort service, which will route traffic from port 30001 on your host to
   port 8001 inside the pods it routes to, allowing you to reach your app
   from the network.

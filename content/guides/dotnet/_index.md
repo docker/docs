@@ -18,7 +18,7 @@ aliases:
   - /guides/dotnet/develop/
   - /guides/dotnet/run-tests/
 params:
-  tags: [cicd]
+  tags: [languages]
   time: 20 minutes
   toc_min: 1
   toc_max: 2
@@ -395,7 +395,7 @@ Docker containers.
 
 ### Prerequisites
 
-Complete [Containerize a .NET application](containerize.md).
+Complete [Containerize a .NET application](./).
 
 ### Overview
 
@@ -410,9 +410,9 @@ In this section, you'll learn how to set up a development environment for your c
 This section uses a different branch of the `docker-dotnet-sample` repository
 that contains an updated .NET application. The updated application is on the
 `add-db` branch of the repository you cloned in [Containerize a .NET
-application](containerize.md).
+application](./).
 
-To get the updated code, you need to checkout the `add-db` branch. For the changes you made in [Containerize a .NET application](containerize.md), for this section, you can stash them. In a terminal, run the following commands in the `docker-dotnet-sample` directory.
+To get the updated code, you need to checkout the `add-db` branch. For the changes you made in [Containerize a .NET application](./), for this section, you can stash them. In a terminal, run the following commands in the `docker-dotnet-sample` directory.
 
 1. Stash any previous changes.
 
@@ -812,7 +812,7 @@ In the next section, you'll learn how to run unit tests using Docker.
 
 ### Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize a .NET application](containerize.md).
+Complete all the previous sections of this guide, starting with [Containerize a .NET application](./).
 
 ### Overview
 
@@ -953,7 +953,7 @@ Next, you’ll learn how to set up a CI/CD pipeline using GitHub Actions.
 
 ### Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize a .NET application](containerize.md). You must have a [GitHub](https://github.com/signup) account and a verified [Docker](https://hub.docker.com/signup) account to complete this section.
+Complete all the previous sections of this guide, starting with [Containerize a .NET application](./). You must have a [GitHub](https://github.com/signup) account and a verified [Docker](https://hub.docker.com/signup) account to complete this section.
 
 ### Overview
 
@@ -1094,7 +1094,7 @@ Next, learn how you can locally test and debug your workloads on Kubernetes befo
 ### Prerequisites
 
 - Complete all the previous sections of this guide, starting with [Containerize
-  a .NET application](containerize.md).
+  a .NET application](./).
 - [Turn on Kubernetes](/manuals/desktop/use-desktop/kubernetes.md#enable-kubernetes) in Docker
   Desktop.
 
@@ -1111,7 +1111,7 @@ In your `docker-dotnet-sample` directory, create a file named
 `docker-dotnet-kubernetes.yaml`. Open the file in an IDE or text editor and add
 the following contents. Replace `DOCKER_USERNAME/REPO_NAME` with your Docker
 username and the name of the repository that you created in [Configure CI/CD for
-your .NET application](configure-ci-cd.md).
+your .NET application](./).
 
 ```yaml
 apiVersion: apps/v1
@@ -1230,7 +1230,7 @@ In this Kubernetes YAML file, there are four objects, separated by the `---`. In
   you'll get just one replica, or copy of your pod. That pod, which is
   described under `template`, has just one container in it. The container is
   created from the image built by GitHub Actions in [Configure CI/CD for your
-  .NET application](configure-ci-cd.md).
+  .NET application](./).
 - A NodePort service, which will route traffic from port 30001 on your host to
   port 8080 inside the pods it routes to, allowing you to reach your app
   from the network.

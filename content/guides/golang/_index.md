@@ -25,7 +25,7 @@ aliases:
   - /guides/golang/run-containers/
   - /guides/golang/run-tests/
 params:
-  tags: [cicd]
+  tags: [languages]
   time: 30 minutes
 ---
 
@@ -552,7 +552,7 @@ In the next module, you’ll take a look at how to run your image as a container
 
 ### Prerequisites
 
-Work through the steps to containerize a Go application in [Build your Go image](build-images.md).
+Work through the steps to containerize a Go application in [Build your Go image](./).
 
 ### Overview
 
@@ -753,7 +753,7 @@ In this module, you learned how to run containers and publish ports. You also le
 
 ### Prerequisites
 
-Work through the steps of the [run your image as a container](run-containers.md) module to learn how to manage the lifecycle of your containers.
+Work through the steps of the [run your image as a container](./) module to learn how to manage the lifecycle of your containers.
 
 ### Introduction
 
@@ -1477,7 +1477,7 @@ In the next module, you'll take a look at one possible approach to running funct
 
 ### Prerequisites
 
-Complete the [Build your Go image](build-images.md) section of this guide.
+Complete the [Build your Go image](./) section of this guide.
 
 ### Overview
 
@@ -1487,7 +1487,7 @@ tests and end-to-end testing. In this guide you take a look at running your unit
 tests in Docker when building.
 
 For this section, use the `docker-gs-ping` project that you cloned in [Build
-your Go image](build-images.md).
+your Go image](./).
 
 ### Run tests when building
 
@@ -1564,7 +1564,7 @@ you’ll learn how to set up a CI/CD pipeline using GitHub Actions.
 
 ### Prerequisites
 
-Complete the previous sections of this guide, starting with [Build your Go image](build-images.md). You must have a [GitHub](https://github.com/signup) account and a verified [Docker](https://hub.docker.com/signup) account to complete this section.
+Complete the previous sections of this guide, starting with [Build your Go image](./). You must have a [GitHub](https://github.com/signup) account and a verified [Docker](https://hub.docker.com/signup) account to complete this section.
 
 ### Overview
 
@@ -1690,7 +1690,7 @@ Next, learn how you can locally test and debug your workloads on Kubernetes befo
 ### Prerequisites
 
 - Complete all the previous sections of this guide, starting with [Build
-  your Go image](build-images.md).
+  your Go image](./).
 - [Turn on Kubernetes](/manuals/desktop/use-desktop/kubernetes.md#enable-kubernetes) in Docker
   Desktop.
 
@@ -1707,7 +1707,7 @@ In your project directory, create a file named
 `docker-go-kubernetes.yaml`. Open the file in an IDE or text editor and add
 the following contents. Replace `DOCKER_USERNAME/REPO_NAME` with your Docker
 username and the name of the repository that you created in [Configure CI/CD for
-your Go application](configure-ci-cd.md).
+your Go application](./).
 
 ```yaml
 apiVersion: apps/v1
@@ -1839,7 +1839,7 @@ In this Kubernetes YAML file, there are four objects, separated by the `---`. In
   you'll get just one replica, or copy of your pod. That pod, which is
   described under `template`, has just one container in it. The container is
   created from the image built by GitHub Actions in [Configure CI/CD for your
-  Go application](configure-ci-cd.md).
+  Go application](./).
 - A NodePort service, which will route traffic from port 30001 on your host to
   port 8080 inside the pods it routes to, allowing you to reach your app
   from the network.

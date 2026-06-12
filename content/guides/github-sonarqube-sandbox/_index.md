@@ -12,7 +12,6 @@ params:
   tags: [cicd]
   time: 40 minutes
   image:
-      url: https://docs.docker.com/ai/mcp-catalog-and-toolkit/sandboxes/
 ---
 
 

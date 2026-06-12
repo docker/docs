@@ -11,9 +11,8 @@ summary: |
   base image selection, and build secrets.
 keywords: Docker, Dockerfile, images, multi-stage builds, layer caching, build secrets, lab, labspace
 params:
-  tags: [cicd]
+  tags: [labs]
   time: 45 minutes
-      url: https://github.com/dockersamples/labspace-building-images
 ---
 
 Take a working but naïve Dockerfile and progressively improve it into a

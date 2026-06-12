@@ -11,9 +11,8 @@ summary: |
   with containers at every stage of the SDLC.
 keywords: Docker, Compose, Testcontainers, Kubernetes, CI/CD, SDLC, lab, labspace
 params:
-  tags: [cicd]
+  tags: [labs]
   time: 60 minutes
-      url: https://github.com/dockersamples/labspace-containerized-sdlc
 ---
 
 Build a real Node.js API, then apply containers at every stage of the software

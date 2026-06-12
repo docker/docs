@@ -283,7 +283,7 @@ In the next section, you'll learn how you can run your application, database, an
 
 ### Prerequisites
 
-Complete [Containerize a generative AI application](containerize.md).
+Complete [Containerize a generative AI application](./).
 
 ### Overview
 

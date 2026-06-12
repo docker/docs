@@ -11,7 +11,8 @@ params:
     - An OpenShift cluster (version 4.11 or later recommended)
     - The oc CLI authenticated to your cluster
     - A Docker Hub account with access to Docker Hardened Images
-    - Familiarity with OpenShift Security Context Constraints (SCCs)---
+    - Familiarity with OpenShift Security Context Constraints (SCCs)
+---
 
 Docker Hardened Images (DHI) can be deployed on Red Hat OpenShift Container
 Platform, but OpenShift’s security model differs from standard Kubernetes in
