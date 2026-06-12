@@ -43,8 +43,11 @@ For more information on the Docker driver, see the
 
 The Docker driver has the following limitations:
 
-- Multi-platform builds are not supported. To build for multiple platforms,
-  use the [`docker-container` driver](./docker-container.md) or enable the
-  [containerd image store](../../../storage/containerd.md).
+
 - You can't configure custom BuildKit versions or parameters. These are
   managed internally by the Docker Engine.
+- Multi-platform builds require the containerd image store. If your Docker
+  Engine uses legacy graph-drivers, multi-platform builds are not supported.
+  Docker Engine v29.x and later uses containerd snapshotters by default,
+  which does support multi-platform builds. See
+  [containerd image store](../../../storage/containerd.md) for more details.
