@@ -1,7 +1,7 @@
 ---
 title: Scanner integrations
 description: Learn which vulnerability scanners work with Docker Hardened Images and how to choose the right scanner for accurate vulnerability assessment.
-keywords: scanner integration, vulnerability scanning, docker scout, trivy, grype, mend.io, black duck, container security scanners
+keywords: scanner integration, vulnerability scanning, docker scout, trivy, grype, wiz, black duck, aikido, container security scanners
 weight: 40
 ---
 
@@ -13,23 +13,19 @@ attestations included with each image.
 ## Scanners with VEX support
 
 The following scanners can read and apply VEX attestations included with Docker
-Hardened Images to deliver more accurate vulnerability assessments:
+Hardened Images:
 
-- [Docker Scout](/scout/): Automatically applies VEX statements with
-  zero configuration. Integrated directly into Docker Desktop and the Docker CLI.
-- [Trivy](https://trivy.dev/): Supports VEX through VEX Hub for automatic
-  updates or local VEX files for air-gapped environments.
-- [Grype](https://github.com/anchore/grype): Supports VEX via the `--vex`
-  flag for local VEX file processing.
-- [Wiz](https://www.wiz.io/): Automatically applies VEX statements with
-  zero configuration.
-- [Mend.io](https://www.mend.io/): Automatically retrieves and applies VEX
-  statements with zero configuration. Combines VEX data with reachability
-  analysis.
-- [Black Duck](https://www.blackduck.com/): Identifies Docker Hardened Images
-  and applies VEX statements with zero configuration.
+| Scanner | VEX application |
+|---------|-----------------|
+| [Docker Scout](/scout/) | Automatic, zero configuration |
+| [Trivy](https://trivy.dev/) | VEX Hub (recommended) or local VEX file |
+| [Grype](https://github.com/anchore/grype) | Via `--vex` flag with local VEX file |
+| [Wiz](https://www.wiz.io/) | Automatic, zero configuration |
+| [Mend.io](https://www.mend.io/) | Automatic, zero configuration |
+| [Black Duck](https://www.blackduck.com/) | Automatic, zero configuration |
+| [Aikido](https://www.aikido.dev/) | Automatic, zero configuration |
 
-For step-by-step instructions, see [Scan Docker Hardened Images](/manuals/dhi/how-to/scan.md).
+For step-by-step instructions for Docker Scout, Trivy, and Grype, see [Scan Docker Hardened Images](/manuals/dhi/how-to/scan.md). For Wiz, Mend.io, Black Duck, and Aikido, refer to their respective documentation.
 
 ## Choosing a scanner for Docker Hardened Images
 
@@ -68,8 +64,7 @@ from Docker Hardened Images offer the following benefits:
   aren't flagged; security teams and compliance officers can review the reasoning
   rather than trusting a vendor's black box.
 - Scanner flexibility: Switch between any VEX-enabled scanner (Docker Scout,
-  Trivy, Grype, Wiz, Mend.io, Black Duck, etc.) without losing vulnerability
-  context or rebuilding exclusion lists.
+  Trivy, Grype, etc.) without losing vulnerability context or rebuilding exclusion lists.
 - Consistent results: VEX-enabled scanners interpret the same data the
   same way, eliminating discrepancies between tools.
 - Faster workflows: Focus on real risks rather than researching why reported
@@ -101,7 +96,7 @@ The image includes signed attestations that explain which vulnerabilities don't
 apply and why. Any VEX-enabled scanner can read these attestations, giving you:
 
 - Tool flexibility: Use any scanner that supports OpenVEX (Docker Scout,
-  Trivy, Grype, Wiz, Mend.io, Black Duck, etc.)
+  Trivy, Grype, etc.)
 - Complete transparency: Review the exact reasoning for each vulnerability
   assessment
 - Full auditability: Security teams and compliance officers can independently
