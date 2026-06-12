@@ -103,8 +103,6 @@ $ docker build --pull -t my-image:my-tag .
 
 The `--pull` flag forces Docker to check for and download a newer
 version of the base image, even if you have a version cached locally.
-It only affects the `FROM` instruction — cached `RUN` layers are still
-reused.
 
 ### Use --no-cache for clean builds
 
