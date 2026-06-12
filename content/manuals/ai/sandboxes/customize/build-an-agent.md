@@ -72,7 +72,7 @@ attaches.
 
 ```yaml {title="amp/spec.yaml"}
 schemaVersion: "1"
-kind: agent
+kind: sandbox
 name: amp
 displayName: Amp
 description: The frontier coding agent.
@@ -176,7 +176,7 @@ Putting it all together:
 
 ```yaml {title="amp/spec.yaml"}
 schemaVersion: "1"
-kind: agent
+kind: sandbox
 name: amp
 displayName: Amp
 description: The frontier coding agent.

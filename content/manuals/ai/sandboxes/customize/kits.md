@@ -29,11 +29,11 @@ and enforces them at runtime. Credentials stay on the host and go through
 a proxy instead of entering the VM, and outbound traffic is restricted to
 the domains permitted by the kit's network rules.
 
-A kit is either a mixin or an agent:
+A kit is either a mixin or a sandbox:
 
 - Mixin kits (`kind: mixin`) extend an existing agent with extra
   capabilities. Stack several on the same sandbox.
-- Agent kits (`kind: agent`) define a full agent from scratch: its image,
+- Sandbox kits (`kind: sandbox`) define a full agent from scratch: its image,
   entrypoint, network policies, and everything else the agent needs.
 
 ## What kits can do
@@ -208,8 +208,8 @@ agentContext: |
   Shared config lives at `/workspace/ruff.toml`.
 ```
 
-Both mixin and agent kits can declare `agentContext:`. The content is written
-only when the active agent kit sets [`agent.aiFilename`](kit-reference.md#agent-block),
+Both mixin and sandbox kits can declare `agentContext:`. The content is written
+only when the active sandbox kit sets [`agent.aiFilename`](kit-reference.md#agent-block),
 which determines the memory file's name.
 
 When more than one loaded kit declares an `agentContext:` block, each kit's
@@ -231,7 +231,7 @@ See [`agentContext`](kit-reference.md#agent-context) in the spec reference for t
 
 ### Define an agent
 
-Agent kits declare an `agent:` block with the image the agent runs in and
+Sandbox kits declare an `agent:` block with the image the agent runs in and
 the command the user attaches to when they launch the sandbox:
 
 ```yaml
@@ -241,7 +241,7 @@ agent:
     run: [my-agent, "--yolo"]
 ```
 
-See [Agent kits](#agent-kits) for use cases and an example.
+See [Sandbox kits](#sandbox-kits) for use cases and an example.
 
 ## Mixin kits
 
@@ -307,9 +307,9 @@ To apply the mixin to a sandbox that's already running, use
 [`sbx kit add`](#local) instead. The `--kit` flag only takes effect when a
 sandbox is created.
 
-## Agent kits
+## Sandbox kits
 
-An agent kit defines a full agent from scratch — image, entrypoint, and
+A sandbox kit defines a full agent from scratch — image, entrypoint, and
 everything the agent needs. Common use cases:
 
 - Package a custom agent you've built so others can run it
@@ -317,7 +317,7 @@ everything the agent needs. Common use cases:
 - Run a fork of an existing agent with your own config
 - Prototype a new agent integration
 
-Agent kits declare everything a mixin kit can, plus an
+Sandbox kits declare everything a mixin kit can, plus an
 [`agent:` block](kit-reference.md#agent-block) that tells the sandbox how to launch the
 agent. For a step-by-step walkthrough, see
 [Build your own agent kit](build-an-agent.md).
@@ -330,7 +330,7 @@ with network, credentials, environment, and commands:
 
 ```yaml {title="claude/spec.yaml"}
 schemaVersion: "1"
-kind: agent
+kind: sandbox
 name: claude
 agent:
   image: "docker/sandbox-templates:claude-code-docker"

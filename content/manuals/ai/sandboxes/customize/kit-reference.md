@@ -31,21 +31,21 @@ my-kit/
 
 ```yaml
 schemaVersion: "1"
-kind: <mixin | agent>
+kind: <mixin | sandbox>
 name: <name>
 displayName: <name>
 description: <text>
 ```
 
-| Field           | Required | Description                                                              |
-| --------------- | -------- | ------------------------------------------------------------------------ |
-| `schemaVersion` | Yes      | Spec schema version. Set to `"1"`.                                       |
-| `kind`          | Yes      | `mixin` for kits that extend an agent; `agent` for kits that define one. |
-| `name`          | Yes      | Unique identifier. Lowercase, alphanumeric, hyphens.                     |
-| `displayName`   | No       | Human-readable name.                                                     |
-| `description`   | No       | Short description.                                                       |
+| Field           | Required | Description                                                                |
+| --------------- | -------- | -------------------------------------------------------------------------- |
+| `schemaVersion` | Yes      | Spec schema version. Set to `"1"`.                                         |
+| `kind`          | Yes      | `mixin` for kits that extend an agent; `sandbox` for kits that define one. |
+| `name`          | Yes      | Unique identifier. Lowercase, alphanumeric, hyphens.                       |
+| `displayName`   | No       | Human-readable name.                                                       |
+| `description`   | No       | Short description.                                                         |
 
-The sections below apply to both kinds. Agent kits also declare an
+The sections below apply to both kinds. Sandbox kits also declare an
 [`agent:` block](#agent-block).
 
 ## Credentials
@@ -271,11 +271,11 @@ agentContext: |
   <markdown>
 ```
 
-Top-level field. Available in both mixin and agent kits. Markdown
+Top-level field. Available in both mixin and sandbox kits. Markdown
 appended to the agent's memory file at sandbox creation. The agent reads
 this content at startup. Write it as instructions or notes the agent
 should follow when working in the sandbox. Applied only when the active
-agent kit sets [`agent.aiFilename`](#agent-block).
+sandbox kit sets [`agent.aiFilename`](#agent-block).
 
 The file is written to the parent of the workspace path inside the
 sandbox, not to the workspace itself. For a workspace mounted at
@@ -295,7 +295,7 @@ across files instead of being concatenated into the main one:
 
 ## Agent block
 
-Required for `kind: agent`.
+Required for `kind: sandbox`.
 
 ```yaml
 agent:

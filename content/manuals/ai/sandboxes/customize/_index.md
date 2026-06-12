@@ -40,12 +40,12 @@ dependencies — anything you'd rather not reinstall on every sandbox start.
 
 A kit is a YAML artifact applied at sandbox creation. The kit can run
 install commands, drop files into the sandbox, declare network and
-credential rules, and (for agent kits) define which template image the
+credential rules, and (for sandbox kits) define which template image the
 agent runs in. Use kits for things that vary per agent or per team:
 shared linter config, project-specific install steps, credential
 injection for a service the agent talks to.
 
-Templates and kits work together. An agent kit's `agent.image` field
+Templates and kits work together. A sandbox kit's `agent.image` field
 points at a template: the template provides the base environment, the
 kit layers config, secrets, and runtime behavior on top. A team can ship
 one heavy template and several thin kits without rebuilding the image
@@ -58,7 +58,7 @@ each time something changes.
 | Pre-install tools and packages into a reusable base image | [Template](templates.md)                                      |
 | Capture a configured running sandbox for reuse            | [Saved template](templates.md#saving-a-sandbox-as-a-template) |
 | Add a tool, credential, or config to agent runs via YAML  | [Kit (mixin)](kits.md)                                        |
-| Define a new agent from scratch                           | [Kit (agent)](kits.md#define-an-agent)                        |
+| Define a new agent from scratch                           | [Kit (sandbox)](kits.md#define-an-agent)                      |
 
 Templates and kits can be used together. A template bakes heavy tools into
 the image for fast sandbox startup; a kit layered on top adds per-run
@@ -67,4 +67,4 @@ credentials, config, or extra capabilities.
 ## Tutorials
 
 - [Build your own agent kit](build-an-agent.md) — step-by-step walkthrough
-  for packaging [Amp](https://ampcode.com/) as an agent kit.
+  for packaging [Amp](https://ampcode.com/) as a sandbox kit.
