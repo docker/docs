@@ -61,7 +61,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed delta updates failing to prepare.
 - Fixed an issue on Hyper-V where Docker commands (e.g. `docker login`) would fail on the first attempt after the engine had been idle-shut-down or paused.
 - Fixed an issue on Windows where Docker Desktop showed a generic engine-start failure instead of a clear, actionable error message when WSL is not installed.
-- Fixed an issue on Windows where WSL-not-installed and WSL-update-required error dialogs showed unexpected actions. They now correctly display only a **Quit** option.
 
 ## 4.77.0
 
