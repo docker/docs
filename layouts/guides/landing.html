@@ -5,11 +5,30 @@
 {{ define "main" }}
   {{- $tagOrder := slice "languages" "ai" "testing" "cicd" "security" "databases" "deployment" "admin" "labs" }}
 
-  <div class="not-prose">
+  <div
+    class="not-prose mx-auto flex min-h-[calc(100dvh-7rem)] max-w-7xl flex-col"
+    x-data="{
+      activeTag: 'languages',
+      query: '',
+      words() { return this.query.trim().toLowerCase().split(/\s+/).filter(Boolean) },
+      filtering() { return this.query.trim().length > 0 },
+      matchText(text) { return this.words().every(w => text.includes(w)) },
+      rowVisible(el) { return !this.filtering() || this.matchText(el.dataset.search) },
+      sectionVisible(el) { return !this.filtering() || Array.from(el.querySelectorAll('[data-guide]')).some(r => this.matchText(r.dataset.search)) },
+      resultCount() { return Array.from(document.querySelectorAll('[data-guide]')).filter(r => this.matchText(r.dataset.search)).length },
+      init() {
+        const obs = new IntersectionObserver(
+          entries => entries.forEach(e => { if (e.isIntersecting) this.activeTag = e.target.id }),
+          { rootMargin: '-20% 0px -70% 0px', threshold: 0 }
+        );
+        document.querySelectorAll('section[data-tag]').forEach(s => obs.observe(s));
+      }
+    }"
+  >
     {{- partial "breadcrumbs.html" . }}
 
-    <div class="mb-12 mt-4">
-      <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
+    <div class="mt-4">
+      <p class="text-xs font-semibold tracking-widest text-gray-400 uppercase dark:text-gray-500">
         {{- len .Pages }} guides
       </p>
       <h1
@@ -23,22 +42,39 @@
       {{- end }}
     </div>
 
-    <div
-      class="flex gap-12"
-      x-data="{
-        activeTag: 'languages',
-        init() {
-          const obs = new IntersectionObserver(
-            entries => entries.forEach(e => { if (e.isIntersecting) this.activeTag = e.target.id }),
-            { rootMargin: '-20% 0px -70% 0px', threshold: 0 }
-          );
-          document.querySelectorAll('section[data-tag]').forEach(s => obs.observe(s));
-        }
-      }"
-    >
-      <!-- Sticky jump nav -->
-      <nav class="hidden xl:flex w-52 flex-none flex-col self-start sticky top-20">
-        <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
+    <!-- Text filter -->
+    <div class="relative mt-8 mb-10 max-w-xl">
+      <span
+        class="icon-svg icon-sm pointer-events-none absolute top-1/2 left-3.5 -translate-y-1/2 text-gray-400 dark:text-gray-500"
+      >
+        {{ partialCached "icon" "magnifying-glass" "magnifying-glass" }}
+      </span>
+      <input
+        type="search"
+        x-model="query"
+        @keydown.escape="query = ''"
+        aria-label="Filter guides"
+        placeholder="Filter guides by name, topic, or tag…"
+        class="w-full rounded-xl border border-gray-300 bg-white py-2.5 pr-10 pl-11 text-sm text-gray-900 shadow-sm transition placeholder:text-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/40 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder:text-gray-500"
+      />
+      <button
+        x-show="query"
+        x-cloak
+        @click="query = ''"
+        aria-label="Clear filter"
+        class="icon-svg icon-sm absolute top-1/2 right-2.5 -translate-y-1/2 rounded-md p-1 text-gray-400 transition hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+      >
+        {{ partialCached "icon" "x-mark" "x-mark" }}
+      </button>
+    </div>
+
+    <div class="flex flex-1 gap-16 xl:gap-24">
+      <!-- Sticky jump nav (hidden while filtering) -->
+      <nav
+        x-show="!filtering()"
+        class="sticky top-20 hidden w-52 flex-none flex-col self-start xl:flex"
+      >
+        <p class="mb-3 text-xs font-semibold tracking-widest text-gray-400 uppercase dark:text-gray-500">
           Jump to
         </p>
         {{- range $i, $tag := $tagOrder }}
@@ -63,8 +99,26 @@
         {{- end }}
       </nav>
 
-      <!-- Sections -->
+      <!-- Guide list -->
       <div class="min-w-0 flex-1">
+        <!-- Filtering meta bar -->
+        <div
+          x-show="filtering()"
+          x-cloak
+          class="mb-8 flex items-center justify-between border-b border-gray-200 pb-4 dark:border-gray-800"
+        >
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            <span class="font-semibold text-gray-900 dark:text-gray-100" x-text="resultCount()"></span>
+            of {{ len .Pages }} guides
+          </p>
+          <button
+            @click="query = ''"
+            class="text-sm font-medium text-blue-600 transition hover:underline dark:text-blue-400"
+          >
+            Clear filter
+          </button>
+        </div>
+
         {{- range $i, $tag := $tagOrder }}
           {{- $tagData := index hugo.Data.tags $tag }}
           {{- $pages := where $.Pages "Params.tags" "intersect" (slice $tag) }}
@@ -72,10 +126,12 @@
             <section
               id="{{ $tag }}"
               data-tag="{{ $tag }}"
-              class="scroll-mt-20 border-t border-gray-200 py-12 first:border-t-0 first:pt-0 dark:border-gray-800"
+              x-show="sectionVisible($el)"
+              class="scroll-mt-16"
+              :class="filtering() ? '' : 'border-t border-gray-200 py-12 first:border-t-0 first:pt-0 dark:border-gray-800'"
             >
-              <div class="mb-6">
-                <p class="mb-1 text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
+              <div class="mb-6" x-show="!filtering()">
+                <p class="mb-1 text-xs font-semibold tracking-widest text-gray-400 uppercase dark:text-gray-500">
                   {{- printf "%02d" (add $i 1) -}}
                 </p>
                 <h2 class="text-2xl font-bold">{{ $tagData.title }}</h2>
@@ -85,18 +141,50 @@
               </div>
               <div class="divide-y divide-gray-200 dark:divide-gray-800">
                 {{- range $pages }}
-                  <div class="-mx-3 grid grid-cols-[5fr_6fr] gap-6 rounded px-3 py-4 hover:bg-gray-50 dark:hover:bg-gray-900">
-                    <a
-                      href="{{ .Permalink }}"
-                      class="font-medium leading-snug hover:underline"
-                    >{{ .Title }}</a>
-                    <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400">{{ .Summary }}</p>
-                  </div>
+                  {{- $tagTitles := slice }}
+                  {{- range .Params.tags }}{{ $tagTitles = $tagTitles | append (index hugo.Data.tags .).title }}{{ end }}
+                  {{- $search := lower (printf "%s %s %s %s" .Title .Summary (delimit .Params.tags " ") (delimit $tagTitles " ")) }}
+                  {{- $search = $search | replaceRE "\\s+" " " }}
+                  <a
+                    href="{{ .Permalink }}"
+                    data-guide
+                    data-search="{{ $search }}"
+                    x-show="rowVisible($el)"
+                    class="group -mx-3 grid grid-cols-[5fr_6fr_auto] items-start gap-6 rounded-lg px-3 py-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-900"
+                  >
+                    <span class="font-medium leading-snug text-gray-900 transition-colors group-hover:text-blue-600 dark:text-gray-100 dark:group-hover:text-blue-400">{{ .Title }}</span>
+                    <span class="text-sm leading-relaxed text-gray-500 dark:text-gray-400">{{ .Summary }}</span>
+                    <span
+                      class="icon-svg icon-sm mt-0.5 self-center text-gray-300 opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-blue-600 group-hover:opacity-100 dark:text-gray-600 dark:group-hover:text-blue-400"
+                    >
+                      {{ partialCached "icon" "arrow-right" "arrow-right" }}
+                    </span>
+                  </a>
                 {{- end }}
               </div>
             </section>
           {{- end }}
         {{- end }}
+
+        <!-- No matches -->
+        <div
+          x-show="filtering() && resultCount() === 0"
+          x-cloak
+          class="flex flex-col items-center justify-center gap-3 py-24 text-center"
+        >
+          <span class="icon-svg icon-lg text-gray-300 dark:text-gray-600">
+            {{ partialCached "icon" "magnifying-glass" "magnifying-glass" }}
+          </span>
+          <p class="text-gray-500 dark:text-gray-400">
+            No guides match “<span class="font-medium text-gray-700 dark:text-gray-200" x-text="query"></span>”.
+          </p>
+          <button
+            @click="query = ''"
+            class="text-sm font-medium text-blue-600 transition hover:underline dark:text-blue-400"
+          >
+            Clear filter
+          </button>
+        </div>
       </div>
     </div>
   </div>
