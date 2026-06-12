@@ -214,14 +214,14 @@ which determines the memory file's name.
 
 When more than one loaded kit declares an `agentContext:` block, each kit's
 content is written to its own `<kit-name>.md` file under a sibling
-`kits-memory/` directory. The main memory file gets a `## Kits` section
-that points to each kit file:
+`kits-agent-context/` directory. The main memory file gets a `## Kits`
+section that points to each kit file:
 
 ```text
 /Users/you/
-├── myproject/         # workspace
-├── AGENTS.md          # main memory file with a "## Kits" index
-└── kits-memory/
+├── myproject/              # workspace
+├── AGENTS.md               # main memory file with a "## Kits" index
+└── kits-agent-context/
     ├── ruff-lint.md
     ├── vale.md
     └── git-ssh-sign.md

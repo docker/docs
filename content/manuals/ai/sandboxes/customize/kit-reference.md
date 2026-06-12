@@ -27,6 +27,26 @@ my-kit/
     └── workspace/
 ```
 
+## Changelog
+
+Renamed fields are still accepted for backward compatibility, but
+`sbx kit validate` reports a deprecation warning for each, and a future
+release may stop accepting them. Update kits to the current names.
+
+### v0.32.0
+
+The following `spec.yaml` fields were renamed:
+
+| Previous       | Current          |
+| -------------- | ---------------- |
+| `memory`       | `agentContext`   |
+| `kind: agent`  | `kind: sandbox`  |
+| `agent:` block | `sandbox:` block |
+
+The per-kit directory was also renamed from `kits-memory/` to
+`kits-agent-context/`. An existing `kits-memory/` directory is migrated
+automatically the next time the sandbox starts.
+
 ## Top-level fields
 
 ```yaml
@@ -287,7 +307,7 @@ When several loaded kits declare `agentContext:` blocks, the content is split
 across files instead of being concatenated into the main one:
 
 - Each kit's agent context is written to `<kit-name>.md` in a sibling
-  `kits-memory/` directory next to the main memory file.
+  `kits-agent-context/` directory next to the main memory file.
 - The main memory file gets a `## Kits` section listing every kit with
   a pointer to its file. The section is delimited by
   `<!-- sbx:kits-section start -->` and `<!-- sbx:kits-section end -->`
