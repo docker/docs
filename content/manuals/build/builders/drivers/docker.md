@@ -38,3 +38,13 @@ If you need additional configuration and flexibility, consider using the
 
 For more information on the Docker driver, see the
 [buildx reference](/reference/cli/docker/buildx/create/#driver).
+
+## Limitations
+
+The Docker driver has the following limitations:
+
+- Multi-platform builds are not supported. To build for multiple platforms,
+  use the [`docker-container` driver](./docker-container.md) or enable the
+  [containerd image store](../../../storage/containerd.md).
+- You can't configure custom BuildKit versions or parameters. These are
+  managed internally by the Docker Engine.
