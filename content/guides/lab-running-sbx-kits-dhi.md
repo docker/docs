@@ -34,7 +34,7 @@ and attestations.
 
 ## Launch the lab
 
-{{< labspace-launch image="dockersamples/labspace-demo-sbx-kits-dhi" >}}
+{{< labspace-launch image="dockersamples/labspace-sbx-kits-dhi" >}}
 
 ## What you'll learn
 
