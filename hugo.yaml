@@ -160,12 +160,12 @@ params:
   # Use `grep` to figure out how they might be used.
 
   # Latest version of the Docker Engine API
-  latest_engine_api_version: "1.54"
+  latest_engine_api_version: "1.55"
   # Latest version of Docker Engine
-  docker_ce_version: "29.5.3"
+  docker_ce_version: "29.6.0"
   # Previous version of the Docker Engine
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
-  docker_ce_version_prev: "29.5.2"
+  docker_ce_version_prev: "29.5.3"
   # Latest Docker Compose version
   compose_version: "v5.1.2"
   # Latest BuildKit version
