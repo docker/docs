@@ -99,12 +99,10 @@ You can view, edit, deactivate, or delete your connections from the **OIDC conne
 
 ## Deactivation and deletion
 
-You can deactivate an OIDC connection to pause GitHub workflow access to your Docker resources without deleting the connection.
+You can deactivate an OIDC connection to pause GitHub workflow access to your Docker resources without deleting the connection. While a connection is deactivated:
 
-- While a connection is deactivated:
   - It cannot issue Docker access tokens.
   - Without Docker access tokens, the `docker/oidc-action` step references will fail at the token-exchange step until you activate the connection.
-- Deactivation is useful when rotating credentials: pause the existing connection while you configure its replacement.
 
 Unlike deactivation, deleting an OIDC connection is permanent. Any workflow whose `docker/oidc-action` step still references the deleted `connection_id` will fail at the token-exchange step, so update that input with a replacement connection's id in every affected workflow before it runs again.
 
