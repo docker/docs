@@ -29,7 +29,7 @@
 
     <div class="mt-4">
       <p class="text-xs font-semibold tracking-widest text-gray-400 uppercase dark:text-gray-500">
-        {{- len .Pages }} guides
+        {{- len .RegularPagesRecursive }} guides
       </p>
       <h1
         data-pagefind-weight="10"
@@ -79,7 +79,7 @@
         </p>
         {{- range $i, $tag := $tagOrder }}
           {{- $tagData := index hugo.Data.tags $tag }}
-          {{- $pages := where $.Pages "Params.tags" "intersect" (slice $tag) }}
+          {{- $pages := where $.RegularPagesRecursive "Params.tags" "intersect" (slice $tag) }}
           {{- if $pages }}
             <a
               href="#{{ $tag }}"
@@ -109,7 +109,7 @@
         >
           <p class="text-sm text-gray-500 dark:text-gray-400">
             <span class="font-semibold text-gray-900 dark:text-gray-100" x-text="resultCount()"></span>
-            of {{ len .Pages }} guides
+            of {{ len .RegularPagesRecursive }} guides
           </p>
           <button
             @click="query = ''"
@@ -121,7 +121,7 @@
 
         {{- range $i, $tag := $tagOrder }}
           {{- $tagData := index hugo.Data.tags $tag }}
-          {{- $pages := where $.Pages "Params.tags" "intersect" (slice $tag) }}
+          {{- $pages := where $.RegularPagesRecursive "Params.tags" "intersect" (slice $tag) }}
           {{- if $pages }}
             <section
               id="{{ $tag }}"
