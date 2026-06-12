@@ -80,7 +80,6 @@ description: The frontier coding agent.
 agent:
   image: "docker/sandbox-templates:shell-docker"
   aiFilename: AGENTS.md
-  persistence: persistent
   entrypoint:
     run: [amp, --dangerously-allow-all]
 ```
@@ -88,9 +87,6 @@ agent:
 - `aiFilename: AGENTS.md` tells the sandbox to create `AGENTS.md` at launch
   and append the [`memory`](#prime-amp-with-memory) block to it. Amp reads
   this file for instructions.
-- `persistence: persistent` keeps Amp's state (auth tokens, history) in a
-  named volume across sandbox restarts. Without it, you re-authenticate
-  every time.
 - `entrypoint.run` runs `amp` in "YOLO-mode" when the sandbox starts. Adjust if
   you want to pass different args on startup.
 
@@ -188,7 +184,6 @@ description: The frontier coding agent.
 agent:
   image: "docker/sandbox-templates:shell-docker"
   aiFilename: AGENTS.md
-  persistence: persistent
   entrypoint:
     run: [amp, --dangerously-allow-all]
 

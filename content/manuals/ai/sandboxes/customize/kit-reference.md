@@ -301,7 +301,6 @@ Required for `kind: agent`.
 agent:
   image: <image-ref>
   aiFilename: <filename>
-  persistence: <persistent | ephemeral>
   entrypoint:
     run: [<argv>, ...]
     args: [<arg>, ...]
@@ -311,7 +310,6 @@ agent:
 | ----------------------- | -------- | ---------------------------------------------------------------------------------------------- |
 | `agent.image`           | Yes      | Docker image reference. See [Base image requirements](#base-image-requirements).               |
 | `agent.aiFilename`      | No       | Memory filename (for example, `AGENTS.md`). Appends top-level [`memory`](#memory) at creation. |
-| `agent.persistence`     | No       | `persistent` (named volume across restarts) or `ephemeral` (default).                          |
 | `agent.entrypoint.run`  | No       | Command and args as a string array. Replaces the image's entrypoint.                           |
 | `agent.entrypoint.args` | No       | Args appended to the image's existing entrypoint.                                              |
 

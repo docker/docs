@@ -269,7 +269,6 @@ description: Claude Code without --dangerously-skip-permissions
 agent:
   image: "docker/sandbox-templates:claude-code-docker"
   aiFilename: CLAUDE.md
-  persistence: persistent
   entrypoint:
     run: [claude]
 
