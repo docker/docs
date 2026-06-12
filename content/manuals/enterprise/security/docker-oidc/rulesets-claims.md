@@ -9,7 +9,7 @@ weight: 20
 
 {{< summary-bar feature_name="Docker OIDC" >}}
 
-Rulesets and subject claims define what actions your GitHub workflows can take with your Docker resources. This doc overviews how configuring rulesets and subject claims affects authorized behaviors.
+Rulesets and subject claims define what actions your GitHub workflows can take with your Docker resources. This doc explains how to configure rulesets and set subject claims to authorize GitHub Workflow behaviors.
 
 ## Rulesets
 
@@ -62,7 +62,9 @@ You can use wildcards to match across repositories or branches:
 
 ## Resources
 
-Docker Hub repositories are currently supported as resources. Resources define what Docker resources a workflow can access when a ruleset matches. You specify resources per ruleset, alongside the scopes that determine the level of access granted.
+Resources define what Docker resources a workflow can access when a ruleset matches. You specify resources per ruleset, alongside the scopes that determine the level of access granted.
+
+Docker Hub repositories are supported resources. 
 
 ## What’s next
 

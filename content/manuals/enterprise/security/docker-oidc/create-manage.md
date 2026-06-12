@@ -9,7 +9,7 @@ weight: 10
 
 {{< summary-bar feature_name="Docker OIDC" >}}
 
-You can create new OIDC connections or manage existing ones from Admin Console in Docker Home. Establishing an OIDC connection occurs in two phases. First, you create the OIDC connection in the admin console, then you configure your GitHub Actions workflow YAML file.
+You can create new OIDC connections or manage existing ones from the Admin Console in Docker Home. Establishing an OIDC connection occurs in two phases. First, you create the OIDC connection in the Admin Console, then you configure your GitHub Actions workflow YAML file.
 
 ## Connect Docker OIDC to GitHub Actions
 
