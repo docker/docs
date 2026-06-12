@@ -79,17 +79,13 @@ addition, it provides timestamps from the video that can help you find the sourc
 
    ```text
    #-------------------------------------------------------------------------
----
    # OpenAI
    #-------------------------------------------------------------------------
----
    OPENAI_TOKEN=your-api-key # Replace your-api-key with your personal API key
 
    #-------------------------------------------------------------------------
----
    # Pinecone
    #-------------------------------------------------------------------------
----
    PINECONE_TOKEN=your-api-key # Replace your-api-key with your personal API key
    ```
 

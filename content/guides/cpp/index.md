@@ -579,7 +579,7 @@ This section walks you through extracting Software Bill of Materials (SBOMs) fro
 
 ### Generate an SBOM
 
-Here we will use the Docker image that we built in the [Create a multi-stage build for your C++ application](/guides/language/cpp/multistage/) guide. If you haven't already built the image, follow the steps in that guide to build the image.
+Here we will use the Docker image that we built in the [Create a multi-stage build for your C++ application](/guides/cpp/) guide. If you haven't already built the image, follow the steps in that guide to build the image.
 The image is named `hello`. To generate an SBOM for the `hello` image, run the following command:
 
 ```bash

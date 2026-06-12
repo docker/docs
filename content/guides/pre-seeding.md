@@ -124,7 +124,6 @@ Assuming that you have an existing Postgres database instance up and running, fo
                                                 List of databases
    Name    |  Owner   | Encoding |  Collate   |   Ctype    | ICU Locale | Locale Provider |   Access privileges
    -----------+----------+----------+------------+------------+------------+-----------------+--------------------
----
    postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            |
    sampledb  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            |
    template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            | =c/postgres          +
@@ -140,7 +139,6 @@ Assuming that you have an existing Postgres database instance up and running, fo
    sampledb=# SELECT * FROM users;
    id | name  |       email
    ----+-------+----------------
----
     1 | Alpha | alpha@example.com
     2 | Beta  | beta@example.com
     3 | Gamma | gamma@example.com
@@ -234,7 +232,6 @@ $ docker container stop postgres
     sampledb=# SELECT * FROM users;
       id | name  |       email
     ----+-------+----------------
----
        1 | Alpha | alpha@example.com
        2 | Beta  | beta@example.com
        3 | Gamma | gamma@example.com
@@ -334,7 +331,6 @@ It is called at the end of the script to initiate the seeding process. The try..
     sampledb=# SELECT * FROM todos;
     id |      task      | completed
     ----+----------------+--------
----
     1 | Watch netflix  | f
     2 | Finish podcast | f
     3 | Pick up kid    | f
