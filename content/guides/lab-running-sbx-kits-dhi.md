@@ -6,10 +6,10 @@ description: |
   harden what they produce using sbx kits and Docker Hardened Images in this
   hands-on interactive lab.
 summary: |
-  Hands-on lab: Run AI coding agents in isolated Docker Sandboxes, then use sbx
+  Hands-on lab: Run AI coding agents in isolated Docker Sandboxes, then use `sbx`
   kits and Docker Hardened Images to turn their output into secure,
   production-ready container images.
-keywords: AI, Docker, Docker Sandboxes, sbx, kits, Docker Hardened Images, DHI, Docker Scout, container security, lab, labspace
+keywords: AI, Docker, Docker Sandboxes, `sbx`, kits, Docker Hardened Images, DHI, Docker Scout, container security, lab, labspace
 params:
   tags: [ai, labs]
   time: 30 minutes
@@ -40,7 +40,7 @@ and attestations.
 
 - Run an AI coding agent (Claude) in an isolated Docker Sandbox microVM with its own daemon, filesystem, and network
 - Apply sandbox network policy that allows approved development endpoints and denies everything else
-- Define an sbx kit: declarative, shareable agent configuration (tools, credentials, network rules, files, startup commands, and guidance) in a single `spec.yaml`
+- Define an `sbx` kit: declarative, shareable agent configuration (tools, credentials, network rules, files, startup commands, and guidance) in a single `spec.yaml`
 - Compare the output of a plain sandbox against one guided by a container best-practices kit
 - Use a DHI kit to direct the agent to build and run on Docker Hardened Images
 - Keep registry credentials on the host with sbx custom secrets, so your Docker PAT never enters the sandbox VM
