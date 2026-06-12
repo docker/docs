@@ -30,7 +30,7 @@
               }
           }
       })"
-        class="bg-background-toc dark:bg-background-toc fixed top-0 z-40 hidden h-screen w-full flex-none overflow-x-hidden overflow-y-auto md:sticky md:top-16 md:z-auto md:block md:h-[calc(100vh-64px)] md:w-[320px]"
+        class="bg-background-toc dark:bg-background-toc fixed top-0 z-40 hidden h-screen w-full flex-none overflow-x-hidden overflow-y-auto{{ if ne .Type "guides" }} md:sticky md:top-16 md:z-auto md:block md:h-[calc(100vh-64px)] md:w-[320px]{{ end }}"
         :class="{ 'hidden': ! $store.showSidebar }"
       >
         <!-- Gray backdrop on small screens -->

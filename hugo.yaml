@@ -13,11 +13,6 @@ taxonomies: {}
 # Cascade layout and type settings to content subtrees.
 # See https://gohugo.io/configuration/cascade/#target
 cascade:
-  # Guide sections use the series layout (metadata card + modules list)
-  - target:
-      path: /guides/**
-      kind: section
-    layout: series
   # Sample pages use the samples type (routes to layouts/samples/)
   - target:
       path: /reference/samples/**

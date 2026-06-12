@@ -208,6 +208,33 @@
     }
   }
 }
+@utility scrollbar-hover {
+  /* Firefox: hide the thumb until hover */
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  &:hover {
+    scrollbar-color: var(--color-gray-400) transparent;
+  }
+  .dark &:hover {
+    scrollbar-color: var(--color-gray-600) transparent;
+  }
+  /* WebKit: reserve the track, reveal the thumb only on hover */
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    background-color: transparent;
+  }
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: var(--color-gray-400);
+  }
+  .dark &:hover::-webkit-scrollbar-thumb {
+    background-color: var(--color-gray-600);
+  }
+}
+
 @utility chip {
   @apply border-divider-light dark:border-divider-dark inline-flex items-center gap-1 rounded-full border bg-gray-100 px-2 text-sm text-gray-800 select-none dark:bg-gray-700 dark:text-gray-200;
 }
@@ -217,7 +244,8 @@
 }
 
 @utility breadcrumbs {
-  font-size: 90%;
+  /* Absolute size so breadcrumbs render identically inside and outside prose */
+  font-size: calc(var(--text-base) * 0.9);
 }
 
 @utility topbar-button {
