@@ -110,7 +110,7 @@ services:
 
    > [!IMPORTANT]
    >
-   > Be aware of [Environment variables precedence](envvars-precedence.md) when using variables in an `.env` file that  as environment variables in your container's environment.
+   > Be aware of [Environment variables precedence](envvars-precedence.md) when using variables in an `.env` file that  are also set as environment variables in your container's environment.
 
 - You can place your `.env` file in a location other than the root of your project's directory, and then use the [`--env-file` option in the CLI](#substitute-with---env-file) so Compose can navigate to it.
 
