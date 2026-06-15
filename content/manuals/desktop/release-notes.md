@@ -55,7 +55,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For Windows
 
-- Added [Synchronized File Shares](/manuals/desktop/features/synchronized-file-sharing.md) support for the WSL2 backend.
+- Added [Synchronized file shares](/manuals/desktop/features/synchronized-file-sharing.md) support for the WSL2 backend.
 - Fixed Docker Desktop getting stuck on **Starting the Docker Engine…** after an in-place upgrade.
 - Fixed a bug where Docker Desktop was not restarted after a failed update was reverted to the previous version.
 - Fixed delta updates failing to prepare.
