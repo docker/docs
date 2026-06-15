@@ -28,7 +28,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-06-15" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.78.0" build_path="//" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.78.0" build_path="/229452/" >}}
 
 ### Updates
 
@@ -40,23 +40,23 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms 
 
-- Fixed an out-of-memory crash that could cause Docker Desktop to become unresponsive or crash while streaming logs in the Docker Desktop Dashboard.
-- Improved Docker Desktop update reliability by retrying stalled and transient download failures and resuming from the partially downloaded file.
-- Added live streaming output to the Gordon tool calls so long-running commands like `docker compose up` display STDOUT/STDERR in real time instead of waiting until completion.
+- Fixed an out-of-memory crash that would cause Docker Desktop to become unresponsive or crash while streaming logs in the Docker Desktop Dashboard.
+- Improved update reliability by retrying stalled and transient download failures and resuming from the partially downloaded file.
+- Added live streaming output to Gordon tool calls so long-running commands like `docker compose up` display STDOUT/STDERR in real time instead of waiting until completion.
 - Added color-coded labels to the **Logs** view so each container and build source is visually distinguished by a unique color in both the log grid and the container-filter dropdown.
-- Improved error message when the Docker Desktop VM fails to start. It now shows the underlying `VirtualizationFramework` / `libkrun` reason instead of the generic **Use of closed network connection**.
+- Improved the error message when the Docker Desktop VM fails to start. It now shows the underlying `VirtualizationFramework` / `libkrun` reason instead of the generic **Use of closed network connection**.
 - Fixed a bug where Docker CLI error messages were shown as raw JSON instead of human-readable text while Docker Desktop was in Resource Saver mode.
 - Fixed a crash that occurred in the **Logs** view when deselecting a container filter.
 - Fixed an issue where the support page was replaced by the no-virtualization override screen when accessed from the troubleshooting popover.
 - Fixed an issue where Docker Desktop failed to start on bare metal EC2 instances (e.g. `g4dn.metal`) with a **Nested virtualization not supported** error.
 - Increased the retry delay to accommodate transient rename failures caused by antivirus software holding file locks.
-- Gordon now shows clear network error messages with guidance to check VPN, proxy, or firewall settings when outbound HTTPS to Docker's services is blocked, instead of a generic agent errror.
-- Fixed the Gordon AI model picker incorrectly showing an internal model identifier instead of 'Default' for sessions with no explicit model selection.
+- Gordon now shows clear network error messages with guidance to check VPN, proxy, or firewall settings when outbound HTTPS to Docker's services is blocked, instead of a generic agent error.
+- Fixed the Gordon AI model picker incorrectly showing an internal model identifier instead of **Default** for sessions with no explicit model selection.
 
 #### For Windows
 
-- Fixed getting stuck on **Starting the Docker Engine…** after an in-place upgrade.
 - Added [Synchronized File Shares](/manuals/desktop/features/synchronized-file-sharing.md) support for the WSL2 backend.
+- Fixed Docker Desktop getting stuck on **Starting the Docker Engine…** after an in-place upgrade.
 - Fixed a bug where Docker Desktop was not restarted after a failed update was reverted to the previous version.
 - Fixed delta updates failing to prepare.
 - Fixed an issue on Hyper-V where Docker commands (e.g. `docker login`) would fail on the first attempt after the engine had been idle-shut-down or paused.
