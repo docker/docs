@@ -48,6 +48,39 @@ enforces [network access policies](security/policy.md) and handles
 works and [Default security posture](security/defaults.md) for what is
 allowed out of the box.
 
+### Upstream proxy
+
+The host-side proxy makes its outbound connections using your host's network
+configuration and routing. When a destination is reachable through a direct
+route, traffic follows that route. When reaching a destination requires an
+upstream proxy, the host-side proxy forwards the request to it. Chaining to an
+upstream proxy means sandbox traffic respects the same egress controls as other
+applications on your host.
+
+The sandbox daemon makes these upstream requests, and it reads the proxy
+environment variables `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY`, along with
+their lowercase equivalents. Set `NO_PROXY` to list hosts that should be
+reached directly instead of through the upstream proxy.
+
+To route sandbox traffic through a different proxy, set
+`DOCKER_SANDBOXES_PROXY` to the proxy URL. It applies only to sandbox traffic
+and sets the upstream proxy for both HTTP and HTTPS to that URL. Unlike
+`HTTP_PROXY` and `HTTPS_PROXY`, it doesn't affect image pulls or the daemon's
+own requests.
+
+Set these variables in the environment where the sandbox daemon starts. The
+daemon starts automatically the first time a command needs it, so set the
+variables before you run a `sbx` command. If the daemon is already running,
+restart it for a change to take effect.
+
+Two limitations apply:
+
+- Only HTTP and HTTPS traffic can be forwarded to an upstream proxy. Raw
+  (non-HTTP) TCP traffic can't be redirected to a proxy.
+- Proxy auto-configuration (`proxy.pac`) files aren't supported. Set the
+  `HTTP_PROXY`, `HTTPS_PROXY`, or `DOCKER_SANDBOXES_PROXY` environment variables
+  explicitly.
+
 ## Lifecycle
 
 `sbx run` initializes a VM with a workspace for a specified agent and starts
