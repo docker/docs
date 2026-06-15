@@ -232,6 +232,11 @@ $ sbx secret set-custom -g \
     --value <secret>
 ```
 
+A `--host` value can also use wildcards, with the same syntax as
+[network rules](../governance/concepts.md#network-rules): `*` matches a
+single label (`*.example.com` covers `api.example.com`) and `**` matches any
+number (`**.example.com` covers `api.example.com` and `v2.api.example.com`).
+
 > [!WARNING]
 > Passing the secret as `--value <secret>` records it in your shell history
 > and exposes it to other processes running as your user. Avoid pasting
