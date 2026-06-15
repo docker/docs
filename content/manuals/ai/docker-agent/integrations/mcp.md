@@ -4,7 +4,7 @@ linkTitle: MCP
 description: Expose agents as tools to MCP clients like Claude Desktop and Claude Code
 keywords:
   [
-    cagent,
+    docker agent,
     mcp,
     model context protocol,
     claude desktop,
