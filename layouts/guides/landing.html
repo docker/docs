@@ -74,7 +74,7 @@
 
     <div class="flex flex-1 gap-16 xl:gap-24">
       <!-- Sticky topic filter -->
-      <nav class="sticky top-20 hidden w-52 flex-none flex-col self-start xl:flex">
+      <nav class="sticky top-20 hidden w-52 flex-none flex-col self-start text-gray-500 xl:flex dark:text-gray-400">
         <p class="mb-3 text-xs font-semibold tracking-widest text-gray-400 uppercase dark:text-gray-500">
           Browse
         </p>
@@ -113,7 +113,10 @@
       </nav>
 
       <!-- Guide list -->
-      <div class="min-w-0 flex-1">
+      <div
+        class="min-w-0 flex-1"
+        :class="{ 'guides-flat': filtering() }"
+      >
         <!-- Filtering meta bar -->
         <div
           x-show="filtering()"
@@ -140,8 +143,7 @@
               id="{{ $tag }}"
               data-tag="{{ $tag }}"
               x-show="sectionVisible($el)"
-              class="scroll-mt-16"
-              :class="filtering() ? '' : 'border-t border-gray-200 py-12 first:border-t-0 first:pt-0 dark:border-gray-800'"
+              class="scroll-mt-16 border-t border-gray-200 py-12 first:border-t-0 first:pt-0 dark:border-gray-800"
             >
               <div class="mb-6" x-show="!filtering()">
                 <p class="mb-1 text-xs font-semibold tracking-widest text-gray-400 uppercase dark:text-gray-500">
