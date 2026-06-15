@@ -7,6 +7,10 @@ aliases:
 weight: 50
 ---
 
+> [!IMPORTANT]
+>
+> New submissions to the Docker Extensions Marketplace are paused while we review Marketplace security. You can still update existing extensions, and private Marketplace extensions are unaffected. Contact extensions@docker.com if you have additional questions.
+
 ## Submit your extension to the Marketplace
 
 Docker Desktop displays published extensions in the Extensions Marketplace on [Docker Desktop](https://open.docker.com/extensions/marketplace) and [Docker Hub](https://hub.docker.com/search?q=&type=extension).
