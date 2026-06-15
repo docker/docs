@@ -87,6 +87,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms 
 
+- Increased the retry delay to accommodate transient rename failures caused by antivirus software holding file locks.
 - Marketplace extensions are now installed and updated by pinned manifest digest, instead of by tag, protecting against tag mutation after publication.
 - Added Buildx version information to the About window.
 - Added a case-sensitivity toggle to the **Logs** search bar which lets you switch between case-insensitive (default) and case-sensitive log filtering.
