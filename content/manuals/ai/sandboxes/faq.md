@@ -2,7 +2,7 @@
 title: FAQ
 weight: 70
 description: Frequently asked questions about Docker Sandboxes.
-keywords: docker sandboxes, sbx, faq, sign in, telemetry
+keywords: docker sandboxes, sbx, faq, sign in, telemetry, clipboard, image paste
 ---
 
 ## Why do I need to sign in?
@@ -158,6 +158,35 @@ the sandbox.
 Collocating skills and other agent configuration with the project itself is a
 good practice regardless of sandboxes. It's versioned alongside the code and
 evolves with the project as it changes.
+
+## Can I paste images into an agent?
+
+Yes, but it's off by default. Text paste already works, because the terminal
+sends it directly. Pasting an image or screenshot with `Ctrl+V` is different:
+the agent reads it from your host clipboard, and the sandbox blocks that access
+unless you opt in.
+
+Turn it on with a local setting:
+
+```console
+$ sbx settings set clipboard.imagePaste true
+```
+
+`Ctrl+V` then pastes host images into agents that read the clipboard, including
+Claude Code and Codex. The setting takes effect within a few seconds, even for
+running sandboxes.
+
+This is opt-in because it relaxes the sandbox's isolation: when enabled, a process
+inside the sandbox can read your host clipboard through the host-side proxy. The
+exposure is narrow — reads happen only on a paste, return image data only
+(`image/png`), and clipboard content is never cached or logged — but it's still
+host data crossing into the sandbox, so it stays off until you turn it on.
+
+To turn it back off:
+
+```console
+$ sbx settings set clipboard.imagePaste false
+```
 
 ## Can I use Docker Sandboxes on headless Linux?
 
