@@ -75,9 +75,9 @@ restart it for a change to take effect.
 
 Two limitations apply:
 
-- Only HTTP and HTTPS traffic can be forwarded to an upstream proxy. Raw
-  (non-HTTP) TCP traffic can't be redirected to a proxy.
-- Proxy auto-configuration (`proxy.pac`) files aren't supported. Set the
+- Only HTTP and HTTPS traffic can be forwarded to an upstream proxy. Other TCP
+  traffic can't be redirected to a proxy.
+- Proxy auto-configuration files, such as `proxy.pac`, aren't supported. Set the
   `HTTP_PROXY`, `HTTPS_PROXY`, or `DOCKER_SANDBOXES_PROXY` environment variables
   explicitly.
 
