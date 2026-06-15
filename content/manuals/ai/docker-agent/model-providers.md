@@ -123,15 +123,20 @@ You can use the `openai` provider type to connect to any model or provider that
 implements the OpenAI API specification. This includes services like Azure
 OpenAI, local inference servers, and other compatible endpoints.
 
-Configure an OpenAI-compatible provider by specifying the base URL:
+Define a named model in the `models` section with the `openai` provider and a
+`base_url`, then reference it from your agent:
 
 ```yaml
+models:
+  my-model:
+    provider: openai
+    model: your-model-name
+    base_url: https://your-provider.example.com/v1
+
 agents:
   root:
-    model: openai/your-model-name
+    model: my-model
     instruction: You are a helpful coding assistant
-    provider:
-      base_url: https://your-provider.example.com/v1
 ```
 
 By default, Docker Agent uses the `OPENAI_API_KEY` environment variable for
@@ -139,13 +144,17 @@ authentication. If your provider uses a different variable, specify it with
 `token_key`:
 
 ```yaml
+models:
+  my-model:
+    provider: openai
+    model: your-model-name
+    base_url: https://your-provider.example.com/v1
+    token_key: YOUR_PROVIDER_API_KEY
+
 agents:
   root:
-    model: openai/your-model-name
+    model: my-model
     instruction: You are a helpful coding assistant
-    provider:
-      base_url: https://your-provider.example.com/v1
-      token_key: YOUR_PROVIDER_API_KEY
 ```
 
 ## What's next
