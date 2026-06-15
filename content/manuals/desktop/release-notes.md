@@ -59,6 +59,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
    - Improved the toolbar with a reorganized layout, saved filter presets that now capture container selection and build log visibility, and the ability to persist container filter state.
    - Added the ability to clear logs.
    - Combined **copy** and **expand**/**collapse** buttons into a single pinned column that stays visible during horizontal scrolling, and fixed **copy** accidentally toggling the row detail pan.
+- Fixed Registry Access Management policy downloads to avoid `permission denied` errors by fetching and caching policies in the user's own directory with tampering detection.
 
 #### For Windows
 
