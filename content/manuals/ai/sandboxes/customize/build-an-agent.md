@@ -18,8 +18,8 @@ This tutorial walks through building an agent kit for the
 [Amp](https://ampcode.com/) coding agent. Each step explains the decision
 behind a part of the spec, so you can apply the same reasoning to other agents.
 
-For reference on every field, see the [Kits](kits.md) page. This tutorial
-focuses on the journey.
+For reference on every field, see the [Kit spec reference](kit-reference.md).
+This tutorial focuses on the journey.
 
 The finished kit is also published as a runnable sample at
 [docker/sbx-kits-contrib](https://github.com/docker/sbx-kits-contrib/tree/main/amp) —
@@ -28,7 +28,7 @@ useful as a reference while you follow along.
 ## Choose a base image
 
 An agent kit needs a container image that satisfies the
-[base image requirements](kits.md#base-image-requirements): non-root
+[base image requirements](kit-reference.md#base-image-requirements): non-root
 `agent` user at UID 1000, passwordless sudo, `/home/agent/` home, and HTTP
 proxy environment variable forwarding.
 
@@ -65,32 +65,28 @@ substitutes the real key on outbound requests to the API host, so the
 secret never enters the sandbox. A later section walks through the
 specific command for storing the key.
 
-## Write the agent block
+## Write the sandbox block
 
-The `agent:` block tells the sandbox how to launch Amp when the user
+The `sandbox:` block tells the sandbox how to launch Amp when the user
 attaches.
 
 ```yaml {title="amp/spec.yaml"}
 schemaVersion: "1"
-kind: agent
+kind: sandbox
 name: amp
 displayName: Amp
 description: The frontier coding agent.
 
-agent:
+sandbox:
   image: "docker/sandbox-templates:shell-docker"
   aiFilename: AGENTS.md
-  persistence: persistent
   entrypoint:
     run: [amp, --dangerously-allow-all]
 ```
 
 - `aiFilename: AGENTS.md` tells the sandbox to create `AGENTS.md` at launch
-  and append the [`memory`](#prime-amp-with-memory) block to it. Amp reads
+  and append the [`agentContext`](#prime-amp-with-memory) block to it. Amp reads
   this file for instructions.
-- `persistence: persistent` keeps Amp's state (auth tokens, history) in a
-  named volume across sandbox restarts. Without it, you re-authenticate
-  every time.
 - `entrypoint.run` runs `amp` in "YOLO-mode" when the sandbox starts. Adjust if
   you want to pass different args on startup.
 
@@ -157,12 +153,12 @@ pick any name.
 
 ## Prime Amp with memory
 
-The `memory` field appends markdown to `AGENTS.md` at sandbox creation.
+The `agentContext` field appends markdown to `AGENTS.md` at sandbox creation.
 Use it to tell Amp about the sandbox environment so it knows the
 conventions when it starts.
 
 ```yaml
-memory: |
+agentContext: |
   ## Sandbox environment
 
   You are running inside a Docker sandbox. The workspace is mounted at
@@ -180,15 +176,14 @@ Putting it all together:
 
 ```yaml {title="amp/spec.yaml"}
 schemaVersion: "1"
-kind: agent
+kind: sandbox
 name: amp
 displayName: Amp
 description: The frontier coding agent.
 
-agent:
+sandbox:
   image: "docker/sandbox-templates:shell-docker"
   aiFilename: AGENTS.md
-  persistence: persistent
   entrypoint:
     run: [amp, --dangerously-allow-all]
 
@@ -209,7 +204,7 @@ commands:
       user: "1000"
       description: Install Amp
 
-memory: |
+agentContext: |
   ## Sandbox environment
 
   You are running inside a Docker sandbox. The workspace is mounted at
@@ -287,7 +282,7 @@ Two loops help:
 - Edit the spec and re-run `sbx run --kit ./amp/ amp` to pick up changes.
   Remove the sandbox first (`sbx rm <name>`) for a clean start.
 
-Flesh out the `memory` block as you refine how Amp should behave in the
+Flesh out the `agentContext` block as you refine how Amp should behave in the
 sandbox.
 
 ## Publish
@@ -316,7 +311,7 @@ the same decisions for your agent:
   placeholder. If it accepts the env var as-is, declare
   `environment.proxyManaged` in the kit and skip the user-side step.
 
-The rest — memory block, network-policy iteration, packaging — is the
+The rest — agent-context block, network-policy iteration, packaging — is the
 same regardless of agent.
 
 ## Remove the stored secret

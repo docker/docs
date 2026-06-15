@@ -1,7 +1,7 @@
 ---
 title: Kit examples
 linkTitle: Examples
-description: Copy-and-adapt spec.yaml snippets for common mixin and agent kit patterns — static files, install commands, background services, initFiles, Claude Code skills, and agent forks.
+description: Copy-and-adapt spec.yaml snippets for common mixin and sandbox kit patterns — static files, install commands, background services, initFiles, Claude Code skills, and agent forks.
 keywords: sandboxes, sbx, kits, mixins, examples, patterns, skills
 weight: 25
 ---
@@ -17,7 +17,7 @@ weight: 25
 Each section below shows one `spec.yaml` snippet that demonstrates a
 single kit pattern. These aren't complete, distributable kits — they're
 small, focused examples you can lift into your own kit. For the full
-spec reference, see [Kits](kits.md).
+spec reference, see [Kit spec reference](kit-reference.md).
 
 ## Drop a shared config file
 
@@ -253,7 +253,7 @@ idempotent. The heredoc pattern overwrites cleanly each time.
 
 ## Fork an existing agent
 
-Agent kits (`kind: agent`) define a full agent from scratch. The most
+Sandbox kits (`kind: sandbox`) define a full agent from scratch. The most
 common variant is a fork of a built-in agent — same image and
 credentials, but a different entrypoint. This example reproduces the
 built-in `claude` agent but drops `--dangerously-skip-permissions` so
@@ -261,15 +261,14 @@ every tool call prompts for approval:
 
 ```yaml {title="claude-safe/spec.yaml"}
 schemaVersion: "1"
-kind: agent
+kind: sandbox
 name: claude-safe
 displayName: Claude Code (with approval prompts)
 description: Claude Code without --dangerously-skip-permissions
 
-agent:
+sandbox:
   image: "docker/sandbox-templates:claude-code-docker"
   aiFilename: CLAUDE.md
-  persistence: persistent
   entrypoint:
     run: [claude]
 
@@ -297,7 +296,7 @@ Launch with the kit's `name:` as the agent argument to `sbx run`:
 $ sbx run claude-safe --kit ./claude-safe
 ```
 
-For a step-by-step walkthrough of building a new agent kit from
+For a step-by-step walkthrough of building a new sandbox kit from
 scratch, see [Build an agent](build-an-agent.md).
 
 ## More examples
