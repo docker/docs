@@ -8,21 +8,24 @@
   <div
     class="not-prose mx-auto flex min-h-[calc(100dvh-7rem)] max-w-7xl flex-col"
     x-data="{
-      activeTag: 'languages',
       query: '',
+      tagFilter: '',
       words() { return this.query.trim().toLowerCase().split(/\s+/).filter(Boolean) },
-      filtering() { return this.query.trim().length > 0 },
+      textFiltering() { return this.query.trim().length > 0 },
+      filtering() { return this.textFiltering() || this.tagFilter !== '' },
       matchText(text) { return this.words().every(w => text.includes(w)) },
-      rowVisible(el) { return !this.filtering() || this.matchText(el.dataset.search) },
-      sectionVisible(el) { return !this.filtering() || Array.from(el.querySelectorAll('[data-guide]')).some(r => this.matchText(r.dataset.search)) },
-      resultCount() { return Array.from(document.querySelectorAll('[data-guide]')).filter(r => this.matchText(r.dataset.search)).length },
-      init() {
-        const obs = new IntersectionObserver(
-          entries => entries.forEach(e => { if (e.isIntersecting) this.activeTag = e.target.id }),
-          { rootMargin: '-20% 0px -70% 0px', threshold: 0 }
-        );
-        document.querySelectorAll('section[data-tag]').forEach(s => obs.observe(s));
-      }
+      rowVisible(el) { return !this.textFiltering() || this.matchText(el.dataset.search) },
+      sectionVisible(el) {
+        if (this.tagFilter) return el.dataset.tag === this.tagFilter;
+        if (this.textFiltering()) return Array.from(el.querySelectorAll('[data-guide]')).some(r => this.matchText(r.dataset.search));
+        return true;
+      },
+      resultCount() {
+        if (this.tagFilter) return document.querySelectorAll('section[data-tag=' + this.tagFilter + '] [data-guide]').length;
+        return Array.from(document.querySelectorAll('[data-guide]')).filter(r => this.matchText(r.dataset.search)).length;
+      },
+      selectTag(tag) { this.tagFilter = this.tagFilter === tag ? '' : tag; this.query = ''; window.scrollTo({ top: 0, behavior: 'smooth' }); },
+      clear() { this.query = ''; this.tagFilter = ''; }
     }"
   >
     {{- partial "breadcrumbs.html" . }}
@@ -52,7 +55,8 @@
       <input
         type="search"
         x-model="query"
-        @keydown.escape="query = ''"
+        @input="tagFilter = ''"
+        @keydown.escape="clear()"
         aria-label="Filter guides"
         placeholder="Filter guides by name, topic, or tag…"
         class="w-full rounded-xl border border-gray-300 bg-white py-2.5 pr-10 pl-11 text-sm text-gray-900 shadow-sm transition placeholder:text-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/40 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder:text-gray-500"
@@ -60,7 +64,7 @@
       <button
         x-show="query"
         x-cloak
-        @click="query = ''"
+        @click="clear()"
         aria-label="Clear filter"
         class="icon-svg icon-sm absolute top-1/2 right-2.5 -translate-y-1/2 rounded-md p-1 text-gray-400 transition hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-800 dark:hover:text-gray-200"
       >
@@ -69,23 +73,32 @@
     </div>
 
     <div class="flex flex-1 gap-16 xl:gap-24">
-      <!-- Sticky jump nav (hidden while filtering) -->
-      <nav
-        x-show="!filtering()"
-        class="sticky top-20 hidden w-52 flex-none flex-col self-start xl:flex"
-      >
+      <!-- Sticky topic filter -->
+      <nav class="sticky top-20 hidden w-52 flex-none flex-col self-start xl:flex">
         <p class="mb-3 text-xs font-semibold tracking-widest text-gray-400 uppercase dark:text-gray-500">
-          Jump to
+          Browse
         </p>
+        <button
+          type="button"
+          @click="clear()"
+          class="flex items-center justify-between py-1.5 text-left text-sm transition-colors"
+          :class="!filtering() ? 'text-black dark:text-white font-medium' : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'"
+        >
+          <span class="flex items-center gap-2.5">
+            <span class="w-5"></span>
+            <span>All guides</span>
+          </span>
+          <span class="text-xs tabular-nums text-gray-300 dark:text-gray-600">{{ len .RegularPagesRecursive }}</span>
+        </button>
         {{- range $i, $tag := $tagOrder }}
           {{- $tagData := index hugo.Data.tags $tag }}
           {{- $pages := where $.RegularPagesRecursive "Params.tags" "intersect" (slice $tag) }}
           {{- if $pages }}
-            <a
-              href="#{{ $tag }}"
-              class="flex items-center justify-between py-1.5 text-sm transition-colors"
-              :class="activeTag === '{{ $tag }}' ? 'text-black dark:text-white font-medium' : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'"
-              @click.prevent="activeTag = '{{ $tag }}'; document.getElementById('{{ $tag }}').scrollIntoView({ behavior: 'smooth' })"
+            <button
+              type="button"
+              @click="selectTag('{{ $tag }}')"
+              class="flex items-center justify-between py-1.5 text-left text-sm transition-colors"
+              :class="tagFilter === '{{ $tag }}' ? 'text-black dark:text-white font-medium' : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'"
             >
               <span class="flex items-center gap-2.5">
                 <span class="w-5 text-xs tabular-nums text-gray-300 dark:text-gray-600">
@@ -94,7 +107,7 @@
                 <span>{{ $tagData.title }}</span>
               </span>
               <span class="text-xs tabular-nums text-gray-300 dark:text-gray-600">{{ len $pages }}</span>
-            </a>
+            </button>
           {{- end }}
         {{- end }}
       </nav>
@@ -112,7 +125,7 @@
             of {{ len .RegularPagesRecursive }} guides
           </p>
           <button
-            @click="query = ''"
+            @click="clear()"
             class="text-sm font-medium text-blue-600 transition hover:underline dark:text-blue-400"
           >
             Clear filter
@@ -145,21 +158,18 @@
                   {{- range .Params.tags }}{{ $tagTitles = $tagTitles | append (index hugo.Data.tags .).title }}{{ end }}
                   {{- $search := lower (printf "%s %s %s %s" .Title .Summary (delimit .Params.tags " ") (delimit $tagTitles " ")) }}
                   {{- $search = $search | replaceRE "\\s+" " " }}
-                  <a
-                    href="{{ .Permalink }}"
+                  <div
                     data-guide
                     data-search="{{ $search }}"
                     x-show="rowVisible($el)"
-                    class="group -mx-3 grid grid-cols-[5fr_6fr_auto] items-start gap-6 rounded-lg px-3 py-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-900"
+                    class="grid grid-cols-[5fr_6fr] items-start gap-6 py-4"
                   >
-                    <span class="font-medium leading-snug text-gray-900 transition-colors group-hover:text-blue-600 dark:text-gray-100 dark:group-hover:text-blue-400">{{ .Title }}</span>
+                    <a
+                      href="{{ .Permalink }}"
+                      class="font-medium leading-snug text-gray-900 hover:underline dark:text-gray-100"
+                    >{{ .Title }}</a>
                     <span class="text-sm leading-relaxed text-gray-500 dark:text-gray-400">{{ .Summary }}</span>
-                    <span
-                      class="icon-svg icon-sm mt-0.5 self-center text-gray-300 opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-blue-600 group-hover:opacity-100 dark:text-gray-600 dark:group-hover:text-blue-400"
-                    >
-                      {{ partialCached "icon" "arrow-right" "arrow-right" }}
-                    </span>
-                  </a>
+                  </div>
                 {{- end }}
               </div>
             </section>
@@ -179,7 +189,7 @@
             No guides match “<span class="font-medium text-gray-700 dark:text-gray-200" x-text="query"></span>”.
           </p>
           <button
-            @click="query = ''"
+            @click="clear()"
             class="text-sm font-medium text-blue-600 transition hover:underline dark:text-blue-400"
           >
             Clear filter
