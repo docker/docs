@@ -13,7 +13,7 @@ Organization access tokens (OATs) provide secure, programmatic access to Docker 
 
 > [!WARNING]
 >
-> Organization access tokens are incompatible with Docker Desktop, Image Access Management, and Registry Access Management. If you use these features, use [personal access tokens](/manuals/security/access-tokens.md) instead.
+> Organization access tokens are incompatible with Docker Desktop and Image Access Management. If you use these features, use [personal access tokens](/manuals/security/access-tokens.md) instead.
 
 ## Who should use organization access tokens?
 
