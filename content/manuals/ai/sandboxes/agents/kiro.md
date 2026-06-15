@@ -85,10 +85,12 @@ Without extra args, the sandbox runs:
 kiro chat --trust-all-tools
 ```
 
-Args after `--` replace these defaults rather than being appended. This is
-why `sbx run kiro -- login --use-device-flow` works for the login subcommand.
-To keep `chat --trust-all-tools` alongside your own args, include them
-yourself:
+When the first argument after `--` is a flag (begins with `-`), it's added
+after the defaults — for example, `sbx run kiro -- --resume` runs
+`kiro chat --trust-all-tools --resume`. When the first argument is a bare word,
+it replaces the defaults, which is why `sbx run kiro -- login --use-device-flow`
+runs the login subcommand on its own. To run `chat` with extra arguments of
+your own, include the subcommand:
 
 ```console
 $ sbx run kiro -- chat --trust-all-tools --resume

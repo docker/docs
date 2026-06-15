@@ -65,12 +65,15 @@ Without extra args, the sandbox runs:
 cursor-agent --yolo
 ```
 
-Args after `--` replace these defaults rather than being appended. To keep
-`--yolo`, include it yourself:
+Arguments after `--` are added after the default flags when the first one is
+itself a flag (begins with `-`), so `--yolo` is preserved:
 
 ```console
-$ sbx run cursor -- --yolo -p "refactor this"
+$ sbx run cursor -- -p "refactor this"   # runs cursor-agent --yolo -p "refactor this"
 ```
+
+When the first argument is a bare word — a subcommand or prompt — it replaces
+the defaults instead.
 
 ## Base image
 

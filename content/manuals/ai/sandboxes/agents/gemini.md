@@ -65,12 +65,15 @@ Without extra args, the sandbox runs:
 gemini --yolo
 ```
 
-Args after `--` replace these defaults rather than being appended. To keep
-`--yolo`, include it yourself:
+Arguments after `--` are added after the default flags when the first one is
+itself a flag (begins with `-`), so `--yolo` is preserved:
 
 ```console
-$ sbx run gemini -- --yolo -p "explain this"
+$ sbx run gemini -- -p "explain this"   # runs gemini --yolo -p "explain this"
 ```
+
+When the first argument is a bare word — a subcommand or prompt — it replaces
+the defaults instead.
 
 ## Base image
 
