@@ -183,20 +183,24 @@ Extracting the tar archive as the current user avoids the `chown` call.
 
 Filesystem operations such as `git status`, `git log`, or directory scans can
 be noticeably slow when the sandbox workspace is mounted in direct mode (the
-default for workspaces without `--clone`). In direct mode, virtiofs caching is
-disabled by default to prevent data corruption. Clone-mode sandboxes enable
-virtiofs caching automatically, so this tuning applies only to direct mode.
+default for workspaces without `--clone`). Virtiofs caching speeds up these
+workloads. Clone-mode sandboxes always enable it, so this tuning applies only
+to direct mode.
 
-To speed up filesystem-intensive workloads, opt into virtiofs caching when
-creating the sandbox:
+On macOS and Linux, virtiofs caching is enabled by default. On Windows it's
+still opt-in — enable it when creating the sandbox:
 
 ```console
 $ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=1 sbx run <template>
 ```
 
 The setting is persisted in the sandbox spec and applies for the lifetime of
-that sandbox. If you experience Git index corruption or unexpected file content
-after enabling the cache, remove the sandbox and recreate it without the flag.
+that sandbox. If you experience Git index corruption or unexpected file content,
+disable caching with the kill switch and recreate the sandbox:
+
+```console
+$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <template>
+```
 
 ## Clone mode reports "not in a Git repository" on WSL
 
