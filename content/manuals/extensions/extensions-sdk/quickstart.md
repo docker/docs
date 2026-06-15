@@ -79,7 +79,7 @@ hidden from the Docker Dashboard. You can change this in **Settings**, see
 
 > [!IMPORTANT]
 >
-> New submissions to the Docker Extensions Marketplace are paused while we review Marketplace security. You can still update existing extensions, and private Marketplace extensions are unaffected. Contact extensions@docker.com if you have additional questions.
+> New submissions to the Docker Extensions Marketplace are paused while Docker reviews Marketplace security. You can still update existing extensions, and private Marketplace extensions are unaffected. Contact extensions@docker.com if you have additional questions.
 
 If you want to make your extension available to all Docker Desktop users, you can submit it for publication in the Marketplace. For more information, see [Publish](extensions/_index.md).
 

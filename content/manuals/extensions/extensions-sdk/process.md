@@ -40,7 +40,7 @@ For further inspiration, see the other examples in the [samples folder](https://
 
 > [!IMPORTANT]
 >
-> New submissions to the Docker Extensions Marketplace are paused while we review Marketplace security. You can still update existing extensions, and private Marketplace extensions are unaffected. Contact extensions@docker.com if you have additional questions.
+> New submissions to the Docker Extensions Marketplace are paused while Docker reviews Marketplace security. You can still update existing extensions, and private Marketplace extensions are unaffected. Contact extensions@docker.com if you have additional questions.
 
 Docker Desktop displays published extensions in the Extensions Marketplace. The Extensions Marketplace is a curated space where developers can discover extensions to improve their developer experience and upload their own extension to share with the world.
 
