@@ -66,8 +66,8 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
       image.
 
       The packages available in the drop-down are OS system packages for the
-      selected image variant. For version 3.23 Alpine-based images, these are
-      hardened packages that have been built from source by Docker with
+      selected image variant. For version 3.23 and later Alpine-based images,
+      these are hardened packages that have been built from source by Docker with
       cryptographic signatures and full supply chain security. For version 3.22
       Alpine-based images and Debian-based images, these are standard system
       packages.
