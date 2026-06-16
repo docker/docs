@@ -46,7 +46,7 @@ Select the **Display settings** icon in the toolbar to toggle the following:
 - **Wrap lines**
 - **Show timestamps**
 
-You can also choose **Clear logs** to remove log entries from the view (available with Docker Dekstop 4.79 and later). A dialog lets you choose between two options:
+You can also choose **Clear logs** to remove log entries from the view (available with Docker Desktop 4.79 and later). A dialog lets you choose between two options:
 
 - **Clear all logs**: Immediately hides all current log entries.
 - **Clear logs before**: Activates a date and time picker. Only entries at or before the selected timestamp are hidden.
