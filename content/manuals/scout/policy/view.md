@@ -52,7 +52,7 @@ for all policy violations for the current image.
 
 ![Detailed Policy Evaluation results](../images/policy-detailed-results.webp)
 
-This view also provides recommendations on how to improve improve policy status
+This view also provides recommendations on how to improve policy status
 for violated policies.
 
 ![Policy details in the tag view](../images/policy-tag-view.webp)
