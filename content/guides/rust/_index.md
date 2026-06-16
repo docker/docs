@@ -23,8 +23,6 @@ The Rust language-specific guide teaches you how to create a containerized Rust 
 - Set up volumes and networking
 - Orchestrate containers using Compose
 - Use containers for development
-- Configure a CI/CD pipeline for your application using GitHub Actions
-- Deploy your containerized Rust application locally to Kubernetes to test and debug your deployment
 
 After completing the Rust modules, you should be able to containerize your own Rust application based on the examples and instructions provided in this guide.
 

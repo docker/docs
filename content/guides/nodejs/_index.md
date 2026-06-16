@@ -16,7 +16,7 @@ params:
   time: 20 minutes
 ---
 
-[Node.js](https://nodejs.org/en) is a JavaScript runtime for building server-side applications. This guide shows you how to containerize a TypeScript Node.js application using Docker, starting from a simple Express API and progressively adding features like a database and CI/CD.
+[Node.js](https://nodejs.org/en) is a JavaScript runtime for building server-side applications. This guide shows you how to containerize a TypeScript Node.js application using Docker, starting from a simple Express API and progressively adding features like a database.
 
 This guide focuses on a backend Node.js API. If you're building a standalone frontend application, Docker has dedicated guides for [React.js](/guides/reactjs/), [Vue.js](/guides/vuejs/), [Angular](/guides/angular/), and [Next.js](/guides/nextjs/).
 
@@ -31,9 +31,6 @@ In this guide, you'll learn how to:
 - Containerize and run a Node.js application using Docker.
 - Set up a local development environment using containers.
 - Run tests inside a Docker container.
-- Configure GitHub Actions for CI/CD with Docker.
-- Inspect and generate supply chain attestations for your image.
-- Deploy your containerized Node.js application to Kubernetes.
 
 Start by containerizing a Node.js application.
 

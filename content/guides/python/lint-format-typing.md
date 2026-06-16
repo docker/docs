@@ -12,8 +12,7 @@ aliases:
 
 Complete [Develop your app](develop.md). This topic requires a local Python
 installation because the tools and Git hooks introduced here run on your
-host. If you don't want to install Python locally, skip this topic. The same
-checks run in CI in the [next topic](configure-github-actions.md).
+host. If you don't want to install Python locally, you can skip this topic.
 
 ## Overview
 
@@ -191,6 +190,5 @@ Related information:
 
 ## Next steps
 
-- [Configure GitHub Actions](configure-github-actions.md) to run these checks automatically
 - Customize linting rules to match your team's style preferences
 - Explore advanced type checking features

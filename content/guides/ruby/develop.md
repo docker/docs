@@ -198,6 +198,3 @@ Related information:
 - [Compose file watch](/manuals/compose/how-tos/file-watch.md)
 - [Multi-stage builds](/manuals/build/building/multi-stage.md)
 
-## Next steps
-
-In the next section, you'll learn how you can locally test and debug your workloads on Kubernetes before deploying.

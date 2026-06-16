@@ -298,6 +298,3 @@ Related information:
 - [Docker volumes](/manuals/engine/storage/volumes.md)
 - [Compose overview](/manuals/compose/_index.md)
 
-## Next steps
-
-In the next section, you'll take a look at how to set up a CI/CD pipeline using GitHub Actions.

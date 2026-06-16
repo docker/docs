@@ -31,10 +31,7 @@ In this guide, you will learn how to:
 - Containerize and run an Angular application using Docker.
 - Set up a local development environment for Angular inside a container.
 - Run tests for your Angular application within a Docker container.
-- Configure a CI/CD pipeline using GitHub Actions for your containerized app.
-- Deploy the containerized Angular application to a local Kubernetes cluster for testing and debugging.
-
-You'll start by containerizing an existing Angular application and work your way up to production-level deployments.
+You'll start by containerizing an existing Angular application.
 
 ---
 

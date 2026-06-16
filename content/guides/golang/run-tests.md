@@ -90,7 +90,3 @@ You should see output containing the following.
 #13 4.915 PASS
 ```
 
-## Next steps
-
-In this section, you learned how to run tests when building your image. Next,
-you’ll learn how to set up a CI/CD pipeline using GitHub Actions.

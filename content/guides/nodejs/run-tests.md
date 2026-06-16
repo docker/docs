@@ -259,6 +259,3 @@ Related information:
 - [Compose file reference](/compose/compose-file/)
 - [`docker compose run` CLI reference](/reference/cli/docker/compose/run/)
 
-## Next steps
-
-In the next section, you'll learn how to set up a CI/CD pipeline using GitHub Actions.
