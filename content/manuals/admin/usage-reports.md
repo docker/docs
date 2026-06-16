@@ -27,6 +27,7 @@ To access usage reports, you must meet the following requirements:
 
 - [Docker Business subscription](https://www.docker.com/pricing?ref=Docs)
 - Organization owner or a custom role with report access permissions
+- An [organization access token (OAT)](/manuals/security/for-admins/access-tokens/)
 
 ## Available report types
 
@@ -34,7 +35,7 @@ To access usage reports, you must meet the following requirements:
 
 Daily aggregated pull activity for your organization. Each report covers one
 calendar day (UTC) and includes all authenticated pulls attributed to your
-organization's billing entity.
+organization.
 
 **Columns:**
 
@@ -66,38 +67,43 @@ organization's billing entity.
 
 ## API reference
 
-The usage reports API uses [ConnectRPC](https://connectrpc.com/) (compatible
-with gRPC and JSON). All endpoints require authentication with a valid
-organization access token or Hub session JWT.
+All endpoints require authentication with an
+[organization access token (OAT)](/manuals/security/for-admins/access-tokens/)
+in the `Authorization` header.
 
-Base URL: `https://marlin-api.docker.com`
+Base URL: `https://api.docker.com`
 
-### List reports
+### Discover available reports
 
-Returns metadata and download links for available reports.
+Returns the report types and cadences available for your organization.
 
-**Endpoint:**
-`POST /docker.marlin.query.v1.ReportService/ListReports`
+```
+GET /v2/orgs/{org_name}/reports
+```
 
-**Request:**
+**Response:**
 
 ```json
 {
-  "orgId": "your-org-id",
-  "reportType": "usage_pulls",
-  "cadence": "daily",
-  "pageSize": 30,
-  "pageToken": ""
+  "report_types": [
+    {"ReportType": "usage_pulls", "Cadence": "daily"}
+  ]
 }
 ```
 
-| Field | Required | Description |
-|-------|----------|-------------|
-| `orgId` | Yes | Your organization ID |
-| `reportType` | Yes | Report type (e.g., `usage_pulls`) |
-| `cadence` | Yes | Report cadence (`daily`) |
-| `pageSize` | No | Number of reports per page (default: 30, max: 100) |
-| `pageToken` | No | Cursor for the next page (from a previous response) |
+### List reports
+
+Returns metadata for available reports of a given type and cadence.
+
+```
+GET /v2/orgs/{org_name}/reports/{type}/{cadence}
+```
+
+**Query parameters:**
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `page_token` | No | Cursor for the next page (from a previous response) |
 
 **Response:**
 
@@ -105,43 +111,39 @@ Returns metadata and download links for available reports.
 {
   "reports": [
     {
-      "reportType": "usage_pulls",
-      "cadence": "daily",
-      "date": "2026-06-01",
-      "sizeBytes": "15234",
-      "downloadUrl": "https://...",
-      "downloadUrlExpiresAt": "2026-06-02T12:15:00Z"
+      "ReportType": "usage_pulls",
+      "Cadence": "daily",
+      "Date": "2026-06-01",
+      "SizeBytes": 15234
     }
   ],
-  "nextPageToken": "..."
+  "next_page_token": "..."
 }
 ```
 
-Each report includes a `downloadUrl` that can be used to download the CSV file
-directly. The URL expires after 15 minutes. To get a fresh URL, call
-`ListReports` again.
+Reports are returned most recent first. When `next_page_token` is present,
+pass it as `page_token` in the next request to get more results.
 
-When `nextPageToken` is present, pass it as `pageToken` in the next request to
-get the next page of results. Reports are returned most recent first.
+### Download a report
+
+Downloads a specific report CSV. The response is a redirect (HTTP 302) to
+a short-lived download URL. Most HTTP clients follow the redirect
+automatically.
+
+```
+GET /v2/orgs/{org_name}/reports/{type}/{cadence}/{date}/download
+```
+
+The download URL expires after 15 minutes.
 
 ### Get report schema
 
-Returns the column definitions for a specific report. Use this to understand the
-structure of the CSV before parsing it, or to detect when columns have been
-added or changed.
+Returns the column definitions for a specific report date. Use this to
+understand the structure of the CSV before parsing it, or to detect when
+columns have been added or changed.
 
-**Endpoint:**
-`POST /docker.marlin.query.v1.ReportService/GetReportSchema`
-
-**Request:**
-
-```json
-{
-  "orgId": "your-org-id",
-  "reportType": "usage_pulls",
-  "cadence": "daily",
-  "date": "2026-06-01"
-}
+```
+GET /v2/orgs/{org_name}/reports/{type}/{cadence}/{date}/schema
 ```
 
 **Response:**
@@ -173,22 +175,30 @@ added or changed.
 ## Example: download a report
 
 ```bash
-# 1. List available reports
-curl -s https://marlin-api.docker.com/docker.marlin.query.v1.ReportService/ListReports \
-  -H "Authorization: Bearer $TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"orgId":"your-org-id","reportType":"usage_pulls","cadence":"daily","pageSize":7}' \
-  | jq '.reports[] | {date, sizeBytes}'
+# Set your org access token
+export TOKEN="dckr_oat_..."
 
-# 2. Download the most recent report
-URL=$(curl -s https://marlin-api.docker.com/docker.marlin.query.v1.ReportService/ListReports \
-  -H "Authorization: Bearer $TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"orgId":"your-org-id","reportType":"usage_pulls","cadence":"daily","pageSize":1}' \
-  | jq -r '.reports[0].downloadUrl')
+# 1. Discover what report types are available
+curl -s -H "Authorization: Bearer $TOKEN" \
+  https://api.docker.com/v2/orgs/your-org/reports | jq .
 
-curl -o usage_pulls_latest.csv "$URL"
+# 2. List available daily usage reports
+curl -s -H "Authorization: Bearer $TOKEN" \
+  https://api.docker.com/v2/orgs/your-org/reports/usage_pulls/daily | jq .
+
+# 3. Download the most recent report
+curl -L -o usage_pulls_2026-06-01.csv -H "Authorization: Bearer $TOKEN" \
+  https://api.docker.com/v2/orgs/your-org/reports/usage_pulls/daily/2026-06-01/download
+
+# 4. Check the column schema
+curl -s -H "Authorization: Bearer $TOKEN" \
+  https://api.docker.com/v2/orgs/your-org/reports/usage_pulls/daily/2026-06-01/schema | jq .
 ```
+
+> [!TIP]
+>
+> Use `curl -L` for the download endpoint. The API returns a redirect (HTTP 302)
+> to the file, and `-L` tells curl to follow it.
 
 ## Data retention
 
