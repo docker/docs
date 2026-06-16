@@ -193,7 +193,9 @@ secret never enters the VM.
 
 See [Credentials](../security/credentials.md) for how to provide the
 credential value on your host, other approaches for cases the example
-above doesn't fit, and what the proxy does at request time.
+above doesn't fit, and what the proxy does at request time. To scope where
+a kit-declared credential is sourced or which domains it's injected into,
+see [Credential bindings](../security/credentials.md#credential-bindings).
 
 ### Inject agent memory
 

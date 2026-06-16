@@ -21,9 +21,11 @@ declares the match and the header; you provide the value on the host. The real
 value never enters the sandbox — the agent sees only a sentinel like
 `proxy-managed`.
 
-There are several ways to provide that value. When more than one source has a
-value for the same service, the stored secret takes precedence over a host
-environment variable.
+There are several ways to provide that value. A
+[credential bindings](#credential-bindings) file can additionally control where
+the value is sourced from and narrow which domains it's injected into. When more
+than one source has a value for the same service, the stored secret takes
+precedence, then bindings discovery, then a host environment variable.
 
 | Form | What it is | Use it when |
 | ---- | ---------- | ----------- |
@@ -31,6 +33,7 @@ environment variable.
 | [Custom secrets](#custom-secrets) (`sbx secret set-custom`) | A value keyed to a domain and environment variable | The service model doesn't fit — the agent validates the variable's format, or the secret rides in a request body |
 | [Environment variables](#environment-variables) | Read from your shell session | One-off testing or CI, where keychain storage isn't worth it |
 | OAuth | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, or Cursor |
+| [Credential bindings](#credential-bindings) (`credentials.yaml`) | Per-service sourcing and domain approval | Restrict which domains a credential reaches, or require an approved binding for every credential (fail-closed) |
 | [Registry credentials](#registry-credentials) (`sbx secret set --registry`) | Authentication for pulling images and kits | Pulling templates or kits from a private registry |
 
 For multi-provider agents (OpenCode, Docker Agent), the proxy selects
@@ -253,6 +256,63 @@ The proxy reads the variable from your terminal session. See individual
 > host-side proxy. For custom environment variables not tied to a
 > [built-in service](#built-in-services), see
 > [Setting custom environment variables](../faq.md#how-do-i-set-custom-environment-variables-inside-a-sandbox).
+
+## Credential bindings
+
+A credential bindings file records, per service, where `sbx` finds each
+credential value and which domains it may be injected into. It lives at
+`~/.config/sbx/credentials.yaml`, or `%APPDATA%\sbx\credentials.yaml` on
+Windows.
+
+Each entry under `bindings` is keyed by a
+[service identifier](#built-in-services) and has two parts:
+
+- **`discovery`** — where to find the value: one or more environment variables,
+  or a file. Entries are tried in order. Omit `discovery` to resolve the value
+  from the [secret store](#stored-secrets) as usual.
+- **`allowedDomains`** — the domains the proxy may inject this credential into.
+  The credential is never attached to a domain outside this list, even if a kit
+  declares it.
+
+```yaml
+bindings:
+  anthropic:
+    discovery:
+      - env: [ANTHROPIC_API_KEY]
+    allowedDomains: [api.anthropic.com]
+  github:
+    discovery:
+      - env: [GH_TOKEN, GITHUB_TOKEN]
+    allowedDomains: [api.github.com, github.com]
+```
+
+For a file source, set `parser: json:<dot.path>` to pull a field from a JSON
+file, or omit `parser` to use the whole file — the same format kits use for
+[`credentials.sources`](../customize/kit-reference.md#fileparser). Bindings
+apply to services a kit or built-in agent already declares; they control how an
+existing service's credential is sourced and scoped, not which services exist.
+
+### Fail-closed mode
+
+By default, a service's credential is injected into every domain its kit
+declares, whether or not a binding exists. Turn on fail-closed mode to require
+an approved binding for every injected credential:
+
+```console
+$ sbx settings set credentials.failClosed true
+```
+
+With fail-closed on, `sbx` injects a credential only where a binding approves
+it. The first time an agent needs a credential that has no binding, `sbx` walks
+you through creating one — choose where the value comes from (the secret store,
+an environment variable, or a file), approve the domains it may reach, and `sbx`
+writes the entry to `credentials.yaml`. In non-interactive contexts (CI or
+`--detached`), a missing binding is reported as a clear error naming the
+service, rather than a silently absent credential.
+
+This makes the bindings file an allowlist of credential-to-domain approvals: an
+agent can use only the credentials you've approved, only on the domains you've
+approved.
 
 ## Registry credentials
 
