@@ -31,7 +31,7 @@ info:
     most-recent-first.
   contact:
     name: Docker
-    url: https://www.docker.com/
+    url: https://api.docker.com/
 
 tags:
   - name: report-types
