@@ -43,7 +43,7 @@ convert a user account into an organization, it's not possible to
 revert it to a personal user account.
 
 For prerequisites and instructions, see
-[Convert an account into an organization](convert-account.md).
+[Convert an account into an organization](setup/convert-account.md).
 
 ### Do organization invitees take up seats?
 
