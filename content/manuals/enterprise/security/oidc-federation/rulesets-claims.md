@@ -1,13 +1,13 @@
 ---
-title: Docker OIDC rulesets and subject claims
+title: OIDC connections rulesets and subject claims
 linkTitle: Rulesets and subject claims
-description: Configure rulesets and subject claims to control access for Docker OIDC connections
-keywords: docker oidc, rulesets, subject claims, openid connect, token claims, access control, enterprise security, admin
+description: Configure rulesets and subject claims to control access for OIDC connections
+keywords: oidc connections, rulesets, subject claims, openid connect, token claims, access control, enterprise security, admin
 tags: [admin]
 weight: 20
 ---
 
-{{< summary-bar feature_name="Docker OIDC" >}}
+{{< summary-bar feature_name="OIDC connections" >}}
 
 Rulesets and subject claims define what actions your GitHub workflows can take with your Docker resources. This page explains how to configure rulesets and set subject claims to authorize GitHub Workflow behaviors.
 
@@ -66,7 +66,7 @@ Resources define what Docker resources a workflow can access when a ruleset matc
 
 Docker Hub repositories are supported resources.
 
-## What’s next
+## What's next
 
-- Learn about [Docker OIDC](/manuals/enterprise/security/docker-oidc/_index.md)
-- [Create or manage Docker OIDC connections](/manuals/enterprise/security/docker-oidc/create-manage.md)
+- Learn about [OIDC connections](/manuals/enterprise/security/oidc-federation/_index.md)
+- [Create or manage OIDC connections](/manuals/enterprise/security/oidc-federation/create-manage.md)

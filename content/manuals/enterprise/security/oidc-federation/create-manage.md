@@ -1,25 +1,25 @@
 ---
-title: Create and manage Docker OIDC connections
+title: Create and manage OIDC connections
 linkTitle: Create and manage connections
-description: Create, update, and delete Docker OIDC connections for your organization
-keywords: docker oidc, create oidc connection, manage oidc connection, openid connect, identity provider, enterprise security, admin
+description: Create, update, and delete OIDC connections for your organization
+keywords: oidc connections, create oidc connection, manage oidc connection, openid connect, identity provider, enterprise security, admin
 tags: [admin]
 weight: 10
 ---
 
-{{< summary-bar feature_name="Docker OIDC" >}}
+{{< summary-bar feature_name="OIDC connections" >}}
 
 You can create new OIDC connections or manage existing ones from the Admin Console in Docker Home. Establishing an OIDC connection occurs in two phases. First, you create the OIDC connection in the Admin Console, then you configure your GitHub Actions workflow YAML file.
 
-## Connect Docker OIDC to GitHub Actions
+## Connect OIDC connections to GitHub Actions
 
-### Step 1: Create the Docker OIDC connection
+### Step 1: Create the OIDC connection
 
 1. Sign in to [Docker Home](https://app.docker.com/), select your organization, then go to the **Admin Console**.
 1. In **Security**, select **OIDC connections**.
 1. Select **Create OIDC connection** to go to the creation page. Fill in the OIDC connection form.
    - You must provide rulesets and subject claims. Other values are optional.
-   - To learn about rulesets, subject claims, and resources, see [Docker OIDC rulesets and subject claims](/manuals/enterprise/security/docker-oidc/rulesets-claims.md).
+   - To learn about rulesets, subject claims, and resources, see [OIDC connections rulesets and subject claims](/manuals/enterprise/security/oidc-federation/rulesets-claims.md).
 1. Select **Create connection**.
 1. Copy your OIDC connection ID.
 
@@ -39,7 +39,7 @@ You can create new OIDC connections or manage existing ones from the Admin Conso
      login:
        runs-on: ubuntu-latest
        steps:
-         - name: Docker OIDC
+         - name: OIDC connections
            id: docker_oidc
            uses: docker/oidc-action@v0
            with:
@@ -68,7 +68,7 @@ jobs:
   login:
     runs-on: ubuntu-latest
     steps:
-      - name: Docker OIDC
+      - name: OIDC connections
         id: docker_oidc
         uses: docker/oidc-action@v0
         with:
@@ -101,12 +101,12 @@ You can view, edit, deactivate, or delete your connections from the **OIDC conne
 
 You can deactivate an OIDC connection to pause GitHub workflow access to your Docker resources without deleting the connection. While a connection is deactivated:
 
-  - It cannot issue Docker access tokens.
-  - Without Docker access tokens, the `docker/oidc-action` step references will fail at the token-exchange step until you activate the connection.
+- It cannot issue Docker access tokens.
+- Without Docker access tokens, the `docker/oidc-action` step references will fail at the token-exchange step until you activate the connection.
 
 Unlike deactivation, deleting an OIDC connection is permanent. Any workflow whose `docker/oidc-action` step still references the deleted `connection_id` will fail at the token-exchange step, so update that input with a replacement connection's id in every affected workflow before it runs again.
 
-## What’s next
+## What's next
 
-- To update your Docker OIDC connection, see [Manage OIDC connections](#manage-oidc-connections)
-- For reference documentation about Docker OIDC rulesets and behaviors, see [Docker OIDC rulesets and subject claims](/manuals/enterprise/security/docker-oidc/rulesets-claims.md)
+- To update your OIDC connection, see [Manage OIDC connections](#manage-oidc-connections)
+- For reference documentation about OIDC connections rulesets and behaviors, see [OIDC connections rulesets and subject claims](/manuals/enterprise/security/oidc-federation/rulesets-claims.md)

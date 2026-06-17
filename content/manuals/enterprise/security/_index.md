@@ -32,9 +32,9 @@ grid_admins:
     description: Configure sign-in for members of your teams and organizations.
     link: /enterprise/security/enforce-sign-in/
     icon: finger-print
-  - title: Docker OIDC
+  - title: OIDC connections
     description: Configure OpenID Connect connections for automated workload authentication.
-    link: /enterprise/security/docker-oidc/
+    link: /enterprise/security/oidc-federation/
     icon: link
   - title: Domain management
     description: Identify uncaptured users in your organization.
