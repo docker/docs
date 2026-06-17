@@ -117,6 +117,28 @@
         class="min-w-0 flex-1"
         :class="{ 'guides-flat': filtering() }"
       >
+        <!-- Featured: curated highlights, shown only in the default view -->
+        {{- $featured := where $.RegularPagesRecursive "Params.featured" true }}
+        {{- with $featured }}
+          <div x-show="!filtering()" class="mb-12">
+            <p class="mb-4 flex items-center gap-1.5 text-xs font-semibold tracking-widest text-gray-400 uppercase dark:text-gray-500">
+              <span class="icon-svg icon-sm text-blue-500">{{ partialCached "icon" "star" "star" }}</span>
+              Featured
+            </p>
+            <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {{- range .ByWeight }}
+                <a
+                  href="{{ .Permalink }}"
+                  class="group flex flex-col gap-1.5 rounded-lg border border-gray-200 p-4 transition-colors hover:border-blue-300 hover:bg-gray-50 dark:border-gray-800 dark:hover:border-blue-800 dark:hover:bg-gray-900"
+                >
+                  <span class="font-medium leading-snug text-gray-900 transition-colors group-hover:text-blue-600 dark:text-gray-100 dark:group-hover:text-blue-400">{{ .Title }}</span>
+                  <span class="line-clamp-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">{{ .Summary }}</span>
+                </a>
+              {{- end }}
+            </div>
+          </div>
+        {{- end }}
+
         <!-- Filtering meta bar -->
         <div
           x-show="filtering()"

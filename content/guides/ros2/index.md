@@ -13,7 +13,7 @@ params:
   tags: [deployment]
   time: 30 minutes
   image: /images/guides/ros2.jpg
-  featured: true
+  featured: false
 ---
 
 
