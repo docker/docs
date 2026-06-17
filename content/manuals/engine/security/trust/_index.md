@@ -38,8 +38,7 @@ chains signing content as part of their release process.
 > [!WARNING]
 >
 > Docker Content Trust (DCT) is being retired. The Notary v1 service at
-> `notary.docker.io` will shut down on December 8, 2026. For the retirement
-> timeline, migration guidance, and alternatives, see
+> `notary.docker.io` will shut down on December 8, 2026. For more information, see
 > [Docker Content Trust (DCT)](/manuals/retired.md#docker-content-trust-dct).
 
 ### Image tags and DCT

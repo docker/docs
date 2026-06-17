@@ -161,7 +161,7 @@ variants.
 If you're experiencing failed pulls of Docker Official Images, check whether
 the `DOCKER_CONTENT_TRUST` environment variable is set to `1`. Docker Content
 Trust is being retired and the service is no longer reliable for pulls. To
-resolve pull failures, unset `DOCKER_CONTENT_TRUST`. For details, see
+resolve pull failures, unset `DOCKER_CONTENT_TRUST`. For more information, see
 [Docker Content Trust (DCT)](/manuals/retired.md#docker-content-trust-dct).
 
 ## Docker Hardened Images
