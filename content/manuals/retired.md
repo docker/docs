@@ -180,6 +180,16 @@ Docker images from source code in an external repository and automatically pushi
 the built image to your Docker repositories. This feature has been deprecated and
 will be removed on April 1, 2027.
 
+### Docker Content Trust (DCT)
+
+Docker Content Trust (DCT) and the Notary v1 service at `notary.docker.io` are
+being fully retired. If you've never set `DOCKER_CONTENT_TRUST=1` or used
+`docker trust` commands, this change doesn't affect you. The service shuts down
+completely on December 8, 2026, following brownout windows in July and August.
+For the timeline, migration guidance, and modern alternatives such as
+Sigstore/Cosign and Notation, see the [Docker Content Trust retirement and
+migration blog post](https://www.docker.com/blog/docker-content-trust-retirement-and-migration-guidance/).
+
 
 ## Open source projects
 
