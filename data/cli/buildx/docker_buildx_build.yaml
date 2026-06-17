@@ -21,7 +21,7 @@ options:
       value_type: stringArray
       default_value: '[]'
       description: |
-        Allow extra privileged entitlement (e.g., `network.host`, `security.insecure`, `device`)
+        Allow extra privileged entitlement (e.g., `network.host`, `security.insecure`, `device`, `buildx.local.delete`)
       details_url: '#allow'
       deprecated: false
       hidden: false
@@ -139,8 +139,7 @@ options:
       kubernetes: false
       swarm: false
     - option: cpu-period
-      value_type: int64
-      default_value: "0"
+      value_type: string
       description: Limit the CPU CFS (Completely Fair Scheduler) period
       deprecated: false
       hidden: true
@@ -149,8 +148,7 @@ options:
       kubernetes: false
       swarm: false
     - option: cpu-quota
-      value_type: int64
-      default_value: "0"
+      value_type: string
       description: Limit the CPU CFS (Completely Fair Scheduler) quota
       deprecated: false
       hidden: true
@@ -160,8 +158,7 @@ options:
       swarm: false
     - option: cpu-shares
       shorthand: c
-      value_type: int64
-      default_value: "0"
+      value_type: string
       description: CPU shares (relative weight)
       deprecated: false
       hidden: true
@@ -400,6 +397,18 @@ options:
       value_type: bool
       default_value: "false"
       description: Suppress the build output and print image ID on success
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: resource
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Resource limits for build containers (format: `memory=2g`, `cpu-quota=50000`)
+      details_url: '#resource'
       deprecated: false
       hidden: false
       experimental: false
@@ -651,9 +660,14 @@ examples: |-
        - `--allow device` - Grants access to all devices.
        - `--allow device=kind|name` - Grants access to a specific device.
        - `--allow device=kind|name,alias=kind|name` - Grants access to a specific device, with optional aliasing.
+    - `buildx.local.delete` - Allows local outputs using `mode=delete` to delete
+      stale destination files when the destination is the current working directory
+      or outside it.
 
-    For entitlements to be enabled, the BuildKit daemon also needs to allow them
-    with `--allow-insecure-entitlement` (see [`create --buildkitd-flags`](/reference/cli/docker/buildx/create/#buildkitd-flags)).
+    For BuildKit entitlements to be enabled, the BuildKit daemon also needs to allow
+    them with `--allow-insecure-entitlement` (see [`create --buildkitd-flags`](/reference/cli/docker/buildx/create/#buildkitd-flags)).
+    The `buildx.local.delete` entitlement is checked by Buildx and isn't sent to the
+    BuildKit daemon.
 
     ```console
     $ docker buildx create --use --name insecure-builder --buildkitd-flags '--allow-insecure-entitlement security.insecure'
@@ -1225,6 +1239,11 @@ examples: |-
     Attribute key:
 
     - `dest` - destination directory where files will be written
+    - `mode` - write mode, either `copy` or `delete`. The default is `copy`.
+      `delete` removes stale files from the destination after exporting the build
+      result. It can be used without `--allow` when `dest` resolves to a
+      subdirectory of the current working directory. If `dest` is the current working
+      directory or resolves outside it, pass `--allow=buildx.local.delete`.
 
     For more information, see
     [Local and tar exporters](/build/exporters/local-tar/).
@@ -1626,6 +1645,43 @@ examples: |-
     > If you don't provide a `hard limit`, the `soft limit` is used
     > for both values. If no `ulimits` are set, they're inherited from
     > the default `ulimits` set on the daemon.
+
+    > [!NOTE]
+    > In most cases, it is recommended to let the builder automatically determine
+    > the appropriate configurations. Manual adjustments should only be considered
+    > when specific performance tuning is required for complex build scenarios.
+
+    ### Set CPU and memory limits for build containers (--resource) {#resource}
+
+    The `--resource` flag constrains the resources available to the containers that
+    run your `RUN` instructions during the build. It's repeatable and takes
+    `key=value` pairs, where `key` is one of:
+
+    | Key           | Description                                                                  |
+    |:--------------|:-----------------------------------------------------------------------------|
+    | `memory`      | Memory limit (format: `<number><unit>`, e.g. `512m`, `2g`).                  |
+    | `memory-swap` | Total memory plus swap limit. Set to `-1` to allow unlimited swap.           |
+    | `cpu-shares`  | CPU shares (relative weight).                                                |
+    | `cpu-period`  | Length of a CPU CFS (Completely Fair Scheduler) period, in microseconds.     |
+    | `cpu-quota`   | CPU CFS quota, in microseconds, within each `cpu-period`.                    |
+    | `cpuset-cpus` | CPUs in which to allow execution (`0-3`, `0,1`).                             |
+    | `cpuset-mems` | Memory nodes (MEMs) in which to allow execution (`0-3`, `0,1`).              |
+
+    ```console
+    $ docker buildx build --resource memory=2g --resource cpu-quota=50000 --resource cpu-period=100000 .
+    ```
+
+    These map to the cgroup resource limits of the legacy `docker build` API and
+    only apply to individual build steps. They don't affect the build cache key.
+
+    > [!NOTE]
+    > These limits require a BuildKit daemon that supports per-step resource limits
+    > (the `exec.meta.linux.resources` capability) and only take effect on Linux.
+
+    > [!NOTE]
+    > Because BuildKit can run build steps in parallel, these limits apply to each
+    > step in isolation rather than to the build as a whole. When the same step is
+    > requested with different limits, the most relaxed limits are used.
 
     > [!NOTE]
     > In most cases, it is recommended to let the builder automatically determine
