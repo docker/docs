@@ -48,7 +48,7 @@ security:
   - bearerAuth: []
 
 paths:
-  /orgs/{org_name}:
+  /orgs/{org_name}/reports:
     parameters:
       - $ref: "#/components/parameters/OrgName"
     get:
@@ -91,7 +91,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalError"
 
-  /orgs/{org_name}/{type}/{cadence}:
+  /orgs/{org_name}/reports/{type}/{cadence}:
     parameters:
       - $ref: "#/components/parameters/OrgName"
       - $ref: "#/components/parameters/ReportType"
@@ -175,7 +175,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalError"
 
-  /orgs/{org_name}/{type}/{cadence}/{date}/download:
+  /orgs/{org_name}/reports/{type}/{cadence}/{date}/download:
     parameters:
       - $ref: "#/components/parameters/OrgName"
       - $ref: "#/components/parameters/ReportType"
@@ -217,7 +217,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalError"
 
-  /orgs/{org_name}/{type}/{cadence}/{date}/schema:
+  /orgs/{org_name}/reports/{type}/{cadence}/{date}/schema:
     parameters:
       - $ref: "#/components/parameters/OrgName"
       - $ref: "#/components/parameters/ReportType"
