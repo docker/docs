@@ -2,8 +2,23 @@
 title: FAQ
 weight: 70
 description: Frequently asked questions about Docker Sandboxes.
-keywords: docker sandboxes, sbx, faq, sign in, telemetry, clipboard, image paste
+keywords: docker sandboxes, sbx, faq, sign in, telemetry, clipboard, image paste, pricing, commercial use
 ---
+
+## Is Docker Sandboxes free? Can I use it commercially?
+
+Yes to both. The `sbx` CLI is free to use, including for commercial and
+professional work, with no per-seat fee. Install it, sign in with a free
+Docker account, and run sandboxes at no cost.
+
+The only paid component is organization governance: centrally managed network
+and filesystem policies, [sign-in enforcement](governance/sign-in-enforcement.md),
+and [audit logs](governance/audit.md). These
+[organization governance features](governance/) require a separate paid
+subscription —
+[contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
+to get started. Everything else, including running agents in isolated
+sandboxes, is free.
 
 ## Why do I need to sign in?
 
