@@ -17,6 +17,7 @@ Artifactory
 armhf
 [Aa]uditability
 auditable
+[Aa]utoconfiguration
 autolock
 [Aa]llowlist(ing)?
 Azure
