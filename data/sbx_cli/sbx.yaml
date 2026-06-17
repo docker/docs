@@ -32,4 +32,5 @@ see_also:
     - sbx secret - Manage stored secrets
     - sbx stop - Stop one or more sandboxes without removing them
     - sbx template - Manage sandbox templates
+    - sbx tui - Open the interactive TUI dashboard
     - sbx version - Show Docker Sandboxes version information

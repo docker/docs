@@ -7,7 +7,7 @@ description: |-
     same path as on the host. Additional workspaces can be provided as extra
     arguments. Append ":ro" to mount them read-only.
 
-    Use "sbx run SANDBOX" to attach to the agent after creation.
+    Use "sbx run --name SANDBOX" to attach to the agent after creation.
 usage: sbx create cursor PATH [PATH...] [flags]
 options:
     - name: help

@@ -3,7 +3,7 @@ synopsis: Create a sandbox for an agent
 description: |-
     Create a sandbox with access to a host workspace for an agent.
 
-    Use "sbx run SANDBOX" to attach to the agent after creation.
+    Use "sbx run --name SANDBOX" to attach to the agent after creation.
 usage: sbx create [flags] AGENT PATH [PATH...]
 options:
     - name: clone
