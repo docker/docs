@@ -20,10 +20,8 @@ aliases:
   - /guides/docker-scout/s3c/
   - /guides/docker-scout/sbom/
   - /guides/docker-scout/why/
-weight: 3
 params:
   tags: [security]
-  featured: true
   image: images/learning-paths/scout.png
   time: 20 minutes
 ---

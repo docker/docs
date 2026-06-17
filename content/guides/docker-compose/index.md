@@ -11,10 +11,8 @@ aliases:
   - /guides/docker-compose/common-questions/
   - /guides/docker-compose/setup/
   - /guides/docker-compose/why/
-weight: 2
 params:
   tags: [cicd]
-  featured: true
   image: images/learning-paths/compose.png
   time: 10 minutes
 ---

@@ -23,8 +23,10 @@ aliases:
   - /language/nodejs/run-tests/
   - /language/nodejs/configure-ci-cd/
   - /language/nodejs/deploy/
+weight: 2
 params:
   tags: [languages]
+  featured: true
   time: 20 minutes
 ---
 
