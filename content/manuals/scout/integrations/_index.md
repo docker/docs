@@ -1,5 +1,5 @@
 ---
-description: How to setup Docker Scout with other systems.
+description: How to set up Docker Scout with other systems.
 keywords: supply chain, security, integrations, registries, ci, environments
 title: Integrating Docker Scout with other systems
 linkTitle: Integrations
