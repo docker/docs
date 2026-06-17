@@ -108,7 +108,7 @@ e is 65537 (0x10001)
 Enter pass phrase for ca-key.pem:
 Verifying - Enter pass phrase for ca-key.pem:
 
-$ openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem
+$ openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem -addext "basicConstraints=critical,CA:TRUE" -addext "keyUsage=critical,keyCertSign,cRLSign"
 Enter pass phrase for ca-key.pem:
 You are about to be asked to enter information that will be incorporated
 into your certificate request.
