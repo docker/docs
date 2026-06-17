@@ -177,8 +177,13 @@ Combine the list and download steps to always fetch the most recent report:
 DATE=$(
   curl -s "https://api.docker.com/enterprise-data/v1/orgs/$ORG/reports/usage_pulls/daily?page_size=1" \
     -H "Authorization: Bearer $TOKEN" \
-  | jq -r '.reports[0].Date'
+  | jq -r '.reports[0].Date // empty'
 )
+
+if [ -z "$DATE" ]; then
+  echo "No reports available."
+  exit 1
+fi
 
 curl -L -o "usage_pulls_${DATE}.csv" \
   "https://api.docker.com/enterprise-data/v1/orgs/$ORG/reports/usage_pulls/daily/${DATE}/download" \
