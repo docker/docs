@@ -1,0 +1,512 @@
+openapi: "3.0.3"
+
+info:
+  title: Docker Enterprise Data API
+  version: "1"
+  description: |
+    HTTP+JSON API for accessing Docker Enterprise customer usage reports.
+
+    **Overview.** Docker Enterprise subscribers can retrieve structured usage
+    reports (CSV) covering product activity within their organization. Reports
+    are generated on a fixed cadence (for example, daily or weekly) and stored
+    for a retention period. This API provides programmatic access to discover
+    available report types, list generated reports, download report files, and
+    inspect report schemas.
+
+    **Resource model.** An organization has one or more report types, each
+    produced at a specific cadence. Each report type + cadence combination
+    contains a series of dated report files (CSV). Every report file has an
+    accompanying JSON schema describing its columns.
+
+    **Authentication.** All endpoints require a Bearer token: either a Personal
+    Access Token (PAT) or Organization Access Token (OAT). The caller must have
+    the `OrganizationReportRead` permission for the target organization.
+
+    **Subscription.** An active Docker Enterprise subscription is required.
+    Requests from organizations without an eligible subscription receive a
+    `403 Forbidden` response.
+
+    **Pagination.** The list-reports endpoint supports cursor-based pagination
+    via `page_size` and `page_token` query parameters. Reports are returned
+    most-recent-first.
+  contact:
+    name: Docker
+    url: https://www.docker.com/
+
+tags:
+  - name: report-types
+    description: Discover available report type and cadence combinations.
+  - name: reports
+    description: List and download generated report files.
+  - name: schemas
+    description: Inspect the column schema for a specific report.
+
+servers:
+  - url: https://api.docker.com/enterprise-data/v1
+
+security:
+  - bearerAuth: []
+
+paths:
+  /orgs/{org_name}:
+    parameters:
+      - $ref: "#/components/parameters/OrgName"
+    get:
+      operationId: listReportTypes
+      tags: [report-types]
+      summary: List report types
+      description: >
+        Returns the distinct report type and cadence combinations available for
+        the organization. Each entry represents a category of reports that can
+        be listed and downloaded.
+      responses:
+        "200":
+          description: Array of report type and cadence combinations.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [report_types]
+                properties:
+                  report_types:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/ReportTypeInfo"
+              examples:
+                default:
+                  value:
+                    report_types:
+                      - ReportType: usage_pulls
+                        Cadence: daily
+                      - ReportType: usage_pulls
+                        Cadence: weekly
+                      - ReportType: image_access
+                        Cadence: daily
+        "401":
+          $ref: "#/components/responses/Unauthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
+
+  /orgs/{org_name}/{type}/{cadence}:
+    parameters:
+      - $ref: "#/components/parameters/OrgName"
+      - $ref: "#/components/parameters/ReportType"
+      - $ref: "#/components/parameters/Cadence"
+    get:
+      operationId: listReports
+      tags: [reports]
+      summary: List reports
+      description: >
+        Returns a paginated list of available report files for the given report
+        type and cadence. Reports are sorted most-recent-first. Use `page_size`
+        and `page_token` query parameters for pagination.
+      parameters:
+        - name: page_size
+          in: query
+          required: false
+          description: >
+            Number of reports to return per page. Minimum 1, maximum 100.
+            Defaults to 30.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 100
+            default: 30
+          examples:
+            default:
+              value: 30
+        - name: page_token
+          in: query
+          required: false
+          description: >
+            Opaque cursor returned in `next_page_token` from a previous
+            response. Omit for the first page.
+          schema:
+            type: string
+          examples:
+            default:
+              value: "MjAyNi0wNi0wMQ"
+      responses:
+        "200":
+          description: Paginated list of reports.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [reports, next_page_token]
+                properties:
+                  reports:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Report"
+                  next_page_token:
+                    type: string
+                    description: >
+                      Opaque cursor for fetching the next page. Empty string
+                      when there are no more results.
+              examples:
+                default:
+                  value:
+                    reports:
+                      - ReportType: usage_pulls
+                        Cadence: daily
+                        Date: "2026-06-16"
+                        SizeBytes: 524288
+                        Key: my-org/usage_pulls/daily/2026-06-16.csv
+                      - ReportType: usage_pulls
+                        Cadence: daily
+                        Date: "2026-06-15"
+                        SizeBytes: 498712
+                        Key: my-org/usage_pulls/daily/2026-06-15.csv
+                    next_page_token: "MjAyNi0wNS0xOA"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
+
+  /orgs/{org_name}/{type}/{cadence}/{date}/download:
+    parameters:
+      - $ref: "#/components/parameters/OrgName"
+      - $ref: "#/components/parameters/ReportType"
+      - $ref: "#/components/parameters/Cadence"
+      - $ref: "#/components/parameters/Date"
+    get:
+      operationId: getReportDownloadURL
+      tags: [reports]
+      summary: Download report
+      description: >
+        Returns a `302 Found` redirect to a pre-signed S3 URL for the report
+        CSV file. The pre-signed URL expires after 15 minutes. Follow the
+        redirect to download the file directly from S3.
+
+
+        Most HTTP clients follow redirects automatically. If your client does
+        not, read the `Location` header from the 302 response and issue a
+        separate GET to that URL (no Authorization header needed for the
+        pre-signed URL).
+      responses:
+        "302":
+          description: >
+            Redirect to a pre-signed download URL. The `Location` header
+            contains the S3 pre-signed URL. The URL expires after 15 minutes.
+          headers:
+            Location:
+              description: Pre-signed S3 URL for the CSV report file.
+              schema:
+                type: string
+                format: uri
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
+
+  /orgs/{org_name}/{type}/{cadence}/{date}/schema:
+    parameters:
+      - $ref: "#/components/parameters/OrgName"
+      - $ref: "#/components/parameters/ReportType"
+      - $ref: "#/components/parameters/Cadence"
+      - $ref: "#/components/parameters/Date"
+    get:
+      operationId: getReportSchema
+      tags: [schemas]
+      summary: Get report schema
+      description: >
+        Returns the JSON schema for the specified report. The schema describes
+        the columns (fields) present in the CSV file, including each field's
+        name, data type, and description. Use this to understand the report
+        structure before or after downloading the CSV.
+      responses:
+        "200":
+          description: Report schema describing the CSV columns.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReportSchema"
+              examples:
+                default:
+                  value:
+                    category: usage_pulls
+                    fields:
+                      - name: event_date
+                        type: date
+                        description: Date the pull occurred (UTC).
+                      - name: repository
+                        type: string
+                        description: Full repository name including namespace.
+                      - name: tag
+                        type: string
+                        description: Image tag that was pulled.
+                      - name: pull_count
+                        type: integer
+                        description: Number of pulls for this repository and tag on this date.
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: |
+        A Personal Access Token (PAT) or Organization Access Token (OAT) passed
+        in the `Authorization: Bearer <token>` header.
+
+        | Type | Format | Notes |
+        |------|--------|-------|
+        | Personal Access Token (PAT) | `dckr_pat_*` | Created under Account Settings. Must belong to an org member with the `OrganizationReportRead` permission. |
+        | Organization Access Token (OAT) | `dckr_oat_*` | Created under Organization Settings. Must be scoped to include report-read access. |
+
+        The organization must have an active Docker Enterprise subscription.
+
+  parameters:
+    OrgName:
+      name: org_name
+      in: path
+      required: true
+      description: Docker organization name (the billing entity).
+      schema:
+        type: string
+        pattern: "^[a-z0-9][a-z0-9_-]*$"
+      examples:
+        default:
+          value: my-org
+
+    ReportType:
+      name: type
+      in: path
+      required: true
+      description: >
+        Report type identifier. Only lowercase alphanumeric characters, hyphens,
+        and underscores are allowed.
+      schema:
+        type: string
+        pattern: "^[a-z0-9][a-z0-9_-]*$"
+      examples:
+        default:
+          value: usage_pulls
+
+    Cadence:
+      name: cadence
+      in: path
+      required: true
+      description: >
+        Report cadence (for example, `daily` or `weekly`). Only lowercase
+        alphanumeric characters, hyphens, and underscores are allowed.
+      schema:
+        type: string
+        pattern: "^[a-z0-9][a-z0-9_-]*$"
+      examples:
+        default:
+          value: daily
+
+    Date:
+      name: date
+      in: path
+      required: true
+      description: >
+        Report date in `YYYY-MM-DD` format. Identifies a specific report
+        within the type and cadence.
+      schema:
+        type: string
+        format: date
+      examples:
+        default:
+          value: "2026-06-16"
+
+  schemas:
+    ReportTypeInfo:
+      type: object
+      description: A distinct report type and cadence combination available for the organization.
+      required: [ReportType, Cadence]
+      properties:
+        ReportType:
+          type: string
+          description: Report type identifier (for example, `usage_pulls`).
+          examples:
+            - usage_pulls
+        Cadence:
+          type: string
+          description: Report generation cadence (for example, `daily`, `weekly`).
+          examples:
+            - daily
+
+    Report:
+      type: object
+      description: Metadata for a single generated report file.
+      required: [ReportType, Cadence, Date, SizeBytes, Key]
+      properties:
+        ReportType:
+          type: string
+          description: Report type identifier.
+          examples:
+            - usage_pulls
+        Cadence:
+          type: string
+          description: Report generation cadence.
+          examples:
+            - daily
+        Date:
+          type: string
+          format: date
+          description: Report date in `YYYY-MM-DD` format.
+          examples:
+            - "2026-06-16"
+        SizeBytes:
+          type: integer
+          format: int64
+          description: Size of the CSV file in bytes.
+          examples:
+            - 524288
+        Key:
+          type: string
+          description: S3 object key for the report file.
+          examples:
+            - my-org/usage_pulls/daily/2026-06-16.csv
+
+    ReportSchema:
+      type: object
+      description: Schema describing the columns present in a report CSV file.
+      required: [category, fields]
+      properties:
+        category:
+          type: string
+          description: Report category (matches the report type).
+          examples:
+            - usage_pulls
+        fields:
+          type: array
+          description: Ordered list of columns in the CSV file.
+          items:
+            $ref: "#/components/schemas/SchemaField"
+
+    SchemaField:
+      type: object
+      description: A single column definition within a report schema.
+      required: [name, type, description]
+      properties:
+        name:
+          type: string
+          description: Column name as it appears in the CSV header row.
+          examples:
+            - event_date
+        type:
+          type: string
+          description: >
+            Data type of the column (for example, `string`, `integer`, `date`,
+            `timestamp`, `boolean`, `float`).
+          examples:
+            - string
+        description:
+          type: string
+          description: Human-readable description of what the column contains.
+          examples:
+            - Date the pull occurred (UTC).
+
+    Error:
+      type: object
+      description: Error envelope returned on all non-2xx responses.
+      required: [error]
+      properties:
+        error:
+          type: string
+          description: Human-readable error message.
+          examples:
+            - "not found"
+
+  responses:
+    BadRequest:
+      description: >
+        The request contains invalid parameters. Path segments must match
+        `^[a-z0-9][a-z0-9_-]*$` and dates must be valid `YYYY-MM-DD` values.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          examples:
+            invalid_segment:
+              summary: Invalid path segment
+              value:
+                error: "invalid input: type contains invalid characters"
+            invalid_date:
+              summary: Invalid date
+              value:
+                error: "invalid input: date must be a valid YYYY-MM-DD date"
+            invalid_page_token:
+              summary: Invalid page token
+              value:
+                error: "invalid input: invalid page token"
+
+    Unauthenticated:
+      description: Missing or invalid Bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          examples:
+            default:
+              value:
+                error: unauthenticated
+
+    Forbidden:
+      description: >
+        The caller lacks the `OrganizationReportRead` permission for this
+        organization, or the organization does not have an active Docker
+        Enterprise subscription.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          examples:
+            default:
+              value:
+                error: permission denied
+
+    NotFound:
+      description: >
+        The requested resource does not exist. This may mean the organization
+        has no reports, the report type or cadence is unknown, or the specific
+        dated report has not been generated.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          examples:
+            default:
+              value:
+                error: not found
+
+    InternalError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          examples:
+            default:
+              value:
+                error: internal error
