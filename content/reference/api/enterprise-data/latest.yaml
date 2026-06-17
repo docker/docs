@@ -18,9 +18,9 @@ info:
     contains a series of dated report files (CSV). Every report file has an
     accompanying JSON schema describing its columns.
 
-    **Authentication.** All endpoints require a Bearer token: either a Personal
-    Access Token (PAT) or Organization Access Token (OAT). The caller must have
-    the `OrganizationReportRead` permission for the target organization.
+    **Authentication.** All endpoints require a Bearer token: an Organization
+    Access Token (OAT) with the `Report Read` scope. Personal Access Tokens
+    (PATs) are not supported.
 
     **Subscription.** An active Docker Enterprise subscription is required.
     Requests from organizations without an eligible subscription receive a
@@ -273,13 +273,11 @@ components:
       type: http
       scheme: bearer
       description: |
-        A Personal Access Token (PAT) or Organization Access Token (OAT) passed
-        in the `Authorization: Bearer <token>` header.
+        An Organization Access Token (OAT) passed in the
+        `Authorization: Bearer <token>` header. The OAT must have the
+        **Report Read** scope selected under Organization permissions.
 
-        | Type | Format | Notes |
-        |------|--------|-------|
-        | Personal Access Token (PAT) | `dckr_pat_*` | Created under Account Settings. Must belong to an org member with the `OrganizationReportRead` permission. |
-        | Organization Access Token (OAT) | `dckr_oat_*` | Created under Organization Settings. Must be scoped to include report-read access. |
+        Personal Access Tokens (PATs) are not supported.
 
         The organization must have an active Docker Enterprise subscription.
 

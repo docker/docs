@@ -1,7 +1,7 @@
 ---
 title: Usage reports
 description: Learn how to retrieve enterprise usage reports for your Docker organization using the Reports API.
-keywords: docker, enterprise, reports, usage, pulls, api, csv, personal access token, pat, organization access token, oat
+keywords: docker, enterprise, reports, usage, pulls, api, csv, organization access token, oat
 weight: 20
 params:
   sidebar:
@@ -28,37 +28,13 @@ Before you begin, ensure you have:
 
 ## Authentication
 
-The Reports API accepts two authentication methods: Personal Access Tokens (PATs)
-and Organization Access Tokens (OATs). Both are sent directly as Bearer tokens.
+The Reports API requires an Organization Access Token (OAT). OATs are
+org-scoped tokens designed for machine-to-machine access, making them
+suitable for automated report retrieval workflows. Personal Access Tokens
+(PATs) are not supported.
 
-### Option A: Personal Access Token
-
-Use a PAT from a user account that has the required role in the organization.
-
-1. [Create a personal access token](/security/access-tokens/) with
-   **Read-only** access or broader.
-
-2. Set your variables:
-
-   ```bash
-   ORG="<your-org-name>"
-   TOKEN="<your-personal-access-token>"
-   ```
-
-3. Test the token:
-
-   ```console
-   $ curl -s "https://api.docker.com/enterprise-data/v1/orgs/$ORG/reports" \
-     -H "Authorization: Bearer $TOKEN" | jq .
-   ```
-
-### Option B: Organization Access Token
-
-Use an OAT issued to the organization. OATs do not require a specific user
-account.
-
-1. [Create an organization access token](/security/oat/) with
-   the appropriate permissions.
+1. [Create an organization access token](/enterprise/security/access-tokens/)
+   and select the **Report Read** scope under Organization permissions.
 
 2. Set your variables:
 
