@@ -23,13 +23,15 @@ $ sbx run shell -- -c "echo 'Hello from sandbox'"
 
 ## Default startup command
 
-Without extra args, the sandbox runs `bash -l`. Args after `--` replace `-l`
-rather than being appended. To preserve login-shell behavior, include `-l`
-yourself:
+Without extra args, the sandbox runs `bash -l`. When the first argument after
+`--` is a flag (begins with `-`), it's added after `-l`, so login-shell
+behavior is preserved:
 
 ```console
-$ sbx run shell -- -l -c "echo hi"
+$ sbx run shell -- -c "echo hi"   # runs bash -l -c "echo hi"
 ```
+
+When the first argument is a bare word, it replaces `-l` instead.
 
 Set your API keys as environment variables so the sandbox proxy can inject
 them into API requests automatically. Credentials are never stored inside

@@ -62,12 +62,16 @@ Without extra args, the sandbox runs:
 claude --dangerously-skip-permissions
 ```
 
-Args after `--` replace these defaults rather than being appended. To keep
-`--dangerously-skip-permissions`, include it yourself:
+Arguments after `--` are added after the default flags when the first one is
+itself a flag (begins with `-`), so `--dangerously-skip-permissions` is
+preserved:
 
 ```console
-$ sbx run claude -- --dangerously-skip-permissions -c
+$ sbx run claude -- -c   # runs claude --dangerously-skip-permissions -c
 ```
+
+When the first argument is a bare word, such as the `agents` subcommand, it
+replaces the defaults instead.
 
 See the [Claude Code CLI reference](https://code.claude.com/docs/en/cli-reference)
 for available options.

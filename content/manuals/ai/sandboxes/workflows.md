@@ -327,7 +327,7 @@ Create the sandbox in the background with `sbx create`, run agent tasks with
 
 ```console
 $ sbx create --name ci-task --clone claude
-$ sbx run ci-task  # attach and give instructions, or use sbx exec for one-off commands
+$ sbx run --name ci-task  # attach and give instructions, or use sbx exec for one-off commands
 $ git fetch sandbox-ci-task
 $ sbx rm ci-task
 ```

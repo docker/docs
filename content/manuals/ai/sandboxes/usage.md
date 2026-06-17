@@ -116,7 +116,7 @@ You can also create the sandbox in the background and attach later:
 
 ```console
 $ sbx create --clone --name my-sandbox claude .
-$ sbx run my-sandbox
+$ sbx run --name my-sandbox
 ```
 
 The clone follows whichever ref your host repository has checked out at
@@ -177,11 +177,33 @@ $ sbx run claude ~/my-project  # creates sandbox
 $ sbx run claude ~/my-project  # reconnects to same sandbox
 ```
 
-Use `--name` to make this explicit and avoid ambiguity:
+Use `--name` to give a sandbox an explicit identity:
 
 ```console
 $ sbx run claude --name my-project
 ```
+
+Once a named sandbox exists, `--name` is how you re-attach to it — from any
+working directory, with or without the agent positional:
+
+```console
+$ sbx run --name my-project        # re-attaches from anywhere
+$ sbx run claude --name my-project # same, with agent confirmed
+```
+
+Re-running a command that previously created a sandbox reconnects to it rather
+than returning an error, so you can up-arrow and re-enter a session without
+first looking up the sandbox name.
+
+To run multiple sandboxes against the same workspace — for example, one for a
+feature branch and one for exploratory changes — give each a distinct name:
+
+```console
+$ sbx run claude --name feature ~/my-project
+$ sbx run claude --name spike ~/my-project
+```
+
+Both sandboxes share the same workspace but are otherwise independent.
 
 ## Creating without attaching
 
@@ -189,15 +211,15 @@ $ sbx run claude --name my-project
 the agent. To create a sandbox in the background without attaching:
 
 ```console
-$ sbx create claude .
+$ sbx create --name my-project claude .
 ```
 
 Unlike `run`, `create` requires an explicit workspace path. It uses direct
 mode by default, or pass `--clone` for [clone mode](#clone-mode). Attach
-later with `sbx run`:
+later with `sbx run --name`:
 
 ```console
-$ sbx run claude-my-project
+$ sbx run --name my-project
 ```
 
 ## Multiple workspaces

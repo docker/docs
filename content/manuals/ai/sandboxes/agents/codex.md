@@ -73,8 +73,9 @@ Without extra args, the sandbox runs:
 codex --dangerously-bypass-approvals-and-sandbox
 ```
 
-Args after `--` replace these defaults rather than being appended. To keep
-the flag, include it yourself:
+Arguments after `--` are added after the default flags when the first one is
+itself a flag (begins with `-`). A bare word — such as a prompt — replaces the
+defaults instead, so lead with the flag to keep bypass mode:
 
 ```console
 $ sbx run codex -- --dangerously-bypass-approvals-and-sandbox "fix the build"

@@ -43,9 +43,11 @@ client's configuration. Both enforce the network policy; only the forward proxy
 [injects credentials](credentials.md) for AI services.
 
 Raw TCP connections, UDP, and ICMP are blocked at the network layer. DNS
-resolution is handled by the proxy; the sandbox cannot make raw DNS queries.
-Traffic to private IP ranges, loopback, and link-local addresses is also
-blocked. Only domains explicitly listed in the policy are reachable.
+resolution goes through the proxy and is subject to the same network policy —
+domains that policy denies are refused at the resolver; loopback names such as
+`localhost` are always resolved regardless of policy. Traffic to private IP
+ranges, loopback, and link-local addresses is also blocked. Only domains
+explicitly listed in the policy are reachable.
 
 For the default set of allowed domains, see
 [Default security posture](defaults.md).
