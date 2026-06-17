@@ -19,7 +19,7 @@ and download the files you need.
 
 Before you begin, ensure you have:
 
-- A [Docker Business subscription](/subscription/core-subscription/details/)
+- A [Docker Business subscription](/subscription/details/)
 - One of the following:
   - Organization owner role
   - A custom role that includes the **report-read** permission
@@ -214,7 +214,7 @@ before processing a report.
 | `GET /enterprise-data/v1/orgs/{org}/reports/{type}/{cadence}/{date}/schema` | Get report column schema |
 
 For the full API specification, see the
-[Enterprise Data API reference](/reference/api/enterprise-data/).
+[Enterprise Data API reference](/reference/api/enterprise-data/latest/).
 
 ## Troubleshooting
 
