@@ -206,6 +206,7 @@ paths:
               schema:
                 type: string
                 format: uri
+              example: "https://customer-exports-prod.s3.amazonaws.com/my-org/usage_pulls/daily/2026-06-16.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=900&..."
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
