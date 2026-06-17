@@ -1,7 +1,7 @@
 ---
 title: Kit examples
 linkTitle: Examples
-description: Copy-and-adapt spec.yaml snippets for common mixin and sandbox kit patterns — static files, install commands, background services, initFiles, Claude Code skills, and agent forks.
+description: Copy-and-adapt spec.yaml snippets for common mixin and sandbox kit patterns — static files, install commands, shell customization, background services, initFiles, Claude Code skills, and agent forks.
 keywords: sandboxes, sbx, kits, mixins, examples, patterns, skills
 weight: 25
 ---
@@ -71,6 +71,90 @@ Install commands run as root by default. Set `user: "1000"` when the
 step should run as the agent user — for example, `npm install -g`
 against a user-scoped prefix, or anything that writes to
 `/home/agent/`.
+
+Install steps run under `sh`, not bash, so bash-only builtins such as
+`source` fail with `sh: source: not found`. Pipe explicitly to `bash`
+(`curl … | bash`) or wrap the step in `bash -c '…'` when you need them.
+
+Downloads are subject to the sandbox's
+[deny-by-default network policy](../governance/local.md). A domain that
+resolves from your host can still be blocked inside the sandbox — for
+example, `get.sdkman.io` returns a 403 until you allow it with
+`sbx policy allow network get.sdkman.io`. A tool may also need base
+packages that aren't in the image: [SDKMAN!](https://sdkman.io/), for
+instance, needs `zip` and `unzip`, so add an
+`apt-get install -y zip unzip` step (as root) before installing it.
+
+> [!WARNING]
+> `curl … | bash` masks download failures. The pipe's exit status is
+> bash's, and bash exits `0` on empty input, so a blocked or failed
+> download still reports success — the sandbox is created with no error
+> even though nothing was installed. Download first, then run, so a
+> failed fetch fails the step:
+>
+> ```yaml
+> commands:
+>   install:
+>     - command: "curl -fsSL https://example.com/install.sh -o /tmp/install.sh && bash /tmp/install.sh"
+>       user: "1000"
+> ```
+
+## Customize the shell environment
+
+Some tools install into a versioned directory and expect you to source
+an init script from your shell profile so their commands land on `PATH`.
+Version managers like [nvm](https://github.com/nvm-sh/nvm) and
+[SDKMAN!](https://sdkman.io/) follow this pattern. To make the tool
+available in every shell, append the source line to
+`/etc/sandbox-persistent.sh` in an install command.
+
+`/etc/sandbox-persistent.sh` is the sandbox's persistent environment
+file. It's sourced before every bash invocation — interactive shells and
+non-interactive ones, including agents started with `sbx run` and
+commands run with `sbx exec`. Appending here makes the tool available to
+the agent regardless of how its shell is launched. The same file is where
+you'd set a custom environment variable; see the
+[FAQ](../faq.md#how-do-i-set-custom-environment-variables-inside-a-sandbox).
+
+```yaml {title="nvm/spec.yaml"}
+schemaVersion: "1"
+kind: mixin
+name: nvm
+displayName: nvm
+description: Node version manager available in every shell
+
+commands:
+  install:
+    - command: "curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash"
+      user: "1000"
+      description: Install nvm
+    - command: |
+        cat >> /etc/sandbox-persistent.sh <<'EOF'
+        export NVM_DIR="$HOME/.nvm"
+        unset NPM_CONFIG_PREFIX
+        [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+        EOF
+      description: Source nvm for every shell
+```
+
+The install step runs as `user: "1000"` so the tool lands under
+`/home/agent/`. The append step runs as root (the default), since
+`/etc/sandbox-persistent.sh` is a system file. The `$HOME` in the
+appended lines resolves per user at source time, so the agent user finds
+its own install. Append to the file rather than overwriting it — the
+sandbox relies on its existing contents.
+
+The base image ships its own Node and sets `NPM_CONFIG_PREFIX`, which
+nvm won't activate alongside. `unset NPM_CONFIG_PREFIX` before sourcing
+`nvm.sh` clears that conflict. Sourcing makes the `nvm` command
+available; it doesn't put a Node version on `PATH`. Run
+`nvm install --lts` to add one — wrap it in `bash -c '…'` if you script
+it as an install step, since install steps run under `sh`.
+
+Append only the init script, not the tool's tab-completion script.
+Because `/etc/sandbox-persistent.sh` is sourced before every command,
+completion scripts — which rely on variables that exist only during
+completion — can break non-interactive shells that agents rely on.
 
 ## Install an internal CA certificate
 

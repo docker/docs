@@ -173,6 +173,7 @@ Netplan
 NFSv\d
 Nginx
 npm
+nvm
 Nutanix
 Nuxeo
 NVIDIA
