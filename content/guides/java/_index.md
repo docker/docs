@@ -10,6 +10,12 @@ toc_max: 2
 aliases:
   - /language/java/
   - /guides/language/java/
+  - /guides/java/configure-ci-cd/
+  - /language/java/configure-ci-cd/
+  - /guides/language/java/configure-ci-cd/
+  - /guides/java/deploy/
+  - /language/java/deploy/
+  - /guides/language/java/deploy/
 languages: [java]
 params:
   time: 20 minutes

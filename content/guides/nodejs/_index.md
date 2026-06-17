@@ -10,6 +10,13 @@ toc_max: 2
 aliases:
   - /language/nodejs/
   - /guides/language/nodejs/
+  - /guides/nodejs/configure-github-actions/
+  - /language/nodejs/configure-ci-cd/
+  - /guides/language/nodejs/configure-ci-cd/
+  - /guides/nodejs/deploy/
+  - /language/nodejs/deploy/
+  - /guides/language/nodejs/deploy/
+  - /guides/nodejs/secure-supply-chain/
 languages: [js]
 tags: [dhi]
 params:

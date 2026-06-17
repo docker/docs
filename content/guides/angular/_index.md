@@ -7,6 +7,9 @@ summary: |
   This guide explains how to containerize Angular applications using Docker.
 toc_min: 1
 toc_max: 2
+aliases:
+  - /guides/angular/configure-github-actions/
+  - /guides/angular/deploy/
 languages: [js]
 params:
   time: 20 minutes

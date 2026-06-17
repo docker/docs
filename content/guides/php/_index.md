@@ -10,6 +10,12 @@ toc_max: 2
 aliases:
   - /language/php/
   - /guides/language/php/
+  - /guides/php/configure-ci-cd/
+  - /language/php/configure-ci-cd/
+  - /guides/language/php/configure-ci-cd/
+  - /guides/php/deploy/
+  - /language/php/deploy/
+  - /guides/language/php/deploy/
 languages: [php]
 params:
   time: 20 minutes

@@ -10,6 +10,14 @@ toc_max: 2
 aliases:
   - /language/python/
   - /guides/language/python/
+  - /guides/python/configure-github-actions/
+  - /language/python/configure-ci-cd/
+  - /guides/language/python/configure-ci-cd/
+  - /guides/python/configure-ci-cd/
+  - /guides/python/deploy/
+  - /language/python/deploy/
+  - /guides/language/python/deploy/
+  - /guides/python/secure-supply-chain/
 languages: [python]
 tags: [dhi]
 params:

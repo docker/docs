@@ -7,6 +7,9 @@ summary: |
   This guide explains how to containerize React.js applications using Docker.
 toc_min: 1
 toc_max: 2
+aliases:
+  - /guides/reactjs/configure-github-actions/
+  - /guides/reactjs/deploy/
 languages: [js]
 params:
   time: 20 minutes

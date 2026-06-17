@@ -10,6 +10,12 @@ toc_max: 2
 aliases:
   - /language/rust/
   - /guides/language/rust/
+  - /guides/rust/configure-ci-cd/
+  - /language/rust/configure-ci-cd/
+  - /guides/language/rust/configure-ci-cd/
+  - /guides/rust/deploy/
+  - /language/rust/deploy/
+  - /guides/language/rust/deploy/
 languages: [rust]
 tags: [dhi]
 params:

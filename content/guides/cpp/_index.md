@@ -10,6 +10,13 @@ toc_max: 2
 aliases:
   - /language/cpp/
   - /guides/language/cpp/
+  - /guides/cpp/configure-ci-cd/
+  - /language/cpp/configure-ci-cd/
+  - /guides/language/cpp/configure-ci-cd/
+  - /guides/cpp/deploy/
+  - /language/cpp/deploy/
+  - /guides/language/cpp/deploy/
+  - /guides/cpp/security/
 languages: [cpp]
 params:
   time: 20 minutes

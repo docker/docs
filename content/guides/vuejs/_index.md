@@ -11,6 +11,8 @@ languages: [js]
 tags: [frameworks, dhi]
 aliases:
   - /frameworks/vue/
+  - /guides/vuejs/configure-github-actions/
+  - /guides/vuejs/deploy/
 params:
   time: 20 minutes
 

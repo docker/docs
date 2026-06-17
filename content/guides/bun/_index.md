@@ -5,6 +5,9 @@ title: Bun language-specific guide
 summary: |
   Learn how to containerize JavaScript applications with the Bun runtime.
 linkTitle: Bun
+aliases:
+  - /guides/bun/configure-ci-cd/
+  - /guides/bun/deploy/
 languages: [js]
 tags: [dhi]
 params:

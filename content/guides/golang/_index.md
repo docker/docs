@@ -10,6 +10,12 @@ toc_max: 2
 aliases:
   - /language/golang/
   - /guides/language/golang/
+  - /guides/golang/configure-ci-cd/
+  - /language/golang/configure-ci-cd/
+  - /guides/language/golang/configure-ci-cd/
+  - /guides/golang/deploy/
+  - /language/golang/deploy/
+  - /guides/language/golang/deploy/
 languages: [go]
 params:
   time: 30 minutes

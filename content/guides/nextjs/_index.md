@@ -8,6 +8,9 @@ summary: |
   development and testing in containers.
 toc_min: 1
 toc_max: 2
+aliases:
+  - /guides/nextjs/configure-github-actions/
+  - /guides/nextjs/deploy/
 languages: [js]
 tags: [frameworks]
 params:

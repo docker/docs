@@ -8,6 +8,12 @@ keywords: getting started, .net
 aliases:
   - /language/dotnet/
   - /guides/language/dotnet/
+  - /guides/dotnet/configure-ci-cd/
+  - /language/dotnet/configure-ci-cd/
+  - /guides/language/dotnet/configure-ci-cd/
+  - /guides/dotnet/deploy/
+  - /language/dotnet/deploy/
+  - /guides/language/dotnet/deploy/
 languages: [c-sharp]
 params:
   time: 20 minutes

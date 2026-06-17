@@ -11,6 +11,13 @@ toc_max: 2
 aliases:
   - /language/ruby/
   - /guides/language/ruby/
+  - /guides/ruby/configure-github-actions/
+  - /language/ruby/configure-ci-cd/
+  - /guides/language/ruby/configure-ci-cd/
+  - /guides/ruby/configure-ci-cd/
+  - /guides/ruby/deploy/
+  - /language/ruby/deploy/
+  - /guides/language/ruby/deploy/
 languages: [ruby]
 tags: [frameworks]
 params:

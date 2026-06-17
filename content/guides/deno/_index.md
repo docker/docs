@@ -5,6 +5,9 @@ title: Deno language-specific guide
 summary: |
   Learn how to containerize JavaScript applications with the Deno runtime using Docker.
 linkTitle: Deno
+aliases:
+  - /guides/deno/configure-ci-cd/
+  - /guides/deno/deploy/
 languages: [js]
 tags: [dhi]
 params:
