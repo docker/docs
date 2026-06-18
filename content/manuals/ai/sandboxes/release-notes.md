@@ -15,6 +15,64 @@ the full release history, including pre-releases and downloads, see the
 
 <!-- BEGIN GENERATED RELEASES -->
 
+## 0.33.0
+
+{{< release-date date="2026-06-17" >}}
+
+[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.33.0)
+
+### Highlights
+
+`sbx run --name <sandbox>` now re-attaches to an existing sandbox by name. You can now also create multiple sandboxes of the same agent type and workspace by specifying unique sandbox names with `--name`.
+
+Consequently, re-attaching to existing sandboxes with `sbx run <name>` is deprecated; the preferred form is `sbx run --name <name>`. The positional argument for `sbx run` should be an agent (e.g. `claude`, or `codex`). Sandbox name as the positional argument for run is still supported but will be removed in a future release.
+
+This release also improves network isolation and policy enforcement. Sandbox DNS is now gated on network policy (closing a DNS-based exfiltration channel), ICMP egress is blocked across daemon restarts, and the MITM proxy publishes a CRL so revocation-strict clients keep working.
+
+### What's New
+
+#### Sandbox Identity & CLI
+
+- `sbx run --name` now identifies a sandbox independent of the working directory: run multiple independently-named sandboxes in the same workspace, re-attach from any directory (agent may be omitted), and re-run a create command to re-enter. It no longer auto-creates numbered sibling sandboxes, prompts before entering a same-named sandbox from a different workspace, and errors when the requested agent doesn't match the named sandbox. The TUI follows the same rules.
+- `sbx run <sandbox>` now prints a deprecation warning when re-attaching to an existing sandbox; use `sbx run --name <sandbox>` instead.
+- `sbx ls --json` now reports a stable per-sandbox `id`.
+- `sbx create` now fails with a clear missing-agent error when run without arguments.
+- `sbx exec` now uses the same working directory as `sbx run`.
+- `sbx cp -L` now follows symlinks in the source path for sandbox-to-host copies.
+- Daemon inspect output is now included in the diagnostics bundle.
+
+#### Networking & Proxy
+
+- Sandbox DNS lookups are now gated on the network policy: a sandboxed process can no longer resolve domains that policy denies, closing a DNS-based data-exfiltration channel. Loopback names (e.g. `localhost`) are exempt to avoid breaking local OAuth callback flows.
+- Outgoing ICMP from sandboxes is now blocked across daemon restarts.
+- CIDR subnet allow rules (e.g. `sbx policy allow network 10.10.14.0/24`) now correctly permit traffic to IP addresses within the subnet.
+- The MITM proxy now publishes a CRL and embeds a CRL distribution point in generated certificates, fixing clients that require certificate revocation checking (e.g. .NET `CheckCertificateRevocationList=true`).
+- Removed the bracketed `[::1]` entry from the sandbox `NO_PROXY` default, fixing credential injection for HTTP clients that mis-parsed it.
+- Claude connectors (Slack, Gmail, Notion, Atlassian, etc.) now work inside sandboxed Claude Code without manual policy overrides.
+
+#### Secrets & Credentials
+
+- `sbx secret set-custom --host`, and `serviceDomains` in kits, now accept wildcard host patterns (`*` matches one label, `**` matches any number) and is repeatable, so one custom secret can cover multiple subdomains/domains.
+
+#### Agents
+
+- Fixed Cursor repeatedly prompting for login; Cursor OAuth credentials now also appear in `sbx secret ls`.
+
+#### Platform & Performance
+
+- The virtiofs cache is now enabled by default on macOS and Linux.
+- Build packages for `linux/arm64` are now produced.
+- On Linux, the keychain backend now falls back to the encrypted on-disk store when `dbus-launch` is unavailable, fixing headless/server hosts.
+
+#### Bug Fixes
+
+- Suppress a misleading warning when saving OAuth credentials while the daemon is not running.
+- Fixed a TTY sizing issue on Windows.
+- Keep agent entrypoint flags when arguments after `--` are themselves flags.
+- Inject git identity from subdirectories and `[include]`d Git config when cloning.
+- Proxy service detection now supports middle-position wildcards.
+- Sandboxes blocked by mount policies are no longer filtered out on daemon startup.
+
 ## 0.32.0
 
 {{< release-date date="2026-06-09" >}}
@@ -193,62 +251,6 @@ Clone mode does not create a branch or worktree on your behalf — instead of a 
 - Make Cursor session bootstrap proxy-local.
 - Add bracketed `[::1]` to `NO_PROXY` for IPv6 loopback.
 - Backdate proxy CA `NotBefore` to match the goproxy leaf cert window.
-
-## 0.30.0
-
-{{< release-date date="2026-05-19" >}}
-
-[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.30.0)
-
-### Highlights
-
-The CLI gets **non-interactive Docker Hub login** for scripted workflows, and sandboxes now have **a configurable grace period before auto-stopping** when the last session exits. Plus a wave of fixes covering Linux packaging, macOS worktree compatibility, Windows installer paths, network isolation, and recoverable sandbox state when host directories vanish.
-
-### What's New
-
-#### Governance & Policy
-
-- Allow `sbx policy` setup before login
-
-#### Kits & Agents
-
-- Re-run `commands.startup` on every container start so init hooks are idempotent across restarts
-- Per-kit memory files for progressive disclosure
-- Enumerate installed kits in the AI memory file's Kits section
-
-#### CLI & Auth
-
-- Add non-interactive Docker Hub login for scripted workflows
-- Migrate `/reset` to `/daemon/reset`; state-dir wipe is now daemon-side
-- Print "Git repository detected" once when using `--branch`
-- Skip implicit run options when the user provides explicit args
-
-#### Networking & Sandboxd
-
-- Bind both loopback stacks by default when publishing ports
-- Allow raw TCP to `host.docker.internal` when localhost is allowed in policy
-- Add grace period before auto-stopping a sandbox when the last session exits
-
-#### Bug Fixes
-
-- Build sailor's `ffi` crate instead of `ffi-krun` for packaged Linux release artifacts
-- Keep sandboxes recoverable when workspace or worktree is deleted on the host
-- Add macOS `/private` path compatibility for worktrees
-- Probe canonical socket path for `sun_path` budget — fixes `krun_start_enter failed` on macOS with long usernames
-- Namespace gVisor socket dir and auth/secret stores by `--app-name` so concurrent daemons don't collide
-- Sanitize runtime ID when looking up gVisor network
-- Check database version before starting the daemon; surface an instructive error instead of crashing
-- Report Docker daemon startup time instead of the pre-start message in DinD
-- Harden `BuildFileCredential` to check more than just file existence
-- Open a sentinel connection in `cp` and `kit add` to prevent auto-stop race
-- Remove redundant `ContainerKill` before `ContainerRemove` in sandboxlib
-- Use a safe Windows `start` invocation for `OpenURL` in the TUI
-- Rename WiX install directory id to `INSTALLFOLDER`
-
-#### Documentation
-
-- Warn agents about worktree path traps with `--branch`
-- Improve consistency and wording in CLI help strings
 
 <!-- END GENERATED RELEASES -->
 
