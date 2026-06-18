@@ -7,14 +7,9 @@ aliases:
   - /manuals/ai/cagent/
 params:
   sidebar:
-    group: Open source
-    badge:
-      color: violet
-      text: Experimental
+    group: AI and agents
 keywords: [ai, agent, docker agent, cagent]
 ---
-
-{{< summary-bar feature_name="Docker Agent" >}}
 
 [Docker Agent](https://github.com/docker/docker-agent) is an open-source framework
 for building teams of specialized AI agents. Instead of prompting one
@@ -163,10 +158,8 @@ it doesn't exist yet.
   [tools in MCP clients](./integrations/mcp.md)
 - Browse example agent configurations in the [Docker Agent
   repository](https://github.com/docker/docker-agent/tree/main/examples)
-- Use `docker agent new` to generate agent teams with AI <!-- TODO: link to some page
-  where we explain this, probably a CLI reference? -->
+- Use `docker agent new` to generate agent teams with AI
 - Connect agents to external tools via the [Docker MCP
   Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)
 - Read the full [configuration
   reference](https://github.com/docker/docker-agent?tab=readme-ov-file#-configuration-reference)
-  <!-- TODO: move to this site/repo -->
