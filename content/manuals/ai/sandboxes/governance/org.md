@@ -18,6 +18,13 @@ supplement or override the organization policy.
 Admins can manage organization policies through the Admin Console UI or
 programmatically using the [Governance API](/reference/api/ai-governance/).
 
+By default, only organization
+[owners](/manuals/enterprise/security/roles-and-permissions/core-roles.md) can
+view and manage AI Governance policies. To let someone other than an owner
+manage policies, create a
+[custom role](/manuals/enterprise/security/roles-and-permissions/custom-roles.md)
+with the **Governance** permissions and assign it to a user or team.
+
 > [!NOTE]
 > Sandbox organization governance is available on a separate paid
 > subscription.
