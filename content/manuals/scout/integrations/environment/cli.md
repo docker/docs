@@ -5,8 +5,6 @@ title: Generic environment integration with CLI
 linkTitle: Generic (CLI)
 ---
 
-{{% include "scout-early-access.md" %}}
-
 You can create a generic environment integration by running the Docker Scout
 CLI client in your CI workflows. The CLI client is available as a binary on
 GitHub and as a container image on Docker Hub. Use the client to invoke the
