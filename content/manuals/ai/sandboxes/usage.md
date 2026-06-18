@@ -224,6 +224,54 @@ $ sbx run claude ~/project-b
 $ sbx rm <sandbox-name>       # when finished
 ```
 
+## Mounting host paths into a running sandbox
+
+Extra workspaces passed to `sbx run` are fixed at create time. To expose an
+additional host path to a sandbox that's already running — without stopping or
+recreating it — use `sbx mount`. The mount spec follows the same
+`HOST[:CONTAINER_TARGET[:ro|rw]]` form as `docker run -v`:
+
+```console
+$ sbx mount my-sandbox /Users/me/extra-data
+```
+
+With a host path alone, the directory becomes visible inside the sandbox under
+`/mnt/host/`, mirroring the host path — in this example,
+`/mnt/host/Users/me/extra-data`.
+
+To bind the host path to a specific location inside the sandbox, append a
+container target. The target must be an absolute path:
+
+```console
+$ sbx mount my-sandbox /Users/me/extra-data:/workspace/data
+```
+
+Mounts are read-write by default. Append `:ro` to mount read-only — writes from
+inside the sandbox then fail with a "read-only file system" error:
+
+```console
+$ sbx mount my-sandbox /Users/me/extra-data:/workspace/data:ro
+```
+
+The host path must exist. Relative host paths are resolved against your current
+directory before being sent to the sandbox. Mount operations are idempotent, so
+re-running the same command is a no-op. The same
+[filesystem rules](governance/concepts.md#filesystem-rules) that govern
+create-time mounts are enforced here, so a path your policy denies is rejected.
+
+To revoke a path, use `sbx umount`. If you bound the path to a container target,
+pass the same target back to also remove the bind mount inside the sandbox:
+
+```console
+$ sbx umount my-sandbox /Users/me/extra-data                 # drop the host path
+$ sbx umount my-sandbox /Users/me/extra-data:/workspace/data # also remove the bind mount
+```
+
+A host path with no target revokes only the exposed path. Like `sbx mount`,
+`sbx umount` is idempotent — revoking a path that was never mounted succeeds
+without error. Both commands operate on the live container, so the sandbox must
+be running.
+
 ## Copying files between host and sandbox
 
 Use [`sbx cp`](/reference/cli/sbx/cp/) to copy files or directories between
