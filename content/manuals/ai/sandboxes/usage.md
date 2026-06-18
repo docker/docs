@@ -228,8 +228,9 @@ $ sbx rm <sandbox-name>       # when finished
 
 Extra workspaces passed to `sbx run` are fixed at create time. To expose an
 additional host path to a sandbox that's already running — without stopping or
-recreating it — use `sbx mount`. The mount spec follows the same
-`HOST[:CONTAINER_TARGET[:ro|rw]]` form as `docker run -v`:
+recreating it — use `sbx mount`. The mount spec takes a shape similar to
+Docker's `-v` flag, `HOST[:PATH[:ro|rw]]`, where `PATH` is a location inside
+the sandbox:
 
 ```console
 $ sbx mount my-sandbox /Users/me/extra-data
@@ -239,8 +240,8 @@ With a host path alone, the directory becomes visible inside the sandbox under
 `/mnt/host/`, mirroring the host path — in this example,
 `/mnt/host/Users/me/extra-data`.
 
-To bind the host path to a specific location inside the sandbox, append a
-container target. The target must be an absolute path:
+To bind the host path to a specific location inside the sandbox, append that
+path. It must be absolute:
 
 ```console
 $ sbx mount my-sandbox /Users/me/extra-data:/workspace/data
@@ -259,8 +260,8 @@ re-running the same command is a no-op. The same
 [filesystem rules](governance/concepts.md#filesystem-rules) that govern
 create-time mounts are enforced here, so a path your policy denies is rejected.
 
-To revoke a path, use `sbx umount`. If you bound the path to a container target,
-pass the same target back to also remove the bind mount inside the sandbox:
+To revoke a path, use `sbx umount`. If you bound the path to a location inside
+the sandbox, pass that same path back to also remove the bind mount:
 
 ```console
 $ sbx umount my-sandbox /Users/me/extra-data                 # drop the host path
