@@ -27,7 +27,9 @@ kit:my-sandbox:deny   network   sandbox:my-sandbox   deny       active   telemet
 The columns are:
 
 - `NAME`: the rule name.
-- `TYPE`: the rule domain, such as `network`.
+- `TYPE`: the rule domain. Network rules show as `network`. Filesystem rules
+  show as `filesystem:read` or `filesystem:write`, depending on the access the
+  rule controls.
 - `ORIGIN`: where the rule was configured. `local` means the rule is global
   and applies to all sandboxes. `sandbox:<name>` means the rule is scoped to
   the named sandbox. `remote` means the rule was set by your organization.
@@ -80,13 +82,33 @@ allow Docker services network   remote               allow      active     *.doc
 Inactive rules show with an `inactive` status. They have no effect while
 organization governance is active.
 
-Use `--type network` to show only network rules. Without a sandbox argument,
-`sbx policy ls` shows every rule across all sandboxes. Pass a sandbox name to
-filter to global rules and rules scoped to that sandbox:
+Use `--type network` or `--type filesystem` to show only rules of that type.
+Without a sandbox argument, `sbx policy ls` shows every rule across all
+sandboxes. Pass a sandbox name to filter to global rules and rules scoped to
+that sandbox:
 
 ```console
 $ sbx policy ls my-sandbox
 ```
+
+### Filesystem rules
+
+`sbx policy ls` lists filesystem rules alongside network rules. Filesystem
+rules control which host paths a sandbox can mount as a workspace. Pass
+`--type filesystem` to show only them:
+
+```console
+$ sbx policy ls --type filesystem
+NAME                         TYPE              ORIGIN   DECISION   STATUS   RESOURCES
+default-fs-read-allow-all    filesystem:read   local    allow      active   **
+default-fs-write-allow-all   filesystem:write  local    allow      active   **
+```
+
+A writable workspace mount must be allowed by both a `filesystem:read` and a
+`filesystem:write` rule; a read-only mount needs only `filesystem:read`. The
+default local policy allows read and write access to all paths, shown as the
+two `default-fs-*` rules above. For the rule syntax and path patterns, see
+[Policy concepts](concepts.md#filesystem-rules).
 
 ## Monitoring traffic
 
@@ -127,3 +149,5 @@ $ sbx policy log my-sandbox
 
 Use `--limit N` to show only the last `N` entries, `--json` for
 machine-readable output, or `--type network` to filter by policy type.
+`sbx policy log` records network traffic only; filesystem mount decisions
+aren't available in the log yet.

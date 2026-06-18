@@ -69,7 +69,9 @@ workspaces. By default, sandboxes can mount any directory the user has
 access to.
 
 Admins can restrict which paths are mountable with filesystem allow and deny
-rules. Each rule takes a path pattern and an action (allow or deny).
+rules. Each rule takes a path pattern and an action (allow or deny). A sandbox
+can mount a path as a writable workspace only if the policy allows both read
+and write access to it; allowing read alone permits a read-only mount.
 
 For path pattern syntax including the difference between `*` and `**`, see
 [Policy concepts](concepts.md#filesystem-rules).
