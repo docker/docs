@@ -288,35 +288,26 @@ To stop forwarding a port:
 $ sbx ports my-sandbox --unpublish 8080:3000
 ```
 
-A few things to keep in mind:
+For a service to be reachable, it must listen on all interfaces inside the
+sandbox, not only `127.0.0.1`. Bind it to `0.0.0.0` for IPv4 or `[::]` for both
+IPv4 and IPv6; most dev servers need a flag like `--host 0.0.0.0` to do this. On
+the host, `--publish` listens on both `127.0.0.1` and `::1`, so a client
+resolving `localhost` might pick IPv6 and fail with "connection reset by peer"
+if the sandboxed service only listens on IPv4 — even when
+`http://127.0.0.1:<port>/` works. To fix that, bind the service to `[::]`, or
+pin the published port to one family with `--publish 8080:3000/tcp4` or `/tcp6`.
 
-- **Services must listen on all interfaces** — a service listening only on
-  `127.0.0.1` inside the sandbox won't be reachable through a published port.
-  Bind to `0.0.0.0` for IPv4, or `[::]` to accept both IPv4 and IPv6. Most dev
-  servers default to `127.0.0.1`, so you'll usually need to pass a flag like
-  `--host 0.0.0.0` or `--host '[::]'` when starting them.
-- **`localhost` on the host can resolve to IPv6** — by default, `--publish`
-  listens on both `127.0.0.1` and `::1`. Your browser or client may pick IPv6
-  when resolving `localhost`. If the sandboxed service only listens on IPv4,
-  the IPv6 connection fails with "connection reset by peer" — even though
-  `http://127.0.0.1:<port>/` works. To fix it, bind the sandboxed service to
-  `[::]` so it accepts both families, or restrict the published port to one
-  family with `--publish 8080:3000/tcp4` (IPv4) or `/tcp6` (IPv6).
-- **Restored across restarts** — published ports are re-published
-  automatically when the sandbox or the daemon restarts, so you don't need to
-  run `sbx ports --publish` again. Explicit host ports are reused. A port
-  published with an OS-assigned host port (such as `--publish 3000`) gets a
-  fresh host port on each start, so run `sbx ports my-sandbox` to find the new
-  one. If an explicit host port is already in use when the sandbox restarts,
-  the CLI or the dashboard prompts you to choose a different host port or
-  cancel. Removing the sandbox deletes its published ports for good.
-- **No create-time flag** — unlike `docker run -p`, there's no `--publish`
-  option on `sbx run` or `sbx create`. Ports can only be published after the
-  sandbox is running.
-- **Unpublish by host or sandbox port** — `--unpublish 8080:3000` removes a
-  single mapping. `--unpublish 3000` removes every host port mapped to sandbox
-  port 3000, which is the way to remove a port published with an OS-assigned
-  host port whose number you don't know.
+Published ports survive restarts: `sbx` re-publishes them when the sandbox or
+the daemon restarts. Explicit host ports are reused, while a port published with
+an OS-assigned host port (such as `--publish 3000`) gets a new host port on each
+start, so check `sbx ports my-sandbox` to find it. If an explicit host port is
+already in use at restart, the CLI or the dashboard prompts you to choose
+another. Removing the sandbox releases its ports.
+
+You can't publish ports at create time — there's no `--publish` flag on
+`sbx run` or `sbx create`, so publish them once the sandbox is running. To stop
+forwarding, `--unpublish 8080:3000` removes a single mapping, and
+`--unpublish 3000` removes every host port mapped to sandbox port 3000.
 
 ## Accessing host services from a sandbox
 
