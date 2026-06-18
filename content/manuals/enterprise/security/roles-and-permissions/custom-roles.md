@@ -196,3 +196,10 @@ Custom roles are built by selecting specific permissions across different catego
 | :------------- | :----------------------------------------------- |
 | View billing   | View organization billing information            |
 | Manage billing | Complete access to managing organization billing |
+
+### Governance
+
+| Permission      | Description                                          |
+| :-------------- | :--------------------------------------------------- |
+| View policies   | View existing AI Governance policies and their rules |
+| Manage policies | Full access to AI Governance policy management       |
