@@ -35,7 +35,7 @@ ruff-lint/
 ```
 
 ```yaml {title="ruff-lint/spec.yaml"}
-schemaVersion: "1"
+schemaVersion: "2"
 kind: mixin
 name: ruff-lint
 displayName: Ruff
@@ -95,7 +95,7 @@ the kit and install each certificate before running
 `update-ca-certificates`.
 
 ```yaml {title="internal-ca/spec.yaml"}
-schemaVersion: "1"
+schemaVersion: "2"
 kind: mixin
 name: internal-ca
 
@@ -196,7 +196,7 @@ docker-review/
 ```
 
 ```yaml {title="docker-review/spec.yaml"}
-schemaVersion: "1"
+schemaVersion: "2"
 kind: mixin
 name: docker-review
 displayName: Dockerfile review skill
@@ -260,7 +260,7 @@ built-in `claude` agent but drops `--dangerously-skip-permissions` so
 every tool call prompts for approval:
 
 ```yaml {title="claude-safe/spec.yaml"}
-schemaVersion: "1"
+schemaVersion: "2"
 kind: sandbox
 name: claude-safe
 displayName: Claude Code (with approval prompts)
@@ -272,22 +272,22 @@ sandbox:
   entrypoint:
     run: [claude]
 
-network:
-  serviceDomains:
-    api.anthropic.com: anthropic
-    console.anthropic.com: anthropic
-  serviceAuth:
-    anthropic:
-      headerName: x-api-key
-      valueFormat: "%s"
-  allowedDomains:
-    - "claude.com:443"
+caps:
+  network:
+    allow:
+      - "claude.com:443"
 
 credentials:
-  sources:
-    anthropic:
-      env:
-        - ANTHROPIC_API_KEY
+  - service: anthropic
+    apiKey:
+      name: ANTHROPIC_API_KEY
+      inject:
+        - domain: api.anthropic.com
+          header: x-api-key
+          format: "%s"
+        - domain: console.anthropic.com
+          header: x-api-key
+          format: "%s"
 ```
 
 Launch with the kit's `name:` as the agent argument to `sbx run`:

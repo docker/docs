@@ -131,16 +131,17 @@ Network rules define which domains the sandbox can reach or block. Kit
 network rules apply only to sandboxes that use the kit:
 
 ```yaml
-network:
-  allowedDomains:
-    - api.example.com
-    - "*.cdn.example.com"
-  deniedDomains:
-    - telemetry.example.com
+caps:
+  network:
+    allow:
+      - api.example.com
+      - "*.cdn.example.com"
+    deny:
+      - telemetry.example.com
 ```
 
-Use `allowedDomains` for hosts the agent needs, such as package
-registries, install endpoints, or external APIs. Use `deniedDomains` for
+Use `allow` for hosts the agent needs, such as package
+registries, install endpoints, or external APIs. Use `deny` for
 hosts the agent should not reach, such as telemetry endpoints. If a domain
 matches both an allow rule and a deny rule, the deny rule wins.
 
@@ -161,33 +162,29 @@ host-side proxy. The agent inside the VM works with a sentinel value;
 the proxy reads the real credential on the host and overwrites the
 auth header before the request leaves the sandbox.
 
-The standard pattern uses four blocks tied to a service identifier
-you choose (here, `my-service`):
+A kit declares the service, the in-container environment variable, and how
+to inject the credential. It does not declare where the value comes from —
+that's the user's
+[credential binding](../security/credentials.md#credential-bindings):
 
 ```yaml
-network:
-  allowedDomains:
-    - api.example.com
-  serviceDomains:
-    api.example.com: my-service # Tag traffic to this domain
-  serviceAuth:
-    my-service:
-      headerName: Authorization # Overwrite this header
-      valueFormat: "Bearer %s"
-
 credentials:
-  sources:
-    my-service:
-      env:
-        - MY_SERVICE_API_KEY # Host-side credential lookup
+  - service: my-service
+    apiKey:
+      name: MY_SERVICE_API_KEY      # in-VM env var, set to a sentinel
+      inject:
+        - domain: api.example.com   # inject on requests to this domain
+          header: Authorization     # overwrite this header
+          format: "Bearer %s"
 
-environment:
-  proxyManaged:
-    - MY_SERVICE_API_KEY # Set the in-VM env var to "proxy-managed"
+caps:
+  network:
+    allow:
+      - api.example.com             # the domain must also be reachable
 ```
 
 The agent boots with `MY_SERVICE_API_KEY=proxy-managed`, sends a
-request with that value in `Authorization`, and the proxy overwrites
+request with that sentinel in `Authorization`, and the proxy overwrites
 the header with the real credential before forwarding. The real
 secret never enters the VM.
 
@@ -269,16 +266,17 @@ ruff-lint/
 ```
 
 ```yaml {title="ruff-lint/spec.yaml"}
-schemaVersion: "1"
+schemaVersion: "2"
 kind: mixin
 name: ruff-lint
 displayName: Ruff Linter
 description: Python linting with shared team config
 
-network:
-  allowedDomains:
-    - pypi.org
-    - files.pythonhosted.org
+caps:
+  network:
+    allow:
+      - pypi.org
+      - files.pythonhosted.org
 
 commands:
   install:
@@ -331,7 +329,7 @@ is an abbreviated version of its spec, showing how the sandbox block combines
 with network, credentials, environment, and commands:
 
 ```yaml {title="claude/spec.yaml"}
-schemaVersion: "1"
+schemaVersion: "2"
 kind: sandbox
 name: claude
 sandbox:
@@ -340,22 +338,22 @@ sandbox:
   entrypoint:
     run: [claude, "--dangerously-skip-permissions"]
 
-network:
-  serviceDomains:
-    api.anthropic.com: anthropic
-    console.anthropic.com: anthropic
-  serviceAuth:
-    anthropic:
-      headerName: x-api-key
-      valueFormat: "%s"
-  allowedDomains:
-    - "claude.com:443"
+caps:
+  network:
+    allow:
+      - "claude.com:443"
 
 credentials:
-  sources:
-    anthropic:
-      env:
-        - ANTHROPIC_API_KEY
+  - service: anthropic
+    apiKey:
+      name: ANTHROPIC_API_KEY
+      inject:
+        - domain: api.anthropic.com
+          header: x-api-key
+          format: "%s"
+        - domain: console.anthropic.com
+          header: x-api-key
+          format: "%s"
 
 environment:
   variables:
@@ -474,9 +472,9 @@ and direct inspection inside the sandbox:
   value, such as `forward`, `forward-bypass`, `transparent`, or
   `browser-open`. Use it to diagnose install-time download failures,
   blocked domains, and unexpected TLS interception. If downloads fail or
-  arrive corrupted after you add `serviceDomains`, check whether the
-  service mapping is too broad. Map only the hosts that need credential
-  injection.
+  arrive corrupted after you add a credential's `apiKey.inject`, check
+  whether an injection domain is too broad. Inject only on the hosts that
+  need credentials.
 - `sbx exec <sandbox> -- <cmd>` runs an arbitrary command inside an
   existing sandbox. Useful for inspecting post-install state without
   recreating: `which mytool`, `ls /home/agent/.local/bin/`,

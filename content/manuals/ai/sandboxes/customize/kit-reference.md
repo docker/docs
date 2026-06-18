@@ -27,11 +27,48 @@ my-kit/
     └── workspace/
 ```
 
+## Schema versions
+
+Two schema versions are supported. `schemaVersion: "2"` is current and
+recommended; `"1"` is still accepted. Both are parsed and validated the same way,
+and a v1 spec is automatically normalized into the v2 model — so existing v1 kits
+keep working unchanged.
+
+You don't have to migrate a kit all at once. Field validity isn't tied to the
+version — you can adopt v2 fields incrementally, or even mix v1 and v2 spellings
+in the same file, and `sbx kit validate` reports a deprecation warning naming the
+v2 replacement for each legacy field.
+
+What changed in v2:
+
+| v1                                         | v2                                        |
+| ------------------------------------------ | ----------------------------------------- |
+| `credentials.sources.<id>`                 | `credentials:` list entry with `service`  |
+| `network.allowedDomains` / `deniedDomains` | `caps.network.allow` / `deny`             |
+| `network.serviceDomains` / `serviceAuth`   | `credentials[].apiKey.inject`             |
+| standalone `oauth:` block                  | `credentials[].oauth`                     |
+| `environment.proxyManaged`                 | automatic — `credentials[].apiKey.name`   |
+| `memory`                                   | `agentContext`                            |
+| `kind: agent` / `agent:` block             | `kind: sandbox` / `sandbox:` block        |
+| `tmpfs:`                                    | `volumes:` entries with `type: tmpfs`     |
+| `settings:` / `kitDir` / `persistence`     | removed (no replacement)                  |
+
+Credential **discovery** also moved out of the kit in v2: a kit declares which
+credentials it needs and how to inject them, but where each value comes from is
+controlled by the user through
+[credential bindings](../security/credentials.md#credential-bindings).
+
+> [!NOTE]
+> `mixins` and `sandbox.build` are accepted by the parser but not yet applied by
+> the runtime — `sbx kit validate` reports them as accepted but not yet
+> implemented. Don't rely on them yet.
+
 ## Changelog
 
 Renamed fields are still accepted for backward compatibility, but
 `sbx kit validate` reports a deprecation warning for each, and a future
-release may stop accepting them. Update kits to the current names.
+release may stop accepting them. Update kits to the current names. For the full
+v1-to-v2 field mapping, see [Schema versions](#schema-versions).
 
 ### v0.32.0
 
@@ -50,7 +87,7 @@ automatically the next time the sandbox starts.
 ## Top-level fields
 
 ```yaml
-schemaVersion: "1"
+schemaVersion: "2"
 kind: <mixin | sandbox>
 name: <name>
 displayName: <name>
@@ -59,7 +96,7 @@ description: <text>
 
 | Field           | Required | Description                                                                |
 | --------------- | -------- | -------------------------------------------------------------------------- |
-| `schemaVersion` | Yes      | Spec schema version. Set to `"1"`.                                         |
+| `schemaVersion` | Yes      | Spec schema version. Use `"2"`; `"1"` is still accepted. See [Schema versions](#schema-versions). |
 | `kind`          | Yes      | `mixin` for kits that extend an agent; `sandbox` for kits that define one. |
 | `name`          | Yes      | Unique identifier. Lowercase, alphanumeric, hyphens.                       |
 | `displayName`   | No       | Human-readable name.                                                       |
@@ -70,31 +107,81 @@ The sections below apply to both kinds. Sandbox kits also declare a
 
 ## Credentials
 
+A kit declares the credentials it needs and how the proxy injects them into
+outbound requests. It does not declare where the value comes from — discovery is
+controlled by the user through
+[credential bindings](../security/credentials.md#credential-bindings), so a kit
+can't read arbitrary host environment variables or files.
+
 ```yaml
 credentials:
-  sources:
-    <service-id>:
-      env: [<env-var>, ...]
-      file:
+  - service: <service-id>
+    description: <text>          # optional
+    required: <true | false>     # optional, default false
+    apiKey:
+      name: <ENV_VAR>
+      inject:
+        - domain: <domain>
+          header: <header>
+          format: <format>
+          username: <user>       # optional, for HTTP basic auth
+    oauth:
+      tokenEndpoint:
+        host: <host>
         path: <path>
-        parser: <parser>
-      priority: <env-first | file-first>
+      sentinels:
+        accessToken: <sentinel>
+        refreshToken: <sentinel>
+      credentialFile:
+        path: <path>
+        template: <json-template>
 ```
 
-| Field                      | Description                                                   |
-| -------------------------- | ------------------------------------------------------------- |
-| `sources`                  | Map of service identifier to credential source.               |
-| `sources.<id>.env`         | Environment variables to read on the host, in priority order. |
-| `sources.<id>.file.path`   | Path on host. `~` expands to home directory.                  |
-| `sources.<id>.file.parser` | How to extract the credential value from the file.            |
-| `sources.<id>.priority`    | `env-first` (default) or `file-first`.                        |
+`credentials` is a list; each entry names a `service` and configures one or more
+auth mechanisms.
 
-Service identifiers link credentials to [network rules](#network).
+| Field         | Description                                                                                                                          |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `service`     | Credential identifier. Known providers (`anthropic`, `github`, `openai`, `google`, ...) auto-expand to their `apiKey` injection config. |
+| `description` | Optional. Shown to the user when approving a [binding](../security/credentials.md#credential-bindings).                              |
+| `required`    | If `true`, sandbox creation fails when the credential is unavailable. Default `false`.                                              |
+| `apiKey`      | API-key injection (see [apiKey](#apikey)).                                                                                           |
+| `oauth`       | OAuth interception (see [oauth](#oauth)).                                                                                            |
+
+For a known provider, `- service: anthropic` is enough — `apiKey.name` and
+`inject` are filled in from the provider registry. Custom services must declare
+`apiKey.name` and `apiKey.inject` (or `oauth`) themselves.
+
+### apiKey
+
+| Field               | Description                                                                                                                          |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `name`              | Environment variable set inside the container. The agent sees a sentinel (`proxy-managed`); the proxy injects the real value. Auto-derived for known providers. |
+| `inject[].domain`   | Domain to inject the credential into. Must also be allowed in [`caps.network`](#network).                                           |
+| `inject[].header`   | HTTP header the proxy sets (for example, `x-api-key`, `Authorization`).                                                             |
+| `inject[].format`   | Header value format, with one `%s` placeholder (for example, `"%s"` or `"Bearer %s"`).                                             |
+| `inject[].username` | Optional. Use HTTP basic auth with this username instead of a bearer header (for example, `x-access-token` for git over HTTPS).     |
+
+### oauth
+
+For agents that authenticate with OAuth (for example, Claude Code), the proxy
+intercepts token responses and replaces real tokens with sentinels, then swaps
+the real token back in on outbound requests. The token never enters the sandbox.
+
+| Field                                     | Description                                                                                          |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `tokenEndpoint.host` / `path`             | The OAuth token endpoint the proxy intercepts.                                                       |
+| `sentinels.accessToken` / `refreshToken`  | Sentinel values written into the container in place of the real tokens.                              |
+| `credentialFile.path`                     | Where to write the credential file inside the container (`~` expands).                               |
+| `credentialFile.template`                 | JSON template for that file. `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, and `{{.ScopesJSON}}` are substituted at runtime. |
 
 ### file.parser
 
-`file.parser` tells the proxy how to extract a credential from the file at `file.path`.
-Omit it for plain-text files; set it to `json:<dot.path>` to extract a field from a JSON file.
+A credential sourced from a file — through a
+[credential binding](../security/credentials.md#credential-bindings) `file`
+source, or a legacy `credentials.sources` entry — can pull its value from a JSON
+field. Omit the parser for plain-text files; set `json:<dot.path>` to extract a
+field from a JSON file.
 
 | Value             | Behavior                                                                             |
 | ----------------- | ------------------------------------------------------------------------------------ |
@@ -107,50 +194,6 @@ Only object keys can be navigated — arrays are not supported and there is no `
 Keys that contain a literal `.` cannot be referenced. The resolved value must be a string, number,
 or boolean; numbers and booleans are converted to strings. Objects, arrays, and null are rejected.
 
-When a source has both `env` and `file` defined, `priority` controls which is tried first. The
-preferred source is used when it exists — the environment variable is set, or the file is
-present on disk. If it doesn't, the other source is used instead. The choice is made once at
-discovery time, so parser errors (missing JSON field, wrong value type, invalid JSON) surface
-as errors rather than triggering a fallback.
-
-Plain-text token file:
-
-```yaml
-credentials:
-  sources:
-    openai:
-      file:
-        path: "~/.openai/token"
-```
-
-Nested JSON field, with an environment variable as fallback:
-
-```yaml
-credentials:
-  sources:
-    github:
-      env:
-        - GH_TOKEN
-      file:
-        path: "~/.config/myapp/creds.json"
-        parser: "json:credentials.github.token"
-      priority: file-first
-```
-
-Given `~/.config/myapp/creds.json`:
-
-```json
-{
-  "credentials": {
-    "github": { "token": "ghp_xyz", "expires": "2026-12-31" }
-  }
-}
-```
-
-The proxy resolves the credential to `ghp_xyz`, falling back to `GH_TOKEN` if the file is
-missing. If the file exists but the JSON path doesn't resolve, the request fails with the
-parser error below instead of falling back.
-
 Common errors when using `json:` parsers:
 
 | Error message                                 | Cause                                                               |
@@ -162,25 +205,27 @@ Common errors when using `json:` parsers:
 
 ## Network
 
+Network egress is declared under `caps.network`. Credentials no longer carry
+their own domain mapping — the proxy injects a credential only into the domains
+its [`apiKey.inject`](#apikey) (or provider default) lists, and every domain the
+sandbox reaches must be allowed here.
+
 ```yaml
-network:
-  allowedDomains: [<domain>, ...]
-  deniedDomains: [<domain>, ...]
-  serviceDomains:
-    <domain>: <service-id>
-  serviceAuth:
-    <service-id>:
-      headerName: <header>
-      valueFormat: <format>
+caps:
+  network:
+    allow: [<domain>, ...]
+    deny: [<domain>, ...]
 ```
 
-| Field                     | Description                                                                                                                          |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `allowedDomains`          | Domains the sandbox can reach. Wildcards supported.                                                                                  |
-| `deniedDomains`           | Domains the sandbox is blocked from reaching. Deny rules take precedence over allow rules, including those from other composed kits. |
-| `serviceDomains`          | Map of domain to service identifier from `credentials.sources`.                                                                      |
-| `serviceAuth.headerName`  | HTTP header the proxy sets (for example, `Authorization`).                                                                           |
-| `serviceAuth.valueFormat` | Format string for the header value (for example, `"Bearer %s"`).                                                                     |
+| Field                | Description                                                                                                     |
+| -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `caps.network.allow` | Domains the sandbox can reach. Wildcards supported.                                                             |
+| `caps.network.deny`  | Domains the sandbox is blocked from reaching. Deny takes precedence over allow, including across composed kits. |
+
+In v1 this was the `network:` block (`allowedDomains` / `deniedDomains`, plus
+`serviceDomains` / `serviceAuth`). Those still parse with a deprecation warning:
+domain lists fold into `caps.network`, and `serviceDomains` / `serviceAuth` fold
+into [`credentials[].apiKey.inject`](#apikey).
 
 ## Environment
 
@@ -188,15 +233,18 @@ network:
 environment:
   variables:
     <NAME>: <value>
-  proxyManaged: [<NAME>, ...]
 ```
 
-| Field          | Description                                                                                                         |
-| -------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `variables`    | Key-value pairs set directly in the container.                                                                      |
-| `proxyManaged` | Environment variable names populated by the proxy at request time. Pair with [`credentials.sources`](#credentials). |
+| Field       | Description                                    |
+| ----------- | ---------------------------------------------- |
+| `variables` | Key-value pairs set directly in the container. |
 
 Variable names must be valid shell identifiers (`[A-Za-z_][A-Za-z0-9_]*`).
+
+In v1, `proxyManaged` listed the variables the proxy populated at request time.
+That's now automatic: declaring a credential with `apiKey.name: <VAR>` sets
+`<VAR>` to a sentinel in the container and injects the real value at the proxy.
+`proxyManaged` still parses with a deprecation warning.
 
 ## Commands
 

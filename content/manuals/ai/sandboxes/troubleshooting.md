@@ -97,6 +97,13 @@ If the agent can't reach its model provider or you see API key errors, the key
 is likely invalid, expired, or not configured. Verify it's set in your shell
 configuration file and that you sourced it or opened a new terminal.
 
+If the agent starts unauthenticated, or a non-interactive run (`--detached` or
+CI) fails with a "no approved binding" error, the credential has no
+[credential binding](security/credentials.md#credential-bindings). Run the
+agent interactively once to approve the binding at the prompt, or pre-create
+the entry in `credentials.yaml`. A credential is injected only where a binding
+authorizes it.
+
 For agents that use the [credential proxy](security/credentials.md), make sure
 you haven't set the API key to an invalid value inside the sandbox — the proxy
 injects credentials automatically on outbound requests.

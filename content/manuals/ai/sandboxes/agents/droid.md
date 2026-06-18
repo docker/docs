@@ -40,9 +40,10 @@ your Factory account.
 $ sbx secret set -g droid
 ```
 
-Alternatively, export the `FACTORY_API_KEY` environment variable in your shell
-before running the sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
+You can also source the key from the `FACTORY_API_KEY` environment variable
+through a [credential binding](../security/credentials.md#credential-bindings);
+the sandbox prompts you to approve one on first run. See
+[Credentials](../security/credentials.md) for details.
 
 **OAuth**: If no API key is set, Droid prompts you to authenticate
 interactively on first run. The proxy handles the OAuth flow, so credentials

@@ -33,9 +33,11 @@ $ sbx run shell -- -c "echo hi"   # runs bash -l -c "echo hi"
 
 When the first argument is a bare word, it replaces `-l` instead.
 
-Set your API keys as environment variables so the sandbox proxy can inject
-them into API requests automatically. Credentials are never stored inside
-the VM:
+Provide your API keys as environment variables so the sandbox proxy can inject
+them into API requests. The proxy injects a key once a
+[credential binding](../security/credentials.md#credential-bindings) authorizes
+it — the sandbox prompts you to approve one on first run. Credentials are never
+stored inside the VM:
 
 ```console
 $ export ANTHROPIC_API_KEY=sk-ant-xxxxx
