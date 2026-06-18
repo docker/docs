@@ -3,8 +3,8 @@ title: Test and debug
 description: Test and debug your extension.
 keywords: Docker, Extensions, sdk, preview, update, Chrome DevTools
 aliases:
- - /desktop/extensions-sdk/build/test-debug/
- - /desktop/extensions-sdk/dev/test-debug/
+  - /desktop/extensions-sdk/build/test-debug/
+  - /desktop/extensions-sdk/dev/test-debug/
 weight: 10
 ---
 
@@ -57,7 +57,7 @@ $ docker extension dev reset <name-of-your-extensions>
 
 ## Show the extension containers
 
-If your extension is composed of one or more services running as containers in the Docker Desktop VM, you can access them easily from the dashboard in Docker Desktop.
+If your extension is composed of one or more services running as containers in the Docker Desktop VM, you can access them from the dashboard in Docker Desktop.
 
 1. In Docker Desktop, navigate to **Settings**.
 2. Under the **Extensions** tab, select the **Show Docker Desktop Extensions system containers** option. You can now view your extension containers and their logs.

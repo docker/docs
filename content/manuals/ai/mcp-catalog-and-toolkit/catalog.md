@@ -20,7 +20,7 @@ portable and consistent across different environments.
 
 > [!NOTE]
 > E2B sandboxes now include direct access to the Docker MCP Catalog, giving
-> developers access to over 200 tools and services to seamlessly build and run
+> developers access to over 200 tools and services to build and run
 > AI agents. For more information, see [E2B Sandboxes](e2b-sandboxes.md).
 
 ## What's in the catalog

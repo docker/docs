@@ -2,8 +2,8 @@
 title: Docker
 description: Docker extension API
 keywords: Docker, extensions, sdk, API
-aliases: 
- - /desktop/extensions-sdk/dev/api/docker/
+aliases:
+  - /desktop/extensions-sdk/dev/api/docker/
 ---
 
 ## Docker objects
@@ -59,7 +59,7 @@ The result contains both the standard output and the standard error of the execu
 ```
 
 In this example, the command output is JSON.
-For convenience, the command result object also has methods to easily parse it:
+For convenience, the command result object also has methods to parse it:
 
 - `result.lines(): string[]` splits output lines.
 - `result.parseJsonObject(): any` parses a well-formed json output.
@@ -126,13 +126,13 @@ await ddClient.docker.cli.exec(
       },
       splitOutputLines: true,
     },
-  }
+  },
 );
 ```
 
 > [!NOTE]
 >
->You cannot use this to chain commands in a single `exec()` invocation (like `docker kill $(docker ps -q)` or using pipe between commands).
+> You cannot use this to chain commands in a single `exec()` invocation (like `docker kill $(docker ps -q)` or using pipe between commands).
 >
 > You need to invoke `exec()` for each command and parse results to pass parameters to the next command if needed.
 
@@ -146,7 +146,7 @@ See the [Exec API reference](/reference/api/extensions-sdk/Exec.md) for details 
 const output = await window.ddClient.execDockerCmd(
   "info",
   "--format",
-  '"{{ json . }}"'
+  '"{{ json . }}"',
 );
 
 window.ddClient.spawnDockerCmd("logs", ["-f", "..."], (data, error) => {
