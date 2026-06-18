@@ -229,8 +229,8 @@ $ sbx rm <sandbox-name>       # when finished
 Extra workspaces passed to `sbx run` are fixed at create time. To expose an
 additional host path to a sandbox that's already running — without stopping or
 recreating it — use `sbx mount`. The mount spec takes a shape similar to
-Docker's `-v` flag, `HOST[:PATH[:ro|rw]]`, where `PATH` is a location inside
-the sandbox:
+Docker's `-v` flag, `HOST_PATH[:PATH[:ro|rw]]`, where `HOST_PATH` is the path
+on your machine and `PATH` is a location inside the sandbox:
 
 ```console
 $ sbx mount my-sandbox /Users/me/extra-data
