@@ -76,6 +76,13 @@ target "test-go-redirects" {
   provenance = false
 }
 
+target "releaser-test" {
+  context = "hack/releaser"
+  target = "releaser-test"
+  output = ["type=cacheonly"]
+  provenance = false
+}
+
 target "dockerfile-lint" {
   call = "check"
 }

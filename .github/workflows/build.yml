@@ -35,7 +35,9 @@ jobs:
         with:
           files: |
             docker-bake.hcl
-          targets: releaser-build
+          targets: |
+            releaser-build
+            releaser-test
 
   build:
     runs-on: ubuntu-24.04
