@@ -302,14 +302,21 @@ A few things to keep in mind:
   `http://127.0.0.1:<port>/` works. To fix it, bind the sandboxed service to
   `[::]` so it accepts both families, or restrict the published port to one
   family with `--publish 8080:3000/tcp4` (IPv4) or `/tcp6` (IPv6).
-- **Not persistent** — published ports are lost when the sandbox stops or the
-  daemon restarts. Re-publish after restarting.
+- **Restored across restarts** — published ports are re-published
+  automatically when the sandbox or the daemon restarts, so you don't need to
+  run `sbx ports --publish` again. Explicit host ports are reused. A port
+  published with an OS-assigned host port (such as `--publish 3000`) gets a
+  fresh host port on each start, so run `sbx ports my-sandbox` to find the new
+  one. If an explicit host port is already in use when the sandbox restarts,
+  the CLI or the dashboard prompts you to choose a different host port or
+  cancel. Removing the sandbox deletes its published ports for good.
 - **No create-time flag** — unlike `docker run -p`, there's no `--publish`
   option on `sbx run` or `sbx create`. Ports can only be published after the
   sandbox is running.
-- **Unpublish requires the host port** — `--unpublish 3000` is rejected; you
-  must use `--unpublish 8080:3000`. Run `sbx ports my-sandbox` first if you
-  used an ephemeral port and need to find the assigned host port.
+- **Unpublish by host or sandbox port** — `--unpublish 8080:3000` removes a
+  single mapping. `--unpublish 3000` removes every host port mapped to sandbox
+  port 3000, which is the way to remove a port published with an OS-assigned
+  host port whose number you don't know.
 
 ## Accessing host services from a sandbox
 
