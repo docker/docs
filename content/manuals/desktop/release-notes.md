@@ -3456,7 +3456,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Fixed a bug where `docker run --gpus=all` hangs. Fixes [docker/for-win#13324](https://github.com/docker/for-win/issues/13324).
 - Fixed a bug where Registry Access Management policy updates were not downloaded.
 - Docker Desktop now allows Windows containers to work when BitLocker is enabled on `C:`.
-- Docker Desktop with the WSL backend no longer requires the `com.docker.service` privileged service to run permanently. For more information see [Permission requirements for Windows](https://docs.docker.com/desktop/windows/permission-requirements/).
+- Docker Desktop with the WSL backend no longer requires the `com.docker.service` privileged service to run permanently. For more information see [Permission requirements for Windows](/manuals/desktop/setup/install/windows-permission-requirements.md).
 
 ### For Mac
 
