@@ -43,8 +43,8 @@ This release also improves network isolation and policy enforcement. Sandbox DNS
 
 #### Networking & Proxy
 
-- Sandbox DNS lookups are now gated on the network policy: a sandboxed process can no longer resolve domains that policy denies, closing a DNS-based data-exfiltration channel. Loopback names (e.g. `localhost`) are exempt to avoid breaking local OAuth callback flows.
-- Outgoing ICMP from sandboxes is now blocked across daemon restarts.
+- Sandbox DNS lookups are now gated on the network policy: a sandboxed process can no longer resolve domains that policy denies, closing a DNS-based data-exfiltration channel. Loopback names (e.g. `localhost`) are exempt to avoid breaking local OAuth callback flows. [CVE-2026-12039](https://www.cve.org/CVERecord?id=CVE-2026-12039)
+- Outgoing ICMP from sandboxes is now blocked across daemon restarts. [CVE-2026-12539](https://www.cve.org/CVERecord?id=CVE-2026-12539)
 - CIDR subnet allow rules (e.g. `sbx policy allow network 10.10.14.0/24`) now correctly permit traffic to IP addresses within the subnet.
 - The MITM proxy now publishes a CRL and embeds a CRL distribution point in generated certificates, fixing clients that require certificate revocation checking (e.g. .NET `CheckCertificateRevocationList=true`).
 - Removed the bracketed `[::1]` entry from the sandbox `NO_PROXY` default, fixing credential injection for HTTP clients that mis-parsed it.
@@ -56,7 +56,7 @@ This release also improves network isolation and policy enforcement. Sandbox DNS
 
 #### Agents
 
-- Fixed Cursor repeatedly prompting for login; Cursor OAuth credentials now also appear in `sbx secret ls`.
+- Cursor OAuth is now supported
 
 #### Platform & Performance
 
