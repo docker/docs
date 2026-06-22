@@ -239,6 +239,12 @@
   - /go/builds-import/
 "/build/checks/#experimental-checks":
   - "/go/build-checks-experimental/"
+"/build/":
+  - /go/build/
+"/build/building/multi-stage/":
+  - /go/build-multi-stage/
+"/build/concepts/dockerfile/":
+  - /go/build-dockerfile/
 
 # Build links (external)
 "https://app.docker.com/build/?utm_campaign=onboard-30-customer-zero&utm_medium=in-product-ad&utm_source=desktop_v4":
@@ -357,9 +363,9 @@
 "/desktop/use-desktop/pause/":
   - /go/mac-desktop-pause/
   - /go/win-desktop-pause/
+  - /go/desktop-pause/
 "/desktop/settings-and-maintenance/settings/#file-sharing":
   - /go/mac-file-sharing/
-
 "/desktop/use-desktop/container/":
   - /go/container/
 "/desktop/use-desktop/images/":
@@ -368,6 +374,10 @@
   - /go/volumes/
 "/extensions/":
   - /go/extensions/
+"/extensions/extensions-sdk/":
+  - /go/extensions-sdk/
+"/extensions/extensions-sdk/extensions/":
+  - /go/publish-extensions/
 "/engine/cli/completion/":
   - /go/completion/
 "/desktop/features/vmm/":
@@ -387,17 +397,112 @@
   - /go/compose-bridge/
 "/desktop/settings-and-maintenance/settings/":
   - /go/notifications/
+  - /go/settings/
 "/desktop/setup/install/mac-install/":
   - /go/apple-silicon/
 "/desktop/setup/install/mac-permission-requirements/#installing-symlinks":
   - /go/symlinks/
 "/desktop/setup/install/mac-permission-requirements/":
   - /go/permissions/
+"/desktop/setup/install/windows-permission-requirements/":
+  - /go/windows-permissions/
 "/desktop/setup/install/mac-permission-requirements/#binding-privileged-ports":
   - /go/port-mapping/
 "/desktop/release-notes/":
   # Link to the Docker Desktop release notes. Used for in-product linkage.
   - /go/desktop-release-notes/
+"/desktop/features/networking/":
+  - /go/networks/
+"/desktop/troubleshoot-and-support/troubleshoot/":
+  - /go/troubleshoot/
+"/desktop/troubleshoot-and-support/troubleshoot/#diagnose":
+  - /go/diagnose/
+"/desktop/troubleshoot-and-support/feedback/":
+  - /go/feedback/
+"/desktop/settings-and-maintenance/settings/#file-sharing":
+  - /go/file-sharing/
+"/desktop/":
+  - /go/desktop/
+"/desktop/features/containerd/":
+  - /go/containerd/
+"/desktop/use-desktop/logs/":
+  - /go/desktop-logs/
+"/desktop/setup/install/linux/#general-system-requirements":
+  - /go/desktop-linux-requirements/
+"/desktop/setup/install/mac-install/#system-requirements":
+  - /go/desktop-mac-requirements/
+"/desktop/setup/install/windows-install/#system-requirements":
+  - /go/desktop-windows-requirements/
+"/support/#diagnostic-data-and-privacy":
+  - /go/diagnostic-data/
+
+
+"/compose/":
+  - /go/compose/
+"/reference/compose-file/":
+  - /go/compose-file/
+"/reference/compose-file/services/":
+  - /go/compose-file-services/
+"/reference/compose-file/services/#build":
+  - /go/compose-file-services-build/
+"/reference/compose-file/services/#depends_on":
+  - /go/compose-file-services-depends_on/
+"/reference/compose-file/services/#develop":
+  - /go/compose-file-services-develop/
+"/reference/compose-file/services/#env_file":
+  - /go/compose-file-services-env-file/
+"/reference/compose-file/services/#environment":
+  - /go/compose-file-services-environment/
+"/reference/compose-file/services/#healthcheck":
+  - /go/compose-file-services-healthcheck/
+"/reference/compose-file/services/#networks":
+  - /go/compose-file-services-networks/
+"/reference/compose-file/services/#ports":
+  - /go/compose-file-services-ports/
+"/reference/compose-file/services/#secrets":
+  - /go/compose-file-services-secrets/
+"/reference/compose-file/services/#volumes":
+  - /go/compose-file-services-volumes/
+"/reference/compose-file/networks/":
+  - /go/compose-file-networks/
+"/reference/compose-file/volumes/":
+  - /go/compose-file-volumes/
+"/reference/compose-file/configs/":
+  - /go/compose-file-configs/
+"/reference/compose-file/secrets/":
+  - /go/compose-file-secrets/
+"/reference/compose-file/interpolation/":
+  - /go/compose-file-interpolation/
+"/reference/compose-file/include/":
+  - /go/compose-file-include/
+"/reference/compose-file/profiles/":
+  - /go/compose-file-profiles/
+"/reference/compose-file/deploy/":
+  - /go/compose-file-deploy/
+"/compose/how-tos/file-watch/":
+  - /go/compose-watch/
+"/compose/how-tos/file-watch/#prerequisites":
+  - /go/compose-watch-prerequisites/
+
+"/engine/network/drivers/host/":
+  - /go/host-network-driver/
+"/engine/storage/bind-mounts/":
+  - /go/bind-mounts/
+"/engine/storage/volumes/":
+  - /go/engine-volumes/
+
+"/guides/nodejs/":
+  - /go/nodejs-guide/
+"/guides/python/":
+  - /go/python-guide/
+"/guides/golang/":
+  - /go/golang-guide/
+"/guides/java/":
+  - /go/java-guide/
+"/guides/dotnet/":
+  - /go/dotnet-guide/
+"/guides/rust/":
+  - /go/rust-guide/
 
 # Docker Hardened Images (DHI)
 "/dhi/how-to/customize/":
@@ -711,6 +816,7 @@
   - /engine/reference/commandline/container_run/
   - /engine/reference/commandline/run/
   - /reference/cli/docker/run/
+  - /go/commandline-run/
 "/reference/cli/docker/container/start/":
   - /edge/engine/reference/commandline/container_start/
   - /engine/reference/commandline/container_start/
