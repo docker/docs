@@ -85,7 +85,7 @@ implications when set by an untrusted author:
 | `pid: host` | Shares the host PID namespace |
 | `devices` | Exposes host devices to the container |
 | `image` | Pulls and runs an arbitrary container image |
-| `env_file`, `label_file`, `secrets`/`configs` (`file:`), `include` | Read files from the host, directly or through symlinks resolved from a remote checkout, and can surface their contents during configuration loading |
+| `env_file`, `label_file`, `secrets`/`configs` (`file:`), `include`, `extends` | Read files from the host, directly or through symlinks resolved from a remote checkout, and can surface their contents during configuration loading |
 
 When in doubt, look up the effect of any unfamiliar field before running the configuration.
 
