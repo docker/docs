@@ -98,7 +98,7 @@ You can create the volume and start the container using the CLI or Docker Deskto
    as it is still running without using the persistent volume.
 
 3. Start the todo app container, but add the `--mount` option to specify a
-   volume mount. Give the volume a name, and mount it to `/etc/todos` in the
+   volume mount. Use the volume named `todo-db`, and mount it to `/etc/todos` in the
    container, which captures all files created at the path.
 
    ```console
