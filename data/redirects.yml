@@ -366,6 +366,7 @@
   - /go/desktop-pause/
 "/desktop/settings-and-maintenance/settings/#file-sharing":
   - /go/mac-file-sharing/
+  - /go/file-sharing/
 "/desktop/use-desktop/container/":
   - /go/container/
 "/desktop/use-desktop/images/":
@@ -419,8 +420,6 @@
   - /go/diagnose/
 "/desktop/troubleshoot-and-support/feedback/":
   - /go/feedback/
-"/desktop/settings-and-maintenance/settings/#file-sharing":
-  - /go/file-sharing/
 "/desktop/":
   - /go/desktop/
 "/desktop/features/containerd/":
