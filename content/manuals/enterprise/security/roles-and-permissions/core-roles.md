@@ -51,7 +51,7 @@ beyond their organization role:
 - Role permissions: Applied organization-wide (member or editor)
 - Team permissions: Additional permissions for specific repositories
 
-To extend access to private repositories, assign a custom role to organization members or configure team permissions.
+To extend access to private repositories, configure team permissions. Custom roles can grant organization-wide permissions to manage repositories (create, edit, delete), but repository-specific access is controlled through team permissions.
 
 ### Organization management permissions
 
