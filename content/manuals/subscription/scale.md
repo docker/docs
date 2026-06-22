@@ -97,7 +97,7 @@ Docker Offload lets developers offload building and running containers to the cl
 
 ## Add minutes
 
-Base subscription minutes reset each billing period and don't accumulate. Additional purchased minutes persist until the end of your subscription period.
+Base subscription minutes reset each month and don't accumulate. Additional purchased minutes persist until the end of your subscription period.
 
 For example, with an annual Docker Team subscription (500 included minutes), if you purchase 500 additional minutes, the 500 base minutes reset monthly while the 500 additional minutes remain available until your annual renewal.
 
