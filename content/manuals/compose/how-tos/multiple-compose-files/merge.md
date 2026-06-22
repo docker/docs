@@ -356,8 +356,6 @@ For more information, see [Using Compose in production](../production.md).
 
 ## Limitations
 
-## Limitations
-
 When merging Compose files, all relative paths (for build contexts, environment files,
 bind-mounted volumes, and other resources) are resolved relative to the base Compose file. The
 first file specified with `-f`, or `compose.yaml` in the current directory if `-f` is
