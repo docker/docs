@@ -91,6 +91,9 @@ Clients are the AI applications that connect to your profiles. Claude Code,
 Cursor, Zed, and others connect through the MCP Gateway, which routes requests
 to the right server and handles authentication and lifecycle management.
 
+> [!NOTE]
+> MCP Gateway as part of Docker AI Governance is an invite-only feature. [Contact Docker Sales](https://www.docker.com/pricing/contact-sales/) to learn more.
+
 ## Learn more
 
 {{< grid >}}
