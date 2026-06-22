@@ -24,6 +24,52 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.79.0
+
+{{< release-date date="2026-06-22" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.79.0" build_path="/230596/" >}}
+
+### Updates
+
+- [Docker Agent v1.79.0](https://github.com/docker/docker-agent/releases/tag/v1.79.0)
+- `docker pass` v0.1.5
+- Docker Desktop CLI v0.4.1
+- Docker Offload v0.6.4 
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Gordon improvements:
+   - Added context-aware suggested questions to the Ask Gordon menu in the **Containers**, **Images**, **Volumes**, and **Builds** tabs, surfacing relevant diagnostics first when items are in a problematic state.
+   - Added a **Give feedback** link to Gordon so you can report issues with a redacted conversation preview or share product feedback.
+   - Fixed a React warning in Gordon's sidebar search input that appeared on the first keystroke when typing a search query.
+- Fixed an issue where the Docker Engine settings editor displayed minified JSON instead of formatted JSON when first opened.
+- Fixed spurious 500 errors for Docker API calls made right after the VM woke from idle shutdown.
+- Fixed spurious 'Integrity issue detected' notifications caused by leftover symlinks from previously bundled binaries.
+- Fixed a broken documentation link in the error screen shown when the current user is not a member of the `docker-users` group.
+- Fixed a breaking change to the `/app/settings/grouped` API that caused integrations such as NVIDIA to stop working correctly.
+- Fixed high CPU usage (~30%) on macOS Retina displays caused by SVG animations in the Gordon landing page.
+- Fixed an issue where OAuth network errors caused Docker Desktop to incorrectly show users as signed out.
+- Fixed an issue where signing in via OAuth would not display the user's username and email in the UI after login.
+- QEMU has been updated to v10.2.3
+- **Logs** view improvements
+   - Added copy buttons. Copy all visible filtered logs at once or copy individual log entries on hover, respecting the current timestamp visibility setting.
+   - Improved the toolbar with a reorganized layout, saved filter presets that now capture container selection and build log visibility, and the ability to persist container filter state.
+   - Added the ability to clear logs.
+   - Combined **copy** and **expand**/**collapse** buttons into a single pinned column that stays visible during horizontal scrolling, and fixed **copy** accidentally toggling the row detail pan.
+- Fixed Registry Access Management policy downloads to avoid `permission denied` errors by fetching and caching policies in the user's own directory with tampering detection.
+
+#### For Windows
+
+- Fixed a bug where Docker Desktop on WSL failed to start with an 'is already mounted' error after a force-killed bootstrap left stale rootfs mounts behind.
+- Fixed an issue on Windows where clicking "Quit Docker Desktop" had no effect when the backend had crashed or been killed.
+- Fixed an issue on Windows where Docker Desktop processes could linger as orphans after an unexpected exit or crash.
+- Fixed getting stuck on "Starting the Docker Engine…" after an in-place upgrade on Windows when the WSL virtual machine had not been shut down.
+- Fixed the tray icon on Windows not matching the system taskbar theme, so the correct light or dark icon is now displayed.
+- Fixed a silent failure on Windows where backend startup errors were only written to a log file. Users now see a visible error dialog box when Docker Desktop fails to start.
+
 ## 4.78.0
 
 {{< release-date date="2026-06-15" >}}
