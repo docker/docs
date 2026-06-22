@@ -69,7 +69,7 @@ to give the container direct access to the network stack of the host.
 See the [run command](/reference/cli/docker/container/run/) for more details on
 publish options used with `docker run`.
 
-All inbound connections pass through the Docker Desktop backend process (`com.docker.backend` (Mac), `com.docker.backend` (Windows), or `qemu` (Linux), which handles port forwarding into the VM.
+All inbound connections pass through the Docker Desktop backend process (`com.docker.backend` (Mac), `com.docker.backend.exe` (Windows), or `qemu` (Linux)), which handles port forwarding into the VM.
 For more details, see [How exposed ports work](/manuals/desktop/features/networking/_index.md#how-exposed-ports-work)
 
 ### Working with VPNs
