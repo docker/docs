@@ -125,6 +125,17 @@ For credentials, see
 Don't put secret values directly in `environment.variables` — they'd
 be visible inside the sandbox VM.
 
+> [!IMPORTANT]
+> The sandbox manages proxy settings for you. It sets `HTTP_PROXY`,
+> `HTTPS_PROXY`, `NO_PROXY`, and their lowercase equivalents automatically so
+> that traffic flows through its built-in forward proxy, which enforces
+> network policy and injects credentials. Leave these variables to the
+> sandbox — setting them in a kit points traffic away from the forward proxy,
+> so it can no longer apply network policy or inject credentials, and those
+> requests typically fail to connect. To send sandbox traffic through an
+> upstream corporate proxy, configure it on the host. See
+> [Upstream proxy](../architecture.md#upstream-proxy).
+
 ### Control network access
 
 Network rules define which domains the sandbox can reach or block. Kit
