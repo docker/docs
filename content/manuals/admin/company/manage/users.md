@@ -143,5 +143,4 @@ see the [Bulk create invites](https://docs.docker.com/reference/api/hub/latest/#
 
 ## Manage members on a team
 
-Use Docker Hub to add a member to a team or remove a member from a team. For
-more details, see [Manage members](../../organization/manage/members.md#manage-members-on-a-team).
+Teams exist at the organization level, not the company level. After inviting members to an organization, you can add them to teams within that organization using Docker Hub. For more details, see [Manage members](../../organization/manage/members.md#manage-members-on-a-team).
