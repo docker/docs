@@ -9,20 +9,11 @@ weight: 35
 
 {{< summary-bar feature_name="OIDC connections" >}}
 
-OIDC connections create a trust relationship between GitHub and Docker so you don't have to maintain long-lived credentials. When you create an OIDC connection, Docker and GitHub exchange short-lived tokens that can grant fine-grained access to your Docker resources.
-
-OIDC connections are available for organizations with Docker Team or Business subscriptions.
-
-## Prerequisites
-
-To create an OIDC connection, you need:
-
-- A Docker Core subscription
-- Organization ownership
+OIDC connections create a trust relationship between Docker and a trusted third-party so you don't have to maintain long-lived credentials. When you create an OIDC connection, Docker exchanges short-lived tokens with another vendor that can grant fine-grained access to your Docker resources.
 
 ## How OIDC connections work
 
-OIDC connections mirror implementations of the OIDC standard. Establishing the trust relationship between GitHub and Docker involves creating the connection, configuring the workflow, and testing.
+OIDC connections mirror implementations of the OIDC standard. Establishing a trust relationship involves creating the connection, configuring a workflow, and testing. For example, a trust relationship between Docker and GitHub follows these steps:
 
 - GitHub issues a JWT ID token for the workflow run.
 - During the authentication process, Docker then:
@@ -42,5 +33,5 @@ While OATs govern access to your Docker resources through organization membershi
 
 ## What's next
 
-- [Create an OIDC connection](/manuals/enterprise/security/oidc-federation/create-manage.md)
-- [OIDC connections rulesets](/manuals/enterprise/security/oidc-federation/rulesets-claims.md)
+- [Create an OIDC connection](/manuals/enterprise/security/oidc-connections/create-manage.md)
+- [OIDC connections rulesets](/manuals/enterprise/security/oidc-connections/rulesets-claims.md)

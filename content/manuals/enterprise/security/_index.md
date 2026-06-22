@@ -34,7 +34,7 @@ grid_admins:
     icon: finger-print
   - title: OIDC connections
     description: Configure OpenID Connect connections for automated workload authentication.
-    link: /enterprise/security/oidc-federation/
+    link: /enterprise/security/oidc-connections/
     icon: link
   - title: Domain management
     description: Identify uncaptured users in your organization.

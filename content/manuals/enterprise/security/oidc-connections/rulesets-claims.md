@@ -62,11 +62,11 @@ You can use wildcards to match across repositories or branches:
 
 ## Resources
 
-Resources define what Docker resources a workflow can access when a ruleset matches. You specify resources per ruleset, alongside the scopes that determine the level of access granted.
+Resources define the Docker resources a workflow can access when a ruleset matches. You specify resources per ruleset, alongside the scopes that determine the level of access granted.
 
 Docker Hub repositories are supported resources.
 
 ## What's next
 
-- Learn about [OIDC connections](/manuals/enterprise/security/oidc-federation/_index.md)
-- [Create or manage OIDC connections](/manuals/enterprise/security/oidc-federation/create-manage.md)
+- Learn about [OIDC connections](/manuals/enterprise/security/oidc-connections/_index.md)
+- [Create or manage OIDC connections](/manuals/enterprise/security/oidc-connections/create-manage.md)

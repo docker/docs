@@ -19,7 +19,7 @@ You can create new OIDC connections or manage existing ones from the Admin Conso
 1. In **Security**, select **OIDC connections**.
 1. Select **Create OIDC connection** to go to the creation page. Fill in the OIDC connection form.
    - You must provide rulesets and subject claims. Other values are optional.
-   - To learn about rulesets, subject claims, and resources, see [OIDC connections rulesets and subject claims](/manuals/enterprise/security/oidc-federation/rulesets-claims.md).
+   - To learn about rulesets, subject claims, and resources, see [OIDC connections rulesets and subject claims](/manuals/enterprise/security/oidc-connections/rulesets-claims.md).
 1. Select **Create connection**.
 1. Copy your OIDC connection ID.
 
@@ -109,4 +109,4 @@ Unlike deactivation, deleting an OIDC connection is permanent. Any workflow whos
 ## What's next
 
 - To update your OIDC connection, see [Manage OIDC connections](#manage-oidc-connections)
-- For reference documentation about OIDC connections rulesets and behaviors, see [OIDC connections rulesets and subject claims](/manuals/enterprise/security/oidc-federation/rulesets-claims.md)
+- For reference documentation about OIDC connections rulesets and behaviors, see [OIDC connections rulesets and subject claims](/manuals/enterprise/security/oidc-connections/rulesets-claims.md)
