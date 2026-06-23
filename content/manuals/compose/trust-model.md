@@ -85,8 +85,15 @@ implications when set by an untrusted author:
 | `pid: host` | Shares the host PID namespace |
 | `devices` | Exposes host devices to the container |
 | `image` | Pulls and runs an arbitrary container image |
+| `env_file`, `label_file`, `secrets`/`configs` (`file:`), `include`, `extends` | Read files from the host, directly or through symlinks resolved from a remote checkout, and can surface their contents during configuration loading |
 
 When in doubt, look up the effect of any unfamiliar field before running the configuration.
+
+Like `volumes`, the file-reference fields read any file the user running Compose
+can access, including through symlinks resolved from a remote checkout, and their
+contents can appear in `docker compose config` output before any container starts.
+Compose does not confine reads to the project directory. Treat a Compose project as
+code you run, not data you inspect.
 
 ### CI/CD environments
 
