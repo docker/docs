@@ -73,8 +73,10 @@ Here's an example script that creates the `docker-users` group and adds the curr
 $Group = "docker-users"
 $CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
 
-# Create the group
-New-LocalGroup -Name $Group
+# Create the group only if it doesn't already exist
+if (-not (Get-LocalGroup -Name $Group -ErrorAction SilentlyContinue)) {
+    New-LocalGroup -Name $Group
+}
 
 # Add the user to the group
 Add-LocalGroupMember -Group $Group -Member $CurrentUser
