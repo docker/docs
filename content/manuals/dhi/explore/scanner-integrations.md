@@ -5,7 +5,7 @@ keywords: scanner integration, vulnerability scanning, docker scout, trivy, gryp
 weight: 40
 ---
 
-Docker Hardened Images work with various vulnerability scanners. However, to get
+Docker Hardened Images (DHI) work with various vulnerability scanners. However, to get
 accurate results that reflect the actual security posture of these images, your
 scanner needs to understand the VEX (Vulnerability Exploitability eXchange)
 attestations included with each image.
