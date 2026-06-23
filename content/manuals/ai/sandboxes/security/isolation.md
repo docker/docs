@@ -169,7 +169,7 @@ How the boundary is enforced:
   untracked files and files excluded by `.gitignore`. Nothing the agent
   does inside the VM can write back through that mount, but all files
   under the Git root are readable inside the sandbox. This includes
-  credential files not tracked by Git, such as `.envrc.private`. Store
+  credential files not tracked by Git, such as `.env`. Store
   secrets outside your working directory or use
   [credential isolation](credentials.md) instead.
 - The agent works on a private clone that lives inside the sandbox. The
