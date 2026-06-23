@@ -99,9 +99,10 @@ same time, they may step on each other's changes — use
 
 ### Clone mode
 
-In clone mode, the sandbox becomes a Git remote on your host. The agent
-commits inside the sandbox; you pull its work back out by fetching from
-that remote.
+In clone mode, the sandbox becomes a Git remote on your host. Your entire
+working directory, including untracked files and files excluded by `.gitignore`, is mounted
+read-only inside the sandbox. The agent commits inside the sandbox; you pull its work back
+out by fetching from that remote.
 
 > [!NOTE]
 > Clone mode was introduced in `sbx` v0.31.0 and replaces the `--branch`
