@@ -1,7 +1,7 @@
 ---
 title: Manage company members
 linkTitle: Users
-description: Learn how to manage company members in the Docker Admin Console.
+description: Learn how to invite and manage members in the organizations within your company using the Docker Admin Console.
 keywords: company, company members, members, admin, Admin Console, member management, organization management, company management, bulk invite, resend invites
 aliases:
   - /admin/company/users/
@@ -9,7 +9,7 @@ aliases:
 
 {{< summary-bar feature_name="Company" >}}
 
-Company owners can invite new members to an organization via Docker ID,
+Add a user to your company by inviting them to be a member of a company organization. Company owners can invite new members to an organization via Docker ID,
 email address, or in bulk with a CSV file containing email
 addresses.
 
@@ -143,5 +143,4 @@ see the [Bulk create invites](https://docs.docker.com/reference/api/hub/latest/#
 
 ## Manage members on a team
 
-Use Docker Hub to add a member to a team or remove a member from a team. For
-more details, see [Manage members](../../organization/manage/members.md#manage-members-on-a-team).
+Teams exist at the organization level, not the company level. After inviting members to an organization, you can add them to teams within that organization using Docker Hub. For more details, see [Manage members](../../organization/manage/members.md#manage-members-on-a-team).

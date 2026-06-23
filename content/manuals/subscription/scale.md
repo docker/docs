@@ -76,7 +76,7 @@ organization without consuming a Docker Core seat. You can purchase licenses for
 Once you've purchased licenses for your organization, you can [manage license assignment](/manuals/admin/organization/manage/manage-licenses.md) from the **Members** page in Docker Home.
 
 > [!TIP]
-> To purchase licenses for AI Governance and Docker Offload, <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_subscription_scale_licenses" class="link" rel="noopener">contact sales</a>. 
+> To purchase licenses for AI Governance and Docker Offload, <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_subscription_scale_licenses" class="link" rel="noopener">contact sales</a>.
 
 ### AI Governance licenses
 
@@ -97,9 +97,9 @@ Docker Offload lets developers offload building and running containers to the cl
 
 ## Add minutes
 
-Minutes don't roll over. Base subscription minutes reset each billing period and don't accumulate. Additional purchased minutes expire at the end of your subscription period.
+Base subscription minutes reset each month and don't accumulate. Additional purchased minutes persist until the end of your subscription period.
 
-For example, with an annual Docker Team subscription (500 included minutes), if you purchase 500 additional minutes, only the additional 500 minutes roll over until your annual renewal.
+For example, with an annual Docker Team subscription (500 included minutes), if you purchase 500 additional minutes, the 500 base minutes reset monthly while the 500 additional minutes remain available until your annual renewal.
 
 ### Docker Build Cloud build minutes
 
