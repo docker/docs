@@ -168,7 +168,10 @@ How the boundary is enforced:
   read-only. The mount covers your entire working directory, including
   untracked files and files excluded by `.gitignore`. Nothing the agent
   does inside the VM can write back through that mount, but all files
-  under the Git root are readable inside the sandbox.
+  under the Git root are readable inside the sandbox. This includes
+  credential files not tracked by Git, such as `.envrc.private`. Store
+  secrets outside your working directory or use
+  [credential isolation](credentials.md) instead.
 - The agent works on a private clone that lives inside the sandbox. The
   clone has its own index, its own refs, and its own working tree. Writes
   to the clone never reach your host.
@@ -190,10 +193,6 @@ The practical guarantees:
 - Credentials, signing keys, and any settings in your repository's
   `.git/config` stay on the host. The agent's clone has its own
   independent configuration.
-- Credential files in your working directory that aren't tracked by Git,
-  including those excluded by `.gitignore` such as `.envrc.private`, are
-  readable inside the sandbox. Store secrets outside your working
-  directory or use [credential isolation](credentials.md) instead.
 
 Use clone mode whenever you want a strong boundary between the agent's
 Git activity and your host repository — for example when running an
