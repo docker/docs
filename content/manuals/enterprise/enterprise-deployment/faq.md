@@ -78,8 +78,10 @@ if (-not (Get-LocalGroup -Name $Group -ErrorAction SilentlyContinue)) {
     New-LocalGroup -Name $Group
 }
 
-# Add the user to the group
-Add-LocalGroupMember -Group $Group -Member $CurrentUser
+# Add the user to the group only if they aren't already a member
+if (-not (Get-LocalGroupMember -Group $Group -Member $CurrentUser -ErrorAction SilentlyContinue)) {
+    Add-LocalGroupMember -Group $Group -Member $CurrentUser
+}
 ```
 
 > [!NOTE]
