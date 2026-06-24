@@ -13,7 +13,7 @@ Synchronized file shares is an alternative file sharing mechanism that provides 
 
 Synchronized file shares is ideal for developers who: 
 - Have large repositories or monorepos with 100 000 files or more totaling hundreds of megabytes or even gigabytes.
-- Are using virtual filesystems, such as VirtioFS, gRPC FUSE, and osxfs, which are no longer scaling well with their codebases. 
+- Are using virtual filesystems, such as VirtioFS and gRPC FUSE which are no longer scaling well with their codebases. 
 - Regularly encounter performance limitations.
 - Don't want to worry about file ownership or spend time resolving conflicting file-ownership information when modifying multiple containers.
 
