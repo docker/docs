@@ -9,11 +9,11 @@ go 1.26.0
 // Make sure to add an entry in the "tools" section when adding a new repository.
 require (
 	github.com/docker/buildx v0.35.0
-	github.com/docker/cli v29.5.3+incompatible
-	github.com/docker/compose/v5 v5.1.4
+	github.com/docker/cli v29.6.0+incompatible
+	github.com/docker/compose/v5 v5.2.0
 	github.com/docker/model-runner v1.1.36
 	github.com/moby/buildkit v0.31.0
-	github.com/moby/moby/api v1.54.2
+	github.com/moby/moby/api v1.55.0
 )
 
 tool (
