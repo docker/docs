@@ -42,9 +42,8 @@ Alternatively, export the `ANTHROPIC_API_KEY` environment variable in your
 shell before running the sandbox. See
 [Credentials](../security/credentials.md) for details on both methods.
 
-**Claude subscription**: If no API key is set, Claude Code prompts you to
-authenticate interactively using OAuth. The proxy handles the OAuth flow, so
-credentials aren't stored inside the sandbox.
+**Claude subscription**: If no API key is set, use the `/login` command inside 
+Claude Code to authenticate via OAuth.
 
 ## Configuration
 
