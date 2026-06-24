@@ -40,10 +40,19 @@ suitable for automated report retrieval workflows. Personal Access Tokens
 
    ```bash
    ORG="<your-org-name>"
-   TOKEN="<your-organization-access-token>"
+   OAT="<your-organization-access-token>"
    ```
 
-3. Test the token:
+3. Exchange the OAT for a JWT bearer token:
+
+   ```bash
+   TOKEN=$(curl -s https://hub.docker.com/v2/auth/token \
+     -H 'Content-Type: application/json' \
+     -d "{\"identifier\":\"$ORG\",\"secret\":\"$OAT\"}" \
+     | jq -r '.access_token')
+   ```
+
+4. Test the token:
 
    ```console
    $ curl -s "https://api.docker.com/enterprise-data/v1/orgs/$ORG/reports" \
@@ -51,7 +60,8 @@ suitable for automated report retrieval workflows. Personal Access Tokens
    ```
 
 You use this `TOKEN` value in the `Authorization: Bearer` header for all
-subsequent API calls.
+subsequent API calls. The JWT expires after a period, so re-run step 3 to
+refresh it.
 
 ## List available report types
 
