@@ -33,8 +33,12 @@ org-scoped tokens designed for machine-to-machine access, making them
 suitable for automated report retrieval workflows. Personal Access Tokens
 (PATs) are not supported.
 
-1. [Create an organization access token](/enterprise/security/access-tokens/)
-   and select the **Report Read** scope under Organization permissions.
+1. Create an organization access token with the **Report Read** scope:
+   - **Via the UI**: In the [Docker Admin Console](https://app.docker.com), go to
+     **Admin Console > Security > Access tokens**, create a new token, expand the
+     **Organization** section under Resources, and select **Report Read**.
+   - **Via the API**: See [Organization access tokens](/enterprise/security/access-tokens/)
+     for programmatic creation.
 
 2. Set your variables:
 
