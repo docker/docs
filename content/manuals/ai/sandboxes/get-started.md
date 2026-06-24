@@ -38,14 +38,14 @@ and cleaning up.
 {{< tab name="Linux (Ubuntu)" >}}
 
 - Ubuntu 24.04 or later
-- 64-bit Intel or AMD (x86_64)
+- 64-bit Intel or AMD (x86_64) or 64-bit Arm (aarch64)
 - KVM hardware virtualization supported and enabled by the CPU. If you're
   running inside a VM, nested virtualization must be turned on. Verify that KVM
   is available:
   ```console
   $ lsmod | grep kvm
   ```
-  A working setup shows `kvm_intel` or `kvm_amd` in the output. If the output
+  A working setup shows `kvm_intel`, `kvm_amd`, `kvm_arm64`, or `kvm` in the output. If the output
   is empty, run `kvm-ok` for diagnostics. If KVM is unavailable, `sbx` will
   not start.
 - Your user in the `kvm` group:
