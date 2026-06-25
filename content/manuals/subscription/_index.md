@@ -1,7 +1,7 @@
 ---
 title: Subscription overview
 linkTitle: Subscription
-description: Learn how Docker subscriptions work, including the types of plans available and how they apply to personal and organization accounts.
+description: Learn about Docker plans, like how to subscribe to product-based plans and how they apply to personal and organization accounts.
 keywords:
   docker subscription, pricing, billing, subscription types, subscription
   plans, docker hardened images, gordon, cloud sandboxes, subscription
@@ -23,7 +23,7 @@ grid_subscriptions:
     description: Add plans to your Docker account that fit your needs.
     link: /subscription/scale/
     icon: chart-bar
-  - title: Upgrade your Docker individual or organization plan
+  - title: Upgrade Docker plans for accounts
     description: Learn how to upgrade or downgrade your Docker plan.
     link: /subscription/change/
     icon: arrow-up-circle
