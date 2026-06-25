@@ -36,9 +36,6 @@ grid_subscriptions:
     link: /subscription/faq/
     icon: question-mark-circle
 aliases:
-  - /subscription/scale/
-  - /subscription/change/
-  - /subscription/details/
   - /docker-hub/billing/
   - /docker-hub/billing/faq/
 ---
@@ -76,12 +73,9 @@ Depending on the plan, you can self-serve topping up your account or you may nee
 
 ## Support add-ons
 
-Standard support is included with paid plans and scales with plan tier.
+Standard support is included with paid plans and scales with plan tier. Docker also offers Premium Support and TAM (technical advisory manager) service as an add-on for Docker Business and DHI customers, which provides 24×7 response, priority SLAs, and expert guidance.
 
-- Docker also offers premium support as an optional add-on for Docker Business and DHI customers.
-- Premium support provides 24/7 response, priority SLAs, and a dedicated technical advisory manager.
-
-To learn more about support add-ons, see [Get support for Docker products](/support/).
+To learn more, see [Docker pricing](https://www.docker.com/pricing/).
 
 ## What's next
 
