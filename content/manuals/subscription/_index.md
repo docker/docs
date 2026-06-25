@@ -40,19 +40,19 @@ aliases:
   - /docker-hub/billing/faq/
 ---
 
-Docker offers several plans ranging from free to paid tiers, including add-on usage top-ups. When you upgrade a plan, you expand your usage entitlements and feature sets for Docker products.
+Docker offers several plans ranging from free to paid plans, including add-on usage top-ups. When you upgrade a plan, you expand your usage entitlements and feature sets for Docker products.
 
 ## Docker plans
 
 You can subscribe to plans for individual or organization accounts, or plans for specific products. The following table summarizes the available plans.
 
-| Plans                                          | Billing model                                          | Types                                     |
-| ---------------------------------------------- | ------------------------------------------------------ | ----------------------------------------- |
-| [Docker Individual](/accounts/)                | Flat-rate tiers for personal accounts                  | Docker Personal, Docker Pro               |
-| [Docker Organization](/admin/)                 | Flat-rate tiers for organization accounts              | Docker Team, Docker Business              |
-| [Docker Hardened Images (DHI)](/dhi/)          | Tiered access to hardened container image repositories | DHI Community, DHI Select, DHI Enterprise |
-| [Gordon](/ai/gordon/)                          | Prepaid usage tiers added to a base plan               | Gordon Plus, Gordon Max, Gordon Ultra     |
-| [AI Governance](/ai/sandboxes/governance/org/) | Purchase set amount of licenses                        | AI Governance                             |
+| Plans                                          | Billing model                                             | Types                                     |
+| ---------------------------------------------- | --------------------------------------------------------- | ----------------------------------------- |
+| [Docker Individual](/accounts/)                | Flat-rate plans for personal accounts                     | Docker Personal, Docker Pro               |
+| [Docker Organization](/admin/)                 | Flat-rate plans for organization accounts                 | Docker Team, Docker Business              |
+| [Docker Hardened Images (DHI)](/dhi/)          | Graduated security features for hardened container images | DHI Community, DHI Select, DHI Enterprise |
+| [Gordon](/ai/gordon/)                          | Prepaid usage for the Gordon AI agent                     | Gordon Plus, Gordon Max, Gordon Ultra     |
+| [AI Governance](/ai/sandboxes/governance/org/) | Purchase set amount of licenses                           | AI Governance                             |
 
 Docker plans for accounts (like individual or organizations) provide a foundation for most users. Some product plans may require a Docker plan for accounts while some products may not need an upgraded Docker plan at all.
 
@@ -73,7 +73,7 @@ Depending on the plan, you can top up your account through self-service or by co
 
 ## Support add-ons
 
-Standard support is included with paid plans and scales with plan tier. Docker also offers Premium Support and a technical advisory manager (TAM) service as an add-on for Docker Business and DHI customers. The add-on includes 24×7 response, priority SLAs, and expert guidance.
+Standard support is included with paid plans and scales with your plan. Docker also offers Premium Support and a technical advisory manager (TAM) service as an add-on for Docker Business and DHI customers. The add-on includes 24×7 response, priority SLAs, and expert guidance.
 
 To learn more, see [Docker pricing](https://www.docker.com/pricing/).
 
