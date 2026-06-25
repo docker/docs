@@ -44,7 +44,7 @@ Docker offers several Docker plans that range from base, free plans to a variety
 
 ## Docker plans
 
-You can subscribe to plans that upgrade your individual and organization accounts, or subscribe to plans for specific products. The table below summarizes the available plans.
+You can subscribe to plans for individual or organization accounts, or plans for specific products. The following table summarizes the available plans.
 
 | Plans                                          | Billing model                                          | Types                                     |
 | ---------------------------------------------- | ------------------------------------------------------ | ----------------------------------------- |
@@ -69,11 +69,11 @@ Plans come with usage entitlements that can be granularly extended without upgra
 | Minutes      | Cloud build capacity, sold in blocks and consumed within the billing period.          | Docker Build Cloud            |
 | Repositories | Additional container repositories covered by security scanning and analysis features. | DHI                           |
 
-Depending on the plan, you can self-serve topping up your account or you may need to contact sales.
+Depending on the plan, you can top up your account through self-service or by contacting sales.
 
 ## Support add-ons
 
-Standard support is included with paid plans and scales with plan tier. Docker also offers Premium Support and TAM (technical advisory manager) service as an add-on for Docker Business and DHI customers, which provides 24×7 response, priority SLAs, and expert guidance.
+Standard support is included with paid plans and scales with plan tier. Docker also offers Premium Support and a technical advisory manager (TAM) service as an add-on for Docker Business and DHI customers. The add-on includes 24×7 response, priority SLAs, and expert guidance.
 
 To learn more, see [Docker pricing](https://www.docker.com/pricing/).
 
