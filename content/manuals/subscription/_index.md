@@ -40,7 +40,7 @@ aliases:
   - /docker-hub/billing/faq/
 ---
 
-Docker offers several Docker plans that range from base, free plans to a variety of paid tiers. When you upgrade a plan, you expand your usage entitlements and feature sets for Docker products. This page breaks down the different Docker plans you can subscribe to and how to top up certain plans.
+Docker offers several plans ranging from free to paid tiers, including add-on usage top-ups. When you upgrade a plan, you expand your usage entitlements and feature sets for Docker products.
 
 ## Docker plans
 
