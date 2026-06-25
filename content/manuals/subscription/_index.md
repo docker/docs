@@ -15,16 +15,16 @@ grid_subscriptions:
     description: Visit the pricing page to see what's included in different Docker subscriptions.
     link: "https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscription"
     icon: magnifying-glass
-  - title: Set up your subscription
+  - title: Set up your plan
     description: Get started setting up a personal or organization subscription.
     link: /subscription/setup/
     icon: shopping-cart
   - title: Scale your subscription
-    description: Scale your subscription to fit your needs.
+    description: Add plans to your Docker account that fit your needs.
     link: /subscription/scale/
     icon: chart-bar
-  - title: Change your subscription
-    description: Learn how to upgrade or downgrade your subscription.
+  - title: Upgrade your Docker individual or organization plan
+    description: Learn how to upgrade or downgrade your Docker plan.
     link: /subscription/change/
     icon: arrow-up-circle
   - title: Docker Desktop license agreement
@@ -43,33 +43,36 @@ aliases:
   - /docker-hub/billing/faq/
 ---
 
-After creating a Docker account, you can subscribe to a number of Docker plans. Docker plans may include different tier levels, ranging from basic tiers to a selection of paid tiers. Each tier within a plan upgrades your usage entitlements and feature sets.
+Docker offers several Docker plans that range from base, free plans to a variety of paid tiers. When you upgrade a plan, you expand your usage entitlements and feature sets for Docker products. This page breaks down the different Docker plans you can subscribe to and how to top up certain plans.
 
-This page breaks down the kinds of Docker plans you can subscribe to, with explanations about usage within each tier.
+## Docker plans
 
-## Docker plan types
+You can subscribe to plans that upgrade your individual and organization accounts, or subscribe to plans for specific products. The table below summarizes the current available plans.
 
-There are two types of Docker plans. Docker Core upgrades your basic personal or organization accounts to higher tiers with additional feature sets. Product-based plans are subscription types tied to discrete products in Docker's product catalog.
+| Plans                                      | Billing model                                          | Types                                     |
+| ------------------------------------------ | ------------------------------------------------------ | ----------------------------------------- |
+| [Docker Individual](/accounts/)            | Flat-rate tiers for personal accounts                  | Docker Personal, Docker Pro               |
+| [Docker Organization](/admin/)             | Flat-rate tiers for organization accounts              | Docker Team, Docker Business              |
+| [Docker Hardened Images (DHI)](/dhi/)      | Tiered access to hardened container image repositories | DHI Community, DHI Select, DHI Enterprise |
+| [Gordon](/ai/gordon/)                      | Prepaid usage tiers added to a base plan               | Gordon Plus, Gordon Max, Gordon Ultra     |
+| [AI Governance](/ai/sandboxes/governance/) | Purchase set amount of licenses                        | AI Governance                             |
 
-| Subscription type | Billing model                                    | Examples                                                                        |
-| ----------------- | ------------------------------------------------ | ------------------------------------------------------------------------------- |
-| Docker Core       | Flat-rate tiers tied to account type             | Docker Pro (Personal)<br>Docker Team and Docker Business (Organization)         |
-| Product-based     | Prepaid entitlements added on top of a base plan | Gordon (Extends monthly usage limits)<br>DHI (Security and compliance features) |
+Docker plans for accounts (like individual or organizations) provide a foundation for most users. Some product plans may require a Docker plan for accounts while some products may not need an upgraded Docker plan at all.
 
-Subscription types can be combined. A Docker Core plan provides the foundation for
-most accounts, with prepaid or per-unit subscriptions added on top as needed. Depending on the product, you may not need a Docker Core plan at all.
+To subscribe to a plan, you can self-serve through **Billing** in [Docker Home](https://app.docker.com), or contact sales. See [Scale your subscription](/subscription/scale/) to find out which applies to the plan you want.
 
 ## Top up your plan
 
-Most subscriptions include a fixed amount of usage. You can purchase additional
-units to extend usage without changing your plan tier.
+Plans come with usage entitlements that can be granularly extended without upgrading to a different plan.
 
-| Unit         | Description                                                                             | Examples           |
-| ------------ | --------------------------------------------------------------------------------------- | ------------------ |
-| Seats        | Each seat extends the subscription entitlements to one more member.                     | Docker Core        |
-| Licenses     | Access to specific products or product tiers, purchased separately from your core plan. | AI Governance      |
-| Minutes      | Cloud build capacity, sold in blocks and consumed within the billing period.            | Docker Build Cloud |
-| Repositories | Additional container repositories covered by security scanning and analysis features.   | DHI                |
+| Unit         | Description                                                                           | Examples                      |
+| ------------ | ------------------------------------------------------------------------------------- | ----------------------------- |
+| Seats        | Each seat extends entitlements to one more member.                                    | Docker Team, Docker Business  |
+| Licenses     | Access to specific products or features.                                              | AI Governance, Docker Offload |
+| Minutes      | Cloud build capacity, sold in blocks and consumed within the billing period.          | Docker Build Cloud            |
+| Repositories | Additional container repositories covered by security scanning and analysis features. | DHI                           |
+
+Depending on the plan, you can self-serve topping up your account or you may need to contact sales.
 
 ## Support add-ons
 
@@ -77,6 +80,8 @@ Standard support is included with paid plans and scales with plan tier.
 
 - Docker also offers premium support as an optional add-on for Docker Business and DHI customers.
 - Premium support provides 24/7 response, priority SLAs, and a dedicated technical advisory manager.
+
+To learn more about support add-ons, see [Get support for Docker products](/support/).
 
 ## What's next
 
