@@ -24,14 +24,15 @@ VEX support, see [Scan Docker Hardened Images](/manuals/dhi/how-to/scan.md).
 ## VEX status reference
 
 Each VEX statement includes a `status` field that records Docker's
-exploitability assessment for a given CVE and image. DHI uses three of the four
-OpenVEX status values.
+exploitability assessment for a given CVE and image. OpenVEX defines four
+status values. DHI uses three of them:
 
 | Status | Meaning |
 |---|---|
 | `not_affected` | The CVE was reported against a package in the image, but Docker has assessed it is not exploitable as shipped |
 | `under_investigation` | Docker is aware of the CVE and is actively evaluating whether it affects the image |
 | `affected` | Docker has confirmed the CVE is exploitable in the image and a fix is not yet available |
+| `fixed` | The vulnerability has been remediated in this version. DHI does not use this status (see below). |
 
 You can view the VEX statements for any DHI using Docker Scout. See [Scan Docker
 Hardened Images](/manuals/dhi/how-to/scan.md).
