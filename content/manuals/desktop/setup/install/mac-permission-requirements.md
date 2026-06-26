@@ -98,8 +98,8 @@ Desktop backend process (`com.docker.backend`) uses an internal helper socket
 helper processes as part of running Docker Desktop.
 
 Unlike the privileged helper, this socket does not run as `root` and grants no
-elevated privileges: it is owned by, and accessible only to, the same macOS user
-running Docker Desktop, and it is contained in Docker Desktop's application container.
+elevated privileges. It is owned by, and accessible only to, the same macOS user
+running Docker Desktop, and is contained in Docker Desktop's application container.
 
 ## Containers running as root within the Linux VM
 
