@@ -342,7 +342,7 @@ chunking:
 This keeps functions intact. The `code_aware` setting uses tree-sitter to
 respect code structure.
 
-> [!NOTE] <!-- TODO: update this when we add support for more languages. -->
+> [!NOTE]
 > Currently only Go is supported; support for additional languages is planned.
 
 For short, focused content like API references:

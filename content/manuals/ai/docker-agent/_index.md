@@ -158,10 +158,8 @@ it doesn't exist yet.
   [tools in MCP clients](./integrations/mcp.md)
 - Browse example agent configurations in the [Docker Agent
   repository](https://github.com/docker/docker-agent/tree/main/examples)
-- Use `docker agent new` to generate agent teams with AI <!-- TODO: link to some page
-  where we explain this, probably a CLI reference? -->
+- Use `docker agent new` to generate agent teams with AI 
 - Connect agents to external tools via the [Docker MCP
   Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)
 - Read the full [configuration
   reference](https://github.com/docker/docker-agent?tab=readme-ov-file#-configuration-reference)
-  <!-- TODO: move to this site/repo -->
