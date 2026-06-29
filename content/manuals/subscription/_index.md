@@ -40,7 +40,7 @@ aliases:
   - /docker-hub/billing/faq/
 ---
 
-Docker offers several plans ranging from free to paid plans, including add-on usage top-ups. When you upgrade a plan, you expand your usage entitlements and feature sets for Docker products.
+You can subscribe to several Docker plans that range from free to paid plans. When you upgrade a plan, you expand your usage entitlements and feature sets for Docker products. Docker plans also let you top up some plans, extending usage to a particular capability without an upgrade. 
 
 ## Docker plans
 
@@ -54,13 +54,13 @@ You can subscribe to plans for individual or organization accounts, or plans for
 | [Gordon](/ai/gordon/)                          | Prepaid usage for the Gordon AI agent                     | Gordon Plus, Gordon Max, Gordon Ultra     |
 | [AI Governance](/ai/sandboxes/governance/org/) | Purchase set amount of licenses                           | AI Governance                             |
 
-Docker plans for accounts (like individual or organizations) provide a foundation for most users. Some product plans may require a Docker plan for accounts while some products may not need an upgraded Docker plan at all.
+Docker plans that upgrade your account (Docker Pro or Docker Team and Business) can provide a foundation for most use cases. Some product plans may require an upgraded Docker account while other product plans let you subscribe without an upgraded account. To learn more, see [Scale your subscription](/manuals/subscription/scale.md). 
 
 To subscribe to a plan, you can self-serve through **Billing** in [Docker Home](https://app.docker.com), or contact sales. See [Scale your subscription](/subscription/scale/) to find out which applies to the plan you want.
 
 ## Top up your plan
 
-Plans come with usage entitlements that can be granularly extended without upgrading to a different plan.
+Plans come with usage entitlements that can be extended without upgrading to a different plan.
 
 | Unit         | Description                                                                           | Examples                      |
 | ------------ | ------------------------------------------------------------------------------------- | ----------------------------- |
@@ -73,7 +73,7 @@ Depending on the plan, you can top up your account through self-service or by co
 
 ## Support add-ons
 
-Standard support is included with paid plans and scales with your plan. Docker also offers Premium Support and a technical advisory manager (TAM) service as an add-on for Docker Business and DHI customers. The add-on includes 24×7 response, priority SLAs, and expert guidance.
+Standard support is included with paid plans and scales with upgrades. Docker also offers Premium Support and a technical advisory manager (TAM) service as an add-on for Docker Business and DHI customers. The add-on includes 24×7 response, priority SLAs, and expert guidance.
 
 To learn more, see [Docker pricing](https://www.docker.com/pricing/).
 
