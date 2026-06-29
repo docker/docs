@@ -24,7 +24,7 @@ grid:
     icon: /icons/gordon.svg
   - title: Docker Hardened Images (DHI)
     description: Hardened image repositories for organization accounts.
-    link: /subscription/plans/dhi-select/
+    link: /subscription/plans/dhi/
     icon: /icons/dhi.svg
   - title: AI Governance
     description: Licenses for organization-wide AI policy enforcement.

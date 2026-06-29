@@ -35,7 +35,7 @@ To change an existing plan, go to the **Plans** page:
 1. Sign in to [Docker Home](https://app.docker.com/), then choose your personal
    account or your organization account.
 1. Go to **Billing** to view the **Plans** page. This shows your active plans and payment details.
-   - The **Active plans** page contains information about tier, renewal cadence, and usage.
+   - The **Active plans** page contains information about plan type, renewal cadence, and usage.
    - To learn more about managing your billing details, see [Billing](/manuals/billing/_index.md).
    - To return to **Plans** after managing your billing details, select **Overview** in the left nav.
 1. View **Active plans** to upgrade, downgrade, or view your active plans.
@@ -44,7 +44,7 @@ To change an existing plan, go to the **Plans** page:
 > Billing behaviors vary from plan to plan. To learn more about upgrading or downgrading a specific plan, see the relevant
 > [product page](/manuals/subscription/plans/_index.md).
 
-### Sales-led products
+## Sales-led products
 
 Some products specify that they're sales-led. You must
 [contact sales](https://www.docker.com/pricing/contact-sales/) to opt in to

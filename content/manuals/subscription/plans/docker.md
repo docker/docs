@@ -33,6 +33,9 @@ Docker plans upgrade your account with higher usage limits, commercial
 licensing, and expanded feature sets. Plans are available for personal accounts
 and organization accounts.
 
+> [!TIP]
+> To subscribe to a Docker plan, see [Set up a new plan](../setup.md).
+
 ## Usage
 
 There are four Docker plans between individual and organization account types. Docker Personal and Docker Pro are for individual account types while Docker Team and Docker Business are for organization account types. 
@@ -51,9 +54,6 @@ This table summarizes usage limits and feature sets available with each Docker p
 | SSO / SCIM                   | —          | —          | —          | ✓         |
 | Registry & Image Access Mgmt | —          | —          | —          | ✓         |
 | Max users                    | 1          | 1          | 100        | Unlimited |
-
-To subscribe to a plan, see
-[Setup](../setup.md).
 
 > [!TIP]
 > If you're upgrading from a Personal plan to a Team plan
@@ -104,6 +104,12 @@ To purchase additional minutes:
 1. Verify your billing details, continue to payment, and complete checkout.
 
 Your additional minutes appear on the Build minutes page immediately. 
+
+### Docker Offload licenses
+
+[Docker Offload](/manuals/offload/_index.md) lets developers offload building and running containers to the cloud. Docker Offload licenses are available for Docker Team and Docker Business plans. Contact your Docker sales representative to purchase Docker Offload licenses. 
+
+Once assigned to your account, organization owners can [manage license assignments](/manuals/admin/organization/manage/manage-licenses.md) in the Admin Console.
 
 ### Testcontainers Cloud minutes
 
