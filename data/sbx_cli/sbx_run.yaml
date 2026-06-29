@@ -10,7 +10,9 @@ description: |-
     Pass agent arguments after the "--" separator. Additional workspaces can be
     provided as extra arguments. Append ":ro" to mount them read-only.
 
-    To create a sandbox without attaching, use "sbx create" instead.
+    To create a sandbox without attaching, use "sbx create" instead, or
+    pass --detached (-d) to print the sandbox ID and exit without opening an
+    interactive session.
 
     Available agents: claude, codex, copilot, cursor, docker-agent, droid, gemini, kiro, opencode, shell
 usage: sbx run [flags] [AGENT] [PATH...] [-- AGENT_ARGS...]
@@ -22,7 +24,7 @@ options:
     - name: cpus
       default_value: "0"
       usage: |
-        Number of CPUs to allocate to the sandbox (0 = auto: N-1 host CPUs, min 1)
+        Number of CPUs to allocate to the sandbox (0 = auto: all host CPUs)
     - name: help
       shorthand: h
       default_value: "false"

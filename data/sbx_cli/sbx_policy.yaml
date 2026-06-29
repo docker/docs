@@ -21,8 +21,8 @@ see_also:
     - sbx - Manage AI coding agent sandboxes.
     - sbx policy allow - Add an allow rule for sandboxes
     - sbx policy deny - Add a deny rule for sandboxes
+    - sbx policy init - Initialize the global network policy
     - sbx policy log - Show sandbox policy logs
     - sbx policy ls - List sandbox policy rules
     - sbx policy reset - Reset policies to defaults
     - sbx policy rm - Remove a policy rule
-    - sbx policy set-default - Set the default network policy
