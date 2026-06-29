@@ -71,12 +71,6 @@ Plans come with usage entitlements that can be extended without upgrading to a d
 
 Depending on the plan, you can top up your account through self-service or by contacting sales.
 
-## Support add-ons
-
-Standard support is included with paid plans and scales with upgrades. Docker also offers Premium Support and a technical advisory manager (TAM) service as an add-on for Docker Business and DHI customers. The add-on includes 24×7 response, priority SLAs, and expert guidance.
-
-To learn more, see [Docker pricing](https://www.docker.com/pricing/).
-
 ## What's next
 
 {{< grid items="grid_subscriptions" >}}
