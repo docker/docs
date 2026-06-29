@@ -1,0 +1,40 @@
+---
+title: AI Governance subscription
+linkTitle: AI Governance
+description:
+  Manage AI Governance and Docker Offload licenses for your organization,
+  including purchasing, assigning, and deactivating
+keywords:
+  ai governance, docker offload, licenses, organization licenses, ai policy,
+  docker sandbox, subscription management
+weight: 40
+aliases:
+  - /subscription/products/ai-governance/
+  - /subscription/ai-governance/
+---
+
+AI Governance lets organization owners enforce organization policies for members
+using supported Docker AI products. When you subscribe to an AI Governance plan, you receive a set of licenses (determined by you) that you can assign to organization members.
+
+## Usage
+
+You can assign AI Governance licenses to any organization member even if they don't occupy a Docker Core seat.
+
+- AI Governance licenses are separate from Docker Team or Business, so you can purchase AI Governance licenses without an existing subscription.
+- When a license-holding member uses a supported Docker AI product, the organization policy
+  overrides their local policy rules.
+- Members without an AI Governance license can still use Docker AI products.
+
+AI Governance supports Docker Sandbox.
+
+## Upgrade or downgrade
+
+To add
+additional AI Governance licenses or to downgrade,
+contact your Docker team representative.
+
+## What's next
+
+- Set up [AI Governance](/manuals/ai/sandboxes/governance/_index.md) policies
+- Manage [license assignment](/manuals/admin/organization/manage/manage-licenses.md) as an organization owner
+- Learn about AI Governance supported products, like [Docker Sandbox](/manuals/ai/sandboxes/_index.md)

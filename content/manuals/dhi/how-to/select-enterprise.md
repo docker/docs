@@ -20,7 +20,7 @@ To use this workflow, you need:
 - One of the following:
   - A DHI Select or Enterprise subscription. [Contact Docker
     sales](https://www.docker.com/products/hardened-images/#compare) to purchase DHI Enterprise
-    or [learn more about DHI Select](../../subscription/scale.md#add-dhi-select-to-organization-accounts).
+    or [learn more about DHI Select](../../subscription/plans/dhi-select.md).
   - An active DHI trial. [Start a free DHI
     trial](https://hub.docker.com/hardened-images/start-free-trial).
 - [Docker Desktop](../../desktop/release-notes.md) 4.65 or later to use the

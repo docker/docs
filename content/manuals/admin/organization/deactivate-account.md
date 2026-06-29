@@ -26,7 +26,7 @@ organization:
 
 - Download any images and tags you want to keep. Use `docker pull -a <image>`
   to pull all tags, or `docker pull <image>:<tag>` to pull a specific tag.
-- If you have an active Docker subscription, [downgrade it to a free subscription](../../subscription/change.md).
+- If you have an active Docker subscription, [downgrade it to a free subscription](../../subscription/plans/docker.md#deactivate-or-downgrade).
 - Remove all other members within the organization.
 - Unlink your [GitHub and Bitbucket accounts](../../docker-hub/repos/manage/builds/link-source.md#unlink-a-github-user-account).
 - For Business organizations, [remove your SSO connection](/manuals/enterprise/security/single-sign-on/manage.md#delete-a-connection).

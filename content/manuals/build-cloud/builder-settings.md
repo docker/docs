@@ -47,7 +47,7 @@ space is half of your subscription's total allocation.
 
 ### Get more build cache space
 
-To get more Build cache space, [upgrade your subscription](/manuals/subscription/scale.md).
+To get more Build cache space, [upgrade your subscription](/manuals/subscription/plans/docker.md#add-minutes).
 
 > [!TIP]
 >

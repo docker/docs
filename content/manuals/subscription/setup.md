@@ -1,34 +1,57 @@
 ---
-description: Set up Docker subscriptions for personal accounts and organizations
-keywords: subscription setup, docker pro, docker team, docker business, organization setup, gordon plan
-title: Set up your subscription
+title: Set up a new plan
 linkTitle: Setup
-weight: 20
+description:
+  Learn how to purchase a new Docker subscription from the product catalog and
+  how to upgrade or downgrade an existing subscription.
+keywords:
+  purchase subscription, buy docker subscription, product catalog, browse
+  products, upgrade subscription, downgrade subscription, docker billing
+weight: 10
 ---
 
-Docker subscriptions provide features and benefits for individual developers, teams, and enterprise businesses. This page explains how to set up subscriptions for personal accounts and organizations.
+You can add and manage your subscriptions from the billing portal in Docker home. Within the billing portal, you use the product catalog to view
+self-serve Docker products, while the plans page shows your active plans with options to upgrade or downgrade.
 
-Before you begin, make sure you have a [Docker ID](../accounts/create-account.md). To learn more about what's included in each tier, see [Docker Pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscriptionSetup).
+## Set up a new subscription
 
-## Personal accounts
+You can purchase Docker plans through the product catalog:
 
-When you [create your Docker ID](../accounts/create-account.md), you automatically get a Docker Personal subscription. This subscription includes essential Docker tools at no cost.
+1. Sign in to [Docker Home](https://app.docker.com/), then choose your personal
+   account or your organization account.
+1. Go to **Billing**.
+1. Select **Browse products**.
+   - The **Products** page is Docker's product catalog.
+   - It lists all products you can purchase via self-serve.
+   - Some products in the catalog may apply to personal accounts, organization accounts, or both.
+   - Each product tile uses an account-type flag so you know the difference.
+1. Select **View plans** to add a plan to your Docker subscription.
+1. Verify your billing details, continue to payment, and complete checkout.
 
-- To learn about Docker Pro subscriptions, [compare Docker Personal and Docker Pro](https://www.docker.com/pricing/).
-- To increase your Gordon usage allowance, see [Scale your subscription](/manuals/subscription/scale.md).
+## Upgrade or downgrade subscription
 
-## Organization accounts
+To change an existing subscription, go to the **Plans** page:
 
-You can subscribe a new or existing organization to Docker Team or Business subscriptions. Only organization owners can manage billing for the organization.
+1. Sign in to [Docker Home](https://app.docker.com/), then choose your personal
+   account or your organization account.
+1. Go to **Billing** to view the **Plans** page. This shows your active subscriptions and payment details.
+   - The **Active plans** page contains information about tier, renewal cadence, and usage.
+   - To learn more about managing your billing details, see [Billing](/manuals/billing/_index.md).
+   - To return to **Plans** after managing your billing details, select **Overview** in the left nav.
+1. View **Active plans** to upgrade, downgrade, or view your active subscriptions.
 
-1. [Create your Docker ID](../accounts/create-account.md) if you don't already have one.
-1. [Create your organization](../admin/organization/setup/orgs.md) or use an existing organization you own.
-1. Select **Billing** to view your current plans, then select **Browse products**.
-1. From the products catalog page, select **View plans** from the Docker tile.
-1. Choose a Docker Team or Business subscription for the organization.
-1. Fill in plan entitlements, verify your billing details, then continue to payment to complete checkout.
+> [!TIP]
+> Billing behaviors vary from plan to plan. To learn more about upgrading or downgrading a specific plan, see the relevant
+> [product page](/manuals/subscription/plans/_index.md).
+
+### Sales-led products
+
+Some products specify that they're sales-led. You must
+[contact sales](https://www.docker.com/pricing/contact-sales/) to opt in to
+these products.
 
 ## What's next
 
-- To upgrade an existing organization's subscription, see [Upgrade your subscription](./change.md#upgrade-your-subscription).
-- To scale your subscription with add-ons like DHI Select, Gordon plans, licenses, or usage minutes, see [Scale your subscription](/manuals/subscription/scale.md).
+- [Learn about available subscriptions](/manuals/subscription/plans/_index.md)
+- [Set up payment information](/manuals/billing/payment-method.md)
+- [View invoices](/manuals/billing/history.md)

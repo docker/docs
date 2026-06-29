@@ -9,7 +9,7 @@ weight: 30
 Licenses let you selectively choose which of your organization members have access to supported Docker products. Organization owners can oversee who on their team has active licenses, or configure licenses to assign automatically when members access supported Docker products. Like Docker Core seats, licenses can be configured on a per member basis. 
 
 > [!TIP]
-> To learn more about product licenses, Docker Core seats, and other Docker add-ons see [scale your subscription](/manuals/subscription/scale.md), 
+> To learn more about product licenses, Docker Core seats, and other Docker add-ons see [Docker plans](/manuals/subscription/plans/_index.md), 
 > or <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_admin_licenses" class="link" rel="noopener">contact sales</a> to purchase licenses.
 
 ## Manage licenses
@@ -42,7 +42,7 @@ AI Governance licenses include single sign-on (SSO) and provisioning features re
 
 See these docs to explore Docker Core add-ons, or products that need licenses:
 
-- [Scale your subscription](/manuals/subscription/scale.md) to learn about different add-ons
+- [Docker plans](/manuals/subscription/plans/_index.md) to learn about different add-ons
 - [Manage seats](/manuals/admin/organization/manage/manage-seats.md) to add more seats to your Docker Core subscription
 - [AI Governance](/manuals/ai/sandboxes/governance/org.md) to set up organization policies for your organization members
 - [Docker Offload](/manuals/offload/about.md) to let your developers offload building and running containers to the cloud

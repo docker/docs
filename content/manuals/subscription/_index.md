@@ -19,17 +19,13 @@ grid_subscriptions:
     description: Get started setting up a personal or organization subscription.
     link: /subscription/setup/
     icon: shopping-cart
-  - title: Scale your subscription
-    description: Add plans to your Docker account that fit your needs.
-    link: /subscription/scale/
+  - title: Explore plans
+    description: Browse available Docker plans and add-ons for individuals, teams, and organizations.
+    link: /subscription/plans/
     icon: chart-bar
-  - title: Upgrade Docker plans for accounts
-    description: Learn how to upgrade or downgrade your Docker plan.
-    link: /subscription/change/
-    icon: arrow-up-circle
   - title: Docker Desktop license agreement
     description: Review the terms of the Docker Subscription Service Agreement.
-    link: /subscription/desktop-license/
+    link: /subscription/plans/desktop-license/
     icon: document-text
   - title: Subscription FAQs
     description: Find the answers you need and explore common questions.
@@ -54,7 +50,7 @@ You can subscribe to plans for individual or organization accounts, or plans for
 | [Gordon](/ai/gordon/)                          | Prepaid usage for the Gordon AI agent                     | Gordon Plus, Gordon Max, Gordon Ultra     |
 | [AI Governance](/ai/sandboxes/governance/org/) | Purchase set amount of licenses                           | AI Governance                             |
 
-Docker plans that upgrade your account (Docker Pro or Docker Team and Business) can provide a foundation for most use cases. Some product plans may require an upgraded Docker account while other product plans let you subscribe without an upgraded account. To learn more, see [Scale your subscription](/manuals/subscription/scale.md). 
+Docker plans that upgrade your account (Docker Pro or Docker Team and Business) can provide a foundation for most use cases. Some product plans may require an upgraded Docker account while other product plans let you subscribe without an upgraded account. To learn more, see [Docker plans](/manuals/subscription/plans/_index.md).
 
 To subscribe to a plan, you can self-serve through **Billing** in [Docker Home](https://app.docker.com), or contact sales.
 

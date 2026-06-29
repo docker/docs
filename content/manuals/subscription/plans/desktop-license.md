@@ -3,23 +3,26 @@ title: Docker Desktop license agreement
 description: Information about Docker Desktop's license agreement and commercial use requirements
 keywords: docker desktop license, subscription service agreement, commercial use, licensing terms
 weight: 60
+aliases:
+  - /subscription/products/desktop-license/
+  - /subscription/desktop-license/
 ---
 
 Docker Desktop is licensed under the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement). When you download and install Docker Desktop, you're asked to agree to these terms.
 
 The Docker Subscription Service Agreement states:
 
- - Docker Desktop is free for:
-    - Small businesses (fewer than 250 employees AND less than $10 million in annual revenue)
-    - Personal use
-    - Education
-    - Non-commercial open source projects
+- Docker Desktop is free for:
+  - Small businesses (fewer than 250 employees AND less than $10 million in annual revenue)
+  - Personal use
+  - Education
+  - Non-commercial open source projects
 - Docker Desktop requires a paid subscription for:
-    - Professional use in larger organizations
-    - Government entities
-    - Commercial use beyond the free tier limits
+  - Professional use in larger organizations
+  - Government entities
+  - Commercial use beyond the free tier limits
 - Paid subscriptions that include Docker Desktop:
-    - Docker Pro, Team, and Business subscriptions
+  - Docker Pro, Team, and Business subscriptions
 
 ## Understanding licensing terms
 
