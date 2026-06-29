@@ -28,15 +28,16 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-06-29" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.80.0" build_path="//" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.80.0" build_path="/232116/" >}}
 
 ### Updates
 
+- Docker Offload `v0.6.6`
 - [Docker Buildx v0.35.0](https://github.com/docker/buildx/releases/tag/v0.35.0)
 - [Docker Model Runner v1.2.4](https://github.com/docker/model-runner/releases/tag/v1.2.4)
 - [containerd v2.2.5](https://github.com/containerd/containerd/releases/tag/v2.2.5)
-- [Docker Engine v29.6.0](https://docs.docker.com/engine/release-notes/29/#2960)
-- [Runc to v3.3.6](https://github.com/opencontainers/runc/releases/tag/v1.3.6)
+- [Docker Engine v29.6.1](https://docs.docker.com/engine/release-notes/29/#2961)
+- [Runc v3.3.6](https://github.com/opencontainers/runc/releases/tag/v1.3.6)
 - Kubernetes v1.36.1
    - CNI plugins v1.9.1
    - cri-tools v1.35.0
@@ -61,14 +62,16 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
+- The experimental `docker sandbox` plugin has been removed. Migrate to [`docker sbx`](/manuals/ai/sandboxes/_index.md).
 - Fixed an issue where running out of disk space showed a generic error dialog instead of a clear **Disk full** message prompting users to free up space and restart.
 - Fixed an issue where using `docker -c desktop-linux` while a cloud context was active would silently route commands to the cloud engine instead of the local desktop Linux engine.
 - Fixed a bug where the backend would incorrectly report a stopped VM as running after an idle shutdown, especially when Enhanced Container Isolation was enabled.
+- Fixed an OS update notification timing issue where users with auto-download enabled were notified when an update was available rather than when it was ready to install.
 
 #### For Mac
 
 - Removed the legacy osxfs file sharing. Users still on osxfs are migrated to VirtioFS.
-- iIncreased VirtioFS filesharing performance by not persisting (fake) file ownership changes on the host. Calls to `chown` will succeed, but `stat` will not be affected.
+- Increased VirtioFS filesharing performance by not persisting (fake) file ownership changes on the host. Calls to `chown` will succeed, but `stat` will not be affected.
 
 #### For Windows
 
