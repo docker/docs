@@ -1,5 +1,5 @@
 ---
-title: DHI subscriptions
+title: DHI plans
 linkTitle: DHI
 description:
   Manage Docker Hardened Images Select repositories for organization accounts,
@@ -14,7 +14,7 @@ aliases:
 
 Docker Hardened Images (DHI) plans let organization members access secure DHI repositories. DHI plans come in three tiers:
 
-- DHI Community is the base plan. No subscription required.
+- DHI Community is the base plan. Free to access.
 - DHI Select plans are self-serve from the billing portal.
 - DHI Enterprise plans are sales led.
 
@@ -31,8 +31,7 @@ For full details on using DHI Select repositories, see
 
 ## Billing behaviors
 
-DHI Select is an annual subscription billed from the date your subscription
-starts.
+DHI Select is an annual plan billed from the date your plan starts.
 
 - Repositories are billed per repository per year.
 - When you add repositories
@@ -51,8 +50,7 @@ billing cycle.
 - Repository access remains active until the cycle ends.
 - No partial refunds are issued.
 
-You cannot stop a subscription mid-cycle to receive a
-partial refund.
+You cannot stop a plan mid-cycle to receive a partial refund.
 
 ## What's next
 

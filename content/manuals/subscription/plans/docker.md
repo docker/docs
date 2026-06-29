@@ -62,7 +62,7 @@ For Docker Team and Docker Business, you can purchase more seats to extend acces
 [Manage seats](/manuals/admin/organization/manage/manage-seats.md).
 
 > [!TIP]
-> If you're upgrading from a Personal subscription to a Team subscription
+> If you're upgrading from a Personal plan to a Team plan
 > and want to keep your username,
 > [convert your user account into an organization](/manuals/admin/organization/setup/convert-account.md).
 
@@ -79,7 +79,7 @@ month.
 | Docker Business | 1,500                        |
 
 Base minutes reset on an annual or monthly cadence, and don't accumulate. Additional purchased
-minutes expire at the end of your subscription period.
+minutes expire at the end of your billing period.
 For example:  
 
 - On an annual plan, additional minutes last until your annual renewal. 
@@ -117,14 +117,14 @@ You can add Testcontainers Cloud runtime minutes in two ways:
 
 - [Contact sales](https://www.docker.com/pricing/contact-sales/) to
   pre-purchase runtime minutes at $3 per 100 minutes. Pre-purchased minutes
-  expire at the end of your subscription period.
+  expire at the end of your billing period.
 - Use on-demand runtime minutes at $4 per 100 minutes, billed at the end of
   each monthly cycle.
 
 ## Downgrade
 
 > [!NOTE]
-> You can't pause or delay a subscription. If an 
+> You can't pause or delay a plan. If an 
 > invoice isn't paid by the due date, there's a 
 > 15-day grace period starting from the due date.
 
@@ -134,6 +134,6 @@ You can cancel or downgrade at any time before your renewal date. The unused por
 - If you have Docker Team or Docker Business:
     - Remove SSO connections and verified domains if your organization uses single sign-on. Members provisioned through SCIM without a password will be locked out.
     - Reduce team members or convert private repositories to fit your new plan limits.
-- If you have a sales-assisted Docker Business subscription, contact your account manager to downgrade.
+- If you have a sales-assisted Docker Business plan, contact your account manager to downgrade.
 
 

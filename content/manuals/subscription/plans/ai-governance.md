@@ -1,5 +1,5 @@
 ---
-title: AI Governance subscription
+title: AI Governance plan
 linkTitle: AI Governance
 description:
   Manage AI Governance and Docker Offload licenses for your organization,
@@ -20,7 +20,7 @@ using supported Docker AI products. When you subscribe to an AI Governance plan,
 
 You can assign AI Governance licenses to any organization member even if they don't occupy a Docker Core seat.
 
-- AI Governance licenses are separate from Docker Team or Business, so you can purchase AI Governance licenses without an existing subscription.
+- AI Governance licenses are separate from Docker Team or Business, so you can purchase AI Governance licenses without an existing plan.
 - When a license-holding member uses a supported Docker AI product, the organization policy
   overrides their local policy rules.
 - Members without an AI Governance license can still use Docker AI products.

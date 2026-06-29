@@ -2,8 +2,8 @@
 title: Docker plans
 linkTitle: Plans
 description:
-  Browse available Docker subscriptions, including plans and add-ons for
-  individuals, teams, and organizations.
+  Browse available Docker plans and add-ons for individuals, teams, and
+  organizations.
 keywords:
   docker products, docker subscriptions, docker core, ai governance, dhi select,
   docker build cloud, gordon plans, product catalog
@@ -15,7 +15,7 @@ aliases:
   - /subscription/details/
 grid:
   - title: Docker
-    description: Personal and organization subscriptions, including build and runtime minutes.
+    description: Personal and organization plans, including build and runtime minutes.
     link: /subscription/plans/docker/
     icon: credit-card
   - title: Gordon plans
@@ -36,7 +36,7 @@ grid:
 > Interested in pricing details? Check out our
 > [pricing page](https://www.docker.com/pricing/) to compare plans.
 
-The Docker product catalog lets you add plans to your Docker subscription on a self-serve basis. Plans can be tied to personal and organization account types, and include options to extend usage limits.
+The Docker product catalog lets you add plans to your Docker account on a self-serve basis. Plans can be tied to personal and organization account types, and include options to extend usage limits.
 
 In this section, you can learn about different Docker plans:
 

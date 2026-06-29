@@ -5,7 +5,7 @@ keywords: docker desktop license, subscription service agreement, commercial use
 weight: 60
 aliases:
   - /subscription/products/desktop-license/
-  - /subscription/desktop-license/
+  - /subscription/plans/desktop-license/
 ---
 
 Docker Desktop is licensed under the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement). When you download and install Docker Desktop, you're asked to agree to these terms.

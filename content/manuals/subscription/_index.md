@@ -1,5 +1,5 @@
 ---
-title: Subscription overview
+title: Plans overview
 linkTitle: Subscription
 description: Learn about Docker plans, like how to subscribe to product-based plans and how they apply to personal and organization accounts.
 keywords:
@@ -11,12 +11,12 @@ params:
   sidebar:
     group: Platform
 grid_subscriptions:
-  - title: Compare Docker subscriptions
-    description: Visit the pricing page to see what's included in different Docker subscriptions.
+  - title: Compare Docker plans
+    description: Visit the pricing page to see what's included in different Docker plans.
     link: "https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscription"
     icon: magnifying-glass
   - title: Set up your plan
-    description: Get started setting up a personal or organization subscription.
+    description: Get started setting up a personal or organization plan.
     link: /subscription/setup/
     icon: shopping-cart
   - title: Explore plans
@@ -25,9 +25,9 @@ grid_subscriptions:
     icon: chart-bar
   - title: Docker Desktop license agreement
     description: Review the terms of the Docker Subscription Service Agreement.
-    link: /subscription/plans/desktop-license/
+    link: /subscription/desktop-license/
     icon: document-text
-  - title: Subscription FAQs
+  - title: Plan FAQs
     description: Find the answers you need and explore common questions.
     link: /subscription/faq/
     icon: question-mark-circle

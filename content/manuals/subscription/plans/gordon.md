@@ -1,5 +1,5 @@
 ---
-title: Gordon plans subscription
+title: Gordon plans
 linkTitle: Gordon
 description:
   Manage Gordon Plus, Max, and Ultra plans for personal accounts, including
@@ -27,7 +27,7 @@ new month. To learn more, see [Gordon usage limits and tiers](/manuals/ai/gordon
 
 > [!IMPORTANT]
 > Gordon plans apply to personal Docker accounts only. If you purchase a Gordon
-> plan while signed in with an organization account, the subscription applies
+> plan while signed in with an organization account, the plan applies
 > to your personal account automatically.
 
 ## Billing behaviors
@@ -38,7 +38,7 @@ charges. For example, if you subscribe to a Gordon Plus plan on April 15:
 - Your April invoice will reflect approximately $10 at a prorated rate with 15 days remaining.
 - Your May invoice will reflect the full month $20 plan rate, and so on.
 
-Subscribing to a Gordon plan charges you at the time of subscription. When you upgrade your Gordon plan, rate limits are immediately effective after payment.
+Subscribing to a Gordon plan charges you at the time of purchase. When you upgrade your Gordon plan, rate limits are immediately effective after payment.
 
 ## Downgrade
 
