@@ -1,52 +1,45 @@
 ---
 title: Usage reports
+linkTitle: Usage reports
 description: Learn how to retrieve enterprise usage reports for your Docker organization using the Reports API.
 keywords: docker, enterprise, reports, usage, pulls, api, csv, organization access token, oat
-weight: 20
-params:
-  sidebar:
-    group: Enterprise
+toc_max: 4
+weight: 50
 ---
 
-Docker provides daily usage reports for organizations with a Docker Business
-subscription. These reports contain pull activity data for your organization and
-are available as CSV downloads through the Reports API.
+{{< summary-bar feature_name="Usage reports" >}}
 
-Reports are generated automatically. You use the API to list what is available
-and download the files you need.
+Docker generates daily pull activity reports for your organization as CSV downloads, accessible through the Reports API.
 
 ## Prerequisites
 
-Before you begin, ensure you have:
+- A [Docker Business subscription](https://www.docker.com/pricing/)
+- Organization owner role, or a [custom role](/manuals/enterprise/security/roles-and-permissions/custom-roles.md)
+  with the report read permission
 
-- A [Docker Business subscription](/subscription/details/)
-- One of the following:
-  - Organization owner role
-  - A custom role that includes the **report-read** permission
-- `curl` installed for making API requests
-- `jq` installed for JSON parsing (optional, for formatting responses)
+> [!NOTE]
+> Personal Access Tokens
+> (PATs) are unsupported for usage reports.
 
-## Authentication
+## Retrieve and download usage reports
 
-The Reports API requires an Organization Access Token (OAT). OATs are
+These procedures walk you through fetching and downloading usage reports for your organization. 
+
+### Step 1. Create an OAT for the Reports API
+
+OATs are
 org-scoped tokens designed for machine-to-machine access, making them
-suitable for automated report retrieval workflows. Personal Access Tokens
-(PATs) are not supported.
+suitable for automated report retrieval workflows.
 
-1. Create an organization access token with the **Report Read** scope:
-   - **Via the UI**: In the [Docker Admin Console](https://app.docker.com), go to
-     **Admin Console > Security > Access tokens**, create a new token, expand the
-     **Organization** section under Resources, and select **Report Read**.
-   - **Via the API**: See [Organization access tokens](/enterprise/security/access-tokens/)
-     for programmatic creation.
-
-2. Set your variables:
+1. Go to [Docker Home](https://app.docker.com/) to [create your OAT](/enterprise/security/access-tokens/#create-an-organization-access-token). To add the report read scope:
+    - Go to **Resources** and select the **Organization scopes** drop-down.
+    - Select **Report read** from the drop-down.
+2. Set your variables so the report read OAT is associated with the correct organization:
 
    ```bash
    ORG="<your-org-name>"
    OAT="<your-organization-access-token>"
    ```
-
 3. Exchange the OAT for a JWT bearer token:
 
    ```bash
@@ -56,7 +49,7 @@ suitable for automated report retrieval workflows. Personal Access Tokens
      | jq -r '.access_token')
    ```
 
-4. Test the token:
+4. Validate the JWT bearer token against the list reports endpoint:
 
    ```console
    $ curl -s "https://api.docker.com/enterprise-data/v1/orgs/$ORG/reports" \
@@ -64,12 +57,18 @@ suitable for automated report retrieval workflows. Personal Access Tokens
    ```
 
 You use this `TOKEN` value in the `Authorization: Bearer` header for all
-subsequent API calls. The JWT expires after a period, so re-run step 3 to
-refresh it.
+subsequent API calls. 
 
-## List available report types
+> [!IMPORTANT]
+> The JWT token expires after a period, 
+> so re-run the OAT exchange step to
+> refresh the JWT token.
 
-Discover which report types and cadences are available for your organization.
+### Step 2. List usage reports types
+
+#### List available reports 
+
+Fetch the available report types and cadences for your organization:
 
 ```console
 $ curl -s "https://api.docker.com/enterprise-data/v1/orgs/$ORG/reports" \
@@ -92,10 +91,9 @@ Example response:
 Each entry represents a distinct combination of report type and cadence. Use
 these values in subsequent calls.
 
-## List reports
+#### List reports for a type and cadence
 
-List available reports for a given type and cadence. Reports are returned in
-reverse chronological order (most recent first).
+List reports for a specific type and cadence. Results are in reverse chronological order:
 
 ```console
 $ curl -s "https://api.docker.com/enterprise-data/v1/orgs/$ORG/reports/usage_pulls/daily" \
@@ -126,25 +124,27 @@ Example response:
 }
 ```
 
-### Pagination
+#### Set pagination for queries
 
 Results are paginated with a default page size of 30 and a maximum of 100.
-Use the `page_size` and `page_token` query parameters to control pagination.
+
+Use the `page_size` and `page_token` query parameters to control pagination: 
 
 ```console
 $ curl -s "https://api.docker.com/enterprise-data/v1/orgs/$ORG/reports/usage_pulls/daily?page_size=10" \
   -H "Authorization: Bearer $TOKEN" | jq .
 ```
 
-When `next_page_token` is non-empty, pass it as `page_token` to fetch the next
-page:
+When `next_page_token` is non-empty, pass it as `page_token` to fetch the next page:
 
 ```console
 $ curl -s "https://api.docker.com/enterprise-data/v1/orgs/$ORG/reports/usage_pulls/daily?page_size=10&page_token=NEXT_TOKEN" \
   -H "Authorization: Bearer $TOKEN" | jq .
 ```
 
-## Download a report
+### Step 3. Download a report
+
+#### Download a specific report
 
 Download the CSV file for a specific date. The API responds with a `302`
 redirect to a pre-signed URL. With `curl -L`, the redirect is followed
@@ -159,7 +159,7 @@ $ curl -L -o "usage_pulls_2026-06-16.csv" \
 The pre-signed download URL expires after 15 minutes. If the link expires,
 call the endpoint again to get a fresh URL.
 
-### Download the latest report
+#### Download latest report
 
 Combine the list and download steps to always fetch the most recent report:
 
@@ -182,8 +182,7 @@ curl -L -o "usage_pulls_${DATE}.csv" \
 
 ## Get report schema
 
-Retrieve the schema for a specific report date. The schema describes the columns
-in the CSV file.
+Fetch the schema for a specific report date to discover available columns and their types:
 
 ```console
 $ curl -s "https://api.docker.com/enterprise-data/v1/orgs/$ORG/reports/usage_pulls/daily/2026-06-16/schema" \
@@ -215,17 +214,14 @@ Example response:
 }
 ```
 
-Use the schema endpoint to programmatically discover column names and types
-before processing a report.
-
 ## API reference
 
-| Endpoint | Description |
-|---|---|
-| `GET /enterprise-data/v1/orgs/{org}/reports` | List available report types |
-| `GET /enterprise-data/v1/orgs/{org}/reports/{type}/{cadence}` | List reports with pagination |
+| Endpoint                                                                      | Description                      |
+| ----------------------------------------------------------------------------- | -------------------------------- |
+| `GET /enterprise-data/v1/orgs/{org}/reports`                                  | List available report types      |
+| `GET /enterprise-data/v1/orgs/{org}/reports/{type}/{cadence}`                 | List reports with pagination     |
 | `GET /enterprise-data/v1/orgs/{org}/reports/{type}/{cadence}/{date}/download` | Download a report (302 redirect) |
-| `GET /enterprise-data/v1/orgs/{org}/reports/{type}/{cadence}/{date}/schema` | Get report column schema |
+| `GET /enterprise-data/v1/orgs/{org}/reports/{type}/{cadence}/{date}/schema`   | Get report column schema         |
 
 For the full API specification, see the
 [Enterprise Data API reference](/reference/api/enterprise-data/latest/).
