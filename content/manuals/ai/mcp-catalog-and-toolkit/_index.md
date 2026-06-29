@@ -35,10 +35,6 @@ grid:
     description: Discover and add MCP servers on-demand using natural language
     icon: magnifying-glass
     link: /ai/mcp-catalog-and-toolkit/dynamic-mcp/
-  - title: Docker Hub MCP server
-    description: Use the Docker Hub MCP server to search images and manage repositories
-    icon: server-stack
-    link: /ai/mcp-catalog-and-toolkit/hub-mcp/
   - title: Security FAQs
     description: Common questions about MCP security, credentials, and server verification
     icon: shield-check

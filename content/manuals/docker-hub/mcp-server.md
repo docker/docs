@@ -4,13 +4,15 @@ linkTitle: Hub MCP server
 description: The Docker Hub MCP Server makes Docker Hub image metadata accessible to LLMs for content discovery.
 keywords: Docker Hub MCP Server, Hub MCP server, Hub MCP
 weight: 60
+aliases:
+  - /ai/mcp-catalog-and-toolkit/hub-mcp/
 ---
 
 The Docker Hub MCP Server is a Model Context Protocol (MCP) server that
 interfaces with Docker Hub APIs to make rich image metadata accessible to LLMs,
 enabling intelligent content discovery and repository management.
 
-For more information about MCP concepts and how MCP servers work, see the [Docker MCP Catalog and Toolkit](index.md) overview page.
+For more information about MCP concepts and how MCP servers work, see the [Docker MCP Catalog and Toolkit](/ai/mcp-catalog-and-toolkit/) overview page.
 
 ## Key features
 
@@ -20,19 +22,20 @@ For more information about MCP concepts and how MCP servers work, see the [Docke
 
 ## Install Docker Hub MCP server
 
-1. From the **MCP Toolkit** menu, select the **Catalog** tab and search for **Docker Hub** and select the plus icon to add the Docker Hub MCP server.
-1. In the server's **Configuration** tab, insert your Docker Hub username and personal access token (PAT).
-1. In the **Clients** tab in MCP Toolkit, ensure Gordon is connected.
-1. From the **Gordon** menu, you can now send requests related to your
-   Docker Hub account, in accordance to the tools provided by the Docker Hub MCP server. To test it, ask Gordon:
+1. In Docker Desktop, select **MCP Toolkit** and select the **Profiles** tab,
+   then select **Create profile** to create a new profile, or select an existing
+   profile to use.
+2. Select the **Catalog** tab, search for **Docker Hub**, and select **Add to**
+   to add it to your profile.
+3. Select the **Profiles** tab, select the profile you added Docker Hub to, and
+   select the configuration icon on the Docker Hub MCP server. Enter your Docker
+   Hub username and personal access token (PAT).
+4. Under the **Clients** section of the same profile, if you already have a
+   client connected it connects automatically. Otherwise, select the plus icon
+   to add a client.
 
-   ```text
-   What repositories are in my namespace?
-   ```
-
-> [!TIP]
-> By default, the Gordon [client](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md#install-an-mcp-client) is enabled,
-> which means Gordon can automatically interact with your MCP servers.
+For more details on setting up profiles and connecting clients, see
+[Get started with Docker MCP Toolkit](/ai/mcp-catalog-and-toolkit/get-started/).
 
 ## Use Claude Desktop as a client
 
