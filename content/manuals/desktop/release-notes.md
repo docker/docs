@@ -37,7 +37,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Model Runner v1.2.4](https://github.com/docker/model-runner/releases/tag/v1.2.4)
 - [containerd v2.2.5](https://github.com/containerd/containerd/releases/tag/v2.2.5)
 - [Docker Engine v29.6.1](https://docs.docker.com/engine/release-notes/29/#2961)
-- [Runc v3.3.6](https://github.com/opencontainers/runc/releases/tag/v1.3.6)
+- [Runc v1.3.6](https://github.com/opencontainers/runc/releases/tag/v1.3.6)
 - Kubernetes v1.36.1
    - CNI plugins v1.9.1
    - cri-tools v1.35.0
