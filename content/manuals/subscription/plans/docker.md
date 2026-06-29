@@ -140,7 +140,7 @@ You can add Testcontainers Cloud runtime minutes in two ways:
 > invoice isn't paid by the due date, there's a
 > 15-day grace period starting from the due date.
 
-You can cancel or downgrade at any time before your renewal date. The unused portion is not refundable, but you retain access to paid features until the end of the current billing cycle.
+You can cancel or downgrade at any time before your renewal date. The unused portion is not refundable, but you retain access to paid features until the end of the current billing cycle. For steps, see [Upgrade or downgrade a plan](../setup.md#upgrade-or-downgrade-a-plan).
 
 - When you downgrade from Docker Pro, your private repository collaborators are removed and additional private repositories are locked.
 - If you have Docker Team or Docker Business:
