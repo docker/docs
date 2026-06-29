@@ -6,9 +6,9 @@ aliases:
   - /ai/mcp-catalog-and-toolkit/sandboxes/
 ---
 
-Docker has partnered with [E2B](https://e2b.dev/), a provider of secure cloud sandboxes for AI agents. E2B sandboxes include direct access to Docker's [MCP Catalog](https://hub.docker.com/mcp), a collection of 200+ tools from publishers including GitHub, Notion, and Stripe.
+[E2B](https://e2b.dev/) provides secure cloud sandboxes for AI agents with direct access to Docker's [MCP Catalog](https://hub.docker.com/mcp), a collection of 200+ tools from publishers including GitHub, Notion, and Stripe.
 
-When you create a sandbox, you specify which MCP tools it should access. E2B launches these tools and provides access through the Docker MCP Gateway.
+When you create an E2B sandbox, you specify which MCP tools it should access. E2B launches these tools and provides access through the Docker MCP Gateway.
 
 ## Example: Using GitHub and Notion MCP server
 
