@@ -10,7 +10,6 @@ keywords:
 weight: 20
 aliases:
   - /subscription/products/
-  - /subscription/change/
   - /subscription/scale/
   - /subscription/details/
 grid:
@@ -33,7 +32,7 @@ grid:
 ---
 
 > [!TIP]
-> Interested in pricing details? Check out our
+> Interested in pricing details? Check out the
 > [pricing page](https://www.docker.com/pricing/) to compare plans.
 
 The Docker product catalog lets you add plans to your Docker account on a self-serve basis. Plans can be tied to personal and organization account types, and include options to extend usage limits.

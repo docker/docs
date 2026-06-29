@@ -8,6 +8,9 @@ keywords:
   purchase subscription, buy docker subscription, product catalog, browse
   products, upgrade subscription, downgrade subscription, docker billing
 weight: 10
+aliases:
+  - /subscription/change/
+  - /subscription/setup/
 ---
 
 You can add and manage your plans from the billing portal in Docker home. Within the billing portal, you use the product catalog to view

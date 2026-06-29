@@ -42,18 +42,18 @@ There are four Docker plans between individual and organization account types. D
 
 This table summarizes usage limits and feature sets available with each Docker plan:
 
-| Feature                      | Personal   | Pro        | Team       | Business  |
-| ---------------------------- | ---------- | ---------- | ---------- | --------- |
-| Docker Desktop               | Basic      | Commercial | Commercial | Hardened  |
-| Private Hub repos            | 1          | Unlimited  | Unlimited  | Unlimited |
-| Hub pull rate                | 100/hr     | Unlimited  | Unlimited  | Unlimited |
-| Docker Scout repos           | 1          | 2          | Unlimited  | Unlimited |
-| Gordon                       | Included   | Included   | —          | —         |
-| Build Cloud minutes/month    | Free trial | 200        | 500        | 1,500     |
-| Testcontainers minutes/month | Free trial | 100        | 500        | 1,500     |
-| SSO / SCIM                   | —          | —          | —          | ✓         |
-| Registry & Image Access Mgmt | —          | —          | —          | ✓         |
-| Max users                    | 1          | 1          | 100        | Unlimited |
+| Feature                            | Personal   | Pro        | Team       | Business  |
+| ---------------------------------- | ---------- | ---------- | ---------- | --------- |
+| Docker Desktop                     | Basic      | Commercial | Commercial | Hardened  |
+| Private Hub repos                  | 1          | Unlimited  | Unlimited  | Unlimited |
+| Hub pull rate                      | 100/hr     | Unlimited  | Unlimited  | Unlimited |
+| Docker Scout repos                 | 1          | 2          | Unlimited  | Unlimited |
+| Gordon                             | Included   | Included   | —          | —         |
+| Build Cloud minutes/month          | Free trial | 200        | 500        | 1,500     |
+| Testcontainers minutes/month       | Free trial | 100        | 500        | 1,500     |
+| SSO / SCIM                         | —          | —          | —          | ✓         |
+| Registry & Image Access Management | —          | —          | —          | ✓         |
+| Max users                          | 1          | 1          | 100        | Unlimited |
 
 > [!TIP]
 > If you're upgrading from a Personal plan to a Team plan
