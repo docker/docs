@@ -6,7 +6,7 @@ keywords:
   docker subscription, pricing, billing, subscription types, subscription
   plans, docker hardened images, gordon, cloud sandboxes, subscription
   management
-weight: 30
+weight: 20
 params:
   sidebar:
     group: Platform
