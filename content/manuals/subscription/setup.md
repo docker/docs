@@ -11,6 +11,14 @@ weight: 10
 aliases:
   - /subscription/change/
   - /subscription/setup/
+  - /docker-hub/upgrade/
+  - /docker-hub/billing/upgrade/
+  - /subscription/upgrade/
+  - /subscription/downgrade/
+  - /subscription/core-subscription/upgrade/
+  - /subscription/core-subscription/downgrade/
+  - /docker-hub/cancel-downgrade/
+  - /docker-hub/billing/downgrade/
 ---
 
 You can add and manage your plans from the billing portal in Docker home. Within the billing portal, you use the product catalog to view
