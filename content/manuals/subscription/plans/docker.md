@@ -15,8 +15,6 @@ aliases:
   - /subscription/core/
   - /subscription/testcontainers-cloud/
   - /subscription/products/testcontainers-cloud/
-  - /billing/scout-billing/
-  - /billing/subscription-management/
   - /subscription/products/build-cloud/
   - /subscription/build-cloud/
 ---
@@ -26,7 +24,7 @@ licensing, and expanded feature sets. Plans are available for personal accounts
 and organization accounts.
 
 > [!TIP]
-> To subscribe to a Docker plan, see [Set up a new plan](../setup.md).
+> To subscribe to a Docker plan, see [Set up, upgrade, or downgrade a plan](../manage.md).
 
 ## Usage
 
@@ -132,11 +130,17 @@ You can add Testcontainers Cloud runtime minutes in two ways:
 > invoice isn't paid by the due date, there's a
 > 15-day grace period starting from the due date.
 
-You can cancel or downgrade at any time before your renewal date. The unused portion is not refundable, but you retain access to paid features until the end of the current billing cycle. For steps, see [Upgrade or downgrade a plan](../setup.md#upgrade-or-downgrade-a-plan).
+You can cancel at any time before your renewal date. The unused portion is not refundable, but you retain access to paid features until the end of the current billing cycle. Canceling a paid plan returns your account to Docker Personal.
 
-- When you downgrade from Docker Pro, your private repository collaborators are removed and additional private repositories are locked.
-- If you have Docker Team or Docker Business:
+To cancel your plan:
+
+1. Sign in to [Docker Home](https://app.docker.com/) and go to **Billing**.
+1. From **Active plans**, select the action menu next to your plan.
+1. Select **Cancel plan** and complete the feedback survey.
+
+- When you cancel Docker Pro, your private repository collaborators are removed and additional private repositories are locked.
+- If you cancel Docker Team or Docker Business:
   - Members provisioned through SCIM without a password will be locked out. Remove SSO connections and verified domains if your organization uses single sign-on.
   - Convert private repositories to fit your new plan limits.
 
-If you have a sales-assisted Docker Business plan, contact your account manager to downgrade.
+If you have a sales-assisted Docker Business plan, contact your account manager to cancel.

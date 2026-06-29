@@ -17,7 +17,7 @@ grid_subscriptions:
     icon: magnifying-glass
   - title: Set up your plan
     description: Get started setting up a personal or organization plan.
-    link: /subscription/setup/
+    link: /subscription/manage/
     icon: shopping-cart
   - title: Explore plans
     description: Browse available Docker plans and add-ons for individuals, teams, and organizations.
@@ -50,7 +50,7 @@ You can subscribe to plans for individual or organization accounts, or plans for
 | [Gordon](/ai/gordon/)                          | Prepaid usage for the Gordon AI agent                     | Gordon Plus, Gordon Max, Gordon Ultra     |
 | [AI Governance](/ai/sandboxes/governance/org/) | Purchase set amount of licenses                           | AI Governance                             |
 
-Docker plans that upgrade your account (Docker Pro or Docker Team and Business) can provide a foundation for most use cases. Some product plans may require an upgraded Docker account while other product plans let you subscribe without an upgraded account. To learn more, see [Docker plans](/manuals/subscription/plans/).
+Docker plans that upgrade your account (Docker Pro or Docker Team and Business) can provide a foundation for most use cases. Some product plans may require an upgraded Docker account while other product plans let you subscribe without an upgraded account. To learn more, see [Docker plans](/manuals/subscription/plans/_index.md).
 
 To subscribe to a plan, you can self-serve through **Billing** in [Docker Home](https://app.docker.com), or contact sales.
 

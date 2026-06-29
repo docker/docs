@@ -33,7 +33,7 @@ You have reached your pull rate limit. You may increase the limit by authenticat
 You can use one of the following solutions:
 
 - [Authenticate](./usage/pulls.md#authentication) or
-  [upgrade](../subscription/setup.md#upgrade-or-downgrade-a-plan) your Docker
+  [upgrade](../subscription/manage.md#upgrade-or-downgrade-a-plan) your Docker
   account.
 - [View your pull rate limit](./usage/pulls.md#view-hourly-pull-rate-and-limit),
   wait until your pull rate limit decreases, and then try again.

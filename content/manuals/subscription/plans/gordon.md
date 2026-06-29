@@ -16,7 +16,7 @@ aliases:
 [Gordon](/manuals/ai/gordon/_index.md) is an AI assistant for Docker workflows. Gordon Base is included at no cost with Docker Personal and Docker Pro plans. Gordon Plus, Max, and Ultra increase your monthly usage allowance and are available as self-serve in the billing portal.
 
 > [!TIP]
-> To subscribe to a Gordon plan, see [Set up a new plan](../setup.md).
+> To subscribe to a Gordon plan, see [Set up, upgrade, or downgrade a plan](../manage.md).
 
 ## Usage
 
@@ -41,6 +41,12 @@ When you downgrade to a lower Gordon plan, the change takes effect on the 1st of
 - On May 1, you are charged the Gordon Plus plan rate and Gordon Plus usage limits take effect.
 
 Cancelling a Gordon plan and returning to Gordon Base follows the same pattern.
+
+To downgrade or cancel:
+
+1. Sign in to [Docker Home](https://app.docker.com/) and go to **Billing**.
+1. From **Active plans**, select **Manage** next to your Gordon plan.
+1. Select a lower plan to downgrade, or select **Cancel auto renewal** to cancel.
 
 > [!IMPORTANT]
 > Docker does not issue refunds or credits

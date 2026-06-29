@@ -1,6 +1,6 @@
 ---
-title: Set up a new plan
-linkTitle: Setup
+title: Set up, upgrade, or downgrade a plan
+linkTitle: Manage
 description:
   Learn how to purchase a new Docker plan from the product catalog and
   how to upgrade or downgrade an existing plan.
@@ -19,6 +19,8 @@ aliases:
   - /subscription/core-subscription/downgrade/
   - /docker-hub/cancel-downgrade/
   - /docker-hub/billing/downgrade/
+  - /billing/scout-billing/
+  - /billing/subscription-management/
 ---
 
 You can add and manage your plans from the billing portal in Docker home. Within the billing portal, you use the product catalog to view
@@ -53,7 +55,7 @@ To change an existing plan, go to the **Plans** page:
 
 > [!TIP]
 > Billing behaviors vary from plan to plan. To learn more about upgrading or downgrading a specific plan, see the relevant
-> [product page](/manuals/subscription/plans/).
+> [product page](/manuals/subscription/plans/_index.md).
 
 ## Sales-led products
 
@@ -63,6 +65,6 @@ these products.
 
 ## What's next
 
-- [Learn about available plans](/manuals/subscription/plans/)
+- [Learn about available plans](/manuals/subscription/plans/_index.md)
 - [Set up payment information](/manuals/billing/payment-method.md)
 - [View invoices](/manuals/billing/history.md)

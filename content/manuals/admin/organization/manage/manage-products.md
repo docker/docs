@@ -149,4 +149,4 @@ To view usage for Docker products:
   [Docker Offload usage and billing](/manuals/offload/usage.md).
 
 If your usage or seat count exceeds your subscription amount, you can
-[view available Docker plans](../../../subscription/plans/) to meet your needs.
+[add seats](./manage-seats.md) or [view available Docker plans](../../../subscription/plans/_index.md) to meet your needs.
