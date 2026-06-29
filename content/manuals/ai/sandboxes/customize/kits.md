@@ -448,8 +448,7 @@ For Docker Hub, include the full `docker.io` prefix. See
 `sbx` restricts which sources a kit can install from. A kit's install
 commands run with root privileges inside the sandbox, so limiting where kits
 come from reduces supply-chain risk. By default, only kits hosted on Docker
-Hub (`docker.io/`) are allowed. Loading a kit from any other source — a Git
-repository or a different registry — fails:
+Hub (`docker.io/`) are allowed. Loading a kit from any other source fails:
 
 ```console
 $ sbx run claude --kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=vale"
