@@ -78,8 +78,8 @@ access to.
 Admins can restrict which paths are mountable with filesystem allow and deny
 rules. Each rule takes a path pattern and an action (allow or deny).
 
-For path pattern syntax including the difference between `*` and `**`, see
-[Policy concepts](concepts.md#filesystem-rules).
+For path pattern syntax and how read and write access combine to allow a
+mount, see [Policy concepts](concepts.md#filesystem-rules).
 
 ## Scope policies to teams
 
