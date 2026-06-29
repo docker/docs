@@ -64,11 +64,11 @@ workflows. Run `sbx policy ls` to see exactly which rules it includes.
 ### Non-interactive environments
 
 In non-interactive environments such as CI pipelines or headless servers, the
-interactive prompt can't be displayed. Use `sbx policy set-default` to set the
+interactive prompt can't be displayed. Use `sbx policy init` to set the
 preset before running any other `sbx` commands:
 
 ```console
-$ sbx policy set-default balanced
+$ sbx policy init balanced
 ```
 
 Available values are `allow-all`, `balanced`, and `deny-all`.
