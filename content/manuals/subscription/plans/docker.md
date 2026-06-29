@@ -31,12 +31,13 @@ aliases:
 
 Docker plans upgrade your account with higher usage limits, commercial
 licensing, and expanded feature sets. Plans are available for personal accounts
-and organization accounts. To subscribe to a plan, see
-[Setup](../setup.md).
+and organization accounts.
 
 ## Usage
 
-There are four Docker plans between individual and organization account types.
+There are four Docker plans between individual and organization account types. Docker Personal and Docker Pro are for individual account types while Docker Team and Docker Business are for organization account types. 
+
+This table summarizes usage limits and feature sets available with each Docker plan:
 
 | Feature                      | Personal   | Pro        | Team       | Business  |
 | ---------------------------- | ---------- | ---------- | ---------- | --------- |
@@ -51,6 +52,14 @@ There are four Docker plans between individual and organization account types.
 | Registry & Image Access Mgmt | —          | —          | —          | ✓         |
 | Max users                    | 1          | 1          | 100        | Unlimited |
 
+To subscribe to a plan, see
+[Setup](../setup.md).
+
+> [!TIP]
+> If you're upgrading from a Personal plan to a Team plan
+> and want to keep your username,
+> [convert your user account into an organization](/manuals/admin/organization/setup/convert-account.md).
+
 ## Billing behaviors
 
 Docker individual and organization plans are billed at a flat rate per user per month, with monthly or
@@ -58,18 +67,17 @@ annual billing options.
 Upgrading your plan immediately extends access to all features
 and entitlements.
 
+### Organization seats 
+
 For Docker Team and Docker Business, you can purchase more seats to extend access to new members in your organization. To learn how to manage seats, see
 [Manage seats](/manuals/admin/organization/manage/manage-seats.md).
-
-> [!TIP]
-> If you're upgrading from a Personal plan to a Team plan
-> and want to keep your username,
-> [convert your user account into an organization](/manuals/admin/organization/setup/convert-account.md).
 
 ### Docker Build Cloud minutes
 
 Each plan includes a base allocation of Docker Build Cloud build minutes per
-month.
+month. For an
+overview of Docker Build Cloud features, see the
+[Docker Build Cloud overview](/manuals/build-cloud/_index.md).
 
 | Plan            | Included build minutes/month |
 | --------------- | ---------------------------- |
@@ -84,10 +92,6 @@ For example:
 
 - On an annual plan, additional minutes last until your annual renewal. 
 - On a monthly plan, they expire at month end.
-
-For an
-overview of Docker Build Cloud features, see the
-[Docker Build Cloud overview](/manuals/build-cloud/_index.md).
 
 #### Add Build Cloud minutes 
 
@@ -132,8 +136,9 @@ You can cancel or downgrade at any time before your renewal date. The unused por
 
 - When you downgrade from Docker Pro, your private repository collaborators are removed and additional private repositories are locked.
 - If you have Docker Team or Docker Business:
-    - Remove SSO connections and verified domains if your organization uses single sign-on. Members provisioned through SCIM without a password will be locked out.
-    - Reduce team members or convert private repositories to fit your new plan limits.
-- If you have a sales-assisted Docker Business plan, contact your account manager to downgrade.
+    - Members provisioned through SCIM without a password will be locked out. Remove SSO connections and verified domains if your organization uses single sign-on.
+    - Convert private repositories to fit your new plan limits.
+
+If you have a sales-assisted Docker Business plan, contact your account manager to downgrade.
 
 

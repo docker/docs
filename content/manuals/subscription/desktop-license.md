@@ -2,7 +2,7 @@
 title: Docker Desktop license agreement
 description: Information about Docker Desktop's license agreement and commercial use requirements
 keywords: docker desktop license, subscription service agreement, commercial use, licensing terms
-weight: 60
+weight: 40
 aliases:
   - /subscription/products/desktop-license/
   - /subscription/plans/desktop-license/

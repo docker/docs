@@ -13,7 +13,7 @@ aliases:
   - /subscription/gordon/
 ---
 
-Gordon plans increase your maximum usage for Gordon. All three tiers are available available as self-serve in the billing portal:
+Gordon plans increase your maximum usage for [Gordon](/manuals/ai/gordon/_index.md). All three tiers are available available as self-serve in the billing portal:
 
 - Gordon Plus
 - Gordon Max
@@ -56,8 +56,3 @@ Cancelling a Gordon plan and downgrading to the base tier follows the same patte
 > [!IMPORTANT]
 > Docker does not issue refunds or credits
 > for remaining days in the current cycle.
-
-## What's next
-
-- [Gordon overview](/manuals/ai/gordon/_index.md)
-- [Gordon usage limits and tiers](/manuals/ai/gordon/usage-limits.md)

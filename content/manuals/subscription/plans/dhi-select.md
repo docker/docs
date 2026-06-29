@@ -12,7 +12,7 @@ aliases:
   - /subscription/dhi-select/
 ---
 
-Docker Hardened Images (DHI) plans let organization members access secure DHI repositories. DHI plans come in three tiers:
+[Docker Hardened Images (DHI)](/manuals/dhi/_index.md) plans let organization members access secure DHI repositories. DHI plans come in three tiers:
 
 - DHI Community is the base plan. Free to access.
 - DHI Select plans are self-serve from the billing portal.
@@ -51,8 +51,3 @@ billing cycle.
 - No partial refunds are issued.
 
 You cannot stop a plan mid-cycle to receive a partial refund.
-
-## What's next
-
-- [Docker Hardened Images overview](/manuals/dhi/_index.md)
-- [Get started with DHI Select and Enterprise](/manuals/dhi/how-to/select-enterprise.md)
