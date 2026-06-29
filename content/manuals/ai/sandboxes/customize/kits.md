@@ -443,6 +443,42 @@ For Docker Hub, include the full `docker.io` prefix. See
 > Without stored credentials, pulls from non-Docker Hub registries are
 > anonymous and private kits fail to pull.
 
+### Restrict kit sources
+
+`sbx` restricts which sources a kit can install from. A kit's install
+commands run with root privileges inside the sandbox, so limiting where kits
+come from reduces supply-chain risk. By default, only kits hosted on Docker
+Hub (`docker.io/`) are allowed. Loading a kit from any other source fails:
+
+```console
+$ sbx run claude --kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=vale"
+ERROR: resolve kits: kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=vale" cannot be installed — its source is not in your allowlist.
+```
+
+To allow another publisher, add its host or host/path prefix to the
+`kit.allowedSources` setting. The setting replaces the whole list, so include
+the entries you want to keep:
+
+```console
+$ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
+```
+
+Entries match as prefixes on a path-segment boundary, so `github.com/docker/`
+allows `github.com/docker/sbx-kits-contrib` but not `github.com/docker-evil/kit`.
+To remove the restriction and allow any remote source, set the list to
+`["*"]`. This isn't recommended.
+
+Installing from a local directory or ZIP file is governed separately by the
+`kit.allowLocalKits` setting, which defaults to `true`. Set it to `false` to
+require a remote source:
+
+```console
+$ sbx settings set kit.allowLocalKits false
+```
+
+For non-interactive use, both settings have environment-variable equivalents:
+`DOCKER_SANDBOXES_KIT_ALLOWED_SOURCES` and `DOCKER_SANDBOXES_KIT_ALLOW_LOCAL`.
+
 ## Packaging and distribution
 
 The `sbx kit` subcommands validate, inspect, and publish kits:

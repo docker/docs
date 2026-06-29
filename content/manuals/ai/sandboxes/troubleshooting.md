@@ -54,6 +54,27 @@ If `sbx policy allow` doesn't unblock the request, your organization may
 manage sandbox policies centrally and take precedence over local rules. See
 [Organization governance](governance/org.md).
 
+## Kit fails to install: source not in allowlist
+
+If loading a kit fails with a message like its source is not in your
+allowlist:
+
+```console
+$ sbx run claude --kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=vale"
+ERROR: resolve kits: kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=vale" cannot be installed — its source is not in your allowlist.
+```
+
+`sbx` restricts kit installs to an allowlist of sources, which defaults to
+Docker Hub (`docker.io/`) only. Add the kit's publisher to the
+`kit.allowedSources` setting, keeping the entries you want to retain:
+
+```console
+$ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
+```
+
+Then run the command again. For details, including how to allow local kits or
+any remote source, see [Restrict kit sources](customize/kits.md#restrict-kit-sources).
+
 ## SSH and other non-HTTP connections fail
 
 Non-HTTP TCP connections like SSH can be allowed by adding a policy rule for
