@@ -42,7 +42,7 @@ To change an existing plan, go to the **Plans** page:
 
 > [!TIP]
 > Billing behaviors vary from plan to plan. To learn more about upgrading or downgrading a specific plan, see the relevant
-> [product page](/manuals/subscription/plans/_index.md).
+> [product page](/manuals/subscription/plans/).
 
 ## Sales-led products
 
@@ -52,6 +52,6 @@ these products.
 
 ## What's next
 
-- [Learn about available plans](/manuals/subscription/plans/_index.md)
+- [Learn about available plans](/manuals/subscription/plans/)
 - [Set up payment information](/manuals/billing/payment-method.md)
 - [View invoices](/manuals/billing/history.md)
