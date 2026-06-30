@@ -55,7 +55,7 @@ You can create new OIDC connections or manage existing ones from the Admin Conso
    - name: Login to Docker Hub
      uses: docker/login-action@{{% param "login_action_version" %}}
      with:
-       username: <YOUR_ORGANIZATION_NAME>
+       username: <DOCKER_ORGANIZATION_NAME>
        password: ${{ steps.docker_oidc.outputs.token }}
    ```
 
@@ -111,5 +111,4 @@ Unlike deactivation, deleting an OIDC connection is permanent. Any workflow whos
 
 ## What's next
 
-- To update your OIDC connection, see [Manage OIDC connections](#manage-oidc-connections)
 - For reference documentation about OIDC connections rulesets and behaviors, see [OIDC connections rulesets and subject claims](/manuals/enterprise/security/oidc-connections/rulesets-claims.md)

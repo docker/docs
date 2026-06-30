@@ -64,7 +64,7 @@ You can use wildcards to match across repositories or branches:
 
 Resources define the Docker resources a workflow can access when a ruleset matches. You specify resources per ruleset, alongside the scopes that determine the level of access granted.
 
-Docker Hub repositories are supported resources.
+Docker Hub repositories and Docker Cloud are supported resources.
 
 ## What's next
 
