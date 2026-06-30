@@ -41,7 +41,7 @@ To downgrade or disable auto-renewal:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and go to **Billing**.
 1. From **Active plans**, select **Manage** next to your Gordon plan.
-2. Select **Downgrade plan** to switch to a lower tier, or **Disable auto renewal** to end your plan after the current billing cycle.
+1. Select **Downgrade plan** to switch to a lower tier, or **Disable auto renewal** to end your plan after the current billing cycle.
 
 > [!IMPORTANT]
 > Docker does not issue refunds or credits
