@@ -38,9 +38,10 @@ Claude Code requires either an Anthropic API key or a Claude subscription.
 $ sbx secret set -g anthropic
 ```
 
-Alternatively, export the `ANTHROPIC_API_KEY` environment variable in your
-shell before running the sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
+You can also source the key from the `ANTHROPIC_API_KEY` environment variable
+through a [credential binding](../security/credentials.md#credential-bindings);
+the sandbox prompts you to approve one on first run. See
+[Credentials](../security/credentials.md) for details.
 
 **Claude subscription**: If no API key is set, use the `/login` command inside 
 Claude Code to authenticate via OAuth.

@@ -52,8 +52,9 @@ so browser-based authentication works without any extra setup.
 $ sbx secret set -g openai
 ```
 
-Alternatively, export the `OPENAI_API_KEY` environment variable in your shell
-before running the sandbox.
+You can also source the key from the `OPENAI_API_KEY` environment variable
+through a [credential binding](../security/credentials.md#credential-bindings);
+the sandbox prompts you to approve one on first run.
 
 See [Credentials](../security/credentials.md) for more details.
 
