@@ -64,9 +64,9 @@ For Docker Team and Docker Business, you can purchase more seats for new members
 1. Sign in to [Docker Home](https://app.docker.com/), then choose your organization account.
 1. Go to **Billing** to view the Overview page, then go to **Active plans**.
 1. From the Docker Team or Docker Business tile, select the action menu.
-    - Select **Add seats** or **Remove seats** from the drop-down menu. 
-    - When you add or remove seats, review your current seats against your new total seats.
-    - When you remove seats, you must remove members from your organization.
+   - Select **Add seats** or **Remove seats** from the drop-down menu.
+   - When you add or remove seats, review your current seats against your new total seats.
+   - When you remove seats, you must remove members from your organization.
 1. Verify your billing details, continue to payment, and complete checkout.
 
 To learn how to manage seats from the Admin Console, see
@@ -75,7 +75,7 @@ To learn how to manage seats from the Admin Console, see
 ### Docker Build Cloud minutes
 
 Each plan includes a base allocation of [Docker Build Cloud](/manuals/build-cloud/_index.md) build minutes per
-month.  Base minutes reset on an annual or monthly cadence, and don't accumulate. Additional purchased
+month. Base minutes reset on an annual or monthly cadence, and don't accumulate. Additional purchased
 minutes expire at the end of your billing period.
 
 To purchase additional minutes:
@@ -92,7 +92,7 @@ Your additional minutes appear on the Build minutes page immediately.
 
 [Docker Offload](/manuals/offload/_index.md) licenses are available for Docker Team and Docker Business plans. Once assigned to your account, organization owners can [manage license assignments](/manuals/admin/organization/manage/manage-licenses.md) in the Admin Console.
 
- To add Docker Offload licenses, you must <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_plans_docker_offload" class="link" rel="noopener">contact sales</a>.
+To add Docker Offload licenses, you must <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_plans_docker_offload" class="link" rel="noopener">contact sales</a>.
 
 ### Testcontainers Cloud minutes
 
@@ -110,16 +110,16 @@ You can add Testcontainers Cloud runtime minutes in two ways:
 ## Cancel a Docker plan
 
 > [!NOTE]
-> If you have a sales-assisted Docker Business plan, 
+> If you have a sales-assisted Docker Business plan,
 > you must contact your account manager to cancel.
 
-You can cancel at any time before your renewal date, but you can't pause or delay a plan. If an invoice isn't paid by the due date, there's a 15-day grace period starting from the due date. While the unused portion is not refundable, you still retain access to paid features until the end of the current billing cycle. Canceling your paid plans may have implications for collaborators or organization members: 
+You can cancel at any time before your renewal date, but you can't pause or delay a plan. If an invoice isn't paid by the due date, there's a 15-day grace period starting from the due date. While the unused portion is not refundable, you still retain access to paid features until the end of the current billing cycle. Canceling your paid plans may have implications for collaborators or organization members:
 
 - Docker Pro private repository collaborators are removed and additional private repositories are locked.
 - Docker Team or Docker Business members provisioned through SCIM without a password will be locked out. Remove SSO connections and verified domains if your organization uses single sign-on.
 - For paid individual and organization plans, you must convert private repositories to fit your new plan limits.
 
-Canceling a paid plan returns your account to Docker Personal or a basic organization account. 
+Canceling a paid plan returns your account to Docker Personal or a basic organization account.
 To cancel your plan:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and go to **Billing**.
