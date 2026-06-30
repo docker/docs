@@ -33,7 +33,7 @@ grid:
 
 > [!TIP]
 > Interested in pricing details? Check out the
-> [pricing page](https://www.docker.com/pricing/) to compare plans.
+> <a href="https://www.docker.com/pricing/" id="dkr_docs_plans_index" class="link" rel="noopener">pricing page</a> to compare plans.
 
 The Docker product catalog lets you add plans to your Docker account on a self-serve basis. Plans can be tied to personal and organization account types, and include options to extend usage limits.
 
