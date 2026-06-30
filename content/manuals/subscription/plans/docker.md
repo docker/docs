@@ -17,6 +17,7 @@ aliases:
   - /subscription/products/testcontainers-cloud/
   - /subscription/products/build-cloud/
   - /subscription/build-cloud/
+  - /subscription/core-subscription/downgrade/
 ---
 
 Docker plans refer to plans that upgrade your account type from the basic free plan to a paid plan. Paid Docker plans come with higher usage limits, commercial
@@ -72,6 +73,12 @@ For Docker Team and Docker Business, you can purchase more seats for new members
 To learn how to manage seats from the Admin Console, see
 [Manage seats](/manuals/admin/organization/manage/manage-seats.md).
 
+### Docker Offload licenses
+
+[Docker Offload](/manuals/offload/_index.md) licenses are available for Docker Team and Docker Business plans. Once assigned to your account, organization owners can [manage license assignments](/manuals/admin/organization/manage/manage-licenses.md) in the Admin Console.
+
+To add Docker Offload licenses, you must <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_plans_docker_offload" class="link" rel="noopener">contact sales</a>.
+
 ### Docker Build Cloud minutes
 
 Each plan includes a base allocation of [Docker Build Cloud](/manuals/build-cloud/_index.md) build minutes per
@@ -87,12 +94,6 @@ To purchase additional minutes:
 1. Verify your billing details, continue to payment, and complete checkout.
 
 Your additional minutes appear on the Build minutes page immediately.
-
-### Docker Offload licenses
-
-[Docker Offload](/manuals/offload/_index.md) licenses are available for Docker Team and Docker Business plans. Once assigned to your account, organization owners can [manage license assignments](/manuals/admin/organization/manage/manage-licenses.md) in the Admin Console.
-
-To add Docker Offload licenses, you must <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_plans_docker_offload" class="link" rel="noopener">contact sales</a>.
 
 ### Testcontainers Cloud minutes
 

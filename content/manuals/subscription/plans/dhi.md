@@ -1,6 +1,6 @@
 ---
 title: DHI plans
-linkTitle: DHI
+linkTitle: Docker Hardened Images (DHI)
 description:
   Manage Docker Hardened Images Select and Enterprise repositories for
   organization accounts, including purchasing, adding repositories, and
@@ -17,7 +17,7 @@ aliases:
 [Docker Hardened Images (DHI)](/manuals/dhi/_index.md) are secure, minimal, production-ready container images maintained by Docker. DHI is available in three plans: Community, Select, and Enterprise.
 
 > [!TIP]
-> You can self-serve DHI Select. See [Manage plans](../manage.md) to add to your organization account.
+> You can self-serve a DHI Select plan. See [Manage plans](../manage.md) to add DHI Select to your organization account.
 
 ## Usage
 

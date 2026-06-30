@@ -12,6 +12,9 @@ aliases:
   - /subscription/products/
   - /subscription/scale/
   - /subscription/details/
+  - /subscription/downgrade/
+  - /docker-hub/cancel-downgrade/
+  - /docker-hub/billing/downgrade/
 grid:
   - title: Docker
     description: Personal and organization plans, including build and runtime minutes.
@@ -33,17 +36,17 @@ grid:
 
 > [!TIP]
 > Interested in pricing details? Check out the
-> <a href="https://www.docker.com/pricing/" id="dkr_docs_plans_index" class="link" rel="noopener">pricing page</a> to compare plans.
+> <a href="https://www.docker.com/pricing/" id="dkr_docs_index_pricing" class="link" rel="noopener">pricing page</a> to compare plans.
 
-The Docker product catalog lets you add plans to your Docker account on a self-serve basis. Plans can be tied to personal and organization account types, and include options to extend usage limits.
+You can subscribe to plans on a self-serve basis when you go to the Docker product catalog from the billing portal. Plans can be tied to personal and organization account types, and include options to extend usage limits.
 
-In this section, you can learn about different Docker plans:
+This section explains how different plans work. You will learn about:
 
-- Understand usage entitlements for each plan
-- How to top up your Docker plan
-- Billing behaviors when you upgrade or downgrade a plan
+- Usage entitlements for each plan
+- Billing behaviors when you upgrade, downgrade, cancel, or cancel auto-renewal
+- For supported plans, topping up with seats, licenses, or minutes
 
-To manage your plans, see [Manage plans](/manuals/subscription/manage.md).
+To manage your plans by adding a new plan or upgrading an active plan, see [Manage plans](/manuals/subscription/manage.md).
 
 ## Product catalog
 
