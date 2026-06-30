@@ -33,6 +33,7 @@ Install the `sbx` CLI and sign in:
 {{< tab name="macOS" >}}
 
 ```console
+$ brew trust docker/tap
 $ brew install docker/tap/sbx
 $ sbx login
 ```

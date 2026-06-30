@@ -69,6 +69,7 @@ Docker Desktop is not required to use `sbx`.
 {{< tab name="macOS" >}}
 
 ```console
+$ brew trust docker/tap
 $ brew install docker/tap/sbx
 $ sbx login
 ```
