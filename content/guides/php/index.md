@@ -298,16 +298,6 @@ $ docker compose down
 For more information about Compose commands, see the [Compose CLI
 reference](/reference/cli/docker/compose/).
 
-### Summary
-
-In this section, you learned how you can containerize and run a simple PHP
-application using Docker.
-
-### Next steps
-
-In the next section, you'll learn how you can develop your application using
-Docker containers.
-
 ## Use containers for PHP development
 
 ### Prerequisites
@@ -741,22 +731,6 @@ Open a browser and view the application at [http://localhost:9000/hello.php](htt
 Press `ctrl+c` in the terminal to stop your application.
 
 While the application appears the same, you can now make use of the dev dependencies. Continue to the next section to learn how you can run tests using Docker.
-
-### Summary
-
-In this section, you took a look at setting up your Compose file to add a local
-database and persist data. You also learned how to use Compose Watch to automatically sync your application when you update your code. And finally, you learned how to create a development container that contains the dependencies needed for development.
-
-Related information:
-
-- [Compose file reference](/reference/compose-file/)
-- [Compose file watch](/manuals/compose/how-tos/file-watch.md)
-- [Dockerfile reference](/reference/dockerfile.md)
-- [Official Docker Image for PHP](https://hub.docker.com/_/php)
-
-### Next steps
-
-In the next section, you'll learn how to run unit tests using Docker.
 
 ## Run PHP tests in a container
 

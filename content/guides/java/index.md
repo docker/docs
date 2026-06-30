@@ -302,16 +302,6 @@ $ docker compose down
 For more information about Compose commands, see the
 [Compose CLI reference](/reference/cli/docker/compose/).
 
-### Summary
-
-In this section, you learned how you can containerize and run a Java
-application using Docker.
-
-### Next steps
-
-In the next section, you'll learn how you can develop your application using
-Docker containers.
-
 ## Use containers for Java development
 
 ### Prerequisites
@@ -692,20 +682,6 @@ Save the changes to `layout.html` and then you can continue developing while the
 After the container is rebuilt and running, refresh [http://localhost:8080](http://localhost:8080) and then verify that **Home!** now appears in the menu.
 
 Press `ctrl+c` in the terminal to stop Compose Watch.
-
-### Summary
-
-In this section, you took a look at running a database locally and persisting the data. You also created a development image that contains the JDK and lets you attach a debugger. Finally, you set up your Compose file to expose the debugging port and configured Compose Watch to live reload your changes.
-
-Related information:
-
-- [Compose file reference](/reference/compose-file/)
-- [Compose Watch](/manuals/compose/how-tos/file-watch.md)
-- [Dockerfile reference](/reference/dockerfile/)
-
-### Next steps
-
-In the next section, you’ll take a look at how to run unit tests in Docker.
 
 ## Run your Java tests
 

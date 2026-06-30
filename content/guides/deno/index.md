@@ -207,24 +207,6 @@ In the terminal, run the following command to stop the application.
 $ docker compose down
 ```
 
-### Summary
-
-In this section, you learned how you can containerize and run your Deno
-application using Docker.
-
-Related information:
-
-- [Dockerfile reference](/reference/dockerfile.md)
-- [.dockerignore file](/reference/dockerfile.md#dockerignore-file)
-- [Docker Compose overview](/manuals/compose/_index.md)
-- [Compose file reference](/reference/compose-file/_index.md)
-- [Docker Hardened Images](/dhi/)
-
-### Next steps
-
-In the next section, you'll learn how you can develop your application using
-containers.
-
 ## Use containers for Deno development
 
 ### Prerequisites

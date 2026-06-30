@@ -538,13 +538,6 @@ base image that you have used in the second stage of the build is very barebones
 There's much more to multi-stage builds, including the possibility of multi-architecture builds,
 so feel free to check out [multi-stage builds](/manuals/build/building/multi-stage.md). This is, however, not essential for your progress here.
 
-### Next steps
-
-In this module, you met your example application and built and container image
-for it.
-
-In the next module, you’ll take a look at how to run your image as a container.
-
 ## Run your Go image as a container
 
 ### Prerequisites
@@ -741,10 +734,6 @@ CONTAINER ID   IMAGE            COMMAND             CREATED          STATUS     
 ```
 
 Now, you can easily identify your container based on the name.
-
-### Next steps
-
-In this module, you learned how to run containers and publish ports. You also learned to manage the lifecycle of containers. You then learned the importance of naming your containers so that they're more easily identifiable. In the next module, you’ll learn how to run a database in a container and connect it to your application.
 
 ## Use containers for Go development
 
@@ -1463,12 +1452,6 @@ If you are interested in experimenting with CockroachDB clusters, check out:
 #### Other databases
 
 Since you didn't run a cluster of CockroachDB instances, you might be wondering whether you could have used a non-distributed database engine. The answer is 'yes', and if you were to pick a more traditional SQL database, such as [PostgreSQL](https://www.postgresql.org/), the process described in this chapter would have been very similar.
-
-### Next steps
-
-In this module, you set up a containerized development environment with your application and the database engine running in different containers. You also wrote a Docker Compose file which links the two containers together and provides for easy starting up and tearing down of the development environment.
-
-In the next module, you'll take a look at one possible approach to running functional tests in Docker.
 
 ## Run your tests using Go test
 

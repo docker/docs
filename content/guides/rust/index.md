@@ -321,21 +321,6 @@ docker-rust-image-dhi:latest   99a1b925a8d6       11.6MB         2.45MB    U
 
 Docker removed the image tagged with `:v1.0.0`, but the `docker-rust-image-dhi:latest` tag is available on your machine.
 
-### Summary
-
-This section showed how to create a Dockerfile and `.dockerignore` file for a Rust application, build an image, and tag and list images.
-
-Related information:
-
-- [Dockerfile reference](/reference/dockerfile.md)
-- [.dockerignore file](/reference/dockerfile.md#dockerignore-file)
-- [docker build CLI reference](/reference/cli/docker/buildx/build/)
-- [Docker Hardened Images](/dhi/)
-
-### Next steps
-
-In the next section learn how to run your image as a container.
-
 ## Run your Rust image as a container
 
 ### Prerequisite
@@ -513,18 +498,6 @@ CONTAINER ID   IMAGE                   COMMAND                  CREATED         
 ```
 
 Now you can identify your container based on the name.
-
-### Summary
-
-In this section, you took a look at running containers. You also took a look at managing containers by starting, stopping, and restarting them. And finally, you looked at naming your containers so they are more identifiable.
-
-Related information:
-
-- [docker run CLI reference](/reference/cli/docker/container/run/)
-
-### Next steps
-
-In the next section, you’ll learn how to run a database in a container and connect it to a Rust application.
 
 ## Develop your Rust application
 

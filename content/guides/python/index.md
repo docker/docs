@@ -471,22 +471,6 @@ $ docker compose down
 For more information about Compose commands, see the [Compose CLI
 reference](/reference/cli/docker/compose/).
 
-### Summary
-
-In this section, you learned how you can containerize and run your Python
-application using Docker.
-
-Related information:
-
-- [Docker Hardened Images](/dhi/)
-- [Dockerfile reference](/reference/dockerfile.md)
-- [Multi-stage builds](/manuals/build/building/multi-stage.md)
-- [Docker Compose overview](/manuals/compose/_index.md)
-
-### Next steps
-
-In the next section, you'll take a look at how to set up a local development environment using Docker containers.
-
 ## Use containers for Python development
 
 ### Prerequisites
@@ -2082,22 +2066,6 @@ Hello, Docker!!!
 ```
 
 Press `ctrl+c` in the terminal to stop your application.
-
-### Summary
-
-In this section, you took a look at setting up your Compose file to add a local
-database and persist data. You also learned how to use Compose Watch to automatically rebuild and run your container when you update your code.
-
-Related information:
-
-- [Compose file reference](/reference/compose-file/)
-- [Compose secrets](/reference/compose-file/secrets.md)
-- [Compose Watch](/manuals/compose/how-tos/file-watch.md)
-- [Multi-stage builds](/manuals/build/building/multi-stage.md)
-
-### Next steps
-
-In the next section, you'll learn how you can set up linting, formatting, and type checking to follow the best practices in Python apps.
 
 ## Linting, formatting, and type checking for Python
 

@@ -106,20 +106,6 @@ $ docker compose down
 For more information about Compose commands, see the [Compose CLI
 reference](/reference/cli/docker/compose/).
 
-### Summary
-
-In this section, you learned how you can containerize and run your R
-application using Docker.
-
-Related information:
-
-- [Docker Compose overview](/manuals/compose/_index.md)
-
-### Next steps
-
-In the next section, you'll learn how you can develop your application using
-containers.
-
 ## Use containers for R development
 
 ### Prerequisites

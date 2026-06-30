@@ -128,19 +128,6 @@ $ docker run hello
 
 You should see the output `Hello, World!` in the terminal.
 
-### Summary
-
-In this section, you learned how to create a multi-stage build for a C++ application. Multi-stage builds help you optimize the size of your final image and separate build dependencies from runtime dependencies.
-In this example, the final image only contains the static binary and doesn't include any build dependencies.
-
-As the image has an empty base, the usual OS tools are also absent. So, for example, you can't run a simple `ls` command in the container:
-
-```bash
-$ docker run hello ls
-```
-
-This makes the image very lightweight and secure.
-
 ## Containerize a C++ application
 
 ### Prerequisites
@@ -211,20 +198,6 @@ $ docker compose down
 
 For more information about Compose commands, see the [Compose CLI
 reference](/reference/cli/docker/compose/).
-
-### Summary
-
-In this section, you learned how you can containerize and run your C++
-application using Docker.
-
-Related information:
-
-- [Docker Compose overview](/manuals/compose/_index.md)
-
-### Next steps
-
-In the next section, you'll learn how you can develop your application using
-containers.
 
 ## Use containers for C++ development
 

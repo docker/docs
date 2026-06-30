@@ -537,43 +537,6 @@ $ docker compose down
 
 ---
 
-### Summary
-
-In this guide, you learned how to containerize, build, and run an Vue.js application using Docker. By following best practices, you created a secure, optimized, and production-ready setup.
-
-What you accomplished:
-
-- Created a multi-stage `Dockerfile` that compiles the Vue.js application and serves the static files using Nginx.
-- Created a `.dockerignore` file to exclude unnecessary files and keep the image clean and efficient.
-- Built your Docker image using `docker build`.
-- Ran the container using `docker compose up`, both in the foreground and in detached mode.
-- Verified that the app was running by visiting [http://localhost:8080](http://localhost:8080).
-- Learned how to stop the containerized application using `docker compose down`.
-
-You now have a fully containerized Vue.js application, running in a Docker container, and ready for deployment across any environment with confidence and consistency.
-
----
-
-### Related resources
-
-Explore official references and best practices to sharpen your Docker workflow:
-
-- [Multi-stage builds](/build/building/multi-stage/) – Learn how to separate build and runtime stages.
-- [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/) – Write efficient, maintainable, and secure Dockerfiles.
-- [Build context in Docker](/build/concepts/context/) – Learn how context affects image builds.
-- [`docker build` CLI reference](/reference/cli/docker/image/build/) – Build Docker images from a Dockerfile.
-- [`docker images` CLI reference](/reference/cli/docker/image/ls/) – Manage and inspect local Docker images.
-- [`docker compose up` CLI reference](/reference/cli/docker/compose/up/) – Start and run multi-container applications.
-- [`docker compose down` CLI reference](/reference/cli/docker/compose/down/) – Stop and remove containers, networks, and volumes.
-
----
-
-### Next steps
-
-With your Vue.js application now containerized, you're ready to move on to the next step.
-
-In the next section, you'll learn how to develop your application using Docker containers, enabling a consistent, isolated, and reproducible development environment across any machine.
-
 ## Use containers for Vue.js development
 
 ### Prerequisites
@@ -730,35 +693,6 @@ To confirm that Compose Watch is functioning correctly:
 You should see the updated text appear instantly, without needing to rebuild the container manually. This confirms that file watching and automatic synchronization are working as expected.
 
 ---
-
-### Summary
-
-In this section, you set up a complete development and production workflow for your Vue.js application using Docker and Docker Compose.
-
-Here’s what you accomplished:
-
-- Created a `Dockerfile.dev` to streamline local development with hot reloading
-- Defined separate `vuejs-dev` and `vuejs-prod` services in your `compose.yaml` file
-- Enabled real-time file syncing using Compose Watch for a smoother development experience
-- Verified that live updates work seamlessly by modifying and previewing a component
-
-With this setup, you're now equipped to build, run, and iterate on your Vue.js app entirely within containers—efficiently and consistently across environments.
-
----
-
-### Related resources
-
-Deepen your knowledge and improve your containerized development workflow with these guides:
-
-- [Using Compose Watch](/manuals/compose/how-tos/file-watch.md) – Automatically sync source changes during development
-- [Multi-stage builds](/manuals/build/building/multi-stage.md) – Create efficient, production-ready Docker images
-- [Dockerfile best practices](/build/building/best-practices/) – Write clean, secure, and optimized Dockerfiles.
-- [Compose file reference](/compose/compose-file/) – Learn the full syntax and options available for configuring services in `compose.yaml`.
-- [Docker volumes](/storage/volumes/) – Persist and manage data between container runs
-
-### Next steps
-
-In the next section, you'll learn how to run unit tests for your Vue.js application inside Docker containers. This ensures consistent testing across all environments and removes dependencies on local machine setup.
 
 ## Run vue.js tests in a container
 

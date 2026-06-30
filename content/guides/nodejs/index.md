@@ -463,21 +463,6 @@ $ docker compose down
 For more information about Compose commands, see the [Compose CLI
 reference](/reference/cli/docker/compose/).
 
-### Summary
-
-In this section, you learned how to containerize and run a Node.js application using Docker.
-
-Related information:
-
-- [Docker Hardened Images](/dhi/)
-- [Dockerfile reference](/reference/dockerfile.md)
-- [Multi-stage builds](/manuals/build/building/multi-stage.md)
-- [Docker Compose overview](/manuals/compose/_index.md)
-
-### Next steps
-
-In the next section, you'll take a look at how to set up a local development environment using Docker containers.
-
 ## Use containers for Node.js development
 
 ### Prerequisites
@@ -1105,22 +1090,6 @@ Debugger listening on ws://0.0.0.0:9229/...
 If that line is missing, confirm the `dev` script in `package.json` includes `--inspect=0.0.0.0:9229` and that `9229:9229` appears in the `ports` list for the `server` service in `compose.yaml`.
 
 For more details about Node.js debugging, see the [Node.js debugging guide](https://nodejs.org/en/docs/guides/debugging-getting-started).
-
-### Summary
-
-In this section, you set up a Compose file with a local database and persistent storage, set up Compose Watch to automatically sync code changes, and configured a debugger that attaches from VS Code and Chrome DevTools.
-
-Related information:
-
-- [Compose file reference](/reference/compose-file/)
-- [Compose secrets](/reference/compose-file/secrets.md)
-- [Compose Watch](/manuals/compose/how-tos/file-watch.md)
-- [Multi-stage builds](/manuals/build/building/multi-stage.md)
-- [Node.js debugging guide](https://nodejs.org/en/docs/guides/debugging-getting-started)
-
-### Next steps
-
-In the next section, you'll learn how to run tests using Docker.
 
 ## Run Node.js tests in a container
 

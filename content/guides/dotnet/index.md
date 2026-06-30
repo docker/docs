@@ -375,23 +375,6 @@ $ docker compose down
 For more information about Compose commands, see the [Compose CLI
 reference](/reference/cli/docker/compose/).
 
-### Summary
-
-In this section, you learned how you can containerize and run your .NET
-application using Docker.
-
-Related information:
-
-- [Dockerfile reference](/reference/dockerfile.md)
-- [.dockerignore file reference](/reference/dockerfile.md#dockerignore-file)
-- [Docker Compose overview](/manuals/compose/_index.md)
-- [Docker Hardened Images](/dhi/)
-
-### Next steps
-
-In the next section, you'll learn how you can develop your application using
-Docker containers.
-
 ## Use containers for .NET development
 
 ### Prerequisites
@@ -793,21 +776,6 @@ secrets:
 ```
 
 Your containerized application will now use the SDK image (either `dhi.io/dotnet:10-sdk` for DHI or `mcr.microsoft.com/dotnet/sdk:10.0-alpine` for official images), which includes development tools like `dotnet test`. Continue to the next section to learn how you can run `dotnet test`.
-
-### Summary
-
-In this section, you took a look at setting up your Compose file to add a local
-database and persist data. You also learned how to use Compose Watch to automatically rebuild and run your container when you update your code. And finally, you learned how to create a development container that contains the SDK tools and dependencies needed for development.
-
-Related information:
-
-- [Compose file reference](/reference/compose-file/)
-- [Compose file watch](/manuals/compose/how-tos/file-watch.md)
-- [Multi-stage builds](/manuals/build/building/multi-stage.md)
-
-### Next steps
-
-In the next section, you'll learn how to run unit tests using Docker.
 
 ## Run .NET tests in a container
 

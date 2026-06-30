@@ -398,15 +398,6 @@ $ docker compose down
 For more information about Compose commands, see the [Compose CLI
 reference](/reference/cli/docker/compose/).
 
-### Summary
-
-In this section, you learned how you can containerize and run your Ruby
-application using Docker.
-
-Related information:
-
-- [Docker Compose overview](/manuals/compose/_index.md)
-
 ## Use containers for Ruby on Rails development
 
 ### Prerequisites
