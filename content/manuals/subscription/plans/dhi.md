@@ -28,7 +28,7 @@ DHI Community gives you access to hardened base images from a public registry at
 
 When you upgrade from DHI Community to DHI Select, you purchase a set number of repositories that are mirrored into your organization's namespace. Entitlements are scoped to the organization account that you assign them to during checkout. All organization members can then pull from those mirrored repositories.
 
-DHI Enterprise extends DHI Select with unlimited customizations, full catalog access, the Hardened System Packages repository, and an Extended Lifecycle Support add-on.
+DHI Enterprise extends DHI Select with unlimited customizations, optional full catalog access, the Hardened System Packages repository, and an Extended Lifecycle Support add-on.
 
 For details on setting up and managing repositories, see [Get started with DHI Select and Enterprise](/manuals/dhi/how-to/select-enterprise.md).
 
