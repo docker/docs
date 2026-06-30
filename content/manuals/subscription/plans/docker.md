@@ -124,5 +124,5 @@ Canceling a paid plan returns your account to Docker Personal or a basic organiz
 To cancel your plan:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and go to **Billing**.
-2. From **Active plans**, select the action menu next to your Docker plan.
-3. Select **Cancel plan** and complete the feedback survey.
+1. From **Active plans**, select the action menu next to your Docker plan.
+1. Select **Cancel plan** and complete the feedback survey.

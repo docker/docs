@@ -57,12 +57,13 @@ Docker plans that upgrade your account (Docker Pro or Docker Team and Business) 
 
 Plans come with usage entitlements that can be extended without upgrading to a different plan.
 
-| Unit         | Description                                                                           | Examples                      |
-| ------------ | ------------------------------------------------------------------------------------- | ----------------------------- |
-| Seats        | Each seat extends entitlements to one more member.                                    | Docker Team, Docker Business  |
-| Licenses     | Access to specific products or features.                                              | AI Governance, Docker Offload |
-| Minutes      | Cloud build capacity, sold in blocks and consumed within the billing period.          | Docker Build Cloud            |
-| Repositories | Additional container repositories covered by security scanning and analysis features. | DHI                           |
+| Unit              | Description                                                                           | Examples                      |
+| ----------------- | ------------------------------------------------------------------------------------- | ----------------------------- |
+| Seats             | Each seat extends entitlements to one more member.                                    | Docker Team, Docker Business  |
+| Licenses          | Access to specific products or features.                                              | AI Governance, Docker Offload |
+| Minutes           | Cloud build capacity, sold in blocks and consumed within the billing period.          | Docker Build Cloud            |
+| Repositories      | Additional container repositories covered by security scanning and analysis features. | DHI                           |
+| Tracked companies | Additional companies tracked in publisher analytics, sold in blocks of 25.            | DVP Starter, DVP Growth       |
 
 ## Manage your plans
 
