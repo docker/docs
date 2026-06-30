@@ -10,6 +10,12 @@ toc_max: 2
 aliases:
   - /language/golang/
   - /guides/language/golang/
+  - /guides/golang/configure-ci-cd/
+  - /language/golang/configure-ci-cd/
+  - /guides/language/golang/configure-ci-cd/
+  - /guides/golang/deploy/
+  - /language/golang/deploy/
+  - /guides/language/golang/deploy/
 languages: [go]
 params:
   time: 30 minutes
@@ -29,8 +35,6 @@ In this guide, you’ll learn how to:
 - Run the image as a container in your local Docker instance and manage the container's lifecycle.
 - Use multi-stage builds for building small images efficiently while keeping your Dockerfiles easy to read and maintain.
 - Use Docker Compose to orchestrate running of multiple related containers together in a development environment.
-- Configure a CI/CD pipeline for your application using [GitHub Actions](https://docs.github.com/en/actions)
-- Deploy your containerized Go application.
 
 ## Prerequisites
 

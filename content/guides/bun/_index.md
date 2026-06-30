@@ -5,6 +5,9 @@ title: Bun language-specific guide
 summary: |
   Learn how to containerize JavaScript applications with the Bun runtime.
 linkTitle: Bun
+aliases:
+  - /guides/bun/configure-ci-cd/
+  - /guides/bun/deploy/
 languages: [js]
 tags: [dhi]
 params:
@@ -21,8 +24,6 @@ The Bun getting started guide teaches you how to create a containerized Bun appl
 
 * Containerize and run a Bun application using Docker
 * Set up a local environment to develop a Bun application using containers
-* Configure a CI/CD pipeline for a containerized Bun application using GitHub Actions
-* Deploy your containerized application locally to Kubernetes to test and debug your deployment
 
 ## Prerequisites
 

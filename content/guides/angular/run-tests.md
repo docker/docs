@@ -132,6 +132,3 @@ Explore official references and best practices to sharpen your Docker testing wo
 - [`docker compose run` CLI reference](/reference/cli/docker/compose/run/) – Run one-off commands in a service container.
 ---
 
-## Next steps
-
-Next, you’ll learn how to set up a CI/CD pipeline using GitHub Actions to automatically build and test your Angular application in a containerized environment. This ensures your code is validated on every push or pull request, maintaining consistency and reliability across your development workflow.

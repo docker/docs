@@ -10,6 +10,13 @@ toc_max: 2
 aliases:
   - /language/cpp/
   - /guides/language/cpp/
+  - /guides/cpp/configure-ci-cd/
+  - /language/cpp/configure-ci-cd/
+  - /guides/language/cpp/configure-ci-cd/
+  - /guides/cpp/deploy/
+  - /language/cpp/deploy/
+  - /guides/language/cpp/deploy/
+  - /guides/cpp/security/
 languages: [cpp]
 params:
   time: 20 minutes
@@ -24,9 +31,6 @@ The C++ getting started guide teaches you how to create a containerized C++ appl
 - Containerize and run a C++ application using a multi-stage Docker build
 - Build and run a C++ application using Docker Compose
 - Set up a local environment to develop a C++ application using containers
-- Configure a CI/CD pipeline for a containerized C++ application using GitHub Actions
-- Deploy your containerized application locally to Kubernetes to test and debug your deployment
-- Use BuildKit to generate SBOM attestations during the build process
 
 After completing the C++ getting started modules, you should be able to containerize your own C++ application based on the examples and instructions provided in this guide.
 

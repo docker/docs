@@ -113,6 +113,3 @@ Related information:
 
 - [docker compose run](/reference/cli/docker/compose/run/)
 
-## Next steps
-
-Next, you’ll learn how to set up a CI/CD pipeline using GitHub Actions.

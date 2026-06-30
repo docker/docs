@@ -10,6 +10,12 @@ toc_max: 2
 aliases:
   - /language/php/
   - /guides/language/php/
+  - /guides/php/configure-ci-cd/
+  - /language/php/configure-ci-cd/
+  - /guides/language/php/configure-ci-cd/
+  - /guides/php/deploy/
+  - /language/php/deploy/
+  - /guides/language/php/deploy/
 languages: [php]
 params:
   time: 20 minutes
@@ -20,8 +26,6 @@ The PHP language-specific guide teaches you how to create a containerized PHP ap
 - Containerize and run a PHP application
 - Set up a local environment to develop a PHP application using containers
 - Run tests for a PHP application within containers
-- Configure a CI/CD pipeline for a containerized PHP application using GitHub Actions
-- Deploy your containerized application locally to Kubernetes to test and debug your deployment
 
 After completing the PHP language-specific guide, you should be able to containerize your own PHP application based on the examples and instructions provided in this guide.
 

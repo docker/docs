@@ -216,6 +216,3 @@ Related information:
 - [Compose file watch](/manuals/compose/how-tos/file-watch.md)
 - [Multi-stage builds](/manuals/build/building/multi-stage.md)
 
-## Next steps
-
-In the next section, you'll take a look at how to set up a CI/CD pipeline using GitHub Actions.

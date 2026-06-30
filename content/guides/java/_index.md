@@ -10,6 +10,12 @@ toc_max: 2
 aliases:
   - /language/java/
   - /guides/language/java/
+  - /guides/java/configure-ci-cd/
+  - /language/java/configure-ci-cd/
+  - /guides/language/java/configure-ci-cd/
+  - /guides/java/deploy/
+  - /language/java/deploy/
+  - /guides/language/java/deploy/
 languages: [java]
 params:
   time: 20 minutes
@@ -20,8 +26,6 @@ The Java getting started guide teaches you how to create a containerized Spring 
 - Containerize and run a Spring Boot application with Maven
 - Set up a local development environment to connect a database to the container, configure a debugger, and use Compose Watch for live reload
 - Run your unit tests inside a container
-- Configure a CI/CD pipeline for your application using GitHub Actions
-- Deploy your containerized application locally to Kubernetes to test and debug your deployment
 
 After completing the Java getting started modules, you should be able to containerize your own Java application based on the examples and instructions provided in this guide.
 

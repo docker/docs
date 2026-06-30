@@ -10,6 +10,12 @@ toc_max: 2
 aliases:
   - /languages/r/
   - /guides/languages/r/
+  - /guides/r/configure-ci-cd/
+  - /language/r/configure-ci-cd/
+  - /guides/language/r/configure-ci-cd/
+  - /guides/r/deploy/
+  - /language/r/deploy/
+  - /guides/language/r/deploy/
 languages: [r]
 params:
   time: 10 minutes
@@ -19,7 +25,5 @@ The R language-specific guide teaches you how to containerize a R application us
 
 - Containerize and run a R application
 - Set up a local environment to develop a R application using containers
-- Configure a CI/CD pipeline for a containerized R application using GitHub Actions
-- Deploy your containerized R application locally to Kubernetes to test and debug your deployment
 
 Start by containerizing an existing R application.

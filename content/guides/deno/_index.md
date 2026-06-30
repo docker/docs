@@ -5,6 +5,9 @@ title: Deno language-specific guide
 summary: |
   Learn how to containerize JavaScript applications with the Deno runtime using Docker.
 linkTitle: Deno
+aliases:
+  - /guides/deno/configure-ci-cd/
+  - /guides/deno/deploy/
 languages: [js]
 tags: [dhi]
 params:
@@ -22,8 +25,6 @@ The Deno getting started guide teaches you how to create a containerized Deno ap
 * Containerize and run a Deno application using Docker
 * Set up a local environment to develop a Deno application using containers
 * Use Docker Compose to run the application.
-* Configure a CI/CD pipeline for a containerized Deno application using GitHub Actions
-* Deploy your containerized application locally to Kubernetes to test and debug your deployment
 
 ## Prerequisites
 

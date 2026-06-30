@@ -8,6 +8,12 @@ keywords: getting started, .net
 aliases:
   - /language/dotnet/
   - /guides/language/dotnet/
+  - /guides/dotnet/configure-ci-cd/
+  - /language/dotnet/configure-ci-cd/
+  - /guides/language/dotnet/configure-ci-cd/
+  - /guides/dotnet/deploy/
+  - /language/dotnet/deploy/
+  - /guides/language/dotnet/deploy/
 languages: [c-sharp]
 params:
   time: 20 minutes
@@ -20,8 +26,6 @@ The .NET getting started guide teaches you how to create a containerized .NET ap
 - Containerize and run a .NET application
 - Set up a local environment to develop a .NET application using containers
 - Run tests for a .NET application using containers
-- Configure a CI/CD pipeline for a containerized .NET application using GitHub Actions
-- Deploy your containerized application locally to Kubernetes to test and debug your deployment
 
 After completing the .NET getting started modules, you should be able to containerize your own .NET application based on the examples and instructions provided in this guide.
 

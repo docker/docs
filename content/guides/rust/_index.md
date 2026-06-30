@@ -10,6 +10,12 @@ toc_max: 2
 aliases:
   - /language/rust/
   - /guides/language/rust/
+  - /guides/rust/configure-ci-cd/
+  - /language/rust/configure-ci-cd/
+  - /guides/language/rust/configure-ci-cd/
+  - /guides/rust/deploy/
+  - /language/rust/deploy/
+  - /guides/language/rust/deploy/
 languages: [rust]
 tags: [dhi]
 params:
@@ -23,8 +29,6 @@ The Rust language-specific guide teaches you how to create a containerized Rust 
 - Set up volumes and networking
 - Orchestrate containers using Compose
 - Use containers for development
-- Configure a CI/CD pipeline for your application using GitHub Actions
-- Deploy your containerized Rust application locally to Kubernetes to test and debug your deployment
 
 After completing the Rust modules, you should be able to containerize your own Rust application based on the examples and instructions provided in this guide.
 

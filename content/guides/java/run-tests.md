@@ -119,7 +119,3 @@ You should see output containing the following
 #15 DONE 101.4s
 ```
 
-## Next steps
-
-In the next section, you’ll take a look at how to set up a CI/CD pipeline using
-GitHub Actions.
