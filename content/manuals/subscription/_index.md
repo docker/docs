@@ -1,5 +1,5 @@
 ---
-title: Plans overview
+title: Overview
 linkTitle: Subscription
 description: Learn about Docker plans, like how to subscribe to product-based plans and how they apply to personal and organization accounts.
 keywords:
@@ -15,8 +15,8 @@ grid_subscriptions:
     description: Visit the pricing page to see what's included in different Docker plans.
     link: "https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscription"
     icon: magnifying-glass
-  - title: Set up your plan
-    description: Get started setting up a personal or organization plan.
+  - title: Manage plans
+    description: Add a new plan, upgrade an active plan, or cancel auto-renewal.
     link: /subscription/manage/
     icon: shopping-cart
   - title: Explore plans
@@ -42,13 +42,12 @@ You can subscribe to several Docker plans that range from free to paid plans. Wh
 
 You can subscribe to plans for individual or organization accounts, or plans for specific products. The following table summarizes the available plans.
 
-| Plans                                          | Billing model                                             | Types                                     |
-| ---------------------------------------------- | --------------------------------------------------------- | ----------------------------------------- |
-| [Docker Individual](/accounts/)                | Flat-rate plans for personal accounts                     | Docker Personal, Docker Pro               |
-| [Docker Organization](/admin/)                 | Flat-rate plans for organization accounts                 | Docker Team, Docker Business              |
-| [Docker Hardened Images (DHI)](/dhi/)          | Graduated security features for hardened container images | DHI Community, DHI Select, DHI Enterprise |
-| [Gordon](/ai/gordon/)                          | Prepaid usage for the Gordon AI agent                     | Gordon Plus, Gordon Max, Gordon Ultra     |
-| [AI Governance](/ai/sandboxes/governance/org/) | Purchase set amount of licenses                           | AI Governance                             |
+| Plans                                                              | Billing model                                             | Types                                                     |
+| ------------------------------------------------------------------ | --------------------------------------------------------- | --------------------------------------------------------- |
+| [Docker](/manuals/subscription/plans/docker.md)                    | Flat-rate plans for personal and organization accounts    | Docker Personal, Docker Pro, Docker Team, Docker Business |
+| [Docker Hardened Images (DHI)](/manuals/subscription/plans/dhi.md) | Graduated security features for hardened container images | DHI Community, DHI Select, DHI Enterprise                 |
+| [Gordon](/manuals/subscription/plans/gordon.md)                    | Prepaid usage for the Gordon AI agent                     | Gordon Plus, Gordon Max, Gordon Ultra                     |
+| [AI Governance](/manuals/subscription/plans/ai-governance.md)      | Purchase set amount of licenses                           | AI Governance                                             |
 
 Docker plans that upgrade your account (Docker Pro or Docker Team and Business) can provide a foundation for most use cases. Some product plans may require an upgraded Docker account while other product plans let you subscribe without an upgraded account. To learn more, see [Docker plans](/manuals/subscription/plans/_index.md).
 
@@ -63,11 +62,11 @@ Plans come with usage entitlements that can be extended without upgrading to a d
 | Minutes      | Cloud build capacity, sold in blocks and consumed within the billing period.          | Docker Build Cloud            |
 | Repositories | Additional container repositories covered by security scanning and analysis features. | DHI                           |
 
-## Manage your plans 
+## Manage your plans
 
-To subscribe to a new plan, you can self-serve through **Billing** in [Docker Home](https://app.docker.com), or by <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_index_sales" class="link" rel="noopener">contacting sales</a>. 
+To subscribe to a new plan, you can self-serve through **Billing** in [Docker Home](https://app.docker.com), or by <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_index_sales" class="link" rel="noopener">contacting sales</a>.
 
-To learn more about adding a new plan or upgrading an active plan, see [Manage plans](/manuals/subscription/manage.md). 
+To learn more about adding a new plan or upgrading an active plan, see [Manage plans](/manuals/subscription/manage.md).
 
 ## What's next
 

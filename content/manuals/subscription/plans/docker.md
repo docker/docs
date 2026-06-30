@@ -21,30 +21,17 @@ aliases:
 ---
 
 Docker plans refer to plans that upgrade your account type from the basic free plan to a paid plan. Paid Docker plans come with higher usage limits, commercial
-licensing, and expanded feature sets. Upgrades to paid Docker plans are available for personal accounts
-and organization accounts.
+licensing, and expanded feature sets.
 
-> [!TIP]
-> To upgrade your free Docker plan in the billing portal, see [Manage plans](../manage.md).
+- Docker Personal is free for individual developers. Docker Pro adds unlimited private repositories, Docker Build Cloud, and commercial Docker Desktop use.
+- Docker Team and Docker Business are plans for organizations, with Team adding audit logs and role-based access control, and Business adding SSO, SCIM, hardened Docker Desktop, and image access management.
+
+To upgrade your free Docker plan in the billing portal, see [Manage plans](../manage.md).
 
 ## Usage
 
-Docker Personal and Docker Pro are Docker plans for individual account types while Docker Team and Docker Business are Docker plans for organization account types.
-
-This table summarizes usage limits and feature sets available with each Docker plan:
-
-| Feature                            | Personal   | Pro        | Team       | Business  |
-| ---------------------------------- | ---------- | ---------- | ---------- | --------- |
-| Docker Desktop                     | Basic      | Commercial | Commercial | Hardened  |
-| Private Hub repos                  | 1          | Unlimited  | Unlimited  | Unlimited |
-| Hub pull rate                      | 100/hr     | Unlimited  | Unlimited  | Unlimited |
-| Docker Scout repos                 | 1          | 2          | Unlimited  | Unlimited |
-| Gordon                             | Included   | Included   | —          | —         |
-| Build Cloud minutes/month          | Free trial | 200        | 500        | 1,500     |
-| Testcontainers minutes/month       | Free trial | 100        | 500        | 1,500     |
-| SSO / SCIM                         | —          | —          | —          | ✓         |
-| Registry & Image Access Management | —          | —          | —          | ✓         |
-| Max users                          | 1          | 1          | 100        | Unlimited |
+Docker Personal and Docker Pro are Docker plans for individual account types while Docker Team and Docker Business are Docker plans for organization account types. For a full feature and pricing breakdown, see the
+<a href="https://www.docker.com/pricing/" id="dkr_docs_index_pricing_docker_plans" class="link" rel="noopener">Docker pricing page</a>. 
 
 > [!TIP]
 > If you're upgrading from a Personal plan to a Team plan
