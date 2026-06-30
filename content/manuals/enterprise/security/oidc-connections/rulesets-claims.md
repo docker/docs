@@ -54,11 +54,11 @@ The exact format varies and depends on what triggered the workflow.
 
 You can use wildcards to match across repositories or branches:
 
-| Pattern                                        | Matches                                   |
-| :--------------------------------------------- | :---------------------------------------- |
-| `repo:my-org/my-repo:ref:refs/heads/main`      | Only the `main` branch of a specific repo |
-| `repo:my-org/*`                                | All repos in the organization             |
-| `repo:my-org/my-repo:ref:refs/heads/release-*` | All branches starting with `release-`     |
+| Pattern                                        | Matches                                         |
+| :--------------------------------------------- | :---------------------------------------------- |
+| `repo:my-org/my-repo:ref:refs/heads/main`      | Only the `main` branch of a specific repository |
+| `repo:my-org/*`                                | All repos in the organization                   |
+| `repo:my-org/my-repo:ref:refs/heads/release-*` | All branches starting with `release-`           |
 
 ## Resources
 

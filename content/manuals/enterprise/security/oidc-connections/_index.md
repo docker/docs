@@ -5,6 +5,11 @@ description: Learn how OIDC connections let organizations authenticate workloads
 keywords: oidc connections, openid connect, subject claims, rulesets, enterprise security, authentication, admin
 tags: [admin]
 weight: 35
+params:
+  sidebar:
+    badge:
+      color: blue
+      text: Beta
 ---
 
 {{< summary-bar feature_name="OIDC connections" >}}
