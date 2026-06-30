@@ -13,10 +13,9 @@ aliases:
   - /subscription/gordon/
 ---
 
-[Gordon](/manuals/ai/gordon/_index.md) is an AI assistant for Docker workflows. Gordon Base is included at no cost with Docker Personal and Docker Pro plans. Gordon Plus, Max, and Ultra increase your monthly usage allowance and are available as self-serve in the billing portal.
+[Gordon](/manuals/ai/gordon/_index.md) is an AI assistant for Docker workflows. Gordon Base is included at no cost with Docker Personal and Docker Pro plans. Gordon Plus, Max, and Ultra increase your monthly usage allowance and are available as self-serve in the billing portal. 
 
-> [!TIP]
-> To subscribe to a Gordon plan, see [Set up, upgrade, or downgrade a plan](../manage.md).
+To upgrade to a Gordon paid plan, see [Manage plans](/manuals/subscription/manage.md). 
 
 ## Usage
 
@@ -29,24 +28,20 @@ Gordon usage is measured in questions. When you upgrade from Gordon Base to a pa
 
 ## Billing behaviors
 
-Gordon plans are billed monthly at the first of the month. If you purchase after the first of the month, your invoice reflects prorated charges for the remaining days in the cycle.
+Gordon plans are billed monthly at the first of the month. If you purchase after the first of the month, your invoice reflects prorated charges for the remaining days in the cycle. Subscribing to a Gordon plan charges you at the time of purchase. When you upgrade your Gordon plan, usage limits are immediately effective after payment. 
 
-Subscribing to a Gordon plan charges you at the time of purchase. When you upgrade your Gordon plan, usage limits are immediately effective after payment.
+## Downgrade or disable auto-renewal
 
-## Downgrade
-
-When you downgrade to a lower Gordon plan, the change takes effect on the 1st of the following month. For example, if you downgrade from Gordon Ultra to Gordon Plus on April 15:
+When you downgrade a Gordon plan, the change takes effect on the 1st of the following month. Disabling auto-renewal for a Gordon plan returns your paid Gordon plan to Gordon Base in the same pattern. For example, if you downgrade from Gordon Ultra to Gordon Plus on April 15:
 
 - From April 15 through April 30, you retain Ultra access and usage limits.
 - On May 1, you are charged the Gordon Plus plan rate and Gordon Plus usage limits take effect.
 
-Cancelling a Gordon plan and returning to Gordon Base follows the same pattern.
-
-To downgrade or cancel:
+To downgrade or disable auto-renewal:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and go to **Billing**.
 1. From **Active plans**, select **Manage** next to your Gordon plan.
-1. Select a lower plan to downgrade, or select **Cancel auto renewal** to cancel.
+2. Select **Downgrade plan** to switch to a lower tier, or **Disable auto renewal** to end your plan after the current billing cycle.
 
 > [!IMPORTANT]
 > Docker does not issue refunds or credits

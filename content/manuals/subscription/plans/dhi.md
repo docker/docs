@@ -17,7 +17,7 @@ aliases:
 [Docker Hardened Images (DHI)](/manuals/dhi/_index.md) are secure, minimal, production-ready container images maintained by Docker. DHI is available in three plans: Community, Select, and Enterprise.
 
 > [!TIP]
-> To subscribe to DHI Select, see [Set up, upgrade, or downgrade a plan](../manage.md).
+> You can self-serve DHI Select. See [Manage plans](../manage.md) to add to your organization account.
 
 ## Usage
 
@@ -25,27 +25,24 @@ DHI Community gives you access to hardened base images from a public registry at
 
 When you upgrade from DHI Community to DHI Select, you purchase a set number of repositories that are mirrored into your organization's namespace. Entitlements are scoped to the organization account that you assign them to during checkout. All organization members can then pull from those mirrored repositories.
 
-DHI Enterprise extends DHI Select with unlimited customizations, full catalog access, the Hardened System Packages repository, and an Extended Lifecycle Support add-on. To upgrade to DHI Enterprise, [contact Docker sales](https://www.docker.com/pricing/contact-sales/).
+DHI Enterprise extends DHI Select with unlimited customizations, full catalog access, the Hardened System Packages repository, and an Extended Lifecycle Support add-on. You must <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_plans_dhi" class="link" rel="noopener">contact sales</a> to upgrade to DHI Enterprise.
 
 For details on setting up and managing repositories, see [Get started with DHI Select and Enterprise](/manuals/dhi/how-to/select-enterprise.md).
 
 ## Billing behaviors
 
-DHI Select is an annual plan billed per repository from the date your plan starts. Repositories added mid-cycle are prorated for the remainder of the billing period.
+DHI Select is an annual plan billed per repository from the date your plan starts. Repositories added mid-cycle are prorated for the remainder of the billing period. You can add more repositories to your DHI Select plan by going to **Active plans** in the billing portal. For steps, see [Manage plans](../manage.md#upgrade-plans).
 
-To add more repositories, go to **Active plans** in the billing portal. For steps, see [Upgrade or downgrade a plan](../manage.md#upgrade-or-downgrade-a-plan).
+## Remove repositories
 
-## Downgrade
+If you want to revert your plan to DHI Community, you must remove repositories from your DHI plan. Repository removals are deferred to the end of the current billing cycle. You can remove repositories at any time, but you cannot stop a plan mid-cycle to receive a partial refund. Repository access remains active until the cycle ends.
 
-Cancellations and repository removals are deferred to the end of the current billing cycle. You can cancel renewal or remove repositories at any time. You cannot stop a plan mid-cycle to receive a partial refund.
-
-To cancel or remove repositories:
+To remove repositories:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and go to **Billing**.
-1. From **Active plans**, select **Manage** next to your DHI plan.
-1. Select **Cancel auto renewal** to cancel, or reduce the repository count to remove repositories.
+1. From **Active plans**, select **Manage** next to **Hardened Images**.
+    - Select **Remove repositories** to reduce the repository count to remove repositories.
+    - To keep your current repository count after renewal, select **Cancel scheduled change**. 
+    - Cancellations and repository removals take effect at the end of the current annual billing cycle.
 
-- Cancellations and repository removals take effect at the end of the current annual billing cycle.
-- Repository access remains active until the cycle ends.
-
-If you're a DHI Enterprise customer, reach out to your sales representative to downgrade.
+If you're subscribed to DHI Enterprise, reach out to your sales representative to change your DHI plan.

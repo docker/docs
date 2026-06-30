@@ -39,20 +39,23 @@ You can purchase Docker plans through the product catalog:
 1. Select **View plans** to add a plan to your Docker account.
 1. Verify your billing details, continue to payment, and complete checkout.
 
-## Upgrade or cancel a plan
+## Upgrade plans
 
-You can manage your active plans from the billing Overview page. 
+You can upgrade active plans from the billing Overview page. 
 
 1. Sign in to [Docker Home](https://app.docker.com/), then choose your personal
    account or your organization account.
-1. Go to **Billing** to view the Overview page. This shows your active plans and payment details.
+1. Go to **Billing** to view the Overview page. 
+   - The Overview page contains your active plans and payment details.
    - **Active plans** contains information about plan type, renewal cadence, and usage.
-1. Top up, upgrade, downgrade, or cancel your active plans from the **Active plans** page. 
-    - This area is where you complete all plan management actions.
+1. Top up or upgrade from the **Active plans** section. 
+    - **Active plans** is where you complete all management actions.
     - Depending on the plan type, you can select the action menu button or the **Manage** button to choose from available actions.
+1. Verify your billing details, continue to payment, and complete checkout.
 
 > [!TIP]
-> Billing behaviors vary from plan to plan. To learn more about upgrading or downgrading a specific plan, see the relevant
+> Billing behaviors vary from plan to plan. Learn more about usage, downgrading, or canceling plans 
+> from the relevant
 > [product page](/manuals/subscription/plans/_index.md).
 
 ## Sales-led products

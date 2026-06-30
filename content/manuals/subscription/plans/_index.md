@@ -43,6 +43,8 @@ In this section, you can learn about different Docker plans:
 - How to top up your Docker plan
 - Billing behaviors when you upgrade or downgrade a plan
 
+To manage your plans, see [Manage plans](/manuals/subscription/manage.md).
+
 ## Product catalog
 
 {{< grid >}}

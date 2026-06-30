@@ -29,7 +29,7 @@ actions:
 
 - Starting a [paid subscription](../subscription/manage.md)
 - Changing your [billing cycle](/manuals/billing/cycle.md) from monthly to annual
-- [Upgrading your subscription](../subscription/manage.md#upgrade-or-downgrade-a-plan)
+- [Upgrading your subscription](../subscription/manage.md#upgrade-plans)
 - [Adding seats](../admin/organization/manage/manage-seats.md) to an existing subscription
 
 If 3DS is required and your payment method supports it, the verification prompt

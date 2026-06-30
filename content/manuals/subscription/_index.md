@@ -36,7 +36,7 @@ aliases:
   - /docker-hub/billing/faq/
 ---
 
-You can subscribe to several Docker plans that range from free to paid plans. When you upgrade a plan, you expand your usage entitlements and feature sets for Docker products. You can also top up some plans, extending usage to more users without needing a full upgrade.
+You can subscribe to several Docker plans that range from free to paid plans. When you upgrade a plan, you expand your usage entitlements and feature sets for Docker products. You can also top up some plans, extending usage to more users without changing your plan type.
 
 ## Docker plans
 

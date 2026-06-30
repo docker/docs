@@ -47,7 +47,7 @@ two builders:
 
 ### Get more build cache space
 
-To get more Build cache space, [upgrade your subscription](/manuals/subscription/manage.md#upgrade-or-downgrade-a-plan).
+To get more Build cache space, [upgrade your subscription](/manuals/subscription/manage.md#upgrade-plans).
 
 > [!TIP]
 >
