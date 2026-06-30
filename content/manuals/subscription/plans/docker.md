@@ -130,7 +130,7 @@ You can add Testcontainers Cloud runtime minutes in two ways:
 > invoice isn't paid by the due date, there's a
 > 15-day grace period starting from the due date.
 
-You can cancel at any time before your renewal date. The unused portion is not refundable, but you retain access to paid features until the end of the current billing cycle. Canceling a paid plan returns your account to Docker Personal.
+When you cancel your plan, you downgrade your account type. You can cancel at any time before your renewal date. The unused portion is not refundable, but you retain access to paid features until the end of the current billing cycle. Canceling a paid plan returns your account to Docker Personal.
 
 To cancel your plan:
 

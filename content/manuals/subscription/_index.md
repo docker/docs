@@ -52,8 +52,6 @@ You can subscribe to plans for individual or organization accounts, or plans for
 
 Docker plans that upgrade your account (Docker Pro or Docker Team and Business) can provide a foundation for most use cases. Some product plans may require an upgraded Docker account while other product plans let you subscribe without an upgraded account. To learn more, see [Docker plans](/manuals/subscription/plans/_index.md).
 
-To subscribe to a plan, you can self-serve through **Billing** in [Docker Home](https://app.docker.com), or contact sales.
-
 ## Top up your plan
 
 Plans come with usage entitlements that can be extended without upgrading to a different plan.
@@ -65,7 +63,11 @@ Plans come with usage entitlements that can be extended without upgrading to a d
 | Minutes      | Cloud build capacity, sold in blocks and consumed within the billing period.          | Docker Build Cloud            |
 | Repositories | Additional container repositories covered by security scanning and analysis features. | DHI                           |
 
-Depending on the plan, you can top up your account through self-service or by contacting sales.
+## Manage your plans 
+
+To subscribe to a plan, you can self-serve through **Billing** in [Docker Home](https://app.docker.com), or by <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_plans_index" class="link" rel="noopener">contacting sales</a>. 
+
+To learn more about using the billing portal to manage your plans, see [Manage](/manuals/subscription/manage.md). 
 
 ## What's next
 

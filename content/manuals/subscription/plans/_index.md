@@ -7,7 +7,7 @@ description:
 keywords:
   docker products, docker subscriptions, docker core, ai governance, dhi select,
   docker build cloud, gordon plans, product catalog
-weight: 20
+weight: 10
 aliases:
   - /subscription/products/
   - /subscription/scale/
