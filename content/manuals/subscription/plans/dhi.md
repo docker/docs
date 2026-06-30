@@ -41,7 +41,7 @@ To remove repositories:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and go to **Billing**.
 1. From **Active plans**, select **Manage** next to **Hardened Images**.
-    - Select **Remove repositories** to reduce the repository count to remove repositories.
+    - Select **Remove repositories** to adjust your repository count.
     - To keep your current repository count after renewal, select **Cancel scheduled change**. 
     - Cancellations and repository removals take effect at the end of the current annual billing cycle.
 
