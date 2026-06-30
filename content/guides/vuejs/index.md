@@ -17,15 +17,14 @@ params:
   time: 20 minutes
 ---
 
-
 The Vue.js language-specific guide shows you how to containerize an Vue.js application using Docker, following best practices for creating efficient, production-ready containers.
 
 [Vue.js](https://vuejs.org/) is a progressive and flexible framework for building modern, interactive web applications. However, as applications scale, managing dependencies, environments, and deployments can become complex. Docker simplifies these challenges by providing a consistent, isolated environment for both development and production.
 
-> 
 > **Acknowledgment**
 >
 > Docker extends its sincere gratitude to [Kristiyan Velkov](https://www.linkedin.com/in/kristiyan-velkov-763130b3/) for authoring this guide. As a Docker Captain and highly skilled Front-end engineer, Kristiyan brings exceptional expertise in modern web development, Docker, and DevOps. His hands-on approach and clear, actionable guidance make this guide an essential resource for developers aiming to build, optimize, and secure Vue.js applications with Docker.
+
 ---
 
 ## What will you learn?
@@ -35,8 +34,6 @@ In this guide, you will learn how to:
 - Containerize and run an Vue.js application using Docker.
 - Set up a local development environment for Vue.js inside a container.
 - Run tests for your Vue.js application within a Docker container.
-- Configure a CI/CD pipeline using GitHub Actions for your containerized app.
-- Deploy the containerized Vue.js application to a local Kubernetes cluster for testing and debugging.
 
 You'll start by containerizing an existing Vue.js application and work your way up to production-level deployments.
 
@@ -74,7 +71,7 @@ This guide walks you through the complete process of containerizing an Vue.js ap
 By the end of this guide, you will:
 
 - Containerize an Vue.js application using Docker.
-- Create and optimize a Dockerfile for production builds. 
+- Create and optimize a Dockerfile for production builds.
 - Use multi-stage builds to minimize image size.
 - Serve the application efficiently with a custom Nginx configuration.
 - Build secure and maintainable Docker images by following best practices.
@@ -89,6 +86,7 @@ to clone the git repository:
 ```console
 $ git clone https://github.com/kristiyan-velkov/docker-vuejs-sample
 ```
+
 ---
 
 ### Build the Docker image
@@ -115,11 +113,13 @@ Choosing DHI offers the advantage of a production-ready image that is lightweigh
 Docker Hardened Images (DHIs) are available for Node.js in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/node). Docker Hardened Images are freely available to everyone with no subscription required. You can pull and use them like any other Docker image after signing in to the DHI registry. For more information, see the [DHI quickstart](/dhi/get-started/) guide.
 
 1. Sign in to the DHI registry:
+
    ```console
    $ docker login dhi.io
    ```
 
 2. Pull the Node.js DHI (check the catalog for available versions):
+
    ```console
    $ docker pull dhi.io/node:24-alpine3.22-dev
    ```
@@ -169,7 +169,7 @@ COPY --chown=nginx:nginx --from=builder /app/dist /usr/share/nginx/html
 USER nginx
 
 # Expose port 8080 to allow HTTP traffic
-# Note: The default Nginx container now listens on port 8080 instead of 80 
+# Note: The default Nginx container now listens on port 8080 instead of 80
 EXPOSE 8080
 
 # Start Nginx directly with custom config
@@ -223,7 +223,7 @@ COPY --chown=nginx:nginx --from=builder /app/dist /usr/share/nginx/html
 USER nginx
 
 # Expose port 8080 to allow HTTP traffic
-# Note: The default Nginx container now listens on port 8080 instead of 80 
+# Note: The default Nginx container now listens on port 8080 instead of 80
 EXPOSE 8080
 
 # Start Nginx directly with custom config
@@ -234,9 +234,10 @@ CMD ["-g", "daemon off;"]
 > [!NOTE]
 > We are using nginx-unprivileged instead of the standard Nginx image to follow security best practices.
 > Running as a non-root user in the final image:
->- Reduces the attack surface
->- Aligns with Docker’s recommendations for container hardening
->- Helps comply with stricter security policies in production environments
+>
+> - Reduces the attack surface
+> - Aligns with Docker’s recommendations for container hardening
+> - Helps comply with stricter security policies in production environments
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -256,13 +257,14 @@ services:
 
 #### Step 3: Create the .dockerignore file
 
-The `.dockerignore` file plays a crucial role in optimizing your Docker image by specifying which files and directories should be excluded from the build context. 
+The `.dockerignore` file plays a crucial role in optimizing your Docker image by specifying which files and directories should be excluded from the build context.
 
 > [!NOTE]
->This helps:
->- Reduce image size  
->- Speed up the build process  
->- Prevent sensitive or unnecessary files (like `.env`, `.git`, or `node_modules`) from being added to the final image.
+> This helps:
+>
+> - Reduce image size
+> - Speed up the build process
+> - Prevent sensitive or unnecessary files (like `.env`, `.git`, or `node_modules`) from being added to the final image.
 >
 > To learn more, visit the [.dockerignore reference](/reference/dockerfile.md#dockerignore-file).
 
@@ -447,10 +449,10 @@ $ docker build --tag docker-vuejs-sample .
 ```
 
 What this command does:
+
 - Uses the Dockerfile in the current directory (.)
 - Packages the application and its dependencies into a Docker image
 - Tags the image as docker-vuejs-sample so you can reference it later
-
 
 #### Step 6: View local images
 
@@ -477,14 +479,13 @@ This output provides key details about your images:
 - **Created** – The timestamp indicating when the image was built.
 - **Size** – The total disk space used by the image.
 
-If the build was successful, you should see `docker-vuejs-sample` image listed. 
+If the build was successful, you should see `docker-vuejs-sample` image listed.
 
 ---
 
 ### Run the containerized application
 
 In the previous step, you created a Dockerfile for your Vue.js application and built a Docker image using the docker build command. Now it’s time to run that image in a container and verify that your application works as expected.
-
 
 Inside the `docker-vuejs-sample` directory, run the following command in a
 terminal.
@@ -509,7 +510,6 @@ $ docker compose up --build -d
 
 Open a browser and view the application at [http://localhost:8080](http://localhost:8080). You should see your Vue.js application running in the browser.
 
-
 To confirm that the container is running, use `docker ps` command:
 
 ```console
@@ -525,13 +525,11 @@ CONTAINER ID   IMAGE                          COMMAND                  CREATED  
 37a1fa85e4b0   docker-vuejs-sample-server     "nginx -c /etc/nginx…"   About a minute ago  Up About a minute  0.0.0.0:8080->8080/tcp   docker-vuejs-sample-server-1
 ```
 
-
 To stop the application, run:
 
 ```console
 $ docker compose down
 ```
-
 
 > [!NOTE]
 > For more information about Compose commands, see the [Compose CLI
@@ -544,6 +542,7 @@ $ docker compose down
 In this guide, you learned how to containerize, build, and run an Vue.js application using Docker. By following best practices, you created a secure, optimized, and production-ready setup.
 
 What you accomplished:
+
 - Created a multi-stage `Dockerfile` that compiles the Vue.js application and serves the static files using Nginx.
 - Created a `.dockerignore` file to exclude unnecessary files and keep the image clean and efficient.
 - Built your Docker image using `docker build`.
@@ -560,8 +559,8 @@ You now have a fully containerized Vue.js application, running in a Docker conta
 Explore official references and best practices to sharpen your Docker workflow:
 
 - [Multi-stage builds](/build/building/multi-stage/) – Learn how to separate build and runtime stages.
-- [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/) – Write efficient, maintainable, and secure Dockerfiles.  
-- [Build context in Docker](/build/concepts/context/) – Learn how context affects image builds.  
+- [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/) – Write efficient, maintainable, and secure Dockerfiles.
+- [Build context in Docker](/build/concepts/context/) – Learn how context affects image builds.
 - [`docker build` CLI reference](/reference/cli/docker/image/build/) – Build Docker images from a Dockerfile.
 - [`docker images` CLI reference](/reference/cli/docker/image/ls/) – Manage and inspect local Docker images.
 - [`docker compose up` CLI reference](/reference/cli/docker/compose/up/) – Start and run multi-container applications.
@@ -588,6 +587,7 @@ Complete [Containerize Vue.js application](./).
 In this section, you'll set up both production and development environments for your Vue.js application using Docker Compose. This approach streamlines your workflow—delivering a lightweight, static site via Nginx in production, and providing a fast, live-reloading dev server with Compose Watch for efficient local development.
 
 You’ll learn how to:
+
 - Configure isolated environments: Set up separate containers optimized for production and development use cases.
 - Live-reload in development: Use Compose Watch to automatically sync file changes, enabling real-time updates without manual intervention.
 - Preview and debug with ease: Develop inside containers with a seamless preview and debug experience—no rebuilds required after every change.
@@ -678,6 +678,7 @@ services:
           target: /app/vite.config.js
           action: restart
 ```
+
 - The `vuejs-prod` service builds and serves your static production app using Nginx.
 - The `vuejs-dev` service runs your Vue.js development server with live reload and hot module replacement.
 - `watch` triggers file sync with Compose Watch.
@@ -712,15 +713,15 @@ To confirm that Compose Watch is functioning correctly:
 
 2. Locate the following line:
 
-    ```html
-    <HelloWorld msg="You did it!" />
-    ```
+   ```html
+   <HelloWorld msg="You did it!" />
+   ```
 
 3. Change it to:
 
-    ```html
-    <HelloWorld msg="Hello from Docker Compose Watch" />
-    ```
+   ```html
+   <HelloWorld msg="Hello from Docker Compose Watch" />
+   ```
 
 4. Save the file.
 
@@ -735,9 +736,10 @@ You should see the updated text appear instantly, without needing to rebuild the
 In this section, you set up a complete development and production workflow for your Vue.js application using Docker and Docker Compose.
 
 Here’s what you accomplished:
-- Created a `Dockerfile.dev` to streamline local development with hot reloading  
-- Defined separate `vuejs-dev` and `vuejs-prod` services in your `compose.yaml` file  
-- Enabled real-time file syncing using Compose Watch for a smoother development experience  
+
+- Created a `Dockerfile.dev` to streamline local development with hot reloading
+- Defined separate `vuejs-dev` and `vuejs-prod` services in your `compose.yaml` file
+- Enabled real-time file syncing using Compose Watch for a smoother development experience
 - Verified that live updates work seamlessly by modifying and previewing a component
 
 With this setup, you're now equipped to build, run, and iterate on your Vue.js app entirely within containers—efficiently and consistently across environments.
@@ -748,11 +750,11 @@ With this setup, you're now equipped to build, run, and iterate on your Vue.js a
 
 Deepen your knowledge and improve your containerized development workflow with these guides:
 
-- [Using Compose Watch](/manuals/compose/how-tos/file-watch.md) – Automatically sync source changes during development  
-- [Multi-stage builds](/manuals/build/building/multi-stage.md) – Create efficient, production-ready Docker images  
+- [Using Compose Watch](/manuals/compose/how-tos/file-watch.md) – Automatically sync source changes during development
+- [Multi-stage builds](/manuals/build/building/multi-stage.md) – Create efficient, production-ready Docker images
 - [Dockerfile best practices](/build/building/best-practices/) – Write clean, secure, and optimized Dockerfiles.
 - [Compose file reference](/compose/compose-file/) – Learn the full syntax and options available for configuring services in `compose.yaml`.
-- [Docker volumes](/storage/volumes/) – Persist and manage data between container runs  
+- [Docker volumes](/storage/volumes/) – Persist and manage data between container runs
 
 ### Next steps
 
@@ -814,7 +816,7 @@ services:
         - action: sync
           path: .
           target: /app
-          
+
   vuejs-test:
     build:
       context: .
@@ -822,8 +824,7 @@ services:
     command: ["npm", "run", "test:unit"]
 ```
 
-The vuejs-test service reuses the same `Dockerfile.dev` used for [development](develop.md) and overrides the default command to run tests with `npm run test`. This setup ensures a consistent test environment that matches your local development configuration.
-
+The vuejs-test service reuses the same `Dockerfile.dev` used for [development](#use-containers-for-vuejs-development) and overrides the default command to run tests with `npm run test`. This setup ensures a consistent test environment that matches your local development configuration.
 
 After completing the previous steps, your project directory should contain the following files:
 
@@ -845,6 +846,7 @@ $ docker compose run --rm vuejs-test
 ```
 
 This command will:
+
 - Start the `vuejs-test` service defined in your `compose.yaml` file.
 - Execute the `npm run test` script using the same environment as development.
 - Automatically remove the container after the tests complete [`docker compose run --rm`](/reference/cli/docker/compose/run/) command.
@@ -869,6 +871,7 @@ Duration:   718ms
 In this section, you learned how to run unit tests for your Vue.js application inside a Docker container using Vitest and Docker Compose.
 
 What you accomplished:
+
 - Created a `vuejs-test` service in `compose.yaml` to isolate test execution.
 - Reused the development `Dockerfile.dev` to ensure consistency between dev and test environments.
 - Ran tests inside the container using `docker compose run --rm vuejs-test`.
@@ -882,519 +885,5 @@ Explore official references and best practices to sharpen your Docker testing wo
 
 - [Dockerfile reference](/reference/dockerfile/) – Understand all Dockerfile instructions and syntax.
 - [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/) – Write efficient, maintainable, and secure Dockerfiles.
-- [Compose file reference](/compose/compose-file/) – Learn the full syntax and options available for configuring services in `compose.yaml`.  
+- [Compose file reference](/compose/compose-file/) – Learn the full syntax and options available for configuring services in `compose.yaml`.
 - [`docker compose run` CLI reference](/reference/cli/docker/compose/run/) – Run one-off commands in a service container.
----
-
-### Next steps
-
-Next, you’ll learn how to set up a CI/CD pipeline using GitHub Actions to automatically build and test your Vue.js application in a containerized environment. This ensures your code is validated on every push or pull request, maintaining consistency and reliability across your development workflow.
-
-## Test your Vue.js deployment
-
-### Prerequisites
-
-Before you begin, make sure you’ve completed the following:
-- Complete all the previous sections of this guide, starting with [Containerize Vue.js application](./).
-- [Enable Kubernetes](/manuals/desktop/use-desktop/kubernetes.md#enable-kubernetes) in Docker Desktop.
-
-> **New to Kubernetes?**  
-> Visit the [Kubernetes basics tutorial](https://kubernetes.io/docs/tutorials/kubernetes-basics/) to get familiar with how clusters, pods, deployments, and services work.
-
----
-
-### Overview
-
-This section guides you through deploying your containerized Vue.js application locally using [Docker Desktop’s built-in Kubernetes](/desktop/kubernetes/). Running your app in a local Kubernetes cluster closely simulates a real production environment, enabling you to test, validate, and debug your workloads with confidence before promoting them to staging or production.
-
----
-
-### Create a Kubernetes YAML file
-
-Follow these steps to define your deployment configuration:
-
-1. In the root of your project, create a new file named: vuejs-sample-kubernetes.yaml
-
-2. Open the file in your IDE or preferred text editor.
-
-3. Add the following configuration, and be sure to replace `{DOCKER_USERNAME}` and `{DOCKERHUB_PROJECT_NAME}` with your actual Docker Hub username and repository name from the previous [Automate your builds with GitHub Actions](./).
-
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: vuejs-sample
-  namespace: default
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: vuejs-sample
-  template:
-    metadata:
-      labels:
-        app: vuejs-sample
-    spec:
-      containers:
-        - name: vuejs-container
-          image: {DOCKER_USERNAME}/{DOCKERHUB_PROJECT_NAME}:latest
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
-          resources:
-            limits:
-              cpu: "500m"
-              memory: "256Mi"
-            requests:
-              cpu: "250m"
-              memory: "128Mi"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: vuejs-sample-service
-  namespace: default
-spec:
-  type: NodePort
-  selector:
-    app: vuejs-sample
-  ports:
-    - port: 8080
-      targetPort: 8080
-      nodePort: 30001
-```
-
-This manifest defines two key Kubernetes resources, separated by `---`:
-
-- Deployment
-  Deploys a single replica of your Vue.js application inside a pod. The pod uses the Docker image built and pushed by your GitHub Actions CI/CD workflow  
-  (refer to [Automate your builds with GitHub Actions](./)).  
-  The container listens on port `8080`, which is typically used by [Nginx](https://nginx.org/en/docs/) to serve your production Vue.js app.
-
-- Service (NodePort) 
-  Exposes the deployed pod to your local machine.  
-  It forwards traffic from port `30001` on your host to port `8080` inside the container.  
-  This lets you access the application in your browser at [http://localhost:30001](http://localhost:30001).
-
-> [!NOTE]
-> To learn more about Kubernetes objects, see the [Kubernetes documentation](https://kubernetes.io/docs/home/).
-
----
-
-### Deploy and check your application
-
-Follow these steps to deploy your containerized Vue.js app into a local Kubernetes cluster and verify that it’s running correctly.
-
-#### Step 1. Apply the Kubernetes configuration
-
-In your terminal, navigate to the directory where your `vuejs-sample-kubernetes.yaml` file is located, then deploy the resources using:
-
-```console
-  $ kubectl apply -f vuejs-sample-kubernetes.yaml
-```
-
-If everything is configured properly, you’ll see confirmation that both the Deployment and the Service were created:
-
-```shell
-  deployment.apps/vuejs-sample created
-  service/vuejs-sample-service created
-```
-   
-This confirms that both the Deployment and the Service were successfully created and are now running inside your local cluster.
-
-#### Step 2. Check the deployment status
-
-Run the following command to check the status of your deployment:
-   
-```console
-  $ kubectl get deployments
-```
-
-You should see output similar to the following:
-
-```shell
-  NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
-  vuejs-sample         1/1     1            1           1m14s
-```
-
-This confirms that your pod is up and running with one replica available.
-
-#### Step 3. Verify the service exposure
-
-Check if the NodePort service is exposing your app to your local machine:
-
-```console
-$ kubectl get services
-```
-
-You should see something like:
-
-```shell
-NAME                     TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-vuejs-sample-service     NodePort    10.98.233.59    <none>        8080:30001/TCP   1m
-```
-
-This output confirms that your app is available via NodePort on port 30001.
-
-#### Step 4. Access your app in the browser
-
-Open your browser and navigate to [http://localhost:30001](http://localhost:30001).
-
-You should see your production-ready Vue.js Sample application running — served by your local Kubernetes cluster.
-
-#### Step 5. Clean up Kubernetes resources
-
-Once you're done testing, you can delete the deployment and service using:
-
-```console
-  $ kubectl delete -f vuejs-sample-kubernetes.yaml
-```
-
-Expected output:
-
-```shell
-  deployment.apps "vuejs-sample" deleted
-  service "vuejs-sample-service" deleted
-```
-
-This ensures your cluster stays clean and ready for the next deployment.
-   
----
-
-### Summary
-
-In this section, you learned how to deploy your Vue.js application to a local Kubernetes cluster using Docker Desktop. This setup allows you to test and debug your containerized app in a production-like environment before deploying it to the cloud.
-
-What you accomplished:
-
-- Created a Kubernetes Deployment and NodePort Service for your Vue.js app  
-- Used `kubectl apply` to deploy the application locally  
-- Verified the app was running and accessible at `http://localhost:30001`  
-- Cleaned up your Kubernetes resources after testing
-
----
-
-### Related resources
-
-Explore official references and best practices to sharpen your Kubernetes deployment workflow:
-
-- [Kubernetes documentation](https://kubernetes.io/docs/home/) – Learn about core concepts, workloads, services, and more.  
-- [Deploy on Kubernetes with Docker Desktop](/manuals) – Use Docker Desktop’s built-in Kubernetes support for local testing and development.
-- [`kubectl` CLI reference](https://kubernetes.io/docs/reference/kubectl/) – Manage Kubernetes clusters from the command line.  
-- [Kubernetes Deployment resource](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) – Understand how to manage and scale applications using Deployments.  
-- [Kubernetes Service resource](https://kubernetes.io/docs/concepts/services-networking/service/) – Learn how to expose your application to internal and external traffic.
-
-## Automate your builds with GitHub Actions
-
-### Prerequisites
-
-Complete all the previous sections of this guide, starting with [Containerize an Vue.js application](./).
-
-You must also have:
-- A [GitHub](https://github.com/signup) account.
-- A verified [Docker Hub](https://hub.docker.com/signup) account.
-
----
-
-### Overview
-
-In this section, you'll set up a CI/CD pipeline using [GitHub Actions](https://docs.github.com/en/actions) to automatically:
-
-- Build your Vue.js application inside a Docker container.
-- Run tests in a consistent environment.
-- Push the production-ready image to [Docker Hub](https://hub.docker.com).
-
----
-
-### Connect your GitHub repository to Docker Hub
-
-To enable GitHub Actions to build and push Docker images, you’ll securely store your Docker Hub credentials in your new GitHub repository.
-
-#### Step 1: Generate Docker Hub credentials and set GitHub secrets
-
-1. Create a Personal Access Token (PAT) from [Docker Hub](https://hub.docker.com)
-   1. Go to your **Docker Hub account → Account Settings → Security**.
-   2. Generate a new Access Token with **Read/Write** permissions.
-   3. Name it something like `docker-vuejs-sample`.
-   4. Copy and save the token — you’ll need it in Step 4.
-
-2. Create a repository in [Docker Hub](https://hub.docker.com/repositories/)
-   1. Go to your **Docker Hub account → Create a repository**.
-   2. For the Repository Name, use something descriptive — for example: `vuejs-sample`.
-   3. Once created, copy and save the repository name — you’ll need it in Step 4.
-
-3. Create a new [GitHub repository](https://github.com/new) for your Vue.js project
-
-4. Add Docker Hub credentials as GitHub repository secrets
-
-   In your newly created GitHub repository:
-   
-   1. Navigate to:
-   **Settings → Secrets and variables → Actions → New repository secret**.
-
-   2. Add the following secrets:
-
-   | Name              | Value                          |
-   |-------------------|--------------------------------|
-   | `DOCKER_USERNAME` | Your Docker Hub username       |
-   | `DOCKERHUB_TOKEN` | Your Docker Hub access token (created in Step 1)   |
-   | `DOCKERHUB_PROJECT_NAME` | Your Docker Project Name (created in Step 2)   |
-
-   These secrets allow GitHub Actions to authenticate securely with Docker Hub during automated workflows.
-
-5. Connect Your Local Project to GitHub
-
-   Link your local project `docker-vuejs-sample` to the GitHub repository you just created by running the following command from your project root:
-
-   ```console
-      $ git remote set-url origin https://github.com/{your-username}/{your-repository-name}.git
-   ```
-
-   >[!IMPORTANT]
-   >Replace `{your-username}` and `{your-repository}` with your actual GitHub username and repository name.
-
-   To confirm that your local project is correctly connected to the remote GitHub repository, run:
-
-   ```console
-   $ git remote -v
-   ```
-
-   You should see output similar to:
-
-   ```console
-   origin  https://github.com/{your-username}/{your-repository-name}.git (fetch)
-   origin  https://github.com/{your-username}/{your-repository-name}.git (push)
-   ```
-
-   This confirms that your local repository is properly linked and ready to push your source code to GitHub.
-
-6. Push your source code to GitHub
-
-   Follow these steps to commit and push your local project to your GitHub repository:
-
-   1. Stage all files for commit.
-
-      ```console
-      $ git add -A
-      ```
-      This command stages all changes — including new, modified, and deleted files — preparing them for commit.
-
-
-   2. Commit the staged changes with a descriptive message.
-
-      ```console
-      $ git commit -m "Initial commit"
-      ```
-      This command creates a commit that snapshots the staged changes with a descriptive message.  
-
-   3. Push the code to the `main` branch.
-
-      ```console
-      $ git push -u origin main
-      ```
-      This command pushes your local commits to the `main` branch of the remote GitHub repository and sets the upstream branch.
-
-Once completed, your code will be available on GitHub, and any GitHub Actions workflow you’ve configured will run automatically.
-
-> [!NOTE]  
-> Learn more about the Git commands used in this step:
-> - [Git add](https://git-scm.com/docs/git-add) – Stage changes (new, modified, deleted) for commit  
-> - [Git commit](https://git-scm.com/docs/git-commit) – Save a snapshot of your staged changes  
-> - [Git push](https://git-scm.com/docs/git-push) – Upload local commits to your GitHub repository  
-> - [Git remote](https://git-scm.com/docs/git-remote) – View and manage remote repository URLs
-
----
-
-#### Step 2: Set up the workflow
-
-Now you'll create a GitHub Actions workflow that builds your Docker image, runs tests, and pushes the image to Docker Hub.
-
-1. Go to your repository on GitHub and select the **Actions** tab in the top menu.
-
-2. Select **Set up a workflow yourself** when prompted.
-
-    This opens an inline editor to create a new workflow file. By default, it will be saved to:
-   `.github/workflows/main.yml`
-
-   
-3. Add the following workflow configuration to the new file:
-
-```yaml
-name: CI/CD – Vue.js App with Docker
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-    types: [opened, synchronize, reopened]
-
-jobs:
-  build-test-deploy:
-    name: Build, Test & Deploy
-    runs-on: ubuntu-latest
-
-    steps:
-      # 1. Checkout the codebase
-      - name: Checkout Code
-        uses: actions/checkout@{{% param "checkout_action_version" %}}
-        with:
-          fetch-depth: 0
-
-      # 2. Set up Docker Buildx
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
-
-      # 3. Cache Docker layers
-      - name: Cache Docker Layers
-        uses: actions/cache@{{% param "cache_action_version" %}}
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
-
-      # 4. Cache npm dependencies
-      - name: Cache npm Dependencies
-        uses: actions/cache@{{% param "cache_action_version" %}}
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
-
-      # 5. Generate build metadata
-      - name: Generate Build Metadata
-        id: meta
-        run: |
-          echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> "$GITHUB_OUTPUT"
-          echo "SHORT_SHA=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
-
-      # 6. Build Docker image for testing
-      - name: Build Dev Docker Image
-        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
-        with:
-          context: .
-          file: Dockerfile.dev
-          tags: ${{ steps.meta.outputs.REPO_NAME }}-dev:latest
-          load: true
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
-
-      # 7. Run unit tests inside container
-      - name: Run Vue.js Tests
-        run: |
-          docker run --rm \
-            --workdir /app \
-            --entrypoint "" \
-            ${{ steps.meta.outputs.REPO_NAME }}-dev:latest \
-            sh -c "npm ci && npm run test -- --ci --runInBand"
-        env:
-          CI: true
-          NODE_ENV: test
-        timeout-minutes: 10
-
-      # 8. Log in to Docker Hub
-      - name: Docker Hub Login
-        uses: docker/login-action@{{% param "login_action_version" %}}
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      # 9. Build and push production image
-      - name: Build and Push Production Image
-        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
-        with:
-          context: .
-          file: Dockerfile
-          push: true
-          platforms: linux/amd64,linux/arm64
-          tags: |
-            ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}:latest
-            ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}:${{ steps.meta.outputs.SHORT_SHA }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-```
-
-This workflow performs the following tasks for your Vue.js application:
-- Triggers on every `push` or `pull request` targeting the `main` branch.
-- Builds a development Docker image using `Dockerfile.dev`, optimized for testing.
-- Executes unit tests using Vitest inside a clean, containerized environment to ensure consistency.
-- Halts the workflow immediately if any test fails — enforcing code quality.
-- Caches both Docker build layers and npm dependencies for faster CI runs.
-- Authenticates securely with Docker Hub using GitHub repository secrets.
-- Builds a production-ready image using the `prod` stage in `Dockerfile`.
-- Tags and pushes the final image to Docker Hub with both `latest` and short SHA tags for traceability.
-
-> [!NOTE]
->  For more information about  `docker/build-push-action`, refer to the [GitHub Action README](https://github.com/docker/build-push-action/blob/master/README.md).
-
----
-
-#### Step 3: Run the workflow
-
-After you've added your workflow file, it's time to trigger and observe the CI/CD process in action.
-
-1. Commit and push your workflow file
-   - Select "Commit changes…" in the GitHub editor.
-   - This push will automatically trigger the GitHub Actions pipeline.
-
-2. Monitor the workflow execution
-   - Go to the Actions tab in your GitHub repository.
-   - Click into the workflow run to follow each step: **build**, **test**, and (if successful) **push**.
-
-3. Verify the Docker image on Docker Hub
-
-   - After a successful workflow run, visit your [Docker Hub repositories](https://hub.docker.com/repositories).
-   - You should see a new image under your repository with:
-      - Repository name: `${your-repository-name}`
-      - Tags include:
-         - `latest` – represents the most recent successful build; ideal for quick testing or deployment.
-         - `<short-sha>` – a unique identifier based on the commit hash, useful for version tracking, rollbacks, and traceability.
-
-> [!TIP] Protect your main branch
-> To maintain code quality and prevent accidental direct pushes, enable branch protection rules:
->  - Navigate to your **GitHub repo → Settings → Branches**.
->  - Under Branch protection rules, click **Add rule**.
->  - Specify `main` as the branch name.
->  - Enable options like:
->     - *Require a pull request before merging*.
->     - *Require status checks to pass before merging*.
->
->  This ensures that only tested and reviewed code is merged into `main` branch.
----
-
-### Summary
-
-In this section, you set up a complete CI/CD pipeline for your containerized Vue.js application using GitHub Actions.
-
-Here's what you accomplished:
-
-- Created a new GitHub repository specifically for your project.
-- Generated a secure Docker Hub access token and added it to GitHub as a secret.
-- Defined a GitHub Actions workflow that:
-   - Build your application inside a Docker container.
-   - Run tests in a consistent, containerized environment.
-   - Push a production-ready image to Docker Hub if tests pass.
-- Triggered and verified the workflow execution through GitHub Actions.
-- Confirmed that your image was successfully published to Docker Hub.
-
-With this setup, your Vue.js application is now ready for automated testing and deployment across environments — increasing confidence, consistency, and team productivity.
-
----
-
-### Related resources
-
-Deepen your understanding of automation and best practices for containerized apps:
-
-- [Introduction to GitHub Actions](/guides/gha.md) – Learn how GitHub Actions automate your workflows  
-- [Docker Build GitHub Actions](/manuals/build/ci/github-actions/_index.md) – Set up container builds with GitHub Actions  
-- [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions) – Full reference for writing GitHub workflows  
-- [Compose file reference](/compose/compose-file/) – Full configuration reference for `compose.yaml`  
-- [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/) – Optimize your image for performance and security  
-
----
-
-### Next steps
-
-Next, learn how you can locally test and debug your Vue.js workloads on Kubernetes before deploying. This helps you ensure your application behaves as expected in a production-like environment, reducing surprises during deployment.

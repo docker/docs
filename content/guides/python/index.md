@@ -26,7 +26,6 @@ params:
   time: 20 minutes
 ---
 
-
 > **Acknowledgment**
 >
 > This guide is a community contribution. Docker would like to thank
@@ -38,8 +37,6 @@ The Python language-specific guide teaches you how to containerize a Python appl
 - Containerize and run a Python application
 - Set up a local environment to develop a Python application using containers
 - Lint, format, typing and best practices
-- Configure a CI/CD pipeline for a containerized Python application using GitHub Actions
-- Deploy your containerized Python application locally to Kubernetes to test and debug your deployment
 
 Start by containerizing an existing Python application.
 
@@ -76,6 +73,7 @@ the **Scaffold script** tab in the file browser and copy the shell command.
 {{< files name="python-docker-example" >}}
 
 {{< file path="app.py" status="new" >}}
+
 ```python
 # A minimal FastAPI application.
 # The root endpoint (GET /) returns a JSON "Hello World" response.
@@ -90,9 +88,11 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 ```
+
 {{< /file >}}
 
 {{< file path="requirements.txt" status="new" >}}
+
 ```text
 # Python package dependencies for the application, pinned for reproducible builds.
 # See https://pip.pypa.io/en/stable/reference/requirements-file-format/
@@ -100,9 +100,11 @@ async def root():
 fastapi==0.115.12
 uvicorn==0.34.3
 ```
+
 {{< /file >}}
 
 {{< file path=".gitignore" status="new" >}}
+
 ```text
 # Files and directories that Git should ignore. This is the standard Python
 # template covering bytecode, build artifacts, virtual environments, and IDE
@@ -166,6 +168,7 @@ venv.bak/
 # Secrets
 db/password.txt
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -213,6 +216,7 @@ build context.
 {{< files name="python-docker-example" >}}
 
 {{< file path="app.py" >}}
+
 ```python
 # A minimal FastAPI application.
 # The root endpoint (GET /) returns a JSON "Hello World" response.
@@ -227,9 +231,11 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 ```
+
 {{< /file >}}
 
 {{< file path="requirements.txt" >}}
+
 ```text
 # Python package dependencies for the application, pinned for reproducible builds.
 # See https://pip.pypa.io/en/stable/reference/requirements-file-format/
@@ -237,9 +243,11 @@ async def root():
 fastapi==0.115.12
 uvicorn==0.34.3
 ```
+
 {{< /file >}}
 
 {{< file path="Dockerfile" status="new" >}}
+
 ```dockerfile
 # syntax=docker/dockerfile:1
 
@@ -283,9 +291,11 @@ EXPOSE 8000
 # Run the application.
 CMD ["/venv/bin/python3", "-m", "uvicorn", "app:app", "--host=0.0.0.0", "--port=8000"]
 ```
+
 {{< /file >}}
 
 {{< file path="compose.yaml" status="new" >}}
+
 ```yaml
 # Comments are provided throughout this file to help you get started.
 # If you need more help, visit the Docker Compose reference guide at
@@ -303,9 +313,11 @@ services:
     ports:
       - 8000:8000
 ```
+
 {{< /file >}}
 
 {{< file path=".dockerignore" status="new" >}}
+
 ```text
 # Include any files or directories that you don't want to be copied to your
 # container here (e.g., local build artifacts, temporary files, etc.).
@@ -342,9 +354,11 @@ services:
 LICENSE
 README.md
 ```
+
 {{< /file >}}
 
 {{< file path=".gitignore" >}}
+
 ```text
 # Files and directories that Git should ignore. This is the standard Python
 # template covering bytecode, build artifacts, virtual environments, and IDE
@@ -408,6 +422,7 @@ venv.bak/
 # Secrets
 db/password.txt
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -508,6 +523,7 @@ following contents.
 {{< files name="python-docker-example" >}}
 
 {{< file path="app.py" status="modified" >}}
+
 ```python
 # FastAPI application backed by a PostgreSQL database via SQLModel.
 # The FastAPI lifespan handler creates database tables at startup.
@@ -566,9 +582,11 @@ def read_heroes() -> Sequence[Hero]:
         heroes = session.exec(select(Hero)).all()
         return heroes
 ```
+
 {{< /file >}}
 
 {{< file path="config.py" status="new" >}}
+
 ```python
 # Pydantic settings that read PostgreSQL connection details from the
 # environment. Supports a password file (Docker secrets) via
@@ -638,9 +656,11 @@ class Settings(BaseSettings):
 
 settings = Settings()  # type: ignore
 ```
+
 {{< /file >}}
 
 {{< file path="requirements.txt" status="modified" hl_lines="5-7" >}}
+
 ```text
 # Python package dependencies for the application, pinned for reproducible builds.
 # See https://pip.pypa.io/en/stable/reference/requirements-file-format/
@@ -651,9 +671,11 @@ psycopg[binary]==3.2.9
 pydantic-settings==2.9.1
 uvicorn==0.34.3
 ```
+
 {{< /file >}}
 
 {{< file path="Dockerfile" >}}
+
 ```dockerfile
 # syntax=docker/dockerfile:1
 
@@ -697,9 +719,11 @@ EXPOSE 8000
 # Run the application.
 CMD ["/venv/bin/python3", "-m", "uvicorn", "app:app", "--host=0.0.0.0", "--port=8000"]
 ```
+
 {{< /file >}}
 
 {{< file path="compose.yaml" >}}
+
 ```yaml
 # Comments are provided throughout this file to help you get started.
 # If you need more help, visit the Docker Compose reference guide at
@@ -717,9 +741,11 @@ services:
     ports:
       - 8000:8000
 ```
+
 {{< /file >}}
 
 {{< file path=".dockerignore" >}}
+
 ```text
 # Include any files or directories that you don't want to be copied to your
 # container here (e.g., local build artifacts, temporary files, etc.).
@@ -756,9 +782,11 @@ services:
 LICENSE
 README.md
 ```
+
 {{< /file >}}
 
 {{< file path=".gitignore" >}}
+
 ```text
 # Files and directories that Git should ignore. This is the standard Python
 # template covering bytecode, build artifacts, virtual environments, and IDE
@@ -822,6 +850,7 @@ venv.bak/
 # Secrets
 db/password.txt
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -833,6 +862,7 @@ Replace `Dockerfile` and `compose.yaml` with the following.
 {{< files name="python-docker-example" >}}
 
 {{< file path="app.py" >}}
+
 ```python
 # FastAPI application backed by a PostgreSQL database via SQLModel.
 # The FastAPI lifespan handler creates database tables at startup.
@@ -891,9 +921,11 @@ def read_heroes() -> Sequence[Hero]:
         heroes = session.exec(select(Hero)).all()
         return heroes
 ```
+
 {{< /file >}}
 
 {{< file path="config.py" >}}
+
 ```python
 # Pydantic settings that read PostgreSQL connection details from the
 # environment. Supports a password file (Docker secrets) via
@@ -963,9 +995,11 @@ class Settings(BaseSettings):
 
 settings = Settings()  # type: ignore
 ```
+
 {{< /file >}}
 
 {{< file path="requirements.txt" >}}
+
 ```text
 # Python package dependencies for the application, pinned for reproducible builds.
 # See https://pip.pypa.io/en/stable/reference/requirements-file-format/
@@ -976,9 +1010,11 @@ psycopg[binary]==3.2.9
 pydantic-settings==2.9.1
 uvicorn==0.34.3
 ```
+
 {{< /file >}}
 
 {{< file path="Dockerfile" status="modified" hl_lines="11,27-34,37,45" >}}
+
 ```dockerfile
 # syntax=docker/dockerfile:1
 
@@ -1030,9 +1066,11 @@ EXPOSE 8000
 
 CMD ["/venv/bin/python3", "-m", "uvicorn", "app:app", "--host=0.0.0.0", "--port=8000"]
 ```
+
 {{< /file >}}
 
 {{< file path="compose.yaml" status="modified" hl_lines="8" >}}
+
 ```yaml
 services:
   # Application service. The `target: builder` line builds the development
@@ -1045,9 +1083,11 @@ services:
     ports:
       - 8000:8000
 ```
+
 {{< /file >}}
 
 {{< file path=".dockerignore" >}}
+
 ```text
 # Include any files or directories that you don't want to be copied to your
 # container here (e.g., local build artifacts, temporary files, etc.).
@@ -1084,9 +1124,11 @@ services:
 LICENSE
 README.md
 ```
+
 {{< /file >}}
 
 {{< file path=".gitignore" >}}
+
 ```text
 # Files and directories that Git should ignore. This is the standard Python
 # template covering bytecode, build artifacts, virtual environments, and IDE
@@ -1150,6 +1192,7 @@ venv.bak/
 # Secrets
 db/password.txt
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -1178,6 +1221,7 @@ database password.
 {{< files name="python-docker-example" >}}
 
 {{< file path="app.py" >}}
+
 ```python
 # FastAPI application backed by a PostgreSQL database via SQLModel.
 # The FastAPI lifespan handler creates database tables at startup.
@@ -1236,9 +1280,11 @@ def read_heroes() -> Sequence[Hero]:
         heroes = session.exec(select(Hero)).all()
         return heroes
 ```
+
 {{< /file >}}
 
 {{< file path="config.py" >}}
+
 ```python
 # Pydantic settings that read PostgreSQL connection details from the
 # environment. Supports a password file (Docker secrets) via
@@ -1308,9 +1354,11 @@ class Settings(BaseSettings):
 
 settings = Settings()  # type: ignore
 ```
+
 {{< /file >}}
 
 {{< file path="requirements.txt" >}}
+
 ```text
 # Python package dependencies for the application, pinned for reproducible builds.
 # See https://pip.pypa.io/en/stable/reference/requirements-file-format/
@@ -1321,9 +1369,11 @@ psycopg[binary]==3.2.9
 pydantic-settings==2.9.1
 uvicorn==0.34.3
 ```
+
 {{< /file >}}
 
 {{< file path="Dockerfile" >}}
+
 ```dockerfile
 # syntax=docker/dockerfile:1
 
@@ -1375,9 +1425,11 @@ EXPOSE 8000
 
 CMD ["/venv/bin/python3", "-m", "uvicorn", "app:app", "--host=0.0.0.0", "--port=8000"]
 ```
+
 {{< /file >}}
 
 {{< file path="compose.yaml" status="modified" hl_lines="11-46" >}}
+
 ```yaml
 services:
   # Application service. The `target: builder` line builds the development
@@ -1426,15 +1478,19 @@ secrets:
   db-password:
     file: db/password.txt
 ```
+
 {{< /file >}}
 
 {{< file path="db/password.txt" status="new" >}}
+
 ```text
 mysecretpassword
 ```
+
 {{< /file >}}
 
 {{< file path=".dockerignore" >}}
+
 ```text
 # Include any files or directories that you don't want to be copied to your
 # container here (e.g., local build artifacts, temporary files, etc.).
@@ -1471,9 +1527,11 @@ mysecretpassword
 LICENSE
 README.md
 ```
+
 {{< /file >}}
 
 {{< file path=".gitignore" >}}
+
 ```text
 # Files and directories that Git should ignore. This is the standard Python
 # template covering bytecode, build artifacts, virtual environments, and IDE
@@ -1537,6 +1595,7 @@ venv.bak/
 # Secrets
 db/password.txt
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -1613,6 +1672,7 @@ Compose Watch instructions.
 {{< files name="python-docker-example" >}}
 
 {{< file path="app.py" >}}
+
 ```python
 # FastAPI application backed by a PostgreSQL database via SQLModel.
 # The FastAPI lifespan handler creates database tables at startup.
@@ -1671,9 +1731,11 @@ def read_heroes() -> Sequence[Hero]:
         heroes = session.exec(select(Hero)).all()
         return heroes
 ```
+
 {{< /file >}}
 
 {{< file path="config.py" >}}
+
 ```python
 # Pydantic settings that read PostgreSQL connection details from the
 # environment. Supports a password file (Docker secrets) via
@@ -1743,9 +1805,11 @@ class Settings(BaseSettings):
 
 settings = Settings()  # type: ignore
 ```
+
 {{< /file >}}
 
 {{< file path="requirements.txt" >}}
+
 ```text
 # Python package dependencies for the application, pinned for reproducible builds.
 # See https://pip.pypa.io/en/stable/reference/requirements-file-format/
@@ -1756,9 +1820,11 @@ psycopg[binary]==3.2.9
 pydantic-settings==2.9.1
 uvicorn==0.34.3
 ```
+
 {{< /file >}}
 
 {{< file path="Dockerfile" >}}
+
 ```dockerfile
 # syntax=docker/dockerfile:1
 
@@ -1810,9 +1876,11 @@ EXPOSE 8000
 
 CMD ["/venv/bin/python3", "-m", "uvicorn", "app:app", "--host=0.0.0.0", "--port=8000"]
 ```
+
 {{< /file >}}
 
 {{< file path="compose.yaml" status="modified" hl_lines="21-24" >}}
+
 ```yaml
 services:
   # Application service. The `target: builder` line builds the development
@@ -1862,15 +1930,19 @@ secrets:
   db-password:
     file: db/password.txt
 ```
+
 {{< /file >}}
 
 {{< file path="db/password.txt" >}}
+
 ```text
 mysecretpassword
 ```
+
 {{< /file >}}
 
 {{< file path=".dockerignore" >}}
+
 ```text
 # Include any files or directories that you don't want to be copied to your
 # container here (e.g., local build artifacts, temporary files, etc.).
@@ -1907,9 +1979,11 @@ mysecretpassword
 LICENSE
 README.md
 ```
+
 {{< /file >}}
 
 {{< file path=".gitignore" >}}
+
 ```text
 # Files and directories that Git should ignore. This is the standard Python
 # template covering bytecode, build artifacts, virtual environments, and IDE
@@ -1973,6 +2047,7 @@ venv.bak/
 # Secrets
 db/password.txt
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -2028,7 +2103,7 @@ In the next section, you'll learn how you can set up linting, formatting, and ty
 
 ### Prerequisites
 
-Complete [Develop your app](develop.md). This topic requires a local Python
+Complete [Develop your app](#use-containers-for-python-development). This topic requires a local Python
 installation because the tools and Git hooks introduced here run on your
 host. If you don't want to install Python locally, skip this topic. The same
 checks run in CI in the [next topic](./).
@@ -2055,6 +2130,7 @@ Create a `pyproject.toml` file in your `python-docker-example` directory:
 {{< files name="python-docker-example" >}}
 
 {{< file path="pyproject.toml" status="new" >}}
+
 ```toml
 # Configuration for code-quality tools.
 # - [tool.ruff]: linting and formatting (https://docs.astral.sh/ruff/)
@@ -2081,6 +2157,7 @@ ignore = [
     "B904",  # Allow raising exceptions without from e, for HTTPException
 ]
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -2116,6 +2193,7 @@ Update `pyproject.toml` to add the Pyright configuration at the bottom.
 {{< files name="python-docker-example" >}}
 
 {{< file path="pyproject.toml" status="modified" hl_lines="25-29" >}}
+
 ```toml
 # Configuration for code-quality tools.
 # - [tool.ruff]: linting and formatting (https://docs.astral.sh/ruff/)
@@ -2147,6 +2225,7 @@ typeCheckingMode = "strict"
 pythonVersion = "3.12"
 exclude = [".venv"]
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -2167,6 +2246,7 @@ directory to set up Ruff hooks:
 {{< files name="python-docker-example" >}}
 
 {{< file path=".pre-commit-config.yaml" status="new" >}}
+
 ```yaml
 # Pre-commit hook configuration. Runs Ruff (lint + format) on every
 # `git commit`. See https://pre-commit.com/
@@ -2179,6 +2259,7 @@ repos:
         args: [--fix]
       - id: ruff-format
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -2209,629 +2290,5 @@ Related information:
 
 ### Next steps
 
-- [Configure GitHub Actions](./) to run these checks automatically
 - Customize linting rules to match your team's style preferences
 - Explore advanced type checking features
-
-## Automate your builds with GitHub Actions
-
-### Prerequisites
-
-Complete all the previous sections of this guide, starting with [Containerize a Python application](./). You must have a [GitHub](https://github.com/signup) account and a verified [Docker](https://hub.docker.com/signup) account to complete this section.
-
-If you didn't create a [GitHub repository](https://github.com/new) for your project yet, it is time to do it. After creating the repository, don't forget to [add a remote](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories) and ensure you can commit and [push your code](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push) to GitHub.
-
-1. In your project's GitHub repository, open **Settings**, and go to **Secrets and variables** > **Actions**.
-
-2. Under the **Variables** tab, create a new **Repository variable** named `DOCKER_USERNAME` and your Docker ID as a value.
-
-3. Create a new [Personal Access Token (PAT)](/manuals/security/access-tokens.md#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read and Write.
-
-4. Add the PAT as a **Repository secret** in your GitHub repository, with the name
-   `DOCKERHUB_TOKEN`.
-
-### Overview
-
-GitHub Actions is a CI/CD automation tool built into GitHub. A workflow is a
-YAML file that tells GitHub which jobs to run when something happens in your
-repository, like a push to a branch or a pull request opening. Workflows live
-in the `.github/workflows/` directory of your repository.
-
-In this section, you'll add a workflow that runs your linting, formatting, and
-type checks on every push to the main branch, then builds your Docker image
-and pushes it to Docker Hub.
-
-### 1. Define the GitHub Actions workflow
-
-You can create a GitHub Actions workflow by creating a YAML file in the `.github/workflows/` directory of your repository. To do this use your favorite text editor or the GitHub web interface. The following steps show you how to create a workflow file using the GitHub web interface.
-
-If you prefer to use the GitHub web interface, follow these steps:
-
-1. Go to your repository on GitHub and then select the **Actions** tab.
-
-2. Select **set up a workflow yourself**.
-
-   This takes you to a page for creating a new GitHub Actions workflow file in
-   your repository. By default, the file is created under `.github/workflows/main.yml`. Change the file name to `build.yml`.
-
-If you prefer to use your text editor, create a new file named `build.yml` in the `.github/workflows/` directory of your repository.
-
-Add the following content to the file:
-
-{{< files name="python-docker-example" >}}
-
-{{< file path=".github/workflows/build.yml" status="new" >}}
-```yaml
-# GitHub Actions workflow that runs on every push to main.
-# - lint-test: runs pre-commit hooks (Ruff) and Pyright type checks.
-# - build_and_push: signs in to Docker Hub and the DHI registry, then
-#   builds and pushes the image (with SBOM and provenance attestations).
-name: Build and push Docker image
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  lint-test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@{{% param "checkout_action_version" %}}
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.12'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pre-commit pyright
-
-      - name: Run pre-commit hooks
-        run: pre-commit run --all-files
-
-      - name: Run pyright
-        run: pyright
-
-  build_and_push:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@{{% param "checkout_action_version" %}}
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@{{% param "login_action_version" %}}
-        with:
-          username: ${{ vars.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Login to Docker Hardened Images
-        uses: docker/login-action@{{% param "login_action_version" %}}
-        with:
-          registry: dhi.io
-          username: ${{ vars.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
-
-      - name: Build and push
-        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
-        with:
-          push: true
-          tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
-```
-{{< /file >}}
-
-{{< /files >}}
-
-Each GitHub Actions workflow includes one or several jobs. Each job consists of steps. Each step can either run a set of commands or use already [existing actions](https://github.com/marketplace?type=actions). The action above has three steps:
-
-1. [Login to Docker Hub](https://github.com/docker/login-action): Action logs in to Docker Hub using the Docker ID and Personal Access Token (PAT) you created earlier.
-
-2. [Set up Docker Buildx](https://github.com/docker/setup-buildx-action): Action sets up Docker [Buildx](https://github.com/docker/buildx), a CLI plugin that extends the capabilities of the Docker CLI.
-
-3. [Build and push](https://github.com/docker/build-push-action): Action builds and pushes the Docker image to Docker Hub. The `tags` parameter specifies the image name and tag. The `latest` tag is used in this example.
-
-### 2. Run the workflow
-
-Commit the changes and push them to the `main` branch. This workflow is runs every time you push changes to the `main` branch. You can find more information about workflow triggers [in the GitHub documentation](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows).
-
-Go to the **Actions** tab of you GitHub repository. It displays the workflow. Selecting the workflow shows you the breakdown of all the steps.
-
-When the workflow is complete, go to your [repositories on Docker Hub](https://hub.docker.com/repositories). If you see the new repository in that list, it means the GitHub Actions workflow successfully pushed the image to Docker Hub.
-
-### Summary
-
-In this section, you learned how to set up a GitHub Actions workflow for your Python application that includes:
-
-- Running pre-commit hooks for linting and formatting
-- Static type checking with Pyright
-- Building and pushing Docker images
-
-Related information:
-
-- [Introduction to GitHub Actions](/guides/gha.md)
-- [Docker Build GitHub Actions](/manuals/build/ci/github-actions/_index.md)
-- [docker/login-action](https://github.com/docker/login-action)
-- [docker/build-push-action](https://github.com/docker/build-push-action)
-- [Create a Docker Hub access token](/manuals/security/access-tokens.md#create-an-access-token)
-
-### Next steps
-
-In the next section, you'll learn how to inspect and generate supply chain
-attestations for your image. See [Secure your supply chain](./).
-
-## Secure your Python image supply chain
-
-### Prerequisites
-
-Complete [Configure CI/CD for your Python application](./).
-
-### Overview
-
-When you ship a container image, what's inside it and where it came from
-matters. Supply chain attestations are signed records that answer questions
-like which packages are in the image, what vulnerabilities affect them, how
-the image was built, and what security checks it passed.
-
-In this section, you'll inspect the attestations that ship with your Docker
-Hardened Image base, generate your own SBOM and provenance attestations
-during CI, and pin the base image by digest so your builds are reproducible.
-
-The inspection commands in this topic are shown manually so you can see what
-each one returns. In a real workflow you'd automate these checks with
-[Docker Scout](/scout/), which runs the same scans on every push,
-enforces policies in CI, and surfaces results in your registry and pull
-requests.
-
-### Inspect the base image attestations
-
-Docker Hardened Images are built to SLSA Build Level 3 and ship with a set of
-signed attestations covering bill-of-materials, vulnerabilities, build
-provenance, and security scans. See
-[DHI attestations](/manuals/dhi/core-concepts/attestations.md) for the full
-list of types and how to verify their signatures with Cosign.
-
-List all the attestations available on the Python DHI:
-
-```console
-$ docker scout attest list registry://dhi.io/python:3.12
-```
-
-View the SBOM:
-
-```console
-$ docker scout sbom registry://dhi.io/python:3.12
-```
-
-Check known vulnerabilities:
-
-```console
-$ docker scout cves registry://dhi.io/python:3.12
-```
-
-> [!NOTE]
->
-> The `registry://` prefix forces `docker scout` to fetch the image and its
-> attestations from the registry instead of reading a locally pulled copy. If
-> you've already pulled or built against the base image, the local copy
-> doesn't have the attached attestations, so the prefix is required to see
-> them.
-
-When you base your own image on a DHI image, these attestations stay attached to the base layer in the registry. Tools that inspect your image can follow the chain back to the DHI source.
-
-### Generate attestations for your image
-
-Update your GitHub Actions workflow to attach SBOM and provenance attestations to the image you push.
-
-Edit `.github/workflows/build.yml` and update the build-and-push step:
-
-```yaml {hl_lines="6-7"}
-- name: Build and push Docker image
-  uses: docker/build-push-action@v6
-  with:
-    context: .
-    push: true
-    sbom: true
-    provenance: mode=max
-    tags: ${{ steps.meta.outputs.tags }}
-```
-
-- `sbom: true` tells BuildKit to scan the built image and attach an SBOM attestation.
-- `provenance: mode=max` records detailed build provenance, including the source repository, commit, and build parameters.
-
-The next time your workflow runs, the pushed image will carry these attestations alongside the image manifest in the registry.
-
-### Inspect your pushed image's attestations
-
-After your workflow pushes the image, inspect it the same way you inspected the base image:
-
-```console
-$ docker scout attest list registry://DOCKER_USERNAME/REPO_NAME:latest
-$ docker scout sbom registry://DOCKER_USERNAME/REPO_NAME:latest
-```
-
-The SBOM includes packages from every layer, including those inherited from `dhi.io/python:3.12`. The provenance record references the DHI base image by digest, so consumers of your image can trace the build chain back to the DHI source.
-
-### Pin the base image by digest
-
-Image tags like `dhi.io/python:3.12` move over time as new patches land. For reproducible builds, pin to an immutable digest.
-
-The Dockerfile uses two tags, `dhi.io/python:3.12-dev` in the builder stage
-and `dhi.io/python:3.12` in the runtime stage. Each tag has its own digest,
-so look up both:
-
-```console
-$ docker buildx imagetools inspect dhi.io/python:3.12-dev --format "{{ .Manifest.Digest }}"
-sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945
-$ docker buildx imagetools inspect dhi.io/python:3.12 --format "{{ .Manifest.Digest }}"
-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-```
-
-Each digest is a 64-character hex string. Update your `Dockerfile` to reference
-each digest on the matching `FROM` line:
-
-```dockerfile
-FROM dhi.io/python:3.12-dev@sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945 AS builder
-# ...
-FROM dhi.io/python:3.12@sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-```
-
-> [!TIP]
->
-> Pinning by digest also pins you to that image's vulnerabilities. Use [Dependabot](https://docs.github.com/en/code-security/dependabot) or [Renovate](https://docs.renovatebot.com/) to automate digest updates so you get a PR when a new patched image is available, with a changelog to review before merging.
-
-### Summary
-
-In this section, you learned how to:
-
-- Inspect the supply chain attestations that ship with the DHI base image, including SBOMs, CVE reports, VEX statements, and scan results
-- Generate SBOM and provenance attestations for your own image in CI
-- Pin base images by digest for reproducible builds
-
-Related information:
-
-- [DHI attestations](/manuals/dhi/core-concepts/attestations.md)
-- [Verify a Docker Hardened Image](/manuals/dhi/how-to/verify.md)
-- [Docker Scout](/scout/)
-- [Build attestations](/manuals/build/metadata/attestations/_index.md)
-
-### Next steps
-
-In the next section, you'll deploy your application to Kubernetes.
-
-## Test your Python deployment
-
-### Prerequisites
-
-- Complete all the previous sections of this guide, starting with [Use containers for Python development](develop.md).
-- [Turn on Kubernetes](/manuals/desktop/use-desktop/kubernetes.md#enable-kubernetes) in Docker Desktop.
-
-### Overview
-
-[Kubernetes](https://kubernetes.io/) is an open source platform that runs and
-orchestrates container workloads across one or more machines. You describe
-what you want to run, like which container images, how many replicas, and
-which network ports to expose, in YAML manifest files. Kubernetes reads the
-manifests and makes the cluster match that description.
-
-In this section, you'll use the Kubernetes environment built into Docker
-Desktop to deploy your application locally. You'll write two manifest files,
-one for the PostgreSQL database and one for the FastAPI application, apply
-them with `kubectl`, and verify the deployment by hitting your application
-from a terminal.
-
-### Registry authentication
-
-The Docker Hardened Images used in this guide are hosted on `dhi.io`. Docker
-Desktop's Kubernetes shares credentials with Docker Desktop, so the `docker login dhi.io`
-you completed earlier is all that's needed. No additional image pull secret is required.
-
-> [!NOTE]
->
-> If you're deploying to a Kubernetes cluster outside of Docker Desktop, you'll
-> need to create an image pull secret and reference it in your pod specs. See
-> [Use a Docker Hardened Image](/dhi/how-to/use/#use-with-kubernetes) for instructions.
-
-### Create a Kubernetes YAML file
-
-Create the following two Kubernetes manifest files in your
-`python-docker-example` directory. Before applying
-`docker-python-kubernetes.yaml`, replace `DOCKER_USERNAME/REPO_NAME` with your
-Docker username and the repository name that you created in [Configure CI/CD for
-your Python application](./).
-
-{{< files name="python-docker-example" >}}
-
-{{< file path="docker-postgres-kubernetes.yaml" status="new" >}}
-```yaml
-# Kubernetes manifests for the PostgreSQL database used by the FastAPI app.
-# Contains a Deployment, Service, PersistentVolumeClaim, and Secret.
-
-# Deployment: runs one PostgreSQL pod. The image, port, env vars, and the
-# persistent volume mount are all defined here.
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: postgres
-  namespace: default
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: postgres
-  template:
-    metadata:
-      labels:
-        app: postgres
-    spec:
-      containers:
-        - name: postgres
-          image: dhi.io/postgres:18
-          ports:
-            - containerPort: 5432
-          env:
-            - name: POSTGRES_DB
-              value: example
-            - name: POSTGRES_USER
-              value: postgres
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: POSTGRES_PASSWORD
-          volumeMounts:
-            - name: postgres-data
-              mountPath: /var/lib/postgresql
-      volumes:
-        - name: postgres-data
-          persistentVolumeClaim:
-            claimName: postgres-pvc
----
-# Service: exposes PostgreSQL inside the cluster on port 5432 so the
-# application pod can reach it by the DNS name `postgres`.
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres
-  namespace: default
-spec:
-  ports:
-    - port: 5432
-  selector:
-    app: postgres
----
-# PersistentVolumeClaim: storage that survives pod restarts.
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgres-pvc
-  namespace: default
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
-# Secret: holds the database password (base64-encoded). Referenced by both
-# the postgres Deployment and the application Deployment.
-apiVersion: v1
-kind: Secret
-metadata:
-  name: postgres-secret
-  namespace: default
-type: Opaque
-data:
-  POSTGRES_PASSWORD: cG9zdGdyZXNfcGFzc3dvcmQ= # Base64 encoded password (e.g., 'postgres_password')
-```
-{{< /file >}}
-
-{{< file path="docker-python-kubernetes.yaml" status="new" >}}
-```yaml
-# Kubernetes manifests for the FastAPI application.
-# Contains a Deployment and a NodePort Service.
-
-# Deployment: runs the FastAPI app. Connection details to the postgres
-# service are passed in via environment variables, and the database
-# password comes from the shared postgres-secret.
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: docker-python-demo
-  namespace: default
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      service: fastapi
-  template:
-    metadata:
-      labels:
-        service: fastapi
-    spec:
-      containers:
-        - name: fastapi-service
-          image: DOCKER_USERNAME/REPO_NAME
-          imagePullPolicy: Always
-          env:
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: POSTGRES_PASSWORD
-            - name: POSTGRES_USER
-              value: postgres
-            - name: POSTGRES_DB
-              value: example
-            - name: POSTGRES_SERVER
-              value: postgres
-            - name: POSTGRES_PORT
-              value: "5432"
-          ports:
-            - containerPort: 8000
----
-# Service: exposes the FastAPI app on port 30001 of the cluster node so
-# you can reach it from your host with `curl http://localhost:30001/`.
-apiVersion: v1
-kind: Service
-metadata:
-  name: service-entrypoint
-  namespace: default
-spec:
-  type: NodePort
-  selector:
-    service: fastapi
-  ports:
-    - port: 8000
-      targetPort: 8000
-      nodePort: 30001
-```
-{{< /file >}}
-
-{{< /files >}}
-
-In these Kubernetes YAML files, there are various objects, separated by the `---`:
-
-- A Deployment, describing a scalable group of identical pods. In this case,
-  you'll get just one replica, or copy of your pod. That pod, which is
-  described under `template`, has just one container in it. The
-  container is created from the image built by GitHub Actions in [Configure CI/CD for
-  your Python application](./).
-- A Service, which will define how the ports are mapped in the containers.
-- A PersistentVolumeClaim, to define a storage that will be persistent through restarts for the database.
-- A Secret, which stores the database password as a Kubernetes Secret resource.
-- A NodePort service, which will route traffic from port 30001 on your host to
-  port 8000 inside the pods it routes to, so you can reach your app
-  from the network.
-
-To learn more about Kubernetes objects, see the [Kubernetes documentation](https://kubernetes.io/docs/home/).
-
-> [!NOTE]
->
-> The `NodePort` service is good for development and testing. For production, implement an [ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) instead.
-
-### Deploy and check your application
-
-1. In a terminal, navigate to `python-docker-example` and deploy your database to
-   Kubernetes.
-
-   ```console
-   $ kubectl apply -f docker-postgres-kubernetes.yaml
-   ```
-
-   You should see output that looks like the following, indicating your Kubernetes objects were created successfully.
-
-   ```console
-   deployment.apps/postgres created
-   service/postgres created
-   persistentvolumeclaim/postgres-pvc created
-   secret/postgres-secret created
-   ```
-
-   Now, deploy your Python application.
-
-   ```console
-   $ kubectl apply -f docker-python-kubernetes.yaml
-   ```
-
-   You should see output that looks like the following, indicating your Kubernetes objects were created successfully.
-
-   ```console
-   deployment.apps/docker-python-demo created
-   service/service-entrypoint created
-   ```
-
-2. Make sure everything worked by listing your deployments.
-
-   ```console
-   $ kubectl get deployments
-   ```
-
-   Your deployment should be listed as follows:
-
-   ```console
-   NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
-   docker-python-demo   1/1     1            1           48s
-   postgres             1/1     1            1           2m39s
-   ```
-
-   This indicates all one of the pods you asked for in your YAML are up and running. Do the same check for your services.
-
-   ```console
-   $ kubectl get services
-   ```
-
-   You should get output like the following.
-
-   ```console
-   NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-   kubernetes           ClusterIP   10.43.0.1      <none>        443/TCP          13h
-   postgres             ClusterIP   10.43.209.25   <none>        5432/TCP         3m10s
-   service-entrypoint   NodePort    10.43.67.120   <none>        8000:30001/TCP   79s
-   ```
-
-   In addition to the default `kubernetes` service, you can see your `service-entrypoint` service, accepting traffic on port 30001/TCP and the internal `ClusterIP` `postgres` with the port `5432` open to accept connections from your Python app.
-
-3. In a terminal, curl the root endpoint to verify the application is running.
-
-   ```console
-   $ curl http://localhost:30001/
-   Hello, Docker!
-   ```
-
-4. Exercise the database by creating a hero with a POST request:
-
-   ```console
-   $ curl -X 'POST' \
-     'http://localhost:30001/heroes/' \
-     -H 'accept: application/json' \
-     -H 'Content-Type: application/json' \
-     -d '{
-     "id": 1,
-     "name": "my hero",
-     "secret_name": "austing",
-     "age": 12
-   }'
-   ```
-
-   You should receive the following response:
-
-   ```json
-   {
-     "age": 12,
-     "id": 1,
-     "name": "my hero",
-     "secret_name": "austing"
-   }
-   ```
-
-   Then read it back with a GET request:
-
-   ```console
-   $ curl http://localhost:30001/heroes/
-   ```
-
-   You should receive an array containing the hero you just created. This
-   confirms the application can read from and write to the PostgreSQL database
-   running in the cluster.
-
-5. Run the following commands to tear down your application.
-
-   ```console
-   $ kubectl delete -f docker-python-kubernetes.yaml
-   $ kubectl delete -f docker-postgres-kubernetes.yaml
-   ```
-
-### Summary
-
-In this section, you learned how to use Docker Desktop to deploy your application to a fully-featured Kubernetes environment on your development machine.
-
-Related information:
-
-- [Kubernetes documentation](https://kubernetes.io/docs/home/)
-- [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/use-desktop/kubernetes.md)
-- [Use a Docker Hardened Image with Kubernetes](/dhi/how-to/use/#use-with-kubernetes)

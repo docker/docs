@@ -30,8 +30,7 @@ params:
   time: 20 minutes
 ---
 
-
-[Node.js](https://nodejs.org/en) is a JavaScript runtime for building server-side applications. This guide shows you how to containerize a TypeScript Node.js application using Docker, starting from a simple Express API and progressively adding features like a database and CI/CD.
+[Node.js](https://nodejs.org/en) is a JavaScript runtime for building server-side applications. This guide shows you how to containerize a TypeScript Node.js application using Docker, starting from a simple Express API and progressively adding features like a database.
 
 This guide focuses on a backend Node.js API. If you're building a standalone frontend application, Docker has dedicated guides for [React.js](/guides/reactjs/), [Vue.js](/guides/vuejs/), [Angular](/guides/angular/), and [Next.js](/guides/nextjs/).
 
@@ -46,9 +45,6 @@ In this guide, you'll learn how to:
 - Containerize and run a Node.js application using Docker.
 - Set up a local development environment using containers.
 - Run tests inside a Docker container.
-- Configure GitHub Actions for CI/CD with Docker.
-- Inspect and generate supply chain attestations for your image.
-- Deploy your containerized Node.js application to Kubernetes.
 
 Start by containerizing a Node.js application.
 
@@ -86,27 +82,30 @@ The sample application is a minimal Express API with a single endpoint that retu
 {{< files name="nodejs-docker-example" >}}
 
 {{< file path="src/index.ts" status="new" >}}
+
 ```typescript
 // A minimal Express application.
 // The root endpoint (GET /) returns a JSON greeting.
 // See https://expressjs.com/ for the framework reference.
 
-import express, { type Request, type Response } from 'express';
+import express, { type Request, type Response } from "express";
 
 const app = express();
-const port = parseInt(process.env.PORT ?? '3000', 10);
+const port = parseInt(process.env.PORT ?? "3000", 10);
 
-app.get('/', (_req: Request, res: Response) => {
-  res.json({ message: 'Hello World' });
+app.get("/", (_req: Request, res: Response) => {
+  res.json({ message: "Hello World" });
 });
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 ```
+
 {{< /file >}}
 
 {{< file path="package.json" status="new" >}}
+
 ```json
 {
   "name": "nodejs-docker-example",
@@ -129,9 +128,11 @@ app.listen(port, () => {
   }
 }
 ```
+
 {{< /file >}}
 
 {{< file path="tsconfig.json" status="new" >}}
+
 ```json
 {
   // TypeScript compiler configuration for the Node.js application.
@@ -151,9 +152,11 @@ app.listen(port, () => {
   "exclude": ["node_modules", "dist"]
 }
 ```
+
 {{< /file >}}
 
 {{< file path=".gitignore" status="new" >}}
+
 ```text
 # Files and directories that Git should ignore. Covers Node.js dependencies,
 # TypeScript build output, environment files, and common editor artifacts.
@@ -167,6 +170,7 @@ dist/
 coverage/
 db/password.txt
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -211,27 +215,30 @@ Add the following three files to your `nodejs-docker-example` directory. The `Do
 {{< files name="nodejs-docker-example" >}}
 
 {{< file path="src/index.ts" >}}
+
 ```typescript
 // A minimal Express application.
 // The root endpoint (GET /) returns a JSON greeting.
 // See https://expressjs.com/ for the framework reference.
 
-import express, { type Request, type Response } from 'express';
+import express, { type Request, type Response } from "express";
 
 const app = express();
-const port = parseInt(process.env.PORT ?? '3000', 10);
+const port = parseInt(process.env.PORT ?? "3000", 10);
 
-app.get('/', (_req: Request, res: Response) => {
-  res.json({ message: 'Hello World' });
+app.get("/", (_req: Request, res: Response) => {
+  res.json({ message: "Hello World" });
 });
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 ```
+
 {{< /file >}}
 
 {{< file path="package.json" >}}
+
 ```json
 {
   "name": "nodejs-docker-example",
@@ -254,9 +261,11 @@ app.listen(port, () => {
   }
 }
 ```
+
 {{< /file >}}
 
 {{< file path="tsconfig.json" >}}
+
 ```json
 {
   // TypeScript compiler configuration for the Node.js application.
@@ -276,9 +285,11 @@ app.listen(port, () => {
   "exclude": ["node_modules", "dist"]
 }
 ```
+
 {{< /file >}}
 
 {{< file path="Dockerfile" status="new" >}}
+
 ```dockerfile
 # syntax=docker/dockerfile:1
 
@@ -343,9 +354,11 @@ EXPOSE 3000
 # Run the application.
 CMD ["node", "dist/index.js"]
 ```
+
 {{< /file >}}
 
 {{< file path="compose.yaml" status="new" >}}
+
 ```yaml
 # Comments are provided throughout this file to help you get started.
 # If you need more help, visit the Docker Compose reference guide at
@@ -363,9 +376,11 @@ services:
     ports:
       - 3000:3000
 ```
+
 {{< /file >}}
 
 {{< file path=".dockerignore" status="new" >}}
+
 ```text
 # Include any files or directories that you don't want to be copied to your
 # container here (e.g., local build artifacts, temporary files, etc.).
@@ -383,9 +398,11 @@ npm-debug.log*
 coverage/
 db/
 ```
+
 {{< /file >}}
 
 {{< file path=".gitignore" >}}
+
 ```text
 # Files and directories that Git should ignore. Covers Node.js dependencies,
 # TypeScript build output, environment files, and common editor artifacts.
@@ -399,6 +416,7 @@ dist/
 coverage/
 db/password.txt
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -488,27 +506,28 @@ Replace `src/index.ts` and `package.json` with the following contents. The file 
 {{< files name="nodejs-docker-example" >}}
 
 {{< file path="src/index.ts" status="modified" >}}
+
 ```typescript
 // Express application backed by a PostgreSQL database.
 // Creates a heroes table at startup.
 // Endpoints: GET / (greeting), GET /health (health check), POST /heroes/ (create), GET /heroes/ (list).
 // See https://expressjs.com/ and https://node-postgres.com/
 
-import express, { type Request, type Response } from 'express';
-import { Pool } from 'pg';
-import { readFileSync } from 'fs';
+import express, { type Request, type Response } from "express";
+import { Pool } from "pg";
+import { readFileSync } from "fs";
 
 const app = express();
-const port = parseInt(process.env.PORT ?? '3000', 10);
+const port = parseInt(process.env.PORT ?? "3000", 10);
 
 app.use(express.json());
 
 function getPassword(): string {
   const passwordFile = process.env.POSTGRES_PASSWORD_FILE;
   if (passwordFile) {
-    return readFileSync(passwordFile, 'utf8').trim();
+    return readFileSync(passwordFile, "utf8").trim();
   }
-  return process.env.POSTGRES_PASSWORD ?? '';
+  return process.env.POSTGRES_PASSWORD ?? "";
 }
 
 const pool = new Pool({
@@ -530,29 +549,29 @@ pool
   )
   .catch(console.error);
 
-app.get('/', (_req: Request, res: Response) => {
-  res.json({ message: 'Hello World' });
+app.get("/", (_req: Request, res: Response) => {
+  res.json({ message: "Hello World" });
 });
 
-app.get('/health', (_req: Request, res: Response) => {
-  res.json({ status: 'ok' });
+app.get("/health", (_req: Request, res: Response) => {
+  res.json({ status: "ok" });
 });
 
-app.post('/heroes/', async (req: Request, res: Response) => {
+app.post("/heroes/", async (req: Request, res: Response) => {
   const { name, secret_name, age } = req.body as {
     name: string;
     secret_name: string;
     age?: number;
   };
   const result = await pool.query(
-    'INSERT INTO heroes (name, secret_name, age) VALUES ($1, $2, $3) RETURNING *',
+    "INSERT INTO heroes (name, secret_name, age) VALUES ($1, $2, $3) RETURNING *",
     [name, secret_name, age],
   );
   res.json(result.rows[0]);
 });
 
-app.get('/heroes/', async (_req: Request, res: Response) => {
-  const result = await pool.query('SELECT * FROM heroes');
+app.get("/heroes/", async (_req: Request, res: Response) => {
+  const result = await pool.query("SELECT * FROM heroes");
   res.json(result.rows);
 });
 
@@ -560,9 +579,11 @@ app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 ```
+
 {{< /file >}}
 
 {{< file path="package.json" status="modified" hl_lines="13,18" >}}
+
 ```json
 {
   "name": "nodejs-docker-example",
@@ -587,6 +608,7 @@ app.listen(port, () => {
   }
 }
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -598,6 +620,7 @@ Replace `Dockerfile` and `compose.yaml` with the following.
 {{< files name="nodejs-docker-example" >}}
 
 {{< file path="Dockerfile" status="modified" hl_lines="12,34,37,63" >}}
+
 ```dockerfile
 # syntax=docker/dockerfile:1
 
@@ -669,9 +692,11 @@ EXPOSE 3000
 # Run the application.
 CMD ["node", "dist/index.js"]
 ```
+
 {{< /file >}}
 
 {{< file path="compose.yaml" status="modified" hl_lines="8" >}}
+
 ```yaml
 services:
   # Application service. The `target: dev` line builds the development
@@ -684,6 +709,7 @@ services:
     ports:
       - 3000:3000
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -703,6 +729,7 @@ You can use containers to set up local services, like a database. In this sectio
 {{< files name="nodejs-docker-example" >}}
 
 {{< file path="compose.yaml" status="modified" hl_lines="11-46" >}}
+
 ```yaml
 services:
   # Application service. The `target: dev` line builds the development
@@ -751,12 +778,15 @@ secrets:
   db-password:
     file: db/password.txt
 ```
+
 {{< /file >}}
 
 {{< file path="db/password.txt" status="new" >}}
+
 ```text
 mysecretpassword
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -818,6 +848,7 @@ Open your `compose.yaml` file in an IDE or text editor and add the highlighted C
 {{< files name="nodejs-docker-example" >}}
 
 {{< file path="compose.yaml" status="modified" hl_lines="21-27" >}}
+
 ```yaml
 services:
   # Application service. The `target: dev` line builds the development
@@ -870,6 +901,7 @@ secrets:
   db-password:
     file: db/password.txt
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -914,6 +946,7 @@ Update the `dev` script in `package.json` to start the inspector. The `--inspect
 {{< files name="nodejs-docker-example" >}}
 
 {{< file path="package.json" status="modified" hl_lines="9" >}}
+
 ```json
 {
   "name": "nodejs-docker-example",
@@ -938,9 +971,11 @@ Update the `dev` script in `package.json` to start the inspector. The `--inspect
   }
 }
 ```
+
 {{< /file >}}
 
 {{< file path=".vscode/launch.json" status="new" >}}
+
 ```json
 {
   "version": "0.2.0",
@@ -961,9 +996,11 @@ Update the `dev` script in `package.json` to start the inspector. The `--inspect
   ]
 }
 ```
+
 {{< /file >}}
 
 {{< file path="compose.yaml" status="modified" hl_lines="11" >}}
+
 ```yaml
 services:
   # Application service. The `target: dev` line builds the development
@@ -1017,6 +1054,7 @@ secrets:
   db-password:
     file: db/password.txt
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -1108,27 +1146,28 @@ can import it without starting a server. Add a test file and update
 {{< files name="nodejs-docker-example" >}}
 
 {{< file path="src/index.ts" status="modified" hl_lines="10,31,70-75" >}}
+
 ```typescript
 // Express application backed by a PostgreSQL database.
 // Creates a heroes table at startup.
 // Endpoints: GET / (greeting), GET /health (health check), POST /heroes/ (create), GET /heroes/ (list).
 // See https://expressjs.com/ and https://node-postgres.com/
 
-import express, { type Request, type Response } from 'express';
-import { Pool } from 'pg';
-import { readFileSync } from 'fs';
+import express, { type Request, type Response } from "express";
+import { Pool } from "pg";
+import { readFileSync } from "fs";
 
 export const app = express();
-const port = parseInt(process.env.PORT ?? '3000', 10);
+const port = parseInt(process.env.PORT ?? "3000", 10);
 
 app.use(express.json());
 
 function getPassword(): string {
   const passwordFile = process.env.POSTGRES_PASSWORD_FILE;
   if (passwordFile) {
-    return readFileSync(passwordFile, 'utf8').trim();
+    return readFileSync(passwordFile, "utf8").trim();
   }
-  return process.env.POSTGRES_PASSWORD ?? '';
+  return process.env.POSTGRES_PASSWORD ?? "";
 }
 
 const pool = new Pool({
@@ -1152,29 +1191,29 @@ if (process.env.POSTGRES_SERVER) {
     .catch(console.error);
 }
 
-app.get('/', (_req: Request, res: Response) => {
-  res.json({ message: 'Hello World' });
+app.get("/", (_req: Request, res: Response) => {
+  res.json({ message: "Hello World" });
 });
 
-app.get('/health', (_req: Request, res: Response) => {
-  res.json({ status: 'ok' });
+app.get("/health", (_req: Request, res: Response) => {
+  res.json({ status: "ok" });
 });
 
-app.post('/heroes/', async (req: Request, res: Response) => {
+app.post("/heroes/", async (req: Request, res: Response) => {
   const { name, secret_name, age } = req.body as {
     name: string;
     secret_name: string;
     age?: number;
   };
   const result = await pool.query(
-    'INSERT INTO heroes (name, secret_name, age) VALUES ($1, $2, $3) RETURNING *',
+    "INSERT INTO heroes (name, secret_name, age) VALUES ($1, $2, $3) RETURNING *",
     [name, secret_name, age],
   );
   res.json(result.rows[0]);
 });
 
-app.get('/heroes/', async (_req: Request, res: Response) => {
-  const result = await pool.query('SELECT * FROM heroes');
+app.get("/heroes/", async (_req: Request, res: Response) => {
+  const result = await pool.query("SELECT * FROM heroes");
   res.json(result.rows);
 });
 
@@ -1185,29 +1224,33 @@ if (require.main === module) {
   });
 }
 ```
+
 {{< /file >}}
 
 {{< file path="src/index.test.ts" status="new" >}}
+
 ```typescript
 // Unit tests for the Express application.
 // Tests the root endpoint without starting a server.
 // See https://vitest.dev/ for the test framework reference.
 
-import { describe, it, expect } from 'vitest';
-import request from 'supertest';
-import { app } from './index';
+import { describe, it, expect } from "vitest";
+import request from "supertest";
+import { app } from "./index";
 
-describe('GET /', () => {
-  it('returns a JSON greeting', async () => {
-    const response = await request(app).get('/');
+describe("GET /", () => {
+  it("returns a JSON greeting", async () => {
+    const response = await request(app).get("/");
     expect(response.status).toBe(200);
-    expect(response.body).toEqual({ message: 'Hello World' });
+    expect(response.body).toEqual({ message: "Hello World" });
   });
 });
 ```
+
 {{< /file >}}
 
 {{< file path="package.json" status="modified" hl_lines="10,20-22" >}}
+
 ```json
 {
   "name": "nodejs-docker-example",
@@ -1236,6 +1279,7 @@ describe('GET /', () => {
   }
 }
 ```
+
 {{< /file >}}
 
 {{< /files >}}
@@ -1335,536 +1379,3 @@ Related information:
 - [Dockerfile reference](/reference/dockerfile/)
 - [Compose file reference](/compose/compose-file/)
 - [`docker compose run` CLI reference](/reference/cli/docker/compose/run/)
-
-### Next steps
-
-In the next section, you'll learn how to set up a CI/CD pipeline using GitHub Actions.
-
-## Automate your builds with GitHub Actions
-
-### Prerequisites
-
-Complete all the previous sections of this guide, starting with [Containerize a Node.js application](./). You must have a [GitHub](https://github.com/signup) account and a verified [Docker](https://hub.docker.com/signup) account to complete this section.
-
-If you haven't created a [GitHub repository](https://github.com/new) for your project yet, do that now. After creating the repository, [add a remote](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories) and make sure you can commit and [push your code](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push) to GitHub.
-
-1. In your project's GitHub repository, open **Settings**, and go to **Secrets and variables** > **Actions**.
-
-2. Under the **Variables** tab, create a new **Repository variable** named `DOCKER_USERNAME` with your Docker ID as the value.
-
-3. Create a new [Personal Access Token (PAT)](/manuals/security/access-tokens.md#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read and Write.
-
-4. Add the PAT as a **Repository secret** in your GitHub repository, with the name `DOCKERHUB_TOKEN`.
-
-### Overview
-
-GitHub Actions is a CI/CD automation tool built into GitHub. A workflow is a YAML file that tells GitHub which jobs to run when something happens in your repository, like a push to a branch or a pull request opening. Workflows live in the `.github/workflows/` directory of your repository.
-
-In this section, you'll add a workflow that runs your tests on every push to the main branch, then builds your Docker image and pushes it to Docker Hub.
-
-### Define the GitHub Actions workflow
-
-You can create a GitHub Actions workflow by creating a YAML file in the `.github/workflows/` directory of your repository. Use your favorite text editor or the GitHub web interface.
-
-If you prefer to use the GitHub web interface:
-
-1. Go to your repository on GitHub and select the **Actions** tab.
-
-2. Select **set up a workflow yourself**.
-
-   This takes you to a page for creating a new GitHub Actions workflow file in your repository. By default, the file is created under `.github/workflows/main.yml`. Change the filename to `build.yml`.
-
-If you prefer to use your text editor, create a new file named `build.yml` in the `.github/workflows/` directory of your repository.
-
-Add the following content to the file:
-
-{{< files name="nodejs-docker-example" >}}
-
-{{< file path=".github/workflows/build.yml" status="new" >}}
-```yaml
-# GitHub Actions workflow that runs on every push to main.
-# - test: runs Vitest unit tests inside a container.
-# - build_and_push: signs in to Docker Hub and the DHI registry, then
-#   builds and pushes the image.
-name: Build and push Docker image
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@{{% param "checkout_action_version" %}}
-
-      - name: Run tests
-        run: docker build --target test -t nodejs-test . && docker run --rm nodejs-test
-
-  build_and_push:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - uses: actions/checkout@{{% param "checkout_action_version" %}}
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@{{% param "login_action_version" %}}
-        with:
-          username: ${{ vars.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Login to Docker Hardened Images
-        uses: docker/login-action@{{% param "login_action_version" %}}
-        with:
-          registry: dhi.io
-          username: ${{ vars.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
-
-      - name: Build and push
-        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
-        with:
-          push: true
-          tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
-```
-{{< /file >}}
-
-{{< /files >}}
-
-The workflow has two jobs:
-
-1. **test**: Builds the `test` stage of the Dockerfile and runs it. If tests fail, the workflow stops and `build_and_push` doesn't run.
-2. **build_and_push**: Signs in to Docker Hub and the DHI registry, then builds and pushes the image.
-
-### Run the workflow
-
-Commit the changes and push them to the `main` branch. This workflow runs every time you push changes to `main`. You can find more information about workflow triggers in the [GitHub documentation](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows).
-
-Go to the **Actions** tab of your GitHub repository. It displays the workflow. Selecting the workflow shows you the breakdown of all the steps.
-
-When the workflow is complete, go to your [repositories on Docker Hub](https://hub.docker.com/repositories). If you see the new repository in that list, the GitHub Actions workflow successfully pushed the image to Docker Hub.
-
-### Summary
-
-In this section, you learned how to set up a GitHub Actions workflow for your Node.js application that includes:
-
-- Running Vitest unit tests inside a container
-- Building and pushing Docker images
-
-Related information:
-
-- [Introduction to GitHub Actions](/guides/gha.md)
-- [Docker Build GitHub Actions](/manuals/build/ci/github-actions/_index.md)
-- [docker/login-action](https://github.com/docker/login-action)
-- [docker/build-push-action](https://github.com/docker/build-push-action)
-- [Create a Docker Hub access token](/manuals/security/access-tokens.md#create-an-access-token)
-
-### Next steps
-
-In the next section, you'll learn how to inspect and generate supply chain
-attestations for your image. See [Secure your supply chain](./).
-
-## Secure your Node.js image supply chain
-
-### Prerequisites
-
-Complete [Automate your builds with GitHub Actions](./).
-
-### Overview
-
-When you ship a container image, what's inside it and where it came from
-matters. Supply chain attestations are signed records that answer questions
-like which packages are in the image, what vulnerabilities affect them, how
-the image was built, and what security checks it passed.
-
-In this section, you'll inspect the attestations that ship with your Docker
-Hardened Image base, generate your own SBOM and provenance attestations
-during CI, and pin the base image by digest so your builds are reproducible.
-
-The inspection commands in this topic are shown manually so you can see what
-each one returns. In a real workflow you'd automate these checks with
-[Docker Scout](/scout/), which runs the same scans on every push,
-enforces policies in CI, and surfaces results in your registry and pull
-requests.
-
-### Inspect the base image attestations
-
-Docker Hardened Images are built to SLSA Build Level 3 and ship with a set of
-signed attestations covering bill-of-materials, vulnerabilities, build
-provenance, and security scans. See
-[DHI attestations](/manuals/dhi/core-concepts/attestations.md) for the full
-list of types and how to verify their signatures with Cosign.
-
-List all the attestations available on the Node.js DHI:
-
-```console
-$ docker scout attest list registry://dhi.io/node:24-alpine3.23-dev
-```
-
-View the SBOM:
-
-```console
-$ docker scout sbom registry://dhi.io/node:24-alpine3.23-dev
-```
-
-Check known vulnerabilities:
-
-```console
-$ docker scout cves registry://dhi.io/node:24-alpine3.23-dev
-```
-
-> [!NOTE]
->
-> The `registry://` prefix forces `docker scout` to fetch the image and its
-> attestations from the registry instead of reading a locally pulled copy. If
-> you've already pulled or built against the base image, the local copy
-> doesn't have the attached attestations, so the prefix is required to see
-> them.
-
-When you base your own image on a DHI image, these attestations stay attached to the base layer in the registry. Tools that inspect your image can follow the chain back to the DHI source.
-
-### Generate attestations for your image
-
-Update your GitHub Actions workflow to attach SBOM and provenance attestations to the image you push.
-
-Edit `.github/workflows/build.yml` and update the build-and-push step:
-
-```yaml {hl_lines="6-7"}
-- name: Build and push Docker image
-  uses: docker/build-push-action@{{% param "build_push_action_version" %}}
-  with:
-    context: .
-    push: true
-    sbom: true
-    provenance: mode=max
-    tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
-```
-
-- `sbom: true` tells BuildKit to scan the built image and attach an SBOM attestation.
-- `provenance: mode=max` records detailed build provenance, including the source repository, commit, and build parameters.
-
-The next time your workflow runs, the pushed image will carry these attestations alongside the image manifest in the registry.
-
-### Inspect your pushed image's attestations
-
-After your workflow pushes the image, inspect it the same way you inspected the base image:
-
-```console
-$ docker scout attest list registry://DOCKER_USERNAME/REPO_NAME:latest
-$ docker scout sbom registry://DOCKER_USERNAME/REPO_NAME:latest
-```
-
-The SBOM includes packages from every layer, including those inherited from `dhi.io/node:24-alpine3.23-dev`. The provenance record references the DHI base image by digest, so consumers of your image can trace the build chain back to the DHI source.
-
-### Pin the base image by digest
-
-Image tags like `dhi.io/node:24-alpine3.23-dev` move over time as new patches land. For reproducible builds, pin to an immutable digest.
-
-Look up the digest for each image:
-
-```console
-$ docker buildx imagetools inspect dhi.io/node:24-alpine3.23-dev --format "{{ .Manifest.Digest }}"
-sha256:2bf01111c7dfe429362f64b3977f0cd6e63ff39023012f88487dec7e83aa26ca
-$ docker buildx imagetools inspect dhi.io/node:24-alpine3.23 --format "{{ .Manifest.Digest }}"
-sha256:868827fd45c6a01f7f3337ba7ff3f48ebb14da10d8cf3d347f98ded5481317a5
-```
-
-Each digest is a 64-character hex string. Update your `Dockerfile` to reference each digest on its corresponding `FROM` line:
-
-```dockerfile
-FROM dhi.io/node:24-alpine3.23-dev@sha256:2bf01111c7dfe429362f64b3977f0cd6e63ff39023012f88487dec7e83aa26ca AS dev
-# ...
-FROM dhi.io/node:24-alpine3.23@sha256:868827fd45c6a01f7f3337ba7ff3f48ebb14da10d8cf3d347f98ded5481317a5 AS runner
-```
-
-> [!TIP]
->
-> Pinning by digest also pins you to that image's vulnerabilities. Use [Dependabot](https://docs.github.com/en/code-security/dependabot) or [Renovate](https://docs.renovatebot.com/) to automate digest updates so you get a PR when a new patched image is available, with a changelog to review before merging.
-
-### Summary
-
-In this section, you learned how to:
-
-- Inspect the supply chain attestations that ship with the DHI base image, including SBOMs, CVE reports, and build provenance
-- Generate SBOM and provenance attestations for your own image in CI
-- Pin base images by digest for reproducible builds
-
-Related information:
-
-- [DHI attestations](/manuals/dhi/core-concepts/attestations.md)
-- [Verify a Docker Hardened Image](/manuals/dhi/how-to/verify.md)
-- [Docker Scout](/scout/)
-- [Build attestations](/manuals/build/metadata/attestations/_index.md)
-
-### Next steps
-
-In the next section, you'll deploy your application to Kubernetes.
-
-## Deploy your Node.js application
-
-### Prerequisites
-
-- Complete all the previous sections of this guide, starting with [Containerize a Node.js application](./).
-- [Turn on Kubernetes](/manuals/desktop/use-desktop/kubernetes.md#enable-kubernetes) in Docker Desktop.
-
-### Overview
-
-In this section, you'll deploy your containerized Node.js application to a local Kubernetes cluster using Docker Desktop. You'll create a Kubernetes manifest that describes how the application should run, including the application deployment, the PostgreSQL database, and the services that connect them.
-
-### Create a Kubernetes manifest
-
-Create a new file called `nodejs-docker-example-kubernetes.yaml` in your project root:
-
-{{< files name="nodejs-docker-example" >}}
-
-{{< file path="nodejs-docker-example-kubernetes.yaml" status="new" >}}
-```yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: nodejs-docker-example
-
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: app-config
-  namespace: nodejs-docker-example
-data:
-  POSTGRES_SERVER: 'postgres'
-  POSTGRES_DB: 'example'
-  POSTGRES_USER: 'postgres'
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgres-pvc
-  namespace: nodejs-docker-example
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: postgres
-  namespace: nodejs-docker-example
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: postgres
-  template:
-    metadata:
-      labels:
-        app: postgres
-    spec:
-      containers:
-        - name: postgres
-          image: dhi.io/postgres:18
-          ports:
-            - containerPort: 5432
-          env:
-            - name: POSTGRES_DB
-              valueFrom:
-                configMapKeyRef:
-                  name: app-config
-                  key: POSTGRES_DB
-            - name: POSTGRES_USER
-              valueFrom:
-                configMapKeyRef:
-                  name: app-config
-                  key: POSTGRES_USER
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: app-secrets
-                  key: db-password
-          volumeMounts:
-            - name: postgres-storage
-              mountPath: /var/lib/postgresql
-          readinessProbe:
-            exec:
-              command: [pg_isready]
-            initialDelaySeconds: 5
-            periodSeconds: 5
-      volumes:
-        - name: postgres-storage
-          persistentVolumeClaim:
-            claimName: postgres-pvc
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres
-  namespace: nodejs-docker-example
-spec:
-  type: ClusterIP
-  ports:
-    - port: 5432
-      targetPort: 5432
-  selector:
-    app: postgres
-
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: server
-  namespace: nodejs-docker-example
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: server
-  template:
-    metadata:
-      labels:
-        app: server
-    spec:
-      containers:
-        - name: server
-          image: DOCKER_USERNAME/nodejs-docker-example:latest
-          ports:
-            - containerPort: 3000
-          env:
-            - name: POSTGRES_SERVER
-              valueFrom:
-                configMapKeyRef:
-                  name: app-config
-                  key: POSTGRES_SERVER
-            - name: POSTGRES_DB
-              valueFrom:
-                configMapKeyRef:
-                  name: app-config
-                  key: POSTGRES_DB
-            - name: POSTGRES_USER
-              valueFrom:
-                configMapKeyRef:
-                  name: app-config
-                  key: POSTGRES_USER
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: app-secrets
-                  key: db-password
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 3000
-            initialDelaySeconds: 10
-            periodSeconds: 5
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: server
-  namespace: nodejs-docker-example
-spec:
-  type: ClusterIP
-  ports:
-    - port: 3000
-      targetPort: 3000
-  selector:
-    app: server
-```
-{{< /file >}}
-
-{{< /files >}}
-
-Before applying the manifest, replace `DOCKER_USERNAME` in the `server` deployment's image field with your Docker Hub username.
-
-### Deploy to Kubernetes
-
-Apply the manifest to your local Kubernetes cluster:
-
-```console
-$ kubectl apply -f nodejs-docker-example-kubernetes.yaml
-```
-
-You should see output confirming that the resources were created:
-
-```console
-namespace/nodejs-docker-example created
-configmap/app-config created
-persistentvolumeclaim/postgres-pvc created
-deployment.apps/postgres created
-service/postgres created
-deployment.apps/server created
-service/server created
-```
-
-Then create the database secret from your password file:
-
-```console
-$ kubectl create secret generic app-secrets \
-  --namespace nodejs-docker-example \
-  --from-file=db-password=db/password.txt
-```
-
-### Verify the deployment
-
-Check that your pods are running:
-
-```console
-$ kubectl get pods -n nodejs-docker-example
-```
-
-Wait until all pods show `Running` in the STATUS column. Then verify your services:
-
-```console
-$ kubectl get services -n nodejs-docker-example
-```
-
-### Access the application
-
-Use port forwarding to access the application from your local machine:
-
-```console
-$ kubectl port-forward -n nodejs-docker-example service/server 3000:3000
-```
-
-Open a new terminal and make a request to the application:
-
-```console
-$ curl http://localhost:3000
-{"message":"Hello World"}
-```
-
-You can also create a hero:
-
-```console
-$ curl -X POST http://localhost:3000/heroes/ \
-  -H 'Content-Type: application/json' \
-  -d '{"name": "my hero", "secret_name": "austing", "age": 12}'
-```
-
-### Clean up
-
-When you're done testing, remove the deployment:
-
-```console
-$ kubectl delete -f nodejs-docker-example-kubernetes.yaml
-```
-
-### Summary
-
-In this section, you deployed your containerized Node.js application to Kubernetes. You created a manifest that defines the application and database deployments, applied it to a local cluster, and verified the application is accessible.
-
-Related information:
-
-- [Kubernetes documentation](https://kubernetes.io/docs/home/)
-- [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/use-desktop/kubernetes.md)
-- [`kubectl` CLI reference](https://kubernetes.io/docs/reference/kubectl/)
-- [Kubernetes Deployment resource](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
-- [Kubernetes Service resource](https://kubernetes.io/docs/concepts/services-networking/service/)

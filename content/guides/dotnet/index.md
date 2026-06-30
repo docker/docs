@@ -24,14 +24,11 @@ params:
   toc_max: 2
 ---
 
-
 The .NET getting started guide teaches you how to create a containerized .NET application using Docker. In this guide, you'll learn how to:
 
 - Containerize and run a .NET application
 - Set up a local environment to develop a .NET application using containers
 - Run tests for a .NET application using containers
-- Configure a CI/CD pipeline for a containerized .NET application using GitHub Actions
-- Deploy your containerized application locally to Kubernetes to test and debug your deployment
 
 After completing the .NET getting started modules, you should be able to containerize your own .NET application based on the examples and instructions provided in this guide.
 
@@ -41,9 +38,9 @@ Start by containerizing an existing .NET application.
 
 ### Prerequisites
 
-* You have installed the latest version of [Docker
+- You have installed the latest version of [Docker
   Desktop](/get-started/get-docker.md).
-* You have a [git client](https://git-scm.com/downloads). The examples in this
+- You have a [git client](https://git-scm.com/downloads). The examples in this
   section use a command-line based git client, but you can use any client.
 
 ### Overview
@@ -81,11 +78,13 @@ Now that you have an application, you can create the necessary Docker assets to 
 Docker Hardened Images (DHIs) for .NET are available in the [Docker Hardened Images catalog](https://hub.docker.com/hardened-images/catalog/dhi/aspnetcore). Docker Hardened Images are freely available to everyone with no subscription required. You can pull and use them like any other Docker image after signing in to the DHI registry. For more information, see the [DHI quickstart](/dhi/get-started/) guide.
 
 1. Sign in to the DHI registry:
+
    ```console
    $ docker login dhi.io
    ```
 
 2. Pull the .NET SDK DHI (check the catalog for available versions):
+
    ```console
    $ docker pull dhi.io/dotnet:10-sdk
    ```
@@ -337,9 +336,10 @@ directory.
 ```
 
 To learn more about the files, see the following:
- - [Dockerfile](/reference/dockerfile.md)
- - [.dockerignore](/reference/dockerfile.md#dockerignore-file)
- - [compose.yaml](/reference/compose-file/_index.md)
+
+- [Dockerfile](/reference/dockerfile.md)
+- [.dockerignore](/reference/dockerfile.md#dockerignore-file)
+- [compose.yaml](/reference/compose-file/_index.md)
 
 ### Run the application
 
@@ -381,10 +381,11 @@ In this section, you learned how you can containerize and run your .NET
 application using Docker.
 
 Related information:
- - [Dockerfile reference](/reference/dockerfile.md)
- - [.dockerignore file reference](/reference/dockerfile.md#dockerignore-file)
- - [Docker Compose overview](/manuals/compose/_index.md)
- - [Docker Hardened Images](/dhi/)
+
+- [Dockerfile reference](/reference/dockerfile.md)
+- [.dockerignore file reference](/reference/dockerfile.md#dockerignore-file)
+- [Docker Compose overview](/manuals/compose/_index.md)
+- [Docker Hardened Images](/dhi/)
 
 ### Next steps
 
@@ -944,363 +945,3 @@ In this section, you learned how to run tests when developing locally using Comp
 Related information:
 
 - [docker compose run](/reference/cli/docker/compose/run/)
-
-### Next steps
-
-Next, you’ll learn how to set up a CI/CD pipeline using GitHub Actions.
-
-## Configure CI/CD for your .NET application
-
-### Prerequisites
-
-Complete all the previous sections of this guide, starting with [Containerize a .NET application](./). You must have a [GitHub](https://github.com/signup) account and a verified [Docker](https://hub.docker.com/signup) account to complete this section.
-
-### Overview
-
-In this section, you'll learn how to set up and use GitHub Actions to build and test your Docker image as well as push it to Docker Hub. You will complete the following steps:
-
-1. Create a new repository on GitHub.
-2. Define the GitHub Actions workflow.
-3. Run the workflow.
-
-### Step one: Create the repository
-
-Create a GitHub repository, configure the Docker Hub credentials, and push your source code.
-
-1. [Create a new repository](https://github.com/new) on GitHub.
-
-2. Open the repository **Settings**, and go to **Secrets and variables** >
-   **Actions**.
-
-3. Create a new **Repository variable** named `DOCKER_USERNAME` and your Docker ID as a value.
-
-4. Create a new [Personal Access Token (PAT)](/manuals/security/access-tokens.md#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read and Write.
-
-5. Add the PAT as a **Repository secret** in your GitHub repository, with the name
-   `DOCKERHUB_TOKEN`.
-
-6. In your local repository on your machine, run the following command to change
-   the origin to the repository you just created. Make sure you change
-   `your-username` to your GitHub username and `your-repository` to the name of
-   the repository you created.
-
-   ```console
-   $ git remote set-url origin https://github.com/your-username/your-repository.git
-   ```
-
-7. In your local repository on your machine, run the following command to rename
-   the branch to main.
-
-   ```console
-   $ git branch -M main
-   ```
-
-8. Run the following commands to stage, commit, and then push your local
-   repository to GitHub.
-
-   ```console
-   $ git add -A
-   $ git commit -m "my first commit"
-   $ git push -u origin main
-   ```
-
-### Step two: Set up the workflow
-
-Set up your GitHub Actions workflow for building, testing, and pushing the image
-to Docker Hub.
-
-1. Go to your repository on GitHub and then select the **Actions** tab.
-
-2. Select **set up a workflow yourself**.
-
-   This takes you to a page for creating a new GitHub actions workflow file in
-   your repository, under `.github/workflows/main.yml` by default.
-
-3. In the editor window, copy and paste the following YAML configuration.
-
-   ```yaml
-   name: ci
-
-   on:
-     push:
-       branches:
-         - main
-
-   jobs:
-     build:
-       runs-on: ubuntu-latest
-       steps:
-         - name: Login to Docker Hub
-           uses: docker/login-action@{{% param "login_action_version" %}}
-           with:
-             username: ${{ vars.DOCKER_USERNAME }}
-             password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-         - name: Set up Docker Buildx
-           uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
-
-         - name: Build and test
-           uses: docker/build-push-action@{{% param "build_push_action_version" %}}
-           with:
-             target: build
-             load: true
-
-         - name: Build and push
-           uses: docker/build-push-action@{{% param "build_push_action_version" %}}
-           with:
-             platforms: linux/amd64,linux/arm64
-             push: true
-             target: final
-             tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
-   ```
-
-   For more information about the YAML syntax for `docker/build-push-action`,
-   refer to the [GitHub Action README](https://github.com/docker/build-push-action/blob/master/README.md).
-
-### Step three: Run the workflow
-
-Save the workflow file and run the job.
-
-1. Select **Commit changes...** and push the changes to the `main` branch.
-
-   After pushing the commit, the workflow starts automatically.
-
-2. Go to the **Actions** tab. It displays the workflow.
-
-   Selecting the workflow shows you the breakdown of all the steps.
-
-3. When the workflow is complete, go to your
-   [repositories on Docker Hub](https://hub.docker.com/repositories).
-
-   If you see the new repository in that list, it means the GitHub Actions
-   successfully pushed the image to Docker Hub.
-
-### Summary
-
-In this section, you learned how to set up a GitHub Actions workflow for your application.
-
-Related information:
-
-- [Introduction to GitHub Actions](/guides/gha.md)
-- [Docker Build GitHub Actions](/manuals/build/ci/github-actions/_index.md)
-- [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
-
-### Next steps
-
-Next, learn how you can locally test and debug your workloads on Kubernetes before deploying.
-
-## Test your .NET deployment
-
-### Prerequisites
-
-- Complete all the previous sections of this guide, starting with [Containerize
-  a .NET application](./).
-- [Turn on Kubernetes](/manuals/desktop/use-desktop/kubernetes.md#enable-kubernetes) in Docker
-  Desktop.
-
-### Overview
-
-In this section, you'll learn how to use Docker Desktop to deploy your
-application to a fully-featured Kubernetes environment on your development
-machine. This allows you to test and debug your workloads on Kubernetes locally
-before deploying.
-
-### Create a Kubernetes YAML file
-
-In your `docker-dotnet-sample` directory, create a file named
-`docker-dotnet-kubernetes.yaml`. Open the file in an IDE or text editor and add
-the following contents. Replace `DOCKER_USERNAME/REPO_NAME` with your Docker
-username and the name of the repository that you created in [Configure CI/CD for
-your .NET application](./).
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    service: server
-  name: server
-  namespace: default
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      service: server
-  strategy: {}
-  template:
-    metadata:
-      labels:
-        service: server
-    spec:
-      initContainers:
-        - name: wait-for-db
-          image: busybox:1.28
-          command:
-            [
-              "sh",
-              "-c",
-              'until nc -zv db 5432; do echo "waiting for db"; sleep 2; done;',
-            ]
-      containers:
-        - image: DOCKER_USERNAME/REPO_NAME
-          name: server
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
-              hostPort: 8080
-              protocol: TCP
-          resources: {}
-      restartPolicy: Always
-status: {}
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    service: db
-  name: db
-  namespace: default
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      service: db
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        service: db
-    spec:
-      containers:
-        - env:
-            - name: POSTGRES_DB
-              value: example
-            - name: POSTGRES_PASSWORD
-              value: example
-          image: postgres:18
-          name: db
-          ports:
-            - containerPort: 5432
-              protocol: TCP
-          resources: {}
-      restartPolicy: Always
-status: {}
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    service: server
-  name: server
-  namespace: default
-spec:
-  type: NodePort
-  ports:
-    - name: "8080"
-      port: 8080
-      targetPort: 8080
-      nodePort: 30001
-  selector:
-    service: server
-status:
-  loadBalancer: {}
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    service: db
-  name: db
-  namespace: default
-spec:
-  ports:
-    - name: "5432"
-      port: 5432
-      targetPort: 5432
-  selector:
-    service: db
-status:
-  loadBalancer: {}
-```
-
-In this Kubernetes YAML file, there are four objects, separated by the `---`. In addition to a Service and Deployment for the database, the other two objects are:
-
-- A Deployment, describing a scalable group of identical pods. In this case,
-  you'll get just one replica, or copy of your pod. That pod, which is
-  described under `template`, has just one container in it. The container is
-  created from the image built by GitHub Actions in [Configure CI/CD for your
-  .NET application](./).
-- A NodePort service, which will route traffic from port 30001 on your host to
-  port 8080 inside the pods it routes to, allowing you to reach your app
-  from the network.
-
-To learn more about Kubernetes objects, see the [Kubernetes documentation](https://kubernetes.io/docs/home/).
-
-### Deploy and check your application
-
-1. In a terminal, navigate to the `docker-dotnet-sample` directory
-   and deploy your application to Kubernetes.
-
-   ```console
-   $ kubectl apply -f docker-dotnet-kubernetes.yaml
-   ```
-
-   You should see output that looks like the following, indicating your Kubernetes objects were created successfully.
-
-   ```shell
-   deployment.apps/db created
-   service/db created
-   deployment.apps/server created
-   service/server created
-   ```
-
-2. Make sure everything worked by listing your deployments.
-
-   ```console
-   $ kubectl get deployments
-   ```
-
-   Your deployment should be listed as follows:
-
-   ```shell
-   NAME     READY   UP-TO-DATE   AVAILABLE   AGE
-   db       1/1     1            1           76s
-   server   1/1     1            1           76s
-   ```
-
-   This indicates all of the pods are up and running. Do the same check for your services.
-
-   ```console
-   $ kubectl get services
-   ```
-
-   You should get output like the following.
-
-   ```shell
-   NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-   db           ClusterIP   10.96.156.90    <none>        5432/TCP         2m8s
-   kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP          164m
-   server       NodePort    10.102.94.225   <none>        8080:30001/TCP   2m8s
-   ```
-
-   In addition to the default `kubernetes` service, you can see your `server` service and `db` service. The `server` service is accepting traffic on port 30001/TCP.
-
-3. Open a browser and visit your app at `localhost:30001`. You should see your
-   application.
-
-4. Run the following command to tear down your application.
-
-   ```console
-   $ kubectl delete -f docker-dotnet-kubernetes.yaml
-   ```
-
-### Summary
-
-In this section, you learned how to use Docker Desktop to deploy your application to a fully-featured Kubernetes environment on your development machine.
-
-Related information:
-
-- [Kubernetes documentation](https://kubernetes.io/docs/home/)
-- [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/use-desktop/kubernetes.md)
-- [Swarm mode overview](/manuals/engine/swarm/_index.md)
