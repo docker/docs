@@ -32,6 +32,10 @@ grid:
     description: Licenses for organization-wide AI policy enforcement.
     link: /subscription/plans/ai-governance/
     icon: shield-check
+  - title: Docker Verified Publisher (DVP)
+    description: Publisher analytics and reporting plans for organization accounts.
+    link: /subscription/plans/dvp/
+    icon: check-badge
 ---
 
 > [!TIP]
