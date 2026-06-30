@@ -4,7 +4,6 @@ linkTitle: GitHub Actions CI
 weight: 60
 keywords: CI/CD, GitHub( Actions), Vue.js
 description: Learn how to configure CI/CD using GitHub Actions for your Vue.js application.
-
 ---
 
 ## Prerequisites
@@ -12,6 +11,7 @@ description: Learn how to configure CI/CD using GitHub Actions for your Vue.js a
 Complete all the previous sections of this guide, starting with [Containerize an Vue.js application](containerize.md).
 
 You must also have:
+
 - A [GitHub](https://github.com/signup) account.
 - A verified [Docker Hub](https://hub.docker.com/signup) account.
 
@@ -49,19 +49,18 @@ To enable GitHub Actions to build and push Docker images, you’ll securely stor
 4. Add Docker Hub credentials as GitHub repository secrets
 
    In your newly created GitHub repository:
-   
    1. Navigate to:
-   **Settings → Secrets and variables → Actions → New repository secret**.
+      **Settings → Secrets and variables → Actions → New repository secret**.
 
    2. Add the following secrets:
 
-   | Name              | Value                          |
-   |-------------------|--------------------------------|
-   | `DOCKER_USERNAME` | Your Docker Hub username       |
-   | `DOCKERHUB_TOKEN` | Your Docker Hub access token (created in Step 1)   |
-   | `DOCKERHUB_PROJECT_NAME` | Your Docker Project Name (created in Step 2)   |
+   | Name                     | Value                                            |
+   | ------------------------ | ------------------------------------------------ |
+   | `DOCKER_USERNAME`        | Your Docker Hub username                         |
+   | `DOCKERHUB_TOKEN`        | Your Docker Hub access token (created in Step 1) |
+   | `DOCKERHUB_PROJECT_NAME` | Your Docker Project Name (created in Step 2)     |
 
-   These secrets allow GitHub Actions to authenticate securely with Docker Hub during automated workflows.
+   These secrets let GitHub Actions authenticate securely with Docker Hub during automated workflows.
 
 5. Connect Your Local Project to GitHub
 
@@ -71,8 +70,8 @@ To enable GitHub Actions to build and push Docker images, you’ll securely stor
       $ git remote set-url origin https://github.com/{your-username}/{your-repository-name}.git
    ```
 
-   >[!IMPORTANT]
-   >Replace `{your-username}` and `{your-repository}` with your actual GitHub username and repository name.
+   > [!IMPORTANT]
+   > Replace `{your-username}` and `{your-repository}` with your actual GitHub username and repository name.
 
    To confirm that your local project is correctly connected to the remote GitHub repository, run:
 
@@ -92,36 +91,38 @@ To enable GitHub Actions to build and push Docker images, you’ll securely stor
 6. Push your source code to GitHub
 
    Follow these steps to commit and push your local project to your GitHub repository:
-
    1. Stage all files for commit.
 
       ```console
       $ git add -A
       ```
-      This command stages all changes — including new, modified, and deleted files — preparing them for commit.
 
+      This command stages all changes — including new, modified, and deleted files — preparing them for commit.
 
    2. Commit the staged changes with a descriptive message.
 
       ```console
       $ git commit -m "Initial commit"
       ```
-      This command creates a commit that snapshots the staged changes with a descriptive message.  
+
+      This command creates a commit that snapshots the staged changes with a descriptive message.
 
    3. Push the code to the `main` branch.
 
       ```console
       $ git push -u origin main
       ```
+
       This command pushes your local commits to the `main` branch of the remote GitHub repository and sets the upstream branch.
 
 Once completed, your code will be available on GitHub, and any GitHub Actions workflow you’ve configured will run automatically.
 
 > [!NOTE]  
 > Learn more about the Git commands used in this step:
-> - [Git add](https://git-scm.com/docs/git-add) – Stage changes (new, modified, deleted) for commit  
-> - [Git commit](https://git-scm.com/docs/git-commit) – Save a snapshot of your staged changes  
-> - [Git push](https://git-scm.com/docs/git-push) – Upload local commits to your GitHub repository  
+>
+> - [Git add](https://git-scm.com/docs/git-add) – Stage changes (new, modified, deleted) for commit
+> - [Git commit](https://git-scm.com/docs/git-commit) – Save a snapshot of your staged changes
+> - [Git push](https://git-scm.com/docs/git-push) – Upload local commits to your GitHub repository
 > - [Git remote](https://git-scm.com/docs/git-remote) – View and manage remote repository URLs
 
 ---
@@ -134,10 +135,9 @@ Now you'll create a GitHub Actions workflow that builds your Docker image, runs 
 
 2. Select **Set up a workflow yourself** when prompted.
 
-    This opens an inline editor to create a new workflow file. By default, it will be saved to:
+   This opens an inline editor to create a new workflow file. By default, it will be saved to:
    `.github/workflows/main.yml`
 
-   
 3. Add the following workflow configuration to the new file:
 
 ```yaml
@@ -237,6 +237,7 @@ jobs:
 ```
 
 This workflow performs the following tasks for your Vue.js application:
+
 - Triggers on every `push` or `pull request` targeting the `main` branch.
 - Builds a development Docker image using `Dockerfile.dev`, optimized for testing.
 - Executes unit tests using Vitest inside a clean, containerized environment to ensure consistency.
@@ -247,7 +248,7 @@ This workflow performs the following tasks for your Vue.js application:
 - Tags and pushes the final image to Docker Hub with both `latest` and short SHA tags for traceability.
 
 > [!NOTE]
->  For more information about  `docker/build-push-action`, refer to the [GitHub Action README](https://github.com/docker/build-push-action/blob/master/README.md).
+> For more information about `docker/build-push-action`, refer to the [GitHub Action README](https://github.com/docker/build-push-action/blob/master/README.md).
 
 ---
 
@@ -264,24 +265,25 @@ After you've added your workflow file, it's time to trigger and observe the CI/C
    - Click into the workflow run to follow each step: **build**, **test**, and (if successful) **push**.
 
 3. Verify the Docker image on Docker Hub
-
    - After a successful workflow run, visit your [Docker Hub repositories](https://hub.docker.com/repositories).
    - You should see a new image under your repository with:
-      - Repository name: `${your-repository-name}`
-      - Tags include:
-         - `latest` – represents the most recent successful build; ideal for quick testing or deployment.
-         - `<short-sha>` – a unique identifier based on the commit hash, useful for version tracking, rollbacks, and traceability.
+     - Repository name: `${your-repository-name}`
+     - Tags include:
+       - `latest` – represents the most recent successful build; ideal for quick testing or deployment.
+       - `<short-sha>` – a unique identifier based on the commit hash, useful for version tracking, rollbacks, and traceability.
 
 > [!TIP] Protect your main branch
 > To maintain code quality and prevent accidental direct pushes, enable branch protection rules:
->  - Navigate to your **GitHub repo → Settings → Branches**.
->  - Under Branch protection rules, click **Add rule**.
->  - Specify `main` as the branch name.
->  - Enable options like:
->     - *Require a pull request before merging*.
->     - *Require status checks to pass before merging*.
 >
->  This ensures that only tested and reviewed code is merged into `main` branch.
+> - Navigate to your **GitHub repo → Settings → Branches**.
+> - Under Branch protection rules, click **Add rule**.
+> - Specify `main` as the branch name.
+> - Enable options like:
+>   - _Require a pull request before merging_.
+>   - _Require status checks to pass before merging_.
+>
+> This ensures that only tested and reviewed code is merged into `main` branch.
+
 ---
 
 ## Summary
@@ -293,9 +295,9 @@ Here's what you accomplished:
 - Created a new GitHub repository specifically for your project.
 - Generated a secure Docker Hub access token and added it to GitHub as a secret.
 - Defined a GitHub Actions workflow that:
-   - Build your application inside a Docker container.
-   - Run tests in a consistent, containerized environment.
-   - Push a production-ready image to Docker Hub if tests pass.
+  - Build your application inside a Docker container.
+  - Run tests in a consistent, containerized environment.
+  - Push a production-ready image to Docker Hub if tests pass.
 - Triggered and verified the workflow execution through GitHub Actions.
 - Confirmed that your image was successfully published to Docker Hub.
 
@@ -307,11 +309,11 @@ With this setup, your Vue.js application is now ready for automated testing and 
 
 Deepen your understanding of automation and best practices for containerized apps:
 
-- [Introduction to GitHub Actions](/guides/gha.md) – Learn how GitHub Actions automate your workflows  
-- [Docker Build GitHub Actions](/manuals/build/ci/github-actions/_index.md) – Set up container builds with GitHub Actions  
-- [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions) – Full reference for writing GitHub workflows  
-- [Compose file reference](/compose/compose-file/) – Full configuration reference for `compose.yaml`  
-- [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/) – Optimize your image for performance and security  
+- [Introduction to GitHub Actions](/guides/gha.md) – Learn how GitHub Actions automate your workflows
+- [Docker Build GitHub Actions](/manuals/build/ci/github-actions/_index.md) – Set up container builds with GitHub Actions
+- [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions) – Full reference for writing GitHub workflows
+- [Compose file reference](/compose/compose-file/) – Full configuration reference for `compose.yaml`
+- [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/) – Optimize your image for performance and security
 
 ---
 
