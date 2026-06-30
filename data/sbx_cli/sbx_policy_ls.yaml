@@ -22,7 +22,8 @@ options:
       usage: Show inactive policy rules hidden by remote governance
     - name: type
       default_value: all
-      usage: 'Filter policies by type: "all" or "network" (default "all")'
+      usage: |
+        Filter policies by type: "all", "network", or "filesystem" (default "all")
 inherited_options:
     - name: debug
       shorthand: D
@@ -34,6 +35,9 @@ example: |4-
 
       # List only network policies
       sbx policy ls --type network
+
+      # List only filesystem policies
+      sbx policy ls --type filesystem
 
       # List policies that apply to a specific sandbox
       sbx policy ls my-sandbox

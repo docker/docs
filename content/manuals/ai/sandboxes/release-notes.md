@@ -15,6 +15,51 @@ the full release history, including pre-releases and downloads, see the
 
 <!-- BEGIN GENERATED RELEASES -->
 
+## 0.34.0
+
+{{< release-date date="2026-06-26" >}}
+
+[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.34.0)
+
+### Highlights
+
+Kit installs are now restricted to an allowlist of sources, defaulting to Docker Hub only — a **breaking change** if you install kits from a Git URL or another registry.
+
+This release also renames `sbx policy set-default` to `sbx policy init`, restores published ports when a sandbox restarts, fixes a number of bugs, and adds two experimental previews: a native SSH endpoint and an `sbx setup` command for smoother first-time onboarding.
+
+### What's New
+
+#### SSH
+
+- Add an experimental native SSH endpoint in sandboxd: connect with `ssh <sandbox-name>@127.0.0.1 -p 2222` (publickey auth, connect-to-create, interactive shell and exec; no SFTP yet). Enable with `sbx settings set feature.ssh true`.
+
+#### Setup & Onboarding
+
+- Add an experimental `sbx setup` command that imports agent credentials from environment variables.
+
+#### Agents
+
+- Cursor sandboxes no longer show the workspace trust prompt on launch.
+
+#### Kits
+
+- Add OCI v2 kit artifact streaming that decompresses the layer once to a cache directory and uses seek-based random access, so file content is not held in memory between reads.
+- Restrict kit installs to an allowlist of sources, defaulting to Docker Hub (`docker.io/`) only.
+
+  **Breaking:** installing a kit from another registry or a Git URL fails until you add its prefix with `sbx settings set kit.allowedSources`. See [Docs: Restrict kit sources](https://docs.docker.com/ai/sandboxes/customize/kits#restrict-kit-sources) for details.
+
+#### CLI & Behavior Changes
+
+- Rename `sbx policy set-default` to `sbx policy init`; the old name keeps working as a hidden, deprecated alias.
+- Published sandbox ports are restored on restart, and the CLI/TUI can recover explicit host-port conflicts by choosing a new host port.
+
+#### Bug Fixes
+
+- Fix a daemon hang where a slow or stuck sandbox creation/deletion blocked `sbx ls`, the TUI, and new sessions until the daemon was restarted.
+- Fix a kit mixin regression where adding `network.serviceDomains` for a service already provided by the base agent failed with a "credential … defined in both" error.
+- Reject `+` in sandbox names with a clear validation error instead of panicking.
+- Fix the interactive host-port conflict recovery prompt not appearing on Windows when restarting a sandbox whose published port is already in use.
+
 ## 0.33.0
 
 {{< release-date date="2026-06-17" >}}
@@ -133,124 +178,6 @@ This release also improves network isolation and policy enforcement. Sandbox DNS
 - Set the default network policy before launching the TUI to avoid spurious 412 errors from policy-rule requests.
 - Stop counting expected `rm`/`stop`/list-ports "not found" 404s as analytics failures, so routine existence checks no longer inflate error dashboards.
 - Require a daemon restart (instead of failing with `405 Method Not Allowed`) when downgrading the CLI below a newer running daemon.
-
-## 0.31.3
-
-{{< release-date date="2026-06-03" >}}
-
-[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.31.3)
-
-### Bug Fixes
-
-- Fix a failure to start sandboxes that were created with older versions of the CLI.
-- Fix a file descriptor leak on Linux. Each credential lookup left a session
-  D-Bus socket open, so long-running processes (such as the daemon) could
-  gradually accumulate open file descriptors and eventually hit the session
-  bus's connection limit, failing with "The maximum number of active
-  connections has been reached." Connections are now closed after each
-  operation. macOS and Windows were not affected.
-
-## 0.31.2
-
-{{< release-date date="2026-06-01" >}}
-
-[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.31.2)
-
-### Highlights
-
-This patch release resolves two reliability issues. It **fixes a Windows issue** where odd default sandbox memory values could lead to startup timeouts. It also includes a **daemon-compatibility fix** that prevents a silent failure (`405 Method Not Allowed`) when the `sbx` CLI is downgraded while a newer `sandboxd` daemon is still running — the CLI now requires a daemon restart instead.
-
-### What's New
-
-#### Bug Fixes
-
-- Fix a Windows issue where odd default sandbox memory values could lead to startup timeouts.
-- Require a daemon restart when downgrading the CLI below a running daemon, instead of silently proceeding into a `405 Method Not Allowed` error.
-
-## 0.31.1
-
-{{< release-date date="2026-05-29" >}}
-
-[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.31.1)
-
-### Bug fixes
-
-- Fixes a bug introduced in v0.31.0 where sandboxes from earlier versions were not listed by sbx ls and could fail to run. Upgrading to v0.31.1 restores them.
-
-## 0.31.0
-
-{{< release-date date="2026-05-28" >}}
-
-[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.31.0)
-
-### Highlights
-
-#### Clone mode: `--clone`
-
-The `--branch` flag has been removed in favor of `--clone` (clone mode). Using `--branch` now fails with:
-
-```console
-$ sbx run claude --branch foo
-ERROR: --branch is no longer supported; use --clone instead
-```
-
-Clone mode does not create a branch or worktree on your behalf — instead of a host-side worktree, the sandbox now runs against an in-container read-only clone.
-
-- Your source repository is mounted into the sandbox read-only, and the shallow clone sets that mount as a Git remote. The agent only ever writes to the in-container clone, never to your working tree or .git/
-- The clone lives on the sandbox's filesystem and is exposed back to the host as a `sandbox-<name>` Git remote served by `git-daemon` (no more `.sbx/<name>-worktrees/...` on the host).
-- Forge remotes (`origin`, `upstream`, etc.) on the host are propagated into the in-container clone, so the agent can `git push origin` directly, the same way you would. Local-path remotes are skipped.
-- Fetched sandbox refs are mirrored into `refs/sandboxes/<name>/*` on the host and persist after the sandbox is removed. Restore a branch from a removed sandbox with `git branch <local-name> refs/sandboxes/<name>/<branch>`. Commits that were never fetched, or uncommitted changes, are still lost on `sbx rm`.
-- The `sandbox-<name>` remote is added to your host on `sbx create --clone` / `sbx run --clone` and removed on `sbx rm`, including across stop and restart.
-
-### What's New
-
-#### CLI
-
-- `sbx create` auto-starts the daemon when it isn't already running.
-- `sbx logout` now stops the daemon and running sandboxes.
-- Unify terminal environment variables across `sbx run` and `sbx exec`.
-
-#### Policies
-
-- Show policy and rule names in CLI list output and TUI details.
-- Add filters to the policies listing.
-
-#### Kits
-
-- Mark kits as experimental.
-- Verbose error reporting for kit apply failures.
-
-#### Sandboxes
-
-- Opt a sandbox into virtiofs caching at create time via `DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=1` (off by default; the choice is persisted in the spec and survives daemon restarts).
-
-#### Networking
-
-- Allow public-CA CRL/OCSP/AIA endpoints in the balanced proxy preset. Applies to new installations or after `sbx policy reset` (which removes any user-added rules).
-
-#### Telemetry
-
-- Surface `port_publish_failed` inner error detail.
-
-#### Secrets
-
-- Store container-registry pull credentials with `sbx secret set --registry`, so `sbx run --template` and `sbx run --kit` can pull from private registries (GHCR, ACR, ECR, Quay, …) without a `docker login`. Manage entries with `sbx secret ls` and remove them with `sbx secret rm --registry <host>`.
-
-> [!WARNING]
-> By default the credential is stored **host-side only** and is used just for pulling templates/kits. It is never placed inside a sandbox. If you pass `-g` (or scope it to a sandbox name), the credential is **injected into the sandbox in plaintext**, where the agent and any code running there can read it. Only use `-g`/sandbox scope when the sandbox itself needs to pull from the registry; otherwise omit `-g` to keep it host-only.
-
-#### Bug Fixes
-
-- Sort `template ls` output by repository, then tag.
-- Retry `ExecResize` to keep the agent TUI in sync.
-- Set `TERM=xterm-256color` when exec'ing with `-t`.
-- Move the state directory symlink from `/tmp` to `~/.sbx/run/`.
-- Stop `storageRootsGone` from locking the storagekit singleton.
-- Use `engineError` and add retry debug logging in sandboxd.
-- Retry transient shim start closures.
-- Make Cursor session bootstrap proxy-local.
-- Add bracketed `[::1]` to `NO_PROXY` for IPv6 loopback.
-- Backdate proxy CA `NotBefore` to match the goproxy leaf cert window.
 
 <!-- END GENERATED RELEASES -->
 
