@@ -124,6 +124,50 @@ all members, while a team-scoped policy grants a research team access to extra
 package mirrors. Research-team members get the extra access, but the org-wide
 deny still applies.
 
+In practice, three patterns cover most layering:
+
+- Deny by default: leave a domain out of every allow rule to keep it blocked.
+- Allow when needed: add a team-scoped allow to grant an exception.
+- Explicit deny: deny a domain outright when no team should ever reach it.
+
+The examples that follow show each pattern.
+
+### Grant one team access to a blocked domain
+
+Because access is [denied by default](concepts.md#rule-evaluation), you don't
+need an explicit deny to keep a domain off-limits. Leaving it out of every allow
+rule is enough. To give a single team access to a domain no one else can reach:
+
+1. Don't add an allow rule for the domain at the organization level. Default
+   deny keeps it blocked for everyone.
+1. Create a team-scoped policy that allows the domain, and scope it to that team.
+
+Only members of that team can reach the domain. Everyone else is still blocked
+by default.
+
+### Block a domain everywhere as a guardrail
+
+Use an explicit org-wide deny when a domain must be off-limits to everyone,
+including teams that have broad allow rules. Because deny wins, an org-wide deny
+on `**.example.com` blocks `example.com` and every subdomain for all members,
+and no team-scoped allow can grant access to it.
+
+Reserve explicit deny rules for domains you want to block outright. For
+everything else, rely on default deny and add allow rules only where access is
+needed.
+
+### An exact deny doesn't cover subdomains
+
+A deny rule matches only the hostnames its pattern matches. A deny on the exact
+hostname `example.com` doesn't match `api.example.com`, so a team-scoped allow
+on `api.example.com` still grants that team access. The org-wide deny and the
+team allow apply to different hostnames, so they never conflict.
+
+To block a domain and all its subdomains, deny `**.example.com` instead. With
+that pattern, deny wins over any team-scoped allow on a subdomain. See
+[Hostname patterns](concepts.md#network-rules) for how exact hostnames and
+wildcards match.
+
 ## Precedence
 
 When organization governance is active, local rules are not evaluated. Only
