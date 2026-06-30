@@ -1,11 +1,11 @@
 ---
 title: Scanner integrations
 description: Learn which vulnerability scanners work with Docker Hardened Images and how to choose the right scanner for accurate vulnerability assessment.
-keywords: scanner integration, vulnerability scanning, docker scout, trivy, grype, wiz, black duck, aikido, container security scanners
+keywords: scanner integration, vulnerability scanning, docker scout, trivy, grype, wiz, black duck, aikido, aws inspector, container security scanners
 weight: 40
 ---
 
-Docker Hardened Images work with various vulnerability scanners. However, to get
+Docker Hardened Images (DHI) work with various vulnerability scanners. However, to get
 accurate results that reflect the actual security posture of these images, your
 scanner needs to understand the VEX (Vulnerability Exploitability eXchange)
 attestations included with each image.
@@ -24,8 +24,9 @@ Hardened Images:
 | [Mend.io](https://docs.mend.io/platform/latest/docker-hardened-images) | Automatic, zero configuration |
 | [Black Duck](https://documentation.blackduck.com/bundle/bd-hub/page/Reporting/vexReport_global.html) | Automatic, zero configuration |
 | [Aikido](https://help.aikido.dev/container-image-scanning/standalone-registries/docker-hub-images) | Automatic, zero configuration |
+| [AWS Inspector](https://docs.aws.amazon.com/inspector/latest/user/supported.html) | Automatic, zero configuration |
 
-For step-by-step instructions for Docker Scout, Trivy, and Grype, see [Scan Docker Hardened Images](/manuals/dhi/how-to/scan.md). For Wiz, Mend.io, Black Duck, and Aikido, refer to their respective documentation.
+For step-by-step instructions for Docker Scout, Trivy, and Grype, see [Scan Docker Hardened Images](/manuals/dhi/how-to/scan.md). For Wiz, Mend.io, Black Duck, Aikido, and AWS Inspector, refer to their respective documentation.
 
 ## Choosing a scanner for Docker Hardened Images
 
@@ -168,4 +169,3 @@ exceptions. This requires:
 
 Learn how to [scan Docker Hardened Images](/manuals/dhi/how-to/scan.md) with
 VEX-compliant scanners.
-
