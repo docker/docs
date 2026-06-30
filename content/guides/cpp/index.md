@@ -128,6 +128,17 @@ $ docker run hello
 
 You should see the output `Hello, World!` in the terminal.
 
+Because the final image uses an empty `scratch` base, it contains only the
+static binary and none of the build dependencies or usual OS tools. For
+example, you can't run a simple `ls` command in the container:
+
+```bash
+$ docker run hello ls
+```
+
+The absence of a shell and other tools keeps the image small and reduces its
+attack surface.
+
 ## Containerize a C++ application
 
 ### Prerequisites
