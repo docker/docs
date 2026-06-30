@@ -184,22 +184,6 @@ the egress path in the **PROXY** column:
   internal CA applies. The only difference between them is whether the client
   knows it's talking to a proxy.
 
-## Docker build export fails with an ownership error
-
-Running `docker build` with the local exporter (`--output=type=local` or `-o
-<path>`) inside a sandbox fails because the exporter tries to `lchown` output
-files to preserve ownership from the build. Processes inside the sandbox run as
-an unprivileged user without `CAP_CHOWN`, so the operation is denied.
-
-Use the tar exporter and extract the archive instead:
-
-```console
-$ mkdir -p ./result
-$ docker build --output type=tar,dest=- . | tar xf - -C ./result
-```
-
-Extracting the tar archive as the current user avoids the `chown` call.
-
 ## Filesystem operations are slow in large repositories
 
 Filesystem operations such as `git status`, `git log`, or directory scans can
