@@ -10,7 +10,6 @@ aliases:
   - /desktop/troubleshoot/overview/
   - /desktop/troubleshoot/
   - /desktop/mac/troubleshoot/
-  - /desktop/mac/troubleshoot
 tags: [Troubleshooting]
 weight: 10
 ---
