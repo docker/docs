@@ -99,7 +99,9 @@ the distribution you'd like to package as a base image, though that is
 not required for some tools like Debian's [Debootstrap](https://wiki.debian.org/Debootstrap),
 which you can also use to build Ubuntu images.
 
-For example, to create an Ubuntu base image:
+For example, to create an Ubuntu base image using the `noble` codename for
+Ubuntu 24.04, run the following commands. Replace `noble` with the codename
+for the Ubuntu release you want to import:
 
 ```dockerfile
 $ sudo debootstrap noble noble > /dev/null
