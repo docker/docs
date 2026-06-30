@@ -12,7 +12,7 @@ weight: 20
 {{< tabs >}}
 {{< tab name="With systemd (Highly recommended)" >}}
 
-The systemd unit file is installed as  `~/.config/systemd/user/docker.service`.
+The systemd unit file is installed as `~/.config/systemd/user/docker.service`.
 
 Use `systemctl --user` to manage the lifecycle of the daemon:
 
@@ -36,8 +36,9 @@ is not supported, even with the `User=` directive.
 To run the daemon directly without systemd, you need to run `dockerd-rootless.sh` instead of `dockerd`.
 
 The following environment variables must be set:
+
 - `$HOME`: the home directory
-- `$XDG_RUNTIME_DIR`: an ephemeral directory that is only accessible by the expected user, e,g, `~/.docker/run`.
+- `$XDG_RUNTIME_DIR`: an ephemeral directory that is only accessible by the expected user, e.g., `~/.docker/run`.
   The directory should be removed on every host shutdown.
   The directory can be on tmpfs, however, should not be under `/tmp`.
   Locating this directory under `/tmp` might be vulnerable to TOCTOU attack.

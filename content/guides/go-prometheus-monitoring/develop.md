@@ -16,7 +16,7 @@ Now, if you make any changes to your Golang application locally, it needs to ref
 docker compose up --build
 ```
 
-But, this is not the best approach. This is not efficient. Every time you make a change in the code, you need to rebuild manually. This is not is not a good flow for development. 
+But, this is not the best approach. This is not efficient. Every time you make a change in the code, you need to rebuild manually. This is not a good flow for development.
 
 The better approach is to use Docker Compose Watch. In the `compose.yml` file, under the service `api`, you have added the `develop` section. So, it's more like a hot reloading. Whenever you make changes to code (defined in `path`), it will rebuild the image (or restart depending on the action). This is how you can use it:
 
@@ -57,7 +57,7 @@ Rebuilding service(s) ["api"] after changes were detected...
  => [api internal] load build definition from Dockerfile                                                                                                  0.0s
  => => transferring dockerfile: 704B                                                                                                                      0.0s
  => [api internal] load metadata for docker.io/library/alpine:3.17                                                                                        1.1s
-  .                             
+  .
  => => exporting manifest list sha256:89ebc86fd51e27c1da440dc20858ff55fe42211a1930c2d51bbdce09f430c7f1                                                    0.0s
  => => naming to docker.io/library/go-api:latest                                                                                                          0.0s
  => => unpacking to docker.io/library/go-api:latest                                                                                                       0.0s
@@ -67,7 +67,7 @@ service(s) ["api"] successfully built
 
 ## Testing the application
 
-Now that you have your application running, head over to the Grafana dashboard to visualize the metrics you are registering. Open your browser and navigate to `http://localhost:3000`. You will be greeted with the Grafana login page. The login credentials are the ones provided in Compose file. 
+Now that you have your application running, head over to the Grafana dashboard to visualize the metrics you are registering. Open your browser and navigate to `http://localhost:3000`. You will be greeted with the Grafana login page. The login credentials are the ones provided in Compose file.
 
 Once you are logged in, you can create a new dashboard. While creating dashboard you will notice that is default data source is `Prometheus`. This is because you have already configured the data source in the `grafana.yml` file.
 
