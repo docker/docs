@@ -1,8 +1,7 @@
 ---
 title: Manage plans
 linkTitle: Manage
-description:
-  Learn how to set up, upgrade, downgrade or cancel, or cancel auto-renewal for available plans.
+description: Learn how to set up, upgrade, downgrade or cancel, or cancel auto-renewal for available plans.
 keywords:
   purchase subscription, buy docker subscription, product catalog, browse
   products, upgrade subscription, downgrade subscription, docker billing, cancel auto-renewal, cancel, top up, manage
@@ -37,22 +36,28 @@ You can purchase Docker plans through the product catalog:
 
 ## Upgrade plans
 
-You can upgrade active plans from the billing Overview page. 
+You can upgrade active plans from the billing Overview page.
 
 1. Sign in to [Docker Home](https://app.docker.com/), then choose your personal
    account or your organization account.
-1. Go to **Billing** to view the Overview page. 
+1. Go to **Billing** to view the Overview page.
    - The Overview page contains your active plans and payment details.
    - **Active plans** contains information about plan type, renewal cadence, and usage.
-1. Top up or upgrade from the **Active plans** section. 
-    - **Active plans** is where you complete all management actions.
-    - Depending on the plan type, you can select the action menu button or the **Manage** button to choose from available actions.
+1. Top up or upgrade from the **Active plans** section.
+   - **Active plans** is where you complete all management actions.
+   - Depending on the plan type, you can select the action menu button or the **Manage** button to choose from available actions.
 1. Verify your billing details, continue to payment, and complete checkout.
 
 > [!TIP]
-> Billing behaviors vary from plan to plan. Learn more about usage, downgrading, or canceling plans 
+> Billing behaviors vary from plan to plan. Learn more about usage, downgrading, or canceling plans
 > from the relevant
 > [product page](/manuals/subscription/plans/_index.md).
+
+## View your credits
+
+Docker displays available account credits in the billing portal. Credits offset eligible usage automatically before Docker charges your payment method.
+
+Credits apply to [Docker AI Cloud](/manuals/subscription/plans/ai-cloud.md). When you sign up for AI Cloud Personal, Docker adds a one-time promotional credit to your account. This credit is non-recurring, doesn't expire, and applies to cloud compute usage only. It doesn't apply to inference, which you pay for through your own API keys.
 
 ## Sales-led products
 
