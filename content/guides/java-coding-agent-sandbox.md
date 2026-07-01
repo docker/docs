@@ -296,7 +296,7 @@ identified all the required domains, add a `network` block to `spec.yaml`:
 
 ```yaml
 network:
-  allow:
+  allowedDomains:
     # SDKMAN + JDK/Maven distribution
     - "get.sdkman.io:443"
     - "api.sdkman.io:443"
