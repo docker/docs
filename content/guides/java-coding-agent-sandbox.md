@@ -262,17 +262,6 @@ before every single command, and a growing `PATH` adds up fast.
 > needs for normal work, and if you want `sdk` later you can run
 > `source "$SDKMAN_DIR/bin/sdkman-init.sh"` by hand.
 
-### Validate the kit
-
-Before running anything, check the spec:
-
-```console
-$ sbx kit validate .sbx/kits/java-toolchain
-Kit "java-toolchain" is valid.
-```
-
-With a valid kit, you add the network block next.
-
 ## Open the network for a Spring Boot and Maven workflow
 
 By default, a sandbox denies every outbound network request that isn't on an
@@ -319,6 +308,14 @@ and you can see exactly what the agent is allowed to reach.
 > teammate's machine that doesn't have those host rules.
 
 ## Run the Testcontainers integration tests
+
+The kit is now complete: install commands and the network allowlist. Validate
+the finished spec before you run it:
+
+```console
+$ sbx kit validate .sbx/kits/java-toolchain
+Kit "java-toolchain" is valid.
+```
 
 Create the sandbox with the finished kit and start the agent. This time the
 install commands can reach the network, so the sandbox builds cleanly:
