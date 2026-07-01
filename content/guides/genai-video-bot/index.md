@@ -6,10 +6,10 @@ keywords: python, generative ai, genai, llm, whisper, pinecone, openai, whisper
 summary: |
   Learn how to build and deploy a generative AI video analysis and
   transcription bot using Docker.
-tags: [ai]
 aliases:
   - /guides/use-case/genai-video-bot/
 params:
+  tags: [ai]
   time: 20 minutes
 ---
 
@@ -78,14 +78,14 @@ addition, it provides timestamps from the video that can help you find the sourc
    called `.env` and specify your API keys inside. The following is the contents of the `.env.example` file that you can refer to as an example.
 
    ```text
-   #----------------------------------------------------------------------------
+   #-------------------------------------------------------------------------
    # OpenAI
-   #----------------------------------------------------------------------------
+   #-------------------------------------------------------------------------
    OPENAI_TOKEN=your-api-key # Replace your-api-key with your personal API key
 
-   #----------------------------------------------------------------------------
+   #-------------------------------------------------------------------------
    # Pinecone
-   #----------------------------------------------------------------------------
+   #-------------------------------------------------------------------------
    PINECONE_TOKEN=your-api-key # Replace your-api-key with your personal API key
    ```
 

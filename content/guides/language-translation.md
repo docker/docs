@@ -6,11 +6,10 @@ description: Learn how to build and run a language translation application using
 summary: |
   This guide demonstrates how to use Docker to deploy language translation
   models for NLP tasks.
-tags: [ai]
-languages: [python]
 aliases:
   - /guides/use-case/nlp/language-translation/
 params:
+  tags: [ai]
   time: 20 minutes
 ---
 

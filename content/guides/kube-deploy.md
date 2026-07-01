@@ -7,8 +7,8 @@ aliases:
   - /guides/deployment-orchestration/kube-deploy/
 summary: |
   Learn how to deploy and orchestrate Docker containers using Kubernetes.
-tags: [deploy]
 params:
+  tags: [deployment]
   time: 10 minutes
 ---
 
