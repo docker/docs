@@ -125,7 +125,6 @@ checks and the API domains it authenticates requests to:
 | Service      | Environment variables              | API domains                                                                                                                   |
 | ------------ | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | `anthropic`  | `ANTHROPIC_API_KEY`                | `api.anthropic.com`, `console.anthropic.com`, `claude.ai`, `mcp-proxy.anthropic.com`                                          |
-| `aws`        | `AWS_ACCESS_KEY_ID`                | `bedrock-runtime.*.amazonaws.com`, `bedrock.*.amazonaws.com`                                                                  |
 | `cursor`     | `CURSOR_API_KEY`                   | `api2.cursor.sh`, `api3.cursor.sh`, `repo42.cursor.sh`, `cursor.com`                                                          |
 | `droid`      | `FACTORY_API_KEY`                  | `api.factory.ai`, `app.factory.ai`, `relay.factory.ai`                                                                        |
 | `github`     | `GH_TOKEN`, `GITHUB_TOKEN`         | `api.github.com`, `github.com`, `raw.githubusercontent.com`, `gist.github.com`, `copilot.github.com`, `api.githubcopilot.com` |
