@@ -24,7 +24,7 @@ To upgrade to a Gordon paid plan, see [Manage plans](/manuals/subscription/manag
 
 ## Usage
 
-Gordon usage is measured in questions. When you upgrade from Gordon Base to a paid plan, your usage multiplies the Base allowance. Usage is tracked per calendar month and resets at the start of each new month. For full limit details, see [Gordon usage limits](/manuals/ai/gordon/usage-limits.md).
+Gordon usage is measured in questions. When you upgrade from Gordon Base to a paid plan, your usage multiplies the Base allowance. Usage is capped across three time windows: 4-hour, daily, and monthly. For full limit details, see [Gordon usage limits](/manuals/ai/gordon/usage-limits.md).
 
 > [!IMPORTANT]
 > Gordon plans apply to personal Docker accounts only. If you purchase a Gordon
