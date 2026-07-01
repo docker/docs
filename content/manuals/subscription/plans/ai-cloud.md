@@ -10,6 +10,11 @@ keywords:
 weight: 20
 ---
 
+> [!TIP]
+> AI Cloud Personal signups receive a one-time
+> promotional credit toward cloud compute usage.
+> To review your balance, see [View your credits](/manuals/subscription/manage.md#view-your-credits).
+
 Docker AI Cloud brings the Agentic Platform, [MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md), and [Cloud Sandboxes](/manuals/ai/sandboxes/_index.md) together in a single product for individual developers.
 
 - AI Cloud Basic is the free default for every new signup. It doesn't require a payment method.
@@ -26,17 +31,15 @@ When you subscribe to an AI Cloud plan, your invoice reflects metered, pay-as-yo
 When you use AI Cloud Basic or Personal, you bring your own API keys for inference. Those costs are handled by your inference provider.
 
 > [!NOTE]
-> Docker AI Cloud plans are a Docker Personal 
+> Docker AI Cloud plans are a Docker Personal
 > and Docker Pro exclusive.
 
 ## Billing behaviors
 
-AI Cloud Personal is pay-as-you-go. Docker meters your cloud sandbox compute and outbound data transfer as you use them, then bills the accrued usage monthly on the first of the month. AI Cloud Basic requires no payment method and incurs no charges.
+AI Cloud Basic requires no payment method and incurs no charges.
 
-When you upgrade from AI Cloud Basic to AI Cloud Personal, you add a payment method to enable Cloud Sandboxes and higher limits.
-
-AI Cloud Personal signups receive a one-time promotional credit toward cloud compute usage. To review your balance, see [View your credits](/manuals/subscription/manage.md#view-your-credits).
+When you upgrade from AI Cloud Basic to AI Cloud Personal, you add a payment method to enable Cloud Sandboxes with higher limits. AI Cloud Personal bills your accrued usage monthly on the first of the month.
 
 ## Cancel a plan
 
-When you cancel AI Cloud Personal, access ends immediately and Docker charges your accrued metered usage right away rather than waiting for the next billing date. Canceling also terminates any running background processes, including active sandboxes. Your account returns to AI Cloud Basic.
+When you cancel AI Cloud Personal, access ends immediately and Docker charges your accrued pay-as-you-go usage right away rather than waiting for your next billing date. Canceling also terminates any running background processes, including active sandboxes. Your account returns to AI Cloud Basic.
