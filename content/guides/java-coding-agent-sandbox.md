@@ -1,6 +1,6 @@
 ---
 title: Run a coding agent safely on a Java project with Docker Sandboxes
-linkTitle: Coding agent on Java project
+linkTitle: Coding agents for Java
 description: Use a Docker Sandbox and a reusable sbx kit to run a coding agent on a Spring Boot project, without giving it unrestricted access to your machine.
 keywords: ai, sbx, docker sandboxes, java, spring boot, testcontainers, maven, sdkman, coding agent, kit
 weight: 3
