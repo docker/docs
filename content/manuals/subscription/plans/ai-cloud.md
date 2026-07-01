@@ -19,15 +19,15 @@ To upgrade to AI Cloud Personal, see [Manage plans](/manuals/subscription/manage
 
 ## Usage
 
-Docker AI Cloud plans apply to personal Docker accounts only and don't include team or organization features.
+AI Cloud Basic includes MCP Gateway access with a monthly tool-call allowance. When you upgrade to AI Cloud Personal, you receive Cloud Sandboxes, higher MCP Gateway limits, concurrent sandboxes, snapshot storage, and private Docker Hub repositories.
 
-AI Cloud Basic includes MCP Gateway access with a monthly tool-call allowance. It doesn't include Cloud Sandboxes or Agentic Platform access.
+When you subscribe to an AI Cloud plan, your invoice reflects metered, pay-as-you-go usage. Docker meters compute usage based on the vCPU and memory that your sandboxes consume over time, along with outbound data transfer.
 
-AI Cloud Personal adds Cloud Sandboxes, higher MCP Gateway limits, concurrent sandboxes, snapshot storage, and private Docker Hub repositories.
+When you use AI Cloud Basic or Personal, you bring your own API keys for inference. Those costs are handled by your inference provider.
 
-Cloud sandbox usage is the only metered component. Docker meters compute usage based on the vCPU and memory that your sandboxes consume over time, along with outbound data transfer. MCP Gateway and Agentic Platform access are included at no extra cost within your plan limits.
-
-Docker AI Cloud doesn't bill for inference. You bring your own API keys for inference, and those costs are handled by your inference provider.
+> [!NOTE]
+> Docker AI Cloud plans are a Docker Personal 
+> and Docker Pro exclusive.
 
 ## Billing behaviors
 
