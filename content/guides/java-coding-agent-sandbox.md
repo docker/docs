@@ -276,40 +276,16 @@ With a valid kit, you add the network block next.
 ## Open the network for a Spring Boot and Maven workflow
 
 By default, a sandbox denies every outbound network request that isn't on an
-allowlist. Rather than guessing the full list, let the workflow tell you what it
-needs. Recreate the sandbox with the kit so far — no network block yet — and
-try the install or a build inside it:
+allowlist. The kit's install commands run when the sandbox is created, and they
+need the network — SDKMAN's API, the JDK download broker, and Maven Central.
+With nothing allowed, those requests are blocked, the install fails, and
+`sbx run` never finishes building the sandbox. So the kit has to declare its
+allowlist before you can use it.
 
-```console
-$ sbx run --name java-tmp claude --kit .sbx/kits/java-toolchain
-```
-
-The first outbound request fails with a structured block:
-
-```text
-!curl -sS https://repo.maven.apache.org
-Blocked by network policy: domain repo.maven.apache.org
-  detail: no matching allow rule — blocked by default deny policy
-```
-
-Inspect what's been blocked from your host:
-
-```console
-$ sbx policy log java-tmp
-```
-
-`sbx policy log` shows each connection with its host, the rule that matched, and
-the reason. Working through the install and a test run, the blocks appear in the
-order the tools reach out: SDKMAN's API, then the JDK download broker, then
-Maven Central, then Docker Hub when Testcontainers pulls images. Allow a domain
-for the running sandbox with `sbx policy allow network <domain>`, or approve it
-in the `sbx` TUI, then re-run and watch for the next block. Repeat until the
-build and test pass.
-
-<!-- TODO: add screenshot of the sbx TUI network-approval view, showing a blocked domain and the allow action. -->
-
-Each domain you confirm becomes a candidate for your kit spec. Once you've
-identified all the required domains, add a `network` block to `spec.yaml`:
+For this project the list is short and predictable, following the tools as they
+reach out: SDKMAN and its JDK broker while the kit installs, Maven Central when
+the build resolves dependencies, and Docker Hub when Testcontainers pulls
+images. Add a `network` block to `spec.yaml`:
 
 ```yaml
 network:
@@ -336,6 +312,14 @@ and the three Docker Hub endpoints an image pull touches. It's short enough to
 review in a code review, which is the point. Anything not on it stays blocked,
 and you can see exactly what the agent is allowed to reach.
 
+> [!TIP]
+> To find the domains for a workflow you don't already know, temporarily allow
+> all outbound traffic from your host with `sbx policy allow network "**"`,
+> create the sandbox, and run the build and tests once. Then read
+> `sbx policy log java-tmp` to see exactly which domains were used, copy those
+> into the kit's `allowedDomains`, and remove the temporary rule so the kit's
+> allowlist is the only thing in effect.
+
 > [!NOTE]
 > Your host might already have broader policy rules (for GitHub or Docker Hub,
 > say) from other work. A domain those rules already cover won't show up as a
@@ -344,10 +328,10 @@ and you can see exactly what the agent is allowed to reach.
 
 ## Run the Testcontainers integration tests
 
-Recreate the sandbox with the finished kit and start the agent:
+Create the sandbox with the finished kit and start the agent. This time the
+install commands can reach the network, so the sandbox builds cleanly:
 
 ```console
-$ sbx rm -f java-tmp
 $ sbx run --name java-tmp claude --kit .sbx/kits/java-toolchain
 ```
 
