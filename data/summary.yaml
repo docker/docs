@@ -203,6 +203,7 @@ Docker Scout Mount Permissions:
   requires: Docker Desktop [4.34.0](/manuals/desktop/release-notes.md#4340) and later
 OIDC connections:
   subscription: [Team, Business]
+  availability: Beta
   for: Administrators
 Domain management:
   subscription: [Business]
