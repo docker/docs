@@ -14,6 +14,14 @@ tags: [Release notes]
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+## 2026-08-20
+
+### New
+
+- The [Docker Verified Publisher Program](./repos/manage/trusted-content/dvp-program.md)
+  is now available via self-serve. Apply directly on the [DVP application
+  page](https://hub.docker.com/publisher-program/apply).
+
 ## 2026-06-29
 
 ### New

@@ -6,6 +6,7 @@ aliases:
   - /docker-hub/publish/insights-analytics/
   - /docker-hub/insights-analytics/
   - /trusted-content/insights-analytics/
+toc_max: 3
 ---
 
 Insights and analytics provides usage analytics for [Docker Verified Publisher
@@ -15,51 +16,50 @@ images on Docker Hub. This includes self-serve access to image and extension
 usage metrics for a desired time span. You can see the number of image pulls by
 tag or by digest, geolocation, cloud provider, client, and more.
 
-> [!NOTE]
->
-> The Legacy DVP program applies to existing customers who have not yet renewed
-> to DVP Core. The DVP Legacy program is deprecated and will be retired. Contact
-> your Docker sales representative or
-> [Docker](https://www.docker.com/partners/programs/) for more information.
+- [DVP program](#dvp-program): Usage analytics for Docker Verified Publisher
+  organizations, including tiered reports and report configuration.
+- [DSOS & Legacy DVP programs](#dsos--legacy-dvp-programs): Usage analytics for
+  Docker-Sponsored Open Source publishers, and for existing customers on the
+  deprecated Legacy DVP program.
 
-{{< tabs >}}
-{{< tab name="DVP program" >}}
+The Legacy DVP program applies to existing customers who have not yet renewed
+to DVP Core. The DVP Legacy program is deprecated and will be retired. Contact
+your Docker sales representative or
+[Docker](https://www.docker.com/partners/programs/) for more information.
+
+## DVP program
 
 All members of an organization have access to the analytics data. Members can
 access analytics data in the [Docker Hub](https://hub.docker.com/) web interface.
 
-## Available reports
+### Available reports
 
-The following reports may be available for download as CSV files:
+The following reports are available for download as CSV files, based on your
+organization's DVP subscription tier:
 
-- [Summary](#summary-report)
-- [Trends](#trends-report)
-- [Technographic](#technographic-report)
-- [Technographic companies](#technographic-companies-report)
-- [Tracked companies](#tracked-companies-report)
+- Starter tier
+  - [Summary](#summary-report)
+- Growth tier
+  - [Summary](#summary-report)
+  - [Trends](#trends-report)
+  - [Technographic companies](#technographic-companies-report)
+  - [Tracked companies](#tracked-companies-report)
+  - [Benchmark](#benchmark-report)
 
-The reports available for download may vary based on your organization's
-subscription. Contact your Docker sales representative or
-[Docker](https://www.docker.com/partners/programs/) for more information.
+The Tracked companies, Technographic companies, and Benchmark reports each
+provide a different slice of reporting on the companies tracked under your
+subscription:
 
-## Configure DVP analytics settings
+- Tracked companies shows how those companies use your own images.
+- Technographic companies shows which other images those companies use
+  alongside yours.
+- Benchmark shows how those companies use images you've configured to
+  benchmark against, such as a competitor's image, instead of your own.
 
-Organization owners and editors can configure DVP analytics settings through Docker Home to control tracked companies and benchmark report allocations for
-your verified publisher namespaces.
+After your organization is provisioned for DVP analytics, it takes up to one
+week for the first reports to become available.
 
-1. Sign in to [Docker Home](https://app.docker.com) and select your organization.
-2. Select **DVP Settings**.
-3. Configure the settings:
-   - **Tracked companies**: Set the number of companies to track for reporting
-     purposes. This setting determines how many company domains appear in your
-     [Tracked companies report](#tracked-companies-report). You can only set
-     this number up to the maximum included in your DVP subscription.
-   - **Benchmark report allocations**: If your organization has benchmark
-     reports enabled, enter the number of companies to include in the benchmark
-     report for each namespace listed.
-4. Select **Save** to apply your changes.
-
-### Summary report
+#### Summary report
 
 The summary report provides high-level usage metrics aggregated across all your
 Docker Hub content, organized by namespace and repository. This report gives you
@@ -101,7 +101,7 @@ The summary report is a CSV file that contains the following data points:
 | `VERSION_CHECKS`   | The number of version checks performed (HEAD requests to check for updates without downloading the full image).                                                       |
 | `EVENT_COUNT`      | The total number of events, calculated as the sum of data downloads and version checks.                                                                               |
 
-### Trends report
+#### Trends report
 
 The trends report helps you understand how adoption of your container images
 evolves over time. It provides visibility into pull activity across repositories
@@ -142,56 +142,7 @@ The trends report is a CSV file that contains the following data points:
 | `UNIQUE_AUTHENTICATED_USERS`   | The number of unique authenticated users who performed pulls.                                                           |
 | `UNIQUE_UNAUTHENTICATED_USERS` | The number of unique unauthenticated users who performed pulls.                                                         |
 
-### Technographic report
-
-The technographic report provides insights into how your Docker Verified
-Publisher (DVP) images are used alongside other container images in real-world
-technology stacks. This report helps you understand the technical ecosystem
-where your images operate and identify co-usage patterns with other images.
-
-You can use this report to answer questions like:
-
-- Which other images are commonly used together with your images?
-- What percentage of your user base also uses specific complementary
-  technologies?
-- How many companies in your ecosystem use both your image and other popular
-  images?
-- What technology stacks are most popular among your users?
-
-To access the report:
-
-1. Sign in to [Docker Hub](https://hub.docker.com/).
-2. Select **My Hub** in the top navigation.
-3. Select your organization in the left navigation.
-4. Select **Analytics** > **Technographic** in the left navigation.
-5. Select **DATA BY WEEK** or **DATA BY MONTH** to choose the data granularity.
-6. Select **Download report** for the desired week or month.
-
-The technographic report is a CSV file that contains the following data points:
-
-| Field              | Description                                                                                                |
-| ------------------ | ---------------------------------------------------------------------------------------------------------- |
-| `DATE_GRANULARITY` | Weekly or monthly granularity of the data.                                                                 |
-| `DATE_REFERENCE`   | The start date of the week or month in YYYY-MM-DD format.                                                  |
-| `PUBLISHER_ID`     | The unique identifier for the publisher organization.                                                      |
-| `PUBLISHER_NAME`   | The name of the organization that owns the DVP repository.                                                 |
-| `DVPP_IMAGE`       | Your Docker Verified Publisher image repository name.                                                      |
-| `PAIRED_IMAGE`     | The other image repository that is commonly used together with your DVP image.                             |
-| `USERS`            | The number of unique users who pulled both your DVP image and the paired image within the time period.     |
-| `TOTAL_PULLERS`    | The total number of unique users who pulled your DVP image during the time period.                         |
-| `PCT_USERS`        | The percentage of your image's users who also use the paired image (users/total_pullers).                  |
-| `DOMAINS`          | The number of unique company domains that pulled both your DVP image and the paired image.                 |
-| `TOTAL_DOMAINS`    | The total number of unique company domains that pulled your DVP image.                                     |
-| `PCT_DOMAINS`      | The percentage of company domains using your image that also use the paired image (domains/total_domains). |
-
-> [!NOTE]
->
-> To protect user privacy and ensure statistical significance, the technographic
-> report only includes image pairings that have at least 10 unique users.
-> Personal, disposable, and university email domains are excluded from the
-> company domain analysis.
-
-### Technographic companies report
+#### Technographic companies report
 
 The technographic companies report provides a detailed view of which specific
 companies (identified by their domains) are using your Docker Verified Publisher
@@ -240,7 +191,7 @@ and another image that were used together during the specified time period.
 > email domains, disposable email services, and university domains. Only
 > business and organizational domains are included in the analysis.
 
-### Tracked companies report
+#### Tracked companies report
 
 The tracked companies report provides detailed insights into how specific
 companies are using your Docker Verified Publisher (DVP) images. This report
@@ -290,8 +241,65 @@ points:
 > are reclassified as CI/CD, and CI/CD tools used on cloud infrastructure are
 > reclassified as production to better reflect actual deployment patterns.
 
-{{< /tab >}}
-{{< tab name="DSOS & Legacy DVP programs" >}}
+#### Benchmark report
+
+The benchmark report shows how companies interact with images you've
+configured to benchmark against, such as a competitor's image, rather than
+your own. The report is generated per repository, so each benchmark repository
+you configure produces its own report.
+
+To access the report:
+
+1. Sign in to [Docker Hub](https://hub.docker.com/).
+2. Select **My Hub** in the top navigation.
+3. Select your organization in the left navigation.
+4. Select **Analytics** > **Benchmark** in the left navigation.
+5. Select **DATA BY WEEK** or **DATA BY MONTH** to choose the data granularity.
+6. Select **Download report** for the desired week or month.
+
+The benchmark report is a CSV file that contains the following data points:
+
+| Field                         | Description                                                                                 |
+| ----------------------------- | -------------------------------------------------------------------------------------------- |
+| `DATE_GRANULARITY`            | Weekly or monthly granularity of the data.                                                   |
+| `DATE_REFERENCE`              | The start date of the week or month in YYYY-MM-DD format.                                    |
+| `PUBLISHER_NAME`              | The name of the organization that owns the DVP repository.                                   |
+| `DOMAIN`                      | The company domain associated with the pulls.                                                |
+| `IP_COUNTRY`                  | The country code (ISO 3166-1 alpha-2) where the pull request originated from.                |
+| `CLOUD_SERVICE_PROVIDER`      | The cloud service provider used for the pull request, or `no csp` for non-cloud providers.    |
+| `USER_AGENT`                  | The client application or tool used to pull the image.                                       |
+| `INFERRED_USE_CASE`           | The inferred deployment environment, using the same rules as the [tracked companies report](#tracked-companies-report). |
+| `IMAGE_REPOSITORY`            | The benchmark-configured image repository that was pulled.                                   |
+| `DATA_DOWNLOADS`              | The number of actual image layer downloads for this combination.                             |
+| `VERSION_CHECKS`              | The number of version checks (HEAD requests) performed without downloading the full image.    |
+| `PULLS`                       | The total number of pull requests (data downloads + version checks).                         |
+| `UNIQUE_AUTHENTICATED_USERS`  | The number of unique authenticated users from this domain who performed pulls.               |
+
+To configure which repositories are benchmarked, see [Configure DVP analytics
+settings](#configure-dvp-analytics-settings).
+
+### Configure DVP analytics settings
+
+Organization owners and editors can configure DVP analytics settings through the
+Admin Console to control tracked companies and benchmark report allocations for
+your verified publisher namespaces.
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your organization.
+2. Select **Admin Console** > **Verified Publisher**.
+3. Configure the settings:
+   - **Tracked companies**: Set the number of companies to track for reporting
+     purposes. This setting determines how many company domains appear in your
+     [Tracked companies report](#tracked-companies-report). You can only set
+     this number up to the maximum included in your DVP subscription.
+   - **Benchmark report allocations**: If your organization has benchmark
+     reports enabled, enter the number of companies to include in the benchmark
+     report for each namespace listed.
+4. Select **Save** to apply your changes.
+
+Changes to your report configuration take effect at the next reporting
+cadence, either the next weekly or monthly report.
+
+## DSOS & Legacy DVP programs
 
 > [!IMPORTANT]
 >
@@ -300,7 +308,7 @@ points:
 > your Docker sales representative or
 > [Docker](https://www.docker.com/partners/programs/) for more information.
 
-## View the image's analytics data
+### View the image's analytics data
 
 You can find analytics data for your repositories on the **Insights and
 analytics** dashboard at the following URL:
@@ -321,7 +329,7 @@ To view data in the chart:
 > Hovering your cursor over the chart displays a tooltip, showing precise data
 > for points in time.
 
-### Share analytics data
+#### Share analytics data
 
 You can share the visualization with others using the **Share** icon at the top
 of the chart. This is a convenient way to share statistics with others in your
@@ -334,7 +342,7 @@ preserves the display selections you made. When someone follows the link, the
 **Insights and analytics** page opens and displays the chart with the same
 configuration as you had set up when creating the link.
 
-## Extension analytics data
+### Extension analytics data
 
 If you have published Docker Extensions in the Extension marketplace, you can
 also get analytics about your extension usage, available as CSV files. You can
@@ -344,7 +352,7 @@ the following URL:
 namespace contains extensions known in the marketplace, you will see an
 **Extensions** tab listing CSV files for your extension(s).
 
-## Exporting analytics data
+### Exporting analytics data
 
 You can export the analytics data either from the web dashboard, or using the
 [DVP Data API](/reference/api/dvp/latest.md). All members of an organization
@@ -355,7 +363,7 @@ Sunday) or monthly format. Monthly data is available from the first day of the
 following calendar month. You can import this data into your own systems, or you
 can analyze it manually as a spreadsheet.
 
-### Export data
+#### Export data
 
 Export usage data for your organization's images using the Docker Hub website by
 following these steps:
@@ -371,13 +379,13 @@ following these steps:
 
     ![Filtering options and download links for analytics data](../../../images/download-analytics-data.png)
 
-### Export data using the API
+#### Export data using the API
 
 The HTTP API endpoints are available at:
 `https://hub.docker.com/api/publisher/analytics/v1`. Learn how to export data
 using the API in the [DVP Data API documentation](/reference/api/dvp/latest.md).
 
-## Data points
+### Data points
 
 Export data in either raw or summary format. Each format contains different data
 points and with different structure.
@@ -385,7 +393,7 @@ points and with different structure.
 The following sections describe the available data points for each format. The
 **Date added** column shows when the field was first introduced.
 
-### Image pulls raw data
+#### Image pulls raw data
 
 The raw data format contains the following data points. Each row in the CSV file
 represents an image pull.
@@ -414,7 +422,7 @@ represents an image pull.
 [3]: /admin/organization/setup/orgs/
 [4]: /docker-hub/repos/
 
-### Image pulls summary data
+#### Image pulls summary data
 
 There are two levels of summary data available:
 
@@ -433,7 +441,7 @@ span:
 | Version check     | HEAD by tag, not followed by a GET                      | January 1, 2022   |
 | Owner             | The name of the organization that owns the repository.  | December 19, 2022 |
 
-### Image pulls action classification rules
+#### Image pulls action classification rules
 
 An action represents the multiple request events associated with a
 `docker pull`. Pulls are grouped by category to make the data more meaningful
@@ -465,7 +473,7 @@ pulls. To provide feedback or ask questions about these rules,
 | HEAD           | digest    | GET by same digest                                              | Pull by digest   | Image is single-arch and/or image is multi-arch but some part of the image already exists on the local machine |                                                                                                                                                                                                                                                                                       |
 | HEAD           | digest    | GET by same digest, then a second GET by different digest       | Pull by Digest   | Image is multi-arch                                                                                            |                                                                                                                                                                                                                                                                                       |
 
-### Extension Summary data
+#### Extension Summary data
 
 There are two levels of extension summary data available:
 
@@ -498,7 +506,7 @@ span:
 | Usage            | Number of openings of the extension tab           | Feb 1, 2024 |
 | UniqueUsers      | Number of unique users openings the extension tab | Feb 1, 2024 |
 
-## Changes in data over time
+### Changes in data over time
 
 The insights and analytics service is continuously improved to increase the
 value it brings to publishers. Some changes might include adding new data
@@ -509,9 +517,6 @@ from the date of when the field was first introduced, and going forward.
 
 Refer to the tables in the [Data points](#data-points) section to see from which
 date a given data point is available.
-
-{{< /tab >}}
-{{< /tabs >}}
 
 ## Privacy
 
