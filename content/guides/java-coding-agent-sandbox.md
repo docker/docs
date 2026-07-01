@@ -114,11 +114,12 @@ commands that run when the sandbox is built, and a network allowlist that
 applies while it runs. It's a `mixin` kit, which layers extra capabilities on
 top of an existing agent.
 
-You can keep a kit anywhere. This guide puts it in a `.sbx/kits/<name>/`
-directory in the project as a convention, but the location is up to you.
-Checking the kit into your repository is optional — a local path works fine —
-but committing it is a good way to share one setup across the team, so
-everyone's sandbox is configured the same way.
+A kit can be loaded from a local path (a directory or ZIP file), a Git
+repository, or an OCI registry. This guide uses a local kit, kept in a
+`.sbx/kits/<name>/` directory in the project as a convention — the location is
+up to you. Checking it into your repository is optional, but committing it is a
+good way to share one setup across the team, so everyone's sandbox is
+configured the same way.
 
 Create `.sbx/kits/java-toolchain/spec.yaml`. The install section has three
 steps, shown here in full and explained below. The network block comes later,
