@@ -107,10 +107,12 @@ $ sbx rm <sandbox-name>
 
 ## Build the toolchain kit
 
-A kit is a directory containing a `spec.yaml` file. It declares install
-commands that run when the sandbox is built, plus a network allowlist that
-applies while it runs. This guide uses a `mixin` kit, which layers extra
-capabilities on top of an existing agent.
+A kit is a directory containing a `spec.yaml` file that declares capabilities a
+sandbox can use — tools to install, network rules, credentials, environment
+variables, files, and agent context. This kit uses two of them: install
+commands that run when the sandbox is built, and a network allowlist that
+applies while it runs. It's a `mixin` kit, which layers extra capabilities on
+top of an existing agent.
 
 You can keep a kit anywhere. This guide puts it in a `.sbx/kits/<name>/`
 directory in the project as a convention, but the location is up to you.
