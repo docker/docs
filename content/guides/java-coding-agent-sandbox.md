@@ -1,13 +1,13 @@
 ---
-title: Run a Java coding agent safely with Docker Sandboxes
-linkTitle: Java coding agent in a sandbox
-description: Build a reusable sbx kit that makes a coding agent productive on a Spring Boot project without giving it unrestricted access to your machine.
+title: Run a coding agent safely on a Java project with Docker Sandboxes
+linkTitle: Coding agent on Java project
+description: Use a Docker Sandbox and a reusable sbx kit to run a coding agent on a Spring Boot project, without giving it unrestricted access to your machine.
 keywords: ai, sbx, docker sandboxes, java, spring boot, testcontainers, maven, sdkman, coding agent, kit
-summary: |
-  Build a reusable sbx kit that installs a Java toolchain and declares a
-  minimal network allowlist, so a coding agent can build and test a Spring
-  Boot project inside an isolated microVM.
 weight: 3
+summary: |
+  Build a reusable sbx kit so a coding agent can build and test a Spring Boot
+  project inside an isolated microVM, with a full Java toolchain and a minimal,
+  reviewable network allowlist.
 params:
   tags: [ai]
   featured: true
@@ -66,9 +66,11 @@ The sample is a Spring Boot service that listens for product price changes on a
 Kafka topic and writes the new price to MySQL through Spring Data JPA. Its
 integration test publishes an event with `KafkaTemplate` and uses Awaitility to
 assert the row landed in the database, so it starts two containers, Kafka and
-MySQL, plus the Testcontainers Ryuk resource reaper. That makes it a good test
-of the whole setup: it needs the toolchain, the network, and a working Docker
-daemon all at once.
+MySQL, plus the Testcontainers Ryuk resource reaper. Between them, these
+exercise a complete, representative Java development setup — the JDK and Maven
+toolchain, network access to Maven Central and image registries, and a working
+Docker daemon for the containers the tests spin up — which is exactly what the
+kit needs to provide.
 
 ## Run your project in a sandbox
 
@@ -84,12 +86,13 @@ $ sbx run claude
 the `claude` agent attached to your terminal. The agent can read and edit your
 files, and it has its own Docker daemon, but the microVM contains only a
 minimal set of tools by default. Ask it to check the toolchain, or run the
-check yourself through the agent's `!` shell:
+check yourself through the agent's `!` shell (the `!` prefix runs a command in
+the sandbox and prints the result):
 
-```console
-$ !java -version
+```text
+!java -version
 bash: java: command not found
-$ !mvn -v
+!mvn -v
 bash: mvn: command not found
 ```
 
@@ -104,10 +107,16 @@ $ sbx rm <sandbox-name>
 
 ## Build the toolchain kit
 
-A kit is a YAML spec you keep under `.sbx/kits/<name>/` in your repository. It
-declares install commands that run when the sandbox is built, and a network
-allowlist that applies while it runs. This guide uses a `mixin` kit, which
-layers extra capabilities on top of an existing agent.
+A kit is a directory containing a `spec.yaml` file. It declares install
+commands that run when the sandbox is built, plus a network allowlist that
+applies while it runs. This guide uses a `mixin` kit, which layers extra
+capabilities on top of an existing agent.
+
+You can keep a kit anywhere. This guide puts it in a `.sbx/kits/<name>/`
+directory in the project as a convention, but the location is up to you.
+Checking the kit into your repository is optional — a local path works fine —
+but committing it is a good way to share one setup across the team, so
+everyone's sandbox is configured the same way.
 
 Create `.sbx/kits/java-toolchain/spec.yaml`. The install section has three
 steps, shown here in full and explained below. The network block comes later,
@@ -201,8 +210,8 @@ The second step installs the toolchain as the agent user, so SDKMAN lands in
 `/home/agent/.sdkman`. A few details here aren't optional, and skipping them is
 what usually breaks a headless SDKMAN install:
 
-- `?rcupdate=false` tells the installer not to edit shell startup files. The kit puts
-  the tools on `PATH` in the third step, deterministically.
+- `?rcupdate=false` tells the installer not to edit shell startup files. The kit
+  puts the tools on `PATH` in the third step, deterministically.
 - `sdkman_auto_answer=true` makes `sdk install` answer its own prompts, and
   `sdkman_selfupdate_feature=false` stops it trying to self-update mid-build.
   Without these, the install hangs waiting for input that never comes.
@@ -248,21 +257,20 @@ Before running anything, check the spec:
 ```console
 $ sbx kit validate .sbx/kits/java-toolchain
 Kit "java-toolchain" is valid.
-Warning: network.allowedDomains is deprecated in favor of network.allow; it still works.
 ```
 
-The deprecation warning is expected with the current `sbx` release and
-harmless; `allowedDomains` still applies. You add that network block next.
+With a valid kit, you add the network block next.
 
 ## Open the network for a Spring Boot and Maven workflow
 
-The sandbox network denies everything not on an allowlist. Rather than guessing
-the full list, let the workflow tell you what it needs. Build the sandbox with
-the kit so far (no network block yet) and try the install or a build inside it.
-The first outbound request fails with a structured block:
+By default, a sandbox denies every outbound network request that isn't on an
+allowlist. Rather than guessing the full list, let the workflow tell you what it
+needs. Build the sandbox with the kit so far (no network block yet) and try the
+install or a build inside it. The first outbound request fails with a structured
+block:
 
-```console
-$ !curl -sS https://repo.maven.apache.org
+```text
+!curl -sS https://repo.maven.apache.org
 Blocked by network policy: domain repo.maven.apache.org
   detail: no matching allow rule — blocked by default deny policy
 ```
@@ -288,7 +296,7 @@ identified all the required domains, add a `network` block to `spec.yaml`:
 
 ```yaml
 network:
-  allowedDomains:
+  allow:
     # SDKMAN + JDK/Maven distribution
     - "get.sdkman.io:443"
     - "api.sdkman.io:443"
@@ -342,8 +350,8 @@ is the proof the `PATH` step worked across both shells.
 Run the integration test. Testcontainers talks to the sandbox's built-in Docker
 daemon, so there's nothing extra to configure:
 
-```console
-$ !./mvnw test
+```text
+!./mvnw test
 ```
 
 On the first run, Maven downloads dependencies from Maven Central, and
@@ -368,8 +376,8 @@ containers, entirely inside the sandbox.
 To see the other half — that the sandbox is still closed — try a domain the kit
 doesn't allow:
 
-```console
-$ !curl -sS https://example.com
+```text
+!curl -sS https://example.com
 Blocked by network policy: domain example.com
   detail: no matching allow rule — blocked by default deny policy
 ```
@@ -378,34 +386,60 @@ The agent has exactly what the project needs and nothing more.
 
 ## Make it reproducible for the team
 
-The kit lives in the repository, so committing it turns this from a one-off setup into
-something the whole team shares. Commit `.sbx/kits/java-toolchain/spec.yaml`,
-and add a short section to the project's `CLAUDE.md` so any agent (and any
-teammate) knows how to start:
+The kit lives in the repository, so committing it turns this from a one-off
+setup into something the whole team shares. A teammate clones the repository,
+launches the sandbox with the kit, and gets the same JDK, the same Maven, and
+the same network allowlist, in their own isolated microVM. The setup is reviewed
+like any other code, because it is code.
+
+### Give the agent context about the kit
+
+The agent starts fresh in each sandbox and doesn't automatically know what the
+kit installed. Add an `agentContext` block to `spec.yaml`; the sandbox appends
+it to the agent's memory file at creation, so the agent starts already knowing
+the toolchain is there and how to use it:
+
+```yaml
+agentContext: |
+  This sandbox has a Java toolchain installed and on PATH: Temurin JDK 25 and
+  Maven, managed by SDKMAN. Build and test the project with `./mvnw`.
+  Testcontainers uses the sandbox's built-in Docker daemon, so integration
+  tests run with `./mvnw test`.
+```
+
+This is the place for kit-specific notes the agent should act on, and it travels
+with the kit — so you don't have to repeat it in the project's `CLAUDE.md`.
+
+### Document how to start
+
+The one thing a person needs is the launch command, so put it in the project's
+`README` where a teammate will look for it:
 
 ````md
-## Running this project in a Docker Sandbox
+## Run this project in a Docker Sandbox
 
-Start your coding agent in a Docker Sandbox with the committed Java toolchain
-kit:
+Start a coding agent in a sandbox with the committed kit:
 
 ```console
 $ sbx run claude --kit .sbx/kits/java-toolchain
 ```
-
-The kit installs SDKMAN, Temurin JDK 25, and Maven, and puts `java` and `mvn`
-on PATH. Testcontainers uses the sandbox's built-in Docker daemon, so run the
-integration tests with `./mvnw test`.
-
-If a network request is blocked, inspect it with `sbx policy log`. For a
-temporary unblock, run `sbx policy allow network <domain>`. If the domain is a
-permanent project requirement, add it to the kit's `allowedDomains`.
 ````
 
-From then on, the one command in that section is the entire setup. A teammate
-clones the repository, runs it, and gets the same JDK, the same Maven, and the same
-network allowlist, in their own isolated microVM. The setup is reviewed like any
-other code, because it is code.
+A teammate clones the repository, runs that one command, and gets the same JDK,
+the same Maven, and the same network allowlist, in their own isolated microVM.
+
+> [!TIP]
+> To steer teammates away from running a coding agent directly on their host,
+> add an instruction to the project's agent instructions (for example,
+> `CLAUDE.md`) that tells the agent to stop and relaunch in a sandbox:
+>
+> ```md
+> If you are not running inside a Docker Sandbox, stop and tell the user to
+> relaunch you with `sbx run claude --kit .sbx/kits/java-toolchain`.
+> ```
+>
+> It's opinionated, but it turns "use the sandbox" from a suggestion into
+> something the agent helps enforce.
 
 ## Conclusion
 
@@ -413,24 +447,27 @@ You have a coding agent that is productive on a Java project, with a full JDK
 and Maven toolchain and a working Docker daemon for Testcontainers, running in
 an isolated microVM whose network only reaches the handful of domains the
 project actually uses. The kit makes that combination reproducible: it's
-committed to the repository, readable in a pull request, and applied with one command,
-so the safe and productive setup is the default for everyone on the team rather
-than something each person reconstructs by hand.
+committed to the repository, readable in a pull request, and applied with one
+command, so the safe and productive setup is the default for everyone on the
+team rather than something each person reconstructs by hand.
 
 This kit is deliberately composite. It bundles SDKMAN, the JDK, and Maven
 together because they're always needed as a unit for this project. If your team
 has kits for other stacks, it might make sense to factor them into smaller,
 composable kits instead.
 
-The finished sample, including the kit and the `CLAUDE.md` section, is at
+The finished sample, including the kit and the `README` section, is at
 [shelajev/tc-guide-java-sbx-kits](https://github.com/shelajev/tc-guide-java-sbx-kits).
 
 ## Further reading
 
 - [Docker Sandboxes overview](../manuals/ai/sandboxes/_index.md) for what the
   isolation gives you and how `sbx` works.
-- [Customizing sandboxes with kits](../manuals/ai/sandboxes/customize/kits.md)
-  for the full kit spec, including `kind`, command users, and network options.
+- [Customize sandboxes with kits](../manuals/ai/sandboxes/customize/kits.md) for
+  what kits can do and how to build one.
+- [Kit spec reference](../manuals/ai/sandboxes/customize/kit-reference.md) for
+  every field in `spec.yaml`, including `network`, `agentContext`, and command
+  users.
 - [Testing Spring Boot Kafka listeners with Testcontainers](https://testcontainers.com/guides/testing-spring-boot-kafka-listener-using-testcontainers/),
   the original guide behind the sample app.
 - [sbx-moderne-kit](https://github.com/shelajev/sbx-moderne-kit) for a more
