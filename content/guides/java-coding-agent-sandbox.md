@@ -39,8 +39,8 @@ In this guide, you'll learn how to:
   box.
 - Write a kit that installs SDKMAN, a JDK, and Maven, and puts them on `PATH`
   for both `sbx exec` and the agent's own shell.
-- Discover the minimal network allowlist a Spring Boot and Maven workflow
-  needs, instead of guessing.
+- Declare the minimal network allowlist a Spring Boot and Maven workflow needs,
+  and nothing more.
 - Run Testcontainers integration tests against the sandbox's built-in Docker
   daemon.
 - Commit the kit so your whole team gets the same sandbox with one command.
@@ -129,7 +129,7 @@ configured the same way.
 
 Create `.sbx/kits/java-toolchain/spec.yaml`. The install section has three
 steps, shown here in full and explained below. The network block comes later,
-once you've discovered which domains the project needs:
+once you know which domains the project needs:
 
 ```yaml
 schemaVersion: "1"
@@ -311,14 +311,6 @@ its release-asset host (where SDKMAN fetches the Temurin build), Maven Central,
 and the three Docker Hub endpoints an image pull touches. It's short enough to
 review in a code review, which is the point. Anything not on it stays blocked,
 and you can see exactly what the agent is allowed to reach.
-
-> [!TIP]
-> To find the domains for a workflow you don't already know, temporarily allow
-> all outbound traffic from your host with `sbx policy allow network "**"`,
-> create the sandbox, and run the build and tests once. Then read
-> `sbx policy log java-tmp` to see exactly which domains were used, copy those
-> into the kit's `allowedDomains`, and remove the temporary rule so the kit's
-> allowlist is the only thing in effect.
 
 > [!NOTE]
 > Your host might already have broader policy rules (for GitHub or Docker Hub,
