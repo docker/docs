@@ -24,8 +24,10 @@ about.
 The [Docker Sandboxes](../manuals/ai/sandboxes/_index.md) `sbx` CLI runs an
 agent inside an isolated microVM with its own filesystem, its own Docker
 daemon, and a network that denies everything by default. That isolation is
-useful on its own, but a bare sandbox has no JDK and no Maven, and the
-default-deny network blocks Maven Central. This guide closes that gap with a
+useful on its own, but the base sandbox ships only part of a Java toolchain —
+it has a JDK, but no Maven — and the default-deny network blocks Maven Central.
+You can install what's missing by hand in each sandbox, but that's a
+per-sandbox chore that drifts over time. This guide closes the gap with a
 [kit](../manuals/ai/sandboxes/customize/kits.md): a small, committed spec that
 installs the toolchain and declares exactly which domains the project is
 allowed to reach, so every teammate gets the same productive, isolated setup
@@ -84,22 +86,25 @@ $ sbx run claude
 
 `sbx run` creates a sandbox, mounts the current directory into it, and starts
 the `claude` agent attached to your terminal. The agent can read and edit your
-files, and it has its own Docker daemon, but the microVM contains only a
-minimal set of tools by default. Ask it to check the toolchain, or run the
-check yourself through the agent's `!` shell (the `!` prefix runs a command in
-the sandbox and prints the result):
+files, and it has its own Docker daemon, and the base image comes with a useful
+set of tools — but not everything a given project needs. Ask it to check the
+toolchain, or run the check yourself through the agent's `!` shell (the `!`
+prefix runs a command in the sandbox and prints the result):
 
 ```text
 !java -version
-bash: java: command not found
+openjdk version "25.0.3" 2026-04-21
+OpenJDK Runtime Environment (build 25.0.3+9)
 !mvn -v
 bash: mvn: command not found
 ```
 
-That's the gap. The agent can see the code but can't build it, and if you tried
-`./mvnw test` it would also hit the default-deny network the moment Maven
-reached out to Maven Central. The rest of this guide fills both gaps with a
-single kit. Exit this sandbox before continuing:
+The sandbox ships a JDK, but no Maven. You could install Maven by hand, or ask
+the agent to, but you'd repeat that in every new sandbox — and small
+differences creep in over time. A kit installs it once, the same way for
+everyone. There's a second gap too: `./mvnw test` would hit the default-deny
+network the moment Maven reached out to Maven Central. The rest of this guide
+fills both with a single kit. Exit this sandbox before continuing:
 
 ```console
 $ sbx rm <sandbox-name>
@@ -219,8 +224,10 @@ what usually breaks a headless SDKMAN install:
   `sdkman_selfupdate_feature=false` stops it trying to self-update mid-build.
   Without these, the install hangs waiting for input that never comes.
 - The versions are pinned: `25.0.3-tem` is the Temurin JDK 25 build, matching
-  the sample's `<java.version>25</java.version>`, and `3.9.16` is Maven. Pinning
-  means every teammate's sandbox has the same toolchain.
+  the sample's `<java.version>25</java.version>`, and `3.9.16` is Maven. The
+  base image already ships a JDK, but installing a pinned one in the kit means
+  the version won't drift when the image updates, and every teammate's sandbox
+  has the same toolchain.
 
 The closing `java -version` and `mvn -v` make the build fail loudly if either
 tool didn't install, so a broken kit never reaches a green checkmark.
