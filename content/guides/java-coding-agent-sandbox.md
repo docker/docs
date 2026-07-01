@@ -243,8 +243,9 @@ is the standard pattern for version managers like SDKMAN and nvm; see
 [Customize the shell environment](../manuals/ai/sandboxes/customize/kit-examples.md#customize-the-shell-environment)
 for the same technique applied to nvm.
 
-The third step appends SDKMAN's `current/bin` directories for the JDK and Maven
-straight to `PATH`. The `grep` guard with the `java-toolchain-kit-path` marker
+The third step prepends SDKMAN's `current/bin` directories for the JDK and Maven
+to `PATH`, so the kit's pinned toolchain takes precedence over the JDK the base
+image ships. The `grep` guard with the `java-toolchain-kit-path` marker
 keeps the block from being added twice, and the `case` statements keep each
 directory from being added to `PATH` more than once — that file is sourced
 before every single command, and a growing `PATH` adds up fast.
