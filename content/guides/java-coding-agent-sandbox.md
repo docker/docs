@@ -459,7 +459,7 @@ together because they're always needed as a unit for this project. If your team
 has kits for other stacks, it might make sense to factor them into smaller,
 composable kits instead.
 
-The finished sample, including the kit and the `README` section, is at
+The finished sample, including the kit, is at
 [shelajev/tc-guide-java-sbx-kits](https://github.com/shelajev/tc-guide-java-sbx-kits).
 
 ## Further reading
