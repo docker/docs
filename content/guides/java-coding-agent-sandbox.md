@@ -77,11 +77,12 @@ kit needs to provide.
 ## Run your project in a sandbox
 
 Start with no kit, so you can see what a bare sandbox gives you. From the
-project directory, launch an agent in a fresh sandbox:
+project directory, launch an agent in a fresh sandbox. Give it a name so the
+commands throughout the walkthrough are easy to copy:
 
 ```console
 $ cd tc-guide-java-sbx-kits
-$ sbx run claude
+$ sbx run --name java-tmp claude
 ```
 
 `sbx run` creates a sandbox, mounts the current directory into it, and starts
@@ -104,10 +105,10 @@ the agent to, but you'd repeat that in every new sandbox — and small
 differences creep in over time. A kit installs it once, the same way for
 everyone. There's a second gap too: `./mvnw test` would hit the default-deny
 network the moment Maven reached out to Maven Central. The rest of this guide
-fills both with a single kit. Exit this sandbox before continuing:
+fills both with a single kit. Remove this sandbox before continuing:
 
 ```console
-$ sbx rm <sandbox-name>
+$ sbx rm -f java-tmp
 ```
 
 ## Build the toolchain kit
@@ -276,9 +277,14 @@ With a valid kit, you add the network block next.
 
 By default, a sandbox denies every outbound network request that isn't on an
 allowlist. Rather than guessing the full list, let the workflow tell you what it
-needs. Build the sandbox with the kit so far (no network block yet) and try the
-install or a build inside it. The first outbound request fails with a structured
-block:
+needs. Recreate the sandbox with the kit so far — no network block yet — and
+try the install or a build inside it:
+
+```console
+$ sbx run --name java-tmp claude --kit .sbx/kits/java-toolchain
+```
+
+The first outbound request fails with a structured block:
 
 ```text
 !curl -sS https://repo.maven.apache.org
@@ -289,7 +295,7 @@ Blocked by network policy: domain repo.maven.apache.org
 Inspect what's been blocked from your host:
 
 ```console
-$ sbx policy log <sandbox-name>
+$ sbx policy log java-tmp
 ```
 
 `sbx policy log` shows each connection with its host, the rule that matched, and
@@ -341,14 +347,15 @@ and you can see exactly what the agent is allowed to reach.
 Recreate the sandbox with the finished kit and start the agent:
 
 ```console
-$ sbx run claude --kit .sbx/kits/java-toolchain
+$ sbx rm -f java-tmp
+$ sbx run --name java-tmp claude --kit .sbx/kits/java-toolchain
 ```
 
 The toolchain is on `PATH` for both entry points. Verify from your host with
 `sbx exec`:
 
 ```console
-$ sbx exec <sandbox-name> bash -lc 'java -version && mvn -v'
+$ sbx exec java-tmp bash -lc 'java -version && mvn -v'
 openjdk version "25.0.3" 2026-xx-xx
 OpenJDK Runtime Environment Temurin-25.0.3+x (build 25.0.3+x)
 OpenJDK 64-Bit Server VM Temurin-25.0.3+x (build 25.0.3+x, mixed mode, sharing)
@@ -393,7 +400,12 @@ Blocked by network policy: domain example.com
   detail: no matching allow rule — blocked by default deny policy
 ```
 
-The agent has exactly what the project needs and nothing more.
+The agent has exactly what the project needs and nothing more. When you're done
+exploring, remove the throwaway sandbox:
+
+```console
+$ sbx rm -f java-tmp
+```
 
 ## Make it reproducible for the team
 
