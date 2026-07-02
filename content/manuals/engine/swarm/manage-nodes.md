@@ -6,10 +6,10 @@ title: Manage nodes in a swarm
 
 As part of the swarm management lifecycle, you may need to:
 
-* [List nodes in the swarm](#list-nodes)
-* [Inspect an individual node](#inspect-an-individual-node)
-* [Update a node](#update-a-node)
-* [Leave the swarm](#leave-the-swarm)
+- [List nodes in the swarm](#list-nodes)
+- [Inspect an individual node](#inspect-an-individual-node)
+- [Update a node](#update-a-node)
+- [Leave the swarm](#leave-the-swarm)
 
 ## List nodes
 
@@ -29,23 +29,23 @@ ehkv3bcimagdese79dn78otj5 *  node-1    Ready   Active        Leader
 The `AVAILABILITY` column shows whether or not the scheduler can assign tasks to
 the node:
 
-* `Active` means that the scheduler can assign tasks to the node.
-* `Pause` means the scheduler doesn't assign new tasks to the node, but existing
+- `Active` means that the scheduler can assign tasks to the node.
+- `Pause` means the scheduler doesn't assign new tasks to the node, but existing
   tasks remain running.
-* `Drain` means the scheduler doesn't assign new tasks to the node. The
-   scheduler shuts down any existing tasks and schedules them on an available
-   node.
+- `Drain` means the scheduler doesn't assign new tasks to the node. The
+  scheduler shuts down any existing tasks and schedules them on an available
+  node.
 
 The `MANAGER STATUS` column shows node participation in the Raft consensus:
 
-* No value indicates a worker node that does not participate in swarm
+- No value indicates a worker node that does not participate in swarm
   management.
-* `Leader` means the node is the primary manager node that makes all swarm
+- `Leader` means the node is the primary manager node that makes all swarm
   management and orchestration decisions for the swarm.
-* `Reachable` means the node is a manager node participating in the Raft
+- `Reachable` means the node is a manager node participating in the Raft
   consensus quorum. If the leader node becomes unavailable, the node is eligible for
   election as the new leader.
-* `Unavailable` means the node is a manager that can't communicate with
+- `Unavailable` means the node is a manager that can't communicate with
   other managers. If a manager node becomes unavailable, you should either join a
   new manager node to the swarm or promote a worker node to be a
   manager.
@@ -87,19 +87,19 @@ Engine Version:         1.12.0-dev
 
 You can modify node attributes to:
 
-* [Change node availability](#change-node-availability)
-* [Add or remove label metadata](#add-or-remove-label-metadata)
-* [Change a node role](#promote-or-demote-a-node)
+- [Change node availability](#change-node-availability)
+- [Add or remove label metadata](#add-or-remove-label-metadata)
+- [Change a node role](#promote-or-demote-a-node)
 
 ### Change node availability
 
 Changing node availability lets you:
 
-* Drain a manager node so that it only performs swarm management tasks and is
+- Drain a manager node so that it only performs swarm management tasks and is
   unavailable for task assignment.
-* Drain a node so you can take it down for maintenance.
-* Pause a node so it can't receive new tasks.
-* Restore unavailable or paused nodes availability status.
+- Drain a node so you can take it down for maintenance.
+- Pause a node so it can't receive new tasks.
+- Restore unavailable or paused nodes availability status.
 
 For example, to change a manager node to `Drain` availability:
 
@@ -146,7 +146,7 @@ Engine labels, however, are still useful because some features that do not
 affect secure orchestration of containers might be better off set in a
 decentralized manner. For instance, an engine could have a label to indicate
 that it has a certain type of disk device, which may not be relevant to security
-directly. These labels are more easily "trusted" by the swarm orchestrator.
+directly. These labels are more readily "trusted" by the swarm orchestrator.
 
 Refer to the `docker service create` [CLI reference](/reference/cli/docker/service/create/)
 for more information about service constraints.
@@ -240,6 +240,6 @@ $ docker node rm node-2
 
 ## Learn more
 
-* [Swarm administration guide](admin_guide.md)
-* [Docker Engine command line reference](/reference/cli/docker/)
-* [Swarm mode tutorial](swarm-tutorial/_index.md)
+- [Swarm administration guide](admin_guide.md)
+- [Docker Engine command line reference](/reference/cli/docker/)
+- [Swarm mode tutorial](swarm-tutorial/_index.md)
