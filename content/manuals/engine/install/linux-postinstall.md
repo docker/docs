@@ -103,6 +103,30 @@ Docker service starts on boot by default. To automatically start Docker and
 containerd on boot for other Linux distributions using systemd, run the
 following commands:
 
+If you installed Docker from [binaries](binaries.md), the systemd service files
+aren't included. It is recommended to create them manually so Docker starts
+automatically on boot:
+
+```console
+$ sudo tee /etc/systemd/system/docker.service > /dev/null <<'EOF'
+[Unit]
+Description=Docker Application Container Engine
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/dockerd
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+EOF
+$ sudo systemctl daemon-reload
+```
+
+Then enable Docker and containerd to start on boot:
+
 ```console
 $ sudo systemctl enable docker.service
 $ sudo systemctl enable containerd.service
