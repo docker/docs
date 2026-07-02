@@ -171,7 +171,8 @@ structured_output:
 | `parallel_tool_calls` | boolean | Enable parallel tool execution (default: true) | No       |
 | `token_key`           | string  | Authentication token key                       | No       |
 | `track_usage`         | boolean | Track token usage                              | No       |
-| `thinking_budget`     | mixed   | Reasoning effort (provider-specific)           | No       |
+| `thinking_budget`        | mixed   | Reasoning effort (provider-specific)                                        | No       |
+| `compaction_model`       | string  | Model to use for session compaction (summary generation); defaults to the agent's own model | No |
 | `bypass_models_gateway`  | boolean | Connect directly to the provider, bypassing any configured models gateway   | No       |
 | `provider_opts`          | object  | Provider-specific options                                                   | No       |
 
@@ -182,6 +183,43 @@ Use multiple models in rotation by separating names with commas:
 ```yaml
 model: anthropic/claude-sonnet-4-5,openai/gpt-5
 ```
+
+### Compaction model
+
+By default, when a session is compacted (via `/compact`, the proactive
+threshold trigger, or post-overflow recovery), Docker Agent uses the agent's
+own model to summarize the conversation. That summary call ingests the entire
+conversation and is the slowest, most expensive call in a session.
+
+You can point `compaction_model` at a smaller, faster model to make compaction
+cheaper without changing the model that runs the conversation:
+
+```yaml
+models:
+  primary:
+    provider: anthropic
+    model: claude-sonnet-4-5
+    compaction_model: fast   # use the cheaper model for compaction
+  fast:
+    provider: anthropic
+    model: claude-haiku-4-5
+
+agents:
+  root:
+    model: primary
+    instruction: You are a helpful assistant.
+```
+
+The value can be a model name from the `models` section or an inline
+`provider/model` spec (for example `openai/gpt-5-mini`). When omitted,
+compaction reuses the agent's own model.
+
+> [!NOTE]
+> If the compaction model has a smaller context window than the primary model,
+> Docker Agent triggers compaction against the smaller window, so the summary
+> call can always ingest the full conversation. Pair the primary with a
+> compaction model whose context window is at least as large to keep the
+> proactive trigger aligned with the primary's window.
 
 ### Bypass models gateway
 
