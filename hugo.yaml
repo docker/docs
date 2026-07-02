@@ -32,6 +32,14 @@ cascade:
   - target:
       path: /reference/cli/sbx/**
     layout: sbx-cli
+  # Docker Agent section indexes are mounted navigation stubs; skip
+  # rendering them so they don't produce empty pages (same pattern as
+  # gordon/concepts and other render:never section indexes)
+  - target:
+      path: /manuals/ai/docker-agent/**
+      kind: section
+    build:
+      render: never
 
 # Remove the /manuals prefix for content in the manuals section
 permalinks:
