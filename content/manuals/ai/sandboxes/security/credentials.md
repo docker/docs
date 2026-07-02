@@ -108,6 +108,8 @@ checks and the API domains it authenticates requests to:
 | ----------- | ---------------------------------- | ----------------------------------- |
 | `anthropic` | `ANTHROPIC_API_KEY`                | `api.anthropic.com`                 |
 | `aws`       | `AWS_ACCESS_KEY_ID`                | AWS Bedrock endpoints               |
+| `cursor`    | `CURSOR_API_KEY`                   | `api2.cursor.sh`                    |
+| `droid`     | `FACTORY_API_KEY`                  | `factory.ai`                        |
 | `github`    | `GH_TOKEN`, `GITHUB_TOKEN`         | `api.github.com`, `github.com`      |
 | `google`    | `GEMINI_API_KEY`, `GOOGLE_API_KEY` | `generativelanguage.googleapis.com` |
 | `groq`      | `GROQ_API_KEY`                     | `api.groq.com`                      |
