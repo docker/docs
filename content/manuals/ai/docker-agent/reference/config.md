@@ -34,7 +34,7 @@ rag: # Optional - RAG sources
     docs: [./documents]
     strategies: [...]
 
-metadata: # Optional - author, license, readme
+metadata: # Optional - author, license, readme, version, tags
   author: Your Name
 ```
 
@@ -171,8 +171,10 @@ structured_output:
 | `parallel_tool_calls` | boolean | Enable parallel tool execution (default: true) | No       |
 | `token_key`           | string  | Authentication token key                       | No       |
 | `track_usage`         | boolean | Track token usage                              | No       |
-| `thinking_budget`     | mixed   | Reasoning effort (provider-specific)           | No       |
-| `provider_opts`       | object  | Provider-specific options                      | No       |
+| `thinking_budget`        | mixed   | Reasoning effort (provider-specific)                                        | No       |
+| `compaction_model`       | string  | Model to use for session compaction (summary generation); defaults to the agent's own model | No |
+| `bypass_models_gateway`  | boolean | Connect directly to the provider, bypassing any configured models gateway   | No       |
+| `provider_opts`          | object  | Provider-specific options                                                   | No       |
 
 ### Alloy models
 
@@ -181,6 +183,74 @@ Use multiple models in rotation by separating names with commas:
 ```yaml
 model: anthropic/claude-sonnet-4-5,openai/gpt-5
 ```
+
+### Compaction model
+
+By default, when a session is compacted (via `/compact`, the proactive
+threshold trigger, or post-overflow recovery), Docker Agent uses the agent's
+own model to summarize the conversation. That summary call ingests the entire
+conversation and is the slowest, most expensive call in a session.
+
+You can point `compaction_model` at a smaller, faster model to make compaction
+cheaper without changing the model that runs the conversation:
+
+```yaml
+models:
+  primary:
+    provider: anthropic
+    model: claude-sonnet-4-5
+    compaction_model: fast   # use the cheaper model for compaction
+  fast:
+    provider: anthropic
+    model: claude-haiku-4-5
+
+agents:
+  root:
+    model: primary
+    instruction: You are a helpful assistant.
+```
+
+The value can be a model name from the `models` section or an inline
+`provider/model` spec (for example `openai/gpt-5-mini`). When omitted,
+compaction reuses the agent's own model.
+
+> [!NOTE]
+> If the compaction model has a smaller context window than the primary model,
+> Docker Agent triggers compaction against the smaller window, so the summary
+> call can always ingest the full conversation. Pair the primary with a
+> compaction model whose context window is at least as large to keep the
+> proactive trigger aligned with the primary's window.
+
+### Bypass models gateway
+
+When a models gateway is configured (via `--models-gateway` or
+`CAGENT_MODELS_GATEWAY`), Docker Agent routes all model requests through it by
+default. Set `bypass_models_gateway: true` on a specific model to make it
+connect directly to its provider instead:
+
+```yaml
+models:
+  # Routed through the gateway when one is configured.
+  gateway-model:
+    provider: openai
+    model: gpt-5
+
+  # Always connects directly to Anthropic, even when a gateway is configured.
+  # Requires ANTHROPIC_API_KEY to be set.
+  direct-model:
+    provider: anthropic
+    model: claude-sonnet-4-5
+    bypass_models_gateway: true
+
+agents:
+  root:
+    model: direct-model
+    instruction: You are a helpful assistant.
+```
+
+A bypassed model authenticates with its own provider credentials
+(`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, or the explicit `token_key`) rather
+than the gateway's token.
 
 ### Thinking budget
 
@@ -534,16 +604,20 @@ Results:
 
 Documentation and sharing information:
 
-| Property  | Type   | Description                     |
-| --------- | ------ | ------------------------------- |
-| `author`  | string | Author name                     |
-| `license` | string | License (e.g., MIT, Apache-2.0) |
-| `readme`  | string | Usage documentation             |
+| Property  | Type     | Description                               |
+| --------- | -------- | ----------------------------------------- |
+| `author`  | string   | Author name                               |
+| `license` | string   | License (e.g., MIT, Apache-2.0)           |
+| `readme`  | string   | Usage documentation                       |
+| `version` | string   | Semantic version string                   |
+| `tags`    | []string | Tags for categorization and discovery     |
 
 ```yaml
 metadata:
   author: Your Name
   license: MIT
+  version: "1.0.0"
+  tags: [coding, review]
   readme: |
     Description and usage instructions
 ```
