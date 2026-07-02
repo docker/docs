@@ -14,6 +14,18 @@ tags: [Release notes]
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+## 2026-06-29
+
+### New
+
+- Docker Hub integrates with Cloudsmith, letting it handle authentication
+  for Docker Hub and Docker Hardened Images (DHI) upstreams using a managed
+  token. This removes the need to supply your own credentials during setup.
+  See Cloudsmith's announcement, [Set up Docker Hub and DHI upstreams with
+  Cloudsmith-managed
+  authentication](https://cloudsmith.com/changelog/set-up-docker-hub-and-dhi-upstreams-with-cloudsmith-managed-authentication),
+  for details.
+
 ## 2026-05-20
 
 ### Infrastructure updates
