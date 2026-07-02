@@ -104,17 +104,19 @@ $ echo "$ANTHROPIC_API_KEY" | sbx secret set -g anthropic
 Each built-in service name maps to a set of environment variables the proxy
 checks and the API domains it authenticates requests to:
 
-| Service     | Environment variables              | API domains                         |
-| ----------- | ---------------------------------- | ----------------------------------- |
-| `anthropic` | `ANTHROPIC_API_KEY`                | `api.anthropic.com`                 |
-| `aws`       | `AWS_ACCESS_KEY_ID`                | AWS Bedrock endpoints               |
-| `github`    | `GH_TOKEN`, `GITHUB_TOKEN`         | `api.github.com`, `github.com`      |
-| `google`    | `GEMINI_API_KEY`, `GOOGLE_API_KEY` | `generativelanguage.googleapis.com` |
-| `groq`      | `GROQ_API_KEY`                     | `api.groq.com`                      |
-| `mistral`   | `MISTRAL_API_KEY`                  | `api.mistral.ai`                    |
-| `nebius`    | `NEBIUS_API_KEY`                   | `api.studio.nebius.ai`              |
-| `openai`    | `OPENAI_API_KEY`                   | `api.openai.com`                    |
-| `xai`       | `XAI_API_KEY`                      | `api.x.ai`                          |
+| Service      | Environment variables              | API domains                                                                                                                   |
+| ------------ | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `anthropic`  | `ANTHROPIC_API_KEY`                | `api.anthropic.com`, `console.anthropic.com`, `claude.ai`, `mcp-proxy.anthropic.com`                                          |
+| `cursor`     | `CURSOR_API_KEY`                   | `api2.cursor.sh`, `api3.cursor.sh`, `repo42.cursor.sh`, `cursor.com`                                                          |
+| `droid`      | `FACTORY_API_KEY`                  | `api.factory.ai`, `app.factory.ai`, `relay.factory.ai`                                                                        |
+| `github`     | `GH_TOKEN`, `GITHUB_TOKEN`         | `api.github.com`, `github.com`, `raw.githubusercontent.com`, `gist.github.com`, `copilot.github.com`, `api.githubcopilot.com` |
+| `google`     | `GEMINI_API_KEY`, `GOOGLE_API_KEY` | `generativelanguage.googleapis.com`, `oauth2.googleapis.com`, `aiplatform.googleapis.com`, `vertexai.googleapis.com`          |
+| `groq`       | `GROQ_API_KEY`                     | `api.groq.com`                                                                                                                |
+| `mistral`    | `MISTRAL_API_KEY`                  | `api.mistral.ai`                                                                                                              |
+| `nebius`     | `NEBIUS_API_KEY`                   | `api.studio.nebius.com`, `api.tokenfactory.nebius.com`                                                                        |
+| `openai`     | `OPENAI_API_KEY`                   | `api.openai.com`, `openai.com`, `chatgpt.com`, `www.chatgpt.com`                                                              |
+| `openrouter` | `OPENROUTER_API_KEY`               | `openrouter.ai`                                                                                                               |
+| `xai`        | `XAI_API_KEY`                      | `api.x.ai`                                                                                                                    |
 
 When you store a secret with `sbx secret set -g <service>`, the proxy uses it
 the same way it would use the corresponding environment variable. You don't
