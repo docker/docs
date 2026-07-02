@@ -34,7 +34,7 @@ rag: # Optional - RAG sources
     docs: [./documents]
     strategies: [...]
 
-metadata: # Optional - author, license, readme
+metadata: # Optional - author, license, readme, version, tags
   author: Your Name
 ```
 
@@ -604,16 +604,20 @@ Results:
 
 Documentation and sharing information:
 
-| Property  | Type   | Description                     |
-| --------- | ------ | ------------------------------- |
-| `author`  | string | Author name                     |
-| `license` | string | License (e.g., MIT, Apache-2.0) |
-| `readme`  | string | Usage documentation             |
+| Property  | Type     | Description                               |
+| --------- | -------- | ----------------------------------------- |
+| `author`  | string   | Author name                               |
+| `license` | string   | License (e.g., MIT, Apache-2.0)           |
+| `readme`  | string   | Usage documentation                       |
+| `version` | string   | Semantic version string                   |
+| `tags`    | []string | Tags for categorization and discovery     |
 
 ```yaml
 metadata:
   author: Your Name
   license: MIT
+  version: "1.0.0"
+  tags: [coding, review]
   readme: |
     Description and usage instructions
 ```
