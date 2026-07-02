@@ -1752,6 +1752,47 @@ services:
 
 For more information, see [Use lifecycle hooks](/manuals/compose/how-tos/lifecycle.md).
 
+### pre_start
+
+{{< summary-bar feature_name="Compose pre_start" >}}
+
+`pre_start` defines a sequence of init containers to run before the service container is started. Each step runs to completion, in declared order, and the service container only starts once every step has exited `0`. A non-zero exit fails the bring-up of the service and its dependents.
+
+Unlike `post_start` and `pre_stop`, which run a command inside the running service container, each `pre_start` step runs in its own ephemeral container, created after the service container is created but before it is started. Possible values are:
+
+- `command`: The command to run. Optional when the chosen image's entrypoint already runs the intended command.
+- `image`: The image used for the ephemeral container. If omitted, the parent service's image is used.
+- `user`: The user to run the command. If not set, defaults to the user declared in `image` (or to the main service command's user when `image` is omitted).
+- `privileged`: Lets the `pre_start` command run with privileged access.
+- `working_dir`: The working directory in which to run the command. If not set, it is run in the same working directory as the main service command.
+- `environment`: Sets the environment variables to run the `pre_start` command. The command inherits the `environment` set for the service's main command, and this section lets you append or override values.
+- `per_replica: false`: Whether the hook runs once for the service as a whole before any replica starts.
+
+A `pre_start` container joins the same networks as the service, so it can reach services declared in `depends_on`, and shares the service's declared volume mounts so files it produces in a shared volume are visible to the service. With `per_replica: false` and a scaled service, only mounts that are shared across replicas (named volumes, bind mounts) are usable. Per-instance mounts (`tmpfs`, anonymous volumes) cannot be addressed by a single run.
+
+A `pre_start` step that has already succeeded for its current definition is not re-run on a subsequent `up`, nor when the service container restarts under its `restart` policy. A step runs again when its definition changes, when the previous run did not succeed, or when the service is recreated.
+
+```yaml
+services:
+  app:
+    image: myapp:latest
+    depends_on:
+      db:
+        condition: service_healthy
+    pre_start:
+      - command: ["./manage.py", "migrate"]
+      - image: busybox
+        command: sh -c 'chown -R 1000:1000 /data'
+    volumes:
+      - data:/data
+
+  db:
+    image: postgres:16
+
+volumes:
+  data:
+```
+
 ### `pre_stop`
 
 {{< summary-bar feature_name="Compose pre stop" >}}
