@@ -63,7 +63,7 @@ To create the `docker` group and add your user:
    You can also run the following command to activate the changes to groups:
 
    ```console
-   $ newgrp docker
+   $ sudo -u $USER bash
    ```
 
 4. Verify that you can run `docker` commands without `sudo`.
