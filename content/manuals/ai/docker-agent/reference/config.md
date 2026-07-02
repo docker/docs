@@ -172,7 +172,8 @@ structured_output:
 | `token_key`           | string  | Authentication token key                       | No       |
 | `track_usage`         | boolean | Track token usage                              | No       |
 | `thinking_budget`     | mixed   | Reasoning effort (provider-specific)           | No       |
-| `provider_opts`       | object  | Provider-specific options                      | No       |
+| `bypass_models_gateway`  | boolean | Connect directly to the provider, bypassing any configured models gateway   | No       |
+| `provider_opts`          | object  | Provider-specific options                                                   | No       |
 
 ### Alloy models
 
@@ -181,6 +182,37 @@ Use multiple models in rotation by separating names with commas:
 ```yaml
 model: anthropic/claude-sonnet-4-5,openai/gpt-5
 ```
+
+### Bypass models gateway
+
+When a models gateway is configured (via `--models-gateway` or
+`CAGENT_MODELS_GATEWAY`), Docker Agent routes all model requests through it by
+default. Set `bypass_models_gateway: true` on a specific model to make it
+connect directly to its provider instead:
+
+```yaml
+models:
+  # Routed through the gateway when one is configured.
+  gateway-model:
+    provider: openai
+    model: gpt-5
+
+  # Always connects directly to Anthropic, even when a gateway is configured.
+  # Requires ANTHROPIC_API_KEY to be set.
+  direct-model:
+    provider: anthropic
+    model: claude-sonnet-4-5
+    bypass_models_gateway: true
+
+agents:
+  root:
+    model: direct-model
+    instruction: You are a helpful assistant.
+```
+
+A bypassed model authenticates with its own provider credentials
+(`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, or the explicit `token_key`) rather
+than the gateway's token.
 
 ### Thinking budget
 
