@@ -1,10 +1,10 @@
 ---
 title: Publishing and exposing ports
 keywords: concepts, build, images, container, docker desktop
-description: This concept page will teach you the significance of publishing and exposing ports in Docker 
+description: This concept page will teach you the significance of publishing and exposing ports in Docker
 weight: 1
-aliases: 
- - /guides/docker-concepts/running-containers/publishing-ports/
+aliases:
+  - /guides/docker-concepts/running-containers/publishing-ports/
 ---
 
 {{< youtube-embed 9JnqOmJ96ds >}}
@@ -38,16 +38,32 @@ Now, any traffic sent to port `8080` on your host machine will be forwarded to p
 >
 > When a port is published, it's published to all network interfaces by default. This means any traffic that reaches your machine can access the published application. Be mindful of publishing databases or any sensitive information. [Learn more about published ports here](/engine/network/#published-ports).
 
+### Publishing to a specific network interface
+
+By default, Docker binds published ports to all network interfaces (`0.0.0.0`). To restrict a port to a specific interface, prepend the IP address to the host port in the `-p` flag:
+
+```console
+$ docker run -d -p HOST_IP:HOST_PORT:CONTAINER_PORT nginx
+```
+
+For example, to only allow local connections to port `8080`:
+
+```console
+$ docker run -d -p 127.0.0.1:8080:80 nginx
+```
+
+This is useful for restricting access to a service so it isn't reachable from external network interfaces.
+
 ### Publishing to ephemeral ports
 
-At times, you may want to simply publish the port but don’t care which host port is used. In these cases, you can let Docker pick the port for you. To do so, simply omit the `HOST_PORT` configuration. 
+At times, you may want to simply publish the port but don’t care which host port is used. In these cases, you can let Docker pick the port for you. To do so, simply omit the `HOST_PORT` configuration.
 
 For example, the following command will publish the container’s port `80` onto an ephemeral port on the host:
 
 ```console
 $ docker run -p 80 nginx
 ```
- 
+
 Once the container is running, using `docker ps` will show you the port that was chosen:
 
 ```console
@@ -60,7 +76,7 @@ In this example, the app is exposed on the host at port `54772`.
 
 ### Publishing all ports
 
-When creating a container image, the `EXPOSE` instruction is used to indicate the packaged application will use the specified port. These ports aren't published by default. 
+When creating a container image, the `EXPOSE` instruction is used to indicate the packaged application will use the specified port. These ports aren't published by default.
 
 With the `-P` or `--publish-all` flag, you can automatically publish all exposed ports to ephemeral ports. This is quite useful when you’re trying to avoid port conflicts in development or testing environments.
 
@@ -82,11 +98,11 @@ In this step, you will run a container and publish its port using the Docker CLI
 
 2. In a terminal, run the following command to start a new container:
 
-    ```console
-    $ docker run -d -p 8080:80 docker/welcome-to-docker
-    ```
+   ```console
+   $ docker run -d -p 8080:80 docker/welcome-to-docker
+   ```
 
-    The first `8080` refers to the host port. This is the port on your local machine that will be used to access the application running inside the container. The second `80` refers to the container port. This is the port that the application inside the container listens on for incoming connections. Hence, the command binds to port `8080` of the host to port `80` on the container system.
+   The first `8080` refers to the host port. This is the port on your local machine that will be used to access the application running inside the container. The second `80` refers to the container port. This is the port that the application inside the container listens on for incoming connections. Hence, the command binds to port `8080` of the host to port `80` on the container system.
 
 3. Verify the published port by going to the **Containers** view of the Docker Desktop Dashboard.
 
@@ -96,26 +112,25 @@ In this step, you will run a container and publish its port using the Docker CLI
 
    ![A screenshot of the landing page of the Nginx web server running in a container](/get-started/docker-concepts/the-basics/images/access-the-frontend.webp?border=true)
 
-
 ### Use Docker Compose
 
 This example will launch the same application using Docker Compose:
 
 1. Create a new directory and inside that directory, create a `compose.yaml` file with the following contents:
 
-    ```yaml
-    services:
-      app:
-        image: docker/welcome-to-docker
-        ports:
-          - 8080:80
-    ```
+   ```yaml
+   services:
+     app:
+       image: docker/welcome-to-docker
+       ports:
+         - 8080:80
+   ```
 
-    The `ports` configuration accepts a few different forms of syntax for the port definition. In this case, you’re using the same `HOST_PORT:CONTAINER_PORT` used in the `docker run` command.
+   The `ports` configuration accepts a few different forms of syntax for the port definition. In this case, you’re using the same `HOST_PORT:CONTAINER_PORT` used in the `docker run` command.
 
 2. Open a terminal and navigate to the directory you created in the previous step.
 
-3. Use the `docker compose up` command to start the application. 
+3. Use the `docker compose up` command to start the application.
 
 4. Open your browser to [http://localhost:8080](http://localhost:8080).
 
@@ -123,12 +138,11 @@ This example will launch the same application using Docker Compose:
 
 If you’d like to dive in deeper on this topic, be sure to check out the following resources:
 
-* [`docker container port` CLI reference](/reference/cli/docker/container/port/)
-* [Published ports](/engine/network/#published-ports)
+- [`docker container port` CLI reference](/reference/cli/docker/container/port/)
+- [Published ports](/engine/network/#published-ports)
 
 ## Next steps
 
 Now that you understand how to publish and expose ports, you're ready to learn how to override the container defaults using the `docker run` command.
 
 {{< button text="Overriding container defaults" url="overriding-container-defaults" >}}
-
