@@ -13,19 +13,17 @@ params:
 
 {{< summary-bar feature_name="Compose pre_start" >}}
 
-Init containersare short-lived containers that run before a service's main container starts. They execute sequentially, each running to completion before the next begins. If any step exits with a non-zero code, the service will not start.
+Init containers are short-lived containers that run before a service's main container starts. They execute sequentially, each running to completion before the next begins. If any step exits with a non-zero code, the service will not start.
 
 Use them for setup work that must finish before the application boots: running database migrations, fixing volume permissions, generating dynamic configuration, or executing any ordered sequence of prerequisites.
 
-
-Compose models init containers as [`pre_start`](/reference/compose-file/services.md#pre_start) lifecycle hooks. Unlike [`post_start`](/reference/compose-file/services.md#post_start) and [`pre_stop`](/reference/compose-file/services.md#pre_stop), which run a command inside the running service container, each `pre_start` step runs in its own ephemeral container created after the service container is created
-but before it is started.
+Compose models init containers as [`pre_start`](/reference/compose-file/services.md#pre_start) lifecycle hooks. Unlike [`post_start`](/reference/compose-file/services.md#post_start) and [`pre_stop`](/reference/compose-file/services.md#pre_stop), which run a command inside the running service container, each `pre_start` step runs in its own ephemeral container created after the service container is created but before it is started.
 
 ## When not to use init containers
 
-For static files and secrets, use the native [`configs`](/reference/compose-file/configs.md) and [`secrets`](/reference/compose-file/secrets.md) top-level elements instead. Compose mounts them directly into containers with a configurable target path, mode, UID, and GID.
+For static files and secrets, use the native [`configs`](/reference/compose-file/configs.md) and [`secrets`](/reference/compose-file/secrets.md) top-level elements instead. Compose mounts them directly into containers with a configurable target path, mode, UID, and GID. No init container required.
 
-For background tasks with their own lifecycle. For example, scheduled backups, post-exit cleanup, periodic maintenance. Those tasks run independently of a service's startup sequence.
+For background tasks with their own lifecycle - scheduled backups, post-exit cleanup, periodic maintenance — init containers are the wrong tool. Those tasks run independently of service startup, not before it.
 
 ## How `pre_start` containers run
 
@@ -37,7 +35,7 @@ Each step in a service's `pre_start` list:
 - Shares the service's volume mounts, so files written to a shared volume are immediately visible to the service.
 - Must exit `0` for the next step, and the service itself, to start. A non-zero exit aborts startup for the service and anything that depends on it.
 
-A `pre_start` step is skipped on subsequent `docker compose up` runs if it previously succeeded and its definition hasn't changed nor when the service container restarts under its `restart` policy. It reruns if the definition changes, the previous run failed, or the service is recreated with `--force-recreate`.
+A `pre_start` step is skipped on subsequent `docker compose up` runs if it previously succeeded, its definition hasn't changed, or when the service container restarts under its `restart` policy. It reruns if the definition changes, the previous run failed, or the service is recreated with `--force-recreate`.
 
 ## Examples
 
@@ -156,19 +154,14 @@ services:
 - Chaining several setup steps does not require a web of `depends_on` edges between one-shot services.
 - The ephemeral container inherits the service's image by default, so no duplicate `image:` declaration is needed.
 
-The one-shot service pattern still has its place when the setup work is a shared concern that multiple services depend on, or when it needs to be addressed independently of any single service.
+The one-shot service pattern still has its place when the setup work is a shared concern that multiple services depend on, or when it needs to be addressable independently of any single service.
 
 ## Limitations
 
-- `pre_start` supports running the hook once for the service as a whole
-  (`per_replica: false`). Running a `pre_start` step once per replica
-  (`per_replica: true`) is not yet supported.
-- Volume mounts shared across replicas (named volumes, bind mounts) are
-  reachable from a `pre_start` step. Per-instance mounts such as `tmpfs`
+- `pre_start` uns once for the service as a whole, not once per replica (`per_replica: false`). Per-replica execution (`per_replica: true`) is not yet supported.
+- Volume mounts shared across replicas (named volumes, bind mounts) are accessible from a `pre_start` step. Per-instance mounts such as `tmpfs`
   or anonymous volumes cannot be addressed by a single shared run.
-- `pre_start` is not re-triggered when you scale a service up. The step
-  runs again only on definition change, prior failure, or
-  `--force-recreate`.
+- `pre_start` does not re-trigger when you scale a service up. A step runs again only on definition change, prior failure, or `--force-recreate`.
 
 ## Reference and additional information
 
