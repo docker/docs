@@ -115,6 +115,30 @@ $ sudo systemctl disable docker.service
 $ sudo systemctl disable containerd.service
 ```
 
+If you installed Docker from [binaries](binaries.md), the systemd service files
+aren't included. It is recommended to create the Docker service file manually so
+Docker starts automatically on boot. The `dockerd` daemon manages containerd
+directly, so a separate containerd service is not required.
+
+```console
+$ sudo tee /etc/systemd/system/docker.service > /dev/null <<'EOF'
+[Unit]
+Description=Docker Application Container Engine
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/dockerd
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+EOF
+$ sudo systemctl daemon-reload
+$ sudo systemctl enable --now docker.service
+```
+
 You can use systemd unit files to configure the Docker service on startup,
 for example to add an HTTP proxy, set a different directory or partition for the
 Docker runtime files, or other customizations. For an example, see
