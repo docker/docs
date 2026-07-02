@@ -186,20 +186,16 @@ the egress path in the **PROXY** column:
 
 ## Sandbox runs out of disk space
 
-The sandbox root (`/`) filesystem defaults to 20 GB. Workloads that write large amounts of data
-to the root filesystem — such as Nix (which installs packages under `/nix/store`), large package
-installations, or build artifacts — can exhaust this limit even when
-`DOCKER_SANDBOXES_DOCKER_SIZE` has been increased. That variable only sizes the Docker data disk
-(`/var/lib/docker`), not the root filesystem.
+The sandbox root (`/`) filesystem defaults to 20 GB. `DOCKER_SANDBOXES_DOCKER_SIZE` only sizes the
+Docker data disk (`/var/lib/docker`) — it does not affect this limit.
 
-To increase the root filesystem size, set `DOCKER_SANDBOXES_ROOT_SIZE` before creating the sandbox:
+To configure the root filesystem size, set `DOCKER_SANDBOXES_ROOT_SIZE` before creating the sandbox:
 
 ```console
 $ DOCKER_SANDBOXES_ROOT_SIZE=40g sbx run claude
 ```
 
-`DOCKER_SANDBOXES_ROOT_SIZE` and `DOCKER_SANDBOXES_DOCKER_SIZE` are independent — set both if your
-workload needs more space on both the root filesystem and the Docker data disk.
+The two variables are independent — set both if you need extra space on `/` and `/var/lib/docker`.
 
 ## Filesystem operations are slow in large repositories
 
