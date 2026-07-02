@@ -238,6 +238,7 @@ sysctls
 Sysdig
 systemd
 teleop
+Temurin
 Testcontainers
 tmpfs
 Traefik
