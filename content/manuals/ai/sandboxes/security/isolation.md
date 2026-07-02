@@ -165,8 +165,13 @@ flowchart LR
 How the boundary is enforced:
 
 - Your repository's Git root is mounted at `/run/sandbox/source` as
-  read-only. Nothing the agent does inside the VM can write back through
-  that mount.
+  read-only. The mount covers your entire working directory, including
+  untracked files and files excluded by `.gitignore`. Nothing the agent
+  does inside the VM can write back through that mount, but all files
+  under the Git root are readable inside the sandbox. This includes
+  credential files not tracked by Git, such as `.env`. Store
+  secrets outside your working directory or use
+  [credential isolation](credentials.md) instead.
 - The agent works on a private clone that lives inside the sandbox. The
   clone has its own index, its own refs, and its own working tree. Writes
   to the clone never reach your host.
