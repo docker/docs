@@ -2,7 +2,7 @@
 title: FAQ
 weight: 70
 description: Frequently asked questions about Docker Sandboxes.
-keywords: docker sandboxes, sbx, faq, sign in, telemetry, clipboard, image paste, pricing, commercial use
+keywords: docker sandboxes, sbx, faq, sign in, telemetry, clipboard, image paste, pricing, commercial use, allowlist, firewall, domains, proxy
 ---
 
 ## Is Docker Sandboxes free? Can I use it commercially?
@@ -49,6 +49,24 @@ See [Organization governance](governance/org.md). This feature requires
 a separate paid subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
 to get started.
+
+## Which domains do I need to allow for Docker Sandboxes to work?
+
+If your organization restricts outbound network access with a firewall or
+proxy, add the following domains to your allowlist so that `sbx` can
+authenticate, pull images, and report diagnostics.
+
+| Domain                                             | Description             |
+| -------------------------------------------------- | ----------------------- |
+| https://login.docker.com                           | Authentication          |
+| https://hub.docker.com                             | Docker Hub              |
+| https://api.docker.com                             | Docker API              |
+| https://marlin-2.docker.com                        | Telemetry               |
+| https://marlin-api.docker.com                      | Telemetry               |
+| https://registry-1.docker.io                       | Docker pull/push        |
+| https://auth.docker.io                             | Registry authentication |
+| https://dhi.io                                     | Docker Hardened Images  |
+| https://sbx-diagnostics.s3.us-east-1.amazonaws.com | Diagnostics upload      |
 
 ## Does the CLI collect telemetry?
 
