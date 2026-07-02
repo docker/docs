@@ -66,7 +66,7 @@ To remove a single payment method:
 1. Find the payment method you want to remove from the **Payment method** table.
 1. Select the three dots, then choose **Remove**.
 
-To remove your default payment method, first set a different payment method as default, or [downgrade to a free subscription](/manuals/subscription/change.md).
+To remove your default payment method, first set a different payment method as default, or [downgrade to a free subscription](/manuals/subscription/plans/docker.md#cancel-a-docker-plan).
 
 ## Enable and disable pay by invoice
 
