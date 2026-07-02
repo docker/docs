@@ -5,6 +5,15 @@ exports.handler = (event, context, callback) => {
     const request = event.Records[0].cf.request;
     const requestUrl = request.uri.replace(/\/$/, "")
 
+    // Preserve the query string (e.g. UTM tags) when issuing a redirect.
+    const withQuery = (location) => {
+        if (!request.querystring) {
+            return location;
+        }
+        const separator = location.includes('?') ? '&' : '?';
+        return location + separator + request.querystring;
+    };
+
     const redirects = JSON.parse(`{{.RedirectsJSON}}`);
     for (let key in redirects) {
         const redirectTarget = key.replace(/\/$/, "")
@@ -18,7 +27,7 @@ exports.handler = (event, context, callback) => {
             headers: {
                 location: [{
                     key: 'Location',
-                    value: redirects[key],
+                    value: withQuery(redirects[key]),
                 }],
             },
         }
@@ -44,7 +53,7 @@ exports.handler = (event, context, callback) => {
             headers: {
                 location: [{
                     key: 'Location',
-                    value: newlocation,
+                    value: withQuery(newlocation),
                 }],
             },
         }
