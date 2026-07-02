@@ -1,0 +1,214 @@
+- section: Getting Started
+  items:
+    - title: Introduction
+      url: /getting-started/introduction/
+    - title: Installation
+      url: /getting-started/installation/
+    - title: Quick Start
+      url: /getting-started/quickstart/
+
+- section: Core Concepts
+  items:
+    - title: Agents
+      url: /concepts/agents/
+    - title: Models
+      url: /concepts/models/
+    - title: Tools
+      url: /concepts/tools/
+    - title: Multi-Agent
+      url: /concepts/multi-agent/
+    - title: Agent Distribution
+      url: /concepts/distribution/
+
+- section: Configuration
+  items:
+    - title: Overview
+      url: /configuration/overview/
+    - title: HCL Configuration
+      url: /configuration/hcl/
+    - title: Agent Config
+      url: /configuration/agents/
+    - title: Model Config
+      url: /configuration/models/
+    - title: Tool Config
+      url: /configuration/tools/
+    - title: Hooks
+      url: /configuration/hooks/
+    - title: Permissions
+      url: /configuration/permissions/
+    - title: Sandbox Mode
+      url: /configuration/sandbox/
+    - title: Structured Output
+      url: /configuration/structured-output/
+    - title: Model Routing
+      url: /configuration/routing/
+
+- section: Built-in Tools
+  groups:
+    - label: File & Shell
+      items:
+        - title: Filesystem
+          url: /tools/filesystem/
+        - title: Shell
+          url: /tools/shell/
+        - title: Script
+          url: /tools/script/
+        - title: Open URL
+          url: /tools/open-url/
+        - title: Fetch
+          url: /tools/fetch/
+    - label: Agent Coordination
+      items:
+        - title: A2A
+          url: /tools/a2a/
+        - title: Handoff
+          url: /tools/handoff/
+        - title: Transfer Task
+          url: /tools/transfer-task/
+        - title: Background Agents
+          url: /tools/background-agents/
+    - label: Memory & Knowledge
+      items:
+        - title: Memory
+          url: /tools/memory/
+        - title: RAG
+          url: /tools/rag/
+        - title: MCP Catalog
+          url: /tools/mcp-catalog/
+        - title: MCP
+          url: /tools/mcp/
+    - label: Planning & Reasoning
+      items:
+        - title: Think
+          url: /tools/think/
+        - title: Plan
+          url: /tools/plan/
+        - title: Session Plan
+          url: /tools/session_plan/
+        - title: Todo
+          url: /tools/todo/
+        - title: Tasks
+          url: /tools/tasks/
+    - label: Interaction
+      items:
+        - title: User Prompt
+          url: /tools/user-prompt/
+        - title: Model Picker
+          url: /tools/model-picker/
+        - title: Session Context
+          url: /tools/session_context/
+        - title: LSP
+          url: /tools/lsp/
+        - title: OpenAPI
+          url: /tools/openapi/
+        - title: API
+          url: /tools/api/
+
+- section: Features
+  items:
+    - title: Terminal UI
+      url: /features/tui/
+    - title: Snapshots
+      url: /features/snapshots/
+    - title: CLI Reference
+      url: /features/cli/
+    - title: MCP Mode
+      url: /features/mcp-mode/
+    - title: Coding Harnesses
+      url: /features/harnesses/
+    - title: A2A Protocol
+      url: /features/a2a/
+    - title: ACP
+      url: /features/acp/
+    - title: API Server
+      url: /features/api-server/
+    - title: Chat Server
+      url: /features/chat-server/
+    - title: Evaluation
+      url: /features/evaluation/
+    - title: Skills
+      url: /features/skills/
+    - title: Remote MCP Servers
+      url: /features/remote-mcp/
+
+- section: Model Providers
+  items:
+    - title: Overview
+      url: /providers/overview/
+    - title: Anthropic
+      url: /providers/anthropic/
+    - title: AWS Bedrock
+      url: /providers/bedrock/
+    - title: Baseten
+      url: /providers/baseten/
+    - title: Cerebras
+      url: /providers/cerebras/
+    - title: Cloudflare AI Gateway
+      url: /providers/cloudflare-ai-gateway/
+    - title: Cloudflare Workers AI
+      url: /providers/cloudflare-workers-ai/
+    - title: DeepSeek
+      url: /providers/deepseek/
+    - title: Docker Model Runner
+      url: /providers/dmr/
+    - title: Fireworks AI
+      url: /providers/fireworks/
+    - title: GitHub Copilot
+      url: /providers/github-copilot/
+    - title: Google Gemini
+      url: /providers/google/
+    - title: Groq
+      url: /providers/groq/
+    - title: Hugging Face
+      url: /providers/huggingface/
+    - title: Local Models
+      url: /providers/local/
+    - title: MiniMax
+      url: /providers/minimax/
+    - title: Mistral
+      url: /providers/mistral/
+    - title: Moonshot AI
+      url: /providers/moonshot/
+    - title: Nebius
+      url: /providers/nebius/
+    - title: OpenAI
+      url: /providers/openai/
+    - title: OpenCode Go
+      url: /providers/opencode-go/
+    - title: OpenCode Zen
+      url: /providers/opencode-zen/
+    - title: OpenRouter
+      url: /providers/openrouter/
+    - title: OVHcloud
+      url: /providers/ovhcloud/
+    - title: Together AI
+      url: /providers/together/
+    - title: Vercel AI Gateway
+      url: /providers/vercel/
+    - title: "xAI (Grok)"
+      url: /providers/xai/
+    - title: Provider Definitions
+      url: /providers/custom/
+
+- section: Resources
+  groups:
+    - label: Guides
+      items:
+        - title: Tips & Best Practices
+          url: /guides/tips/
+        - title: Thinking / Reasoning
+          url: /guides/thinking/
+        - title: Managing Secrets
+          url: /guides/secrets/
+        - title: Go SDK
+          url: /guides/go-sdk/
+    - label: Community
+      items:
+        - title: Contributing
+          url: /community/contributing/
+        - title: Troubleshooting
+          url: /community/troubleshooting/
+        - title: Telemetry
+          url: /community/telemetry/
+        - title: OpenTelemetry Tracing
+          url: /community/opentelemetry/

@@ -1,0 +1,7 @@
+_site
+.jekyll-cache
+pages
+node_modules
+recordings
+DEVELOPMENT.md
+TODO.md

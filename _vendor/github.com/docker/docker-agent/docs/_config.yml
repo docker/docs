@@ -1,0 +1,52 @@
+title: Docker Agent
+tagline: Run AI agents like containers.
+description: Run AI agents from a YAML file. Define them once, share them through any OCI registry, and run them anywhere — by Docker.
+url: "https://docker.github.io"
+baseurl: "/docker-agent"
+
+# Use kramdown (GitHub Pages default) with GFM
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+
+# Plugins supported by GitHub Pages
+plugins:
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+  - jekyll-readme-index
+  - jekyll-seo-tag
+
+relative_links:
+  enabled: true
+  collections: true
+
+# Don't process these
+exclude:
+  - DEVELOPMENT.md
+  - TODO.md
+  - STYLE.md
+  - recordings/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - pages/
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - .markdownlint-cli2.yaml
+  - .prettierrc
+  - .prettierignore
+  - _config.dev.yml
+  - Dockerfile
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Collections for organized content
+collections_dir: ""

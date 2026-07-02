@@ -1,0 +1,3 @@
+# Override for local development preview
+# Clears the baseurl so pages are served at the root
+baseurl: ""

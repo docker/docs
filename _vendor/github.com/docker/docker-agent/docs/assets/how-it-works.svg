@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Docker Agent runtime flow:
+  agent.yaml → docker agent run → (Model ↔ Tools ↔ Sub-agents loop) → Streamed output
+
+  Embedded as <img>, so currentColor does NOT inherit from the host
+  page. Hard-code text/stroke colors to docs.docker.com gray-600
+  (#566581) — the same neutral mid-grey that reads on both the light
+  page background (#E7EAEF) and the dark page background (#10151B).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 240" role="img"
+     aria-label="Docker Agent runtime flow: a YAML config is run by the docker agent CLI, which loops through model, tools and sub-agents, and streams results back."
+     font-family="Roboto Flex, Roboto, -apple-system, sans-serif"
+     fill="#566581" stroke="#566581">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2560FF" stroke="none"/>
+    </marker>
+  </defs>
+
+  <!-- 1. YAML config -->
+  <g transform="translate(20,90)">
+    <rect width="140" height="60" rx="10" fill="none" stroke="#2560FF" stroke-width="1.5"/>
+    <text x="70" y="28" text-anchor="middle" font-size="13" font-weight="700" stroke="none">agent.yaml</text>
+    <text x="70" y="46" text-anchor="middle" font-size="11" opacity="0.7" stroke="none">your config</text>
+  </g>
+
+  <!-- arrow 1 -->
+  <line x1="160" y1="120" x2="200" y2="120" stroke="#2560FF" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- 2. CLI -->
+  <g transform="translate(200,90)">
+    <rect width="160" height="60" rx="10" fill="#2560FF" stroke="#2560FF" stroke-width="1.5"/>
+    <text x="80" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" stroke="none" font-family="Roboto Mono, monospace">docker agent run</text>
+    <text x="80" y="46" text-anchor="middle" font-size="11" fill="#ffffff" opacity="0.85" stroke="none">runtime</text>
+  </g>
+
+  <!-- arrow 2 -->
+  <line x1="360" y1="120" x2="400" y2="120" stroke="#2560FF" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- 3. Loop -->
+  <g transform="translate(400,30)">
+    <rect width="320" height="180" rx="14" fill="rgba(37, 96, 255, 0.08)" stroke="#2560FF" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="160" y="22" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="0.08em" fill="#2560FF" stroke="none">REASONING LOOP</text>
+
+    <g transform="translate(20,40)">
+      <rect width="84" height="52" rx="8" fill="rgba(37, 96, 255, 0.06)" stroke="#566581" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="42" y="24" text-anchor="middle" font-size="12" font-weight="700" stroke="none">Model</text>
+      <text x="42" y="40" text-anchor="middle" font-size="10" opacity="0.7" stroke="none">LLM call</text>
+    </g>
+
+    <g transform="translate(118,40)">
+      <rect width="84" height="52" rx="8" fill="rgba(37, 96, 255, 0.06)" stroke="#566581" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="42" y="24" text-anchor="middle" font-size="12" font-weight="700" stroke="none">Tools</text>
+      <text x="42" y="40" text-anchor="middle" font-size="10" opacity="0.7" stroke="none">fs / shell / MCP</text>
+    </g>
+
+    <g transform="translate(216,40)">
+      <rect width="84" height="52" rx="8" fill="rgba(37, 96, 255, 0.06)" stroke="#566581" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="42" y="24" text-anchor="middle" font-size="12" font-weight="700" stroke="none">Sub-agents</text>
+      <text x="42" y="40" text-anchor="middle" font-size="10" opacity="0.7" stroke="none">delegation</text>
+    </g>
+
+    <path d="M104,66 C 110,76 132,76 138,66" fill="none" stroke="#2560FF" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <path d="M202,66 C 208,76 230,76 236,66" fill="none" stroke="#2560FF" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <path d="M280,98 C 280,140 60,140 60,98" fill="none" stroke="#2560FF" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <text x="160" y="158" text-anchor="middle" font-size="10" opacity="0.7" stroke="none">repeats until task is done</text>
+  </g>
+
+  <!-- arrow 3 -->
+  <line x1="720" y1="120" x2="760" y2="120" stroke="#2560FF" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- 4. Output -->
+  <g transform="translate(760,90)">
+    <rect width="100" height="60" rx="10" fill="none" stroke="#2560FF" stroke-width="1.5"/>
+    <text x="50" y="28" text-anchor="middle" font-size="13" font-weight="700" stroke="none">Stream</text>
+    <text x="50" y="46" text-anchor="middle" font-size="11" opacity="0.7" stroke="none">to TUI / API</text>
+  </g>
+</svg>
