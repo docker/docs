@@ -32,6 +32,14 @@ cascade:
   - target:
       path: /reference/cli/sbx/**
     layout: sbx-cli
+  # Docker Agent section indexes are mounted navigation stubs; skip
+  # rendering them so they don't produce empty pages (same pattern as
+  # gordon/concepts and other render:never section indexes)
+  - target:
+      path: /manuals/ai/docker-agent/**
+      kind: section
+    build:
+      render: never
 
 # Remove the /manuals prefix for content in the manuals section
 permalinks:
@@ -385,3 +393,27 @@ module:
         - source: cmd/cli/docs/reference
           target: data/cli/model
           files: ["*.yaml"]
+
+    # Docker Agent
+    # Single-sources https://docker.github.io/docker-agent/ content;
+    # bumped on each docker-agent release by sync-docker-agent-docs.yml.
+    - path: github.com/docker/docker-agent
+      mounts:
+        - source: docs/getting-started
+          target: content/manuals/ai/docker-agent/getting-started
+        - source: docs/concepts
+          target: content/manuals/ai/docker-agent/concepts
+        - source: docs/configuration
+          target: content/manuals/ai/docker-agent/configuration
+        - source: docs/tools
+          target: content/manuals/ai/docker-agent/tools
+        - source: docs/providers
+          target: content/manuals/ai/docker-agent/providers
+        - source: docs/features
+          target: content/manuals/ai/docker-agent/features
+        - source: docs/guides
+          target: content/manuals/ai/docker-agent/guides
+        - source: docs/community
+          target: content/manuals/ai/docker-agent/community
+        - source: docs/demo.gif
+          target: content/manuals/ai/docker-agent/demo.gif
