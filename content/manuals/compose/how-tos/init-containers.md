@@ -158,7 +158,7 @@ The one-shot service pattern still has its place when the setup work is a shared
 
 ## Limitations
 
-- `pre_start` uns once for the service as a whole, not once per replica (`per_replica: false`). Per-replica execution (`per_replica: true`) is not yet supported.
+- `pre_start` runs once for the service as a whole, not once per replica (`per_replica: false`). Per-replica execution (`per_replica: true`) is not yet supported.
 - Volume mounts shared across replicas (named volumes, bind mounts) are accessible from a `pre_start` step. Per-instance mounts such as `tmpfs`
   or anonymous volumes cannot be addressed by a single shared run.
 - `pre_start` does not re-trigger when you scale a service up. A step runs again only on definition change, prior failure, or `--force-recreate`.
