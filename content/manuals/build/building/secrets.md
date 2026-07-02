@@ -265,12 +265,12 @@ $ docker build \
   https://github.com/example/todo-app.git
 ```
 
-## HTTP authentication for `COPY` and `ADD`
+## HTTP authentication for `ADD`
 
-To use secrets in `COPY` or `ADD` commands, you can create
-`HTTP_AUTH_TOKEN_<host>` or `HTTP_AUTH_HEADER_<host>` secrets for use when
-accessing the specified host. For example `HTTP_AUTH_TOKEN_127.0.0.1=token` will
-make requests to `127.0.0.1` add a header `Authorization: Bearer token`.
+To use secrets in `ADD` commands you can create `HTTP_AUTH_TOKEN_<host>` or
+`HTTP_AUTH_HEADER_<host>` secrets for use when accessing the specified host. For
+example `HTTP_AUTH_TOKEN_127.0.0.1=token` will make requests to `127.0.0.1` add
+a header `Authorization: Bearer token`.
 
 These variables follow the same convention as the [Git HTTP authentication
 scheme](#http-authentication-scheme) handling.
