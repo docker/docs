@@ -52,14 +52,20 @@ jobs:
         if: steps.get-version.outputs.version != steps.get-version.outputs.current
         uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4
       -
+        # Pin the new version directly in go.mod: hugo mod get would
+        # record the module's full transitive graph as indirect requires,
+        # while hugo mod vendor alone only resolves the mounted docs.
+        name: Update pin
+        if: steps.get-version.outputs.version != steps.get-version.outputs.current
+        run: |
+          go mod edit -require "${MODULE_NAME}@${{ steps.get-version.outputs.version }}"
+      -
         name: Vendor module
         if: steps.get-version.outputs.version != steps.get-version.outputs.current
         uses: docker/bake-action@82490499d2e5613fcead7e128237ef0b0ea210f7 # v7
         with:
           targets: vendor
           provenance: false
-          set: |
-            *.args.MODULE=${{ env.MODULE_NAME }}@${{ steps.get-version.outputs.version }}
       -
         name: Detect changes
         id: changes
