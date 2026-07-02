@@ -321,6 +321,7 @@ Zsh
 README
 [Rr]eal-time
 [Rr]egex(es)?
+[Rr]uleset(s)?
 [Rr]untimes?
 [Ss]andbox(ed)?
 [Ss]eccomp
