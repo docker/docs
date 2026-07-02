@@ -24,18 +24,19 @@ $ docker buildx build --push -t <registry>/<image> \
 The following table describes the available CSV parameters that you can pass to
 `--cache-to` and `--cache-from`.
 
-| Name                | Option       | Type                    | Default | Description                                                                                                                     |
-|---------------------|--------------|-------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------|
-| `src`               | `cache-from` | String                  |         | Path of the local directory where cache gets imported from.                                                                     |
-| `digest`            | `cache-from` | String                  |         | Digest of manifest to import, see [cache versioning][4].                                                                        |
-| `dest`              | `cache-to`   | String                  |         | Path of the local directory where cache gets exported to.                                                                       |
-| `mode`              | `cache-to`   | `min`,`max`             | `min`   | Cache layers to export, see [cache mode][1].                                                                                    |
-| `oci-mediatypes`    | `cache-to`   | `true`,`false`          | `true`  | Use OCI media types in exported manifests, see [OCI media types][2].                                                            |
-| `image-manifest`    | `cache-to`   | `true`,`false`          | `true`  | When using OCI media types, generate an image manifest instead of an image index for the cache image, see [OCI media types][2]. |
-| `compression`       | `cache-to`   | `gzip`,`estargz`,`zstd` | `gzip`  | Compression type, see [cache compression][3].                                                                                   |
-| `compression-level` | `cache-to`   | `0..22`                 |         | Compression level, see [cache compression][3].                                                                                  |
-| `force-compression` | `cache-to`   | `true`,`false`          | `false` | Forcibly apply compression, see [cache compression][3].                                                                         |
-| `ignore-error`      | `cache-to`   | Boolean                 | `false` | Ignore errors caused by failed cache exports.                                                                                   |
+| Name                | Option                  | Type                    | Default  | Description                                                                                                                     |
+| ------------------- | ----------------------- | ----------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `src`               | `cache-from`            | String                  |          | Path of the local directory where cache gets imported from.                                                                     |
+| `digest`            | `cache-from`            | String                  |          | Digest of manifest to import, see [cache versioning][4].                                                                        |
+| `tag`               | `cache-to`, `cache-from` | String                  | `latest` | Custom tag for the cache image in the local index, see [cache versioning][4].                                                   |
+| `dest`              | `cache-to`              | String                  |          | Path of the local directory where cache gets exported to.                                                                       |
+| `mode`              | `cache-to`              | `min`,`max`             | `min`    | Cache layers to export, see [cache mode][1].                                                                                    |
+| `oci-mediatypes`    | `cache-to`              | `true`,`false`          | `true`   | Use OCI media types in exported manifests, see [OCI media types][2].                                                            |
+| `image-manifest`    | `cache-to`              | `true`,`false`          | `true`   | When using OCI media types, generate an image manifest instead of an image index for the cache image, see [OCI media types][2]. |
+| `compression`       | `cache-to`              | `gzip`,`estargz`,`zstd` | `gzip`   | Compression type, see [cache compression][3].                                                                                   |
+| `compression-level` | `cache-to`              | `0..22`                 |          | Compression level, see [cache compression][3].                                                                                  |
+| `force-compression` | `cache-to`              | `true`,`false`          | `false`  | Forcibly apply compression, see [cache compression][3].                                                                         |
+| `ignore-error`      | `cache-to`              | Boolean                 | `false`  | Ignore errors caused by failed cache exports.                                                                                   |
 
 [1]: _index.md#cache-mode
 [2]: _index.md#oci-media-types
@@ -46,8 +47,6 @@ If the `src` cache doesn't exist, then the cache import step will fail, but the
 build continues.
 
 ## Cache versioning
-
-<!-- FIXME: update once https://github.com/moby/buildkit/pull/3111 is released -->
 
 This section describes how versioning works for caches on a local filesystem,
 and how you can use the `digest` parameter to use older versions of cache.
@@ -80,6 +79,27 @@ available in the `blobs` directory. These old caches are addressable by digest,
 and kept indefinitely. Therefore, the size of the local cache will continue to
 grow (see [`moby/buildkit#1896`](https://github.com/moby/buildkit/issues/1896)
 for more information).
+
+When using the local cache backend with `--cache-to`, you can use the `tag`
+parameter to name the cache reference recorded in the local OCI layout's
+`index.json` (via `org.opencontainers.image.ref.name`), not the built image
+tag. This lets you store multiple cache outputs in the same directory by
+using different cache reference names; reusing the same `tag` will update that
+reference in `index.json`.
+
+```console
+$ docker buildx build --push -t <registry>/<image> \
+  --cache-to type=local,dest=path/to/local/dir,tag=cache-v1 \
+  --cache-to type=local,dest=path/to/local/dir,tag=cache-v2
+```
+
+To import a cache with a specific tag, pass the `tag` parameter to
+`--cache-from`:
+
+```console
+$ docker buildx build --push -t <registry>/<image> \
+  --cache-from type=local,src=path/to/local/dir,tag=cache-v1
+```
 
 When importing cache using `--cache-from`, you can specify the `digest` parameter
 to force loading an older version of the cache, for example:
