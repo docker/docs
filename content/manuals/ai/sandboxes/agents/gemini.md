@@ -38,9 +38,11 @@ Gemini requires either a Google API key or a Google account with Gemini access.
 $ sbx secret set -g google
 ```
 
-Alternatively, export the `GEMINI_API_KEY` or `GOOGLE_API_KEY` environment
-variable in your shell before running the sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
+You can also source the key from the `GEMINI_API_KEY` or `GOOGLE_API_KEY`
+environment variable through a
+[credential binding](../security/credentials.md#credential-bindings); the
+sandbox prompts you to approve one on first run. See
+[Credentials](../security/credentials.md) for details.
 
 **Google account**: If no API key is set, Gemini prompts you to sign in
 interactively when it starts. Interactive authentication is scoped to the

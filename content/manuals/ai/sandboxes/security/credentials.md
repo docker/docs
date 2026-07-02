@@ -21,17 +21,22 @@ declares the match and the header; you provide the value on the host. The real
 value never enters the sandbox — the agent sees only a sentinel like
 `proxy-managed`.
 
-There are several ways to provide that value. When more than one source has a
-value for the same service, the stored secret takes precedence over a host
-environment variable.
+There are several ways to provide that value. For built-in agents, a
+[credential bindings](#credential-bindings) entry authorizes each credential: it
+records where the value is sourced from and which domains it may be injected
+into. `sbx` creates this entry interactively the first time an agent needs the
+credential. Without an authorizing binding, the credential is withheld rather
+than injected. When a binding resolves more than one source, the stored secret
+takes precedence over an environment variable or file.
 
-| Form | What it is | Use it when |
-| ---- | ---------- | ----------- |
-| [Stored secrets](#stored-secrets) (`sbx secret set`) | A value in your OS keychain, keyed by service | The default for any built-in or kit-declared service |
-| [Custom secrets](#custom-secrets) (`sbx secret set-custom`) | A value keyed to a domain and environment variable | The service model doesn't fit — the agent validates the variable's format, or the secret rides in a request body |
-| [Environment variables](#environment-variables) | Read from your shell session | One-off testing or CI, where keychain storage isn't worth it |
-| OAuth | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, or Cursor |
-| [Registry credentials](#registry-credentials) (`sbx secret set --registry`) | Authentication for pulling images and kits | Pulling templates or kits from a private registry |
+| Form                                                                        | What it is                                                   | Use it when                                                                                                      |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| [Stored secrets](#stored-secrets) (`sbx secret set`)                        | A value in your OS keychain, keyed by service                | The default for any built-in or kit-declared service                                                             |
+| [Custom secrets](#custom-secrets) (`sbx secret set-custom`)                 | A value keyed to a domain and environment variable           | The service model doesn't fit — the agent validates the variable's format, or the secret rides in a request body |
+| [Environment variables](#environment-variables)                             | A shell variable a binding's discovery points at             | One-off testing, where keychain storage isn't worth it                                                           |
+| OAuth                                                                       | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, or Cursor                                                     |
+| [Credential bindings](#credential-bindings) (`credentials.yaml`)            | Per-service sourcing and domain approval                     | The default authorization for built-in agents; also restricts which domains a credential reaches                 |
+| [Registry credentials](#registry-credentials) (`sbx secret set --registry`) | Authentication for pulling images and kits                   | Pulling templates or kits from a private registry                                                                |
 
 For multi-provider agents (OpenCode, Docker Agent), the proxy selects
 credentials based on the API endpoint being called. See individual
@@ -236,23 +241,123 @@ the kit handles the wiring; you only provide the value.
 
 ## Environment variables
 
-As an alternative to stored secrets, export the relevant environment variable
-in your shell before running a sandbox:
+A host environment variable isn't a credential source on its own — built-in
+agents don't read host variables implicitly, so exporting `ANTHROPIC_API_KEY`
+and running `sbx run claude` does nothing by itself. To use one, point a
+[credential binding](#credential-bindings) at it, listing the variable under the
+binding's `discovery`. `sbx` prompts you to create that binding the first time
+an agent needs the credential, or you can write it yourself.
+
+With a binding in place, export the variable before you run the sandbox. See
+individual [agent pages](../agents/) for the variable names each agent expects:
 
 ```console
 $ export ANTHROPIC_API_KEY=sk-ant-api03-xxxxx
 $ sbx run claude
 ```
 
-The proxy reads the variable from your terminal session. See individual
-[agent pages](../agents/) for the variable names each agent expects.
-
 > [!NOTE]
-> These environment variables are set on your host, not inside the sandbox.
+> These environment variables are read on your host, not set inside the sandbox.
 > Sandbox agents are pre-configured to use credentials managed by the
 > host-side proxy. For custom environment variables not tied to a
 > [built-in service](#built-in-services), see
 > [Setting custom environment variables](../faq.md#how-do-i-set-custom-environment-variables-inside-a-sandbox).
+
+## Credential bindings
+
+A credential bindings file records, per service, where `sbx` finds each
+credential value and which domains it may be injected into. It lives at
+`~/.config/sbx/credentials.yaml`, or `%APPDATA%\sbx\credentials.yaml` on
+Windows.
+
+Built-in agents require an authorizing binding for each credential they use.
+`sbx` creates one interactively the first time you run an agent (see
+[First-run approval](#first-run-approval)); you can also write entries by hand.
+
+Each entry under `bindings` is keyed by a
+[service identifier](#built-in-services) and has two parts:
+
+- `discovery` — where to find the value: one or more environment variables,
+  or a file. Entries are tried in order. Omit `discovery` to resolve the value
+  from the [secret store](#stored-secrets) as usual.
+- `allowedDomains` — the domains the proxy may inject this credential into.
+  The credential is never attached to a domain outside this list, even if a kit
+  declares it.
+
+```yaml
+bindings:
+  anthropic:
+    discovery:
+      - env: [ANTHROPIC_API_KEY]
+    allowedDomains: [api.anthropic.com]
+  github:
+    discovery:
+      - env: [GH_TOKEN, GITHUB_TOKEN]
+    allowedDomains: [api.github.com, github.com]
+```
+
+For a file source, set `parser: json:<dot.path>` to pull a field from a JSON
+file, or omit `parser` to use the whole file — see the
+[file parser format](../customize/kit-reference.md#fileparser) in the kit spec
+reference. Bindings
+apply to services a kit or built-in agent already declares; they control how an
+existing service's credential is sourced and scoped, not which services exist.
+
+For example, to source the GitHub token from a field in a JSON file:
+
+```yaml
+bindings:
+  github:
+    discovery:
+      - file:
+          path: "~/.config/myapp/creds.json"
+          parser: "json:credentials.github.token"
+    allowedDomains: [api.github.com, github.com]
+```
+
+### First-run approval
+
+Built-in agents inject a credential only where a binding approves it. The first
+time an agent needs a credential that has no binding, `sbx` walks you through
+creating one. For an API key, you choose where the value comes from (the secret
+store, an environment variable, or a file) and approve the domains it may reach.
+For OAuth, you approve the sign-in domains and authenticate in the host flow —
+there's no source to pick. Either way, `sbx` writes the entry to
+`credentials.yaml`, and the same prompt appears in the terminal and in the
+interactive TUI.
+
+In non-interactive contexts (CI or `--detached`), there's no one to answer the
+prompt, so a missing binding is reported as a clear error naming the service
+rather than a silently absent credential. Pre-create the binding — by running
+the agent interactively once, or by writing `credentials.yaml` directly — before
+running unattended.
+
+This makes the bindings file an allowlist of credential-to-domain approvals: an
+agent can use only the credentials you've approved, only on the domains you've
+approved.
+
+<!-- TODO(launch, confirm before publish): upgrade experience for users who
+     already stored a secret (sbx secret set) before built-ins moved to v2.
+     Confirm whether the existing stored secret is auto-bound on first run or
+     whether the user is prompted to approve a binding for it, then add an
+     "Upgrading from an earlier release" note here. Gated on docker/sandboxes#3684. -->
+
+#### Which kits require a binding
+
+Requiring an approved binding is a property of the kit's `schemaVersion`, not of
+whether the agent is built-in. Every built-in agent uses `schemaVersion: "2"`,
+and so does any custom kit authored against it — all of them require a binding
+and behave identically. Kits still on `schemaVersion: "1"` inject their declared
+credentials without a binding.
+
+To hold older-schema kits to the same rule, turn on fail-closed mode:
+
+```console
+$ sbx settings set credentials.failClosed true
+```
+
+With fail-closed on, every injected credential requires an approved binding,
+regardless of the kit's schema.
 
 ## Registry credentials
 
