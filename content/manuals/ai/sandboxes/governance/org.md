@@ -195,6 +195,23 @@ command.
 > `sbx policy reset` deletes all locally configured policy rules. The command
 > prompts for confirmation before proceeding.
 
+#### Network versus filesystem enforcement timing
+
+Network policy and filesystem policy differ in when a change takes effect:
+
+- Network policy is evaluated on every outbound request. Once a policy
+  change has synced to the developer's machine (up to 5 minutes), it applies
+  immediately to subsequent requests.
+
+- Filesystem policy is only checked when a workspace is mounted — that
+  is, when a sandbox is created. Once a sandbox is running, changing the
+  filesystem policy has no effect on that sandbox. The sandbox continues to
+  access the previously allowed path until it is removed and a new one is
+  created.
+
+To apply a filesystem policy change immediately, remove the running sandbox
+and create a new one.
+
 ### Sandbox cannot mount workspace
 
 If a sandbox fails to mount with a `mount policy denied` error, verify that
