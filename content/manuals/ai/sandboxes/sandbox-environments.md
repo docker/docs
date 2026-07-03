@@ -10,6 +10,11 @@ keywords:
   - environment file
   - sandbox configuration
   - declarative
+params:
+  sidebar:
+    badge:
+      color: violet
+      text: Experimental
 ---
 
 > [!NOTE]
