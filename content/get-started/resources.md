@@ -17,7 +17,7 @@ If books are your preferred learning style, check out these written by the [Dock
 
 * [Operational AI with Docker](https://www.amazon.com/Operational-AI-Docker-services-Kubernetes/dp/1807301095),  Ajeet Singh Raina & Harsh Manvar, April 2026
 * [Docker and Kubernetes Security](https://www.dockersecurity.io/), Mohammad-Ali A'râbi, October 2025. Get 50% discount on PDF version with the code `AHOYCAPTAIN` on [buy.DockerSecurity.io](https://buy.dockersecurity.io/).
-* * [Docker for React.js Developers](https://www.dockerfrontend.com/), Kristiyan Velkov. Learn Docker from a front-end perspective with practical, production-ready examples for modern React.js applications. Get **30% off** with the code `DOCKER30` at [www.dockerfrontend.com](https://www.dockerfrontend.com/) or [www.kristiyanvelkov.com](https://www.kristiyanvelkov.com)
+* [Docker for React.js Developers](https://www.dockerfrontend.com/), Kristiyan Velkov. Learn Docker from a front-end perspective with practical, production-ready examples for modern React.js applications. Get **30% off** with the code `DOCKER30` at [www.dockerfrontend.com](https://www.dockerfrontend.com/) or [www.kristiyanvelkov.com](https://www.kristiyanvelkov.com)
 * [Learn Docker in a Month of Lunches](https://www.manning.com/books/learn-docker-in-a-month-of-lunches), Elton Stoneman. Use the code `stonemanpc` for a 40% discount.
 * [Docker on Windows: From 101 to Production with Docker on Windows](https://www.amazon.com/Docker-Windows-Elton-Stoneman-ebook/dp/B0711Y4J9K/), Elton Stoneman
 * [Learn Kubernetes in a Month of Lunches](https://www.manning.com/books/learn-kubernetes-in-a-month-of-lunches), Elton Stoneman. Use the code `stonemanpc` for a 40% discount.
