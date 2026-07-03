@@ -397,21 +397,25 @@ module:
     # Docker Agent
     # Single-sources https://docker.github.io/docker-agent/ content;
     # bumped on each docker-agent release by sync-docker-agent-docs.yml.
-    # docs/ also hosts the upstream Jekyll site, so its infrastructure
-    # files are filtered out of the mount.
+    # Sections are mounted individually so hugo mod vendor does not
+    # vendor the upstream Jekyll site files that also live in docs/.
     - path: github.com/docker/docker-agent
       mounts:
-        - source: docs
-          target: content/manuals/ai/docker-agent
-          files:
-            - "! /_*"
-            - "! /_*/**"
-            - "! /assets/**"
-            - "! /css/**"
-            - "! /js/**"
-            - "! /recordings/**"
-            - "! /404.md"
-            - "! /Dockerfile"
-            - "! /Gemfile"
-            - "! /STYLE.md"
-            - "! /index.md"
+        - source: docs/getting-started
+          target: content/manuals/ai/docker-agent/getting-started
+        - source: docs/concepts
+          target: content/manuals/ai/docker-agent/concepts
+        - source: docs/configuration
+          target: content/manuals/ai/docker-agent/configuration
+        - source: docs/tools
+          target: content/manuals/ai/docker-agent/tools
+        - source: docs/providers
+          target: content/manuals/ai/docker-agent/providers
+        - source: docs/features
+          target: content/manuals/ai/docker-agent/features
+        - source: docs/guides
+          target: content/manuals/ai/docker-agent/guides
+        - source: docs/community
+          target: content/manuals/ai/docker-agent/community
+        - source: docs/demo.gif
+          target: content/manuals/ai/docker-agent/demo.gif
