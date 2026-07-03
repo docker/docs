@@ -79,7 +79,7 @@ $ sbx env run base.sbxenv.yaml local.sbxenv.yaml
 
 A common pattern is to commit a `base.sbxenv.yaml` with shared team
 configuration and add `local.sbxenv.yaml` to `.gitignore` for personal
-overrides — a different workspace path, additional secrets, or adjusted
+overrides: a different workspace path, additional secrets, or adjusted
 resource limits.
 
 ## Variable interpolation
@@ -164,8 +164,10 @@ secrets in this map.
 | `refresh` | Re-fetch interval for `ref`-based secrets, e.g. `55m`.                                           |
 
 > [!WARNING]
-> Avoid `value` for real credentials — the plaintext is visible to anyone
-> with read access to the file. Use `ref` or `command` instead.
+> Avoid setting real credentials as a plaintext `value`. The plaintext is visible to
+> anyone with read access to the file. Use `ref` (vault URI) or `command`
+> to source the value at runtime, or use variable interpolation to read it
+> from the environment: `value: ${MY_TOKEN}`.
 
 ```yaml
 secrets:
@@ -189,15 +191,6 @@ registries:
   ghcr.io:
     secret:
       command: gh auth token
-  docker.io:
-    username:
-      command: >-
-        echo "https://index.docker.io/v1/" |
-        docker-credential-desktop get | jq -r '.Username'
-    secret:
-      command: >-
-        echo "https://index.docker.io/v1/" |
-        docker-credential-desktop get | jq -r '.Secret'
 ```
 
 ### `ports`
