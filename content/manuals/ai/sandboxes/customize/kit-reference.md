@@ -46,11 +46,13 @@ What changed in v2:
 | `credentials.sources.<id>`                 | `credentials:` list entry with `service` |
 | `network.allowedDomains` / `deniedDomains` | `caps.network.allow` / `deny`            |
 | `network.serviceDomains` / `serviceAuth`   | `credentials[].apiKey.inject`            |
+| `network.publishedPorts`                   | top-level `publishedPorts`               |
 | standalone `oauth:` block                  | `credentials[].oauth`                    |
-| `environment.proxyManaged`                 | automatic — `credentials[].apiKey.name`  |
+| `environment.proxyManaged`                 | `credentials[].apiKey.name` + `proxyManaged: true` |
 | `memory`                                   | `agentContext`                           |
 | `kind: agent` / `agent:` block             | `kind: sandbox` / `sandbox:` block       |
 | `tmpfs:`                                   | `volumes:` entries with `type: tmpfs`    |
+| `volumes:` (mapping form)                  | `volumes:` sequence (`- path: <path>`)   |
 | `settings:` / `kitDir` / `persistence`     | removed (no replacement)                 |
 
 Credential discovery also moved out of the kit in v2: a kit declares which
@@ -144,7 +146,7 @@ auth mechanisms.
 | ------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `service`     | Credential identifier, matched against the value stored with `sbx secret set`. Lowercase kebab-case.                                    |
 | `description` | Optional. Shown to the user when approving a [binding](../security/credentials.md#credential-bindings).                                                     |
-| `required`    | If `true`, sandbox creation fails when the credential is unavailable. Default `false`.                                                  |
+| `required`    | If `true`, `sbx` logs a warning when the credential can't be resolved. It doesn't block sandbox creation — the sandbox starts without the credential. Default `false`. |
 | `apiKey`      | API-key injection (see [apiKey](#apikey)).                                                                                              |
 | `oauth`       | OAuth interception (see [oauth](#oauth)).                                                                                               |
 
@@ -155,7 +157,8 @@ or an `oauth` block; the service name alone doesn't supply injection config.
 
 | Field               | Description                                                                                                                                                     |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`              | Environment variable name for the credential. The agent sees a sentinel (`proxy-managed`); the proxy injects the real value on matching requests.                |
+| `name`              | Environment variable name for the credential (for example, `ANTHROPIC_API_KEY`).                                                                                |
+| `proxyManaged`      | If `true`, `sbx` sets `name` inside the container to a sentinel (`proxy-managed`) so agents that expect the variable start cleanly. The proxy injects the real value on the `inject` domains whether or not this is set. Default `false`. |
 | `inject[].domain`   | Domain to inject the credential into. Must also be allowed in [`caps.network`](#network).                                                                       |
 | `inject[].header`   | HTTP header the proxy sets (for example, `x-api-key`, `Authorization`).                                                                                         |
 | `inject[].format`   | Header value format, with one `%s` placeholder (for example, `"%s"` or `"Bearer %s"`).                                                                          |
@@ -172,7 +175,11 @@ the real token back in on outbound requests. The token never enters the sandbox.
 | `tokenEndpoint.host` / `path`            | The OAuth token endpoint the proxy intercepts.                                                                                            |
 | `sentinels.accessToken` / `refreshToken` | Sentinel values written into the container in place of the real tokens.                                                                   |
 | `credentialFile.path`                    | Where to write the credential file inside the container (`~` expands).                                                                    |
-| `credentialFile.template`                | JSON template for that file. `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, and `{{.ScopesJSON}}` are substituted at runtime. |
+| `credentialFile.template`                | Go template for that file. `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, `{{.Scopes}}`, and `{{.ScopesJSON}}` are substituted at runtime. |
+| `resourceHosts`                          | API hosts where the proxy attaches the token on outbound requests, distinct from the token endpoint host.                               |
+| `skipIfEnv`                              | Environment variable names that, if set on the host, make a stored API key take precedence over the OAuth flow.                          |
+| `responseFields`                         | Overrides the default field names the proxy reads from the token response.                                                              |
+| `passthrough`                            | If `true`, the proxy passes the token response through unchanged instead of replacing the tokens with sentinels.                         |
 
 ## Network
 
