@@ -29,6 +29,7 @@ value for the same service, the stored secret takes precedence.
 | [Stored secrets](#stored-secrets) (`sbx secret set`)                        | A value in your OS keychain, keyed by service                | The default for any built-in or kit-declared service                                                             |
 | [Custom secrets](#custom-secrets) (`sbx secret set-custom`)                 | A value keyed to a domain and environment variable           | The service model doesn't fit — the agent validates the variable's format, or the secret rides in a request body |
 | OAuth                                                                       | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, Cursor, or Droid                                              |
+| [Credential bindings](#credential-bindings) (`credentials.yaml`)            | Per-service mechanism and domain approval                    | Required for third-party `schemaVersion: "2"` kits                                                               |
 | [Registry credentials](#registry-credentials) (`sbx secret set --registry`) | Authentication for pulling images and kits                   | Pulling templates or kits from a private registry                                                                |
 
 For multi-provider agents (OpenCode, Docker Agent), the proxy selects
@@ -144,10 +145,24 @@ it into requests to the listed API domains.
 
 ### Services declared by kits
 
-Custom kits can declare their own service identifiers in `spec.yaml` —
-they're not limited to the table above. To provide a credential for a
-kit-declared service, run `sbx secret set` with the same identifier the kit
-declares under `credentials.sources`:
+Custom kits can declare their own service identifiers in `spec.yaml`. In
+`schemaVersion: "2"`, credentials are declared under the `credentials:` list:
+
+```yaml
+credentials:
+  - service: my-service
+    apiKey:
+      name: MY_SERVICE_TOKEN
+      inject:
+        - domain: api.my-service.com
+          header: Authorization
+          format: "Bearer %s"
+```
+
+For a known provider (such as `anthropic` or `openai`), `- service: <name>` is
+enough — injection config is filled in from the provider registry. To provide
+the credential value, run `sbx secret set` with the same identifier the kit
+declares:
 
 ```console
 $ sbx secret set -g my-service
@@ -156,7 +171,7 @@ $ sbx secret set -g my-service
 There's no separate registration step; the keychain entry is keyed on the
 identifier the kit already uses. See
 [Authenticate to external services](../customize/kits.md#authenticate-to-external-services)
-for the kit-side wiring.
+for the full kit-side wiring.
 
 ### List and remove secrets
 
@@ -255,6 +270,94 @@ proxy replaces it with the real value. The agent never sees the real secret.
 
 Prefer the [service-based flow](#stored-secrets) whenever it's an option —
 the kit handles the wiring; you only provide the value.
+
+## Credential bindings
+
+A credential bindings file records, per service, where `sbx` finds each
+credential value and which domains it may be injected into. It lives at
+`~/.config/sbx/credentials.yaml`, or `%APPDATA%\sbx\credentials.yaml` on
+Windows.
+
+Third-party kits that declare `schemaVersion: "2"` require an authorizing
+binding for each credential they use. `sbx` creates one interactively the first
+time you run such a kit (see [First-run approval](#first-run-approval)); you can
+also write entries by hand. Built-in agents are authorized by provenance and
+never need a binding.
+
+Each entry under `bindings` is keyed by a
+[service identifier](#built-in-services) and has two optional parts:
+
+- `discovery` — where to find the value: one or more environment variables,
+  or a file. Entries are tried in order. Omit `discovery` to use the value from
+  the [secret store](#stored-secrets).
+- `allowedDomains` — the domains the proxy may inject this credential into.
+  The credential is never attached to a domain outside this list, even if a kit
+  declares it.
+
+```yaml
+bindings:
+  anthropic:
+    discovery:
+      - env: [ANTHROPIC_API_KEY]
+    allowedDomains: [api.anthropic.com]
+  github:
+    discovery:
+      - env: [GH_TOKEN, GITHUB_TOKEN]
+    allowedDomains: [api.github.com, github.com]
+```
+
+For a file source, set `parser: json:<dot.path>` to pull a field from a JSON
+file, or omit `parser` to use the whole file — see the
+[file parser format](../customize/kit-reference.md#fileparser) in the kit spec
+reference. Bindings apply to services a kit already declares; they control how
+an existing service's credential is sourced and scoped, not which services exist.
+
+For example, to source the GitHub token from a field in a JSON file:
+
+```yaml
+bindings:
+  github:
+    discovery:
+      - file:
+          path: "~/.config/myapp/creds.json"
+          parser: "json:credentials.github.token"
+    allowedDomains: [api.github.com, github.com]
+```
+
+### First-run approval
+
+When a third-party kit needs a credential that has no binding, `sbx` walks you
+through creating one. You choose where the value comes from (the secret store,
+an environment variable, or a file) and approve the domains it may reach.
+`sbx` writes the entry to `credentials.yaml`, and the same prompt appears in
+the terminal and in the interactive TUI.
+
+In non-interactive contexts (CI or `--detached`), there's no one to answer the
+prompt, so a missing binding is reported as a clear error naming the service
+rather than a silently absent credential. Pre-create the binding — by running
+the kit interactively once, or by writing `credentials.yaml` directly — before
+running unattended.
+
+This makes the bindings file an allowlist of credential-to-domain approvals: a
+kit can use only the credentials you've approved, only on the domains you've
+approved.
+
+#### Which kits require a binding
+
+Only third-party kits that declare `schemaVersion: "2"` require a binding.
+Built-in agents also use `schemaVersion: "2"` internally but are authorized by
+provenance — their credentials inject automatically without a binding. Kits on
+`schemaVersion: "1"` also inject without a binding.
+
+To extend the binding requirement to `schemaVersion: "1"` kits, turn on
+fail-closed mode:
+
+```console
+$ sbx settings set credentials.failClosed true
+```
+
+With fail-closed on, every injected credential — regardless of schema version —
+requires an approved binding.
 
 ## Registry credentials
 
