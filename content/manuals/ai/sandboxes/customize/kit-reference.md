@@ -142,21 +142,20 @@ auth mechanisms.
 
 | Field         | Description                                                                                                                             |
 | ------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `service`     | Credential identifier. Known providers (`anthropic`, `github`, `openai`, `google`, ...) auto-expand to their `apiKey` injection config. |
+| `service`     | Credential identifier, matched against the value stored with `sbx secret set`. Lowercase kebab-case.                                    |
 | `description` | Optional. Shown to the user when approving a [binding](../security/credentials.md#credential-bindings).                                                     |
 | `required`    | If `true`, sandbox creation fails when the credential is unavailable. Default `false`.                                                  |
 | `apiKey`      | API-key injection (see [apiKey](#apikey)).                                                                                              |
 | `oauth`       | OAuth interception (see [oauth](#oauth)).                                                                                               |
 
-For a known provider, `- service: anthropic` is enough — `apiKey.name` and
-`inject` are filled in from the provider registry. Custom services must declare
-`apiKey.name` and `apiKey.inject` (or `oauth`) themselves.
+Each service must declare either an `apiKey` block (with `name` and `inject`)
+or an `oauth` block; the service name alone doesn't supply injection config.
 
 ### `apiKey`
 
 | Field               | Description                                                                                                                                                     |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`              | Environment variable set inside the container. The agent sees a sentinel (`proxy-managed`); the proxy injects the real value. Auto-derived for known providers. |
+| `name`              | Environment variable name for the credential. The agent sees a sentinel (`proxy-managed`); the proxy injects the real value on matching requests.                |
 | `inject[].domain`   | Domain to inject the credential into. Must also be allowed in [`caps.network`](#network).                                                                       |
 | `inject[].header`   | HTTP header the proxy sets (for example, `x-api-key`, `Authorization`).                                                                                         |
 | `inject[].format`   | Header value format, with one `%s` placeholder (for example, `"%s"` or `"Bearer %s"`).                                                                          |
@@ -175,53 +174,11 @@ the real token back in on outbound requests. The token never enters the sandbox.
 | `credentialFile.path`                    | Where to write the credential file inside the container (`~` expands).                                                                    |
 | `credentialFile.template`                | JSON template for that file. `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, and `{{.ScopesJSON}}` are substituted at runtime. |
 
-### file.parser
-
-A credential sourced from a file — through a
-[credential binding](../security/credentials.md#credential-bindings) `file`
-source, or a legacy `credentials.sources` entry — can pull its value from a JSON
-field. Omit the parser for plain-text files; set `json:<dot.path>` to extract a
-field from a JSON file.
-
-| Value             | Behavior                                                                             |
-| ----------------- | ------------------------------------------------------------------------------------ |
-| omitted or empty  | Reads the entire file as the credential. Leading and trailing whitespace is trimmed. |
-| `json:<dot.path>` | Parses the file as JSON and returns the value at the dot-separated path.             |
-| any other value   | Rejected — `unsupported parser: <value>`.                                            |
-
-For `json:` paths, segments are separated by `.` (for example, `json:credentials.github.token`).
-Only object keys can be navigated — arrays are not supported and there is no `[0]`-style indexing.
-Keys that contain a literal `.` cannot be referenced. The resolved value must be a string, number,
-or boolean; numbers and booleans are converted to strings. Objects, arrays, and null are rejected.
-
-For example, given this file:
-
-```json
-{
-  "credentials": {
-    "github": { "token": "ghp_xyz", "expires": "2026-12-31" }
-  }
-}
-```
-
-`json:credentials.github.token` resolves to `ghp_xyz`. If the path doesn't
-resolve — a missing field, or a value that isn't a string — the request fails
-with one of the errors below.
-
-Common errors when using `json:` parsers:
-
-| Error message                                 | Cause                                                               |
-| --------------------------------------------- | ------------------------------------------------------------------- |
-| `field 'X' not found in JSON`                 | The path doesn't exist in the file.                                 |
-| `cannot navigate to field 'X': not an object` | A path segment hit a string, array, or scalar instead of an object. |
-| `field 'X' is not a string value`             | The resolved value is an object, array, or null.                    |
-| `failed to parse JSON: ...`                   | The file is not valid JSON.                                         |
-
 ## Network
 
 Network egress is declared under `caps.network`. Credentials no longer carry
 their own domain mapping — the proxy injects a credential only into the domains
-its [`apiKey.inject`](#apikey) (or provider default) lists, and every domain the
+its [`apiKey.inject`](#apikey) lists, and every domain the
 sandbox reaches must be allowed here.
 
 ```yaml

@@ -159,10 +159,9 @@ credentials:
           format: "Bearer %s"
 ```
 
-For a known provider (such as `anthropic` or `openai`), `- service: <name>` is
-enough — injection config is filled in from the provider registry. To provide
-the credential value, run `sbx secret set` with the same identifier the kit
-declares:
+Each service declares an `apiKey` block (with `name` and `inject`) or an
+`oauth` block. To provide the credential value, run `sbx secret set` with the
+same identifier the kit declares:
 
 ```console
 $ sbx secret set -g my-service
