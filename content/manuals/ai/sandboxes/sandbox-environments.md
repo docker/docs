@@ -110,7 +110,7 @@ secrets:
 | ---------------------- | ---------------- | -------- | ------------------------------ | ------------------------------------------------------------------------------- |
 | `schemaVersion`        | string           | Yes      | —                              | Schema version. Currently `"1"`                                                 |
 | `name`                 | string           | No       | `<agent>-<workspace-basename>` | Sandbox name                                                                    |
-| `agent`                | string           | No       | —                              | Agent type, e.g. `claude`                                                       |
+| `agent`                | string           | Yes      | —                              | Agent type, e.g. `claude`                                                       |
 | `workspace`            | string or object | No       | `.`                            | Workspace path or configuration; see [`workspace`](#workspace)                  |
 | `additionalWorkspaces` | list             | No       | —                              | Extra directories to mount; see [`additionalWorkspaces`](#additionalworkspaces) |
 | `kits`                 | list of strings  | No       | —                              | Kit references to install at sandbox creation                                   |
@@ -142,13 +142,13 @@ A list of extra directories to mount alongside the primary workspace:
 
 ### `sandboxOptions`
 
-| Field        | Type   | Default   | Description                                                     |
-| ------------ | ------ | --------- | --------------------------------------------------------------- |
-| `memory`     | string | —         | Memory limit, e.g. `8g`, `512m`                                 |
-| `cpus`       | number | —         | CPU limit                                                       |
-| `pullPolicy` | string | `missing` | When to pull the sandbox image: `always`, `missing`, or `never` |
-| `template`   | string | —         | Custom sandbox template image                                   |
-| `profile`    | string | —         | Governance profile name                                         |
+| Field        | Type   | Default  | Description                                                     |
+| ------------ | ------ | -------- | --------------------------------------------------------------- |
+| `memory`     | string | —        | Memory limit, e.g. `8g`, `512m`                                 |
+| `cpus`       | number | —        | CPU limit                                                       |
+| `pullPolicy` | string | `always` | When to pull the sandbox image: `always`, `missing`, or `never` |
+| `template`   | string | —        | Custom sandbox template image                                   |
+| `profile`    | string | —        | Governance profile name                                         |
 
 ### `secrets`
 
@@ -178,9 +178,11 @@ secrets:
 
 ### `registries`
 
-A map of registry hostnames to pull credentials. Each entry has `username`
-and `secret` fields. Both accept the same secret source fields as
-[`secrets`](#secrets) (`ref`, `command`, or `value`).
+A map of registry hostnames to pull credentials. Each entry requires
+`secret` and accepts an optional `username`. Both fields use the same secret
+source forms as [`secrets`](#secrets) (`ref`, `command`, or `value`).
+Omitting `username` stores the credential as token-only, which registries
+like GHCR and GitLab accept.
 
 ```yaml
 registries:
