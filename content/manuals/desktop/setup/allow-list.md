@@ -32,3 +32,4 @@ This page contains the domain URLs that you need to add to a firewall allowlist 
 | https://api.docker.com                                                               | New API                                      |
 | https://dhi.io                                                                       | Docker Hardened Images                       |
 | https://registry.scout.docker.com                                                    | Docker Scout registry for DHI attestations   |
+| https://ai-backend-service.docker.com                                                | Docker AI assistant (Gordon)                 |
