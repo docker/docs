@@ -1079,6 +1079,22 @@ healthcheck:
   start_interval: 5s
 ```
 
+The healthcheck command runs inside the container. For example, `localhost` refers to the container being checked, not to the host or another service.
+
+The following example waits for a web service to respond on its own HTTP endpoint before Compose treats it as healthy:
+
+```yml
+services:
+  web:
+    image: nginx
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+```
+
 `interval`, `timeout`, `start_period`, and `start_interval` are [specified as durations](extension.md#specifying-durations). Introduced in Docker Compose version [2.20.2](https://github.com/docker/compose/releases/tag/v2.20.2)
 
 `test` defines the command Compose runs to check container health. It can be
