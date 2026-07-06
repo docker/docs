@@ -357,7 +357,7 @@
 # Link used by Docker Desktop to refer users on how to activate WSL 2
 "/desktop/features/wsl/":
   - /go/wsl2/
-  - /go/windows-linux-vm/
+  - /go/windows-linux-vmm/
 "/desktop/get-started/#credentials-management-for-linux-users":
   - /go/linux-credentials/
 "/desktop/use-desktop/pause/":
