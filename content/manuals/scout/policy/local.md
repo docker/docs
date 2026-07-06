@@ -2,8 +2,6 @@
 title: Evaluate policies
 description: Evaluate Docker Scout policies using the CLI, with built-in and custom Rego policies
 keywords: scout, policy, rego, opa, cli, custom policies, policy bundle
-aliases:
-  - /scout/policy/local/
 ---
 
 {{< summary-bar feature_name="Evaluate policies" >}}
@@ -54,6 +52,7 @@ to evaluate policies as part of your workflow:
   with:
     command: policy
     image: ${{ env.IMAGE_NAME }}
+    organization: <ORG>
 ```
 
 For other CI platforms, install the
@@ -68,13 +67,14 @@ dashboard-managed policy settings, replicate those settings locally with
 `--policy-config`:
 
 ```yaml
-- uses: docker/scout-action@v1
+- uses: docker/scout-action@v1.23.0
   with:
     command: compare
     image: ${{ env.IMAGE_NAME }}
     to-env: production
     exit-on: policy
     policy-config: policies.json
+    organization: <ORG>
 ```
 
 See [Configure built-in policies](#configure-built-in-policies) for the
