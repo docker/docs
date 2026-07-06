@@ -24,6 +24,59 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.81
+
+{{< release-date date="2026-07-13" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.82.0" build_path="//" >}}
+
+### Updates
+
+- [Docker Compose v5.3.0](https://github.com/docker/compose/releases/tag/v5.3.0)
+- [Docker Agent v1.98.0](https://github.com/docker/docker-agent/releases/tag/v1.98.0)
+- [Docker Scout CLI v1.23.1](https://github.com/docker/scout-cli/releases/tag/v1.23.1)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Added thumbs up and thumbs down feedback buttons to Gordon AI assistant responses, letting users rate replies or report issues directly from the chat.
+- Fixed a bug where containers created by Docker Desktop had their stop timeout set to 1 second instead of the Docker Engine default, causing `docker stop` to terminate processes too quickly.
+- Fixed reset to factory defaults not clearing MCP Toolkit profiles, catalogs and authorizations.
+- Fixed an issue where selected thumbs up/down feedback buttons in Gordon were visually indistinguishable after selecting.
+- Fixed reset to factory defaults not clearing downloaded LLM models.
+- Fixed a bug where the Gordon chat area would go blank when the agent requested free-text input via elicitation.
+- Fixed a delay in the Kubernetes screen where the progress UI did not appear immediately after confirming cluster creation or deletion.
+- Fixed a rare case where Docker Desktop could shut down if the build service crashed, for example during a factory reset.
+- Fixed a bug where the Kubernetes (kind) cluster failed to start with a **Failed to get API server port** error after a Docker Desktop restart.
+- With `docker pass`, the `ls` command now behaves consistently across all platforms.
+- Fixed an issue where users signed out due to sign-in enforcement policies were shown a generic sign-in prompt instead of a clear explanation of why they were signed out.
+
+#### For Mac
+
+- Fixed an issue where Docker Desktop child processes could linger after an unexpected backend exit.
+- Fixed an issue where Docker Desktop failed to start for users with long home directory paths that caused Unix socket paths to exceed OS length limits.
+- Fixed an issue where vsock listener failures showed a cryptic crash instead of a clear, actionable recovery dialog.
+
+#### For Windows
+
+- Fixed an issue where `.log` files were missing from diagnostic bundles, ensuring the Docker Desktop service log is now included.
+- Lowered the priority of Docker Desktop's background processes and enabled Windows Efficiency mode while idle to reduce power and CPU usage.
+- Fixed factory reset leaving containers and images behind on Hyper-V when Docker Desktop is run by a user other than the one that installed it.
+- Fixed a multi-minute hang during WSL engine startup when the wsl-bootstrap process fails unexpectedly, surfacing the error promptly instead.
+- Fixed an issue where auto-updates could leave Docker Desktop stuck in a 'connecting' state due to a successful installation being incorrectly rolled back.
+- Fixed an issue where vsock listener failures on Windows Hyper-V showed a cryptic crash instead of a clear, actionable recovery dialog.
+- Fixed a race condition where connecting to `com.docker.service` immediately after startup could result in a **File not found** error.
+- Fixed an issue where a graphical installer window would flash during background auto-updates. Updates now run silently.
+- Improved security by verifying the Authenticode signature of the downloaded installer before executing it during updates.
+- Fixed an issue where missing or disabled Windows feature descriptions were not shown in diagnostic output.
+- Improved the installer progress screen with a single continuous progress bar that smoothly advances from 0% to 100% throughout the entire installation.
+- Fixed an issue where `~` in bind mount paths was not correctly resolved to the home directory when the `HOME` environment variable was not set.
+
+#### For Linux
+
+- Fixed an issue where Docker Desktop failed to start for users with long home directory paths that caused Unix socket paths to exceed OS length limits.
+
 ## 4.81.0
 
 {{< release-date date="2026-07-06" >}}
