@@ -51,7 +51,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a rare case where Docker Desktop could shut down if the build service crashed, for example during a factory reset.
 - Fixed an issue where containers ignored user-configured stop timeouts during normal operation due to a proxy-level override forcing a 1-second timeout on all containers.
 
-#### For Mac
+#### For Mac
 
 - Fixed Docker Desktop failing to start when the user's environment contained very long environment variables.
 - Fixed a Docker Offload crash on Intel machines due to `SG_READ_ONLY` not being set in the `__DATA_CONST` segment, causing the system linker to fail to load the executable. Fixes [docker/desktop-feedback#471](https://github.com/docker/desktop-feedback/issues/471).
