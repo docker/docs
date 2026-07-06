@@ -2,8 +2,6 @@
 title: Evaluate policies
 description: Evaluate Docker Scout policies using the CLI, with built-in and custom Rego policies
 keywords: scout, policy, rego, opa, cli, custom policies, policy bundle
-aliases:
-  - /scout/policy/local/
 ---
 
 {{< summary-bar feature_name="Evaluate policies" >}}
