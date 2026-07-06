@@ -6,6 +6,7 @@ description: A guide on using Docker Compose to manage Laravel applications for 
 keywords: laravel, php, docker compose, web framework, development, production
 aliases:
   - /frameworks/laravel/
+  - /guides/frameworks/laravel/
   - /guides/frameworks/laravel/common-questions/
   - /guides/frameworks/laravel/development-setup/
   - /guides/frameworks/laravel/prerequisites/

@@ -132,7 +132,7 @@ When those lines appear in the logs, the web apps are ready to use.
 
 Since the goal is to teach AI about things it does not yet know, begin by asking it a simple question about NiFi at
 [http://localhost:8501/](http://localhost:8501/).
-![alt text](image.png)
+![alt text](images/genai-leveraging-rag-1.png)
 
 ```text
 Question: What is Apache Nifi?
@@ -144,7 +144,7 @@ As shown, the AI does not know anything about this subject because it did not ex
 
 Now it's time to teach the AI some new tricks. First, connect to [http://localhost:8502/](http://localhost:8502/). Instead of using the "neo4j" tag, change it to the "apache-nifi" tag, then select the **Import** button.
 
-![alt text](image-1.png)
+![alt text](images/genai-leveraging-rag-2.png)
 
 After the import is successful, you can access Neo4j to verify the data.
 
@@ -160,7 +160,7 @@ ORDER BY Count DESC;
 
 To execute this query, write in the box on the top and select the blue run button.
 
-![alt text](image-2.png)
+![alt text](images/genai-leveraging-rag-3.png)
 
 Results will appear below. The information shown is downloaded from Stack Overflow and saved in the graph database. RAG will utilize this information to enhance its responses.
 
@@ -178,7 +178,7 @@ CALL db.relationshipTypes()
 
 You're ready to enable the LLM to use this information. Go back to [http://localhost:8501/](http://localhost:8501/), enable the **RAG** checkbox, and ask the same question again. The LLM will provide a more detailed answer.
 
-![alt text](image-3.png)
+![alt text](images/genai-leveraging-rag-4.png)
 
 The system delivers comprehensive, accurate information by pulling from current technical documentation.
 ```text
