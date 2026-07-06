@@ -101,7 +101,13 @@ You can add Testcontainers Cloud runtime minutes in two ways:
 > If you have a sales-assisted Docker Business plan,
 > you must contact your account manager to cancel.
 
-You can cancel at any time before your renewal date, but you can't pause or delay a plan. If an invoice isn't paid by the due date, there's a 15-day grace period starting from the due date. While the unused portion is not refundable, you still retain access to paid features until the end of the current billing cycle. Canceling your paid plans may have implications for collaborators or organization members:
+You can cancel at any time before your renewal date, but you can't pause or delay a plan. If an invoice isn't paid by the due date, there's a 15-day grace period starting from the due date. While the unused portion is not refundable, you still retain access to paid features until the end of the current billing cycle. 
+
+> [!NOTE]
+>
+> Billing periods are calculated in UTC (Coordinated Universal Time). If you're in a timezone behind UTC, for example US Pacific Time is UTC−7/−8, canceling or making changes late in your local day may fall into the next billing day in UTC.
+
+Canceling your paid plans may have implications for collaborators or organization members:
 
 - Docker Pro private repository collaborators are removed and additional private repositories are locked.
 - Docker Team or Docker Business members provisioned through SCIM without a password will be locked out. Remove SSO connections and verified domains if your organization uses single sign-on.
@@ -113,3 +119,4 @@ To cancel your plan:
 1. Sign in to [Docker Home](https://app.docker.com/) and go to **Billing**.
 2. From **Active plans**, select the action menu next to your Docker plan.
 3. Select **Cancel plan** and complete the feedback survey.
+
