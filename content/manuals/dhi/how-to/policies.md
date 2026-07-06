@@ -97,7 +97,7 @@ Image (DHI) or DHI base image** policy for your organization:
    to enable it for your repositories.
 
 For more information on configuring policies, see
-[Configure policies](../../scout/policy/configure.md).
+[Configure policies](../../scout/policy/dashboard.md).
 
 #### Step 5: View policy compliance
 

@@ -1,0 +1,60 @@
+command: docker scout policy publish
+short: |
+    Package local Rego policies into an OCI bundle and push it to a registry (experimental)
+long: |-
+    The docker scout policy publish command packages Rego policies into an OCI policy bundle and pushes it to a registry. The published bundle can then be evaluated with docker scout policy --policy-bundle REFERENCE.
+
+    When no --policy-file or --policy-dir is given, the built-in default policy set is published. Authentication uses your existing registry credentials (run "docker login" first).
+usage: docker scout policy publish [OPTIONS] REFERENCE
+pname: docker scout policy
+plink: docker_scout_policy.yaml
+options:
+    - option: policy-dir
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Path to a directory of local .rego policy files to include (repeatable)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: policy-file
+      value_type: stringArray
+      default_value: '[]'
+      description: Path or http(s) URL to a .rego policy file to include (repeatable)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: debug
+      value_type: bool
+      default_value: "false"
+      description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: verbose-debug
+      value_type: bool
+      default_value: "false"
+      description: Verbose debug
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+examples: "  Publish the built-in default policies:\n  $ docker scout policy publish registry.example.com/policies:latest\e[0m\n\n  Publish a directory of local policies:\n  $ docker scout policy publish --policy-dir ./rego registry.example.com/policies:latest\e[0m\n\n  Publish specific policy files:\n  $ docker scout policy publish --policy-file fixable.rego --policy-file licenses.rego registry.example.com/policies:latest\e[0m"
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

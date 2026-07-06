@@ -267,7 +267,7 @@ changes the version automatically, because you're in control and you have an
 audit trail of when and how the change occurred.
 
 For more information about automatically updating your base images with Docker
-Scout, see [Remediation](/manuals/scout/policy/remediation.md).
+Scout, see [Remediation](/manuals/scout/policy/dashboard.md).
 
 ## Build and test your images in CI
 
