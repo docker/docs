@@ -305,6 +305,19 @@ don't front-load complexity.
 - Don't use "**Bold:** format" for subsection labels (use plain text
   with colon)
 
+### Guide structure
+
+Guides are single-page - don't split a guide into multiple sub-pages
+(for example, separate "overview", "configure", and "deploy" pages for
+one guide). Cover the full task on one page and use headings to
+organize sections.
+
+Store each guide as a single Markdown file directly under
+`content/guides/` (for example, `content/guides/django.md`), not
+wrapped in its own directory with an `index.md`. Guide images belong in
+the shared `content/guides/images/` folder, prefixed with the guide's
+slug, not in a per-guide directory - see [Images](#images).
+
 ### Lists
 
 - Limit bulleted lists to five items when possible
@@ -395,6 +408,13 @@ For code block syntax, language hints, variables, and advanced features
 - Keep images small and focused
 - Compress images before adding to repository
 - Remove unused images from repository
+
+**File organization:**
+
+- Store guide images in the shared `content/guides/images/` folder,
+  not in a per-guide directory
+- Prefix filenames with the guide's slug to avoid collisions (for
+  example, `kafka-architecture.webp`)
 
 For image syntax and parameters (sizing, borders), see
 [COMPONENTS.md](COMPONENTS.md#images).
