@@ -316,7 +316,7 @@ Store each guide as a single Markdown file directly under
 `content/guides/` (for example, `content/guides/django.md`), not
 wrapped in its own directory with an `index.md`. Guide images belong in
 the shared `content/guides/images/` folder, prefixed with the guide's
-slug, not in a per-guide directory - see [Images](#images).
+slug, not in a per-guide directory - see [Images](STYLE.md#images).
 
 ### Lists
 
