@@ -105,7 +105,7 @@ You can cancel at any time before your renewal date, but you can't pause or dela
 
 > [!NOTE]
 >
-> Billing periods are calculated in UTC. If you're in a timezone behind UTC (for example, US Pacific Time is UTC−7/−8), canceling or making changes late in your local day may fall into the next billing day in UTC.
+> Billing periods are calculated in UTC (Coordinated Universal Time). If you're in a timezone behind UTC, for example US Pacific Time is UTC−7/−8, canceling or making changes late in your local day may fall into the next billing day in UTC.
 
 Canceling your paid plans may have implications for collaborators or organization members:
 
