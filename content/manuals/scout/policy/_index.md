@@ -36,7 +36,6 @@ Docker Scout includes the following built-in policy types:
 - [Supply Chain Attestations](#supply-chain-attestations)
 - [Default Non-Root User](#default-non-root-user)
 - [Approved Base Images](#approved-base-images)
-- [Valid Docker Hardened Image (DHI) or DHI base image](#valid-docker-hardened-image-dhi-or-dhi-base-image)
 
 For configuration options for each policy type, see
 [Evaluate policies](./local.md#configure-built-in-policies).
@@ -105,13 +104,6 @@ base image reference doesn't match any of the allowed patterns.
 
 Your images need provenance attestations for this policy to evaluate
 successfully. For more information, see [No base image data](#no-base-image-data).
-
-### Valid Docker Hardened Image (DHI) or DHI base image
-
-The **Valid Docker Hardened Image (DHI) or DHI base image** policy type
-ensures your images are either Docker Hardened Images or are built using a DHI
-as the base image. It validates compliance by checking for a valid Docker
-signed verification summary attestation.
 
 <!-- vale Docker.HeadingSentenceCase = YES -->
 
