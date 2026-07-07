@@ -149,7 +149,7 @@ Docker from the repository.
    To install the latest version, run:
 
    ```console
-   $ sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   $ sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx docker-compose-plugin
    ```
 
    {{< /tab >}}
@@ -170,7 +170,7 @@ Docker from the repository.
 
    ```console
    $ VERSION_STRING=5:{{% param "docker_ce_version" %}}-1~debian.12~bookworm
-   $ sudo apt install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
+   $ sudo apt install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx docker-compose-plugin
    ```
 
    {{< /tab >}}
@@ -282,7 +282,7 @@ To upgrade Docker Engine, download the newer package files and repeat the
 1. Uninstall the Docker Engine, CLI, containerd, and Docker Compose packages:
 
    ```console
-   $ sudo apt purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
+   $ sudo apt purge docker-ce docker-ce-cli containerd.io docker-buildx docker-compose-plugin docker-ce-rootless-extras
    ```
 
 2. Images, containers, volumes, or custom configuration files on your host
