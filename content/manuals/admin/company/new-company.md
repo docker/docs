@@ -26,7 +26,7 @@ To create a new company:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select the
    organization you want to add to your company.
-1. Select **Admin Console**, then **Company management**.
+1. Select **Organization settings**.
 1. Select **Create a company**.
 1. Enter a unique name for your company, then select **Continue**.
 

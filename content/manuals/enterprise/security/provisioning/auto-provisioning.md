@@ -28,7 +28,7 @@ Auto-provisioning is configured per domain. To enable it:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select
    your company or organization.
-1. Select **Admin Console**, then **Domain management**.
+1. Select **Identity & auth**, then **Domain management**.
 1. Select the **Actions menu** next to the domain you want to enable
    auto-provisioning for.
 1. Select **Enable auto-provisioning**.
@@ -45,7 +45,7 @@ To disable auto-provisioning for a user:
 1. Sign in to [Docker Home](https://app.docker.com) and select
    your organization. If your organization is part of a company, select the company
    and configure the domain for the organization at the company level.
-1. Select **Admin Console**, then **Domain management**.
+1. Select **Identity & auth**, then **Domain management**.
 1. Select the **Actions menu** next to your domain.
 1. Select **Disable auto-provisioning**.
 1. Select **Disable** to confirm.

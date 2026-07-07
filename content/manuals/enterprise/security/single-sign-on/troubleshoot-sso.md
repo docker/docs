@@ -21,7 +21,7 @@ If you experience SSO issues, check both Docker and your identity provider for e
 ### Check Docker error logs
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your organization from the top-left account drop-down.
-1. Select **Admin Console**, then **SSO and SCIM**.
+1. Select **Identity & auth**, then **SSO and SCIM**.
 1. In the SSO connections table, select the **Action** menu and then **View error logs**.
 1. For more details on specific errors, select **View error details** next to an error message.
 1. Note any errors you see on this page for further troubleshooting.
@@ -98,7 +98,7 @@ JIT is enabled by default when you enable SSO. If you have JIT disabled and need
 to re-enable it:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your organization from the top-left account drop-down.
-1. Select **Admin Console**, then **SSO and SCIM**.
+1. Select **Identity & auth**, then **SSO and SCIM**.
 1. In the SSO connections table, select the **Action** menu and then **Enable JIT provisioning**.
 1. Select **Enable** to confirm.
 
@@ -112,10 +112,10 @@ To manually invite users, see [Invite members](/manuals/admin/organization/manag
 If you have SCIM enabled, troubleshoot your SCIM connection using the following steps:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your organization from the top-left account drop-down.
-1. Select **Admin Console**, then **SSO and SCIM**.
+1. Select **Identity & auth**, then **SSO and SCIM**.
 1. In the SSO connections table, select the **Action** menu and then **View error logs**. For more details on specific errors, select **View error details** next to an error message. Note any errors you see on this page.
-1. Navigate back to the **SSO and SCIM** page of the Admin Console and verify your SCIM configuration:
-   - Ensure that the SCIM Base URL and API Token in your IdP match those provided in the Docker Admin Console.
+1. Navigate back to **Identity & auth**, then **SSO and SCIM**, and verify your SCIM configuration:
+   - Ensure that the SCIM Base URL and API Token in your IdP match those provided in Docker.
    - Verify that SCIM is enabled in both Docker and your IdP.
 1. Ensure that the attributes being synced from your IdP match Docker's [supported attributes](/manuals/enterprise/security/provisioning/scim/provision-scim.md#supported-attributes) for SCIM.
 1. Test user provisioning by trying to provision a test user through your IdP and verify if they appear in Docker.

@@ -50,11 +50,10 @@ You've now created an organization.
 
 ## View an organization
 
-To view an organization in the Admin Console:
+To view an organization:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your
    organization.
-1. From the left-hand navigation menu, select **Admin Console**.
 
 The Admin Console contains many options that let you to
 configure your organization.

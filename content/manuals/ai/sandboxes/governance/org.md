@@ -41,7 +41,7 @@ To create a policy:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your
    organization.
-1. Select **Admin Console**, then **AI governance**.
+1. Select **AI Platform**, then the governance section you want.
 1. Select **Network access** or **Filesystem access**, then **Create policy**.
 1. Enter a **Policy name**.
 1. Set the **Scope** to **Organization** or **Teams**. If you select **Teams**,
