@@ -31,7 +31,7 @@ To create a new settings policy:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select
    your organization.
-1. Select **Admin Console**, then **Desktop Settings Management**.
+1. Select **Docker Desktop**, then **Settings Management**.
 1. Select **Create a settings policy**.
 1. Provide a name and optional description.
 

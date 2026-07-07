@@ -43,7 +43,7 @@ Docker Hub.
 
 1. Sign in to [Docker Home](https://app.docker.com) and select the organization
    you want to deactivate.
-1. Select **Admin Console**, then **Deactivate**. If the **Deactivate**
+1. Select **Organization settings**, then **Deactivate**. If the **Deactivate**
    button is unavailable, confirm you've completed all [Prerequisites](#prerequisites).
 1. Enter the organization name to confirm deactivation.
 1. Select **Deactivate organization**.

@@ -31,7 +31,7 @@ Configure Docker socket exceptions using Settings Management:
 {{< tab name="Admin Console" >}}
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your organization from the top-left account drop-down.
-1. Go to **Admin Console** > **Desktop Settings Management**.
+1. Select **Docker Desktop**, then **Settings Management**.
 1. [Create or edit a setting policy](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md).
 1. Find **Enhanced Container Isolation** settings.
 1. Configure **Docker socket access control** with your trusted images and

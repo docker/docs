@@ -44,7 +44,7 @@ IdP. This issue usually surfaces as incorrect role or team assignment.
 #### Disable JIT provisioning (recommended)
 
 1. Sign in to [Docker Home](https://app.docker.com/).
-1. Select **Admin Console**, then **SSO and SCIM**.
+1. Select **Identity & auth**, then **SSO and SCIM**.
 1. Find the relevant SSO connection.
 1. Select the **actions menu** and choose **Edit**.
 1. Disable **Just-in-Time provisioning**.
@@ -76,7 +76,7 @@ linked to manage them.
 SCIM only manages users that it provisions. To allow SCIM to manage an
 existing user:
 
-1. Remove the user manually from the Docker [Admin Console](https://app.docker.com/admin).
+1. Remove the user manually from [Docker Home](https://app.docker.com) under **Members**.
 1. Trigger provisioning from your IdP.
 1. SCIM will re-create the user with correct attributes.
 

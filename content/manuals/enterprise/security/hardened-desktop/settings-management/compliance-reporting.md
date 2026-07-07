@@ -28,7 +28,7 @@ To view compliance reporting:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select
 your organization.
-1. Select **Admin Console**, then **Desktop settings reporting**.
+1. Select **Docker Desktop**, then **Settings Reporting**.
 
 The reporting dashboard provides these tools:
 
