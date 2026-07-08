@@ -15,8 +15,12 @@ The top-level `secrets` declaration defines or references sensitive data that is
 application. The source of the secret is either `file` or `environment`.
 
 - `file`: The secret is created with the contents of the file at the specified path.
-- `environment`: The secret is created with the value of an environment variable on the host. This is only supported by Docker Compose. It is not supported when deploying with [`docker stack deploy`](/manuals/engine/swarm/stack-deploy.md).
- 
+- `environment`: The secret is created with the value of an environment variable on the host. This is only supported by Docker Compose. It is not supported when deploying with [`docker stack deploy`](/manuals/engine/swarm/stack-deploy.md). 
+
+> [!NOTE]
+> `external` property is available only for Docker Swarm. Docker Compose will ignore this attribute.
+
+- `external`: If set to true, `external` specifies that this secret has already been created via `docker secret create`. Docker does not attempt to create it, and if it does not exist, an error occurs.
 
 ## Example 1
 
