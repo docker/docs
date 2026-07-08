@@ -179,7 +179,7 @@ The following table lists the configurable keys for each built-in policy.
 | `approved-base-images` | `allowed_distros` | curated list | OS distributions considered allowed |
 | `supply-chain-attestations` | `required_attestations` | provenance and SBOM predicate types | Attestation predicate types that must be present |
 
-#### Default high-profile CVEs {#default-high-profile-cves}
+#### Default high-profile CVEs
 
 The built-in `cves` list includes the following CVEs. Docker updates this list
 as new high-profile vulnerabilities are disclosed.
