@@ -69,7 +69,7 @@ The script would be responsible for ensuring the `docker-users` group exists and
 
 > [!WARNING]
 >
-> Membership in `docker-users` grants access to the Docker daemon socket, which is equivalent to granting administrative privileges on the host. Only add users who require access to Windows containers or Hyper-V VM management. For Linux containers using the WSL 2 backend, this group membership is not required. See [Protect the Docker daemon socket](/engine/security/protect-access/) for background.
+> Membership in `docker-users` grants access to the Docker daemon socket, which is equivalent to granting administrative privileges on the host. Only add users who require access to Windows containers or Hyper-V VM management. For Linux containers using the WSL 2 backend, this group membership is not required. See [Protect the Docker daemon socket](/manuals/engine/security/protect-access.md) for further information.
 
 Here's an example script that creates the `docker-users` group if needed and adds the current user to it (requirements may vary depending on environment):
 
