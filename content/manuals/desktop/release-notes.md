@@ -24,6 +24,193 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.81.0
+
+{{< release-date date="2026-07-06" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.81.0" build_path="/232925/" >}}
+
+### Updates
+
+- [Docker Model Runner v1.2.5](https://github.com/docker/model-runner/releases/tag/v1.2.5)
+- [Docker Agent v1.88.1](https://github.com/docker/docker-agent/releases/tag/v1.88.1)
+- Docker Offload `v0.6.7`
+- [Docker Compose v5.2.0](https://github.com/docker/compose/releases/tag/v5.2.0)
+- [Docker Scout CLI v1.22.0](https://github.com/docker/scout-cli/releases/tag/v1.22.0)
+- [DHI CLI (`dhictl`) v0.0.5](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.5)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an error that caused volumes, images, and containers to fail to load in the Docker Desktop Dashboard.
+- Removed the deprecated `cagent` binary from Docker Desktop; use `docker agent` instead.
+- Kubernetes kind cluster now works with Registry Access Management.
+- Fixed a bug where the sign-in/update prompt was not shown when upgrading between versions that cross a version digit boundary (e.g., 4.9.x to 4.10.x).
+- Fixed an issue in Ask Gordon where the tool call permission dialog blocked the chat view, replacing it with an inline approval card so users can read Gordon's full message before approving or rejecting.
+- Fixed a rare case where Docker Desktop could shut down if the build service crashed, for example during a factory reset.
+- Fixed an issue where containers ignored user-configured stop timeouts during normal operation due to a proxy-level override forcing a 1-second timeout on all containers.
+
+#### For Mac
+
+- Fixed Docker Desktop failing to start when the user's environment contained very long environment variables.
+- Fixed a Docker Offload crash on Intel machines due to `SG_READ_ONLY` not being set in the `__DATA_CONST` segment, causing the system linker to fail to load the executable. Fixes [docker/desktop-feedback#471](https://github.com/docker/desktop-feedback/issues/471).
+
+#### For Windows
+
+- Fixed an issue on Windows where stopping Docker Desktop would immediately force off the Hyper-V VM without waiting for a graceful guest shutdown, reducing the risk of data corruption.
+- Fixed a bug on Windows where `dockerd` failed to connect through the local HTTPS proxy due to a TLS handshake error caused by an incorrect proxy URL scheme.
+- Fixed a Windows update that reverted and showed a **Mismatch patch version** error when it ran again after the target version was already installed.
+- Fixed Resource Saver not stopping the Docker engine when running on WSL.
+- Fixed a regression where Docker Desktop failed to start on WSL2 kernels that could not attach the Synchronized File Shares eBPF probes, such as Windows on Arm. Fixes [docker/desktop-feedback#470](https://github.com/docker/desktop-feedback/issues/470).
+
+#### For Linux
+
+- Fixed a bug where Docker Desktop would fail to start after a reset.
+
+## 4.80.0
+
+{{< release-date date="2026-06-29" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.80.0" build_path="/232116/" >}}
+
+### Updates
+
+- Docker Offload `v0.6.6`
+- [Docker Buildx v0.35.0](https://github.com/docker/buildx/releases/tag/v0.35.0)
+- [Docker Model Runner v1.2.4](https://github.com/docker/model-runner/releases/tag/v1.2.4)
+- [containerd v2.2.5](https://github.com/containerd/containerd/releases/tag/v2.2.5)
+- [Docker Engine v29.6.1](https://docs.docker.com/engine/release-notes/29/#2961)
+- [Runc v1.3.6](https://github.com/opencontainers/runc/releases/tag/v1.3.6)
+- Kubernetes v1.36.1
+   - CNI plugins v1.9.1
+   - cri-tools v1.35.0
+   - cri-dockerd v0.3.25
+- Updated Kubernetes images:
+   - Kubeadm:
+      - `docker/desktop-storage-provisioner:v4.0`
+      - `docker/desktop-vpnkit-controller:v4.0`
+      - `docker/desktop-kubernetes-etcd:3.6.8-0`
+      - `docker/desktop-kubernetes-coredns:v1.14.2`
+      - `docker/desktop-kubernetes-pause:3.10.2`
+      - `docker/desktop-kubernetes-apiserver:v1.36.1`
+      - `docker/desktop-kubernetes-controller-manager:v1.36.1`
+      - `docker/desktop-kubernetes-scheduler:v1.36.1`
+      - `docker/desktop-kubernetes-proxy:v1.36.1`
+   - Kind:
+      - `docker/desktop-containerd-registry-mirror:v0.0.4`
+      - `docker/desktop-cloud-provider-kind:v0.6.0`
+      - `envoyproxy/envoy:v1.36.7`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- The experimental `docker sandbox` plugin has been removed. Migrate to [`docker sbx`](/manuals/ai/sandboxes/_index.md).
+- Fixed an issue where running out of disk space showed a generic error dialog instead of a clear **Disk full** message prompting users to free up space and restart.
+- Fixed an issue where using `docker -c desktop-linux` while a cloud context was active would silently route commands to the cloud engine instead of the local desktop Linux engine.
+- Fixed a bug where the backend would incorrectly report a stopped VM as running after an idle shutdown, especially when Enhanced Container Isolation was enabled.
+- Fixed an OS update notification timing issue where users with auto-download enabled were notified when an update was available rather than when it was ready to install.
+
+#### For Mac
+
+- Removed the legacy osxfs file sharing. Users still on osxfs are migrated to VirtioFS.
+- Increased VirtioFS filesharing performance by not persisting (fake) file ownership changes on the host. Calls to `chown` will succeed, but `stat` will not be affected.
+
+#### For Windows
+
+- Fixed an issue where the Windows installer failed when the destination directory contained leftover files from a previous interrupted installation.
+- Fixed an issue on Windows where upgrading Docker Desktop would unnecessarily shut down and unregister unrelated WSL distros via `wsl --shutdown`.
+- Fixed spurious Hyper-V job failures on Windows where operations briefly transitioning through suspended or shutting down states were incorrectly reported as failed.
+- Fixed an issue where the WSL engine failed to start with a **Permission denied** error on machines where the cross-distro WSL mount was configured as `noexec`.
+- Fixed an issue on Windows where end users could override the `NO_PROXY` exclusion list even when an admin had locked the proxy configuration.
+- Fixed an issue on Windows where Docker Desktop would silently disappear on startup failure. An error dialog is now displayed instead.
+- Fixed an issue on Windows where Docker Desktop showed a generic engine-start failure instead of routing to the WSL update recovery when an older wsl.exe did not support the --version flag.
+
+## 4.79.0
+
+{{< release-date date="2026-06-22" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.79.0" build_path="/230596/" >}}
+
+### Updates
+
+- [Docker Agent v1.79.0](https://github.com/docker/docker-agent/releases/tag/v1.79.0)
+- `docker pass` v0.1.5
+- Docker Desktop CLI v0.4.1
+- Docker Offload v0.6.4 
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Gordon improvements:
+   - Added context-aware suggested questions to the Ask Gordon menu in the **Containers**, **Images**, **Volumes**, and **Builds** tabs, surfacing relevant diagnostics first when items are in a problematic state.
+   - Added a **Give feedback** link to Gordon so you can report issues with a redacted conversation preview or share product feedback.
+   - Fixed a React warning in Gordon's sidebar search input that appeared on the first keystroke when typing a search query.
+- Fixed an issue where the Docker Engine settings editor displayed minified JSON instead of formatted JSON when first opened.
+- Fixed spurious 500 errors for Docker API calls made right after the VM woke from idle shutdown.
+- Fixed spurious 'Integrity issue detected' notifications caused by leftover symlinks from previously bundled binaries.
+- Fixed a broken documentation link in the error screen shown when the current user is not a member of the `docker-users` group.
+- Fixed a breaking change to the `/app/settings/grouped` API that caused integrations such as NVIDIA to stop working correctly.
+- Fixed high CPU usage (~30%) on macOS Retina displays caused by SVG animations in the Gordon landing page.
+- Fixed an issue where OAuth network errors caused Docker Desktop to incorrectly show users as signed out.
+- Fixed an issue where signing in via OAuth would not display the user's username and email in the UI after login.
+- QEMU has been updated to v10.2.3
+- **Logs** view improvements
+   - Added copy buttons. Copy all visible filtered logs at once or copy individual log entries on hover, respecting the current timestamp visibility setting.
+   - Improved the toolbar with a reorganized layout, saved filter presets that now capture container selection and build log visibility, and the ability to persist container filter state.
+   - Added the ability to clear logs.
+   - Combined **copy** and **expand**/**collapse** buttons into a single pinned column that stays visible during horizontal scrolling, and fixed **copy** accidentally toggling the row detail pan.
+- Fixed Registry Access Management policy downloads to avoid `permission denied` errors by fetching and caching policies in the user's own directory with tampering detection.
+
+#### For Windows
+
+- Fixed a bug where Docker Desktop on WSL failed to start with an 'is already mounted' error after a force-killed bootstrap left stale rootfs mounts behind.
+- Fixed an issue on Windows where clicking "Quit Docker Desktop" had no effect when the backend had crashed or been killed.
+- Fixed an issue on Windows where Docker Desktop processes could linger as orphans after an unexpected exit or crash.
+- Fixed getting stuck on "Starting the Docker Engine…" after an in-place upgrade on Windows when the WSL virtual machine had not been shut down.
+- Fixed the tray icon on Windows not matching the system taskbar theme, so the correct light or dark icon is now displayed.
+- Fixed a silent failure on Windows where backend startup errors were only written to a log file. Users now see a visible error dialog box when Docker Desktop fails to start.
+
+## 4.78.0
+
+{{< release-date date="2026-06-15" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.78.0" build_path="/229452/" >}}
+
+### Updates
+
+- [Docker Agent v1.73.0](https://github.com/docker/docker-agent/releases/tag/v1.73.0)
+- `docker pass` v0.1.4
+- [Credential helpers v0.9.8](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.8)
+
+### Bug fixes and enhancements
+
+#### For all platforms 
+
+- Fixed an out-of-memory crash that would cause Docker Desktop to become unresponsive or crash while streaming logs in the Docker Desktop Dashboard.
+- Improved update reliability by retrying stalled and transient download failures and resuming from the partially downloaded file.
+- Added live streaming output to Gordon tool calls so long-running commands like `docker compose up` display STDOUT/STDERR in real time instead of waiting until completion.
+- Added color-coded labels to the **Logs** view so each container and build source is visually distinguished by a unique color in both the log grid and the container-filter dropdown.
+- Improved the error message when the Docker Desktop VM fails to start. It now shows the underlying `VirtualizationFramework` / `libkrun` reason instead of the generic **Use of closed network connection**.
+- Fixed a bug where Docker CLI error messages were shown as raw JSON instead of human-readable text while Docker Desktop was in Resource Saver mode.
+- Fixed a crash that occurred in the **Logs** view when deselecting a container filter.
+- Fixed an issue where the support page was replaced by the no-virtualization override screen when accessed from the troubleshooting popover.
+- Fixed an issue where Docker Desktop failed to start on bare metal EC2 instances (e.g. `g4dn.metal`) with a **Nested virtualization not supported** error.
+- Increased the retry delay to accommodate transient rename failures caused by antivirus software holding file locks.
+- Gordon now shows clear network error messages with guidance to check VPN, proxy, or firewall settings when outbound HTTPS to Docker's services is blocked, instead of a generic agent error.
+- Fixed the Gordon AI model picker incorrectly showing an internal model identifier instead of **Default** for sessions with no explicit model selection.
+
+#### For Windows
+
+- Added [Synchronized file shares](/manuals/desktop/features/synchronized-file-sharing.md) support for the WSL2 backend.
+- Fixed Docker Desktop getting stuck on **Starting the Docker Engine…** after an in-place upgrade.
+- Fixed a bug where Docker Desktop was not restarted after a failed update was reverted to the previous version.
+- Fixed delta updates failing to prepare.
+- Fixed an issue on Hyper-V where Docker commands (e.g. `docker login`) would fail on the first attempt after the engine had been idle-shut-down or paused.
+- Fixed an issue on Windows where Docker Desktop showed a generic engine-start failure instead of a clear, actionable error message when WSL is not installed.
+
 ## 4.77.0
 
 {{< release-date date="2026-06-08" >}}
@@ -49,6 +236,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms 
 
+- Increased the retry delay to accommodate transient rename failures caused by antivirus software holding file locks.
 - Marketplace extensions are now installed and updated by pinned manifest digest, instead of by tag, protecting against tag mutation after publication.
 - Added Buildx version information to the About window.
 - Added a case-sensitivity toggle to the **Logs** search bar which lets you switch between case-insensitive (default) and case-sensitive log filtering.
@@ -3417,7 +3605,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Fixed a bug where `docker run --gpus=all` hangs. Fixes [docker/for-win#13324](https://github.com/docker/for-win/issues/13324).
 - Fixed a bug where Registry Access Management policy updates were not downloaded.
 - Docker Desktop now allows Windows containers to work when BitLocker is enabled on `C:`.
-- Docker Desktop with the WSL backend no longer requires the `com.docker.service` privileged service to run permanently. For more information see [Permission requirements for Windows](https://docs.docker.com/desktop/windows/permission-requirements/).
+- Docker Desktop with the WSL backend no longer requires the `com.docker.service` privileged service to run permanently. For more information see [Permission requirements for Windows](/manuals/desktop/setup/install/windows-permission-requirements.md).
 
 ### For Mac
 

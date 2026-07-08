@@ -99,9 +99,10 @@ same time, they may step on each other's changes — use
 
 ### Clone mode
 
-In clone mode, the sandbox becomes a Git remote on your host. The agent
-commits inside the sandbox; you pull its work back out by fetching from
-that remote.
+In clone mode, the sandbox becomes a Git remote on your host. Your entire
+working directory, including untracked files and files excluded by `.gitignore`, is mounted
+read-only inside the sandbox. The agent commits inside the sandbox; you pull its work back
+out by fetching from that remote.
 
 > [!NOTE]
 > Clone mode was introduced in `sbx` v0.31.0 and replaces the `--branch`
@@ -116,7 +117,7 @@ You can also create the sandbox in the background and attach later:
 
 ```console
 $ sbx create --clone --name my-sandbox claude .
-$ sbx run my-sandbox
+$ sbx run --name my-sandbox
 ```
 
 The clone follows whichever ref your host repository has checked out at
@@ -177,11 +178,33 @@ $ sbx run claude ~/my-project  # creates sandbox
 $ sbx run claude ~/my-project  # reconnects to same sandbox
 ```
 
-Use `--name` to make this explicit and avoid ambiguity:
+Use `--name` to give a sandbox an explicit identity:
 
 ```console
 $ sbx run claude --name my-project
 ```
+
+Once a named sandbox exists, `--name` is how you re-attach to it — from any
+working directory, with or without the agent positional:
+
+```console
+$ sbx run --name my-project        # re-attaches from anywhere
+$ sbx run claude --name my-project # same, with agent confirmed
+```
+
+Re-running a command that previously created a sandbox reconnects to it rather
+than returning an error, so you can up-arrow and re-enter a session without
+first looking up the sandbox name.
+
+To run multiple sandboxes against the same workspace — for example, one for a
+feature branch and one for exploratory changes — give each a distinct name:
+
+```console
+$ sbx run claude --name feature ~/my-project
+$ sbx run claude --name spike ~/my-project
+```
+
+Both sandboxes share the same workspace but are otherwise independent.
 
 ## Creating without attaching
 
@@ -189,15 +212,15 @@ $ sbx run claude --name my-project
 the agent. To create a sandbox in the background without attaching:
 
 ```console
-$ sbx create claude .
+$ sbx create --name my-project claude .
 ```
 
 Unlike `run`, `create` requires an explicit workspace path. It uses direct
 mode by default, or pass `--clone` for [clone mode](#clone-mode). Attach
-later with `sbx run`:
+later with `sbx run --name`:
 
 ```console
-$ sbx run claude-my-project
+$ sbx run --name my-project
 ```
 
 ## Multiple workspaces
@@ -288,28 +311,26 @@ To stop forwarding a port:
 $ sbx ports my-sandbox --unpublish 8080:3000
 ```
 
-A few things to keep in mind:
+For a service to be reachable, it must listen on all interfaces inside the
+sandbox, not only `127.0.0.1`. Bind it to `0.0.0.0` for IPv4 or `[::]` for both
+IPv4 and IPv6; most dev servers need a flag like `--host 0.0.0.0` to do this. On
+the host, `--publish` listens on both `127.0.0.1` and `::1`, so a client
+resolving `localhost` might pick IPv6 and fail with "connection reset by peer"
+if the sandboxed service only listens on IPv4 — even when
+`http://127.0.0.1:<port>/` works. To fix that, bind the service to `[::]`, or
+pin the published port to one family with `--publish 8080:3000/tcp4` or `/tcp6`.
 
-- **Services must listen on all interfaces** — a service listening only on
-  `127.0.0.1` inside the sandbox won't be reachable through a published port.
-  Bind to `0.0.0.0` for IPv4, or `[::]` to accept both IPv4 and IPv6. Most dev
-  servers default to `127.0.0.1`, so you'll usually need to pass a flag like
-  `--host 0.0.0.0` or `--host '[::]'` when starting them.
-- **`localhost` on the host can resolve to IPv6** — by default, `--publish`
-  listens on both `127.0.0.1` and `::1`. Your browser or client may pick IPv6
-  when resolving `localhost`. If the sandboxed service only listens on IPv4,
-  the IPv6 connection fails with "connection reset by peer" — even though
-  `http://127.0.0.1:<port>/` works. To fix it, bind the sandboxed service to
-  `[::]` so it accepts both families, or restrict the published port to one
-  family with `--publish 8080:3000/tcp4` (IPv4) or `/tcp6` (IPv6).
-- **Not persistent** — published ports are lost when the sandbox stops or the
-  daemon restarts. Re-publish after restarting.
-- **No create-time flag** — unlike `docker run -p`, there's no `--publish`
-  option on `sbx run` or `sbx create`. Ports can only be published after the
-  sandbox is running.
-- **Unpublish requires the host port** — `--unpublish 3000` is rejected; you
-  must use `--unpublish 8080:3000`. Run `sbx ports my-sandbox` first if you
-  used an ephemeral port and need to find the assigned host port.
+Published ports survive restarts: `sbx` re-publishes them when the sandbox or
+the daemon restarts. Explicit host ports are reused, while a port published with
+an OS-assigned host port (such as `--publish 3000`) gets a new host port on each
+start, so check `sbx ports my-sandbox` to find it. If an explicit host port is
+already in use at restart, the CLI or the dashboard prompts you to choose
+another. Removing the sandbox releases its ports.
+
+You can't publish ports at create time — there's no `--publish` flag on
+`sbx run` or `sbx create`, so publish them once the sandbox is running. To stop
+forwarding, `--unpublish 8080:3000` removes a single mapping, and
+`--unpublish 3000` removes every host port mapped to sandbox port 3000.
 
 ## Accessing host services from a sandbox
 

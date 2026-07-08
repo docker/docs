@@ -114,7 +114,7 @@ To manage Docker Offload access for your organization, use [Settings
 Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md):
 
 1. Sign in to [Docker Home](https://app.docker.com/) as an organization owner.
-1. Select **Admin Console** > **Desktop Settings Management**.
+1. Select **Docker Desktop**, then **Settings Management**.
 1. Configure the **Enable Docker Offload** setting to control whether Docker Offload features are available in Docker
    Desktop. You can configure this setting in five states:
    - **Always enabled**: Docker Offload is always enabled and users cannot disable it. The Offload
@@ -149,4 +149,4 @@ To view usage for Docker products:
   [Docker Offload usage and billing](/manuals/offload/usage.md).
 
 If your usage or seat count exceeds your subscription amount, you can
-[scale your subscription](../../../subscription/scale.md) to meet your needs.
+[add seats](./manage-seats.md) or [view available Docker plans](../../../subscription/plans/_index.md) to meet your needs.

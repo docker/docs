@@ -274,6 +274,9 @@ examples: |-
     on the filesystem. Alternatively, you can pass a wildcard (`*`) to allow Bake
     to access the entire filesystem.
 
+    Bake also supports `--allow=buildx.local.delete` to grant local outputs
+    permission to delete stale files when `mode=delete` is set.
+
     ### Example: fs.read
 
     Given the following Bake configuration, Bake would need to access the parent
@@ -618,6 +621,7 @@ examples: |-
     $ docker buildx bake --set foo*.no-cache                # bypass caching only for targets starting with 'foo'
     $ docker buildx bake --set target.platform+=linux/arm64 # appends 'linux/arm64' to the platform list
     $ docker buildx bake --set target.contexts.bar=../bar   # overrides 'bar' named context
+    $ docker buildx bake --set target.resources.memory=2g   # overrides memory resource limit
     ```
 
     > [!NOTE]
@@ -648,6 +652,7 @@ examples: |-
     * `platform`
     * `pull`
     * `push`
+    * `resources`
     * `secrets`
     * `ssh`
     * `tags`

@@ -33,6 +33,10 @@ grid:
     link: "/extensions/extensions-sdk/extensions/multi-arch/"
 ---
 
+> [!IMPORTANT]
+>
+> New submissions to the Docker Extensions Marketplace are paused while Docker reviews Marketplace security. You can still update existing extensions, and private Marketplace extensions are unaffected. Contact extensions@docker.com if you have additional questions.
+
 The resources in this section help you create your own Docker extension.
 
 The Docker CLI tool provides a set of commands to help you build and publish your extension, packaged as a 

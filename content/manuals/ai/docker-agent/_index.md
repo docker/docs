@@ -5,6 +5,9 @@ weight: 60
 aliases:
   - /ai/cagent/
   - /manuals/ai/cagent/
+  - /ai/docker-agent/integrations/
+  - /ai/docker-agent/reference/
+  - /ai/docker-agent/reference/examples/
 params:
   sidebar:
     group: AI and agents
@@ -134,7 +137,7 @@ agents:
 
 You can also configure model settings (like context limits), tools (including
 MCP servers), and more. See the [configuration
-reference](./reference/config.md)
+reference](./configuration/overview/index.md)
 for complete details.
 
 ## Share agent teams
@@ -152,16 +155,12 @@ it doesn't exist yet.
 
 ## What's next
 
-- Follow the [tutorial](./tutorial.md) to build your first coding agent
-- Learn [best practices](./best-practices.md) for building effective agents
-- Integrate Docker Agent with your [editor](./integrations/acp.md) or use agents as
-  [tools in MCP clients](./integrations/mcp.md)
+- Follow the [quickstart](./getting-started/quickstart/index.md) to build your first agent
+- Learn [best practices](./guides/tips/index.md) for building effective agents
+- Integrate Docker Agent with your [editor](./features/acp/index.md) or use agents as
+  [tools in MCP clients](./tools/mcp/index.md)
 - Browse example agent configurations in the [Docker Agent
   repository](https://github.com/docker/docker-agent/tree/main/examples)
-- Use `docker agent new` to generate agent teams with AI <!-- TODO: link to some page
-  where we explain this, probably a CLI reference? -->
 - Connect agents to external tools via the [Docker MCP
   Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)
-- Read the full [configuration
-  reference](https://github.com/docker/docker-agent?tab=readme-ov-file#-configuration-reference)
-  <!-- TODO: move to this site/repo -->
+- Read the full [configuration reference](./configuration/overview/index.md)

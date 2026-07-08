@@ -13,6 +13,10 @@ sandbox gets its own Docker daemon, filesystem, and network — the agent can
 build containers, install packages, and modify files without touching your host
 system.
 
+> [!NOTE]
+> The `sbx` CLI is free to use, including for commercial work. Only
+> [organization governance](governance/) requires a separate paid subscription.
+
 Organization admins can
 [centrally manage sandbox network and filesystem policies](governance/org.md)
 from the Docker Admin Console, so the same rules apply uniformly across every
@@ -29,6 +33,7 @@ Install the `sbx` CLI and sign in:
 {{< tab name="macOS" >}}
 
 ```console
+$ brew trust docker/tap
 $ brew install docker/tap/sbx
 $ sbx login
 ```

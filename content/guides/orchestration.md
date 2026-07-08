@@ -7,8 +7,8 @@ aliases:
   - /guides/deployment-orchestration/orchestration/
 summary: |
   Explore the essentials of container orchestration with Docker.
-tags: [deploy]
 params:
+  tags: [deployment]
   time: 10 minutes
 ---
 

@@ -45,7 +45,7 @@ To add a domain:
 1. Sign in to [app.docker.com](https://app.docker.com), then choose your
    organization. If your organization is part of a company, then select the company to manage
    the domain at the company level.
-1. Select **Admin Console**, then **Domain management**.
+1. Select **Identity & auth**, then **Domain management**.
 1. Select **Add a domain**.
 1. Enter your domain in the text box and select **Add domain**.
 1. In the modal, copy the **TXT Record Value** provided for domain verification.
@@ -65,21 +65,21 @@ host using the TXT Record Value from Docker. DNS propagation can take up to
 
 1. To add your TXT record to AWS, see [Creating records by using the Amazon Route 53 console](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html).
 1. Wait up to 72 hours for TXT record verification.
-1. After the record is live, go to **Domain management** in the [Admin Console](https://app.docker.com/admin) and select **Verify**.
+1. After the record is live, go to **Identity & auth**, then **Domain management**, and select **Verify**.
 
 {{< /tab >}}
 {{< tab name="Google Cloud DNS" >}}
 
 1. To add your TXT record to Google Cloud DNS, see [Verifying your domain with a TXT record](https://cloud.google.com/identity/docs/verify-domain-txt).
 1. Wait up to 72 hours for TXT record verification.
-1. After the record is live, go to **Domain management** in the [Admin Console](https://app.docker.com/admin) and select **Verify**.
+1. After the record is live, go to **Identity & auth**, then **Domain management**, and select **Verify**.
 
 {{< /tab >}}
 {{< tab name="GoDaddy" >}}
 
 1. To add your TXT record to GoDaddy, see [Add a TXT record](https://www.godaddy.com/help/add-a-txt-record-19232).
 1. Wait up to 72 hours for TXT record verification.
-1. After the record is live, go to **Domain management** in the [Admin Console](https://app.docker.com/admin) and select **Verify**.
+1. After the record is live, go to **Identity & auth**, then **Domain management**, and select **Verify**.
 
 {{< /tab >}}
 {{< tab name="Other providers" >}}
@@ -87,7 +87,7 @@ host using the TXT Record Value from Docker. DNS propagation can take up to
 1. Sign in to your domain host.
 1. Add a TXT record to your DNS settings and save the record.
 1. Wait up to 72 hours for TXT record verification.
-1. After the record is live, go to **Domain management** in the [Admin Console](https://app.docker.com/admin) and select **Verify**.
+1. After the record is live, go to **Identity & auth**, then **Domain management**, and select **Verify**.
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -95,8 +95,8 @@ host using the TXT Record Value from Docker. DNS propagation can take up to
 ### Step 3: Create an SSO connection in Docker
 
 1. From [app.docker.com](https://app.docker.com), choose your
-   organization. Select **Admin Console**.
-1. Choose **SSO and SCIM** from the **Security** section.
+   organization.
+1. Select **Identity & auth**, then **SSO and SCIM**.
 1. Select **Create Connection**. Name the connection, then choose **SAML 2.0**.
 1. Keep this window open. You need to copy and paste these values in your Okta window:
    - **Entity ID**
@@ -196,7 +196,7 @@ Complete the integration by pasting your IdP values into Docker.
 1. Copy the following values:
    - From Azure AD: **Login URL**
    - **Certificate (Base64)** contents
-1. Return to the Docker Admin Console, then paste the **Login URL** and **Certificate (Base64)** values.
+1. Return to Docker Home, then paste the **Login URL** and **Certificate (Base64)** values.
 1. Choose your domain from the drop-down.
 1. Optional. Select a default team, if required by your org.
 1. Review and select **Create connection**.
@@ -204,7 +204,7 @@ Complete the integration by pasting your IdP values into Docker.
 {{< /tab >}}
 {{< tab name="Azure OpenID Connect (OIDC)" >}}
 
-1. Return to the Docker Admin Console.
+1. Return to Docker Home.
 1. Paste the following values:
    - **Client ID**
    - **Client Secret**
@@ -245,7 +245,7 @@ Before enforcing SSO, users accessing Docker through the CLI must [create a pers
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select
    your organization or company.
-1. Select **Admin Console**, then **SSO and SCIM**.
+1. Select **Identity & auth**, then **SSO and SCIM**.
 1. In the SSO connections table, select the **Action** menu, then **Enable enforcement**.
 1. Follow the on-screen instructions.
 1. Select **Turn on enforcement**.

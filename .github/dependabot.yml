@@ -8,6 +8,14 @@ updates:
     open-pull-requests-limit: 10
     schedule:
       interval: daily
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: daily
+    allow:
+      - dependency-name: '@docker/marlin-sdk-web-public'
+    open-pull-requests-limit: 1
+
   - package-ecosystem: gomod
     directory: /
     cooldown:

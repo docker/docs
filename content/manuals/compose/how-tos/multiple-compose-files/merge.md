@@ -356,8 +356,22 @@ For more information, see [Using Compose in production](../production.md).
 
 ## Limitations
 
-Docker Compose supports relative paths for the many resources to be included in the application model: build context for service images, location of file defining environment variables, path to a local directory used in a bind-mounted volume.
-With such a constraint, code organization in a monorepo can become hard as a natural choice would be to have dedicated folders per team or component, but then the Compose files relative paths become irrelevant. 
+When merging Compose files, all relative paths (for build contexts, environment files,
+bind-mounted volumes, and other resources) are resolved relative to the base Compose file. The
+first file specified with `-f`, or `compose.yaml` in the current directory if `-f` is
+not used. Paths in override files are not resolved relative to the override file's own
+location.
+
+This means that in a monorepo where Compose files are spread across team or component
+subdirectories, relative paths in those files are resolved incorrectly when used as
+override files.
+
+> [!TIP] 
+>
+> If you need each Compose file's paths to resolve relative to its own location,
+> use the [`include` top-level element](include.md) instead of merging with `-f`. Each
+> included file is loaded with its own project directory, so relative paths resolve
+> correctly.
 
 ## Reference information
 

@@ -18,6 +18,13 @@ supplement or override the organization policy.
 Admins can manage organization policies through the Admin Console UI or
 programmatically using the [Governance API](/reference/api/ai-governance/).
 
+By default, only organization
+[owners](/manuals/enterprise/security/roles-and-permissions/core-roles.md) can
+view and manage AI Governance policies. To let someone other than an owner
+manage policies, create a
+[custom role](/manuals/enterprise/security/roles-and-permissions/custom-roles.md)
+with the **Governance** permissions and assign it to a user or team.
+
 > [!NOTE]
 > Sandbox organization governance is available on a separate paid
 > subscription.
@@ -34,7 +41,7 @@ To create a policy:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your
    organization.
-1. Select **Admin Console**, then **AI governance**.
+1. Select **AI Platform**, then the governance section you want.
 1. Select **Network access** or **Filesystem access**, then **Create policy**.
 1. Enter a **Policy name**.
 1. Set the **Scope** to **Organization** or **Teams**. If you select **Teams**,
@@ -71,8 +78,8 @@ access to.
 Admins can restrict which paths are mountable with filesystem allow and deny
 rules. Each rule takes a path pattern and an action (allow or deny).
 
-For path pattern syntax including the difference between `*` and `**`, see
-[Policy concepts](concepts.md#filesystem-rules).
+For path pattern syntax and how read and write access combine to allow a
+mount, see [Policy concepts](concepts.md#filesystem-rules).
 
 ## Scope policies to teams
 
@@ -116,6 +123,50 @@ everywhere. For example, an org-wide policy can deny a category of domains for
 all members, while a team-scoped policy grants a research team access to extra
 package mirrors. Research-team members get the extra access, but the org-wide
 deny still applies.
+
+In practice, three patterns cover most layering:
+
+- Deny by default: leave a domain out of every allow rule to keep it blocked.
+- Allow when needed: add a team-scoped allow to grant an exception.
+- Explicit deny: deny a domain outright when no team should ever reach it.
+
+The examples that follow show each pattern.
+
+### Grant one team access to a blocked domain
+
+Because access is [denied by default](concepts.md#rule-evaluation), you don't
+need an explicit deny to keep a domain off-limits. Leaving it out of every allow
+rule is enough. To give a single team access to a domain no one else can reach:
+
+1. Don't add an allow rule for the domain at the organization level. Default
+   deny keeps it blocked for everyone.
+1. Create a team-scoped policy that allows the domain, and scope it to that team.
+
+Only members of that team can reach the domain. Everyone else is still blocked
+by default.
+
+### Block a domain everywhere as a guardrail
+
+Use an explicit org-wide deny when a domain must be off-limits to everyone,
+including teams that have broad allow rules. Because deny wins, an org-wide deny
+on `**.example.com` blocks `example.com` and every subdomain for all members,
+and no team-scoped allow can grant access to it.
+
+Reserve explicit deny rules for domains you want to block outright. For
+everything else, rely on default deny and add allow rules only where access is
+needed.
+
+### An exact deny doesn't cover subdomains
+
+A deny rule matches only the hostnames its pattern matches. A deny on the exact
+hostname `example.com` doesn't match `api.example.com`, so a team-scoped allow
+on `api.example.com` still grants that team access. The org-wide deny and the
+team allow apply to different hostnames, so they never conflict.
+
+To block a domain and all its subdomains, deny `**.example.com` instead. With
+that pattern, deny wins over any team-scoped allow on a subdomain. See
+[Hostname patterns](concepts.md#network-rules) for how exact hostnames and
+wildcards match.
 
 ## Precedence
 

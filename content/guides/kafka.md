@@ -5,11 +5,10 @@ title: Developing event-driven applications with Kafka and Docker
 linktitle: Event-driven apps with Kafka
 summary: |
   This guide explains how to run Apache Kafka in Docker containers.
-tags: [distributed-systems]
-languages: [js]
 aliases:
   - /guides/use-case/kafka/
 params:
+  tags: [deployment]
   time: 20 minutes
 ---
 

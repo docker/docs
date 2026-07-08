@@ -2,8 +2,23 @@
 title: FAQ
 weight: 70
 description: Frequently asked questions about Docker Sandboxes.
-keywords: docker sandboxes, sbx, faq, sign in, telemetry
+keywords: docker sandboxes, sbx, faq, sign in, telemetry, clipboard, image paste, pricing, commercial use, allowlist, firewall, domains, proxy
 ---
+
+## Is Docker Sandboxes free? Can I use it commercially?
+
+Yes to both. The `sbx` CLI is free to use, including for commercial and
+professional work, with no per-seat fee. Install it, sign in with a free
+Docker account, and run sandboxes at no cost.
+
+The only paid component is organization governance: centrally managed network
+and filesystem policies, [sign-in enforcement](governance/sign-in-enforcement.md),
+and [audit logs](governance/audit.md). These
+[organization governance features](governance/) require a separate paid
+subscription —
+[contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
+to get started. Everything else, including running agents in isolated
+sandboxes, is free.
 
 ## Why do I need to sign in?
 
@@ -34,6 +49,24 @@ See [Organization governance](governance/org.md). This feature requires
 a separate paid subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
 to get started.
+
+## Which domains do I need to allow for Docker Sandboxes to work?
+
+If your organization restricts outbound network access with a firewall or
+proxy, add the following domains to your allowlist so that `sbx` can
+authenticate, pull images, and report diagnostics.
+
+| Domain                                             | Description             |
+| -------------------------------------------------- | ----------------------- |
+| https://login.docker.com                           | Authentication          |
+| https://hub.docker.com                             | Docker Hub              |
+| https://api.docker.com                             | Docker API              |
+| https://marlin-2.docker.com                        | Telemetry               |
+| https://marlin-api.docker.com                      | Telemetry               |
+| https://registry-1.docker.io                       | Docker pull/push        |
+| https://auth.docker.io                             | Registry authentication |
+| https://dhi.io                                     | Docker Hardened Images  |
+| https://sbx-diagnostics.s3.us-east-1.amazonaws.com | Diagnostics upload      |
 
 ## Does the CLI collect telemetry?
 
@@ -111,22 +144,22 @@ startup. In Claude Code, use the `/permissions` command to change the mode
 interactively.
 
 To make approval prompts the default for every session, define a custom
-agent kit that overrides the agent's entrypoint to drop the
+sandbox kit that overrides the agent's entrypoint to drop the
 permission-skipping flag. For example, a kit that launches Claude Code
 without `--dangerously-skip-permissions`:
 
 ```yaml {title="claude-safe/spec.yaml"}
 schemaVersion: "1"
-kind: agent
+kind: sandbox
 name: claude-safe
-agent:
+sandbox:
   image: "docker/sandbox-templates:claude-code-docker"
   entrypoint:
     run: [claude]
 ```
 
 Run it with `sbx run claude-safe --kit ./claude-safe/`. See
-[Agent kits](customize/kits.md#agent-kits) for the full pattern.
+[Sandbox kits](customize/kits.md#sandbox-kits) for the full pattern.
 
 ## How do I know if my agent is running in a sandbox?
 
@@ -158,6 +191,35 @@ the sandbox.
 Collocating skills and other agent configuration with the project itself is a
 good practice regardless of sandboxes. It's versioned alongside the code and
 evolves with the project as it changes.
+
+## Can I paste images into an agent?
+
+Yes, but it's off by default. Text paste already works, because the terminal
+sends it directly. Pasting an image or screenshot with `Ctrl+V` is different:
+the agent reads it from your host clipboard, and the sandbox blocks that access
+unless you opt in.
+
+Turn it on with a local setting:
+
+```console
+$ sbx settings set clipboard.imagePaste true
+```
+
+`Ctrl+V` then pastes host images into agents that read the clipboard, including
+Claude Code and Codex. The setting takes effect within a few seconds, even for
+running sandboxes.
+
+This is opt-in because it relaxes the sandbox's isolation: when enabled, a process
+inside the sandbox can read your host clipboard through the host-side proxy. The
+exposure is narrow — reads happen only on a paste, return image data only
+(`image/png`), and clipboard content is never cached or logged — but it's still
+host data crossing into the sandbox, so it stays off until you turn it on.
+
+To turn it back off:
+
+```console
+$ sbx settings set clipboard.imagePaste false
+```
 
 ## Can I use Docker Sandboxes on headless Linux?
 

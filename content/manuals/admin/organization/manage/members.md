@@ -112,7 +112,7 @@ To bulk resend invitations:
 
 ### Remove an invitation
 
-To remove an invitation from the Admin Console:
+To remove an invitation:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.
@@ -126,7 +126,7 @@ Use Docker Hub or the Admin Console to add or remove team members. Organization 
 
 ### Add a member to a team
 
-To add a member to a team with the Admin Console:
+To add a member to a team:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.
@@ -140,7 +140,7 @@ An invitee must first accept the invitation to join the organization before bein
 
 If your organization uses single sign-on (SSO) with [SCIM](/manuals/enterprise/security/provisioning/scim/_index.md) enabled, you should remove members from your identity provider (IdP). This automatically removes members from Docker. If SCIM is disabled, follow procedures in this doc to remove members manually in Docker.
 
-Organization owners can remove a member from a team in Docker Hub or Admin Console. Removing the member from the team will revoke their access to the permitted resources. To remove a member from a specific team with the Admin Console:
+Organization owners can remove a member from a team. Removing the member from the team will revoke their access to the permitted resources. To remove a member from a specific team:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.
@@ -154,7 +154,7 @@ Organization owners can manage [roles](/manuals/enterprise/security/roles-and-pe
 within an organization. If an organization is part of a company,
 the company owner can also manage that organization's roles. If you have SSO enabled, you can use [SCIM for role mapping](/manuals/enterprise/security/provisioning/scim/_index.md).
 
-To update a member role in the Admin Console:
+To update a member role:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.

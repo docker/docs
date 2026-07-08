@@ -1502,6 +1502,12 @@ If your URL files are protected using authentication, you need to use `RUN wget`
 `RUN curl` or use another tool from within the container as the `ADD` instruction
 doesn't support authentication.
 
+##### Secrets
+
+You can use the `HTTP_AUTH_HEADER_<host>` and `HTTP_AUTH_TOKEN_<host>` secrets
+to set credentials for remote sources. For more information, see
+[Build secrets](https://docs.docker.com/build/building/secrets/#http-authentication-for-add).
+
 #### Adding files from a Git repository
 
 To use a Git repository as the source for `ADD`, you can reference the
@@ -1967,6 +1973,13 @@ path, using `--link` is always recommended. The performance of `--link` is
 equivalent or better than the default behavior and, it creates much better
 conditions for cache reuse.
 
+When copying a path into a subdirectory, `--link` will always copy from the
+root of the filesystem. When copying a directory, the existing mode is
+overridden with the new mode from the copied path. If you need a specific mode
+for a directory, such as the more permissive `/tmp` directory, you may need to
+either avoid using `--link`, unroll the copy into its base components, or use
+`--chmod` to ensure the overwriting directory contains the same permissions.
+
 ### COPY --parents
 
 ```dockerfile
@@ -2062,8 +2075,8 @@ COPY --exclude=*.txt hom* /mydir/
 ```
 
 You can specify the `--exclude` option multiple times for a `COPY` instruction.
-Multiple `--excludes` are files matching its patterns not to be copied,
-even if the files paths match the pattern specified in `<src>`.
+Files matching any of the specified `--exclude` patterns are not copied,
+even if their paths match the pattern specified in `<src>`.
 To add all files starting with "hom", excluding files with either `.txt` or `.md` extensions:
 
 ```dockerfile

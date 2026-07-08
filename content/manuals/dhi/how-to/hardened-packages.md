@@ -83,6 +83,7 @@ RUN apk update && \
 ```
 
 Replace `3.23` with your Alpine version in both the base image tag and repository URL.
+Supported versions include Alpine 3.23 and 3.24.
 
 To verify the configuration, build and run the image:
 

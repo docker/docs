@@ -114,9 +114,11 @@ $ docker build --no-cache -t my-image:my-tag .
 ```
 
 This gets the latest available versions of dependencies from package
-managers like `apt-get` or `npm`. However, `--no-cache` doesn't pull a
-fresh base image - it only prevents reusing cached layers. For a
-completely fresh build with the latest base image, combine both flags:
+managers like `apt-get` or `npm`. It does not pull a fresh base image —
+for that, use `--pull`.
+
+The two flags serve distinct purposes and can be combined. Use both
+together to get a fresh base image and re-execute all build steps:
 
 ```console
 $ docker build --pull --no-cache -t my-image:my-tag .
@@ -265,7 +267,7 @@ changes the version automatically, because you're in control and you have an
 audit trail of when and how the change occurred.
 
 For more information about automatically updating your base images with Docker
-Scout, see [Remediation](/manuals/scout/policy/remediation.md).
+Scout, see [Remediation](/manuals/scout/policy/dashboard.md).
 
 ## Build and test your images in CI
 

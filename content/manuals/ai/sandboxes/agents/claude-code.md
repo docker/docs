@@ -42,9 +42,8 @@ Alternatively, export the `ANTHROPIC_API_KEY` environment variable in your
 shell before running the sandbox. See
 [Credentials](../security/credentials.md) for details on both methods.
 
-**Claude subscription**: If no API key is set, Claude Code prompts you to
-authenticate interactively using OAuth. The proxy handles the OAuth flow, so
-credentials aren't stored inside the sandbox.
+**Claude subscription**: If no API key is set, use the `/login` command inside 
+Claude Code to authenticate via OAuth.
 
 ## Configuration
 
@@ -62,12 +61,16 @@ Without extra args, the sandbox runs:
 claude --dangerously-skip-permissions
 ```
 
-Args after `--` replace these defaults rather than being appended. To keep
-`--dangerously-skip-permissions`, include it yourself:
+Arguments after `--` are added after the default flags when the first one is
+itself a flag (begins with `-`), so `--dangerously-skip-permissions` is
+preserved:
 
 ```console
-$ sbx run claude -- --dangerously-skip-permissions -c
+$ sbx run claude -- -c   # runs claude --dangerously-skip-permissions -c
 ```
+
+When the first argument is a bare word, such as the `agents` subcommand, it
+replaces the defaults instead.
 
 See the [Claude Code CLI reference](https://code.claude.com/docs/en/cli-reference)
 for available options.

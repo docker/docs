@@ -1,5 +1,10 @@
 {{ partial "breadcrumbs.html" . }}
 <h1 data-pagefind-weight="10">{{ .Title | safeHTML }}</h1>
+{{- if and (eq .Type "guides") .Params.summary }}
+  <p class="mt-0 text-lg text-gray-500 dark:text-gray-400">
+    {{ .Params.summary }}
+  </p>
+{{- end }}
 <div class="hidden lg:block">
   {{ partialCached "md-dropdown.html" "-" "-" }}
 </div>

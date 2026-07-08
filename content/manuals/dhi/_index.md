@@ -31,7 +31,7 @@ params:
       icon: question-mark-circle
       link: /dhi/troubleshoot/
     - title: Additional resources
-      description: Guides, blog posts, Docker Hub catalog, GitHub repositories, and more.
+      description: Guides, Docker Hub catalog, GitHub repositories, and more.
       icon: link
       link: /dhi/resources/
     - title: Release notes

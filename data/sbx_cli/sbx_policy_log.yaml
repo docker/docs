@@ -24,7 +24,8 @@ options:
       usage: Only display log entries
     - name: type
       default_value: all
-      usage: 'Filter logs by type: "all" or "network" (default "all")'
+      usage: |
+        Filter logs by type: "all", "network", or "filesystem" (filesystem logs are not supported yet; default "all")
 inherited_options:
     - name: debug
       shorthand: D

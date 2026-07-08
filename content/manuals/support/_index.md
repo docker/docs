@@ -3,7 +3,7 @@ title: Get support for Docker products
 linkTitle: Support
 description: Learn about support options for Docker products including paid subscriptions and community resources
 keywords: support, help, docker desktop, subscriptions, community, troubleshooting
-weight: 5
+weight: 50
 params:
   sidebar:
     group: Platform

@@ -21,7 +21,7 @@ The backend acts as:
   - On Linux, the `qemu` process performs this function.
 - File server: Handles file access from containers to the host filesystem.
   - When using gRPC FUSE, the backend performs the file sharing.
-  - When using `virtiofs`, `osxfs`, or `krun`, file access is handled by those respective daemons rather than the backend process.
+  - When using `virtiofs`, or `krun`, file access is handled by those respective daemons rather than the backend process.
 - Control plane: Manages Docker API calls, port forwarding, and proxy configuration.
 
 The following table summarizes typical setups in more detail:
@@ -32,7 +32,6 @@ The following table summarizes typical setups in more detail:
 | Windows (WSL 2) | WSL 2                                 | `com.docker.backend.exe` | WSL 2 kernel (no visibility from host) | Recommended only when WSL 2 integration is needed          |
 | Mac             | Virtualization framework + gRPC FUSE  | `com.docker.backend`     | `com.docker.backend`                   | Recommended for performance and visibility                 |
 | Mac             | Virtualization framework + `virtiofs` | `com.docker.backend`     | Apple's Virtualization framework       | Higher performance but no file access visibility from host |
-| Mac             | Virtualization framework + `osxfs`    | `com.docker.backend`     | `osxfs`                                | Legacy setup, not recommended                              |
 | Mac             | DockerVMM + `virtiofs`                | `com.docker.backend`     | `krun`                                 | Currently in Beta                                          |
 | Linux           | Native Linux VM                       | `qemu`                   | `virtiofsd`                            | No `com.docker.backend` process on Linux                   |
 

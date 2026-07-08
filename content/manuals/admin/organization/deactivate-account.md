@@ -26,10 +26,10 @@ organization:
 
 - Download any images and tags you want to keep. Use `docker pull -a <image>`
   to pull all tags, or `docker pull <image>:<tag>` to pull a specific tag.
-- If you have an active Docker subscription, [downgrade it to a free subscription](../../subscription/change.md).
+- If you have an active Docker subscription, [downgrade it to a free subscription](../../subscription/plans/docker.md#cancel-a-docker-plan).
 - Remove all other members within the organization.
 - Unlink your [GitHub and Bitbucket accounts](../../docker-hub/repos/manage/builds/link-source.md#unlink-a-github-user-account).
-- For Business organizations, [remove your SSO connection](/manuals/enterprise/security/single-sign-on/manage.md#remove-an-organization).
+- For Business organizations, [remove your SSO connection](/manuals/enterprise/security/single-sign-on/manage.md#delete-a-connection).
 
 ## Deactivate
 
@@ -43,7 +43,7 @@ Docker Hub.
 
 1. Sign in to [Docker Home](https://app.docker.com) and select the organization
    you want to deactivate.
-1. Select **Admin Console**, then **Deactivate**. If the **Deactivate**
+1. Select **Organization settings**, then **Deactivate**. If the **Deactivate**
    button is unavailable, confirm you've completed all [Prerequisites](#prerequisites).
 1. Enter the organization name to confirm deactivation.
 1. Select **Deactivate organization**.

@@ -25,12 +25,11 @@ organization.
 
 ## Create a custom role
 
-Before you can assign a custom role to users, you must create one in the
-Admin Console:
+Before you can assign a custom role to users, you must create one:
 
 1. Sign in to [Docker Home](https://app.docker.com).
-2. Select **Admin Console**.
-3. Under **User management**, select **Roles** > **Create role**.
+2. Select **Members**.
+3. Select the **Roles** tab, then **Create role**.
 4. Create a name and describe what the role is for:
    - Provide a **Label**
    - Enter a unique **Name** identifier (can't be changed later)
@@ -47,8 +46,8 @@ With a custom role created, you can now [assign custom roles to users](#assign-c
 ## Edit a custom role
 
 1. Sign in to [Docker Home](https://app.docker.com).
-2. Select **Admin Console**.
-3. Under **User management**, select **Roles**.
+2. Select **Members**.
+3. Select the **Roles** tab.
 4. Find your custom role from the list, and select the **Actions menu**.
 5. Select **Edit**.
 6. You can edit the following custom role settings:
@@ -101,8 +100,8 @@ The role column will update to the newly assigned role.
 To see which users and teams are assigned to roles:
 
 1. Sign in to [Docker Home](https://app.docker.com).
-2. Select **Admin Console**.
-3. Under **User management**, select **Roles**.
+2. Select **Members**.
+3. Select the **Roles** tab.
 4. In the roles list, view the **Users** and **Teams** columns to see
    assignment counts.
 5. Select a specific role to view its permissions and assignments in detail.
@@ -148,13 +147,13 @@ To see which users and teams are assigned to roles:
 Before deleting a custom role, you must reassign all users and teams to different roles.
 
 1. Sign in to [Docker Home](https://app.docker.com).
-2. Select **Admin Console**.
-3. Under **User management**, select **Roles**.
+2. Select **Members**.
+3. Select the **Roles** tab.
 4. Find your custom role from the list, and select the **Actions menu**.
 5. If the role has assigned users or teams:
    - Navigate to the **Members** page and change the role for all users assigned to this custom role
    - Navigate to the **Teams** page and reassign all teams that have this custom role
-6. Once no users or teams are assigned, return to **Roles**.
+6. Once no users or teams are assigned, return to the **Roles** tab.
 7. Find your custom role and select the **Actions menu**.
 8. Select **Delete**.
 9. In the confirmation window, select **Delete** to confirm.
@@ -196,3 +195,10 @@ Custom roles are built by selecting specific permissions across different catego
 | :------------- | :----------------------------------------------- |
 | View billing   | View organization billing information            |
 | Manage billing | Complete access to managing organization billing |
+
+### Governance
+
+| Permission      | Description                                          |
+| :-------------- | :--------------------------------------------------- |
+| View policies   | View existing AI Governance policies and their rules |
+| Manage policies | Full access to AI Governance policy management       |

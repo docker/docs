@@ -35,10 +35,6 @@ grid:
     description: Discover and add MCP servers on-demand using natural language
     icon: magnifying-glass
     link: /ai/mcp-catalog-and-toolkit/dynamic-mcp/
-  - title: Docker Hub MCP server
-    description: Use the Docker Hub MCP server to search images and manage repositories
-    icon: server-stack
-    link: /ai/mcp-catalog-and-toolkit/hub-mcp/
   - title: Security FAQs
     description: Common questions about MCP security, credentials, and server verification
     icon: shield-check
@@ -90,6 +86,9 @@ once, then share it across clients or with your team.
 Clients are the AI applications that connect to your profiles. Claude Code,
 Cursor, Zed, and others connect through the MCP Gateway, which routes requests
 to the right server and handles authentication and lifecycle management.
+
+> [!NOTE]
+> MCP Gateway as part of Docker AI Governance is an invite-only feature. [Contact Docker Sales](https://www.docker.com/pricing/contact-sales/) to learn more.
 
 ## Learn more
 

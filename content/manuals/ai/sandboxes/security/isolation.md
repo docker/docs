@@ -43,9 +43,11 @@ client's configuration. Both enforce the network policy; only the forward proxy
 [injects credentials](credentials.md) for AI services.
 
 Raw TCP connections, UDP, and ICMP are blocked at the network layer. DNS
-resolution is handled by the proxy; the sandbox cannot make raw DNS queries.
-Traffic to private IP ranges, loopback, and link-local addresses is also
-blocked. Only domains explicitly listed in the policy are reachable.
+resolution goes through the proxy and is subject to the same network policy —
+domains that policy denies are refused at the resolver; loopback names such as
+`localhost` are always resolved regardless of policy. Traffic to private IP
+ranges, loopback, and link-local addresses is also blocked. Only domains
+explicitly listed in the policy are reachable.
 
 For the default set of allowed domains, see
 [Default security posture](defaults.md).
@@ -163,8 +165,13 @@ flowchart LR
 How the boundary is enforced:
 
 - Your repository's Git root is mounted at `/run/sandbox/source` as
-  read-only. Nothing the agent does inside the VM can write back through
-  that mount.
+  read-only. The mount covers your entire working directory, including
+  untracked files and files excluded by `.gitignore`. Nothing the agent
+  does inside the VM can write back through that mount, but all files
+  under the Git root are readable inside the sandbox. This includes
+  credential files not tracked by Git, such as `.env`. Store
+  secrets outside your working directory or use
+  [credential isolation](credentials.md) instead.
 - The agent works on a private clone that lives inside the sandbox. The
   clone has its own index, its own refs, and its own working tree. Writes
   to the clone never reach your host.

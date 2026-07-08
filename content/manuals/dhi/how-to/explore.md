@@ -46,7 +46,7 @@ provides the following:
  - Guides: Several guides on how to use the image and migrate your existing application.
  - Images: Select this option to [view image variants](#image-variants).
  - Security summary: Select a tag name to view a quick security summary,
-   including package count, total known vulnerabilities, and Scout health score.
+   including package count and total known vulnerabilities.
  - Recently pushed tags: A list of recently updated image variants and when they
    were last updated.
  - Use this image: After selecting an image variant, you can select this option to
@@ -84,7 +84,6 @@ The **Images** page provides a table with the following columns:
   (65532)`.
 - Last pushed: When the image variant was last updated.
 - Vulnerabilities: Vulnerability counts by severity level.
-- Health: The Scout health score. Select the score to view more details.
 
 ### Image variant details
 

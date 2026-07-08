@@ -15,7 +15,7 @@ The MSI package supports various MDM (Mobile Device Management) solutions, makin
 ## Install interactively
 
 1. In [Docker Home](http://app.docker.com), choose your organization.
-2. Select **Admin Console**, then **Enterprise deployment**.
+2. Select **Docker Desktop**, then **Deploy**.
 3. From the **Windows OS** tab, select the **Download MSI installer** button.
 4. Once downloaded, double-click `Docker Desktop Installer.msi` to run the installer.
 5. After accepting the license agreement, choose the install location. By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`(all-user installations) or `%LOCALAPPDATA%\Programs\DockerDesktop` (per-user installations)
@@ -43,7 +43,7 @@ If your administrator account is different from your user account, you must add 
 > When installing Docker Desktop with the MSI, in-app updates are automatically disabled by default. This ensures organizations can maintain version consistency and prevent unapproved updates.
 > Starting with Docker Desktop version 4.60 and later, in-app updates from an MSI installation can be enabled by changing the `disableUpdate` setting to `false` through [Settings Management](../security/hardened-desktop/settings-management/).
 >
-> Docker Desktop notifies you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the **Enterprise deployment** page.
+> Docker Desktop notifies you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the **Deploy** page.
 >
 > To keep up to date with new releases, check the [release notes](/manuals/desktop/release-notes.md) page.
 

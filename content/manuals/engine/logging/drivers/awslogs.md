@@ -338,6 +338,14 @@ default AWS shared credentials file (`~/.aws/credentials` of the root user), or
 if you are running the Docker daemon on an Amazon EC2 instance, the Amazon EC2
 instance profile.
 
+> [!NOTE]
+> Docker reads AWS credentials when the container starts.
+> If you use a shared AWS credentials file with temporary credentials,
+> updating the file later does not automatically update the credentials
+> used by the running container. When the temporary credentials expire,
+> log delivery to Amazon CloudWatch Logs can fail. Restart the container
+> after refreshing the credentials so Docker can load the updated values.
+
 Credentials must have a policy applied that allows the `logs:CreateLogStream`
 and `logs:PutLogEvents` actions, as shown in the following example.
 

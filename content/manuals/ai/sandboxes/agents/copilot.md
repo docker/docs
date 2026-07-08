@@ -59,12 +59,15 @@ Without extra args, the sandbox runs:
 copilot --yolo
 ```
 
-Args after `--` replace these defaults rather than being appended. To keep
-`--yolo`, include it yourself:
+Arguments after `--` are added after the default flags when the first one is
+itself a flag (begins with `-`), so `--yolo` is preserved:
 
 ```console
-$ sbx run copilot -- --yolo -p "review this PR"
+$ sbx run copilot -- -p "review this PR"   # runs copilot --yolo -p "review this PR"
 ```
+
+When the first argument is a bare word — a subcommand or prompt — it replaces
+the defaults instead.
 
 ## Base image
 

@@ -80,6 +80,10 @@ Both IPv4 and IPv6 notation are supported: `10.0.0.0/8`, `192.168.1.0/24`,
 Filesystem rules use the actions `read` and `write`. Resources are host paths
 that sandboxes can mount as workspaces.
 
+A workspace mounted with write access must be allowed by both a `read` and a
+`write` rule; a read-only workspace needs only `read`. When default deny blocks
+a mount, the denial reason names whether read or write access was missing.
+
 `~` expands to the user's home directory on every platform, including Windows,
 where it resolves to `%USERPROFILE%`. A single `~/**` rule therefore matches
 each user's home tree on macOS, Linux, and Windows. The policy engine expands

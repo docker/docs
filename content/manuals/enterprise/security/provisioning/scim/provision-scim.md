@@ -44,7 +44,7 @@ For additional details about supported attributes and SCIM, see
 To enable SCIM:
 
 1. Sign in to [Docker Home](https://app.docker.com).
-1. Select **Admin Console**, then **SSO and SCIM**.
+1. Select **Identity & auth**, then **SSO and SCIM**.
 1. In the **SSO connections** table, select the **Actions** icon for your
    connection, then select **Setup SCIM**.
 1. Copy the **SCIM Base URL** and **API Token** and paste the values into your
@@ -336,7 +336,7 @@ After completing role mapping, you can test the configuration manually.
 1. Select a user you've assigned to your SCIM application.
 1. Select **Provision User**.
 1. Wait a few seconds, then check the Docker
-   [Admin Console](https://app.docker.com/admin) under **Members**.
+   **Members** in [Docker Home](https://app.docker.com).
 1. If the user doesn't appear, review logs in **Reports > System Log** and
    confirm SCIM settings in the app.
 
@@ -348,7 +348,7 @@ After completing role mapping, you can test the configuration manually.
 1. Go to **Provisioning** > **Provision on demand**.
 1. Select a user or group and choose **Provision**.
 1. Confirm that the user appears in the Docker
-   [Admin Console](https://app.docker.com/admin) under **Members**.
+   **Members** in [Docker Home](https://app.docker.com).
 1. If needed, check **Provisioning logs** for errors.
 
 {{< /tab >}}
@@ -364,7 +364,7 @@ organization.
 To disable SCIM:
 
 1. Sign in to [Docker Home](https://app.docker.com).
-1. Select **Admin Console**, then **SSO and SCIM**.
+1. Select **Identity & auth**, then **SSO and SCIM**.
 1. In the **SSO connections** table, select the **Actions** icon.
 1. Select **Disable SCIM**.
 

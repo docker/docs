@@ -5,8 +5,8 @@ description:  This guide walks through the process of setting up and utilizing a
 keywords: Docker, GenAI, Retrieval-Augmented Generation, RAG, Graph Databases, Neo4j, AI, LLM
 summary: |
   This guide explains setting up a GenAI stack with Retrieval-Augmented Generation (RAG) and Neo4j, covering key concepts, deployment steps, and a case study. It also includes troubleshooting tips for optimizing AI performance with real-time data.
-tags: [ai]
 params:
+  tags: [ai]
   time: 35 minutes
 ---
 

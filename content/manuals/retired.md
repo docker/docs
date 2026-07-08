@@ -63,6 +63,8 @@ aliases:
   - /toolbox/toolbox_install_mac/
   - /toolbox/toolbox_install_windows/
   - /desktop/features/dev-environments/
+  - /scout/policy/scores/
+  - /scout/integrations/environment/sysdig/
 ---
 
 This document provides an overview of Docker features, products, and
@@ -150,6 +152,35 @@ instead.
 You can still view the
 [Docker Desktop sandboxes documentation](/manuals/ai/sandboxes/docker-desktop.md).
 
+### Docker Scout features
+
+The following Docker Scout features have been retired or deprecated. For
+details, see the [Scout platform release notes](/manuals/scout/release-notes/platform.md).
+
+- Health scores and Scout Everywhere: graded Docker Hub images from A to F
+  based on policy compliance, surfaced across Docker Hub. Retired July 1, 2026.
+- Sysdig integration: detected images running in your cluster via the Sysdig API.
+  Retired July 1, 2026.
+- GitHub source code management integration: linked images to their source
+  repository and automated base-image updates via PRs. Retired July 1, 2026.
+  For migration options, see
+  [GitHub integration](/manuals/scout/integrations/source-code-management/github.md).
+- Notifications: alerted users to newly disclosed CVEs in-product and by email.
+  Deprecated, retiring September 1, 2026.
+- Slack integration: sent vulnerability and policy compliance notifications to
+  Slack channels. Deprecated, retiring July 30, 2026. For more information,
+  see [Slack integration](/manuals/scout/integrations/team-collaboration/slack.md).
+- Amazon ECR integration: automatically analyzed images pushed to ECR
+  registries. Deprecated, retiring September 1, 2026. For migration options, see
+  [ECR integration](/manuals/scout/integrations/registry/ecr.md).
+- Azure Container Registry integration: automatically analyzed images pushed to
+  ACR registries. Deprecated, retiring September 1, 2026. For migration options,
+  see [ACR integration](/manuals/scout/integrations/registry/acr.md).
+- Policies page in the Dashboard: the `docker scout policy`
+  CLI continues to work. Deprecated, retiring September 1, 2026. See
+  [Evaluate policies](/manuals/scout/policy/local.md).
+- SonarQube integration: surfaced SonarQube quality gate results as a Docker Scout policy. Deprecated, retiring September 1, 2026.
+
 ### GitHub Copilot extension
 
 The Docker for GitHub Copilot extension integrated Docker capabilities with
@@ -179,6 +210,16 @@ Docker Hub Automated Builds was a feature of Docker Hub that allowed building
 Docker images from source code in an external repository and automatically pushing
 the built image to your Docker repositories. This feature has been deprecated and
 will be removed on April 1, 2027.
+
+### Docker Content Trust (DCT)
+
+Docker Content Trust (DCT) and the Notary v1 service at `notary.docker.io` are
+being fully retired. If you've never set `DOCKER_CONTENT_TRUST=1` or used
+`docker trust` commands, this change doesn't affect you. The service shuts down
+completely on December 8, 2026, following brownout windows in July and August.
+For the timeline, migration guidance, and modern alternatives such as
+Sigstore/Cosign and Notation, see the [Docker Content Trust retirement and
+migration blog post](https://www.docker.com/blog/docker-content-trust-retirement-and-migration-guidance/).
 
 
 ## Open source projects

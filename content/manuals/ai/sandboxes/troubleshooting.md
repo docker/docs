@@ -54,6 +54,27 @@ If `sbx policy allow` doesn't unblock the request, your organization may
 manage sandbox policies centrally and take precedence over local rules. See
 [Organization governance](governance/org.md).
 
+## Kit fails to install: source not in allowlist
+
+If loading a kit fails with a message like its source is not in your
+allowlist:
+
+```console
+$ sbx run claude --kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=vale"
+ERROR: resolve kits: kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=vale" cannot be installed — its source is not in your allowlist.
+```
+
+`sbx` restricts kit installs to an allowlist of sources, which defaults to
+Docker Hub (`docker.io/`) only. Add the kit's publisher to the
+`kit.allowedSources` setting, keeping the entries you want to retain:
+
+```console
+$ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
+```
+
+Then run the command again. For details, including how to allow local kits or
+any remote source, see [Restrict kit sources](customize/kits.md#restrict-kit-sources).
+
 ## SSH and other non-HTTP connections fail
 
 Non-HTTP TCP connections like SSH can be allowed by adding a policy rule for
@@ -163,40 +184,28 @@ the egress path in the **PROXY** column:
   internal CA applies. The only difference between them is whether the client
   knows it's talking to a proxy.
 
-## Docker build export fails with an ownership error
-
-Running `docker build` with the local exporter (`--output=type=local` or `-o
-<path>`) inside a sandbox fails because the exporter tries to `lchown` output
-files to preserve ownership from the build. Processes inside the sandbox run as
-an unprivileged user without `CAP_CHOWN`, so the operation is denied.
-
-Use the tar exporter and extract the archive instead:
-
-```console
-$ mkdir -p ./result
-$ docker build --output type=tar,dest=- . | tar xf - -C ./result
-```
-
-Extracting the tar archive as the current user avoids the `chown` call.
-
 ## Filesystem operations are slow in large repositories
 
 Filesystem operations such as `git status`, `git log`, or directory scans can
 be noticeably slow when the sandbox workspace is mounted in direct mode (the
-default for workspaces without `--clone`). In direct mode, virtiofs caching is
-disabled by default to prevent data corruption. Clone-mode sandboxes enable
-virtiofs caching automatically, so this tuning applies only to direct mode.
+default for workspaces without `--clone`). Virtiofs caching speeds up these
+workloads. Clone-mode sandboxes always enable it, so this tuning applies only
+to direct mode.
 
-To speed up filesystem-intensive workloads, opt into virtiofs caching when
-creating the sandbox:
+On macOS and Linux, virtiofs caching is enabled by default. On Windows it's
+still opt-in — enable it when creating the sandbox:
 
 ```console
 $ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=1 sbx run <template>
 ```
 
 The setting is persisted in the sandbox spec and applies for the lifetime of
-that sandbox. If you experience Git index corruption or unexpected file content
-after enabling the cache, remove the sandbox and recreate it without the flag.
+that sandbox. If you experience Git index corruption or unexpected file content,
+disable caching with the kill switch and recreate the sandbox:
+
+```console
+$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <template>
+```
 
 ## Clone mode reports "not in a Git repository" on WSL
 

@@ -29,23 +29,29 @@ Use the **Search** field at the top of the Logs view to find specific entries. T
 - Plain-text terms for exact match searches
 - Regular expressions (for example, `/error|warn/`)
 
-You can save your search terms for easy-access later.
+You can save your current filters as a preset for easy access later. Presets capture your container selection, build log visibility, and case sensitivity settings, as well as any active search terms. If no containers are selected, the preset is named all; otherwise it is named after the first selected container.
 
 To refine the log stream further, select the **Filter** icon in the toolbar to open the container filter panel. From here you can:
 
 - Check individual containers to show only their output
 - Check Compose stacks to show or hide entire groups
-- Use **Select all** or **Clear all** to quickly toggle every container at once
+- Toggle off **View build logs** to exclude build-related log output in the stream
+- Use **Select all** or **Clear container filters** to quickly toggle every container at once
 
 Use the **Export** button in the top-right corner (available with Docker Desktop version 4.77 and later) to export all logs or only the logs that match your filters.
 
 ## Display settings
 
 Select the **Display settings** icon in the toolbar to toggle the following:
-
-- **View build logs**: Include or exclude build-related log output in the stream
 - **Wrap lines**
 - **Show timestamps**
+
+You can also choose **Clear logs** to remove log entries from the view (available with Docker Desktop 4.79 and later). A dialog lets you choose between two options:
+
+- **Clear all logs**: Immediately hides all current log entries.
+- **Clear logs before**: Activates a date and time picker. Only entries at or before the selected timestamp are hidden.
+
+The cleared state persists across Docker Desktop restarts. Once entries are cleared, they cannot be restored.
 
 ## Feedback
 
