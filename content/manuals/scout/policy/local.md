@@ -169,7 +169,7 @@ The following table lists the configurable keys for each built-in policy.
 | `fixable-vulnerabilities` | `fixable_only` | `true` | When `true`, only vulnerabilities with a known fix count |
 | `fixable-vulnerabilities` | `package_types` | `[]` | Allowlist of PURL package types to consider; empty means all |
 | `fixable-vulnerabilities` | `grace_period_days` | `0` | Days a newly disclosed CVE is exempt |
-| `high-profile-vulnerabilities` | `cves` | [see below](#default-high-profile-cves) | CVE IDs considered high-profile |
+| `high-profile-vulnerabilities` | `cves` | [Default high-profile CVEs](#default-high-profile-cves) | CVE IDs considered high-profile |
 | `high-profile-vulnerabilities` | `ignored_cves` | `[]` | CVE IDs excluded from causing a failure |
 | `high-profile-vulnerabilities` | `include_cisa_kev` | `true` | Also flag vulnerabilities in the CISA KEV catalog |
 | `copyleft-license` | `licenses` | AGPL/GPL/LGPL/MPL/… | SPDX license IDs treated as copyleft |
