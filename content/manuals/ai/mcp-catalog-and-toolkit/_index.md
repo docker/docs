@@ -32,7 +32,7 @@ grid:
     icon: cpu-chip
     link: /ai/mcp-catalog-and-toolkit/mcp-gateway/
   - title: Dynamic MCP
-    description: Discover and add MCP servers on-demand using natural language
+    description: Discover and add MCP servers on-demand using natural language. This feature is experimental.
     icon: magnifying-glass
     link: /ai/mcp-catalog-and-toolkit/dynamic-mcp/
   - title: Security FAQs
