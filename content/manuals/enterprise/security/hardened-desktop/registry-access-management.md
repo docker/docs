@@ -31,7 +31,7 @@ Registry Access Management works with any container registry, including:
 Before configuring Registry Access Management, you must:
 
 - [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md). Registry Access Management only takes effect when users are signed in to Docker Desktop with organization credentials.
-- Use [personal access tokens (PATs)](/manuals/security/access-tokens.md) for authentication (Organization access tokens aren't supported)
+- Use [Organization access tokens (OATs)](/manuals/security/access-tokens.md) for authentication
 - Have a Docker Business subscription
 
 ## Configure registry permissions
