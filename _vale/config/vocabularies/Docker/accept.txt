@@ -424,12 +424,14 @@ bootloader
 Buildkite
 crypto
 Graylog
+Heartbleed
 Kubuntu
 Libnetwork
 lockfile
 Lubuntu
 multimodal
 multithreading
+Log4Shell
 NLP
 Nodemon
 oldoldstable
@@ -437,6 +439,8 @@ parallelizable
 PHPUnit
 pnpm
 PyTorch
+Shellshock
+Spring4Shell
 superset
 tokenization
 WebGL
