@@ -1,38 +1,26 @@
----
-title: Introduction
-keywords: get started, getting started, how to get started
-weight: 30
-description: |
-  Get started with Docker. You'll learn about Docker Desktop, developing with
-  Docker, as well as how to build and push your first image.
-summary: |
-  Embark on a comprehensive learning path to understand Docker and
-  containerization, beginning with foundational concepts and installation
-  procedures. Progress through hands-on exercises that cover essential Docker
-  commands, image creation, and container orchestration.
-layout: series
-params:
-  proficiencyLevel: Beginner
-  time: 15 minutes
-  prerequisites: None
-aliases:
-  - /guides/getting-started/
----
+# Nambiar District 25
 
-## About this series
+## Premium Luxury Apartments on Sarjapur Road
 
-In this guide series, you will gain hands-on experience with Docker, starting
-with installing and setting up Docker Desktop on your local machine. You will
-learn how to run your first container, understanding the basics of
-containerization and its benefits. This series guides you through building your
-first Docker image, providing insights into creating efficient and reusable
-images. Finally, you will explore how to publish your image on Docker Hub,
-enabling you to share your work with the broader community and leverage
-Docker's powerful ecosystem for collaborative development and deployment.
+Nambiar District 25 is a premium integrated township located on Sarjapur Road, Bangalore. The project offers spacious 2, 2.5, 3, 3.5, and 4.5 BHK luxury apartments with modern amenities, landscaped gardens, and excellent connectivity to Electronic City, Whitefield, Bellandur, and Outer Ring Road.
 
-## What you'll learn
+## Features
 
-- Set up Docker Desktop
-- Run your first container
-- Build your first image
-- Publish your image on Docker Hub
+- Luxury Apartments
+- Clubhouse
+- Swimming Pool
+- Gym
+- Children's Play Area
+- Sports Courts
+- Jogging Track
+- Landscaped Gardens
+- 24x7 Security
+
+## Why Choose Nambiar District 25?
+
+The project combines luxury, convenience, and connectivity, making it an excellent choice for homebuyers and investors looking for premium residential property in Bangalore.
+
+## Learn More
+
+Official Website:
+https://nambiarprojects.com/nambiar-district-25/
