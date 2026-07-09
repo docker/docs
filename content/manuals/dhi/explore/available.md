@@ -62,10 +62,11 @@ with. Debian tends to offer the broadest compatibility.
 To accommodate different stages of the application lifecycle, DHI offers all
 language framework images and select application images in two variants:
 
-- Development (dev) images: Equipped with necessary development tools and
+- Development images: Equipped with necessary development tools and
 libraries, these images facilitate the building and testing of applications in a
 secure environment. They include a shell, package manager, a root user, and
-other tools needed for development.
+other tools needed for development. Depending on the image, the development
+variant may use a `-dev` or `-sdk` tag suffix.
 
 - Runtime images: Stripped of development tools, these images contain only the
 essential components needed to run applications, ensuring a minimal attack
