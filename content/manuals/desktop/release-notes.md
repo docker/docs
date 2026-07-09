@@ -24,7 +24,7 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
-## 4.81
+## 4.82
 
 {{< release-date date="2026-07-13" >}}
 
@@ -47,7 +47,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed reset to factory defaults not clearing downloaded LLM models.
 - Fixed a bug where the Gordon chat area would go blank when the agent requested free-text input via elicitation.
 - Fixed a delay in the Kubernetes screen where the progress UI did not appear immediately after confirming cluster creation or deletion.
-- Fixed a rare case where Docker Desktop could shut down if the build service crashed, for example during a factory reset.
 - Fixed a bug where the Kubernetes (kind) cluster failed to start with a **Failed to get API server port** error after a Docker Desktop restart.
 - With `docker pass`, the `ls` command now behaves consistently across all platforms.
 - Fixed an issue where users signed out due to sign-in enforcement policies were shown a generic sign-in prompt instead of a clear explanation of why they were signed out.
