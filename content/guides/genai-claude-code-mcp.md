@@ -7,6 +7,7 @@ summary: |
   You’ll enable the Docker Hub MCP server, connect Claude Code, verify MCP access, and create a Node.js + PostgreSQL stack with a conversational prompt.
 aliases:
   - /guides/use-case/genai-claude-code-mcp/
+  - /guides/genai-claude-code-mcp/claude-code-mcp-guide/
 params:
   tags: [ai]
   time: 15 minutes
@@ -73,11 +74,11 @@ Make sure you have:
 1. [Create a read-only personal access token](/security/access-tokens/#create-a-personal-access-token) and enter your access token under **Secrets**
 1. Save the configuration
 
-![Docker Hub](./Images/catalog_docker_hub.avif "Docker Hub")
+![Docker Hub](images/genai-claude-code-mcp-catalog-docker-hub.avif "Docker Hub")
 
 Public images work without credentials. For private repositories, you can add your Docker Hub username and token later.
 
-![Docker Hub Secrets](./Images/dockerhub_secrets.avif "Docker Hub Secrets")
+![Docker Hub Secrets](images/genai-claude-code-mcp-dockerhub-secrets.avif "Docker Hub Secrets")
 
 
 ---
@@ -93,7 +94,7 @@ You can connect from Docker Desktop or using the CLI.
 1. Locate Claude Code  
 1. Select **Connect**
 
-![Docker Connection](./Images/docker-connect-claude.avif)
+![Docker Connection](images/genai-claude-code-mcp-docker-connect-claude.avif)
 
 ### Option B. Connect using the CLI
 
@@ -128,7 +129,7 @@ You should now see:
 - The MCP gateway (for example `MCP_DOCKER`)
 - Tools provided by the Docker Hub MCP server
 
-![mcp-docker](./Images/mcp-servers.avif)
+![mcp-docker](images/genai-claude-code-mcp-mcp-servers.avif)
 
 If not, restart Claude Code or check Docker Desktop to confirm the connection.
 
@@ -268,7 +269,7 @@ Open your browser:
 ```console
 http://localhost:3000
 ```
-![Local Host](./Images/Localhost.avif)
+![Local Host](images/genai-claude-code-mcp-localhost.avif)
 
 Your Node.js app should now be running.
 

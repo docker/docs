@@ -585,7 +585,7 @@ You should receive the following response:
 
 You’ll use the debugger that comes with the IntelliJ IDEA. You can use the community version of this IDE. Open your project in IntelliJ IDEA, go to the **Run** menu, and then **Edit Configuration**. Add a new Remote JVM Debug configuration similar to the following:
 
-![Java Connect a Debugger](images/connect-debugger.webp)
+![Java Connect a Debugger](images/java-connect-debugger.webp)
 
 Set a breakpoint.
 
@@ -593,11 +593,11 @@ Open `src/main/java/org/springframework/samples/petclinic/vet/VetController.java
 
 To start your debug session, select the **Run** menu and then **Debug _NameOfYourConfiguration_**.
 
-![Debug menu](images/debug-menu.webp?w=300)
+![Debug menu](images/java-debug-menu.webp?w=300)
 
 You should now see the connection in the logs of your Compose application.
 
-![Compose log file ](images/compose-logs.webp)
+![Compose log file ](images/java-compose-logs.webp)
 
 You can now call the server endpoint.
 
@@ -607,7 +607,7 @@ $ curl --request GET --url http://localhost:8080/vets
 
 You should have seen the code break on the marked line and now you are able to use the debugger just like you would normally. You can also inspect and watch variables, set conditional breakpoints, view stack traces and a do bunch of other stuff.
 
-![Debugger code breakpoint](images/debugger-breakpoint.webp)
+![Debugger code breakpoint](images/java-debugger-breakpoint.webp)
 
 Press `ctrl+c` in the terminal to stop your application.
 
