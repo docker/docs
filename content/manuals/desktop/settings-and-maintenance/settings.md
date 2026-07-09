@@ -123,7 +123,7 @@ To prevent developers from accidentally changing the proxy settings, see
 
 #### Docker Desktop proxy
 
-Used for Docker Desktop host-level traffic: signing in to Docker, the Desktop application, CLI, and extensions. Acts as a fallback for daemon image pulls only when **Containers proxy** is not configured.
+Used for Docker Desktop host-level traffic: signing in to Docker, the Desktop application, CLI, and extensions. Acts as a fallback for docker image pulls only when [Containers proxy](#containers-proxy) is not configured.
 
 | Proxy mode | Description |
 |------------|-------------|
@@ -137,7 +137,7 @@ Used for Docker Desktop host-level traffic: signing in to Docker, the Desktop ap
 
 #### Containers proxy
 
-Used for daemon image pulls (Always enforced. All `docker pull` and Compose pull operations go through this proxy) and for outbound traffic from running containers when air-gapped container enforcement is configured. If a PAC file is configured here, it must explicitly allow Docker registry endpoints or image pulls fail.
+Used for docker image pulls (always enforced - all `docker pull` and Compose pull operations go through this proxy) and for outbound traffic from running containers when air-gapped container enforcement is configured. If a PAC file is configured here, ensure it returns an appropriate proxy server for Docker registry endpoints, or image pulls will fail.
 
 | Proxy mode | Description |
 |------------|-------------|

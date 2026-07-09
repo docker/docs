@@ -30,7 +30,7 @@ Use air-gapped containers if:
 
 > [!IMPORTANT]
 >
-> If you configure a PAC file under `containersProxy`, it must explicitly allow Docker registry endpoints (such as `registry-1.docker.io` and `auth.docker.io`) or all image pulls will fail — including `docker pull` and Compose pulls — because daemon image pulls always go through `containersProxy`.
+> If you configure a PAC file under `containersProxy`, ensure it returns an appropriate proxy server for Docker registry endpoints (such as `registry-1.docker.io` and `auth.docker.io`). If the PAC file does not handle these endpoints, all image pulls will fail — including `docker pull` and Compose pulls — because docker image pulls always go through `containersProxy`.
 
 Other considerations:
 
@@ -66,7 +66,7 @@ Add the container proxy to your [`admin-settings.json` file](/manuals/enterprise
 
 ### Configuration parameters
 
-The `containersProxy` setting controls network policies applied to daemon image pulls and, when `transparentPorts` is configured, running container outbound traffic:
+The `containersProxy` setting controls network policies applied to docker image pulls and, when `transparentPorts` is configured, running container outbound traffic:
 
 | Parameter | Description | Value |
 |-----------|-------------|-------|
