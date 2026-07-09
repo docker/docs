@@ -137,7 +137,7 @@ Used for Docker Desktop host-level traffic: signing in to Docker, the Desktop ap
 
 #### Containers proxy
 
-Used for daemon image pulls (always enforced — all `docker pull` and Compose pull operations go through this proxy) and for outbound traffic from running containers when air-gapped container enforcement is configured. If a PAC file is configured here, it must explicitly allow Docker registry endpoints or image pulls will fail.
+Used for daemon image pulls (Always enforced. All `docker pull` and Compose pull operations go through this proxy) and for outbound traffic from running containers when air-gapped container enforcement is configured. If a PAC file is configured here, it must explicitly allow Docker registry endpoints or image pulls fail.
 
 | Proxy mode | Description |
 |------------|-------------|
