@@ -400,7 +400,16 @@ Defines network addresses that containers should bypass when using proxy setting
 
 ### Air-gapped container proxy
 
-Configures an HTTP/HTTPS proxy for containers in air-gapped environments, providing controlled network access in offline or restricted network environments.
+Configures an HTTP/HTTPS proxy that governs two distinct traffic paths:
+
+- **Daemon image pulls (always enforced)**: Docker Desktop always injects `http.docker.internal:3128` as the daemon's proxy in `daemon.json` at VM startup. All `docker pull` and Compose pull operations are routed through `containersProxy`, including any PAC file rules. This applies regardless of whether `transparentPorts` is configured.
+- **Running container outbound traffic (opt-in)**: Container TCP traffic is only subject to `containersProxy` rules when `transparentPorts` is configured. Without it, running containers connect directly and PAC file rules do not apply to their outbound traffic.
+
+> [!IMPORTANT]
+>
+> If you configure a PAC file under `containersProxy`, the PAC file must explicitly allow Docker registry endpoints (such as `registry-1.docker.io`, `auth.docker.io`, and `production.cloudflare.docker.com`) or all image pulls will fail. This is expected behavior — the PAC file applies to daemon image pulls unconditionally.
+
+The `proxy` (App Proxy) setting governs Docker Desktop host-level traffic: the Desktop application, Docker CLI, and extensions. It serves as a fallback for the daemon only when `containersProxy` is not explicitly configured. Once `containersProxy` is set, the App Proxy plays no role in daemon or container traffic.
 
 | Property | Value |
 |---|---|
