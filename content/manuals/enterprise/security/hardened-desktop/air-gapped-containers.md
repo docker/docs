@@ -66,7 +66,7 @@ Add the container proxy to your [`admin-settings.json` file](/manuals/enterprise
 
 ### Configuration parameters
 
-The `containersProxy` setting controls network policies applied to docker image pulls and, when `transparentPorts` is configured, running container outbound traffic:
+The `containersProxy` setting controls network policies applied to `docker image pull` and, when `transparentPorts` is configured, running container outbound traffic:
 
 | Parameter | Description | Value |
 |-----------|-------------|-------|
