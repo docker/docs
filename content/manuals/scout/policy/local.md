@@ -169,7 +169,7 @@ The following table lists the configurable keys for each built-in policy.
 | `fixable-vulnerabilities` | `fixable_only` | `true` | When `true`, only vulnerabilities with a known fix count |
 | `fixable-vulnerabilities` | `package_types` | `[]` | Allowlist of PURL package types to consider; empty means all |
 | `fixable-vulnerabilities` | `grace_period_days` | `0` | Days a newly disclosed CVE is exempt |
-| `high-profile-vulnerabilities` | `cves` | curated list | CVE IDs considered high-profile |
+| `high-profile-vulnerabilities` | `cves` | [Default high-profile CVEs](#default-high-profile-cves) | CVE IDs considered high-profile |
 | `high-profile-vulnerabilities` | `ignored_cves` | `[]` | CVE IDs excluded from causing a failure |
 | `high-profile-vulnerabilities` | `include_cisa_kev` | `true` | Also flag vulnerabilities in the CISA KEV catalog |
 | `copyleft-license` | `licenses` | AGPL/GPL/LGPL/MPL/… | SPDX license IDs treated as copyleft |
@@ -178,6 +178,37 @@ The following table lists the configurable keys for each built-in policy.
 | `approved-base-images` | `allowed_distros_only` | `true` | When enabled, base image must use an allowed OS distribution |
 | `approved-base-images` | `allowed_distros` | curated list | OS distributions considered allowed |
 | `supply-chain-attestations` | `required_attestations` | provenance and SBOM predicate types | Attestation predicate types that must be present |
+
+#### Default high-profile CVEs
+
+The built-in `cves` list includes the following CVEs. Docker updates this list
+as new high-profile vulnerabilities are disclosed.
+
+| CVE ID | Common name |
+| --- | --- |
+| CVE-2014-0160 | Heartbleed |
+| CVE-2014-6271 | Shellshock |
+| CVE-2021-44228 | Log4Shell |
+| CVE-2021-45046 | Log4j follow-up |
+| CVE-2022-22965 | Spring4Shell |
+| CVE-2023-38545 | curl SOCKS5 heap overflow |
+| CVE-2023-44487 | HTTP/2 Rapid Reset |
+| CVE-2024-3094 | XZ Utils backdoor |
+
+To override the list, set `cves` in your policy-config file:
+
+```json
+{
+  "policies": [
+    {
+      "name": "high-profile-vulnerabilities",
+      "config": {
+        "cves": ["CVE-2021-44228", "CVE-2024-3094"]
+      }
+    }
+  ]
+}
+```
 
 ## Write custom policies
 
