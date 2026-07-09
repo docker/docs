@@ -407,7 +407,7 @@ Configures an HTTP/HTTPS proxy that governs two distinct traffic paths:
 
 > [!IMPORTANT]
 >
-> If you configure a PAC file under `containersProxy`, ensure it returns an appropriate proxy server for Docker registry endpoints. If the PAC file does not handle these endpoints, all image pulls will fail because docker image pulls always go through `containersProxy`.
+> If you configure a PAC file under `containersProxy`, the PAC file must return an appropriate proxy server to connect to the registries where your images are hosted.
 
 The [`proxy`](#proxy) setting governs Docker Desktop host-level traffic: the Desktop application, Docker CLI, and extensions. It serves as a fallback for the daemon only when `containersProxy` is not explicitly configured. Once `containersProxy` is set, `proxy` plays no role in daemon or container traffic.
 

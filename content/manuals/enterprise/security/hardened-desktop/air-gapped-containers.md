@@ -25,12 +25,12 @@ Use air-gapped containers if:
 
 `containersProxy` governs two distinct traffic paths:
 
-- Daemon image pulls (always enforced): Docker Desktop hardwires `http.docker.internal:3128` as the daemon's proxy in `daemon.json` at VM startup, so all `docker pull` and Compose pull operations always go through `containersProxy`, including any PAC file rules.
+- Image pulls (always enforced): Docker Desktop hardwires `http.docker.internal:3128` as the daemon's proxy in `daemon.json` at VM startup, so all `docker pull` and Compose pull operations always go through `containersProxy`, including any PAC file rules.
 - Running container outbound traffic (opt-in): Docker Desktop intercepts container TCP connections and applies proxy rules only for ports listed in `transparentPorts`. Without it, running container traffic bypasses `containersProxy` entirely.
 
 > [!IMPORTANT]
 >
-> If you configure a PAC file under `containersProxy`, ensure it returns an appropriate proxy server for Docker registry endpoints (such as `registry-1.docker.io` and `auth.docker.io`). If the PAC file does not handle these endpoints, all image pulls will fail — including `docker pull` and Compose pulls — because docker image pulls always go through `containersProxy`.
+> If you configure a PAC file under `containersProxy`, the PAC file must return an appropriate proxy server to connect to the registries where your images are hosted.
 
 Other considerations:
 
