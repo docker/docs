@@ -123,7 +123,7 @@ To prevent developers from accidentally changing the proxy settings, see
 
 #### Docker Desktop proxy
 
-Used for Docker Desktop host-level traffic: signing in to Docker, the Docker Desktop application, Docker CLI, extensions, and error diagnostics. It also acts as a fallback for daemon image pulls when **Containers proxy** is not explicitly configured. Once Containers proxy is set, this setting plays no role in daemon or container traffic.
+Used for Docker Desktop host-level traffic: signing in to Docker, the Desktop application, CLI, and extensions. Acts as a fallback for daemon image pulls only when **Containers proxy** is not configured.
 
 | Proxy mode | Description |
 |------------|-------------|

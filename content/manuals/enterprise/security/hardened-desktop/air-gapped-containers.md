@@ -25,28 +25,15 @@ Use air-gapped containers if:
 
 `containersProxy` governs two distinct traffic paths:
 
-**Daemon image pulls (always enforced)**
-
-Docker Desktop always injects `http.docker.internal:3128` as the daemon's proxy into `daemon.json` at VM startup. All `docker pull` and Compose pull operations are always routed through `containersProxy` — including any PAC file rules — regardless of whether `transparentPorts` is configured. The App Proxy (`proxy` setting) does not govern daemon image pulls; it only serves as a fallback for the daemon when `containersProxy` is not explicitly configured.
-
-**Running container outbound traffic (opt-in)**
-
-Air-gapped container enforcement for running container TCP traffic operates by intercepting container network connections and applying proxy rules:
-
-1. Traffic interception: Docker Desktop intercepts outgoing network connections from running containers
-1. Port filtering: Only traffic on specified ports (`transparentPorts`) is subject to proxy rules
-1. Rule evaluation: PAC file rules or static proxy settings determine how to handle each connection
-1. Connection handling: Traffic is allowed directly, routed through a proxy, or blocked based on the rules
-
-Without `transparentPorts` configured, running container traffic bypasses `containersProxy` entirely and connects directly.
+- **Daemon image pulls (always enforced)**: Docker Desktop hardwires `http.docker.internal:3128` as the daemon's proxy in `daemon.json` at VM startup, so all `docker pull` and Compose pull operations always go through `containersProxy`, including any PAC file rules.
+- **Running container outbound traffic (opt-in)**: Docker Desktop intercepts container TCP connections and applies proxy rules only for ports listed in `transparentPorts`. Without it, running container traffic bypasses `containersProxy` entirely.
 
 > [!IMPORTANT]
 >
-> If you configure a PAC file under `containersProxy`, it must explicitly allow Docker registry endpoints (such as `registry-1.docker.io`, `auth.docker.io`, and `production.cloudflare.docker.com`) or all `docker pull` and Compose pull operations will fail. This applies even if you have not configured `transparentPorts`, because daemon image pulls always go through `containersProxy`.
+> If you configure a PAC file under `containersProxy`, it must explicitly allow Docker registry endpoints (such as `registry-1.docker.io` and `auth.docker.io`) or all image pulls will fail — including `docker pull` and Compose pulls — because daemon image pulls always go through `containersProxy`.
 
-Some additional considerations:
+Other considerations:
 
-- The `proxy` setting continues to apply to Docker Desktop application traffic, Docker CLI, and extensions on the host
 - If PAC file download fails, containers block requests to target URLs
 - Hostname is available for ports 80 and 443, but only IP addresses for other ports
 
