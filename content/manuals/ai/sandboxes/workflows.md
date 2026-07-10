@@ -333,9 +333,18 @@ $ sbx rm ci-task
 ```
 
 Agent credentials (API keys, GitHub token) can be pre-configured as global
-secrets so they're available to any sandbox the CI runner creates:
+secrets so they're available to any sandbox the CI runner creates. If the
+relevant environment variables are already set in the CI environment (see the
+[built-in services table](security/credentials.md#built-in-services) for which
+variables each service reads), import them all at once:
 
 ```console
-$ echo "$ANTHROPIC_API_KEY" | sbx secret set -g anthropic
-$ echo "$GITHUB_TOKEN" | sbx secret set -g github
+$ sbx secret import --all
+```
+
+To overwrite an existing stored entry, add `--force`. To pass a value from your
+CI provider's secret store, use `-t`. For example, in a GitHub Actions step:
+
+```yaml
+- run: sbx secret set -g anthropic -t "${{ secrets.ANTHROPIC_API_KEY }}"
 ```

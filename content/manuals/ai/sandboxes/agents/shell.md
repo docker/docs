@@ -33,13 +33,13 @@ $ sbx run shell -- -c "echo hi"   # runs bash -l -c "echo hi"
 
 When the first argument is a bare word, it replaces `-l` instead.
 
-Set your API keys as environment variables so the sandbox proxy can inject
-them into API requests automatically. Credentials are never stored inside
-the VM:
+Store credentials using [stored secrets](../security/credentials.md#stored-secrets)
+before running the sandbox. The proxy injects them into outbound API requests;
+credentials are never stored inside the VM:
 
 ```console
-$ export ANTHROPIC_API_KEY=sk-ant-xxxxx
-$ export OPENAI_API_KEY=sk-xxxxx
+$ sbx secret set -g anthropic
+$ sbx secret set -g openai
 ```
 
 Once inside the shell, you can install agents using their standard methods,

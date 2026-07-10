@@ -48,11 +48,6 @@ $ sbx secret set -g openrouter
 You only need to configure the providers you want to use. OpenCode detects
 available credentials and offers those providers in the TUI.
 
-You can also use environment variables (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`,
-`GOOGLE_GENERATIVE_AI_API_KEY`, `XAI_API_KEY`, `GROQ_API_KEY`,
-`AWS_ACCESS_KEY_ID`, `OPENROUTER_API_KEY`). See
-[Credentials](../security/credentials.md) for details on both methods.
-
 ## Configuration
 
 Sandboxes don't pick up user-level configuration from your host. Only

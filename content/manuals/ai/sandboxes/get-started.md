@@ -124,25 +124,14 @@ option.
 
 ## Authenticate your agent
 
-Agents need credentials for their model provider. How you provide them depends
-on the agent.
-
 For Claude Code with a Claude subscription (Max, Team, or Enterprise), no
 upfront setup is needed — use the `/login` command inside the sandbox to sign
-in with OAuth. The session token stays on your host and is injected by a
-proxy, not stored inside the sandbox.
+in with OAuth. The session token stays on your host and is never stored inside
+the sandbox.
 
-For agents that use API keys (or if you prefer API key authentication for
-Claude Code), store the key before starting a sandbox:
-
-```console
-$ sbx secret set -g anthropic
-```
-
-This prompts for the secret value and stores it in your OS keychain. A proxy on
-your host injects the key into outbound API requests so it's never exposed
-inside the sandbox. See [Credentials](security/credentials.md) for details on
-scoping, supported services, and alternative methods.
+If you prefer to authenticate with an API key, see
+[Credentials](security/credentials.md) for how to store one with
+`sbx secret set`.
 
 To give the agent access to GitHub for creating pull requests or interacting
 with repositories:

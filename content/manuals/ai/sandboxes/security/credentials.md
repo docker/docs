@@ -22,16 +22,14 @@ value never enters the sandbox — the agent sees only a sentinel like
 `proxy-managed`.
 
 There are several ways to provide that value. When more than one source has a
-value for the same service, the stored secret takes precedence over a host
-environment variable.
+value for the same service, the stored secret takes precedence.
 
-| Form | What it is | Use it when |
-| ---- | ---------- | ----------- |
-| [Stored secrets](#stored-secrets) (`sbx secret set`) | A value in your OS keychain, keyed by service | The default for any built-in or kit-declared service |
-| [Custom secrets](#custom-secrets) (`sbx secret set-custom`) | A value keyed to a domain and environment variable | The service model doesn't fit — the agent validates the variable's format, or the secret rides in a request body |
-| [Environment variables](#environment-variables) | Read from your shell session | One-off testing or CI, where keychain storage isn't worth it |
-| OAuth | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, or Cursor |
-| [Registry credentials](#registry-credentials) (`sbx secret set --registry`) | Authentication for pulling images and kits | Pulling templates or kits from a private registry |
+| Form                                                                        | What it is                                                   | Use it when                                                                                                      |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| [Stored secrets](#stored-secrets) (`sbx secret set`)                        | A value in your OS keychain, keyed by service                | The default for any built-in or kit-declared service                                                             |
+| [Custom secrets](#custom-secrets) (`sbx secret set-custom`)                 | A value keyed to a domain and environment variable           | The service model doesn't fit — the agent validates the variable's format, or the secret rides in a request body |
+| OAuth                                                                       | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, or Cursor                                                     |
+| [Registry credentials](#registry-credentials) (`sbx secret set --registry`) | Authentication for pulling images and kits                   | Pulling templates or kits from a private registry                                                                |
 
 For multi-provider agents (OpenCode, Docker Agent), the proxy selects
 credentials based on the API endpoint being called. See individual
@@ -93,16 +91,39 @@ $ sbx secret set my-sandbox openai
 > you set or change a global secret while a sandbox is running, recreate the
 > sandbox for the new value to take effect.
 
-You can also pipe in a value for non-interactive use:
+### Import from environment variables
+
+If you already have API keys set in your shell, `sbx secret import` reads them
+and stores them in the keychain without typing each value manually:
 
 ```console
-$ echo "$ANTHROPIC_API_KEY" | sbx secret set -g anthropic
+$ sbx secret import
 ```
+
+This scans your current session for the environment variables in the
+[built-in services table](#built-in-services) below and prompts you to confirm
+each one before writing. To import a single service:
+
+```console
+$ sbx secret import openai
+```
+
+Pass `--all` to import everything without prompting (new entries only; existing
+entries are left unchanged), or `--force` to overwrite existing entries:
+
+```console
+$ sbx secret import --all
+$ sbx secret import openai --force
+```
+
+Pass `--dry-run` to preview what would be imported without writing anything.
+Run `sbx secret ls` afterwards to confirm what's stored. For setting up
+credentials in CI, see [CI and headless use](../workflows.md#ci-and-headless-use).
 
 ### Built-in services
 
-Each built-in service name maps to a set of environment variables the proxy
-checks and the API domains it authenticates requests to:
+Each built-in service name maps to the environment variables `sbx secret import`
+reads and the API domains the proxy injects credentials into:
 
 | Service      | Environment variables              | API domains                                                                                                                   |
 | ------------ | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -118,9 +139,8 @@ checks and the API domains it authenticates requests to:
 | `openrouter` | `OPENROUTER_API_KEY`               | `openrouter.ai`                                                                                                               |
 | `xai`        | `XAI_API_KEY`                      | `api.x.ai`                                                                                                                    |
 
-When you store a secret with `sbx secret set -g <service>`, the proxy uses it
-the same way it would use the corresponding environment variable. You don't
-need to set both.
+When you store a secret with `sbx secret set -g <service>`, the proxy injects
+it into requests to the listed API domains.
 
 ### Services declared by kits
 
@@ -236,26 +256,6 @@ proxy replaces it with the real value. The agent never sees the real secret.
 Prefer the [service-based flow](#stored-secrets) whenever it's an option —
 the kit handles the wiring; you only provide the value.
 
-## Environment variables
-
-As an alternative to stored secrets, export the relevant environment variable
-in your shell before running a sandbox:
-
-```console
-$ export ANTHROPIC_API_KEY=sk-ant-api03-xxxxx
-$ sbx run claude
-```
-
-The proxy reads the variable from your terminal session. See individual
-[agent pages](../agents/) for the variable names each agent expects.
-
-> [!NOTE]
-> These environment variables are set on your host, not inside the sandbox.
-> Sandbox agents are pre-configured to use credentials managed by the
-> host-side proxy. For custom environment variables not tied to a
-> [built-in service](#built-in-services), see
-> [Setting custom environment variables](../faq.md#how-do-i-set-custom-environment-variables-inside-a-sandbox).
-
 ## Registry credentials
 
 Registry credentials authenticate to private OCI registries when pulling
@@ -348,10 +348,9 @@ $ sbx secret rm my-sandbox --registry ghcr.io -f
 
 ## Best practices
 
-- Use [stored secrets](#stored-secrets) over environment variables. Stored
-  secrets are encrypted at rest in the OS keychain (or an encrypted file on
-  Linux hosts without a keychain), while environment variables are plaintext in
-  your shell. See [Where secrets are stored](#where-secrets-are-stored).
+- Use [stored secrets](#stored-secrets) to provide credentials. They are
+  encrypted at rest in the OS keychain (or an encrypted file on Linux hosts
+  without a keychain). See [Where secrets are stored](#where-secrets-are-stored).
 - Don't set API keys manually inside the sandbox. Sandbox agents are
   pre-configured to use proxy-managed credentials.
 - Registry credentials you make available inside a sandbox are stored in the VM

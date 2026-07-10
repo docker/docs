@@ -38,10 +38,6 @@ Cursor supports two authentication methods: an API key or OAuth.
 $ sbx secret set -g cursor
 ```
 
-Alternatively, export the `CURSOR_API_KEY` environment variable in your shell
-before running the sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
-
 **OAuth**: If no API key is set, Cursor prompts you to sign in interactively
 on first run. The proxy intercepts the token exchange with
 `api2.cursor.sh/auth/poll`, so credentials are managed by the host and aren't
