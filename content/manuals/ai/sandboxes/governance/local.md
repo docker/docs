@@ -126,10 +126,10 @@ a network request with `sbx policy check network`:
 
 ```console
 $ sbx policy check network api.anthropic.com
-allowed
+Allowed: api.anthropic.com
 
 $ sbx policy check network blocked.example.com
-denied
+Denied: blocked.example.com
 ```
 
 The target can be a hostname, a `host:port` pair, an IP address, or a URL.

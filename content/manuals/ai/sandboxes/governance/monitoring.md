@@ -17,11 +17,9 @@ Use `sbx policy ls` to see all active policies and their current status:
 
 ```console
 $ sbx policy ls
-POLICY                       SOURCE   APPLIES TO   SUMMARY
-Balanced                     local    all          network: 42 allow, 1 deny
-default-fs-read-allow-all    local    all          filesystem read: 1 allow
-default-fs-write-allow-all   local    all          filesystem write: 1 allow
-kit:docs                     kit      my-sandbox   network: 2 allow
+POLICY                                 SOURCE   APPLIES TO          SUMMARY
+local-policy                           local    all                 network: 42 allow, 1 deny; filesystem read: 1 allow; filesystem write: 1 allow
+1b2633ea-e604-48bb-a5e6-3ac86ba383fe   kit      sandbox:my-sandbox  network: 3 allow
 ```
 
 The columns are:
@@ -106,9 +104,8 @@ rules control which host paths a sandbox can mount as a workspace. Pass
 
 ```console
 $ sbx policy ls --type filesystem
-POLICY                       SOURCE   APPLIES TO   SUMMARY
-default-fs-read-allow-all    local    all          filesystem read: 1 allow
-default-fs-write-allow-all   local    all          filesystem write: 1 allow
+POLICY         SOURCE   APPLIES TO   SUMMARY
+local-policy   local    all          filesystem read: 1 allow; filesystem write: 1 allow
 ```
 
 A writable workspace mount must be allowed by both a `filesystem:read` and a
