@@ -19,6 +19,13 @@ $ sbx stop my-sandbox               # pause it
 $ sbx rm my-sandbox                 # delete it entirely
 ```
 
+If the sandbox has an active session — an open attach, SSH connection, or
+in-flight SFTP transfer — `sbx rm` refuses unless you pass `--force`:
+
+```console
+$ sbx rm --force my-sandbox
+```
+
 To get a shell inside a running sandbox — useful for inspecting the environment,
 checking Docker containers, or manually installing something:
 
@@ -29,6 +36,7 @@ $ sbx exec -it <sandbox-name> bash
 If you need a clean slate, remove the sandbox and re-run:
 
 ```console
+$ sbx stop my-sandbox
 $ sbx rm my-sandbox
 $ sbx run claude
 ```

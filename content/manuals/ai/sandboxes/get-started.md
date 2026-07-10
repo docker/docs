@@ -186,9 +186,10 @@ agents, open shells, and manage network rules from one place. See
 
 By default, the agent edits your working tree directly. To give the agent an
 isolated copy of your repository, use `--clone`. Because `--clone` is a
-create-time flag, remove the existing sandbox first:
+create-time flag, stop and remove the existing sandbox first:
 
 ```console
+$ sbx stop my-sandbox
 $ sbx rm my-sandbox
 $ sbx run --clone --name my-sandbox claude
 ```
@@ -262,6 +263,12 @@ space:
 
 ```console
 $ sbx rm my-sandbox
+```
+
+If the sandbox has an active session, pass `--force`:
+
+```console
+$ sbx rm --force my-sandbox
 ```
 
 Removing a sandbox deletes everything inside it — installed packages, Docker
