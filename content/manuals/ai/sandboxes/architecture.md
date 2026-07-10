@@ -68,15 +68,24 @@ and sets the upstream proxy for both HTTP and HTTPS to that URL. Unlike
 `HTTP_PROXY` and `HTTPS_PROXY`, it doesn't affect image pulls or the daemon's
 own requests.
 
+`DOCKER_SANDBOXES_PROXY` accepts `http://`, `https://`, `socks5://`, and
+`socks5h://` URLs. With `socks5://`, DNS is resolved locally before the
+connection is handed to the proxy. With `socks5h://`, DNS resolution is
+delegated to the proxy. Both schemes support credentials in the URL:
+`socks5://user:pass@host:port`.
+
+Set `DOCKER_SANDBOXES_NO_PROXY` to exclude specific destinations from
+`DOCKER_SANDBOXES_PROXY`, using standard comma-separated `NO_PROXY` matching
+semantics. This only affects traffic routed through `DOCKER_SANDBOXES_PROXY`
+— use `NO_PROXY` to exclude destinations from `HTTP_PROXY`/`HTTPS_PROXY`.
+
 Set these variables in the environment where the sandbox daemon starts. The
 daemon starts automatically the first time a command needs it, so set the
 variables before you run a `sbx` command. If the daemon is already running,
 restart it for a change to take effect.
 
-Two limitations apply:
+One limitation applies:
 
-- Only HTTP and HTTPS traffic can be forwarded to an upstream proxy. Other TCP
-  traffic can't be redirected to a proxy.
 - Proxy auto-configuration files, such as `proxy.pac`, aren't supported. Set the
   `HTTP_PROXY`, `HTTPS_PROXY`, or `DOCKER_SANDBOXES_PROXY` environment variables
   explicitly.
