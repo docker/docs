@@ -411,7 +411,7 @@ $ sbx kit add my-sandbox ./my-kit/
 `sbx kit add` recreates the sandbox container with the updated kit set.
 VM state — installed packages, Docker images, volumes, and agent history — is
 preserved across the recreation. The kit's network allow/deny rules take effect
-immediately. Kits can't be removed from a running sandbox — delete and recreate
+immediately. Kits can't be removed from a running sandbox — remove and recreate
 it to start clean.
 
 ### Git repository
