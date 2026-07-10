@@ -19,8 +19,8 @@ $ sbx stop my-sandbox               # pause it
 $ sbx rm my-sandbox                 # delete it entirely
 ```
 
-If the sandbox has an active session (an open attach, SSH connection, or
-in-flight SFTP transfer), `sbx rm` refuses unless you pass `--force`:
+If the sandbox has an active session — an open attach, SSH connection, or
+in-flight SFTP transfer — `sbx rm` refuses unless you pass `--force`:
 
 ```console
 $ sbx rm --force my-sandbox
