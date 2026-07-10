@@ -316,7 +316,8 @@ $ sbx run claude --kit /path/to/ruff-lint/
 
 To apply the mixin to a sandbox that's already running, use
 [`sbx kit add`](#local) instead. The `--kit` flag only takes effect when a
-sandbox is created.
+sandbox is created. `sbx kit add` recreates the sandbox container, but VM state
+— installed packages, Docker images, volumes, and agent history — is preserved.
 
 ## Sandbox kits
 
@@ -388,6 +389,9 @@ several kits on the same sandbox.
 > against an existing sandbox name fails with
 > `--kit can only be used when creating a new sandbox`. To extend a
 > running sandbox with a kit, use [`sbx kit add`](#local) instead.
+> `sbx kit add` recreates the sandbox container with the updated kit set.
+> VM state — installed packages, Docker images, volumes, and agent history
+> — is preserved across the recreation.
 
 ### Local
 
@@ -398,15 +402,17 @@ $ sbx run claude --kit ./my-kit/
 $ sbx run claude --kit ./my-kit-1.0.zip
 ```
 
-While iterating on a kit, apply changes to a running sandbox with
-`sbx kit add` instead of recreating it:
+While iterating on a kit, apply changes to a running sandbox with `sbx kit add`:
 
 ```console
 $ sbx kit add my-sandbox ./my-kit/
 ```
 
-`kit add` re-runs install commands and re-copies files. Kits can't be
-removed from a running sandbox — remove and recreate it to start clean.
+`sbx kit add` recreates the sandbox container with the updated kit set.
+VM state — installed packages, Docker images, volumes, and agent history — is
+preserved across the recreation. The kit's network allow/deny rules take effect
+immediately. Kits can't be removed from a running sandbox — remove and recreate
+it to start clean.
 
 ### Git repository
 
