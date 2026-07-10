@@ -1,0 +1,28 @@
+name: sbx policy inspect
+synopsis: Inspect policy or rule details
+description: |-
+    Inspect full detail for a selected policy or rule.
+
+    The selector may be a policy ID, policy name, rule ID, or rule name.
+    Selecting a policy lists every resource with its decision, rule, and status;
+    selecting a rule shows just that rule. Use "sbx policy ls" to find policy
+    names and "sbx policy ls --wide" to find rule IDs and resource values.
+usage: sbx policy inspect <policy-or-rule> [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for inspect
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      # Inspect a policy by name
+      sbx policy inspect "Developer access"
+
+      # Inspect a rule by ID
+      sbx policy inspect 2d3c1f0e-4a73-4e05-bc9d-f2f9a4b50d67
+see_also:
+    - sbx policy - Manage sandbox policies

@@ -19,7 +19,7 @@ inherited_options:
       usage: Enable debug logging
 see_also:
     - sbx - Manage AI coding agent sandboxes.
-    - sbx kit add - Add a kit to a running sandbox
+    - sbx kit add - Add a kit to a sandbox
     - sbx kit inspect - Display details about a kit artifact
     - sbx kit pack - Package a directory as a kit artifact
     - sbx kit pull - Pull a kit artifact from an OCI registry
