@@ -13,64 +13,59 @@ blocked or allowed.
 
 ## Listing rules
 
-Use `sbx policy ls` to see all active rules and their current status:
+Use `sbx policy ls` to see all active policies and their current status:
 
 ```console
 $ sbx policy ls
-PROVENANCE   APPLIES_TO     POLICY/RULE                  TYPE               DECISION   RESOURCES
-local        all            default-ai-services          network            allow      api.anthropic.com:443
-                                                                                       api.openai.com:443
-local        all            default-fs-read-allow-all    filesystem:read    allow      **
-local        all            default-fs-write-allow-all   filesystem:write   allow      **
-kit          sandbox:docs   kit:docs                     network            allow      api.github.com
-                                                                                       registry.npmjs.org
+POLICY                                 SOURCE   APPLIES TO          SUMMARY
+local-policy                           local    all                 network: 42 allow, 1 deny; filesystem read: 1 allow; filesystem write: 1 allow
+1b2633ea-e604-48bb-a5e6-3ac86ba383fe   kit      sandbox:my-sandbox  network: 3 allow
 ```
 
 The columns are:
 
-- `PROVENANCE`: where the rule came from. `local` is a rule from your local
-  policy — a preset default or one you added with `sbx policy`. `kit` is a rule
-  added by a [kit](../customize/kits.md#control-network-access). `remote` is a
-  rule set by your organization.
-- `APPLIES_TO`: which sandboxes the rule applies to. `all` means the rule is
-  global. `sandbox:<name>` means it's scoped to the named sandbox.
-- `POLICY/RULE`: the rule's identity. Organization rules show as
-  `<policy> / <rule>`. Local and kit rules show the rule name.
-- `TYPE`: the rule domain. Network rules show as `network`. Filesystem rules
-  show as `filesystem:read` or `filesystem:write`, depending on the access the
-  rule controls.
-- `DECISION`: whether the rule allows or denies the resource.
-- `RESOURCES`: the hosts or patterns the rule applies to.
+- `POLICY`: the policy name.
+- `SOURCE`: where the policy came from. `local` means your local configuration
+  — a preset or rules you added with `sbx policy`. `kit` means a
+  [kit](../customize/kits.md#control-network-access). `org` means your
+  organization.
+- `APPLIES TO`: which sandboxes the policy applies to. `all` means the policy
+  is global. `sandbox:<name>` scopes it to a single sandbox; a profile name
+  scopes it to sandboxes using that profile.
+- `SUMMARY`: a count of rules by type and decision — for example,
+  `network: 5 allow, 1 deny`.
+
+To see full rule-level detail including rule IDs and resources, pass `--wide`.
+To inspect a single policy or rule, use `sbx policy inspect`:
+
+```console
+$ sbx policy inspect Balanced
+```
+
+Use `--source` to filter by origin (`local`, `org`, or `kit`) and `--decision`
+to filter by outcome (`allow` or `deny`).
 
 A `STATUS` column also appears when you pass `--include-inactive`; see
 [Showing inactive rules](#showing-inactive-rules).
 
-When organization governance is active, the output starts with a `Policy rules`
-header showing which organization manages the policy, the sync state, and how
-many inactive rules are hidden:
+When organization governance is active, the output starts with a summary line
+showing which organization manages the policy, the sync state, and how many
+inactive rules are hidden:
 
 ```console
 $ sbx policy ls
-Policy rules
-------------
-Governance  Managed by my-org
-Sync        OK, last synced 08:21:01
-Hidden      9 inactive rules. Show with: sbx policy ls --include-inactive
+Governance: Managed by my-org | Sync: OK, last synced 08:21:01 | Hidden: 9 inactive rules. Show with: sbx policy ls --include-inactive
 
-PROVENANCE   APPLIES_TO   POLICY/RULE                                      TYPE               DECISION   RESOURCES
-remote       all          default filesystem / allow home subdirectories   filesystem:write   allow      ~/**
-remote       all          default filesystem / deny home directory         filesystem:write   deny       ~/
-remote       all          default network / allow AI services              network            allow      api.anthropic.com
-                                                                                                         api.openai.com
-remote       all          default network / allow Docker services          network            allow      *.docker.com
-                                                                                                         *.docker.io
+POLICY               SOURCE   APPLIES TO   SUMMARY
+default filesystem   org      all          filesystem read: 2 allow; filesystem write: 7 allow, 2 deny
+default network      org      all          network: 38 allow, 4 deny
 ```
 
-The `Governance` line shows which organization manages the policy, and `Sync`
-confirms the daemon has pulled the latest rules. If the sync state shows an
-error or a stale timestamp, the daemon may not have the most recent org policy.
-Run `sbx policy reset` to force a fresh pull. The `Hidden` line reports how many
-inactive rules are suppressed and how to reveal them.
+`Governance` shows which organization manages the policy, and `Sync` confirms
+the daemon has pulled the latest rules. If the sync state shows an error or a
+stale timestamp, the daemon may not have the most recent org policy. Run
+`sbx policy reset` to force a fresh pull. `Hidden` reports how many inactive
+rules are suppressed and how to reveal them.
 
 ### Showing inactive rules
 
@@ -81,30 +76,21 @@ example, to confirm which local rules the organization policy overrides — pass
 
 ```console
 $ sbx policy ls --include-inactive
-Policy rules
-------------
-Governance  Managed by my-org
-Sync        OK, last synced 08:41:06
+Governance: Managed by my-org | Sync: OK, last synced 08:41:06
 
-PROVENANCE   APPLIES_TO   POLICY/RULE                                      TYPE               DECISION   STATUS                        RESOURCES
-local                     default-fs-read-allow-all                        filesystem:read    allow      inactive — corporate policy   **
-                                                                                                         takes precedence and does
-                                                                                                         not delegate this rule type
-                                                                                                         to local policy.
-local                     default-fs-write-allow-all                       filesystem:write   allow      inactive — corporate policy   **
-                                                                                                         takes precedence and does
-                                                                                                         not delegate this rule type
-                                                                                                         to local policy.
-remote       all          default filesystem / allow home subdirectories   filesystem:write   allow      active                        ~/**
-remote       all          default filesystem / deny home directory         filesystem:write   deny       active                        ~/
+POLICY                       SOURCE   APPLIES TO   SUMMARY                                                    STATUS
+default filesystem           org      all          filesystem read: 2 allow; filesystem write: 7 allow, 2 deny   active
+default network              org      all          network: 38 allow, 4 deny                                   active
+default-fs-read-allow-all    local    all          filesystem read: 1 allow                                    inactive
+default-fs-write-allow-all   local    all          filesystem write: 1 allow                                   inactive
 ```
 
-Inactive rules show `inactive` in the `STATUS` column, along with the reason.
-They have no effect while organization governance is active.
+Inactive policies show `inactive` in the `STATUS` column. They have no effect
+while organization governance is active.
 
-Use `--type network` or `--type filesystem` to show only rules of that type.
-Without a sandbox argument, `sbx policy ls` shows every rule across all
-sandboxes. Pass a sandbox name to filter to global rules and rules scoped to
+Use `--type network` or `--type filesystem` to show only policies of that type.
+Without a sandbox argument, `sbx policy ls` shows every policy across all
+sandboxes. Pass a sandbox name to filter to global policies and those scoped to
 that sandbox:
 
 ```console
@@ -113,15 +99,14 @@ $ sbx policy ls my-sandbox
 
 ### Filesystem rules
 
-`sbx policy ls` lists filesystem rules alongside network rules. Filesystem
+`sbx policy ls` lists filesystem policies alongside network policies. Filesystem
 rules control which host paths a sandbox can mount as a workspace. Pass
 `--type filesystem` to show only them:
 
 ```console
 $ sbx policy ls --type filesystem
-PROVENANCE   APPLIES_TO   POLICY/RULE                  TYPE               DECISION   RESOURCES
-local        all          default-fs-read-allow-all    filesystem:read    allow      **
-local        all          default-fs-write-allow-all   filesystem:write   allow      **
+POLICY         SOURCE   APPLIES TO   SUMMARY
+local-policy   local    all          filesystem read: 1 allow; filesystem write: 1 allow
 ```
 
 A writable workspace mount must be allowed by both a `filesystem:read` and a

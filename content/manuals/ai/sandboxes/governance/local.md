@@ -54,7 +54,9 @@ Choose a default network policy:
 | Locked Down | All outbound traffic is blocked, including model provider APIs (for example, `api.anthropic.com`). You must explicitly allow everything you need. |
 
 The **Balanced** preset's baseline allowlist is a good starting point for most
-workflows. Run `sbx policy ls` to see exactly which rules it includes.
+workflows. Run `sbx policy ls` to see exactly which rules it includes. As of
+v0.35.0, the Balanced preset also allows VS Code domains, Azure Blob Storage
+(`*.blob.core.windows.net`), and `dhi.io` over HTTP.
 
 > [!NOTE]
 > If your organization manages sandbox policies centrally, organization rules
@@ -111,8 +113,35 @@ To remove a sandbox-scoped rule, pass `--sandbox <name>`:
 $ sbx policy rm network --sandbox my-sandbox --resource api.example.com
 ```
 
-To inspect which rules are active and where they come from, use
-`sbx policy ls`. See [Monitoring](monitoring.md).
+To inspect which policies are active and where they come from, use
+`sbx policy ls`. Use `--source` to filter by origin (`local`, `org`, `kit`),
+`--decision` to filter by outcome (`allow`, `deny`), and `--wide` for
+rule-level detail including rule IDs. To inspect a single policy or rule in
+full, use `sbx policy inspect`. See [Monitoring](monitoring.md).
+
+## Testing policy
+
+Before running a sandbox, you can check whether the current policy would allow
+a network request with `sbx policy check network`:
+
+```console
+$ sbx policy check network api.anthropic.com
+Allowed: api.anthropic.com
+
+$ sbx policy check network blocked.example.com
+Denied: blocked.example.com
+```
+
+The target can be a hostname, a `host:port` pair, an IP address, or a URL.
+Bare hostnames and IP addresses are evaluated against port 443. This is useful
+for verifying custom rules or checking what the Locked Down preset blocks
+before you start an agent.
+
+To check policy in the context of a specific sandbox:
+
+```console
+$ sbx policy check network --sandbox my-sandbox api.example.com
+```
 
 ### Resetting
 
