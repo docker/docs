@@ -1,18 +1,23 @@
 name: sbx policy ls
-synopsis: List sandbox policy rules
+synopsis: List sandbox policies
 description: |-
-    List active policy rules.
+    List active sandbox policies.
 
-    Displays the provenance, scope, rule name (or ID if no name is set), type,
-    decision (allow/deny), and the associated resources for each rule.
+    Without SANDBOX, the command shows one overview row per policy with its source,
+    where it applies, and a summary of decisions by resource type. With SANDBOX, it
+    summarizes active rules that apply to that sandbox.
+
+    Use --wide to show the detailed rule-level table with rule IDs, resources, status,
+    and rule metadata. Use --json for the filtered daemon response.
 
     When remote governance is active, inactive policy rules are hidden by default.
     Use --include-inactive to show inactive rules for troubleshooting.
-
-    When SANDBOX is specified, only policies that apply to that sandbox are shown
-    (global rules plus rules scoped to that sandbox).
+    Use "sbx policy inspect <policy-or-rule>" for full detail on a selected policy or
+    rule.
 usage: sbx policy ls [SANDBOX] [flags]
 options:
+    - name: decision
+      usage: 'Filter policies by decision: "allow" or "deny"'
     - name: help
       shorthand: h
       default_value: "false"
@@ -20,10 +25,18 @@ options:
     - name: include-inactive
       default_value: "false"
       usage: Show inactive policy rules hidden by remote governance
+    - name: json
+      default_value: "false"
+      usage: Output filtered policy rules as JSON
+    - name: source
+      usage: 'Filter policies by source: "local", "org", or "kit"'
     - name: type
       default_value: all
       usage: |
         Filter policies by type: "all", "network", or "filesystem" (default "all")
+    - name: wide
+      default_value: "false"
+      usage: Show detailed rule-level output with rule IDs and resources
 inherited_options:
     - name: debug
       shorthand: D
@@ -33,14 +46,20 @@ example: |4-
       # List all policies
       sbx policy ls
 
+      # List the policies that apply to one sandbox
+      sbx policy ls my-sandbox
+
+      # Show detailed rule-level rows with rule IDs and resources
+      sbx policy ls --wide
+
+      # Output filtered rules as JSON
+      sbx policy ls --json
+
       # List only network policies
       sbx policy ls --type network
 
-      # List only filesystem policies
-      sbx policy ls --type filesystem
-
-      # List policies that apply to a specific sandbox
-      sbx policy ls my-sandbox
+      # List organization policies that deny access
+      sbx policy ls --source org --decision deny
 
       # Include inactive rules hidden by remote governance
       sbx policy ls --include-inactive
