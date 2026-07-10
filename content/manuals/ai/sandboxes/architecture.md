@@ -42,7 +42,11 @@ Virtiofs caching is enabled by default on all operating systems. File reads
 from the sandbox VM are cached on the host side, reducing round-trips through
 the filesystem passthrough and improving performance for read-heavy workloads
 such as `git status` or directory scans. To opt out, set
-`DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0` before the daemon starts.
+`DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0` when creating the sandbox:
+
+```console
+$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <template>
+```
 
 ## Networking
 
