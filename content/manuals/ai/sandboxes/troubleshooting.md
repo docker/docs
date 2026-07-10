@@ -184,6 +184,18 @@ the egress path in the **PROXY** column:
   internal CA applies. The only difference between them is whether the client
   knows it's talking to a proxy.
 
+## Sandbox runs out of disk space
+
+The sandbox root (`/`) filesystem defaults to 20 GB. To increase it, set `DOCKER_SANDBOXES_ROOT_SIZE`
+before creating the sandbox:
+
+```console
+$ DOCKER_SANDBOXES_ROOT_SIZE=40g sbx run claude
+```
+
+`DOCKER_SANDBOXES_ROOT_SIZE` controls the root filesystem size. `DOCKER_SANDBOXES_DOCKER_SIZE`
+controls the Docker data disk (`/var/lib/docker`) size. The two are independent — set both if needed.
+
 ## Filesystem operations are slow in large repositories
 
 Filesystem operations such as `git status`, `git log`, or directory scans can
