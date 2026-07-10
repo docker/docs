@@ -192,16 +192,9 @@ default for workspaces without `--clone`). Virtiofs caching speeds up these
 workloads. Clone-mode sandboxes always enable it, so this tuning applies only
 to direct mode.
 
-On macOS and Linux, virtiofs caching is enabled by default. On Windows it's
-still opt-in — enable it when creating the sandbox:
-
-```console
-$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=1 sbx run <template>
-```
-
-The setting is persisted in the sandbox spec and applies for the lifetime of
-that sandbox. If you experience Git index corruption or unexpected file content,
-disable caching with the kill switch and recreate the sandbox:
+Virtiofs caching is enabled by default on all operating systems. If you
+experience Git index corruption or unexpected file content, disable caching
+with the kill switch and recreate the sandbox:
 
 ```console
 $ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <template>

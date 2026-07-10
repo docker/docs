@@ -38,6 +38,12 @@ share images or layers.
 Each sandbox consumes disk space for its VM image, Docker images, container
 layers, and volumes, and this grows as you build images and install packages.
 
+Virtiofs caching is enabled by default on all operating systems. File reads
+from the sandbox VM are cached on the host side, reducing round-trips through
+the filesystem passthrough and improving performance for read-heavy workloads
+such as `git status` or directory scans. To opt out, set
+`DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0` before the daemon starts.
+
 ## Networking
 
 All outbound traffic from the sandbox routes through an HTTP/HTTPS proxy on
