@@ -30,7 +30,8 @@ The columns are:
   [kit](../customize/kits.md#control-network-access). `org` means your
   organization.
 - `APPLIES TO`: which sandboxes the policy applies to. `all` means the policy
-  is global. A sandbox name or profile name scopes it to specific sandboxes.
+  is global. `sandbox:<name>` scopes it to a single sandbox; a profile name
+  scopes it to sandboxes using that profile.
 - `SUMMARY`: a count of rules by type and decision — for example,
   `network: 5 allow, 1 deny`.
 
