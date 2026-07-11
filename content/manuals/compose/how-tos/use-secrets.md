@@ -19,6 +19,10 @@ Environment variables are often available to all processes, and it can be diffic
 
 Secrets are mounted as a file in `/run/secrets/<secret_name>` inside the container.
 
+> [!NOTE]
+>
+> Secrets are supported on Linux containers only. Compose delivers each secret by bind-mounting a single file into the container, and Windows containers support bind-mounting directories only. For Windows containers, bind-mount a directory containing the secret file instead.
+
 Getting a secret into a container is a two-step process. First, define the secret using the [top-level secrets element in your Compose file](/reference/compose-file/secrets.md). Next, update your service definitions to reference the secrets they require with the [secrets attribute](/reference/compose-file/services.md#secrets). Compose grants access to secrets on a per-service basis.
 
 Unlike the other methods, this permits granular access control within a service container via standard filesystem permissions.
