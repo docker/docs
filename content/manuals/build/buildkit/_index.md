@@ -152,15 +152,18 @@ see [GitHub issues](https://github.com/moby/buildkit/issues?q=is%3Aissue%20state
    ```
 
    > [!NOTE]
-   > If you are running a _dockerd-managed_ `containerd` process, use that instead, by supplying the address:
+   > If you are running a _dockerd-managed_ `containerd` process, use that instead, by supplying the     address:
    > `buildkitd.exe --containerd-worker-addr "npipe:////./pipe/docker-containerd"`
 
 7. In another terminal with administrator privileges, create a remote builder that uses the local BuildKit daemon.
+   
+   > [!WARNING]
+   > Do not close the terminal running `buildkitd.exe` from the previous step. The daemon must remain    running for subsequent BuildKit commands to succeed.
 
    > [!NOTE]
-   >
+   > 
    > This requires Docker Desktop version 4.29 or later.
-
+  
    ```console
    > docker buildx create --name buildkit-exp --use --driver=remote npipe:////./pipe/buildkitd
    buildkit-exp
@@ -217,3 +220,60 @@ see [GitHub issues](https://github.com/moby/buildkit/issues?q=is%3Aissue%20state
     ```console
     > docker run <username>/hello-buildkit
     ```
+
+## Frequently asked questions
+
+### Will the daemon continue running once I close the terminal window?
+
+  No. The daemon stops if you started `buildkitd.exe` from PowerShell. If you close the 
+  PowerShell window running `buildkitd.exe`, the daemon stops. This does not apply to Docker 
+  Desktop's own background services, which are managed by Docker Desktop.
+
+### What portions of this procedure do I need to repeat to build something again in the future?
+
+One-time: Installing containerd and BuildKit binaries, adding BuildKit to PATH.
+
+Repeats: `buildkitd.exe` whenever the daemon is not running, `buildctl build ...` for every build.
+   
+### Do I need to build again on PowerShell terminal as admin, or can I use Docker Desktop?
+
+If you use the standalone BuildKit commands from the site, you need to use the BuildKit workflow with `buildkitd.exe` + `buildctl build ...`. Initial setup should be performed from an elevated Administrator PowerShell session. Alternatively, you can use Docker Desktop instead of the standalone BuildKit workflow. Docker Desktop manages the builder for you, so you do not need to manually run `buildkitd.exe` or `buildctl`.
+    
+Example: Ensure your machine is compatible with the image you want, and that you are in the same directory. See Steps 9–10 for full details.
+                
+- Create a Dockerfile (if you haven't already):
+  - Single line:  
+    ```powershell
+    "FROM mcr.microsoft.com/windows/nanoserver:ltsc2022" > Dockerfile
+    ```
+  - Multiple lines:  
+    ```powershell
+    @"
+    FROM mcr.microsoft.com/windows/nanoserver:ltsc2022
+    CMD ["cmd.exe"]
+    "@ > Dockerfile 
+    ```
+- Verify the Dockerfile: 
+  - Ensure it's created in directory: 
+    ```powershell
+    dir Dockerfile 
+    ```
+  - Show content of file: 
+    ```powershell
+    type Dockerfile
+    ```
+- Pull the base image (if not already available locally): 
+  ```console
+  > docker pull mcr.microsoft.com/windows/nanoserver:ltsc2022
+  ```
+- Build the image:
+  ```console
+  > docker buildx build .
+  ```
+> [!NOTE]
+>
+> Build status and resulting images can be viewed in the Docker Desktop application.
+
+### Does the daemon need to be running to run the image, or can I close the terminal and run it from Docker Desktop?  
+
+No. Building an image and running an image are two separate steps. The BuildKit daemon `buildkitd.exe` is only needed during the build process. Once the image has been built and is available to the container runtime, the daemon is no longer required. You can safely stop `buildkitd.exe` and run the image independently using Docker Desktop or `docker run`.
