@@ -61,9 +61,9 @@ organization:
   personalized demo and information about DHI Select and Enterprise subscriptions
 - [Request an image](https://github.com/docker-hardened-images/catalog/issues):
   Submit a request for a specific Docker Hardened Image
-- [Debian (`dhi-deb`) package index](https://dhi.io/deb/debian/main/index.html):
+- [Debian package index](https://dhi.io/deb/debian/main/index.html):
   Browse hardened Debian packages in Docker's public repository
-- [Alpine (`dhi-apk`) package index](https://dhi.io/apk/alpine/v3.24/main/index.html):
+- [Alpine package index](https://dhi.io/apk/alpine/v3.24/main/index.html):
   Browse hardened Alpine packages in Docker's public repository
 - <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_dhi_resources" class="link" rel="noopener">Contact Sales</a>: Connect with
   Docker sales team for enterprise inquiries

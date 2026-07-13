@@ -24,8 +24,8 @@ Access to hardened packages varies by subscription:
 To browse the packages currently available in Docker's public hardened package
 repositories, see the following package indexes:
 
-- [Debian (`dhi-deb`) package index](https://dhi.io/deb/debian/main/index.html)
-- [Alpine (`dhi-apk`) package index](https://dhi.io/apk/alpine/v3.24/main/index.html)
+- [Debian package index](https://dhi.io/deb/debian/main/index.html)
+- [Alpine package index](https://dhi.io/apk/alpine/v3.24/main/index.html)
 
 Docker is constantly adding new hardened packages. If a package you need isn't
 available yet, you can [request it in the DHI catalog
