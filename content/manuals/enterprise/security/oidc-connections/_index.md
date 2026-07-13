@@ -19,7 +19,7 @@ OIDC connections mirror implementations of the OIDC standard. Establishing a tru
 - During the authentication process, Docker then:
   - Verifies the token against GitHub's public key registry
   - Matches subject claims against specified rulesets created in [Docker Home](https://app.docker.com/).
-- Docker returns an access token, allowing the GitHub Action login to Docker to access resources.
+- Docker returns an access token, allowing the GitHub Action to sign in to Docker to access resources.
 
 All tokens created and exchanged during an OIDC workflow are short-lived and issued on a per-workflow basis.
 

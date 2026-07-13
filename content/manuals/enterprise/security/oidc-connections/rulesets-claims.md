@@ -9,7 +9,7 @@ weight: 20
 
 {{< summary-bar feature_name="OIDC connections" >}}
 
-Rulesets and subject claims define what actions your GitHub workflows can take with your Docker resources. This page explains how to configure rulesets and set subject claims to authorize GitHub Workflow behaviors.
+Rulesets and subject claims define what actions your GitHub workflows can take with your Docker resources. This page explains how to configure rulesets and set subject claims to authorize GitHub workflow behaviors.
 
 ## Rulesets
 
