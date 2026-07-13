@@ -24,11 +24,11 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
-## 4.82
+## 4.82.0
 
 {{< release-date date="2026-07-13" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.82.0" build_path="//" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.82.0" build_path="/233772/" >}}
 
 ### Updates
 
@@ -40,14 +40,14 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- Added thumbs up and thumbs down feedback buttons to Gordon AI assistant responses, letting users rate replies or report issues directly from the chat.
+- Added thumbs up and thumbs down feedback buttons to Gordon responses. Users can rate replies or report issues directly from the chat.
 - Fixed a bug where containers created by Docker Desktop had their stop timeout set to 1 second instead of the Docker Engine default, causing `docker stop` to terminate processes too quickly.
-- Fixed reset to factory defaults not clearing MCP Toolkit profiles, catalogs and authorizations.
+- Fixed reset to factory defaults not clearing MCP Toolkit profiles, catalogs, and authorizations.
 - Fixed an issue where selected thumbs up/down feedback buttons in Gordon were visually indistinguishable after selecting.
 - Fixed reset to factory defaults not clearing downloaded LLM models.
 - Fixed a bug where the Gordon chat area would go blank when the agent requested free-text input via elicitation.
 - Fixed a delay in the Kubernetes screen where the progress UI did not appear immediately after confirming cluster creation or deletion.
-- Fixed a bug where the Kubernetes (kind) cluster failed to start with a **Failed to get API server port** error after a Docker Desktop restart.
+- Fixed a bug where a Kubernetes kind cluster failed to start with a **Failed to get API server port** error after a Docker Desktop restart.
 - With `docker pass`, the `ls` command now behaves consistently across all platforms.
 - Fixed an issue where users signed out due to sign-in enforcement policies were shown a generic sign-in prompt instead of a clear explanation of why they were signed out.
 
@@ -60,7 +60,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For Windows
 
 - Fixed an issue where `.log` files were missing from diagnostic bundles, ensuring the Docker Desktop service log is now included.
-- Lowered the priority of Docker Desktop's background processes and enabled Windows Efficiency mode while idle to reduce power and CPU usage.
+- Lowered the priority of Docker Desktop's background processes and enabled Windows Efficiency Mode while idle to reduce power and CPU usage.
 - Fixed factory reset leaving containers and images behind on Hyper-V when Docker Desktop is run by a user other than the one that installed it.
 - Fixed a multi-minute hang during WSL engine startup when the wsl-bootstrap process fails unexpectedly, surfacing the error promptly instead.
 - Fixed an issue where auto-updates could leave Docker Desktop stuck in a 'connecting' state due to a successful installation being incorrectly rolled back.
