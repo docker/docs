@@ -14,7 +14,7 @@ params:
 
 {{< summary-bar feature_name="OIDC connections" >}}
 
-OIDC connections create a trust relationship between Docker and a trusted third-party so you don't have to maintain long-lived credentials. When you create an OIDC connection, Docker exchanges short-lived tokens with another vendor that can grant fine-grained access to your Docker resources.
+OIDC connections create a trust relationship between Docker and a trusted third party so you don't have to maintain long-lived credentials. When you create an OIDC connection, Docker exchanges short-lived tokens with another vendor that can grant fine-grained access to your Docker resources.
 
 ## How OIDC connections work
 
@@ -23,7 +23,7 @@ OIDC connections mirror implementations of the OIDC standard. Establishing a tru
 - GitHub issues a JWT ID token for the workflow run.
 - During the authentication process, Docker then:
   - Verifies the token against GitHub's public key registry
-  - Matches subject claims against specified rulesets created in the Admin Console.
+  - Matches subject claims against specified rulesets created in [Docker Home](https://app.docker.com/).
 - Docker returns an access token, allowing the GitHub Action login to Docker to access resources.
 
 All tokens created and exchanged during an OIDC workflow are short-lived and issued on a per-workflow basis.

@@ -9,17 +9,17 @@ weight: 10
 
 {{< summary-bar feature_name="OIDC connections" >}}
 
-Organization owners and editors can create new OIDC connections or manage existing ones from the Admin Console in Docker Home. Establishing an OIDC connection occurs in two phases. First, you create the OIDC connection in the Admin Console, then you configure your GitHub Actions workflow YAML file.
+Organization owners and editors can create new OIDC connections or manage existing ones from **OIDC connections** in Docker Home. Establishing an OIDC connection occurs in two phases. First, you create the OIDC connection in Docker Home, then you configure your GitHub Actions workflow YAML file.
 
 > [!NOTE]
-> GitHub is the only supported trusted third party at this time.
+> OIDC connections supports GitHub as a trusted third party.
 
 ## Connect OIDC connections to GitHub Actions
 
 ### Step 1: Create the OIDC connection
 
-1. Sign in to [Docker Home](https://app.docker.com/), select your organization, then go to the **Admin Console**.
-1. In **Identity & auth**, select **OIDC connections**.
+1. Sign in to [Docker Home](https://app.docker.com/), select your organization, then go to **Identity & auth**.
+1. Select **OIDC connections**.
 1. Select **Create OIDC connection** to go to the creation page. Fill in the OIDC connection form.
    - You must provide rulesets and subject claims. Other values are optional.
    - To learn about rulesets, subject claims, and resources, see [OIDC connections rulesets and subject claims](/manuals/enterprise/security/oidc-connections/rulesets-claims.md).
@@ -61,38 +61,36 @@ Organization owners and editors can create new OIDC connections or manage existi
 
    The `username` value must be an organization name. Personal accounts are not supported.
 
-Your updated workflow YAML should look like this:
+   Your updated workflow YAML should look like this:
 
-```yaml
-permissions:
-  id-token: write
+   ```yaml
+   permissions:
+     id-token: write
 
-jobs:
-  login:
-    runs-on: ubuntu-latest
-    steps:
-      - name: OIDC connections
-        id: docker_oidc
-        uses: docker/oidc-action@v0
-        with:
-          connection_id: <YOUR_CONNECTION_ID>
+   jobs:
+     login:
+       runs-on: ubuntu-latest
+       steps:
+         - name: OIDC connections
+           id: docker_oidc
+           uses: docker/oidc-action@v0
+           with:
+             connection_id: <YOUR_CONNECTION_ID>
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@{{% param "login_action_version" %}}
-        with:
-          username: <YOUR_ORGANIZATION_NAME>
-          password: ${{ steps.docker_oidc.outputs.token }}
-```
+         - name: Login to Docker Hub
+           uses: docker/login-action@{{% param "login_action_version" %}}
+           with:
+             username: <YOUR_ORGANIZATION_NAME>
+             password: ${{ steps.docker_oidc.outputs.token }}
+   ```
 
-### Step 3 (optional): Test
-
-Run your GitHub Action and verify the workflow is able to log in to Docker successfully.
+1. Run your GitHub Action and verify the workflow is able to log in to Docker successfully.
 
 ## Manage OIDC connections
 
 You can view, edit, deactivate, or delete your connections from the **OIDC connections** page.
 
-1. From the **Admin Console**, go to **OIDC connections**.
+1. From **Identity & auth**, go to **OIDC connections**.
 1. From the **OIDC connections** page, find the row with your target connection ID.
 1. Select the action menu icon for your options.
    - **Edit** opens the **Edit OIDC connection** page where you can copy your connection ID, update rulesets, or view the **Failures** table.
