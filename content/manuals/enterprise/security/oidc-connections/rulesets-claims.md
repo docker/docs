@@ -17,12 +17,12 @@ A ruleset is a set of conditions that Docker evaluates against an incoming GitHu
 
 Each ruleset contains the following fields:
 
-- **Label**: A name for the ruleset.
-- **Rules**: One or more conditions based on OIDC token claims, such as the repository name, branch, or workflow path.
+- Label: A name for the ruleset.
+- Rules: One or more conditions based on OIDC token claims, such as the repository name, branch, or workflow path.
   - These are expressed as subject claim strings.
   - See [Subject claims](#subject-claims).
-- **Resources**: The Docker resources a workflow can access when the ruleset matches. See [Resources](#resources).
-- **Scopes**: The permissions granted on those resources, such as read or write access.
+- Resources: The Docker resources a workflow can access when the ruleset matches. See [Resources](#resources).
+- Scopes: The permissions granted on those resources, such as read or write access.
 
 You can define between 1 and 5 rulesets per connection. Use multiple rulesets to apply different access levels across different workflows or branches.
 
