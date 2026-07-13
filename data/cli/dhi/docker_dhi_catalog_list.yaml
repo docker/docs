@@ -1,0 +1,73 @@
+command: docker dhi catalog list
+short: List available Docker Hardened Images
+long: List all available Docker Hardened Images and Helm charts in the catalog
+usage: docker dhi catalog list
+pname: docker dhi catalog
+plink: docker_dhi_catalog.yaml
+options:
+    - option: filter
+      shorthand: f
+      value_type: string
+      description: Filter by name (case-insensitive substring match)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: fips
+      value_type: bool
+      default_value: "false"
+      description: Filter to FIPS compliant images (use --fips=false to exclude)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: json
+      value_type: bool
+      default_value: "false"
+      description: Output in JSON format
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: stig
+      value_type: bool
+      default_value: "false"
+      description: Filter to STIG certified images (use --stig=false to exclude)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: type
+      value_type: string
+      description: Filter by type (image, helm, chart, or helm-chart)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: org
+      value_type: string
+      description: Docker Hub organization (overrides config)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

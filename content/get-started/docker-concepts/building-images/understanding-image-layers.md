@@ -103,13 +103,13 @@ In this first step, you will create your own base image that you will then use f
 
     ```console
     IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
-    d5c1fca2cdc4   10 seconds ago   /bin/bash                                       126MB     Add node
-    2b7cc08dcdbb   5 weeks ago      /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B
-    <missing>      5 weeks ago      /bin/sh -c #(nop) ADD file:07cdbabf782942af0…   69.2MB
-    <missing>      5 weeks ago      /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B
-    <missing>      5 weeks ago      /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B
-    <missing>      5 weeks ago      /bin/sh -c #(nop)  ARG LAUNCHPAD_BUILD_ARCH     0B
-    <missing>      5 weeks ago      /bin/sh -c #(nop)  ARG RELEASE                  0B
+    9e274734bb25   10 seconds ago   /bin/bash                                       157MB     Add node
+    cd1dba651b30   7 days ago       /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B
+    <missing>      7 days ago       /bin/sh -c #(nop) ADD file:6089c6bede9eca8ec…   110MB
+    <missing>      7 days ago       /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B
+    <missing>      7 days ago       /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B
+    <missing>      7 days ago       /bin/sh -c #(nop)  ARG LAUNCHPAD_BUILD_ARCH     0B
+    <missing>      7 days ago       /bin/sh -c #(nop)  ARG RELEASE                  0B
     ```
 
     Note the “Add node” comment on the top line. This layer contains the Node.js install you just made.

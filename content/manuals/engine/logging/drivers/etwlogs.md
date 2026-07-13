@@ -25,7 +25,7 @@ before the provider has been registered with the system.
 Here is an example of how to listen to these events using the logman utility program
 included in most installations of Windows:
 
-1. `logman start -ets DockerContainerLogs -p {a3693192-9ed6-46d2-a981-f8226c8363bd} 0 0 -o trace.etl`
+1. `logman start -ets DockerContainerLogs -p "{a3693192-9ed6-46d2-a981-f8226c8363bd}" 0x0 -o trace.etl`
 2. Run your container(s) with the etwlogs driver, by adding
    `--log-driver=etwlogs` to the Docker run command, and generate log messages.
 3. `logman stop -ets DockerContainerLogs`

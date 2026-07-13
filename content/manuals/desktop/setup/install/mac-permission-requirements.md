@@ -5,10 +5,7 @@ keywords: Docker Desktop, mac, security, install, permissions
 title: Understand permission requirements for Docker Desktop on Mac
 linkTitle: Mac permission requirements
 aliases:
-- /docker-for-mac/privileged-helper/
-- /desktop/mac/privileged-helper/
 - /desktop/mac/permission-requirements/
-- /desktop/install/mac-permission-requirements/
 weight: 20
 ---
 
@@ -93,6 +90,17 @@ $ rm /Library/LaunchDaemons/com.docker.vmnetd.plist
 $ rm /Library/PrivilegedHelperTools/com.docker.vmnetd
 ```
 
+## Backend helper socket
+
+Aside from the optional [privileged helper](#privileged-helper), the Docker
+Desktop backend process (`com.docker.backend`) uses an internal helper socket
+(`~/Library/Containers/com.docker.docker/Data/forkexecd.sock`) to fork and execute
+helper processes as part of running Docker Desktop.
+
+Unlike the privileged helper, this socket does not run as `root` and grants no
+elevated privileges. It is owned by, and accessible only to, the same macOS user
+running Docker Desktop, and is contained in Docker Desktop's application container.
+
 ## Containers running as root within the Linux VM
 
 With Docker Desktop, the Docker daemon and containers run in a lightweight Linux
@@ -105,7 +113,7 @@ retain their original permissions.
 ## Enhanced Container Isolation
 
 In addition, Docker Desktop supports [Enhanced Container Isolation
-mode](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md) (ECI),
+mode](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md) (ECI),
 available to Business customers only, which further secures containers without
 impacting developer workflows.
 

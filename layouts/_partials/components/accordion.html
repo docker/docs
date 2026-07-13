@@ -1,0 +1,26 @@
+<div
+  id="{{ urls.Anchorize .title }}"
+  x-data="{ open: {{ .open | default false }} }"
+  class="my-6 rounded-sm border border-gray-200 bg-white py-2 dark:border-gray-700 dark:bg-gray-900"
+>
+  <button
+    class="not-prose flex w-full justify-between px-4 py-2"
+    x-on:click="open = ! open"
+  >
+    <div class="{{ with .large }}text-xl{{ end }} flex items-center gap-2">
+      {{- with .icon }}
+        <span class="icon-svg -mt-1">{{ partialCached "icon" . . }}</span>
+      {{- end }}
+      {{ .title }}
+    </div>
+    <span :class="{ 'hidden' : !open }" class="icon-svg icon-sm"
+      >{{ partialCached "icon" "chevron-up" "chevron-up" }}</span
+    >
+    <span :class="{ 'hidden' : open }" class="icon-svg icon-sm"
+      >{{ partialCached "icon" "chevron-down" "chevron-down" }}</span
+    >
+  </button>
+  <div x-show="open" x-collapse class="px-4">
+    {{ markdownify .body }}
+  </div>
+</div>

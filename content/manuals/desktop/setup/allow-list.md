@@ -17,18 +17,19 @@ This page contains the domain URLs that you need to add to a firewall allowlist 
 
 | Domains                                                                              | Description                                  |
 | ------------------------------------------------------------------------------------ | -------------------------------------------- |
-| https://api.segment.io                                                               | Analytics                                    |
-| https://cdn.segment.com                                                              | Analytics                                    |
 | https://notify.bugsnag.com                                                           | Error reports                                |
 | https://sessions.bugsnag.com                                                         | Error reports                                |
 | https://auth.docker.io                                                               | Authentication                               |
 | https://cdn.auth0.com                                                                | Authentication                               |
 | https://login.docker.com                                                             | Authentication                               |
+| https://auth.docker.com                                                              | Authentication                               |
 | https://desktop.docker.com                                                           | Update                                       |
 | https://hub.docker.com                                                               | Docker Hub                                   |
 | https://registry-1.docker.io                                                         | Docker Pull/Push                             |
-| https://production.cloudflare.docker.com                                             | Docker Pull/Push (Paid plans)                |
-| https://docker-images-prod.6aa30f8b08e16409b46e0173d6de2f56.r2.cloudflarestorage.com | Docker Pull/Push (Personal plan / Anonymous) |
+| https://production.cloudfront.docker.com                                             | Docker Pull/Push                             |
 | https://docker-pinata-support.s3.amazonaws.com                                       | Troubleshooting                              |
 | https://api.dso.docker.com                                                           | Docker Scout service                         |
 | https://api.docker.com                                                               | New API                                      |
+| https://dhi.io                                                                       | Docker Hardened Images                       |
+| https://registry.scout.docker.com                                                    | Docker Scout registry for DHI attestations   |
+| https://ai-backend-service.docker.com                                                | [Gordon](/manuals/ai/gordon/_index.md)       |

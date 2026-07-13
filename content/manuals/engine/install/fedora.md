@@ -26,8 +26,8 @@ To get started with Docker Engine on Fedora, make sure you
 To install Docker Engine, you need a maintained version of one of the following
 Fedora versions:
 
-- Fedora 42
-- Fedora 41
+- Fedora 44
+- Fedora 43
 
 ### Uninstall old versions
 
@@ -72,6 +72,8 @@ You can install Docker Engine in different ways, depending on your needs:
 - In testing and development environments, you can use automated
   [convenience scripts](#install-using-the-convenience-script) to install Docker.
 
+{{% include "engine-license.md" %}}
+
 ### Install using the rpm repository {#install-using-the-repository}
 
 Before you install Docker Engine for the first time on a new host machine, you
@@ -80,12 +82,8 @@ Docker from the repository.
 
 #### Set up the repository
 
-Install the `dnf-plugins-core` package (which provides the commands to manage
-your DNF repositories) and set up the repository.
-
 ```console
-$ sudo dnf -y install dnf-plugins-core
-$ sudo dnf-3 config-manager --add-repo {{% param "download-url-base" %}}/docker-ce.repo
+$ sudo dnf config-manager addrepo --from-repofile {{% param "download-url-base" %}}/docker-ce.repo
 ```
 
 #### Install Docker Engine
@@ -151,6 +149,17 @@ $ sudo dnf-3 config-manager --add-repo {{% param "download-url-base" %}}/docker-
    boot your system. If you don't want Docker to start automatically, use `sudo
    systemctl start docker` instead.
 
+   > [!NOTE]
+   >
+   > If the Docker service fails to start and `journalctl -u docker`
+   > shows `failed to find iptables`, point the `iptables` command to
+   > `iptables-nft` using `alternatives` and restart the service:
+   >
+   > ```console
+   > $ sudo alternatives --set iptables /usr/bin/iptables-nft
+   > $ sudo systemctl restart docker
+   > ```
+
 3. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
@@ -199,6 +208,17 @@ download a new file each time you want to upgrade Docker Engine.
    This configures the Docker systemd service to start automatically when you
    boot your system. If you don't want Docker to start automatically, use `sudo
    systemctl start docker` instead.
+
+   > [!NOTE]
+   >
+   > If the Docker service fails to start and `journalctl -u docker`
+   > shows `failed to find iptables`, point the `iptables` command to
+   > `iptables-nft` using `alternatives` and restart the service:
+   >
+   > ```console
+   > $ sudo alternatives --set iptables /usr/bin/iptables-nft
+   > $ sudo systemctl restart docker
+   > ```
 
 4. Verify that the installation is successful by running the `hello-world` image:
 

@@ -29,7 +29,7 @@ The following GitHub Actions are available:
 - [Docker Setup Compose](https://github.com/marketplace/actions/docker-setup-compose):
   installs and sets up [Compose](../../../compose).
 - [Docker Setup Docker](https://github.com/marketplace/actions/docker-setup-docker):
-  installs Docker CE.
+  installs Docker Engine.
 - [Docker Setup QEMU](https://github.com/marketplace/actions/docker-setup-qemu):
   installs [QEMU](https://github.com/qemu/qemu) static binaries for
   multi-platform builds.

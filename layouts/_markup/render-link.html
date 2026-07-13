@@ -1,0 +1,13 @@
+{{ $url := .Destination }}
+{{- if (strings.HasPrefix $url "http") -}}
+  <a class="link" href="{{ $url | safeURL }}" rel="noopener">{{ .Text | safeHTML }}</a>
+{{- else if (strings.HasPrefix $url "mailto:") -}}
+  <a class="link" href="{{ $url }}">{{ .Text | safeHTML }}</a>
+{{- else if (strings.HasPrefix $url "/") -}}
+  {{ if (strings.HasSuffix (urls.Parse $url).Path ".md") }}
+    {{ $url = (ref page $url) }}
+  {{ end }}
+  <a class="link" href="{{ $url }}">{{ .Text | safeHTML }}</a>
+{{- else -}}
+  <a class="link" href="{{ ref page $url }}">{{ .Text | safeHTML }}</a>
+{{- end -}}

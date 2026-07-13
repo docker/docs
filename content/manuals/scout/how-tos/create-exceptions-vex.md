@@ -24,8 +24,13 @@ To create exceptions using OpenVEX documents, you need:
 
 - The latest version of Docker Desktop or the Docker Scout CLI plugin
 - The [`vexctl`](https://github.com/openvex/vexctl) command line tool.
-- The [containerd image store](/manuals/desktop/features/containerd.md) must be enabled
+
+Additional requirements depend on how you attach the VEX document:
+
+- The [containerd image store](/manuals/desktop/features/containerd.md)
+  must be enabled to attach the document as an attestation.
 - Write permissions to the registry repository where the image is stored
+  are required to attach the document as an attestation.
 
 ## Introduction to VEX
 
@@ -246,7 +251,9 @@ change the VEX document.
 
 To attach VEX documents as an attestation, you can use the `docker scout
 attestation add` CLI command. Using attestations is the recommended option for
-attaching exceptions to images when using VEX.
+attaching exceptions to images when using VEX. This method requires the
+[containerd image store](/manuals/desktop/features/containerd.md) and write
+access to the registry repository where the image is stored.
 
 You can attach attestations to images that have already been pushed to a
 registry. You don't need to build or push the image again. Additionally, having
@@ -280,6 +287,8 @@ To attach an attestation to an image:
 Embedding VEX documents directly on the image filesystem is a good option if
 you know the exceptions ahead of time, before you build the image. And it's
 relatively easy; just `COPY` the VEX document to the image in your Dockerfile.
+Unlike attestations, this method doesn't require the containerd image store or
+write access to a registry before the image is pushed.
 
 The downside with this approach is that you can't change or update the
 exception later. Image layers are immutable, so anything you put in the image's
@@ -315,4 +324,3 @@ It doesn't matter where on the image's filesystem you store the file.
 
 Note that the copied files must be part of the filesystem of the final image,
 For multi-stage builds, the documents must persist in the final stage.
-

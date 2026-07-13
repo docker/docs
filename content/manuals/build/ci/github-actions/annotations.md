@@ -34,22 +34,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 
       - name: Extract metadata
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@{{% param "metadata_action_version" %}}
         with:
           images: ${{ env.IMAGE_NAME }}
 
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           tags: ${{ steps.meta.outputs.tags }}
           annotations: ${{ steps.meta.outputs.annotations }}
@@ -73,22 +73,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 
       - name: Extract metadata
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@{{% param "metadata_action_version" %}}
         with:
           images: ${{ env.IMAGE_NAME }}
 
       - name: Build
-        uses: docker/bake-action@v6
+        uses: docker/bake-action@{{% param "bake_action_version" %}}
         with:
           files: |
             ./docker-bake.hcl
@@ -126,24 +126,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 
       - name: Extract metadata
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@{{% param "metadata_action_version" %}}
         with:
           images: ${{ env.IMAGE_NAME }}
         env:
           DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
 
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           tags: ${{ steps.meta.outputs.tags }}
           annotations: ${{ steps.meta.outputs.annotations }}

@@ -196,12 +196,12 @@ Navigate to the root of the project directory. Inside this directory, you'll fin
 
 
     ```console
-    Running 5/5
-    ✔ Network nginx-nodejs-redis_default    Created                                                0.0s
-    ✔ Container nginx-nodejs-redis-web1-1   Started                                                0.1s
-    ✔ Container nginx-nodejs-redis-redis-1  Started                                                0.1s
-    ✔ Container nginx-nodejs-redis-web2-1   Started                                                0.1s
-    ✔ Container nginx-nodejs-redis-nginx-1  Started
+     ✔ Network nginx-node-redis_default   Created                                                                                                   0.0s
+     ✔ Container nginx-node-redis-web2-1  Created                                                                                                   0.1s
+     ✔ Container nginx-node-redis-web1-1  Created                                                                                                   0.1s
+     ✔ Container nginx-node-redis-redis-1 Created                                                                                                   0.1s
+     ✔ Container nginx-node-redis-nginx-1 Created   
+ 
     ```
 
 2. If you look at the Docker Desktop Dashboard, you can see the containers and dive deeper into their configuration.

@@ -1,0 +1,47 @@
+command: docker dhi customization delete
+short: Delete one or more customizations
+long: |-
+    Delete one or more Docker Hardened Images customizations by their IDs.
+
+    Multiple IDs can be specified as positional arguments.
+
+    Examples:
+      # Delete a single customization
+      docker dhi customization delete abc123
+
+      # Delete multiple customizations
+      docker dhi customization delete abc123 def456 ghi789
+
+      # Delete without confirmation prompt
+      docker dhi customization delete abc123 def456 --force
+usage: docker dhi customization delete <id> [id...]
+pname: docker dhi customization
+plink: docker_dhi_customization.yaml
+options:
+    - option: force
+      shorthand: f
+      value_type: bool
+      default_value: "false"
+      description: Skip the confirmation prompt; aborts if any ID does not exist
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: org
+      value_type: string
+      description: Docker Hub organization (overrides config)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

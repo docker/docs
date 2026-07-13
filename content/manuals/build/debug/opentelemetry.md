@@ -29,7 +29,7 @@ $ docker buildx create --use \
   --driver-opt "env.JAEGER_TRACE=localhost:6831"
 ```
 
-Boot and [inspect `mybuilder`](/reference/cli/docker/buildx/inspect.md):
+Boot and [inspect `mybuilder`](/reference/cli/docker/buildx/inspect/):
 
 ```console
 $ docker buildx inspect --bootstrap

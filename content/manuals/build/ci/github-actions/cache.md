@@ -30,16 +30,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
+
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           push: true
           tags: user/app:latest
@@ -63,16 +63,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
+
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           push: true
           tags: user/app:latest
@@ -104,16 +104,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
+
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           push: true
           tags: user/app:latest
@@ -123,14 +123,14 @@ jobs:
 
 > [!IMPORTANT]
 >
-> Starting [April 15th, 2025, only GitHub Cache service API v2 will be supported](https://gh.io/gha-cache-sunset).
-> 
+> As of April 15th, 2025, [only GitHub Cache service API v2 is supported.](https://gh.io/gha-cache-sunset). The legacy v1 API has been shut down.
+>
 > If you encounter the following error during your build:
-> 
+>
 > ```console
 > ERROR: failed to solve: This legacy service is shutting down, effective April 15, 2025. Migrate to the new service ASAP. For more information: https://gh.io/gha-cache-sunset
 > ```
-> 
+>
 > You're probably using outdated tools that only support the legacy GitHub
 > Cache service API v1. Here are the minimum versions you need to upgrade to
 > depending on your use case:
@@ -138,37 +138,37 @@ jobs:
 > * BuildKit >= v0.20.0
 > * Docker Compose >= v2.33.1
 > * Docker Engine >= v28.0.0 (if you're building using the Docker driver with containerd image store enabled)
-> 
+>
 > If you're building using the `docker/build-push-action` or `docker/bake-action`
 > actions on GitHub hosted runners, Docker Buildx and BuildKit are already up
 > to date but on self-hosted runners, you may need to update them yourself.
 > Alternatively, you can use the `docker/setup-buildx-action` action to install
 > the latest version of Docker Buildx:
-> 
+>
 > ```yaml
 > - name: Set up Docker Buildx
->   uses: docker/setup-buildx-action@v3
+>   uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 >   with:
 >    version: latest
 > ```
-> 
+>
 > If you're building using Docker Compose, you can use the
 > `docker/setup-compose-action` action:
-> 
+>
 > ```yaml
 > - name: Set up Docker Compose
->   uses: docker/setup-compose-action@v1
+>   uses: docker/setup-compose-action@{{% param "setup_compose_action_version" %}}
 >   with:
 >    version: latest
 > ```
-> 
+>
 > If you're building using the Docker Engine with the containerd image store
 > enabled, you can use the `docker/setup-docker-action` action:
-> 
+>
 > ```yaml
 > -
 >   name: Set up Docker
->   uses: docker/setup-docker-action@v4
+>   uses: docker/setup-docker-action@{{% param "setup_docker_action_version" %}}
 >   with:
 >     version: latest
 >     daemon-config: |
@@ -182,7 +182,7 @@ jobs:
 ### Cache mounts
 
 BuildKit doesn't preserve cache mounts in the GitHub Actions cache by default.
-If you wish to put your cache mounts into GitHub Actions cache and reuse it
+To put your cache mounts into GitHub Actions cache and reuse it
 between builds, you can use a workaround provided by
 [`reproducible-containers/buildkit-cache-dance`](https://github.com/reproducible-containers/buildkit-cache-dance).
 
@@ -197,13 +197,16 @@ Example Dockerfile in `build/package/Dockerfile`
 FROM golang:1.21.1-alpine as base-build
 
 WORKDIR /build
-RUN go env -w GOMODCACHE=/root/.cache/go-build
 
-COPY go.mod go.sum ./
-RUN --mount=type=cache,target=/root/.cache/go-build go mod download
+RUN --mount=type=cache,target=/go/pkg/mod \
+    --mount=type=bind,source=go.mod,target=go.mod \
+    --mount=type=bind,source=go.sum,target=go.sum \
+    go mod download
 
-COPY ./src ./
-RUN --mount=type=cache,target=/root/.cache/go-build go build -o /bin/app /build/src
+RUN --mount=type=cache,target=/go/pkg/mod \
+    --mount=type=cache,target=/root/.cache/go-build \
+    --mount=type=bind,target=. \
+    go build -o /bin/app ./src
 ...
 ```
 
@@ -220,20 +223,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@{{% param "setup_qemu_action_version" %}}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 
       - name: Docker meta
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@{{% param "metadata_action_version" %}}
         with:
           images: user/app
           tags: |
@@ -243,7 +246,7 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
 
       - name: Go Build Cache for Docker
-        uses: actions/cache@v4
+        uses: actions/cache@{{% param "cache_action_version" %}}
         with:
           path: go-build-cache
           key: ${{ runner.os }}-go-build-cache-${{ hashFiles('**/go.sum') }}
@@ -254,7 +257,7 @@ jobs:
           cache-source: go-build-cache
 
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -291,16 +294,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 
       - name: Cache Docker layers
-        uses: actions/cache@v4
+        uses: actions/cache@{{% param "cache_action_version" %}}
         with:
           path: ${{ runner.temp }}/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}
@@ -308,7 +311,7 @@ jobs:
             ${{ runner.os }}-buildx-
 
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           push: true
           tags: user/app:latest

@@ -51,10 +51,11 @@ building images in a consistent way, with the same configuration.
 
 ## The Bake file format
 
-You can write Bake files in HCL, YAML (Docker Compose files), or JSON. In
-general, HCL is the most expressive and flexible format, which is why you'll
-see it used in most of the examples in this documentation, and in projects that
-use Bake.
+You can write Bake files in HCL or JSON. Bake can also read
+[Docker Compose files](./compose-file.md) and translate each service to a build
+target. HCL is the most expressive and flexible format, which is why you'll see
+it used in most of the examples in this documentation, and in projects that use
+Bake.
 
 The properties that can be set for a target closely resemble the CLI flags for
 `docker build`. For instance, consider the following `docker build` command:
@@ -87,7 +88,7 @@ target "myapp" {
 > [!TIP]
 >
 > Want a better editing experience for Bake files in VS Code?
-> Check out the [Docker VS Code Extension (Beta)](https://marketplace.visualstudio.com/items?itemName=docker.docker) for linting, code navigation, and vulnerability scanning.
+> Check out the [Docker DX](https://marketplace.visualstudio.com/items?itemName=docker.docker) extension for linting, code navigation, and vulnerability scanning.
 
 ## Next steps
 

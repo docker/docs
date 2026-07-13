@@ -1,7 +1,0 @@
-{{ partial "heading.html" (dict
-  "level" .Level
-  "text" (.Text | safeHTML)
-  "id" (.Attributes.id | default .Anchor)
-  "class" .Attributes.class
-  )
-}}

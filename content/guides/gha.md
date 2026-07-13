@@ -3,8 +3,9 @@ title: Introduction to GitHub Actions with Docker
 linkTitle: GitHub Actions and Docker
 summary: |
   Learn how to automate image build and push with GitHub Actions.
+keywords: github actions, ci/cd, docker hub, build and push, automation, workflows
 params:
-  tags: [devops]
+  tags: [cicd]
   time: 10 minutes
 ---
 
@@ -18,7 +19,7 @@ Docker builds. Use it as-is, or extend it further to fit your needs.
 
 If you want to follow along with the guide, ensure you have the following:
 
-- A Docker account.
+- A verified Docker account.
 - Familiarity with Dockerfiles.
 
 This guide assumes basic knowledge of Docker concepts but provides explanations
@@ -51,7 +52,7 @@ that, you must authenticate with your Docker credentials (username and access
 token) as part of the GitHub Actions workflow.
 
 For instructions on how to create a Docker access token, see
-[Create and manage access tokens](/manuals/security/for-developers/access-tokens.md).
+[Create and manage access tokens](/manuals/security/access-tokens.md).
 
 Once you have your Docker credentials ready, add the credentials to your GitHub
 repository so you can use them in GitHub Actions:
@@ -103,10 +104,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@{{% param "checkout_action_version" %}}
       - name: Extract Docker image metadata
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@{{% param "metadata_action_version" %}}
         with:
           images: ${{ vars.DOCKER_USERNAME }}/my-image
 ```
@@ -127,7 +128,7 @@ To authenticate with Docker Hub, add the following step to your workflow:
 
 ```yaml
       - name: Log in to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -142,7 +143,7 @@ following configuration builds the image and pushes it directly to a registry.
 
 ```yaml
       - name: Build and push Docker image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
@@ -182,10 +183,10 @@ Here's the updated snippet:
 
 ```yaml
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
       
       - name: Build and push Docker image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
@@ -216,25 +217,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@{{% param "checkout_action_version" %}}
 
       - name: Extract Docker image metadata
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@{{% param "metadata_action_version" %}}
         with:
           images: ${{ vars.DOCKER_USERNAME }}/my-image
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
       
       - name: Build and push Docker image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
@@ -251,5 +252,6 @@ additional features based on your project's needs, such as
 ### Further reading
 
 - Learn more about advanced configurations and examples in the [Docker Build GitHub Actions](/manuals/build/ci/github-actions/_index.md) section.
-- For more complex build setups, you may want to consider [Bake](/manuals/build/bake/_index.md). (See also the [Mastering Buildx Bake guide](/guides/bake/index.md).)
+- For more complex build setups, you may want to consider [Bake](/manuals/build/bake/_index.md). (See also the [Mastering Buildx Bake guide](/guides/bake/).)
+
 - Learn about Docker's managed build service, designed for faster, multi-platform builds, see [Docker Build Cloud](/guides/docker-build-cloud/_index.md).

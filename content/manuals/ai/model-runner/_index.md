@@ -1,14 +1,12 @@
 ---
 title: Docker Model Runner
+linkTitle: Model Runner
 params:
   sidebar:
-    badge:
-      color: blue
-      text: Beta
-    group: AI
-weight: 20
+    group: AI and agents
+weight: 30
 description: Learn how to use Docker Model Runner to manage and run AI models.
-keywords: Docker, ai, model runner, docker desktop, docker engine, llm
+keywords: Docker, ai, model runner, docker desktop, docker engine, llm, openai, ollama, llama.cpp, vllm, diffusers, cpu, nvidia, cuda, amd, rocm, vulkan, cline, continue, cursor, image generation, stable diffusion
 aliases:
   - /desktop/features/model-runner/
   - /model-runner/
@@ -16,290 +14,128 @@ aliases:
 
 {{< summary-bar feature_name="Docker Model Runner" >}}
 
+Docker Model Runner (DMR) makes it easy to manage, run, and
+deploy AI models using Docker. Designed for developers,
+Docker Model Runner streamlines the process of pulling, running, and serving
+large language models (LLMs) and other AI models directly from Docker Hub,
+any OCI-compliant registry, or [Hugging Face](https://huggingface.co/).
+
+With seamless integration into Docker Desktop and Docker
+Engine, you can serve models via OpenAI and Ollama-compatible APIs, package GGUF files as
+OCI Artifacts, and interact with models from both the command line and graphical
+interface.
+
+Whether you're building generative AI applications, experimenting with machine
+learning workflows, or integrating AI into your software development lifecycle,
+Docker Model Runner provides a consistent, secure, and efficient way to work
+with AI models locally.
+
 ## Key features
 
-- [Pull and push models to and from Docker Hub](https://hub.docker.com/u/ai)
+- [Pull and push models to and from Docker Hub or any OCI-compliant registry](https://hub.docker.com/u/ai)
+- [Pull models from Hugging Face](https://huggingface.co/)
+- Serve models on [OpenAI and Ollama-compatible APIs](api-reference.md) for easy integration with existing apps
+- Support for [llama.cpp, vLLM, and Diffusers inference engines](inference-engines.md) (vLLM and Diffusers on Linux with NVIDIA GPUs)
+- [Generate images from text prompts](inference-engines.md#diffusers) using Stable Diffusion models with the Diffusers backend
+- Package GGUF and Safetensors files as OCI Artifacts and publish them to any Container Registry
 - Run and interact with AI models directly from the command line or from the Docker Desktop GUI
+- [Connect to AI coding tools](ide-integrations.md) like Cline, Continue, Cursor, and Aider
+- [Configure context size and model parameters](configuration.md) to tune performance
+- [Set up Open WebUI](openwebui-integration.md) for a ChatGPT-like web interface
 - Manage local models and display logs
+- Display prompt and response details
+- Conversational context support for multi-turn interactions
 
-## How it works
+## Requirements
 
-Models are pulled from Docker Hub the first time they're used and stored locally. They're loaded into memory only at runtime when a request is made, and unloaded when not in use to optimize resources. Since models can be large, the initial pull may take some time — but after that, they're cached locally for faster access. You can interact with the model using [OpenAI-compatible APIs](#what-api-endpoints-are-available).
+Docker Model Runner is supported on the following platforms:
+
+{{< tabs >}}
+{{< tab name="Windows">}}
+
+Windows(amd64):
+-  NVIDIA GPUs
+-  NVIDIA drivers 576.57+
+
+Windows(arm64):
+- OpenCL for Adreno
+- Qualcomm Adreno GPU (6xx series and later)
+
+  > [!NOTE]
+  > Some llama.cpp features might not be fully supported on the 6xx series.
+
+{{< /tab >}}
+{{< tab name="MacOS">}}
+
+- Apple Silicon
+
+{{< /tab >}}
+{{< tab name="Linux">}}
+
+Docker Engine only:
+
+- Supports CPU, NVIDIA (CUDA), AMD (ROCm), and Vulkan backends
+- Requires NVIDIA driver 575.57.08+ when using NVIDIA GPUs
+
+{{< /tab >}}
+{{</tabs >}}
+
+## How Docker Model Runner works
+
+Models are pulled from Docker Hub, an OCI-compliant registry, or
+[Hugging Face](https://huggingface.co/) the first time you use them and are
+stored locally. They load into memory only at runtime when a request is made,
+and unload when not in use to optimize resources. Because models can be large,
+the initial pull may take some time. After that, they're cached locally for
+faster access. You can interact with the model using
+[OpenAI and Ollama-compatible APIs](api-reference.md).
+
+### Inference engines
+
+Docker Model Runner supports three inference engines:
+
+| Engine | Best for | Model format |
+|--------|----------|--------------|
+| [llama.cpp](inference-engines.md#llamacpp) | Local development, resource efficiency | GGUF (quantized) |
+| [vLLM](inference-engines.md#vllm) | Production, high throughput | Safetensors |
+| [Diffusers](inference-engines.md#diffusers) | Image generation (Stable Diffusion) | Safetensors |
+
+llama.cpp is the default engine and works on all platforms. vLLM requires NVIDIA GPUs and is supported on Linux x86_64 and Windows with WSL2. Diffusers enables image generation and requires NVIDIA GPUs on Linux (x86_64 or ARM64). See [Inference engines](inference-engines.md) for detailed comparison and setup.
+
+### Context size
+
+Models have a configurable context size (context length) that determines how many tokens they can process. The default varies by model but is typically 2,048-8,192 tokens. You can adjust this per-model:
+
+```console
+$ docker model configure --context-size 8192 ai/qwen2.5-coder
+```
+
+See [Configuration options](configuration.md) for details on context size and other parameters.
 
 > [!TIP]
 >
 > Using Testcontainers or Docker Compose?
 > [Testcontainers for Java](https://java.testcontainers.org/modules/docker_model_runner/)
 > and [Go](https://golang.testcontainers.org/modules/dockermodelrunner/), and
-> [Docker Compose](/manuals/compose/how-tos/model-runner.md) now support Docker Model Runner.
+> [Docker Compose](/manuals/ai/compose/models-and-compose.md) support Docker
+> Model Runner.
 
-## Enable Docker Model Runner
+## Security and isolation
 
-### Enable DMR in Docker Desktop
+### Execution environment
 
-1. Navigate to the **Beta features** tab in settings.
-2. Tick the **Enable Docker Model Runner** setting.
-3. If you are running on Windows with a supported NVIDIA GPU, you should also see and be able to tick the **Enable GPU-backed inference** setting.
+Docker Model Runner isolates inference engines from your host:
 
-You can now use the `docker model` command in the CLI and view and interact with your local models in the **Models** tab in the Docker Desktop Dashboard.
+- On Linux, Docker Model Runner and its inference engines, such as Diffusers,
+  run inside a container, which provides the isolation boundary.
+- On macOS and Windows, the engines don't run inside a container, so Docker
+  Model Runner runs them in a sandboxed environment (seatbelt/sandbox-exec and Job Objects respectively)
 
-> [!IMPORTANT]
->
-> For Docker Desktop versions 4.41 and earlier, this settings lived under the **Experimental features** tab on the **Features in development** page.
+### Networking
 
-### Enable DMR in Docker Engine
-
-1. Ensure you have installed [Docker Engine](/engine/install/).
-2. DMR is available as a package. To install it, run:
-
-   {{< tabs >}}
-   {{< tab name="Ubuntu/Debian">}}
-
-   ```console
-   $ sudo apt-get update
-   $ sudo apt-get install docker-model-plugin
-   ```
-
-   {{< /tab >}}
-   {{< tab name="RPM-base distributions">}}
-
-   ```console
-   $ sudo dnf update
-   $ sudo dnf install docker-model-plugin
-   ```
-
-   {{< /tab >}}
-   {{< /tabs >}}
-
-3. Test the installation:
-
-   ```console
-   $ docker model version
-   $ docker model run ai/smollm2
-   ```
-
-## Pull a model
-
-Models are cached locally.
-
-{{< tabs group="release" >}}
-{{< tab name="From Docker Desktop">}}
-
-1. Select **Models** and select the **Docker Hub** tab.
-2. Find the model of your choice and select **Pull**.
-
-{{< /tab >}}
-{{< tab name="From the Docker CLI">}}
-
-Use the [`docker model pull` command](/reference/cli/docker/).
-
-{{< /tab >}}
-{{< /tabs >}}
-
-## Run a model
-
-{{< tabs group="release" >}}
-{{< tab name="From Docker Desktop">}}
-
-Select **Models** and select the **Local** tab and click the play button.
-The interactive chat screen opens.
-
-{{< /tab >}}
-{{< tab name="From the Docker CLI" >}}
-
-Use the [`docker model run` command](/reference/cli/docker/).
-
-{{< /tab >}}
-{{< /tabs >}}
-
-## Troubleshooting
-
-To troubleshoot potential issues, display the logs:
-
-{{< tabs group="release" >}}
-{{< tab name="From Docker Desktop">}}
-
-Select **Models** and select the **Logs** tab.
-
-{{< /tab >}}
-{{< tab name="From the Docker CLI">}}
-
-Use the [`docker model log` command](/reference/cli/docker/).
-
-{{< /tab >}}
-{{< /tabs >}}
-
-## Example: Integrate Docker Model Runner into your software development lifecycle
-
-You can now start building your Generative AI application powered by the Docker Model Runner.
-
-If you want to try an existing GenAI application, follow these instructions.
-
-1. Set up the sample app. Clone and run the following repository:
-
-   ```console
-   $ git clone https://github.com/docker/hello-genai.git
-   ```
-
-2. In your terminal, navigate to the `hello-genai` directory.
-
-3. Run `run.sh` for pulling the chosen model and run the app(s):
-
-4. Open you app in the browser at the addresses specified in the repository [README](https://github.com/docker/hello-genai).
-
-You'll see the GenAI app's interface where you can start typing your prompts.
-
-You can now interact with your own GenAI app, powered by a local model. Try a few prompts and notice how fast the responses are — all running on your machine with Docker.
-
-## FAQs
-
-### What models are available?
-
-All the available models are hosted in the [public Docker Hub namespace of `ai`](https://hub.docker.com/u/ai).
-
-### What CLI commands are available?
-
-See [the reference docs](/reference/cli/docker/model/).
-
-### What API endpoints are available?
-
-Once the feature is enabled, new API endpoints are available under the following base URLs:
-
-{{< tabs >}}
-{{< tab name="Docker Desktop">}}
-
-- From containers: `http://model-runner.docker.internal/`
-- From host processes: `http://localhost:12434/`, assuming TCP host access is
-  enabled on the default port (12434).
-
-{{< /tab >}}
-{{< tab name="Docker Engine">}}
-
-- From containers: `http://172.17.0.1:12434/` (with `172.17.0.1` representing the host gateway address)
-- From host processes: `http://localhost:12434/`
-
-> [!NOTE]
-> The `172.17.0.1` interface may not be available by default to containers
- within a Compose project.
-> In this case, add an `extra_hosts` directive to your Compose service YAML:
-> 
-> ```yaml
-> extra_hosts:
->   - "model-runner.docker.internal:host-gateway"
-> ```
-> Then you can access the Docker Model Runner APIs at http://model-runner.docker.internal:12434/
-
-{{< /tab >}}
-{{</tabs >}}
-
-Docker Model management endpoints:
-
-```text
-POST /models/create
-GET /models
-GET /models/{namespace}/{name}
-DELETE /models/{namespace}/{name}
-```
-
-OpenAI endpoints:
-
-```text
-GET /engines/llama.cpp/v1/models
-GET /engines/llama.cpp/v1/models/{namespace}/{name}
-POST /engines/llama.cpp/v1/chat/completions
-POST /engines/llama.cpp/v1/completions
-POST /engines/llama.cpp/v1/embeddings
-```
-
-To call these endpoints via a Unix socket (`/var/run/docker.sock`), prefix their path with
-with `/exp/vDD4.40`.
-
-> [!NOTE]
-> You can omit `llama.cpp` from the path. For example: `POST /engines/v1/chat/completions`.
-
-### How do I interact through the OpenAI API?
-
-#### From within a container
-
-To call the `chat/completions` OpenAI endpoint from within another container using `curl`:
-
-```bash
-#!/bin/sh
-
-curl http://model-runner.docker.internal/engines/llama.cpp/v1/chat/completions \
-    -H "Content-Type: application/json" \
-    -d '{
-        "model": "ai/smollm2",
-        "messages": [
-            {
-                "role": "system",
-                "content": "You are a helpful assistant."
-            },
-            {
-                "role": "user",
-                "content": "Please write 500 words about the fall of Rome."
-            }
-        ]
-    }'
-
-```
-
-#### From the host using TCP
-
-To call the `chat/completions` OpenAI endpoint from the host via TCP:
-
-1. Enable the host-side TCP support from the Docker Desktop GUI, or via the [Docker Desktop CLI](/manuals/desktop/features/desktop-cli.md).
-   For example: `docker desktop enable model-runner --tcp <port>`.
-
-   If you are running on Windows, also enable GPU-backed inference.
-   See [Enable Docker Model Runner](#enable-dmr-in-docker-desktop).
-
-2. Interact with it as documented in the previous section using `localhost` and the correct port.
-
-```bash
-#!/bin/sh
-
-	curl http://localhost:12434/engines/llama.cpp/v1/chat/completions \
-    -H "Content-Type: application/json" \
-    -d '{
-        "model": "ai/smollm2",
-        "messages": [
-            {
-                "role": "system",
-                "content": "You are a helpful assistant."
-            },
-            {
-                "role": "user",
-                "content": "Please write 500 words about the fall of Rome."
-            }
-        ]
-    }'
-```
-
-#### From the host using a Unix socket
-
-To call the `chat/completions` OpenAI endpoint through the Docker socket from the host using `curl`:
-
-```bash
-#!/bin/sh
-
-curl --unix-socket $HOME/.docker/run/docker.sock \
-    localhost/exp/vDD4.40/engines/llama.cpp/v1/chat/completions \
-    -H "Content-Type: application/json" \
-    -d '{
-        "model": "ai/smollm2",
-        "messages": [
-            {
-                "role": "system",
-                "content": "You are a helpful assistant."
-            },
-            {
-                "role": "user",
-                "content": "Please write 500 words about the fall of Rome."
-            }
-        ]
-    }'
-```
+The Model Runner API is not authenticated. Any client that can reach it,
+including other containers on the same Docker network, can pull, load, and
+run models, and send inference requests.
 
 ## Known issues
 
@@ -321,19 +157,29 @@ $ ln -s /Applications/Docker.app/Contents/Resources/cli-plugins/docker-model ~/.
 
 Once linked, rerun the command.
 
-### No safeguard for running oversized models
+## Privacy and data collection
 
-Currently, Docker Model Runner doesn't include safeguards to prevent you from
-launching models that exceed your system's available resources. Attempting to
-run a model that is too large for the host machine may result in severe
-slowdowns or may render the system temporarily unusable. This issue is
-particularly common when running LLMs without sufficient GPU memory or system
-RAM.
+Docker Model Runner respects your privacy settings in Docker Desktop. Data collection is controlled by the **Send usage statistics** setting:
 
-### No consistent digest support in Model CLI
+- **Disabled**: No usage data is collected
+- **Enabled**: Only minimal, non-personal data is collected:
+  - [Model names](https://github.com/docker/model-runner/blob/eb76b5defb1a598396f99001a500a30bbbb48f01/pkg/metrics/metrics.go#L96) (via HEAD requests to Docker Hub)
+  - User agent information
+  - Whether requests originate from the host or containers
 
-The Docker Model CLI currently lacks consistent support for specifying models by image digest. As a temporary workaround, you should refer to models by name instead of digest.
+When using Docker Model Runner with Docker Engine, HEAD requests to Docker Hub are made to track model names, regardless of any settings.
+
+No prompt content, responses, or personally identifiable information is ever collected.
 
 ## Share feedback
 
-Thanks for trying out Docker Model Runner. Give feedback or report any bugs you may find through the **Give feedback** link next to the **Enable Docker Model Runner** setting.
+Thanks for trying out Docker Model Runner. To report bugs or request features, [open an issue on GitHub](https://github.com/docker/model-runner/issues). You can also give feedback through the **Give feedback** link next to the **Enable Docker Model Runner** setting.
+
+## Next steps
+
+- [Get started with DMR](get-started.md) - Enable DMR and run your first model
+- [API reference](api-reference.md) - OpenAI and Ollama-compatible API documentation
+- [Configuration options](configuration.md) - Context size and runtime parameters
+- [Inference engines](inference-engines.md) - llama.cpp, vLLM, and Diffusers details
+- [IDE integrations](ide-integrations.md) - Connect Cline, Continue, Cursor, and more
+- [Open WebUI integration](openwebui-integration.md) - Set up a web chat interface

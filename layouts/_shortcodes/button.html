@@ -1,0 +1,10 @@
+{{ $text := .Get "text" }}
+{{ $url := .Get "url" }}
+{{- if (strings.HasPrefix $url "http") -}}
+  {{ $url = $url | safeURL }}
+{{- else if (strings.FindRE `([^_]|^)index.md` $url 1) -}}
+  {{ $url = ref .Page (strings.Replace $url "index.md" "_index.md") }}
+{{- else -}}
+  {{ $url = ref .Page $url }}
+{{- end -}}
+<a class="button not-prose" href="{{ $url }}">{{ $text }}</a>

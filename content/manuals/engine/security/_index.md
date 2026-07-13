@@ -194,7 +194,7 @@ to the host.
 This doesn't affect regular web apps, but reduces the vectors of attack by
 malicious users considerably. By default Docker
 drops all capabilities except [those
-needed](https://github.com/moby/moby/blob/master/oci/caps/defaults.go#L6-L19),
+needed](https://github.com/moby/moby/blob/master/daemon/pkg/oci/caps/defaults.go#L6-L19),
 an allowlist instead of a denylist approach. You can see a full list of
 available capabilities in [Linux
 manpages](https://man7.org/linux/man-pages/man7/capabilities.7.html).

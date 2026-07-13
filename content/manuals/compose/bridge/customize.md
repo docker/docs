@@ -2,13 +2,15 @@
 title: Customize Compose Bridge 
 linkTitle: Customize
 weight: 20
-description: Learn about the Compose Bridge templates syntax
-keywords: compose, bridge, templates
+description: Learn how to customize Compose Bridge transformations using Go templates and Compose extensions
+keywords: docker compose bridge, customize compose bridge, compose bridge templates, compose to kubernetes, compose bridge transformation, go templates docker
 ---
 
 {{< summary-bar feature_name="Compose bridge" >}}
 
-This page explains how Compose Bridge utilizes templating to efficiently translate Docker Compose files into Kubernetes manifests. It also explain how you can customize these templates for your specific requirements and needs, or how you can build your own transformation. 
+You can customize how Compose Bridge converts your Docker Compose files into platform-specific formats. 
+
+This page explains how Compose Bridge uses templating to generate Kubernetes manifests and how you can customize these templates for your specific requirements and needs, or how you can build your own transformation.  
 
 ## How it works 
 
@@ -16,11 +18,11 @@ Compose bridge uses transformations to let you convert a Compose model into anot
 
 A transformation is packaged as a Docker image that receives the fully-resolved Compose model as `/in/compose.yaml` and can produce any target format file under `/out`.
 
-Compose Bridge provides its transformation for Kubernetes using Go templates, so that it is easy to extend for customization by just replacing or appending your own templates.
+Compose Bridge includes a default Kubernetes transformation using Go templates, which you can customize by replacing or extending templates.
 
-### Syntax
+### Template syntax
 
-Compose Bridge make use of templates to transform a Compose configuration file into Kubernetes manifests. Templates are plain text files that use the [Go templating syntax](https://pkg.go.dev/text/template). This enables the insertion of logic and data, making the templates dynamic and adaptable according to the Compose model.
+Compose Bridge makes use of templates to transform a Compose configuration file into Kubernetes manifests. Templates are plain text files that use the [Go templating syntax](https://pkg.go.dev/text/template). This enables the insertion of logic and data, making the templates dynamic and adaptable according to the Compose model.
 
 When a template is executed, it must produce a YAML file which is the standard format for Kubernetes manifests. Multiple files can be generated as long as they are separated by `---`
 
@@ -42,9 +44,11 @@ key: value
 {{ end }}
 ```
 
-### Input
+### Input model
 
-The input Compose model is the canonical YAML model you can get by running  `docker compose config`. Within the templates, data from the `compose.yaml` is accessed using dot notation, allowing you to navigate through nested data structures. For example, to access the deployment mode of a service, you would use `service.deploy.mode`:
+You can generate the input model by running `docker compose config`. 
+
+This canonical YAML output serves as the input for Compose Bridge transformations. Within the templates, data from the `compose.yaml` is accessed using dot notation, allowing you to navigate through nested data structures. For example, to access the deployment mode of a service, you would use `service.deploy.mode`:
 
  ```yaml
 # iterate over a yaml sequence
@@ -52,26 +56,28 @@ The input Compose model is the canonical YAML model you can get by running  `doc
   # access a nested attribute using dot notation
   {{ if eq $service.deploy.mode "global" }}
 kind: DaemonSet
-  {{ end }}
-{{ end }}
+  {{ end }}
+{{ end }}
 ```
 
-You can check the [Compose Specification JSON schema](https://github.com/compose-spec/compose-go/blob/main/schema/compose-spec.json) to have a full overview of the Compose model. This schema outlines all possible configurations and their data types in the Compose model. 
+You can check the [Compose Specification JSON schema](https://github.com/compose-spec/compose-go/blob/main/schema/compose-spec.json) for a full overview of the Compose model. This schema outlines all possible configurations and their data types in the Compose model. 
 
-### Helpers
+### Helper functions
 
 As part of the Go templating syntax, Compose Bridge offers a set of YAML helper functions designed to manipulate data within the templates efficiently:
 
-- `seconds`: Converts a [duration](/reference/compose-file/extension.md#specifying-durations) into an integer
-- `uppercase`: Converts a string into upper case characters
-- `title`: Converts a string by capitalizing the first letter of each word
-- `safe`: Converts a string into a safe identifier, replacing all characters (except lowercase a-z) with `-`
-- `truncate`: Removes the N first elements from a list
-- `join`: Groups elements from a list into a single string, using a separator
-- `base64`: Encodes a string as base64 used in Kubernetes for encoding secrets
-- `map`: Transforms a value according to mappings expressed as `"value -> newValue"` strings 
-- `indent`: Writes string content indented by N spaces
-- `helmValue`: Writes the string content as a template value in the final file
+| Function    | Description                                                                                                 |
+| ----------- | ----------------------------------------------------------------------------------------------------------- |
+| `seconds`   | Converts a [duration](/reference/compose-file/extension.md#specifying-durations) into an integer (seconds). |
+| `uppercase` | Converts a string to uppercase.                                                                             |
+| `title`     | Capitalizes the first letter of each word.                                                                  |
+| `safe`      | Converts a string into a safe identifier (replaces non-lowercase characters with `-`).                      |
+| `truncate`  | Removes the first N elements from a list.                                                                   |
+| `join`      | Joins list elements into a single string with a separator.                                                  |
+| `base64`    | Encodes a string as base64 (used for Kubernetes secrets).                                                   |
+| `map`       | Maps values using `“value -> newValue”` syntax.                                                             |
+| `indent`    | Indents string content by N spaces.                                                                         |
+| `helmValue` | Outputs a Helm-style template value.                                                                        |
 
 In the following example, the template checks if a healthcheck interval is specified for a service, applies the `seconds` function to convert this interval into seconds and assigns the value to the `periodSeconds` attribute.
 
@@ -81,38 +87,65 @@ In the following example, the template checks if a healthcheck interval is speci
 {{ end }}
 ```
 
-## Customization
+## Customize the default templates
 
 As Kubernetes is a versatile platform, there are many ways
 to map Compose concepts into Kubernetes resource definitions. Compose
 Bridge lets you customize the transformation to match your own infrastructure
-decisions and preferences, with various level of flexibility and effort.
+decisions and preferences, with varying level of flexibility and effort.
 
 ### Modify the default templates
 
-You can extract templates used by the default transformation `docker/compose-bridge-kubernetes`,
-by running `compose-bridge transformations create --from docker/compose-bridge-kubernetes my-template` 
-and adjusting the templates to match your needs.
+You can extract templates used by the default transformation `docker/compose-bridge-kubernetes`:
 
-The templates are extracted into a directory named after your template name, in this case `my-template`.  
-It includes a Dockerfile that lets you create your own image to distribute your template, as well as a directory containing the templating files.  
-You are free to edit the existing files, delete them, or [add new ones](#add-your-own-templates) to subsequently generate Kubernetes manifests that meet your needs.  
+```console
+$ docker compose bridge transformations create --from docker/compose-bridge-kubernetes my-template
+``` 
+
+The templates are extracted into a directory named after your template name, in this case `my-template`. It includes:
+
+- A Dockerfile that lets you create your own image to distribute your template
+- A directory containing the templating files
+
+Edit, [add](#add-your-own-templates), or remove templates as needed. 
+
 You can then use the generated Dockerfile to package your changes into a new transformation image, which you can then use with Compose Bridge:
 
 ```console
 $ docker build --tag mycompany/transform --push .
 ```
 
-You can then use your transformation as a replacement:
+Use your transformation as a replacement:
 
 ```console
-$ compose-bridge convert --transformations mycompany/transform 
+$ docker compose bridge convert --transformations mycompany/transform 
 ```
+
+#### Model Runner templates
+
+The default transformation also includes templates for applications that use LLMs:
+
+- `model-runner-deployment.tmpl`: Generates the Kubernetes deployment for Docker Model Runner. Customize it to change replica counts, image tags, resource requests and limits, GPU scheduling settings, tolerations, or additional environment variables.
+- `model-runner-service.tmpl`: Builds the service that exposes Docker Model Runner. Update it to switch between `ClusterIP`, `NodePort`, or `LoadBalancer` types, adjust ports, or add annotations for ingress and service meshes.
+- `model-runner-pvc.tmpl`: Defines the persistent volume claim used to store downloaded models. Edit it to set storage size, storage class, access modes, or volume annotations required by your storage provider.
+- `/overlays/model-runner/kustomization.yaml`: Kustomize overlay applied when you deploy Model Runner to a standalone Kubernetes cluster. Extend it to add patches for labels and annotations, attach `NetworkPolicies`, or include extra manifests.
+- `/overlays/desktop/deployment.tmpl`: Desktop-specific deployment template that keeps the in-cluster Model Runner scaled down and points workloads to the host endpoint. Adjust it if you change the Desktop endpoint or want to deploy Model Runner on Desktop instead of relying on the host service.
+
+Common customization scenarios:
+
+- Enable GPU support by adding vendor-specific resource requests, limits, and node selectors in `model-runner-deployment.tmpl`.
+- Increase or tune storage for model artifacts by editing `model-runner-pvc.tmpl` to set the desired size, storage class, or access mode.
+- Expose Model Runner outside the cluster by switching the service type in `model-runner-service.tmpl` or adding ingress annotations in the model-runner overlay.
+- Align cluster policies by adding labels, annotations, or NetworkPolicies through `/overlays/model-runner/kustomization.yaml`.
+
+For more details, see [Use Model Runner](use-model-runner.md).
 
 ### Add your own templates
 
 For resources that are not managed by Compose Bridge's default transformation, 
-you can build your own templates. The `compose.yaml` model may not offer all 
+you can build your own templates. 
+
+The `compose.yaml` model may not offer all 
 the configuration attributes required to populate the target manifest. If this is the case, you can
 then rely on Compose custom extensions to better describe the
 application, and offer an agnostic transformation.
@@ -152,7 +185,7 @@ when transforming Compose models into Kubernetes in addition to other
 transformations:
 
 ```console
-$ compose-bridge convert \
+$ docker compose bridge convert \
     --transformation docker/compose-bridge-kubernetes \
     --transformation mycompany/transform 
 ```
@@ -184,7 +217,3 @@ CMD ["/usr/bin/kompose", "convert", "-f", "/in/compose.yaml", "--out", "/out"]
 
 This Dockerfile bundles Kompose and defines the command to run this tool according
 to the Compose Bridge transformation contract.
-
-## What's next?
-
-- [Explore the advanced integration](advanced-integration.md)

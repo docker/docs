@@ -23,7 +23,7 @@ tags:
   - name: changelog
     x-displayName: Changelog
     description: |
-      See the [Changelog](/reference/api/hub/latest-changelog) for a summary of changes across Docker Hub API versions.
+      See the [Changelog](/reference/api/hub/changelog) for a summary of changes across Docker Hub API versions.
   - name: resources
     x-displayName: Resources
     description: |
@@ -40,9 +40,9 @@ tags:
       - `X-RateLimit-Remaining` - The remaining amount of calls within the limit period.
       - `X-RateLimit-Reset` - The unix timestamp of when the remaining resets.
 
-      If you have hit the limit, you will receive a response status of `429` and the `X-Retry-After` header in the response.
+      If you have hit the limit, you will receive a response status of `429` and the `Retry-After` header in the response.
 
-      The `X-Retry-After` header is a unix timestamp of when you can call the API again.
+      The [`Retry-After` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After) specifies the number of seconds to wait until you can call the API again.
 
       **Note**: These rate limits are separate from anti-abuse and Docker Hub download, or pull rate limiting.
       To learn more about Docker Hub pull rate limiting, see [Usage and limits](https://docs.docker.com/docker-hub/usage/).
@@ -53,7 +53,7 @@ tags:
 
       Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your subscription (Personal, Pro, or Team) and your account's permissions.
 
-      To learn more about the features available in each subscription and to upgrade your existing subscription, see [Docker Pricing](https://www.docker.com/pricing).
+      To learn more about the features available in each subscription and to upgrade your existing subscription, see [Docker Pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsApiHub).
 
       # Types
 
@@ -101,7 +101,7 @@ tags:
   - name: access-tokens
     x-displayName: Personal Access Tokens
     description: |
-      The Personal Access Token endpoints lets you manage personal access tokens. For more information, see [Access Tokens](https://docs.docker.com/security/for-developers/access-tokens/).
+      The Personal Access Token endpoints lets you manage personal access tokens. For more information, see [Access Tokens](https://docs.docker.com/security/access-tokens/).
 
       You can use a personal access token instead of a password in the [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) or in the [Create an authentication token](#operation/PostUsersLogin) route to obtain a bearer token.
 
@@ -117,7 +117,7 @@ tags:
     description: |
       The Audit Logs API endpoints allow you to query audit log events across a namespace.
 
-      For more information, see [Audit Logs](https://docs.docker.com/admin/organization/activity-logs/).
+      For more information, see [Audit Logs](https://docs.docker.com/admin/activity-logs/).
   - name: org-settings
     x-displayName: Org Settings
     description: |
@@ -139,14 +139,14 @@ tags:
     description: |
       The groups endpoints allow you to manage your organization's teams and their members.
 
-      For more information, seee [Create and manage a team](https://docs.docker.com/admin/organization/manage-a-team/).
+      For more information, see [Create and manage a team](https://docs.docker.com/admin/organization/manage/manage-a-team/).
   - name: invites
     x-displayName: Invites
     x-audience: public
     description: |
       The invites endpoints allow you to manage invites for users to join your Docker organization.
 
-      For more information, see [Invite members](https://docs.docker.com/admin/organization/members/#invite-members).
+      For more information, see [Invite members](https://docs.docker.com/admin/organization/manage/members/#invite-members).
   - name: scim
     x-displayName: SCIM
     x-audience: public
@@ -425,46 +425,247 @@ paths:
                 response:
                   value:
                     actions:
+                      billing:
+                        actions:
+                          - name: plan.upgrade
+                            description: Occurs when your organization’s billing plan is upgraded to a higher tier plan.
+                            label: Plan Upgraded
+                          - name: plan.downgrade
+                            description: Occurs when your organization’s billing plan is downgraded to a lower tier plan.
+                            label: Plan Downgraded
+                          - name: plan.seat_add
+                            description: Occurs when a seat is added to your organization’s billing plan.
+                            label: Seat Added
+                          - name: plan.seat_remove
+                            description: Occurs when a seat is removed from your organization’s billing plan.
+                            label: Seat Removed
+                          - name: plan.cycle_change
+                            description: Occurs when there is a change in the recurring interval that your organization is charged.
+                            label: Billing Cycle Changed
+                          - name: plan.downgrade_cancel
+                            description: Occurs when a scheduled plan downgrade for your organization is canceled.
+                            label: Plan Downgrade Canceled
+                          - name: plan.seat_removal_cancel
+                            description: Occurs when a scheduled seat removal for an organization’s billing plan is canceled.
+                            label: Seat Removal Canceled
+                          - name: plan.upgrade.request
+                            description: Occurs when a user in your organization requests a plan upgrade.
+                            label: Plan Upgrade Requested
+                          - name: plan.downgrade.request
+                            description: Occurs when a user in your organization requests a plan downgrade.
+                            label: Plan Downgrade Requested
+                          - name: plan.seat_add.request
+                            description: Occurs when a user in your organization requests an increase in the number of seats.
+                            label: Seat Addition Requested
+                          - name: plan.seat_removal.request
+                            description: Occurs when a user in your organization requests a decrease in the number of seats.
+                            label: Seat Removal Requested
+                          - name: plan.cycle_change.request
+                            description: Occurs when a user in your organization requests a change in the billing cycle.
+                            label: Billing Cycle Change Requested
+                          - name: plan.downgrade_cancel.request
+                            description: Occurs when a user in your organization requests a cancellation of a scheduled plan downgrade.
+                            label: Plan Downgrade Cancellation Requested
+                          - name: plan.seat_removal_cancel.request
+                            description: Occurs when a user in your organization requests a cancellation of a scheduled seat removal.
+                            label: Seat Removal Cancellation Requested
+                          - name: plan.product_change
+                            description: Occurs when there is a change in the product that your organization subscribes to.
+                            label: Billing Product Changed
+                        label: Billing
+                      enterprise:
+                        actions:
+                          - name: setting.policy.create
+                            description: Details of adding an admin settings policy
+                            label: Policy created
+                          - name: setting.policy.update
+                            description: Details of updating an admin settings policy
+                            label: Policy updated
+                          - name: setting.policy.delete
+                            description: Details of deleting an admin settings policy
+                            label: Policy deleted
+                          - name: setting.policy.transfer
+                            description: Details of transferring an admin settings policy to another owner
+                            label: Policy transferred
+                          - name: sso.connection.create
+                            description: Details of creating a new org/company SSO connection
+                            label: Create SSO Connection
+                          - name: sso.connection.update
+                            description: Details of updating an existing org/company SSO connection
+                            label: Update SSO Connection
+                          - name: sso.connection.delete
+                            description: Details of deleting an existing org/company SSO connection
+                            label: Delete SSO Connection
+                          - name: sso.connection.enforcement_toggle
+                            description: Details of toggling enforcement on an existing org/company SSO connection
+                            label: Enforce SSO
+                          - name: sso.connection.scim_toggle
+                            description: Details of toggling SCIM on an existing org/company SSO connection
+                            label: Enforce SCIM
+                          - name: sso.connection.scim_token_refresh
+                            description: Details of a SCIM token refresh on an existing org/company SSO connection
+                            label: Refresh SCIM Token
+                          - name: sso.connection.connection_type_change
+                            description: Details of a connection type change on an existing org/company SSO connection
+                            label: Change SSO Connection Type
+                          - name: sso.connection.jit_toggle
+                            description: Details of a JIT toggle on an existing org/company SSO connection
+                            label: Toggle JIT provisioning
+                        label: Enterprise
+                      offload:
+                        actions:
+                          - name: lease.start
+                            description: Details of the started Offload lease.
+                            label: Offload lease start
+                          - name: lease.end
+                            description: Details of the ended Offload lease.
+                            label: Offload lease end
+                        label: Offload
+                      oidc:
+                        actions:
+                          - name: connection.create
+                            description: Details of creating an OIDC connection.
+                            label: OIDC connection created
+                          - name: connection.update
+                            description: Details of updating an OIDC connection.
+                            label: OIDC connection updated
+                          - name: connection.delete
+                            description: Details of deleting an OIDC connection.
+                            label: OIDC connection deleted
+                        label: OIDC
                       org:
                         actions:
+                          - name: create
+                            description: Activities related to the creation of a new organization
+                            label: Organization Created
+                          - name: member.add
+                            description: Details of the member added to your organization
+                            label: Organization Member Added
+                          - name: member.remove
+                            description: Details about the member removed from your organization
+                            label: Organization Member Removed
+                          - name: member.role.change
+                            description: Details about the role changed for a member in your organization
+                            label: Member Role Changed
+                          - name: member.invite.send
+                            description: Details of the member invited to your organization
+                            label: Org Member Invited
                           - name: team.create
-                            description: contains team create events
-                            label: Team Created
+                            description: Activities related to the creation of a team
+                            label: Organization Created
+                          - name: team.update
+                            description: Activities related to the modification of a team
+                            label: Organization Deleted
                           - name: team.delete
-                            description: contains team delete events
-                            label: Team Deleted
+                            description: Activities related to the deletion of a team
+                            label: Organization Deleted
                           - name: team.member.add
-                            description: contains team member add events
+                            description: Details of the member added to your team
                             label: Team Member Added
                           - name: team.member.remove
-                            description: contains team member remove events
+                            description: Details of the member removed from your team
                             label: Team Member Removed
-                          - name: team.member.invite
-                            description: contains team member invite events
-                            label: Team Member Invited
-                          - name: member.removed
-                            description: contains org member remove events
-                            label: Organization Member Removed
-                          - name: create
-                            description: contains organization create events
-                            label: Organization Created
+                          - name: domain.create
+                            description: Details of the single sign-on domain added to your organization
+                            label: Single Sign-On domain added
+                          - name: domain.verify
+                            description: Details of the single sign-on domain verified for your organization
+                            label: Single Sign-On domain verified
+                          - name: domain.delete
+                            description: Details of the single sign-on domain removed from your organization
+                            label: Single Sign-On domain deleted
+                          - name: domain.auto-provisioning.toggle
+                            description: Details of toggling the Auto-Provisioning feature on a domain on or off
+                            label: Organization Auto-Provisioning Toggled
+                          - name: settings.update
+                            description: Details related to the organization setting that was updated
+                            label: Organization Settings Updated
+                          - name: registry_access.enabled
+                            description: Activities related to enabling Registry Access Management
+                            label: Registry Access Management enabled
+                          - name: registry_access.disabled
+                            description: Activities related to disabling Registry Access Management
+                            label: Registry Access Management disabled
+                          - name: registry_access.registry_added
+                            description: Activities related to the addition of a registry
+                            label: Registry Access Management registry added
+                          - name: registry_access.registry_updated
+                            description: Details related to the registry that was updated
+                            label: Registry Access Management registry updated
+                          - name: registry_access.registry_removed
+                            description: Activities related to the removal of a registry
+                            label: Registry Access Management registry removed
+                          - name: access_token.create
+                            description: Access token created in organization
+                            label: Access token created
+                          - name: access_token.update
+                            description: Access token updated in organization
+                            label: Access token updated
+                          - name: access_token.delete
+                            description: Access token deleted in organization
+                            label: Access token deleted
+                          - name: customrole.create
+                            description: A custom role was created
+                            label: Custom role created
+                          - name: customrole.update
+                            description: An existing custom role was updated
+                            label: Custom role updated
+                          - name: customrole.delete
+                            description: A custom role was deleted
+                            label: Custom role deleted
+                          - name: securepolicyconfigure.create
+                            description: A secure policy configuration was created
+                            label: Secure Policy Configuration created
+                          - name: securepolicyconfigure.update
+                            description: A secure policy configuration was updated
+                            label: Secure Policy Configuration updated
+                          - name: securepolicyconfigure.delete
+                            description: A secure policy configuration was deleted
+                            label: Secure Policy Configuration deleted
+                          - name: securepolicyclient.create
+                            description: A secure policy client was created
+                            label: Secure Policy Client created
+                          - name: securepolicyclient.update
+                            description: A secure policy client was updated
+                            label: Secure Policy Client updated
+                          - name: securepolicyclient.delete
+                            description: A secure policy client was deleted
+                            label: Secure Policy Client deleted
+                          - name: securepolicyprofile.create
+                            description: A secure policy profile was created
+                            label: Secure Policy Profile created
+                          - name: securepolicyprofile.update
+                            description: A secure policy profile was updated
+                            label: Secure Policy Profile updated
+                          - name: securepolicyprofile.delete
+                            description: A secure policy profile was deleted
+                            label: Secure Policy Profile deleted
                         label: Organization
                       repo:
                         actions:
                           - name: create
-                            description: contains repository create events
+                            description: Activities related to the creation of a new repository
                             label: Repository Created
+                          - name: update
+                            description: Activities related to the modification of a repository
+                            label: Repository Updated
                           - name: delete
-                            description: contains repository delete events
+                            description: Activities related to the deletion of a repository
                             label: Repository Deleted
                           - name: change_privacy
-                            description: contains repository privacy change events
+                            description: Details related to the privacy policies that were updated
                             label: Privacy Changed
+                          - name: category.updated
+                            description: Details related to updating a repository categories
+                            label: Categories updated
+                          - name: immutable.tags.updated
+                            description: Details related to updating tag immutability of a repository
+                            label: Tag immutability updated
                           - name: tag.push
-                            description: contains image tag push events
+                            description: Activities related to the tags pushed
                             label: Tag Pushed
                           - name: tag.delete
-                            description: contains image tag delete events
+                            description: Activities related to the tags deleted
                             label: Tag Deleted
                         label: Repository
         "429":
@@ -528,6 +729,19 @@ paths:
                         timestamp: "2021-02-19T01:34:35Z"
                         action_description: |
                           pushed the tag latest with the digest sha256:c1ae9c435032a to the repository docker/example
+                      - account: docker
+                        action: offload.lease.end
+                        name: docker
+                        actor: docker
+                        data:
+                          lease_id: l_3EgPuRCjtUqT279CFPOQWcO8zOf
+                          resource_type: run_4cpu_8mem
+                          started_at: "2026-06-04T18:24:21Z"
+                          updated_at: "2026-06-04T18:36:43Z"
+                          org_id: b908ca6e-b9a9-4a53-a9a5-6bec96f72432
+                          user_id: ecae6747-e42c-43cb-925d-cfce1ab32b02
+                        timestamp: "2026-06-04T18:36:43Z"
+                        action_description: "offload lease 'l_3EgPuRCjtUqT279CFPOQWcO8zOf' ended, ran for '12m22s'"
         "429":
           description: ""
           content:
@@ -823,6 +1037,7 @@ paths:
       - $ref: "#/components/parameters/namespace"
       - $ref: "#/components/parameters/repository"
     get:
+      operationId: ListRepositoryTags
       summary: List repository tags
       tags:
         - repositories
@@ -867,6 +1082,7 @@ paths:
       - $ref: "#/components/parameters/repository"
       - $ref: "#/components/parameters/tag"
     get:
+      operationId: GetRepositoryTag
       summary: Read repository tag
       tags:
         - repositories
@@ -892,6 +1108,62 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
+  /v2/namespaces/{namespace}/repositories/{repository}/immutabletags:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+    patch:
+      operationId: UpdateRepositoryImmutableTags
+      summary: "Update repository immutable tags"
+      description: |
+        Updates the immutable tags configuration for this repository.
+
+        **Only users with administrative privileges for the repository can modify these settings.**
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/update_repository_immutable_tags_request"
+      responses:
+        200:
+          $ref: "#/components/responses/update_repository_immutable_tags_response"
+        400:
+          $ref: "#/components/responses/bad_request"
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
+  /v2/namespaces/{namespace}/repositories/{repository}/immutabletags/verify:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+    post:
+      operationId: VerifyRepositoryImmutableTags
+      summary: "Verify repository immutable tags"
+      description: |
+        Validates  the immutable tags regex pass in parameter and returns a list of tags matching it in this repository.
+
+        **Only users with administrative privileges for the repository call this endpoint.**
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/immutable_tags_verify_request"
+      responses:
+        200:
+          $ref: "#/components/responses/immutable_tags_verify_response"
+        400:
+          $ref: "#/components/responses/bad_request"
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
   /v2/repositories/{namespace}/{repository}/groups:
     parameters:
       - $ref: "#/components/parameters/namespace"
@@ -900,34 +1172,360 @@ paths:
       summary: Assign a group (Team) to a repository for access
       tags:
         - repositories
+      operationId: CreateRepositoryGroup
       security:
         - bearerAuth: []
-      parameters:
-        - in: query
-          name: group_name
-          required: true
-          schema:
-            type: string
-          description: Name of the group (team) in the organization.
-        - in: query
-          name: permission
-          required: true
-          schema:
-            type: string
-            description: |
-              Access level for the group. Possible values:
-              - `read`
-              - `write`
-              - `admin`
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RepositoryGroupCreationRequest"
+            example:
+              group_id: 12345
+              permission: "write"
       responses:
         "200":
-          $ref: "#/components/responses/team_repo"
+          description: Repository group permission created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RepositoryGroup"
+              example:
+                group_name: "developers"
+                permission: "write"
+                group_id: 12345
+        "400":
+          description: Bad Request - Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+        "401":
+          $ref: "#/components/responses/unauthorized"
         "403":
           $ref: "#/components/responses/forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
+  /v2/namespaces/{namespace}/repositories:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+    get:
+      operationId: listNamespaceRepositories
+      summary: List repositories in a namespace
+      description: |
+        Returns a list of repositories within the specified namespace (organization or user).
 
-          
+        Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+        - {} # Allow anonymous access for public repositories
+      parameters:
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          description: Page number to get. Defaults to 1.
+        - in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+          description: Number of repositories to get per page. Defaults to 10. Max of 100.
+        - in: query
+          name: name
+          required: false
+          schema:
+            type: string
+          description: Filter repositories by name (partial match).
+        - in: query
+          name: ordering
+          required: false
+          schema:
+            type: string
+            enum:
+              - name
+              - -name
+              - last_updated
+              - -last_updated
+              - pull_count
+              - -pull_count
+          description: |
+            Order repositories by the specified field. Prefix with '-' for descending order.
+            Available options:
+            - `name` / `-name`: Repository name (ascending/descending)
+            - `last_updated` / `-last_updated`: Last update time (ascending/descending)
+            - `pull_count` / `-pull_count`: Number of pulls (ascending/descending)
+      responses:
+        "200":
+          description: List of repositories
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/list_repositories_response"
+              examples:
+                repositories_list:
+                  value:
+                    count: 287
+                    next: "https://hub.docker.com/v2/namespaces/docker/repositories?page=2&page_size=2"
+                    previous: null
+                    results:
+                      - name: "highland_builder"
+                        namespace: "docker"
+                        repository_type: "image"
+                        status: 1
+                        status_description: "active"
+                        description: "Image for performing Docker build requests"
+                        is_private: false
+                        star_count: 7
+                        pull_count: 15722123
+                        last_updated: "2023-06-20T10:44:45.459826Z"
+                        last_modified: "2024-10-16T13:48:34.145251Z"
+                        date_registered: "2015-05-19T21:13:35.937763Z"
+                        affiliation: ""
+                        media_types:
+                          - "application/octet-stream"
+                          - "application/vnd.docker.container.image.v1+json"
+                          - "application/vnd.docker.distribution.manifest.v1+prettyjws"
+                        content_types:
+                          - "unrecognized"
+                          - "image"
+                        categories:
+                          - name: "Languages & frameworks"
+                            slug: "languages-and-frameworks"
+                          - name: "Integration & delivery"
+                            slug: "integration-and-delivery"
+                          - name: "Operating systems"
+                            slug: "operating-systems"
+                        storage_size: 488723114800
+                      - name: "whalesay"
+                        namespace: "docker"
+                        repository_type: null
+                        status: 1
+                        status_description: "active"
+                        description: "An image for use in the Docker demo tutorial"
+                        is_private: false
+                        star_count: 757
+                        pull_count: 130737682
+                        last_updated: "2015-06-19T19:06:27.388123Z"
+                        last_modified: "2024-10-16T13:48:34.145251Z"
+                        date_registered: "2015-06-09T18:16:36.527329Z"
+                        affiliation: ""
+                        media_types:
+                          - "application/vnd.docker.distribution.manifest.v1+prettyjws"
+                        content_types:
+                          - "image"
+                        categories:
+                          - name: "Languages & frameworks"
+                            slug: "languages-and-frameworks"
+                          - name: "Integration & delivery"
+                            slug: "integration-and-delivery"
+                        storage_size: 103666708
+        "400":
+          description: Bad Request - Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+              examples:
+                invalid_ordering:
+                  summary: Invalid ordering value
+                  value:
+                    fields:
+                      ordering:
+                        [
+                          "Invalid ordering value. Must be one of: name, -name, last_updated, -last_updated, pull_count, -pull_count",
+                        ]
+                    text: "Invalid ordering value"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          description: Page not found - occurs when requesting a page number `>1` that exceeds the available results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+    post:
+      summary: Create a new repository
+      description: |
+        Creates a new repository within the specified namespace. The repository will be created
+        with the provided metadata including name, description, and privacy settings.
+      operationId: CreateRepository
+      tags:
+        - repositories
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/repo_creation_request"
+            example:
+              name: "my-app"
+              namespace: "myorganization"
+              description: "A sample application repository"
+              full_description: "This is a comprehensive description of my application repository that contains additional details about the project."
+              registry: "docker.io"
+              is_private: false
+      responses:
+        201:
+          description: Repository created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/repository_info"
+              example:
+                name: "my-app"
+                namespace: "myorganization"
+                repository_type: "image"
+                status: 1
+                status_description: "Active"
+                description: "A sample application repository"
+                is_private: false
+                is_automated: false
+                star_count: 0
+                pull_count: 0
+                last_updated: "2025-01-20T10:30:00Z"
+                date_registered: "2025-01-20T10:30:00Z"
+                collaborator_count: 0
+                hub_user: "myorganization"
+                has_starred: false
+                full_description: "This is a comprehensive description of my application repository that contains additional details about the project."
+                media_types: []
+                content_types: []
+                categories: []
+                immutable_tags_settings:
+                  enabled: false
+                  rules: []
+                storage_size: null
+                source: null
+        400:
+          $ref: "#/components/responses/bad_request"
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
+        500:
+          $ref: "#/components/responses/internal_error"
+  /v2/namespaces/{namespace}/repositories/{repository}:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+    get:
+      operationId: GetRepository
+      summary: Get repository in a namespace
+      description: |
+        Returns a repository within the specified namespace (organization or user).
+
+        Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+        - {} # Allow anonymous access for public repositories
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/repository_info"
+              example:
+                name: "my-app"
+                namespace: "myorganization"
+                repository_type: "image"
+                status: 1
+                status_description: "Active"
+                description: "A sample application repository"
+                is_private: false
+                is_automated: false
+                star_count: 0
+                pull_count: 0
+                last_updated: "2025-01-20T10:30:00Z"
+                date_registered: "2025-01-20T10:30:00Z"
+                collaborator_count: 0
+                hub_user: "myorganization"
+                has_starred: false
+                full_description: "This is a comprehensive description of my application repository that contains additional details about the project."
+                media_types: []
+                content_types: []
+                categories: []
+                immutable_tags_settings:
+                  enabled: false
+                  rules: []
+                storage_size: null
+                source: null
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
+        500:
+          $ref: "#/components/responses/internal_error"
+    head:
+      operationId: CheckRepository
+      summary: Check repository in a namespace
+      description: |
+        Check a repository within the specified namespace (organization or user).
+
+        Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+        - {} # Allow anonymous access for public repositories
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/repository_info"
+              example:
+                name: "my-app"
+                namespace: "myorganization"
+                repository_type: "image"
+                status: 1
+                status_description: "Active"
+                description: "A sample application repository"
+                is_private: false
+                is_automated: false
+                star_count: 0
+                pull_count: 0
+                last_updated: "2025-01-20T10:30:00Z"
+                date_registered: "2025-01-20T10:30:00Z"
+                collaborator_count: 0
+                hub_user: "myorganization"
+                has_starred: false
+                full_description: "This is a comprehensive description of my application repository that contains additional details about the project."
+                media_types: []
+                content_types: []
+                categories: []
+                immutable_tags_settings:
+                  enabled: false
+                  rules: []
+                storage_size: null
+                source: null
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
+        500:
+          $ref: "#/components/responses/internal_error"
   /v2/orgs/{org_name}/members:
     parameters:
       - $ref: "#/components/parameters/org_name"
@@ -948,7 +1546,7 @@ paths:
         - `last_seen_at`
         - `last_desktop_version`
 
-        To make visible, please see [View Insights for organization users](https://docs.docker.com/admin/organization/insights/#view-insights-for-organization-users).
+        To make visible, please see [View Insights for organization users](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
 
         <span class="oat"></span>
       tags:
@@ -2008,7 +2606,412 @@ components:
         application/scim+json:
           schema:
             $ref: "#/components/schemas/scim_user"
+    update_repository_immutable_tags_response:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/repository_info"
+    immutable_tags_verify_response:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/immutable_tags_verify_response"
   schemas:
+    update_repository_immutable_tags_request:
+      type: object
+      properties:
+        immutable_tags:
+          type: boolean
+          description: Whether immutable tags are enabled
+        immutable_tags_rules:
+          type: array
+          items:
+            type: string
+          description: List of immutable tag rules
+          example:
+            - "v.*"
+            - ".*-RELEASE"
+      required:
+        - immutable_tags
+        - immutable_tags_rules
+    repo_creation_request:
+      type: object
+      required:
+        - name
+        - namespace
+      properties:
+        name:
+          type: string
+          description: |
+            The name of the repository. Must be 2-255 characters long and may only include 
+            alphanumeric characters, periods (.), underscores (_), or hyphens (-). 
+            Letters must be lowercase.
+          minLength: 2
+          maxLength: 255
+          pattern: "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+          example: "my-app"
+        namespace:
+          type: string
+          description: The namespace where the repository will be created
+          example: "myorganization"
+        description:
+          type: string
+          description: Short description of the repository
+          maxLength: 100
+          example: "A sample application repository"
+        full_description:
+          type: string
+          description: Detailed description of the repository
+          maxLength: 25000
+          example: "This is a comprehensive description of my application repository that contains additional details about the project, its purpose, usage instructions, and other relevant information."
+        registry:
+          type: string
+          description: The registry where the repository will be hosted
+          example: "docker.io"
+        is_private:
+          type: boolean
+          description: Whether the repository should be private
+          default: false
+          example: false
+    RepositoryGroupCreationRequest:
+      type: object
+      required:
+        - group_id
+        - permission
+      properties:
+        group_id:
+          type: integer
+          format: int64
+          description: The ID of the organization group to grant access to
+          example: 12345
+        permission:
+          type: string
+          description: |
+            The permission level to grant to the group:
+            - read: Can view and pull from the repository
+            - write: Can view, pull, and push to the repository
+            - admin: Can view, pull, push, and manage repository settings
+          enum: ["read", "write", "admin"]
+          example: "write"
+    RepositoryGroup:
+      type: object
+      properties:
+        group_name:
+          type: string
+          description: The name of the group
+          example: "developers"
+        permission:
+          type: string
+          description: The permission level granted to the group
+          enum: ["read", "write", "admin"]
+          example: "write"
+        group_id:
+          type: integer
+          format: int64
+          description: The ID of the group
+          example: 12345
+    repository_info:
+      type: object
+      properties:
+        user:
+          type: string
+          description: Username of the repository owner
+        name:
+          type: string
+          description: Repository name
+        namespace:
+          type: string
+          description: Repository namespace
+        repository_type:
+          type: string
+          nullable: true
+          description: Type of the repository
+        status:
+          type: integer
+          description: Repository status code
+        status_description:
+          type: string
+          description: Description of the repository status
+        description:
+          type: string
+          description: Short description of the repository
+        is_private:
+          type: boolean
+          description: Whether the repository is private
+        is_automated:
+          type: boolean
+          description: Whether the repository has automated builds
+        star_count:
+          type: integer
+          format: int64
+          description: Number of stars
+        pull_count:
+          type: integer
+          format: int64
+          description: Number of pulls
+        last_updated:
+          type: string
+          format: date-time
+          example: "2021-01-05T21:06:53.506400Z"
+          description: ISO 8601 timestamp of when repository was last updated
+        last_modified:
+          type: string
+          format: date-time
+          example: "2021-01-05T21:06:53.506400Z"
+          nullable: true
+          description: ISO 8601 timestamp of when repository was last modified
+        date_registered:
+          type: string
+          format: date-time
+          example: "2021-01-05T21:06:53.506400Z"
+          description: ISO 8601 timestamp of when repository was created
+        collaborator_count:
+          type: integer
+          format: int64
+          description: Number of collaborators
+        affiliation:
+          type: string
+          nullable: true
+          description: Repository affiliation
+        hub_user:
+          type: string
+          nullable: true
+          description: Hub user information
+        has_starred:
+          type: boolean
+          description: Whether the current user has starred this repository
+        full_description:
+          type: string
+          nullable: true
+          description: Full description of the repository
+        permissions:
+          $ref: "#/components/schemas/repo_permissions"
+        media_types:
+          type: array
+          items:
+            type: string
+            nullable: true
+          description: Supported media types
+        content_types:
+          type: array
+          items:
+            type: string
+          description: Supported content types
+        categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/category"
+          description: Repository categories
+        immutable_tags_settings:
+          $ref: "#/components/schemas/immutable_tags_settings"
+        storage_size:
+          type: integer
+          format: int64
+          nullable: true
+          description: Storage size in bytes
+        source:
+          type: string
+          nullable: true
+          description: Source of the repository, where it was created from
+      required:
+        - user
+        - name
+        - namespace
+        - status
+        - status_description
+        - description
+        - is_private
+        - is_automated
+        - star_count
+        - pull_count
+        - last_updated
+        - date_registered
+        - collaborator_count
+        - has_starred
+        - permissions
+        - media_types
+        - content_types
+        - categories
+        - immutable_tags_settings
+    repo_permissions:
+      type: object
+      properties:
+        read:
+          type: boolean
+          description: Read permission
+        write:
+          type: boolean
+          description: Write permission
+        admin:
+          type: boolean
+          description: Admin permission
+      required:
+        - read
+        - write
+        - admin
+    immutable_tags_settings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether immutable tags are enabled
+        rules:
+          type: array
+          items:
+            type: string
+          description: List of immutable tag rules
+      required:
+        - enabled
+        - rules
+    immutable_tags_verify_request:
+      type: object
+      properties:
+        regex:
+          type: string
+          pattern: '^[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*$'
+          description: 'Immutable tags rule regex pattern. Must match format: [a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*'
+          example: "v.*"
+      required:
+        - regex
+    immutable_tags_verify_response:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: List of tags that match the provided regex pattern
+          example:
+            - "v1.0.0"
+            - "v2.1.3"
+            - "latest"
+      required:
+        - tags
+    repository_list_entry:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the repository
+          example: "hello-world"
+        namespace:
+          type: string
+          description: Namespace (organization or username) that owns the repository
+          example: "docker"
+        repository_type:
+          type: string
+          description: Type of repository
+          enum:
+            - image
+            - plugin
+            - null
+          example: "image"
+          nullable: true
+        status:
+          type: integer
+          description: Repository status code
+          example: 1
+        status_description:
+          type: string
+          description: Human-readable repository status
+          enum:
+            - active
+            - inactive
+          example: "active"
+        description:
+          type: string
+          description: Repository description
+          nullable: true
+          example: "Hello World! (an example of minimal Dockerization)"
+        is_private:
+          type: boolean
+          description: Whether the repository is private
+          example: false
+        star_count:
+          type: integer
+          description: Number of users who starred this repository
+          minimum: 0
+          example: 1234
+        pull_count:
+          type: integer
+          description: Total number of pulls for this repository
+          minimum: 0
+          example: 50000000
+        last_updated:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the repository was last updated
+          example: "2023-12-01T10:30:00Z"
+          nullable: true
+        last_modified:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the repository was last modified
+          example: "2023-12-01T10:30:00Z"
+          nullable: true
+        date_registered:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the repository was created
+          example: "2013-06-19T19:07:54Z"
+        affiliation:
+          type: string
+          description: User's affiliation with the repository (empty string if no affiliation)
+          example: ""
+        media_types:
+          type: array
+          description: Media types supported by this repository
+          items:
+            type: string
+          example:
+            - "application/vnd.docker.plugin.v1+json"
+        content_types:
+          type: array
+          description: Content types supported by this repository
+          items:
+            type: string
+          example:
+            - "plugin"
+        categories:
+          type: array
+          description: Categories associated with this repository
+          items:
+            $ref: "#/components/schemas/category"
+          example: []
+        storage_size:
+          type: integer
+          description: Storage size in bytes used by this repository
+          minimum: 0
+          example: 232719127
+    category:
+      type: object
+      required:
+        - name
+        - slug
+      properties:
+        name:
+          type: string
+          description: Human-readable name of the category
+          example: "Databases"
+          minLength: 1
+        slug:
+          type: string
+          description: URL-friendly identifier for the category
+          example: "databases"
+          minLength: 1
+          pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      description: Repository category for classification and discovery
+    list_repositories_response:
+      allOf:
+        - $ref: "#/components/schemas/page"
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: "#/components/schemas/repository_list_entry"
     UsersLoginRequest:
       description: User login details
       type: object
@@ -2226,6 +3229,10 @@ components:
             - repo:read
           items:
             type: string
+        expires_at:
+          type: string
+          format: date-time
+          example: "2021-10-28T18:30:19.520861Z"
     createAccessTokenRequest:
       type: object
       required:
@@ -2503,7 +3510,7 @@ components:
           example: moby
         invitee:
           type: string
-          description: can either be a dockerID for registred users or an email for non-registred users
+          description: can either be a dockerID for registered users or an email for non-registered users
           example: invitee@docker.com
         org:
           type: string
@@ -2633,7 +3640,7 @@ components:
             - owners
         is_guest:
           type: boolean
-          description: If the organization has verfied domains, members that have email addresses outside of those domains will be flagged as guests.
+          description: If the organization has verified domains, members that have email addresses outside of those domains will be flagged as guests.
           example: false
         primary_email:
           type: string
@@ -2645,20 +3652,20 @@ components:
           format: date-time
           description: |
             Last time the user logged in. To access this field, you must have insights visible for your organization. See 
-            [Insights](https://docs.docker.com/admin/organization/insights/#view-insights-for-organization-users).
+            [Insights](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
           example: "2021-01-05T21:06:53.506400Z"
         last_seen_at:
           type: string
           format: date-time
           description: |
             Last time the user was seen. To access this field, you must have insights visible for your organization. See 
-            [Insights](https://docs.docker.com/admin/organization/insights/#view-insights-for-organization-users).
+            [Insights](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
           example: "2021-01-05T21:06:53.506400Z"
         last_desktop_version:
           type: string
           description: |
             Last desktop version the user used. To access this field, you must have insights visible for your organization. See 
-            [Insights](https://docs.docker.com/admin/organization/insights/#view-insights-for-organization-users).
+            [Insights](https://docs.docker.com/admin/insights/#view-insights-for-organization-users).
           example: 4.29.0
 
     org_member_paginated:
@@ -3020,14 +4027,20 @@ components:
         path:
           type: string
           example: "myorg/myrepo"
-          description: The path of the resource. The format of this will change depending on the type of resource.
+          description: |
+            The path of the resource. The format of this will change depending on the type of resource.
+
+            For TYPE_REPO resources:
+            - Must be an existing repository name (e.g., "myorg/myrepo")
+            - Can use glob patterns (e.g., "myorg/*" for all repositories in the organization)
+            - Use "*/*/public" to reference all public repositories
           required: true
         scopes:
           type: array
           description: The scopes this token has access to
           items:
             type: string
-            example: "repo-pull"
+            example: "scope-image-pull"
           required: true
     getOrgAccessTokensResponse:
       type: object
@@ -3081,7 +4094,31 @@ components:
     createOrgAccessTokenResponse:
       type: object
       allOf:
-        - $ref: "#/components/schemas/orgAccessToken"
+        - type: object
+          properties:
+            id:
+              type: string
+              example: "a7a5ef25-8889-43a0-8cc7-f2a94268e861"
+            label:
+              type: string
+              example: "My organization token"
+            is_active:
+              type: boolean
+              example: true
+            created_at:
+              type: string
+              format: date-time
+              example: "2022-05-20T00:54:18Z"
+            expires_at:
+              type: string
+              format: date-time
+              example: "2023-05-20T00:54:18Z"
+              nullable: true
+            last_used_at:
+              type: string
+              format: date-time
+              example: "2022-06-15T12:30:45Z"
+              nullable: true
         - type: object
           properties:
             token:
@@ -3329,6 +4366,18 @@ components:
               member:
                 type: string
                 example: jonsnow
+    update_repository_immutable_tags_request:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/update_repository_immutable_tags_request"
+    immutable_tags_verify_request:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/immutable_tags_verify_request"
   securitySchemes:
     bearerAuth:
       type: http

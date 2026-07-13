@@ -2,162 +2,98 @@
 title: Add or update a payment method
 weight: 20
 description: Learn how to add or update a payment method in Docker Hub
-keywords: payments, billing, subscription, supported payment methods, failed payments, coupons
-alisases:
-    - /billing/core-billing/payment-method/
+keywords: payments, billing, subscription, supported payment methods, failed payments, add credit card, bank transfer, Stripe Link, payment failure
+aliases:
+  - /billing/core-billing/payment-method/
 ---
 
-This page describes how to add or update a payment method for your personal account or for an organization.
+Docker supports different payment methods for your paid personal
+account or organization. This page describes supported payment types, how to make payments from [Docker Home](https://app.docker.com/), and how to set up pay by invoice.
 
-You can add a payment method or update your account's existing payment method at any time.
+## Supported payment types
 
-> [!IMPORTANT]
->
-> If you want to remove all payment methods, you must first downgrade your subscription to a free subscription. See [Downgrade](../subscription/change.md).
+You can add a payment method or update your account's existing payment method
+at any time. All charges are in United States dollars (USD). The following payment methods are supported:
 
-The following payment methods are supported:
+| Category      | Payment type                                                            |
+| ------------- | ----------------------------------------------------------------------- |
+| Cards         | Visa, MasterCard, American Express, Discover, JCB, Diners, UnionPay     |
+| Wallets       | Stripe Link                                                             |
+| Bank accounts | Automated Clearing House (ACH) transfer with a verified US bank account |
 
-- Cards
-  - Visa
-  - MasterCard
-  - American Express
-  - Discover
-  - JCB
-  - Diners
-  - UnionPay
-- Wallets
-  - Stripe Link
-- Bank accounts
-  - ACH transfer with a [verified](manuals/billing/payment-method.md#verify-a-bank-account) US bank account
+## Prerequisites
 
-All currency, for example the amount listed on your billing invoice, is in United States dollar (USD).
+Certain payment methods require additional steps before selecting them as a payment method:
 
-{{% include "tax-compliance.md" %}}
+- You must [verify a bank account](/manuals/billing/payment-method.md#verify-a-bank-account) before choosing a bank account.
+- You must have a Docker Business or Docker Team plan to [pay by invoice](/manuals/billing/payment-method.md#enable-and-disable-pay-by-invoice).
+- You must be an existing Stripe Link customer, or fill out the card information form to use Link payments.
 
 ## Manage payment method
 
-### Personal account
+Paid personal accounts and organizations follow the same procedures to add, update, or remove payment methods.
 
-{{< tabs >}}
-{{< tab name="Docker subscription" >}}
-
-To add a payment method:
+### Add payment method
 
 1. Sign in to [Docker Home](https://app.docker.com/).
-2. Under Settings and administration, select **Billing**.
-3. Select **Payment methods** from the left-hand menu.
-4. Select **Add payment method**.
-5. Enter your new payment information:
-    - If you are adding a card:
-        - Select **Card** and fill out the card information form.
-    - If you are adding a Link payment:
-        - Select **Secure, 1-click checkout with Link** and enter your Link **email address** and **phone number**.
-        - If you are not an existing Link customer, you must fill out the card information form to store a card for Link payments.
-    - If you are adding a bank account:
-        - Select **US bank account**.
-        - Verify your **Email** and **Full name**.
-        - If your bank is listed, select your bank's name.
-        - If your bank is not listed, select **Search for your bank**.
-        - To verify your bank account, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
-6. Select **Add payment method**.
-7. Optional. You can set a new default payment method by selecting the **Set as default** action.
-8. Optional. You can remove non-default payment methods by selecting the **Delete** action.
+1. Select your account name for personal accounts, or select your organization name for organization accounts.
+1. Select **Billing**, then **Payment methods**.
+1. Select **Add payment method** and enter your new payment information:
+   - For first time setup, fill in your billing information.
+   - To purchase as a business, provide your tax ID.
+1. Choose to add a card, a US bank account, or a Link payment.
+   - To pay with card, fill out the card information form.
+   - To pay with a US bank account:
+     - Verify your **Email** and **Full name**.
+     - If your bank is listed, select your bank's name.
+     - If your bank is not listed, select **Search for your bank**.
+   - To pay through Link, select an existing payment and choose **Use this card**.
+1. Finish adding the payment method by selecting **Add payment method**.
 
-> [!NOTE]
->
-> If you want to set a US bank account as your default payment method, you must
-> verify the account first.
+### Set default payment method
 
-{{< /tab >}}
-{{< tab name="Legacy Docker subscription" >}}
+After adding one or more payment methods, you can set one as a default method.
 
-To add a payment method:
+1. From **Billing**, go to **Payment methods**.
+1. Find the payment method you want to set as default from the **Payment method** table.
+1. Select the three dots, then choose **Set as default**.
 
-1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select your avatar in the top-right corner.
-3. From the drop-down menu select **Billing**.
-4. Select the **Payment methods and billing history** link.
-5. In the **Payment method** section, select **Add payment method**.
-6. Enter your new payment information:
-    - If you are adding a card:
-        - Select **Card** and fill out the card information form.
-    - If you are adding a Link payment:
-        - Select **Secure, 1-click checkout with Link** and enter your Link **email address** and **phone number**.
-        - If you are not an existing Link customer, you must fill out the card information form to store a card for Link payments.
-7. Select **Add**.
-8. Select the **Actions** icon, then select **Make default** to ensure that your new payment method applies to all purchases and subscriptions.
-9. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.
+### Remove payment method
 
-{{< /tab >}}
-{{< /tabs >}}
+To remove a single payment method:
 
-### Organization
+1. From **Billing**, go to **Payment methods**.
+1. Find the payment method you want to remove from the **Payment method** table.
+1. Select the three dots, then choose **Remove**.
 
-> [!NOTE]
->
-> You must be an organization owner to make changes to the payment information.
+To remove your default payment method, first set a different payment method as default, or [downgrade to a free subscription](/manuals/subscription/plans/docker.md#cancel-a-docker-plan).
 
-{{< tabs >}}
-{{< tab name="Docker subscription" >}}
+## Enable and disable pay by invoice
 
-To add a payment method:
+> [!TIP]
+> Do you need to pay by invoice? [Upgrade to a Docker Business or Docker Team plan](https://www.docker.com/pricing?ref=Docs&refAction=DocsBillingPaymentMethod) and choose the annual subscription.
 
-1. Sign in to [Docker Home](https://app.docker.com/).
-2. Under Settings and administration, select **Billing**.
-3. Choose your organization from the top-left drop-down.
-4. Select **Payment methods** from the left-hand menu.
-5. Select **Add payment method**.
-6. Enter your new payment information:
-    - If you are adding a card:
-        - Select **Card** and fill out the card information form.
-    - If you are adding a Link payment:
-        - Select **Secure, 1-click checkout with Link** and enter your Link **email address** and **phone number**.
-        - If you are not an existing Link customer, you must fill out the card information form to store a card for Link payments.
-    - If you are adding a bank account:
-        - Select **US bank account**.
-        - Verify your **Email** and **Full name**.
-        - If your bank is listed, select your bank's name.
-        - If your bank is not listed, select **Search for your bank**.
-        - To verify your bank account, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
-7. Select **Add payment method**.
-8. Select **Add payment method**.
-9. Optional. You can set a new default payment method by selecting the **Set as default** action.
-10. Optional. You can remove non-default payment methods by selecting the **Delete** action.
+Pay by invoice requires you to pay upfront for your first subscription period using a payment card or ACH bank transfer. At renewal time, instead of automatic payment, you'll receive an invoice via
+email that you must pay manually.
 
-> [!NOTE]
->
-> If you want to set a US bank account as your default payment method, you must
-> verify the account first.
+Follow these steps to enable or disable pay by invoice:
 
-{{< /tab >}}
-{{< tab name="Legacy Docker subscription" >}}
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+   organization.
+2. Select **Billing**, then **Payment methods**.
+3. Select **Pay by invoice**, then select the pay by invoice toggle to enable or disable.
+4. Confirm your billing contact details. If you need to change them, select
+   **Change** and enter your new details.
 
-To add a payment method:
-
-1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select your avatar in the top-right corner.
-3. From the drop-down menu select **Billing**.
-4. Select the organization account you want to update.
-5. Select the **Payment methods and billing history** link.
-6. In the **Payment Method** section, select **Add payment method**.
-7. Enter your new payment information:
-    - If you are adding a card:
-        - Select **Card** and fill out the card information form.
-    - If you are adding a Link payment:
-        - Select **Secure, 1-click checkout with Link** and enter your Link **email address** and **phone number**.
-        - If you are not an existing Link customer, you must fill out the card information form to store a card for Link payments.
-8. Select **Add payment method**.
-9. Select the **Actions** icon, then select **Make default** to ensure that your new payment method applies to all purchases and subscriptions.
-10. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.
-
-{{< /tab >}}
-{{< /tabs >}}
+Pay by invoice is not available for
+subscription upgrades or changes.
 
 ## Verify a bank account
 
 There are two ways to verify a bank account as a payment method:
 
-- Instant verification: Docker supports several major banks for instant verification.
+- Instant verification: Docker supports several major banks for instant
+  verification.
 - Manual verification: All other banks must be verified manually.
 
 ### Instant verification
@@ -166,54 +102,49 @@ To verify your bank account instantly, you must sign in to your bank account
 from the Docker billing flow:
 
 1. Choose **US bank account** as your payment method.
-2. Verify your **Email** and **Full name**.
-3. If your bank is listed, select your bank's name or select **Search for your bank**.
-4. Sign in to your bank and review the terms and conditions. This agreement
-allows Docker to debit payments from your connected bank account.
-5. Select **Agree and continue**.
-6. Select an account to link and verify, and select **Connect account**.
+1. Verify your **Email** and **Full name**.
+1. If your bank is listed, select your bank's name or
+   select **Search for your bank**.
+1. Sign in to your bank and review the terms and conditions. This agreement
+   allows Docker to debit payments from your connected bank account.
+1. Select **Agree and continue**.
+1. Select an account to link and verify, and select **Connect account**.
 
-When the account is verified, you will see a success message in the pop-up modal.
+When the account is verified, you will see a success message in the pop-up
+modal.
 
 ### Manual verification
 
-To verify your bank account manually, you must enter the micro-deposit amount from your bank statement:
+To verify your bank account manually, you must enter the micro-deposit amount
+from your bank statement:
 
 1. Choose **US bank account** as your payment method.
-2. Verify your **Email** and **First and last name**.
-3. Select **Enter bank details manually instead**.
-4. Enter your bank details: **Routing number** and **Account number**.
-5. Select **Submit**.
-6. You will receive an email with instructions on how to manually verify.
+1. Verify your **Email** and **First and last name**.
+1. Select **Enter bank details manually instead**.
+1. Enter your bank details: **Routing number** and **Account number**.
+1. Select **Submit**.
+1. You will receive an email with instructions on how to manually verify.
 
-Manual verification uses micro-deposits. You should see a small deposit
-(e.g. $-0.01) in your bank account in 1-2 business days. Open your manual verification email and enter the amount of this deposit to verify your account.
+Manual verification uses micro-deposits. You’ll see a small deposit
+(such as $0.01) in your bank account within 1–2 business days. Open your manual
+verification email and enter the amount of this deposit to verify your account.
 
 ## Failed payments
 
-> [!NOTE]
->
-> You can't manually retry a failed payment. Docker will retry failed payments
-based on the retry schedule.
+If your payment fails, select **Pay now**. This redirects you from Docker Hub so you can manually retry the payment through Stripe.
 
-If your subscription payment fails, there is a grace period of 15 days, including the due date. Docker retries to collect the payment 3 times using the following schedule:
+You have a grace period of 15 days
+including the due date when your payment fails. Docker retries to collect the payment 3 times using the
+following schedule:
 
 - 3 days after the due date
 - 5 days after the previous attempt
 - 7 days after the previous attempt
 
-Docker also sends an email notification `Action Required - Credit Card Payment Failed` with an attached unpaid invoice after each failed payment attempt.
+Docker also sends an email notification
+`Action Required - Credit Card Payment Failed` with an attached unpaid invoice
+after each failed payment attempt.
 
-Once the grace period is over and the invoice is still not paid, the subscription downgrades to a free subscription and all paid features are disabled.
-
-## Redeem a coupon
-
-You can redeem a coupon for any paid Docker subscription.
-
-A coupon can be used when you:
-- Sign up to a new paid subscription from a free subscription
-- Upgrade an existing paid subscription
-
-You are asked to enter your coupon code when you confirm or enter your payment method.
-
-If you use a coupon to pay for a subscription, when the coupon expires, your payment method is charged the full cost of your subscription. If you don't have a saved payment method, your account downgrades to a free subscription.
+Once the grace period is over and the invoice is still not paid, the
+subscription downgrades to a free subscription and all paid features are
+disabled.

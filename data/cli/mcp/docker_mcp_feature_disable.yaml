@@ -1,0 +1,13 @@
+command: docker mcp feature disable
+short: Disable an experimental feature
+long: Disable an experimental feature that was previously enabled.
+usage: docker mcp feature disable <feature-name>
+pname: docker mcp feature
+plink: docker_mcp_feature.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

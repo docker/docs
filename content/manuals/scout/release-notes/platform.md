@@ -15,13 +15,54 @@ issues, and bug fixes in Docker Scout releases. These release notes cover the
 Docker Scout platform, including the Dashboard. For CLI release notes, refer to
 [Docker Scout CLI release notes](./cli.md).
 
+## Q2 2026
+
+### 2026-07-01
+
+The following Docker Scout features were retired:
+
+- Health scores and Scout Everywhere: Docker Hub and Docker Desktop no longer
+  display health scores or the always-on Scout experience. Use
+  `docker scout quickview` for a quick vulnerability and policy summary.
+- Sysdig integration: The Sysdig runtime environment integration has been removed.
+- GitHub source code management integration: Migrate to GitHub Dependabot for
+  base-image updates and build with `--provenance=mode=max` for
+  image-to-source linkage. See
+  [GitHub integration](../integrations/source-code-management/github.md)
+  for a migration guide.
+
+The following is deprecated and will be retired on July 30, 2026:
+
+- Slack integration: Vulnerability and policy compliance notifications to Slack
+  channels. Integrate `docker scout cves` or `docker scout policy` into your CI
+  pipeline as an alternative. See
+  [Slack integration](../integrations/team-collaboration/slack.md).
+
+The following are deprecated and will be retired on September 1, 2026:
+
+- Notifications: In-product and email notifications about newly disclosed CVEs.
+  Integrate `docker scout cves` or `docker scout policy` into your CI pipeline
+  to surface vulnerability and policy results without push notifications.
+
+- Amazon ECR integration: Migrate to
+  [`docker scout watch`](/reference/cli/docker/scout/watch/) for continuous
+  polling or integrate Scout into your CI pipeline. See
+  [ECR integration](../integrations/registry/ecr.md) for a migration guide.
+- Azure Container Registry integration: Same migration options as ECR. See
+  [ACR integration](../integrations/registry/acr.md) for a migration guide.
+- Policies page in the Dashboard: The `docker scout policy`
+  command replaces this with more options for evaluating policies. You can run
+  evaluations locally, in CI, against custom Rego policies, or using OCI
+  bundles. See [Evaluate policies](../policy/local.md).
+- SonarQube integration.
+
 ## Q4 2024
 
 New features and enhancements released in the fourth quarter of 2024.
 
 ### 2024-10-09
 
-Policy Evaluation has graduated form Early Access to General Availability.
+Policy Evaluation has graduated from Early Access to General Availability.
 
 Docker Scout Dashboard UI changes:
 
@@ -43,11 +84,11 @@ customize policies either by editing the default policy from a **policy type**
 which acts as a template. The default policies in Docker Scout are also
 implemented based on these types.
 
-For more information, refer to [policy types](/manuals/scout/policy/_index.md#policy-types).
+For more information, refer to [policy types](../policy/_index.md#policy-types).
 
 ### 2024-09-09
 
-This release changes how [health scores](/manuals/scout/policy/scores.md) are
+This release changes how health scores are
 calculated in Docker Scout. The health score calculation now considers optional
 and custom policies that you have configured for your organization.
 
@@ -61,7 +102,7 @@ calculation will be based on the out-of-the-box policies.
 ### 2024-08-13
 
 This release changes the out-of-the-box policies to align with the policy
-configurations used to evaluate Docker Scout [health scores](/manuals/scout/policy/scores.md).
+configurations used to evaluate Docker Scout health scores.
 
 The default out-of-the-box policies are now:
 
@@ -132,7 +173,7 @@ making the now-removed **All critical vulnerabilities** policy redundant.
 
 **Azure Container Registry** integration graduated from
 [Early Access](../../release-lifecycle.md#early-access-ea) to
-[General Availability](../../release-lifecycle.md#genera-availability-ga).
+[General Availability](../../release-lifecycle.md#general-availability-ga).
 
 For more information and setup instructions, see
 [Integrate Azure Container Registry](../integrations/registry/acr.md).
@@ -168,7 +209,7 @@ more precise recommendations.
 
 For more information about the types of recommendations that Docker Scout can
 provide to help you improve policy compliance, see
-[Remediation](../policy/remediation.md).
+[Use the Dashboard](../policy/dashboard.md).
 
 For more information about how to authorize the Docker Scout GitHub app on your
 source repositories, see
@@ -216,7 +257,7 @@ policies for your organization include:
 - Customize the list of "high-profile vulnerabilities"
 - Add or remove software licenses to flag as "copyleft"
 
-For more information, see [Configurable policies](../policy/configure.md).
+For more information, see [Configurable policies](../policy/dashboard.md).
 
 ### 2023-11-10
 
@@ -289,20 +330,16 @@ used to run your production workloads. It also helps reduce monitoring noise,
 by automatically excluding vulnerabilities in programs that are never loaded
 into memory, using VEX documents.
 
-For more information and getting started, see [Sysdig integration
-documentation](../integrations/environment/sysdig.md).
+For more information, see the [Scout platform release notes](#2026-07-01).
 
 #### JFrog Artifactory integration
 
 The new JFrog Artifactory integration enables automatic image analysis on
 Artifactory registries.
 
-![Animation of how to integrate Artifactory](../images/release-notes/artifactory-agent.gif)
-
 The integration involves deploying a Docker Scout Artifactory agent that polls
 for new images, performs analysis, and uploads results to Docker Scout, all
-while preserving the integrity of image data. Learn more in the [Artifactory
-integration documentation](../integrations/registry/artifactory.md)
+while preserving the integrity of image data.
 
 #### Known limitations
 

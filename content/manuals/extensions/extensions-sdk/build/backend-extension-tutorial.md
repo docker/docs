@@ -190,13 +190,9 @@ FROM node:17.7-alpine3.14 AS client-builder
 FROM golang:1.17-alpine AS builder
 ENV CGO_ENABLED=0
 WORKDIR /backend
-COPY vm/go.* .
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build \
-    go mod download
-COPY vm/. .
-RUN --mount=type=cache,target=/go/pkg/mod \
-    --mount=type=cache,target=/root/.cache/go-build \
+    --mount=type=bind,source=vm/.,target=. \
     go build -trimpath -ldflags="-s -w" -o bin/service
 
 FROM alpine:3.15
@@ -279,14 +275,13 @@ Replace the `ui/src/App.tsx` file with the following code:
 ```tsx
 
 // ui/src/App.tsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createDockerDesktopClient } from "@docker/extension-api-client";
 
 //obtain docker desktop extension client
 const ddClient = createDockerDesktopClient();
 
 export function App() {
-  const ddClient = createDockerDesktopClient();
   const [hello, setHello] = useState<string>();
 
   useEffect(() => {

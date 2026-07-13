@@ -2,5 +2,5 @@
 build:
   render: never
 title: FAQs
-weight: 30
+weight: 70
 ---

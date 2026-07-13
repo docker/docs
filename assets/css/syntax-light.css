@@ -14,12 +14,7 @@
   /* LineHighlight */
   .hl {
     min-width: fit-content;
-    background-color: var(--color-blue-100);
-  }
-  .lntd:first-child .hl,
-  & > .chroma > code > .hl {
-    margin-left: -4px;
-    border-left: 4px solid var(--color-blue-300);
+    background-color: var(--color-gray-100);
   }
   /* LineNumbersTable */
   .lnt {

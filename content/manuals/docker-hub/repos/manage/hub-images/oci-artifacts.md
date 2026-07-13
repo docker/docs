@@ -78,23 +78,24 @@ Steps:
 
    ```console
    $ helm package demo
-   Successfully packaged chart and saved it to: /Users/hubuser/demo-0.1.0.tgz
+   Successfully packaged chart and saved it to: demo-0.1.0.tgz
    ```
 
 3. Sign in to Docker Hub with Helm, using your Docker credentials.
 
    ```console
-   $ helm registry login registry-1.docker.io -u hubuser
+   $ helm registry login registry-1.docker.io -u <YOUR_DOCKER_USERNAME>
    ```
 
 4. Push the chart to a Docker Hub repository.
 
    ```console
-   $ helm push demo-0.1.0.tgz oci://registry-1.docker.io/docker
+   $ helm push demo-0.1.0.tgz oci://registry-1.docker.io/<YOUR_DOCKER_USERNAME>
    ```
 
-   This uploads the Helm chart tarball to a `demo` repository in the `docker`
-   namespace.
+   This uploads the Helm chart tarball to a `demo` repository in the `<YOUR_DOCKER_USERNAME>`
+   namespace. Running this command creates a `<YOUR_DOCKER_USERNAME>/demo` repository
+   if one does not already exist.
 
 5. Go to the repository page on Docker Hub. The **Tags** section of the page
    shows the Helm chart tag.
@@ -127,18 +128,18 @@ Steps:
 2. Sign in to Docker Hub using the ORAS CLI.
 
    ```console
-   $ oras login -u hubuser registry-1.docker.io
+   $ oras login -u <YOUR_DOCKER_USERNAME> registry-1.docker.io
    ```
 
 3. Push the file to Docker Hub.
 
    ```console
-   $ oras push registry-1.docker.io/docker/demo:0.0.1 \
+   $ oras push registry-1.docker.io/<YOUR_DOCKER_USERNAME>/demo:0.0.1 \
      --artifact-type=application/vnd.docker.volume.v1+tar.gz \
      myvolume.txt:text/plain
    ```
 
-   This uploads the volume to a `demo` repository in the `docker` namespace. The
+   This uploads the volume to a `demo` repository in the `<YOUR_DOCKER_USERNAME>` namespace. The
    `--artifact-type` flag specifies a special media type that makes Docker Hub
    recognize the artifact as a container volume.
 
@@ -166,13 +167,13 @@ Steps:
 2. Sign in to Docker Hub using the ORAS CLI.
 
    ```console
-   $ oras login -u hubuser registry-1.docker.io
+   $ oras login -u <YOUR_DOCKER_USERNAME> registry-1.docker.io
    ```
 
 3. Push the file to Docker Hub.
 
    ```console
-   $ oras push registry-1.docker.io/docker/demo:0.0.1 myartifact.txt:text/plain
+   $ oras push registry-1.docker.io/<YOUR_DOCKER_USERNAME>/demo:0.0.1 myartifact.txt:text/plain
    ```
 
 4. Go to the repository page on Docker Hub. The **Tags** section on that page

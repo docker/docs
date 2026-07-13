@@ -3,16 +3,13 @@ description: Extensions
 keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows,
 title: Non-marketplace extensions
 weight: 20
-aliases:
- - /desktop/extensions/non-marketplace/
 ---
 
 ## Install an extension not available in the Marketplace
 
 > [!WARNING]
 >
-> Docker Extensions that are not in the Marketplace haven't gone through Docker's review process.
-> Extensions can install binaries, invoke commands and access files on your machine. Installing them is at your own risk.
+> Extensions installed outside the Marketplace have not gone through Docker's review process. Like all Docker extensions, they run with host-level privileges. They can install binaries, access Docker Engine, invoke commands, and access files on your machine. Install only if you trust the publisher and have verified the source.
 
 The Extensions Marketplace is the trusted and official place to install extensions from within Docker Desktop. These extensions have gone through a review process by Docker. However, other extensions can also be installed in Docker Desktop if you trust the extension author.
 

@@ -1,11 +1,12 @@
 ---
 description: Free up disk space by removing unused resources with the prune command
-keywords: pruning, prune, images, volumes, containers, networks, disk, administration,
+keywords:
+  pruning, prune, images, volumes, containers, networks, disk, administration,
   garbage collection
 title: Prune unused Docker objects
 aliases:
-- /engine/admin/pruning/
-- /config/pruning/
+  - /engine/admin/pruning/
+  - /config/pruning/
 ---
 
 Docker takes a conservative approach to cleaning up unused objects (often
@@ -52,7 +53,7 @@ $ docker image prune -a --filter "until=24h"
 ```
 
 Other filtering expressions are available. See the
-[`docker image prune` reference](/reference/cli/docker/image/prune.md)
+[`docker image prune` reference](/reference/cli/docker/image/prune/)
 for more examples.
 
 ## Prune containers
@@ -83,7 +84,7 @@ $ docker container prune --filter "until=24h"
 ```
 
 Other filtering expressions are available. See the
-[`docker container prune` reference](/reference/cli/docker/container/prune.md)
+[`docker container prune` reference](/reference/cli/docker/container/prune/)
 for more examples.
 
 ## Prune volumes
@@ -111,7 +112,7 @@ $ docker volume prune --filter "label!=keep"
 ```
 
 Other filtering expressions are available. See the
-[`docker volume prune` reference](/reference/cli/docker/volume/prune.md)
+[`docker volume prune` reference](/reference/cli/docker/volume/prune/)
 for more examples.
 
 ## Prune networks
@@ -140,8 +141,27 @@ $ docker network prune --filter "until=24h"
 ```
 
 Other filtering expressions are available. See the
-[`docker network prune` reference](/reference/cli/docker/network/prune.md)
+[`docker network prune` reference](/reference/cli/docker/network/prune/)
 for more examples.
+
+## Prune build cache
+
+`docker buildx prune` removes the build cache for the currently selected
+builder. If you use multiple builders, each builder maintains its own cache —
+use the `--builder` flag to target a specific builder instance.
+
+```console
+$ docker buildx prune
+
+WARNING! This will remove all dangling build cache.
+Are you sure you want to continue? [y/N] y
+```
+
+By default, you're prompted to continue. To bypass the prompt, use the `-f` or
+`--force` flag.
+
+See the [`docker buildx prune` reference](/reference/cli/docker/buildx/prune/)
+for all options, including `--all` to also remove internal and frontend images.
 
 ## Prune everything
 
@@ -188,5 +208,5 @@ $ docker system prune --filter "until=24h"
 ```
 
 Other filtering expressions are available. See the
-[`docker system prune` reference](/reference/cli/docker/system/prune.md)
+[`docker system prune` reference](/reference/cli/docker/system/prune/)
 for more examples.

@@ -1,3 +1,0 @@
-{{ $fileToInclude := .Get 0 }}
-{{ $filePath := printf "includes/%s" $fileToInclude }}
-{{ readFile $filePath | safeHTML }}

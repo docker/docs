@@ -1,0 +1,28 @@
+command: docker dhi catalog
+short: Browse the Docker Hardened Images catalog
+long: Commands to browse available Docker Hardened Images and Helm charts
+pname: docker dhi
+plink: docker_dhi.yaml
+cname:
+    - docker dhi catalog get
+    - docker dhi catalog list
+clink:
+    - docker_dhi_catalog_get.yaml
+    - docker_dhi_catalog_list.yaml
+options:
+    - option: org
+      value_type: string
+      description: Docker Hub organization (overrides config)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

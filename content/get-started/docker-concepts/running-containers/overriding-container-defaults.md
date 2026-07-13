@@ -152,7 +152,7 @@ Sometimes, you might need to override the default commands (`CMD`) or entry poin
     ```yaml
     services:
       postgres:
-        image: postgres
+        image: postgres:18
         entrypoint: ["docker-entrypoint.sh", "postgres"]
         command: ["-h", "localhost", "-p", "5432"]
         environment:

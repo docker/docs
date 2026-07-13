@@ -6,7 +6,6 @@ keywords: Arch Linux, install, uninstall, upgrade, update, linux, desktop, docke
 title: Install Docker Desktop on Arch-based distributions
 linkTitle: Arch
 aliases:
-- /desktop/linux/install/archlinux/
 - /desktop/install/archlinux/
 - /desktop/install/linux/archlinux/
 ---
@@ -17,11 +16,9 @@ aliases:
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) requires a [paid
-> subscription](https://www.docker.com/pricing/).
+> subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopArchlinuxInstall).
 
 This page contains information on how to install, launch and upgrade Docker Desktop on an Arch-based distribution. 
-
-
 
 ## Prerequisites
 
@@ -33,7 +30,7 @@ To install Docker Desktop successfully, you must meet the [general system requir
 
    ```console
    $ wget https://download.docker.com/linux/static/stable/x86_64/docker-{{% param "docker_ce_version" %}}.tgz -qO- | tar xvfz - docker/docker --strip-components=1
-   $ mv ./docker /usr/local/bin
+   $ sudo cp -rp ./docker /usr/local/bin/ && rm -r ./docker
    ```
 
 2. Download the latest Arch package from the [Release notes](/manuals/desktop/release-notes.md).
@@ -52,7 +49,7 @@ To install Docker Desktop successfully, you must meet the [general system requir
 
 ## Next steps
 
-- Explore [Docker's subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
+- Explore [Docker's subscriptions](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopArchlinuxInstall) to see what Docker can offer you.
 - Take a look at the [Docker workshop](/get-started/workshop/_index.md) to learn how to build an image and run it as a containerized application.
 - [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and all its features.
 - [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.

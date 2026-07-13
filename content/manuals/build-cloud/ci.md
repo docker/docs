@@ -36,8 +36,8 @@ See [Loading build results](./usage/#loading-build-results) for details.
 
 To enable your CI/CD system to build and push images using Docker Build Cloud, provide both an access token and a username. The type of token and the username you use depend on your account type and permissions.
 
-- If you are an organization administrator or have permission to create [organization access tokens (OAT)](../security/for-admins/access-tokens.md), use an OAT and set `DOCKER_USER` to your Docker Hub organization name.
-- If you do not have permission to create OATs or are using a personal account, use a [personal access token (PAT)](/security/for-developers/access-tokens/) and set `DOCKER_USER` to your Docker Hub username.
+- If you are an organization administrator or have permission to create [organization access tokens (OAT)](/manuals/enterprise/security/access-tokens.md), use an OAT and set `DOCKER_ACCOUNT` to your Docker Hub organization name.
+- If you do not have permission to create OATs or are using a personal account, use a [personal access token (PAT)](/security/access-tokens/) and set `DOCKER_ACCOUNT` to your Docker Hub username.
 
 ### Creating access tokens
 
@@ -45,14 +45,13 @@ To enable your CI/CD system to build and push images using Docker Build Cloud, p
 
 If you are an organization administrator:
 
-1. Create an [organization access token (OAT)](../security/for-admins/access-tokens.md):
-   - The token must have these permissions:
-     - **cloud-connect** scope
-     - **Read public repositories** permission
-     - **Repository access** with **Image push** permission for the target repository:
-       - Expand the **Repository** drop-down.
-       - Select **Add repository** and choose your target repository.
-       - Set the **Image push** permission for the repository.
+- Create an [organization access token (OAT)](/manuals/enterprise/security/access-tokens.md). The token must have these permissions:
+    1. **cloud-connect** scope
+    2. **Read public repositories** permission
+    3. **Repository access** with **Image push** permission for the target repository:
+        - Expand the **Repository** drop-down.
+        - Select **Add repository** and choose your target repository.
+        - Set the **Image push** permission for the repository.
 
 If you are not an organization administrator:
 
@@ -60,18 +59,19 @@ If you are not an organization administrator:
 
 #### For personal accounts
 
-1. Create a [personal access token (PAT)](/security/for-developers/access-tokens/):
-   - Create a new token with **Read & write** access.
-     - Note: Building with Docker Build Cloud only requires read access, but you need write access to push images to a Docker Hub repository.
+- Create a [personal access token (PAT)](/security/access-tokens/) with the following permissions:
+   1. **Read & write** access.
+        - Note: Building with Docker Build Cloud only requires read access, but you need write access to push images to a Docker Hub repository.
 
 
 ## CI platform examples
 
 > [!NOTE]
 >
-> In your CI/CD configuration, set the following variables:
-> - `DOCKER_PAT` — your access token (PAT or OAT)
-> - `DOCKER_USER` — your Docker Hub username (for PAT) or organization name (for OAT)
+> In your CI/CD configuration, set the following variables/secrets:
+> - `DOCKER_ACCESS_TOKEN` — your access token (PAT or OAT). Use a secret to store the token.
+> - `DOCKER_ACCOUNT` — your Docker Hub organization name (for OAT) or username (for PAT)
+> - `CLOUD_BUILDER_NAME` — the name of the cloud builder you created in the [Docker Build Cloud Dashboard](https://app.docker.com/build/)
 >
 > This ensures your builds authenticate correctly with Docker Build Cloud.
 
@@ -90,26 +90,50 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
-          username: ${{ vars.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_PAT }}
+          username: ${{ vars.DOCKER_ACCOUNT }}
+          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
       
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         with:
           driver: cloud
-          endpoint: "<ORG>/default"
-          install: true
+          endpoint: "${{ vars.DOCKER_ACCOUNT }}/${{ vars.CLOUD_BUILDER_NAME }}" # for example, "acme/default"
       
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
-          tags: "<IMAGE>"
+          tags: "<IMAGE>" # for example, "acme/my-image:latest"
           # For pull requests, export results to the build cache.
           # Otherwise, push to a registry.
           outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry' }}
 ```
+
+The example above uses `docker/build-push-action`, which automatically uses the
+builder set up by `setup-buildx-action`. If you need to use the `docker build`
+command directly instead, you have two options:
+
+- Use `docker buildx build` instead of `docker build`
+- Set the `BUILDX_BUILDER` environment variable to use the cloud builder:
+
+  ```yaml
+  - name: Set up Docker Buildx
+    id: builder
+    uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
+    with:
+      driver: cloud
+      endpoint: "${{ vars.DOCKER_ACCOUNT }}/${{ vars.CLOUD_BUILDER_NAME }}"
+
+  - name: Build
+    run: |
+      docker build .
+    env:
+      BUILDX_BUILDER: ${{ steps.builder.outputs.name }}
+  ```
+
+For more information about the `BUILDX_BUILDER` environment variable, see
+[Build variables](/manuals/build/building/variables.md#buildx_builder).
 
 ### GitLab
 
@@ -120,7 +144,7 @@ default:
     - docker:24-dind
   before_script:
     - docker info
-    - echo "$DOCKER_PAT" | docker login --username "$DOCKER_USER" --password-stdin
+    - echo "$DOCKER_ACCESS_TOKEN" | docker login --username "$DOCKER_ACCOUNT" --password-stdin
     - |
       apk add curl jq
       ARCH=${CI_RUNNER_EXECUTABLE_ARCH#*/}
@@ -128,11 +152,12 @@ default:
       mkdir -vp ~/.docker/cli-plugins/
       curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
       chmod a+x ~/.docker/cli-plugins/docker-buildx
-    - docker buildx create --use --driver cloud ${DOCKER_ORG}/default
+    - docker buildx create --use --driver cloud ${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}
 
 variables:
   IMAGE_NAME: <IMAGE>
-  DOCKER_ORG: <ORG>
+  DOCKER_ACCOUNT: <DOCKER_ACCOUNT> # your Docker Hub organization name (or username when using a personal account)
+  CLOUD_BUILDER_NAME: <CLOUD_BUILDER_NAME> # the name of the cloud builder you created in the [Docker Build Cloud Dashboard](https://app.docker.com/build/)
 
 # Build multi-platform image and push to a registry
 build_push:
@@ -176,8 +201,8 @@ jobs:
           curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
           chmod a+x ~/.docker/cli-plugins/docker-buildx
 
-      - run: echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
-      - run: docker buildx create --use --driver cloud "<ORG>/default"
+      - run: echo "$DOCKER_ACCESS_TOKEN" | docker login --username $DOCKER_ACCOUNT --password-stdin
+      - run: docker buildx create --use --driver cloud "${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}"
 
       - run: |
           docker buildx build \
@@ -199,8 +224,8 @@ jobs:
           curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
           chmod a+x ~/.docker/cli-plugins/docker-buildx
 
-      - run: echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
-      - run: docker buildx create --use --driver cloud "<ORG>/default"
+      - run: echo "$DOCKER_ACCESS_TOKEN" | docker login --username $DOCKER_ACCOUNT --password-stdin
+      - run: docker buildx create --use --driver cloud "${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}"
 
       - run: |
           docker buildx build \
@@ -231,7 +256,7 @@ Add the following `environment` hook agent's hook directory:
 set -euo pipefail
 
 if [[ "$BUILDKITE_PIPELINE_NAME" == "build-push-docker" ]]; then
- export DOCKER_PAT="<DOCKER_PERSONAL_ACCESS_TOKEN>"
+ export DOCKER_ACCESS_TOKEN="<DOCKER_ACCESS_TOKEN>"
 fi
 ```
 
@@ -239,7 +264,8 @@ Create a `pipeline.yml` that uses the `docker-login` plugin:
 
 ```yaml
 env:
-  DOCKER_ORG: <ORG>
+  DOCKER_ACCOUNT: <DOCKER_ACCOUNT> # your Docker Hub organization name (or username when using a personal account)
+  CLOUD_BUILDER_NAME: <CLOUD_BUILDER_NAME> # the name of the cloud builder you created in the [Docker Build Cloud Dashboard](https://app.docker.com/build/)
   IMAGE_NAME: <IMAGE>
 
 steps:
@@ -247,8 +273,8 @@ steps:
     key: build-push
     plugins:
       - docker-login#v2.1.0:
-          username: <DOCKER_USER>
-          password-env: DOCKER_PAT # the variable name in the environment hook
+          username: DOCKER_ACCOUNT
+          password-env: DOCKER_ACCESS_TOKEN # the variable name in the environment hook
 ```
 
 Create the `build.sh` script:
@@ -277,7 +303,7 @@ curl --silent -L --output $DOCKER_DIR/cli-plugins/docker-buildx $BUILDX_URL
 chmod a+x ~/.docker/cli-plugins/docker-buildx
 
 # Connect to your builder and set it as the default builder
-docker buildx create --use --driver cloud "$DOCKER_ORG/default"
+docker buildx create --use --driver cloud "${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}"
 
 # Cache-only image build
 docker buildx build \
@@ -302,9 +328,9 @@ pipeline {
 
   environment {
     ARCH = 'amd64'
-    DOCKER_PAT = credentials('docker-personal-access-token')
-    DOCKER_USER = credentials('docker-username')
-    DOCKER_ORG = '<ORG>'
+    DOCKER_ACCESS_TOKEN = credentials('docker-access-token')
+    DOCKER_ACCOUNT = credentials('docker-account')
+    CLOUD_BUILDER_NAME = '<CLOUD_BUILDER_NAME>'
     IMAGE_NAME = '<IMAGE>'
   }
 
@@ -317,8 +343,8 @@ pipeline {
         sh 'mkdir -vp ~/.docker/cli-plugins/'
         sh 'curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL'
         sh 'chmod a+x ~/.docker/cli-plugins/docker-buildx'
-        sh 'echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin'
-        sh 'docker buildx create --use --driver cloud "$DOCKER_ORG/default"'
+        sh 'echo "$DOCKER_ACCESS_TOKEN" | docker login --username $DOCKER_ACCOUNT --password-stdin'
+        sh 'docker buildx create --use --driver cloud "${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}"'
         // Cache-only build
         sh 'docker buildx build --platform linux/amd64,linux/arm64 --tag "$IMAGE_NAME" --output type=cacheonly .'
         // Build and push a multi-platform image
@@ -340,10 +366,10 @@ services:
 
 env:
   global:
-    - IMAGE_NAME=username/repo
+    - IMAGE_NAME=<IMAGE> # for example, "acme/my-image:latest"
 
 before_install: |
-  echo "$DOCKER_PAT" | docker login --username "$DOCKER_USER" --password-stdin
+  echo "$DOCKER_ACCESS_TOKEN" | docker login --username "$DOCKER_ACCOUNT" --password-stdin
 
 install: |
   set -e 
@@ -351,7 +377,7 @@ install: |
   mkdir -vp ~/.docker/cli-plugins/
   curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
   chmod a+x ~/.docker/cli-plugins/docker-buildx
-  docker buildx create --use --driver cloud "<ORG>/default"
+  docker buildx create --use --driver cloud "${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}"
 
 script: |
   docker buildx build \
@@ -363,9 +389,8 @@ script: |
 ### BitBucket Pipelines 
 
 ```yaml
-# Prerequisites: $DOCKER_USER, $DOCKER_PAT setup as deployment variables
+# Prerequisites: $DOCKER_ACCOUNT, $CLOUD_BUILDER_NAME, $DOCKER_ACCESS_TOKEN setup as deployment variables
 # This pipeline assumes $BITBUCKET_REPO_SLUG as the image name
-# Replace <ORG> in the `docker buildx create` command with your Docker org
 
 image: atlassian/default-image:3
 
@@ -379,8 +404,8 @@ pipelines:
           - BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
           - curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
           - chmod a+x ~/.docker/cli-plugins/docker-buildx
-          - echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
-          - docker buildx create --use --driver cloud "<ORG>/default"
+          - echo "$DOCKER_ACCESS_TOKEN" | docker login --username $DOCKER_ACCOUNT --password-stdin
+          - docker buildx create --use --driver cloud "${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}"
           - IMAGE_NAME=$BITBUCKET_REPO_SLUG
           - docker buildx build
             --platform linux/amd64,linux/arm64
@@ -404,11 +429,11 @@ mkdir -vp ~/.docker/cli-plugins/
 curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
 chmod a+x ~/.docker/cli-plugins/docker-buildx
 
-# Login to Docker Hub. For security reasons $DOCKER_PAT should be a Personal Access Token. See https://docs.docker.com/build-cloud/ci/#creating-access-tokens
-echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
+# Login to Docker Hub with an access token. See https://docs.docker.com/build-cloud/ci/#creating-access-tokens
+echo "$DOCKER_ACCESS_TOKEN" | docker login --username $DOCKER_ACCOUNT --password-stdin
 
 # Connect to your builder and set it as the default builder
-docker buildx create --use --driver cloud "<ORG>/default"
+docker buildx create --use --driver cloud "${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}"
 
 # Cache-only image build
 docker buildx build \
@@ -449,11 +474,11 @@ curl --silent -L --output ~/.docker/cli-plugins/docker-compose $COMPOSE_URL
 chmod a+x ~/.docker/cli-plugins/docker-buildx
 chmod a+x ~/.docker/cli-plugins/docker-compose
 
-# Login to Docker Hub. For security reasons $DOCKER_PAT should be a Personal Access Token. See https://docs.docker.com/build-cloud/ci/#creating-access-tokens
-echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
+# Login to Docker Hub with an access token. See https://docs.docker.com/build-cloud/ci/#creating-access-tokens
+echo "$DOCKER_ACCESS_TOKEN" | docker login --username $DOCKER_ACCOUNT --password-stdin
 
 # Connect to your builder and set it as the default builder
-docker buildx create --use --driver cloud "<ORG>/default"
+docker buildx create --use --driver cloud "${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}"
 
 # Build the image build
 docker compose build

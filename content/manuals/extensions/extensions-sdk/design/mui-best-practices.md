@@ -38,11 +38,11 @@ The best way to build your UI, so that it’s robust against future theming chan
 
 Sometimes you’ll need a piece of UI that doesn’t exist in our design system. If so, we recommend that you first reach out to us. We may already have something in our internal design system, or we may be able to expand our design system to accommodate your use case.
 
-If you still decide to build it yourself after contacting us, try and define the new UI in a reuseable fashion. If you define your custom UI in just one place, it’ll make it easier to change in the future if our core theme changes. You could use:
+If you still decide to build it yourself after contacting us, try and define the new UI in a reusable fashion. If you define your custom UI in just one place, it’ll make it easier to change in the future if our core theme changes. You could use:
 
 -  A new `variant` of an existing component - see [MUI docs](https://mui.com/material-ui/customization/theme-components/#creating-new-component-variants)
--  A MUI mixin (a freeform bundle of reuseable styling rules defined inside a theme)
--  A new [reuseable component](https://mui.com/material-ui/customization/how-to-customize/#2-reusable-component)
+-  A MUI mixin (a freeform bundle of reusable styling rules defined inside a theme)
+-  A new [reusable component](https://mui.com/material-ui/customization/how-to-customize/#2-reusable-component)
 
 Some of the above options require you to extend our MUI theme. See the MUI documentation on [theme composition](https://mui.com/material-ui/customization/theming/#nesting-the-theme).
 

@@ -58,13 +58,13 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
 1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop.
 
 
-2. Open this [pre-initialized project](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.4.0-M3&packaging=jar&jvmVersion=21&groupId=com.example&artifactId=spring-boot-docker&name=spring-boot-docker&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.spring-boot-docker&dependencies=web) to generate a ZIP file. Here’s how that looks:
+2. Open this [pre-initialized project](https://start.spring.io/#!type=maven-project&language=java&platformVersion=4.0.1&packaging=jar&configurationFileFormat=properties&jvmVersion=21&groupId=com.example&artifactId=spring-boot-docker&name=spring-boot-docker&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.spring-boot-docker&dependencies=web) to generate a ZIP file. Here’s how that looks:
 
 
     ![A screenshot of Spring Initializr tool selected with Java 21, Spring Web and Spring Boot 3.4.0](images/multi-stage-builds-spring-initializer.webp?border=true)
 
 
-    [Spring Initializr](https://start.spring.io/) is a quickstart generator for Spring projects. It provides an extensible API to generate JVM-based projects with implementations for several common concepts — like basic language generation for Java, Kotlin, and Groovy. 
+    [Spring Initializr](https://start.spring.io/) is a quickstart generator for Spring projects. It provides an extensible API to generate JVM-based projects with implementations for several common concepts — like basic language generation for Java, Kotlin, Groovy, and Maven. 
 
     Select **Generate** to create and download the zip file for this project.
 
@@ -152,7 +152,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
  2. In the `Dockerfile`, define your base image by adding the following line:
 
      ```dockerfile
-     FROM eclipse-temurin:21.0.2_13-jdk-jammy
+     FROM eclipse-temurin:21.0.8_9-jdk-jammy
      ```
 
  3. Now, define the working directory by using the `WORKDIR` instruction. This will specify where future commands will run and the directory files will be copied inside the container image.
@@ -190,7 +190,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
     And with that, you should have the following Dockerfile:
 
     ```dockerfile 
-    FROM eclipse-temurin:21.0.2_13-jdk-jammy
+    FROM eclipse-temurin:21.0.8_9-jdk-jammy
     WORKDIR /app
     COPY .mvn/ .mvn
     COPY mvnw pom.xml ./
@@ -268,7 +268,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 1. Consider the following Dockerfile:
 
     ```dockerfile
-    FROM eclipse-temurin:21.0.2_13-jdk-jammy AS builder
+    FROM eclipse-temurin:21.0.8_9-jdk-jammy AS builder
     WORKDIR /opt/app
     COPY .mvn/ .mvn
     COPY mvnw pom.xml ./
@@ -276,7 +276,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
     COPY ./src ./src
     RUN ./mvnw clean install
 
-    FROM eclipse-temurin:21.0.2_13-jre-jammy AS final
+    FROM eclipse-temurin:21.0.8_9-jre-jammy AS final
     WORKDIR /opt/app
     EXPOSE 8080
     COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar

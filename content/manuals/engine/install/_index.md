@@ -31,6 +31,21 @@ aliases:
 - /engine/installation/oracle/
 - /enterprise/supported-platforms/
 - /install/linux/docker-ee/oracle/
+- /ee/docker-ee/sles/
+- /ee/docker-ee/suse/
+- /engine/installation/linux/docker-ce/sles/
+- /engine/installation/linux/docker-ee/sles/
+- /engine/installation/linux/docker-ee/suse/
+- /engine/installation/linux/sles/
+- /engine/installation/linux/SUSE/
+- /engine/installation/linux/suse/
+- /engine/installation/sles/
+- /engine/installation/SUSE/
+- /install/linux/docker-ce/sles/
+- /install/linux/docker-ee/sles/
+- /install/linux/docker-ee/suse/
+- /install/linux/sles/
+- /installation/sles/
 ---
 
 This section describes how to install Docker Engine on Linux, also known as
@@ -38,16 +53,17 @@ Docker CE. Docker Engine is also available for Windows, macOS, and Linux,
 through Docker Desktop. For instructions on how to install Docker Desktop,
 see: [Overview of Docker Desktop](/manuals/desktop/_index.md).
 
-## Supported platforms
+## Installation procedures for supported platforms
+
+Click on a platform's link to view the relevant installation procedure.
 
 | Platform                                       | x86_64 / amd64 | arm64 / aarch64 | arm (32-bit) | ppc64le | s390x |
 | :--------------------------------------------- | :------------: | :-------------: | :----------: | :-----: | :---: |
 | [CentOS](centos.md)                            |       ✅       |       ✅        |              |   ✅    |       |
 | [Debian](debian.md)                            |       ✅       |       ✅        |      ✅      |   ✅    |       |
 | [Fedora](fedora.md)                            |       ✅       |       ✅        |              |   ✅    |       |
-| [Raspberry Pi OS (32-bit)](raspberry-pi-os.md) |                |                 |      ✅      |         |       |
+| [Raspberry Pi OS (32-bit)](raspberry-pi-os.md) |                |                 |      ⚠️      |         |       |
 | [RHEL](rhel.md)                                |       ✅       |       ✅        |              |         |  ✅   |
-| [SLES](sles.md)                                |                |                 |              |         |  ✅   |
 | [Ubuntu](ubuntu.md)                            |       ✅       |       ✅        |      ✅      |   ✅    |  ✅   |
 | [Binaries](binaries.md)                        |       ✅       |       ✅        |      ✅      |         |       |
 
@@ -58,7 +74,7 @@ see: [Overview of Docker Desktop](/manuals/desktop/_index.md).
 > While the following instructions may work, Docker doesn't test or verify
 > installation on distribution derivatives.
 
-- If you use Debian derivatives such as "BunsenLabs Linux", "Kali Linux" or 
+- If you use Debian derivatives such as "BunsenLabs Linux", "Kali Linux" or
   "LMDE" (Debian-based Mint) should follow the installation instructions for
   [Debian](debian.md), substitute the version of your distribution for the
   corresponding Debian release. Refer to the documentation of your distribution to find
@@ -105,9 +121,10 @@ Patch releases are always backward compatible with its major and minor version.
 
 ### Licensing
 
-Docker Engine is licensed under the Apache License, Version 2.0. See
-[LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full
-license text.
+Commercial use of Docker Engine obtained via Docker Desktop
+within larger enterprises (exceeding 250 employees OR with annual revenue surpassing
+$10 million USD), requires a [paid subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsEngineInstall).
+Apache License, Version 2.0. See [LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full license.
 
 ## Reporting security issues
 

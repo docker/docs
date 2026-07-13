@@ -37,4 +37,4 @@ If you need additional configuration and flexibility, consider using the
 ## Further reading
 
 For more information on the Docker driver, see the
-[buildx reference](/reference/cli/docker/buildx/create.md#driver).
+[buildx reference](/reference/cli/docker/buildx/create/#driver).

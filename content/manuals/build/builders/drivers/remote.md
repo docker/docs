@@ -48,9 +48,9 @@ Unix socket, and have Buildx connect through it.
    $ sudo ./buildkitd --group $(id -gn) --addr unix://$HOME/buildkitd.sock
    ```
 
-   Alternatively, [see here](https://github.com/moby/buildkit/blob/master/docs/rootless.md)
-   for running buildkitd in rootless mode or [here](https://github.com/moby/buildkit/tree/master/examples/systemd)
-   for examples of running it as a systemd service.
+   Alternatively, refer to the [Rootless Buildkit documentation](https://github.com/moby/buildkit/blob/master/docs/rootless.md)
+   for running buildkitd in rootless mode, or [the BuildKit systemd examples](https://github.com/moby/buildkit/tree/master/examples/systemd)
+   for running it as a systemd service.
 
 2. Check that you have a Unix socket that you can connect to.
 
@@ -159,13 +159,13 @@ BuildKit manually. Additionally, when executing builds from inside Kubernetes
 pods, the Buildx builder will need to be recreated from within each pod or
 copied between them.
 
-1. Create a Kubernetes deployment of `buildkitd`, as per the instructions
-   [here](https://github.com/moby/buildkit/tree/master/examples/kubernetes).
+1. Create a Kubernetes deployment of `buildkitd` by following the instructions
+   [in the BuildKit documentation](https://github.com/moby/buildkit/tree/master/examples/kubernetes).
 
-   Following the guide, create certificates for the BuildKit daemon and client
-   using [create-certs.sh](https://github.com/moby/buildkit/blob/master/examples/kubernetes/create-certs.sh),
-   and create a deployment of BuildKit pods with a service that connects to
-   them.
+   Create certificates for the BuildKit daemon and client using the
+   [create-certs.sh](https://github.com/moby/buildkit/blob/master/examples/kubernetes/create-certs.sh),
+   script and create a deployment of BuildKit pods with a service that connects
+   to them.
 
 2. Assuming that the service is called `buildkitd`, create a remote builder in
    Buildx, ensuring that the listed certificate files are present:

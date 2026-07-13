@@ -1,0 +1,27 @@
+command: docker model stop-runner
+short: Stop Docker Model Runner (Docker Engine only)
+long: |-
+    This command stops the Docker Model Runner by removing the running containers, but preserves the container images on disk. Use this command when you want to temporarily stop the runner but plan to start it again later.
+
+    To completely remove the runner including images, use `docker model uninstall-runner --images` instead.
+usage: docker model stop-runner
+pname: docker model
+plink: docker_model.yaml
+options:
+    - option: models
+      value_type: bool
+      default_value: "false"
+      description: Remove model storage volume
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

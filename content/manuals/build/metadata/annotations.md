@@ -6,6 +6,8 @@ aliases:
 - /build/building/annotations/
 ---
 
+<!-- vale Docker.Spacing = NO -->
+
 Annotations provide descriptive metadata for images. Use annotations to record
 arbitrary information and attach it to your image, which helps consumers and
 tools understand the origin, contents, and how to use the image.
@@ -39,7 +41,7 @@ You can add annotations to an image at build-time, or when creating the image
 manifest or index.
 
 > [!NOTE]
-> 
+>
 > The Docker Engine image store doesn't support loading images with
 > annotations. To build with annotations, make sure to push the image directly
 > to a registry, using the `--push` CLI flag or the
@@ -68,7 +70,7 @@ For examples on how to add annotations to images built with GitHub Actions, see
 You can also add annotations to an image created using `docker buildx
 imagetools create`. This command only supports adding annotations to an index
 or manifest descriptors, see
-[CLI reference](/reference/cli/docker/buildx/imagetools/create.md#annotation).
+[CLI reference](/reference/cli/docker/buildx/imagetools/create/#annotation).
 
 ## Inspect annotations
 
@@ -202,9 +204,9 @@ Related articles:
 
 Reference information:
 
-- [`docker buildx build --annotation`](/reference/cli/docker/buildx/build.md#annotation)
+- [`docker buildx build --annotation`](/reference/cli/docker/buildx/build/#annotation)
 - [Bake file reference: `annotations`](/manuals/build/bake/reference.md#targetannotations)
-- [`docker buildx imagetools create --annotation`](/reference/cli/docker/buildx/imagetools/create.md#annotation)
+- [`docker buildx imagetools create --annotation`](/reference/cli/docker/buildx/imagetools/create/#annotation)
 
 <!-- links -->
 

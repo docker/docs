@@ -16,6 +16,7 @@ An extension can have the following optional parts:
 * Executables deployed on the host machine.
 
 Extensions are executed with the same permissions as the Docker Desktop user. Extension capabilities include running any Docker commands (including running containers and mounting folders), running extension binaries, and accessing files on your machine that are accessible by the user running Docker Desktop.
+Note that extensions are not restricted to execute binaries that they list in the [host section](../architecture/metadata.md#host-section) of the extension metadata: since these binaries can contain any code running as user, they can in turn execute any other commands as long as the user has rights to execute them.
 
 The Extensions SDK provides a set of JavaScript APIs to invoke commands or invoke these binaries from the extension UI code. Extensions can also provide a backend part that starts a long-lived running container in the background.
 

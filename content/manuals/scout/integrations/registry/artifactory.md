@@ -1,191 +1,167 @@
 ---
-description: Integrate JFrog Artifactory and JFrog Container Registry with Docker Scout
-keywords: docker scout, jfrog, artifactory, jcr, integration, image analysis, security, cves
-title: Integrate Docker Scout with Artifactory
-linkTitle: Artifactory
+description: Integrate Artifactory Container Registry with Docker Scout
+keywords: docker scout, artifactory, integration, image analysis, security, cves
+title: Integrate Docker Scout with Artifactory Container Registry
+linkTitle: Artifactory Container Registry
 aliases:
   - /scout/artifactory/
 ---
 
-Integrating Docker Scout with JFrog Artifactory lets you run image analysis
-automatically on images in Artifactory registries.
+Integrating Docker Scout with JFrog Artifactory lets you index and analyze
+images from Artifactory. This integration is powered by a long-running
+`docker scout watch` process. It pulls images from your selected repositories
+(optionally filtered), can receive webhook callbacks from Artifactory, and
+pushes image data to Docker Scout. View results in the Docker Scout Dashboard or
+with `docker scout` CLI.
 
-## Local image analysis
+## How it works
 
-You can analyze Artifactory images for vulnerabilities locally using Docker Desktop or the Docker CLI. You first need to authenticate with JFrog Artifactory using the [`docker login`](/reference/cli/docker/login/) command. For example:
+You run [`docker scout watch`](/reference/cli/docker/scout/watch/) on a host you
+control and configure the Artifactory-specific registry string via `--registry
+"key=value,..."`. The watch process can:
 
-```bash
-docker login {URL}
-```
+- Watch specific repositories or an entire registry
+- Optionally ingest all existing images once
+- Periodically refresh repository lists
+- Receive webhook callbacks from Artifactory on a local port you choose
 
-> [!TIP]
->
-> For cloud-hosted Artifactory you can find the credentials for your Artifactory repository by
-> selecting it in the Artifactory UI and then the **Set Me Up** button.
+After the integration, Docker Scout automatically pulls and analyzes images
+that you push to the Artifactory registry. Metadata about your images are stored on the
+Docker Scout platform, but Docker Scout doesn't store the container images
+themselves. For more information about how Docker Scout handles image data, see
+[Data handling](/manuals/scout/deep-dive/data-handling.md).
 
-## Remote image analysis
+### Artifactory-specific registry string options
 
-To automatically analyze images running in remote environments you need to deploy the Docker Scout Artifactory agent. The agent is a
-standalone service that analyzes images and uploads the result to Docker Scout.
-You can view the results using the
-[Docker Scout Dashboard](https://scout.docker.com/).
+These `type=artifactory` options override the generic registry handling for the `--registry` option:
 
-### How the agent works
+| Key              | Required | Description                                                                            |
+|------------------|:--------:|----------------------------------------------------------------------------------------|
+| `type`           |   Yes    | Must be `artifactory`.                                                                 |
+| `registry`       |   Yes    | Docker/OCI registry hostname (e.g., `example.jfrog.io`).                               |
+| `api`            |   Yes    | Artifactory REST API base URL (e.g., `https://example.jfrog.io/artifactory`).          |
+| `repository`     |   Yes    | Repository to watch (replaces `--repository`).                                         |
+| `includes`       |    No    | Globs to include (e.g., `*/frontend*`).                                                |
+| `excludes`       |    No    | Globs to exclude (e.g., `*/legacy/*`).                                                 |
+| `port`           |    No    | Local port to listen on for webhook callbacks.                                         |
+| `subdomain-mode` |    No    | `true` or `false`; matches Artifactory’s Docker layout (subdomain versus repository-path). |
 
-The Docker Scout Artifactory agent is available as an
-[image on Docker Hub](https://hub.docker.com/r/docker/artifactory-agent). The agent works by continuously polling
-Artifactory for new images. When it finds a new image, it performs the following
-steps:
+## Integrate an Artifactory registry
 
-1. Pull the image from Artifactory
-2. Analyze the image
-3. Upload the analysis result to Docker Scout
+Use the following steps to integrate your Artifactory registry with Docker
+Scout.
 
-The agent records the Software Bill of Materials (SBOM) for the image, and the
-SBOMs for all of its base images. The recorded SBOMs include both Operating
-System (OS)-level and application-level programs or dependencies that the image
-contains.
+1. Pick the host on which to run `docker scout watch`.
 
-Additionally, the agent sends the following metadata about the image to Docker Scout:
+   The host must have local or network access to your private registry and be able
+   to access the Scout API (`https://api.scout.docker.com`) over the internet. If
+   you're using webhook callbacks, Artifactory must also be able to reach the Scout
+   client host on the configured port.
+   Override the `--workers` option (default: `3`) for optimal performance based on
+   the size of the host and the expected workload.
 
-- The source repository URL and commit SHA for the image
-- Build instructions
-- Build date
-- Tags and digest
-- Target platforms
-- Layer sizes
+2. Ensure you are running the latest version of Scout.
 
-The agent never transacts the image
-itself, nor any data inside the image, such as code, binaries, and layer blobs.
+   Check your current version:
 
-The agent doesn't detect and analyze pre-existing images. It only analyzes
-images that appear in the registry while the agent is running.
+   ```console
+   $ docker scout version
+   ```
 
-### Deploy the agent
+   If necessary, [install the latest version of Scout](https://docs.docker.com/scout/install/).
 
-This section describes the steps for deploying the Artifactory agent.
+3. Set up your Artifactory credentials.
 
-#### Prerequisites
+   Store the credentials that the Scout client will use to authenticate with
+   Artifactory. The following is an example using environment variables. Replace
+   `<user>` and `<password-or-access-token>` with your actual values.
 
-Before you deploy the agent, ensure that you meet the prerequisites:
+   ```console
+   $ export DOCKER_SCOUT_ARTIFACTORY_API_USER=<user>
+   $ export DOCKER_SCOUT_ARTIFACTORY_API_PASSWORD=<password-or-access-token>
+   ```
 
-- The server where you host the agent can access the following resources over
-  the network:
-  - Your JFrog Artifactory instance
-  - `hub.docker.com`, port 443, for authenticating with Docker
-  - `api.dso.docker.com`, port 443, for transacting data to Docker Scout
-- The registries are Docker V2 registries. V1 registries aren't supported.
+   > [!TIP]
+   >
+   > As a best practice, create a dedicated user with read-only access and use
+   > an access token instead of a password.
 
-The agent supports all versions of JFrog Artifactory and JFrog Container
-Registry.
+   Store the credential that Artifactory will use to authenticate webhook
+   callbacks. The following is an example using an environment variable. Replace
+   `<random-64-128-character-secret>` with an actual secret.
 
-#### Create the configuration file
+   ```console
+   $ export DOCKER_SCOUT_ARTIFACTORY_WEBHOOK_SECRET=<random-64-128-character-secret>
+   ````
 
-You configure the agent using a JSON file. The agent expects the configuration
-file to be in `/opt/artifactory-agent/data/config.json` on startup.
+   > [!TIP]
+   >
+   > As a best practice, generate a high-entropy random string of 64-128 characters.
 
-The configuration file includes the following properties:
+4. Set up your Scout credentials.
 
-| Property                    | Description                                                                     |
-| --------------------------- | ------------------------------------------------------------------------------- |
-| `agent_id`                  | Unique identifier for the agent.                                                |
-| `docker.organization_name`  | Name of the Docker organization.                                                |
-| `docker.username`           | Username of the admin user in the Docker organization.                          |
-| `docker.pat`                | Personal access token of the admin user with read and write permissions.        |
-| `artifactory.base_url`      | Base URL of the Artifactory instance.                                           |
-| `artifactory.username`      | Username of the Artifactory user with read permissions that the agent will use. |
-| `artifactory.password`      | Password or API token for the Artifactory user.                                 |
-| `artifactory.image_filters` | Optional: List of repositories and images to analyze.                           |
+   1. Generate an organization access token for accessing Scout. For more
+      details, see [Create an organization access
+      token](/enterprise/security/access-tokens/#create-an-organization-access-token).
+   2. Sign in to Docker using the organization access token.
 
-If you don't specify any repositories in `artifactory.image_filters`, the agent
-runs image analysis on all images in your Artifactory instance.
+       ```console
+       $ docker login --username <your_organization_name>
+       ```
 
-The following snippet shows a sample configuration:
+       When prompted for a password, paste the organization access token you
+       generated.
 
-```json
-{
-  "agent_id": "acme-prod-agent",
-  "docker": {
-    "organization_name": "acme",
-    "username": "mobythewhale",
-    "pat": "dckr_pat__dsaCAs_xL3kNyupAa7dwO1alwg"
-  },
-  "artifactory": [
-    {
-      "base_url": "https://acme.jfrog.io",
-      "username": "acmeagent",
-      "password": "hayKMvFKkFp42RAwKz2K",
-      "image_filters": [
-        {
-          "repository": "dev-local",
-          "images": ["internal/repo1", "internal/repo2"]
-        },
-        {
-          "repository": "prod-local",
-          "images": ["staging/repo1", "prod/repo1"]
-        }
-      ]
-    }
-  ]
-}
-```
+   3. Connect your local Docker environment to your organization's Docker Scout service.
 
-Create a configuration file and save it somewhere on the server where you plan
-to run the agent. For example, `/var/opt/artifactory-agent/config.json`.
+       ```console
+       $ docker scout enroll <your_organization_name>
+       ```
 
-#### Run the agent
+5. Index existing images. You only need to do this once.
 
-The following example shows how to run the Docker Scout Artifactory agent using
-`docker run`. This command creates a bind mount for the directory containing the
-JSON configuration file created earlier at `/opt/artifactory-agent/data` inside
-the container. Make sure the mount path you use is the directory containing the
-`config.json` file.
+    Run `docker scout watch` with the `--all-images` option to index all images in the specified Artifactory repository. The following is an example command:
 
-<!-- prettier-ignore -->
-> [!IMPORTANT]
->
-> Use the `v1` tag of the Artifactory agent image. Don't use the `latest` tag as
-> doing so may incur breaking changes.
+   ```console
+   $ docker scout watch --registry \
+   "type=artifactory,registry=example.jfrog.io,api=https://example.jfrog.io/artifactory,include=*/frontend*,exclude=*/dta/*,repository=docker-local,port=9000,subdomain-mode=true" \
+   --all-images
+   ```
 
-```console
-$ docker run \
-  --mount type=bind,src=/var/opt/artifactory-agent,target=/opt/artifactory-agent/data \
-  docker/artifactory-agent:v1
-```
+6. Confirm the images have been indexed by viewing them on the [Scout
+   Dashboard](https://scout.docker.com/).
 
-#### Analyzing pre-existing data
+7. Configure Artifactory callbacks.
 
-By default the agent detects and analyzes images as they're created and
-updated. If you want to use the agent to analyze pre-existing images, you
-can use backfill mode. Use the `--backfill-from=TIME` command line option,
-where `TIME` is an ISO 8601 formatted time, to run the agent in backfill mode.
-If you use this option, the agent analyzes all images pushed between that
-time and the current time when the agent starts, then exits.
+   In your Artifactory UI or via REST API, configure webhooks for image
+   push/update events. Set the endpoint to your `docker scout watch` host and
+   port, and include the `DOCKER_SCOUT_ARTIFACTORY_WEBHOOK_SECRET` for
+   authentication.
 
-For example:
+   For more information, see the [JFrog Artifactory Webhooks
+   documentation](https://jfrog.com/help/r/jfrog-platform-administration-documentation/webhooks)
+   or the [JFrog Artifactory REST API Webhooks
+   documentation](https://jfrog.com/help/r/jfrog-rest-apis/webhooks).
 
-```console
-$ docker run \
-  --mount type=bind,src=/var/opt/artifactory-agent,target=/opt/artifactory-agent/data \
-  docker/artifactory-agent:v1 --backfill-from=2022-04-10T10:00:00Z
-```
+8. Continuously watch for new or updated images.
 
-When running a backfill multiple times, the agent won't analyze images that
-it's already analyzed. To force re-analysis, provide the `--force` command
-line flag.
+   Run `docker scout watch` with the `--refresh-registry` option to watch for
+   new images to index.
 
-### View analysis results
+   The `docker scout watch` command is a long-running process that must
+   continue running indefinitely in the background to receive webhooks and
+   watch for new images. If you run it directly in a terminal and close the
+   session, the process will stop.
 
-You can view the image analysis results in the Docker Scout Dashboard.
+   The following is an example command. You can run the process as a system
+   service, for example using `systemd` or `nohup`, to ensure it continues
+   running in the background.
 
-1. Go to [Images page](https://scout.docker.com/reports/images/) in the Docker Scout Dashboard.
+   ```console
+   $ docker scout watch --registry \
+   "type=artifactory,registry=example.jfrog.io,api=https://example.jfrog.io/artifactory,include=*/frontend*,exclude=*/dta/*,repository=docker-local,port=9000,subdomain-mode=true" \
+   --refresh-registry
+   ```
 
-   This page displays the Docker Scout-enabled repositories in your organization.
-
-2. Select the image in the list.
-3. Select the tag.
-
-When you have selected a tag, you're taken to the vulnerability report for that
-tag. Here, you can select if you want to view all vulnerabilities in the image,
-or vulnerabilities introduced in a specific layer. You can also filter
-vulnerabilities by severity, and whether or not there's a fix version available.
+9. Optional. Set up Scout integration for real-time notifications from popular
+   collaboration platforms.

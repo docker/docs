@@ -5,7 +5,7 @@ description: Find documentation on Docker Build Cloud to help you build your con
 keywords: build, cloud, cloud build, remote builder
 params:
   sidebar:
-    group: Products
+    group: Application development
 aliases:
   - /build/cloud/faq/
   - /build/cloud/
@@ -47,12 +47,7 @@ cache, and encryption in transit. That means there are no shared processes or
 data between cloud builders.
 
 > [!NOTE]
->
-> Docker Build Cloud is currently only available in the US East region. Users
-> in Europe and Asia may experience increased latency compared to users based
-> in North America.
->
-> Support for multi-region builders is on the roadmap.
+> Docker Build Cloud is only available in the US East region.
 
 ## Get Docker Build Cloud
 
@@ -63,10 +58,10 @@ to get access to Docker Build Cloud:
 - Users with a free Personal account can opt-in to a 7-day free trial, with the option
 to subscribe for access. To start your free trial, sign in to [Docker Build Cloud Dashboard](https://app.docker.com/build/) and follow the on-screen instructions.
 - All users with a paid Docker subscription have access to Docker Build Cloud included
-with their Docker suite of products. See [Docker subscriptions and features](/manuals/subscription/details.md) for more information.
+with their Docker suite of products. See [Docker subscriptions and features](https://www.docker.com/pricing?ref=Docs&refAction=DocsBuildCloud) for more information.
 
 Once you've signed up and created a builder, continue by
 [setting up the builder in your local environment](./setup.md).
 
 For information about roles and permissions related to Docker Build Cloud, see
-[Roles and Permissions](/manuals/security/for-admins/roles-and-permissions.md#docker-build-cloud-permissions).
+[Roles and Permissions](/manuals/enterprise/security/roles-and-permissions.md#docker-build-cloud-permissions).

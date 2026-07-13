@@ -1,12 +1,13 @@
 # syntax=docker/dockerfile:1
 # check=skip=InvalidBaseImagePlatform
 
-ARG ALPINE_VERSION=3.21
-ARG GO_VERSION=1.24
+ARG ALPINE_VERSION=3.23
+ARG GO_VERSION=1.26
 ARG HTMLTEST_VERSION=0.17.0
-ARG HUGO_VERSION=0.141.0
-ARG NODE_VERSION=22
-ARG PAGEFIND_VERSION=1.3.0
+ARG VALE_VERSION=3.11.2
+ARG HUGO_VERSION=0.163.0
+ARG NODE_VERSION=24
+ARG PAGEFIND_VERSION=1.5.2
 
 # base defines the generic base stage
 FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS base
@@ -14,7 +15,8 @@ RUN apk add --no-cache \
     git \
     nodejs \
     npm \
-    gcompat
+    gcompat \
+    rsync
 
 # npm downloads Node.js dependencies
 FROM base AS npm
@@ -48,16 +50,23 @@ ARG HUGO_ENV="development"
 ARG DOCS_URL="https://docs.docker.com"
 ENV HUGO_CACHEDIR="/tmp/hugo_cache"
 RUN --mount=type=cache,target=/tmp/hugo_cache \
-    hugo --gc --minify -e $HUGO_ENV -b $DOCS_URL
+    hugo \
+      --gc \
+      --minify \
+      --panicOnWarning \
+      --printPathWarnings \
+      --printUnusedTemplates \
+      -b $DOCS_URL \
+      -e $HUGO_ENV
+RUN ./hack/flatten-and-resolve.js public
 
 # lint lints markdown files
-FROM davidanson/markdownlint-cli2:v0.14.0 AS lint
-USER root
+FROM ghcr.io/igorshubovych/markdownlint-cli:v0.45.0 AS lint
 RUN --mount=type=bind,target=. \
-    /usr/local/bin/markdownlint-cli2 \
+    markdownlint \
     "content/**/*.md" \
-    "#content/manuals/engine/release-notes/*.md" \
-    "#content/manuals/desktop/previous-versions/*.md"
+    --ignore "content/manuals/engine/release-notes/*.md" \
+    --ignore "content/manuals/desktop/previous-versions/*.md"
 
 # test validates HTML output and checks for broken links
 FROM wjdp/htmltest:v${HTMLTEST_VERSION} AS test
@@ -65,6 +74,23 @@ WORKDIR /test
 COPY --from=build /project/public ./public
 ADD .htmltest.yml .htmltest.yml
 RUN htmltest
+
+# vale
+FROM jdkato/vale:v${VALE_VERSION} AS vale-run
+WORKDIR /src
+ARG GITHUB_ACTIONS
+RUN --mount=type=bind,target=.,rw <<EOT
+  set -e
+  mkdir /out
+  args=""
+  [ "$GITHUB_ACTIONS" = "true" ] && args="--output=.vale-rdjsonl.tmpl"
+  set -x
+  vale sync
+  vale $args content/ | tee /out/vale.out
+EOT
+
+FROM scratch AS vale
+COPY --from=vale-run /out/vale.out /
 
 # update-modules downloads and vendors Hugo modules
 FROM build-base AS update-modules
@@ -74,8 +100,6 @@ RUN <<"EOT"
 set -ex
 if [ -n "$MODULE" ]; then
     hugo mod get ${MODULE}
-    RESOLVED=$(cat go.mod | grep -m 1 "${MODULE/@*/}" | awk '{print $1 "@" $2}')
-    go mod edit -replace "${MODULE/@*/}=${RESOLVED}";
 else
     echo "no module set";
 fi
@@ -86,6 +110,22 @@ RUN hugo mod vendor
 FROM scratch AS vendor
 COPY --from=update-modules /project/_vendor /_vendor
 COPY --from=update-modules /project/go.* /
+
+FROM base AS validate-vendor
+RUN --mount=target=/context \
+  --mount=type=bind,from=vendor,target=/out \
+  --mount=target=.,type=tmpfs <<EOT
+set -e
+rsync -a /context/. .
+git add -A
+rm -rf _vendor
+cp -rf /out/* .
+if [ -n "$(git status --porcelain -- go.mod go.sum _vendor)" ]; then
+  echo >&2 'ERROR: Vendor result differs. Please vendor your package with "make vendor"'
+  git status --porcelain -- go.mod go.sum _vendor
+  exit 1
+fi
+EOT
 
 # build-upstream builds an upstream project with a replacement module
 FROM build-base AS build-upstream
@@ -111,18 +151,6 @@ FROM alpine:${ALPINE_VERSION} AS unused-media
 RUN apk add --no-cache fd ripgrep
 WORKDIR /test
 RUN --mount=type=bind,target=. ./hack/test/unused_media
-
-# path-warnings checks for duplicate target paths
-FROM build-base AS path-warnings
-RUN hugo --printPathWarnings > ./path-warnings.txt
-RUN <<EOT
-DUPLICATE_TARGETS=$(grep "Duplicate target paths" ./path-warnings.txt)
-if [ ! -z "$DUPLICATE_TARGETS" ]; then
-    echo "$DUPLICATE_TARGETS"
-    echo "You probably have a duplicate alias defined. Please check your aliases."
-    exit 1
-fi
-EOT
 
 # pagefind installs the Pagefind runtime
 FROM base AS pagefind

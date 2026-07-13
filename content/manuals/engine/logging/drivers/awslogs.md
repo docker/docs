@@ -17,11 +17,12 @@ and Command Line Tools](https://docs.aws.amazon.com/cli/latest/reference/logs/in
 ## Usage
 
 To use the `awslogs` driver as the default logging driver, set the `log-driver`
-and `log-opt` keys to appropriate values in the `daemon.json` file, which is
-located in `/etc/docker/` on Linux hosts or
-`C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
-configuring Docker using `daemon.json`, see
+and `log-opt` keys to appropriate values in the `daemon.json` file. For more
+about configuring Docker using `daemon.json`, see
 [daemon.json](/reference/cli/dockerd.md#daemon-configuration-file).
+
+{{% include "daemon-cfg-desktop.md" %}}
+
 The following example sets the log driver to `awslogs` and sets the
 `awslogs-region` option.
 
@@ -225,11 +226,16 @@ The following `strftime` codes are supported:
 | `%p` | AM or PM.                                                        | AM       |
 | `%M` | Minute as a zero-padded decimal number.                          | 57       |
 | `%S` | Second as a zero-padded decimal number.                          | 04       |
-| `%L` | Milliseconds as a zero-padded decimal number.                    | .123     |
 | `%f` | Microseconds as a zero-padded decimal number.                    | 000345   |
 | `%z` | UTC offset in the form +HHMM or -HHMM.                           | +1300    |
 | `%Z` | Time zone name.                                                  | PST      |
 | `%j` | Day of the year as a zero-padded decimal number.                 | 363      |
+
+In addition, the following non-`strftime` codes are supported:
+
+| Code | Meaning                                                              | Example  |
+| :--- | :------------------------------------------------------------------- | :------- |
+| `%L` | Milliseconds as a zero-padded decimal number preceded with a period. | .123     |
 
 ### awslogs-multiline-pattern
 
@@ -331,6 +337,14 @@ logging driver. You can provide these credentials with the `AWS_ACCESS_KEY_ID`,
 default AWS shared credentials file (`~/.aws/credentials` of the root user), or
 if you are running the Docker daemon on an Amazon EC2 instance, the Amazon EC2
 instance profile.
+
+> [!NOTE]
+> Docker reads AWS credentials when the container starts.
+> If you use a shared AWS credentials file with temporary credentials,
+> updating the file later does not automatically update the credentials
+> used by the running container. When the temporary credentials expire,
+> log delivery to Amazon CloudWatch Logs can fail. Restart the container
+> after refreshing the credentials so Docker can load the updated values.
 
 Credentials must have a policy applied that allows the `logs:CreateLogStream`
 and `logs:PutLogEvents` actions, as shown in the following example.

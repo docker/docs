@@ -1,0 +1,30 @@
+command: docker mcp catalog ls
+short: List all configured catalogs
+long: |
+    List all configured catalogs including Docker's official catalog and any locally managed catalogs.
+usage: docker mcp catalog ls
+pname: docker mcp catalog
+plink: docker_mcp_catalog.yaml
+options:
+    - option: format
+      value_type: format
+      description: 'Output format. Supported: "json", "yaml".'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+examples: |4-
+      # List all catalogs
+      docker mcp catalog ls
+
+      # List catalogs in JSON format
+      docker mcp catalog ls --format=json
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

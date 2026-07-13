@@ -1,0 +1,13 @@
+command: docker dhi auth apk
+short: Create authentication details for DHI APK repositories
+long: Create authentication details for DHI APK repositories
+usage: docker dhi auth apk
+pname: docker dhi auth
+plink: docker_dhi_auth.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

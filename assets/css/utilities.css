@@ -1,13 +1,3 @@
-@utility icon-svg {
-  svg {
-    font-size: 24px;
-    width: 1em;
-    height: 1em;
-    display: inline-block;
-    fill: currentColor;
-  }
-}
-
 @utility icon-xs {
   svg {
     font-size: 12px;
@@ -17,6 +7,12 @@
 @utility icon-sm {
   svg {
     font-size: 16px;
+  }
+}
+
+@utility icon-md {
+  svg {
+    font-size: 24px;
   }
 }
 
@@ -42,43 +38,10 @@
   @apply dark:hue-rotate-180 dark:invert dark:filter;
 }
 
-@utility bg-pattern-blue {
-  background-color: rgba(255, 255, 255, 0.5);
-  background-image: url("/assets/images/bg-pattern-blue.webp");
-  background-blend-mode: overlay;
-  background-size: cover;
-  background-repeat: no-repeat;
-  .dark & {
-    background-color: rgba(0, 0, 0, 0.741);
-  }
-}
-
-@utility bg-pattern-purple {
-  background-color: rgba(255, 255, 255, 0.5);
-  background-image: url("/assets/images/bg-pattern-purple.webp");
-  background-blend-mode: overlay;
-  background-size: cover;
-  background-repeat: no-repeat;
-  .dark & {
-    background-color: rgba(0, 0, 0, 0.741);
-  }
-}
-
 @utility bg-background-toc {
   background-color: var(--color-navbar-bg);
   .dark & {
     background-color: var(--color-navbar-bg-dark);
-  }
-}
-
-@utility bg-pattern-verde {
-  background-color: rgba(255, 255, 255, 0.5);
-  background-image: url("/assets/images/bg-pattern-verde.webp");
-  background-blend-mode: overlay;
-  background-size: cover;
-  background-repeat: no-repeat;
-  .dark & {
-    background-color: rgba(0, 0, 0, 0.741);
   }
 }
 
@@ -139,44 +102,38 @@
 }
 
 @utility prose {
-  .highlight,
-  :not(pre) > code {
+  table:not(.lntable) code {
+    overflow-wrap: unset;
+    white-space: nowrap;
+  }
+
+  /* code in `inline code` style */
+  :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)),
+  a > code {
     font-size: 0.875em;
-    border: 1px solid;
-    border-radius: 0.25rem; /* theme("spacing.1") fallback */
-    border: none;
-    background: transparent;
+    font-weight: 400 !important;
+    border: 1px solid !important;
+    border-radius: 0.25rem;
+    border: none !important;
+    padding: 4px !important;
+    background: var(--tw-prose-code-bg) !important;
+    .dark & {
+      background: var(--tw-prose-code-bg-dark) !important;
+    }
     &::before,
     &::after {
       content: none !important;
     }
   }
 
-  :not(pre) > code {
-    background: var(--color-gray-200);
-    display: inline-block;
-    margin: 0;
-    font-weight: 400;
-    overflow-wrap: anywhere;
-    padding: 0 4px;
-  }
-
-  table:not(.lntable) code {
-    overflow-wrap: unset;
-    white-space: nowrap;
-  }
-
-  /* Indented code blocks */
+  /* code blocks with unrecognized languages*/
   pre:not(.chroma) {
-    @apply my-4 overflow-x-auto p-3;
-    font-size: 0.875em;
-    border: 1px solid;
-    border-radius: 0.25rem; /* theme("spacing.1") fallback */
-    background: var(--color-white-main);
-    border-color: var(--color-gray-300);
+    @apply overflow-x-auto p-3;
+    background: var(--tw-prose-code-bg);
+    color: var(--color-gray-700);
     .dark & {
-      background: var(--color-gray-200);
-      border-color: var(--color-gray-400);
+      background: var(--tw-prose-code-bg-dark);
+      color: var(--color-gray-200);
     }
   }
 
@@ -232,7 +189,11 @@
 }
 
 @utility sub-button {
-  @apply flex w-full items-start gap-2 rounded-sm px-2 py-2 text-left text-gray-700 transition-colors hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800;
+  @apply flex w-full items-center gap-2 rounded-sm px-2 py-2 text-left text-gray-600 transition-colors hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800;
+}
+
+@utility dropdown-base {
+  @apply rounded-sm border border-gray-300 bg-white text-gray-600 dark:border-gray-300 dark:bg-gray-900 dark:text-gray-100;
 }
 
 @utility toc {
@@ -247,6 +208,160 @@
     }
   }
 }
+@utility scrollbar-hover {
+  /* Firefox: hide the thumb until hover */
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  &:hover {
+    scrollbar-color: var(--color-gray-400) transparent;
+  }
+  .dark &:hover {
+    scrollbar-color: var(--color-gray-600) transparent;
+  }
+  /* WebKit: reserve the track, reveal the thumb only on hover */
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    background-color: transparent;
+  }
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: var(--color-gray-400);
+  }
+  .dark &:hover::-webkit-scrollbar-thumb {
+    background-color: var(--color-gray-600);
+  }
+}
+
 @utility chip {
   @apply border-divider-light dark:border-divider-dark inline-flex items-center gap-1 rounded-full border bg-gray-100 px-2 text-sm text-gray-800 select-none dark:bg-gray-700 dark:text-gray-200;
+}
+
+@utility pagination-link {
+  @apply flex items-center justify-center rounded-sm p-2;
+}
+
+@utility breadcrumbs {
+  /* Absolute size so breadcrumbs render identically inside and outside prose */
+  font-size: calc(var(--text-base) * 0.9);
+}
+
+/* Guides landing: collapse section spacing into a flat list while filtering.
+   Grouped spacing is the static default; this only applies once the page is
+   being filtered, so it never affects first paint (no layout jank). */
+.guides-flat > section {
+  border-top-width: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+@utility topbar-button {
+  @apply min-h-10 max-w-40 rounded-md border-1 border-blue-300 bg-(--topnav-button-bg) px-2 text-center font-semibold text-white;
+  @apply inline-flex items-center justify-center gap-1.5 transition-colors hover:border-blue-300 hover:bg-blue-400;
+  svg {
+    font-size: 19px;
+  }
+}
+@utility topbar-button-clear {
+  @apply min-h-9 px-0 text-center font-semibold text-white/95 transition-colors hover:text-white/85;
+  svg {
+    font-size: 19px;
+  }
+}
+
+.footer {
+  @apply ml-auto hidden flex-row justify-between gap-6 px-4 pt-6 pb-2 md:flex;
+  @apply border-t border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-gray-900;
+  @apply text-gray-600 dark:text-gray-400;
+  a:hover {
+    @apply underline underline-offset-4;
+  }
+}
+
+.social {
+  @apply flex min-w-20 flex-wrap items-center gap-1;
+}
+
+.links {
+  @apply flex items-center gap-3;
+}
+
+.links a {
+  @apply inline-flex min-w-15 truncate whitespace-normal;
+}
+
+.secondaryLinks {
+  @apply flex items-center;
+  a,
+  button {
+    @apply whitespace-normal md:truncate;
+  }
+}
+
+.secondaryLinks > *:not(:last-child)::after {
+  content: "|";
+  @apply mx-1 text-gray-400;
+}
+
+.ot-sdk-show-settings {
+  @apply !text-gray-600 hover:!text-gray-800 dark:!text-gray-400 dark:hover:!text-gray-200;
+  @apply !m-0 !min-w-15 !truncate !border-none !p-0 !text-sm;
+}
+#ot-sdk-btn.ot-sdk-show-settings:hover,
+#ot-sdk-btn.optanon-show-settings:hover {
+  @apply !text-gray-600 underline decoration-1 underline-offset-4 hover:!bg-transparent dark:!text-gray-400;
+}
+
+@keyframes reflection {
+  0% {
+    transform: translateX(-100%);
+  }
+  18% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@utility shimmer {
+  position: relative;
+  overflow: hidden;
+
+  & > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      transparent 43%,
+      rgba(123, 164, 244, 0.25) 49%,
+      rgba(170, 196, 248, 0.45) 50%,
+      rgba(123, 164, 244, 0.25) 51%,
+      transparent 57%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    pointer-events: none;
+    z-index: 1;
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: reflection 3s ease-in-out 3s forwards;
+    }
+  }
+
+  &:hover {
+    @apply bg-blue-800 border-blue-400;
+  }
 }

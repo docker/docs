@@ -3,50 +3,93 @@ title: Docker MCP Catalog and Toolkit
 linkTitle: MCP Catalog and Toolkit
 params:
   sidebar:
-    group: AI
+    group: AI and agents
     badge:
       color: blue
       text: Beta
-weight: 30
+weight: 20
 description: Learn about Docker's MCP catalog on Docker Hub
 keywords: Docker, ai, mcp servers, ai agents, extension, docker desktop, llm, docker hub
 grid:
- - title: MCP Catalog
-   description: Learn about the benefits of the MCP Catalog, how you can use it, and how you can contribute
-   icon: hub
-   link: /ai/mcp-catalog-and-toolkit/catalog/
- - title: MCP Toolkit
-   description: Learn about the MCP toolkit to manage MCP servers and clients
-   icon: /icons/toolkit.svg
-   link: /ai/mcp-catalog-and-toolkit/toolkit/
+  - title: Get started with MCP Toolkit
+    description: Learn how to quickly install and use the MCP Toolkit to set up servers and clients.
+    icon: magnifying-glass-plus
+    link: /ai/mcp-catalog-and-toolkit/get-started/
+  - title: MCP Catalog
+    description: Browse Docker's curated collection of verified MCP servers
+    icon: globe-alt
+    link: /ai/mcp-catalog-and-toolkit/catalog/
+  - title: MCP Profiles
+    description: Organize servers into profiles for different projects and share configurations
+    icon: folder
+    link: /ai/mcp-catalog-and-toolkit/profiles/
+  - title: MCP Toolkit
+    description: Use Docker Desktop's UI to discover, configure, and manage MCP servers
+    icon: /icons/toolkit.svg
+    link: /ai/mcp-catalog-and-toolkit/toolkit/
+  - title: MCP Gateway
+    description: Use the CLI and Gateway to run MCP servers with custom configurations
+    icon: cpu-chip
+    link: /ai/mcp-catalog-and-toolkit/mcp-gateway/
+  - title: Dynamic MCP
+    description: Discover and add MCP servers on-demand using natural language
+    icon: magnifying-glass
+    link: /ai/mcp-catalog-and-toolkit/dynamic-mcp/
+  - title: Security FAQs
+    description: Common questions about MCP security, credentials, and server verification
+    icon: shield-check
+    link: /ai/mcp-catalog-and-toolkit/faqs/
+  - title: E2B sandboxes
+    description: Cloud sandboxes for AI agents with built-in MCP Catalog access
+    icon: cloud
+    link: /ai/mcp-catalog-and-toolkit/e2b-sandboxes/
 ---
 
-The Model Context Protocol (MCP) is a modern standard that transforms AI agents from passive responders into action-oriented systems. By standardizing how tools are described, discovered, and invoked, MCP enables agents to securely query APIs, access data, and execute services across diverse environments.
+{{< summary-bar feature_name="Docker MCP Catalog and Toolkit" >}}
 
-As agents move into production, MCP solves common integration challenges — interoperability, reliability, and security — by providing a consistent, decoupled, and scalable interface between agents and tools. Just as containers redefined software deployment, MCP is reshaping how AI systems interact with the world.
+[Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) is
+an open protocol that standardizes how AI applications access external tools
+and data sources. By connecting LLMs to local development tools, databases,
+APIs, and other resources, MCP extends their capabilities beyond their base
+training.
 
-> **Example**
-> 
-> In simple terms, an MCP server is a way for an LLM to interact with an external system.
-> 
-> For example:
-> If you ask a model to create a meeting, it needs to communicate with your calendar app to do that.
-> An MCP server for your calendar app provides _tools_ that perform atomic actions, such as:
-> "getting the details of a meeting" or "creating a new meeting".
+The challenge is that running MCP servers locally creates operational friction.
+Each server requires separate installation and configuration for every
+application you use. You run untrusted code directly on your machine, manage
+updates manually, and troubleshoot dependency conflicts yourself. Configure a
+GitHub server for Claude, then configure it again for Cursor, and so on. Each
+time you manage credentials, permissions, and environment setup.
 
-## What is Docker MCP Catalog and Toolkit?
+## Docker MCP features
 
-Docker MCP Catalog and Toolkit is a comprehensive solution for securely building, sharing, and running MCP tools. It simplifies the developer experience across these key areas:
+The [MCP Toolkit](/ai/mcp-catalog-and-toolkit/toolkit/) and [MCP
+Gateway](/ai/mcp-catalog-and-toolkit/mcp-gateway/) solve these challenges
+through centralized management. Instead of configuring each server for every AI
+application separately, you set things up once and connect all your clients to
+it. The workflow centers on three concepts: catalogs, profiles, and clients.
 
-- Discovery: A central catalog with verified, versioned tools
-- Credential Management: OAuth-based and secure by default
-- Execution: Tools run in isolated, containerized environments
-- Portability: Use MCP tools across Claude, Cursor, VS Code, and more — no code changes needed
+![MCP overview](./images/mcp_toolkit.avif)
 
-With Docker Hub and the MCP Toolkit, you can:
+[Catalogs](/ai/mcp-catalog-and-toolkit/catalog/) are curated collections of
+MCP servers. The Docker MCP Catalog provides 300+ verified servers packaged as
+container images with versioning, provenance, and security updates. Organizations
+can create [custom
+catalogs](/ai/mcp-catalog-and-toolkit/catalog/#custom-catalogs) with approved
+servers for their teams.
 
-- Launch MCP servers in seconds
-- Add tools via CLI or GUI
-- Rely on Docker's pull-based infrastructure for trusted delivery
+[Profiles](/ai/mcp-catalog-and-toolkit/profiles/) organize servers into named
+collections for different projects. Your "web-dev" profile might use GitHub and
+Playwright; your "backend" profile, database tools. Profiles support both
+containerized servers from catalogs and remote MCP servers. Configure a profile
+once, then share it across clients or with your team.
+
+Clients are the AI applications that connect to your profiles. Claude Code,
+Cursor, Zed, and others connect through the MCP Gateway, which routes requests
+to the right server and handles authentication and lifecycle management.
+
+> [!NOTE]
+> MCP Gateway as part of Docker AI Governance is an invite-only feature. [Contact Docker Sales](https://www.docker.com/pricing/contact-sales/) to learn more.
+
+## Learn more
 
 {{< grid >}}

@@ -29,6 +29,7 @@ Options:
       --bip string                            IPv4 address for the default bridge
       --bip6 string                           IPv6 address for the default bridge
   -b, --bridge string                         Attach containers to a network bridge
+      --bridge-accept-fwmark string           In bridge networks, accept packets with this firewall mark/mask
       --cdi-spec-dir list                     CDI specification directories to use
       --cgroup-parent string                  Set parent cgroup for all containers
       --config-file string                    Daemon configuration file (default "/etc/docker/daemon.json")
@@ -58,6 +59,7 @@ Options:
       --exec-root string                      Root directory for execution state files (default "/var/run/docker")
       --experimental                          Enable experimental features
       --feature map                           Enable feature in the daemon
+      --firewall-backend string               Firewall backend to use, iptables or nftables
       --fixed-cidr string                     IPv4 subnet for the default bridge network
       --fixed-cidr-v6 string                  IPv6 subnet for the default bridge network
   -G, --group string                          Group for the unix socket (default "docker")
@@ -608,7 +610,7 @@ $ sudo dockerd --add-runtime <runtime>=<path>
 
 Defining runtime arguments via the command line is not supported.
 
-For an example configuration for a runc drop-in replacment, see
+For an example configuration for a runc drop-in replacement, see
 [Alternative container runtimes > youki](https://docs.docker.com/engine/daemon/alternative-runtimes/#youki)
 
 ##### Configure the default container runtime
@@ -840,42 +842,49 @@ $ docker run -it --add-host host.docker.internal:host-gateway \
 PING host.docker.internal (2001:db8::1111): 56 data bytes
 ```
 
-### Enable CDI devices
-
-> [!NOTE]
-> This is experimental feature and as such doesn't represent a stable API.
->
-> This feature isn't enabled by default. To this feature, set `features.cdi` to
-> `true` in the `daemon.json` configuration file.
+### Configure CDI devices
 
 Container Device Interface (CDI) is a
 [standardized](https://github.com/cncf-tags/container-device-interface/blob/main/SPEC.md)
 mechanism for container runtimes to create containers which are able to
 interact with third party devices.
 
+CDI is currently only supported for Linux containers and is enabled by default
+since Docker Engine 28.3.0.
+
 The Docker daemon supports running containers with CDI devices if the requested
 device specifications are available on the filesystem of the daemon.
 
-The default specification directors are:
+The default specification directories are:
 
 - `/etc/cdi/` for static CDI Specs
 - `/var/run/cdi` for generated CDI Specs
 
-Alternatively, you can set custom locations for CDI specifications using the
+#### Set custom locations
+
+To set custom locations for CDI specifications, use the
 `cdi-spec-dirs` option in the `daemon.json` configuration file, or the
-`--cdi-spec-dir` flag for the `dockerd` CLI.
+`--cdi-spec-dir` flag for the `dockerd` CLI:
 
 ```json
 {
-  "features": {
-     "cdi": true
-  },
   "cdi-spec-dirs": ["/etc/cdi/", "/var/run/cdi"]
 }
 ```
 
-When CDI is enabled for a daemon, you can view the configured CDI specification
-directories using the `docker info` command.
+You can view the configured CDI specification directories using the `docker info` command.
+
+#### Disable CDI devices
+
+The feature in enabled by default. To disable it, use the `cdi` options in the `daemon.json` file:
+
+```json
+"features": {
+  "cdi": false
+},
+```
+
+To check the status of the CDI devices, run `docker info`.
 
 #### Daemon logging format {#log-format}
 
@@ -949,8 +958,6 @@ the `--cgroup-parent` option on the daemon.
 #### Daemon metrics
 
 The `--metrics-addr` option takes a TCP address to serve the metrics API.
-This feature is still experimental, therefore, the daemon must be running in experimental
-mode for this feature to work.
 
 To serve the metrics API on `localhost:9323` you would specify `--metrics-addr 127.0.0.1:9323`,
 allowing you to make requests on the API at `127.0.0.1:9323/metrics` to receive metrics in the
@@ -1050,9 +1057,9 @@ $ echo $?
 
 ##### On Linux
 
-The default location of the configuration file on Linux is
-`/etc/docker/daemon.json`. Use the `--config-file` flag to specify a
-non-default location.
+The default location of the configuration file on Linux is `/etc/docker/daemon.json`.
+If the file does not exist, you need to create it first. Use the `--config-file`
+flag to specify a non-default location.
 
 The following is a full example of the allowed configuration options on Linux:
 
@@ -1063,14 +1070,15 @@ The following is a full example of the allowed configuration options on Linux:
   "bip": "",
   "bip6": "",
   "bridge": "",
+  "bridge-accept-fwmark": "",
   "builder": {
     "gc": {
       "enabled": true,
-      "defaultKeepStorage": "10GB",
+      "defaultReservedSpace": "10GB",
       "policy": [
-        { "keepStorage": "10GB", "filter": ["unused-for=2200h"] },
-        { "keepStorage": "50GB", "filter": ["unused-for=3300h"] },
-        { "keepStorage": "100GB", "all": true }
+        { "maxUsedSpace": "512MB", "keepDuration": "48h", "filter": [ "type=source.local" ] },
+        { "reservedSpace": "10GB", "maxUsedSpace": "100GB", "keepDuration": "1440h" },
+        { "reservedSpace": "50GB", "minFreeSpace": "20GB", "maxUsedSpace": "200GB", "all": true }
       ]
     }
   },
@@ -1113,6 +1121,7 @@ The following is a full example of the allowed configuration options on Linux:
     "cdi": true,
     "containerd-snapshotter": true
   },
+  "firewall-backend": "",
   "fixed-cidr": "",
   "fixed-cidr-v6": "",
   "group": "",
@@ -1199,8 +1208,9 @@ The following is a full example of the allowed configuration options on Linux:
 ##### On Windows
 
 The default location of the configuration file on Windows is
-`%programdata%\docker\config\daemon.json`. Use the `--config-file` flag
-to specify a non-default location.
+`%programdata%\docker\config\daemon.json`. If the file does not exist, you need
+to create it first. Use the `--config-file` flag to specify a non-default
+location.
 
 The following is a full example of the allowed configuration options on Windows:
 
@@ -1302,7 +1312,7 @@ The list of currently supported options that can be reconfigured is this:
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | `debug`                            | Toggles debug mode of the daemon.                                                                           |
 | `labels`                           | Replaces the daemon labels with a new set of labels.                                                        |
-| `live-restore`                     | Toggles [live restore](https://docs.docker.com/engine/containers/live-restore/).                            |
+| `live-restore`                     | Toggles [live restore](https://docs.docker.com/engine/daemon/live-restore/).                                |
 | `max-concurrent-downloads`         | Configures the max concurrent downloads for each pull.                                                      |
 | `max-concurrent-uploads`           | Configures the max concurrent uploads for each push.                                                        |
 | `max-download-attempts`            | Configures the max download attempts for each pull.                                                         |

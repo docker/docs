@@ -1,0 +1,13 @@
+command: docker model configure show
+short: Show model configurations
+long: Show model configurations
+usage: docker model configure show [MODEL]
+pname: docker model configure
+plink: docker_model_configure.yaml
+deprecated: false
+hidden: true
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

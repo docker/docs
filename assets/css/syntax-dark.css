@@ -16,18 +16,13 @@
     min-width: fit-content;
     background-color: var(--color-gray-800);
   }
-  .lntd:first-child .hl,
-  & > .chroma > code > .hl {
-    margin-left: -4px;
-    border-left: 4px solid var(--color-gray-900);
-  }
   /* LineNumbersTable */
   .lnt {
     white-space: pre;
     user-select: none;
     margin-right: 0.4em;
     padding: 0 0.4em 0 0.4em;
-    color: var(--color-gray-900);
+    color: var(--color-gray-300);
   }
   /* LineNumbers */
   .ln {

@@ -14,21 +14,24 @@
   },
   "homepage": "https://docs.docker.com/",
   "dependencies": {
-    "@alpinejs/collapse": "^3.14.3",
-    "@alpinejs/focus": "^3.14.3",
-    "@alpinejs/persist": "^3.14.3",
-    "@floating-ui/dom": "^1.6.12",
-    "@material-symbols/svg-400": "^0.23.0",
-    "@tailwindcss/cli": "^4.1.6",
-    "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
-    "@tailwindcss/typography": "^0.5.15",
-    "alpinejs": "^3.14.3",
-    "tailwindcss": "^4.1.6"
+    "@alpinejs/collapse": "3.15.8",
+    "@alpinejs/focus": "3.15.8",
+    "@alpinejs/persist": "3.15.8",
+    "@docker/marlin-sdk-web-public": "0.6.0",
+    "@floating-ui/dom": "1.7.6",
+    "@tailwindcss/cli": "4.2.1",
+    "@tailwindcss/typography": "0.5.19",
+    "alpinejs": "3.15.8",
+    "heroicons": "2.2.0",
+    "highlight.js": "11.11.1",
+    "marked": "17.0.4",
+    "mermaid": "11.15.0",
+    "tailwindcss": "4.2.1"
   },
   "devDependencies": {
-    "markdownlint": "^0.35.0",
-    "prettier": "^3.3.3",
-    "prettier-plugin-go-template": "^0.0.15",
-    "prettier-plugin-tailwindcss": "^0.6.11"
+    "markdownlint": "0.40.0",
+    "prettier": "3.8.1",
+    "prettier-plugin-go-template": "0.0.15",
+    "prettier-plugin-tailwindcss": "0.7.2"
   }
 }

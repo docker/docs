@@ -328,7 +328,7 @@ If you are currently using the `--ipv6` option _without_ specifying the
 `--fixed-cidr-v6` option, the Docker daemon will refuse to start with the
 following message:
 
-```none
+```text
 Error starting daemon: Error initializing network controller: Error creating
                        default "bridge" network: failed to parse pool request
                        for address space "LocalDefault" pool " subpool ":
@@ -344,7 +344,7 @@ In a similar way, if you specify the `--ipv6` flag when creating a network
 with the default IPAM driver, without providing an IPv6 `--subnet`, network
 creation will fail with the following message:
 
-```none
+```text
 Error response from daemon: failed to parse pool request for address space
                             "LocalDefault" pool "" subpool "": could not find an
                             available, non-overlapping IPv6 address pool among
@@ -397,7 +397,7 @@ If you are currently using the `--ipv6` option _without_ specifying the
 `--fixed-cidr-v6` option, the Docker daemon will refuse to start with the
 following message:
 
-```none
+```text
 Error starting daemon: Error initializing network controller: Error creating
                        default "bridge" network: failed to parse pool request
                        for address space "LocalDefault" pool " subpool ":
@@ -413,7 +413,7 @@ In a similar way, if you specify the `--ipv6` flag when creating a network
 with the default IPAM driver, without providing an IPv6 `--subnet`, network
 creation will fail with the following message:
 
-```none
+```text
 Error response from daemon: failed to parse pool request for address space
                             "LocalDefault" pool "" subpool "": could not find an
                             available, non-overlapping IPv6 address pool among
@@ -1041,7 +1041,7 @@ additional binaries; `dockerd`, and `docker-proxy`. If you have scripts for inst
 * Support for AAAA Records (aka IPv6 Service Discovery) in embedded DNS Server ([#21396](https://github.com/docker/docker/pull/21396))
 - Fix to not forward docker domain IPv6 queries to external servers ([#21396](https://github.com/docker/docker/pull/21396))
 * Multiple A/AAAA records from embedded DNS Server for DNS Round robin ([#21019](https://github.com/docker/docker/pull/21019))
-- Fix endpoint count inconsistency after an ungraceful dameon restart ([#21261](https://github.com/docker/docker/pull/21261))
+- Fix endpoint count inconsistency after an ungraceful daemon restart ([#21261](https://github.com/docker/docker/pull/21261))
 - Move the ownership of exposed ports and port-mapping options from Endpoint to Sandbox ([#21019](https://github.com/docker/docker/pull/21019))
 - Fixed a bug which prevents docker reload when host is configured with ipv6.disable=1 ([#21019](https://github.com/docker/docker/pull/21019))
 - Added inbuilt nil IPAM driver ([#21019](https://github.com/docker/docker/pull/21019))

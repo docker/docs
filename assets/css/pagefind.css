@@ -1,0 +1,25 @@
+/* Pagefind Component UI Customizations */
+
+/* Dark mode variables for modal */
+.dark pagefind-modal {
+  --pf-text: var(--color-gray-100);
+  --pf-text-secondary: var(--color-gray-300);
+  --pf-text-muted: var(--color-gray-400);
+  --pf-background: var(--color-gray-900);
+  --pf-border: var(--color-gray-700);
+  --pf-border-focus: var(--color-blue-400);
+  --pf-hover: var(--color-gray-800);
+}
+
+/* Highlight marks in results */
+pagefind-results mark {
+  background-color: var(--color-yellow-200);
+  color: inherit;
+  padding: 0 0.125rem;
+  border-radius: 0.125rem;
+}
+
+.dark pagefind-results mark {
+  background-color: rgba(255, 204, 72, 0.3);
+  color: white;
+}

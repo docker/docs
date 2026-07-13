@@ -1,0 +1,34 @@
+command: docker dhi customization build logs
+short: Get logs of a build
+long: Get the logs of a Docker Hardened Images customization build
+usage: docker dhi customization build logs <repository> <name> <build-id>
+pname: docker dhi customization build
+plink: docker_dhi_customization_build.yaml
+options:
+    - option: json
+      value_type: bool
+      default_value: "false"
+      description: Output in JSON format
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: org
+      value_type: string
+      description: Docker Hub organization (overrides config)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

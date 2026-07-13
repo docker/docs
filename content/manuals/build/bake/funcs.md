@@ -13,8 +13,9 @@ configuration in more complex ways than just concatenation or interpolation.
 
 ## Standard library
 
-Bake ships with built-in support for the [`go-cty` standard library functions](https://github.com/zclconf/go-cty/tree/main/cty/function/stdlib).
-The following example shows the `add` function.
+Bake ships with built-in support for the [standard library functions](/manuals/build/bake/stdlib.md).
+
+The following example shows the `add` function:
 
 ```hcl {title=docker-bake.hcl}
 variable "TAG" {
@@ -107,8 +108,6 @@ $ docker buildx bake --print webapp
 
 You can make references to [variables](./variables) and standard library
 functions inside your functions.
-
-You can't reference user-defined functions from other functions.
 
 The following example uses a global variable (`REPO`) in a custom function.
 

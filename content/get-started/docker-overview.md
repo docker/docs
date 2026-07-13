@@ -26,7 +26,7 @@ significantly reduce the delay between writing code and running it in production
 ## The Docker platform
 
 Docker provides the ability to package and run an application in a loosely isolated
-environment called a container. The isolation and security lets you run many
+environment called a container. The isolation and security let you run many
 containers simultaneously on a given host. Containers are lightweight and contain
 everything needed to run the application, so you don't need to rely on what's
 installed on the host. You can share containers while you work,
@@ -107,7 +107,7 @@ Docker API. The Docker client can communicate with more than one daemon.
 
 ### Docker Desktop
 
-Docker Desktop is an easy-to-install application for your Mac, Windows or Linux environment that enables you to build and share containerized applications and microservices. Docker Desktop includes the Docker daemon (`dockerd`), the Docker client (`docker`), Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper. For more information, see [Docker Desktop](/manuals/desktop/_index.md).
+Docker Desktop is an easy-to-install application for your Mac, Windows, or Linux environment that enables you to build and share containerized applications and microservices. Docker Desktop includes the Docker daemon (`dockerd`), the Docker client (`docker`), Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper. For more information, see [Docker Desktop](/manuals/desktop/_index.md).
 
 ### Docker registries
 
@@ -128,8 +128,8 @@ of those objects.
 
 An image is a read-only template with instructions for creating a Docker
 container. Often, an image is based on another image, with some additional
-customization. For example, you may build an image which is based on the `ubuntu`
-image, but installs the Apache web server and your application, as well as the
+customization. For example, you may build an image that is based on the Ubuntu image 
+but includes the Apache web server and your application, as well as the
 configuration details needed to make your application run.
 
 You might create your own images or you might only use those created by others

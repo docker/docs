@@ -118,12 +118,12 @@ the mount point of the secret within a given container.
 Use these links to read about specific commands, or continue to the
 [example about using secrets with a service](secrets.md#simple-example-get-started-with-secrets).
 
-- [`docker secret create`](/reference/cli/docker/secret/create.md)
-- [`docker secret inspect`](/reference/cli/docker/secret/inspect.md)
-- [`docker secret ls`](/reference/cli/docker/secret/ls.md)
-- [`docker secret rm`](/reference/cli/docker/secret/rm.md)
-- [`--secret`](/reference/cli/docker/service/create.md#secret) flag for `docker service create`
-- [`--secret-add` and `--secret-rm`](/reference/cli/docker/service/update.md#secret-add) flags for `docker service update`
+- [`docker secret create`](/reference/cli/docker/secret/create/)
+- [`docker secret inspect`](/reference/cli/docker/secret/inspect/)
+- [`docker secret ls`](/reference/cli/docker/secret/ls/)
+- [`docker secret rm`](/reference/cli/docker/secret/rm/)
+- [`--secret`](/reference/cli/docker/service/create/#secret) flag for `docker service create`
+- [`--secret-add` and `--secret-rm`](/reference/cli/docker/service/update/#secret-add) flags for `docker service update`
 
 ## Examples
 

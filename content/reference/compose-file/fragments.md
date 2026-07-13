@@ -1,6 +1,6 @@
 ---
 title: Fragments
-description: Understand how to use fragments
+description: Reuse configuration with YAML anchors and fragments
 keywords: compose, compose specification, fragments, compose file reference
 aliases: 
  - /compose/compose-file/10-fragments/

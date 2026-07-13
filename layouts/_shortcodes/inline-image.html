@@ -1,0 +1,15 @@
+{{ $src := .Get "src" }}
+{{ $alt := .Get "alt" }}
+{{ $title := .Get "title" }}
+
+{{ if and (eq .Page.Kind "page") (not (hasPrefix $src "/")) }}
+  {{ $src = (printf "../%s" $src) }}
+{{ end }}
+
+<img
+  loading="lazy"
+  src="{{ $src }}"
+  alt="{{ $alt }}"
+  {{ with $title }}title="{{ . }}"{{ end }}
+  class="inline my-0 not-prose"
+/>

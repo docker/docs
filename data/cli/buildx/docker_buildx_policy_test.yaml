@@ -1,0 +1,54 @@
+command: docker buildx policy test
+short: Run policy tests
+long: Run policy tests
+usage: docker buildx policy test <path>
+pname: docker buildx policy
+plink: docker_buildx_policy.yaml
+options:
+    - option: filename
+      value_type: string
+      default_value: Dockerfile
+      description: Name of the Dockerfile to validate
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: run
+      value_type: string
+      description: Run only tests with name containing this substring
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: builder
+      value_type: string
+      description: Override the configured builder instance
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

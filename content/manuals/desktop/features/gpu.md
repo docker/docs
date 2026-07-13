@@ -11,7 +11,7 @@ aliases:
 
 > [!NOTE]
 >
-> Currently GPU support in Docker Desktop is only available on Windows with the WSL2 backend.
+> GPU support in Docker Desktop is only available on Windows with the WSL2 backend.
 
 Docker Desktop for Windows supports NVIDIA GPU Paravirtualization (GPU-PV) on NVIDIA GPUs, allowing containers to access GPU resources for compute-intensive workloads like AI, machine learning, or video processing.
 
@@ -63,16 +63,28 @@ GPU Device 0: "GeForce RTX 2060 with Max-Q Design" with compute capability 7.5
 = 2724.379 single-precision GFLOP/s at 20 flops per interaction
 ```
 
-## Run a real-world model: Llama2 with Ollama
+## Run a real-world model: SmolLM2 with Docker Model Runner
 
-Use the [official Ollama image](https://hub.docker.com/r/ollama/ollama) to run the Llama2 LLM with GPU acceleration:
+Use Docker Model Runner to run the SmolLM2 LLM with vLLM and GPU acceleration:
 
 ```console
-$ docker run --gpus=all -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+$ docker model install-runner --backend vllm --gpu cuda
 ```
 
-Then start the model:
+Check it's correctly installed:
 
 ```console
-$ docker exec -it ollama ollama run llama2
+$ docker model status
+Docker Model Runner is running
+
+Status:
+llama.cpp: running llama.cpp version: c22473b
+vllm: running vllm version: 0.11.0
+```
+
+Run the model:
+
+```console
+$ docker model run ai/smollm2-vllm hi
+Hello! I'm sure everything goes smoothly here. How can I assist you today?
 ```

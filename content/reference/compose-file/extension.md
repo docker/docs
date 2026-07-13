@@ -1,6 +1,6 @@
 ---
 title: Extensions
-description: Understand how to use extensions
+description: Define and reuse custom fragments with extensions in Docker Compose
 keywords: compose, compose specification, extensions, compose file reference
 aliases: 
  - /compose/compose-file/11-extension/
@@ -117,7 +117,7 @@ services:
 >
 > In the example above, the environment variables are declared using the `FOO: BAR` mapping syntax, while the sequence syntax `- FOO=BAR` is only valid when no fragments are involved.
 
-## Informative Historical Notes
+## Informative historical notes
 
 This section is informative. At the time of writing, the following prefixes are known to exist:
 

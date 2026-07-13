@@ -12,9 +12,9 @@ aliases:
 
 A Compose file can use variables to offer more flexibility. If you want to quickly switch 
 between image tags to test multiple versions, or want to adjust a volume source to your local
-environment, you don't need to edit the Compose file each time, you can just set variables that insert values into your Compose file at run time.
+environment, you don't need to edit the Compose file each time, you can just set variables that insert values into your Compose file at runtime.
 
-Interpolation can also be used to insert values into your Compose file at run time, which is then used to pass variables into your container's environment
+Interpolation can also be used to insert values into your Compose file at runtime, which is then used to pass variables into your container's environment
 
 Below is a simple example: 
 
@@ -28,7 +28,7 @@ services:
 ```
 
 When you run `docker compose up`, the `web` service defined in the Compose file [interpolates](variable-interpolation.md) in the image `webapp:v1.5` which was set in the `.env` file. You can verify this with the
-[config command](/reference/cli/docker/compose/config.md), which prints your resolved application config to the terminal:
+[config command](/reference/cli/docker/compose/config/), which prints your resolved application config to the terminal:
 
 ```console
 $ docker compose config
@@ -64,8 +64,12 @@ Docker Compose can interpolate variables into your Compose file from multiple so
 Note that when the same variable is declared by multiple sources, precedence applies:
 
 1. Variables from your shell environment
-2. If `--env-file` is not set, variables set by an `.env` file in local working directory (`PWD`)
-3. Variables from a file set by `--env-file` or an `.env` file in project directory
+2. Variables from a file set by `--env-file`
+3. If `--env-file` is not set, variables from an `.env` file in the project directory,
+   where the project directory is:
+   - `--project-directory` if set
+   - otherwise, the directory of the first Compose file specified with `-f`/`--file`
+   - otherwise, your shell's current directory (`PWD`)
 
 You can check variables and values used by Compose to interpolate the Compose model by running `docker compose config --environment`.
 
@@ -130,9 +134,13 @@ The following syntax rules apply to environment files:
 - Blank lines are ignored.
 - Unquoted and double-quoted (`"`) values have interpolation applied.
 - Each line represents a key-value pair. Values can optionally be quoted.
+- Delimiter separating key and value can be either `=` or `:`.
+- Spaces before and after value are ignored.
   - `VAR=VAL` -> `VAL`
   - `VAR="VAL"` -> `VAL`
   - `VAR='VAL'` -> `VAL`
+  - `VAR: VAL` -> `VAL`
+  - `VAR = VAL  ` -> `VAL` <!-- markdownlint-disable-line no-space-in-code -->
 - Inline comments for unquoted values must be preceded with a space.
   - `VAR=VAL # comment` -> `VAL`
   - `VAR=VAL# not a comment` -> `VAL# not a comment`
@@ -149,6 +157,21 @@ The following syntax rules apply to environment files:
   - `VAR="some\tvalue"` -> `some  value`
   - `VAR='some\tvalue'` -> `some\tvalue`
   - `VAR=some\tvalue` -> `some\tvalue`
+- Single-quoted values can span multiple lines. Example:
+
+   ```yaml
+   KEY='SOME
+   VALUE'
+   ```
+
+   If you then run `docker compose config`, you'll see:
+  
+   ```yaml
+   environment:
+     KEY: |-
+       SOME
+       VALUE
+   ```
 
 ### Substitute with `--env-file`
 
@@ -207,9 +230,13 @@ $ docker compose --env-file ./config/.env.dev up
 
 An `.env` file can also be used to declare [pre-defined environment variables](envvars.md) used to control Compose behavior and files to be loaded. 
 
-When executed without an explicit `--env-file` flag, Compose searches for an `.env` file in your working directory ([PWD](https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html#index-PWD)) and loads values 
-both for self-configuration and interpolation. If the values in this file define the `COMPOSE_FILE` pre-defined variable, which results in a project directory being set to another folder, 
-Compose will load a second `.env` file, if present. This second `.env` file has a lower precedence. 
+When executed without an explicit `--env-file` flag, Compose searches for an `.env` file
+in the project directory and loads values both for self-configuration and interpolation.
+The project directory is determined by `--project-directory` if set, otherwise by the
+directory of the first Compose file specified with `-f`/`--file`, otherwise `PWD`.
+If the values in this file define the `COMPOSE_FILE` pre-defined variable, which results
+in a project directory being set to another folder, Compose loads a second `.env` file,
+if present. This second `.env` file has a lower precedence. 
 
 This mechanism makes it possible to invoke an existing Compose project with a custom set of variables as overrides, without the need to pass environment variables by the command line.
 

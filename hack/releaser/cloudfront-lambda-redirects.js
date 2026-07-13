@@ -52,5 +52,40 @@ exports.handler = (event, context, callback) => {
         return
     }
 
+    // Check Accept header for markdown/text requests
+    const headers = request.headers;
+    const acceptHeader = headers.accept ? headers.accept[0].value : '';
+    const wantsMarkdown = acceptHeader.includes('text/markdown') ||
+                          acceptHeader.includes('text/plain');
+
+    // Handle directory requests by appending index.html or index.md for requests without file extensions
+    let uri = request.uri;
+
+    // Check if the URI has a dot after the last slash (indicating a filename)
+    // This is more accurate than just checking the end of the URI
+    const hasFileExtension = /\.[^/]*$/.test(uri.split('/').pop());
+
+    // If it's not a file, treat it as a directory
+    if (!hasFileExtension) {
+        if (wantsMarkdown) {
+            // Markdown files are flattened: /path/to/page.md not /path/to/page/index.md.
+            // The homepage markdown output remains at /index.md.
+            const stripped = uri.replace(/\/$/, '');
+            uri = stripped === '' ? '/index.md' : stripped + '.md';
+        } else {
+            // HTML uses directory structure with index.html
+            if (!uri.endsWith("/")) {
+                uri += "/";
+            }
+            uri += "index.html";
+        }
+        request.uri = uri;
+    } else if (wantsMarkdown && uri.endsWith('/index.html')) {
+        // If requesting index.html but wants markdown, use the flattened .md file.
+        // The homepage markdown output lives at /index.md.
+        uri = uri === '/index.html' ? '/index.md' : uri.replace(/\/index\.html$/, '.md');
+        request.uri = uri;
+    }
+
     callback(null, request);
 };

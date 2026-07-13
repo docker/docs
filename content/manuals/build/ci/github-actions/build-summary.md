@@ -19,8 +19,8 @@ versions of the [Build and push Docker images](https://github.com/marketplace/ac
 or [Docker Buildx Bake](https://github.com/marketplace/actions/docker-buildx-bake)
 GitHub Actions:
 
-- `docker/build-push-action@v6`
-- `docker/bake-action@v6`
+- `docker/build-push-action@{{% param "build_push_action_version" %}}`
+- `docker/bake-action@{{% param "bake_action_version" %}}`
 
 To view the job summary, open the details page for the job in GitHub after the
 job has finished. The summary is available for both failed and successful
@@ -30,8 +30,6 @@ message that caused the build to fail:
 ![Builds summary error message](../images/build_summary_error.png)
 
 ## Import build records to Docker Desktop
-
-{{< summary-bar feature_name="Import builds" >}}
 
 The job summary includes a link for downloading a build record archive for the
 run. The build record archive is a ZIP file containing the details about a build
@@ -67,7 +65,7 @@ in the YAML configuration for your build step:
 
 ```yaml {hl_lines=4}
       - name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         env:
           DOCKER_BUILD_SUMMARY: false
         with:
@@ -83,7 +81,7 @@ your build step:
 
 ```yaml {hl_lines=4}
       - name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         env:
           DOCKER_BUILD_RECORD_UPLOAD: false
         with:
@@ -98,7 +96,5 @@ contain a link to download the build record archive.
 
 Build summaries are currently not supported for:
 
-- Builds using [Docker Build Cloud](/manuals/build-cloud/_index.md). Support for Docker
-  Build Cloud is planned for a future release.
 - Repositories hosted on GitHub Enterprise Servers. Summaries can only be
   viewed for repositories hosted on GitHub.com.

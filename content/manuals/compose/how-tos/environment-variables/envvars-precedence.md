@@ -6,13 +6,12 @@ description: Scenario overview illustrating how environment variables are resolv
 keywords: compose, environment, env file
 weight: 20
 aliases:
-- /compose/envvars-precedence/
 - /compose/environment-variables/envvars-precedence/
 ---
 
 When the same environment variable is set in multiple sources, Docker Compose follows a precedence rule to determine the value for that variable in your container's environment.
 
-This page contains information on the level of precedence each method of setting environmental variables takes.
+This page explains how Docker Compose determines the final value of an environment variable when it's defined in multiple locations.
 
 The order of precedence (highest to lowest) is as follows:
 1. Set using [`docker compose run -e` in the CLI](set-environment-variables.md#set-environment-variables-with-docker-compose-run---env).
@@ -21,6 +20,15 @@ The order of precedence (highest to lowest) is as follows:
 4. Use of the [`env_file` attribute](set-environment-variables.md#use-the-env_file-attribute) in the Compose file.
 5. Set in a container image in the [ENV directive](/reference/dockerfile.md#env).
    Having any `ARG` or `ENV` setting in a `Dockerfile` evaluates only if there is no Docker Compose entry for `environment`, `env_file` or `run --env`.
+
+> [!NOTE] 
+> 
+> When `--env-file` is not set, Compose may load up to two `.env` files.
+> It first loads one from the project directory (determined by `--project-directory`
+> if set, otherwise the directory of the first `-f`/`--file` Compose file, otherwise
+> `PWD`). If that file sets `COMPOSE_FILE` to a path in a different directory, Compose
+> loads a second `.env` file from that directory with lower precedence. For more
+> information, see [local `.env` file versus project directory `.env` file](variable-interpolation.md#local-env-file-versus-project-directory-env-file).
 
 ## Simple example
 
@@ -59,25 +67,25 @@ The columns `Host OS environment` and `.env` file is listed only for illustratio
 
 Each row represents a combination of contexts where `VALUE` is set, substituted, or both. The **Result** column indicates the final value for `VALUE` in each scenario.
 
-|  # |  `docker compose run`  |  `environment` attribute  |  `env_file` attribute  |  Image `ENV` |  `Host OS` environment  |  `.env` file      | |  Result  |
-|:--:|:----------------:|:-------------------------------:|:----------------------:|:------------:|:-----------------------:|:-----------------:|:---:|:----------:|
-|  1 |   -              |   -                             |   -                    |   -          |  `VALUE=1.4`            |  `VALUE=1.3`      || -               |
-|  2 |   -              |   -                             |  `VALUE=1.6`           |  `VALUE=1.5` |  `VALUE=1.4`            |   -               ||**`VALUE=1.6`**  |
-|  3 |   -              |  `VALUE=1.7`                    |   -                    |  `VALUE=1.5` |  `VALUE=1.4`            |   -               ||**`VALUE=1.7`**  |
-|  4 |   -              |   -                             |   -                    |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      ||**`VALUE=1.5`**  |
-|  5 |`--env VALUE=1.8` |   -                             |   -                    |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      ||**`VALUE=1.8`**  |
-|  6 |`--env VALUE`     |   -                             |   -                    |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      ||**`VALUE=1.4`**  |
-|  7 |`--env VALUE`     |   -                             |   -                    |  `VALUE=1.5` |   -                     |  `VALUE=1.3`      ||**`VALUE=1.3`**  |
-|  8 |   -              |   -                             |   `VALUE`              |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      ||**`VALUE=1.4`**  |
-|  9 |   -              |   -                             |   `VALUE`              |  `VALUE=1.5` |   -                     |  `VALUE=1.3`      ||**`VALUE=1.3`**  |
-| 10 |   -              |  `VALUE`                        |   -                    |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      ||**`VALUE=1.4`**  |
-| 11 |   -              |  `VALUE`                        |   -                    |  `VALUE=1.5` |  -                      |  `VALUE=1.3`      ||**`VALUE=1.3`**  |
-| 12 |`--env VALUE`     |  `VALUE=1.7`                    |   -                    |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      ||**`VALUE=1.4`**  |
-| 13 |`--env VALUE=1.8` |  `VALUE=1.7`                    |   -                    |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      ||**`VALUE=1.8`**  |
-| 14 |`--env VALUE=1.8` |   -                             |  `VALUE=1.6`           |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      ||**`VALUE=1.8`**  |
-| 15 |`--env VALUE=1.8` |  `VALUE=1.7`                    |  `VALUE=1.6`           |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      ||**`VALUE=1.8`**  |
+|  # |  `docker compose run`  |  `environment` attribute  |  `env_file` attribute  |  Image `ENV` |  `Host OS` environment  |  `.env` file      |   Result  |
+|:--:|:----------------:|:-------------------------------:|:----------------------:|:------------:|:-----------------------:|:-----------------:|:----------:|
+|  1 |   -              |   -                             |   -                    |   -          |  `VALUE=1.4`            |  `VALUE=1.3`      | -               |
+|  2 |   -              |   -                             |  `VALUE=1.6`           |  `VALUE=1.5` |  `VALUE=1.4`            |   -               |**`VALUE=1.6`**  |
+|  3 |   -              |  `VALUE=1.7`                    |   -                    |  `VALUE=1.5` |  `VALUE=1.4`            |   -               |**`VALUE=1.7`**  |
+|  4 |   -              |   -                             |   -                    |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      |**`VALUE=1.5`**  |
+|  5 |`--env VALUE=1.8` |   -                             |   -                    |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      |**`VALUE=1.8`**  |
+|  6 |`--env VALUE`     |   -                             |   -                    |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      |**`VALUE=1.4`**  |
+|  7 |`--env VALUE`     |   -                             |   -                    |  `VALUE=1.5` |   -                     |  `VALUE=1.3`      |**`VALUE=1.3`**  |
+|  8 |   -              |   -                             |   `VALUE`              |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      |**`VALUE=1.4`**  |
+|  9 |   -              |   -                             |   `VALUE`              |  `VALUE=1.5` |   -                     |  `VALUE=1.3`      |**`VALUE=1.3`**  |
+| 10 |   -              |  `VALUE`                        |   -                    |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      |**`VALUE=1.4`**  |
+| 11 |   -              |  `VALUE`                        |   -                    |  `VALUE=1.5` |  -                      |  `VALUE=1.3`      |**`VALUE=1.3`**  |
+| 12 |`--env VALUE`     |  `VALUE=1.7`                    |   -                    |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      |**`VALUE=1.4`**  |
+| 13 |`--env VALUE=1.8` |  `VALUE=1.7`                    |   -                    |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      |**`VALUE=1.8`**  |
+| 14 |`--env VALUE=1.8` |   -                             |  `VALUE=1.6`           |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      |**`VALUE=1.8`**  |
+| 15 |`--env VALUE=1.8` |  `VALUE=1.7`                    |  `VALUE=1.6`           |  `VALUE=1.5` |  `VALUE=1.4`            |  `VALUE=1.3`      |**`VALUE=1.8`**  |
 
-### Result explanation
+### Understanding precedence results
 
 Result 1: The local environment takes precedence, but the Compose file is not set to replicate this inside the container, so no such variable is set.
 
@@ -87,7 +95,7 @@ Result 3: The `environment` attribute in the Compose file defines an explicit va
 
 Result 4: The image's `ENV` directive declares the variable `VALUE`, and since the Compose file is not set to override this value, this variable is defined by image
 
-Result 5: The `docker compose run` command has the `--env` flag set which an explicit value, and overrides the value set by the image. 
+Result 5: The `docker compose run` command has the `--env` flag set with an explicit value, and overrides the value set by the image. 
 
 Result 6: The `docker compose run` command has the `--env` flag set to replicate the value from the environment. Host OS value takes precedence and is replicated into the container's environment.
 
@@ -104,3 +112,8 @@ Result 11: The `environment` attribute in the Compose file is set to replicate `
 Result 12: The `--env` flag has higher precedence than the `environment` and `env_file` attributes and is to set to replicate `VALUE` from the local environment. Host OS value takes precedence and is replicated into the container's environment.
 
 Results 13 to 15: The `--env` flag has higher precedence than the `environment` and `env_file` attributes and so sets the value. 
+
+## Next steps
+
+- [Set environment variables in Compose](set-environment-variables.md)
+- [Use variable interpolation in Compose files](variable-interpolation.md)

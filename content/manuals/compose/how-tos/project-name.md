@@ -1,20 +1,20 @@
 ---
 title: Specify a project name
 weight: 10
-description: Understand the different ways you can set a project name in Compose and what the precedence is.
+description: Learn how to set a custom project name in Compose and understand the precedence of each method.
 keywords: name, compose, project, -p flag, name top-level element
 aliases:
 - /compose/project-name/
 ---
 
-In Compose, the default project name is derived from the base name of the project directory. However, you have the flexibility to set a custom project name. 
+By default, Compose assigns the project name based on the name of the directory that contains the Compose file. You can override this with several methods.
 
 This page offers examples of scenarios where custom project names can be helpful, outlines the various methods to set a project name, and provides the order of precedence for each approach.
 
 > [!NOTE]
 >
 > The default project directory is the base directory of the Compose file. A custom value can also be set
-> for it using the [`--project-directory` command line option](/reference/cli/docker/compose.md#use--p-to-specify-a-project-name).
+> for it using the [`--project-directory` command line option](/reference/cli/docker/compose/#options).
 
 ## Example use cases
 
@@ -42,4 +42,4 @@ The precedence order for each method, from highest to lowest, is as follows:
 ## What's next?
 
 - Read up on [working with multiple Compose files](multiple-compose-files/_index.md).
-- Explore some [sample apps](samples-for-compose.md).
+- Explore some [sample apps](https://github.com/docker/awesome-compose).

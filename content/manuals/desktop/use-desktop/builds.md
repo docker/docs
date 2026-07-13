@@ -16,9 +16,7 @@ connected to the same cloud builder.
 
 > [!NOTE]
 >
-> When building Windows container images using the `docker build` command, the legacy builder is used which does not populate the **Builds** view. To switch to using BuildKit, you can either:
-> - Set `DOCKER_BUILDKIT=1` in the build command, such as `DOCKER_BUILDKIT=1 docker build .` or
-> - Use the `docker buildx build` command
+> Windows container image builds use the legacy builder and do not appear in the **Builds** view. Only BuildKit-powered builds are shown here.
 
 ## Show build list
 
@@ -36,8 +34,6 @@ The top-right corner shows the name of your currently selected builder, and the
 Docker Desktop settings.
 
 ### Import builds
-
-{{< summary-bar feature_name="Import builds" >}}
 
 The **Import builds** button lets you import build records for builds by other
 people, or builds in a CI environment. When you've imported a build record, it

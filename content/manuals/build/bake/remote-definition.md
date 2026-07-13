@@ -176,7 +176,7 @@ and use the `cwd://` prefix for the metadata Bake file:
 
 ```yml
       - name: Build
-        uses: docker/bake-action@v6
+        uses: docker/bake-action@{{% param "bake_action_version" %}}
         with:
           files: |
             ./docker-bake.hcl

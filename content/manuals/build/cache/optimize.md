@@ -116,13 +116,16 @@ instruction in your Dockerfile:
 
 ```dockerfile
 FROM golang:latest
-WORKDIR /app
+WORKDIR /build
 RUN --mount=type=bind,target=. go build -o /app/hello
 ```
 
-In this example, the current directory is mounted into the build container
-before the `go build` command gets executed. The source code is available in
-the build container for the duration of that `RUN` instruction. When the
+In this example, the current directory is mounted into the build container at
+`/build` before the `go build` command gets executed. The build output is
+written to `/app/hello`, which is outside the mount point. This distinction is
+important: the build output must be written outside the bind mount target,
+since the mount is read-only by default. The source code is available in the
+build container for the duration of that `RUN` instruction. When the
 instruction is done executing, the mounted files are not persisted in the final
 image, or in the build cache. Only the output of the `go build` command
 remains.
@@ -225,6 +228,7 @@ tool you're using. Here are a few examples:
 
 ```dockerfile
 RUN --mount=type=cache,target=/go/pkg/mod \
+    --mount=type=cache,target=/root/.cache/go-build \
     go build -o /app/hello
 ```
 
@@ -324,16 +328,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@{{% param "login_action_version" %}}
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           push: true
           tags: user/app:latest

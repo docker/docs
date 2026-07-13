@@ -1,0 +1,27 @@
+name: sbx completion powershell
+synopsis: Generate the autocompletion script for powershell
+description: |
+    Generate the autocompletion script for powershell.
+
+    To load completions in your current shell session:
+
+    	sbx completion powershell | Out-String | Invoke-Expression
+
+    To load completions for every new session, add the output of the above command
+    to your powershell profile.
+usage: sbx completion powershell [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for powershell
+    - name: no-descriptions
+      default_value: "false"
+      usage: disable completion descriptions
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx completion - Generate the autocompletion script for the specified shell

@@ -1,0 +1,700 @@
+{{/* Wide-mode API reference layout.
+
+  Reads the colocated *.yaml Page Resource, unmarshals it into a plain Hugo
+  map with transform.Unmarshal, and renders the OpenAPI 3 spec inline using
+  Docker docs styling. Overrides baseof's "main" block so the article spans
+  the full available width; the built-in right-rail TOC is replaced with a
+  custom endpoint navigator (partials/api-ref/nav.html) sticky-pinned to
+  the viewport.
+
+  $ref nodes are resolved on the fly through partials/api-ref/resolve.html;
+  no oapi-codegen or third-party JS runtime is involved.
+*/}}
+
+{{ define "main" }}
+  {{- $specRes := .Resources.GetMatch "*.yaml" -}}
+  {{- if not $specRes -}}
+    {{- errorf "api-reference: no .yaml resource found alongside %s" .File.Path -}}
+  {{- end -}}
+  {{- $api := $specRes | transform.Unmarshal -}}
+
+
+  <div class="flex w-full min-w-0 gap-8">
+    <div class="min-w-0 flex-1">
+      {{ partial "breadcrumbs.html" . }}
+      <h1 data-pagefind-weight="10" class="mb-2 text-3xl font-bold">
+        {{ .Title | safeHTML }}
+      </h1>
+      {{ with .Description }}
+        <p class="text-gray-600 dark:text-gray-400">{{ . }}</p>
+      {{ end }}
+      {{ template "api-ref-meta" (dict "api" $api "spec" $specRes) }}
+      {{ partialCached "md-dropdown.html" "-" "-" }}
+
+      {{ template "api-ref-overview" $api }}
+      {{ template "api-ref-auth" $api }}
+      {{ template "api-ref-tags" $api }}
+      {{ template "api-ref-schemas" $api }}
+    </div>
+
+    <aside class="hidden w-56 flex-none lg:block">
+      <nav
+        class="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto text-sm"
+      >
+        {{ partial "api-ref/nav.html" $api }}
+      </nav>
+    </aside>
+  </div>
+{{ end }}
+
+{{/* ── Meta strip: version, base URL, download link ──────────────────────── */}}
+{{ define "api-ref-meta" }}
+  {{- $api := .api -}}
+  {{- $spec := .spec -}}
+  <div class="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+    {{- with $api.info }}
+      {{- with .version }}
+        <div>
+          <span class="font-medium text-gray-500 dark:text-gray-400"
+            >Version</span
+          >
+          <code
+            class="ml-1 rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800"
+            >{{ . }}</code
+          >
+        </div>
+      {{- end }}
+    {{- end }}
+    {{- range $api.servers }}
+      <div>
+        <span class="font-medium text-gray-500 dark:text-gray-400"
+          >Base URL</span
+        >
+        <code
+          class="ml-1 rounded bg-gray-100 px-1.5 py-0.5 text-xs text-blue-600 dark:bg-gray-800 dark:text-blue-400"
+          >{{ .url }}</code
+        >
+      </div>
+    {{- end }}
+    <a
+      href="{{ $spec.Permalink }}"
+      class="ml-auto text-blue-600 hover:underline dark:text-blue-400"
+      >Download OpenAPI specification</a
+    >
+  </div>
+{{ end }}
+
+{{/* ── Overview ─────────────────────────────────────────────────────────── */}}
+{{ define "api-ref-overview" }}
+  {{- $api := . -}}
+  {{- with $api.info }}
+    {{- with .description }}
+      <section class="mb-10">
+        <div class="prose dark:prose-invert max-w-none">
+          {{ . | markdownify }}
+        </div>
+      </section>
+    {{- end }}
+  {{- end }}
+{{ end }}
+
+{{/* ── Authentication ───────────────────────────────────────────────────── */}}
+{{ define "api-ref-auth" }}
+  {{- $api := . -}}
+  {{- with $api.components }}
+    {{- with .securitySchemes }}
+      <section class="mb-12">
+        <h2
+          id="authentication"
+          class="mb-4 scroll-mt-24 text-2xl font-semibold"
+        >
+          Authentication
+        </h2>
+        {{- range $name, $scheme := . }}
+          <div class="mb-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+            <code
+              class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800"
+              >{{ $name }}</code
+            >
+            {{- with $scheme.type }}
+              <span class="text-gray-500 dark:text-gray-400"
+                >type: <code class="text-xs">{{ . }}</code></span
+              >
+            {{- end }}
+            {{- with $scheme.scheme }}
+              <span class="text-gray-500 dark:text-gray-400"
+                >scheme: <code class="text-xs">{{ . }}</code></span
+              >
+            {{- end }}
+            {{- with $scheme.bearerFormat }}
+              <span class="text-gray-500 dark:text-gray-400"
+                >bearer format: <code class="text-xs">{{ . }}</code></span
+              >
+            {{- end }}
+          </div>
+          {{- with $scheme.description }}
+            <div class="prose dark:prose-invert max-w-none">
+              {{ . | markdownify }}
+            </div>
+          {{- end }}
+        {{- end }}
+      </section>
+    {{- end }}
+  {{- end }}
+{{ end }}
+
+{{/* ── Endpoints grouped by tag ─────────────────────────────────────────── */}}
+{{ define "api-ref-tags" }}
+  {{- $api := . -}}
+  {{- $paths := $api.paths -}}
+  {{- $methods := slice "get" "post" "put" "patch" "delete" -}}
+  {{- range $api.tags }}
+    {{- $tagName := .name -}}
+    <section class="mb-14">
+      <h2
+        id="tag-{{ $tagName | urlize }}"
+        class="mb-1 scroll-mt-24 text-2xl font-semibold"
+      >
+        {{ $tagName | title }}
+      </h2>
+      {{- with .description }}
+        <p class="mb-6 text-sm text-gray-500 dark:text-gray-400">{{ . }}</p>
+      {{- end }}
+
+      {{- range $path, $item := $paths }}
+        {{/* Resolve shared (path-level) parameters once. */}}
+        {{- $sharedParams := slice -}}
+        {{- with index $item "parameters" -}}
+          {{- range . -}}
+            {{- $p := partial "api-ref/resolve.html" (dict "api" $api "node" .) -}}
+            {{- $sharedParams = $sharedParams | append $p -}}
+          {{- end -}}
+        {{- end -}}
+
+        {{- range $methods -}}
+          {{- $method := . -}}
+          {{- with index $item $method -}}
+            {{- $op := . -}}
+            {{- if in $op.tags $tagName -}}
+              {{ template "api-ref-operation" (dict
+                "api" $api
+                "op" $op
+                "method" $method
+                "path" $path
+                "sharedParams" $sharedParams
+                )
+              }}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end }}
+    </section>
+  {{- end }}
+{{ end }}
+
+{{/* ── Single operation card ────────────────────────────────────────────── */}}
+{{ define "api-ref-operation" }}
+  {{- $api := .api -}}
+  {{- $op := .op -}}
+  {{- $method := .method -}}
+  {{- $path := .path -}}
+  {{- $sharedParams := .sharedParams -}}
+
+  {{- $methodColors := dict
+    "get"    "bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300"
+    "post"   "bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300"
+    "put"    "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-300"
+    "patch"  "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-300"
+    "delete" "bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300"
+  -}}
+
+  {{- $anchor := "" -}}
+  {{- with $op.operationId -}}
+    {{- $anchor = printf "operation-%s" . -}}
+  {{- end -}}
+
+  {{- $curl := partial "api-ref/curl.html" (dict
+    "api" $api
+    "op" $op
+    "method" $method
+    "path" $path
+    "sharedParams" $sharedParams
+    )
+  -}}
+
+
+  <div
+    {{ with $anchor }}id="{{ . }}"{{ end }}
+    class="mb-8 scroll-mt-24 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700"
+  >
+    <div
+      class="flex flex-wrap items-center gap-3 border-b border-gray-200 bg-gray-50 px-4 py-3 dark:border-gray-700 dark:bg-gray-900"
+    >
+      <span
+        class="{{ index $methodColors $method }} inline-block rounded px-2 py-0.5 font-mono text-xs font-bold uppercase"
+        >{{ upper $method }}</span
+      >
+      <code class="font-mono text-sm">{{ $path }}</code>
+      <div class="ml-auto flex items-center gap-3">
+        {{- with $op.summary }}
+          <span class="text-sm font-medium text-gray-700 dark:text-gray-300"
+            >{{ . }}</span
+          >
+        {{- end }}
+        <button
+          x-data="{ copied: false }"
+          @click="navigator.clipboard.writeText({{ $curl | jsonify }}).then(() => { copied = true; setTimeout(() => copied = false, 2000) })"
+          :title="copied ? 'Copied!' : 'Copy as cURL'"
+          class="inline-flex cursor-pointer items-center gap-1 rounded border border-gray-200 bg-white px-2 py-1 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+        >
+          <span class="icon-svg icon-sm" x-show="!copied" x-cloak>
+            {{ partialCached "icon" "document-duplicate" "document-duplicate" }}
+          </span>
+          <span
+            class="icon-svg icon-sm text-green-600 dark:text-green-400"
+            x-show="copied"
+            x-cloak
+          >
+            {{ partialCached "icon" "check-circle" "check-circle" }}
+          </span>
+          <span x-text="copied ? 'Copied' : 'cURL'"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="p-5">
+      {{- with $op.description }}
+        <div class="prose dark:prose-invert prose-sm mb-5 max-w-none">
+          {{ . | markdownify }}
+        </div>
+      {{- end }}
+
+      {{ template "api-ref-params" (dict
+        "api" $api
+        "op" $op
+        "sharedParams" $sharedParams
+        )
+      }}
+
+      {{ template "api-ref-body" (dict "api" $api "op" $op) }}
+
+      {{ template "api-ref-responses" (dict "api" $api "op" $op) }}
+    </div>
+  </div>
+{{ end }}
+
+{{/* ── Parameters table (path + operation; in: path/query/header) ───────── */}}
+{{ define "api-ref-params" }}
+  {{- $api := .api -}}
+  {{- $op := .op -}}
+  {{- $params := .sharedParams -}}
+  {{- with index $op "parameters" -}}
+    {{- range . -}}
+      {{- $p := partial "api-ref/resolve.html" (dict "api" $api "node" .) -}}
+      {{- $params = $params | append $p -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if $params }}
+    <div class="mb-5">
+      <h4
+        class="mb-2 text-xs font-semibold tracking-wider text-gray-500 uppercase dark:text-gray-400"
+      >
+        Parameters
+      </h4>
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-gray-200 dark:border-gray-700">
+            <th
+              class="w-36 py-1.5 pr-4 text-left font-medium text-gray-700 dark:text-gray-300"
+            >
+              Name
+            </th>
+            <th
+              class="w-16 py-1.5 pr-4 text-left font-medium text-gray-700 dark:text-gray-300"
+            >
+              In
+            </th>
+            <th
+              class="w-20 py-1.5 pr-4 text-left font-medium text-gray-700 dark:text-gray-300"
+            >
+              Type
+            </th>
+            <th
+              class="w-20 py-1.5 pr-4 text-left font-medium text-gray-700 dark:text-gray-300"
+            >
+              Required
+            </th>
+            <th
+              class="py-1.5 text-left font-medium text-gray-700 dark:text-gray-300"
+            >
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {{- range $params }}
+            <tr
+              class="border-b border-gray-100 last:border-0 dark:border-gray-800"
+            >
+              <td class="py-1.5 pr-4 align-top">
+                <code class="rounded bg-gray-100 px-1 text-xs dark:bg-gray-800"
+                  >{{ .name }}</code
+                >
+              </td>
+              <td
+                class="py-1.5 pr-4 align-top text-xs text-gray-500 dark:text-gray-400"
+              >
+                {{ .in }}
+              </td>
+              <td
+                class="py-1.5 pr-4 align-top font-mono text-xs text-gray-500 dark:text-gray-400"
+              >
+                {{ template "api-ref-type" (dict "api" $api "schema" .schema) }}
+              </td>
+              <td
+                class="py-1.5 pr-4 align-top text-xs text-gray-500 dark:text-gray-400"
+              >
+                {{ if .required }}yes{{ else }}no{{ end }}
+              </td>
+              <td
+                class="py-1.5 align-top text-sm text-gray-600 dark:text-gray-400"
+              >
+                {{ with .description }}{{ . | markdownify }}{{ end }}
+              </td>
+            </tr>
+          {{- end }}
+        </tbody>
+      </table>
+    </div>
+  {{- end }}
+{{ end }}
+
+{{/* ── Request body ─────────────────────────────────────────────────────── */}}
+{{ define "api-ref-body" }}
+  {{- $api := .api -}}
+  {{- $op := .op -}}
+  {{- with $op.requestBody }}
+    {{- $body := partial "api-ref/resolve.html" (dict "api" $api "node" .) }}
+    <div class="mb-5">
+      <h4
+        class="mb-2 text-xs font-semibold tracking-wider text-gray-500 uppercase dark:text-gray-400"
+      >
+        Request body
+      </h4>
+      {{- with $body.description }}
+        <p class="mb-2 text-sm text-gray-600 dark:text-gray-400">
+          {{ . | markdownify }}
+        </p>
+      {{- end }}
+      {{- $ct := "" -}}
+      {{- $media := dict -}}
+      {{- range $name, $m := $body.content -}}
+        {{- if not $ct -}}{{- $ct = $name -}}{{- $media = $m -}}{{- end -}}
+      {{- end -}}
+      {{- if $ct }}
+        <p class="mb-2 text-xs text-gray-500 dark:text-gray-400">
+          Content type:
+          <code class="rounded bg-gray-100 px-1 dark:bg-gray-800"
+            >{{ $ct }}</code
+          >
+        </p>
+        {{ template "api-ref-schema-link" (dict "api" $api "schema" $media.schema) }}
+        {{ template "api-ref-examples" (dict
+          "examples" $media.examples
+          "prefix" "req"
+          )
+        }}
+      {{- end }}
+    </div>
+  {{- end }}
+{{ end }}
+
+{{/* ── Responses ────────────────────────────────────────────────────────── */}}
+{{ define "api-ref-responses" }}
+  {{- $api := .api -}}
+  {{- $op := .op -}}
+  {{- $statusColors := dict
+    "200" "bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300"
+    "201" "bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300"
+    "204" "bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300"
+    "400" "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-300"
+    "401" "bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300"
+    "403" "bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300"
+    "404" "bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300"
+    "409" "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-300"
+    "500" "bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300"
+  -}}
+  {{- with $op.responses }}
+    <div>
+      <h4
+        class="mb-2 text-xs font-semibold tracking-wider text-gray-500 uppercase dark:text-gray-400"
+      >
+        Responses
+      </h4>
+      <div class="space-y-2">
+        {{- range $code, $resp := . }}
+          {{- $r := partial "api-ref/resolve.html" (dict "api" $api "node" $resp) }}
+          <details
+            {{ if hasPrefix $code "2" }}open{{ end }}
+            class="group rounded border border-gray-200 dark:border-gray-700"
+          >
+            <summary
+              class="flex cursor-pointer list-none items-center gap-2 rounded-t bg-gray-50 px-3 py-2 dark:bg-gray-900 [&::-webkit-details-marker]:hidden"
+            >
+              <span
+                class="inline-block text-gray-400 transition-transform group-open:rotate-90 dark:text-gray-500"
+                >&#9656;</span
+              >
+              <span
+                class="{{ index $statusColors $code | default "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300" }} inline-block rounded px-1.5 py-0.5 font-mono text-xs font-semibold"
+                >{{ $code }}</span
+              >
+              <span class="text-sm text-gray-600 dark:text-gray-400"
+                >{{ $r.description }}</span
+              >
+            </summary>
+            {{- $ct := "" -}}
+            {{- $media := dict -}}
+            {{- range $name, $m := $r.content -}}
+              {{- if not $ct -}}
+                {{- $ct = $name -}}{{- $media = $m -}}
+              {{- end -}}
+            {{- end -}}
+            {{- if $ct }}
+              <div class="px-3 pt-2 pb-3">
+                {{ template "api-ref-schema-link" (dict "api" $api "schema" $media.schema) }}
+                {{ template "api-ref-examples" (dict
+                  "examples" $media.examples
+                  "prefix" (printf "resp-%s" $code)
+                  )
+                }}
+              </div>
+            {{- end }}
+          </details>
+        {{- end }}
+      </div>
+    </div>
+  {{- end }}
+{{ end }}
+
+{{/* ── Example block with optional tabs ─────────────────────────────────── */}}
+{{ define "api-ref-examples" }}
+  {{- $examples := .examples -}}
+  {{- $prefix := .prefix -}}
+  {{- $tabs := slice -}}
+  {{- range $name, $ex := $examples -}}
+    {{- $tabs = $tabs | append (dict "name" $name "ex" $ex) -}}
+  {{- end -}}
+  {{- if $tabs }}
+    {{- $first := (index $tabs 0).name -}}
+    <div
+      {{ if gt (len $tabs) 1 }}x-data="{ tab: {{ $first | jsonify }} }"{{ end }}
+    >
+      {{- if gt (len $tabs) 1 }}
+        <div class="mb-2 flex flex-wrap gap-1">
+          {{- range $tabs }}
+            {{- $label := .name -}}
+            {{- with .ex.summary }}{{ $label = . }}{{ end -}}
+            <button
+              @click="tab = {{ .name | jsonify }}"
+              :class="tab === {{ .name | jsonify }} ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' : 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400'"
+              class="rounded px-2 py-0.5 text-xs font-medium"
+            >
+              {{ $label }}
+            </button>
+          {{- end }}
+        </div>
+      {{- end }}
+      {{- range $tabs }}
+        <div
+          {{ if gt (len $tabs) 1 }}
+            x-show="tab === {{ .name | jsonify }}"
+          {{ end }}
+        >
+          {{- with .ex.value -}}
+            <div
+              class="syntax-light dark:syntax-dark not-prose overflow-hidden rounded border border-gray-200 dark:border-gray-700"
+            >
+              {{ highlight (. | jsonify (dict "indent" "  ")) "json" "" }}
+            </div>
+          {{- end }}
+        </div>
+      {{- end }}
+    </div>
+  {{- end }}
+{{ end }}
+
+{{/* ── Inline schema-reference link (used in body/response) ─────────────── */}}
+{{ define "api-ref-schema-link" }}
+  {{- $api := .api -}}
+  {{- $schema := .schema -}}
+  {{- if reflect.IsMap $schema -}}
+    {{- with index $schema "$ref" -}}
+      {{- $parts := split . "/" -}}
+      {{- $name := index $parts (sub (len $parts) 1) -}}
+      <p class="mb-2 text-xs text-gray-500 dark:text-gray-400">
+        Schema:
+        <a
+          href="#schema-{{ $name | urlize }}"
+          class="font-mono text-blue-600 hover:underline dark:text-blue-400"
+          >{{ $name }}</a
+        >
+      </p>
+    {{- end -}}
+  {{- end -}}
+{{ end }}
+
+{{/* ── Type rendering for parameter / property tables ───────────────────── */}}
+{{ define "api-ref-type" }}
+  {{- $api := .api -}}
+  {{- $schema := .schema -}}
+  {{- if not (reflect.IsMap $schema) -}}
+    —
+  {{- else -}}
+    {{- with index $schema "$ref" -}}
+      {{- $parts := split . "/" -}}
+      {{- $name := index $parts (sub (len $parts) 1) -}}
+      <a
+        href="#schema-{{ $name | urlize }}"
+        class="text-blue-600 hover:underline dark:text-blue-400"
+        >{{ $name }}</a
+      >
+    {{- else -}}
+      {{- with $schema.type -}}
+        {{- if eq . "array" -}}
+          array&lt;{{ template "api-ref-type" (dict "api" $api "schema" $schema.items) }}&gt;
+        {{- else -}}
+          {{ . }}
+        {{- end -}}
+      {{- else -}}
+        {{- if $schema.allOf -}}
+          object
+        {{- else if $schema.anyOf -}}
+          any
+        {{- else if $schema.oneOf -}}
+          any
+        {{- else -}}
+          —
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{ end }}
+
+{{/* ── Schemas section ──────────────────────────────────────────────────── */}}
+{{ define "api-ref-schemas" }}
+  {{- $api := . -}}
+  {{- with $api.components -}}
+    {{- with .schemas }}
+      <section class="mb-12">
+        <h2 id="schemas" class="mb-6 scroll-mt-24 text-2xl font-semibold">
+          Schemas
+        </h2>
+        {{- range $name, $schema := . }}
+          <div
+            id="schema-{{ $name | urlize }}"
+            class="mb-8 scroll-mt-24 rounded border border-gray-200 p-4 dark:border-gray-700"
+          >
+            <h3 class="mb-1 font-mono text-base font-semibold">{{ $name }}</h3>
+            {{- with $schema.description }}
+              <div
+                class="prose dark:prose-invert prose-sm mb-3 max-w-none text-sm"
+              >
+                {{ . | markdownify }}
+              </div>
+            {{- end }}
+            {{- with $schema.enum }}
+              <p class="mb-3 text-sm text-gray-500 dark:text-gray-400">
+                Enum:
+                {{- range $i, $v := . -}}
+                  {{- if $i }},{{ end -}}
+                  <code
+                    class="rounded bg-gray-100 px-1 text-xs dark:bg-gray-800"
+                    >{{ $v }}</code
+                  >
+                {{- end -}}
+              </p>
+            {{- end }}
+            {{- with $schema.properties }}
+              {{ template "api-ref-properties" (dict
+                "api" $api
+                "schema" $schema
+                )
+              }}
+            {{- else }}
+              {{- with $schema.items }}
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                  Items:
+                  <span class="font-mono"
+                    >{{ template "api-ref-type" (dict "api" $api "schema" .) }}</span
+                  >
+                </p>
+              {{- end }}
+            {{- end }}
+          </div>
+        {{- end }}
+      </section>
+    {{- end }}
+  {{- end }}
+{{ end }}
+
+{{/* ── Property table for a schema ──────────────────────────────────────── */}}
+{{ define "api-ref-properties" }}
+  {{- $api := .api -}}
+  {{- $schema := .schema -}}
+  {{- $required := $schema.required | default slice -}}
+  <table class="w-full border-collapse text-sm">
+    <thead>
+      <tr class="border-b border-gray-200 dark:border-gray-700">
+        <th
+          class="w-40 py-1.5 pr-4 text-left font-medium text-gray-700 dark:text-gray-300"
+        >
+          Property
+        </th>
+        <th
+          class="w-32 py-1.5 pr-4 text-left font-medium text-gray-700 dark:text-gray-300"
+        >
+          Type
+        </th>
+        <th
+          class="w-20 py-1.5 pr-4 text-left font-medium text-gray-700 dark:text-gray-300"
+        >
+          Required
+        </th>
+        <th
+          class="py-1.5 text-left font-medium text-gray-700 dark:text-gray-300"
+        >
+          Description
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{- range $propName, $prop := $schema.properties }}
+        <tr class="border-b border-gray-100 last:border-0 dark:border-gray-800">
+          <td class="py-1.5 pr-4 align-top">
+            <code class="rounded bg-gray-100 px-1 text-xs dark:bg-gray-800"
+              >{{ $propName }}</code
+            >
+          </td>
+          <td
+            class="py-1.5 pr-4 align-top font-mono text-xs text-gray-500 dark:text-gray-400"
+          >
+            {{ template "api-ref-type" (dict "api" $api "schema" $prop) }}
+          </td>
+          <td
+            class="py-1.5 pr-4 align-top text-xs text-gray-500 dark:text-gray-400"
+          >
+            {{ if in $required $propName }}yes{{ else }}no{{ end }}
+          </td>
+          <td class="py-1.5 align-top text-sm text-gray-600 dark:text-gray-400">
+            {{- $resolved := partial "api-ref/resolve.html" (dict "api" $api "node" $prop) -}}
+            {{- with $resolved.description -}}
+              {{ . | markdownify }}
+            {{- end -}}
+          </td>
+        </tr>
+      {{- end }}
+    </tbody>
+  </table>
+{{ end }}

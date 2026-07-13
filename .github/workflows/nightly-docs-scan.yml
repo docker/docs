@@ -1,0 +1,86 @@
+name: Nightly Documentation Scan
+
+on:
+  schedule:
+    # Run every day at 3am UTC
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: "Report issues but do not create them"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: nightly-docs-scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      id-token: write
+      contents: read
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          fetch-depth: 1
+
+      - name: Ensure cache directory exists
+        run: mkdir -p "${{ github.workspace }}/.cache"
+
+      - name: Restore scanner state
+        uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+        with:
+          path: |
+            ${{ github.workspace }}/.cache/scanner-memory.db
+            ${{ github.workspace }}/.cache/scan-history.json
+          key: docs-scanner-state-${{ github.repository }}-${{ github.run_id }}
+          restore-keys: |
+            docs-scanner-state-${{ github.repository }}-
+
+      - name: Configure AWS credentials
+        id: aws-credentials
+        continue-on-error: true
+        uses: aws-actions/configure-aws-credentials@d979d5b3a71173a29b74b5b88418bfda9437d885 # v6.1.1
+        with:
+          role-to-assume: arn:aws:iam::710015040892:role/docker-agent-action-20260409141318957000000001
+          aws-region: us-east-1
+
+      - name: Fetch bot PAT
+        if: steps.aws-credentials.outcome == 'success'
+        run: |
+          PAT=$(aws secretsmanager get-secret-value \
+            --secret-id docker-agent-action/github-app \
+            --query SecretString \
+            --output text | jq -r '.pat')
+          echo "::add-mask::$PAT"
+          echo "GITHUB_APP_TOKEN=$PAT" >> "$GITHUB_ENV"
+
+      - name: Run documentation scan
+        uses: docker/docker-agent-action@e96a4bb40cac114f64358621e1d08346c8eadc8c # v2.0.1
+        env:
+          GH_TOKEN: ${{ env.GITHUB_APP_TOKEN || github.token }}
+        with:
+          agent: ${{ github.workspace }}/.github/agents/docs-scanner.yaml
+          prompt: "${{ inputs.dry-run == true && 'DRY RUN MODE: Do not create any GitHub issues. Report what you would create but skip the gh issue create commands.' || 'Run the nightly documentation scan as described in your instructions.' }}"
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github-token: ${{ env.GITHUB_APP_TOKEN || github.token }}
+          timeout: 1200
+
+      - name: Save scanner state
+        uses: actions/cache/save@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+        if: always()
+        with:
+          path: |
+            ${{ github.workspace }}/.cache/scanner-memory.db
+            ${{ github.workspace }}/.cache/scan-history.json
+          key: docs-scanner-state-${{ github.repository }}-${{ github.run_id }}

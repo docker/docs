@@ -10,6 +10,8 @@ aliases:
  - /install/overview/
  - /installation/
  - /get-docker/
+ - /desktop/install/
+ - /desktop/setup/install/
 ---
 
 Docker is an open platform for developing, shipping, and running applications.
@@ -29,7 +31,7 @@ section and choose the best installation path for you.
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) requires a [paid
-> subscription](https://www.docker.com/pricing/).
+> subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsGetDocker).
 
 <div class="not-prose">
 {{< card

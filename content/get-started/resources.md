@@ -9,37 +9,15 @@ Docker and the broader community of Docker experts have put together many differ
 
 ## Docker Training
 
-Expand your knowledge on all things Docker with [basic to advanced trainings from Docker experts](https://www.docker.com/trainings/). 
-
-You can find recorded content at your own convenience, or register for a live session to participate in Q&A.
-
-## Hosted labs
-
-These self-paced and hands-on workshops use a free, hosted environment ([Play with Kubernetes](https://labs.play-with-k8s.com/)) that doesn't require any installation. Follow along and learn more about Kubernetes.
-
-* [Kubernetes Workshop](https://training.play-with-kubernetes.com/kubernetes-workshop/)
-
-\* Labs are free but require registration with a Docker ID.
-
-## Self-guided tutorials
-
-Created by experts in the Docker community, these free tutorials provide guided step-by-step workflows for working with the Docker platform.
-
-* **Integrating Docker with Your IDE**
-    * [Java Development: Eclipse](https://training.play-with-docker.com/java-debugging-eclipse/)
-    * [Java Development: IntelliJ](https://training.play-with-docker.com/java-debugging-intellij/)
-    * [Java Development: Netbeans](https://training.play-with-docker.com/java-debugging-netbeans/)
-    * [Live Debugging Node.js with Docker and Visual Studio Code](https://training.play-with-docker.com/nodejs-live-debugging/)
-
-* **Windows Containers**
-    * [Windows Container Setup](https://training.play-with-docker.com/windows-containers-setup/)
-    * [Windows Container Basics](https://training.play-with-docker.com/windows-containers-basics/)
-    * [Windows Containers Multi-Container Applications](https://training.play-with-docker.com/windows-containers-multicontainer/)
+Learn Docker and containerization fundamentals through self-paced, [hands-on training courses](/get-started/introduction) created by Docker experts.
 
 ## Books
 
 If books are your preferred learning style, check out these written by the [Docker Captains](https://www.docker.com/community/captains). Docker Captain is a distinction that Docker awards to select members of the community that are both experts in their field and are committed to sharing their Docker knowledge with others.
 
+* [Operational AI with Docker](https://www.amazon.com/Operational-AI-Docker-services-Kubernetes/dp/1807301095),  Ajeet Singh Raina & Harsh Manvar, April 2026
+* [Docker and Kubernetes Security](https://www.dockersecurity.io/), Mohammad-Ali A'râbi, October 2025. Get 50% discount on PDF version with the code `AHOYCAPTAIN` on [buy.DockerSecurity.io](https://buy.dockersecurity.io/).
+* [Docker for React.js Developers](https://www.dockerfrontend.com/), Kristiyan Velkov. Learn Docker from a front-end perspective with practical, production-ready examples for modern React.js applications. Get **30% off** with the code `DOCKER30` at [www.dockerfrontend.com](https://www.dockerfrontend.com/) or [www.kristiyanvelkov.com](https://www.kristiyanvelkov.com)
 * [Learn Docker in a Month of Lunches](https://www.manning.com/books/learn-docker-in-a-month-of-lunches), Elton Stoneman. Use the code `stonemanpc` for a 40% discount.
 * [Docker on Windows: From 101 to Production with Docker on Windows](https://www.amazon.com/Docker-Windows-Elton-Stoneman-ebook/dp/B0711Y4J9K/), Elton Stoneman
 * [Learn Kubernetes in a Month of Lunches](https://www.manning.com/books/learn-kubernetes-in-a-month-of-lunches), Elton Stoneman. Use the code `stonemanpc` for a 40% discount.
@@ -62,18 +40,7 @@ A number of Docker Captains have also created video courses on Docker and Kubern
 * [Elton Stoneman](https://docker4.net/udemy): Docker for .NET Apps - on Linux and Windows. Includes the discount code `644ABCBC33F474541885`.
 * [Nick Janetakis](https://nickjanetakis.com/courses/) Dive into Docker, Docker for DevOps
 * [Nigel Poulton](https://nigelpoulton.com/video-courses): Kubernetes 101, Getting Started with Kubernetes, Docker and Kubernetes: The Big Picture, Kubernetes Deep Dive, Docker Deep Dive
-* [Arun Gupta](https://www.lynda.com/Docker-tutorials/Docker-Java-developers/576584-2.html): Docker for Java Developers
 * [Ajeet Singh Raina](https://collabnix.com/): Docker and Kubernetes Labs
 * \[French\] [Luc Juggery](https://www.udemy.com/user/lucjuggery/): Introduction to Kubernetes, The Docker Platform
 
 \* Many of the courses are fee-based
-
-## Community-translated docs
-
-> [!NOTE]
->
-> The following section contains a subset of Docker docs that are translated by community
-> members. This is not an officially translated version of Docker docs and it may not be up to date.
-> You must use the community-translated docs at your own discretion.
-
-- [Subset of Docker docs in Japanese](https://docs.docker.jp/index.html) translated by Docker Captain [Masahito Zembutsu](https://github.com/zembutsu).

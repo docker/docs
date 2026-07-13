@@ -5,14 +5,10 @@ description: Introduction and overview of BuildKit
 keywords: build, buildkit
 ---
 
-## Overview
-
-[BuildKit](https://github.com/moby/buildkit)
-is an improved backend to replace the legacy builder. BuildKit is the default builder
-for users on Docker Desktop, and Docker Engine as of version 23.0.
-
-BuildKit provides new functionality and improves your builds' performance.
-It also introduces support for handling more complex scenarios:
+[BuildKit](https://github.com/moby/buildkit) is the builder backend used by
+Docker. BuildKit provides improved functionality and improves your builds'
+performance over the legacy builder used in earlier versions of Docker. It also
+introduces support for handling more complex scenarios:
 
 - Detect and skip executing unused build stages
 - Parallelize building independent build stages
@@ -21,16 +17,16 @@ It also introduces support for handling more complex scenarios:
 - Detect and skip transferring unused files in your
   [build context](../concepts/context.md)
 - Use [Dockerfile frontend](frontend.md) implementations with many
-  new features
+  additional features
 - Avoid side effects with rest of the API (intermediate images and containers)
 - Prioritize your build cache for automatic pruning
 
-Apart from many new features, the main areas BuildKit improves on the current
-experience are performance, storage management, and extensibility. From the
-performance side, a significant update is a new fully concurrent build graph
-solver. It can run build steps in parallel when possible and optimize out
-commands that don't have an impact on the final result. We have also optimized
-the access to the local source files. By tracking only the updates made to these
+The main areas BuildKit improves on the legacy builder are performance, storage
+management, and extensibility. From the performance side, a significant update
+is a fully concurrent build graph solver. It can run build steps in parallel when possible and optimize out
+commands that don't have an impact on the final result.
+The access to the local source files has also been optimized. By tracking
+only the updates made to these
 files between repeated build invocations, there is no need to wait for local
 files to be read or uploaded before the work can begin.
 
@@ -39,7 +35,7 @@ files to be read or uploaded before the work can begin.
 At the core of BuildKit is a
 [Low-Level Build (LLB)](https://github.com/moby/buildkit#exploring-llb) definition format. LLB is an intermediate binary format
 that allows developers to extend BuildKit. LLB defines a content-addressable
-dependency graph that can be used to put together very complex build
+dependency graph that can be used to put together complex build
 definitions. It also supports features not exposed in Dockerfiles, like direct
 data mounting and nested invocation.
 
@@ -72,39 +68,8 @@ BuildKit, you would
 
 ## Getting started
 
-BuildKit is the default builder for users on Docker Desktop and Docker Engine
-v23.0 and later.
-
-If you have installed Docker Desktop, you don't need to enable BuildKit. If you
-are running a version of Docker Engine version earlier than 23.0, you can enable
-BuildKit either by setting an environment variable, or by making BuildKit the
-default setting in the daemon configuration.
-
-To set the BuildKit environment variable when running the `docker build`
-command, run:
-
-```console
-$ DOCKER_BUILDKIT=1 docker build .
-```
-
-> [!NOTE]
->
-> Buildx always uses BuildKit.
-
-To use Docker BuildKit by default, edit the Docker daemon configuration in
-`/etc/docker/daemon.json` as follows, and restart the daemon.
-
-```json
-{
-  "features": {
-    "buildkit": true
-  }
-}
-```
-
-If the `/etc/docker/daemon.json` file doesn't exist, create new file called
-`daemon.json` and then add the following to the file. And restart the Docker
-daemon.
+BuildKit is the default builder for Docker Desktop and Docker Engine users.
+If you're building Windows containers, the legacy builder is used instead.
 
 ## BuildKit on Windows
 
@@ -115,7 +80,7 @@ daemon.
 
 BuildKit has experimental support for Windows containers (WCOW) as of version 0.13.
 This section walks you through the steps for trying it out.
-We appreciate any feedback you submit by [opening an issue here](https://github.com/moby/buildkit/issues/new), especially `buildkitd.exe`.
+To share feedback, [open an issue in the repository](https://github.com/moby/buildkit/issues/new), especially `buildkitd.exe`.
 
 ### Known limitations
 
@@ -149,12 +114,12 @@ see [GitHub issues](https://github.com/moby/buildkit/issues?q=is%3Aissue%20state
 
    Select the Docker icon in the taskbar, and then **Switch to Windows containers...**.
 
-3. Install containerd version 1.7.7 or later following the setup instructions [here](https://github.com/containerd/containerd/blob/main/docs/getting-started.md#installing-containerd-on-windows).
+3. Install containerd version 1.7.7 or later following the [setup instructions](https://github.com/containerd/containerd/blob/main/docs/getting-started.md#installing-containerd-on-windows).
 
 4. Download and extract the latest BuildKit release.
 
    ```powershell
-   $version = "v0.13.1" # specify the release version, v0.13+
+   $version = "v0.22.0" # specify the release version, v0.13+
    $arch = "amd64" # arm64 binary available too
    curl.exe -LO https://github.com/moby/buildkit/releases/download/$version/buildkit-$version.windows-$arch.tar.gz
    # there could be another `.\bin` directory from containerd instructions
@@ -179,11 +144,16 @@ see [GitHub issues](https://github.com/moby/buildkit/issues?q=is%3Aissue%20state
    $Env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + `
        [System.Environment]::GetEnvironmentVariable("Path","User")
    ```
+
 6. Start the BuildKit daemon.
 
    ```console
    > buildkitd.exe
    ```
+
+   > [!NOTE]
+   > If you are running a _dockerd-managed_ `containerd` process, use that instead, by supplying the address:
+   > `buildkitd.exe --containerd-worker-addr "npipe:////./pipe/docker-containerd"`
 
 7. In another terminal with administrator privileges, create a remote builder that uses the local BuildKit daemon.
 

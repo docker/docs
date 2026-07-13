@@ -1,5 +1,5 @@
 ---
-description: How to setup Docker Scout in continuous integration pipelines
+description: How to set up Docker Scout in continuous integration pipelines
 keywords: scanning, vulnerabilities, Hub, supply chain, security, ci, continuous integration,
   github actions, gitlab
 title: Using Docker Scout in continuous integration

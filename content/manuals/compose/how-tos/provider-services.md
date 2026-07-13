@@ -2,19 +2,13 @@
 title: Use provider services
 description: Learn how to use provider services in Docker Compose to integrate external capabilities into your applications
 keywords: compose, docker compose, provider, services, platform capabilities, integration, model runner, ai
-weight: 112
-params:
-  sidebar:
-    badge:
-      color: green
-      text: New
+weight: 130
 ---
 
 {{< summary-bar feature_name="Compose provider services" >}}
 
 Docker Compose supports provider services, which allow integration with services whose lifecycles are managed by third-party components rather than by Compose itself.  
 This feature enables you to define and utilize platform-specific services without the need for manual setup or direct lifecycle management.
-
 
 ## What are provider services?
 
@@ -82,6 +76,7 @@ The `type` field in a provider service references the name of either:
 
 1. A Docker CLI plugin (e.g., `docker-model`)
 2. A binary available in the user's PATH
+3. A path to the binary or script to execute
 
 When Compose encounters a provider service, it looks for a plugin or binary with the specified name to handle the provisioning of the requested capability.
 
@@ -103,6 +98,10 @@ The plugin or binary is responsible for:
 3. Returning information about how to access the provisioned resource
 
 This information is then passed to dependent services as environment variables.
+
+> [!TIP]
+>
+> If you're working with AI models in Compose, use the [`models` top-level element](/manuals/ai/compose/models-and-compose.md) instead.
 
 ## Benefits of using provider services
 

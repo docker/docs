@@ -1,0 +1,139 @@
+{{/* Build a curl command for an OpenAPI operation.
+
+  Input dict:
+  api          — unmarshaled spec root
+  op           — operation object
+  method       — http method (lowercase string)
+  path         — path string (e.g. "/orgs/{org_name}/policies")
+  sharedParams — already-resolved path-level parameters
+
+  Output: a multi-line curl command string (line-continued with " \\\n  ").
+  Path placeholders are filled from parameter examples when available;
+  unresolved path params fall back to `<name>`. Query params without an
+  example are omitted. Bearer-auth schemes contribute an Authorization
+  header with the literal `$TOKEN` placeholder.
+*/}}
+{{- $api := .api -}}
+{{- $op := .op -}}
+{{- $method := .method -}}
+{{- $path := .path -}}
+{{- $sharedParams := .sharedParams -}}
+
+{{/* Combine path-level + operation-level parameters, resolving $refs. */}}
+{{- $params := $sharedParams -}}
+{{- with index $op "parameters" -}}
+  {{- range . -}}
+    {{- $p := partial "api-ref/resolve.html" (dict "api" $api "node" .) -}}
+    {{- $params = $params | append $p -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Substitute path placeholders. */}}
+{{- $url := $path -}}
+{{- range $params -}}
+  {{- if eq .in "path" -}}
+    {{- $val := printf "<%s>" .name -}}
+    {{- with .example -}}{{- $val = . | string -}}{{- end -}}
+    {{- with .examples -}}
+      {{- $picked := false -}}
+      {{- with index . "default" -}}
+        {{- with .value -}}
+          {{- $val = . | string -}}{{- $picked = true -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if not $picked -}}
+        {{- range . -}}
+          {{- if not $picked -}}
+            {{- with .value -}}
+              {{- $val = . | string -}}{{- $picked = true -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $url = replace $url (printf "{%s}" .name) $val -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Append query string from query parameters that have examples. */}}
+{{- $qs := slice -}}
+{{- range $params -}}
+  {{- if eq .in "query" -}}
+    {{- $val := "" -}}
+    {{- with .example -}}{{- $val = . | string -}}{{- end -}}
+    {{- with .examples -}}
+      {{- $picked := false -}}
+      {{- with index . "default" -}}
+        {{- with .value -}}
+          {{- $val = . | string -}}{{- $picked = true -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if not $picked -}}
+        {{- range . -}}
+          {{- if not $picked -}}
+            {{- with .value -}}
+              {{- $val = . | string -}}{{- $picked = true -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if $val -}}
+      {{- $qs = $qs | append (printf "%s=%s" .name $val) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if $qs -}}{{- $url = printf "%s?%s" $url (delimit $qs "&") -}}{{- end -}}
+
+{{/* Prepend base URL from the first server entry. */}}
+{{- $base := "" -}}
+{{- with index $api.servers 0 -}}{{- $base = .url -}}{{- end -}}
+{{- $fullURL := printf "%s%s" $base $url -}}
+
+{{- $lines := slice (printf "curl -X %s '%s'" (upper $method) $fullURL) -}}
+
+{{/* Bearer auth header if the spec defines a bearer scheme. */}}
+{{- $hasBearer := false -}}
+{{- with $api.components -}}
+  {{- with .securitySchemes -}}
+    {{- range . -}}
+      {{- if and (eq .type "http") (eq .scheme "bearer") -}}
+        {{- $hasBearer = true -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if $hasBearer -}}
+  {{- $lines = $lines | append "-H 'Authorization: Bearer $TOKEN'" -}}
+{{- end -}}
+
+{{/* Request body example. Picks the first content type declared. */}}
+{{- with $op.requestBody -}}
+  {{- $body := partial "api-ref/resolve.html" (dict "api" $api "node" .) -}}
+  {{- $ct := "" -}}
+  {{- $media := dict -}}
+  {{- range $name, $m := $body.content -}}
+    {{- if not $ct -}}{{- $ct = $name -}}{{- $media = $m -}}{{- end -}}
+  {{- end -}}
+  {{- if $ct -}}
+    {{- $lines = $lines | append (printf "-H 'Content-Type: %s'" $ct) -}}
+    {{- $example := "" -}}
+    {{- with $media.examples -}}
+      {{- with index . "default" -}}
+        {{- with .value -}}{{- $example = . | jsonify -}}{{- end -}}
+      {{- end -}}
+      {{- if not $example -}}
+        {{- range . -}}
+          {{- if not $example -}}
+            {{- with .value -}}{{- $example = . | jsonify -}}{{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if $example -}}
+      {{- $lines = $lines | append (printf "-d '%s'" $example) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return (delimit $lines " \\\n  ") -}}

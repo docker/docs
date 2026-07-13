@@ -5,10 +5,6 @@ title: General FAQs for Desktop
 linkTitle: General
 tags: [FAQ]
 aliases:
-- /mackit/faqs/
-- /docker-for-mac/faqs/
-- /docker-for-windows/faqs/
-- /desktop/faqs/
 - /desktop/faqs/general/
 weight: 10
 ---
@@ -18,26 +14,12 @@ weight: 10
 Yes, you can use Docker Desktop offline. However, you
 cannot access features that require an active internet
 connection. Additionally, any functionality that requires you to sign in won't work while using Docker Desktop offline or in air-gapped environments.
-This includes:
-
-- The resources in the [Learning Center](/manuals/desktop/use-desktop/_index.md)
-- Pulling or pushing an image to Docker Hub
-- [Image Access Management](/manuals/security/for-developers/access-tokens.md)
-- [Static vulnerability scanning](/manuals/docker-hub/repos/manage/vulnerability-scanning.md)
-- Viewing remote images in the Docker Dashboard
-- Docker Build when using [BuildKit](/manuals/build/buildkit/_index.md#getting-started).
-  You can work around this by disabling BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
-- [Kubernetes](/manuals/desktop/features/kubernetes.md) (Images are download when you enable Kubernetes for the first time)
-- Checking for updates
-- [In-app diagnostics](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md#diagnose-from-the-app) (including the [Self-diagnose tool](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md#diagnose-from-the-app))
-- Sending usage statistics
-- When `networkMode` is set to `mirrored`
 
 ### How do I connect to the remote Docker Engine API?
 
 To connect to the remote Engine API, you might need to provide the location of the Engine API for Docker clients and development tools.
 
-Mac and Windows WSL 2 users can connect to the Docker Engine through a Unix socket: `unix:///var/run/docker.sock`.
+Mac and Windows WSL 2 users can connect to the Docker Engine through a Unix socket: `unix:///var/run/docker.sock`. Docker Desktop for Linux uses a [per-user socket](linuxfaqs.md#how-do-i-use-docker-sdks-with-docker-desktop-for-linux) located at `~/.docker/desktop/docker.sock` instead of the system-wide `/var/run/docker.sock`.
 
 If you are working with applications like [Apache Maven](https://maven.apache.org/)
 that expect settings for `DOCKER_HOST` and `DOCKER_CERT_PATH` environment
@@ -60,11 +42,52 @@ The host has a changing IP address, or none if you have no network access.
 It is recommend that you connect to the special DNS name `host.docker.internal`,
 which resolves to the internal IP address used by the host.
 
-For more information and examples, see [how to connect from a container to a service on the host](/manuals/desktop/features/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
+For more information and examples, see [how to connect from a container to a service on the host](/manuals/desktop/features/networking.md#connect-a-container-to-a-service-on-the-host).
 
 ### Can I pass through a USB device to a container?
 
 Docker Desktop does not support direct USB device passthrough. However, you can use USB over IP to connect common USB devices to the Docker Desktop VM and in turn be forwarded to a container. For more details, see [Using USB/IP with Docker Desktop](/manuals/desktop/features/usbip.md).
+
+### How do I verify Docker Desktop is using a proxy server ?
+
+To verify, look at the most recent events logged in `httpproxy.log`. This is located at `~/Library/Containers/com.docker.docker/Data/log/host` on macOS or `%LOCALAPPDATA%/Docker/log/host/` on Windows. 
+
+The following shows a few examples of what you can expect to see:
+
+- Docker Desktop using app level settings (proxy mode manual) for proxy:
+
+   ```console
+   host will use proxy: app settings http_proxy=http://172.211.16.3:3128 https_proxy=http://172.211.16.3:3128
+   Linux will use proxy: app settings http_proxy=http://172.211.16.3:3128 https_proxy=http://172.211.16.3:3128
+   ```
+
+- Docker Desktop using system level settings (proxy mode system) for proxy:
+
+   ```console
+   host will use proxy: static system http_proxy=http://172.211.16.3:3128 https_proxy=http://172.211.16.3:3128 no_proxy=
+   Linux will use proxy: static system http_proxy=http://172.211.16.3:3128 https_proxy=http://172.211.16.3:3128 no_proxy=
+   ```
+
+- Docker Desktop is not configured to use a proxy server:
+
+   ```console
+   host will use proxy: disabled
+   Linux will use proxy: disabled
+   ```
+
+- Docker Desktop is configured to use app level settings (proxy mode manual) and using a PAC file:
+
+   ```console
+   using a proxy PAC file: http://127.0.0.1:8081/proxy.pac
+   host will use proxy: app settings from PAC file http://127.0.0.1:8081/proxy.pac
+   Linux will use proxy: app settings from PAC file http://127.0.0.1:8081/proxy.pac
+   ```
+
+- Connect request using the configured proxy server:
+
+   ```console
+   CONNECT desktop.docker.com:443: host connecting via static system HTTPS proxy http://172.211.16.3:3128
+   ```
 
 ### How do I run Docker Desktop without administrator privileges?
 
@@ -83,7 +106,7 @@ You can then sign in to your machine with the user ID specified, and launch Dock
 
 > [!NOTE]
 > 
-> Before launching Docker Desktop, if a `settings-store.json` file (or `settings.json` for Docker Desktop versions 4.34 and earlier) already exists in the `~/Library/Group Containers/group.com.docker/` directory, you will see a **Finish setting up Docker Desktop** window that prompts for administrator privileges when you select **Finish**. To avoid this, ensure you delete the `settings-store.json` file (or `settings.json` for Docker Desktop versions 4.34 and earlier) left behind from any previous installations before launching the application.
+> Before launching Docker Desktop, if a `settings-store.json` file already exists in the `~/Library/Group Containers/group.com.docker/` directory, you will see a **Finish setting up Docker Desktop** window that prompts for administrator privileges when you select **Finish**. To avoid this, ensure you delete the `settings-store.json` file left behind from any previous installations before launching the application.
 
 {{< /tab >}}
 {{< tab name="Windows" >}}

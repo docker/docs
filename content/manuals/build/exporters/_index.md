@@ -10,7 +10,7 @@ aliases:
 
 Exporters save your build results to a specified output type. You specify the
 exporter to use with the
-[`--output` CLI option](/reference/cli/docker/buildx/build.md#output).
+[`--output` CLI option](/reference/cli/docker/buildx/build/#output).
 Buildx supports the following exporters:
 
 - `image`: exports the build result to a container image.
@@ -222,8 +222,8 @@ The common parameters described here are:
 
 When you export a compressed output, you can configure the exact compression
 algorithm and level to use. While the default values provide a good
-out-of-the-box experience, you may wish to tweak the parameters to optimize for
-storage vs compute costs. Changing the compression parameters can reduce storage
+out-of-the-box experience, you can tweak the parameters to optimize for
+storage versus compute costs. Changing the compression parameters can reduce storage
 space required, and improve image download times, but will increase build times.
 
 To select the compression algorithm, you can use the `compression` option. For
@@ -251,6 +251,22 @@ the previous compression algorithm.
 >
 > The `gzip` and `estargz` compression methods use the [`compress/gzip` package](https://pkg.go.dev/compress/gzip),
 > while `zstd` uses the [`github.com/klauspost/compress/zstd` package](https://github.com/klauspost/compress/tree/master/zstd).
+
+#### zstd compression levels
+
+When you specify `compression=zstd`, the `compression-level` parameter accepts
+values from 0 to 22. BuildKit maps these values to four internal compression
+levels:
+
+| compression-level | Internal level | Approximate zstd level | Description                           |
+| ----------------- | -------------- | ---------------------- | ------------------------------------- |
+| 0-2               | Fastest        | ~1                     | Fastest compression, larger file size |
+| 3-6 (default)     | Default        | ~3                     | Balanced compression and speed        |
+| 7-8               | Better         | ~7                     | Better compression, slower            |
+| 9-22              | Best           | ~11                    | Best compression, slowest             |
+
+For example, setting `compression-level=5` and `compression-level=6` produces
+the same compression output, since both map to the "Default" internal level.
 
 ### OCI media types
 

@@ -40,10 +40,12 @@ The following table describes the available parameters:
 | `force-compression` | `true`,`false`                         | `false` | Forcefully apply compression, see [compression][1]                                                                                    |
 | `oci-mediatypes`    | `true`,`false`                         |         | Use OCI media types in exporter manifests. Defaults to `true` for `type=oci`, and `false` for `type=docker`. See [OCI Media types][2] |
 | `annotation.<key>`  | String                                 |         | Attach an annotation with the respective `key` and `value` to the built image,see [annotations][3]                                    |
+| `rewrite-timestamp` | `true`,`false`                         | `false` | Rewrite the file timestamps to the `SOURCE_DATE_EPOCH` value. See [build reproducibility][4] for how to specify the `SOURCE_DATE_EPOCH` value. |
 
 [1]: _index.md#compression
 [2]: _index.md#oci-media-types
 [3]: #annotations
+[4]: https://github.com/moby/buildkit/blob/master/docs/build-repro.md
 
 ## Annotations
 

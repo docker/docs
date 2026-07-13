@@ -17,7 +17,7 @@ through creating a custom image and sharing it through Docker Hub.
 ## Prerequisites
 
 - [Download and install Docker](../../get-started/get-docker.md)
-- [Create a Docker account](https://app.docker.com/signup)
+- A verified [Docker](https://app.docker.com/signup) account
 
 ## Step 1: Find an image in Docker Hub's library
 
@@ -115,7 +115,7 @@ You can run images from Docker Hub using the CLI or Docker Desktop Dashboard.
    The container logs appear after the container starts.
 
 5. Select the **8080:80** link to open the server, or visit
-   [https://localhost:8080](https://localhost:8080) in your web browser.
+   [http://localhost:8080](http://localhost:8080) in your web browser.
 
 6. In the Docker Desktop Dashboard, select the **Stop** button to stop the
    container.
@@ -140,7 +140,7 @@ You can run images from Docker Hub using the CLI or Docker Desktop Dashboard.
    The `docker run` command automatically pulls and runs the image without the
    need to run `docker pull` first. To learn more about the command and its
    options, see the [`docker run` CLI
-   reference](../../reference/cli/docker/container/run.md). After running the
+   reference](/reference/cli/docker/container/run/). After running the
    command, you should see output similar to the following.
 
    ```console {collapse=true}
@@ -174,7 +174,7 @@ You can run images from Docker Hub using the CLI or Docker Desktop Dashboard.
    ...
    ```
 
-3. Visit [https://localhost:8080](https://localhost:8080) to view the default
+3. Visit [http://localhost:8080](http://localhost:8080) to view the default
    Nginx page and verify that the container is running.
 
 4. In the terminal, press <kdb>Ctrl+C</kbd> to stop the container.
@@ -216,7 +216,7 @@ customize your own images to suit specific needs.
    This command builds your image and tags it so that Docker understands which
    repository to push it to in Docker Hub. To learn more about the command and
    its options, see the [`docker build` CLI
-   reference](../../reference/cli/docker/buildx/build.md). After running the
+   reference](/reference/cli/docker/buildx/build/). After running the
    command, you should see output similar to the following.
 
    ```console {collapse=true}
@@ -241,7 +241,7 @@ customize your own images to suit specific needs.
    $ docker run -p 8080:80 --rm <YOUR-USERNAME>/nginx-custom
    ```
 
-4. Visit [https://localhost:8080](https://localhost:8080) to view the page. You
+4. Visit [http://localhost:8080](http://localhost:8080) to view the page. You
    should see `Hello world from Docker!`.
 
 5. In the terminal, press CTRL+C to stop the container.
@@ -262,7 +262,7 @@ customize your own images to suit specific needs.
    The command pushes the image to Docker Hub and automatically
    creates the repository if it doesn't exist. To learn more about the command,
    see the [`docker push` CLI
-   reference](../../reference/cli/docker/image/push.md). After running the
+   reference](/reference/cli/docker/image/push/). After running the
    command, you should see output similar to the following.
 
    ```console {collapse=true}
@@ -323,4 +323,3 @@ these options.
 
 Add [repository information](./repos/manage/information.md) to help users find and use
 your image.
-

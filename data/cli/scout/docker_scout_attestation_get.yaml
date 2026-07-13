@@ -1,0 +1,123 @@
+command: docker scout attestation get
+aliases: docker scout attestation get, docker scout attest get
+short: Get attestation for image
+long: The docker scout attestation get command gets attestations for images.
+usage: docker scout attestation get OPTIONS IMAGE [DIGEST]
+pname: docker scout attestation
+plink: docker_scout_attestation.yaml
+options:
+    - option: key
+      value_type: string
+      default_value: https://registry.scout.docker.com/keyring/dhi/latest.pub
+      description: Signature key to use for verification
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: org
+      value_type: string
+      description: Namespace of the Docker organization
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: output
+      shorthand: o
+      value_type: string
+      description: Write the report to a file
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: platform
+      value_type: string
+      description: Platform of image to analyze
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: predicate
+      value_type: bool
+      default_value: "false"
+      description: Get in-toto predicate only dropping the subject
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: predicate-type
+      value_type: string
+      description: Predicate-type for attestation
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: ref
+      value_type: string
+      description: |-
+        Reference to use if the provided tarball contains multiple references.
+        Can only be used with archive
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: skip-tlog
+      value_type: bool
+      default_value: "false"
+      description: Skip signature verification against public transaction log
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: verify
+      value_type: bool
+      default_value: "false"
+      description: Verify the signature on the attestation
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: debug
+      value_type: bool
+      default_value: "false"
+      description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: verbose-debug
+      value_type: bool
+      default_value: "false"
+      description: Verbose debug
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

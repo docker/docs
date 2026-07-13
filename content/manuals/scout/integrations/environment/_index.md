@@ -37,7 +37,6 @@ Docker Scout supports the following runtime integrations:
 
 - [Docker Scout GitHub Action](https://github.com/marketplace/actions/docker-scout#record-an-image-deployed-to-an-environment)
 - [CLI client](./cli.md)
-- [Sysdig integration](./sysdig.md)
 
 > [!NOTE]
 >
@@ -79,7 +78,7 @@ comparing the image built from the code in the PR to the corresponding image in
 staging or production.
 
 You can also compare with streams using the `--to-env` flag on the
-[`docker scout compare`](/reference/cli/docker/scout/compare.md)
+[`docker scout compare`](/reference/cli/docker/scout/compare/)
 CLI command:
 
 ```console

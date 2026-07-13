@@ -45,7 +45,7 @@ or using CLI flags for the `--http-proxy` or `--https-proxy` flags for the
 {
   "proxies": {
     "http-proxy": "http://proxy.example.com:3128",
-    "https-proxy": "https://proxy.example.com:3129",
+    "https-proxy": "http://proxy.example.com:3128",
     "no-proxy": "*.test.example.com,.example.org,127.0.0.0/8"
   }
 }
@@ -101,21 +101,21 @@ systemd drop-in file that sets the variables for the `docker` service.
    Environment="HTTP_PROXY=http://proxy.example.com:3128"
    ```
 
-   If you are behind an HTTPS proxy server, set the `HTTPS_PROXY` environment
+   To proxy HTTPS requests, set the `HTTPS_PROXY` environment
    variable:
 
    ```systemd
    [Service]
-   Environment="HTTPS_PROXY=https://proxy.example.com:3129"
+   Environment="HTTPS_PROXY=http://proxy.example.com:3128"
    ```
 
-   Multiple environment variables can be set; to set both a non-HTTPS and a
-   HTTPs proxy;
+   Multiple environment variables can be set; to set both an HTTP and an
+   HTTPS proxy;
 
    ```systemd
    [Service]
    Environment="HTTP_PROXY=http://proxy.example.com:3128"
-   Environment="HTTPS_PROXY=https://proxy.example.com:3129"
+   Environment="HTTPS_PROXY=http://proxy.example.com:3128"
    ```
 
    > [!NOTE]
@@ -134,7 +134,6 @@ systemd drop-in file that sets the variables for the `docker` service.
    The `NO_PROXY` variable specifies a string that contains comma-separated
    values for hosts that should be excluded from proxying. These are the options
    you can specify to exclude hosts:
-
    - IP address prefix (`1.2.3.4`)
    - Domain name, or a special DNS label (`*`)
    - A domain name matches that name and all subdomains. A domain name with a
@@ -151,7 +150,7 @@ systemd drop-in file that sets the variables for the `docker` service.
    ```systemd
    [Service]
    Environment="HTTP_PROXY=http://proxy.example.com:3128"
-   Environment="HTTPS_PROXY=https://proxy.example.com:3129"
+   Environment="HTTPS_PROXY=http://proxy.example.com:3128"
    Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
    ```
 
@@ -168,7 +167,7 @@ systemd drop-in file that sets the variables for the `docker` service.
    ```console
    $ sudo systemctl show --property=Environment docker
 
-   Environment=HTTP_PROXY=http://proxy.example.com:3128 HTTPS_PROXY=https://proxy.example.com:3129 NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
+   Environment=HTTP_PROXY=http://proxy.example.com:3128 HTTPS_PROXY=http://proxy.example.com:3128 NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
    ```
 
 {{< /tab >}}
@@ -188,21 +187,21 @@ systemd drop-in file that sets the variables for the `docker` service.
    Environment="HTTP_PROXY=http://proxy.example.com:3128"
    ```
 
-   If you are behind an HTTPS proxy server, set the `HTTPS_PROXY` environment
+   To proxy HTTPS requests, set the `HTTPS_PROXY` environment
    variable:
 
    ```systemd
    [Service]
-   Environment="HTTPS_PROXY=https://proxy.example.com:3129"
+   Environment="HTTPS_PROXY=http://proxy.example.com:3128"
    ```
 
-   Multiple environment variables can be set; to set both a non-HTTPS and a
-   HTTPs proxy;
+   Multiple environment variables can be set; to set both an HTTP and an
+   HTTPS proxy;
 
    ```systemd
    [Service]
    Environment="HTTP_PROXY=http://proxy.example.com:3128"
-   Environment="HTTPS_PROXY=https://proxy.example.com:3129"
+   Environment="HTTPS_PROXY=http://proxy.example.com:3128"
    ```
 
    > [!NOTE]
@@ -221,7 +220,6 @@ systemd drop-in file that sets the variables for the `docker` service.
    The `NO_PROXY` variable specifies a string that contains comma-separated
    values for hosts that should be excluded from proxying. These are the options
    you can specify to exclude hosts:
-
    - IP address prefix (`1.2.3.4`)
    - Domain name, or a special DNS label (`*`)
    - A domain name matches that name and all subdomains. A domain name with a
@@ -238,7 +236,7 @@ systemd drop-in file that sets the variables for the `docker` service.
    ```systemd
    [Service]
    Environment="HTTP_PROXY=http://proxy.example.com:3128"
-   Environment="HTTPS_PROXY=https://proxy.example.com:3129"
+   Environment="HTTPS_PROXY=http://proxy.example.com:3128"
    Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
    ```
 
@@ -255,7 +253,7 @@ systemd drop-in file that sets the variables for the `docker` service.
    ```console
    $ systemctl --user show --property=Environment docker
 
-   Environment=HTTP_PROXY=http://proxy.example.com:3128 HTTPS_PROXY=https://proxy.example.com:3129 NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
+   Environment=HTTP_PROXY=http://proxy.example.com:3128 HTTPS_PROXY=http://proxy.example.com:3128 NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
    ```
 
 {{< /tab >}}
