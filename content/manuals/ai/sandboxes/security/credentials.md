@@ -363,8 +363,10 @@ $ sbx secret rm my-sandbox --registry ghcr.io -f
   a credential, the agent prompts you to authenticate — Codex prompts on the
   host from `sbx run codex`, while Claude Code, Cursor, and Droid prompt
   interactively inside the sandbox. To authenticate ahead of time, run
-  `sbx secret set -g openai --oauth` for Codex, or use `/login` inside Claude
-  Code. See the individual [agent pages](../agents/) for each agent's flow.
+  `sbx secret set -g openai --oauth` for Codex or use `/login` inside Claude
+  Code; Cursor and Droid have no ahead-of-time option, so their sign-in prompt
+  appears when the agent starts. See the individual [agent pages](../agents/)
+  for each agent's flow.
 - If you store credentials in 1Password, see
   [Sourcing credentials from 1Password](../workflows.md#sourcing-credentials-from-1password)
   for how to use `op read` and `op run` with `sbx`.
