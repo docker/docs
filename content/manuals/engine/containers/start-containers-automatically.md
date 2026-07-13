@@ -37,7 +37,7 @@ The following command starts a Redis container and configures it to always
 restart, unless the container is explicitly stopped, or the daemon restarts.
 
 ```console
-$ docker run -d --restart unless-stopped redis
+$ docker run -d --name redis --restart unless-stopped redis
 ```
 
 The following command changes the restart policy for an already running
