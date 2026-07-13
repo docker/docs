@@ -136,6 +136,36 @@ The **effort gauge** is a fixed-width six-cell indicator (`▰` filled, `▱` em
 
 Harness-backed agents (e.g. `claude-code`) show the harness type as their model and no thinking gauge. Press **Shift+Tab** to cycle the current model's thinking-effort level; a `✻ Thinking: <level>` toast confirms the change (useful when the sidebar is hidden).
 
+### Agent Delegation Feedback
+
+When a parent agent calls `transfer_task` to delegate work to a sub-agent, the TUI provides live visual feedback in both the sidebar and the chat.
+
+**Sidebar — Transfer box:** As soon as the delegation starts, an animated **Transfer** box appears below the agent roster, showing the direction of the handoff with a traveling dot:
+
+```text
+╭─ Transfer ─────────────────╮
+│  parent  ●──────►  child   │
+╰────────────────────────────╯
+```
+
+The box stays visible for at least 1.5 seconds. Once the sub-agent produces its first message, reasoning, or tool output, the box hides (still honoring the minimum window) to keep the sidebar focused on the active agent. If the sub-agent is slow or silent, the box hides after a 3-second maximum cutoff. The header shows a `↔` marker while any delegation is still in flight, even after the box hides.
+
+**Sidebar — Return box:** When the sub-agent finishes and control returns to the parent, a brief **Return** box animates the reverse direction for up to 1.5 seconds, then disappears:
+
+```text
+╭─ Return ───────────────────╮
+│  child  ●──────►  parent   │
+╰────────────────────────────╯
+```
+
+**Chat — return transition:** Alongside the sidebar Return animation, the chat shows a one-line static transition between the two agent badges:
+
+```text
+[child]  returned control to  [parent]
+```
+
+This transition is not persisted — it does not reappear when you reload the session.
+
 ### Thinking and Tool Details
 
 Reasoning/thinking blocks are collapsed by default and carry a `Thinking` header badge. When collapsed, the TUI shows a short preview and compact tool summaries. Expand a block to see the full thinking content and the real tool renderers, including detailed tool output such as file edit diffs.
