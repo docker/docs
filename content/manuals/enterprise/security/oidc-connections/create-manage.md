@@ -19,7 +19,7 @@ Organization owners and editors can create new OIDC connections or manage existi
 ### Step 1: Create the OIDC connection
 
 1. Sign in to [Docker Home](https://app.docker.com/), select your organization, then go to the **Admin Console**.
-1. In **Security**, select **OIDC connections**.
+1. In **Identity & auth**, select **OIDC connections**.
 1. Select **Create OIDC connection** to go to the creation page. Fill in the OIDC connection form.
    - You must provide rulesets and subject claims. Other values are optional.
    - To learn about rulesets, subject claims, and resources, see [OIDC connections rulesets and subject claims](/manuals/enterprise/security/oidc-connections/rulesets-claims.md).
@@ -86,11 +86,11 @@ jobs:
 
 ### Step 3 (optional): Test
 
-After both phases, open the workflow run in GitHub Actions and select **Stage** to test the job.
+Run your GitHub Action and verify the workflow is able to log in to Docker successfully.
 
 ## Manage OIDC connections
 
-You can view, edit, deactivate, or delete your connections from the **OIDC connection** page.
+You can view, edit, deactivate, or delete your connections from the **OIDC connections** page.
 
 1. From the **Admin Console**, go to **OIDC connections**.
 1. From the **OIDC connections** page, find the row with your target connection ID.
