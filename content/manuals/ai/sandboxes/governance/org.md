@@ -2,21 +2,23 @@
 title: Organization policy
 linkTitle: Org policy
 weight: 20
-description: Centrally manage sandbox network and filesystem policies for your organization.
-keywords: docker sandboxes, governance, organization policy, AI governance, Docker Home, network access, filesystem access
+description: Centrally manage sandbox network, filesystem, and MCP policies for your organization.
+keywords: docker sandboxes, governance, organization policy, AI governance, admin console, network access, filesystem access, mcp policy
 aliases:
   - /ai/sandboxes/security/governance/
 ---
 
 [Local policies](local.md) give individual developers control over what their
 sandboxes can access. Organization policy moves that control to the admin level:
-rules apply to sandboxes across the organization,
-either to every member or to specific teams. When organization governance is active, it replaces local `sbx policy`
-rules entirely — local rules are no longer evaluated and can't be used to
-supplement or override the organization policy.
+rules defined in **Admin Console** apply to sandboxes across the organization,
+either to every member or to specific teams. When organization governance is
+active, it replaces local `sbx policy` rules entirely — local rules are no
+longer evaluated and can't be used to supplement or override the organization
+policy.
 
-Admins can manage organization policies through the Docker Home UI or
-programmatically using the [Governance API](/reference/api/ai-governance/).
+Admins can manage organization policies through the Admin Console UI. For
+programmatic management of network and filesystem policies, use the
+[Governance API](/reference/api/ai-governance/).
 
 By default, only organization
 [owners](/manuals/enterprise/security/roles-and-permissions/core-roles.md) can
@@ -33,17 +35,19 @@ with the **Governance** permissions and assign it to a user or team.
 
 ## Create a policy
 
-Manage policies from the **AI Platform** section in the left-hand navigation
+Manage policies under **Admin Console**, a section in the left-hand navigation
 of [Docker Home](https://app.docker.com). Network and filesystem policies are
 managed separately, under **Network access** and **Filesystem access**.
+
+The steps in this section cover network and filesystem policies. MCP policies
+use Cedar rather than rule rows; see [MCP policies](#mcp-policies).
 
 To create a policy:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your
    organization.
-1. In the left-hand navigation, expand **AI Platform** and select
-   **Network access** or **Filesystem access**.
-1. Select **Create policy**.
+1. Select **AI Platform**, then the governance section you want.
+1. Select **Network access** or **Filesystem access**, then **Create policy**.
 1. Enter a **Policy name**.
 1. Set the **Scope** to **Organization** or **Teams**. If you select **Teams**,
    choose the teams the policy applies to. See
@@ -82,6 +86,25 @@ rules. Each rule takes a path pattern and an action (allow or deny).
 For path pattern syntax and how read and write access combine to allow a
 mount, see [Policy concepts](concepts.md#filesystem-rules).
 
+## MCP policies
+
+MCP policies control sandbox activity that goes through MCP servers, such as
+server registration, tool calls, resource reads, prompts, and gateway
+meta-tools. Unlike network and filesystem policies, MCP policies are written in
+Cedar using the `MCP` namespace.
+
+MCP policy is default deny: an MCP request is blocked unless a matching
+`permit` allows it. Use `forbid` for rules that must always deny a matching
+request. A matching `forbid` overrides a `permit`, including one that requires
+approval.
+
+Use `@requireApproval` on a `permit` statement to require user approval before a
+matching request runs. If the sandbox can't ask a user for approval, the request
+is denied.
+
+For the MCP policy model and a starter example, see
+[MCP policies](concepts.md#mcp-policies).
+
 ## Scope policies to teams
 
 An organization can have more than one policy, and each policy applies either
@@ -99,7 +122,7 @@ Team scoping targets your organization's existing
 exist before you can scope a policy to it. Create teams and manage their members
 in one of two ways:
 
-- Manually, in Docker Home.
+- Manually, in the Admin Console.
 - Automatically, by using
   [group mapping](/manuals/enterprise/security/provisioning/scim/group-mapping.md)
   to synchronize your identity provider's groups with the teams in your
@@ -172,21 +195,21 @@ wildcards match.
 ## Precedence
 
 When organization governance is active, local rules are not evaluated. Only
-organization rules determine what is allowed or denied,
+organization rules set in the Admin Console determine what is allowed or denied,
 and they can't be supplemented or overridden from a developer's machine. The
 same applies to filesystem policies: organization rules replace local behavior
 entirely. For how a user's organization policies are evaluated together, see
 [Policy concepts](concepts.md#rule-evaluation).
 
 To unblock a domain when organization governance is active, update the rule in
-Docker Home or via the [API](/reference/api/ai-governance/). Without
+the Admin Console or via the [API](/reference/api/ai-governance/). Without
 organization governance, remove the local rule with `sbx policy rm`.
 
 ## Troubleshooting
 
 ### Policy changes not taking effect
 
-After updating organization policies, changes take up
+After updating organization policies in the Admin Console, changes take up
 to 5 minutes to propagate to developer machines. To apply changes
 immediately, users can run `sbx policy reset`, which stops the daemon and
 forces it to pull the latest organization policies on the next `sbx`
@@ -216,5 +239,5 @@ and create a new one.
 ### Sandbox cannot mount workspace
 
 If a sandbox fails to mount with a `mount policy denied` error, verify that
-the filesystem allow rule uses `**` rather than `*`. A
+the filesystem allow rule in the Admin Console uses `**` rather than `*`. A
 single `*` doesn't match across directory separators.

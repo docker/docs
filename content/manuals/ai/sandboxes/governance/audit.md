@@ -3,7 +3,7 @@ title: Audit logging
 linkTitle: Audit logs
 weight: 28
 description: Capture a structured, durable record of every sandbox policy decision for SIEM ingestion and compliance.
-keywords: docker sandboxes, audit log, audit logging, policy decision, SIEM, compliance, jsonl, splunk, filebeat
+keywords: docker sandboxes, audit log, audit logging, policy decision, MCP policy, SIEM, compliance, jsonl, splunk, filebeat
 ---
 
 The sandbox daemon records a structured audit event for every policy decision
@@ -39,6 +39,10 @@ The daemon writes two categories of record:
 - Session lifecycle records mark the start and end of each daemon run.
   Evaluation records share the run's `audit_session_id`, so you can correlate
   every decision back to a single daemon session.
+
+When MCP policy enforcement is active, MCP evaluations use the same evaluation
+record category. The action and resource values identify the MCP request, such
+as a tool call or resource read.
 
 A network evaluation record looks like this:
 
@@ -84,7 +88,7 @@ Common fields include:
 | `resource_id`      | The target of the evaluation, such as a host and port.                                                       |
 | `decision`         | `AUDIT_DECISION_ALLOW` or `AUDIT_DECISION_DENY`.                                                             |
 | `deny_reason`      | Why a denied request was blocked. Present on deny decisions.                                                 |
-| `agent`            | The AI agent driving the sandbox (for example, `claude`, `codex`). Omitted when the agent is unknown.       |
+| `agent`            | The AI agent driving the sandbox (for example, `claude`, `codex`). Omitted when the agent is unknown.        |
 
 Each record is attributed to the signed-in Docker user and the organization
 whose governance policy is in effect.
