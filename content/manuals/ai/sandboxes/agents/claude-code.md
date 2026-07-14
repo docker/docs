@@ -38,7 +38,7 @@ Claude Code requires either an Anthropic API key or a Claude subscription.
 $ sbx secret set -g anthropic
 ```
 
-**Claude subscription**: If no API key is set, use the `/login` command inside 
+**Claude subscription**: If no API key is set, use the `/login` command inside
 Claude Code to authenticate via OAuth.
 
 ## Configuration
@@ -75,7 +75,7 @@ for available options.
 
 Claude Code's [agents view](https://code.claude.com/docs/en/agent-view)
 dispatches tasks to subagents that work in parallel, each in its own
-Git worktree. Pair it with [clone mode](../usage.md#clone-mode) for an
+Git worktree. Pair it with [clone mode](../workflows.md#clone-mode) for an
 isolated multi-agent workflow:
 
 ```console
@@ -102,7 +102,7 @@ $ git fetch sandbox-<sandbox-name>
 $ git diff main..sandbox-<sandbox-name>/<branch>
 ```
 
-See [Git workflow](../usage.md#git-workflow) for clone-mode details.
+See [Git workflows](../workflows.md#git-workflows) for clone-mode details.
 
 ## Base image
 
