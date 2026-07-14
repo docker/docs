@@ -54,47 +54,27 @@ To create a policy:
 1. Set the **Scope** to **Organization** or **Teams**. If you select **Teams**,
    choose the teams the policy applies to. See
    [Scope policies to teams](#scope-policies-to-teams).
-1. Select **Add rule** to add each rule. For rule syntax, see
-   [Policy concepts](../concepts.md#rule-syntax).
+1. Select **Add rule** to add each rule. For rule syntax, use the relevant
+   access-control page in [Choose a policy type](#choose-a-policy-type).
 
 Existing policies are listed with their name, scope, rule count, and last
 update. Use the action menu (⋮) to edit or delete a policy.
 
-## Network policies
+## Choose a policy type
 
-### Configuring org-level network rules
+Organization policies are managed by access surface. Use the access-control
+pages for syntax, examples, and enforcement details:
 
-A network rule takes a network target and an action (allow or deny). You can
-add multiple entries at once, one per line.
+- [Network access rules](network.md): control outbound network access from
+  sandboxes.
+- [Filesystem access rules](filesystem.md): control which host paths sandboxes
+  can mount as workspaces.
+- [MCP tool access](mcp.md): control MCP server registration, tool calls,
+  resources, prompts, and approval gates with Cedar policy.
 
-For the full syntax reference (exact hostnames, wildcard subdomains, port
-suffixes, and CIDR ranges), see [Network access rules](network.md).
-
-When organization governance is active, local network rules are not evaluated.
-The organization policy is the only policy in effect. `sbx policy ls` hides
-these inactive local rules by default. See
-[Monitoring](../monitor-and-enforce/monitoring.md#showing-inactive-rules) for
-how to list them and read the rule view.
-
-## Filesystem policies
-
-Filesystem policies control which host paths a sandbox can mount as
-workspaces. By default, sandboxes can mount any directory the user has
-access to.
-
-Admins can restrict which paths are mountable with filesystem allow and deny
-rules. Each rule takes a path pattern and an action (allow or deny).
-
-For path pattern syntax and how read and write access combine to allow a
-mount, see [Filesystem access rules](filesystem.md).
-
-## MCP policies
-
-MCP policies control sandbox activity that goes through MCP servers, such as
-server registration, tool calls, resource reads, prompts, and gateway
-meta-tools. Unlike network and filesystem policies, MCP policies are written in
-Cedar using the `MCP` namespace. For policy patterns and examples, see
-[MCP tool access](mcp.md).
+When organization governance is active, local and kit-defined rules are not
+evaluated. To see which rules are active on a developer machine, use
+[Monitoring policies](../monitor-and-enforce/monitoring.md).
 
 ## Scope policies to teams
 
@@ -123,78 +103,16 @@ in one of two ways:
 Because policies apply by team, a user's policies update automatically as their
 team membership changes, including changes synced from your IdP.
 
-### How org-wide and team-scoped policies combine
+### How scoped policies combine
 
 A user is governed by all of their
-[effective policies](../concepts.md#policy-scope) at once — every org-wide
-policy, plus the team-scoped policies for the teams they belong to. The rules
-combine into a single evaluation in which deny always wins, so a team-scoped
-policy can grant access on top of the org-wide policies but can't loosen a
-restriction they impose. For the full evaluation model, see
-[Rule evaluation](../concepts.md#rule-evaluation).
+[effective policies](../concepts.md#policy-scope): every org-wide policy, plus
+the team-scoped policies for the teams they belong to. Use org-wide policies
+for guardrails that must apply everywhere, and team-scoped policies for access
+that only some teams need.
 
-This makes org-wide policies the natural home for guardrails that must hold
-everywhere. For example, an org-wide policy can deny a category of domains for
-all members, while a team-scoped policy grants a research team access to extra
-package mirrors. Research-team members get the extra access, but the org-wide
-deny still applies.
-
-In practice, three patterns cover most layering:
-
-- Deny by default: leave a domain out of every allow rule to keep it blocked.
-- Allow when needed: add a team-scoped allow to grant an exception.
-- Explicit deny: deny a domain outright when no team should ever reach it.
-
-The examples that follow show each pattern.
-
-### Grant one team access to a blocked domain
-
-Because access is [denied by default](../concepts.md#rule-evaluation), you don't
-need an explicit deny to keep a domain off-limits. Leaving it out of every allow
-rule is enough. To give a single team access to a domain no one else can reach:
-
-1. Don't add an allow rule for the domain at the organization level. Default
-   deny keeps it blocked for everyone.
-1. Create a team-scoped policy that allows the domain, and scope it to that team.
-
-Only members of that team can reach the domain. Everyone else is still blocked
-by default.
-
-### Block a domain everywhere as a guardrail
-
-Use an explicit org-wide deny when a domain must be off-limits to everyone,
-including teams that have broad allow rules. Because deny wins, an org-wide deny
-on `**.example.com` blocks `example.com` and every subdomain for all members,
-and no team-scoped allow can grant access to it.
-
-Reserve explicit deny rules for domains you want to block outright. For
-everything else, rely on default deny and add allow rules only where access is
-needed.
-
-### An exact deny doesn't cover subdomains
-
-A deny rule matches only the hostnames its pattern matches. A deny on the exact
-hostname `example.com` doesn't match `api.example.com`, so a team-scoped allow
-on `api.example.com` still grants that team access. The org-wide deny and the
-team allow apply to different hostnames, so they never conflict.
-
-To block a domain and all its subdomains, deny `**.example.com` instead. With
-that pattern, deny wins over any team-scoped allow on a subdomain. See
-[Hostname patterns](../concepts.md#network-rules) for how exact hostnames and
-wildcards match.
-
-## Precedence
-
-When organization governance is active, local rules are not evaluated. Only
-organization rules set in the Admin Console determine what is allowed or denied,
-and they can't be supplemented or overridden from a developer's machine. The
-same applies to filesystem policies: organization rules replace local behavior
-entirely. For how a user's organization policies are evaluated together, see
-[Policy concepts](../concepts.md#rule-evaluation).
-
-To unblock a domain when organization governance is active, update the rule in
-the Admin Console or via the [API](/reference/api/ai-governance/). Without
-organization governance, remove the local rule with `sbx policy rm`.
+For precedence between local and organization policies, and for how allow and
+deny rules combine, see [Policy concepts](../concepts.md).
 
 ## Troubleshooting
 
@@ -226,9 +144,3 @@ Network policy and filesystem policy differ in when a change takes effect:
 
 To apply a filesystem policy change immediately, remove the running sandbox
 and create a new one.
-
-### Sandbox cannot mount workspace
-
-If a sandbox fails to mount with a `mount policy denied` error, verify that
-the filesystem allow rule in the Admin Console uses `**` rather than `*`. A
-single `*` doesn't match across directory separators.
