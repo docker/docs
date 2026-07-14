@@ -44,7 +44,7 @@ data. Create fresh sandboxes afterwards.
 
 ## Agent can't install packages or reach an API
 
-Sandboxes use a [deny-by-default network policy](governance/local.md).
+Sandboxes use a [deny-by-default network policy](governance/access-controls/local.md).
 If the agent fails to install packages or call an external API, the target
 domain is likely not in the allow list. Check which requests are being blocked:
 
@@ -66,7 +66,7 @@ $ sbx policy allow network "**"
 
 If `sbx policy allow` doesn't unblock the request, your organization may
 manage sandbox policies centrally and take precedence over local rules. See
-[Organization governance](governance/org.md).
+[Organization governance](governance/access-controls/organization.md).
 
 ## Kit fails to install: source not in allowlist
 
@@ -141,7 +141,7 @@ If credentials are configured correctly but API calls still fail, check
 the `transparent` proxy don't get credential injection. This can happen when a
 client inside the sandbox (such as a process in a Docker container) isn't
 configured to use the forward proxy. See
-[Monitoring network activity](governance/monitoring.md)
+[Monitoring network activity](governance/monitor-and-enforce/monitoring.md)
 for details.
 
 ## API calls fail with a certificate error

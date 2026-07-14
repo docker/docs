@@ -20,7 +20,7 @@ aliases:
 
 ## Usage
 
-AI Governance lets organization owners enforce [governance policies](/manuals/ai/sandboxes/governance/org.md) to license-holding members. Organization policies override the local policies of a license-holding member.
+AI Governance lets organization owners enforce [governance policies](/manuals/ai/sandboxes/governance/access-controls/organization.md) to license-holding members. Organization policies override the local policies of a license-holding member.
 
 You can [assign AI Governance licenses](/manuals/admin/organization/manage/manage-licenses.md) to any organization member, even if they don't occupy a Docker Team or Docker Business seat. For best practice, review available licenses as you add new members since members without an AI Governance license can still use Docker AI products.
 

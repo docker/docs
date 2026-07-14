@@ -115,7 +115,7 @@ Use ↑/↓ to navigate, Enter to select, or press 1–3.
 
 **Balanced** is a good starting point — it permits traffic to common
 development services while blocking everything else. You can adjust individual
-rules later. See [Policies](governance/local.md) for a full description of each
+rules later. See [Policies](governance/access-controls/local.md) for a full description of each
 option.
 
 > [!NOTE]
@@ -214,8 +214,9 @@ $ sbx policy allow network registry.npmjs.org
 With **Balanced**, common development services are allowed by default. With
 **Locked Down**, everything is blocked until you allow it — including your
 model provider's API. If the agent can't reach a service it needs, the network
-policy is the first place to look. See [Policies](governance/local.md) for the
-full rule set and how to customize it.
+policy is the first place to look. See
+[Policies](governance/access-controls/local.md) for the full rule set and how
+to customize it.
 
 ## Clean up
 

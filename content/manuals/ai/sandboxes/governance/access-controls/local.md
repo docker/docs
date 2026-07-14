@@ -1,10 +1,12 @@
 ---
-title: Local policy
+title: Local access rules
+linkTitle: Local rules
 weight: 10
 description: Configure network access rules for sandboxes on your local machine.
 keywords: docker sandboxes, local policy, network access, allow rules, deny rules, sbx policy
 aliases:
   - /ai/sandboxes/security/policy/
+  - /ai/sandboxes/governance/local/
 ---
 
 The `sbx policy` command manages network access rules on your local machine.
@@ -18,12 +20,13 @@ Local rules apply only when your organization doesn't enforce governance:
   Local rules are inactive, and `sbx policy allow` and `sbx policy deny` have
   no effect. To list the inactive local rules, run
   `sbx policy ls --include-inactive`. See
-  [Monitoring](monitoring.md#showing-inactive-rules).
+  [Monitoring](../monitor-and-enforce/monitoring.md#showing-inactive-rules).
 
-See [Organization policy](org.md) for how organization governance works.
+See [Organization policies](organization.md) for how organization governance
+works.
 
 For domain patterns, wildcards, CIDR ranges, and filesystem path syntax, see
-[Policy concepts](concepts.md#rule-syntax).
+[Policy concepts](../concepts.md#rule-syntax).
 
 ## Default preset
 
@@ -61,7 +64,7 @@ v0.35.0, the Balanced preset also allows VS Code domains, Azure Blob Storage
 > [!NOTE]
 > If your organization manages sandbox policies centrally, organization rules
 > take precedence over the preset you select here. See
-> [Organization policy](org.md).
+> [Organization policies](organization.md).
 
 ### Non-interactive environments
 
@@ -117,7 +120,8 @@ To inspect which policies are active and where they come from, use
 `sbx policy ls`. Use `--source` to filter by origin (`local`, `org`, `kit`),
 `--decision` to filter by outcome (`allow`, `deny`), and `--wide` for
 rule-level detail including rule IDs. To inspect a single policy or rule in
-full, use `sbx policy inspect`. See [Monitoring](monitoring.md).
+full, use `sbx policy inspect`. See
+[Monitoring](../monitor-and-enforce/monitoring.md).
 
 ## Testing policy
 

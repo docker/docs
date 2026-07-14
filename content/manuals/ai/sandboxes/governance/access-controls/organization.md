@@ -1,11 +1,12 @@
 ---
-title: Organization policy
-linkTitle: Org policy
+title: Organization policies
+linkTitle: Org policies
 weight: 20
 description: Centrally manage sandbox network, filesystem, and MCP policies for your organization.
 keywords: docker sandboxes, governance, organization policy, AI governance, admin console, network access, filesystem access, mcp policy
 aliases:
   - /ai/sandboxes/security/governance/
+  - /ai/sandboxes/governance/org/
 ---
 
 [Local policies](local.md) give individual developers control over what their
@@ -40,7 +41,8 @@ of [Docker Home](https://app.docker.com). Network and filesystem policies are
 managed separately, under **Network access** and **Filesystem access**.
 
 The steps in this section cover network and filesystem policies. MCP policies
-use Cedar rather than rule rows; see [MCP policies](#mcp-policies).
+use Cedar rather than rule rows. For MCP examples, see
+[MCP tool access](mcp.md).
 
 To create a policy:
 
@@ -53,7 +55,7 @@ To create a policy:
    choose the teams the policy applies to. See
    [Scope policies to teams](#scope-policies-to-teams).
 1. Select **Add rule** to add each rule. For rule syntax, see
-   [Policy concepts](concepts.md#rule-syntax).
+   [Policy concepts](../concepts.md#rule-syntax).
 
 Existing policies are listed with their name, scope, rule count, and last
 update. Use the action menu (⋮) to edit or delete a policy.
@@ -66,13 +68,13 @@ A network rule takes a network target and an action (allow or deny). You can
 add multiple entries at once, one per line.
 
 For the full syntax reference (exact hostnames, wildcard subdomains, port
-suffixes, and CIDR ranges), see [Policy concepts](concepts.md#network-rules).
+suffixes, and CIDR ranges), see [Network access rules](network.md).
 
 When organization governance is active, local network rules are not evaluated.
 The organization policy is the only policy in effect. `sbx policy ls` hides
 these inactive local rules by default. See
-[Monitoring](monitoring.md#showing-inactive-rules) for how to list them and read
-the rule view.
+[Monitoring](../monitor-and-enforce/monitoring.md#showing-inactive-rules) for
+how to list them and read the rule view.
 
 ## Filesystem policies
 
@@ -84,26 +86,15 @@ Admins can restrict which paths are mountable with filesystem allow and deny
 rules. Each rule takes a path pattern and an action (allow or deny).
 
 For path pattern syntax and how read and write access combine to allow a
-mount, see [Policy concepts](concepts.md#filesystem-rules).
+mount, see [Filesystem access rules](filesystem.md).
 
 ## MCP policies
 
 MCP policies control sandbox activity that goes through MCP servers, such as
 server registration, tool calls, resource reads, prompts, and gateway
 meta-tools. Unlike network and filesystem policies, MCP policies are written in
-Cedar using the `MCP` namespace.
-
-MCP policy is default deny: an MCP request is blocked unless a matching
-`permit` allows it. Use `forbid` for rules that must always deny a matching
-request. A matching `forbid` overrides a `permit`, including one that requires
-approval.
-
-Use `@requireApproval` on a `permit` statement to require user approval before a
-matching request runs. If the sandbox can't ask a user for approval, the request
-is denied.
-
-For the MCP policy model and a starter example, see
-[MCP policies](concepts.md#mcp-policies).
+Cedar using the `MCP` namespace. For policy patterns and examples, see
+[MCP tool access](mcp.md).
 
 ## Scope policies to teams
 
@@ -135,12 +126,12 @@ team membership changes, including changes synced from your IdP.
 ### How org-wide and team-scoped policies combine
 
 A user is governed by all of their
-[effective policies](concepts.md#policy-scope) at once — every org-wide policy,
-plus the team-scoped policies for the teams they belong to. The rules combine
-into a single evaluation in which deny always wins, so a team-scoped policy can
-grant access on top of the org-wide policies but can't loosen a restriction they
-impose. For the full evaluation model, see
-[Rule evaluation](concepts.md#rule-evaluation).
+[effective policies](../concepts.md#policy-scope) at once — every org-wide
+policy, plus the team-scoped policies for the teams they belong to. The rules
+combine into a single evaluation in which deny always wins, so a team-scoped
+policy can grant access on top of the org-wide policies but can't loosen a
+restriction they impose. For the full evaluation model, see
+[Rule evaluation](../concepts.md#rule-evaluation).
 
 This makes org-wide policies the natural home for guardrails that must hold
 everywhere. For example, an org-wide policy can deny a category of domains for
@@ -158,7 +149,7 @@ The examples that follow show each pattern.
 
 ### Grant one team access to a blocked domain
 
-Because access is [denied by default](concepts.md#rule-evaluation), you don't
+Because access is [denied by default](../concepts.md#rule-evaluation), you don't
 need an explicit deny to keep a domain off-limits. Leaving it out of every allow
 rule is enough. To give a single team access to a domain no one else can reach:
 
@@ -189,7 +180,7 @@ team allow apply to different hostnames, so they never conflict.
 
 To block a domain and all its subdomains, deny `**.example.com` instead. With
 that pattern, deny wins over any team-scoped allow on a subdomain. See
-[Hostname patterns](concepts.md#network-rules) for how exact hostnames and
+[Hostname patterns](../concepts.md#network-rules) for how exact hostnames and
 wildcards match.
 
 ## Precedence
@@ -199,7 +190,7 @@ organization rules set in the Admin Console determine what is allowed or denied,
 and they can't be supplemented or overridden from a developer's machine. The
 same applies to filesystem policies: organization rules replace local behavior
 entirely. For how a user's organization policies are evaluated together, see
-[Policy concepts](concepts.md#rule-evaluation).
+[Policy concepts](../concepts.md#rule-evaluation).
 
 To unblock a domain when organization governance is active, update the rule in
 the Admin Console or via the [API](/reference/api/ai-governance/). Without
