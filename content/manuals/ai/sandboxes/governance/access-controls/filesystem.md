@@ -1,14 +1,14 @@
 ---
-title: Filesystem access rules
+title: Filesystem access policies
 linkTitle: Filesystem access
 weight: 40
 description: Control which host paths Docker Sandboxes can mount as workspaces with organization filesystem policies.
 keywords: docker sandboxes, filesystem access, filesystem rules, workspace mount, organization policy, governance
 ---
 
-Filesystem access rules control which host paths a sandbox can mount as a
-workspace. Organization filesystem policies contain one or more rules that
-restrict sandbox workspaces to approved directories.
+Filesystem access policies control which host paths a sandbox can mount as a
+workspace. Each policy contains one or more rules that restrict sandbox
+workspaces to approved directories.
 
 Filesystem access is managed with [organization policies](organization.md). When
 organization governance is active, filesystem rules replace local behavior for

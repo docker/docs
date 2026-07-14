@@ -44,10 +44,10 @@ MCP policy basics, evaluation, and precedence.
   machine with the `sbx policy` CLI.
 - [Organization policies](access-controls/organization.md): centrally manage
   sandbox policies across your organization from the Admin Console.
-- [Network access rules](access-controls/network.md): control outbound network
+- [Network access policies](access-controls/network.md): control outbound network
   access from sandboxes.
-- [Filesystem access rules](access-controls/filesystem.md): control which host
-  paths sandboxes can mount as workspaces.
+- [Filesystem access policies](access-controls/filesystem.md): control which
+  host paths sandboxes can mount as workspaces.
 - [MCP access policies](access-controls/mcp.md): control MCP server registration,
   tool calls, resources, prompts, and approval gates.
 
