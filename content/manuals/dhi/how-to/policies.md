@@ -30,17 +30,20 @@ Docker Scout service.
 
 The `dhi/policies` bundle includes the following policies:
 
-| Policy | What it checks |
-| --- | --- |
-| No default root user for non-dev images | The image is configured to run as a non-root user. |
-| No fixable vulnerabilities past their remediation SLA | No fixable CVEs remain unaddressed past their remediation SLA (7 days for critical and high, 30 days for others). |
-| No high-profile vulnerabilities | The image is free of a curated list of well-known CVEs, optionally including the CISA KEV catalog. |
-| No embedded malware | A malware scan attestation is present and passing. |
-| No embedded secrets | A secret scan attestation is present and passing. |
-| No failing tests | A test attestation is present and passing. |
-| Signed supply chain attestations | SBOM and provenance attestations are attached and signed. |
-| Unintentional shell or package manager | No undeclared shell or package manager is present in the image. |
-| STIG scan | For FIPS-compliant images, the STIG scan meets the required score. |
+| Policy | Policy name | What it checks |
+| --- | --- | --- |
+| No default root user for non-dev images | `dhi-default-non-root-user` | The image is configured to run as a non-root user. |
+| No fixable vulnerabilities past their remediation SLA | `fixable-vulnerabilities` | No fixable CVEs remain unaddressed past their remediation SLA (7 days for critical and high, 30 days for others). |
+| No high-profile vulnerabilities | `high-profile-vulnerabilities` | The image is free of a curated list of well-known CVEs, optionally including the CISA KEV catalog. |
+| No embedded malware | `dhi-no-embedded-malware` | A malware scan attestation is present and passing. |
+| No embedded secrets | `dhi-no-embedded-secrets` | A secret scan attestation is present and passing. |
+| No failing tests | `dhi-no-failing-tests` | A test attestation is present and passing. |
+| Signed supply chain attestations | `dhi-signed-supply-chain-attestations` | SBOM and provenance attestations are attached and signed. |
+| Unintentional shell or package manager | `dhi-unintentional-shell-or-package-manager` | No undeclared shell or package manager is present in the image. |
+| STIG scan | `dhi-stig-scan-score` | For FIPS-compliant images, the STIG scan meets the required score. |
+
+The **Policy name** is the stable ID you reference in a `--policy-config` file to
+enable, disable, or tune a policy.
 
 For the authoritative list and the Rego source for each policy, see the
 [`docker-hardened-images/policies`](https://github.com/docker-hardened-images/policies)
@@ -123,9 +126,29 @@ $ docker scout policy my-dhi-app:v1 \
   --policy-config ./config.json
 ```
 
-The config file matches policies by their stable name and lets you disable
-individual policies or adjust their settings, such as severity levels and grace
-periods. For the config file format, see
+The config file matches policies by the **Policy name** listed in
+[Policies in the DHI bundle](#policies-in-the-dhi-bundle) and lets you disable
+individual policies or adjust their settings. For example, the following config
+disables the STIG scan policy and only flags critical fixable vulnerabilities:
+
+```json
+{
+  "policies": [
+    {
+      "name": "dhi-stig-scan-score",
+      "enabled": false
+    },
+    {
+      "name": "fixable-vulnerabilities",
+      "config": {
+        "severities": ["CRITICAL"]
+      }
+    }
+  ]
+}
+```
+
+For the full config file format, see
 [Configure built-in policies](../../scout/policy/local.md#configure-built-in-policies).
 
 You can also combine the DHI bundle with the built-in Docker Scout policies,
