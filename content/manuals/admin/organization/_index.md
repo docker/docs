@@ -41,8 +41,9 @@ For how organizations fit into the broader company hierarchy, see the
 ## Organization roles
 
 An organization includes owners, members, and optional teams. Organization
-owners have full administrator access to manage members, roles, and teams.
-Teams group members to manage repository permissions collectively.
+owners have full administrator access to manage members, roles, and teams. A
+team is an optional grouping of members that share the same repository
+permissions.
 
 For details about each role and its permissions, see
 [Roles and permissions](/manuals/enterprise/security/roles-and-permissions/_index.md).

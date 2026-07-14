@@ -22,15 +22,17 @@ grid:
   - title: Security
     description: Explore security features for administrators.
     icon: shield-check
-    link: /security/
+    link: /enterprise/security/
 aliases:
   - /docker-hub/admin-overview
 ---
 
-Administrators can manage companies and organizations using
-Docker Home. Docker Home provides centralized
-observability, access management, and security controls across Docker
-environments. It lets you:
+Organization and company owners can manage members, control access, and enforce
+security across their Docker environments. You perform these tasks in Docker
+Home, which provides centralized observability, access management, and security
+controls.
+
+As an organization or company owner, you can:
 
 - Create and manage companies and organizations
 - Assign roles and permissions to members
