@@ -19,7 +19,7 @@ Owners can invite new members to an organization via Docker ID, email address, o
 >
 > If you manage a company, first select the organization from the
 > **Organizations** page before inviting members. For more details, see
-> [Manage company members](/manuals/admin/company/manage/users.md).
+> [Manage company members](/manuals/admin/company/manage/_index.md#manage-company-members).
 
 ### Invite members via Docker ID or email address
 

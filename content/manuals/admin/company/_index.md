@@ -14,15 +14,15 @@ grid:
       Learn how to add and manage organizations as well as seats within your
       company.
     icon: building-storefront
-    link: /admin/company/manage/organizations/
+    link: /admin/company/manage/#manage-organizations
   - title: Manage company owners
     description: Find out more about company owners and how to manage them.
     icon: user-group
-    link: /admin/company/manage/owners/
+    link: /admin/company/manage/#manage-company-owners
   - title: Manage users
     description: Explore how to manage users in all organizations.
     icon: user-plus
-    link: /admin/company/manage/users/
+    link: /admin/company/manage/#manage-company-members
   - title: Configure single sign-on
     description: Discover how to configure SSO for your entire company.
     icon: key
