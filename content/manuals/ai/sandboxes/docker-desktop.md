@@ -20,8 +20,25 @@ running AI coding agents in isolated microVMs. This integration is superseded
 by the standalone `sbx` CLI, which provides the full Docker Sandboxes workflow
 and doesn't require Docker Desktop.
 
-> [!NOTE]
-> Use the standalone `sbx` CLI for sandboxed AI agent workflows.
+## Migrate to the sbx CLI
+
+Use the standalone `sbx` CLI for new sandboxes. Use this page only when you
+need to work with existing Docker Desktop-integrated sandboxes while you
+migrate.
+
+The common commands map as follows:
+
+| Task             | Docker Desktop integration             | Standalone CLI                |
+| ---------------- | -------------------------------------- | ----------------------------- |
+| Run an agent     | `docker sandbox run AGENT [PATH]`      | `sbx run AGENT [PATH]`        |
+| List sandboxes   | `docker sandbox ls`                    | `sbx ls`                      |
+| Open a shell     | `docker sandbox exec -it <name> bash`  | `sbx exec -it <name> bash`    |
+| Remove a sandbox | `docker sandbox rm <name>`             | `sbx rm <name>`               |
+
+Install and sign in to the `sbx` CLI by following the
+[Docker Sandboxes get started guide](_index.md#get-started). For network
+access rules, follow the standalone
+[network policy instructions](get-started.md#manage-network-access).
 
 ## Prerequisites
 
