@@ -65,9 +65,31 @@ With a company, administrators can:
 - View and manage all nested organizations
 - Configure company and organization settings centrally
 - Control access to the company
-- Have up to ten unique users assigned to the company owner role
 - Configure SSO and SCIM for all nested organizations
 - Enforce SSO for all users in the company
+
+## Company owners
+
+A company can have multiple owners. A company owner has visibility across the
+entire company and can manage settings for every organization under it. Company
+owners have the same access rights as organization owners, but don't need to be
+a member of any individual organization. A company can have up to ten unique
+company owners.
+
+Company owners don't occupy a seat unless one of the following applies:
+
+- They're added as a member of an organization under the company.
+- SSO is enabled and the company owner signs in through SSO, which automatically
+  adds them as an organization member.
+
+When you first create a company, your account is both a company owner and an
+organization owner, so it occupies a seat while you remain an organization
+owner. To keep full company-owner access without using a seat,
+[assign another user as the organization owner](/manuals/admin/organization/manage/members.md#update-a-member-role),
+then remove yourself from the organization.
+
+To add or remove company owners, see
+[Manage your company](/manuals/admin/company/manage.md#company-owners).
 
 ## Create and manage your company
 

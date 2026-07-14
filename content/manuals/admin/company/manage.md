@@ -38,22 +38,9 @@ longer manage it through the company, and its owner must manage it separately.
 
 ## Company owners
 
-A company can have multiple owners. Company owners have visibility across the
-entire company and can manage settings that apply to all organizations under
-that company. They also have the same access rights as organization owners without
-needing individual organization membership.
-
-Company owners do not occupy a seat unless:
-
-- They are added as a member of an organization under your company.
-- SSO is enabled and the company owner signs in via SSO, which automatically
-  adds them as an organization member.
-
-When you first create a company, your account is both a company owner and an
-organization owner, so it occupies a seat as long as you remain an organization
-owner. To keep full company-owner access without using a seat,
-[assign another user as the organization owner](/manuals/admin/organization/manage/members.md#update-a-member-role),
-then remove yourself from the organization.
+A company can have multiple owners who manage the company and all of its
+organizations. For details about the company owner role and how it affects
+seats, see [Company owners](/manuals/admin/company/_index.md#company-owners).
 
 ### Add a company owner
 
@@ -61,7 +48,7 @@ then remove yourself from the organization.
 1. Select **Company owners**, then choose **Add owner**.
 1. Specify the user's Docker ID, then finish by selecting **Add company owner**.
 
-### Remove company owner
+### Remove a company owner
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your company.
 1. Select **Company owners**.
