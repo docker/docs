@@ -1,6 +1,6 @@
 ---
 title: Monitor and enforce
-weight: 20
+weight: 30
 description: Inspect active sandbox governance rules, collect audit records, and enforce organization sign-in.
 keywords: docker sandboxes, governance monitoring, audit logs, sign-in enforcement, policy enforcement
 ---

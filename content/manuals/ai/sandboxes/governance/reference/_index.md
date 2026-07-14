@@ -1,6 +1,6 @@
 ---
 title: Reference
-weight: 30
+weight: 40
 description: Reference material for Docker AI Governance policy APIs and policy syntax.
 keywords: docker sandboxes, governance reference, governance API, policy reference
 ---

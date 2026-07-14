@@ -1,6 +1,6 @@
 ---
 title: Policy concepts
-weight: 5
+weight: 10
 description: The resource model, rule syntax, and evaluation logic behind Docker sandbox governance.
 keywords: docker sandboxes, policy concepts, rule syntax, network rules, filesystem rules, mcp policy, cedar policy, precedence, rule evaluation
 ---
@@ -126,9 +126,9 @@ Cedar using the `MCP` namespace, rather than the network and filesystem rule
 format.
 
 Cedar evaluates each MCP request against a principal, action, resource, and
-context. Admins write rules for the action, resource, and context. Policy scope
-supplies the principal, so a rule that tries to match a specific user, team,
-tenant, or role in the principal doesn't match.
+context. Admins write policy statements for the action, resource, and context.
+Policy scope supplies the principal, so a statement that tries to match a
+specific user, team, tenant, or role in the principal doesn't match.
 
 Governed MCP actions are default deny: an MCP request is blocked unless a
 matching `permit` allows it. A matching `forbid` overrides any `permit`,

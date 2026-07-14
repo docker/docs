@@ -1,13 +1,12 @@
 ---
 title: Access controls
-weight: 10
+weight: 20
 description: Configure local and organization controls for sandbox network, filesystem, and MCP access.
 keywords: docker sandboxes, access controls, governance, network access, filesystem access, MCP access
 ---
 
-Access controls define what sandboxes can reach or use. Use these pages to
-configure policies by scope, then drill into the access surface you want to
-govern.
+Access controls define what sandboxes can reach or use. Choose a policy scope,
+then choose the access surface you want to govern.
 
 ## Policy scope
 

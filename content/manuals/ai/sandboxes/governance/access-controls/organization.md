@@ -11,7 +11,7 @@ aliases:
 
 [Local policies](local.md) give individual developers control over what their
 sandboxes can access. Organization policy moves that control to the admin level:
-rules defined in **Admin Console** apply to sandboxes across the organization,
+rules defined in the Admin Console apply to sandboxes across the organization,
 either to every member or to specific teams. When organization governance is
 active, it replaces local `sbx policy` rules entirely — local rules are no
 longer evaluated and can't be used to supplement or override the organization
@@ -41,7 +41,7 @@ of [Docker Home](https://app.docker.com). Network and filesystem policies are
 managed separately, under **Network access** and **Filesystem access**.
 
 The steps in this section cover network and filesystem policies. MCP policies
-use Cedar rather than rule rows. For MCP examples, see
+use Cedar rather than the network and filesystem rule form. For MCP examples, see
 [MCP tool access](mcp.md).
 
 To create a policy:
