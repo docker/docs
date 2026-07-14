@@ -20,7 +20,7 @@ running AI coding agents in isolated microVMs. This integration is superseded
 by the standalone `sbx` CLI, which provides the full Docker Sandboxes workflow
 and doesn't require Docker Desktop.
 
-## Migrate to the sbx CLI
+## Migrate to the standalone CLI
 
 Use the standalone `sbx` CLI for new sandboxes. Use this page only when you
 need to work with existing Docker Desktop-integrated sandboxes while you
