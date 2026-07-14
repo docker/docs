@@ -78,12 +78,12 @@ against the DHI policy bundle.
 
 #### Step 1: Use a DHI base image in your Dockerfile
 
-Create a Dockerfile that uses a Docker Hardened Image mirrored repository as the
-base. For example:
+Create a Dockerfile that uses a Docker Hardened Image from the DHI catalog as
+the base. For example:
 
 ```dockerfile
 # Dockerfile
-FROM <your-namespace>/dhi-python:3.13
+FROM dhi.io/python:3.13
 
 ENTRYPOINT ["python", "-c", "print('Hello from a DHI-based image')"]
 ```
