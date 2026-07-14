@@ -38,6 +38,8 @@ personal account.
   machine with the `sbx policy` CLI
 - [Organization policy](org.md): centrally manage sandbox policies across
   your organization from the Admin Console
+- [Org policy recipes](recipes.md): minimal, composable network policy presets
+  for common workflows, in Admin Console and API form
 - [Sign-in enforcement](sign-in-enforcement.md): require developers to sign in
   as organization members, enforced through endpoint management
 - [Monitoring](monitoring.md): inspect active rules and monitor sandbox
