@@ -42,6 +42,9 @@ organization:
   keys and verification tools
 - [Log](https://github.com/docker-hardened-images/log): Log of references (tag >
   digest) for Docker Hardened Images
+- [Policies](https://github.com/docker-hardened-images/policies): Rego source
+  for the Docker Scout policies used to enforce DHI security and compliance
+  standards
 - [dhictl](https://github.com/docker-hardened-images/dhictl): Command-line
   interface for managing and interacting with Docker Hardened Images
 - [Terraform Provider](https://github.com/docker-hardened-images/terraform-provider-dhi):
