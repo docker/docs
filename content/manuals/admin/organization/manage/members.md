@@ -15,6 +15,12 @@ Learn how to manage members for your organization in Docker Hub and the Docker A
 
 Owners can invite new members to an organization via Docker ID, email address, or with a CSV file containing email addresses. If an invitee does not have a Docker account, they must create an account and verify their email address before they can accept an invitation to join the organization. When inviting members, their pending invitation occupies a seat.
 
+> [!NOTE]
+>
+> If you manage a company, first select the organization from the
+> **Organizations** page before inviting members. For more details, see
+> [Manage company members](/manuals/admin/company/manage/users.md).
+
 ### Invite members via Docker ID or email address
 
 Use the following steps to invite members to your organization via Docker ID or email address.
