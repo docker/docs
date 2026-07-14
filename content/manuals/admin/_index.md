@@ -28,7 +28,7 @@ aliases:
 ---
 
 Administrators can manage companies and organizations using
-[Docker Home](https://app.docker.com). Docker Home provides centralized
+Docker Home. Docker Home provides centralized
 observability, access management, and security controls across Docker
 environments. It lets you:
 

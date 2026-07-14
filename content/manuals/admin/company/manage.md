@@ -2,8 +2,8 @@
 title: Manage your company
 linkTitle: Manage
 weight: 20
-description: Learn how to manage your company, including its organizations, owners, and members, using the Docker Admin Console.
-keywords: company, manage company, multiple organizations, company owners, company members, Docker Admin Console, add organization, resend invites
+description: Learn how to manage your company, including its organizations, owners, and members, using Docker Home.
+keywords: company, manage company, multiple organizations, company owners, company members, Docker Home, add organization, resend invites
 aliases:
   - /admin/company/manage/organizations/
   - /admin/company/manage/owners/
@@ -33,7 +33,7 @@ company.
 > Once you add an organization to a company, you can't remove it from the
 > company.
 
-1. Sign in to the [Docker Home](https://app.docker.com) and select
+1. Sign in to [Docker Home](https://app.docker.com) and select
    your company.
 1. Select **Managed organizations**.
 1. Select **Add organization**, then choose an organization from the dropdown.
@@ -118,4 +118,4 @@ sales to add seats.
 Teams exist at the organization level, not the company level. After inviting
 members to an organization, you can add them to teams within that organization.
 For more details, see
-[Manage members on a team](../organization/manage/members.md#manage-members-on-a-team).
+[Manage members on a team](/manuals/admin/organization/manage/members.md#manage-members-on-a-team).

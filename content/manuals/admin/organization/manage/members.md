@@ -20,12 +20,6 @@ Docker account, they must create one and verify their email address before
 they can accept an invitation to join the organization. When inviting members,
 their pending invitation occupies a seat.
 
-> [!NOTE]
->
-> If you manage a company, first select the organization from the
-> **Organizations** page before inviting members. For more details, see
-> [Invite members to an organization](/manuals/admin/company/manage.md#invite-members-to-an-organization).
-
 ### Invite members via Docker ID or email address
 
 Use the following steps to invite members to your organization via Docker ID

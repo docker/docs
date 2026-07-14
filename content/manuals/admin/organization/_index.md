@@ -20,7 +20,7 @@ grid:
   - title: Security
     description:
       Start here to manage security and access for your organization, including
-      single sign-on, provisioning, and access management.
+      single sign-on, provisioning, and image and registry access management.
     icon: shield-check
     link: /enterprise/security/
 ---

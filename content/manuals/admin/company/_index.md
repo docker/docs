@@ -3,7 +3,7 @@ title: Company overview
 linkTitle: Company
 weight: 20
 description: Learn how to manage multiple organizations using companies, including managing users, owners, and security.
-keywords: company, multiple organizations, manage companies, admin console, Docker Business settings
+keywords: company, multiple organizations, manage companies, Docker Home, Docker Business settings
 grid:
   - title: Create a company
     description: Get started by learning how to create a company.

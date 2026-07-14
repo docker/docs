@@ -3,14 +3,14 @@ title: Create new company
 linkTitle: Setup
 weight: 10
 description: Learn how to create a company to centrally manage multiple organizations.
-keywords: company, hub, organization, company owner, Admin Console, company management, Docker Business, create company, Docker Admin Console
+keywords: company, hub, organization, company owner, Docker Home, company management, Docker Business, create company
 aliases:
   - /docker-hub/new-company/
 ---
 
 {{< summary-bar feature_name="Company" >}}
 
-Learn how to create a new company in the Docker Admin Console, a centralized
+Learn how to create a new company in Docker Home, a centralized
 dashboard for managing organizations.
 
 ## Prerequisites
