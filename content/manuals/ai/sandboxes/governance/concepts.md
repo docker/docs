@@ -196,7 +196,8 @@ whether your organization has governance enabled:
 - Organization governance active: organization rules apply across all developer
   machines, and local and kit-defined rules are not evaluated. `sbx policy ls`
   hides these inactive rules by default; see
-  [Monitoring](monitoring.md#showing-inactive-rules) for how to list them.
+  [Monitoring](monitor-and-enforce/monitoring.md#showing-inactive-rules) for how
+  to list them.
 
 When organization governance is active, a user's organization policies are
 evaluated together, as described in [Rule evaluation](#rule-evaluation).

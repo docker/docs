@@ -18,9 +18,9 @@ system.
 > [organization governance](governance/) requires a separate paid subscription.
 
 Organization admins can
-[centrally manage sandbox network and filesystem policies](governance/org.md),
-so the same rules apply uniformly across every developer's machine. Available
-on a separate paid subscription.
+[centrally manage sandbox network and filesystem policies](governance/access-controls/organization.md)
+from the Docker Admin Console, so the same rules apply uniformly across every
+developer's machine. Available on a separate paid subscription.
 
 ## Get started
 

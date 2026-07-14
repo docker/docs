@@ -227,8 +227,9 @@ $ sbx policy allow network registry.npmjs.org
 With **Balanced**, common development services are allowed by default. With
 **Locked Down**, everything is blocked until you allow it — including your
 model provider's API. If the agent can't reach a service it needs, the network
-policy is the first place to look. See [Policies](governance/local.md) for the
-full rule set and how to customize it.
+policy is the first place to look. See
+[Policies](governance/access-controls/local.md) for the full rule set and how
+to customize it.
 
 ## Clean up
 
