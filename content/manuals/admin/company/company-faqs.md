@@ -32,8 +32,7 @@ Company owners do not occupy a seat unless one of the following is true:
 
 When you first create a company, your account is both a company owner and an
 organization owner, so it occupies a seat as long as you remain an organization
-owner. For how to keep company-owner access without using a seat, see
-[Company owners](/manuals/admin/company/_index.md#company-owners).
+owner.
 
 ### What permissions does the company owner have in the associated/nested organizations?
 
