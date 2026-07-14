@@ -1,22 +1,22 @@
 ---
-title: Local access rules
-linkTitle: Local rules
+title: Local policy
 weight: 10
-description: Configure network access rules for sandboxes on your local machine.
+description: Configure local network access rules for sandboxes on your machine.
 keywords: docker sandboxes, local policy, network access, allow rules, deny rules, sbx policy
 aliases:
   - /ai/sandboxes/security/policy/
   - /ai/sandboxes/governance/local/
 ---
 
-The `sbx policy` command manages network access rules on your local machine.
-Rules apply to all sandboxes on the machine when you use the global scope, or
-to a single sandbox when scoped by name.
+The `sbx policy` command manages the local policy on your machine. The local
+policy contains network access rules. Rules apply to all sandboxes on the
+machine when you use the global scope, or to a single sandbox when scoped by
+name.
 
-Local rules apply only when your organization doesn't enforce governance:
+Local policy applies only when your organization doesn't enforce governance:
 
-- **No org governance**: local rules fully control what sandboxes can access.
-- **Org governance active**: the organization policy replaces local policy.
+- **No org governance**: the local policy controls what sandboxes can access.
+- **Org governance active**: organization policies replace local policy.
   Local rules are inactive, and `sbx policy allow` and `sbx policy deny` have
   no effect. To list the inactive local rules, run
   `sbx policy ls --include-inactive`. See

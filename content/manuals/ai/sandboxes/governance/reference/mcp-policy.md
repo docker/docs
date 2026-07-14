@@ -11,8 +11,8 @@ namespace. This reference defines the Docker-specific policy surface for Model
 Context Protocol (MCP) activity made available to sandboxes through Docker's
 MCP gateway.
 
-Use this reference with [Control MCP tool access](../access-controls/mcp.md)
-for common policy patterns. For the Cedar language, see the
+Use this reference with [MCP access policies](../access-controls/mcp.md) for
+common policy patterns. For the Cedar language, see the
 [Cedar documentation](https://docs.cedarpolicy.com/).
 
 ## Evaluation model

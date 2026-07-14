@@ -6,14 +6,14 @@ description: Control outbound network access from Docker Sandboxes with local an
 keywords: docker sandboxes, network access, network rules, governance, local policy, organization policy
 ---
 
-Network access rules control outbound connections from sandboxes. Use them to
-allow the domains, IP ranges, and ports a workflow needs, and to block
-destinations that should stay unavailable.
+Network access rules control outbound connections from sandboxes. Network
+policies contain one or more rules that allow the domains, IP ranges, and ports
+a workflow needs, or block destinations that should stay unavailable.
 
 You can configure network access in two places:
 
-- [Local access rules](local.md), which apply to sandboxes on one developer
-  machine when organization governance is not active.
+- [Local policy](local.md), which applies to sandboxes on one developer machine
+  when organization governance is not active.
 - [Organization policies](organization.md), which apply centrally across an
   organization or to selected teams.
 
@@ -48,7 +48,7 @@ $ sbx policy deny network ads.example.com
 ```
 
 For presets, sandbox-scoped rules, testing, and troubleshooting, see
-[Local access rules](local.md).
+[Local policy](local.md).
 
 ## Organization network rules
 

@@ -5,13 +5,15 @@ description: Configure local and organization controls for sandbox network, file
 keywords: docker sandboxes, access controls, governance, network access, filesystem access, MCP access
 ---
 
-Access controls define what sandboxes can reach or use. Choose a policy scope,
-then choose the access surface you want to govern.
+Access controls are expressed as policies. Local and organization pages
+describe where policies apply. Network and filesystem pages describe the rules
+inside those policies. MCP policies use Cedar statements instead of the network
+and filesystem rule format.
 
 ## Policy scope
 
-- [Local access rules](local.md): configure network rules on a developer
-  machine with the `sbx policy` CLI.
+- [Local policy](local.md): configure network rules on a developer machine with
+  the `sbx policy` CLI.
 - [Organization policies](organization.md): manage centralized policies for an
   organization or team in the Docker Admin Console.
 
@@ -21,5 +23,5 @@ then choose the access surface you want to govern.
   sandboxes.
 - [Filesystem access rules](filesystem.md): control which host paths sandboxes
   can mount as workspaces.
-- [MCP tool access](mcp.md): control MCP server registration, tool calls,
+- [MCP access policies](mcp.md): control MCP server registration, tool calls,
   resources, prompts, and approval gates with Cedar policy.
