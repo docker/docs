@@ -2,7 +2,7 @@
 title: Company FAQs
 linkTitle: FAQs
 weight: 30
-description: Company FAQs
+description: Frequently asked questions about Docker companies, including subscriptions, seats, company owners, and permissions.
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, company, administration, company management
 tags: [FAQ]
 aliases:
@@ -25,10 +25,11 @@ manage it outside of the company. For more details, see
 
 ### Do company owners occupy a subscription seat?
 
-Company owners do not occupy a seat unless one of the following is true:
+Company owners don't occupy a seat unless one of the following is true:
 
 - They are added as a member of an organization under your company
-- SSO is enabled and the company owner signs in via SSO, which automatically adds them as an organization member
+- SSO is enabled and the company owner signs in through SSO, which
+  automatically adds them as an organization member
 
 When you first create a company, your account is both a company owner and an
 organization owner, so it occupies a seat as long as you remain an organization
@@ -37,6 +38,9 @@ owner.
 ### What permissions does the company owner have in the associated/nested organizations?
 
 Company owners can navigate to the **Organizations** page to view all their
-nested organizations in a single location. They can also view or edit organization members and change single sign-on (SSO) and System for Cross-domain Identity Management (SCIM) settings. Changes to company settings impact all users in each organization under the company.
+nested organizations in a single location. They can also view or edit
+organization members and change single sign-on (SSO) and System for
+Cross-domain Identity Management (SCIM) settings. Changes to company settings
+impact all users in each organization under the company.
 
 For more information, see [Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md).

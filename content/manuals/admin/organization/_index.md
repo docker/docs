@@ -3,7 +3,7 @@ title: Organization overview
 linkTitle: Organization
 weight: 10
 description: Learn how to manage your Docker organization, including teams, members, permissions, and settings.
-keywords: organizations, admin, overview, manage teams, roles
+keywords: organizations, admin, overview, manage teams, roles, members, permissions, organization settings
 grid:
   - title: Onboard your organization
     description: Learn how to onboard and secure your organization.
@@ -38,7 +38,7 @@ The following diagram shows how organizations relate to teams and members.
 For how organizations fit into the broader company hierarchy, see the
 [administration overview](/manuals/admin/_index.md#company-and-organization-hierarchy).
 
-## Organization members
+## Organization roles
 
 An organization includes owners, members, and optional teams. Organization
 owners have full administrator access to manage members, roles, and teams.

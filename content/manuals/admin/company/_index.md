@@ -31,9 +31,10 @@ aliases:
 
 {{< summary-bar feature_name="Company" >}}
 
-A company provides a single point of visibility across multiple organizations,
-for centralized organization and settings management. Organization owners with a Docker Business subscription can create a company and
-manage it through Docker Home.
+A company provides a single point of visibility across multiple
+organizations, for centralized organization and settings management.
+Organization owners with a Docker Business subscription can create a company
+and manage it through Docker Home.
 
 ## Company structure
 
@@ -45,19 +46,20 @@ organizations.
 For the full administration hierarchy, see the
 [administration overview](/manuals/admin/_index.md#company-and-organization-hierarchy).
 
-## Company owners
+## Company roles
 
-The creator of a company becomes both a company owner and an
-organization owner, and occupies a seat as organization
-owner. After creation, a company can have multiple owners, and each owner has visibility across the
-entire company. They can manage settings for every organization under it and have the same access rights as organization owners.
+A company includes one or more company owners. The creator of a company
+becomes both a company owner and an organization owner, and occupies a seat
+as organization owner. After creation, a company can have multiple owners,
+and each owner has visibility across the entire company. They can manage
+settings for every organization under it and have the same access rights as
+organization owners.
 
-- A company can have up to ten unique
-  company owners.
+- A company can have up to ten unique company owners.
 - Company owners don't occupy a seat unless one of the following applies:
   - They're added as a member of an organization under the company.
-  - SSO is enabled and the company owner signs in through SSO, which automatically
-    adds them as an organization member.
+  - SSO is enabled and the company owner signs in through SSO, which
+    automatically adds them as an organization member.
 
 To add or remove company owners, see
 [Manage your company](/manuals/admin/company/manage.md#company-owners).

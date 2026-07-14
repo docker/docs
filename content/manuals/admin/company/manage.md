@@ -16,11 +16,17 @@ aliases:
 
 {{< summary-bar feature_name="Company" >}}
 
-After creating a company, you can manage multiple organizations from Docker Home. Company owners can use the company portal to invite users to specific organizations, view seat availability across organizations, and add new company owners.
+After creating a company, you can manage multiple organizations from Docker
+Home. Company owners can use the company portal to invite users to specific
+organizations, view seat availability across organizations, and add new
+company owners.
 
 ## Add more organizations
 
-Company owners can add Docker organizations with a Docker Business plan to their company, so long as they're also the organization owners for that organization. There's no limit to the number of organizations you add to a company.
+Company owners can add Docker organizations with a Docker Business plan to
+their company, so long as they're also the organization owners for that
+organization. There's no limit to the number of organizations you add to a
+company.
 
 > [!IMPORTANT]
 >
@@ -40,7 +46,7 @@ longer manage it through the company, and its owner must manage it separately.
 
 A company can have multiple owners who manage the company and all of its
 organizations. For details about the company owner role and how it affects
-seats, see [Company owners](/manuals/admin/company/_index.md#company-owners).
+seats, see [Company roles](/manuals/admin/company/_index.md#company-roles).
 
 ### Add a company owner
 
@@ -52,7 +58,8 @@ seats, see [Company owners](/manuals/admin/company/_index.md#company-owners).
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your company.
 1. Select **Company owners**.
-1. Find the company owner you want to remove and select the **Actions** menu, then choose **Remove as company owner**.
+1. Find the company owner you want to remove and select the **Actions** menu,
+   then choose **Remove as company owner**.
 
 ## Company invitations
 
@@ -73,23 +80,28 @@ invited to.
    - To invite groups of users, select **CSV upload**.
 1. Add user(s) to an organization by choosing **Select an organization**.
 
-Users receive invitations in their email with instructions to accept the invitation. After accepting the invitation, new members appear on the **Users** page. The table specifies how many organizations they're members of.
+Users receive invitations in their email with instructions to accept the
+invitation. After accepting the invitation, new members appear on the
+**Users** page. The table specifies how many organizations they're members of.
 
 ### Resend invitations
 
-Company owners can resend invitations
-from the company-level **Users** page. To resend individual invitations:
+Company owners can resend invitations from the company-level **Users** page.
+To resend individual invitations:
 
 1. Select your company from [Docker Home](https://app.docker.com/).
 1. Select **Users**, then locate the invitee from the users table.
 1. Select the **Actions** menu, then choose **Resend**.
-   - Before resending, confirm you are resending the invitation to the correct invitee.
-   - The resend invitation modal displays the date you originally invited the invitee.
+   - Before resending, confirm you are resending the invitation to the correct
+     invitee.
+   - The resend invitation modal displays the date you originally invited the
+     invitee.
 1. Choose **Invite** to confirm.
 
 To bulk resend invitations:
 
-1. From the users table, use the multi-select checkboxes next to the invitees you want to invite.
+1. From the users table, use the multi-select checkboxes next to the invitees
+   you want to invite.
 1. Select **Resend invites**, then choose **Resend** to confirm.
 
 ## Add seats to an organization
