@@ -30,7 +30,7 @@ aliases:
 Administrators can manage companies and organizations using
 [Docker Home](https://app.docker.com). Docker Home provides centralized
 observability, access management, and security controls across Docker
-environments. It lets you: 
+environments. It lets you:
 
 - Create and manage companies and organizations
 - Assign roles and permissions to members
@@ -47,13 +47,11 @@ organizations into the following hierarchy and roles.
 
 ### Company
 
-A company groups multiple Docker organizations for centralized configuration. Companies have the company owner administrator role available.
-
-The company owner:
-
-- Can view and manage all organizations within the company
-- Has full access to company-wide settings and inherits the same permissions as organization owners
-- Does not occupy a seat
+A company groups multiple Docker organizations for centralized configuration. A
+company owner can view and manage every organization in the company and its
+company-wide settings, with the same access rights as an organization owner. For
+the company owner role and how it affects seats, see
+[Company owners](/manuals/admin/company/_index.md#company-owners).
 
 Companies are only available for Docker Business subscribers.
 
