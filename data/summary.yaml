@@ -185,6 +185,8 @@ Docker Projects:
   availability: Beta
 Docker Sandboxes sbx:
   availability: Early Access
+Docker Sandboxes SSH:
+  availability: Experimental
 Docker Sandboxes:
   availability: Experimental
   requires: Docker Desktop [4.58](/manuals/desktop/release-notes.md#4580) or later
