@@ -175,8 +175,7 @@ They're hidden from `sbx policy ls` by default; run `sbx policy ls
 column.
 
 Organization policy can't be supplemented from your machine. To change what
-your sandboxes can access, ask your admin to update the organization policy in
-the Admin Console.
+your sandboxes can access, ask your admin to update the organization policy.
 
 ### A domain is still blocked after adding an allow rule
 
@@ -186,5 +185,5 @@ ls` to check whether org governance is active; if the output starts with a
 `Policy rules` header listing a `Governance  Managed by <org>` line, it is. Add
 `--include-inactive` to confirm your rule shows an `inactive` status. If so, the
 block can only be
-lifted by updating the org policy in the Admin Console or via the
+lifted by updating the org policy in Docker Home or via the
 [API](/reference/api/ai-governance/).
