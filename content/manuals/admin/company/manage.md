@@ -16,92 +16,50 @@ aliases:
 
 {{< summary-bar feature_name="Company" >}}
 
-Learn how to manage your company in the Docker Admin Console, including the
-organizations within it, company owners, and members.
+After creating a company, you can manage multiple organizations from Docker Home. Company owners can use the company portal to invite users to specific organizations, view seat availability across organizations, and add new company owners.
 
-## Manage organizations
+## Add more organizations
 
-Manage the organizations in a company using the Docker Admin Console.
-
-### View all organizations
-
-1. Sign in to the [Docker Home](https://app.docker.com) and choose
-   your company.
-1. Select **Managed organizations**.
-
-The **Organizations** view displays all organizations under your company.
-
-### Add seats to an organization
-
-If you have a self-serve subscription that has no pending subscription changes,
-you can add seats using Docker Home. For more information about adding seats,
-see [Manage seats](/manuals/admin/organization/manage/manage-seats.md#add-seats-to-your-subscription).
-
-If you have a sales-assisted subscription, you must contact Docker support or
-sales to add seats.
-
-### Add organizations to a company
-
-To add an organization to a company, ensure the following:
-
-- You are a company owner.
-- You are an organization owner of the organization you want to add.
-- The organization has a Docker Business subscription.
-- There’s no limit to how many organizations can exist under a company.
+Company owners can add Docker organizations with a Docker Business plan to their company, so long as they're also the organization owners for that organization.
 
 > [!IMPORTANT]
 >
 > Once you add an organization to a company, you can't remove it from the
 > company.
 
-1. Sign in to [Docker Home](https://app.docker.com) and select your company from
-   the top-left account drop-down.
+1. Sign in to the [Docker Home](https://app.docker.com) and select
+   your company.
 1. Select **Managed organizations**.
-1. Select **Add organization**.
-1. Choose the organization you want to add from the drop-down menu.
-1. Select **Add organization** to confirm.
+1. Select **Add organization**, then choose an organization from the dropdown.
 
-### Manage an organization
+There's no limit to the number of organizations you add to a company.
 
-1. Sign in to [Docker Home](https://app.docker.com) and select your company from
-   the top-left account drop-down.
-1. Select **Managed organizations**.
-1. Select the organization you want to manage.
-
-For more details about managing an organization, see
-[Organization administration](../organization/_index.md).
-
-## Manage company owners
+## Company owners
 
 A company can have multiple owners. Company owners have visibility across the
 entire company and can manage settings that apply to all organizations under
-that company. They also have the same access rights as organization owners but
-don’t need to be members of any individual organization.
+that company. They also have the same access rights as organization owners without
+needing individual organization membership.
 
-> [!IMPORTANT]
->
-> Company owners do not occupy a seat unless they are added as a member of an
-> organization under your company, or SSO is enabled and the company owner signs
-> in via SSO (which automatically adds them as an organization member).
+Company owners do not occupy a seat unless:
+
+- They are added as a member of an organization under your company.
+- SSO is enabled and the company owner signs in via SSO, which automatically
+  adds them as an organization member.
 
 ### Add a company owner
 
-1. Sign in to [Docker Home](https://app.docker.com) and select your company from
-   the top-left account drop-down.
+1. Sign in to [Docker Home](https://app.docker.com) and select your company.
+1. Select **Company owners**, then choose **Add owner**.
+1. Specify the user's Docker ID, then finish by selecting **Add company owner**.
+
+### Remove company owner
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your company.
 1. Select **Company owners**.
-1. Select **Add owner**.
-1. Specify the user's Docker ID to search for the user.
-1. After you find the user, select **Add company owner**.
+1. Find the company owner you want to remove and select the **Actions** menu, then choose **Remove as company owner**.
 
-### Remove a company owner
-
-1. Sign in to [Docker Home](https://app.docker.com) and select your company from
-   the top-left account drop-down.
-1. Select **Company owners**.
-1. Locate the company owner you want to remove and select the **Actions** menu.
-1. Select **Remove as company owner**.
-
-## Manage company members
+## Company invitations
 
 You add a user to your company by inviting them to an organization within the
 company. Company owners can invite members to any organization in the company
@@ -113,48 +71,44 @@ invited to.
 
 ### Invite members to an organization
 
-Company owners invite members at the organization level. Select the target
-organization first, then follow the standard invitation steps.
+1. Sign in to [Docker Home](https://app.docker.com) and select your company.
+1. Select **Users**, then choose **Invite**.
+1. Choose how you want to invite members:
+   - To invite individual users, select **Emails or usernames**.
+   - To invite groups of users, select **CSV upload**.
+1. Add user(s) to an organization by choosing **Select an organization**.
 
-1. Sign in to [Docker Home](https://app.docker.com) and select your company
-   from the top-left account drop-down.
-1. On the **Organizations** page, select the organization you want to add
-   members to.
-1. Follow the steps in
-   [Manage organization members](../organization/manage/members.md#invite-members)
-   to invite members using a Docker ID or email address, a CSV file, or the
-   Docker Hub API.
+Users receive invitations in their email with instructions to accept the invitation. After accepting the invitation, new members appear on the **Users** page. The table specifies how many organizations they're members of.
 
 ### Resend invitations
 
-Company owners can resend invitations across all organizations in the company
-from the company-level **Users** page.
+Company owners can resend invitations
+from the company-level **Users** page. To resend individual invitations:
 
-#### Resend an individual invitation
+1. Select your company from [Docker Home](https://app.docker.com/).
+1. Select **Users**, then locate the invitee from the users table.
+1. Select the **Actions** menu, then choose **Resend**.
+   - Before resending, confirm you are resending the invitation to the correct invitee.
+   - The resend invitation modal displays the date you originally invited the invitee.
+1. Choose **Invite** to confirm.
 
-1. In [Docker Home](https://app.docker.com/), select your company from the
-   top-left account drop-down.
-1. Select **Users**.
-1. Select the **action menu** next to the invitee, then select **Resend**.
-1. Select **Invite** to confirm.
+To bulk resend invitations:
 
-#### Bulk resend invitations
+1. From the users table, use the multi-select checkboxes next to the invitees you want to invite.
+1. Select **Resend invites**, then choose **Resend** to confirm.
 
-1. In [Docker Home](https://app.docker.com/), select your company from the
-   top-left account drop-down.
-1. Select **Users**.
-1. Use the **checkboxes** next to **Usernames** to select users.
-1. Select **Resend invites**.
-1. Select **Resend** to confirm.
+## Add seats to an organization
 
-### Manage members on a team
+If you have a self-serve subscription that has no pending subscription changes,
+you can add seats using Docker Home. For more information about adding seats,
+see [Manage seats](/manuals/admin/organization/manage/manage-seats.md#add-seats-to-your-subscription).
+
+If you have a sales-assisted subscription, you must contact Docker support or
+sales to add seats.
+
+## Manage teams
 
 Teams exist at the organization level, not the company level. After inviting
 members to an organization, you can add them to teams within that organization.
 For more details, see
 [Manage members on a team](../organization/manage/members.md#manage-members-on-a-team).
-
-## More resources
-
-- [Video: Managing a company and nested organizations](https://youtu.be/XZ5_i6qiKho?feature=shared&t=229)
-- [Video: Adding nested organizations to a company](https://youtu.be/XZ5_i6qiKho?feature=shared&t=454)
