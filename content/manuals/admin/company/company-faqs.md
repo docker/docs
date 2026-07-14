@@ -33,7 +33,10 @@ Company owners don't occupy a seat unless one of the following is true:
 
 When you first create a company, your account is both a company owner and an
 organization owner, so it occupies a seat as long as you remain an organization
-owner.
+owner. To free up that seat,
+[assign another user as the organization owner](/manuals/admin/organization/manage/members.md#update-a-member-role)
+and remove yourself from the organization. You keep full administrative access
+as a company owner without using a subscription seat.
 
 ### What permissions does the company owner have in the associated/nested organizations?
 

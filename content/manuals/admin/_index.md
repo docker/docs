@@ -57,12 +57,13 @@ Companies are only available for Docker Business subscribers.
 
 ### Organization
 
-Organization owners have the organization owner administrator role. They can
-manage organization settings, users, and access controls, but they occupy a
-[seat](/manuals/admin/organization/organization-faqs.md#what-is-the-difference-between-user-invitee-seat-and-member).
+An organization sits below the company and is where you group teams and
+members and assign access to repositories. Every Docker Team and Business
+subscriber has at least one organization.
 
-- An organization contains teams and repositories.
-- All Docker Team and Business subscribers must have at least one organization.
+Organization owners hold the organization owner administrator role and manage
+organization settings, users, and access controls. Each owner occupies a
+[seat](/manuals/admin/organization/organization-faqs.md#what-is-the-difference-between-user-invitee-seat-and-member).
 
 [Upgrading to a Docker Business plan](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdmin)
 grants you the company owner role so you can manage multiple organizations.
