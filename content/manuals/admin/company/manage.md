@@ -69,7 +69,7 @@ To add an organization to a company, ensure the following:
 1. Select the organization you want to manage.
 
 For more details about managing an organization, see
-[Organization administration](../../organization/_index.md).
+[Organization administration](../organization/_index.md).
 
 ## Manage company owners
 
@@ -121,7 +121,7 @@ organization first, then follow the standard invitation steps.
 1. On the **Organizations** page, select the organization you want to add
    members to.
 1. Follow the steps in
-   [Manage organization members](../../organization/manage/members.md#invite-members)
+   [Manage organization members](../organization/manage/members.md#invite-members)
    to invite members using a Docker ID or email address, a CSV file, or the
    Docker Hub API.
 
@@ -152,7 +152,7 @@ from the company-level **Users** page.
 Teams exist at the organization level, not the company level. After inviting
 members to an organization, you can add them to teams within that organization.
 For more details, see
-[Manage members on a team](../../organization/manage/members.md#manage-members-on-a-team).
+[Manage members on a team](../organization/manage/members.md#manage-members-on-a-team).
 
 ## More resources
 

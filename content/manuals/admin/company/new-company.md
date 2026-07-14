@@ -41,13 +41,13 @@ When you create the company, the organization you selected is automatically
 migrated to the new company.
 
 For more information on how you can add more organizations to your company,
-see [Add organizations to a company](./manage/_index.md#add-organizations-to-a-company).
+see [Add organizations to a company](./manage.md#add-organizations-to-a-company).
 
 ## Next steps
 
-- [Manage organizations](./manage/_index.md#manage-organizations)
-- [Manage company members](./manage/_index.md#manage-company-members)
-- [Manage company owners](./manage/_index.md#manage-company-owners)
+- [Manage organizations](./manage.md#manage-organizations)
+- [Manage company members](./manage.md#manage-company-members)
+- [Manage company owners](./manage.md#manage-company-owners)
 
 ## More resources
 
