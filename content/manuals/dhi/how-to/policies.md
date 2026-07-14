@@ -196,8 +196,8 @@ username and a [personal access token](/manuals/security/access-tokens.md) as th
 
 Set `exit-code: true` to fail the step when any policy isn't met. The
 `policy-bundle` input accepts a comma-separated list of bundles, and you can
-combine it with the `policy-file`, `policy-dir`, and `policy-config` inputs, just
-like the CLI flags.
+combine it with the `policy-file`, `policy-dir`, and `policy-config` inputs, the
+same as the CLI flags.
 
 For more on running policy evaluation in CI, see
 [Evaluate policies](../../scout/policy/local.md#use-in-ci).
