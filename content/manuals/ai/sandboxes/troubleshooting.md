@@ -9,9 +9,9 @@ keywords: docker sandboxes, sbx, troubleshooting, diagnostics, reset, network po
 
 Before digging into a specific issue, run
 [`sbx diagnose`](/reference/cli/sbx/diagnose/) to check for common problems
-with your installation, such as a missing CLI binary, an unresponsive daemon,
-a CLI/daemon version mismatch, missing storage directories, or broken
-authentication.
+with your installation, such as a missing CLI binary, daemon reachability
+problems, a CLI/daemon version mismatch, missing storage directories, or
+broken authentication.
 
 ```console
 $ sbx diagnose
@@ -21,6 +21,20 @@ The command prints a summary of checks that passed, warned, or failed, along
 with suggested fixes. Use `--output json` to get machine-readable output, or
 `--output github-issue` to generate a Markdown snippet suitable for pasting
 into a GitHub issue.
+
+## Restart the sandbox daemon
+
+If sandbox commands hang, fail to connect to the daemon, or keep returning
+daemon errors, restart the sandbox daemon before resetting sandbox state:
+
+```console
+$ sbx daemon stop
+$ sbx daemon start --detach
+```
+
+Then retry the command that failed. Restarting the daemon doesn't delete
+sandbox data. If the issue persists or state is corrupted, use
+[`sbx reset`](/reference/cli/sbx/reset/).
 
 ## Resetting sandboxes
 
