@@ -66,3 +66,5 @@ MCP policy basics, evaluation, and precedence.
 
 - [AI Governance API](/reference/api/ai-governance/): manage network and
   filesystem org policies programmatically.
+- [MCP policy reference](reference/mcp-policy.md): look up Docker MCP policy
+  actions, resources, attributes, context fields, and approval behavior.
