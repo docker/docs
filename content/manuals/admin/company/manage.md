@@ -20,7 +20,7 @@ After creating a company, you can manage multiple organizations from Docker Home
 
 ## Add more organizations
 
-Company owners can add Docker organizations with a Docker Business plan to their company, so long as they're also the organization owners for that organization.
+Company owners can add Docker organizations with a Docker Business plan to their company, so long as they're also the organization owners for that organization. There's no limit to the number of organizations you add to a company.
 
 > [!IMPORTANT]
 >
@@ -32,7 +32,9 @@ Company owners can add Docker organizations with a Docker Business plan to their
 1. Select **Managed organizations**.
 1. Select **Add organization**, then choose an organization from the dropdown.
 
-There's no limit to the number of organizations you add to a company.
+A nested organization must keep its Docker Business subscription to stay managed
+by the company. If an organization downgrades from Docker Business, you can no
+longer manage it through the company, and its owner must manage it separately.
 
 ## Company owners
 
@@ -46,6 +48,12 @@ Company owners do not occupy a seat unless:
 - They are added as a member of an organization under your company.
 - SSO is enabled and the company owner signs in via SSO, which automatically
   adds them as an organization member.
+
+When you first create a company, your account is both a company owner and an
+organization owner, so it occupies a seat as long as you remain an organization
+owner. To keep full company-owner access without using a seat,
+[assign another user as the organization owner](/manuals/admin/organization/manage/members.md#update-a-member-role),
+then remove yourself from the organization.
 
 ### Add a company owner
 
