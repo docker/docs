@@ -147,6 +147,9 @@ Resources are referenced with `MCP` entity types, such as `MCP::Server`,
 a tool policy can match the server that exposes the tool, the tool's bare name,
 and server-declared tool annotations such as `readOnly` or `destructive`.
 
+For exact action, resource, context, and approval behavior, see the
+[MCP policy reference](reference/mcp-policy.md).
+
 The following policy allows tools that the server declares read-only, and
 requires approval before a non-read-only tool can run:
 
