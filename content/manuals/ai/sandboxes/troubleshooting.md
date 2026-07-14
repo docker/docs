@@ -44,7 +44,8 @@ data. Create fresh sandboxes afterwards.
 
 ## Agent can't install packages or reach an API
 
-Sandboxes use a [deny-by-default network policy](governance/access-controls/local.md).
+Sandboxes use [network access rules](governance/access-controls/network.md) to
+control outbound traffic.
 If the agent fails to install packages or call an external API, the target
 domain is likely not in the allow list. Check which requests are being blocked:
 
@@ -66,7 +67,7 @@ $ sbx policy allow network "**"
 
 If `sbx policy allow` doesn't unblock the request, your organization may
 manage sandbox policies centrally and take precedence over local rules. See
-[Organization governance](governance/access-controls/organization.md).
+[Organization policies](governance/access-controls/organization.md).
 
 ## Kit fails to install: source not in allowlist
 

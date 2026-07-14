@@ -29,9 +29,8 @@ Signing in gives each sandbox a verified identity, which lets Docker:
   containers, install packages, and push code. Your Docker identity is the
   anchor.
 - **Enable team features.** Team-scale features like
-  [organization governance](governance/access-controls/organization.md), shared environments, and
-  audit logs need a concept of "who," and adding that later would be worse for
-  everyone.
+  [organization governance](governance/), shared environments, and audit logs
+  need a concept of "who," and adding that later would be worse for everyone.
 - **Authenticate against Docker infrastructure.** Sandboxes pull images, run
   daemons, and talk to Docker services. A Docker account authenticates those
   requests.
@@ -45,7 +44,7 @@ rules apply to every sandbox in the
 organization. When organization governance is active, it replaces local rules
 set with `sbx policy` — local rules are no longer evaluated.
 
-See [Organization governance](governance/access-controls/organization.md). This feature requires
+See [Organization policies](governance/access-controls/organization.md). This feature requires
 a separate paid subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
 to get started.
