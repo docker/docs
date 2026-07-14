@@ -9,10 +9,7 @@ weight: 10
 
 {{< summary-bar feature_name="OIDC connections" >}}
 
-Organization owners and editors can create new OIDC connections or manage existing ones from **OIDC connections** in Docker Home. Establishing an OIDC connection occurs in two phases. First, you create the OIDC connection in Docker Home, then you configure your GitHub Actions workflow YAML file.
-
-> [!NOTE]
-> OIDC connections supports GitHub as a trusted third party.
+Organization owners and editors can create new OIDC connections or manage existing ones from **OIDC connections** in Docker Home. Establishing an OIDC connection occurs in two phases. First, you create the OIDC connection in Docker Home, then you configure your GitHub Actions workflow YAML file. OIDC connections only supports GitHub as a trusted third party.
 
 ## Connect OIDC connections to GitHub Actions
 
@@ -103,7 +100,7 @@ You can view, edit, deactivate, or delete your connections from the **OIDC conne
 You can deactivate an OIDC connection to pause GitHub workflow access to your Docker resources without deleting the connection. While a connection is deactivated:
 
 - It cannot issue Docker access tokens.
-- Without Docker access tokens, the `docker/oidc-action` step references fails at the token-exchange step until you activate the connection.
+- Without Docker access tokens, `docker/oidc-action` fails at the token-exchange step until you activate the connection.
 
 Unlike deactivation, deleting an OIDC connection is permanent. Any workflow whose `docker/oidc-action` step still references the deleted `connection_id` fails at the token-exchange step, so update that input with a replacement connection's id in every affected workflow before it runs again.
 
