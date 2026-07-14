@@ -48,15 +48,21 @@ it first if it doesn't exist yet.
 
 ## Enable SSH access
 
-SSH access is an experimental feature. Turn it on, restart the daemon so it
-picks up the setting, then write the SSH client config:
+SSH access is an experimental feature. Turn it on, then stop the daemon so it
+reloads with the new setting. The daemon reads `feature.ssh` only at startup,
+so the change takes effect the next time it starts:
 
 ```console
 $ sbx settings set platform.allowExperimentalFeatures true
 $ sbx settings set feature.ssh true
-$ sbx daemon stop && sbx daemon start
+$ sbx daemon stop
 $ sbx setup ssh
 ```
+
+The `sbx` CLI starts the daemon automatically in the background when a command
+needs it, so `sbx setup ssh` brings it back up with SSH enabled — you don't
+start it by hand. To start it yourself instead, use `sbx daemon start -d`; the
+`-d` flag runs it in the background rather than holding your terminal.
 
 `sbx setup ssh` is idempotent — you can re-run it at any time. It adds a
 managed block to `~/.ssh/config` similar to the following:
