@@ -224,12 +224,11 @@ To allow a specific host:
 $ sbx policy allow network registry.npmjs.org
 ```
 
-With **Balanced**, common development services are allowed by default. With
-**Locked Down**, everything is blocked until you allow it — including your
-model provider's API. If the agent can't reach a service it needs, the network
-policy is the first place to look. See
-[Policies](governance/access-controls/local.md) for the full rule set and how
-to customize it.
+With **Locked Down**, even your model provider API is blocked unless you
+explicitly allow it. With **Balanced**, common development services are
+permitted by default. See
+[local access rules](governance/access-controls/local.md) for the full rule set
+and how to customize it.
 
 ## Clean up
 

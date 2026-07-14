@@ -77,7 +77,7 @@ Install steps run under `sh`, not bash, so bash-only builtins such as
 (`curl … | bash`) or wrap the step in `bash -c '…'` when you need them.
 
 Downloads are subject to the sandbox's
-[deny-by-default network policy](../governance/access-controls/local.md). A domain that
+[network access rules](../governance/access-controls/network.md). A domain that
 resolves from your host can still be blocked inside the sandbox — for
 example, `get.sdkman.io` returns a 403 until you allow it with
 `sbx policy allow network get.sdkman.io`. A tool may also need base
