@@ -11,7 +11,7 @@ layers, and only one applies at a time:
 
 **Local policy** is configured per machine using the `sbx policy` CLI. It
 lets individual developers customize which domains their sandboxes can reach.
-See [Local access rules](access-controls/local.md).
+See [Local policy](access-controls/local.md).
 
 **Organization policy** is configured centrally in the Docker Admin Console.
 Network and filesystem policies can also be managed via the
@@ -40,15 +40,15 @@ MCP policy basics, evaluation, and precedence.
 
 ### Access controls
 
-- [Local access rules](access-controls/local.md): configure network rules on
-  your machine with the `sbx policy` CLI.
+- [Local policy](access-controls/local.md): configure network rules on your
+  machine with the `sbx policy` CLI.
 - [Organization policies](access-controls/organization.md): centrally manage
   sandbox policies across your organization from the Admin Console.
 - [Network access rules](access-controls/network.md): control outbound network
   access from sandboxes.
 - [Filesystem access rules](access-controls/filesystem.md): control which host
   paths sandboxes can mount as workspaces.
-- [MCP tool access](access-controls/mcp.md): control MCP server registration,
+- [MCP access policies](access-controls/mcp.md): control MCP server registration,
   tool calls, resources, prompts, and approval gates.
 
 ### Monitor and enforce

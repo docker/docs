@@ -42,7 +42,7 @@ managed separately, under **Network access** and **Filesystem access**.
 
 The steps in this section cover network and filesystem policies. MCP policies
 use Cedar rather than the network and filesystem rule form. For MCP examples, see
-[MCP tool access](mcp.md).
+[MCP access policies](mcp.md).
 
 To create a policy:
 
@@ -69,7 +69,7 @@ pages for syntax, examples, and enforcement details:
   sandboxes.
 - [Filesystem access rules](filesystem.md): control which host paths sandboxes
   can mount as workspaces.
-- [MCP tool access](mcp.md): control MCP server registration, tool calls,
+- [MCP access policies](mcp.md): control MCP server registration, tool calls,
   resources, prompts, and approval gates with Cedar policy.
 
 When organization governance is active, local and kit-defined rules are not

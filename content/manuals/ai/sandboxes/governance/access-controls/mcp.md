@@ -1,17 +1,17 @@
 ---
-title: Control MCP tool access
-linkTitle: MCP tool access
+title: MCP access policies
+linkTitle: MCP access
 weight: 50
 description: Use Cedar-based MCP policies to control sandbox MCP server registration, tool calls, prompts, resources, and approval gates.
-keywords: docker sandboxes, MCP policy, MCP tool access, Cedar policy, requireApproval, AI Governance
+keywords: docker sandboxes, MCP policy, MCP access, Cedar policy, requireApproval, AI Governance
 ---
 
-MCP access rules control Model Context Protocol activity made available to a
+MCP policies control Model Context Protocol activity made available to a
 sandbox through Docker's MCP gateway. Use them to govern server registration,
 tool calls, gateway meta-tools, resources, prompts, and approval requirements.
 
 Unlike [network access rules](network.md) and
-[filesystem access rules](filesystem.md), MCP access rules are organization
+[filesystem access rules](filesystem.md), MCP policies are organization
 policies written in Cedar. Docker defines the `MCP` namespace, including the
 actions, resource types, attributes, and approval behavior that policies can
 match. For Docker's MCP policy actions, resources, attributes, and context

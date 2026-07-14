@@ -215,7 +215,7 @@ $ sbx policy allow network registry.npmjs.org
 With **Locked Down**, even your model provider API is blocked unless you
 explicitly allow it. With **Balanced**, common development services are
 permitted by default. See
-[local access rules](governance/access-controls/local.md) for the full rule set
+[local policy](governance/access-controls/local.md) for the full rule set
 and how to customize it.
 
 ## Clean up
