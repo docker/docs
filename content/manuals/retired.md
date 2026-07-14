@@ -145,9 +145,12 @@ project requirements.
 ### Docker Desktop sandboxes
 
 Docker Desktop sandboxes let users run AI coding agents in isolated microVMs
-through the `docker sandbox` command. The `docker sandbox` plugin was removed
-in Docker Desktop 4.80.0. Use the standalone
-[`sbx` CLI](/manuals/ai/sandboxes/_index.md) instead.
+through the `docker sandbox` command. The Docker Desktop integration is
+deprecated. Use the standalone [`sbx` CLI](/manuals/ai/sandboxes/_index.md)
+instead.
+
+You can still view the
+[Docker Desktop sandboxes documentation](/manuals/ai/sandboxes/docker-desktop.md).
 
 ### Docker Scout features
 
