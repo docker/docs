@@ -11,3 +11,5 @@ Use reference material when you need API details or exact policy syntax.
   evaluation, and precedence.
 - [AI Governance API](api.md): HTTP API reference for network and filesystem
   organization policies.
+- [MCP policy reference](mcp-policy.md): Docker MCP policy actions, resources,
+  attributes, context fields, and approval behavior.

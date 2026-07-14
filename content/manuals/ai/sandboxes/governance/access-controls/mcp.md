@@ -14,8 +14,10 @@ Unlike [network access rules](network.md) and
 [filesystem access rules](filesystem.md), MCP access rules are organization
 policies written in Cedar. Docker defines the `MCP` namespace, including the
 actions, resource types, attributes, and approval behavior that policies can
-match. For the full Cedar language, see the
-[Cedar documentation](https://docs.cedarpolicy.com/).
+match. For Docker's MCP policy actions, resources, attributes, context fields,
+and approval behavior, see the
+[MCP policy reference](../reference/mcp-policy.md). For Cedar syntax and
+language semantics, see the [Cedar documentation](https://docs.cedarpolicy.com/).
 
 ## How MCP policy works
 
@@ -123,6 +125,8 @@ server command and argument attributes don't apply to remote servers.
 ## Next steps
 
 - Use [Policy concepts](../concepts.md#mcp-policies) for the MCP policy model.
+- Use the [MCP policy reference](../reference/mcp-policy.md) for exact action,
+  resource, attribute, context, and approval behavior.
 - Use [Organization policies](organization.md) to manage policy scope.
 - Use [Audit logs](../monitor-and-enforce/audit.md) to collect policy decision
   records.
