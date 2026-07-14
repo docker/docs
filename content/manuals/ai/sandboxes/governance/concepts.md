@@ -2,7 +2,7 @@
 title: Policy concepts
 weight: 5
 description: The resource model, rule syntax, and evaluation logic behind Docker sandbox governance.
-keywords: docker sandboxes, policy concepts, rule syntax, network rules, filesystem rules, precedence, rule evaluation
+keywords: docker sandboxes, policy concepts, rule syntax, network rules, filesystem rules, mcp policy, cedar policy, precedence, rule evaluation
 ---
 
 ## Resource model
@@ -15,7 +15,8 @@ Policies exist at two levels:
 
 - **Local**: configured per machine using the `sbx policy` CLI. Applies to
   sandboxes on that machine only.
-- **Organization**: configured in Docker Home or via the
+- **Organization**: configured in the Docker Admin Console. Network and
+  filesystem policies can also be managed via the
   [Governance API](/reference/api/ai-governance/). Applies to sandboxes across
   the organization. An organization can have several policies, each applying
   either org-wide or to specific teams. See [Policy scope](#policy-scope).
@@ -30,8 +31,10 @@ A **rule** is the unit of access control within a policy. Each rule has:
 - **Resources**: the targets the rule matches against
 - **Decision**: `allow` or `deny`
 
-Rules are grouped by domain: all rules in a policy must share the same domain,
-either `network` or `filesystem`.
+Rules are grouped by domain. Network and filesystem rules in a policy must
+share the same domain, either `network` or `filesystem`. MCP policies use Cedar
+statements written in the `MCP` namespace instead of the network and filesystem
+rule format.
 
 ## Policy scope
 
@@ -115,6 +118,52 @@ Use `**` to match a directory tree recursively. A single `*` matches within one
 path segment and won't cross a path separator. For example, `~/**` matches all
 paths under the home directory, while `~/*` matches only its direct children.
 
+### MCP policies
+
+MCP policies control Model Context Protocol activity made available to a
+sandbox through Docker's MCP gateway. They are organization policies written in
+Cedar using the `MCP` namespace, rather than the network and filesystem rule
+format.
+
+Cedar evaluates each MCP request against a principal, action, resource, and
+context. Admins write rules for the action, resource, and context. Policy scope
+supplies the principal, so a rule that tries to match a specific user, team,
+tenant, or role in the principal doesn't match.
+
+Governed MCP actions are default deny: an MCP request is blocked unless a
+matching `permit` allows it. A matching `forbid` overrides any `permit`,
+including a permit that requires approval.
+
+MCP policies can match actions such as:
+
+- `register`: Register an MCP server
+- `invokeTool`: Call an MCP tool
+- `invokePrimordial`: Call a gateway meta-tool
+- `readResource`: Read an MCP resource
+- `getPrompt`: Retrieve an MCP prompt
+
+Resources are referenced with `MCP` entity types, such as `MCP::Server`,
+`MCP::Tool`, `MCP::Resource`, `MCP::Prompt`, and `MCP::Primordial`. For example,
+a tool policy can match the server that exposes the tool, the tool's bare name,
+and server-declared tool annotations such as `readOnly` or `destructive`.
+
+The following policy allows tools that the server declares read-only, and
+requires approval before a non-read-only tool can run:
+
+```cedar
+permit (principal, action == MCP::Action::"invokeTool", resource)
+when { resource.readOnly == true };
+
+@requireApproval("write tool call")
+permit (principal, action == MCP::Action::"invokeTool", resource)
+when { resource.readOnly == false };
+```
+
+The `@requireApproval` annotation applies to `permit` statements. When a request
+matches that permit and no matching `forbid` overrides it, the sandbox asks the
+user to approve before the request runs. If the request can't be presented to a
+user for approval, it is denied.
+
 ## Rule evaluation
 
 When organization governance is active, the rules from all of a user's
@@ -125,7 +174,8 @@ each request, following two principles:
   regardless of any matching allow rules.
 - Default deny: anything an allow rule doesn't match is blocked. Outbound
   network traffic is blocked unless a network rule allows the destination, and a
-  host path can't be mounted unless a filesystem rule allows it.
+  host path can't be mounted unless a filesystem rule allows it. MCP activity is
+  blocked unless an MCP `permit` allows it.
 
 Because every effective policy feeds the same evaluation, allows are additive (a
 request is allowed if any effective policy allows it) and denies are absolute (a
