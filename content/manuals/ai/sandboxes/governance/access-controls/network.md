@@ -1,14 +1,14 @@
 ---
-title: Network access rules
+title: Network access policies
 linkTitle: Network access
 weight: 30
 description: Control outbound network access from Docker Sandboxes with local and organization policy rules.
 keywords: docker sandboxes, network access, network rules, governance, local policy, organization policy
 ---
 
-Network access rules control outbound connections from sandboxes. Network
-policies contain one or more rules that allow the domains, IP ranges, and ports
-a workflow needs, or block destinations that should stay unavailable.
+Network access policies control outbound connections from sandboxes. Each
+policy contains one or more rules that allow the domains, IP ranges, and ports a
+workflow needs, or block destinations that should stay unavailable.
 
 You can configure network access in two places:
 

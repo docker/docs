@@ -83,10 +83,10 @@ contact text.
 Organization policies are managed by access surface. Use the access-control
 pages for syntax, examples, and enforcement details:
 
-- [Network access rules](network.md): control outbound network access from
+- [Network access policies](network.md): control outbound network access from
   sandboxes.
-- [Filesystem access rules](filesystem.md): control which host paths sandboxes
-  can mount as workspaces.
+- [Filesystem access policies](filesystem.md): control which host paths
+  sandboxes can mount as workspaces.
 - [MCP access policies](mcp.md): control MCP server registration, tool calls,
   resources, prompts, and approval gates with Cedar policy.
 
