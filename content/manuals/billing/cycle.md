@@ -6,42 +6,43 @@ keywords: billing, cycle, payments, subscription
 ---
 
 You can choose between a monthly or annual billing cycle when purchasing a
-subscription. If you have a monthly billing cycle, you can choose to
-switch to an annual billing cycle.
-
-If you're on a monthly plan, you can switch to a yearly plan at any time.
-However, switching from a yearly to a monthly cycle isn't supported.
+subscription. If you have a monthly billing cycle, you can switch to an annual
+billing cycle at any time. Switching from an annual to a monthly billing cycle
+isn't supported.
 
 When you change your billing cycle:
 
 - Your next billing date reflects the new cycle. To find your next billing date,
-  see [View renewal date](history.md#view-renewal-date). All billing dates and renewal periods are calculated in UTC.
+  see [View renewal date](/manuals/billing/history.md#view-renewal-date). Docker
+  calculates all billing dates and renewal periods in UTC.
 - Your subscription's start date resets. For example, if the monthly
   subscription started on March 1 and ended on April 1, switching the billing
   duration on March 15, 2024, resets the new start date to March 15, 2024, with
   an end date of March 15, 2025.
 - Any unused portion of your monthly subscription is prorated and applied as
-  credit toward an annual subscription. For example, if your monthly cost is $10
-  and you're used value is $5, when you switch to an annual cycle ($100), the
-  final charge is $95 ($100-$5).
+  credit toward an annual subscription. For example, if your monthly cost is
+  $10 and the unused value is $5, when you switch to an annual cycle that costs
+  $100, the final charge is $95.
 
-## Change personal account to an annual cycle
+## Change a personal account to annual
 
 Pay by invoice is not available for subscription upgrades or changes.
 
 To change your billing cycle:
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select
-   your organization.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your personal
+   account.
 1. Select **Billing**.
 1. On the plans and usage page, select **Switch to annual billing**.
 1. Verify your billing information.
 1. Select **Continue to payment**.
-1. Verify payment information and select **Upgrade subscription**. If you choose to pay using a US bank account, you must verify the account. For more information, see [Verify a bank account](/manuals/billing/payment-method.md#verify-a-bank-account).
+1. Verify your payment information and select **Upgrade subscription**. If you
+   pay using a US bank account, you must
+   [verify the bank account](/manuals/billing/payment-method.md#verify-a-bank-account).
 
-The billing plans and usage page will now reflect your new annual plan details.
+The billing plans and usage page reflects your annual plan details.
 
-## Change organization to an annual cycle
+## Change an organization to annual
 
 You must be an organization owner to make changes to the payment information.
 
@@ -56,4 +57,6 @@ organization's Docker subscription:
 1. On the plans and usage page, select **Switch to annual billing**.
 1. Verify your billing information.
 1. Select **Continue to payment**.
-1. Verify payment information and select **Upgrade subscription**. If you choose to pay using a US bank account, you must verify the account. For more information, see [Verify a bank account](/manuals/billing/payment-method.md#verify-a-bank-account).
+1. Verify your payment information and select **Upgrade subscription**. If you
+   pay using a US bank account, you must
+   [verify the bank account](/manuals/billing/payment-method.md#verify-a-bank-account).
