@@ -27,7 +27,7 @@ Governed MCP activity is default deny. A request is blocked unless a matching
 `permit` allows it. A matching `forbid` overrides any `permit`, including a
 permit annotated with `@requireApproval`.
 
-An actionless `permit` covers every MCP action:
+An actionless `permit` matches every MCP action that reaches Cedar evaluation:
 
 ```cedar
 permit (principal, action, resource);
@@ -35,16 +35,16 @@ permit (principal, action, resource);
 
 ## Actions
 
-| Action              | Governs                   | Notes                                                                                                                  |
-| ------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `register`          | MCP server registration   | Remote server registration needs an explicit `permit`. Use `forbid` rules to block local server registration patterns. |
-| `invokeTool`        | MCP tool calls            | Most tool access policies target this action.                                                                          |
-| `invokePrimordial`  | Gateway meta-tool calls   | Applies to gateway-injected meta-tools such as `mcp-add` and `code-mode`.                                              |
-| `readResource`      | MCP resource reads        | Cedar policy is enforced inside the sandbox. Remote server reads aren't evaluated by Cedar policy.                     |
-| `getPrompt`         | MCP prompt retrieval      | Remote prompt access is governed by gateway config, not Cedar policy.                                                  |
-| `listTools`         | MCP tool listing          | Not Cedar-gated. Tool listings can include tools denied at invocation.                                                 |
-| `listResources`     | MCP resource listing      | Not Cedar-gated.                                                                                                       |
-| `subscribeResource` | MCP resource subscription | Not Cedar-gated.                                                                                                       |
+| Action              | Governs                   | Notes                                                                                                |
+| ------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `register`          | MCP server registration   | Remote server registration needs an explicit `permit`. Use server attributes to scope registration.  |
+| `invokeTool`        | MCP tool calls            | Most tool access policies target this action.                                                        |
+| `invokePrimordial`  | Gateway meta-tool calls   | Applies to gateway-injected meta-tools such as `mcp-add` and `code-mode`.                            |
+| `readResource`      | MCP resource reads        | Rules match `MCP::Resource` and `resource.uri`.                                                      |
+| `getPrompt`         | MCP prompt retrieval      | Rules match `MCP::Prompt` and `resource.name`.                                                       |
+| `listTools`         | MCP tool listing          | Defined in the schema but not Cedar-gated. Tool listings can include tools denied at invocation.     |
+| `listResources`     | MCP resource listing      | Defined in the schema but not Cedar-gated. Resource listings can include resources denied by policy. |
+| `subscribeResource` | MCP resource subscription | Defined in the schema but not Cedar-gated.                                                           |
 
 ## Resources
 
@@ -52,7 +52,7 @@ Match resources with the MCP entity type and attributes for the request.
 
 | Entity            | Match with             | Notes                                                                                                                            |
 | ----------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `MCP::Server`     | Registered server name | The server URL is the `resource.identityURL` attribute, not the entity ID.                                                       |
+| `MCP::Server`     | Registered server name | The server URL or source is the `resource.identityURL` attribute, not the entity ID.                                             |
 | `MCP::Tool`       | Bare tool name         | Use `resource.name`. Display prefixes aren't included. A bare-name match applies to every server exposing a tool with that name. |
 | `MCP::Resource`   | Resource URI           | Use `resource.uri`.                                                                                                              |
 | `MCP::Prompt`     | Prompt name            | Use `resource.name`.                                                                                                             |
@@ -69,22 +69,24 @@ resource in MCP::Primordial::"code-mode"
 
 ## Resource attributes
 
-Tool annotation attributes are server-declared and advisory.
+Tool annotation attributes come from MCP tool annotations or catalog metadata
+and are advisory.
 
-| Attribute                  | Applies to                | Notes                                                                           |
-| -------------------------- | ------------------------- | ------------------------------------------------------------------------------- |
-| `resource.name`            | Tools and prompts         | For tools, this is the bare tool name, not a display-prefixed name.             |
-| `resource.uri`             | Resources                 | Use with string operators such as `like`.                                       |
-| `resource.readOnly`        | Tools                     | Defaults to `false` when a tool doesn't declare it.                             |
-| `resource.destructive`     | Tools                     | Defaults to `true` when a tool doesn't declare it.                              |
-| `resource.idempotent`      | Tools                     | Server-declared tool annotation.                                                |
-| `resource.openWorld`       | Tools                     | Server-declared tool annotation.                                                |
-| `resource.type`            | Server registration       | Use for remote server registration rules.                                       |
-| `resource.identityURL`     | Server registration       | The server URL. Use for remote server registration rules.                       |
-| `resource.requiresOAuth`   | Server registration       | Use for remote server registration rules.                                       |
-| `resource.requiresNetwork` | Server registration       | Use for remote server registration rules.                                       |
-| `resource.command`         | Local server registration | Local stdio server command. Remote servers don't provide this value.            |
-| `resource.args`            | Local server registration | Local stdio server arguments. This is a set, so `.contains()` can match values. |
+| Attribute                  | Applies to                | Notes                                                                                          |
+| -------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------- |
+| `resource.name`            | Tools and prompts         | For tools, this is the bare tool name, not a display-prefixed name.                            |
+| `resource.uri`             | Resources                 | Use with string operators such as `like`.                                                      |
+| `resource.readOnly`        | Tools                     | Defaults to `false` when a tool doesn't declare it.                                            |
+| `resource.destructive`     | Tools                     | Defaults to `true` when a tool doesn't declare it.                                             |
+| `resource.idempotent`      | Tools                     | Defaults to `false` when a tool doesn't declare it.                                            |
+| `resource.openWorld`       | Tools                     | Defaults to `true` when a tool doesn't declare it.                                             |
+| `resource.category`        | Tools                     | Server or catalog category copied onto the tool resource. Tools don't self-declare categories. |
+| `resource.type`            | Servers                   | Use for server registration rules.                                                             |
+| `resource.identityURL`     | Servers                   | The server URL or source. Use for server registration rules.                                   |
+| `resource.requiresOAuth`   | Servers                   | Use for server registration rules.                                                             |
+| `resource.requiresNetwork` | Servers                   | Use for server registration rules.                                                             |
+| `resource.command`         | Local server registration | Local stdio server command. The MCP gateway sends an empty value.                              |
+| `resource.args`            | Local server registration | Local stdio server arguments. This is a set, so `.contains()` can match values.                |
 
 Use `like` for string attributes. In Cedar, `like` uses `*` as its wildcard,
 matches the full string, treats `?` as a literal character, and treats `\*` as
@@ -95,10 +97,11 @@ attributes, use `like`.
 
 ## Context fields
 
-| Field                  | Notes                                                                                          |
-| ---------------------- | ---------------------------------------------------------------------------------------------- |
-| `context.request_time` | Bound at each enforcement point. Use it for time-window rules.                                 |
-| `context.args`         | Tool-call arguments. Bound inside the sandbox. Gateway enforcement doesn't receive this field. |
+| Field                  | Notes                                                                                             |
+| ---------------------- | ------------------------------------------------------------------------------------------------- |
+| `context.request_time` | Bound at each enforcement point. Use it for time-window rules.                                    |
+| `context.oauth_scopes` | OAuth scopes for the caller. Present as a set, even when empty.                                   |
+| `context.args`         | Tool-call arguments for `invokeTool`. Present when arguments are available as a supported object. |
 
 Guard tool-call argument rules with `context has args` and a field check:
 
@@ -115,6 +118,9 @@ when {
 A `permit` gated on missing arguments doesn't match, so the request falls to
 default deny. A `forbid` gated on missing arguments doesn't match, so it
 doesn't block the request.
+
+Only object-shaped tool arguments are represented in `context.args`.
+Unsupported, malformed, or too deeply nested arguments are omitted.
 
 ## Approval annotation
 
@@ -144,14 +150,12 @@ don't require approval.
 
 - Tool and resource listing actions aren't Cedar-gated. Listings can include
   entries that a policy denies when the sandbox tries to use them.
-- `readResource` is evaluated by Cedar policy inside the sandbox, not for
-  remote server reads.
-- `getPrompt` for remote servers is governed by gateway config, not Cedar
-  policy.
-- Tool-call argument rules using `context.args` apply inside the sandbox only.
 - Server command and argument rules using `resource.command` or `resource.args`
-  apply to local stdio servers only.
+  apply where local stdio server details are available. The MCP gateway sends
+  empty values for those attributes.
 - Principal-based rules don't take effect. Use organization and team policy
   scope to target users.
-- Server groups and tool categories aren't supported in MCP policy. Reference
-  servers and tools individually.
+- Server groups aren't supported in MCP policy. Reference servers individually.
+- Tool categories aren't self-declared by MCP tools. When available,
+  `resource.category` is server or catalog metadata copied onto the tool
+  resource.
