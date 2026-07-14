@@ -22,7 +22,7 @@ Access to hardened packages varies by subscription:
   to compliance and security-patched packages.
 
 To browse the packages currently available in Docker's public hardened package
-repositories, see the following package indexes:
+repositories, see the following indexes:
 
 - [Debian package index](https://dhi.io/deb/debian/main/index.html)
 - [Alpine package index](https://dhi.io/apk/alpine/v3.24/main/index.html)
