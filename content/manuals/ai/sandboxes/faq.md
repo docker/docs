@@ -40,8 +40,8 @@ Your Docker account email is only used for authentication, not marketing.
 
 ## Can I enforce sandbox policies across my organization?
 
-Yes. Admins can centrally manage network and filesystem policies from the
-Docker Admin Console. Rules defined there apply to every sandbox in the
+Yes. Admins can centrally manage network and filesystem policies. These
+rules apply to every sandbox in the
 organization. When organization governance is active, it replaces local rules
 set with `sbx policy` — local rules are no longer evaluated.
 
