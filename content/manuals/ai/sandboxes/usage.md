@@ -128,41 +128,24 @@ to switch between the sandboxes panel and the network panel.
 From the network panel you can browse connection logs, allow or block specific
 hosts, and add custom network rules. Press `?` to see all keyboard shortcuts.
 
-## Git workflow
+## Git workspace modes
 
-When your workspace is a Git repository, you can share it with a sandbox in one
-of two ways:
+When your primary workspace is a Git repository, choose how the sandbox receives
+it when you create the sandbox:
 
-- Direct mode (default): the agent has read-write access to your
-  working tree. Changes the agent makes appear on your host immediately.
-- [Clone mode](#clone-mode) (`--clone`): the agent works on a private
-  Git clone inside the sandbox, with your host repository mounted
-  read-only. The sandbox exposes its clone as a Git remote on your host,
-  so you fetch the agent's commits the same way you'd fetch from any
-  other remote.
+- Direct mode is the default. The agent has read-write access to your working
+  tree, and changes appear on your host immediately.
+- [Clone mode](#clone-mode) uses `--clone`. The agent works in a private Git
+  clone inside the sandbox, and your host repository is mounted read-only.
 
-For a comparison of approaches and workflow recipes, see
-[Workflow patterns](workflows.md#git-workflows). For the security model
-behind each mode, see
+For guidance on branch strategy, fetching work from a sandbox, and parallel
+agent workflows, see [Git workflows](workflows.md#git-workflows). For the
+security model behind each mode, see
 [Workspace isolation](security/isolation.md#workspace-isolation).
-
-### Direct mode (default)
-
-The agent edits your working tree directly. Stage, commit, and push from the
-host as you normally would. If you run multiple agents on the same repository at
-the same time, use [clone mode](#clone-mode) to give each agent an isolated
-workspace.
 
 ### Clone mode
 
-In clone mode, the sandbox becomes a Git remote on your host. Your entire
-working directory, including untracked files and files excluded by `.gitignore`,
-is mounted read-only inside the sandbox. The agent commits inside the sandbox.
-You pull its work back out by fetching from that remote:
-
-```console
-$ git fetch sandbox-<name>
-```
+To create a clone-mode sandbox, pass `--clone` when you run or create it:
 
 ```console
 $ sbx run --clone claude
@@ -175,25 +158,19 @@ $ sbx create --clone --name my-sandbox claude .
 $ sbx run --name my-sandbox
 ```
 
-The clone follows whichever ref your host repository has checked out at
-create time. No branch is created automatically.
+Clone mode has a few create-time constraints:
 
-Clone mode is fixed at create time. To switch an existing sandbox to clone mode,
-remove it and recreate it with `sbx create --clone`.
-
-> [!WARNING]
-> Removing a clone-mode sandbox drops the in-sandbox clone along with it.
-> Any commits you haven't fetched (`git fetch sandbox-<name>`) or pushed
-> to an upstream remote are lost. `sbx rm` prints a warning before
-> deleting a clone-mode sandbox — review it before confirming.
-
-Clone mode requires a Git repository as the primary workspace, and is
-rejected at create time in two cases:
-
-- `--clone` on a non-Git workspace. Omit `--clone` for non-Git workspaces.
-- `--clone` from inside a Git worktree (other than the main one). The
-  read-only bind mount can't resolve the worktree's `.git` pointer file.
-  Run `sbx create --clone` from the main repository checkout instead.
+- Clone mode is fixed at create time. To switch an existing sandbox to clone
+  mode, remove it and recreate it with `sbx create --clone`.
+- The clone follows whichever ref your host repository has checked out at create
+  time. No branch is created automatically.
+- The primary workspace must be a Git repository. Omit `--clone` for non-Git
+  workspaces.
+- Clone mode is rejected from inside a Git worktree other than the main one. The
+  read-only bind mount can't resolve the worktree's `.git` pointer file. Run
+  `sbx create --clone` from the main repository checkout instead.
+- Removing a clone-mode sandbox drops the in-sandbox clone. Fetch or push any
+  commits you want to keep before you remove it.
 
 ## Multiple workspaces
 
