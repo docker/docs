@@ -29,6 +29,8 @@ What crosses the boundary into the VM:
 - **Shared agent skills:** a persistent host-side store is mounted read-write
   at the agent's skills directory unless you opt out when creating the
   sandbox. Supported agents in other sandboxes mount the same store.
+- **MCP gateway traffic:** supported agents connect to a host-side MCP gateway
+  endpoint. The gateway brokers access to registered MCP servers.
 
 What crosses the boundary back to the host:
 
@@ -43,6 +45,12 @@ host filesystem. It also cannot access your host Docker daemon, your host
 network or localhost, or any domain not in the allow list. Sandboxes cannot
 communicate directly over the network. Raw TCP, UDP, and ICMP are blocked at
 the network layer.
+
+MCP servers are an explicit integration point. Remote MCP servers run outside
+Docker Sandboxes, and local stdio MCP servers run on the host, not inside the
+sandbox VM. An agent can invoke the tools those servers expose through the MCP
+gateway, subject to MCP policies when organization governance is active. Treat
+local MCP servers as trusted host integrations.
 
 ![Sandbox security model showing the hypervisor boundary between the sandbox VM and the host system. The workspace directory is shared read-write. The agent process, Docker Engine, packages, and VM filesystem are inside the VM. Host filesystem, processes, Docker Engine, and network are outside the VM and not accessible. A proxy enforces allow/deny policies and injects credentials into outbound requests.](../images/sbx-security.png)
 
@@ -104,6 +112,11 @@ the host filesystem or create a direct network path between sandboxes, but it
 does put participating sandboxes in the same trust boundary. See
 [Share agent skills](../workflows.md#share-agent-skills) for details and the
 per-sandbox opt-out.
+
+Local stdio MCP servers run outside the sandbox VM. If you register a local MCP
+server that starts a host process or host Docker container, that process or
+container uses host permissions and host isolation, not sandbox isolation. See
+[MCP gateway](../mcp-gateway.md).
 
 ## Organization-wide control
 
