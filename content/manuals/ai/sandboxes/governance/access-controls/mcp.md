@@ -37,6 +37,12 @@ For Docker MCP policies:
 - A matching `forbid` overrides any `permit`, including a permit with
   `@requireApproval`.
 
+If MCP policy enforcement isn't active for a user, the MCP gateway doesn't
+evaluate Cedar policy and MCP activity is allowed by the gateway. When
+enforcement is active, evaluation is fail closed: server registration and
+governed MCP requests are denied unless a matching `permit` allows them. MCP
+doesn't have a local preset equivalent to network policy.
+
 MCP policies are enforced on the MCP gateway path, not by the sandbox network
 proxy. During `sbx mcp add`, Docker Sandboxes evaluates the resolved server
 definition against `MCP::Action::"register"` before storing the registration.
