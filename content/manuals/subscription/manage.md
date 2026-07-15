@@ -1,8 +1,7 @@
 ---
 title: Manage plans
 linkTitle: Manage
-description:
-  Learn how to set up, upgrade, downgrade or cancel, or cancel auto-renewal for available plans.
+description: Learn how to set up, upgrade, downgrade or cancel, or cancel auto-renewal for available plans.
 keywords:
   purchase subscription, buy docker subscription, product catalog, browse
   products, upgrade subscription, downgrade subscription, docker billing, cancel auto-renewal, cancel, top up, manage
@@ -34,23 +33,27 @@ You can purchase Docker plans through the product catalog:
    - Each product tile uses an account-type flag so you know the difference.
 1. Select **View plans** to add a plan to your Docker account.
 1. Verify your billing details, continue to payment, and complete checkout.
+   - Optional. To add a VAT number, select the **I'm purchasing as a business**
+     checkbox and enter your Tax ID.
+   - Your VAT number must include your country prefix. For example, enter
+     `DE123456789` for a German VAT number.
 
 ## Upgrade plans
 
-You can upgrade active plans from the billing Overview page. 
+You can upgrade active plans from the billing Overview page.
 
 1. Sign in to [Docker Home](https://app.docker.com/), then choose your personal
    account or your organization account.
-1. Go to **Billing** to view the Overview page. 
+1. Go to **Billing** to view the Overview page.
    - The Overview page contains your active plans and payment details.
    - **Active plans** contains information about plan type, renewal cadence, and usage.
-1. Top up or upgrade from the **Active plans** section. 
-    - **Active plans** is where you complete all management actions.
-    - Depending on the plan type, you can select the action menu button or the **Manage** button to choose from available actions.
+1. Top up or upgrade from the **Active plans** section.
+   - **Active plans** is where you complete all management actions.
+   - Depending on the plan type, you can select the action menu button or the **Manage** button to choose from available actions.
 1. Verify your billing details, continue to payment, and complete checkout.
 
 > [!TIP]
-> Billing behaviors vary from plan to plan. Learn more about usage, downgrading, or canceling plans 
+> Billing behaviors vary from plan to plan. Learn more about usage, downgrading, or canceling plans
 > from the relevant
 > [product page](/manuals/subscription/plans/_index.md).
 
@@ -65,3 +68,5 @@ Some products are sales-led. You must
 - [Set up payment information](/manuals/billing/payment-method.md)
 - [View invoices](/manuals/billing/history.md)
 - To learn more about managing your billing details, see [Billing](/manuals/billing/_index.md).
+- To learn about sales tax and VAT, see
+  [Sales tax and VAT](/manuals/billing/_index.md#sales-tax-and-vat).

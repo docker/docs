@@ -11,7 +11,7 @@ can submit a valid tax exemption certificate to Docker Support.
 
 If you're a global customer subject to VAT, make sure to include your VAT
 number, along with your country prefix, when you
-[update your billing details](/manuals/billing/details.md#update-billing-details).
+[purchase a Docker plan](/manuals/subscription/manage.md#set-up-a-new-plan).
 
 ## Prerequisites
 
