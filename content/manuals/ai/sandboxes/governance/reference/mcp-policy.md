@@ -72,21 +72,21 @@ resource in MCP::Primordial::"code-mode"
 Tool annotation attributes come from MCP tool annotations or catalog metadata
 and are advisory.
 
-| Attribute                  | Applies to                | Notes                                                                                          |
-| -------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------- |
-| `resource.name`            | Tools and prompts         | For tools, this is the bare tool name, not a display-prefixed name.                            |
-| `resource.uri`             | Resources                 | Use with string operators such as `like`.                                                      |
-| `resource.readOnly`        | Tools                     | Defaults to `false` when a tool doesn't declare it.                                            |
-| `resource.destructive`     | Tools                     | Defaults to `true` when a tool doesn't declare it.                                             |
-| `resource.idempotent`      | Tools                     | Defaults to `false` when a tool doesn't declare it.                                            |
-| `resource.openWorld`       | Tools                     | Defaults to `true` when a tool doesn't declare it.                                             |
-| `resource.category`        | Tools                     | Server or catalog category copied onto the tool resource. Tools don't self-declare categories. |
-| `resource.type`            | Servers                   | Use for server registration rules.                                                             |
-| `resource.identityURL`     | Servers                   | The server URL or source. Use for server registration rules.                                   |
-| `resource.requiresOAuth`   | Servers                   | Use for server registration rules.                                                             |
-| `resource.requiresNetwork` | Servers                   | Use for server registration rules.                                                             |
-| `resource.command`         | Local server registration | Local stdio server command. The MCP gateway sends an empty value.                              |
-| `resource.args`            | Local server registration | Local stdio server arguments. This is a set, so `.contains()` can match values.                |
+| Attribute                  | Applies to        | Notes                                                                                                                                                 |
+| -------------------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `resource.name`            | Tools and prompts | For tools, this is the bare tool name, not a display-prefixed name.                                                                                   |
+| `resource.uri`             | Resources         | Use with string operators such as `like`.                                                                                                             |
+| `resource.readOnly`        | Tools             | Defaults to `false` when a tool doesn't declare it.                                                                                                   |
+| `resource.destructive`     | Tools             | Defaults to `true` when a tool doesn't declare it.                                                                                                    |
+| `resource.idempotent`      | Tools             | Defaults to `false` when a tool doesn't declare it.                                                                                                   |
+| `resource.openWorld`       | Tools             | Defaults to `true` when a tool doesn't declare it.                                                                                                    |
+| `resource.category`        | Tools             | Server or catalog category copied onto the tool resource. Tools don't self-declare categories.                                                        |
+| `resource.type`            | Servers           | Use for server registration rules.                                                                                                                    |
+| `resource.identityURL`     | Servers           | The server URL or source. Use for server registration rules.                                                                                          |
+| `resource.requiresOAuth`   | Servers           | Use for server registration rules.                                                                                                                    |
+| `resource.requiresNetwork` | Servers           | Use for server registration rules.                                                                                                                    |
+| `resource.command`         | Servers           | Local stdio server command, such as `npx` or `docker`, when available. Empty for remote servers and registrations that don't include command details. |
+| `resource.args`            | Servers           | Local stdio server arguments when available. This is a set, so `.contains()` can match values. Empty when no command details are available.           |
 
 Use `like` for string attributes. In Cedar, `like` uses `*` as its wildcard,
 matches the full string, treats `?` as a literal character, and treats `\*` as
@@ -151,8 +151,10 @@ don't require approval.
 - Tool and resource listing actions aren't Cedar-gated. Listings can include
   entries that a policy denies when the sandbox tries to use them.
 - Server command and argument rules using `resource.command` or `resource.args`
-  apply where local stdio server details are available. The MCP gateway sends
-  empty values for those attributes.
+  apply only when the resolved server registration includes local stdio command
+  details. Remote servers and metadata-resolved local servers can have empty
+  values for those attributes. Use `resource.type` to match all local stdio
+  servers.
 - Principal-based rules don't take effect. Use organization and team policy
   scope to target users.
 - Server groups aren't supported in MCP policy. Reference servers individually.

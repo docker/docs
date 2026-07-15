@@ -260,5 +260,5 @@ Then explore:
   network rules into a reusable definition you launch with a single flag.
 - [Agents](agents/) — the full list of supported agents and how to configure
   each one.
-- [Governance](governance/) — centrally manage network and filesystem policies
-  across a team.
+- [Governance](governance/) — centrally manage network, filesystem, and MCP
+  policies across a team.

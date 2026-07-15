@@ -122,5 +122,5 @@ admins.
 - [Default security posture](defaults/): what a fresh sandbox permits and
   blocks
 - [Credentials](credentials/): how to provide and manage API keys
-- [Governance](../governance/): configure network and filesystem access rules,
-  locally or across your organization
+- [Governance](../governance/): configure network, filesystem, and MCP access
+  controls locally or across your organization

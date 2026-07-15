@@ -11,8 +11,9 @@ Yes to both. The `sbx` CLI is free to use, including for commercial and
 professional work, with no per-seat fee. Install it, sign in with a free
 Docker account, and run sandboxes at no cost.
 
-The only paid component is organization governance: centrally managed network
-and filesystem policies, [sign-in enforcement](governance/monitor-and-enforce/sign-in-enforcement.md),
+The only paid component is organization governance: centrally managed network,
+filesystem, and MCP policies,
+[sign-in enforcement](governance/monitor-and-enforce/sign-in-enforcement.md),
 and [audit logs](governance/monitor-and-enforce/audit.md). These
 [organization governance features](governance/) require a separate paid
 subscription —
@@ -39,13 +40,13 @@ Your Docker account email is only used for authentication, not marketing.
 
 ## Can I enforce sandbox policies across my organization?
 
-Yes. Admins can centrally manage network and filesystem policies. These
-rules apply to every sandbox in the
+Yes. Admins can centrally manage network, filesystem, and MCP policies from
+the Docker Admin Console. Rules defined there apply to every sandbox in the
 organization. When organization governance is active, it replaces local rules
 set with `sbx policy` — local rules are no longer evaluated.
 
-See [Organization policies](governance/access-controls/organization.md). This feature requires
-a separate paid subscription —
+See [Organization policies](governance/access-controls/organization.md). This
+feature requires a separate paid subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
 to get started.
 
@@ -131,7 +132,7 @@ $ echo $BRAVE_API_KEY
 ## Why do agents run without approval prompts?
 
 The sandbox itself is the safety boundary. Because agents run inside an
-isolated microVM with [network policies](governance/),
+isolated microVM with [network policies](governance/access-controls/network.md),
 [credential isolation](security/credentials.md), and no access to your host
 system outside the workspace, the usual reasons for approval prompts (preventing
 destructive commands, network access, file modifications) are handled by the
