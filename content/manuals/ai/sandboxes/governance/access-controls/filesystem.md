@@ -35,9 +35,9 @@ and WSL, see [Filesystem rules](../concepts.md#filesystem-rules).
 
 ## Organization filesystem rules
 
-Admins manage filesystem policies in the Docker Admin Console. A policy can
-apply to the whole organization or to selected teams. For setup steps and team
-scoping, see [Organization policies](organization.md).
+Organization filesystem rules belong to policies that can apply to the whole
+organization or to selected teams. For setup steps and team scoping, see
+[Organization policies](organization.md).
 
 Filesystem policy is checked when a workspace is mounted, which happens when a
 sandbox is created. To apply a filesystem policy change to a running workflow,
@@ -48,5 +48,5 @@ remove the sandbox and create a new one.
 ### Sandbox cannot mount workspace
 
 If a sandbox fails to mount with a `mount policy denied` error, verify that the
-filesystem allow rule in the Admin Console uses `**` rather than `*`. A single
-`*` doesn't match across directory separators.
+filesystem allow rule uses `**` rather than `*`. A single `*` doesn't match
+across directory separators.

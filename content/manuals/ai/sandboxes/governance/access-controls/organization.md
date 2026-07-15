@@ -3,7 +3,7 @@ title: Organization policies
 linkTitle: Org policies
 weight: 20
 description: Centrally manage sandbox network, filesystem, and MCP policies for your organization.
-keywords: docker sandboxes, governance, organization policy, AI governance, admin console, network access, filesystem access, mcp policy
+keywords: docker sandboxes, governance, organization policy, AI governance, Docker Home, network access, filesystem access, mcp policy
 aliases:
   - /ai/sandboxes/security/governance/
   - /ai/sandboxes/governance/org/
@@ -11,13 +11,12 @@ aliases:
 
 [Local policies](local.md) give individual developers control over what their
 sandboxes can access. Organization policy moves that control to the admin level:
-rules defined in the Admin Console apply to sandboxes across the organization,
-either to every member or to specific teams. When organization governance is
-active, it replaces local `sbx policy` rules entirely — local rules are no
-longer evaluated and can't be used to supplement or override the organization
-policy.
+organization policies apply to sandboxes across the organization, either to
+every member or to specific teams. When organization governance is active, it
+replaces local `sbx policy` rules entirely — local rules are no longer
+evaluated and can't be used to supplement or override the organization policy.
 
-Admins can manage organization policies through the Admin Console UI. For
+Admins can manage organization policies through the Docker Home UI. For
 programmatic management of network and filesystem policies, use the
 [Governance API](/reference/api/ai-governance/).
 
@@ -36,7 +35,7 @@ with the **Governance** permissions and assign it to a user or team.
 
 ## Create a policy
 
-Manage policies under **Admin Console**, a section in the left-hand navigation
+Manage policies from the **AI Platform** section in the left-hand navigation
 of [Docker Home](https://app.docker.com). Network and filesystem policies are
 managed separately, under **Network access** and **Filesystem access**.
 
@@ -48,8 +47,9 @@ To create a policy:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your
    organization.
-1. Select **AI Platform**, then the governance section you want.
-1. Select **Network access** or **Filesystem access**, then **Create policy**.
+1. In the left-hand navigation, expand **AI Platform** and select
+   **Network access** or **Filesystem access**.
+1. Select **Create policy**.
 1. Enter a **Policy name**.
 1. Set the **Scope** to **Organization** or **Teams**. If you select **Teams**,
    choose the teams the policy applies to. See
@@ -93,7 +93,7 @@ Team scoping targets your organization's existing
 exist before you can scope a policy to it. Create teams and manage their members
 in one of two ways:
 
-- Manually, in the Admin Console.
+- Manually, in Docker Home.
 - Automatically, by using
   [group mapping](/manuals/enterprise/security/provisioning/scim/group-mapping.md)
   to synchronize your identity provider's groups with the teams in your
@@ -118,11 +118,10 @@ deny rules combine, see [Policy concepts](../concepts.md).
 
 ### Policy changes not taking effect
 
-After updating organization policies in the Admin Console, changes take up
-to 5 minutes to propagate to developer machines. To apply changes
-immediately, users can run `sbx policy reset`, which stops the daemon and
-forces it to pull the latest organization policies on the next `sbx`
-command.
+After updating organization policies, changes take up to 5 minutes to
+propagate to developer machines. To apply changes immediately, users can run
+`sbx policy reset`, which stops the daemon and forces it to pull the latest
+organization policies on the next `sbx` command.
 
 > [!WARNING]
 > `sbx policy reset` deletes all locally configured policy rules. The command
