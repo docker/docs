@@ -27,6 +27,11 @@ Governed MCP activity is default deny. A request is blocked unless a matching
 `permit` allows it. A matching `forbid` overrides any `permit`, including a
 permit annotated with `@requireApproval`.
 
+Default deny applies only to MCP activity that reaches Cedar evaluation. If MCP
+policy enforcement isn't active for a user, the MCP gateway doesn't evaluate
+Cedar policy and MCP activity is allowed by the gateway. If enforcement is
+active but no effective MCP policy permits a request, the request is denied.
+
 An actionless `permit` matches every MCP action that reaches Cedar evaluation:
 
 ```cedar
