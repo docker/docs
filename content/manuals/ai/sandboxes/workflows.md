@@ -348,3 +348,8 @@ CI provider's secret store, use `-t`. For example, in a GitHub Actions step:
 ```yaml
 - run: sbx secret set -g anthropic -t "${{ secrets.ANTHROPIC_API_KEY }}"
 ```
+
+## Sandbox environments
+
+For a declarative alternative to `sbx run` flags, see
+[Sandbox environment files](sandbox-environments.md).
