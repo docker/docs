@@ -3,36 +3,20 @@ title: Company overview
 linkTitle: Company
 weight: 20
 description: Learn how to manage multiple organizations using companies, including managing users, owners, and security.
-keywords: company, multiple organizations, manage companies, admin console, Docker Business settings
+keywords: company, multiple organizations, manage companies, Docker Home, Docker Business settings
 grid:
   - title: Create a company
     description: Get started by learning how to create a company.
     icon: building-office-2
     link: /admin/company/new-company/
-  - title: Manage organizations
-    description:
-      Learn how to add and manage organizations as well as seats within your
-      company.
+  - title: Manage your company
+    description: Add organizations, manage company owners, and invite members.
     icon: building-storefront
-    link: /admin/company/manage/organizations/
-  - title: Manage company owners
-    description: Find out more about company owners and how to manage them.
-    icon: user-group
-    link: /admin/company/manage/owners/
-  - title: Manage users
-    description: Explore how to manage users in all organizations.
-    icon: user-plus
-    link: /admin/company/manage/users/
-  - title: Configure single sign-on
-    description: Discover how to configure SSO for your entire company.
+    link: /admin/company/manage/
+  - title: Configure SSO and SCIM
+    description: Set up single sign-on and SCIM provisioning for your company.
     icon: key
     link: /enterprise/security/single-sign-on/
-  - title: Set up SCIM
-    description:
-      Set up SCIM to automatically provision and deprovision users in your
-      company.
-    icon: clipboard-document-check
-    link: /enterprise/security/provisioning/scim/
   - title: Domain management
     description: Add and verify your company's domains.
     icon: check-badge
@@ -47,29 +31,40 @@ aliases:
 
 {{< summary-bar feature_name="Company" >}}
 
-A company provides a single point of visibility across multiple organizations,
-simplifying organization and settings management.
-
+A company provides a single point of visibility across multiple
+organizations, for centralized organization and settings management.
 Organization owners with a Docker Business subscription can create a company
-and manage it through the [Docker Admin Console](https://app.docker.com/admin).
+and manage it through Docker Home.
+
+## Company structure
 
 The following diagram shows how a company relates to its associated
 organizations.
 
 ![Diagram showing how companies relate to Docker organizations](/admin/images/docker-admin-structure.webp)
 
-## Key features
+For the full administration hierarchy, see the
+[administration overview](/manuals/admin/_index.md#company-and-organization-hierarchy).
 
-With a company, administrators can:
+## Company roles
 
-- View and manage all nested organizations
-- Configure company and organization settings centrally
-- Control access to the company
-- Have up to ten unique users assigned to the company owner role
-- Configure SSO and SCIM for all nested organizations
-- Enforce SSO for all users in the company
+A company includes one or more company owners. The creator of a company
+becomes both a company owner and an organization owner, and occupies a seat
+as organization owner. After creation, a company can have multiple owners,
+and each owner has visibility across the entire company. They can manage
+settings for every organization under it and have the same access rights as
+organization owners.
 
-## Create and manage your company
+- A company can have up to ten unique company owners.
+- Company owners don't occupy a seat unless one of the following applies:
+  - They're added as a member of an organization under the company.
+  - SSO is enabled and the company owner signs in through SSO, which
+    automatically adds them as an organization member.
+
+To add or remove company owners, see
+[Manage your company](/manuals/admin/company/manage.md#company-owners).
+
+## What's next
 
 Learn how to create and manage a company in the following sections.
 
