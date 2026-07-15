@@ -15,12 +15,10 @@ weight: 20
 > promotional credit toward cloud compute usage.
 
 Docker AI Cloud plans are a Docker Personal and Docker Pro exclusive. Docker AI
-Cloud combines the Agentic Platform,
-[MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md), and
-[Cloud Sandboxes](/manuals/ai/sandboxes/_index.md) together in a single
-product for individual developers.
+Cloud combines the Agentic Platform, MCP Gateway, and Cloud Sandboxes together
+in a single product for individual developers.
 
-- AI Cloud Basic is the free default for every new signup. It doesn't require
+- AI Cloud Basic is the free default for every new sign-up. It doesn't require
   a payment method.
 - AI Cloud Personal is a pay-as-you-go plan for developers who need Cloud
   Sandboxes. It has no recurring subscription fee, so you pay only for the
