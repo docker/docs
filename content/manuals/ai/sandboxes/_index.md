@@ -18,7 +18,7 @@ system.
 > [organization governance](governance/) requires a separate paid subscription.
 
 Organization admins can
-[centrally manage sandbox network and filesystem policies](governance/access-controls/organization.md)
+[centrally manage sandbox network, filesystem, and MCP policies](governance/access-controls/organization.md)
 from the Docker Admin Console, so the same rules apply uniformly across every
 developer's machine. Available on a separate paid subscription.
 
@@ -73,6 +73,8 @@ the [usage guide](usage.md) for basic commands.
 ## Learn more
 
 - [Agents](agents/) — supported agents and per-agent configuration
+- [MCP gateway](mcp-gateway.md) — register MCP servers and connect them to
+  sandboxed agents
 - [Customize](customize/) — reusable templates and declarative kits for
   extending or tailoring sandboxes
 - [Architecture](architecture.md) — microVM isolation, workspace mounting,

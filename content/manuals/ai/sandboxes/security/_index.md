@@ -1,7 +1,7 @@
 ---
 title: Security model
 linkTitle: Security model
-weight: 50
+weight: 80
 description: Trust boundaries, isolation layers, and security properties of Docker Sandboxes.
 keywords: docker sandboxes, security model, isolation, trust boundaries, microVM
 ---

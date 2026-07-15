@@ -1,6 +1,6 @@
 ---
 title: Architecture
-weight: 40
+weight: 70
 description: Technical architecture of Docker Sandboxes; workspace mounting, storage, networking, and sandbox lifecycle.
 keywords: docker sandboxes, architecture, microVM, workspace mounting, sandbox lifecycle
 ---

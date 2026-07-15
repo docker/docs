@@ -3,6 +3,7 @@ title: Docker Sandboxes release notes
 linkTitle: Release notes
 description: New features, bug fixes, and changes in Docker Sandboxes
 keywords: docker sandboxes, sbx, release notes, changelog
+weight: 130
 toc_min: 1
 toc_max: 2
 tags:
@@ -23,7 +24,7 @@ the full release history, including pre-releases and downloads, see the
 
 ### Highlights
 
-This release revamps **policy tooling** with a concise `sbx policy ls`, a new `sbx policy inspect`, and a `sbx policy check network` command for testing whether the current policy would allow an access request before you run. 
+This release revamps **policy tooling** with a concise `sbx policy ls`, a new `sbx policy inspect`, and a `sbx policy check network` command for testing whether the current policy would allow an access request before you run.
 Networking gains a **SOCKS5 upstream-proxy transport**.  
 Secrets get a new **`sbx secret import`** with clearer env-source visibility.
 

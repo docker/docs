@@ -3,7 +3,7 @@ title: Customizing sandboxes
 linkTitle: Customize
 description: Build reusable sandbox images, extend agents with tools and credentials, and define custom agents using templates and kits.
 keywords: sandboxes, sbx, customize, templates, kits, mixins, custom agents
-weight: 35
+weight: 60
 aliases:
   - /ai/sandboxes/agents/custom-environments/
 params:
