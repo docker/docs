@@ -3,6 +3,7 @@ title: "OpenTelemetry Tracing"
 description: "Export docker-agent traces to any OTLP backend, including Langfuse and LangSmith, for debugging agentic workflows."
 keywords: docker agent, ai agents, community, opentelemetry tracing
 weight: 40
+canonical: https://docs.docker.com/ai/docker-agent/community/opentelemetry/
 ---
 
 _docker-agent can export OpenTelemetry traces of an agent run to any OTLP/HTTP backend. This is separate from [product-analytics telemetry](../telemetry/index.md) and is opt-in via the `--otel` flag._

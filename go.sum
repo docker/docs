@@ -128,6 +128,8 @@ github.com/docker/docker v28.5.2+incompatible h1:DBX0Y0zAjZbSrm1uzOkdr1onVghKaft
 github.com/docker/docker v28.5.2+incompatible/go.mod h1:eEKB0N0r5NX/I1kEveEz05bcu8tLC/8azJZsviup8Sk=
 github.com/docker/docker-agent v1.96.0 h1:wt018652ejWtHpMOdhvjwIxaeI46rc6o8snqb9QsmiI=
 github.com/docker/docker-agent v1.96.0/go.mod h1:PJlLIntWPY0KPepCIeR4+WRo2fmQnmnONYBmb/ULorM=
+github.com/docker/docker-agent v1.103.0 h1:hmS2u0fU4MMyUnXrjJlhcfjpBUzkBEBM9/DrmL0yTpY=
+github.com/docker/docker-agent v1.103.0/go.mod h1:KUYwjuxrs2N3BBrAQ6CMNPVQxOfoZoLUYpbxyGTM02w=
 github.com/docker/docker-credential-helpers v0.9.3 h1:gAm/VtF9wgqJMoxzT3Gj5p4AqIjCBS4wrsOh9yRqcz8=
 github.com/docker/docker-credential-helpers v0.9.3/go.mod h1:x+4Gbw9aGmChi3qTLZj8Dfn0TD20M/fuWy0E5+WDeCo=
 github.com/docker/docker-credential-helpers v0.9.5 h1:EFNN8DHvaiK8zVqFA2DT6BjXE0GzfLOZ38ggPTKePkY=

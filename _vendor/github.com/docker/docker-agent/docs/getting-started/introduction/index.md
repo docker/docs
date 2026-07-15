@@ -3,6 +3,7 @@ title: "Introduction"
 description: "Docker Agent is a multi-agent runtime that lets you build, run, and share AI agents with a YAML or HCL config — no glue code required."
 keywords: docker agent, ai agents, getting started, introduction
 weight: 10
+canonical: https://docs.docker.com/ai/docker-agent/getting-started/introduction/
 ---
 
 _Docker Agent is a multi-agent runtime that lets you build, run, and share AI agents with a YAML or HCL config — no glue code required._

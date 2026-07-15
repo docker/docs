@@ -4,6 +4,7 @@ description: "Create custom tools that call HTTP APIs."
 keywords: docker agent, ai agents, tools, toolsets, api tool
 linkTitle: "API"
 weight: 240
+canonical: https://docs.docker.com/ai/docker-agent/tools/api/
 ---
 
 _Create custom tools that call HTTP APIs._

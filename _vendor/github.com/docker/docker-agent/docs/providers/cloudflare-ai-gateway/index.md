@@ -3,6 +3,7 @@ title: "Cloudflare AI Gateway"
 description: "Use Cloudflare AI Gateway models with docker-agent."
 keywords: docker agent, ai agents, model providers, llm, cloudflare ai gateway
 weight: 60
+canonical: https://docs.docker.com/ai/docker-agent/providers/cloudflare-ai-gateway/
 ---
 
 _Use Cloudflare AI Gateway models with docker-agent._

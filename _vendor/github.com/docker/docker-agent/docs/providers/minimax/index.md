@@ -3,6 +3,7 @@ title: "MiniMax"
 description: "Use MiniMax AI models with docker-agent."
 keywords: docker agent, ai agents, model providers, llm, minimax
 weight: 160
+canonical: https://docs.docker.com/ai/docker-agent/providers/minimax/
 ---
 
 _Use MiniMax AI models with docker-agent._

@@ -4,6 +4,7 @@ description: "Dispatch work to sub-agents concurrently and collect results async
 keywords: docker agent, ai agents, tools, toolsets, background agents tool
 linkTitle: "Background Agents"
 weight: 90
+canonical: https://docs.docker.com/ai/docker-agent/tools/background-agents/
 ---
 
 _Dispatch work to sub-agents concurrently and collect results asynchronously._
@@ -74,6 +75,8 @@ agents:
 > **When to Use**
 >
 > Use `background_agents` when your orchestrator needs to fan out work to multiple specialists in parallel — for example, researching several topics simultaneously or running independent code analyses side by side.
+
+In the TUI, each background task's token usage is accounted for live: the sidebar's Agents panel shows the sub-agent's context usage percentage on its roster row, the Agent Inspector shows its exact token counts, and the task's cost joins the session total.
 
 ## Using Harness Sub-Agents
 

@@ -3,6 +3,7 @@ title: "Groq"
 description: "Use Groq fast-inference models with docker-agent."
 keywords: docker agent, ai agents, model providers, llm, groq
 weight: 130
+canonical: https://docs.docker.com/ai/docker-agent/providers/groq/
 ---
 
 _Use Groq models with docker-agent._

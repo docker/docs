@@ -3,6 +3,7 @@ title: "Thinking / Reasoning"
 description: "Control how much a model reasons before responding. Works across OpenAI, Anthropic, Google Gemini, AWS Bedrock, and Docker Model Runner."
 keywords: docker agent, ai agents, guides, thinking / reasoning
 weight: 20
+canonical: https://docs.docker.com/ai/docker-agent/guides/thinking/
 ---
 
 _Control how much a model reasons before responding. Works across OpenAI, Anthropic, Google Gemini, AWS Bedrock, and Docker Model Runner._
@@ -325,7 +326,7 @@ models:
 
 ## Changing Thinking Level at Runtime
 
-While running in the TUI, press **Shift+Tab** to cycle the thinking effort level for the current model without editing your YAML config, or type `/effort <level>` to jump straight to a specific level (e.g. `/effort high`):
+While running in the TUI, press **Shift+Tab** to cycle the thinking effort level for the current model without editing your YAML config, or type `/effort <level>` to jump straight to a specific level (e.g. `/effort high`). Running `/effort` without an argument opens a picker listing the levels the current model supports:
 
 - The level steps through the model's supported range (model-specific), wrapping around — for example `none → minimal → low → medium → high → none` on OpenAI gpt-5/o-series, `none → minimal → low → medium → high → xhigh → none` on gpt-5.2+, `none → low → medium → high → max → none` on Anthropic Opus 4.6 and Sonnet 4.6, and `none → low → medium → high → xhigh → max → none` on Anthropic Opus 4.7+, Fable 5, and Mythos 5. For older Anthropic models (e.g. Sonnet 4.5) that only accept token budgets, effort-string cycling has no effect — use an integer `thinking_budget` in your YAML config instead.
 - The current level is shown in the sidebar next to the model name (e.g. `openai/gpt-5 • high`).

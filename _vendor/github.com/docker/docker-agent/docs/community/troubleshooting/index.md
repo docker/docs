@@ -3,6 +3,7 @@ title: "Troubleshooting"
 description: "Common issues and how to resolve them when working with docker-agent."
 keywords: docker agent, ai agents, community, troubleshooting
 weight: 20
+canonical: https://docs.docker.com/ai/docker-agent/community/troubleshooting/
 ---
 
 _Common issues and how to resolve them when working with docker-agent._
@@ -45,6 +46,66 @@ agents:
       retries: 2 # retries per model for 5xx errors
       cooldown: 1m # how long to stick with fallback after 429
 ```
+
+## Missing credentials or model errors
+
+When docker-agent can't find a usable model at startup, it fails fast with an actionable error. The message names the exact next step. `docker agent doctor` is the fastest way to see the full picture — which providers have credentials, whether Docker Model Runner is reachable, and which model `auto` would pick.
+
+### Required environment variables not set
+
+An agent (or a tool it uses) depends on environment variables that aren't configured:
+
+```text
+The following environment variables must be set:
+ - ANTHROPIC_API_KEY
+
+Provide them using any of these sources:
+ - Shell environment:  export ANTHROPIC_API_KEY=<value>
+ - Env file:           docker agent run --env-from-file <file> ...
+ - pass:               pass insert ANTHROPIC_API_KEY
+ - macOS Keychain:     security add-generic-password -a "$USER" -s ANTHROPIC_API_KEY -w
+
+See https://docs.docker.com/ai/docker-agent/guides/secrets/ for details.
+```
+
+Set the variable through any of the listed [secret sources](../../guides/secrets/index.md). When the missing variable is a model-provider API key, the error also suggests running a local model instead (`docker agent run --model dmr/ai/qwen3 ...`), which needs no API key, and links to the [Set Up a Model](../../getting-started/set-up-a-model/index.md) tutorial.
+
+### No model available (`auto` selection failed)
+
+The `auto` model selector found no configured cloud provider and no usable Docker Model Runner model:
+
+```text
+No model is currently available.
+
+To fix this, you can:
+  - Pull a Docker Model Runner model, e.g. `docker model pull ai/qwen3`
+  - Install Docker Model Runner: https://docs.docker.com/ai/model-runner/get-started/
+  - Configure an API key for a cloud provider:
+    - anthropic: ANTHROPIC_API_KEY
+    - openai: OPENAI_API_KEY
+    ...
+```
+
+Either configure a cloud provider API key (see [API keys not set](#api-keys-not-set) below) or pull a local model. The [Set Up a Model](../../getting-started/set-up-a-model/index.md) tutorial walks through both paths. Run `docker agent doctor` to see which providers have credentials and whether Docker Model Runner is reachable.
+
+### Docker Model Runner model not pulled
+
+A `dmr/...` model was requested but isn't available locally:
+
+```text
+model ai/qwen3 is not pulled in Docker Model Runner
+
+To resolve this, you can:
+  - Pull it first: docker model pull ai/qwen3
+  - Or choose a model that is already available (see `docker model ls`).
+```
+
+If instead you see `cannot query Docker Model Runner at <url>`, Docker Model Runner isn't installed or running — see the [Model Runner get-started guide](https://docs.docker.com/ai/model-runner/get-started/).
+
+> [!TIP]
+> **Diagnose before you run**
+>
+> Run `docker agent doctor` (or `docker agent doctor ./agent.yaml` to include a file's requirements) to check all three issues in one shot. It exits non-zero when something would block a run, making it useful as a CI preflight. See the [CLI reference](../../features/cli/index.md#docker-agent-doctor).
 
 ## Debug Mode
 

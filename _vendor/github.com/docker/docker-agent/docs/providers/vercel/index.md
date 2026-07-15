@@ -3,6 +3,7 @@ title: "Vercel AI Gateway"
 description: "Use Vercel AI Gateway models with docker-agent."
 keywords: docker agent, ai agents, model providers, llm, vercel ai gateway
 weight: 260
+canonical: https://docs.docker.com/ai/docker-agent/providers/vercel/
 ---
 
 _Use Vercel AI Gateway models with docker-agent._

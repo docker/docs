@@ -4,6 +4,7 @@ description: "Run docker-agent with locally hosted models for privacy, offline u
 keywords: docker agent, ai agents, model providers, llm, local models (ollama, vllm, localai)
 linkTitle: "Local Models"
 weight: 150
+canonical: https://docs.docker.com/ai/docker-agent/providers/local/
 aliases:
   - /ai/docker-agent/local-models/
 ---

@@ -3,6 +3,7 @@ title: "Cerebras"
 description: "Use Cerebras models with docker-agent."
 keywords: docker agent, ai agents, model providers, llm, cerebras
 weight: 50
+canonical: https://docs.docker.com/ai/docker-agent/providers/cerebras/
 ---
 
 _Use Cerebras models with docker-agent._

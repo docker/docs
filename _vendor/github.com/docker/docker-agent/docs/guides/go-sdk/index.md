@@ -3,6 +3,7 @@ title: "Go SDK"
 description: "Use docker-agent as a Go library to embed AI agents in your applications."
 keywords: docker agent, ai agents, guides, go sdk
 weight: 40
+canonical: https://docs.docker.com/ai/docker-agent/guides/go-sdk/
 ---
 
 _Use docker-agent as a Go library to embed AI agents in your applications._

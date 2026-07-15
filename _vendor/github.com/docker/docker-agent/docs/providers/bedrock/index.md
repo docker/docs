@@ -3,6 +3,7 @@ title: "AWS Bedrock"
 description: "Access Claude, Nova, Llama, and more through AWS infrastructure with enterprise-grade security and compliance."
 keywords: docker agent, ai agents, model providers, llm, aws bedrock
 weight: 30
+canonical: https://docs.docker.com/ai/docker-agent/providers/bedrock/
 ---
 
 _Access Claude, Nova, Llama, and more through AWS infrastructure with enterprise-grade security and compliance._

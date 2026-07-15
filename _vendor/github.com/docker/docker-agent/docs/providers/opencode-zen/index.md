@@ -3,6 +3,7 @@ title: "OpenCode Zen"
 description: "Use OpenCode Zen models with docker-agent."
 keywords: docker agent, ai agents, model providers, llm, opencode zen
 weight: 220
+canonical: https://docs.docker.com/ai/docker-agent/providers/opencode-zen/
 ---
 
 _Use OpenCode Zen models with docker-agent._
