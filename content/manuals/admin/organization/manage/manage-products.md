@@ -1,5 +1,6 @@
 ---
-title: Docker products
+title: Manage usage and access for Docker products
+linkTitle: Product usage and access
 weight: 50
 description: Learn how to manage access and usage for Docker products for your organization
 keywords: organization, tools, products, product access, organization management
@@ -9,28 +10,33 @@ aliases:
 
 {{< summary-bar feature_name="Admin orgs" >}}
 
-In this section, learn how to manage access and view usage of the Docker
-products for your organization. For more detailed information about each
-product, including how to set up and configure them, see the following manuals:
+Use this page to learn how to control and monitor product access and usage for your organization's members. 
+If you're looking for setup and
+configuration instructions, see each product's manual under [What's
+next](#whats-next).
 
-- [Docker Desktop](../../../desktop/_index.md)
-- [Docker Hub](../../../docker-hub/_index.md)
-- [Docker Build Cloud](../../../build-cloud/_index.md)
-- [Docker Scout](../../../scout/_index.md)
-- [Testcontainers Cloud](https://testcontainers.com/cloud/docs/#getting-started)
-- [Docker Offload](../../../offload/_index.md)
+## Monitor product usage for your organization
 
-## Manage product access for your organization
+| Product              | Monitor usage                                                                                                                                                                    |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Docker Desktop       | View the **Insights** page in [Docker Home](https://app.docker.com/). For more details, see [Insights](../../insights.md).                                                       |
+| Docker Hub           | View the [**Usage** page](https://hub.docker.com/usage) in Docker Hub.                                                                                                           |
+| Docker Build Cloud   | View the **Build minutes** page in [Docker Build Cloud](http://app.docker.com/build).                                                                                            |
+| Docker Scout         | View the [**Repository settings** page](https://scout.docker.com/settings/repos) in Docker Scout.                                                                                |
+| Testcontainers Cloud | View the [**Billing** page](https://app.testcontainers.cloud/dashboard/billing) in Testcontainers Cloud.                                                                         |
+| Docker Offload       | View the **Offload** > **Offload overview** page in [Docker Home](https://app.docker.com/). For more details, see [Docker Offload usage and billing](/manuals/offload/usage.md). |
 
-Access to the Docker products included in your subscription is turned on by
+If your usage or seat count exceeds your subscription amount, you can
+[add seats](./manage-seats.md) or [view available Docker plans](../../../subscription/plans/_index.md) to meet your needs.
+
+## Control access for your organization
+
+Access to the Docker products included in your plan is turned on by
 default for all users. For an overview of products included in your
-subscription, see
+plans, see
 [Docker subscriptions and features](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminManageProducts).
 
-{{< tabs >}}
-{{< tab name="Docker Desktop" >}}
-
-### Manage Docker Desktop access
+### Docker Desktop access
 
 To manage Docker Desktop access:
 
@@ -41,19 +47,13 @@ To manage Docker Desktop access:
 With sign-in enforced, only users who are a member of your organization can
 use Docker Desktop after signing in.
 
-{{< /tab >}}
-{{< tab name="Docker Hub" >}}
-
-### Manage Docker Hub access
+### Docker Hub access
 
 To manage Docker Hub access, sign in to
 [Docker Home](https://app.docker.com/) and configure [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md)
 or [Image Access Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md).
 
-{{< /tab >}}
-{{< tab name="Docker Build Cloud" >}}
-
-### Manage Docker Build Cloud access
+### Docker Build Cloud access
 
 To initially set up and configure Docker Build Cloud, sign in to
 [Docker Build Cloud](https://app.docker.com/build) and follow the
@@ -66,10 +66,7 @@ To manage Docker Build Cloud access:
 1. Select **Account settings**.
 1. Select **Lock access to Docker Build Account**.
 
-{{< /tab >}}
-{{< tab name="Docker Scout" >}}
-
-### Manage Docker Scout access
+### Docker Scout access
 
 To initially set up and configure Docker Scout, sign in to
 [Docker Scout](https://scout.docker.com/) and follow the on-screen instructions.
@@ -86,10 +83,7 @@ To manage Docker Scout access:
    use [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md)
    and set `sbomIndexing` to `false` to disable, or to `true` to enable.
 
-{{< /tab >}}
-{{< tab name="Testcontainers Cloud" >}}
-
-### Manage Testcontainers Cloud access
+### Testcontainers Cloud access
 
 To initially set up and configure Testcontainers Cloud, sign in to
 [Testcontainers Cloud](https://app.testcontainers.cloud/) and follow the
@@ -101,10 +95,7 @@ To manage access to Testcontainers Cloud:
    select **Account**.
 1. Select **Settings**, then **Lock access to Testcontainers Cloud**.
 
-{{< /tab >}}
-{{< tab name="Docker Offload" >}}
-
-### Manage Docker Offload access
+### Docker Offload access
 
 > [!NOTE]
 >
@@ -133,20 +124,14 @@ Management](/manuals/enterprise/security/hardened-desktop/settings-management/_i
 For more details on Settings Management, see the [Settings
 reference](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md#enable-docker-offload).
 
-{{< /tab >}}
-{{< /tabs >}}
+## What's next
 
-## Monitor product usage for your organization
+For more detailed information about each
+product, including how to set up and configure them, see the following manuals:
 
-To view usage for Docker products:
-
-- Docker Desktop: View the **Insights** page in [Docker Home](https://app.docker.com/). For more details, see [Insights](../../insights.md).
-- Docker Hub: View the [**Usage** page](https://hub.docker.com/usage) in Docker Hub.
-- Docker Build Cloud: View the **Build minutes** page in [Docker Build Cloud](http://app.docker.com/build).
-- Docker Scout: View the [**Repository settings** page](https://scout.docker.com/settings/repos) in Docker Scout.
-- Testcontainers Cloud: View the [**Billing** page](https://app.testcontainers.cloud/dashboard/billing) in Testcontainers Cloud.
-- Docker Offload: View the **Offload** > **Offload overview** page in [Docker Home](https://app.docker.com/). For more details, see
-  [Docker Offload usage and billing](/manuals/offload/usage.md).
-
-If your usage or seat count exceeds your subscription amount, you can
-[add seats](./manage-seats.md) or [view available Docker plans](../../../subscription/plans/_index.md) to meet your needs.
+- [Docker Desktop](../../../desktop/_index.md)
+- [Docker Hub](../../../docker-hub/_index.md)
+- [Docker Build Cloud](../../../build-cloud/_index.md)
+- [Docker Scout](../../../scout/_index.md)
+- [Testcontainers Cloud](https://testcontainers.com/cloud/docs/#getting-started)
+- [Docker Offload](../../../offload/_index.md)
