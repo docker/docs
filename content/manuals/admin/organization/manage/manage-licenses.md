@@ -2,7 +2,7 @@
 title: Manage license assignment
 linkTitle: License assignment
 description: Manage product licenses for your organization, including assignment, revocation, and automatic assignment.
-keywords: licenses, organization, members, Docker Core, Docker Offload, AI governance, license assignment, admin console
+keywords: licenses, organization, members, Docker Core, Docker Offload, AI governance, license assignment, docker home
 weight: 30
 ---
 

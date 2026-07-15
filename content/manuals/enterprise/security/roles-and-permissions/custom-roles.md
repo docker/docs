@@ -1,7 +1,7 @@
 ---
 title: Custom roles
 description: Create tailored permission sets for your organization with custom roles
-keywords: custom roles, permissions, access control, organization management, docker hub, admin console, security
+keywords: custom roles, permissions, access control, organization management, docker hub, docker home, security
 ---
 
 {{< summary-bar feature_name="General admin" >}}

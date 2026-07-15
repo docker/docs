@@ -326,12 +326,12 @@ Docker Desktop has two distinct proxy settings with different scopes:
 >
 > Proxy configuration is a special case because it must be configured in two places:
 >
-> 1. In the Admin Console for your organization.
+> 1. In Docker Home for your organization.
 > 2. On the user's system where Docker Desktop is installed.
 >
 > On the user's machine, configure the proxy either through the `admin-settings.json` file or by using installer flags during Docker Desktop installation. For detailed instructions, refer to the [installation guide](/manuals/desktop/setup/install/windows-install.md#proxy-configuration).
 > 
-> This additional configuration is required because Docker Desktop must know which proxy server to use before it can complete user sign-in and retrieve organization settings from the Admin Console.
+> This additional configuration is required because Docker Desktop must know which proxy server to use before it can complete user sign-in and retrieve organization settings from Docker Home.
 
 ### Container proxy
 
@@ -359,7 +359,7 @@ Docker Desktop has two distinct proxy settings with different scopes:
 
 > [!NOTE]
 >
-> This setting is not available to configure via the Docker Admin Console.
+> This setting is not available to configure via Docker Home.
 
 ### Kubernetes settings
 
