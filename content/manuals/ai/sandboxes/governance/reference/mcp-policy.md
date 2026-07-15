@@ -42,7 +42,7 @@ permit (principal, action, resource);
 | ------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `register`          | MCP server registration   | Remote server registration needs an explicit `permit`. Use server attributes to scope registration.  |
 | `invokeTool`        | MCP tool calls            | Most tool access policies target this action.                                                        |
-| `invokePrimordial`  | Gateway meta-tool calls   | Applies to gateway-injected meta-tools such as `mcp-add` and `code-mode`.                            |
+| `invokePrimordial`  | Gateway meta-tool calls   | Applies to built-in gateway tools such as `mcp-exec`, `code-mode`, and OAuth authorization helpers.  |
 | `readResource`      | MCP resource reads        | Rules match `MCP::Resource` and `resource.uri`.                                                      |
 | `getPrompt`         | MCP prompt retrieval      | Rules match `MCP::Prompt` and `resource.name`.                                                       |
 | `listTools`         | MCP tool listing          | Defined in the schema but not Cedar-gated. Tool listings can include tools denied at invocation.     |
