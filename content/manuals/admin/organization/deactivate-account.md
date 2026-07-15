@@ -2,7 +2,7 @@
 title: Deactivate an organization
 linkTitle: Deactivate
 description: Learn how to deactivate a Docker organization and required prerequisite steps.
-keywords: delete, deactivate organization, account, organization management, Admin Console, cancel subscription
+keywords: delete, deactivate organization, account, organization management, Docker Home, cancel subscription
 weight: 50
 aliases:
   - /docker-hub/deactivate-account/
@@ -32,9 +32,6 @@ organization:
 - For Business organizations, [remove your SSO connection](/manuals/enterprise/security/single-sign-on/manage.md#delete-a-connection).
 
 ## Deactivate
-
-You can deactivate your organization using either the Admin Console or
-Docker Hub.
 
 > [!WARNING]
 >

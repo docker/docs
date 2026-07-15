@@ -172,7 +172,7 @@ To schedule a meeting, email successteam@docker.com.
 ### Send finalized settings files to the MDM team
 
 After reaching an agreement with the relevant teams about your baseline and
-security configurations as outlined in the previous section, configure Settings Management using either the [Docker Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md) or an
+security configurations as outlined in the previous section, configure Settings Management either via [Docker Home](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md) or with an
 [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md).
 
 Once the file is ready, collaborate with your MDM team to deploy your chosen

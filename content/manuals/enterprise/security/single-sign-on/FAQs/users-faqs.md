@@ -45,7 +45,7 @@ Additionally, you can use the [Docker Hub API](/reference/api/hub/latest.md) to 
 
 ## How does turning off Just-in-Time provisioning affect user sign-in?
 
-When JIT is turned off (available with SCIM in the Admin Console), users must be organization members or have pending invitations to access Docker. Users who don't meet these criteria get an "Access denied" error and need administrator invitations.
+When JIT is turned off (available with SCIM in Docker Home), users must be organization members or have pending invitations to access Docker. Users who don't meet these criteria get an "Access denied" error and need administrator invitations.
 
 See [SSO authentication with JIT provisioning disabled](/manuals/enterprise/security/provisioning/just-in-time.md#sso-authentication-with-jit-provisioning-disabled).
 

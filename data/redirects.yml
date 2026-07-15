@@ -297,7 +297,7 @@
 "/desktop/use-desktop/container/#execdebug":
   - /go/debug-gui/
 
-# Docker Admin Console - Insights
+# Docker Admin Console/Home - Insights
 "/admin/organization/insights/":
   - /go/insights/
 "/admin/organization/insights/#docker-desktop-users/":

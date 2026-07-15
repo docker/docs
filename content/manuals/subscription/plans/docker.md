@@ -57,12 +57,12 @@ For Docker Team and Docker Business, you can purchase more seats for new members
    - When you remove seats, you must remove members from your organization.
 1. Verify your billing details, continue to payment, and complete checkout.
 
-To learn how to manage seats from the Admin Console, see
+To learn how to manage seats from Docker Home, see
 [Manage seats](/manuals/admin/organization/manage/manage-seats.md).
 
 ### Docker Offload licenses
 
-[Docker Offload](/manuals/offload/_index.md) licenses are available for Docker Team and Docker Business plans. Once assigned to your account, organization owners can [manage license assignments](/manuals/admin/organization/manage/manage-licenses.md) in the Admin Console.
+[Docker Offload](/manuals/offload/_index.md) licenses are available for Docker Team and Docker Business plans. Once assigned to your account, organization owners can [manage license assignments](/manuals/admin/organization/manage/manage-licenses.md) in Docker Home.
 
 To add Docker Offload licenses, you must <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_plans_docker_offload" class="link" rel="noopener">contact sales</a>.
 

@@ -3,7 +3,7 @@ title: Organization FAQs
 linkTitle: FAQs
 weight: 60
 description: Organization FAQs
-keywords: Docker, Docker Hub, SSO FAQs, single sign-on, organizations, administration, Admin Console, members, organization management, manage orgs
+keywords: Docker, Docker Hub, SSO FAQs, single sign-on, organizations, administration, Docker Home, members, organization management, manage orgs
 tags: [FAQ]
 aliases:
   - /docker-hub/organization-faqs/
