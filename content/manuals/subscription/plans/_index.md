@@ -20,6 +20,10 @@ grid:
     description: Personal and organization plans, including build and runtime minutes.
     link: /subscription/plans/docker/
     icon: credit-card
+  - title: AI Cloud
+    description: Pay-as-you-go plans for Cloud Sandboxes and the Agentic Platform.
+    link: /subscription/plans/ai-cloud/
+    icon: cloud
   - title: Gordon plans
     description: Usage plans that increase your Gordon allowance.
     link: /subscription/plans/gordon/

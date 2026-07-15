@@ -7,7 +7,7 @@ description:
 keywords:
   ai governance, licenses, organization licenses, ai policy, docker sandbox,
   subscription management
-weight: 40
+weight: 50
 aliases:
   - /subscription/products/ai-governance/
   - /subscription/ai-governance/
