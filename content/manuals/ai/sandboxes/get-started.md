@@ -173,7 +173,7 @@ my-sandbox    claude   running           ~/my-project
 ```
 
 Each row shows a sandbox's name, the agent running in it, its status, any
-[published ports](usage.md#accessing-services-in-the-sandbox), and its
+[published ports](usage.md#publish-ports), and its
 workspace — the host directory shared into the sandbox. That workspace is the
 one part of your machine the agent can see.
 
@@ -251,14 +251,13 @@ rules from one place.
 
 Then explore:
 
-- [Clone mode](usage.md#clone-mode) — give each agent an isolated Git clone
-  instead of your working tree, so you can run several agents on one repository
-  in parallel and review each one's commits separately.
+- [Usage guide](usage.md) — basic commands, reconnecting, workspaces, and port
+  publishing.
+- [Workflow patterns](workflows.md) — Git strategies, local services, CI, and
+  authenticated tools.
 - [Customize with kits](customize/) — package an agent, its tools, and its
   network rules into a reusable definition you launch with a single flag.
 - [Agents](agents/) — the full list of supported agents and how to configure
   each one.
 - [Governance](governance/) — centrally manage network and filesystem policies
   across a team.
-- [Usage guide](usage.md) — reconnecting, multiple workspaces, port forwarding,
-  and more.

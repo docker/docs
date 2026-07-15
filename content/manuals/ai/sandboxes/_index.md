@@ -68,7 +68,7 @@ $ sbx run claude
 ```
 
 See the [get started guide](get-started.md) for a full walkthrough, or jump to
-the [usage guide](usage.md) for common patterns.
+the [usage guide](usage.md) for basic commands.
 
 ## Learn more
 

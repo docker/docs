@@ -117,7 +117,7 @@ $ git clone https://github.com/owner/repo.git
 
 If a request to `127.0.0.1` or a local network IP returns "connection refused"
 from inside a sandbox, the address is not reachable from within the sandbox VM.
-See [Accessing host services from a sandbox](usage.md#accessing-host-services-from-a-sandbox).
+See [Accessing host services from a sandbox](workflows.md#accessing-host-services-from-a-sandbox).
 
 ## Docker authentication failure
 

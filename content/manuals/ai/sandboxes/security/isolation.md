@@ -97,7 +97,7 @@ workspace with it:
   the VM and the agent works on a private clone inside the VM. The
   agent's edits never reach your host until you fetch them.
 
-See [Git workflow](../usage.md#git-workflow) for the workflow side of
+See [Git workflows](../workflows.md#git-workflows) for the workflow side of
 each.
 
 ### Direct mount (default)
