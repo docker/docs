@@ -52,9 +52,9 @@ For presets, sandbox-scoped rules, testing, and troubleshooting, see
 
 ## Organization network rules
 
-Admins manage organization network rules in the Docker Admin Console. A policy
-can apply to the whole organization or to selected teams. For setup steps and
-team scoping, see [Organization policies](organization.md).
+Organization network rules belong to policies that can apply to the whole
+organization or to selected teams. For setup steps and team scoping, see
+[Organization policies](organization.md).
 
 Use [Monitoring policies](../monitor-and-enforce/monitoring.md) to inspect
 which network rules are active on a developer machine.

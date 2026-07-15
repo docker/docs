@@ -14,10 +14,10 @@ at two layers, and only one applies at a time:
 lets individual developers customize which domains their sandboxes can reach.
 See [Local policy](access-controls/local.md).
 
-**Organization policy** is configured centrally in the Docker Admin Console.
-Network and filesystem policies can also be managed via the
-[Governance API](/reference/api/ai-governance/). Rules defined at the org level
-apply uniformly across every sandbox in the organization. Organization
+**Organization policy** is configured centrally in Docker Home. Network and
+filesystem policies can also be managed via the
+[Governance API](/reference/api/ai-governance/). Controls defined at the org
+level apply uniformly across every sandbox in the organization. Organization
 governance can also include MCP policies for sandbox MCP activity. When
 organization governance is active, it replaces local policy entirely: local
 `sbx policy` rules are no longer evaluated. See
@@ -44,7 +44,7 @@ MCP policy basics, evaluation, and precedence.
 - [Local policy](access-controls/local.md): configure network rules on your
   machine with the `sbx policy` CLI.
 - [Organization policies](access-controls/organization.md): centrally manage
-  sandbox policies across your organization from the Admin Console.
+  sandbox policies across your organization.
 - [Network access policies](access-controls/network.md): control outbound network
   access from sandboxes.
 - [Filesystem access policies](access-controls/filesystem.md): control which

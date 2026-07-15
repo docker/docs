@@ -40,10 +40,10 @@ Your Docker account email is only used for authentication, not marketing.
 
 ## Can I enforce sandbox policies across my organization?
 
-Yes. Admins can centrally manage network, filesystem, and MCP policies from
-the Docker Admin Console. Rules defined there apply to every sandbox in the
-organization. When organization governance is active, it replaces local rules
-set with `sbx policy` — local rules are no longer evaluated.
+Yes. Admins can centrally manage network, filesystem, and MCP policies. These
+controls apply to every sandbox in the organization. When organization
+governance is active, it replaces local rules set with `sbx policy` — local
+rules are no longer evaluated.
 
 See [Organization policies](governance/access-controls/organization.md). This
 feature requires a separate paid subscription —

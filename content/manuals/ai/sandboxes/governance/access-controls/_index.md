@@ -15,7 +15,7 @@ and filesystem rule format.
 - [Local policy](local.md): configure network rules on a developer machine with
   the `sbx policy` CLI.
 - [Organization policies](organization.md): manage centralized policies for an
-  organization or team in the Docker Admin Console.
+  organization or team.
 
 ## Access surfaces
 
