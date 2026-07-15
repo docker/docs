@@ -43,7 +43,7 @@ You can add multiple payment methods in the billing portal. When you add a new p
 1. Sign in to [Docker Home](https://app.docker.com/).
 1. Select your username for a personal account, or select your organization
    name for an organization.
-1. Select **Billing** to go to the billing portal, then **Change** in the **Payment methods** tile.
+1. Select **Billing** to go to the billing portal, then **Change** in the **Payment method** tile.
 1. From the **Change payment method** modal, choose to add a card, a US bank account, or a Link payment.
    - To pay with a card, enter your card information.
    - To pay with a US bank account, verify your **Email** and **Full name**.
@@ -58,7 +58,7 @@ You can add multiple payment methods in the billing portal. When you add a new p
 
 After adding one or more payment methods, you can set one as a default method.
 
-1. From **Billing**, go to the **Payment methods** tile.
+1. From **Billing**, go to the **Payment method** tile.
 1. Select **Change** to open the **Change payment method** modal, then select **Change** next to your current default method.
 1. Choose the payment method you want to set as default.
 1. Verify your information, then select **Save as default**.
@@ -67,7 +67,7 @@ After adding one or more payment methods, you can set one as a default method.
 
 You can only remove secondary payment methods. To remove a secondary payment method:
 
-1. From **Billing**, go to the **Payment methods** tile.
+1. From **Billing**, go to the **Payment method** tile.
 1. Select **Change** to open the **Change payment method** modal, then select **Change** next to your current default method.
 1. Select the **Actions** menu next to the payment method you want to remove, then select **Remove**.
 1. Verify your billing details, then select **Save as default**.
