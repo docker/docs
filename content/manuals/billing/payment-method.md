@@ -68,7 +68,7 @@ After adding one or more payment methods, you can set one as a default method.
 You can only remove secondary payment methods. To remove a secondary payment method:
 
 1. From **Billing**, go to the **Payment method** tile.
-1. Select **Change** to open the **Change payment method** modal, then select **Change** next to your current default method.
+1. Select **Change** to open the **Change payment method** modal.
 1. Select the **Actions** menu next to the payment method you want to remove, then select **Remove**.
 1. Verify your billing details, then select **Save as default**.
 

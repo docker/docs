@@ -21,12 +21,12 @@ history. To view your billing history:
    account or organization account.
 1. Select **Billing**, then **Invoices**.
 1. View an individual invoice by selecting:
-    - **Invoice number** to open invoice details in your browser
-    - **Download** to download a copy of your invoice.
+   - **Invoice number** to open invoice details in your browser
+   - **Download** to download a copy of your invoice.
 
 > [!NOTE]
-> 
-> If you want to view your organization account's 
+>
+> If you want to view your organization account's
 > billing history, you must be an organization owner.
 
 ## Understand your invoice
@@ -46,21 +46,19 @@ Your invoice includes the following information:
 | Pay online     | A link to pay an unpaid invoice online                                                        |
 
 The information in the **Bill to** section comes from your billing
-information. 
+information.
 
-- Not all fields are required. 
-- You can't change a paid or unpaid invoice. 
+- Not all fields are required.
+- You can't change a paid or unpaid invoice.
 - Updating your billing information
-doesn't update an existing invoice.
+  doesn't update an existing invoice.
 
 If you want different billing information reflected in your invoice, update your billing information before your renewal date, when
 Docker finalizes your invoice. For more information, see [Update billing information](details.md).
 
 ## View renewal date
 
-Renewal dates are defined on a per-plan basis. Depending on the product you
-subscribe to, your cycle can be monthly, annual, or another cadence. For
-plan-specific billing cycle details, see [Plans](/manuals/subscription/plans/_index.md).
+Renewal dates are set on a per-plan basis, so check each plan individually if you subscribe to more than one. Depending on the product, your billing cycle can be monthly, annual, or another cadence. For plan-specific renewal and billing cycle details, see [Plans](/manuals/subscription/plans/_index.md).
 
 ## Pay by invoice
 
