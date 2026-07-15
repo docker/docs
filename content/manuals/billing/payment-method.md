@@ -1,5 +1,6 @@
 ---
 title: Add or update a payment method
+linkTitle: Payment methods
 weight: 20
 description: Learn how to manage cards, US bank accounts, Stripe Link, and pay by invoice for Docker subscriptions.
 keywords: payments, billing, subscription, payment methods, credit card, ACH, US bank account, Stripe Link, pay by invoice, failed payments

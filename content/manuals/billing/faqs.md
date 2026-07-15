@@ -4,7 +4,7 @@ linkTitle: FAQs
 description: Find answers to common questions about Docker billing, failed payments, taxes, and pay by invoice.
 keywords: billing, renewal, failed payments, sales tax, VAT, academic pricing, pay by invoice
 tags: [FAQ]
-weight: 60
+weight: 80
 ---
 
 ## What happens if my subscription payment fails?

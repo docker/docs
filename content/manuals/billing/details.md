@@ -1,6 +1,7 @@
 ---
-title: Manage your billing information
-weight: 30
+title: Update your billing information
+linkTitle: Update information
+weight: 40
 description: Learn how to update billing contact information, addresses, and tax IDs for Docker subscriptions.
 keywords: payments, billing, subscription, invoices, update billing email, change billing address, VAT ID, Docker billing account
 ---

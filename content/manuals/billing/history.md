@@ -1,6 +1,7 @@
 ---
-title: Invoices and billing history
-weight: 40
+title: View and manage invoices and billing history
+linkTitle: Invoices
+weight: 60
 description: Learn how to view and pay Docker invoices, download billing history, and find your subscription renewal date.
 keywords: payments, billing, subscription, invoices, renewals, billing history, pay invoice, VAT number
 aliases:
