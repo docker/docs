@@ -32,7 +32,7 @@ For details about when Docker Sandboxes evaluates MCP policies for a user, see
 
 An actionless `permit` matches every MCP action that reaches Cedar evaluation:
 
-```cedar
+```plaintext
 permit (principal, action, resource);
 ```
 
@@ -63,7 +63,7 @@ Match resources with the MCP entity type and attributes for the request.
 
 Examples:
 
-```cedar
+```plaintext
 resource in MCP::Server::"notion"
 resource.name == "move_file"
 resource.uri like "*/docs/*"
@@ -108,7 +108,7 @@ attributes, use `like`.
 
 Guard tool-call argument rules with `context has args` and a field check:
 
-```cedar
+```plaintext
 permit (principal, action == MCP::Action::"invokeTool", resource)
 when {
   resource.name == "approve_expense" &&
@@ -130,7 +130,7 @@ Unsupported, malformed, or too deeply nested arguments are omitted.
 Use `@requireApproval("reason")` on a `permit` statement to require user
 approval before a matching request runs:
 
-```cedar
+```plaintext
 @requireApproval("write tool call")
 permit (principal, action == MCP::Action::"invokeTool", resource)
 when { resource.readOnly == false };

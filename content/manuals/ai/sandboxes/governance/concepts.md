@@ -153,7 +153,7 @@ For exact action, resource, context, and approval behavior, see the
 The following policy allows tools that the server declares read-only, and
 requires approval before a non-read-only tool can run:
 
-```cedar
+```plaintext
 permit (principal, action == MCP::Action::"invokeTool", resource)
 when { resource.readOnly == true };
 

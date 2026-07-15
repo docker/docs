@@ -57,7 +57,7 @@ actions and limitations.
 To allow all MCP activity while you build a narrower policy, use an actionless
 `permit`:
 
-```cedar
+```plaintext
 permit (principal, action, resource);
 ```
 
@@ -70,7 +70,7 @@ approval-gated tool calls.
 Servers can declare tool annotations such as `readOnly` and `destructive`. To
 allow tools that a server marks read-only:
 
-```cedar
+```plaintext
 permit (principal, action == MCP::Action::"invokeTool", resource)
 when { resource.readOnly == true };
 ```
@@ -83,7 +83,7 @@ fails closed for unannotated tools.
 Use `@requireApproval` on a `permit` statement to require user approval before
 a matching request runs:
 
-```cedar
+```plaintext
 permit (principal, action == MCP::Action::"invokeTool", resource)
 when { resource.readOnly == true };
 
@@ -99,7 +99,7 @@ If the sandbox can't ask a user for approval, the request is denied. A matching
 
 Use `MCP::Server` to match the registered server that exposes a tool:
 
-```cedar
+```plaintext
 permit (principal, action == MCP::Action::"invokeTool", resource)
 when {
   resource.readOnly == true &&
@@ -113,7 +113,7 @@ Server names must match the registered MCP server names.
 
 Use `forbid` for controls that must always win over permits:
 
-```cedar
+```plaintext
 permit (principal, action == MCP::Action::"invokeTool", resource);
 
 forbid (principal, action == MCP::Action::"invokeTool", resource)
@@ -127,7 +127,7 @@ pattern also blocks unannotated tools.
 
 Use the `register` action to control which MCP servers can be registered:
 
-```cedar
+```plaintext
 permit (principal, action == MCP::Action::"register", resource)
 when { resource in MCP::Server::"github" };
 
