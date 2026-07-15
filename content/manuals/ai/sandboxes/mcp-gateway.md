@@ -100,9 +100,9 @@ $ sbx mcp add fetch --local \
   --url https://registry.modelcontextprotocol.io/v0/servers/fetch-mcp/versions/latest
 ```
 
-For local gateway usage, include `--local`. Without `--local`, registry and
-manifest URLs resolve to OCI-backed server registrations for hosted gateway
-modes, which this page doesn't cover.
+The `--local` flag tells `sbx` to run the registry or manifest entry as a
+host-side stdio server. If the entry doesn't publish a stdio package, `sbx`
+rejects the registration instead of starting it locally.
 
 A server manifest describes the MCP server package and how to start it. It can
 be hosted on a GitHub raw URL, internal HTTP server, or CDN.
