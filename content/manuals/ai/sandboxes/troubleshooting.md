@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-weight: 60
+weight: 100
 description: Resolve common issues when using Docker Sandboxes.
 keywords: docker sandboxes, sbx, troubleshooting, diagnostics, reset, network policy, git, ssh
 ---

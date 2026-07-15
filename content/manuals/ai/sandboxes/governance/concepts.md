@@ -121,9 +121,9 @@ paths under the home directory, while `~/*` matches only its direct children.
 ### MCP policies
 
 MCP policies control Model Context Protocol activity made available to a
-sandbox through Docker's MCP gateway. They are organization policies written in
-Cedar using the `MCP` namespace, rather than the network and filesystem rule
-format.
+sandbox through Docker's [MCP gateway](../mcp-gateway.md). They are
+organization policies written in Cedar using the `MCP` namespace, rather than
+the network and filesystem rule format.
 
 Cedar evaluates each MCP request against a principal, action, resource, and
 context. Admins write policy statements for the action, resource, and context.

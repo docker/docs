@@ -9,7 +9,7 @@ keywords: docker sandboxes, MCP policy, Cedar policy, MCP actions, MCP resources
 MCP policies are organization policies written in Cedar using Docker's `MCP`
 namespace. This reference defines the Docker-specific policy surface for Model
 Context Protocol (MCP) activity made available to sandboxes through Docker's
-MCP gateway.
+[MCP gateway](../../mcp-gateway.md).
 
 Use this reference with [MCP access policies](../access-controls/mcp.md) for
 common policy patterns. For the Cedar language, see the

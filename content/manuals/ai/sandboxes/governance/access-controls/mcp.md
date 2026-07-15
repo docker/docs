@@ -9,6 +9,8 @@ keywords: docker sandboxes, MCP policy, MCP access, Cedar policy, requireApprova
 MCP policies control Model Context Protocol activity made available to a
 sandbox through Docker's MCP gateway. Use them to govern server registration,
 tool calls, gateway meta-tools, resources, prompts, and approval requirements.
+To register MCP servers and connect them to sandboxes, see
+[MCP gateway](../../mcp-gateway.md).
 
 Unlike [network access policies](network.md) and
 [filesystem access policies](filesystem.md), MCP policies are organization

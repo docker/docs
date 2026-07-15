@@ -1,6 +1,6 @@
 ---
 title: FAQ
-weight: 70
+weight: 110
 description: Frequently asked questions about Docker Sandboxes.
 keywords: docker sandboxes, sbx, faq, sign in, telemetry, clipboard, image paste, pricing, commercial use, allowlist, firewall, domains, proxy
 ---
