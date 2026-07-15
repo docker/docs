@@ -14,8 +14,8 @@ This is different from configuring an MCP server directly in an agent such as
 Claude Code. Direct MCP setup configures that agent's own MCP client. With
 Docker Sandboxes, you register MCP servers once on the host, and the sandbox
 gateway exposes them to supported agents inside isolated sandboxes. That
-host-managed gateway provides a single path for credentials, dynamic or fixed
-server sets, live server loading, and organization governance.
+host-managed gateway provides a single path for credentials, explicit server
+loading, live updates, and organization governance.
 
 > [!NOTE]
 > The Docker Sandboxes MCP gateway is separate from the Docker Desktop MCP
@@ -42,8 +42,7 @@ $ sbx mcp add notion --url https://mcp.notion.com/mcp
 ```
 
 If the server requires OAuth, `sbx` opens an authorization flow before it stores
-the registration. After registration, verify that the server is in your local
-MCP catalog:
+the registration. After registration, verify that the server is registered:
 
 ```console
 $ sbx mcp ls
@@ -51,25 +50,23 @@ NAME                 TYPE     URL/COMMAND
 notion               remote   https://mcp.notion.com/mcp
 ```
 
-Then start a sandbox:
+Then start a sandbox and expose the registered server:
 
 ```console
-$ sbx run claude --name mcp-demo
+$ sbx run claude --name mcp-demo --static-mcp notion
 ```
 
-The sandbox starts with an MCP gateway. In the default dynamic mode, the agent
-can discover registered MCP servers through gateway tools and use them during
-the session. Because you registered the server before starting the sandbox, it
-is part of that sandbox's initial MCP catalog. The registration remains on the
-host and can be reused by other sandboxes.
+The sandbox starts with an MCP gateway and pre-loads the `notion` server. The
+registration remains on the host and can be reused by other sandboxes.
 
 ## Register an MCP server
 
 `sbx mcp add` registers an MCP server by name. The registration records the
-server definition on the host. It doesn't attach the server to a running sandbox
-by itself. A server registered before sandbox creation is available when that
-sandbox's gateway starts. To add a server to a sandbox that's already running,
-use [`sbx mcp load`](#add-a-server-to-a-running-sandbox).
+server definition on the host. It doesn't attach the server to a sandbox by
+itself. To expose a registered server to a sandbox, pass it with
+[`--static-mcp`](#expose-servers-at-sandbox-creation) when you create the
+sandbox, or use [`sbx mcp load`](#add-a-server-to-a-running-sandbox) for a
+sandbox that's already running.
 
 Server names can contain letters, numbers, dots, hyphens, and underscores.
 
@@ -175,10 +172,9 @@ To register an OAuth-backed server without authorizing it, pass `--skip_auth`:
 $ sbx mcp add notion --url https://mcp.notion.com/mcp --skip_auth
 ```
 
-When a server isn't authorized, the gateway exposes a helper tool named
-`<server>-authorize`, such as `notion-authorize`. The agent can call that tool
-from inside the sandbox when it needs the server. The gateway also exposes
-`<server>-revoke-auth` for OAuth-backed servers.
+When an unauthorized OAuth-backed server is exposed to a sandbox, the gateway
+exposes a helper tool named `<server>-authorize`, such as `notion-authorize`.
+The agent can call that tool from inside the sandbox when it needs the server.
 
 You can manage OAuth credentials from the host:
 
@@ -191,34 +187,13 @@ $ sbx mcp auth rm notion
 Use `--all` to apply `auth`, `auth status`, or `auth rm` to all registered
 OAuth-backed servers. Use `--format=json` for machine-readable output.
 
-## Expose servers to a sandbox
+## Expose servers at sandbox creation
 
 Every sandbox starts an MCP gateway. When the sandbox starts, supported agent
 integrations read the gateway URL and register it with the agent.
 
-A sandbox can use MCP in dynamic mode or static mode. The mode is selected when
-the sandbox is created.
-
-| Mode    | How to use it             | Behavior                                                                  |
-| ------- | ------------------------- | ------------------------------------------------------------------------- |
-| Dynamic | Omit `--static-mcp`       | The registered catalog is searchable from the agent through gateway tools |
-| Static  | Pass `--static-mcp` names | Only the named servers are pre-loaded, and discovery tools are disabled   |
-
-### Dynamic mode
-
-Dynamic mode is the default. Start a sandbox without `--static-mcp`:
-
-```console
-$ sbx run claude --name my-session
-```
-
-In dynamic mode, the agent can search the registered MCP catalog and connect
-servers during the session. The gateway exposes discovery tools such as
-`mcp-find` and `mcp-add`.
-
-### Static mode
-
-Use static mode when you want a fixed MCP server set for the sandbox:
+Use `--static-mcp` when you want to pre-load registered MCP servers into a
+sandbox:
 
 ```console
 $ sbx mcp add notion --url https://mcp.notion.com/mcp
@@ -234,13 +209,14 @@ $ sbx run claude --name my-session \
 ```
 
 Every name in the static set must already be registered with `sbx mcp add`. The
-static set is fixed at sandbox creation time. To use a different static set,
-create a new sandbox.
+static set is fixed at sandbox creation time. If you omit `--static-mcp`, the
+sandbox starts with an MCP gateway but no registered MCP servers. To use a
+different static set, create a new sandbox.
 
 ## Add a server to a running sandbox
 
-To attach an already-registered server to a running sandbox outside the initial
-dynamic or static setup, use `sbx mcp load`:
+To attach an already-registered server to a running sandbox, use
+`sbx mcp load`:
 
 ```console
 $ sbx mcp add linear --url https://mcp.linear.app/mcp
@@ -248,8 +224,28 @@ $ sbx mcp load linear --sandbox my-session
 MCP server "linear" loaded into sandbox "my-session" (live)
 ```
 
-Connected agent sessions receive a tool-list update, so the agent can discover
-the added tools without reconnecting.
+Connected agent sessions receive a tool-list update, so the added tools become
+visible without reconnecting.
+
+## Built-in gateway tools
+
+The local MCP gateway exposes a small set of built-in tools. These tools belong
+to the gateway itself, not to a registered MCP server.
+
+| Tool                 | Description                                                                                    |
+| -------------------- | ---------------------------------------------------------------------------------------------- |
+| `mcp-exec`           | Executes a tool by name in the current gateway session.                                        |
+| `code-mode`          | Creates a session-scoped JavaScript tool that can call selected tools through the MCP gateway. |
+| `<server>-authorize` | Starts OAuth authorization for an exposed server that requires authorization.                  |
+
+The gateway exposes `<server>-authorize` only when an OAuth-backed server needs
+authorization. If `code-mode` creates a generated tool, that generated tool is
+available only in the current session.
+
+In MCP access policies, built-in gateway tools are `MCP::Primordial` resources
+and use the `invokePrimordial` action. Tools from registered MCP servers are
+`MCP::Tool` resources and use the `invokeTool` action. For details, see the
+[MCP policy reference](governance/reference/mcp-policy.md).
 
 ## Manage registrations
 
