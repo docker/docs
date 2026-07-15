@@ -230,7 +230,14 @@ visible without reconnecting.
 ## Built-in gateway tools
 
 The local MCP gateway exposes a small set of built-in tools. These tools belong
-to the gateway itself, not to a registered MCP server.
+to the gateway itself, not to a registered MCP server. Agents can see and call
+them on the same MCP connection as server tools, so they can appear in agent
+tool lists, logs, policy decisions, audit logs, or approval prompts.
+
+You don't need to call these tools directly for normal setup. Use `sbx mcp`
+commands to register servers and manage credentials from the host. The tools
+matter because agents can call them during a session, and admins can govern
+them separately from tools provided by registered MCP servers.
 
 | Tool                 | Description                                                                                    |
 | -------------------- | ---------------------------------------------------------------------------------------------- |
@@ -238,9 +245,9 @@ to the gateway itself, not to a registered MCP server.
 | `code-mode`          | Creates a session-scoped JavaScript tool that can call selected tools through the MCP gateway. |
 | `<server>-authorize` | Starts OAuth authorization for an exposed server that requires authorization.                  |
 
-The gateway exposes `<server>-authorize` only when an OAuth-backed server needs
-authorization. If `code-mode` creates a generated tool, that generated tool is
-available only in the current session.
+The gateway exposes `<server>-authorize` only when an OAuth-backed server is
+exposed to the sandbox and needs authorization. If `code-mode` creates a
+generated tool, that generated tool is available only in the current session.
 
 In MCP access policies, built-in gateway tools are `MCP::Primordial` resources
 and use the `invokePrimordial` action. Tools from registered MCP servers are
