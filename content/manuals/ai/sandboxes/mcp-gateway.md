@@ -56,16 +56,21 @@ $ sbx run claude --name mcp-demo
 
 The sandbox starts with an MCP gateway. In the default dynamic mode, the agent
 can discover registered MCP servers through gateway tools and use them during
-the session. The registration remains on the host and can be reused by other
-sandboxes.
+the session. Because you registered the server before starting the sandbox, it
+is part of that sandbox's initial MCP catalog. The registration remains on the
+host and can be reused by other sandboxes.
 
 ## Register an MCP server
 
 `sbx mcp add` registers an MCP server by name. The registration records the
 server definition on the host. It doesn't attach the server to a running sandbox
-by itself.
+by itself. A server registered before sandbox creation is available when that
+sandbox's gateway starts. To add a server to a sandbox that's already running,
+use [`sbx mcp load`](#add-a-server-to-a-running-sandbox).
 
 Server names can contain letters, numbers, dots, hyphens, and underscores.
+
+### Remote endpoint URL
 
 For a remote MCP endpoint, pass the server URL:
 
@@ -74,26 +79,50 @@ $ sbx mcp add notion --url https://mcp.notion.com/mcp
 $ sbx mcp add linear --url https://mcp.linear.app/mcp
 ```
 
-You can also register a server from an MCP registry URL, a `server.json` or
-`server.yaml` manifest URL, or a Docker Hardened Image reference that carries
-an MCP server manifest:
+### MCP registry URL
+
+You can register a server from the MCP community registry:
 
 ```console
 $ sbx mcp add fetch \
   --url https://registry.modelcontextprotocol.io/v0/servers/fetch-mcp/versions/latest
+```
 
+### Server manifest URL
+
+You can register a server from a URL that returns a `server.json` or
+`server.yaml` document. A server manifest describes the MCP server and how the
+gateway should connect to it. This is the same general shape used by the MCP
+community registry, and it works for manifests hosted on GitHub raw URLs,
+internal HTTP servers, or CDNs.
+
+```console
 $ sbx mcp add opine --url https://example.com/mcp/opine/server.yaml
+```
 
+### Docker Hardened Image reference
+
+You can register a Docker Hardened Image reference when the image carries an
+MCP server manifest in its attestation:
+
+```console
 $ sbx mcp add fetch --url dhi.io/fetch-mcp:latest
 ```
 
-To run a registry server locally as a container, add `--local`. This is useful
-for stdio-based servers packaged as containers:
+Generic image references, such as `docker.io/example/server:latest`, aren't
+accepted. Use a server manifest URL instead.
+
+### Registry server as a local container
+
+To run a registry server locally as a container, add `--local` to a registry or
+manifest URL. This is useful for stdio-based servers packaged as containers:
 
 ```console
 $ sbx mcp add fetch --local \
   --url https://registry.modelcontextprotocol.io/v0/servers/fetch-mcp/versions/latest
 ```
+
+### Local stdio command
 
 You can also register a local stdio command:
 
