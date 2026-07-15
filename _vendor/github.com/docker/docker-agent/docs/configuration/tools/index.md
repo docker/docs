@@ -4,6 +4,7 @@ description: "Complete reference for configuring built-in tools, MCP tools, and 
 keywords: docker agent, ai agents, configuration, yaml, tool configuration
 linkTitle: "Tool Config"
 weight: 50
+canonical: https://docs.docker.com/ai/docker-agent/configuration/tools/
 aliases:
   - /ai/docker-agent/reference/toolsets/
 ---
@@ -17,7 +18,8 @@ Built-in tools are included with docker-agent and require no external dependenci
 | Type | Description | Page |
 | --- | --- | --- |
 | `filesystem` | Read, write, list, search, navigate | [Filesystem](../../tools/filesystem/index.md) |
-| `shell` | Execute shell commands (sync + background jobs) | [Shell](../../tools/shell/index.md) |
+| `shell` | Execute shell commands synchronously | [Shell](../../tools/shell/index.md) |
+| `background_jobs` | Run and manage long-running shell commands | [Background Jobs](../../tools/background-jobs/index.md) |
 | `think` | Reasoning scratchpad | [Think](../../tools/think/index.md) |
 | `plan` | Shared persistent scratchpad for multi-agent collaboration | [Plan](../../tools/plan/index.md) |
 | `session_plan` | Per-session markdown plan for the draft-review-execute workflow | [Session Plan](../../tools/session_plan/index.md) |
@@ -46,6 +48,7 @@ Built-in tools are included with docker-agent and require no external dependenci
 toolsets:
   - type: filesystem
   - type: shell
+  - type: background_jobs
   - type: think
   - type: todo
   - type: memory
@@ -126,7 +129,7 @@ toolsets:
 
 | Property                | Type    | Description                                                                                                           |
 | ----------------------- | ------- | --------------------------------------------------------------------------------------------------------------------- |
-| `remote.url`            | string  | Base URL of the MCP server                                                                                            |
+| `remote.url`            | string  | URL of the MCP server. Accepts `https://`, `http://`, and `unix://` (Unix domain socket) schemes.                     |
 | `remote.transport_type` | string  | `streamable` or `sse`                                                                                                 |
 | `remote.headers`        | object  | HTTP headers (typically for auth)                                                                                     |
 | `allow_private_ips`     | boolean | Permit remote MCP OAuth helper requests to dial non-public IP addresses. Use only for trusted internal servers.        |

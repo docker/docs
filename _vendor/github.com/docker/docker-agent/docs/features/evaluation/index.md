@@ -3,6 +3,7 @@ title: "Evaluation"
 description: "Measure agent quality with automated evaluations — tool call accuracy, response relevance, output size, and more."
 keywords: docker agent, ai agents, features, evaluation
 weight: 100
+canonical: https://docs.docker.com/ai/docker-agent/features/evaluation/
 aliases:
   - /ai/docker-agent/evals/
 ---
@@ -68,7 +69,6 @@ Each eval file is a JSON session that captures a complete conversation. The key 
   "messages": [
     {
       "message": {
-        "agentFilename": "./agent.yaml",
         "message": {
           "role": "user",
           "content": "How many files in the local folder?"
@@ -77,7 +77,7 @@ Each eval file is a JSON session that captures a complete conversation. The key 
     },
     {
       "message": {
-        "agentName": "root",
+        "agent_name": "root",
         "message": {
           "role": "assistant",
           "tool_calls": [
@@ -95,7 +95,7 @@ Each eval file is a JSON session that captures a complete conversation. The key 
     },
     {
       "message": {
-        "agentName": "root",
+        "agent_name": "root",
         "message": {
           "role": "assistant",
           "content": "There are 2 files in the local folder..."

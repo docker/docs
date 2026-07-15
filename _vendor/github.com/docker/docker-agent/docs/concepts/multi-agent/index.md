@@ -4,6 +4,7 @@ description: "Build teams of specialized agents that collaborate and delegate ta
 keywords: docker agent, ai agents, concepts, multi-agent systems
 linkTitle: "Multi-Agent"
 weight: 40
+canonical: https://docs.docker.com/ai/docker-agent/concepts/multi-agent/
 ---
 
 _Build teams of specialized agents that collaborate and delegate tasks to each other._

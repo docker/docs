@@ -3,6 +3,7 @@ title: "OpenRouter"
 description: "Use OpenRouter models with docker-agent."
 keywords: docker agent, ai agents, model providers, llm, openrouter
 weight: 230
+canonical: https://docs.docker.com/ai/docker-agent/providers/openrouter/
 ---
 
 _Use OpenRouter models with docker-agent._

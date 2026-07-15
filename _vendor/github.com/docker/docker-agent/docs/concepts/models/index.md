@@ -3,6 +3,7 @@ title: "Models"
 description: "Models are the AI brains behind your agents. docker-agent supports multiple providers and flexible configuration."
 keywords: docker agent, ai agents, concepts, models
 weight: 20
+canonical: https://docs.docker.com/ai/docker-agent/concepts/models/
 ---
 
 _Models are the AI brains behind your agents. docker-agent supports multiple providers and flexible configuration._
@@ -79,6 +80,7 @@ for details.
 | Mistral             | `mistral`        | Mistral models                       | `MISTRAL_API_KEY`                   |
 | xAI                 | `xai`            | Grok models                          | `XAI_API_KEY`                       |
 | Nebius              | `nebius`         | Open-source and specialised models   | `NEBIUS_API_KEY`                    |
+| NVIDIA NIM          | `nvidia`         | Nemotron, Llama, Qwen, DeepSeek (open models) | `NVIDIA_API_KEY`               |
 | MiniMax             | `minimax`        | MiniMax models                       | `MINIMAX_API_KEY`                   |
 | Baseten             | `baseten`        | DeepSeek, Kimi, GLM, Llama models    | `BASETEN_API_KEY`                   |
 | OVHcloud            | `ovhcloud`       | Qwen, Llama, Mistral, DeepSeek (EU-hosted) | `OVH_AI_ENDPOINTS_ACCESS_TOKEN` |
@@ -97,6 +99,7 @@ for details.
 | Azure OpenAI        | `azure`          | gpt-4o, gpt-5 on Azure               | `AZURE_API_KEY` + `base_url`        |
 | Ollama              | `ollama`         | Any local Ollama model               | None (local; optional `base_url`)   |
 | GitHub Copilot      | `github-copilot` | Copilot-hosted OpenAI/Anthropic      | `GITHUB_TOKEN` (PAT with `copilot`) |
+| ChatGPT (OpenAI account) | `chatgpt`   | gpt-5 family via ChatGPT subscription | None (sign in via `docker agent setup`) |
 
 See the [Model Providers](../../providers/overview/index.md) section for detailed configuration guides.
 

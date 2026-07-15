@@ -3,6 +3,7 @@ title: "CLI Reference"
 description: "Complete reference for all docker-agent command-line commands and flags."
 keywords: docker agent, ai agents, features, cli reference
 weight: 30
+canonical: https://docs.docker.com/ai/docker-agent/features/cli/
 aliases:
   - /ai/docker-agent/reference/cli/
 ---
@@ -30,7 +31,7 @@ $ docker agent run [config] [message...] [flags]
 | `--yolo`                                | Auto-approve all tool calls                                                                                                               |
 | `--model <ref>`                         | Override model(s). Use `provider/model` for all agents, or `agent=provider/model` for specific agents. Comma-separate multiple overrides. |
 | `--session <id>`                        | Resume a previous session. Supports relative refs (`-1` = last, `-2` = second to last). An explicit ID that does not exist yet is created with that ID, so a supervisor can own the session ID upfront and reuse it across runs. |
-| `-s, --session-db <path>`               | Path to the SQLite session database (default: `~/.cagent/session.db`)                                                                     |
+| `-s, --session-db <path>`               | Path to the SQLite session database (default: `<data-dir>/session.db`, so `~/.cagent/session.db` unless `--data-dir` is set)              |
 | `--session-read-only`                   | Open the TUI in read-only mode: conversation history is displayed but no new messages can be sent to the LLM. Cannot be used with `--exec`. |
 | `--prompt-file <path>`                  | Include file contents as additional system context (repeatable)                                                                           |
 | `--attach <path>`                       | Attach an image file to the initial message                                                                                               |
@@ -41,7 +42,7 @@ $ docker agent run [config] [message...] [flags]
 | `--app-name <name>`                     | Override the application name label shown in the TUI (status bar, window title, "/exit" notifications).                                   |
 | `--sidebar`                             | Control sidebar visibility. Set to `--sidebar=false` to hide the sidebar and disable the Ctrl+B toggle (default: `true`).                 |
 | `--disable-commands <list>`             | Hide and disable specific slash commands in the TUI. Accepts a comma-separated list of command names (leading slash optional, case-insensitive). E.g. `--disable-commands="/cost,/eval,/model"`. |
-| `--theme <name>`                        | Preselect a TUI theme by name (overrides the theme from user config; ignored outside the interactive TUI)                                 |
+| `--theme <name>`                        | Preselect a TUI theme by name, or `auto` to follow the terminal's light/dark background (overrides the theme from user config; ignored outside the interactive TUI) |
 | `--on-event <type>=<cmd>`               | Run a shell command when an event of the given type fires (`*=<cmd>` matches any event). Repeatable.                                      |
 | `--json`                                | Output results as newline-delimited JSON (use with `--exec`)                                                                              |
 | `--hide-tool-calls`                     | Hide tool calls in the output                                                                                                             |
@@ -50,7 +51,7 @@ $ docker agent run [config] [message...] [flags]
 | `--template <image>`                    | Template image for the sandbox (default: `docker/sandbox-templates:docker-agent`)                                                         |
 | `--sbx`                                 | Prefer the `sbx` CLI backend when available (default `true`; set `--sbx=false` to force `docker sandbox`)                                 |
 | `--no-kit`                              | Disable the [auto-kit](../../configuration/sandbox/index.md#auto-kit): do not stage skills or prompt files into the sandbox    |
-| `--agent-picker [refs]`                 | Show a full-screen interactive picker before launching, letting you browse and select an agent. Accepts an optional comma-separated list of agent references to show (defaults to `default,coder`). Arrow keys navigate; `?` toggles the YAML preview panel; Enter confirms. Not available in `--exec` or non-TTY modes. |
+| `--agent-picker [refs]`                 | Show a full-screen interactive picker before launching, letting you browse and select an agent. Accepts an optional comma-separated list of agent references to show (defaults to the built-in `default` and `coder` agents plus any agent configs found in `~/.agents`). Arrow keys navigate; `?` toggles the YAML preview panel; `l` (or mouse-click) toggles the **Lean Mode** checkbox to launch in the lean TUI; `b` (or clicking **[ Open Board ]**) opens the Kanban board (`docker agent board`) instead of running an agent; Enter confirms. Not available in `--exec` or non-TTY modes. |
 | `-w, --worktree [name]`                 | Run the agent in a fresh git worktree of the working directory, isolating its changes from your checkout. Optionally name it (`--worktree=my-feature`); otherwise a name is generated. Requires the working directory to be inside a git repository. Every tool (the shell included) runs inside the worktree. Combine with `--working-dir` to branch from another repository, and with `--session` to resume into the same worktree later. Cannot be combined with `--remote` or `--sandbox`. When the session ends, a clean worktree is removed automatically; one with work prompts to keep or remove (never in `--exec`). |
 | `--worktree-base <ref>`                  | Branch the `--worktree` from `<ref>` (a branch, tag, commit, or remote-tracking ref like `origin/main`) instead of the current `HEAD`. A remote-tracking ref is fetched first so the worktree starts from the latest remote state. Requires `--worktree`; cannot be combined with `--worktree-pr`, `--remote`, or `--sandbox`. |
 | `--worktree-pr <number\|url>`            | Run the agent in a git worktree checked out on an existing GitHub pull request (PR number, `#123`, or PR URL). Continues the PR's branch so commits push back to it. Requires the [GitHub CLI](https://cli.github.com/) (`gh`). Cannot be combined with `--worktree`, `--remote`, or `--sandbox`. |
@@ -66,7 +67,7 @@ $ docker agent run [config] [message...] [flags]
 | `--hook-stop <cmd>`                     | Add a stop hook command, fired when the model finishes responding (repeatable)                                                            |
 | `--fake <path>`                         | Replay AI responses from a cassette file (for testing). Mutually exclusive with `--record`.                                               |
 | `--fake-stream [ms]`                    | When replaying with `--fake`, simulate streaming with a delay between chunks (defaults to 15ms when given without a value).               |
-| `--record [path]`                       | Record AI API interactions to a cassette file (auto-generates filename if no path given)                                                  |
+| `--record [path]`                       | Record AI API interactions to a cassette file and generate a TUI e2e test from the session (auto-generates filename if no path given). Routes through `--models-gateway` when one is configured. |
 | `-d, --debug`                           | Enable debug logging                                                                                                                      |
 | `--log-file <path>`                     | Custom debug log location                                                                                                                 |
 | `-o, --otel`                            | Enable OpenTelemetry observability: traces, metrics, and logs. Requires `OTEL_EXPORTER_OTLP_ENDPOINT` to export to a collector. |
@@ -198,6 +199,39 @@ $ docker agent models --provider openai
 $ docker agent models --format json | jq
 ```
 
+### `docker agent setup`
+
+Set up a model interactively. Two paths: pick a cloud provider, paste its API key, and choose where to store it (macOS Keychain, `pass`, or the docker agent env file `~/.config/cagent/.env`), or check Docker Model Runner and pull a local model (no API key needed). Ends with the exact command to start chatting. Secret values are never printed.
+
+The wizard is also offered automatically when an interactive run finds no usable model (decline-able; set `DOCKER_AGENT_NO_SETUP=1` to suppress the offer).
+
+```bash
+$ docker agent setup
+```
+
+### `docker agent doctor`
+
+Diagnose the model and credential setup. Reports which model providers have credentials and where each credential comes from (shell environment, env file, pass, keychain, …), whether Docker Model Runner is reachable and which models are pulled, and which model the `auto` selection would pick. Secret values are never printed. Exits with a non-zero status when an issue would prevent an agent from running, which makes it usable in scripts and CI.
+
+```bash
+$ docker agent doctor [agent-file|registry-ref] [flags]
+```
+
+With an agent file, also lists the environment variables that file requires (model credentials and tool secrets such as `GITHUB_PERSONAL_ACCESS_TOKEN`), whether each one is set, and from which source.
+
+| Flag                     | Default | Description                                                    |
+| ------------------------ | ------- | -------------------------------------------------------------- |
+| `--json`                 | `false` | Output the full report in JSON format (for scripting).         |
+| `--env-from-file <file>` | (none)  | Also check variables supplied by an env file.                  |
+| `--models-gateway <url>` | (none)  | Diagnose against a models gateway (credentials come from it).  |
+
+```bash
+# Examples
+$ docker agent doctor                        # credential, DMR, and auto-selection state
+$ docker agent doctor ./agent.yaml           # also check that file's requirements
+$ docker agent doctor --json | jq .issues
+```
+
 ### `docker agent serve api`
 
 Start the HTTP API server for programmatic access. The argument can be a single agent file, a registry reference, or a directory — when given a directory, every `.yaml`/`.yml`/`.hcl` file in it is exposed as a separate entry under `/api/agents`.
@@ -213,7 +247,7 @@ $ docker agent serve api <agent-file>|<agents-dir>|<registry-ref> [flags]
 | `-s, --session-db <path>`  | `session.db`       | Path to the SQLite session database (relative paths resolve against the working directory).                |
 | `--pull-interval <minutes>`| `0`                | Periodically re-pull OCI/URL references and refresh the agent definition. `0` disables auto-pull.          |
 | `--fake <path>`             | (none)             | Replay AI responses from a cassette file (for testing). Mutually exclusive with `--record`.               |
-| `--record [path]`           | (none)             | Record AI API interactions to a cassette file.                                                            |
+| `--record [path]`           | (none)             | Record AI API interactions to a cassette file. Routes through `--models-gateway` when one is configured. |
 | `--mcp-oauth-redirect-uri <url>` | (none)        | OAuth redirect URI for the unmanaged MCP OAuth flow in server mode. When set, the runtime drives PKCE and code exchange in-process and sends the full authorize URL to the client via elicitation. See [Remote MCP](../remote-mcp/index.md) for details. |
 
 > **Diagnostics:** Set `CAGENT_PPROF_ADDR=127.0.0.1:6060` (or `--pprof-addr`, a hidden flag) to start a live Go pprof server at `/debug/pprof/`. Use a loopback address; a non-loopback binding logs a security warning.
@@ -271,6 +305,7 @@ $ docker agent serve a2a <config> [flags]
 | ---------------------- | ------------------ | ------------------------------------------------------------------------------------------ |
 | `-a, --agent <name>`   | (team default)     | Name of the agent to run. Defaults to the team's first agent if not specified.             |
 | `-l, --listen <addr>`  | `127.0.0.1:8082`   | Address to listen on.                                                                       |
+| `-s, --session-db <path>` | `<data-dir>/session.db` | Path to the SQLite session database.                                                 |
 
 All [runtime configuration flags](#runtime-configuration-flags) are also accepted.
 
@@ -291,7 +326,7 @@ $ docker agent serve acp <config> [flags]
 
 | Flag                      | Default                     | Description                                       |
 | ------------------------- | --------------------------- | ------------------------------------------------- |
-| `-s, --session-db <path>` | `~/.cagent/session.db`      | Path to the SQLite session database.              |
+| `-s, --session-db <path>` | `<data-dir>/session.db`     | Path to the SQLite session database.              |
 
 All [runtime configuration flags](#runtime-configuration-flags) are also accepted.
 
@@ -339,6 +374,18 @@ $ curl http://127.0.0.1:8083/v1/chat/completions \
 ```
 
 See [Chat Server](../chat-server/index.md) for the full feature reference.
+
+### `docker agent board`
+
+Launch a full-screen Kanban TUI for orchestrating multiple agents at once. Each card runs an agent in its own tmux session on an isolated git worktree; moving a card forward through the pipeline (Dev → Review → Push → Done) delivers the destination column's prompt to that card's agent. Projects and column prompts are stored in the global config file (`~/.config/cagent/config.yaml`) and can be managed from the TUI.
+
+```bash
+$ docker agent board
+```
+
+Takes no arguments or flags. Requires `tmux` and `git` to be installed.
+
+See [Kanban Board](../board/index.md) for key bindings, configuration, and workflow details.
 
 ### `docker agent share push` / `docker agent share pull`
 
@@ -522,8 +569,8 @@ These flags are available on every `docker agent` command:
 | `--log-file <path>`       | Custom debug log location (only used with `--debug`)                                   |
 | `-o, --otel`              | Enable OpenTelemetry observability: traces, metrics, and logs. Requires `OTEL_EXPORTER_OTLP_ENDPOINT` to export to a collector. |
 | `--cache-dir <path>`      | Override the cache directory (default: `~/Library/Caches/cagent` on macOS)             |
-| `--config-dir <path>`     | Override the config directory (default: `~/.config/cagent`)                            |
-| `--data-dir <path>`       | Override the data directory (default: `~/.cagent`)                                     |
+| `--config-dir <path>`     | Override the config directory (default: `~/.config/cagent`). Also reads `DOCKER_AGENT_CONFIG_DIR` (legacy `CAGENT_CONFIG_DIR`) env var. |
+| `--data-dir <path>`       | Override the data directory (default: `~/.cagent`; holds `session.db`, worktrees, plans, …)            |
 | `--help`                  | Show help for any command                                                              |
 
 ### OpenTelemetry environment variables

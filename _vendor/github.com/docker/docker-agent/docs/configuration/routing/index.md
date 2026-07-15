@@ -3,6 +3,7 @@ title: "Model Routing"
 description: "Route requests to different models based on the content of user messages."
 keywords: docker agent, ai agents, configuration, yaml, model routing
 weight: 100
+canonical: https://docs.docker.com/ai/docker-agent/configuration/routing/
 ---
 
 _Route requests to different models based on the content of user messages._

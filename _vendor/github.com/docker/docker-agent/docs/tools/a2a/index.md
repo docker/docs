@@ -4,6 +4,7 @@ description: "Connect to remote agents via the Agent-to-Agent protocol."
 keywords: docker agent, ai agents, tools, toolsets, a2a tool
 linkTitle: "A2A"
 weight: 60
+canonical: https://docs.docker.com/ai/docker-agent/tools/a2a/
 ---
 
 _Connect to remote agents via the Agent-to-Agent protocol._

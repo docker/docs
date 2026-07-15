@@ -3,6 +3,7 @@ title: "Baseten"
 description: "Use Baseten AI models with docker-agent."
 keywords: docker agent, ai agents, model providers, llm, baseten
 weight: 40
+canonical: https://docs.docker.com/ai/docker-agent/providers/baseten/
 ---
 
 _Use Baseten AI models with docker-agent._

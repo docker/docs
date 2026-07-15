@@ -3,6 +3,7 @@ title: "Provider Definitions"
 description: "Define reusable provider configurations with shared defaults for any provider type — OpenAI, Anthropic, Google, Bedrock, and more."
 keywords: docker agent, ai agents, model providers, llm, provider definitions
 weight: 280
+canonical: https://docs.docker.com/ai/docker-agent/providers/custom/
 ---
 
 _Define reusable provider configurations with shared defaults for any provider type — OpenAI, Anthropic, Google, Bedrock, and more._

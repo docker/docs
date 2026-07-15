@@ -4,6 +4,7 @@ description: "Shared persistent scratchpad for multi-agent collaboration."
 keywords: docker agent, ai agents, tools, toolsets, plan tool
 linkTitle: "Plan"
 weight: 150
+canonical: https://docs.docker.com/ai/docker-agent/tools/plan/
 ---
 
 _Shared persistent scratchpad for multi-agent collaboration._

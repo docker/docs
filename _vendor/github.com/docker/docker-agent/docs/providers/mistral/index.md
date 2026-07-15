@@ -3,6 +3,7 @@ title: "Mistral"
 description: "Use Mistral AI models with docker-agent."
 keywords: docker agent, ai agents, model providers, llm, mistral
 weight: 170
+canonical: https://docs.docker.com/ai/docker-agent/providers/mistral/
 ---
 
 _Use Mistral AI models with docker-agent._

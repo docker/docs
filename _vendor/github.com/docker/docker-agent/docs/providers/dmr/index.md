@@ -3,6 +3,7 @@ title: "Docker Model Runner"
 description: "Run AI models locally with Docker — no API keys, no costs, full data privacy."
 keywords: docker agent, ai agents, model providers, llm, docker model runner
 weight: 90
+canonical: https://docs.docker.com/ai/docker-agent/providers/dmr/
 ---
 
 _Run AI models locally with Docker — no API keys, no costs, full data privacy._

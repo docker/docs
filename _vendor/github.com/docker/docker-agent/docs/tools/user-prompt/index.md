@@ -4,6 +4,7 @@ description: "Ask the user questions and collect interactive input during agent 
 keywords: docker agent, ai agents, tools, toolsets, user prompt tool
 linkTitle: "User Prompt"
 weight: 190
+canonical: https://docs.docker.com/ai/docker-agent/tools/user-prompt/
 ---
 
 _Ask the user questions and collect interactive input during agent execution._

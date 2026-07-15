@@ -3,6 +3,7 @@ title: "Agents"
 description: "Agents are the core building blocks of docker-agent. Each agent is an AI-powered entity with a model, instructions, tools, and optional sub-agents."
 keywords: docker agent, ai agents, concepts, agents
 weight: 10
+canonical: https://docs.docker.com/ai/docker-agent/concepts/agents/
 ---
 
 _Agents are the core building blocks of docker-agent. Each agent is an AI-powered entity with a model, instructions, tools, and optional sub-agents._

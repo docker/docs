@@ -3,6 +3,7 @@ title: "Managing Secrets"
 description: "How to securely provide API keys and credentials to docker-agent using environment variables, env files, Docker Compose secrets, macOS Keychain, pass, and 1Password references."
 keywords: docker agent, ai agents, guides, managing secrets
 weight: 30
+canonical: https://docs.docker.com/ai/docker-agent/guides/secrets/
 ---
 
 _How to securely provide API keys and credentials to docker-agent._
@@ -15,10 +16,11 @@ docker-agent needs API keys to talk to model providers (OpenAI, Anthropic, etc.)
 | --- | --- | --- |
 | 1 | [Environment variables](#environment-variables) | `export OPENAI_API_KEY=sk-...` |
 | 2 | [Docker Compose secrets](#docker-compose-secrets) | Files in `/run/secrets/` |
-| 3 | [Credential helper](#credential-helper) | Custom command declared in `~/.config/cagent/config.yaml` under `credential_helper:` |
-| 4 | [Docker Desktop](#docker-desktop) | Secrets stored by the Docker Desktop backend (no setup on a Desktop install) |
-| 5 | [`pass` password manager](#pass-password-manager) | `pass insert OPENAI_API_KEY` |
-| 6 | [macOS Keychain](#macos-keychain) | `security add-generic-password` |
+| 3 | [docker agent env file](#docker-agent-env-file) | `~/.config/cagent/.env`, written by `docker agent setup` |
+| 4 | [Credential helper](#credential-helper) | Custom command declared in `~/.config/cagent/config.yaml` under `credential_helper:` |
+| 5 | [Docker Desktop](#docker-desktop) | Secrets stored by the Docker Desktop backend (no setup on a Desktop install) |
+| 6 | [`pass` password manager](#pass-password-manager) | `pass insert OPENAI_API_KEY` |
+| 7 | [macOS Keychain](#macos-keychain) | `security add-generic-password` |
 
 The first provider that has a value wins. You can mix and match — for example, use environment variables for one key and Keychain for another.
 
@@ -82,6 +84,17 @@ The file format supports:
 
 > [!IMPORTANT]
 > Add `.env` to your `.gitignore` to avoid committing secrets to version control.
+
+## docker agent env file
+
+A `.env` file (same format as above) at `~/.config/cagent/.env` is read automatically on every run — no `--env-from-file` flag needed. It is where [`docker agent setup`](../../features/cli/index.md#docker-agent-setup) stores API keys when you choose the env-file location, and you can edit it by hand:
+
+```bash
+# ~/.config/cagent/.env
+OPENAI_API_KEY=sk-...
+```
+
+The file is created with owner-only permissions (`0600`), but the values are stored in plain text: prefer the OS keychain or `pass` when available.
 
 ## Docker Compose Secrets
 
@@ -240,6 +253,7 @@ References follow the `op://<vault>/<item>/<field>` format. Make sure the `op` C
 | --- | --- | --- |
 | Environment variables | Quick local development, scripts | Low |
 | Env files | Team projects, multiple keys | Low |
+| docker agent env file | Keys used across all projects, written by `docker agent setup` | Low |
 | Docker Compose secrets | Containerized deployments, CI/CD | Medium |
 | `pass` | Linux/macOS, GPG-based workflows | Medium |
 | macOS Keychain | macOS local development | Low |

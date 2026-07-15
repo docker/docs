@@ -3,6 +3,7 @@ title: "OpenCode Go"
 description: "Use OpenCode Go models with docker-agent."
 keywords: docker agent, ai agents, model providers, llm, opencode go
 weight: 210
+canonical: https://docs.docker.com/ai/docker-agent/providers/opencode-go/
 ---
 
 _Use OpenCode Go models with docker-agent._

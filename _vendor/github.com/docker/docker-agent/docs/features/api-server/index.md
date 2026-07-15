@@ -3,6 +3,7 @@ title: "API Server"
 description: "Expose your agents via an HTTP API for programmatic access, web frontends, and integrations."
 keywords: docker agent, ai agents, features, api server
 weight: 80
+canonical: https://docs.docker.com/ai/docker-agent/features/api-server/
 ---
 
 _Expose your agents via an HTTP API for programmatic access, web frontends, and integrations._
@@ -182,7 +183,7 @@ docker agent serve api <agent-file>|<agents-dir> [flags]
 | `-s, --session-db` | `session.db`     | Path to the SQLite session database              |
 | `--pull-interval`  | `0` (disabled)   | Auto-pull OCI reference every N minutes          |
 | `--fake`           | (none)           | Replay AI responses from cassette file (testing) |
-| `--record`         | (none)           | Record AI API interactions to cassette file      |
+| `--record`         | (none)           | Record AI API interactions to cassette file. Routes through `--models-gateway` when one is configured. |
 | `--mcp-oauth-redirect-uri` | (none)   | Public HTTPS URL advertised as the OAuth `redirect_uri` for unmanaged MCP OAuth flows. When set, docker-agent drives PKCE and code exchange in-process and sends the full authorize URL to the client via elicitation. See [Remote MCP](../remote-mcp/index.md) for details. |
 
 > [!TIP]

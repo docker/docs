@@ -4,6 +4,7 @@ description: "Persistent task database with priorities and dependencies, shared 
 keywords: docker agent, ai agents, tools, toolsets, tasks tool
 linkTitle: "Tasks"
 weight: 180
+canonical: https://docs.docker.com/ai/docker-agent/tools/tasks/
 ---
 
 _Persistent task database with priorities and dependencies, shared across sessions._

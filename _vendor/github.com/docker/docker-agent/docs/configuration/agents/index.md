@@ -4,6 +4,7 @@ description: "Complete reference for defining agents in your YAML configuration.
 keywords: docker agent, ai agents, configuration, yaml, agent configuration
 linkTitle: "Agent Config"
 weight: 30
+canonical: https://docs.docker.com/ai/docker-agent/configuration/agents/
 ---
 
 _Complete reference for defining agents in your YAML configuration._
@@ -34,6 +35,8 @@ agents:
     max_consecutive_tool_calls: int # Optional: max identical consecutive tool calls
     max_old_tool_call_tokens: int # Optional: token budget for old tool call content (disabled unless positive)
     num_history_items: int # Optional: limit conversation history
+    session_compaction: boolean # Optional: disable automatic session compaction (default: true)
+    compaction_threshold: float # Optional: context-window fraction that triggers auto-compaction (0–1, default: 0.9)
     use_toolsets: [list] # Optional: names of top-level toolsets to merge into this agent
     readonly: boolean # Optional: restrict all toolsets to read-only tools only
     skills: boolean | [list] # Optional: enable skill discovery (true/false or list of names and/or sources)
@@ -95,6 +98,8 @@ agents:
 | `max_consecutive_tool_calls` | int     | ✗        | Maximum consecutive identical tool calls before the agent is terminated, preventing degenerate loops. Default: `5`.                                                          |
 | `max_old_tool_call_tokens`  | int     | ✗        | Maximum number of tokens to keep from old tool call arguments and results. Older tool calls beyond this budget have their content replaced with a placeholder, saving context space. Tokens are approximated as `len/4`. Truncation is disabled by default; set a positive value to enable it. Set to `-1` to disable truncation (unlimited). |
 | `num_history_items`         | int     | ✗        | Limit the number of conversation history messages sent to the model. Useful for managing context window size with long conversations. Default: unlimited (all messages sent). |
+| `session_compaction`        | boolean | ✗        | When `false`, disables automatic session compaction for this agent: neither the proactive threshold trigger nor the post-overflow auto-recovery runs. The manual `/compact` command remains available. Default: `true`. |
+| `compaction_threshold`      | float   | ✗        | Fraction of the model's context window at which proactive auto-compaction triggers. Must be greater than `0` and at most `1`. A `compaction_threshold` set on the agent's model takes precedence. Default: `0.9`. See [Compaction Threshold](../models/index.md#delegating-session-compaction). |
 | `skills`                    | bool/array | ✗     | Enable automatic skill discovery. `true` loads all discovered local skills, `false` disables them. A list can mix skill sources (`local` or `https://…` URLs) and skill names to include — see [Skills](../../features/skills/index.md).                                                     |
 | `commands`                  | object  | ✗        | Named prompts that can be run with `docker agent run config.yaml /command_name`. Can be simple strings or objects with `instruction` and/or `agent` fields for agent switching, or a `url` field to open a link in the browser (TUI only). See [Named Commands](#named-commands) below. |
 | `use_commands`              | list of string | ✗   | Names of top-level `commands` groups to merge into this agent. Inline `commands` entries take precedence on name conflicts. Default: `[]`. |
