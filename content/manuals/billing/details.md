@@ -2,17 +2,17 @@
 title: Update your billing details
 linkTitle: Update details
 weight: 40
-description: Learn how to update billing details, like contact information, addresses, and tax IDs for Docker subscriptions.
-keywords: payments, billing, subscription, invoices, update billing email, change billing address, VAT ID, Docker billing account
+description: Learn how to update billing details, like contact information, addresses, and notification email for Docker subscriptions.
+keywords: payments, billing, subscription, invoices, update billing email, change billing address, Docker billing account
 aliases:
   - /billing/cycle/
 ---
 
-You can update the email address that receives billing invoices at any time. Existing invoices, whether paid or unpaid, cannot be updated. Changes only apply to future invoices.
+You can update your billing contact information, address, and notification email at any time. Existing invoices, whether paid or unpaid, cannot be updated. Changes only apply to future invoices.
 
 ## Update billing details
 
-You can update your billing details for Docker individual accounts and Docker organization accounts using the same procedures. You can update your default billing details through any **Change payment method** modal. 
+You can update your billing details for Docker individual accounts and Docker organization accounts using the same procedures.
 
 To update your billing information from **Settings** in Docker Home:
 
