@@ -1,95 +1,40 @@
 ---
-title: Update your billing information
-linkTitle: Update information
+title: Update your billing details
+linkTitle: Update details
 weight: 40
-description: Learn how to update billing contact information, addresses, and tax IDs for Docker subscriptions.
+description: Learn how to update billing details, like contact information, addresses, and tax IDs for Docker subscriptions.
 keywords: payments, billing, subscription, invoices, update billing email, change billing address, VAT ID, Docker billing account
+aliases:
+  - /billing/cycle/
 ---
 
-You can update the billing information for your personal account or for an
-organization. When you update your billing information, these changes apply to
-future invoices. Docker sends invoices and other billing-related communications
-to the billing account's email address.
+You can update the email address that receives billing invoices at any time. Existing invoices, whether paid or unpaid, cannot be updated. Changes only apply to future invoices.
 
-> [!NOTE]
->
-> Existing invoices, whether paid or unpaid, cannot be updated.
-> Changes only apply to future invoices.
+## Update billing details
 
-## Manage billing information
+You can update your billing details for Docker individual accounts and Docker organization accounts using the same procedures. You can update your default billing details through any **Change payment method** modal. 
 
-### Personal account
+To update your billing information from **Settings** in Docker Home:
 
-To update your billing information:
-
-1. Sign in to [Docker Home](https://app.docker.com/) and select your personal
+1. Sign in to [Docker Home](https://app.docker.com/) and select your personal or organization
    account.
-1. Select **Billing**.
-1. Select **Billing information** from the left-hand navigation.
-1. On your billing information card, select **Change**.
-1. Update your billing contact and billing address information.
-1. Optional. To add or update a VAT ID, select the
-   **I'm purchasing as a business** checkbox and enter your tax ID.
+1. Select **Billing**, then go to **Settings**.
+1. Select **Edit**, then choose **Update** next to your current billing contact and billing address information.
+1. Verify your information, then select **Save as default**.
 
-   > [!IMPORTANT]
-   >
-   > Your VAT number must include your country prefix. For example, enter
-   > `DE123456789` for a German VAT number.
+For more information on changing your default payment method, see [Change default payment method](/manuals/billing/payment-method.md#change-default-payment-method).
 
-1. Select **Update**.
+## Billing notifications
 
-### Organization
+Docker sends invoices and other billing-related communications
+to the billing account's email address. These communications include:
 
-> [!NOTE]
->
-> You must be an organization owner to make changes to the billing information.
+- Confirmations, such as new subscriptions, paid invoices
+- Notifications for card failure and card expiration errors
+- Reminders for subscription renewal
 
-To update your billing information:
+## Billing cycle
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your
-   organization.
-1. Select **Billing**.
-1. Select **Billing information** from the left-hand navigation.
-1. On your billing information card, select **Change**.
-1. Update your billing contact and billing address information.
-1. Optional. To add or update a VAT ID, select the
-   **I'm purchasing as a business** checkbox and enter your tax ID.
-
-   > [!IMPORTANT]
-   >
-   > Your VAT number must include your country prefix. For example, enter
-   > `DE123456789` for a German VAT number.
-
-1. Select **Update**.
-
-## Update your billing email address
-
-Docker sends the following billing-related emails:
-
-- Confirmations (new subscriptions, paid invoices)
-- Notifications (card failure, card expiration)
-- Reminders (subscription renewal)
-
-You can update the email address that receives billing invoices at any time.
-
-### Personal account
-
-To update your billing email address:
-
-1. Sign in to [Docker Home](https://app.docker.com/) and select your personal
-   account.
-1. Select **Billing**.
-1. Select **Billing information** from the left-hand navigation.
-1. On your billing information card, select **Change**.
-1. Update your billing contact information and select **Update**.
-
-### Organization
-
-To update your billing email address:
-
-1. Sign in to [Docker Home](https://app.docker.com/) and select
-   your organization.
-1. Select **Billing**.
-1. Select **Billing information** from the left-hand navigation.
-1. On your billing information card, select **Change**.
-1. Update your billing contact information and select **Update**.
+Billing cycles are defined on a per-plan basis. Depending on the product you
+subscribe to, your cycle can be monthly, annual, or another cadence. For
+plan-specific billing cycle details, see [Plans](/manuals/subscription/plans/_index.md).
