@@ -29,8 +29,9 @@ server sets, live server loading, and organization governance.
   Gemini, Kiro, or OpenCode.
 - For remote servers that require OAuth, use MCP servers that support OAuth
   Dynamic Client Registration.
-- For local containerized MCP servers, use a host with Docker installed and
-  running.
+- For `--local --url` registrations that resolve to OCI packages, use a host
+  with Docker installed and running. Docker is also required for explicit
+  `--command docker ...` registrations.
 
 ## Quick start
 
@@ -105,16 +106,20 @@ the host. You can provide a metadata URL or an explicit command.
 
 Use `--local --url` when you have an MCP community registry URL or a URL that
 returns a `server.json` or `server.yaml` document. The registry entry or
-manifest must describe an OCI package that uses stdio transport. `sbx` resolves
-the image from the metadata and starts it on the host with Docker.
+manifest must describe an OCI package that uses stdio transport. `sbx` doesn't
+launch non-OCI package types, such as `npm`, from metadata. To use those
+servers, register an explicit command.
+
+This path resolves the image from the metadata and starts it on the host with
+Docker, so Docker must be installed and running on the host.
 
 ```console
 $ sbx mcp add fetch --local \
   --url https://registry.modelcontextprotocol.io/v0/servers/fetch-mcp/versions/latest
 ```
 
-If the entry doesn't publish a stdio package, `sbx` rejects the registration
-instead of starting it locally.
+If the entry doesn't publish an OCI stdio package, `sbx` rejects the
+registration instead of starting it locally.
 
 A server manifest describes the MCP server package and how to start it. It can
 be hosted on a GitHub raw URL, internal HTTP server, or CDN.
