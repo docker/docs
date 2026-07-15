@@ -3,7 +3,7 @@ title: Docker Sandboxes release notes
 linkTitle: Release notes
 description: New features, bug fixes, and changes in Docker Sandboxes
 keywords: docker sandboxes, sbx, release notes, changelog
-weight: 130
+weight: 120
 toc_min: 1
 toc_max: 2
 tags:

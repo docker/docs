@@ -1,7 +1,7 @@
 ---
 title: Supported agents
 linkTitle: Agents
-weight: 50
+weight: 40
 description: AI coding agents supported by Docker Sandboxes.
 keywords: docker sandboxes, ai agents, claude code, codex, cursor, gemini
 ---
