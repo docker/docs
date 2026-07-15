@@ -1,6 +1,7 @@
 ---
-title: Invoices and billing history
-weight: 40
+title: View and manage invoices and billing history
+linkTitle: Invoices
+weight: 60
 description: Learn how to view invoices and your billing history
 keywords: payments, billing, subscription, invoices, renewals, invoice management, billing administration, pay invoice
 aliases:
