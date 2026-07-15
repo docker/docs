@@ -72,6 +72,20 @@ use [`sbx mcp load`](#add-a-server-to-a-running-sandbox).
 
 Server names can contain letters, numbers, dots, hyphens, and underscores.
 
+The `--url` flag can point to different kinds of input. The execution location
+depends on what you register:
+
+- **Remote endpoint URL**: The URL is the running MCP server endpoint. The
+  server runs remotely, and the sandbox gateway connects to it.
+- **Metadata URL with `--local`**: The URL returns a registry entry,
+  `server.json`, or `server.yaml` that describes an OCI-packaged stdio server.
+  `sbx` resolves the image and runs it on the host with Docker.
+- **Explicit command**: `sbx` runs the command on the host as a stdio MCP
+  server.
+
+Local stdio servers run on the host, not inside the sandbox. The agent inside
+the sandbox connects only to the MCP gateway.
+
 ### Remote endpoint URL
 
 For a remote MCP endpoint, pass the server URL:
@@ -84,25 +98,23 @@ $ sbx mcp add linear --url https://mcp.linear.app/mcp
 ### Local stdio server
 
 Some MCP servers communicate over stdio instead of exposing a remote HTTP
-endpoint. Docker Sandboxes can register local stdio servers in two ways: by
-resolving a package from registry or manifest metadata, or by running an
-explicit command.
+endpoint. Use a local stdio server when `sbx` should launch the MCP server on
+the host. You can provide a metadata URL or an explicit command.
 
 #### From registry or manifest metadata
 
-Use `--local` with an MCP community registry URL or a URL that returns a
-`server.json` or `server.yaml` document. The registry entry or manifest must
-describe an OCI package that uses stdio transport. `sbx` resolves the image from
-the metadata and starts it on the host with Docker.
+Use `--local --url` when you have an MCP community registry URL or a URL that
+returns a `server.json` or `server.yaml` document. The registry entry or
+manifest must describe an OCI package that uses stdio transport. `sbx` resolves
+the image from the metadata and starts it on the host with Docker.
 
 ```console
 $ sbx mcp add fetch --local \
   --url https://registry.modelcontextprotocol.io/v0/servers/fetch-mcp/versions/latest
 ```
 
-The `--local` flag tells `sbx` to run the registry or manifest entry as a
-host-side stdio server. If the entry doesn't publish a stdio package, `sbx`
-rejects the registration instead of starting it locally.
+If the entry doesn't publish a stdio package, `sbx` rejects the registration
+instead of starting it locally.
 
 A server manifest describes the MCP server package and how to start it. It can
 be hosted on a GitHub raw URL, internal HTTP server, or CDN.
