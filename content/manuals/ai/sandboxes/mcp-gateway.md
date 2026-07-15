@@ -29,6 +29,8 @@ server sets, live server loading, and organization governance.
   Gemini, Kiro, or OpenCode.
 - For remote servers that require OAuth, use MCP servers that support OAuth
   Dynamic Client Registration.
+- For local containerized MCP servers, use a host with Docker installed and
+  running.
 
 ## Quick start
 
@@ -79,64 +81,59 @@ $ sbx mcp add notion --url https://mcp.notion.com/mcp
 $ sbx mcp add linear --url https://mcp.linear.app/mcp
 ```
 
-### MCP registry URL
+### Local stdio server
 
-You can register a server from the MCP community registry:
+Some MCP servers communicate over stdio instead of exposing a remote HTTP
+endpoint. Docker Sandboxes can register local stdio servers in two ways: by
+resolving a package from registry or manifest metadata, or by running an
+explicit command.
 
-```console
-$ sbx mcp add fetch \
-  --url https://registry.modelcontextprotocol.io/v0/servers/fetch-mcp/versions/latest
-```
+#### From registry or manifest metadata
 
-### Server manifest URL
-
-You can register a server from a URL that returns a `server.json` or
-`server.yaml` document. A server manifest describes the MCP server and how the
-gateway should connect to it. This is the same general shape used by the MCP
-community registry, and it works for manifests hosted on GitHub raw URLs,
-internal HTTP servers, or CDNs.
-
-```console
-$ sbx mcp add opine --url https://example.com/mcp/opine/server.yaml
-```
-
-### Docker Hardened Image reference
-
-You can register a Docker Hardened Image reference when the image carries an
-MCP server manifest in its attestation:
-
-```console
-$ sbx mcp add fetch --url dhi.io/fetch-mcp:latest
-```
-
-Generic image references, such as `docker.io/example/server:latest`, aren't
-accepted. Use a server manifest URL instead.
-
-### Registry server as a local container
-
-To run a registry server locally as a container, add `--local` to a registry or
-manifest URL. This is useful for stdio-based servers packaged as containers:
+Use `--local` with an MCP community registry URL or a URL that returns a
+`server.json` or `server.yaml` document. The registry entry or manifest must
+describe an OCI package that uses stdio transport. `sbx` resolves the image from
+the metadata and starts it on the host with Docker.
 
 ```console
 $ sbx mcp add fetch --local \
   --url https://registry.modelcontextprotocol.io/v0/servers/fetch-mcp/versions/latest
 ```
 
-### Local stdio command
+For local gateway usage, include `--local`. Without `--local`, registry and
+manifest URLs resolve to OCI-backed server registrations for hosted gateway
+modes, which this page doesn't cover.
 
-You can also register a local stdio command:
+A server manifest describes the MCP server package and how to start it. It can
+be hosted on a GitHub raw URL, internal HTTP server, or CDN.
+
+```console
+$ sbx mcp add opine --local --url https://example.com/mcp/opine/server.yaml
+```
+
+#### From an explicit command
+
+Use `--command` when you already know the executable and arguments, or when you
+need custom Docker flags. The command can be a package runner such as `npx` or
+a Docker container command:
 
 ```console
 $ sbx mcp add playwright --command npx --args @playwright/mcp@latest
 $ sbx mcp add local-image-server --command docker \
-  --args run --args -i --args your/image
+  --args run --args -i --args --rm --args your/image
 ```
 
+Use registry or manifest metadata when you have a published server definition
+and don't need to customize `docker run`. Use `--command` for local
+development, private servers, or custom container flags.
+
 > [!WARNING]
-> Local stdio commands run on the host, outside the sandbox. They run with your
-> host user's permissions and can access host files, host network resources, and
-> credentials available to that user. Use `--command` only with executables you
-> trust.
+> Local stdio servers run on the host, outside sandbox isolation. If the command
+> starts a Docker container, that container uses host Docker isolation, not
+> sandbox isolation. The process or container can access host files, host
+> network resources, and credentials made available to it. Use trusted commands
+> and images, and avoid mounting host paths or passing credentials unless the
+> server needs them.
 
 ## Authorize OAuth-backed servers
 
