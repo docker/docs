@@ -153,15 +153,16 @@ credentials:
   - service: my-service
     apiKey:
       name: MY_SERVICE_TOKEN
+      proxyManaged: true
       inject:
         - domain: api.my-service.com
-          header: Authorization
-          format: "Bearer %s"
+          scheme: bearer
 ```
 
-Each service declares an `apiKey` block (with `name` and `inject`) or an
-`oauth` block. To provide the credential value, run `sbx secret set` with the
-same identifier the kit declares:
+Each service declares `apiKey`, `oauth`, or both. When both resolve at runtime,
+the API key takes precedence and OAuth acts as the fallback. To provide the
+credential value, run `sbx secret set` with the same identifier the kit
+declares:
 
 ```console
 $ sbx secret set -g my-service
@@ -291,7 +292,8 @@ mechanisms:
   from the [secret store](#stored-secrets) (`sbx secret set <service>`); the
   binding records approval, it doesn't hold or locate the value.
 - `oauth` — approves the OAuth flow for the service. You sign in on the host,
-  and the proxy handles token refresh and routing.
+  and the proxy handles token refresh and routing. OAuth domains include the
+  token endpoint host and any resource hosts declared by the kit.
 
 Each mechanism takes a `domains` list — the domains the proxy may inject the
 credential into. The credential is attached only where those domains and the
@@ -318,10 +320,11 @@ secret store or enter one at the prompt, and you approve the domains it may
 reach. `sbx` writes the entry to `credentials.yaml`.
 
 In non-interactive contexts (CI or `--detached`), there's no one to answer the
-prompt. `sbx` logs a warning naming the service and creates the sandbox anyway
-with the credential withheld, so the agent starts unauthenticated. Pre-create
-the binding — by running the kit interactively once, or by writing
-`credentials.yaml` directly — before running unattended.
+prompt. If the kit marks the credential as `required: true`, resolution fails
+fast when no binding or host fallback exists. For optional credentials, the
+sandbox can start with that credential withheld. Pre-create the binding — by
+running the kit interactively once, or by writing `credentials.yaml` directly —
+before running unattended.
 
 This makes the bindings file an allowlist of credential-to-domain approvals: a
 kit can use only the credentials and domains you've approved.

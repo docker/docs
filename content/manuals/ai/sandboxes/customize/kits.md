@@ -48,7 +48,7 @@ Install commands are the place to put anything an agent needs into the
 image, via `apt`, `pip`, `npm`, `curl | bash`, or whatever fits:
 
 ```yaml
-commands:
+setup:
   install:
     - command: "apt-get update && apt-get install -y jq"
 ```
@@ -58,7 +58,7 @@ warming caches, or refreshing config on each start. They must be
 idempotent — see the [`startup`](kit-reference.md#startup) spec reference:
 
 ```yaml
-commands:
+setup:
   startup:
     - command: ["my-daemon"]
       background: true
@@ -67,7 +67,7 @@ commands:
 ### Inject files
 
 Kits can inject files into the sandbox in two ways: **static files** bundled
-with the kit, and **`initFiles`** written at startup with runtime values
+with the kit, and **`setup.files`** written at startup with runtime values
 substituted in.
 
 Static files work well for content that doesn't vary between sandboxes, such
@@ -84,28 +84,29 @@ my-kit/
         └── .editorconfig
 ```
 
-`initFiles` cover content that depends on runtime values, such as an
+`setup.files` cover content that depends on runtime values, such as an
 absolute workspace path that a tool needs to bake into its config file
 at startup:
 
 ```yaml
-commands:
-  initFiles:
+setup:
+  files:
     - path: /home/agent/.my-tool/config.json
       content: '{"workspace": "${WORKDIR}"}'
       onlyIfMissing: true
 ```
 
-See [`initFiles`](kit-reference.md#initfiles) in the spec reference for all fields.
+See [`setup.files`](kit-reference.md#files) in the spec reference for all
+fields.
 
 Sandboxes seed settings files for some built-in agents during setup.
 For example, the sandbox writes `/home/agent/.claude/settings.json`
 for the `claude` agent. This happens after the kit's static files and
-`initFiles`, so kit-injected files at those paths get overwritten.
+`setup.files`, so kit-injected files at those paths get overwritten.
 Workspace files (such as `<workspace>/.claude/settings.local.json`)
 aren't affected, and you can ship them under `files/workspace/` as
 usual. To override a path the sandbox writes to, use a
-[`commands.startup`](kit-reference.md#startup) script instead. See
+[`setup.startup`](kit-reference.md#startup) script instead. See
 [Override agent settings](kit-examples.md#override-agent-settings) for
 an example.
 
@@ -142,7 +143,7 @@ Network rules define which domains the sandbox can reach or block. Kit
 network rules apply only to sandboxes that use the kit:
 
 ```yaml
-caps:
+permissions:
   network:
     allow:
       - api.example.com
@@ -188,7 +189,7 @@ credentials:
           header: Authorization # overwrite this header
           format: "Bearer %s"
 
-caps:
+permissions:
   network:
     allow:
       - api.example.com # the domain must also be reachable
@@ -213,31 +214,33 @@ the agent project conventions, usage tips for a tool the kit installs,
 or other guidance that should be in scope when the sandbox runs.
 
 ```yaml
-agentContext: |
-  Ruff is installed. Run `ruff check` before committing.
-  Shared config lives at `/workspace/ruff.toml`.
+agentInstructions:
+  content: |
+    Ruff is installed. Run `ruff check` before committing.
+    Shared config lives at `/workspace/ruff.toml`.
 ```
 
-Both mixin and sandbox kits can declare `agentContext:`. The content is written
-only when the active sandbox kit sets [`sandbox.aiFilename`](kit-reference.md#sandbox-block),
-which determines the memory file's name.
+Both mixin and sandbox kits can declare `agentInstructions.content`. The active
+sandbox kit sets `agentInstructions.filename`, which determines the memory
+file's name.
 
-When more than one loaded kit declares an `agentContext:` block, each kit's
+When more than one loaded kit declares `agentInstructions.content`, each kit's
 content is written to its own `<kit-name>.md` file under a sibling
-`kits-agent-context/` directory. The main memory file gets a `## Kits`
+`kits-memory/` directory. The main memory file gets a `## Kits`
 section that points to each kit file:
 
 ```text
 /Users/you/
 ├── myproject/              # workspace
 ├── AGENTS.md               # main memory file with a "## Kits" index
-└── kits-agent-context/
+└── kits-memory/
     ├── ruff-lint.md
     ├── vale.md
     └── git-ssh-sign.md
 ```
 
-See [`agentContext`](kit-reference.md#agent-context) in the spec reference for the full field schema.
+See [`agentInstructions`](kit-reference.md#agent-instructions) in the spec
+reference for the full field schema.
 
 ### Define an agent
 
@@ -247,8 +250,7 @@ the command the user attaches to when they launch the sandbox:
 ```yaml
 sandbox:
   image: "my-registry/my-agent:latest"
-  entrypoint:
-    run: [my-agent, "--yolo"]
+  entrypoint: [my-agent, "--yolo"]
 ```
 
 See [Sandbox kits](#sandbox-kits) for use cases and an example.
@@ -283,13 +285,13 @@ name: ruff-lint
 displayName: Ruff Linter
 description: Python linting with shared team config
 
-caps:
+permissions:
   network:
     allow:
       - pypi.org
       - files.pythonhosted.org
 
-commands:
+setup:
   install:
     - command: "uv tool install ruff@latest"
       user: "1000"
@@ -339,7 +341,7 @@ agent. For a step-by-step walkthrough, see
 
 The `claude` agent you get from `sbx run claude` is defined as a kit. Here
 is an abbreviated version of its spec, showing how the sandbox block combines
-with network, credentials, environment, and commands:
+with network, credentials, environment, and setup:
 
 ```yaml {title="claude/spec.yaml"}
 schemaVersion: "2"
@@ -347,11 +349,12 @@ kind: sandbox
 name: claude
 sandbox:
   image: "docker/sandbox-templates:claude-code-docker"
-  aiFilename: CLAUDE.md
-  entrypoint:
-    run: [claude, "--dangerously-skip-permissions"]
+  entrypoint: [claude, "--dangerously-skip-permissions"]
 
-caps:
+agentInstructions:
+  filename: CLAUDE.md
+
+permissions:
   network:
     allow:
       - "claude.com:443"
@@ -372,7 +375,7 @@ environment:
   variables:
     IS_SANDBOX: "1"
 
-commands:
+setup:
   install:
     - command: "curl -fsSL https://claude.ai/install.sh | bash"
       user: "1000"
@@ -513,8 +516,8 @@ Docker credential store, so pushing to a private registry requires a prior
 ## Spec reference
 
 For a field-by-field reference of every `spec.yaml` block — top-level
-fields, credentials, network, environment, commands, static files,
-agent context, and the sandbox block — see [Kit spec reference](kit-reference.md).
+fields, credentials, network, environment, setup, static files,
+agent instructions, and the sandbox block — see [Kit spec reference](kit-reference.md).
 
 ## Debugging
 
