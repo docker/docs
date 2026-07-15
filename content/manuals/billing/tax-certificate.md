@@ -9,9 +9,9 @@ weight: 70
 If you're a customer in the United States and are exempt from sales tax, you
 can submit a valid tax exemption certificate to Docker Support.
 
-If you're a global customer subject to VAT, make sure to include your
-[VAT number](/manuals/billing/history.md#include-your-vat-number-on-your-invoice)
-along with your country prefix when you update your billing profile.
+If you're a global customer subject to VAT, make sure to include your VAT
+number, along with your country prefix, when you
+[update your billing details](/manuals/billing/details.md#update-billing-details).
 
 ## Prerequisites
 
