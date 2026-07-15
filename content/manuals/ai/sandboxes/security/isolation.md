@@ -64,6 +64,12 @@ your host. When the agent runs `docker build` or `docker compose up`, those
 commands execute against that engine. The agent has no path to your host Docker
 daemon.
 
+This Docker Engine boundary applies to processes running inside the sandbox VM.
+It doesn't apply to local stdio MCP servers registered through the
+[MCP gateway](../mcp-gateway.md). Those servers run on the host, outside the
+sandbox VM. If a local MCP server starts a Docker container, it uses Docker on
+the host.
+
 Each sandbox VM runs its own Docker Engine. The agent runs inside the VM,
 alongside that engine, and drives it to create containers, all within the
 VM:

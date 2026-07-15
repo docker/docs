@@ -100,6 +100,22 @@ One limitation applies:
   `HTTP_PROXY`, `HTTPS_PROXY`, or `DOCKER_SANDBOXES_PROXY` environment variables
   explicitly.
 
+## MCP gateway
+
+Supported agents connect to a single MCP gateway endpoint for the sandbox. The
+gateway runs on the host side of the sandbox boundary and brokers access to
+registered MCP servers.
+
+Registered MCP servers can be remote endpoints, or they can be local stdio
+servers launched on the host. Local stdio servers don't run inside the sandbox
+VM. If a local stdio server is packaged as an OCI image, or if you register an
+explicit `docker` command, it uses Docker on the host.
+
+When MCP policies apply, enforcement happens on the MCP gateway path, separate
+from the HTTP/HTTPS network proxy. Server registration is checked before the
+server is stored, and governed MCP requests are checked by the gateway before
+tool calls, resource reads, prompt retrieval, or gateway meta-tool execution.
+
 ## Lifecycle
 
 `sbx run` initializes a VM with a workspace for a specified agent and starts

@@ -37,6 +37,16 @@ For Docker MCP policies:
 - A matching `forbid` overrides any `permit`, including a permit with
   `@requireApproval`.
 
+MCP policies are enforced on the MCP gateway path, not by the sandbox network
+proxy. During `sbx mcp add`, Docker Sandboxes evaluates the resolved server
+definition against `MCP::Action::"register"` before storing the registration.
+When a sandbox uses MCP, the gateway evaluates governed MCP requests before
+tool calls, resource reads, prompt retrieval, and gateway meta-tool execution.
+
+Tool and resource listings can include entries that policy later denies at use
+time. Use the [MCP policy reference](../reference/mcp-policy.md) for the exact
+actions and limitations.
+
 ## Start with a baseline
 
 To allow all MCP activity while you build a narrower policy, use an actionless
