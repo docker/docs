@@ -137,7 +137,7 @@ a Docker container command:
 ```console
 $ sbx mcp add playwright --command npx --args @playwright/mcp@latest
 $ sbx mcp add local-image-server --command docker \
-  --args run --args -i --args --rm --args your/image
+  --args "run,-i,--rm,your/image"
 ```
 
 Use registry or manifest metadata when you have a published server definition

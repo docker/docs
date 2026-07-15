@@ -18,8 +18,9 @@ addresses, and link-local addresses is also blocked.
 
 Run `sbx policy ls` to see the active network rules for your installation.
 Rules can be customized per machine with the `sbx policy` CLI, or managed
-centrally across your organization. Org-level rules take precedence over local
-rules. See [Governance](../governance/).
+centrally across your organization from the Admin Console. Org-level rules
+take precedence over local rules. See
+[Network access policies](../governance/access-controls/network.md).
 
 ## Workspace defaults
 

@@ -134,6 +134,10 @@ For remote server registration, match attributes the gateway provides, such as
 server type, identity URL, OAuth requirement, or network requirement. Local
 server command and argument attributes don't apply to remote servers.
 
+For local stdio servers, `resource.type == "local-stdio"` matches host-side
+local servers. Use `resource.command` and `resource.args` only when the
+resolved registration includes command details.
+
 ## Next steps
 
 - Use [Policy concepts](../concepts.md#mcp-policies) for the MCP policy model.
