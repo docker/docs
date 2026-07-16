@@ -78,6 +78,9 @@ need to match the root domain and its subdomains.
 Both IPv4 and IPv6 notation are supported: `10.0.0.0/8`, `192.168.1.0/24`,
 `2001:db8::/32`.
 
+For local and organization policy configuration, see
+[Network access policies](access-controls/network.md).
+
 ### Filesystem rules
 
 Filesystem rules use the actions `read` and `write`. Resources are host paths
@@ -117,6 +120,9 @@ Wildcards behave the same way in every path format:
 Use `**` to match a directory tree recursively. A single `*` matches within one
 path segment and won't cross a path separator. For example, `~/**` matches all
 paths under the home directory, while `~/*` matches only its direct children.
+
+For organization policy configuration and enforcement details, see
+[Filesystem access policies](access-controls/filesystem.md).
 
 ### MCP policies
 
