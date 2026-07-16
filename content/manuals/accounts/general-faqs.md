@@ -53,8 +53,3 @@ organization name can't be the same as an existing Docker ID.
 
 For more information, see
 [Organization overview](/manuals/admin/organization/_index.md).
-
-## What's next
-
-- [Docker accounts overview](./_index.md)
-- [Create a Docker account](./create-account.md)

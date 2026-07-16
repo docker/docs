@@ -68,9 +68,3 @@ account.
 Deactivating your account does not delete your personal data. To request
 personal data deletion, fill out Docker's
 [Privacy request form](https://preferences.docker.com/).
-
-## What's next
-
-- [Manage your account](./manage-account.md)
-- [Docker accounts overview](./_index.md)
-- [Deactivate an organization](../admin/organization/deactivate-account.md)

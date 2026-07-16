@@ -132,9 +132,3 @@ basis:
 
 - [Docker Community Forums](https://forums.docker.com/)
 - [Docker Community Slack](https://dockr.ly/comm-slack)
-
-## What's next
-
-- [Manage your account](./manage-account.md)
-- [Enable two-factor authentication](../security/2fa/_index.md)
-- [Docker accounts overview](./_index.md)

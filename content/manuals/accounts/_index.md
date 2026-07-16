@@ -36,7 +36,7 @@ grid:
     link: /accounts/general-faqs/
 ---
 
-A Docker account is your identity on Docker. Use it to access products like
+A Docker account is how Docker identifies you. Use it to access products like
 Docker Hub and Docker Desktop, manage settings, and join organizations.
 
 This section covers individual accounts. For organizations and companies, see
@@ -45,7 +45,7 @@ This section covers individual accounts. For organizations and companies, see
 ## Account identity
 
 When you create an account, you choose a Docker ID and a sign-in method.
-Docker also ties a verified email to the account. These aren't the same thing:
+Docker also ties a verified email to the account.
 
 - Your Docker account is where Docker associates your plans, Hub
   repositories, and account settings.
