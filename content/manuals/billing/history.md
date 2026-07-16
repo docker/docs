@@ -65,7 +65,7 @@ Renewal dates are set on a per-plan basis, so check each plan individually if yo
 > [!TIP]
 >
 > To pay by invoice,
-> [upgrade to a Docker Business or Docker Team plan](https://www.docker.com/pricing?ref=Docs&refAction=DocsBillingPaymentMethod)
+> [upgrade to a Docker Team or Docker Business plan](https://www.docker.com/pricing?ref=Docs&refAction=DocsBillingPaymentMethod)
 > and choose an annual subscription.
 
 Pay by invoice requires upfront payment for your first subscription period

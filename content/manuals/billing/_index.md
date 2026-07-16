@@ -28,13 +28,13 @@ aliases:
   - /billing/docker-hub-pricing/
 ---
 
-You can use the billing portal to manage actions for your Docker plans, such as updating
+You can use the billing portal to manage actions for your Docker subscriptions, such as updating
 payment methods, reviewing billing details, and tracking invoice history.
 
 ## Docker plans and billing behaviors
 
 Your invoice history is a reference to the Docker plans you subscribe to. To understand more about how you were invoiced, such as renewal dates and billing cycles, review the [plan details](/manuals/subscription/plans/_index.md)
-for what you've subscribed to. To add a new plan or upgrade an active plan, see [Subscription](/manuals/subscription/_index.md).
+for what you've subscribed to. To upgrade, or add a new plan see [Subscription](/manuals/subscription/_index.md).
 
 ## Sales tax and VAT
 
