@@ -23,9 +23,10 @@ that supports remote development over SSH can connect to it.
 
 ## How it works
 
-`sbx setup ssh` writes a managed block to your `~/.ssh/config` that maps the
-`*.sbx` host pattern to the sandbox daemon. Connections don't use a network
-port or an SSH key:
+`sbx setup ssh` writes a managed block to your SSH config: `~/.ssh/config` on
+macOS and Linux, or `%USERPROFILE%\.ssh\config` on Windows. The block maps the
+`*.sbx` host pattern to the sandbox daemon. Connections don't use a network port
+or an SSH key:
 
 - A `ProxyCommand` relays the SSH stream to the daemon over its local socket
   (a Unix domain socket on macOS and Linux, a named pipe on Windows).
@@ -65,7 +66,7 @@ start it by hand. To start it yourself instead, use `sbx daemon start -d`; the
 `-d` flag runs it in the background rather than holding your terminal.
 
 `sbx setup ssh` is idempotent — you can re-run it at any time. It adds a
-managed block to `~/.ssh/config` similar to the following:
+managed block to your SSH config similar to the following:
 
 ```text
 # >>> docker sandboxes (managed) >>>
