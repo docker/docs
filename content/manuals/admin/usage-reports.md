@@ -23,7 +23,7 @@ Docker generates daily pull activity reports for your organization as CSV downlo
 
 ## Retrieve and download usage reports
 
-These procedures walk you through fetching and downloading usage reports for your organization. 
+These procedures walk you through fetching and downloading usage reports for your organization.
 
 ### Step 1. Create an OAT for the Reports API
 
@@ -32,14 +32,15 @@ org-scoped tokens designed for machine-to-machine access, making them
 suitable for automated report retrieval workflows.
 
 1. Go to [Docker Home](https://app.docker.com/) to [create your OAT](/enterprise/security/access-tokens/#create-an-organization-access-token). To add the report read scope:
-    - Go to **Resources** and select the **Organization scopes** drop-down.
-    - Select **Report read** from the drop-down.
+   - Go to **Resources** and select the **Organization scopes** drop-down.
+   - Select **Report read** from the drop-down.
 2. Set your variables so the report read OAT is associated with the correct organization:
 
    ```bash
    ORG="<your-org-name>"
    OAT="<your-organization-access-token>"
    ```
+
 3. Exchange the OAT for a JWT bearer token:
 
    ```bash
@@ -57,16 +58,16 @@ suitable for automated report retrieval workflows.
    ```
 
 You use this `TOKEN` value in the `Authorization: Bearer` header for all
-subsequent API calls. 
+subsequent API calls.
 
 > [!IMPORTANT]
-> The JWT token expires after a period, 
+> The JWT token expires after a period,
 > so re-run the OAT exchange step to
 > refresh the JWT token.
 
 ### Step 2. List usage reports types
 
-#### List available reports 
+#### List available reports
 
 Fetch the available report types and cadences for your organization:
 
@@ -128,7 +129,7 @@ Example response:
 
 Results are paginated with a default page size of 30 and a maximum of 100.
 
-Use the `page_size` and `page_token` query parameters to control pagination: 
+Use the `page_size` and `page_token` query parameters to control pagination:
 
 ```console
 $ curl -s "https://api.docker.com/enterprise-data/v1/orgs/$ORG/reports/usage_pulls/daily?page_size=10" \
@@ -196,23 +197,30 @@ Example response:
   "category": "usage_pulls",
   "fields": [
     {
-      "name": "date",
-      "type": "string",
-      "description": "The date of the pull event (YYYY-MM-DD)."
+      "name": "day",
+      "type": "date",
+      "description": "Date of the pull activity (UTC)"
     },
     {
-      "name": "repository",
+      "name": "image_repository",
       "type": "string",
-      "description": "The repository that was pulled."
+      "description": "Repository name, excluding namespace and tag"
     },
     {
-      "name": "pull_count",
+      "name": "tag",
+      "type": "string",
+      "description": "Image tag that was pulled"
+    },
+    {
+      "name": "event_count",
       "type": "integer",
-      "description": "Number of pulls for the repository on this date."
+      "description": "Total pull events (version_checks + data_downloads)"
     }
   ]
 }
 ```
+
+> The response is abbreviated. The full schema includes additional fields such as `hub_username`, `namespace`, `ip_address`, `os`, `user_agent`, `egress_size_bytes`, and others. Use the schema endpoint to retrieve the complete list for a given report.
 
 ## API reference
 

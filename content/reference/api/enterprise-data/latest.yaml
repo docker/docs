@@ -245,18 +245,18 @@ paths:
                   value:
                     category: usage_pulls
                     fields:
-                      - name: event_date
+                      - name: day
                         type: date
-                        description: Date the pull occurred (UTC).
-                      - name: repository
+                        description: Date of the pull activity (UTC).
+                      - name: image_repository
                         type: string
-                        description: Full repository name including namespace.
+                        description: Repository name, excluding namespace and tag.
                       - name: tag
                         type: string
                         description: Image tag that was pulled.
-                      - name: pull_count
+                      - name: event_count
                         type: integer
-                        description: Number of pulls for this repository and tag on this date.
+                        description: Total pull events (version_checks + data_downloads).
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -412,7 +412,7 @@ components:
           type: string
           description: Column name as it appears in the CSV header row.
           examples:
-            - event_date
+            - day
         type:
           type: string
           description: >
