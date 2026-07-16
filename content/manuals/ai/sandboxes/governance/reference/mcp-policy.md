@@ -153,6 +153,10 @@ don't require approval.
 
 - Tool and resource listing actions aren't Cedar-gated. Listings can include
   entries that a policy denies when the sandbox tries to use them.
+- Registration policy is evaluated when a server is registered. It doesn't
+  remove existing registrations or stop an already-loaded server by itself.
+  Govern existing registrations with use-time rules such as `invokeTool`,
+  `readResource`, and `getPrompt`.
 - Server command and argument rules using `resource.command` or `resource.args`
   apply only when the resolved server registration includes local stdio command
   details. Remote servers and metadata-resolved local servers can have empty
