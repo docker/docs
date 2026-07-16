@@ -220,7 +220,7 @@ See the [Installer flags](#installer-flags) section to see what flags the `insta
 
 #### Install from Microsoft Store
 
-Go to [Microsoft Store Docker Desktop page](https://apps.microsoft.com/detail/XP8CBJ40XLBWKX) and click the <key>Get</key> or <key>Install</key> button on the page.
+Go to [Microsoft Store Docker Desktop page](https://apps.microsoft.com/detail/XP8CBJ40XLBWKX) and select the **Get** or **Install** button on the page.
 
 > [!IMPORTANT]
 >
