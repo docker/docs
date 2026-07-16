@@ -127,7 +127,7 @@ organization policies on the next `sbx` command.
 > `sbx policy reset` deletes all locally configured policy rules. The command
 > prompts for confirmation before proceeding.
 
-#### Enforcement timing by policy type {#network-versus-filesystem-enforcement-timing}
+#### Enforcement timing by policy type
 
 Policy types differ in when a change takes effect after it reaches the
 developer machine:
