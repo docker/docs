@@ -28,7 +28,7 @@ $ docker agent run [config] [message...] [flags]
 | Flag                                    | Description                                                                                                                               |
 | --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | `-a, --agent <name>`                    | Run a specific agent from the config                                                                                                      |
-| `--yolo`                                | Auto-approve all tool calls                                                                                                               |
+| `--yolo`                                | Auto-approve tool calls (unless explicitly denied)                                                                                        |
 | `--model <ref>`                         | Override model(s). Use `provider/model` for all agents, or `agent=provider/model` for specific agents. Comma-separate multiple overrides. |
 | `--session <id>`                        | Resume a previous session. Supports relative refs (`-1` = last, `-2` = second to last). An explicit ID that does not exist yet is created with that ID, so a supervisor can own the session ID upfront and reuse it across runs. |
 | `-s, --session-db <path>`               | Path to the SQLite session database (default: `<data-dir>/session.db`, so `~/.cagent/session.db` unless `--data-dir` is set)              |
@@ -199,9 +199,27 @@ $ docker agent models --provider openai
 $ docker agent models --format json | jq
 ```
 
+### `docker agent toolsets`
+
+List the built-in toolset types available for use in an agent configuration. Each type can be referenced under `toolsets:` in an agent YAML file. Use this to discover what's available without leaving the terminal.
+
+```bash
+$ docker agent toolsets [flags]
+```
+
+| Flag             | Default | Description                       |
+| ---------------- | ------- | --------------------------------- |
+| `--format <fmt>` | `table` | Output format: `table` or `json`. |
+
+```bash
+# Examples
+$ docker agent toolsets                                # human-readable table
+$ docker agent toolsets --format json | jq             # machine-readable (type, summary, docs URL)
+```
+
 ### `docker agent setup`
 
-Set up a model interactively. Two paths: pick a cloud provider, paste its API key, and choose where to store it (macOS Keychain, `pass`, or the docker agent env file `~/.config/cagent/.env`), or check Docker Model Runner and pull a local model (no API key needed). Ends with the exact command to start chatting. Secret values are never printed.
+Set up a model interactively. Three paths: pick a cloud provider, paste its API key, and choose where to store it (macOS Keychain, `pass`, or the docker agent env file `~/.config/cagent/.env`); check Docker Model Runner and pull a local model (no API key needed); or register a custom OpenAI-compatible provider (endpoint URL, API format, and API key variable) saved to your [user configuration](../../providers/custom/index.md#global-providers-user-configuration) so its models work everywhere via `--model <name>/<model>`. Ends with the exact command to start chatting. Secret values are never printed.
 
 The wizard is also offered automatically when an interactive run finds no usable model (decline-able; set `DOCKER_AGENT_NO_SETUP=1` to suppress the offer).
 
@@ -479,7 +497,7 @@ $ docker agent run yolo-coder
 
 **Alias Options:** Aliases can include runtime options that apply automatically when used:
 
-- `--yolo` — Auto-approve all tool calls when running the alias
+- `--yolo` — Auto-approve tool calls (unless explicitly denied) when running the alias
 - `--model <ref>` — Override the model for the alias
 - `--hide-tool-results` — Hide tool call results in the TUI when running the alias
 - `--sandbox` — Always run the alias inside a [Docker sandbox](../../configuration/sandbox/index.md)

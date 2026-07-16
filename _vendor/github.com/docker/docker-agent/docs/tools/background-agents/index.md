@@ -30,7 +30,7 @@ The background agents tool lets an orchestrator dispatch work to sub-agents conc
 | `task`            | string | ✓        | Clear, concise description of the task the sub-agent should achieve.        |
 | `expected_output` | string | ✗        | Optional description of the result format the caller expects.               |
 
-`run_background_agent` returns a **task ID** string. Tools run by the sub-agent are pre-approved, so only dispatch to trusted sub-agents with well-scoped tasks.
+`run_background_agent` returns a **task ID** string. Tools run by the sub-agent inherit the parent session's permissions. Because background tasks run non-interactively, any tool call that would normally prompt the user for approval will be automatically denied. To allow background agents to run mutating tools, you must explicitly approve them in the parent session (e.g. via YOLO mode or explicit allow rules).
 
 ### `view_background_agent` and `stop_background_agent` parameters
 

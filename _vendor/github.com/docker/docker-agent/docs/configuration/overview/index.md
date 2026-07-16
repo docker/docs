@@ -19,7 +19,7 @@ A docker-agent config has these main sections:
 
 ```bash
 # 1. Version — configuration schema version (optional but recommended)
-version: 10
+version: 12
 
 # 2. Metadata — optional agent metadata for distribution
 metadata:
@@ -34,7 +34,7 @@ models:
     model: claude-sonnet-4-5
     max_tokens: 64000
 
-# 4. Agents — define AI agents with their behavior
+# 4. Agents — define AI agents with their behavior (at least one is required)
 agents:
   root:
     model: claude
@@ -294,10 +294,10 @@ For YAML editor autocompletion and validation, use the [Docker Agent JSON Schema
 
 ## Config Versioning
 
-docker-agent configs are versioned. The current version is `10`. Add the version at the top of your config:
+docker-agent configs are versioned. The current version is `12`. Add the version at the top of your config:
 
 ```yaml
-version: 10
+version: 12
 
 agents:
   root:
@@ -306,6 +306,14 @@ agents:
 ```
 
 When you load an older config, docker-agent automatically migrates it to the latest schema. It's recommended to include the version to ensure consistent behavior.
+
+If you use a config key that requires a newer schema version, Docker Agent will fail with a strict-parse error and include a hint like:
+
+```text
+hint: this key is supported by config version 12; update the top-level 'version' field (currently 11)
+```
+
+Bump the `version` field as directed to enable the new key.
 
 ## Metadata Section
 

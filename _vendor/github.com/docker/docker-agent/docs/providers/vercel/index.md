@@ -28,8 +28,10 @@ built-in support for Vercel AI Gateway as an alias provider.
 ## Usage
 
 Vercel AI Gateway model IDs use a `creator/model` form (for example
-`openai/gpt-5` or `anthropic/claude-sonnet-4.5`); the gateway routes each
-request to the underlying provider.
+`openai/gpt-5.6-sol` or `anthropic/claude-sonnet-4.5`); the gateway routes each
+request to the underlying provider. The gateway lists explicit variant slugs
+only (`openai/gpt-5.6-sol`, `-terra`, `-luna`) — there is no unsuffixed
+`openai/gpt-5.6` alias on the gateway.
 
 ### Inline Syntax
 
@@ -38,7 +40,7 @@ The simplest way to use Vercel AI Gateway:
 ```yaml
 agents:
   root:
-    model: vercel/openai/gpt-5
+    model: vercel/openai/gpt-5.6-sol
     description: Assistant using Vercel AI Gateway
     instruction: You are a helpful assistant.
 ```
@@ -51,8 +53,7 @@ For more control over parameters:
 models:
   vercel_model:
     provider: vercel
-    model: openai/gpt-5
-    temperature: 0.7
+    model: openai/gpt-5.6-sol
     max_tokens: 8192
 
 agents:
@@ -70,7 +71,9 @@ the current model list, IDs, and pricing.
 
 | Model | Description |
 | --- | --- |
-| `openai/gpt-5` | OpenAI GPT-5 routed through the gateway |
+| `openai/gpt-5.6-sol` | OpenAI GPT-5.6 Sol (frontier) routed through the gateway |
+| `openai/gpt-5.6-terra` | OpenAI GPT-5.6 Terra (workhorse) routed through the gateway |
+| `openai/gpt-5.6-luna` | OpenAI GPT-5.6 Luna (high-volume) routed through the gateway |
 | `anthropic/claude-sonnet-4.5` | Anthropic Claude Sonnet routed through the gateway |
 | `google/gemini-2.5-flash` | Google Gemini routed through the gateway |
 

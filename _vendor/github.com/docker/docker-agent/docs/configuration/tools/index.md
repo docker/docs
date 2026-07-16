@@ -131,7 +131,7 @@ toolsets:
 | ----------------------- | ------- | --------------------------------------------------------------------------------------------------------------------- |
 | `remote.url`            | string  | URL of the MCP server. Accepts `https://`, `http://`, and `unix://` (Unix domain socket) schemes.                     |
 | `remote.transport_type` | string  | `streamable` or `sse`                                                                                                 |
-| `remote.headers`        | object  | HTTP headers (typically for auth)                                                                                     |
+| `remote.headers`        | object  | HTTP headers sent on every request. Values support `${env.VAR}` and `${headers.NAME}` placeholders, resolved per request. `${env.VAR}` reads an environment variable; `${headers.NAME}` forwards a header from the caller's incoming request (useful when docker-agent runs as an API server). |
 | `allow_private_ips`     | boolean | Permit remote MCP OAuth helper requests to dial non-public IP addresses. Use only for trusted internal servers.        |
 
 ## Auto-Installing Tools
