@@ -36,8 +36,6 @@ extensions run in the isolated sandbox.
 
 - The first connection installs the editor server inside the sandbox, so it
   can take a moment. Later connections are faster.
-- SSH port forwarding can reach services on the sandbox's loopback address.
-  Other destination addresses aren't supported.
 
 ## Related
 

@@ -144,8 +144,6 @@ This stops the daemon and closes any live connections.
 SSH access is experimental. The following limitations apply:
 
 - SFTP file transfer is supported on Linux hosts only.
-- SSH port forwarding can reach services on the sandbox's loopback address.
-  Other destination addresses aren't supported.
 
 ## Connect a specific tool
 
