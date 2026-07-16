@@ -19,15 +19,23 @@ environment instead of on your host.
 
 - SSH access set up. See [Editor and app integrations](_index.md#enable-ssh-access).
 - The Codex app installed.
+- An existing sandbox created from the Codex template. The template includes
+  the `codex` command required by the app's remote server.
 
 ## Connect
 
-1. In the Codex app, add a new SSH connection.
-2. Enter the sandbox host, `<name>.sbx`. Leave port and identity settings
-   empty — the managed SSH config that `sbx setup ssh` wrote supplies them.
-3. Connect. Codex runs against the sandbox over SSH.
+Create a named Codex sandbox for the current directory if you don't already
+have one:
 
-<!-- TODO: confirm the exact Codex app connection flow and add screenshots -->
+```console
+$ sbx create --name demo codex .
+```
+
+Follow the Codex instructions to
+[connect to an SSH host](https://learn.chatgpt.com/docs/remote-connections#connect-to-an-ssh-host).
+Add the connection manually and enter the sandbox hostname, such as `demo.sbx`,
+as the endpoint. Leave port and identity settings empty because the managed SSH
+config supplies them.
 
 ## Related
 

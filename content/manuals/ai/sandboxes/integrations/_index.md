@@ -35,8 +35,8 @@ port or an SSH key:
   triggers a host-key mismatch.
 
 Because SSH terminates at the daemon, no SSH server runs inside the sandbox.
-Connecting to `<name>.sbx` starts the sandbox if it isn't running, and creates
-it first if it doesn't exist yet.
+Connecting to `<name>.sbx` starts the sandbox if it isn't running. The sandbox
+must already exist.
 
 ## Prerequisites
 
@@ -88,6 +88,27 @@ You don't edit this block by hand. The `User _default_user_` sentinel tells the
 daemon to log you in as the sandbox image's default user, so your host username
 is never sent.
 
+The wildcard entry configures how SSH clients connect, but it doesn't add
+individual sandbox names to application host pickers. Enter the sandbox
+hostname, such as `demo.sbx`, manually when you configure an integration.
+
+## Create or identify a sandbox
+
+SSH connections require an existing sandbox. To create a named shell sandbox
+for the current directory:
+
+```console
+$ sbx create --name demo shell .
+```
+
+To identify an existing sandbox, list your sandboxes:
+
+```console
+$ sbx ls
+```
+
+Use the sandbox name as the SSH hostname with the `.sbx` suffix.
+
 ## Connect
 
 Open a shell in a sandbox named `demo`:
@@ -123,9 +144,8 @@ This stops the daemon and closes any live connections.
 SSH access is experimental. The following limitations apply:
 
 - SFTP file transfer is supported on Linux hosts only.
-- Port forwarding is limited to the sandbox's loopback address. To expose a
-  sandbox port to your host, use
-  [`sbx ports`](../usage.md#accessing-services-in-the-sandbox) instead.
+- SSH port forwarding can reach services on the sandbox's loopback address.
+  Other destination addresses aren't supported.
 
 ## Connect a specific tool
 

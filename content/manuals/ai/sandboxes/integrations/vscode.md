@@ -21,9 +21,7 @@ run in the isolated sandbox.
 ## Connect
 
 1. Open the Command Palette and run **Remote-SSH: Connect to Host**.
-2. Select the sandbox host, `<name>.sbx`. Because `sbx setup ssh` added it to
-   your SSH config, it appears in the host list automatically. You can also
-   type it in directly.
+2. Enter the sandbox host manually as `<name>.sbx`.
 3. VS Code opens a new window connected to the sandbox. Open a folder from the
    sandbox workspace to start working.
 
@@ -33,9 +31,23 @@ run in the isolated sandbox.
 
 - The first connection installs the VS Code server inside the sandbox, so it
   can take a moment. Later connections are faster.
-- Port forwarding is limited to the sandbox's loopback address. To reach a
-  sandbox port from your host, use
-  [`sbx ports`](../usage.md#accessing-services-in-the-sandbox).
+- SSH port forwarding can reach services on the sandbox's loopback address.
+  Other destination addresses aren't supported.
+
+### Reconnect loop on macOS
+
+Affected versions of VS Code can enter an infinite reconnect loop on macOS. If
+this happens, set `remote.SSH.useLocalServer` to `false` in your VS Code user
+settings:
+
+```json
+{
+  "remote.SSH.useLocalServer": false
+}
+```
+
+For details, see
+[microsoft/vscode-remote-release#11672](https://github.com/microsoft/vscode-remote-release/issues/11672).
 
 ## Related
 
