@@ -125,47 +125,20 @@ sandbox through Docker's [MCP gateway](../mcp-gateway.md). They are
 organization policies written in Cedar using the `MCP` namespace, rather than
 the network and filesystem rule format.
 
-Cedar evaluates each MCP request against a principal, action, resource, and
-context. Admins write policy statements for the action, resource, and context.
-Policy scope supplies the principal, so a statement that tries to match a
-specific user, team, tenant, or role in the principal doesn't match.
+MCP policy applies when a developer registers a server and when an agent uses
+the MCP gateway. Registration rules control future `sbx mcp add` operations.
+Use-time rules control tool calls, gateway meta-tools, resource reads, and
+prompt retrieval from servers that are already registered or loaded.
 
-Governed MCP actions are default deny: an MCP request is blocked unless a
-matching `permit` allows it. A matching `forbid` overrides any `permit`,
-including a permit that requires approval.
+Governed MCP activity is default deny: a request is blocked unless a matching
+`permit` allows it. A matching `forbid` overrides any `permit`, including a
+permit that requires approval. Policy scope supplies the principal, so use
+organization or team scope instead of matching users, teams, tenants, or roles
+in Cedar.
 
-MCP policies can match actions such as:
-
-- `register`: Register an MCP server
-- `invokeTool`: Call an MCP tool
-- `invokePrimordial`: Call a gateway meta-tool
-- `readResource`: Read an MCP resource
-- `getPrompt`: Retrieve an MCP prompt
-
-Resources are referenced with `MCP` entity types, such as `MCP::Server`,
-`MCP::Tool`, `MCP::Resource`, `MCP::Prompt`, and `MCP::Primordial`. For example,
-a tool policy can match the server that exposes the tool, the tool's bare name,
-and server-declared tool annotations such as `readOnly` or `destructive`.
-
+For representative policies, see [MCP access policies](access-controls/mcp.md).
 For exact action, resource, context, and approval behavior, see the
 [MCP policy reference](reference/mcp-policy.md).
-
-The following policy allows tools that the server declares read-only, and
-requires approval before a non-read-only tool can run:
-
-```plaintext
-permit (principal, action == MCP::Action::"invokeTool", resource)
-when { resource.readOnly == true };
-
-@requireApproval("write tool call")
-permit (principal, action == MCP::Action::"invokeTool", resource)
-when { resource.readOnly == false };
-```
-
-The `@requireApproval` annotation applies to `permit` statements. When a request
-matches that permit and no matching `forbid` overrides it, the sandbox asks the
-user to approve before the request runs. If the request can't be presented to a
-user for approval, it is denied.
 
 ## Rule evaluation
 

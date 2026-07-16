@@ -152,6 +152,6 @@ developer machine:
   rules apply to subsequent governed MCP requests through the gateway.
 
 To apply a filesystem policy change immediately, remove the running sandbox
-and create a new one. To block an existing MCP registration after it has been
-loaded into a sandbox, add use-time rules for the registered server name. For
-examples, see [MCP access policies](mcp.md#control-server-registration).
+and create a new one. To prevent use of an MCP server that is already registered
+or loaded, add use-time rules for the registered server name. For examples, see
+[Withdraw server access](mcp.md#withdraw-server-access).
