@@ -23,18 +23,20 @@ grid:
     link: /billing/
 ---
 
-As an organization owner, you manage your organization's membership, access, and product usage. You can invite members, group
-them into teams, assign (or revoke) licenses and seats, and make changes to access to Docker
-products.
+As an organization owner, you manage your organization's membership, access,
+and product usage. You can invite members, group them into teams, assign or
+revoke licenses and seats, and change access to Docker products.
 
 ## Managing your organization
 
-You manage your organization from [Docker Home](https://app.docker.com) and must be assigned
-the [organization owner role](/manuals/enterprise/security/roles-and-permissions/_index.md).
+You manage your organization from [Docker Home](https://app.docker.com) and
+must be assigned the
+[organization owner role](/manuals/enterprise/security/roles-and-permissions/_index.md).
 
 ## Seats and licenses
 
-Seats and licenses both control access, but they apply to different kinds of plans. The following table summarizes the difference.
+Seats and licenses both control access, but they apply to different kinds of
+plans. The following table summarizes the difference.
 
 | Entitlement | What it grants                                          | Applies to                                       | Managed from |
 | ----------- | ------------------------------------------------------- | ------------------------------------------------ | ------------ |

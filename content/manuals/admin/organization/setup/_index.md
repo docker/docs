@@ -37,15 +37,18 @@ an existing user account into an organization.
 
 ## Setting up your organization
 
-You set up your organization from [Docker Home](https://app.docker.com) and must be assigned
-the [organization owner role](/manuals/enterprise/security/roles-and-permissions/_index.md). Setting up an organization happens in broad phases:
+You set up your organization from [Docker Home](https://app.docker.com) and
+must be assigned the
+[organization owner role](/manuals/enterprise/security/roles-and-permissions/_index.md).
+Setting up an organization happens in broad phases:
 
-1. You can create a new organization, or convert an existing user account into one.
-  Choose the option that fits how you already use Docker; you don't need both.
+1. You can create a new organization, or convert an existing user account
+   into one. Choose the option that fits how you already use Docker. You
+   don't need both.
 1. After creating your organization, you must onboard it by inviting members,
-  securing authentication, and enforcing sign-in. These steps build on each
-  other, so follow them in order.
-1. You can update your organization's general information whenever it changes at any time.
+   securing authentication, and enforcing sign-in. These steps build on each
+   other, so follow them in order.
+1. You can update your organization's general information whenever it changes.
 
 ## What's next
 
