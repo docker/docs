@@ -112,9 +112,10 @@ request matches the annotated `permit`, the gateway sends an
 governed request. In a human-driven client, the person operating the agent sees
 the prompt and decides whether to proceed.
 
-The following policy adds this confirmation to the previous policy for
-non-read-only tools. The annotation string becomes the reason shown in the
-elicitation:
+The following policy requires confirmation for non-read-only tools on a server
+registered as `example`. Use it alongside any permits needed to register the
+server or use its other capabilities. The annotation string becomes the reason
+shown in the elicitation:
 
 ```plaintext
 @requireApproval("non-read-only tool call")
@@ -163,16 +164,19 @@ execution context that can't relay an elicitation, including calls from inside
 
 ## Withdraw server access
 
-To withdraw access from a server that broader rules permit, address both
-enforcement points. First, prevent future registrations of the server by
-matching its identity URL:
+To withdraw access from a server that broader rules permit, block it at
+registration and at use time. Registration policy controls future `sbx mcp add`
+operations, while use-time policy controls requests from servers that are
+already registered or loaded.
+
+Prevent future registrations of the server by matching its identity URL:
 
 ```plaintext
 forbid (principal, action == MCP::Action::"register", resource)
 when { resource.identityURL == "https://mcp.example.com/mcp" };
 ```
 
-Then deny use-time requests for each registered name that refers to the server:
+Deny use-time requests for each registered name that refers to the server:
 
 ```plaintext
 forbid (principal, action == MCP::Action::"invokeTool", resource)
