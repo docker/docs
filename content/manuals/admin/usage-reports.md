@@ -31,7 +31,7 @@ OATs are
 org-scoped tokens designed for machine-to-machine access, making them
 suitable for automated report retrieval workflows.
 
-1. Go to [Docker Home](https://app.docker.com/) to [create your OAT](/manuals/enterprise/security/access-tokens/#create-an-organization-access-token). To add the report read scope:
+1. Go to [Docker Home](https://app.docker.com/) to [create your OAT](/enterprise/security/access-tokens/#create-an-organization-access-token). To add the report read scope:
    - Go to **Resources** and select the **Organization scopes** drop-down.
    - Select **Report read** from the drop-down.
 2. Set your variables so the report read OAT is associated with the correct organization:
