@@ -36,26 +36,23 @@ with the **Governance** permissions and assign it to a user or team.
 ## Create a policy
 
 Manage policies from the **AI Platform** section in the left-hand navigation
-of [Docker Home](https://app.docker.com). Network and filesystem policies are
-managed separately, under **Network access** and **Filesystem access**.
-
-The steps in this section cover network and filesystem policies. MCP policies
-use Cedar rather than the network and filesystem rule form. For MCP examples, see
-[MCP access policies](mcp.md).
+of [Docker Home](https://app.docker.com).
 
 To create a policy:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your
    organization.
 1. In the left-hand navigation, expand **AI Platform** and select
-   **Network access** or **Filesystem access**.
+   **Network access**, **Filesystem access**, or **MCP access**.
 1. Select **Create policy**.
 1. Enter a **Policy name**.
 1. Set the **Scope** to **Organization** or **Teams**. If you select **Teams**,
    choose the teams the policy applies to. See
    [Scope policies to teams](#scope-policies-to-teams).
-1. Select **Add rule** to add each rule. For rule syntax, use the relevant
-   access-control page in [Choose a policy type](#choose-a-policy-type).
+1. Define the policy rules. For network and filesystem policies, select
+   **Add rule** for each rule. For MCP policies, enter Cedar statements in the
+   policy editor. For syntax and examples, use the relevant access-control page
+   in [Choose a policy type](#choose-a-policy-type).
 
 Existing policies are listed with their name, scope, rule count, and last
 update. Use the action menu (⋮) to edit or delete a policy.
