@@ -37,10 +37,12 @@ Confirm that you can connect to the sandbox from a terminal:
 $ ssh demo.sbx
 ```
 
-Follow the Codex instructions to
+In the Codex app, open **Settings > Connections** and add an SSH connection
+manually. Enter the sandbox hostname, such as `demo.sbx`, as the host, then
+choose the sandbox workspace folder as the remote project.
+
+For more connection options, see the Codex instructions to
 [connect to an SSH host](https://learn.chatgpt.com/docs/remote-connections#connect-to-an-ssh-host).
-Add the connection manually and enter the sandbox hostname, such as `demo.sbx`,
-as the endpoint. The managed SSH config supplies the connection settings.
 
 ## Related
 
