@@ -484,10 +484,10 @@ defaults. Version kit specs and template definitions with the project, and
 publish reusable template images to your registry. This gives each developer the
 same starting environment.
 
-Use [organization governance](governance/org.md) for rules that admins need to
-apply across developers, such as network and filesystem policies. Organization
-rules are managed in the Docker Admin Console, take precedence over local
-policy, and require a separate paid subscription.
+Use [organization policies](governance/access-controls/organization.md) for
+controls that organization administrators apply across developers, such as
+network, filesystem, and MCP policies. Organization policies take precedence
+over local policy and require a separate paid subscription.
 
 You can use both. Templates and kits describe the development environment;
 governance defines the boundaries it runs within.

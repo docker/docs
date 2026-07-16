@@ -73,13 +73,12 @@ Server names can contain letters, numbers, dots, hyphens, and underscores.
 The `--url` flag can point to different kinds of input. The execution location
 depends on what you register:
 
-- **Remote endpoint URL**: The URL is the running MCP server endpoint. The
-  server runs remotely, and the sandbox gateway connects to it.
-- **Metadata URL with `--local`**: The URL returns a registry entry,
-  `server.json`, or `server.yaml` that describes an OCI-packaged stdio server.
-  `sbx` resolves the image and runs it on the host with Docker.
-- **Explicit command**: `sbx` runs the command on the host as a stdio MCP
-  server.
+- A remote endpoint URL identifies a running MCP server. The server runs
+  remotely, and the sandbox gateway connects to it.
+- A metadata URL with `--local` returns a registry entry, `server.json`, or
+  `server.yaml` that describes an OCI-packaged stdio server. `sbx` resolves the
+  image and runs it on the host with Docker.
+- An explicit command runs on the host as a stdio MCP server.
 
 Local stdio servers run on the host, not inside the sandbox. The agent inside
 the sandbox connects only to the MCP gateway.
