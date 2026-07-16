@@ -20,17 +20,20 @@ extensions run in the isolated sandbox.
 ## Prerequisites
 
 - SSH access set up. See [Editor and app integrations](_index.md#enable-ssh-access).
-- Cursor's Remote - SSH support installed. Cursor bundles a Remote - SSH
-  extension compatible with the VS Code one.
+- Cursor's Remote - SSH support installed.
 
 ## Connect
+
+Confirm that you can connect to the sandbox from a terminal:
+
+```console
+$ ssh demo.sbx
+```
 
 1. Open the Command Palette and run **Remote-SSH: Connect to Host**.
 2. Enter the sandbox host manually as `<name>.sbx`.
 3. Cursor opens a new window connected to the sandbox. Open a folder from the
    sandbox workspace to start working.
-
-<!-- TODO: add screenshot of the Cursor Remote-SSH host picker showing <name>.sbx -->
 
 ## Notes
 

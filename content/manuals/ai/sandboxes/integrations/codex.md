@@ -31,11 +31,16 @@ have one:
 $ sbx create --name demo codex .
 ```
 
+Confirm that you can connect to the sandbox from a terminal:
+
+```console
+$ ssh demo.sbx
+```
+
 Follow the Codex instructions to
 [connect to an SSH host](https://learn.chatgpt.com/docs/remote-connections#connect-to-an-ssh-host).
 Add the connection manually and enter the sandbox hostname, such as `demo.sbx`,
-as the endpoint. Leave port and identity settings empty because the managed SSH
-config supplies them.
+as the endpoint. The managed SSH config supplies the connection settings.
 
 ## Related
 

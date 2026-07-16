@@ -20,12 +20,16 @@ run in the isolated sandbox.
 
 ## Connect
 
-1. Open the Command Palette and run **Remote-SSH: Connect to Host**.
-2. Enter the sandbox host manually as `<name>.sbx`.
-3. VS Code opens a new window connected to the sandbox. Open a folder from the
-   sandbox workspace to start working.
+Confirm that you can connect to the sandbox from a terminal:
 
-<!-- TODO: add screenshot of the Remote-SSH host picker showing <name>.sbx -->
+```console
+$ ssh demo.sbx
+```
+
+Follow the VS Code instructions to
+[connect to a remote host](https://code.visualstudio.com/docs/remote/ssh#_connect-to-a-remote-host).
+When prompted for the host, enter the sandbox hostname, such as `demo.sbx`,
+manually. The managed SSH config supplies the connection settings.
 
 ## Notes
 
