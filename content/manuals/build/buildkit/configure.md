@@ -6,8 +6,8 @@ keywords: build, buildkit, configuration, buildx, network, cni, registry
 
 If you create a `docker-container` or `kubernetes` builder with Buildx, you can
 apply a custom [BuildKit configuration](toml-configuration.md) by passing the
-[`--config` flag](/reference/cli/docker/buildx/create.md#config) to
-the `docker buildx create` command.
+[`--buildkitd-config` flag](/reference/cli/docker/buildx/create/#buildkitd-config)
+to the `docker buildx create` command.
 
 ## Registry mirror
 
@@ -34,7 +34,7 @@ defining a mirror for `docker.io` (Docker Hub) to `mirror.gcr.io`.
    $ docker buildx create --use --bootstrap \
      --name mybuilder \
      --driver docker-container \
-     --config /etc/buildkitd.toml
+     --buildkitd-config /etc/buildkitd.toml
    ```
 
 3. Build an image:
@@ -96,7 +96,7 @@ configuration.
    $ docker buildx create --use --bootstrap \
      --name mybuilder \
      --driver docker-container \
-     --config /etc/buildkitd.toml
+     --buildkitd-config /etc/buildkitd.toml
    ```
 
 3. Inspect the builder's configuration file (`/etc/buildkit/buildkitd.toml`), it
@@ -136,9 +136,29 @@ $ docker buildx build --push --tag myregistry.com/myimage:latest .
 ## CNI networking
 
 CNI networking for builders can be useful for dealing with network port
-contention during concurrent builds. CNI is [not yet](https://github.com/moby/buildkit/issues/28)
-available in the default BuildKit image. But you can create your own image that
-includes CNI support.
+contention during concurrent builds.
+
+### Bridge networking
+
+The BuildKit image ships with a built-in bridge network provider that uses a
+minimal set of bundled CNI plugins, so you don't need to build a custom image
+or supply your own CNI configuration. To use it, set the worker network mode to
+`bridge` when you create the builder:
+
+```console
+$ docker buildx create --use --bootstrap \
+  --name mybuilder \
+  --driver docker-container \
+  --buildkitd-flags "--oci-worker-net=bridge"
+```
+
+BuildKit creates a `buildkit0` bridge with a default subnet of `10.10.0.0/16`,
+and cleans up the bridge automatically when the daemon shuts down.
+
+### Custom CNI configuration
+
+For more control over networking, build a custom BuildKit image with your own
+CNI configuration and plugins.
 
 The following Dockerfile example shows a custom BuildKit image with CNI support.
 It uses the [CNI config for integration tests](https://github.com/moby/buildkit/blob/master//hack/fixtures/cni.json)
@@ -166,7 +186,7 @@ ADD https://raw.githubusercontent.com/moby/buildkit/${BUILDKIT_VERSION}/hack/fix
 ```
 
 Now you can build this image, and create a builder instance from it using
-[the `--driver-opt image` option](/reference/cli/docker/buildx/create.md#driver-opt):
+[the `--driver-opt image` option](/reference/cli/docker/buildx/create/#driver-opt):
 
 ```console
 $ docker buildx build --tag buildkit-cni:local --load .
@@ -183,7 +203,7 @@ $ docker buildx create --use --bootstrap \
 
 You can limit the parallelism of the BuildKit solver, which is particularly useful
 for low-powered machines, using a [BuildKit configuration](toml-configuration.md)
-while creating a builder with the [`--config` flags](/reference/cli/docker/buildx/create.md#config).
+while creating a builder with the [`--buildkitd-config` flag](/reference/cli/docker/buildx/create/#buildkitd-config).
 
 ```toml
 # /etc/buildkitd.toml
@@ -198,7 +218,7 @@ that will use this BuildKit configuration to limit parallelism.
 $ docker buildx create --use \
   --name mybuilder \
   --driver docker-container \
-  --config /etc/buildkitd.toml
+  --buildkitd-config /etc/buildkitd.toml
 ```
 
 ### TCP connection limit

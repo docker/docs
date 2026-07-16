@@ -4,9 +4,11 @@ weight: 20
 description: Learn about Dockerfiles and how to use them with Docker Images to build and package your software
 keywords: build, buildx, buildkit, getting started, dockerfile
 aliases:
-- /build/hellobuild/
-- /build/building/packaging/
+  - /build/hellobuild/
+  - /build/building/packaging/
 ---
+
+<!-- vale Docker.We = NO -->
 
 ## Dockerfile
 
@@ -19,8 +21,8 @@ reference in the [Dockerfile reference](/reference/dockerfile.md).
 
 Here are the most common types of instructions:
 
-| Instruction                                                        | Description                                                                                                                                                                                              |
-| ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Instruction                                               | Description                                                                                                                                                                                              |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`FROM <image>`](/reference/dockerfile.md#from)           | Defines a base for your image.                                                                                                                                                                           |
 | [`RUN <command>`](/reference/dockerfile.md#run)           | Executes any commands in a new layer on top of the current image and commits the result. `RUN` also has a shell form for running commands.                                                               |
 | [`WORKDIR <directory>`](/reference/dockerfile.md#workdir) | Sets the working directory for any `RUN`, `CMD`, `ENTRYPOINT`, `COPY`, and `ADD` instructions that follow it in the Dockerfile.                                                                          |
@@ -41,7 +43,7 @@ Some projects may need distinct Dockerfiles for specific purposes. A common
 convention is to name these `<something>.Dockerfile`. You can specify the
 Dockerfile filename using the `--file` flag for the `docker build` command.
 Refer to the
-[`docker build` CLI reference](/reference/cli/docker/buildx/build.md#file)
+[`docker build` CLI reference](/reference/cli/docker/buildx/build/#file)
 to learn about the `--file` flag.
 
 > [!NOTE]
@@ -146,7 +148,7 @@ use this notation to name your images. There are many public images you can
 leverage in your projects, by importing them into your build steps using the
 Dockerfile `FROM` instruction.
 
-[Docker Hub](https://hub.docker.com/search?image_filter=official&q=&type=image)
+[Docker Hub](https://hub.docker.com/search?badges=official)
 contains a large set of official images that you can use for this purpose.
 
 ### Environment setup
@@ -167,7 +169,7 @@ the container.
 Note the `# install app dependencies` line. This is a comment. Comments in
 Dockerfiles begin with the `#` symbol. As your Dockerfile evolves, comments can
 be instrumental to document how your Dockerfile works for any future readers
-and editors of the file, including your future self!
+and editors of the file, including your future self.
 
 > [!NOTE]
 >
@@ -194,7 +196,7 @@ use the command to install the flask web framework.
 
 The next instruction uses the
 [`COPY` instruction](/reference/dockerfile.md#copy) to copy the
-`hello.py` file from the local build context into the root directory of our image. 
+`hello.py` file from the local build context into the root directory of our image.
 
 ```dockerfile
 COPY hello.py /
@@ -281,5 +283,5 @@ Docker host.
 
 > [!TIP]
 >
-> Want a better editing experience for Dockerfiles in VS Code?
-> Check out the [Docker VS Code Extension (Beta)](https://marketplace.visualstudio.com/items?itemName=docker.docker) for linting, code navigation, and vulnerability scanning.
+> To improve linting, code navigation, and vulnerability scanning of your Dockerfiles in Visual Studio Code
+> see the [Docker DX](https://marketplace.visualstudio.com/items?itemName=docker.docker) extension.

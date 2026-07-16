@@ -42,10 +42,10 @@ Before you can run the application, you need to get the application source code 
    ├── getting-started-app/
    │ ├── .dockerignore
    │ ├── package.json
+   │ ├── package-lock.json   
    │ ├── README.md
    │ ├── spec/
    │ ├── src/
-   │ └── yarn.lock
    ```
 
 ## Build the app's image
@@ -58,18 +58,21 @@ To build the image, you'll need to use a Dockerfile. A Dockerfile is simply a te
    ```dockerfile
    # syntax=docker/dockerfile:1
 
-   FROM node:lts-alpine
+   FROM node:24-alpine
    WORKDIR /app
    COPY . .
-   RUN yarn install --production
+   RUN npm install --omit=dev
    CMD ["node", "src/index.js"]
    EXPOSE 3000
    ```
+   This Dockerfile does the following:
 
-   This Dockerfile starts off with a `node:lts-alpine` base image, a
-   light-weight Linux image that comes with Node.js and the Yarn package
-   manager pre-installed. It copies all of the source code into the image,
-   installs the necessary dependencies, and starts the application.
+   - Uses `node:24-alpine` as the base image, a lightweight Linux image with Node.js pre-installed
+   - Sets `/app` as the working directory
+   - Copies source code into the image
+   - Installs the necessary dependencies
+   - Specifies the command to start the application
+   - Documents that the app listens on port 3000
 
 2. Build the image using the following commands:
 
@@ -85,9 +88,9 @@ To build the image, you'll need to use a Dockerfile. A Dockerfile is simply a te
    $ docker build -t getting-started .
    ```
 
-   The `docker build` command uses the Dockerfile to build a new image. You might have noticed that Docker downloaded a lot of "layers". This is because you instructed the builder that you wanted to start from the `node:lts-alpine` image. But, since you didn't have that on your machine, Docker needed to download the image.
+   The `docker build` command uses the Dockerfile to build a new image. You might have noticed that Docker downloaded a lot of "layers". This is because you instructed the builder that you wanted to start from the `node:24-alpine` image. But, since you didn't have that on your machine, Docker needed to download the image.
 
-   After Docker downloaded the image, the instructions from the Dockerfile copied in your application and used `yarn` to install your application's dependencies. The `CMD` directive specifies the default command to run when starting a container from this image.
+   After Docker downloaded the image, the instructions from the Dockerfile copied in your application and used `npm` to install your application's dependencies.
 
    Finally, the `-t` flag tags your image. Think of this as a human-readable name for the final image. Since you named the image `getting-started`, you can refer to that image when you run a container.
 

@@ -4,11 +4,10 @@ keywords: tensorflow.js, machine learning, ml, mediapipe, blazeface, face detect
 title: Face detection with TensorFlow.js
 summary: |
   This guide explains how to run TensorFlow.js in Docker containers.
-tags: [ai]
-languages: [js]
 aliases:
   - /guides/use-case/tensorflowjs/
 params:
+  tags: [ai]
   time: 20 minutes
 ---
 
@@ -43,7 +42,7 @@ pre-trained models, facilitating a wide range of ML applications directly in web
 environments. TensorFlow.js offers efficient computation, making sophisticated
 ML tasks accessible to web developers without deep ML expertise.
 
-## Why Use TensorFlow.js and Docker together?
+## Why use TensorFlow.js and Docker together?
 
 - Environment consistency and simplified deployment: Docker packages
   TensorFlow.js applications and their dependencies into containers, ensuring
@@ -293,10 +292,10 @@ gui
   .add(state, "backend", ["wasm", "webgl", "cpu"])
   .onChange(async (backend) => {
     await tf.setBackend(backend);
-    addFlagLables();
+    addFlagLabels();
   });
 
-async function addFlagLables() {
+async function addFlagLabels() {
   if (!document.querySelector("#simd_supported")) {
     const simdSupportLabel = document.createElement("div");
     simdSupportLabel.id = "simd_supported";
@@ -385,7 +384,7 @@ const renderPrediction = async () => {
 
 const setupPage = async () => {
   await tf.setBackend(state.backend);
-  addFlagLables();
+  addFlagLabels();
   await setupCamera();
   video.play();
 
@@ -512,7 +511,7 @@ others, enabling seamless integration into diverse projects. It also promotes
 the adoption of your containerized solutions, broadening their impact across the
 developer ecosystem. To share your image:
 
-1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) or sign in to [Docker Hub](https://hub.docker.com).
+1. [Sign up](https://www.docker.com/pricing?ref=Docs&refAction=DocsGuidesTensorflowjs) or sign in to [Docker Hub](https://hub.docker.com).
 
 2. Rebuild your image to include the changes to your application. This time,
    prefix the image name with your Docker ID. Docker uses the name to determine

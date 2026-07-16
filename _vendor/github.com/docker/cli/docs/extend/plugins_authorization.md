@@ -74,9 +74,14 @@ The sequence diagrams below depict an allow and deny authorization flow:
 Each request sent to the plugin includes the authenticated user, the HTTP
 headers, and the request/response body. Only the user name and the
 authentication method used are passed to the plugin. Most importantly, no user
-credentials or tokens are passed. Finally, not all request/response bodies
-are sent to the authorization plugin. Only those request/response bodies where
-the `Content-Type` is either `text/*` or `application/json` are sent.
+credentials or tokens are passed.
+
+> [!NOTE]
+> Authorization plugins enforce requests to the Docker daemon's HTTP API only. gRPC method
+> calls, whether dispatched natively or upgraded through `POST /grpc`, are not subject to authorization.
+> Furthermore, HTTP request/response bodies where the `Content-Type` is `application/json` are forwarded;
+> bodies of any other type are not visible to the plugin and cannot be used for enforcement,
+> even though the daemon acts on this data.
 
 For commands that can potentially hijack the HTTP connection (`HTTP
 Upgrade`), such as `exec`, the authorization plugin is only called for the
@@ -85,6 +90,35 @@ not applied to the rest of the flow. Specifically, the streaming data is not
 passed to the authorization plugins. For commands that return chunked HTTP
 response, such as `logs` and `events`, only the HTTP request is sent to the
 authorization plugins.
+
+The Engine's authorization middleware fails closed: when a plugin returns an error or returns `Allow: false`,
+the request is denied and the error is surfaced to the client. Plugins should also fail closed: if the plugin
+cannot confidently evaluate a request, it should return an error or `Allow: false`.
+
+### Response body size and partial buffering
+
+The internal buffer that holds the response body between the daemon's HTTP
+handler and the plugin's response authorization callback (`responseModifier`,
+defined in [`pkg/authorization/response.go`](https://github.com/moby/moby/blob/master/pkg/authorization/response.go))
+has a fixed capacity of 64 KiB (`maxBufferSize`).
+
+For most non-streaming endpoints the full response is buffered for plugin
+inspection regardless of total size, because Go's `encoding/json` encoder
+serializes the complete payload into a single underlying write. The
+streaming-response exclusion noted above (for example, `logs` and `events`)
+is the practical effect of this 64 KiB threshold combined with the
+`io.WriteFlusher` write pattern used by streaming handlers, where each write
+is immediately drained to the client and is therefore no longer available
+for plugin inspection by the time the handler returns.
+
+> [!NOTE]
+> Plugins that depend on `ResponseBody` inspection for redaction or
+> content-filtering should restrict their policies to endpoints whose
+> response is produced as a single write (typical of REST-style API
+> responses). For commands whose responses are streamed or are likely to
+> exceed the buffer through multiple writes, do not rely on `ResponseBody`
+> for security-relevant decisions; perform the filtering in a separate
+> layer in front of the daemon.
 
 During request/response processing, some authorization flows might
 need to do additional queries to the Docker daemon. To complete such flows,
@@ -209,7 +243,7 @@ Name                   | Type              | Description
 User                   | string            | The user identification
 Authentication method  | string            | The authentication method used
 Request method         | enum              | The HTTP method (GET/DELETE/POST)
-Request URI            | string            | The HTTP request URI including API version (e.g., v.1.17/containers/json)
+Request URI            | string            | The HTTP request URI including API version, as sent by the client (e.g., v.1.17/containers/json)
 Request headers        | map[string]string | Request headers as key value pairs (without the authorization header)
 Request body           | []byte            | Raw request body
 
@@ -232,7 +266,7 @@ Name                    | Type              | Description
 User                    | string            | The user identification
 Authentication method   | string            | The authentication method used
 Request method          | string            | The HTTP method (GET/DELETE/POST)
-Request URI             | string            | The HTTP request URI including API version (e.g., v.1.17/containers/json)
+Request URI             | string            | The HTTP request URI including API version, as sent by the client (e.g., v.1.17/containers/json)
 Request headers         | map[string]string | Request headers as key value pairs (without the authorization header)
 Request body            | []byte            | Raw request body
 Response status code    | int               | Status code from the Docker daemon

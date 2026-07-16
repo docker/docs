@@ -192,7 +192,7 @@ The todo app supports the setting of a few environment variables to specify MySQ
 >
 > While using env vars to set connection settings is generally accepted for development, it's highly discouraged
 > when running applications in production. Diogo Monica, a former lead of security at Docker,
-> [wrote a fantastic blog post](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/)
+> [wrote a fantastic blog post](https://blog.diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/)
 > explaining why.
 >
 > A more secure mechanism is to use the secret support provided by your container orchestration framework. In most cases,
@@ -212,14 +212,14 @@ You can now start your dev-ready container.
 
    ```console
    $ docker run -dp 127.0.0.1:3000:3000 \
-     -w /app -v "$(pwd):/app" \
+     -w /app -v ".:/app" \
      --network todo-app \
      -e MYSQL_HOST=mysql \
      -e MYSQL_USER=root \
      -e MYSQL_PASSWORD=secret \
      -e MYSQL_DB=todos \
-     node:18-alpine \
-     sh -c "yarn install && yarn run dev"
+     node:24-alpine \
+     sh -c "npm install && npm run dev"
    ```
    
    {{< /tab >}}
@@ -228,14 +228,14 @@ You can now start your dev-ready container.
 
    ```powershell
    $ docker run -dp 127.0.0.1:3000:3000 `
-     -w /app -v "$(pwd):/app" `
+     -w /app -v ".:/app" `
      --network todo-app `
      -e MYSQL_HOST=mysql `
      -e MYSQL_USER=root `
      -e MYSQL_PASSWORD=secret `
      -e MYSQL_DB=todos `
-     node:18-alpine `
-     sh -c "yarn install && yarn run dev"
+     node:24-alpine `
+     sh -c "npm install && npm run dev"
    ```
 
    {{< /tab >}}
@@ -250,8 +250,8 @@ You can now start your dev-ready container.
      -e MYSQL_USER=root ^
      -e MYSQL_PASSWORD=secret ^
      -e MYSQL_DB=todos ^
-     node:18-alpine ^
-     sh -c "yarn install && yarn run dev"
+     node:24-alpine ^
+     sh -c "npm install && npm run dev"
    ```
 
    {{< /tab >}}
@@ -259,14 +259,14 @@ You can now start your dev-ready container.
 
    ```console
    $ docker run -dp 127.0.0.1:3000:3000 \
-     -w //app -v "/$(pwd):/app" \
+     -w //app -v "/.:/app" \
      --network todo-app \
      -e MYSQL_HOST=mysql \
      -e MYSQL_USER=root \
      -e MYSQL_PASSWORD=secret \
      -e MYSQL_DB=todos \
-     node:18-alpine \
-     sh -c "yarn install && yarn run dev"
+     node:24-alpine \
+     sh -c "npm install && npm run dev"
    ```
    
    {{< /tab >}}
@@ -276,11 +276,13 @@ You can now start your dev-ready container.
    using the mysql database.
 
    ```console
-   $ nodemon src/index.js
-   [nodemon] 2.0.20
+   [nodemon] 3.1.11
    [nodemon] to restart at any time, enter `rs`
-   [nodemon] watching dir(s): *.*
+   [nodemon] watching path(s): *.*
+   [nodemon] watching extensions: js,mjs,cjs,json
    [nodemon] starting `node src/index.js`
+   Waiting for mysql:3306.
+   Connected!
    Connected to mysql db at host mysql
    Listening on port 3000
    ```

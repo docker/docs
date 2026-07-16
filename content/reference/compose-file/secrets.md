@@ -1,13 +1,13 @@
 ---
-title: Secrets top-level elements
+title: Secrets
 description: Explore all the attributes the secrets top-level element can have.
 keywords: compose, compose specification, secrets, compose file reference
-aliases: 
+aliases:
  - /compose/compose-file/09-secrets/
 weight: 60
 ---
 
-Secrets are a flavor of [Configs](configs.md) focusing on sensitive data, with specific constraint for this usage. 
+Secrets are a flavor of [Configs](configs.md) focusing on sensitive data, with specific constraint for this usage.
 
 Services can only access secrets when explicitly granted by a [`secrets` attribute](services.md#secrets) within the `services` top-level element.
 
@@ -15,7 +15,8 @@ The top-level `secrets` declaration defines or references sensitive data that is
 application. The source of the secret is either `file` or `environment`.
 
 - `file`: The secret is created with the contents of the file at the specified path.
-- `environment`: The secret is created with the value of an environment variable on the host.
+- `environment`: The secret is created with the value of an environment variable on the host. This is only supported by Docker Compose. It is not supported when deploying with [`docker stack deploy`](/manuals/engine/swarm/stack-deploy.md).
+ 
 
 ## Example 1
 
@@ -28,9 +29,9 @@ secrets:
     file: ./server.cert
 ```
 
-## Example 2 
+## Example 2
 
-`token` secret  is created as `<project_name>_token` when the application is deployed,
+`token` secret is created as `<project_name>_token` when the application is deployed,
 by registering the content of the `OAUTH_TOKEN` environment variable as a platform secret.
 
 ```yml
@@ -38,6 +39,10 @@ secrets:
   token:
     environment: "OAUTH_TOKEN"
 ```
+
+> [!NOTE]
+> `environment` secrets are not supported when deploying with `docker stack deploy`.
+> Use `file` or `external` as the secret source instead.
 
 ## Additional resources
 

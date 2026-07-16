@@ -16,6 +16,10 @@ and quality. They appear as **Reviewed** in the Marketplace.
 
 Self-published extensions are autonomously published by extension developers and go through an automated validation process. They appear as **Not reviewed** in the Marketplace.
 
+> [!IMPORTANT]
+>
+> Marketplace extensions are reviewed by Docker, but are not subject to a full security audit. Extensions run with host-level privileges. They can install binaries, access Docker Engine, invoke commands, and access files on your machine. Only install extensions from publishers you trust.
+
 ## Install an extension
 
 > [!NOTE]

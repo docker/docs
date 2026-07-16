@@ -96,7 +96,7 @@ const containers = await window.ddClient.listContainers();
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `options` | `never` | (Optional). A JSON like `{ "all": true, "limit": 10, "size": true, "filters": JSON.stringify({ status: ["exited"] }), }` For more information about the different properties see [the Docker API endpoint documentation](https://docs.docker.com/engine/api/v1.41/#operation/ContainerList). |
+| `options` | `never` | (Optional). A JSON like `{ "all": true, "limit": 10, "size": true, "filters": JSON.stringify({ status: ["exited"] }), }` For more information about the different properties see [the Docker API endpoint documentation](https://docs.docker.com/reference/api/engine/version/v1.52/#operation/ContainerList). |
 
 #### Returns
 
@@ -128,7 +128,7 @@ const images = await window.ddClient.listImages();
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `options` | `never` | (Optional). A JSON like `{ "all": true, "filters": JSON.stringify({ dangling: ["true"] }), "digests": true }` For more information about the different properties see [the Docker API endpoint documentation](https://docs.docker.com/engine/api/v1.41/#tag/Image). |
+| `options` | `never` | (Optional). A JSON like `{ "all": true, "filters": JSON.stringify({ dangling: ["true"] }), "digests": true }` For more information about the different properties see [the Docker API endpoint documentation](https://docs.docker.com/reference/api/engine/version/v1.52/#tag/Image). |
 
 #### Returns
 
@@ -401,37 +401,13 @@ DockerDesktopClientV0.navigateToVolume
 
 ___
 
-### navigateToDevEnvironments
-
-▸ **navigateToDevEnvironments**(): `void`
-
-Navigate to the Dev Environments window in Docker Desktop.
-
-```typescript
-window.ddClient.navigateToDevEnvironments();
-```
-
-> [!WARNING]
->
-> It will be removed in a future version. Use [viewDevEnvironments](NavigationIntents.md#viewdevenvironments) instead.
-
-#### Returns
-
-`void`
-
-#### Inherited from
-
-DockerDesktopClientV0.navigateToDevEnvironments
-
-___
-
 ## Other Methods
 
 ### execHostCmd
 
 ▸ **execHostCmd**(`cmd`): `Promise`<[`ExecResultV0`](ExecResultV0.md)\>
 
-You can run binaries defined in the host section in the extension metadata.
+Invoke a binary on the host. The binary is typically shipped with your extension using the host section in the extension metadata. Note that extensions run with user access rights, this API is not restricted to binaries listed in the host section of the extension metadata (some extensions might install software during user interaction, and invoke newly installed binaries even if not listed in the extension metadata) 
 
 ```typescript
 window.ddClient.execHostCmd(`cliShippedOnHost xxx`).then((cmdResult: any) => {

@@ -1,0 +1,30 @@
+name: sbx policy
+synopsis: Manage sandbox policies
+description: |-
+    Manage persistent access policies for sandboxes.
+
+    Policies contain rules that control what sandboxes can access. Local rules
+    can apply globally across all sandboxes or be scoped to one sandbox. Use
+    subcommands to allow, deny, list, or remove rules.
+usage: sbx policy COMMAND
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for policy
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx - Manage AI coding agent sandboxes.
+    - sbx policy allow - Add an allow rule for sandboxes
+    - sbx policy check - Check whether policy allows an access request
+    - sbx policy deny - Add a deny rule for sandboxes
+    - sbx policy init - Initialize the global network policy
+    - sbx policy inspect - Inspect policy or rule details
+    - sbx policy log - Show sandbox policy logs
+    - sbx policy ls - List sandbox policies
+    - sbx policy reset - Reset policies to defaults
+    - sbx policy rm - Remove a policy rule

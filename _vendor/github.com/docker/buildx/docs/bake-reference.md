@@ -227,6 +227,8 @@ The following table shows the complete list of attributes that you can assign to
 | [`description`](#targetdescription)             | String  | Description of a target                                              |
 | [`dockerfile-inline`](#targetdockerfile-inline) | String  | Inline Dockerfile string                                             |
 | [`dockerfile`](#targetdockerfile)               | String  | Dockerfile location                                                  |
+| [`entitlements`](#targetentitlements)           | List    | Permissions that the build process requires to run                   |
+| [`extra-hosts`](#targetextra-hosts)             | List    | Customs host-to-IP mapping                                           |
 | [`inherits`](#targetinherits)                   | List    | Inherit attributes from other targets                                |
 | [`labels`](#targetlabels)                       | Map     | Metadata for images                                                  |
 | [`matrix`](#targetmatrix)                       | Map     | Define a set of variables that forks a target into multiple targets. |
@@ -234,8 +236,10 @@ The following table shows the complete list of attributes that you can assign to
 | [`no-cache-filter`](#targetno-cache-filter)     | List    | Disable build cache for specific stages                              |
 | [`no-cache`](#targetno-cache)                   | Boolean | Disable build cache completely                                       |
 | [`output`](#targetoutput)                       | List    | Output destinations                                                  |
+| [`policy`](#targetpolicy)                       | List    | Policies to validate build sources and metadata                      |
 | [`platforms`](#targetplatforms)                 | List    | Target platforms                                                     |
 | [`pull`](#targetpull)                           | Boolean | Always pull images                                                   |
+| [`resources`](#targetresources)                 | Map     | Resource limits for build containers                                 |
 | [`secret`](#targetsecret)                       | List    | Secrets to expose to the build                                       |
 | [`shm-size`](#targetshm-size)                   | List    | Size of `/dev/shm`                                                   |
 | [`ssh`](#targetssh)                             | List    | SSH agent sockets or keys to expose to the build                     |
@@ -583,6 +587,20 @@ target "integration-tests" {
 
 Entitlements are enabled with a two-step process. First, a target must declare the entitlements it requires. Secondly, when invoking the `bake` command, the user must grant the entitlements by passing the `--allow` flag or confirming the entitlements when prompted in an interactive terminal. This is to ensure that the user is aware of the possibly insecure permissions they are granting to the build process.
 
+### `target.extra-hosts`
+
+Use the `extra-hosts` attribute to define customs host-to-IP mapping for the
+target. This has the same effect as passing a [`--add-host`][add-host] flag to
+the build command.
+
+```hcl
+target "default" {
+  extra-hosts = {
+    my_hostname = "8.8.8.8"
+  }
+}
+```
+
 ### `target.inherits`
 
 A target can inherit attributes from other targets.
@@ -867,7 +885,7 @@ This is the same as the `--no-cache` flag for `docker build`.
 
 ```hcl
 target "default" {
-  no-cache = 1
+  no-cache = true
 }
 ```
 
@@ -880,6 +898,25 @@ The following example configures the target to use a cache-only output,
 ```hcl
 target "default" {
   output = [{ type = "cacheonly" }]
+}
+```
+
+> [!NOTE]
+> Local outputs with `mode=delete` require granting `--allow=buildx.local.delete`
+> when invoking `docker buildx bake`.
+
+### `target.policy`
+
+Policies to validate build sources and metadata. Each entry uses the same keys
+as the `--policy` flag for `docker buildx build` (`filename`, `reset`,
+`disabled`, `strict`, `log-level`). Bake also automatically loads
+`Dockerfile.rego` alongside the target Dockerfile when present.
+
+```hcl
+target "default" {
+  policy = [
+    { filename = "extra.rego" },
+  ]
 }
 ```
 
@@ -906,6 +943,29 @@ target "default" {
   pull = true
 }
 ```
+
+### `target.resources`
+
+Sets cgroup resource limits for the containers that run `RUN` instructions
+during the build. The supported keys are `memory`, `memory-swap`, `cpu-shares`,
+`cpu-period`, `cpu-quota`, `cpuset-cpus`, and `cpuset-mems`. These map to the
+equivalent `docker build` flags and to the
+[`--resource`](https://docs.docker.com/reference/cli/docker/buildx/build/#resource)
+flag for `docker buildx build`.
+
+```hcl
+target "default" {
+  resources = {
+    memory      = "2g"
+    memory-swap = "4g"
+    cpu-quota   = 50000
+  }
+}
+```
+
+> [!NOTE]
+> These limits require a BuildKit daemon that supports per-step resource limits
+> and only take effect on Linux. They don't affect the build cache key.
 
 ### `target.secret`
 
@@ -1083,6 +1143,7 @@ or interpolate them in attribute values in your Bake file.
 variable "TAG" {
   type = string
   default = "latest"
+  description = "Tag to use for build"
 }
 
 target "webapp-dev" {
@@ -1094,6 +1155,8 @@ target "webapp-dev" {
 You can assign a default value for a variable in the Bake file,
 or assign a `null` value to it. If you assign a `null` value,
 Buildx uses the default value from the Dockerfile instead.
+
+You can also add a description of the variable's purpose with the `description` field. This attribute is useful when combined with the `docker buildx bake --list=variables` option, providing a more informative output when listing the available variables in a Bake file.
 
 You can override variable defaults set in the Bake file using environment variables.
 The following example sets the `TAG` variable to `dev`,
@@ -1315,11 +1378,17 @@ to define them.
 
 ### Use environment variable as default
 
-You can set a Bake variable to use the value of an environment variable as a default value:
+If an environment variable exists with the same name as a declared Bake
+variable, Bake uses that environment variable value instead of the declared
+default.
+
+To disable this environment-based variable lookup, set
+`BUILDX_BAKE_DISABLE_VARS_ENV_LOOKUP=1`.
+
 
 ```hcl
 variable "HOME" {
-  default = "$HOME"
+  default = "/root"
 }
 ```
 
@@ -1383,8 +1452,7 @@ $ docker buildx bake
 
 ## Function
 
-A [set of general-purpose functions][bake_stdlib]
-provided by [go-cty][go-cty]
+A [set of general-purpose functions][bake_stdlib] provided by [go-cty][go-cty]
 are available for use in HCL files:
 
 ```hcl
@@ -1422,8 +1490,9 @@ target "webapp-dev" {
 
 <!-- external links -->
 
+[add-host]: https://docs.docker.com/reference/cli/docker/buildx/build/#add-host
 [attestations]: https://docs.docker.com/build/attestations/
-[bake_stdlib]: https://github.com/docker/buildx/blob/master/bake/hclparser/stdlib.go
+[bake_stdlib]: https://github.com/docker/buildx/blob/master/docs/bake-stdlib.md
 [build-arg]: https://docs.docker.com/reference/cli/docker/image/build/#build-arg
 [build-context]: https://docs.docker.com/reference/cli/docker/buildx/build/#build-context
 [cache-backends]: https://docs.docker.com/build/cache/backends/

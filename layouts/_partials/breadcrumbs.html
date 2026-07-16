@@ -1,0 +1,13 @@
+<nav
+  id="breadcrumbs"
+  data-pagefind-ignore
+  class="breadcrumbs mb-4 flex min-w-0 items-center gap-2 text-gray-400 dark:text-gray-300"
+>
+  {{ range .Ancestors.Reverse }}
+    <a href="{{ .Permalink }}" class="link truncate"
+      >{{ markdownify .LinkTitle }}</a
+    >
+    <span>/</span>
+  {{- end }}
+  <span class="truncate">{{ markdownify .LinkTitle }}</span>
+</nav>

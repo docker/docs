@@ -1,0 +1,10 @@
+{{- $name := . -}}
+{{- $path := strings.TrimLeft "/" $name -}}
+{{- if not (strings.Contains $path "/") -}}
+  {{- $path = printf "icons/%s.svg" $path -}}
+{{- end -}}
+{{- with resources.Get $path -}}
+  {{- .Content | safeHTML -}}
+{{- else -}}
+  {{- errorf "Icon not found: %q (resolved to %q)" $name $path -}}
+{{- end -}}

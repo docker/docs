@@ -1,259 +1,137 @@
 ---
-title: Ask Gordon
-description: Learn how to streamline your workflow with Docker's AI-powered assistant.
-weight: 10
+title: Gordon
+description:
+  AI assistant for Docker workflows - execute tasks, debug issues, and
+  manage containers with intelligent assistance
+weight: 40
 params:
   sidebar:
-    badge:
-      color: blue
-      text: Beta
-    group: AI
-aliases: 
- - /desktop/features/gordon/
+    group: AI and agents
+aliases:
+  - /desktop/features/gordon/
 ---
 
-{{< summary-bar feature_name="Ask Gordon" >}}
+{{< summary-bar feature_name="Gordon" >}}
 
-Ask Gordon is your personal AI assistant embedded in Docker Desktop and the
-Docker CLI. It's designed to streamline your workflow and help you make the most
-of the Docker ecosystem.
+Gordon is an AI-powered assistant that takes action on your Docker workflows.
+It analyzes your environment, proposes solutions, and executes commands with
+your permission.
 
-## What is Ask Gordon?
+## What Gordon does
 
-Ask Gordon provides AI-powered assistance in Docker tools. It offers contextual help for tasks like:
+Gordon takes action to help you with Docker tasks:
 
-- Improving Dockerfiles
-- Running and troubleshooting containers
-- Interacting with your images and code
-- Finding vulnerabilities or configuration issues
+- Explains Docker concepts and commands
+- Searches Docker documentation and web resources for solutions
+- Writes and modifies Dockerfiles following best practices
+- Debugs container failures by reading logs and proposing fixes
+- Manages containers, images, volumes, and networks
 
-It understands your local environment, including source code, Dockerfiles, and images, to provide personalized and actionable guidance.
+Gordon proposes every action before executing. You approve what it does.
 
-These features are not enabled by default, and are not
-production-ready. You may also encounter the term "Docker AI" as a broader
-reference to this technology.
+## Where to use Gordon
 
-> [!NOTE] 
+Gordon is available on four surfaces:
+
+- Open the Gordon view from the Docker Desktop sidebar to run Docker commands
+  with your approval. See [Using Gordon in Docker
+  Desktop](./how-to/docker-desktop.md).
+- Run `docker ai` in the terminal to use the full assistant from the command
+  line. See [Using Gordon via CLI](./how-to/cli.md).
+- Select the Gordon icon on any repository page at
+  [hub.docker.com](https://hub.docker.com) to ask about a repository's
+  images, tags, and metadata. Hand off to Docker Desktop to take action.
+- Select the Gordon icon on any page at
+  [docs.docker.com](https://docs.docker.com) to ask Docker questions.
+
+Docker Desktop and the CLI count against your Gordon plan's [usage
+limits](./usage-limits.md). Gordon on Docker Hub and docs.docker.com is free
+and does not require a Docker account or a Docker Desktop install. It has
+its own shared public usage limit and does not access your Docker
+environment.
+
+## Get started
+
+### Prerequisites
+
+Before you begin:
+
+- Docker Desktop 4.74 or later
+- Sign in to your Docker account
+
+> [!NOTE]
+> Gordon is enabled by default for signed-in Docker users. If your account
+> belongs to an organization with a Business subscription, access requires two
+> additional steps:
 >
-> Ask Gordon is powered by Large Language Models (LLMs). Like all
-> LLM-based tools, its responses may sometimes be inaccurate. Always verify the
-> information provided.
+> 1. Contact Docker Support to activate Gordon for your organization. Docker
+>    will confirm when activation is complete.
+> 2. Once confirmed, an organization administrator must turn on Gordon via
+>    [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md).
+>    Set **Enable Gordon** to **Enabled** or **Always enabled**. Ensure all
+>    Settings Management prerequisites are met for the setting to take effect
+>    on Docker Desktop clients.
 
-### What data does Gordon access?
+### Quick start
 
-When you use Ask Gordon, the data it accesses depends on the context of your
-query:
+{{< tabs >}}
+{{< tab name="Docker Desktop" >}}
 
-- Local files: If you use the `docker ai` command, Ask Gordon can access files
-  and directories in the current working directory where the command is
-  executed. In Docker Desktop, if you ask about a specific file or directory in
-  the **Ask Gordon** view, you'll be prompted to select the relevant context.
-- Local images: Gordon integrates with Docker Desktop and can view all images in
-  your local image store. This includes images you've built or pulled from a
-  registry.
+1. Open Docker Desktop.
+2. Select **Gordon** in the sidebar.
+3. Select your project directory.
+4. Type a question: "What containers are running?"
 
-To provide accurate responses, Ask Gordon may send relevant files, directories,
-or image metadata to the Gordon backend along with your query. This data
-transfer occurs over the network but is never stored persistently or shared with
-third parties. It is used exclusively to process your request and formulate a
-response. For more information about privacy terms and conditions for Docker AI,
-review [Gordon's Supplemental
-Terms](https://www.docker.com/legal/docker-ai-supplemental-terms/).
+   ![Gordon running in Docker Desktop](./images/gordon_gui.avif)
 
-All data transferred is encrypted in transit.
+5. Review Gordon's proposed actions and approve.
 
-### How your data is collected and used
+{{< /tab >}}
+{{< tab name="CLI" >}}
 
-Docker collects anonymized data from your interactions with Ask Gordon to
-enhance the service. This includes the following:
-
-- Your queries: Questions you ask Gordon.
-- Responses: Answers provided by Gordon.
-- Feedback: Thumbs-up and thumbs-down ratings.
-
-To ensure privacy and security:
-
-- Data is anonymized and cannot be traced back to you or your account.
-- Docker does not use this data to train AI models or share it with third
-  parties.
-
-By using Ask Gordon, you help improve Docker AI's reliability and accuracy,
-making it more effective for all users.
-
-If you have concerns about data collection or usage, you can
-[disable](#disable-ask-gordon) the feature at any time.
-
-## Enable Ask Gordon
-
-1. Sign in to your Docker account.
-2. Navigate to the **Features in development** tab in settings.
-3. Under the **Experimental features** tab, select **Access experimental features**.
-4. Select **Apply and restart**. 
-5. Quit and reopen Docker Desktop to ensure the changes take effect. 
-6. Open the **Settings** view in Docker Desktop.
-7. Navigate to **Features in development**.
-8. From the **Beta** tab, check the **Enable Docker AI** checkbox.
-
-   The Docker AI terms of service agreement is displayed. You must agree to the
-   terms before you can enable the feature. Review the terms and select **Accept
-   and enable** to continue.
-
-9. Select **Apply & restart**.
-
-You can also enable Ask Gordon from the **Ask Gordon** tab if you have selected the  **Access experimental features** setting. Simply select the **Enable Ask Gordon** button, and then accept the Docker AI terms of service agreement.
-
-## Using Ask Gordon
-
-The primary interfaces to Docker's AI capabilities are through the **Ask
-Gordon** view in Docker Desktop, or if you prefer to use the CLI: the `docker
-ai` CLI command.
-
-Once you've enabled the Docker AI features, you'll also find references to **Ask
-Gordon** in various other places throughout the Docker Desktop user interface.
-Whenever you encounter a button with the **Sparkles** (✨) icon in the user
-interface, you can use the button to get contextual support from Ask Gordon.
-
-## Example workflows
-
-Ask Gordon is a general-purpose AI assistant created to help you with all your
-Docker-related tasks and workflows. If you need some inspiration, here are a few
-ways things you can try:
-
-- [Troubleshoot a crashed container](#troubleshoot-a-crashed-container)
-- [Get help with running a container](#get-help-with-running-a-container)
-- [Improve a Dockerfile](#improve-a-dockerfile)
-
-For more examples, try asking Gordon directly. For example:
-
-```console
-$ docker ai "What can you do?"
-```
-
-### Troubleshoot a crashed container
-
-If you try to start a container with an invalid configuration or command, you
-can use Ask Gordon to troubleshoot the error. For example, try starting a
-Postgres container without specifying a database password:
-
-```console
-$ docker run postgres
-Error: Database is uninitialized and superuser password is not specified.
-       You must specify POSTGRES_PASSWORD to a non-empty value for the
-       superuser. For example, "-e POSTGRES_PASSWORD=password" on "docker run".
-
-       You may also use "POSTGRES_HOST_AUTH_METHOD=trust" to allow all
-       connections without a password. This is *not* recommended.
-
-       See PostgreSQL documentation about "trust":
-       https://www.postgresql.org/docs/current/auth-trust.html
-```
-
-In the **Containers** view in Docker Desktop, select the ✨ icon next to the
-container's name, or inspect the container and open the **Ask Gordon** tab.
-
-### Get help with running a container
-
-If you want to run a specific image but you're not sure how, Gordon might be
-able to help you get set up:
-
-1. Pull an image from Docker Hub (for example, `postgres`).
-2. Open the **Images** view in Docker Desktop and select the image.
-3. Select the **Run** button.
-
-In the **Run a new container** dialog, you should see a message about
-**Ask Gordon**.
-
-![Ask Gordon hint in Docker Desktop](../../images/gordon-run-ctr.png)
-
-The linked text in the hint is a suggested prompt to start a conversation with
-Ask Gordon.
-
-### Improve a Dockerfile
-
-Gordon can analyze your Dockerfile and suggest improvements. To have Gordon
-evaluate your Dockerfile using the `docker ai` command:
-
-1. Navigate to your project directory:
+1. Open your terminal and run:
 
    ```console
-   $ cd path/to/my/project
+   $ docker ai
    ```
 
-2. Use the `docker ai` command to rate your Dockerfile:
+   This opens the Terminal User Interface (TUI) for Gordon.
 
-   ```console
-   $ docker ai rate my Dockerfile
-   ```
+2. Type a question: "what containers are running?" and press <kbd>Enter</kbd>.
 
-Gordon will analyze your Dockerfile and identify opportunities for improvement
-across several dimensions:
+   ![Gordon running in the terminal](./images/gordon_tui.avif)
 
-- Build cache optimization
-- Security
-- Image size efficiency
-- Best practices compliance
-- Maintainability
-- Reproducibility
-- Portability
-- Resource efficiency
+3. Review Gordon's proposed actions and approve by typing `y`.
 
-## Disable Ask Gordon
+{{< /tab >}}
+{{< /tabs >}}
 
-### For individual users
+### Permissions
 
-If you've enabled Ask Gordon and you want to disable it again:
+By default, Gordon asks for approval before executing actions. You can approve
+individual actions or allow all actions for the current session.
 
-1. Open the **Settings** view in Docker Desktop.
-2. Navigate to **Features in development**.
-3. Clear the **Enable Docker AI** checkbox.
-4. Select **Apply & restart**.
+![Gordon permission request](./images/gordon_permissions_prompt.avif)
 
-### For organizations
+Permissions reset for each session. To configure default permissions or enable
+auto-approve mode, see [Permissions](./how-to/permissions.md).
 
-If you want to disable Ask Gordon for your entire Docker organization, using
-[Settings
-Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md),
-add the following property to your `admin-settings.json` file:
+### Try these examples
 
-```json
-{
-  "enableDockerAI": {
-    "value": false,
-    "locked": true
-  }
-}
+Container inspection:
+
+```console
+$ docker ai "show me logs from my nginx container"
 ```
 
-Alternatively, you can disable all Beta features by setting `allowBetaFeatures`
-to false:
+Dockerfile review:
 
-```json
-{
-  "allowBetaFeatures": {
-    "value": false,
-    "locked": true
-  }
-}
+```console
+$ docker ai "review my Dockerfile for best practices"
 ```
 
-## Feedback
+Image management:
 
-<!-- vale Docker.We = NO -->
-
-We value your input on Ask Gordon and encourage you to share your experience.
-Your feedback helps us improve and refine Ask Gordon for all users. If you
-encounter issues, have suggestions, or simply want to share what you like,
-here's how you can get in touch:
-
-- Thumbs-up and thumbs-down buttons
-
-  Rate Ask Gordon's responses using the thumbs-up or thumbs-down buttons in the
-  response.
-
-- Feedback survey
-
-  You can access the Ask Gordon survey by following the _Give feedback_ link in
-  the **Ask Gordon** view in Docker Desktop, or from the CLI by running the
-  `docker ai feedback` command.
-
-
+```console
+$ docker ai "list my local images and their sizes"
+```

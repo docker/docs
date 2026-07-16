@@ -1,0 +1,24 @@
+command: docker mcp feature
+short: Manage experimental features
+long: |-
+    Manage experimental features for Docker MCP Gateway.
+
+    Features are stored in your Docker configuration file (~/.docker/config.json)
+    and control optional functionality that may change in future versions.
+pname: docker mcp
+plink: docker_mcp.yaml
+cname:
+    - docker mcp feature disable
+    - docker mcp feature enable
+    - docker mcp feature ls
+clink:
+    - docker_mcp_feature_disable.yaml
+    - docker_mcp_feature_enable.yaml
+    - docker_mcp_feature_ls.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

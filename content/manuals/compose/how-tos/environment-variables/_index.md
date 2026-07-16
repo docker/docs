@@ -2,14 +2,13 @@
 title: Environment variables in Compose
 linkTitle: Use environment variables
 weight: 40
-description: Explainer on the ways to set, use and manage environment variables in
-  Compose
+description: Explains how to set, use, and manage environment variables in Docker Compose.
 keywords: compose, orchestration, environment, env file
 aliases:
 - /compose/environment-variables/
 ---
 
-By leveraging environment variables and interpolation in Docker Compose, you can create versatile and reusable configurations, making your Dockerized applications easier to manage and deploy across different environments. 
+Environment variables and interpolation in Docker Compose help you create reusable, flexible configurations. This makes Dockerized applications easier to manage and deploy across environments.
 
 > [!TIP]
 >

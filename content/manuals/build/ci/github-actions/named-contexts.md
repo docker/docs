@@ -5,7 +5,7 @@ description: Use additional contexts in multi-stage builds with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, context
 ---
 
-You can define [additional build contexts](/reference/cli/docker/buildx/build.md#build-context),
+You can define [additional build contexts](/reference/cli/docker/buildx/build/#build-context),
 and access them in your Dockerfile with `FROM name` or `--from=name`. When
 Dockerfile defines a stage with the same name it's overwritten.
 
@@ -33,10 +33,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
 
       - name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           build-contexts: |
             alpine=docker-image://alpine:{{% param "example_alpine_version" %}}
@@ -68,19 +68,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         with:
           driver: docker
 
       - name: Build base image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           context: "{{defaultContext}}:base"
           load: true
           tags: my-base-image:latest
 
       - name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           build-contexts: |
             alpine=docker-image://my-base-image:latest
@@ -112,28 +112,28 @@ jobs:
     runs-on: ubuntu-latest
     services:
       registry:
-        image: registry:2
+        image: registry:3
         ports:
           - 5000:5000
     steps:
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@{{% param "setup_qemu_action_version" %}}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         with:
           # network=host driver-opt needed to push to local registry
           driver-opts: network=host
 
       - name: Build base image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           context: "{{defaultContext}}:base"
           tags: localhost:5000/my-base-image:latest
           push: true
 
       - name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           build-contexts: |
             alpine=docker-image://localhost:5000/my-base-image:latest

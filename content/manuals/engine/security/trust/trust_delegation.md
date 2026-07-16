@@ -26,7 +26,7 @@ same as the registry URL specified in the image tag (following a similar logic t
 `$ docker push`). When using Docker Hub or DTR, the notary
 server URL is the same as the registry URL. However, for self-hosted
 environments or 3rd party registries, you will need to specify an alternative
-URL for the notary server. This is done with:
+URL of the notary server. This is done with:
 
 ```console
 $ export DOCKER_CONTENT_TRUST_SERVER=https://<URL>:<PORT>
@@ -96,8 +96,7 @@ configure the Notary CLI:
 The newly created configuration file contains information about the location of your local Docker trust data and the notary server URL.
 
 For more detailed information about how to use notary outside of the
-Docker Content Trust use cases, refer to the Notary CLI documentation
-[here](https://github.com/theupdateframework/notary/blob/master/docs/command_reference.md) 
+Docker Content Trust use cases, refer to the [Notary CLI documentation](https://github.com/theupdateframework/notary/blob/master/docs/command_reference.md) 
 
 ## Creating delegation keys
 
@@ -189,8 +188,8 @@ jeff                                    9deed251daa1aa6f9d5f9b752847647cf8d705da
 When the first delegation is added to the Notary Server using `$ docker trust`,
 we automatically initiate trust data for the repository. This includes creating 
 the notary target and snapshots keys, and rotating the snapshot key to be 
-managed by the notary server. More information on these keys can be found 
-[here](trust_key_mng.md)
+managed by the notary server. More information on these keys can be found in
+[Manage keys for content trust](trust_key_mng.md).
 
 When initiating a repository, you will need the key and the passphrase of a local
 Notary Canonical Root Key. If you have not initiated a repository before, and 
@@ -361,7 +360,7 @@ Successfully removed ben from registry.example.com/admin/demo
    ```
 
 2) If you have added additional delegations already and are seeing an error 
-   message that there are no valid signatures in `targest/releases`, you will need
+   message that there are no valid signatures in `targets/releases`, you will need
    to resign the `targets/releases` delegation file with the Notary CLI.
 
    ```text
@@ -374,8 +373,8 @@ Successfully removed ben from registry.example.com/admin/demo
    $ notary witness registry.example.com/admin/demo targets/releases --publish
    ```
 
-   More information on the `$ notary witness` command can be found 
-   [here](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#recovering-a-delegation)
+   For more information on the `notary witness` command, refer to the
+   [Notary client advanced usage guide](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#recovering-a-delegation)
 
 ### Removing a contributor's key from a delegation
 

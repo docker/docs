@@ -1,0 +1,19 @@
+{{- /*
+	For Netlify deployments, we disallow all routes to prevent search
+	engines from indexing our preview sites.
+	*/
+-}}
+
+{{- if hugo.IsProduction -}}
+User-agent: *
+Disallow: /unassociated-machines/
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
+
+
+Sitemap: {{ "sitemap.xml" | absURL }}
+{{- else -}}
+# Disable all indexing on staging websites and Netlify previews to prevent
+# them showing up in search results.
+User-agent: *
+Disallow: /
+{{- end }}

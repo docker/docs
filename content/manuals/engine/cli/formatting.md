@@ -18,7 +18,7 @@ include examples of customizing the output format.
 
 > [!NOTE]
 >
-> When using the `--format` flag, you need observe your shell environment.
+> When using the `--format` flag, you need to observe your shell environment.
 > In a POSIX shell, you can run the following with a single quote:
 >
 > ```console
@@ -110,7 +110,7 @@ $ docker image list --format '{{truncate .Repository 15}}'
 
 This example displays the image repository name, truncating it to the first 15 characters if it's longer.
 
-## println
+## `println`
 
 `println` prints each value on a new line.
 

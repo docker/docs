@@ -44,12 +44,6 @@ Let's say you used this command to run a simple Python Flask application:
 $ docker run -d -P training/webapp python app.py
 ```
 
-> [!NOTE]
->
-> Containers have an internal network and an IP address.
-> Docker can have a variety of network configurations. You can see more
-> information on Docker networking [here](index.md).
-
 When that container was created, the `-P` flag was used to automatically map
 any network port inside it to a random high port within an *ephemeral port
 range* on your Docker host. Next, when `docker ps` was run, you saw that port
@@ -176,7 +170,7 @@ You can also use `docker inspect` to return the container's name.
 > [!NOTE]
 >
 > Container names must be unique. That means you can only call
-> one container `web`. If you want to re-use a container name you must delete
+> one container `web`. If you want to reuse a container name you must delete
 > the old container (with `docker container rm`) before you can create a new
 > container with the same name. As an alternative you can use the `--rm`
 > flag with the `docker run` command. This deletes the container
@@ -295,9 +289,9 @@ Docker uses this prefix format to define three distinct environment variables:
 
 * The `prefix_ADDR` variable contains the IP Address from the URL, for
 example `WEBDB_PORT_5432_TCP_ADDR=172.17.0.82`.
-* The `prefix_PORT` variable contains just the port number from the URL for
+* The `prefix_PORT` variable contains just the port number from the URL of
 example `WEBDB_PORT_5432_TCP_PORT=5432`.
-* The `prefix_PROTO` variable contains just the protocol from the URL for
+* The `prefix_PROTO` variable contains just the protocol from the URL of
 example `WEBDB_PORT_5432_TCP_PROTO=tcp`.
 
 If the container exposes multiple ports, an environment variable set is

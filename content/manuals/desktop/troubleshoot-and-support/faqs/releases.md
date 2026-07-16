@@ -8,7 +8,7 @@ tags: [FAQ]
 
 ### How frequent will new releases be?
 
-New releases are available roughly every month, unless there are critical fixes that need to be released sooner. 
+New releases are available every week, unless there are critical fixes that need to be released sooner. 
 
 The **Automatically check for updates** setting in the **Software updates** tab is turned on by default. This means you receive notifications in the Docker menu and a notification badge on the Docker Desktop Dashboard when a new version is available. 
 

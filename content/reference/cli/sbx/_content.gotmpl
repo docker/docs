@@ -1,0 +1,48 @@
+{{- /*
+  Content adapter for sbx CLI reference pages.
+
+  Generates pages from YAML data files in hugo.Data.sbx_cli (cobra/doc format).
+  For each YAML file it creates a page at the command path (spaces → slashes).
+  Commands with child entries in see_also become Hugo sections; others become
+  regular pages.
+*/ -}}
+
+{{- range $name, $data := hugo.Data.sbx_cli -}}
+  {{- if not $data.name -}}
+    {{- continue -}}
+  {{- end -}}
+
+  {{- /* Determine if this command has child commands (from see_also) */ -}}
+  {{- $hasChildren := false -}}
+  {{- $prefix := printf "%s " $data.name -}}
+  {{- with $data.see_also -}}
+    {{- range . -}}
+      {{- $cmd := index (split . " - ") 0 -}}
+      {{- if strings.HasPrefix $cmd $prefix -}}
+        {{- $hasChildren = true -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* Compute path relative to this adapter (strip "sbx/" prefix) */ -}}
+  {{- $fullPath := replace $data.name " " "/" -}}
+  {{- $kind := cond $hasChildren "section" "page" -}}
+
+  {{- if eq $data.name "sbx" -}}
+    {{- /* Root command is the section index */ -}}
+    {{- $.AddPage (dict
+      "path" "."
+      "title" $data.name
+      "kind" "section"
+      "params" (dict "datafile" $name)
+    ) -}}
+  {{- else -}}
+    {{- $relPath := strings.TrimPrefix "sbx/" $fullPath -}}
+    {{- $.AddPage (dict
+      "path" $relPath
+      "title" $data.name
+      "kind" $kind
+      "params" (dict "datafile" $name)
+    ) -}}
+  {{- end -}}
+{{- end -}}

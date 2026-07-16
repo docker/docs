@@ -1,0 +1,22 @@
+command: docker desktop diagnose
+short: Diagnose Docker Desktop issues
+usage: docker desktop diagnose [OPTIONS]
+pname: docker desktop diagnose
+plink: docker_desktop_diagnose.yaml
+options:
+    - option: upload
+      shorthand: u
+      value_type: bool
+      default_value: "false"
+      description: Uploads the diagnostic ID.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false

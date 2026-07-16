@@ -8,35 +8,20 @@ linkTitle: Sign in
 weight: 40
 aliases:
 - /desktop/linux/
-- /desktop/linux/index/
 - /desktop/mac/
-- /desktop/mac/index/
 - /desktop/windows/
-- /desktop/windows/index/
 - /docker-for-mac/
-- /docker-for-mac/index/
-- /docker-for-mac/osx/
-- /docker-for-mac/started/
 - /docker-for-windows/
-- /docker-for-windows/index/
-- /docker-for-windows/started/
-- /mac/
-- /mackit/
-- /mackit/getting-started/
-- /win/
-- /windows/
-- /winkit/
-- /winkit/getting-started/
 - /desktop/get-started/
 ---
 
 Docker recommends signing in with the **Sign in** option in the top-right corner of the Docker Dashboard. 
 
-In large enterprises where admin access is restricted, administrators can [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md). 
+In large enterprises where admin access is restricted, administrators can [enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md). 
 
 > [!TIP]
 >
-> Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you. 
+> Explore [Docker's core subscriptions](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopSignIn) to see what else Docker can offer you. 
 
 ## Benefits of signing in
 
@@ -44,7 +29,7 @@ In large enterprises where admin access is restricted, administrators can [enfor
 
 - Increase your pull rate limit compared to anonymous users. See [Usage and limits](/manuals/docker-hub/usage/_index.md).
 
-- Enhance your organization’s security posture for containerized development with [Hardened Desktop](/manuals/security/for-admins/hardened-desktop/_index.md).
+- Enhance your organization’s security posture for containerized development with [Hardened Desktop](/manuals/enterprise/security/hardened-desktop/_index.md).
 
 > [!NOTE]
 >
@@ -71,10 +56,10 @@ Docker Desktop displays a warning if `pass` is not configured.
     3ABCD1234EF56G78
    uid          Molly <molly@example.com>
    ```
-3. Copy the GPG ID and use it to initialize `pass`
+3. Copy the GPG ID and use it to initialize `pass`. For example
 
    ```console
-   $ pass init <your_generated_gpg-id_public_key>
+   $ pass init 3ABCD1234EF56G78
    ``` 
 
    You should see output similar to: 

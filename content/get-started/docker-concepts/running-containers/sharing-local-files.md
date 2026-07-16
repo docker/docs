@@ -38,7 +38,7 @@ Here's a way to use `docker run` to start a container using a bind mount and map
 $ docker run -v /HOST/PATH:/CONTAINER/PATH -it nginx
 ```
 
-The `--mount` flag offers more advanced features and granular control, making it suitable for complex mount scenarios or production deployments. If you use `--mount` to bind-mount a file or directory that doesn't yet exist on the Docker host, the `docker run` command doesn't automatically create it for you but generates an error.
+The `--mount` flag offers more advanced features and granular control, making it suitable for complex mount scenarios or production deployments. By default, if you use `--mount` to bind-mount a file or directory that doesn't yet exist on the Docker host, the `docker run` command doesn't automatically create it for you but generates an error.
 
 ```console
 $ docker run --mount type=bind,source=/HOST/PATH,target=/CONTAINER/PATH,readonly nginx
@@ -162,12 +162,12 @@ Using a bind mount, you can map the configuration file on your host computer to 
 1. You can view the mounted files inside a container by selecting the container's **Files** tab and then selecting a file inside the `/usr/local/apache2/htdocs/` directory. Then, select **Open file editor**.
 
 
-   ![A screenshot of Docker Desktop Dashboard showing the mounted files inside the a container](images/mounted-files.webp?border=true)
+   ![A screenshot of Docker Desktop Dashboard showing the mounted files inside the container](images/mounted-files.webp?border=true)
 
 2. Delete the file on the host and verify the file is also deleted in the container. You will find that the files no longer exist under **Files** in the Docker Desktop Dashboard.
 
 
-   ![A screenshot of Docker Desktop Dashboard showing the deleted files inside the a container](images/deleted-files.webp?border=true)
+   ![A screenshot of Docker Desktop Dashboard showing the deleted files inside the container](images/deleted-files.webp?border=true)
 
 
 3. Recreate the HTML file on the host system and see that file re-appears under the **Files** tab under **Containers** on the Docker Desktop Dashboard. By now, you will be able to access the site too.
@@ -182,10 +182,7 @@ The container continues to run until you stop it.
 
 2. Locate the container you'd like to stop.
 
-3. Select the **Delete** action in the Actions column.
-
-![A screenshot of Docker Desktop Dashboard showing how to delete the container](images/delete-the-container.webp?border=true)
-
+3. Select the **Stop** action in the Actions column.
 
 ## Additional resources
 

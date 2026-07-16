@@ -1,0 +1,4 @@
+{{ $mermaid := resources.Get "js/mermaid.js"
+  | js.Build (dict "minify" true "targetPath" "mermaid.js")
+}}
+<script defer src="{{ $mermaid.Permalink }}"></script>

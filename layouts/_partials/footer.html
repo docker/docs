@@ -1,0 +1,95 @@
+<div
+  class="ml-auto hidden grid-cols-3 gap-6 border-t border-gray-200 bg-gray-100 px-4 pt-6 pb-2 text-gray-600 md:grid dark:border-gray-700 dark:bg-gray-900 dark:text-gray-400 [&_a:hover]:underline [&_a:hover]:underline-offset-4"
+>
+  <div class="flex min-w-20 flex-wrap items-center gap-1">
+    <a href="https://www.linkedin.com/company/docker" aria-label="LinkedIn">
+      <span class="icon-svg">
+        {{ partialCached "icon" "linkedin" "linkedin" }}
+      </span>
+    </a>
+    <a href="https://x.com/docker/" aria-label="Twitter">
+      <span class="icon-svg">
+        {{ partialCached "icon" "twitter" "twitter" }}
+      </span>
+    </a>
+    <a href="https://www.facebook.com/docker.run" aria-label="Facebook">
+      <span class="icon-svg">
+        {{ partialCached "icon" "facebook" "facebook" }}
+      </span>
+    </a>
+    <a href="http://www.youtube.com/user/dockerrun" aria-label="YouTube">
+      <span class="icon-svg">
+        {{ partialCached "icon" "youtube" "youtube" }}
+      </span>
+    </a>
+    <a href="https://www.instagram.com/dockerinc/" aria-label="Instagram">
+      <span class="icon-svg">
+        {{ partialCached "icon" "instagram" "instagram" }}
+      </span>
+    </a>
+  </div>
+  <div class="flex items-center justify-center gap-3">
+    <a
+      href="https://www.docker.com/"
+      class="inline-flex truncate whitespace-normal"
+      >Product offerings</a
+    >
+    <a
+      href="https://www.docker.com/pricing?ref=Docs&refAction=DocsFooter"
+      class="inline-flex truncate whitespace-normal"
+      >Pricing</a
+    >
+    <a
+      href="https://www.docker.com/company/"
+      class="inline-flex truncate whitespace-normal"
+      >About us</a
+    >
+    <a
+      href="{{ "llms.txt" | relURL }}"
+      class="inline-flex truncate whitespace-normal"
+      >llms.txt</a
+    >
+    <a
+      href="{{ "llms-full.txt" | relURL }}"
+      class="inline-flex truncate whitespace-normal"
+      >llms-full.txt</a
+    >
+  </div>
+  <div class="flex items-center justify-end">
+    <button
+      type="button"
+      id="ot-sdk-btn"
+      class="ot-sdk-show-settings whitespace-normal md:truncate"
+    >
+      Cookies Settings
+    </button>
+    <span class="mx-1 text-gray-400">|</span>
+    <a
+      title="Docker Terms of Use"
+      href="https://www.docker.com/legal/docker-terms-use/"
+      class="whitespace-normal md:truncate"
+      >Terms of Use</a
+    >
+    <span class="mx-1 text-gray-400">|</span>
+    <a
+      title="Docker Systems Status Page"
+      href="https://www.dockerstatus.com/"
+      class="whitespace-normal md:truncate"
+      >Status</a
+    >
+    <span class="mx-1 text-gray-400">|</span>
+    <a
+      title="Docker Legal Terms"
+      href="https://www.docker.com/legal"
+      class="whitespace-normal md:truncate"
+      >Legal</a
+    >
+  </div>
+</div>
+<div
+  class="border-t border-gray-200 bg-gray-100 px-4 py-4 text-sm text-gray-400 md:border-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-600"
+>
+  <span
+    >Copyright © 2013-{{ time.Now.Year }} Docker Inc. All rights reserved.</span
+  >
+</div>

@@ -6,6 +6,10 @@ aliases:
 - /docker-hub/builds/manage-builds/
 ---
 
+> [!WARNING]
+> Docker Hub Automated Builds is a deprecated feature.
+> It will be fully retired on April 1, 2027.
+
 > [!NOTE]
 >
 > Automated builds require a Docker Pro, Team, or Business subscription.

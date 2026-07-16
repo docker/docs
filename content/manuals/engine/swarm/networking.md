@@ -290,8 +290,7 @@ service's external clients to an individual swarm node, without the client
 needing to know how many nodes are participating in the service or their
 IP addresses or ports. You don't need to publish ports which are used between
 services on the same network. For instance, if you have a
-[WordPress service that stores its data in a MySQL service](https://training.play-with-docker.com/swarm-service-discovery/),
-and they are connected to the same overlay network, you do not need to publish
+WordPress service that stores its data in a MySQL service, and they are connected to the same overlay network, you do not need to publish
 the MySQL port to the client, only the WordPress HTTP port.
 
 Service discovery can work in two different ways: internal connection-based
@@ -314,6 +313,14 @@ round robin (DNSRR). You can configure this per service.
   balancer, such as HAProxy. To configure a service to use DNSRR, use the flag
   `--endpoint-mode dnsrr` when creating a new service or updating an existing
   one.
+
+### Container discovery
+
+For most situations, connect to the service name. Docker load-balances
+requests across all running tasks ("containers") backing the service. To
+resolve the IP addresses of all individual tasks backing a service directly,
+perform a DNS lookup for `tasks.<service-name>`. Docker returns a list of
+all task IP addresses for that service, one per running replica.
 
 ## Customize the ingress network {#customize-ingress}
 
@@ -395,7 +402,7 @@ order to delete an existing bridge. The package name is `bridge-utils`.
 
 4.  Create or re-create the `docker_gwbridge` bridge with your custom settings.
     This example uses the subnet `10.11.0.0/16`. For a full list of customizable
-    options, see [Bridge driver options](/reference/cli/docker/network/create.md#bridge-driver-options).
+    options, see [Bridge driver options](/reference/cli/docker/network/create/#bridge-driver-options).
 
     ```console
     $ docker network create \

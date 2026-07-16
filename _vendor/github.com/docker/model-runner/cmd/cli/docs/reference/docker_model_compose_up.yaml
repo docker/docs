@@ -1,0 +1,90 @@
+command: docker model compose up
+usage: docker model compose up
+pname: docker model compose
+plink: docker_model_compose.yaml
+options:
+    - option: backend
+      value_type: string
+      default_value: llama.cpp
+      description: inference backend to use
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: context-size
+      value_type: int64
+      default_value: "-1"
+      description: context size for the model
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: model
+      value_type: stringArray
+      default_value: '[]'
+      description: model to use
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: runtime-flags
+      value_type: string
+      description: raw runtime flags to pass to the inference engine
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: speculative-draft-model
+      value_type: string
+      description: draft model for speculative decoding
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: speculative-min-acceptance-rate
+      value_type: float64
+      default_value: "0"
+      description: minimum acceptance rate for speculative decoding
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: speculative-num-tokens
+      value_type: int
+      default_value: "0"
+      description: number of tokens to predict speculatively
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: project-name
+      value_type: string
+      description: compose project name
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: true
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

@@ -14,6 +14,10 @@ variable "DRY_RUN" {
   default = null
 }
 
+variable "GITHUB_ACTIONS" {
+  default = null
+}
+
 group "default" {
   targets = ["release"]
 }
@@ -36,7 +40,7 @@ target "release" {
 }
 
 group "validate" {
-  targets = ["lint", "test", "unused-media", "test-go-redirects", "dockerfile-lint", "path-warnings"]
+  targets = ["lint", "test", "unused-media", "test-go-redirects", "dockerfile-lint", "validate-vendor"]
 }
 
 target "test" {
@@ -48,6 +52,15 @@ target "test" {
 target "lint" {
   target = "lint"
   output = ["type=cacheonly"]
+  provenance = false
+}
+
+target "vale" {
+  target = "vale"
+  args = {
+    GITHUB_ACTIONS = GITHUB_ACTIONS
+  }
+  output = ["./tmp"]
   provenance = false
 }
 
@@ -65,11 +78,6 @@ target "test-go-redirects" {
 
 target "dockerfile-lint" {
   call = "check"
-}
-
-target "path-warnings" {
-  target = "path-warnings"
-  output = ["type=cacheonly"]
 }
 
 #
@@ -117,14 +125,6 @@ target "_common-aws" {
   provenance = false
 }
 
-target "aws-s3-update-config" {
-  inherits = ["_common-aws"]
-  context = "hack/releaser"
-  target = "aws-s3-update-config"
-  no-cache-filter = ["aws-update-config"]
-  output = ["type=cacheonly"]
-}
-
 target "aws-lambda-invoke" {
   inherits = ["_common-aws"]
   context = "hack/releaser"
@@ -155,6 +155,11 @@ target "vendor" {
   }
   output = ["."]
   provenance = false
+}
+
+target "validate-vendor" {
+  target = "validate-vendor"
+  output = ["type=cacheonly"]
 }
 
 variable "UPSTREAM_MODULE_NAME" {

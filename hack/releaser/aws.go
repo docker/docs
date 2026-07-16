@@ -3,7 +3,6 @@ package main
 import (
 	"archive/zip"
 	"bytes"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
@@ -18,64 +17,11 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/cloudfront"
 	"github.com/aws/aws-sdk-go/service/lambda"
-	"github.com/aws/aws-sdk-go/service/s3"
 )
 
 type AwsCmd struct {
-	S3UpdateConfig   AwsS3UpdateConfigCmd   `kong:"cmd,name=s3-update-config"`
 	LambdaInvoke     AwsLambdaInvokeCmd     `kong:"cmd,name=lambda-invoke"`
 	CloudfrontUpdate AwsCloudfrontUpdateCmd `kong:"cmd,name=cloudfront-update"`
-}
-
-type AwsS3UpdateConfigCmd struct {
-	Region   string `kong:"name='region',env='AWS_REGION'"`
-	S3Bucket string `kong:"name='s3-bucket',env='AWS_S3_BUCKET'"`
-	S3Config string `kong:"name='s3-website-config',env='AWS_S3_CONFIG'"`
-	DryRun   bool   `kong:"name='dry-run',env='DRY_RUN'"`
-}
-
-func (s *AwsS3UpdateConfigCmd) Run() error {
-	if s.DryRun {
-		log.Printf("INFO: Dry run mode enabled. Configuration:\nRegion: %s\nS3Bucket: %s\nS3Config: %s\n", s.Region, s.S3Bucket, s.S3Config)
-		return nil
-	}
-
-	file, err := os.ReadFile(s.S3Config)
-	if err != nil {
-		return fmt.Errorf("failed to read s3 config file %s: %w", s.S3Config, err)
-	}
-
-	data := s3.WebsiteConfiguration{}
-	err = json.Unmarshal(file, &data)
-	if err != nil {
-		return fmt.Errorf("failed to parse JSON from %s: %w", s.S3Config, err)
-	}
-
-	sess, err := session.NewSession(&aws.Config{
-		Credentials: awsCredentials(),
-		Region:      aws.String(s.Region),
-	})
-	if err != nil {
-		return fmt.Errorf("failed to create session: %w", err)
-	}
-
-	svc := s3.New(sess)
-
-	// Create SetBucketWebsite parameters based on the JSON file input
-	params := s3.PutBucketWebsiteInput{
-		Bucket:               aws.String(s.S3Bucket),
-		WebsiteConfiguration: &data,
-	}
-
-	// Set the website configuration on the bucket.
-	// Replacing any existing configuration.
-	_, err = svc.PutBucketWebsite(&params)
-	if err != nil {
-		return fmt.Errorf("unable to set bucket %q website configuration: %w", s.S3Bucket, err)
-	}
-
-	log.Printf("INFO: successfully set bucket %q website configuration\n", s.S3Bucket)
-	return nil
 }
 
 type AwsLambdaInvokeCmd struct {

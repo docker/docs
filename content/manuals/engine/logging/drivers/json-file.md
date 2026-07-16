@@ -31,11 +31,11 @@ only one container.
 ## Usage
 
 To use the `json-file` driver as the default logging driver, set the `log-driver`
-and `log-opts` keys to appropriate values in the `daemon.json` file, which is
-located in `/etc/docker/` on Linux hosts or
-`C:\ProgramData\docker\config\` on Windows Server. If the file does not exist, create it first. For more information about
-configuring Docker using `daemon.json`, see
+and `log-opts` keys to appropriate values in the `daemon.json` file. For more
+information about configuring Docker using `daemon.json`, see
 [daemon.json](/reference/cli/dockerd.md#daemon-configuration-file).
+
+{{% include "daemon-cfg-desktop.md" %}}
 
 The following example sets the log driver to `json-file` and sets the `max-size`
 and `max-file` options to enable automatic log-rotation.
@@ -80,7 +80,7 @@ The `json-file` logging driver supports the following logging options:
 | `labels-regex` | Similar to and compatible with `labels`. A regular expression to match logging-related labels. Used for advanced [log tag options](log_tags.md).                                                              | `--log-opt labels-regex=^(production_status\|geo)` |
 | `env`          | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon accepts. Used for advanced [log tag options](log_tags.md).                               | `--log-opt env=os,customer`                        |
 | `env-regex`    | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                                                  | `--log-opt env-regex=^(os\|customer)`              |
-| `compress`     | Toggles compression for rotated logs. Default is `disabled`.                                                                                                                                                  | `--log-opt compress=true`                          |
+| `compress`     | Toggles compression for rotated logs. Defaults to `false` (no compression).                                                                                                                                   | `--log-opt compress=true`                          |
 
 ### Examples
 

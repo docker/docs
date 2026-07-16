@@ -1,0 +1,30 @@
+name: Release Notes PR Trigger
+
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - content/manuals/desktop/release-notes.md
+
+jobs:
+  trigger:
+    runs-on: ubuntu-24.04
+    if: github.repository_owner == 'docker'
+    steps:
+      - name: Save PR details
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          jq -n \
+            --arg url "$PR_URL" \
+            --arg title "$PR_TITLE" \
+            --arg author "$PR_AUTHOR" \
+            '{url: $url, title: $title, author: $author}' > pr-details.json
+
+      - name: Upload PR details
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
+        with:
+          name: pr-details
+          path: pr-details.json

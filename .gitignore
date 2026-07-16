@@ -1,10 +1,19 @@
+.hugo_build.lock
+hugo_stats.json
+.idea/
+.vscode/mcp.json
+.vscode/settings.json
+.vscode/tasks.json
 **/.DS_Store
 **/desktop.ini
-.vscode
 node_modules
-.hugo_build.lock
-resources
 public
-tmp
+resources
 static/pagefind
-.idea/
+tmp
+# Binary installed by cagent-action in CI
+cagent
+# cagent tmp files
+.cagent
+.pr-body.md
+.validation.log

@@ -1,13 +1,11 @@
 ---
-description: How to use Docker Compose's extends keyword to share configuration between
-  files and projects
-keywords: fig, composition, compose, docker, orchestration, documentation, docs
+description: Learn how to reuse service configurations across files and projects using Docker Compose’s extends attribute.
+keywords: fig, composition, compose, docker, orchestration, documentation, docs, compose file modularization
 title: Extend your Compose file
 linkTitle: Extend
 weight: 20
 aliases:
 - /compose/extends/
-- /compose/multiple-compose-files/extends/
 ---
 
 Docker Compose's [`extends` attribute](/reference/compose-file/services.md#extends)
@@ -29,7 +27,13 @@ configuration. Tracking which fragment of a service is relative to which path is
 difficult and confusing, so to keep paths easier to understand, all paths must
 be defined relative to the base file. 
 
-## How it works
+> [!NOTE]
+>
+> `extends` is not supported when deploying with `docker stack deploy`. Running
+> `docker stack config` on a Compose file that uses `extends` returns the error:
+> `Configuration contains forbidden properties`.
+
+## How the `extends` attribute works
 
 ### Extending services from another file
 
@@ -43,7 +47,7 @@ services:
       service: webapp
 ```
 
-This instructs Compose to re-use only the properties of the `webapp` service
+This instructs Compose to reuse only the properties of the `webapp` service
 defined in the `common-services.yml` file. The `webapp` service itself is not part of the final project.
 
 If `common-services.yml`
@@ -62,12 +66,12 @@ You get exactly the same result as if you wrote
 `compose.yaml` with the same `build`, `ports`, and `volumes` configuration
 values defined directly under `web`.
 
-To include the service `webapp` in the final project when extending services from another file, you need to explicitly include both services in your current Compose file. For example (note this is a non-normative example):
+To include the service `webapp` in the final project when extending services from another file, you need to explicitly include both services in your current Compose file. For example (this is for illustrative purposes only):
 
 ```yaml
 services:
   web:
-    build: alpine
+    build: ./alpine
     command: echo
     extends:
       file: common-services.yml
@@ -87,7 +91,7 @@ If you define services in the same Compose file and extend one service from anot
 ```yaml 
 services:
   web:
-    build: alpine
+    build: ./alpine
     extends: webapp
   webapp:
     environment:
@@ -157,20 +161,6 @@ services:
     depends_on:
       - queue
 ```
-
-## Exceptions and limitations
-
-`volumes_from` and `depends_on` are never shared between services using
-`extends`. These exceptions exist to avoid implicit dependencies; you always
-define `volumes_from` locally. This ensures dependencies between services are
-clearly visible when reading the current file. Defining these locally also
-ensures that changes to the referenced file don't break anything.
-
-`extends` is useful if you only need a single service to be shared and you are
-familiar with the file you're extending to, so you can tweak the
-configuration. But this isn’t an acceptable solution when you want to re-use
-someone else's unfamiliar configurations and you don’t know about its own
-dependencies.
 
 ## Relative paths
 

@@ -84,7 +84,7 @@ services:
 > - Completed tasks remain until explicitly removed.
 > - Options like `max-concurrent` for controlling concurrency are supported only via the CLI and are not available in Compose.
 
-For more detailed information about job options and behavior, see the [Docker CLI documentation](/reference/cli/docker/service/create.md#running-as-a-job)
+For more detailed information about job options and behavior, see the [Docker CLI documentation](/reference/cli/docker/service/create/#running-as-a-job)
 
 ### `placement`
 
@@ -92,19 +92,19 @@ For more detailed information about job options and behavior, see the [Docker CL
 
 #### `constraints`
 
-`constraints` defines a required property the platform's node must fulfill to run the service container. For a further example, see the [CLI reference docs](/reference/cli/docker/service/create.md#constraint).
+`constraints` defines a required property the platform's node must fulfill to run the service container. For a further example, see the [CLI reference docs](/reference/cli/docker/service/create/#constraint).
 
 ```yml
 deploy:
   placement:
     constraints:
-      - disktype=ssd
+      - node.labels.disktype==ssd
 ```
 
 #### `preferences`
 
 `preferences` defines a strategy (currently `spread` is the only supported strategy) to spread tasks evenly 
-over the values of the datacenter node label. For a further example, see the [CLI reference docs](/reference/cli/docker/service/create.md#placement-pref)
+over the values of the datacenter node label. For a further example, see the [CLI reference docs](/reference/cli/docker/service/create/#placement-pref)
 
 ```yml
 deploy:
@@ -132,7 +132,7 @@ services:
 `resources` configures physical resource constraints for container to run on platform. Those constraints can be configured
 as:
 
-- `limits`: The platform must prevent the container to allocate more.
+- `limits`: The platform must prevent the container from allocating more resources.
 - `reservations`: The platform must guarantee the container can allocate at least the configured amount.
 
 ```yml
@@ -270,7 +270,7 @@ deploy:
 
 ### `rollback_config`
 
-`rollback_config` configures how the service should be rollbacked in case of a failing update.
+`rollback_config` configures how the service should be rolled back in case of a failing update.
 
 - `parallelism`: The number of containers to rollback at a time. If set to 0, all containers rollback simultaneously.
 - `delay`: The time to wait between each container group's rollback (default 0s).

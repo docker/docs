@@ -1,12 +1,7 @@
 ---
 title: Checking your build configuration
 linkTitle: Build checks
-params:
-  sidebar:
-    badge:
-      color: green
-      text: New
-weight: 30
+weight: 20
 description: Learn how to use build checks to validate your build configuration.
 keywords: build, buildx, buildkit, checks, validate, configuration, lint
 ---
@@ -38,8 +33,8 @@ Build checks are useful for:
 
 > [!TIP]
 >
-> Want a better editing experience for Dockerfiles in VS Code?
-> Check out the [Docker VS Code Extension (Beta)](https://marketplace.visualstudio.com/items?itemName=docker.docker) for linting, code navigation, and vulnerability scanning.
+> To improve linting, code navigation, and vulnerability scanning of your Dockerfiles in Visual Studio Code
+> see the [Docker DX](https://marketplace.visualstudio.com/items?itemName=docker.docker) extension.
 
 ## Build with checks
 
@@ -79,7 +74,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build and push
-        uses: docker/build-push-action@v6.6.0
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
 ```
 
 ![GitHub Actions build check annotations](./images/gha-check-annotations.png)

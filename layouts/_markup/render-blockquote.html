@@ -1,0 +1,42 @@
+{{- $icons := dict
+  "caution" "warning.svg"
+  "important" "important.svg"
+  "note" "info.svg"
+  "tip" "lightbulb.svg"
+  "warning" "warning.svg"
+}}
+{{- $admonitionClasses := dict
+  "caution" "admonition admonition-danger"
+  "important" "admonition admonition-note"
+  "note" "admonition admonition-note"
+  "tip" "admonition admonition-tip"
+  "warning" "admonition admonition-warning"
+}}
+{{- $type := cond (index $icons .AlertType) .AlertType "note" }}
+{{- $iconFile := index $icons $type }}
+{{- $partial := printf "admonitions/icons/%s" $iconFile }}
+
+  
+{{ if eq .Type "alert" }}
+  <blockquote
+    {{ with .Attributes.id }}id="{{ . }}"{{ end }}
+    class="{{ index $admonitionClasses .AlertType }} admonition not-prose">
+    <div class="admonition-header">
+      <span class="admonition-icon">
+        {{- partialCached $partial . }}
+      </span>
+      <span class="admonition-title">
+        {{ printf "%s%s" (upper (substr $.AlertType 0 1)) (substr $.AlertType 1) }}
+      </span>
+    </div>
+    <div class="admonition-content">
+      {{ .Text | safeHTML }}
+    </div>
+  </blockquote>
+{{ else }}
+<blockquote
+  {{ with .Attributes.id }}id="{{ . }}"{{ end }}
+  class="admonition not-prose">
+  {{ .Text | safeHTML }}
+  </blockquote>
+{{ end }}

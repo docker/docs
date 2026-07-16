@@ -1,0 +1,76 @@
+---
+title: Docker Hardened Images
+description: Secure, minimal, and production-ready base images
+weight: 8
+params:
+  sidebar:
+    group: Supply chain security
+  grid_sections:
+    - title: Quickstart
+      description: Follow a step-by-step guide to explore and run a Docker Hardened Image.
+      icon: rocket-launch
+      link: /dhi/get-started/
+    - title: Explore
+      description: Learn what Docker Hardened Images are, how they're built, and what sets them apart from typical base images.
+      icon: information-circle
+      link: /dhi/explore/
+    - title: Features
+      description: Discover the security, compliance, and enterprise-readiness features built into Docker Hardened Images.
+      icon: lock-closed
+      link: /dhi/features/
+    - title: How-tos
+      description: Step-by-step guides for using, verifying, scanning, and migrating to Docker Hardened Images.
+      icon: play
+      link: /dhi/how-to/
+    - title: Core concepts
+      description: Understand the secure supply chain principles that make Docker Hardened Images production-ready.
+      icon: clipboard-document-check
+      link: /dhi/core-concepts/
+    - title: Troubleshoot
+      description: Resolve common issues with building, running, or debugging Docker Hardened Images.
+      icon: question-mark-circle
+      link: /dhi/troubleshoot/
+    - title: Additional resources
+      description: Guides, Docker Hub catalog, GitHub repositories, and more.
+      icon: link
+      link: /dhi/resources/
+    - title: Release notes
+      description: New features, improvements, and changes in Docker Hardened Images.
+      icon: newspaper
+      link: /dhi/release-notes/platform/
+---
+
+Docker Hardened Images (DHI) provide minimal, secure, and production-ready
+container images, Helm charts, and system packages maintained by Docker.
+Designed to reduce vulnerabilities and simplify compliance, DHI integrates
+easily into your existing Docker-based workflows with little to no retooling
+required.
+
+DHI is available in the following three subscriptions.
+
+| Feature | Community | Select | Enterprise |
+|---|---|---|---|
+| Hardened, minimal images | ✅ | ✅ | ✅ |
+| Near-zero CVEs | ✅ | ✅ | ✅ |
+| Verifiable SBOMs & SLSA Build L3 provenance | ✅ | ✅ | ✅ |
+| Full, unsuppressed CVE visibility | ✅ | ✅ | ✅ |
+| Drop-in adoption, no workflow changes | ✅ | ✅ | ✅ |
+| Full catalog of open source images under Apache 2.0 | ✅ | ✅ | ✅ |
+| Built with Docker Hardened System Packages | ✅ | ✅ | ✅ |
+| Upstream cadence for Docker-released patches | ✅ | ✅ | ✅ |
+| FIPS/STIG variants | ❌ | ✅ | ✅ |
+| Critical CVE fixes < 7 days with SLA-backed continuous patching | ❌ | ✅ | ✅ |
+| Customizations | ❌ | ✅ Up to 5 | ✅ Unlimited |
+| Access to Hardened System Packages repository | ❌ | ❌ | ✅ |
+| Full catalog access available | ❌ | ❌ | ✅ |
+| Extended Lifecycle Support add-on available | ❌ | ❌ | ✅ +5 years of hardened updates |
+
+For pricing and more details, see the [Docker Hardened Images subscription
+comparison](https://www.docker.com/products/hardened-images/#compare).
+
+Explore the sections below to get started with Docker Hardened Images, integrate
+them into your workflow, and learn what makes them secure and enterprise-ready.
+
+{{< grid
+  items="grid_sections"
+>}}

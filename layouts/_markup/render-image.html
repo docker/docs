@@ -1,0 +1,54 @@
+{{- $u := urls.Parse .Destination -}}
+{{- $src := $u.String -}}
+{{ if not (or $u.IsAbs (strings.HasPrefix $u.String "/")) }}
+  {{ $base := urls.Parse .Page.Permalink }}
+  {{ if strings.HasSuffix .Page.File.BaseFileName "index" }}
+    {{ $src = $base.JoinPath $u.Path -}}
+  {{ else }}
+    {{ $src = $base.JoinPath "../" $u.Path -}}
+  {{ end }}
+{{ end }}
+
+{{ $params := $u.Query }}
+{{ $width := $params.Get "w" }}
+{{ $height := $params.Get "h" }}
+{{ $border := $params.Has "border" }}
+
+
+<figure
+  x-data="{ zoom: false }"
+  @click="zoom = ! zoom"
+  class="cursor-pointer hover:opacity-90"
+>
+  <img
+    loading="lazy"
+    src="{{ $src }}"
+    alt="{{ .Text }}"
+    {{ with $width }}width="{{ . }}"{{ end }}
+    {{ with $height }}height="{{ . }}"{{ end }}
+    class="mx-auto{{ with $border }}
+      border border-divider-light dark:border-divider-dark
+    {{ end }} rounded-sm"
+  />
+  {{ with .Title }}
+    <figcaption class="text-gray-200 dark:text-gray-500">{{ . }}</figcaption>
+  {{ end }}
+  <template x-teleport="body">
+    <div
+      x-show="zoom"
+      @click="zoom = false"
+      x-transition.opacity.duration.250ms
+      class="fixed inset-0 z-20 flex items-center justify-center bg-black/100 p-6"
+    >
+      <button class="icon-svg fixed top-6 right-8 z-30 text-white">
+        {{ partialCached "icon" "x-mark" "x-mark" }}
+      </button>
+      <img
+        loading="lazy"
+        class="max-h-full max-w-full rounded-sm"
+        src="{{ $src }}"
+        alt="{{ .Text }}"
+      />
+    </div>
+  </template>
+</figure>

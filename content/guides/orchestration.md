@@ -7,8 +7,8 @@ aliases:
   - /guides/deployment-orchestration/orchestration/
 summary: |
   Explore the essentials of container orchestration with Docker.
-tags: [deploy]
 params:
+  tags: [deployment]
   time: 10 minutes
 ---
 
@@ -41,7 +41,7 @@ Docker Desktop sets up Kubernetes for you quickly and easily. Follow the setup a
 
 1.  From the Docker Dashboard, navigate to **Settings**, and select the **Kubernetes** tab.
 
-2.  Select the checkbox labeled **Enable Kubernetes**, and select **Apply & Restart**. Docker Desktop automatically sets up Kubernetes for you. You'll know that Kubernetes has been successfully enabled when you see a green light beside 'Kubernetes _running_' in **Settings**.
+2.  Select the checkbox labeled **Enable Kubernetes**, and select **Apply**. Docker Desktop automatically sets up Kubernetes for you. You'll know that Kubernetes has been successfully enabled when you see a green light beside 'Kubernetes _running_' in **Settings**.
 
 3.  To confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
 
@@ -107,7 +107,7 @@ Docker Desktop sets up Kubernetes for you quickly and easily. Follow the setup a
 
 1. From the Docker Dashboard, navigate to **Settings**, and select the **Kubernetes** tab.
 
-2. Select the checkbox labeled **Enable Kubernetes**, and select **Apply & Restart**. Docker Desktop automatically sets up Kubernetes for you. You'll know that Kubernetes has been successfully enabled when you see a green light beside 'Kubernetes _running_' in the **Settings** menu.
+2. Select the checkbox labeled **Enable Kubernetes**, and select **Apply**. Docker Desktop automatically sets up Kubernetes for you. You'll know that Kubernetes has been successfully enabled when you see a green light beside 'Kubernetes _running_' in the **Settings** menu.
 
 3. To confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
 

@@ -15,6 +15,10 @@ params:
 
 {{< summary-bar feature_name="Wasm workloads" >}}
 
+> [!IMPORTANT]
+>
+> Wasm workloads are deprecated and will be removed in a future Docker Desktop release. This feature is no longer actively maintained. 
+
 WebAssembly (Wasm) is a fast, light alternative to Linux and
 Windows containers.  With Docker Desktop, you can now run Wasm workloads side by side with traditional containers.
 
@@ -34,7 +38,7 @@ then pre-existing images and containers will be inaccessible.
 1. Navigate to **Settings** in Docker Desktop.
 2. In the **General** tab, check **Use containerd for pulling and storing images**.
 3. Go to **Features in development** and check the **Enable Wasm** option.
-4. Select **Apply & restart** to save the settings.
+4. Select **Apply** to save the settings.
 5. In the confirmation dialog, select **Install** to install the Wasm runtimes.
 
 Docker Desktop downloads and installs the following runtimes: 

@@ -1,0 +1,30 @@
+command: docker dhi mirror
+short: Mirror Docker Hardened Images to your organization
+long: Commands to mirror Docker Hardened Images to your organization's registry
+pname: docker dhi
+plink: docker_dhi.yaml
+cname:
+    - docker dhi mirror list
+    - docker dhi mirror start
+    - docker dhi mirror stop
+clink:
+    - docker_dhi_mirror_list.yaml
+    - docker_dhi_mirror_start.yaml
+    - docker_dhi_mirror_stop.yaml
+options:
+    - option: org
+      value_type: string
+      description: Docker Hub organization (overrides config)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

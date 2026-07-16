@@ -1,13 +1,8 @@
-{{ define "left" }}
-  {{ partial "sidebar/mainnav.html" . }}
-  {{ partial "sidebar/sections.html" . }}
-{{ end }}
-
-{{ define "main" }}
-  {{ partial "breadcrumbs.html" . }}
-  <article class="prose max-w-none dark:prose-invert">
+{{ define "article" }}
+  <article class="prose dark:prose-invert max-w-none">
+    {{ partial "breadcrumbs.html" . }}
     {{ with .Title }}
-    <h1 class="scroll-mt-36">{{ . }}</h1>
+      <h1>{{ . }}</h1>
     {{ end }}
     <table>
       <thead>
@@ -17,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        {{ range site.Data.samples.samples }}
+        {{ range hugo.Data.samples.samples }}
           {{ if in .services $.Params.service }}
             <tr>
               <td>{{ printf "[%s](%s)" .title .url | markdownify }}</td>
@@ -50,8 +45,4 @@
       </li>
     </ul>
   </article>
-{{ end }}
-
-{{ define "right" }}
-  {{ partial "aside.html" . }}
 {{ end }}

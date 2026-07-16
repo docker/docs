@@ -53,7 +53,7 @@ Volumes have their own lifecycle beyond that of containers and can grow quite la
 
 ## Try it out
 
-In this guide, you’ll practice creating and using volumes to persist data created by a Postgres container. When the database runs, it stores files into the `/var/lib/postgresql/data` directory. By attaching the volume here, you will be able to restart the container multiple times while keeping the data.
+In this guide, you'll practice creating and using volumes to persist data created by a Postgres container. When the database runs, it stores files into the `/var/lib/postgresql` directory. By attaching the volume here, you will be able to restart the container multiple times while keeping the data.
 
 ### Use volumes
 
@@ -62,7 +62,7 @@ In this guide, you’ll practice creating and using volumes to persist data crea
 2. Start a container using the [Postgres image](https://hub.docker.com/_/postgres) with the following command:
 
     ```console
-    $ docker run --name=db -e POSTGRES_PASSWORD=secret -d -v postgres_data:/var/lib/postgresql/data postgres
+    $ docker run --name=db -e POSTGRES_PASSWORD=secret -d -v postgres_data:/var/lib/postgresql postgres:18
     ```
 
     This will start the database in the background, configure it with a password, and attach a volume to the directory PostgreSQL will persist the database files.
@@ -115,7 +115,7 @@ In this guide, you’ll practice creating and using volumes to persist data crea
 8. Start a new container by running the following command, attaching the same volume with the persisted data:
 
     ```console
-    $ docker run --name=new-db -d -v postgres_data:/var/lib/postgresql/data postgres 
+    $ docker run --name=new-db -d -v postgres_data:/var/lib/postgresql postgres:18
     ```
 
     You might have noticed that the `POSTGRES_PASSWORD` environment variable has been omitted. That’s because that variable is only used when bootstrapping a new database.
@@ -128,13 +128,13 @@ In this guide, you’ll practice creating and using volumes to persist data crea
 
 ### View volume contents
 
-The Docker Desktop Dashboard provides the ability to view the contents of any volume, as well as the ability to export, import, and clone volumes.
+The Docker Desktop Dashboard provides the ability to view the contents of any volume, as well as the ability to export, import, empty, delete and clone volumes.
 
 1. Open the Docker Desktop Dashboard and navigate to the **Volumes** view. In this view, you should see the **postgres_data** volume.
 
 2. Select the **postgres_data** volume’s name.
 
-3. The **Data** tab shows the contents of the volume and provides the ability to navigate the files. Double-clicking on a file will let you see the contents and make changes.
+3. The **Stored Data** tab shows the contents of the volume and provides the ability to navigate the files. The **Container in-use** tab displays the name of the container using the volume, the image name, the port number used by the container, and the target. A target is a path inside a container that gives access to the files in the volume. The **Exports** tab lets you export the volume. Double-clicking on a file will let you see the contents and make changes.
 
 4. Right-click on any file to save it or delete it.
 

@@ -1,7 +1,9 @@
 ---
-description: Learn how to install, launch, and upgrade Docker Desktop on Ubuntu. This
+description:
+  Learn how to install, launch, and upgrade Docker Desktop on Ubuntu. This
   quick guide will cover prerequisites, installation methods, and more.
-keywords: install docker ubuntu, ubuntu install docker, install docker on ubuntu,
+keywords:
+  install docker ubuntu, ubuntu install docker, install docker on ubuntu,
   docker install ubuntu, how to install docker on ubuntu, ubuntu docker install, docker
   installation on ubuntu, docker ubuntu install, docker installing ubuntu, installing
   docker on ubuntu, docker desktop for ubuntu
@@ -10,16 +12,15 @@ linkTitle: Ubuntu
 weight: 10
 toc_max: 4
 aliases:
-- /desktop/linux/install/ubuntu/
-- /desktop/install/ubuntu/
-- /desktop/install/linux/ubuntu/
+  - /desktop/install/ubuntu/
+  - /desktop/install/linux/ubuntu/
 ---
 
 > **Docker Desktop terms**
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees or more than $10 million USD in annual revenue) requires a [paid
-> subscription](https://www.docker.com/pricing/).
+> subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopUbuntuInstall).
 
 This page contains information on how to install, launch and upgrade Docker Desktop on an Ubuntu distribution.
 
@@ -28,7 +29,7 @@ This page contains information on how to install, launch and upgrade Docker Desk
 To install Docker Desktop successfully, you must:
 
 - Meet the [general system requirements](_index.md#general-system-requirements).
-- Have an x86-64 system with Ubuntu 22.04, 24.04, or the latest non-LTS version.
+- Have an x86-64 system with Ubuntu 26.04 LTS or 24.04 LTS.
 - If you're not using GNOME, you must install `gnome-terminal` to enable terminal access from Docker Desktop:
   ```console
   $ sudo apt install gnome-terminal
@@ -47,7 +48,7 @@ Recommended approach to install Docker Desktop on Ubuntu:
 
    ```console
    $ sudo apt-get update
-   $ sudo apt-get install ./docker-desktop-amd64.deb
+   $ sudo apt install ./docker-desktop-amd64.deb
    ```
 
    > [!NOTE]
@@ -68,7 +69,7 @@ The post-install script:
 - Sets the capability on the Docker Desktop binary to map privileged ports and set resource limits.
 - Adds a DNS name for Kubernetes to `/etc/hosts`.
 - Creates a symlink from `/usr/local/bin/com.docker.cli` to `/usr/bin/docker`.
-  This is because the classic Docker CLI is installed at `/usr/bin/docker`. The Docker Desktop installer also installs a Docker CLI binary that includes cloud-integration capabilities and is essentially a wrapper for the Compose CLI, at `/usr/local/bin/com.docker.cli`. The symlink ensures that the wrapper can access the classic Docker CLI. 
+  This is because the classic Docker CLI is installed at `/usr/bin/docker`. The Docker Desktop installer also installs a Docker CLI binary that includes cloud-integration capabilities and is essentially a wrapper for the Compose CLI, at `/usr/local/bin/com.docker.cli`. The symlink ensures that the wrapper can access the classic Docker CLI.
 
 ## Launch Docker Desktop
 
@@ -80,12 +81,12 @@ When a new version for Docker Desktop is released, the Docker UI shows a notific
 You need to download the new package each time you want to upgrade Docker Desktop and run:
 
 ```console
-$ sudo apt-get install ./docker-desktop-amd64.deb
+$ sudo apt install ./docker-desktop-amd64.deb
 ```
 
 ## Next steps
 
-- Review [Docker's subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
+- Review [Docker's subscriptions](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopUbuntuInstall) to see what Docker can offer you.
 - Follow the [Docker workshop](/get-started/workshop/_index.md) to learn how to build an image and run it as a containerized application.
 - [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and all its features.
 - [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.

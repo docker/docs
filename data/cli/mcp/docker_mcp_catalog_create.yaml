@@ -1,0 +1,64 @@
+command: docker mcp catalog create
+short: |
+    Create a new catalog from a profile, legacy catalog, or community registry
+long: |
+    Create a new catalog from a profile, legacy catalog, or community registry
+usage: docker mcp catalog create <oci-reference> [--server <ref1> --server <ref2> ...] [--from-profile <profile-id>] [--from-legacy-catalog <url>] [--from-community-registry <hostname>] [--title <title>]
+pname: docker mcp catalog
+plink: docker_mcp_catalog.yaml
+options:
+    - option: from-community-registry
+      value_type: string
+      description: |
+        Community registry hostname to fetch servers from (e.g. registry.modelcontextprotocol.io)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: from-legacy-catalog
+      value_type: string
+      description: Legacy catalog URL to create the catalog from
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: from-profile
+      value_type: string
+      description: Profile ID to create the catalog from
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: server
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Server to include specified with a URI: https:// (MCP Registry reference) or docker:// (Docker Image reference) or catalog:// (Catalog reference) or file:// (Local file path). Can be specified multiple times.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: title
+      value_type: string
+      description: Title of the catalog
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

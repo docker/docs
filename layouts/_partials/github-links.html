@@ -1,0 +1,25 @@
+{{- /*
+  Adds links for editing the page or requesting changes:
+  - "Edit this page": Only in production, skips files from `_vendor/` (upstream repositories).
+  - "Request changes": Links to a pre-filled issue form.
+*/ -}}
+{{ if hugo.IsProduction }}
+  {{ with .File }}
+  {{ if not (in .Filename "/_vendor/") }}
+<p class="flex items-center gap-1">
+  <span class="icon-svg icon-sm">
+    {{ partialCached "icon" "pencil-square" "pencil-square" }}
+  </span>
+  <a class="link" rel="noopener"
+    href="{{ site.Params.repo }}/edit/main/content/{{ .Path }}">{{- T "editPage" -}}</a>
+</p>
+  {{ end }}
+  {{ end }}
+<p class="flex items-center gap-1">
+  <span class="icon-svg icon-sm">
+    {{ partialCached "icon" "flag" "flag" }}
+  </span>
+  <a class="link" rel="noopener"
+    href="{{ site.Params.repo }}/issues/new?template=doc_issue.yml&location={{ .Permalink }}&labels=status%2Ftriage">{{- T "requestChanges" -}}</a>
+</p>
+{{ end }}

@@ -1,0 +1,52 @@
+command: docker mcp catalog server ls
+aliases: docker mcp catalog server ls, docker mcp catalog server list
+short: List servers in a catalog
+long: |-
+    List all servers in a catalog.
+
+    Use --filter to search for servers matching a query (case-insensitive substring matching on server names).
+    Filters use key=value format (e.g., name=github).
+usage: docker mcp catalog server ls <oci-reference>
+pname: docker mcp catalog server
+plink: docker_mcp_catalog_server.yaml
+options:
+    - option: filter
+      shorthand: f
+      value_type: stringArray
+      default_value: '[]'
+      description: Filter output (e.g., name=github)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: format
+      value_type: string
+      default_value: human
+      description: 'Supported: json, yaml, human.'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+examples: |4-
+      # List all servers in a catalog
+      docker mcp catalog server ls mcp/docker-mcp-catalog:latest
+
+      # Filter servers by name
+      docker mcp catalog server ls mcp/docker-mcp-catalog:latest --filter name=github
+
+      # Combine multiple filters (using short flag)
+      docker mcp catalog server ls mcp/docker-mcp-catalog:latest -f name=slack -f name=github
+
+      # Output in JSON format
+      docker mcp catalog server ls mcp/docker-mcp-catalog:latest --format json
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

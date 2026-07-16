@@ -13,18 +13,25 @@ The following is a complete `buildkitd.toml` configuration example.
 Note that some configuration options are only useful in edge cases.
 
 ```toml
-# debug enables additional debug logging
-debug = true
-# trace enables additional trace logging (very verbose, with potential performance impacts)
-trace = true
 # root is where all buildkit state is stored.
 root = "/var/lib/buildkit"
 # insecure-entitlements allows insecure entitlements, disabled by default.
-insecure-entitlements = [ "network.host", "security.insecure" ]
+insecure-entitlements = [ "network.host", "security.insecure", "device" ]
+# proxyNetwork enables proxy network enforcement for all builds, disabled by default.
+# It can also be enabled with buildkitd --proxy-network.
+proxyNetwork = true
+# provenanceEnvDir is the directory where extra config is loaded that is added
+# to the provenance of builds:
+# slsa v0.2: invocation.environment.*
+# slsa v1: buildDefinition.internalParameters.*
+provenanceEnvDir = "/etc/buildkit/provenance.d"
 
 [log]
   # log formatter: json or text
   format = "text"
+
+  # log level (error/warn/info/debug/trace)
+  level = "info"
 
 [dns]
   nameservers=["1.1.1.1","8.8.8.8"]
@@ -69,7 +76,6 @@ insecure-entitlements = [ "network.host", "security.insecure" ]
   # Whether run subprocesses in main pid namespace or not, this is useful for
   # running rootless buildkit inside a container.
   noProcessSandbox = false
-
   # gc enables/disables garbage collection
   gc = true
   # reservedSpace is the minimum amount of disk space guaranteed to be
@@ -87,7 +93,6 @@ insecure-entitlements = [ "network.host", "security.insecure" ]
   # collector will attempt to leave - however, it will never be bought below
   # reservedSpace.
   minFreeSpace = "20GB"
-
   # alternate OCI worker binary name(example 'crun'), by default either 
   # buildkit-runc or runc binary is used
   binary = ""
@@ -116,7 +121,6 @@ insecure-entitlements = [ "network.host", "security.insecure" ]
     # collector will attempt to leave - however, it will never be bought below
     # reservedSpace.
     minFreeSpace = "10GB"
-
     # keepDuration can be an integer number of seconds (e.g. 172800), or a
     # string duration (e.g. "48h")
     keepDuration = "48h"
@@ -148,7 +152,8 @@ insecure-entitlements = [ "network.host", "security.insecure" ]
   # collector will attempt to leave - however, it will never be bought below
   # reservedSpace.
   minFreeSpace = "20GB"
-
+  # limit the number of parallel build steps that can run at the same time
+  max-parallelism = 4
   # maintain a pool of reusable CNI network namespaces to amortize the overhead
   # of allocating and releasing the namespaces
   cniPoolSize = 16
@@ -176,8 +181,13 @@ insecure-entitlements = [ "network.host", "security.insecure" ]
 [registry."docker.io"]
   # mirror configuration to handle path in case a mirror registry requires a /project path rather than just a host:port
   mirrors = ["yourmirror.local:5000", "core.harbor.domain/proxy.docker.io"]
+  # Use plain HTTP to connect to the mirrors.
   http = true
+  # Use HTTPS with self-signed certificates. Do not enable this together with `http`.
   insecure = true
+  # If you use token auth with self-signed certificates,
+  # then buildctl also needs to trust the token provider CA (for example, certificates that are configured for registry)
+  # because buildctl pulls tokens directly without daemon process
   ca=["/etc/config/myca.pem"]
   [[registry."docker.io".keypair]]
     key="/etc/config/key.pem"
@@ -193,7 +203,6 @@ insecure-entitlements = [ "network.host", "security.insecure" ]
 
 [frontend."gateway.v0"]
   enabled = true
-
   # If allowedRepositories is empty, all gateway sources are allowed.
   # Otherwise, only the listed repositories are allowed as a gateway source.
   # 
@@ -206,5 +215,22 @@ insecure-entitlements = [ "network.host", "security.insecure" ]
 [system]
   # how often buildkit scans for changes in the supported emulated platforms
   platformsCacheMaxAge = "1h"
+  # maxRegistryConcurrency sets the maximum number of concurrent connections
+  # per registry. If unset, the default concurrency limit is used.
+  maxRegistryConcurrency = 4
 
+
+# optional signed cache configuration for GitHub Actions backend
+[ghacache.sign]
+# command that signs the payload in stdin and outputs the signature to stdout. Normally you want cosign to produce the signature bytes.
+cmd = ""
+[ghacache.verify]
+required = false
+[ghacache.verify.policy]
+timestampThreshold = 1
+tlogThreshold = 1
+# cetificate properties that need to match. Simple wildcards (*) are supported.
+certificateIssuer = ""
+subjectAlternativeName = ""
+buildSignerURI = ""
 ```

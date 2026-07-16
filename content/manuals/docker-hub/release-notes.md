@@ -2,7 +2,8 @@
 title: Docker Hub release notes
 linkTitle: Release notes
 weight: 999
-description: Learn about the new features, bug fixes, and breaking changes for Docker
+description:
+  Learn about the new features, bug fixes, and breaking changes for Docker
   Hub
 keywords: docker hub, whats new, release notes
 toc_min: 1
@@ -12,6 +13,54 @@ tags: [Release notes]
 
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
+
+## 2026-06-29
+
+### New
+
+- Docker Hub integrates with Cloudsmith, letting it handle authentication
+  for Docker Hub and Docker Hardened Images (DHI) upstreams using a managed
+  token. This removes the need to supply your own credentials during setup.
+  See Cloudsmith's announcement, [Set up Docker Hub and DHI upstreams with
+  Cloudsmith-managed
+  authentication](https://cloudsmith.com/changelog/set-up-docker-hub-and-dhi-upstreams-with-cloudsmith-managed-authentication),
+  for details.
+
+## 2026-05-20
+
+### Infrastructure updates
+
+- Docker Hub has added Amazon CloudFront as a CDN for image pushes and pulls,
+  improving reliability. You may see a new domain,
+  `production.cloudfront.docker.com`, in your network logs. TLS certificates for
+  this domain are issued by Amazon Trust Services.
+
+  Most users are unaffected. You may need to take action if your environment
+  uses an egress firewall with a domain allowlist, a TLS inspection proxy, or a
+  managed CA trust store. See the [Docker Desktop
+  allowlist](/manuals/desktop/setup/allow-list.md) for updated domain
+  requirements. If you see TLS errors, ensure your trust store includes the
+  [Amazon Trust Services Root CAs](https://www.amazontrust.com/repository/). If
+  you're a paid subscriber, you can [contact Docker
+  Support](https://hub.docker.com/support/contact/) if you need updated TLS
+  certificate details or the issue persists.
+
+## 2026-05-06
+
+### Deprecation notice
+
+- [Docker Hub Automated Builds](./repos/manage/builds/) 
+  is being deprecated. Existing accounts will have access until April 1, 2027. 
+  See [migration options](./repos/manage/builds/migrate/)
+  for guides on migrating to GitHub Actions or Bitbucket Pipelines.
+
+## 2026-02-13
+
+### New
+
+- Administrators can now prevent creating public repositories within
+  organization namespaces using the [Disable public
+  repositories](./settings.md#disable-creation-of-public-repos) setting.
 
 ## 2025-02-18
 
@@ -29,7 +78,7 @@ known issues for each Docker Hub release.
 
 ### New
 
- - You can tag Docker Hub repositories with [categories](./repos/manage/information.md#repository-categories).
+- You can tag Docker Hub repositories with [categories](./repos/manage/information.md#repository-categories).
 
 ## 2023-12-11
 
@@ -47,13 +96,13 @@ known issues for each Docker Hub release.
 
 ## 2023-08-28
 
-- Organizations with SSO enabled can assign members to roles, organizations, and teams with [SCIM role mapping](scim.md#set-up-role-mapping). 
+- Organizations with SSO enabled can assign members to roles, organizations, and teams with [SCIM role mapping](scim.md#set-up-role-mapping).
 
 ## 2023-07-26
 
 ### New
 
-- Organizations can assign the [editor role](roles-and-permissions.md) to members to grant additional permissions without full administrative access.
+- Organizations can assign the [editor role](/manuals/enterprise/security/roles-and-permissions/_index.md) to members to grant additional permissions without full administrative access.
 
 ## 2023-05-09
 
@@ -65,14 +114,13 @@ known issues for each Docker Hub release.
 
 ### New
 
--  You can now automatically sync user updates with your Docker organizations and teams with [Group Mapping](group-mapping.md) for SSO and SCIM provisioning.
+- You can now automatically sync user updates with your Docker organizations and teams with [Group Mapping](group-mapping.md) for SSO and SCIM provisioning.
 
 ## 2022-12-12
 
 ### New
 
 - The new domain audit feature lets you audit your domains for users who aren't a member of your organization.
-
 
 ## 2022-09-26
 
@@ -84,13 +132,13 @@ known issues for each Docker Hub release.
 
 ### Bug fixes and enhancements
 
-- In Docker Hub, you can now download a [registry.json](../security/for-admins/enforce-sign-in/_index.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
+- In Docker Hub, you can now download a [registry.json](/manuals/enterprise/security/enforce-sign-in/_index.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
 
 ## 2022-09-19
 
 ### Bug fixes and enhancements
 
-- You can now [export a CSV file of members](../admin/organization//members.md#export-members) from organizations that you own.
+- You can now [export a CSV file of members](../admin/organization/manage/members.md#export-members-csv-file) from organizations that you own.
 
 ## 2022-07-22
 
@@ -114,7 +162,7 @@ known issues for each Docker Hub release.
 
 ### New
 
-- [Registry Access Management](/manuals/security/for-admins/hardened-desktop/registry-access-management.md) is now available for all Docker Business subscriptions. When enabled, your users can access specific registries in Docker Hub.
+- [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) is now available for all Docker Business subscriptions. When enabled, your users can access specific registries in Docker Hub.
 
 ## 2022-05-03
 
@@ -126,7 +174,7 @@ known issues for each Docker Hub release.
 
 ### New
 
-- You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription//change.md).
+- You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription/plans/docker.md).
 
 ## 2021-08-31
 
@@ -143,7 +191,7 @@ The updated [Docker Subscription Service Agreement](https://www.docker.com/legal
 - The existing Docker Free subscription has been renamed **Docker Personal**.
 - **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
 
-    To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq). For more information, see [Docker subscription overview](../subscription/_index.md).
+  To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq). For more information, see [Docker subscription overview](../subscription/_index.md).
 
 ## 2021-05-05
 
@@ -183,7 +231,7 @@ Docker introduces the Advanced Image Management dashboard that enables you to vi
 
 Docker introduces Audit logs, a new feature that allows team owners to view a list of activities that occur at organization and repository levels. This feature begins tracking the activities from the release date, that is, **from 25 January 2021**.
 
-For more information about this feature and for instructions on how to use it, see [Activity logs](../admin/organization/activity-logs.md).
+For more information about this feature and for instructions on how to use it, see [Activity logs](../admin/activity-logs.md).
 
 ## 2020-11-10
 
@@ -201,98 +249,94 @@ Docker introduces Hub Vulnerability Scanning which enables you to automatically 
 
 ### New features
 
-* Docker has announced a new, per-seat pricing model to accelerate developer workflows for cloud-native development. The previous private repository/concurrent autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories. For more information, see [Docker subscription](../subscription/_index.md).
+- Docker has announced a new, per-seat pricing model to accelerate developer workflows for cloud-native development. The previous private repository/concurrent autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories. For more information, see [Docker subscription](../subscription/_index.md).
 
-* Docker has enabled download rate limits for downloads and pull requests on Docker Hub. This caps the number of objects that users can download within a specified timeframe. For more information, see [Usage and limits](/manuals/docker-hub/usage/_index.md).
+- Docker has enabled download rate limits for downloads and pull requests on Docker Hub. This caps the number of objects that users can download within a specified timeframe. For more information, see [Usage and limits](/manuals/docker-hub/usage/_index.md).
 
 ## 2019-11-04
 
 ### Enhancements
 
-* The [repositories page](repos/_index.md) and all
-related settings and tabs have been updated and moved from `cloud.docker.com`
-to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker.com/repositories](https://hub.docker.com/repositories).
+- The [repositories page](repos/_index.md) and all
+  related settings and tabs have been updated and moved from `cloud.docker.com`
+  to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker.com/repositories](https://hub.docker.com/repositories).
 
 ### Known Issues
 
-* Scan results don't appear for some official images.
+- Scan results don't appear for some official images.
 
 ## 2019-10-21
 
 ### New features
 
-* **Beta:** Docker Hub now supports two-factor authentication (2FA). Enable it in your account settings, under the **[Security](https://hub.docker.com/settings/security)** section.
+- **Beta:** Docker Hub now supports two-factor authentication (2FA). Enable it in your account settings, under the **[Security](https://hub.docker.com/settings/security)** section.
 
-    > If you lose both your 2FA authentication device and recovery code, you may
-    > not be able to recover your account.
+  > If you lose both your 2FA authentication device and recovery code, you may
+  > not be able to recover your account.
 
 ### Enhancements
 
-* As a security measure, when two-factor authentication is enabled, the Docker CLI requires a personal access token instead of a password to log in.
+- As a security measure, when two-factor authentication is enabled, the Docker CLI requires a personal access token instead of a password to log in.
 
 ### Known Issues
 
-* Scan results don't appear for some official images.
-
+- Scan results don't appear for some official images.
 
 ## 2019-10-02
 
 ### Enhancements
 
-* You can now manage teams and members straight from your [organization page](https://hub.docker.com/orgs).
-Each organization page now breaks down into these tabs:
-  * **New:** Members - manage your members directly from this page (delete,
-  add, or open their teams)
-  * **New:** Teams - search by team or username, and open up any team page to
-  manage the team
-  * **New:** Invitees (conditional tab, only if an invite exists) - resend or
-  remove invitations from this tab
-  * Repositories
-  * Settings
-  * Billing
+- You can now manage teams and members straight from your [organization page](https://hub.docker.com/orgs).
+  Each organization page now breaks down into these tabs:
+  - **New:** Members - manage your members directly from this page (delete,
+    add, or open their teams)
+  - **New:** Teams - search by team or username, and open up any team page to
+    manage the team
+  - **New:** Invitees (conditional tab, only if an invite exists) - resend or
+    remove invitations from this tab
+  - Repositories
+  - Settings
+  - Billing
 
 ### Bug fixes
 
-* Fixed an issue where Kinematic could not connect and log in to Docker Hub.
+- Fixed an issue where Kinematic could not connect and log in to Docker Hub.
 
 ### Known Issues
 
-* Scan results don't appear for some official images.
-
+- Scan results don't appear for some official images.
 
 ## 2019-09-19
 
 ### New features
 
-* You can now [create personal access tokens](/security/for-developers/access-tokens/) in Docker Hub and use them to authenticate from the Docker CLI. Find them in your account settings, under the new **[Security](https://hub.docker.com/settings/security)** section.
+- You can now [create personal access tokens](/security/access-tokens/) in Docker Hub and use them to authenticate from the Docker CLI. Find them in your account settings, under the new **[Security](https://hub.docker.com/settings/security)** section.
 
 ### Known Issues
 
-* Scan results don't appear for some official images.
-
+- Scan results don't appear for some official images.
 
 ## 2019-09-16
 
 ### Enhancements
 
-* The [billing page](../subscription/change.md) for personal accounts has been updated. You can access the page at its new URL: [https://hub.docker.com/billing/plan](https://hub.docker.com/billing/plan).
+- The [billing page](../subscription/plans/docker.md) for personal accounts has been updated. You can access the page at its new URL: [https://hub.docker.com/billing/plan](https://hub.docker.com/billing/plan).
 
 ### Known Issues
 
-* Scan results don't appear for some official images.
-
+- Scan results don't appear for some official images.
 
 ## 2019-09-05
 
 ### Enhancements
 
-* The `Tags` tab on an image page now provides additional information for each tag:
-  * A list of digests associated with the tag
-  * The architecture it was built on
-  * The OS
-  * The user who most recently updated an image for a specific tag
-* The security scan summary for Docker Official Images has been updated.
+- The `Tags` tab on an image page now provides additional information for each tag:
+  - A list of digests associated with the tag
+  - The architecture it was built on
+  - The OS
+  - The user who most recently updated an image for a specific tag
+- The security scan summary for Docker Official Images has been updated.
 
 ### Known Issues
 
-* Scan results don't appear for some official images.
+- Scan results don't appear for some official images.

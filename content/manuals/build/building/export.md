@@ -18,7 +18,7 @@ from that image, or push it to a registry. Under the hood, this uses the default
 exporter, called the `docker` exporter.
 
 To export your build results as files instead, you can use the `--output` flag,
-or `-o` for short. the `--output` flag lets you change the output format of
+or `-o` for short. The `--output` flag lets you change the output format of
 your build.
 
 ## Export binaries from a build

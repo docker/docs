@@ -4,8 +4,6 @@ keywords: compose, docker, merge, compose file
 title: Merge Compose files
 linkTitle: Merge
 weight: 10
-aliases:
-- /compose/multiple-compose-files/merge/
 ---
 
 Docker Compose lets you merge and override a set of Compose files together to create a composite Compose file.
@@ -246,14 +244,14 @@ For more merging rules, see [Merge and override](/reference/compose-file/merge.m
    
 - You can use the `-f` flag to specify a path to a Compose file that is not located in the current directory, either from the command line or by setting up a [COMPOSE_FILE environment variable](../environment-variables/envvars.md#compose_file) in your shell or in an environment file.
 
-   For example, if you are running the [Compose Rails sample](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/rails/README.md), and have a `compose.yaml` file in a directory called `sandbox/rails`. You can use a command like [docker compose pull](/reference/cli/docker/compose/pull.md) to get the postgres image for the `db` service from anywhere by using the `-f` flag as follows: `docker compose -f ~/sandbox/rails/compose.yaml pull db`
+   For example, if you are running the [Compose Rails sample](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/rails/README.md), and have a `compose.yaml` file in a directory called `sandbox/rails`. You can use a command like [docker compose pull](/reference/cli/docker/compose/pull/) to get the postgres image for the `db` service from anywhere by using the `-f` flag as follows: `docker compose -f ~/sandbox/rails/compose.yaml pull db`
 
    Here's the full example:
 
    ```console
    $ docker compose -f ~/sandbox/rails/compose.yaml pull db
-   Pulling db (postgres:latest)...
-   latest: Pulling from library/postgres
+   Pulling db (postgres:18)...
+   18: Pulling from library/postgres
    ef0380f84d05: Pull complete
    50cf91dc1db8: Pull complete
    d3add4cd115c: Pull complete
@@ -268,7 +266,7 @@ For more merging rules, see [Merge and override](/reference/compose-file/merge.m
    dcca70822752: Pull complete
    cecf11b8ccf3: Pull complete
    Digest: sha256:1364924c753d5ff7e2260cd34dc4ba05ebd40ee8193391220be0f9901d4e1651
-   Status: Downloaded newer image for postgres:latest
+   Status: Downloaded newer image for postgres:18
    ```
 
 ## Example
@@ -292,7 +290,7 @@ services:
       - cache
 
   db:
-    image: postgres:latest
+    image: postgres:18
 
   cache:
     image: redis:latest
@@ -358,8 +356,22 @@ For more information, see [Using Compose in production](../production.md).
 
 ## Limitations
 
-Docker Compose supports relative paths for the many resources to be included in the application model: build context for service images, location of file defining environment variables, path to a local directory used in a bind-mounted volume.
-With such a constraint, code organization in a monorepo can become hard as a natural choice would be to have dedicated folders per team or component, but then the Compose files relative paths become irrelevant. 
+When merging Compose files, all relative paths (for build contexts, environment files,
+bind-mounted volumes, and other resources) are resolved relative to the base Compose file. The
+first file specified with `-f`, or `compose.yaml` in the current directory if `-f` is
+not used. Paths in override files are not resolved relative to the override file's own
+location.
+
+This means that in a monorepo where Compose files are spread across team or component
+subdirectories, relative paths in those files are resolved incorrectly when used as
+override files.
+
+> [!TIP] 
+>
+> If you need each Compose file's paths to resolve relative to its own location,
+> use the [`include` top-level element](include.md) instead of merging with `-f`. Each
+> included file is loaded with its own project directory, so relative paths resolve
+> correctly.
 
 ## Reference information
 

@@ -207,7 +207,7 @@ The classic image store doesn't support manifest lists,
 which is how the provenance attestations are attached to an image.
 
 Open **Settings** in Docker Desktop. Under the **General** section, make sure
-that the **Use containerd for pulling and storing images** option is checked, then select **Apply & Restart**.
+that the **Use containerd for pulling and storing images** option is checked, then select **Apply**.
 Note that changing image stores temporarily hides images and containers of the
 inactive image store until you switch back.
 
@@ -248,15 +248,9 @@ because the example image uses an old version `alpine` as a base image.
 
 Close the **Recommended fixes for base image** modal. In the policy listing, select **View fixes** button, next to the policy name for details about the violation, and recommendations on how to address it.
 
-In this case, the recommended action is to enable
-[Docker Scout's GitHub integration](./integrations/source-code-management/github.md),
-which helps keep your base images up-to-date automatically.
-
-> [!TIP]
->
-> You can't enable this integration for the demo app used in this guide.
-> Feel free to push the code to a GitHub repository that you own,
-> and try out the integration there!
+In this case, the recommended action is to update the base image to a newer
+version. You can use GitHub Dependabot with `package-ecosystem: "docker"` to
+automate base image updates.
 
 ## Summary
 

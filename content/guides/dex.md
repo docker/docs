@@ -4,9 +4,8 @@ description: &desc Mocking OAuth services in testing with Dex
 keywords: Dex, container-supported development
 linktitle: Mocking OAuth services with Dex
 summary: *desc
-tags: [app-dev, distributed-systems]
-languages: []
 params:
+  tags: [testing]
   time: 10 minutes
 ---
 
@@ -27,7 +26,7 @@ The official [Docker image for Dex](https://hub.docker.com/r/dexidp/dex/) provid
 
 [Docker Compose](/compose/): Recommended for managing multi-container Docker applications.
 
-### Setting Up Dex with Docker
+### Setting up Dex with Docker
 
 Begin by creating a directory for your Dex project:
 
@@ -87,7 +86,7 @@ or use CLI tools like [htpasswd](https://httpd.apache.org/docs/2.4/programs/htpa
 
 With Docker Compose configured, start Dex:
 ```yaml
-# docker-compose.yaml
+# compose.yaml
 
 services:
   dex:

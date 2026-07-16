@@ -8,40 +8,40 @@ aliases:
   - /engine/scan/
 params:
   sidebar:
-    group: Products
+    group: Supply chain security
 grid:
   - title: Quickstart
     link: /scout/quickstart/
     description: Learn what Docker Scout can do, and how to get started.
-    icon: explore
+    icon: magnifying-glass-plus
   - title: Image analysis
     link: /scout/image-analysis/
     description: Reveal and dig into the composition of your images.
-    icon: radar
+    icon: signal
   - title: Advisory database
     link: /scout/advisory-db-sources/
     description: Learn about the information sources that Docker Scout uses.
-    icon: database
+    icon: circle-stack
   - title: Integrations
     description: |
       Connect Docker Scout with your CI, registries, and other third-party services.
     link: /scout/integrations/
-    icon: multiple_stop
+    icon: arrows-right-left
   - title: Dashboard
     link: /scout/dashboard/
     description: |
       The web interface for Docker Scout.
-    icon: dashboard
+    icon: squares-2x2
   - title: Policy
     link: /scout/policy/
     description: |
       Ensure that your artifacts align with supply chain best practices.
-    icon: policy
+    icon: shield-check
   - title: Upgrade
     link: /subscription/change/
     description: |
-      The free plan includes up to 1 repository. Upgrade for more.
-    icon: upgrade
+      A Personal subscription includes up to 1 repository. Upgrade for more.
+    icon: arrow-up-circle
 ---
 
 Container images consist of layers and software packages, which are susceptible to vulnerabilities.
@@ -52,7 +52,6 @@ By analyzing your images, Docker Scout compiles an inventory of components, also
 The SBOM is matched against a continuously updated vulnerability database to pinpoint security weaknesses.
 
 Docker Scout is a standalone service and platform that you can interact with
-using Docker Desktop, Docker Hub, the Docker CLI, and the Docker Scout Dashboard.
-Docker Scout also facilitates integrations with third-party systems, such as container registries and CI platforms.
+using Docker Hub, the Docker CLI, and the Docker Scout Dashboard.
 
 {{< grid >}}

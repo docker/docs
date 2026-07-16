@@ -3,8 +3,9 @@ title: Host network driver
 description: All about exposing containers on the Docker host's network
 keywords: network, host, standalone, host mode networking
 aliases:
-- /network/host/
-- /network/drivers/host/
+  - /network/host/
+  - /network/drivers/host/
+  - /engine/network/tutorials/host/
 ---
 
 If you use the `host` network mode for a container, that container's network
@@ -32,7 +33,17 @@ Host mode networking can be useful for the following use cases:
 
 This is because it doesn't require network address translation (NAT), and no "userland-proxy" is created for each port.
 
-The host networking driver is supported on Docker Engine (Linux only) and Docker Desktop version 4.34 and later.
+## Platform support
+
+The host networking driver is supported on:
+
+- Docker Engine on Linux
+- Docker Desktop version 4.34 and later (requires enabling the feature in
+  Settings)
+
+> [!NOTE]
+> For Docker Desktop users, see the [Docker Desktop section](#docker-desktop)
+> below for setup instructions.
 
 You can also use a `host` network for a swarm service, by passing `--network host`
 to the `docker service create` command. In this case, control traffic (traffic
@@ -93,19 +104,66 @@ $ nc localhost 80
 ### Limitations
 
 - Processes inside the container cannot bind to the IP addresses of the host
- because the container has no direct access to the interfaces of the host.
+  because the container has no direct access to the interfaces of the host.
 - The host network feature of Docker Desktop works on layer 4. This means that
-unlike with Docker on Linux, network protocols that operate below TCP or UDP are
-not supported.
+  unlike with Docker on Linux, network protocols that operate below TCP or UDP are
+  not supported.
 - This feature doesn't work with Enhanced Container Isolation enabled, since
-isolating your containers from the host and allowing them access to the host
-network contradict each other.
+  isolating your containers from the host and allowing them access to the host
+  network contradict each other.
 - Only Linux containers are supported. Host networking does not work with
   Windows containers.
 
+## Usage example
+
+This example shows how to start an Nginx container that binds directly to port
+80 on the Docker host. From a networking perspective, this provides the same
+level of isolation as if Nginx were running directly on the host, but the
+container remains isolated in all other aspects (storage, process namespace,
+user namespace).
+
+### Prerequisites
+
+- Port 80 must be available on the Docker host. To make Nginx listen on a
+  different port, see the [Nginx image documentation](https://hub.docker.com/_/nginx/).
+- The host networking driver only works on Linux hosts, and as an opt-in
+  feature in Docker Desktop version 4.34 and later.
+
+### Steps
+
+1. Create and start the container as a detached process. The `--rm` option
+   removes the container when it exits. The `-d` flag starts it in the
+   background:
+
+   ```console
+   $ docker run --rm -d --network host --name my_nginx nginx
+   ```
+
+2. Access Nginx by browsing to [http://localhost:80/](http://localhost:80/).
+
+3. Examine your network stack:
+
+   Check all network interfaces and verify that no new interface was created:
+
+   ```console
+   $ ip addr show
+   ```
+
+   Verify which process is bound to port 80 using `netstat`. You need `sudo`
+   because the process is owned by the Docker daemon user:
+
+   ```console
+   $ sudo netstat -tulpn | grep :80
+   ```
+
+4. Stop the container. It's removed automatically because of the `--rm` option:
+
+   ```console
+   $ docker container stop my_nginx
+   ```
+
 ## Next steps
 
-- Go through the [host networking tutorial](/manuals/engine/network/tutorials/host.md)
 - Learn about [networking from the container's point of view](../_index.md)
 - Learn about [bridge networks](./bridge.md)
 - Learn about [overlay networks](./overlay.md)

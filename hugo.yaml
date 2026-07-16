@@ -8,16 +8,45 @@ disableHugoGeneratorInject: true
 ignoreLogs:
   - cascade-pattern-with-extension
 
-taxonomies:
-  tag: tags
-  language: languages
+taxonomies: {}
+
+# Cascade layout and type settings to content subtrees.
+# See https://gohugo.io/configuration/cascade/#target
+cascade:
+  # Sample pages use the samples type (routes to layouts/samples/)
+  - target:
+      path: /reference/samples/**
+      kind: page
+    type: samples
+  # CLI reference pages use the cli layout (data-driven from YAML)
+  - target:
+      path: /reference/cli/docker
+    layout: cli
+  - target:
+      path: /reference/cli/docker/**
+    layout: cli
+  # sbx CLI reference pages use the sbx-cli layout (cobra/doc YAML)
+  - target:
+      path: /reference/cli/sbx
+    layout: sbx-cli
+  - target:
+      path: /reference/cli/sbx/**
+    layout: sbx-cli
+  # Docker Agent section indexes are mounted navigation stubs; skip
+  # rendering them so they don't produce empty pages (same pattern as
+  # gordon/concepts and other render:never section indexes)
+  - target:
+      path: /manuals/ai/docker-agent/**
+      kind: section
+    build:
+      render: never
 
 # Remove the /manuals prefix for content in the manuals section
 permalinks:
   page:
-    manuals: /:sections[1:]/:slugorfilename/
+    manuals: /:sections[1:]/:slugorcontentbasename/
   section:
-    manuals: /:sections[1:]/:slugorfilename/
+    manuals: /:sections[1:]/
 
 markup:
   tableOfContents:
@@ -46,8 +75,8 @@ build:
     disableTags: true
   # Ensure that CSS/assets changes trigger a dev server rebuild
   cachebusters:
-    - source: assets/watching/hugo_stats\.json
-      target: styles\.css
+    - source: assets/notwatching/hugo_stats\.json
+      target: css
     - source: (postcss|tailwind)\.config\.js
       target: css
     - source: assets/.*\.js
@@ -69,22 +98,15 @@ outputFormats:
     isPlainText: true
     mediaType: "application/json"
     notAlternative: true
-  # robots.txt, see: layouts/index.robots.json
-  robots:
-    baseName: robots
-    isPlainText: true
-    mediaType: "text/plain"
-    notAlternative: true
-  # Markdown for LLMs, see layouts/_default/single.markdown.md
-  Markdown:
-    baseName: index
-    mediaType: "text/markdown"
-    isPlainText: true
-    isHTML: false
-    permalinkable: false
   # llms.txt
   llms:
     baseName: llms
+    isPlainText: true
+    mediaType: "text/plain"
+    notAlternative: true
+    permalinkable: false
+  llmsfull:
+    baseName: llms-full
     isPlainText: true
     mediaType: "text/plain"
     notAlternative: true
@@ -95,27 +117,27 @@ outputFormats:
 outputs:
   home:
     - html
+    - markdown
     - redirects
     - metadata
     - robots
     - llms
+    - llmsfull
   page:
     - html
-    - Markdown
+    - markdown
   section:
     - html
-    - Markdown
+    - markdown
 
 languages:
   en:
-    languageName: English
+    label: English
 
 # Site-wide parameters
 # Can be accessed in content with {{% param "param_name" %}}
 # Or in layouts/partials with site.Params.param_name
 params:
-  kapa:
-    id: ba5c2cbc-6535-4334-a72e-050f7a681c8a
   analytics:
     hotjar:
       prod: 3169877
@@ -123,6 +145,14 @@ params:
     google: GTM-WL2QLG5
     onetrust: 65425fb0-7b36-4317-9f10-7b3e08039af0
     vwo: 723167
+    marlin:
+      # Public-write API keys for the Marlin analytics SDK.
+      apiKey:
+        prod: mrl_2nuEKUo5bzRv8GcDKeYjij4J4U--OLdN
+        stage: mrl_W14SGEQ7nYmBsAyjZPyOM-nlgE53E-vX
+      endpoint:
+        prod: https://marlin-2.docker.com
+        stage: https://marlin-2-stage.docker.com
 
   # Docs repository URL
   repo: https://github.com/docker/docs
@@ -133,37 +163,50 @@ params:
   # Use `grep` to figure out how they might be used.
 
   # Latest version of the Docker Engine API
-  latest_engine_api_version: "1.49"
+  latest_engine_api_version: "1.55"
   # Latest version of Docker Engine
-  docker_ce_version: "28.1.1"
+  docker_ce_version: "29.6.1"
   # Previous version of the Docker Engine
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
-  docker_ce_version_prev: "28.1.0"
+  docker_ce_version_prev: "29.6.0"
   # Latest Docker Compose version
-  compose_version: "v2.36.2"
+  compose_version: "v5.1.2"
   # Latest BuildKit version
-  buildkit_version: "0.21.0"
+  buildkit_version: "0.28.0"
+  # Latest actions version
+  bake_action_version: "v7"
+  build_push_action_version: "v7"
+  login_action_version: "v4"
+  metadata_action_version: "v6"
+  setup_buildx_action_version: "v4"
+  setup_compose_action_version: "v2"
+  setup_docker_action_version: "v5"
+  setup_qemu_action_version: "v4"
+  github_builder_version: "v1"
+  # Generic actions
+  checkout_action_version: "v6"
+  cache_action_version: "v5"
 
   # Example runtime/library/os versions
-  example_go_version: "1.24"
-  example_alpine_version: "3.21"
-  example_node_version: "20"
+  example_go_version: "1.25"
+  example_alpine_version: "3.23"
+  example_node_version: "24"
 
 menus:
   # Site header menu
   main:
-  - name: Get started
-    pageRef: /get-started/
-    weight: 1
-  - name: Guides
-    pageRef: /guides/
-    weight: 2
-  - name: Manuals
-    pageRef: /manuals/
-    weight: 3
-  - name: Reference
-    pageRef: /reference/
-    weight: 4
+    - name: Get started
+      pageRef: /get-started/
+      weight: 1
+    - name: Guides
+      pageRef: /guides/
+      weight: 2
+    - name: Manuals
+      pageRef: /manuals/
+      weight: 3
+    - name: Reference
+      pageRef: /reference/
+      weight: 4
 
   # Footer links
   footer:
@@ -181,7 +224,7 @@ menus:
     - url: https://www.docker.com/products/business
       name: Docker Business
       parent: Product offerings
-    - url: https://www.docker.com/pricing/faq
+    - url: https://www.docker.com/pricing?ref=Docs&refAction=DocsFooter
       name: Pricing FAQs
       parent: Product offerings
     - url: https://www.docker.com/partners/programs
@@ -272,30 +315,31 @@ module:
   proxy: https://proxy.golang.org,direct
   hugoVersion:
     extended: false
-    min: "0.141.0"
+    min: "0.156.0"
   mounts:
     # Mount the assets directory so it doesn't get overwritten
     - source: assets
       target: assets
     # Mount hugo_stats.json to the assets dir to trigger cachebust
-    - source: hugo_stats.json
-      target: assets/watching/hugo_stats.json
+    - disableWatch: true
+      source: hugo_stats.json
+      target: assets/notwatching/hugo_stats.json
     # Mount the icon files to assets so we can access them with resources.Get
-    - source: node_modules/@material-symbols/svg-400/rounded
+    - source: node_modules/heroicons/24/solid
       target: assets/icons
+    # Mount highlight.js theme for Gordon chat syntax highlighting
+    - source: node_modules/highlight.js/styles/github-dark.css
+      target: assets/css/highlight-github-dark.css
 
   imports:
-
-    # Docker Engine
-    - path: github.com/moby/moby
+    # Docker Engine API
+    - path: github.com/moby/moby/api
       mounts:
-        - source: docs/api/v1.24.md
-          target: content/reference/api/engine/version/v1.24.md
-        - source: docs/api/version-history.md
+        - source: docs/CHANGELOG.md
           target: content/reference/api/engine/version-history.md
-        - source: docs/api
+        - source: docs
           target: content/reference/api/engine/version
-          includeFiles: "*.yaml"
+          files: ["*.yaml"]
 
     # BuildKit
     - path: github.com/moby/buildkit
@@ -304,7 +348,7 @@ module:
           target: content/reference/dockerfile.md
         - source: frontend/dockerfile/docs/rules
           target: content/reference/build-checks
-          includeFiles: "*.md"
+          files: ["*.md"]
         - source: docs/buildkitd.toml.md
           target: content/manuals/build/buildkit/toml-configuration.md
         - source: docs/attestations/slsa-definitions.md
@@ -317,16 +361,18 @@ module:
       mounts:
         - source: docs/bake-reference.md
           target: content/manuals/build/bake/reference.md
+        - source: docs/bake-stdlib.md
+          target: content/manuals/build/bake/stdlib.md
 
     # Docker CLI
     - path: github.com/docker/cli
       mounts:
         - source: docs/extend
           target: content/manuals/engine/extend
-          excludeFiles:
-            - "EBS_volume.md"
-            - "plugins_metrics.md"
-            - "plugins_services.md"
+          files:
+            - "! EBS_volume.md"
+            - "! plugins_metrics.md"
+            - "! plugins_services.md"
         - source: docs/deprecated.md
           target: content/manuals/engine/deprecated.md
         - source: docs/reference/run.md
@@ -335,15 +381,41 @@ module:
           target: content/reference/cli/dockerd.md
 
     # Compose
-    - path: github.com/docker/compose/v2
+    - path: github.com/docker/compose/v5
       mounts:
         - source: docs/reference
-          target: data/compose-cli
-          includeFiles: "*.yaml"
+          target: data/cli/compose
+          files: ["*.yaml"]
 
-    # Scout CLI plugin (public dist repo)
-    - path: github.com/docker/scout-cli
+    # Model CLI
+    - path: github.com/docker/model-runner
       mounts:
-        - source: docs
-          target: data/scout-cli
-          includeFiles: "*.yaml"
+        - source: cmd/cli/docs/reference
+          target: data/cli/model
+          files: ["*.yaml"]
+
+    # Docker Agent
+    # Single-sources https://docker.github.io/docker-agent/ content;
+    # bumped on each docker-agent release by sync-docker-agent-docs.yml.
+    # Sections are mounted individually so hugo mod vendor does not
+    # vendor the upstream Jekyll site files that also live in docs/.
+    - path: github.com/docker/docker-agent
+      mounts:
+        - source: docs/getting-started
+          target: content/manuals/ai/docker-agent/getting-started
+        - source: docs/concepts
+          target: content/manuals/ai/docker-agent/concepts
+        - source: docs/configuration
+          target: content/manuals/ai/docker-agent/configuration
+        - source: docs/tools
+          target: content/manuals/ai/docker-agent/tools
+        - source: docs/providers
+          target: content/manuals/ai/docker-agent/providers
+        - source: docs/features
+          target: content/manuals/ai/docker-agent/features
+        - source: docs/guides
+          target: content/manuals/ai/docker-agent/guides
+        - source: docs/community
+          target: content/manuals/ai/docker-agent/community
+        - source: docs/demo.gif
+          target: content/manuals/ai/docker-agent/demo.gif

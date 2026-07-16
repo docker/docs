@@ -1,0 +1,86 @@
+{{/* Right-rail navigation for an OpenAPI reference page.
+
+  Input: the unmarshaled spec root (plain map from transform.Unmarshal).
+
+  Lists Authentication, every tag with its operations (linking to the same
+  anchors the operation cards expose), and the Schemas section heading.
+*/}}
+{{- $api := . -}}
+{{- $paths := $api.paths -}}
+{{- $methods := slice "get" "post" "put" "patch" "delete" -}}
+{{- $methodColors := dict
+  "get"    "text-blue-700 dark:text-blue-300"
+  "post"   "text-green-700 dark:text-green-300"
+  "put"    "text-yellow-700 dark:text-yellow-300"
+  "patch"  "text-yellow-700 dark:text-yellow-300"
+  "delete" "text-red-700 dark:text-red-300"
+-}}
+
+
+<p
+  class="mb-3 text-xs font-semibold tracking-wider text-gray-500 uppercase dark:text-gray-400"
+>
+  On this page
+</p>
+<ul class="space-y-1">
+  {{- with $api.components }}
+    {{- if .securitySchemes }}
+      <li>
+        <a
+          href="#authentication"
+          class="block py-0.5 text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+        >
+          Authentication
+        </a>
+      </li>
+    {{- end }}
+  {{- end }}
+  {{- range $api.tags }}
+    {{- $tagName := .name }}
+    <li class="mt-3">
+      <a
+        href="#tag-{{ $tagName | urlize }}"
+        class="block py-0.5 text-xs font-semibold tracking-wider text-gray-500 uppercase hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+      >
+        {{ $tagName | title }}
+      </a>
+      <ul class="mt-1 space-y-0.5">
+        {{- range $path, $item := $paths }}
+          {{- range $methods }}
+            {{- $method := . }}
+            {{- with index $item $method }}
+              {{- $op := . }}
+              {{- if in $op.tags $tagName }}
+                {{- $label := $op.summary | default $op.operationId | default $path }}
+                <li>
+                  <a
+                    href="#operation-{{ $op.operationId }}"
+                    class="flex items-baseline gap-2 py-0.5 text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+                  >
+                    <span
+                      class="{{ index $methodColors $method }} w-12 flex-none font-mono text-[10px] font-bold uppercase"
+                      >{{ upper $method }}</span
+                    >
+                    <span class="min-w-0 truncate">{{ $label }}</span>
+                  </a>
+                </li>
+              {{- end }}
+            {{- end }}
+          {{- end }}
+        {{- end }}
+      </ul>
+    </li>
+  {{- end }}
+  {{- with $api.components }}
+    {{- if .schemas }}
+      <li class="mt-3">
+        <a
+          href="#schemas"
+          class="block py-0.5 text-xs font-semibold tracking-wider text-gray-500 uppercase hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+        >
+          Schemas
+        </a>
+      </li>
+    {{- end }}
+  {{- end }}
+</ul>

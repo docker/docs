@@ -4,9 +4,8 @@ description: &desc Mocking API services in development and testing with WireMock
 keywords: WireMock, container-supported development
 linktitle: Mocking API services with WireMock
 summary: *desc
-tags: [app-dev, distributed-systems]
-languages: [js]
 params:
+  tags: [testing]
   time: 20 minutes
 ---
 
@@ -208,7 +207,7 @@ Follow the steps to setup a non-containerized Node application:
    > [!TIP]
    > Before you proceed to the next step, ensure that you stop the node application service.
 
-## Use a Live API in production to fetch real-time weather data from AccuWeather
+## Use a live API in production to fetch real-time weather data from AccuWeather
 
    To enhance your Node.js application with real-time weather data, you can seamlessly integrate the AccuWeather API. This section of the guide will walk you through the steps involved in setting up a non-containerized Node.js application and fetching weather information directly from the AccuWeather API.
 

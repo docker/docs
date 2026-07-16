@@ -1,0 +1,41 @@
+command: docker scout attestation
+aliases: docker scout attestation, docker scout attest
+short: Manage attestations on images
+long: Manage attestations on images
+pname: docker scout
+plink: docker_scout.yaml
+cname:
+    - docker scout attestation add
+    - docker scout attestation get
+    - docker scout attestation list
+clink:
+    - docker_scout_attestation_add.yaml
+    - docker_scout_attestation_get.yaml
+    - docker_scout_attestation_list.yaml
+inherited_options:
+    - option: debug
+      value_type: bool
+      default_value: "false"
+      description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: verbose-debug
+      value_type: bool
+      default_value: "false"
+      description: Verbose debug
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

@@ -66,11 +66,11 @@ Using the **Exec** tab is the same as running one of the following commands:
 - `docker exec -it <container-id> /bin/sh`
 - `docker exec -it <container-id> cmd.exe` when accessing Windows containers
 
-For more details, see the [`docker exec` CLI reference](/reference/cli/docker/exec/).
+For more details, see the [`docker exec` CLI reference](/reference/cli/docker/container/exec/).
 
 If you have enabled Docker Debug in settings, or toggled on **Debug mode** to the right of the tab options, the **Debug** tab displays. 
 
-Debug mode requires a [Pro, Team, or Business subscription](/subscription/details/). Debug mode has several advantages, such as:
+Debug mode has several advantages, such as:
 
 - A customizable toolbox. The toolbox comes with many standard Linux tools
   pre-installed, such as `vim`, `nano`, `htop`, and `curl`. For more details, see the [`docker debug` CLI reference](/reference/cli/docker/debug/).
@@ -79,13 +79,9 @@ Debug mode requires a [Pro, Team, or Business subscription](/subscription/detail
 
 To use debug mode:
 
-1. Sign in to Docker Desktop with an account that has a Pro, Team, or Business
-   subscription.
-2. After you're signed in, either:
-
-   - Hover over your running container and under the **Actions** column, select the **Show container actions**
-     menu. From the drop-down menu, select **Use Docker Debug**.
-   - Or, select the container and then select the **Debug** tab. 
+- Hover over your running container and under the **Actions** column, select the **Show container actions**
+menu. From the drop-down menu, select **Use Docker Debug**.
+- Or, select the container and then select the **Debug** tab. 
 
 To use debug mode by default, navigate to
 the **General** tab in **Settings** and select the **Enable Docker Debug by

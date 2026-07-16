@@ -1,0 +1,101 @@
+<div id="search-bar" class="h-full relative flex items-center overflow-visible">
+  <button
+    type="button"
+    aria-label="Search"
+    class="cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-blue-700 border border-blue-500 text-white transition-colors focus:outline-none focus:ring focus:ring-blue-400 hover:bg-blue-800 hover:border-blue-400"
+    id="search-modal-trigger"
+  >
+    <span class="icon-svg">
+      {{ partialCached "icon" "magnifying-glass" "magnifying-glass" }}
+    </span>
+    <span class="hidden px-1 lg:inline">Search</span>
+  </button>
+</div>
+
+<script type="module">
+  // Configure Pagefind before any components connect to DOM
+  await import('/pagefind/pagefind-component-ui.js');
+  const { configureInstance, getInstanceManager } = window.PagefindComponents;
+
+  configureInstance('default', {
+    bundlePath: '/pagefind/',
+    ranking: {
+      termFrequency: 0.0,
+      termSimilarity: 2.0,
+      pageLength: 0.0,
+      termSaturation: 1.0,
+      metaWeights: {
+        title: 10.0,
+        description: 4.0,
+        keywords: 6.0
+      }
+    }
+  });
+
+  // Create modal after config is set
+  document.body.insertAdjacentHTML('beforeend', `
+    <pagefind-modal id="search-modal" reset-on-close>
+      <pagefind-modal-header>
+        <pagefind-input placeholder="Search documentation…"></pagefind-input>
+      </pagefind-modal-header>
+      <pagefind-modal-body>
+        <p id="search-placeholder" class="text-center text-gray-500 dark:text-gray-400 py-8">
+          Start typing to search the documentation
+        </p>
+        <pagefind-summary></pagefind-summary>
+        <pagefind-results>
+          <script type="text/pagefind-template">
+            <li class="py-3 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+              {{ print "{{#if meta.breadcrumbs}}" }}
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">{{ print "{{ meta.breadcrumbs }}" }}</p>
+              {{ print "{{/if}}" }}
+              <p class="font-medium">
+                <a class="text-blue-600 dark:text-blue-400 hover:underline" href="{{ print "{{ meta.url | default(url) | safeUrl }}" }}">
+                  {{ print "{{ meta.title }}" }}
+                </a>
+              </p>
+              {{ print "{{#if excerpt}}" }}
+                <p class="text-gray-600 dark:text-gray-400 mt-1 text-sm">{{ print "{{+ excerpt +}}" }}</p>
+              {{ print "{{/if}}" }}
+              {{ print "{{#if sub_results}}" }}
+                <ul class="mt-3 ml-4 flex flex-wrap gap-2">
+                  {{ print "{{#each sub_results as sub}}" }}
+                    {{ print "{{#if (lt @index 5)}}" }}
+                      <li class="text-sm">
+                        <a class="text-blue-600 dark:text-blue-400 hover:underline" href="{{ print "{{ sub.url | safeUrl }}" }}">
+                          {{ print "{{ sub.title }}" }}
+                        </a>
+                      </li>
+                    {{ print "{{/if}}" }}
+                  {{ print "{{/each}}" }}
+                </ul>
+              {{ print "{{/if}}" }}
+            </li>
+          </script>
+        </pagefind-results>
+      </pagefind-modal-body>
+    </pagefind-modal>
+  `);
+
+  const modal = document.getElementById('search-modal');
+  const placeholder = document.getElementById('search-placeholder');
+
+  // Show/hide placeholder based on search state
+  const instance = getInstanceManager().getInstance('default');
+  instance.on('search', (term) => {
+    placeholder.hidden = !!term;
+  });
+  instance.on('results', () => {
+    placeholder.hidden = !!instance.searchTerm;
+  });
+
+  // Open modal
+  const openModal = () => modal.open?.();
+  document.getElementById('search-modal-trigger').addEventListener('click', openModal);
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      openModal();
+    }
+  });
+</script>

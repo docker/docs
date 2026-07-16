@@ -4,18 +4,18 @@ linkTitle: Deprecated products and features
 description: |
   Explore deprecated and retired Docker features, products, and open source
   projects, including details on transitioned tools and archived initiatives.
+keywords: deprecated, retired, docker products, docker features, legacy
 params:
   sidebar:
-    group: Products
+    group: Application development
 aliases:
+  - /docker-hub/service-accounts/
   - /cloud/
-  - /cloud/aci-compose-features/
   - /cloud/aci-container-features/
   - /cloud/aci-integration/
   - /cloud/ecs-architecture/
-  - /cloud/ecs-compose-examples/
-  - /cloud/ecs-compose-features/
   - /cloud/ecs-integration/
+  - /compose/migrate/
   - /engine/context/aci-integration/
   - /engine/context/ecs-integration/
   - /machine/
@@ -62,6 +62,9 @@ aliases:
   - /toolbox/overview/
   - /toolbox/toolbox_install_mac/
   - /toolbox/toolbox_install_windows/
+  - /desktop/features/dev-environments/
+  - /scout/policy/scores/
+  - /scout/integrations/environment/sysdig/
 ---
 
 This document provides an overview of Docker features, products, and
@@ -118,9 +121,9 @@ Mirantis Kubernetes Engine or other products offered by Mirantis. Much of the
 technology and features found in Docker EE have been absorbed into the Mirantis
 product line.
 
-> [!NOTE]  
+> [!TIP]  
 > For information about enterprise-level features offered by Docker today,
-> see the [Docker Business subscription](/manuals/subscription/details.md#docker-business).
+> see the [Docker Business subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsRetired).
 
 ### Docker Data Center and Docker Trusted Registry
 
@@ -135,10 +138,86 @@ guidance on modern equivalents.
 ### Dev Environments
 
 Dev Environments was a feature introduced in Docker Desktop that allowed
-developers to spin up development environments quickly. This feature is no
-longer under active development. Similar workflows can be achieved through
+developers to spin up development environments quickly. It was deprecated and removed from Docker Desktop version 4.42 and later. Similar workflows can be achieved through
 Docker Compose or by creating custom configurations tailored to specific
 project requirements.
+
+### Docker Desktop sandboxes
+
+Docker Desktop sandboxes let users run AI coding agents in isolated microVMs
+through the `docker sandbox` command. The `docker sandbox` plugin was removed
+in Docker Desktop 4.80.0. Use the standalone
+[`sbx` CLI](/manuals/ai/sandboxes/_index.md) instead.
+
+### Docker Scout features
+
+The following Docker Scout features have been retired or deprecated. For
+details, see the [Scout platform release notes](/manuals/scout/release-notes/platform.md).
+
+- Health scores and Scout Everywhere: graded Docker Hub images from A to F
+  based on policy compliance, surfaced across Docker Hub. Retired July 1, 2026.
+- Sysdig integration: detected images running in your cluster via the Sysdig API.
+  Retired July 1, 2026.
+- GitHub source code management integration: linked images to their source
+  repository and automated base-image updates via PRs. Retired July 1, 2026.
+  For migration options, see
+  [GitHub integration](/manuals/scout/integrations/source-code-management/github.md).
+- Notifications: alerted users to newly disclosed CVEs in-product and by email.
+  Deprecated, retiring September 1, 2026.
+- Slack integration: sent vulnerability and policy compliance notifications to
+  Slack channels. Deprecated, retiring July 30, 2026. For more information,
+  see [Slack integration](/manuals/scout/integrations/team-collaboration/slack.md).
+- Amazon ECR integration: automatically analyzed images pushed to ECR
+  registries. Deprecated, retiring September 1, 2026. For migration options, see
+  [ECR integration](/manuals/scout/integrations/registry/ecr.md).
+- Azure Container Registry integration: automatically analyzed images pushed to
+  ACR registries. Deprecated, retiring September 1, 2026. For migration options,
+  see [ACR integration](/manuals/scout/integrations/registry/acr.md).
+- Policies page in the Dashboard: the `docker scout policy`
+  CLI continues to work. Deprecated, retiring September 1, 2026. See
+  [Evaluate policies](/manuals/scout/policy/local.md).
+- SonarQube integration: surfaced SonarQube quality gate results as a Docker Scout policy. Deprecated, retiring September 1, 2026.
+
+### GitHub Copilot extension
+
+The Docker for GitHub Copilot extension integrated Docker capabilities with
+GitHub Copilot Chat, helping developers containerize applications, generate
+Docker assets, and analyze vulnerabilities through conversational prompts. The
+extension was available in early access on the GitHub Marketplace. GitHub
+[deprecated Copilot Extensions](https://github.blog/changelog/2025-09-24-deprecate-github-copilot-extensions-github-apps/)
+which led to the retirement of the Docker for GitHub Copilot extension. If
+you're looking for AI-assisted Docker workflows, explore the Docker MCP Toolkit
+and MCP Catalog, or use Gordon in Docker Desktop and the Docker CLI.
+
+### Enhanced Service Account add-ons
+
+Enhanced Service Account add-ons provided tiered pull rate limits for automated
+workflows and service accounts accessing Docker Hub.
+
+Docker recommends transitioning to [Organization Access Tokens
+(OATs)](/manuals/enterprise/security/access-tokens.md), which provide secure,
+programmatic access to Docker Hub with granular repository permissions, token
+expiration, and better security auditing. OATs are included with Docker Team
+and Business subscriptions and offer similar functionality without requiring
+separate add-on purchases.
+
+### Docker Hub Automated Builds
+
+Docker Hub Automated Builds was a feature of Docker Hub that allowed building
+Docker images from source code in an external repository and automatically pushing
+the built image to your Docker repositories. This feature has been deprecated and
+will be removed on April 1, 2027.
+
+### Docker Content Trust (DCT)
+
+Docker Content Trust (DCT) and the Notary v1 service at `notary.docker.io` are
+being fully retired. If you've never set `DOCKER_CONTENT_TRUST=1` or used
+`docker trust` commands, this change doesn't affect you. The service shuts down
+completely on December 8, 2026, following brownout windows in July and August.
+For the timeline, migration guidance, and modern alternatives such as
+Sigstore/Cosign and Notation, see the [Docker Content Trust retirement and
+migration blog post](https://www.docker.com/blog/docker-content-trust-retirement-and-migration-guidance/).
+
 
 ## Open source projects
 
@@ -162,6 +241,15 @@ compose`), which is written in Go and integrates with the Docker CLI. Compose
 v1 is no longer maintained, and users should migrate to Compose v2.
 
 [Compose v2 Documentation](/manuals/compose/_index.md)
+
+### Docker SBOM CLI plugin
+
+The Docker SBOM CLI plugin provided the `docker sbom` command for generating
+and viewing software bill of materials (SBOMs) for container images. The plugin
+is discontinued. Use [`docker scout sbom`](/reference/cli/docker/scout/sbom/)
+for SBOM generation and inspection.
+
+[See Docker SBOM CLI plugin release notes for migration guidance](https://github.com/docker/sbom-cli-plugin/releases/tag/v0.7.0)
 
 ### InfraKit
 

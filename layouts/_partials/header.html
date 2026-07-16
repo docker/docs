@@ -1,0 +1,120 @@
+<header class="sticky top-0 z-20 h-16 w-full bg-blue-600 text-white">
+  <div class="mx-auto flex h-full justify-between gap-2 px-4">
+    <div class="flex h-full items-center gap-2 lg:gap-8">
+      {{- if not .IsHome }}
+        <button
+          x-data
+          @click="$store.showSidebar = true"
+          class="icon-svg block h-full px-4 md:hidden"
+          aria-label="Menu"
+        >
+          {{ partialCached "icon" "bars-3" "bars-3" }}
+        </button>
+      {{- end }}
+      <div>
+        {{/* main logo */}}
+        <a title="Docker Docs home page" href="{{ site.BaseURL }}">
+          <div class="hidden sm:block">
+            {{- (resources.Get "images/docker-docs-white.svg").Content | safe.HTML -}}
+          </div>
+          <div class="block sm:hidden">
+            {{- (resources.Get "images/docker-docs-white-condensed.svg").Content | safe.HTML -}}
+          </div>
+        </a>
+      </div>
+      <nav class="mt-1 hidden md:flex lg:flex xl:flex 2xl:flex">
+        {{/* main menu */}}
+        <ul class="flex text-sm md:text-base lg:gap-4">
+          {{ range site.Menus.main }}
+            <li
+              {{- if or (eq page.Permalink .Page.Permalink) (page.IsDescendant .Page) }}
+                class="border-b-4"
+              {{- else }}
+                class="border-b-4 border-transparent hover:border-white/20"
+              {{- end }}
+            >
+              <a class="block px-2 py-1 whitespace-nowrap" href="{{ .URL }}"
+                >{{ .Name }}</a
+              >
+            </li>
+          {{ end }}
+        </ul>
+      </nav>
+    </div>
+    <div
+      id="buttons"
+      class="flex min-w-0 flex-shrink-0 items-center justify-end"
+    >
+      <div class="flex items-center gap-2">
+        <div data-tooltip-wrapper class="relative">
+          <button
+            x-data
+            @click="$store.gordon.toggle()"
+            aria-label="Ask Gordon, AI assistant"
+            aria-describedby="gordon-tooltip"
+            class="group shimmer flex cursor-pointer items-center gap-2 rounded-lg border border-blue-500 bg-blue-700 p-2 text-white transition-colors focus:ring focus:ring-blue-400 focus:outline-none"
+          >
+            <span class="icon-svg group-hover:hidden">
+              {{ partialCached "icon" "gordon" "gordon" }}
+            </span>
+            <span class="icon-svg hidden group-hover:block">
+              {{ partialCached "icon" "gordon-happy" "gordon-happy" }}
+            </span>
+            <span class="hidden px-1 lg:inline">Gordon</span>
+          </button>
+          <div
+            id="gordon-tooltip"
+            data-tooltip-body
+            class="absolute top-0 left-0 hidden rounded-sm bg-gray-900 p-2 text-sm whitespace-nowrap text-white"
+            role="tooltip"
+          >
+            Gordon, your AI assistant for Docker docs
+            <div
+              data-tooltip-arrow
+              class="absolute h-2 w-2 rotate-45 bg-gray-900"
+            ></div>
+          </div>
+        </div>
+
+        <div id="search-bar-container">
+          {{ partialCached "search-bar.html" "-" }}
+        </div>
+
+        <button
+          aria-label="Theme switch"
+          id="theme-switch"
+          class="cursor-pointer rounded-lg border border-blue-500 bg-blue-700 p-2 transition-colors hover:border-blue-400 hover:bg-blue-800 focus:ring focus:ring-blue-400 focus:outline-none"
+          x-data="{ theme: localStorage.getItem('theme-preference') || 'auto' }"
+          x-init="
+            let mql = window.matchMedia('(prefers-color-scheme: dark)');
+            function applyTheme(val) {
+              if (val === 'auto') {
+                localStorage.removeItem('theme-preference');
+                document.firstElementChild.className = mql.matches ? 'dark' : 'light';
+              } else {
+                localStorage.setItem('theme-preference', val);
+                document.firstElementChild.className = val;
+              }
+              document.firstElementChild.dataset.themePreference = val;
+            }
+            let handler = e => { if (theme === 'auto') document.firstElementChild.className = e.matches ? 'dark' : 'light'; };
+            mql.addEventListener('change', handler);
+            $watch('theme', val => applyTheme(val));
+            return () => mql.removeEventListener('change', handler);
+          "
+          @click="theme = (theme === 'light' ? 'dark' : theme === 'dark' ? 'auto' : 'light')"
+        >
+          <span class="theme-icon-sun icon-svg" x-show="theme === 'light'"
+            >{{ partialCached "icon" "sun" "sun" }}
+          </span>
+          <span class="theme-icon-moon icon-svg" x-show="theme === 'dark'">
+            {{ partialCached "icon" "moon" "moon" }}
+          </span>
+          <span class="theme-icon-auto icon-svg" x-show="theme === 'auto'">
+            {{ partialCached "icon" "system" "system" }}
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

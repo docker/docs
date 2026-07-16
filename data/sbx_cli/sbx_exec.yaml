@@ -1,0 +1,58 @@
+name: sbx exec
+synopsis: Execute a command inside a sandbox
+description: |-
+    Execute a command in a sandbox. If the sandbox is stopped, it is started first.
+
+    Flags match the behavior of "docker exec".
+usage: sbx exec [flags] SANDBOX COMMAND [ARG...]
+options:
+    - name: detach
+      shorthand: d
+      default_value: "false"
+      usage: 'Detached mode: run command in the background'
+    - name: detach-keys
+      usage: Override the key sequence for detaching a container
+    - name: env
+      shorthand: e
+      default_value: '[]'
+      usage: Set environment variables
+    - name: env-file
+      default_value: '[]'
+      usage: Read in a file of environment variables
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for exec
+    - name: interactive
+      shorthand: i
+      default_value: "false"
+      usage: Keep STDIN open even if not attached
+    - name: privileged
+      default_value: "false"
+      usage: Give extended privileges to the command
+    - name: tty
+      shorthand: t
+      default_value: "false"
+      usage: Allocate a pseudo-TTY
+    - name: user
+      shorthand: u
+      usage: 'Username or UID (format: <name|uid>[:<group|gid>])'
+    - name: workdir
+      shorthand: w
+      usage: Working directory inside the container
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      # Open a shell inside a sandbox
+      sbx exec -it my-sandbox bash
+
+      # Run a command in the background
+      sbx exec -d my-sandbox npm start
+
+      # Run as root
+      sbx exec -u root my-sandbox apt-get update
+see_also:
+    - sbx - Manage AI coding agent sandboxes.

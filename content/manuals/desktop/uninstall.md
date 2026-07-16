@@ -10,7 +10,7 @@ weight: 210
 >
 > Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
 > other Docker-related data local to the machine, and removes the files generated
-> by the application. To learn how to preserve important data before uninstalling, refer to the [back up and restore data](/manuals/desktop/settings-and-maintenance/backup-and-restore.md) section.
+> by the application. To preserve important data before uninstalling, refer to the [back up and restore data](/manuals/desktop/settings-and-maintenance/backup-and-restore.md) section.
 
 {{< tabs >}}
 {{< tab name="Windows" >}}
@@ -25,7 +25,11 @@ weight: 210
 
 1. Locate the installer:
    ```console
+   # all-user installation
    $ C:\Program Files\Docker\Docker\Docker Desktop Installer.exe
+
+   # per-user installation (Beta)
+   $ %LOCALAPPDATA%\Programs\DockerDesktop\Docker Desktop Installer.exe
    ```
 2. Uninstall Docker Desktop. 
  - In PowerShell, run:
@@ -89,13 +93,6 @@ After uninstalling Docker Desktop, some residual files may remain which you can 
 ```console
 $ rm -rf ~/Library/Group\ Containers/group.com.docker
 $ rm -rf ~/.docker
-```
-
-With Docker Desktop version 4.36 and earlier, the following files may also be left on the file system. You can remove these with administrative privileges:
-
-```console
-/Library/PrivilegedHelperTools/com.docker.vmnetd
-/Library/PrivilegedHelperTools/com.docker.socket
 ```
 
 {{< /tab >}}
@@ -170,7 +167,7 @@ To uninstall Docker Desktop for Fedora:
    ```console
    $ rm -r $HOME/.docker/desktop
    $ sudo rm /usr/local/bin/com.docker.cli
-   $ sudo apt purge docker-desktop
+   $ sudo dnf remove docker-desktop
    ```
 
    This removes configuration and data files at `$HOME/.docker/desktop`, the symlink at `/usr/local/bin/com.docker.cli`, and purges the remaining systemd service files.
@@ -187,20 +184,18 @@ To uninstall Docker Desktop for Arch:
 1. Remove the Docker Desktop application. Run:
 
    ```console
-   $ sudo pacman remove docker-desktop
+   $ sudo pacman -Rns docker-desktop
    ```
 
-   This removes the Docker Desktop package itself but doesn’t delete all of its files or settings.
+   This removes the Docker Desktop package along with its configuration files and dependencies not required by other packages.
 
-2. Manually remove leftover file.
+2. Manually remove leftover files.
 
    ```console
    $ rm -r $HOME/.docker/desktop
-   $ sudo rm /usr/local/bin/com.docker.cli
-   $ sudo apt purge docker-desktop
    ```
 
-   This removes configuration and data files at `$HOME/.docker/desktop`, the symlink at `/usr/local/bin/com.docker.cli`, and purges the remaining systemd service files.
+   This removes configuration and data files at `$HOME/.docker/desktop`.
 
 3. Clean up Docker config settings. In `$HOME/.docker/config.json`, remove the `credsStore` and `currentContext` properties.
 

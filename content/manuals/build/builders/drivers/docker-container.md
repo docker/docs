@@ -49,6 +49,7 @@ pass to `--driver-opt`:
 | `cgroup-parent`  | String  | `/docker/buildx` | Sets the cgroup parent of the container if Docker is using the "cgroupfs" driver.                                      |
 | `restart-policy` | String  | `unless-stopped` | Sets the container's [restart policy](/manuals/engine/containers/start-containers-automatically.md#use-a-restart-policy).      |
 | `env.<key>`      | String  |                  | Sets the environment variable `key` to the specified `value` in the container.                                         |
+| `provenance-add-gha`   | Boolean |    `true`       | Automatically writes GitHub Actions context into the builder for provenance.                                                   |
 
 Before you configure the resource limits for the container,
 read about [configuring runtime resource constraints for containers](/engine/containers/resource_constraints/).
@@ -133,14 +134,14 @@ $ docker buildx build \
 You can customize the network that the builder container uses. This is useful
 if you need to use a specific network for your builds.
 
-For example, let's [create a network](/reference/cli/docker/network/create.md)
+For example, let's [create a network](/reference/cli/docker/network/create/)
 named `foonet`:
 
 ```console
 $ docker network create foonet
 ```
 
-Now create a [`docker-container` builder](/reference/cli/docker/buildx/create.md)
+Now create a [`docker-container` builder](/reference/cli/docker/buildx/create/)
 that will use this network:
 
 ```console
@@ -150,13 +151,13 @@ $ docker buildx create --use \
   --driver-opt "network=foonet"
 ```
 
-Boot and [inspect `mybuilder`](/reference/cli/docker/buildx/inspect.md):
+Boot and [inspect `mybuilder`](/reference/cli/docker/buildx/inspect/):
 
 ```console
 $ docker buildx inspect --bootstrap
 ```
 
-[Inspect the builder container](/reference/cli/docker/inspect.md)
+[Inspect the builder container](/reference/cli/docker/inspect/)
 and see what network is being used:
 
 ```console
@@ -167,4 +168,4 @@ map[foonet:0xc00018c0c0]
 ## Further reading
 
 For more information on the Docker container driver, see the
-[buildx reference](/reference/cli/docker/buildx/create.md#driver).
+[buildx reference](/reference/cli/docker/buildx/create/#driver).

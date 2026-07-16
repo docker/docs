@@ -3,21 +3,17 @@ title: Synchronized file shares
 weight: 70
 description: Get started with Synchronized file shares on Docker Desktop.
 keyword: mutagen, file sharing, docker desktop, bind mounts
-aliases:
-- /desktop/synchronized-file-sharing/
 ---
 
 {{< summary-bar feature_name="Synchronized file sharing" >}}
 
 Synchronized file shares is an alternative file sharing mechanism that provides fast and flexible host-to-VM file sharing, enhancing bind mount performance through the use of synchronized filesystem caches. 
-
-![Image of Synchronized file shares pane](../images/synched-file-shares.webp)
  
 ## Who is it for?
 
 Synchronized file shares is ideal for developers who: 
 - Have large repositories or monorepos with 100 000 files or more totaling hundreds of megabytes or even gigabytes.
-- Are using virtual filesystems, such as VirtioFS, gRPC FUSE, and osxfs, which are no longer scaling well with their codebases. 
+- Are using virtual filesystems, such as VirtioFS and gRPC FUSE which are no longer scaling well with their codebases. 
 - Regularly encounter performance limitations.
 - Don't want to worry about file ownership or spend time resolving conflicting file-ownership information when modifying multiple containers.
 
@@ -33,7 +29,7 @@ After creating a file share instance, any container using a bind mount that poin
 
 > [!IMPORTANT]
 >
-> Synchronized file shares isn't available on WSL or when using Windows containers. 
+> Synchronized file shares isn't available when using Windows containers. 
 
 ## Create a file share instance 
 
@@ -49,12 +45,7 @@ When the status indicator displays **Watching for filesystem changes**, your fil
 
 > [!NOTE]
 >
-> When you create a new service, setting the [bind mount option consistency](/reference/cli/docker/service/create.md#options-for-bind-mounts) to `:consistent` bypasses Synchronized file shares. 
-
-> [!TIP]
->
-> Docker Compose can automatically create file shares for bind mounts. 
-> Ensure you're signed in to Docker with a paid subscription and have enabled both **Access experimental features** and **Manage Synchronized file shares with Compose** in Docker Desktop's settings.
+> When you create a new service, setting the [bind mount option consistency](/reference/cli/docker/service/create/#options-for-bind-mounts) to `:consistent` bypasses Synchronized file shares. 
 
 ## Explore your file share instance
 
@@ -82,7 +73,7 @@ In general, use your `.syncignore` file to exclude items that aren't critical to
 
 - Changes made to `.syncignore` don't lead to immediate deletions unless the file share is recreated. In other words, files that are newly ignored due to modifications in the `.syncignore` file remain in their current location, but are no longer updated during synchronization.
 
-- File share instances are currently limited to approximately 2 million files per share. For best performance, if you have a file share instance of this size, try to decompose it into multiple shares corresponding to individual bind mount locations.
+- File share instances are limited to approximately 2 million files per share. For best performance, if you have a file share instance of this size, try to decompose it into multiple shares corresponding to individual bind mount locations.
 
 - Case conflicts, due to Linux being case-sensitive and macOS/Windows only being case-preserving, display as **File exists** problems in the GUI. These can be ignored. However, if they persist, you can report the issue.
 

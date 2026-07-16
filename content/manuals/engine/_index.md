@@ -5,43 +5,43 @@ description: Find a comprehensive overview of Docker Engine, including how to in
 keywords: Engine
 params:
   sidebar:
-    group: Open source
+    group: Application development
 grid:
 - title: Install Docker Engine
   description: Learn how to install the open source Docker Engine for your distribution.
-  icon: download
+  icon: arrow-down-tray
   link: /engine/install
 - title: Storage
   description: Use persistent data with Docker containers.
-  icon: database
+  icon: circle-stack
   link: /storage
 - title: Networking
   description: Manage network connections between containers.
-  icon: network_node
+  icon: server-stack
   link: /network
 - title: Container logs
   description: Learn how to view and read container logs.
-  icon: text_snippet
+  icon: document-text
   link: /config/containers/logging/
 - title: Prune
   description: Tidy up unused resources.
-  icon: content_cut
+  icon: scissors
   link: /config/pruning
 - title: Configure the daemon
   description: Delve into the configuration options of the Docker daemon.
-  icon: tune
+  icon: adjustments-horizontal
   link: /config/daemon
 - title: Rootless mode
   description: Run Docker without root privileges.
-  icon: security
+  icon: shield-check
   link: /engine/security/rootless
 - title: Deprecated features
   description: Find out what features of Docker Engine you should stop using.
-  icon: folder_delete
+  icon: folder-minus
   link: /engine/deprecated/
 - title: Release notes
   description: Read the release notes for the latest version.
-  icon: note_add
+  icon: document-plus
   link: /engine/release-notes
 aliases:
 - /edge/
@@ -74,8 +74,7 @@ For more details, see
 
 ## Licensing
 
-The Docker Engine is licensed under the Apache License, Version 2.0. See
-[LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full license
-text. 
-
-However, for commercial use of Docker Engine obtained via Docker Desktop within larger enterprises (exceeding 250 employees OR with annual revenue surpassing $10 million USD), a [paid subscription](https://www.docker.com/pricing/) is required.
+Commercial use of Docker Engine obtained via Docker Desktop
+within larger enterprises (exceeding 250 employees OR with annual revenue surpassing
+$10 million USD), requires a [paid subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsEngine).
+Apache License, Version 2.0. See [LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full license.

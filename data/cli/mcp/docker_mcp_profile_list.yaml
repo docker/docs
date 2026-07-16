@@ -1,0 +1,25 @@
+command: docker mcp profile list
+aliases: docker mcp profile list, docker mcp profile ls
+short: List profiles
+long: List profiles
+usage: docker mcp profile list
+pname: docker mcp profile
+plink: docker_mcp_profile.yaml
+options:
+    - option: format
+      value_type: string
+      default_value: human
+      description: 'Supported: json, yaml, human.'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

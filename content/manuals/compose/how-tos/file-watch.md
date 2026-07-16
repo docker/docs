@@ -118,6 +118,10 @@ For `path: ./app/html` and a change to `./app/html/index.html`:
 
 The `ignore` patterns are relative to the `path` defined in the current `watch` action, not to the project directory. In the following Example 1, the ignore path would be relative to the `./web` directory specified in the `path` attribute.
 
+### `initial_sync`
+
+When using a `sync+x` action, the `initial_sync` attribute tells Compose to ensure files that are part of the defined `path` are up to date before starting a new watch session.
+
 ## Example 1
 
 This minimal example targets a Node.js application with the following structure:
@@ -142,6 +146,7 @@ services:
         - action: sync
           path: ./web
           target: /src/web
+          initial_sync: true
           ignore:
             - node_modules/
         - action: rebuild
@@ -206,10 +211,6 @@ This setup demonstrates how to use the `sync+restart` action in Docker Compose t
 > Check out [`dockersamples/avatars`](https://github.com/dockersamples/avatars),
 > or [local setup for Docker docs](https://github.com/docker/docs/blob/main/CONTRIBUTING.md)
 > for a demonstration of Compose `watch`.
-
-## Feedback
-
-We are actively looking for feedback on this feature. Give feedback or report any bugs you may find in the [Compose Specification repository](https://github.com/compose-spec/compose-spec/pull/253).
 
 ## Reference
 

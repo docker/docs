@@ -12,13 +12,18 @@ This page refers to the Linux kernel driver as `OverlayFS` and to the Docker
 storage driver as `overlay2`.
 
 > [!NOTE]
->
+> Docker Engine 29.0 and later uses the
+> [containerd image store](/manuals/engine/storage/containerd.md) by default.
+> The `overlay2` driver is a legacy storage driver that is superseded by the
+> `overlayfs` containerd snapshotter. For more information, see
+> [Select a storage driver](/manuals/engine/storage/drivers/select-storage-driver.md).
+
+> [!NOTE]
 > For `fuse-overlayfs` driver, check [Rootless mode documentation](/manuals/engine/security/rootless.md).
 
 ## Prerequisites
 
-OverlayFS is the recommended storage driver, and supported if you meet the following
-prerequisites:
+The `overlay2` driver is supported if you meet the following prerequisites:
 
 - Version 4.0 or higher of the Linux kernel, or RHEL or CentOS using
   version 3.10.0-514 of the kernel or higher.
@@ -219,7 +224,7 @@ the image's top layer plus a new directory for the container. The image's
 layers are the `lowerdirs` in the overlay and are read-only. The new directory for
 the container is the `upperdir` and is writable.
 
-### Image and container layers on-disk
+### Image and container layers on-disk (legacy overlay driver)
 
 The following `docker pull` command shows a Docker host downloading a Docker
 image comprising five layers.
@@ -437,25 +442,25 @@ filesystems:
 
 [`open(2)`](https://linux.die.net/man/2/open)
 : OverlayFS only implements a subset of the POSIX standards.
-  This can result in certain OverlayFS operations breaking POSIX standards. One
-  such operation is the copy-up operation. Suppose that your application calls
-  `fd1=open("foo", O_RDONLY)` and then `fd2=open("foo", O_RDWR)`. In this case,
-  your application expects `fd1` and `fd2` to refer to the same file. However, due
-  to a copy-up operation that occurs after the second calling to `open(2)`, the
-  descriptors refer to different files. The `fd1` continues to reference the file
-  in the image (`lowerdir`) and the `fd2` references the file in the container
-  (`upperdir`). A workaround for this is to `touch` the files which causes the
-  copy-up operation to happen. All subsequent `open(2)` operations regardless of
-  read-only or read-write access mode reference the file in the
-  container (`upperdir`).
+This can result in certain OverlayFS operations breaking POSIX standards. One
+such operation is the copy-up operation. Suppose that your application calls
+`fd1=open("foo", O_RDONLY)` and then `fd2=open("foo", O_RDWR)`. In this case,
+your application expects `fd1` and `fd2` to refer to the same file. However, due
+to a copy-up operation that occurs after the second calling to `open(2)`, the
+descriptors refer to different files. The `fd1` continues to reference the file
+in the image (`lowerdir`) and the `fd2` references the file in the container
+(`upperdir`). A workaround for this is to `touch` the files which causes the
+copy-up operation to happen. All subsequent `open(2)` operations regardless of
+read-only or read-write access mode reference the file in the
+container (`upperdir`).
 
-  `yum` is known to be affected unless the `yum-plugin-ovl` package is installed.
-  If the `yum-plugin-ovl` package is not available in your distribution such as
-  RHEL/CentOS prior to 6.8 or 7.2, you may need to run `touch /var/lib/rpm/*`
-  before running `yum install`. This package implements the `touch` workaround
-  referenced above for `yum`.
+`yum` is known to be affected unless the `yum-plugin-ovl` package is installed.
+If the `yum-plugin-ovl` package is not available in your distribution such as
+RHEL/CentOS prior to 6.8 or 7.2, you may need to run `touch /var/lib/rpm/*`
+before running `yum install`. This package implements the `touch` workaround
+referenced above for `yum`.
 
 [`rename(2)`](https://linux.die.net/man/2/rename)
 : OverlayFS does not fully support the `rename(2)` system call. Your
-  application needs to detect its failure and fall back to a "copy and unlink"
-  strategy.
+application needs to detect its failure and fall back to a "copy and unlink"
+strategy.

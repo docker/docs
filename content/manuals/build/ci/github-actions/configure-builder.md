@@ -19,7 +19,7 @@ to pin to Buildx v0.10.0:
 
 ```yaml
 - name: Set up Docker Buildx
-  uses: docker/setup-buildx-action@v3
+  uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
   with:
     version: v0.10.0
 ```
@@ -29,7 +29,7 @@ To pin to a specific version of BuildKit, use the `image` option in the
 
 ```yaml
 - name: Set up Docker Buildx
-  uses: docker/setup-buildx-action@v3
+  uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
   with:
     driver-opts: image=moby/buildkit:v0.11.0
 ```
@@ -51,12 +51,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         with:
           buildkitd-flags: --debug
       
       - name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
 ```
 
 Logs will be available at the end of a job:
@@ -85,7 +85,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         with:
           buildkitd-config-inline: |
             [registry."docker.io"]
@@ -120,7 +120,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         with:
           config: .github/buildkitd.toml
 ```
@@ -140,11 +140,11 @@ fields:
 
 | Name              | Type   | Description                                                                                                                                                                                                                                                             |
 | ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`            | String | [Name of the node](/reference/cli/docker/buildx/create.md#node). If empty, it's the name of the builder it belongs to, with an index number suffix. This is useful to set it if you want to modify/remove a node in an underlying step of you workflow. |
-| `endpoint`        | String | [Docker context or endpoint](/reference/cli/docker/buildx/create.md#description) of the node to add to the builder                                                                                                                                      |
-| `driver-opts`     | List   | List of additional [driver-specific options](/reference/cli/docker/buildx/create.md#driver-opt)                                                                                                                                                         |
-| `buildkitd-flags` | String | [Flags for buildkitd](/reference/cli/docker/buildx/create.md#buildkitd-flags) daemon                                                                                                                                                                    |
-| `platforms`       | String | Fixed [platforms](/reference/cli/docker/buildx/create.md#platform) for the node. If not empty, values take priority over the detected ones.                                                                                                             |
+| `name`            | String | [Name of the node](/reference/cli/docker/buildx/create/#node). If empty, it's the name of the builder it belongs to, with an index number suffix. This is useful to set it if you want to modify/remove a node in an underlying step of your workflow. |
+| `endpoint`        | String | [Docker context or endpoint](/reference/cli/docker/buildx/create/#description) of the node to add to the builder                                                                                                                                      |
+| `driver-opts`     | List   | List of additional [driver-specific options](/reference/cli/docker/buildx/create/#driver-opt)                                                                                                                                                         |
+| `buildkitd-flags` | String | [Flags for buildkitd](/reference/cli/docker/buildx/create/#buildkitd-flags) daemon                                                                                                                                                                    |
+| `platforms`       | String | Fixed [platforms](/reference/cli/docker/buildx/create/#platform) for the node. If not empty, values take priority over the detected ones.                                                                                                             |
 
 Here is an example using remote nodes with the [`remote` driver](/manuals/build/builders/drivers/remote.md)
 and [TLS authentication](#tls-authentication):
@@ -160,7 +160,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         with:
           driver: remote
           endpoint: tcp://oneprovider:1234
@@ -209,7 +209,7 @@ jobs:
           private-key-name: aws_graviton2
       
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         with:
           endpoint: ssh://me@graviton2
 ```
@@ -238,7 +238,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         with:
           driver: remote
           endpoint: tcp://graviton2:1234
@@ -266,10 +266,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@{{% param "checkout_action_version" %}}
       
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         with:
           driver: kubernetes
       
@@ -303,21 +303,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up builder1
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         id: builder1
       
       - name: Set up builder2
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@{{% param "setup_buildx_action_version" %}}
         id: builder2
       
       - name: Build against builder1
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           builder: ${{ steps.builder1.outputs.name }}
           target: mytarget1
       
       - name: Build against builder2
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@{{% param "build_push_action_version" %}}
         with:
           builder: ${{ steps.builder2.outputs.name }}
           target: mytarget2

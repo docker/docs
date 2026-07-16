@@ -11,18 +11,15 @@ aliases:
 - /desktop/mac/install/
 - /docker-for-mac/install/
 - /engine/installation/mac/
-- /installation/mac/
-- /docker-for-mac/apple-m1/
-- /docker-for-mac/apple-silicon/
-- /desktop/mac/apple-silicon/
 - /desktop/install/mac-install/
+- /desktop/install/mac/
 ---
 
 > **Docker Desktop terms**
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees or more than $10 million USD in annual revenue) requires a [paid
-> subscription](https://www.docker.com/pricing/).
+> subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopMacInstall).
 
 This page provides download links, system requirements, and step-by-step installation instructions for Docker Desktop on Mac.
 
@@ -31,24 +28,9 @@ This page provides download links, system requirements, and step-by-step install
 
 *For checksums, see [Release notes](/manuals/desktop/release-notes.md).*
 
-> [!WARNING]
->
-> If you're experiencing malware detection issues, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
-
 ## System requirements
 
 {{< tabs >}}
-{{< tab name="Mac with Intel chip" >}}
-
-- A supported version of macOS.
-
-  > [!IMPORTANT]
-  >
-  > Docker Desktop is supported on the current and two previous major macOS releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases).
-
-- At least 4 GB of RAM.
-
-{{< /tab >}}
 {{< tab name="Mac with Apple silicon" >}}
 
 - A supported version of macOS.
@@ -64,7 +46,28 @@ This page provides download links, system requirements, and step-by-step install
    $ softwareupdate --install-rosetta
    ```
 {{< /tab >}}
+{{< tab name="Mac with Intel chip" >}}
+
+- A supported version of macOS.
+
+  > [!IMPORTANT]
+  >
+  > Docker Desktop is supported on the current and two previous major macOS releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases).
+
+- At least 4 GB of RAM.
+
+{{< /tab >}}
 {{< /tabs >}}
+
+> **Before you install or update**
+>
+> - Quit tools that might call Docker in the background (Visual Studio Code, terminals, agent apps).
+>
+> - If you manage fleets or install via MDM, use the [**PKG installer**](/manuals/enterprise/enterprise-deployment/pkg-install-and-configure.md).
+>
+> - Keep the installer volume mounted until the installation completes.
+>
+> If you encounter a "Docker.app is damaged" dialog, see [Fix "Docker.app is damaged" on macOS](/manuals/desktop/troubleshoot-and-support/troubleshoot/mac-damaged-dialog.md).
 
 ## Install and run Docker Desktop on Mac
 
@@ -124,7 +127,7 @@ The `install` command accepts the following flags:
 
 - `--allowed-org=<org name>`: Requires the user to sign in and be part of the specified Docker Hub organization when running the application
 - `--user=<username>`: Performs the privileged configurations once during installation. This removes the need for the user to grant root privileges on first run. For more information, see [Privileged helper permission requirements](/manuals/desktop/setup/install/mac-permission-requirements.md#permission-requirements). To find the username, enter `ls /Users` in the CLI.
-- `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by administrators to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md).
+- `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by administrators to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md).
   - It must be used together with the `--allowed-org=<org name>` flag. 
   - For example: `--allowed-org=<org name> --admin-settings="{'configurationFileVersion': 2, 'enhancedContainerIsolation': {'value': true, 'locked': false}}"`
 
@@ -134,10 +137,24 @@ The `install` command accepts the following flags:
 - `--override-proxy-http=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests. It requires `--proxy-http-mode` to be `manual`.
 - `--override-proxy-https=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests, requires `--proxy-http-mode` to be `manual`
 - `--override-proxy-exclude=<hosts/domains>`: Bypasses proxy settings for the hosts and domains. It's a comma-separated list.
+- `--override-proxy-pac=<PAC file URL>`: Sets the PAC file URL. This setting takes effect only when using `manual` proxy mode.
+- `--override-proxy-embedded-pac=<PAC script>`: Specifies an embedded PAC (Proxy Auto-Config) script. This setting takes effect only when using `manual` proxy mode and has precedence over the `--override-proxy-pac` flag.
+
+###### Example of specifying PAC file
+
+```console
+$ sudo /Applications/Docker.app/Contents/MacOS/install --user testuser --proxy-http-mode="manual" --override-proxy-pac="http://localhost:8080/myproxy.pac"
+```
+
+###### Example of specifying PAC script
+
+```console
+$ sudo /Applications/Docker.app/Contents/MacOS/install --user testuser --proxy-http-mode="manual" --override-proxy-embedded-pac="function FindProxyForURL(url, host) { return \"DIRECT\"; }"
+```
 
 > [!TIP]
 >
-> As an IT administrator, you can use endpoint management (MDM) software to identify the number of Docker Desktop instances and their versions within your environment. This can provide accurate license reporting, help ensure your machines use the latest version of Docker Desktop, and enable you to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md).
+> As an IT administrator, you can use endpoint management (MDM) software to identify the number of Docker Desktop instances and their versions within your environment. This can provide accurate license reporting, help ensure your machines use the latest version of Docker Desktop, and enable you to [enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
 > - [Intune](https://learn.microsoft.com/en-us/mem/intune/apps/app-discovered-apps)
 > - [Jamf](https://docs.jamf.com/10.25.0/jamf-pro/administrator-guide/Application_Usage.html)
 > - [Kandji](https://support.kandji.io/support/solutions/articles/72000559793-view-a-device-application-list)
@@ -146,7 +163,7 @@ The `install` command accepts the following flags:
 
 ## Where to go next
 
-- Explore [Docker's subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
+- Explore [Docker's subscriptions](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopMacInstall) to see what Docker can offer you.
 - [Get started with Docker](/get-started/introduction/_index.md).
 - [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and all its features.
 - [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md) describes common problems, workarounds, how
