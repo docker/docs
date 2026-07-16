@@ -277,16 +277,16 @@ the kit handles the wiring; you only provide the value.
 
 ## Credential bindings
 
-A credential bindings file records which credential mechanisms you've approved
-for each service and the domains each may be used on. It lives at
+A credential bindings file records which credential mechanisms and domains
+you've approved for each service. It lives at
 `~/.config/sbx/credentials.yaml`, or `%APPDATA%\sbx\credentials.yaml` on
 Windows.
 
 Third-party kits that declare `schemaVersion: "2"` require an approved binding
 for each credential they use. `sbx` creates one interactively the first time you
 run such a kit (see [First-run approval](#first-run-approval)); you can also
-write entries by hand. Built-in agents are authorized by provenance and never
-need a binding.
+write entries by hand. Credentials declared only by embedded, built-in kits are
+authorized by provenance and don't need a binding.
 
 Each entry under `bindings` is keyed by a
 [service identifier](#built-in-services) and approves one or both credential
@@ -299,9 +299,9 @@ mechanisms:
   and the proxy handles token refresh and routing. OAuth domains include the
   token endpoint host and any resource hosts declared by the kit.
 
-Each mechanism takes a `domains` list — the domains the proxy may inject the
-credential into. The credential is attached only where those domains and the
-ones the kit requests overlap.
+Each mechanism takes a `domains` list that records the domains you approved.
+`sbx` asks for approval when a kit requests domains that the existing binding
+doesn't cover.
 
 ```yaml
 bindings:
@@ -319,26 +319,29 @@ authorizes that mechanism. Declining a credential writes no entry at all.
 ### First-run approval
 
 When a third-party kit needs a credential that has no binding, `sbx` walks you
-through approving one. For each credential, you use the value already in the
-secret store or enter one at the prompt, and you approve the domains it may
-reach. `sbx` writes the entry to `credentials.yaml`.
+through approving one. For an API key, you can use a value already in the secret
+store or enter one at the prompt. For OAuth, you approve the sign-in flow. In
+both cases, you approve the domains declared by the kit. `sbx` writes the entry
+to `credentials.yaml`.
 
 In non-interactive contexts (CI or `--detached`), there's no one to answer the
-prompt. If the kit marks the credential as `required: true`, resolution fails
-fast when no binding or host fallback exists. For optional credentials, the
-sandbox can start with that credential withheld. Pre-create the binding — by
-running the kit interactively once, or by writing `credentials.yaml` directly —
-before running unattended.
+prompt. Without a binding, the sandbox starts with the credential withheld. If
+the kit marks the credential as `required: true`, `sbx` also prints a warning.
+Pre-create the binding by running the kit interactively once or by writing
+`credentials.yaml` directly before running unattended.
 
-This makes the bindings file an allowlist of credential-to-domain approvals: a
-kit can use only the credentials and domains you've approved.
+The bindings file gates whether a third-party v2 kit can use a service
+credential. The kit's credential injection rules and network permissions still
+constrain which requests can carry the credential.
 
 ### Which kits require a binding
 
 Only third-party kits that declare `schemaVersion: "2"` require a binding.
-Built-in agents also use `schemaVersion: "2"` but are authorized by provenance,
-so their credentials inject automatically without a binding. Kits on
-`schemaVersion: "1"` inject their declared credentials without a binding.
+Built-in agents also use `schemaVersion: "2"`, but credentials declared only by
+embedded kits are authorized by provenance and inject automatically. If a
+third-party kit also declares the same service, that service requires approval.
+Kits on `schemaVersion: "1"` inject their declared credentials without a
+binding.
 
 ## Registry credentials
 

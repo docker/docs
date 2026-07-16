@@ -175,9 +175,9 @@ the proxy reads the real credential on the host and overwrites the
 auth header before the request leaves the sandbox.
 
 A kit declares the service, the in-container environment variable, and how
-to inject the credential. It does not declare where the value comes from —
-that's the user's
-[credential binding](../security/credentials.md):
+to inject the credential. It doesn't declare a host discovery source. The user
+provides the value through the secret store or first-run prompt, and a
+[credential binding](../security/credentials.md) authorizes its use:
 
 ```yaml
 credentials:
@@ -203,9 +203,9 @@ secret never enters the VM.
 
 See [Credentials](../security/credentials.md) for how to provide the
 credential value on your host, other approaches for cases the example
-above doesn't fit, and what the proxy does at request time. To scope where
-a kit-declared credential is sourced or which domains it's injected into,
-see [Credential bindings](../security/credentials.md).
+above doesn't fit, and what the proxy does at request time. See
+[Credential bindings](../security/credentials.md) to approve the mechanisms
+and domains declared by a third-party v2 kit.
 
 ### Inject agent memory
 

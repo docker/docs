@@ -210,9 +210,9 @@ file.
 ## Credentials
 
 A kit declares the credentials it needs and how the proxy injects them into
-outbound requests. It does not declare where the value comes from — discovery is
-controlled by the user through
-[credential bindings](../security/credentials.md), so a kit
+outbound requests. It does not declare a host discovery source. The user
+provides the value through the secret store or the first-run prompt, and a
+[credential binding](../security/credentials.md) authorizes its use. A kit
 can't read arbitrary host environment variables or files.
 
 ```yaml
@@ -250,14 +250,14 @@ credentials:
 `credentials` is a list; each entry names a `service` and configures one or more
 auth mechanisms.
 
-| Field         | Description                                                                                                  |
-| ------------- | ------------------------------------------------------------------------------------------------------------ |
-| `service`     | Credential identifier, matched against the value stored with `sbx secret set`. Lowercase kebab-case.         |
-| `description` | Optional. Shown to the user when approving a [binding](../security/credentials.md#credential-bindings).      |
-| `required`    | If `true`, the resolver fails fast when the credential has no binding and no host fallback. Default `false`. |
-| `provider`    | Reserved for a provider registry. Accepted with a warning and no runtime effect.                             |
-| `apiKey`      | API-key injection (see [apiKey](#apikey)).                                                                   |
-| `oauth`       | OAuth interception (see [oauth](#oauth)).                                                                    |
+| Field         | Description                                                                                                                                 |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `service`     | Credential identifier, matched against the value stored with `sbx secret set`. Lowercase kebab-case.                                        |
+| `description` | Optional. Shown to the user when approving a [binding](../security/credentials.md#credential-bindings).                                     |
+| `required`    | Marks the credential as essential to the agent. If it has no binding, `sbx` warns and starts with the credential withheld. Default `false`. |
+| `provider`    | Reserved for a provider registry. Accepted with a warning and no runtime effect.                                                            |
+| `apiKey`      | API-key injection (see [apiKey](#apikey)).                                                                                                  |
+| `oauth`       | OAuth interception (see [oauth](#oauth)).                                                                                                   |
 
 Each service must declare `apiKey`, `oauth`, or both. When both resolve at
 runtime, the API key takes precedence and OAuth acts as the fallback.
@@ -290,7 +290,7 @@ the real token response into the sandbox.
 | `credentialFile.structure`               | Declarative JSON shape for the credential file. `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, and `{{.Scopes}}` are substituted at runtime. |
 | `credentialFile.template`                | Deprecated Go template form. If both `structure` and `template` are set, `structure` wins.                                                               |
 | `resourceHosts`                          | API hosts where the proxy attaches the token on outbound requests, distinct from the token endpoint host.                                                |
-| `skipIfEnv`                              | Environment variable names that, if set on the host, make a stored API key take precedence over the OAuth flow.                                          |
+| `skipIfEnv`                              | Accepted for compatibility, but ignored for schema v2. A v2 binding is authoritative instead of host environment variables.                              |
 | `responseFields`                         | Overrides the default field names the proxy reads from the token response.                                                                               |
 | `passthrough`                            | If `true`, the proxy passes the token response through unchanged instead of replacing the tokens with sentinels.                                         |
 
