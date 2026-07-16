@@ -4,6 +4,11 @@ linkTitle: Integrations
 weight: 37
 description: Connect editors and desktop apps to a Docker Sandbox over SSH.
 keywords: docker sandboxes, ssh, integrations, vs code, cursor, remote development, sbx
+params:
+  sidebar:
+    badge:
+      color: blue
+      text: Experimental
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes SSH" >}}
