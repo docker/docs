@@ -104,10 +104,17 @@ It prevents a developer from registering another endpoint under the approved
 name or registering the approved endpoint under another name. Remove the
 resource or prompt permit if users don't need that capability.
 
-## Require approval for non-read-only tools
+## Require confirmation with MCP elicitation
 
-Add an approval-gated permit to the previous policy when users should be able to
-run other tools after confirmation:
+Despite its name, `@requireApproval` doesn't send a request to an organization
+administrator. It turns a matching `permit` into a per-request confirmation
+through MCP. The gateway sends an `elicitation/create` request to the same MCP
+client session that made the governed request. In a human-driven client, the
+person operating the agent sees the prompt and decides whether to proceed.
+
+Add an approval-gated permit to the previous policy to require this
+confirmation for non-read-only tools. The annotation string becomes the reason
+shown in the elicitation:
 
 ```plaintext
 @requireApproval("non-read-only tool call")
@@ -120,13 +127,39 @@ when {
 
 Tool annotations are supplied by the server and are advisory. `readOnly`
 defaults to `false` for tools that don't declare it, so this pattern requires
-approval for unannotated tools. If the client session can't ask the user for
-approval, the request is denied. A matching `forbid` also denies the request
-without showing an approval prompt.
+confirmation for unannotated tools.
 
-Use approval for in-session gateway requests. `sbx mcp add` can't present an
-approval request, so a registration permit with `@requireApproval` results in a
-denial.
+The gateway handles a matching request as follows:
+
+```mermaid
+flowchart TD
+  request["Agent sends a governed MCP request"] --> evaluate["Gateway evaluates MCP policy"]
+  evaluate -->|"Normal permit"| forward["Forward request"]
+  evaluate -->|"No permit or matching forbid"| deny["Deny request"]
+  evaluate -->|"Permit with @requireApproval"| elicit["Send MCP elicitation to connected client"]
+  elicit --> confirm{"Client returns explicit confirmation?"}
+  confirm -->|"No, unsupported, or error"| deny
+  confirm -->|"Yes"| reevaluate["Re-evaluate with approval digest"]
+  reevaluate -->|"Allowed"| forward
+  reevaluate -->|"Denied or changed"| deny
+```
+
+The prompt identifies the server or gateway tool and includes the annotation
+reason. It doesn't include raw tool arguments. Each matching request requires a
+new confirmation. After confirmation, the gateway re-evaluates the request with
+a digest that binds the response to the evaluated authorization request.
+
+Use this mechanism as a confirmation guardrail for human-driven clients. It
+doesn't create administrator approval or separation of duties. An autonomous
+MCP client can respond to an in-protocol elicitation programmatically. Use
+`forbid` for operations that must never run.
+
+The request is denied if the originating client session can't handle MCP
+elicitation, the user declines, the elicitation fails, or re-evaluation doesn't
+allow the request. `sbx mcp add` can't present an elicitation, so a registration
+permit with `@requireApproval` results in a denial. Tool calls made from an
+execution context that can't relay an elicitation, including calls from inside
+`code-mode`, are also denied.
 
 ## Withdraw server access
 

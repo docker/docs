@@ -127,8 +127,8 @@ Unsupported, malformed, or too deeply nested arguments are omitted.
 
 ## Approval annotation
 
-Use `@requireApproval("reason")` on a `permit` statement to require user
-approval before a matching request runs:
+Use `@requireApproval("reason")` on a `permit` statement to require in-session
+confirmation through MCP elicitation before a matching request runs:
 
 ```plaintext
 @requireApproval("write tool call")
@@ -138,12 +138,18 @@ when { resource.readOnly == false };
 
 When a request matches the annotated `permit` and no `forbid` overrides it, the
 policy engine returns an approval-required outcome. The annotation string is
-shown as the approval reason.
+shown as the elicitation reason. An approval-required outcome takes precedence
+over a normal `permit`. A matching `forbid` denies the request without an
+elicitation.
+
+For the request flow and trust model, see
+[Require confirmation with MCP elicitation](../access-controls/mcp.md#require-confirmation-with-mcp-elicitation).
 
 Approval requires a client session that can present an MCP elicitation request
 to the user. If the request can't be presented for approval, the request is
 denied. Approval is an in-session confirmation, not an out-of-band approval
-workflow.
+workflow. Each confirmation applies to one authorization request. After the
+client confirms, the gateway re-evaluates the request with an approval digest.
 
 `sbx mcp add` can't present an elicitation request. A registration permit with
 `@requireApproval` therefore results in a denial.
@@ -156,6 +162,9 @@ don't require approval.
 
 - Tool and resource listing actions aren't Cedar-gated. Listings can include
   entries that a policy denies when the sandbox tries to use them.
+- Approval-gated requests are denied when the execution context can't relay an
+  MCP elicitation to the originating client. This includes tool calls made from
+  inside `code-mode`.
 - Registration policy is evaluated when a server is registered. It doesn't
   remove existing registrations or stop an already-loaded server by itself.
   Govern existing registrations with use-time rules such as `invokeTool`,
