@@ -107,43 +107,17 @@ To identify an existing sandbox, list your sandboxes:
 $ sbx ls
 ```
 
-Use the sandbox name as the SSH hostname with the `.sbx` suffix.
+## Connect to a sandbox over SSH
 
-## Connect
-
-Open a shell in a sandbox named `demo`:
+Use the sandbox name with the `.sbx` suffix. For example, to connect to a
+sandbox named `demo`:
 
 ```console
 $ ssh demo.sbx
 ```
 
-Connect as a specific user inside the sandbox:
-
-```console
-$ ssh root@demo.sbx
-```
-
-Transfer files with SFTP:
-
-```console
-$ sftp demo.sbx
-```
-
-## Revoke access
-
-Access is gated by your Docker login. To sever all SSH sessions, sign out:
-
-```console
-$ sbx logout
-```
-
-This stops the daemon and closes any live connections.
-
-## Limitations
-
-SSH access is experimental. The following limitations apply:
-
-- SFTP file transfer is supported on Linux hosts only.
+To copy files that aren't part of a mounted workspace, use
+[`sbx cp`](../usage.md#copying-files-between-host-and-sandbox).
 
 ## Connect a specific tool
 
