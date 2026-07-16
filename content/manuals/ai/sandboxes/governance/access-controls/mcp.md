@@ -135,6 +135,34 @@ permit (principal, action == MCP::Action::"register", resource)
 when { resource in MCP::Server::"notion" };
 ```
 
+Server names are chosen at registration time. To block a remote server
+regardless of the name a developer chooses, match the server's
+`resource.identityURL`:
+
+```plaintext
+permit (principal, action == MCP::Action::"register", resource);
+
+forbid (principal, action == MCP::Action::"register", resource)
+when { resource.identityURL == "https://mcp.example.com/mcp" };
+```
+
+This pattern prevents future `sbx mcp add` registrations for that identity URL.
+It doesn't remove registrations that already exist or stop an already-loaded
+server by itself. To govern existing registrations, add use-time rules for the
+registered server name. Replace `example` with the name used in the existing
+registration:
+
+```plaintext
+forbid (principal, action == MCP::Action::"invokeTool", resource)
+when { resource in MCP::Server::"example" };
+
+forbid (principal, action == MCP::Action::"readResource", resource)
+when { resource in MCP::Server::"example" };
+
+forbid (principal, action == MCP::Action::"getPrompt", resource)
+when { resource in MCP::Server::"example" };
+```
+
 For remote server registration, match attributes the gateway provides, such as
 server type, identity URL, OAuth requirement, or network requirement. Local
 server command and argument attributes don't apply to remote servers.
