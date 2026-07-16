@@ -106,15 +106,15 @@ resource or prompt permit if users don't need that capability.
 
 ## Require confirmation with MCP elicitation
 
-Despite its name, `@requireApproval` doesn't send a request to an organization
-administrator. It turns a matching `permit` into a per-request confirmation
-through MCP. The gateway sends an `elicitation/create` request to the same MCP
-client session that made the governed request. In a human-driven client, the
-person operating the agent sees the prompt and decides whether to proceed.
+Use `@requireApproval` to require per-request confirmation through MCP. When a
+request matches the annotated `permit`, the gateway sends an
+`elicitation/create` request to the same MCP client session that made the
+governed request. In a human-driven client, the person operating the agent sees
+the prompt and decides whether to proceed.
 
-Add an approval-gated permit to the previous policy to require this
-confirmation for non-read-only tools. The annotation string becomes the reason
-shown in the elicitation:
+The following policy adds this confirmation to the previous policy for
+non-read-only tools. The annotation string becomes the reason shown in the
+elicitation:
 
 ```plaintext
 @requireApproval("non-read-only tool call")
