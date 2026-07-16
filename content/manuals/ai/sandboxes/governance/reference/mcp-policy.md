@@ -28,7 +28,7 @@ Governed MCP activity is default deny. A request is blocked unless a matching
 permit annotated with `@requireApproval`.
 
 For details about when Docker Sandboxes evaluates MCP policies for a user, see
-[How MCP policy works](../access-controls/mcp.md#how-mcp-policy-works).
+[Govern the server lifecycle](../access-controls/mcp.md#govern-the-server-lifecycle).
 
 An actionless `permit` matches every MCP action that reaches Cedar evaluation:
 
@@ -84,7 +84,7 @@ and are advisory.
 | `resource.idempotent`      | Tools             | Defaults to `false` when a tool doesn't declare it.                                                                                                   |
 | `resource.openWorld`       | Tools             | Defaults to `true` when a tool doesn't declare it.                                                                                                    |
 | `resource.category`        | Tools             | Server or catalog category copied onto the tool resource. Tools don't self-declare categories.                                                        |
-| `resource.type`            | Servers           | Use for server registration rules.                                                                                                                    |
+| `resource.type`            | Servers           | Use for server registration rules. `local-stdio` identifies explicit host commands, and `container-stdio` identifies OCI-packaged stdio servers.      |
 | `resource.identityURL`     | Servers           | The server URL or source. Use for server registration rules.                                                                                          |
 | `resource.requiresOAuth`   | Servers           | Use for server registration rules.                                                                                                                    |
 | `resource.requiresNetwork` | Servers           | Use for server registration rules.                                                                                                                    |
@@ -145,6 +145,9 @@ to the user. If the request can't be presented for approval, the request is
 denied. Approval is an in-session confirmation, not an out-of-band approval
 workflow.
 
+`sbx mcp add` can't present an elicitation request. A registration permit with
+`@requireApproval` therefore results in a denial.
+
 Only the exact annotation name `@requireApproval` applies approval behavior.
 Other annotation names, such as `@requireConsent` or `@requireConfirmation`,
 don't require approval.
@@ -160,8 +163,8 @@ don't require approval.
 - Server command and argument rules using `resource.command` or `resource.args`
   apply only when the resolved server registration includes local stdio command
   details. Remote servers and metadata-resolved local servers can have empty
-  values for those attributes. Use `resource.type` to match all local stdio
-  servers.
+  values for those attributes. Use `resource.type` to match the `local-stdio`
+  and `container-stdio` server classes.
 - Principal-based rules don't take effect. Use organization and team policy
   scope to target users.
 - Server groups aren't supported in MCP policy. Reference servers individually.

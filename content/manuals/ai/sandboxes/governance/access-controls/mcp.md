@@ -6,151 +6,140 @@ description: Use Cedar-based MCP policies to control sandbox MCP server registra
 keywords: docker sandboxes, MCP policy, MCP access, Cedar policy, requireApproval, AI Governance
 ---
 
-MCP policies control Model Context Protocol activity made available to a
-sandbox through Docker's MCP gateway. Use them to govern server registration,
-tool calls, gateway meta-tools, resources, prompts, and approval requirements.
-To register MCP servers and connect them to sandboxes, see
+MCP access policies let organization administrators control which Model
+Context Protocol (MCP) servers developers can register and what agents can do
+through Docker's MCP gateway. Use these policies to approve trusted servers,
+withdraw access to a server, require approval for tool calls, and restrict
+host-run servers. To register MCP servers and connect them to sandboxes, see
 [MCP gateway](../../mcp-gateway.md).
 
 Unlike [network access policies](network.md) and
 [filesystem access policies](filesystem.md), MCP policies are organization
 policies written in Cedar. Docker defines the `MCP` namespace, including the
 actions, resource types, attributes, and approval behavior that policies can
-match. For Docker's MCP policy actions, resources, attributes, and context
-fields, see the [MCP policy reference](../reference/mcp-policy.md). For Cedar
-syntax and language semantics, see the
+match. This page focuses on representative access patterns. For Docker's exact
+policy surface, see the [MCP policy reference](../reference/mcp-policy.md). For
+Cedar syntax and language semantics, see the
 [Cedar documentation](https://docs.cedarpolicy.com/).
 
-## How MCP policy works
+## Govern the server lifecycle
 
-Cedar evaluates each request against a principal, action, resource, and context.
-For Docker MCP policies:
+MCP policy applies at two points in a server's lifecycle. A rule for one point
+doesn't automatically govern the other.
 
-- Policy scope supplies the principal. Use organization or team scope instead
-  of matching users, teams, tenants, or roles in the policy.
-- Actions use the `MCP::Action` namespace, such as
-  `MCP::Action::"invokeTool"`.
-- Resources use MCP entity types, such as `MCP::Server`, `MCP::Tool`,
-  `MCP::Resource`, `MCP::Prompt`, and `MCP::Primordial`.
-- A matching `forbid` overrides any `permit`, including a permit with
-  `@requireApproval`.
-- When MCP policy enforcement is active, evaluation is fail closed: server
-  registration and governed MCP requests are denied unless a matching `permit`
-  allows them.
+| Admin decision                             | Evaluation point                            | Match with                                                                 |
+| ------------------------------------------ | ------------------------------------------- | -------------------------------------------------------------------------- |
+| Whether a server can be registered         | When a developer runs `sbx mcp add`         | The registered name and resolved server attributes, such as `identityURL`  |
+| What agents can do through the MCP gateway | When the gateway handles a governed request | The registered server name, tool annotations, resource URI, or prompt name |
 
-If MCP policy enforcement isn't active for a user, the MCP gateway doesn't
-evaluate Cedar policy and MCP activity is allowed by the gateway. MCP doesn't
-have a local preset equivalent to network policy.
+Registration rules affect future registrations. They don't remove a saved
+registration or prevent an existing registration from being loaded with
+`sbx mcp load`. Use-time rules govern tool calls, resource reads, and prompt
+retrieval from servers that are already registered or loaded.
 
-MCP policies are enforced on the MCP gateway path, not by the sandbox network
-proxy. During `sbx mcp add`, Docker Sandboxes evaluates the resolved server
-definition against `MCP::Action::"register"` before storing the registration.
-When a sandbox uses MCP, the gateway evaluates governed MCP requests before
-tool calls, resource reads, prompt retrieval, and gateway meta-tool execution.
+Server names are chosen during registration. Registration rules can match the
+chosen name and resolved server identity together. At use time, tools,
+resources, and prompts are associated with the registered name, so rules for an
+existing server must match every name under which it was registered.
 
-Tool and resource listings can include entries that policy later denies at use
-time. Use the [MCP policy reference](../reference/mcp-policy.md) for the exact
-actions and limitations.
+Built-in gateway tools, such as `code-mode` and OAuth authorization helpers,
+are also governed at use time. They are `MCP::Primordial` resources rather than
+tools associated with a registered server. For details, see
+[Built-in gateway tools](../../mcp-gateway.md#built-in-gateway-tools).
 
-## Start with a baseline
+Use-time policy doesn't hide or remove existing registrations. Tool and
+resource listings can also include entries that policy denies when an agent
+tries to use them.
 
-To allow all MCP activity while you build a narrower policy, use an actionless
-`permit`:
+## Choose an access posture
+
+When MCP policy enforcement is active for a user, registration and governed MCP
+requests are denied unless a matching `permit` allows them. A matching `forbid`
+overrides any `permit`, including a permit with `@requireApproval`.
+
+Use permits for an allowlist policy. For a blocklist policy that grants MCP
+activity except for explicit restrictions, start with an actionless permit:
 
 ```plaintext
 permit (principal, action, resource);
 ```
 
-This is useful as a temporary baseline. For production policies, prefer
-patterns that limit access to approved servers, read-only tools, or
-approval-gated tool calls.
+This statement permits every MCP action that reaches Cedar evaluation. Add
+`forbid` statements for the restrictions the policy must enforce.
 
-## Allow read-only tools
+Policy scope supplies the principal. Use organization or team scope instead of
+matching users, teams, tenants, or roles in Cedar. If MCP policy enforcement
+isn't active for a user, the gateway doesn't evaluate Cedar policy and permits
+MCP activity. MCP doesn't have a local preset equivalent to network policy.
 
-Servers can declare tool annotations such as `readOnly` and `destructive`. To
-allow tools that a server marks read-only:
+## Approve a server
 
-```plaintext
-permit (principal, action == MCP::Action::"invokeTool", resource)
-when { resource.readOnly == true };
-```
-
-`readOnly` defaults to `false` for tools that don't declare it, so this pattern
-fails closed for unannotated tools.
-
-## Require approval for writes
-
-Use `@requireApproval` on a `permit` statement to require user approval before
-a matching request runs:
+For an allowlist, approve both the server registration and its use-time
+capabilities. The following policy approves a remote server only when it is
+registered as `example` with the expected identity URL. It permits read-only
+tool calls, resource reads, and prompt retrieval from that registered server:
 
 ```plaintext
-permit (principal, action == MCP::Action::"invokeTool", resource)
-when { resource.readOnly == true };
+permit (principal, action == MCP::Action::"register", resource)
+when {
+  resource in MCP::Server::"example" &&
+  resource.identityURL == "https://mcp.example.com/mcp"
+};
 
-@requireApproval("write tool call")
-permit (principal, action == MCP::Action::"invokeTool", resource)
-when { resource.readOnly == false };
-```
-
-If the sandbox can't ask a user for approval, the request is denied. A matching
-`forbid` still denies the request without showing an approval prompt.
-
-## Limit tools to approved servers
-
-Use `MCP::Server` to match the registered server that exposes a tool:
-
-```plaintext
 permit (principal, action == MCP::Action::"invokeTool", resource)
 when {
-  resource.readOnly == true &&
-  (resource in MCP::Server::"github" || resource in MCP::Server::"notion")
+  resource in MCP::Server::"example" &&
+  resource.readOnly == true
+};
+
+permit (principal, action == MCP::Action::"readResource", resource)
+when { resource in MCP::Server::"example" };
+
+permit (principal, action == MCP::Action::"getPrompt", resource)
+when { resource in MCP::Server::"example" };
+```
+
+Matching both the name and identity URL establishes a canonical registration.
+It prevents a developer from registering another endpoint under the approved
+name or registering the approved endpoint under another name. Remove the
+resource or prompt permit if users don't need that capability.
+
+## Require approval for non-read-only tools
+
+Add an approval-gated permit to the previous policy when users should be able to
+run other tools after confirmation:
+
+```plaintext
+@requireApproval("non-read-only tool call")
+permit (principal, action == MCP::Action::"invokeTool", resource)
+when {
+  resource in MCP::Server::"example" &&
+  resource.readOnly == false
 };
 ```
 
-Server names must match the registered MCP server names.
+Tool annotations are supplied by the server and are advisory. `readOnly`
+defaults to `false` for tools that don't declare it, so this pattern requires
+approval for unannotated tools. If the client session can't ask the user for
+approval, the request is denied. A matching `forbid` also denies the request
+without showing an approval prompt.
 
-## Block destructive tools
+Use approval for in-session gateway requests. `sbx mcp add` can't present an
+approval request, so a registration permit with `@requireApproval` results in a
+denial.
 
-Use `forbid` for controls that must always win over permits:
+## Withdraw server access
 
-```plaintext
-permit (principal, action == MCP::Action::"invokeTool", resource);
-
-forbid (principal, action == MCP::Action::"invokeTool", resource)
-when { resource.destructive == true };
-```
-
-`destructive` defaults to `true` for tools that don't declare it, so this
-pattern also blocks unannotated tools.
-
-## Control server registration
-
-Use the `register` action to control which MCP servers can be registered:
+To withdraw access from a server that broader rules permit, address both
+enforcement points. First, prevent future registrations of the server by
+matching its identity URL:
 
 ```plaintext
-permit (principal, action == MCP::Action::"register", resource)
-when { resource in MCP::Server::"github" };
-
-permit (principal, action == MCP::Action::"register", resource)
-when { resource in MCP::Server::"notion" };
-```
-
-Server names are chosen at registration time. To block a remote server
-regardless of the name a developer chooses, match the server's
-`resource.identityURL`:
-
-```plaintext
-permit (principal, action == MCP::Action::"register", resource);
-
 forbid (principal, action == MCP::Action::"register", resource)
 when { resource.identityURL == "https://mcp.example.com/mcp" };
 ```
 
-This pattern prevents future `sbx mcp add` registrations for that identity URL.
-It doesn't remove registrations that already exist or stop an already-loaded
-server by itself. To govern existing registrations, add use-time rules for the
-registered server name. Replace `example` with the name used in the existing
-registration:
+Then deny use-time requests for each registered name that refers to the server:
 
 ```plaintext
 forbid (principal, action == MCP::Action::"invokeTool", resource)
@@ -163,15 +152,43 @@ forbid (principal, action == MCP::Action::"getPrompt", resource)
 when { resource in MCP::Server::"example" };
 ```
 
-For remote server registration, match attributes the gateway provides, such as
-server type, identity URL, OAuth requirement, or network requirement. Local
-server command and argument attributes don't apply to remote servers.
+The registration remains saved and can still be listed or loaded. These rules
+prevent another registration for the identity URL and deny governed use under
+the registered name. If the server was registered under other names, add
+use-time rules for those names as well.
 
-For local stdio servers, `resource.type == "local-stdio"` matches host-side
-local servers. Use `resource.command` and `resource.args` only when the
-resolved registration includes command details.
+An OAuth authorization helper is a built-in gateway tool, not a child of the
+registered server. To prevent agents from starting authorization for the
+server, govern the helper separately:
 
-## Next steps
+```plaintext
+forbid (principal, action == MCP::Action::"invokePrimordial", resource)
+when { resource in MCP::Primordial::"example-authorize" };
+```
+
+## Restrict host-run servers
+
+Local stdio servers run on the host, outside the sandbox VM. This includes
+explicit host commands and OCI-packaged stdio servers started with host Docker.
+For details about this boundary, see
+[Docker Engine isolation](../../security/isolation.md#docker-engine-isolation).
+
+In a blocklist policy that otherwise permits registration, deny both host-run
+server types:
+
+```plaintext
+forbid (principal, action == MCP::Action::"register", resource)
+when {
+  resource.type == "local-stdio" ||
+  resource.type == "container-stdio"
+};
+```
+
+`local-stdio` covers explicit commands, including commands that start a Docker
+container. `container-stdio` covers OCI-packaged stdio servers resolved from
+registry or manifest metadata.
+
+## Related information
 
 - Use [Policy concepts](../concepts.md#mcp-policies) for the MCP policy model.
 - Use the [MCP policy reference](../reference/mcp-policy.md) for exact action,
