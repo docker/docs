@@ -1,24 +1,25 @@
 ---
-title: Connect Codex to a sandbox
-linkTitle: Codex
+title: Connect ChatGPT to a sandbox
+linkTitle: ChatGPT
 weight: 40
-description: Run the Codex app against a Docker Sandbox over SSH.
-keywords: docker sandboxes, codex, openai, remote ssh, sbx
+description: Run Codex in the ChatGPT desktop app against a Docker Sandbox over SSH.
+keywords: docker sandboxes, chatgpt, codex, openai, remote ssh, sbx
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes SSH" >}}
 
-Connect the Codex app to a sandbox over SSH so it works inside the isolated
-environment instead of on your host.
+Connect the ChatGPT desktop app to a sandbox over SSH so Codex works inside the
+isolated environment instead of on your host.
 
 > [!NOTE]
-> This page covers the Codex app connecting to a sandbox over SSH. To run the
-> Codex CLI inside a sandbox directly, see [Codex](../agents/codex.md).
+> This page covers running Codex in the ChatGPT desktop app connected to a
+> sandbox over SSH. To run the Codex CLI inside a sandbox directly, see
+> [Codex](../agents/codex.md).
 
 ## Prerequisites
 
 - SSH access set up. See [Editor and app integrations](_index.md#enable-ssh-access).
-- The Codex app installed.
+- The ChatGPT desktop app installed.
 - An existing sandbox created from the Codex template. The template includes
   the `codex` command required by the app's remote server.
 
@@ -37,11 +38,11 @@ Confirm that you can connect to the sandbox from a terminal:
 $ ssh demo.sbx
 ```
 
-In the Codex app, open **Settings > Connections** and add an SSH connection
-manually. Enter the sandbox hostname, such as `demo.sbx`, as the host, then
-choose the sandbox workspace folder as the remote project.
+In the ChatGPT desktop app, open **Settings > Connections** and add an SSH
+connection manually. Enter the sandbox hostname, such as `demo.sbx`, as the
+host, then choose the sandbox workspace folder as the remote project.
 
-For more connection options, see the Codex instructions to
+For more connection options, see the OpenAI instructions to
 [connect to an SSH host](https://learn.chatgpt.com/docs/remote-connections#connect-to-an-ssh-host).
 
 ## Related

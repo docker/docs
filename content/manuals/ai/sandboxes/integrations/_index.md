@@ -150,4 +150,4 @@ SSH access is experimental. The following limitations apply:
 - [VS Code](vscode.md)
 - [Cursor](cursor.md)
 - [Claude Desktop](claude-desktop.md)
-- [Codex](codex.md)
+- [ChatGPT](chatgpt.md)
