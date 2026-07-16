@@ -90,7 +90,12 @@ For more information, see
 
 ## Manage connected accounts
 
-You can unlink connected Google or GitHub accounts:
+If you signed up with Google or GitHub, that provider appears under
+**Connected accounts**. Disconnecting it removes the OAuth connection. It
+doesn't change your Docker ID, and it doesn't let you add a different sign-in
+method. You can't connect both Google and GitHub to the same account.
+
+To disconnect a connected account:
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
 1. Select your avatar in the top-right corner and select **Account settings**.
@@ -102,19 +107,3 @@ or GitHub. See Google or GitHub's documentation for more information:
 
 - [Manage connections between your Google Account and third-parties](https://support.google.com/accounts/answer/13533235?hl=en)
 - [Reviewing and revoking authorization of GitHub Apps](https://docs.github.com/en/apps/using-github-apps/reviewing-and-revoking-authorization-of-github-apps)
-
-## Convert your account
-
-For information on converting your account into an organization, see
-[Convert an account into an organization](../admin/organization/setup/convert-account.md).
-
-## Deactivate your account
-
-For information on deactivating your account, see
-[Deactivate a Docker account](./deactivate-user-account.md).
-
-## What's next
-
-- [Docker accounts overview](./_index.md)
-- [Create a Docker account](./create-account.md)
-- [Enable two-factor authentication](../security/2fa/_index.md)
