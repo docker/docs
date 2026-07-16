@@ -129,7 +129,8 @@ $ docker scout policy my-dhi-app:v1 \
 The config file matches policies by the **Policy name** listed in
 [Policies in the DHI bundle](#policies-in-the-dhi-bundle) and lets you disable
 individual policies or adjust their settings. For example, the following config
-disables the STIG scan policy and only flags critical fixable vulnerabilities:
+disables the STIG scan policy and opts out of CISA KEV checks in the
+high-profile vulnerabilities policy:
 
 ```json
 {
@@ -139,9 +140,9 @@ disables the STIG scan policy and only flags critical fixable vulnerabilities:
       "enabled": false
     },
     {
-      "name": "fixable-vulnerabilities",
+      "name": "high-profile-vulnerabilities",
       "config": {
-        "severities": ["CRITICAL"]
+        "include_cisa_kev": false
       }
     }
   ]
