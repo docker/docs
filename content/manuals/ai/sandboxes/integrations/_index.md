@@ -21,24 +21,6 @@ that supports remote development over SSH can connect to it.
 > SSH access is experimental and off by default. The command surface and
 > behavior may change.
 
-## How it works
-
-`sbx setup ssh` writes a managed block to your SSH config: `~/.ssh/config` on
-macOS and Linux, or `%USERPROFILE%\.ssh\config` on Windows. The block maps the
-`*.sbx` host pattern to the sandbox daemon. Connections don't use a network port
-or an SSH key:
-
-- A `ProxyCommand` relays the SSH stream to the daemon over its local socket
-  (a Unix domain socket on macOS and Linux, a named pipe on Windows).
-- The daemon accepts the connection only while you have an active Docker login.
-  Authentication is tied to your login, not to a stored key.
-- The host key is verified on every connection, so a rotated daemon key never
-  triggers a host-key mismatch.
-
-Because SSH terminates at the daemon, no SSH server runs inside the sandbox.
-Connecting to `<name>.sbx` starts the sandbox if it isn't running. The sandbox
-must already exist.
-
 ## Prerequisites
 
 - The `sbx` CLI installed and signed in. See [Get started](../get-started.md).
@@ -49,9 +31,7 @@ must already exist.
 
 ## Enable SSH access
 
-SSH access is an experimental feature. Turn it on, then stop the daemon so it
-reloads with the new setting. The daemon reads `feature.ssh` only at startup,
-so the change takes effect the next time it starts:
+Run the following commands to enable experimental features and SSH access:
 
 ```console
 $ sbx settings set platform.allowExperimentalFeatures true
@@ -60,38 +40,9 @@ $ sbx daemon stop
 $ sbx setup ssh
 ```
 
-The `sbx` CLI starts the daemon automatically in the background when a command
-needs it, so `sbx setup ssh` brings it back up with SSH enabled — you don't
-start it by hand. To start it yourself instead, use `sbx daemon start -d`; the
-`-d` flag runs it in the background rather than holding your terminal.
-
-`sbx setup ssh` is idempotent — you can re-run it at any time. It adds a
-managed block to your SSH config similar to the following:
-
-```text
-# >>> docker sandboxes (managed) >>>
-Host *.sbx
-    User _default_user_
-    ProxyCommand "sbx" ssh proxy %n
-    IdentityAgent none
-    IdentityFile /dev/null
-    IdentitiesOnly yes
-    ControlMaster no
-    ControlPath none
-    UserKnownHostsFile "~/.ssh/sbx_known_hosts"
-    KnownHostsCommand "sbx" ssh known-hosts %H
-    StrictHostKeyChecking yes
-    SendEnv *
-# <<< docker sandboxes (managed) <<<
-```
-
-You don't edit this block by hand. The `User _default_user_` sentinel tells the
-daemon to log you in as the sandbox image's default user, so your host username
-is never sent.
-
-The wildcard entry configures how SSH clients connect, but it doesn't add
-individual sandbox names to application host pickers. Enter the sandbox
-hostname, such as `demo.sbx`, manually when you configure an integration.
+Stopping the daemon makes it reload the SSH setting the next time it starts.
+`sbx setup ssh` starts the daemon again and configures your SSH client. You can
+re-run the setup command at any time.
 
 ## Create or identify a sandbox
 
@@ -123,3 +74,48 @@ $ ssh demo.sbx
 - [Cursor](cursor.md)
 - [Claude Desktop](claude-desktop.md)
 - [ChatGPT](chatgpt.md)
+
+## How SSH connections work
+
+`sbx setup ssh` writes a managed block to your SSH config: `~/.ssh/config` on
+macOS and Linux, or `%USERPROFILE%\.ssh\config` on Windows. The block is similar
+to the following:
+
+```text
+# >>> docker sandboxes (managed) >>>
+Host *.sbx
+    User _default_user_
+    ProxyCommand "sbx" ssh proxy %n
+    IdentityAgent none
+    IdentityFile /dev/null
+    IdentitiesOnly yes
+    ControlMaster no
+    ControlPath none
+    UserKnownHostsFile "~/.ssh/sbx_known_hosts"
+    KnownHostsCommand "sbx" ssh known-hosts %H
+    StrictHostKeyChecking yes
+    SendEnv *
+# <<< docker sandboxes (managed) <<<
+```
+
+You don't edit this block by hand. The `User _default_user_` sentinel tells the
+daemon to log you in as the sandbox image's default user, so your host username
+is never sent.
+
+The `*.sbx` wildcard maps sandbox hostnames to the sandbox daemon, but it
+doesn't add individual sandbox names to application host pickers. Enter the
+sandbox hostname, such as `demo.sbx`, manually when you configure an
+integration.
+
+Connections don't use a network port or an SSH key:
+
+- A `ProxyCommand` relays the SSH stream to the daemon over its local socket
+  (a Unix domain socket on macOS and Linux, a named pipe on Windows).
+- The daemon accepts the connection only while you have an active Docker login.
+  Authentication is tied to your login, not to a stored key.
+- The host key is verified on every connection, so a rotated daemon key never
+  triggers a host-key mismatch.
+
+Because SSH terminates at the daemon, no SSH server runs inside the sandbox.
+Connecting to `<name>.sbx` starts the sandbox if it isn't running. The sandbox
+must already exist.
