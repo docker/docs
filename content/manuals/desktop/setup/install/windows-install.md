@@ -140,7 +140,9 @@ For more information, see [Running Docker Desktop in a VM or VDI environment](/m
 
 ## Install Docker Desktop on Windows
 
-### Install interactively
+### Install with our installer
+
+#### Install interactively
 
 1. Download the installer using the download button at the top of the page, or from the [release notes](/manuals/desktop/release-notes.md).
 
@@ -148,7 +150,7 @@ For more information, see [Running Docker Desktop in a VM or VDI environment](/m
 
    > [!NOTE]
    >
-   >If you want to switch installation mode at a later date, you need to uninstall and reinstall Docker Desktop.
+   > If you want to switch installation mode at a later date, you need to uninstall and reinstall Docker Desktop.
 
 3. When prompted, ensure the **Use WSL 2 instead of Hyper-V** option on the Configuration page is selected or not depending on your choice of backend.
 
@@ -160,7 +162,7 @@ For more information, see [Running Docker Desktop in a VM or VDI environment](/m
 
 6. [Start Docker Desktop](#start-docker-desktop).
 
-### Install from the command line
+#### Install from the command line
 
 After downloading `Docker Desktop Installer.exe`, run the following command in a terminal to install Docker Desktop to `%LOCALAPPDATA%\Programs\DockerDesktop`.
 
@@ -213,6 +215,38 @@ See the [Installer flags](#installer-flags) section to see what flags the `insta
 > [!NOTE]
 >
 >If you want to switch installation mode at a later date, you need to uninstall and reinstall Docker Desktop.
+
+### Install from a package manager
+
+#### Install from Microsoft Store
+
+Go to [Microsoft Store Docker Desktop page](https://apps.microsoft.com/detail/XP8CBJ40XLBWKX) and click the <key>Get</key> or <key>Install</key> button on the page.
+
+> [!IMPORTANT]
+>
+> ARM64 architecture is not supported.
+>
+> To check your PC's architecture, enter either `systeminfo` or `start ms-settings:about`, in either Command Prompt or PowerShell, and look up text like `ARM64-based` in the `System Type` (the key name would be localized depending on your preferred Windows display language setting) value.
+
+#### Install from Window Package Manager
+
+Run the following command in Command Prompt:
+
+```sh
+winget.exe add --id Docker.DockerDesktop -e -s winget -h --accept-package-agreements --authentication-mode silent --accept-source-agreements --disable-interactivity
+
+rem ARM64 is not supported from Microsoft Store
+winget.exe add --id XP8CBJ40XLBWKX -e -s winget -h --accept-package-agreements --authentication-mode silent --accept-source-agreements --disable-interactivity
+```
+
+The following command is specifically available in PowerShell:
+
+```powershell
+Start-Process winget.exe -Args 'add --id Docker.DockerDesktop -e -s winget -h --accept-package-agreements --authentication-mode silent --accept-source-agreements --disable-interactivity' -nnw -Wait
+
+# ARM64 is not supported from Microsoft Store
+Start-Process winget.exe -Args 'add --id XP8CBJ40XLBWKX -e -s winget -h --accept-package-agreements --authentication-mode silent --accept-source-agreements --disable-interactivity' -nnw -Wait
+```
 
 ## Start Docker Desktop
 
