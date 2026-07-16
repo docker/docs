@@ -8,8 +8,8 @@ keywords: docker sandboxes, credentials, api keys, authentication, proxy, ssh ag
 Most agents need an API key for their model provider. An HTTP/HTTPS proxy on
 your host intercepts outbound requests from the sandbox, looks up the matching
 credential on the host, and overwrites the auth header before forwarding. The
-real credential stays on the host; the sandbox sees only a sentinel value. For
-the security model behind this, see
+real credential stays on the host when proxy management is active; the sandbox
+sees only a sentinel value. For the security model behind this, see
 [Credential isolation](isolation.md#credential-isolation).
 
 ## How credential injection works
@@ -17,9 +17,13 @@ the security model behind this, see
 When a sandbox makes an outbound request, the host-side proxy decides three
 things: whether the request **matches** a service the kit (or built-in agent)
 declares, what **header** to write, and what **value** to inject. The kit
-declares the match and the header; you provide the value on the host. The real
-value never enters the sandbox — the agent sees only a sentinel like
-`proxy-managed`.
+declares the match and the header; you provide the value on the host. For
+proxy-managed credentials, the real value never enters the sandbox — the agent
+sees only a sentinel like `proxy-managed`.
+
+A kit can set OAuth `passthrough: true` to opt out of sentinel masking. This
+sends the real token response into the sandbox and reduces credential isolation.
+See the [`oauth` kit fields](../customize/kit-reference.md#oauth).
 
 There are several ways to provide that value. When more than one source has a
 value for the same service, the stored secret takes precedence.

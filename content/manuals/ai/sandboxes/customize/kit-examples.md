@@ -361,6 +361,8 @@ permissions:
   network:
     allow:
       - "claude.com:443"
+      - "api.anthropic.com:443"
+      - "console.anthropic.com:443"
 
 credentials:
   - service: anthropic

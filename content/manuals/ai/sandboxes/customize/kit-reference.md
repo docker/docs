@@ -17,6 +17,10 @@ weight: 22
 This page documents every field in a kit's `spec.yaml`. For an overview of
 what kits are and how to use them, see [Kits](kits.md).
 
+For the normative v2 grammar used by the parser and tests, see the
+[`schemaVersion: "2"` specification](https://github.com/docker/sbx-kits-contrib/blob/main/spec/SPEC-v2.md)
+in the `docker/sbx-kits-contrib` repository.
+
 A kit directory has a required `spec.yaml` and an optional `files/` tree:
 
 ```text
@@ -29,8 +33,9 @@ my-kit/
 
 ## Schema versions
 
-Two schema versions are supported. `schemaVersion: "2"` is current and
-recommended; `"1"` is still accepted through the legacy path.
+Starting with Docker Sandboxes version 0.36, two schema versions are supported.
+Use `schemaVersion: "2"` for new kits. Version `"1"` remains accepted through
+the legacy path.
 
 The loader forks on `schemaVersion`. A v2 spec uses the v2 grammar only. Legacy
 v1 fields in a `schemaVersion: "2"` spec are rejected during decode instead of
@@ -227,7 +232,7 @@ credentials:
           scheme: bearer
         - domain: <domain>
           scheme: basic
-          username: <user> # optional, for HTTP basic auth
+          username: <user> # required with scheme: basic
     oauth:
       tokenEndpoint:
         host: <host>
@@ -273,7 +278,9 @@ runtime, the API key takes precedence and OAuth acts as the fallback.
 
 For agents that authenticate with OAuth (for example, Claude Code), the proxy
 intercepts token responses and replaces real tokens with sentinels, then swaps
-the real token back in on outbound requests. The token never enters the sandbox.
+the real token back in on outbound requests. By default, the token never enters
+the sandbox. Setting `passthrough: true` opts out of sentinel masking and sends
+the real token response into the sandbox.
 
 | Field                                    | Description                                                                                                                                              |
 | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |

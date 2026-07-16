@@ -184,6 +184,7 @@ credentials:
   - service: my-service
     apiKey:
       name: MY_SERVICE_API_KEY # in-VM env var, set to a sentinel
+      proxyManaged: true
       inject:
         - domain: api.example.com # inject on requests to this domain
           header: Authorization # overwrite this header
@@ -222,12 +223,10 @@ agentInstructions:
 
 Both mixin and sandbox kits can declare `agentInstructions.content`. The active
 sandbox kit sets `agentInstructions.filename`, which determines the memory
-file's name.
-
-When more than one loaded kit declares `agentInstructions.content`, each kit's
-content is written to its own `<kit-name>.md` file under a sibling
-`kits-memory/` directory. The main memory file gets a `## Kits`
-section that points to each kit file:
+file's name. The sandbox kit's content is written inline in that file. Each
+mixin's content is written to its own `<kit-name>.md` file under a sibling
+`kits-memory/` directory, and the main memory file gets a `## Kits` section that
+points to each mixin file:
 
 ```text
 /Users/you/
@@ -358,6 +357,8 @@ permissions:
   network:
     allow:
       - "claude.com:443"
+      - "api.anthropic.com:443"
+      - "console.anthropic.com:443"
 
 credentials:
   - service: anthropic
