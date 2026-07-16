@@ -265,7 +265,7 @@ Synchronized file sharing:
   subscription: [Pro, Team, Business]
 Usage reports:
   subscription: [Business]
-  for: Administrators
+  for: Administrators and users with report read permission
 USB/IP support:
   for: Docker Desktop for Mac, Linux, and Windows with the Hyper-V backend
 VMM:

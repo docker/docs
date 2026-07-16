@@ -19,4 +19,4 @@ issues for the Docker Enterprise Data API.
 
 - Initial release of the Enterprise Data API
 - Usage reports endpoints: list report types, list reports, download, schema
-- Authentication via Personal Access Tokens (PAT) and Organization Access Tokens (OAT)
+- Authentication via Organization Access Tokens (OAT). Personal Access Tokens (PATs) are not supported.
