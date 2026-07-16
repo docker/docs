@@ -24,16 +24,11 @@ host.
 
 ## Connect
 
-1. Open the environment picker and select **Add SSH host**.
-2. In the **Add SSH connection** dialog, enter the connection details:
-   - **Name**: a friendly label for the connection, such as `My sandbox`.
-   - **SSH Host**: enter the sandbox host manually as `<name>.sbx`.
-   - Leave **SSH Port** and **Identity File** empty. The managed SSH config
-     that `sbx setup ssh` wrote supplies everything else.
-3. Select **Add SSH connection**. Claude Desktop connects to the sandbox and
-   runs Claude Code there.
-
-<!-- TODO: add screenshots of the environment picker and the Add SSH connection dialog -->
+Follow the Claude Desktop instructions for
+[SSH sessions](https://code.claude.com/docs/en/desktop#ssh-sessions). When you
+add the connection, enter the sandbox hostname, such as `demo.sbx`, manually in
+the **SSH Host** field. Leave **SSH Port** and **Identity File** empty because
+the managed SSH config supplies them.
 
 ## Related
 
