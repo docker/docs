@@ -51,6 +51,8 @@ All endpoints are under the `/api` prefix.
 | `PATCH`  | `/api/sessions/:id/title`           | Update session title                                    |
 | `PATCH`  | `/api/sessions/:id/permissions`     | Update session permissions                              |
 | `POST`   | `/api/sessions/:id/fork`            | Fork a session at a user message — creates a new session with messages `[0, message_index)` of the parent (see [Session Forking](#session-forking)) |
+| `POST`   | `/api/sessions/:id/messages`        | Append a message directly to a session's history (bypasses the model). Returns `409 Conflict` while the session has an active run (see [Agent Execution](#agent-execution)). |
+| `PATCH`  | `/api/sessions/:id/messages/:msg_id` | Update an existing message by ID. Returns `409 Conflict` while the session has an active run. |
 | `POST`   | `/api/sessions/:id/resume`          | Resume a paused session (after tool confirmation)       |
 | `POST`   | `/api/sessions/:id/tools/toggle`    | Toggle auto-approve (YOLO) mode                         |
 | `POST`   | `/api/sessions/:id/elicitation`     | Respond to an MCP tool elicitation request              |

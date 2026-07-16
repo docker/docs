@@ -312,6 +312,7 @@ Skills are discovered from these locations (later overrides earlier):
 | Path              | Search Type                                |
 | ----------------- | ------------------------------------------ |
 | `.claude/skills/` | Flat (cwd only)                            |
+| `.github/skills/` | Flat (each directory from git root to cwd) |
 | `.agents/skills/` | Flat (each directory from git root to cwd) |
 
 ## Invoking Skills
@@ -337,6 +338,7 @@ When multiple skills share the same name:
 1. Global skills load first
 2. Project skills load next, from git root toward current directory
 3. Skills closer to the current directory override those further away
+4. At the same directory level, `.agents/skills/` overrides `.github/skills/`
 
 ## Skills in Sandbox Mode
 

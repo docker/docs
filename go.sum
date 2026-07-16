@@ -130,6 +130,8 @@ github.com/docker/docker-agent v1.96.0 h1:wt018652ejWtHpMOdhvjwIxaeI46rc6o8snqb9
 github.com/docker/docker-agent v1.96.0/go.mod h1:PJlLIntWPY0KPepCIeR4+WRo2fmQnmnONYBmb/ULorM=
 github.com/docker/docker-agent v1.103.0 h1:hmS2u0fU4MMyUnXrjJlhcfjpBUzkBEBM9/DrmL0yTpY=
 github.com/docker/docker-agent v1.103.0/go.mod h1:KUYwjuxrs2N3BBrAQ6CMNPVQxOfoZoLUYpbxyGTM02w=
+github.com/docker/docker-agent v1.110.0 h1:B5LJRkEvIk1WLojMR09gD6ZAD2hD43SIRSbjKs+yyc4=
+github.com/docker/docker-agent v1.110.0/go.mod h1:TcrFxPYbc9SL0ouAcb/YwwjePfS0ULYkzfTJkvDUfzY=
 github.com/docker/docker-credential-helpers v0.9.3 h1:gAm/VtF9wgqJMoxzT3Gj5p4AqIjCBS4wrsOh9yRqcz8=
 github.com/docker/docker-credential-helpers v0.9.3/go.mod h1:x+4Gbw9aGmChi3qTLZj8Dfn0TD20M/fuWy0E5+WDeCo=
 github.com/docker/docker-credential-helpers v0.9.5 h1:EFNN8DHvaiK8zVqFA2DT6BjXE0GzfLOZ38ggPTKePkY=

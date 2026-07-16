@@ -9,6 +9,8 @@ canonical: https://docs.docker.com/ai/docker-agent/configuration/agents/
 
 _Complete reference for defining agents in your YAML configuration._
 
+A configuration must define at least one agent under `agents`.
+
 ## Full Schema
 
 <!-- yaml-lint:skip -->
@@ -34,6 +36,7 @@ agents:
     max_iterations: int # Optional: max tool-calling loops
     max_consecutive_tool_calls: int # Optional: max identical consecutive tool calls
     max_old_tool_call_tokens: int # Optional: token budget for old tool call content (disabled unless positive)
+    max_tool_result_tokens: int # Optional: per-tool-result token cap with middle-out truncation (disabled unless positive)
     num_history_items: int # Optional: limit conversation history
     session_compaction: boolean # Optional: disable automatic session compaction (default: true)
     compaction_threshold: float # Optional: context-window fraction that triggers auto-compaction (0–1, default: 0.9)
@@ -97,6 +100,7 @@ agents:
 | `max_iterations`            | int     | ✗        | Maximum number of tool-calling loops. Default: unlimited (0). Set this to prevent infinite loops.                                                                             |
 | `max_consecutive_tool_calls` | int     | ✗        | Maximum consecutive identical tool calls before the agent is terminated, preventing degenerate loops. Default: `5`.                                                          |
 | `max_old_tool_call_tokens`  | int     | ✗        | Maximum number of tokens to keep from old tool call arguments and results. Older tool calls beyond this budget have their content replaced with a placeholder, saving context space. Tokens are approximated as `len/4`. Truncation is disabled by default; set a positive value to enable it. Set to `-1` to disable truncation (unlimited). |
+| `max_tool_result_tokens`    | int     | ✗        | Maximum number of tokens to keep from each tool result when it is added to the session. Oversized results are truncated middle-out: the head and tail are kept and the removed middle is replaced with a truncation marker. Textual documents attached to the result share the same budget. Tokens are approximated as `len/4`. The cap is disabled by default; set a positive value to enable it. `0` and `-1` both leave tool results unbounded. |
 | `num_history_items`         | int     | ✗        | Limit the number of conversation history messages sent to the model. Useful for managing context window size with long conversations. Default: unlimited (all messages sent). |
 | `session_compaction`        | boolean | ✗        | When `false`, disables automatic session compaction for this agent: neither the proactive threshold trigger nor the post-overflow auto-recovery runs. The manual `/compact` command remains available. Default: `true`. |
 | `compaction_threshold`      | float   | ✗        | Fraction of the model's context window at which proactive auto-compaction triggers. Must be greater than `0` and at most `1`. A `compaction_threshold` set on the agent's model takes precedence. Default: `0.9`. See [Compaction Threshold](../models/index.md#delegating-session-compaction). |

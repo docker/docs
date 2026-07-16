@@ -99,11 +99,32 @@ toolsets:
 | ----------------------- | ------- | ----------- |
 | `remote.url`            | string  | Base URL of the MCP server. |
 | `remote.transport_type` | string  | `streamable` or `sse`. |
-| `remote.headers`        | object  | HTTP headers (typically for static auth tokens). |
+| `remote.headers`        | object  | HTTP headers sent on every request. Values support `${env.VAR}` and `${headers.NAME}` placeholders, resolved per request. See [Remote MCP Servers](../../features/remote-mcp/index.md#per-request-header-template-expansion) for details. |
 | `remote.oauth`          | object  | Explicit OAuth client credentials for servers that don't support DCR. See [Remote MCP Servers](../../features/remote-mcp/index.md#oauth-for-servers-without-dynamic-client-registration). |
 | `allow_private_ips`     | boolean | Permit remote MCP OAuth helper requests to dial non-public IP addresses. Use only for trusted internal servers. |
 
 For a curated list of public remote MCP endpoints (Linear, GitHub, Vercel, Notion, …) and full OAuth configuration details, see [Remote MCP Servers](../../features/remote-mcp/index.md).
+
+## MCP Prompts
+
+MCP servers can expose **prompts** — named, parameterized templates that the server provides via the `/prompts` endpoint. Docker Agent discovers these at toolset startup and registers them as **slash commands** in the TUI, so you can invoke them directly from the input box.
+
+```text
+# Type / to see available prompts alongside built-in commands
+/review         # invoke an MCP prompt named "review"
+/summarize My text here   # invoke with the first argument filled in
+```
+
+**How it works:**
+
+- Each MCP prompt appears in the command palette (accessible via <kbd>Ctrl</kbd>+<kbd>K</kbd>) under the **MCP Prompts** category.
+- Typing `/<prompt-name>` in the input box invokes the prompt immediately.
+- If the prompt declares arguments and you provide text after the slash command, that text is mapped to the first declared argument.
+- If a required argument is missing, docker-agent opens the argument input dialog before running the prompt.
+- When no argument is needed or all required arguments are supplied, the prompt runs immediately.
+
+> [!NOTE]
+> MCP prompt discovery requires a YAML-declared `mcp` toolset. Prompts from servers activated through the [Docker MCP Catalog](../../tools/mcp-catalog/index.md) (`ref: docker:<name>`) are not currently surfaced.
 
 ## Embedded Resources
 

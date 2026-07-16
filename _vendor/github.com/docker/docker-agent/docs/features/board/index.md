@@ -31,7 +31,8 @@ Requirements: `tmux` and `git` must be installed.
   agent loading config, models, and tools) → `attaching` (control-plane socket
   bound; board waiting for the first snapshot).
 - **Columns are a pipeline.** The default pipeline is
-  Dev → Review → Push → Done. Moving a card forward (`]`)
+  Dev → Review → Push → Done, and it's fully customizable: manage columns
+  from the board (`c`) or in the config file. Moving a card forward (`]`)
   sends the destination column's prompt to the card's agent; moving it back
   (`[`) sends nothing.
 - **Attach anytime.** Press `enter` (or double-click a card) to attach your
@@ -57,6 +58,7 @@ Requirements: `tmux` and `git` must be installed.
 | `1`-`9`       | Move the card to column N                           |
 | `x`           | Delete the card, its session, worktree, and branch  |
 | `p`           | Manage projects (add, edit, reorder, remove)        |
+| `c`           | Manage columns (add, edit, reorder, remove)         |
 | `e`           | Edit the selected column's prompt                   |
 | `←↓↑→` `hjkl` | Navigate                                            |
 | mouse         | Click selects, double-click attaches, drag moves, wheel scrolls |
@@ -67,7 +69,7 @@ Requirements: `tmux` and `git` must be installed.
 
 Everything is configured in the global config file
 (`~/.config/cagent/config.yaml`) or through the TUI itself (`p` for projects,
-`e` for column prompts):
+`c` for columns, `e` for column prompts):
 
 ```yaml
 board:
@@ -88,6 +90,8 @@ board:
       emoji: ✅
 ```
 
-Omitting `columns` keeps the default pipeline. When a card enters a column
-with a `prompt`, that prompt is delivered to the card's agent as its next
-message.
+Omitting `columns` keeps the default pipeline. Column `id`s identify a
+column across renames (cards remember the column they are in by id); when
+omitted, the id is derived from the column's name. When a card enters a
+column with a `prompt`, that prompt is delivered to the card's agent as its
+next message.

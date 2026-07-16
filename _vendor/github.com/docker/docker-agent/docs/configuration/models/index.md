@@ -37,6 +37,11 @@ models:
     capabilities: # Optional: override attachment capabilities
       image: boolean # Optional: whether the model accepts image attachments
       pdf: boolean # Optional: whether the model accepts PDF attachments
+    cost: # Optional: explicit token pricing (USD per 1M tokens)
+      input: float # Optional: price per 1M input tokens
+      output: float # Optional: price per 1M output tokens
+      cache_read: float # Optional: price per 1M cached input tokens
+      cache_write: float # Optional: price per 1M cache-write tokens
     provider_opts: # Optional: provider-specific options
       key: value
     title_model: string # Optional: model used for session-title generation
@@ -65,6 +70,7 @@ models:
 | `track_usage`         | boolean    | ✗        | Track and report token usage for this model                                           |
 | `routing`             | array      | ✗        | Rule-based routing to different models. See [Model Routing](../routing/index.md). |
 | `capabilities`        | object     | ✗        | Override attachment capabilities for this model. See [Attachment Capability Overrides](#attachment-capability-overrides). |
+| `cost`                | object     | ✗        | Explicit token pricing in USD per 1M tokens, overriding the built-in catalogue. See [Custom Token Pricing](#custom-token-pricing). |
 | `provider_opts`       | object     | ✗        | Provider-specific options (see provider pages)                                        |
 | `title_model`         | string     | ✗        | Model used for session-title generation. Can be a named model from the `models:` section or an inline `provider/model` string. When omitted, the agent's primary model generates titles. Cannot be combined with `first_available`. |
 | `compaction_model`    | string     | ✗        | Model used for session compaction (summary generation). Can be a named model or an inline `provider/model` string. When omitted, the primary model compacts. Cannot be combined with `first_available`. See [Delegating Session Compaction](#delegating-session-compaction). |
@@ -110,6 +116,53 @@ that the endpoint does not support leads to a provider-side API error. When
 conservative text-only fallback).
 
 See [`examples/capability-overrides.yaml`](https://github.com/docker/docker-agent/blob/main/examples/capability-overrides.yaml) for a complete example.
+
+## Custom Token Pricing
+
+docker-agent prices each model call from the [models.dev](https://models.dev/)
+catalogue. Models the catalogue does not know — custom OpenAI-compatible
+providers, local models, private deployments — are "unpriced": every call is
+recorded at $0 despite consuming tokens, with only a log warning.
+
+Declare `cost` to price a model explicitly, in **USD per one million tokens**.
+When set, it takes precedence over the catalogue and makes an uncatalogued
+model priced:
+
+```yaml
+models:
+  internal-gpt:
+    provider: internal-llm
+    model: gpt-4o
+    cost:
+      input: 1.25 # USD per 1M input tokens
+      output: 5.00 # USD per 1M output tokens
+      cache_read: 0.125 # USD per 1M cached input tokens
+      cache_write: 1.5625 # USD per 1M cache-write tokens
+
+  # Also works for catalogued models, e.g. a negotiated enterprise discount:
+  discounted-sonnet:
+    provider: anthropic
+    model: claude-sonnet-4-5
+    cost:
+      input: 2.4
+      output: 12.0
+```
+
+| Field              | Type  | Description                             |
+| ------------------ | ----- | --------------------------------------- |
+| `cost.input`       | float | USD price per 1M input tokens           |
+| `cost.output`      | float | USD price per 1M output tokens          |
+| `cost.cache_read`  | float | USD price per 1M cached input tokens    |
+| `cost.cache_write` | float | USD price per 1M cache-write tokens     |
+
+The declared prices feed per-turn cost computation, session cost tracking, the
+`/model` picker, and the [`after_llm_call` hook](../hooks/index.md)'s `cost`
+field. Prices must not be negative; omitted fields default to `0`. An all-zero
+table means "priced, free" — distinct from omitting `cost` entirely
+(unpriced). Cannot be combined with `first_available` (set it on the candidate
+models instead).
+
+See [`examples/custom-pricing.yaml`](https://github.com/docker/docker-agent/blob/main/examples/custom-pricing.yaml) for a complete example.
 
 ## Delegating Session-Title Generation
 
@@ -278,8 +331,8 @@ Uses effort levels as strings:
 models:
   gpt:
     provider: openai
-    model: gpt-5
-    thinking_budget: low # minimal | low | medium | high | xhigh
+    model: gpt-5.6
+    thinking_budget: low # none | minimal | low | medium | high | xhigh | max (xhigh needs gpt-5.2+; none/max need gpt-5.6+; minimal dropped on gpt-5.6+)
 ```
 
 ### Anthropic
@@ -325,13 +378,23 @@ models:
 
 ### Disabling Thinking
 
-Works for all providers:
-
 ```yaml
 thinking_budget: none # or 0
 ```
 
-Models that always reason (OpenAI o-series, gpt-5, Gemini 3) fall back to the API default and still reason internally.
+`none` and `0` both clear docker-agent's local thinking configuration (omitting `thinking_budget` has the same effect); neither is guaranteed to reach the API as a real "off" switch:
+
+- **OpenAI gpt-5.6+** (Sol/Terra/Luna) is the only case with a genuine API-level `none` reasoning effort: docker-agent sends it as-is and the model does not reason.
+- **Older OpenAI reasoning models** (o-series, gpt-5 through gpt-5.5) have no such switch: `none`/`0` just clear the local config, and the model falls back to the API's own default effort and still reasons internally. Same for other always-reasoning models (Gemini 3).
+- Providers with a true optional-thinking switch (Gemini 2.5, Claude, local models) are fully disabled by `none`/`0`.
+
+```yaml
+models:
+  fast-responder:
+    provider: openai
+    model: gpt-5.6
+    thinking_budget: none # real API-level disable on gpt-5.6+
+```
 
 See the [Thinking / Reasoning guide](../../guides/thinking/index.md) for per-provider details, including AWS Bedrock and Docker Model Runner.
 

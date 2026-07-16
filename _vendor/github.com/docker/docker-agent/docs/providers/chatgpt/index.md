@@ -17,7 +17,8 @@ Business plan rather than pay-per-token API credits.
 
 Under the hood, docker-agent talks to the ChatGPT Codex backend
 (`https://chatgpt.com/backend-api/codex`), which serves the `gpt-5` model
-family over the OpenAI Responses API.
+family over the OpenAI Responses API. GPT-5.6 (Sol/Terra/Luna) is served
+there too; GPT-5.2 and GPT-5.3-Codex are deprecated for ChatGPT sign-in.
 
 ## Prerequisites
 
@@ -52,7 +53,7 @@ rm ~/.config/cagent/chatgpt-auth.json      # sign out (remove the stored sign-in
 ```yaml
 agents:
   root:
-    model: chatgpt/gpt-5.2
+    model: chatgpt/gpt-5.6
     instruction: You are a helpful assistant.
 ```
 
@@ -62,7 +63,7 @@ agents:
 models:
   gpt:
     provider: chatgpt
-    model: gpt-5.2
+    model: gpt-5.6
     thinking_budget: medium
 
 agents:
@@ -75,12 +76,17 @@ agents:
 The Codex backend serves the models available to your ChatGPT plan,
 typically:
 
-| Model               | Best For                              |
-| ------------------- | ------------------------------------- |
-| `gpt-5.2`           | General purpose, strong reasoning     |
-| `gpt-5.2-codex`     | Agentic coding workflows              |
-| `gpt-5.1`           | Previous flagship                     |
-| `gpt-5.1-codex-mini`| Fast and cheap coding tasks           |
+| Model                | Best For                              |
+| -------------------- | -------------------------------------- |
+| `gpt-5.6`            | Alias for `gpt-5.6-sol`; general purpose, strong reasoning |
+| `gpt-5.6-sol`        | Frontier model, most capable          |
+| `gpt-5.6-terra`      | Everyday workhorse                    |
+| `gpt-5.6-luna`       | High-volume, cost-efficient           |
+| `gpt-5.2`            | Deprecated for ChatGPT sign-in        |
+| `gpt-5.2-codex`      | Deprecated for ChatGPT sign-in        |
+
+The effort picker exposes Low/Medium/High/XHigh/Max on the GPT-5.6 family
+(no Minimal).
 
 ## How It Works
 
@@ -114,7 +120,7 @@ refreshed.
 | Embeddings / reranking | Not supported | Supported |
 
 When both credentials are configured, automatic model selection prefers
-`openai`; pin `--model chatgpt/gpt-5.2` (or use a named model) to use the
+`openai`; pin `--model chatgpt/gpt-5.6` (or use a named model) to use the
 subscription.
 
 > [!NOTE]

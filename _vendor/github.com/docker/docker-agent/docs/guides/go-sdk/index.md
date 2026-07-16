@@ -129,6 +129,23 @@ if err := chat.Restart(); err != nil {
 
 For advanced use (custom elicitation, raw event inspection), call `chat.Runtime()` to access the underlying `runtime.Runtime` directly.
 
+> [!WARNING]
+> **Breaking change: `Runtime.ResumeElicitation` (#3584)**
+>
+> `Runtime.ResumeElicitation` gained an `elicitationID` parameter so responses can
+> be correlated with a specific concurrent elicitation request (needed once
+> multiple background jobs can be eliciting input at the same time). It is
+> declared **variadic** (`elicitationID ...string`) specifically so existing
+> *callers* of the 3-argument form keep compiling unchanged — `rt.ResumeElicitation(ctx, action, content)`
+> still works and falls back to resolving the sole pending request.
+>
+> If you implement your own `runtime.Runtime` (rather than embedding
+> `runtime.LocalRuntime`/`runtime.RemoteRuntime`), you do need to update your
+> method's signature to match, and also add an `OnElicitationRequest(handler
+> func(runtime.Event))` method (a no-op is fine if your runtime never raises
+> elicitations) — both are required interface methods, matching the existing
+> no-op-able pattern already used by `OnToolsChanged`/`OnBackgroundEvent`.
+
 ## Optional Provider Build Tags
 
 By default docker-agent includes all four cloud providers (OpenAI, Anthropic, Google, Amazon Bedrock). When embedding docker-agent in your own binary you can compile out unneeded providers — together with their transitive SDK dependencies — to reduce binary size.
