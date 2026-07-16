@@ -4,6 +4,7 @@ description: "Complete reference for defining models with providers, parameters,
 keywords: docker agent, ai agents, configuration, yaml, model configuration
 linkTitle: "Model Config"
 weight: 40
+canonical: https://docs.docker.com/ai/docker-agent/configuration/models/
 ---
 
 _Complete reference for defining models with providers, parameters, and reasoning settings._
@@ -17,7 +18,7 @@ models:
     first_available: [list] # Optional: candidate model refs, tried in order by available credentials.
                             # Mutually exclusive with other model settings.
     provider: string # Required unless using first_available. One of: openai, anthropic, google, amazon-bedrock,
-                     # dmr, mistral, xai, nebius, minimax, baseten, ovhcloud, groq, fireworks, deepseek, cerebras, together, huggingface, moonshot, vercel, cloudflare-workers-ai, cloudflare-ai-gateway, requesty, openrouter,
+                     # dmr, mistral, xai, nebius, nvidia, minimax, baseten, ovhcloud, groq, fireworks, deepseek, cerebras, together, huggingface, moonshot, vercel, cloudflare-workers-ai, cloudflare-ai-gateway, requesty, openrouter,
                      # azure, ollama, github-copilot, or a named provider defined
                      # under the top-level `providers:` section.
     model: string # Required: model identifier
@@ -36,11 +37,17 @@ models:
     capabilities: # Optional: override attachment capabilities
       image: boolean # Optional: whether the model accepts image attachments
       pdf: boolean # Optional: whether the model accepts PDF attachments
+    cost: # Optional: explicit token pricing (USD per 1M tokens)
+      input: float # Optional: price per 1M input tokens
+      output: float # Optional: price per 1M output tokens
+      cache_read: float # Optional: price per 1M cached input tokens
+      cache_write: float # Optional: price per 1M cache-write tokens
     provider_opts: # Optional: provider-specific options
       key: value
     title_model: string # Optional: model used for session-title generation
     compaction_model: string # Optional: model used for session-compaction (summary generation)
-    bypass_models_gateway: boolean # Optional: skip the models gateway for this model
+    compaction_threshold: float # Optional: context-window fraction that triggers auto-compaction (0–1, default: 0.9)
+    bypass_models_gateway: boolean # Optional: skip the models gateway for this model (implied by a custom base_url)
 ```
 
 ## Properties Reference
@@ -48,7 +55,7 @@ models:
 | Property              | Type       | Required | Description                                                                           |
 | --------------------- | ---------- | -------- | ------------------------------------------------------------------------------------- |
 | `first_available`     | array      | ✗        | Candidate model references tried in order; selects the first whose credentials are configured. Mutually exclusive with other model settings. |
-| `provider`            | string     | ✓/✗      | Required for regular model definitions; omitted for `first_available` selectors. Provider: `openai`, `anthropic`, `google`, `amazon-bedrock`, `dmr`, `mistral`, `xai`, `nebius`, `minimax`, `baseten`, `ovhcloud`, `groq`, `fireworks`, `deepseek`, `cerebras`, `together`, `huggingface`, `moonshot`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `azure`, `ollama`, `github-copilot`, or any [named provider](../../providers/custom/index.md). |
+| `provider`            | string     | ✓/✗      | Required for regular model definitions; omitted for `first_available` selectors. Provider: `openai`, `anthropic`, `google`, `amazon-bedrock`, `dmr`, `mistral`, `xai`, `nebius`, `nvidia`, `minimax`, `baseten`, `ovhcloud`, `groq`, `fireworks`, `deepseek`, `cerebras`, `together`, `huggingface`, `moonshot`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `azure`, `ollama`, `github-copilot`, `chatgpt`, or any [named provider](../../providers/custom/index.md). |
 | `model`               | string     | ✓/✗      | Required for regular model definitions; omitted for `first_available` selectors. Model name (e.g., `gpt-4o`, `claude-sonnet-4-5`, `gemini-3.5-flash`) |
 | `temperature`         | float      | ✗        | Sampling randomness. Range is provider-dependent — typically `0.0–2.0` (Anthropic caps at `1.0`). `0.0` is deterministic. |
 | `max_tokens`          | int        | ✗        | Maximum response length in tokens                                                     |
@@ -63,10 +70,12 @@ models:
 | `track_usage`         | boolean    | ✗        | Track and report token usage for this model                                           |
 | `routing`             | array      | ✗        | Rule-based routing to different models. See [Model Routing](../routing/index.md). |
 | `capabilities`        | object     | ✗        | Override attachment capabilities for this model. See [Attachment Capability Overrides](#attachment-capability-overrides). |
+| `cost`                | object     | ✗        | Explicit token pricing in USD per 1M tokens, overriding the built-in catalogue. See [Custom Token Pricing](#custom-token-pricing). |
 | `provider_opts`       | object     | ✗        | Provider-specific options (see provider pages)                                        |
 | `title_model`         | string     | ✗        | Model used for session-title generation. Can be a named model from the `models:` section or an inline `provider/model` string. When omitted, the agent's primary model generates titles. Cannot be combined with `first_available`. |
 | `compaction_model`    | string     | ✗        | Model used for session compaction (summary generation). Can be a named model or an inline `provider/model` string. When omitted, the primary model compacts. Cannot be combined with `first_available`. See [Delegating Session Compaction](#delegating-session-compaction). |
-| `bypass_models_gateway` | boolean  | ✗        | When `true`, this model connects directly to its provider even when a models gateway (`--models-gateway` / `CAGENT_MODELS_GATEWAY`) is configured. See [Gateway Bypass](#gateway-bypass). |
+| `compaction_threshold` | float     | ✗        | Fraction of the context window at which proactive auto-compaction triggers for agents running this model. Must be greater than `0` and at most `1`. Takes precedence over the agent-level `compaction_threshold`. Cannot be combined with `first_available`. Default: `0.9`. |
+| `bypass_models_gateway` | boolean  | ✗        | When `true`, this model connects directly to its provider even when a models gateway (`--models-gateway` / `CAGENT_MODELS_GATEWAY`) is configured. Implied by a custom `base_url`. See [Gateway Bypass](#gateway-bypass). |
 
 ## Attachment Capability Overrides
 
@@ -107,6 +116,53 @@ that the endpoint does not support leads to a provider-side API error. When
 conservative text-only fallback).
 
 See [`examples/capability-overrides.yaml`](https://github.com/docker/docker-agent/blob/main/examples/capability-overrides.yaml) for a complete example.
+
+## Custom Token Pricing
+
+docker-agent prices each model call from the [models.dev](https://models.dev/)
+catalogue. Models the catalogue does not know — custom OpenAI-compatible
+providers, local models, private deployments — are "unpriced": every call is
+recorded at $0 despite consuming tokens, with only a log warning.
+
+Declare `cost` to price a model explicitly, in **USD per one million tokens**.
+When set, it takes precedence over the catalogue and makes an uncatalogued
+model priced:
+
+```yaml
+models:
+  internal-gpt:
+    provider: internal-llm
+    model: gpt-4o
+    cost:
+      input: 1.25 # USD per 1M input tokens
+      output: 5.00 # USD per 1M output tokens
+      cache_read: 0.125 # USD per 1M cached input tokens
+      cache_write: 1.5625 # USD per 1M cache-write tokens
+
+  # Also works for catalogued models, e.g. a negotiated enterprise discount:
+  discounted-sonnet:
+    provider: anthropic
+    model: claude-sonnet-4-5
+    cost:
+      input: 2.4
+      output: 12.0
+```
+
+| Field              | Type  | Description                             |
+| ------------------ | ----- | --------------------------------------- |
+| `cost.input`       | float | USD price per 1M input tokens           |
+| `cost.output`      | float | USD price per 1M output tokens          |
+| `cost.cache_read`  | float | USD price per 1M cached input tokens    |
+| `cost.cache_write` | float | USD price per 1M cache-write tokens     |
+
+The declared prices feed per-turn cost computation, session cost tracking, the
+`/model` picker, and the [`after_llm_call` hook](../hooks/index.md)'s `cost`
+field. Prices must not be negative; omitted fields default to `0`. An all-zero
+table means "priced, free" — distinct from omitting `cost` entirely
+(unpriced). Cannot be combined with `first_available` (set it on the candidate
+models instead).
+
+See [`examples/custom-pricing.yaml`](https://github.com/docker/docker-agent/blob/main/examples/custom-pricing.yaml) for a complete example.
 
 ## Delegating Session-Title Generation
 
@@ -152,18 +208,39 @@ call can always ingest the full conversation. Pair the primary with a
 compaction model whose window is at least as large to keep the proactive
 trigger aligned with the primary's window.
 
+By default the proactive trigger fires when the estimated token usage crosses
+**90%** of the context window. The `compaction_threshold` field tunes that
+fraction (greater than `0`, at most `1`): lower values compact earlier and
+keep requests smaller, higher values compact later and keep more verbatim
+history. It can be set on the model (as above, taking precedence) or on the
+agent, and automatic compaction can be disabled entirely per agent with
+`session_compaction: false` — see [Agent Config](../agents/index.md#properties-reference).
+
+```yaml
+models:
+  primary:
+    provider: anthropic
+    model: claude-sonnet-4-5
+    compaction_model: fast
+    # Compact at 80% of the window instead of the default 90%.
+    compaction_threshold: 0.8
+```
+
 > [!WARNING]
 > **Constraint**
 >
 > `compaction_model` cannot be combined with `first_available` model selection — the combination is rejected at validation time.
 
-See [`examples/compaction_model.yaml`](https://github.com/docker/docker-agent/blob/main/examples/compaction_model.yaml) for a complete example.
+See [`examples/compaction_model.yaml`](https://github.com/docker/docker-agent/blob/main/examples/compaction_model.yaml)
+and [`examples/compaction_threshold.yaml`](https://github.com/docker/docker-agent/blob/main/examples/compaction_threshold.yaml)
+for complete examples.
 
 ## Gateway Bypass
 
 When a models gateway (`--models-gateway` / `CAGENT_MODELS_GATEWAY`) is configured,
-all models route through it by default. Set `bypass_models_gateway: true` on a
-specific model to make it connect directly to its provider instead:
+models without a custom `base_url` route through it by default. Set
+`bypass_models_gateway: true` on a specific model to make it connect directly
+to its provider instead:
 
 ```yaml
 models:
@@ -255,8 +332,8 @@ Uses effort levels as strings:
 models:
   gpt:
     provider: openai
-    model: gpt-5
-    thinking_budget: low # minimal | low | medium | high | xhigh
+    model: gpt-5.6
+    thinking_budget: low # none | minimal | low | medium | high | xhigh | max (xhigh needs gpt-5.2+; none/max need gpt-5.6+; minimal dropped on gpt-5.6+)
 ```
 
 ### Anthropic
@@ -302,13 +379,23 @@ models:
 
 ### Disabling Thinking
 
-Works for all providers:
-
 ```yaml
 thinking_budget: none # or 0
 ```
 
-Models that always reason (OpenAI o-series, gpt-5, Gemini 3) fall back to the API default and still reason internally.
+`none` and `0` both clear docker-agent's local thinking configuration (omitting `thinking_budget` has the same effect); neither is guaranteed to reach the API as a real "off" switch:
+
+- **OpenAI gpt-5.6+** (Sol/Terra/Luna) is the only case with a genuine API-level `none` reasoning effort: docker-agent sends it as-is and the model does not reason.
+- **Older OpenAI reasoning models** (o-series, gpt-5 through gpt-5.5) have no such switch: `none`/`0` just clear the local config, and the model falls back to the API's own default effort and still reasons internally. Same for other always-reasoning models (Gemini 3).
+- Providers with a true optional-thinking switch (Gemini 2.5, Claude, local models) are fully disabled by `none`/`0`.
+
+```yaml
+models:
+  fast-responder:
+    provider: openai
+    model: gpt-5.6
+    thinking_budget: none # real API-level disable on gpt-5.6+
+```
 
 See the [Thinking / Reasoning guide](../../guides/thinking/index.md) for per-provider details, including AWS Bedrock and Docker Model Runner.
 
@@ -400,7 +487,7 @@ See the [Anthropic provider page](../../providers/anthropic/index.md#thinking-di
 ## Custom HTTP Headers
 
 For OpenAI-compatible providers (`openai`, `github-copilot`, `mistral`, `xai`,
-`nebius`, `minimax`, `baseten`, `ovhcloud`, `groq`, `fireworks`, `deepseek`, `cerebras`, `together`, `huggingface`, `moonshot`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `ollama`, and any custom provider using the OpenAI API),
+`nebius`, `nvidia`, `minimax`, `baseten`, `ovhcloud`, `groq`, `fireworks`, `deepseek`, `cerebras`, `together`, `huggingface`, `moonshot`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `ollama`, and any custom provider using the OpenAI API),
 `provider_opts.http_headers` adds arbitrary HTTP headers to every outgoing
 request:
 

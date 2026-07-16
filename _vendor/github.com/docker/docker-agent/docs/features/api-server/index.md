@@ -3,6 +3,7 @@ title: "API Server"
 description: "Expose your agents via an HTTP API for programmatic access, web frontends, and integrations."
 keywords: docker agent, ai agents, features, api server
 weight: 80
+canonical: https://docs.docker.com/ai/docker-agent/features/api-server/
 ---
 
 _Expose your agents via an HTTP API for programmatic access, web frontends, and integrations._
@@ -50,6 +51,8 @@ All endpoints are under the `/api` prefix.
 | `PATCH`  | `/api/sessions/:id/title`           | Update session title                                    |
 | `PATCH`  | `/api/sessions/:id/permissions`     | Update session permissions                              |
 | `POST`   | `/api/sessions/:id/fork`            | Fork a session at a user message — creates a new session with messages `[0, message_index)` of the parent (see [Session Forking](#session-forking)) |
+| `POST`   | `/api/sessions/:id/messages`        | Append a message directly to a session's history (bypasses the model). Returns `409 Conflict` while the session has an active run (see [Agent Execution](#agent-execution)). |
+| `PATCH`  | `/api/sessions/:id/messages/:msg_id` | Update an existing message by ID. Returns `409 Conflict` while the session has an active run. |
 | `POST`   | `/api/sessions/:id/resume`          | Resume a paused session (after tool confirmation)       |
 | `POST`   | `/api/sessions/:id/tools/toggle`    | Toggle auto-approve (YOLO) mode                         |
 | `POST`   | `/api/sessions/:id/elicitation`     | Respond to an MCP tool elicitation request              |
@@ -182,7 +185,7 @@ docker agent serve api <agent-file>|<agents-dir> [flags]
 | `-s, --session-db` | `session.db`     | Path to the SQLite session database              |
 | `--pull-interval`  | `0` (disabled)   | Auto-pull OCI reference every N minutes          |
 | `--fake`           | (none)           | Replay AI responses from cassette file (testing) |
-| `--record`         | (none)           | Record AI API interactions to cassette file      |
+| `--record`         | (none)           | Record AI API interactions to cassette file. Routes through `--models-gateway` when one is configured. |
 | `--mcp-oauth-redirect-uri` | (none)   | Public HTTPS URL advertised as the OAuth `redirect_uri` for unmanaged MCP OAuth flows. When set, docker-agent drives PKCE and code exchange in-process and sends the full authorize URL to the client via elicitation. See [Remote MCP](../remote-mcp/index.md) for details. |
 
 > [!TIP]

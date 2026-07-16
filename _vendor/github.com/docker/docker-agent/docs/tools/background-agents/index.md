@@ -4,6 +4,7 @@ description: "Dispatch work to sub-agents concurrently and collect results async
 keywords: docker agent, ai agents, tools, toolsets, background agents tool
 linkTitle: "Background Agents"
 weight: 90
+canonical: https://docs.docker.com/ai/docker-agent/tools/background-agents/
 ---
 
 _Dispatch work to sub-agents concurrently and collect results asynchronously._
@@ -29,7 +30,7 @@ The background agents tool lets an orchestrator dispatch work to sub-agents conc
 | `task`            | string | ✓        | Clear, concise description of the task the sub-agent should achieve.        |
 | `expected_output` | string | ✗        | Optional description of the result format the caller expects.               |
 
-`run_background_agent` returns a **task ID** string. Tools run by the sub-agent are pre-approved, so only dispatch to trusted sub-agents with well-scoped tasks.
+`run_background_agent` returns a **task ID** string. Tools run by the sub-agent inherit the parent session's permissions. Because background tasks run non-interactively, any tool call that would normally prompt the user for approval will be automatically denied. To allow background agents to run mutating tools, you must explicitly approve them in the parent session (e.g. via YOLO mode or explicit allow rules).
 
 ### `view_background_agent` and `stop_background_agent` parameters
 
@@ -74,6 +75,8 @@ agents:
 > **When to Use**
 >
 > Use `background_agents` when your orchestrator needs to fan out work to multiple specialists in parallel — for example, researching several topics simultaneously or running independent code analyses side by side.
+
+In the TUI, each background task's token usage is accounted for live: the sidebar's Agents panel shows the sub-agent's context usage percentage on its roster row, the Agent Inspector shows its exact token counts, and the task's cost joins the session total.
 
 ## Using Harness Sub-Agents
 

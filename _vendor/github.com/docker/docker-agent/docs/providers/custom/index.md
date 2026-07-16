@@ -3,6 +3,7 @@ title: "Provider Definitions"
 description: "Define reusable provider configurations with shared defaults for any provider type — OpenAI, Anthropic, Google, Bedrock, and more."
 keywords: docker agent, ai agents, model providers, llm, provider definitions
 weight: 280
+canonical: https://docs.docker.com/ai/docker-agent/providers/custom/
 ---
 
 _Define reusable provider configurations with shared defaults for any provider type — OpenAI, Anthropic, Google, Bedrock, and more._
@@ -254,6 +255,44 @@ agents:
     model: fast_openai/gpt-4o-mini
 ```
 
+## Global Providers (User Configuration)
+
+Providers defined in an agent file only apply to that file. To make a custom
+provider available to every command (`docker agent run`, `new`, `models`, ...),
+define it once in your user configuration (`~/.config/cagent/config.yaml`)
+under the same `providers` key:
+
+```yaml
+# ~/.config/cagent/config.yaml
+providers:
+  myprovider:
+    base_url: https://llm.corp.example.com/v1
+    api_type: openai_chatcompletions
+    token_key: MYPROVIDER_API_KEY
+```
+
+The easiest way to register one is the interactive wizard:
+
+```bash
+docker agent setup
+# pick "3. OpenAI-compatible provider", then enter the endpoint,
+# API format, and the environment variable holding the API key
+```
+
+Once registered, the provider works everywhere:
+
+```bash
+docker agent models --provider myprovider   # list the endpoint's models
+docker agent new --model myprovider/mymodel # build agents with it
+docker agent run --model myprovider/mymodel # chat with it
+```
+
+Global providers are merged into every loaded agent configuration; when an
+agent file defines a provider with the same name, the agent file wins. Note
+that automatic model selection (`model: auto`) never picks a custom provider,
+so reference its models explicitly with `--model <name>/<model>` or
+`default_model`.
+
 ## How It Works
 
 When you reference a provider:
@@ -263,3 +302,9 @@ When you reference a provider:
 3. All model-level defaults (temperature, max_tokens, thinking_budget, etc.) are inherited (model settings take precedence)
 4. For OpenAI-compatible providers, the `api_type` is stored in `provider_opts.api_type`
 5. The model is used with the appropriate API client
+
+A provider with a `base_url` implies `bypass_models_gateway: true` for every
+model that references it: user-chosen endpoints are never routed through a
+configured models gateway, and such models authenticate with the provider's
+own credentials (`token_key`). See
+[Gateway Bypass](../../configuration/models/index.md#gateway-bypass).

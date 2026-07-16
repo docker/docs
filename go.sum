@@ -128,6 +128,8 @@ github.com/docker/docker v28.5.2+incompatible h1:DBX0Y0zAjZbSrm1uzOkdr1onVghKaft
 github.com/docker/docker v28.5.2+incompatible/go.mod h1:eEKB0N0r5NX/I1kEveEz05bcu8tLC/8azJZsviup8Sk=
 github.com/docker/docker-agent v1.96.0 h1:wt018652ejWtHpMOdhvjwIxaeI46rc6o8snqb9QsmiI=
 github.com/docker/docker-agent v1.96.0/go.mod h1:PJlLIntWPY0KPepCIeR4+WRo2fmQnmnONYBmb/ULorM=
+github.com/docker/docker-agent v1.103.0 h1:hmS2u0fU4MMyUnXrjJlhcfjpBUzkBEBM9/DrmL0yTpY=
+github.com/docker/docker-agent v1.103.0/go.mod h1:KUYwjuxrs2N3BBrAQ6CMNPVQxOfoZoLUYpbxyGTM02w=
 github.com/docker/docker-credential-helpers v0.9.3 h1:gAm/VtF9wgqJMoxzT3Gj5p4AqIjCBS4wrsOh9yRqcz8=
 github.com/docker/docker-credential-helpers v0.9.3/go.mod h1:x+4Gbw9aGmChi3qTLZj8Dfn0TD20M/fuWy0E5+WDeCo=
 github.com/docker/docker-credential-helpers v0.9.5 h1:EFNN8DHvaiK8zVqFA2DT6BjXE0GzfLOZ38ggPTKePkY=
@@ -563,3 +565,5 @@ gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
 gopkg.in/yaml.v3 v3.0.1/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
 howett.net/plist v1.0.2-0.20250314012144-ee69052608d9 h1:eeH1AIcPvSc0Z25ThsYF+Xoqbn0CI/YnXVYoTLFdGQw=
 howett.net/plist v1.0.2-0.20250314012144-ee69052608d9/go.mod h1:fyFX5Hj5tP1Mpk8obqA9MZgXT416Q5711SDT7dQLTLk=
+github.com/docker/docker-agent v1.110.0 h1:B5LJRkEvIk1WLojMR09gD6ZAD2hD43SIRSbjKs+yyc4=
+github.com/docker/docker-agent v1.110.0/go.mod h1:TcrFxPYbc9SL0ouAcb/YwwjePfS0ULYkzfTJkvDUfzY=
