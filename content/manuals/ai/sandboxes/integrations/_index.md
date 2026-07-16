@@ -116,9 +116,6 @@ sandbox named `demo`:
 $ ssh demo.sbx
 ```
 
-To copy files that aren't part of a mounted workspace, use
-[`sbx cp`](../usage.md#copying-files-between-host-and-sandbox).
-
 ## Connect a specific tool
 
 - [VS Code](vscode.md)
