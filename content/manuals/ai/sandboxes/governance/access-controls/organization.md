@@ -127,9 +127,10 @@ organization policies on the next `sbx` command.
 > `sbx policy reset` deletes all locally configured policy rules. The command
 > prompts for confirmation before proceeding.
 
-#### Network versus filesystem enforcement timing
+#### Enforcement timing by policy type {#network-versus-filesystem-enforcement-timing}
 
-Network policy and filesystem policy differ in when a change takes effect:
+Policy types differ in when a change takes effect after it reaches the
+developer machine:
 
 - Network policy is evaluated on every outbound request. Once a policy
   change has synced to the developer's machine (up to 5 minutes), it applies
@@ -141,5 +142,16 @@ Network policy and filesystem policy differ in when a change takes effect:
   access the previously allowed path until it is removed and a new one is
   created.
 
+- MCP registration policy is evaluated when a server is registered with
+  `sbx mcp add`. Changing registration rules doesn't remove existing
+  registrations or stop an already-loaded server by itself.
+
+- MCP use-time policy is evaluated by the MCP gateway when a sandbox makes a
+  governed MCP request, such as a tool call, resource read, prompt retrieval,
+  or built-in gateway tool call. Once a policy change has synced, use-time
+  rules apply to subsequent governed MCP requests through the gateway.
+
 To apply a filesystem policy change immediately, remove the running sandbox
-and create a new one.
+and create a new one. To block an existing MCP registration after it has been
+loaded into a sandbox, add use-time rules for the registered server name. For
+examples, see [MCP access policies](mcp.md#control-server-registration).
