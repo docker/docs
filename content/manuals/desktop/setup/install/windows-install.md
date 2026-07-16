@@ -140,7 +140,7 @@ For more information, see [Running Docker Desktop in a VM or VDI environment](/m
 
 ## Install Docker Desktop on Windows
 
-### Install with our installer
+### Install with the installer
 
 #### Install interactively
 
@@ -228,24 +228,24 @@ Go to [Microsoft Store Docker Desktop page](https://apps.microsoft.com/detail/XP
 >
 > To check your PC's architecture, enter either `systeminfo` or `start ms-settings:about`, in either Command Prompt or PowerShell, and look up text like `ARM64-based` in the `System Type` (the key name would be localized depending on your preferred Windows display language setting) value.
 
-#### Install from Window Package Manager
+#### Install from Windows Package Manager
 
 Run the following command in Command Prompt:
 
 ```sh
-winget.exe add --id Docker.DockerDesktop -e -s winget -h --accept-package-agreements --authentication-mode silent --accept-source-agreements --disable-interactivity
+winget.exe install --id Docker.DockerDesktop -e -s winget -h --accept-package-agreements --authentication-mode silent --accept-source-agreements --disable-interactivity
 
 rem ARM64 is not supported from Microsoft Store
-winget.exe add --id XP8CBJ40XLBWKX -e -s winget -h --accept-package-agreements --authentication-mode silent --accept-source-agreements --disable-interactivity
+winget.exe install --id XP8CBJ40XLBWKX -e -s msstore -h --accept-package-agreements --authentication-mode silent --accept-source-agreements --disable-interactivity
 ```
 
 The following command is specifically available in PowerShell:
 
 ```powershell
-Start-Process winget.exe -Args 'add --id Docker.DockerDesktop -e -s winget -h --accept-package-agreements --authentication-mode silent --accept-source-agreements --disable-interactivity' -nnw -Wait
+Start-Process winget.exe -ArgumentList 'add --id Docker.DockerDesktop -e -s winget -h --accept-package-agreements --authentication-mode silent --accept-source-agreements --disable-interactivity' -nnw -Wait
 
 # ARM64 is not supported from Microsoft Store
-Start-Process winget.exe -Args 'add --id XP8CBJ40XLBWKX -e -s winget -h --accept-package-agreements --authentication-mode silent --accept-source-agreements --disable-interactivity' -nnw -Wait
+Start-Process winget.exe -ArgumentList 'add --id XP8CBJ40XLBWKX -e -s msstore -h --accept-package-agreements --authentication-mode silent --accept-source-agreements --disable-interactivity' -nnw -Wait
 ```
 
 ## Start Docker Desktop
