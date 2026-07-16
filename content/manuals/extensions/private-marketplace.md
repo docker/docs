@@ -65,7 +65,7 @@ This creates 2 files:
 
 > [!IMPORTANT]
 >
-> If your org is using [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) via [Docker Home](manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console/_index.md), you will not need the `admins-settings.json` file. Delete the generated file and keep only the `extensions.txt` file.
+> If your org is using [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) via [Docker Home](manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console/_index.md), you will not need the `admin-settings.json` file. Delete the generated file and keep only the `extensions.txt` file.
 
 ## Step two: Set the behaviour
 
