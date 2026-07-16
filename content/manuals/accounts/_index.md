@@ -26,41 +26,34 @@ grid:
     description: Add an extra layer of authentication to your Docker account.
     link: /security/2fa/
     icon: device-phone-mobile
-  - title: Deactivate an account
-    description: Learn how to deactivate a Docker user account.
-    link: /accounts/deactivate-user-account/
-    icon: no-symbol
-  - title: Account FAQ
+  - title: Organization overview
+    description: Learn how to create and manage Docker organizations.
+    icon: building-storefront
+    link: /admin/organization/
+  - title: Account FAQs
     description: Explore frequently asked questions about Docker accounts.
     icon: question-mark-circle
     link: /accounts/general-faqs/
 ---
 
-A Docker account is your identity on Docker. With an account, you can access
-Docker products and services such as Docker Hub and Docker Desktop, manage
-security settings, and join organizations.
+A Docker account is your identity on Docker. Use it to access products like
+Docker Hub and Docker Desktop, manage settings, and join organizations.
 
-This section covers individual Docker accounts. For organizations, companies,
-and administrator roles, see [Administration](/manuals/admin/_index.md).
+This section covers individual accounts. For organizations and companies, see
+[Administration](/manuals/admin/_index.md).
 
 ## Account identity
 
-When you create a Docker account, you choose a Docker ID and a sign-in method.
-Docker also ties a verified email address to the account. These pieces work
-together, but they aren't the same thing:
+When you create an account, you choose a Docker ID and a sign-in method.
+Docker also ties a verified email to the account. These aren't the same thing:
 
 - Your Docker account is where Docker associates your plans, Hub
   repositories, and account settings.
 - Your Docker ID identifies you with a unique username.
-- You authenticate with email and password, Google, or GitHub.
-
-You can sign in with your Docker ID, email, or connected social account.
-Docker still associates a verified email from that provider with your account.
-You choose one sign-in method when you create your account. Docker doesn't
-support linking multiple sign-in methods to the same Docker ID.
-
-For how to create an account, see
-[Create a Docker account](/manuals/accounts/create-account.md).
+- Your email is how Docker contacts you for notifications and
+  security-related communications.
+- Your sign-in method (email and password, Google, or GitHub) is how
+  you authenticate.
 
 ## Individual accounts and organization accounts
 
@@ -74,9 +67,6 @@ Every organization is created and administered by one or more individual
 accounts. You always sign in with your individual account, then work in the
 organizations you own or belong to. Organization owners and members are
 individual accounts that hold a role in that organization.
-
-To create and manage organizations, see
-[Organization overview](/manuals/admin/organization/_index.md).
 
 ## What's next
 

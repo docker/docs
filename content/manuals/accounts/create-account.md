@@ -46,7 +46,7 @@ Docker blocks sign-in until you've verified your account.
    - Must be between 4 and 30 characters long
    - Can only contain numbers and lowercase letters
 1. Choose a password that's at least 9 characters long, then select
-   **Sign Up**.
+   **Sign up**.
 1. Verify your email address when you receive the Docker OTP verification
    email. This completes the registration process.
 
@@ -74,7 +74,7 @@ CLI.
 {{< tabs >}}
 {{< tab name="Email or Docker ID" >}}
 
-1. Go to the [Docker sign in page](https://login.docker.com).
+1. Go to the [Docker sign in page](https://login.docker.com/).
 1. Enter your email address or Docker ID and select **Continue**.
 1. Enter your password and select **Continue**.
 
@@ -84,13 +84,12 @@ To reset your password, see [Reset your password](#reset-your-password).
 {{< tab name="Google or GitHub" >}}
 
 You can sign in using your Google or GitHub credentials. If your social
-account uses the same email address as an existing Docker ID, the accounts
-are automatically linked.
+account uses the same email address as an existing Docker ID, Docker links
+that provider to the account.
 
 If no Docker ID exists, Docker creates a new account for you.
 
-Docker doesn't support linking multiple sign-in methods to the same Docker
-ID.
+You can't link both Google and GitHub to the same Docker ID.
 
 {{< /tab >}}
 {{< tab name="CLI" >}}
