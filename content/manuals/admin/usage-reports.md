@@ -67,16 +67,14 @@ subsequent API calls.
 
 ### Step 2. List usage reports types
 
-#### List available reports
-
-Fetch the available report types and cadences for your organization:
+### List all available reports
 
 ```console
 $ curl -s "https://api.docker.com/enterprise-data/v1/orgs/$ORG/reports" \
   -H "Authorization: Bearer $TOKEN" | jq .
 ```
 
-Example response:
+An example response will describe the report types and cadence. This response tells you that your organization has usage pull reports set to a daily cadence.
 
 ```json
 {
@@ -89,7 +87,7 @@ Example response:
 }
 ```
 
-Each entry represents a distinct combination of report type and cadence. Use
+Each entry represents a distinct combination of report type and cadence. If you have more report types or different cadences configured, you can find that information here. Use
 these values in subsequent calls.
 
 #### List reports for a type and cadence
@@ -127,9 +125,7 @@ Example response:
 
 #### Set pagination for queries
 
-Results are paginated with a default page size of 30 and a maximum of 100.
-
-Use the `page_size` and `page_token` query parameters to control pagination:
+Results are paginated with a default page size of 30 and a maximum of 100. Use the `page_size` and `page_token` query parameters to control how many results are returned and to navigate between pages.
 
 ```console
 $ curl -s "https://api.docker.com/enterprise-data/v1/orgs/$ORG/reports/usage_pulls/daily?page_size=10" \
@@ -145,11 +141,11 @@ $ curl -s "https://api.docker.com/enterprise-data/v1/orgs/$ORG/reports/usage_pul
 
 ### Step 3. Download a report
 
-#### Download a specific report
+### Download specific reports
 
-Download the CSV file for a specific date. The API responds with a `302`
-redirect to a pre-signed URL. With `curl -L`, the redirect is followed
-automatically and the file is saved locally.
+Reports are downloaded as CSV files. The API responds with a `302` redirect to a
+pre-signed URL. With `curl -L`, the redirect is followed automatically and the
+file is saved locally.
 
 ```console
 $ curl -L -o "usage_pulls_2026-06-16.csv" \
