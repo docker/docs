@@ -86,18 +86,19 @@ See [Accessing host services from a sandbox](usage.md#accessing-host-services-fr
 
 ## SSH port forwarding to another host fails
 
-SSH can forward a service running inside a sandbox to your host. For example,
-the following command makes port `3000` in the sandbox available at
-`localhost:3000` on your host:
+You can use an SSH connection to make a service running inside a sandbox
+available on your host. For example, the following command makes port `3000`
+in the sandbox available at `localhost:3000` on your host:
 
 ```console
 $ ssh -N -L 3000:127.0.0.1:3000 demo.sbx
 ```
 
-SSH can't use the sandbox as a tunnel to another host. For example, forwarding
-to `database.example.com:5432` isn't supported. This restriction doesn't affect
-VS Code, Cursor, and similar tools, which forward connections to services they
-start inside the sandbox.
+Port forwarding through this connection can only target services inside the
+sandbox. You can't use the sandbox as a tunnel to another host, such as
+`database.example.com:5432`. This restriction doesn't affect VS Code, Cursor,
+and similar tools, which forward connections to services they start inside the
+sandbox.
 
 ## Docker authentication failure
 
