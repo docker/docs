@@ -38,10 +38,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Docker Desktop CLI v0.4.2
 - [Docker Model Runner v1.2.6](https://github.com/docker/model-runner/releases/tag/v1.2.6)
-- [Docker Offload `v0.6.9`
+- Docker Offload `v0.6.9`
 - [Docker Agent v1.103.0](https://github.com/docker/docker-agent/releases/tag/v1.103.0)
 - [Docker Compose v5.3.1](https://github.com/docker/compose/releases/tag/v5.3.1)
-- [Docker Desktop Build `v0.36.0`
+- Docker Desktop Build `v0.36.0`
 ### Bug fixes and enhancements
 
 #### For all platforms
@@ -53,7 +53,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed an issue where a GPU process crash prevented the Docker Desktop Dashboard from loading by automatically disabling hardware acceleration and restarting the app.
 - Fixed an issue where `docker ai` sessions launched directly from a terminal were killed when Docker Desktop was restarted.
 - Fixed an issue where a malformed `daemon.json` would be silently overwritten with defaults on startup, causing users to lose their custom daemon configuration.
-- Added a **Custom rules** tab Gordon's permissions dialog. Users can now add allow/deny rules for specific commands or MCP tools.
+- Added a **Custom rules** tab to Gordon's permissions dialog. Users can now add allow/deny rules for specific commands or MCP tools.
 - Added pulsing discovery badges to Gordon's **Plan mode** button, model selector, and **Feedback/Issues** button to help users find new features. 
 
 #### For Mac
