@@ -84,22 +84,6 @@ If a request to `127.0.0.1` or a local network IP returns "connection refused"
 from inside a sandbox, the address is not reachable from within the sandbox VM.
 See [Accessing host services from a sandbox](usage.md#accessing-host-services-from-a-sandbox).
 
-## SSH port forwarding to another host fails
-
-You can use an SSH connection to make a service running inside a sandbox
-available on your host. For example, the following command makes port `3000`
-in the sandbox available at `localhost:3000` on your host:
-
-```console
-$ ssh -N -L 3000:127.0.0.1:3000 demo.sbx
-```
-
-Port forwarding through this connection can only target services inside the
-sandbox. You can't use the sandbox as a tunnel to another host, such as
-`database.example.com:5432`. This restriction doesn't affect VS Code, Cursor,
-and similar tools, which forward connections to services they start inside the
-sandbox.
-
 ## Docker authentication failure
 
 If you see a message like `You are not authenticated to Docker`, your login
