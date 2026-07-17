@@ -2,9 +2,10 @@
 title: Docker accounts
 description: >
   Learn what a Docker account is, how Docker IDs, emails, and sign-in methods
-  relate, and how individual accounts differ from organizations
-keywords: accounts, docker ID, username, email, Google, GitHub, sign-in, account
-  management, docker account, individual account, organization account
+  relate, and how individual accounts connect to organizations
+keywords: accounts, docker ID, username, email, Google, GitHub, sign-in,
+  authentication, account management, docker account, individual account,
+  organization account, account types, Docker Hub
 weight: 10
 params:
   sidebar:
@@ -39,34 +40,22 @@ grid:
 A Docker account is how Docker identifies you. Use it to access products like
 Docker Hub and Docker Desktop, manage settings, and join organizations.
 
-This section covers individual accounts. For organizations and companies, see
-[Administration](/manuals/admin/_index.md).
+Docker has two primary account types: individual and organization. You create
+and administer organizations with your individual account. For organization
+accounts, see [Organizations](/manuals/admin/organization/_index.md). For
+organizations and companies, see [Administration](/manuals/admin/_index.md).
 
-## Account identity
+## Docker ID, email, and sign-in
 
 When you create an account, you choose a Docker ID and a sign-in method.
 Docker also ties a verified email to the account.
 
-- Your Docker account is where Docker associates your plans, Hub
-  repositories, and account settings.
-- Your Docker ID identifies you with a unique username.
-- Your email is how Docker contacts you for notifications and
-  security-related communications.
-- Your sign-in method (email and password, Google, or GitHub) is how
-  you authenticate.
-
-## Individual accounts and organization accounts
-
-Docker has two primary account types:
-
-- Individual accounts that are identified by a Docker ID.
-- Organization accounts that are shared workspaces for teams and
-  repositories.
-
-Every organization is created and administered by one or more individual
-accounts. You always sign in with your individual account, then work in the
-organizations you own or belong to. Organization owners and members are
-individual accounts that hold a role in that organization.
+- Docker account: Associates your plans, Hub repositories, and account
+  settings.
+- Docker ID: A unique username that identifies you.
+- Email: How Docker contacts you for notifications and security-related
+  communications.
+- Sign-in method: Email and password, Google, or GitHub.
 
 ## What's next
 
