@@ -152,7 +152,7 @@ The mirror tools require a Docker Hub username and [personal access token
 passed as an HTTP Basic auth header. Generate the value with:
 
 ```console
-$ printf 'USERNAME:dckr_pat_...' | base64
+$ printf 'USERNAME:dckr_pat_...' | base64 | tr -d '\n'
 ```
 
 Then add it to your MCP client configuration:
