@@ -89,7 +89,7 @@ Or add it manually to `.claude/mcp.json` in your project:
 {{< /tab >}}
 {{< tab name="Docker Agent" >}}
 
-In your [Docker Agent](/manuals/ai/docker-agent/) YAML configuration, add the
+In your [Docker Agent](/manuals/ai/docker-agent/_index.md) YAML configuration, add the
 DHI MCP server as a remote toolset:
 
 ```yaml
@@ -195,7 +195,7 @@ compare, or act on:
   count, package count, vulnerability severity counts by level, labels, and
   a list of attestation predicate types.
 - `dhi_get_image_packages` returns each package in the image with its name,
-  version, type (deb, rpm, apk, etc.), purl, licenses, and the file paths where
+  version, type (`deb`, `rpm`, `apk`, etc.), purl, licenses, and the file paths where
   it was found.
 - `dhi_get_image_cves` returns each CVE affecting the image with its
   severity, CVSS score and vector, affected package, fix version (if any), EPSS
