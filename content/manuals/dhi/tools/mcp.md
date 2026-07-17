@@ -9,7 +9,7 @@ aliases:
 ---
 
 The Docker Hardened Images (DHI) MCP server exposes the DHI catalog through the
-Model Context Protocol (MCP) letting you query repositories, inspect image
+Model Context Protocol (MCP), letting you query repositories, inspect image
 metadata, retrieve SBOMs, and check CVEs directly from your AI assistant in
 plain language.
 
