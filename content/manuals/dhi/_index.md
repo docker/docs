@@ -34,8 +34,8 @@ params:
       description: Browse and manage Docker Hardened Images using Docker Hub, the CLI, MCP server, or Terraform.
       icon: wrench-screwdriver
       link: /dhi/tools/
-    - title: Additional resources
-      description: Guides, Docker Hub catalog, GitHub repositories, and more.
+    - title: Resources and feedback
+      description: Guides, GitHub repositories, community channels, and how to give feedback.
       icon: link
       link: /dhi/resources/
     - title: Release notes
