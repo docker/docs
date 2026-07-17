@@ -3,7 +3,7 @@ title: Default security posture
 linkTitle: Defaults
 weight: 15
 description: What a sandbox permits and blocks before you change any settings.
-keywords: docker sandboxes, security defaults, network policy, credentials, sbx
+keywords: docker sandboxes, security defaults, network policy, credentials, shared skills, sbx
 ---
 
 A sandbox created with `sbx run` and no additional flags has the following
@@ -31,6 +31,14 @@ including hidden files, configuration files, build scripts, and Git hooks.
 See [Workspace isolation](isolation.md#workspace-isolation) for what to
 review after an agent session.
 
+## Shared skills defaults
+
+Sandboxes for supported agents mount a persistent shared skills store
+read-write by default. Every sandbox that uses the store can change skills that
+other participating sandboxes may load. Use `--no-share-skills` when creating a
+sandbox to keep it outside this shared trust boundary. See
+[Share agent skills](../workflows.md#share-agent-skills).
+
 ## Credential defaults
 
 No credentials are available to the sandbox unless you provide them using
@@ -52,17 +60,18 @@ The agent runs with full control inside the sandbox VM:
 Everything the agent installs or creates inside the VM, including packages,
 Docker images, and configuration changes, persists across stop and restart
 cycles. When you remove the sandbox with `sbx rm`, the VM and its contents
-are deleted. Only workspace files remain on the host.
+are deleted. Workspace files and the shared skills store remain on the host.
 
 ## What is blocked by default
 
 The following are blocked for all sandboxes and cannot be changed through
 policy configuration:
 
-- Host filesystem access outside the workspace directory
+- Host filesystem access outside explicitly mounted workspaces and the shared
+  skills store
 - Host Docker daemon
 - Host network and localhost
-- Communication between sandboxes
+- Direct network communication between sandboxes
 - Raw TCP, UDP, and ICMP connections
 - Traffic to private IP ranges and link-local addresses
 

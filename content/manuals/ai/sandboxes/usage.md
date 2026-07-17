@@ -187,8 +187,8 @@ shared libraries the agent shouldn't modify:
 $ sbx run claude ~/project-a ~/shared-libs:ro ~/docs:ro
 ```
 
-Each sandbox is completely isolated, so you can also run separate projects
-side-by-side. Remove unused sandboxes when you're done to reclaim disk space:
+You can also run separate projects side-by-side. Remove unused sandboxes when
+you're done to reclaim disk space:
 
 ```console
 $ sbx run claude ~/project-a
@@ -254,6 +254,7 @@ dev server and host-service recipes, see
 
 While a sandbox exists, installed packages, Docker images, configuration
 changes, and command history all persist across stops and restarts. When you
-remove a sandbox, everything inside is deleted — only your workspace files
-remain on your host. To preserve a configured environment, create a
-[custom template](customize/templates.md) or use a [kit](customize/kits.md).
+remove a sandbox, everything inside is deleted. Your workspace files and the
+[shared agent skills store](workflows.md#share-agent-skills) remain on your
+host. To preserve a configured environment, create a [custom
+template](customize/templates.md) or use a [kit](customize/kits.md).

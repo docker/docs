@@ -26,17 +26,23 @@ What crosses the boundary into the VM:
   outbound HTTP requests. The raw credential values never enter the VM.
 - **Network access:** HTTP and HTTPS requests to
   [allowed domains](defaults/) are proxied through the host.
+- **Shared agent skills:** a persistent host-side store is mounted read-write
+  at the agent's skills directory unless you opt out when creating the
+  sandbox. Supported agents in other sandboxes mount the same store.
 
 What crosses the boundary back to the host:
 
 - **Workspace file changes:** visible on your host in real time with the
   default direct mount.
 - **HTTP/HTTPS requests:** sent to allowed domains through the host proxy.
+- **Shared skill changes:** written to the host-side store and visible to other
+  sandboxes that share it.
 
-Everything else is blocked. The agent cannot access your host filesystem
-(outside the workspace), your host Docker daemon, your host network or
-localhost, other sandboxes, or any domain not in the allow list. Raw TCP, UDP,
-and ICMP are blocked at the network layer.
+Outside the workspace and shared skills store, the agent cannot access your
+host filesystem. It also cannot access your host Docker daemon, your host
+network or localhost, or any domain not in the allow list. Sandboxes cannot
+communicate directly over the network. Raw TCP, UDP, and ICMP are blocked at
+the network layer.
 
 ![Sandbox security model showing the hypervisor boundary between the sandbox VM and the host system. The workspace directory is shared read-write. The agent process, Docker Engine, packages, and VM filesystem are inside the VM. Host filesystem, processes, Docker Engine, and network are outside the VM and not accessible. A proxy enforces allow/deny policies and injects credentials into outbound requests.](../images/sbx-security.png)
 
@@ -90,6 +96,14 @@ Kits run install commands with root privileges inside the sandbox. To limit
 supply-chain risk, `sbx` restricts kit installs to an allowlist of sources
 that defaults to Docker Hub only. See
 [Restrict kit sources](../customize/kits.md#restrict-kit-sources).
+
+Shared agent skills create a narrow exception to cross-sandbox isolation. The
+store is mounted read-write, so one sandbox can modify instructions or scripts
+that an agent later uses in another sandbox. This doesn't expose the rest of
+the host filesystem or create a direct network path between sandboxes, but it
+does put participating sandboxes in the same trust boundary. See
+[Share agent skills](../workflows.md#share-agent-skills) for details and the
+per-sandbox opt-out.
 
 ## Organization-wide control
 

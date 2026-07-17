@@ -20,10 +20,11 @@ processes, files, or resources outside its defined boundaries.
 
 - **Process isolation:** separate kernel per sandbox; processes inside the VM
   are invisible to your host and to other sandboxes
-- **Filesystem isolation:** only your workspace directory is shared with the
-  host. The rest of the VM filesystem persists across restarts but is removed
-  when you delete the sandbox. Symlinks pointing outside the workspace scope
-  are not followed.
+- **Filesystem isolation:** your workspace directory and, for supported agents
+  that haven't opted out, the dedicated [shared skills
+  store](../workflows.md#share-agent-skills) are shared with the host. The rest
+  of the VM filesystem persists across restarts but is removed when you delete
+  the sandbox. Symlinks pointing outside the workspace scope are not followed.
 - **Full cleanup:** when you remove a sandbox with `sbx rm`, the VM and
   everything inside it is deleted
 
@@ -189,7 +190,7 @@ The practical guarantees:
   into your working tree.
 - Concurrent `git` commands on the host and inside the sandbox cannot
   race on a shared `.git/index` or shared refs — there is no shared
-  writable state.
+  writable Git state.
 - Credentials, signing keys, and any settings in your repository's
   `.git/config` stay on the host. The agent's clone has its own
   independent configuration.
