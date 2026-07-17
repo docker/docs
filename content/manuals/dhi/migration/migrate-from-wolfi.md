@@ -10,7 +10,7 @@ Images (DHI). Generally, the migration process is straightforward since Wolfi is
 Alpine-like and DHI provides an Alpine-based hardened image.
 
 Like other hardened images, DHI provides comprehensive
-[attestations](/dhi/core-concepts/attestations/) including SBOMs and provenance,
+[attestations](/dhi/explore/security-concepts/attestations/) including SBOMs and provenance,
 allowing you to [verify](/manuals/dhi/how-to/verify.md) image signatures and
 [scan](/manuals/dhi/how-to/scan.md) for vulnerabilities to ensure the security
 and integrity of your images.
@@ -83,7 +83,7 @@ ENTRYPOINT ["/app/myapp"]
 ```
 
 After updating your Dockerfile, build and test your application. If you encounter
-issues, see the [Troubleshoot](/manuals/dhi/troubleshoot.md) guide for common
+issues, see the [Troubleshoot](/manuals/dhi/how-to/troubleshoot.md) guide for common
 problems and solutions.
 
 ## Language-specific examples

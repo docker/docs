@@ -39,7 +39,7 @@ the minimum requirements for VEX defined by CISA (Cybersecurity and
 Infrastructure Security Agency), the U.S. government agency responsible for
 cybersecurity guidance. These attestations document which vulnerabilities don't
 apply to the image and why, helping you focus on real risks. To understand what
-VEX is and how it works, see the [VEX core concept](/manuals/dhi/core-concepts/vex.md).
+VEX is and how it works, see the [VEX core concept](/manuals/dhi/explore/security-concepts/vex.md).
 
 Because OpenVEX is an open standard with government backing, it has strong
 industry momentum and any tool can implement it without vendor-specific

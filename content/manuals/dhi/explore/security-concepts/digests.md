@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /dhi/core-concepts/digests/
 title: Image digests
 description: Learn how Docker Hardened Images help secure every stage of your software supply chain with signed metadata, provenance, and minimal attack surface.
 keywords: docker image digest, pull image by digest, immutable container image, secure container reference, multi-platform manifest

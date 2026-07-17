@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /dhi/core-concepts/sbom/
 title: Software Bill of Materials (SBOMs)
 linktitle: SBOMs
 description: Learn what SBOMs are, why they matter, and how Docker Hardened Images include signed SBOMs to support transparency and compliance.
@@ -91,4 +93,4 @@ $ docker scout attest get dhi.io/node:20.19-debian12 \
 For more details about SBOM attestations and Docker Build, see [SBOM
 attestations](/build/metadata/attestations/sbom/).
 
-To learn more about Docker Scout and working with SBOMs, see [Docker Scout SBOMs](../../scout/how-tos/view-create-sboms.md).
+To learn more about Docker Scout and working with SBOMs, see [Docker Scout SBOMs](../../../scout/how-tos/view-create-sboms.md).

@@ -7,18 +7,14 @@ aliases:
 params:
   grid_discover:
     - title: Search and evaluate Docker Hardened Images
-      description: Learn how to find and evaluate image repositories, variants, metadata, and attestations in the DHI catalog on Docker Hub.
+      description: Learn how to find and compare image repositories, variants, and metadata in the DHI catalog.
       icon: globe-alt
-      link: /dhi/how-to/explore/
+      link: /dhi/how-to/search-evaluate/
   grid_adopt:
     - title: Get started with DHI Select and Enterprise
       description: Learn how to mirror repositories, customize images, and access compliance variants with DHI Select and Enterprise subscriptions.
       icon: rocket-launch
       link: /dhi/how-to/select-enterprise/
-    - title: Use the DHI CLI
-      description: Use the dhictl command-line tool to manage and interact with Docker Hardened Images.
-      icon: command-line
-      link: /dhi/how-to/cli/
     - title: Mirror a Docker Hardened Image repository
       description: Learn how to mirror an image into your organization's namespace and optionally push it to another private registry.
       icon: arrows-right-left
@@ -53,6 +49,11 @@ params:
       description: Learn how to use image policies with Docker Scout for Docker Hardened Images.
       icon: shield-check
       link: /dhi/how-to/policies/
+  grid_troubleshoot:
+    - title: Troubleshoot
+      description: Resolve common issues when building, running, or debugging Docker Hardened Images, such as non-root behavior, missing shells, and port access.
+      icon: question-mark-circle
+      link: /dhi/how-to/troubleshoot/
 ---
 
 This section provides practical, task-based guidance for working with Docker
@@ -95,4 +96,10 @@ Enforce policies to maintain security and compliance.
 
 {{< grid
   items="grid_govern"
+>}}
+
+## Troubleshoot
+
+{{< grid
+  items="grid_troubleshoot"
 >}}

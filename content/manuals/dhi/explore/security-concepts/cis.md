@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /dhi/core-concepts/cis/
 title: CIS Benchmark
 description: Learn how Docker Hardened Images comply with the CIS Docker Benchmark to help organizations harden container images for secure deployments.
 keywords: docker cis benchmark, cis docker compliance, cis docker images, docker hardened images, secure container images
@@ -31,7 +33,7 @@ configuration.
 CIS-compliant DHIs are compliant with all controls in Section 4, with the sole
 exception of the control requiring Docker Content Trust (DCT), which [Docker
 officially retired](https://www.docker.com/blog/retiring-docker-content-trust/).
-Instead, DHIs are [signed](/manuals/dhi/core-concepts/signatures.md) using
+Instead, DHIs are [signed](/manuals/dhi/explore/security-concepts/signatures.md) using
 Cosign, providing an even higher level of authenticity and integrity. By
 starting from a CIS-compliant DHI, teams can adopt image-level best practices
 from the benchmark more quickly and confidently.
@@ -46,7 +48,7 @@ from the benchmark more quickly and confidently.
 ## Identify CIS-compliant images
 
 CIS-compliant images are labeled as **CIS** in the Docker Hardened Images catalog.
-To find them, [search the catalog](../how-to/explore.md) and look for the **CIS**
+To find them, [search the catalog](../../how-to/search-evaluate.md) and look for the **CIS**
 designation on individual listings.
 
 ## Get the benchmark

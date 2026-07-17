@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /dhi/core-concepts/signatures/
 title: Code signing
 description: Understand how Docker Hardened Images are cryptographically signed using Cosign to verify authenticity, integrity, and secure provenance.
 keywords: container image signing, cosign docker image, verify image signature, signed container image, sigstore cosign

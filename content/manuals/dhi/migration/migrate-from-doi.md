@@ -102,7 +102,7 @@ ENTRYPOINT ["/app/myapp"]
 ```
 
 After updating your Dockerfile, build and test your application. If you encounter
-issues, see the [Troubleshoot](/manuals/dhi/troubleshoot.md) guide for common
+issues, see the [Troubleshoot](/manuals/dhi/how-to/troubleshoot.md) guide for common
 problems and solutions.
 
 ## Language-specific examples

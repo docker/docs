@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /dhi/core-concepts/fips/
 title: FIPS
 description: Learn how Docker Hardened Images support FIPS 140 through validated cryptographic modules to help organizations meet compliance requirements.
 keywords: docker fips, fips 140 images, fips docker images, docker compliance, secure container images
@@ -66,7 +68,7 @@ compliance requirements by incorporating components that meet the standard.
 Docker Hardened Images that support FIPS are marked as **FIPS** compliant
 in the Docker Hardened Images catalog.
 
-To find DHI repositories with FIPS image variants, [search the catalog](../how-to/explore.md) and:
+To find DHI repositories with FIPS image variants, [search the catalog](../../how-to/search-evaluate.md) and:
 
 - Use the **FIPS** filter on the catalog page
 - Look for **FIPS** compliant on individual image listings
@@ -77,7 +79,7 @@ ending with `-fips`, such as `3.13-fips`.
 
 ## Use a FIPS variant
 
-To use a FIPS variant, you must [mirror](../how-to/mirror.md) the repository
+To use a FIPS variant, you must [mirror](../../how-to/mirror.md) the repository
 and then pull the FIPS image from your mirrored repository.
 
 ## View the FIPS attestation

@@ -33,10 +33,11 @@ params:
       description: Understand Docker's role and your responsibilities when using Docker Hardened Images as part of your secure software supply chain.
       icon: user-group
       link: /dhi/explore/responsibility/
-    - title: Give feedback
-      icon: question-mark-circle
-      description: Docker welcomes all contributions and feedback.
-      link: /dhi/explore/feedback
+    - title: Security concepts
+      description: Learn the core concepts behind Docker Hardened Images — signed attestations, immutable digests, SLSA, VEX, and more.
+      icon: clipboard-document-check
+      link: /dhi/explore/security-concepts/
+
 aliases:
   - /dhi/about/
 ---
@@ -48,8 +49,7 @@ existing Docker-based workflows with little to no retooling required.
 
 This section helps you understand what Docker Hardened Images are, how they're
 built and tested, the different types available, and how responsibility is
-shared between Docker and you as a user. For a complete list of DHI features and
-capabilities, see [Features](/dhi/features/).
+shared between Docker and you as a user.
 
 ## Learn more about Docker Hardened Images
 

@@ -388,15 +388,15 @@ attestations when needed.
 ## Available DHI attestations
 
 See [available
-attestations](../core-concepts/attestations.md#image-attestations) for a list
+attestations](../explore/security-concepts/attestations.md#image-attestations) for a list
 of attestations available for each DHI image and [Helm chart
-attestations](../core-concepts/attestations.md#helm-chart-attestations) for a
+attestations](../explore/security-concepts/attestations.md#helm-chart-attestations) for a
 list of attestations available for each DHI chart.
 
 ## Explore attestations on Docker Hub
 
 You can also browse attestations visually when [exploring an image
-variant](./explore.md#image-variant-details). The **Attestations** section
+variant](./search-evaluate.md#image-variant-details). The **Attestations** section
 lists each available attestation with its:
 
 - Type (e.g. SBOM, VEX)

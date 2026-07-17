@@ -31,7 +31,7 @@ Docker account, pull and run an image, and compare it with a Docker Official Ima
 3. Select the Python repository to view its details.
 
 Continue to the next step to pull and run the image. To dive deeper into searching
-and evaluating images, see [Search and evaluate Docker Hardened Images](./how-to/explore.md).
+and evaluating images, see [Search and evaluate Docker Hardened Images](./how-to/search-evaluate.md).
 
 ## Step 2: Pull and run the image
 
@@ -121,7 +121,7 @@ The `## Overview` section of the output looks similar to the following:
 Docker maintains near-zero CVEs in Docker Hardened Images. For DHI Select and
 Enterprise subscriptions, when new CVEs are discovered, the CVEs are remediated
 within the industry-leading SLA time frame. Learn more about the [SLA-backed
-security features](./features.md#sla-backed-security).
+security features](./_index.md#sla-backed-security).
 
 This comparison shows that the Docker Hardened Image:
 
@@ -129,7 +129,7 @@ This comparison shows that the Docker Hardened Image:
 - Reduces size: From 412 MB down to 35 MB (91% reduction)
 - Minimizes packages: From 610 packages down to 80 (87% reduction)
 
-To dive deeper into comparing images see [Search and evaluate Docker Hardened Images](./how-to/explore.md#compare-and-evaluate-images).
+To dive deeper into comparing images see [Search and evaluate Docker Hardened Images](./how-to/search-evaluate.md#compare-and-evaluate-images).
 
 ## What's next
 

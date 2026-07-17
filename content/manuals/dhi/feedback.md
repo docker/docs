@@ -6,6 +6,7 @@ keywords: software supply chain security, feedback, bugs, discussion, questions
 weight: 999
 aliases:
   - /dhi/about/feedback/
+  - /dhi/explore/feedback/
 ---
 
 Committed to maintaining the quality, security, and reliability of the Docker Hardened Images (DHI)
@@ -33,11 +34,11 @@ You can [open a new issue](https://github.com/docker-hardened-images/catalog/iss
 - Documentation improvements
 - Security vulnerabilities (see security policy)
 
-It's encouraged to first search existing issues to see if it’s already been reported.
+It's encouraged to first search existing issues to see if it's already been reported.
 The DHI team reviews reports regularly and appreciates clear, actionable feedback.
 
 ## Responsible security disclosure
 
 It is forbidden to post details of vulnerabilities before coordinated disclosure and resolution.
 
-If you discover a security vulnerability, report it responsibly by following Docker’s [security disclosure](https://www.docker.com/trust/vulnerability-disclosure-policy/).
+If you discover a security vulnerability, report it responsibly by following Docker's [security disclosure](https://www.docker.com/trust/vulnerability-disclosure-policy/).

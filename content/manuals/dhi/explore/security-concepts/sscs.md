@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /dhi/core-concepts/sscs/
 title: Software Supply Chain Security
 linktitle: Software Supply Chain Security
 description: Learn how Docker Hardened Images help secure every stage of your software supply chain with signed metadata, provenance, and minimal attack surface.
