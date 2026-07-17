@@ -89,8 +89,8 @@ repository](/dhi/how-to/mirror/).
 
 ## Customizations
 
-Customizations are accessible from **My Hub** > **Hardened Images** > **Manage**
-> **Mirrored Images**. Select the menu icon next to a mirrored repository and
+Customizations are accessible from **My Hub** > **Hardened Images** > **Manage** > **Mirrored Images**.
+Select the menu icon next to a mirrored repository and
 then **Customize**. Each customization defines
 additional packages, OCI artifacts, environment variables, or labels to layer
 onto the base DHI during a rebuild.
