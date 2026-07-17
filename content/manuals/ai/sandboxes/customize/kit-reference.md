@@ -50,6 +50,7 @@ What changed in v2:
 | `network.serviceDomains` / `serviceAuth`    | `credentials[].apiKey.inject`            |
 | `network.publishedPorts` / `publishedPorts` | top-level `ports`                        |
 | standalone `oauth:` block                   | `credentials[].oauth`                    |
+| `oauth.skipIfEnv`                           | Accepted but ignored                     |
 | `environment.proxyManaged`                  | `credentials[].apiKey.proxyManaged`      |
 | `memory` / `agentContext`                   | `agentInstructions.content`              |
 | `kind: agent` / `agent:` block              | `kind: sandbox` / `sandbox:` block       |
@@ -135,8 +136,6 @@ schemaVersion: "2"
 kind: sandbox
 name: claude-safe
 extends: claude
-sandbox:
-  entrypoint: [claude]
 ```
 
 `extends:` is sandbox-only. The parent must resolve to a sandbox kit. `mixins:`
@@ -243,7 +242,7 @@ credentials:
       credentialFile:
         path: <path>
         structure:
-          service:
+          <key>:
             accessToken: "{{.AccessToken}}"
 ```
 
@@ -282,17 +281,17 @@ the real token back in on outbound requests. By default, the token never enters
 the sandbox. Setting `passthrough: true` opts out of sentinel masking and sends
 the real token response into the sandbox.
 
-| Field                                    | Description                                                                                                                                              |
-| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tokenEndpoint.host` / `path`            | The OAuth token endpoint the proxy intercepts.                                                                                                           |
-| `sentinels.accessToken` / `refreshToken` | Sentinel values written into the container in place of the real tokens.                                                                                  |
-| `credentialFile.path`                    | Where to write the credential file inside the container (`~` expands).                                                                                   |
-| `credentialFile.structure`               | Declarative JSON shape for the credential file. `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, and `{{.Scopes}}` are substituted at runtime. |
-| `credentialFile.template`                | Deprecated Go template form. If both `structure` and `template` are set, `structure` wins.                                                               |
-| `resourceHosts`                          | API hosts where the proxy attaches the token on outbound requests, distinct from the token endpoint host.                                                |
-| `skipIfEnv`                              | Accepted for compatibility, but ignored for schema v2. A v2 binding is authoritative instead of host environment variables.                              |
-| `responseFields`                         | Overrides the default field names the proxy reads from the token response.                                                                               |
-| `passthrough`                            | If `true`, the proxy passes the token response through unchanged instead of replacing the tokens with sentinels.                                         |
+| Field                                    | Description                                                                                                                                                            |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tokenEndpoint.host` / `path`            | The OAuth token endpoint the proxy intercepts.                                                                                                                         |
+| `sentinels.accessToken` / `refreshToken` | Sentinel values written into the container in place of the real tokens.                                                                                                |
+| `credentialFile.path`                    | Where to write the credential file inside the container (`~` expands).                                                                                                 |
+| `credentialFile.structure`               | User-defined, declarative JSON shape for the credential file. `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, and `{{.Scopes}}` are substituted at runtime. |
+| `credentialFile.template`                | Deprecated Go template form. If both `structure` and `template` are set, `structure` wins.                                                                             |
+| `resourceHosts`                          | API hosts where the proxy attaches the token on outbound requests, distinct from the token endpoint host.                                                              |
+| `skipIfEnv`                              | Accepted for compatibility, but ignored for schema v2. A v2 binding is authoritative instead of host environment variables.                                            |
+| `responseFields`                         | Overrides the default field names the proxy reads from the token response.                                                                                             |
+| `passthrough`                            | If `true`, the proxy passes the token response through unchanged instead of replacing the tokens with sentinels.                                                       |
 
 ## Network
 
@@ -330,7 +329,7 @@ In v1 this was the `network:` block (`allowedDomains` / `deniedDomains`, plus
 
 ## Ports
 
-Use `ports` for inbound service exposure from the sandbox to the host:
+Use `ports` to expose sandbox services to the host:
 
 ```yaml
 ports:

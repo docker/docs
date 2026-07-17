@@ -228,7 +228,7 @@ setup:
 An empty log file tells you the wrapper ran; a populated one tells you why
 the service failed.
 
-## Bake runtime values into a file with setup files
+## Write runtime values to a file
 
 When a config file needs a value that isn't known until sandbox start
 — most often the absolute workspace path — use `setup.files`.

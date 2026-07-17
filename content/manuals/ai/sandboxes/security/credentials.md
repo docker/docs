@@ -334,7 +334,7 @@ The bindings file gates whether a third-party v2 kit can use a service
 credential. The kit's credential injection rules and network permissions still
 constrain which requests can carry the credential.
 
-### Which kits require a binding
+### Kits that require a binding
 
 Only third-party kits that declare `schemaVersion: "2"` require a binding.
 Built-in agents also use `schemaVersion: "2"`, but credentials declared only by
