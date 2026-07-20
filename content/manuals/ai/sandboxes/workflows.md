@@ -59,16 +59,16 @@ turn-by-turn.
 
 ### Clone mode
 
-In clone mode, the sandbox gets a private Git clone. The agent manages its
-own branches and commits inside that clone; your host working tree is never
-touched. When the agent is done, you either fetch its branches to the host or
-ask the agent to push directly to your fork.
+In clone mode, `sbx` creates a separate Git clone inside the sandbox. The agent
+edits this clone instead of your host working tree. Its changes stay inside the
+sandbox until you fetch a branch or the agent pushes one to a remote. Your host
+repository is also available at `/run/sandbox/source`, but only with read
+access. The sandbox clone is not a Git worktree linked to your host checkout.
 
-Clone mode is designed for parallelism: a single clone-mode sandbox can hold
-many branches at once, and subagent orchestrators (such as Claude Code's
-[agents view](agents/claude-code.md#agents-view)) can dispatch independent
-tasks to separate agents, each working on its own branch or worktree inside
-the clone.
+A single clone-mode sandbox can hold multiple branches and worktrees for
+parallel tasks. The `--clone` flag creates the clone, but it doesn't separate
+one task from another. To keep parallel tasks isolated, instruct your agent tool
+to create a separate branch or worktree for each task.
 
 > [!NOTE]
 > `--clone` is a create-time flag and cannot be changed on an existing
@@ -135,10 +135,9 @@ It's only reachable while the sandbox is running:
    $ sbx run --clone claude
    ```
 
-2. Dispatch each independent task to a separate subagent. Claude Code handles
-   branch isolation for subagents automatically in agents view. For other
-   agents (such as Codex), add an instruction to `AGENTS.md` to get the same
-   behavior:
+2. Dispatch each independent task to a separate background session. Your agent
+   tool may use branches or worktrees to keep their changes separate. If it
+   doesn't, add a project instruction such as:
 
    ```markdown
    Always start each task on its own git branch before making changes.
