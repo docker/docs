@@ -81,6 +81,43 @@ These phrases add no value - state the fact directly:
 - **Write timelessly**: Avoid "currently" or "as of this writing" - the
   documentation describes the product as it is today
 
+### Explain technical behavior
+
+Explain behavior from the reader's perspective. Lead with the observable
+outcome, then add the implementation details needed to explain it.
+
+Prefer:
+
+> Changes made by the agent stay inside the sandbox until you fetch them. The
+> agent works in a separate Git clone inside the sandbox.
+
+Avoid:
+
+> A session that works directly in the sandbox clone still can't modify your
+> host repository.
+
+The preferred version tells readers where changes happen and when they become
+visible. The second version makes readers reconstruct the relationship between
+the session, sandbox clone, and host repository.
+
+Separate guarantees from variable behavior. Don't present behavior controlled
+by another tool as a product default or guarantee. When behavior varies,
+structure the explanation in this order:
+
+1. State what always happens
+2. State what the product doesn't control
+3. Tell the reader what to do
+
+For example:
+
+> The `--clone` flag creates the clone, but it doesn't separate one task from
+> another. To keep parallel tasks isolated, instruct your agent tool to create
+> a separate branch or worktree for each task.
+
+Avoid chains of qualifications such as "may," "can," and "depends" that leave
+the reader without a conclusion. Keep qualifiers that are needed for accuracy.
+State what controls the behavior and what the reader should do.
+
 ### Scope preservation
 
 When updating existing documentation, resist the urge to expand
@@ -108,6 +145,10 @@ remake it.
 
 Good additions fill genuine gaps. Bad additions change the document's
 character. When in doubt, add less rather than more.
+
+Include caveats, failure scenarios, and fallback behavior only when they affect
+a decision or action. Don't turn a clarification into a catalog of edge
+cases.
 
 ## Grammar and style
 
@@ -146,7 +187,11 @@ Use contractions to maintain a conversational tone, but don't overdo it.
 - Never contract a noun with a verb (your container is ready, not your
   container's ready)
 
-### Dangling modifiers
+### Clear subjects and modifiers
+
+Name the actor when a system includes multiple tools or components. Repeat the
+noun instead of using an ambiguous pronoun. For example, distinguish between
+what a CLI creates, what an agent edits, and what remains on the host.
 
 Avoid unclear subjects:
 
@@ -179,6 +224,11 @@ Avoid unclear subjects:
 ### Conciseness and redundant phrases
 
 Remove unnecessary words to make documentation clearer and more direct.
+
+Keep an adjective or qualifier only when it changes how readers understand the
+behavior or complete the task. If removing it doesn't change an outcome,
+decision, or next step, remove it. Apply the same test to implementation
+details.
 
 **Eliminate redundant phrases:**
 
@@ -559,6 +609,7 @@ Common phrases to transform for clearer, more direct writing:
 - ✅ Direct and practical
 - ✅ Conversational with active voice
 - ✅ Specific and actionable
+- ✅ Lead with observable outcomes
 - ❌ Corporate-speak
 - ❌ Condescending
 - ❌ Overly formal
