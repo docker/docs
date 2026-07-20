@@ -24,6 +24,54 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.83.0
+
+{{< release-date date="2026-07-20" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.83.0" build_path="/234302/" >}}
+
+### Updates
+
+- Docker Desktop CLI `v0.4.2`
+- [Docker Model Runner v1.2.6](https://github.com/docker/model-runner/releases/tag/v1.2.6)
+- Docker Offload `v0.6.9`
+- [Docker Agent v1.103.0](https://github.com/docker/docker-agent/releases/tag/v1.103.0)
+- [Docker Compose v5.3.1](https://github.com/docker/compose/releases/tag/v5.3.1)
+- Docker Desktop Build `v0.36.0`
+- [Docker Engine v29.6.2](https://docs.docker.com/engine/release-notes/29/#2962)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Added support for migrating a per-machine Docker Desktop installation to a per-user installation in-place via `install --user` on Windows, preserving user data without requiring a manual uninstall.
+- Fixed `kubectl exec` and `kubectl attach` functionality for v1.36.
+- Fixed Docker Engine startup failures being reported as a generic `io: read/write on closed pipe` error instead of the underlying cause.
+- Fixed the **Images** view showing **0 Bytes** reclaimable size for a while when many images are present.
+- Fixed the volumes list not correctly sorting by size.
+- Fixed an issue where a GPU process crash prevented the Docker Desktop Dashboard from loading by automatically disabling hardware acceleration and restarting the app.
+- Fixed an issue where `docker ai` sessions launched directly from a terminal were killed when Docker Desktop was restarted.
+- Fixed an issue where a malformed `daemon.json` would be silently overwritten with defaults on startup, causing users to lose their custom daemon configuration.
+- Added a **Custom rules** tab to Gordon's permissions dialog. Users can now add allow/deny rules for specific commands or MCP tools.
+- Added pulsing discovery badges to Gordon's **Plan mode** button, model selector, and **Feedback/Issues** button to help users find new features. 
+
+#### For Mac
+
+- Fixed an issue where a stale `com.docker.virtualization` process could prevent Docker Desktop from starting a new VM with a `VZErrorInvalidVirtualMachineConfiguration` error.
+
+#### For Windows
+
+- Fixed an issue where a failed delta update would leave users stranded on an old version by automatically falling back to the full installer.
+- Fixed the Windows MSI installer reporting success when the component installation step actually failed.
+- Fixed an issue where the Windows installer wizard froze while enabling Windows features via DISM during Docker Desktop installation.
+- Fixed a UI thread deadlock in the Windows installer that caused a blank or hung window when prerequisite services were registered but not running during admin installs.
+- Fixed the Windows installer silently reporting success when it could not install the Docker CLI plugins.
+- Fixed the Windows installer deleting a previously installed CLI plugin when re-linking it failed.
+- Fixed a bug where registry policy download failures were silently ignored, so users now see proper error reporting when the admin helper exits with a non-zero code.
+- Changed the Windows installer to select a per-user installation by default.
+- Fixed a WSL integration issue on WSL 2.6.x and later where Docker Desktop failed to work in user distros due to a 0-byte proxy binary, causing **Permission denied** or **Exec format error**.
+- Fixed the Docker CLI in integrated WSL distributions breaking after Resource Saver stopped the VM. The VM now stays running while a WSL integration is active and wakes when one is enabled. Fixes [docker/desktop-feedback#522](https://github.com/docker/desktop-feedback/issues/522).
+
 ## 4.82.0
 
 {{< release-date date="2026-07-13" >}}
