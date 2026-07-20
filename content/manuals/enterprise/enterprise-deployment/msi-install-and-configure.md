@@ -5,6 +5,7 @@ keywords: msi, windows, docker desktop, install, deploy, configure, admin, mdm
 tags: [admin]
 weight: 10
 aliases:
+  - /desktop/setup/install/msi/
   - /desktop/setup/install/enterprise-deployment/msi-install-and-configure/
 ---
 
