@@ -24,12 +24,7 @@ Each ruleset contains the following fields:
 - Resources: The Docker resources a workflow can access when the ruleset matches. See [Resources](#resources).
 - Scopes: The permissions granted on those resources, such as read or write access.
 
-You can define between 1 and 5 rulesets per connection. Use multiple rulesets to apply different access levels across different workflows or branches.
-
-> [!TIP]
-> If more than one ruleset matches an incoming token,
-> Docker merges the resources from all matching rulesets
-> and grants access to the combined set.
+You can define between 1 and 5 rulesets per connection. Use multiple rulesets to apply different access levels across different workflows or branches. If more than one ruleset matches an incoming token, Docker merges the resources from all matching rulesets and grants access to the combined set.
 
 ## Subject claims
 
@@ -51,6 +46,9 @@ The exact format varies and depends on what triggered the workflow.
 
 - A branch push, pull request, tag, or environment deployment each produces a different `sub` value.
 - Refer to [GitHub's OpenID Connect Reference](https://docs.github.com/en/actions/reference/security/oidc) for the full list of formats.
+
+> [!TIP] 
+> GitHub repositories created after July 15, 2026 have immutable identifiers in the default subject claim. For example: `repo:octocat@123456/my-repo@456789:ref:refs/heads/main` See [GitHub changelog](https://github.blog/changelog/2026-04-23-immutable-subject-claims-for-github-actions-oidc-tokens/) for more details. 
 
 You can use wildcards to match across repositories or branches:
 

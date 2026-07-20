@@ -41,7 +41,7 @@ Organization owners and editors can create new OIDC connections or manage existi
        steps:
          - name: OIDC connections
            id: docker_oidc
-           uses: docker/oidc-action@v0
+           uses: docker/oidc-action@v1
            with:
              connection_id: <YOUR_CONNECTION_ID>
    ```
@@ -70,7 +70,7 @@ Organization owners and editors can create new OIDC connections or manage existi
        steps:
          - name: OIDC connections
            id: docker_oidc
-           uses: docker/oidc-action@v0
+           uses: docker/oidc-action@v1
            with:
              connection_id: <YOUR_CONNECTION_ID>
 
