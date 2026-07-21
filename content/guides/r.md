@@ -110,7 +110,7 @@ reference](/reference/cli/docker/compose/).
 
 ### Prerequisites
 
-Complete [Containerize a R application](./).
+Complete [Containerize a R application](#containerize-a-r-application).
 
 ### Overview
 
