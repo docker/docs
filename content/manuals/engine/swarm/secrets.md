@@ -125,6 +125,35 @@ Use these links to read about specific commands, or continue to the
 - [`--secret`](/reference/cli/docker/service/create/#secret) flag for `docker service create`
 - [`--secret-add` and `--secret-rm`](/reference/cli/docker/service/update/#secret-add) flags for `docker service update`
 
+## Defining and using secrets in compose files
+
+Using secrets in compose files alongside Docker Swarm is as simple as defining a secret
+using `docker secret create`.
+
+```console
+$ printf "my-secret" | docker secret create some_secret -
+```
+
+In the `compose.yml` file you can declare the secret as `external` in the top-level `secrets` attribute.
+
+```yaml
+services:
+    api:
+        image: my-web-app
+        environment:
+            MY_ENV: /run/secrets/some_secret
+        secrets:
+            - some_secret
+
+secrets:
+    some_secret:
+        external: true
+```
+
+Both the `docker-compose` and `docker stack` commands support defining secrets
+in a compose file. See
+[the Compose file reference](/reference/compose-file/secrets.md) for details.
+
 ## Examples
 
 This section includes three graduated examples which illustrate how to use
@@ -138,12 +167,6 @@ a similar way, see
 > These examples use a single-Engine swarm and unscaled services for
 > simplicity. The examples use Linux containers, but Windows containers also
 > support secrets. See [Windows support](#windows-support).
-
-### Defining and using secrets in compose files
-
-Both the `docker-compose` and `docker stack` commands support defining secrets
-in a compose file. See
-[the Compose file reference](/reference/compose-file/legacy-versions.md) for details.
 
 ### Simple example: Get started with secrets
 
