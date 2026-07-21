@@ -243,6 +243,26 @@ If you need more than 256 IP addresses, do not increase the IP block size. You c
 endpoint mode with an external load balancer, or use multiple smaller overlay networks. See 
 [Configure service discovery](#configure-service-discovery) for more information about different endpoint modes.
 
+#### Use direct server return
+
+Direct server return (DSR) changes east-west overlay load balancing so that
+IPVS routes packets by changing the destination MAC address. The source IP and
+destination virtual IP (VIP) remain unchanged.
+
+Create an overlay network that uses DSR:
+
+```console
+$ docker network create \
+  --driver overlay \
+  --opt dsr \
+  dsr-net
+```
+
+> [!NOTE]
+>
+> DSR is supported only for traffic between services on Linux nodes. The
+> ingress routing mesh does not use DSR.
+
 #### Configure encryption of application data {#encryption}
 
 Management and control plane data related to a swarm is always encrypted.
