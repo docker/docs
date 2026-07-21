@@ -434,6 +434,8 @@
   - /go/desktop-mac-requirements/
 "/desktop/setup/install/windows-install/#system-requirements":
   - /go/desktop-windows-requirements/
+"/desktop/setup/install/windows-install/#installation-modes":
+  - /go/desktop-windows-install-modes/
 "/support/#diagnostic-data-and-privacy":
   - /go/diagnostic-data/
 
