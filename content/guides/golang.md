@@ -542,7 +542,7 @@ so feel free to check out [multi-stage builds](/manuals/build/building/multi-sta
 
 ### Prerequisites
 
-Work through the steps to containerize a Go application in [Build your Go image](./).
+Work through the steps to containerize a Go application in [Build your Go image](#build-your-go-image).
 
 ### Overview
 
@@ -739,7 +739,7 @@ Now, you can easily identify your container based on the name.
 
 ### Prerequisites
 
-Work through the steps of the [run your image as a container](./) module to learn how to manage the lifecycle of your containers.
+Work through the steps of the [run your image as a container](#run-your-go-image-as-a-container) module to learn how to manage the lifecycle of your containers.
 
 ### Introduction
 
@@ -1457,7 +1457,7 @@ Since you didn't run a cluster of CockroachDB instances, you might be wondering 
 
 ### Prerequisites
 
-Complete the [Build your Go image](./) section of this guide.
+Complete the [Build your Go image](#build-your-go-image) section of this guide.
 
 ### Overview
 
@@ -1467,7 +1467,7 @@ tests and end-to-end testing. In this guide you take a look at running your unit
 tests in Docker when building.
 
 For this section, use the `docker-gs-ping` project that you cloned in [Build
-your Go image](./).
+your Go image](#build-your-go-image).
 
 ### Run tests when building
 

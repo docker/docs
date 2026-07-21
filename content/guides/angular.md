@@ -538,7 +538,7 @@ $ docker compose down
 
 ### Prerequisites
 
-Complete [Containerize Angular application](./).
+Complete [Containerize Angular application](#containerize-an-angular-application).
 
 ---
 
@@ -683,7 +683,7 @@ You should see the updated text appear instantly, without needing to rebuild the
 
 ### Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize Angular application](./).
+Complete all the previous sections of this guide, starting with [Containerize Angular application](#containerize-an-angular-application).
 
 ### Overview
 

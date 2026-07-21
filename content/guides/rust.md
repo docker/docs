@@ -325,7 +325,7 @@ Docker removed the image tagged with `:v1.0.0`, but the `docker-rust-image-dhi:l
 
 ### Prerequisite
 
-You have completed [Build your Rust image](./) and you have built an image.
+You have completed [Build your Rust image](#build-your-rust-image) and you have built an image.
 
 ### Overview
 
@@ -335,7 +335,7 @@ To run an image inside of a container, you use the `docker run` command. The `do
 
 ### Run an image
 
-Use `docker run` to run the image you built in [Build your Rust image](./).
+Use `docker run` to run the image you built in [Build your Rust image](#build-your-rust-image).
 
 ```console
 $ docker run docker-rust-image-dhi
