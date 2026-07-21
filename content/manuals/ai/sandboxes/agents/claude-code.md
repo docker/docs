@@ -38,13 +38,8 @@ Claude Code requires either an Anthropic API key or a Claude subscription.
 $ sbx secret set -g anthropic
 ```
 
-Alternatively, export the `ANTHROPIC_API_KEY` environment variable in your
-shell before running the sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
-
-**Claude subscription**: If no API key is set, Claude Code prompts you to
-authenticate interactively using OAuth. The proxy handles the OAuth flow, so
-credentials aren't stored inside the sandbox.
+**Claude subscription**: If no API key is set, use the `/login` command inside
+Claude Code to authenticate via OAuth.
 
 ## Configuration
 
@@ -62,12 +57,16 @@ Without extra args, the sandbox runs:
 claude --dangerously-skip-permissions
 ```
 
-Args after `--` replace these defaults rather than being appended. To keep
-`--dangerously-skip-permissions`, include it yourself:
+Arguments after `--` are added after the default flags when the first one is
+itself a flag (begins with `-`), so `--dangerously-skip-permissions` is
+preserved:
 
 ```console
-$ sbx run claude -- --dangerously-skip-permissions -c
+$ sbx run claude -- -c   # runs claude --dangerously-skip-permissions -c
 ```
+
+When the first argument is a bare word, such as the `agents` subcommand, it
+replaces the defaults instead.
 
 See the [Claude Code CLI reference](https://code.claude.com/docs/en/cli-reference)
 for available options.
@@ -75,9 +74,9 @@ for available options.
 ## Agents view
 
 Claude Code's [agents view](https://code.claude.com/docs/en/agent-view)
-dispatches tasks to subagents that work in parallel, each in its own
-Git worktree. Pair it with [clone mode](../usage.md#clone-mode) for an
-isolated multi-agent workflow:
+starts background sessions that run tasks in parallel. Pair it with
+[clone mode](../workflows.md#clone-mode) to keep their changes inside the
+sandbox:
 
 ```console
 $ sbx run --clone claude -- agents
@@ -93,17 +92,21 @@ use Claude Code's auto mode or pass the flag explicitly:
 $ sbx run --clone claude -- --dangerously-skip-permissions agents
 ```
 
-The subagents' worktrees live inside the sandbox's private clone — none
-of them touches your host repository. Each subagent commits to its own
-branch, and you review the work from the host by fetching the
-`sandbox-<sandbox-name>` remote:
+Claude Code may use branches or worktrees to keep changes from its background
+sessions separate. This depends on the task, Claude Code configuration, and
+project instructions. The `--clone` flag doesn't control this behavior. Claude
+Code creates any branches and worktrees inside the sandbox, not in your host
+checkout.
+
+To review a branch created by a session, fetch the
+`sandbox-<sandbox-name>` remote from the host:
 
 ```console
 $ git fetch sandbox-<sandbox-name>
 $ git diff main..sandbox-<sandbox-name>/<branch>
 ```
 
-See [Git workflow](../usage.md#git-workflow) for clone-mode details.
+See [Git workflows](../workflows.md#git-workflows) for clone-mode details.
 
 ## Base image
 

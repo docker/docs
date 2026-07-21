@@ -3,7 +3,7 @@ title: Onboard your organization
 linkTitle: Onboard
 weight: 20
 description: Get started onboarding your Docker Team or Business organization.
-keywords: business, team, organizations, get started, onboarding, Admin Console, organization management,
+keywords: business, team, organizations, get started, onboarding, Docker Home, organization management,
 toc_min: 1
 toc_max: 3
 aliases:
@@ -15,7 +15,7 @@ aliases:
 
 {{< summary-bar feature_name="Admin orgs" >}}
 
-Learn how to onboard your organization using the Admin Console or Docker Hub.
+Learn how to onboard your organization.
 
 Onboarding your organization includes:
 
@@ -47,13 +47,13 @@ Before you start onboarding your organization, ensure you:
 
 ## Onboard with guided setup
 
-The Admin Console has a guided setup to help you
+Docker Home has a guided setup to help you
 onboard your organization. The guided setup's steps consist of basic onboarding
 tasks. If you want to onboard outside of the guided setup,
 see [Recommended onboarding steps](/manuals/admin/organization/setup/onboard.md#recommended-onboarding-steps).
 
 To onboard using the guided setup,
-navigate to the [Admin Console](https://app.docker.com) and
+navigate to [Docker Home](https://app.docker.com) and
 select **Guided setup** in the left-hand navigation.
 
 The guided setup walks you through the following onboarding steps:
@@ -73,13 +73,13 @@ receive your Docker subscription benefits.
 
 1. Identify the Docker users in your organization.
    - If your organization uses device management software, like MDM or Jamf,
-   you can use the device management software to help identify Docker users.
-   See your device management software's documentation for details. You can
-   identify Docker users by checking if Docker Desktop is installed at the
-   following location on each user's machine:
-      - Mac: `/Applications/Docker.app`
-      - Windows: `C:\Program Files\Docker\Docker`(all-user installation) or `%LOCALAPPDATA%\Programs\DockerDesktop` (per-user installation (Beta))
-      - Linux: `/opt/docker-desktop`
+     you can use the device management software to help identify Docker users.
+     See your device management software's documentation for details. You can
+     identify Docker users by checking if Docker Desktop is installed at the
+     following location on each user's machine:
+     - Mac: `/Applications/Docker.app`
+     - Windows: `C:\Program Files\Docker\Docker`(all-user installation) or `%LOCALAPPDATA%\Programs\DockerDesktop` (per-user installation (Beta))
+     - Linux: `/opt/docker-desktop`
    - If your organization doesn't use device management software or your
      users haven't installed Docker Desktop yet, you can survey your users to
      identify who is using Docker Desktop.
@@ -122,7 +122,7 @@ For more details, see [Invite members](/manuals/admin/organization/manage/member
 
 Configuring SSO and SCIM is optional and only available to Docker Business
 subscribers. To upgrade a Docker Team subscription to a Docker Business
-subscription, see [Change your subscription](/manuals/subscription/change.md).
+subscription, see [Upgrade a plan](/manuals/subscription/manage.md#upgrade-plans).
 
 Use your identity provider (IdP) to manage members and provision them to Docker
 automatically via SSO and SCIM. See the following for more details:

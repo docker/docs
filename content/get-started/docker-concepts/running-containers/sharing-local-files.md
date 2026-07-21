@@ -162,12 +162,12 @@ Using a bind mount, you can map the configuration file on your host computer to 
 1. You can view the mounted files inside a container by selecting the container's **Files** tab and then selecting a file inside the `/usr/local/apache2/htdocs/` directory. Then, select **Open file editor**.
 
 
-   ![A screenshot of Docker Desktop Dashboard showing the mounted files inside the a container](images/mounted-files.webp?border=true)
+   ![A screenshot of Docker Desktop Dashboard showing the mounted files inside the container](images/mounted-files.webp?border=true)
 
 2. Delete the file on the host and verify the file is also deleted in the container. You will find that the files no longer exist under **Files** in the Docker Desktop Dashboard.
 
 
-   ![A screenshot of Docker Desktop Dashboard showing the deleted files inside the a container](images/deleted-files.webp?border=true)
+   ![A screenshot of Docker Desktop Dashboard showing the deleted files inside the container](images/deleted-files.webp?border=true)
 
 
 3. Recreate the HTML file on the host system and see that file re-appears under the **Files** tab under **Containers** on the Docker Desktop Dashboard. By now, you will be able to access the site too.

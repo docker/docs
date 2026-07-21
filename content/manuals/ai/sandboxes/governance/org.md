@@ -3,20 +3,27 @@ title: Organization policy
 linkTitle: Org policy
 weight: 20
 description: Centrally manage sandbox network and filesystem policies for your organization.
-keywords: docker sandboxes, governance, organization policy, AI governance, admin console, network access, filesystem access
+keywords: docker sandboxes, governance, organization policy, AI governance, Docker Home, network access, filesystem access
 aliases:
   - /ai/sandboxes/security/governance/
 ---
 
 [Local policies](local.md) give individual developers control over what their
 sandboxes can access. Organization policy moves that control to the admin level:
-rules defined in **Admin Console** apply to sandboxes across the organization,
+rules apply to sandboxes across the organization,
 either to every member or to specific teams. When organization governance is active, it replaces local `sbx policy`
 rules entirely — local rules are no longer evaluated and can't be used to
 supplement or override the organization policy.
 
-Admins can manage organization policies through the Admin Console UI or
+Admins can manage organization policies through the Docker Home UI or
 programmatically using the [Governance API](/reference/api/ai-governance/).
+
+By default, only organization
+[owners](/manuals/enterprise/security/roles-and-permissions/core-roles.md) can
+view and manage AI Governance policies. To let someone other than an owner
+manage policies, create a
+[custom role](/manuals/enterprise/security/roles-and-permissions/custom-roles.md)
+with the **Governance** permissions and assign it to a user or team.
 
 > [!NOTE]
 > Sandbox organization governance is available on a separate paid
@@ -26,7 +33,7 @@ programmatically using the [Governance API](/reference/api/ai-governance/).
 
 ## Create a policy
 
-Manage policies under **Admin Console**, a section in the left-hand navigation
+Manage policies from the **AI Platform** section in the left-hand navigation
 of [Docker Home](https://app.docker.com). Network and filesystem policies are
 managed separately, under **Network access** and **Filesystem access**.
 
@@ -34,8 +41,9 @@ To create a policy:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your
    organization.
-1. Select **Admin Console**, then **AI governance**.
-1. Select **Network access** or **Filesystem access**, then **Create policy**.
+1. In the left-hand navigation, expand **AI Platform** and select
+   **Network access** or **Filesystem access**.
+1. Select **Create policy**.
 1. Enter a **Policy name**.
 1. Set the **Scope** to **Organization** or **Teams**. If you select **Teams**,
    choose the teams the policy applies to. See
@@ -71,8 +79,8 @@ access to.
 Admins can restrict which paths are mountable with filesystem allow and deny
 rules. Each rule takes a path pattern and an action (allow or deny).
 
-For path pattern syntax including the difference between `*` and `**`, see
-[Policy concepts](concepts.md#filesystem-rules).
+For path pattern syntax and how read and write access combine to allow a
+mount, see [Policy concepts](concepts.md#filesystem-rules).
 
 ## Scope policies to teams
 
@@ -91,7 +99,7 @@ Team scoping targets your organization's existing
 exist before you can scope a policy to it. Create teams and manage their members
 in one of two ways:
 
-- Manually, in the Admin Console.
+- Manually, in Docker Home.
 - Automatically, by using
   [group mapping](/manuals/enterprise/security/provisioning/scim/group-mapping.md)
   to synchronize your identity provider's groups with the teams in your
@@ -117,24 +125,68 @@ all members, while a team-scoped policy grants a research team access to extra
 package mirrors. Research-team members get the extra access, but the org-wide
 deny still applies.
 
+In practice, three patterns cover most layering:
+
+- Deny by default: leave a domain out of every allow rule to keep it blocked.
+- Allow when needed: add a team-scoped allow to grant an exception.
+- Explicit deny: deny a domain outright when no team should ever reach it.
+
+The examples that follow show each pattern.
+
+### Grant one team access to a blocked domain
+
+Because access is [denied by default](concepts.md#rule-evaluation), you don't
+need an explicit deny to keep a domain off-limits. Leaving it out of every allow
+rule is enough. To give a single team access to a domain no one else can reach:
+
+1. Don't add an allow rule for the domain at the organization level. Default
+   deny keeps it blocked for everyone.
+1. Create a team-scoped policy that allows the domain, and scope it to that team.
+
+Only members of that team can reach the domain. Everyone else is still blocked
+by default.
+
+### Block a domain everywhere as a guardrail
+
+Use an explicit org-wide deny when a domain must be off-limits to everyone,
+including teams that have broad allow rules. Because deny wins, an org-wide deny
+on `**.example.com` blocks `example.com` and every subdomain for all members,
+and no team-scoped allow can grant access to it.
+
+Reserve explicit deny rules for domains you want to block outright. For
+everything else, rely on default deny and add allow rules only where access is
+needed.
+
+### An exact deny doesn't cover subdomains
+
+A deny rule matches only the hostnames its pattern matches. A deny on the exact
+hostname `example.com` doesn't match `api.example.com`, so a team-scoped allow
+on `api.example.com` still grants that team access. The org-wide deny and the
+team allow apply to different hostnames, so they never conflict.
+
+To block a domain and all its subdomains, deny `**.example.com` instead. With
+that pattern, deny wins over any team-scoped allow on a subdomain. See
+[Hostname patterns](concepts.md#network-rules) for how exact hostnames and
+wildcards match.
+
 ## Precedence
 
 When organization governance is active, local rules are not evaluated. Only
-organization rules set in the Admin Console determine what is allowed or denied,
+organization rules determine what is allowed or denied,
 and they can't be supplemented or overridden from a developer's machine. The
 same applies to filesystem policies: organization rules replace local behavior
 entirely. For how a user's organization policies are evaluated together, see
 [Policy concepts](concepts.md#rule-evaluation).
 
 To unblock a domain when organization governance is active, update the rule in
-the Admin Console or via the [API](/reference/api/ai-governance/). Without
+Docker Home or via the [API](/reference/api/ai-governance/). Without
 organization governance, remove the local rule with `sbx policy rm`.
 
 ## Troubleshooting
 
 ### Policy changes not taking effect
 
-After updating organization policies in the Admin Console, changes take up
+After updating organization policies, changes take up
 to 5 minutes to propagate to developer machines. To apply changes
 immediately, users can run `sbx policy reset`, which stops the daemon and
 forces it to pull the latest organization policies on the next `sbx`
@@ -144,8 +196,25 @@ command.
 > `sbx policy reset` deletes all locally configured policy rules. The command
 > prompts for confirmation before proceeding.
 
+#### Network versus filesystem enforcement timing
+
+Network policy and filesystem policy differ in when a change takes effect:
+
+- Network policy is evaluated on every outbound request. Once a policy
+  change has synced to the developer's machine (up to 5 minutes), it applies
+  immediately to subsequent requests.
+
+- Filesystem policy is only checked when a workspace is mounted — that
+  is, when a sandbox is created. Once a sandbox is running, changing the
+  filesystem policy has no effect on that sandbox. The sandbox continues to
+  access the previously allowed path until it is removed and a new one is
+  created.
+
+To apply a filesystem policy change immediately, remove the running sandbox
+and create a new one.
+
 ### Sandbox cannot mount workspace
 
 If a sandbox fails to mount with a `mount policy denied` error, verify that
-the filesystem allow rule in the Admin Console uses `**` rather than `*`. A
+the filesystem allow rule uses `**` rather than `*`. A
 single `*` doesn't match across directory separators.

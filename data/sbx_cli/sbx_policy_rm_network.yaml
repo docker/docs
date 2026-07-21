@@ -6,7 +6,8 @@ description: |-
     The rule is removed from the global policy by default. Use --sandbox to
     remove from policy "local" scoped to a single sandbox instead.
 
-    Use "sbx policy ls" to see active policies and their IDs/resources.
+    Use "sbx policy ls --wide" to see active rule IDs and resources, or
+    "sbx policy ls --json" for the raw filtered daemon response.
 usage: sbx policy rm network [--sandbox SANDBOX] [flags]
 options:
     - name: help
@@ -26,8 +27,8 @@ inherited_options:
       default_value: "false"
       usage: Enable debug logging
 example: |4-
-      # List policies to find the ID or resource to remove
-      sbx policy ls
+      # List rules to find the ID or resource to remove
+      sbx policy ls --wide
 
       # Remove a global rule by resource
       sbx policy rm network --resource api.example.com

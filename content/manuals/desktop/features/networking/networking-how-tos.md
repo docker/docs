@@ -69,7 +69,7 @@ to give the container direct access to the network stack of the host.
 See the [run command](/reference/cli/docker/container/run/) for more details on
 publish options used with `docker run`.
 
-All inbound connections pass through the Docker Desktop backend process (`com.docker.backend` (Mac), `com.docker.backend` (Windows), or `qemu` (Linux), which handles port forwarding into the VM.
+All inbound connections pass through the Docker Desktop backend process (`com.docker.backend` (Mac), `com.docker.backend.exe` (Windows), or `qemu` (Linux)), which handles port forwarding into the VM.
 For more details, see [How exposed ports work](/manuals/desktop/features/networking/_index.md#how-exposed-ports-work)
 
 ### Working with VPNs
@@ -97,7 +97,7 @@ For more details on proxies and proxy configurations, see the [Proxy settings do
 
 You can control how Docker handles container networking and DNS resolution to better support a range of environments — from IPv4-only to dual-stack and IPv6-only systems. These settings help prevent timeouts and connectivity issues caused by incompatible or misconfigured host networks.
 
-You can set the following settings on the **Network** tab in the Docker Desktop Dashboard settings, or if you're an admin, with Settings Management via the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md#networking), or the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+You can set the following settings on the **Network** tab in the Docker Desktop Dashboard settings, or if you're an admin, with Settings Management via the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md#networking), or [Docker Home](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 > [!NOTE]
 >

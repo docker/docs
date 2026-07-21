@@ -86,6 +86,11 @@ The default allowed domains include broad wildcards. Some defaults like
 see the full list of active rules, and remove entries you don't need. See
 [Default security posture](defaults/).
 
+Kits run install commands with root privileges inside the sandbox. To limit
+supply-chain risk, `sbx` restricts kit installs to an allowlist of sources
+that defaults to Docker Hub only. See
+[Restrict kit sources](../customize/kits.md#restrict-kit-sources).
+
 ## Organization-wide control
 
 On a single developer's machine, security and policy are configured locally —

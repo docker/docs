@@ -21,6 +21,15 @@ The order of precedence (highest to lowest) is as follows:
 5. Set in a container image in the [ENV directive](/reference/dockerfile.md#env).
    Having any `ARG` or `ENV` setting in a `Dockerfile` evaluates only if there is no Docker Compose entry for `environment`, `env_file` or `run --env`.
 
+> [!NOTE] 
+> 
+> When `--env-file` is not set, Compose may load up to two `.env` files.
+> It first loads one from the project directory (determined by `--project-directory`
+> if set, otherwise the directory of the first `-f`/`--file` Compose file, otherwise
+> `PWD`). If that file sets `COMPOSE_FILE` to a path in a different directory, Compose
+> loads a second `.env` file from that directory with lower precedence. For more
+> information, see [local `.env` file versus project directory `.env` file](variable-interpolation.md#local-env-file-versus-project-directory-env-file).
+
 ## Simple example
 
 In the following example, a different value for the same environment variable in an `.env` file and with the `environment` attribute in the Compose file:

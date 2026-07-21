@@ -1,11 +1,25 @@
 ---
 title: Usage
 weight: 20
-description: Common patterns for working with sandboxes.
-keywords: docker sandboxes, sbx, usage, run, policy, secrets, branches, git, workspaces, ssh
+description: Basic sbx commands for creating, managing, and connecting to Docker Sandboxes.
+keywords: docker sandboxes, sbx, usage, run, create, stop, remove, ports, workspaces
 ---
 
-## Working with sandboxes
+Use this page as a command-oriented guide to day-to-day `sbx` operations. For
+scenario-based recommendations, see [Workflow patterns](workflows.md).
+
+## Sign in
+
+Sign in from a terminal:
+
+```console
+$ sbx login
+```
+
+For scripts or CI runners where a browser isn't available, see
+[CI and headless use](workflows.md#ci-and-headless-use).
+
+## Start, stop, and remove
 
 The basic workflow is [`run`](/reference/cli/sbx/run/) to start,
 [`ls`](/reference/cli/sbx/ls/) to check status,
@@ -19,33 +33,76 @@ $ sbx stop my-sandbox               # pause it
 $ sbx rm my-sandbox                 # delete it entirely
 ```
 
-To get a shell inside a running sandbox — useful for inspecting the environment,
-checking Docker containers, or manually installing something:
+If the sandbox has an active session — an open attach, SSH connection, or
+in-flight SFTP transfer — `sbx rm` refuses unless you pass `--force`:
 
 ```console
-$ sbx exec -it <sandbox-name> bash
+$ sbx rm --force my-sandbox
 ```
 
-If you need a clean slate, remove the sandbox and re-run:
+If you need a clean slate, remove the sandbox and run it again:
 
 ```console
+$ sbx stop my-sandbox
 $ sbx rm my-sandbox
 $ sbx run claude
 ```
 
-## Non-interactive login
+## Reconnect and name sandboxes
 
-For CI environments and scripts where a browser is not available, use a
-Docker Personal Access Token (PAT) with `--username` and `--password-stdin`:
+Sandboxes persist after the agent exits. Running the same workspace path again
+reconnects to the existing sandbox rather than creating another sandbox:
 
 ```console
-$ echo "$DOCKER_PAT" | sbx login --username <your-docker-id> --password-stdin
+$ sbx run claude ~/my-project  # creates sandbox
+$ sbx run claude ~/my-project  # reconnects to same sandbox
 ```
 
-`--password-stdin` reads the token from standard input to keep it out of
-your shell history. Generate a PAT from your
-[Docker account settings](https://app.docker.com/settings/personal-access-tokens)
-with at least **Read** scope.
+Use `--name` to give a sandbox an explicit identity:
+
+```console
+$ sbx run claude --name my-project
+```
+
+Once a named sandbox exists, use `--name` to re-attach to it from any working
+directory, with or without the agent positional:
+
+```console
+$ sbx run --name my-project        # re-attaches from anywhere
+$ sbx run claude --name my-project # same, with agent confirmed
+```
+
+To run multiple sandboxes against the same workspace, give each a distinct
+name:
+
+```console
+$ sbx run claude --name feature ~/my-project
+$ sbx run claude --name spike ~/my-project
+```
+
+## Create without attaching
+
+[`sbx run`](/reference/cli/sbx/run/) creates the sandbox and attaches you to the
+agent. To create a sandbox in the background without attaching:
+
+```console
+$ sbx create --name my-project claude .
+```
+
+Unlike `run`, `create` requires an explicit workspace path. Attach later with
+`sbx run --name`:
+
+```console
+$ sbx run --name my-project
+```
+
+## Run commands inside a sandbox
+
+To get a shell inside a running sandbox, use [`sbx exec`](/reference/cli/sbx/exec/):
+
+```console
+$ sbx exec -it <sandbox-name> bash
+```
 
 ## Interactive mode
 
@@ -71,42 +128,26 @@ to switch between the sandboxes panel and the network panel.
 From the network panel you can browse connection logs, allow or block specific
 hosts, and add custom network rules. Press `?` to see all keyboard shortcuts.
 
-## Git workflow
+## Git workspace modes
 
-When your workspace is a Git repository, you can choose one of two ways
-to share it with a sandbox. You make the choice when you create the
-sandbox:
+When your primary workspace is a Git repository, choose how the sandbox receives
+it when you create the sandbox:
 
-- **Direct mode (default)** — the agent has read-write access to your
-  working tree. Changes the agent makes appear on your host immediately.
-- **[Clone mode](#clone-mode) (`--clone`)** — the agent works on a private
-  Git clone inside the sandbox, with your host repository mounted
-  read-only. The sandbox exposes its clone as a Git remote on your host,
-  so you fetch the agent's commits the same way you'd fetch from any
-  other remote.
+- Direct mode is the default. The agent has read-write access to your working
+  tree, and changes appear on your host immediately.
+- [Clone mode](#clone-mode) uses `--clone`. The agent edits a separate Git clone
+  inside the sandbox. Its changes stay there until you fetch them or the agent
+  pushes them. Your host repository is also available at
+  `/run/sandbox/source`, but only with read access.
 
-For a comparison of approaches and step-by-step recipes, see
-[Workflow patterns](workflows.md#git-workflows). For the security model
-behind each mode, see
+For guidance on branch strategy, fetching work from a sandbox, and parallel
+agent workflows, see [Git workflows](workflows.md#git-workflows). For the
+security model behind each mode, see
 [Workspace isolation](security/isolation.md#workspace-isolation).
-
-### Direct mode (default)
-
-The agent edits your working tree directly. Stage, commit, and push as you
-normally would. If you run multiple agents on the same repository at the
-same time, they may step on each other's changes — use
-[clone mode](#clone-mode) to give each agent its own isolated workspace.
 
 ### Clone mode
 
-In clone mode, the sandbox becomes a Git remote on your host. The agent
-commits inside the sandbox; you pull its work back out by fetching from
-that remote.
-
-> [!NOTE]
-> Clone mode was introduced in `sbx` v0.31.0 and replaces the `--branch`
-> flag used in earlier versions. If your CLI doesn't recognize `--clone`,
-> update to the latest version.
+To create a clone-mode sandbox, pass `--clone` when you run or create it:
 
 ```console
 $ sbx run --clone claude
@@ -116,89 +157,22 @@ You can also create the sandbox in the background and attach later:
 
 ```console
 $ sbx create --clone --name my-sandbox claude .
-$ sbx run my-sandbox
+$ sbx run --name my-sandbox
 ```
 
-The clone follows whichever ref your host repository has checked out at
-create time. No new branch is created automatically.
+Clone mode has a few create-time constraints:
 
-> [!NOTE]
-> Clone mode is fixed at create time. To switch an existing sandbox to
-> clone mode, remove it and recreate it with `sbx create --clone`.
-
-The CLI copies the Git remotes from your host repository (`origin`,
-`upstream`, and so on) into the in-sandbox clone. The agent can push to
-your fork directly using the same remote names. Local-path remotes
-(`file://` URLs, filesystem paths) aren't copied, since they aren't
-reachable from inside the sandbox.
-
-#### Sandbox lifecycle and the Git remote
-
-The Git daemon that exposes the in-sandbox clone runs as part of the
-sandbox itself. It's only reachable while the sandbox is running:
-
-- `sbx stop` shuts down the daemon. `git fetch sandbox-<name>` fails until
-  the sandbox starts again.
-- Restarting the sandbox assigns a new ephemeral port to the daemon. The
-  CLI updates the `sandbox-<name>` remote URL in your host repository's
-  Git config automatically, so fetching continues to work without manual
-  reconfiguration.
-- `sbx rm` removes the sandbox, the daemon, the published port, and the
-  `sandbox-<name>` remote entry from your host repository.
-
-> [!WARNING]
-> Removing a clone-mode sandbox drops the in-sandbox clone along with it.
-> Any commits you haven't fetched (`git fetch sandbox-<name>`) or pushed
-> to an upstream remote are lost. `sbx rm` prints a warning before
-> deleting a clone-mode sandbox — review it before confirming.
-
-#### Restrictions
-
-Clone mode requires a Git repository as the primary workspace, and is
-rejected at create time in two cases:
-
-- `--clone` on a non-Git workspace. Omit `--clone` for non-Git workspaces.
-- `--clone` from inside a Git worktree (other than the main one). The
-  read-only bind mount can't resolve the worktree's `.git` pointer file.
-  Run `sbx create --clone` from the main repository checkout instead.
-
-You can also create a Git worktree yourself and run an agent inside it
-without `--clone`, but the sandbox won't have access to the `.git`
-directory in the parent repository, so the agent can't use Git at all.
-See [Host worktree](workflows.md#host-worktree) in Workflow patterns.
-
-## Reconnecting and naming
-
-Sandboxes persist after the agent exits. Running the same workspace path again
-reconnects to the existing sandbox rather than creating a new one:
-
-```console
-$ sbx run claude ~/my-project  # creates sandbox
-$ sbx run claude ~/my-project  # reconnects to same sandbox
-```
-
-Use `--name` to make this explicit and avoid ambiguity:
-
-```console
-$ sbx run claude --name my-project
-```
-
-## Creating without attaching
-
-[`sbx run`](/reference/cli/sbx/run/) creates the sandbox and attaches you to
-the agent. To create a sandbox in the background without attaching:
-
-```console
-$ sbx create claude .
-```
-
-Unlike `run`, `create` requires an explicit workspace path. It uses direct
-mode by default, or pass `--clone` for [clone mode](#clone-mode). Attach
-later with `sbx run`:
-
-```console
-$ sbx run claude-my-project
-```
+- Clone mode is fixed at create time. To switch an existing sandbox to clone
+  mode, remove it and recreate it with `sbx create --clone`.
+- The clone follows whichever ref your host repository has checked out at create
+  time. No branch is created automatically.
+- The primary workspace must be a Git repository. Omit `--clone` for non-Git
+  workspaces.
+- Clone mode is rejected from inside a Git worktree other than the main one. The
+  read-only bind mount can't resolve the worktree's `.git` pointer file. Run
+  `sbx create --clone` from the main repository checkout instead.
+- Removing a clone-mode sandbox drops the in-sandbox clone. Fetch or push any
+  commits you want to keep before you remove it.
 
 ## Multiple workspaces
 
@@ -239,27 +213,12 @@ $ sbx cp ./src/ my-sandbox:/home/user/src
 One side of the copy must use `SANDBOX:PATH`. Copying directly between two
 sandboxes isn't supported.
 
-## Installing dependencies and using Docker
-
-Ask the agent to install what's needed — it has sudo access, and installed
-packages persist for the sandbox's lifetime. For teams or repeated setups,
-see [Customize](customize/) for reusable templates and declarative kits.
-
-Agents can also build Docker images, run containers, and use
-[Compose](/manuals/compose/_index.md). Everything runs inside the sandbox's private Docker
-daemon, so containers started by the agent never appear in your host's
-`docker ps`. When you remove the sandbox, all images, containers, and volumes
-inside it are deleted with it.
-
-## Accessing services in the sandbox
+## Publish ports
 
 Sandboxes are [network-isolated](security/isolation.md) — your browser or local
 tools can't reach a server running inside one by default. Use
 [`sbx ports`](/reference/cli/sbx/ports/) to forward traffic from your host into
 a running sandbox.
-
-The common case: an agent has started a dev server or API, and you want to open
-it in your browser or run tests against it.
 
 ```console
 $ sbx ports my-sandbox --publish 8080:3000   # host 8080 → sandbox port 3000
@@ -273,8 +232,8 @@ $ sbx ports my-sandbox --publish 3000        # ephemeral host port
 $ sbx ports my-sandbox                       # check which port was assigned
 ```
 
-`sbx ls` shows active port mappings alongside each sandbox, and `sbx ports`
-lists them in detail:
+`sbx ls` shows active port mappings alongside each sandbox. `sbx ports` lists
+them in detail.
 
 ```console
 $ sbx ls
@@ -288,66 +247,10 @@ To stop forwarding a port:
 $ sbx ports my-sandbox --unpublish 8080:3000
 ```
 
-A few things to keep in mind:
-
-- **Services must listen on all interfaces** — a service listening only on
-  `127.0.0.1` inside the sandbox won't be reachable through a published port.
-  Bind to `0.0.0.0` for IPv4, or `[::]` to accept both IPv4 and IPv6. Most dev
-  servers default to `127.0.0.1`, so you'll usually need to pass a flag like
-  `--host 0.0.0.0` or `--host '[::]'` when starting them.
-- **`localhost` on the host can resolve to IPv6** — by default, `--publish`
-  listens on both `127.0.0.1` and `::1`. Your browser or client may pick IPv6
-  when resolving `localhost`. If the sandboxed service only listens on IPv4,
-  the IPv6 connection fails with "connection reset by peer" — even though
-  `http://127.0.0.1:<port>/` works. To fix it, bind the sandboxed service to
-  `[::]` so it accepts both families, or restrict the published port to one
-  family with `--publish 8080:3000/tcp4` (IPv4) or `/tcp6` (IPv6).
-- **Not persistent** — published ports are lost when the sandbox stops or the
-  daemon restarts. Re-publish after restarting.
-- **No create-time flag** — unlike `docker run -p`, there's no `--publish`
-  option on `sbx run` or `sbx create`. Ports can only be published after the
-  sandbox is running.
-- **Unpublish requires the host port** — `--unpublish 3000` is rejected; you
-  must use `--unpublish 8080:3000`. Run `sbx ports my-sandbox` first if you
-  used an ephemeral port and need to find the assigned host port.
-
-## Accessing host services from a sandbox
-
-Services running on your host are reachable from inside a sandbox using the
-hostname `host.docker.internal`.
-Use this instead of `127.0.0.1` or your machine's local network IP address,
-which are not reachable from inside the sandbox.
-
-The sandbox proxy translates `host.docker.internal` to `localhost` before
-forwarding the request, so you must add the `localhost` address with the
-specific port to your network policy allowlist:
-
-```console
-$ sbx policy allow network localhost:11434
-```
-
-Then use `host.docker.internal` in any configuration or request that points at
-the host service. For example, to verify connectivity from a sandbox shell:
-
-```console
-$ curl http://host.docker.internal:11434
-```
-
-## Rolling out to a team
-
-When rolling sandboxes out across a team, two features handle different
-needs:
-
-- [Custom templates and kits](customize/) let you package reusable agent
-  configurations, MCP servers, base images, and per-project policies. Every
-  developer pulls them down with their workspace.
-- [Organization governance](governance/org.md) lets admins define
-  network and filesystem rules in the Docker Admin Console. The rules apply
-  across every developer's sandboxes and take precedence over local policy.
-  Available on a separate paid subscription.
-
-Customization gives developers shared starting points. Governance gives
-admins centralized enforcement.
+You can't publish ports at create time — there's no `--publish` flag on
+`sbx run` or `sbx create`, so publish them once the sandbox is running. For
+dev server and host-service recipes, see
+[Local services](workflows.md#local-services).
 
 ## What persists
 
@@ -355,4 +258,4 @@ While a sandbox exists, installed packages, Docker images, configuration
 changes, and command history all persist across stops and restarts. When you
 remove a sandbox, everything inside is deleted — only your workspace files
 remain on your host. To preserve a configured environment, create a
-[custom template](customize/templates.md).
+[custom template](customize/templates.md) or use a [kit](customize/kits.md).

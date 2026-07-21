@@ -38,10 +38,6 @@ Cursor supports two authentication methods: an API key or OAuth.
 $ sbx secret set -g cursor
 ```
 
-Alternatively, export the `CURSOR_API_KEY` environment variable in your shell
-before running the sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
-
 **OAuth**: If no API key is set, Cursor prompts you to sign in interactively
 on first run. The proxy intercepts the token exchange with
 `api2.cursor.sh/auth/poll`, so credentials are managed by the host and aren't
@@ -65,12 +61,15 @@ Without extra args, the sandbox runs:
 cursor-agent --yolo
 ```
 
-Args after `--` replace these defaults rather than being appended. To keep
-`--yolo`, include it yourself:
+Arguments after `--` are added after the default flags when the first one is
+itself a flag (begins with `-`), so `--yolo` is preserved:
 
 ```console
-$ sbx run cursor -- --yolo -p "refactor this"
+$ sbx run cursor -- -p "refactor this"   # runs cursor-agent --yolo -p "refactor this"
 ```
+
+When the first argument is a bare word — a subcommand or prompt — it replaces
+the defaults instead.
 
 ## Base image
 

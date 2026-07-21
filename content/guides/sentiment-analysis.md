@@ -6,11 +6,10 @@ description: Learn how to build and run a sentiment analysis application using P
 summary: |
   This guide demonstrates how to containerize sentiment analysis models using
   Docker.
-tags: [ai]
-languages: [python]
 aliases:
   - /guides/use-case/nlp/sentiment-analysis/
 params:
+  tags: [ai]
   time: 20 minutes
 ---
 

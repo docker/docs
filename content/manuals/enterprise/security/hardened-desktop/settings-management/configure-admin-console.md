@@ -1,8 +1,8 @@
 ---
-title: Configure Settings Management with the Admin Console
-linkTitle: Use the Admin Console
-description: Configure and enforce Docker Desktop settings across your organization using the Docker Admin Console
-keywords: admin console, settings management, policy configuration, enterprise controls, docker desktop
+title: Configure Settings Management in Docker Home
+linkTitle: Use Docker Home
+description: Configure and enforce Docker Desktop settings across your organization in Docker Home
+keywords: docker home, settings management, policy configuration, enterprise controls, docker desktop
 weight: 20
 aliases:
   - /security/for-admins/hardened-desktop/settings-management/configure-admin-console/
@@ -10,7 +10,7 @@ aliases:
 
 {{< summary-bar feature_name="Admin Console" >}}
 
-Use the Docker Admin Console to create and manage settings policies for Docker Desktop across your organization. Settings policies let you standardize configurations, enforce security requirements, and maintain consistent Docker Desktop environments.
+Use Docker Home to create and manage settings policies for Docker Desktop across your organization. Settings policies let you standardize configurations, enforce security requirements, and maintain consistent Docker Desktop environments.
 
 ## Prerequisites
 
@@ -31,14 +31,14 @@ To create a new settings policy:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select
    your organization.
-1. Select **Admin Console**, then **Desktop Settings Management**.
+1. Select **Docker Desktop**, then **Settings Management**.
 1. Select **Create a settings policy**.
 1. Provide a name and optional description.
 
    > [!TIP]
    >
    > You can upload an existing `admin-settings.json` file to pre-fill the form.
-   > Admin Console policies override local `admin-settings.json` files.
+   > Docker Home policies override local `admin-settings.json` files.
 
 1. Choose who the policy applies to:
    - All users
@@ -50,7 +50,7 @@ To create a new settings policy:
 
 1. Configure each setting using a state:
 
-     | Admin Console state | Description                        | `admin-settings.json` equivalent   |
+     | Docker Home state | Description                        | `admin-settings.json` equivalent   |
      | :------------------ | :--------------------------------- |:---------------------------------- |
      | **User-defined**    | Users can change the setting       | Omit the setting                   |
      | **Always enabled**  | Setting is on and locked           | `"value": true`, `"locked": true`  |
@@ -96,7 +96,7 @@ After you apply policies:
 
 ## Manage existing policies
 
-From the **Desktop Settings Management** page in the Admin Console, use the **Actions** menu to:
+From the **Desktop Settings Management** page in Docker Home, use the **Actions** menu to:
 
 - Edit or delete an existing settings policy
 - Export a settings policy as an `admin-settings.json` file

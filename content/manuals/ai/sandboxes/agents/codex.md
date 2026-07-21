@@ -52,9 +52,6 @@ so browser-based authentication works without any extra setup.
 $ sbx secret set -g openai
 ```
 
-Alternatively, export the `OPENAI_API_KEY` environment variable in your shell
-before running the sandbox.
-
 See [Credentials](../security/credentials.md) for more details.
 
 ## Configuration
@@ -73,8 +70,9 @@ Without extra args, the sandbox runs:
 codex --dangerously-bypass-approvals-and-sandbox
 ```
 
-Args after `--` replace these defaults rather than being appended. To keep
-the flag, include it yourself:
+Arguments after `--` are added after the default flags when the first one is
+itself a flag (begins with `-`). A bare word — such as a prompt — replaces the
+defaults instead, so lead with the flag to keep bypass mode:
 
 ```console
 $ sbx run codex -- --dangerously-bypass-approvals-and-sandbox "fix the build"

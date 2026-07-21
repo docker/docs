@@ -11,9 +11,9 @@ sandbox gets its own Docker daemon, filesystem, and network — the agent can
 build containers, install packages, and modify files without touching your host
 system.
 
-This page walks through a typical first session: installing the CLI,
-authenticating your agent, running a sandbox, isolating the agent's workspace,
-and cleaning up.
+This page walks through your first session: install the CLI, run an agent in a
+sandbox, see how the sandbox isolates it, control what it can reach on the
+network, and clean up.
 
 ## Prerequisites
 
@@ -38,14 +38,14 @@ and cleaning up.
 {{< tab name="Linux (Ubuntu)" >}}
 
 - Ubuntu 24.04 or later
-- 64-bit Intel or AMD (x86_64)
+- 64-bit Intel or AMD (x86_64) or 64-bit Arm (aarch64)
 - KVM hardware virtualization supported and enabled by the CPU. If you're
   running inside a VM, nested virtualization must be turned on. Verify that KVM
   is available:
   ```console
   $ lsmod | grep kvm
   ```
-  A working setup shows `kvm_intel` or `kvm_amd` in the output. If the output
+  A working setup shows `kvm_intel`, `kvm_amd`, `kvm_arm64`, or `kvm` in the output. If the output
   is empty, run `kvm-ok` for diagnostics. If KVM is unavailable, `sbx` will
   not start.
 - Your user in the `kvm` group:
@@ -69,6 +69,7 @@ Docker Desktop is not required to use `sbx`.
 {{< tab name="macOS" >}}
 
 ```console
+$ brew trust docker/tap
 $ brew install docker/tap/sbx
 $ sbx login
 ```
@@ -123,25 +124,14 @@ option.
 
 ## Authenticate your agent
 
-Agents need credentials for their model provider. How you provide them depends
-on the agent.
-
 For Claude Code with a Claude subscription (Max, Team, or Enterprise), no
 upfront setup is needed — use the `/login` command inside the sandbox to sign
-in with OAuth. The session token stays on your host and is injected by a
-proxy, not stored inside the sandbox.
+in with OAuth. The session token stays on your host and is never stored inside
+the sandbox.
 
-For agents that use API keys (or if you prefer API key authentication for
-Claude Code), store the key before starting a sandbox:
-
-```console
-$ sbx secret set -g anthropic
-```
-
-This prompts for the secret value and stores it in your OS keychain. A proxy on
-your host injects the key into outbound API requests so it's never exposed
-inside the sandbox. See [Credentials](security/credentials.md) for details on
-scoping, supported services, and alternative methods.
+If you prefer to authenticate with an API key, see
+[Credentials](security/credentials.md) for how to store one with
+`sbx secret set`.
 
 To give the agent access to GitHub for creating pull requests or interacting
 with repositories:
@@ -166,7 +156,15 @@ full list.
 The first run takes a little longer while the agent image is pulled. Subsequent
 runs reuse the cached image and start in seconds.
 
-You can check what's running at any time:
+This attaches you to the agent running inside the sandbox. Give it a real
+task — ask it to add a feature, install a dependency, or build and run your
+project. The agent has a full Linux environment with its own Docker daemon, so
+it can install packages, build images, and start containers on its own while it
+works.
+
+## See what the agent can touch
+
+From another terminal, list your sandboxes:
 
 ```console
 $ sbx ls
@@ -174,61 +172,32 @@ SANDBOX       AGENT    STATUS    PORTS   WORKSPACE
 my-sandbox    claude   running           ~/my-project
 ```
 
-You can also run `sbx` with no arguments to open an interactive dashboard.
-The dashboard shows your sandboxes with live status, lets you attach to
-agents, open shells, and manage network rules from one place. See
-[Interactive mode](usage.md#interactive-mode) for details.
+Each row shows a sandbox's name, the agent running in it, its status, any
+[published ports](usage.md#publish-ports), and its
+workspace — the host directory shared into the sandbox. That workspace is the
+one part of your machine the agent can see.
 
-![The interactive dashboard showing sandbox status, resource usage, and network governance controls.](images/sbx-dashboard.png)
+By default, the workspace is shared read-write, so the agent and your host see
+the same files. Edits the agent makes to your project appear in your working
+tree as it writes them, and you review them as an ordinary Git diff before
+committing.
 
-## Use clone mode
+Everything else runs inside the microVM, isolated from your host:
 
-By default, the agent edits your working tree directly. To give the agent an
-isolated copy of your repository, use `--clone`. Because `--clone` is a
-create-time flag, remove the existing sandbox first:
+- The agent has its own filesystem, Docker daemon, and network.
+- Packages it installs, images it pulls, and containers it starts stay inside
+  the sandbox. Your host system is untouched, and removing the sandbox discards
+  them.
 
-```console
-$ sbx rm my-sandbox
-$ sbx run --clone --name my-sandbox claude
-```
+If you'd rather the agent not touch your working tree at all — for example,
+when running several agents on one repository — use
+[clone mode](usage.md#clone-mode), which gives it a private clone instead.
 
-In clone mode, the sandbox keeps a private Git clone inside the microVM and
-mounts your host repository read-only. The sandbox exposes its clone as a
-`sandbox-<sandbox-name>` remote on your host, so you review the agent's
-commits the same way you'd fetch from any other remote:
+## Control what the agent can reach
 
-```console
-$ git fetch sandbox-my-sandbox
-$ git log sandbox-my-sandbox/main
-$ git diff main..sandbox-my-sandbox/main
-```
-
-When you're ready to create a pull request:
-
-```console
-$ git checkout -b my-feature sandbox-my-sandbox/main
-$ git push -u origin my-feature
-$ gh pr create
-```
-
-For Claude Code, pair `--clone` with the
-[agents view](agents/claude-code.md#agents-view) to dispatch tasks to
-subagents that each work on their own branch inside the same sandbox:
-
-```console
-$ sbx run --clone --name my-sandbox claude -- agents
-```
-
-Clone mode is especially useful when running multiple agents on the same
-repository in parallel — each works in its own isolated clone without
-touching your host working tree. See [Clone mode](usage.md#clone-mode) for
-the full workflow, including how to have the agent commit to a dedicated
-branch.
-
-## Manage network access
-
-Your network policy controls what the sandbox can reach. If the agent fails to
-connect to an API or service, it's likely blocked by the policy.
+Isolation isn't only about the filesystem. You also control what the sandbox
+can reach on the network. You chose a default policy when you signed in, and
+you can inspect or adjust it at any time.
 
 Check which rules are in effect:
 
@@ -242,14 +211,16 @@ To allow a specific host:
 $ sbx policy allow network registry.npmjs.org
 ```
 
-With **Locked Down**, even your model provider API is blocked unless you
-explicitly allow it. With **Balanced**, common development services are
-permitted by default. See [Policies](governance/local.md) for the full rule
-set and how to customize it.
+With **Balanced**, common development services are allowed by default. With
+**Locked Down**, everything is blocked until you allow it — including your
+model provider's API. If the agent can't reach a service it needs, the network
+policy is the first place to look. See [Policies](governance/local.md) for the
+full rule set and how to customize it.
 
 ## Clean up
 
-Sandboxes persist after the agent exits. To stop a sandbox without deleting it:
+Sandboxes persist after the agent exits, so you can stop one and pick up where
+you left off later:
 
 ```console
 $ sbx stop my-sandbox
@@ -267,14 +238,26 @@ Removing a sandbox deletes everything inside it — installed packages, Docker
 images, and the in-sandbox Git clone if you used clone mode. Files in your
 host working tree are unaffected.
 
-## Next steps
+## What's next
 
-- [Usage guide](usage.md) — sandbox management, reconnecting, multiple
-  workspaces, port forwarding, and more
-- [Agents](agents/) — supported agents and configuration
-- [Customize](customize/) — build reusable templates or declare capabilities
-  with kits
-- [Credentials](security/credentials.md) — credential storage and management
-- [Workspace isolation](security/isolation.md#workspace-isolation) — what
-  the agent can affect on your host, and how to review changes
-- [Governance](governance/) — control outbound access
+You've run an agent, seen how the sandbox isolates it, and controlled its
+network access. A few directions from here.
+
+Run `sbx` with no arguments to open the interactive dashboard: a live view of
+every sandbox where you can attach to agents, open shells, and manage network
+rules from one place.
+
+![The interactive dashboard showing sandbox status, resource usage, and network governance controls.](images/sbx-dashboard.png)
+
+Then explore:
+
+- [Usage guide](usage.md) — basic commands, reconnecting, workspaces, and port
+  publishing.
+- [Workflow patterns](workflows.md) — Git strategies, local services, CI, and
+  authenticated tools.
+- [Customize with kits](customize/) — package an agent, its tools, and its
+  network rules into a reusable definition you launch with a single flag.
+- [Agents](agents/) — the full list of supported agents and how to configure
+  each one.
+- [Governance](governance/) — centrally manage network and filesystem policies
+  across a team.

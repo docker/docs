@@ -4,7 +4,7 @@ linkTitle: FAQs
 description: Frequently asked questions related to billing
 keywords: billing, renewal, payments, faq
 tags: [FAQ]
-weight: 60
+weight: 80
 ---
 
 ### What happens if my subscription payment fails?

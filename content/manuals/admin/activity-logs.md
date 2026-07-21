@@ -32,7 +32,7 @@ To view activity logs in Docker Home:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your
 organization.
-1. Select **Admin Console**, then **Activity logs**.
+1. Select **Activity**.
 
 {{< /tab >}}
 {{< tab name="API">}}

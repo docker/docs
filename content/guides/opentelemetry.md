@@ -4,9 +4,8 @@ description: &desc Learn how to instrument a JavaScript application using OpenTe
 keywords: OpenTelemetry, observability, tracing
 linktitle: Instrumenting JS Apps with OpenTelemetry
 summary: *desc
-tags: [app-dev, observability]
-languages: [js]
 params:
+  tags: [cicd]
   time: 10 minutes
 ---
 

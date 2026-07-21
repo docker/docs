@@ -2,7 +2,7 @@
 title: Single sign-on overview
 linkTitle: Single sign-on
 description: Learn how single sign-on works, how to set it up, and the required SSO attributes.
-keywords: Single Sign-On, SSO, sign-in, admin, docker hub, admin console, security, identity provider, SSO configuration, enterprise login, Docker Business, user authentication
+keywords: Single Sign-On, SSO, sign-in, admin, docker hub, docker home, security, identity provider, SSO configuration, enterprise login, Docker Business, user authentication
 aliases:
   - /single-sign-on/
   - /admin/company/settings/sso/
@@ -48,8 +48,8 @@ assigned to an organization, and added to a team.
 
 > [!IMPORTANT]
 >
-> Docker plans to deprecate CLI password-based sign-in in future releases.
-> Using a PAT ensures continued CLI access. For more information, see the
+> When SSO is enforced, CLI password-based sign-in is no longer supported.
+> Use a personal access token (PAT) for CLI access. For more information, see the
 > [security announcement](/manuals/security/security-announcements.md#deprecation-of-password-logins-on-cli-when-sso-enforced).
 
 ## Next steps

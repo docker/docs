@@ -21,7 +21,7 @@ The backend acts as:
   - On Linux, the `qemu` process performs this function.
 - File server: Handles file access from containers to the host filesystem.
   - When using gRPC FUSE, the backend performs the file sharing.
-  - When using `virtiofs`, `osxfs`, or `krun`, file access is handled by those respective daemons rather than the backend process.
+  - When using `virtiofs`, or `krun`, file access is handled by those respective daemons rather than the backend process.
 - Control plane: Manages Docker API calls, port forwarding, and proxy configuration.
 
 The following table summarizes typical setups in more detail:
@@ -32,7 +32,6 @@ The following table summarizes typical setups in more detail:
 | Windows (WSL 2) | WSL 2                                 | `com.docker.backend.exe` | WSL 2 kernel (no visibility from host) | Recommended only when WSL 2 integration is needed          |
 | Mac             | Virtualization framework + gRPC FUSE  | `com.docker.backend`     | `com.docker.backend`                   | Recommended for performance and visibility                 |
 | Mac             | Virtualization framework + `virtiofs` | `com.docker.backend`     | Apple's Virtualization framework       | Higher performance but no file access visibility from host |
-| Mac             | Virtualization framework + `osxfs`    | `com.docker.backend`     | `osxfs`                                | Legacy setup, not recommended                              |
 | Mac             | DockerVMM + `virtiofs`                | `com.docker.backend`     | `krun`                                 | Currently in Beta                                          |
 | Linux           | Native Linux VM                       | `qemu`                   | `virtiofsd`                            | No `com.docker.backend` process on Linux                   |
 
@@ -66,13 +65,9 @@ Host firewalls can permit or deny inbound connections by filtering on `com.docke
 
 ## Using Docker Desktop with a proxy
 
-Docker Desktop can use your system’s default proxy settings or custom settings that you configure with [Docker Desktop's proxy setting](/manuals/desktop/settings-and-maintenance/settings.md#proxies). All proxy traffic passes through `com.docker.backend.exe`.
+Docker Desktop can use your system’s default proxy settings or custom settings that you configure with [Docker Desktop’s proxy setting](/manuals/desktop/settings-and-maintenance/settings.md#proxies).
 
-When a proxy is enabled:
-
-- The backend process forwards the network requests, for example `docker pull`, through an internal proxy at `http.docker.internal:3128`.
-- The internal proxy then connects either directly to the internet or through your upstream proxy, depending on your configuration and adding authentication if necessary.
-- Docker Desktop then downloads the requested images or data through the proxy as usual.
+Docker Desktop routes traffic through two separate proxies. The Containers proxy governs all `docker image pull` operations, as well as running container traffic when air-gapped container enforcement is enabled. The Docker Desktop proxy governs host-level traffic - the Desktop application, Docker CLI, and extensions — and is a fallback for image pulls only when the Containers proxy is not explicitly configured.
 
 Note that:
 

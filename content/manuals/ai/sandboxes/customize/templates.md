@@ -29,7 +29,7 @@ ask the agent to install what's needed.
 > create new agent runtimes. The agent that launches inside the sandbox is
 > determined by the base image variant you extend and the agent you specify
 > in the `sbx run` command, not by binaries installed in the template. To
-> define a new agent from scratch, see [Kits](kits.md#defining-an-agent).
+> define a new agent from scratch, see [Kits](kits.md#define-an-agent).
 
 ### Base images
 

@@ -8,9 +8,8 @@ summary: |
   You'll scaffold the project with uv, create a production-ready Dockerfile
   using a Docker Hardened Image, then add a development stage and Compose Watch
   for fast iteration.
-languages: [python]
-tags: [dhi]
 params:
+  tags: [security]
   time: 25 minutes
 ---
 

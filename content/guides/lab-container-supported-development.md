@@ -13,13 +13,6 @@ keywords: Docker, Compose, local development, PostgreSQL, pgAdmin, containers, l
 params:
   tags: [labs]
   time: 30 minutes
-  resource_links:
-    - title: Docker Compose docs
-      url: /compose/
-    - title: Bind mounts
-      url: /engine/storage/bind-mounts/
-    - title: Labspace repository
-      url: https://github.com/dockersamples/labspace-container-supported-development
 ---
 
 Use containers to run the services your app depends on — databases, caches,

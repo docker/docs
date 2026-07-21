@@ -1,5 +1,6 @@
 ---
 title: Change your billing cycle
+linkTitle: Change cycle
 weight: 50
 description: Learn to change your billing cycle for your Docker subscription
 keywords: billing, cycle, payments, subscription
@@ -15,7 +16,7 @@ However, switching from a yearly to a monthly cycle isn't supported.
 When you change your billing cycle:
 
 - Your next billing date reflects the new cycle. To find your next billing date,
-  see [View renewal date](history.md#view-renewal-date).
+  see [View renewal date](history.md#view-renewal-date). All billing dates and renewal periods are calculated in UTC.
 - Your subscription's start date resets. For example, if the monthly
   subscription started on March 1 and ended on April 1, switching the billing
   duration on March 15, 2024, resets the new start date to March 15, 2024, with

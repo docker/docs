@@ -120,6 +120,23 @@ See [Configuration options](configuration.md) for details on context size and ot
 > [Docker Compose](/manuals/ai/compose/models-and-compose.md) support Docker
 > Model Runner.
 
+## Security and isolation
+
+### Execution environment
+
+Docker Model Runner isolates inference engines from your host:
+
+- On Linux, Docker Model Runner and its inference engines, such as Diffusers,
+  run inside a container, which provides the isolation boundary.
+- On macOS and Windows, the engines don't run inside a container, so Docker
+  Model Runner runs them in a sandboxed environment (seatbelt/sandbox-exec and Job Objects respectively)
+
+### Networking
+
+The Model Runner API is not authenticated. Any client that can reach it,
+including other containers on the same Docker network, can pull, load, and
+run models, and send inference requests.
+
 ## Known issues
 
 ### `docker model` is not recognised

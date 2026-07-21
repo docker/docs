@@ -49,8 +49,8 @@ params:
       icon: bug-ant
       link: /dhi/how-to/scan/
   grid_govern:
-    - title: Enforce Docker Hardened Image usage with policies
-      description: Learn how to use image policies with Docker Scout for Docker Hardened Images.
+    - title: Apply Docker Hardened Image policies to your images
+      description: Learn how to hold your own images to Docker Hardened Image security and compliance standards using the Docker Scout CLI.
       icon: shield-check
       link: /dhi/how-to/policies/
 ---

@@ -15,6 +15,14 @@ the full release history, including pre-releases and downloads, see the
 
 <!-- BEGIN GENERATED RELEASES -->
 
+## 0.0.5
+
+{{< release-date date="2026-06-29" >}}
+
+[GitHub release](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.5)
+
+Maintenance release with dependency updates.
+
 ## 0.0.4
 
 {{< release-date date="2026-05-25" >}}

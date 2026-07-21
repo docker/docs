@@ -54,7 +54,9 @@ Choose a default network policy:
 | Locked Down | All outbound traffic is blocked, including model provider APIs (for example, `api.anthropic.com`). You must explicitly allow everything you need. |
 
 The **Balanced** preset's baseline allowlist is a good starting point for most
-workflows. Run `sbx policy ls` to see exactly which rules it includes.
+workflows. Run `sbx policy ls` to see exactly which rules it includes. As of
+v0.35.0, the Balanced preset also allows VS Code domains, Azure Blob Storage
+(`*.blob.core.windows.net`), and `dhi.io` over HTTP.
 
 > [!NOTE]
 > If your organization manages sandbox policies centrally, organization rules
@@ -64,11 +66,11 @@ workflows. Run `sbx policy ls` to see exactly which rules it includes.
 ### Non-interactive environments
 
 In non-interactive environments such as CI pipelines or headless servers, the
-interactive prompt can't be displayed. Use `sbx policy set-default` to set the
+interactive prompt can't be displayed. Use `sbx policy init` to set the
 preset before running any other `sbx` commands:
 
 ```console
-$ sbx policy set-default balanced
+$ sbx policy init balanced
 ```
 
 Available values are `allow-all`, `balanced`, and `deny-all`.
@@ -111,8 +113,35 @@ To remove a sandbox-scoped rule, pass `--sandbox <name>`:
 $ sbx policy rm network --sandbox my-sandbox --resource api.example.com
 ```
 
-To inspect which rules are active and where they come from, use
-`sbx policy ls`. See [Monitoring](monitoring.md).
+To inspect which policies are active and where they come from, use
+`sbx policy ls`. Use `--source` to filter by origin (`local`, `org`, `kit`),
+`--decision` to filter by outcome (`allow`, `deny`), and `--wide` for
+rule-level detail including rule IDs. To inspect a single policy or rule in
+full, use `sbx policy inspect`. See [Monitoring](monitoring.md).
+
+## Testing policy
+
+Before running a sandbox, you can check whether the current policy would allow
+a network request with `sbx policy check network`:
+
+```console
+$ sbx policy check network api.anthropic.com
+Allowed: api.anthropic.com
+
+$ sbx policy check network blocked.example.com
+Denied: blocked.example.com
+```
+
+The target can be a hostname, a `host:port` pair, an IP address, or a URL.
+Bare hostnames and IP addresses are evaluated against port 443. This is useful
+for verifying custom rules or checking what the Locked Down preset blocks
+before you start an agent.
+
+To check policy in the context of a specific sandbox:
+
+```console
+$ sbx policy check network --sandbox my-sandbox api.example.com
+```
 
 ### Resetting
 
@@ -138,22 +167,23 @@ $ sbx policy reset --force
 
 If rules you add with `sbx policy allow` or `sbx policy deny` don't change
 sandbox behavior, your organization likely has governance enabled. Run `sbx
-policy ls` to check: if the output starts with a `Governance: managed by <org>`
-header, org governance is active. When it's active, the organization policy
-replaces local policy, so your rules have no effect. They're hidden from `sbx
-policy ls` by default; run `sbx policy ls --include-inactive` to see them with
-an `inactive` status.
+policy ls` to check: if the output starts with a `Policy rules` header listing a
+`Governance  Managed by <org>` line, org governance is active. When it's active,
+the organization policy replaces local policy, so your rules have no effect.
+They're hidden from `sbx policy ls` by default; run `sbx policy ls
+--include-inactive` to see them with an `inactive` status in the `STATUS`
+column.
 
 Organization policy can't be supplemented from your machine. To change what
-your sandboxes can access, ask your admin to update the organization policy in
-the Admin Console.
+your sandboxes can access, ask your admin to update the organization policy.
 
 ### A domain is still blocked after adding an allow rule
 
 If a domain remains blocked after you add a local allow rule, your organization
 likely enforces governance, which makes local rules inactive. Run `sbx policy
 ls` to check whether org governance is active; if the output starts with a
-`Governance: managed by <org>` header, it is. Add `--include-inactive` to
-confirm your rule shows an `inactive` status. If so, the block can only be
-lifted by updating the org policy in the Admin Console or via the
+`Policy rules` header listing a `Governance  Managed by <org>` line, it is. Add
+`--include-inactive` to confirm your rule shows an `inactive` status. If so, the
+block can only be
+lifted by updating the org policy in Docker Home or via the
 [API](/reference/api/ai-governance/).

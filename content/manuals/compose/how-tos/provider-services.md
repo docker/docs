@@ -2,7 +2,7 @@
 title: Use provider services
 description: Learn how to use provider services in Docker Compose to integrate external capabilities into your applications
 keywords: compose, docker compose, provider, services, platform capabilities, integration, model runner, ai
-weight: 112
+weight: 130
 ---
 
 {{< summary-bar feature_name="Compose provider services" >}}

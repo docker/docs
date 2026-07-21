@@ -4,10 +4,10 @@ keywords: database, mysql
 title: Use containerized databases
 summary: |
   Learn how to effectively run and manage databases as containers.
-tags: [databases]
 aliases:
   - /guides/use-case/databases/
 params:
+  tags: [databases]
   time: 20 minutes
 ---
 

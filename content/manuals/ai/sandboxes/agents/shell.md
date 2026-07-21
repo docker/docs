@@ -23,21 +23,23 @@ $ sbx run shell -- -c "echo 'Hello from sandbox'"
 
 ## Default startup command
 
-Without extra args, the sandbox runs `bash -l`. Args after `--` replace `-l`
-rather than being appended. To preserve login-shell behavior, include `-l`
-yourself:
+Without extra args, the sandbox runs `bash -l`. When the first argument after
+`--` is a flag (begins with `-`), it's added after `-l`, so login-shell
+behavior is preserved:
 
 ```console
-$ sbx run shell -- -l -c "echo hi"
+$ sbx run shell -- -c "echo hi"   # runs bash -l -c "echo hi"
 ```
 
-Set your API keys as environment variables so the sandbox proxy can inject
-them into API requests automatically. Credentials are never stored inside
-the VM:
+When the first argument is a bare word, it replaces `-l` instead.
+
+Store credentials using [stored secrets](../security/credentials.md#stored-secrets)
+before running the sandbox. The proxy injects them into outbound API requests;
+credentials are never stored inside the VM:
 
 ```console
-$ export ANTHROPIC_API_KEY=sk-ant-xxxxx
-$ export OPENAI_API_KEY=sk-xxxxx
+$ sbx secret set -g anthropic
+$ sbx secret set -g openai
 ```
 
 Once inside the shell, you can install agents using their standard methods,

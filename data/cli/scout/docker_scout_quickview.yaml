@@ -115,6 +115,46 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: policy-bundle
+      value_type: stringArray
+      default_value: '[]'
+      description: OCI reference of a policy bundle to evaluate (repeatable)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: policy-config
+      value_type: string
+      description: |
+        Path or http(s) URL to a JSON file configuring policy enablement and inputs
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: policy-dir
+      value_type: stringArray
+      default_value: '[]'
+      description: Path to a directory of local .rego policy files (repeatable)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: policy-file
+      value_type: stringArray
+      default_value: '[]'
+      description: Path or http(s) URL to a .rego policy file (repeatable)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: ref
       value_type: string
       description: |-

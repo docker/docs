@@ -334,7 +334,7 @@
     x-transition:leave="transition ease-in duration-200"
     x-transition:leave-start="translate-x-0"
     x-transition:leave-end="translate-x-full"
-    class="fixed top-0 right-0 z-50 flex h-screen w-full flex-col overflow-hidden rounded-none bg-white shadow-2xl transition-all duration-200 md:w-[min(80ch,90vw)] dark:bg-gray-950"
+    class="fixed top-0 right-0 z-50 flex h-screen w-full flex-col overflow-hidden overscroll-contain rounded-none bg-white shadow-2xl transition-all duration-200 md:w-[min(80ch,90vw)] dark:bg-gray-950"
   >
     <!-- Header -->
     <div
@@ -385,21 +385,20 @@
     <!-- Messages container -->
     <div
       x-ref="messagesContainer"
-      class="flex-1 space-y-4 p-6"
+      class="flex min-h-0 flex-1 flex-col space-y-4 overflow-y-auto overscroll-contain p-6"
       style="scrollbar-width: none; &::-webkit-scrollbar: { display: none; }"
-      :class="{ 'overflow-y-auto': messages.length > 0 }"
     >
       <!-- Welcome message when empty -->
       <template x-if="messages.length === 0">
         <div
-          class="flex h-full flex-col items-center justify-start overflow-y-auto px-2 pt-4 pb-2 text-center"
+          class="my-auto flex flex-col items-center gap-2 px-2 pt-4 pb-2 text-center"
         >
-          <div class="mx-auto mb-2 w-4/5 max-w-xs" aria-hidden="true">
-            <div
-              class="motion-safe:animate-[robotFloat_5s_ease-in-out_infinite]"
-            >
-              {{ partialCached "icon" "images/gordon-robot.svg" "images/gordon-robot.svg" }}
-            </div>
+          <div
+            class="mx-auto mb-2"
+            style="width: clamp(80px, 35%, 160px)"
+            aria-hidden="true"
+          >
+            {{ partialCached "icon" "images/gordon-robot.svg" "images/gordon-robot.svg" }}
           </div>
           <div class="flex w-full flex-col items-center justify-start gap-3">
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
@@ -711,17 +710,6 @@
 
 <!-- Styles for Gordon chat -->
 <style>
-  /* Robot floating animation */
-  @keyframes robotFloat {
-    0%,
-    100% {
-      transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-      transform: translateY(-15px) rotate(1deg);
-    }
-  }
-
   /* Code block styles */
   #gordon-chat pre {
     background: #0d1117;

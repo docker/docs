@@ -2,7 +2,7 @@
 title: Desktop settings reporting
 linkTitle: Desktop settings reporting
 description: Track and monitor user compliance with Docker Desktop settings policies using the reporting dashboard
-keywords: settings management, compliance reporting, admin console, policy enforcement, docker desktop
+keywords: settings management, compliance reporting, docker home, policy enforcement, docker desktop
 weight: 30
 aliases:
  - /security/for-admins/hardened-desktop/settings-management/compliance-reporting/
@@ -28,7 +28,7 @@ To view compliance reporting:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select
 your organization.
-1. Select **Admin Console**, then **Desktop settings reporting**.
+1. Select **Docker Desktop**, then **Settings Reporting**.
 
 The reporting dashboard provides these tools:
 
@@ -118,4 +118,4 @@ Docker Desktop checks for policy updates:
 - Every 60 minutes while Docker Desktop is running
 - When users restart Docker Desktop
 
-Changes to policies in the Admin Console are available immediately, but users must restart Docker Desktop to apply them.
+Changes to policies in Docker Home are available immediately, but users must restart Docker Desktop to apply them.

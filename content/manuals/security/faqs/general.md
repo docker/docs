@@ -66,4 +66,4 @@ Security vetting for extensions isn't implemented. Extensions aren't covered as 
 
 ## Can I prevent users from pushing images to Docker Hub private repositories?
 
-No direct setting exists to disable private repositories. However, [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) lets administrators control which registries developers can access through Docker Desktop via the Admin Console.
+No direct setting exists to disable private repositories. However, [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) lets administrators control which registries developers can access through Docker Desktop via Docker Home.

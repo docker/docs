@@ -31,7 +31,7 @@ Registry Access Management works with any container registry, including:
 Before configuring Registry Access Management, you must:
 
 - [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md). Registry Access Management only takes effect when users are signed in to Docker Desktop with organization credentials.
-- Use [personal access tokens (PATs)](/manuals/security/access-tokens.md) for authentication (Organization access tokens aren't supported)
+- Use [Organization access tokens (OATs)](/manuals/security/access-tokens.md) for authentication
 - Have a Docker Business subscription
 
 ## Configure registry permissions
@@ -39,7 +39,7 @@ Before configuring Registry Access Management, you must:
 To configure registry permissions:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your organization from the top-left account drop-down.
-1. Select **Admin Console**, then **Registry access**.
+1. Select **Docker Desktop**, then **Registry Access**.
 1. Use the **toggle** to enable registry access. By default, Docker Hub is enabled
 in the registry list.
 1. To add additional registries, select **Add registry** and provide

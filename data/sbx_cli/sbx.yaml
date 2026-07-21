@@ -18,6 +18,7 @@ see_also:
     - sbx completion - Generate the autocompletion script for the specified shell
     - sbx cp - Copy files or directories between a sandbox and the host
     - sbx create - Create a sandbox for an agent
+    - sbx daemon - Manage sandboxd daemon
     - sbx diagnose - Diagnose common issues with your sbx installation
     - sbx exec - Execute a command inside a sandbox
     - sbx kit - (Experimental) Manage kit artifacts
@@ -30,6 +31,8 @@ see_also:
     - sbx rm - Remove one or more sandboxes
     - sbx run - Run an agent in a sandbox
     - sbx secret - Manage stored secrets
+    - sbx setup - (Experimental) Detect host configuration and prepare Docker Sandboxes
     - sbx stop - Stop one or more sandboxes without removing them
     - sbx template - Manage sandbox templates
+    - sbx tui - Open the interactive TUI dashboard
     - sbx version - Show Docker Sandboxes version information

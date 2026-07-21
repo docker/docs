@@ -3,7 +3,7 @@ title: Create your organization
 linkTitle: Create
 weight: 10
 description: Learn how to create an organization.
-keywords: docker organizations, organization, create organization, docker teams, docker admin console, organization management
+keywords: docker organizations, organization, create organization, docker teams, organization management
 aliases:
   - /docker-hub/orgs/
   - /admin/organization/orgs/
@@ -14,10 +14,8 @@ aliases:
 There are multiple ways to create an organization. You can either:
 
 - Create a new organization using the **Create Organization** option in the
-  Admin Console or Docker Hub
+  Docker Home
 - Convert an existing user account to an organization
-
-These procedures walk you through creating an organization from the Admin Console.
 
 ## Prerequisites
 
@@ -50,13 +48,12 @@ You've now created an organization.
 
 ## View an organization
 
-To view an organization in the Admin Console:
+To view an organization:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your
    organization.
-1. From the left-hand navigation menu, select **Admin Console**.
 
-The Admin Console contains many options that let you to
+Docker Home contains many options that let you to
 configure your organization.
 
 ## Merge organizations
@@ -74,7 +71,7 @@ the following steps:
 1. Based on the number of seats from the secondary organization, [purchase additional seats](../manage/manage-seats.md) for the primary organization account that you want to keep.
 1. Manually add users to the primary organization and remove existing users from the secondary organization.
 1. Manually move over your data, including all repositories.
-1. Once you're done moving all of your users and data, [downgrade](../../../subscription/change.md) the secondary account to a free subscription. Note that Docker does not offer refunds for downgrading organizations mid-billing cycle.
+1. Once you're done moving all of your users and data, [downgrade](../../../subscription/plans/docker.md#cancel-a-docker-plan) the secondary account to a free subscription. Note that Docker does not offer refunds for downgrading organizations mid-billing cycle.
 
 If your organization has a Docker Business subscription with a purchase
 order, contact Support or your Account Manager at Docker.

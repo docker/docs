@@ -1,7 +1,7 @@
 ---
 title: Core roles
 description: Control access to content, registry, and organization management with roles in your organization.
-keywords: members, teams, organization, company, roles, access, docker hub, admin console, security, permissions
+keywords: members, teams, organization, company, roles, access, docker hub, docker home, security, permissions
 aliases:
   - /enterprise/security/roles-and-permissions/
 ---
@@ -51,7 +51,7 @@ beyond their organization role:
 - Role permissions: Applied organization-wide (member or editor)
 - Team permissions: Additional permissions for specific repositories
 
-To extend access to private repositories, assign a custom role to organization members or configure team permissions.
+To extend access to private repositories, configure team permissions. Custom roles can grant organization-wide permissions to manage repositories (create, edit, delete) but do not grant pull access to private repositories — use team permissions for that.
 
 ### Organization management permissions
 

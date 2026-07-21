@@ -5,6 +5,7 @@ title: Connect Gemini to Grafana via MCP
 summary: |
   Learn how to leverage the Model Context Protocol (MCP) to interact with Grafana dashboards and datasources directly from your terminal.
 params:
+  tags: [ai]
   proficiencyLevel: Intermediate
   time: 15 minutes
 ---

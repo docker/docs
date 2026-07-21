@@ -15,7 +15,7 @@ Policies exist at two levels:
 
 - **Local**: configured per machine using the `sbx policy` CLI. Applies to
   sandboxes on that machine only.
-- **Organization**: configured in the Docker Admin Console or via the
+- **Organization**: configured in Docker Home or via the
   [Governance API](/reference/api/ai-governance/). Applies to sandboxes across
   the organization. An organization can have several policies, each applying
   either org-wide or to specific teams. See [Policy scope](#policy-scope).
@@ -79,6 +79,10 @@ Both IPv4 and IPv6 notation are supported: `10.0.0.0/8`, `192.168.1.0/24`,
 
 Filesystem rules use the actions `read` and `write`. Resources are host paths
 that sandboxes can mount as workspaces.
+
+A workspace mounted with write access must be allowed by both a `read` and a
+`write` rule; a read-only workspace needs only `read`. When default deny blocks
+a mount, the denial reason names whether read or write access was missing.
 
 `~` expands to the user's home directory on every platform, including Windows,
 where it resolves to `%USERPROFILE%`. A single `~/**` rule therefore matches

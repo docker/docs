@@ -5,8 +5,6 @@ title: Generic environment integration with CLI
 linkTitle: Generic (CLI)
 ---
 
-{{% include "scout-early-access.md" %}}
-
 You can create a generic environment integration by running the Docker Scout
 CLI client in your CI workflows. The CLI client is available as a binary on
 GitHub and as a container image on Docker Hub. Use the client to invoke the
@@ -100,7 +98,6 @@ stages:
         pool:
           vmImage: ubuntu-latest
         steps:
-          - task: Docker@2
           - script: docker run -it \
               -e DOCKER_SCOUT_HUB_USER=$DOCKER_SCOUT_HUB_USER \
               -e DOCKER_SCOUT_HUB_PASSWORD=$DOCKER_SCOUT_HUB_PASSWORD \

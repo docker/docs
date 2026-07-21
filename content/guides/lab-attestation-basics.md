@@ -12,15 +12,6 @@ keywords: Docker, supply chain, SBOM, provenance, SLSA, Cosign, VEX, attestation
 params:
   tags: [labs]
   time: 45 minutes
-  resource_links:
-    - title: Build attestations
-      url: /build/metadata/attestations/
-    - title: SBOM attestations
-      url: /build/metadata/attestations/sbom/
-    - title: Provenance attestations
-      url: /build/metadata/attestations/slsa-provenance/
-    - title: Labspace repository
-      url: https://github.com/dockersamples/labspace-attestation-basics
 ---
 
 Prove where your container images came from and that they haven't been

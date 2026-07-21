@@ -3,7 +3,7 @@ title: Macvlan network driver
 description:
   All about using Macvlan to make your containers appear like physical
   machines on the network
-keywords: network, macvlan, standalone
+keywords: network, macvlan, standalone, ipv6, slaac
 aliases:
   - /config/containers/macvlan/
   - /engine/userguide/networking/get-started-macvlan/
@@ -146,6 +146,30 @@ $ docker network create -d macvlan \
      -o parent=eth0.218 \
      -o macvlan_mode=bridge macvlan216
 ```
+
+### Use router-assigned IPv6 addresses
+
+The previous example assigns IPv6 addresses from a subnet managed by Docker's
+IPAM. On a `macvlan` network, you can instead let containers receive IPv6
+addresses directly from a router on the parent network, using stateless
+address autoconfiguration (SLAAC).
+
+When a `macvlan` network has no IPv6 subnet, Docker disables IPv6 on the
+container's interface, so it can't accept the router advertisements that SLAAC
+relies on. To re-enable IPv6 on the interface, set its `disable_ipv6` sysctl
+to `0` when you connect the container to the network:
+
+```console
+$ docker network connect \
+    --driver-opt="com.docker.network.endpoint.sysctls=net.ipv6.conf.IFNAME.disable_ipv6=0" \
+    my-macvlan-net my-container
+```
+
+Use the literal string `IFNAME` in the sysctl name. Docker replaces it with
+the name of the container's interface on this network. `disable_ipv6` is a
+per-interface sysctl, so it must be set with the `endpoint.sysctls`
+driver option rather than `docker run --sysctl`. For more details, see
+[`docker network connect`](/reference/cli/docker/network/connect/#sysctl).
 
 ## Usage examples
 

@@ -17,6 +17,7 @@ Artifactory
 armhf
 [Aa]uditability
 auditable
+[Aa]utoconfiguration
 autolock
 [Aa]llowlist(ing)?
 Azure
@@ -84,6 +85,7 @@ dockerignore
 Dockerize
 Dockerized
 Dockerizing
+Dependabot
 DuckDuckGo
 Entra
 EPERM
@@ -173,6 +175,7 @@ Netplan
 NFSv\d
 Nginx
 npm
+nvm
 Nutanix
 Nuxeo
 NVIDIA
@@ -201,6 +204,7 @@ Quickview
 rebalance
 reimplement
 reloader
+repinning
 Rego
 Rekor
 ROCm
@@ -421,12 +425,14 @@ bootloader
 Buildkite
 crypto
 Graylog
+Heartbleed
 Kubuntu
 Libnetwork
 lockfile
 Lubuntu
 multimodal
 multithreading
+Log4Shell
 NLP
 Nodemon
 oldoldstable
@@ -434,6 +440,8 @@ parallelizable
 PHPUnit
 pnpm
 PyTorch
+Shellshock
+Spring4Shell
 superset
 tokenization
 WebGL

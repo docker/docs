@@ -63,18 +63,24 @@ psexec -i -s msiexec /i "DockerDesktop.msi"
 ```
 The installation should complete successfully, but the `docker-users` group won't be populated.
 
-As a workaround, you can create a script that runs in the context of the user account. 
+As a workaround, you can create a script that runs in the context of the user account.
 
-The script would be responsible for creating the `docker-users` group and populating it with the correct user.
+The script would be responsible for ensuring the `docker-users` group exists and populating it with the correct user.
 
-Here's an example script that creates the `docker-users` group and adds the current user to it (requirements may vary depending on environment):
+> [!WARNING]
+>
+> Membership in `docker-users` grants access to the Docker daemon socket, which is equivalent to granting administrative privileges on the host. Only add users who require access to Windows containers or Hyper-V VM management. For Linux containers using the WSL 2 backend, this group membership is not required. See [Protect the Docker daemon socket](/manuals/engine/security/protect-access.md) for further information.
+
+Here's an example script that creates the `docker-users` group if needed and adds the current user to it (requirements may vary depending on environment):
 
 ```powershell
 $Group = "docker-users"
 $CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
 
-# Create the group
-New-LocalGroup -Name $Group
+# Create the group if it doesn't exist
+if (-not (Get-LocalGroup -Name $Group -ErrorAction SilentlyContinue)) {
+    New-LocalGroup -Name $Group
+}
 
 # Add the user to the group
 Add-LocalGroupMember -Group $Group -Member $CurrentUser

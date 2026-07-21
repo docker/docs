@@ -13,7 +13,7 @@ only one applies at a time:
 lets individual developers customize which domains their sandboxes can reach.
 See [Local policy](local.md).
 
-**Organization policy** is configured centrally in the Docker Admin Console or
+**Organization policy** is configured centrally in Docker Home or
 via the [Governance API](/reference/api/ai-governance/). Rules defined at the org level apply
 uniformly across every sandbox in the organization. When organization
 governance is active, it replaces local policy entirely: local `sbx policy`
@@ -37,7 +37,7 @@ personal account.
 - [Local policy](local.md): configure network and filesystem rules on your
   machine with the `sbx policy` CLI
 - [Organization policy](org.md): centrally manage sandbox policies across
-  your organization from the Admin Console
+  your organization
 - [Sign-in enforcement](sign-in-enforcement.md): require developers to sign in
   as organization members, enforced through endpoint management
 - [Monitoring](monitoring.md): inspect active rules and monitor sandbox

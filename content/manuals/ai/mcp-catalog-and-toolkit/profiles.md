@@ -41,6 +41,12 @@ database servers, while your "data-analysis" profile includes spreadsheet, API,
 and visualization servers. Create as many profiles as you need, each containing
 only the servers relevant to that context.
 
+> [!NOTE]
+>
+> OAuth credentials are an exception to profile isolation — they are shared
+> across all profiles. If you need to use different accounts for different
+> projects, revoke and re-authorize when switching profiles.
+
 You can connect different AI applications to different profiles. When you
 connect a client, you specify which profile it should use. This means Claude
 Desktop and VS Code can have access to different server collections if needed.

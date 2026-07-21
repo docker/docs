@@ -1,0 +1,14 @@
+{{ define "left" }}
+  {{- partial "sidebar/mainnav.html" . }}
+{{ end }}
+
+{{ define "main" }}
+  <div class="mx-auto flex w-full max-w-7xl justify-center gap-12">
+    <article class="prose dark:prose-invert min-w-0 max-w-[92ch]">
+      {{ partial "content-default.html" . }}
+    </article>
+    <div class="-mt-8 hidden w-72 flex-none lg:block">
+      {{ partial "aside.html" . }}
+    </div>
+  </div>
+{{ end }}

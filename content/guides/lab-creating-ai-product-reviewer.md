@@ -13,13 +13,8 @@ keywords: AI, Docker, Model Runner, sentiment analysis, embeddings, RAG, lab, la
 aliases:
   - /labs/docker-for-ai/creating-ai-product-reviewer/
 params:
-  tags: [ai, labs]
+  tags: [labs]
   time: 60 minutes
-  resource_links:
-    - title: Docker Model Runner docs
-      url: /ai/model-runner/
-    - title: Labspace repository
-      url: https://github.com/dockersamples/labspace-creating-ai-product-reviewer
 ---
 
 Build a complete feedback analysis pipeline for a fictional AI product called

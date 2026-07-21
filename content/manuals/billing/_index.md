@@ -3,7 +3,7 @@ title: Manage billing and payments
 linkTitle: Billing
 description: Find information about managing billing and payments for Docker subscriptions.
 keywords: billing, invoice, payment, subscription, Docker billing, update payment method, billing history, invoices, payment verification, tax exemption
-weight: 10
+weight: 30
 params:
   sidebar:
     group: Platform

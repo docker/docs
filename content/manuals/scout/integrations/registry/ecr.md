@@ -3,7 +3,19 @@ description: Integrate Amazon Elastic Container Registry with Docker Scout
 keywords: docker scout, ecr, integration, image analysis, security, cves
 title: Integrate Docker Scout with Amazon ECR
 linkTitle: Amazon ECR
+params:
+  sidebar:
+    badge:
+      color: gray
+      text: Deprecated
 ---
+
+> [!IMPORTANT]
+>
+> The Docker Scout Amazon ECR integration is deprecated and will be retired on September 1, 2026.
+> Migrate to [`docker scout watch`](/reference/cli/docker/scout/watch/) for
+> continuous analysis, or integrate Scout into your CI pipeline.
+> See [Migrate from the ECR integration](#migrate-from-the-ecr-integration).
 
 Integrating Docker Scout with Amazon Elastic Container Registry (ECR) lets you
 view image insights for images hosted in ECR repositories. After integrating
@@ -172,3 +184,108 @@ Scout Dashboard:
 
   The account ID and region are included in the registry hostname:
   `<aws_account_id>.dkr.ecr.<region>.amazonaws.com/<image>`
+
+## Migrate from the ECR integration
+
+Two migration paths are available.
+
+### Continuous polling
+
+Best for teams that want ongoing, registry-wide analysis without changing
+their build pipelines. `docker scout watch` runs as a long-running process
+that polls your ECR registry and pushes results to Docker Scout, replicating
+what the integration provided.
+
+1. Pick a host on which to run `docker scout watch`.
+
+   The host must have network access to your ECR registry and be able to
+   access the Scout API (`https://api.scout.docker.com`) over the internet.
+
+2. Ensure you are running the latest version of Scout.
+
+   ```console
+   $ docker scout version
+   ```
+
+   If necessary, [install the latest version of Scout](https://docs.docker.com/scout/install/).
+
+3. Authenticate Docker to your ECR registry using the AWS CLI.
+
+   ```console
+   $ aws ecr get-login-password --region <region> | \
+     docker login --username AWS --password-stdin \
+     <aws_account_id>.dkr.ecr.<region>.amazonaws.com
+   ```
+
+   The AWS identity used must have at least `ecr:GetAuthorizationToken` and
+   `ecr:BatchGetImage` permissions on the target registry.
+
+   > [!TIP]
+   >
+   > As a best practice, use a dedicated IAM role or user with read-only
+   > access to the registry.
+
+4. Set up your Scout credentials.
+
+   1. Generate an organization access token. For more details, see
+      [Create an organization access token](/enterprise/security/access-tokens/#create-an-organization-access-token).
+   2. Sign in to Docker using the organization access token.
+
+      ```console
+      $ docker login --username <your_organization_name>
+      ```
+
+      When prompted for a password, paste the organization access token.
+
+   3. Connect your local Docker environment to your organization's Docker Scout service.
+
+      ```console
+      $ docker scout enroll <your_organization_name>
+      ```
+
+5. Index existing images. You only need to do this once.
+
+   Run `docker scout watch` with the `--all-images` flag to backfill all
+   existing images in the registry.
+
+   ```console
+   $ docker scout watch \
+     --org <your-org> \
+     --registry <aws_account_id>.dkr.ecr.<region>.amazonaws.com \
+     --all-images
+   ```
+
+6. Confirm the images have been indexed by viewing them on the
+   [Scout Dashboard](https://scout.docker.com/).
+
+7. Continuously watch for new images.
+
+   Run `docker scout watch` to poll for new images going forward. Use
+   `--interval` (default 60 seconds) to control polling frequency, and
+   `--repository` and `--tag` to narrow scope.
+
+   ```console
+   $ docker scout watch \
+     --org <your-org> \
+     --registry <aws_account_id>.dkr.ecr.<region>.amazonaws.com \
+     --refresh-registry
+   ```
+
+   `docker scout watch` is a long-running process. Run it as a system
+   service, for example using `systemd` or `nohup`, to ensure it continues
+   running in the background.
+
+Reference: [`docker scout watch`](/reference/cli/docker/scout/watch/)
+
+### Build-time analysis in CI
+
+Best for teams that already have CI pipelines and want analysis scoped to
+images they actively build and push. No long-running process required.
+
+After `docker build` in your pipeline, run:
+
+- `docker scout quickview` or `docker scout cves` to analyze the image.
+- `docker scout compare --to-env <env>` for PR gating against policy.
+- `docker scout environment` to record the image to an environment.
+
+See [Integrating Docker Scout with CI](../_index.md#continuous-integration).

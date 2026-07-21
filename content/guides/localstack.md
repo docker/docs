@@ -6,9 +6,8 @@ linktitle: AWS development with LocalStack
 summary: |
   This guide explains how to use Docker to run LocalStack, a local AWS cloud
   stack emulator.
-tags: [cloud-services]
-languages: [js]
 params:
+  tags: [databases]
   time: 20 minutes
 ---
 
@@ -110,7 +109,7 @@ Now that you've familiarized yourself with LocalStack, it's time to see it in ac
 
 Now it’s time to connect your app to LocalStack. The `index.js` file, located in the backend/ directory, serves as the main entry point for the backend application.
 
-The code interacts with LocalStack’s S3 service, which is accessed via the endpoint defined by the `S3_ENDPOINT_URL` environment variable, typically set to `http://localhost:4556` for local development.
+The code interacts with LocalStack’s S3 service, which is accessed via the endpoint defined by the `S3_ENDPOINT_URL` environment variable, typically set to `http://localhost:4566` for local development.
 
 The `S3Client` from the AWS SDK is configured to use this LocalStack endpoint, along with test credentials (`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`) that are also sourced from environment variables. This setup lets the application to perform operations on the locally simulated S3 service as if it were interacting with the real AWS S3, making the code flexible for different environments.
 
@@ -264,7 +263,7 @@ Now that you have learnt how to connect a non-containerized Node.js application 
          - SERVICES=s3
          - GATEWAY_LISTEN=0.0.0.0:4566
        volumes:
-         - ./localstack:/docker-entrypoint-initaws.d"
+         - ./localstack:/etc/localstack/init/ready.d
 
    volumes:
      mongodbdata:
@@ -307,6 +306,15 @@ Now that you have learnt how to connect a non-containerized Node.js application 
    ```
 
    The command creates an S3 bucket named `mysamplebucket`.
+
+   > [!TIP]
+   >
+   > You can automate this step by placing a shell script (for example,
+   > `init.sh`) under the local `./localstack` directory. Make sure the
+   > script is executable (`chmod +x ./localstack/init.sh`). LocalStack
+   > runs files mounted in `/etc/localstack/init/ready.d` once it is ready.
+   > See [LocalStack init hooks](https://docs.localstack.cloud/references/init-hooks/)
+   > for more details.
 
    Open [http://localhost:5173](http://localhost:5173) to access the complete to-do list application and start uploading images to the Amazon S3 bucket. 
 

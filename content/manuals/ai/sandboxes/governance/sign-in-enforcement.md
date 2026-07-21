@@ -262,7 +262,7 @@ For access, contact ACME IT Security:
 ## Related pages
 
 - [Organization policy](org.md): centrally manage sandbox network and
-  filesystem rules from the Docker Admin Console
+  filesystem rules
 - [Governance overview](_index.md): how local and organization governance fit
   together
 - [Enforce sign-in for Docker Desktop](/manuals/enterprise/security/enforce-sign-in/_index.md):

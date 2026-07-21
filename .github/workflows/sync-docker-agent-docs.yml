@@ -1,0 +1,130 @@
+name: sync-docker-agent-docs
+
+on:
+  schedule:
+    # Run daily at 02:30 UTC, offset from sync-cli-docs
+    - cron: '30 2 * * *'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "(optional) docker-agent version - defaults to the latest release tag"
+        required: false
+        default: ""
+  pull_request:
+    paths:
+      - '.github/workflows/sync-docker-agent-docs.yml'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  BRANCH_NAME: "bot/sync-docker-agent-docs"
+  MODULE_NAME: "github.com/docker/docker-agent"
+
+jobs:
+  sync-docker-agent-docs:
+    runs-on: ubuntu-24.04
+    steps:
+      -
+        name: Checkout docs repo
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          fetch-depth: 0
+      -
+        name: Get target version
+        id: get-version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "${{ inputs.version }}" ]; then
+            VERSION="${{ inputs.version }}"
+          else
+            VERSION=$(gh release view --repo docker/docker-agent --json tagName --jq .tagName)
+          fi
+          CURRENT=$(go list -m -f '{{ .Version }}' "$MODULE_NAME" || true)
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "current=$CURRENT" >> "$GITHUB_OUTPUT"
+          echo "docker-agent version: **$VERSION** (currently pinned: **$CURRENT**)" | tee -a "$GITHUB_STEP_SUMMARY"
+      -
+        name: Set up Docker Buildx
+        if: steps.get-version.outputs.version != steps.get-version.outputs.current
+        uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4
+      -
+        # go mod edit sets the version before plain make vendor: passing
+        # VENDOR_MODULE would run hugo mod get, which records docker-agent's
+        # full transitive graph as indirect requires in go.mod.
+        name: Update vendor
+        if: steps.get-version.outputs.version != steps.get-version.outputs.current
+        run: |
+          go mod edit -require "${MODULE_NAME}@${{ steps.get-version.outputs.version }}"
+          make vendor
+      -
+        name: Detect changes
+        id: changes
+        if: steps.get-version.outputs.version != steps.get-version.outputs.current
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changes=true" >> "$GITHUB_OUTPUT"
+            echo "Changes detected - syncing Docker Agent docs" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "changes=false" >> "$GITHUB_OUTPUT"
+            echo "No changes to sync - Docker Agent docs are up to date" >> "$GITHUB_STEP_SUMMARY"
+          fi
+      -
+        name: Commit changes
+        if: steps.changes.outputs.changes == 'true'
+        env:
+          BRANCH_NAME: ${{ env.BRANCH_NAME }}
+          VERSION: ${{ steps.get-version.outputs.version }}
+        run: |
+          git checkout -b "$BRANCH_NAME"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "docker-agent: sync docs with docker-agent $VERSION"
+      -
+        name: Create or update Pull Request
+        if: steps.changes.outputs.changes == 'true' && github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH_NAME: ${{ env.BRANCH_NAME }}
+          PR_TITLE: "docker-agent: sync docs with docker-agent ${{ steps.get-version.outputs.version }}"
+          PR_BODY: |
+            ## Summary
+
+            Automated sync of Docker Agent documentation from the docker/docker-agent repository.
+
+            **docker-agent version:** ${{ steps.get-version.outputs.version }}
+
+            ---
+
+            > [!IMPORTANT]
+            > **Reviewer:** Please close and reopen this PR to trigger CI checks.
+            > See: https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow#triggering-a-workflow-from-a-workflow
+        run: |
+          # Check for existing open PR from this branch
+          EXISTING_PR=$(gh pr list --state open --head "$BRANCH_NAME" --json url --jq ".[0].url // empty")
+
+          if [ -n "$EXISTING_PR" ]; then
+            echo "Updating existing PR: $EXISTING_PR" >> "$GITHUB_STEP_SUMMARY"
+            git push -u origin "$BRANCH_NAME" --force
+            gh pr edit "$EXISTING_PR" --title "$PR_TITLE" --body "$PR_BODY"
+          else
+            # Check if a closed PR with the same title already exists
+            CLOSED_PR=$(gh pr list --state closed --search "$PR_TITLE in:title" --json url --jq ".[0].url // empty")
+            if [ -n "$CLOSED_PR" ]; then
+              echo "A closed PR already exists for this version: $CLOSED_PR" >> "$GITHUB_STEP_SUMMARY"
+              echo "Skipping PR creation."
+              exit 0
+            fi
+
+            echo "Creating new PR" >> "$GITHUB_STEP_SUMMARY"
+            git push -u origin "$BRANCH_NAME"
+            gh pr create \
+              --title "$PR_TITLE" \
+              --body "$PR_BODY" \
+              --base main \
+              --head "$BRANCH_NAME"
+          fi

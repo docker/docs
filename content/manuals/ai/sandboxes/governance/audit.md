@@ -23,8 +23,8 @@ Audit logging is active only while your organization enforces a centralized
 governance policy. The subscription alone doesn't produce records. If your
 organization hasn't configured and enforced an [organization policy](org.md),
 the daemon writes no audit logs. To confirm governance is active, run `sbx
-policy ls` — the output begins with a `Governance: managed by <org>` header
-when an organization policy is in effect.
+policy ls` — the output begins with a `Policy rules` header listing a
+`Governance  Managed by <org>` line when an organization policy is in effect.
 
 Audit logging complements [monitoring](monitoring.md). Monitoring with `sbx
 policy ls` and `sbx policy log` is for live, interactive debugging. Audit
@@ -63,7 +63,8 @@ A network evaluation record looks like this:
     "no applicable policies for op(action=net:connect:tcp, resource=net:domain:example.com:443)"
   ],
   "action_type": "network_egress",
-  "network_egress": { "protocol": "tcp" }
+  "network_egress": { "protocol": "tcp" },
+  "agent": "claude"
 }
 ```
 
@@ -83,6 +84,7 @@ Common fields include:
 | `resource_id`      | The target of the evaluation, such as a host and port.                                                       |
 | `decision`         | `AUDIT_DECISION_ALLOW` or `AUDIT_DECISION_DENY`.                                                             |
 | `deny_reason`      | Why a denied request was blocked. Present on deny decisions.                                                 |
+| `agent`            | The AI agent driving the sandbox (for example, `claude`, `codex`). Omitted when the agent is unknown.       |
 
 Each record is attributed to the signed-in Docker user and the organization
 whose governance policy is in effect.

@@ -4,9 +4,8 @@ description: &desc Mocking OAuth services in testing with Dex
 keywords: Dex, container-supported development
 linktitle: Mocking OAuth services with Dex
 summary: *desc
-tags: [app-dev, distributed-systems]
-languages: []
 params:
+  tags: [testing]
   time: 10 minutes
 ---
 

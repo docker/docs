@@ -10,6 +10,7 @@ aliases:
 - /docker-for-windows/wsl/
 - /desktop/windows/wsl/
 - /desktop/wsl/
+- /docker-for-windows/wsl-tech-preview/
 ---
 
 Windows Subsystem for Linux (WSL) 2 is a full Linux kernel built by Microsoft that lets Linux distributions run without managing virtual machines. With Docker Desktop running on WSL 2, users can leverage Linux workspaces and avoid maintaining both Linux and Windows build scripts. In addition, WSL 2 provides improvements to file system sharing, faster cold-start times, and dynamic resource allocation.

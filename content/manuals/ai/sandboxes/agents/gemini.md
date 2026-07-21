@@ -38,10 +38,6 @@ Gemini requires either a Google API key or a Google account with Gemini access.
 $ sbx secret set -g google
 ```
 
-Alternatively, export the `GEMINI_API_KEY` or `GOOGLE_API_KEY` environment
-variable in your shell before running the sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
-
 **Google account**: If no API key is set, Gemini prompts you to sign in
 interactively when it starts. Interactive authentication is scoped to the
 sandbox and doesn't persist if you remove and recreate it.
@@ -65,12 +61,15 @@ Without extra args, the sandbox runs:
 gemini --yolo
 ```
 
-Args after `--` replace these defaults rather than being appended. To keep
-`--yolo`, include it yourself:
+Arguments after `--` are added after the default flags when the first one is
+itself a flag (begins with `-`), so `--yolo` is preserved:
 
 ```console
-$ sbx run gemini -- --yolo -p "explain this"
+$ sbx run gemini -- -p "explain this"   # runs gemini --yolo -p "explain this"
 ```
+
+When the first argument is a bare word — a subcommand or prompt — it replaces
+the defaults instead.
 
 ## Base image
 

@@ -1,5 +1,6 @@
 ---
 title: Add or update a payment method
+linkTitle: Payment methods
 weight: 20
 description: Learn how to add or update a payment method in Docker Hub
 keywords: payments, billing, subscription, supported payment methods, failed payments, add credit card, bank transfer, Stripe Link, payment failure
@@ -66,7 +67,7 @@ To remove a single payment method:
 1. Find the payment method you want to remove from the **Payment method** table.
 1. Select the three dots, then choose **Remove**.
 
-To remove your default payment method, first set a different payment method as default, or [downgrade to a free subscription](/manuals/subscription/change.md).
+To remove your default payment method, first set a different payment method as default, or [downgrade to a free subscription](/manuals/subscription/plans/docker.md#cancel-a-docker-plan).
 
 ## Enable and disable pay by invoice
 

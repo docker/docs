@@ -239,6 +239,7 @@ The following table shows the complete list of attributes that you can assign to
 | [`policy`](#targetpolicy)                       | List    | Policies to validate build sources and metadata                      |
 | [`platforms`](#targetplatforms)                 | List    | Target platforms                                                     |
 | [`pull`](#targetpull)                           | Boolean | Always pull images                                                   |
+| [`resources`](#targetresources)                 | Map     | Resource limits for build containers                                 |
 | [`secret`](#targetsecret)                       | List    | Secrets to expose to the build                                       |
 | [`shm-size`](#targetshm-size)                   | List    | Size of `/dev/shm`                                                   |
 | [`ssh`](#targetssh)                             | List    | SSH agent sockets or keys to expose to the build                     |
@@ -900,6 +901,10 @@ target "default" {
 }
 ```
 
+> [!NOTE]
+> Local outputs with `mode=delete` require granting `--allow=buildx.local.delete`
+> when invoking `docker buildx bake`.
+
 ### `target.policy`
 
 Policies to validate build sources and metadata. Each entry uses the same keys
@@ -938,6 +943,29 @@ target "default" {
   pull = true
 }
 ```
+
+### `target.resources`
+
+Sets cgroup resource limits for the containers that run `RUN` instructions
+during the build. The supported keys are `memory`, `memory-swap`, `cpu-shares`,
+`cpu-period`, `cpu-quota`, `cpuset-cpus`, and `cpuset-mems`. These map to the
+equivalent `docker build` flags and to the
+[`--resource`](https://docs.docker.com/reference/cli/docker/buildx/build/#resource)
+flag for `docker buildx build`.
+
+```hcl
+target "default" {
+  resources = {
+    memory      = "2g"
+    memory-swap = "4g"
+    cpu-quota   = 50000
+  }
+}
+```
+
+> [!NOTE]
+> These limits require a BuildKit daemon that supports per-step resource limits
+> and only take effect on Linux. They don't affect the build cache key.
 
 ### `target.secret`
 
