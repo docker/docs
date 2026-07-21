@@ -107,9 +107,8 @@ RUN --mount=type=bind,source=src,target=src \
     --mount=type=bind,source=Cargo.toml,target=Cargo.toml \
     --mount=type=bind,source=Cargo.lock,target=Cargo.lock \
     --mount=type=cache,target=/app/target/ \
-    --mount=type=cache,target=/usr/local/cargo/git/db \
-    --mount=type=cache,target=/usr/local/cargo/registry/ \
-    cargo build --locked --release && \
+    --mount=type=cache,target=/var/cache/cargo \
+    CARGO_HOME=/var/cache/cargo cargo build --locked --release && \
     cp ./target/release/$APP_NAME /bin/server
 
 ################################################################################
@@ -164,9 +163,8 @@ RUN --mount=type=bind,source=src,target=src \
     --mount=type=bind,source=Cargo.toml,target=Cargo.toml \
     --mount=type=bind,source=Cargo.lock,target=Cargo.lock \
     --mount=type=cache,target=/app/target/ \
-    --mount=type=cache,target=/usr/local/cargo/git/db \
-    --mount=type=cache,target=/usr/local/cargo/registry/ \
-    cargo build --locked --release && \
+    --mount=type=cache,target=/var/cache/cargo \
+    CARGO_HOME=/var/cache/cargo cargo build --locked --release && \
     cp ./target/release/$APP_NAME /bin/server
 
 ################################################################################
@@ -205,6 +203,11 @@ CMD ["/bin/server"]
 
 {{< /tab >}}
 {{< /tabs >}}
+
+The cache mount uses an alternate `CARGO_HOME` so concurrent builds share
+Cargo's cache lock. Setting `CARGO_HOME` also changes where Cargo looks for
+global configuration and credentials. Project-level `.cargo/config.toml` files
+are unaffected.
 
 For building an image, only the Dockerfile is necessary. Open the Dockerfile
 in your favorite IDE or text editor and see what it contains. To learn more
@@ -591,9 +594,9 @@ For the sample application, you'll use a variation of the backend from the react
    WORKDIR /app
 
    # Build the application.
-   # Leverage a cache mount to /usr/local/cargo/registry/
-   # for downloaded dependencies and a cache mount to /app/target/ for
-   # compiled dependencies which will speed up subsequent builds.
+   # Leverage a cache mount to /var/cache/cargo for downloaded dependencies
+   # and a cache mount to /app/target/ for compiled dependencies which will
+   # speed up subsequent builds.
    # Leverage a bind mount to the src directory to avoid having to copy the
    # source code into the container. Once built, copy the executable to an
    # output directory before the cache mounted /app/target is unmounted.
@@ -601,11 +604,11 @@ For the sample application, you'll use a variation of the backend from the react
        --mount=type=bind,source=Cargo.toml,target=Cargo.toml \
        --mount=type=bind,source=Cargo.lock,target=Cargo.lock \
        --mount=type=cache,target=/app/target/ \
-       --mount=type=cache,target=/usr/local/cargo/registry/ \
+       --mount=type=cache,target=/var/cache/cargo \
        --mount=type=bind,source=migrations,target=migrations \
        <<EOF
    set -e
-   cargo build --locked --release
+   CARGO_HOME=/var/cache/cargo cargo build --locked --release
    cp ./target/release/$APP_NAME /bin/server
    EOF
 

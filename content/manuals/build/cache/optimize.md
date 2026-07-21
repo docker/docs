@@ -262,10 +262,14 @@ RUN --mount=type=cache,target=/root/.gem \
 
 ```dockerfile
 RUN --mount=type=cache,target=/app/target/ \
-    --mount=type=cache,target=/usr/local/cargo/git/db \
-    --mount=type=cache,target=/usr/local/cargo/registry/ \
-    cargo build
+    --mount=type=cache,target=/var/cache/cargo \
+    CARGO_HOME=/var/cache/cargo cargo build
 ```
+
+The cache mount uses an alternate `CARGO_HOME` so concurrent builds share
+Cargo's cache lock. Setting `CARGO_HOME` also changes where Cargo looks for
+global configuration and credentials. Project-level `.cargo/config.toml` files
+are unaffected.
 
 {{< /tab >}}
 {{< tab name=".NET" >}}
