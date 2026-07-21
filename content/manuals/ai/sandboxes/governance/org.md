@@ -184,6 +184,17 @@ organization governance, remove the local rule with `sbx policy rm`.
 
 ## Troubleshooting
 
+> [!NOTE]
+> During an outage of Docker AI Governance or Docker authentication, viewing
+> and editing organization policies may be unavailable. Already-running
+> sandboxes continue to use their cached policy for up to one hour, and local
+> `sbx policy` commands continue to function during that time.
+>
+> If only Docker Home is unavailable, you can continue to view and edit
+> policies through the [Governance API](/reference/api/ai-governance/). Check
+> [Docker Systems Status](https://www.dockerstatus.com/) for service
+> availability.
+
 ### Policy changes not taking effect
 
 After updating organization policies, changes take up
