@@ -32,8 +32,8 @@ $ ssh demo.sbx
 
 1. Open the Command Palette and run **Remote-SSH: Connect to Host**.
 2. Enter the sandbox host manually as `<name>.sbx`.
-3. Cursor opens a new window connected to the sandbox. Open a folder from the
-   sandbox workspace to start working.
+3. Cursor opens a new window connected to the sandbox. Use the remote folder
+   picker to [select the mounted workspace](_index.md#select-the-workspace-folder).
 
 ## Notes
 

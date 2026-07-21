@@ -73,6 +73,17 @@ sandbox named `demo`:
 $ ssh demo.sbx
 ```
 
+## Select the workspace folder
+
+Connecting an app to a sandbox selects the remote environment, but it might not
+open the mounted workspace automatically. Use the app's remote folder picker to
+select the workspace when you configure the connection or start a session.
+
+The folder picker might open at the sandbox user's home directory, typically
+`/home/agent`. Workspaces retain their absolute host paths inside the sandbox.
+For example, if you mount `/Users/bob/src/my-project`, select
+`/Users/bob/src/my-project` in the remote folder picker.
+
 ## Connect a specific tool
 
 - [VS Code](vscode.md)

@@ -35,8 +35,10 @@ select **+ Add SSH connection**. Enter a name for the connection and enter the
 sandbox hostname, such as `demo.sbx`, in **SSH Host**. Leave **SSH Port** and
 **Identity File** empty because the managed SSH config supplies them.
 
-Select the connection from the environment drop-down and choose the sandbox
-workspace folder.
+Select the connection from the environment drop-down, then use the remote
+folder picker to
+[select the mounted workspace](_index.md#select-the-workspace-folder). The
+picker might initially open at `/home/agent`.
 
 For more connection options, see the Claude Desktop instructions for
 [SSH sessions](https://code.claude.com/docs/en/desktop#ssh-sessions).

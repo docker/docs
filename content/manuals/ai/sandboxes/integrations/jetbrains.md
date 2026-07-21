@@ -46,9 +46,10 @@ $ ssh demo.sbx
    **OpenSSH config and authentication agent** as the authentication type. The
    managed SSH config supplies the remaining connection settings.
 4. Select **Check Connection and Continue**.
-5. Choose the backend IDE version and the project folder in the sandbox, then
-   connect. The first connection downloads and installs the IDE backend inside
-   the sandbox.
+5. Choose the backend IDE version, then use the remote folder picker to
+   [select the mounted workspace](_index.md#select-the-workspace-folder) as the
+   project folder. Connect to the project. The first connection downloads and
+   installs the IDE backend inside the sandbox.
 
 For more connection options, see the JetBrains instructions to
 [connect and work with JetBrains Gateway](https://www.jetbrains.com/help/idea/remote-development-a.html).
