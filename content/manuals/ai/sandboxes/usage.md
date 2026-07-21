@@ -135,8 +135,10 @@ it when you create the sandbox:
 
 - Direct mode is the default. The agent has read-write access to your working
   tree, and changes appear on your host immediately.
-- [Clone mode](#clone-mode) uses `--clone`. The agent works in a private Git
-  clone inside the sandbox, and your host repository is mounted read-only.
+- [Clone mode](#clone-mode) uses `--clone`. The agent edits a separate Git clone
+  inside the sandbox. Its changes stay there until you fetch them or the agent
+  pushes them. Your host repository is also available at
+  `/run/sandbox/source`, but only with read access.
 
 For guidance on branch strategy, fetching work from a sandbox, and parallel
 agent workflows, see [Git workflows](workflows.md#git-workflows). For the
