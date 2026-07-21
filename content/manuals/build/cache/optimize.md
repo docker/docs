@@ -269,8 +269,7 @@ RUN --mount=type=cache,target=/app/target/ \
 The cache mount uses a single `CARGO_HOME` so concurrent builds coordinate
 access through Cargo's cache lock. Setting `CARGO_HOME` also changes where
 Cargo looks for global configuration and credentials. Project-level
-`.cargo/config.toml` files are unaffected. If your build needs credentials for
-a private registry, pass them as [build secrets](/manuals/build/building/secrets.md).
+`.cargo/config.toml` files are unaffected.
 
 {{< /tab >}}
 {{< tab name=".NET" >}}
