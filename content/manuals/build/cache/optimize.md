@@ -266,10 +266,11 @@ RUN --mount=type=cache,target=/app/target/ \
     CARGO_HOME=/var/cache/cargo cargo build
 ```
 
-The cache mount uses an alternate `CARGO_HOME` so concurrent builds share
-Cargo's cache lock. Setting `CARGO_HOME` also changes where Cargo looks for
-global configuration and credentials. Project-level `.cargo/config.toml` files
-are unaffected.
+The cache mount uses a single `CARGO_HOME` so concurrent builds coordinate
+access through Cargo's cache lock. Setting `CARGO_HOME` also changes where
+Cargo looks for global configuration and credentials. Project-level
+`.cargo/config.toml` files are unaffected. If your build needs credentials for
+a private registry, pass them as [build secrets](/manuals/build/building/secrets.md).
 
 {{< /tab >}}
 {{< tab name=".NET" >}}
