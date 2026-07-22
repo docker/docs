@@ -67,8 +67,8 @@ The exact format varies and depends on what triggered the workflow.
   for the full list of formats.
 
 > [!NOTE]
-> GitHub repositories created after July 15, 2026 have immutable
-> identifiers in the default subject claim. For example:
+> GitHub now includes immutable identifiers in the default subject claim
+> for repositories created after July 15, 2026. For example:
 > `repo:octocat@123456/my-repo@456789:ref:refs/heads/main`. See the
 > [GitHub changelog](https://github.blog/changelog/2026-04-23-immutable-subject-claims-for-github-actions-oidc-tokens/)
 > for more details.
