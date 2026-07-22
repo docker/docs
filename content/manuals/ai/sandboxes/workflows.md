@@ -27,7 +27,7 @@ $ sbx skills import --dry-run
 ```
 
 The command scans the following directories in order and copies each skill
-subdirectory into the shared store. When a sandbox is created, `sbx` mounts the
+subdirectory into the shared store. When the sandbox starts, `sbx` mounts the
 store at the path the agent reads inside the sandbox.
 
 | Agent       | Host source         | Sandbox mount target          |
@@ -65,16 +65,21 @@ the complete skill directory rather than merging files. Run the import command
 again when you want to copy updates from the host. Running `sbx reset` clears
 the shared store.
 
-Sandboxes created with `sbx run` or `sbx create` for a supported agent mount
-the store as a read-write directory by default. To create a sandbox without
-the shared store, use `--no-share-skills`:
+Sandboxes created with `sbx` version 0.37.0 or later for a supported agent are
+configured to mount the store read-write by default. These sandboxes mount the
+current contents of the store each time they start, so you can import skills
+before or after creating them. To create a sandbox without the shared store,
+use `--no-share-skills`:
 
 ```console
 $ sbx run --no-share-skills claude
 ```
 
-The option only applies when the sandbox is created. To turn off shared skills
-for an existing sandbox, remove it and recreate it with the option.
+Upgrading `sbx` does not enable shared skills for sandboxes created with an
+earlier version. Remove and recreate those sandboxes after upgrading. The
+`--no-share-skills` option also only applies when the sandbox is created. To
+turn off shared skills for an existing sandbox, remove it and recreate it with
+the option.
 
 > [!WARNING]
 > The shared skills store is mounted read-write. A sandbox can modify any skill
