@@ -379,7 +379,7 @@ reference](/reference/cli/docker/compose/).
 
 ### Prerequisites
 
-Complete [Containerize a .NET application](./).
+Complete [Containerize a .NET application](#containerize-a-net-application).
 
 ### Overview
 
@@ -394,9 +394,9 @@ In this section, you'll learn how to set up a development environment for your c
 This section uses a different branch of the `docker-dotnet-sample` repository
 that contains an updated .NET application. The updated application is on the
 `add-db` branch of the repository you cloned in [Containerize a .NET
-application](./).
+application](#containerize-a-net-application).
 
-To get the updated code, you need to checkout the `add-db` branch. For the changes you made in [Containerize a .NET application](./), for this section, you can stash them. In a terminal, run the following commands in the `docker-dotnet-sample` directory.
+To get the updated code, you need to checkout the `add-db` branch. For the changes you made in [Containerize a .NET application](#containerize-a-net-application), for this section, you can stash them. In a terminal, run the following commands in the `docker-dotnet-sample` directory.
 
 1. Stash any previous changes.
 
@@ -781,7 +781,7 @@ Your containerized application will now use the SDK image (either `dhi.io/dotnet
 
 ### Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize a .NET application](./).
+Complete all the previous sections of this guide, starting with [Containerize a .NET application](#containerize-a-net-application).
 
 ### Overview
 

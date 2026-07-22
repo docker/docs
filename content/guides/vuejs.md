@@ -541,7 +541,7 @@ $ docker compose down
 
 ### Prerequisites
 
-Complete [Containerize Vue.js application](./).
+Complete [Containerize Vue.js application](#containerize-an-vuejs-application).
 
 ---
 
@@ -698,7 +698,7 @@ You should see the updated text appear instantly, without needing to rebuild the
 
 ### Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize Vue.js application](./).
+Complete all the previous sections of this guide, starting with [Containerize Vue.js application](#containerize-an-vuejs-application).
 
 ### Overview
 
