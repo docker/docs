@@ -15,8 +15,9 @@ You can browse, search, or filter images by category in the [Docker Hub
 catalog](https://hub.docker.com/hardened-images/catalog). For details about
 the catalog interface, see [Docker Hub](/dhi/tools/hub/).
 
-Alternatively, use the [DHI CLI](/dhi/tools/cli/) to browse the catalog from
-the command line:
+Alternatively, use the [DHI MCP server](/dhi/tools/mcp/) to search and
+inspect the catalog directly from your AI assistant, or use the [DHI
+CLI](/dhi/tools/cli/) to browse the catalog from the command line:
 
 ```console
 $ docker dhi catalog list
