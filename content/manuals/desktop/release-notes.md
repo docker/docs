@@ -36,6 +36,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Agent v1.111.0](https://github.com/docker/docker-agent/releases/tag/v1.111.0)
 - Kubernetes:
   - cri-dockerd v0.4.4
+- [Docker Hardened Images CLI (`dhictl`) v0.0.7](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.7)
 
 ### Bug fixes and enhancements
 
@@ -44,6 +45,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a bug where an invalid `~/.docker/config.json` caused Docker Desktop to hang with high CPU/memory and show no error dialog. Docker Desktop now surfaces an error dialog prompting the user to correct the file.
 - Fixed a bug that prevented some Docker Hardened Images customizations from being created.
 - Fixed a bug where deleting an unrelated credential ID could accidentally erase Docker Hub OAuth tokens, causing users to be unexpectedly signed out.
+- Removed Docker Scout CLI hints that previously appeared after running `docker pull` or `docker buildx build` commands.
 
 #### For Windows
 
