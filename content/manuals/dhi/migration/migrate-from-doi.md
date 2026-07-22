@@ -58,7 +58,7 @@ replaced by the new hardened image.
 - FROM golang:1.25
 
 + ## Updated to use hardened base image
-+ FROM dhi.io/golang:1.25-debian12-dev
++ FROM dhi.io/golang:1.25-debian13-dev
 ```
 
 Note that DHI does not have a `latest` tag in order to promote best practices
@@ -89,13 +89,13 @@ The following example shows a multi-stage Dockerfile with a build stage and runt
 
 ```dockerfile
 # Build stage
-FROM dhi.io/golang:1.25-debian12-dev AS builder
+FROM dhi.io/golang:1.25-debian13-dev AS builder
 WORKDIR /app
 COPY . .
 RUN go build -o myapp
 
 # Runtime stage
-FROM dhi.io/golang:1.25-debian12
+FROM dhi.io/golang:1.25-debian13
 WORKDIR /app
 COPY --from=builder /app/myapp .
 ENTRYPOINT ["/app/myapp"]

@@ -43,7 +43,7 @@ replaced by the new hardened image.
 - FROM cgr.dev/chainguard/go:latest-dev
 
 + ## Updated to use hardened base image
-+ FROM dhi.io/golang:1.25-alpine3.22-dev
++ FROM dhi.io/golang:1.25-alpine3.24-dev
 ```
 
 Note that DHI does not have a `latest` tag in order to promote best practices
@@ -70,13 +70,13 @@ The following example shows a multi-stage Dockerfile with a build stage and runt
 
 ```dockerfile
 # Build stage
-FROM dhi.io/golang:1.25-alpine3.22-dev AS builder
+FROM dhi.io/golang:1.25-alpine3.24-dev AS builder
 WORKDIR /app
 COPY . .
 RUN go build -o myapp
 
 # Runtime stage
-FROM dhi.io/golang:1.25-alpine3.22
+FROM dhi.io/golang:1.25-alpine3.24
 WORKDIR /app
 COPY --from=builder /app/myapp .
 ENTRYPOINT ["/app/myapp"]
