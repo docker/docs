@@ -267,6 +267,15 @@ The embedded DNS server address is `127.0.0.11`.
 There is no IPv6 equivalent; the IPv4 address works even in IPv6-only containers.
 If an application requires an explicit DNS server address, use `127.0.0.11`.
 
+> [!NOTE]
+>
+> When you configure multiple DNS servers for a container on the default
+> `bridge` network, the container's resolver library determines how it queries
+> them. Some resolvers query the servers in order. Others query them in parallel
+> and use the first response received, even if that response is `NXDOMAIN`.
+> On a custom network, Docker's embedded DNS server queries upstream servers in
+> order and stops after a successful response or an `NXDOMAIN` response.
+
 You can configure DNS resolution on a per-container basis, using flags for the
 `docker run` or `docker create` command used to start the container.
 The following table describes the available `docker run` flags related to DNS
