@@ -4,11 +4,6 @@ linkTitle: Integrations
 weight: 37
 description: Connect editors and desktop apps to a Docker Sandbox over SSH.
 keywords: docker sandboxes, ssh, integrations, vs code, cursor, jetbrains, remote development, sbx
-params:
-  sidebar:
-    badge:
-      color: blue
-      text: Experimental
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes SSH" >}}
@@ -22,10 +17,6 @@ Each sandbox is reachable at `<name>.sbx`, where `<name>` is the sandbox name.
 Once SSH is set up, `<name>.sbx` behaves like any other SSH host, so any tool
 that supports remote development over SSH can connect to it.
 
-> [!NOTE]
-> SSH access is experimental and off by default. The command surface and
-> behavior may change.
-
 ## Prerequisites
 
 - The `sbx` CLI installed and signed in. See [Get started](../get-started.md).
@@ -36,18 +27,14 @@ that supports remote development over SSH can connect to it.
 
 ## Enable SSH access
 
-Run the following commands to enable experimental features and SSH access:
+Run the SSH setup command once:
 
 ```console
-$ sbx settings set platform.allowExperimentalFeatures true
-$ sbx settings set feature.ssh true
-$ sbx daemon stop
 $ sbx setup ssh
 ```
 
-Stopping the daemon makes it reload the SSH setting the next time it starts.
-`sbx setup ssh` starts the daemon again and configures your SSH client. You can
-re-run the setup command at any time.
+The command starts the Docker Sandboxes daemon if needed and configures your
+SSH client. You can re-run it at any time.
 
 ## Create or identify a sandbox
 
