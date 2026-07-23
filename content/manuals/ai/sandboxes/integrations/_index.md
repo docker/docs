@@ -3,15 +3,15 @@ title: Editor and app integrations
 linkTitle: Integrations
 weight: 37
 description: Connect editors and desktop apps to a Docker Sandbox over SSH.
-keywords: docker sandboxes, ssh, integrations, vs code, cursor, jetbrains, remote development, sbx
+keywords: docker sandboxes, ssh, integrations, vs code, cursor, remote development, sbx
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes SSH" >}}
 
 You can connect an external editor or desktop app to a running sandbox over
-SSH. This lets you use the tools you already know — VS Code, Cursor, JetBrains
-IDEs, Claude Desktop, and others — while your code runs, builds, and executes
-inside the isolated sandbox instead of on your host.
+SSH. This lets you use the tools you already know — VS Code, Cursor, Claude
+Desktop, and others — while your code runs, builds, and executes inside the
+isolated sandbox instead of on your host.
 
 Each sandbox is reachable at `<name>.sbx`, where `<name>` is the sandbox name.
 Once SSH is set up, `<name>.sbx` behaves like any other SSH host, so any tool
@@ -75,7 +75,6 @@ For example, if you mount `/Users/bob/src/my-project`, select
 
 - [VS Code](vscode.md)
 - [Cursor](cursor.md)
-- [JetBrains IDEs](jetbrains.md)
 - [Claude Desktop](claude-desktop.md)
 - [ChatGPT](chatgpt.md)
 
