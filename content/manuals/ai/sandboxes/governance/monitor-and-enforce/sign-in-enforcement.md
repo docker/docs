@@ -1,9 +1,11 @@
 ---
 title: Sign-in enforcement
 linkTitle: Sign-in enforcement
-weight: 22
+weight: 30
 description: Require Docker Sandboxes users to sign in as members of your organization, enforced through endpoint management.
 keywords: docker sandboxes, sign-in enforcement, organization enforcement, sbx login, MDM, configuration profile, registry key, allowedOrgs
+aliases:
+  - /ai/sandboxes/governance/sign-in-enforcement/
 ---
 
 Sign-in enforcement restricts Docker Sandboxes to users who are members of
@@ -13,8 +15,9 @@ membership after the user authenticates. If the check fails, credentials are
 immediately revoked and the user can't run sandboxes.
 
 Without this enforcement, a developer can sign in with a personal account and
-bypass organization [governance policies](org.md). Sign-in enforcement closes
-that gap at the endpoint, where users can't override it.
+bypass organization [governance policies](../access-controls/organization.md).
+Sign-in enforcement closes that gap at the endpoint, where users can't override
+it.
 
 > [!NOTE]
 > Sign-in enforcement is part of Docker's AI Governance offering.
@@ -261,9 +264,10 @@ For access, contact ACME IT Security:
 
 ## Related pages
 
-- [Organization policy](org.md): centrally manage sandbox network and
-  filesystem rules
-- [Governance overview](_index.md): how local and organization governance fit
+- [Organization policies](../access-controls/organization.md): centrally manage
+  sandbox network, filesystem, and MCP access controls from the Docker Admin
+  Console
+- [Governance overview](../_index.md): how local and organization governance fit
   together
 - [Enforce sign-in for Docker Desktop](/manuals/enterprise/security/enforce-sign-in/_index.md):
   the equivalent control for Docker Desktop

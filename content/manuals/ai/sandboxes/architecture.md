@@ -1,6 +1,6 @@
 ---
 title: Architecture
-weight: 40
+weight: 70
 description: Technical architecture of Docker Sandboxes; workspace mounting, storage, networking, and sandbox lifecycle.
 keywords: docker sandboxes, architecture, microVM, workspace mounting, sandbox lifecycle
 ---
@@ -52,7 +52,7 @@ $ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <template>
 
 All outbound traffic from the sandbox routes through an HTTP/HTTPS proxy on
 your host. Agents are configured to use the proxy automatically. The proxy
-enforces [network access policies](governance/) and handles
+enforces [network access policies](governance/access-controls/network.md) and handles
 [credential injection](security/credentials.md). See
 [Network isolation](security/isolation.md#network-isolation) for how this
 works and [Default security posture](security/defaults.md) for what is
@@ -99,6 +99,22 @@ One limitation applies:
 - Proxy auto-configuration files, such as `proxy.pac`, aren't supported. Set the
   `HTTP_PROXY`, `HTTPS_PROXY`, or `DOCKER_SANDBOXES_PROXY` environment variables
   explicitly.
+
+## MCP gateway
+
+Supported agents connect to a single MCP gateway endpoint for the sandbox. The
+gateway runs on the host side of the sandbox boundary and brokers access to
+registered MCP servers.
+
+Registered MCP servers can be remote endpoints, or they can be local stdio
+servers launched on the host. Local stdio servers don't run inside the sandbox
+VM. If a local stdio server is packaged as an OCI image, or if you register an
+explicit `docker` command, it uses Docker on the host.
+
+When MCP policies apply, enforcement happens on the MCP gateway path, separate
+from the HTTP/HTTPS network proxy. Server registration is checked before the
+server is stored, and governed MCP requests are checked by the gateway before
+tool calls, resource reads, prompt retrieval, or gateway meta-tool execution.
 
 ## Lifecycle
 

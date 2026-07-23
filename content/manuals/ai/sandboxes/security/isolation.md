@@ -37,10 +37,11 @@ each other and cannot reach your host's localhost. There is no shared network
 between sandboxes or between a sandbox and your host.
 
 All HTTP and HTTPS traffic leaving a sandbox passes through a proxy on your
-host that enforces the [network policy](../governance/). The sandbox routes
-traffic through either a forward proxy or a transparent proxy depending on the
-client's configuration. Both enforce the network policy; only the forward proxy
-[injects credentials](credentials.md) for AI services.
+host that enforces the
+[network access policy](../governance/access-controls/network.md). The sandbox
+routes traffic through either a forward proxy or a transparent proxy depending
+on the client's configuration. Both enforce the network policy; only the
+forward proxy [injects credentials](credentials.md) for AI services.
 
 Raw TCP connections, UDP, and ICMP are blocked at the network layer. DNS
 resolution goes through the proxy and is subject to the same network policy —
@@ -63,6 +64,12 @@ Engine](/manuals/engine/_index.md) inside the sandbox environment, isolated from
 your host. When the agent runs `docker build` or `docker compose up`, those
 commands execute against that engine. The agent has no path to your host Docker
 daemon.
+
+This Docker Engine boundary applies to processes running inside the sandbox VM.
+It doesn't apply to local stdio MCP servers registered through the
+[MCP gateway](../mcp-gateway.md). Those servers run on the host, outside the
+sandbox VM. If a local MCP server starts a Docker container, it uses Docker on
+the host.
 
 Each sandbox VM runs its own Docker Engine. The agent runs inside the VM,
 alongside that engine, and drives it to create containers, all within the

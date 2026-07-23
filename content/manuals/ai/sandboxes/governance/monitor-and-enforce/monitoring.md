@@ -1,8 +1,10 @@
 ---
 title: Monitoring policies
-weight: 25
+weight: 10
 description: Inspect active policy rules and monitor sandbox network traffic with sbx policy ls and sbx policy log.
 keywords: docker sandboxes, policy monitoring, sbx policy ls, sbx policy log, network traffic, policy debugging
+aliases:
+  - /ai/sandboxes/governance/monitoring/
 ---
 
 `sbx policy ls` and `sbx policy log` give you a combined view of all active
@@ -27,7 +29,7 @@ The columns are:
 - `POLICY`: the policy name.
 - `SOURCE`: where the policy came from. `local` means your local configuration
   — a preset or rules you added with `sbx policy`. `kit` means a
-  [kit](../customize/kits.md#control-network-access). `org` means your
+  [kit](../../customize/kits.md#control-network-access). `org` means your
   organization.
 - `APPLIES TO`: which sandboxes the policy applies to. `all` means the policy
   is global. `sandbox:<name>` scopes it to a single sandbox; a profile name
@@ -113,7 +115,7 @@ A writable workspace mount must be allowed by both a `filesystem:read` and a
 `filesystem:write` rule; a read-only mount needs only `filesystem:read`. The
 default local policy allows read and write access to all paths, shown as the
 two `default-fs-*` rules above. For the rule syntax and path patterns, see
-[Policy concepts](concepts.md#filesystem-rules).
+[Policy concepts](../concepts.md#filesystem-rules).
 
 ## Monitoring traffic
 
@@ -135,13 +137,13 @@ my-sandbox   network  app.example.com        browser-open                       
 
 The `PROXY` column shows how the request left the sandbox:
 
-| Value | Description |
-| ----- | ----------- |
-| `forward` | Routed through the forward proxy. Supports [credential injection](../security/credentials.md). |
-| `forward-bypass` | Routed through the forward proxy without credential injection. |
-| `transparent` | Intercepted by the transparent proxy. Policy is enforced but credential injection is not available. |
-| `network` | Non-HTTP traffic (raw TCP, UDP, ICMP). TCP can be allowed with a policy rule; UDP and ICMP are always blocked. |
-| `browser-open` | A sandbox process requested opening a URL in the host browser. Policy is enforced before opening the URL. |
+| Value            | Description                                                                                                    |
+| ---------------- | -------------------------------------------------------------------------------------------------------------- |
+| `forward`        | Routed through the forward proxy. Supports [credential injection](../../security/credentials.md).              |
+| `forward-bypass` | Routed through the forward proxy without credential injection.                                                 |
+| `transparent`    | Intercepted by the transparent proxy. Policy is enforced but credential injection is not available.            |
+| `network`        | Non-HTTP traffic (raw TCP, UDP, ICMP). TCP can be allowed with a policy rule; UDP and ICMP are always blocked. |
+| `browser-open`   | A sandbox process requested opening a URL in the host browser. Policy is enforced before opening the URL.      |
 
 The `RULE` column identifies the policy rule that matched the request. The
 `REASON` column includes extra context when the daemon records one.

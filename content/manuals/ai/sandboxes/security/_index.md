@@ -1,7 +1,7 @@
 ---
 title: Security model
 linkTitle: Security model
-weight: 50
+weight: 80
 description: Trust boundaries, isolation layers, and security properties of Docker Sandboxes.
 keywords: docker sandboxes, security model, isolation, trust boundaries, microVM
 ---
@@ -26,6 +26,8 @@ What crosses the boundary into the VM:
   outbound HTTP requests. The raw credential values never enter the VM.
 - **Network access:** HTTP and HTTPS requests to
   [allowed domains](defaults/) are proxied through the host.
+- **MCP gateway traffic:** supported agents connect to a host-side MCP gateway
+  endpoint. The gateway brokers access to registered MCP servers.
 
 What crosses the boundary back to the host:
 
@@ -37,6 +39,12 @@ Everything else is blocked. The agent cannot access your host filesystem
 (outside the workspace), your host Docker daemon, your host network or
 localhost, other sandboxes, or any domain not in the allow list. Raw TCP, UDP,
 and ICMP are blocked at the network layer.
+
+MCP servers are an explicit integration point. Remote MCP servers run outside
+Docker Sandboxes, and local stdio MCP servers run on the host, not inside the
+sandbox VM. An agent can invoke the tools those servers expose through the MCP
+gateway, subject to MCP policies when organization governance is active. Treat
+local MCP servers as trusted host integrations.
 
 ![Sandbox security model showing the hypervisor boundary between the sandbox VM and the host system. The workspace directory is shared read-write. The agent process, Docker Engine, packages, and VM filesystem are inside the VM. Host filesystem, processes, Docker Engine, and network are outside the VM and not accessible. A proxy enforces allow/deny policies and injects credentials into outbound requests.](../images/sbx-security.png)
 
@@ -91,6 +99,11 @@ supply-chain risk, `sbx` restricts kit installs to an allowlist of sources
 that defaults to Docker Hub only. See
 [Restrict kit sources](../customize/kits.md#restrict-kit-sources).
 
+Local stdio MCP servers run outside the sandbox VM. If you register a local MCP
+server that starts a host process or host Docker container, that process or
+container uses host permissions and host isolation, not sandbox isolation. See
+[MCP gateway](../mcp-gateway.md).
+
 ## Organization-wide control
 
 On a single developer's machine, security and policy are configured locally —
@@ -109,5 +122,5 @@ admins.
 - [Default security posture](defaults/): what a fresh sandbox permits and
   blocks
 - [Credentials](credentials/): how to provide and manage API keys
-- [Governance](../governance/): configure network and filesystem access rules,
-  locally or across your organization
+- [Governance](../governance/): configure network, filesystem, and MCP access
+  controls locally or across your organization

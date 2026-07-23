@@ -1,6 +1,6 @@
 ---
 title: FAQ
-weight: 70
+weight: 110
 description: Frequently asked questions about Docker Sandboxes.
 keywords: docker sandboxes, sbx, faq, sign in, telemetry, clipboard, image paste, pricing, commercial use, allowlist, firewall, domains, proxy
 ---
@@ -11,9 +11,10 @@ Yes to both. The `sbx` CLI is free to use, including for commercial and
 professional work, with no per-seat fee. Install it, sign in with a free
 Docker account, and run sandboxes at no cost.
 
-The only paid component is organization governance: centrally managed network
-and filesystem policies, [sign-in enforcement](governance/sign-in-enforcement.md),
-and [audit logs](governance/audit.md). These
+The only paid component is organization governance: centrally managed network,
+filesystem, and MCP policies,
+[sign-in enforcement](governance/monitor-and-enforce/sign-in-enforcement.md),
+and [audit logs](governance/monitor-and-enforce/audit.md). These
 [organization governance features](governance/) require a separate paid
 subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
@@ -29,9 +30,8 @@ Signing in gives each sandbox a verified identity, which lets Docker:
   containers, install packages, and push code. Your Docker identity is the
   anchor.
 - **Enable team features.** Team-scale features like
-  [organization governance](governance/org.md), shared environments, and
-  audit logs need a concept of "who," and adding that later would be worse for
-  everyone.
+  [organization governance](governance/), shared environments, and audit logs
+  need a concept of "who," and adding that later would be worse for everyone.
 - **Authenticate against Docker infrastructure.** Sandboxes pull images, run
   daemons, and talk to Docker services. A Docker account authenticates those
   requests.
@@ -40,13 +40,13 @@ Your Docker account email is only used for authentication, not marketing.
 
 ## Can I enforce sandbox policies across my organization?
 
-Yes. Admins can centrally manage network and filesystem policies. These
-rules apply to every sandbox in the
-organization. When organization governance is active, it replaces local rules
-set with `sbx policy` — local rules are no longer evaluated.
+Yes. Admins can centrally manage network, filesystem, and MCP policies. These
+controls apply to every sandbox in the organization. When organization
+governance is active, it replaces local rules set with `sbx policy` — local
+rules are no longer evaluated.
 
-See [Organization governance](governance/org.md). This feature requires
-a separate paid subscription —
+See [Organization policies](governance/access-controls/organization.md). This
+feature requires a separate paid subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
 to get started.
 
@@ -132,7 +132,7 @@ $ echo $BRAVE_API_KEY
 ## Why do agents run without approval prompts?
 
 The sandbox itself is the safety boundary. Because agents run inside an
-isolated microVM with [network policies](governance/),
+isolated microVM with [network policies](governance/access-controls/network.md),
 [credential isolation](security/credentials.md), and no access to your host
 system outside the workspace, the usual reasons for approval prompts (preventing
 destructive commands, network access, file modifications) are handled by the
