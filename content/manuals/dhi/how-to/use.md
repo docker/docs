@@ -81,7 +81,7 @@ For multi-stage builds:
   executables](#use-a-static-image-for-compiled-executables).
 
 To learn how to search for available variants, see [Search and evaluate
-images](./explore.md).
+images](./search-evaluate.md).
 
 ## Use a DHI in CI/CD pipelines
 
@@ -90,7 +90,7 @@ You can reference them in Dockerfiles, pull them as part of a pipeline step, or
 run containers based on them during builds and tests.
 
 Unlike typical container images, DHIs also include signed
-[attestations](../core-concepts/attestations.md) such as SBOMs and provenance
+[attestations](../explore/security-concepts/attestations.md) such as SBOMs and provenance
 metadata. You can incorporate these into your pipeline to support supply chain
 security, policy checks, or audit requirements if your tooling supports it.
 

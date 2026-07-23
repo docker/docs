@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /dhi/core-concepts/vex/
 title: Vulnerability Exploitability eXchange (VEX)
 linktitle: VEX
 description: Learn how VEX helps you prioritize real risks by identifying which vulnerabilities in Docker Hardened Images are actually exploitable.

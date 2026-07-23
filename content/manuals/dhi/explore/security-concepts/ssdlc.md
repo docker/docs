@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /dhi/core-concepts/ssdlc/
 title: Secure Software Development Lifecycle
 linktitle: SSDLC
 description: See how Docker Hardened Images support a secure SDLC by integrating with scanning, signing, and debugging tools.
@@ -37,7 +39,7 @@ Docker provides tools and secure content that make SSDLC practices easier to
 adopt across the container lifecycle. With [Docker Hardened
 Images](../_index.md) (DHIs), [Docker
 Debug](/reference/cli/docker/debug/), and [Docker
-Scout](../../../manuals/scout/_index.md), teams can add security without losing
+Scout](../../../scout/_index.md), teams can add security without losing
 velocity.
 
 ### Plan and design

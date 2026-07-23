@@ -72,7 +72,7 @@ can use either interface.
 {{< /tabs >}}
 
 Continue to the next step to mirror the image. To dive deeper into exploring
-images see [Search and evaluate Docker Hardened Images](explore.md).
+images see [Search and evaluate Docker Hardened Images](search-evaluate.md).
 
 ## Step 2: Mirror the repository
 
@@ -97,7 +97,7 @@ can mirror repositories.
 
 To use the following commands, you must authenticate or configure DHI CLI
 authentication using your Docker token. For details, see [Use the DHI
-CLI](cli.md#configuration).
+CLI](../tools/cli.md#configuration).
 
 1. Start mirroring the repository to your organization namespace. Replace
    `<your-org>` with your organization name.
@@ -152,7 +152,7 @@ column to monitor the build status.
 
 To use the following commands, you must authenticate or configure DHI CLI
 authentication using your Docker token. For details, see [Use the DHI
-CLI](cli.md#configuration).
+CLI](../tools/cli.md#configuration).
 
 1. Create a customization. Replace `<your-org>` with your organization name.
    This creates a file called `my-customization.yaml` with the customization

@@ -1,12 +1,16 @@
 ---
-title: Docker Hardened Images resources
-linktitle: Additional resources
-description: Additional resources including product information, guides, and GitHub repositories for Docker Hardened Images
+title: Resources and feedback
+linktitle: Resources and feedback
+description: Additional resources, community links, GitHub repositories, and how to give feedback for Docker Hardened Images.
+keywords: docker hardened images resources, dhi feedback, dhi github, dhi community, report issue, dhi support
 weight: 999
+aliases:
+  - /dhi/about/feedback/
+  - /dhi/explore/feedback/
 ---
 
-This page provides links to additional resources related to Docker Hardened
-Images (DHI), including guides, Docker Hub resources, and GitHub repositories.
+This page provides links to additional resources, community channels, and ways
+to give feedback on Docker Hardened Images (DHI).
 
 For product information and feature comparison, visit the [Docker Hardened
 Images product page](https://www.docker.com/products/hardened-images/).
@@ -50,8 +54,6 @@ organization:
 - [Terraform Provider](https://github.com/docker-hardened-images/terraform-provider-dhi):
   Terraform provider for managing DHI resources
   ([Terraform Registry](https://registry.terraform.io/providers/docker-hardened-images/dhi/latest/docs))
-- [Discussions](https://github.com/orgs/docker-hardened-images/discussions):
-  Community forum and product discussions
 
 ## Additional resources
 
@@ -73,3 +75,19 @@ organization:
 - [Docker Support](https://www.docker.com/support/): Access support resources
   for DHI Select and Enterprise customers
 
+## Feedback and community
+
+Use the [GitHub Discussions board](https://github.com/orgs/docker-hardened-images/discussions)
+to engage with the DHI team for general questions, best practices, security
+tips, and community announcements.
+
+To report a bug, request a feature, or suggest a documentation improvement,
+[open an issue](https://github.com/docker-hardened-images/catalog/issues) in
+the catalog repository.
+
+## Security disclosure
+
+Do not post details of vulnerabilities before coordinated disclosure and
+resolution. If you discover a security vulnerability, report it responsibly
+by following Docker's [security disclosure
+policy](https://www.docker.com/trust/vulnerability-disclosure-policy/).
