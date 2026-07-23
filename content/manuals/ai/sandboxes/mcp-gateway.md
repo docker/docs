@@ -171,9 +171,10 @@ To register an OAuth-backed server without authorizing it, pass `--skip_auth`:
 $ sbx mcp add notion --url https://mcp.notion.com/mcp --skip_auth
 ```
 
-When an unauthorized OAuth-backed server is exposed to a sandbox, the gateway
-exposes a helper tool named `<server>-authorize`, such as `notion-authorize`.
-The agent can call that tool from inside the sandbox when it needs the server.
+For each OAuth-backed remote server exposed to a sandbox, the gateway exposes a
+helper tool named `<server>-authorize`, such as `notion-authorize`. The agent can
+call the tool to authorize or reauthorize the server. If the server isn't
+authorized, the helper is the only tool exposed for that server.
 
 You can manage OAuth credentials from the host:
 
@@ -208,9 +209,9 @@ $ sbx run claude --name my-session \
 ```
 
 Every name in the static set must already be registered with `sbx mcp add`. The
-static set is fixed at sandbox creation time. If you omit `--static-mcp`, the
-sandbox starts with an MCP gateway but no registered MCP servers. To use a
-different static set, create a new sandbox.
+static set is fixed at sandbox creation time. In local gateway mode, if you omit
+`--static-mcp`, the sandbox starts with an MCP gateway but no registered MCP
+servers. To use a different static set, create a new sandbox.
 
 ## Add a server to a running sandbox
 
@@ -238,15 +239,17 @@ commands to register servers and manage credentials from the host. The tools
 matter because agents can call them during a session, and admins can govern
 them separately from tools provided by registered MCP servers.
 
-| Tool                 | Description                                                                                    |
-| -------------------- | ---------------------------------------------------------------------------------------------- |
-| `mcp-exec`           | Executes a tool by name in the current gateway session.                                        |
-| `code-mode`          | Creates a session-scoped JavaScript tool that can call selected tools through the MCP gateway. |
-| `<server>-authorize` | Starts OAuth authorization for an exposed server that requires authorization.                  |
+| Tool                 | Description                                                                                |
+| -------------------- | ------------------------------------------------------------------------------------------ |
+| `mcp-exec`           | Executes a tool by name through the gateway.                                               |
+| `code-mode`          | Creates an ephemeral JavaScript tool that can call selected tools through the MCP gateway. |
+| `<server>-authorize` | Starts or restarts OAuth authorization for an exposed OAuth-backed remote server.          |
 
-The gateway exposes `<server>-authorize` only when an OAuth-backed server is
-exposed to the sandbox and needs authorization. If `code-mode` creates a
-generated tool, that generated tool is available only in the current session.
+The gateway exposes `<server>-authorize` for OAuth-backed remote servers, even
+when they already have a valid token. Local stdio servers don't expose this
+helper. If `code-mode` creates a generated tool, the tool is shared by clients
+connected to the sandbox's gateway and disappears when the gateway is replaced
+or stops.
 
 In MCP access policies, built-in gateway tools are `MCP::Primordial` resources
 and use the `invokePrimordial` action. Tools from registered MCP servers are
