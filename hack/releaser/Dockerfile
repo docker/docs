@@ -15,6 +15,12 @@ RUN --mount=type=bind,target=. \
   --mount=type=cache,target=/root/.cache/go-build \
   go build -o /out/releaser .
 
+# releaser-test runs the unit tests for the CloudFront redirect Lambda function.
+FROM base AS releaser-test
+RUN apk add --no-cache nodejs
+RUN --mount=type=bind,target=. \
+  node --test cloudfront-lambda-redirects.test.js
+
 FROM base AS aws-lambda-invoke
 ARG DRY_RUN=false
 ARG AWS_REGION

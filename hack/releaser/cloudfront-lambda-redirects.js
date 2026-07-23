@@ -1,91 +1,113 @@
-'use strict';
+"use strict";
 
 exports.handler = (event, context, callback) => {
-    //console.log("event", JSON.stringify(event));
-    const request = event.Records[0].cf.request;
-    const requestUrl = request.uri.replace(/\/$/, "")
+  //console.log("event", JSON.stringify(event));
+  const request = event.Records[0].cf.request;
+  const requestUrl = request.uri.replace(/\/$/, "");
 
-    const redirects = JSON.parse(`{{.RedirectsJSON}}`);
-    for (let key in redirects) {
-        const redirectTarget = key.replace(/\/$/, "")
-        if (redirectTarget !== requestUrl) {
-            continue;
-        }
-        //console.log(`redirect: ${requestUrl} to ${redirects[key]}`);
-        const response = {
-            status: '301',
-            statusDescription: 'Moved Permanently',
-            headers: {
-                location: [{
-                    key: 'Location',
-                    value: redirects[key],
-                }],
-            },
-        }
-        callback(null, response);
-        return
+  // Preserve the query string (e.g. UTM tags) when issuing a redirect.
+  const withQuery = (location) => {
+    if (!request.querystring) {
+      return location;
     }
-
-    const redirectsPrefixes = JSON.parse(`{{.RedirectsPrefixesJSON}}`);
-    for (let x in redirectsPrefixes) {
-        const rp = redirectsPrefixes[x];
-        if (!request.uri.startsWith(`/${rp['prefix']}`)) {
-            continue;
-        }
-        let newlocation = "/";
-        if (rp['strip']) {
-            let re = new RegExp(`(^/${rp['prefix']})`, 'gi');
-            newlocation = request.uri.replace(re,'/');
-        }
-        //console.log(`redirect: ${request.uri} to ${redirectsPrefixes[key]}`);
-        const response = {
-            status: '301',
-            statusDescription: 'Moved Permanently',
-            headers: {
-                location: [{
-                    key: 'Location',
-                    value: newlocation,
-                }],
-            },
-        }
-        callback(null, response);
-        return
+    const isRelative = location.startsWith("/") && !location.startsWith("//");
+    const url = new URL(location, "https://docs.docker.com");
+    const query = new URLSearchParams(request.querystring);
+    for (const [key, value] of query) {
+      url.searchParams.append(key, value);
     }
+    return isRelative ? url.pathname + url.search + url.hash : url.href;
+  };
 
-    // Check Accept header for markdown/text requests
-    const headers = request.headers;
-    const acceptHeader = headers.accept ? headers.accept[0].value : '';
-    const wantsMarkdown = acceptHeader.includes('text/markdown') ||
-                          acceptHeader.includes('text/plain');
-
-    // Handle directory requests by appending index.html or index.md for requests without file extensions
-    let uri = request.uri;
-
-    // Check if the URI has a dot after the last slash (indicating a filename)
-    // This is more accurate than just checking the end of the URI
-    const hasFileExtension = /\.[^/]*$/.test(uri.split('/').pop());
-
-    // If it's not a file, treat it as a directory
-    if (!hasFileExtension) {
-        if (wantsMarkdown) {
-            // Markdown files are flattened: /path/to/page.md not /path/to/page/index.md.
-            // The homepage markdown output remains at /index.md.
-            const stripped = uri.replace(/\/$/, '');
-            uri = stripped === '' ? '/index.md' : stripped + '.md';
-        } else {
-            // HTML uses directory structure with index.html
-            if (!uri.endsWith("/")) {
-                uri += "/";
-            }
-            uri += "index.html";
-        }
-        request.uri = uri;
-    } else if (wantsMarkdown && uri.endsWith('/index.html')) {
-        // If requesting index.html but wants markdown, use the flattened .md file.
-        // The homepage markdown output lives at /index.md.
-        uri = uri === '/index.html' ? '/index.md' : uri.replace(/\/index\.html$/, '.md');
-        request.uri = uri;
+  const redirects = JSON.parse(`{{.RedirectsJSON}}`);
+  for (let key in redirects) {
+    const redirectTarget = key.replace(/\/$/, "");
+    if (redirectTarget !== requestUrl) {
+      continue;
     }
+    //console.log(`redirect: ${requestUrl} to ${redirects[key]}`);
+    const response = {
+      status: "301",
+      statusDescription: "Moved Permanently",
+      headers: {
+        location: [
+          {
+            key: "Location",
+            value: withQuery(redirects[key]),
+          },
+        ],
+      },
+    };
+    callback(null, response);
+    return;
+  }
 
-    callback(null, request);
+  const redirectsPrefixes = JSON.parse(`{{.RedirectsPrefixesJSON}}`);
+  for (let x in redirectsPrefixes) {
+    const rp = redirectsPrefixes[x];
+    if (!request.uri.startsWith(`/${rp["prefix"]}`)) {
+      continue;
+    }
+    let newlocation = "/";
+    if (rp["strip"]) {
+      let re = new RegExp(`(^/${rp["prefix"]})`, "gi");
+      newlocation = request.uri.replace(re, "/");
+    }
+    //console.log(`redirect: ${request.uri} to ${redirectsPrefixes[key]}`);
+    const response = {
+      status: "301",
+      statusDescription: "Moved Permanently",
+      headers: {
+        location: [
+          {
+            key: "Location",
+            value: withQuery(newlocation),
+          },
+        ],
+      },
+    };
+    callback(null, response);
+    return;
+  }
+
+  // Check Accept header for markdown/text requests
+  const headers = request.headers;
+  const acceptHeader = headers.accept ? headers.accept[0].value : "";
+  const wantsMarkdown =
+    acceptHeader.includes("text/markdown") ||
+    acceptHeader.includes("text/plain");
+
+  // Handle directory requests by appending index.html or index.md for requests without file extensions
+  let uri = request.uri;
+
+  // Check if the URI has a dot after the last slash (indicating a filename)
+  // This is more accurate than just checking the end of the URI
+  const hasFileExtension = /\.[^/]*$/.test(uri.split("/").pop());
+
+  // If it's not a file, treat it as a directory
+  if (!hasFileExtension) {
+    if (wantsMarkdown) {
+      // Markdown files are flattened: /path/to/page.md not /path/to/page/index.md.
+      // The homepage markdown output remains at /index.md.
+      const stripped = uri.replace(/\/$/, "");
+      uri = stripped === "" ? "/index.md" : stripped + ".md";
+    } else {
+      // HTML uses directory structure with index.html
+      if (!uri.endsWith("/")) {
+        uri += "/";
+      }
+      uri += "index.html";
+    }
+    request.uri = uri;
+  } else if (wantsMarkdown && uri.endsWith("/index.html")) {
+    // If requesting index.html but wants markdown, use the flattened .md file.
+    // The homepage markdown output lives at /index.md.
+    uri =
+      uri === "/index.html"
+        ? "/index.md"
+        : uri.replace(/\/index\.html$/, ".md");
+    request.uri = uri;
+  }
+
+  callback(null, request);
 };
