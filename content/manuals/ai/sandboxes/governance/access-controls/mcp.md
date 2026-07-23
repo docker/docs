@@ -80,21 +80,25 @@ registered as `example` with the expected identity URL. It permits read-only
 tool calls, resource reads, and prompt retrieval from that registered server:
 
 ```plaintext
+// Permit registration with the expected name and identity URL.
 permit (principal, action == MCP::Action::"register", resource)
 when {
   resource in MCP::Server::"example" &&
   resource.identityURL == "https://mcp.example.com/mcp"
 };
 
+// Permit read-only tool calls.
 permit (principal, action == MCP::Action::"invokeTool", resource)
 when {
   resource in MCP::Server::"example" &&
   resource.readOnly == true
 };
 
+// Permit resource reads.
 permit (principal, action == MCP::Action::"readResource", resource)
 when { resource in MCP::Server::"example" };
 
+// Permit prompt retrieval.
 permit (principal, action == MCP::Action::"getPrompt", resource)
 when { resource in MCP::Server::"example" };
 ```
@@ -210,26 +214,24 @@ explicit host commands and OCI-packaged stdio servers started with host Docker.
 For details about this boundary, see
 [Docker Engine isolation](../../security/isolation.md#docker-engine-isolation).
 
-In a blocklist policy that otherwise permits registration, deny both host-run
-server types:
+In a blocklist policy that otherwise permits registration, deny the host-run
+server type:
 
 ```plaintext
 forbid (principal, action == MCP::Action::"register", resource)
-when {
-  resource.type == "local-stdio" ||
-  resource.type == "container-stdio"
-};
+when { resource.type == "local-stdio" };
 ```
 
 `local-stdio` covers explicit commands, including commands that start a Docker
-container. `container-stdio` covers OCI-packaged stdio servers resolved from
-registry or manifest metadata.
+container, and OCI-packaged stdio servers resolved from registry or manifest
+metadata with `--local`.
 
 ## Related information
 
-- Use [Policy concepts](../concepts.md#mcp-policies) for the MCP policy model.
-- Use the [MCP policy reference](../reference/mcp-policy.md) for exact action,
-  resource, attribute, context, and approval behavior.
-- Use [Organization policies](organization.md) to manage policy scope.
-- Use [Audit logs](../monitor-and-enforce/audit.md) to collect policy decision
+- [MCP policy concepts](../concepts.md#mcp-policies): policy model and rule
+  evaluation.
+- [MCP policy reference](../reference/mcp-policy.md): exact action, resource,
+  attribute, context, and approval behavior.
+- [Organization policies](organization.md): policy creation and scope.
+- [MCP policy audit logs](../monitor-and-enforce/audit.md): policy decision
   records.

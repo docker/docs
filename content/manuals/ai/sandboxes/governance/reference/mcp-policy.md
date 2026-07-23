@@ -40,7 +40,7 @@ permit (principal, action, resource);
 
 | Action              | Governs                   | Notes                                                                                                |
 | ------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `register`          | MCP server registration   | Remote server registration needs an explicit `permit`. Use server attributes to scope registration.  |
+| `register`          | MCP server registration   | Server registration needs an explicit `permit`. Use server attributes to scope registration.         |
 | `invokeTool`        | MCP tool calls            | Most tool access policies target this action.                                                        |
 | `invokePrimordial`  | Gateway meta-tool calls   | Applies to built-in gateway tools such as `mcp-exec`, `code-mode`, and OAuth authorization helpers.  |
 | `readResource`      | MCP resource reads        | Rules match `MCP::Resource` and `resource.uri`.                                                      |
@@ -55,7 +55,7 @@ Match resources with the MCP entity type and attributes for the request.
 
 | Entity            | Match with             | Notes                                                                                                                            |
 | ----------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `MCP::Server`     | Registered server name | The server URL or source is the `resource.identityURL` attribute, not the entity ID.                                             |
+| `MCP::Server`     | Registered server name | The canonical server identity is the `resource.identityURL` attribute, not the entity ID.                                        |
 | `MCP::Tool`       | Bare tool name         | Use `resource.name`. Display prefixes aren't included. A bare-name match applies to every server exposing a tool with that name. |
 | `MCP::Resource`   | Resource URI           | Use `resource.uri`.                                                                                                              |
 | `MCP::Prompt`     | Prompt name            | Use `resource.name`.                                                                                                             |
@@ -83,9 +83,8 @@ and are advisory.
 | `resource.destructive`     | Tools             | Defaults to `true` when a tool doesn't declare it.                                                                                                    |
 | `resource.idempotent`      | Tools             | Defaults to `false` when a tool doesn't declare it.                                                                                                   |
 | `resource.openWorld`       | Tools             | Defaults to `true` when a tool doesn't declare it.                                                                                                    |
-| `resource.category`        | Tools             | Server or catalog category copied onto the tool resource. Tools don't self-declare categories.                                                        |
-| `resource.type`            | Servers           | Use for server registration rules. `local-stdio` identifies explicit host commands, and `container-stdio` identifies OCI-packaged stdio servers.      |
-| `resource.identityURL`     | Servers           | The server URL or source. Use for server registration rules.                                                                                          |
+| `resource.type`            | Servers           | Use for server registration rules. See [Server type values](#server-type-values).                                                                     |
+| `resource.identityURL`     | Servers           | Canonical server identity. The value depends on the registration type. See [Server identity values](#server-identity-values).                         |
 | `resource.requiresOAuth`   | Servers           | Use for server registration rules.                                                                                                                    |
 | `resource.requiresNetwork` | Servers           | Use for server registration rules.                                                                                                                    |
 | `resource.command`         | Servers           | Local stdio server command, such as `npx` or `docker`, when available. Empty for remote servers and registrations that don't include command details. |
@@ -98,13 +97,33 @@ a literal asterisk.
 Use `.contains()` only on set attributes, such as `resource.args`. On string
 attributes, use `like`.
 
+### Server type values
+
+- `local-stdio`: a host-run stdio server. This includes explicit commands and
+  OCI-packaged stdio servers resolved from metadata with `--local`.
+- `container-stdio`: reserved for containerized stdio servers provisioned
+  through hosted gateway modes. The local gateway doesn't emit this value.
+- `remote-dcr`: a remote endpoint that doesn't require OAuth or supports OAuth
+  Dynamic Client Registration.
+- `remote-no-dcr`: a remote OAuth endpoint that doesn't support Dynamic Client
+  Registration.
+
+### Server identity values
+
+For a remote server, `resource.identityURL` is the endpoint URL. For an explicit
+local command, it is the resolved executable path on the host. For a `--local`
+metadata registration, it is `local://stdio/<name>`, not the registry or
+manifest URL.
+
 ## Context fields
 
-| Field                  | Notes                                                                                             |
-| ---------------------- | ------------------------------------------------------------------------------------------------- |
-| `context.request_time` | Bound at each enforcement point. Use it for time-window rules.                                    |
-| `context.oauth_scopes` | OAuth scopes for the caller. Present as a set, even when empty.                                   |
-| `context.args`         | Tool-call arguments for `invokeTool`. Present when arguments are available as a supported object. |
+| Field                  | Notes                                                                                                                                                                      |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `context.request_time` | Bound for tool calls, built-in gateway tool calls, resource reads, and prompt retrieval. Registration requests don't include it.                                           |
+| `context.args`         | Tool-call arguments for `invokeTool` requests to local stdio servers. Present when arguments are available as a supported object. Remote server requests don't include it. |
+
+A registration `permit` conditioned on `context.request_time` doesn't match,
+so the registration falls to default deny.
 
 Guard tool-call argument rules with `context has args` and a field check:
 
@@ -123,7 +142,7 @@ default deny. A `forbid` gated on missing arguments doesn't match, so it
 doesn't block the request.
 
 Only object-shaped tool arguments are represented in `context.args`.
-Unsupported, malformed, or too deeply nested arguments are omitted.
+Unsupported or malformed arguments are omitted.
 
 ## Approval annotation
 
@@ -172,11 +191,8 @@ don't require approval.
 - Server command and argument rules using `resource.command` or `resource.args`
   apply only when the resolved server registration includes local stdio command
   details. Remote servers and metadata-resolved local servers can have empty
-  values for those attributes. Use `resource.type` to match the `local-stdio`
-  and `container-stdio` server classes.
+  values for those attributes. Use `resource.type == "local-stdio"` to match
+  host-run servers independently of command details.
 - Principal-based rules don't take effect. Use organization and team policy
   scope to target users.
 - Server groups aren't supported in MCP policy. Reference servers individually.
-- Tool categories aren't self-declared by MCP tools. When available,
-  `resource.category` is server or catalog metadata copied onto the tool
-  resource.
