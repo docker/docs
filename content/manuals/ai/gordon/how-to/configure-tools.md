@@ -63,8 +63,9 @@ To configure:
 
 ![Advanced tool configuration](../images/gordon_advanced_tool_config.avif)
 
-Gordon still requests approval before running allow-listed tools, unless YOLO
-mode (auto-approve mode that bypasses permission checks) is enabled.
+Gordon still requests approval before running allow-listed tools, unless
+[YOLO mode](/manuals/ai/gordon/how-to/permissions.md#yolo-mode) (auto-approve
+mode that bypasses permission checks) is enabled.
 
 ## Organizational controls
 

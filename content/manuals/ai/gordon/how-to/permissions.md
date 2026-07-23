@@ -39,6 +39,46 @@ before using a tool.
 
 You can also enable YOLO mode to bypass permission checking altogether.
 
+## YOLO mode
+
+YOLO mode (“You Only Live Once”) is a setting that lets Gordon skip permission
+checks entirely and auto-approve every tool call instead of asking you to
+confirm each action.
+
+### What it does
+
+With YOLO mode on, Gordon runs allow-listed and non-allow-listed tools
+immediately — including shell commands, file writes, and other actions that
+would normally require your approval.
+
+### How to enable it
+
+1. Open Docker Desktop.
+2. Select **Gordon** in the sidebar.
+3. Select the settings icon at the bottom of text input.
+4. In the **Basic** tab, toggle **YOLO mode** on.
+
+The setting applies immediately to all sessions.
+
+### Security implications
+
+Enabling YOLO mode removes your ability to review or stop individual actions
+before they run. Gordon can execute destructive commands (such as deleting
+containers, volumes, or files) without prompting you first. Only enable it in
+environments where you're comfortable with Gordon acting without oversight,
+such as an isolated container or VM.
+
+### When you might use it
+
+- Trusted, sandboxed, or disposable environments
+- Demos and quick experimentation
+- Automated workflows where the tool list is already trusted
+
+### How to disable it
+
+Go back to the Basic tab in settings and toggle YOLO mode off. Gordon will
+resume asking for approval before running tools.
+
 The new permission settings apply immediately to all sessions.
 
 ## Session-level permissions
