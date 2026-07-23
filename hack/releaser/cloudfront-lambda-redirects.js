@@ -8,7 +8,12 @@ exports.handler = (event, context, callback) => {
     const redirects = JSON.parse(`{{.RedirectsJSON}}`);
     for (let key in redirects) {
         const redirectTarget = key.replace(/\/$/, "")
-        if (redirectTarget !== requestUrl) {
+        const exactMatch = key === request.uri
+        // Preserve slash-insensitive matching without redirecting a canonical
+        // slash-terminated destination back to itself.
+        const normalizedMatch = redirectTarget === requestUrl &&
+            redirects[key] !== request.uri
+        if (!exactMatch && !normalizedMatch) {
             continue;
         }
         //console.log(`redirect: ${requestUrl} to ${redirects[key]}`);
