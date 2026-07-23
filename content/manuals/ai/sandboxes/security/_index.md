@@ -74,10 +74,10 @@ can still affect you through the shared workspace and allowed network channels.
 In direct mode, workspace changes are live on your host. With the default
 direct mount, the agent edits the same files you see on your host. This
 includes files that execute implicitly during normal development: Git hooks,
-CI configuration, IDE task configs, `Makefile`, `package.json` scripts, and
-similar build files. Review changes before running any modified code. Note
-that Git hooks live inside `.git/` and do not appear in `git diff` output —
-check them separately. See
+CI configuration, IDE task configs, AI project configuration and settings,
+`Makefile`, `package.json` scripts, and similar build files. Review changes
+before running any modified code. Note that Git hooks live inside `.git/`
+and do not appear in `git diff` output — check them separately. See
 [Workspace isolation](isolation/#workspace-isolation) for the full list and
 for the alternative clone-mode boundary.
 

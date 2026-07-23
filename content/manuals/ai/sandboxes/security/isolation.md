@@ -115,6 +115,7 @@ including:
 - Git hooks (`.git/hooks/`)
 - CI configuration (`.github/workflows/`, `.gitlab-ci.yml`)
 - IDE configuration (`.vscode/tasks.json`, `.idea/` run configurations)
+- AI project configuration and settings (`.claude/`, `.codex/`, `.gemini/`)
 - Hidden files, shell scripts, and executables
 
 Some of these files execute code when you trigger normal development
@@ -130,6 +131,9 @@ Review them after any agent session before performing those actions:
   during build or install steps.
 - IDE configuration (`.vscode/tasks.json`, `.idea/`) can run tasks
   when you open the project.
+- AI project configuration and settings (`.claude/settings.json`, `.codex/config.toml`,
+  `.gemini/settings.json`) can define hooks and startup commands that
+  execute automatically.
 
 > [!WARNING]
 > Treat sandbox-modified workspace files the same way you would treat a pull
