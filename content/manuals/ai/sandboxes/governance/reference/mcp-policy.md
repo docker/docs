@@ -99,10 +99,10 @@ attributes, use `like`.
 
 ### Server type values
 
+Local gateway registrations use these values:
+
 - `local-stdio`: a host-run stdio server. This includes explicit commands and
   OCI-packaged stdio servers resolved from metadata with `--local`.
-- `container-stdio`: reserved for containerized stdio servers provisioned
-  through hosted gateway modes. The local gateway doesn't emit this value.
 - `remote-dcr`: a remote endpoint that doesn't require OAuth or supports OAuth
   Dynamic Client Registration.
 - `remote-no-dcr`: a remote OAuth endpoint that doesn't support Dynamic Client
