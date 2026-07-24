@@ -12,7 +12,7 @@ aliases:
 
 Learn how to deactivate a Docker organization, including required prerequisite
 steps. For information about deactivating user
-accounts, see [Deactivate a user account](../../accounts/deactivate-user-account.md).
+accounts, see [Deactivate a Docker account](../../accounts/deactivate-user-account.md).
 
 > [!WARNING]
 >

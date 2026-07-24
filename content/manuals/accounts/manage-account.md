@@ -1,24 +1,27 @@
 ---
 title: Manage a Docker account
-linkTitle: Manage an account
+linkTitle: Manage
 weight: 20
-description: Learn how to manage your Docker account.
-keywords: accounts, docker ID, account settings, account management, docker home
+description: Update account settings, email, password, 2FA, tokens, and connected accounts
+keywords:
+  manage docker account, account settings, update email, change password,
+  Gravatar, two-factor authentication, personal access tokens, Google, GitHub,
+  connected accounts, convert account, deactivate account, Docker Home
 ---
 
-You can centrally manage your Docker account using Docker Home, including
+You can centrally manage your Docker account in Docker Home, including
 administrative and security settings.
 
 > [!TIP]
 >
 > If your account is associated with an organization that enforces single
 > sign-on (SSO), you may not have permissions to update your account settings.
-> You must contact your administrator to update your settings.
+> Contact your administrator to update your settings.
 
 ## Update account information
 
 Account information is visible on your **Account settings** page. You can
-update the following account information:
+update the following:
 
 - Full name
 - Company
@@ -40,7 +43,8 @@ To update your email address:
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
 1. Go to **Settings**, then choose **Email**.
-1. Enter your new email address and confirm your identity with your password. Select **Verify email**.
+1. Enter your new email address and confirm your identity with your password.
+   Select **Verify email**.
 1. Go to the new Docker email and copy the 6-digit verification code.
 1. Paste the verification code to complete updating your email.
 
@@ -54,13 +58,13 @@ Your verification session expires after 15 minutes.
 
 ## Change your password
 
-You can change your password by initiating a password reset via email. To change your password:
+You can change your password by starting a password reset by email:
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
 1. Select your avatar in the top-right corner and select **Account settings**.
 1. Select **Password**, then **Reset password**.
-1. Docker will send you a password reset email with instructions to reset
-   your password.
+1. Docker sends you a password reset email with instructions to reset your
+   password.
 
 ## Manage two-factor authentication
 
@@ -86,7 +90,12 @@ For more information, see
 
 ## Manage connected accounts
 
-You can unlink connected Google or GitHub accounts:
+If you signed up with Google or GitHub, that provider appears under
+**Connected accounts**. Disconnecting it removes the OAuth connection. It
+doesn't change your Docker ID, and it doesn't let you add a different sign-in
+method. You can't connect both Google and GitHub to the same account.
+
+To disconnect a connected account:
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
 1. Select your avatar in the top-right corner and select **Account settings**.
@@ -107,4 +116,10 @@ For information on converting your account into an organization, see
 ## Deactivate your account
 
 For information on deactivating your account, see
-[Deactivating a user account](./deactivate-user-account.md).
+[Deactivate a Docker account](./deactivate-user-account.md).
+
+## What's next
+
+- [Docker accounts overview](./_index.md)
+- [Create a Docker account](./create-account.md)
+- [Enable two-factor authentication](../security/2fa/_index.md)

@@ -1,11 +1,11 @@
 ---
 title: Create a Docker account
-linkTitle: Create an account
+linkTitle: Create
 weight: 10
-description: Learn how to register for a Docker ID and sign in to your account
+description: Create a Docker ID with email, Google, or GitHub, then sign in
 keywords:
-  accounts, docker ID, billing, paid plans, support, Hub, Store, Forums, knowledge
-  base, beta access, email, activation, verification
+  create docker account, docker ID, sign up, sign in, email, Google, GitHub,
+  verification, OTP, password reset, docker login
 aliases:
   - /docker-hub/accounts/
   - /docker-id/
@@ -13,71 +13,86 @@ aliases:
 
 You can create a free Docker account with your email address or by signing up
 with your Google or GitHub account. After creating a unique Docker ID, you can
-access all Docker products, including Docker Hub, Docker Desktop, and Docker Scout.
+access Docker products, including Docker Hub, Docker Desktop, and Docker Scout.
 
-Your Docker ID becomes your username for hosted Docker services, and
+Your Docker ID becomes your username for hosted Docker services and
 [Docker forums](https://forums.docker.com/).
 
 > [!TIP]
 >
-> Explore [Docker's subscriptions](https://www.docker.com/pricing?ref=Docs&refAction=DocsCreateAccount) to see what else Docker can offer you.
+> Explore
+> [Docker's subscriptions](https://www.docker.com/pricing?ref=Docs&refAction=DocsCreateAccount)
+> to see what else Docker can offer you.
 
 ## Create and verify your account
 
-Signing up with an email address, Google, or GitHub account requires additional verification to complete account creation:
+Signing up with an email address, Google, or GitHub requires verification
+before you can sign in:
 
-- If you sign up with Google or GitHub, you must first verify your email address with that provider.
-- If you sign up with an email address, you need to follow verification steps.
-  - After creating an account, Docker asks for a one-time password (OTP).
-  - Find the email from Docker with your code, then return to the OTP page to paste in your OTP code.  
+- If you sign up with Google or GitHub, verify your email address with that
+  provider first.
+- If you sign up with an email address, Docker sends a one-time password
+  (OTP). Enter the code from the Docker email on the OTP page.
 
 Docker blocks sign-in until you've verified your account.
 
-### Sign up with your email
+{{< tabs >}}
+{{< tab name="Email" >}}
 
-1. Go to the [Docker sign-up page](https://app.docker.com/signup/) and enter a unique, valid email address.
-1. Enter a username to use as your Docker ID. Once you create your Docker ID
-   you can't reuse it in the future if you deactivate this account. Your username: - Must be between 4 and 30 characters long - Can only contain numbers and lowercase letters
-1. Choose a password that's at least 9 characters long, then select **Sign Up**.
-1. Verify your email address when you receive the Docker OTP verification email. This completes the registration process.
+1. Go to the [Docker sign-up page](https://app.docker.com/signup/) and enter a
+   unique, valid email address.
+1. Enter a username to use as your Docker ID. Once you create your Docker ID,
+   you can't reuse it if you deactivate this account. Your username:
+   - Must be between 4 and 30 characters long
+   - Can only contain numbers and lowercase letters
+1. Choose a password that's at least 9 characters long, then select
+   **Sign up**.
+1. Verify your email address when you receive the Docker OTP verification
+   email. This completes the registration process.
 
-### Sign up with Google or GitHub
+{{< /tab >}}
+{{< tab name="Google or GitHub" >}}
 
 1. Go to the [Docker sign-up page](https://app.docker.com/signup/).
 1. Select your social provider, Google or GitHub.
 1. Select the social account you want to link to your Docker account.
 1. Select **Authorize Docker** to let Docker access your social account
-   information. You will be re-routed to the sign-up page.
+   information. Docker redirects you to the sign-up page.
 1. Enter a username to use as your Docker ID. Your username:
    - Must be between 4 and 30 characters long
    - Can only contain numbers and lowercase letters
 1. Select **Sign up**.
 
+{{< /tab >}}
+{{< /tabs >}}
+
 ## Sign in to your account
 
-You can sign in with your email, Google or GitHub account, or from
-the Docker CLI.
+You can sign in with your email, Google or GitHub account, or from the Docker
+CLI.
 
-### Sign in with email or Docker ID
+{{< tabs >}}
+{{< tab name="Email or Docker ID" >}}
 
-1. Go to the [Docker sign in page](https://login.docker.com).
+1. Go to the [Docker sign in page](https://login.docker.com/).
 1. Enter your email address or Docker ID and select **Continue**.
 1. Enter your password and select **Continue**.
 
 To reset your password, see [Reset your password](#reset-your-password).
 
-### Sign in with Google or GitHub
+{{< /tab >}}
+{{< tab name="Google or GitHub" >}}
 
 You can sign in using your Google or GitHub credentials. If your social
-account uses the same email address as an existing Docker ID, the
-accounts are automatically linked.
+account uses the same email address as an existing Docker ID, Docker links
+that provider to the account.
 
 If no Docker ID exists, Docker creates a new account for you.
 
-Docker doesn't support linking multiple sign-in methods
-to the same Docker ID.
+You can't link both Google and GitHub to the same Docker ID.
 
-### Sign in using the CLI
+{{< /tab >}}
+{{< tab name="CLI" >}}
 
 Use the `docker login` command to authenticate from the command line. For
 details, see [`docker login`](/reference/cli/docker/login/).
@@ -89,9 +104,13 @@ details, see [`docker login`](/reference/cli/docker/login/).
 >
 > To improve security, use
 > [Docker credential helpers](https://github.com/docker/docker-credential-helpers).
-> For even stronger protection, use a [personal access token](../security/access-tokens.md)
-> instead of a password. This is especially useful in CI/CD environments
-> or when credential helpers aren't available.
+> For even stronger protection, use a
+> [personal access token](../security/access-tokens.md) instead of a password.
+> This is especially useful in CI/CD environments or when credential helpers
+> aren't available.
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Reset your password
 
@@ -104,11 +123,12 @@ To reset your password:
 ## Troubleshooting
 
 If you have a paid Docker subscription,
-[contact the Support team](https://hub.docker.com/support/contact/) for assistance.
+[contact the Support team](https://hub.docker.com/support/contact/) for
+assistance.
 
 All Docker users can seek troubleshooting information and support through the
-following resources, where Docker or the community respond on a best effort
+following resources, where Docker or the community respond on a best-effort
 basis:
 
 - [Docker Community Forums](https://forums.docker.com/)
-- [Docker Community Slack](http://dockr.ly/comm-slack)
+- [Docker Community Slack](https://dockr.ly/comm-slack)
