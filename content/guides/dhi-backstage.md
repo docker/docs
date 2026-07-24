@@ -375,8 +375,14 @@ Then create the customization:
 dhictl customization create --org YOUR_ORG node-backstage.yaml
 ```
 
-Monitor the build progress using the customization ID from the create output, or
-run `dhictl customization list --org YOUR_ORG` to look it up:
+Monitor the build progress using the customization ID from the create output.
+To look up the ID, run:
+
+```console
+dhictl customization list --org YOUR_ORG
+```
+
+Then monitor the build:
 
 ```console
 dhictl customization build list <customization-id> --org YOUR_ORG
