@@ -17,7 +17,7 @@ The backend is provided by the [`docker sandbox`](https://docs.docker.com/ai/san
 > [!NOTE]
 > **Requirements**
 >
-> Sandbox mode requires Docker Desktop with sandbox support (or a working `sbx` CLI). docker-agent shells out to these tools, it does not start raw `docker run` containers.
+> Sandbox mode requires Docker Desktop with sandbox support (or a working `sbx` CLI). Docker Agent shells out to these tools, it does not start raw `docker run` containers.
 
 ## Usage
 
@@ -27,14 +27,14 @@ Enable sandbox mode with the `--sandbox` flag on the `docker agent run` command:
 docker agent run --sandbox agent.yaml
 ```
 
-docker-agent launches a sandbox VM, copies itself into it, mounts the current working directory, and re-runs the agent from inside.
+Docker Agent launches a sandbox VM, copies itself into it, mounts the current working directory, and re-runs the agent from inside.
 
 ## Flags
 
 | Flag          | Default                                      | Description                                                                                               |
 | ------------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | `--sandbox`   | `false`                                      | Enable sandbox mode.                                                                                      |
-| `--template`  | `docker/sandbox-templates:docker-agent`      | OCI image used as the sandbox template. Passed to `docker sandbox create -t` / `sbx create -t`.           |
+| `--template`  | `docker/sandbox-templates:docker-agent`      | OCI image used as the sandbox template. Passed to `docker sandbox create -t` / `sbx create -t`. See [Sandbox templates](#sandbox-templates). |
 | `--sbx`       | `true`                                       | Prefer the `sbx` CLI backend when it is available. Set `--sbx=false` to always use `docker sandbox`.      |
 | `--no-kit`    | `false`                                      | Disable the [auto-kit](#auto-kit) — do not stage skills or prompt files into the sandbox.                 |
 
@@ -139,6 +139,78 @@ pointing at this command so you can turn the missing host into a
 one-line, persistent fix instead of relying on the wider conservative
 fallback host set.
 
+## Sandbox templates
+
+A sandbox template is the OCI image the sandbox VM boots from. It determines
+the base OS and the tools available inside the VM, including whether the
+`docker-agent` binary is already there. `--template` (or `-t` on `sbx
+create` / `docker sandbox create`) selects it.
+
+### The default template
+
+`--template` defaults to `docker/sandbox-templates:docker-agent`, the
+official Docker Agent sandbox template, maintained by the Docker Sandboxes
+team. See [What the default template includes](#what-the-default-template-includes)
+for details.
+
+> [!NOTE]
+> There's currently no automated process that syncs this repository's own
+> template improvements into `docker/sandbox-templates:docker-agent`. Such a
+> process may land later, but until then this image can lag behind the
+> latest Docker Agent template build.
+
+### The repo-published templates
+
+This repository's own CI also builds and publishes a sandbox template — from
+the `template` stage of the
+[`Dockerfile`](https://github.com/docker/docker-agent/blob/main/Dockerfile) —
+as `docker/docker-agent-sbx-templates`. It's the way to get the freshest
+Docker Agent–flavored template:
+
+| Tag       | Built from                    | Use it when                                                        |
+| --------- | ------------------------------ | ------------------------------------------------------------------- |
+| `:latest` | The most recent `v*` release   | You want the newest Docker Agent template with release stability. |
+| `:edge`   | The current `main` branch      | You want today's `main` build and can tolerate lower stability.   |
+
+(Each release also publishes a matching version-pinned tag, e.g.
+`docker/docker-agent-sbx-templates:1.2.3`.)
+
+Use `:latest` for normal use. Reach for `:edge` only when you specifically
+need an unreleased fix or feature and can tolerate the occasional breakage.
+For reproducible runs, pin to a digest instead of a tag, e.g.
+`docker/docker-agent-sbx-templates@sha256:...`.
+
+Select one with `--template`:
+
+```bash
+$ docker agent run --sandbox --template docker/docker-agent-sbx-templates:latest agent.yaml
+```
+
+Or point the [`sbx`](https://docs.docker.com/ai/sandboxes/) CLI at it
+directly, without going through Docker Agent:
+
+```bash
+$ sbx create -t docker/docker-agent-sbx-templates:latest
+```
+
+> [!TIP]
+> The upstream [Docker Sandboxes documentation](https://docs.docker.com/ai/sandboxes/)
+> covers the full `sbx` / `docker sandbox` CLI reference, independent of
+> Docker Agent.
+
+### What they contain
+
+The `template` stage in this repository's
+[`Dockerfile`](https://github.com/docker/docker-agent/blob/main/Dockerfile)
+layers onto `docker/sandbox-templates:shell-docker` and adds:
+
+- The `docker-agent` binary.
+- `vim` and `tmux`, for interactive debugging inside the VM.
+- The **`docker-mcp`** Docker CLI plugin, installed at `~/.docker/cli-plugins/docker-mcp`.
+
+The image carries the label `com.docker.sandboxes.flavor=docker-agent-docker`
+so sandbox tooling can identify it.
+
 ## Example
 
 ```yaml
@@ -158,23 +230,30 @@ docker agent run --sandbox agent.yaml
 
 ## How It Works
 
-1. `--sandbox` tells docker-agent to prefer the `sbx` CLI (if available and `--sbx` is true), otherwise it falls back to `docker sandbox`.
+1. `--sandbox` tells Docker Agent to prefer the `sbx` CLI (if available and `--sbx` is true), otherwise it falls back to `docker sandbox`.
 2. A new sandbox VM is created from the image passed via `--template`.
 3. The current working directory is mounted into the VM; the agent binary is copied in.
 4. The [auto-kit](#auto-kit) is staged on the host and bind-mounted read-only into the VM, so the agent sees its skills and prompt files inside the sandbox.
 5. The default-deny network proxy is opened for the configured [models gateway](../../features/cli/index.md#runtime-configuration-flags) and any package hosts the auto-installer needs for the agent's MCP/LSP toolsets.
 6. All tools (shell, filesystem, background jobs, etc.) run inside the VM.
-7. When the session ends, docker-agent exits but does not stop or remove the sandbox VM; both the VM and the kit are kept around so subsequent runs from the same workspace can reuse them. A fresh sandbox is created only when the mount set has changed.
+7. When the session ends, Docker Agent exits but does not stop or remove the sandbox VM; both the VM and the kit are kept around so subsequent runs from the same workspace can reuse them. A fresh sandbox is created only when the mount set has changed.
 
 ### What the default template includes
 
-The default template (`docker/sandbox-templates:docker-agent`) ships with:
+The default template (`docker/sandbox-templates:docker-agent`) is a
+separate image maintained by the Docker Sandboxes team. This repository
+does not control its base image or contents, so no claim is made here
+about what it ships with beyond being the image `docker agent run
+--sandbox` uses whenever `--template` is not overridden (see
+[Flags](#flags) for the exact default).
 
-- **`docker-mcp`** CLI plugin — installed at `~/.docker/cli-plugins/docker-mcp`, available out of the box so agents can invoke `docker mcp` commands inside the sandbox without any additional setup.
+For a template whose base image and contents are verified against this
+repository's own build — including the `docker-mcp` CLI plugin — see
+[the repo-published templates](#sandbox-templates).
 
 ## Auto-Kit
 
-The sandbox VM has its own filesystem and `$HOME` — none of the host's `~/.agents/skills/`, `~/.claude/skills/`, project-level `.agents/skills/`, or prompt files like `AGENTS.md` and `CLAUDE.md` are visible inside it. To bridge that gap, docker-agent automatically builds a **kit**: a self-contained directory staged on the host before the sandbox starts and bind-mounted read-only into the VM at the same path.
+The sandbox VM has its own filesystem and `$HOME` — none of the host's `~/.agents/skills/`, `~/.claude/skills/`, project-level `.agents/skills/`, or prompt files like `AGENTS.md` and `CLAUDE.md` are visible inside it. To bridge that gap, Docker Agent automatically builds a **kit**: a self-contained directory staged on the host before the sandbox starts and bind-mounted read-only into the VM at the same path.
 
 The kit is built whenever `--sandbox` is used with an agent reference. It is opt-out via `--no-kit`.
 
@@ -186,7 +265,7 @@ For the agent referenced on the command line, the kit collects:
 - **Prompt files** — every file referenced via the agent's `add_prompt_files` (`AGENTS.md`, `CLAUDE.md`, …) is collected. Files that already live under the working directory are left alone (the live workspace mount surfaces them); files outside it (e.g. an `AGENTS.md` in `$HOME`) are copied under `<kit>/prompt_files/`.
 - **A manifest** — `<kit>/manifest.json` records what was staged. The on-disk copy is sanitised so it cannot be used to map the host filesystem from inside the sandbox.
 
-Before launch, docker-agent prints a summary of what was staged so you can see exactly which skills and prompt files the agent will have access to inside the sandbox.
+Before launch, Docker Agent prints a summary of what was staged so you can see exactly which skills and prompt files the agent will have access to inside the sandbox.
 
 ### Secret redaction
 
@@ -198,7 +277,7 @@ The sandbox templates ship with a default-deny network proxy that allows the maj
 
 ### Caching
 
-Kits are stored under the docker-agent cache directory (`~/Library/Caches/cagent/sandbox-kits/<hash>` on macOS) keyed by a content hash of the agent reference. Reusing the same agent across runs reuses the same kit directory in place; disk usage is bounded by the number of distinct agents you have run. Kits are deliberately kept on disk between runs because the reused sandbox VM holds a hard reference to the kit's bind-mount path — deleting it would leave the sandbox un-startable.
+Kits are stored under the Docker Agent cache directory (`~/Library/Caches/cagent/sandbox-kits/<hash>` on macOS) keyed by a content hash of the agent reference. Reusing the same agent across runs reuses the same kit directory in place; disk usage is bounded by the number of distinct agents you have run. Kits are deliberately kept on disk between runs because the reused sandbox VM holds a hard reference to the kit's bind-mount path — deleting it would leave the sandbox un-startable.
 
 ### Disabling the kit
 

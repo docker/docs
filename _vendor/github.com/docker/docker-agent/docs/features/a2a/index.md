@@ -1,6 +1,6 @@
 ---
 title: "A2A Protocol"
-description: "Expose docker-agent agents via Google's Agent-to-Agent (A2A) protocol for interoperability with other agent frameworks."
+description: "Expose Docker Agent agents via Google's Agent-to-Agent (A2A) protocol for interoperability with other agent frameworks."
 keywords: docker agent, ai agents, features, a2a protocol
 weight: 60
 canonical: https://docs.docker.com/ai/docker-agent/features/a2a/
@@ -8,7 +8,7 @@ aliases:
   - /ai/docker-agent/integrations/a2a/
 ---
 
-_Expose docker-agent agents via Google's Agent-to-Agent (A2A) protocol for interoperability with other agent frameworks._
+_Expose Docker Agent agents via Google's Agent-to-Agent (A2A) protocol for interoperability with other agent frameworks._
 
 ## Overview
 
@@ -54,7 +54,7 @@ $ docker agent serve a2a agentcatalog/pirate
 
 - **Auto port selection** — Picks an available port if not specified
 - **Agent card** — Provides standard A2A agent metadata
-- **Full docker-agent features** — Supports all tools, models, and gateway features
+- **Full Docker Agent features** — Supports all tools, models, and gateway features
 - **Multiple sources** — Load agents from files or the agent catalog
 
 > [!TIP]

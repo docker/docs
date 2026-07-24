@@ -1,18 +1,18 @@
 ---
 title: "Cloudflare AI Gateway"
-description: "Use Cloudflare AI Gateway models with docker-agent."
+description: "Use Cloudflare AI Gateway models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, cloudflare ai gateway
 weight: 60
 canonical: https://docs.docker.com/ai/docker-agent/providers/cloudflare-ai-gateway/
 ---
 
-_Use Cloudflare AI Gateway models with docker-agent._
+_Use Cloudflare AI Gateway models with Docker Agent._
 
 ## Overview
 
 [Cloudflare AI Gateway](https://developers.cloudflare.com/ai-gateway/) is a
 single OpenAI-compatible endpoint that routes to models from OpenAI, Anthropic,
-Workers AI and more, with caching, rate limiting and observability. docker-agent
+Workers AI and more, with caching, rate limiting and observability. Docker Agent
 includes built-in support for AI Gateway as an alias provider.
 
 The alias sends your token in the standard `Authorization: Bearer` header, so it
@@ -82,7 +82,7 @@ the current provider list, model IDs, and how billing works.
 
 ## How It Works
 
-Cloudflare AI Gateway is implemented as a built-in alias in docker-agent:
+Cloudflare AI Gateway is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://gateway.ai.cloudflare.com/v1/${CLOUDFLARE_ACCOUNT_ID}/${CLOUDFLARE_GATEWAY_ID}/compat`
@@ -91,13 +91,13 @@ Cloudflare AI Gateway is implemented as a built-in alias in docker-agent:
 The base URL is templated: `${CLOUDFLARE_ACCOUNT_ID}` and
 `${CLOUDFLARE_GATEWAY_ID}` are substituted from the environment when the provider
 is built, so both must be set in addition to `CLOUDFLARE_API_TOKEN`. Because the
-gateway can route to open-weight models with strict chat templates, docker-agent
+gateway can route to open-weight models with strict chat templates, Docker Agent
 coalesces consecutive system messages into a single leading one for this
 provider.
 
 ## Authentication
 
-docker-agent authenticates by sending `CLOUDFLARE_API_TOKEN` in the standard
+Docker Agent authenticates by sending `CLOUDFLARE_API_TOKEN` in the standard
 `Authorization: Bearer` header. On the `.../compat` endpoint that header is
 treated as the **provider** key, so this alias works when:
 

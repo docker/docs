@@ -1,6 +1,6 @@
 ---
 title: "Model Providers"
-description: "docker-agent supports multiple AI model providers. Choose the right one for your use case, or use multiple providers in the same configuration."
+description: "Docker Agent supports multiple AI model providers. Choose the right one for your use case, or use multiple providers in the same configuration."
 keywords: docker agent, ai agents, model providers, llm
 linkTitle: "Overview"
 weight: 10
@@ -9,7 +9,7 @@ aliases:
   - /ai/docker-agent/model-providers/
 ---
 
-_docker-agent supports multiple AI model providers. Choose the right one for your use case, or use multiple providers in the same configuration._
+_Docker Agent supports multiple AI model providers. Choose the right one for your use case, or use multiple providers in the same configuration._
 
 ## Supported Providers
 
@@ -32,7 +32,7 @@ _docker-agent supports multiple AI model providers. Choose the right one for you
 
 ## Additional Built-in Providers
 
-docker-agent also includes built-in aliases for these providers:
+Docker Agent also includes built-in aliases for these providers:
 
 | Provider       | Alias            | API Key / Env Variable              |
 | -------------- | ---------------- | ----------------------------------- |

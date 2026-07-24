@@ -1,16 +1,16 @@
 ---
 title: "Remote MCP Servers"
-description: "Connect docker-agent to cloud services via remote MCP servers with built-in OAuth authentication."
+description: "Connect Docker Agent to cloud services via remote MCP servers with built-in OAuth authentication."
 keywords: docker agent, ai agents, features, remote mcp servers
 weight: 120
 canonical: https://docs.docker.com/ai/docker-agent/features/remote-mcp/
 ---
 
-_Connect docker-agent to cloud services via remote MCP servers with built-in OAuth authentication._
+_Connect Docker Agent to cloud services via remote MCP servers with built-in OAuth authentication._
 
 ## Overview
 
-Docker Agent supports connecting to remote MCP servers over **Streamable HTTP**, **SSE** (Server-Sent Events), and **Unix domain sockets**. Streamable HTTP is the current recommended transport for most hosted MCP servers. Many popular services offer MCP endpoints with OAuth — docker-agent handles the authentication flow automatically.
+Docker Agent supports connecting to remote MCP servers over **Streamable HTTP**, **SSE** (Server-Sent Events), and **Unix domain sockets**. Streamable HTTP is the current recommended transport for most hosted MCP servers. Many popular services offer MCP endpoints with OAuth — Docker Agent handles the authentication flow automatically.
 
 ```yaml
 toolsets:
@@ -22,7 +22,7 @@ toolsets:
 
 ## Unix Domain Sockets
 
-Use a `unix://` URL to connect to an MCP server listening on a local Unix socket. This is useful when running docker-agent inside a container and exposing an MCP server from the host via a bind-mounted socket:
+Use a `unix://` URL to connect to an MCP server listening on a local Unix socket. This is useful when running Docker Agent inside a container and exposing an MCP server from the host via a bind-mounted socket:
 
 ```yaml
 toolsets:
@@ -37,7 +37,7 @@ The path after `unix://` is the absolute path to the socket file. Configured `he
 > [!TIP]
 > **OAuth flow**
 >
-> When you connect to a remote MCP server that requires OAuth, docker-agent opens your browser automatically for authentication. Tokens are cached for subsequent sessions.
+> When you connect to a remote MCP server that requires OAuth, Docker Agent opens your browser automatically for authentication. Tokens are cached for subsequent sessions.
 
 > [!TIP]
 > **Cancelling the authorization dialog**
@@ -73,30 +73,30 @@ Set `allow_private_ips: true` on a remote MCP toolset only when the MCP server o
 > Header values in `remote.headers` support `${env.VAR}` and `${headers.NAME}` placeholders. Both are resolved on every outbound HTTP request (not just once at initialization), so short-lived credentials and forwarded caller headers always reflect the latest values:
 >
 > - `${env.VAR}` — reads the named environment variable. Useful for credentials stored in a secret manager that rotates them in-process.
-> - `${headers.NAME}` — forwards the named header from the caller's incoming HTTP request. Only meaningful when docker-agent is running as an API server (`docker agent serve api`) and a client passes authentication headers that the upstream MCP server also accepts.
+> - `${headers.NAME}` — forwards the named header from the caller's incoming HTTP request. Only meaningful when Docker Agent is running as an API server (`docker agent serve api`) and a client passes authentication headers that the upstream MCP server also accepts.
 
 > [!NOTE]
 > **Automatic reconnection after idle timeouts**
 >
-> Remote MCP connections (Streamable HTTP / SSE) automatically reconnect after the server closes an idle connection — no configuration needed. Services like Notion and Linear close idle connections periodically; docker-agent detects the clean close and reconnects with exponential backoff. To tune reconnect behaviour or disable reconnection entirely, use the [`lifecycle` block](../../configuration/tools/index.md#toolset-lifecycle).
+> Remote MCP connections (Streamable HTTP / SSE) automatically reconnect after the server closes an idle connection — no configuration needed. Services like Notion and Linear close idle connections periodically; Docker Agent detects the clean close and reconnects with exponential backoff. To tune reconnect behaviour or disable reconnection entirely, use the [`lifecycle` block](../../configuration/tools/index.md#toolset-lifecycle).
 
 > [!NOTE]
 > **Automatic recovery from revoked or rotated OAuth tokens**
 >
-> If a remote MCP server rejects the cached token with a `401 invalid_token` error (for example, because the token was revoked or rotated server-side), docker-agent handles the failure automatically:
+> If a remote MCP server rejects the cached token with a `401 invalid_token` error (for example, because the token was revoked or rotated server-side), Docker Agent handles the failure automatically:
 >
-> - **Silent refresh:** when a refresh token is available, docker-agent silently exchanges it for a new access token and replays the request — no user interaction required.
+> - **Silent refresh:** when a refresh token is available, Docker Agent silently exchanges it for a new access token and replays the request — no user interaction required.
 > - **Re-authentication prompt:** when the refresh token is absent or has also expired, the toolset transitions to a "needs re-auth" state and surfaces an OAuth prompt on your next message (exactly like the first-time flow).
 >
 > Either way, the agent never burns 5 reconnect attempts on an auth failure — it fails fast and either refreshes silently or defers to interactive re-auth. If you want to trigger re-auth immediately without waiting for the next message, run `/toolset-restart <name>` from the TUI.
 
 ### OAuth for servers without Dynamic Client Registration
 
-Most remote MCP servers that require OAuth support [Dynamic Client Registration (RFC 7591)](https://datatracker.ietf.org/doc/html/rfc7591) — no configuration is needed, docker-agent handles the flow for you.
+Most remote MCP servers that require OAuth support [Dynamic Client Registration (RFC 7591)](https://datatracker.ietf.org/doc/html/rfc7591) — no configuration is needed, Docker Agent handles the flow for you.
 
-For servers that do **not** support DCR, docker-agent falls back automatically:
+For servers that do **not** support DCR, Docker Agent falls back automatically:
 
-1. **Interactive credential prompt**: docker-agent presents a dialog asking for your `client_id` (required) and optionally a `client_secret`. This covers servers that require pre-registered app credentials but don't advertise them via DCR.
+1. **Interactive credential prompt**: Docker Agent presents a dialog asking for your `client_id` (required) and optionally a `client_secret`. This covers servers that require pre-registered app credentials but don't advertise them via DCR.
 2. **Explicit `oauth:` block** (recommended when you know the credentials in advance): add the block described below to skip the interactive prompt and supply credentials directly in config.
 
 ```yaml
@@ -118,7 +118,7 @@ toolsets:
 | -------------- | --------------- | -------- | ------------------------------------------------------------------------------------------------ |
 | `clientId`     | string          | ✓        | OAuth client ID registered with the remote MCP server.                                           |
 | `clientSecret` | string          | ✗        | OAuth client secret. Omit for public clients using PKCE.                                         |
-| `callbackPort` | integer         | ✗        | Local port to receive the OAuth redirect. If omitted, docker-agent picks a random free port.    |
+| `callbackPort` | integer         | ✗        | Local port to receive the OAuth redirect. If omitted, Docker Agent picks a random free port.    |
 | `scopes`       | array[string]   | ✗        | Scopes to request during the authorization step. Values are server-specific.                     |
 | `callbackRedirectURL` | string   | ✗        | Custom OAuth redirect URI. Useful when the auth server requires HTTPS or a pre-registered URL. The literal placeholder `${callbackPort}` is replaced with the actual local callback port. See below.            |
 
@@ -156,7 +156,7 @@ The local callback server still listens on the loopback interface on `callbackPo
 
 ### Unmanaged OAuth flow (server mode)
 
-When running `docker-agent serve api` (no local browser, no callback server), the runtime delegates the OAuth dance to the connected client via an MCP elicitation. There are two sub-behaviors, selected by the `--mcp-oauth-redirect-uri` flag:
+When running `docker agent serve api` (no local browser, no callback server), the runtime delegates the OAuth dance to the connected client via an MCP elicitation. There are two sub-behaviors, selected by the `--mcp-oauth-redirect-uri` flag:
 
 - **`--mcp-oauth-redirect-uri=<URL>` set** (recommended for hosts like Docker Desktop): the runtime generates `state` + PKCE + (optional) Dynamic Client Registration in-process, builds the full authorize URL, and emits an elicitation whose `Meta` includes:
 

@@ -1,12 +1,12 @@
 ---
 title: "Contributing"
-description: "docker-agent is open source. Here's how to set up your development environment and contribute."
+description: "Docker Agent is open source. Here's how to set up your development environment and contribute."
 keywords: docker agent, ai agents, community, contributing
 weight: 10
 canonical: https://docs.docker.com/ai/docker-agent/community/contributing/
 ---
 
-_docker-agent is open source. Here's how to set up your development environment and contribute._
+_Docker Agent is open source. Here's how to set up your development environment and contribute._
 
 ## Development Setup
 
@@ -52,14 +52,14 @@ export ANTHROPIC_API_KEY=your_key_here
 
 ## Dogfooding
 
-Use docker-agent to work on docker-agent! The project includes a specialized developer agent:
+Use Docker Agent to work on Docker Agent! The project includes a specialized developer agent:
 
 ```bash
 cd docker-agent
 docker agent run ./golang_developer.yaml
 ```
 
-This agent is an expert Go developer that understands the docker-agent codebase. Ask it questions, request fixes, or have it implement features.
+This agent is an expert Go developer that understands the Docker Agent codebase. Ask it questions, request fixes, or have it implement features.
 
 ## Core Concepts
 
@@ -121,7 +121,7 @@ Find us on [Slack](https://dockercommunity.slack.com/archives/C09DASHHRU4) for q
 
 ## Code of Conduct
 
-We want to keep the docker-agent community welcoming, inclusive, and collaborative. Key guidelines:
+We want to keep the Docker Agent community welcoming, inclusive, and collaborative. Key guidelines:
 
 - **Be nice** — Be courteous, respectful, and polite. No abuse of any kind will be tolerated.
 - **Encourage diversity** — Make everyone feel welcome regardless of background.

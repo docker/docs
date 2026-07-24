@@ -1,19 +1,19 @@
 ---
 title: "HCL Configuration"
-description: "Write docker-agent configs in HCL instead of YAML, using labeled blocks, heredocs, and the same underlying schema."
+description: "Write Docker Agent configs in HCL instead of YAML, using labeled blocks, heredocs, and the same underlying schema."
 keywords: docker agent, ai agents, configuration, yaml, hcl configuration
 weight: 20
 canonical: https://docs.docker.com/ai/docker-agent/configuration/hcl/
 ---
 
-_Write docker-agent configs in HCL instead of YAML. It maps to the same docker-agent schema and validation rules._
+_Write Docker Agent configs in HCL instead of YAML. It maps to the same Docker Agent schema and validation rules._
 
 `docker-agent` supports `.hcl` config files anywhere it supports `.yaml` or `.yml` files. HCL is useful if you prefer labeled blocks, less punctuation, and heredocs for long prompts.
 
 > [!TIP]
 > **Same config model, different syntax**
 >
-> YAML and HCL are just two syntaxes for the same docker-agent configuration model. docker-agent converts HCL to the equivalent YAML structure internally, then runs the normal schema validation and loading pipeline.
+> YAML and HCL are just two syntaxes for the same Docker Agent configuration model. Docker Agent converts HCL to the equivalent YAML structure internally, then runs the normal schema validation and loading pipeline.
 
 ## Minimal Example
 
@@ -181,7 +181,7 @@ agent "root" {
 
 HCL treats `${...}` inside strings and heredocs as template interpolation. If you need the literal text `${...}` in your prompt, escape it as `$${...}`.
 
-This matters for command prompts that intentionally show docker-agent template snippets:
+This matters for command prompts that intentionally show Docker Agent template snippets:
 
 ```hcl
 command "fix-lint" {
@@ -288,14 +288,14 @@ The same idea applies to other list-shaped sections such as RAG `strategy` block
 
 ## Important Differences from Terraform
 
-docker-agent uses HCL as a configuration syntax, not as Terraform:
+Docker Agent uses HCL as a configuration syntax, not as Terraform:
 
 - There are no modules, `locals`, or `variable` blocks.
 - The only function available in expressions is [`file()`](#loading-files-with-file); Terraform's function library (including `templatefile()`, which `file()` with a vars object replaces) is not available.
 - Prefer normal literal values: strings, numbers, booleans, lists, objects, and nested blocks.
 - After conversion, the result is validated exactly like the equivalent YAML config.
 
-If you already know Terraform, think of docker-agent HCL as a thin block-based syntax over the existing config schema.
+If you already know Terraform, think of Docker Agent HCL as a thin block-based syntax over the existing config schema.
 
 ## Examples
 

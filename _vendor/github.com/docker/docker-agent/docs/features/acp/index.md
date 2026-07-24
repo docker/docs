@@ -1,6 +1,6 @@
 ---
 title: "ACP (Agent Client Protocol)"
-description: "Expose docker-agent agents via the Agent Client Protocol for integration with ACP-compatible hosts like VS Code, IDEs, and other developer tools."
+description: "Expose Docker Agent agents via the Agent Client Protocol for integration with ACP-compatible hosts like VS Code, IDEs, and other developer tools."
 keywords: docker agent, ai agents, features, acp (agent client protocol)
 linkTitle: "ACP"
 weight: 70
@@ -9,11 +9,11 @@ aliases:
   - /ai/docker-agent/integrations/acp/
 ---
 
-_Expose docker-agent agents via the Agent Client Protocol for integration with ACP-compatible hosts like VS Code, IDEs, and other developer tools._
+_Expose Docker Agent agents via the Agent Client Protocol for integration with ACP-compatible hosts like VS Code, IDEs, and other developer tools._
 
 ## Overview
 
-The `docker agent serve acp` command starts an ACP server that communicates over **stdio** (standard input/output). This makes it ideal for integration with editors, IDEs, and other tools that spawn agent processes — the host sends JSON-RPC messages to docker-agent's stdin and reads responses from stdout.
+The `docker agent serve acp` command starts an ACP server that communicates over **stdio** (standard input/output). This makes it ideal for integration with editors, IDEs, and other tools that spawn agent processes — the host sends JSON-RPC messages to Docker Agent's stdin and reads responses from stdout.
 
 ACP is built on the [ACP Go SDK](https://github.com/coder/acp-go-sdk) and provides a standardized way for client applications to interact with AI agents.
 
@@ -42,7 +42,7 @@ $ docker agent serve acp ./agent.yaml --session-db ./my-sessions.db
 
 1. The host application spawns `docker agent serve acp agent.yaml` as a child process
 2. Communication happens over **stdin/stdout** using the ACP protocol
-3. The host sends user messages, docker-agent processes them through the agent
+3. The host sends user messages, Docker Agent processes them through the agent
 4. Agent responses, tool calls, and events stream back to the host
 5. Sessions are persisted in a SQLite database for continuity
 
@@ -58,7 +58,7 @@ Host Application
 
 - **Stdio transport** — No network ports needed; ideal for subprocess integration
 - **Session persistence** — SQLite-backed sessions survive process restarts
-- **Full agent support** — All docker-agent features work: tools, multi-agent, model fallbacks
+- **Full agent support** — All Docker Agent features work: tools, multi-agent, model fallbacks
 - **Multi-agent configs** — Team configurations with sub-agents work transparently
 - **Filesystem operations** — Agents can read/write files relative to the host's working directory
 
@@ -84,7 +84,7 @@ docker agent serve acp <agent-file>|<registry-ref> [flags]
 
 ## Integration Example
 
-A host application would spawn docker-agent as a subprocess and communicate via the ACP protocol:
+A host application would spawn Docker Agent as a subprocess and communicate via the ACP protocol:
 
 ```javascript
 // Pseudocode for an IDE extension
@@ -109,7 +109,7 @@ child.stdout.on("data", (data) => {
 > [!TIP]
 > **When to use ACP**
 >
-> Use ACP when building **IDE integrations**, **editor plugins**, or any tool that wants to embed a docker-agent agent as a subprocess. For HTTP-based integrations, use the [API Server](../api-server/index.md) instead.
+> Use ACP when building **IDE integrations**, **editor plugins**, or any tool that wants to embed a Docker Agent agent as a subprocess. For HTTP-based integrations, use the [API Server](../api-server/index.md) instead.
 
 > [!NOTE]
 > **See also**

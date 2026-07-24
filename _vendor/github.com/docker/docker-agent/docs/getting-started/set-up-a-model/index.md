@@ -6,7 +6,7 @@ weight: 25
 canonical: https://docs.docker.com/ai/docker-agent/getting-started/set-up-a-model/
 ---
 
-_Every agent needs a model to think with. Bring an API key for a cloud provider, or run a model locally with Docker Model Runner. This page walks through both paths end to end._
+_Most agents need a model to think with: bring an API key for a cloud provider, or run a model locally with Docker Model Runner. This page walks through both paths end to end — plus the exception: agents that delegate to the Claude Code CLI on a Claude subscription, which need no model at all._
 
 ## Pick a Path
 
@@ -19,10 +19,12 @@ _Every agent needs a model to think with. Bring an API key for a cloud provider,
 
 You can set up both. When you don't name a model, Docker Agent's `auto` selection picks the first cloud provider with a configured key and falls back to a locally pulled Docker Model Runner model.
 
+There is also a third path that is neither: if you have a **Claude subscription**, the [Claude Code harness](#path-c-claude-code-harness-claude-subscription) runs the official `claude` CLI as the agent — no API key and no local model required.
+
 > [!TIP]
 > **Prefer a wizard?**
 >
-> `docker agent setup` walks through the same choices interactively: pick a provider and store its key, or check Docker Model Runner and pull a local model. This page is the manual version of both paths. See the [CLI reference](../../features/cli/index.md#docker-agent-setup).
+> `docker agent setup` walks through the same choices interactively: pick a provider and store its key, check Docker Model Runner and pull a local model, or set up the Claude Code harness. This page is the manual version. See the [CLI reference](../../features/cli/index.md#docker-agent-setup).
 
 ## Path A: Cloud Provider (API Key)
 
@@ -53,11 +55,10 @@ That lasts for the current shell session. To set a key up once, use any other bu
 $ echo 'ANTHROPIC_API_KEY=sk-ant-...' > .env
 $ docker agent run --env-from-file .env
 
-# pass password manager (Linux, macOS)
-$ pass insert ANTHROPIC_API_KEY
-
-# macOS Keychain
-$ security add-generic-password -a "$USER" -s ANTHROPIC_API_KEY -w
+# Docker Agent env file, read automatically on every run
+# (`docker agent setup` writes it for you with owner-only permissions)
+$ echo 'ANTHROPIC_API_KEY=sk-ant-...' >> ~/.config/cagent/.env
+$ chmod 600 ~/.config/cagent/.env
 ```
 
 The entry name must match the environment variable the provider expects. [Managing Secrets](../../guides/secrets/index.md) covers every source (Docker Compose secrets, credential helpers, 1Password references) and the order they are checked in.
@@ -180,6 +181,50 @@ agents:
 ```
 
 When no cloud key is configured, bare `docker agent run` auto-selects a pulled local model, so after `docker model pull` you can run with no flags at all. The [Docker Model Runner provider page](../../providers/dmr/index.md) covers context size, runtime flags, and other tuning options.
+
+## Path C: Claude Code Harness (Claude Subscription)
+
+If you already pay for a Claude subscription, an agent can delegate its work to
+the official Claude Code CLI instead of calling a model API. This is an
+**external CLI, not provider API access**: Docker Agent launches `claude`,
+which authenticates with its own subscription login — no `ANTHROPIC_API_KEY`,
+no Docker Model Runner, and no token ever passes through Docker Agent.
+
+### 1. Install and log in
+
+Install [Claude Code](https://docs.anthropic.com/en/docs/claude-code), then
+log in **as the same OS user and environment that run `docker agent`**:
+
+```bash
+$ claude auth login --claudeai   # interactive, opens a browser
+$ claude auth status --text      # verify
+```
+
+### 2. Create a harness agent
+
+`docker agent setup` (pick "Claude Code harness") generates this file for you,
+or write it yourself:
+
+```yaml
+# claude-code-agent.yaml
+agents:
+  root:
+    description: Claude Code running on your Claude subscription
+    harness:
+      type: claude-code
+      effort: medium # low | medium | high | xhigh | max; omit for the Claude Code default
+```
+
+### 3. Verify and run
+
+```bash
+$ docker agent doctor claude-code-agent.yaml   # checks the CLI is installed and logged in
+$ docker agent run claude-code-agent.yaml
+```
+
+The harness runs the CLI non-interactively and bypasses Claude Code's
+permission prompts, so use it in a repository you trust — see the security
+notes and full field reference in [Coding Harnesses](../../features/harnesses/index.md).
 
 ## Check Your Setup Anytime
 

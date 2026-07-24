@@ -50,7 +50,7 @@ toolsets:
     recall: true
 ```
 
-When the agent starts a background job with `recall: true`, docker-agent sends a steering message back into the running agent loop after the job finishes. The message contains a short completion sentence and the job output, so the agent can react without polling `view_background_job`.
+When the agent starts a background job with `recall: true`, Docker Agent sends a steering message back into the running agent loop after the job finishes. The message contains a short completion sentence and the job output, so the agent can react without polling `view_background_job`.
 
 Use recall for finite background work where completion matters (for example, a long build or test suite). Avoid it for servers and watchers that are expected to run until stopped. See [`examples/shell_recall.yaml`](https://github.com/docker/docker-agent/blob/main/examples/shell_recall.yaml) for a complete configuration.
 

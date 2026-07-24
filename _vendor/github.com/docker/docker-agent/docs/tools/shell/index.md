@@ -111,4 +111,4 @@ The shell toolset exposes one tool:
 > [!NOTE]
 > **Tool Confirmation**
 >
-> By default, docker-agent asks for user confirmation before executing shell commands. Use `--yolo` to auto-approve all tool calls.
+> By default, Docker Agent asks for user confirmation before executing shell commands. Use `--yolo` to auto-approve all tool calls.

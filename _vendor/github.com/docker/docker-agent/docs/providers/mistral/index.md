@@ -1,16 +1,16 @@
 ---
 title: "Mistral"
-description: "Use Mistral AI models with docker-agent."
+description: "Use Mistral AI models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, mistral
 weight: 170
 canonical: https://docs.docker.com/ai/docker-agent/providers/mistral/
 ---
 
-_Use Mistral AI models with docker-agent._
+_Use Mistral AI models with Docker Agent._
 
 ## Overview
 
-Mistral AI provides powerful language models through an OpenAI-compatible API. docker-agent includes built-in support for Mistral as an alias provider.
+Mistral AI provides powerful language models through an OpenAI-compatible API. Docker Agent includes built-in support for Mistral as an alias provider.
 
 ## Setup
 
@@ -70,23 +70,23 @@ Check the [Mistral Models documentation](https://docs.mistral.ai/getting-started
 
 ## Auto-Detection
 
-When you run `docker agent run` without specifying a config, docker-agent automatically detects available providers. If `MISTRAL_API_KEY` is set and higher-priority providers (OpenAI, Anthropic, Google) are not available, Mistral will be used with `mistral-small-latest` as the default model.
+When you run `docker agent run` without specifying a config and no project-level `docker-agent.yaml`, `docker-agent.yml`, or `docker-agent.hcl` exists, Docker Agent automatically detects available providers. If `MISTRAL_API_KEY` is set and higher-priority providers (OpenAI, Anthropic, Google) are not available, Mistral will be used with `mistral-small-latest` as the default model.
 
 ## Extended Thinking
 
-docker-agent's `thinking_budget` field is **not applied** to Mistral models: the underlying OpenAI-compatible client only sends `reasoning_effort` for OpenAI reasoning model names (o-series, gpt-5). Setting `thinking_budget` on a Mistral model passes config validation but has no effect on the request.
+Docker Agent's `thinking_budget` field is **not applied** to Mistral models: the underlying OpenAI-compatible client only sends `reasoning_effort` for OpenAI reasoning model names (o-series, gpt-5). Setting `thinking_budget` on a Mistral model passes config validation but has no effect on the request.
 
 Mistral reasoning models (e.g. `magistral`) reason on their own without configuration. For non-reasoning models, use the [think tool](../../tools/think/index.md) instead.
 
 ## How It Works
 
-Mistral is implemented as a built-in alias in docker-agent:
+Mistral is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://api.mistral.ai/v1`
 - **Token Variable:** `MISTRAL_API_KEY`
 
-This means Mistral uses the same client as OpenAI, making it fully compatible with all OpenAI features supported by docker-agent.
+This means Mistral uses the same client as OpenAI, making it fully compatible with all OpenAI features supported by Docker Agent.
 
 ## Example: Code Assistant
 

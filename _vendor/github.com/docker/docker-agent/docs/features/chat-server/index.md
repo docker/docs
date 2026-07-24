@@ -1,12 +1,12 @@
 ---
 title: "Chat Server"
-description: "Expose your agents through an OpenAI-compatible Chat Completions API so any tool that already speaks OpenAI can drive a docker-agent agent."
+description: "Expose your agents through an OpenAI-compatible Chat Completions API so any tool that already speaks OpenAI can drive a Docker Agent agent."
 keywords: docker agent, ai agents, features, chat server
 weight: 90
 canonical: https://docs.docker.com/ai/docker-agent/features/chat-server/
 ---
 
-_Expose your agents through an OpenAI-compatible Chat Completions API so any tool that already speaks OpenAI can drive a docker-agent agent._
+_Expose your agents through an OpenAI-compatible Chat Completions API so any tool that already speaks OpenAI can drive a Docker Agent agent._
 
 ## Overview
 
@@ -15,7 +15,7 @@ more agents through an **OpenAI-compatible Chat Completions API** at
 `/v1/chat/completions` and `/v1/models`. Any client that already speaks the
 OpenAI protocol — for example
 [Open WebUI](https://github.com/open-webui/open-webui), `curl`, the OpenAI
-Python SDK, or LangChain — can drive a docker-agent agent without any custom
+Python SDK, or LangChain — can drive a Docker Agent agent without any custom
 integration.
 
 ```bash
@@ -38,7 +38,7 @@ $ docker agent serve chat agent.yaml --api-key-env CHAT_BEARER_TOKEN
 > [!TIP]
 > **When to use chat server vs. API server**
 >
-> Use the **chat server** when you want to plug docker-agent into existing OpenAI-compatible tooling (chat UIs, IDE integrations, OpenAI SDK clients). Use the [API server](../api-server/index.md) when you want full control over sessions, agent execution, tool-call confirmations, and streamed runtime events.
+> Use the **chat server** when you want to plug Docker Agent into existing OpenAI-compatible tooling (chat UIs, IDE integrations, OpenAI SDK clients). Use the [API server](../api-server/index.md) when you want full control over sessions, agent execution, tool-call confirmations, and streamed runtime events.
 
 ## Endpoints
 
@@ -207,7 +207,7 @@ also accepted.
 
 ## Open WebUI Integration
 
-Open WebUI can talk to any OpenAI-compatible endpoint. To plug docker-agent
+Open WebUI can talk to any OpenAI-compatible endpoint. To plug Docker Agent
 in:
 
 1. Start the chat server, optionally with auth:
@@ -229,4 +229,4 @@ in:
 > [!NOTE]
 > **See also**
 >
-> For the docker-agent–native HTTP API (sessions, tool-call confirmation, runtime events), see the [API Server](../api-server/index.md). For full CLI flag documentation, see the [CLI Reference](../cli/index.md#docker-agent-serve-chat).
+> For the Docker Agent–native HTTP API (sessions, tool-call confirmation, runtime events), see the [API Server](../api-server/index.md). For full CLI flag documentation, see the [CLI Reference](../cli/index.md#docker-agent-serve-chat).

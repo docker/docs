@@ -1,18 +1,18 @@
 ---
 title: "Fireworks AI"
-description: "Use Fireworks AI models with docker-agent."
+description: "Use Fireworks AI models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, fireworks ai
 weight: 100
 canonical: https://docs.docker.com/ai/docker-agent/providers/fireworks/
 ---
 
-_Use Fireworks AI models with docker-agent._
+_Use Fireworks AI models with Docker Agent._
 
 ## Overview
 
 [Fireworks AI](https://fireworks.ai/) is a fast inference host for open-weight
 models, serving Kimi K2, Llama, Qwen, DeepSeek, GLM and others through an
-OpenAI-compatible API. docker-agent includes built-in support for Fireworks AI
+OpenAI-compatible API. Docker Agent includes built-in support for Fireworks AI
 as an alias provider.
 
 ## Setup
@@ -75,14 +75,14 @@ limits, and pricing.
 
 ## How It Works
 
-Fireworks AI is implemented as a built-in alias in docker-agent:
+Fireworks AI is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://api.fireworks.ai/inference/v1`
 - **Token Variable:** `FIREWORKS_API_KEY`
 
 Because Fireworks fronts open-weight models whose chat templates may reject more
-than one leading system message, docker-agent coalesces its per-source system
+than one leading system message, Docker Agent coalesces its per-source system
 messages into a single one for this provider.
 
 ## Example: Code Assistant

@@ -10,7 +10,7 @@ _Skills provide specialized instructions that agents can load on demand when a t
 
 ## How Skills Work
 
-1. docker-agent scans standard directories for `SKILL.md` files
+1. Docker Agent scans standard directories for `SKILL.md` files
 2. Skill metadata (name, description) is injected into the agent's system prompt
 3. When a user request matches a skill, the agent reads the full instructions
 4. The agent follows the skill's detailed instructions to complete the task
@@ -342,7 +342,7 @@ When multiple skills share the same name:
 
 ## Skills in Sandbox Mode
 
-When you run an agent with [`--sandbox`](../../configuration/sandbox/index.md), the sandbox VM has its own filesystem with no access to your host's skill directories. docker-agent handles this transparently via the [auto-kit](../../configuration/sandbox/index.md#auto-kit): every discovered local skill is staged into a per-agent kit on the host, run through best-effort secret redaction (see the [auto-kit](../../configuration/sandbox/index.md#secret-redaction) docs), and bind-mounted read-only into the sandbox so the agent sees the same skills inside the VM as on the host. No configuration is required — use `--no-kit` only if you explicitly want to run the sandbox without any host skills.
+When you run an agent with [`--sandbox`](../../configuration/sandbox/index.md), the sandbox VM has its own filesystem with no access to your host's skill directories. Docker Agent handles this transparently via the [auto-kit](../../configuration/sandbox/index.md#auto-kit): every discovered local skill is staged into a per-agent kit on the host, run through best-effort secret redaction (see the [auto-kit](../../configuration/sandbox/index.md#secret-redaction) docs), and bind-mounted read-only into the sandbox so the agent sees the same skills inside the VM as on the host. No configuration is required — use `--no-kit` only if you explicitly want to run the sandbox without any host skills.
 
 ## Creating a Skill
 

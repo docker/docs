@@ -32,7 +32,7 @@ agents:
     add_prompt_files: [list] # Optional: include additional prompt files
     add_description_parameter: bool # Optional: add description to tool schema
     redact_secrets: boolean # Optional: scrub detected secrets out of tool args, outgoing chat messages, and tool output
-    code_mode_tools: boolean # Optional: enable code mode tool format
+    code_mode_tools: boolean # Optional: let the agent write JavaScript to orchestrate tool calls (see Code Mode)
     max_iterations: int # Optional: max tool-calling loops
     max_consecutive_tool_calls: int # Optional: max identical consecutive tool calls
     max_old_tool_call_tokens: int # Optional: token budget for old tool call content (disabled unless positive)
@@ -40,6 +40,7 @@ agents:
     num_history_items: int # Optional: limit conversation history
     session_compaction: boolean # Optional: disable automatic session compaction (default: true)
     compaction_threshold: float # Optional: context-window fraction that triggers auto-compaction (0–1, default: 0.9)
+    compaction_model: string # Optional: model used for session-compaction (summary generation)
     use_toolsets: [list] # Optional: names of top-level toolsets to merge into this agent
     readonly: boolean # Optional: restrict all toolsets to read-only tools only
     skills: boolean | [list] # Optional: enable skill discovery (true/false or list of names and/or sources)
@@ -69,8 +70,8 @@ agents:
       path: string
     harness: # Optional: delegate to an external coding CLI (Claude Code, Codex, opencode, pi)
       type: string # Required: claude-code | codex | opencode | pi
-      model: string # Optional: model override forwarded to the CLI
-      effort: string # claude-code only: low | medium | high | max
+      model: string # Optional: model override forwarded to the CLI (omit for the CLI's own default)
+      effort: string # claude-code only: low | medium | high | xhigh | max (omit for the Claude Code default)
       agent: string # opencode only: agent profile name
       thinking: boolean # opencode only: enable extended thinking
 ```
@@ -96,14 +97,15 @@ agents:
 | `add_prompt_files`          | array   | ✗        | List of file paths whose contents are appended to the system prompt. Useful for including coding standards, guidelines, or additional context.                                |
 | `add_description_parameter` | boolean | ✗        | When `true`, adds agent descriptions as a parameter in tool schemas. Helps with tool selection in multi-agent scenarios.                                                      |
 | `redact_secrets`            | boolean | ✗        | When `true`, scrubs detected secrets (API keys, tokens, private keys, etc.) out of tool-call arguments, outgoing chat messages, and tool output before they reach a tool, the model, or downstream consumers. See [Redacting Secrets](#redacting-secrets) below.   |
-| `code_mode_tools`           | boolean | ✗        | When `true`, formats tool responses in a code-optimized format with structured output schemas. Useful for MCP gateway and programmatic access.                                |
+| `code_mode_tools`           | boolean | ✗        | When `true`, replaces the agent's individual tools with a single tool that runs a JavaScript script calling as many of them as needed in one turn. See [Code Mode](../../features/code-mode/index.md). |
 | `max_iterations`            | int     | ✗        | Maximum number of tool-calling loops. Default: unlimited (0). Set this to prevent infinite loops.                                                                             |
 | `max_consecutive_tool_calls` | int     | ✗        | Maximum consecutive identical tool calls before the agent is terminated, preventing degenerate loops. Default: `5`.                                                          |
 | `max_old_tool_call_tokens`  | int     | ✗        | Maximum number of tokens to keep from old tool call arguments and results. Older tool calls beyond this budget have their content replaced with a placeholder, saving context space. Tokens are approximated as `len/4`. Truncation is disabled by default; set a positive value to enable it. Set to `-1` to disable truncation (unlimited). |
 | `max_tool_result_tokens`    | int     | ✗        | Maximum number of tokens to keep from each tool result when it is added to the session. Oversized results are truncated middle-out: the head and tail are kept and the removed middle is replaced with a truncation marker. Textual documents attached to the result share the same budget. Tokens are approximated as `len/4`. The cap is disabled by default; set a positive value to enable it. `0` and `-1` both leave tool results unbounded. |
 | `num_history_items`         | int     | ✗        | Limit the number of conversation history messages sent to the model. Useful for managing context window size with long conversations. Default: unlimited (all messages sent). |
-| `session_compaction`        | boolean | ✗        | When `false`, disables automatic session compaction for this agent: neither the proactive threshold trigger nor the post-overflow auto-recovery runs. The manual `/compact` command remains available. Default: `true`. |
-| `compaction_threshold`      | float   | ✗        | Fraction of the model's context window at which proactive auto-compaction triggers. Must be greater than `0` and at most `1`. A `compaction_threshold` set on the agent's model takes precedence. Default: `0.9`. See [Compaction Threshold](../models/index.md#delegating-session-compaction). |
+| `session_compaction`        | boolean | ✗        | When `false`, disables automatic session compaction for this agent: neither the proactive threshold trigger nor the post-overflow auto-recovery runs. The manual `/compact` command remains available. Default: `true`. See the [Context & Compaction guide](../../guides/compaction/index.md). |
+| `compaction_threshold`      | float   | ✗        | Fraction of the model's context window at which proactive auto-compaction triggers. Must be greater than `0` and at most `1`. A `compaction_threshold` set on the agent's model takes precedence. Default: `0.9`. See the [Context & Compaction guide](../../guides/compaction/index.md). |
+| `compaction_model`          | string  | ✗        | Model used for session compaction (summary generation). Can be a named model or an inline `provider/model` string. This agent-level value takes precedence over a `compaction_model` set on the agent's model or provider; when none is set, the agent's own model compacts. See the [Context & Compaction guide](../../guides/compaction/index.md). |
 | `skills`                    | bool/array | ✗     | Enable automatic skill discovery. `true` loads all discovered local skills, `false` disables them. A list can mix skill sources (`local` or `https://…` URLs) and skill names to include — see [Skills](../../features/skills/index.md).                                                     |
 | `commands`                  | object  | ✗        | Named prompts that can be run with `docker agent run config.yaml /command_name`. Can be simple strings or objects with `instruction` and/or `agent` fields for agent switching, or a `url` field to open a link in the browser (TUI only). See [Named Commands](#named-commands) below. |
 | `use_commands`              | list of string | ✗   | Names of top-level `commands` groups to merge into this agent. Inline `commands` entries take precedence on name conflicts. Default: `[]`. |
@@ -122,6 +124,11 @@ agents:
 > **max_iterations**
 >
 > Default is `0` (unlimited). Always set `max_iterations` for agents with powerful tools like `shell` to prevent infinite loops. A value of 20–50 is typical for development agents.
+
+> [!TIP]
+> **Managing long sessions**
+>
+> `max_old_tool_call_tokens`, `max_tool_result_tokens`, `num_history_items`, `session_compaction`, and `compaction_threshold` all help keep long-running sessions inside the model's context window. See the [Context & Compaction guide](../../guides/compaction/index.md) for how to combine them.
 
 ## External Instruction Files
 
@@ -171,6 +178,40 @@ contents are loaded as the agent's instruction when the config is loaded. Notes:
   agent stays self-contained.
 
 A runnable example lives in [`examples/instruction_file.yaml`](https://github.com/docker/docker-agent/blob/main/examples/instruction_file.yaml).
+
+## Prompt Files
+
+`add_prompt_files` injects the contents of one or more files into the agent's
+context at the start of every turn — handy for repo-wide conventions like
+`AGENTS.md` or `CLAUDE.md` that should stay available without being pasted
+into `instruction`:
+
+```yaml
+agents:
+  root:
+    model: anthropic/claude-sonnet-4-5
+    description: A helpful coding assistant
+    instruction: You are an expert software developer.
+    add_prompt_files:
+      - AGENTS.md
+```
+
+For each name, the agent loads the closest match found by walking up from the
+current working directory, plus (if it's a different file) a copy at that
+name directly under the user's home directory — so a personal `~/AGENTS.md`
+can layer on top of a repo-local one. Missing files are skipped rather than
+erroring. Because resolution and the read happen on every turn, edits to the
+file are picked up without restarting the agent.
+
+Use `--prompt-file` to add files for a single run without editing the
+config. It's merged with any `add_prompt_files` already set on the agent,
+with duplicates dropped:
+
+```bash
+$ docker agent run agent.yaml --prompt-file CONTRIBUTING.md
+```
+
+Resolved prompt files show up as their own entries in the `/context` dialog — see [File Attachments](../../features/tui/index.md#file-attachments) in the Terminal UI guide.
 
 ## Response Cache
 
@@ -322,6 +363,11 @@ agents:
 
 ## Named Commands
 
+> [!TIP]
+> **Full reference**
+>
+> This section covers the basics. For URL commands, agent-switching commands, reusable top-level `commands:` groups, and hiding commands with `--disable-commands`, see [Custom Commands](../commands/index.md).
+
 Define reusable prompt shortcuts that can send prompts to the current agent, switch to a different sub-agent, or open a URL in the browser:
 
 > **Note:** Named slash commands execute immediately, even while the agent is processing another message. Unlike regular chat messages (which are queued), slash commands interrupt or direct the agent even while it is mid-response.
@@ -339,8 +385,8 @@ agents:
       
       # Advanced format with agent switching
       plan:
-        agent: planner  # Switch to the 'planner' sub-agent
-        instruction: "Create a detailed plan for: $1"  # Optional: send this prompt after switching
+        agent: planner  # Switch to the 'planner' agent
+        instruction: "Create a detailed plan for: ${args.join(\" \")}"  # Optional: send this prompt after switching
       
       # Agent switching without instruction - forwards remaining text as prompt
       review:
@@ -366,8 +412,8 @@ Commands support three formats:
 
    ```yaml
    plan:
-     agent: planner           # Required: name of sub-agent to switch to
-     instruction: "Plan: $1"  # Optional: prompt to send after switching
+     agent: planner  # Required: name of any agent defined in the team
+     instruction: "Plan: ${args.join(\" \")}"  # Optional: prompt to send after switching
      description: "Switch to planning mode"  # Optional: shown in help text
    ```
 
@@ -379,7 +425,16 @@ Commands support three formats:
      description: "Open the documentation"  # Optional: shown in help text
    ```
 
-When `agent` is set without `instruction`, any text typed after the slash command (e.g., `/plan build a web app`) is forwarded as a prompt to the target agent. The target agent must be listed in the current agent's `sub_agents` array.
+When `agent` is set without `instruction`, any text typed after the slash command (e.g., `/plan build a web app`) is forwarded as a prompt to the target agent. The target agent can be **any agent defined in the team configuration** — it does not need to be listed in the current agent's `sub_agents` array.
+
+**Argument and expansion syntax**
+
+An `instruction` string can reference the command's arguments and expand tool calls:
+
+- `${args[0]}`, `${args[1]}`, … — individual positional arguments, in the order the user typed them after the command
+- `${args.join(" ")}` — all arguments joined into a single string
+- `${tool_name({...})}` — calls a tool and inlines its return value (any tool available to the agent)
+- `!tool_name(key=value)` — legacy tool-call form: calls a tool with plain `key=value` arguments and inlines its output
 
 ### Agent-Switching Commands
 
@@ -396,7 +451,7 @@ agents:
       # Switch to planner with a pre-filled prompt
       plan:
         agent: planner
-        instruction: "Create a detailed plan for: $1"
+        instruction: "Create a detailed plan for: ${args.join(\" \")}"
       # Switch to reviewer; any text after /review is forwarded
       review:
         agent: reviewer

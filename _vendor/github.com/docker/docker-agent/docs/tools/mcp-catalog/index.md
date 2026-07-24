@@ -11,7 +11,7 @@ _Let the agent discover and activate remote MCP servers from the Docker MCP Cata
 
 ## Overview
 
-The `mcp_catalog` toolset gives an agent access to a curated subset of the [Docker MCP Catalog](https://hub.docker.com/search?q=&type=mcp) — every server in this subset is reachable over the **streamable-http** transport, so docker-agent can talk to it directly without the MCP gateway or a local subprocess.
+The `mcp_catalog` toolset gives an agent access to a curated subset of the [Docker MCP Catalog](https://hub.docker.com/search?q=&type=mcp) — every server in this subset is reachable over the **streamable-http** transport, so Docker Agent can talk to it directly without the MCP gateway or a local subprocess.
 
 Servers are **not** active by default. Instead, the toolset exposes a small set of meta-tools the agent uses to search, enable, and disable servers as a turn unfolds. Tools from un-enabled servers stay hidden, so the prompt is not flooded with hundreds of tool definitions the agent will never use.
 
@@ -27,7 +27,7 @@ toolsets:
   - type: mcp_catalog
 ```
 
-The catalog is embedded in the docker-agent binary and refreshed with each release. By default every server in the embedded subset is offered.
+The catalog is embedded in the `docker-agent` binary and refreshed with each release. By default every server in the embedded subset is offered.
 
 ### Restricting the offered servers
 
@@ -72,7 +72,7 @@ Up to five tools are exposed to the model. The disable / reset-auth pair only ap
 
 ## Authentication
 
-The catalog only includes servers docker-agent can authenticate itself, so there are two auth flavours:
+The catalog only includes servers Docker Agent can authenticate itself, so there are two auth flavours:
 
 - **`oauth`** — `enable_remote_mcp_server` surfaces an authorization URL through the elicitation pipeline (the same one used by YAML-declared remote MCP toolsets) and blocks until the user either authorizes or cancels. Once the user authorizes, tokens are persisted in the OS keyring and re-used on subsequent runs. Use `reset_remote_mcp_server_auth` to wipe them. If the user dismisses the dialog, `enable` returns an error result naming the decline so the agent can ask whether to retry.
 - **`none`** — No authentication. The server is reachable as soon as it is enabled.
@@ -102,10 +102,10 @@ A complete, runnable configuration lives in [`examples/mcp_catalog.yaml`](https:
 ## Notes and Limitations
 
 - **Streamable-http only.** The catalog deliberately excludes servers that require a local subprocess or the MCP gateway — declare those with [`type: mcp`](../../configuration/tools/index.md#mcp-tools) instead.
-- **Catalog membership changes between releases.** The set of available servers is updated with each docker-agent release as integrations are added or removed. Servers present in one release may not appear in the next.
+- **Catalog membership changes between releases.** The set of available servers is updated with each Docker Agent release as integrations are added or removed. Servers present in one release may not appear in the next.
 - **Blocking enable.** DNS, TCP, MCP handshake and any OAuth flow happen synchronously inside `enable_remote_mcp_server` so the agent gets a deterministic result in the same turn. On startup, however, the runtime probes tools non-interactively (`mcp.WithoutInteractivePrompts`); OAuth-pending servers fail fast there and are silently deferred to the next interactive turn — including the sidebar-only tool-count pass, where a dialog would be impossible.
 - **No prompt discovery.** MCP prompt lookups (`/prompts`) walk YAML-declared `mcp` toolsets directly; prompts exposed by servers activated through the catalog are not surfaced. Tools — the primary interface — work fine.
-- **Frozen at build time.** The list of servers is embedded in the binary. New entries land with each docker-agent release.
+- **Frozen at build time.** The list of servers is embedded in the binary. New entries land with each Docker Agent release.
 
 > [!TIP]
 > **Pair with permissions**

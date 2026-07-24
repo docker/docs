@@ -12,7 +12,7 @@ _Measure agent quality with automated evaluations — tool call accuracy, respon
 
 ## Overview
 
-The `docker agent eval` command runs your agent against a set of recorded sessions and scores the results. Each eval session captures a user question, the expected tool calls, and criteria the response must satisfy. docker-agent replays the question, compares the agent's behavior to expectations, and produces a report.
+The `docker agent eval` command runs your agent against a set of recorded sessions and scores the results. Each eval session captures a user question, the expected tool calls, and criteria the response must satisfy. Docker Agent replays the question, compares the agent's behavior to expectations, and produces a report.
 
 > [!NOTE]
 > **Docker required**
@@ -43,7 +43,7 @@ $ docker agent eval agent.yaml --only "auth*" --repeat 5
 
 ## Eval Directory Structure
 
-By default, docker-agent looks for eval sessions in an `evals/` directory next to your agent config:
+By default, Docker Agent looks for eval sessions in an `evals/` directory next to your agent config:
 
 ```bash
 my-agent/
@@ -128,7 +128,7 @@ The `evals` object inside each session controls what gets scored:
 
 ## Scoring Metrics
 
-docker-agent evaluates agents across three dimensions:
+Docker Agent evaluates agents across three dimensions:
 
 | Metric              | How It's Measured                                                                                                         |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -170,13 +170,13 @@ $ docker agent eval <agent-file>|<registry-ref> [<eval-dir>|./evals]
 When `--base-image` is set, the eval harness builds a derived image on top of your base image at evaluation time. Two things happen automatically:
 
 1. **The docker-agent binary is injected** — it is copied from `docker/docker-agent:edge` into the derived image at build time, so you don't need to include it in your base image.
-2. **The entrypoint is overridden** — docker-agent replaces your base image's entrypoint with its own `/run.sh` wrapper.
+2. **The entrypoint is overridden** — Docker Agent replaces your base image's entrypoint with its own `/run.sh` wrapper.
 
 Your base image therefore only needs to provide the runtime environment: language runtimes, installed dependencies, test fixtures, the appropriate working directory, and so on. Any `ENTRYPOINT` or `CMD` defined in your base image is ignored.
 
 ## Output
 
-After a run completes, docker-agent produces:
+After a run completes, Docker Agent produces:
 
 - **Console summary** — Pass/fail status per eval with metric breakdowns
 - **JSON results** — Full structured results for programmatic analysis

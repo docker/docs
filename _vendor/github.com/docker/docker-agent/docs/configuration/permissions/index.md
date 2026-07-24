@@ -104,7 +104,7 @@ Permissions support glob-style patterns with optional argument matching:
 | -------------- | ------------------------------ |
 | `shell`        | Exact match for `shell` tool   |
 | `read_*`       | Any tool starting with `read_` |
-| `mcp:github:*` | Any GitHub MCP tool            |
+| `github_*`     | Any GitHub MCP tool            |
 | `*`            | All tools                      |
 
 ### Argument Matching
@@ -219,13 +219,13 @@ Control MCP tools by their qualified names:
 permissions:
   allow:
     # Allow all GitHub read operations
-    - "mcp:github:get_*"
-    - "mcp:github:list_*"
-    - "mcp:github:search_*"
+    - "github_get_*"
+    - "github_list_*"
+    - "github_search_*"
   deny:
     # Block destructive GitHub operations
-    - "mcp:github:delete_*"
-    - "mcp:github:close_*"
+    - "github_delete_*"
+    - "github_close_*"
 ```
 
 ## Combining with Hooks

@@ -1,16 +1,16 @@
 ---
 title: "Nebius"
-description: "Use Nebius AI models with docker-agent."
+description: "Use Nebius AI models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, nebius
 weight: 190
 canonical: https://docs.docker.com/ai/docker-agent/providers/nebius/
 ---
 
-_Use Nebius AI models with docker-agent._
+_Use Nebius AI models with Docker Agent._
 
 ## Overview
 
-Nebius provides AI models through an OpenAI-compatible API. docker-agent includes built-in support for Nebius as an alias provider.
+Nebius provides AI models through an OpenAI-compatible API. Docker Agent includes built-in support for Nebius as an alias provider.
 
 ## Setup
 
@@ -66,7 +66,7 @@ Nebius hosts various open models. Check the [Nebius documentation](https://nebiu
 
 ## How It Works
 
-Nebius is implemented as a built-in alias in docker-agent:
+Nebius is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://api.studio.nebius.com/v1`

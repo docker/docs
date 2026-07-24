@@ -108,6 +108,7 @@ agents:
 | `track_usage`         | boolean    | Whether to track token usage by default.                                              | —                        |
 | `thinking_budget`     | string/int | Default reasoning effort/budget.                                                      | —                        |
 | `task_budget`         | int/object | Default total token budget for an agentic task (forwarded to Anthropic; honored by Claude Opus 4.7 today). Integer shorthand or `{type: tokens, total: N}`. | —                        |
+| `compaction_model`    | string     | Default model used for session compaction (summary generation) by agents whose model uses this provider. Named model or inline `provider/model` string. Agent-level and model-level `compaction_model` take precedence. | —                        |
 | `provider_opts`       | object     | Provider-specific options passed through to the client.                               | —                        |
 
 ## Default Inheritance
@@ -137,6 +138,10 @@ models:
     thinking_budget: low
 ```
 
+`compaction_model` works slightly differently: it is not merged into the model
+but resolved per agent, with the agent-level `compaction_model` winning over
+the model-level one, which wins over the provider-level default.
+
 ## Shorthand Syntax
 
 Once a provider is defined, you can use the shorthand `provider_name/model` syntax:
@@ -156,7 +161,7 @@ Only applicable for OpenAI-compatible providers (when `provider` is `openai` or 
 - **`openai_chatcompletions`** — Standard OpenAI Chat Completions API. Works with most OpenAI-compatible endpoints.
 - **`openai_responses`** — OpenAI Responses API. For newer models that require the Responses API format.
 
-> If `api_type` is not set, docker-agent automatically selects the API type based on the model name. You only need to set `api_type` explicitly to override the detected default.
+> If `api_type` is not set, Docker Agent automatically selects the API type based on the model name. You only need to set `api_type` explicitly to override the detected default.
 
 ## Examples
 
@@ -302,3 +307,9 @@ When you reference a provider:
 3. All model-level defaults (temperature, max_tokens, thinking_budget, etc.) are inherited (model settings take precedence)
 4. For OpenAI-compatible providers, the `api_type` is stored in `provider_opts.api_type`
 5. The model is used with the appropriate API client
+
+A provider with a `base_url` implies `bypass_models_gateway: true` for every
+model that references it: user-chosen endpoints are never routed through a
+configured models gateway, and such models authenticate with the provider's
+own credentials (`token_key`). See
+[Gateway Bypass](../../configuration/models/index.md#gateway-bypass).

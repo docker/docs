@@ -14,7 +14,7 @@ _Expert guidance for building effective, efficient, and secure agents._
 
 ### Auto Mode for Quick Start
 
-Don't have a config file? docker-agent can automatically detect your available API keys and use an appropriate model:
+Don't have a config file? Docker Agent can automatically detect your available API keys and use an appropriate model:
 
 ```bash
 # Automatically uses the best available provider
@@ -56,7 +56,7 @@ agents:
 
 ### Model Aliases Are Auto-Pinned
 
-docker-agent automatically resolves model aliases to their latest pinned versions. This ensures reproducible behavior:
+Docker Agent automatically resolves model aliases to their latest pinned versions. This ensures reproducible behavior:
 
 ```yaml
 # You write:
@@ -375,7 +375,7 @@ settings:
   default_model: anthropic/claude-sonnet-4-5
 ```
 
-This model is used when you run `docker agent run` without a config file.
+This model is used by the built-in default agent when you run `docker agent run` without a config argument and no project-level `docker-agent.yaml`, `docker-agent.yml`, or `docker-agent.hcl` exists.
 
 ### Get Desktop Notifications with Hooks
 
@@ -402,7 +402,7 @@ On Linux, replace `osascript` with `notify-send`:
 command: notify-send "docker-agent" "Agent needs your input"
 ```
 
-Hooks inherit docker-agent's environment, so this works as-is from a desktop terminal. In detached contexts (SSH, tmux started outside your desktop session, containers), `notify-send` needs the session's `DISPLAY` and `DBUS_SESSION_BUS_ADDRESS` to reach the notification daemon, and fails silently without them. Pass them with the per-hook `env` option:
+Hooks inherit Docker Agent's environment, so this works as-is from a desktop terminal. In detached contexts (SSH, tmux started outside your desktop session, containers), `notify-send` needs the session's `DISPLAY` and `DBUS_SESSION_BUS_ADDRESS` to reach the notification daemon, and fails silently without them. Pass them with the per-hook `env` option:
 
 ```yaml
 on_user_input:
@@ -426,13 +426,13 @@ settings:
           osascript -e "display notification \"$MESSAGE\" with title \"docker-agent\""
 ```
 
-If a sound is enough, set `settings: { sound: true }` instead — docker-agent plays a failure sound when a task errors, and a success sound when a task that ran longer than `sound_threshold` seconds (default 10) completes.
+If a sound is enough, set `settings: { sound: true }` instead — Docker Agent plays a failure sound when a task errors, and a success sound when a task that ran longer than `sound_threshold` seconds (default 10) completes.
 
 See the [Hooks documentation](../../configuration/hooks/index.md) for the full list of events, their payloads, and per-hook options (`env`, `working_dir`, `timeout`).
 
 ### GitHub PR Reviewer Example
 
-Use docker-agent as a GitHub Actions PR reviewer:
+Use Docker Agent as a GitHub Actions PR reviewer:
 
 ```yaml
 # .github/workflows/pr-review.yml

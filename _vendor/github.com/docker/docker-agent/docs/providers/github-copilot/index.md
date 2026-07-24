@@ -1,19 +1,19 @@
 ---
 title: "GitHub Copilot"
-description: "Use GitHub Copilot's hosted models (GPT-4o, Claude, Gemini, and more) with docker-agent through your GitHub subscription."
+description: "Use GitHub Copilot's hosted models (GPT-4o, Claude, Gemini, and more) with Docker Agent through your GitHub subscription."
 keywords: docker agent, ai agents, model providers, llm, github copilot
 weight: 110
 canonical: https://docs.docker.com/ai/docker-agent/providers/github-copilot/
 ---
 
-_Use GitHub Copilot's hosted models with docker-agent through your existing GitHub subscription._
+_Use GitHub Copilot's hosted models with Docker Agent through your existing GitHub subscription._
 
 ## Overview
 
 GitHub Copilot exposes an OpenAI-compatible Chat Completions API at
-`https://api.githubcopilot.com`. docker-agent ships with built-in support for
+`https://api.githubcopilot.com`. Docker Agent ships with built-in support for
 it as the `github-copilot` provider, so any user with a paid GitHub Copilot
-subscription can reuse their entitlement from docker-agent.
+subscription can reuse their entitlement from Docker Agent.
 
 ## Prerequisites
 
@@ -70,14 +70,14 @@ for the current model list.
 ## `Copilot-Integration-Id` Header
 
 GitHub's Copilot API rejects requests that don't carry a
-`Copilot-Integration-Id` header with a `Bad Request` error. docker-agent
+`Copilot-Integration-Id` header with a `Bad Request` error. Docker Agent
 automatically sends `copilot-developer-cli` for the `github-copilot`
 provider, so PAT-based usage works out of the box.
 
 We specifically chose `copilot-developer-cli` (instead of, say,
 `vscode-chat`) because it is the integration id accepted by the Copilot
 API for **both** OAuth tokens and Personal Access Tokens. Most
-docker-agent users authenticate with a PAT exported as `GITHUB_TOKEN`,
+Docker Agent users authenticate with a PAT exported as `GITHUB_TOKEN`,
 and `vscode-chat` is rejected for those tokens.
 
 If you need to send a different integration id — for example if your
@@ -102,7 +102,7 @@ works too.
 GitHub Copilot proxies OpenAI models behind two endpoints: the legacy
 `/chat/completions` and the newer `/responses`. Newer models (the `gpt-5`
 family, Codex variants, etc.) are only served via `/responses` and reject
-`/chat/completions` with a `400 Bad Request`. docker-agent auto-selects the
+`/chat/completions` with a `400 Bad Request`. Docker Agent auto-selects the
 right endpoint per model, so no configuration is needed in the common case.
 
 If you ever need to force one or the other, set `api_type` explicitly:
@@ -135,7 +135,7 @@ models:
 
 ## How It Works
 
-GitHub Copilot is implemented as a built-in alias in docker-agent:
+GitHub Copilot is implemented as a built-in alias in Docker Agent:
 
 - **API type:** OpenAI-compatible (Chat Completions)
 - **Base URL:** `https://api.githubcopilot.com`
@@ -143,5 +143,5 @@ GitHub Copilot is implemented as a built-in alias in docker-agent:
 - **Default headers:** `Copilot-Integration-Id: copilot-developer-cli`
 
 This means the same client as OpenAI is used, so every OpenAI feature
-supported by docker-agent (tool calling, structured output, multimodal
+supported by Docker Agent (tool calling, structured output, multimodal
 inputs, etc.) is available when the underlying model supports it.

@@ -1,16 +1,16 @@
 ---
 title: "Go SDK"
-description: "Use docker-agent as a Go library to embed AI agents in your applications."
+description: "Use Docker Agent as a Go library to embed AI agents in your applications."
 keywords: docker agent, ai agents, guides, go sdk
 weight: 40
 canonical: https://docs.docker.com/ai/docker-agent/guides/go-sdk/
 ---
 
-_Use docker-agent as a Go library to embed AI agents in your applications._
+_Use Docker Agent as a Go library to embed AI agents in your applications._
 
 ## Overview
 
-docker-agent can be used as a Go library, allowing you to build AI agents directly into your Go applications. This gives you full programmatic control over agent creation, tool integration, and execution.
+Docker Agent can be used as a Go library, allowing you to build AI agents directly into your Go applications. This gives you full programmatic control over agent creation, tool integration, and execution.
 
 > [!NOTE]
 > **Import Path**
@@ -40,7 +40,7 @@ docker-agent can be used as a Go library, allowing you to build AI agents direct
 
 ## Embedding TUI Components
 
-When building custom UIs on top of docker-agent's TUI primitives, four packages define the contracts that keep the runtime and the UI in sync:
+When building custom UIs on top of Docker Agent's TUI primitives, four packages define the contracts that keep the runtime and the UI in sync:
 
 - **`pkg/tui/components/toolconfirm`** — import this package for the permission-decision policy rather than copying the pattern-building logic. The `Decision` enum, `BuildPermissionPattern` helper, and rejection-reason presets are the canonical source of truth: whatever pattern is shown to the user in the confirmation dialog is exactly the pattern granted to the runtime.
 - **`pkg/tui/service`** — use `StaticSessionState` as a stub `SessionStateReader` when rendering individual message or tool views outside the full TUI app. It returns conservative fixed values for all nine interface methods, eliminating the need for hand-rolled stubs.
@@ -49,7 +49,7 @@ When building custom UIs on top of docker-agent's TUI primitives, four packages 
 
 ## Headless Embedded Chat (`pkg/embeddedchat`)
 
-`pkg/embeddedchat` is a thin wrapper around the docker-agent runtime that lets you drive an agent from your own UI instead of running docker-agent's Bubble Tea application. It handles runtime construction, event projection, and conversation state, exposing a simple `Send` / `Confirm` / `Restart` / `Close` API.
+`pkg/embeddedchat` is a thin wrapper around the Docker Agent runtime that lets you drive an agent from your own UI instead of running Docker Agent's Bubble Tea application. It handles runtime construction, event projection, and conversation state, exposing a simple `Send` / `Confirm` / `Restart` / `Close` API.
 
 ### Creating a session
 
@@ -148,7 +148,7 @@ For advanced use (custom elicitation, raw event inspection), call `chat.Runtime(
 
 ## Optional Provider Build Tags
 
-By default docker-agent includes all four cloud providers (OpenAI, Anthropic, Google, Amazon Bedrock). When embedding docker-agent in your own binary you can compile out unneeded providers — together with their transitive SDK dependencies — to reduce binary size.
+By default Docker Agent includes all four cloud providers (OpenAI, Anthropic, Google, Amazon Bedrock). When embedding Docker Agent in your own binary you can compile out unneeded providers — together with their transitive SDK dependencies — to reduce binary size.
 
 Each provider is gated by a negative build tag prefixed `docker_agent_` to avoid collisions with your own project's tags:
 
@@ -197,7 +197,7 @@ Pass the custom registry via `teamloader.WithToolsetRegistry(registry)` when cal
 
 ## Registering Custom Built-in Themes
 
-When embedding docker-agent, you can contribute your own built-in themes via `styles.RegisterBuiltinThemes`. Registered themes integrate seamlessly with the existing theme picker, `/theme` command, and `settings.theme` config key — they behave exactly like docker-agent's own bundled themes.
+When embedding Docker Agent, you can contribute your own built-in themes via `styles.RegisterBuiltinThemes`. Registered themes integrate seamlessly with the existing theme picker, `/theme` command, and `settings.theme` config key — they behave exactly like Docker Agent's own bundled themes.
 
 ```go
 import (
@@ -225,9 +225,9 @@ colors:
   background: "#1A0F0A"
 ```
 
-If `name:` is omitted, docker-agent uses the filename stem as the display name in the theme picker (e.g. `brand` from `themes/brand.yaml`).
+If `name:` is omitted, Docker Agent uses the filename stem as the display name in the theme picker (e.g. `brand` from `themes/brand.yaml`).
 
-To replace docker-agent's default theme entirely, ship the file as `themes/default.yaml` — it masks the bundled default while inheriting any colors you don't set.
+To replace Docker Agent's default theme entirely, ship the file as `themes/default.yaml` — it masks the bundled default while inheriting any colors you don't set.
 
 **Semantics:**
 
@@ -237,7 +237,7 @@ To replace docker-agent's default theme entirely, ship the file as `themes/defau
 
 ## MCP OAuth Token Persistence
 
-By default, MCP OAuth tokens are stored in-memory only and are not persisted across process restarts. The CLI registers a keyring-backed store automatically at startup; when embedding docker-agent as a library you must do this yourself if you want tokens to survive restarts.
+By default, MCP OAuth tokens are stored in-memory only and are not persisted across process restarts. The CLI registers a keyring-backed store automatically at startup; when embedding Docker Agent as a library you must do this yourself if you want tokens to survive restarts.
 
 Call `keyringstore.Register()` **before** any MCP toolset is initialised to enable the OS keyring-backed token store:
 
@@ -255,9 +255,26 @@ func main() {
 > [!WARNING]
 > **Call order matters**
 >
-> If `keyringstore.Register()` is called after the default token store has already been lazily initialised, docker-agent panics. The store is initialised when any remote MCP toolset is constructed — which happens inside `teamloader.Load()`. Always call `keyringstore.Register()` before calling `teamloader.Load()` on a config that includes remote MCP toolsets.
+> If `keyringstore.Register()` is called after the default token store has already been lazily initialised, Docker Agent panics. The store is initialised when any remote MCP toolset is constructed — which happens inside `teamloader.Load()`. Always call `keyringstore.Register()` before calling `teamloader.Load()` on a config that includes remote MCP toolsets.
 
 If you do not need persistent OAuth tokens (for example, in short-lived batch jobs or tests), omit the call and tokens will be kept in-memory for the process lifetime.
+
+## JavaScript Command Expressions (opt-in)
+
+Slash-command instructions can embed `${...}` JavaScript expressions (`${args[0]}`, `${args.join(" ")}`, `${tool({...})}`). Evaluating them requires the goja JavaScript engine, which is deliberately kept out of `pkg/runtime`'s import graph so code-built embedders don't link it by default.
+
+The CLI, `teamloader.Load()`, `pkg/cli.Run()` and `embeddedchat/defaults` enable it automatically. If you build teams in code, call `runtime.ResolveCommand` (or `cli.PrepareUserMessage`) directly **and** use `${...}` expressions in commands, register the evaluator yourself:
+
+```go
+import "github.com/docker/docker-agent/pkg/runtime/jscommands"
+
+func main() {
+    jscommands.Register()
+    // ... rest of your startup code
+}
+```
+
+Without the registration, `${...}` expressions are left unexpanded and a warning naming the fix is logged; everything else about command resolution (including the legacy `!tool(...)` syntax) works as usual.
 
 ## Basic Example
 
@@ -469,7 +486,7 @@ func createTeam(llm provider.Provider) *team.Team {
 
 ## Built-in Tools
 
-Use docker-agent's built-in tools:
+Use Docker Agent's built-in tools:
 
 ```go
 import (
@@ -505,7 +522,7 @@ func createAgentWithBuiltinTools(llm provider.Provider) *agent.Agent {
 
 ## HTTP Middleware / Transport Wrappers
 
-Use `options.WithHTTPTransportWrapper` to inject HTTP middleware into the transport chain of all provider clients built by docker-agent. This is useful for request tracing, injecting custom headers, collecting metrics, or any other cross-cutting concern at the HTTP layer.
+Use `options.WithHTTPTransportWrapper` to inject HTTP middleware into the transport chain of all provider clients built by Docker Agent. This is useful for request tracing, injecting custom headers, collecting metrics, or any other cross-cutting concern at the HTTP layer.
 
 ```go
 import (
@@ -544,11 +561,11 @@ The wrapper receives the already-instrumented transport (OpenTelemetry, SSE deco
 > [!WARNING]
 > **Vertex AI not supported**
 >
-> Vertex AI uses an ADC-managed HTTP client that docker-agent cannot intercept. When a transport wrapper is set, docker-agent falls back to the GeminiAPI backend instead of Vertex AI — a debug message is logged.
+> Vertex AI uses an ADC-managed HTTP client that Docker Agent cannot intercept. When a transport wrapper is set, Docker Agent falls back to the GeminiAPI backend instead of Vertex AI — a debug message is logged.
 
 In **gateway mode** the wrapper is called on every LLM request because gateway clients are rebuilt each call for short-lived auth tokens. In **direct mode** it is called once at client construction. Rate-limit responses (HTTP 429) are classified as non-retryable by the runtime and cause the model chain to skip to the next fallback, so wrappers that track per-request outcomes will observe these as failures rather than retried calls.
 
-Returning `nil` from your wrapper function is not allowed; docker-agent logs a warning and keeps the original transport instead.
+Returning `nil` from your wrapper function is not allowed; Docker Agent logs a warning and keeps the original transport instead.
 
 ## Using Different Providers
 

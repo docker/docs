@@ -76,11 +76,11 @@ toolsets:
 > [!TIP]
 > **Auto-installation**
 >
-> If the `command` is not in your `PATH`, docker-agent looks it up in the [aqua registry](https://github.com/aquaproj/aqua-registry) and installs it for you. Use `version: "false"` to opt out, or set `DOCKER_AGENT_AUTO_INSTALL=false` globally. See [Auto-Installing Tools](../../configuration/tools/index.md#auto-installing-tools).
+> If the `command` is not in your `PATH`, Docker Agent looks it up in the [aqua registry](https://github.com/aquaproj/aqua-registry) and installs it for you. Use `version: "false"` to opt out, or set `DOCKER_AGENT_AUTO_INSTALL=false` globally. See [Auto-Installing Tools](../../configuration/tools/index.md#auto-installing-tools).
 
 ## Remote MCP (Streamable HTTP / SSE)
 
-Connect to MCP servers over the network. OAuth flows (including [Dynamic Client Registration](https://datatracker.ietf.org/doc/html/rfc7591)) are handled automatically — docker-agent opens your browser when authentication is required and caches tokens for subsequent sessions. Tokens are refreshed silently when they expire or are revoked server-side; if a silent refresh is not possible, the OAuth prompt reappears on the next message.
+Connect to MCP servers over the network. OAuth flows (including [Dynamic Client Registration](https://datatracker.ietf.org/doc/html/rfc7591)) are handled automatically — Docker Agent opens your browser when authentication is required and caches tokens for subsequent sessions. Tokens are refreshed silently when they expire or are revoked server-side; if a silent refresh is not possible, the OAuth prompt reappears on the next message.
 
 ```yaml
 toolsets:
@@ -120,7 +120,7 @@ MCP servers can expose **prompts** — named, parameterized templates that the s
 - Each MCP prompt appears in the command palette (accessible via <kbd>Ctrl</kbd>+<kbd>K</kbd>) under the **MCP Prompts** category.
 - Typing `/<prompt-name>` in the input box invokes the prompt immediately.
 - If the prompt declares arguments and you provide text after the slash command, that text is mapped to the first declared argument.
-- If a required argument is missing, docker-agent opens the argument input dialog before running the prompt.
+- If a required argument is missing, Docker Agent opens the argument input dialog before running the prompt.
 - When no argument is needed or all required arguments are supplied, the prompt runs immediately.
 
 > [!NOTE]
@@ -239,7 +239,7 @@ See [Per-Toolset Model Routing](../../configuration/tools/index.md#per-toolset-m
 
 ### Lifecycle (auto-restart, profiles)
 
-Local stdio and remote MCP servers are supervised: crashed servers reconnect automatically with exponential backoff. **Remote** MCP servers (Streamable HTTP / SSE) also reconnect after idle/clean connection closes — services like Notion and Linear periodically close idle connections, and docker-agent reconnects transparently. Tune the policy with the `lifecycle` block:
+Local stdio and remote MCP servers are supervised: crashed servers reconnect automatically with exponential backoff. **Remote** MCP servers (Streamable HTTP / SSE) also reconnect after idle/clean connection closes — services like Notion and Linear periodically close idle connections, and Docker Agent reconnects transparently. Tune the policy with the `lifecycle` block:
 
 ```yaml
 toolsets:
