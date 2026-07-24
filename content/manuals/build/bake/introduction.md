@@ -44,7 +44,7 @@ $ docker buildx bake myapp
 
 For simple builds, the difference between `docker build` and `docker buildx
 bake` is minimal. However, as your build configuration grows more complex, Bake
-provides a more structured way to manage that complexity, that would be
+provides a more structured way to manage that complexity, which would be
 difficult to manage with CLI flags for the `docker build`. It also provides a
 way to share build configurations across your team, so that everyone is
 building images in a consistent way, with the same configuration.
