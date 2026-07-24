@@ -1,12 +1,12 @@
 ---
 title: "Models"
-description: "Models are the AI brains behind your agents. docker-agent supports multiple providers and flexible configuration."
+description: "Models are the AI brains behind your agents. Docker Agent supports multiple providers and flexible configuration."
 keywords: docker agent, ai agents, concepts, models
 weight: 20
 canonical: https://docs.docker.com/ai/docker-agent/concepts/models/
 ---
 
-_Models are the AI brains behind your agents. docker-agent supports multiple providers and flexible configuration._
+_Models are the AI brains behind your agents. Docker Agent supports multiple providers and flexible configuration._
 
 ## Inline vs. Named Models
 
@@ -63,7 +63,7 @@ agents:
     instruction: You are a helpful assistant.
 ```
 
-At load time, docker-agent selects the first candidate whose credentials are
+At load time, Docker Agent selects the first candidate whose credentials are
 configured. You only need credentials for one candidate. See
 [Model Configuration](../../configuration/models/index.md#first-available-models)
 for details.
@@ -109,6 +109,7 @@ See the [Model Providers](../../providers/overview/index.md) section for detaile
 | ------------------- | ---------- | ------------------------------------------------- |
 | `provider`          | string     | Provider identifier (required)                    |
 | `model`             | string     | Model name (required)                             |
+| `description`       | string     | Human-readable summary of the model's purpose     |
 | `temperature`       | float      | Randomness: 0.0 (deterministic) to 1.0 (creative) |
 | `max_tokens`        | int        | Maximum response length                           |
 | `top_p`             | float      | Nucleus sampling: 0.0 to 1.0                      |
@@ -129,11 +130,11 @@ Control how much the model "thinks" before responding:
 | Anthropic  | int or str | 1024–32768 tokens, or `adaptive`, `adaptive/<effort>`, effort level | off                              |
 | Gemini 2.5 | int        | 0 (off), -1 (dynamic), or token count                               | -1 (dynamic)                     |
 | Gemini 3   | string     | `minimal`, `low`, `medium`, `high`                                  | varies                           |
-| All        | string/int | `none` or `0` clears docker-agent's local config                    | —                                |
+| All        | string/int | `none` or `0` clears Docker Agent's local config                    | —                                |
 
 `none` and `0` are not universal API-level disable switches. On genuine OpenAI
 gpt-5.6+ endpoints (Sol/Terra/Luna), `none` is a real `reasoning_effort` value
-that docker-agent sends as-is and the model does not reason. On older OpenAI
+that Docker Agent sends as-is and the model does not reason. On older OpenAI
 models, `none`/`0` only clear the local `thinking_budget` — omitting the field
 has the same effect — and the model falls back to the API's own default effort
 (still reasoning internally for always-reasoning models like the o-series).
@@ -162,7 +163,7 @@ models:
 
 ## Alloy Models
 
-"Alloy models" let you use more than one model in the same conversation — docker-agent alternates between them to leverage the strengths of each:
+"Alloy models" let you use more than one model in the same conversation — Docker Agent alternates between them to leverage the strengths of each:
 
 ```yaml
 agents:

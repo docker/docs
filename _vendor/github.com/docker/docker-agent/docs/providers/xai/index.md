@@ -1,16 +1,16 @@
 ---
 title: "xAI (Grok)"
-description: "Use xAI's Grok models with docker-agent."
+description: "Use xAI's Grok models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, xai (grok)
 weight: 270
 canonical: https://docs.docker.com/ai/docker-agent/providers/xai/
 ---
 
-_Use xAI's Grok models with docker-agent._
+_Use xAI's Grok models with Docker Agent._
 
 ## Overview
 
-xAI provides the Grok family of models through an OpenAI-compatible API. docker-agent includes built-in support for xAI as an alias provider.
+xAI provides the Grok family of models through an OpenAI-compatible API. Docker Agent includes built-in support for xAI as an alias provider.
 
 ## Setup
 
@@ -69,13 +69,13 @@ Check the [xAI documentation](https://docs.x.ai/docs) for the latest available m
 
 ## Extended Thinking
 
-docker-agent's `thinking_budget` field is **not applied** to xAI models: the underlying OpenAI-compatible client only sends `reasoning_effort` for OpenAI reasoning model names (o-series, gpt-5). Setting `thinking_budget` on a Grok model passes config validation but has no effect on the request.
+Docker Agent's `thinking_budget` field is **not applied** to xAI models: the underlying OpenAI-compatible client only sends `reasoning_effort` for OpenAI reasoning model names (o-series, gpt-5). Setting `thinking_budget` on a Grok model passes config validation but has no effect on the request.
 
 Grok reasoning models (e.g. `grok-3-mini`) reason on their own without configuration. For non-reasoning models, use the [think tool](../../tools/think/index.md) instead.
 
 ## How It Works
 
-xAI is implemented as a built-in alias in docker-agent:
+xAI is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://api.x.ai/v1`

@@ -1,12 +1,12 @@
 ---
 title: "Troubleshooting"
-description: "Common issues and how to resolve them when working with docker-agent."
+description: "Common issues and how to resolve them when working with Docker Agent."
 keywords: docker agent, ai agents, community, troubleshooting
 weight: 20
 canonical: https://docs.docker.com/ai/docker-agent/community/troubleshooting/
 ---
 
-_Common issues and how to resolve them when working with docker-agent._
+_Common issues and how to resolve them when working with Docker Agent._
 
 ## Common Errors
 
@@ -29,7 +29,7 @@ The agent hit its `max_iterations` limit without completing the task.
 
 ### Model Fallback Triggered
 
-When the primary model fails, docker-agent automatically switches to fallback models. Look for log messages like `"Switching to fallback model"`.
+When the primary model fails, Docker Agent automatically switches to fallback models. Look for log messages like `"Switching to fallback model"`.
 
 - **429 errors:** Rate limited — the cooldown period keeps using the fallback
 - **5xx errors:** Server issues — retries with exponential backoff first, then falls back
@@ -49,7 +49,7 @@ agents:
 
 ## Missing credentials or model errors
 
-When docker-agent can't find a usable model at startup, it fails fast with an actionable error. The message names the exact next step. `docker agent doctor` is the fastest way to see the full picture — which providers have credentials, whether Docker Model Runner is reachable, and which model `auto` would pick.
+When Docker Agent can't find a usable model at startup, it fails fast with an actionable error. The message names the exact next step. `docker agent doctor` is the fastest way to see the full picture — which providers have credentials, whether Docker Model Runner is reachable, and which model `auto` would pick.
 
 ### Required environment variables not set
 
@@ -60,10 +60,9 @@ The following environment variables must be set:
  - ANTHROPIC_API_KEY
 
 Provide them using any of these sources:
- - Shell environment:  export ANTHROPIC_API_KEY=<value>
- - Env file:           docker agent run --env-from-file <file> ...
- - pass:               pass insert ANTHROPIC_API_KEY
- - macOS Keychain:     security add-generic-password -a "$USER" -s ANTHROPIC_API_KEY -w
+ - Shell environment:      export ANTHROPIC_API_KEY=<value>
+ - Env file:               docker agent run --env-from-file <file> ...
+ - Docker Agent env file:  docker agent setup (stores the key in ~/.config/cagent/.env)
 
 See https://docs.docker.com/ai/docker-agent/guides/secrets/ for details.
 ```
@@ -109,7 +108,7 @@ If instead you see `cannot query Docker Model Runner at <url>`, Docker Model Run
 
 ## Debug Mode
 
-The first step for any issue is enabling debug logging. This provides detailed information about what docker-agent is doing internally.
+The first step for any issue is enabling debug logging. This provides detailed information about what Docker Agent is doing internally.
 
 ```bash
 # Enable debug logging (writes to ~/.cagent/cagent.debug.log)
@@ -168,7 +167,7 @@ If the agent hangs or times out, check that you can reach the provider's API end
 
 - Ensure the MCP tool command is installed and on your `PATH`
 - Check file permissions — tools need to be executable
-- Test MCP tools independently before integrating with docker-agent
+- Test MCP tools independently before integrating with Docker Agent
 - For Docker-based MCP tools (`ref: docker:*`), ensure Docker Desktop is running
 
 ### Filesystem / shell tool errors
@@ -184,7 +183,7 @@ MCP and LSP toolsets are managed by a supervisor that auto-restarts them when th
 - `/tools` — the unified tools dialog. Its top section lists every toolset with its current state (`Stopped`, `Starting`, `Ready`, `Degraded`, `Restarting`, `Failed`), restart count, and last error; the bottom section lists every tool the agent can call. Start here whenever a tool seems missing or stuck.
 - `/toolset-restart <name>` — force a supervisor-driven reconnect of the named toolset. Useful after completing OAuth, when a remote MCP server has been redeployed, or when a language server like `gopls` is unresponsive.
 
-Remote MCP servers that return `401 invalid_token` (e.g. because the stored OAuth token was revoked or rotated) are now self-healing: docker-agent silently exchanges the refresh token for a new one when possible, or surfaces an OAuth re-authentication prompt on your next message when refresh is not possible. No more stuck toolsets that require a process restart — but if you want to trigger re-auth immediately, `/toolset-restart <name>` forces it right away.
+Remote MCP servers that return `401 invalid_token` (e.g. because the stored OAuth token was revoked or rotated) are now self-healing: Docker Agent silently exchanges the refresh token for a new one when possible, or surfaces an OAuth re-authentication prompt on your next message when refresh is not possible. No more stuck toolsets that require a process restart — but if you want to trigger re-auth immediately, `/toolset-restart <name>` forces it right away.
 
 MCP tools using stdio transport must complete the initialization handshake before becoming available. If tools fail silently:
 
@@ -196,7 +195,7 @@ MCP tools using stdio transport must complete the initialization handshake befor
 > [!NOTE]
 > **Startup tool-listing timeout**
 >
-> At startup, docker-agent queries each toolset for its tool list. If a toolset does not respond within 10 seconds (e.g. a wedged MCP stdio server that never answers `tools/list`), that toolset is skipped with a warning and the remaining toolsets load normally. The sidebar resolves showing whichever tools did load — no infinite spinner. Enable `--debug` to see the warning message, and use `/toolset-restart <name>` once the server becomes responsive.
+> At startup, Docker Agent queries each toolset for its tool list. If a toolset does not respond within 10 seconds (e.g. a wedged MCP stdio server that never answers `tools/list`), that toolset is skipped with a warning and the remaining toolsets load normally. The sidebar resolves showing whichever tools did load — no infinite spinner. Enable `--debug` to see the warning message, and use `/toolset-restart <name>` once the server becomes responsive.
 
 If a toolset keeps crashing in a tight loop, tune the [`lifecycle`](../../configuration/tools/index.md#toolset-lifecycle) block on the toolset (e.g. raise `backoff.initial`, lower `max_restarts`, or switch to the `best-effort` profile) so a flaky dependency does not amplify into a restart storm.
 
@@ -204,7 +203,7 @@ If a toolset keeps crashing in a tight loop, tune the [`lifecycle`](../../config
 
 ### YAML syntax issues
 
-docker-agent validates config at startup and reports errors with line numbers. Common problems:
+Docker Agent validates config at startup and reports errors with line numbers. Common problems:
 
 - Incorrect indentation (YAML is whitespace-sensitive)
 - Missing quotes around values containing special characters (`:`, `#`, `{`, `}`)
@@ -231,7 +230,7 @@ docker-agent validates config at startup and reports errors with line numbers. C
 
 ### Port conflicts
 
-When running docker-agent as an API server or MCP server, ensure the port is not already in use:
+When running Docker Agent as an API server or MCP server, ensure the port is not already in use:
 
 ```bash
 # Check if port 8080 is in use

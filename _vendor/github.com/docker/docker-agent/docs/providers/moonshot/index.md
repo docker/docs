@@ -1,18 +1,18 @@
 ---
 title: "Moonshot AI"
-description: "Use Moonshot AI (Kimi) models with docker-agent."
+description: "Use Moonshot AI (Kimi) models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, moonshot ai
 weight: 180
 canonical: https://docs.docker.com/ai/docker-agent/providers/moonshot/
 ---
 
-_Use Moonshot AI (Kimi) models with docker-agent._
+_Use Moonshot AI (Kimi) models with Docker Agent._
 
 ## Overview
 
 [Moonshot AI](https://www.moonshot.ai/) serves its Kimi model family through an
 OpenAI-compatible API. The Kimi K2 models have strong momentum for coding and
-agentic tasks. docker-agent includes built-in support for Moonshot AI as an
+agentic tasks. Docker Agent includes built-in support for Moonshot AI as an
 alias provider.
 
 ## Setup
@@ -74,7 +74,7 @@ model IDs, context limits, and pricing.
 
 ## How It Works
 
-Moonshot AI is implemented as a built-in alias in docker-agent:
+Moonshot AI is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://api.moonshot.ai/v1`

@@ -12,7 +12,7 @@ _Package, share, and run agents via OCI-compatible registries — just like cont
 
 ## Overview
 
-docker-agent agents can be pushed to any OCI-compatible registry (Docker Hub, GitHub Container Registry, etc.) and pulled/run anywhere. This makes sharing agents as easy as sharing Docker images.
+Docker Agent agents can be pushed to any OCI-compatible registry (Docker Hub, GitHub Container Registry, etc.) and pulled/run anywhere. This makes sharing agents as easy as sharing Docker images.
 
 > [!TIP]
 > For CLI commands related to distribution, see [CLI Reference](../../features/cli/index.md) (`docker agent share push`, `docker agent share pull`, `docker agent alias`).
@@ -108,7 +108,7 @@ $ docker agent serve api docker.io/username/agent:latest --pull-interval 10
 
 ## Private Repositories
 
-docker-agent supports pulling from private GitHub repositories and registries that require authentication. Use standard Docker login or GitHub authentication:
+Docker Agent supports pulling from private GitHub repositories and registries that require authentication. Use standard Docker login or GitHub authentication:
 
 ```bash
 # Login to a registry
@@ -122,7 +122,7 @@ $ docker agent run docker.io/myorg/private-agent:latest
 > [!NOTE]
 > **Docker Desktop credentials**
 >
-> When pulling or running an agent from a `docker.com` or `*.docker.com` HTTPS URL (e.g. `desktop.docker.com`), docker-agent automatically forwards your Docker Desktop JWT for authentication — no explicit login required when Docker Desktop is running and signed in.
+> When pulling or running an agent from a `docker.com` or `*.docker.com` HTTPS URL (e.g. `desktop.docker.com`), Docker Agent automatically forwards your Docker Desktop JWT for authentication — no explicit login required when Docker Desktop is running and signed in.
 >
 > Note: `docker.io` (the standard Docker Hub registry domain) is a separate domain and is **not** covered by automatic JWT forwarding. Agents pulled from `docker.io` or `registry-1.docker.io` still require `docker login docker.io` for private repositories.
 

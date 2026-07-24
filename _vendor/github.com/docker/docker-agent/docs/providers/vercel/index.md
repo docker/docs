@@ -1,19 +1,19 @@
 ---
 title: "Vercel AI Gateway"
-description: "Use Vercel AI Gateway models with docker-agent."
+description: "Use Vercel AI Gateway models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, vercel ai gateway
 weight: 260
 canonical: https://docs.docker.com/ai/docker-agent/providers/vercel/
 ---
 
-_Use Vercel AI Gateway models with docker-agent._
+_Use Vercel AI Gateway models with Docker Agent._
 
 ## Overview
 
 [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) is a single, unified
 OpenAI-compatible endpoint that routes to models from OpenAI, Anthropic, Google,
 xAI and more at list price with no markup, plus provider routing and failover.
-It lets you reach many providers with one API key. docker-agent includes
+It lets you reach many providers with one API key. Docker Agent includes
 built-in support for Vercel AI Gateway as an alias provider.
 
 ## Setup
@@ -82,14 +82,14 @@ the current model list, IDs, and pricing.
 
 ## How It Works
 
-Vercel AI Gateway is implemented as a built-in alias in docker-agent:
+Vercel AI Gateway is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://ai-gateway.vercel.sh/v1`
 - **Token Variable:** `AI_GATEWAY_API_KEY`
 
 Because the gateway can route to open-weight models with strict chat templates,
-docker-agent coalesces consecutive system messages into a single leading one for
+Docker Agent coalesces consecutive system messages into a single leading one for
 this provider.
 
 ## Example: Code Assistant

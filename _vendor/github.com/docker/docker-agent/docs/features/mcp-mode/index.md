@@ -1,12 +1,12 @@
 ---
 title: "MCP Mode"
-description: "Expose your docker-agent agents as MCP tools for use in Claude Desktop, Claude Code, and other MCP-compatible applications."
+description: "Expose your Docker Agent agents as MCP tools for use in Claude Desktop, Claude Code, and other MCP-compatible applications."
 keywords: docker agent, ai agents, features, mcp mode
 weight: 40
 canonical: https://docs.docker.com/ai/docker-agent/features/mcp-mode/
 ---
 
-_Expose your docker-agent agents as MCP tools for use in Claude Desktop, Claude Code, and other MCP-compatible applications._
+_Expose your Docker Agent agents as MCP tools for use in Claude Desktop, Claude Code, and other MCP-compatible applications._
 
 ## Why MCP Mode?
 

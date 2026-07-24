@@ -1,12 +1,12 @@
 ---
 title: "Anthropic"
-description: "Use Claude Sonnet 4, Claude Sonnet 4.5, and other Anthropic models with docker-agent."
+description: "Use Claude Sonnet 4, Claude Sonnet 4.5, and other Anthropic models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, anthropic
 weight: 20
 canonical: https://docs.docker.com/ai/docker-agent/providers/anthropic/
 ---
 
-_Use Claude Sonnet 4, Claude Sonnet 4.5, and other Anthropic models with docker-agent._
+_Use Claude Sonnet 4, Claude Sonnet 4.5, and other Anthropic models with Docker Agent._
 
 ## Setup
 
@@ -20,7 +20,7 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 Authenticate with short-lived tokens minted from your own OIDC identity
 provider instead of a long-lived API key. See Anthropic's
 [Workload Identity Federation guide](https://platform.claude.com/docs/en/build-with-claude/workload-identity-federation)
-to provision a Federation Rule, then configure docker-agent with a typed
+to provision a Federation Rule, then configure Docker Agent with a typed
 `auth:` block:
 
 ```yaml
@@ -156,9 +156,9 @@ is forwarded as
 and is ideal for letting long-running agents self-regulate effort without
 tightening `max_tokens` on every call.
 
-docker-agent automatically attaches the required `task-budgets-2026-03-13`
+Docker Agent automatically attaches the required `task-budgets-2026-03-13`
 beta header whenever this field is set. You can configure `task_budget` on
-**any** Claude model — docker-agent never gates it by model name. At the time
+**any** Claude model — Docker Agent never gates it by model name. At the time
 of writing, only **Claude Opus 4.7** actually honors the field; other Claude
 models (Sonnet 4.5, Opus 4.5 / 4.6, etc.) are expected to reject requests
 that include it. Check the Anthropic release notes linked above for the
@@ -204,7 +204,7 @@ models:
         - claude-sonnet-4-6
 ```
 
-docker-agent automatically attaches the required
+Docker Agent automatically attaches the required
 `server-side-fallback-2026-06-01` beta header and forwards the option as
 `fallbacks: [{"model": "..."}]`. The response's `model` field reports which
 model actually served the request.
@@ -216,7 +216,7 @@ AI, or the Message Batches API.
 
 ## Thinking Display
 
-Controls whether thinking blocks are returned in responses when thinking is enabled. Newer Claude models (Opus 4.7+, Fable 5) hide thinking content by default (`omitted`); docker-agent counters this by requesting `summarized` thinking whenever an adaptive/effort-based budget is used without an explicit `thinking_display`, so reasoning stays visible in the UI. Set `thinking_display` in `provider_opts` to override:
+Controls whether thinking blocks are returned in responses when thinking is enabled. Newer Claude models (Opus 4.7+, Fable 5) hide thinking content by default (`omitted`); Docker Agent counters this by requesting `summarized` thinking whenever an adaptive/effort-based budget is used without an explicit `thinking_display`, so reasoning stays visible in the UI. Set `thinking_display` in `provider_opts` to override:
 
 ```yaml
 models:
@@ -225,13 +225,13 @@ models:
     model: claude-opus-4-7
     thinking_budget: adaptive
     provider_opts:
-      thinking_display: omitted # "summarized", "display", or "omitted"
+      thinking_display: omitted # "summarized" or "omitted" ("display" on pre-4.6 models only)
 ```
 
 Valid values:
 
-- `summarized`: thinking blocks are returned with summarized thinking text (docker-agent's default for adaptive/effort-based budgets).
-- `display`: thinking blocks are returned for display.
+- `summarized`: thinking blocks are returned with summarized thinking text (Docker Agent's default for adaptive/effort-based budgets).
+- `display`: thinking blocks are returned for display. Only accepted by pre-4.6 token-thinking models (e.g. Sonnet 4.5, Haiku 4.5); models from the adaptive-thinking generation onward (Opus/Sonnet 4.6+, Sonnet 5, Fable 5) reject it, and Docker Agent fails fast with a configuration error instead of sending a request the API would refuse.
 - `omitted`: thinking blocks are returned with an empty thinking field; the signature is still returned for multi-turn continuity. Useful to reduce time-to-first-text-token when streaming.
 
 Note: `thinking_display` applies to both `thinking_budget` with token counts and adaptive/effort-based budgets. For token-count budgets no default is applied (the API already defaults to `summarized`). Full thinking tokens are billed regardless of the `thinking_display` value.

@@ -171,7 +171,7 @@ The LSP tool includes built-in instructions that guide the agent on how to use i
 
 ## Capability Detection
 
-Not all LSP servers support all features. During the `initialize` handshake, docker-agent reads the server's `ServerCapabilities` and **filters out the `lsp_*` tools the server does not advertise**. The model never sees, for example, `lsp_inlay_hints` against a server that doesn't support it, so it can't waste a turn calling a tool that would only fail.
+Not all LSP servers support all features. During the `initialize` handshake, Docker Agent reads the server's `ServerCapabilities` and **filters out the `lsp_*` tools the server does not advertise**. The model never sees, for example, `lsp_inlay_hints` against a server that doesn't support it, so it can't waste a turn calling a tool that would only fail.
 
 The agent uses `lsp_workspace` to discover what's available:
 
@@ -224,4 +224,4 @@ All LSP tools use **1-based** line and character positions:
 > [!TIP]
 > **Auto-Installation**
 >
-> docker-agent can automatically download and install LSP servers if they are not found in your PATH. Use the `version` property to specify a package, or let docker-agent auto-detect it from the command name. See [Auto-Installing Tools](../../configuration/tools/index.md#auto-installing-tools) for details.
+> Docker Agent can automatically download and install LSP servers if they are not found in your PATH. Use the `version` property to specify a package, or let Docker Agent auto-detect it from the command name. See [Auto-Installing Tools](../../configuration/tools/index.md#auto-installing-tools) for details.

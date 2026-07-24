@@ -33,7 +33,7 @@ The external CLI must be installed and available on `PATH` before starting Docke
 | `opencode` | `opencode` | [opencode.ai](https://opencode.ai) |
 | `pi` | `pi` | Refer to the `pi` CLI documentation for installation instructions. |
 
-Docker Agent will report an error at session start if the required binary is not found.
+Docker Agent will report an error at session start if the required binary is not found. The `claude-code` harness additionally needs the CLI to be logged in — see [Authentication](#authentication-claude-subscription-no-api-key) below.
 
 ## Configuration
 
@@ -54,8 +54,8 @@ Harness agents do **not** need a `model:` field — the external CLI manages its
 | Field | Applies to | Type | Description |
 | --- | --- | --- | --- |
 | `type` | all | string | **Required.** One of `claude-code`, `codex`, `opencode`, `pi` |
-| `model` | all | string | Optional model override forwarded to the CLI |
-| `effort` | `claude-code` | string | Reasoning effort: `low` \| `medium` \| `high` \| `max` — forwarded as `--effort` |
+| `model` | all | string | Optional model override forwarded to the CLI. When omitted, the CLI uses its own default model. |
+| `effort` | `claude-code` | string | Reasoning effort: `low` \| `medium` \| `high` \| `xhigh` \| `max` — forwarded as `--effort`. When omitted, Claude Code uses its own default. |
 | `agent` | `opencode` | string | opencode agent profile name |
 | `thinking` | `opencode` | boolean | Enable extended thinking — forwarded as `--thinking` |
 
@@ -67,8 +67,66 @@ agents:
     description: Claude Code coding agent
     harness:
       type: claude-code
-      effort: high       # low | medium | high | max
+      model: claude-sonnet-4-5 # optional: alias (sonnet, opus, haiku) or full model ID
+      effort: high # low | medium | high | xhigh | max
 ```
+
+- `model` accepts whatever the `claude` CLI accepts for `--model`: an alias
+  like `sonnet`, `opus`, or `haiku`, or a full model ID like
+  `claude-sonnet-4-5`. Omit it to use Claude Code's own default model. This is
+  **not** a Docker Agent `provider/model` reference — the harness model never
+  goes through Docker Agent's model providers or routing.
+- `effort` is forwarded as `--effort` and must be one of `low`, `medium`,
+  `high`, `xhigh`, or `max`. Omit it to use Claude Code's own default.
+
+#### Authentication (Claude subscription, no API key)
+
+The `claude-code` harness runs the official CLI with the CLI's **own login**.
+A Claude (claude.ai) subscription sign-in is all it needs — no
+`ANTHROPIC_API_KEY` and no Docker Agent model credential are required for the
+harness agent itself. Log in once:
+
+```bash
+$ claude auth login --claudeai   # interactive, opens a browser
+$ claude auth status --text      # verify the login
+```
+
+The login is stored per OS user by the CLI (in its own configuration and, on
+macOS, the keychain) and is found via `HOME` and the process environment. Run
+the login **as the same OS user and environment that run `docker agent`** — a
+login made under another user, container, or `sudo` context is invisible to
+the harness. Docker Agent never reads, copies, or stores the CLI's tokens; it
+only launches `claude`, which authenticates itself.
+
+If the CLI is not logged in when a harness agent runs, the `claude` subprocess
+fails at session start and the agent reports a harness error — Docker Agent
+never opens a browser or starts a login on its own. Diagnose and fix with:
+
+```bash
+$ docker agent doctor ./agent.yaml   # checks install + login for claude-code harness files
+$ docker agent setup                 # pick "Claude Code harness" to be walked through it
+```
+
+`docker agent doctor <file>` probes the CLI only when the file declares a
+`claude-code` harness, and reports installation, version, and safe login
+metadata (auth method, API provider, subscription type — never your email,
+organization, or tokens). `docker agent setup` offers to run the official
+`claude auth login --claudeai` for you (only after you confirm) and writes a
+ready-to-run `claude-code-agent.yaml`.
+
+> [!WARNING]
+> **The harness bypasses Claude Code's permission prompts**
+>
+> Docker Agent runs the CLI non-interactively with its own tools and passes
+> `--dangerously-skip-permissions`: Claude Code edits files and runs commands
+> without asking. Only point a harness agent at a repository you trust, and
+> prefer isolation — `docker agent run --worktree` runs it on an isolated git
+> worktree, keeping its changes off your checkout (a worktree with work, or
+> from a non-interactive run, is kept for inspection per the normal cleanup
+> rules). `docker agent run --sandbox` does not automatically carry the
+> `claude` CLI or its login into the sandbox, so it cannot isolate the
+> harness unless the sandbox image is separately provisioned and
+> authenticated.
 
 ### Codex
 
@@ -114,6 +172,29 @@ The `model_id` field in hook payloads is set to the harness label (e.g. `claude-
 
 See [Hooks](../../configuration/hooks/index.md) for the full hook reference.
 
+## Recipe: Root Harness Agent
+
+The simplest setup: a single root agent that hands everything to Claude Code.
+No `models:` section, no API key — the CLI's subscription login does the work.
+This is exactly the file `docker agent setup` generates for the Claude Code
+harness path (as `claude-code-agent.yaml`).
+
+```yaml
+# claude-code-agent.yaml
+agents:
+  root:
+    description: Claude Code running on your Claude subscription
+    harness:
+      type: claude-code
+      effort: medium # low | medium | high | xhigh | max; omit for the Claude Code default
+      # model: claude-sonnet-4-5   # optional; omit for the Claude Code default
+```
+
+```bash
+$ docker agent run claude-code-agent.yaml
+$ docker agent doctor claude-code-agent.yaml   # verify the CLI is installed and logged in
+```
+
 ## Recipe: Orchestrator + Harness Sub-Agents (Sequential)
 
 An orchestrator plans the work and delegates to specialized harness agents one at a time. Each coding agent runs in its own sub-session and reports results back.
@@ -142,13 +223,18 @@ agents:
     description: Claude Code specialist for complex refactors
     harness:
       type: claude-code
-      effort: high
+      model: claude-sonnet-4-5
+      effort: xhigh
 
   codex-coder:
     description: Codex specialist for code generation
     harness:
       type: codex
 ```
+
+Only the orchestrator's `model: claude` needs an Anthropic API key — the
+`claude-coder` harness agent authenticates through the CLI's own subscription
+login.
 
 The root agent calls `transfer_task` to send work to a harness sub-agent, waits for the result, and continues. See the [full example on GitHub](https://github.com/docker/docker-agent/blob/main/examples/coding_harnesses.yaml).
 

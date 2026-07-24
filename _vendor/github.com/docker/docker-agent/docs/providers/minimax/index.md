@@ -1,16 +1,16 @@
 ---
 title: "MiniMax"
-description: "Use MiniMax AI models with docker-agent."
+description: "Use MiniMax AI models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, minimax
 weight: 160
 canonical: https://docs.docker.com/ai/docker-agent/providers/minimax/
 ---
 
-_Use MiniMax AI models with docker-agent._
+_Use MiniMax AI models with Docker Agent._
 
 ## Overview
 
-MiniMax provides AI models through an OpenAI-compatible API. docker-agent includes built-in support for MiniMax as an alias provider.
+MiniMax provides AI models through an OpenAI-compatible API. Docker Agent includes built-in support for MiniMax as an alias provider.
 
 ## Setup
 
@@ -68,7 +68,7 @@ Check the [MiniMax documentation](https://www.minimaxi.com/document/introduction
 
 ## How It Works
 
-MiniMax is implemented as a built-in alias in docker-agent:
+MiniMax is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai`)
 - **Base URL:** `https://api.minimax.io/v1`

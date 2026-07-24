@@ -1,12 +1,12 @@
 ---
 title: "Installation"
-description: "Get docker-agent running on your system in minutes."
+description: "Get Docker Agent running on your system in minutes."
 keywords: docker agent, ai agents, getting started, installation
 weight: 20
 canonical: https://docs.docker.com/ai/docker-agent/getting-started/installation/
 ---
 
-_Get docker-agent running on your system in minutes._
+_Get Docker Agent running on your system in minutes._
 
 ## Prerequisites
 
@@ -15,18 +15,18 @@ _Get docker-agent running on your system in minutes._
 
 ## Docker Desktop (Pre-installed)
 
-Starting with [Docker Desktop 4.63](https://docs.docker.com/desktop/release-notes/#4630), **docker-agent is already available**. No separate installation needed — just open a terminal and run:
+Starting with [Docker Desktop 4.63](https://docs.docker.com/desktop/release-notes/#4630), **Docker Agent is already available**. No separate installation needed — just open a terminal and run:
 
 ```bash
 $ docker agent version
 ```
 
 > [!TIP]
-> Docker Desktop bundles docker-agent and keeps it up to date. This is the easiest way to get started, especially if you want to use Docker MCP tools and Docker Model Runner.
+> Docker Desktop bundles Docker Agent and keeps it up to date. This is the easiest way to get started, especially if you want to use Docker MCP tools and Docker Model Runner.
 
 ## Homebrew (macOS / Linux)
 
-Install docker-agent using [Homebrew](https://brew.sh/):
+Install Docker Agent using [Homebrew](https://brew.sh/):
 
 ```bash
 # Install
@@ -36,7 +36,7 @@ $ brew install docker-agent
 $ docker-agent version
 ```
 
-You can also install docker-agent as a docker CLI plugin, by copying `docker-agent` binary in `~/.docker/cli-plugins`. You can then run `docker agent version`.
+You can also install Docker Agent as a docker CLI plugin, by copying the `docker-agent` binary in `~/.docker/cli-plugins`. You can then run `docker agent version`.
 
 ## Download Binary Releases
 
@@ -65,7 +65,7 @@ Download `docker-agent-windows-amd64.exe` from the [releases page](https://githu
 
 ## Optional Self-Updates
 
-When docker-agent is installed from a standalone GitHub release binary, you can opt in to automatic self-updates by setting `DOCKER_AGENT_AUTO_UPDATE` to a truthy value (`1`, `true`, `yes`, or `on`):
+When Docker Agent is installed from a standalone GitHub release binary, you can opt in to automatic self-updates by setting `DOCKER_AGENT_AUTO_UPDATE` to a truthy value (`1`, `true`, `yes`, or `on`):
 
 ```bash
 # Enable for one command
@@ -76,14 +76,14 @@ export DOCKER_AGENT_AUTO_UPDATE=1
 docker agent run
 ```
 
-With self-updates enabled, docker-agent checks the latest GitHub release before normal commands run. If a newer release exists and your session is interactive, docker-agent asks whether you want to install it or keep running your current version. When the answer is yes (or the session is non-interactive, such as CI or piped input, in which case the update proceeds automatically), it downloads the asset for your OS and architecture, verifies the release-provided SHA-256 digest/checksum, replaces the current binary, and restarts the command with the same arguments.
+With self-updates enabled, Docker Agent checks the latest GitHub release before normal commands run. If a newer release exists and your session is interactive, Docker Agent asks whether you want to install it or keep running your current version. When the answer is yes (or the session is non-interactive, such as CI or piped input, in which case the update proceeds automatically), it downloads the asset for your OS and architecture, verifies the release-provided SHA-256 digest/checksum, replaces the current binary, and restarts the command with the same arguments.
 
-Self-updates are fail-safe: if checking, downloading, verifying, installing, or restarting fails, docker-agent keeps running the current binary. Version/help/completion commands and Docker CLI plugin metadata handshakes do not trigger self-updates.
+Self-updates are fail-safe: if checking, downloading, verifying, installing, or restarting fails, Docker Agent keeps running the current binary. Version/help/completion commands and Docker CLI plugin metadata handshakes do not trigger self-updates.
 
 > [!NOTE]
 > **Package-manager installs**
 >
-> Docker Desktop and Homebrew already manage docker-agent updates. Prefer those update mechanisms when you installed docker-agent that way. Self-updates are mainly intended for standalone release binaries.
+> Docker Desktop and Homebrew already manage Docker Agent updates. Prefer those update mechanisms when you installed Docker Agent that way. Self-updates are mainly intended for standalone release binaries.
 
 ## Build from Source
 
@@ -114,7 +114,7 @@ task build
 
 ## Set Up API Keys
 
-docker-agent needs API keys for the model providers you want to use. Set them as environment variables:
+Docker Agent needs API keys for the model providers you want to use. Set them as environment variables:
 
 ```bash
 # Pick one (or more) depending on your provider

@@ -22,6 +22,7 @@ models:
                      # azure, ollama, github-copilot, or a named provider defined
                      # under the top-level `providers:` section.
     model: string # Required: model identifier
+    description: string # Optional: human-readable summary of the model's purpose or strengths
     temperature: float # Optional: 0.0–2.0 (provider-dependent; e.g. Anthropic caps at 1.0)
     max_tokens: integer # Optional: response length limit
     top_p: float # Optional: 0.0–1.0
@@ -47,7 +48,7 @@ models:
     title_model: string # Optional: model used for session-title generation
     compaction_model: string # Optional: model used for session-compaction (summary generation)
     compaction_threshold: float # Optional: context-window fraction that triggers auto-compaction (0–1, default: 0.9)
-    bypass_models_gateway: boolean # Optional: skip the models gateway for this model
+    bypass_models_gateway: boolean # Optional: skip the models gateway for this model (implied by a custom base_url)
 ```
 
 ## Properties Reference
@@ -57,6 +58,7 @@ models:
 | `first_available`     | array      | ✗        | Candidate model references tried in order; selects the first whose credentials are configured. Mutually exclusive with other model settings. |
 | `provider`            | string     | ✓/✗      | Required for regular model definitions; omitted for `first_available` selectors. Provider: `openai`, `anthropic`, `google`, `amazon-bedrock`, `dmr`, `mistral`, `xai`, `nebius`, `nvidia`, `minimax`, `baseten`, `ovhcloud`, `groq`, `fireworks`, `deepseek`, `cerebras`, `together`, `huggingface`, `moonshot`, `vercel`, `cloudflare-workers-ai`, `cloudflare-ai-gateway`, `requesty`, `openrouter`, `azure`, `ollama`, `github-copilot`, `chatgpt`, or any [named provider](../../providers/custom/index.md). |
 | `model`               | string     | ✓/✗      | Required for regular model definitions; omitted for `first_available` selectors. Model name (e.g., `gpt-4o`, `claude-sonnet-4-5`, `gemini-3.5-flash`) |
+| `description`         | string     | ✗        | Informational, human-readable summary of the model's purpose or strengths (e.g., "fast and cheap, good for summaries"). Not sent to the model. Can be combined with `first_available` (a selector's description is kept when it resolves). |
 | `temperature`         | float      | ✗        | Sampling randomness. Range is provider-dependent — typically `0.0–2.0` (Anthropic caps at `1.0`). `0.0` is deterministic. |
 | `max_tokens`          | int        | ✗        | Maximum response length in tokens                                                     |
 | `top_p`               | float      | ✗        | Nucleus sampling threshold (`0.0–1.0`)                                                |
@@ -73,16 +75,16 @@ models:
 | `cost`                | object     | ✗        | Explicit token pricing in USD per 1M tokens, overriding the built-in catalogue. See [Custom Token Pricing](#custom-token-pricing). |
 | `provider_opts`       | object     | ✗        | Provider-specific options (see provider pages)                                        |
 | `title_model`         | string     | ✗        | Model used for session-title generation. Can be a named model from the `models:` section or an inline `provider/model` string. When omitted, the agent's primary model generates titles. Cannot be combined with `first_available`. |
-| `compaction_model`    | string     | ✗        | Model used for session compaction (summary generation). Can be a named model or an inline `provider/model` string. When omitted, the primary model compacts. Cannot be combined with `first_available`. See [Delegating Session Compaction](#delegating-session-compaction). |
-| `compaction_threshold` | float     | ✗        | Fraction of the context window at which proactive auto-compaction triggers for agents running this model. Must be greater than `0` and at most `1`. Takes precedence over the agent-level `compaction_threshold`. Cannot be combined with `first_available`. Default: `0.9`. |
-| `bypass_models_gateway` | boolean  | ✗        | When `true`, this model connects directly to its provider even when a models gateway (`--models-gateway` / `CAGENT_MODELS_GATEWAY`) is configured. See [Gateway Bypass](#gateway-bypass). |
+| `compaction_model`    | string     | ✗        | Model used for session compaction (summary generation). Can be a named model or an inline `provider/model` string. The agent-level `compaction_model` takes precedence over this value, which in turn takes precedence over a provider-level default. When none is set, the primary model compacts. Cannot be combined with `first_available`. See the [Context & Compaction guide](../../guides/compaction/index.md). |
+| `compaction_threshold` | float     | ✗        | Fraction of the context window at which proactive auto-compaction triggers for agents running this model. Must be greater than `0` and at most `1`. Takes precedence over the agent-level `compaction_threshold`. Cannot be combined with `first_available`. Default: `0.9`. See the [Context & Compaction guide](../../guides/compaction/index.md). |
+| `bypass_models_gateway` | boolean  | ✗        | When `true`, this model connects directly to its provider even when a models gateway (`--models-gateway` / `CAGENT_MODELS_GATEWAY`) is configured. Implied by a custom `base_url`. See [Gateway Bypass](#gateway-bypass). |
 
 ## Attachment Capability Overrides
 
 For custom OpenAI-compatible providers, local models (Ollama, DMR), and any
-model the built-in catalogue does not describe, docker-agent cannot
+model the built-in catalogue does not describe, Docker Agent cannot
 auto-detect whether the endpoint accepts image or PDF attachments. When the
-model is absent from the catalogue, docker-agent logs a diagnostic and falls
+model is absent from the catalogue, Docker Agent logs a diagnostic and falls
 back to text-only, silently dropping attachments.
 
 Declare `capabilities` to make the model's attachment support authoritative
@@ -119,7 +121,7 @@ See [`examples/capability-overrides.yaml`](https://github.com/docker/docker-agen
 
 ## Custom Token Pricing
 
-docker-agent prices each model call from the [models.dev](https://models.dev/)
+Docker Agent prices each model call from the [models.dev](https://models.dev/)
 catalogue. Models the catalogue does not know — custom OpenAI-compatible
 providers, local models, private deployments — are "unpriced": every call is
 recorded at $0 despite consuming tokens, with only a log warning.
@@ -185,6 +187,11 @@ titles.
 
 ## Delegating Session Compaction
 
+> [!TIP]
+> **Full guide**
+>
+> For a task-oriented walkthrough of automatic vs. on-demand compaction, trimming tool results, and reading the context gauge, see [Managing Context & Compaction](../../guides/compaction/index.md). This section covers the `compaction_model` and `compaction_threshold` fields themselves.
+
 The `compaction_model` field lets a heavyweight primary model hand off the expensive
 compaction (summary generation) call to a smaller, faster model:
 
@@ -200,10 +207,22 @@ models:
 ```
 
 The value can be a named entry from the `models` stanza or an inline
-`provider/model` string. When omitted, the primary model compacts.
+`provider/model` string. Resolution priority: an agent-level `compaction_model`
+wins, then the model-level value, then a provider-level default set in the
+`providers` section; when none is set, the primary model compacts. For an
+agent listing several models (`model: a,b`), the first listed model that sets
+a value (or whose provider sets a default) wins at that level.
+
+```yaml
+providers:
+  my_anthropic:
+    provider: anthropic
+    # Default for every agent whose model uses this provider.
+    compaction_model: anthropic/claude-haiku-4-5
+```
 
 If the compaction model has a **smaller context window** than the primary,
-docker-agent triggers compaction against the smaller window so the summary
+Docker Agent triggers compaction against the smaller window so the summary
 call can always ingest the full conversation. Pair the primary with a
 compaction model whose window is at least as large to keep the proactive
 trigger aligned with the primary's window.
@@ -238,8 +257,9 @@ for complete examples.
 ## Gateway Bypass
 
 When a models gateway (`--models-gateway` / `CAGENT_MODELS_GATEWAY`) is configured,
-all models route through it by default. Set `bypass_models_gateway: true` on a
-specific model to make it connect directly to its provider instead:
+models without a custom `base_url` route through it by default. Set
+`bypass_models_gateway: true` on a specific model to make it connect directly
+to its provider instead:
 
 ```yaml
 models:
@@ -275,7 +295,7 @@ See [`examples/bypass_models_gateway.yaml`](https://github.com/docker/docker-age
 
 ## First Available Models
 
-Use `first_available` when the same agent should work with whichever provider credentials are available in the current environment. docker-agent checks the candidates in order at load time and replaces the selector with the first candidate whose required environment variables are configured.
+Use `first_available` when the same agent should work with whichever provider credentials are available in the current environment. Docker Agent checks the candidates in order at load time and replaces the selector with the first candidate whose required environment variables are configured.
 
 ```yaml
 models:
@@ -294,9 +314,9 @@ agents:
 
 Candidates can be inline `provider/model` references or names from the same `models:` section. Local providers such as `dmr` and `ollama` do not require credentials, so they are useful as final fallbacks.
 
-If none of the candidates has credentials configured, docker-agent reports the missing environment variables grouped by candidate. You only need to configure one group of credentials, not every provider in the list.
+If none of the candidates has credentials configured, Docker Agent reports the missing environment variables grouped by candidate. You only need to configure one group of credentials, not every provider in the list.
 
-A `first_available` model is only a selector. It cannot be combined with `provider`, `model`, `routing`, `token_key`, budgets, sampling options, or other model settings. Put those settings on named candidate models instead:
+A `first_available` model is only a selector. Except for the informational `description`, it cannot be combined with `provider`, `model`, `routing`, `token_key`, budgets, sampling options, or other model settings. Put those settings on named candidate models instead:
 
 ```yaml
 models:
@@ -382,9 +402,9 @@ models:
 thinking_budget: none # or 0
 ```
 
-`none` and `0` both clear docker-agent's local thinking configuration (omitting `thinking_budget` has the same effect); neither is guaranteed to reach the API as a real "off" switch:
+`none` and `0` both clear Docker Agent's local thinking configuration (omitting `thinking_budget` has the same effect); neither is guaranteed to reach the API as a real "off" switch:
 
-- **OpenAI gpt-5.6+** (Sol/Terra/Luna) is the only case with a genuine API-level `none` reasoning effort: docker-agent sends it as-is and the model does not reason.
+- **OpenAI gpt-5.6+** (Sol/Terra/Luna) is the only case with a genuine API-level `none` reasoning effort: Docker Agent sends it as-is and the model does not reason.
 - **Older OpenAI reasoning models** (o-series, gpt-5 through gpt-5.5) have no such switch: `none`/`0` just clear the local config, and the model falls back to the API's own default effort and still reasons internally. Same for other always-reasoning models (Gemini 3).
 - Providers with a true optional-thinking switch (Gemini 2.5, Claude, local models) are fully disabled by `none`/`0`.
 
@@ -409,10 +429,10 @@ choose a tight per-call `max_tokens`.
 
 It is forwarded to Anthropic's
 [`output_config.task_budget`](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7)
-request field. docker-agent automatically attaches the required
+request field. Docker Agent automatically attaches the required
 `task-budgets-2026-03-13` beta header whenever this field is set.
 
-You can configure `task_budget` on **any** Claude model — docker-agent never
+You can configure `task_budget` on **any** Claude model — Docker Agent never
 gates it by model name. At the time of writing only **Claude Opus 4.7**
 actually honors the field; other Claude models will reject requests that
 include it. Check the Anthropic release notes linked above for the current
@@ -469,7 +489,7 @@ models:
 
 ## Thinking Display (Anthropic)
 
-For Anthropic Claude models, `thinking_display` controls whether thinking blocks are returned in responses when thinking is enabled. Newer Claude models (Opus 4.7+, Fable 5) hide thinking content by default (`omitted`); docker-agent requests `summarized` thinking by default for adaptive/effort-based budgets so reasoning stays visible. Set this provider option to override:
+For Anthropic Claude models, `thinking_display` controls whether thinking blocks are returned in responses when thinking is enabled. Newer Claude models (Opus 4.7+, Fable 5) hide thinking content by default (`omitted`); Docker Agent requests `summarized` thinking by default for adaptive/effort-based budgets so reasoning stays visible. Set this provider option to override:
 
 ```yaml
 models:
@@ -478,8 +498,10 @@ models:
     model: claude-opus-4-7
     thinking_budget: adaptive
     provider_opts:
-      thinking_display: omitted # "summarized", "display", or "omitted"
+      thinking_display: omitted # "summarized" or "omitted" ("display" on pre-4.6 models only)
 ```
+
+`display` (full thinking blocks) is only accepted by pre-4.6 token-thinking models (e.g. Sonnet 4.5, Haiku 4.5); newer models (Opus/Sonnet 4.6+, Sonnet 5, Fable 5) only accept `summarized` and `omitted`, and Docker Agent rejects the configuration at startup.
 
 See the [Anthropic provider page](../../providers/anthropic/index.md#thinking-display) for details.
 

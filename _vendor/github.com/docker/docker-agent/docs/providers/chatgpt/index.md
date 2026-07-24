@@ -1,12 +1,12 @@
 ---
 title: "ChatGPT (OpenAI account)"
-description: "Use your ChatGPT Plus/Pro/Business subscription with docker-agent by signing in with your OpenAI account, no API key needed."
+description: "Use your ChatGPT Plus/Pro/Business subscription with Docker Agent by signing in with your OpenAI account, no API key needed."
 keywords: docker agent, ai agents, model providers, llm, chatgpt, openai, codex, subscription
 weight: 55
 canonical: https://docs.docker.com/ai/docker-agent/providers/chatgpt/
 ---
 
-_Use your ChatGPT subscription with docker-agent by signing in with your OpenAI account. No API key needed._
+_Use your ChatGPT subscription with Docker Agent by signing in with your OpenAI account. No API key needed._
 
 ## Overview
 
@@ -15,7 +15,7 @@ The `chatgpt` provider authenticates with a ChatGPT account (the same
 `OPENAI_API_KEY`. Usage is billed against your ChatGPT Plus, Pro, or
 Business plan rather than pay-per-token API credits.
 
-Under the hood, docker-agent talks to the ChatGPT Codex backend
+Under the hood, Docker Agent talks to the ChatGPT Codex backend
 (`https://chatgpt.com/backend-api/codex`), which serves the `gpt-5` model
 family over the OpenAI Responses API. GPT-5.6 (Sol/Terra/Luna) is served
 there too; GPT-5.2 and GPT-5.3-Codex are deprecated for ChatGPT sign-in.
@@ -34,7 +34,7 @@ docker agent setup
 
 Pick **chatgpt** in the provider list: instead of asking for an API key, the
 wizard opens your browser on the ChatGPT sign-in page and stores the
-resulting OAuth credential in the docker-agent config directory
+resulting OAuth credential in the Docker Agent config directory
 (`~/.config/cagent/chatgpt-auth.json`, owner-only permissions). The access
 token is refreshed automatically; you only need to sign in again if the
 refresh token is revoked.
@@ -97,14 +97,14 @@ The effort picker exposes Low/Medium/High/XHigh/Max on the GPT-5.6 family
 - **API:** requests go to the Responses API only; the backend has no Chat
   Completions endpoint, so `api_type` is pinned automatically.
 - **Request shape:** the backend requires stateless requests (`store: false`)
-  and a top-level `instructions` field, so docker-agent moves system messages
+  and a top-level `instructions` field, so Docker Agent moves system messages
   there. Client-side sampling parameters (`temperature`, `top_p`,
   `max_tokens`) are not supported by the backend and are dropped.
 
 ## Setting the Token Explicitly
 
 `CHATGPT_OAUTH_TOKEN` can also be set like any other credential (shell
-environment, `--env-from-file`, keychain, ...). An explicitly set value takes
+environment, `--env-from-file`, ...). An explicitly set value takes
 precedence over the stored sign-in. This is useful for short-lived CI runs
 with a pre-minted access token, but note that such a token expires and is not
 refreshed.

@@ -1,18 +1,18 @@
 ---
 title: "NVIDIA NIM"
-description: "Use NVIDIA NIM models with docker-agent."
+description: "Use NVIDIA NIM models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, nvidia, nim, nemotron
 weight: 290
 canonical: https://docs.docker.com/ai/docker-agent/providers/nvidia/
 ---
 
-_Use NVIDIA NIM models with docker-agent._
+_Use NVIDIA NIM models with Docker Agent._
 
 ## Overview
 
 NVIDIA provides access to Nemotron and many other open-weight models through
 [build.nvidia.com](https://build.nvidia.com/) (with a free tier) via an
-OpenAI-compatible API. docker-agent includes built-in support for NVIDIA as an
+OpenAI-compatible API. Docker Agent includes built-in support for NVIDIA as an
 alias provider. The same alias also works against a self-hosted
 [NVIDIA NIM](https://docs.nvidia.com/nim/) deployment by overriding `base_url`.
 
@@ -86,14 +86,14 @@ models:
 
 ## How It Works
 
-NVIDIA is implemented as a built-in alias in docker-agent:
+NVIDIA is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://integrate.api.nvidia.com/v1`
 - **Token Variable:** `NVIDIA_API_KEY`
 
 Because NIM fronts open-weight models whose chat templates often only accept
-a single system message, docker-agent coalesces the agent instruction and any
+a single system message, Docker Agent coalesces the agent instruction and any
 toolset instructions into one leading system message before sending the
 request.
 

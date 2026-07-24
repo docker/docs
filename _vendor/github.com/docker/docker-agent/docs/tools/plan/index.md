@@ -13,7 +13,7 @@ _Shared persistent scratchpad for multi-agent collaboration._
 
 The plan tool gives agents a shared, persistent scratchpad of named documents. Any agent in a multi-agent config that loads the `plan` toolset can read and write the same plans, and those plans survive across sessions. This makes it straightforward to wire a planner agent that sketches work and one or more executor agents that consume it without any custom tool wiring.
 
-Plans are stored as JSON files in the docker-agent data directory (`~/.cagent/plans/` by default). All agents that share a process serialize on a single mutex so concurrent reads and writes are safe. Writes are atomic (temp file + rename), so a reader never observes partial content.
+Plans are stored as JSON files in the Docker Agent data directory (`~/.cagent/plans/` by default). All agents that share a process serialize on a single mutex so concurrent reads and writes are safe. Writes are atomic (temp file + rename), so a reader never observes partial content.
 
 ## Configuration
 
