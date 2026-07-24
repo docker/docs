@@ -31,9 +31,11 @@ When you create a sandbox, everything inside it persists until you remove it:
 Docker images and containers built or pulled by the agent, installed packages,
 agent state and history, and workspace changes.
 
-Sandboxes are isolated from each other. Each one maintains its own Docker
-daemon state, image cache, and package installations. Multiple sandboxes don't
-share images or layers.
+Each sandbox maintains its own Docker daemon state, image cache, and package
+installations. Multiple sandboxes don't share images or layers. The
+[shared agent skills store](workflows.md#share-agent-skills) is an exception:
+supported agents mount the same host-side store read-write unless you opt out
+when creating the sandbox.
 
 Each sandbox consumes disk space for its VM image, Docker images, container
 layers, and volumes, and this grows as you build images and install packages.

@@ -134,9 +134,9 @@ $ echo $BRAVE_API_KEY
 The sandbox itself is the safety boundary. Because agents run inside an
 isolated microVM with [network policies](governance/),
 [credential isolation](security/credentials.md), and no access to your host
-system outside the workspace, the usual reasons for approval prompts (preventing
-destructive commands, network access, file modifications) are handled by the
-sandbox isolation layers instead.
+system outside explicitly shared paths, the usual reasons for approval prompts
+(preventing destructive commands, network access, file modifications) are
+handled by the sandbox isolation layers instead.
 
 If you prefer to re-enable approval prompts, change the permission mode
 inside the session. Most agents let you switch permission modes after
@@ -173,24 +173,19 @@ in-progress task:
 
 ## Why doesn't the sandbox use my user-level agent configuration?
 
-Sandboxes don't pick up user-level agent configuration from your host. This
-includes directories like `~/.claude` for Claude Code or `~/.codex` for Codex,
-where hooks, skills, and other settings are stored. Only project-level
-configuration in the working directory is available inside the sandbox.
+Sandboxes don't import your complete user-level agent configuration. Hooks,
+settings, and other files under directories such as `~/.claude` remain on the
+host. Project-level configuration in the working directory remains available
+inside the sandbox.
 
-To make configuration available in a sandbox, copy or move what you need into
-your project directory before starting a session:
+Shared agent skills are the exception. Run `sbx skills import` to copy skills
+from supported host directories into a persistent store shared with
+sandboxes. See [Share agent skills](workflows.md#share-agent-skills) for the
+supported directories, mount behavior, and per-sandbox opt-out.
 
-```console
-$ cp -r ~/.claude/skills .claude/skills
-```
-
-Don't use symlinks — a sandboxed agent can't follow symlinks to paths outside
-the sandbox.
-
-Collocating skills and other agent configuration with the project itself is a
-good practice regardless of sandboxes. It's versioned alongside the code and
-evolves with the project as it changes.
+Keep project-specific skills and other agent configuration in the project
+itself. This versions the configuration alongside the code. Don't use symlinks
+to host paths because a sandboxed agent can't follow them outside the sandbox.
 
 ## Can I paste images into an agent?
 
