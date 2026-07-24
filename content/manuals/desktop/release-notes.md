@@ -24,6 +24,35 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.84.0
+
+{{< release-date date="2026-07-27" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.84.0" build_path="//" >}}
+
+
+### Updates
+
+- [Docker Agent v1.111.0](https://github.com/docker/docker-agent/releases/tag/v1.111.0)
+- Kubernetes:
+  - cri-dockerd v0.4.4
+- [Docker Hardened Images CLI (`dhictl`) v0.0.7](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.7)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where an invalid `~/.docker/config.json` caused Docker Desktop to hang with high CPU/memory and show no error dialog. Docker Desktop now surfaces an error dialog prompting the user to correct the file.
+- Fixed a bug that prevented some Docker Hardened Images customizations from being created.
+- Fixed a bug where deleting an unrelated credential ID could accidentally erase Docker Hub OAuth tokens, causing users to be unexpectedly signed out.
+- Removed Docker Scout CLI hints that previously appeared after running `docker pull` or `docker buildx build` commands.
+
+#### For Windows
+
+- Fixed a bug on Windows where an empty or malformed `install-settings.json` caused Docker Desktop to hang with high CPU/memory usage and no error dialog on startup.
+- The MSI installer now detects per-user Docker Desktop installations on the machine and blocks installation with a clear message naming the affected users. Affected users must uninstall their per-user Docker Desktop before the MSI can be installed.
+- Fixed a bug where uninstalling Docker Desktop could permanently lock the user out of their own application data directories if the deletion failed mid-way.
+
 ## 4.83.0
 
 {{< release-date date="2026-07-20" >}}
