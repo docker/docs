@@ -42,6 +42,7 @@ of the writable layer of the container:
 - [Volume mounts](#volume-mounts)
 - [Bind mounts](#bind-mounts)
 - [tmpfs mounts](#tmpfs-mounts)
+- [Image mounts](#image-mounts)
 - [Named pipes](#named-pipes)
 
 No matter which type of mount you choose to use, the data looks the same from
@@ -85,6 +86,18 @@ such as caching intermediate data, handling sensitive information like
 credentials, or reducing disk I/O. Use tmpfs mounts only when the data does not
 need to persist beyond the current container session.
 
+### Image mounts
+
+An image mount makes the contents of another image available inside a container
+at a path you choose. The mounted image is read-only and isn't part of the
+container's own image, so you can bring in tools or assets from one image
+without rebuilding another.
+
+Use image mounts when you need to consume files packaged as an image, such as
+mounting a tool-rich image to debug a minimal container, or sharing read-only
+assets across containers running different images. Image mounts require the
+[containerd image store](containerd.md).
+
 ### Named pipes
 
 [Named pipes](https://docs.microsoft.com/en-us/windows/desktop/ipc/named-pipes)
@@ -99,6 +112,7 @@ Learn more about container data persistence:
 - [Volumes](./volumes.md)
 - [Bind mounts](./bind-mounts.md)
 - [tmpfs mounts](./tmpfs.md)
+- [Image mounts](./image-mounts.md)
 
 Learn more about daemon storage backends:
 
