@@ -2,9 +2,9 @@
 title: Claude Code
 weight: 10
 description: |
-  Use Claude Code in Docker Sandboxes with authentication, configuration, and
-  YOLO mode for AI-assisted development.
-keywords: docker sandboxes, claude code, anthropic, ai agent, sbx
+  Use Claude Code in Docker Sandboxes with authentication, local models,
+  configuration, and YOLO mode for AI-assisted development.
+keywords: docker sandboxes, claude code, anthropic, ai agent, sbx, local models, llmman, ollama
 ---
 
 Official documentation: [Claude Code](https://code.claude.com/docs)
@@ -116,8 +116,44 @@ this base.
 
 ## Use a local model
 
-To run Claude Code in a sandbox against a local model on your host through
-Docker Model Runner, see
+The `--model` flag routes Claude Code's Anthropic API requests to a model
+served on your host. This feature is experimental.
+
+Enable the feature:
+
+```console
+$ sbx settings set platform.allowExperimentalFeatures true
+$ sbx settings set feature.model true
+```
+
+To use the bundled `llmman` model server, pass a GGUF model reference or short
+name:
+
+```console
+$ sbx run --model gemma4 claude
+```
+
+On first use, `sbx` starts `llmman`, pulls the model, and leaves the server
+running on your host. Later sandboxes reuse the server and its model store.
+
+To use an existing Ollama installation instead, prefix the model name with
+`ollama/`:
+
+```console
+$ sbx run --model ollama/gemma4 claude
+```
+
+Ollama must already be installed and running. `sbx` connects to it but doesn't
+start or manage the Ollama process.
+
+You can also change the model for an existing sandbox:
+
+```console
+$ sbx run --name <sandbox-name> --model <model-name>
+```
+
+Changing the model recreates the sandbox container. The workspace and
+kit-owned volumes persist.
+
+To use Docker Model Runner instead, see
 [Run Claude Code in a Docker Sandbox with Docker Model Runner](/guides/claude-code-sandbox-model-runner/).
-For the host-only version without a sandbox, see
-[Use Claude Code with Docker Model Runner](/guides/claude-code-model-runner/).
