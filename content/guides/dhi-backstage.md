@@ -375,10 +375,11 @@ Then create the customization:
 dhictl customization create --org YOUR_ORG node-backstage.yaml
 ```
 
-Monitor the build progress:
+Monitor the build progress using the customization ID from the create output, or
+run `dhictl customization list --org YOUR_ORG` to look it up:
 
 ```console
-dhictl customization build list --org YOUR_ORG YOUR_ORG/dhi-node "backstage"
+dhictl customization build list <customization-id> --org YOUR_ORG
 ```
 
 Docker builds the customized image on its secure infrastructure and publishes it as `YOUR_ORG/dhi-node:24-alpine3.23_backstage`.
