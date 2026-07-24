@@ -51,7 +51,9 @@ ranges, loopback, and link-local addresses is also blocked. Only domains
 explicitly listed in the policy are reachable.
 
 For the default set of allowed domains, see
-[Default security posture](defaults.md).
+[Default security posture](defaults.md). To forward allowed traffic through a
+corporate or upstream proxy, see
+[Configure an upstream proxy](../upstream-proxy.md).
 
 ## Docker Engine isolation
 

@@ -79,6 +79,8 @@ the [usage guide](usage.md) for basic commands.
   extending or tailoring sandboxes
 - [Architecture](architecture.md) — microVM isolation, workspace mounting,
   networking
+- [Upstream proxy](upstream-proxy.md) — route sandbox and daemon traffic through
+  a corporate proxy, PAC file, or your OS system proxy
 - [Security](security/) — isolation model, credential handling, and
   network policies
 - [CLI reference](/reference/cli/sbx/) — full list of `sbx` commands and options

@@ -69,38 +69,14 @@ upstream proxy, the host-side proxy forwards the request to it. Chaining to an
 upstream proxy means sandbox traffic respects the same egress controls as other
 applications on your host.
 
-The sandbox daemon makes these upstream requests, and it reads the proxy
-environment variables `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY`, along with
-their lowercase equivalents. Set `NO_PROXY` to list hosts that should be
-reached directly instead of through the upstream proxy.
+By default, both sandbox traffic and the daemon's own traffic follow your OS
+system proxy, so this usually works without any configuration. To set a proxy
+explicitly — with a proxy URL, a PAC file, a SOCKS5 proxy, or separate settings
+for sandbox and daemon traffic — see
+[Configure an upstream proxy](upstream-proxy.md).
 
-To route sandbox traffic through a different proxy, set
-`DOCKER_SANDBOXES_PROXY` to the proxy URL. It applies only to sandbox traffic
-and sets the upstream proxy for both HTTP and HTTPS to that URL. Unlike
-`HTTP_PROXY` and `HTTPS_PROXY`, it doesn't affect image pulls or the daemon's
-own requests.
-
-`DOCKER_SANDBOXES_PROXY` accepts `http://`, `https://`, `socks5://`, and
-`socks5h://` URLs. With `socks5://`, DNS is resolved locally before the
-connection is handed to the proxy. With `socks5h://`, DNS resolution is
-delegated to the proxy. Both schemes support credentials in the URL:
-`socks5://user:pass@host:port`.
-
-Set `DOCKER_SANDBOXES_NO_PROXY` to exclude specific destinations from
-`DOCKER_SANDBOXES_PROXY`, using standard comma-separated `NO_PROXY` matching
-semantics. This only affects traffic routed through `DOCKER_SANDBOXES_PROXY`
-— use `NO_PROXY` to exclude destinations from `HTTP_PROXY`/`HTTPS_PROXY`.
-
-Set these variables in the environment where the sandbox daemon starts. The
-daemon starts automatically the first time a command needs it, so set the
-variables before you run a `sbx` command. If the daemon is already running,
-restart it for a change to take effect.
-
-One limitation applies:
-
-- Proxy auto-configuration files, such as `proxy.pac`, aren't supported. Set the
-  `HTTP_PROXY`, `HTTPS_PROXY`, or `DOCKER_SANDBOXES_PROXY` environment variables
-  explicitly.
+Only HTTP and HTTPS traffic can be forwarded to an upstream proxy. Other TCP
+traffic can't be redirected to a proxy.
 
 ## Lifecycle
 
