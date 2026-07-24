@@ -126,14 +126,15 @@ Docker from the repository.
 
    ```bash
    # Add Docker's official GPG key:
-   sudo apt update
-   sudo apt install ca-certificates curl
-   sudo install -m 0755 -d /etc/apt/keyrings
-   sudo curl -fsSL {{% param "download-url-base" %}}/gpg -o /etc/apt/keyrings/docker.asc
-   sudo chmod a+r /etc/apt/keyrings/docker.asc
+   sudo apt update &&
+   sudo apt install ca-certificates curl &&
+   sudo install -m 0755 -d /etc/apt/keyrings &&
+   sudo curl -fsSL {{% param "download-url-base" %}}/gpg -o /etc/apt/keyrings/docker.asc &&
+   sudo chmod a+r /etc/apt/keyrings/docker.asc &&
 
-   # Add the repository to Apt sources:
-   sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+   {
+     # Add the repository to Apt sources:
+     sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
    Types: deb
    URIs: {{% param "download-url-base" %}}
    Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
@@ -141,8 +142,9 @@ Docker from the repository.
    Architectures: $(dpkg --print-architecture)
    Signed-By: /etc/apt/keyrings/docker.asc
    EOF
-
-   sudo apt update
+   } &&
+   
+   sudo apt update;
    ```
 
 2. Install the Docker packages.
