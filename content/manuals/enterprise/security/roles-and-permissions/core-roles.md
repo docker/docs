@@ -44,6 +44,8 @@ These permissions apply organization-wide.
 | Edit build settings                                   | ❌     | ❌     | ✅    |
 | View teams                                            | ✅     | ✅     | ✅    |
 | Assign team permissions to repositories               | ❌     | ✅     | ✅    |
+| Create an OIDC connection                             | ❌     | ✅     | ✅    |
+| Delete an OIDC connection                             | ❌     | ❌     | ✅    |
 
 You can grant repository permissions to members
 beyond their organization role:
