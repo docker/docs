@@ -65,31 +65,31 @@ Make sure you have:
    ```dockerfile
    # syntax=docker/dockerfile:1
    
-   # Builds an image with the Python 3.12 image
+   # Build an image with the Python 3.12 image
    FROM python:3.12-alpine
    
-   # Sets the working directory to `/code`
+   # Set the working directory to `/code`
    WORKDIR /code
    
-   # Sets environment variables used by the `flask` command
+   # Set environment variables used by the `flask` command
    ENV FLASK_APP=app.py
    ENV FLASK_RUN_HOST=0.0.0.0
    
-   # Installs `gcc` and other dependencies
+   # Install `gcc` and other dependencies
    RUN apk add --no-cache gcc musl-dev linux-headers
    
-   # Copies `requirements.txt`
+   # Copy `requirements.txt`
    COPY requirements.txt .
    
-   # Installs the Python dependencies
+   # Install the Python dependencies
    RUN pip install -r requirements.txt
    
-   # Copies the current directory `.` in the project to the workdir `.` in the image
+   # Copy the current directory `.` in the project to the workdir `.` in the image
    COPY . .
    
    EXPOSE 5000
    
-   # Sets the default command for the container to `flask run --debug`
+   # Set the default command for the container to `flask run --debug`
    CMD ["flask", "run", "--debug"]
    ```
 
