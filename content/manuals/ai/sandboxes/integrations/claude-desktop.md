@@ -20,6 +20,8 @@ host.
 ## Prerequisites
 
 - SSH access set up. See [Editor and app integrations](_index.md#enable-ssh-access).
+- An existing named sandbox. See
+  [Create or identify a sandbox](_index.md#create-or-identify-a-sandbox).
 - Claude Desktop installed.
 
 ## Connect
@@ -42,6 +44,22 @@ picker might initially open at `/home/agent`.
 
 For more connection options, see the Claude Desktop instructions for
 [SSH sessions](https://code.claude.com/docs/en/desktop#ssh-sessions).
+
+## Troubleshoot SSH connection timeouts on Windows
+
+Claude Desktop requires Git on Windows. If an SSH connection times out and the
+Claude Desktop logs include `ProxyCommand error: spawn sh ENOENT`, install
+[Git for Windows](https://git-scm.com/download/win).
+
+If Git is already installed, verify that `sh.exe` is available on your `PATH`:
+
+```powershell
+PS> where.exe sh
+```
+
+If the command doesn't find `sh.exe`, add the Git `bin` directory to your user
+`Path`. The default directory is `C:\Program Files\Git\bin`. Quit and restart
+Claude Desktop after updating `Path`.
 
 ## Related
 

@@ -105,6 +105,12 @@ You don't edit this block by hand. The `User _default_user_` sentinel tells the
 daemon to log you in as the sandbox image's default user, so your host username
 is never sent.
 
+`SendEnv *` offers host environment variables to the daemon, but the daemon
+accepts only variables in its `ssh.acceptEnv` allowlist. Execution-sensitive
+variables such as `PATH`, `LD_*`, and `NODE_OPTIONS` are always blocked, even
+if added to the allowlist. Accepted values apply only to the SSH session and
+aren't stored in the sandbox configuration.
+
 The `*.sbx` wildcard maps sandbox hostnames to the sandbox daemon, but it
 doesn't add individual sandbox names to application host pickers. Enter the
 sandbox hostname, such as `demo.sbx`, manually when you configure an
@@ -120,5 +126,5 @@ Connections don't use a network port or an SSH key:
   triggers a host-key mismatch.
 
 Because SSH terminates at the daemon, no SSH server runs inside the sandbox.
-Connecting to `<name>.sbx` starts the sandbox if it isn't running. The sandbox
-must already exist.
+The sandbox must already be created. If it is stopped, connecting to
+`<name>.sbx` starts it automatically.
