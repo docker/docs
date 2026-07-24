@@ -22,6 +22,9 @@ network, and clean up.
 
 - macOS Sonoma (version 14) or later
 - Apple silicon
+- An API key or authentication method for the agent you want to use. Most agents
+  require an API key for their model provider (Anthropic, OpenAI, Google, and
+  others). See the [agent pages](agents/) for provider-specific instructions.
 
 {{< /tab >}}
 {{< tab name="Windows" >}}
@@ -33,6 +36,9 @@ network, and clean up.
   ```powershell
   Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -All
   ```
+- An API key or authentication method for the agent you want to use. Most agents
+  require an API key for their model provider (Anthropic, OpenAI, Google, and
+  others). See the [agent pages](agents/) for provider-specific instructions.
 
 {{< /tab >}}
 {{< tab name="Linux (Ubuntu)" >}}
@@ -53,13 +59,12 @@ network, and clean up.
   $ sudo usermod -aG kvm $USER
   ```
   Log out and back in (or run `newgrp kvm`) for the group change to take effect.
+- An API key or authentication method for the agent you want to use. Most agents
+  require an API key for their model provider (Anthropic, OpenAI, Google, and
+  others). See the [agent pages](agents/) for provider-specific instructions.
 
 {{< /tab >}}
 {{< /tabs >}}
-
-An API key or authentication method for the agent you want to use. Most agents
-require an API key for their model provider (Anthropic, OpenAI, Google, and
-others). See the [agent pages](agents/) for provider-specific instructions.
 
 Docker Desktop is not required to use `sbx`.
 
