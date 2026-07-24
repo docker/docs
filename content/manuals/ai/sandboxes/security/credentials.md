@@ -8,8 +8,8 @@ keywords: docker sandboxes, credentials, api keys, authentication, proxy, ssh ag
 Most agents need an API key for their model provider. An HTTP/HTTPS proxy on
 your host intercepts outbound requests from the sandbox, looks up the matching
 credential on the host, and overwrites the auth header before forwarding. The
-real credential stays on the host; the sandbox sees only a sentinel value. For
-the security model behind this, see
+real credential stays on the host when proxy management is active; the sandbox
+sees only a sentinel value. For the security model behind this, see
 [Credential isolation](isolation.md#credential-isolation).
 
 ## How credential injection works
@@ -17,9 +17,13 @@ the security model behind this, see
 When a sandbox makes an outbound request, the host-side proxy decides three
 things: whether the request **matches** a service the kit (or built-in agent)
 declares, what **header** to write, and what **value** to inject. The kit
-declares the match and the header; you provide the value on the host. The real
-value never enters the sandbox — the agent sees only a sentinel like
-`proxy-managed`.
+declares the match and the header; you provide the value on the host. For
+proxy-managed credentials, the real value never enters the sandbox — the agent
+sees only a sentinel like `proxy-managed`.
+
+A kit can set OAuth `passthrough: true` to opt out of sentinel masking. This
+sends the real token response into the sandbox and reduces credential isolation.
+See the [`oauth` kit fields](../customize/kit-reference.md#oauth).
 
 There are several ways to provide that value. When more than one source has a
 value for the same service, the stored secret takes precedence.
@@ -29,6 +33,7 @@ value for the same service, the stored secret takes precedence.
 | [Stored secrets](#stored-secrets) (`sbx secret set`)                        | A value in your OS keychain, keyed by service                | The default for any built-in or kit-declared service                                                             |
 | [Custom secrets](#custom-secrets) (`sbx secret set-custom`)                 | A value keyed to a domain and environment variable           | The service model doesn't fit — the agent validates the variable's format, or the secret rides in a request body |
 | OAuth                                                                       | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, Cursor, or Droid                                              |
+| [Credential bindings](#credential-bindings) (`credentials.yaml`)            | Per-service mechanism and domain approval                    | Required for third-party `schemaVersion: "2"` kits                                                               |
 | [Registry credentials](#registry-credentials) (`sbx secret set --registry`) | Authentication for pulling images and kits                   | Pulling templates or kits from a private registry                                                                |
 
 For multi-provider agents (OpenCode, Docker Agent), the proxy selects
@@ -144,10 +149,24 @@ it into requests to the listed API domains.
 
 ### Services declared by kits
 
-Custom kits can declare their own service identifiers in `spec.yaml` —
-they're not limited to the table above. To provide a credential for a
-kit-declared service, run `sbx secret set` with the same identifier the kit
-declares under `credentials.sources`:
+Custom kits can declare their own service identifiers in `spec.yaml`. In
+`schemaVersion: "2"`, credentials are declared under the `credentials:` list:
+
+```yaml
+credentials:
+  - service: my-service
+    apiKey:
+      name: MY_SERVICE_TOKEN
+      proxyManaged: true
+      inject:
+        - domain: api.my-service.com
+          scheme: bearer
+```
+
+Each service declares `apiKey`, `oauth`, or both. When both resolve at runtime,
+the API key takes precedence and OAuth acts as the fallback. To provide the
+credential value, run `sbx secret set` with the same identifier the kit
+declares:
 
 ```console
 $ sbx secret set -g my-service
@@ -156,7 +175,7 @@ $ sbx secret set -g my-service
 There's no separate registration step; the keychain entry is keyed on the
 identifier the kit already uses. See
 [Authenticate to external services](../customize/kits.md#authenticate-to-external-services)
-for the kit-side wiring.
+for the full kit-side wiring.
 
 ### List and remove secrets
 
@@ -255,6 +274,74 @@ proxy replaces it with the real value. The agent never sees the real secret.
 
 Prefer the [service-based flow](#stored-secrets) whenever it's an option —
 the kit handles the wiring; you only provide the value.
+
+## Credential bindings
+
+A credential bindings file records which credential mechanisms and domains
+you've approved for each service. It lives at
+`~/.config/sbx/credentials.yaml`, or `%APPDATA%\sbx\credentials.yaml` on
+Windows.
+
+Third-party kits that declare `schemaVersion: "2"` require an approved binding
+for each credential they use. `sbx` creates one interactively the first time you
+run such a kit (see [First-run approval](#first-run-approval)); you can also
+write entries by hand. Credentials declared only by embedded, built-in kits are
+authorized by provenance and don't need a binding.
+
+Each entry under `bindings` is keyed by a
+[service identifier](#built-in-services) and approves one or both credential
+mechanisms:
+
+- `apiKey` — approves injecting the service's stored API key. The value comes
+  from the [secret store](#stored-secrets) (`sbx secret set <service>`); the
+  binding records approval, it doesn't hold or locate the value.
+- `oauth` — approves the OAuth flow for the service. You sign in on the host,
+  and the proxy handles token refresh and routing. OAuth domains include the
+  token endpoint host and any resource hosts declared by the kit.
+
+Each mechanism takes a `domains` list that records the domains you approved.
+`sbx` asks for approval when a kit requests domains that the existing binding
+doesn't cover.
+
+```yaml
+bindings:
+  anthropic:
+    apiKey:
+      domains: [api.anthropic.com]
+  github:
+    apiKey:
+      domains: [api.github.com, github.com]
+```
+
+A binding is only an approval record: the presence of `apiKey` or `oauth`
+authorizes that mechanism. Declining a credential writes no entry at all.
+
+### First-run approval
+
+When a third-party kit needs a credential that has no binding, `sbx` walks you
+through approving one. For an API key, you can use a value already in the secret
+store or enter one at the prompt. For OAuth, you approve the sign-in flow. In
+both cases, you approve the domains declared by the kit. `sbx` writes the entry
+to `credentials.yaml`.
+
+In non-interactive contexts (CI or `--detached`), there's no one to answer the
+prompt. Without a binding, the sandbox starts with the credential withheld. If
+the kit marks the credential as `required: true`, `sbx` also prints a warning.
+Pre-create the binding by running the kit interactively once or by writing
+`credentials.yaml` directly before running unattended.
+
+The bindings file gates whether a third-party v2 kit can use a service
+credential. The kit's credential injection rules and network permissions still
+constrain which requests can carry the credential.
+
+### Kits that require a binding
+
+Only third-party kits that declare `schemaVersion: "2"` require a binding.
+Built-in agents also use `schemaVersion: "2"`, but credentials declared only by
+embedded kits are authorized by provenance and inject automatically. If a
+third-party kit also declares the same service, that service requires approval.
+Kits on `schemaVersion: "1"` inject their declared credentials without a
+binding.
 
 ## Registry credentials
 

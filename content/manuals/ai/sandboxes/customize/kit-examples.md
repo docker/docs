@@ -1,7 +1,7 @@
 ---
 title: Kit examples
 linkTitle: Examples
-description: Copy-and-adapt spec.yaml snippets for common mixin and sandbox kit patterns — static files, install commands, shell customization, background services, initFiles, Claude Code skills, and agent forks.
+description: Copy-and-adapt spec.yaml snippets for common mixin and sandbox kit patterns — static files, install commands, shell customization, background services, setup files, Claude Code skills, and agent forks.
 keywords: sandboxes, sbx, kits, mixins, examples, patterns, skills
 weight: 25
 ---
@@ -35,13 +35,13 @@ ruff-lint/
 ```
 
 ```yaml {title="ruff-lint/spec.yaml"}
-schemaVersion: "1"
+schemaVersion: "2"
 kind: mixin
 name: ruff-lint
 displayName: Ruff
 description: Python linting with shared team config
 
-commands:
+setup:
   install:
     - command: "uv tool install ruff@latest"
       user: "1000"
@@ -56,12 +56,12 @@ select = ["E", "F", "I"]
 
 ## Install a tool at sandbox creation
 
-`commands.install` runs once per sandbox, at creation time. It's where
+`setup.install` runs once per sandbox, at creation time. It's where
 anything that needs to land in the image goes — package managers
 (`apt-get`, `pip`, `npm`), binary downloads, or vendor install scripts.
 
 ```yaml
-commands:
+setup:
   install:
     - command: "apt-get update && apt-get install -y jq"
     - command: "curl -fsSL https://example.com/install.sh | sh"
@@ -93,7 +93,7 @@ instance, needs `zip` and `unzip`, so add an
 > failed fetch fails the step:
 >
 > ```yaml
-> commands:
+> setup:
 >   install:
 >     - command: "curl -fsSL https://example.com/install.sh -o /tmp/install.sh && bash /tmp/install.sh"
 >       user: "1000"
@@ -117,13 +117,13 @@ you'd set a custom environment variable; see the
 [FAQ](../faq.md#how-do-i-set-custom-environment-variables-inside-a-sandbox).
 
 ```yaml {title="nvm/spec.yaml"}
-schemaVersion: "1"
+schemaVersion: "2"
 kind: mixin
 name: nvm
 displayName: nvm
 description: Node version manager available in every shell
 
-commands:
+setup:
   install:
     - command: "curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash"
       user: "1000"
@@ -179,11 +179,11 @@ the kit and install each certificate before running
 `update-ca-certificates`.
 
 ```yaml {title="internal-ca/spec.yaml"}
-schemaVersion: "1"
+schemaVersion: "2"
 kind: mixin
 name: internal-ca
 
-commands:
+setup:
   install:
     - command: "install -m 0644 /home/agent/internal-ca.crt /usr/local/share/ca-certificates/internal-ca.crt && update-ca-certificates"
       user: "0"
@@ -196,13 +196,13 @@ certificates without further configuration.
 
 ## Run a background service
 
-`commands.startup` runs on every sandbox start. To keep a long-running
+`setup.startup` runs on every sandbox start. To keep a long-running
 service such as a dev server or daemon alive, set `background: true`. The
 sandbox runs the command in the background and replays startup commands on
 each start, so the service comes back after a stop/start cycle:
 
 ```yaml
-commands:
+setup:
   startup:
     - command: ["my-service", "--port", "8080"]
       user: "1000"
@@ -215,7 +215,7 @@ for debugging, wrap the command in a shell and redirect to a log file. Let
 trailing `&` yourself:
 
 ```yaml
-commands:
+setup:
   startup:
     - command:
         - sh
@@ -228,16 +228,16 @@ commands:
 An empty log file tells you the wrapper ran; a populated one tells you why
 the service failed.
 
-## Bake runtime values into a file with initFiles
+## Write runtime values to a file
 
 When a config file needs a value that isn't known until sandbox start
-— most often the absolute workspace path — use `commands.initFiles`.
+— most often the absolute workspace path — use `setup.files`.
 The `${WORKDIR}` placeholder expands to the primary workspace path
 when the file is written.
 
 ```yaml
-commands:
-  initFiles:
+setup:
+  files:
     - path: /home/agent/.local/bin/start-code-server.sh
       content: |
         exec code-server --bind-addr 0.0.0.0:8080 --auth none "${WORKDIR}"
@@ -253,7 +253,7 @@ commands:
 `mode: "0755"` makes the generated file executable so the startup
 command can invoke it directly.
 
-Use `initFiles` instead of a static file whenever the content depends
+Use `setup.files` instead of a static file whenever the content depends
 on a runtime value. Use a static file otherwise.
 
 > [!TIP]
@@ -280,7 +280,7 @@ docker-review/
 ```
 
 ```yaml {title="docker-review/spec.yaml"}
-schemaVersion: "1"
+schemaVersion: "2"
 kind: mixin
 name: docker-review
 displayName: Dockerfile review skill
@@ -313,12 +313,12 @@ for details.
 Sandboxes seed settings files for some built-in agents during setup.
 For example, the sandbox writes `/home/agent/.claude/settings.json`
 for the `claude` agent. This happens after the kit's static files and
-`initFiles`, so a kit can't override those paths with either mechanism.
-Use `commands.startup` instead, which runs after the sandbox seeds its
+`setup.files`, so a kit can't override those paths with either mechanism.
+Use `setup.startup` instead, which runs after the sandbox seeds its
 files:
 
 ```yaml
-commands:
+setup:
   startup:
     - command:
         - sh
@@ -344,7 +344,7 @@ built-in `claude` agent but drops `--dangerously-skip-permissions` so
 every tool call prompts for approval:
 
 ```yaml {title="claude-safe/spec.yaml"}
-schemaVersion: "1"
+schemaVersion: "2"
 kind: sandbox
 name: claude-safe
 displayName: Claude Code (with approval prompts)
@@ -352,26 +352,29 @@ description: Claude Code without --dangerously-skip-permissions
 
 sandbox:
   image: "docker/sandbox-templates:claude-code-docker"
-  aiFilename: CLAUDE.md
-  entrypoint:
-    run: [claude]
+  entrypoint: [claude]
 
-network:
-  serviceDomains:
-    api.anthropic.com: anthropic
-    console.anthropic.com: anthropic
-  serviceAuth:
-    anthropic:
-      headerName: x-api-key
-      valueFormat: "%s"
-  allowedDomains:
-    - "claude.com:443"
+agentInstructions:
+  filename: CLAUDE.md
+
+permissions:
+  network:
+    allow:
+      - "claude.com:443"
+      - "api.anthropic.com:443"
+      - "console.anthropic.com:443"
 
 credentials:
-  sources:
-    anthropic:
-      env:
-        - ANTHROPIC_API_KEY
+  - service: anthropic
+    apiKey:
+      name: ANTHROPIC_API_KEY
+      inject:
+        - domain: api.anthropic.com
+          header: x-api-key
+          format: "%s"
+        - domain: console.anthropic.com
+          header: x-api-key
+          format: "%s"
 ```
 
 Launch with the kit's `name:` as the agent argument to `sbx run`:
