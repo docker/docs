@@ -76,7 +76,7 @@ To build the image, you'll need to use a Dockerfile. A Dockerfile is simply a te
 
 2. Build the image using the following commands:
 
-   In the terminal, make sure you're in the `getting-started-app` directory. Replace `/path/to/getting-started-app` with the path to your `getting-started-app` directory.
+   Ensure that you've opened an instance of Docker Desktop. Otherwise, your commands will encounter an error connecting to the Docker API. In the terminal, make sure you're in the `getting-started-app` directory. Replace `/path/to/getting-started-app` with the path to your `getting-started-app` directory.
 
    ```console
    $ cd /path/to/getting-started-app
