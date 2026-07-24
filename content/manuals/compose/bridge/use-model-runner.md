@@ -88,4 +88,4 @@ When `modelRunner.enabled` is `true`, Compose Bridge uses the generated manifest
 The `modelRunner.enabled` setting also determines the number of replicas for the `model-runner-deployment`:
 
 - When `true`, the deployment replica count is set to 1, and Docker Model Runner is deployed in the Kubernetes cluster.
-- When `false`, the replica count is 0, and no Docker Model Runner resources are deployed.
+- When `false`, the Kubernetes deployment replica count is 0, so no in-cluster Docker Model Runner is deployed. On Docker Desktop, Compose Bridge instead configures workloads to connect to the Docker Model Runner instance running on the host.
