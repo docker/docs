@@ -53,7 +53,7 @@ replaced by the new DHI Debian image.
 - FROM ubuntu/go:1.22-24.04
 
 + ## Updated to use hardened Debian-based image
-+ FROM dhi.io/golang:1-debian13-dev
++ FROM dhi.io/golang:1.25-debian13-dev
 ```
 
 To find the right tag, explore the available tags in the [DHI
@@ -74,7 +74,7 @@ contain package managers.
 -     && rm -rf /var/lib/apt/lists/*
 
 + ## DHI: Use a language-specific dev image with package manager
-+ FROM dhi.io/golang:1-debian13-dev
++ FROM dhi.io/golang:1.25-debian13-dev
 + RUN apt-get update && apt-get install -y \
 +     git \
 +     && rm -rf /var/lib/apt/lists/*
@@ -105,7 +105,7 @@ The following example shows a multi-stage Dockerfile migrating from Ubuntu to DH
 
 ```dockerfile
 # Build stage
-FROM dhi.io/golang:1-debian13-dev AS builder
+FROM dhi.io/golang:1.25-debian13-dev AS builder
 WORKDIR /app
 
 # Install system dependencies (only available in dev images)
@@ -121,7 +121,7 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags="-s -w" -o main .
 
 # Runtime stage
-FROM dhi.io/golang:1-debian13
+FROM dhi.io/golang:1.25-debian13
 WORKDIR /app
 
 # Copy compiled binary from builder
