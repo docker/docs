@@ -167,8 +167,8 @@ $ sbx policy reset --force
 
 If rules you add with `sbx policy allow` or `sbx policy deny` don't change
 sandbox behavior, your organization likely has governance enabled. Run `sbx
-policy ls` to check: if the output starts with a `Policy rules` header listing a
-`Governance  Managed by <org>` line, org governance is active. When it's active,
+policy ls` to check: if the output starts with a `Governance:` status line
+showing `Managed by <org>`, org governance is active. When it's active,
 the organization policy replaces local policy, so your rules have no effect.
 They're hidden from `sbx policy ls` by default; run `sbx policy ls
 --include-inactive` to see them with an `inactive` status in the `STATUS`
@@ -182,8 +182,7 @@ your sandboxes can access, ask your admin to update the organization policy.
 If a domain remains blocked after you add a local allow rule, your organization
 likely enforces governance, which makes local rules inactive. Run `sbx policy
 ls` to check whether org governance is active; if the output starts with a
-`Policy rules` header listing a `Governance  Managed by <org>` line, it is. Add
+`Governance:` status line showing `Managed by <org>`, it is. Add
 `--include-inactive` to confirm your rule shows an `inactive` status. If so, the
-block can only be
-lifted by updating the org policy in Docker Home or via the
-[API](/reference/api/ai-governance/).
+block can only be lifted by updating the org policy in Docker Home or via
+the [API](/reference/api/ai-governance/).
