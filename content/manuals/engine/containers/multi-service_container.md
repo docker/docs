@@ -1,6 +1,6 @@
 ---
 description: Learn how to run more than one process in a single container
-keywords: docker, supervisor, process management
+keywords: docker, supervisor, process management, tini, init
 title: Run multiple processes in a container
 weight: 20
 aliases:
@@ -29,6 +29,43 @@ container as the main process, and handles reaping of all processes when the
 container exits. Handling such processes this way is superior to using a
 full-fledged init process such as `sysvinit` or `systemd` to handle process
 lifecycle within your container.
+
+## Use the `--init` flag
+
+Docker Engine ships with [Tini](https://github.com/krallin/tini), a minimal
+init process built specifically for containers. The bundled binary is called
+`docker-init`. When you pass `--init` to `docker run`, the daemon mounts
+`docker-init` into the container and runs it as PID 1. It performs two
+functions:
+
+- Forwards signals (such as `SIGTERM`) to child processes so they can shut
+  down gracefully
+- Reaps zombie processes that would otherwise accumulate when child processes
+  exit
+
+Run a container with `--init` and inspect its process tree:
+
+```console
+$ docker run -dit --init busybox
+a428c601d073...
+
+$ docker top a428c601d073
+UID   PID     PPID    C   STIME   TTY   TIME       CMD
+root  25165   25145   0   12:49   ?     00:00:00   /sbin/docker-init -- sh
+root  25189   25165   0   12:49   ?     00:00:00   sh
+```
+
+The output shows `/sbin/docker-init` running as PID 1, with the shell as its
+child process.
+
+In Docker Compose, set `init: true` on a service for the same behavior:
+
+```yaml
+services:
+  web:
+    image: alpine:latest
+    init: true
+```
 
 If you need to run more than one service within a container, you can achieve
 this in a few different ways.
