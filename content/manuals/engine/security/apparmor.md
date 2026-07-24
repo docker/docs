@@ -38,6 +38,77 @@ explicitly specifies the default policy:
 $ docker run --rm -it --security-opt apparmor=docker-default hello-world
 ```
 
+## Customize the default profile
+
+Starting with Docker Engine 29.7, you can configure the daemon to generate the
+`docker-default` profile from a custom template.
+This changes the default policy for every container that doesn't specify
+another profile with `security-opt`.
+
+The template uses Go [text/template](https://pkg.go.dev/text/template) syntax.
+Docker renders and loads it when the daemon starts.
+Use the built-in
+[`baseTemplate`](https://github.com/moby/profiles/blob/main/apparmor/template.go)
+as a starting point because it includes the rules and template substitutions
+required for compatibility across supported hosts.
+
+> [!CAUTION]
+>
+> A custom template can reduce container isolation. Review and test every
+> change to the built-in policy.
+
+### Create a template
+
+Copy the contents between the `baseTemplate` backticks and save them as
+`/etc/docker/apparmor/docker-default`.
+The template isn't a complete AppArmor profile until Docker renders it.
+Store the file outside the AppArmor profile directory (`/etc/apparmor.d`)
+because the host AppArmor service can try to parse the template before Docker
+renders it.
+
+Modify the policy rules as needed. Docker provides the following template data:
+
+- `.Abi`: `abi/3.0` when the host provides that AppArmor ABI, or an empty string
+- `.Name`: the profile name, `docker-default`
+- `.DaemonProfile`: the daemon's AppArmor profile, or `unconfined`
+- `.Imports`: host-specific declarations and includes for the global scope
+- `.InnerImports`: host-specific includes for the profile scope
+
+Keep the `.Abi`, `.Name`, `.Imports`, and `.InnerImports` substitutions from the
+built-in template.
+Use `.DaemonProfile` in rules that permit signals from the daemon.
+
+### Configure the daemon
+
+Set `apparmor-profile` to the template path in the daemon configuration:
+
+```json {title="/etc/docker/daemon.json"}
+{
+  "apparmor-profile": "/etc/docker/apparmor/docker-default"
+}
+```
+
+You can instead pass the path with the
+`dockerd --apparmor-profile=/etc/docker/apparmor/docker-default` flag.
+Don't configure the option both as a flag and in `daemon.json`.
+
+### Restart and verify
+
+Restart the Docker daemon:
+
+```console
+$ sudo systemctl restart docker
+```
+
+Verify the configured template path:
+
+```console
+$ docker info --format '{{json .SecurityOptions}}'
+```
+
+The output includes
+`name=apparmor,profile=/etc/docker/apparmor/docker-default`.
+
 ## Load and unload profiles
 
 To load a new profile into AppArmor for use with containers:
