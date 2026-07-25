@@ -3,6 +3,7 @@ title: "Go SDK"
 description: "Use docker-agent as a Go library to embed AI agents in your applications."
 keywords: docker agent, ai agents, guides, go sdk
 weight: 40
+canonical: https://docs.docker.com/ai/docker-agent/guides/go-sdk/
 ---
 
 _Use docker-agent as a Go library to embed AI agents in your applications._
@@ -127,6 +128,23 @@ if err := chat.Restart(); err != nil {
 | `RuntimeEvent` | The original `runtime.Event` for callers that need the full stream.      |
 
 For advanced use (custom elicitation, raw event inspection), call `chat.Runtime()` to access the underlying `runtime.Runtime` directly.
+
+> [!WARNING]
+> **Breaking change: `Runtime.ResumeElicitation` (#3584)**
+>
+> `Runtime.ResumeElicitation` gained an `elicitationID` parameter so responses can
+> be correlated with a specific concurrent elicitation request (needed once
+> multiple background jobs can be eliciting input at the same time). It is
+> declared **variadic** (`elicitationID ...string`) specifically so existing
+> *callers* of the 3-argument form keep compiling unchanged — `rt.ResumeElicitation(ctx, action, content)`
+> still works and falls back to resolving the sole pending request.
+>
+> If you implement your own `runtime.Runtime` (rather than embedding
+> `runtime.LocalRuntime`/`runtime.RemoteRuntime`), you do need to update your
+> method's signature to match, and also add an `OnElicitationRequest(handler
+> func(runtime.Event))` method (a no-op is fine if your runtime never raises
+> elicitations) — both are required interface methods, matching the existing
+> no-op-able pattern already used by `OnToolsChanged`/`OnBackgroundEvent`.
 
 ## Optional Provider Build Tags
 

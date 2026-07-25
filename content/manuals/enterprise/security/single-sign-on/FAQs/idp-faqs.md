@@ -27,7 +27,7 @@ To turn on SSO in Docker, you need the following from your IdP:
 
 ## What happens if my existing certificate expires?
 
-Contact your identity provider to retrieve a new X.509 certificate. Update with the new certificate in [SSO configuration settings](/manuals/enterprise/security/single-sign-on/manage.md#manage-sso-connections) from Docker Admin Console.
+Contact your identity provider to retrieve a new X.509 certificate. Update with the new certificate in [SSO configuration settings](/manuals/enterprise/security/single-sign-on/manage.md#manage-sso-connections) from Docker Home.
 
 - If your organization enforces SSO, username and password credentials won't work.
 - If your organization doesn't enforce SSO, users can sign in with their username and password credentials.
@@ -46,7 +46,7 @@ Yes, bot accounts need seats like regular users, requiring a non-aliased domain 
 
 ## Does SAML SSO use Just-in-Time provisioning?
 
-The SSO implementation uses Just-in-Time (JIT) provisioning by default. You can optionally turn off JIT in the Admin Console if you turn on auto-provisioning using SCIM. See [Just-in-Time provisioning](/manuals/enterprise/security/provisioning/just-in-time.md).
+The SSO implementation uses Just-in-Time (JIT) provisioning by default. You can optionally turn off JIT in Docker Home if you turn on auto-provisioning using SCIM. See [Just-in-Time provisioning](/manuals/enterprise/security/provisioning/just-in-time.md).
 
 ## My Entra ID SSO connection isn't working and shows an error. How can I troubleshoot this?
 

@@ -4,6 +4,7 @@ description: "Automatically generate tools from an OpenAPI specification."
 keywords: docker agent, ai agents, tools, toolsets, openapi tool
 linkTitle: "OpenAPI"
 weight: 230
+canonical: https://docs.docker.com/ai/docker-agent/tools/openapi/
 ---
 
 _Automatically generate tools from an OpenAPI specification._

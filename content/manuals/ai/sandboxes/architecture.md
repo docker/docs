@@ -31,12 +31,24 @@ When you create a sandbox, everything inside it persists until you remove it:
 Docker images and containers built or pulled by the agent, installed packages,
 agent state and history, and workspace changes.
 
-Sandboxes are isolated from each other. Each one maintains its own Docker
-daemon state, image cache, and package installations. Multiple sandboxes don't
-share images or layers.
+Each sandbox maintains its own Docker daemon state, image cache, and package
+installations. Multiple sandboxes don't share images or layers. The
+[shared agent skills store](workflows.md#share-agent-skills) is an exception:
+supported agents mount the same host-side store read-write unless you opt out
+when creating the sandbox.
 
 Each sandbox consumes disk space for its VM image, Docker images, container
 layers, and volumes, and this grows as you build images and install packages.
+
+Virtiofs caching is enabled by default on all operating systems. File reads
+from the sandbox VM are cached on the host side, reducing round-trips through
+the filesystem passthrough and improving performance for read-heavy workloads
+such as `git status` or directory scans. To opt out, set
+`DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0` when creating the sandbox:
+
+```console
+$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <template>
+```
 
 ## Networking
 
@@ -68,15 +80,24 @@ and sets the upstream proxy for both HTTP and HTTPS to that URL. Unlike
 `HTTP_PROXY` and `HTTPS_PROXY`, it doesn't affect image pulls or the daemon's
 own requests.
 
+`DOCKER_SANDBOXES_PROXY` accepts `http://`, `https://`, `socks5://`, and
+`socks5h://` URLs. With `socks5://`, DNS is resolved locally before the
+connection is handed to the proxy. With `socks5h://`, DNS resolution is
+delegated to the proxy. Both schemes support credentials in the URL:
+`socks5://user:pass@host:port`.
+
+Set `DOCKER_SANDBOXES_NO_PROXY` to exclude specific destinations from
+`DOCKER_SANDBOXES_PROXY`, using standard comma-separated `NO_PROXY` matching
+semantics. This only affects traffic routed through `DOCKER_SANDBOXES_PROXY`
+— use `NO_PROXY` to exclude destinations from `HTTP_PROXY`/`HTTPS_PROXY`.
+
 Set these variables in the environment where the sandbox daemon starts. The
 daemon starts automatically the first time a command needs it, so set the
 variables before you run a `sbx` command. If the daemon is already running,
 restart it for a change to take effect.
 
-Two limitations apply:
+One limitation applies:
 
-- Only HTTP and HTTPS traffic can be forwarded to an upstream proxy. Other TCP
-  traffic can't be redirected to a proxy.
 - Proxy auto-configuration files, such as `proxy.pac`, aren't supported. Set the
   `HTTP_PROXY`, `HTTPS_PROXY`, or `DOCKER_SANDBOXES_PROXY` environment variables
   explicitly.

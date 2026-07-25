@@ -69,9 +69,10 @@ successfully. For more information, see [No base image data](#no-base-image-data
 ### High-Profile Vulnerabilities
 
 The **High-Profile Vulnerabilities** policy type checks whether your images
-contain vulnerabilities from Docker Scout's curated list of widely recognized,
-high-impact CVEs. The list includes Log4Shell, Spring4Shell, XZ backdoor, and
-others, and is updated as new high-profile vulnerabilities are disclosed.
+contain vulnerabilities from a [curated list of widely recognized, high-impact
+CVEs](./local.md#default-high-profile-cves), including Log4Shell, Spring4Shell,
+and XZ backdoor. The list is updated as new high-profile vulnerabilities are
+disclosed.
 
 You can configure which CVEs are considered high-profile and enable tracking
 of CISA's Known Exploited Vulnerabilities catalog.

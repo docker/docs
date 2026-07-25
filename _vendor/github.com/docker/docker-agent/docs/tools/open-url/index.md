@@ -4,6 +4,7 @@ description: "Open a fixed URL in the user's default browser."
 keywords: docker agent, ai agents, tools, toolsets, open url tool
 linkTitle: "Open URL"
 weight: 40
+canonical: https://docs.docker.com/ai/docker-agent/tools/open-url/
 ---
 
 _Open a fixed URL in the user's default browser._

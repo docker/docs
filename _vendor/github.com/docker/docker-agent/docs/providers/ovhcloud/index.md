@@ -3,6 +3,7 @@ title: "OVHcloud"
 description: "Use OVHcloud AI Endpoints models with docker-agent."
 keywords: docker agent, ai agents, model providers, llm, ovhcloud
 weight: 240
+canonical: https://docs.docker.com/ai/docker-agent/providers/ovhcloud/
 ---
 
 _Use OVHcloud AI Endpoints models with docker-agent._

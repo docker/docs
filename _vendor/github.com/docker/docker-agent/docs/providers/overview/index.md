@@ -4,6 +4,7 @@ description: "docker-agent supports multiple AI model providers. Choose the righ
 keywords: docker agent, ai agents, model providers, llm
 linkTitle: "Overview"
 weight: 10
+canonical: https://docs.docker.com/ai/docker-agent/providers/overview/
 aliases:
   - /ai/docker-agent/model-providers/
 ---
@@ -35,11 +36,13 @@ docker-agent also includes built-in aliases for these providers:
 
 | Provider       | Alias            | API Key / Env Variable              |
 | -------------- | ---------------- | ----------------------------------- |
+| ChatGPT (OpenAI account) | [`chatgpt`](../chatgpt/index.md) | None (sign in via `docker agent setup`) |
 | OpenCode Zen   | `opencode-zen`   | `OPENCODE_API_KEY`                  |
 | OpenCode Go    | `opencode-go`    | `OPENCODE_API_KEY`                  |
 | Mistral        | `mistral`        | `MISTRAL_API_KEY`                   |
 | xAI (Grok)     | `xai`            | `XAI_API_KEY`                       |
 | Nebius         | `nebius`         | `NEBIUS_API_KEY`                    |
+| NVIDIA NIM     | `nvidia`         | `NVIDIA_API_KEY`                    |
 | MiniMax        | `minimax`        | `MINIMAX_API_KEY`                   |
 | Baseten        | `baseten`        | `BASETEN_API_KEY`                   |
 | OVHcloud       | `ovhcloud`       | `OVH_AI_ENDPOINTS_ACCESS_TOKEN`     |

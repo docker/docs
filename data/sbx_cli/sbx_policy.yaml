@@ -20,9 +20,11 @@ inherited_options:
 see_also:
     - sbx - Manage AI coding agent sandboxes.
     - sbx policy allow - Add an allow rule for sandboxes
+    - sbx policy check - Check whether policy allows an access request
     - sbx policy deny - Add a deny rule for sandboxes
     - sbx policy init - Initialize the global network policy
+    - sbx policy inspect - Inspect policy or rule details
     - sbx policy log - Show sandbox policy logs
-    - sbx policy ls - List sandbox policy rules
+    - sbx policy ls - List sandbox policies
     - sbx policy reset - Reset policies to defaults
     - sbx policy rm - Remove a policy rule

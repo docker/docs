@@ -1,7 +1,7 @@
 ---
 title: Add and manage domains
 description: Add, verify, and manage domains to control user access and enable auto-provisioning in Docker organizations
-keywords: domain management, domain verification, auto-provisioning, user management, DNS, TXT record, Admin Console
+keywords: domain management, domain verification, auto-provisioning, user management, DNS, TXT record, Docker Home
 weight: 10
 aliases:
   - /security/for-admins/domain-management/

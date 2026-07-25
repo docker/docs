@@ -4,6 +4,7 @@ description: "Hand off the active conversation to another local agent defined in
 keywords: docker agent, ai agents, tools, toolsets, handoff tool
 linkTitle: "Handoff"
 weight: 70
+canonical: https://docs.docker.com/ai/docker-agent/tools/handoff/
 ---
 
 _Hand off the active conversation to another local agent defined in the same config._

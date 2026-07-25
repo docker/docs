@@ -15,6 +15,71 @@ the full release history, including pre-releases and downloads, see the
 
 <!-- BEGIN GENERATED RELEASES -->
 
+## 0.35.0
+
+{{< release-date date="2026-07-10" >}}
+
+[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.35.0)
+
+### Highlights
+
+This release revamps **policy tooling** with a concise `sbx policy ls`, a new `sbx policy inspect`, and a `sbx policy check network` command for testing whether the current policy would allow an access request before you run. 
+Networking gains a **SOCKS5 upstream-proxy transport**.  
+Secrets get a new **`sbx secret import`** with clearer env-source visibility.
+
+### What's New
+
+#### Networking & Proxy
+
+- The sandbox proxy can chain upstream egress through a SOCKS5 proxy (`socks5://` / `socks5h://`, with optional auth) via `DOCKER_SANDBOXES_PROXY`, `HTTP_PROXY`, or `HTTPS_PROXY`.
+- Add `DOCKER_SANDBOXES_NO_PROXY` to exclude destinations from `DOCKER_SANDBOXES_PROXY`, using standard `NO_PROXY` matching semantics.
+- Droid OAuth credentials are now proxy-managed: real tokens stay on the host and never land in the sandbox.
+- Faster sandbox startup: the TLS-proxy CA is installed by merging into the trust bundle instead of running `update-ca-certificates`, saving several hundred milliseconds.
+
+#### Policy
+
+- Simplify `sbx policy ls` and add `--wide`, `--source`, and `--decision` filters
+- Add `sbx policy check` to test whether the current policy would allow an access request
+- Balanced network preset now allows VS Code domains, Azure Blob Storage (`*.blob.core.windows.net`), and `dhi.io` over HTTP.
+
+#### Kits
+
+- `sbx kit add` now recreates the sandbox container with the augmented kit set instead of injecting at runtime. State is preserved with the re-creation.
+- `sbx kit add` applies the added kit's network allow/deny rules and composed policy on the running sandbox.
+- Re-attaching to a sandbox created from a custom `--kit` agent now works with `sbx run --name <name>` without re-passing `--kit`.
+- Kits can inject the user's Docker login token into requests to docker.com hosts via a credential with service `sbx-login`.
+
+#### CLI
+
+- `sbx rm` now won't delete an active session unless `--force` is passed.
+- `sbx inspect` now lists the sandbox's kits, injected secrets, and sandbox information.
+- Added `sbx daemon` command (`start`, `stop`, `status`, `log-level`)
+
+#### Secrets
+
+- `sbx secret import` imports credential env vars into the keychain; `sbx secret ls` flags env-only and OAuth-shadowed entries. Host env vars no longer auto-inject at runtime — use `sbx secret import` to migrate.
+
+#### Runtime & images
+
+- Enable virtiofs caching by default on all operating systems by default for faster filesystem performance (`DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0` to opt out).
+
+### Bug Fixes
+
+- Fix "container not found" errors when copying files with `sbx cp` on a sandbox that has had a kit added.
+- Enforce the one-credential-per-service rule on credential capture paths so a stale API key no longer shadows a newly captured credential.
+- Fix `sbx login` failing with "The specified item already exists in the keychain" when signing back into a previously used account; logout now clears all stored Docker credentials.
+- Restarted sandboxes keep GitHub access by rehydrating the stored `github` credential on daemon restart.
+- Fix a custom kit clearing the proxy's built-in GitHub auth header mapping for the whole daemon until a restart.
+- Tunnel plain-HTTP forward traffic (e.g. `apt`, port 80) via CONNECT when the upstream proxy only supports CONNECT.
+- Sandbox egress through an upstream proxy identifies as `sbx-proxy` on the CONNECT handshake.
+- Fix IPv6 policy allow rules using bracket notation (e.g. `[fdcb::1]:22`) not matching.
+- Fix `sbx` connecting to the wrong Docker daemon when `DOCKER_HOST` is set in the environment.
+- Serialize Docker Hub token refresh across the CLI and daemon so sign-in sessions aren't unexpectedly lost.
+
+### Platform support
+
+- Block installation on Windows versions older than Windows 11 (the only currently supported version).
+
 ## 0.34.0
 
 {{< release-date date="2026-06-26" >}}
@@ -117,67 +182,6 @@ This release also improves network isolation and policy enforcement. Sandbox DNS
 - Inject git identity from subdirectories and `[include]`d Git config when cloning.
 - Proxy service detection now supports middle-position wildcards.
 - Sandboxes blocked by mount policies are no longer filtered out on daemon startup.
-
-## 0.32.0
-
-{{< release-date date="2026-06-09" >}}
-
-[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.32.0)
-
-### Highlights
-
-**[Audit logging](https://docs.docker.com/ai/sandboxes/governance/audit/)**: Sandboxes now emit structured JSONL audit records for policy decisions. Records are written to a per-OS log directory and can be forwarded to any SIEM platform for enterprise compliance workflows. Requires a Docker AI Governance subscription.
-
-**[Sign-in enforcement](https://docs.docker.com/ai/sandboxes/governance/sign-in-enforcement/)**: Administrators can now require Docker organization membership verification. Enforcement is deployed via standard endpoint management tooling: configuration profiles on macOS, the registry on Windows, and a JSON policy file on Linux. This closes the gap for organizations that need to ensure only authenticated, authorized users run AI coding agents.
-
-### What's New
-
-#### CLI
-
-- Offer an interactive "Sign in with ChatGPT" OAuth flow on the first `sbx create`/`sbx run codex` when no Codex credentials are configured.
-- Pre-select `balanced` as the highlighted default in the first-run network policy prompt, so pressing Enter accepts the recommended policy.
-- Make global the default scope for `policy network allow|deny` and `policy rm`; add `--sandbox` to target a specific sandbox and drop the `-g/--global` flag.
-- Simplify `sbx version` to a single line by default; gate detailed information behind `-D/--debug`.
-- Unhide `sbx secret set-custom`, a command for [setting custom secrets](https://docs.docker.com/ai/sandboxes/security/credentials/#custom-secrets), and mark it as experimental.
-
-#### Secrets
-
-- Add OpenRouter as a built-in service provider, so `sbx secret set <sandbox> openrouter` works without `set-custom` and the proxy injects `Authorization: Bearer <token>` automatically.
-- Fall back to an encrypted on-disk secrets store on Linux/WSL hosts where no working keychain is available, with a one-time warning on secret-writing paths including `sbx login`.
-- Substitute custom-secret sentinels inside HTTP Basic auth payloads, so credentials referenced in `Basic` Authorization headers are resolved like other sentinel shapes.
-
-#### Networking
-
-- Hide inactive governed policy rules by default in `sbx policy ls` and the TUI Network Rules view, with governance/sync status, hidden-rule indicators, and an `--include-inactive` flag (TUI `i` toggle) to reveal them.
-- Route OAuth/browser-open requests to the caller's graphical session, fixing `/login` opening on the host's display instead of the SSH terminal that invoked it.
-
-#### Kits
-
-- Support the v2 OCI kit artifact format end-to-end, so kits are standard OCI images that registries and OCI tooling (Hub, `oras`, `crane`, `skopeo`) can introspect without kit-specific knowledge.
-- Write `files/workspace/<path>` kit entries correctly when `sbx run --clone` is used; previously the file hook fired before the in-container clone populated the workspace and failed the sandbox start.
-
-#### Performance
-
-- Keep virtiofs caching enabled for sandboxes using `--clone`, avoiding a FUSE round-trip on every `stat()` and speeding up `git status`, `grep -r`, and tree walks inside the sandbox.
-
-#### Packaging
-
-- Require the system keyring dependency in Linux packages so credential storage works out of the box.
-
-#### Documentation
-
-- Replace stale `--branch`/worktree guidance in generated agent guidance (CLAUDE.md/AGENTS.md) with `--clone`, including how to sync host commits via `/run/sandbox/source`.
-
-#### Bug Fixes
-
-- Fix an issue with `sbx secret set <sandbox> <service>` silently dropping credentials while reporting success.
-- Migrate stale runtime `SocketPath` references on daemon restart, so sandboxes upgraded from v0.31.0 stay visible to `sbx ls` after `/tmp` is cleaned.
-- Keep non-interactive `sbx exec` output intact by not tearing down the attach-exec bridge on stdin EOF (no more spurious empty output with exit code 0).
-- Clear stale pending status in the TUI when a network deny rule is deleted, so a host no longer shows as Blocked after its rule is removed.
-- Bind MCP gateway state to the daemon-assigned runtime instance so a same-name sandbox recreate cannot leave Claude pointed at a stale gateway port.
-- Set the default network policy before launching the TUI to avoid spurious 412 errors from policy-rule requests.
-- Stop counting expected `rm`/`stop`/list-ports "not found" 404s as analytics failures, so routine existence checks no longer inflate error dashboards.
-- Require a daemon restart (instead of failing with `405 Method Not Allowed`) when downgrading the CLI below a newer running daemon.
 
 <!-- END GENERATED RELEASES -->
 

@@ -116,7 +116,7 @@ You need [super admin permissions](https://help.okta.com/en-us/content/topics/se
 
 1. Sign in to your Okta Admin account. From the top nav, select the **Admin** button to go to Okta's Admin Console.
 1. From the **Applications** section in the left nav, choose **Applications**. Select **Create App Integration**.
-1. Choose SAML 2.0 to match your selection from Docker's Admin Console.
+1. Choose SAML 2.0 to match your selection from Docker Home.
 1. For **General Settings**, name your app "Docker." Uploading a logo is optional.
 1. For **Configure SAML**, input the following values:
    - For the **Single Sign On URL** value, paste the Docker ACS URL.
@@ -221,7 +221,7 @@ IdPs like Microsoft Entra and Okta may require that you assign a user to an appl
 
 After assigning yourself to an app:
 
-1. Open an incognito browser window and sign in to the Admin Console using your domain email address.
+1. Open an incognito browser window and sign in to Docker Home using your domain email address.
 1. When redirected to your IdP's sign in page, authenticate with your domain email instead of using your Docker ID.
 
 If you have multiple IdPs, choose the sign-in option **Continue with SSO**. If you're using the CLI, you must authenticate using a personal access token.

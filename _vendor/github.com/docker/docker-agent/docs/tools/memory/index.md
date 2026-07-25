@@ -4,6 +4,7 @@ description: "Persistent key-value storage backed by SQLite for cross-session re
 keywords: docker agent, ai agents, tools, toolsets, memory tool
 linkTitle: "Memory"
 weight: 100
+canonical: https://docs.docker.com/ai/docker-agent/tools/memory/
 ---
 
 _Persistent key-value storage backed by SQLite for cross-session recall._

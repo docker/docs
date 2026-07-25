@@ -3,6 +3,7 @@ title: "Contributing"
 description: "docker-agent is open source. Here's how to set up your development environment and contribute."
 keywords: docker agent, ai agents, community, contributing
 weight: 10
+canonical: https://docs.docker.com/ai/docker-agent/community/contributing/
 ---
 
 _docker-agent is open source. Here's how to set up your development environment and contribute._

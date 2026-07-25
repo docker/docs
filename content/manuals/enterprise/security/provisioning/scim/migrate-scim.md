@@ -77,7 +77,7 @@ re-created by SCIM after removal.
 
 ### Export user records
 
-Export a list of JIT-provisioned users from Docker Admin Console:
+Export a list of JIT-provisioned users from Docker Home:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your
    organization.

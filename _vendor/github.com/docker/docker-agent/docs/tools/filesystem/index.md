@@ -4,6 +4,7 @@ description: "Read, write, list, search, and navigate files and directories."
 keywords: docker agent, ai agents, tools, toolsets, filesystem tool
 linkTitle: "Filesystem"
 weight: 10
+canonical: https://docs.docker.com/ai/docker-agent/tools/filesystem/
 ---
 
 _Read, write, list, search, and navigate files and directories._

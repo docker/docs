@@ -1,6 +1,6 @@
 ---
 title: Manage unassociated machines
-description: Learn how to manage unassociated machines using the Docker Admin Console
+description: Learn how to manage unassociated machines in Docker Home
 keywords: unassociated machines, insights, manage users, enforce sign-in
 sitemap: false
 pagefind_exclude: true

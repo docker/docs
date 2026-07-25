@@ -323,6 +323,7 @@ Zsh
 README
 [Rr]eal-time
 [Rr]egex(es)?
+[Rr]uleset(s)?
 [Rr]untimes?
 [Ss]andbox(ed)?
 [Ss]eccomp
@@ -424,12 +425,14 @@ bootloader
 Buildkite
 crypto
 Graylog
+Heartbleed
 Kubuntu
 Libnetwork
 lockfile
 Lubuntu
 multimodal
 multithreading
+Log4Shell
 NLP
 Nodemon
 oldoldstable
@@ -437,6 +440,8 @@ parallelizable
 PHPUnit
 pnpm
 PyTorch
+Shellshock
+Spring4Shell
 superset
 tokenization
 WebGL

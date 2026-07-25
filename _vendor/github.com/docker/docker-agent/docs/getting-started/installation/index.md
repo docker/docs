@@ -3,6 +3,7 @@ title: "Installation"
 description: "Get docker-agent running on your system in minutes."
 keywords: docker agent, ai agents, getting started, installation
 weight: 20
+canonical: https://docs.docker.com/ai/docker-agent/getting-started/installation/
 ---
 
 _Get docker-agent running on your system in minutes._

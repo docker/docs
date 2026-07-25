@@ -9,6 +9,7 @@ description: |-
     env vars set on this host, and accepted secrets are imported into the global
     secrets store (the same store as "sbx secret set -g").
 
+      [g]      Get help with Gordon using the detected setup context
       [T]      toggle the detailed review table on/off
       ↑/↓      move between rows
       TAB      toggle import / skip for the selected row

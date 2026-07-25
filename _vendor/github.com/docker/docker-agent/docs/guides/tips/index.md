@@ -3,6 +3,7 @@ title: "Tips & Best Practices"
 description: "Expert guidance for building effective, efficient, and secure agents."
 keywords: docker agent, ai agents, guides, tips & best practices
 weight: 10
+canonical: https://docs.docker.com/ai/docker-agent/guides/tips/
 aliases:
   - /ai/docker-agent/best-practices/
 ---
@@ -375,6 +376,59 @@ settings:
 ```
 
 This model is used when you run `docker agent run` without a config file.
+
+### Get Desktop Notifications with Hooks
+
+Long-running agents shouldn't require staring at the terminal. Add [global hooks](../../configuration/hooks/index.md#global-user-level-hooks) to your user config so every agent notifies you when it needs attention or finishes:
+
+```yaml
+# ~/.config/cagent/config.yaml
+settings:
+  hooks:
+    # Agent is waiting for your input (question, approval prompt, ...)
+    on_user_input:
+      - type: command
+        command: osascript -e 'display notification "Agent needs your input" with title "docker-agent"'
+
+    # Agent finished responding
+    stop:
+      - type: command
+        command: osascript -e 'display notification "Task finished" with title "docker-agent"'
+```
+
+On Linux, replace `osascript` with `notify-send`:
+
+```yaml
+command: notify-send "docker-agent" "Agent needs your input"
+```
+
+Hooks inherit docker-agent's environment, so this works as-is from a desktop terminal. In detached contexts (SSH, tmux started outside your desktop session, containers), `notify-send` needs the session's `DISPLAY` and `DBUS_SESSION_BUS_ADDRESS` to reach the notification daemon, and fails silently without them. Pass them with the per-hook `env` option:
+
+```yaml
+on_user_input:
+  - type: command
+    command: notify-send "docker-agent" "Agent needs your input"
+    env:
+      DISPLAY: ":0"
+      DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
+```
+
+To also get alerted on errors and warnings, hook the `notification` event and read the message from the JSON payload on stdin:
+
+```yaml
+settings:
+  hooks:
+    notification:
+      - type: command
+        timeout: 10
+        command: |
+          MESSAGE=$(cat | jq -r '.notification_message // "Agent error"')
+          osascript -e "display notification \"$MESSAGE\" with title \"docker-agent\""
+```
+
+If a sound is enough, set `settings: { sound: true }` instead — docker-agent plays a failure sound when a task errors, and a success sound when a task that ran longer than `sound_threshold` seconds (default 10) completes.
+
+See the [Hooks documentation](../../configuration/hooks/index.md) for the full list of events, their payloads, and per-hook options (`env`, `working_dir`, `timeout`).
 
 ### GitHub PR Reviewer Example
 

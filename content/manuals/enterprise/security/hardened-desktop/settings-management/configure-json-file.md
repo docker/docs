@@ -309,6 +309,11 @@ The following tables describe all available settings in the `admin-settings.json
 
 ### Proxy settings
 
+Docker Desktop has two distinct proxy settings with different scopes:
+
+- `proxy` (App Proxy): Governs Docker Desktop host-level traffic — the Desktop application, Docker CLI, and extensions. It also serves as a fallback for the daemon when `containersProxy` is not explicitly configured. Once `containersProxy` is set, `proxy` plays no role in daemon or container traffic.
+- [`containersProxy`](#container-proxy): Always governs `docker image pull`. All `docker image pull` and Compose pull operations go through `containersProxy`, including any PAC file rules. It also governs running container outbound traffic when `transparentPorts` is configured.
+
 | Parameter            | OS           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Version                                |
 | :------------------- | ------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
 | `proxy`              |              | If `mode` is set to `system` instead of `manual`, Docker Desktop gets the proxy values from the system and ignores any values set for `http`, `https` and `exclude`. Change `mode` to `manual` to manually configure proxy servers. If the proxy port is custom, specify it in the `http` or `https` property, for example `"https": "http://myotherproxy.com:4321"`. The `exclude` property specifies a comma-separated list of hosts and domains to bypass the proxy. |                                        |
@@ -321,18 +326,18 @@ The following tables describe all available settings in the `admin-settings.json
 >
 > Proxy configuration is a special case because it must be configured in two places:
 >
-> 1. In the Admin Console for your organization.
+> 1. In Docker Home for your organization.
 > 2. On the user's system where Docker Desktop is installed.
 >
 > On the user's machine, configure the proxy either through the `admin-settings.json` file or by using installer flags during Docker Desktop installation. For detailed instructions, refer to the [installation guide](/manuals/desktop/setup/install/windows-install.md#proxy-configuration).
 > 
-> This additional configuration is required because Docker Desktop must know which proxy server to use before it can complete user sign-in and retrieve organization settings from the Admin Console.
+> This additional configuration is required because Docker Desktop must know which proxy server to use before it can complete user sign-in and retrieve organization settings from Docker Home.
 
 ### Container proxy
 
 | Parameter         | OS  | Description                                                                                                                                                                                                                                         | Version                                |
 | :---------------- | --- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| `containersProxy` |     | Creates air-gapped containers. For more information see [Air-Gapped Containers](../air-gapped-containers.md).                                                                                                                                       |  |
+| `containersProxy` |     | Configures the proxy for `docker image pull` (always enforced) and running container outbound traffic (enforced when `transparentPorts` is set). For more information see [Air-Gapped Containers](../air-gapped-containers.md). |  |
 | `pac`             |     | Specifies a PAC file URL. For example, `"pac": "http://containerproxy/proxy.pac"`.                                                                                                                                                                  |                                        |
 | `embeddedPac`     |     | Specifies an embedded PAC (Proxy Auto-config) script. For example, `"embeddedPac": "function FindProxyForURL(url, host) { return \"PROXY 192.168.92.1:2003\"; }"`. This setting takes precedence over HTTP, HTTPS, Proxy bypass and PAC server URL. |  |
 
@@ -354,7 +359,7 @@ The following tables describe all available settings in the `admin-settings.json
 
 > [!NOTE]
 >
-> This setting is not available to configure via the Docker Admin Console.
+> This setting is not available to configure via Docker Home.
 
 ### Kubernetes settings
 

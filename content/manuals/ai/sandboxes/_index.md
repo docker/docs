@@ -18,9 +18,9 @@ system.
 > [organization governance](governance/) requires a separate paid subscription.
 
 Organization admins can
-[centrally manage sandbox network and filesystem policies](governance/org.md)
-from the Docker Admin Console, so the same rules apply uniformly across every
-developer's machine. Available on a separate paid subscription.
+[centrally manage sandbox network and filesystem policies](governance/org.md),
+so the same rules apply uniformly across every developer's machine. Available
+on a separate paid subscription.
 
 ## Get started
 
@@ -68,11 +68,13 @@ $ sbx run claude
 ```
 
 See the [get started guide](get-started.md) for a full walkthrough, or jump to
-the [usage guide](usage.md) for common patterns.
+the [usage guide](usage.md) for basic commands.
 
 ## Learn more
 
 - [Agents](agents/) — supported agents and per-agent configuration
+- [Integrations](integrations/) — connect editors and apps like VS Code and
+  Cursor to a sandbox over SSH
 - [Customize](customize/) — reusable templates and declarative kits for
   extending or tailoring sandboxes
 - [Architecture](architecture.md) — microVM isolation, workspace mounting,

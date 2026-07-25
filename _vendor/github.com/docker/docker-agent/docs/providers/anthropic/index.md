@@ -3,6 +3,7 @@ title: "Anthropic"
 description: "Use Claude Sonnet 4, Claude Sonnet 4.5, and other Anthropic models with docker-agent."
 keywords: docker agent, ai agents, model providers, llm, anthropic
 weight: 20
+canonical: https://docs.docker.com/ai/docker-agent/providers/anthropic/
 ---
 
 _Use Claude Sonnet 4, Claude Sonnet 4.5, and other Anthropic models with docker-agent._

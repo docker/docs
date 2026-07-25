@@ -1,8 +1,9 @@
 ---
 title: Submit a tax exemption certificate
+linkTitle: Tax exemption certificate
 description: Learn how to submit a tax exemption or VAT certificate for Docker billing.
 keywords: billing, renewal, payments, tax, exemption, VAT, billing support, Docker billing
-weight: 50
+weight: 70
 ---
 
 If you're a customer in the United States and are exempt from sales tax, you

@@ -32,7 +32,7 @@ _For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
 
 ## Installation modes
  
-Docker Desktop supports two installation modes. Per-user installation (Beta) is recommended for most users. It does not require administrator privileges to install or update, and the WSL 2 backend it uses covers the needs of the vast majority of Docker Desktop users.
+Docker Desktop supports two installation modes. Per-user installation is recommended for most users and is selected by default in the installer. It does not require administrator privileges to install or update, and the WSL 2 backend it uses covers the needs of the vast majority of Docker Desktop users.
  
 | | Per-user (recommended) | All users |
 |---|---|---|
@@ -201,6 +201,12 @@ If using all-users installation and your administrator account is different to y
 ```console
 $ net localgroup docker-users <user> /add
 ```
+
+> [!WARNING]
+>
+> Membership in `docker-users` grants access to the Docker daemon socket, which is equivalent to granting administrative privileges on the host. Only add users who require access to Windows containers or Hyper-V VM management. For Linux containers using the WSL 2 backend, this group membership is not required. See [Protect the Docker daemon socket](/manuals/engine/security/protect-access.md) for more information.
+
+If you're deploying via MDM (such as Intune) and the `docker-users` group isn't populated automatically, see [Why isn't the `docker-users` group populated when the MSI is installed with Intune or another MDM solution?](/manuals/enterprise/enterprise-deployment/faq.md#why-isnt-the-docker-users-group-populated-when-the-msi-is-installed-with-intune-or-another-mdm-solution).
 
 See the [Installer flags](#installer-flags) section to see what flags the `install` command accepts.
 
