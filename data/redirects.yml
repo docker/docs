@@ -389,6 +389,7 @@
   - /go/eci/
 "/desktop/features/synchronized-file-sharing/":
   - /go/synchronized-file-sharing/
+  - /desktop/synchronized-file-sharing/
 "/reference/cli/dockerd/":
   - /go/daemon-config/
   - /engine/reference/commandline/dockerd/
