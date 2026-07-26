@@ -20,8 +20,6 @@ isolated environment instead of on your host.
 
 - SSH access set up. See [Editor and app integrations](_index.md#enable-ssh-access).
 - The ChatGPT desktop app installed.
-- An existing sandbox created from the Codex template. The template includes
-  the `codex` command required by the app's remote server.
 
 ## Connect
 
