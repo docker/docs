@@ -28,7 +28,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-07-27" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.84.0" build_path="//" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.84.0" build_path="/234994/" >}}
 
 
 ### Updates
@@ -37,6 +37,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Kubernetes:
   - cri-dockerd v0.4.4
 - [Docker Hardened Images CLI (`dhictl`) v0.0.7](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.7)
+- Docker Desktop CLI `v0.4.3`
 
 ### Bug fixes and enhancements
 
