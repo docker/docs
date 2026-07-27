@@ -84,6 +84,33 @@ $ dockerd --debug \
   --host tcp://192.168.59.3:2376
 ```
 
+#### Listen on a Unix socket on Windows
+
+Starting with Docker Engine 29.5, you can configure `dockerd` on Windows to
+listen on a Unix socket. This setting is optional. The default Windows endpoint
+remains the `npipe` named pipe.
+
+Run `dockerd` from an elevated PowerShell session:
+
+```powershell
+PS C:\> dockerd -H unix://C:/Users/<USER>/docker.sock --group docker-users
+```
+
+Replace `<USER>` with the name of your Windows user profile directory.
+Without `--group`, only members of the Administrators group and the `SYSTEM`
+account can access the socket. Use a comma-separated list to grant access to
+multiple users or groups.
+
+Use a path in the user profile when granting access with `--group`. A socket
+created directly under `C:\` can inherit a high integrity level that blocks
+access for the configured users and groups.
+
+Configure the Docker client to use the same socket:
+
+```powershell
+PS C:\> docker -H unix://C:/Users/<USER>/docker.sock info
+```
+
 Learn about the available configuration options in the
 [dockerd reference docs](/reference/cli/dockerd.md), or by
 running:
