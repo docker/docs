@@ -2,7 +2,7 @@
 title: Create and manage OIDC connections
 linkTitle: Create and manage connections
 description: Create, update, and delete OIDC connections for your organization
-keywords: oidc connections, create oidc connection, github actions, docker/oidc-action, openid connect, enterprise security, admin
+keywords: oidc connections, create oidc connection, github actions, docker/login-action, openid connect, enterprise security, admin
 tags: [admin]
 weight: 10
 ---
@@ -33,68 +33,51 @@ YAML file.
 1. Select **Create connection**.
 1. Copy your OIDC connection ID.
 
-### Step 2: Define the GitHub Actions workflow
+### Step 2: Update your workflow
 
-1. Add a top-level `permissions` key that requests a GitHub OIDC ID token:
+Add the OIDC connection ID and your Docker organization name as
+[GitHub Actions variables](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/store-information-in-variables)
+in your repository or organization settings. Then update your workflow:
 
-   ```yaml
-   permissions:
-     id-token: write
-   ```
+```yaml
+name: ci
 
-1. Define a job that triggers the OIDC exchange. Update `connection_id`
-   with the connection ID you copied from Docker:
+on:
+  push:
+    branches: main
 
-   ```yaml
-   jobs:
-     login:
-       runs-on: ubuntu-latest
-       steps:
-         - name: OIDC connections
-           id: docker_oidc
-           uses: docker/oidc-action@v1
-           with:
-             connection_id: <YOUR_CONNECTION_ID>
-   ```
+permissions:
+  contents: read
+  id-token: write
 
-1. Add a step that signs in to Docker with an access token once the ID
-   token passes authentication:
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@{{% param "login_action_version" %}}
+        env:
+          DOCKERHUB_OIDC_CONNECTIONID: ${{ vars.DOCKERHUB_OIDC_CONNECTIONID }}
+        with:
+          username: ${{ vars.DOCKERHUB_ORGANIZATION }}
+```
 
-   ```yaml
-   - name: Sign in to Docker Hub
-     uses: docker/login-action@{{% param "login_action_version" %}}
-     with:
-       username: <DOCKER_ORGANIZATION_NAME>
-       password: ${{ steps.docker_oidc.outputs.token }}
-   ```
+The `id-token: write` permission lets the workflow request a GitHub OIDC
+token. The `docker/login-action` handles the OIDC token exchange and
+Docker login in a single step when `DOCKERHUB_OIDC_CONNECTIONID` is set
+and `password` is omitted.
 
-   The `username` value must be an organization name. Personal accounts
-   aren't supported.
+The `username` value must be an organization name. Personal accounts
+aren't supported.
 
-   Your updated workflow YAML should look like this:
+Run your GitHub Action and verify the workflow can sign in to Docker.
 
-   ```yaml
-   permissions:
-     id-token: write
-
-   jobs:
-     login:
-       runs-on: ubuntu-latest
-       steps:
-         - name: OIDC connections
-           id: docker_oidc
-           uses: docker/oidc-action@v1
-           with:
-             connection_id: <YOUR_CONNECTION_ID>
-
-         - name: Sign in to Docker Hub
-           uses: docker/login-action@{{% param "login_action_version" %}}
-           with:
-             username: <YOUR_ORGANIZATION_NAME>
-             password: ${{ steps.docker_oidc.outputs.token }}
-   ```
-
-1. Run your GitHub Action and verify the workflow can sign in to Docker.
+> [!TIP]
+> If your workflow needs the Docker access token as a separate output
+> (for example, for API calls or custom authentication flows), use
+> [`docker/oidc-action`](https://github.com/docker/oidc-action) to
+> perform the token exchange explicitly.
 
 ## Manage OIDC connections
 
@@ -118,14 +101,13 @@ your Docker resources without deleting the connection. While a connection
 is deactivated:
 
 - It can't issue Docker access tokens.
-- Without Docker access tokens, `docker/oidc-action` fails at the
-  token-exchange step until you activate the connection.
+- The login step in your workflow will fail at the token-exchange step
+  until you activate the connection.
 
 Unlike deactivation, deleting an OIDC connection is permanent. Any workflow
-whose `docker/oidc-action` step still references the deleted
-`connection_id` fails at the token-exchange step. Update that input with a
-replacement connection's ID in every affected workflow before it runs
-again.
+that still references the deleted connection ID will fail at the
+token-exchange step. Update the connection ID in every affected workflow
+before it runs again.
 
 ## What's next
 
