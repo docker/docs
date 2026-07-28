@@ -211,7 +211,7 @@ $ docker compose down
 
 ### Prerequisites
 
-Complete [Containerize a Deno application](./).
+Complete [Containerize a Deno application](#containerize-a-deno-application).
 
 ### Overview
 

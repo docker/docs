@@ -15,17 +15,70 @@ the full release history, including pre-releases and downloads, see the
 
 <!-- BEGIN GENERATED RELEASES -->
 
+## 0.37.0
+
+{{< release-date date="2026-07-24" >}}
+
+[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.37.0)
+
+### Highlights
+
+**SSH access to sandboxes (experimental).** Docker Sandboxes can now be used as SSH targets. After enabling SSH access, run `sbx setup ssh` once, then connect to an existing sandbox by name with `ssh my-sandbox.sbx`. Use the connection for interactive shells, one-shot commands, and SSH-based remote development.
+
+**Shared agent skills.** Docker Sandboxes can now import skills from supported host agents into a persistent store shared across sandboxes. Run sbx skills import to import them. New sandboxes mount the store read-write by default; use --no-share-skills to opt out.
+
+### What's New
+
+#### SSH
+
+- `sbx setup ssh` adds a managed `*.sbx` entry to your SSH config, making existing sandboxes available at `<name>.sbx`.
+- SSH connections start the local Docker Sandboxes daemon and the target sandbox automatically when needed.
+- Connect using OpenSSH-compatible clients and remote-development tools such as VS Code, Cursor, Claude Desktop, and ChatGPT.
+
+#### Shared skills
+
+- `sbx skills import` discovers and imports skills from the host and makes them available to sandboxed agents. Use `--dry-run` to preview imports and `--force` to replace existing skills.
+- Imported skills persist after sandbox deletion and are mounted into new sandboxes for supported agents.
+- Pass `--no-share-skills` to `sbx run` or `sbx create` when creating a sandbox to opt out.
+
+#### CLI
+
+- `sbx create` and `sbx run` accept `-p/--publish` to publish sandbox ports at creation time.
+
+#### Networking & Policy
+
+- `DOCKER_SANDBOXES_PROXY=system` routes sandbox egress through the host operating system's proxy configuration (macOS/Windows), including any PAC auto-config URL.
+- Governance-policy denials can now display an organization-configured support message (for example, who to contact).
+
+#### Security & Audit
+
+- Audit now emits execution-outcome records for network egress (per allowed connection) and filesystem mounts (per allowed path) — success, latency, and error class — alongside the policy-attributed decision records.
+- sandboxd excludes itself from Windows Error Reporting so daemon crash dumps cannot capture in-memory credentials.
+
+#### Performance
+
+- `sbx secret ls` and sandbox startup are faster on Linux hosts without an OS keychain — stored secrets are no longer all decrypted just to list or resolve credentials.
+
+### Bug Fixes
+
+- Fixed sandboxd failing to start on Linux hosts without an OS keychain, where the on-disk secret store's key derivation could peg a CPU during startup and the CLI would kill the still-starting daemon.
+- Fixed an intermittent "failed to fully delete sandbox" error when removing a running sandbox, caused by a network-teardown race with the engine's endpoint cleanup.
+
 ## 0.35.0
 
 {{< release-date date="2026-07-10" >}}
 
 [GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.35.0)
 
+### Notice
+
+There are no Linux/ARM64 builds for v0.35.x due to stability issues that were encountered during this release. We plan to bring them back for the next release.
+
 ### Highlights
 
-This release revamps **policy tooling** with a concise `sbx policy ls`, a new `sbx policy inspect`, and a `sbx policy check network` command for testing whether the current policy would allow an access request before you run. 
-Networking gains a **SOCKS5 upstream-proxy transport**.  
-Secrets get a new **`sbx secret import`** with clearer env-source visibility.
+- **Host environment variables are no longer used for authentication.** Previous versions automatically detected API keys in predefined environment variables (such as `ANTHROPIC_API_KEY`) and injected them into model provider requests. Starting with this release, sandboxes only authenticate using credentials you've explicitly stored, or OAuth for agents that support it. If you relied on environment variables, run the new `sbx secret import` command once to move your keys into the keychain. See the [credentials documentation](https://docs.docker.com/ai/sandboxes/security/credentials/) for details.
+- Policy commands are revamped with a more concise `sbx policy ls`, a new `sbx policy inspect`, and a `sbx policy check network` command for testing whether the current policy would allow an access request before you run. 
+- Networking gains a **SOCKS5 upstream-proxy transport**.  
 
 ### What's New
 
@@ -124,64 +177,6 @@ This release also renames `sbx policy set-default` to `sbx policy init`, restore
 - Fix a kit mixin regression where adding `network.serviceDomains` for a service already provided by the base agent failed with a "credential … defined in both" error.
 - Reject `+` in sandbox names with a clear validation error instead of panicking.
 - Fix the interactive host-port conflict recovery prompt not appearing on Windows when restarting a sandbox whose published port is already in use.
-
-## 0.33.0
-
-{{< release-date date="2026-06-17" >}}
-
-[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.33.0)
-
-### Highlights
-
-`sbx run --name <sandbox>` now re-attaches to an existing sandbox by name. You can now also create multiple sandboxes of the same agent type and workspace by specifying unique sandbox names with `--name`.
-
-Consequently, re-attaching to existing sandboxes with `sbx run <name>` is deprecated; the preferred form is `sbx run --name <name>`. The positional argument for `sbx run` should be an agent (e.g. `claude`, or `codex`). Sandbox name as the positional argument for run is still supported but will be removed in a future release.
-
-This release also improves network isolation and policy enforcement. Sandbox DNS is now gated on network policy (closing a DNS-based exfiltration channel), ICMP egress is blocked across daemon restarts, and the MITM proxy publishes a CRL so revocation-strict clients keep working.
-
-### What's New
-
-#### Sandbox Identity & CLI
-
-- `sbx run --name` now identifies a sandbox independent of the working directory: run multiple independently-named sandboxes in the same workspace, re-attach from any directory (agent may be omitted), and re-run a create command to re-enter. It no longer auto-creates numbered sibling sandboxes, prompts before entering a same-named sandbox from a different workspace, and errors when the requested agent doesn't match the named sandbox. The TUI follows the same rules.
-- `sbx run <sandbox>` now prints a deprecation warning when re-attaching to an existing sandbox; use `sbx run --name <sandbox>` instead.
-- `sbx ls --json` now reports a stable per-sandbox `id`.
-- `sbx create` now fails with a clear missing-agent error when run without arguments.
-- `sbx exec` now uses the same working directory as `sbx run`.
-- `sbx cp -L` now follows symlinks in the source path for sandbox-to-host copies.
-- Daemon inspect output is now included in the diagnostics bundle.
-
-#### Networking & Proxy
-
-- Sandbox DNS lookups are now gated on the network policy: a sandboxed process can no longer resolve domains that policy denies, closing a DNS-based data-exfiltration channel. Loopback names (e.g. `localhost`) are exempt to avoid breaking local OAuth callback flows. [CVE-2026-12039](https://www.cve.org/CVERecord?id=CVE-2026-12039)
-- Outgoing ICMP from sandboxes is now blocked across daemon restarts. [CVE-2026-12539](https://www.cve.org/CVERecord?id=CVE-2026-12539)
-- CIDR subnet allow rules (e.g. `sbx policy allow network 10.10.14.0/24`) now correctly permit traffic to IP addresses within the subnet.
-- The MITM proxy now publishes a CRL and embeds a CRL distribution point in generated certificates, fixing clients that require certificate revocation checking (e.g. .NET `CheckCertificateRevocationList=true`).
-- Removed the bracketed `[::1]` entry from the sandbox `NO_PROXY` default, fixing credential injection for HTTP clients that mis-parsed it.
-- Claude connectors (Slack, Gmail, Notion, Atlassian, etc.) now work inside sandboxed Claude Code without manual policy overrides.
-
-#### Secrets & Credentials
-
-- `sbx secret set-custom --host`, and `serviceDomains` in kits, now accept wildcard host patterns (`*` matches one label, `**` matches any number) and is repeatable, so one custom secret can cover multiple subdomains/domains.
-
-#### Agents
-
-- Cursor OAuth is now supported
-
-#### Platform & Performance
-
-- The virtiofs cache is now enabled by default on macOS and Linux.
-- Build packages for `linux/arm64` are now produced.
-- On Linux, the keychain backend now falls back to the encrypted on-disk store when `dbus-launch` is unavailable, fixing headless/server hosts.
-
-#### Bug Fixes
-
-- Suppress a misleading warning when saving OAuth credentials while the daemon is not running.
-- Fixed a TTY sizing issue on Windows.
-- Keep agent entrypoint flags when arguments after `--` are themselves flags.
-- Inject git identity from subdirectories and `[include]`d Git config when cloning.
-- Proxy service detection now supports middle-position wildcards.
-- Sandboxes blocked by mount policies are no longer filtered out on daemon startup.
 
 <!-- END GENERATED RELEASES -->
 

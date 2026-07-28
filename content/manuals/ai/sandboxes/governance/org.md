@@ -54,6 +54,24 @@ To create a policy:
 Existing policies are listed with their name, scope, rule count, and last
 update. Use the action menu (⋮) to edit or delete a policy.
 
+## Configure a support message
+
+Admins can add an optional support message that appears after the policy denial
+details when a sandbox action is blocked by organization governance. Use it to
+point members to an internal support channel, ticket queue, or security contact.
+
+To set the message:
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your
+   organization.
+1. In the left-hand navigation, expand **AI Platform** and select **Manage**.
+1. In **Support message**, enter up to 500 characters.
+1. Select **Save changes**.
+
+Docker shows the message only for denials caused by organization governance
+policy. If you leave it blank, Docker shows the policy denial without additional
+contact text.
+
 ## Network policies
 
 ### Configuring org-level network rules

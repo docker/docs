@@ -4,6 +4,7 @@ description: "Reference a previous session as context in the current one."
 keywords: docker agent, ai agents, tools, toolsets, session context tool
 linkTitle: "Session Context"
 weight: 210
+canonical: https://docs.docker.com/ai/docker-agent/tools/session_context/
 ---
 
 _Reference a previous session as context, without manual export/import._

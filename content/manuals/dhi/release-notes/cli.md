@@ -15,6 +15,28 @@ the full release history, including pre-releases and downloads, see the
 
 <!-- BEGIN GENERATED RELEASES -->
 
+## 0.0.7
+
+{{< release-date date="2026-07-21" >}}
+
+[GitHub release](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.7)
+
+### Bug Fixes
+
+- Fixes JSON output incorrectly escaping ampersands as `\u0026` — values such as catalog categories containing `&` now appear as-is in output
+
+## 0.0.6
+
+{{< release-date date="2026-07-13" >}}
+
+[GitHub release](https://github.com/docker-hardened-images/dhictl/releases/tag/v0.0.6)
+
+This release fixes an issue that prevented customizations from being created via the CLI.
+
+### Bug Fixes
+
+- Fixes `dhictl customization create` failing when GraphQL rejected mutation inputs that incorrectly included the output-only `__typename` field from OCI artifact data
+
 ## 0.0.5
 
 {{< release-date date="2026-06-29" >}}

@@ -4,15 +4,16 @@ description: "Execute arbitrary shell commands in the user's environment."
 keywords: docker agent, ai agents, tools, toolsets, shell tool
 linkTitle: "Shell"
 weight: 20
+canonical: https://docs.docker.com/ai/docker-agent/tools/shell/
 ---
 
 _Execute arbitrary shell commands in the user's environment._
 
 ## Overview
 
-The shell tool allows agents to execute arbitrary shell commands. This is one of the most powerful tools — it lets agents run builds, install dependencies, query APIs, and interact with the system. Each call runs in a fresh, isolated shell session — no state persists between calls.
+The shell tool allows agents to execute arbitrary shell commands synchronously. This is one of the most powerful tools — it lets agents run builds, install dependencies, query APIs, and interact with the system. Each call runs in a fresh, isolated shell session — no state persists between calls.
 
-Commands have a default 30-second timeout and require user confirmation unless `--yolo` is used.
+Commands have a default 30-second timeout and require user confirmation unless `--yolo` is used. For servers, watchers, and other long-running commands, add the [`background_jobs`](../background-jobs/index.md) toolset alongside `shell`.
 
 ## Configuration
 
@@ -83,22 +84,16 @@ Notes and limitations:
 - Interactive UI only. In headless / non-interactive runs the prompt is declined automatically and `sudo` fails as before.
 - Only a bare `sudo ...` invocation in a POSIX shell (`sh`, `bash`, `zsh`, ...) is handled. `sudo` called by absolute path (`/usr/bin/sudo`), via `env sudo`, from inside a nested script, or under a non-POSIX shell (e.g. `fish`) is not intercepted and behaves as before.
 - Caching is `sudo`'s own. Because each shell tool call runs in a fresh shell with no controlling terminal, `sudo`'s credential cache does not persist across separate tool calls: you are prompted once per shell command that uses `sudo`. Within a single command, multiple `sudo` calls (e.g. `sudo a && sudo b`) usually share one prompt, subject to `sudo`'s own timestamp configuration.
-- The prompt must be answered within the command's timeout; raise the `timeout` parameter for `sudo` commands that may wait on input. Background jobs (`run_background_job`) are wired too, but their prompt only works while the originating turn is still active.
+- The prompt must be answered within the command's timeout; raise the `timeout` parameter for `sudo` commands that may wait on input.
 - Prompts are serialized: if a single command runs two `sudo` calls in parallel (e.g. `sudo a & sudo b`), the second waits for the first prompt to be answered rather than opening two dialogs at once.
 
 ## Available Tools
 
-The shell toolset exposes five tools:
+The shell toolset exposes one tool:
 
-| Tool Name              | Description                                                                                    |
-| ---------------------- | ---------------------------------------------------------------------------------------------- |
-| `shell`                | Run a command synchronously and return its combined output when it finishes.                   |
-| `run_background_job`   | Start a command asynchronously and return a job ID immediately. Use for servers/watchers/etc. |
-| `list_background_jobs` | List all background jobs with their status, runtime, and metadata.                             |
-| `view_background_job`  | View the buffered output and status of a specific background job by ID.                        |
-| `stop_background_job`  | Stop a running background job. Child processes are terminated too.                             |
-
-Background job output is captured up to 10 MB per job. All background jobs are automatically terminated when the agent session ends.
+| Tool Name | Description                                                                  |
+| --------- | ---------------------------------------------------------------------------- |
+| `shell`   | Run a command synchronously and return its combined output when it finishes. |
 
 ### `shell` parameters
 
@@ -107,15 +102,6 @@ Background job output is captured up to 10 MB per job. All background jobs are a
 | `cmd`     | string  | ✓        | The shell command to execute.                                             |
 | `cwd`     | string  | ✗        | Working directory to run the command in (default: `.`).                   |
 | `timeout` | integer | ✗        | Per-call execution timeout in seconds (default: `30`).                    |
-
-### `run_background_job` parameters
-
-| Parameter | Type   | Required | Description                                                             |
-| --------- | ------ | -------- | ----------------------------------------------------------------------- |
-| `cmd`     | string | ✓        | The shell command to execute in the background.                         |
-| `cwd`     | string | ✗        | Working directory to run the command in (default: `.`).                 |
-
-`view_background_job` and `stop_background_job` each take a single required `job_id` string returned by `run_background_job` or `list_background_jobs`.
 
 > [!WARNING]
 > **Safety**

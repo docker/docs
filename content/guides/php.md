@@ -302,7 +302,7 @@ reference](/reference/cli/docker/compose/).
 
 ### Prerequisites
 
-Complete [Containerize a PHP application](./).
+Complete [Containerize a PHP application](#containerize-a-php-application).
 
 ### Overview
 
@@ -736,7 +736,7 @@ While the application appears the same, you can now make use of the dev dependen
 
 ### Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize a PHP application](./).
+Complete all the previous sections of this guide, starting with [Containerize a PHP application](#containerize-a-php-application).
 
 ### Overview
 

@@ -3,13 +3,14 @@ title: "Remote MCP Servers"
 description: "Connect docker-agent to cloud services via remote MCP servers with built-in OAuth authentication."
 keywords: docker agent, ai agents, features, remote mcp servers
 weight: 120
+canonical: https://docs.docker.com/ai/docker-agent/features/remote-mcp/
 ---
 
 _Connect docker-agent to cloud services via remote MCP servers with built-in OAuth authentication._
 
 ## Overview
 
-Docker Agent supports connecting to remote MCP servers over **Streamable HTTP** and **SSE** (Server-Sent Events) transports. Streamable HTTP is the current recommended transport for most hosted MCP servers. Many popular services offer MCP endpoints with OAuth — docker-agent handles the authentication flow automatically.
+Docker Agent supports connecting to remote MCP servers over **Streamable HTTP**, **SSE** (Server-Sent Events), and **Unix domain sockets**. Streamable HTTP is the current recommended transport for most hosted MCP servers. Many popular services offer MCP endpoints with OAuth — docker-agent handles the authentication flow automatically.
 
 ```yaml
 toolsets:
@@ -18,6 +19,20 @@ toolsets:
       url: "https://mcp.linear.app/mcp"
       transport_type: "streamable"
 ```
+
+## Unix Domain Sockets
+
+Use a `unix://` URL to connect to an MCP server listening on a local Unix socket. This is useful when running docker-agent inside a container and exposing an MCP server from the host via a bind-mounted socket:
+
+```yaml
+toolsets:
+  - type: mcp
+    remote:
+      url: "unix:///tmp/mcp-notify.sock"
+      transport_type: "streamable"
+```
+
+The path after `unix://` is the absolute path to the socket file. Configured `headers` are forwarded over the socket connection. OAuth discovery is not supported for Unix socket URLs.
 
 > [!TIP]
 > **OAuth flow**
@@ -38,7 +53,7 @@ toolsets:
       url: "https://mcp.example.com/mcp"
       transport_type: "streamable" # or "sse" for legacy servers
       headers:
-        Authorization: "Bearer token" # optional: static auth
+        Authorization: "Bearer ${env.MY_TOKEN}" # resolved per request
     # Optional: use only for trusted internal/private MCP or OAuth endpoints.
     allow_private_ips: true
 ```
@@ -51,6 +66,14 @@ Set `allow_private_ips: true` on a remote MCP toolset only when the MCP server o
 > **Headers forwarded during OAuth discovery**
 >
 > Configured `headers` are forwarded to OAuth protected-resource-metadata discovery requests directed at the MCP server's own host — not to third-party authorization servers. This allows services like Grafana Cloud that require a routing header (e.g. `X-Grafana-URL`) on the discovery request to scope the OAuth flow correctly. Headers are never sent to a different host than the one in `remote.url`.
+
+> [!NOTE]
+> **Per-request header template expansion**
+>
+> Header values in `remote.headers` support `${env.VAR}` and `${headers.NAME}` placeholders. Both are resolved on every outbound HTTP request (not just once at initialization), so short-lived credentials and forwarded caller headers always reflect the latest values:
+>
+> - `${env.VAR}` — reads the named environment variable. Useful for credentials stored in a secret manager that rotates them in-process.
+> - `${headers.NAME}` — forwards the named header from the caller's incoming HTTP request. Only meaningful when docker-agent is running as an API server (`docker agent serve api`) and a client passes authentication headers that the upstream MCP server also accepts.
 
 > [!NOTE]
 > **Automatic reconnection after idle timeouts**
@@ -71,7 +94,10 @@ Set `allow_private_ips: true` on a remote MCP toolset only when the MCP server o
 
 Most remote MCP servers that require OAuth support [Dynamic Client Registration (RFC 7591)](https://datatracker.ietf.org/doc/html/rfc7591) — no configuration is needed, docker-agent handles the flow for you.
 
-For servers that do **not** support DCR, provide explicit OAuth credentials with the `oauth:` block:
+For servers that do **not** support DCR, docker-agent falls back automatically:
+
+1. **Interactive credential prompt**: docker-agent presents a dialog asking for your `client_id` (required) and optionally a `client_secret`. This covers servers that require pre-registered app credentials but don't advertise them via DCR.
+2. **Explicit `oauth:` block** (recommended when you know the credentials in advance): add the block described below to skip the interactive prompt and supply credentials directly in config.
 
 ```yaml
 toolsets:

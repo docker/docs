@@ -3,7 +3,7 @@ title: Manage SSO domains and connections
 linkTitle: Manage connections
 weight: 30
 description: Learn how to manage Single Sign-On for your organization or company.
-keywords: manage, single sign-on, SSO, sign-on, admin console, admin, security, domains, connections, users, provisioning
+keywords: manage, single sign-on, SSO, sign-on, docker home, admin, security, domains, connections, users, provisioning
 aliases:
 - /admin/company/settings/sso-management/
 - /single-sign-on/manage/

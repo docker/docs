@@ -118,37 +118,9 @@ $ docker dhi mirror list --org my-org --type helm-chart
 {{< tab name="Terraform" >}}
 
 You can manage DHI mirrors as infrastructure-as-code using the [DHI Terraform
-provider](https://registry.terraform.io/providers/docker-hardened-images/dhi/latest/docs).
+provider](/dhi/tools/terraform/).
 
-First, install and configure the provider:
-
-```hcl
-terraform {
-  required_providers {
-    dhi = {
-      source = "docker-hardened-images/dhi"
-    }
-  }
-}
-
-provider "dhi" {
-  docker_hub_username = var.docker_username
-  docker_hub_password = var.docker_password
-  organization        = var.org_name
-}
-```
-
-> [!NOTE]
->
-> Instead of specifying credentials in the provider block, you can set the
-> `DOCKER_USERNAME`, `DOCKER_PASSWORD`, and `DHI_ORG` environment variables. You
-> can also authenticate using an organization access token (OAT) in place of a
-> password. Set `DOCKER_USERNAME` to your organization namespace and
-> `DOCKER_PASSWORD` to the OAT. When using an OAT, the same permission scopes
-> apply as with the CLI: read (pull) access is required to list mirrors, and
-> push access is required to create or delete them.
-
-Then, define a `dhi_mirror` resource for each repository you want to mirror:
+Define a `dhi_mirror` resource for each repository you want to mirror:
 
 ```hcl
 resource "dhi_mirror" "golang" {

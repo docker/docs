@@ -3,6 +3,7 @@ title: "Snapshots"
 description: "Shadow-git snapshots capture your workspace at turn boundaries so you can review what an agent changed and undo it without touching your real git history."
 keywords: docker agent, ai agents, features, snapshots
 weight: 20
+canonical: https://docs.docker.com/ai/docker-agent/features/snapshots/
 ---
 
 _Shadow-git snapshots capture your workspace at turn boundaries so you can review what an agent changed and undo it without touching your real git history._

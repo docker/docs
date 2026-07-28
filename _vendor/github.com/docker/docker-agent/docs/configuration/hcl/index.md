@@ -3,6 +3,7 @@ title: "HCL Configuration"
 description: "Write docker-agent configs in HCL instead of YAML, using labeled blocks, heredocs, and the same underlying schema."
 keywords: docker agent, ai agents, configuration, yaml, hcl configuration
 weight: 20
+canonical: https://docs.docker.com/ai/docker-agent/configuration/hcl/
 ---
 
 _Write docker-agent configs in HCL instead of YAML. It maps to the same docker-agent schema and validation rules._
@@ -194,6 +195,66 @@ command "fix-lint" {
 
 The model will receive the literal `${shell({cmd: "task lint"})}` text.
 
+## Loading Files with `file()`
+
+The `file()` function reads a UTF-8 text file and returns its contents as a string. Relative paths are resolved from the HCL config file's directory, and reads are restricted to that directory.
+
+This keeps long prompts out of the config:
+
+```hcl
+agent "root" {
+  model       = "openai/gpt-5"
+  description = "Coding assistant"
+  instruction = file("prompts/coding.md")
+}
+```
+
+With a single argument, the file contents are returned exactly as written — any `${...}` in the file stays literal, so runtime snippets like `${shell({cmd: "..."})}` pass through untouched.
+
+### Rendering files as templates
+
+Pass an object as the second argument to render the file as an HCL template. Each key becomes a variable available inside the file:
+
+```hcl
+agent "reviewer" {
+  model       = "openai/gpt-5"
+  description = "Go reviewer"
+  instruction = file("prompts/reviewer.md", {
+    language   = "Go"
+    strictness = "high"
+  })
+}
+
+agent "py_reviewer" {
+  model       = "openai/gpt-5"
+  description = "Python reviewer"
+  instruction = file("prompts/reviewer.md", {
+    language   = "Python"
+    strictness = "relaxed"
+  })
+}
+```
+
+With `prompts/reviewer.md` containing:
+
+```markdown
+You review ${language} code with ${strictness} strictness.
+```
+
+Templates support the full HCL template syntax, including `%{ for }` and `%{ if }` directives:
+
+```markdown
+Rules:
+%{ for rule in rules ~}
+- ${rule}
+%{ endfor ~}
+```
+
+Two things to keep in mind:
+
+- Referencing a variable that is not in the object is an error.
+- No functions are available inside templates, so a template cannot call `file()` again. If the file needs a literal `${...}` while being rendered as a template, escape it as `$${...}` inside the file.
+
 ## Repeated Blocks Become Lists
 
 Some YAML sections are lists. In HCL, those are written as repeated blocks.
@@ -230,7 +291,7 @@ The same idea applies to other list-shaped sections such as RAG `strategy` block
 docker-agent uses HCL as a configuration syntax, not as Terraform:
 
 - There are no modules, `locals`, or `variable` blocks.
-- There are no docker-agent-specific HCL functions to call from expressions.
+- The only function available in expressions is [`file()`](#loading-files-with-file); Terraform's function library (including `templatefile()`, which `file()` with a vars object replaces) is not available.
 - Prefer normal literal values: strings, numbers, booleans, lists, objects, and nested blocks.
 - After conversion, the result is validated exactly like the equivalent YAML config.
 
@@ -242,3 +303,4 @@ See these real configs in the repository:
 
 - [`examples/pirate.hcl`](https://github.com/docker/docker-agent/blob/main/examples/pirate.hcl)
 - [`examples/gopher.hcl`](https://github.com/docker/docker-agent/blob/main/examples/gopher.hcl)
+- [`examples/instructions_from_file.hcl`](https://github.com/docker/docker-agent/blob/main/examples/instructions_from_file.hcl)

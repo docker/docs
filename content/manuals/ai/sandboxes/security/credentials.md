@@ -28,7 +28,7 @@ value for the same service, the stored secret takes precedence.
 | --------------------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
 | [Stored secrets](#stored-secrets) (`sbx secret set`)                        | A value in your OS keychain, keyed by service                | The default for any built-in or kit-declared service                                                             |
 | [Custom secrets](#custom-secrets) (`sbx secret set-custom`)                 | A value keyed to a domain and environment variable           | The service model doesn't fit — the agent validates the variable's format, or the secret rides in a request body |
-| OAuth                                                                       | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, or Cursor                                                     |
+| OAuth                                                                       | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, Cursor, or Droid                                              |
 | [Registry credentials](#registry-credentials) (`sbx secret set --registry`) | Authentication for pulling images and kits                   | Pulling templates or kits from a private registry                                                                |
 
 For multi-provider agents (OpenCode, Docker Agent), the proxy selects
@@ -358,13 +358,15 @@ $ sbx secret rm my-sandbox --registry ghcr.io -f
   proxy-injected service credentials, which never enter the sandbox. Reserve
   them for sandboxes that need registry access, and prefer sandbox scope over
   global (`-g`) to limit exposure.
-- For Claude Code and Codex, OAuth is another secure option: the flow runs on
-  the host, so the token is never exposed inside the sandbox. If you haven't
-  stored a credential, both agents prompt you to authenticate before the
-  sandbox launches — Codex prompts on the host from `sbx run codex`, and Claude
-  Code prompts inside the agent. To authenticate ahead of time, run
-  `sbx secret set -g openai --oauth` for Codex, or use `/login` inside Claude
-  Code.
+- Several agents support OAuth as another secure option: the flow runs on the
+  host, so the token is never exposed inside the sandbox. If you haven't stored
+  a credential, the agent prompts you to authenticate — Codex prompts on the
+  host from `sbx run codex`, while Claude Code, Cursor, and Droid prompt
+  interactively inside the sandbox. To authenticate ahead of time, run
+  `sbx secret set -g openai --oauth` for Codex or use `/login` inside Claude
+  Code; Cursor and Droid have no ahead-of-time option, so their sign-in prompt
+  appears when the agent starts. See the individual [agent pages](../agents/)
+  for each agent's flow.
 - If you store credentials in 1Password, see
   [Sourcing credentials from 1Password](../workflows.md#sourcing-credentials-from-1password)
   for how to use `op read` and `op run` with `sbx`.

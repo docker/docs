@@ -4,6 +4,7 @@ description: "Give your agents access to document knowledge bases with backgroun
 keywords: docker agent, ai agents, tools, toolsets, rag tool
 linkTitle: "RAG"
 weight: 110
+canonical: https://docs.docker.com/ai/docker-agent/tools/rag/
 aliases:
   - /ai/docker-agent/rag/
 ---

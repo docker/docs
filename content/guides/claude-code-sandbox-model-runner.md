@@ -88,7 +88,7 @@ $ sbx policy allow network localhost:12434
 ```
 
 For background on host access from sandboxes, see
-[Accessing host services from a sandbox](../manuals/ai/sandboxes/usage.md#accessing-host-services-from-a-sandbox).
+[Accessing host services from a sandbox](../manuals/ai/sandboxes/workflows.md#accessing-host-services-from-a-sandbox).
 
 ## Step 3: Create a Claude Code sandbox
 

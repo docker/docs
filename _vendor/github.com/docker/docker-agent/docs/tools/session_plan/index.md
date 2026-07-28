@@ -4,6 +4,7 @@ description: "Per-session plan tracker for the draft, review, execute workflow."
 keywords: docker agent, ai agents, tools, toolsets, session plan tool
 linkTitle: "Session Plan"
 weight: 160
+canonical: https://docs.docker.com/ai/docker-agent/tools/session_plan/
 ---
 
 _Per-session plan tracker for the "draft, review, execute" workflow._

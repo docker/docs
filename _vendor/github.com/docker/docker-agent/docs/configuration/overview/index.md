@@ -4,6 +4,7 @@ description: "docker-agent uses YAML or HCL configuration files to define agents
 keywords: docker agent, ai agents, configuration, yaml, configuration overview
 linkTitle: "Overview"
 weight: 10
+canonical: https://docs.docker.com/ai/docker-agent/configuration/overview/
 aliases:
   - /ai/docker-agent/reference/config/
 ---
@@ -18,7 +19,7 @@ A docker-agent config has these main sections:
 
 ```bash
 # 1. Version — configuration schema version (optional but recommended)
-version: 10
+version: 12
 
 # 2. Metadata — optional agent metadata for distribution
 metadata:
@@ -33,7 +34,7 @@ models:
     model: claude-sonnet-4-5
     max_tokens: 64000
 
-# 4. Agents — define AI agents with their behavior
+# 4. Agents — define AI agents with their behavior (at least one is required)
 agents:
   root:
     model: claude
@@ -212,6 +213,8 @@ Applies to:
 - `agents.<name>.toolsets[*].working_dir` (MCP, LSP)
 - `agents.<name>.toolsets[*].path` (memory, tasks)
 - `agents.<name>.toolsets[*].env` values (MCP, shell, script, LSP)
+- `agents.<name>.toolsets[*].shell.<tool>.working_dir` (script tools)
+- `agents.<name>.hooks.*.working_dir`
 - The `~` prefix is also accepted in any path-like field documented as such.
 
 ```yaml
@@ -226,6 +229,21 @@ agents:
 ```
 
 Unlike the JS-templated fields above, these accept only a plain variable reference: richer JS expressions (e.g. `${env.VAR || 'default'}`) are **not** evaluated here, and the legacy `$VAR` / `${VAR}` forms keep working for backward compatibility.
+
+Hook and script-tool `env` values expand only the plain `${env.VAR}` form, resolved against the **OS process environment** (dotenv/secret-provider values are not consulted); a bare `$VAR` or `${VAR}` is passed through **literally**, so values that legitimately contain `$` (passwords, templates) are never mangled:
+
+```yaml
+agents:
+  root:
+    hooks:
+      session_start:
+        - type: command
+          command: ./notify.sh
+          working_dir: "~/scripts"                # ~, $VAR, ${VAR}, ${env.VAR} all work
+          env:
+            API_TOKEN: "${env.NOTIFY_TOKEN}"      # expanded
+            PASSWORD: "pa$$word"                  # kept literal
+```
 
 Model definitions follow the same rule. The `models.<name>.model` and `models.<name>.base_url` fields are expanded when the provider is built, accepting both `${env.VAR}` and `${VAR}`. This is useful when the model id or endpoint is injected by the environment (for example a Docker Compose / DMR setup that exports the model reference as a variable):
 
@@ -248,10 +266,11 @@ models:
 | `commands.*`                                  |     ✓      |       ✗       |  ✗  |
 | `headers`, `remote.headers`, `api_config.headers` |     ✓      |       ✗       |  ✗  |
 | `models.*.model`, `models.*.base_url`         |     ✓      |       ✓       |  ✗  |
-| `working_dir`, `path`                         |     ✓      |       ✓       |  ✓  |
-| `env` values                                  |     ✓      |       ✓       |  ✗  |
+| `working_dir`, `path` (toolset, script tool, hook) |     ✓      |       ✓       |  ✓  |
+| `env` values (toolset)                        |     ✓      |       ✓       |  ✗  |
+| `env` values (hook, script tool)              |     ✓      |   literal     |  ✗  |
 
-The `~` prefix is meaningful only in path-like fields (`working_dir`, `path`).
+The `~` prefix is meaningful only in path-like fields (`working_dir`, `path`). In hook and script-tool `env` values, "literal" means a bare `$X` / `${X}` is passed to the process unchanged — only `${env.X}` is substituted there, so values containing `$` survive intact.
 
 Prefer `${env.X}` everywhere. The bare `$X` / `${X}` and `~` forms are accepted only in path and `env` value fields, where they remain supported for backward compatibility.
 
@@ -275,10 +294,10 @@ For YAML editor autocompletion and validation, use the [Docker Agent JSON Schema
 
 ## Config Versioning
 
-docker-agent configs are versioned. The current version is `10`. Add the version at the top of your config:
+docker-agent configs are versioned. The current version is `12`. Add the version at the top of your config:
 
 ```yaml
-version: 10
+version: 12
 
 agents:
   root:
@@ -287,6 +306,14 @@ agents:
 ```
 
 When you load an older config, docker-agent automatically migrates it to the latest schema. It's recommended to include the version to ensure consistent behavior.
+
+If you use a config key that requires a newer schema version, Docker Agent will fail with a strict-parse error and include a hint like:
+
+```text
+hint: this key is supported by config version 12; update the top-level 'version' field (currently 11)
+```
+
+Bump the `version` field as directed to enable the new key.
 
 ## Metadata Section
 

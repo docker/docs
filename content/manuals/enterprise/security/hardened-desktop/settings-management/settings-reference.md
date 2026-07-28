@@ -27,7 +27,7 @@ as sign in timestamps, pulls, or builds.
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `analyticsEnabled` |
-| Admin Console | **Send usage statistics** |
+| Docker Home | **Send usage statistics** |
 
 > [!NOTE]
 >
@@ -46,7 +46,7 @@ Controls whether Docker Desktop checks for and notifies users about available up
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `disableUpdate` |
-| Admin Console | **Disable update** |
+| Docker Home | **Disable update** |
 
 > [!NOTE]
 >
@@ -63,7 +63,7 @@ Allows Docker Desktop to automatically update components that do not require a r
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `silentModulesUpdate` |
-| Admin Console | **Automatically update components** |
+| Docker Home | **Automatically update components** |
 
 ### Enable Gordon
 
@@ -73,11 +73,11 @@ Allows Docker Desktop to automatically update components that do not require a r
 | Accepted values (individuals) | `true`, `false` |
 | Accepted values (Business tier) | `"Disabled"`, `"Enabled"`, `"Always Enabled"` |
 | JSON key | `enableDockerAI` |
-| Admin Console | **Enable Gordon** |
+| Docker Home | **Enable Gordon** |
 
 > [!IMPORTANT]
 >
-> Docker Business customers must set this to `"Enabled"` or `"Always Enabled"` in the Admin Console. Setting to `"User Defined"` alone will not activate Gordon.
+> Docker Business customers must set this to `"Enabled"` or `"Always Enabled"` in Docker Home. Setting to `"User Defined"` alone will not activate Gordon.
 
 ### Block `docker load`
 
@@ -89,7 +89,7 @@ Prevents users from loading local Docker images using the `docker load` command,
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `blockDockerLoad` |
-| Admin Console | **Block Docker Load** |
+| Docker Home | **Block Docker Load** |
 
 > [!NOTE]
 >
@@ -106,7 +106,7 @@ Prevents the onboarding survey from being shown to new users.
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `displayedOnboarding` |
-| Admin Console | **Hide onboarding survey** |
+| Docker Home | **Hide onboarding survey** |
 
 ### Enable Docker terminal
 
@@ -119,7 +119,7 @@ Allows or restricts access to the built-in terminal for host system interaction.
 | Format | Boolean |
 | Docker Desktop GUI | **General** tab |
 | JSON key | `desktopTerminalEnabled` |
-| Admin Console | Not available |
+| Docker Home | Not available |
 
 ### Expose Docker API on TCP 2375 {{< badge color=blue text="Windows only" >}}
 
@@ -131,7 +131,7 @@ Exposes the Docker API over an unauthenticated TCP socket on port 2375. Only rec
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `exposeDockerAPIOnTCP2375` |
-| Admin Console | **Expose Docker API** |
+| Docker Home | **Expose Docker API** |
 
 > [!NOTE]
 >
@@ -150,7 +150,7 @@ Controls whether users can install and run Docker Extensions.
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `extensionsEnabled` |
-| Admin Console | **Allow Extensions** |
+| Docker Home | **Allow Extensions** |
 
 > [!NOTE]
 >
@@ -167,7 +167,7 @@ Prevents installation of third-party or locally developed extensions.
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `onlyMarketplaceExtensions` |
-| Admin Console | **Only marketplace extensions** |
+| Docker Home | **Only marketplace extensions** |
 
 ### Enable a private marketplace
 
@@ -179,7 +179,7 @@ Ensures Docker Desktop connects to content defined and controlled by the adminis
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `extensionsPrivateMarketplace` |
-| Admin Console | **Extensions private marketplace** |
+| Docker Home | **Extensions private marketplace** |
 
 ## AI
 
@@ -193,7 +193,7 @@ Enables Docker Model Runner functionality for running AI models in containers.
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `enableInference` |
-| Admin Console | **Enable Docker Model Runner** |
+| Docker Home | **Enable Docker Model Runner** |
 
 #### Enable host-side TCP support
 
@@ -205,7 +205,7 @@ Enables TCP connectivity for Docker Model Runner services, allowing external app
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `enableInferenceTCP` |
-| Admin Console | **Host-side TCP support** |
+| Docker Home | **Host-side TCP support** |
 | Requires | Docker Model Runner enabled |
 
 ##### Port
@@ -218,7 +218,7 @@ Specifies the port used for Model Runner TCP connections.
 | Accepted values | Integer |
 | Format | Integer |
 | JSON key | `enableInferenceTCPPort` |
-| Admin Console | **Host-side TCP port** |
+| Docker Home | **Host-side TCP port** |
 | Requires | Docker Model Runner and host-side TCP support enabled |
 
 ##### CORS Allowed Origins 
@@ -231,7 +231,7 @@ Controls cross-origin resource sharing for Model Runner web integration.
 | Accepted values | Empty string (deny all), `*` (accept all), or comma-separated list of origins |
 | Format | String |
 | JSON key | `enableInferenceCORS` |
-| Admin Console | **CORS Allowed Origins** |
+| Docker Home | **CORS Allowed Origins** |
 | Requires | Docker Model Runner and host-side TCP support enabled |
 
 ### Enable GPU-backed inference {{< badge color=blue text="Windows only" >}}
@@ -244,7 +244,7 @@ Enables GPU-backed inference. Additional components will be downloaded to `~/.do
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `enableInferenceGPUVariant` |
-| Admin Console | **Enable GPU-backed inference** |
+| Docker Home | **Enable GPU-backed inference** |
 
 ## File sharing and emulation 
 
@@ -258,7 +258,7 @@ Defines which host directories containers can access for development workflows.
 | Accepted values | List of file paths |
 | Format | Array of strings |
 | JSON key | `filesharingAllowedDirectories` |
-| Admin Console | Yes — **Allowed file sharing directories** |
+| Docker Home | Yes — **Allowed file sharing directories** |
 
 ### VirtioFS {{< badge color=blue text="Mac only" >}}
 
@@ -270,7 +270,7 @@ Uses VirtioFS for fast, native file sharing between host and containers. If both
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `useVirtualizationFrameworkVirtioFS` |
-| Admin Console | **Use VirtioFS for file sharing** tab |
+| Docker Home | **Use VirtioFS for file sharing** tab |
 
 ### gRPC FUSE {{< badge color=blue text="Mac only" >}}
 
@@ -282,7 +282,7 @@ Enables gRPC FUSE for macOS file sharing.
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `useGrpcfuse` |
-| Admin Console | **Use gRPC FUSE for file sharing** |
+| Docker Home | **Use gRPC FUSE for file sharing** |
 
 ### Rosetta {{< badge color=blue text="Mac only" >}}
 
@@ -294,7 +294,7 @@ Uses Rosetta for x86_64/amd64 emulation on Apple Silicon.
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `useVirtualizationFrameworkRosetta` |
-| Admin Console | **Use Rosetta for x86_64/amd64 emulation on Apple Silicon** |
+| Docker Home | **Use Rosetta for x86_64/amd64 emulation on Apple Silicon** |
 
 ## Scout
 
@@ -308,7 +308,7 @@ Turns on vulnerability scanning and software bill of materials (SBOM) analysis f
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `sbomIndexing` |
-| Admin Console | **SBOM indexing** |
+| Docker Home | **SBOM indexing** |
 
 ### Enable background Scout SBOM indexing 
 
@@ -320,7 +320,7 @@ Keeps image metadata current by indexing during idle time or after image operati
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `useBackgroundIndexing` |
-| Admin Console | **Background indexing** |
+| Docker Home | **Background indexing** |
 
 ## Proxy
 
@@ -328,12 +328,12 @@ Keeps image metadata current by indexing during idle time or after image operati
 >
 > Proxy configuration is a special case because it must be configured in two places:
 >
-> 1. In the Admin Console for your organization.
+> 1. In the Docker Home for your organization.
 > 2. On the user's system where Docker Desktop is installed.
 >
 > On the user's machine, configure the proxy either through the `admin-settings.json` file or by using installer flags during Docker Desktop installation. For detailed instructions, refer to the [installation guide](/manuals/desktop/setup/install/windows-install.md#proxy-configuration).
 > 
-> This additional configuration is required because Docker Desktop must know which proxy server to use before it can complete user sign-in and retrieve organization settings from the Admin Console.
+> This additional configuration is required because Docker Desktop must know which proxy server to use before it can complete user sign-in and retrieve organization settings from the Docker Home.
 
 ### Embedded PAC script 
 
@@ -345,7 +345,7 @@ Specifies an embedded Proxy Auto-Config (PAC) script. For example: `"embeddedPac
 | Accepted values | Embedded PAC script content |
 | Format | String |
 | JSON key | `embeddedPac` |
-| Admin Console | Yes **Embedded PAC script** |
+| Docker Home | Yes **Embedded PAC script** |
 
 ### PAC file URL 
 
@@ -357,7 +357,7 @@ Specifies a PAC file URL for Docker Desktop to use when routing network traffic.
 | Accepted values | PAC file URL |
 | Format | String |
 | JSON key | `pac` |
-| Admin Console | **PAC file** |
+| Docker Home | **PAC file** |
 
 ### Override Windows "dockerd" port {{< badge color=blue text="Windows only" >}}
 
@@ -369,7 +369,7 @@ Exposes Docker Desktop's internal proxy locally on this port for the Windows Doc
 | Accepted values | `-1` `0` |
 | Format | String |
 | JSON key | `windowsDockerdPort` |
-| Admin Console | **Override Windows “dockerd” port** |
+| Docker Home | **Override Windows “dockerd” port** |
 
 ### Enable Kerberos and NTLM authentication 
 
@@ -381,7 +381,7 @@ Enables enterprise proxy authentication support for Kerberos and NTLM protocols.
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `proxy.enableKerberosNtlm` |
-| Admin Console | **Kerberos NTLM** |
+| Docker Home | **Kerberos NTLM** |
 
 ### Proxy bypass
 
@@ -394,7 +394,7 @@ Defines network addresses that containers should bypass when using proxy setting
 | Format | String |
 | Docker Desktop GUI | **Proxies** tab |
 | JSON key | `proxy` (with `manual` and `exclude` modes) |
-| Admin Console | Yes — **Proxy** section |
+| Docker Home | Yes — **Proxy** section |
 
 ## Containers proxy
 
@@ -417,7 +417,7 @@ The [`proxy`](#proxy) setting governs Docker Desktop host-level traffic: the Des
 | Accepted values | JSON object |
 | Format | JSON object |
 | JSON key | `containersProxy` |
-| Admin Console | **Containers proxy** section |
+| Docker Home | **Containers proxy** section |
 
 ```json
 "containersProxy": {
@@ -445,7 +445,7 @@ When set to `true`, Docker Desktop uses the WSL 2 based engine. Overrides any ba
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `wslEngineEnabled` |
-| Admin Console | **Windows Subsystem for Linux (WSL) Engine** |
+| Docker Home | **Windows Subsystem for Linux (WSL) Engine** |
 
 ### Docker daemon options 
 
@@ -457,7 +457,7 @@ Overrides the Docker daemon configuration used in containers, without modifying 
 | Accepted values | JSON object |
 | Format | Stringified JSON |
 | JSON key | `linuxVM.dockerDaemonOptions` |
-| Admin Console | **Docker Daemon options** in the LinuxVM dropdown |
+| Docker Home | **Docker Daemon options** in the LinuxVM dropdown |
 
 ### VPNKit CIDR {{< badge color=blue text="Mac only" >}}
 
@@ -469,7 +469,7 @@ Sets the network subnet used for Docker Desktop's internal VPNKit DHCP/DNS servi
 | Accepted values | CIDR notation |
 | Format | String |
 | JSON key | `vpnkitCIDR` |
-| Admin Console | **VPNKit CIDR** |
+| Docker Home | **VPNKit CIDR** |
 
 ## Windows containers
 
@@ -483,7 +483,7 @@ Overrides the Docker daemon configuration used in Windows containers, without mo
 | Accepted values | JSON object |
 | Format | Stringified JSON |
 | JSON key | `windowsContainers.dockerDaemonOptions` |
-| Admin Console | **Docker Daemon options** in the **Windows containers dropdown** |
+| Docker Home | **Docker Daemon options** in the **Windows containers dropdown** |
 
 ## Kubernetes
 
@@ -497,7 +497,7 @@ Enables the local Kubernetes cluster integration with Docker Desktop.
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `kubernetes` |
-| Admin Console | **Enable Kubernetes** |
+| Docker Home | **Enable Kubernetes** |
 
 ### Show system containers
 
@@ -508,7 +508,7 @@ Controls visibility of Kubernetes system containers in the Docker Desktop Dashbo
 | Default | `false` |
 | Accepted values | `true`, `false` |
 | Format | Boolean |
-| Admin Console | **Show system containers** |
+| Docker Home | **Show system containers** |
 
 ### Kubernetes image repository 
 
@@ -520,7 +520,7 @@ Specifies a registry used for Kubernetes control plane images instead of Docker 
 | Accepted values | Registry URL |
 | Format | String |
 | JSON key | `KubernetesImagesRepository` |
-| Admin Console | **Kubernetes Images Repository** |
+| Docker Home | **Kubernetes Images Repository** |
 
 > [!NOTE]
 >
@@ -539,7 +539,7 @@ Controls Kubernetes cluster topology and node configuration.
 | Default | `kubeadm` |
 | Accepted values | `kubeadm`, `kind` |
 | Format | String |
-| Admin Console | **Kubernetes mode** |
+| Docker Home | **Kubernetes mode** |
 
 ### Node version
 
@@ -550,7 +550,7 @@ Pins the Kubernetes version used for cluster nodes.
 | Default | `1.31.1` |
 | Accepted values | Semantic version (e.g. `1.29.1`) |
 | Format | String |
-| Admin Console | **Node version** tab |
+| Docker Home | **Node version** tab |
 
 ### Nodes count
 
@@ -561,7 +561,7 @@ Sets the number of nodes in multi-node Kubernetes clusters.
 | Default | `1` |
 | Accepted values | Integer |
 | Format | Integer |
-| Admin Console | **Nodes count** |
+| Docker Home | **Nodes count** |
 
 ## Features in development
 
@@ -575,7 +575,7 @@ Controls whether users can access all Docker Desktop features that are in public
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `allowBetaFeatures` |
-| Admin Console | **Access beta features** |
+| Docker Home | **Access beta features** |
 
 ### Enable Docker MCP Toolkit (Beta)
 
@@ -587,7 +587,7 @@ Enables [Docker MCP Toolkit](/manuals/ai/mcp-catalog-and-toolkit/_index.md) in D
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `enableDockerMCPToolkit` |
-| Admin Console | Not available |
+| Docker Home | Not available |
 
 ## Enhance container isolation
 
@@ -601,7 +601,7 @@ Prevents containers from modifying Docker Desktop VM configuration or accessing 
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `enhancedContainerIsolation` |
-| Admin Console | **Enable enhanced container isolation** |
+| Docker Home | **Enable enhanced container isolation** |
 
 ### Docker socket access control (ECI exceptions)
 
@@ -612,7 +612,7 @@ Defines specific images and commands allowed to use the Docker socket when Enhan
 | Accepted values | JSON object |
 | Format | JSON object |
 | JSON key | ``dockerSocketMount` |
-| Admin Console | **Image list**, **Command list** |
+| Docker Home | **Image list**, **Command list** |
 
 ```json
 "enhancedContainerIsolation": {
@@ -645,7 +645,7 @@ Sets the default IP protocol used when Docker creates new networks.
 | Accepted values | `ipv4only`, `ipv6only` |
 | Format | String |
 | JSON key | `defaultNetworkingMode` |
-| Admin Console | **Default network IP mode** |
+| Docker Home | **Default network IP mode** |
 
 For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
 
@@ -659,7 +659,7 @@ Filters unsupported DNS record types to improve reliability in environments wher
 | Accepted values | `ipv4`, `ipv6`, `none` |
 | Format | String |
 | JSON key | `dnsInhibition` |
-| Admin Console | **DNS filtering behavior** |
+| Docker Home | **DNS filtering behavior** |
 
 For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
 
@@ -673,7 +673,7 @@ Specify how port bindings are handled for new containers.
 | Accepted values | `default-local-port-binding`, `local-only-port-binding`, `default-port-binding` |
 | Format | String |
 | JSON key | `portBindingBehavior` |
-| Admin Console | **Port binding behavior** |
+| Docker Home | **Port binding behavior** |
 
 ## Other
 
@@ -687,7 +687,7 @@ Controls Docker Offload availability. When enabled, users see the Docker Offload
 | Accepted values | `true`, `false` |
 | Format | Boolean |
 | JSON key | `enableCloud` |
-| Admin Console | **Enable Docker Offload** |
+| Docker Home | **Enable Docker Offload** |
 
 > [!NOTE]
 >

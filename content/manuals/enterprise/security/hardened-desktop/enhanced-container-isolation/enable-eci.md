@@ -47,7 +47,7 @@ a Docker Business subscription.
 Configure Enhanced Container Isolation organization-wide using Settings Management:
 
 {{< tabs >}}
-{{< tab name="Admin Console" >}}
+{{< tab name="Docker Home" >}}
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your organization from the top-left account drop-down.
 1. Select **Docker Desktop**, then **Settings Management**.

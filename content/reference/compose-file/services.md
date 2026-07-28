@@ -1766,11 +1766,13 @@ Unlike `post_start` and `pre_stop`, which run a command inside the running servi
 - `privileged`: Lets the `pre_start` command run with privileged access.
 - `working_dir`: The working directory in which to run the command. If not set, it is run in the same working directory as the main service command.
 - `environment`: Sets the environment variables to run the `pre_start` command. The command inherits the `environment` set for the service's main command, and this section lets you append or override values.
-- `per_replica: false`: Whether the hook runs once for the service as a whole before any replica starts.
+- `per_replica: false`: Whether the step runs once for the service as a whole before any replica starts.
 
-A `pre_start` container joins the same networks as the service, so it can reach services declared in `depends_on`, and shares the service's declared volume mounts so files it produces in a shared volume are visible to the service. With `per_replica: false` and a scaled service, only mounts that are shared across replicas (named volumes, bind mounts) are usable. Per-instance mounts (`tmpfs`, anonymous volumes) cannot be addressed by a single run.
+`pre_start` steps only run once the service's `depends_on` conditions have been satisfied, so a step can rely on those dependencies the same way the main service command does. A`pre_start` container joins the same networks as the service, so it can reach services declared in `depends_on`, and shares the service's declared volume mounts so files it produces in a shared volume are visible to the service. 
 
-A `pre_start` step that has already succeeded for its current definition is not re-run on a subsequent `up`, nor when the service container restarts under its `restart` policy. A step runs again when its definition changes, when the previous run did not succeed, or when the service is recreated.
+With `per_replica: false` and a scaled service, only mounts that are shared across replicas (named volumes, bind mounts) are usable. Per-instance mounts (`tmpfs`, anonymous volumes) cannot be addressed by a single run. This is not an error. The steps run without access to per-instance mounts. Data a `per_replica: false` step must share with the service belongs in a named volume or bind mount.
+
+A `pre_start` step that has already succeeded for its current definition is not re-run on a subsequent `up`, nor when the service container restarts under its `restart` policy. A step runs again when its definition changes, when the previous run did not succeed, or when the service is recreated. For example, after a change to the service configuration or an explicit forced recreation.
 
 ```yaml
 services:
@@ -1799,7 +1801,7 @@ volumes:
 
 `pre_stop` defines a sequence of lifecycle hooks to run before the container is stopped. These hooks won't run if the container stops by itself or is terminated suddenly.
 
-Configuration is equivalent to [post_start](#post_start).
+Configuration is equivalent to [`post_start`](#post_start).
 
 ### `privileged`
 

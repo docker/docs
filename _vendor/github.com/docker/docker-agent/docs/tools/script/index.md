@@ -4,6 +4,7 @@ description: "Define custom shell scripts as named tools with typed parameters."
 keywords: docker agent, ai agents, tools, toolsets, script tool
 linkTitle: "Script"
 weight: 30
+canonical: https://docs.docker.com/ai/docker-agent/tools/script/
 ---
 
 _Define custom shell scripts as named tools with typed parameters._

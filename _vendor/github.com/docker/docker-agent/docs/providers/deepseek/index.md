@@ -3,6 +3,7 @@ title: "DeepSeek"
 description: "Use DeepSeek models with docker-agent."
 keywords: docker agent, ai agents, model providers, llm, deepseek
 weight: 80
+canonical: https://docs.docker.com/ai/docker-agent/providers/deepseek/
 ---
 
 _Use DeepSeek models with docker-agent._

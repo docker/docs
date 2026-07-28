@@ -4,6 +4,7 @@ description: "Read content from HTTP/HTTPS URLs."
 keywords: docker agent, ai agents, tools, toolsets, fetch tool
 linkTitle: "Fetch"
 weight: 50
+canonical: https://docs.docker.com/ai/docker-agent/tools/fetch/
 ---
 
 _Read content from HTTP/HTTPS URLs._

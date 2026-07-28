@@ -402,7 +402,7 @@ reference](/reference/cli/docker/compose/).
 
 ### Prerequisites
 
-Complete [Containerize a Ruby on Rails application](./).
+Complete [Containerize a Ruby on Rails application](#containerize-a-ruby-on-rails-application).
 
 ### Overview
 

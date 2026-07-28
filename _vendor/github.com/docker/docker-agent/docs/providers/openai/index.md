@@ -1,11 +1,12 @@
 ---
 title: "OpenAI"
-description: "Use GPT-4o, GPT-5, GPT-5-mini, and other OpenAI models with docker-agent."
+description: "Use GPT-5.6, GPT-4o, GPT-5, GPT-5-mini, and other OpenAI models with docker-agent."
 keywords: docker agent, ai agents, model providers, llm, openai
 weight: 200
+canonical: https://docs.docker.com/ai/docker-agent/providers/openai/
 ---
 
-_Use GPT-4o, GPT-5, GPT-5-mini, and other OpenAI models with docker-agent._
+_Use GPT-5.6, GPT-4o, GPT-5, GPT-5-mini, and other OpenAI models with docker-agent._
 
 ## Setup
 
@@ -14,6 +15,11 @@ _Use GPT-4o, GPT-5, GPT-5-mini, and other OpenAI models with docker-agent._
 export OPENAI_API_KEY="sk-..."
 ```
 
+> [!TIP]
+> No API key? A ChatGPT Plus/Pro/Business subscription can be used instead
+> through the [`chatgpt` provider](../chatgpt/index.md): sign in once with
+> `docker agent setup` (pick chatgpt).
+
 ## Configuration
 
 ### Inline
@@ -21,7 +27,7 @@ export OPENAI_API_KEY="sk-..."
 ```yaml
 agents:
   root:
-    model: openai/gpt-5
+    model: openai/gpt-5.6
 ```
 
 ### Named Model
@@ -30,51 +36,57 @@ agents:
 models:
   gpt:
     provider: openai
-    model: gpt-5
-    temperature: 0.7
+    model: gpt-5.6
     max_tokens: 4000
 ```
 
 ## Available Models
 
-| Model         | Best For                             |
-| ------------- | ------------------------------------ |
-| `gpt-5`       | Most capable, complex reasoning      |
-| `gpt-5-mini`  | Fast, cost-effective, good reasoning |
-| `gpt-4o`      | Multimodal, balanced performance     |
-| `gpt-4o-mini` | Cheapest, fast for simple tasks      |
+| Model            | Best For                                             |
+| ---------------- | ----------------------------------------------------- |
+| `gpt-5.6`         | Alias for `gpt-5.6-sol`; tracks the flagship model    |
+| `gpt-5.6-sol`     | Frontier model, most capable, complex reasoning       |
+| `gpt-5.6-terra`   | Everyday workhorse; successor to the `-mini` tier     |
+| `gpt-5.6-luna`    | High-volume, cost-efficient; successor to `-nano` tier |
+| `gpt-5`           | Previous-generation flagship                          |
+| `gpt-5-mini`      | Previous-generation fast, cost-effective model        |
+| `gpt-4o`          | Multimodal, balanced performance                      |
+| `gpt-4o-mini`     | Cheapest, fast for simple tasks                       |
+
+Starting with GPT-5.6, OpenAI renamed the `-mini`/`-nano` size tiers to `-terra`/`-luna` (with `-sol` denoting the frontier tier previously left unsuffixed).
 
 Find more model names at [modelnames.ai](https://modelnames.ai/) or in the [official OpenAI docs](https://platform.openai.com/docs/models).
 
 ## Thinking Budget
 
-OpenAI reasoning models (o-series, gpt-5, gpt-5-mini) support extended thinking through the `reasoning_effort` API parameter. Set `thinking_budget` to control the effort level:
+OpenAI reasoning models (o-series, gpt-5, gpt-5-mini, gpt-5.6 family) support extended thinking through the `reasoning_effort` API parameter. Set `thinking_budget` to control the effort level:
 
 ```yaml
 models:
   gpt-thinker:
     provider: openai
-    model: gpt-5-mini
-    thinking_budget: high   # minimal | low | medium | high | xhigh
+    model: gpt-5.6
+    thinking_budget: high   # none | minimal | low | medium | high | xhigh | max
 ```
 
 **Effort levels:**
 
 | Level     | Description                                              |
 | --------- | -------------------------------------------------------- |
-| `none`    | Don't request extra reasoning (alias for `0`); the API's own default still applies. |
-| `minimal` | Fastest; lightest reasoning pass.                        |
+| `none`    | No reasoning. On `gpt-5.6`+ this is a real API value that is sent as-is; on older models it just disables the local `thinking_budget` (the API's own default still applies). |
+| `minimal` | Fastest; lightest reasoning pass. Not accepted on `gpt-5.6`+ (dropped from the API). |
 | `low`     | Quick reasoning for straightforward tasks.               |
 | `medium`  | Balanced default.                                        |
 | `high`    | More thorough; recommended for complex tasks.            |
-| `xhigh`   | Near-maximum effort; slower but most accurate.           |
+| `xhigh`   | Near-maximum effort; slower but most accurate. Requires `gpt-5.2`+. |
+| `max`     | Maximum effort. Requires `gpt-5.6`+ (Sol/Terra/Luna).    |
 
-These are the **only** values OpenAI accepts — token counts, `max`, `adaptive`, and `adaptive/<effort>` are rejected with a configuration error at request time. Older models (o1, o3-mini) only accept `low`/`medium`/`high`.
+Token counts, `adaptive`, and `adaptive/<effort>` are rejected with a configuration error at request time. Older models (o1, o3-mini) only accept `low`/`medium`/`high`; `xhigh` requires `gpt-5.2`+; `none` and `max` require `gpt-5.6`+; `minimal` is not accepted on `gpt-5.6`+.
 
 > [!WARNING]
 > **Hidden reasoning tokens**
 >
-> OpenAI reasoning models always produce hidden reasoning tokens that count against `max_tokens` — even with `thinking_budget: none`. docker-agent automatically raises the output-token floor for its internal low-effort calls so reasoning cannot starve visible text output.
+> OpenAI reasoning models always produce hidden reasoning tokens that count against `max_tokens` — even with `thinking_budget: none` on older models. docker-agent automatically raises the output-token floor for its internal low-effort calls so reasoning cannot starve visible text output.
 
 See the [Thinking / Reasoning guide](../../guides/thinking/index.md) for a cross-provider overview.
 

@@ -3,6 +3,7 @@ title: "Tools"
 description: "Tools give agents the ability to interact with the world — read files, run commands, search the web, query databases, and more."
 keywords: docker agent, ai agents, concepts, tools
 weight: 30
+canonical: https://docs.docker.com/ai/docker-agent/concepts/tools/
 ---
 
 _Tools give agents the ability to interact with the world — read files, run commands, search the web, query databases, and more._
@@ -28,7 +29,8 @@ docker-agent ships with several built-in tools that require no external dependen
 | Tool | Description |
 | --- | --- |
 | [Filesystem](../../tools/filesystem/index.md) | Read, write, list, search, and navigate files and directories |
-| [Shell](../../tools/shell/index.md) | Execute synchronous and background shell commands |
+| [Shell](../../tools/shell/index.md) | Execute shell commands synchronously |
+| [Background Jobs](../../tools/background-jobs/index.md) | Run and manage long-running shell commands |
 | [Think](../../tools/think/index.md) | Step-by-step reasoning scratchpad for planning and decision-making |
 | [Todo](../../tools/todo/index.md) | Task list management for complex multi-step workflows |
 | [Tasks](../../tools/tasks/index.md) | Persistent task database shared across sessions |

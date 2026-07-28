@@ -978,7 +978,7 @@ $ docker stop nextjs-app
 
 ### Prerequisites
 
-Complete [Containerize Next.js application](./).
+Complete [Containerize Next.js application](#containerize-a-nextjs-application).
 
 ---
 
@@ -1152,7 +1152,7 @@ You should see the updated text appear instantly, without needing to rebuild the
 
 ### Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize Next.js application](./).
+Complete all the previous sections of this guide, starting with [Containerize Next.js application](#containerize-a-nextjs-application).
 
 ### Overview
 

@@ -189,7 +189,7 @@ $ docker compose down
 
 ### Prerequisites
 
-Complete [Containerize a Bun application](./).
+Complete [Containerize a Bun application](#containerize-a-bun-application).
 
 ### Overview
 

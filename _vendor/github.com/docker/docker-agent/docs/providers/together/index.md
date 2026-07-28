@@ -3,6 +3,7 @@ title: "Together AI"
 description: "Use Together AI models with docker-agent."
 keywords: docker agent, ai agents, model providers, llm, together ai
 weight: 250
+canonical: https://docs.docker.com/ai/docker-agent/providers/together/
 ---
 
 _Use Together AI models with docker-agent._

@@ -306,7 +306,7 @@ For more information about Compose commands, see the
 
 ### Prerequisites
 
-Work through the steps to containerize your application in [Containerize your app](./).
+Work through the steps to containerize your application in [Containerize your app](#containerize-a-java-application).
 
 ### Overview
 
@@ -687,7 +687,7 @@ Press `ctrl+c` in the terminal to stop Compose Watch.
 
 ### Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize a Java application](./).
+Complete all the previous sections of this guide, starting with [Containerize a Java application](#containerize-a-java-application).
 
 ### Overview
 

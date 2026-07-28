@@ -3,6 +3,7 @@ title: "Fireworks AI"
 description: "Use Fireworks AI models with docker-agent."
 keywords: docker agent, ai agents, model providers, llm, fireworks ai
 weight: 100
+canonical: https://docs.docker.com/ai/docker-agent/providers/fireworks/
 ---
 
 _Use Fireworks AI models with docker-agent._
