@@ -1,11 +1,12 @@
 ---
-title: Docker accounts FAQs
+title: Docker account FAQs
 linkTitle: FAQs
 weight: 40
 description: FAQs about Docker IDs, account creation, and organization names
 keywords:
   docker ID, docker account FAQ, change docker ID, username taken, trademark,
-  organization name, organization namespace, create account, Google, GitHub
+  organization name, organization namespace, create account, Google, GitHub,
+  deactivate docker ID
 tags: [FAQ]
 aliases:
   - /docker-hub/general-faqs/
@@ -52,4 +53,10 @@ the organization ID, is the unique identifier of a Docker organization. The
 organization name can't be the same as an existing Docker ID.
 
 For more information, see
-[Organization overview](/manuals/admin/organization/_index.md).
+[Docker organization overview](/manuals/admin/organization/_index.md).
+
+## What's next
+
+- [Create a Docker account](/manuals/accounts/create-account.md)
+- [Manage a Docker account](/manuals/accounts/manage-account.md)
+- [Docker organization overview](/manuals/admin/organization/_index.md)

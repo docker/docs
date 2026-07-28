@@ -2,10 +2,11 @@
 title: Create a Docker account
 linkTitle: Create
 weight: 10
-description: Create a Docker ID with email, Google, or GitHub, then sign in
+description: Create a Docker ID with email, Google, or GitHub, then verify your
+  account
 keywords:
   create docker account, docker ID, sign up, sign in, email, Google, GitHub,
-  verification, OTP, password reset, docker login
+  verification, OTP, password, docker login, username requirements
 aliases:
   - /docker-hub/accounts/
   - /docker-id/
@@ -20,9 +21,9 @@ Your Docker ID becomes your username for hosted Docker services and
 
 > [!TIP]
 >
-> Explore
+> See
 > [Docker's subscriptions](https://www.docker.com/pricing?ref=Docs&refAction=DocsCreateAccount)
-> to see what else Docker can offer you.
+> for available plans.
 
 ## Create and verify your account
 
@@ -41,8 +42,9 @@ Docker blocks sign-in until you've verified your account.
 
 1. Go to the [Docker sign-up page](https://app.docker.com/signup/) and enter a
    unique, valid email address.
-1. Enter a username to use as your Docker ID. Once you create your Docker ID,
-   you can't change it or reuse it if you deactivate this account. Your username:
+1. Enter a username to use as your Docker ID. After you create your Docker
+   ID, you can't change it or reuse it if you deactivate this account. Your
+   username:
    - Must be between 4 and 30 characters long
    - Can only contain numbers and lowercase letters
 1. Choose a password that's at least 9 characters long, then select
@@ -58,8 +60,9 @@ Docker blocks sign-in until you've verified your account.
 1. Select the social account you want to link to your Docker account.
 1. Select **Authorize Docker** to let Docker access your social account
    information. Docker redirects you to the sign-up page.
-1. Enter a username to use as your Docker ID. Once you create your Docker ID,
-   you can't change it or reuse it if you deactivate this account. Your username:
+1. Enter a username to use as your Docker ID. After you create your Docker
+   ID, you can't change it or reuse it if you deactivate this account. Your
+   username:
    - Must be between 4 and 30 characters long
    - Can only contain numbers and lowercase letters
 1. Select **Sign up**.
@@ -79,3 +82,8 @@ basis:
 
 - [Docker Community Forums](https://forums.docker.com/)
 - [Docker Community Slack](https://dockr.ly/comm-slack)
+
+## What's next
+
+- [Manage a Docker account](/manuals/accounts/manage-account.md)
+- [Enable two-factor authentication](/manuals/security/2fa/_index.md)

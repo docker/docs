@@ -1,5 +1,5 @@
 ---
-title: Organization overview
+title: Docker organization overview
 linkTitle: Organization
 weight: 10
 description: >
@@ -41,7 +41,8 @@ The following diagram shows how organizations relate to teams and members.
 organization](/admin/images/org-structure.webp)
 
 For how organizations fit into the broader company hierarchy, see
-[administration overview](/manuals/admin/_index.md#company-and-organization-hierarchy).
+[Administration
+overview](/manuals/admin/_index.md#company-and-organization-hierarchy).
 
 ## Individual and organization accounts
 
@@ -65,7 +66,8 @@ team is an optional grouping of members that share the same repository
 permissions.
 
 For details about each role and its permissions, see
-[Roles and permissions](/manuals/enterprise/security/roles-and-permissions/_index.md).
+[Roles and
+permissions](/manuals/enterprise/security/roles-and-permissions/_index.md).
 
 ## What's next
 

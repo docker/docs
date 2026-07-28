@@ -6,14 +6,14 @@ description: Prerequisites and steps to deactivate an individual Docker account
 keywords:
   deactivate docker account, delete docker account, close docker account,
   disable docker account, account management, leave organization, privacy
-  request
+  request, personal data
 ---
 
 Learn how to deactivate an individual Docker account, including the
 prerequisites required for deactivation.
 
 For information on deactivating an organization, see
-[Deactivate an organization](../admin/organization/deactivate-account.md).
+[Deactivate an organization](/manuals/admin/organization/deactivate-account.md).
 
 > [!WARNING]
 >
@@ -22,7 +22,7 @@ For information on deactivating an organization, see
 
 ## Prerequisites
 
-Before deactivating your Docker account, ensure you meet the following
+Before deactivating your Docker account, complete the following
 requirements:
 
 - If you are an organization or company owner, you must leave your
@@ -31,26 +31,28 @@ requirements:
      organization.
   1. Select **Members** and find your username.
   1. Select the **Actions** menu and then select **Leave organization**.
-- If you are the sole owner of an organization, you must assign the owner role
-  to another member of the organization and then remove yourself from the
-  organization, or deactivate the organization. Similarly, if you are the sole
-  owner of a company, either add someone else as a company owner and then
-  remove yourself, or deactivate the company.
+- If you are the sole owner of an organization, you must assign the owner
+  role to another member of the organization and then remove yourself from
+  the organization, or deactivate the organization. Similarly, if you are
+  the sole owner of a company, either add someone else as a company owner
+  and then remove yourself, or deactivate the company.
 - If you have an active Docker subscription,
-  [downgrade it to a Docker Personal subscription](../subscription/plans/docker.md#cancel-a-docker-plan).
+  [downgrade it to a Docker Personal
+  subscription](/manuals/subscription/plans/docker.md#cancel-a-docker-plan).
 - Download any images and tags you want to keep. Use
   `docker pull -a <image>` to pull all tags, or `docker pull <image>:<tag>`
   to pull a specific tag.
-- If you linked a GitHub or Bitbucket account for automated builds, unlink it.
-  See
-  [Unlink a GitHub user account](../docker-hub/repos/manage/builds/link-source.md#unlink-a-github-user-account)
+- If you linked a GitHub or Bitbucket account for automated builds, unlink
+  it. See
+  [Unlink a GitHub user
+  account](/manuals/docker-hub/repos/manage/builds/link-source.md#unlink-a-github-user-account)
   or
-  [Unlink a Bitbucket user account](../docker-hub/repos/manage/builds/link-source.md#unlink-a-bitbucket-user-account).
+  [Unlink a Bitbucket user
+  account](/manuals/docker-hub/repos/manage/builds/link-source.md#unlink-a-bitbucket-user-account).
 
 ## Deactivate
 
-Once you have completed all the previous steps, you can deactivate your
-account.
+After you complete the prerequisites, you can deactivate your account.
 
 > [!WARNING]
 >

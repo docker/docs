@@ -5,7 +5,7 @@ description: >
   relate, and how individual accounts connect to organizations
 keywords: accounts, docker ID, username, email, Google, GitHub, sign-in,
   authentication, account management, docker account, individual account,
-  organization account, account types, Docker Hub
+  organization account, account types, Docker Hub, SSO, deactivate account
 weight: 10
 params:
   sidebar:
@@ -55,7 +55,9 @@ Docker also ties a verified email to the account.
 - Docker ID: A unique username that identifies you.
 - Email: How Docker contacts you for notifications and security-related
   communications.
-- Sign-in method: Email and password, [single sign-on (SSO)](/enterprise/security/single-sign-on.md), Google, or GitHub.
+- Sign-in method: Email and password,
+  [single sign-on (SSO)](/manuals/enterprise/security/single-sign-on/_index.md),
+  Google, or GitHub.
 
 ## What's next
 
