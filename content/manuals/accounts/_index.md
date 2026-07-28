@@ -55,7 +55,7 @@ Docker also ties a verified email to the account.
 - Docker ID: A unique username that identifies you.
 - Email: How Docker contacts you for notifications and security-related
   communications.
-- Sign-in method: Email and password, Google, or GitHub.
+- Sign-in method: Email and password, [single sign-on (SSO)](/enterprise/security/single-sign-on.md), Google, or GitHub.
 
 ## What's next
 
