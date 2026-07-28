@@ -58,7 +58,7 @@ Your verification session expires after 15 minutes.
 
 ## Change your password
 
-You can change your password by starting a password reset by email:
+Initiate your password reset through email:
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
 1. Select your avatar in the top-right corner and select **Account settings**.
