@@ -31,7 +31,7 @@ You can purchase Docker plans through the product catalog:
    - The **Products** page contains products and upgrades available for self-serve.
    - Some products in the catalog may apply to personal accounts, organization accounts, or both.
    - Each product tile uses an account-type flag so you know the difference.
-1. Select **View plans**, then choose the plan you want to add to your Docker subscription. 
+1. Select **View plans**, then choose the plan you want to add to your Docker subscription.
 1. Verify your billing details, continue to payment, and complete checkout.
    - Optional. To add a VAT number, select the **I'm purchasing as a business**
      checkbox and enter your Tax ID.
@@ -69,4 +69,4 @@ Some products are sales-led. You must
 - [View invoices](/manuals/billing/history.md)
 - To learn more about managing your billing details, see [Billing](/manuals/billing/_index.md).
 - To learn about sales tax and VAT, see
-  [Sales tax and VAT](/manuals/billing/_index.md#sales-tax-and-vat).
+  [Taxes](/manuals/billing/tax-certificate.md).

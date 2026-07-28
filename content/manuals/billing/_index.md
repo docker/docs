@@ -2,7 +2,7 @@
 title: Manage billing and payments
 linkTitle: Billing
 description: Find information about managing billing and payments for Docker subscriptions.
-keywords: billing, invoice, payment, subscription, Docker billing, update payment method, billing history, invoices, payment verification, tax exemption
+keywords: billing, invoice, payment, subscription, Docker billing, update payment method, billing history, invoices, payment verification
 weight: 30
 params:
   sidebar:
@@ -34,14 +34,6 @@ payment methods, reviewing billing details, and tracking invoice history.
 ## Docker plans and billing behaviors
 
 Your invoice history is a reference to the Docker plans you subscribe to. For information about your billing cycle and renewal dates, see [plan details](/manuals/subscription/plans/_index.md). To upgrade or add a new plan, see [Subscription](/manuals/subscription/_index.md).
-
-## Sales tax and VAT
-
-Depending on your location, Docker may collect sales tax or VAT on your
-subscription. To add your VAT number or Tax ID, do so when you
-[purchase a Docker plan](/manuals/subscription/manage.md#set-up-a-new-plan).
-If you're a US customer exempt from sales tax, you can
-[submit a tax exemption certificate](/manuals/billing/tax-certificate.md).
 
 ## What's next
 

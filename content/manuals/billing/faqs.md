@@ -44,12 +44,9 @@ Docker collects sales tax or VAT from the following customers:
 - For United Kingdom customers, Docker began collecting VAT on May 1, 2025.
 
 To help ensure correct tax assessments, keep your
-[billing information](/manuals/billing/details.md) up to date. You can add a
-tax ID or VAT ID when you
-[purchase a Docker plan](/manuals/subscription/manage.md#set-up-a-new-plan).
-
-If you're exempt from sales tax, see
-[Submit a tax certificate](/manuals/billing/tax-certificate.md).
+[billing information](/manuals/billing/details.md) up to date. For details on
+adding a VAT number or submitting a US tax exemption certificate, see
+[Taxes](/manuals/billing/tax-certificate.md).
 
 ## Does Docker offer academic pricing?
 
