@@ -58,67 +58,14 @@ Docker blocks sign-in until you've verified your account.
 1. Select the social account you want to link to your Docker account.
 1. Select **Authorize Docker** to let Docker access your social account
    information. Docker redirects you to the sign-up page.
-1. Enter a username to use as your Docker ID. Your username:
+1. Enter a username to use as your Docker ID. Once you create your Docker ID,
+   you can't change it or reuse it if you deactivate this account. Your username:
    - Must be between 4 and 30 characters long
    - Can only contain numbers and lowercase letters
 1. Select **Sign up**.
 
 {{< /tab >}}
 {{< /tabs >}}
-
-## Sign in to your account
-
-You can sign in with your email, Google or GitHub account, or from the Docker
-CLI.
-
-{{< tabs >}}
-{{< tab name="Email or Docker ID" >}}
-
-1. Go to the [Docker sign in page](https://login.docker.com/).
-1. Enter your email address or Docker ID and select **Continue**.
-1. Enter your password and select **Continue**.
-
-To reset your password, see [Reset your password](#reset-your-password).
-
-{{< /tab >}}
-{{< tab name="Google or GitHub" >}}
-
-You can sign in using your Google or GitHub credentials. If your social
-account uses the same email address as an existing Docker ID, Docker links
-that provider to the account.
-
-If no Docker ID exists, Docker creates a new account for you.
-
-You can't link both Google and GitHub to the same Docker ID.
-
-{{< /tab >}}
-{{< tab name="CLI" >}}
-
-Use the `docker login` command to authenticate from the command line. For
-details, see [`docker login`](/reference/cli/docker/login/).
-
-> [!WARNING]
->
-> The `docker login` command stores credentials in your home directory under
-> `.docker/config.json`. The password is base64-encoded.
->
-> To improve security, use
-> [Docker credential helpers](https://github.com/docker/docker-credential-helpers).
-> For even stronger protection, use a
-> [personal access token](../security/access-tokens.md) instead of a password.
-> This is especially useful in CI/CD environments or when credential helpers
-> aren't available.
-
-{{< /tab >}}
-{{< /tabs >}}
-
-## Reset your password
-
-To reset your password:
-
-1. Go to the [Docker sign in page](https://login.docker.com/).
-1. Enter your email address.
-1. When prompted for your password, select **Forgot password?**.
 
 ## Troubleshooting
 
