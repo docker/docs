@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /dhi/core-concepts/immutability/
 title: Immutable infrastructure
 linktitle: Immutability
 description: Understand how image digests, read-only containers, and signed metadata ensure Docker Hardened Images are tamper-resistant and immutable.

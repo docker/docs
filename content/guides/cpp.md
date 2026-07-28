@@ -214,7 +214,7 @@ reference](/reference/cli/docker/compose/).
 
 ### Prerequisites
 
-Complete [Containerize a C++ application](./).
+Complete [Containerize a C++ application](#containerize-a-c-application).
 
 ### Overview
 

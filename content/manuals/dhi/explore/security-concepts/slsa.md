@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /dhi/core-concepts/slsa/
 title: Supply-chain Levels for Software Artifacts (SLSA)
 linktitle: SLSA
 description: Learn how Docker Hardened Images comply with SLSA Build Level 3 and how to verify provenance for secure, tamper-resistant builds.

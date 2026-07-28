@@ -1,11 +1,12 @@
 ---
 title: Troubleshoot
 description: Resolve common issues when building, running, or debugging Docker Hardened Images, such as non-root behavior, missing shells, and port access.
-weight: 40
+weight: 100
 tags: [Troubleshooting]
 keywords: troubleshoot hardened image, docker debug container, non-root permission issue, missing shell error, no package manager, debug, hardened images, DHI, troubleshooting, ephemeral container, docker debug, non-root containers, hardened container image, debug secure container
 aliases:
-- /dhi/how-to/debug/
+  - /dhi/how-to/debug/
+  - /dhi/troubleshoot/
 ---
 
 This page covers debugging techniques and common issues you may encounter while
@@ -137,7 +138,7 @@ appropriate permissions.
 
 To find out which user a DHI runs as, check the repository page for the image on
 Docker Hub. See [View image variant
-details](./how-to/explore.md#image-variant-details) for more information.
+details](../tools/hub.md#image-variant-details-page) for more information.
 
 ### Privileged ports
 
@@ -159,7 +160,7 @@ the runtime image.
 
 To find out which shell, if any, a DHI has, check the repository page for the
 image on Docker Hub. See [View image variant
-details](./how-to/explore.md#image-variant-details) for more information.
+details](../tools/hub.md#image-variant-details-page) for more information.
 
 Also, use Docker Debug when you need shell access to a running container. For
 more details, see [General debugging](#general-debugging).
@@ -171,7 +172,7 @@ or other community images.
 
 To find out the ENTRYPOINT or CMD for a DHI, check the repository page for the
 image on Docker Hub. See [View image variant
-details](./how-to/explore.md#image-variant-details) for more information.
+details](../tools/hub.md#image-variant-details-page) for more information.
 
 ### No package manager
 

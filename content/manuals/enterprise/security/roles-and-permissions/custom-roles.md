@@ -28,33 +28,31 @@ organization.
 Before you can assign a custom role to users, you must create one:
 
 1. Sign in to [Docker Home](https://app.docker.com).
-2. Select **Members**.
-3. Select the **Roles** tab, then **Create role**.
-4. Create a name and describe what the role is for:
+2. Select **Roles**, then **Create role**.
+3. Create a name and describe what the role is for:
    - Provide a **Label**
    - Enter a unique **Name** identifier (can't be changed later)
    - Add an optional **Description**
-5. Set permissions for the role by expanding permission categories and selecting
+4. Set permissions for the role by expanding permission categories and selecting
    the checkboxes for permissions. For a full list of available permissions, see
    the [custom roles permissions reference](#custom-roles-permissions-reference).
-6. Select **Review** to review your custom roles configuration and see a summary
+5. Select **Review** to review your custom roles configuration and see a summary
    of selected permissions.
-7. Select **Create**.
+6. Select **Create**.
 
 With a custom role created, you can now [assign custom roles to users](#assign-custom-roles).
 
 ## Edit a custom role
 
 1. Sign in to [Docker Home](https://app.docker.com).
-2. Select **Members**.
-3. Select the **Roles** tab.
-4. Find your custom role from the list, and select the **Actions menu**.
-5. Select **Edit**.
-6. You can edit the following custom role settings:
+2. Select **Roles**.
+3. Find your custom role from the list, and select the **Actions menu**.
+4. Select **Edit**.
+5. You can edit the following custom role settings:
    - Label
    - Description
    - Permissions
-7. After you have finished editing, select **Save**.
+6. After you have finished editing, select **Save**.
 
 ## Assign custom roles
 
@@ -100,11 +98,10 @@ The role column will update to the newly assigned role.
 To see which users and teams are assigned to roles:
 
 1. Sign in to [Docker Home](https://app.docker.com).
-2. Select **Members**.
-3. Select the **Roles** tab.
-4. In the roles list, view the **Users** and **Teams** columns to see
+2. Select **Roles** 
+3. In the roles list, view the **Users** and **Teams** columns to see
    assignment counts.
-5. Select a specific role to view its permissions and assignments in detail.
+4. Select a specific role to view its permissions and assignments in detail.
 
 ## Reassign custom roles
 
@@ -147,16 +144,15 @@ To see which users and teams are assigned to roles:
 Before deleting a custom role, you must reassign all users and teams to different roles.
 
 1. Sign in to [Docker Home](https://app.docker.com).
-2. Select **Members**.
-3. Select the **Roles** tab.
-4. Find your custom role from the list, and select the **Actions menu**.
-5. If the role has assigned users or teams:
+2. Select **Roles**.
+3. Find your custom role from the list, and select the **Actions menu**.
+4. If the role has assigned users or teams:
    - Navigate to the **Members** page and change the role for all users assigned to this custom role
    - Navigate to the **Teams** page and reassign all teams that have this custom role
-6. Once no users or teams are assigned, return to the **Roles** tab.
-7. Find your custom role and select the **Actions menu**.
-8. Select **Delete**.
-9. In the confirmation window, select **Delete** to confirm.
+5. Once no users or teams are assigned, return to **Roles**.
+6. Find your custom role and select the **Actions menu**.
+7. Select **Delete**.
+8. In the confirmation window, select **Delete** to confirm.
 
 ## Custom roles permissions reference
 

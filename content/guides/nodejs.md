@@ -467,7 +467,7 @@ reference](/reference/cli/docker/compose/).
 
 ### Prerequisites
 
-Complete [Containerize a Node.js application](./).
+Complete [Containerize a Node.js application](#containerize-a-nodejs-application).
 
 ### Overview
 
@@ -1095,7 +1095,7 @@ For more details about Node.js debugging, see the [Node.js debugging guide](http
 
 ### Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize a Node.js application](./).
+Complete all the previous sections of this guide, starting with [Containerize a Node.js application](#containerize-a-nodejs-application).
 
 ### Overview
 

@@ -127,7 +127,7 @@ In the next section, you'll learn how to properly configure the application with
 
 ### Prerequisites
 
-Complete [Containerize a RAG application](./).
+Complete [Containerize a RAG application](#containerize-a-rag-application).
 
 ### Overview
 

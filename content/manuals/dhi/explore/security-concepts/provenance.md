@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /dhi/core-concepts/provenance/
 title: Image provenance
 description: Learn how build provenance metadata helps trace the origin of Docker Hardened Images and support compliance with SLSA.
 keywords: image provenance, container build traceability, slsa compliance, signed container image, software supply chain trust

@@ -2,13 +2,95 @@
 title: Workflow patterns
 linkTitle: Workflows
 weight: 30
-description: Workflow patterns for Docker Sandboxes, covering git strategies, local services, authenticated tools, commit signing, and CI integration.
-keywords: docker sandboxes, sbx, workflows, clone mode, git, branches, commit signing, github cli, local services, ci, headless
+description: Workflow patterns for Docker Sandboxes, covering shared agent skills, git strategies, local services, authenticated tools, and CI integration.
+keywords: docker sandboxes, sbx, workflows, agent skills, shared skills, clone mode, git, branches, commit signing, github cli, local services, ci, headless
 ---
 
 Use this page when you need to choose an approach for a specific way of working
 with sandboxes. For command syntax and lifecycle basics, see
 [Usage](usage.md).
+
+## Share agent skills
+
+Shared agent skills make skills from supported agents on your host available
+inside your sandboxes. Importing copies the skills into a persistent store that
+survives sandbox deletion and is shared by default with new sandboxes that run
+a supported agent.
+
+> [!NOTE]
+> Shared agent skills are experimental.
+
+Preview the skills that `sbx` finds without copying them:
+
+```console
+$ sbx skills import --dry-run
+```
+
+The command scans the following directories in order and copies each skill
+subdirectory into the shared store. When the sandbox starts, `sbx` mounts the
+store at the path the agent reads inside the sandbox.
+
+| Agent       | Host source         | Sandbox mount target          |
+| ----------- | ------------------- | ----------------------------- |
+| Claude Code | `~/.claude/skills`  | `/home/agent/.claude/skills`  |
+| Codex       | `~/.agents/skills`  | `/home/agent/.agents/skills`  |
+| Copilot     | `~/.copilot/skills` | `/home/agent/.copilot/skills` |
+| Cursor      | `~/.cursor/skills`  | `/home/agent/.cursor/skills`  |
+| Droid       | `~/.factory/skills` | `/home/agent/.factory/skills` |
+
+All imported skills go into the same store, regardless of their source. If
+more than one source contains a skill with the same directory name, the skill
+from the first source in the table wins and `sbx` warns about the others.
+
+Import the skills:
+
+```console
+$ sbx skills import
+```
+
+The final output reports the shared store path. The default locations are:
+
+| Platform | Shared store path                                                           |
+| -------- | --------------------------------------------------------------------------- |
+| macOS    | `~/Library/Application Support/com.docker.sandboxes/sandboxes/agent-skills` |
+| Linux    | `~/.local/state/sandboxes/sandboxes/agent-skills`                           |
+| Windows  | `%LOCALAPPDATA%\DockerSandboxes\sandboxes\state\agent-skills`               |
+
+On Linux, `sbx` uses `$XDG_STATE_HOME/sandboxes/sandboxes/agent-skills` when
+`XDG_STATE_HOME` is set.
+
+When a skill already exists in the store, `sbx` prompts before replacing it.
+Use `--force` to replace existing skills without prompts. Importing replaces
+the complete skill directory rather than merging files. Run the import command
+again when you want to copy updates from the host. Running `sbx reset` clears
+the shared store.
+
+Sandboxes created with `sbx` version 0.37.0 or later for a supported agent are
+configured to mount the store read-write by default. These sandboxes mount the
+current contents of the store each time they start, so you can import skills
+before or after creating them. To create a sandbox without the shared store,
+use `--no-share-skills`:
+
+```console
+$ sbx run --no-share-skills claude
+```
+
+Upgrading `sbx` does not enable shared skills for sandboxes created with an
+earlier version. Remove and recreate those sandboxes after upgrading. The
+`--no-share-skills` option also only applies when the sandbox is created. To
+turn off shared skills for an existing sandbox, remove it and recreate it with
+the option.
+
+> [!WARNING]
+> The shared skills store is mounted read-write. A sandbox can modify any skill
+> in the store, and another sandbox can later load the modified instructions or
+> run the modified scripts. The store is dedicated sandbox state, so this does
+> not by itself execute the modified skill on your host. It does put every
+> sandbox that shares the store in the same trust boundary. Use
+> `--no-share-skills` to keep a sandbox outside that boundary.
+
+Some agents scan for skills when a session starts. If imported skills don't
+appear in an existing session, start another agent session.
 
 ## Git workflows
 
@@ -59,16 +141,16 @@ turn-by-turn.
 
 ### Clone mode
 
-In clone mode, the sandbox gets a private Git clone. The agent manages its
-own branches and commits inside that clone; your host working tree is never
-touched. When the agent is done, you either fetch its branches to the host or
-ask the agent to push directly to your fork.
+In clone mode, `sbx` creates a separate Git clone inside the sandbox. The agent
+edits this clone instead of your host working tree. Its changes stay inside the
+sandbox until you fetch a branch or the agent pushes one to a remote. Your host
+repository is also available at `/run/sandbox/source`, but only with read
+access. The sandbox clone is not a Git worktree linked to your host checkout.
 
-Clone mode is designed for parallelism: a single clone-mode sandbox can hold
-many branches at once, and subagent orchestrators (such as Claude Code's
-[agents view](agents/claude-code.md#agents-view)) can dispatch independent
-tasks to separate agents, each working on its own branch or worktree inside
-the clone.
+A single clone-mode sandbox can hold multiple branches and worktrees for
+parallel tasks. The `--clone` flag creates the clone, but it doesn't separate
+one task from another. To keep parallel tasks isolated, instruct your agent tool
+to create a separate branch or worktree for each task.
 
 > [!NOTE]
 > `--clone` is a create-time flag and cannot be changed on an existing
@@ -135,10 +217,9 @@ It's only reachable while the sandbox is running:
    $ sbx run --clone claude
    ```
 
-2. Dispatch each independent task to a separate subagent. Claude Code handles
-   branch isolation for subagents automatically in agents view. For other
-   agents (such as Codex), add an instruction to `AGENTS.md` to get the same
-   behavior:
+2. Dispatch each independent task to a separate background session. Your agent
+   tool may use branches or worktrees to keep their changes separate. If it
+   doesn't, add a project instruction such as:
 
    ```markdown
    Always start each task on its own git branch before making changes.

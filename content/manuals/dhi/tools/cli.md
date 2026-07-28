@@ -1,9 +1,11 @@
 ---
 title: Use the DHI CLI
-linkTitle: Use the CLI
-weight: 50
+linkTitle: CLI
+weight: 20
 keywords: docker dhi, CLI, command line, docker hardened images
 description: Learn how to install and use docker dhi, the command-line interface for managing Docker Hardened Images.
+aliases:
+  - /dhi/how-to/cli/
 ---
 
 The `docker dhi` command-line interface (CLI) is a tool for managing Docker Hardened Images:
@@ -141,7 +143,7 @@ $ docker dhi mirror stop dhi-golang --org my-org --delete --force
 
 The CLI can be used to create and manage DHI image customizations. For detailed
 instructions on creating customizations using the GUI, see [Customize a Docker
-Hardened Image](./customize.md).
+Hardened Image](../how-to/customize.md).
 
 The following is a quick reference for CLI commands. For complete details on all
 options and flags, see the
@@ -204,7 +206,7 @@ Generate authentication credentials for accessing the enterprise hardened
 package repository. These credentials are used when configuring your package
 manager to install compliance and security-patched packages in your own images. For detailed
 instructions, see [Enterprise
-repository](./hardened-packages.md#enterprise-repository).
+repository](../how-to/hardened-packages.md#enterprise-repository).
 
 For Alpine-based images:
 

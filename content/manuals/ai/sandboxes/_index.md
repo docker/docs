@@ -73,6 +73,8 @@ the [usage guide](usage.md) for basic commands.
 ## Learn more
 
 - [Agents](agents/) — supported agents and per-agent configuration
+- [Integrations](integrations/) — connect editors and apps like VS Code and
+  Cursor to a sandbox over SSH
 - [Customize](customize/) — reusable templates and declarative kits for
   extending or tailoring sandboxes
 - [Architecture](architecture.md) — microVM isolation, workspace mounting,

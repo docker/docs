@@ -61,6 +61,7 @@ The unofficial packages to uninstall are:
 - `docker.io`
 - `docker-compose`
 - `docker-doc`
+- `docker-buildx`
 - `podman-docker`
 
 Moreover, Docker Engine depends on `containerd` and `runc`. Docker Engine
@@ -71,7 +72,7 @@ conflicts with the versions bundled with Docker Engine.
 Run the following command to uninstall all conflicting packages:
 
 ```console
-$ sudo apt remove $(dpkg --get-selections docker.io docker-compose docker-doc podman-docker containerd runc | cut -f1)
+$ sudo apt remove $(dpkg --get-selections docker.io docker-compose docker-doc docker-buildx podman-docker containerd runc | cut -f1)
 ```
 
 `apt` might report that you have none of these packages installed.

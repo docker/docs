@@ -1,115 +1,227 @@
 ---
-title: Enforce Docker Hardened Image usage with policies
-linktitle: Enforce image usage
-description: Learn how to use image policies with Docker Scout for Docker Hardened Images.
+title: Apply Docker Hardened Image policies to your images
+linktitle: Apply image policies
+description: Learn how to hold your own images to Docker Hardened Image security and compliance standards using the Docker Scout CLI.
 weight: 50
-keywords: docker scout policies, enforce image compliance, container security policy, image provenance, vulnerability policy check
+keywords: docker scout policies, image security policy, container compliance, dhi policies, vulnerability policy check
 ---
 
-When you have a Docker Hardened Images Enterprise subscription, mirroring a
-Docker Hardened Image (DHI) repository automatically enables [Docker
-Scout](/scout/), allowing you to start enforcing security and compliance
-policies for your images without additional setup. Using Docker Scout policies,
-you can define and apply rules that ensure only approved and secure images, such
-as those based on DHIs, are used across your environments.
+Docker publishes the set of security and compliance policies that Docker
+Hardened Images (DHIs) are built to meet, so you can hold your own images to the
+same standards. You evaluate images against these policies with the
+[`docker scout policy`](../../scout/policy/local.md) command.
 
-Docker Scout includes a dedicated **Valid Docker Hardened Image (DHI) or DHI
-base
-image**
-policy type that validates whether your images are Docker Hardened Images or are
-built using a DHI as the base image. This policy checks for valid Docker signed
-verification summary attestations.
+These policies encode requirements such as running as a non-root user, being
+free of fixable critical and high vulnerabilities, containing no embedded
+malware or secrets, and shipping signed supply chain attestations. They don't
+verify whether an image is a DHI or built on a DHI base image; they check
+whether an image meets the same bar that DHIs are held to.
 
-With policy evaluation built into Docker Scout, you can monitor image compliance
-in real time, integrate checks into your CI/CD workflows, and maintain
-consistent standards for image security and provenance.
+Unlike the built-in Docker Scout policies, the DHI policies aren't embedded in
+the CLI. They're maintained as Rego source in the
+[`docker-hardened-images/policies`](https://github.com/docker-hardened-images/policies)
+repository and published as an OCI policy bundle at
+[`dhi/policies`](https://hub.docker.com/repository/docker/dhi/policies/general).
+You pull the bundle at evaluation time with the `--policy-bundle` flag, so you
+can apply DHI standards locally, in CI, or both, without sending any data to the
+Docker Scout service.
 
-## View existing policies
+## Policies in the DHI bundle
 
-To see the current policies applied to a mirrored DHI repository:
+The `dhi/policies` bundle includes the following policies:
 
-1. Go to the mirrored DHI repository in [Docker Hub](https://hub.docker.com).
-2. Select **View on Scout**.
+| Policy | Policy name | What it checks |
+| --- | --- | --- |
+| No default root user for non-dev images | `dhi-default-non-root-user` | The image is configured to run as a non-root user. |
+| No fixable vulnerabilities past their remediation SLA | `fixable-vulnerabilities` | No fixable CVEs remain unaddressed past their remediation SLA (7 days for critical and high, 30 days for others). |
+| No high-profile vulnerabilities | `high-profile-vulnerabilities` | The image is free of a curated list of well-known CVEs, optionally including the CISA KEV catalog. |
+| No embedded malware | `dhi-no-embedded-malware` | A malware scan attestation is present and passing. |
+| No embedded secrets | `dhi-no-embedded-secrets` | A secret scan attestation is present and passing. |
+| No failing tests | `dhi-no-failing-tests` | A test attestation is present and passing. |
+| Signed supply chain attestations | `dhi-signed-supply-chain-attestations` | SBOM and provenance attestations are attached and signed. |
+| Unintentional shell or package manager | `dhi-unintentional-shell-or-package-manager` | No undeclared shell or package manager is present in the image. |
+| STIG scan | `dhi-stig-scan-score` | For FIPS-compliant images, the STIG scan meets the required score. |
 
-   This opens the [Docker Scout dashboard](https://scout.docker.com), where you
-   can see which policies are currently active and whether your images meet the
-   policy criteria.
+The **Policy name** is the stable ID you reference in a `--policy-config` file to
+enable, disable, or tune a policy.
 
-Docker Scout automatically evaluates policy compliance when new images are
-pushed. Each policy includes a compliance result and a link to the affected
-images and layers.
+For the authoritative list and the Rego source for each policy, see the
+[`docker-hardened-images/policies`](https://github.com/docker-hardened-images/policies)
+repository.
 
-## Evaluate DHI policy compliance for your images
+## Prerequisites
 
-When you enable Docker Scout for your repositories, you can configure the
-**Valid Docker Hardened Image (DHI) or DHI base
-image**
-policy. This optional policy validates whether your images are DHIs or built with DHI
-base images by checking for Docker signed verification summary attestations.
+- The [Docker Scout CLI plugin](/manuals/scout/install.md). It's included with
+  Docker Desktop.
+- Access to pull the `dhi/policies` bundle from Docker Hub. Authentication uses
+  your existing Docker registry credentials, so sign in first:
 
-The following example shows how to build an image using a DHI base image and
-evaluate its compliance with the DHI policy.
+  ```console
+  $ docker login
+  ```
+
+## Evaluate an image against the DHI policies
+
+To evaluate an image against the DHI policy bundle, pass the bundle reference to
+`docker scout policy` with the `--policy-bundle` flag:
+
+```console
+$ docker scout policy <image> --policy-bundle dhi/policies:latest
+```
+
+The CLI pulls the bundle, indexes the image into an SBOM, enriches it with CVE
+and VEX data, and evaluates each policy in the bundle against that data. Bundles
+are cached by digest, so re-running against the same bundle doesn't re-download
+it.
 
 ### Example: Build and evaluate a DHI-based image
 
+The following example builds an image from a DHI base image and evaluates it
+against the DHI policy bundle.
+
 #### Step 1: Use a DHI base image in your Dockerfile
 
-Create a Dockerfile that uses a Docker Hardened Image mirrored repository as the
-base. For example:
+Create a Dockerfile that uses a Docker Hardened Image from the DHI catalog as
+the base. For example:
 
 ```dockerfile
 # Dockerfile
-FROM <your-namespace>/dhi-python:3.13-alpine3.21
+FROM dhi.io/python:3.13
 
 ENTRYPOINT ["python", "-c", "print('Hello from a DHI-based image')"]
 ```
 
-#### Step 2: Build and push the image
+#### Step 2: Build the image
 
 Open a terminal and navigate to the directory containing your Dockerfile. Then,
-build and push the image to your Docker Hub repository:
+build the image and load it into your local image store:
 
 ```console
-$ docker build \
-  --push \
-  -t <your-namespace>/my-dhi-app:v1 .
+$ docker build --load -t my-dhi-app:v1 .
 ```
 
-#### Step 3: Enable Docker Scout
+#### Step 3: Evaluate the image against the DHI policies
 
-To enable Docker Scout for your organization and the repository, run the
-following commands in your terminal:
+Sign in and evaluate the local image against the DHI policy bundle:
 
 ```console
 $ docker login
-$ docker scout enroll <your-namespace>
-$ docker scout repo enable --org <your-namespace> <your-namespace>/my-dhi-app
+$ docker scout policy my-dhi-app:v1 \
+  --policy-bundle dhi/policies:latest
 ```
 
-#### Step 4: Configure the DHI policy
+The command prints a compliance result for each policy in the bundle, along with
+the details of any violations.
 
-Once Docker Scout is enabled, you can configure the **Valid Docker Hardened
-Image (DHI) or DHI base image** policy for your organization:
+## Customize the DHI policies
 
-1. Go to the [Docker Scout dashboard](https://scout.docker.com).
-2. Select your organization and navigate to **Policies**.
-3. Configure the **Valid Docker Hardened Image (DHI) or DHI base image** policy
-   to enable it for your repositories.
+You can tune which policies run and their thresholds with a `--policy-config`
+file. The
+[`docker-hardened-images/policies`](https://github.com/docker-hardened-images/policies)
+repository includes an example `config.json` you can start from.
 
-For more information on configuring policies, see
-[Configure policies](../../scout/policy/dashboard.md).
+```console
+$ docker scout policy my-dhi-app:v1 \
+  --policy-bundle dhi/policies:latest \
+  --policy-config ./config.json
+```
 
-#### Step 5: View policy compliance
+The config file matches policies by the **Policy name** listed in
+[Policies in the DHI bundle](#policies-in-the-dhi-bundle) and lets you disable
+individual policies or adjust their settings. For example, the following config
+disables the STIG scan policy and opts out of CISA KEV checks in the
+high-profile vulnerabilities policy:
 
-Once the DHI policy is configured and active, you can view compliance results:
+```json
+{
+  "policies": [
+    {
+      "name": "dhi-stig-scan-score",
+      "enabled": false
+    },
+    {
+      "name": "high-profile-vulnerabilities",
+      "config": {
+        "include_cisa_kev": false
+      }
+    }
+  ]
+}
+```
 
-1. Go to the [Docker Scout dashboard](https://scout.docker.com).
-2. Select your organization and navigate to **Images**.
-3. Find your image, `<your-namespace>/my-dhi-app:v1`, and select the link in the **Compliance** column.
+For the full config file format, see
+[Configure built-in policies](../../scout/policy/local.md#configure-built-in-policies).
 
-This shows the policy compliance results for your image. The **Valid Docker
-Hardened Image (DHI) or DHI base image** policy evaluates whether your image has
-a valid Docker signed verification summary attestation or if its base image has
-such an attestation.
+You can also combine the DHI bundle with the built-in Docker Scout policies,
+additional bundles, or your own custom Rego files. `--policy-bundle`,
+`--policy-file`, and `--policy-dir` are all repeatable:
 
-You can now [evaluate policy compliance in your CI](/scout/policy/ci/).
+```console
+$ docker scout policy my-dhi-app:v1 \
+  --policy-bundle dhi/policies:latest \
+  --policy-file ./custom.rego
+```
+
+For more on authoring custom policies and combining policy sources, see
+[Evaluate policies](../../scout/policy/local.md).
+
+## Enforce policy compliance in CI
+
+Use the [Docker Scout GitHub Action](https://github.com/docker/scout-action) to
+evaluate the DHI policies on every push and fail the workflow when an image
+doesn't meet them. The following workflow builds the image, then evaluates it
+against the DHI policy bundle:
+
+```yaml
+name: DHI policy check
+
+on:
+  push:
+
+env:
+  IMAGE_NAME: my-dhi-app:${{ github.sha }}
+
+jobs:
+  policy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PAT }}
+
+      - name: Build the image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: ${{ env.IMAGE_NAME }}
+
+      - name: Evaluate DHI policies
+        uses: docker/scout-action@v1.23.1
+        with:
+          command: policy
+          image: ${{ env.IMAGE_NAME }}
+          policy-bundle: dhi/policies:latest
+          exit-code: true
+```
+
+The `docker/login-action` step authenticates with Docker Hub so the runner can
+pull the DHI base image and the `dhi/policies` bundle. Store your Docker Hub
+username and a [personal access token](/manuals/security/access-tokens.md) as the
+`DOCKER_USER` and `DOCKER_PAT` repository secrets.
+
+Set `exit-code: true` to fail the step when any policy isn't met. The
+`policy-bundle` input accepts a comma-separated list of bundles, and you can
+combine it with the `policy-file`, `policy-dir`, and `policy-config` inputs, the
+same as the CLI flags.
+
+For more on running policy evaluation in CI, see
+[Evaluate policies](../../scout/policy/local.md#use-in-ci).

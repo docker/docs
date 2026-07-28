@@ -74,9 +74,9 @@ for available options.
 ## Agents view
 
 Claude Code's [agents view](https://code.claude.com/docs/en/agent-view)
-dispatches tasks to subagents that work in parallel, each in its own
-Git worktree. Pair it with [clone mode](../workflows.md#clone-mode) for an
-isolated multi-agent workflow:
+starts background sessions that run tasks in parallel. Pair it with
+[clone mode](../workflows.md#clone-mode) to keep their changes inside the
+sandbox:
 
 ```console
 $ sbx run --clone claude -- agents
@@ -92,10 +92,14 @@ use Claude Code's auto mode or pass the flag explicitly:
 $ sbx run --clone claude -- --dangerously-skip-permissions agents
 ```
 
-The subagents' worktrees live inside the sandbox's private clone — none
-of them touches your host repository. Each subagent commits to its own
-branch, and you review the work from the host by fetching the
-`sandbox-<sandbox-name>` remote:
+Claude Code may use branches or worktrees to keep changes from its background
+sessions separate. This depends on the task, Claude Code configuration, and
+project instructions. The `--clone` flag doesn't control this behavior. Claude
+Code creates any branches and worktrees inside the sandbox, not in your host
+checkout.
+
+To review a branch created by a session, fetch the
+`sandbox-<sandbox-name>` remote from the host:
 
 ```console
 $ git fetch sandbox-<sandbox-name>

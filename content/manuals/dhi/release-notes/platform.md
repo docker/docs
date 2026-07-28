@@ -11,6 +11,16 @@ This page contains information about the new features, improvements, and changes
 in the Docker Hardened Images (DHI) platform. Release notes are aggregated by
 quarter and include only notable product changes.
 
+## Q3 2026
+
+New features and enhancements released in the third quarter of 2026.
+
+- DHI MCP server: The DHI catalog is now accessible via a remote MCP server at
+  `https://dhi.io/mcp`. Connect any MCP-capable AI assistant to search
+  repositories, inspect image metadata, retrieve SBOMs, check CVEs, and manage
+  mirrors using plain language. For more information, see [Use the DHI MCP
+  server](/dhi/tools/mcp/).
+
 ## Q2 2026
 
 New features and enhancements released in the second quarter of 2026.

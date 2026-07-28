@@ -517,7 +517,7 @@ $ docker compose down
 
 ### Prerequisites
 
-Complete [Containerize React.js application](./).
+Complete [Containerize React.js application](#containerize-a-reactjs-application).
 
 ---
 
@@ -688,7 +688,7 @@ You should see the updated text appear instantly, without needing to rebuild the
 
 ### Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize React.js application](./).
+Complete all the previous sections of this guide, starting with [Containerize React.js application](#containerize-a-reactjs-application).
 
 ### Overview
 

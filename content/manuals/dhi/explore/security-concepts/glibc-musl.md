@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /dhi/core-concepts/glibc-musl/
 title: glibc and musl support in Docker Hardened Images
 linktitle: glibc and musl
 description: Compare glibc and musl variants of DHIs to choose the right base image for your application’s compatibility, size, and performance needs.

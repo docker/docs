@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /dhi/core-concepts/cves/
 title: Common Vulnerabilities and Exposures (CVEs)
 linktitle: CVEs
 description: Understand what CVEs are, how Docker Hardened Images reduce exposure, and how to scan images for vulnerabilities using popular tools.

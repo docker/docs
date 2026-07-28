@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /dhi/core-concepts/stig/
 title: STIG
 description: Learn how Docker Hardened Images provide STIG-ready container images with verifiable security scan attestations for government and enterprise compliance requirements.
 keywords: docker stig, stig-ready images, stig guidance, openscap docker, secure container images
@@ -58,7 +60,7 @@ Docker Hardened Images that include STIG scan results are labeled as **STIG** in
 the Docker Hardened Images catalog.
 
 To find DHI repositories with STIG image variants, [explore
-images](../how-to/explore.md#image-variants) and:
+images](../../tools/hub.md#images-page) and:
 
 - Use the **STIG** filter on the catalog page
 - Look for **STIG** labels on individual image listings
@@ -68,13 +70,13 @@ repository, and find images labeled with **STIG** in the **Compliance** column.
 
 ## Use a STIG variant
 
-To use a STIG variant, you must [mirror](../how-to/mirror.md) the repository
+To use a STIG variant, you must [mirror](../../how-to/mirror.md) the repository
 and then pull the STIG image from your mirrored repository.
 
 ## View and verify STIG scan results
 
 Docker provides a signed [STIG scan
-attestation](../core-concepts/attestations.md) for each STIG-ready image.
+attestation](attestations.md) for each STIG-ready image.
 These attestations include:
 
 - A summary of the scan results, including the number of passed, failed, and not

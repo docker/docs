@@ -475,7 +475,7 @@ reference](/reference/cli/docker/compose/).
 
 ### Prerequisites
 
-Complete [Containerize a Python application](./).
+Complete [Containerize a Python application](#containerize-a-python-application).
 
 ### Overview
 
@@ -2073,8 +2073,8 @@ Press `ctrl+c` in the terminal to stop your application.
 
 Complete [Develop your app](#use-containers-for-python-development). This topic requires a local Python
 installation because the tools and Git hooks introduced here run on your
-host. If you don't want to install Python locally, skip this topic. The same
-checks run in CI in the [next topic](./).
+host. If you don't want to install Python locally, skip this topic. You can
+also run the same checks in CI.
 
 ### Overview
 
