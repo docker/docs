@@ -29,7 +29,7 @@ Some payment methods require additional setup before changing it to your default
 - Verify a
   [bank account](#verify-a-bank-account) before choosing it as a payment method.
 - Use an existing Stripe Link account, or enter your card information to set up
-  Link.
+  Stripe Link.
 
 ## Manage payment method
 
@@ -44,12 +44,12 @@ You can add multiple payment methods in the billing portal. When you add a new p
 1. Select your username for a personal account, or select your organization
    name for an organization.
 1. Select **Billing** to go to the billing portal, then **Change** in the **Payment method** tile.
-1. From the **Change payment method** modal, choose to add a card, a US bank account, or a Link payment.
+1. From the **Change payment method** modal, choose to add a card, a US bank account, or a Stripe Link payment.
    - To pay with a card, enter your card information.
    - To pay with a US bank account, verify your **Email** and **Full name**.
      - If your bank is listed, select your bank's name.
      - If your bank is not listed, select **Search for your bank**.
-   - To pay through Link, select an existing payment method, then select
+   - To pay through Stripe Link, select an existing payment method, then select
      **Use this card**.
 1. For first-time setup, enter your billing information.
 1. Finish adding the payment method by selecting **Save as default**.

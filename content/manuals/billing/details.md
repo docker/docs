@@ -19,7 +19,7 @@ To update your billing information from **Settings** in Docker Home:
 1. Sign in to [Docker Home](https://app.docker.com/) and select your personal or organization
    account.
 1. Select **Billing**, then go to **Settings**.
-1. Select **Edit**, then choose **Update** next to your current billing contact and billing address information.
+1. Select **Edit** to make your changes.
 1. Verify your information, then select **Save as default**.
 
 For more information on changing your default payment method, see [Change default payment method](/manuals/billing/payment-method.md#change-default-payment-method).
