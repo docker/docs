@@ -24,6 +24,10 @@ grid_core:
     description: Learn how 3DS works and how to troubleshoot verification issues.
     link: /billing/3d-secure/
     icon: wallet
+  - title: Taxes
+    description: Learn how to submit a US tax exemption certificate or add a VAT number.
+    link: /billing/tax-certificate/
+    icon: document-text
 aliases:
   - /billing/docker-hub-pricing/
 ---
