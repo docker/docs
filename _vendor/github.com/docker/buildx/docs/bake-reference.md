@@ -43,7 +43,7 @@ The following attributes are overridden by the last occurrence:
 - `target.cache-to`
 - `target.dockerfile-inline`
 - `target.dockerfile`
-- `target.outputs`
+- `target.output`
 - `target.platforms`
 - `target.pull`
 - `target.tags`
@@ -416,6 +416,11 @@ target "app" {
 ```
 
 This resolves to the current working directory (`"."`) by default.
+Set `BUILDX_BAKE_FILE_RELATIVE_PATHS=1` to resolve local directory paths in
+`target.context` and `target.contexts` relative to the Bake file that defines
+each path. Compose files use the first Compose file directory as the base, which
+matches Compose project directory semantics. Use `cwd://` for paths that should
+remain relative to the current working directory when this opt-in is enabled.
 
 ```console
 $ docker buildx bake --print -f - <<< 'target "default" {}'
@@ -1001,6 +1006,14 @@ RUN --mount=type=secret,id=KUBECONFIG,env=KUBECONFIG \
     helm upgrade --install
 ```
 
+You can override the source for an existing secret without changing the target's
+secret IDs. The secret must already be declared by the target.
+
+```console
+$ docker buildx bake --set default.secret.aws=env=AWS_CREDENTIALS
+$ docker buildx bake --set default.secret.KUBECONFIG=src=/path/to/kubeconfig
+```
+
 ### `target.shm-size`
 
 Sets the size of the shared memory allocated for build containers when using
@@ -1043,6 +1056,12 @@ RUN --mount=type=ssh \
     && ssh-keyscan github.com >> ~/.ssh/known_hosts \
     && git clone git@github.com:user/my-private-repo.git
 ```
+
+> [!NOTE]
+> When overriding `ssh` from the command line with `--set`, use the inline
+> `id=path` string form rather than the object form shown above, for example
+> `docker buildx bake --set "*.ssh=default=$HOME/.ssh/id_ed25519"`. Separate
+> multiple paths with commas. See [`bake --set`][set] for details.
 
 ### `target.tags`
 
@@ -1506,6 +1525,7 @@ target "webapp-dev" {
 [platform]: https://docs.docker.com/reference/cli/docker/buildx/build/#platform
 [run_mount_secret]: https://docs.docker.com/reference/dockerfile/#run---mounttypesecret
 [secret]: https://docs.docker.com/reference/cli/docker/buildx/build/#secret
+[set]: https://docs.docker.com/reference/cli/docker/buildx/bake/#set
 [ssh]: https://docs.docker.com/reference/cli/docker/buildx/build/#ssh
 [tag]: https://docs.docker.com/reference/cli/docker/image/build/#tag
 [target]: https://docs.docker.com/reference/cli/docker/image/build/#target
