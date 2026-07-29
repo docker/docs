@@ -265,7 +265,7 @@ The `docker dhi` CLI can be configured with a YAML file located at:
 - `$HOME/.config/dhictl/config.yaml` on _Linux_ and _macOS_
 - `%USERPROFILE%\.config\dhictl\config.yaml` on _Windows_
 
-If `$XDG_CONFIG_HOME` is set, the configuration file is located at `$XDG_CONFIG_HOME/dhictl/config.yaml` (see the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir/spec/latest/)).
+If `$XDG_CONFIG_HOME` is set, the configuration file is located at `$XDG_CONFIG_HOME/dhictl/config.yaml`.
 
 Available configuration options:
 
