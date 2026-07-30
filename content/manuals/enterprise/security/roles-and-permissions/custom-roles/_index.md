@@ -1,8 +1,8 @@
 ---
-title: Custom roles
+title: Custom roles overview
 linkTitle: Custom roles
-description: Create tailored permission sets that match your organization's specific needs
-keywords: custom roles, permissions, access control, organization management, docker hub, docker home, security
+description: Learn when to use custom roles and how they differ from Docker's built-in core roles
+keywords: custom roles, permissions, access control, least privilege, docker business, organization management, docker hub, docker home, security
 weight: 20
 grid:
   - title: "Manage custom roles"
@@ -17,33 +17,35 @@ grid:
 
 {{< summary-bar feature_name="General admin" >}}
 
-Custom roles let you create tailored permission sets that match your
-organization's specific needs. Use custom roles when Docker's core roles
-don't fit your access control requirements.
+Custom roles let you build permission sets that match your organization's
+access control needs. Use them when Docker's
+[core roles](/manuals/enterprise/security/roles-and-permissions/core-roles.md)
+don't provide the right combination of permissions.
 
 ## What are custom roles?
 
-Custom roles let you select specific permissions from categories like user
-management, team management, billing, and Hub permissions. You can assign
-custom roles to individual users or teams.
+With custom roles, you select permissions from categories such as user
+management, team management, billing, Hub, and governance. You can assign a
+custom role to individual users or to teams.
 
 Users and teams get either a core role or a custom role, but not both.
 
 ## Prerequisites
 
-To configure custom roles, you need owner permissions in your Docker
-organization.
+To configure custom roles, you need:
+
+- A Docker Business subscription
+- Owner permissions in your Docker organization
 
 ## When to use custom roles
 
 Use custom roles when:
 
-- You need specific permission combinations not available in core roles
-- You want specialized roles like billing administrators, security auditors,
-  or repository managers
+- You need permission combinations not available in core roles
+- You want specialized roles such as billing administrators, security
+  auditors, or repository managers
 - You need department-specific access control
-- You want to implement the principle of least privilege with precise
-  permission grants
+- You want least-privilege access with precise permission grants
 
 ## Next steps
 

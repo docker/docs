@@ -1,37 +1,38 @@
 ---
 title: Core roles and permissions
 linkTitle: Core roles
-description: Compare Member, Editor, and Owner permissions for content, registry, and organization management.
-keywords: core roles, member, editor, owner, permissions, organization, company, docker hub, docker home, security, oidc connections, teams
+description: Compare Member, Editor, and Owner permissions for content, registry, organization, Scout, and Build Cloud
+keywords: core roles, member, editor, owner, permissions, organization, company, docker hub, docker scout, docker build cloud, oidc, teams, security
 weight: 10
 ---
 
 {{< summary-bar feature_name="General admin" >}}
 
-Core roles are Docker's built-in roles with predefined permission sets.
-This page summarizes permissions for each core role.
+Core roles are Docker's built-in roles with predefined permission sets. This
+page compares what Member, Editor, and Owner can do across content, registry,
+organization management, Docker Scout, and Docker Build Cloud.
 
-## What are core roles?
+## Core role summary
 
 Docker organizations have three core roles:
 
-- **Member**: Non-administrative role with basic access. Members can
-  view other organization members and pull images from repositories
-  they have access to.
-- **Editor**: Partial administrative access. Editors can create, edit,
-  and delete repositories. They can also manage team permissions for
+- **Member**: Non-administrative role with basic access. Members can view
+  other organization members and pull images from repositories they have
+  access to.
+- **Editor**: Partial administrative access. Editors can create, edit, and
+  delete repositories. They can also manage team permissions for
   repositories.
-- **Owner**: Full administrative access. Owners can manage all
-  organization settings, including repositories, teams, members,
-  billing, and security features.
+- **Owner**: Full administrative access. Owners can manage all organization
+  settings, including repositories, teams, members, billing, and security
+  features.
 
 A company owner has the same organization management permissions as an
-organization owner, but there are some content and registry permissions
-that company owners don't have (for example, repository pull/push). For
-more information, see
+organization owner, but some content and registry permissions don't apply
+to company owners (for example, repository pull and push). For more
+information, see
 [Company overview](/manuals/admin/company/_index.md).
 
-### Content and registry permissions
+## Content and registry permissions
 
 These permissions apply organization-wide.
 
@@ -56,18 +57,17 @@ These permissions apply organization-wide.
 | Assign team permissions to repositories               | ❌     | ✅     | ✅    |
 | Manage OIDC connections                               | ❌     | ✅     | ✅    |
 
-You can grant repository permissions to members beyond their
-organization role:
+You can grant repository permissions beyond a member's organization role:
 
 - Role permissions: Applied organization-wide (member or editor)
 - Team permissions: Additional permissions for specific repositories
 
 To extend access to private repositories, configure team permissions.
-Custom roles can grant organization-wide permissions to manage
-repositories (create, edit, delete) but do not grant pull access to
-private repositories — use team permissions for that.
+Custom roles can grant organization-wide permissions to manage repositories
+(create, edit, delete) but don't grant pull access to private repositories.
+Use team permissions for that.
 
-### Organization management permissions
+## Organization management permissions
 
 | Permission                                                        | Member | Editor | Owner |
 | :---------------------------------------------------------------- | :----- | :----- | :---- |
@@ -94,13 +94,13 @@ private repositories — use team permissions for that.
 
 > [!TIP]
 >
-> If you want more granular access control, you can
+> For more granular access control,
 > [upgrade to a Docker Business plan](https://www.docker.com/pricing?ref=Docs&refAction=DocsEnterpriseCoreRoles)
-> for custom roles and advanced permissions.
+> to use [custom roles](/manuals/enterprise/security/roles-and-permissions/custom-roles/_index.md).
 
 _\* If not part of a company_
 
-### Docker Scout permissions
+## Docker Scout permissions
 
 | Permission                                            | Member | Editor | Owner |
 | :---------------------------------------------------- | :----- | :----- | :---- |
@@ -110,7 +110,7 @@ _\* If not part of a company_
 | Create environments                                   | ❌     | ❌     | ✅    |
 | Manage registry integrations                          | ❌     | ❌     | ✅    |
 
-### Docker Build Cloud permissions
+## Docker Build Cloud permissions
 
 | Permission                 | Member | Editor | Owner |
 | -------------------------- | :----- | :----- | :---- |
@@ -119,3 +119,12 @@ _\* If not part of a company_
 | Configure builder settings | ✅     | ✅     | ✅    |
 | Buy minutes                | ❌     | ❌     | ✅    |
 | Manage subscription        | ❌     | ❌     | ✅    |
+
+## Next steps
+
+- [Custom roles](/manuals/enterprise/security/roles-and-permissions/custom-roles/_index.md):
+  Create tailored permission sets on a Docker Business plan
+- [Manage organization members](/manuals/admin/organization/manage/members.md):
+  Invite users and assign roles
+- [Company overview](/manuals/admin/company/_index.md): Understand company
+  owner permissions versus organization owner permissions
