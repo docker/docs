@@ -30,7 +30,7 @@ To use AI Governance Audit Logs, your organization needs:
 - A Docker [AI Governance plan](/manuals/subscription/plans/ai-governance.md)
 - An enforced organization governance policy
 - A Docker organization account
-- An organization owner to configure delivery and view hosted events
+- An organization owner, or a user with a [custom role](/manuals/enterprise/security/roles-and-permissions/custom-roles.md) that includes AI Governance audit permissions, to configure delivery and view hosted events
 
 > [!NOTE]
 > Other Docker subscriptions are not sufficient on their own to use AI Governance
@@ -56,7 +56,7 @@ Docker supports two delivery modes for audit records:
   app.docker.com. Cloud delivery is on by default when AI Governance is enabled.
   Organization owners can disable it in [audit delivery settings](configure.md).
 
-Organization owners can use local disk, Docker Cloud, or both.
+Organization owners and users with a [custom role](/manuals/enterprise/security/roles-and-permissions/custom-roles.md) that includes AI Governance audit permissions can configure local disk, Docker Cloud, or both.
 
 Organizations that used local audit logging before hosted audit logs were
 available start with cloud delivery off until an owner opts in from
