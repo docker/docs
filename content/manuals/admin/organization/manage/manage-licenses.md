@@ -65,7 +65,7 @@ for AI Governance licenses. Only organizations that purchase AI Governance can
 set up auto-assignment for Docker Core as well.
 
 - When you purchase AI Governance, signing in to
-  [Docker Sandboxes](/manuals/ai/sandboxes/) with the `sbx login` command
+  [Docker Sandboxes](/manuals/ai/sandboxes/_index.md) with the `sbx login` command
   automatically provisions AI Governance licenses on a first-come,
   first-served basis.
 - Similarly, signing in to Docker Desktop automatically provisions Docker Core
