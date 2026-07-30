@@ -64,7 +64,7 @@ organization owners.
 To add or remove company owners, see
 [Manage your company](/manuals/admin/company/manage.md#company-owners).
 
-## What's next
+## Next steps
 
 Learn how to create and manage a company in the following sections.
 

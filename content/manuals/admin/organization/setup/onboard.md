@@ -168,7 +168,7 @@ security posture:
 - [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md): Define which registries your developers can access.
 - [Settings management](/manuals/enterprise/security/hardened-desktop/settings-management.md): Set and control Docker Desktop settings for your users.
 
-## What's next
+## Next steps
 
 - [Manage Docker products](../manage/manage-products.md) to configure access and view usage.
 - Configure [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/_index.md) to improve your organization’s security posture for containerized development.

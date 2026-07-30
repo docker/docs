@@ -46,7 +46,7 @@ plans. The following table summarizes the difference.
 For details, see [Seats](/manuals/admin/organization/manage/manage-seats.md)
 and [License assignment](/manuals/admin/organization/manage/manage-licenses.md).
 
-## What's next
+## Next steps
 
 Explore the following sections to manage your organization.
 

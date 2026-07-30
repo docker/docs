@@ -59,6 +59,6 @@ Docker also ties a verified email to the account.
   [single sign-on (SSO)](/manuals/enterprise/security/single-sign-on/_index.md),
   Google, or GitHub.
 
-## What's next
+## Next steps
 
 {{< grid >}}

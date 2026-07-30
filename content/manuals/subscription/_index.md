@@ -68,6 +68,6 @@ To subscribe to a new plan, you can self-serve through **Billing** in [Docker Ho
 
 To learn more about adding a new plan or upgrading an active plan, see [Manage plans](/manuals/subscription/manage.md).
 
-## What's next
+## Next steps
 
 {{< grid items="grid_subscriptions" >}}

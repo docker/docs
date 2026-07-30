@@ -127,6 +127,6 @@ whose `docker/oidc-action` step still references the deleted
 replacement connection's ID in every affected workflow before it runs
 again.
 
-## What's next
+## Next steps
 
 - [OIDC connections rulesets and subject claims](/manuals/enterprise/security/oidc-connections/rulesets-claims.md)
