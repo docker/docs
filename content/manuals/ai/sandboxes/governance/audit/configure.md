@@ -40,8 +40,11 @@ To configure audit delivery:
      CSV export, and SIEM forwarding.
 6. Save your changes.
 
-Cloud delivery is off by default. To enable it, turn on **Docker Cloud**.
-To keep records local to your hosts, keep only **Local disk** on.
+Cloud delivery is on by default when AI Governance is enabled. To keep records
+local to your hosts, turn off **Docker Cloud** and keep **Local disk** on.
+
+Organizations that used local audit logging before hosted audit logs were
+available start with cloud delivery off until an owner opts in.
 
 ## Configure retention
 

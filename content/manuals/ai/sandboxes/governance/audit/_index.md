@@ -53,10 +53,14 @@ Docker supports two delivery modes for audit records:
   collection, or collection through your own log shipper.
 - **Docker Cloud**: Docker stores audit records in Docker Cloud. Cloud
   delivery powers the hosted audit log view, CSV export, and SIEM streaming from
-  app.docker.com. Cloud delivery is off by default. Organization owners must
-  opt in to enable it.
+  app.docker.com. Cloud delivery is on by default when AI Governance is enabled.
+  Organization owners can disable it in [audit delivery settings](configure.md).
 
 Organization owners can use local disk, Docker Cloud, or both.
+
+Organizations that used local audit logging before hosted audit logs were
+available start with cloud delivery off until an owner opts in from
+[audit delivery settings](configure.md).
 
 ## Data handling
 
