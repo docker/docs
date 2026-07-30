@@ -19,7 +19,7 @@ together:
 
 Your organization needs:
 
-- A Docker AI Governance subscription
+- A Docker [AI Governance plan](/manuals/subscription/plans/ai-governance.md)
 - An enforced organization governance policy
 - Organization owner access
 

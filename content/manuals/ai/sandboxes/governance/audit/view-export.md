@@ -15,9 +15,9 @@ policy decisions, export events to CSV, or stream events to your SIEM.
 To view audit events:
 
 1. Sign in to [Docker Home](https://app.docker.com/).
-2. Open your organization.
-3. Go to **AI Platform** > **Audit logs**.
-4. Open **Audit Events**.
+1. Open your organization.
+1. Go to **AI Platform** > **Audit logs**.
+1. Open **Audit Events**.
 
 The **Audit Events** view includes summary tiles for total events, allowed
 events, denied events, and consent-required events. The event table includes:
@@ -43,9 +43,9 @@ The event table uses cursor pagination for large result sets.
 Use CSV export when you need an offline copy of filtered audit events:
 
 1. Open **Audit Events**.
-2. Apply the filters and search terms for the events you want to export.
-3. Select **Export**.
-4. Download the generated CSV file from the link Docker provides.
+1. Apply the filters and search terms for the events you want to export.
+1. Select **Export**.
+1. Download the generated CSV file from the link Docker provides.
 
 CSV exports include up to 1 000 000 rows. Download links expire after 24 hours.
 

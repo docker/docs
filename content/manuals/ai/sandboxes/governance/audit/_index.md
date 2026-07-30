@@ -8,7 +8,7 @@ keywords: docker sandboxes, audit log, audit logging, AI Governance, policy deci
 
 AI Governance Audit Logs record Docker AI Governance activity for your
 organization. Each record captures the principal, action, target, decision, and
-time for a governance event. Records contain metadata only — they don't contain
+time for a governance event. Records contain metadata only. They don't contain
 prompt content, agent output, or parameter values.
 
 Audit logs are exposed when AI Governance is enabled for your organization.
@@ -27,16 +27,16 @@ audit logs.
 
 To use AI Governance Audit Logs, your organization needs:
 
-- A Docker AI Governance subscription
+- A Docker [AI Governance plan](/manuals/subscription/plans/ai-governance.md)
 - An enforced organization governance policy
 - A Docker organization account
 - An organization owner to configure delivery and view hosted events
 
 > [!NOTE]
-> A Docker Sandboxes subscription alone is not sufficient. Users who have
-> Docker Sandboxes but do not have an AI Governance license and an enforced
-> organization policy will not generate audit data and will not appear in audit
-> events or SIEM forwarding output. Personal accounts are not supported.
+> Other Docker subscriptions are not sufficient on their own to use AI Governance
+> Audit Logs. Users without an AI Governance license and an enforced organization
+> policy will not generate audit data and will not appear in audit events or SIEM
+> forwarding output. Personal accounts are not supported.
 
 ## Coverage
 
