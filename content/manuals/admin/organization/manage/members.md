@@ -213,8 +213,8 @@ remove members from your IdP instead.
 
 ## Export members CSV file
 
-Owners of Docker Team or Business organizations can export a CSV file of all members. Docker generates the file
-asynchronously and emails it to the owner when it's ready.
+Organization owners can export a CSV file of all members. Docker generates
+the file asynchronously and emails it to the owner when it's ready.
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.
