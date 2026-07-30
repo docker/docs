@@ -22,7 +22,7 @@ By default, only organization
 [owners](/manuals/enterprise/security/roles-and-permissions/core-roles.md) can
 view and manage AI Governance policies. To let someone other than an owner
 manage policies, create a
-[custom role](/manuals/enterprise/security/roles-and-permissions/custom-roles.md)
+[custom role](/manuals/enterprise/security/roles-and-permissions/custom-roles/_index.md)
 with the **Governance** permissions and assign it to a user or team.
 
 > [!NOTE]

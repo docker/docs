@@ -3,8 +3,7 @@ title: Core roles and permissions
 linkTitle: Core roles
 description: Compare Member, Editor, and Owner permissions for content, registry, and organization management.
 keywords: core roles, member, editor, owner, permissions, organization, company, docker hub, docker home, security, oidc connections, teams
-aliases:
-  - /enterprise/security/roles-and-permissions/
+weight: 10
 ---
 
 {{< summary-bar feature_name="General admin" >}}

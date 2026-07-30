@@ -27,7 +27,7 @@ Roles control what users can do in your Docker organization. When you invite use
 Docker provides two types of roles to meet different organizational needs:
 
 - [Core roles](/manuals/enterprise/security/roles-and-permissions/core-roles.md) with predefined permissions
-- [Custom roles](/manuals/enterprise/security/roles-and-permissions/custom-roles.md) that you can tailor to your specific requirements
+- [Custom roles](/manuals/enterprise/security/roles-and-permissions/custom-roles/_index.md) that you can tailor to your specific requirements
 
 ## Docker roles
 
