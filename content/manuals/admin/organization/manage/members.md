@@ -19,6 +19,11 @@ Docker account, they must create one and verify their email address before
 they can accept an invitation to join the organization. When inviting members,
 their pending invitation occupies a seat.
 
+You can also assign an invitee a product license.
+Unlike a seat, a license isn't deducted from your organization's available
+licenses until the invitee accepts. See
+[Assign licenses on invite](/manuals/admin/organization/manage/manage-licenses.md#assign-licenses-on-invite).
+
 ### Invite members via Docker ID or email address
 
 Use the following steps to invite members to your organization via Docker ID

@@ -24,7 +24,32 @@ To manage licenses for your organization:
 1. Optional. To bulk assign or revoke licenses, choose the members you want to bulk manage, then select the **Bulk actions** menu.
 1. Optional. To manage automatic license assignment, turn off or turn on with the **Automatically assign licenses** toggle.
 
-You must assign licenses manually, or configure automatic license assignment to consume a license. Inviting a new member to your organization consumes a seat or license if you select a product in **Licenses (optional)** during the [invite flow](/manuals/admin/organization/manage/members.md), but won't auto-assign product licenses by default. Conversely, purchasing a set of licenses won't trigger automatic assignment to existing members.
+To consume a license, assign it manually or configure automatic license assignment. You can also assign a license to someone as you invite them to your organization. See [Assign licenses on invite](#assign-licenses-on-invite). Purchasing a set of licenses won't trigger automatic assignment to existing members.
+
+## Assign licenses on invite
+
+When you invite someone to your organization, you can assign them a product license before they accept the invitation. This is an alternative to assigning a license manually after they join, or letting automatic license assignment give them a license the first time they use a supported product.
+
+To assign a license when you invite a member:
+
+1. Sign in to [Docker Home](https://app.docker.com), then choose your organization.
+1. Select **Members** from the left navigation, then select **Invite**.
+1. Select **Emails or usernames**, then enter the email addresses or Docker IDs of the people you want to invite.
+1. Assign a role. See [Roles and permissions](/manuals/enterprise/security/roles-and-permissions/_index.md) for details about the access permissions for each role.
+1. Optional. Under **Licenses (optional)**, select a license that's available to your organization.
+   <!-- TODO: confirm UI -->
+1. Follow the on-screen instructions to send the invitation.
+
+Selecting a license on an invitation doesn't deduct a license from your organization's available licenses. Docker deducts the license when the invitee accepts the invitation:
+
+- If a license is available when they accept, Docker assigns it to them and the number of available licenses decreases by one.
+- If no licenses remain when they accept, they still join your organization, but without a license. Docker doesn't notify you or the invitee in this case.
+
+> [!IMPORTANT]
+>
+> Confirm how many licenses your organization has available before you send invitations in bulk. Docker doesn't notify you when your licenses run out, so invitees can join your organization without the license you assigned to them.
+
+For more about sending, resending, and removing invitations, including CSV file limits, see [Manage organization members](/manuals/admin/organization/manage/members.md).
 
 ## Automatic license assignment
 
