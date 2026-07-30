@@ -94,6 +94,6 @@ responsibility of your log shipper or your own housekeeping.
 
 Point your log shipper at the audit directory and configure it to collect
 `.jsonl` files only. Tools such as the Splunk Universal Forwarder,
-Filebeat, and Crowdstrike Falcon LogScale read the directory and forward each
+Filebeat, and CrowdStrike Falcon LogScale read the directory and forward each
 line as an event. Because in-progress records live in `.tmp` files until they
 are finalized, collectors never see partial records.

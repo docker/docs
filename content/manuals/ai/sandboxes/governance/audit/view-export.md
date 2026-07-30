@@ -52,7 +52,7 @@ CSV exports include up to 1 000 000 rows. Download links expire after 24 hours.
 ## SIEM forwarding
 
 Docker can forward audit events to your security information and event
-management (SIEM) system. This allows you to centralize Docker governance data
+management (SIEM) system, letting you centralize Docker governance data
 alongside other security signals in tools such as Datadog or Splunk.
 
 To set up forwarding, you provide an HTTPS endpoint that will receive the audit
