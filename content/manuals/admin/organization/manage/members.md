@@ -22,7 +22,7 @@ their pending invitation occupies a seat.
 You can also assign an invitee a product license.
 Unlike a seat, a license isn't deducted from your organization's available
 licenses until the invitee accepts. See
-[Assign licenses on invite](/manuals/admin/organization/manage/manage-licenses.md#assign-licenses-on-invite).
+[Licenses and invites](/manuals/admin/organization/manage/manage-licenses.md#licenses-and-invites).
 
 ### Invite members via Docker ID or email address
 

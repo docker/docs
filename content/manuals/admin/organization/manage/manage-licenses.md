@@ -1,73 +1,116 @@
 ---
 title: Manage license assignment
 linkTitle: License assignment
-description: Manage product licenses for your organization, including assignment, revocation, and automatic assignment.
-keywords: licenses, organization, members, Docker Core, Docker Offload, AI governance, license assignment, docker home
+description: Manage product licenses for your organization, including invite-time assignment, revocation, and automatic assignment.
+keywords: licenses, organization, members, invite, invitation, Docker Core, Docker Offload, AI Governance, license assignment, docker home
 weight: 30
 ---
 
-Licenses let you selectively choose which of your organization members have access to supported Docker products. Organization owners can oversee who on their team has active licenses, or configure licenses to assign automatically when members access supported Docker products. Like Docker Core seats, licenses can be configured on a per member basis.
+Licenses let you selectively choose which of your organization members have
+access to supported Docker products. Organization owners can manage active
+licenses for their members, or configure licenses to assign automatically when
+members access supported Docker products.
 
 > [!TIP]
-> To learn more about product licenses, Docker Core seats, and other Docker add-ons see [Docker plans](/manuals/subscription/plans/_index.md),
+> To learn more about product licenses, Docker Core seats, and other Docker
+> add-ons, see [Docker plans](/manuals/subscription/plans/_index.md),
 > or <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_admin_licenses" class="link" rel="noopener">contact sales</a> to purchase licenses.
 
-## Manage licenses
+## Licenses and invites
 
-The **Members** page lets you track the number of available licenses for your organization and who currently holds a license. You can also assign or revoke licenses from this page.
+When you invite someone to your organization, you can assign them a product
+license before they accept the invitation. Docker deducts the license when the
+invitee accepts the invitation:
 
-To manage licenses for your organization:
+- If a license is available when they accept, Docker assigns it to them and the
+  number of available licenses decreases by one.
+- If no licenses remain when they accept, they still join your organization,
+  but without a license. Docker doesn't notify you or the invitee in this case.
 
-1. Sign in to [Docker Home](https://app.docker.com), then choose your organization.
-1. Select **Members** from the left navigation.
-1. Select the action menu at the end of the row to assign or revoke an active license.
-1. Optional. To bulk assign or revoke licenses, choose the members you want to bulk manage, then select the **Bulk actions** menu.
-1. Optional. To manage automatic license assignment, turn off or turn on with the **Automatically assign licenses** toggle.
+Confirm your available licenses before sending invitations in bulk. If licenses
+run out, invitees can still join your organization but won't have an active
+license.
 
-To consume a license, assign it manually or configure automatic license assignment. You can also assign a license to someone as you invite them to your organization. See [Assign licenses on invite](#assign-licenses-on-invite). Purchasing a set of licenses won't trigger automatic assignment to existing members.
+### Invite and assign a license
 
-## Assign licenses on invite
+Assigning a license on invite is an alternative to assigning one manually after
+they join, or relying on automatic license assignment the first time they use a
+supported product. To assign a license when you invite a member:
 
-When you invite someone to your organization, you can assign them a product license before they accept the invitation. This is an alternative to assigning a license manually after they join, or letting automatic license assignment give them a license the first time they use a supported product.
-
-To assign a license when you invite a member:
-
-1. Sign in to [Docker Home](https://app.docker.com), then choose your organization.
+1. Sign in to [Docker Home](https://app.docker.com), then choose your
+   organization.
 1. Select **Members** from the left navigation, then select **Invite**.
-1. Select **Emails or usernames**, then enter the email addresses or Docker IDs of the people you want to invite.
-1. Assign a role. See [Roles and permissions](/manuals/enterprise/security/roles-and-permissions/_index.md) for details about the access permissions for each role.
-1. Optional. Under **Licenses (optional)**, select a license that's available to your organization.
-   <!-- TODO: confirm UI -->
-1. Follow the on-screen instructions to send the invitation.
+1. Select **Emails or usernames**.
+1. Enter the email addresses or Docker IDs of the people you want to invite,
+   then assign their
+   [role](/manuals/enterprise/security/roles-and-permissions/_index.md).
+1. Under **Licenses (optional)**, select a license that's available to your
+   organization.
+1. Select **Invite** to send the invite.
 
-Selecting a license on an invitation doesn't deduct a license from your organization's available licenses. Docker deducts the license when the invitee accepts the invitation:
+For more about sending, resending, and removing invitations, including CSV
+file limits, see
+[Manage organization members](/manuals/admin/organization/manage/members.md).
 
-- If a license is available when they accept, Docker assigns it to them and the number of available licenses decreases by one.
-- If no licenses remain when they accept, they still join your organization, but without a license. Docker doesn't notify you or the invitee in this case.
+### Accept invites
 
-> [!IMPORTANT]
->
-> Confirm how many licenses your organization has available before you send invitations in bulk. Docker doesn't notify you when your licenses run out, so invitees can join your organization without the license you assigned to them.
-
-For more about sending, resending, and removing invitations, including CSV file limits, see [Manage organization members](/manuals/admin/organization/manage/members.md).
+A user invited with license assignment must check their Docker Home
+notifications to accept the invite and assign the license.
 
 ## Automatic license assignment
 
-Automatic license assignment gives members a product license when they use a supported product for the first time. Automatic license assignment is available for AI Governance licenses. Only organizations that purchase AI Governance can set up auto-assignment for Docker Core as well.
+Automatic license assignment gives members a product license when they use a
+supported product for the first time. Automatic license assignment is available
+for AI Governance licenses. Only organizations that purchase AI Governance can
+set up auto-assignment for Docker Core as well.
 
-- When you purchase AI Governance, signing into [Docker Sandboxes](https://docs.docker.com/ai/sandboxes/) with `login` command in `sbx` CLI (`sbx login`) automatically provisions AI Governance licenses on a first-come, first served basis.
-- Similarly, logins to Docker Desktop will automatically provision Docker Core for AI Governance license-holding organizations that have available Docker Core seats.
+- When you purchase AI Governance, signing in to
+  [Docker Sandboxes](/manuals/ai/sandboxes/) with the `sbx login` command
+  automatically provisions AI Governance licenses on a first-come,
+  first-served basis.
+- Similarly, signing in to Docker Desktop automatically provisions Docker Core
+  for AI Governance license-holding organizations that have available Docker
+  Core seats.
 - Licenses are assigned until exhausted.
-  - Once the available licenses are exhausted, automatic license assignment will stop until you purchase more licenses or revoke assigned licenses.
-  - Members can still use Docker Sandbox or Docker Desktop, but organization policies for those products won't affect their usage.
+  - Once the available licenses are exhausted, automatic license assignment
+    stops until you purchase more licenses or revoke assigned licenses.
+  - Members can still use Docker Sandboxes or Docker Desktop, but organization
+    policies for those products won't affect their usage.
 
-AI Governance licenses include single sign-on (SSO) and provisioning features regardless of your Docker Core subscription. Automatic license assignment requires [setting up SSO](/manuals/enterprise/security/single-sign-on/connect.md), then [provisioning](/manuals/enterprise/security/provisioning/_index.md) with System for Cross-domain Identity Management (SCIM) or Just-in-Time (JIT).
+AI Governance licenses include single sign-on (SSO) and provisioning features
+regardless of your Docker Core subscription. Automatic license assignment
+requires
+[setting up SSO](/manuals/enterprise/security/single-sign-on/connect.md), then
+[provisioning](/manuals/enterprise/security/provisioning/_index.md) with System
+for Cross-domain Identity Management (SCIM) or Just-in-Time (JIT).
+
+## Manage licenses
+
+The **Members** page lets you track the number of available licenses for your
+organization and who holds a license. You can also assign or revoke licenses
+from this page.
+
+To manage licenses for your organization:
+
+1. Sign in to [Docker Home](https://app.docker.com), then choose your
+   organization.
+1. Select **Members** from the left navigation.
+1. Select the action menu at the end of the row to assign or revoke an active
+   license.
+1. Optional. To bulk assign or revoke licenses, choose the members you want to
+   bulk manage, then select the **Bulk actions** menu.
+1. Optional. To manage automatic license assignment, turn off or turn on with
+   the **Automatically assign licenses** toggle.
 
 ## What's next
 
-See these docs to explore Docker Core add-ons, or products that need licenses:
+Explore Docker Core add-ons and products that need licenses:
 
-- [Docker plans](/manuals/subscription/plans/_index.md) to learn about different add-ons
-- [Manage seats](/manuals/admin/organization/manage/manage-seats.md) to add more seats to your Docker Core subscription
-- [AI Governance](/manuals/ai/sandboxes/governance/org.md) to set up organization policies for your organization members
-- [Docker Offload](/manuals/offload/about.md) to let your developers offload building and running containers to the cloud
+- [Docker plans](/manuals/subscription/plans/_index.md) to learn about different
+  add-ons
+- [Manage seats](/manuals/admin/organization/manage/manage-seats.md) to add more
+  seats to your Docker Core subscription
+- [AI Governance](/manuals/ai/sandboxes/governance/org.md) to set up
+  organization policies for your organization members
+- [Docker Offload](/manuals/offload/about.md) to let your developers offload
+  building and running containers to the cloud
