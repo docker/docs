@@ -50,7 +50,7 @@ Setting up an organization happens in broad phases:
    other, so follow them in order.
 1. You can update your organization's general information whenever it changes.
 
-## What's next
+## Next steps
 
 Explore the following sections to set up your organization.
 

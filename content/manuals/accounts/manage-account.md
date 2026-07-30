@@ -123,7 +123,7 @@ organization](/manuals/admin/organization/setup/convert-account.md).
 For information on deactivating your account, see
 [Deactivate a Docker account](/manuals/accounts/deactivate-user-account.md).
 
-## What's next
+## Next steps
 
 - [Docker accounts overview](/manuals/accounts/_index.md)
 - [Create a Docker account](/manuals/accounts/create-account.md)

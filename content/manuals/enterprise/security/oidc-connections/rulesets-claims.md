@@ -89,7 +89,7 @@ determine the level of access granted.
 
 Docker Hub repositories and Docker Build Cloud are supported resources.
 
-## What's next
+## Next steps
 
 - [OIDC connections overview](/manuals/enterprise/security/oidc-connections/_index.md)
 - [Create or manage OIDC connections](/manuals/enterprise/security/oidc-connections/create-manage.md)
