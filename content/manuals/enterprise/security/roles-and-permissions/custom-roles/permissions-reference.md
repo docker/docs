@@ -52,12 +52,3 @@ tables on this page when you
 | :-------------- | :--------------------------------------------------- |
 | View policies   | View existing AI Governance policies and their rules |
 | Manage policies | Full access to AI Governance policy management       |
-
-## Next steps
-
-- [Create and manage custom roles](manage.md): Create roles and assign them
-  to users and teams
-- [Organization access tokens](/manuals/enterprise/security/access-tokens.md):
-  Learn how OATs provide programmatic Hub access
-- [Core roles and permissions](/manuals/enterprise/security/roles-and-permissions/core-roles.md):
-  Compare built-in Member, Editor, and Owner permissions
