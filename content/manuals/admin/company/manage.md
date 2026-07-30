@@ -3,7 +3,7 @@ title: Manage your company
 linkTitle: Manage
 weight: 20
 description: Learn how to manage your company, including its organizations, owners, and members, using Docker Home.
-keywords: company, manage company, multiple organizations, company owners, company members, Docker Home, add organization, resend invites
+keywords: company, manage company, multiple organizations, company owners, company members, Docker Home, add organization, resend invites, export users, CSV
 aliases:
   - /admin/company/manage/organizations/
   - /admin/company/manage/owners/
@@ -103,6 +103,26 @@ To bulk resend invitations:
 1. From the users table, use the multi-select checkboxes next to the invitees
    you want to invite.
 1. Select **Resend invites**, then choose **Resend** to confirm.
+
+## Export users CSV file
+
+Company owners can export a CSV file of users across organizations in the
+company.
+
+1. Sign in to [Docker Home](https://app.docker.com/) and select your company.
+1. Select **Users**.
+1. Select the **Download** icon. The CSV file downloads in your browser.
+
+The CSV file includes these fields:
+
+- Name: The user's name
+- Username: The user's Docker ID
+- Email: The user's email address
+- Account Created: The time and date when the user account was created
+- Member of Organizations: Organizations the user belongs to within the
+  company
+- Invited to Organizations: Organizations the user is invited to within the
+  company
 
 ## Add seats to an organization
 

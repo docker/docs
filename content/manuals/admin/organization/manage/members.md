@@ -220,17 +220,11 @@ the file asynchronously and emails it to the owner when it's ready.
    organization.
 1. Select **Members**.
 1. Select the **Download** icon to start the export.
+1. Open the email from Docker and select the link to download the CSV file.
 
-Organization and company CSV files include these fields:
+The CSV file includes these fields:
 
 - Name: The user's name
 - Username: The user's Docker ID
 - Email: The user's email address
 - Account Created: The time and date when the user account was created
-
-Company CSV files include two additional fields:
-
-- Member of Organizations: Organizations the user belongs to within the
-  company
-- Invited to Organizations: Organizations the user is invited to within the
-  company
