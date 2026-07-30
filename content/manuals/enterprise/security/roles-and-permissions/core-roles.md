@@ -8,23 +8,24 @@ weight: 10
 
 {{< summary-bar feature_name="General admin" >}}
 
-Core roles are Docker's built-in roles with predefined permission sets. This
-page compares what Member, Editor, and Owner can do across content, registry,
-organization management, Docker Scout, and Docker Build Cloud.
+Core roles are Docker's built-in roles with predefined permission sets. This page defines the core roles and compares what each core role can do across Docker products. If you need a
+different combination of permissions, use
+[custom roles](/manuals/enterprise/security/roles-and-permissions/custom-roles/_index.md)
+instead.
 
-## Core role summary
+## Core roles 
 
 Docker organizations have three core roles:
 
-- **Member**: Non-administrative role with basic access. Members can view
-  other organization members and pull images from repositories they have
-  access to.
-- **Editor**: Partial administrative access. Editors can create, edit, and
-  delete repositories. They can also manage team permissions for
-  repositories.
-- **Owner**: Full administrative access. Owners can manage all organization
+- Owner provides full administrative access. Owners can manage all organization
   settings, including repositories, teams, members, billing, and security
   features.
+- Editor extends partial administrative access. Editors can create, edit, and
+  delete repositories. They can also manage team permissions for
+  repositories.
+- Member is a non-administrative role with basic access. Members can view
+  other organization members and pull images from repositories they have
+  access to.
 
 A company owner has the same organization management permissions as an
 organization owner, but some content and registry permissions don't apply
@@ -32,7 +33,9 @@ to company owners (for example, repository pull and push). For more
 information, see
 [Company overview](/manuals/admin/company/_index.md).
 
-## Content and registry permissions
+## Permissions reference
+
+### Content and registry
 
 These permissions apply organization-wide.
 
@@ -67,7 +70,7 @@ Custom roles can grant organization-wide permissions to manage repositories
 (create, edit, delete) but don't grant pull access to private repositories.
 Use team permissions for that.
 
-## Organization management permissions
+### Organization management
 
 | Permission                                                        | Member | Editor | Owner |
 | :---------------------------------------------------------------- | :----- | :----- | :---- |
@@ -100,7 +103,7 @@ Use team permissions for that.
 
 _\* If not part of a company_
 
-## Docker Scout permissions
+### Docker Scout
 
 | Permission                                            | Member | Editor | Owner |
 | :---------------------------------------------------- | :----- | :----- | :---- |
@@ -110,7 +113,7 @@ _\* If not part of a company_
 | Create environments                                   | ❌     | ❌     | ✅    |
 | Manage registry integrations                          | ❌     | ❌     | ✅    |
 
-## Docker Build Cloud permissions
+### Docker Build Cloud
 
 | Permission                 | Member | Editor | Owner |
 | -------------------------- | :----- | :----- | :---- |
