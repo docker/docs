@@ -59,6 +59,3 @@ From the **SIEM forwarding** list, select the menu next to a destination to
 edit or delete it. The edit form lets you update credentials and toggle
 forwarding on or off for that destination. Deleting a destination permanently
 removes the endpoint and its stored credential and cannot be undone.
-
-To collect host-local files with your own log shipper instead, see
-[Local audit logs](local.md).
