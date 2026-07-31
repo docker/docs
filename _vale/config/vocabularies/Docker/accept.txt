@@ -87,6 +87,7 @@ Dockerized
 Dockerizing
 Dependabot
 DuckDuckGo
+Dynatrace
 Entra
 EPERM
 ESXi
