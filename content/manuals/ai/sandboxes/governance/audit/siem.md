@@ -21,7 +21,7 @@ saving.
 | Dynatrace                        | Dynatrace Log Management using the Log Ingest API               |
 | Custom HTTPS endpoint (advanced) | Any SIEM that accepts HTTPS with a custom authentication header |
 
-## What you'll need
+## Before you begin
 
 Gather credentials from your SIEM before configuring forwarding:
 
