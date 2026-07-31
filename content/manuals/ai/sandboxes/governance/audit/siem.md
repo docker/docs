@@ -23,6 +23,11 @@ saving.
 
 ## Before you begin
 
+SIEM forwarding requires Docker Cloud delivery to be enabled for your
+organization. If you haven't already, enable it under **AI Platform** >
+**Audit logs** > **Audit delivery** before configuring a SIEM destination. See
+[Configure audit delivery](configure.md).
+
 Gather credentials from your SIEM before configuring forwarding:
 
 - **Splunk Cloud**: HEC ingest URL and an HEC token. Optionally, a Splunk index
