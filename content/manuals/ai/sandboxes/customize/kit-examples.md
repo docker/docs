@@ -60,6 +60,14 @@ select = ["E", "F", "I"]
 anything that needs to land in the image goes — package managers
 (`apt-get`, `pip`, `npm`), binary downloads, or vendor install scripts.
 
+> [!TIP]
+> Each new sandbox runs all `setup.install` commands. The results aren't
+> cached between sandboxes. Creating a kit avoids building and distributing an
+> image, so kits work well for smaller, composable changes. For substantial
+> build or installation steps, consider a
+> [custom template](templates.md#build-a-custom-template). Sandboxes reuse
+> template images from the local cache.
+
 ```yaml
 setup:
   install:
