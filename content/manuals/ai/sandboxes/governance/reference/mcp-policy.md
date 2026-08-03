@@ -103,6 +103,9 @@ Local gateway registrations use these values:
 
 - `local-stdio`: a host-run stdio server. This includes explicit commands and
   OCI-packaged stdio servers resolved from metadata with `--local`.
+- `container-stdio`: an OCI-packaged server resolved from metadata without
+  `--local`. This value can appear in `register` decisions, but the local
+  gateway can't attach or run this server type.
 - `remote-dcr`: a remote endpoint that doesn't require OAuth or supports OAuth
   Dynamic Client Registration.
 - `remote-no-dcr`: a remote OAuth endpoint that doesn't support Dynamic Client
@@ -117,10 +120,10 @@ manifest URL.
 
 ## Context fields
 
-| Field                  | Notes                                                                                                                                                                      |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `context.request_time` | Bound for tool calls, built-in gateway tool calls, resource reads, and prompt retrieval. Registration requests don't include it.                                           |
-| `context.args`         | Tool-call arguments for `invokeTool` requests to local stdio servers. Present when arguments are available as a supported object. Remote server requests don't include it. |
+| Field                  | Notes                                                                                                                                       |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `context.request_time` | Bound for tool calls, built-in gateway tool calls, resource reads, and prompt retrieval. Registration requests don't include it.            |
+| `context.args`         | Arguments for `invokeTool` and `invokePrimordial` requests evaluated by the gateway. Present when arguments are available as a JSON object. |
 
 A registration `permit` conditioned on `context.request_time` doesn't match,
 so the registration falls to default deny.
