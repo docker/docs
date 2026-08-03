@@ -45,7 +45,7 @@ Gather credentials from your SIEM before configuring forwarding:
 1. Sign in to [Docker Home](https://app.docker.com/).
 1. Open your organization.
 1. Go to **AI Platform** > **Audit logs**.
-1. Open **SIEM forwarding**.
+1. Open **Export & Connectors**.
 1. Select **Add destination**.
 1. Select your destination and complete the form.
 1. Select **Save**.
