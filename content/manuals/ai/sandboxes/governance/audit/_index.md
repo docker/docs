@@ -6,6 +6,8 @@ description: Capture, view, export, and collect structured audit records for Doc
 keywords: docker sandboxes, audit log, audit logging, AI Governance, policy decision, SIEM, compliance, jsonl
 ---
 
+{{< summary-bar feature_name="AI Governance Audit Logs" >}}
+
 AI Governance Audit Logs record Docker AI Governance activity for your
 organization. Each record captures the principal, action, target, decision, and
 time for a governance event. Records contain metadata only. They don't contain
@@ -58,6 +60,8 @@ Docker supports two delivery modes for audit records:
 
 Organization owners and users with a [custom role](/manuals/enterprise/security/roles-and-permissions/custom-roles.md) that includes AI Governance audit permissions can configure local disk, Docker Cloud, or both.
 
+The hosted audit log view, CSV export, and SIEM forwarding all require Docker Cloud delivery to be enabled. Local delivery alone does not power these features.
+
 Organizations that used local audit logging before hosted audit logs were
 available start with cloud delivery off until an owner opts in from
 [audit delivery settings](configure.md).
@@ -75,4 +79,5 @@ Policy](https://www.docker.com/legal/privacy/).
 - [Local audit logs](local.md)
 - [Configure audit delivery](configure.md)
 - [View and export audit events](view-export.md)
+- [SIEM forwarding](siem.md)
 - [Audit record reference](record-reference.md)

@@ -1,3 +1,6 @@
+AI Governance Audit Logs:
+  subscription: [AI Governance]
+  requires: Docker Sandboxes [0.35.0](/manuals/ai/sandboxes/release-notes.md) or later
 Activity logs:
   subscription: [Team, Business]
   for: Administrators
