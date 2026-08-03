@@ -6,6 +6,8 @@ description: Capture, view, export, and collect structured audit records for Doc
 keywords: docker sandboxes, audit log, audit logging, AI Governance, policy decision, SIEM, compliance, jsonl
 ---
 
+{{< summary-bar feature_name="AI Governance Audit Logs" >}}
+
 AI Governance Audit Logs record Docker AI Governance activity for your
 organization. Each record captures the principal, action, target, decision, and
 time for a governance event. Records contain metadata only. They don't contain
