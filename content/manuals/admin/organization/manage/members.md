@@ -98,7 +98,7 @@ API endpoint.
 Users can accept or decline an invitation from the invitation email or the
 **Notifications Center**.
 
-To accept an invitation:
+To accept from the invitation email:
 
 1. Check your email inbox and open the Docker email with an invitation to
    join the Docker organization.
@@ -114,12 +114,17 @@ To accept an invitation:
    navigation menu.
 1. Select **Accept** on your invitation.
 
+To accept from the **Notifications Center**:
+
+1. Sign in to [Docker Hub](https://hub.docker.com/) or
+   [Docker Home](https://app.docker.com/).
+1. Open the **Notifications Center** in the header.
+1. Select **Accept** on the invitation.
+
 After accepting an invitation, you become a member of the organization.
 
 Invitation email links expire after 14 days. If your email link has expired,
-you can sign in to [Docker Hub](https://hub.docker.com/) with the email
-address the link was sent to and accept the invitation from the
-**Notifications Center**.
+you can still accept from the **Notifications Center**.
 
 ## Manage invitations
 

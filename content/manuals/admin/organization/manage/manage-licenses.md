@@ -37,12 +37,12 @@ Licenses aren't reserved for pending invitations, so they must still be
 available when each invitee accepts. Monitor availability on the Members page
 while invitations are pending.
 
-### Invite and assign a license
+### Select licenses when inviting
 
-Assigning a license on invite is an alternative to assigning one manually after
-they join, or, where available, relying on automatic license assignment the
-first time they use a supported product. To assign a license when you invite a
-member:
+Selecting licenses when you invite is an alternative to assigning one manually
+after they join, or, where available, relying on automatic license assignment
+the first time they use a supported product. To select licenses when you invite
+a member:
 
 1. Sign in to [Docker Home](https://app.docker.com), then choose your
    organization.
