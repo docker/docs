@@ -6,15 +6,17 @@ keywords: licenses, organization, members, invite, invitation, Docker Core, Dock
 weight: 30
 ---
 
-Licenses let you selectively choose which of your organization members have
-access to supported Docker products. Organization owners can manage active
-licenses for their members, or configure licenses to assign automatically when
-members access supported Docker products.
+Licenses let you choose which organization members can access supported Docker
+products. Organization owners can manage active licenses for their members, or
+configure licenses to assign automatically when members access supported Docker
+products.
 
 > [!TIP]
 > To learn more about product licenses, Docker Core seats, and other Docker
 > add-ons, see [Docker plans](/manuals/subscription/plans/_index.md),
-> or <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_admin_licenses" class="link" rel="noopener">contact sales</a> to purchase licenses.
+> or
+> <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_admin_licenses" class="link" rel="noopener">contact sales</a>
+> to purchase licenses.
 
 ## Licenses and invites
 
@@ -60,8 +62,8 @@ file limits, see
 ### Accept invites
 
 A user can accept from the link in their invitation email or from their
-Notifications Center. If the selected license is available, Docker assigns it
-automatically upon acceptance.
+**Notifications Center**. If the selected license is available, Docker assigns
+it automatically upon acceptance.
 
 ## Automatic license assignment
 
@@ -71,8 +73,8 @@ for AI Governance licenses. Only organizations that purchase AI Governance can
 set up auto-assignment for Docker Core as well.
 
 - When you purchase AI Governance, signing in to
-  [Docker Sandboxes](/manuals/ai/sandboxes/_index.md) with the `sbx login` command
-  automatically provisions AI Governance licenses on a first-come,
+  [Docker Sandboxes](/manuals/ai/sandboxes/_index.md) with the `sbx login`
+  command automatically provisions AI Governance licenses on a first-come,
   first-served basis.
 - Similarly, signing in to Docker Desktop automatically provisions Docker Core
   for AI Governance license-holding organizations that have available Docker
