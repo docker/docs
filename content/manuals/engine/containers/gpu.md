@@ -88,7 +88,9 @@ This exposes the GPUs at index `0` and `2` — the first and third GPUs listed i
 
 > [!NOTE]
 >
-> NVIDIA GPUs can only be accessed by systems running a single engine.
+> GPU access with the `--gpus` flag is documented here for standalone Docker
+> Engine containers on a single host. This page doesn't cover GPU scheduling
+> across multiple Docker Engine hosts or orchestrators.
 
 ### Set NVIDIA capabilities
 
