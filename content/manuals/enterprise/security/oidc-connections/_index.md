@@ -46,7 +46,7 @@ While OATs govern access to your Docker resources through organization
 membership, OIDC connections authenticate GitHub Actions workflows when
 they request a change to your Docker resources.
 
-## What's next
+## Next steps
 
 - [Create an OIDC connection](/manuals/enterprise/security/oidc-connections/create-manage.md)
 - [OIDC rulesets and subject claims](/manuals/enterprise/security/oidc-connections/rulesets-claims.md)

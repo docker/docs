@@ -203,4 +203,5 @@ $ docker rm tmptest
 
 - Learn about [volumes](volumes.md)
 - Learn about [bind mounts](bind-mounts.md)
+- Learn about [image mounts](image-mounts.md)
 - Learn about [storage drivers](/engine/storage/drivers/)

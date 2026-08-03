@@ -102,7 +102,7 @@ To manage licenses for your organization:
 1. Optional. To manage automatic license assignment, turn off or turn on with
    the **Automatically assign licenses** toggle.
 
-## What's next
+## Next steps
 
 Explore Docker Core add-ons and products that need licenses:
 

@@ -69,7 +69,7 @@ For details about each role and its permissions, see
 [Roles and
 permissions](/manuals/enterprise/security/roles-and-permissions/_index.md).
 
-## What's next
+## Next steps
 
 Learn how to create and manage your organization in the following sections.
 

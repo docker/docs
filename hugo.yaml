@@ -165,14 +165,14 @@ params:
   # Latest version of the Docker Engine API
   latest_engine_api_version: "1.55"
   # Latest version of Docker Engine
-  docker_ce_version: "29.6.1"
+  docker_ce_version: "29.7.1"
   # Previous version of the Docker Engine
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
-  docker_ce_version_prev: "29.6.0"
+  docker_ce_version_prev: "29.7.0"
   # Latest Docker Compose version
-  compose_version: "v5.1.2"
+  compose_version: "v5.3.1"
   # Latest BuildKit version
-  buildkit_version: "0.28.0"
+  buildkit_version: "0.32.0"
   # Latest actions version
   bake_action_version: "v7"
   build_push_action_version: "v7"
@@ -188,7 +188,7 @@ params:
   cache_action_version: "v5"
 
   # Example runtime/library/os versions
-  example_go_version: "1.25"
+  example_go_version: "1.26"
   example_alpine_version: "3.23"
   example_node_version: "24"
 
