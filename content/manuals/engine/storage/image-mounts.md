@@ -30,7 +30,7 @@ Image mounts are appropriate for the following types of use case:
   utilities. You can mount a tool-rich image, such as `busybox`, into the
   running container's namespace and run those tools without changing the
   original image. For a worked example, see
-  [Debug with Docker Hardened Images](/manuals/dhi/troubleshoot.md).
+  [Debug with Docker Hardened Images](/manuals/dhi/how-to/troubleshoot.md).
 
 - Sharing read-only assets, such as datasets, models, or static content, that
   are distributed as an image and consumed by containers running a different
