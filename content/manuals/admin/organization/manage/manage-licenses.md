@@ -18,24 +18,29 @@ members access supported Docker products.
 
 ## Licenses and invites
 
-When you invite someone to your organization, you can assign them a product
-license before they accept the invitation. Docker deducts the license when the
-invitee accepts the invitation:
+When you invite someone, you can select a product license to assign when they
+accept. Docker doesn't reserve or deduct the license at invite time; assignment
+happens on acceptance:
 
 - If a license is available when they accept, Docker assigns it to them and the
   number of available licenses decreases by one.
 - If no licenses remain when they accept, they still join your organization,
-  but without a license. Docker doesn't notify you or the invitee in this case.
+  but without a license.
 
-Confirm your available licenses before sending invitations in bulk. If licenses
-run out, invitees can still join your organization but won't have an active
-license.
+> [!NOTE]
+> Docker doesn't notify you or the invitee when a selected license is
+> unavailable at acceptance.
+
+Licenses aren't reserved for pending invitations, so they must still be
+available when each invitee accepts. Monitor availability on the Members page
+while invitations are pending.
 
 ### Invite and assign a license
 
 Assigning a license on invite is an alternative to assigning one manually after
-they join, or relying on automatic license assignment the first time they use a
-supported product. To assign a license when you invite a member:
+they join, or, where available, relying on automatic license assignment the
+first time they use a supported product. To assign a license when you invite a
+member:
 
 1. Sign in to [Docker Home](https://app.docker.com), then choose your
    organization.
@@ -44,8 +49,8 @@ supported product. To assign a license when you invite a member:
 1. Enter the email addresses or Docker IDs of the people you want to invite,
    then assign their
    [role](/manuals/enterprise/security/roles-and-permissions/_index.md).
-1. Under **Licenses (optional)**, select a license that's available to your
-   organization.
+1. Under **Licenses (optional)**, select one or more licenses that are
+   available to your organization.
 1. Select **Invite** to send the invite.
 
 For more about sending, resending, and removing invitations, including CSV
@@ -54,8 +59,9 @@ file limits, see
 
 ### Accept invites
 
-A user invited with license assignment must check their Docker Home
-notifications to accept the invite and assign the license.
+A user can accept from the link in their invitation email or from their
+Notifications Center. If the selected license is available, Docker assigns it
+automatically upon acceptance.
 
 ## Automatic license assignment
 
