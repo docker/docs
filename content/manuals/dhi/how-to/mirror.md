@@ -48,7 +48,7 @@ ability to view and manage mirrors.
 
 You can mirror image and chart repositories to your organization's namespace on
 Docker Hub. Mirroring makes the repositories available within your organization
-and enables customization for your environment:
+and lets you customize them for your environment:
 
 - Image repositories: Mirroring lets you customize images by adding packages,
   OCI artifacts (such as custom certificates or additional tools), environment
