@@ -12,7 +12,7 @@ aliases:
 
 Docker provides [restart policies](/reference/cli/docker/container/run/#restart)
 to control whether your containers start automatically when they exit, or when
-Docker restarts. Restart policies start linked containers in the correct order.
+Docker restarts.
 Docker recommends that you use restart policies, and avoid using process
 managers to start containers.
 
