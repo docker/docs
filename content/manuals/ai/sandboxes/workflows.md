@@ -448,10 +448,8 @@ The token is never stored in plaintext inside the sandbox. See
 
 When using Docker Hub, authentication is handled automatically; `sbx` reuses
 your existing login session. For other registries, you need to configure
-credentials for `sbx` so you can push or pull private images, including
-[templates](customize/templates.md). The agent can then run `docker build` and
-`docker push`, and `sbx` can resolve private image references, without any
-extra authentication:
+credentials for `sbx` so it can pull private [templates](customize/templates.md)
+and kits when creating a sandbox:
 
 ```console
 $ gh auth token | sbx secret set --registry ghcr.io \
@@ -459,6 +457,11 @@ $ gh auth token | sbx secret set --registry ghcr.io \
 $ echo "$ACR_PASSWORD" | sbx secret set --registry myregistry.azurecr.io \
     --username myuser --password-stdin
 ```
+
+Add `-g` or a sandbox name when the agent needs to run authenticated
+`docker pull` or `docker push` commands from inside the sandbox. The host-side
+proxy handles the registry login without writing the credential into the
+sandbox.
 
 Images and containers built inside the sandbox run on the sandbox's private
 Docker daemon, not your host's. They're deleted when the sandbox is removed.
