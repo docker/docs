@@ -34,9 +34,21 @@ repositories:
 
 ## Mirror a DHI repository to your organization
 
-To mirror repositories, you must be an organization owner or editor, or use a
-personal access token (PAT) or organization access token (OAT). See the CLI and
-Terraform tabs in the following sections for required permission scopes.
+Organization owners, editors, and members with a [custom role](../../enterprise/security/roles-and-permissions/custom-roles.md)
+that includes the DHI mirroring permission can create, view, and manage mirrors.
+When using the CLI or Terraform, you can also mirror using an [organization
+access token (OAT)](../../enterprise/security/access-tokens.md) with the
+appropriate permission scopes, without requiring role-based access.
+
+Docker automatically creates and manages the `dhi-mirroring-admins` team when
+a mirror is initiated, assigning it to each new mirror. Members with the DHI
+mirroring permission are automatically added to this team so they can view and
+manage mirrors after creation. Removing members from this team may affect their
+ability to view and manage mirrors.
+
+You can mirror image and chart repositories to your organization's namespace on
+Docker Hub. Mirroring makes the repositories available within your organization
+and enables customization for your environment:
 
 - Image repositories: Mirroring lets you customize images by adding packages,
   OCI artifacts (such as custom certificates or additional tools), environment
