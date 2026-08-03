@@ -27,8 +27,8 @@ loading, live updates, and organization governance.
 - Sign in with `sbx login`.
 - Use an agent integration that configures MCP at startup: Claude Code, Codex,
   Gemini, Kiro, or OpenCode.
-- For remote servers that require OAuth, use MCP servers that support OAuth
-  Dynamic Client Registration.
+- For remote servers that require OAuth without Dynamic Client Registration,
+  register an OAuth client with the server provider.
 - For `--local --url` registrations that resolve to OCI packages, use a host
   with Docker installed and running. Docker is also required for explicit
   `--command docker ...` registrations.
@@ -136,6 +136,13 @@ $ sbx mcp add local-image-server --command docker \
   --args "run,-i,--rm,your/image"
 ```
 
+To set the working directory for the host process, pass `--dir`. This flag is
+only valid with `--command`:
+
+```console
+$ sbx mcp add local-fs --command node --args server.js --dir /srv/data
+```
+
 Use registry or manifest metadata when you have a published server definition
 and don't need to customize `docker run`. Use `--command` for local
 development, private servers, or custom container flags.
@@ -170,6 +177,59 @@ To register an OAuth-backed server without authorizing it, pass `--skip_auth`:
 ```console
 $ sbx mcp add notion --url https://mcp.notion.com/mcp --skip_auth
 ```
+
+### Use a pre-registered OAuth client
+
+In local gateway mode, you can register a remote OAuth server that doesn't
+support Dynamic Client Registration. If the server publishes OAuth metadata,
+pass the client ID that you registered with the server provider:
+
+```console
+$ sbx mcp add slack --url https://slack.example.com/mcp \
+  --client-id <CLIENT_ID>
+```
+
+If the server doesn't publish OAuth metadata, pass
+`--oauth-authorization-server` with the client ID. The flag accepts a local
+file path or an HTTP or HTTPS URL to an RFC 8414 authorization server metadata
+document. The document must define `authorization_endpoint` and
+`token_endpoint`:
+
+```console
+$ sbx mcp add serverx --url https://mcp.serverx.example/mcp \
+  --oauth-authorization-server ./serverx-authorization-server.json \
+  --client-id <CLIENT_ID>
+```
+
+These flags are only valid with `--url`.
+
+For a confidential OAuth client, store the client secret before registering
+the server. There is no `--client-secret` flag:
+
+```console
+$ sbx secret set mcp:slack.client_secret
+$ sbx mcp add slack --url https://slack.example.com/mcp \
+  --client-id <CLIENT_ID>
+```
+
+The client secret stays in the encrypted host credential store and isn't
+written to the MCP registration. If the server requires a confidential client
+and no secret is stored, registration succeeds but authorization is skipped.
+Store the secret, then run `sbx mcp auth <server>`.
+
+### Set OAuth scopes
+
+Use the repeatable `--scope` flag to record the default scopes requested during
+authorization:
+
+```console
+$ sbx mcp add serverx --url https://mcp.serverx.example/mcp \
+  --scope read --scope write
+```
+
+The `sbx mcp auth` command also accepts `--scope` to override the recorded
+defaults for one authorization. If the authorization server advertises
+supported scopes, every requested scope must be in that set.
 
 For each OAuth-backed remote server exposed to a sandbox, the gateway exposes a
 helper tool named `<server>-authorize`, such as `notion-authorize`. The agent can
@@ -276,9 +336,12 @@ Remove a registered server:
 $ sbx mcp rm notion
 ```
 
-For OAuth-backed servers, `sbx mcp rm` removes the OAuth credential before it
-removes the server registration. To remove only the OAuth credential, use
-`sbx mcp auth rm`.
+For OAuth-backed servers, `sbx mcp rm` removes the OAuth access token before it
+removes the server registration. A client secret for a pre-registered OAuth
+client and its identity binding remain in the host credential store so you can
+reuse them when you re-add the same client. The command prints the
+`sbx secret rm` commands for removing them. To remove only the OAuth access
+token, use `sbx mcp auth rm`.
 
 ## Register a bundle
 
