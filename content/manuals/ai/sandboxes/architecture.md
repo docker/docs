@@ -94,7 +94,7 @@ semantics. This only affects traffic routed through `DOCKER_SANDBOXES_PROXY`
 Set these variables in the environment where the sandbox daemon starts. The
 daemon starts automatically the first time a command needs it, so set the
 variables before you run a `sbx` command. If the daemon is already running,
-restart it for a change to take effect.
+run `sbx daemon restart` for a change to take effect.
 
 One limitation applies:
 
