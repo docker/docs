@@ -1,10 +1,14 @@
 ---
-title: Manage organization members
+title: Invite and manage organization members
 linkTitle: Members
 weight: 10
-description: Invite, manage, and export members for your Docker organization.
-keywords: members, invite members, organization members, Docker Home, export
-  member list, edit roles, manage invitations, CSV invite, teams, remove members
+description: Invite and manage organization members in Docker Home. Assign
+  roles, resend or remove invitations, add members to teams, and export a CSV
+  member list.
+keywords: members, invite members, organization members, Docker Home, Docker
+  Hub, export member list, edit roles, manage invitations, CSV invite, bulk
+  invite, resend invitation, remove member, accept invitation, teams, pending
+  invitations, organization owner
 aliases:
   - /docker-hub/members/
   - /admin/organization/members/
@@ -16,12 +20,12 @@ Learn how to invite and manage members for your organization in Docker Home.
 
 Owners can invite new members using a Docker ID, email address, or a CSV file
 of email addresses. If an invitee doesn't have a Docker account, they must
-create one and verify their email address before they can accept an invitation.
-Pending invitations occupy a seat.
+create one and verify their email address before they can accept. Pending
+invitations occupy a seat.
 
 When you invite members, you assign them a role. See
-[Roles and permissions](/manuals/enterprise/security/roles-and-permissions/_index.md)
-for details about the access permissions for each role.
+[Roles and permissions][roles-permissions] for details about the access
+permissions for each role.
 
 {{< tabs >}}
 {{< tab name="Email or username" >}}
@@ -52,7 +56,7 @@ for details about the access permissions for each role.
    - The file must contain a header row with at least one heading named
      `email`. Additional columns are allowed and are ignored in the import.
    - The file must contain a maximum of 1000 email addresses (rows). To invite
-     more than 1000 users, create multiple CSV files and complete this
+     more than 1000 members, create multiple CSV files and complete this
      procedure for each file.
 
 1. Create a new CSV file or export a CSV file from another application.
@@ -66,20 +70,18 @@ for details about the access permissions for each role.
    file into the **Select a CSV file to upload** box. You can select only one
    CSV file at a time.
 1. After the CSV file uploads, select **Review** to identify invalid email
-   addresses, already invited users, users who are already members, or
-   duplicate email addresses in the same CSV file.
+   addresses, invitees with a pending invitation, members already in the
+   organization, or duplicate email addresses in the same CSV file.
 1. Follow the on-screen instructions to invite members.
 
 {{< /tab >}}
 {{< /tabs >}}
 
 You can also bulk invite members with the Docker Hub API. For more
-information, see the
-[Bulk create invites](https://docs.docker.com/reference/api/hub/latest/#tag/invites/paths/~1v2~1invites~1bulk/post)
-API endpoint.
+information, see the [Bulk create invites][bulk-invites] API endpoint.
 
 Pending invitations appear in the Members table. Invitees receive an email
-with a link to Docker Hub where they can accept or decline the invitation.
+with a link to Docker Hub to accept or decline.
 
 ## Accept an invitation
 
@@ -112,9 +114,7 @@ the number of available seats, you can't invite more members.
 >
 > Need more seats for your organization?
 > [Add seats](/manuals/admin/organization/manage/manage-seats.md) to your
-> subscription, or see
-> [Docker pricing](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminMembers)
-> for plan options.
+> subscription, or see [Docker pricing][docker-pricing] for plan options.
 
 ### Resend an invitation
 
@@ -158,8 +158,7 @@ owners can add a member to one or more teams within an organization.
 1. Select the team name.
 1. Select **Add member**. Search for the member by email address or username.
 
-An invitee must accept the organization invitation before you can add them to
-a team.
+An invitee must accept the invitation before you can add them to a team.
 
 ### Remove members from teams
 
@@ -175,7 +174,7 @@ resources.
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.
 1. Select **Teams**, then select the team.
-1. Select the **X** next to the user's name to remove them from the team.
+1. Select the **X** next to the member's name to remove them from the team.
 1. When prompted, select **Remove** to confirm.
 
 ### Update a member role
@@ -184,7 +183,7 @@ Organization owners can manage
 [roles](/manuals/enterprise/security/roles-and-permissions/_index.md) within
 an organization. If an organization is part of a company, the company owner
 can also manage that organization's roles. If SSO is enabled, you can use
-[SCIM for role mapping](/manuals/enterprise/security/provisioning/scim/_index.md).
+[SCIM for role mapping][scim-role-mapping].
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.
@@ -211,7 +210,7 @@ remove members from your IdP instead.
    **Actions** menu, then **Remove member**.
 1. Select **Remove** to confirm.
 
-## Export members CSV file
+## Export a member list CSV
 
 Organization owners can export a CSV file of all members. Docker generates
 the file asynchronously and emails it to the owner when it's ready.
@@ -223,13 +222,31 @@ the file asynchronously and emails it to the owner when it's ready.
 1. Open the email from Docker and select the link to download the CSV file.
 
    {{< accordion title="CSV fields" >}}
-
-   - Name: The user's name
-   - Username: The user's Docker ID
-   - Email: The user's email address
-   - Type: Whether the entry is a user or an invitee
-   - Role: The user's role in the organization
-   - Teams: Teams the user belongs to
-   - Date Joined: When the user joined the organization
+   - Name: The member's name
+   - Username: The member's Docker ID
+   - Email: The member's email address
+   - Type: Whether the entry is a member or an invitee
+   - Role: The member's role in the organization
+   - Teams: Teams the member belongs to
+   - Date Joined: When the member joined the organization
 
    {{< /accordion >}}
+
+## Next steps
+
+After you invite and manage members, explore these related topics:
+
+- [Manage subscription seats](./manage-seats.md) to add seats for pending
+  invitations
+- [Manage license assignment](./manage-licenses.md) to control product access
+- [Create and manage a team](./manage-a-team.md) to group members and set
+  repository permissions
+- [Roles and permissions][roles-permissions] for role definitions
+- [SCIM provisioning][scim-provisioning] to automate member and role
+  management
+
+[roles-permissions]: /manuals/enterprise/security/roles-and-permissions/_index.md
+[bulk-invites]: /reference/api/hub/latest/#tag/invites/paths/~1v2~1invites~1bulk/post
+[docker-pricing]: https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminMembers
+[scim-role-mapping]: /manuals/enterprise/security/provisioning/scim/_index.md
+[scim-provisioning]: /manuals/enterprise/security/provisioning/scim/_index.md
