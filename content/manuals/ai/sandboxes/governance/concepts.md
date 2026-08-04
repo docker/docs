@@ -165,7 +165,9 @@ request is blocked if any effective policy denies it). A deny rule in an
 org-wide policy therefore applies to everyone and can't be overridden by a
 team-scoped policy, which makes org-wide deny rules useful as guardrails.
 
-Local rules take no part in this evaluation; see [Precedence](#precedence).
+Local allow rules take no part in this evaluation. Local deny rules are still
+evaluated and layer on top of the organization policy. See
+[Precedence](#precedence).
 
 ## Precedence
 
@@ -176,10 +178,12 @@ whether your organization has governance enabled:
   [kit-defined network rules](../customize/kits.md#control-network-access)
   determine what sandboxes can access.
 - Organization governance active: organization rules apply across all developer
-  machines, and local and kit-defined rules are not evaluated. `sbx policy ls`
-  hides these inactive rules by default; see
-  [Monitoring](monitor-and-enforce/monitoring.md#showing-inactive-rules) for how
-  to list them.
+  machines. Local and kit-defined allow rules are not evaluated. They can't
+  be used to loosen org policy restrictions. Local deny rules are still
+  evaluated and layer on top of the organization policy. `sbx policy ls` hides
+  inactive rules by default. See
+  [Monitoring](monitor-and-enforce/monitoring.md#showing-inactive-rules) for how to list them.
+
 
 When organization governance is active, a user's organization policies are
 evaluated together, as described in [Rule evaluation](#rule-evaluation).
