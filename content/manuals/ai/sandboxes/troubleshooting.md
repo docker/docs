@@ -210,6 +210,15 @@ $ DOCKER_SANDBOXES_ROOT_SIZE=40g sbx run claude
 `DOCKER_SANDBOXES_ROOT_SIZE` controls the root filesystem size. `DOCKER_SANDBOXES_DOCKER_SIZE`
 controls the Docker data disk (`/var/lib/docker`) size. The two are independent — set both if needed.
 
+For a [clone-mode sandbox](usage.md#clone-mode), set
+`DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE` before creating the sandbox to
+configure the cloned workspace volume capacity. The variable accepts
+human-readable size strings such as `100g`:
+
+```console
+$ DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE=100g sbx run --clone claude
+```
+
 ## Filesystem operations are slow in large repositories
 
 Filesystem operations such as `git status`, `git log`, or directory scans can
