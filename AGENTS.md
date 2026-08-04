@@ -119,7 +119,7 @@ Every content page under `content/` requires:
 
 - `title:` — page title
 - `description:` — short description for SEO/previews
-- `keywords:` — list of search keywords (omitting this fails rumdl)
+- `keywords:` — list of search keywords
 
 Additional common fields:
 
