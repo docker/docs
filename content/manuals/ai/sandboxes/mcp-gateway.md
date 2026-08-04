@@ -64,7 +64,7 @@ registration remains on the host and can be reused by other sandboxes.
 `sbx mcp add` registers an MCP server by name. The registration records the
 server definition on the host. It doesn't attach the server to a sandbox by
 itself. To expose a registered server to a sandbox, pass it with
-[`--static-mcp`](#expose-servers-at-sandbox-creation) when you create the
+[`--static-mcp`](#use-static-mode) when you create the
 sandbox, or use [`sbx mcp load`](#add-a-server-to-a-running-sandbox) for a
 sandbox that's already running.
 
