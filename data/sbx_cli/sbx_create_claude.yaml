@@ -27,6 +27,10 @@ inherited_options:
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
+    - name: deny-network
+      default_value: '[]'
+      usage: |
+        Add a per-sandbox network deny rule at creation time. Can be specified multiple times. The rule applies only to the new sandbox and can be listed or removed later with `sbx policy ls <NAME>` / `sbx policy rm network --sandbox <NAME> --resource <HOST>`. Safe under centralized governance because a local deny can only narrow, never widen, egress.
     - name: kit
       default_value: '[]'
       experimental: true
@@ -39,6 +43,11 @@ inherited_options:
     - name: name
       usage: |
         Name for the sandbox (default: <agent>-<workdir>, letters, numbers, hyphens, periods, plus signs and minus signs only)
+    - name: publish
+      shorthand: p
+      default_value: '[]'
+      usage: |
+        Publish a sandbox port to the host (can be repeated): [[HOST_IP:]HOST_PORT:]SANDBOX_PORT[/PROTOCOL]
     - name: quiet
       shorthand: q
       default_value: "false"

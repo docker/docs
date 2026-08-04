@@ -7,8 +7,10 @@ description: |-
     where it applies, and a summary of decisions by resource type. With SANDBOX, it
     summarizes active rules that apply to that sandbox.
 
-    Use --wide to show the detailed rule-level table with rule IDs, resources, status,
-    and rule metadata. Use --json for the filtered daemon response.
+    Use --wide to show the detailed rule-level table with separate POLICY,
+    POLICY_ID, RULE, and RULE_ID columns plus resources, status, and rule
+    metadata. RULE_ID is the identifier accepted by "sbx policy rm network --id"
+    (local rules only). Use --json for the filtered daemon response.
 
     When remote governance is active, inactive policy rules are hidden by default.
     Use --include-inactive to show inactive rules for troubleshooting.
