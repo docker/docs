@@ -223,7 +223,7 @@ to look like a real Amp key. Pick a placeholder shape that matches Amp's
 expected format:
 
 ```console
-$ sbx secret set-custom -g \
+$ sbx secret set-custom \
     --host ampcode.com \
     --env AMP_API_KEY \
     --placeholder "sgamp-{rand}" \
@@ -320,7 +320,7 @@ To remove the entry created earlier with `sbx secret set-custom`, pass
 the host to `sbx secret rm`:
 
 ```console
-$ sbx secret rm -g --host ampcode.com
+$ sbx secret rm --host ampcode.com
 ```
 
 The `--host` flag is part of the experimental `set-custom` surface and doesn't appear in `sbx secret rm --help`.

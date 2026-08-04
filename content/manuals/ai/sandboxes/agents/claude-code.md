@@ -35,7 +35,7 @@ Claude Code requires either an Anthropic API key or a Claude subscription.
 [stored secrets](../security/credentials.md#stored-secrets):
 
 ```console
-$ sbx secret set -g anthropic
+$ sbx secret set anthropic
 ```
 
 **Claude subscription**: If no API key is set, use the `/login` command inside
