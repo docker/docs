@@ -26,6 +26,11 @@ host.
 
 ## Connect
 
+> [!WARNING]
+> Connecting Claude Desktop to a sandbox over SSH transmits Anthropic
+> credentials into the Claude Code process within the sandbox, reducing
+> isolation guarantees.
+
 Confirm that you can connect to the sandbox from a terminal:
 
 ```console
@@ -44,6 +49,15 @@ picker might initially open at `/home/agent`.
 
 For more connection options, see the Claude Desktop instructions for
 [SSH sessions](https://code.claude.com/docs/en/desktop#ssh-sessions).
+
+## Troubleshoot a broken SSH connection after token refresh
+
+The SSH connection drops when the Anthropic token expires and needs to be
+refreshed. To work around this, run the sandbox manually from your host:
+
+```console
+$ sbx run --name <sandbox-name>
+```
 
 ## Troubleshoot SSH connection timeouts on Windows
 

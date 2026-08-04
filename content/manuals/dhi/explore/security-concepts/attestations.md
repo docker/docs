@@ -62,10 +62,10 @@ tooling or security platforms.
 
 While every DHI variant includes a set of attestations, the attestations may
 vary based on the image variant. For example, some images may include a STIG
-scan attestation. The following table is a comprehensive list of all
-attestations that may be included with a DHI. To see which attestations are
-available for a specific image variant, including the specific predicate type URIs,
-use Docker Scout:
+scan attestation. The following table lists attestations that may be included with a DHI; the
+actual set varies by image variant. To see which attestations are available
+for a specific image variant, including the specific predicate type URIs, use
+Docker Scout:
 
 ```console
 $ docker scout attest list dhi.io/<image>:<tag>
@@ -89,6 +89,7 @@ For more details, see [Verify image attestations](../../how-to/verify.md#verify-
 | SLSA verification summary  | A summary attestation indicating the image's compliance with SLSA requirements.                                                                                                          |
 | SPDX SBOM                  | An SBOM in [SPDX](https://spdx.dev/) format, widely adopted in open-source ecosystems.                                                                                                   |
 | FIPS compliance            | An attestation that verifies the image uses FIPS 140-validated cryptographic modules.                              |
+| DHI Changelog              | A record of changes made to the image across versions. |
 | DHI Image Sources          | Links to a corresponding source image containing all materials used to build the image, including package source code, Git repositories, and local files, ensuring compliance with open source license requirements. |
 
 ## Package attestations

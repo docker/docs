@@ -24,6 +24,42 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.85.0
+
+{{< release-date date="2026-08-03" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.85.0" build_path="/235549/" >}}
+
+### Updates
+
+- [Docker AI Agent v1.115.0](https://github.com/docker/docker-agent/releases/tag/v1.115.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms 
+
+- Fixed an issue where native crash reports were uploaded to Bugsnag even when analytics was disabled by the user.
+- Fixed an issue where file content previews and diffs were hidden in the Gordon confirmation card when approving write or edit file actions.
+- Fixed an issue where an invalid `install-settings.json` caused a ~7-minute startup delay before showing the error dialog. The error now appears immediately.
+- Fixed an issue where Gordon's plan mode would silently revert to build mode after the first message, causing subsequent turns to run with full tool access despite plan mode appearing active.
+- Fixed an issue where an invalid `config.json` at startup would delay the error dialog by up to 7 minutes instead of appearing within seconds.
+- Fixed a Linux VM kernel panic that could hang Docker Desktop when a container's file watcher (inotify/fanotify) observed host-side changes to files on a bind mount.
+- Fixed Docker Hardened Images CLI ampersands being encoded when outputting JSON to the console.
+- Fixed a bug where extensions-related requests would fail on startup due to the extensions selector incorrectly defaulting to enabled before settings were loaded.
+- Fixed an issue where sub-agent message attribution was lost when reloading a historical multi-agent Gordon session, causing sub-agent messages to appear as if produced by the main agent.
+- Fixed Gordon's **Clean up Docker** suggestion prompt to propose a cleanup plan and wait for user confirmation before removing any resources, preventing unintended deletions.
+- Fixed the Gordon AI plan-mode toggle visibility to accurately reflect backend support, showing only when the connected agent declares plan capability.
+
+#### For Windows
+
+- Fixed a bug where per-user uninstalls of Docker Desktop on Windows failed with an unauthorized access error when attempting to revert the hosts file.
+- Added per-user install mode as the default for fresh Docker Desktop installations from the Microsoft Store on Windows, removing the need for admin privileges.
+- Fixed an issue where Docker Desktop crashed when the `docker-users` group is missing, now showing a recoverable group membership dialog instead.
+
+#### For Linux
+
+- Removing files on a host bind mount inside an Enhanced Container Isolation container no longer fails with "Value too large for data type".
+
 ## 4.84.0
 
 {{< release-date date="2026-07-27" >}}

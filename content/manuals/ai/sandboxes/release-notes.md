@@ -15,6 +15,22 @@ the full release history, including pre-releases and downloads, see the
 
 <!-- BEGIN GENERATED RELEASES -->
 
+## 0.37.1
+
+{{< release-date date="2026-07-29" >}}
+
+[GitHub release](https://github.com/docker/sbx-releases/releases/tag/v0.37.1)
+
+### Highlights
+
+This patch release stops SSH sessions from **forwarding credential environment variables into sandboxes by default**. Variables such as `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, and `GH_TOKEN` are no longer sent from the client to the sandbox unless explicitly allowed via the `ssh.acceptEnv` setting.
+
+### What's New
+
+#### Bug Fixes
+
+- SSH sessions no longer forward credential environment variables (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `GH_TOKEN`, ...) from the client into the sandbox by default; use the `ssh.acceptEnv` setting to opt back in for specific variables
+
 ## 0.37.0
 
 {{< release-date date="2026-07-24" >}}

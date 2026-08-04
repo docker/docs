@@ -13,7 +13,7 @@ aliases:
 Use this page to learn how to control and monitor product access and usage
 for your organization's members. If you're looking for setup and
 configuration instructions, see each product's manual under
-[What's next](#whats-next).
+[Next steps](#next-steps).
 
 ## Control access for your organization
 
@@ -142,7 +142,7 @@ following table to learn where you can monitor organization usage:
 To learn about the included usage across Docker plans, see
 [Docker subscriptions and features](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminManageProducts).
 
-## What's next
+## Next steps
 
 For more detailed information about each product, including how to set up
 and configure them, see the following manuals:

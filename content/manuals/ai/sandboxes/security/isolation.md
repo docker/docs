@@ -148,6 +148,13 @@ never works directly against your host repository. Even with full root
 inside the VM, it cannot modify your `.git` directory, your working tree,
 or any tracked file on your host.
 
+> [!IMPORTANT]
+> Clone mode protects your host repository from modification, **not from
+> inspection**. Your repository is still mounted read-only into the sandbox,
+> including untracked files and files excluded by `.gitignore`. Files such as
+> `.env` remain readable by the agent. Store secrets outside your working
+> directory or use [credential isolation](credentials.md) instead.
+
 ```mermaid
 flowchart LR
   subgraph host["Host repository (untouched)"]
@@ -174,9 +181,7 @@ How the boundary is enforced:
   untracked files and files excluded by `.gitignore`. Nothing the agent
   does inside the VM can write back through that mount, but all files
   under the Git root are readable inside the sandbox. This includes
-  credential files not tracked by Git, such as `.env`. Store
-  secrets outside your working directory or use
-  [credential isolation](credentials.md) instead.
+  credential files not tracked by Git, such as `.env`.
 - The agent works on a private clone that lives inside the sandbox. The
   clone has its own index, its own refs, and its own working tree. Writes
   to the clone never reach your host.

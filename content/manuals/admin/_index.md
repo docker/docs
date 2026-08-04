@@ -81,7 +81,7 @@ or functions.
 A member is any Docker user added to an organization. Organization and company
 owners can assign roles to members to define their level of access.
 
-## What's next
+## Next steps
 
 Learn how to manage companies and organizations in the following sections.
 
