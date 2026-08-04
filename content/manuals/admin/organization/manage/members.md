@@ -222,9 +222,14 @@ the file asynchronously and emails it to the owner when it's ready.
 1. Select the **Download** icon to start the export.
 1. Open the email from Docker and select the link to download the CSV file.
 
-The CSV file includes these fields:
+   {{< accordion title="CSV fields" >}}
 
-- Name: The user's name
-- Username: The user's Docker ID
-- Email: The user's email address
-- Account Created: The time and date when the user account was created
+   - Name: The user's name
+   - Username: The user's Docker ID
+   - Email: The user's email address
+   - Type: Whether the entry is a user or an invitee
+   - Role: The user's role in the organization
+   - Teams: Teams the user belongs to
+   - Date Joined: When the user joined the organization
+
+   {{< /accordion >}}

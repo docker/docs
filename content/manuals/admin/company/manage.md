@@ -113,16 +113,18 @@ company.
 1. Select **Users**.
 1. Select the **Download** icon. The CSV file downloads in your browser.
 
-The CSV file includes these fields:
+   {{< accordion title="CSV fields" >}}
 
-- Name: The user's name
-- Username: The user's Docker ID
-- Email: The user's email address
-- Account Created: The time and date when the user account was created
-- Member of Organizations: Organizations the user belongs to within the
-  company
-- Invited to Organizations: Organizations the user is invited to within the
-  company
+   - Name: The user's name
+   - Username: The user's Docker ID
+   - Email: The user's email address
+   - Member of Organizations: Organizations the user belongs to within the
+     company
+   - Invited to Organizations: Organizations the user is invited to within the
+     company
+   - Account created: The time and date when the user account was created
+
+   {{< /accordion >}}
 
 ## Add seats to an organization
 
