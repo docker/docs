@@ -88,9 +88,11 @@ This exposes the GPUs at index `0` and `2` — the first and third GPUs listed i
 
 > [!NOTE]
 >
-> GPU access with the `--gpus` flag is documented here for standalone Docker
-> Engine containers on a single host. This page doesn't cover GPU scheduling
-> across multiple Docker Engine hosts or orchestrators.
+> The `--gpus` flag provides GPU access to containers created with
+> `docker run`. To make GPUs available to services in a swarm, advertise them
+> as [node generic resources](/reference/cli/dockerd/#node-generic-resources)
+> and request them with
+> [`--generic-resource`](/reference/cli/docker/service/create/#generic-resources).
 
 ### Set NVIDIA capabilities
 
