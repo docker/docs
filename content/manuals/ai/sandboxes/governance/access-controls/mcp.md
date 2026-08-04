@@ -42,9 +42,9 @@ chosen name and resolved server identity together. At use time, tools,
 resources, and prompts are associated with the registered name, so rules for an
 existing server must match every name under which it was registered.
 
-Built-in gateway tools, such as `code-mode` and OAuth authorization helpers,
-are also governed at use time. They are `MCP::Primordial` resources rather than
-tools associated with a registered server. For details, see
+Built-in gateway tools, such as `mcp-add`, `code-mode`, and OAuth authorization
+helpers, are also governed at use time. They are `MCP::Primordial` resources
+rather than tools associated with a registered server. For details, see
 [Built-in gateway tools](../../mcp-gateway.md#built-in-gateway-tools).
 
 Use-time policy doesn't hide or remove existing registrations. Tool and

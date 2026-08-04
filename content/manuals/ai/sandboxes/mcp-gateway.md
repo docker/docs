@@ -247,13 +247,24 @@ $ sbx mcp auth rm notion
 Use `--all` to apply `auth`, `auth status`, or `auth rm` to all registered
 OAuth-backed servers. Use `--format=json` for machine-readable output.
 
-## Expose servers at sandbox creation
+## Choose an MCP mode
 
 Every sandbox starts an MCP gateway. When the sandbox starts, supported agent
 integrations read the gateway URL and register it with the agent.
 
-Use `--static-mcp` when you want to pre-load registered MCP servers into a
-sandbox:
+Whether you pass `--static-mcp` when you create the sandbox determines its MCP
+mode:
+
+- Static mode pre-loads the specified servers and doesn't expose dynamic
+  discovery tools to the agent.
+- Dynamic mode pre-loads no servers and lets the agent find and attach
+  registered servers.
+
+This choice persists across sandbox restarts.
+
+### Use static mode
+
+Pass `--static-mcp` to pre-load registered MCP servers:
 
 ```console
 $ sbx mcp add notion --url https://mcp.notion.com/mcp
@@ -269,14 +280,27 @@ $ sbx run claude --name my-session \
 ```
 
 Every name in the static set must already be registered with `sbx mcp add`. The
-static set is fixed at sandbox creation time. In local gateway mode, if you omit
-`--static-mcp`, the sandbox starts with an MCP gateway but no registered MCP
-servers. To use a different static set, create a new sandbox.
+gateway doesn't expose `mcp-find`, `mcp-add`, or `mcp-config-set` to the agent.
+
+You can't replace the initial set by passing `--static-mcp` when reconnecting to
+an existing sandbox. To attach another server from the host, use
+[`sbx mcp load`](#add-a-server-to-a-running-sandbox).
+
+### Use dynamic mode
+
+Omit `--static-mcp` to use dynamic mode. The gateway pre-loads no servers and
+exposes `mcp-find`, `mcp-add`, and `mcp-config-set` to the agent. The agent can
+search the registered server catalog and attach servers during the session.
+
+If you run `sbx mcp add` after a dynamic sandbox starts, its gateway refreshes
+the searchable catalog. The agent can then find and attach the new registration
+without restarting. The `sbx mcp add` command doesn't attach the server by
+itself.
 
 ## Add a server to a running sandbox
 
 To attach an already-registered server to a running sandbox, use
-`sbx mcp load`:
+`sbx mcp load`. This works in both static and dynamic modes:
 
 ```console
 $ sbx mcp add linear --url https://mcp.linear.app/mcp
@@ -285,7 +309,8 @@ MCP server "linear" loaded into sandbox "my-session" (live)
 ```
 
 Connected agent sessions receive a tool-list update, so the added tools become
-visible without reconnecting.
+visible without reconnecting. The loaded server remains attached across sandbox
+restarts.
 
 ## Built-in gateway tools
 
@@ -303,13 +328,16 @@ them separately from tools provided by registered MCP servers.
 | -------------------- | ------------------------------------------------------------------------------------------ |
 | `mcp-exec`           | Executes a tool by name through the gateway.                                               |
 | `code-mode`          | Creates an ephemeral JavaScript tool that can call selected tools through the MCP gateway. |
+| `mcp-find`           | Searches the registered server catalog without changing sandbox state. Dynamic mode only.  |
+| `mcp-add`            | Attaches a registered server to the sandbox. Dynamic mode only.                            |
+| `mcp-config-set`     | Sets per-session configuration overrides for an attached server. Dynamic mode only.        |
 | `<server>-authorize` | Starts or restarts OAuth authorization for an exposed OAuth-backed remote server.          |
 
-The gateway exposes `<server>-authorize` for OAuth-backed remote servers, even
-when they already have a valid token. Local stdio servers don't expose this
-helper. If `code-mode` creates a generated tool, the tool is shared by clients
-connected to the sandbox's gateway and disappears when the gateway is replaced
-or stops.
+Servers attached with `mcp-add` remain attached across sandbox restarts. The
+gateway exposes `<server>-authorize` for OAuth-backed remote servers, even when
+they already have a valid token. Local stdio servers don't expose this helper.
+If `code-mode` creates a generated tool, the tool is shared by clients connected
+to the sandbox's gateway and disappears when the gateway is replaced or stops.
 
 In MCP access policies, built-in gateway tools are `MCP::Primordial` resources
 and use the `invokePrimordial` action. Tools from registered MCP servers are
@@ -342,41 +370,6 @@ client and its identity binding remain in the host credential store so you can
 reuse them when you re-add the same client. The command prints the
 `sbx secret rm` commands for removing them. To remove only the OAuth access
 token, use `sbx mcp auth rm`.
-
-## Register a bundle
-
-An MCP bundle is a JSON array of server definitions fetched from a URL. Each
-entry maps to one `sbx mcp add` registration.
-
-```json
-[
-  { "name": "notion", "url": "https://mcp.notion.com/mcp" },
-  { "name": "linear", "url": "https://mcp.linear.app/mcp" },
-  {
-    "name": "github",
-    "command": "npx",
-    "args": ["@modelcontextprotocol/server-github"]
-  }
-]
-```
-
-Fetch and register a bundle:
-
-```console
-$ sbx mcp bundle add core --url https://example.com/mcp-bundle.json
-```
-
-List registered bundles:
-
-```console
-$ sbx mcp bundle ls
-```
-
-Remove a bundle and the servers it registered:
-
-```console
-$ sbx mcp bundle rm core
-```
 
 ## Governance
 

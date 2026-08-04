@@ -41,7 +41,7 @@ All HTTP and HTTPS traffic leaving a sandbox passes through a proxy on your
 host that enforces the
 [network access policy](../governance/access-controls/network.md). The sandbox
 routes traffic through either a forward proxy or a transparent proxy depending
-on the client's configuration. Both enforce the network policy; only the
+on the client's configuration. Both enforce the network policy. Only the
 forward proxy [injects credentials](credentials.md) for AI services.
 
 Raw TCP connections, UDP, and ICMP are blocked at the network layer. DNS
