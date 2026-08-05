@@ -24,7 +24,7 @@ In per-user mode, Docker Desktop installs to `%LOCALAPPDATA%\Programs\DockerDesk
 - After installation, Docker Desktop can be run without administrator privileges.
 - Some settings marked **Requires password** in **Settings** still require elevation. When you change one of these settings and select **Apply**, Docker Desktop opens a UAC prompt for administrator access.
  
-Per-user installation does not install the privileged helper service `com.docker.service` automatically. As a result, features that depend on it, such as the Hyper-V backend and Windows containers, are not available. For most users this is not a limitation, as the WSL 2 backend covers the majority of use cases.
+Per-user installation does not install the privileged helper service `com.docker.service` automatically. As a result, features that depend on it, such as the Hyper-V backend and Windows containers, are not available. Docker VMM (Beta) is available in per-user mode and does not require the privileged helper. For most users, the WSL 2 or Docker VMM backend covers the majority of use cases.
  
 ### All-users installation
  
@@ -56,7 +56,7 @@ Docker Desktop needs to perform a limited set of privileged operations which are
 
 > [!NOTE]
 >
-> `com.docker.service` is only installed in all-users installation mode. It is not used in per-user installation, which instead relies solely on the WSL 2 backend and does not support Hyper-V or Windows containers.
+> `com.docker.service` is only installed in all-users installation mode. It is not used in per-user installation, which relies on the WSL 2 or Docker VMM backend and does not support Hyper-V or Windows containers.
 
 The privileged helper `com.docker.service` is a Windows service which runs in the background with `SYSTEM` privileges. It listens on the named pipe `//./pipe/dockerBackendV2`. The developer runs the Docker Desktop application, which connects to the named pipe and sends commands to the service. This named pipe is protected, and only users that are part of the `docker-users` group can have access to it.
 
