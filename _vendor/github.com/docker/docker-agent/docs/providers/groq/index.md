@@ -1,17 +1,17 @@
 ---
 title: "Groq"
-description: "Use Groq fast-inference models with docker-agent."
+description: "Use Groq fast-inference models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, groq
 weight: 130
 canonical: https://docs.docker.com/ai/docker-agent/providers/groq/
 ---
 
-_Use Groq models with docker-agent._
+_Use Groq models with Docker Agent._
 
 ## Overview
 
 [Groq](https://groq.com/) serves open-weight models on its LPU inference engine
-through an OpenAI-compatible API, with a focus on very low latency. docker-agent
+through an OpenAI-compatible API, with a focus on very low latency. Docker Agent
 includes built-in support for Groq as an alias provider.
 
 ## Setup
@@ -76,7 +76,7 @@ model IDs, context limits, and rate limits.
 
 ## How It Works
 
-Groq is implemented as a built-in alias in docker-agent:
+Groq is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://api.groq.com/openai/v1`

@@ -208,18 +208,18 @@ view_background_agent(task_id="agent_task_abc123")
 
 ## External Sub-Agents from Registries
 
-Sub-agents don't have to be defined locally — you can reference agents from OCI registries (such as the [Docker Agent Catalog](https://hub.docker.com/u/agentcatalog)) directly in your `sub_agents` list. This lets you compose teams using pre-built, shared agents without duplicating their configuration.
+Sub-agents don't have to be defined locally — you can reference agents from any OCI-compatible registry directly in your `sub_agents` list. This lets you compose teams using shared agents without duplicating their configuration.
 
 ```yaml
 agents:
   root:
     model: openai/gpt-5
-    description: Coordinator that delegates to local and catalog sub-agents
+    description: Coordinator that delegates to local and external sub-agents
     instruction: |
       Delegate tasks to the most appropriate sub-agent.
     sub_agents:
       - local_helper
-      - agentcatalog/pirate # pulled from registry automatically
+      - myorg/agent:tag # pulled from registry automatically
 
   local_helper:
     model: openai/gpt-5
@@ -227,17 +227,17 @@ agents:
     instruction: You are a helpful assistant.
 ```
 
-External sub-agents are automatically named after their last path segment — for example, `agentcatalog/pirate` becomes `pirate`. You can also give them an explicit name using the `name:reference` syntax:
+External sub-agents are automatically named after their last path segment (without the tag) — for example, `myorg/agent:tag` becomes `agent`. You can also give them an explicit name using the `name:reference` syntax:
 
 ```yaml
     sub_agents:
-      - my_pirate:agentcatalog/pirate  # available as "my_pirate"
+      - my_agent:myorg/agent:tag  # available as "my_agent"
       - reviewer:docker.io/myorg/review-agent:latest
 ```
 
 ### Pin external sub-agents to a digest
 
-External references use a tag by default: `agentcatalog/pirate` is shorthand for `agentcatalog/pirate:latest`. Tag references are re-resolved against the registry on **every** `docker agent run`: each unpinned external sub-agent triggers a digest lookup at startup, even when that sub-agent is never invoked in the session. On a healthy connection this typically adds a second or two per reference (it depends on your network and registry), and it is one of the paths that can stall if the registry or credential helper misbehaves.
+External references use a tag by default: `myorg/agent` is shorthand for `myorg/agent:latest`. Tag references are re-resolved against the registry on **every** `docker agent run`: each unpinned external sub-agent triggers a digest lookup at startup, even when that sub-agent is never invoked in the session. On a healthy connection this typically adds a second or two per reference (it depends on your network and registry), and it is one of the paths that can stall if the registry or credential helper misbehaves.
 
 Pinning a reference to an immutable digest (`@sha256:…`) makes the runtime serve it straight from the local cache with no network round-trip, so startup stays fast and your team is fully reproducible:
 
@@ -251,9 +251,9 @@ Copy the digest from your registry (Docker Hub shows it next to the tag) or read
 External references in `handoffs` and `force_handoff` carry the same per-run cost, so pin those to a digest too.
 
 > [!TIP]
-> External sub-agents work with any OCI-compatible registry, not just the Docker Agent Catalog. See [Agent Distribution](../distribution/index.md) for more on registry references.
+> External sub-agents work with any OCI-compatible registry. See [Agent Distribution](../distribution/index.md) for more on registry references.
 >
-> See [`examples/sub-agents-from-catalog.yaml`](https://github.com/docker/docker-agent/blob/main/examples/sub-agents-from-catalog.yaml) for a complete example mixing local and catalog sub-agents.
+> See [`examples/sub-agents-from-registry.yaml`](https://github.com/docker/docker-agent/blob/main/examples/sub-agents-from-registry.yaml) for a complete example mixing local and external sub-agents.
 
 ## Harness-Backed Sub-Agents
 

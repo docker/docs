@@ -1,16 +1,16 @@
 ---
 title: "Google Gemini"
-description: "Use Gemini 2.5 Flash, Gemini 3 Pro, and other Google models with docker-agent."
+description: "Use Gemini 2.5 Flash, Gemini 3 Pro, and other Google models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, google gemini
 weight: 120
 canonical: https://docs.docker.com/ai/docker-agent/providers/google/
 ---
 
-_Use Gemini 2.5 Flash, Gemini 3 Pro, and other Google models with docker-agent._
+_Use Gemini 2.5 Flash, Gemini 3 Pro, and other Google models with Docker Agent._
 
 ## Setup
 
-docker-agent reads the first credential it finds from these environment variables (see `pkg/model/provider/gemini/client.go`):
+Docker Agent reads the first credential it finds from these environment variables (see `pkg/model/provider/gemini/client.go`):
 
 | Variable                    | Purpose                                                                             |
 | --------------------------- | ----------------------------------------------------------------------------------- |

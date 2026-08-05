@@ -1,18 +1,18 @@
 ---
 title: "OpenCode Go"
-description: "Use OpenCode Go models with docker-agent."
+description: "Use OpenCode Go models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, opencode go
 weight: 210
 canonical: https://docs.docker.com/ai/docker-agent/providers/opencode-go/
 ---
 
-_Use OpenCode Go models with docker-agent._
+_Use OpenCode Go models with Docker Agent._
 
 ## Overview
 
 [OpenCode Go](https://opencode.ai/docs/go) is a low-cost subscription service ($5 first month, then $10/month) that provides reliable access to popular open-source coding models. It serves models through both OpenAI-compatible and Anthropic-compatible APIs from globally distributed endpoints.
 
-docker-agent includes built-in support for OpenCode Go as an alias provider.
+Docker Agent includes built-in support for OpenCode Go as an alias provider.
 
 ## Setup
 
@@ -122,15 +122,15 @@ agents:
 
 ## How It Works
 
-OpenCode Go is implemented as a built-in alias in docker-agent:
+OpenCode Go is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://opencode.ai/zen/go/v1`
 - **Token Variable:** `OPENCODE_API_KEY`
 
-This means OpenCode Go uses the same client as OpenAI, making it fully compatible with all OpenAI features supported by docker-agent.
+This means OpenCode Go uses the same client as OpenAI, making it fully compatible with all OpenAI features supported by Docker Agent.
 
-For Anthropic-compatible models (MiniMax, Qwen), docker-agent uses a custom provider pointing to the Anthropic client at `https://opencode.ai/zen/go` with the same token.
+For Anthropic-compatible models (MiniMax, Qwen), Docker Agent uses a custom provider pointing to the Anthropic client at `https://opencode.ai/zen/go` with the same token.
 
 ## Example: Code Assistant
 
