@@ -8,7 +8,7 @@ params:
   sidebar:
     badge:
       color: blue
-      text: Beta
+      text: Updated
 ---
 
 Docker Desktop supports multiple Virtual Machine Managers (VMMs) to power the Linux VM that runs containers. The options available depend on your platform.
