@@ -66,6 +66,9 @@ network, and clean up.
 {{< /tab >}}
 {{< /tabs >}}
 
+If you run `sbx` in a virtual desktop infrastructure (VDI) environment, the
+environment must support nested virtualization.
+
 Docker Desktop is not required to use `sbx`.
 
 ## Install and sign in
