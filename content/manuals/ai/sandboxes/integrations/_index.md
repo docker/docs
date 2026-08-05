@@ -122,6 +122,19 @@ Connections don't use a network port or an SSH key:
 - The host key is verified on every connection, so a rotated daemon key never
   triggers a host-key mismatch.
 
+SSH clients can use local port forwarding to make a service listening on the
+sandbox's loopback interface available on the host. For example, a remote
+development client can map `127.0.0.1:4321` in the sandbox to
+`127.0.0.1:55565` on the host, choosing an available host port automatically.
+Traffic passes through the SSH connection instead of a published Docker port.
+
+The sandbox daemon accepts forwarded connections only to loopback addresses in
+the sandbox, including `localhost`, `127.0.0.0/8`, and `::1`. The SSH client
+chooses the bind address for the listener on the host. A listener bound to
+`127.0.0.1` or `::1` is reachable only from the host. A client configured to
+bind to a non-loopback address can make the forwarded service reachable from
+other machines, subject to the host's network and firewall configuration.
+
 Because SSH terminates at the daemon, no SSH server runs inside the sandbox.
 The sandbox must already be created. If it is stopped, connecting to
 `<name>.sbx` starts it automatically.
