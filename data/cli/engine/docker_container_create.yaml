@@ -827,7 +827,7 @@ options:
     - option: pull
       value_type: string
       default_value: missing
-      description: Pull image before creating (`always`, `|missing`, `never`)
+      description: Pull image before creating (`always`, `missing`, `never`)
       deprecated: false
       hidden: false
       experimental: false

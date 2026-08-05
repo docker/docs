@@ -62,7 +62,7 @@ You can upgrade active plans from the billing Overview page.
 Some products are sales-led. You must
 <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_plans_manage" class="link" rel="noopener">contact sales</a> to opt in.
 
-## What's next
+## Next steps
 
 - [Learn about available plans](/manuals/subscription/plans/_index.md)
 - [Set up payment information](/manuals/billing/payment-method.md)

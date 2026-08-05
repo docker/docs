@@ -260,14 +260,13 @@ the kit handles the wiring; you only provide the value.
 
 Registry credentials authenticate to private OCI registries when pulling
 [templates](../customize/templates.md) or [kits](../customize/kits.md), and can
-also let the agent pull and push images from inside the sandbox. Use
-`sbx secret set --registry <host>` to store them. For Docker Hub, `sbx` reuses
-your `sbx login` session — no registry secret needed. For other registries
-(GitHub Container Registry, ECR, ACR, self-hosted Nexus, and so on), store
-credentials with `sbx secret set --registry`.
+also let the agent pull and push images from inside the sandbox through the
+host-side proxy. Use `sbx secret set --registry <host>` to store them. For
+Docker Hub, `sbx` reuses your `sbx login` session — no registry secret needed.
+For other registries (GitHub Container Registry, ECR, ACR, self-hosted Nexus,
+and so on), store credentials with `sbx secret set --registry`.
 
-The scope you store a credential at controls where it's used — and whether its
-value enters the sandbox. The scope comes from how you target `sbx secret set`:
+Choose the scope by adding `-g`, adding a sandbox name, or passing neither:
 
 ```text
 sbx secret set [-g | SANDBOX] --registry HOST
@@ -276,17 +275,12 @@ sbx secret set [-g | SANDBOX] --registry HOST
 - **Host-only** (no `-g`, no `SANDBOX`): the `sbx` CLI uses it to pull templates
   and kits when creating a sandbox. The credential stays on the host and is
   never available inside the sandbox.
-- **Global** (`-g`): same as host-only, plus written into
-  `~/.docker/config.json` in every new sandbox so the agent can pull and push
-  images. The value lives inside the VM, where the agent can read it, so it's
-  less isolated than the proxy-injected service credentials above. Use it when
-  agents build and publish container images.
-- **Sandbox-scoped** (`SANDBOX`): same in-sandbox behavior as global, but only
-  for the named sandbox. Use it when only one sandbox needs registry access.
-
-> [!NOTE]
-> Registry credentials are written into a sandbox at creation time. Recreate an
-> existing sandbox to pick up credentials added after it was created.
+- **Global** (`-g`): same as host-only, plus the host-side proxy authenticates
+  registry login requests from sandboxes. The credential stays on the host and
+  is never written to the sandbox filesystem. Use it when agents build and
+  publish container images.
+- **Sandbox-scoped** (`SANDBOX`): same proxy behavior as global, but only for the
+  named sandbox. Use it when only one sandbox needs registry access.
 
 ### Store registry credentials
 
@@ -306,19 +300,21 @@ $ echo "$ACR_PASSWORD" | sbx secret set \
     --password-stdin
 ```
 
-Add `-g` to store the credential globally, before you create the sandbox:
+Add `-g` to store the credential globally for sandbox registry operations:
 
 ```console
 $ gh auth token | sbx secret set -g --registry ghcr.io --password-stdin
-$ sbx run claude                      # created with the credential in place
+$ sbx run claude
 ```
 
-To scope the credential to a single sandbox, store it under that sandbox's name
-and create the sandbox with the same name:
+Store global registry credentials before creating a sandbox. Existing sandboxes
+don't pick up global registry credentials added later. To add registry access to
+an existing sandbox, use a sandbox-scoped credential instead.
+
+To scope the credential to a single sandbox, store it under that sandbox's name:
 
 ```console
 $ gh auth token | sbx secret set my-app --registry ghcr.io --password-stdin
-$ sbx run claude --name my-app
 ```
 
 `sbx kit pull` also uses these credentials, with the Docker credential
@@ -353,11 +349,10 @@ $ sbx secret rm my-sandbox --registry ghcr.io -f
   without a keychain). See [Where secrets are stored](#where-secrets-are-stored).
 - Don't set API keys manually inside the sandbox. Sandbox agents are
   pre-configured to use proxy-managed credentials.
-- Registry credentials you make available inside a sandbox are stored in the VM
-  (`~/.docker/config.json`), where the agent can read them — unlike
-  proxy-injected service credentials, which never enter the sandbox. Reserve
-  them for sandboxes that need registry access, and prefer sandbox scope over
-  global (`-g`) to limit exposure.
+- Registry credentials stay on the host and are injected by the proxy when a
+  sandbox authenticates to the registry. Reserve them for sandboxes that need
+  registry access, and prefer sandbox scope over global (`-g`) to limit
+  exposure.
 - Several agents support OAuth as another secure option: the flow runs on the
   host, so the token is never exposed inside the sandbox. If you haven't stored
   a credential, the agent prompts you to authenticate — Codex prompts on the

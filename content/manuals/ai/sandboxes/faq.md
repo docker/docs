@@ -13,7 +13,7 @@ Docker account, and run sandboxes at no cost.
 
 The only paid component is organization governance: centrally managed network
 and filesystem policies, [sign-in enforcement](governance/sign-in-enforcement.md),
-and [audit logs](governance/audit.md). These
+and [audit logs](governance/audit/). These
 [organization governance features](governance/) require a separate paid
 subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
