@@ -80,6 +80,8 @@ For example, if you mount `/Users/bob/src/my-project`, select
 
 ## How SSH connections work
 
+### Managed SSH configuration
+
 `sbx setup ssh` writes a managed block to your SSH config: `~/.ssh/config` on
 macOS and Linux, or `%USERPROFILE%\.ssh\config` on Windows. The block is similar
 to the following:
@@ -100,18 +102,15 @@ Host *.sbx
 # <<< docker sandboxes (managed) <<<
 ```
 
-You don't edit this block by hand. The `User _default_user_` sentinel tells the
-daemon to log you in as the sandbox image's default user, so your host username
-is never sent.
+You don't edit this block by hand. Its key entries work as follows:
 
-SSH connections don't forward client environment variables into the sandbox.
-The daemon acknowledges SSH environment requests for compatibility but ignores
-their names and values.
+- `Host *.sbx` maps sandbox hostnames to the sandbox daemon. Application host
+  pickers don't discover individual sandbox names from this wildcard, so enter
+  the hostname, such as `demo.sbx`, manually when you configure an integration.
+- `User _default_user_` tells the daemon to use the sandbox image's default
+  user, so your host username is never sent.
 
-The `*.sbx` wildcard maps sandbox hostnames to the sandbox daemon, but it
-doesn't add individual sandbox names to application host pickers. Enter the
-sandbox hostname, such as `demo.sbx`, manually when you configure an
-integration.
+### Connection and authentication
 
 Connections don't use a network port or an SSH key:
 
@@ -121,6 +120,18 @@ Connections don't use a network port or an SSH key:
   Authentication is tied to your login, not to a stored key.
 - The host key is verified on every connection, so a rotated daemon key never
   triggers a host-key mismatch.
+
+Because SSH terminates at the daemon, no SSH server runs inside the sandbox.
+The sandbox must already be created. If it is stopped, connecting to
+`<name>.sbx` starts it automatically.
+
+### Environment variables
+
+SSH connections don't forward client environment variables into the sandbox.
+The daemon acknowledges SSH environment requests for compatibility but ignores
+their names and values.
+
+### Port forwarding
 
 SSH clients can use local port forwarding to make a service listening on the
 sandbox's loopback interface available on the host. For example, a remote
@@ -134,7 +145,3 @@ chooses the bind address for the listener on the host. A listener bound to
 `127.0.0.1` or `::1` is reachable only from the host. A client configured to
 bind to a non-loopback address can make the forwarded service reachable from
 other machines, subject to the host's network and firewall configuration.
-
-Because SSH terminates at the daemon, no SSH server runs inside the sandbox.
-The sandbox must already be created. If it is stopped, connecting to
-`<name>.sbx` starts it automatically.
