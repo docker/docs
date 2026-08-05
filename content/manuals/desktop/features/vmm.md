@@ -17,7 +17,7 @@ Docker Desktop supports multiple Virtual Machine Managers (VMMs) to power the Li
 
 {{< summary-bar feature_name="VMM" >}}
 
-Docker VMM is a container-optimized hypervisor. From Docker Desktop 4.83, Docker VMM uses Docker's own hypervisor, replacing libkrun used in version 4.79 and earlier for Mac users. Built specifically for container workloads, Docker VMM:
+Docker VMM is a container-optimized hypervisor. From Docker Desktop 4.83, Docker VMM uses Docker's own hypervisor, replacing `libkrun` used in version 4.79 and earlier for Mac users. Built specifically for container workloads, Docker VMM:
 
 - Returns idle memory to the host when containers aren't active, so Docker Desktop doesn't hold RAM it's not using
 - Improves file I/O between container and host, reducing latency in the edit-compile-test loop
@@ -38,15 +38,15 @@ Docker VMM requires a minimum of 4 GB of memory allocated to the Docker Linux VM
 
 If you previously had Docker VMM selected, which engine runs depends on your version:
 
-- Docker Desktop 4.79 and earlier: backed by libkrun
-- Docker Desktop 4.83 and later: backed by Docker's own hypervisor
+- Docker Desktop 4.79 and earlier is backed by `libkrun`
+- Docker Desktop 4.86 and later is backed by Docker's own hypervisor
 
 If you're upgrading from 4.79 or earlier, your setting is preserved and Docker Desktop switches to the new Docker VMM automatically on restart.
 
 {{< /tab >}}
 {{< tab name="Windows" >}}
 
-1. Go to **Settings** > **General**.
+1. Go to **Settings** > **General** > **Virtual Machine Manager**.
 2. Select **Docker VMM**.
 3. Select **Apply & restart**.
 
@@ -87,4 +87,4 @@ For more information, see [Docker Desktop WSL 2 backend](/manuals/desktop/featur
 
 ### Hyper-V
 
-Hyper-V is Windows' native hypervisor. It runs the Docker Linux VM in a fully isolated virtual machine, providing a strong boundary between the container environment and the Windows host than WSL 2. Hyper-V is only available in all-users installation mode and requires administrator privileges.
+Hyper-V is Windows' native hypervisor. It runs the Docker Linux VM in a fully isolated virtual machine, providing a strong boundary between the container environment and the Windows host. Hyper-V is only available in all-users installation mode and requires administrator privileges.
