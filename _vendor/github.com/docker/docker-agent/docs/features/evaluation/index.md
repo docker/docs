@@ -12,7 +12,7 @@ _Measure agent quality with automated evaluations — tool call accuracy, respon
 
 ## Overview
 
-The `docker agent eval` command runs your agent against a set of recorded sessions and scores the results. Each eval session captures a user question, the expected tool calls, and criteria the response must satisfy. docker-agent replays the question, compares the agent's behavior to expectations, and produces a report.
+The `docker agent eval` command runs your agent against a set of recorded sessions and scores the results. Each eval session captures a user question, the expected tool calls, and criteria the response must satisfy. Docker Agent replays the question, compares the agent's behavior to expectations, and produces a report.
 
 > [!NOTE]
 > **Docker required**
@@ -43,7 +43,7 @@ $ docker agent eval agent.yaml --only "auth*" --repeat 5
 
 ## Eval Directory Structure
 
-By default, docker-agent looks for eval sessions in an `evals/` directory next to your agent config:
+By default, Docker Agent looks for eval sessions in an `evals/` directory next to your agent config:
 
 ```bash
 my-agent/
@@ -128,7 +128,7 @@ The `evals` object inside each session controls what gets scored:
 
 ## Scoring Metrics
 
-docker-agent evaluates agents across three dimensions:
+Docker Agent evaluates agents across three dimensions:
 
 | Metric              | How It's Measured                                                                                                         |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -157,7 +157,7 @@ $ docker agent eval <agent-file>|<registry-ref> [<eval-dir>|./evals]
 | Flag                | Default                     | Description                                                       |
 | ------------------- | --------------------------- | ----------------------------------------------------------------- |
 | `-c, --concurrency` | num CPUs                    | Number of concurrent evaluation runs                              |
-| `--judge-model`     | `anthropic/claude-opus-4-5-20251101` | Model for LLM-as-a-judge relevance scoring                        |
+| `--judge-model`     | `anthropic/claude-opus-5` | Model for LLM-as-a-judge relevance scoring                        |
 | `--output`          | `<eval-dir>/results`  | Directory for results, logs, and session databases                |
 | `--only`            | (all)                       | Only run evals with file names matching these patterns            |
 | `--base-image`      | (default)                   | Custom base Docker image for eval containers (see [Custom Base Images](#custom-base-images)) |
@@ -165,18 +165,50 @@ $ docker agent eval <agent-file>|<registry-ref> [<eval-dir>|./evals]
 | `-e, --env`         | (none)                      | Environment variables to pass to container (`KEY` or `KEY=VALUE`) |
 | `--repeat`          | `1`                         | Number of times to repeat each evaluation (useful for computing baselines) |
 
+### Provider Credentials
+
+Eval containers are isolated from your host environment. Dedicated model
+provider API keys (for example `ANTHROPIC_API_KEY` or `OPENAI_API_KEY`) are
+forwarded into eval containers automatically, so most provider setups work
+without extra flags.
+
+> [!WARNING]
+> **`GITHUB_TOKEN` and `GH_TOKEN` are not forwarded automatically**
+>
+> GitHub tokens are broad credentials (git, `gh`, CI, packages), not dedicated
+> model API keys, so for security reasons Docker Agent does not forward them
+> into eval containers — even when they are set in your shell or in
+> `~/.config/cagent/.env`. If your agent uses the `github-copilot` provider,
+> pass the token explicitly by name:
+>
+> ```bash
+> docker agent eval agent.yaml ./evals -e GITHUB_TOKEN
+> ```
+>
+> When using a custom env file, both flags are required:
+>
+> ```bash
+> docker agent eval agent.yaml ./evals \
+>   --env-from-file /path/to/secrets.env \
+>   -e GITHUB_TOKEN
+> ```
+
+Note that the LLM judge runs on the host, not inside the eval container. If
+the token is not forwarded, judge validation can succeed while every
+evaluated agent run fails to authenticate.
+
 ### Custom Base Images
 
 When `--base-image` is set, the eval harness builds a derived image on top of your base image at evaluation time. Two things happen automatically:
 
 1. **The docker-agent binary is injected** — it is copied from `docker/docker-agent:edge` into the derived image at build time, so you don't need to include it in your base image.
-2. **The entrypoint is overridden** — docker-agent replaces your base image's entrypoint with its own `/run.sh` wrapper.
+2. **The entrypoint is overridden** — Docker Agent replaces your base image's entrypoint with its own `/run.sh` wrapper.
 
 Your base image therefore only needs to provide the runtime environment: language runtimes, installed dependencies, test fixtures, the appropriate working directory, and so on. Any `ENTRYPOINT` or `CMD` defined in your base image is ignored.
 
 ## Output
 
-After a run completes, docker-agent produces:
+After a run completes, Docker Agent produces:
 
 - **Console summary** — Pass/fail status per eval with metric breakdowns
 - **JSON results** — Full structured results for programmatic analysis

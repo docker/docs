@@ -1,18 +1,18 @@
 ---
 title: "Hugging Face"
-description: "Use Hugging Face Inference Providers with docker-agent."
+description: "Use Hugging Face Inference Providers with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, hugging face
 weight: 140
 canonical: https://docs.docker.com/ai/docker-agent/providers/huggingface/
 ---
 
-_Use Hugging Face Inference Providers with docker-agent._
+_Use Hugging Face Inference Providers with Docker Agent._
 
 ## Overview
 
 [Hugging Face Inference Providers](https://huggingface.co/docs/inference-providers/index)
 routes requests to open models (Llama, Qwen, DeepSeek, Kimi, GLM and others)
-across many backends through a single OpenAI-compatible endpoint. docker-agent
+across many backends through a single OpenAI-compatible endpoint. Docker Agent
 includes built-in support for Hugging Face as an alias provider.
 
 ## Setup
@@ -74,14 +74,14 @@ for current model IDs, context limits, and pricing.
 
 ## How It Works
 
-Hugging Face is implemented as a built-in alias in docker-agent:
+Hugging Face is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://router.huggingface.co/v1`
 - **Token Variable:** `HF_TOKEN`
 
 Because Hugging Face fronts open-weight models whose chat templates may reject
-more than one leading system message, docker-agent coalesces its per-source
+more than one leading system message, Docker Agent coalesces its per-source
 system messages into a single one for this provider.
 
 ## Example: Code Assistant

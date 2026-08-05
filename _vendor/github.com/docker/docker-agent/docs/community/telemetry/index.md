@@ -1,14 +1,14 @@
 ---
 title: "Telemetry"
-description: "docker-agent collects anonymous usage data to help improve the tool. Telemetry can be disabled at any time."
+description: "Docker Agent collects anonymous usage data to help improve the tool. Telemetry can be disabled at any time."
 keywords: docker agent, ai agents, community, telemetry
 weight: 30
 canonical: https://docs.docker.com/ai/docker-agent/community/telemetry/
 ---
 
-_docker-agent collects anonymous usage data to help improve the tool. Telemetry can be disabled at any time._
+_Docker Agent collects anonymous usage data to help improve the tool. Telemetry can be disabled at any time._
 
-On first startup, docker-agent displays a notice about telemetry collection so you're always informed. All events are processed synchronously when recorded.
+On first startup, Docker Agent displays a notice about telemetry collection so you're always informed. All events are processed synchronously when recorded.
 
 ## Disabling Telemetry
 

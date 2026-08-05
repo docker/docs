@@ -1,14 +1,14 @@
 ---
 title: "OpenTelemetry Tracing"
-description: "Export docker-agent traces to any OTLP backend, including Langfuse and LangSmith, for debugging agentic workflows."
+description: "Export Docker Agent traces to any OTLP backend, including Langfuse and LangSmith, for debugging agentic workflows."
 keywords: docker agent, ai agents, community, opentelemetry tracing
 weight: 40
 canonical: https://docs.docker.com/ai/docker-agent/community/opentelemetry/
 ---
 
-_docker-agent can export OpenTelemetry traces of an agent run to any OTLP/HTTP backend. This is separate from [product-analytics telemetry](../telemetry/index.md) and is opt-in via the `--otel` flag._
+_Docker Agent can export OpenTelemetry traces of an agent run to any OTLP/HTTP backend. This is separate from [product-analytics telemetry](../telemetry/index.md) and is opt-in via the `--otel` flag._
 
-When enabled, docker-agent emits OpenTelemetry GenAI (`gen_ai.*`) and MCP (`mcp.*`) spans following the [OpenTelemetry semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/). Spans cover the agent turn, model calls (with token usage and cost attributes), tool calls, MCP client/server activity, sub-agent hand-offs, and provider fallbacks. W3C `traceparent` context is propagated so the whole run renders as a single connected trace tree.
+When enabled, Docker Agent emits OpenTelemetry GenAI (`gen_ai.*`) and MCP (`mcp.*`) spans following the [OpenTelemetry semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/). Spans cover the agent turn, model calls (with token usage and cost attributes), tool calls, MCP client/server activity, sub-agent hand-offs, and provider fallbacks. W3C `traceparent` context is propagated so the whole run renders as a single connected trace tree.
 
 ## Enabling
 
@@ -20,7 +20,7 @@ Without an exporter endpoint configured, spans are recorded locally as no-ops. T
 
 ## Configuration
 
-docker-agent reads the standard OTLP environment variables:
+Docker Agent reads the standard OTLP environment variables:
 
 | Variable | Purpose |
 | --- | --- |
@@ -32,7 +32,7 @@ docker-agent reads the standard OTLP environment variables:
 > [!NOTE]
 > **Base endpoint, not the full signal URL**
 >
-> Set `OTEL_EXPORTER_OTLP_ENDPOINT` to the **base** endpoint (for example `https://cloud.langfuse.com/api/public/otel`). docker-agent appends `/v1/traces` for you, matching the value documented by Langfuse and LangSmith. A bare `host:port` is also accepted and gets `https://` (or `http://` for localhost).
+> Set `OTEL_EXPORTER_OTLP_ENDPOINT` to the **base** endpoint (for example `https://cloud.langfuse.com/api/public/otel`). Docker Agent appends `/v1/traces` for you, matching the value documented by Langfuse and LangSmith. A bare `host:port` is also accepted and gets `https://` (or `http://` for localhost).
 
 > [!WARNING]
 > **Message content can contain sensitive data**
@@ -88,7 +88,7 @@ docker agent run agent.yaml --otel
 > [!NOTE]
 > **Langfuse and LangSmith ingest traces only**
 >
-> Both backends accept the traces signal only. docker-agent also wires metric and log exporters at the same endpoint, so their periodic exports return `404` against trace-only backends. This is harmless to traces but appears in the debug log. Point a full OTLP collector at the endpoint if you also want metrics and logs.
+> Both backends accept the traces signal only. Docker Agent also wires metric and log exporters at the same endpoint, so their periodic exports return `404` against trace-only backends. This is harmless to traces but appears in the debug log. Point a full OTLP collector at the endpoint if you also want metrics and logs.
 
 ## Inspecting traces locally
 
