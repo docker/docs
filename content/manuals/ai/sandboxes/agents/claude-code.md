@@ -113,7 +113,8 @@ this base.
 ## Use a local model
 
 The `--model` flag routes Claude Code's Anthropic API requests to a model
-served on your host. This feature is experimental.
+served on your host. This feature is experimental and isn't supported on
+Windows.
 
 Enable the feature:
 
