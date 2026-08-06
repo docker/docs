@@ -74,7 +74,8 @@ agents:
       - Changing navigation, formatting, style, metadata, or search terms
       - Fixing links, typos, grammar, or build failures
       - Updating documentation infrastructure, tests, dependencies, or tooling
-      - Syncing generated or vendored reference content
+      - Syncing generated or vendored reference content without a qualifying
+        feature or material enhancement
       - Bumping a version or recording routine release notes without a
         qualifying feature or material enhancement
       - Documenting an existing limitation, prerequisite, workaround, or
