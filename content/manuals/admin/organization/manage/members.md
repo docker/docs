@@ -2,14 +2,16 @@
 title: Manage organization members
 linkTitle: Members
 weight: 10
-description: Learn how to manage organization members.
-keywords: members, teams, organizations, invite members, manage team members, export member list, edit roles, organization teams, user management
+description: Manage organization members, including invitations, roles, teams,
+  and member-list exports.
+keywords: members, organization members, invitations, teams, manage team
+  members, export member list, edit roles, user management
 aliases:
   - /docker-hub/members/
   - /admin/organization/members/
 ---
 
-Learn how to manage members for your organization.
+Manage organization invitations, member roles, teams, and member-list exports.
 
 ## Invite members
 
@@ -18,6 +20,12 @@ or with a CSV file containing email addresses. If an invitee doesn't have a
 Docker account, they must create one and verify their email address before
 they can accept an invitation to join the organization. When inviting members,
 their pending invitation occupies a seat.
+
+You can also select one or more product licenses for an invitee; Docker
+assigns available licenses when they accept. Unlike a seat, licenses aren't
+deducted from your organization's available licenses until the invitee accepts.
+See
+[Licenses and invites](/manuals/admin/organization/manage/manage-licenses.md#licenses-and-invites).
 
 ### Invite members via Docker ID or email address
 
@@ -35,8 +43,8 @@ When you invite members, you assign them a role. See
 [Roles and permissions](/manuals/enterprise/security/roles-and-permissions/_index.md)
 for details about the access permissions for each role.
 
-Pending invitations appear in the table. Invitees receive an email with a link
-to Docker Hub where they can accept or decline the invitation.
+Pending invitations appear in the table. Invitees can accept or decline the
+invitation from the invitation email or the **Notifications Center**.
 
 ### Invite members via CSV file
 
@@ -76,8 +84,8 @@ addresses:
    already members, or duplicated email addresses within the same CSV file.
 1. Follow the on-screen instructions to invite members.
 
-Pending invitations appear in the table. The invitees receive an email with a
-link to Docker Hub where they can accept or decline the invitation.
+Pending invitations appear in the table. Invitees can accept or decline the
+invitation from the invitation email or the **Notifications Center**.
 
 ### Invite members via API
 
@@ -87,10 +95,10 @@ API endpoint.
 
 ## Accept invitation
 
-After receiving an email invitation, users can access a link to Docker Hub
-where they can accept or decline the invitation.
+Users can accept or decline an invitation from the invitation email or the
+**Notifications Center**.
 
-To accept an invitation:
+To accept from the invitation email:
 
 1. Check your email inbox and open the Docker email with an invitation to
    join the Docker organization.
@@ -106,12 +114,17 @@ To accept an invitation:
    navigation menu.
 1. Select **Accept** on your invitation.
 
-After accepting an invitation, you are now a member of the organization.
+To accept from the **Notifications Center**:
+
+1. Sign in to [Docker Hub](https://hub.docker.com/) or
+   [Docker Home](https://app.docker.com/).
+1. Open the **Notifications Center** in the header.
+1. Select **Accept** on the invitation.
+
+After accepting an invitation, you become a member of the organization.
 
 Invitation email links expire after 14 days. If your email link has expired,
-you can sign in to [Docker Hub](https://hub.docker.com/) with the email
-address the link was sent to and accept the invitation from the
-**Notifications** panel.
+you can still accept from the **Notifications Center**.
 
 ## Manage invitations
 
@@ -121,7 +134,6 @@ file exceeds the number of available seats in your organization, you won't be
 able to invite more members.
 
 > [!TIP]
->
 > Need to manage more than 1,000 team members?
 > [Upgrade to Docker Business for unlimited user invites](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminMembers)
 > and advanced role management. You can also
