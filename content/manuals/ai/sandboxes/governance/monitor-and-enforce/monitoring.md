@@ -71,9 +71,9 @@ rules are suppressed and how to reveal them.
 
 ### Showing inactive rules
 
-When organization governance is active, local and kit-defined rules are not
-evaluated, so `sbx policy ls` hides them by default. To list them too — for
-example, to confirm which local rules the organization policy overrides — pass
+When organization governance is active, local and kit-defined allow rules are
+not evaluated, so `sbx policy ls` hides them by default. To list them too — for
+example, to confirm which allow rules the organization policy overrides — pass
 `--include-inactive`. This adds a `STATUS` column:
 
 ```console
@@ -88,7 +88,9 @@ default-fs-write-allow-all   local    all          filesystem write: 1 allow    
 ```
 
 Inactive policies show `inactive` in the `STATUS` column. They have no effect
-while organization governance is active.
+while organization governance is active. Local and kit-defined deny rules stay
+active and aren't hidden, because a deny still applies on top of the
+organization policy. See [Precedence](../concepts.md#precedence).
 
 Use `--type network` or `--type filesystem` to show only policies of that type.
 Without a sandbox argument, `sbx policy ls` shows every policy across all

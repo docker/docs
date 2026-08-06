@@ -16,12 +16,11 @@ name.
 Local policy interacts with organization governance as follows:
 
 - **No org governance**: the local policy controls what sandboxes can access.
-- **Org governance active**: organization policies are the primary policies.
-  Local allow rules are inactive and have no effect. You can't use them to
-  loosen a restriction the org policy imposes. Local deny rules are still
-  evaluated and layer on top of the organization policy, so you can further
-  restrict access beyond what the org policy allows. To list inactive rules,
-  run `sbx policy ls --include-inactive`. See
+- **Org governance active**: only organization allow rules grant access, so
+  local allow rules are inactive and can't expand what the organization permits.
+  Local deny rules are still evaluated, so you can restrict access further than
+  the organization policy does. To list inactive rules, run
+  `sbx policy ls --include-inactive`. See
   [Monitoring](../monitor-and-enforce/monitoring.md#showing-inactive-rules).
 
 See [Organization policies](organization.md) for how organization governance
@@ -104,8 +103,9 @@ $ sbx policy allow network --sandbox my-sandbox api.example.com
 $ sbx policy deny network --sandbox my-sandbox ads.example.com
 ```
 
-You can also set per-sandbox deny rules at creation time with `--deny-network`
-on `sbx create` or `sbx run`, instead of adding them after the fact:
+As of v0.38.0, you can also set per-sandbox deny rules at creation time with
+`--deny-network` on `sbx create` or `sbx run`, instead of adding them after the
+fact:
 
 ```console
 $ sbx create --deny-network ads.example.com claude .
@@ -197,12 +197,10 @@ Inactive allow rules are hidden from `sbx policy ls` by default; run
 `sbx policy ls --include-inactive` to see them with an `inactive` status in
 the `STATUS` column.
 
-Organization policy can't be supplemented from your machine. To change what
-your sandboxes can access, ask your admin to update the organization policy.
-
-Local deny rules are still evaluated under org governance and layer on top of
-the org policy. Use them to further restrict access beyond what the org policy
-allows.
+When organization governance is active, only organization allow rules can grant
+access. Ask your admin to update the organization policy if you need access to
+an additional resource. Local deny rules remain active, so you can use
+`sbx policy deny` to restrict access further.
 
 ### A domain is still blocked after adding an allow rule
 

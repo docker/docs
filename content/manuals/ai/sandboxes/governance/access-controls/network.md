@@ -17,9 +17,10 @@ You can configure network access in two places:
 - [Organization policies](organization.md), which apply centrally across an
   organization or to selected teams.
 
-When organization governance is active, organization network rules replace
-local rules. Local rules are inactive until organization governance no longer
-applies.
+When organization governance is active, only organization allow rules grant
+network access. Local allow rules are inactive until organization governance no
+longer applies, while local deny rules still apply on top of the organization
+policy. See [Precedence](../concepts.md#precedence).
 
 ## Rule syntax
 

@@ -21,8 +21,9 @@ Policies exist at two levels:
   the organization. An organization can have several policies, each applying
   either org-wide or to specific teams. See [Policy scope](#policy-scope).
 
-When organization governance is active, organization policies replace local
-policies entirely. See [Precedence](#precedence).
+When organization governance is active, only organization allow rules can grant
+access. Local and kit-defined deny rules still apply on top. See
+[Precedence](#precedence).
 
 A **rule** is the unit of access control within a policy. Each rule has:
 
@@ -165,25 +166,38 @@ request is blocked if any effective policy denies it). A deny rule in an
 org-wide policy therefore applies to everyone and can't be overridden by a
 team-scoped policy, which makes org-wide deny rules useful as guardrails.
 
-Local allow rules take no part in this evaluation. Local deny rules are still
-evaluated and layer on top of the organization policy. See
-[Precedence](#precedence).
+Local and kit-defined allow rules take no part in this evaluation. Deny rules
+from those sources do still apply. See [Precedence](#precedence).
 
 ## Precedence
 
-Local and organization policies don't combine. Which one applies depends on
-whether your organization has governance enabled:
+What applies depends on whether your organization has governance enabled:
 
 - No organization governance: local rules and any
   [kit-defined network rules](../customize/kits.md#control-network-access)
   determine what sandboxes can access.
-- Organization governance active: organization rules apply across all developer
-  machines. Local and kit-defined allow rules are not evaluated. They can't
-  be used to loosen org policy restrictions. Local deny rules are still
-  evaluated and layer on top of the organization policy. `sbx policy ls` hides
-  inactive rules by default. See
-  [Monitoring](monitor-and-enforce/monitoring.md#showing-inactive-rules) for how to list them.
+- Organization governance active: organization policy determines what access can
+  be granted. Only organization allow rules grant access, so local and
+  kit-defined allow rules are inactive and can't expand what the organization
+  permits. Deny rules apply from every source, so a local or kit-defined deny
+  can still restrict access further.
 
+Precedence is decided by a rule's decision rather than its source:
+
+| Rule                | Evaluated under organization governance |
+| ------------------- | --------------------------------------- |
+| Organization allow  | Yes                                     |
+| Organization deny   | Yes                                     |
+| Local allow         | No                                      |
+| Local deny          | Yes                                     |
+| Kit-defined allow   | No                                      |
+| Kit-defined deny    | Yes                                     |
+
+Local and kit-defined rules cover network access only, so a deny that layers on
+top of organization policy is always a network deny. `sbx policy ls` hides
+inactive rules by default. See
+[Monitoring](monitor-and-enforce/monitoring.md#showing-inactive-rules) for how
+to list them.
 
 When organization governance is active, a user's organization policies are
 evaluated together, as described in [Rule evaluation](#rule-evaluation).
