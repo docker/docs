@@ -30,6 +30,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.86.0" build_path="/XXXXXX/" >}}
 
+### New
+
+- Docker VMM now uses Docker's own container-optimized hypervisor. It is available for Mac and Windows.
+
 ### Updates
 
 - [Docker Engine v29.7.1](https://docs.docker.com/engine/release-notes/29/#2971)
