@@ -16,8 +16,8 @@ prompt content, agent output, or parameter values.
 Audit logs are exposed when AI Governance is enabled for your organization.
 Docker Sandboxes send audit records only for signed-in users who have an AI
 Governance license and are governed by an enforced centralized [organization
-policy](../org.md). Docker Sandboxes users without both don't send audit data to
-audit logs.
+policy](../access-controls/organization.md). Docker Sandboxes users without both
+don't send audit data to audit logs.
 
 > [!NOTE]
 > AI Governance Audit Logs are part of Docker AI Governance and require a

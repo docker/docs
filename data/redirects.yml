@@ -327,6 +327,11 @@
 
 # Links in Desktop
 
+# Docker Sandboxes
+"/ai/sandboxes/governance/access-controls/mcp/":
+  - /go/mcp-policy/
+"/ai/sandboxes/mcp-gateway/":
+  - /go/sbx-mcp-gateway/
 
 # Desktop MCP Toolkit
 "/ai/mcp-catalog-and-toolkit/toolkit/":

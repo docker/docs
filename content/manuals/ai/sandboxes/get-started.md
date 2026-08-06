@@ -160,8 +160,8 @@ Initialize the global network policy for your sandboxes:
 
 **Balanced** is a good starting point — it permits traffic to common
 development services while blocking everything else. You can adjust individual
-rules later. See [Policies](governance/local.md) for a full description of each
-option.
+rules later. See [Local policy](governance/access-controls/local.md) for a full
+description of each option.
 
 Replace `claude` with the agent you want to use — see [Agents](agents/) for the
 full list.
@@ -224,11 +224,11 @@ To allow a specific host:
 $ sbx policy allow network registry.npmjs.org
 ```
 
-With **Balanced**, common development services are allowed by default. With
-**Locked Down**, everything is blocked until you allow it — including your
-model provider's API. If the agent can't reach a service it needs, the network
-policy is the first place to look. See [Policies](governance/local.md) for the
-full rule set and how to customize it.
+With **Locked Down**, even your model provider API is blocked unless you
+explicitly allow it. With **Balanced**, common development services are
+permitted by default. See
+[local policy](governance/access-controls/local.md) for the full rule set
+and how to customize it.
 
 ## Clean up
 
@@ -272,5 +272,5 @@ Then explore:
   network rules into a reusable definition you launch with a single flag.
 - [Agents](agents/) — the full list of supported agents and how to configure
   each one.
-- [Governance](governance/) — centrally manage network and filesystem policies
-  across a team.
+- [Governance](governance/) — centrally manage network, filesystem, and MCP
+  policies across a team.
