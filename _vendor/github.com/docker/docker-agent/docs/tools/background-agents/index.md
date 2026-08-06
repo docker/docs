@@ -32,6 +32,8 @@ The background agents tool lets an orchestrator dispatch work to sub-agents conc
 
 `run_background_agent` returns a **task ID** string. Tools run by the sub-agent inherit the parent session's permissions. Because background tasks run non-interactively, any tool call that would normally prompt the user for approval will be automatically denied. To allow background agents to run mutating tools, you must explicitly approve them in the parent session (e.g. via YOLO mode or explicit allow rules).
 
+Background delegation shares the same runtime guards as `transfer_task`: delegation cycles are rejected and chains are capped at 10 nested delegations. See [Delegation Limits](../transfer-task/index.md#delegation-limits).
+
 ### `view_background_agent` and `stop_background_agent` parameters
 
 | Parameter | Type   | Required | Description                                                    |

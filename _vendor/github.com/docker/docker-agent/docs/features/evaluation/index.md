@@ -15,9 +15,9 @@ _Measure agent quality with automated evaluations — tool call accuracy, respon
 The `docker agent eval` command runs your agent against a set of recorded sessions and scores the results. Each eval session captures a user question, the expected tool calls, and criteria the response must satisfy. Docker Agent replays the question, compares the agent's behavior to expectations, and produces a report.
 
 > [!NOTE]
-> **Docker required**
+> **Container runtime required**
 >
-> Evaluations run inside Docker containers for isolation. Each eval gets a clean environment with optional setup scripts. Docker Desktop (or Docker Engine) must be running.
+> Evaluations run inside containers for isolation. Each eval gets a clean environment with optional setup scripts. A running Docker-compatible container CLI/runtime is required: Docker Desktop or Docker Engine by default, or another Docker-compatible runtime such as Podman selected with `--container-runtime`.
 
 ## Quick Start
 
@@ -39,6 +39,9 @@ $ docker agent eval agent.yaml --repeat 5
 
 # Repeat a specific eval 5 times
 $ docker agent eval agent.yaml --only "auth*" --repeat 5
+
+# Use a Docker-compatible runtime such as Podman
+$ docker agent eval agent.yaml --container-runtime podman
 ```
 
 ## Eval Directory Structure
@@ -160,7 +163,8 @@ $ docker agent eval <agent-file>|<registry-ref> [<eval-dir>|./evals]
 | `--judge-model`     | `anthropic/claude-opus-5` | Model for LLM-as-a-judge relevance scoring                        |
 | `--output`          | `<eval-dir>/results`  | Directory for results, logs, and session databases                |
 | `--only`            | (all)                       | Only run evals with file names matching these patterns            |
-| `--base-image`      | (default)                   | Custom base Docker image for eval containers (see [Custom Base Images](#custom-base-images)) |
+| `--base-image`      | (default)                   | Custom base image for eval containers (see [Custom Base Images](#custom-base-images)) |
+| `--container-runtime` | `docker`                  | Container runtime executable for building and running evaluations (e.g. `podman`) |
 | `--keep-containers` | `false`                     | Keep containers after evaluation (don't remove with `--rm`)       |
 | `-e, --env`         | (none)                      | Environment variables to pass to container (`KEY` or `KEY=VALUE`) |
 | `--repeat`          | `1`                         | Number of times to repeat each evaluation (useful for computing baselines) |
@@ -219,7 +223,7 @@ After a run completes, Docker Agent produces:
 > [!TIP]
 > **Debugging Failed Evals**
 >
-> Use `--keep-containers` to preserve containers after evaluation. You can then inspect them with `docker exec` to understand why an eval failed. The session database (`.db` file) contains the full conversation history for each eval.
+> Use `--keep-containers` to preserve containers after evaluation. You can then inspect them with your selected runtime's `exec` command (`docker exec` by default, `podman exec` with `--container-runtime podman`) to understand why an eval failed. The session database (`.db` file) contains the full conversation history for each eval.
 
 ```bash
 $ docker agent eval demo.yaml ./evals

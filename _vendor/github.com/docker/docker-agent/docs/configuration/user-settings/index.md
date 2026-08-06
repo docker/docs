@@ -54,6 +54,7 @@ You rarely need to hand-edit this file. Most fields are managed from the TUI's `
 | `cache_stable_prompts` | boolean | `false` | Keep changing trusted context (date, environment info, dynamic prompt files) out of the frozen system prefix and append chronological updates instead, improving prompt-cache hit rates on long sessions. |
 | `warn_on_cache_miss` | boolean | `false` | Warn when a model call after the first one in a session reports no cached input tokens (a prompt-cache miss). Managed from the **Notifications** tab of `/settings`. |
 | `busy_send_mode` | string | `steer` | What happens to a message sent while the agent is working: `steer` injects it into the ongoing stream; `queue` holds it until the current turn ends. |
+| `interrupt_confirmation` | string | `always` | Controls how the <kbd>Esc</kbd> key interrupts a running stream: `always` (default) shows a confirmation dialog; `double-tap` requires pressing <kbd>Esc</kbd> twice within 1 second; `none` interrupts immediately without confirmation. Managed from the **Behavior** tab of `/settings`. |
 | `permissions` | object | _unset_ | Global tool-permission rules (`allow` / `ask` / `deny`), merged with agent-level and session-level permissions. See [Permissions](../permissions/index.md#global-permissions). |
 | `hooks` | object | _unset_ | Global lifecycle hooks applied to every agent, additive with agent-config and CLI hooks. See [Global (user-level) hooks](../hooks/index.md#global-user-level-hooks). |
 | `keybindings` | array | _unset_ | Remap TUI keyboard shortcuts. See [Custom Keybindings](../../features/tui/index.md#custom-keybindings) for the full list of actions and syntax. |
@@ -101,6 +102,7 @@ settings:
   cache_stable_prompts: true
   warn_on_cache_miss: true
   busy_send_mode: queue
+  interrupt_confirmation: double-tap
   restore_tabs: true
   tab_title_max_length: 24
   layout:
