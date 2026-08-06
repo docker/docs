@@ -36,13 +36,13 @@ OpenCode supports multiple providers. Store keys for the providers you want to
 use with [stored secrets](../security/credentials.md#stored-secrets):
 
 ```console
-$ sbx secret set -g openai
-$ sbx secret set -g anthropic
-$ sbx secret set -g google
-$ sbx secret set -g xai
-$ sbx secret set -g groq
-$ sbx secret set -g aws
-$ sbx secret set -g openrouter
+$ sbx secret set openai
+$ sbx secret set anthropic
+$ sbx secret set google
+$ sbx secret set xai
+$ sbx secret set groq
+$ sbx secret set aws
+$ sbx secret set openrouter
 ```
 
 You only need to configure the providers you want to use. OpenCode detects
@@ -57,7 +57,7 @@ OpenCode Zen API keys aren't part of the built-in OpenCode credentials that
 Set the `OPENCODE_API_KEY` environment variable on the host, then store it:
 
 ```console
-$ sbx secret set-custom -g \
+$ sbx secret set-custom \
     --host opencode.ai \
     --env OPENCODE_API_KEY \
     --value "$OPENCODE_API_KEY"
@@ -73,8 +73,8 @@ OpenCode Zen also requires network access to `opencode.ai`:
 $ sbx policy allow network opencode.ai:443
 ```
 
-If you add the custom secret globally with `-g`, recreate existing OpenCode
-sandboxes so the new environment variable is available inside the sandbox.
+If you add a global custom secret, recreate existing OpenCode sandboxes so the
+new environment variable is available inside the sandbox.
 
 ## Configuration
 

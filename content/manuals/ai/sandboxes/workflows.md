@@ -428,10 +428,10 @@ credential on your host once, and the sandbox either forwards it via the
 proxy or via SSH agent forwarding.
 
 > [!NOTE]
-> The `-g` flag stores a secret globally so all future sandboxes can use it.
-> Sandboxes that already exist when you run `sbx secret set -g` do not
+> Service secrets are global by default, so all future sandboxes can use them.
+> Sandboxes that already exist when you run `sbx secret set` do not
 > receive the updated value. To update a running sandbox, scope the secret to
-> it directly: `sbx secret set <sandbox-name> <service>`.
+> it directly: `sbx secret set <service> --sandbox <sandbox-name>`.
 
 ### GitHub CLI
 
@@ -440,7 +440,7 @@ outbound requests, so `gh` works inside the sandbox without any additional
 configuration:
 
 ```console
-$ echo "$(gh auth token)" | sbx secret set -g github
+$ echo "$(gh auth token)" | sbx secret set github
 ```
 
 The agent can then create pull requests, open issues, comment on PRs, and
@@ -463,9 +463,10 @@ credentials for `sbx` so it can pull private [templates](customize/templates.md)
 and kits when creating a sandbox:
 
 ```console
-$ gh auth token | sbx secret set --registry ghcr.io \
+$ gh auth token | sbx secret set --all-sandboxes --registry ghcr.io \
     --username <github-username> --password-stdin
-$ echo "$ACR_PASSWORD" | sbx secret set --registry myregistry.azurecr.io \
+$ echo "$ACR_PASSWORD" | sbx secret set --all-sandboxes \
+    --registry myregistry.azurecr.io \
     --username myuser --password-stdin
 ```
 
@@ -478,7 +479,7 @@ Images and containers built inside the sandbox run on the sandbox's private
 Docker daemon, not your host's. They're deleted when the sandbox is removed.
 
 For information on how registry credentials differ from other secrets,
-per-registry username requirements, and global versus per-sandbox scoping, see
+per-registry username requirements, and all-sandbox versus per-sandbox scoping, see
 [Registry credentials](security/credentials.md#registry-credentials).
 
 ### Sourcing credentials from 1Password
@@ -489,8 +490,8 @@ Use `op read` to populate stored secrets without pasting values manually. Store
 the value once and it's available to all future sandboxes:
 
 ```console
-$ op read "op://Work/GitHub/token" | sbx secret set -g github
-$ op read "op://Work/Anthropic/credential" | sbx secret set -g anthropic
+$ op read "op://Work/GitHub/token" | sbx secret set github
+$ op read "op://Work/Anthropic/credential" | sbx secret set anthropic
 ```
 
 The real value stays on your host; the sandbox sees the proxy-managed
@@ -565,7 +566,7 @@ To overwrite an existing stored entry, add `--force`. To pass a value from your
 CI provider's secret store, use `-t`. For example, in a GitHub Actions step:
 
 ```yaml
-- run: sbx secret set -g anthropic -t "${{ secrets.ANTHROPIC_API_KEY }}"
+- run: sbx secret set anthropic -t "${{ secrets.ANTHROPIC_API_KEY }}"
 ```
 
 ## Share setup across a team

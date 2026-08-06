@@ -74,20 +74,20 @@ more on running sandboxes without a desktop keyring, see
 ### Store a secret
 
 ```console
-$ sbx secret set -g anthropic
+$ sbx secret set anthropic
 ```
 
-This prompts you for the secret value interactively. The `-g` flag stores the
-secret globally so it's available to all sandboxes. To scope a secret to a
-specific sandbox instead:
+This prompts you for the secret value interactively. Service secrets are
+global by default, so the secret is available to all sandboxes. To scope a
+secret to a specific sandbox instead:
 
 ```console
-$ sbx secret set my-sandbox openai
+$ sbx secret set openai --sandbox my-sandbox
 ```
 
 > [!NOTE]
 > A sandbox-scoped secret takes effect immediately, even if the sandbox is
-> running. A global secret (`-g`) only applies when a sandbox is created. If
+> running. A global secret only applies when a sandbox is created. If
 > you set or change a global secret while a sandbox is running, recreate the
 > sandbox for the new value to take effect.
 
@@ -139,7 +139,7 @@ reads and the API domains the proxy injects credentials into:
 | `openrouter` | `OPENROUTER_API_KEY`               | `openrouter.ai`                                                                                                               |
 | `xai`        | `XAI_API_KEY`                      | `api.x.ai`                                                                                                                    |
 
-When you store a secret with `sbx secret set -g <service>`, the proxy injects
+When you store a secret with `sbx secret set <service>`, the proxy injects
 it into requests to the listed API domains.
 
 ### Services declared by kits
@@ -150,7 +150,7 @@ kit-declared service, run `sbx secret set` with the same identifier the kit
 declares under `credentials.sources`:
 
 ```console
-$ sbx secret set -g my-service
+$ sbx secret set my-service
 ```
 
 There's no separate registration step; the keychain entry is keyed on the
@@ -171,7 +171,7 @@ SCOPE      TYPE      NAME      SECRET
 Remove a secret:
 
 ```console
-$ sbx secret rm -g github
+$ sbx secret rm github
 ```
 
 > [!NOTE]
@@ -184,7 +184,7 @@ The `github` service gives the agent access to the `gh` CLI inside the
 sandbox. Pass your existing GitHub CLI token:
 
 ```console
-$ echo "$(gh auth token)" | sbx secret set -g github
+$ echo "$(gh auth token)" | sbx secret set github
 ```
 
 This is useful for agents that create pull requests, open issues, or interact
@@ -215,10 +215,11 @@ when an agent validates the environment variable format at boot, or when the
 credential lands in a request body rather than a header — use
 `sbx secret set-custom`. The secret is keyed on one or more target domains, an
 environment variable name, and an optional placeholder string, instead of a
-service identifier.
+service identifier. Custom secrets are global by default. Pass `--sandbox` to
+scope one to a specific sandbox.
 
 ```console
-$ sbx secret set-custom -g \
+$ sbx secret set-custom \
     --host api.example.com \
     --env API_KEY \
     --value <secret>
@@ -229,7 +230,7 @@ an API is split across related hostnames or when two unrelated endpoints share
 a credential:
 
 ```console
-$ sbx secret set-custom -g \
+$ sbx secret set-custom \
     --host api.example.com \
     --host uploads.example.com \
     --env API_KEY \
@@ -266,21 +267,23 @@ Docker Hub, `sbx` reuses your `sbx login` session — no registry secret needed.
 For other registries (GitHub Container Registry, ECR, ACR, self-hosted Nexus,
 and so on), store credentials with `sbx secret set --registry`.
 
-Choose the scope by adding `-g`, adding a sandbox name, or passing neither:
+Choose the scope by adding `--all-sandboxes`, adding `--sandbox SANDBOX`, or
+passing neither:
 
 ```text
-sbx secret set [-g | SANDBOX] --registry HOST
+sbx secret set [--all-sandboxes | --sandbox SANDBOX] --registry HOST
 ```
 
-- **Host-only** (no `-g`, no `SANDBOX`): the `sbx` CLI uses it to pull templates
+- **Host-only** (no scope flag): the `sbx` CLI uses it to pull templates
   and kits when creating a sandbox. The credential stays on the host and is
   never available inside the sandbox.
-- **Global** (`-g`): same as host-only, plus the host-side proxy authenticates
-  registry login requests from sandboxes. The credential stays on the host and
-  is never written to the sandbox filesystem. Use it when agents build and
-  publish container images.
-- **Sandbox-scoped** (`SANDBOX`): same proxy behavior as global, but only for the
-  named sandbox. Use it when only one sandbox needs registry access.
+- **All sandboxes** (`--all-sandboxes`): same as host-only, plus the proxy
+  authenticates registry login requests from sandboxes. The credential stays
+  on the host and is never written to the sandbox filesystem. Use it when
+  agents build and publish container images.
+- **Sandbox-scoped** (`--sandbox SANDBOX`): same proxy behavior as
+  `--all-sandboxes`, but only for the named sandbox. Use it when only one
+  sandbox needs registry access.
 
 ### Store registry credentials
 
@@ -300,21 +303,21 @@ $ echo "$ACR_PASSWORD" | sbx secret set \
     --password-stdin
 ```
 
-Add `-g` to store the credential globally for sandbox registry operations:
+Add `--all-sandboxes` to make the credential available to every new sandbox:
 
 ```console
-$ gh auth token | sbx secret set -g --registry ghcr.io --password-stdin
+$ gh auth token | sbx secret set --all-sandboxes --registry ghcr.io --password-stdin
 $ sbx run claude
 ```
 
-Store global registry credentials before creating a sandbox. Existing sandboxes
-don't pick up global registry credentials added later. To add registry access to
-an existing sandbox, use a sandbox-scoped credential instead.
+Store all-sandboxes registry credentials before creating a sandbox. Existing
+sandboxes don't pick up all-sandboxes registry credentials added later. To add
+registry access to an existing sandbox, use a sandbox-scoped credential instead.
 
 To scope the credential to a single sandbox, store it under that sandbox's name:
 
 ```console
-$ gh auth token | sbx secret set my-app --registry ghcr.io --password-stdin
+$ gh auth token | sbx secret set --sandbox my-app --registry ghcr.io --password-stdin
 ```
 
 `sbx kit pull` also uses these credentials, with the Docker credential
@@ -323,23 +326,23 @@ push targets still require a prior `docker login`.
 
 ### Remove registry credentials
 
-Remove both the host-only and global entries for a registry:
+Remove both the host-only and all-sandboxes entries for a registry:
 
 ```console
 $ sbx secret rm --registry ghcr.io -f
 ```
 
-To remove only the global (in-sandbox) entry and leave the
-host-only credential in place, pass `-g`:
+To remove only the all-sandboxes entry and leave the host-only credential in
+place, pass `--all-sandboxes`:
 
 ```console
-$ sbx secret rm -g --registry ghcr.io -f
+$ sbx secret rm --all-sandboxes --registry ghcr.io -f
 ```
 
 To remove a sandbox-scoped credential, pass the sandbox name:
 
 ```console
-$ sbx secret rm my-sandbox --registry ghcr.io -f
+$ sbx secret rm --sandbox my-sandbox --registry ghcr.io -f
 ```
 
 ## Best practices
@@ -351,14 +354,14 @@ $ sbx secret rm my-sandbox --registry ghcr.io -f
   pre-configured to use proxy-managed credentials.
 - Registry credentials stay on the host and are injected by the proxy when a
   sandbox authenticates to the registry. Reserve them for sandboxes that need
-  registry access, and prefer sandbox scope over global (`-g`) to limit
+  registry access, and prefer sandbox scope over `--all-sandboxes` to limit
   exposure.
 - Several agents support OAuth as another secure option: the flow runs on the
   host, so the token is never exposed inside the sandbox. If you haven't stored
   a credential, the agent prompts you to authenticate — Codex prompts on the
   host from `sbx run codex`, while Claude Code, Cursor, and Droid prompt
   interactively inside the sandbox. To authenticate ahead of time, run
-  `sbx secret set -g openai --oauth` for Codex or use `/login` inside Claude
+  `sbx secret set openai --oauth` for Codex or use `/login` inside Claude
   Code; Cursor and Droid have no ahead-of-time option, so their sign-in prompt
   appears when the agent starts. See the individual [agent pages](../agents/)
   for each agent's flow.

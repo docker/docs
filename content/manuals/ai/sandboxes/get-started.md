@@ -128,7 +128,7 @@ To give the agent access to GitHub for creating pull requests or interacting
 with repositories:
 
 ```console
-$ sbx secret set -g github -t "$(gh auth token)"
+$ sbx secret set github -t "$(gh auth token)"
 ```
 
 ## Run your first sandbox

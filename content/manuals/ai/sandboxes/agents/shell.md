@@ -38,8 +38,8 @@ before running the sandbox. The proxy injects them into outbound API requests;
 credentials are never stored inside the VM:
 
 ```console
-$ sbx secret set -g anthropic
-$ sbx secret set -g openai
+$ sbx secret set anthropic
+$ sbx secret set openai
 ```
 
 Once inside the shell, you can install agents using their standard methods,
