@@ -1,0 +1,22 @@
+{
+  "period_start": "2026-07-28",
+  "period_end": "2026-08-03",
+  "items": [
+    {
+      "product": "Docker Engine",
+      "title": "Mount files from container images",
+      "description": "Mount files or directories from another image without copying them into the container image.",
+      "url": "/engine/storage/image-mounts/",
+      "published": "2026-08-03",
+      "source_prs": [25486]
+    },
+    {
+      "product": "Docker Sandboxes",
+      "title": "Export AI Governance audit events",
+      "description": "Search and export policy decisions, or stream audit events to a SIEM system.",
+      "url": "/ai/sandboxes/governance/audit/view-export/",
+      "published": "2026-07-31",
+      "source_prs": [25679]
+    }
+  ]
+}
