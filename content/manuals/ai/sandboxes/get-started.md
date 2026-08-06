@@ -160,8 +160,8 @@ Initialize the global network policy for your sandboxes:
 
 **Balanced** is a good starting point — it permits traffic to common
 development services while blocking everything else. You can adjust individual
-rules later. See [Policies](governance/local.md) for a full description of each
-option.
+rules later. See [Local policy](governance/access-controls/local.md) for a full
+description of each option.
 
 Replace `claude` with the agent you want to use — see [Agents](agents/) for the
 full list.
