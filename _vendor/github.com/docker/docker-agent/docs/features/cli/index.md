@@ -461,7 +461,8 @@ $ docker agent eval <agent-file>|<registry-ref> [<eval-dir>|./evals] [flags]
 | `--judge-model`     | `anthropic/claude-opus-5` | Model for LLM-as-a-judge relevance scoring (format: `provider/model`)      |
 | `--output <dir>`    | `<eval-dir>/results`                 | Directory for results, logs, and session databases                         |
 | `--only <pattern>`  | (all)                                | Only run evals with file names matching these patterns (repeatable)        |
-| `--base-image`      | (default)                            | Custom base Docker image for eval containers                               |
+| `--base-image`      | (default)                            | Custom base image for eval containers                                      |
+| `--container-runtime` | `docker`                           | Container runtime executable for building and running evaluations (e.g. `podman`) |
 | `--keep-containers` | `false`                              | Keep containers after evaluation (don't remove with `--rm`)                |
 | `-e, --env`         | (none)                               | Environment variables to pass to container (`KEY` or `KEY=VALUE`, repeatable) |
 | `--repeat <n>`      | `1`                                  | Number of times to repeat each evaluation (useful for computing baselines) |
@@ -476,6 +477,7 @@ $ docker agent eval agent.yaml -c 8                       # 8 concurrent evaluat
 $ docker agent eval agent.yaml --keep-containers          # keep containers for debugging
 $ docker agent eval agent.yaml --only "auth*"             # only run matching evals
 $ docker agent eval agent.yaml --repeat 5                 # repeat each eval 5 times
+$ docker agent eval agent.yaml --container-runtime podman # use a Docker-compatible runtime such as Podman
 ```
 
 See [Evaluation](../evaluation/index.md) for details on creating eval sessions and interpreting results.
