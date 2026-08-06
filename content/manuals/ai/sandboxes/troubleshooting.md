@@ -28,8 +28,7 @@ If sandbox commands hang, fail to connect to the daemon, or keep returning
 daemon errors, restart the sandbox daemon before resetting sandbox state:
 
 ```console
-$ sbx daemon stop
-$ sbx daemon start --detach
+$ sbx daemon restart
 ```
 
 Then retry the command that failed. Restarting the daemon doesn't delete
