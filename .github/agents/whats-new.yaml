@@ -1,14 +1,14 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/docker/docker-agent/refs/heads/main/cagent-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/docker/docker-agent/refs/heads/main/agent-schema.json
 models:
-  claude-sonnet:
+  claude-sonnet-5:
     provider: anthropic
-    model: claude-sonnet-4-5
-    max_tokens: 8192
+    model: claude-sonnet-5
+    max_tokens: 4096
     temperature: 0.1
 
 agents:
   root:
-    model: claude-sonnet
+    model: claude-sonnet-5
     description: Curates user-facing Docker launches from recently published documentation
     add_prompt_files:
       - AGENTS.md
