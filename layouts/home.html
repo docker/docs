@@ -116,43 +116,7 @@
         </div>
       </section>
 
-      <!-- Popular Topics Section -->
-      <section class="py-8">
-        <div class="container mx-auto max-w-3xl px-4">
-          <h2
-            class="mb-8 text-center text-2xl font-semibold text-gray-900 dark:text-white"
-          >
-            Featured topics
-          </h2>
-          <div
-            class="divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white dark:divide-gray-700 dark:border-gray-700 dark:bg-gray-900"
-          >
-            {{ range slice
-              (dict "url" "/dhi/" "title" "Docker Hardened Images")
-              (dict "url" "/ai/sandboxes/get-started/" "title" "Get started with Docker Sandboxes")
-              (dict "url" "/desktop/" "title" "Docker Desktop overview")
-              (dict "url" "/engine/install/" "title" "Install Docker Engine")
-              (dict "url" "/reference/dockerfile/" "title" "Dockerfile reference")
-              (dict "url" "/build/" "title" "Docker Build overview")
-            }}
-              <a
-                href="{{ .url }}"
-                class="group flex items-center justify-between px-4 py-3 transition hover:bg-blue-50 dark:hover:bg-gray-700"
-              >
-                <span
-                  class="text-gray-900 transition group-hover:text-blue-500 dark:text-white dark:group-hover:text-blue-400"
-                  >{{ .title }}</span
-                >
-                <span
-                  class="icon-svg text-gray-400 transition group-hover:translate-x-1 dark:text-gray-500"
-                >
-                  {{ partialCached "icon" "arrow-right" "arrow-right" }}
-                </span>
-              </a>
-            {{ end }}
-          </div>
-        </div>
-      </section>
+      {{ partial "whats-new.html" . }}
     </main>
     <footer>{{ partialCached "footer.html" . }}</footer>
   </body>
