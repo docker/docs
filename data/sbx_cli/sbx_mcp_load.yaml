@@ -1,0 +1,32 @@
+name: sbx mcp load
+synopsis: Load an already-registered MCP server into a running sandbox
+description: |-
+    Attach a previously-registered MCP server to a running sandbox's gateway.
+    Connected agents see the new server's tools immediately via the standard MCP
+    tools/list_changed notification — no agent restart required.
+
+    The server must already exist in the local MCP store (register first with
+    'sbx mcp add'). Both remote/hosted and local-stdio servers are supported.
+usage: sbx mcp load <name> --sandbox <sandbox> [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for load
+    - name: sandbox
+      usage: Target sandbox name (required)
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      # Register, then load into the running sandbox 'my-sbx'.
+      sbx mcp add notion --url https://mcp.notion.com/mcp
+      sbx mcp load notion --sandbox my-sbx
+
+      # Local stdio server.
+      sbx mcp add github --command npx --args @modelcontextprotocol/server-github
+      sbx mcp load github --sandbox my-sbx
+see_also:
+    - sbx mcp - Manage MCP servers
