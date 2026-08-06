@@ -34,17 +34,22 @@ destination IP and port (for example, `sbx policy allow network "10.1.2.3:22"`).
 UDP and ICMP are blocked at the network layer and can't be unblocked with policy
 rules.
 
-On first start, and after running `sbx policy reset`, the daemon prompts you
-to choose a network preset:
+If you haven't chosen a default preset, the CLI prompts you before it runs a
+sandbox. Running `sbx policy reset` clears the preset and prompts you to choose
+again:
 
 ```plaintext
-Choose a default network policy:
+Initialize the global network policy for your sandboxes:
+
+  Applies to all sandboxes, current and future — change it later with
+  "sbx policy allow/deny/rm". Kits, including built-in agent kits, may
+  also add per-sandbox rules.
 
      1. Open         — All network traffic allowed, no restrictions.
-     2. Balanced     — Default deny, with common dev sites allowed.
+  ❯  2. Balanced     — Default deny, with common dev sites allowed.
      3. Locked Down  — All network traffic blocked unless you allow it.
 
-  Use ↑/↓ to navigate, Enter to select, or press 1–3.
+  Use ↑/↓ or 1–3 to navigate, Enter to confirm, Esc to cancel.
 ```
 
 | Preset      | Description                                                                                                                                       |
@@ -152,10 +157,9 @@ To remove all custom rules and start fresh with a new preset, use
 $ sbx policy reset
 ```
 
-This deletes the local policy store and stops the daemon. When the daemon
-restarts on the next command, you are prompted to choose a new preset. Running
-sandboxes stop when the daemon shuts down. Pass `--force` to skip the
-confirmation prompt:
+This deletes the local policy store, restarts the daemon, and prompts you to
+choose a new preset. Running sandboxes stop when the daemon shuts down. Pass
+`--force` to skip the confirmation prompt:
 
 ```console
 $ sbx policy reset --force
