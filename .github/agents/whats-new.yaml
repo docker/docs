@@ -36,6 +36,11 @@ agents:
       items to make the list look balanced. Several or all highlights may come
       from one product when that reflects what shipped.
 
+      Preserve the copy for an existing highlight while it remains in the
+      publication window and still qualifies. Rewrite it only when newly merged
+      documentation makes the existing copy inaccurate or incomplete. Do not
+      rewrite continuing highlights for freshness, variety, or style.
+
       ## Inclusion criteria
 
       Include a change only when all of the following are true:

@@ -2,8 +2,8 @@ name: Update What's New
 
 on:
   schedule:
-    # Review the previous Monday through Sunday each Monday at 06:00 UTC.
-    - cron: "0 6 * * 1"
+    # Review the previous seven complete UTC days every day at 06:00 UTC.
+    - cron: "0 6 * * *"
   workflow_dispatch:
     inputs:
       dry-run:
@@ -36,7 +36,7 @@ jobs:
       - name: Set publication period
         id: period
         run: |
-          PERIOD_END=$(date -u -d 'last sunday' +%F)
+          PERIOD_END=$(date -u -d 'yesterday' +%F)
           echo "start=$(date -u -d "$PERIOD_END - 6 days" +%F)" >> "$GITHUB_OUTPUT"
           echo "end=$PERIOD_END" >> "$GITHUB_OUTPUT"
 
@@ -57,6 +57,16 @@ jobs:
             --output text | jq -r '.pat')
           echo "::add-mask::$PAT"
           echo "GITHUB_APP_TOKEN=$PAT" >> "$GITHUB_ENV"
+
+      - name: Restore open proposal
+        env:
+          GH_TOKEN: ${{ env.GITHUB_APP_TOKEN || github.token }}
+        run: |
+          EXISTING_PR=$(gh pr list --state open --head "$BRANCH_NAME" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING_PR" ]; then
+            git fetch origin "$BRANCH_NAME:refs/remotes/origin/$BRANCH_NAME"
+            git show "origin/$BRANCH_NAME:data/whats-new.json" > data/whats-new.json
+          fi
 
       - name: Curate highlights
         uses: docker/docker-agent-action@e96a4bb40cac114f64358621e1d08346c8eadc8c # v2.0.1
@@ -98,10 +108,23 @@ jobs:
         id: changes
         if: inputs.dry-run != true
         run: |
-          if git diff --quiet -- data/whats-new.json; then
+          if cmp -s \
+            <(git show HEAD:data/whats-new.json | jq -S '.items') \
+            <(jq -S '.items' data/whats-new.json); then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Close obsolete pull request
+        if: steps.changes.outputs.changed == 'false'
+        env:
+          GH_TOKEN: ${{ env.GITHUB_APP_TOKEN || github.token }}
+        run: |
+          EXISTING_PR=$(gh pr list --state open --head "$BRANCH_NAME" --json url --jq '.[0].url // empty')
+          if [ -n "$EXISTING_PR" ]; then
+            gh pr close "$EXISTING_PR" \
+              --comment "The latest sliding-window review no longer proposes changes to the published highlights."
           fi
 
       - name: Commit changes
@@ -129,7 +152,7 @@ jobs:
               --title "docs: update what's new" \
               --body-file .pr-body.md
           else
-            git push --set-upstream origin "$BRANCH_NAME"
+            git push --force --set-upstream origin "$BRANCH_NAME"
             gh pr create \
               --title "docs: update what's new" \
               --body-file .pr-body.md \
