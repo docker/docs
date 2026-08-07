@@ -33,6 +33,8 @@ Here's what makes them awesome. Containers are:
 - Independent. Each container is independently managed. Deleting one container won't affect any others.
 - Portable. Containers can run anywhere! The container that runs on your development machine will work the same way in a data center or anywhere in the cloud!
 
+![Diagram showing three containers (frontend, backend, database) running side by side, each with an isolated filesystem, all sharing the host OS kernel](images/container-architecture.png)
+
 ### Containers versus virtual machines (VMs)
 
 Without getting too deep, a VM is an entire operating system with its own kernel, hardware drivers, programs, and applications. Spinning up a VM only to isolate a single application is a lot of overhead.
@@ -42,6 +44,8 @@ A container is simply an isolated process with all of the files it needs to run.
 > **Using VMs and containers together**
 >
 > Quite often, you will see containers and VMs used together. As an example, in a cloud environment, the provisioned machines are typically VMs. However, instead of provisioning one machine to run one application, a VM with a container runtime can run multiple containerized applications, increasing resource utilization and reducing costs.
+
+![Diagram comparing virtual machines (each with a full Guest OS) versus containers (sharing the host kernel with no Guest OS overhead)](images/containers-vs-vms.png)
 
 
 ## Try it out
