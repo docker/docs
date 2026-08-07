@@ -19,7 +19,7 @@ aliases:
 > won't reflect how your system stores images. For operational guidance, see
 > [containerd image store](../containerd.md).
 
-To use storage drivers effectively, it's important to know how Docker builds and
+To use storage drivers effectively, you need to know how Docker builds and
 stores images, and how these images are used by containers. You can use this
 information to make informed choices about the best way to persist data from
 your applications and avoid performance problems along the way.
