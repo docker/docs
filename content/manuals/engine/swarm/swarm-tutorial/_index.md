@@ -11,10 +11,10 @@ before you begin.
 
 The tutorial guides you through:
 
-* Initializing a cluster of Docker Engines in swarm mode
-* Adding nodes to the swarm
-* Deploying application services to the swarm
-* Managing the swarm once you have everything running
+- Initializing a cluster of Docker Engines in swarm mode
+- Adding nodes to the swarm
+- Deploying application services to the swarm
+- Managing the swarm once you have everything running
 
 This tutorial uses Docker Engine CLI commands entered on the command line of a
 terminal window.
@@ -25,9 +25,9 @@ If you are brand new to Docker, see [About Docker Engine](../../_index.md).
 
 To run this tutorial, you need:
 
-* [Three Linux hosts which can communicate over a network, with Docker installed](#three-networked-host-machines)
-* [The IP address of the manager machine](#the-ip-address-of-the-manager-machine)
-* [Open ports between the hosts](#open-protocols-and-ports-between-the-hosts)
+- [Three Linux hosts which can communicate over a network, with Docker installed](#three-networked-host-machines)
+- [The IP address of the manager machine](#the-ip-address-of-the-manager-machine)
+- [Open ports between the hosts](#open-protocols-and-ports-between-the-hosts)
 
 ### Three networked host machines
 
@@ -46,7 +46,7 @@ workers (`worker1` and `worker2`).
 #### Install Docker Engine on Linux machines
 
 If you are using Linux based physical computers or cloud-provided computers as
-hosts, simply follow the [Linux install instructions](../../install/_index.md)
+hosts, follow the [Linux install instructions](../../install/_index.md)
 for your platform. Spin up the three machines, and you are ready. You can test both
 single-node and multi-node swarm scenarios on Linux machines.
 
@@ -68,9 +68,9 @@ The tutorial uses `manager1` : `192.168.99.100`.
 
 The following ports must be available. On some systems, these ports are open by default.
 
-* Port `2377` TCP for communication with and between manager nodes
-* Port `7946` TCP/UDP for overlay network node discovery
-* Port `4789` UDP (configurable) for overlay network traffic
+- Port `2377` TCP for communication with and between manager nodes
+- Port `7946` TCP/UDP for overlay network node discovery
+- Port `4789` UDP (configurable) for overlay network traffic
 
 If you plan on creating an overlay network with encryption (`--opt encrypted`),
 you also need to ensure IP protocol 50 (IPSec ESP) traffic is allowed.
@@ -84,8 +84,8 @@ If the network which Swarm traffic traverses is not fully trusted, it is strongl
 encrypted overlay networks be used. If encrypted overlay networks are in exclusive use, some
 additional hardening is suggested:
 
-* [Customize the default ingress network](../networking.md) to use encryption
-* Only accept encrypted packets on the Data Path Port:
+- [Customize the default ingress network](../networking.md) to use encryption
+- Only accept encrypted packets on the Data Path Port:
 
 ```bash
 # Example iptables rule (order and other tools may require customization)
@@ -94,6 +94,6 @@ iptables -I INPUT -m udp --dport 4789 -m policy --dir in --pol none -j DROP
 
 ## Next steps
 
-Next, you'll create a swarm. 
+Next, you'll create a swarm.
 
 {{< button text="Create a swarm" url="create-swarm.md" >}}

@@ -14,7 +14,7 @@ the Docker CLI to see details about the service running in the swarm.
     `manager1`.
 
 2.  Run `docker service inspect --pretty <SERVICE-ID>` to display the details
-    about a service in an easily readable format.
+    about a service in a readable format.
 
     To see the details on the `helloworld` service:
 
@@ -38,7 +38,7 @@ the Docker CLI to see details about the service running in the swarm.
     > [!TIP]
     >
     > To return the service details in json format, run the same command
-    without the `--pretty` flag.
+    > without the `--pretty` flag.
 
     ```console
     [manager1]$ docker service inspect helloworld
@@ -113,7 +113,7 @@ the Docker CLI to see details about the service running in the swarm.
     > [!TIP]
     >
     > If `helloworld` is running on a node other than your manager node,
-    you must ssh to that node.
+    > you must ssh to that node.
 
     ```console
     [worker2]$ docker ps

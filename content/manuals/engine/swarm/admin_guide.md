@@ -3,7 +3,7 @@ description: Manager administration guide
 keywords: docker, container, swarm, manager, raft
 title: Administer and maintain a swarm of Docker Engines
 aliases:
-- /engine/swarm/manager-administration-guide/
+  - /engine/swarm/manager-administration-guide/
 ---
 
 When you run a swarm of Docker Engines, manager nodes are the key components
@@ -55,8 +55,8 @@ troubleshooting steps if you do lose the quorum of managers.
 When initiating a swarm, you must specify the `--advertise-addr` flag to
 advertise your address to other manager nodes in the swarm. For more
 information, see [Run Docker Engine in swarm mode](swarm-mode.md#configure-the-advertise-address). Because manager nodes are
-meant to be a stable component of the infrastructure, you should use a *fixed
-IP address* for the advertise address to prevent the swarm from becoming
+meant to be a stable component of the infrastructure, you should use a _fixed
+IP address_ for the advertise address to prevent the swarm from becoming
 unstable on machine reboot.
 
 If the whole swarm restarts and every manager node subsequently gets a new IP
@@ -73,19 +73,19 @@ partition, there is a higher chance that the quorum remains available to process
 requests if the network is partitioned into two sets. Keeping the quorum is not
 guaranteed if you encounter more than two network partitions.
 
-| Swarm Size |  Majority  |  Fault Tolerance  |
-|:------------:|:----------:|:-----------------:|
-|      1       |     1      |         0         |
-|      2       |     2      |         0         |
-|    **3**     |     2      |       **1**       |
-|      4       |     3      |         1         |
-|    **5**     |     3      |       **2**       |
-|      6       |     4      |         2         |
-|    **7**     |     4      |       **3**       |
-|      8       |     5      |         3         |
-|    **9**     |     5      |       **4**       |
+| Swarm Size | Majority | Fault Tolerance |
+| :--------: | :------: | :-------------: |
+|     1      |    1     |        0        |
+|     2      |    2     |        0        |
+|   **3**    |    2     |      **1**      |
+|     4      |    3     |        1        |
+|   **5**    |    3     |      **2**      |
+|     6      |    4     |        2        |
+|   **7**    |    4     |      **3**      |
+|     8      |    5     |        3        |
+|   **9**    |    5     |      **4**      |
 
-For example, in a swarm with *5 nodes*, if you lose *3 nodes*, you don't have a
+For example, in a swarm with _5 nodes_, if you lose _3 nodes_, you don't have a
 quorum. Therefore you can't add or remove nodes until you recover one of the
 unavailable manager nodes or recover the swarm with disaster recovery
 commands. See [Recover from disaster](#recover-from-disaster).
@@ -111,12 +111,12 @@ entire set of machines or common maintenance scenarios. If you suffer a failure
 in any of those zones, the swarm should maintain the quorum of manager nodes
 available to process requests and rebalance workloads.
 
-| Swarm manager nodes |  Repartition (on 3 Availability zones) |
-|:-------------------:|:--------------------------------------:|
-| 3                   |                  1-1-1                 |
-| 5                   |                  2-2-1                 |
-| 7                   |                  3-2-2                 |
-| 9                   |                  3-3-3                 |
+| Swarm manager nodes | Repartition (on 3 Availability zones) |
+| :-----------------: | :-----------------------------------: |
+|          3          |                 1-1-1                 |
+|          5          |                 2-2-1                 |
+|          7          |                 3-2-2                 |
+|          9          |                 3-3-3                 |
 
 ### Run manager-only nodes
 
@@ -160,21 +160,17 @@ for more information.
 From the command line, run `docker node inspect <id-node>` to query the nodes.
 For instance, to query the reachability of the node as a manager:
 
-
 ```console
 $ docker node inspect manager1 --format "{{ .ManagerStatus.Reachability }}"
 reachable
 ```
 
-
 To query the status of the node as a worker that accept tasks:
-
 
 ```console
 $ docker node inspect manager1 --format "{{ .Status.State }}"
 ready
 ```
-
 
 From those commands, we can see that `manager1` is both at the status
 `reachable` as a manager and `ready` as a worker.
@@ -255,7 +251,7 @@ You can back up the swarm using any manager. Use the following procedure.
     other nodes continue generating swarm data that is not part of this backup.
 
     > [!NOTE]
-    > 
+    >
     > Be sure to maintain the quorum of swarm managers. During the
     > time that a manager is shut down, your swarm is more vulnerable to
     > losing the quorum if further nodes are lost. The number of managers you
@@ -267,7 +263,7 @@ You can back up the swarm using any manager. Use the following procedure.
 
 4.  Restart the manager.
 
-To restore, see [Restore from a backup](#restore-from-a-backup). 
+To restore, see [Restore from a backup](#restore-from-a-backup).
 
 ## Recover from disaster
 
@@ -286,7 +282,7 @@ restore the data to a new swarm.
     backup.
 
     > [!NOTE]
-    > 
+    >
     > The new node uses the same encryption key for on-disk
     > storage as the old one. It is not possible to change the on-disk storage
     > encryption keys at this time.
@@ -305,7 +301,7 @@ restore the data to a new swarm.
     ```
 
 5.  Verify that the state of the swarm is as expected. This may include
-    application-specific tests or simply checking the output of
+    application-specific tests or checking the output of
     `docker service ls` to be sure that all expected services are present.
 
 6.  If you use auto-lock,
@@ -360,7 +356,7 @@ flag, the Docker Engine where you run the command becomes the manager node of a
 single-node swarm which is capable of managing and running services. The manager
 has all the previous information about services and tasks, worker nodes are
 still part of the swarm, and services are still running. You need to add or
-re-add  manager nodes to achieve your previous task distribution and ensure that
+re-add manager nodes to achieve your previous task distribution and ensure that
 you have enough managers to maintain high availability and prevent losing the
 quorum.
 
