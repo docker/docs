@@ -281,7 +281,8 @@ Synchronized file sharing:
 USB/IP support:
   for: Docker Desktop for Mac, Linux, and Windows with the Hyper-V backend
 VMM:
-  for: Docker Desktop on Mac with Apple Silicon
+  availability: Beta
+  requires: "Docker Desktop 4.86 or later"
 Wasm workloads:
   availability: Beta
 Wasmtime:
