@@ -24,6 +24,51 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.86.0
+
+{{< release-date date="2026-08-10" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.86.0" build_path="/XXXXXX/" >}}
+
+### New
+
+- Docker VMM now uses Docker's own container-optimized hypervisor. It is available for Mac and Windows.
+
+### Updates
+
+- [Docker Engine v29.7.1](https://docs.docker.com/engine/release-notes/29/#2971)
+- [Docker Buildx v0.36.0](https://github.com/docker/buildx/releases/tag/v0.36.0)
+- [Docker Scout CLI v1.24.0](https://github.com/docker/scout-cli/releases/tag/v1.24.0)
+- [Docker Agent v1.119.0](https://github.com/docker/docker-agent/releases/tag/v1.119.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Gordon now displays specific error messages for tool failures, policy-blocked actions, and loop detection instead of a generic **Agent error**.
+- Fixed container stop timeouts and `unless-stopped` restart policies not being honored during engine shutdown.
+- Fixed a bug where enabling Docker Offload from the Docker Desktop Dashboard failed when the proxy was configured by the operating system instead of by environment variables.
+- Fixed a crash on startup after upgrading, for users whose settings file was written by a very old version.
+- Fixed port forwarding for Swarm services that use automatically assigned published ports, including host-mode task ports and repeated ingress port definitions.
+- Added a three-mode safety system (Strict, Balanced, Autonomous) to the Gordon AI agent's tool confirmation UI, replacing the previous binary approve/allow-all dialog, with risk-tier labels on confirmation.
+- Fixed a flash of incorrect UI content on app launch, such as a brief 'Waiting for the Docker Engine...' screen or unexpected navigation away from gated pages.
+- AF_UNIX sockets shared over VirtioFS now work in both directions (host to guest and guest to host).
+- Fixed a bug where restarting the VM would steal the window focus.
+
+#### For Mac
+
+- Fixed a bug where a Kubernetes (kind) cluster with Enhanced Container Isolation could fail to recover after a Docker Desktop restart.
+- Fixed nftables `fib` expressions failing with "Operation not supported" in `inet` tables on Apple Silicon.
+
+#### For Windows
+
+- Fixed an issue where the Windows installer reported success when it could not write its settings or enterprise policy files.
+- Fixed Model Runner failing to start with `CreateJobObject: Access is denied` when Docker Desktop is launched via a Secondary Logon (run-as-user) session.
+
+#### For Linux
+
+- Fixed Docker Desktop failing to start on Linux arm64 hosts due to incorrect QEMU binary path resolution always using the x86_64 binary.
+
 ## 4.85.0
 
 {{< release-date date="2026-08-03" >}}
