@@ -131,6 +131,15 @@ Used for Docker Desktop host-level traffic: signing in to Docker, the Desktop ap
 | **No proxy** | Connect directly without a proxy. |
 | **Manual configuration** | Enter a **Web Server (HTTP)** and **Secure Web Server (HTTPS)** URL manually. Use the format `http://proxy:port` or `https://proxy:port`. You can also specify hosts and domains that should bypass the proxy, for example: `registry-1.docker.com,*.docker.com,10.0.0.0/8`. |
 
+On Windows, when you're running Windows containers, turn on **Use proxy for
+Windows Docker daemon** to route the Windows Docker daemon through Docker
+Desktop's internal proxy. This lets the daemon use system or manually configured
+proxy settings, including proxies that require authentication. It also applies
+[Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md#registry-limits-and-platform-constraints)
+restrictions to Windows image operations. Docker Business administrators can
+manage this option with the
+[`windowsDockerdPort` setting](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md#override-windows-dockerd-port).
+
 > [!NOTE]
 >
 > If you use a PAC file hosted on a web server, add the MIME type `application/x-ns-proxy-autoconfig` for the `.pac` extension. Without this, the PAC file may not parse correctly. See [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/air-gapped-containers.md#proxy-auto-configuration-files).
