@@ -161,7 +161,7 @@ For more control over networking, build a custom BuildKit image with your own
 CNI configuration and plugins.
 
 The following Dockerfile example shows a custom BuildKit image with CNI support.
-It uses the [CNI config for integration tests](https://github.com/moby/buildkit/blob/master//hack/fixtures/cni.json)
+It uses the [CNI config for integration tests](https://github.com/moby/buildkit/blob/master/hack/fixtures/cni.json)
 in BuildKit as an example. Feel free to include your own CNI configuration.
 
 ```dockerfile

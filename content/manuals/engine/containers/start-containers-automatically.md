@@ -17,7 +17,7 @@ Docker recommends that you use restart policies, and avoid using process
 managers to start containers.
 
 Restart policies are different from the `--live-restore` flag of the `dockerd`
-command. Using `--live-restore` lets you to keep your containers running during
+command. Using `--live-restore` lets you keep your containers running during
 a Docker upgrade, though networking and user input are interrupted.
 
 ## Use a restart policy
