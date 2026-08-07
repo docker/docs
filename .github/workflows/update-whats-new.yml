@@ -1,0 +1,161 @@
+name: Update What's New
+
+on:
+  schedule:
+    # Review the previous seven complete UTC days every day at 06:00 UTC.
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: "Propose highlights without opening a pull request"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+concurrency:
+  group: update-whats-new
+  cancel-in-progress: false
+
+env:
+  BRANCH_NAME: bot/update-whats-new
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          fetch-depth: 0
+
+      - name: Set publication period
+        id: period
+        run: |
+          PERIOD_END=$(date -u -d 'yesterday' +%F)
+          echo "start=$(date -u -d "$PERIOD_END - 6 days" +%F)" >> "$GITHUB_OUTPUT"
+          echo "end=$PERIOD_END" >> "$GITHUB_OUTPUT"
+
+      - name: Configure AWS credentials
+        id: aws-credentials
+        continue-on-error: true
+        uses: aws-actions/configure-aws-credentials@d979d5b3a71173a29b74b5b88418bfda9437d885 # v6.1.1
+        with:
+          role-to-assume: arn:aws:iam::710015040892:role/docker-agent-action-20260409141318957000000001
+          aws-region: us-east-1
+
+      - name: Fetch bot token
+        if: steps.aws-credentials.outcome == 'success'
+        run: |
+          PAT=$(aws secretsmanager get-secret-value \
+            --secret-id docker-agent-action/github-app \
+            --query SecretString \
+            --output text | jq -r '.pat')
+          echo "::add-mask::$PAT"
+          echo "GITHUB_APP_TOKEN=$PAT" >> "$GITHUB_ENV"
+
+      - name: Restore open proposal
+        env:
+          GH_TOKEN: ${{ env.GITHUB_APP_TOKEN || github.token }}
+        run: |
+          EXISTING_PR=$(gh pr list --state open --head "$BRANCH_NAME" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING_PR" ]; then
+            git fetch origin "$BRANCH_NAME:refs/remotes/origin/$BRANCH_NAME"
+            git show "origin/$BRANCH_NAME:data/whats-new.json" > data/whats-new.json
+          fi
+
+      - name: Curate highlights
+        uses: docker/docker-agent-action@e96a4bb40cac114f64358621e1d08346c8eadc8c # v2.0.1
+        env:
+          GH_TOKEN: ${{ env.GITHUB_APP_TOKEN || github.token }}
+        with:
+          agent: ${{ github.workspace }}/.github/agents/whats-new.yaml
+          prompt: >-
+            Review documentation pull requests merged from
+            ${{ steps.period.outputs.start }} through
+            ${{ steps.period.outputs.end }}, inclusive, and curate the What's
+            new data as described in your instructions.
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github-token: ${{ env.GITHUB_APP_TOKEN || github.token }}
+          timeout: 1200
+
+      - name: Verify agent changes
+        env:
+          PERIOD_START: ${{ steps.period.outputs.start }}
+          PERIOD_END: ${{ steps.period.outputs.end }}
+        run: |
+          CHANGED=$(git status --short | awk '$2 != "data/whats-new.json" && $2 != ".pr-body.md" { print }')
+          if [ -n "$CHANGED" ]; then
+            echo "::error::Agent changed files outside its allowed scope"
+            echo "$CHANGED"
+            exit 1
+          fi
+          test -f .pr-body.md
+          npx prettier --check data/whats-new.json
+          node hack/validate-whats-new.mjs data/whats-new.json "$PERIOD_START" "$PERIOD_END"
+
+      - name: Show proposal
+        if: inputs.dry-run == true
+        run: |
+          git diff -- data/whats-new.json
+          cat .pr-body.md
+
+      - name: Detect changes
+        id: changes
+        if: inputs.dry-run != true
+        run: |
+          if cmp -s \
+            <(git show HEAD:data/whats-new.json | jq -S '.items') \
+            <(jq -S '.items' data/whats-new.json); then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Close obsolete pull request
+        if: steps.changes.outputs.changed == 'false'
+        env:
+          GH_TOKEN: ${{ env.GITHUB_APP_TOKEN || github.token }}
+        run: |
+          EXISTING_PR=$(gh pr list --state open --head "$BRANCH_NAME" --json url --jq '.[0].url // empty')
+          if [ -n "$EXISTING_PR" ]; then
+            gh pr close "$EXISTING_PR" \
+              --comment "The latest sliding-window review no longer proposes changes to the published highlights."
+          fi
+
+      - name: Commit changes
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          PERIOD_END: ${{ steps.period.outputs.end }}
+        run: |
+          git checkout -B "$BRANCH_NAME"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/whats-new.json
+          git commit -m "docs: update what's new for $PERIOD_END"
+
+      - name: Create or update pull request
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ env.GITHUB_APP_TOKEN || github.token }}
+        run: |
+          gh auth setup-git
+          EXISTING_PR=$(gh pr list --state open --head "$BRANCH_NAME" --json url --jq '.[0].url // empty')
+
+          if [ -n "$EXISTING_PR" ]; then
+            git push --force --set-upstream origin "$BRANCH_NAME"
+            gh pr edit "$EXISTING_PR" \
+              --title "docs: update what's new" \
+              --body-file .pr-body.md
+          else
+            git push --force --set-upstream origin "$BRANCH_NAME"
+            gh pr create \
+              --title "docs: update what's new" \
+              --body-file .pr-body.md \
+              --base main \
+              --head "$BRANCH_NAME"
+          fi

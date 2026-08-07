@@ -1,0 +1,38 @@
+{
+  "period_start": "2026-07-30",
+  "period_end": "2026-08-05",
+  "items": [
+    {
+      "product": "Docker AI Governance",
+      "title": "Search and forward audit events",
+      "description": "Search and export policy decisions from Docker Cloud, or forward events to Splunk, Dynatrace, and custom HTTPS endpoints.",
+      "url": "/ai/sandboxes/governance/audit/",
+      "published": "2026-08-03",
+      "source_prs": [25679, 25687]
+    },
+    {
+      "product": "Docker Desktop",
+      "title": "Install from the Microsoft Store without administrator privileges",
+      "description": "Fresh Microsoft Store installations on Windows use per-user mode by default.",
+      "url": "/desktop/release-notes/#4850",
+      "published": "2026-08-03",
+      "source_prs": [25665]
+    },
+    {
+      "product": "Docker Engine",
+      "title": "Mount files from container images",
+      "description": "Mount tools or read-only assets from another image without rebuilding the container image.",
+      "url": "/engine/storage/image-mounts/",
+      "published": "2026-08-03",
+      "source_prs": [25486]
+    },
+    {
+      "product": "Docker Engine",
+      "title": "Use Unix sockets on Windows",
+      "description": "Configure the Docker daemon and CLI on Windows to communicate over a Unix socket.",
+      "url": "/engine/daemon/#listen-on-a-unix-socket-on-windows",
+      "published": "2026-08-03",
+      "source_prs": [25660]
+    }
+  ]
+}
