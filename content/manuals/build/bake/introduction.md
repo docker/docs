@@ -6,9 +6,9 @@ description: Get started with using Bake to build your project
 keywords: bake, quickstart, build, project, introduction, getting started
 ---
 
-Bake is an abstraction for the `docker build` command that lets you more easily
-manage your build configuration (CLI flags, environment variables, etc.) in a
-consistent way for everyone on your team.
+Bake is an abstraction for the `docker build` command that lets you manage your
+build configuration (CLI flags, environment variables, etc.) in a consistent
+way for everyone on your team.
 
 Bake is a command built into the Buildx CLI, so as long as you have Buildx
 installed, you also have access to bake, via the `docker buildx bake` command.
