@@ -158,10 +158,10 @@ hosts the agent should not reach, such as telemetry endpoints. If a domain
 matches both an allow rule and a deny rule, the deny rule wins.
 
 > [!IMPORTANT]
-> Kit network rules don't apply when organization governance is active. In
-> that case, only organization rules are evaluated, so kit-defined allow and
-> deny rules are ignored — including any domains a kit allows for the agent
-> to reach. For details, see
+> When organization governance is active, only organization allow rules grant
+> access, so kit-defined `allow` rules are ignored — including any domains a kit
+> allows for the agent to reach. Kit-defined `deny` rules still apply, because a
+> deny can only restrict access further. For details, see
 > [Policy precedence](../governance/concepts.md#precedence).
 
 For authenticated services, see

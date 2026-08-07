@@ -11,8 +11,11 @@ workspace. Each policy contains one or more rules that restrict sandbox
 workspaces to approved directories.
 
 Filesystem access is managed with [organization policies](organization.md). When
-organization governance is active, filesystem rules replace local behavior for
-workspace mounts.
+organization governance is active, organization rules determine which paths a
+sandbox can mount, and the local filesystem allow rules from the default preset
+become inactive. `sbx policy deny` applies to network access only, so there are
+no local filesystem deny rules to layer on top. See
+[Precedence](../concepts.md#precedence).
 
 ## Rule syntax
 

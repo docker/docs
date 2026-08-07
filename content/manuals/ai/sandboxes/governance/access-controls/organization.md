@@ -12,9 +12,11 @@ aliases:
 [Local policies](local.md) give individual developers control over what their
 sandboxes can access. Organization policy moves that control to the admin level:
 organization policies apply to sandboxes across the organization, either to
-every member or to specific teams. When organization governance is active, it
-replaces local `sbx policy` rules entirely — local rules are no longer
-evaluated and can't be used to supplement or override the organization policy.
+every member or to specific teams. When organization governance is active, only
+organization allow rules grant access: local `sbx policy` allow rules are no
+longer evaluated and can't expand what the organization permits. Local network
+deny rules remain active, so developers can restrict access further but never
+loosen it.
 
 Admins can manage organization policies through the Docker Home UI. For
 programmatic management of network and filesystem policies, use the
@@ -87,8 +89,10 @@ pages for syntax, examples, and enforcement details:
 - [MCP access policies](mcp.md): control MCP server registration, tool calls,
   resources, prompts, and approval gates with Cedar policy.
 
-When organization governance is active, local and kit-defined rules are not
-evaluated. To see which rules are active on a developer machine, use
+When organization governance is active, local and kit-defined allow rules are
+not evaluated, while deny rules from those sources still apply. See
+[Precedence](../concepts.md#precedence). To see which rules are active on a
+developer machine, use
 [Monitoring policies](../monitor-and-enforce/monitoring.md).
 
 ## Scope policies to teams

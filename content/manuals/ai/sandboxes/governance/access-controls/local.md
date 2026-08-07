@@ -13,12 +13,13 @@ policy contains network access rules. Rules apply to all sandboxes on the
 machine when you use the global scope, or to a single sandbox when scoped by
 name.
 
-Local policy applies only when your organization doesn't enforce governance:
+Local policy interacts with organization governance as follows:
 
 - **No org governance**: the local policy controls what sandboxes can access.
-- **Org governance active**: organization policies replace local policy.
-  Local rules are inactive, and `sbx policy allow` and `sbx policy deny` have
-  no effect. To list the inactive local rules, run
+- **Org governance active**: only organization allow rules grant access, so
+  local allow rules are inactive and can't expand what the organization permits.
+  Local deny rules are still evaluated, so you can restrict access further than
+  the organization policy does. To list inactive rules, run
   `sbx policy ls --include-inactive`. See
   [Monitoring](../monitor-and-enforce/monitoring.md#showing-inactive-rules).
 
@@ -102,6 +103,19 @@ $ sbx policy allow network --sandbox my-sandbox api.example.com
 $ sbx policy deny network --sandbox my-sandbox ads.example.com
 ```
 
+As of v0.38.0, you can also set per-sandbox deny rules at creation time with
+`--deny-network` on `sbx create` or `sbx run`, instead of adding them after the
+fact:
+
+```console
+$ sbx create --deny-network ads.example.com claude .
+$ sbx run --deny-network ads.example.com claude
+```
+
+Pass the flag multiple times to deny more than one host. Rules added this way
+appear in `sbx policy ls <name>` and can be removed with
+`sbx policy rm network --sandbox <name> --resource <host>`.
+
 Specify multiple hosts in one command with a comma-separated list:
 
 ```console
@@ -171,26 +185,29 @@ $ sbx policy reset --force
 
 ## Troubleshooting
 
-### Local rules have no effect
+### Local allow rules have no effect
 
-If rules you add with `sbx policy allow` or `sbx policy deny` don't change
-sandbox behavior, your organization likely has governance enabled. Run `sbx
-policy ls` to check: if the output starts with a `Governance:` status line
-showing `Managed by <org>`, org governance is active. When it's active,
-the organization policy replaces local policy, so your rules have no effect.
-They're hidden from `sbx policy ls` by default; run `sbx policy ls
---include-inactive` to see them with an `inactive` status in the `STATUS`
-column.
+If rules you add with `sbx policy allow` don't change sandbox behavior, your
+organization likely has governance enabled. Run `sbx policy ls` to check: if
+the output starts with a `Governance:` status line showing `Managed by <org>`,
+org governance is active. When it's active, local allow rules are inactive.
+You can't use them to loosen restrictions the org policy imposes.
 
-Organization policy can't be supplemented from your machine. To change what
-your sandboxes can access, ask your admin to update the organization policy.
+Inactive allow rules are hidden from `sbx policy ls` by default; run
+`sbx policy ls --include-inactive` to see them with an `inactive` status in
+the `STATUS` column.
+
+When organization governance is active, only organization allow rules can grant
+access. Ask your admin to update the organization policy if you need access to
+an additional resource. Local deny rules remain active, so you can use
+`sbx policy deny` to restrict access further.
 
 ### A domain is still blocked after adding an allow rule
 
 If a domain remains blocked after you add a local allow rule, your organization
-likely enforces governance, which makes local rules inactive. Run `sbx policy
-ls` to check whether org governance is active; if the output starts with a
-`Governance:` status line showing `Managed by <org>`, it is. Add
-`--include-inactive` to confirm your rule shows an `inactive` status. If so, the
-block can only be lifted by updating the org policy in Docker Home or via
+likely enforces governance, which makes local allow rules inactive. Run `sbx
+policy ls` to check whether org governance is active; if the output starts with
+a `Governance:` status line showing `Managed by <org>`, it is. Add
+`--include-inactive` to confirm your rule shows an `inactive` status. If so,
+the block can only be lifted by updating the org policy in Docker Home or via
 the [API](/reference/api/ai-governance/).
