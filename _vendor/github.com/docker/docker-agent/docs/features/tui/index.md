@@ -57,7 +57,7 @@ settings:
 
 Omit `lean` or set it to `false` to keep the full TUI as the default. You can still use `--lean` for a single run, or `--lean=false` to use the full TUI when `settings.lean` is enabled. See [User Settings](../../configuration/user-settings/index.md) for the full precedence rules between flags and user config.
 
-The lean TUI supports **steering**: messages submitted while the agent is running are queued and delivered to the active session. Pending steering messages appear with muted styling at the end of the live stream so you can see what will be sent next.
+The lean TUI supports **steering** and **follow-ups** while the agent is running. Press <kbd>Enter</kbd> to steer the active turn, or <kbd>Alt</kbd>+<kbd>Enter</kbd> to queue the message as a separate turn after the current one finishes. Pending messages appear with muted styling at the end of the live stream.
 
 The lean TUI supports a focused set of slash commands: `/new`, `/compact`, `/model`, `/effort`, `/clear`, `/help`, `/exit` (alias: `/quit`), plus any agent-defined commands. Type `/model` (or `/model <provider/model>`) to switch the active model inline — the command opens a fuzzy-searchable list of available models.
 
@@ -355,7 +355,9 @@ Customize session titles to make them more meaningful and easier to find. By def
 | Ctrl+Z     | Suspend TUI to background (resume with `fg`)    |
 | Ctrl+X     | Clear queued messages                           |
 | Escape     | Cancel current operation                        |
-| Enter      | Send message (or newline with Shift+Enter)      |
+| Enter      | Send message (or steer while the agent is running) |
+| Alt+Enter  | Queue a follow-up turn while the agent is running |
+| Shift+Enter | Insert a newline |
 | Up/Down    | Navigate message history                        |
 
 Press <kbd>Ctrl</kbd>+<kbd>H</kbd> to view the complete list of all available keyboard shortcuts.
