@@ -71,7 +71,7 @@ Two different questions come up here, and it's worth keeping them separate:
 
 ### `--sandbox`: the isolation boundary
 
-For an untrusted or autonomous agent — anything acting without a human watching approvals — **`--sandbox` is the isolation boundary to reach for**, not a cleverer allow-list. It runs the entire agent, shell calls included, inside a Docker sandbox VM: a misbehaving or successfully-prompt-injected agent can't touch anything outside the mounted working directory or reach other host/CI state, regardless of which command it runs. That VM isn't disposable or ephemeral — a sandbox matching the current workspace and mount set is retained and reused across subsequent runs rather than torn down when the session ends (see [How It Works](../../configuration/sandbox/index.md#how-it-works)). See [Sandbox Mode](../../configuration/sandbox/index.md) for the full flag reference, requirements (Docker Desktop or the `sbx` CLI), and how the network allowlist and kit staging work.
+For an untrusted or autonomous agent — anything acting without a human watching approvals — **`--sandbox` is the isolation boundary to reach for**, not a cleverer allow-list. It runs the entire agent, shell calls included, inside a VM managed by [`sbx`](https://docs.docker.com/ai/sandboxes/): a misbehaving or successfully-prompt-injected agent can't touch anything outside the mounted working directory or reach other host/CI state, regardless of which command it runs. That VM isn't disposable or ephemeral — a sandbox matching the current workspace and mount set is retained and reused across subsequent runs rather than torn down when the session ends (see [How It Works](../../configuration/sandbox/index.md#how-it-works)). See [Sandbox Mode](../../configuration/sandbox/index.md) for the full flag reference, `sbx` requirement, network allowlist, and kit staging behavior.
 
 ```bash
 $ docker agent run --sandbox --exec agent.yaml --json "Fix the failing test"
@@ -169,7 +169,7 @@ jobs:
           path: agent-events.ndjson
 ```
 
-This job auto-approves every shell call the review agent makes (`--yolo`) rather than trying to allow-list every `git`/`grep`/`cat` invocation a code review might need — the read surface for "review this diff" is open-ended, and a fixed pattern list is exactly the kind of shell-matching boundary the [previous section](#defense-in-depth-not-a-boundary-permissions-and-shell-command-matching) says not to rely on. If your CI environment can run `--sandbox` (a self-hosted runner with Docker Desktop, or an `sbx`-enabled image — GitHub-hosted `ubuntu-latest` ships neither out of the box), add it and get a real isolation boundary around that `--yolo`:
+This job auto-approves every shell call the review agent makes (`--yolo`) rather than trying to allow-list every `git`/`grep`/`cat` invocation a code review might need — the read surface for "review this diff" is open-ended, and a fixed pattern list is exactly the kind of shell-matching boundary the [previous section](#defense-in-depth-not-a-boundary-permissions-and-shell-command-matching) says not to rely on. If your CI environment has `sbx` installed and configured (GitHub-hosted `ubuntu-latest` does not ship it out of the box), add `--sandbox` and get a real isolation boundary around that `--yolo`:
 
 ```bash
 $ docker-agent run --sandbox --exec --yolo .github/agents/review-agent.yaml --json "..."
