@@ -83,6 +83,16 @@ the attestations to an image manifest, since it's outputting a directory of
 files or a tarball, not an image. Instead, these exporters write the
 attestations to one or more JSON files in the root directory of the export.
 
+> [!NOTE]
+>
+> Attestations also depend on the build **driver** and image store, not only the
+> exporter. The `docker` driver with the classic image store can't produce image
+> attestations (`ERROR: Attestation is not supported for the docker driver`).
+> Use the containerd image store, switch to a driver such as `docker-container`,
+> or disable attestations for that build. See
+> [Build drivers](/manuals/build/drivers/) and
+> [Containerd image store](/manuals/engine/storage/containerd/).
+
 ## Example
 
 The following example shows a truncated in-toto JSON representation of an SBOM
