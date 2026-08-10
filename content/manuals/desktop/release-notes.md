@@ -28,15 +28,11 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-08-10" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.86.0" build_path="/XXXXXX/" >}}
-
-### New
-
-- Docker VMM now uses Docker's own container-optimized hypervisor. It is available for Mac and Windows.
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.86.0" build_path="/236216/" >}}
 
 ### Updates
 
-- [Docker Engine v29.7.1](https://docs.docker.com/engine/release-notes/29/#2971)
+- [Docker Engine v29.7.2](https://docs.docker.com/engine/release-notes/29/#2972)
 - [Docker Buildx v0.36.0](https://github.com/docker/buildx/releases/tag/v0.36.0)
 - [Docker Scout CLI v1.24.0](https://github.com/docker/scout-cli/releases/tag/v1.24.0)
 - [Docker Agent v1.119.0](https://github.com/docker/docker-agent/releases/tag/v1.119.0)
@@ -45,6 +41,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
+- Docker VMM Beta performance improvements by Docker’s own container-optimized hypervisor. Available for Mac and Windows.
 - Gordon now displays specific error messages for tool failures, policy-blocked actions, and loop detection instead of a generic **Agent error**.
 - Fixed container stop timeouts and `unless-stopped` restart policies not being honored during engine shutdown.
 - Fixed a bug where enabling Docker Offload from the Docker Desktop Dashboard failed when the proxy was configured by the operating system instead of by environment variables.
@@ -64,10 +61,11 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Fixed an issue where the Windows installer reported success when it could not write its settings or enterprise policy files.
 - Fixed Model Runner failing to start with `CreateJobObject: Access is denied` when Docker Desktop is launched via a Secondary Logon (run-as-user) session.
+- Updated the bundled 7-Zip to 26.02 to avoid antivirus software quarantining it during an upgrade on Windows.
 
 #### For Linux
 
-- Fixed Docker Desktop failing to start on Linux arm64 hosts due to incorrect QEMU binary path resolution always using the x86_64 binary.
+- Fixed Docker Desktop failing to start on Linux arm64 hosts due to incorrect QEMU binary path resolution.
 
 ## 4.85.0
 
