@@ -375,13 +375,15 @@ credentials:
 environment:
   variables:
     IS_SANDBOX: "1"
-
-setup:
-  install:
-    - command: "curl -fsSL https://claude.ai/install.sh | bash"
-      user: "1000"
-      description: Install Claude Code
 ```
+
+The `claude-code-docker` image already contains Claude Code, so the kit doesn't
+install the agent binary. The full built-in kit also declares persistent
+volumes, seeds sandbox-managed settings, registers the MCP gateway, and adds
+sandbox-specific agent instructions. Those platform integration details are
+omitted here, so this abbreviated spec isn't a drop-in replacement for the
+built-in kit. To package a custom agent, follow
+[Build your own agent kit](build-an-agent.md) instead of copying this example.
 
 ## Using kits
 
