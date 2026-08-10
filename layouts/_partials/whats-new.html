@@ -2,33 +2,19 @@
 {{- with $data.items -}}
   <section class="py-10 md:py-12">
     <div class="container mx-auto max-w-4xl px-4">
-      <header
-        class="mb-6 flex items-baseline justify-between gap-4 border-b border-gray-200 pb-4 dark:border-gray-800"
-      >
+      <header class="mb-6 border-b border-gray-200 pb-4 dark:border-gray-800">
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
           What's new
         </h2>
-        <p class="shrink-0 text-sm text-gray-500 dark:text-gray-400">
-          <time datetime="{{ $data.period_start }}"
-            >{{ $data.period_start | time.Format "Jan 2" }}</time
-          >–<time datetime="{{ $data.period_end }}"
-            >{{ $data.period_end | time.Format "Jan 2, 2006" }}</time
-          >
-        </p>
       </header>
       <ol>
-        {{- $previousDate := "" -}}
         {{ range . }}
           <li class="grid grid-cols-[1fr] md:grid-cols-[5rem_1fr] md:gap-x-6">
-            {{ if ne .published $previousDate }}
-              <time
-                class="hidden pt-5 text-right text-sm text-gray-500 md:block dark:text-gray-400"
-                datetime="{{ .published }}"
-                >{{ .published | time.Format "Jan 2" }}</time
-              >
-            {{ else }}
-              <span class="hidden md:block"></span>
-            {{ end }}
+            <time
+              class="hidden pt-5 text-right text-sm text-gray-500 md:block dark:text-gray-400"
+              datetime="{{ .published }}"
+              >{{ .published | time.Format "Jan 2" }}</time
+            >
             <a
               href="{{ .url }}"
               class="group relative block border-l border-gray-200 py-5 pl-7 dark:border-gray-700"
@@ -41,13 +27,11 @@
                 class="mb-1 flex flex-wrap items-center gap-x-2 text-sm font-medium text-blue-600 dark:text-blue-400"
               >
                 {{ .product }}
-                {{ if ne .published $previousDate }}
-                  <time
-                    class="font-normal text-gray-500 md:hidden dark:text-gray-400"
-                    datetime="{{ .published }}"
-                    >{{ .published | time.Format "Jan 2" }}</time
-                  >
-                {{ end }}
+                <time
+                  class="font-normal text-gray-500 md:hidden dark:text-gray-400"
+                  datetime="{{ .published }}"
+                  >{{ .published | time.Format "Jan 2" }}</time
+                >
               </span>
               <span class="flex items-center gap-2">
                 <span
@@ -65,7 +49,6 @@
               >
             </a>
           </li>
-          {{- $previousDate = .published -}}
         {{ end }}
       </ol>
     </div>
