@@ -104,9 +104,8 @@ For example, the sandbox writes `/home/agent/.claude/settings.json`
 for the `claude` agent. This happens after the kit's static files and
 `setup.files`, so kit-injected files at those paths get overwritten.
 Use a separate settings layer when the agent supports one. For example, Claude
-Code combines its user settings with project settings under
-`<workspace>/.claude/`, and OpenCode can load an additional file from the path
-in `OPENCODE_CONFIG`. See
+Code can load an additional settings file with `--settings`, and OpenCode can
+load one from the path in `OPENCODE_CONFIG`. See
 [Customize agent settings](kit-examples.md#customize-agent-settings) for
 examples. Don't use `setup.startup` for settings the agent must read during
 initialization because startup commands don't gate the agent entrypoint.

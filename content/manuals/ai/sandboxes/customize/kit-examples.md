@@ -322,36 +322,46 @@ Some agents combine settings from several files. Place kit settings in a
 separate file when the agent supports it, instead of replacing a file the
 sandbox manages.
 
-Claude Code combines user settings with project settings. The sandbox manages
-`/home/agent/.claude/settings.json`, so place kit settings in the workspace's
-`.claude/settings.json` file:
+Claude Code's `--settings` option loads an additional settings file. Extend the
+built-in `claude` kit to add the option without reproducing its configuration,
+and place the additional file outside the path the sandbox manages:
 
 ```text
 claude-sonnet/
 ├── spec.yaml
 └── files/
-    └── workspace/
-        └── .claude/
-            └── settings.json
+    └── home/
+        └── .config/
+            └── claude/
+                └── sonnet.json
 ```
 
 ```yaml {title="claude-sonnet/spec.yaml"}
 schemaVersion: "2"
-kind: mixin
+kind: sandbox
 name: claude-sonnet
-requires:
-  agent: claude
+extends: claude
+
+sandbox:
+  command:
+    - --settings
+    - /home/agent/.config/claude/sonnet.json
 ```
 
-```json {title="claude-sonnet/files/workspace/.claude/settings.json"}
+```json {title="claude-sonnet/files/home/.config/claude/sonnet.json"}
 {
   "model": "sonnet"
 }
 ```
 
-Claude Code merges the project setting with the sandbox-managed user settings.
-A user can override the project setting with
-`.claude/settings.local.json` in the workspace.
+Claude Code merges the additional file with the sandbox-managed user settings.
+Because the file is under `files/home/`, it stays inside the sandbox instead of
+being written into a directly mounted host workspace. Launch the sandbox with
+the child kit's name:
+
+```console
+$ sbx run claude-sonnet --kit ./claude-sonnet
+```
 
 OpenCode supports an additional config file through `OPENCODE_CONFIG`. Keep the
 kit's config at a different path from the global file that the sandbox manages:
@@ -389,9 +399,9 @@ OpenCode merges the custom file with its global and project config files. See
 the OpenCode [config precedence](https://opencode.ai/docs/config/#precedence-order)
 for the complete order.
 
-Agent settings mechanisms differ. If an agent doesn't support project settings,
-an additional config file, or an environment variable for the setting, kits
-can't replace the sandbox-managed user settings before the agent launches.
+Agent settings mechanisms differ. If an agent doesn't support an additional
+config file, launch option, or environment variable for the setting, kits can't
+replace the sandbox-managed user settings before the agent launches.
 `setup.startup` doesn't gate the agent entrypoint, so don't use it for settings
 the agent must read during initialization.
 
