@@ -90,8 +90,8 @@ attestations to one or more JSON files in the root directory of the export.
 > attestations (`ERROR: Attestation is not supported for the docker driver`).
 > Use the containerd image store, switch to a driver such as `docker-container`,
 > or disable attestations for that build. See
-> [Build drivers](/manuals/build/builders/drivers/) and
-> [containerd image store](/manuals/engine/storage/containerd.md).
+> [Build drivers](/build/builders/drivers/) and
+> [containerd image store](/engine/storage/containerd/).
 
 ## Example
 
