@@ -336,54 +336,31 @@ Sandbox kits declare everything a mixin kit can, plus an
 agent. For a step-by-step walkthrough, see
 [Build your own agent kit](build-an-agent.md).
 
-### Example: the built-in `claude` agent
+### Example: extend the built-in `claude` agent
 
-The `claude` agent you get from `sbx run claude` is defined as a kit. Here
-is an abbreviated version of its spec, showing how the sandbox block combines
-with network, credentials, environment, and setup:
+Use `extends:` to create a variant of a built-in agent without reproducing its
+configuration. This example inherits the complete `claude` kit and replaces its
+entrypoint so Claude Code uses manual permission mode instead of bypassing
+approval prompts:
 
-```yaml {title="claude/spec.yaml"}
+```yaml {title="claude-safe/spec.yaml"}
 schemaVersion: "2"
 kind: sandbox
-name: claude
+name: claude-safe
+displayName: Claude Code with approval prompts
+description: Claude Code in manual permission mode
+
+extends: claude
+
 sandbox:
-  image: "docker/sandbox-templates:claude-code-docker"
-  entrypoint: [claude, "--dangerously-skip-permissions"]
-
-agentInstructions:
-  filename: CLAUDE.md
-
-permissions:
-  network:
-    allow:
-      - "claude.com:443"
-      - "api.anthropic.com:443"
-      - "console.anthropic.com:443"
-
-credentials:
-  - service: anthropic
-    apiKey:
-      name: ANTHROPIC_API_KEY
-      inject:
-        - domain: api.anthropic.com
-          header: x-api-key
-          format: "%s"
-        - domain: console.anthropic.com
-          header: x-api-key
-          format: "%s"
-
-environment:
-  variables:
-    IS_SANDBOX: "1"
+  entrypoint: [claude, "--permission-mode", "manual"]
 ```
 
-The `claude-code-docker` image already contains Claude Code, so the kit doesn't
-install the agent binary. The full built-in kit also declares persistent
-volumes, seeds sandbox-managed settings, registers the MCP gateway, and adds
-sandbox-specific agent instructions. Those platform integration details are
-omitted here, so this abbreviated spec isn't a drop-in replacement for the
-built-in kit. To package a custom agent, follow
-[Build your own agent kit](build-an-agent.md) instead of copying this example.
+The child kit inherits the built-in image, credentials, network permissions,
+persistent volumes, settings, MCP integration, and agent instructions. Its
+`sandbox.entrypoint` replaces the inherited entrypoint. Use `extends:` for a
+single parent agent; use a mixin to add an independent capability that can work
+with one or more agents.
 
 ## Using kits
 
