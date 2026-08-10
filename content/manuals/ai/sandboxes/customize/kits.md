@@ -336,31 +336,14 @@ Sandbox kits declare everything a mixin kit can, plus an
 agent. For a step-by-step walkthrough, see
 [Build your own agent kit](build-an-agent.md).
 
-### Example: extend the built-in `claude` agent
+### Extend a built-in agent
 
 Use `extends:` to create a variant of a built-in agent without reproducing its
-configuration. This example inherits the complete `claude` kit and replaces its
-entrypoint so Claude Code uses manual permission mode instead of bypassing
-approval prompts:
-
-```yaml {title="claude-safe/spec.yaml"}
-schemaVersion: "2"
-kind: sandbox
-name: claude-safe
-displayName: Claude Code with approval prompts
-description: Claude Code in manual permission mode
-
-extends: claude
-
-sandbox:
-  entrypoint: [claude, "--permission-mode", "manual"]
-```
-
-The child kit inherits the built-in image, credentials, network permissions,
-persistent volumes, settings, MCP integration, and agent instructions. Its
-`sandbox.entrypoint` replaces the inherited entrypoint. Use `extends:` for a
+configuration. The child kit inherits the parent's image, credentials, network
+permissions, volumes, settings, and agent instructions. Use `extends:` for a
 single parent agent; use a mixin to add an independent capability that can work
-with one or more agents.
+with one or more agents. See [Fork an existing agent](kit-examples.md#fork-an-existing-agent)
+for an example that changes Claude Code's permission mode.
 
 ## Using kits
 
