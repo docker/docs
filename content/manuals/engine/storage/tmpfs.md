@@ -20,6 +20,13 @@ As opposed to volumes and bind mounts, a tmpfs mount is temporary, and only
 persisted in the host memory. When the container stops, the tmpfs mount is
 removed, and files written there won't be persisted.
 
+Because tmpfs stores data in memory, that usage counts against the container's
+memory cgroup limit (`--memory` / Compose `mem_limit`). Setting a large
+`tmpfs-size` (or host-mounted tmpfs) does not give the container extra RAM
+outside that limit — filling the mount can still OOM the container. Memory
+metrics for the container include tmpfs usage; see
+[runtime metrics](/manuals/engine/containers/runmetrics/).
+
 tmpfs mounts are best used for cases when you do not want the data to persist
 either on the host machine or within the container. This may be for security
 reasons or to protect the performance of the container when your application
@@ -47,6 +54,8 @@ the mount.
 
 - Unlike volumes and bind mounts, you can't share tmpfs mounts between containers.
 - This functionality is only available if you're running Docker on Linux.
+- Data on a tmpfs mount counts toward the container memory limit. A large
+  `size=` value does not raise that limit.
 - Setting permissions on tmpfs may cause them to [reset after container restart](https://github.com/docker/for-linux/issues/138). In some cases [setting the uid/gid](https://github.com/docker/compose/issues/3425#issuecomment-423091370) can serve as a workaround.
 
 ## Syntax
