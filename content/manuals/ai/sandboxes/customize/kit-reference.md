@@ -408,8 +408,8 @@ For stacked kits, entries in each stage are applied in `--kit` order. An install
 command can consume a bundled file from `files/home/`, but not one from
 `files/workspace/` or `setup.files`, because those files land later.
 
-`sbx kit add` recreates the sandbox's container instead of injecting the kit
-into the running container. It supports mixin kits limited to
+`sbx kit add` recreates the sandbox rather than modifying it in place. It
+supports mixin kits limited to
 `environment.variables`, `setup.install`, and `permissions.network.allow`,
 which follow the same order as sandbox creation. It rejects a kit that declares
 static files, `setup.startup`, or `setup.files`. To use those fields, recreate
