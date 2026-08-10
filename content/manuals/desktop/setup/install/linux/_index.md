@@ -129,7 +129,7 @@ and architectures:
 
 An experimental package is available for [Arch](archlinux.md)-based distributions. Docker has not tested or verified the installation.
 
-Docker supports Docker Desktop on the current and previous LTS releases of the aforementioned distributions, as well as the most recent version.
+Docker publishes Docker Desktop packages for the Linux distributions listed above. The exact releases packages are built for are listed on each distro-specific install page (for example, [Debian](debian.md)).
 
 ## General system requirements
 
