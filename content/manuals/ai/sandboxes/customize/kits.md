@@ -264,62 +264,9 @@ cases:
   vendor API)
 - Inject shared team config (linter rules, editor settings, dotfiles)
 
-### Example: Python linting kit
-
-This kit installs [Ruff](https://docs.astral.sh/ruff/) and injects a shared
-configuration file, so every sandbox starts with the same linting setup.
-
-```text
-ruff-lint/
-├── spec.yaml
-└── files/
-    └── workspace/
-        └── ruff.toml
-```
-
-```yaml {title="ruff-lint/spec.yaml"}
-schemaVersion: "2"
-kind: mixin
-name: ruff-lint
-displayName: Ruff Linter
-description: Python linting with shared team config
-
-permissions:
-  network:
-    allow:
-      - pypi.org
-      - files.pythonhosted.org
-
-setup:
-  install:
-    - command: "uv tool install ruff@latest"
-      user: "1000"
-      description: Install Ruff
-```
-
-```toml {title="ruff-lint/files/workspace/ruff.toml"}
-line-length = 100
-
-[lint]
-select = ["E", "F", "I"]
-```
-
-> [!TIP]
-> The templates for the built-in agents (`claude`, `codex`, and so on)
-> already include `uv`, so this mixin can use it without installing it
-> separately.
-
-To start a new sandbox with this mixin:
-
-```console
-$ sbx run claude --kit /path/to/ruff-lint/
-```
-
-To apply the mixin to a sandbox that's already running, use
-[`sbx kit add`](#local) instead. The `--kit` flag only takes effect when a
-sandbox is created. `sbx kit add` restarts the sandbox to apply the kit, but VM
-state — installed packages, Docker images, volumes, and agent history — is
-preserved.
+See [Drop a shared config file](kit-examples.md#drop-a-shared-config-file) and
+[Install a tool at sandbox creation](kit-examples.md#install-a-tool-at-sandbox-creation)
+for complete mixin examples.
 
 ## Sandbox kits
 
