@@ -287,10 +287,11 @@ agent. For a step-by-step walkthrough, see
 
 Use `extends:` to create a variant of a built-in agent without reproducing its
 configuration. The child kit inherits the parent's image, credentials, network
-permissions, volumes, settings, and agent instructions. Use `extends:` for a
-single parent agent; use a mixin to add an independent capability that can work
-with one or more agents. See [Fork an existing agent](kit-examples.md#fork-an-existing-agent)
-for an example that changes Claude Code's permission mode.
+permissions, persistent volumes, settings, MCP integration, and agent
+instructions. Use `extends:` for a single parent agent; use a mixin to add an
+independent capability that can work with one or more agents. See
+[Fork an existing agent](kit-examples.md#fork-an-existing-agent) for an example
+that changes Claude Code's permission mode.
 
 ## Using kits
 
