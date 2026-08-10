@@ -103,12 +103,13 @@ Sandboxes seed settings files for some built-in agents during setup.
 For example, the sandbox writes `/home/agent/.claude/settings.json`
 for the `claude` agent. This happens after the kit's static files and
 `setup.files`, so kit-injected files at those paths get overwritten.
-Workspace files (such as `<workspace>/.claude/settings.local.json`)
-aren't affected, and you can ship them under `files/workspace/` as
-usual. To override a path the sandbox writes to, use a
-[`setup.startup`](kit-reference.md#startup) script instead. See
-[Override agent settings](kit-examples.md#override-agent-settings) for
-an example.
+Use a separate settings layer when the agent supports one. For example, Claude
+Code combines its user settings with project settings under
+`<workspace>/.claude/`, and OpenCode can load an additional file from the path
+in `OPENCODE_CONFIG`. See
+[Customize agent settings](kit-examples.md#customize-agent-settings) for
+examples. Don't use `setup.startup` for settings the agent must read during
+initialization because startup commands don't gate the agent entrypoint.
 
 ### Set environment variables
 

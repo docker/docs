@@ -410,14 +410,16 @@ Runs at every sandbox start. String array, not interpreted by a shell.
 | ------------- | -------- | ----------------------------------- |
 | `command`     | —        | Command and args as a string array. |
 | `user`        | `"1000"` | User to run as. `"1000"` = agent.   |
-| `background`  | `false`  | Run in background.                  |
+| `background`  | `false`  | Let later startup commands run without waiting for this command. |
 | `description` | —        | Human-readable description.         |
 
 Startup commands are non-interactive. They run before the agent
 attaches, with no terminal connected, so they can't prompt the user
 (for example, an interactive `aws login` will hang or fail). They also
 don't gate the agent's entrypoint: the agent launches once startup
-commands have been dispatched, regardless of `background`. Use them
+commands have been dispatched, regardless of `background`. A value of
+`false` waits within the startup dispatcher before it runs the next command;
+it doesn't delay the agent entrypoint. Use startup commands
 for non-interactive prep — launching daemons, warming caches,
 refreshing config — and use `setup.files` for any value that
 needs to land on disk before the agent runs.
