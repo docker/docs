@@ -167,7 +167,7 @@ sandbox:
 
 | Field                | Required | Description                                                                                                     |
 | -------------------- | -------- | --------------------------------------------------------------------------------------------------------------- |
-| `sandbox.image`      | Yes      | Docker image reference. A sandbox that sets `extends:` can inherit this from its parent.                        |
+| `sandbox.image`      | When `extends:` is omitted | Docker image reference.                                                                                         |
 | `sandbox.build`      | No       | Build configuration. Runtime support is pending, so a kit with `build:` must also set `image:`.                 |
 | `sandbox.entrypoint` | No       | Fixed process prefix as a string array. The first element is the agent binary.                                  |
 | `sandbox.command`    | No       | Mode-specific argument tail. Use a list shorthand for `default`, or a mapping with `default` and `interactive`. |
