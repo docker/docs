@@ -1,7 +1,31 @@
 {
-  "period_start": "2026-07-30",
-  "period_end": "2026-08-05",
+  "period_start": "2026-08-03",
+  "period_end": "2026-08-09",
   "items": [
+    {
+      "product": "Docker Sandboxes",
+      "title": "Connect sandboxes through an MCP gateway",
+      "description": "Register local or remote MCP servers on the host, reuse them across sandboxes, and govern server and tool access with Cedar policies.",
+      "url": "/ai/sandboxes/mcp-gateway/",
+      "published": "2026-08-06",
+      "source_prs": [25559, 25707]
+    },
+    {
+      "product": "Docker Sandboxes",
+      "title": "Author version 2 sandbox kits",
+      "description": "Define kit setup, permissions, networking, and API key or OAuth credential requirements with the version 2 kit schema.",
+      "url": "/ai/sandboxes/customize/kit-reference/#schema-versions",
+      "published": "2026-08-06",
+      "source_prs": [25467, 25707]
+    },
+    {
+      "product": "Docker Sandboxes",
+      "title": "Run Claude Code with local models",
+      "description": "Experimental support routes Claude Code sandbox requests to the bundled llmman server or an existing Ollama installation.",
+      "url": "/ai/sandboxes/agents/claude-code/#use-a-local-model",
+      "published": "2026-08-06",
+      "source_prs": [25641, 25707]
+    },
     {
       "product": "Docker AI Governance",
       "title": "Search and forward audit events",
