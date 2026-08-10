@@ -410,7 +410,7 @@ Runs at every sandbox start. String array, not interpreted by a shell.
 | ------------- | -------- | ----------------------------------- |
 | `command`     | —        | Command and args as a string array. |
 | `user`        | `"1000"` | User to run as. `"1000"` = agent.   |
-| `background`  | `false`  | Let later startup commands run without waiting for this command. |
+| `background`  | `false`  | Block later startup commands until this command finishes. Set to `true` to let later commands run without waiting. |
 | `description` | —        | Human-readable description.         |
 
 Startup commands are non-interactive. They run before the agent
