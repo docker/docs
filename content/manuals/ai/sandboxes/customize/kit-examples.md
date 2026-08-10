@@ -142,15 +142,15 @@ setup:
         unset NPM_CONFIG_PREFIX
         [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
         EOF
+      user: "1000"
       description: Source nvm for every shell
 ```
 
-The install step runs as `user: "1000"` so the tool lands under
-`/home/agent/`. The append step runs as root (the default), since
-`/etc/sandbox-persistent.sh` is a system file. The `$HOME` in the
-appended lines resolves per user at source time, so the agent user finds
-its own install. Append to the file rather than overwriting it — the
-sandbox relies on its existing contents.
+Both install steps run as `user: "1000"`. This installs the tool under
+`/home/agent/` and can update `/etc/sandbox-persistent.sh`, which the agent user
+owns. The `$HOME` in the appended lines resolves per user at source time, so the
+agent user finds its own install. Append to the file rather than overwriting it
+— the sandbox relies on its existing contents.
 
 The base image ships its own Node and sets `NPM_CONFIG_PREFIX`, which
 nvm won't activate alongside. `unset NPM_CONFIG_PREFIX` before sourcing
