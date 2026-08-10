@@ -57,7 +57,7 @@ Rules appended to the `FORWARD` chain will be processed after Docker's rules.
 >
 > Docker also blocks direct-routed access to **unpublished** container ports in
 > the `DOCKER` filter rules (see
-> [Port publishing](./port-publishing.md)). Packets that another datapath has
+> [Port publishing](./port-publishing.md)). Packets that another data path has
 > already rewritten to a container address (for example a Kubernetes CNI that
 > DNAT's Service VIPs before host netfilter) still hit that protection. They
 > never become "published" traffic you can reopen only with `DOCKER-USER`. To
