@@ -40,7 +40,7 @@ Docker Desktop supports two installation modes. Per-user installation is recomme
 | Registry keys | Current User (HKCU) | Local Machine (HKLM) |
 | Admin rights to install | Not required | Required |
 | Admin rights to update | Not required | Required |
-| Linux containers backend | WSL 2 only | WSL 2 or Hyper-V |
+| Linux containers backend | WSL 2 or Docker VMM | WSL 2, Hyper-V, or Docker VMM |
 | Windows containers | Not supported | Supported |
 | Security | Smaller attack surface; no privileged system service installed | Requires privileged system service; broader access to host resources |
 
@@ -50,9 +50,9 @@ For more information, see [Understand permission requirements for Windows](windo
 
 > [!TIP]
 >
-> **Should I use Hyper-V or WSL?**
+> **Which backend should I use?**
 >
-> Docker Desktop's functionality remains consistent on both WSL and Hyper-V, without a preference for either architecture. Hyper-V and WSL have their own advantages and disadvantages, depending on your specific setup and your planned use case. Note that Hyper-V is only available with all-users installation. If you install Docker Desktop in per-user mode, WSL 2 is the only supported backend. 
+> Docker Desktop for Windows supports three backends: WSL 2, Hyper-V, and Docker VMM (Beta). WSL 2 is the default and works for most users without administrator privileges. Hyper-V is only available with all-users installation. Docker VMM is a container-optimized hypervisor that reclaims idle memory and improves file I/O. For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md).
 
 {{< tabs >}}
 {{< tab name="WSL 2 backend, x86_64" >}}
@@ -150,7 +150,7 @@ For more information, see [Running Docker Desktop in a VM or VDI environment](/m
    >
    >If you want to switch installation mode at a later date, you need to uninstall and reinstall Docker Desktop.
 
-3. When prompted, ensure the **Use WSL 2 instead of Hyper-V** option on the Configuration page is selected or not depending on your choice of backend.
+3. When prompted, select your backend on the Configuration page: **Use WSL 2 instead of Hyper-V** for WSL 2, or leave it unselected for Hyper-V. You can switch to Docker VMM after installation from **Settings** > **General**.
 
     On systems that support only one backend, Docker Desktop automatically selects the available option.
 
