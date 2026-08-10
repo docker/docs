@@ -25,7 +25,7 @@ memory cgroup limit (`--memory` / Compose `mem_limit`). Setting a large
 `tmpfs-size` (or host-mounted tmpfs) does not give the container extra RAM
 outside that limit — filling the mount can still OOM the container. Memory
 metrics for the container include tmpfs usage; see
-[runtime metrics](/manuals/engine/containers/runmetrics/).
+[runtime metrics](/manuals/engine/containers/runmetrics.md).
 
 tmpfs mounts are best used for cases when you do not want the data to persist
 either on the host machine or within the container. This may be for security
