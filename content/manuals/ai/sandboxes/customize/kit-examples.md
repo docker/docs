@@ -318,9 +318,9 @@ for details.
 
 ## Customize agent settings
 
-Some agents combine settings from several files. Place kit settings in a
-separate file when the agent supports it, instead of replacing a file the
-sandbox manages.
+Some agents combine settings from several files. When the agent supports it,
+place kit settings in a separate file instead of replacing
+[sandbox-managed agent configuration](kits.md#sandbox-managed-agent-configuration).
 
 Claude Code's `--settings` option loads an additional settings file. Extend the
 built-in `claude` kit to add the option without reproducing its configuration,
