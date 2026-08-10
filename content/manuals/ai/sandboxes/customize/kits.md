@@ -315,6 +315,12 @@ To start a new sandbox with this mixin:
 $ sbx run claude --kit /path/to/ruff-lint/
 ```
 
+To apply the mixin to a sandbox that's already running, use
+[`sbx kit add`](#local) instead. The `--kit` flag only takes effect when a
+sandbox is created. `sbx kit add` restarts the sandbox to apply the kit, but VM
+state — installed packages, Docker images, volumes, and agent history — is
+preserved.
+
 ## Sandbox kits
 
 A sandbox kit defines a full agent from scratch — image, entrypoint, and
