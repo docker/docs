@@ -400,7 +400,7 @@ When a sandbox is created, kit content is applied in this order:
 2. Static files under `files/home/`.
 3. `setup.install` commands, in declaration order.
 4. `setup.files` entries.
-5. `setup.startup` commands are registered for each container start.
+5. `setup.startup` commands are registered for each sandbox start.
 6. Static files under `files/workspace/`, after the workspace is ready. With
    `--clone`, this means after the repository has been cloned.
 
