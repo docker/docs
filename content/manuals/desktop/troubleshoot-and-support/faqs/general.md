@@ -96,7 +96,7 @@ Docker Desktop requires administrator privileges only for installation. Once ins
 {{< tabs >}}
 {{< tab name="Mac" >}}
 
-To run Docker Desktop on Mac without requiring administrator privileges, install via the command line and pass the `—user=<userid>` installer flag:
+To run Docker Desktop on Mac without requiring administrator privileges, install via the command line and pass the `--user=<userid>` installer flag:
 
 ```console
 $ /Applications/Docker.app/Contents/MacOS/install --user=<userid>
@@ -115,10 +115,10 @@ You can then sign in to your machine with the user ID specified, and launch Dock
 >
 > If you are using the WSL 2 backend, first make sure that you meet the [minimum required version](/manuals/desktop/features/wsl/best-practices.md) for WSL 2. Otherwise, update WSL 2 first.  
 
-To run Docker Desktop on Windows without requiring administrator privileges, install via the command line and pass the `—always-run-service` installer flag.
+To run Docker Desktop on Windows without requiring administrator privileges, install via the command line and pass the `--always-run-service` installer flag.
 
 ```console
-$ "Docker Desktop Installer.exe" install —always-run-service
+$ "Docker Desktop Installer.exe" install --always-run-service
 ```
 
 {{< /tab >}}
