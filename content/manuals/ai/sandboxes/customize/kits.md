@@ -315,12 +315,6 @@ To start a new sandbox with this mixin:
 $ sbx run claude --kit /path/to/ruff-lint/
 ```
 
-To apply the mixin to a sandbox that's already running, use
-[`sbx kit add`](#local) instead. The `--kit` flag only takes effect when a
-sandbox is created. `sbx kit add` restarts the sandbox to apply the kit, but VM
-state — installed packages, Docker images, volumes, and agent history — is
-preserved.
-
 ## Sandbox kits
 
 A sandbox kit defines a full agent from scratch — image, entrypoint, and
@@ -390,13 +384,15 @@ repository, or an OCI registry. Pass `--kit` more than once to stack
 several kits on the same sandbox.
 
 > [!IMPORTANT]
-> `--kit` only takes effect when a sandbox is created. Passing it
-> against an existing sandbox name fails with
-> `--kit can only be used when creating a new sandbox`. To extend a
-> running sandbox with a kit, use [`sbx kit add`](#local) instead.
+> `--kit` only takes effect when a sandbox is created. Passing it against an
+> existing sandbox name fails with
+> `--kit can only be used when creating a new sandbox`. To add a supported
+> mixin kit to a running sandbox, use [`sbx kit add`](#local) instead.
 > `sbx kit add` restarts the sandbox to apply the updated kit set.
 > VM state — installed packages, Docker images, volumes, and agent history
-> — is preserved across the restart.
+> — is preserved across the restart. It supports mixin kits limited to
+> `environment.variables`, `setup.install`, and `permissions.network.allow`.
+> To use other fields, recreate the sandbox with `--kit`.
 
 ### Local
 
@@ -407,7 +403,8 @@ $ sbx run claude --kit ./my-kit/
 $ sbx run claude --kit ./my-kit-1.0.zip
 ```
 
-While iterating on a kit, apply changes to a running sandbox with `sbx kit add`:
+While iterating on a supported mixin kit, apply changes to a running sandbox
+with `sbx kit add`:
 
 ```console
 $ sbx kit add my-sandbox ./my-kit/
@@ -415,9 +412,8 @@ $ sbx kit add my-sandbox ./my-kit/
 
 `sbx kit add` restarts the sandbox to apply the updated kit set.
 VM state — installed packages, Docker images, volumes, and agent history — is
-preserved across the restart. The kit's network allow/deny rules take effect
-immediately. Kits can't be removed from a running sandbox — remove and recreate
-it to start clean.
+preserved across the restart. Kits can't be removed from a running sandbox —
+remove and recreate it to start clean.
 
 ### Git repository
 
