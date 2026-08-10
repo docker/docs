@@ -194,7 +194,8 @@ If you don't have a paid Docker subscription, create an issue on [GitHub](https:
 
 > [!IMPORTANT]
 >
-> This tool has been deprecated.
+> This tool has been deprecated. Use the diagnostic methods in
+> [Diagnose](#diagnose) instead (from the app, an error message, or the terminal).
 
 ## Check the logs
 
