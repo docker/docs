@@ -177,10 +177,11 @@ The effective command is `entrypoint` plus `command.default` for non-interactive
 launches, and `entrypoint` plus `command.interactive` for TTY sessions. If
 `interactive` is omitted, it falls back to `default`.
 
-For a kit that uses `extends:`, `sandbox.command` replaces the parent's full
-argument list instead of appending to it. Define every argument the child
-needs. For example, a child of `claude` that adds `--settings` must also include
-`--dangerously-skip-permissions` to preserve that behavior.
+For a kit that uses `extends:`, `sandbox.command` replaces the full inherited
+argument tail, including flags after the binary in the parent's
+`sandbox.entrypoint`. It doesn't append to that tail. Define every argument the
+child needs. For example, a child of `claude` that adds `--settings` must also
+include `--dangerously-skip-permissions` to preserve that behavior.
 
 The agent's container image must provide:
 
