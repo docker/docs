@@ -73,7 +73,12 @@ if (publishedDates.join() !== sortedDates.join()) {
   throw new Error("items must be sorted by published date, newest first");
 }
 
-const identities = data.items.map((item) => `${item.title}\0${item.url}`);
-if (new Set(identities).size !== identities.length) {
-  throw new Error("items must not contain duplicate titles and URLs");
+const titles = data.items.map((item) => item.title);
+if (new Set(titles).size !== titles.length) {
+  throw new Error("items must not contain duplicate titles");
+}
+
+const urls = data.items.map((item) => item.url);
+if (new Set(urls).size !== urls.length) {
+  throw new Error("items must not contain duplicate URLs");
 }
