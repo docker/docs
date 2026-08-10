@@ -344,6 +344,7 @@ extends: claude
 
 sandbox:
   command:
+    - --dangerously-skip-permissions
     - --settings
     - /home/agent/.config/claude/sonnet.json
 ```

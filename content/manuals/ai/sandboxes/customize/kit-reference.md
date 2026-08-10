@@ -177,6 +177,10 @@ The effective command is `entrypoint` plus `command.default` for non-interactive
 launches, and `entrypoint` plus `command.interactive` for TTY sessions. If
 `interactive` is omitted, it falls back to `default`.
 
+For a kit that uses `extends:`, `sandbox.command` replaces the arguments
+inherited from the parent instead of appending to them. Repeat any flags from
+the parent's `sandbox.entrypoint` that the child must retain.
+
 The agent's container image must provide:
 
 - A non-root `agent` user at UID 1000 with passwordless sudo.
