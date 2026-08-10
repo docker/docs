@@ -194,7 +194,9 @@ If you don't have a paid Docker subscription, create an issue on [GitHub](https:
 
 > [!IMPORTANT]
 >
-> This tool has been deprecated.
+> This tool has been deprecated. Use the diagnostic methods in
+> [Diagnose](#diagnose) above, including the [`docker desktop diagnose`
+> command](/manuals/desktop/features/desktop-cli.md), instead.
 
 ## Check the logs
 
