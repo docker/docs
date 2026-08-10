@@ -363,9 +363,10 @@ the child kit's name:
 $ sbx run claude-sonnet --kit ./claude-sonnet
 ```
 
-OpenCode supports an additional config file through `OPENCODE_CONFIG`. The
-sandbox manages `/home/agent/.config/opencode/opencode.json`. Keep the kit's
-config at a different path, such as `/home/agent/.config/opencode/team.json`:
+OpenCode supports an additional config file through `OPENCODE_CONFIG`. Keep the
+kit's config separate from the sandbox-managed
+`/home/agent/.config/opencode/opencode.json`, for example at
+`/home/agent/.config/opencode/team.json`:
 
 ```text
 opencode-team/

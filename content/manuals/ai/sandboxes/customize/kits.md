@@ -99,10 +99,24 @@ setup:
 See [`setup.files`](kit-reference.md#files) in the spec reference for all
 fields.
 
-Sandboxes seed settings files for some built-in agents during setup.
-For example, the sandbox writes `/home/agent/.claude/settings.json`
-for the `claude` agent. This happens after the kit's static files and
-`setup.files`, so kit-injected files at those paths get overwritten.
+#### Sandbox-managed agent configuration
+
+Built-in agent kits reserve the following paths for sandbox setup. Treat these
+paths as sandbox-managed, even if a file is only needed for a particular
+feature. Don't target them with static files, `setup.files`, or install
+commands. Later setup can replace your content or depend on settings that your
+file removes. In this table, `~` is `/home/agent`.
+
+| Built-in agent kit | Managed configuration paths |
+| ------------------ | --------------------------- |
+| `claude` | `~/.claude.json`, `~/.claude/settings.json`, `~/.claude/.config.json` |
+| `codex` | `~/.codex/config.toml` |
+| `copilot` | `~/.copilot/config.json` |
+| `cursor` | `~/.cursor/cli-config.json` |
+| `gemini` | `~/.gemini/settings.json` |
+| `kiro` | `~/.kiro/settings/mcp.json` |
+| `opencode` | `~/.config/opencode/opencode.json` |
+
 Use a separate settings layer when the agent supports one. For example, Claude
 Code can load an additional settings file with `--settings`, and OpenCode can
 load one from the path in `OPENCODE_CONFIG`. See
