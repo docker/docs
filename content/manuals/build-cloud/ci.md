@@ -29,8 +29,9 @@ See [Loading build results](./usage/#loading-build-results) for details.
 
 > [!NOTE]
 >
-> Builds on Docker Build Cloud have a timeout limit of 90 minutes. Builds that
-> run for longer than 90 minutes are automatically cancelled.
+> Builds on Docker Build Cloud have a timeout limit that depends on your
+> subscription plan. Builds that run for longer than your limit are
+> automatically cancelled.
 
 ## Setting up credentials for CI/CD
 
