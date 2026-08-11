@@ -167,7 +167,7 @@ sandbox:
 
 | Field                | Required | Description                                                                                                     |
 | -------------------- | -------- | --------------------------------------------------------------------------------------------------------------- |
-| `sandbox.image`      | Yes      | Docker image reference. A sandbox that sets `extends:` can inherit this from its parent.                        |
+| `sandbox.image`      | When `extends:` is omitted | Docker image reference.                                                                                         |
 | `sandbox.build`      | No       | Build configuration. Runtime support is pending, so a kit with `build:` must also set `image:`.                 |
 | `sandbox.entrypoint` | No       | Fixed process prefix as a string array. The first element is the agent binary.                                  |
 | `sandbox.command`    | No       | Mode-specific argument tail. Use a list shorthand for `default`, or a mapping with `default` and `interactive`. |
@@ -176,6 +176,12 @@ sandbox:
 The effective command is `entrypoint` plus `command.default` for non-interactive
 launches, and `entrypoint` plus `command.interactive` for TTY sessions. If
 `interactive` is omitted, it falls back to `default`.
+
+For a kit that uses `extends:`, `sandbox.command` replaces the full inherited
+argument tail, including flags after the binary in the parent's
+`sandbox.entrypoint`. It doesn't append to that tail. Define every argument the
+child needs. For example, a child of `claude` that adds `--settings` must also
+include `--dangerously-skip-permissions` to preserve that behavior.
 
 The agent's container image must provide:
 
@@ -434,14 +440,16 @@ Runs at every sandbox start. String array, not interpreted by a shell.
 | ------------- | -------- | ----------------------------------- |
 | `command`     | —        | Command and args as a string array. |
 | `user`        | `"1000"` | User to run as. `"1000"` = agent.   |
-| `background`  | `false`  | Run in background.                  |
+| `background`  | `false`  | Block later startup commands until this command finishes. Set to `true` to let later commands run without waiting. |
 | `description` | —        | Human-readable description.         |
 
 Startup commands are non-interactive. They run before the agent
 attaches, with no terminal connected, so they can't prompt the user
 (for example, an interactive `aws login` will hang or fail). They also
 don't gate the agent's entrypoint: the agent launches once startup
-commands have been dispatched, regardless of `background`. Use them
+commands have been dispatched, regardless of `background`. A value of
+`false` waits within the startup dispatcher before it runs the next command;
+it doesn't delay the agent entrypoint. Use startup commands
 for non-interactive prep — launching daemons, warming caches,
 refreshing config — and use `setup.files` for any value that
 needs to land on disk before the agent runs.

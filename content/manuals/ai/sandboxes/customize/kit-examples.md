@@ -316,32 +316,97 @@ See the
 [FAQ](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for details.
 
-## Override agent settings
+## Customize agent settings
 
-Sandboxes seed settings files for some built-in agents during setup.
-For example, the sandbox writes `/home/agent/.claude/settings.json`
-for the `claude` agent. This happens after the kit's static files and
-`setup.files`, so a kit can't override those paths with either mechanism.
-Use `setup.startup` instead, which runs after the sandbox seeds its
-files:
+Some agents combine settings from several files. When the agent supports it,
+place kit settings in a separate file instead of replacing
+[sandbox-managed agent configuration](kits.md#sandbox-managed-agent-configuration).
 
-```yaml
-setup:
-  startup:
-    - command:
-        - sh
-        - -c
-        - |
-          mkdir -p /home/agent/.claude
-          cat > /home/agent/.claude/settings.json <<'JSON'
-          {"permissions": {"allow": ["Bash(echo:*)"]}}
-          JSON
-      user: "1000"
-      description: Write user-scope claude settings
+Claude Code's `--settings` option loads an additional settings file. Extend the
+built-in `claude` kit to add the option without reproducing its configuration,
+and place the additional file outside the path the sandbox manages:
+
+```text
+claude-sonnet/
+├── spec.yaml
+└── files/
+    └── home/
+        └── .config/
+            └── claude/
+                └── sonnet.json
 ```
 
-Startup commands replay on every sandbox start, so the script must be
-idempotent. The heredoc pattern overwrites cleanly each time.
+```yaml {title="claude-sonnet/spec.yaml"}
+schemaVersion: "2"
+kind: sandbox
+name: claude-sonnet
+extends: claude
+
+sandbox:
+  command:
+    - --dangerously-skip-permissions
+    - --settings
+    - /home/agent/.config/claude/sonnet.json
+```
+
+```json {title="claude-sonnet/files/home/.config/claude/sonnet.json"}
+{
+  "model": "sonnet"
+}
+```
+
+Claude Code merges the additional file with the sandbox-managed user settings.
+Because the file is under `files/home/`, it stays inside the sandbox instead of
+being written into a directly mounted host workspace. Launch the sandbox with
+the child kit's name:
+
+```console
+$ sbx run claude-sonnet --kit ./claude-sonnet
+```
+
+OpenCode supports an additional config file through `OPENCODE_CONFIG`. Keep the
+kit's config separate from the sandbox-managed
+`/home/agent/.config/opencode/opencode.json`, for example at
+`/home/agent/.config/opencode/team.json`:
+
+```text
+opencode-team/
+├── spec.yaml
+└── files/
+    └── home/
+        └── .config/
+            └── opencode/
+                └── team.json
+```
+
+```yaml {title="opencode-team/spec.yaml"}
+schemaVersion: "2"
+kind: mixin
+name: opencode-team
+requires:
+  agent: opencode
+
+environment:
+  variables:
+    OPENCODE_CONFIG: /home/agent/.config/opencode/team.json
+```
+
+```json {title="opencode-team/files/home/.config/opencode/team.json"}
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": false
+}
+```
+
+OpenCode merges the custom file with its global and project config files. See
+the OpenCode [config precedence](https://opencode.ai/docs/config/#precedence-order)
+for the complete order.
+
+Agent settings mechanisms differ. If an agent doesn't support an additional
+config file, launch option, or environment variable for the setting, kits can't
+replace the sandbox-managed user settings before the agent launches.
+`setup.startup` doesn't gate the agent entrypoint, so don't use it for settings
+the agent must read during initialization.
 
 ## Fork an existing agent
 
