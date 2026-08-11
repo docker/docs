@@ -150,6 +150,18 @@ Used for `docker image pull` (always enforced - all `docker pull` and Compose pu
 >
 > The HTTPS proxy used for image scanning is configured using the `HTTPS_PROXY` environment variable.
 
+#### Use proxy for Windows Docker daemon
+
+On Windows, when you run **Windows containers**, Docker Desktop can expose its
+internal proxy to the Windows Docker daemon. Turn on **Use proxy for Windows
+Docker daemon** so that Windows-container image pulls and other daemon traffic
+use the same proxy path as Docker Desktop (including Registry Access Management
+restrictions). See also
+[Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md#registry-limits-and-platform-constraints).
+
+Admins can set the local listen port with `windowsDockerdPort` in Settings
+Management (`-1` disables the option, `0` picks a free port).
+
 #### Proxy authentication
 
 | Method |  Behavior | Notes |
