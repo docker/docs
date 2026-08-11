@@ -96,6 +96,49 @@ Unlike `run`, `create` requires an explicit workspace path. Attach later with
 $ sbx run --name my-project
 ```
 
+## Set environment variables
+
+> [!NOTE]
+> The `-e`/`--env` and `--env-file` flags require `sbx` version 0.39.0 or
+> later.
+
+Pass `-e` or `--env` to `sbx run` or `sbx create` to set an environment
+variable in the sandbox:
+
+```console
+$ sbx run -e LOG_LEVEL=debug claude
+```
+
+Specify a variable name without a value to copy its value from the host
+environment:
+
+```console
+$ export API_URL=https://api.example.com
+$ sbx run -e API_URL claude
+```
+
+To load multiple variables, pass one or more environment files:
+
+```console
+$ sbx create --name my-project --env-file .env.sandbox claude .
+```
+
+The flags follow `docker run` precedence rules. Values passed with `-e`
+override values from environment files. When you pass multiple environment
+files, a value in a later file overrides the same variable in an earlier file.
+
+When either command creates a sandbox, the variables are stored with the
+sandbox. They are also available to the agent session started by `sbx run`.
+When `sbx run` re-attaches to an existing sandbox, the variables apply to that
+agent session without changing the sandbox's stored environment. To set
+variables for one command instead, use `sbx exec -e` or
+`sbx exec --env-file`.
+
+Environment variables are readable by processes inside the sandbox. For API
+keys and other supported credentials, use
+[`sbx secret`](security/credentials.md) so the host-side proxy can inject the
+credential without exposing its value to the agent.
+
 ## Run commands inside a sandbox
 
 To get a shell inside a running sandbox, use [`sbx exec`](/reference/cli/sbx/exec/):

@@ -515,7 +515,10 @@ at launch and routes them through its proxy — the credential is never stored i
 sbx's state and never appears inside the sandbox container.
 
 This only applies to those specific credential variables. The sandbox does not
-forward arbitrary environment variables from the host into the sandbox.
+forward arbitrary host environment variables unless you pass them explicitly
+with [`-e` or `--env-file`](usage.md#set-environment-variables). Explicitly
+passed values are readable by processes inside the sandbox and don't receive
+the host-side proxy protection used for supported credentials.
 
 For multiple credentials at once, use `--env-file` with a file of `op://`
 references:

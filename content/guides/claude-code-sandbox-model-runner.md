@@ -52,7 +52,7 @@ Before you start, make sure you have:
 
 - [Docker Desktop](../get-started/get-docker.md) or Docker Engine installed
 - [Docker Model Runner enabled](../manuals/ai/model-runner/get-started.md#enable-docker-model-runner)
-- [Docker Sandboxes (`sbx`) installed and signed in](../manuals/ai/sandboxes/install.md)
+- [Docker Sandboxes (`sbx`) version 0.39.0 or later installed and signed in](../manuals/ai/sandboxes/install.md)
 
 If you use Docker Desktop, turn on TCP access in **Settings** > **AI**, or
 run:
@@ -92,38 +92,28 @@ For background on host access from sandboxes, see
 
 ## Step 3: Create a Claude Code sandbox
 
-From your project directory, create a sandbox without launching the agent:
+From your project directory, create a sandbox without launching the agent. Set
+`ANTHROPIC_BASE_URL` so Claude Code uses Docker Model Runner whenever the
+sandbox starts:
 
 ```console
 $ cd ~/my-project
-$ sbx create claude --name claude-dmr .
+$ sbx create --name claude-dmr \
+  -e ANTHROPIC_BASE_URL=http://host.docker.internal:12434 \
+  claude .
 ```
 
-`sbx run` would also work, but it launches Claude Code immediately. Without
-`ANTHROPIC_BASE_URL` set, Claude Code points at `api.anthropic.com` and
-either prompts for OAuth or errors out before you can fix the endpoint.
-Creating the sandbox first lets you write the local endpoint into it before
-the agent starts.
+`sbx run` would also work, but it launches Claude Code immediately. Creating
+the sandbox first gives you a chance to verify the endpoint before the agent
+starts.
 
 You don't need to set an Anthropic API key or run `sbx secret set
 anthropic`. Docker Model Runner doesn't authenticate the local endpoint,
 and the sandbox proxy only injects credentials for requests bound for
 `api.anthropic.com`. See
 [Credentials](../manuals/ai/sandboxes/security/credentials.md) for the full
-list of services the proxy authenticates.
-
-## Step 4: Set the local endpoint inside the sandbox
-
-Append `ANTHROPIC_BASE_URL` to the sandbox's persistent environment file so
-Claude Code reads it on every launch:
-
-```console
-$ sbx exec -d claude-dmr bash -c "echo 'export ANTHROPIC_BASE_URL=http://host.docker.internal:12434' >> /etc/sandbox-persistent.sh"
-```
-
-The `bash -c` wrapper ensures the `>>` redirect runs inside the sandbox, not
-on your host. For details on this approach, see
-[How do I set custom environment variables inside a sandbox?](../manuals/ai/sandboxes/faq.md#how-do-i-set-custom-environment-variables-inside-a-sandbox).
+list of services the proxy authenticates. For more ways to set variables, see
+[Set environment variables](../manuals/ai/sandboxes/usage.md#set-environment-variables).
 
 To confirm the variable is set, open a shell in the sandbox:
 
@@ -133,7 +123,7 @@ $ echo $ANTHROPIC_BASE_URL
 http://host.docker.internal:12434
 ```
 
-## Step 5: Verify connectivity to Docker Model Runner
+## Step 4: Verify connectivity to Docker Model Runner
 
 Still inside the sandbox shell, send a test request to the host endpoint:
 
@@ -152,7 +142,7 @@ Type `exit` to leave the shell. For more details about the request format,
 see the
 [Anthropic-compatible API reference](../manuals/ai/model-runner/api-reference.md#anthropic-compatible-api).
 
-## Step 6: Launch Claude Code with the local model
+## Step 5: Launch Claude Code with the local model
 
 Run Claude Code in the sandbox and pass the model flag through to the agent:
 
@@ -161,11 +151,11 @@ $ sbx run claude-dmr -- --model ai/devstral-small-2
 ```
 
 Everything after `--` is forwarded to the Claude Code CLI. Because
-`ANTHROPIC_BASE_URL` is set in the sandbox's persistent environment, Claude
+`ANTHROPIC_BASE_URL` is stored in the sandbox's environment, so Claude
 Code routes requests to Docker Model Runner on your host instead of
 `api.anthropic.com`.
 
-## Step 7: Inspect Claude Code requests
+## Step 6: Inspect Claude Code requests
 
 To inspect the requests Claude Code sends, run on your host:
 
@@ -176,7 +166,7 @@ $ docker model requests --model ai/devstral-small-2 | jq .
 This helps you debug prompts, context usage, and compatibility issues
 without attaching to the sandbox.
 
-## Step 8: Package `gpt-oss` with a larger context window
+## Step 7: Package `gpt-oss` with a larger context window
 
 `ai/gpt-oss` defaults to a smaller context window than coding-focused
 models. To use it for repository-scale prompts, package a larger variant on
@@ -203,8 +193,7 @@ deleting it:
 $ sbx stop claude-dmr
 ```
 
-To remove the sandbox and everything inside, including the persistent
-environment file:
+To remove the sandbox and everything inside:
 
 ```console
 $ sbx rm claude-dmr

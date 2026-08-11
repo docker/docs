@@ -120,9 +120,10 @@ available in every shell, append the source line to
 file. It's sourced before every bash invocation — interactive shells and
 non-interactive ones, including agents started with `sbx run` and
 commands run with `sbx exec`. Appending here makes the tool available to
-the agent regardless of how its shell is launched. The same file is where
-you'd set a custom environment variable; see the
-[FAQ](../faq.md#how-do-i-set-custom-environment-variables-inside-a-sandbox).
+the agent regardless of how its shell is launched. Use
+[`environment.variables`](kit-reference.md#environment) for ordinary variables
+declared by a kit. To pass variables when creating a sandbox, use
+[`-e` or `--env-file`](../usage.md#set-environment-variables).
 
 ```yaml {title="nvm/spec.yaml"}
 schemaVersion: "2"
