@@ -392,9 +392,33 @@ setup:
       description: <text>
 ```
 
+### Execution order
+
+When a sandbox is created, kit content is applied in this order:
+
+1. Network permissions and environment variables.
+2. Static files under `files/home/`.
+3. `setup.install` commands, in declaration order.
+4. `setup.files` entries.
+5. `setup.startup` commands are registered for each sandbox start.
+6. Static files under `files/workspace/`, after the workspace is ready. With
+   `--clone`, this means after the repository has been cloned.
+
+For stacked kits, entries in each stage are applied in `--kit` order. An install
+command can consume a bundled file from `files/home/`, but not one from
+`files/workspace/` or `setup.files`, because those files land later.
+
+`sbx kit add` recreates the sandbox rather than modifying it in place. It
+supports mixin kits limited to
+`environment.variables`, `setup.install`, and `permissions.network.allow`,
+which follow the same order as sandbox creation. It rejects a kit that declares
+static files, `setup.startup`, or `setup.files`. To use those fields, recreate
+the sandbox with the kit.
+
 ### install
 
-Runs once during sandbox creation. Shell strings passed to `sh -c`.
+Runs synchronously when a kit is applied, either during sandbox creation or
+through `sbx kit add`. Shell strings are passed to `sh -c`.
 
 | Field         | Default | Description                   |
 | ------------- | ------- | ----------------------------- |
