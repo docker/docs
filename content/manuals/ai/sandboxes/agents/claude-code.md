@@ -49,6 +49,15 @@ available inside the sandbox. See
 [Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
+### Remote control
+
+To use Claude Code's `/remote-control` command inside a sandbox, turn on remote
+control:
+
+```console
+$ sbx settings set claude.remoteControl true
+```
+
 ### Default startup command
 
 Without extra args, the sandbox runs:
