@@ -48,6 +48,17 @@ $ sbx rm my-sandbox
 $ sbx run claude
 ```
 
+To remove all stopped local sandboxes, use `sbx prune`. Running sandboxes are
+never removed. Preview the sandboxes that would be removed, or filter out
+sandboxes stopped within the last week:
+
+```console
+$ sbx prune --dry-run
+$ sbx prune --filter since=168h
+```
+
+Run `sbx prune` without flags to confirm and remove all stopped sandboxes.
+
 ## Reconnect and name sandboxes
 
 Sandboxes persist after the agent exits. Running the same workspace path again
