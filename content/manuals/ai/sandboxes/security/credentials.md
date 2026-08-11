@@ -117,10 +117,10 @@ The corresponding `op` or `aws` CLI must be installed and authenticated on the
 host.
 
 > [!NOTE]
-> If provider settings such as `OP_ACCOUNT`, `AWS_PROFILE`, or supported AWS
-> region and config variables are set when you register a reference, `sbx`
-> records them for later daemon-side resolution. Otherwise, the provider CLI
-> uses its default account or profile.
+> To resolve a reference with a specific 1Password account or AWS profile, set
+> `OP_ACCOUNT` or `AWS_PROFILE` when you run `sbx secret set`. `sbx` uses that
+> account or profile whenever it resolves the secret. If neither variable is
+> set, the provider CLI uses its default.
 
 Use `--command` for another host tool that prints a secret to standard output:
 
@@ -135,11 +135,12 @@ command because the text can appear in shell history and process listings.
 By default, `sbx` verifies the source when you register it and reports an error
 without exposing the resolver's standard error. Use `--no-verify` to store a
 source that can't be resolved during registration. To troubleshoot an initial
-verification failure, use `--show-error`; provider error output can contain
+verification failure, use `--show-error`. Provider error output can contain
 sensitive information. You can't combine `--show-error` with `--no-verify`.
 
-Resolved service secrets are cached for 55 minutes by default. Set another
-duration or resolve the source for every credential use with `--refresh`:
+Resolved service secrets are cached for 55 minutes by default. To change the
+cache duration, use `--refresh <duration>`. To resolve the source for every
+credential use instead of caching it, pass `--refresh on-demand`:
 
 ```console
 $ sbx secret set anthropic \
