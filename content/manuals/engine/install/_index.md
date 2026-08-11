@@ -90,9 +90,9 @@ Click on a platform's link to view the relevant installation procedure.
   or are built from modified source code. Docker isn't involved in releasing these
   packages and you should report any bugs or issues involving these packages to
   your Linux distribution's issue tracker.
-- On Arch Linux and derivatives (for example Manjaro), install Docker Engine from
-  the distribution's own packages (such as the `docker` package in the official
-  Arch repositories). Docker doesn't publish Engine packages for Arch. For a
+- On Arch Linux and Arch-based distributions, install Docker Engine from the
+  distribution's own packages (such as the `docker` package in the official Arch
+  repositories). Docker doesn't publish Engine packages for Arch. For a
   distribution-agnostic install, use the [static binaries](binaries.md).
 
 Docker provides [binaries](binaries.md) for manual installation of Docker Engine.
