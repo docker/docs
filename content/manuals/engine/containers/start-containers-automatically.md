@@ -12,7 +12,7 @@ aliases:
 
 Docker provides [restart policies](/reference/cli/docker/container/run/#restart)
 to control whether your containers start automatically when they exit, or when
-Docker restarts. Restart policies start linked containers in the correct order.
+Docker restarts.
 Docker recommends that you use restart policies, and avoid using process
 managers to start containers.
 
@@ -37,7 +37,7 @@ The following command starts a Redis container and configures it to always
 restart, unless the container is explicitly stopped, or the daemon restarts.
 
 ```console
-$ docker run -d --restart unless-stopped redis
+$ docker run -d --name redis --restart unless-stopped redis
 ```
 
 The following command changes the restart policy for an already running

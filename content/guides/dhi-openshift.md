@@ -3,8 +3,8 @@ title: Use Docker Hardened Images with Red Hat OpenShift
 description: Deploy Docker Hardened Images on Red Hat OpenShift Container Platform, covering Security Context Constraints, arbitrary user ID assignment, file permissions, and best practices.
 summary: Learn how to deploy Docker Hardened Images (DHI) on Red Hat OpenShift, configure Security Context Constraints, handle arbitrary user ID assignment, and set file permissions for both runtime and development image variants.
 keywords: docker hardened images, dhi, openshift, OCP, SCC, security context constraints, non-root, distroless, containers, red hat
-tags: ["Docker Hardened Images", "dhi"]
 params:
+  tags: [security]
   proficiencyLevel: Intermediate
   time: 30 minutes
   prerequisites:
@@ -620,6 +620,6 @@ and use `COPY --chown` to transfer results.
 
 - [Use an image in Kubernetes](/dhi/how-to/k8s/) — general DHI Kubernetes deployment guide.
 - [Customize an image](/dhi/how-to/customize/) — add packages to DHI images using Enterprise customization.
-- [Debug a container](/dhi/troubleshoot/#general-debugging) — troubleshoot distroless containers with Docker Debug (local development).
+- [Debug a container](/dhi/how-to/troubleshoot/#general-debugging) — troubleshoot distroless containers with Docker Debug (local development).
 - [Managing SCCs](https://docs.openshift.com/container-platform/4.14/authentication/managing-security-context-constraints.html) — Red Hat’s reference documentation on Security Context Constraints.
 - [Creating images for OpenShift](https://docs.openshift.com/container-platform/4.14/openshift_images/create-images.html) — Red Hat’s guidelines for building OpenShift-compatible container images.

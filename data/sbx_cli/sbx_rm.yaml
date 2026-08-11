@@ -7,7 +7,8 @@ description: |-
     worktrees, and deletes sandbox state. This action cannot be undone.
 
     Removal requires confirmation; use --force to skip confirmation prompts
-    (for non-interactive scripts). Use --all to remove every sandbox.
+    (for non-interactive scripts) and to delete a sandbox that is in use
+    (e.g. an open SSH connection). Use --all to remove every sandbox.
 usage: sbx rm [SANDBOX...] [flags]
 options:
     - name: all
@@ -16,7 +17,8 @@ options:
     - name: force
       shorthand: f
       default_value: "false"
-      usage: Skip confirmation prompts
+      usage: |
+        Skip confirmation prompts and delete even if in use (e.g. an open SSH connection)
     - name: help
       shorthand: h
       default_value: "false"

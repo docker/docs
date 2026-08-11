@@ -31,8 +31,12 @@ You can purchase Docker plans through the product catalog:
    - The **Products** page contains products and upgrades available for self-serve.
    - Some products in the catalog may apply to personal accounts, organization accounts, or both.
    - Each product tile uses an account-type flag so you know the difference.
-1. Select **View plans** to add a plan to your Docker account.
+1. Select **View plans**, then choose the plan you want to add to your Docker subscription.
 1. Verify your billing details, continue to payment, and complete checkout.
+   - Optional. To add a VAT number, select the **I'm purchasing as a business**
+     checkbox and enter your Tax ID.
+   - Your VAT number must include your country prefix. For example, enter
+     `DE123456789` for a German VAT number.
 
 ## Upgrade plans
 
@@ -64,9 +68,11 @@ Credits apply to [Docker AI Cloud](/manuals/subscription/plans/ai-cloud.md). Whe
 Some products are sales-led. You must
 <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_plans_manage" class="link" rel="noopener">contact sales</a> to opt in.
 
-## What's next
+## Next steps
 
 - [Learn about available plans](/manuals/subscription/plans/_index.md)
 - [Set up payment information](/manuals/billing/payment-method.md)
 - [View invoices](/manuals/billing/history.md)
 - To learn more about managing your billing details, see [Billing](/manuals/billing/_index.md).
+- To learn about sales tax and VAT, see
+  [Taxes](/manuals/billing/tax-certificate.md).

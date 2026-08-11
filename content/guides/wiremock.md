@@ -4,9 +4,8 @@ description: &desc Mocking API services in development and testing with WireMock
 keywords: WireMock, container-supported development
 linktitle: Mocking API services with WireMock
 summary: *desc
-tags: [app-dev, distributed-systems]
-languages: [js]
 params:
+  tags: [testing]
   time: 20 minutes
 ---
 
@@ -58,12 +57,12 @@ Launch a quick demo of WireMock by using the following steps:
 
     After a moment, the application will be up and running. 
 
-    ![Diagram showing the WireMock container running on Docker Desktop ](./images/wiremock-using-docker.webp)
+    ![Diagram showing the WireMock container running on Docker Desktop](./images/wiremock-using-docker.webp)
 
 
     You can check the logs by selecting the `wiremock-node-docker` container:
 
-    ![Diagram showing the logs of WireMock container running on Docker Desktop ](./images/wiremock-logs-docker-desktop.webp)
+    ![Diagram showing the logs of WireMock container running on Docker Desktop](./images/wiremock-logs-docker-desktop.webp)
 
  4. Test the Mock API.
 
@@ -94,7 +93,7 @@ Now that you have tried WireMock, let’s use it in development and testing. In 
   - External AccuWeather API: The real API from which live weather data is fetched.
   - WireMock: The mock server that simulates the API responses during testing. It runs as a Docker container.
 
-  ![Diagram showing the architecture of WireMock in development ](./images/wiremock-arch.webp)
+  ![Diagram showing the architecture of WireMock in development](./images/wiremock-arch.webp)
 
   - In development, the Node.js backend sends a request to WireMock instead of the actual AccuWeather API.
   - In production, it connects directly to the live AccuWeather API for real data.

@@ -13,13 +13,6 @@ keywords: Docker, Compose, Testcontainers, Kubernetes, CI/CD, SDLC, lab, labspac
 params:
   tags: [labs]
   time: 60 minutes
-  resource_links:
-    - title: Docker Compose docs
-      url: /compose/
-    - title: Testcontainers docs
-      url: https://testcontainers.com/
-    - title: Labspace repository
-      url: https://github.com/dockersamples/labspace-containerized-sdlc
 ---
 
 Build a real Node.js API, then apply containers at every stage of the software

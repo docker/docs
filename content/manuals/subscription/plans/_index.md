@@ -24,18 +24,18 @@ grid:
     description: Pay-as-you-go plans for cloud sandboxes and MCP Gateway.
     link: /subscription/plans/ai-cloud/
     icon: cloud
-  - title: AI Governance
-    description: Licenses for organization-wide AI policy enforcement.
-    link: /subscription/plans/ai-governance/
-    icon: shield-check
-  - title: Docker Hardened Images (DHI)
-    description: Hardened image repositories for organization accounts.
-    link: /subscription/plans/dhi/
-    icon: /icons/dhi.svg
   - title: Gordon plans
     description: Usage plans that increase your Gordon allowance.
     link: /subscription/plans/gordon/
     icon: /icons/gordon.svg
+  - title: Docker Hardened Images (DHI)
+    description: Hardened image repositories for organization accounts.
+    link: /subscription/plans/dhi/
+    icon: /icons/dhi.svg
+  - title: AI Governance
+    description: Licenses for organization-wide AI policy enforcement.
+    link: /subscription/plans/ai-governance/
+    icon: shield-check
 ---
 
 > [!TIP]

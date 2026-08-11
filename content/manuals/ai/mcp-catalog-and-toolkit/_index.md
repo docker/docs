@@ -32,13 +32,9 @@ grid:
     icon: cpu-chip
     link: /ai/mcp-catalog-and-toolkit/mcp-gateway/
   - title: Dynamic MCP
-    description: Discover and add MCP servers on-demand using natural language
+    description: Discover and add MCP servers on-demand using natural language. This feature is experimental.
     icon: magnifying-glass
     link: /ai/mcp-catalog-and-toolkit/dynamic-mcp/
-  - title: Docker Hub MCP server
-    description: Use the Docker Hub MCP server to search images and manage repositories
-    icon: server-stack
-    link: /ai/mcp-catalog-and-toolkit/hub-mcp/
   - title: Security FAQs
     description: Common questions about MCP security, credentials, and server verification
     icon: shield-check

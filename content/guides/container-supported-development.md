@@ -6,8 +6,8 @@ summary: |
 description: |
   Use containers in your local development loop to develop and test faster… even if your main app isn't running in containers.
 keywords: containers, local development, dependent services, testing, debugging, development environment
-tags: [app-dev]
 params:
+  tags: [cicd]
   image: images/learning-paths/container-supported-development.png
   time: 20 minutes
   resource_links: []

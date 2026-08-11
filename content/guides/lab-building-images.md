@@ -13,15 +13,6 @@ keywords: Docker, Dockerfile, images, multi-stage builds, layer caching, build s
 params:
   tags: [labs]
   time: 45 minutes
-  resource_links:
-    - title: Dockerfile reference
-      url: /reference/dockerfile/
-    - title: Multi-stage builds
-      url: /build/building/multi-stage/
-    - title: Build secrets
-      url: /build/building/secrets/
-    - title: Labspace repository
-      url: https://github.com/dockersamples/labspace-building-images
 ---
 
 Take a working but naïve Dockerfile and progressively improve it into a

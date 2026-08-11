@@ -44,12 +44,11 @@ subscription. Contact your Docker sales representative or
 
 ## Configure DVP analytics settings
 
-Organization owners and editors can configure DVP analytics settings through the
-Admin Console to control tracked companies and benchmark report allocations for
+Organization owners and editors can configure DVP analytics settings through Docker Home to control tracked companies and benchmark report allocations for
 your verified publisher namespaces.
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your organization.
-2. Select **Admin Console** > **Verified Publisher**.
+2. Select **DVP Settings**.
 3. Configure the settings:
    - **Tracked companies**: Set the number of companies to track for reporting
      purposes. This setting determines how many company domains appear in your

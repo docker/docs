@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-weight: 60
+weight: 100
 description: Resolve common issues when using Docker Sandboxes.
 keywords: docker sandboxes, sbx, troubleshooting, diagnostics, reset, network policy, git, ssh
 ---
@@ -9,9 +9,9 @@ keywords: docker sandboxes, sbx, troubleshooting, diagnostics, reset, network po
 
 Before digging into a specific issue, run
 [`sbx diagnose`](/reference/cli/sbx/diagnose/) to check for common problems
-with your installation, such as a missing CLI binary, an unresponsive daemon,
-a CLI/daemon version mismatch, missing storage directories, or broken
-authentication.
+with your installation, such as a missing CLI binary, daemon reachability
+problems, a CLI/daemon version mismatch, missing storage directories, or
+broken authentication.
 
 ```console
 $ sbx diagnose
@@ -22,6 +22,19 @@ with suggested fixes. Use `--output json` to get machine-readable output, or
 `--output github-issue` to generate a Markdown snippet suitable for pasting
 into a GitHub issue.
 
+## Restart the sandbox daemon
+
+If sandbox commands hang, fail to connect to the daemon, or keep returning
+daemon errors, restart the sandbox daemon before resetting sandbox state:
+
+```console
+$ sbx daemon restart
+```
+
+Then retry the command that failed. Restarting the daemon doesn't delete
+sandbox data. If the issue persists or state is corrupted, use
+[`sbx reset`](/reference/cli/sbx/reset/).
+
 ## Resetting sandboxes
 
 If you hit persistent issues or corrupted state, run
@@ -30,7 +43,8 @@ data. Create fresh sandboxes afterwards.
 
 ## Agent can't install packages or reach an API
 
-Sandboxes use a [deny-by-default network policy](governance/local.md).
+Sandboxes use [network access rules](governance/access-controls/network.md) to
+control outbound traffic.
 If the agent fails to install packages or call an external API, the target
 domain is likely not in the allow list. Check which requests are being blocked:
 
@@ -52,7 +66,7 @@ $ sbx policy allow network "**"
 
 If `sbx policy allow` doesn't unblock the request, your organization may
 manage sandbox policies centrally and take precedence over local rules. See
-[Organization governance](governance/org.md).
+[Organization policies](governance/access-controls/organization.md).
 
 ## Kit fails to install: source not in allowlist
 
@@ -103,7 +117,7 @@ $ git clone https://github.com/owner/repo.git
 
 If a request to `127.0.0.1` or a local network IP returns "connection refused"
 from inside a sandbox, the address is not reachable from within the sandbox VM.
-See [Accessing host services from a sandbox](usage.md#accessing-host-services-from-a-sandbox).
+See [Accessing host services from a sandbox](workflows.md#accessing-host-services-from-a-sandbox).
 
 ## Docker authentication failure
 
@@ -127,7 +141,7 @@ If credentials are configured correctly but API calls still fail, check
 the `transparent` proxy don't get credential injection. This can happen when a
 client inside the sandbox (such as a process in a Docker container) isn't
 configured to use the forward proxy. See
-[Monitoring network activity](governance/monitoring.md)
+[Monitoring network activity](governance/monitor-and-enforce/monitoring.md)
 for details.
 
 ## API calls fail with a certificate error
@@ -184,21 +198,26 @@ the egress path in the **PROXY** column:
   internal CA applies. The only difference between them is whether the client
   knows it's talking to a proxy.
 
-## Docker build export fails with an ownership error
+## Sandbox runs out of disk space
 
-Running `docker build` with the local exporter (`--output=type=local` or `-o
-<path>`) inside a sandbox fails because the exporter tries to `lchown` output
-files to preserve ownership from the build. Processes inside the sandbox run as
-an unprivileged user without `CAP_CHOWN`, so the operation is denied.
-
-Use the tar exporter and extract the archive instead:
+The sandbox root (`/`) filesystem defaults to 20 GB. To increase it, set `DOCKER_SANDBOXES_ROOT_SIZE`
+before creating the sandbox:
 
 ```console
-$ mkdir -p ./result
-$ docker build --output type=tar,dest=- . | tar xf - -C ./result
+$ DOCKER_SANDBOXES_ROOT_SIZE=40g sbx run claude
 ```
 
-Extracting the tar archive as the current user avoids the `chown` call.
+`DOCKER_SANDBOXES_ROOT_SIZE` controls the root filesystem size. `DOCKER_SANDBOXES_DOCKER_SIZE`
+controls the Docker data disk (`/var/lib/docker`) size. The two are independent — set both if needed.
+
+For a [clone-mode sandbox](usage.md#clone-mode), set
+`DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE` before creating the sandbox to
+configure the cloned workspace volume capacity. The variable accepts
+human-readable size strings such as `100g`:
+
+```console
+$ DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE=100g sbx run --clone claude
+```
 
 ## Filesystem operations are slow in large repositories
 
@@ -208,16 +227,9 @@ default for workspaces without `--clone`). Virtiofs caching speeds up these
 workloads. Clone-mode sandboxes always enable it, so this tuning applies only
 to direct mode.
 
-On macOS and Linux, virtiofs caching is enabled by default. On Windows it's
-still opt-in — enable it when creating the sandbox:
-
-```console
-$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=1 sbx run <template>
-```
-
-The setting is persisted in the sandbox spec and applies for the lifetime of
-that sandbox. If you experience Git index corruption or unexpected file content,
-disable caching with the kill switch and recreate the sandbox:
+Virtiofs caching is enabled by default on all operating systems. If you
+experience Git index corruption or unexpected file content, disable caching
+with the kill switch and recreate the sandbox:
 
 ```console
 $ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <template>

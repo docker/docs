@@ -23,16 +23,17 @@ Use air-gapped containers if:
 
 ## How air-gapped containers work
 
-Air-gapped containers operate by intercepting container network traffic and applying proxy rules:
+`containersProxy` governs two distinct traffic paths:
 
-1. Traffic interception: Docker Desktop intercepts all outgoing network connections from containers
-1. Port filtering: Only traffic on specified ports (`transparentPorts`) is subject to proxy rules
-1. Rule evaluation: PAC file rules or static proxy settings determine how to handle each connection
-1. Connection handling: Traffic is allowed directly, routed through a proxy, or blocked based on the rules
+- Image pulls (always enforced): Docker Desktop hardwires `http.docker.internal:3128` as the daemon's proxy in `daemon.json` at VM startup, so all `docker pull` and Compose pull operations always go through `containersProxy`, including any PAC file rules.
+- Running container outbound traffic (opt-in): Docker Desktop intercepts container TCP connections and applies proxy rules only for ports listed in `transparentPorts`. Without it, running container traffic bypasses `containersProxy` entirely.
 
-Some important considerations include:
+> [!IMPORTANT]
+>
+> If you configure a PAC file under `containersProxy`, the PAC file must return an appropriate proxy server to connect to the registries where your images are hosted.
 
-- The existing `proxy` setting continues to apply to Docker Desktop application traffic on the host
+Other considerations:
+
 - If PAC file download fails, containers block requests to target URLs
 - Hostname is available for ports 80 and 443, but only IP addresses for other ports
 
@@ -65,7 +66,7 @@ Add the container proxy to your [`admin-settings.json` file](/manuals/enterprise
 
 ### Configuration parameters
 
-The `containersProxy` setting controls network policies applied to container traffic:
+The `containersProxy` setting controls network policies applied to `docker image pull` and, when `transparentPorts` is configured, running container outbound traffic:
 
 | Parameter | Description | Value |
 |-----------|-------------|-------|

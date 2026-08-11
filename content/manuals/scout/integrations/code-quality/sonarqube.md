@@ -3,7 +3,18 @@ title: Integrate Docker Scout with SonarQube
 linkTitle: SonarQube
 description: Evaluate your images with the SonarQube quality gates defined in your projects
 keywords: scout, supply chain, integration, code quality
+params:
+  sidebar:
+    badge:
+      color: gray
+      text: Deprecated
 ---
+
+> [!IMPORTANT]
+>
+> The Docker Scout SonarQube integration is deprecated and will be retired on
+> September 1, 2026. Migration guidance will be provided. For details, see the
+> [Scout platform release notes](/manuals/scout/release-notes/platform.md).
 
 The SonarQube integration enables Docker Scout to surface SonarQube quality
 gate checks through Policy Evaluation, under a new [SonarQube Quality Gates
