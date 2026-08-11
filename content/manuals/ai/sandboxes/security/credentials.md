@@ -9,8 +9,9 @@ Most agents need an API key for their model provider. An HTTP/HTTPS proxy on
 your host intercepts outbound requests from the sandbox, looks up the matching
 credential on the host, and overwrites the auth header before forwarding. The
 real credential stays on the host when proxy management is active; the sandbox
-sees only a sentinel value. For the security model behind this, see
-[Credential isolation](isolation.md#credential-isolation).
+sees only a sentinel value. See
+[Trust boundaries](_index.md#trust-boundaries) for how credential isolation
+fits into the broader sandbox security model.
 
 ## How credential injection works
 
