@@ -423,9 +423,10 @@ For troubleshooting, see
 
 The sandbox proxy handles API credentials for model providers automatically,
 but agents often also need credentials for tools like `gh`, `docker`, or a
-secrets manager. The pattern is the same in each case: configure the
-credential on your host once, and the sandbox either forwards it via the
-proxy or via SSH agent forwarding.
+secrets manager. Configure the credential source on your host, and the proxy
+injects the resolved value into matching requests from the sandbox. Dynamic
+secret sources can retrieve a value from an authenticated host CLI without
+copying the value into the secret store.
 
 > [!NOTE]
 > Service secrets are global by default, so all future sandboxes can use them.
@@ -440,8 +441,13 @@ outbound requests, so `gh` works inside the sandbox without any additional
 configuration:
 
 ```console
-$ echo "$(gh auth token)" | sbx secret set github
+$ sbx secret set github --command 'gh auth token'
 ```
+
+The daemon runs `gh auth token` on the host and caches its output for 55 minutes
+by default. After the cache expires, it runs the command again, so token updates
+from `gh` don't need to be copied into `sbx` manually. Use `--refresh on-demand`
+to run the command for every credential use.
 
 The agent can then create pull requests, open issues, comment on PRs, and
 interact with the GitHub API the same way it would from your host:
@@ -484,49 +490,54 @@ per-registry username requirements, and all-sandbox versus per-sandbox scoping, 
 
 ### Sourcing credentials from 1Password
 
-#### Populating stored secrets with `op read`
-
-Use `op read` to populate stored secrets without pasting values manually. Store
-the value once and it's available to all future sandboxes:
-
-```console
-$ op read "op://Work/GitHub/token" | sbx secret set github
-$ op read "op://Work/Anthropic/credential" | sbx secret set anthropic
-```
-
-The real value stays on your host; the sandbox sees the proxy-managed
-placeholder as usual.
-
-#### Per-launch injection with `op run`
-
-To resolve credentials fresh from your vault on each launch without storing
-them via `sbx secret set`, use `op run`:
+Install the 1Password CLI, sign in on the host, and pass an `op://` reference to
+`sbx secret set`. The secret store records the reference, and the daemon uses
+`op read` on the host when the proxy needs the credential:
 
 ```console
-$ ANTHROPIC_API_KEY="op://Work/Anthropic/credential" op run -- sbx run claude
-$ OPENAI_API_KEY="op://Work/OpenAI/key" op run -- sbx run codex
-$ GEMINI_API_KEY="op://Work/Google/key" op run -- sbx run gemini
+$ sbx secret set github --ref 'op://Work/GitHub/token'
+$ sbx secret set anthropic --ref 'op://Work/Anthropic/credential'
 ```
 
-`op run` resolves each `op://` reference in the environment before executing
-`sbx`. The sandbox reads the
-[built-in service environment variables](security/credentials.md#built-in-services)
-at launch and routes them through its proxy — the credential is never stored in
-sbx's state and never appears inside the sandbox container.
-
-This only applies to those specific credential variables. The sandbox does not
-forward arbitrary environment variables from the host into the sandbox.
-
-For multiple credentials at once, use `--env-file` with a file of `op://`
-references:
+The real value stays on your host, and the sandbox sees the proxy-managed
+placeholder. Service secrets are cached for 55 minutes by default. To retrieve
+the value from 1Password for every credential use, set the refresh policy:
 
 ```console
-$ cat .sbx-secrets.env
-ANTHROPIC_API_KEY=op://Work/Anthropic/credential
-GITHUB_TOKEN=op://Work/GitHub/token
-
-$ op run --env-file=.sbx-secrets.env -- sbx run claude
+$ sbx secret set anthropic \
+    --ref 'op://Work/Anthropic/credential' \
+    --refresh on-demand
 ```
+
+When more than one 1Password account is configured, set `OP_ACCOUNT` while
+registering the reference. `sbx` records the account selector for later
+resolution:
+
+```console
+$ OP_ACCOUNT=work sbx secret set anthropic \
+    --ref 'op://Work/Anthropic/credential'
+```
+
+### Sourcing credentials from AWS Secrets Manager
+
+Install and authenticate the AWS CLI on the host, then register the secret's
+ARN. The daemon calls AWS Secrets Manager when the proxy needs the value:
+
+```console
+$ sbx secret set anthropic \
+    --ref 'arn:aws:secretsmanager:us-west-2:123456789012:secret:anthropic-api-key'
+```
+
+If you use a named AWS profile, set `AWS_PROFILE` while registering the
+reference. `sbx` records the profile for daemon-side resolution:
+
+```console
+$ AWS_PROFILE=development sbx secret set anthropic \
+    --ref 'arn:aws:secretsmanager:us-west-2:123456789012:secret:anthropic-api-key'
+```
+
+See [Use a dynamic secret source](security/credentials.md#use-a-dynamic-secret-source)
+for refresh policies, verification options, and custom secrets.
 
 ## CI and headless use
 

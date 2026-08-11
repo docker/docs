@@ -31,7 +31,7 @@ value for the same service, the stored secret takes precedence.
 
 | Form                                                                        | What it is                                                   | Use it when                                                                                                      |
 | --------------------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| [Stored secrets](#stored-secrets) (`sbx secret set`)                        | A value in your OS keychain, keyed by service                | The default for any built-in or kit-declared service                                                             |
+| [Stored secrets](#stored-secrets) (`sbx secret set`)                        | A value or dynamic source in your OS keychain, keyed by service | The default for any built-in or kit-declared service                                                          |
 | [Custom secrets](#custom-secrets) (`sbx secret set-custom`)                 | A value keyed to a domain and environment variable           | The service model doesn't fit — the agent validates the variable's format, or the secret rides in a request body |
 | OAuth                                                                       | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, Cursor, or Droid                                              |
 | [Credential bindings](#credential-bindings) (`credentials.yaml`)            | Per-service mechanism and domain approval                    | Required for third-party `schemaVersion: "2"` kits                                                               |
@@ -43,9 +43,10 @@ credentials based on the API endpoint being called. See individual
 
 ## Stored secrets
 
-`sbx secret set` stores credentials in your OS keychain, keyed on a service
-identifier. Built-in agents declare a fixed set of services. Custom kits can
-declare their own. The same `sbx secret set` flow works for both.
+`sbx secret set` stores credential values or dynamic secret sources in your OS
+keychain, keyed on a service identifier. Built-in agents declare a fixed set of
+services. Custom kits can declare their own. The same `sbx secret set` flow
+works for both.
 
 ### Where secrets are stored
 
@@ -96,6 +97,55 @@ $ sbx secret set openai --sandbox my-sandbox
 > running. A global secret only applies when a sandbox is created. If
 > you set or change a global secret while a sandbox is running, recreate the
 > sandbox for the new value to take effect.
+
+### Use a dynamic secret source
+
+Dynamic secret sources let `sbx` retrieve a credential from an authenticated
+host tool when the proxy needs it. The secret store contains the reference or
+command instead of the credential value. Resolution and caching happen on the
+host, and the sandbox still receives only the proxy-managed placeholder.
+
+Use `--ref` with a 1Password secret reference or an AWS Secrets Manager ARN:
+
+```console
+$ sbx secret set anthropic --ref 'op://Work/Anthropic/credential'
+$ sbx secret set openai \
+    --ref 'arn:aws:secretsmanager:us-west-2:123456789012:secret:openai-api-key'
+```
+
+The corresponding `op` or `aws` CLI must be installed and authenticated on the
+host. When you register a reference, `sbx` records supported provider settings,
+such as `OP_ACCOUNT`, `AWS_PROFILE`, and AWS config paths, so the daemon uses
+the same account or profile when it resolves the reference.
+
+Use `--command` for another host tool that prints a secret to standard output:
+
+```console
+$ sbx secret set github --command 'gh auth token'
+```
+
+`sbx` runs the command through the host shell and trims its output. The command
+text is stored and replayed by the daemon. Don't embed a secret directly in the
+command because the text can appear in shell history and process listings.
+
+By default, `sbx` verifies the source when you register it and reports an error
+without exposing the resolver's standard error. Use `--no-verify` to store a
+source that can't be resolved during registration. To troubleshoot an initial
+verification failure, use `--show-error`; provider error output can contain
+sensitive information. You can't combine `--show-error` with `--no-verify`.
+
+Resolved service secrets are cached for 55 minutes by default. Set another
+duration or resolve the source for every credential use with `--refresh`:
+
+```console
+$ sbx secret set anthropic \
+    --ref 'op://Work/Anthropic/credential' \
+    --refresh 30m
+$ sbx secret set github --command 'gh auth token' --refresh on-demand
+```
+
+`--ref` and `--command` are mutually exclusive. They can't be combined with
+`--token`, `--oauth`, or `--registry`.
 
 ### Import from environment variables
 
@@ -201,14 +251,15 @@ $ sbx secret rm github
 ### GitHub token
 
 The `github` service gives the agent access to the `gh` CLI inside the
-sandbox. Pass your existing GitHub CLI token:
+sandbox. Resolve your existing GitHub CLI token on the host:
 
 ```console
-$ echo "$(gh auth token)" | sbx secret set github
+$ sbx secret set github --command 'gh auth token'
 ```
 
-This is useful for agents that create pull requests, open issues, or interact
-with GitHub APIs on your behalf.
+The daemon refreshes the token from the host command after the default cache
+period. This is useful for agents that create pull requests, open issues, or
+interact with GitHub APIs on your behalf.
 
 ### SSH agent
 
@@ -261,6 +312,21 @@ A `--host` value can also use wildcards, with the same syntax as
 [network rules](../governance/concepts.md#network-rules): `*` matches a
 single label (`*.example.com` covers `api.example.com`) and `**` matches any
 number (`**.example.com` covers `api.example.com` and `v2.api.example.com`).
+
+Custom secrets also accept [dynamic secret sources](#use-a-dynamic-secret-source).
+Replace `--value` with either `--ref` or `--command`:
+
+```console
+$ sbx secret set-custom \
+    --host api.example.com \
+    --env API_KEY \
+    --ref 'op://Work/Example/credential'
+```
+
+Dynamic custom secrets resolve on demand by default. Pass `--refresh` with a
+duration to cache the resolved value. The verification and error-output flags
+work the same as they do for service secrets. `--ref` and `--command` can't be
+combined with `--value` or `--token`.
 
 > [!WARNING]
 > Passing the secret as `--value <secret>` records it in your shell history
@@ -453,9 +519,9 @@ $ sbx secret rm --sandbox my-sandbox --registry ghcr.io -f
   Code; Cursor and Droid have no ahead-of-time option, so their sign-in prompt
   appears when the agent starts. See the individual [agent pages](../agents/)
   for each agent's flow.
-- If you store credentials in 1Password, see
+- If you store credentials in 1Password or AWS Secrets Manager, see
   [Sourcing credentials from 1Password](../workflows.md#sourcing-credentials-from-1password)
-  for how to use `op read` and `op run` with `sbx`.
+  and [Sourcing credentials from AWS Secrets Manager](../workflows.md#sourcing-credentials-from-aws-secrets-manager).
 
 ## Custom templates and placeholder values
 
