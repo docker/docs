@@ -15,6 +15,17 @@ The shell tool allows agents to execute arbitrary shell commands synchronously. 
 
 Commands have a default 30-second timeout and require user confirmation unless `--yolo` is used. For servers, watchers, and other long-running commands, add the [`background_jobs`](../background-jobs/index.md) toolset alongside `shell`.
 
+### Shell interpreter detection
+
+The shell tool automatically detects and names the resolved shell interpreter (e.g., `bash`, `zsh`, `powershell`, `pwsh`, `cmd`) in its description to the model, along with the operating system (Linux, macOS, Windows). This helps models use the correct shell syntax for the host environment.
+
+For example:
+
+- On Linux with bash: "Executes the given shell command with bash on Linux."
+- On Windows with PowerShell: "Executes the given shell command with powershell on Windows. Use Windows PowerShell 5.1 syntax: chain commands with ";" (not "&&"), and avoid POSIX commands/flags like "ls -la"."
+
+This reduces wasted turns where models assume POSIX syntax on Windows or vice versa.
+
 ## Configuration
 
 ```yaml

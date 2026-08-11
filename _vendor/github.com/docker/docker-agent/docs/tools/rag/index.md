@@ -20,6 +20,8 @@ The `rag` toolset lets agents search through your documents to find relevant inf
 - **Hybrid search** — Combine strategies with result fusion for best results
 - **Reranking** — Re-score results with specialized models for improved relevance
 
+RAG is the strategy to reach for when a document collection is too large to inline directly, or gets queried repeatedly across turns/sessions — see [Choosing a Large-Input Strategy](../../guides/headless/index.md#choosing-a-large-input-strategy) for how it compares to `@`/`/attach` attachments and prompt files.
+
 ## Quick Start
 
 ```yaml

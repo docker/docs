@@ -213,6 +213,8 @@ $ docker agent run agent.yaml --prompt-file CONTRIBUTING.md
 
 Resolved prompt files show up as their own entries in the `/context` dialog — see [File Attachments](../../features/tui/index.md#file-attachments) in the Terminal UI guide.
 
+See [Choosing a Large-Input Strategy](../../guides/headless/index.md#choosing-a-large-input-strategy) for how prompt files compare to `@`/`/attach` attachments, the `rag` toolset, and sending content over the API/chat server.
+
 ## Response Cache
 
 The response cache short-circuits the model when the same user question is asked again. The first time a question is asked, the agent calls the model normally and stores the assistant's reply. Subsequent identical questions skip the model entirely and replay the stored reply verbatim.

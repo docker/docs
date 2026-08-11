@@ -4,4 +4,4 @@
 # github.com/docker/cli v29.7.1+incompatible
 # github.com/docker/compose/v5 v5.4.0
 # github.com/docker/model-runner v1.1.36
-# github.com/docker/docker-agent v1.122.0
+# github.com/docker/docker-agent v1.124.0

@@ -257,6 +257,27 @@ The API server stores every conversation as a distinct session in the SQLite dat
 - Confirm `--session-db` points to the path you expect — a stale database from another run can resurface old sessions.
 - Use `GET /api/sessions/:id` to inspect what is actually stored, and `DELETE /api/sessions/:id` to clear sessions you don't want anymore.
 
+### HTTP 413: request body too large
+
+Three kinds of process reject an oversized request body with `413 Request Entity Too Large`: `docker agent serve api`, `docker agent serve chat`, and an interactive run's control plane ([`docker agent run --listen`](../../features/api-server/index.md#listen)). They aren't configured the same way: `serve api` and `serve chat` each expose their own `--max-request-size` flag (1 MiB default). A `--listen` control plane has no such flag — it enforces a fixed, non-configurable 1 MiB limit — and no `--auth-token` either. Work through these layers in order:
+
+1. **Identify which server is involved.** `serve api`, `serve chat`, and an attached run's `--listen` control plane are three separate kinds of process. `serve api` and `serve chat` each have their own `--max-request-size` flag and 1 MiB default — check the flags the process that returned the 413 was actually started with. A `--listen` control plane has no `--max-request-size` flag: its 1 MiB cap is fixed.
+2. **Measure the serialized request body, not a source file's size.** JSON string escaping and, for any base64-encoded binary content, base64's ~33% expansion both inflate the wire size well past the original file size — a file just under the limit can still push the encoded request over it.
+3. **Rule out an intermediary.** If a reverse proxy, gateway, or load balancer sits in front of Docker Agent, it usually enforces its own, independent body-size limit — often with a differently formatted error — and can reject the request before Docker Agent ever sees it.
+4. **Confirm who actually returned the error.** A 413 (or a context-length error) can also come from the model provider itself once the request reaches it; that is a separate limit unrelated to `--max-request-size` — see [Context Window Exceeded](#context-window-exceeded) above.
+5. **Resolve it.** Once you've confirmed Docker Agent's own server rejected the request, send less content — split it across turns. On `serve api` or `serve chat` you can also restart the server with a deliberately chosen, larger `--max-request-size` (see [API Server](../../features/api-server/index.md#cli-flags) or [Chat Server](../../features/chat-server/index.md#cli-flags)). A `--listen` control plane has no `--max-request-size` flag to raise — sending less content is the only fix.
+
+A few things that catch people out:
+
+- `--max-request-size` is set once at process startup and applies to every request that server handles — it isn't per-request or per-client. Only `serve api` and `serve chat` have it; a `--listen` control plane's 1 MiB cap can't be changed.
+- `0` or a negative value falls back to the 1 MiB default; it does not mean "no limit".
+- Retrying the same oversized body against the same server won't succeed — the limit doesn't change between requests.
+- On all three, the body-size check runs ahead of request authentication, so an oversized request can come back as 413 even without valid credentials.
+- Piping stdin into a **local** run (`docker agent run agent.yaml -`) never crosses Docker Agent's own inbound HTTP boundary — Docker Agent may still send that content onward to a model/provider over HTTP, but no request reaches Docker Agent's own server to be measured against a `--max-request-size` cap. Piping stdin into `docker agent run --remote ... -`, however, does cross that boundary: the CLI serializes that stdin text into a native API run request and sends it to whichever Docker Agent server the `--remote` address points at — a `serve api` process or another run's `--listen` control plane, never `serve chat`, which speaks a different protocol — so it's measured against that server's own limit like any other request (a configurable `--max-request-size` for `serve api`, or the fixed 1 MiB cap for a `--listen` control plane). That initial request carries only message text — conversion currently drops any attachment resolved locally (`@path`, `/attach`, `--attach`) for the first message, so it alone can't be the cause of a 413. But a `--remote` run doesn't stay text-only for its whole lifetime: a locally resolved attachment added to a *later* message while the agent is still busy — via the default steer behavior or an explicit follow-up (Alt+Enter) — is forwarded as part of that native API request, counts toward the same limit, and can trigger 413 just like any other oversized request.
+
+> [!WARNING]
+> Raising `--max-request-size` increases how much memory an unauthenticated or malicious client can force the server to buffer per request. Pick a value with your deployment's exposure in mind, and pair any non-loopback listener with `--auth-token` (API server) or `--api-key`/`--api-key-env` (chat server). A `--listen` control plane has neither flag — keep it on loopback, a unix socket, or behind an authenticating reverse proxy if it must be reachable from elsewhere.
+
 ## Performance Issues
 
 ### High memory usage

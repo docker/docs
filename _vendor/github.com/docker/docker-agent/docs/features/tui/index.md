@@ -13,6 +13,8 @@ _Docker Agent's default interface is a rich, interactive terminal UI with file a
 
 ## Launching the TUI
 
+Both the full TUI and the lean TUI display a centered ASCII art Docker Agent banner on startup when the chat is empty. The banner is automatically hidden once the agent starts responding or when a custom welcome message is configured.
+
 ```bash
 # Launch with a config
 $ docker agent run agent.yaml
@@ -57,7 +59,7 @@ settings:
 
 Omit `lean` or set it to `false` to keep the full TUI as the default. You can still use `--lean` for a single run, or `--lean=false` to use the full TUI when `settings.lean` is enabled. See [User Settings](../../configuration/user-settings/index.md) for the full precedence rules between flags and user config.
 
-The lean TUI supports **steering**: messages submitted while the agent is running are queued and delivered to the active session. Pending steering messages appear with muted styling at the end of the live stream so you can see what will be sent next.
+The lean TUI supports **steering** and **follow-ups** while the agent is running. Press <kbd>Enter</kbd> to steer the active turn, or <kbd>Alt</kbd>+<kbd>Enter</kbd> to queue the message as a separate turn after the current one finishes. Pending messages appear with muted styling at the end of the live stream.
 
 The lean TUI supports a focused set of slash commands: `/new`, `/compact`, `/model`, `/effort`, `/clear`, `/help`, `/exit` (alias: `/quit`), plus any agent-defined commands. Type `/model` (or `/model <provider/model>`) to switch the active model inline — the command opens a fuzzy-searchable list of available models.
 
@@ -227,6 +229,24 @@ The TUI renders Mermaid diagram blocks inline rather than displaying raw syntax.
 
 Mermaid rendering works in both the full TUI and the lean TUI. Unsupported or syntactically invalid diagram blocks are displayed as ordinary fenced code blocks — no configuration is required and there is no way to disable it.
 
+### LaTeX Math Rendering
+
+The TUI renders LaTeX math expressions as terminal-friendly Unicode text. When an assistant message contains inline math (delimited by `$…$`) or display math (delimited by `$$…$$`), the TUI converts supported LaTeX commands to their Unicode equivalents and displays them directly in the conversation.
+
+Supported features include:
+
+- Greek letters (`\alpha`, `\beta`, `\gamma`, …)
+- Mathematical operators (`\times`, `\div`, `\pm`, `\oplus`, …)
+- Relations (`\le`, `\ge`, `\approx`, `\equiv`, …)
+- Set operators (`\cap`, `\cup`, `\subset`, `\in`, …)
+- Calculus symbols (`\int`, `\sum`, `\prod`, `\partial`, `\nabla`, …)
+- Arrows and logic (`\to`, `\implies`, `\forall`, `\exists`, …)
+- Superscripts and subscripts (e.g., `x^2`, `a_i`)
+- Fractions (`\frac{a}{b}`), square roots (`\sqrt{x}`), and matrices
+- Common functions (`\sin`, `\cos`, `\log`, `\lim`, …)
+
+Unsupported or syntactically invalid LaTeX expressions fall back to displaying the raw source. LaTeX rendering works in both the full TUI and the lean TUI, requires no configuration, and cannot be disabled.
+
 ### Markdown Images
 
 The TUI fetches and renders images referenced in agent responses using the Kitty graphics protocol. When an assistant message contains a standard Markdown image reference, the TUI downloads the image in the background and displays it inline at the point of the reference. While the image is loading a placeholder is shown; once loaded, the message re-renders with the image in place.
@@ -265,6 +285,8 @@ Explain what the code in @pkg/agent/agent.go does
 ```
 
 The agent receives the full file contents in a structured `<attachments>` block, while the UI shows just the reference.
+
+For large or frequently-reused documents, or for getting content to an agent over the API or chat server instead of the TUI, see [Choosing a Large-Input Strategy](../../guides/headless/index.md#choosing-a-large-input-strategy).
 
 Attached files are also recorded on the session so sub-agents spawned by task transfer can read them. To review what is attached, open `/context`: the dialog lists every attached file (and resolved prompt file) with a per-file token estimate and, when a compaction has occurred, displays the verbatim text of the most recent compaction summary. Use <kbd>↑</kbd>/<kbd>↓</kbd> to select an attached file and press <kbd>d</kbd> (or <kbd>x</kbd>/<kbd>Del</kbd>) to drop it, or run `/drop <path>` directly — press <kbd>Tab</kbd> after `/drop` and a space to complete the path from the currently attached files. Dropping stops sharing the file with sub-agents and skills; content already inlined in earlier messages stays in the conversation until compaction, and the file can always be re-attached with `@` or `/attach`.
 
@@ -355,7 +377,9 @@ Customize session titles to make them more meaningful and easier to find. By def
 | Ctrl+Z     | Suspend TUI to background (resume with `fg`)    |
 | Ctrl+X     | Clear queued messages                           |
 | Escape     | Cancel current operation                        |
-| Enter      | Send message (or newline with Shift+Enter)      |
+| Enter      | Send message (or steer while the agent is running) |
+| Alt+Enter  | Queue a follow-up turn while the agent is running |
+| Shift+Enter | Insert a newline |
 | Up/Down    | Navigate message history                        |
 
 Press <kbd>Ctrl</kbd>+<kbd>H</kbd> to view the complete list of all available keyboard shortcuts.

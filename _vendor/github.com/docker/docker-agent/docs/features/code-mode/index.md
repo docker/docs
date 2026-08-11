@@ -33,7 +33,7 @@ agents:
         ref: docker:github-official
 ```
 
-Every toolset configured on the agent (the GitHub MCP server here) is wrapped: the model no longer sees the individual GitHub tools, only `run_tools_with_javascript`, with each wrapped tool documented as a JSDoc-commented function signature inside its description.
+Every toolset configured on the agent (the GitHub MCP server here) is wrapped: the model no longer sees the individual GitHub tools, only `run_tools_with_javascript`, with each wrapped tool documented as TypeScript interfaces, type aliases, and function declarations inside its description.
 
 To force Code Mode for every agent in a run regardless of their individual config, use the `--code-mode-tools` CLI flag (or the equivalent `--code-mode-tools` [runtime configuration flag](../cli/index.md#runtime-configuration-flags), accepted by `run`, `run --exec`, `serve api`, `serve mcp`, and the other commands that load an agent):
 

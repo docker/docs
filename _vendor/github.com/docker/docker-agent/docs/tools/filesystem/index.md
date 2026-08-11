@@ -28,6 +28,15 @@ When a file is not found, error messages include the resolved absolute path to h
 > [!IMPORTANT]
 > Agents must use paths appropriate for the host OS. A Windows absolute path like `C:\file.txt` on a Unix system (or vice versa) is rejected with a clear error message.
 
+### Empty directory detection
+
+When `list_directory` encounters an empty directory or a directory where all entries are hidden by ignore patterns (e.g., only a `.git` folder when `ignore_vcs: true`), it explicitly reports the state:
+
+- **Empty directory**: "Directory is empty: /path/to/dir"
+- **All entries ignored**: "Directory has no visible entries (N hidden by ignore patterns): /path/to/dir"
+
+This helps agents distinguish between an empty directory and a tool failure, avoiding unnecessary retries with shell commands.
+
 ## Available Tools
 
 | Tool                   | Description                                                               |
@@ -36,7 +45,7 @@ When a file is not found, error messages include the resolved absolute path to h
 | `read_multiple_files`  | Read several files in one call (more efficient than multiple `read_file`) |
 | `write_file`           | Create or overwrite a file with new content                               |
 | `edit_file`            | Make line-based edits (find-and-replace) in an existing file              |
-| `list_directory`       | List files and directories at a given path                                |
+| `list_directory`       | List files and directories at a given path (explicitly reports empty directories) |
 | `directory_tree`       | Recursive tree view of a directory                                        |
 | `create_directory`     | Create a new directory (creates parent directories as needed)             |
 | `remove_directory`     | Remove an empty directory                                                 |
