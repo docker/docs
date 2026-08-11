@@ -114,9 +114,13 @@ $ sbx secret set openai \
 ```
 
 The corresponding `op` or `aws` CLI must be installed and authenticated on the
-host. When you register a reference, `sbx` records supported provider settings,
-such as `OP_ACCOUNT`, `AWS_PROFILE`, and AWS config paths, so the daemon uses
-the same account or profile when it resolves the reference.
+host.
+
+> [!NOTE]
+> If provider settings such as `OP_ACCOUNT`, `AWS_PROFILE`, or supported AWS
+> region and config variables are set when you register a reference, `sbx`
+> records them for later daemon-side resolution. Otherwise, the provider CLI
+> uses its default account or profile.
 
 Use `--command` for another host tool that prints a secret to standard output:
 

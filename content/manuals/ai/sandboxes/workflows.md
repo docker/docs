@@ -509,15 +509,6 @@ $ sbx secret set anthropic \
     --refresh on-demand
 ```
 
-When more than one 1Password account is configured, set `OP_ACCOUNT` while
-registering the reference. `sbx` records the account selector for later
-resolution:
-
-```console
-$ OP_ACCOUNT=work sbx secret set anthropic \
-    --ref 'op://Work/Anthropic/credential'
-```
-
 ### Sourcing credentials from AWS Secrets Manager
 
 Install and authenticate the AWS CLI on the host, then register the secret's
@@ -528,16 +519,9 @@ $ sbx secret set anthropic \
     --ref 'arn:aws:secretsmanager:us-west-2:123456789012:secret:anthropic-api-key'
 ```
 
-If you use a named AWS profile, set `AWS_PROFILE` while registering the
-reference. `sbx` records the profile for daemon-side resolution:
-
-```console
-$ AWS_PROFILE=development sbx secret set anthropic \
-    --ref 'arn:aws:secretsmanager:us-west-2:123456789012:secret:anthropic-api-key'
-```
-
 See [Use a dynamic secret source](security/credentials.md#use-a-dynamic-secret-source)
-for refresh policies, verification options, and custom secrets.
+for refresh policies, verification options, custom secrets, and provider
+account or profile selection.
 
 ## CI and headless use
 
