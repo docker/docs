@@ -122,7 +122,7 @@ agents:
         <validation>
         - Use the validate tool to verify your changes
         - Check specific targets: lint, vale, test, unused-media
-        - Fix markdownlint errors in content files
+        - Fix rumdl errors in content files
         - Fix htmltest errors (broken links, missing alt text)
         - Validate redirects with test-go-redirects
         </validation>

@@ -12,7 +12,7 @@ _Run AI models locally with Docker — no API keys, no costs, full data privacy.
 
 Docker Model Runner (DMR) lets you run open-source AI models directly on your machine. Models run in Docker, so there's no API key needed and no data leaves your computer.
 
-docker-agent automatically discovers models you have already pulled from DMR. When no model is explicitly configured, auto-selection prefers a locally-installed model (choosing the model specified via the `model:` key in the agent YAML if it is already pulled locally, or otherwise the first available non-embedding model) rather than always defaulting to `ai/qwen3:latest` and triggering a pull prompt.
+Docker Agent automatically discovers models you have already pulled from DMR. When no model is explicitly configured, auto-selection prefers a locally-installed model (choosing the model specified via the `model:` key in the agent YAML if it is already pulled locally, or otherwise the first available non-embedding model) rather than always defaulting to `ai/qwen3:latest` and triggering a pull prompt.
 
 > [!TIP]
 > **No API key needed**
@@ -92,7 +92,7 @@ models:
 
 If `context_size` is omitted, Model Runner uses its default. `max_tokens` is **not** used as the context window.
 
-docker-agent's auto-compaction scales its summary and keep-tail token budgets proportionally to `context_size`. This ensures compaction works correctly even for small context windows — for example, an 8k-token local model will not have its session history wiped during compaction.
+Docker Agent's auto-compaction scales its summary and keep-tail token budgets proportionally to `context_size`. This ensures compaction works correctly even for small context windows — for example, an 8k-token local model will not have its session history wiped during compaction.
 
 ## Thinking / reasoning budget
 
@@ -236,7 +236,7 @@ models:
 
 ## Custom Endpoint
 
-If `base_url` is omitted, docker-agent auto-discovers the DMR endpoint. To set manually:
+If `base_url` is omitted, Docker Agent auto-discovers the DMR endpoint. To set manually:
 
 ```yaml
 models:
@@ -248,6 +248,6 @@ models:
 
 ## Troubleshooting
 
-- **Plugin not found:** Ensure Docker Model Runner is enabled in Docker Desktop. docker-agent will fall back to the default URL.
+- **Plugin not found:** Ensure Docker Model Runner is enabled in Docker Desktop. Docker Agent will fall back to the default URL.
 - **Endpoint empty:** Verify the Model Runner is running with `docker model status --json`.
 - **Performance:** Use `runtime_flags` to tune GPU layers (`--ngl`) and thread count (`--threads`).

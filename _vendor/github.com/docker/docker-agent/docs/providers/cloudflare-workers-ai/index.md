@@ -1,19 +1,19 @@
 ---
 title: "Cloudflare Workers AI"
-description: "Use Cloudflare Workers AI models with docker-agent."
+description: "Use Cloudflare Workers AI models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, cloudflare workers ai
 weight: 70
 canonical: https://docs.docker.com/ai/docker-agent/providers/cloudflare-workers-ai/
 ---
 
-_Use Cloudflare Workers AI models with docker-agent._
+_Use Cloudflare Workers AI models with Docker Agent._
 
 ## Overview
 
 [Cloudflare Workers AI](https://developers.cloudflare.com/workers-ai/) runs
 open-weight models (Llama, Mistral, Qwen, Gemma, and more) on Cloudflare's
 global edge network through an OpenAI-compatible endpoint. No separate provider
-accounts are needed for the supported models. docker-agent includes built-in
+accounts are needed for the supported models. Docker Agent includes built-in
 support for Workers AI as an alias provider.
 
 ## Setup
@@ -78,7 +78,7 @@ for the current list, IDs, and pricing.
 
 ## How It Works
 
-Cloudflare Workers AI is implemented as a built-in alias in docker-agent:
+Cloudflare Workers AI is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai/v1`
@@ -87,5 +87,5 @@ Cloudflare Workers AI is implemented as a built-in alias in docker-agent:
 The base URL is templated: `${CLOUDFLARE_ACCOUNT_ID}` is substituted from the
 environment when the provider is built, so `CLOUDFLARE_ACCOUNT_ID` must be set in
 addition to `CLOUDFLARE_API_TOKEN`. Because Workers AI serves open-weight models
-with strict chat templates, docker-agent coalesces consecutive system messages
+with strict chat templates, Docker Agent coalesces consecutive system messages
 into a single leading one for this provider.

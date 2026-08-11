@@ -65,6 +65,39 @@ You can also disable default provenance attestations by setting the
 environment variable. See [Provenance attestation](./slsa-provenance.md) for
 more details about provenance modes and options.
 
+### Driver and image store support
+
+Attestations attach to an image index. The classic image store doesn't support
+image indices, so it can't hold an image with attestations.
+
+The default `docker` driver builds with the BuildKit library bundled into the
+Docker daemon, and writes the result to the daemon's image store. If the daemon
+still uses the classic image store, the build fails:
+
+```text
+ERROR: failed to build: Attestation is not supported for the docker driver.
+Switch to a different driver, or turn on the containerd image store, and try again.
+```
+
+To build attestations with the `docker` driver, turn on the containerd image
+store. See [containerd image store with Docker Desktop](/manuals/desktop/features/containerd.md)
+or [containerd image store with Docker Engine](/manuals/engine/storage/containerd.md).
+
+| Driver                    | Attestation support                 |
+| :------------------------ | :---------------------------------- |
+| `docker`                  | Requires the containerd image store |
+| `docker-container`        | Supported                           |
+| `kubernetes` and `remote` | Supported                           |
+
+The `docker-container`, `kubernetes`, and `remote` drivers run BuildKit outside
+the Docker daemon, so they build attestations regardless of which image store
+the daemon uses. Pushing the result to a registry with `--push` keeps the
+attestations. If you load the result into the daemon with `--load` instead, the
+same image store requirement applies.
+
+If you don't want to switch image stores or drivers, opt out of attestations
+with `--provenance=false --sbom=false`.
+
 ## Storage
 
 BuildKit produces attestations in the [in-toto format](https://github.com/in-toto/attestation),

@@ -1,18 +1,18 @@
 ---
 title: "Together AI"
-description: "Use Together AI models with docker-agent."
+description: "Use Together AI models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, together ai
 weight: 250
 canonical: https://docs.docker.com/ai/docker-agent/providers/together/
 ---
 
-_Use Together AI models with docker-agent._
+_Use Together AI models with Docker Agent._
 
 ## Overview
 
 [Together AI](https://www.together.ai/) is one of the largest hosts of open
 models, serving Llama, Qwen, DeepSeek, Kimi, GLM and others through an
-OpenAI-compatible API. docker-agent includes built-in support for Together AI as
+OpenAI-compatible API. Docker Agent includes built-in support for Together AI as
 an alias provider.
 
 ## Setup
@@ -74,14 +74,14 @@ current model IDs, context limits, and pricing.
 
 ## How It Works
 
-Together AI is implemented as a built-in alias in docker-agent:
+Together AI is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://api.together.xyz/v1`
 - **Token Variable:** `TOGETHER_API_KEY`
 
 Because Together AI fronts open-weight models whose chat templates may reject
-more than one leading system message, docker-agent coalesces its per-source
+more than one leading system message, Docker Agent coalesces its per-source
 system messages into a single one for this provider.
 
 ## Example: Code Assistant

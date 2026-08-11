@@ -118,7 +118,7 @@ Explore Docker Core add-ons and products that need licenses:
   add-ons
 - [Manage seats](/manuals/admin/organization/manage/manage-seats.md) to add more
   seats to your Docker Core subscription
-- [AI Governance](/manuals/ai/sandboxes/governance/org.md) to set up
-  organization policies for your organization members
+- [AI Governance plan](/manuals/subscription/plans/ai-governance.md) to learn
+  about AI Governance license usage and billing
 - [Docker Offload](/manuals/offload/about.md) to let your developers offload
   building and running containers to the cloud

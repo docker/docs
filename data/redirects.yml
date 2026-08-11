@@ -8,6 +8,8 @@
 # provide a short, permanent link to refer to a topic in the documentation.
 # For example, the docker CLI can output https://docs.docker.com/go/some-topic
 # in its help output, which can be redirected to elsewhere in the documentation.
+"/learn/":
+  - /learn
 "/security/access-tokens/":
   - /go/access-tokens/
 "/reference/api/engine/#deprecated-api-versions":
@@ -325,6 +327,11 @@
 
 # Links in Desktop
 
+# Docker Sandboxes
+"/ai/sandboxes/governance/access-controls/mcp/":
+  - /go/mcp-policy/
+"/ai/sandboxes/mcp-gateway/":
+  - /go/sbx-mcp-gateway/
 
 # Desktop MCP Toolkit
 "/ai/mcp-catalog-and-toolkit/toolkit/":

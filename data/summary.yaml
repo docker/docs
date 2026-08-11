@@ -1,3 +1,6 @@
+AI Governance Audit Logs:
+  subscription: [AI Governance]
+  requires: Docker Sandboxes [0.35.0](/manuals/ai/sandboxes/release-notes.md) or later
 Activity logs:
   subscription: [Team, Business]
   for: Administrators
@@ -67,6 +70,8 @@ Buildx metadata warnings:
   requires: Docker Buildx [0.16.0](https://github.com/docker/buildx/releases/tag/v0.16.0) and later
 Buildx no default:
   requires: Docker Buildx [0.10.4](https://github.com/docker/buildx/releases/tag/v0.10.4) and later
+Buildx no default OCI artifact:
+  requires: Docker Buildx [0.36.1](https://github.com/docker/buildx/releases/tag/v0.36.1) and later
 Cache backend API:
   availability: Experimental
 Company:
@@ -276,7 +281,8 @@ Synchronized file sharing:
 USB/IP support:
   for: Docker Desktop for Mac, Linux, and Windows with the Hyper-V backend
 VMM:
-  for: Docker Desktop on Mac with Apple Silicon
+  availability: Beta
+  requires: "Docker Desktop 4.86 or later"
 Wasm workloads:
   availability: Beta
 Wasmtime:

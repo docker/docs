@@ -1,0 +1,199 @@
+name: sbx mcp add
+synopsis: Register an MCP server
+description: |-
+    Register an MCP server by name. The server is validated and its
+    specification is stored for use with sbx create/run --static-mcp.
+
+    This command only registers the server. To attach an already-registered
+    server to a running sandbox, use 'sbx mcp load'.
+
+    The --url flag accepts four input formats; the type is auto-detected:
+
+      - Remote MCP endpoint URL (https://host/mcp — talks MCP at the URL;
+        OAuth metadata is discovered via RFC 9728/8414).
+      - MCP community-registry URL (https://registry.modelcontextprotocol.io/v0/servers/<name>...)
+        — fetches the registry envelope and resolves the OCI image.
+      - Server-manifest URL (any URL returning a server.json or server.yaml
+        body shaped like the MCP community-registry schema — GitHub raw URLs,
+        internal HTTP servers, ad-hoc CDN links all work).
+      - Docker Hardened Images (DHI) image ref (dhi.io/<name>:<tag> or
+        dhi.io/<name>@sha256:... — the server.json manifest is extracted
+        from the image's in-toto attestation via the OCI Referrers API).
+
+    Other image refs (inputs without "://" that are not dhi.io, e.g.
+    docker.io/foo:tag) are no longer accepted. Use a server manifest instead.
+
+    SSRF guard and --skip-ssrf-check:
+      A --url whose host resolves to a private/RFC1918, loopback, link-local,
+      or cloud-metadata address is rejected by the SSRF guard (this protects
+      against manifest URLs that reach internal services, cloud metadata, or
+      DNS-rebinding targets). Some legitimate servers live on private networks
+      (split-horizon DNS, internal load balancers, VPN-only endpoints,
+      PrivateLink), so their public hostname resolves to a private address.
+      Pass --skip-ssrf-check to opt out of the guard for a single add when you
+      trust the host. This also disables DNS-rebinding/redirect re-checks, so
+      use it only for URLs you control.
+
+    OAuth for remote endpoints (--oauth-authorization-server / --client-id):
+      Two related options configure OAuth for a remote --url server (both are
+      only valid with --url):
+
+      --oauth-authorization-server hand-supplies the authorization-server
+      metadata for a server that publishes no well-known RFC 9728/8414 metadata
+      (e.g. Gmail). It is a local file path or an http(s) URL to a JSON document
+      conforming to the RFC 8414 oauth-authorization-server shape
+      (authorization_endpoint and token_endpoint are required). In this CLI it
+      must be accompanied by --client-id.
+
+      --client-id supplies a PRE-REGISTERED OAuth client. It may be given WITHOUT
+      --oauth-authorization-server: the server's authorization metadata is then
+      discovered normally and the supplied client is attached to it. This is the
+      right mode for a server whose discoverable metadata exposes no
+      registration_endpoint (so Dynamic Client Registration is impossible) but
+      which accepts a client id the operator registered ahead of time.
+
+      Client secrets (confidential clients):
+        There is no --client-secret flag. The secret for a confidential client
+        lives in the encrypted secret store in the global scope under the
+        service name "mcp:<server>.client_secret", and is read from there
+        whenever the server is used:
+
+          sbx secret set mcp:<server>.client_secret
+
+        Run it with no -t so the value is read from stdin instead of landing in
+        your shell history. The secret is never written to the MCP registration
+        on disk. Remove it later with 'sbx secret rm mcp:<server>.client_secret'.
+
+        The stored secret is bound to the OAuth identity (client id, issuer and
+        token endpoint) that first used it. Re-registering the same server name
+        against a different client or authorization server therefore does NOT
+        reuse it — store the secret again for the new client. To let a new
+        identity claim the existing secret, drop the recorded binding with
+        'sbx secret rm mcp:<server>.client_secret.identity'.
+
+      Two rules apply on the discovered path (they do not affect a server that
+      advertises a registration_endpoint, the hand-supplied
+      --oauth-authorization-server path, or --command servers):
+
+        - If the discovered authorization metadata has NO registration_endpoint,
+          Dynamic Client Registration is impossible, so --client-id is REQUIRED;
+          the add fails without it. This is the Slack shape (discoverable metadata,
+          no DCR, a pre-registered client).
+        - A stored client secret is REQUIRED when the server's advertised
+          token_endpoint_auth_methods_supported (RFC 8414) does NOT include "none"
+          — i.e. it accepts only confidential clients (client_secret_basic /
+          client_secret_post). Registration still succeeds without one, but the
+          add-time authorization is skipped; store the secret and run
+          'sbx mcp auth <server>' to finish. When the list includes "none" a
+          public/PKCE client is allowed and --client-id alone is enough. If the
+          server advertises no token_endpoint_auth_methods_supported at all (the
+          field is optional in RFC 8414), the requirement cannot be determined and
+          the add proceeds as usual.
+
+    Default OAuth scopes (--scope):
+      --scope records the DEFAULT set of scopes to request at consent time for a
+      remote --url OAuth server (repeatable). These are requested by 'sbx mcp auth'
+      when it is run with no --scope of its own. Scopes are validated only when the
+      authorization server advertises a supported set (RFC 8414 scopes_supported):
+      then every scope must be a member or the add fails naming the offending
+      scope(s). If the server advertises no supported set (the field is optional in
+      RFC 8414), the requested scopes are accepted as given. --scope applies both to
+      a hand-supplied override and to a plain --url server whose OAuth metadata is
+      discovered.
+
+    Alternative input — local stdio command (--command + --args):
+      The command runs as a subprocess on the HOST, outside the sandbox.
+
+      WARNING: Local servers are for ad-hoc development only. They have
+      no identity, no verifiable supply chain, and no sandboxing. The
+      process runs with your host user's full permissions — it can read
+      your filesystem, access your network, and call any API your user
+      can. Do not use --command with untrusted executables.
+usage: sbx mcp add <name> (--url <url> | --command <cmd>) [flags]
+options:
+    - name: args
+      default_value: '[]'
+      usage: Command-line arguments for the command
+    - name: client-id
+      usage: |
+        OAuth client id for a pre-registered client (with --url; may be used with or without --oauth-authorization-server). A confidential client's secret comes from 'sbx secret set mcp:<server>.client_secret'
+    - name: command
+      usage: Executable to run for a local stdio server
+    - name: dir
+      usage: Working directory (cwd) for a --command host server
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for add
+    - name: local
+      default_value: "false"
+      usage: Run registry OCI server locally via docker run
+    - name: oauth-authorization-server
+      usage: |
+        Path or http(s) URL to an RFC 8414 oauth-authorization-server metadata JSON document
+    - name: scope
+      default_value: '[]'
+      usage: |
+        Default OAuth scope to request at consent time (repeatable; must be advertised by the server's authorization metadata). Applies to --url remote OAuth servers.
+    - name: skip-ssrf-check
+      default_value: "false"
+      usage: |
+        Disable the SSRF guard for this add: allow a --url whose host resolves to a private/metadata address (operator asserts the host is trusted)
+    - name: skip_auth
+      default_value: "false"
+      usage: |
+        Register an OAuth server without starting the hosted OAuth flow
+    - name: url
+      usage: |
+        MCP server manifest URL, remote endpoint URL, or dhi.io image ref
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      # Remote MCP endpoint (OAuth auto-detected)
+      sbx mcp add notion --url https://mcp.notion.com/mcp
+      sbx mcp add linear --url https://mcp.linear.app/mcp
+
+      # MCP community-registry URL
+      sbx mcp add fetch --url https://registry.modelcontextprotocol.io/v0/servers/fetch-mcp/versions/latest
+
+      # Plain server-manifest URL (server.json / server.yaml)
+      sbx mcp add opine --url https://example.com/mcp/opine/server.yaml
+
+      # Docker Hardened Image (manifest is extracted from the image attestation)
+      sbx mcp add fetch --url dhi.io/fetch-mcp:latest
+
+      # Registry URL, local mode (runs on host via docker run; stdio packages only)
+      sbx mcp add fetch --local --url https://registry.modelcontextprotocol.io/v0/servers/fetch-mcp/versions/latest
+
+      # Private-network endpoint (host resolves to a private address) — opt out of the SSRF guard
+      sbx mcp add internal --url https://maas.prd.astra.example.com/mcp --skip-ssrf-check
+
+      # Remote endpoint with a hand-supplied OAuth override (server publishes no
+      # well-known OAuth metadata): --oauth-authorization-server is a path or
+      # http(s) URL to an RFC 8414 metadata document, --client-id the OAuth client id
+      sbx mcp add acme --url https://mcp.acme.com/mcp --oauth-authorization-server ./acme-as.json --client-id my-client
+
+      # Pre-registered client on a DISCOVERABLE server that has no registration
+      # endpoint — no --oauth-authorization-server needed (metadata is discovered)
+      sbx mcp add slack --url https://slack.example.com/mcp --client-id my-preregistered-client
+
+      # Confidential client — store the secret first (prompted, never in argv or
+      # shell history), then register; the secret is read from the secret store
+      sbx secret set mcp:slack.client_secret
+      sbx mcp add slack --url https://slack.example.com/mcp --client-id my-preregistered-client
+
+      # Record default OAuth scopes to request at consent time (must be advertised
+      # by the server's authorization metadata; repeat --scope for each one)
+      sbx mcp add acme --url https://mcp.acme.com/mcp --scope read --scope write
+
+      # Local stdio command (runs on host — development only)
+      sbx mcp add github --command npx --args @modelcontextprotocol/server-github
+      sbx mcp add postgres --command docker --args "run,-i,--rm,mcp/postgres"
+
+      # Local stdio command with a working directory (cwd) for the host process
+      sbx mcp add local-fs --command node --args server.js --dir /srv/data
+see_also:
+    - sbx mcp - Manage MCP servers

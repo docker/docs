@@ -1,17 +1,17 @@
 ---
 title: "OVHcloud"
-description: "Use OVHcloud AI Endpoints models with docker-agent."
+description: "Use OVHcloud AI Endpoints models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, ovhcloud
 weight: 240
 canonical: https://docs.docker.com/ai/docker-agent/providers/ovhcloud/
 ---
 
-_Use OVHcloud AI Endpoints models with docker-agent._
+_Use OVHcloud AI Endpoints models with Docker Agent._
 
 ## Overview
 
 [OVHcloud AI Endpoints](https://endpoints.ai.cloud.ovh.net/) serves open-weight
-models through an OpenAI-compatible API, hosted in the EU. docker-agent includes
+models through an OpenAI-compatible API, hosted in the EU. Docker Agent includes
 built-in support for OVHcloud as an alias provider.
 
 ## Setup
@@ -74,20 +74,20 @@ IDs, context limits, and free-tier availability.
 
 ## How It Works
 
-OVHcloud is implemented as a built-in alias in docker-agent:
+OVHcloud is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://oai.endpoints.kepler.ai.cloud.ovh.net/v1`
 - **Token Variable:** `OVH_AI_ENDPOINTS_ACCESS_TOKEN`
 
-docker-agent automatically coalesces consecutive system messages into one for
+Docker Agent automatically coalesces consecutive system messages into one for
 OVHcloud, because some OVHcloud models return an empty stream when a request
 carries more than one system message.
 
 ## Free tier
 
 OVHcloud offers rate-limited free access to several models. Under heavy
-rate-limiting the endpoint may return an empty response; docker-agent surfaces
+rate-limiting the endpoint may return an empty response; Docker Agent surfaces
 this as a warning rather than failing. For sustained use, an access token with a
 paid plan avoids the free-tier request-rate cap.
 

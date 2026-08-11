@@ -17,6 +17,7 @@ const Module = require("node:module");
 const SRC = path.join(__dirname, "cloudfront-lambda-redirects.js");
 
 const REDIRECTS = {
+  "/learn": "/learn/",
   "/old/page/": "/new/page/",
   "/target-with-query/": "/dest/?ref=docs",
   "/target-with-fragment/": "/dest/?ref=docs#install",
@@ -83,6 +84,16 @@ test("exact redirect without a query string is unchanged", async () => {
   const { result } = await invoke({ uri: "/old/page/" });
   assert.equal(result.status, "301");
   assert.equal(locationOf(result), "/new/page/");
+});
+
+test("bare path redirects without redirecting the canonical target to itself", async () => {
+  const { result: bareResult } = await invoke({ uri: "/learn" });
+  assert.equal(bareResult.status, "301");
+  assert.equal(locationOf(bareResult), "/learn/");
+
+  const { result: canonicalResult, request } = await invoke({ uri: "/learn/" });
+  assert.equal(canonicalResult, request);
+  assert.equal(request.uri, "/learn/index.html");
 });
 
 test("exact redirect appends with & when target already has a query string", async () => {

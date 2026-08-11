@@ -2,13 +2,13 @@
 title: View and export audit events
 linkTitle: View and export
 weight: 30
-description: Search, filter, export, and stream Docker AI Governance audit events from the hosted audit log UI.
-keywords: docker sandboxes, audit events, audit logs, AI Governance, CSV export, SIEM, Splunk, NDJSON
+description: Search, filter, and export Docker AI Governance audit events from the hosted audit log UI.
+keywords: docker sandboxes, audit events, audit logs, AI Governance, CSV export
 ---
 
 Cloud delivery stores AI Governance audit records in Docker Cloud and makes
 them available in the hosted audit log UI. Use the hosted view to investigate
-policy decisions, export events to CSV, or stream events to your SIEM.
+policy decisions or export events to CSV.
 
 ## View audit events
 
@@ -48,20 +48,3 @@ Use CSV export when you need an offline copy of filtered audit events:
 1. Download the generated CSV file from the link Docker provides.
 
 CSV exports include up to 1 000 000 rows. Download links expire after 24 hours.
-
-## SIEM forwarding
-
-Docker can forward audit events to your security information and event
-management (SIEM) system, letting you centralize Docker governance data
-alongside other security signals in tools such as Datadog or Splunk.
-
-To set up forwarding, you provide an HTTPS endpoint that will receive the audit
-events, choose an output format, and supply the credentials Docker will use to
-authenticate against your SIEM. Docker verifies the endpoint is reachable before
-saving the configuration.
-
-Once configured, forwarding can be enabled or disabled without losing your saved
-settings.
-
-To collect host-local files with your own log shipper instead, see
-[Local audit logs](local.md).

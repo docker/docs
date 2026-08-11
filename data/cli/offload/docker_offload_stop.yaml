@@ -4,11 +4,10 @@ usage: docker offload stop [OPTIONS]
 pname: docker offload
 plink: docker_offload.yaml
 options:
-  - option: force
-    shorthand: f
+  - option: terminate
     value_type: bool
     default_value: "false"
-    description: Don't prompt for confirmation
+    description: Terminate the remote lease
     deprecated: false
     hidden: false
     experimental: false

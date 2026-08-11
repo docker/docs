@@ -1,16 +1,16 @@
 ---
 title: "OpenRouter"
-description: "Use OpenRouter models with docker-agent."
+description: "Use OpenRouter models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, openrouter
 weight: 230
 canonical: https://docs.docker.com/ai/docker-agent/providers/openrouter/
 ---
 
-_Use OpenRouter models with docker-agent._
+_Use OpenRouter models with Docker Agent._
 
 ## Overview
 
-OpenRouter provides access to models from many providers through an OpenAI-compatible API. docker-agent includes built-in support for OpenRouter as an alias provider.
+OpenRouter provides access to models from many providers through an OpenAI-compatible API. Docker Agent includes built-in support for OpenRouter as an alias provider.
 
 ## Setup
 
@@ -35,7 +35,7 @@ agents:
     instruction: You are a helpful assistant.
 ```
 
-OpenRouter model IDs usually include the upstream provider name, such as `anthropic/claude-sonnet-4-5` or `meta-llama/llama-3.3-70b-instruct`. docker-agent splits only the first slash, so the full upstream model ID is preserved.
+OpenRouter model IDs usually include the upstream provider name, such as `anthropic/claude-sonnet-4-5` or `meta-llama/llama-3.3-70b-instruct`. Docker Agent splits only the first slash, so the full upstream model ID is preserved.
 
 ### Named Model
 
@@ -58,13 +58,13 @@ agents:
 
 ## Pricing and Model Metadata
 
-docker-agent fetches OpenRouter model metadata from [models.dev](https://models.dev/), including pricing per 1M input/output tokens, cache pricing when available, context limits, output limits, and modalities. This powers cost tracking and the model picker in the same way as other first-class providers.
+Docker Agent fetches OpenRouter model metadata from [models.dev](https://models.dev/), including pricing per 1M input/output tokens, cache pricing when available, context limits, output limits, and modalities. This powers cost tracking and the model picker in the same way as other first-class providers.
 
-If models.dev is unavailable, docker-agent falls back to its embedded catalog snapshot.
+If models.dev is unavailable, Docker Agent falls back to its embedded catalog snapshot.
 
 ## How It Works
 
-OpenRouter is implemented as a built-in alias in docker-agent:
+OpenRouter is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai`)
 - **Base URL:** `https://openrouter.ai/api/v1`

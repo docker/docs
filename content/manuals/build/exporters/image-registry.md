@@ -26,7 +26,7 @@ The following table describes the available parameters that you can pass to
 
 | Parameter              | Type                                   | Default | Description                                                                                                                                                                                                                         |
 | ---------------------- | -------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`                 | String                                 |         | Specify image name(s)                                                                                                                                                                                                               |
+| `name`                 | String                                 |         | Image name. To specify multiple names, use a comma-separated list.                                                                                                                                    |
 | `push`                 | `true`,`false`                         | `false` | Push after creating the image.                                                                                                                                                                                                      |
 | `push-by-digest`       | `true`,`false`                         | `false` | Push image without name.                                                                                                                                                                                                            |
 | `registry.insecure`    | `true`,`false`                         | `false` | Allow pushing to insecure registry.                                                                                                                                                                                                 |
@@ -47,6 +47,17 @@ The following table describes the available parameters that you can pass to
 [3]: #annotations
 [4]: https://github.com/moby/buildkit/blob/master/docs/build-repro.md
 [5]: /manuals/build/metadata/attestations/_index.md#attestations-as-oci-artifacts
+
+The `name` parameter is a CSV value inside the `--output` value. To specify
+multiple image names, quote the complete `name` field:
+
+```console
+$ docker buildx build \
+    --output 'type=image,"name=registry.example.com/myapp:1.0,registry.example.com/myapp:latest",push=true' .
+```
+
+To assign multiple names with CLI flags instead, repeat the
+[`--tag` flag](/reference/cli/docker/buildx/build/#tag).
 
 ## Annotations
 

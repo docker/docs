@@ -25,6 +25,10 @@ options:
       default_value: "0"
       usage: |
         Number of CPUs to allocate to the sandbox (0 = auto: all host CPUs)
+    - name: deny-network
+      default_value: '[]'
+      usage: |
+        Add a per-sandbox network deny rule at creation time. Can be specified multiple times. The rule applies only to the new sandbox and can be listed or removed later with `sbx policy ls <NAME>` / `sbx policy rm network --sandbox <NAME> --resource <HOST>`. Safe under centralized governance because a local deny can only narrow, never widen, egress.
     - name: help
       shorthand: h
       default_value: "false"
@@ -40,6 +44,11 @@ options:
         Memory limit in binary units (e.g., 1024m, 8g). Default: 50% of host memory, max 32 GiB
     - name: name
       usage: 'Name for the sandbox (default: <agent>-<workdir>)'
+    - name: publish
+      shorthand: p
+      default_value: '[]'
+      usage: |
+        Publish a sandbox port to the host (can be repeated): [[HOST_IP:]HOST_PORT:]SANDBOX_PORT[/PROTOCOL]. Applied when the sandbox is created; ignored when re-attaching (use "sbx ports")
     - name: template
       shorthand: t
       usage: |

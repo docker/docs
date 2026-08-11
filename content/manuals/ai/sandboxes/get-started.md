@@ -66,6 +66,9 @@ network, and clean up.
 {{< /tab >}}
 {{< /tabs >}}
 
+If you run `sbx` in a virtual desktop infrastructure (VDI) environment, the
+environment must support nested virtualization.
+
 Docker Desktop is not required to use `sbx`.
 
 ## Install and sign in
@@ -104,24 +107,7 @@ The first command adds Docker's `apt` repository to your system.
 If you need to install `sbx` manually, download a binary directly from the
 [sbx-releases](https://github.com/docker/sbx-releases/releases) repository.
 
-`sbx login` opens a browser for Docker OAuth. On first login (and after `sbx
-policy reset`), the CLI prompts you to choose a default network policy for your
-sandboxes:
-
-```plaintext
-Choose a default network policy:
-
-     1. Open         — All network traffic allowed, no restrictions.
-     2. Balanced     — Default deny, with common dev sites allowed.
-     3. Locked Down  — All network traffic blocked unless you allow it.
-
-Use ↑/↓ to navigate, Enter to select, or press 1–3.
-```
-
-**Balanced** is a good starting point — it permits traffic to common
-development services while blocking everything else. You can adjust individual
-rules later. See [Policies](governance/local.md) for a full description of each
-option.
+`sbx login` opens a browser for Docker OAuth.
 
 > [!NOTE]
 > See the [FAQ](faq.md) for details on why sign-in is required and what
@@ -142,7 +128,7 @@ To give the agent access to GitHub for creating pull requests or interacting
 with repositories:
 
 ```console
-$ sbx secret set -g github -t "$(gh auth token)"
+$ sbx secret set github -t "$(gh auth token)"
 ```
 
 ## Run your first sandbox
@@ -154,6 +140,28 @@ Pick a project directory and launch an agent with
 $ cd ~/my-project
 $ sbx run --name my-sandbox claude
 ```
+
+The first time you run a sandbox, the CLI prompts you to choose a default
+network preset:
+
+```plaintext
+Initialize the global network policy for your sandboxes:
+
+  Applies to all sandboxes, current and future — change it later with
+  "sbx policy allow/deny/rm". Kits, including built-in agent kits, may
+  also add per-sandbox rules.
+
+     1. Open         — All network traffic allowed, no restrictions.
+  ❯  2. Balanced     — Default deny, with common dev sites allowed.
+     3. Locked Down  — All network traffic blocked unless you allow it.
+
+  Use ↑/↓ or 1–3 to navigate, Enter to confirm, Esc to cancel.
+```
+
+**Balanced** is a good starting point — it permits traffic to common
+development services while blocking everything else. You can adjust individual
+rules later. See [Local policy](governance/access-controls/local.md) for a full
+description of each option.
 
 Replace `claude` with the agent you want to use — see [Agents](agents/) for the
 full list.
@@ -201,8 +209,8 @@ when running several agents on one repository — use
 ## Control what the agent can reach
 
 Isolation isn't only about the filesystem. You also control what the sandbox
-can reach on the network. You chose a default policy when you signed in, and
-you can inspect or adjust it at any time.
+can reach on the network. You chose a default policy before the sandbox
+started, and you can inspect or adjust it at any time.
 
 Check which rules are in effect:
 
@@ -216,11 +224,11 @@ To allow a specific host:
 $ sbx policy allow network registry.npmjs.org
 ```
 
-With **Balanced**, common development services are allowed by default. With
-**Locked Down**, everything is blocked until you allow it — including your
-model provider's API. If the agent can't reach a service it needs, the network
-policy is the first place to look. See [Policies](governance/local.md) for the
-full rule set and how to customize it.
+With **Locked Down**, even your model provider API is blocked unless you
+explicitly allow it. With **Balanced**, common development services are
+permitted by default. See
+[local policy](governance/access-controls/local.md) for the full rule set
+and how to customize it.
 
 ## Clean up
 
@@ -264,5 +272,5 @@ Then explore:
   network rules into a reusable definition you launch with a single flag.
 - [Agents](agents/) — the full list of supported agents and how to configure
   each one.
-- [Governance](governance/) — centrally manage network and filesystem policies
-  across a team.
+- [Governance](governance/) — centrally manage network, filesystem, and MCP
+  policies across a team.

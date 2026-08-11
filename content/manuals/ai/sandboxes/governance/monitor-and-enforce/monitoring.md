@@ -1,8 +1,10 @@
 ---
 title: Monitoring policies
-weight: 25
+weight: 10
 description: Inspect active policy rules and monitor sandbox network traffic with sbx policy ls and sbx policy log.
 keywords: docker sandboxes, policy monitoring, sbx policy ls, sbx policy log, network traffic, policy debugging
+aliases:
+  - /ai/sandboxes/governance/monitoring/
 ---
 
 `sbx policy ls` and `sbx policy log` give you a combined view of all active
@@ -27,7 +29,7 @@ The columns are:
 - `POLICY`: the policy name.
 - `SOURCE`: where the policy came from. `local` means your local configuration
   — a preset or rules you added with `sbx policy`. `kit` means a
-  [kit](../customize/kits.md#control-network-access). `org` means your
+  [kit](../../customize/kits.md#control-network-access). `org` means your
   organization.
 - `APPLIES TO`: which sandboxes the policy applies to. `all` means the policy
   is global. `sandbox:<name>` scopes it to a single sandbox; a profile name
@@ -69,9 +71,9 @@ rules are suppressed and how to reveal them.
 
 ### Showing inactive rules
 
-When organization governance is active, local and kit-defined rules are not
-evaluated, so `sbx policy ls` hides them by default. To list them too — for
-example, to confirm which local rules the organization policy overrides — pass
+When organization governance is active, local and kit-defined allow rules are
+not evaluated, so `sbx policy ls` hides them by default. To list them too — for
+example, to confirm which allow rules the organization policy overrides — pass
 `--include-inactive`. This adds a `STATUS` column:
 
 ```console
@@ -86,7 +88,9 @@ default-fs-write-allow-all   local    all          filesystem write: 1 allow    
 ```
 
 Inactive policies show `inactive` in the `STATUS` column. They have no effect
-while organization governance is active.
+while organization governance is active. Local and kit-defined deny rules stay
+active and aren't hidden, because a deny still applies on top of the
+organization policy. See [Precedence](../concepts.md#precedence).
 
 Use `--type network` or `--type filesystem` to show only policies of that type.
 Without a sandbox argument, `sbx policy ls` shows every policy across all
@@ -113,7 +117,7 @@ A writable workspace mount must be allowed by both a `filesystem:read` and a
 `filesystem:write` rule; a read-only mount needs only `filesystem:read`. The
 default local policy allows read and write access to all paths, shown as the
 two `default-fs-*` rules above. For the rule syntax and path patterns, see
-[Policy concepts](concepts.md#filesystem-rules).
+[Policy concepts](../concepts.md#filesystem-rules).
 
 ## Monitoring traffic
 
@@ -135,13 +139,13 @@ my-sandbox   network  app.example.com        browser-open                       
 
 The `PROXY` column shows how the request left the sandbox:
 
-| Value | Description |
-| ----- | ----------- |
-| `forward` | Routed through the forward proxy. Supports [credential injection](../security/credentials.md). |
-| `forward-bypass` | Routed through the forward proxy without credential injection. |
-| `transparent` | Intercepted by the transparent proxy. Policy is enforced but credential injection is not available. |
-| `network` | Non-HTTP traffic (raw TCP, UDP, ICMP). TCP can be allowed with a policy rule; UDP and ICMP are always blocked. |
-| `browser-open` | A sandbox process requested opening a URL in the host browser. Policy is enforced before opening the URL. |
+| Value            | Description                                                                                                    |
+| ---------------- | -------------------------------------------------------------------------------------------------------------- |
+| `forward`        | Routed through the forward proxy. Supports [credential injection](../../security/credentials.md).              |
+| `forward-bypass` | Routed through the forward proxy without credential injection.                                                 |
+| `transparent`    | Intercepted by the transparent proxy. Policy is enforced but credential injection is not available.            |
+| `network`        | Non-HTTP traffic (raw TCP, UDP, ICMP). TCP can be allowed with a policy rule. UDP and ICMP are always blocked. |
+| `browser-open`   | A sandbox process requested opening a URL in the host browser. Policy is enforced before opening the URL.      |
 
 The `RULE` column identifies the policy rule that matched the request. The
 `REASON` column includes extra context when the daemon records one.

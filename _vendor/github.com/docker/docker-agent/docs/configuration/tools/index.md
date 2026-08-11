@@ -13,13 +13,15 @@ _Complete reference for configuring built-in tools, MCP tools, and Docker-based 
 
 ## Built-in Tools
 
-Built-in tools are included with docker-agent and require no external dependencies. Add them to your agent's `toolsets` list by `type`. Each tool's dedicated page covers its full configuration options, available operations, and examples.
+Built-in tools are included with Docker Agent and require no external dependencies. Add them to your agent's `toolsets` list by `type`. Each tool's dedicated page covers its full configuration options, available operations, and examples.
 
 | Type | Description | Page |
 | --- | --- | --- |
 | `filesystem` | Read, write, list, search, navigate | [Filesystem](../../tools/filesystem/index.md) |
+| `git` | Read-only repository inspection (status, log, branches, show, blame) | [Git](../../tools/git/index.md) |
 | `shell` | Execute shell commands synchronously | [Shell](../../tools/shell/index.md) |
 | `background_jobs` | Run and manage long-running shell commands | [Background Jobs](../../tools/background-jobs/index.md) |
+| `scheduler` | Schedule instructions to run at a time or on a recurring interval | [Scheduler](../../tools/scheduler/index.md) |
 | `think` | Reasoning scratchpad | [Think](../../tools/think/index.md) |
 | `plan` | Shared persistent scratchpad for multi-agent collaboration | [Plan](../../tools/plan/index.md) |
 | `session_plan` | Per-session markdown plan for the draft-review-execute workflow | [Session Plan](../../tools/session_plan/index.md) |
@@ -38,6 +40,7 @@ Built-in tools are included with docker-agent and require no external dependenci
 | `open_url` | Open a fixed URL in the user's default browser | [Open URL](../../tools/open-url/index.md) |
 | `transfer_task` | Delegate to sub-agents (auto-enabled) | [Transfer Task](../../tools/transfer-task/index.md) |
 | `background_agents` | Parallel sub-agent dispatch | [Background Agents](../../tools/background-agents/index.md) |
+| `webhook` | Reliable notifications to a configured destination, with retries (Slack, Discord, Telegram, IFTTT, Teams, …) | [Webhook](../../tools/webhook/index.md) |
 | `handoff` | Local conversation handoff to another agent in the same config (auto-enabled by `handoffs:`) | [Handoff](../../tools/handoff/index.md) |
 | `a2a` | A2A remote agent connection | [A2A](../../tools/a2a/index.md) |
 | `mcp_catalog` | Discover and activate remote MCP servers from the Docker MCP Catalog on demand | [MCP Catalog](../../tools/mcp-catalog/index.md) |
@@ -131,17 +134,17 @@ toolsets:
 | ----------------------- | ------- | --------------------------------------------------------------------------------------------------------------------- |
 | `remote.url`            | string  | URL of the MCP server. Accepts `https://`, `http://`, and `unix://` (Unix domain socket) schemes.                     |
 | `remote.transport_type` | string  | `streamable` or `sse`                                                                                                 |
-| `remote.headers`        | object  | HTTP headers sent on every request. Values support `${env.VAR}` and `${headers.NAME}` placeholders, resolved per request. `${env.VAR}` reads an environment variable; `${headers.NAME}` forwards a header from the caller's incoming request (useful when docker-agent runs as an API server). |
+| `remote.headers`        | object  | HTTP headers sent on every request. Values support `${env.VAR}` and `${headers.NAME}` placeholders, resolved per request. `${env.VAR}` reads an environment variable; `${headers.NAME}` forwards a header from the caller's incoming request (useful when Docker Agent runs as an API server). |
 | `allow_private_ips`     | boolean | Permit remote MCP OAuth helper requests to dial non-public IP addresses. Use only for trusted internal servers.        |
 
 ## Auto-Installing Tools
 
-When configuring MCP or LSP tools that require a binary command, docker agent can **automatically download and install** the command if it's not already available on your system. This uses the [aqua registry](https://github.com/aquaproj/aqua-registry) — a curated index of CLI tool packages.
+When configuring MCP or LSP tools that require a binary command, Docker Agent can **automatically download and install** the command if it's not already available on your system. This uses the [aqua registry](https://github.com/aquaproj/aqua-registry) — a curated index of CLI tool packages.
 
 ### How It Works
 
-1. When a toolset with a `command` is loaded, docker agent checks if the command is available in your `PATH`
-2. If not found, it checks the docker agent tools directory (`~/.cagent/tools/bin/`)
+1. When a toolset with a `command` is loaded, Docker Agent checks if the command is available in your `PATH`
+2. If not found, it checks the Docker Agent tools directory (`~/.cagent/tools/bin/`)
 3. If still not found, it looks up the command in the aqua registry and installs it automatically
 
 ### Explicit Package Reference
@@ -164,7 +167,7 @@ The format is `owner/repo` or `owner/repo@version`. When a version is omitted, t
 
 ### Automatic Detection
 
-If the `version` property is not set, docker agent tries to auto-detect the package from the command name by searching the aqua registry:
+If the `version` property is not set, Docker Agent tries to auto-detect the package from the command name by searching the aqua registry:
 
 ```yaml
 toolsets:
@@ -223,7 +226,7 @@ The simplest knob is `profile`, which picks a preset:
 
 | Profile | Auto-restart | Use case |
 | --- | --- | --- |
-| `resilient` | Yes | Default. Exponential backoff on disconnect; the agent keeps running if the toolset is unavailable. Matches the historical docker-agent behaviour. |
+| `resilient` | Yes | Default. Exponential backoff on disconnect; the agent keeps running if the toolset is unavailable. Matches the historical Docker Agent behaviour. |
 | `strict` | No | Fail-fast. Marks the toolset as required. Intended for CI / headless runs where a missing dependency should be a hard error. |
 | `best-effort` | No | Single attempt, no retries. Good for experimental MCPs whose flakiness should not amplify into a restart loop. |
 
@@ -274,13 +277,13 @@ toolsets:
 | `backoff.multiplier` | number | Multiplier applied each attempt. Default: `2`. |
 | `backoff.jitter` | number | Fraction (0..1) of the computed delay applied as a uniform random offset. `0` disables jitter (default). |
 | `required` | boolean | Marks the toolset as critical. Today this is informational; a future eager-startup phase will refuse to start the agent when a required toolset cannot reach Ready. Defaults to `true` under `strict`, `false` otherwise. |
-| `startup_timeout` | duration | Cap on the initial connect+initialize duration. Today this is informational; the eager-startup phase that enforces it ships in a follow-up. |
-| `call_timeout` | duration | Documented per-call timeout. Informational; the runtime currently uses the caller's context for cancellation. |
+| `startup_timeout` | duration | Cap on the initial connect+initialize duration. Enforced since v1.94.0: on expiry the toolset stays stopped and the runtime retries on the next turn. |
+| `call_timeout` | duration | Cap on an individual tool call, including one reconnect-retry. Enforced: on expiry the call is cancelled and surfaced to the model as a tool error; cancellation is propagated to the server. `0`/unset means no timeout — opt-in only, no profile default. |
 
 > [!NOTE]
-> **`required` and `startup_timeout` are not yet enforced**
+> **`required` is not yet enforced**
 >
-> The schema validates these fields and the supervisor stores them, but no code path acts on them yet. They are documented now so config files written today keep working when the planned eager-startup phase lands. Picking the `strict` profile is forward-compatible — it will start enforcing `required=true` automatically.
+> The schema validates this field and the supervisor stores it, but no code path acts on it yet. It is documented now so config files written today keep working when the planned eager-startup phase lands. Picking the `strict` profile is forward-compatible — it will start enforcing `required=true` automatically.
 
 ### Inspecting and restarting toolsets at runtime
 
@@ -445,6 +448,15 @@ toolsets:
 ```
 
 When `defer` is a list of tool names, only those specific tools are deferred; all other tools in the toolset load eagerly. Setting `defer: true` defers the entire toolset.
+
+### Tool Discovery with `search_tool`
+
+When an entire toolset is deferred (`defer: true`), the deferred toolset exposes two built-in tools to the agent:
+
+- **`search_tool`** — Discover available deferred tools by keyword. The search uses **fuzzy matching** against both tool names and descriptions: all characters of the query must appear in the target string in order (but not necessarily adjacently), so a query like `"crfil"` matches `"create_file"`. Returns a list of matching tool names with descriptions.
+- **`add_tool`** — Activate a discovered tool by name so it becomes available for use.
+
+These tools let the agent browse a large toolset on-demand without activating every tool upfront.
 
 See [`examples/deferred.yaml`](https://github.com/docker/docker-agent/blob/main/examples/deferred.yaml) for a complete example.
 

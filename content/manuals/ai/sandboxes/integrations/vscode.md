@@ -54,6 +54,34 @@ settings:
 For details, see
 [microsoft/vscode-remote-release#11672](https://github.com/microsoft/vscode-remote-release/issues/11672).
 
+### SSH host key verification fails
+
+VS Code can leave duplicate or malformed `Host *.sbx` blocks in your SSH
+config after you add an SSH host. If a VS Code connection reports a
+`KnownHostsCommand` error or `Host key verification failed`, remove every SSH
+config block marked `docker sandboxes (managed)`, including the marker
+comments:
+
+```diff
+-# >>> docker sandboxes (managed) >>>
+-Host *.sbx
+-    User _default_user_
+-    ProxyCommand "sbx" ssh proxy %n
+-    ...
+-    UserKnownHostsFile "~/.ssh/sbx_known_hosts"
+-    KnownHostsCommand "sbx" ssh known-hosts %H
+-    StrictHostKeyChecking yes
+-# <<< docker sandboxes (managed) <<<
+```
+
+Then regenerate the managed block:
+
+```console
+$ sbx setup ssh
+```
+
+Reconnect to the sandbox from VS Code.
+
 ## Related
 
 - [Editor and app integrations](_index.md) — how SSH access works and how to
