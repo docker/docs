@@ -164,5 +164,4 @@ Scout.
    ```
 
 9. Optional. Set up Scout integration for real-time notifications from popular
-   collaboration platforms. For details, see [Integrate Docker Scout with
-   Slack](../team-collaboration/slack.md).
+   collaboration platforms.

@@ -12,7 +12,7 @@ Docker Hardened Images (DHI) is a comprehensive catalog of
 security-hardened container images built to meet diverse
 development and production needs.
 
-You can explore the DHI catalog on [Docker Hub](https://hub.docker.com/hardened-images/catalog) or use the [DHI CLI](../how-to/cli.md) to browse
+You can explore the DHI catalog on [Docker Hub](https://hub.docker.com/hardened-images/catalog) or use the [DHI CLI](../tools/cli.md) to browse
 available images, tags, and metadata from the command line.
 
 ## Framework and application images
@@ -85,7 +85,7 @@ For example, you might find tags like the following in a DHI repository:
 
 Some Docker Hardened Images include a `-fips` variant. These variants use
 cryptographic modules that have been validated under [FIPS
-140](../core-concepts/fips.md), a U.S. government standard for secure
+140](security-concepts/fips.md), a U.S. government standard for secure
 cryptographic operations.
 
 FIPS variants are designed to help organizations meet regulatory and compliance

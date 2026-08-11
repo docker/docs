@@ -36,22 +36,45 @@ OpenCode supports multiple providers. Store keys for the providers you want to
 use with [stored secrets](../security/credentials.md#stored-secrets):
 
 ```console
-$ sbx secret set -g openai
-$ sbx secret set -g anthropic
-$ sbx secret set -g google
-$ sbx secret set -g xai
-$ sbx secret set -g groq
-$ sbx secret set -g aws
-$ sbx secret set -g openrouter
+$ sbx secret set openai
+$ sbx secret set anthropic
+$ sbx secret set google
+$ sbx secret set xai
+$ sbx secret set groq
+$ sbx secret set aws
+$ sbx secret set openrouter
 ```
 
 You only need to configure the providers you want to use. OpenCode detects
 available credentials and offers those providers in the TUI.
 
-You can also use environment variables (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`,
-`GOOGLE_GENERATIVE_AI_API_KEY`, `XAI_API_KEY`, `GROQ_API_KEY`,
-`AWS_ACCESS_KEY_ID`, `OPENROUTER_API_KEY`). See
-[Credentials](../security/credentials.md) for details on both methods.
+### OpenCode Zen API keys
+
+OpenCode Zen API keys aren't part of the built-in OpenCode credentials that
+`sbx secret set` supports. To use an OpenCode Zen API key, store it as a
+[custom secret](../security/credentials.md#custom-secrets):
+
+Set the `OPENCODE_API_KEY` environment variable on the host, then store it:
+
+```console
+$ sbx secret set-custom \
+    --host opencode.ai \
+    --env OPENCODE_API_KEY \
+    --value "$OPENCODE_API_KEY"
+```
+
+Custom secrets keep the real key in the host secret store. The sandbox receives
+`OPENCODE_API_KEY` as a placeholder, and the host-side proxy replaces that
+placeholder with the real key on requests to `opencode.ai`.
+
+OpenCode Zen also requires network access to `opencode.ai`:
+
+```console
+$ sbx policy allow network opencode.ai:443
+```
+
+If you add a global custom secret, recreate existing OpenCode sandboxes so the
+new environment variable is available inside the sandbox.
 
 ## Configuration
 

@@ -3,7 +3,7 @@ title: Create your organization
 linkTitle: Create
 weight: 10
 description: Learn how to create an organization.
-keywords: docker organizations, organization, create organization, docker teams, docker admin console, organization management
+keywords: docker organizations, organization, create organization, docker teams, organization management
 aliases:
   - /docker-hub/orgs/
   - /admin/organization/orgs/
@@ -14,10 +14,8 @@ aliases:
 There are multiple ways to create an organization. You can either:
 
 - Create a new organization using the **Create Organization** option in the
-  Admin Console or Docker Hub
+  Docker Home
 - Convert an existing user account to an organization
-
-These procedures walk you through creating an organization from the Admin Console.
 
 ## Prerequisites
 
@@ -50,13 +48,12 @@ You've now created an organization.
 
 ## View an organization
 
-To view an organization in the Admin Console:
+To view an organization:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your
    organization.
-1. From the left-hand navigation menu, select **Admin Console**.
 
-The Admin Console contains many options that let you to
+Docker Home contains many options that let you to
 configure your organization.
 
 ## Merge organizations

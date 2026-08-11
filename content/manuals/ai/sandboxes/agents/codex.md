@@ -38,7 +38,7 @@ To set up authentication ahead of time, choose one of the following methods.
 **OAuth**: Start the OAuth flow on your host with:
 
 ```console
-$ sbx secret set -g openai --oauth
+$ sbx secret set openai --oauth
 ```
 
 This opens a browser window for authentication and stores the resulting tokens
@@ -49,11 +49,8 @@ so browser-based authentication works without any extra setup.
 [stored secrets](../security/credentials.md#stored-secrets):
 
 ```console
-$ sbx secret set -g openai
+$ sbx secret set openai
 ```
-
-Alternatively, export the `OPENAI_API_KEY` environment variable in your shell
-before running the sandbox.
 
 See [Credentials](../security/credentials.md) for more details.
 

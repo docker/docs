@@ -2,17 +2,17 @@
 title: Change general organization information
 linkTitle: Change information
 weight: 30
-description: Learn how to manage settings for organizations using Docker Admin Console.
-keywords: organization, settings, Admin Console, manage, Docker organization, Gravatar, SCIM, SSO setup, domain management, organization settings
+description: Learn how to manage settings for organizations.
+keywords: organization, settings, Docker Home, manage, Docker organization, Gravatar, SCIM, SSO setup, domain management, organization settings
 aliases:
   - /admin/organization/general-settings/
 ---
 
-Learn how to update your organization information using the Admin Console.
+Learn how to update your organization information.
 
 ## Update organization information
 
-General organization information appears on your organization landing page in the Admin Console.
+General organization information appears on your organization landing page.
 
 This information includes:
 
@@ -24,8 +24,9 @@ This information includes:
 
 To edit this information:
 
-1. Sign in to the [Admin Console](https://app.docker.com/admin) and
-   select your organization from the top-left account drop-down.
+1. Sign in to [Docker Home](https://app.docker.com) and select your
+   organization from the top-left account drop-down.
+1. Select **Organization settings**.
 1. Enter or update your organization’s details, then select **Save**.
 
 ## Next steps

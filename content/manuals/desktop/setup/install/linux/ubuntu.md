@@ -30,6 +30,7 @@ To install Docker Desktop successfully, you must:
 
 - Meet the [general system requirements](_index.md#general-system-requirements).
 - Have an x86-64 system with Ubuntu 26.04 LTS or 24.04 LTS.
+- For a GNOME desktop environment, you must install AppIndicator and KStatusNotifierItem [GNOME extensions](https://extensions.gnome.org/extension/615/appindicator-support/).
 - If you're not using GNOME, you must install `gnome-terminal` to enable terminal access from Docker Desktop:
   ```console
   $ sudo apt install gnome-terminal

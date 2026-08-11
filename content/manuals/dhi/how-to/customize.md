@@ -219,10 +219,9 @@ For a complete reference of all YAML fields, see
 {{< tab name="Terraform" >}}
 
 You can manage DHI customizations as infrastructure-as-code using the [DHI
-Terraform
-provider](https://registry.terraform.io/providers/docker-hardened-images/dhi/latest/docs).
-If you haven't configured the provider yet, see the Terraform tab in [Mirror a
-repository](./mirror.md) for setup instructions.
+Terraform provider](/dhi/tools/terraform/). If you haven't configured the
+provider yet, see [DHI Terraform provider](/dhi/tools/terraform/) for setup
+instructions.
 
 Define a `dhi_customization` resource for each customization:
 

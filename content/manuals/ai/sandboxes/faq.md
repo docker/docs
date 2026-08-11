@@ -1,8 +1,8 @@
 ---
 title: FAQ
-weight: 70
+weight: 110
 description: Frequently asked questions about Docker Sandboxes.
-keywords: docker sandboxes, sbx, faq, sign in, telemetry, clipboard, image paste, pricing, commercial use
+keywords: docker sandboxes, sbx, faq, sign in, telemetry, clipboard, image paste, pricing, commercial use, allowlist, firewall, domains, proxy
 ---
 
 ## Is Docker Sandboxes free? Can I use it commercially?
@@ -11,9 +11,10 @@ Yes to both. The `sbx` CLI is free to use, including for commercial and
 professional work, with no per-seat fee. Install it, sign in with a free
 Docker account, and run sandboxes at no cost.
 
-The only paid component is organization governance: centrally managed network
-and filesystem policies, [sign-in enforcement](governance/sign-in-enforcement.md),
-and [audit logs](governance/audit.md). These
+The only paid component is organization governance: centrally managed network,
+filesystem, and MCP policies,
+[sign-in enforcement](governance/monitor-and-enforce/sign-in-enforcement.md),
+and [audit logs](governance/audit/). These
 [organization governance features](governance/) require a separate paid
 subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
@@ -29,9 +30,8 @@ Signing in gives each sandbox a verified identity, which lets Docker:
   containers, install packages, and push code. Your Docker identity is the
   anchor.
 - **Enable team features.** Team-scale features like
-  [organization governance](governance/org.md), shared environments, and
-  audit logs need a concept of "who," and adding that later would be worse for
-  everyone.
+  [organization governance](governance/), shared environments, and audit logs
+  need a concept of "who," and adding that later would be worse for everyone.
 - **Authenticate against Docker infrastructure.** Sandboxes pull images, run
   daemons, and talk to Docker services. A Docker account authenticates those
   requests.
@@ -40,15 +40,34 @@ Your Docker account email is only used for authentication, not marketing.
 
 ## Can I enforce sandbox policies across my organization?
 
-Yes. Admins can centrally manage network and filesystem policies from the
-Docker Admin Console. Rules defined there apply to every sandbox in the
-organization. When organization governance is active, it replaces local rules
-set with `sbx policy` — local rules are no longer evaluated.
+Yes. Admins can centrally manage network, filesystem, and MCP policies. These
+controls apply to every sandbox in the organization. When organization
+governance is active, only organization allow rules grant access: local allow
+rules set with `sbx policy` are no longer evaluated, while local deny rules
+still apply on top.
 
-See [Organization governance](governance/org.md). This feature requires
-a separate paid subscription —
+See [Organization policies](governance/access-controls/organization.md). This
+feature requires a separate paid subscription —
 [contact Docker Sales](https://www.docker.com/products/ai-governance/#contact-sales)
 to get started.
+
+## Which domains do I need to allow for Docker Sandboxes to work?
+
+If your organization restricts outbound network access with a firewall or
+proxy, add the following domains to your allowlist so that `sbx` can
+authenticate, pull images, and report diagnostics.
+
+| Domain                                             | Description             |
+| -------------------------------------------------- | ----------------------- |
+| https://login.docker.com                           | Authentication          |
+| https://hub.docker.com                             | Docker Hub              |
+| https://api.docker.com                             | Docker API              |
+| https://marlin-2.docker.com                        | Telemetry               |
+| https://marlin-api.docker.com                      | Telemetry               |
+| https://registry-1.docker.io                       | Docker pull/push        |
+| https://auth.docker.io                             | Registry authentication |
+| https://dhi.io                                     | Docker Hardened Images  |
+| https://sbx-diagnostics.s3.us-east-1.amazonaws.com | Diagnostics upload      |
 
 ## Does the CLI collect telemetry?
 
@@ -114,11 +133,11 @@ $ echo $BRAVE_API_KEY
 ## Why do agents run without approval prompts?
 
 The sandbox itself is the safety boundary. Because agents run inside an
-isolated microVM with [network policies](governance/),
+isolated microVM with [network policies](governance/access-controls/network.md),
 [credential isolation](security/credentials.md), and no access to your host
-system outside the workspace, the usual reasons for approval prompts (preventing
-destructive commands, network access, file modifications) are handled by the
-sandbox isolation layers instead.
+system outside explicitly shared paths, the usual reasons for approval prompts
+(preventing destructive commands, network access, file modifications) are
+handled by the sandbox isolation layers instead.
 
 If you prefer to re-enable approval prompts, change the permission mode
 inside the session. Most agents let you switch permission modes after
@@ -155,24 +174,19 @@ in-progress task:
 
 ## Why doesn't the sandbox use my user-level agent configuration?
 
-Sandboxes don't pick up user-level agent configuration from your host. This
-includes directories like `~/.claude` for Claude Code or `~/.codex` for Codex,
-where hooks, skills, and other settings are stored. Only project-level
-configuration in the working directory is available inside the sandbox.
+Sandboxes don't import your complete user-level agent configuration. Hooks,
+settings, and other files under directories such as `~/.claude` remain on the
+host. Project-level configuration in the working directory remains available
+inside the sandbox.
 
-To make configuration available in a sandbox, copy or move what you need into
-your project directory before starting a session:
+Shared agent skills are the exception. Run `sbx skills import` to copy skills
+from supported host directories into a persistent store shared with
+sandboxes. See [Share agent skills](workflows.md#share-agent-skills) for the
+supported directories, mount behavior, and per-sandbox opt-out.
 
-```console
-$ cp -r ~/.claude/skills .claude/skills
-```
-
-Don't use symlinks — a sandboxed agent can't follow symlinks to paths outside
-the sandbox.
-
-Collocating skills and other agent configuration with the project itself is a
-good practice regardless of sandboxes. It's versioned alongside the code and
-evolves with the project as it changes.
+Keep project-specific skills and other agent configuration in the project
+itself. This versions the configuration alongside the code. Don't use symlinks
+to host paths because a sandboxed agent can't follow them outside the sandbox.
 
 ## Can I paste images into an agent?
 

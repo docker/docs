@@ -70,7 +70,7 @@ and packages, and application-level packages such as maven, npm, and so on.
 ### Environment metadata
 
 If you integrate Docker Scout with your runtime environment via the
-[Sysdig integration](/manuals/scout/integrations/environment/sysdig.md),
+[CLI integration](/manuals/scout/integrations/environment/cli.md),
 Docker Scout collects the following data points about your deployments:
 
 - Kubernetes namespace

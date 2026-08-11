@@ -1,6 +1,6 @@
 command: docker scout policy
 short: |
-    Evaluate policies against an image and display the policy evaluation results (experimental)
+    Evaluate local Rego policies against an image and display the results (experimental)
 long: |-
     The `docker scout policy` command evaluates policies against an image.
     The image analysis is uploaded to Docker Scout where policies get evaluated.
@@ -9,16 +9,11 @@ long: |-
 usage: docker scout policy [IMAGE | REPO]
 pname: docker scout
 plink: docker_scout.yaml
+cname:
+    - docker scout policy publish
+clink:
+    - docker_scout_policy_publish.yaml
 options:
-    - option: env
-      value_type: string
-      description: Name of the environment to compare to
-      deprecated: true
-      hidden: true
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
     - option: exit-code
       shorthand: e
       value_type: bool
@@ -61,26 +56,57 @@ options:
       swarm: false
     - option: platform
       value_type: string
-      description: Platform of image to pull policy results from
+      description: Platform of image to evaluate policies against
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: to-env
+    - option: policy-bundle
+      value_type: stringArray
+      default_value: '[]'
+      description: OCI reference of a policy bundle to evaluate (repeatable)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: policy-config
       value_type: string
-      description: Name of the environment to compare to
+      description: |
+        Path or http(s) URL to a JSON file configuring policy enablement and inputs
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: to-latest
-      value_type: bool
-      default_value: "false"
-      description: Latest image processed to compare to
+    - option: policy-dir
+      value_type: stringArray
+      default_value: '[]'
+      description: Path to a directory of local .rego policy files (repeatable)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: policy-file
+      value_type: stringArray
+      default_value: '[]'
+      description: Path or http(s) URL to a .rego policy file (repeatable)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: result-file
+      value_type: string
+      description: |
+        Write the full Rego evaluation result (pass, violations, query bindings and OPA metrics) of each evaluated policy to a JSON file (useful when iterating on local --policy-file policies)
       deprecated: false
       hidden: false
       experimental: false

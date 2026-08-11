@@ -35,12 +35,8 @@ Cursor supports two authentication methods: an API key or OAuth.
 [stored secrets](../security/credentials.md#stored-secrets):
 
 ```console
-$ sbx secret set -g cursor
+$ sbx secret set cursor
 ```
-
-Alternatively, export the `CURSOR_API_KEY` environment variable in your shell
-before running the sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
 
 **OAuth**: If no API key is set, Cursor prompts you to sign in interactively
 on first run. The proxy intercepts the token exchange with

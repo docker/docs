@@ -31,7 +31,7 @@ To configure namespace access control:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization from the top-left account drop-down.
-2. Select **Admin Console**, then **Namespace access**.
+2. Select **Docker Desktop**, then **Namespace access**.
 3. Use the toggle to enable or disable namespace access control.
 4. Select **Save changes**.
 

@@ -7,13 +7,7 @@ description: |-
 
     Agent secrets are detected from the built-in agent kit specs and the
     env vars set on this host, and accepted secrets are imported into the global
-    secrets store (the same store as "sbx secret set -g").
-
-      [T]      toggle the detailed review table on/off
-      ↑/↓      move between rows
-      TAB      toggle import / skip for the selected row
-      [enter]  accept and import
-      [q]/esc  quit without importing
+    secrets store (the same store as "sbx secret set").
 usage: sbx setup
 options:
     - name: help
@@ -27,3 +21,4 @@ inherited_options:
       usage: Enable debug logging
 see_also:
     - sbx - Manage AI coding agent sandboxes.
+    - sbx setup ssh - Set up SSH client config for the sandbox endpoint

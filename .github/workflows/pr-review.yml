@@ -34,12 +34,24 @@ jobs:
         ## Priority Issues
 
         ### 1. Vendored/Generated Content (CRITICAL - Auto-reject)
-        Flag if changes touch:
+        Check for vendored or generated files before reviewing any changed content.
+        Treat these paths as vendored/generated:
         - Any file in `_vendor/` directory (vendored from upstream repos)
         - Any YAML file in `data/*/*.yaml` subdirectories (CLI reference data generated from upstream)
           - Examples: `data/engine-cli/*.yaml`, `data/buildx/*.yaml`, `data/scout-cli/*.yaml`
           - Exception: root-level data/ files are manually maintained (allow edits)
         - `content/reference/api/ai-governance/api.yaml` (verbatim copy of the upstream OpenAPI spec, vendored from the private docker/governor-services repo via `hack/sync-governance-api.sh`)
+
+        If all changed files are vendored/generated:
+        - Leave at most one PR-level review comment.
+        - Do not leave inline comments.
+        - Do not review style, wording, markdown, command accuracy, links, or content quality inside those files.
+        - Say only that the PR edits vendored/generated content, identify the affected path pattern, and direct the author to make the change upstream and sync it back.
+
+        If a PR changes both vendored/generated files and hand-authored files:
+        - Leave one comment for the vendored/generated file issue.
+        - Review only the hand-authored files for the remaining priority issues below.
+        - Do not leave style, wording, markdown, command accuracy, link, or content-quality comments on vendored/generated files.
 
         ### 2. Missing Redirects When Removing/Moving Pages (HIGH)
         When a PR removes or moves a page:

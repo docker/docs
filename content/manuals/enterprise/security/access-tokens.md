@@ -56,7 +56,7 @@ To create an OAT:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
 organization.
-1. Select **Admin Console**, then **Access tokens**.
+1. Select **Identity & auth**, then **Access tokens**.
 1. Select **Generate access token**.
 1. Configure token details:
     - Label: Descriptive name indicating the token's purpose
@@ -97,7 +97,7 @@ To manage existing tokens:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
 organization.
-1. Select **Admin Console**, then **Access tokens**.
+1. Select **Identity & auth**, then **Access tokens**.
 1. Select the actions menu in the token row, you can:
     - **Edit**
     - **Deactivate**

@@ -3,10 +3,16 @@ synopsis: Remove a network rule
 description: |-
     Remove a network rule by rule ID, resource, or both.
 
+    --id takes the RULE_ID value shown by "sbx policy ls --wide" and
+    "sbx policy inspect" — the rule's identifier, not its name. Passing a rule
+    name fails with an error that names the actual rule ID and, for removable
+    rules, the exact corrected command.
+
     The rule is removed from the global policy by default. Use --sandbox to
     remove from policy "local" scoped to a single sandbox instead.
 
-    Use "sbx policy ls" to see active policies and their IDs/resources.
+    Use "sbx policy ls --wide" to see active rule IDs and resources, or
+    "sbx policy ls --json" for the raw filtered daemon response.
 usage: sbx policy rm network [--sandbox SANDBOX] [flags]
 options:
     - name: help
@@ -26,8 +32,8 @@ inherited_options:
       default_value: "false"
       usage: Enable debug logging
 example: |4-
-      # List policies to find the ID or resource to remove
-      sbx policy ls
+      # List rules to find the ID or resource to remove
+      sbx policy ls --wide
 
       # Remove a global rule by resource
       sbx policy rm network --resource api.example.com

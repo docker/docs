@@ -33,12 +33,8 @@ Copilot requires a GitHub token with Copilot access. Store your token using
 [stored secrets](../security/credentials.md#stored-secrets):
 
 ```console
-$ echo "$(gh auth token)" | sbx secret set -g github
+$ echo "$(gh auth token)" | sbx secret set github
 ```
-
-Alternatively, export the `GH_TOKEN` or `GITHUB_TOKEN` environment variable in
-your shell before running the sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
 
 ## Configuration
 

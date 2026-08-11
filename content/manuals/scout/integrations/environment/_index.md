@@ -37,7 +37,6 @@ Docker Scout supports the following runtime integrations:
 
 - [Docker Scout GitHub Action](https://github.com/marketplace/actions/docker-scout#record-an-image-deployed-to-an-environment)
 - [CLI client](./cli.md)
-- [Sysdig integration](./sysdig.md)
 
 > [!NOTE]
 >

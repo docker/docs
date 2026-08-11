@@ -5,7 +5,7 @@ This site builds https://docs.docker.com/ using Hugo.
 
 ## Project structure
 
-```
+```text
 content/          # Documentation source (Markdown + Hugo front matter)
 ├── manuals/      # Product docs (Engine, Desktop, Hub, etc.)
 ├── guides/       # Task-oriented guides
@@ -119,7 +119,7 @@ Every content page under `content/` requires:
 
 - `title:` — page title
 - `description:` — short description for SEO/previews
-- `keywords:` — list of search keywords (omitting this fails markdownlint)
+- `keywords:` — list of search keywords
 
 Additional common fields:
 
@@ -135,8 +135,9 @@ produces broken HTML — always check COMPONENTS.md for correct syntax.
 ## Commands
 
 ```sh
-npx prettier --write <file>        # Format before committing
-scripts/lint.sh <file>...          # Lint specific files (markdownlint + vale)
+npx --no-install rumdl fmt <file>  # Format Markdown before committing
+npx prettier --write <file>        # Format non-Markdown files
+scripts/lint.sh <file>...          # Lint specific files (rumdl + Vale)
 docker buildx bake validate        # Run all validation checks
 docker buildx bake lint            # Markdown linting only
 docker buildx bake vale            # Style guide checks only
@@ -157,7 +158,7 @@ and `validate-vendor` targets run correctly in CI.
 ## Verification loop
 
 1. Make changes
-2. Format with prettier: `npx prettier --write <file>`
+2. Format Markdown with rumdl: `npx --no-install rumdl fmt <file>`
 3. Lint the changed files: `scripts/lint.sh <file>...`
 4. Run a full build with `docker buildx bake` (optional for small changes)
 

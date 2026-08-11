@@ -20,7 +20,7 @@ Each tool serves a different purpose.
 | Run AI models locally with an OpenAI-compatible API             | [Model Runner](./ai/model-runner/)                       | `docker model`   |
 | Connect AI tools to external services via MCP                   | [MCP Catalog and Toolkit](./ai/mcp-catalog-and-toolkit/) | `docker mcp`     |
 | Build and orchestrate custom multi-agent teams                  | [Docker Agent](./ai/docker-agent/)                       | `docker agent`   |
-| Run coding agents in isolated environments                      | [Docker Sandboxes](./ai/sandboxes/)                      | `docker sandbox` |
+| Run coding agents in isolated environments                      | [Docker Sandboxes](./ai/sandboxes/)                      | `sbx`            |
 
 ## How these tools relate
 
