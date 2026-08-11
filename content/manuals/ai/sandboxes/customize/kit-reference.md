@@ -296,16 +296,14 @@ the real token response into the sandbox.
 | `sentinels.accessToken` / `refreshToken` | Sentinel values written into the container in place of the real tokens.                                                                                                                           |
 | `credentialFile.path`                    | Where to write the credential file inside the container (`~` expands).                                                                                                                            |
 | `credentialFile.structure`               | Declarative JSON shape. Supports `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, and `{{.Scopes}}`.                                                                                   |
-| `credentialFile.template`                | Free-form Go template. Supports `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, `{{.Scopes}}`, and `{{.ScopesJSON}}`. Use `{{.ScopesJSON}}` for a JSON array.                           |
+| `credentialFile.template`                | Go template. Supports `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, `{{.Scopes}}`, and `{{.ScopesJSON}}`.                                                                          |
 | `resourceHosts`                          | API hosts where the proxy attaches the token on outbound requests, distinct from the token endpoint host.                                                                                         |
 | `skipIfEnv`                              | Accepted for compatibility, but ignored for schema v2. A v2 binding is authoritative instead of host environment variables.                                                                       |
 | `responseFields`                         | Overrides the default field names the proxy reads from the token response.                                                                                                                        |
 | `passthrough`                            | If `true`, the proxy passes the token response through unchanged instead of replacing the tokens with sentinels.                                                                                  |
 
 `credentialFile.structure` provides a declarative alternative to
-`credentialFile.template`. The engine substitutes the declared placeholders
-and then encodes the structure as JSON, which preserves the numeric type of
-`ExpiresAt`, the array type of `Scopes`, and produces well-formed JSON. If both
+`credentialFile.template`. The engine renders it as well-formed JSON. If both
 fields are set, `structure` takes precedence.
 
 ## Network
