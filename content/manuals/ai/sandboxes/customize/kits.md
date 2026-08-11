@@ -53,9 +53,9 @@ setup:
     - command: "apt-get update && apt-get install -y jq"
 ```
 
-Startup commands cover things like launching background services,
-warming caches, or refreshing config on each start. They must be
-idempotent — see the [`startup`](kit-reference.md#startup) spec reference:
+Startup commands cover things like launching background services or warming
+caches on each start. They must be idempotent — see the
+[`startup`](kit-reference.md#startup) spec reference:
 
 ```yaml
 setup:
