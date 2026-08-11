@@ -1,16 +1,15 @@
 ---
-title: Create and manage custom roles
+title: Manage custom roles in Docker
 linkTitle: Manage
-description: Create, edit, assign, reassign, and delete custom roles for users and teams
-keywords: custom roles, create role, assign role, edit role, delete role, reassign role, manage roles, access control, docker home, security
+description: Create, edit, assign, reassign, and delete custom roles in Docker Home for organization users and teams
+keywords: custom roles, manage custom roles, role assignments, access control, Docker Home, organization roles, permissions
 weight: 10
 ---
 
 {{< summary-bar feature_name="General admin" >}}
 
-This page shows how to create custom roles, change their permissions, and
-assign them to users and teams. For the full list of permissions you can
-grant, see the
+Create custom roles, manage their permissions, and assign them to users and
+teams. For a full list of permissions, see the
 [custom roles permissions reference](permissions-reference.md).
 
 ## Create a custom role
@@ -19,16 +18,15 @@ Before you can assign a custom role, create one:
 
 1. Sign in to [Docker Home](https://app.docker.com).
 1. Select **Roles**, then **Create role**.
-1. Create a name and describe what the role is for:
+1. Define the role:
    - Provide a **Label**
-   - Enter a unique **Name** identifier (can't be changed later)
+   - Enter a unique **Name** identifier. You can't change it later.
    - Add an optional **Description**
 1. Set permissions for the role by expanding permission categories and
    selecting the checkboxes for permissions. For a full list of available
    permissions, see the
    [custom roles permissions reference](permissions-reference.md).
-1. Select **Review** to review your configuration and see a summary of
-   selected permissions.
+1. Select **Review** to review the configuration and selected permissions.
 1. Select **Create**.
 
 After you create a custom role, you can

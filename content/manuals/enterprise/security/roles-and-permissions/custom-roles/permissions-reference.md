@@ -1,16 +1,19 @@
 ---
-title: Custom roles permissions reference
+title: Custom role permissions reference
 linkTitle: Permissions reference
-description: Reference of permissions you can assign when creating custom roles in Docker
-keywords: custom roles, permissions reference, organization management, billing, docker hub, governance, access tokens, sso, scim, security
+description: >-
+  Permissions available for Docker custom roles across organization management,
+  Docker Hub, billing, and AI Governance.
+keywords: >-
+  custom roles, custom role permissions, Docker, Docker Hub, organization
+  management, billing, AI Governance, access tokens, SSO, SCIM, security
 weight: 20
 ---
 
 {{< summary-bar feature_name="General admin" >}}
 
-Custom roles are built from permissions across several categories. Use the
-tables on this page when you
-[create or edit a custom role](manage.md).
+Custom roles use permissions from several categories. Use the following tables
+to [create or edit a custom role](manage.md).
 
 ## Organization management
 
@@ -23,13 +26,13 @@ tables on this page when you
 | Update organization information   | Update organization information such as name and location         |
 | Member management                 | Manage organization members, invites, and roles                   |
 | View custom roles                 | View existing custom roles and their permissions                  |
-| Manage custom roles               | Full access to custom role management and assignment              |
+| Manage custom roles               | Manage and assign custom roles                                    |
 | Manage organization access tokens | Create, update, and delete organization access tokens             |
 | View activity logs                | Access organization audit logs and activity history               |
 | View domains                      | View domains and domain audit settings                            |
 | Manage domains                    | Manage verified domains and domain audit settings                 |
 | View SSO and SCIM                 | View single sign-on and user provisioning configurations          |
-| Manage SSO and SCIM               | Full access to SSO and SCIM management                            |
+| Manage SSO and SCIM               | Manage single sign-on and user provisioning configurations        |
 | Manage Desktop settings           | Configure Docker Desktop settings policies and view usage reports |
 
 ## Docker Hub
@@ -41,14 +44,14 @@ tables on this page when you
 
 ## Billing
 
-| Permission     | Description                                      |
-| :------------- | :----------------------------------------------- |
-| View billing   | View organization billing information            |
-| Manage billing | Complete access to managing organization billing |
+| Permission     | Description                           |
+| :------------- | :------------------------------------ |
+| View billing   | View organization billing information |
+| Manage billing | Manage organization billing           |
 
 ## Governance
 
 | Permission      | Description                                          |
 | :-------------- | :--------------------------------------------------- |
 | View policies   | View existing AI Governance policies and their rules |
-| Manage policies | Full access to AI Governance policy management       |
+| Manage policies | Manage AI Governance policies and their rules        |

@@ -1,8 +1,8 @@
 ---
-title: Custom roles overview
+title: Custom roles and permissions overview
 linkTitle: Custom roles
-description: Build permission sets for your Docker organization by selecting individual permissions and assigning them to users or teams
-keywords: custom roles, permission sets, access control, least privilege, docker business, organization management, role assignment, teams, security
+description: Use custom roles to assign tailored permissions to users and teams in your Docker organization
+keywords: custom roles, custom permissions, permission sets, access control, least privilege, docker business, docker home, organization management, role assignment, teams, security
 weight: 20
 grid:
   - title: Manage custom roles
@@ -17,8 +17,8 @@ grid:
 
 {{< summary-bar feature_name="General admin" >}}
 
-Custom roles are permission sets you build by selecting individual
-permissions. This page defines custom roles and explains when to use them.
+Custom roles are permission sets built from individual permissions. This page
+defines custom roles and explains when to use them.
 If Docker's predefined permission sets meet your needs, use
 [core roles](/manuals/enterprise/security/roles-and-permissions/core-roles.md)
 instead.
@@ -37,7 +37,7 @@ Before configuring custom roles, you need:
 
 ## Using custom roles
 
-Core roles satisfy most organizations. Use custom roles when you need:
+Use custom roles when you need:
 
 - Specialized roles such as billing administrators, security auditors, or
   repository managers
