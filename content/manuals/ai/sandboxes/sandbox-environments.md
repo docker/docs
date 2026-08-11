@@ -21,14 +21,13 @@ params:
 > `sbx env` is experimental. The command interface and file format may change
 > in future releases.
 
-A sandbox environment file (`.sbxenv.yaml`) describes a sandbox in code:
-the agent, kits, workspace, secrets, ports, and resource limits. Commit one
-alongside your project and every team member runs an identical sandbox with a
-single command, without sharing flag combinations or setup instructions.
+A sandbox environment file describes the agent, kits, workspaces, environment
+variables, credentials, MCP servers, ports, and resource limits for a sandbox.
+Commit the file with your project so team members can run the same sandbox
+configuration without sharing flag combinations or setup instructions.
 
-The environment file doesn't need to live in the same directory as the
-workspace. You can place it anywhere and point `workspace.path` at the target
-directory:
+The environment file doesn't need to be in the workspace. You can store it in
+another directory and set `workspace.path` to the workspace:
 
 ```yaml
 # .sbxenv.yaml
@@ -56,51 +55,75 @@ ports:
 
 ## Commands
 
-| Command                    | Description                                                                       |
-| -------------------------- | --------------------------------------------------------------------------------- |
-| `sbx env run [PATH...]`    | Provisions the environment if it doesn't exist, then opens an interactive session |
-| `sbx env create [PATH...]` | Provisions without attaching; use in scripts and CI                               |
-| `sbx env rm [PATH...]`     | Removes the sandbox and all resources provisioned by the environment              |
+| Command                                         | Description                                                                               |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `sbx env run [PATH...]`                         | Creates the environment if needed, then attaches to it                                    |
+| `sbx env create [PATH...]`                      | Creates the environment without attaching                                                 |
+| `sbx env exec [PATH...] -- COMMAND [ARG...]`    | Runs a command in an existing environment                                                  |
+| `sbx env rm [PATH...]`                          | Removes the sandbox and credentials scoped to it                                           |
 
-`PATH` can be a directory (reads the `.sbxenv.yaml` inside it) or a direct
-path to a file. With no argument, `sbx env` reads `.sbxenv.yaml` in the
-current directory.
+`PATH` can be a directory or a direct path to an environment file. When you
+pass a directory, `sbx` reads `.sbxenv.yaml` and falls back to `.sbxenv.yml`.
+With no path, `sbx` searches the working directory.
 
-Passing multiple paths merges the files in order — see
-[Multiple files](#multiple-files).
+Pass the same set of paths to each lifecycle command so they resolve the same
+sandbox. See [Multiple files](#multiple-files) for details.
 
-`sbx env rm` removes all secrets and registry credentials that were
-provisioned when the environment was created, not just the sandbox container.
+`sbx env run` starts and attaches to an existing sandbox without provisioning
+its secrets and bindings again. The command applies changes to `env` to the new
+session and reconciles declared MCP servers.
+
+For `sbx env exec`, arguments before `--` are environment-file paths and
+arguments after `--` form the command. Without `--`, all arguments form the
+command and `sbx` reads the environment file from the working directory:
+
+```console
+$ sbx env exec .sbxenv.yaml -- go test ./...
+$ sbx env exec go test ./...
+```
+
+`sbx env rm` removes the sandbox and its scoped service and registry
+credentials. Global credential bindings remain unless you pass
+`--prune-bindings`. Host-global MCP registrations remain available to other
+sandboxes.
 
 ## Multiple files
 
-`sbx env run` and `sbx env create` accept multiple paths and deep-merge them
-in order. Later files override scalar values; lists concatenate. This follows
-the same semantics as Docker Compose's multiple `-f` files:
+Pass multiple paths to merge environment files in order. Nested mappings merge
+by key, lists concatenate, and values from later files replace earlier scalar
+values. Relative workspace paths and the default sandbox name use the directory
+of the first file.
 
 ```console
 $ sbx env run base.sbxenv.yaml local.sbxenv.yaml
 ```
 
-A common pattern is to commit a `base.sbxenv.yaml` with shared team
-configuration and add `local.sbxenv.yaml` to `.gitignore` for personal
-overrides: a different workspace path, additional secrets, or adjusted
-resource limits.
+Commit a `base.sbxenv.yaml` with shared configuration and add
+`local.sbxenv.yaml` to `.gitignore` for personal overrides, such as another
+workspace path, additional secrets, or different resource limits.
 
 ## Variable interpolation
 
-Host environment variables are expanded before the file is parsed:
+Host environment variables are expanded in each file before the files are
+merged and parsed:
 
-| Syntax             | Behavior                                        |
-| ------------------ | ----------------------------------------------- |
-| `$VAR` or `${VAR}` | Expands to the value of `VAR`; fails if unset   |
-| `${VAR:-default}`  | Uses `default` if `VAR` is unset or empty       |
-| `${VAR:?message}`  | Fails with `message` if `VAR` is unset or empty |
-| `$$`               | Literal `$`                                     |
+| Syntax                   | Behavior                                                    |
+| ------------------------ | ----------------------------------------------------------- |
+| `$VAR` or `${VAR}`       | Uses the value of `VAR`, or an empty string when unset      |
+| `${VAR:-default}`        | Uses `default` when `VAR` is unset or empty                 |
+| `${VAR-default}`         | Uses `default` when `VAR` is unset                          |
+| `${VAR:+replacement}`    | Uses `replacement` when `VAR` is set and non-empty          |
+| `${VAR+replacement}`     | Uses `replacement` when `VAR` is set                        |
+| `${VAR:?message}`        | Fails with `message` when `VAR` is unset or empty           |
+| `${VAR?message}`         | Fails with `message` when `VAR` is unset                    |
+| `$$`                     | Inserts a literal `$`                                       |
+
+Default, replacement, and error values can contain nested variable
+expressions.
 
 ```yaml
 workspace:
-  path: $HOME/src/myproject
+  path: ${WORKSPACE:-$HOME/src/myproject}
 
 secrets:
   my-token:
@@ -109,70 +132,78 @@ secrets:
 
 ## File reference
 
+The loader rejects unknown fields and unsupported schema versions.
+
 ### Top-level fields
 
 | Field                  | Type             | Required | Default                        | Description                                                                     |
 | ---------------------- | ---------------- | -------- | ------------------------------ | ------------------------------------------------------------------------------- |
-| `schemaVersion`        | string           | Yes      | —                              | Schema version. Currently `"1"`                                                 |
+| `schemaVersion`        | string           | Yes      | None                           | Schema version. The supported value is `"1"`                                   |
 | `name`                 | string           | No       | `<agent>-<workspace-basename>` | Sandbox name                                                                    |
-| `agent`                | string           | Yes      | —                              | Agent type, e.g. `claude`                                                       |
-| `workspace`            | string or object | No       | `.`                            | Workspace path or configuration; see [`workspace`](#workspace)                  |
-| `additionalWorkspaces` | list             | No       | —                              | Extra directories to mount; see [`additionalWorkspaces`](#additionalworkspaces) |
-| `kits`                 | list of strings  | No       | —                              | Kit references to install at sandbox creation                                   |
-| `env`                  | map              | No       | —                              | Environment variables to inject into the sandbox                                |
-| `sandboxOptions`       | object           | No       | —                              | Resource and image-pull settings; see [`sandboxOptions`](#sandboxoptions)       |
-| `secrets`              | map              | No       | —                              | Service credentials; see [`secrets`](#secrets)                                  |
-| `registries`           | map              | No       | —                              | Registry pull credentials; see [`registries`](#registries)                      |
-| `ports`                | list             | No       | —                              | Port mappings; see [`ports`](#ports)                                            |
+| `agent`                | string           | Yes      | None                           | Built-in agent or the name of an agent kit                                      |
+| `kits`                 | list of strings  | No       | None                           | Directory, ZIP, or OCI kit references to install at creation                    |
+| `workspace`            | string or object | No       | First file's directory         | Primary workspace. See [`workspace`](#workspace)                                |
+| `additionalWorkspaces` | list             | No       | None                           | Extra directories to mount. See [`additionalWorkspaces`](#additionalworkspaces) |
+| `env`                  | map of strings   | No       | None                           | Environment variables for the sandbox                                           |
+| `sandboxOptions`       | object           | No       | None                           | Creation options. See [`sandboxOptions`](#sandboxoptions)                        |
+| `secrets`              | map              | No       | None                           | Service credentials. See [`secrets`](#secrets)                                  |
+| `bindings`             | map              | No       | None                           | Credential injection approvals. See [`bindings`](#bindings)                     |
+| `registries`           | map              | No       | None                           | Registry pull credentials. See [`registries`](#registries)                      |
+| `mcp`                  | object           | No       | None                           | MCP servers. See [`mcp`](#mcp)                                                  |
+| `ports`                | list             | No       | None                           | Port mappings. See [`ports`](#ports)                                            |
 
 ### `workspace`
 
-When specified as a string, `workspace` is treated as the path. Use the
-object form to enable clone mode or when the file doesn't live next to the
-workspace:
+When specified as a string, `workspace` is the path. Use the object form for
+clone mode:
 
-| Field   | Type    | Default | Description                                                             |
-| ------- | ------- | ------- | ----------------------------------------------------------------------- |
-| `path`  | string  | `.`     | Path to the workspace directory                                         |
-| `clone` | boolean | `false` | Mount the workspace as a private clone, equivalent to `sbx run --clone` |
+| Field   | Type    | Default                | Description                                                             |
+| ------- | ------- | ---------------------- | ----------------------------------------------------------------------- |
+| `path`  | string  | First file's directory | Workspace directory. Relative paths resolve from the first file         |
+| `clone` | boolean | `false`                | Use a private clone, equivalent to `sbx create --clone`                  |
+
+You can override `workspace.clone` for one `create` or `run` invocation with
+`--clone` or `--clone=false`.
 
 ### `additionalWorkspaces`
 
-A list of extra directories to mount alongside the primary workspace:
+Each additional workspace is mounted after the primary workspace. Relative
+paths resolve from the directory of the first environment file.
 
-| Field      | Type    | Required | Description                   |
-| ---------- | ------- | -------- | ----------------------------- |
-| `path`     | string  | Yes      | Path to the directory         |
-| `readOnly` | boolean | No       | Mount the directory read-only |
+| Field      | Type    | Required | Default | Description                   |
+| ---------- | ------- | -------- | ------- | ----------------------------- |
+| `path`     | string  | Yes      | None    | Directory to mount            |
+| `readOnly` | boolean | No       | `false` | Mount the directory read-only |
 
 ### `sandboxOptions`
 
-| Field        | Type   | Default  | Description                                                     |
-| ------------ | ------ | -------- | --------------------------------------------------------------- |
-| `memory`     | string | —        | Memory limit, e.g. `8g`, `512m`                                 |
-| `cpus`       | number | —        | CPU limit                                                       |
-| `pullPolicy` | string | `always` | When to pull the sandbox image: `always`, `missing`, or `never` |
-| `template`   | string | —        | Custom sandbox template image                                   |
-| `profile`    | string | —        | Governance profile name                                         |
+| Field        | Type    | Default  | Description                                                     |
+| ------------ | ------- | -------- | --------------------------------------------------------------- |
+| `template`   | string  | None     | Custom sandbox template image                                   |
+| `memory`     | string  | None     | Memory limit, such as `8g` or `512m`                             |
+| `cpus`       | integer | `0`      | CPU limit. `0` selects the automatic value                       |
+| `pullPolicy` | string  | `always` | Image pull policy: `always`, `missing`, or `never`               |
+| `profile`    | string  | None     | Governance profile name                                         |
 
 ### `secrets`
 
-A map of secret names to secret sources. Each secret is provisioned when the
-environment is created, scoped to the sandbox. `sbx env rm` removes all
-secrets in this map.
+`secrets` maps service names to secret sources. Each entry must set exactly one
+of `value`, `ref`, or `command`. The secret is stored at the sandbox scope when
+the environment is created.
 
-| Field     | Description                                                                                      |
-| --------- | ------------------------------------------------------------------------------------------------ |
-| `ref`     | A vault URI, e.g. `op://Vault/Item/field` (1Password). Resolved from the vault at creation time. |
-| `command` | A shell command whose stdout becomes the secret value.                                           |
-| `value`   | A plaintext secret value.                                                                        |
-| `refresh` | Re-fetch interval for `ref`-based secrets, e.g. `55m`.                                           |
+| Field      | Type    | Default | Description                                                                  |
+| ---------- | ------- | ------- | ---------------------------------------------------------------------------- |
+| `value`    | string  | None    | Literal secret value                                                         |
+| `ref`      | string  | None    | Vault URI, such as `op://Vault/Item/field`                                    |
+| `command`  | string  | None    | Host shell command whose standard output becomes the secret                   |
+| `refresh`  | string  | None    | Resolution policy for `ref` or `command`, such as `on-demand` or `55m`        |
+| `backend`  | string  | Automatic | Resolver for `ref`: `sdk` or `cli`                                          |
+| `noVerify` | boolean | `false` | Skip resolving a `ref` or `command` once when provisioning the secret         |
 
 > [!WARNING]
-> Avoid setting real credentials as a plaintext `value`. The plaintext is visible to
-> anyone with read access to the file. Use `ref` (vault URI) or `command`
-> to source the value at runtime, or use variable interpolation to read it
-> from the environment: `value: ${MY_TOKEN}`.
+> A literal `value` is visible to anyone with read access to the file. Use a
+> vault URI with `ref`, obtain the value at runtime with `command`, or use
+> variable interpolation such as `value: ${MY_TOKEN}`.
 
 ```yaml
 secrets:
@@ -183,13 +214,32 @@ secrets:
     command: gh auth token
 ```
 
+### `bindings`
+
+`bindings` approves credential injection domains for each service. The
+environment merges these approvals into the user's global
+`credentials.yaml`. Each service can contain an `apiKey` block, an `oauth`
+block, or both. Each block contains a `domains` list:
+
+```yaml
+bindings:
+  github:
+    apiKey:
+      domains:
+        - api.github.com
+```
+
+`sbx env rm` preserves global bindings by default. Pass `--prune-bindings` to
+remove every service binding declared by the environment file.
+
 ### `registries`
 
-A map of registry hostnames to pull credentials. Each entry requires
-`secret` and accepts an optional `username`. Both fields use the same secret
-source forms as [`secrets`](#secrets) (`ref`, `command`, or `value`).
-Omitting `username` stores the credential as token-only, which registries
-like GHCR and GitLab accept.
+`registries` maps registry hostnames to pull credentials. Each entry requires
+`secret` and accepts an optional `username`. Both fields accept a secret source
+with exactly one of `value`, `ref`, or `command`.
+
+When `username` is omitted, `sbx` stores a token-only credential. Registries
+such as GHCR and GitLab accept token-only credentials.
 
 ```yaml
 registries:
@@ -198,12 +248,33 @@ registries:
       command: gh auth token
 ```
 
+### `mcp`
+
+The `mcp.servers` list registers MCP servers on the host and adds them to the
+sandbox. This field requires the hosted MCP control plane through
+`SBX_MCP_URL`. MCP registrations are host-global and remain after
+`sbx env rm`.
+
+| Field     | Type            | Required | Default | Description                                                     |
+| --------- | --------------- | -------- | ------- | --------------------------------------------------------------- |
+| `name`    | string          | Yes      | None    | Server name                                                     |
+| `url`     | string          | No       | None    | Remote server URL, registry reference, or OCI reference          |
+| `command` | string          | No       | None    | Command for a local stdio server                                 |
+| `args`    | list of strings | No       | None    | Arguments passed to `command`                                   |
+
+Each server must set exactly one of `url` or `command`.
+
 ### `ports`
 
-A list of port mappings between the sandbox and the host:
+`ports` publishes sandbox ports when the environment is created. Ports exposed
+by a kit but omitted from this list receive an ephemeral host port.
 
-| Field      | Type    | Required | Default | Description                                                        |
-| ---------- | ------- | -------- | ------- | ------------------------------------------------------------------ |
-| `sandbox`  | integer | Yes      | —       | Port number inside the sandbox                                     |
-| `host`     | integer | No       | —       | Port number on the host. Omit to expose without a fixed host port. |
-| `protocol` | string  | No       | `tcp`   | Protocol: `tcp` or `udp`                                           |
+| Field      | Type    | Required | Default          | Description                                                           |
+| ---------- | ------- | -------- | ---------------- | --------------------------------------------------------------------- |
+| `sandbox`  | integer | Yes      | None             | Sandbox port from 1 through 65535                                     |
+| `host`     | integer | No       | Ephemeral        | Host port from 1 through 65535                                        |
+| `protocol` | string  | No       | `tcp`            | `tcp`, `tcp4`, `tcp6`, `udp`, `udp4`, or `udp6`                       |
+| `hostIP`   | string  | No       | Loopback         | Host interface. The default uses available IPv4 and IPv6 loopback     |
+
+If a port can't be published, sandbox creation fails and removes the new
+sandbox.
