@@ -5,8 +5,8 @@ title: Visualizing your PostgreSQL databases with pgAdmin
 linktitle: Visualizing your PostgreSQL databases with pgAdmin
 summary: |
   Explore how to add pgAdmin to your development stack and make it as easy as possible for your teammates to navigate through your PostgreSQL databases.
-tags: [databases]
 params:
+  tags: [databases]
   time: 10 minutes
 ---
 

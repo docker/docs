@@ -2,7 +2,7 @@
 title: Manage license assignment
 linkTitle: License assignment
 description: Manage product licenses for your organization, including assignment, revocation, and automatic assignment.
-keywords: licenses, organization, members, Docker Core, Docker Offload, AI governance, license assignment, admin console
+keywords: licenses, organization, members, Docker Core, Docker Offload, AI governance, license assignment, docker home
 weight: 30
 ---
 
@@ -38,7 +38,7 @@ Automatic license assignment gives members a product license when they use a sup
 
 AI Governance licenses include single sign-on (SSO) and provisioning features regardless of your Docker Core subscription. Automatic license assignment requires [setting up SSO](/manuals/enterprise/security/single-sign-on/connect.md), then [provisioning](/manuals/enterprise/security/provisioning/_index.md) with System for Cross-domain Identity Management (SCIM) or Just-in-Time (JIT).
 
-## What's next
+## Next steps
 
 See these docs to explore Docker Core add-ons, or products that need licenses:
 

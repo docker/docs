@@ -13,7 +13,7 @@ options:
     - name: cpus
       default_value: "0"
       usage: |
-        Number of CPUs to allocate to the sandbox (0 = auto: N-1 host CPUs, min 1)
+        Number of CPUs to allocate to the sandbox (0 = auto: all host CPUs)
     - name: help
       shorthand: h
       default_value: "false"

@@ -7,8 +7,10 @@ summary: >
   Scan a Docker Hardened Image with and without VEX and audit every suppression
   and its justification.
 keywords: vex, openvex, not_affected, under_investigation, affected, cve, docker scout, dhi, vulnerability
-tags: [dhi]
+weight: 1
 params:
+  tags: [security]
+  featured: true
   proficiencyLevel: Intermediate
   time: 25 minutes
 ---
@@ -280,7 +282,7 @@ The justification codes have precise meanings:
   that addresses the CVE in this image.
 
 For the full list of justification codes, see [VEX status
-reference](/manuals/dhi/core-concepts/vex.md#not_affected-justification-codes).
+reference](/manuals/dhi/explore/security-concepts/vex.md#not_affected-justification-codes).
 
 Every suppression is documented, auditable, and verifiable with any VEX-enabled
 scanner.
@@ -355,7 +357,7 @@ $ curl -s https://raw.githubusercontent.com/docker-hardened-images/advisories/ma
 ```
 
 For status definitions and justification codes, see the [VEX status
-reference](/manuals/dhi/core-concepts/vex.md#vex-status-reference).
+reference](/manuals/dhi/explore/security-concepts/vex.md#vex-status-reference).
 
 ## What's next
 
@@ -367,7 +369,7 @@ reference](/manuals/dhi/core-concepts/vex.md#vex-status-reference).
   VEX](/manuals/scout/how-tos/create-exceptions-vex.md).
 - VEX status reference: For status definitions, justification codes, and
   why DHI does not use `fixed`, see [Vulnerability Exploitability eXchange
-  (VEX)](/manuals/dhi/core-concepts/vex.md#vex-status-reference).
+  (VEX)](/manuals/dhi/explore/security-concepts/vex.md#vex-status-reference).
 - Browse the VEX feed directly: The raw VEX data is published at
   [github.com/docker-hardened-images/advisories](https://github.com/docker-hardened-images/advisories/tree/main/vex),
   organized by image name.

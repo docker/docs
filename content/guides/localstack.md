@@ -6,9 +6,8 @@ linktitle: AWS development with LocalStack
 summary: |
   This guide explains how to use Docker to run LocalStack, a local AWS cloud
   stack emulator.
-tags: [cloud-services]
-languages: [js]
 params:
+  tags: [databases]
   time: 20 minutes
 ---
 

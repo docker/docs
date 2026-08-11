@@ -48,6 +48,11 @@ $ docker run --rm \
              hello-world
 ```
 
+The Docker CLI resolves a relative profile path from the working directory
+where you invoke `docker`. The CLI reads the profile and sends its contents to
+the daemon, so the profile must be available on the client host when the client
+and daemon run on separate hosts.
+
 ### Significant syscalls blocked by the default profile
 
 Docker's default seccomp profile is an allowlist which specifies the calls that

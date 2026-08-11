@@ -45,7 +45,7 @@ Configure startup behavior, UI appearance, terminal preferences, and feature def
 | **Use the WSL 2 based engine** | WSL 2 provides better performance than the Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](/manuals/desktop/features/wsl/_index.md). | Disabled | Windows | |
 | **Add \*.docker.internal to host file**                | Adds internal DNS entries.                                  | Enabled                   | Windows                        | Helps resolve Docker-internal domains |
 | **Choose Virtual Machine Manager (VMM)**              | Choose the VMM for creating and managing the Docker Desktop Linux VM. For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md). | | Mac | Select **Docker VMM** for the latest and most performant Hypervisor/Virtual Machine Manager. This option is available only on Apple Silicon Macs and is in Beta.|
-| **Choose file sharing implementation for your containers** | Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs (Legacy)** | **VirtioFS** | Mac | Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206). It is the only file sharing implementation supported by Docker VMM. |
+| **Choose file sharing implementation for your containers** | Choose whether you want to share files using **VirtioFS**, or **gRPC FUSE** | **VirtioFS** | Mac | Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206). It is the only file sharing implementation supported by Docker VMM. |
 |**Use Rosetta for x86_64/amd64 emulation on Apple Silicon** | Accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have selected **Apple Virtualization framework** as the Virtual Machine Manager. | Disabled | Mac | |
 | **Send usage statistics** | Send diagnostics, crash reports, and usage data to Docker to improve and troubleshoot the application. Docker may periodically prompt you for more information. | Enabled | All | |
 | **Use Enhanced Container Isolation** | Prevent containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md). | Disabled | All | Must be signed in and have a Docker Business subscription. |
@@ -123,7 +123,7 @@ To prevent developers from accidentally changing the proxy settings, see
 
 #### Docker Desktop proxy
 
-Used for signing in to Docker, pulling and pushing images, fetching artifacts during image builds, and reporting error diagnostics.
+Used for Docker Desktop host-level traffic: signing in to Docker, the Desktop application, CLI, and extensions. Acts as a fallback for `docker image pull` only when [Containers proxy](#containers-proxy) is not configured.
 
 | Proxy mode | Description |
 |------------|-------------|
@@ -137,7 +137,7 @@ Used for signing in to Docker, pulling and pushing images, fetching artifacts du
 
 #### Containers proxy
 
-Used for outbound traffic from running containers.
+Used for `docker image pull` (always enforced - all `docker pull` and Compose pull operations go through this proxy) and for outbound traffic from running containers when air-gapped container enforcement is configured. If a PAC file is configured here, ensure it returns an appropriate proxy server for Docker registry endpoints, or image pulls will fail.
 
 | Proxy mode | Description |
 |------------|-------------|
@@ -345,5 +345,5 @@ Enable Docker Offload and configure idle timeout and GPU support for cloud-based
 | Setting             | Description                               | Notes                                 |
 | ------------------- | ----------------------------------------- | ------------------------------------- |
 | **Enable Docker Offload** | Run your containers in the cloud.  | Requires sign-in and an Offload subscription |
-| **Idle timeout** | Set the duration of time between no activity and Docker Offload entering idle mode. For details about idle timeout, see [Active and idle states](../../offload/configuration.md#understand-active-and-idle-states). | |
+| **Idle timeout** | Set the duration of time between no activity and Docker Offload entering idle mode. For details about idle timeout, see [Session management and idle state](/manuals/offload/about.md#session-management-and-idle-state). | |
 | **Enable GPU support** | Let your workloads use cloud GPU if available. | |

@@ -5,7 +5,7 @@ summary: |
   Learn how to automate Docker image build and push using Azure Pipelines.
 keywords: azure pipelines, azure devops, ci/cd, docker hub, build and push, automation
 params:
-  tags: [devops]
+  tags: [cicd]
   time: 10 minutes
 ---
 
@@ -308,5 +308,5 @@ With this Azure Pipelines CI setup, you get:
 
 - [Azure Pipelines Documentation](https://learn.microsoft.com/en-us/azure/devops/pipelines/?view=azure-devops): Comprehensive guide to configuring and managing CI/CD pipelines in Azure DevOps.
 - [Docker Task for Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/build/docker): Detailed reference for using the Docker task in Azure Pipelines to build and push images.
-- [Docker Buildx Bake](/manuals/build/bake/_index.md): Explore Docker's advanced build tool for complex, multi-stage, and multi-platform build setups. See also the [Mastering Buildx Bake Guide](/guides/bake/index.md) for practical examples and best practices.
+- [Docker Buildx Bake](/manuals/build/bake/_index.md): Explore Docker's advanced build tool for complex, multi-stage, and multi-platform build setups. See also the [Mastering Buildx Bake Guide](/guides/bake/) for practical examples and best practices.
 - [Docker Build Cloud](/guides/docker-build-cloud/_index.md): Learn about Docker's managed build service for faster, scalable, and multi-platform image builds in the cloud.

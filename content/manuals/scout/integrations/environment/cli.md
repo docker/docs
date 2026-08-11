@@ -98,7 +98,6 @@ stages:
         pool:
           vmImage: ubuntu-latest
         steps:
-          - task: Docker@2
           - script: docker run -it \
               -e DOCKER_SCOUT_HUB_USER=$DOCKER_SCOUT_HUB_USER \
               -e DOCKER_SCOUT_HUB_PASSWORD=$DOCKER_SCOUT_HUB_PASSWORD \

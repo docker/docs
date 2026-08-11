@@ -32,6 +32,10 @@ grid:
   description: Explore usage limits and how to better utilize Docker Hub.
   icon: chart-bar
   link: /docker-hub/usage/
+- title: MCP server
+  description: Use the Docker Hub MCP server to access image metadata and manage repositories with AI agents.
+  icon: server-stack
+  link: /docker-hub/mcp-server/
 - title: Release notes
   description: Find out about new features, improvements, and bug fixes.
   icon: document-plus
@@ -56,7 +60,8 @@ Key features of Docker Hub:
 * Trusted content featuring high-quality, secure images
 
 In addition to the graphical interface, you can interact with Docker Hub using
-the [Docker Hub API](../../reference/api/hub/latest.md) or experimental [Docker
-Hub CLI tool](https://github.com/docker/hub-tool#readme).
+the [Docker Hub API](../../reference/api/hub/latest.md), the experimental [Docker
+Hub CLI tool](https://github.com/docker/hub-tool#readme), or the [Docker Hub
+MCP server](/docker-hub/mcp-server/) for AI agent integrations.
 
 {{< grid >}}

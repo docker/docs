@@ -38,12 +38,6 @@ $ sbx secret set -g openrouter
 You only need to configure the providers you want to use. Docker Agent detects
 available credentials and routes requests to the appropriate provider.
 
-Alternatively, export the environment variables (`OPENAI_API_KEY`,
-`ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`, `XAI_API_KEY`, `NEBIUS_API_KEY`,
-`MISTRAL_API_KEY`, `OPENROUTER_API_KEY`) in your shell before running the
-sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
-
 ## Configuration
 
 Sandboxes don't pick up user-level configuration from your host. Only

@@ -22,16 +22,14 @@ value never enters the sandbox — the agent sees only a sentinel like
 `proxy-managed`.
 
 There are several ways to provide that value. When more than one source has a
-value for the same service, the stored secret takes precedence over a host
-environment variable.
+value for the same service, the stored secret takes precedence.
 
-| Form | What it is | Use it when |
-| ---- | ---------- | ----------- |
-| [Stored secrets](#stored-secrets) (`sbx secret set`) | A value in your OS keychain, keyed by service | The default for any built-in or kit-declared service |
-| [Custom secrets](#custom-secrets) (`sbx secret set-custom`) | A value keyed to a domain and environment variable | The service model doesn't fit — the agent validates the variable's format, or the secret rides in a request body |
-| [Environment variables](#environment-variables) | Read from your shell session | One-off testing or CI, where keychain storage isn't worth it |
-| OAuth | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, or Cursor |
-| [Registry credentials](#registry-credentials) (`sbx secret set --registry`) | Authentication for pulling images and kits | Pulling templates or kits from a private registry |
+| Form                                                                        | What it is                                                   | Use it when                                                                                                      |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| [Stored secrets](#stored-secrets) (`sbx secret set`)                        | A value in your OS keychain, keyed by service                | The default for any built-in or kit-declared service                                                             |
+| [Custom secrets](#custom-secrets) (`sbx secret set-custom`)                 | A value keyed to a domain and environment variable           | The service model doesn't fit — the agent validates the variable's format, or the secret rides in a request body |
+| OAuth                                                                       | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, Cursor, or Droid                                              |
+| [Registry credentials](#registry-credentials) (`sbx secret set --registry`) | Authentication for pulling images and kits                   | Pulling templates or kits from a private registry                                                                |
 
 For multi-provider agents (OpenCode, Docker Agent), the proxy selects
 credentials based on the API endpoint being called. See individual
@@ -93,32 +91,56 @@ $ sbx secret set my-sandbox openai
 > you set or change a global secret while a sandbox is running, recreate the
 > sandbox for the new value to take effect.
 
-You can also pipe in a value for non-interactive use:
+### Import from environment variables
+
+If you already have API keys set in your shell, `sbx secret import` reads them
+and stores them in the keychain without typing each value manually:
 
 ```console
-$ echo "$ANTHROPIC_API_KEY" | sbx secret set -g anthropic
+$ sbx secret import
 ```
+
+This scans your current session for the environment variables in the
+[built-in services table](#built-in-services) below and prompts you to confirm
+each one before writing. To import a single service:
+
+```console
+$ sbx secret import openai
+```
+
+Pass `--all` to import everything without prompting (new entries only; existing
+entries are left unchanged), or `--force` to overwrite existing entries:
+
+```console
+$ sbx secret import --all
+$ sbx secret import openai --force
+```
+
+Pass `--dry-run` to preview what would be imported without writing anything.
+Run `sbx secret ls` afterwards to confirm what's stored. For setting up
+credentials in CI, see [CI and headless use](../workflows.md#ci-and-headless-use).
 
 ### Built-in services
 
-Each built-in service name maps to a set of environment variables the proxy
-checks and the API domains it authenticates requests to:
+Each built-in service name maps to the environment variables `sbx secret import`
+reads and the API domains the proxy injects credentials into:
 
-| Service     | Environment variables              | API domains                         |
-| ----------- | ---------------------------------- | ----------------------------------- |
-| `anthropic` | `ANTHROPIC_API_KEY`                | `api.anthropic.com`                 |
-| `aws`       | `AWS_ACCESS_KEY_ID`                | AWS Bedrock endpoints               |
-| `github`    | `GH_TOKEN`, `GITHUB_TOKEN`         | `api.github.com`, `github.com`      |
-| `google`    | `GEMINI_API_KEY`, `GOOGLE_API_KEY` | `generativelanguage.googleapis.com` |
-| `groq`      | `GROQ_API_KEY`                     | `api.groq.com`                      |
-| `mistral`   | `MISTRAL_API_KEY`                  | `api.mistral.ai`                    |
-| `nebius`    | `NEBIUS_API_KEY`                   | `api.studio.nebius.ai`              |
-| `openai`    | `OPENAI_API_KEY`                   | `api.openai.com`                    |
-| `xai`       | `XAI_API_KEY`                      | `api.x.ai`                          |
+| Service      | Environment variables              | API domains                                                                                                                   |
+| ------------ | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `anthropic`  | `ANTHROPIC_API_KEY`                | `api.anthropic.com`, `console.anthropic.com`, `claude.ai`, `mcp-proxy.anthropic.com`                                          |
+| `cursor`     | `CURSOR_API_KEY`                   | `api2.cursor.sh`, `api3.cursor.sh`, `repo42.cursor.sh`, `cursor.com`                                                          |
+| `droid`      | `FACTORY_API_KEY`                  | `api.factory.ai`, `app.factory.ai`, `relay.factory.ai`                                                                        |
+| `github`     | `GH_TOKEN`, `GITHUB_TOKEN`         | `api.github.com`, `github.com`, `raw.githubusercontent.com`, `gist.github.com`, `copilot.github.com`, `api.githubcopilot.com` |
+| `google`     | `GEMINI_API_KEY`, `GOOGLE_API_KEY` | `generativelanguage.googleapis.com`, `oauth2.googleapis.com`, `aiplatform.googleapis.com`, `vertexai.googleapis.com`          |
+| `groq`       | `GROQ_API_KEY`                     | `api.groq.com`                                                                                                                |
+| `mistral`    | `MISTRAL_API_KEY`                  | `api.mistral.ai`                                                                                                              |
+| `nebius`     | `NEBIUS_API_KEY`                   | `api.studio.nebius.com`, `api.tokenfactory.nebius.com`                                                                        |
+| `openai`     | `OPENAI_API_KEY`                   | `api.openai.com`, `openai.com`, `chatgpt.com`, `www.chatgpt.com`                                                              |
+| `openrouter` | `OPENROUTER_API_KEY`               | `openrouter.ai`                                                                                                               |
+| `xai`        | `XAI_API_KEY`                      | `api.x.ai`                                                                                                                    |
 
-When you store a secret with `sbx secret set -g <service>`, the proxy uses it
-the same way it would use the corresponding environment variable. You don't
-need to set both.
+When you store a secret with `sbx secret set -g <service>`, the proxy injects
+it into requests to the listed API domains.
 
 ### Services declared by kits
 
@@ -234,38 +256,17 @@ proxy replaces it with the real value. The agent never sees the real secret.
 Prefer the [service-based flow](#stored-secrets) whenever it's an option —
 the kit handles the wiring; you only provide the value.
 
-## Environment variables
-
-As an alternative to stored secrets, export the relevant environment variable
-in your shell before running a sandbox:
-
-```console
-$ export ANTHROPIC_API_KEY=sk-ant-api03-xxxxx
-$ sbx run claude
-```
-
-The proxy reads the variable from your terminal session. See individual
-[agent pages](../agents/) for the variable names each agent expects.
-
-> [!NOTE]
-> These environment variables are set on your host, not inside the sandbox.
-> Sandbox agents are pre-configured to use credentials managed by the
-> host-side proxy. For custom environment variables not tied to a
-> [built-in service](#built-in-services), see
-> [Setting custom environment variables](../faq.md#how-do-i-set-custom-environment-variables-inside-a-sandbox).
-
 ## Registry credentials
 
 Registry credentials authenticate to private OCI registries when pulling
 [templates](../customize/templates.md) or [kits](../customize/kits.md), and can
-also let the agent pull and push images from inside the sandbox. Use
-`sbx secret set --registry <host>` to store them. For Docker Hub, `sbx` reuses
-your `sbx login` session — no registry secret needed. For other registries
-(GitHub Container Registry, ECR, ACR, self-hosted Nexus, and so on), store
-credentials with `sbx secret set --registry`.
+also let the agent pull and push images from inside the sandbox through the
+host-side proxy. Use `sbx secret set --registry <host>` to store them. For
+Docker Hub, `sbx` reuses your `sbx login` session — no registry secret needed.
+For other registries (GitHub Container Registry, ECR, ACR, self-hosted Nexus,
+and so on), store credentials with `sbx secret set --registry`.
 
-The scope you store a credential at controls where it's used — and whether its
-value enters the sandbox. The scope comes from how you target `sbx secret set`:
+Choose the scope by adding `-g`, adding a sandbox name, or passing neither:
 
 ```text
 sbx secret set [-g | SANDBOX] --registry HOST
@@ -274,17 +275,12 @@ sbx secret set [-g | SANDBOX] --registry HOST
 - **Host-only** (no `-g`, no `SANDBOX`): the `sbx` CLI uses it to pull templates
   and kits when creating a sandbox. The credential stays on the host and is
   never available inside the sandbox.
-- **Global** (`-g`): same as host-only, plus written into
-  `~/.docker/config.json` in every new sandbox so the agent can pull and push
-  images. The value lives inside the VM, where the agent can read it, so it's
-  less isolated than the proxy-injected service credentials above. Use it when
-  agents build and publish container images.
-- **Sandbox-scoped** (`SANDBOX`): same in-sandbox behavior as global, but only
-  for the named sandbox. Use it when only one sandbox needs registry access.
-
-> [!NOTE]
-> Registry credentials are written into a sandbox at creation time. Recreate an
-> existing sandbox to pick up credentials added after it was created.
+- **Global** (`-g`): same as host-only, plus the host-side proxy authenticates
+  registry login requests from sandboxes. The credential stays on the host and
+  is never written to the sandbox filesystem. Use it when agents build and
+  publish container images.
+- **Sandbox-scoped** (`SANDBOX`): same proxy behavior as global, but only for the
+  named sandbox. Use it when only one sandbox needs registry access.
 
 ### Store registry credentials
 
@@ -304,19 +300,21 @@ $ echo "$ACR_PASSWORD" | sbx secret set \
     --password-stdin
 ```
 
-Add `-g` to store the credential globally, before you create the sandbox:
+Add `-g` to store the credential globally for sandbox registry operations:
 
 ```console
 $ gh auth token | sbx secret set -g --registry ghcr.io --password-stdin
-$ sbx run claude                      # created with the credential in place
+$ sbx run claude
 ```
 
-To scope the credential to a single sandbox, store it under that sandbox's name
-and create the sandbox with the same name:
+Store global registry credentials before creating a sandbox. Existing sandboxes
+don't pick up global registry credentials added later. To add registry access to
+an existing sandbox, use a sandbox-scoped credential instead.
+
+To scope the credential to a single sandbox, store it under that sandbox's name:
 
 ```console
 $ gh auth token | sbx secret set my-app --registry ghcr.io --password-stdin
-$ sbx run claude --name my-app
 ```
 
 `sbx kit pull` also uses these credentials, with the Docker credential
@@ -346,24 +344,24 @@ $ sbx secret rm my-sandbox --registry ghcr.io -f
 
 ## Best practices
 
-- Use [stored secrets](#stored-secrets) over environment variables. Stored
-  secrets are encrypted at rest in the OS keychain (or an encrypted file on
-  Linux hosts without a keychain), while environment variables are plaintext in
-  your shell. See [Where secrets are stored](#where-secrets-are-stored).
+- Use [stored secrets](#stored-secrets) to provide credentials. They are
+  encrypted at rest in the OS keychain (or an encrypted file on Linux hosts
+  without a keychain). See [Where secrets are stored](#where-secrets-are-stored).
 - Don't set API keys manually inside the sandbox. Sandbox agents are
   pre-configured to use proxy-managed credentials.
-- Registry credentials you make available inside a sandbox are stored in the VM
-  (`~/.docker/config.json`), where the agent can read them — unlike
-  proxy-injected service credentials, which never enter the sandbox. Reserve
-  them for sandboxes that need registry access, and prefer sandbox scope over
-  global (`-g`) to limit exposure.
-- For Claude Code and Codex, OAuth is another secure option: the flow runs on
-  the host, so the token is never exposed inside the sandbox. If you haven't
-  stored a credential, both agents prompt you to authenticate before the
-  sandbox launches — Codex prompts on the host from `sbx run codex`, and Claude
-  Code prompts inside the agent. To authenticate ahead of time, run
-  `sbx secret set -g openai --oauth` for Codex, or use `/login` inside Claude
-  Code.
+- Registry credentials stay on the host and are injected by the proxy when a
+  sandbox authenticates to the registry. Reserve them for sandboxes that need
+  registry access, and prefer sandbox scope over global (`-g`) to limit
+  exposure.
+- Several agents support OAuth as another secure option: the flow runs on the
+  host, so the token is never exposed inside the sandbox. If you haven't stored
+  a credential, the agent prompts you to authenticate — Codex prompts on the
+  host from `sbx run codex`, while Claude Code, Cursor, and Droid prompt
+  interactively inside the sandbox. To authenticate ahead of time, run
+  `sbx secret set -g openai --oauth` for Codex or use `/login` inside Claude
+  Code; Cursor and Droid have no ahead-of-time option, so their sign-in prompt
+  appears when the agent starts. See the individual [agent pages](../agents/)
+  for each agent's flow.
 - If you store credentials in 1Password, see
   [Sourcing credentials from 1Password](../workflows.md#sourcing-credentials-from-1password)
   for how to use `op read` and `op run` with `sbx`.

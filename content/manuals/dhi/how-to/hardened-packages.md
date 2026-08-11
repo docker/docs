@@ -21,6 +21,16 @@ Access to hardened packages varies by subscription:
   the enterprise package repository directly in your own images for full access
   to compliance and security-patched packages.
 
+To browse the packages currently available in Docker's public hardened package
+repositories, see the following indexes:
+
+- [Debian package index](https://dhi.io/deb/debian/main/index.html)
+- [Alpine package index](https://dhi.io/apk/alpine/v3.24/main/index.html)
+
+Docker is constantly adding new hardened packages. If a package you need isn't
+available yet, you can [request it in the DHI catalog
+repository](https://github.com/docker-hardened-images/catalog/issues).
+
 ## Built-in packages
 
 Supported distributions of Docker Hardened Images (DHI) automatically include

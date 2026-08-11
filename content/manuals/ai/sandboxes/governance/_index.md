@@ -9,15 +9,16 @@ Sandbox governance covers the policy system that controls what sandboxes can
 access over the network and on the filesystem. It operates at two layers, and
 only one applies at a time:
 
-**Local policy** is configured per machine using the `sbx policy` CLI. It
-lets individual developers customize which domains their sandboxes can reach.
-See [Local policy](local.md).
+**Local policy** is configured per machine using the `sbx policy` CLI. It lets
+individual developers customize which domains their sandboxes can reach. See
+[Local policy](local.md).
 
 **Organization policy** is configured centrally in the Docker Admin Console or
-via the [Governance API](/reference/api/ai-governance/). Rules defined at the org level apply
-uniformly across every sandbox in the organization. When organization
-governance is active, it replaces local policy entirely: local `sbx policy`
-rules are no longer evaluated. See [Organization policy](org.md).
+via the [Governance API](/reference/api/ai-governance/). Rules defined at the
+org level apply uniformly across every sandbox in the organization. When
+organization governance is active, it replaces local policy entirely: local
+`sbx policy` rules are no longer evaluated. See
+[Organization policy](org.md).
 
 Alongside this access-control policy, admins can require developers to sign in
 as members of their organization before using sandboxes at all.
@@ -32,17 +33,17 @@ personal account.
 
 ## Learn more
 
-- [Policy concepts](concepts.md): resource model, rule syntax, evaluation,
-  and precedence
+- [Policy concepts](concepts.md): resource model, rule syntax, evaluation, and
+  precedence
 - [Local policy](local.md): configure network and filesystem rules on your
   machine with the `sbx policy` CLI
-- [Organization policy](org.md): centrally manage sandbox policies across
-  your organization from the Admin Console
+- [Organization policy](org.md): centrally manage sandbox policies across your
+  organization from the Admin Console
 - [Sign-in enforcement](sign-in-enforcement.md): require developers to sign in
   as organization members, enforced through endpoint management
-- [Monitoring](monitoring.md): inspect active rules and monitor sandbox
-  network traffic with `sbx policy ls` and `sbx policy log`
-- [Audit logs](audit.md): capture a durable, structured record of every
-  policy decision for SIEM ingestion and compliance
+- [Monitoring](monitoring.md): inspect active rules and monitor sandbox network
+  traffic with `sbx policy ls` and `sbx policy log`
+- [Audit logs](audit/): view, configure, export, and collect governance audit
+  records
 - [API reference](/reference/api/ai-governance/): manage org policies
   programmatically via the Governance API

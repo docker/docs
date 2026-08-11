@@ -13,13 +13,18 @@ aliases:
   - /subscription/gordon/
 ---
 
-[Gordon](/manuals/ai/gordon/_index.md) is an AI assistant for Docker workflows. Gordon Base is included at no cost with Docker Personal and Docker Pro plans. Gordon Plus, Max, and Ultra increase your monthly usage allowance and are available as self-serve in the billing portal. 
+[Gordon](/manuals/ai/gordon/_index.md) is an AI assistant for Docker workflows. For pricing details, see the [Gordon product page](https://www.docker.com/products/gordon/).
 
-To upgrade to a Gordon paid plan, see [Manage plans](/manuals/subscription/manage.md). 
+- Gordon Base is included at no cost with Docker plans. It covers everyday Docker workflow questions with a baseline monthly usage allowance.
+- Gordon Plus is for developers who use Gordon regularly. It increases your monthly usage allowance above Base.
+- Gordon Max is for power users who rely on Gordon throughout their workflow. It offers a significantly higher usage allowance than Plus.
+- Gordon Ultra is for developers with the highest usage needs. It provides the maximum monthly allowance available on a self-serve plan.
+
+To upgrade to a Gordon paid plan, see [Manage plans](/manuals/subscription/manage.md).
 
 ## Usage
 
-Gordon usage is measured in questions. When you upgrade from Gordon Base to a paid plan, your usage multiplies the Base allowance. Usage is tracked per calendar month and resets at the start of each new month. For full limit details, see [Gordon usage limits](/manuals/ai/gordon/usage-limits.md).
+Gordon usage is measured in questions. When you upgrade from Gordon Base to a paid plan, your usage multiplies the Base allowance. Usage is capped across three time windows: 4-hour, daily, and monthly. For full limit details, see [Gordon usage limits](/manuals/ai/gordon/usage-limits.md).
 
 > [!IMPORTANT]
 > Gordon plans apply to personal Docker accounts only. If you purchase a Gordon

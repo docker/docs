@@ -1,3 +1,6 @@
+AI Governance Audit Logs:
+  subscription: [AI Governance]
+  requires: Docker Sandboxes [0.35.0](/manuals/ai/sandboxes/release-notes.md) or later
 Activity logs:
   subscription: [Team, Business]
   for: Administrators
@@ -111,6 +114,8 @@ Compose label file:
   requires: Docker Compose [2.32.2](https://github.com/docker/compose/releases/tag/v2.32.2) and later
 Compose lifecycle hooks:
   requires: Docker Compose [2.30.0](https://github.com/docker/compose/releases/tag/v2.30.0) and later
+Compose pre_start:
+  requires: Docker Compose [5.3.0](https://github.com/docker/compose/releases/tag/v5.3.0) and later
 Compose mac address:
   requires: Docker Compose [2.23.2](https://github.com/docker/compose/releases/tag/v2.23.2) and later
 Compose menu:
@@ -185,6 +190,9 @@ Docker Projects:
   availability: Beta
 Docker Sandboxes sbx:
   availability: Early Access
+Docker Sandboxes SSH:
+  availability: GA
+  requires: Docker Sandboxes 0.37.0 or later
 Docker Sandboxes:
   availability: Experimental
   requires: Docker Desktop [4.58](/manuals/desktop/release-notes.md#4580) or later
@@ -201,6 +209,9 @@ Docker Scout health scores:
   availability: Beta
 Docker Scout Mount Permissions:
   requires: Docker Desktop [4.34.0](/manuals/desktop/release-notes.md#4340) and later
+OIDC connections:
+  subscription: [Team, Business]
+  for: Administrators
 Domain management:
   subscription: [Business]
   for: Administrators
@@ -238,6 +249,8 @@ Jamf Pro:
   for: Administrators
 Load by default:
   requires: Docker Buildx [0.14.0](https://github.com/docker/buildx/releases/tag/v0.14.0) and later
+Evaluate policies:
+  availability: Experimental
 MSI installer:
   subscription: [Business]
   for: Administrators

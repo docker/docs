@@ -21,30 +21,17 @@ aliases:
 ---
 
 Docker plans refer to plans that upgrade your account type from the basic free plan to a paid plan. Paid Docker plans come with higher usage limits, commercial
-licensing, and expanded feature sets. Upgrades to paid Docker plans are available for personal accounts
-and organization accounts.
+licensing, and expanded feature sets.
 
-> [!TIP]
-> To upgrade your free Docker plan in the billing portal, see [Manage plans](../manage.md).
+- Docker Personal is free for individual developers. Docker Pro adds unlimited private repositories, Docker Build Cloud, and commercial Docker Desktop use.
+- Docker Team and Docker Business are plans for organizations, with Team adding audit logs and role-based access control, and Business adding SSO, SCIM, hardened Docker Desktop, and image access management.
+
+To upgrade your free Docker plan in the billing portal, see [Manage plans](../manage.md).
 
 ## Usage
 
-Docker Personal and Docker Pro are Docker plans for individual account types while Docker Team and Docker Business are Docker plans for organization account types.
-
-This table summarizes usage limits and feature sets available with each Docker plan:
-
-| Feature                            | Personal   | Pro        | Team       | Business  |
-| ---------------------------------- | ---------- | ---------- | ---------- | --------- |
-| Docker Desktop                     | Basic      | Commercial | Commercial | Hardened  |
-| Private Hub repos                  | 1          | Unlimited  | Unlimited  | Unlimited |
-| Hub pull rate                      | 100/hr     | Unlimited  | Unlimited  | Unlimited |
-| Docker Scout repos                 | 1          | 2          | Unlimited  | Unlimited |
-| Gordon                             | Included   | Included   | —          | —         |
-| Build Cloud minutes/month          | Free trial | 200        | 500        | 1,500     |
-| Testcontainers minutes/month       | Free trial | 100        | 500        | 1,500     |
-| SSO / SCIM                         | —          | —          | —          | ✓         |
-| Registry & Image Access Management | —          | —          | —          | ✓         |
-| Max users                          | 1          | 1          | 100        | Unlimited |
+Docker Personal and Docker Pro are Docker plans for individual account types while Docker Team and Docker Business are Docker plans for organization account types. For a full feature and pricing breakdown, see the
+<a href="https://www.docker.com/pricing/" id="dkr_docs_index_pricing_docker_plans" class="link" rel="noopener">Docker pricing page</a>. 
 
 > [!TIP]
 > If you're upgrading from a Personal plan to a Team plan
@@ -70,12 +57,12 @@ For Docker Team and Docker Business, you can purchase more seats for new members
    - When you remove seats, you must remove members from your organization.
 1. Verify your billing details, continue to payment, and complete checkout.
 
-To learn how to manage seats from the Admin Console, see
+To learn how to manage seats from Docker Home, see
 [Manage seats](/manuals/admin/organization/manage/manage-seats.md).
 
 ### Docker Offload licenses
 
-[Docker Offload](/manuals/offload/_index.md) licenses are available for Docker Team and Docker Business plans. Once assigned to your account, organization owners can [manage license assignments](/manuals/admin/organization/manage/manage-licenses.md) in the Admin Console.
+[Docker Offload](/manuals/offload/_index.md) licenses are available for Docker Team and Docker Business plans. Once assigned to your account, organization owners can [manage license assignments](/manuals/admin/organization/manage/manage-licenses.md) in Docker Home.
 
 To add Docker Offload licenses, you must <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_plans_docker_offload" class="link" rel="noopener">contact sales</a>.
 
@@ -114,7 +101,13 @@ You can add Testcontainers Cloud runtime minutes in two ways:
 > If you have a sales-assisted Docker Business plan,
 > you must contact your account manager to cancel.
 
-You can cancel at any time before your renewal date, but you can't pause or delay a plan. If an invoice isn't paid by the due date, there's a 15-day grace period starting from the due date. While the unused portion is not refundable, you still retain access to paid features until the end of the current billing cycle. Canceling your paid plans may have implications for collaborators or organization members:
+You can cancel at any time before your renewal date, but you can't pause or delay a plan. If an invoice isn't paid by the due date, there's a 15-day grace period starting from the due date. While the unused portion is not refundable, you still retain access to paid features until the end of the current billing cycle. 
+
+> [!NOTE]
+>
+> Billing periods are calculated in UTC (Coordinated Universal Time). If you're in a timezone behind UTC, for example US Pacific Time is UTC−7/−8, canceling or making changes late in your local day may fall into the next billing day in UTC.
+
+Canceling your paid plans may have implications for collaborators or organization members:
 
 - Docker Pro private repository collaborators are removed and additional private repositories are locked.
 - Docker Team or Docker Business members provisioned through SCIM without a password will be locked out. Remove SSO connections and verified domains if your organization uses single sign-on.
@@ -124,5 +117,6 @@ Canceling a paid plan returns your account to Docker Personal or a basic organiz
 To cancel your plan:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and go to **Billing**.
-1. From **Active plans**, select the action menu next to your Docker plan.
-1. Select **Cancel plan** and complete the feedback survey.
+2. From **Active plans**, select the action menu next to your Docker plan.
+3. Select **Cancel plan** and complete the feedback survey.
+

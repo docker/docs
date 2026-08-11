@@ -9,6 +9,7 @@ description: |-
     - Clear all internal registries
     - Delete all sandbox state
     - Remove all policies
+    - Clear the Gordon assistant's sessions and history
     - Delete all stored secrets
     - Sign out of Docker Sandboxes
     - Stop the daemon

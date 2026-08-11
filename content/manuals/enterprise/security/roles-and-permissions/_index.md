@@ -2,7 +2,7 @@
 title: Roles and permissions
 linkTitle: Roles and permissions
 description: Control access to content, registry, and organization management with Docker's role system
-keywords: roles, permissions, custom roles, core roles, access control, organization management, docker hub, admin console, security
+keywords: roles, permissions, custom roles, core roles, access control, organization management, docker hub, docker home , security
 tags: [admin]
 aliases:
   - /admin/organization/roles/

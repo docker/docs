@@ -8,6 +8,8 @@
 # provide a short, permanent link to refer to a topic in the documentation.
 # For example, the docker CLI can output https://docs.docker.com/go/some-topic
 # in its help output, which can be redirected to elsewhere in the documentation.
+"/learn/":
+  - /learn
 "/security/access-tokens/":
   - /go/access-tokens/
 "/reference/api/engine/#deprecated-api-versions":
@@ -297,7 +299,7 @@
 "/desktop/use-desktop/container/#execdebug":
   - /go/debug-gui/
 
-# Docker Admin Console - Insights
+# Docker Admin Console/Home - Insights
 "/admin/organization/insights/":
   - /go/insights/
 "/admin/organization/insights/#docker-desktop-users/":
@@ -312,6 +314,9 @@
   - /go/insights-images/
 "/admin/organization/insights/#extensions":
   - /go/insights-extensions/
+
+"/enterprise/security/hardened-desktop/settings-management/":
+  - /go/settings-management/
 
 # Billing - cancellation
 "/subscription/desktop-license/":
@@ -357,7 +362,7 @@
 # Link used by Docker Desktop to refer users on how to activate WSL 2
 "/desktop/features/wsl/":
   - /go/wsl2/
-  - /go/windows-linux-vm/
+  - /go/windows-linux-vmm/
 "/desktop/get-started/#credentials-management-for-linux-users":
   - /go/linux-credentials/
 "/desktop/use-desktop/pause/":
@@ -434,6 +439,8 @@
   - /go/desktop-mac-requirements/
 "/desktop/setup/install/windows-install/#system-requirements":
   - /go/desktop-windows-requirements/
+"/desktop/setup/install/windows-install/#installation-modes":
+  - /go/desktop-windows-install-modes/
 "/support/#diagnostic-data-and-privacy":
   - /go/diagnostic-data/
 

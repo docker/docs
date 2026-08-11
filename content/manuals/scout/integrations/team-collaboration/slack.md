@@ -5,7 +5,21 @@ description: |
   Integrate Docker Scout with Slack to receive real-time updates
   about vulnerabilities and policy compliance in Slack channels
 keywords: scout, team collaboration, slack, notifications, updates
+params:
+  sidebar:
+    badge:
+      color: gray
+      text: Deprecated
 ---
+
+> [!IMPORTANT]
+>
+> The Docker Scout Slack integration is deprecated and will be retired on
+> July 30, 2026. To surface CVE and policy results without push notifications,
+> integrate `docker scout cves` or `docker scout policy` into your CI pipeline.
+> See [CI integrations](/manuals/scout/integrations/_index.md#continuous-integration).
+> For details, see the
+> [Scout platform release notes](/manuals/scout/release-notes/platform.md).
 
 You can integrate Docker Scout with Slack by creating a Slack webhook and
 adding it to the Docker Scout Dashboard. Docker Scout will notify you about
@@ -22,13 +36,13 @@ to the Slack channels associated with the webhook.
 
 > [!NOTE]
 >
-> Notifications are only triggered for the _last pushed_ image tags for each
+> Notifications are only triggered for the *last pushed* image tags for each
 > repository. "Last pushed" refers to the image tag that was most recently
 > pushed to the registry and analyzed by Docker Scout. If the last pushed image
 > is not affected by a newly disclosed CVE, then no notification will be triggered.
 
 For more information about Docker Scout notifications,
-see [Notification settings](/manuals/scout/explore/dashboard.md#notification-settings)
+see [Notification settings](/manuals/scout/explore/dashboard.md#notification-settings).
 
 ## Setup
 
@@ -49,7 +63,7 @@ To add a Slack integration:
    or enter the names of the repositories that you want to send notifications for.
 6. When you're ready to enable the integration, select **Create**.
 
-After creating the webhook, Docker Scout begins to send notifications updates
+After creating the webhook, Docker Scout begins to send notification updates
 to the Slack channels associated with the webhook.
 
 ## Remove a Slack integration

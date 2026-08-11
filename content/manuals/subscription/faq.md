@@ -1,5 +1,5 @@
 ---
-title: Subscription FAQs
+title: Plan FAQs
 linkTitle: FAQs
 description: Frequently asked questions about Docker subscriptions and billing
 keywords: subscription faqs, docker billing, subscription transfer, academic pricing, docker programs

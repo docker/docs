@@ -20,10 +20,11 @@ processes, files, or resources outside its defined boundaries.
 
 - **Process isolation:** separate kernel per sandbox; processes inside the VM
   are invisible to your host and to other sandboxes
-- **Filesystem isolation:** only your workspace directory is shared with the
-  host. The rest of the VM filesystem persists across restarts but is removed
-  when you delete the sandbox. Symlinks pointing outside the workspace scope
-  are not followed.
+- **Filesystem isolation:** your workspace directory and, for supported agents
+  that haven't opted out, the dedicated [shared skills
+  store](../workflows.md#share-agent-skills) are shared with the host. The rest
+  of the VM filesystem persists across restarts but is removed when you delete
+  the sandbox. Symlinks pointing outside the workspace scope are not followed.
 - **Full cleanup:** when you remove a sandbox with `sbx rm`, the VM and
   everything inside it is deleted
 
@@ -97,7 +98,7 @@ workspace with it:
   the VM and the agent works on a private clone inside the VM. The
   agent's edits never reach your host until you fetch them.
 
-See [Git workflow](../usage.md#git-workflow) for the workflow side of
+See [Git workflows](../workflows.md#git-workflows) for the workflow side of
 each.
 
 ### Direct mount (default)
@@ -115,6 +116,7 @@ including:
 - Git hooks (`.git/hooks/`)
 - CI configuration (`.github/workflows/`, `.gitlab-ci.yml`)
 - IDE configuration (`.vscode/tasks.json`, `.idea/` run configurations)
+- AI project configuration and settings (`.claude/`, `.codex/`, `.gemini/`)
 - Hidden files, shell scripts, and executables
 
 Some of these files execute code when you trigger normal development
@@ -130,6 +132,9 @@ Review them after any agent session before performing those actions:
   during build or install steps.
 - IDE configuration (`.vscode/tasks.json`, `.idea/`) can run tasks
   when you open the project.
+- AI project configuration and settings (`.claude/settings.json`, `.codex/config.toml`,
+  `.gemini/settings.json`) can define hooks and startup commands that
+  execute automatically.
 
 > [!WARNING]
 > Treat sandbox-modified workspace files the same way you would treat a pull
@@ -142,6 +147,13 @@ When you start a sandbox with [`--clone`](../usage.md#clone-mode), the agent
 never works directly against your host repository. Even with full root
 inside the VM, it cannot modify your `.git` directory, your working tree,
 or any tracked file on your host.
+
+> [!IMPORTANT]
+> Clone mode protects your host repository from modification, **not from
+> inspection**. Your repository is still mounted read-only into the sandbox,
+> including untracked files and files excluded by `.gitignore`. Files such as
+> `.env` remain readable by the agent. Store secrets outside your working
+> directory or use [credential isolation](credentials.md) instead.
 
 ```mermaid
 flowchart LR
@@ -165,8 +177,11 @@ flowchart LR
 How the boundary is enforced:
 
 - Your repository's Git root is mounted at `/run/sandbox/source` as
-  read-only. Nothing the agent does inside the VM can write back through
-  that mount.
+  read-only. The mount covers your entire working directory, including
+  untracked files and files excluded by `.gitignore`. Nothing the agent
+  does inside the VM can write back through that mount, but all files
+  under the Git root are readable inside the sandbox. This includes
+  credential files not tracked by Git, such as `.env`.
 - The agent works on a private clone that lives inside the sandbox. The
   clone has its own index, its own refs, and its own working tree. Writes
   to the clone never reach your host.
@@ -184,7 +199,7 @@ The practical guarantees:
   into your working tree.
 - Concurrent `git` commands on the host and inside the sandbox cannot
   race on a shared `.git/index` or shared refs — there is no shared
-  writable state.
+  writable Git state.
 - Credentials, signing keys, and any settings in your repository's
   `.git/config` stay on the host. The agent's clone has its own
   independent configuration.
