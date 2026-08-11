@@ -67,6 +67,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Fixed Docker Desktop failing to start on Linux arm64 hosts due to incorrect QEMU binary path resolution.
 
+### Security
+
+- Addressed CVE-2026-17106, a destination-escape flaw in `docker container cp`.
+
 ## 4.85.0
 
 {{< release-date date="2026-08-03" >}}
