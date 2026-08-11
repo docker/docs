@@ -88,7 +88,10 @@ This exposes the GPUs at index `0` and `2` — the first and third GPUs listed i
 
 > [!NOTE]
 >
-> NVIDIA GPUs can only be accessed by systems running a single engine.
+> The `--gpus` flag works with a single Docker Engine on one host. It does not
+> schedule GPUs across multiple Swarm nodes. Multiple containers on the same
+> engine can share or request GPUs; for Swarm services, advertise GPUs as
+> [generic resources](/engine/swarm/services/#control-service-placement) instead.
 
 ### Set NVIDIA capabilities
 
