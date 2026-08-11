@@ -9,7 +9,7 @@ aliases:
 - /desktop/enterprise/admin/configure/windows-admin/
 ---
 
-Docker Desktop Enterprise (DDE) has been deprecated and is no longer in active development. Please use [Docker Desktop](../_index.md) Community instead.
+Docker Desktop Enterprise (DDE) has been deprecated and is no longer in active development. Use [Docker Desktop](../_index.md) instead.
 
 If you are an existing DDE customer, use the [Support form](https://hub.docker.com/support/desktop/) to request a transition to one of the new [subscriptions](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopEnterprise).
 
