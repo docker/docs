@@ -24,6 +24,45 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.87.0
+
+{{< release-date date="2026-08-17" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.87.0" build_path="/XXXXXX/" >}}
+
+### Updates
+
+- [Docker Agent v1.122.0](https://github.com/docker/docker-agent/releases/tag/v1.122.0)
+- [Docker Buildx v0.36.1](https://github.com/docker/buildx/releases/tag/v0.36.1)
+- Docker Offload `v0.6.10`
+- [Docker Compose v5.4.0](https://github.com/docker/compose/releases/tag/v5.4.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where the in-app update failed with `Source and destination path must have identical roots` when Docker Desktop was installed to a custom directory on another drive.
+- Fixed a misleading proxy error that named the destination server instead of the unreachable upstream proxy, and included machine-wide proxy configuration in diagnostics.
+- Fixed a bug where updating could keep failing with a `file exists` error after an earlier update had failed.
+- Fixed an issue where Gordon would lose access to tools and show misleading sign-in prompts after a failed auto-login at startup, without requiring a restart of Docker Desktop.
+
+#### For Mac
+
+- Fixed a false `Docker Desktop encountered an unexpected error` dialog that could appear during VM shutdown on with the `libkrun` engine.
+- Fixed a rare crash where the Docker Desktop with the Apple Virtualization Framework VM stopped unexpectedly right after a new connection was opened.
+
+#### For Windows
+
+- Fixed WSL error recovery on Windows not displaying specific, actionable error messages for errors like `HCS/0x80070569`, showing the generic fallback instead.
+- Fixed an issue on Windows where per-user `.EXE` installs applying an auto-update wrote `install-settings.json` to the system-wide path instead of the correct per-user location.
+- Fixed an issue on Windows where diagnostic bundles were missing network connection profile data due to an empty `Get-NetConnectionProfile.json` file.
+- Fixed a bug on Windows where Docker Desktop repeatedly asked users to run `wsl --update` when WSL was installed via the Microsoft Store rather than the inbox optional component.
+- Fixed an issue where the Resource Saver settings section was incorrectly shown when using Windows containers instead of Linux containers.
+- Fixed an issue on Windows where the disk image usage limit was hidden in **Resources** settings when Hyper-V was selected as the hypervisor.
+- Fixed an issue on Windows where installer logs from per-user installations were missing from diagnostic bundles.
+- Fixed the virtual disk limit not being applied when lowered on Windows with Hyper-V.
+- Fixed the disk usage limit slider being hidden and ignored for the Docker VMM backend on Windows, so users can now set and enforce disk size in **Settings** > **Resources** > **Advanced**.
+
 ## 4.86.0
 
 {{< release-date date="2026-08-10" >}}
