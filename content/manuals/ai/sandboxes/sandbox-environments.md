@@ -18,8 +18,9 @@ params:
 ---
 
 > [!NOTE]
-> `sbx env` is experimental. The command interface and file format may change
-> in future releases.
+> `sbx env` requires `sbx` 0.39.0 or later and supports local sandboxes only.
+> The feature is experimental, so the command interface and file format may
+> change in future releases.
 
 A sandbox environment file describes the agent, kits, workspaces, environment
 variables, credentials, MCP servers, ports, and resource limits for a sandbox.
@@ -55,12 +56,12 @@ ports:
 
 ## Commands
 
-| Command                                         | Description                                                                               |
-| ----------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `sbx env run [PATH...]`                         | Creates the environment if needed, then attaches to it                                    |
-| `sbx env create [PATH...]`                      | Creates the environment without attaching                                                 |
-| `sbx env exec [PATH...] -- COMMAND [ARG...]`    | Runs a command in an existing environment                                                  |
-| `sbx env rm [PATH...]`                          | Removes the sandbox and credentials scoped to it                                           |
+| Command                                                                                 | Description                                      |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| [`sbx env run`](/reference/cli/sbx/env/run/) `[PATH...]`                                | Creates the environment if needed, then attaches |
+| [`sbx env create`](/reference/cli/sbx/env/create/) `[PATH...]`                          | Creates the environment without attaching        |
+| [`sbx env exec`](/reference/cli/sbx/env/exec/) `[PATH...] -- COMMAND [ARG...]`           | Runs a command in an existing environment        |
+| [`sbx env rm`](/reference/cli/sbx/env/rm/) `[PATH...]`                                  | Removes the sandbox and its scoped credentials   |
 
 `PATH` can be a directory or a direct path to an environment file. When you
 pass a directory, `sbx` reads `.sbxenv.yaml` and falls back to `.sbxenv.yml`.
@@ -70,8 +71,10 @@ Pass the same set of paths to each lifecycle command so they resolve the same
 sandbox. See [Multiple files](#multiple-files) for details.
 
 `sbx env run` starts and attaches to an existing sandbox without provisioning
-its secrets and bindings again. The command applies changes to `env` to the new
-session and reconciles declared MCP servers.
+its secrets and bindings again. For an existing sandbox, the command applies
+changes to `env` to the new session and reconciles declared MCP servers. Changes
+to workspaces, kits, ports, secrets, bindings, and `sandboxOptions` require you
+to remove the environment with `sbx env rm` and create it again.
 
 For `sbx env exec`, arguments before `--` are environment-file paths and
 arguments after `--` form the command. Without `--`, all arguments form the
@@ -86,6 +89,13 @@ $ sbx env exec go test ./...
 credentials. Global credential bindings remain unless you pass
 `--prune-bindings`. Host-global MCP registrations remain available to other
 sandboxes.
+
+Secret provisioning, binding updates, and MCP server registration occur before
+the sandbox is created. If sandbox creation fails, scoped secrets remain, and
+bindings and MCP registrations may also remain. Run `sbx env rm` with the same
+paths to remove the scoped secrets. Pass `--prune-bindings` if you also want to
+remove the declared global bindings. MCP registrations are host-global and
+remain after cleanup.
 
 ## Multiple files
 
@@ -232,6 +242,11 @@ bindings:
 `sbx env rm` preserves global bindings by default. Pass `--prune-bindings` to
 remove every service binding declared by the environment file.
 
+> [!WARNING]
+> `--prune-bindings` deletes the complete global binding entry for every
+> service declared in the environment file. This can affect other sandboxes
+> that share those service bindings.
+
 ### `registries`
 
 `registries` maps registry hostnames to pull credentials. Each entry requires
@@ -250,10 +265,9 @@ registries:
 
 ### `mcp`
 
-The `mcp.servers` list registers MCP servers on the host and adds them to the
-sandbox. This field requires the hosted MCP control plane through
-`SBX_MCP_URL`. MCP registrations are host-global and remain after
-`sbx env rm`.
+The `mcp.servers` list registers servers with the built-in
+[MCP gateway](mcp-gateway.md) and adds them to the sandbox. MCP registrations
+are host-global and remain after `sbx env rm`.
 
 | Field     | Type            | Required | Default | Description                                                     |
 | --------- | --------------- | -------- | ------- | --------------------------------------------------------------- |
