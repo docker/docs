@@ -264,62 +264,9 @@ cases:
   vendor API)
 - Inject shared team config (linter rules, editor settings, dotfiles)
 
-### Example: Python linting kit
-
-This kit installs [Ruff](https://docs.astral.sh/ruff/) and injects a shared
-configuration file, so every sandbox starts with the same linting setup.
-
-```text
-ruff-lint/
-├── spec.yaml
-└── files/
-    └── workspace/
-        └── ruff.toml
-```
-
-```yaml {title="ruff-lint/spec.yaml"}
-schemaVersion: "2"
-kind: mixin
-name: ruff-lint
-displayName: Ruff Linter
-description: Python linting with shared team config
-
-permissions:
-  network:
-    allow:
-      - pypi.org
-      - files.pythonhosted.org
-
-setup:
-  install:
-    - command: "uv tool install ruff@latest"
-      user: "1000"
-      description: Install Ruff
-```
-
-```toml {title="ruff-lint/files/workspace/ruff.toml"}
-line-length = 100
-
-[lint]
-select = ["E", "F", "I"]
-```
-
-> [!TIP]
-> The templates for the built-in agents (`claude`, `codex`, and so on)
-> already include `uv`, so this mixin can use it without installing it
-> separately.
-
-To start a new sandbox with this mixin:
-
-```console
-$ sbx run claude --kit /path/to/ruff-lint/
-```
-
-To apply the mixin to a sandbox that's already running, use
-[`sbx kit add`](#local) instead. The `--kit` flag only takes effect when a
-sandbox is created. `sbx kit add` restarts the sandbox to apply the kit, but VM
-state — installed packages, Docker images, volumes, and agent history — is
-preserved.
+See [Drop a shared config file](kit-examples.md#drop-a-shared-config-file) and
+[Install a tool at sandbox creation](kit-examples.md#install-a-tool-at-sandbox-creation)
+for complete mixin examples.
 
 ## Sandbox kits
 
@@ -336,52 +283,15 @@ Sandbox kits declare everything a mixin kit can, plus an
 agent. For a step-by-step walkthrough, see
 [Build your own agent kit](build-an-agent.md).
 
-### Example: the built-in `claude` agent
+### Extend a built-in agent
 
-The `claude` agent you get from `sbx run claude` is defined as a kit. Here
-is an abbreviated version of its spec, showing how the sandbox block combines
-with network, credentials, environment, and setup:
-
-```yaml {title="claude/spec.yaml"}
-schemaVersion: "2"
-kind: sandbox
-name: claude
-sandbox:
-  image: "docker/sandbox-templates:claude-code-docker"
-  entrypoint: [claude, "--dangerously-skip-permissions"]
-
-agentInstructions:
-  filename: CLAUDE.md
-
-permissions:
-  network:
-    allow:
-      - "claude.com:443"
-      - "api.anthropic.com:443"
-      - "console.anthropic.com:443"
-
-credentials:
-  - service: anthropic
-    apiKey:
-      name: ANTHROPIC_API_KEY
-      inject:
-        - domain: api.anthropic.com
-          header: x-api-key
-          format: "%s"
-        - domain: console.anthropic.com
-          header: x-api-key
-          format: "%s"
-
-environment:
-  variables:
-    IS_SANDBOX: "1"
-
-setup:
-  install:
-    - command: "curl -fsSL https://claude.ai/install.sh | bash"
-      user: "1000"
-      description: Install Claude Code
-```
+Use `extends:` to create a variant of a built-in agent without reproducing its
+configuration. The child kit inherits the parent's image, credentials, network
+permissions, persistent volumes, settings, MCP integration, and agent
+instructions. Use `extends:` for a single parent agent; use a mixin to add an
+independent capability that can work with one or more agents. See
+[Fork an existing agent](kit-examples.md#fork-an-existing-agent) for an example
+that changes Claude Code's permission mode.
 
 ## Using kits
 

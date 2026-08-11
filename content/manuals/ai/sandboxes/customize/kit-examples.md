@@ -346,44 +346,27 @@ idempotent. The heredoc pattern overwrites cleanly each time.
 ## Fork an existing agent
 
 Sandbox kits (`kind: sandbox`) define a full agent from scratch. The most
-common variant is a fork of a built-in agent — same image and
-credentials, but a different entrypoint. This example reproduces the
-built-in `claude` agent but drops `--dangerously-skip-permissions` so
-every tool call prompts for approval:
+common variant is a fork of a built-in agent. Use `extends:` to inherit the
+parent's complete configuration and declare only the fields you want to change.
+This example replaces the built-in `claude` entrypoint so Claude Code uses
+manual permission mode instead of bypassing approval prompts:
 
 ```yaml {title="claude-safe/spec.yaml"}
 schemaVersion: "2"
 kind: sandbox
 name: claude-safe
 displayName: Claude Code (with approval prompts)
-description: Claude Code without --dangerously-skip-permissions
+description: Claude Code in manual permission mode
+
+extends: claude
 
 sandbox:
-  image: "docker/sandbox-templates:claude-code-docker"
-  entrypoint: [claude]
-
-agentInstructions:
-  filename: CLAUDE.md
-
-permissions:
-  network:
-    allow:
-      - "claude.com:443"
-      - "api.anthropic.com:443"
-      - "console.anthropic.com:443"
-
-credentials:
-  - service: anthropic
-    apiKey:
-      name: ANTHROPIC_API_KEY
-      inject:
-        - domain: api.anthropic.com
-          header: x-api-key
-          format: "%s"
-        - domain: console.anthropic.com
-          header: x-api-key
-          format: "%s"
+  entrypoint: [claude, "--permission-mode", "manual"]
 ```
+
+The child inherits the built-in image, credentials, network permissions,
+persistent volumes, settings, MCP integration, and agent instructions. Its
+`sandbox.entrypoint` replaces the inherited entrypoint.
 
 Launch with the kit's `name:` as the agent argument to `sbx run`:
 
