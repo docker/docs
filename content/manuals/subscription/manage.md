@@ -1,7 +1,9 @@
 ---
 title: Manage plans
 linkTitle: Manage
-description: Learn how to set up, upgrade, downgrade or cancel, or cancel auto-renewal for available plans.
+description: >
+  Learn how to set up, upgrade, downgrade, or cancel plans, and how to
+  manage auto-renewal and credits.
 keywords:
   purchase subscription, buy docker subscription, product catalog, browse
   products, upgrade subscription, downgrade subscription, docker billing, cancel auto-renewal, cancel, top up, manage
@@ -59,9 +61,17 @@ You can upgrade active plans from the billing Overview page.
 
 ## View your credits
 
-Docker displays available account credits in the billing portal. Credits offset eligible usage automatically before Docker charges your payment method.
+Docker displays available account credits in the billing portal. Credits
+offset eligible usage automatically before Docker charges your payment
+method. To review credit balance and applied credits, see
+[Credits](/manuals/billing/_index.md#credits).
 
-Credits apply to [Docker Agentic Platform](/manuals/subscription/plans/docker-agentic-platform.md). When you sign up for Docker Agentic Platform, Docker adds a one-time promotional credit to your account. This credit is non-recurring, doesn't expire, and applies to cloud compute usage only. It doesn't apply to inference, which you pay for through your own API keys.
+Credits apply to
+[Docker Agentic Platform](/manuals/subscription/plans/docker-agentic-platform.md).
+When you sign up for Docker Agentic Platform, Docker adds a one-time
+promotional credit to your account. This credit is non-recurring,
+doesn't expire, and applies to cloud compute usage only. It doesn't
+apply to inference, which you pay for through your own API keys.
 
 ## Sales-led products
 
