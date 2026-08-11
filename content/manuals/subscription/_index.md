@@ -45,7 +45,7 @@ You can subscribe to plans for individual or organization accounts, or plans for
 | Plans                                                              | Billing model                                             | Types                                                     |
 | ------------------------------------------------------------------ | --------------------------------------------------------- | --------------------------------------------------------- |
 | [Docker](/manuals/subscription/plans/docker.md)                    | Flat-rate plans for personal and organization accounts    | Docker Personal, Docker Pro, Docker Team, Docker Business |
-| [Docker AI Cloud](/manuals/subscription/plans/ai-cloud.md)         | Pay-as-you-go (PayGo) for cloud sandbox usage             | AI Cloud Basic, AI Cloud Personal                         |
+| [Docker Agentic Platform](/manuals/subscription/plans/docker-agentic-platform.md) | Pay-as-you-go (PayGo) for cloud sandbox usage             | Docker Agentic Platform                          |
 | [Docker Hardened Images (DHI)](/manuals/subscription/plans/dhi.md) | Graduated security features for hardened container images | DHI Community, DHI Select, DHI Enterprise                 |
 | [Gordon](/manuals/subscription/plans/gordon.md)                    | Prepaid usage for the Gordon AI agent                     | Gordon Plus, Gordon Max, Gordon Ultra                     |
 | [AI Governance](/manuals/subscription/plans/ai-governance.md)      | Purchase set amount of licenses                           | AI Governance                                             |

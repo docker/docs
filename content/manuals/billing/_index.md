@@ -35,6 +35,12 @@ aliases:
 You can use the billing portal to manage actions for your Docker subscriptions, such as updating
 payment methods, reviewing billing details, and tracking invoice history.
 
+## Usage
+
+## Costs
+
+## Credits
+
 ## Docker plans and billing behaviors
 
 Your invoice history is a reference to the Docker plans you subscribe to. For information about your billing cycle and renewal dates, see [plan details](/manuals/subscription/plans/_index.md). To upgrade or add a new plan, see [Subscription](/manuals/subscription/_index.md).

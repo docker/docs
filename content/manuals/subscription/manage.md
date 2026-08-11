@@ -61,7 +61,7 @@ You can upgrade active plans from the billing Overview page.
 
 Docker displays available account credits in the billing portal. Credits offset eligible usage automatically before Docker charges your payment method.
 
-Credits apply to [Docker AI Cloud](/manuals/subscription/plans/ai-cloud.md). When you sign up for AI Cloud Personal, Docker adds a one-time promotional credit to your account. This credit is non-recurring, doesn't expire, and applies to cloud compute usage only. It doesn't apply to inference, which you pay for through your own API keys.
+Credits apply to [Docker Agentic Platform](/manuals/subscription/plans/docker-agentic-platform.md). When you sign up for Docker Agentic Platform, Docker adds a one-time promotional credit to your account. This credit is non-recurring, doesn't expire, and applies to cloud compute usage only. It doesn't apply to inference, which you pay for through your own API keys.
 
 ## Sales-led products
 
