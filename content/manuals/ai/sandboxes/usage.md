@@ -134,10 +134,25 @@ agent session without changing the sandbox's stored environment. To set
 variables for one command instead, use `sbx exec -e` or
 `sbx exec --env-file`.
 
+To persist a variable across future sessions of an existing sandbox, append an
+export to `/etc/sandbox-persistent.sh`:
+
+```console
+$ sbx exec -d <sandbox-name> bash -c "echo 'export INTERNAL_API_URL=https://api.example.com' >> /etc/sandbox-persistent.sh"
+```
+
+The `bash -c` wrapper ensures the `>>` redirect runs inside the sandbox instead
+of on your host. The file is sourced when Bash starts inside the sandbox,
+including for interactive sessions and agents started with `sbx run`. A command
+passed directly to `sbx exec` doesn't start a shell. Wrap that command in
+`bash -c` if it needs variables from the persistent environment file.
+
 Environment variables are readable by processes inside the sandbox. For API
-keys and other supported credentials, use
-[`sbx secret`](security/credentials.md) so the host-side proxy can inject the
-credential without exposing its value to the agent.
+keys and other credentials, use [`sbx secret set`](security/credentials.md#store-a-secret)
+for a supported service or the experimental
+[`sbx secret set-custom`](security/credentials.md#custom-secrets) for a
+credential sent to known hosts. The host-side proxy can then inject the real
+value without exposing it to the agent.
 
 ## Run commands inside a sandbox
 
