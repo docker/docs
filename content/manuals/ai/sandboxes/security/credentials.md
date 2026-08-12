@@ -326,6 +326,11 @@ through approving one. You can use a value already in the secret store or enter
 one at the prompt. You approve the domains declared by the kit, and `sbx` writes
 the entry to `credentials.yaml`.
 
+The approval prompt can also offer OAuth when a third-party sandbox kit
+declares it. Approving OAuth writes a binding, but doesn't activate OAuth
+interception for a third-party sandbox agent. Decline OAuth unless the kit also
+offers a working credential mechanism, such as an API key.
+
 In non-interactive contexts (CI or `--detached`), there's no one to answer the
 prompt. Without a binding, the sandbox starts with the credential withheld. If
 the kit marks the credential as `required: true`, `sbx` also prints a warning.
@@ -348,11 +353,11 @@ requires approval. Kits on `schemaVersion: "1"` inject their declared
 credentials without a binding.
 
 > [!WARNING]
-> Proxy-managed OAuth isn't supported for a third-party kit that extends a
-> built-in agent. Repeating the parent's OAuth declaration in the child kit
-> doesn't activate OAuth interception. Use a stored API key when the service
-> supports one. Otherwise, an OAuth login performed inside the sandbox stores
-> the real token there.
+> Proxy-managed OAuth isn't supported for third-party sandbox agents, including
+> kits that extend a built-in agent. Repeating the parent's OAuth declaration in
+> the child kit doesn't activate OAuth interception. Use a stored API key when
+> the service supports one. Otherwise, an OAuth login performed inside the
+> sandbox stores the real token there.
 
 ## Registry credentials
 

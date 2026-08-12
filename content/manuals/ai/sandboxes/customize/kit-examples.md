@@ -373,16 +373,17 @@ $ sbx secret set anthropic
 ```
 
 When you launch the kit for the first time, `sbx` prompts you to approve its
-inherited Anthropic credentials. Approve the API-key mechanism. Because this is
-a third-party schema v2 kit, `sbx` records your approval as a
+inherited Anthropic credentials. Select **Review each**, approve the API-key
+mechanism, and decline OAuth. Because this is a third-party schema v2 kit,
+`sbx` records your approval as a
 [credential binding](../security/credentials.md#credential-bindings). The
 sandbox receives a sentinel value, and the proxy injects the real API key into
 requests to the domains declared by the kit.
 
 > [!WARNING]
-> The approval prompt also lists OAuth, but approving it doesn't activate OAuth
-> interception for the extended agent. If you use Claude Code's `/login`
-> command, Claude Code stores the real OAuth tokens inside the sandbox.
+> The approval prompt also lists OAuth, but approving it has no effect for the
+> extended agent. If you use Claude Code's `/login` command, Claude Code stores
+> the real OAuth tokens inside the sandbox.
 
 OpenCode supports an additional config file through `OPENCODE_CONFIG`. Keep the
 kit's config separate from the sandbox-managed
