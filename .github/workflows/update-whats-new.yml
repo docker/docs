@@ -75,10 +75,9 @@ jobs:
         with:
           agent: ${{ github.workspace }}/.github/agents/whats-new.yaml
           prompt: >-
-            Review documentation pull requests merged from
+            Use the curate-whats-new skill to review documentation pull requests merged from
             ${{ steps.period.outputs.start }} through
-            ${{ steps.period.outputs.end }}, inclusive, and curate the What's
-            new data as described in your instructions.
+            ${{ steps.period.outputs.end }}, inclusive.
           anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
           github-token: ${{ env.GITHUB_APP_TOKEN || github.token }}
           timeout: 1200
