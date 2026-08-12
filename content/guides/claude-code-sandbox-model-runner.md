@@ -104,8 +104,8 @@ $ sbx create --name claude-dmr \
 ```
 
 `sbx run` would also work, but it launches Claude Code immediately. Creating
-the sandbox first gives you a chance to verify the endpoint before the agent
-starts.
+the sandbox first lets you confirm the variable and test connectivity before
+the agent starts.
 
 You don't need to set an Anthropic API key or run `sbx secret set
 anthropic`. Docker Model Runner doesn't authenticate the local endpoint,
@@ -151,9 +151,8 @@ $ sbx run claude-dmr -- --model ai/devstral-small-2
 ```
 
 Everything after `--` is forwarded to the Claude Code CLI. Because
-`ANTHROPIC_BASE_URL` is stored in the sandbox's environment, so Claude
-Code routes requests to Docker Model Runner on your host instead of
-`api.anthropic.com`.
+`ANTHROPIC_BASE_URL` is stored in the sandbox's environment, Claude Code routes
+requests to Docker Model Runner on your host instead of `api.anthropic.com`.
 
 ## Step 6: Inspect Claude Code requests
 
