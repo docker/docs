@@ -1627,6 +1627,11 @@ examples: |-
     ignored, whereas a `#` appearing anywhere else in a line is treated as part of
     the variable value.
 
+    Values are taken as-is: surrounding quotes are kept as part of the value
+    (they are not stripped the way a shell `source` would). If you need spaces
+    without literal quote characters, omit the quotes in the file, or set the
+    variable with `-e` / `--env` on the command line.
+
     ```console
     $ cat env.list
     # This is a comment
