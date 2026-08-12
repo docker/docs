@@ -321,15 +321,11 @@ The real credential isn't stored in this file.
 
 ### First-run approval
 
-When a third-party kit needs an API key that has no binding, `sbx` walks you
-through approving one. You can use a value already in the secret store or enter
-one at the prompt. You approve the domains declared by the kit, and `sbx` writes
-the entry to `credentials.yaml`.
-
-The approval prompt can also offer OAuth when a third-party sandbox kit
-declares it. Approving OAuth writes a binding, but doesn't activate OAuth
-interception for a third-party sandbox agent. Decline OAuth unless the kit also
-offers a working credential mechanism, such as an API key.
+When a third-party kit needs a credential that has no binding, `sbx` walks you
+through approving one. For an API key, you can use a value already in the secret
+store or enter one at the prompt. For OAuth, you approve the sign-in flow. In
+both cases, you approve the domains declared by the kit. `sbx` writes the entry
+to `credentials.yaml`.
 
 In non-interactive contexts (CI or `--detached`), there's no one to answer the
 prompt. Without a binding, the sandbox starts with the credential withheld. If
