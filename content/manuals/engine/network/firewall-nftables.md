@@ -225,7 +225,7 @@ priority `filter - 1` or lower.
 > Any packet that reaches the host's firewall rules already addressed to a
 > container is treated this way. For example, a Kubernetes CNI plugin may
 > translate a Service address to a container address before the packet reaches
-> the host's prerouting rules. Docker cannot distinguish the result from a
+> the host's pre-routing rules. Docker cannot distinguish the result from a
 > packet routed to the container by a remote host. Which host interface these
 > packets arrive on depends on the plugin's data path — for an overlay network
 > it is normally the tunnel device.
