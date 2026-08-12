@@ -1,0 +1,22 @@
+schemaVersion: "1"
+name: docs-env
+agent: codex
+
+workspace:
+  path: $HOME/src/github.com/docker/docs
+  clone: true
+
+kits:
+  - "git+https://github.com/docker/sbx-kits-contrib.git#dir=vale"
+  - "git+https://github.com/docker/sbx-kits-contrib.git#dir=git-ssh-sign"
+  - "git+https://github.com/docker/sbx-kits-contrib.git#dir=github-ssh"
+  - "./.sbx/kits/hugo"
+  - "./.sbx/kits/rumdl"
+
+secrets:
+  github:
+    command: gh auth token
+
+ports:
+  - sandbox: 1313
+    host: 1313
