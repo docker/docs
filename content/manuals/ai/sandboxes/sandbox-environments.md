@@ -17,42 +17,49 @@ params:
       text: Experimental
 ---
 
+A sandbox environment file captures the setup for a project in a
+`.sbxenv.yaml` file. Instead of sharing a collection of CLI flags and setup
+steps, commit the file so everyone can create a consistent sandbox setup with
+one command.
+
 > [!NOTE]
-> `sbx env` requires `sbx` 0.39.0 or later and supports local sandboxes only.
-> The feature is experimental, so the command interface and file format may
-> change in future releases.
+> `sbx env` requires `sbx` 0.39.0 or later. The feature is experimental, so the
+> command interface and file format may change in future releases.
 
-A sandbox environment file describes the agent, kits, workspaces, environment
-variables, credentials, MCP servers, ports, and resource limits for a sandbox.
-Commit the file with your project so team members can run the same sandbox
-configuration without sharing flag combinations or setup instructions.
-
-The environment file doesn't need to be in the workspace. You can store it in
-another directory and set `workspace.path` to the workspace:
+For example, the following file defines a sandbox for a web application. It
+names the sandbox, selects the agent, sets an environment variable, obtains a
+GitHub credential from the host, and publishes the development server on port
+3000:
 
 ```yaml
 # .sbxenv.yaml
 schemaVersion: "1"
-name: docs-env
+name: web-app
 agent: claude
 
-workspace:
-  path: $HOME/src/github.com/docker/docs
-  clone: true
-
-kits:
-  - "git+https://github.com/docker/sbx-kits-contrib.git#dir=vale"
-  - "git+https://github.com/docker/sbx-kits-contrib.git#dir=git-ssh-sign"
-  - "git+https://github.com/docker/sbx-kits-contrib.git#dir=github-ssh"
+env:
+  NODE_ENV: development
 
 secrets:
   github:
     command: gh auth token
 
 ports:
-  - sandbox: 1313
-    host: 1313
+  - sandbox: 3000
+    host: 3000
 ```
+
+Save the file in the project directory, then run:
+
+```console
+$ sbx env run
+```
+
+`sbx` uses the project directory as the workspace, provisions the declared
+credential, creates the sandbox, and attaches to the agent. Other team members
+can run the same command after cloning the project. Environment files can also
+install kits, mount additional workspaces, register MCP servers, and set
+resource limits.
 
 ## Commands
 
