@@ -24,41 +24,8 @@ Available on a separate paid subscription.
 
 ## Get started
 
-For complete system requirements, see the
-[get started prerequisites](get-started.md#prerequisites).
-
-Install the `sbx` CLI and sign in:
-
-{{< tabs >}}
-{{< tab name="macOS" >}}
-
-```console
-$ brew trust docker/tap
-$ brew install docker/tap/sbx
-$ sbx login
-```
-
-{{< /tab >}}
-{{< tab name="Windows" >}}
-
-```powershell
-> winget install -h Docker.sbx
-> sbx login
-```
-
-{{< /tab >}}
-{{< tab name="Linux (Ubuntu)" >}}
-
-```console
-$ curl -fsSL https://get.docker.com | sudo REPO_ONLY=1 sh
-$ sudo apt-get install docker-sbx
-$ sudo usermod -aG kvm $USER
-$ newgrp kvm
-$ sbx login
-```
-
-{{< /tab >}}
-{{< /tabs >}}
+Follow the [installation guide](install.md) to check the system requirements,
+install the `sbx` CLI, and sign in.
 
 Then launch an agent in a sandbox:
 
@@ -67,8 +34,8 @@ $ cd ~/my-project
 $ sbx run claude
 ```
 
-See the [get started guide](get-started.md) for a full walkthrough, or jump to
-the [usage guide](usage.md) for basic commands.
+See the [get started guide](get-started.md) for a first-session walkthrough, or
+jump to the [usage guide](usage.md) for basic commands.
 
 ## Learn more
 
