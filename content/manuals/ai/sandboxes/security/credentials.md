@@ -317,14 +317,14 @@ bindings:
 
 A binding is only an approval record: the presence of `apiKey` or `oauth`
 authorizes that mechanism. Declining a credential writes no entry at all.
+The real credential isn't stored in this file.
 
 ### First-run approval
 
-When a third-party kit needs a credential that has no binding, `sbx` walks you
-through approving one. For an API key, you can use a value already in the secret
-store or enter one at the prompt. For OAuth, you approve the sign-in flow. In
-both cases, you approve the domains declared by the kit. `sbx` writes the entry
-to `credentials.yaml`.
+When a third-party kit needs an API key that has no binding, `sbx` walks you
+through approving one. You can use a value already in the secret store or enter
+one at the prompt. You approve the domains declared by the kit, and `sbx` writes
+the entry to `credentials.yaml`.
 
 In non-interactive contexts (CI or `--detached`), there's no one to answer the
 prompt. Without a binding, the sandbox starts with the credential withheld. If
@@ -340,10 +340,19 @@ constrain which requests can carry the credential.
 
 Only third-party kits that declare `schemaVersion: "2"` require a binding.
 Built-in agents also use `schemaVersion: "2"`, but credentials declared only by
-embedded kits are authorized by provenance and inject automatically. If a
-third-party kit also declares the same service, that service requires approval.
-Kits on `schemaVersion: "1"` inject their declared credentials without a
-binding.
+embedded kits are authorized by provenance and inject automatically. A
+third-party kit that extends a built-in agent inherits its credentials, but not
+its built-in provenance. The inherited credentials therefore require approval.
+If a third-party kit declares the same service itself, that service also
+requires approval. Kits on `schemaVersion: "1"` inject their declared
+credentials without a binding.
+
+> [!WARNING]
+> Proxy-managed OAuth isn't supported for a third-party kit that extends a
+> built-in agent. Repeating the parent's OAuth declaration in the child kit
+> doesn't activate OAuth interception. Use a stored API key when the service
+> supports one. Otherwise, an OAuth login performed inside the sandbox stores
+> the real token there.
 
 ## Registry credentials
 
