@@ -216,34 +216,6 @@ paths to remove the scoped secrets. Pass `--prune-bindings` if you also want to
 remove the declared global bindings. MCP registrations are host-global and
 remain after cleanup.
 
-## Variable interpolation
-
-Host environment variables are expanded in each file before the files are
-merged and parsed:
-
-| Syntax                   | Behavior                                                    |
-| ------------------------ | ----------------------------------------------------------- |
-| `$VAR` or `${VAR}`       | Uses the value of `VAR`, or an empty string when unset      |
-| `${VAR:-default}`        | Uses `default` when `VAR` is unset or empty                 |
-| `${VAR-default}`         | Uses `default` when `VAR` is unset                          |
-| `${VAR:+replacement}`    | Uses `replacement` when `VAR` is set and non-empty          |
-| `${VAR+replacement}`     | Uses `replacement` when `VAR` is set                        |
-| `${VAR:?message}`        | Fails with `message` when `VAR` is unset or empty           |
-| `${VAR?message}`         | Fails with `message` when `VAR` is unset                    |
-| `$$`                     | Inserts a literal `$`                                       |
-
-Default, replacement, and error values can contain nested variable
-expressions.
-
-```yaml
-workspace:
-  path: ${WORKSPACE:-$HOME/src/myproject}
-
-secrets:
-  my-token:
-    value: ${MY_TOKEN:?MY_TOKEN must be set}
-```
-
 ## File reference
 
 The loader rejects unknown fields and unsupported schema versions.
@@ -316,8 +288,7 @@ the environment is created.
 
 > [!WARNING]
 > A literal `value` is visible to anyone with read access to the file. Use a
-> vault URI with `ref`, obtain the value at runtime with `command`, or use
-> variable interpolation such as `value: ${MY_TOKEN}`.
+> vault URI with `ref` or obtain the value at runtime with `command`.
 
 ```yaml
 secrets:
