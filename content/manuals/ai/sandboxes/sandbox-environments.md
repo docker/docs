@@ -26,16 +26,26 @@ one command.
 > `sbx env` requires `sbx` 0.39.0 or later. The feature is experimental, so the
 > command interface and file format may change in future releases.
 
-For example, the following file defines a sandbox for a web application. It
-names the sandbox, selects the agent, sets an environment variable, obtains a
-GitHub credential from the host, and publishes the development server on port
-3000:
+## Common workflows
+
+The following examples combine environment file fields into configurations you
+can adapt for a project.
+
+### Share a complete project environment
+
+Commit a `.sbxenv.yaml` file that includes the agent, project tools,
+credentials, environment variables, and ports the project needs. The following
+example adds the Playwright mixin kit to a web application so the agent can run
+browser tests:
 
 ```yaml
 # .sbxenv.yaml
 schemaVersion: "1"
 name: web-app
 agent: claude
+
+kits:
+  - "git+https://github.com/docker/sbx-kits-contrib.git#dir=playwright"
 
 env:
   NODE_ENV: development
@@ -49,17 +59,115 @@ ports:
     host: 3000
 ```
 
-Save the file in the project directory, then run:
+The Playwright kit installs the browser test tools, declares the network access
+needed to install them, and gives the agent instructions for using them. Before
+using a Git kit from this repository, add its source to your
+[kit source allowlist](customize/kits.md#restrict-kit-sources):
+
+```console
+$ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
+```
+
+The setting replaces the complete allowlist, so include any existing sources
+you want to keep. Pin remote kits with the `ref` URL parameter when you need
+reproducible setup.
+
+Run the environment from the project directory:
 
 ```console
 $ sbx env run
 ```
 
 `sbx` uses the project directory as the workspace, provisions the declared
-credential, creates the sandbox, and attaches to the agent. Other team members
-can run the same command after cloning the project. Environment files can also
-install kits, mount additional workspaces, register MCP servers, and set
-resource limits.
+credential, installs the kit, creates the sandbox, publishes the port, and
+attaches to the agent. Other team members can run the same command after
+cloning the project.
+
+### Combine team defaults and personal settings
+
+Keep the shared configuration in a committed file and put machine-specific
+settings in a file excluded from version control. For example, commit
+`base.sbxenv.yaml`:
+
+```yaml
+schemaVersion: "1"
+name: web-app
+agent: claude
+
+env:
+  NODE_ENV: development
+
+sandboxOptions:
+  cpus: 4
+  memory: 8g
+```
+
+Add `local.sbxenv.yaml` to `.gitignore`, then use it for personal settings:
+
+```yaml
+env:
+  LOG_LEVEL: debug
+
+sandboxOptions:
+  memory: 12g
+```
+
+Pass both files in merge order:
+
+```console
+$ sbx env run base.sbxenv.yaml local.sbxenv.yaml
+```
+
+Nested mappings merge by key, lists concatenate, and values from later files
+replace earlier scalar values. In this example, the sandbox has four CPUs,
+12 GB of memory, and both environment variables. The first file controls the
+base directory for relative workspace paths and the default sandbox name.
+
+### Work across multiple repositories
+
+Mount related repositories alongside the primary project when the agent needs
+to coordinate changes or consult shared code and documentation:
+
+```yaml
+# .sbxenv.yaml in the web-app repository
+schemaVersion: "1"
+name: web-platform
+agent: codex
+
+workspace: .
+
+additionalWorkspaces:
+  - path: ../shared-components
+  - path: ../architecture-docs
+    readOnly: true
+```
+
+The agent starts in `web-app`, can modify `shared-components`, and can read
+`architecture-docs` without changing it. Relative paths resolve from the
+directory of the first environment file. Additional workspaces are mounted
+directly even when the primary workspace uses clone mode.
+
+### Reuse an environment in automation
+
+Use the same committed environment for interactive development and automated
+tasks. Developers attach to the agent with `run`:
+
+```console
+$ sbx env run
+```
+
+Automation can create the sandbox without attaching, run commands in it, and
+remove it afterward:
+
+```console
+$ sbx env create
+$ sbx env exec -- npm test
+$ sbx env rm --force
+```
+
+Commands and vault references under `secrets` resolve on the host, so the
+automation runner must provide the referenced tools and authentication. The
+secret values remain outside the environment file.
 
 ## Commands
 
@@ -75,13 +183,7 @@ pass a directory, `sbx` reads `.sbxenv.yaml` and falls back to `.sbxenv.yml`.
 With no path, `sbx` searches the working directory.
 
 Pass the same set of paths to each lifecycle command so they resolve the same
-sandbox. See [Multiple files](#multiple-files) for details.
-
-`sbx env run` starts and attaches to an existing sandbox without provisioning
-its secrets and bindings again. For an existing sandbox, the command applies
-changes to `env` to the new session and reconciles declared MCP servers. Changes
-to workspaces, kits, ports, secrets, bindings, and `sandboxOptions` require you
-to remove the environment with `sbx env rm` and create it again.
+sandbox.
 
 For `sbx env exec`, arguments before `--` are environment-file paths and
 arguments after `--` form the command. Without `--`, all arguments form the
@@ -91,6 +193,16 @@ command and `sbx` reads the environment file from the working directory:
 $ sbx env exec .sbxenv.yaml -- go test ./...
 $ sbx env exec go test ./...
 ```
+
+## Update an environment
+
+`sbx env run` starts and attaches to an existing sandbox without provisioning
+its secrets and bindings again. For an existing sandbox, the command applies
+changes to `env` to the new session and reconciles declared MCP servers. Changes
+to workspaces, kits, ports, secrets, bindings, and `sandboxOptions` require you
+to remove the environment with `sbx env rm` and create it again.
+
+## Remove an environment
 
 `sbx env rm` removes the sandbox and its scoped service and registry
 credentials. Global credential bindings remain unless you pass
@@ -103,21 +215,6 @@ bindings and MCP registrations may also remain. Run `sbx env rm` with the same
 paths to remove the scoped secrets. Pass `--prune-bindings` if you also want to
 remove the declared global bindings. MCP registrations are host-global and
 remain after cleanup.
-
-## Multiple files
-
-Pass multiple paths to merge environment files in order. Nested mappings merge
-by key, lists concatenate, and values from later files replace earlier scalar
-values. Relative workspace paths and the default sandbox name use the directory
-of the first file.
-
-```console
-$ sbx env run base.sbxenv.yaml local.sbxenv.yaml
-```
-
-Commit a `base.sbxenv.yaml` with shared configuration and add
-`local.sbxenv.yaml` to `.gitignore` for personal overrides, such as another
-workspace path, additional secrets, or different resource limits.
 
 ## Variable interpolation
 
