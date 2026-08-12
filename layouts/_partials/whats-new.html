@@ -1,6 +1,8 @@
 {{- $data := index hugo.Data "whats-new" -}}
 {{- with $data.items -}}
-  <section class="py-10 md:py-12">
+  {{- $featured := where . "featured" true -}}
+  {{- $more := where . "featured" false -}}
+  <section class="py-10 md:py-12" x-data="{ expanded: false }">
     <div class="container mx-auto max-w-4xl px-4">
       <header class="mb-6 border-b border-gray-200 pb-4 dark:border-gray-800">
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
@@ -8,7 +10,7 @@
         </h2>
       </header>
       <ol>
-        {{ range . }}
+        {{ range $featured }}
           <li class="grid grid-cols-[1fr] md:grid-cols-[5rem_1fr] md:gap-x-6">
             <time
               class="hidden pt-5 text-right text-sm text-gray-500 md:block dark:text-gray-400"
@@ -50,7 +52,71 @@
             </a>
           </li>
         {{ end }}
+        {{ range $more }}
+          <li
+            x-cloak
+            x-show="expanded"
+            class="grid grid-cols-[1fr] md:grid-cols-[5rem_1fr] md:gap-x-6"
+          >
+            <time
+              class="hidden pt-5 text-right text-sm text-gray-500 md:block dark:text-gray-400"
+              datetime="{{ .published }}"
+              >{{ .published | time.Format "Jan 2" }}</time
+            >
+            <a
+              href="{{ .url }}"
+              class="group relative block border-l border-gray-200 py-5 pl-7 dark:border-gray-700"
+            >
+              <span
+                aria-hidden="true"
+                class="absolute top-6 -left-[5px] size-[9px] rounded-full bg-gray-300 ring-4 ring-gray-50 transition group-hover:bg-blue-500 dark:bg-gray-600 dark:ring-gray-950 dark:group-hover:bg-blue-400"
+              ></span>
+              <span
+                class="mb-1 flex flex-wrap items-center gap-x-2 text-sm font-medium text-blue-600 dark:text-blue-400"
+              >
+                {{ .product }}
+                <time
+                  class="font-normal text-gray-500 md:hidden dark:text-gray-400"
+                  datetime="{{ .published }}"
+                  >{{ .published | time.Format "Jan 2" }}</time
+                >
+              </span>
+              <span class="flex items-center gap-2">
+                <span
+                  class="font-medium text-gray-900 transition group-hover:text-blue-500 dark:text-white dark:group-hover:text-blue-400"
+                  >{{ .title }}</span
+                >
+                <span
+                  class="icon-svg shrink-0 text-gray-400 transition group-hover:translate-x-1 group-hover:text-blue-500 dark:text-gray-500 dark:group-hover:text-blue-400"
+                >
+                  {{ partialCached "icon" "arrow-right" "arrow-right" }}
+                </span>
+              </span>
+              <span class="mt-1 block text-sm text-gray-600 dark:text-gray-300"
+                >{{ .description }}</span
+              >
+            </a>
+          </li>
+        {{ end }}
       </ol>
+      {{ with $more }}
+        <button
+          type="button"
+          @click="expanded = !expanded"
+          :aria-expanded="expanded"
+          class="mt-4 ml-7 inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-500 md:ml-[6.5rem] dark:text-blue-400 dark:hover:text-blue-300"
+        >
+          <span x-text="expanded ? 'Show top 5' : 'Show all 30 days'"
+            >Show all 30 days</span
+          >
+          <span class="icon-svg icon-sm" x-show="!expanded">
+            {{ partialCached "icon" "chevron-down" "chevron-down" }}
+          </span>
+          <span class="icon-svg icon-sm" x-cloak x-show="expanded">
+            {{ partialCached "icon" "chevron-up" "chevron-up" }}
+          </span>
+        </button>
+      {{ end }}
     </div>
   </section>
 {{- end -}}

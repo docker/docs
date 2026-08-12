@@ -1,14 +1,24 @@
 {
-  "period_start": "2026-08-03",
-  "period_end": "2026-08-09",
+  "period_start": "2026-07-13",
+  "period_end": "2026-08-11",
   "items": [
+    {
+      "product": "Docker Desktop",
+      "title": "Use Docker VMM on Mac and Windows",
+      "description": "Run Docker Desktop with Docker's container-optimized hypervisor on supported Mac and Windows systems.",
+      "url": "/desktop/features/vmm/",
+      "published": "2026-08-10",
+      "source_prs": [25702, 25726],
+      "featured": true
+    },
     {
       "product": "Docker Sandboxes",
       "title": "Connect sandboxes through an MCP gateway",
       "description": "Register local or remote MCP servers on the host, reuse them across sandboxes, and govern server and tool access with Cedar policies.",
       "url": "/ai/sandboxes/mcp-gateway/",
       "published": "2026-08-06",
-      "source_prs": [25559, 25707]
+      "source_prs": [25559, 25707],
+      "featured": true
     },
     {
       "product": "Docker Sandboxes",
@@ -16,15 +26,17 @@
       "description": "Define kit setup, permissions, networking, and API key or OAuth credential requirements with the version 2 kit schema.",
       "url": "/ai/sandboxes/customize/kit-reference/#schema-versions",
       "published": "2026-08-06",
-      "source_prs": [25467, 25707]
+      "source_prs": [25467, 25707],
+      "featured": false
     },
     {
       "product": "Docker Sandboxes",
       "title": "Run Claude Code with local models",
-      "description": "Experimental support routes Claude Code sandbox requests to the bundled llmman server or an existing Ollama installation.",
+      "description": "Route Claude Code sandbox requests to the bundled local-model server or an existing Ollama installation.",
       "url": "/ai/sandboxes/agents/claude-code/#use-a-local-model",
       "published": "2026-08-06",
-      "source_prs": [25641, 25707]
+      "source_prs": [25641, 25707],
+      "featured": false
     },
     {
       "product": "Docker AI Governance",
@@ -32,7 +44,8 @@
       "description": "Search and export policy decisions from Docker Cloud, or forward events to Splunk, Dynatrace, and custom HTTPS endpoints.",
       "url": "/ai/sandboxes/governance/audit/",
       "published": "2026-08-03",
-      "source_prs": [25679, 25687]
+      "source_prs": [25679, 25687],
+      "featured": true
     },
     {
       "product": "Docker Desktop",
@@ -40,23 +53,44 @@
       "description": "Fresh Microsoft Store installations on Windows use per-user mode by default.",
       "url": "/desktop/release-notes/#4850",
       "published": "2026-08-03",
-      "source_prs": [25665]
+      "source_prs": [25665],
+      "featured": false
     },
     {
-      "product": "Docker Engine",
-      "title": "Mount files from container images",
-      "description": "Mount tools or read-only assets from another image without rebuilding the container image.",
-      "url": "/engine/storage/image-mounts/",
-      "published": "2026-08-03",
-      "source_prs": [25486]
+      "product": "Docker Sandboxes",
+      "title": "Share agent skills across sandboxes",
+      "description": "Import skills from supported host agents into a persistent store that sandboxes can share.",
+      "url": "/ai/sandboxes/workflows/#share-agent-skills",
+      "published": "2026-07-24",
+      "source_prs": [25588],
+      "featured": false
     },
     {
-      "product": "Docker Engine",
-      "title": "Use Unix sockets on Windows",
-      "description": "Configure the Docker daemon and CLI on Windows to communicate over a Unix socket.",
-      "url": "/engine/daemon/#listen-on-a-unix-socket-on-windows",
-      "published": "2026-08-03",
-      "source_prs": [25660]
+      "product": "Docker Sandboxes",
+      "title": "Connect editors and desktop apps over SSH",
+      "description": "Use a sandbox from VS Code, Cursor, Claude Desktop, ChatGPT, or another SSH-capable tool.",
+      "url": "/ai/sandboxes/integrations/",
+      "published": "2026-07-24",
+      "source_prs": [25557],
+      "featured": true
+    },
+    {
+      "product": "Docker Hardened Images",
+      "title": "Query the DHI catalog from AI assistants",
+      "description": "Search DHI repositories, inspect images, retrieve SBOMs, check CVEs, and manage mirrors through the DHI MCP server.",
+      "url": "/dhi/tools/mcp/",
+      "published": "2026-07-23",
+      "source_prs": [25589],
+      "featured": false
+    },
+    {
+      "product": "Docker Enterprise",
+      "title": "Authenticate GitHub Actions with OIDC connections",
+      "description": "Exchange GitHub OIDC tokens for short-lived access to Docker resources without storing long-lived workflow credentials.",
+      "url": "/enterprise/security/oidc-connections/",
+      "published": "2026-07-21",
+      "source_prs": [25336],
+      "featured": true
     }
   ]
 }

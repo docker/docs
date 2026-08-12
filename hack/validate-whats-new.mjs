@@ -15,6 +15,7 @@ const requiredItemKeys = [
   "url",
   "published",
   "source_prs",
+  "featured",
 ];
 
 if (data.period_start !== expectedStart) {
@@ -26,10 +27,6 @@ if (data.period_end !== expectedEnd) {
 if (!Array.isArray(data.items)) {
   throw new Error("items must be an array");
 }
-if (data.items.length > 10) {
-  throw new Error("items must contain no more than 10 highlights");
-}
-
 for (const [index, item] of data.items.entries()) {
   const missing = requiredItemKeys.filter((key) => !(key in item));
   if (missing.length > 0) {
@@ -65,6 +62,17 @@ for (const [index, item] of data.items.entries()) {
       `item ${index + 1} source_prs must contain pull request numbers`,
     );
   }
+  if (typeof item.featured !== "boolean") {
+    throw new Error(`item ${index + 1} featured must be a boolean`);
+  }
+}
+
+const featuredCount = data.items.filter((item) => item.featured).length;
+const expectedFeaturedCount = Math.min(5, data.items.length);
+if (featuredCount !== expectedFeaturedCount) {
+  throw new Error(
+    `items must contain ${expectedFeaturedCount} featured highlights`,
+  );
 }
 
 const publishedDates = data.items.map((item) => item.published);

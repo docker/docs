@@ -2,7 +2,7 @@ name: Update What's New
 
 on:
   schedule:
-    # Review the previous seven complete UTC days every day at 06:00 UTC.
+    # Review the previous 30 complete UTC days every day at 06:00 UTC.
     - cron: "0 6 * * *"
   workflow_dispatch:
     inputs:
@@ -37,7 +37,7 @@ jobs:
         id: period
         run: |
           PERIOD_END=$(date -u -d 'yesterday' +%F)
-          echo "start=$(date -u -d "$PERIOD_END - 6 days" +%F)" >> "$GITHUB_OUTPUT"
+          echo "start=$(date -u -d "$PERIOD_END - 29 days" +%F)" >> "$GITHUB_OUTPUT"
           echo "end=$PERIOD_END" >> "$GITHUB_OUTPUT"
 
       - name: Configure AWS credentials
