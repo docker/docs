@@ -96,16 +96,18 @@ data.
 ```console
 $ docker volume prune
 
-WARNING! This will remove all volumes not used by at least one container.
+WARNING! This will remove anonymous local volumes not used by at least one container.
 Are you sure you want to continue? [y/N] y
 ```
 
 By default, you are prompted to continue. To bypass the prompt, use the `-f` or
 `--force` flag.
 
-By default, all unused volumes are removed. You can limit the scope using
-the `--filter` flag. For instance, the following command only removes
-volumes which aren't labelled with the `keep` label:
+By default, only **anonymous** unused volumes are removed. Named volumes that
+aren't attached to a container are left alone unless you pass `--all` / `-a`.
+You can also limit the scope with the `--filter` flag. For instance, the
+following command only removes volumes which aren't labelled with the `keep`
+label:
 
 ```console
 $ docker volume prune --filter "label!=keep"
