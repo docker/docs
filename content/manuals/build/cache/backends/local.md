@@ -13,6 +13,11 @@ for the underlying directory structure. Local cache is a good choice if you're
 just testing, or if you want the flexibility to self-manage a shared storage
 solution.
 
+This cache storage backend works with the default `docker` driver only when the
+[containerd image store](/manuals/desktop/features/containerd.md) is enabled. If
+the containerd image store isn't enabled, use a different driver. See
+[Build drivers](/manuals/build/builders/drivers/_index.md) for more information.
+
 ## Synopsis
 
 ```console
