@@ -134,6 +134,7 @@ reads and the API domains the proxy injects credentials into:
 | Service      | Environment variables              | API domains                                                                                                                   |
 | ------------ | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | `anthropic`  | `ANTHROPIC_API_KEY`                | `api.anthropic.com`, `console.anthropic.com`, `claude.ai`, `mcp-proxy.anthropic.com`                                          |
+| `copilot`    | `COPILOT_GITHUB_TOKEN`             | `api.githubcopilot.com`, `api.business.githubcopilot.com`, `api.enterprise.githubcopilot.com`, `api.individual.githubcopilot.com`, `copilot.github.com` |
 | `cursor`     | `CURSOR_API_KEY`                   | `api2.cursor.sh`, `api3.cursor.sh`, `repo42.cursor.sh`, `cursor.com`                                                          |
 | `droid`      | `FACTORY_API_KEY`                  | `api.factory.ai`, `app.factory.ai`, `relay.factory.ai`                                                                        |
 | `github`     | `GH_TOKEN`, `GITHUB_TOKEN`         | `api.github.com`, `github.com`, `raw.githubusercontent.com`, `gist.github.com`, `copilot.github.com`, `api.githubcopilot.com` |
@@ -147,6 +148,21 @@ reads and the API domains the proxy injects credentials into:
 
 When you store a secret with `sbx secret set <service>`, the proxy injects
 it into requests to the listed API domains.
+
+> [!NOTE]
+> `github` and `copilot` are separate secrets because they need different
+> token types. GitHub Copilot's own API rejects classic personal access
+> tokens, so it needs a fine-grained PAT with the `Copilot Requests`
+> permission — but a fine-grained PAT can't also cover general `gh`/git
+> access the way a classic PAT does. Set `github` to a classic PAT (or an
+> OAuth-based token) for repository access, and `copilot` to a fine-grained
+> PAT for Copilot API access.
+>
+> `api.githubcopilot.com` and `copilot.github.com` appear under both rows
+> because which secret injects into them depends on the kit: the `copilot`
+> kit uses its own `copilot` secret for them, while other kits (`opencode`,
+> `docker-agent`) route the same domains through their `github` secret
+> instead.
 
 ### Services declared by kits
 
