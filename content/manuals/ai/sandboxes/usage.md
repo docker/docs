@@ -147,6 +147,10 @@ including for interactive sessions and agents started with `sbx run`. A command
 passed directly to `sbx exec` doesn't start a shell. Wrap that command in
 `bash -c` if it needs variables from the persistent environment file.
 
+A variable added to the file only takes effect for sessions and agents started
+afterward. Restart a running agent, or stop and start the sandbox, to pick up
+the new value.
+
 Environment variables are readable by processes inside the sandbox. For API
 keys and other credentials, use [`sbx secret set`](security/credentials.md#store-a-secret)
 for a supported service or the experimental
