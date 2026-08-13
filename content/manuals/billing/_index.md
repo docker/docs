@@ -47,24 +47,24 @@ You can manage your Docker plans from the Billing portal:
 
 1. Sign in to [Docker Home](https://app.docker.com/), then choose your
    account.
-1. Go to **Billing** to view the Overview page.
+1. Go to **Billing** to view the **Overview** page.
 1. Select the page you want to explore.
 
 ### Usage
 
-The billing usage page helps you compare usage-based charges across
+The billing **Usage** page helps you compare usage-based charges across
 billing periods. You can track usage by changing the period, product,
 and how the product is metered.
 
 ### Costs
 
-The billing costs page aggregates all costs by billing period. This page
+The billing **Costs** page aggregates all costs by billing period. This page
 breaks down charges by resource (the product accruing a charge), the
 status of your billing period, and costs to date.
 
 ### Credits
 
-The billing credits page shows credits applied to your costs. If you
+The billing **Credits** page shows credits applied to your costs. If you
 received a promotional credit, you can see how it applies to your bill
 from this page.
 
