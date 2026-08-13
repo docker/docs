@@ -38,8 +38,7 @@ Docker Agentic Platform requires that you bring your own API keys
 for inference. Your inference provider handles those costs.
 
 After you subscribe, your invoice reflects metered, pay-as-you-go compute usage.
-Docker meters compute usage based on the vCPU and memory that your
-sandboxes consume over time. To track usage for Docker Agentic Platform:
+Docker meters compute usage based on sandbox runtime consumption in seconds of compute. Each instance shape, calculated from vCPU plus memory, has its own billing rate. To track usage for Docker Agentic Platform:
 
 1. Sign in to [Docker Home](https://app.docker.com/), then choose your
    account.
