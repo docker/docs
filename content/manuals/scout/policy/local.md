@@ -165,6 +165,13 @@ greater-than thresholds:
 | > 10% | E |
 | <= 10% | F |
 
+Thresholds are exclusive of their lower bound, so an exact boundary value
+grades down: a score of exactly 90% is a B, not an A; exactly 70% is a C, and
+so on.
+
+If every policy is excluded from the score (for example, all policies are
+configured with `weight: 0`), no health score is shown at all.
+
 To change a policy's contribution to the score, set `custom.weight` in the
 policy's Rego metadata, or override it per policy in the policy-config file:
 
