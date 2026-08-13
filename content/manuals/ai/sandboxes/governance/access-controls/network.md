@@ -24,8 +24,10 @@ policy. See [Precedence](../concepts.md#precedence).
 
 ## Rule syntax
 
-Network rules use the actions `connect:tcp` and `connect:udp`. Resources are
-hostnames, CIDR ranges, ports, or hostnames with ports.
+Network rules use the action `connect:tcp`. Resources are hostnames, CIDR
+ranges, ports, or hostnames with ports. The governance policy schema also
+accepts `connect:udp`, but Docker Sandboxes blocks direct external UDP
+independently of network policy.
 
 Examples:
 
