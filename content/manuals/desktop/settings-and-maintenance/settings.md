@@ -158,7 +158,7 @@ This allows Windows containers to use the configured Docker Desktop proxy, and
 it is required if you want [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md)
 restrictions to apply to Windows image operations. Administrators can manage
 the same behavior with
-[Override Windows "dockerd" port](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md#override-windows-dockerd-port).
+[**Override Windows "dockerd" port**](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md#override-windows-dockerd-port).
 
 #### Proxy authentication
 
