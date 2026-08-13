@@ -153,7 +153,7 @@ it into requests to the listed API domains.
 > `github` and `copilot` are separate secrets because they need different
 > token types. GitHub Copilot's own API rejects classic personal access
 > tokens, so it needs a fine-grained PAT with the `Copilot Requests`
-> permission — but a fine-grained PAT can't also cover general `gh`/git
+> permission — but a fine-grained PAT can't also cover general `gh`/Git
 > access the way a classic PAT does. Set `github` to a classic PAT (or an
 > OAuth-based token) for repository access, and `copilot` to a fine-grained
 > PAT for Copilot API access.
