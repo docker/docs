@@ -53,20 +53,19 @@ status only when the relative importance of the candidate set changes.
 
 1. Read `data/whats-new.json`.
 2. Determine the review mode from the request:
-   - For an incremental review, inspect only PRs merged in the supplied
-     candidate range. Retain existing items inside the publication window
-     without re-reviewing their source PRs. If the request says there are no new
-     candidates, skip PR discovery and only remove expired items and reconsider
-     featured status.
+   - For an incremental review, list PRs merged from the day after the supplied
+     checkpoint through the end of the publication window. Retain existing
+     items inside the publication window without re-reviewing their source PRs.
    - For a full review, inspect every PR merged in the supplied publication
      window.
-3. Unless there are no new candidates, list every PR in the range that applies
-   to the review mode:
+3. List PRs in the range that applies to the review mode:
 
    ```console
    $ gh pr list --repo docker/docs --state merged --search 'merged:START..END' --limit 200
    ```
 
+   If an incremental search returns no PRs, skip candidate inspection and only
+   remove expired items.
 4. Inspect the diff and resulting pages for every plausible new candidate.
 5. Decide what qualifies using only evidence in the merged documentation.
 6. Remove existing items published before the requested publication window.

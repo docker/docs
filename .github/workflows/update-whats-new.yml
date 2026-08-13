@@ -80,12 +80,10 @@ jobs:
             git show "origin/$BRANCH_NAME:data/whats-new.json" > data/whats-new.json
           fi
 
-      - name: Check for work
-        id: preflight
+      - name: Set review mode and checkpoint
+        id: review
         env:
           FULL_RESCAN: ${{ inputs.full-rescan == true }}
-          GH_TOKEN: ${{ env.GITHUB_APP_TOKEN || github.token }}
-          PERIOD_START: ${{ steps.period.outputs.start }}
           PERIOD_END: ${{ steps.period.outputs.end }}
           STATE_FILE: ${{ runner.temp }}/whats-new-state.json
         run: |
@@ -99,38 +97,9 @@ jobs:
           fi
 
           if [ "$FULL_RESCAN" = "true" ]; then
-            CANDIDATE_START=$PERIOD_START
             MODE=full
           else
-            CANDIDATE_START=$(date -u -d "$REVIEWED_THROUGH + 1 day" +%F)
             MODE=incremental
-          fi
-
-          HAS_NEW_PRS=false
-          if [[ "$CANDIDATE_START" < "$PERIOD_END" || "$CANDIDATE_START" = "$PERIOD_END" ]]; then
-            CANDIDATE_RANGE="$CANDIDATE_START through $PERIOD_END, inclusive"
-            PR_COUNT=$(gh pr list \
-              --repo docker/docs \
-              --state merged \
-              --search "merged:$CANDIDATE_START..$PERIOD_END" \
-              --limit 1 \
-              --json number \
-              --jq 'length')
-            if [ "$PR_COUNT" -gt 0 ]; then
-              HAS_NEW_PRS=true
-            elif [ "$MODE" = "incremental" ]; then
-              CANDIDATE_RANGE="none; there are no new candidate pull requests"
-            fi
-          else
-            CANDIDATE_RANGE="none; there are no new candidate pull requests"
-          fi
-
-          HAS_EXPIRED=$(jq --arg start "$PERIOD_START" \
-            'any(.items[]; .published < $start)' data/whats-new.json)
-
-          RUN_AGENT=false
-          if [ "$MODE" = "full" ] || [ "$HAS_NEW_PRS" = "true" ] || [ "$HAS_EXPIRED" = "true" ]; then
-            RUN_AGENT=true
           fi
 
           jq -n --arg reviewed_through "$PERIOD_END" \
@@ -138,34 +107,25 @@ jobs:
 
           {
             echo "mode=$MODE"
-            echo "candidate-range=$CANDIDATE_RANGE"
-            echo "run-agent=$RUN_AGENT"
+            echo "reviewed-through=$REVIEWED_THROUGH"
           } >> "$GITHUB_OUTPUT"
-          echo "New PRs: $HAS_NEW_PRS; expired items: $HAS_EXPIRED; run agent: $RUN_AGENT"
-
-      - name: Report no changes to review
-        if: steps.preflight.outputs.run-agent == 'false'
-        run: |
-          echo "No pull requests were merged since the last successful review, and no highlights expired from the 30-day window." | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Curate highlights
-        if: steps.preflight.outputs.run-agent == 'true'
         uses: docker/docker-agent-action@e96a4bb40cac114f64358621e1d08346c8eadc8c # v2.0.1
         env:
           GH_TOKEN: ${{ env.GITHUB_APP_TOKEN || github.token }}
         with:
           agent: ${{ github.workspace }}/.github/agents/whats-new.yaml
           prompt: >-
-            Use the curate-whats-new skill in ${{ steps.preflight.outputs.mode }} mode.
+            Use the curate-whats-new skill in ${{ steps.review.outputs.mode }} mode.
             The publication window is ${{ steps.period.outputs.start }} through
-            ${{ steps.period.outputs.end }}, inclusive. Candidate range:
-            ${{ steps.preflight.outputs.candidate-range }}.
+            ${{ steps.period.outputs.end }}, inclusive. The last successful incremental
+            review covered through ${{ steps.review.outputs.reviewed-through }}.
           anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
           github-token: ${{ env.GITHUB_APP_TOKEN || github.token }}
           timeout: 1200
 
       - name: Verify agent changes
-        if: steps.preflight.outputs.run-agent == 'true'
         env:
           PERIOD_START: ${{ steps.period.outputs.start }}
           PERIOD_END: ${{ steps.period.outputs.end }}
@@ -181,14 +141,14 @@ jobs:
           node hack/validate-whats-new.mjs data/whats-new.json "$PERIOD_START" "$PERIOD_END"
 
       - name: Show proposal
-        if: steps.preflight.outputs.run-agent == 'true' && inputs.dry-run == true
+        if: inputs.dry-run == true
         run: |
           git diff -- data/whats-new.json
           cat .pr-body.md
 
       - name: Detect changes
         id: changes
-        if: steps.preflight.outputs.run-agent == 'true' && inputs.dry-run != true
+        if: inputs.dry-run != true
         run: |
           if cmp -s \
             <(git show HEAD:data/whats-new.json | jq -S '.items') \
