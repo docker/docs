@@ -168,8 +168,9 @@ for all options, including `--all` to also remove internal and frontend images.
 ## Prune everything
 
 The `docker system prune` command is a shortcut that prunes images, containers,
-and networks. Volumes aren't pruned by default, and you must specify the
-`--volumes` flag for `docker system prune` to prune volumes.
+and networks. Volumes aren't pruned by default. Add `--volumes` to also remove
+unused **anonymous** volumes. Named unused volumes are left alone; use
+`docker volume prune --all` if you intend to delete those too.
 
 ```console
 $ docker system prune
@@ -183,7 +184,7 @@ WARNING! This will remove:
 Are you sure you want to continue? [y/N] y
 ```
 
-To also prune volumes, add the `--volumes` flag:
+To also prune unused anonymous volumes, add the `--volumes` flag:
 
 ```console
 $ docker system prune --volumes
@@ -191,9 +192,9 @@ $ docker system prune --volumes
 WARNING! This will remove:
         - all stopped containers
         - all networks not used by at least one container
-        - all volumes not used by at least one container
+        - all anonymous volumes not used by at least one container
         - all dangling images
-        - all build cache
+        - unused build cache
 
 Are you sure you want to continue? [y/N] y
 ```
