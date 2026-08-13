@@ -52,17 +52,30 @@ status only when the relative importance of the candidate set changes.
 ## Procedure
 
 1. Read `data/whats-new.json`.
-2. List every PR merged in the requested period:
+2. Determine the review mode from the request:
+   - For an incremental review, inspect only PRs merged in the supplied
+     candidate range. Retain existing items inside the publication window
+     without re-reviewing their source PRs. If the request says there are no new
+     candidates, skip PR discovery and only remove expired items and reconsider
+     featured status.
+   - For a full review, inspect every PR merged in the supplied publication
+     window.
+3. Unless there are no new candidates, list every PR in the range that applies
+   to the review mode:
 
    ```console
    $ gh pr list --repo docker/docs --state merged --search 'merged:START..END' --limit 200
    ```
 
-3. Inspect the diff and resulting pages for every plausible candidate.
-4. Decide what qualifies using only evidence in the merged documentation.
-5. Replace `period_start`, `period_end`, and `items` in
+4. Inspect the diff and resulting pages for every plausible new candidate.
+5. Decide what qualifies using only evidence in the merged documentation.
+6. Remove existing items published before the requested publication window.
+   Add newly qualifying launches, combine related PRs, and reconsider featured
+   status across the resulting list. Do not replace or rewrite retained items
+   merely because they were not part of the incremental candidate range.
+7. Replace `period_start`, `period_end`, and `items` in
    `data/whats-new.json`. Sort items by `published` date, newest first.
-6. Write `.pr-body.md` with the publication period, selected highlights and
+8. Write `.pr-body.md` with the publication period, selected highlights and
    source PRs, plus concise reasons for plausible exclusions.
 
 Each item must contain `product`, `title`, `description`, `url`, `published`,
