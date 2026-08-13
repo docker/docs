@@ -44,7 +44,7 @@ Docker Desktop supports two installation modes. Per-user installation is recomme
 | Windows containers | Not supported | Supported |
 | Security | Smaller attack surface; no privileged system service installed | Requires privileged system service; broader access to host resources |
 
-For more information, see [Understand permission requirements for Windows](windows-install.md).
+For more information, see [Understand permission requirements for Windows](./windows-permission-requirements.md).
 
 ## System requirements
 
