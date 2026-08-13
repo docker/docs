@@ -149,7 +149,7 @@ Generates event logs in nanosecond resolution. Defaults to `false`.
 Sets the timeout for the write call to the `fluentd` daemon. By default,
 writes have no timeout and will block indefinitely.
 
-### fluentd-read-timeout
+### Fluentd-read-timeout
 
 Sets the timeout for reading acknowledgements (ACKs) from the `fluentd`
 daemon. By default, reads have no timeout and will block indefinitely.
