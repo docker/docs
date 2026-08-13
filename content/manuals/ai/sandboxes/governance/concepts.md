@@ -61,7 +61,8 @@ plus every team-scoped policy for a team they belong to. See
 
 Network rules use the action `connect:tcp`. Resources are hostnames, CIDR
 ranges, or ports. The governance policy schema also accepts `connect:udp`, but
-Docker Sandboxes blocks direct external UDP independently of network policy.
+Docker Sandboxes always blocks direct external UDP and ICMP. `connect:udp`
+rules have no effect.
 
 **Hostname patterns**
 

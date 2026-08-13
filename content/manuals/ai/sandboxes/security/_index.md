@@ -24,8 +24,8 @@ What crosses the boundary into the VM:
   and the agent works on a private clone.
 - **Credentials:** the host-side proxy injects authentication headers into
   outbound HTTP requests. The raw credential values never enter the VM.
-- **Network access:** HTTP and HTTPS requests to
-  [allowed domains](defaults/) are proxied through the host.
+- **Network access:** outbound TCP connections to destinations allowed by
+  [network policy](defaults/) are proxied through the host.
 - **Shared agent skills:** a persistent host-side store is mounted read-write
   at the agent's skills directory unless you opt out when creating the
   sandbox. Supported agents in other sandboxes mount the same store.
@@ -36,15 +36,16 @@ What crosses the boundary back to the host:
 
 - **Workspace file changes:** visible on your host in real time with the
   default direct mount.
-- **HTTP/HTTPS requests:** sent to allowed domains through the host proxy.
+- **Outbound TCP connections:** sent to allowed destinations through the host
+  proxy.
 - **Shared skill changes:** written to the host-side store and visible to other
   sandboxes that share it.
 
 Outside the workspace and shared skills store, the agent cannot access your
 host filesystem. It also cannot access your host Docker daemon, your host
-network or localhost, or any domain not in the allow list. Sandboxes cannot
-communicate directly over the network. Raw TCP, UDP, and ICMP are blocked at
-the network layer.
+network directly, or any destination not allowed by network policy. Sandboxes
+cannot communicate directly over the network. Direct external UDP and ICMP are
+blocked at the network layer.
 
 MCP servers are an explicit integration point. Remote MCP servers run outside
 Docker Sandboxes, and local stdio MCP servers run on the host, not inside the
@@ -61,8 +62,9 @@ The sandbox security model has five layers. See
 
 - **Hypervisor isolation:** separate kernel per sandbox. No shared memory or
   processes with the host.
-- **Network isolation:** all HTTP/HTTPS traffic proxied through the host.
-  [Deny-by-default policy](defaults/). Non-HTTP protocols blocked entirely.
+- **Network isolation:** outbound TCP traffic is proxied through the host and
+  governed by a [deny-by-default policy](defaults/). Direct external UDP and
+  ICMP are blocked.
 - **Docker Engine isolation:** each sandbox has its own Docker Engine with no
   path to the host daemon.
 - **Workspace isolation** (opt-in via `--clone`): the agent works on a

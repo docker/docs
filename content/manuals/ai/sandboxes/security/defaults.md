@@ -13,8 +13,8 @@ security posture.
 
 All outbound TCP traffic, including HTTP, HTTPS, and SSH, is blocked unless an
 explicit rule allows the destination. Direct external UDP and ICMP traffic is
-blocked at the network layer. DNS queries use the sandbox's policy-gated
-resolver.
+blocked at the network layer. DNS queries use the sandbox's internal resolver,
+which enforces network policy.
 
 Run `sbx policy ls` to see the active network rules for your installation.
 Rules can be customized per machine with the `sbx policy` CLI, or managed
