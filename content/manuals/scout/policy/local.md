@@ -118,6 +118,67 @@ $ docker scout policy myorg/app:latest --only-policy "No copyleft licenses"
 $ docker scout policy myorg/app:latest --output report.txt
 ```
 
+## Health score
+
+`docker scout policy`, `docker scout quickview`, and `docker scout compare` also
+report a health score alongside the policy results: a numeric percentage and an
+A-F letter grade, computed entirely from the local policy evaluation. No data is
+sent to the Scout service to compute it.
+
+```console
+$ docker scout policy myorg/app:latest
+...
+Health score  B (83%)
+```
+
+`docker scout compare` shows the score for both images:
+
+```console
+Health score  Analyzed B (83%)  Comparison C (65%)
+```
+
+### How the score is calculated
+
+The score is a weighted pass ratio:
+
+- Each policy contributes a weight to the total, taken from its `custom.weight`
+  metadata annotation (see [Metadata annotations](#metadata-annotations)) or a
+  `weight` override in the policy-config file. Policies without a declared
+  weight default to `10`.
+- A policy that passes (reports zero violations) contributes its full weight to
+  the scored points.
+- A policy that fails still counts its weight toward the total, but contributes
+  nothing to the scored points, which lowers the score.
+- A policy with no data to evaluate (unknown) also counts toward the total
+  without contributing to the scored points.
+- A policy with a weight of `0` is excluded from the score entirely.
+
+The percentage is `scored / total * 100`, mapped to a letter grade using strict
+greater-than thresholds:
+
+| Score | Grade |
+| --- | --- |
+| > 90% | A |
+| > 70% | B |
+| > 50% | C |
+| > 30% | D |
+| > 10% | E |
+| <= 10% | F |
+
+To change a policy's contribution to the score, set `custom.weight` in the
+policy's Rego metadata, or override it per policy in the policy-config file:
+
+```json
+{
+  "policies": [
+    {
+      "name": "no-copyleft-licenses",
+      "weight": 0
+    }
+  ]
+}
+```
+
 ## Built-in policies
 
 The following policies are available by default:
@@ -157,6 +218,10 @@ Pass it with `--policy-config`.
 
 - `policies[].name`: the policy's stable ID (see the following table).
 - `policies[].enabled`: set to `false` to skip the policy. Policies not listed are enabled by default.
+- `policies[].weight`: overrides the policy's `custom.weight` metadata annotation,
+  which determines its contribution to the [health score](#health-score). A
+  weight of `0` excludes the policy from the score. When omitted, the policy's
+  own annotation is used, or `10` if it has none.
 - `policies[].config`: an object passed to the policy as `data.config`.
 
 ### Configuration reference
@@ -293,7 +358,7 @@ to render results. Place them in a `# METADATA` block immediately above the
 | `description` | Longer explanation |
 | `custom.name` | Stable ID used to match `--policy-config` entries. Defaults to the package path if omitted |
 | `custom.result_type` | How violations are rendered: `vulnerability`, `license`, `boolean`, or `generic` (default) |
-| `custom.weight` | Higher weights sort first in the report |
+| `custom.weight` | Scoring weight and display sort order. Higher weights sort first in the report and contribute more to the [health score](#health-score). Defaults to `10` when omitted; a weight of `0` excludes the policy from the score |
 | `custom.not_compliant_title` | Status label shown when the policy fails |
 | `custom.details_order` | Ordered list of `detail` keys to display as columns |
 
