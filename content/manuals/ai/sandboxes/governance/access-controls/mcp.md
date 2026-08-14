@@ -2,7 +2,7 @@
 title: MCP access policies
 linkTitle: MCP access
 weight: 50
-description: Use Cedar-based MCP policies to control sandbox MCP server registration, tool calls, prompts, resources, and approval gates.
+description: Use Cedar-based policies to control MCP server registration and activity routed through the Docker Sandboxes MCP gateway.
 keywords: docker sandboxes, MCP policy, MCP access, Cedar policy, requireApproval, AI Governance
 ---
 
@@ -12,6 +12,14 @@ through Docker's MCP gateway. Use these policies to approve trusted servers,
 withdraw access to a server, require approval for tool calls, and restrict
 host-run servers. To register MCP servers and connect them to sandboxes, see
 [MCP gateway](../../mcp-gateway.md).
+
+MCP access policies apply only to server registration and requests handled by
+Docker's MCP gateway. They don't govern an MCP server that an agent or MCP
+client configures and connects to directly from inside the sandbox. A direct
+connection to a remote MCP server is outbound sandbox traffic, so
+[network access policy](network.md) determines whether the sandbox can reach
+the server. To prevent access through both paths, block the server in MCP
+access policy and block its network destination in network access policy.
 
 Unlike [network access policies](network.md) and
 [filesystem access policies](filesystem.md), MCP policies are organization

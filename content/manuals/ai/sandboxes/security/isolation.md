@@ -33,26 +33,25 @@ hypervisor boundary is the isolation control, not in-VM privilege separation.
 
 ## Network isolation
 
-Each sandbox has its own isolated network. Sandboxes cannot communicate with
-each other and cannot reach your host's localhost. There is no shared network
-between sandboxes or between a sandbox and your host.
+Each sandbox has its own isolated network. Sandboxes cannot communicate
+directly with each other or share a network with your host. To reach a service
+running on the host through a policy-controlled connection, see
+[Accessing host services from a sandbox](../workflows.md#accessing-host-services-from-a-sandbox).
 
-All HTTP and HTTPS traffic leaving a sandbox passes through a proxy on your
-host that enforces the
+All outbound TCP traffic passes through a proxy on your host that enforces the
 [network access policy](../governance/access-controls/network.md). The sandbox
 routes traffic through either a forward proxy or a transparent proxy depending
 on the client's configuration. Both enforce the network policy. Only the
 forward proxy [injects credentials](credentials.md) for AI services.
 
-Raw TCP connections, UDP, and ICMP are blocked at the network layer. DNS
-resolution goes through the proxy and is subject to the same network policy —
-domains that policy denies are refused at the resolver; loopback names such as
-`localhost` are always resolved regardless of policy. Traffic to private IP
-ranges, loopback, and link-local addresses is also blocked. Only domains
-explicitly listed in the policy are reachable.
+Direct external UDP and ICMP are blocked at the network layer. DNS queries use
+the sandbox's internal resolver, which enforces network policy. TCP connections
+are allowed only when a policy rule matches the destination.
 
 For the default set of allowed domains, see
-[Default security posture](defaults.md).
+[Default security posture](defaults.md). To forward allowed traffic through a
+corporate or upstream proxy, see
+[Configure an upstream proxy](../upstream-proxy.md).
 
 ## Docker Engine isolation
 

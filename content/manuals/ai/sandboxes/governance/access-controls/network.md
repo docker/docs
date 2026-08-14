@@ -24,8 +24,10 @@ policy. See [Precedence](../concepts.md#precedence).
 
 ## Rule syntax
 
-Network rules use the actions `connect:tcp` and `connect:udp`. Resources are
-hostnames, CIDR ranges, ports, or hostnames with ports.
+Network rules use the action `connect:tcp`. Resources are hostnames, CIDR
+ranges, ports, or hostnames with ports. The governance policy schema also
+accepts `connect:udp`, but Docker Sandboxes always blocks direct external UDP
+and ICMP. `connect:udp` rules have no effect.
 
 Examples:
 
@@ -59,3 +61,10 @@ organization or to selected teams. For setup steps and team scoping, see
 
 Use [Monitoring policies](../monitor-and-enforce/monitoring.md) to inspect
 which network rules are active on a developer machine.
+
+> [!NOTE]
+> To manage Model Context Protocol (MCP) server registration and requests
+> through Docker's MCP gateway, use [MCP access policies](mcp.md). These
+> policies apply only to the gateway. Direct MCP connections from a sandbox
+> don't use the gateway, but you can control access to remote MCP servers with
+> network policy.

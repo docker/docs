@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   review:
-    uses: docker/docker-agent-action/.github/workflows/review-pr.yml@e96a4bb40cac114f64358621e1d08346c8eadc8c # v2.0.1
+    uses: docker/docker-agent-action/.github/workflows/review-pr.yml@baf90543d81f5de59751dfd10e6cf45e21a5a982 # v2.0.3
     # Scoped to the job so other jobs in this workflow aren't over-permissioned
     permissions:
       contents: read # Read repository files and PR diffs
