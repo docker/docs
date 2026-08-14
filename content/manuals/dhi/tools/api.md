@@ -122,7 +122,7 @@ is live. Use `isExcepted` as your filter for "is this CVE suppressed."
 | `isExcepted` | Docker suppresses this CVE for this image. Use this to filter. |
 | `sourceType` | `EXTERNAL` (Debian NODSA), `MANUAL_EXCEPTION` (Docker analyst exception), or `VEX_STATEMENT` (an ingested VEX document). |
 | `type` | `FALSE_POSITIVE` and `ACCEPTED_RISK` suppress the CVE. `UNDER_INVESTIGATION` and `AFFECTED` don't. |
-| `justification` | The OpenVEX justification enum. Always `null` for NODSA exclusions. |
+| `justification` | The OpenVEX justification value. Always `null` for NODSA exclusions. |
 | `additionalDetails` | Free-text rationale, safe to display to end users. |
 | `isDhiStatement` | Whether the statement is inherited from the DHI base image. |
 | `id` | Stable identifier for the statement. |
