@@ -216,13 +216,6 @@ $ sbx env exec -- npm test
 $ sbx env rm --force
 ```
 
-With no environment-file path, `--` is optional. When you pass a path, use `--`
-to separate it from the command:
-
-```console
-$ sbx env exec .sbxenv.yaml -- npm test
-```
-
 Commands and vault references under `secrets` resolve on the host, so the
 automation runner must provide the referenced tools and authentication. The
 secret values remain outside the environment file.
