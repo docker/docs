@@ -104,6 +104,35 @@ organization.
     - **Delete**
 1. Select **Save** after making changes to a token.
 
+## Hub API support
+
+OATs can authenticate requests to most Docker Hub API endpoints under
+`/v2/namespaces/{namespace}/repositories/`. Pass the token as a Bearer token
+in the `Authorization` header with your organization name as the username.
+
+### Supported endpoints
+
+The following endpoint categories accept OAT authentication:
+
+- Repository management: list, create, get, update, and delete repositories
+- Tags: list, get, and delete tags; get tag images, attestations, and compose files
+- Dockerfile: get and update a repository's linked Dockerfile
+- Repository groups: list, get, create, update, and delete group assignments
+- Stars: list, count, add, and remove repository stars
+- Immutable tags: update and verify immutable tag policies
+- Repository categories, privacy, and webhook pipeline settings
+- Namespace metrics
+
+### Listing behavior
+
+`GET /v2/namespaces/{namespace}/repositories` returns results based on the
+token's configured scopes:
+
+- **With `scope-repository-list` scope** (or equivalent): all repositories are
+  returned, including private ones.
+- **Without that scope**: only public repositories are returned.
+
+
 ## Organization access token best practices
 
 - Regular token rotation: Set reasonable expiration dates and rotate tokens regularly to minimize security risks.
