@@ -34,7 +34,9 @@ hypervisor boundary is the isolation control, not in-VM privilege separation.
 ## Network isolation
 
 Each sandbox has its own isolated network. Sandboxes cannot communicate
-directly with each other or share a network with your host.
+directly with each other or share a network with your host. To reach a service
+running on the host through a policy-controlled connection, see
+[Accessing host services from a sandbox](../workflows.md#accessing-host-services-from-a-sandbox).
 
 All outbound TCP traffic passes through a proxy on your host that enforces the
 [network access policy](../governance/access-controls/network.md). The sandbox
