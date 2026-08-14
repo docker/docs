@@ -29,7 +29,8 @@ setup steps.
 ## Start an environment
 
 Create a `.sbxenv.yaml` file in your project directory. This example gives the
-agent a shared environment variable and the Playwright browser-testing tools:
+agent a shared environment variable and the Playwright browser-testing tools.
+It also publishes the application's development port:
 
 ```yaml
 schemaVersion: "1"
@@ -41,6 +42,10 @@ kits:
 
 env:
   NODE_ENV: test
+
+ports:
+  - sandbox: 3000
+    host: 3000
 ```
 
 From the same directory, run the environment:
@@ -51,7 +56,8 @@ $ sbx env run
 
 The project directory becomes the workspace. If the environment doesn't exist,
 `sbx` creates a sandbox named `web-app`, installs Playwright and Chromium, and
-attaches to the agent. Later runs attach to the existing sandbox.
+publishes sandbox port `3000` on the host. It then attaches to the agent. Later
+runs attach to the existing sandbox.
 
 ## Commands
 
