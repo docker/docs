@@ -44,6 +44,10 @@ params:
       description: Learn how to scan Docker Hardened Images for known vulnerabilities using Docker Scout, Grype, or Trivy.
       icon: bug-ant
       link: /dhi/how-to/scan/
+    - title: Query VEX for a Docker Hardened Image
+      description: Use the DHI GraphQL API to fetch VEX statements and suppressed CVEs for a Docker Hardened Image by digest, at scale.
+      icon: bug-ant
+      link: /dhi/how-to/vex-api/
   grid_govern:
     - title: Apply Docker Hardened Image policies to your images
       description: Learn how to hold your own images to Docker Hardened Image security and compliance standards using the Docker Scout CLI.
