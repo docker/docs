@@ -205,9 +205,11 @@ categorized as **Unspecified** (U).
 
 Docker Scout doesn't implement a proprietary vulnerability metrics system. All
 metrics are inherited from security advisories that Docker Scout integrates
-with. Advisories may use different thresholds for classifying vulnerabilities,
-but most of them adhere to the CVSS v3.0 specification, which maps CVSS scores
-to severity ratings according to the following table:
+with. After Scout picks an advisory source, it [prefers CVSS v4 over
+v3](/manuals/scout/deep-dive/advisory-db-sources.md) when both scores exist.
+Most sources still publish a 0–10 score, and Scout maps that score to a
+severity rating with the same bands used by CVSS v3.0 (v4 uses the same
+qualitative ranges):
 
 | CVSS score | Severity rating  |
 | ---------- | ---------------- |
