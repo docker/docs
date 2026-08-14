@@ -91,23 +91,27 @@ any remote source, see [Restrict kit sources](customize/kits.md#restrict-kit-sou
 
 ## SSH and other non-HTTP connections fail
 
-Non-HTTP TCP connections like SSH can be allowed by adding a policy rule for
-the destination IP address and port. For example, to allow SSH to a specific
-host:
+Non-HTTP TCP connections such as SSH can be allowed by adding a policy rule for
+the destination. Hostname rules work for these connections because the sandbox
+recovers the hostname from its DNS resolver when the protocol doesn't include
+one:
+
+```console
+$ sbx policy allow network "myhost:22"
+```
+
+If the destination is reached by IP address without a DNS lookup, the hostname
+can't be recovered. Use an address-based rule in that case:
 
 ```console
 $ sbx policy allow network "10.1.2.3:22"
 ```
 
-Hostname-based rules (for example, `myhost:22`) don't work for non-HTTP
-connections because the proxy can't resolve the hostname to an IP address in
-this context. Use the IP address directly.
-
 UDP and ICMP traffic is blocked at the network layer and can't be unblocked
 with policy rules.
 
 For Git operations over SSH, you can either add an allow rule for the Git
-server's IP address or use HTTPS URLs instead:
+server's hostname or IP address, or use HTTPS URLs instead:
 
 ```console
 $ git clone https://github.com/owner/repo.git

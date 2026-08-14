@@ -52,10 +52,11 @@ $ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <template>
 
 ## Networking
 
-All outbound traffic from the sandbox routes through an HTTP/HTTPS proxy on
-your host. Agents are configured to use the proxy automatically. The proxy
-enforces [network access policies](governance/access-controls/network.md) and handles
-[credential injection](security/credentials.md). See
+All outbound TCP traffic from the sandbox routes through a proxy on your host.
+Agents use a forward proxy for HTTP and HTTPS; other TCP traffic is forwarded
+transparently. Both paths enforce
+[network access policies](governance/access-controls/network.md). The forward
+proxy also handles [credential injection](security/credentials.md). See
 [Network isolation](security/isolation.md#network-isolation) for how this
 works and [Default security posture](security/defaults.md) for what is
 allowed out of the box.
