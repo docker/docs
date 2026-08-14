@@ -52,7 +52,7 @@ Before you start, make sure you have:
 
 - [Docker Desktop](../get-started/get-docker.md) or Docker Engine installed
 - [Docker Model Runner enabled](../manuals/ai/model-runner/get-started.md#enable-docker-model-runner)
-- [Docker Sandboxes (`sbx`) installed and signed in](../manuals/ai/sandboxes/get-started.md#install-and-sign-in)
+- [Docker Sandboxes (`sbx`) installed and signed in](../manuals/ai/sandboxes/install.md)
 
 If you use Docker Desktop, turn on TCP access in **Settings** > **AI**, or
 run:
