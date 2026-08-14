@@ -5,7 +5,7 @@ description: >
   Learn about Docker Agentic Platform for individual developers,
   including usage entitlements, pay-as-you-go billing, and cancellation.
 keywords:
-  docker agentic platform, cloud sandboxes, mcp gateway, gordon,
+  docker agentic platform, cloud sandboxes, mcp gateway,
   pay-as-you-go, paygo, metered billing, personal subscription,
   promotional credit, cancel subscription, sandbox compute
 weight: 20
@@ -16,12 +16,11 @@ weight: 20
 > credit toward cloud compute usage. To review your balance, see
 > [Credits](/manuals/billing/_index.md#credits).
 
-Docker Agentic Platform brings
+Docker Agentic Platform combines
 [MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md) and
-[Cloud Sandboxes](/manuals/ai/sandboxes/_index.md) into the Agentic
-Platform UI. The Agentic Platform lets you run agents in isolated compute
-environments and manage MCP Gateway access with higher tool-call
-allowances.
+[Cloud Sandboxes](/manuals/ai/sandboxes/_index.md) in the Agentic
+Platform UI. Use it to run agents in isolated compute environments and
+manage MCP Gateway access with higher tool-call allowances.
 
 Docker Agentic Platform is a pay-as-you-go plan. There is no
 recurring subscription fee, so you pay for the usage you accrue. To add
@@ -31,14 +30,17 @@ it to your Docker subscription, see
 ## Usage
 
 > [!NOTE]
-> Docker Agentic Platform plans are a Docker Personal and Docker Pro
-> exclusive.
+> Docker Agentic Platform is available only on Docker Personal and
+> Docker Pro accounts.
 
 Docker Agentic Platform requires that you bring your own API keys
 for inference. Your inference provider handles those costs.
 
-After you subscribe, your invoice reflects metered, pay-as-you-go compute usage.
-Docker meters compute usage based on sandbox runtime consumption in seconds of compute. Each instance shape, calculated from vCPU plus memory, has its own billing rate. To track usage for Docker Agentic Platform:
+After you subscribe, your invoice reflects metered, pay-as-you-go
+compute usage. Docker meters compute usage based on sandbox runtime
+consumption in seconds of compute. Each instance shape, calculated from
+vCPU plus memory, has its own billing rate. To track usage for Docker
+Agentic Platform:
 
 1. Sign in to [Docker Home](https://app.docker.com/), then choose your
    account.
@@ -59,13 +61,14 @@ previous period. For example:
 - If you subscribed on September 10, you are billed on October 10.
 - Your invoice from October 10 reflects accrued usage from September 10
   through October 9.
-- Your invoice may be generated with an up to 24 hour delay from your billing date.
+- Your invoice may generate with up to a 24-hour delay from your
+  billing date.
 
 ## Cancel a plan
 
-Canceling Docker Agentic Platform disables subscription renewal at the start of
-the next plan period. Docker bills you for usage at the end of the plan
-period.
+Canceling Docker Agentic Platform disables subscription renewal at the
+start of the next plan period. Docker bills you for usage at the end of
+the plan period.
 
 1. Sign in to [Docker Home](https://app.docker.com/) and go to
    **Billing**.

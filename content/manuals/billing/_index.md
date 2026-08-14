@@ -43,7 +43,7 @@ invoice history.
 
 ## Billing
 
-You can manage your Docker plans from the Billing portal:
+You can manage your Docker plans from the billing portal:
 
 1. Sign in to [Docker Home](https://app.docker.com/), then choose your
    account.
@@ -58,7 +58,7 @@ and how the product is metered.
 
 ### Costs
 
-The billing **Costs** page aggregates all costs by billing period. This page
+The billing **Costs** page aggregates all costs by billing period. It
 breaks down charges by resource (the product accruing a charge), the
 status of your billing period, and costs to date.
 
