@@ -364,25 +364,10 @@ the child kit's name:
 $ sbx run claude-sonnet --kit ./claude-sonnet
 ```
 
-Proxy-managed OAuth isn't supported for a third-party kit that extends the
-built-in `claude` agent. Store an Anthropic API key on the host before the first
-launch:
-
-```console
-$ sbx secret set anthropic
-```
-
 When you launch the kit for the first time, `sbx` prompts you to approve its
 inherited Anthropic credentials. Because this is a third-party schema v2 kit,
 `sbx` records your approval as a
-[credential binding](../security/credentials.md#credential-bindings). The
-sandbox receives a sentinel value, and the proxy injects the real API key into
-requests to the domains declared by the kit.
-
-> [!WARNING]
-> The approval prompt also lists OAuth, but OAuth doesn't work for the extended
-> agent. If you use Claude Code's `/login` command, Claude Code stores the real
-> OAuth tokens inside the sandbox.
+[credential binding](../security/credentials.md#credential-bindings).
 
 OpenCode supports an additional config file through `OPENCODE_CONFIG`. Keep the
 kit's config separate from the sandbox-managed
@@ -451,9 +436,7 @@ sandbox:
 
 The child inherits the built-in image, credentials, network permissions,
 persistent volumes, settings, MCP integration, and agent instructions. Its
-`sandbox.entrypoint` replaces the inherited entrypoint. Proxy-managed OAuth
-isn't supported for the extended agent, so follow the
-[Anthropic API-key setup](#customize-agent-settings) before launching it.
+`sandbox.entrypoint` replaces the inherited entrypoint.
 
 Launch with the kit's `name:` as the agent argument to `sbx run`:
 

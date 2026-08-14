@@ -348,13 +348,6 @@ If a third-party kit declares the same service itself, that service also
 requires approval. Kits on `schemaVersion: "1"` inject their declared
 credentials without a binding.
 
-> [!WARNING]
-> Proxy-managed OAuth isn't supported for third-party sandbox agents, including
-> kits that extend a built-in agent. Repeating the parent's OAuth declaration in
-> the child kit doesn't activate OAuth interception. Use a stored API key when
-> the service supports one. Otherwise, an OAuth login performed inside the
-> sandbox stores the real token there.
-
 ## Registry credentials
 
 Registry credentials authenticate to private OCI registries when pulling
