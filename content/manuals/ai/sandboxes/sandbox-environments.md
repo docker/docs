@@ -55,12 +55,12 @@ attaches to the agent. Later runs attach to the existing sandbox.
 
 ## Commands
 
-| Command                                                                                 | Description                                      |
-| --------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| [`sbx env run`](/reference/cli/sbx/env/run/) `[PATH...]`                                | Creates the environment if needed, then attaches |
-| [`sbx env create`](/reference/cli/sbx/env/create/) `[PATH...]`                          | Creates the environment without attaching        |
-| [`sbx env exec`](/reference/cli/sbx/env/exec/) `[PATH...] -- COMMAND [ARG...]`           | Runs a command in an existing environment        |
-| [`sbx env rm`](/reference/cli/sbx/env/rm/) `[PATH...]`                                  | Removes the sandbox and its scoped credentials   |
+| Command                                                                                 | Description                                                                                          |
+| --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| [`sbx env run`](/reference/cli/sbx/env/run/) `[PATH...]`                                | Creates the environment if needed, then attaches. Re-runs apply only [`env` and MCP changes](#update-an-environment) |
+| [`sbx env create`](/reference/cli/sbx/env/create/) `[PATH...]`                          | Creates the environment without attaching                                                            |
+| [`sbx env exec`](/reference/cli/sbx/env/exec/) `[PATH...] -- COMMAND [ARG...]`           | Runs a command in an existing environment                                                            |
+| [`sbx env rm`](/reference/cli/sbx/env/rm/) `[PATH...]`                                  | Removes the sandbox and its scoped credentials                                                       |
 
 `PATH` can be a directory or a direct path to an environment file. When you
 pass a directory, `sbx` reads `.sbxenv.yaml` and falls back to `.sbxenv.yml`.
@@ -68,14 +68,6 @@ With no path, `sbx` searches the working directory.
 
 Pass the same set of paths to each lifecycle command so they resolve the same
 sandbox.
-
-## Update an environment
-
-`sbx env run` starts and attaches to an existing sandbox without provisioning
-its secrets and bindings again. For an existing sandbox, the command applies
-changes to `env` to the new session and reconciles declared MCP servers. Changes
-to workspaces, kits, ports, secrets, bindings, and `sandboxOptions` require you
-to remove the environment with `sbx env rm` and create it again.
 
 ## Common workflows
 
@@ -219,6 +211,14 @@ $ sbx env rm --force
 Commands and vault references under `secrets` resolve on the host, so the
 automation runner must provide the referenced tools and authentication. The
 secret values remain outside the environment file.
+
+## Update an environment
+
+`sbx env run` starts and attaches to an existing sandbox without provisioning
+its secrets and bindings again. For an existing sandbox, the command applies
+changes to `env` to the new session and reconciles declared MCP servers. Changes
+to workspaces, kits, ports, secrets, bindings, and `sandboxOptions` require you
+to remove the environment with `sbx env rm` and create it again.
 
 ## Remove an environment
 
