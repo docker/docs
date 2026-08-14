@@ -1039,6 +1039,10 @@ paths:
     get:
       operationId: ListRepositoryTags
       summary: List repository tags
+      description: |
+        Returns the list of tags for the specified repository.
+
+        <span class="oat"></span>
       tags:
         - repositories
       security:
@@ -1065,6 +1069,10 @@ paths:
           $ref: "#/components/responses/NotFound"
     head:
       summary: Check repository tags
+      description: |
+        Checks whether the repository has any tags.
+
+        <span class="oat"></span>
       tags:
         - repositories
       security:
@@ -1084,6 +1092,10 @@ paths:
     get:
       operationId: GetRepositoryTag
       summary: Read repository tag
+      description: |
+        Returns details for a specific tag in the specified repository.
+
+        <span class="oat"></span>
       tags:
         - repositories
       security:
@@ -1097,6 +1109,10 @@ paths:
           $ref: "#/components/responses/NotFound"
     head:
       summary: Check repository tag
+      description: |
+        Checks whether the specified tag exists in the repository.
+
+        <span class="oat"></span>
       tags:
         - repositories
       security:
@@ -1119,6 +1135,8 @@ paths:
         Updates the immutable tags configuration for this repository.
 
         **Only users with administrative privileges for the repository can modify these settings.**
+
+        <span class="oat"></span>
       tags:
         - repositories
       security:
@@ -1144,9 +1162,11 @@ paths:
       operationId: VerifyRepositoryImmutableTags
       summary: "Verify repository immutable tags"
       description: |
-        Validates  the immutable tags regex pass in parameter and returns a list of tags matching it in this repository.
+        Validates the immutable tags regex passed in the request body and returns a list of tags matching it in this repository.
 
-        **Only users with administrative privileges for the repository call this endpoint.**
+        **Only users with administrative privileges for the repository can call this endpoint.**
+
+        <span class="oat"></span>
       tags:
         - repositories
       security:
@@ -1170,6 +1190,10 @@ paths:
       - $ref: "#/components/parameters/repository"
     post:
       summary: Assign a group (Team) to a repository for access
+      description: |
+        Assigns an organization group (team) to a repository with a specified permission level.
+
+        <span class="oat"></span>
       tags:
         - repositories
       operationId: CreateRepositoryGroup
@@ -1217,6 +1241,10 @@ paths:
         Returns a list of repositories within the specified namespace (organization or user).
 
         Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
+
+        <span class="oat"></span>
+
+        **OAT listing behavior**: an OAT with the `scope-repository-list` scope sees all repositories including private ones. An OAT without that scope only sees public repositories.
       tags:
         - repositories
       security:
@@ -1360,6 +1388,8 @@ paths:
       description: |
         Creates a new repository within the specified namespace. The repository will be created
         with the provided metadata including name, description, and privacy settings.
+
+        <span class="oat"></span>
       operationId: CreateRepository
       tags:
         - repositories
@@ -1431,6 +1461,8 @@ paths:
         Returns a repository within the specified namespace (organization or user).
 
         Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
+
+        <span class="oat"></span>
       tags:
         - repositories
       security:
@@ -1482,6 +1514,8 @@ paths:
         Check a repository within the specified namespace (organization or user).
 
         Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
+
+        <span class="oat"></span>
       tags:
         - repositories
       security:
