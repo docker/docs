@@ -196,7 +196,7 @@ field reference and the OpenVEX mapping, see
 
 ## Query customization images
 
-[DHI VEX statements apply directly to images built with the customization
+DHI VEX statements apply directly to images built with the [customization
 feature](/manuals/dhi/how-to/customize.md). Query the customized image's own
 digest to get its packages, CVEs, and suppressions in a single call. You
 don't need to query the base image separately.
