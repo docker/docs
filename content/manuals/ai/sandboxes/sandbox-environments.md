@@ -74,58 +74,6 @@ sandbox.
 The following examples combine environment file fields into configurations you
 can adapt for a project.
 
-### Share a complete project environment
-
-Commit a `.sbxenv.yaml` file that includes the agent, project tools,
-credentials, environment variables, and ports the project needs. The following
-example adds the Playwright mixin kit to a web application so the agent can run
-browser tests:
-
-```yaml
-# .sbxenv.yaml
-schemaVersion: "1"
-name: web-app
-agent: claude
-
-kits:
-  - "git+https://github.com/docker/sbx-kits-contrib.git#dir=playwright"
-
-env:
-  NODE_ENV: development
-
-secrets:
-  github:
-    command: gh auth token
-
-ports:
-  - sandbox: 3000
-    host: 3000
-```
-
-The Playwright kit installs the browser test tools, declares the network access
-needed to install them, and gives the agent instructions for using them. Before
-using a Git kit from this repository, add its source to your
-[kit source allowlist](customize/kits.md#restrict-kit-sources):
-
-```console
-$ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
-```
-
-The setting replaces the complete allowlist, so include any existing sources
-you want to keep. Pin remote kits with the `ref` URL parameter when you need
-reproducible setup.
-
-Run the environment from the project directory:
-
-```console
-$ sbx env run
-```
-
-`sbx` uses the project directory as the workspace, provisions the declared
-credential, installs the kit, creates the sandbox, publishes the port, and
-attaches to the agent. Other team members can run the same command after
-cloning the project.
-
 ### Combine team defaults and personal settings
 
 Keep the shared configuration in a committed file and put machine-specific
@@ -250,7 +198,7 @@ The loader rejects unknown fields and unsupported schema versions.
 | `schemaVersion`        | string           | Yes      | None                           | Schema version. The supported value is `"1"`                                   |
 | `name`                 | string           | No       | `<agent>-<workspace-basename>` | Sandbox name                                                                    |
 | `agent`                | string           | Yes      | None                           | Built-in agent or the name of an agent kit                                      |
-| `kits`                 | list of strings  | No       | None                           | Directory, ZIP, or OCI kit references to install at creation                    |
+| `kits`                 | list of strings  | No       | None                           | Kits to install at creation. See [`kits`](#kits)                                 |
 | `workspace`            | string or object | No       | First file's directory         | Primary workspace. See [`workspace`](#workspace)                                |
 | `additionalWorkspaces` | list             | No       | None                           | Extra directories to mount. See [`additionalWorkspaces`](#additionalworkspaces) |
 | `env`                  | map of strings   | No       | None                           | Environment variables for the sandbox                                           |
@@ -260,6 +208,26 @@ The loader rejects unknown fields and unsupported schema versions.
 | `registries`           | map              | No       | None                           | Registry pull credentials. See [`registries`](#registries)                      |
 | `mcp`                  | object           | No       | None                           | MCP servers. See [`mcp`](#mcp)                                                  |
 | `ports`                | list             | No       | None                           | Port mappings. See [`ports`](#ports)                                            |
+
+### `kits`
+
+`kits` accepts local directories, ZIP archives, OCI registry references, and
+Git URLs prefixed with `git+https://` or `git+ssh://`. Kits can install tools,
+configure the sandbox, and give the agent project-specific instructions. See
+[Kits](customize/kits.md) for details.
+
+Remote kit sources must match the
+[kit source allowlist](customize/kits.md#restrict-kit-sources). Docker Hub is
+allowed by default. To use Git kits from `docker/sbx-kits-contrib`, add its
+source:
+
+```console
+$ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
+```
+
+The setting replaces the complete allowlist, so include any existing sources
+you want to keep. For reproducible setup, pin Git kits with the `ref` URL
+parameter and OCI kits with an immutable tag or digest.
 
 ### `workspace`
 
