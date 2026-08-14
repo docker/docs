@@ -317,6 +317,7 @@ bindings:
 
 A binding is only an approval record: the presence of `apiKey` or `oauth`
 authorizes that mechanism. Declining a credential writes no entry at all.
+The real credential isn't stored in this file.
 
 ### First-run approval
 
@@ -340,10 +341,19 @@ constrain which requests can carry the credential.
 
 Only third-party kits that declare `schemaVersion: "2"` require a binding.
 Built-in agents also use `schemaVersion: "2"`, but credentials declared only by
-embedded kits are authorized by provenance and inject automatically. If a
-third-party kit also declares the same service, that service requires approval.
-Kits on `schemaVersion: "1"` inject their declared credentials without a
-binding.
+embedded kits are authorized by provenance and inject automatically. A
+third-party kit that extends a built-in agent inherits its credentials, but not
+its built-in provenance. The inherited credentials therefore require approval.
+If a third-party kit declares the same service itself, that service also
+requires approval. Kits on `schemaVersion: "1"` inject their declared
+credentials without a binding.
+
+> [!WARNING]
+> Proxy-managed OAuth isn't supported for third-party sandbox agents, including
+> kits that extend a built-in agent. Repeating the parent's OAuth declaration in
+> the child kit doesn't activate OAuth interception. Use a stored API key when
+> the service supports one. Otherwise, an OAuth login performed inside the
+> sandbox stores the real token there.
 
 ## Registry credentials
 
