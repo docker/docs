@@ -28,12 +28,19 @@ setup steps.
 
 ## Start an environment
 
-Create a `.sbxenv.yaml` file in your project directory. The smallest valid file
-specifies a schema version and an agent:
+Create a `.sbxenv.yaml` file in your project directory. This example gives the
+agent a shared environment variable and the Playwright browser-testing tools:
 
 ```yaml
 schemaVersion: "1"
+name: web-app
 agent: claude
+
+kits:
+  - docker.io/sbx/playwright-kit:latest
+
+env:
+  NODE_ENV: test
 ```
 
 From the same directory, run the environment:
@@ -43,8 +50,8 @@ $ sbx env run
 ```
 
 The project directory becomes the workspace. If the environment doesn't exist,
-`sbx` creates it and attaches to the agent. Later runs attach to the existing
-sandbox.
+`sbx` creates a sandbox named `web-app`, installs Playwright and Chromium, and
+attaches to the agent. Later runs attach to the existing sandbox.
 
 ## Commands
 
@@ -61,15 +68,6 @@ With no path, `sbx` searches the working directory.
 
 Pass the same set of paths to each lifecycle command so they resolve the same
 sandbox.
-
-For `sbx env exec`, arguments before `--` are environment-file paths and
-arguments after `--` form the command. Without `--`, all arguments form the
-command and `sbx` reads the environment file from the working directory:
-
-```console
-$ sbx env exec .sbxenv.yaml -- go test ./...
-$ sbx env exec go test ./...
-```
 
 ## Update an environment
 
@@ -216,6 +214,13 @@ remove it afterward:
 $ sbx env create
 $ sbx env exec -- npm test
 $ sbx env rm --force
+```
+
+With no environment-file path, `--` is optional. When you pass a path, use `--`
+to separate it from the command:
+
+```console
+$ sbx env exec .sbxenv.yaml -- npm test
 ```
 
 Commands and vault references under `secrets` resolve on the host, so the
