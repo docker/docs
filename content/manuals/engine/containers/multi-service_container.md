@@ -20,15 +20,18 @@ avoid one container being responsible for multiple aspects of your overall
 application. You can connect multiple containers using user-defined networks and
 shared volumes.
 
-The container's main process is responsible for managing all processes that it
-starts. In some cases, the main process isn't well-designed, and doesn't handle
-"reaping" (stopping) child processes gracefully when the container exits. If
-your process falls into this category, you can use the `--init` option when you
-run the container. 
+The container's main process is responsible for managing the processes that it
+starts. If the main process doesn't reap exited child processes, they can remain
+as zombies. Use the `--init` option when the application doesn't handle this
+responsibility itself.
 
-The `--init` flag inserts a tiny init-process (based on [Tini](https://github.com/krallin/tini), shipped as `docker-init`) into the container as the main process, and handles reaping of all processes when the container exits. Handling such processes this way is superior to using a full-fledged init process such as `sysvinit` or `systemd` to handle process lifecycle within your container.
+The `--init` flag inserts a small init process as PID 1. The init process
+forwards signals to the container's main process and reaps processes that become
+zombies. This is preferable to using a full init system, such as `sysvinit` or
+`systemd`, inside the container.
 
-In Docker Compose, you can achieve the same behavior by setting `init: true` for your service configuration:
+When using Docker Compose, set `init: true` on the service to run an init
+process:
 
 ```yaml
 services:
@@ -72,9 +75,6 @@ COPY my_second_process my_second_process
 COPY my_wrapper_script.sh my_wrapper_script.sh
 CMD ./my_wrapper_script.sh
 ```
-
-> [!TIP]
-> When using a wrapper script to run multiple services, it is highly recommended to run the container with the `--init` flag. This ensures that signals (like `SIGTERM` from `docker stop`) are correctly propagated to child processes running in the background, allowing them to terminate gracefully.
 
 ## Use Bash job controls
 
