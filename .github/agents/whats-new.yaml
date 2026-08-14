@@ -4,7 +4,6 @@ models:
     provider: anthropic
     model: claude-sonnet-5
     max_tokens: 4096
-    temperature: 0.1
 
 agents:
   root:

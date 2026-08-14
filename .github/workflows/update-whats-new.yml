@@ -2,12 +2,16 @@ name: Update What's New
 
 on:
   schedule:
-    # Review the previous 30 complete UTC days every day at 06:00 UTC.
+    # Review new merges and expire old highlights every day at 06:00 UTC.
     - cron: "0 6 * * *"
   workflow_dispatch:
     inputs:
       dry-run:
         description: "Propose highlights without opening a pull request"
+        type: boolean
+        default: false
+      full-rescan:
+        description: "Re-evaluate every pull request in the 30-day window"
         type: boolean
         default: false
 
@@ -40,6 +44,14 @@ jobs:
           echo "start=$(date -u -d "$PERIOD_END - 29 days" +%F)" >> "$GITHUB_OUTPUT"
           echo "end=$PERIOD_END" >> "$GITHUB_OUTPUT"
 
+      - name: Restore curator state
+        uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+        with:
+          path: ${{ runner.temp }}/whats-new-state.json
+          key: whats-new-state-${{ github.repository }}-${{ github.run_id }}
+          restore-keys: |
+            whats-new-state-${{ github.repository }}-
+
       - name: Configure AWS credentials
         id: aws-credentials
         continue-on-error: true
@@ -68,6 +80,36 @@ jobs:
             git show "origin/$BRANCH_NAME:data/whats-new.json" > data/whats-new.json
           fi
 
+      - name: Set review mode and checkpoint
+        id: review
+        env:
+          FULL_RESCAN: ${{ inputs.full-rescan == true }}
+          PERIOD_END: ${{ steps.period.outputs.end }}
+          STATE_FILE: ${{ runner.temp }}/whats-new-state.json
+        run: |
+          REVIEWED_THROUGH=$(jq -r '.reviewed_through // empty' "$STATE_FILE" 2>/dev/null || true)
+          if ! [[ "$REVIEWED_THROUGH" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+            REVIEWED_THROUGH=$(jq -r '.period_end' data/whats-new.json)
+          fi
+          DATA_PERIOD_END=$(jq -r '.period_end' data/whats-new.json)
+          if [[ "$DATA_PERIOD_END" > "$REVIEWED_THROUGH" ]]; then
+            REVIEWED_THROUGH=$DATA_PERIOD_END
+          fi
+
+          if [ "$FULL_RESCAN" = "true" ]; then
+            MODE=full
+          else
+            MODE=incremental
+          fi
+
+          jq -n --arg reviewed_through "$PERIOD_END" \
+            '{reviewed_through: $reviewed_through}' > "$STATE_FILE"
+
+          {
+            echo "mode=$MODE"
+            echo "reviewed-through=$REVIEWED_THROUGH"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Curate highlights
         uses: docker/docker-agent-action@e96a4bb40cac114f64358621e1d08346c8eadc8c # v2.0.1
         env:
@@ -75,9 +117,10 @@ jobs:
         with:
           agent: ${{ github.workspace }}/.github/agents/whats-new.yaml
           prompt: >-
-            Use the curate-whats-new skill to review documentation pull requests merged from
-            ${{ steps.period.outputs.start }} through
-            ${{ steps.period.outputs.end }}, inclusive.
+            Use the curate-whats-new skill in ${{ steps.review.outputs.mode }} mode.
+            The publication window is ${{ steps.period.outputs.start }} through
+            ${{ steps.period.outputs.end }}, inclusive. The last successful incremental
+            review covered through ${{ steps.review.outputs.reviewed-through }}.
           anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
           github-token: ${{ env.GITHUB_APP_TOKEN || github.token }}
           timeout: 1200
@@ -158,3 +201,10 @@ jobs:
               --base main \
               --head "$BRANCH_NAME"
           fi
+
+      - name: Save curator state
+        if: success() && inputs.dry-run != true && steps.changes.outputs.changed != 'true'
+        uses: actions/cache/save@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+        with:
+          path: ${{ runner.temp }}/whats-new-state.json
+          key: whats-new-state-${{ github.repository }}-${{ github.run_id }}
