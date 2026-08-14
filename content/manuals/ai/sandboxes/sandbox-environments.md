@@ -63,7 +63,7 @@ runs attach to the existing sandbox.
 
 | Command                                                                                 | Description                                                                                          |
 | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| [`sbx env run`](/reference/cli/sbx/env/run/) `[PATH...]`                                | Creates the environment if needed, then attaches. Re-runs apply only [`env` and MCP changes](#update-an-environment) |
+| [`sbx env run`](/reference/cli/sbx/env/run/) `[PATH...]`                                | Creates the environment if needed, then attaches. Re-runs apply only [`env` and MCP changes](#update-an-environment). Remove and recreate for other changes |
 | [`sbx env create`](/reference/cli/sbx/env/create/) `[PATH...]`                          | Creates the environment without attaching                                                            |
 | [`sbx env exec`](/reference/cli/sbx/env/exec/) `[PATH...] -- COMMAND [ARG...]`           | Runs a command in an existing environment                                                            |
 | [`sbx env rm`](/reference/cli/sbx/env/rm/) `[PATH...]`                                  | Removes the sandbox and its scoped credentials                                                       |
@@ -264,7 +264,7 @@ paths resolve from the directory of the first environment file.
 | ------------ | ------- | -------- | --------------------------------------------------------------- |
 | `template`   | string  | None     | Custom sandbox template image                                   |
 | `memory`     | string  | None     | Memory limit, such as `8g` or `512m`                             |
-| `cpus`       | integer | `0`      | CPU limit. `0` selects the automatic value                       |
+| `cpus`       | integer | `0`      | Number of CPUs. `0` allocates all host CPUs                      |
 | `pullPolicy` | string  | `always` | Image pull policy: `always`, `missing`, or `never`               |
 | `profile`    | string  | None     | Governance profile name                                         |
 
@@ -281,7 +281,7 @@ the environment is created.
 | `command`  | string  | None    | Host shell command whose standard output becomes the secret                   |
 | `refresh`  | string  | None    | Resolution policy for `ref` or `command`, such as `on-demand` or `55m`        |
 | `backend`  | string  | Automatic | Resolver for `ref`: `sdk` or `cli`                                          |
-| `noVerify` | boolean | `false` | Skip resolving a `ref` or `command` once when provisioning the secret         |
+| `noVerify` | boolean | `false` | Skip verifying that a `ref` or `command` resolves during provisioning          |
 
 > [!WARNING]
 > A literal `value` is visible to anyone with read access to the file. Use a
