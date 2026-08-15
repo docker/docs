@@ -1,6 +1,6 @@
 ---
 title: Get started with Docker MCP Toolkit
-linkTitle: Get started
+linkTitle: Get started docker mcp gateway run --profile docker_n8n_io_n8nio_n8n docker run -it --rm --name n8n -p 5678:5678 docker.n8n.io/n8nio/n8n
 description: Learn how to quickly install and use the MCP Toolkit to set up servers and clients.
 keywords: Docker MCP Toolkit, MCP server, MCP client, AI agents
 weight: 5
