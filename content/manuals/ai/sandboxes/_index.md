@@ -3,6 +3,8 @@ title: Docker Sandboxes
 description: Run AI coding agents in isolated environments
 keywords: docker sandboxes, sbx, ai agents, sandboxed agents, microVM
 weight: 10
+aliases:
+  - /ai/sandboxes/sandbox-environments/
 params:
   sidebar:
     group: AI and agents
