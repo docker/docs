@@ -77,7 +77,7 @@ ControlPersist    yes
 
 ## Use TLS (HTTPS) to protect the Docker daemon socket
 
-If you need Docker to be reachable through HTTP rather than SSH in a safe manner,
+If you need Docker to be reachable through HTTPS rather than SSH,
 you can enable TLS (HTTPS) by specifying the `tlsverify` flag and pointing Docker's
 `tlscacert` flag to a trusted CA certificate.
 
