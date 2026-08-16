@@ -1216,7 +1216,7 @@ examples: |-
     Joining another container's PID namespace can be useful for debugging that
     container.
 
-    1. Start a container running a Redis server:
+    1. Start a container running nginx:
 
        ```console
        $ docker run --rm --name my-nginx -d nginx:alpine
