@@ -215,7 +215,7 @@ looks like the following:
 ```
 
 In the above example, you can see `profile=/usr/bin/docker`. This means the
-user has the `docker-engine` (Docker Engine daemon) profile loaded.
+user has the Docker CLI profile loaded.
 
 Look at another log line:
 
@@ -267,7 +267,7 @@ container PIDs is in `enforce` mode. This means AppArmor is actively blocking
 and auditing in `dmesg` anything outside the bounds of the `docker-default`
 profile.
 
-The output above also shows the `/usr/bin/docker` (Docker Engine daemon) profile
+The output above also shows the `/usr/bin/docker` (Docker CLI) profile
 is running in `complain` mode. This means AppArmor only logs to `dmesg`
 activity outside the bounds of the profile. (Except in the case of Ubuntu
 Trusty, where some interesting behaviors are enforced.)
@@ -275,7 +275,7 @@ Trusty, where some interesting behaviors are enforced.)
 ## Contribute to Docker's AppArmor code
 
 Advanced users and package managers can find a profile for `/usr/bin/docker`
-(Docker Engine daemon) underneath
+(the Docker CLI) underneath
 [contrib/apparmor](https://github.com/moby/moby/tree/master/contrib/apparmor)
 in the Docker Engine source repository.
 
