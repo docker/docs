@@ -33,8 +33,9 @@ any of the following:
 | `always`                   | Always restart the container if it stops. If it's manually stopped, it's restarted only when Docker daemon restarts or the container itself is manually restarted. (See the second bullet listed in [restart policy details](#restart-policy-details))                                                                                                                |
 | `unless-stopped`           | Similar to `always`, except that when the container is stopped (manually or otherwise), it isn't restarted even after Docker daemon restarts.                                                                                                                                                                                                                         |
 
-The following command starts a Redis container and configures it to always
-restart, unless the container is explicitly stopped, or the daemon restarts.
+The following command starts a Redis container with the `unless-stopped`
+restart policy. Docker restarts the container if it exits or if the daemon
+restarts, but not if you stopped the container yourself.
 
 ```console
 $ docker run -d --name redis --restart unless-stopped redis
