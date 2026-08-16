@@ -17,11 +17,11 @@ loads it into the kernel.
 >
 > This profile is used on containers, not on the Docker daemon.
 
-A profile for the Docker Engine daemon exists but it is not currently installed
-with the `deb` packages. If you are interested in the source for the daemon
-profile, it is located in
+No AppArmor profile for `dockerd` is shipped with the `deb` packages. The
+files under
 [contrib/apparmor](https://github.com/moby/moby/tree/master/contrib/apparmor)
-in the Docker Engine source repository.
+in the Moby repository are a profile for the `/usr/bin/docker` CLI, not for
+the daemon.
 
 ## Understand the policies
 
