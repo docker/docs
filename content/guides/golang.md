@@ -242,6 +242,11 @@ This `COPY` command uses a wildcard to copy all files with `.go` extension
 located in the current directory on the host (the directory where the `Dockerfile`
 is located) into the current directory inside the image.
 
+`COPY *.go ./` does not recurse. Packages under `pkg/` or other
+subdirectories are left out, so `go build` then fails to find them. For a
+multi-package module, copy the module root instead (`COPY . .`) and use a
+`.dockerignore` file to keep the context small.
+
 Now, to compile your application, use the familiar `RUN` command:
 
 ```dockerfile
