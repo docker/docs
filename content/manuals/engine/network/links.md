@@ -38,6 +38,10 @@ detail on container linking in default `bridge` network.
 
 ## Connect using network port mapping
 
+Publishing a port with `-p` or `-P` is not container linking. It exposes a
+container port on the host. For the current reference, see
+[Published ports](port-publishing.md).
+
 Let's say you used this command to run a simple Python Flask application:
 
 ```console
