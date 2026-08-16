@@ -226,6 +226,18 @@ FROM alpine
 COPY --from=build /log /log
 ```
 
+Declare these automatic arguments with no default. A default such as
+`ARG TARGETPLATFORM=linux/amd64` is treated as a user-set value, so it wins
+over `--platform`. If you need a fallback for builders that do not set the
+automatic arguments, apply it later:
+
+```dockerfile
+ARG TARGETPLATFORM
+ENV TARGETPLATFORM=${TARGETPLATFORM:-linux/amd64}
+```
+
+The same applies to `TARGETOS`, `TARGETARCH`, and `TARGETVARIANT`.
+
 ## Examples
 
 Here are some examples of multi-platform builds:
