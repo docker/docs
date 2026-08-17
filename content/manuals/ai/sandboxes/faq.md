@@ -225,18 +225,20 @@ $ sbx settings set clipboard.imagePaste false
 
 Yes. On Linux, `sbx` stores secrets in the Secret Service exposed by your
 desktop keyring, such as GNOME Keyring or KDE Wallet. Headless servers and some
-WSL setups have no running Secret Service, so `sbx` falls back to an encrypted
-file under `$XDG_CONFIG_HOME/com.docker.sandboxes`, which defaults to
+WSL setups have no running Secret Service, so `sbx` falls back to a file under
+`$XDG_CONFIG_HOME/com.docker.sandboxes`, which defaults to
 `~/.config/com.docker.sandboxes` when `$XDG_CONFIG_HOME` is unset. No setup is
 required. When you store a secret on such a host, `sbx` prints a notice:
 
 ```text
-No keychain detected - this secret will be stored in an encrypted file on disk
+No keychain detected - this secret will be stored on disk, protected by file permissions rather than a password
 ```
 
-The file is encrypted at rest and protected by `0700` directory permissions,
-the same posture as `~/.docker/config.json`. It's weaker than an OS keychain,
-which also mediates access per application.
+`sbx` stores the file in a directory with `0700` permissions, the same
+file-permission model used for `~/.docker/config.json`. Any user or process that
+can read the file can retrieve the stored credentials, so treat the directory as
+sensitive. Where available, prefer a keychain, which mediates access per
+application.
 
 To keep secrets in a keyring instead, run a Secret Service on the host before
 storing them: install `gnome-keyring` and start `dbus-run-session`, or run the

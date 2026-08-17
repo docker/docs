@@ -59,22 +59,25 @@ The store backing `sbx secret set` depends on your operating system:
 The Ubuntu package depends on GNOME Keyring, so a standard desktop install
 needs no extra setup.
 
-On Linux hosts without a running Secret Service — headless servers and some
-WSL setups — `sbx` falls back to an encrypted file under your user config
-directory `$XDG_CONFIG_HOME/com.docker.sandboxes`, which defaults to
+On Linux hosts without a running Secret Service — headless servers and some WSL
+setups — `sbx` falls back to a file under your user config directory
+`$XDG_CONFIG_HOME/com.docker.sandboxes`, which defaults to
 `~/.config/com.docker.sandboxes` when `$XDG_CONFIG_HOME` is unset. The fallback
 is automatic and needs no configuration. When you store a secret this way,
 `sbx` prints a notice:
 
 ```text
-No keychain detected - this secret will be stored in an encrypted file on disk
+No keychain detected - this secret will be stored on disk, protected by file permissions rather than a password
 ```
 
-The file is encrypted at rest and protected by `0700` directory permissions,
-the same posture as `~/.docker/config.json`. This is weaker than an OS
-keychain, which also mediates access per application. If you start a Secret
-Service on the host later, `sbx` stores new secrets in the keychain again. For
-more on running sandboxes without a desktop keyring, see
+`sbx` stores the file in a directory with `0700` permissions, the same
+file-permission model used for `~/.docker/config.json`. Any user or process that
+can read the file can retrieve the stored credentials, so treat the directory as
+sensitive. Where available, prefer a keychain, which mediates access per
+application.
+
+If you start a Secret Service on the host later, `sbx` stores new secrets in the
+keychain again. For more on running sandboxes without a desktop keyring, see
 [Can I use Docker Sandboxes on headless Linux?](../faq.md#can-i-use-docker-sandboxes-on-headless-linux)
 
 ### Store a secret
@@ -445,9 +448,10 @@ $ sbx secret rm --sandbox my-sandbox --registry ghcr.io -f
 
 ## Best practices
 
-- Use [stored secrets](#stored-secrets) to provide credentials. They are
-  encrypted at rest in the OS keychain (or an encrypted file on Linux hosts
-  without a keychain). See [Where secrets are stored](#where-secrets-are-stored).
+- Use [stored secrets](#stored-secrets) to provide credentials. The OS keychain
+  protects them at rest; on Linux hosts without a keychain they are held in a
+  permission-protected file instead. See
+  [Where secrets are stored](#where-secrets-are-stored).
 - Don't set API keys manually inside the sandbox. Sandbox agents are
   pre-configured to use proxy-managed credentials.
 - Registry credentials stay on the host and are injected by the proxy when a
