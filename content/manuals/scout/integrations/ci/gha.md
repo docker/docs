@@ -109,7 +109,11 @@ This creates workflow steps to:
 > evaluate the image locally, you must ensure that the image is loaded the
 > local image store of your runner.
 >
-> This comparison doesn't work if you push the image to a registry, or if you
+> In this example, the comparison step runs only for `pull_request` events. On
+> other events, the workflow pushes the image and enables SBOM and provenance
+> attestations instead of loading the image locally.
+>
+> The comparison doesn't work if you push the image to a registry, or if you
 > build an image that can't be loaded to the runner's local image store. For
 > example, multi-platform images or images with SBOM or provenance attestation
 > can't be loaded to the local image store.
