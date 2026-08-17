@@ -150,9 +150,10 @@ Run Claude Code in the sandbox and pass the model flag through to the agent:
 $ sbx run claude-dmr -- --model ai/devstral-small-2
 ```
 
-Everything after `--` is forwarded to the Claude Code CLI. Because
-`ANTHROPIC_BASE_URL` is stored in the sandbox's environment, Claude Code routes
-requests to Docker Model Runner on your host instead of `api.anthropic.com`.
+Everything after `--` is forwarded to the Claude Code CLI.
+`ANTHROPIC_BASE_URL` is stored with the sandbox and available to every session,
+so Claude Code routes requests to Docker Model Runner on your host instead of
+`api.anthropic.com`.
 
 ## Step 6: Inspect Claude Code requests
 
