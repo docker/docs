@@ -18,7 +18,7 @@ params:
 ---
 
 A sandbox environment file captures the setup for a project in a
-`.sbxenv.yaml` file. Commit the file with your project so contributors use the
+`.sbxenv.yaml` file. Share the file with project contributors so they use the
 same agent, tools, resources, and credentials without reproducing CLI flags and
 setup steps.
 
@@ -28,14 +28,24 @@ setup steps.
 
 ## Start an environment
 
-Create a `.sbxenv.yaml` file in your project directory. This example gives the
-agent a shared environment variable and the Playwright browser-testing tools.
-It also publishes the application's development port:
+Keep the environment file outside the directories you mount into the sandbox.
+For example, place it beside your project:
+
+```text
+web-app-env/
+├── .sbxenv.yaml
+└── web-app/
+```
+
+Create `web-app-env/.sbxenv.yaml`. This example gives the agent a shared
+environment variable and the Playwright browser-testing tools. It also
+publishes the application's development port:
 
 ```yaml
 schemaVersion: "1"
 name: web-app
 agent: claude
+workspace: ./web-app
 
 kits:
   - docker.io/sbx/playwright-kit:latest
@@ -48,16 +58,25 @@ ports:
     host: 3000
 ```
 
-From the same directory, run the environment:
+From `web-app-env`, run the environment:
 
 ```console
 $ sbx env run
 ```
 
-The project directory becomes the workspace. If the environment doesn't exist,
-`sbx` creates a sandbox named `web-app`, installs Playwright and Chromium, and
-publishes sandbox port `3000` on the host. It then attaches to the agent. Later
-runs attach to the existing sandbox.
+The `web-app` directory becomes the workspace, while `.sbxenv.yaml` remains
+outside the sandbox. If the environment doesn't exist, `sbx` creates a sandbox
+named `web-app`, installs Playwright and Chromium, and publishes sandbox port
+`3000` on the host. It then attaches to the agent. Later runs attach to the
+existing sandbox.
+
+> [!WARNING]
+> With [direct mount](security/isolation.md#direct-mount-default), the agent can
+> modify every file in a workspace. If an environment file is inside a mounted
+> workspace, the agent can change the file that controls later `sbx env`
+> commands. Store environment files outside all direct-mounted workspaces. Clone
+> mode protects files in the primary repository, but additional workspaces
+> remain direct-mounted.
 
 ## Commands
 
@@ -82,14 +101,16 @@ can adapt for a project.
 
 ### Combine team defaults and personal settings
 
-Keep the shared configuration in a committed file and put machine-specific
-settings in a file excluded from version control. For example, commit
-`base.sbxenv.yaml`:
+Keep the shared configuration in a version-controlled environment directory
+outside the mounted workspace. Put machine-specific settings in a file excluded
+from version control. For example, commit `base.sbxenv.yaml` beside the
+`web-app` directory:
 
 ```yaml
 schemaVersion: "1"
 name: web-app
 agent: claude
+workspace: ./web-app
 
 env:
   NODE_ENV: development
@@ -126,23 +147,24 @@ Mount related repositories alongside the primary project when the agent needs
 to coordinate changes or consult shared code and documentation:
 
 ```yaml
-# .sbxenv.yaml in the web-app repository
+# .sbxenv.yaml in the directory above the repositories
 schemaVersion: "1"
 name: web-platform
 agent: codex
 
-workspace: .
+workspace: ./web-app
 
 additionalWorkspaces:
-  - path: ../shared-components
-  - path: ../architecture-docs
+  - path: ./shared-components
+  - path: ./architecture-docs
     readOnly: true
 ```
 
 The agent starts in `web-app`, can modify `shared-components`, and can read
-`architecture-docs` without changing it. Relative paths resolve from the
-directory of the first environment file. Additional workspaces are mounted
-directly even when the primary workspace uses clone mode.
+`architecture-docs` without changing it. The environment file stays outside all
+three workspaces. Relative paths resolve from the directory of the first
+environment file. Additional workspaces are mounted directly even when the
+primary workspace uses clone mode.
 
 ### Reuse an environment in automation
 
@@ -239,6 +261,15 @@ parameter and OCI kits with an immutable tag or digest.
 
 When specified as a string, `workspace` is the path. Use the object form for
 clone mode:
+
+With direct mount mode, keep the environment file outside the primary and
+additional workspaces. An agent can modify files in direct-mounted workspaces,
+including an environment file that controls later `sbx env` commands. See
+[Direct mount](security/isolation.md#direct-mount-default).
+
+An agent can also replace a symlink stored inside a direct-mounted workspace.
+If you use a symlink for discoverability, pass the external source path to each
+`sbx env` lifecycle command.
 
 | Field   | Type    | Default                | Description                                                             |
 | ------- | ------- | ---------------------- | ----------------------------------------------------------------------- |
