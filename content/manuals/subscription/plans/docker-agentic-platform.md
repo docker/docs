@@ -16,11 +16,7 @@ weight: 20
 > credit toward cloud compute usage. To review your balance, see
 > [Credits](/manuals/billing/_index.md#credits).
 
-Docker Agentic Platform combines
-[MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md) and
-[Cloud Sandboxes](/manuals/ai/sandboxes/_index.md) in the Agentic
-Platform UI. Use it to run agents in isolated compute environments and
-manage MCP Gateway access with higher tool-call allowances.
+Docker Agentic Platform runs agent and tool workloads in isolated sandboxes on Docker-managed cloud infrastructure.
 
 Docker Agentic Platform is a pay-as-you-go plan. There is no
 recurring subscription fee, so you pay for the usage you accrue. To add
@@ -38,8 +34,9 @@ for inference. Your inference provider handles those costs.
 
 After you subscribe, your invoice reflects metered, pay-as-you-go
 compute usage. Docker meters compute usage based on sandbox runtime
-consumption in seconds of compute. Each instance shape, calculated from
-vCPU plus memory, has its own billing rate. To track usage for Docker
+consumption in seconds of compute calculated from
+vCPU plus memory. Depending on the configuration you choose at setup, 
+your costs may vary across different sandboxes. To track usage for Docker
 Agentic Platform:
 
 1. Sign in to [Docker Home](https://app.docker.com/), then choose your
