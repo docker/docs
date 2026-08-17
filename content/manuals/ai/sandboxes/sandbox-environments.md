@@ -74,9 +74,9 @@ existing sandbox.
 > With [direct mount](security/isolation.md#direct-mount-default), the agent can
 > modify every file in a workspace. If an environment file is inside a mounted
 > workspace, the agent can change the file that controls later `sbx env`
-> commands. Store environment files outside all direct-mounted workspaces. Clone
-> mode protects files in the primary repository, but additional workspaces
-> remain direct-mounted.
+> commands. Store environment files outside all direct-mounted workspaces.
+> [Clone mode](security/isolation.md#clone-mode) protects files in the primary
+> repository, but additional workspaces remain direct-mounted.
 
 ## Commands
 
