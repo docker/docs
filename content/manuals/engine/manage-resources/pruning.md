@@ -10,12 +10,13 @@ aliases:
 ---
 
 Docker takes a conservative approach to cleaning up unused objects (often
-referred to as "garbage collection"), such as images, containers, volumes, and
-networks. These objects are generally not removed unless you explicitly ask
-Docker to do so. This can cause Docker to use extra disk space. For each type of
-object, Docker provides a `prune` command. In addition, you can use `docker
-system prune` to clean up multiple types of objects at once. This topic shows
-how to use these `prune` commands.
+referred to as "garbage collection"), such as images, containers, volumes,
+networks, and build cache. These objects are generally not removed unless you
+explicitly ask Docker to do so. This can cause Docker to use extra disk space.
+For each type of object, Docker provides a `prune` command. In addition, you can
+use `docker system prune` to clean up multiple types of objects at once
+(including unused build cache). This topic shows how to use these `prune`
+commands.
 
 ## Prune images
 
@@ -168,9 +169,10 @@ for all options, including `--all` to also remove internal and frontend images.
 ## Prune everything
 
 The `docker system prune` command is a shortcut that prunes images, containers,
-and networks. Volumes aren't pruned by default. Add `--volumes` to also remove
-unused **anonymous** volumes. Named unused volumes are left alone; use
-`docker volume prune --all` if you intend to delete those too.
+networks, and unused build cache (including BuildKit cache mounts). Volumes
+aren't pruned by default. Add `--volumes` to also remove unused **anonymous**
+volumes. Named unused volumes are left alone; use `docker volume prune --all`
+if you intend to delete those too.
 
 ```console
 $ docker system prune
