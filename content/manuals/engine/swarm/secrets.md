@@ -264,7 +264,7 @@ real-world example, continue to
     $ docker secret rm my_secret_data
     ```
 
-### Example: Use a templated secret
+### Example: Use a Go template for a secret
 
 Secrets support the same Go templates as [configs](configs.md#example-use-a-templated-config).
 Pass `--template-driver golang` when you create the secret. The template is
