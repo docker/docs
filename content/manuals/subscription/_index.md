@@ -48,7 +48,7 @@ You can subscribe to plans for individual or organization accounts, or plans for
 | [Docker Hardened Images (DHI)](/manuals/subscription/plans/dhi.md)     | Graduated security features for hardened container images | DHI Community, DHI Select, DHI Enterprise                 |
 | [Gordon](/manuals/subscription/plans/gordon.md)                        | Prepaid usage for the Gordon AI agent                     | Gordon Plus, Gordon Max, Gordon Ultra                     |
 | [AI Governance](/manuals/subscription/plans/ai-governance.md)          | Purchase set amount of licenses                           | AI Governance                                             |
-| [Docker Verified Publisher (DVP)](/manuals/subscription/plans/dvp.md)  | Annual plans based on tracked companies                   | DVP Starter, DVP Growth                                   |
+| [Docker Verified Publisher (DVP)](/manuals/subscription/plans/docker-verified-publisher.md)  | Annual plans based on tracked companies                   | DVP Starter, DVP Growth                                   |
 
 Docker plans that upgrade your account (Docker Pro or Docker Team and Business) can provide a foundation for most use cases. Some product plans may require an upgraded Docker account while other product plans let you subscribe without an upgraded account. To learn more, see [Docker plans](/manuals/subscription/plans/_index.md).
 
