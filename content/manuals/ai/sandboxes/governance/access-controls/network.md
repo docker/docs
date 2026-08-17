@@ -59,3 +59,10 @@ organization or to selected teams. For setup steps and team scoping, see
 
 Use [Monitoring policies](../monitor-and-enforce/monitoring.md) to inspect
 which network rules are active on a developer machine.
+
+> [!NOTE]
+> To manage Model Context Protocol (MCP) server registration and requests
+> through Docker's MCP gateway, use [MCP access policies](mcp.md). These
+> policies apply only to the gateway. Direct MCP connections from a sandbox
+> don't use the gateway, but you can control access to remote MCP servers with
+> network policy.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review PR"
+  short_description: "Validate incoming documentation pull requests"
+  default_prompt: "Use $review-pr to validate this incoming documentation PR and draft maintainer feedback."
