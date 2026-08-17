@@ -70,13 +70,8 @@ named `web-app`, installs Playwright and Chromium, and publishes sandbox port
 `3000` on the host. It then attaches to the agent. Later runs attach to the
 existing sandbox.
 
-> [!WARNING]
-> With [direct mount](security/isolation.md#direct-mount-default), the agent can
-> modify every file in a workspace. If an environment file is inside a mounted
-> workspace, the agent can change the file that controls later `sbx env`
-> commands. Store environment files outside all direct-mounted workspaces.
-> [Clone mode](security/isolation.md#clone-mode) protects files in the primary
-> repository, but additional workspaces remain direct-mounted.
+This placement keeps the environment file outside the agent's writable
+workspace. See the [`workspace` guidance](#workspace) for details.
 
 ## Commands
 
@@ -262,14 +257,13 @@ parameter and OCI kits with an immutable tag or digest.
 When specified as a string, `workspace` is the path. Use the object form for
 clone mode:
 
-With direct mount mode, keep the environment file outside the primary and
-additional workspaces. An agent can modify files in direct-mounted workspaces,
-including an environment file that controls later `sbx env` commands. See
-[Direct mount](security/isolation.md#direct-mount-default).
-
-An agent can also replace a symlink stored inside a direct-mounted workspace.
-If you use a symlink for discoverability, pass the external source path to each
-`sbx env` lifecycle command.
+> [!WARNING]
+> With [direct mount](security/isolation.md#direct-mount-default), the agent can
+> modify every file in a workspace. If an environment file is inside a mounted
+> workspace, the agent can change the file that controls later `sbx env`
+> commands. Store environment files outside all direct-mounted workspaces.
+> [Clone mode](security/isolation.md#clone-mode) protects files in the primary
+> repository, but additional workspaces remain direct-mounted.
 
 | Field   | Type    | Default                | Description                                                             |
 | ------- | ------- | ---------------------- | ----------------------------------------------------------------------- |
