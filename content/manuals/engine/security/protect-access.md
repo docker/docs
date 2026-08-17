@@ -315,12 +315,17 @@ Docker in various other modes by mixing the flags.
 
 #### Client modes
 
- - `tls`: Authenticate server based on public/default CA pool
- - `tlsverify`, `tlscacert`: Authenticate server based on given CA
- - `tls`, `tlscert`, `tlskey`: Authenticate with client certificate, do not
-   authenticate server based on given CA
- - `tlsverify`, `tlscacert`, `tlscert`, `tlskey`: Authenticate with client
-   certificate and authenticate server based on given CA
+- `tls`: Enable TLS. The client still loads `--tlscacert` (default
+  `~/.docker/ca.pem`) and fails if that file is missing. It does not use
+  the system CA pool. Without `--tlsverify`, the daemon certificate is
+  not verified.
+- `tlsverify`, `tlscacert`: Enable TLS and verify the daemon against the
+  given CA
+- `tls`, `tlscert`, `tlskey`: Present a client certificate. Still loads
+  `--tlscacert` as above. The daemon certificate is not verified unless
+  `--tlsverify` is also set
+- `tlsverify`, `tlscacert`, `tlscert`, `tlskey`: Present a client
+  certificate and verify the daemon against the given CA
 
 If found, the client sends its client certificate, so you just need
 to drop your keys into `~/.docker/{ca,cert,key}.pem`. Alternatively,
