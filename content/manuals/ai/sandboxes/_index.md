@@ -46,6 +46,8 @@ jump to the [usage guide](usage.md) for basic commands.
   sandboxed agents
 - [Customize](customize/) — reusable templates and declarative kits for
   extending or tailoring sandboxes
+- [GPU passthrough](gpu-passthrough.md) — build the NVIDIA driver bundle and
+  run GPU-accelerated workloads in a sandbox
 - [Architecture](architecture.md) — microVM isolation, workspace mounting,
   networking
 - [Upstream proxy](upstream-proxy.md) — route sandbox and daemon traffic through
