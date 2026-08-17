@@ -22,7 +22,7 @@ New features and enhancements released in the third quarter of 2026.
   server](/dhi/tools/mcp/).
 - DHI API: VEX statements and suppressed CVEs for a Docker Hardened Image are
   now available to query by digest through the DHI GraphQL API. For more
-  information, see [Use the DHI API](/dhi/tools/api.md).
+  information, see [Use the DHI API](../tools/api.md).
 
 ## Q2 2026
 
