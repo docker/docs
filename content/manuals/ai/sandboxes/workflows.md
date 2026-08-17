@@ -330,7 +330,7 @@ lists them in detail:
 ```console
 $ sbx ls
 SANDBOX         AGENT   STATUS   PORTS                    WORKSPACE
-my-sandbox      claude  running  127.0.0.1:8080->3000/tcp /home/user/proj
+my-sandbox      claude  running  127.0.0.1:8080->3000/tcp4 /home/user/proj
 ```
 
 To stop forwarding a port:
@@ -342,12 +342,14 @@ $ sbx ports my-sandbox --unpublish 8080:3000
 For a service to be reachable, it must listen on all interfaces inside the
 sandbox, not only `127.0.0.1`. Bind it to `0.0.0.0` for IPv4 or `[::]` for both
 IPv4 and IPv6. Most dev servers need a flag like `--host 0.0.0.0` to do this.
-On the host, `--publish` listens on both `127.0.0.1` and `::1`, so a client
-resolving `localhost` might pick IPv6 and fail with "connection reset by peer"
-if the sandboxed service only listens on IPv4, even when
-`http://127.0.0.1:<port>/` works. To fix that, bind the service to `[::]`, or
-pin the published port to one family with `--publish 8080:3000/tcp4` or
-`/tcp6`.
+
+On the host, a published port binds IPv4 (`127.0.0.1`) unless you name another
+protocol, so `http://localhost:<port>/` reaches a service listening on IPv4
+whichever address your resolver picks for `localhost`. To publish on both
+families use `--publish 8080:3000/tcp`, and for IPv6 alone `/tcp6`. Both of
+those require the sandboxed service to listen on IPv6 as well — bind it to
+`[::]` — or a client arriving over `::1` has its connection accepted and then
+reset.
 
 Published ports survive restarts: `sbx` re-publishes them when the sandbox or
 the daemon restarts. Explicit host ports are reused, while a port published with
