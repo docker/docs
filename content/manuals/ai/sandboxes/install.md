@@ -97,6 +97,13 @@ $ curl -fsSL https://get.docker.com | sudo REPO_ONLY=1 sh
 $ sudo apt-get install docker-sbx
 ```
 
+The convenience script keys off `ID` in `/etc/os-release`. On Pop!_OS that
+value is `pop`, so the script adds Debian apt sources and `docker-sbx` is
+missing from the index. Add Docker's
+[Ubuntu repository](/engine/install/ubuntu/) (24.04 / noble on current Pop!_OS)
+instead, or download a `.deb` from
+[sbx-releases](https://github.com/docker/sbx-releases/releases).
+
 ## Install manually
 
 To install `sbx` without a package manager, download a binary from the
