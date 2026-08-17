@@ -50,7 +50,7 @@ $ docker run -d --name web \
 `--health-cmd` always runs through `CMD-SHELL`. Use
 `--no-healthcheck` to turn the image check off.
 
-See [`docker run`](/reference/cli/docker/container/run/#health).
+See [`docker run`](/reference/cli/docker/container/run/#health-cmd).
 
 ## Read the status
 
