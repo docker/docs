@@ -20,9 +20,11 @@ host.
 ## Prerequisites
 
 - SSH access set up. See [Editor and app integrations](_index.md#enable-ssh-access).
-- An existing named sandbox. See
-  [Create or identify a sandbox](_index.md#create-or-identify-a-sandbox).
 - Claude Desktop installed.
+
+Use a sandbox created with the Claude agent type. The Claude sandbox template
+configures Anthropic credentials and network access for the remote Claude Code
+session.
 
 ## Connect
 
@@ -30,6 +32,13 @@ host.
 > Connecting Claude Desktop to a sandbox over SSH transmits Anthropic
 > credentials into the Claude Code process within the sandbox, reducing
 > isolation guarantees.
+
+Create a named Claude sandbox for the current directory if you don't already
+have one:
+
+```console
+$ sbx create --name demo claude .
+```
 
 Confirm that you can connect to the sandbox from a terminal:
 

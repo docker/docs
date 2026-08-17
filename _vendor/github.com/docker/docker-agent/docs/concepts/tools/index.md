@@ -10,21 +10,21 @@ _Tools give agents the ability to interact with the world — read files, run co
 
 ## How Tools Work
 
-When an agent needs to perform an action, it makes a **tool call**. The docker-agent runtime executes the tool and returns the result to the agent, which can then use it to continue its work.
+When an agent needs to perform an action, it makes a **tool call**. The Docker Agent runtime executes the tool and returns the result to the agent, which can then use it to continue its work.
 
 1. Agent receives a user message
 2. Agent decides it needs to use a tool (e.g., read a file)
-3. docker-agent executes the tool and returns the result
+3. Docker Agent executes the tool and returns the result
 4. Agent incorporates the result and responds
 
 > [!NOTE]
 > **Tool Confirmation**
 >
-> By default, docker-agent asks for user confirmation before executing tools that have side effects (shell commands, file writes). Use `--yolo` to auto-approve all tool calls.
+> By default, Docker Agent asks for user confirmation before executing tools that have side effects (shell commands, file writes). Use `--yolo` to auto-approve all tool calls.
 
 ## Built-in Tools
 
-docker-agent ships with several built-in tools that require no external dependencies. Each is enabled by adding its `type` to the agent's `toolsets` list:
+Docker Agent ships with several built-in tools that require no external dependencies. Each is enabled by adding its `type` to the agent's `toolsets` list:
 
 | Tool | Description |
 | --- | --- |
@@ -52,7 +52,7 @@ docker-agent ships with several built-in tools that require no external dependen
 
 ## MCP Tools
 
-docker-agent supports the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) for extending agents with external tools. There are three ways to connect MCP tools:
+Docker Agent supports the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) for extending agents with external tools. There are three ways to connect MCP tools:
 
 - **Docker MCP** (recommended) — Run MCP servers in Docker containers via the [MCP Gateway](https://github.com/docker/mcp-gateway). Browse the [Docker MCP Catalog](https://hub.docker.com/search?q=&type=mcp).
 - **Local MCP (stdio)** — Run MCP servers as local processes communicating over stdin/stdout.

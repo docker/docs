@@ -18,9 +18,9 @@ system.
 > [organization governance](governance/) requires a separate paid subscription.
 
 Organization admins can
-[centrally manage sandbox network and filesystem policies](governance/org.md),
-so the same rules apply uniformly across every developer's machine. Available
-on a separate paid subscription.
+[centrally manage sandbox network, filesystem, and MCP policies](governance/access-controls/organization.md),
+so the same controls apply uniformly across every developer's machine.
+Available on a separate paid subscription.
 
 ## Get started
 
@@ -75,10 +75,14 @@ the [usage guide](usage.md) for basic commands.
 - [Agents](agents/) — supported agents and per-agent configuration
 - [Integrations](integrations/) — connect editors and apps like VS Code and
   Cursor to a sandbox over SSH
+- [MCP gateway](mcp-gateway.md) — register MCP servers and connect them to
+  sandboxed agents
 - [Customize](customize/) — reusable templates and declarative kits for
   extending or tailoring sandboxes
 - [Architecture](architecture.md) — microVM isolation, workspace mounting,
   networking
+- [Upstream proxy](upstream-proxy.md) — route sandbox and daemon traffic through
+  a corporate proxy, PAC file, or your OS system proxy
 - [Security](security/) — isolation model, credential handling, and
   network policies
 - [CLI reference](/reference/cli/sbx/) — full list of `sbx` commands and options

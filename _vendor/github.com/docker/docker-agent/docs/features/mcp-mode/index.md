@@ -1,12 +1,12 @@
 ---
 title: "MCP Mode"
-description: "Expose your docker-agent agents as MCP tools for use in Claude Desktop, Claude Code, and other MCP-compatible applications."
+description: "Expose your Docker Agent agents as MCP tools for use in Claude Desktop, Claude Code, and other MCP-compatible applications."
 keywords: docker agent, ai agents, features, mcp mode
 weight: 40
 canonical: https://docs.docker.com/ai/docker-agent/features/mcp-mode/
 ---
 
-_Expose your docker-agent agents as MCP tools for use in Claude Desktop, Claude Code, and other MCP-compatible applications._
+_Expose your Docker Agent agents as MCP tools for use in Claude Desktop, Claude Code, and other MCP-compatible applications._
 
 ## Why MCP Mode?
 
@@ -29,7 +29,7 @@ The `docker agent serve mcp` command makes your agents available to any applicat
 $ docker agent serve mcp ./agent.yaml
 
 # Expose from a registry
-$ docker agent serve mcp agentcatalog/pirate
+$ docker agent serve mcp myorg/agent:tag
 
 # Set the working directory
 $ docker agent serve mcp ./agent.yaml --working-dir /path/to/project
@@ -75,7 +75,7 @@ Add a configuration to your Claude Desktop MCP settings file:
         "agent", 
         "serve",
         "mcp",
-        "agentcatalog/coder",
+        "myorg/coder",
         "--working-dir",
         "/home/user/projects"
       ],
@@ -96,7 +96,7 @@ Restart Claude Desktop after updating the configuration.
 $ claude mcp add --transport stdio myagent \
   --env OPENAI_API_KEY=$OPENAI_API_KEY \
   --env ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY \
-  -- docker agent serve mcp agentcatalog/pirate --working-dir $(pwd)
+  -- docker agent serve mcp myorg/agent:tag --working-dir $(pwd)
 ```
 
 ## Multi-Agent in MCP Mode

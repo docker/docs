@@ -1,0 +1,30 @@
+name: sbx mcp auth rm
+synopsis: Remove MCP server OAuth credentials
+description: |-
+    Remove hosted OAuth credentials for registered MCP servers.
+
+    This command does not remove local MCP server registrations. Use 'sbx mcp rm'
+    to remove a registration.
+usage: sbx mcp auth rm [server-name] [flags]
+options:
+    - name: all
+      default_value: "false"
+      usage: Apply to all registered OAuth servers
+    - name: format
+      default_value: text
+      usage: 'Output format: "text" or "json"'
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for rm
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      sbx mcp auth rm --all
+      sbx mcp auth rm notion
+      sbx mcp auth rm notion --format=json
+see_also:
+    - sbx mcp auth - Authorize MCP servers

@@ -15,7 +15,7 @@ Model routing lets you define a "router" model that automatically selects the be
 > [!NOTE]
 > **How It Works**
 >
-> docker-agent uses NLP-based text similarity (via Bleve full-text search) to match user messages against example phrases you define. The route with the best-matching examples wins, and that model handles the request.
+> Docker Agent uses NLP-based text similarity (via Bleve full-text search) to match user messages against example phrases you define. The route with the best-matching examples wins, and that model handles the request.
 
 ## Configuration
 

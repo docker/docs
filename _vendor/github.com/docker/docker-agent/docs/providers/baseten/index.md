@@ -1,16 +1,16 @@
 ---
 title: "Baseten"
-description: "Use Baseten AI models with docker-agent."
+description: "Use Baseten AI models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, baseten
 weight: 40
 canonical: https://docs.docker.com/ai/docker-agent/providers/baseten/
 ---
 
-_Use Baseten AI models with docker-agent._
+_Use Baseten AI models with Docker Agent._
 
 ## Overview
 
-Baseten provides AI models through an OpenAI-compatible API. docker-agent includes built-in support for Baseten as an alias provider.
+Baseten provides AI models through an OpenAI-compatible API. Docker Agent includes built-in support for Baseten as an alias provider.
 
 ## Setup
 
@@ -67,7 +67,7 @@ Baseten hosts various open models through its Model APIs. Check the [Baseten doc
 
 ## How It Works
 
-Baseten is implemented as a built-in alias in docker-agent:
+Baseten is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://inference.baseten.co/v1`

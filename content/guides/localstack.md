@@ -65,11 +65,11 @@ Launch a quick demo of LocalStack by using the following steps:
 
    This Compose file also includes specifications for a required Mongo database. You can verify the services are up and running by visiting the Docker Desktop Dashboard.
 
-   ![Diagram showing the LocalStack and Mongo container up and running on Docker Desktop ](./images/launch-localstack.webp)
+   ![Diagram showing the LocalStack and Mongo container up and running on Docker Desktop](./images/launch-localstack.webp)
 
 3. Verify that LocalStack is up and running by selecting the container and checking the logs.
 
-   ![Diagram showing the logs of LocalStack container ](./images/localstack-logs.webp)
+   ![Diagram showing the logs of LocalStack container](./images/localstack-logs.webp)
 
 4. Creating a Local Amazon S3 Bucket
 
@@ -91,7 +91,7 @@ Launch a quick demo of LocalStack by using the following steps:
 
     You can verify if the S3 bucket gets created or not by selecting the LocalStack container on the Docker Desktop Dashboard and viewing the logs. The logs indicates that your LocalStack environment is configured correctly and you can now use the `mysamplebucket` for storing and retrieving objects.
 
-    ![Diagram showing the logs of LocalStack that highlights the S3 bucket being created successfully ](./images/localstack-s3put.webp)
+    ![Diagram showing the logs of LocalStack that highlights the S3 bucket being created successfully](./images/localstack-s3put.webp)
 
 ## Using LocalStack in development
 
@@ -102,7 +102,7 @@ Now that you've familiarized yourself with LocalStack, it's time to see it in ac
 - MongoDB: A database to store all the to-do list data
 - LocalStack: Emulates the Amazon S3 service and stores and retrieve images.
 
-![Diagram showing the tech stack of the sample todo-list application that includes LocalStack, frontend and backend services ](images/localstack-arch.webp)
+![Diagram showing the tech stack of the sample todo-list application that includes LocalStack, frontend and backend services](images/localstack-arch.webp)
 
 
 ## Connecting to LocalStack from a non-containerized app

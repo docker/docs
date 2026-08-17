@@ -38,6 +38,32 @@ Now, any traffic sent to port `8080` on your host machine will be forwarded to p
 >
 > When a port is published, it's published to all network interfaces by default. This means any traffic that reaches your machine can access the published application. Be mindful of publishing databases or any sensitive information. [Learn more about published ports here](/engine/network/#published-ports).
 
+
+### Publishing on a specific host IP
+
+By default, published ports listen on all host interfaces (`0.0.0.0` / `::`). You can
+bind to a single address by putting the IP first in the publish string:
+
+```console
+$ docker run -d -p 127.0.0.1:8080:80 nginx
+```
+
+The full form is `HOST_IP:HOST_PORT:CONTAINER_PORT`.
+
+- `HOST_IP`: Optional. The host address to bind. Use `127.0.0.1` to keep the port
+  local to the machine, or a specific interface IP so only that NIC accepts traffic.
+- `HOST_PORT` / `CONTAINER_PORT`: Same meaning as in `HOST_PORT:CONTAINER_PORT`.
+
+In Compose, the same extended form works under `ports`:
+
+```yaml
+services:
+  app:
+    image: docker/welcome-to-docker
+    ports:
+      - "127.0.0.1:8080:80"
+```
+
 ### Publishing to ephemeral ports
 
 At times, you may want to simply publish the port but don’t care which host port is used. In these cases, you can let Docker pick the port for you. To do so, simply omit the `HOST_PORT` configuration. 

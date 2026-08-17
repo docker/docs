@@ -1,18 +1,18 @@
 ---
 title: "OpenCode Zen"
-description: "Use OpenCode Zen models with docker-agent."
+description: "Use OpenCode Zen models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, opencode zen
 weight: 220
 canonical: https://docs.docker.com/ai/docker-agent/providers/opencode-zen/
 ---
 
-_Use OpenCode Zen models with docker-agent._
+_Use OpenCode Zen models with Docker Agent._
 
 ## Overview
 
 [OpenCode Zen](https://opencode.ai/docs/zen) is a curated gateway of tested and verified AI models provided by the OpenCode team. It offers pay-per-use access to a wide range of models — from GPT and Claude to open-source models — all through a single API key. Several free models are also available.
 
-docker-agent includes built-in support for OpenCode Zen as an alias provider for OpenAI-compatible models. Anthropic and Google models are supported via custom provider definitions.
+Docker Agent includes built-in support for OpenCode Zen as an alias provider for OpenAI-compatible models. Anthropic and Google models are supported via custom provider definitions.
 
 ## Setup
 
@@ -97,7 +97,7 @@ These models use the `/v1/chat/completions` endpoint and work directly with the 
 
 ### OpenAI-Compatible (Responses API)
 
-These models use the `/v1/responses` endpoint and are auto-detected by docker-agent based on the model name:
+These models use the `/v1/responses` endpoint and are auto-detected by Docker Agent based on the model name:
 
 | Model                  | Description                       |
 | ---------------------- | --------------------------------- |
@@ -194,7 +194,7 @@ agents:
 
 ## How It Works
 
-OpenCode Zen is implemented as a built-in alias in docker-agent:
+OpenCode Zen is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (auto-detects Responses API for GPT models, Chat Completions for others)
 - **Base URL:** `https://opencode.ai/zen/v1`
@@ -202,7 +202,7 @@ OpenCode Zen is implemented as a built-in alias in docker-agent:
 
 The same API key works for both OpenCode Go and OpenCode Zen — they are part of the same platform. Zen uses a pay-per-use billing model, while Go uses a fixed subscription.
 
-For Anthropic-compatible models, docker-agent uses a custom provider pointing to the Anthropic client at `https://opencode.ai/zen` with the same token. For Google models, a custom provider points to the Google client at `https://opencode.ai/zen` (the Google SDK appends its own `/v1beta/models/...` path segment).
+For Anthropic-compatible models, Docker Agent uses a custom provider pointing to the Anthropic client at `https://opencode.ai/zen` with the same token. For Google models, a custom provider points to the Google client at `https://opencode.ai/zen` (the Google SDK appends its own `/v1beta/models/...` path segment).
 
 ### Differences from OpenCode Go
 

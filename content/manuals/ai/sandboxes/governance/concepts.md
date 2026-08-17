@@ -1,8 +1,8 @@
 ---
 title: Policy concepts
-weight: 5
+weight: 10
 description: The resource model, rule syntax, and evaluation logic behind Docker sandbox governance.
-keywords: docker sandboxes, policy concepts, rule syntax, network rules, filesystem rules, precedence, rule evaluation
+keywords: docker sandboxes, policy concepts, rule syntax, network rules, filesystem rules, mcp policy, cedar policy, precedence, rule evaluation
 ---
 
 ## Resource model
@@ -15,13 +15,15 @@ Policies exist at two levels:
 
 - **Local**: configured per machine using the `sbx policy` CLI. Applies to
   sandboxes on that machine only.
-- **Organization**: configured in Docker Home or via the
+- **Organization**: configured in Docker Home. Network and filesystem policies
+  can also be managed via the
   [Governance API](/reference/api/ai-governance/). Applies to sandboxes across
   the organization. An organization can have several policies, each applying
   either org-wide or to specific teams. See [Policy scope](#policy-scope).
 
-When organization governance is active, organization policies replace local
-policies entirely. See [Precedence](#precedence).
+When organization governance is active, only organization allow rules can grant
+access. Local and kit-defined deny rules still apply on top. See
+[Precedence](#precedence).
 
 A **rule** is the unit of access control within a policy. Each rule has:
 
@@ -30,8 +32,10 @@ A **rule** is the unit of access control within a policy. Each rule has:
 - **Resources**: the targets the rule matches against
 - **Decision**: `allow` or `deny`
 
-Rules are grouped by domain: all rules in a policy must share the same domain,
-either `network` or `filesystem`.
+Rules are grouped by domain. Network and filesystem rules in a policy must
+share the same domain, either `network` or `filesystem`. MCP policies use Cedar
+statements written in the `MCP` namespace instead of the network and filesystem
+rule format.
 
 ## Policy scope
 
@@ -75,6 +79,9 @@ need to match the root domain and its subdomains.
 Both IPv4 and IPv6 notation are supported: `10.0.0.0/8`, `192.168.1.0/24`,
 `2001:db8::/32`.
 
+For local and organization policy configuration, see
+[Network access policies](access-controls/network.md).
+
 ### Filesystem rules
 
 Filesystem rules use the actions `read` and `write`. Resources are host paths
@@ -115,6 +122,31 @@ Use `**` to match a directory tree recursively. A single `*` matches within one
 path segment and won't cross a path separator. For example, `~/**` matches all
 paths under the home directory, while `~/*` matches only its direct children.
 
+For organization policy configuration and enforcement details, see
+[Filesystem access policies](access-controls/filesystem.md).
+
+### MCP policies
+
+MCP policies control Model Context Protocol activity made available to a
+sandbox through Docker's [MCP gateway](../mcp-gateway.md). They are
+organization policies written in Cedar using the `MCP` namespace, rather than
+the network and filesystem rule format.
+
+MCP policy applies when a developer registers a server and when an agent uses
+the MCP gateway. Registration rules control future `sbx mcp add` operations.
+Use-time rules control tool calls, gateway meta-tools, resource reads, and
+prompt retrieval from servers that are already registered or loaded.
+
+Governed MCP activity is default deny: a request is blocked unless a matching
+`permit` allows it. A matching `forbid` overrides any `permit`, including a
+permit that requires approval. Policy scope supplies the principal, so use
+organization or team scope instead of matching users, teams, tenants, or roles
+in Cedar.
+
+For representative policies, see [MCP access policies](access-controls/mcp.md).
+For exact action, resource, context, and approval behavior, see the
+[MCP policy reference](reference/mcp-policy.md).
+
 ## Rule evaluation
 
 When organization governance is active, the rules from all of a user's
@@ -125,7 +157,8 @@ each request, following two principles:
   regardless of any matching allow rules.
 - Default deny: anything an allow rule doesn't match is blocked. Outbound
   network traffic is blocked unless a network rule allows the destination, and a
-  host path can't be mounted unless a filesystem rule allows it.
+  host path can't be mounted unless a filesystem rule allows it. MCP activity is
+  blocked unless an MCP `permit` allows it.
 
 Because every effective policy feeds the same evaluation, allows are additive (a
 request is allowed if any effective policy allows it) and denies are absolute (a
@@ -133,20 +166,38 @@ request is blocked if any effective policy denies it). A deny rule in an
 org-wide policy therefore applies to everyone and can't be overridden by a
 team-scoped policy, which makes org-wide deny rules useful as guardrails.
 
-Local rules take no part in this evaluation; see [Precedence](#precedence).
+Local and kit-defined allow rules take no part in this evaluation. Deny rules
+from those sources do still apply. See [Precedence](#precedence).
 
 ## Precedence
 
-Local and organization policies don't combine. Which one applies depends on
-whether your organization has governance enabled:
+What applies depends on whether your organization has governance enabled:
 
 - No organization governance: local rules and any
   [kit-defined network rules](../customize/kits.md#control-network-access)
   determine what sandboxes can access.
-- Organization governance active: organization rules apply across all developer
-  machines, and local and kit-defined rules are not evaluated. `sbx policy ls`
-  hides these inactive rules by default; see
-  [Monitoring](monitoring.md#showing-inactive-rules) for how to list them.
+- Organization governance active: organization policy determines what access can
+  be granted. Only organization allow rules grant access, so local and
+  kit-defined allow rules are inactive and can't expand what the organization
+  permits. Deny rules apply from every source, so a local or kit-defined deny
+  can still restrict access further.
+
+Precedence is decided by a rule's decision rather than its source:
+
+| Rule                | Evaluated under organization governance |
+| ------------------- | --------------------------------------- |
+| Organization allow  | Yes                                     |
+| Organization deny   | Yes                                     |
+| Local allow         | No                                      |
+| Local deny          | Yes                                     |
+| Kit-defined allow   | No                                      |
+| Kit-defined deny    | Yes                                     |
+
+Local and kit-defined rules cover network access only, so a deny that layers on
+top of organization policy is always a network deny. `sbx policy ls` hides
+inactive rules by default. See
+[Monitoring](monitor-and-enforce/monitoring.md#showing-inactive-rules) for how
+to list them.
 
 When organization governance is active, a user's organization policies are
 evaluated together, as described in [Rule evaluation](#rule-evaluation).

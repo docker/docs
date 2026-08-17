@@ -284,7 +284,8 @@ volumes inside it are deleted with it.
 
 This pattern works well for tasks where the agent needs to run the project's
 test suite or inspect a service it started. If you need to reach that service
-from your host, publish a port after the sandbox is running.
+from your host, publish the port when you create the sandbox, or publish it
+later with `sbx ports`.
 
 ## Local services
 
@@ -294,23 +295,33 @@ needs to call a service running on your host.
 ### Accessing services in the sandbox
 
 Sandboxes are [network-isolated](security/isolation.md) — your browser or local
-tools can't reach a server running inside one by default. Use
-[`sbx ports`](/reference/cli/sbx/ports/) to forward traffic from your host into
-a running sandbox.
+tools can't reach a server running inside one by default. A port mapping of
+`8080:3000` publishes sandbox port 3000 on host port 8080.
+
+If you know which ports you need, publish them when you create the sandbox:
+
+```console
+$ sbx run --publish 8080:3000 --name my-sandbox claude
+```
+
+For an existing sandbox, use [`sbx ports`](/reference/cli/sbx/ports/) to
+forward traffic from your host.
 
 The common case: an agent has started a dev server or API, and you want to open
 it in your browser or run tests against it.
 
 ```console
-$ sbx ports my-sandbox --publish 8080:3000   # host 8080 → sandbox port 3000
+$ sbx ports my-sandbox --publish 8080:3000
 $ open http://localhost:8080
 ```
 
-To let the OS pick a free host port instead of choosing one yourself:
+To let the OS pick a free host port instead of choosing one yourself, specify
+only the sandbox port. Then use `sbx ports` to check which host port was
+assigned:
 
 ```console
-$ sbx ports my-sandbox --publish 3000        # ephemeral host port
-$ sbx ports my-sandbox                       # check which port was assigned
+$ sbx ports my-sandbox --publish 3000
+$ sbx ports my-sandbox
 ```
 
 `sbx ls` shows active port mappings alongside each sandbox, and `sbx ports`
@@ -345,10 +356,10 @@ on each start. Check `sbx ports my-sandbox` to find it. If an explicit host port
 is already in use at restart, the CLI or the dashboard prompts you to choose
 another. Removing the sandbox releases its ports.
 
-You can't publish ports at create time — there's no `--publish` flag on
-`sbx run` or `sbx create`, so publish them once the sandbox is running. To stop
-forwarding, `--unpublish 8080:3000` removes a single mapping, and
-`--unpublish 3000` removes every host port mapped to sandbox port 3000.
+When `sbx run` re-attaches to an existing sandbox, it ignores `--publish`. Use
+`sbx ports` to publish ports on that sandbox. To stop forwarding,
+`--unpublish 8080:3000` removes a single mapping, and `--unpublish 3000`
+removes every host port mapped to sandbox port 3000.
 
 ### Accessing host services from a sandbox
 
@@ -417,10 +428,10 @@ credential on your host once, and the sandbox either forwards it via the
 proxy or via SSH agent forwarding.
 
 > [!NOTE]
-> The `-g` flag stores a secret globally so all future sandboxes can use it.
-> Sandboxes that already exist when you run `sbx secret set -g` do not
+> Service secrets are global by default, so all future sandboxes can use them.
+> Sandboxes that already exist when you run `sbx secret set` do not
 > receive the updated value. To update a running sandbox, scope the secret to
-> it directly: `sbx secret set <sandbox-name> <service>`.
+> it directly: `sbx secret set <service> --sandbox <sandbox-name>`.
 
 ### GitHub CLI
 
@@ -429,7 +440,7 @@ outbound requests, so `gh` works inside the sandbox without any additional
 configuration:
 
 ```console
-$ echo "$(gh auth token)" | sbx secret set -g github
+$ echo "$(gh auth token)" | sbx secret set github
 ```
 
 The agent can then create pull requests, open issues, comment on PRs, and
@@ -452,9 +463,10 @@ credentials for `sbx` so it can pull private [templates](customize/templates.md)
 and kits when creating a sandbox:
 
 ```console
-$ gh auth token | sbx secret set --registry ghcr.io \
+$ gh auth token | sbx secret set --all-sandboxes --registry ghcr.io \
     --username <github-username> --password-stdin
-$ echo "$ACR_PASSWORD" | sbx secret set --registry myregistry.azurecr.io \
+$ echo "$ACR_PASSWORD" | sbx secret set --all-sandboxes \
+    --registry myregistry.azurecr.io \
     --username myuser --password-stdin
 ```
 
@@ -467,7 +479,7 @@ Images and containers built inside the sandbox run on the sandbox's private
 Docker daemon, not your host's. They're deleted when the sandbox is removed.
 
 For information on how registry credentials differ from other secrets,
-per-registry username requirements, and global versus per-sandbox scoping, see
+per-registry username requirements, and all-sandbox versus per-sandbox scoping, see
 [Registry credentials](security/credentials.md#registry-credentials).
 
 ### Sourcing credentials from 1Password
@@ -478,8 +490,8 @@ Use `op read` to populate stored secrets without pasting values manually. Store
 the value once and it's available to all future sandboxes:
 
 ```console
-$ op read "op://Work/GitHub/token" | sbx secret set -g github
-$ op read "op://Work/Anthropic/credential" | sbx secret set -g anthropic
+$ op read "op://Work/GitHub/token" | sbx secret set github
+$ op read "op://Work/Anthropic/credential" | sbx secret set anthropic
 ```
 
 The real value stays on your host; the sandbox sees the proxy-managed
@@ -554,7 +566,7 @@ To overwrite an existing stored entry, add `--force`. To pass a value from your
 CI provider's secret store, use `-t`. For example, in a GitHub Actions step:
 
 ```yaml
-- run: sbx secret set -g anthropic -t "${{ secrets.ANTHROPIC_API_KEY }}"
+- run: sbx secret set anthropic -t "${{ secrets.ANTHROPIC_API_KEY }}"
 ```
 
 ## Share setup across a team
@@ -568,10 +580,10 @@ defaults. Version kit specs and template definitions with the project, and
 publish reusable template images to your registry. This gives each developer the
 same starting environment.
 
-Use [organization governance](governance/org.md) for rules that admins need to
-apply across developers, such as network and filesystem policies. Organization
-rules are managed in the Docker Admin Console, take precedence over local
-policy, and require a separate paid subscription.
+Use [organization policies](governance/access-controls/organization.md) for
+controls that organization administrators apply across developers, such as
+network, filesystem, and MCP policies. Organization policies take precedence
+over local policy and require a separate paid subscription.
 
 You can use both. Templates and kits describe the development environment;
 governance defines the boundaries it runs within.

@@ -25,6 +25,7 @@ see_also:
     - sbx login - Sign in to Docker
     - sbx logout - Stop all running sandboxes and sign out of Docker
     - sbx ls - List sandboxes
+    - sbx mcp - Manage MCP servers
     - sbx policy - Manage sandbox policies
     - sbx ports - Manage sandbox port publishing
     - sbx reset - Reset all sandboxes and clean up state
@@ -32,6 +33,7 @@ see_also:
     - sbx run - Run an agent in a sandbox
     - sbx secret - Manage stored secrets
     - sbx setup - (Experimental) Detect host configuration and prepare Docker Sandboxes
+    - sbx skills - (Experimental) Manage skills shared across sandboxes
     - sbx stop - Stop one or more sandboxes without removing them
     - sbx template - Manage sandbox templates
     - sbx tui - Open the interactive TUI dashboard

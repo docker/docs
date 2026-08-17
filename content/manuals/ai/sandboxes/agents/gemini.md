@@ -35,7 +35,7 @@ Gemini requires either a Google API key or a Google account with Gemini access.
 [stored secrets](../security/credentials.md#stored-secrets):
 
 ```console
-$ sbx secret set -g google
+$ sbx secret set google
 ```
 
 **Google account**: If no API key is set, Gemini prompts you to sign in

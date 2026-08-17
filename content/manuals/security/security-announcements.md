@@ -12,6 +12,12 @@ toc_max: 2
 
 [Subscribe to security RSS feed](/security/security-announcements/index.xml)
 
+## Docker Desktop 4.86.0 security update: CVE-2026-17106
+
+A vulnerability in Docker Desktop was fixed on August 10 in the [4.86.0](/manuals/desktop/release-notes.md#4860) release:
+
+- Addressed CVE-2026-17106, a destination-escape flaw in `docker container cp`. 
+
 ## Docker Desktop 4.71.0 security update: CVE-2026-5843
 
 A vulnerability in Docker Desktop was fixed on April 27 in the [4.71.0](/manuals/desktop/release-notes.md#4710) release:

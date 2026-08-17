@@ -48,7 +48,7 @@ Install commands are the place to put anything an agent needs into the
 image, via `apt`, `pip`, `npm`, `curl | bash`, or whatever fits:
 
 ```yaml
-commands:
+setup:
   install:
     - command: "apt-get update && apt-get install -y jq"
 ```
@@ -58,7 +58,7 @@ warming caches, or refreshing config on each start. They must be
 idempotent — see the [`startup`](kit-reference.md#startup) spec reference:
 
 ```yaml
-commands:
+setup:
   startup:
     - command: ["my-daemon"]
       background: true
@@ -67,7 +67,7 @@ commands:
 ### Inject files
 
 Kits can inject files into the sandbox in two ways: **static files** bundled
-with the kit, and **`initFiles`** written at startup with runtime values
+with the kit, and **`setup.files`** written at startup with runtime values
 substituted in.
 
 Static files work well for content that doesn't vary between sandboxes, such
@@ -84,30 +84,45 @@ my-kit/
         └── .editorconfig
 ```
 
-`initFiles` cover content that depends on runtime values, such as an
+`setup.files` cover content that depends on runtime values, such as an
 absolute workspace path that a tool needs to bake into its config file
 at startup:
 
 ```yaml
-commands:
-  initFiles:
+setup:
+  files:
     - path: /home/agent/.my-tool/config.json
       content: '{"workspace": "${WORKDIR}"}'
       onlyIfMissing: true
 ```
 
-See [`initFiles`](kit-reference.md#initfiles) in the spec reference for all fields.
+See [`setup.files`](kit-reference.md#files) in the spec reference for all
+fields.
 
-Sandboxes seed settings files for some built-in agents during setup.
-For example, the sandbox writes `/home/agent/.claude/settings.json`
-for the `claude` agent. This happens after the kit's static files and
-`initFiles`, so kit-injected files at those paths get overwritten.
-Workspace files (such as `<workspace>/.claude/settings.local.json`)
-aren't affected, and you can ship them under `files/workspace/` as
-usual. To override a path the sandbox writes to, use a
-[`commands.startup`](kit-reference.md#startup) script instead. See
-[Override agent settings](kit-examples.md#override-agent-settings) for
-an example.
+#### Sandbox-managed agent configuration
+
+Built-in agent kits reserve the following paths for sandbox setup. Treat these
+paths as sandbox-managed, even if a file is only needed for a particular
+feature. Don't target them with static files, `setup.files`, or install
+commands. Later setup can replace your content or depend on settings that your
+file removes. In this table, `~` is `/home/agent`.
+
+| Built-in agent kit | Managed configuration paths |
+| ------------------ | --------------------------- |
+| `claude` | `~/.claude.json`, `~/.claude/settings.json`, `~/.claude/.config.json` |
+| `codex` | `~/.codex/config.toml` |
+| `copilot` | `~/.copilot/config.json` |
+| `cursor` | `~/.cursor/cli-config.json` |
+| `gemini` | `~/.gemini/settings.json` |
+| `kiro` | `~/.kiro/settings/mcp.json` |
+| `opencode` | `~/.config/opencode/opencode.json` |
+
+Use a separate settings layer when the agent supports one. For example, Claude
+Code can load an additional settings file with `--settings`, and OpenCode can
+load one from the path in `OPENCODE_CONFIG`. See
+[Customize agent settings](kit-examples.md#customize-agent-settings) for
+examples. Don't use `setup.startup` for settings the agent must read during
+initialization because startup commands don't gate the agent entrypoint.
 
 ### Set environment variables
 
@@ -142,24 +157,25 @@ Network rules define which domains the sandbox can reach or block. Kit
 network rules apply only to sandboxes that use the kit:
 
 ```yaml
-network:
-  allowedDomains:
-    - api.example.com
-    - "*.cdn.example.com"
-  deniedDomains:
-    - telemetry.example.com
+permissions:
+  network:
+    allow:
+      - api.example.com
+      - "*.cdn.example.com"
+    deny:
+      - telemetry.example.com
 ```
 
-Use `allowedDomains` for hosts the agent needs, such as package
-registries, install endpoints, or external APIs. Use `deniedDomains` for
+Use `allow` for hosts the agent needs, such as package
+registries, install endpoints, or external APIs. Use `deny` for
 hosts the agent should not reach, such as telemetry endpoints. If a domain
 matches both an allow rule and a deny rule, the deny rule wins.
 
 > [!IMPORTANT]
-> Kit network rules don't apply when organization governance is active. In
-> that case, only organization rules are evaluated, so kit-defined allow and
-> deny rules are ignored — including any domains a kit allows for the agent
-> to reach. For details, see
+> When organization governance is active, only organization allow rules grant
+> access, so kit-defined `allow` rules are ignored — including any domains a kit
+> allows for the agent to reach. Kit-defined `deny` rules still apply, because a
+> deny can only restrict access further. For details, see
 > [Policy precedence](../governance/concepts.md#precedence).
 
 For authenticated services, see
@@ -172,39 +188,38 @@ host-side proxy. The agent inside the VM works with a sentinel value;
 the proxy reads the real credential on the host and overwrites the
 auth header before the request leaves the sandbox.
 
-The standard pattern uses four blocks tied to a service identifier
-you choose (here, `my-service`):
+A kit declares the service, the in-container environment variable, and how
+to inject the credential. It doesn't declare a host discovery source. The user
+provides the value through the secret store or first-run prompt, and a
+[credential binding](../security/credentials.md) authorizes its use:
 
 ```yaml
-network:
-  allowedDomains:
-    - api.example.com
-  serviceDomains:
-    api.example.com: my-service # Tag traffic to this domain
-  serviceAuth:
-    my-service:
-      headerName: Authorization # Overwrite this header
-      valueFormat: "Bearer %s"
-
 credentials:
-  sources:
-    my-service:
-      env:
-        - MY_SERVICE_API_KEY # Host-side credential lookup
+  - service: my-service
+    apiKey:
+      name: MY_SERVICE_API_KEY # in-VM env var, set to a sentinel
+      proxyManaged: true
+      inject:
+        - domain: api.example.com # inject on requests to this domain
+          header: Authorization # overwrite this header
+          format: "Bearer %s"
 
-environment:
-  proxyManaged:
-    - MY_SERVICE_API_KEY # Set the in-VM env var to "proxy-managed"
+permissions:
+  network:
+    allow:
+      - api.example.com # the domain must also be reachable
 ```
 
 The agent boots with `MY_SERVICE_API_KEY=proxy-managed`, sends a
-request with that value in `Authorization`, and the proxy overwrites
+request with that sentinel in `Authorization`, and the proxy overwrites
 the header with the real credential before forwarding. The real
 secret never enters the VM.
 
 See [Credentials](../security/credentials.md) for how to provide the
 credential value on your host, other approaches for cases the example
-above doesn't fit, and what the proxy does at request time.
+above doesn't fit, and what the proxy does at request time. See
+[Credential bindings](../security/credentials.md) to approve the mechanisms
+and domains declared by a third-party v2 kit.
 
 ### Inject agent memory
 
@@ -214,31 +229,31 @@ the agent project conventions, usage tips for a tool the kit installs,
 or other guidance that should be in scope when the sandbox runs.
 
 ```yaml
-agentContext: |
-  Ruff is installed. Run `ruff check` before committing.
-  Shared config lives at `/workspace/ruff.toml`.
+agentInstructions:
+  content: |
+    Ruff is installed. Run `ruff check` before committing.
+    Shared config lives at `/workspace/ruff.toml`.
 ```
 
-Both mixin and sandbox kits can declare `agentContext:`. The content is written
-only when the active sandbox kit sets [`sandbox.aiFilename`](kit-reference.md#sandbox-block),
-which determines the memory file's name.
-
-When more than one loaded kit declares an `agentContext:` block, each kit's
-content is written to its own `<kit-name>.md` file under a sibling
-`kits-agent-context/` directory. The main memory file gets a `## Kits`
-section that points to each kit file:
+Both mixin and sandbox kits can declare `agentInstructions.content`. The active
+sandbox kit sets `agentInstructions.filename`, which determines the memory
+file's name. The sandbox kit's content is written inline in that file. Each
+mixin's content is written to its own `<kit-name>.md` file under a sibling
+`kits-memory/` directory, and the main memory file gets a `## Kits` section that
+points to each mixin file:
 
 ```text
 /Users/you/
 ├── myproject/              # workspace
 ├── AGENTS.md               # main memory file with a "## Kits" index
-└── kits-agent-context/
+└── kits-memory/
     ├── ruff-lint.md
     ├── vale.md
     └── git-ssh-sign.md
 ```
 
-See [`agentContext`](kit-reference.md#agent-context) in the spec reference for the full field schema.
+See [`agentInstructions`](kit-reference.md#agent-instructions) in the spec
+reference for the full field schema.
 
 ### Define an agent
 
@@ -248,8 +263,7 @@ the command the user attaches to when they launch the sandbox:
 ```yaml
 sandbox:
   image: "my-registry/my-agent:latest"
-  entrypoint:
-    run: [my-agent, "--yolo"]
+  entrypoint: [my-agent, "--yolo"]
 ```
 
 See [Sandbox kits](#sandbox-kits) for use cases and an example.
@@ -264,61 +278,9 @@ cases:
   vendor API)
 - Inject shared team config (linter rules, editor settings, dotfiles)
 
-### Example: Python linting kit
-
-This kit installs [Ruff](https://docs.astral.sh/ruff/) and injects a shared
-configuration file, so every sandbox starts with the same linting setup.
-
-```text
-ruff-lint/
-├── spec.yaml
-└── files/
-    └── workspace/
-        └── ruff.toml
-```
-
-```yaml {title="ruff-lint/spec.yaml"}
-schemaVersion: "1"
-kind: mixin
-name: ruff-lint
-displayName: Ruff Linter
-description: Python linting with shared team config
-
-network:
-  allowedDomains:
-    - pypi.org
-    - files.pythonhosted.org
-
-commands:
-  install:
-    - command: "uv tool install ruff@latest"
-      user: "1000"
-      description: Install Ruff
-```
-
-```toml {title="ruff-lint/files/workspace/ruff.toml"}
-line-length = 100
-
-[lint]
-select = ["E", "F", "I"]
-```
-
-> [!TIP]
-> The templates for the built-in agents (`claude`, `codex`, and so on)
-> already include `uv`, so this mixin can use it without installing it
-> separately.
-
-To start a new sandbox with this mixin:
-
-```console
-$ sbx run claude --kit /path/to/ruff-lint/
-```
-
-To apply the mixin to a sandbox that's already running, use
-[`sbx kit add`](#local) instead. The `--kit` flag only takes effect when a
-sandbox is created. `sbx kit add` restarts the sandbox to apply the kit, but VM
-state — installed packages, Docker images, volumes, and agent history — is
-preserved.
+See [Drop a shared config file](kit-examples.md#drop-a-shared-config-file) and
+[Install a tool at sandbox creation](kit-examples.md#install-a-tool-at-sandbox-creation)
+for complete mixin examples.
 
 ## Sandbox kits
 
@@ -335,49 +297,15 @@ Sandbox kits declare everything a mixin kit can, plus an
 agent. For a step-by-step walkthrough, see
 [Build your own agent kit](build-an-agent.md).
 
-### Example: the built-in `claude` agent
+### Extend a built-in agent
 
-The `claude` agent you get from `sbx run claude` is defined as a kit. Here
-is an abbreviated version of its spec, showing how the sandbox block combines
-with network, credentials, environment, and commands:
-
-```yaml {title="claude/spec.yaml"}
-schemaVersion: "1"
-kind: sandbox
-name: claude
-sandbox:
-  image: "docker/sandbox-templates:claude-code-docker"
-  aiFilename: CLAUDE.md
-  entrypoint:
-    run: [claude, "--dangerously-skip-permissions"]
-
-network:
-  serviceDomains:
-    api.anthropic.com: anthropic
-    console.anthropic.com: anthropic
-  serviceAuth:
-    anthropic:
-      headerName: x-api-key
-      valueFormat: "%s"
-  allowedDomains:
-    - "claude.com:443"
-
-credentials:
-  sources:
-    anthropic:
-      env:
-        - ANTHROPIC_API_KEY
-
-environment:
-  variables:
-    IS_SANDBOX: "1"
-
-commands:
-  install:
-    - command: "curl -fsSL https://claude.ai/install.sh | bash"
-      user: "1000"
-      description: Install Claude Code
-```
+Use `extends:` to create a variant of a built-in agent without reproducing its
+configuration. The child kit inherits the parent's image, credentials, network
+permissions, persistent volumes, settings, MCP integration, and agent
+instructions. Use `extends:` for a single parent agent; use a mixin to add an
+independent capability that can work with one or more agents. See
+[Fork an existing agent](kit-examples.md#fork-an-existing-agent) for an example
+that changes Claude Code's permission mode.
 
 ## Using kits
 
@@ -386,13 +314,15 @@ repository, or an OCI registry. Pass `--kit` more than once to stack
 several kits on the same sandbox.
 
 > [!IMPORTANT]
-> `--kit` only takes effect when a sandbox is created. Passing it
-> against an existing sandbox name fails with
-> `--kit can only be used when creating a new sandbox`. To extend a
-> running sandbox with a kit, use [`sbx kit add`](#local) instead.
+> `--kit` only takes effect when a sandbox is created. Passing it against an
+> existing sandbox name fails with
+> `--kit can only be used when creating a new sandbox`. To add a supported
+> mixin kit to a running sandbox, use [`sbx kit add`](#local) instead.
 > `sbx kit add` restarts the sandbox to apply the updated kit set.
 > VM state — installed packages, Docker images, volumes, and agent history
-> — is preserved across the restart.
+> — is preserved across the restart. It supports mixin kits limited to
+> `environment.variables`, `setup.install`, and `permissions.network.allow`.
+> To use other fields, recreate the sandbox with `--kit`.
 
 ### Local
 
@@ -403,7 +333,8 @@ $ sbx run claude --kit ./my-kit/
 $ sbx run claude --kit ./my-kit-1.0.zip
 ```
 
-While iterating on a kit, apply changes to a running sandbox with `sbx kit add`:
+While iterating on a supported mixin kit, apply changes to a running sandbox
+with `sbx kit add`:
 
 ```console
 $ sbx kit add my-sandbox ./my-kit/
@@ -411,9 +342,8 @@ $ sbx kit add my-sandbox ./my-kit/
 
 `sbx kit add` restarts the sandbox to apply the updated kit set.
 VM state — installed packages, Docker images, volumes, and agent history — is
-preserved across the restart. The kit's network allow/deny rules take effect
-immediately. Kits can't be removed from a running sandbox — remove and recreate
-it to start clean.
+preserved across the restart. Kits can't be removed from a running sandbox —
+remove and recreate it to start clean.
 
 ### Git repository
 
@@ -513,8 +443,8 @@ Docker credential store, so pushing to a private registry requires a prior
 ## Spec reference
 
 For a field-by-field reference of every `spec.yaml` block — top-level
-fields, credentials, network, environment, commands, static files,
-agent context, and the sandbox block — see [Kit spec reference](kit-reference.md).
+fields, credentials, network, environment, setup, static files,
+agent instructions, and the sandbox block — see [Kit spec reference](kit-reference.md).
 
 ## Debugging
 
@@ -526,9 +456,9 @@ and direct inspection inside the sandbox:
   value, such as `forward`, `forward-bypass`, `transparent`, or
   `browser-open`. Use it to diagnose install-time download failures,
   blocked domains, and unexpected TLS interception. If downloads fail or
-  arrive corrupted after you add `serviceDomains`, check whether the
-  service mapping is too broad. Map only the hosts that need credential
-  injection.
+  arrive corrupted after you add a credential's `apiKey.inject`, check
+  whether an injection domain is too broad. Inject only on the hosts that
+  need credentials.
 - `sbx exec <sandbox> -- <cmd>` runs an arbitrary command inside an
   existing sandbox. Useful for inspecting post-install state without
   recreating: `which mytool`, `ls /home/agent/.local/bin/`,

@@ -48,6 +48,19 @@ remote project.
 For more connection options, see the OpenAI instructions to
 [connect to an SSH host](https://learn.chatgpt.com/docs/remote-connections#connect-to-an-ssh-host).
 
+## Full access still prompts for approval
+
+ChatGPT controls Codex permissions separately from the Docker Sandbox. To run
+commands without Codex approval prompts, select **Full access** from the
+permissions menu for the remote chat. Enabling **Full access** under
+**Settings > General** only adds the mode to the permissions menu. It doesn't
+change an existing chat.
+
+If the chat continues to request approval while showing **Full access**, update
+the ChatGPT desktop app, then stop and restart the active task. Approval prompts
+that return after reconnecting can indicate a
+[Codex remote-permission synchronization issue](https://github.com/openai/codex/issues/29054).
+
 ## Related
 
 - [Editor and app integrations](_index.md) — how SSH access works and how to

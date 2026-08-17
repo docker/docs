@@ -10,9 +10,9 @@ _Shadow-git snapshots capture your workspace at turn boundaries so you can revie
 
 ## Overview
 
-When snapshots are enabled, docker-agent records the state of your working
+When snapshots are enabled, Docker Agent records the state of your working
 directory as the agent runs. Each checkpoint is stored in a **shadow git
-repository** kept under the docker-agent data directory — completely separate
+repository** kept under the Docker Agent data directory — completely separate
 from your project's own `.git`. This lets you:
 
 - **Review** exactly which files an agent touched on a given turn.
@@ -84,7 +84,7 @@ when snapshots are turned off.
 ## How It Works
 
 - **Shadow repository.** The first time a snapshot is taken for a worktree,
-  docker-agent initializes a separate shadow git directory under the data
+  Docker Agent initializes a separate shadow git directory under the data
   directory (`~/.cagent/snapshot/...` by default), keyed by a hash of the
   worktree path. The shadow repo stores tree objects only — it never writes
   commits and never touches your source repository's `.git`.

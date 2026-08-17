@@ -597,7 +597,7 @@ To start your debug session, select the **Run** menu and then **Debug _NameOfYou
 
 You should now see the connection in the logs of your Compose application.
 
-![Compose log file ](images/java-compose-logs.webp)
+![Compose log file](images/java-compose-logs.webp)
 
 You can now call the server endpoint.
 
