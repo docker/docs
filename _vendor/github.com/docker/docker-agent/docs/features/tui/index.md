@@ -1,17 +1,19 @@
 ---
 title: "Terminal UI (TUI)"
-description: "docker-agent's default interface is a rich, interactive terminal UI with file attachments, themes, session management, and more."
+description: "Docker Agent's default interface is a rich, interactive terminal UI with file attachments, themes, session management, and more."
 keywords: docker agent, ai agents, features, terminal ui (tui)
 linkTitle: "Terminal UI"
 weight: 10
 canonical: https://docs.docker.com/ai/docker-agent/features/tui/
 ---
 
-_docker-agent's default interface is a rich, interactive terminal UI with file attachments, themes, session management, and more._
+_Docker Agent's default interface is a rich, interactive terminal UI with file attachments, themes, session management, and more._
 
-![docker-agent TUI in action showing an interactive agent session](../../demo.gif)
+![Docker Agent TUI in action showing an interactive agent session](../../demo.gif)
 
 ## Launching the TUI
+
+Both the full TUI and the lean TUI display a centered ASCII art Docker Agent banner on startup when the chat is empty. The banner is automatically hidden once the agent starts responding or when a custom welcome message is configured.
 
 ```bash
 # Launch with a config
@@ -55,9 +57,11 @@ settings:
   lean: true
 ```
 
-Omit `lean` or set it to `false` to keep the full TUI as the default. You can still use `--lean` for a single run, or `--lean=false` to use the full TUI when `settings.lean` is enabled.
+Omit `lean` or set it to `false` to keep the full TUI as the default. You can still use `--lean` for a single run, or `--lean=false` to use the full TUI when `settings.lean` is enabled. See [User Settings](../../configuration/user-settings/index.md) for the full precedence rules between flags and user config.
 
-The lean TUI supports **steering**: messages submitted while the agent is running are queued and delivered to the active session. Pending steering messages appear with muted styling at the end of the live stream so you can see what will be sent next.
+The lean TUI supports **steering** and **follow-ups** while the agent is running. Press <kbd>Enter</kbd> to steer the active turn, or <kbd>Alt</kbd>+<kbd>Enter</kbd> to queue the message as a separate turn after the current one finishes. Pending messages appear with muted styling at the end of the live stream.
+
+The lean TUI supports a focused set of slash commands: `/new`, `/compact`, `/model`, `/effort`, `/clear`, `/help`, `/exit` (alias: `/quit`), plus any agent-defined commands. Type `/model` (or `/model <provider/model>`) to switch the active model inline — the command opens a fuzzy-searchable list of available models.
 
 ## Slash Commands
 
@@ -75,31 +79,41 @@ Type `/` during a session to see available commands, or press <kbd>Ctrl</kbd>+<k
 | `/snapshots`       | List captured snapshots (only when snapshots are enabled)                            |
 | `/export`          | Export the session as HTML                                                           |
 | `/sessions`        | Browse and load past sessions                                                        |
+| `/plans`           | Browse and manage plans: every [shared plan](../../tools/plan/index.md) plus the current session's [session plan](../../tools/session_plan/index.md). Filter, open a detail view, refresh, export to a file, and — for shared plans — set status, edit/create in `$VISUAL`/`$EDITOR`, and delete, all guarded against concurrent edits. Not available in the lean TUI |
 | `/model`           | Change the model for the current agent                                               |
-| `/effort`          | Set the current model's reasoning-effort level (`/effort <none\|minimal\|low\|medium\|high\|xhigh\|max>`, or `/effort` alone to pick from the supported levels; reasoning models only) |
+| `/effort`          | Set the current model's reasoning-effort level (`/effort <none\|minimal\|low\|medium\|high\|xhigh\|max>`, or `/effort` alone to pick from the supported levels; reasoning models only). Press <kbd>Tab</kbd> after `/effort` and a space to complete a level the current model supports |
 | `/settings`        | Manage appearance, behavior, and notification preferences                           |
 | `/yolo`            | Toggle automatic tool call approval                                                  |
 | `/title`           | Set or regenerate session title                                                      |
 | `/attach`          | Attach a file to your message                                                        |
 | `/shell`           | Open a shell                                                                         |
 | `/star`            | Star/unstar the current session                                                      |
-| `/context`         | Show a context-window breakdown: estimated tokens per category (system prompt, tool definitions, prompt files, messages, tool results, compaction summary), a team-level **Live sessions** view (the current session plus every running sub-agent session with its agent, short session ID, and context budget), plus a per-file inventory of attached files and prompt files. Use the arrow keys to select a row: press <kbd>Enter</kbd> on a live session to explicitly compact it, or <kbd>d</kbd> on an attached file to drop it |
-| `/drop`            | Remove an attached file from the session context (`/drop <path>`, or `/drop` alone to review and drop from the `/context` dialog)  |
-| `/cost`            | Show cost breakdown for this session                                                 |
+| `/context`         | Show a context-window breakdown: estimated tokens per category (system prompt, tool definitions, prompt files, messages, tool results, compaction summary), a team-level **Live sessions** view (the current session plus every running sub-agent session with its agent, short session ID, and context budget), plus a per-file inventory of attached files and prompt files. When a compaction has occurred, the dialog also displays the verbatim text of the most recent compaction summary. When a dedicated `compaction_model` caps the effective limit below the primary model's own window, a second line reads "compaction cap: `<model>` • `<N>` tokens" — Live-sessions rows are silent on the cap, and the sidebar shows a minimal ⚠ capped marker without repeating the model or the figure (the `/context` header is the authoritative source of the model + number). Use the arrow keys to select a row: press <kbd>Enter</kbd> on a live session to explicitly compact it, or <kbd>d</kbd> on an attached file to drop it |
+| `/drop`            | Remove an attached file from the session context (`/drop <path>`, or `/drop` alone to review and drop from the `/context` dialog). Press <kbd>Tab</kbd> after `/drop` and a space to complete an attached file's path |
+| `/cost`            | Show cost breakdown for this session. Includes a **By Agent** section (alongside **By Model**) showing cumulative cost per agent; unattributed usage and compaction spend appear in their own buckets. |
 | `/eval`            | Create an evaluation report                                                          |
 | `/pause`           | Pause/resume the runtime loop. While the agent is mid-request, the resize handle shows "Pausing…" until the in-flight request completes; once the loop is blocked the indicator changes to "⏸ Paused". Run `/pause` again to resume. |
 | `/tools`           | Show every toolset (with lifecycle state) and the tools they expose                  |
 | `/skills`          | List skills available to the current agent                                           |
-| `/toolset-restart` | Force a supervisor-driven reconnect of the named toolset (`/toolset-restart <name>`) |
+| `/toolset-restart` | Force a supervisor-driven reconnect of the named toolset (`/toolset-restart <name>`). Press <kbd>Tab</kbd> after `/toolset-restart` and a space to complete a toolset name; non-restartable toolsets are shown dimmed and cannot be selected. |
 | `/permissions`     | Inspect and edit tool permission rules                                               |
 | `/speak`           | Voice input via system speech-to-text (macOS only)                                   |
 | `/exit`            | Exit the application (aliases: `/quit`, `/q`)                                        |
 
 Slash commands (both built-in and named) execute immediately when entered. Regular chat messages sent while the agent is working are steered into the ongoing stream by default: the agent picks them up mid-turn (they appear in the transcript at the point the agent sees them) without breaking the stream. Prefer the previous end-of-turn behavior? Switch **While agent is working** to `Queue` on the **Behavior** tab of `/settings`; queued messages are processed in order once the stream stops.
 
+Agent-defined commands (prompts, URL links, agent-switching shortcuts) are configured under `commands:` in the agent YAML — see [Custom Commands](../../configuration/commands/index.md) for the full reference, including how to hide commands with `--disable-commands`.
+
 ### Agents Panel
 
-The sidebar's **Agents** section lists every agent in the team. The current agent is shown as a focus **card** (rendered in place at its position in the list) with its name, a wrapped description, its full `provider/model`, and a thinking line. Every other agent is shown as a compact **two-line row** — line 1 is the shortcut/spinner, the agent name (in its accent color), and a right-aligned thinking **gauge**; line 2 is the indented full `provider/model` — so a large team stays scannable while still showing each model. Once an agent has run (in the main session, as a delegated sub-agent, or as a background agent task), line 2 also carries its latest **context usage** as a right-aligned percentage of its context window, so per-agent context accounting is visible at a glance across the whole team. Agents are separated by a blank line so the two-line rows stay visually distinct. The effort **gauge** is the only visual language for thinking; the focus card and the Agent Inspector spell out the exact level alongside it. Left-click any agent to switch to it.
+The sidebar's **Agents** section lists every agent in the team and has two display modes selectable via **Sidebar info mode** in `/settings`:
+
+- **Compact** (default) — The current agent is shown as a focus **card** (rendered in place at its position in the list) with its name, a wrapped description, its full `provider/model`, and a thinking line. Every other agent is shown as a compact **two-line row** — line 1 is the shortcut/spinner, the agent name (in its accent color), and a right-aligned thinking **gauge**; line 2 is the indented full `provider/model` and, once the agent has run, its latest **context usage** as a right-aligned percentage of its context window.
+- **Detailed** — Each agent is shown as a responsive card with labeled **Effort**, **Context**, and **Cost** metrics on a single line (or split across lines at narrow sidebar widths), making cumulative per-agent cost visible at a glance across the team.
+
+Agents are separated by a blank line so rows stay visually distinct. The effort **gauge** is the only visual language for thinking; the focus card and the Agent Inspector spell out the exact level alongside it. Left-click any agent to switch to it.
+
+On large teams the roster can be trimmed to the agents that matter right now: enable **Active agents only** (nested under **Agents** in `/settings` → Appearance → Sidebar sections, off by default) to list only agents active in the current session — the selected or working agent, participants of an in-flight transfer, and any agent with recorded participation (usage or attributed cost, including agents restored with a reloaded session). The filter also applies to the top/bottom band, is purely presentational — <kbd>Ctrl</kbd>+<kbd>number</kbd> shortcuts keep their original team positions and agent cycling still walks the whole team — and is unavailable while the Agents section itself is hidden.
 
 #### Agent inspector
 
@@ -114,7 +128,8 @@ The title is rendered in the agent's accent color. Sections appear in this order
 - **Description** — the agent's wrapped description.
 - **Live state** — a `● current agent` line when the inspected agent is the one currently running.
 - **Model / Fallback / Thinking** — the `provider/model`, any fallback models, and the gauge + value thinking line (omitted for models with no selectable thinking, e.g. harness-backed agents).
-- **Context** — the agent's latest known context usage, e.g. `Context: 12.8K of 128.0K tokens (10%)` (a bare token count when the context limit is unknown; omitted until the agent has run). Sub-agent and background-agent runs are accounted for.
+- **Context** — the agent's latest known context usage, e.g. `Context: 12.8K of 128.0K tokens (10%)` (a bare token count when the context limit is unknown; omitted until the agent has run). Sub-agent and background-agent runs are accounted for. When a dedicated `compaction_model` caps the effective limit below the primary model's own window, the token-usage line also shows a short "⚠ capped" marker (see `/context` for the model and figure).
+- **Cost** — the agent's cumulative cost across all runs in the session tree. Repeated session snapshots are not double-counted. Omitted until the agent has run.
 - **Sub-agents (N) / Handoffs (N) / Skills (N)** — compact, inline, comma-separated lists wrapped to the dialog width.
 - **Limits** — the configured per-agent limits that are set, e.g. `Limits: max-iter 50 · history 40 · max-tool-calls 5`.
 - **Options** — the enabled option flags, e.g. `Options: add-date · add-environment-info · redact-secrets`.
@@ -185,6 +200,8 @@ While a compaction is running the percentage is replaced by a **"compacting…"*
 
 The thresholds are proportional to the agent's configured `compaction_threshold` (default `0.9`), so a custom value keeps a predictable visual runway. See [Compaction Threshold](../../configuration/models/index.md#delegating-session-compaction) for configuration details.
 
+Clicking the token/context part of the sidebar's usage reading (the glyph, token count, context percentage — or the "compacting…" marker — and the `⚠ capped` marker) opens the `/context` dialog with the full breakdown. Clicking the cost part (the `$` figure and the sub-session count) opens the `/cost` dialog instead. The "Token Usage" section title itself is not clickable.
+
 ### Thinking and Tool Details
 
 Reasoning/thinking blocks are collapsed by default and carry a `Thinking` header badge. When collapsed, the TUI shows a short preview and compact tool summaries. Expand a block to see the full thinking content and the real tool renderers, including detailed tool output such as file edit diffs.
@@ -197,7 +214,44 @@ settings:
   expand_thinking: true
 ```
 
-Set it to `false` or omit it to keep the default collapsed behavior.
+Set it to `false` or omit it to keep the default collapsed behavior. See [User Settings](../../configuration/user-settings/index.md) for the full settings reference.
+
+### Mermaid Diagrams
+
+The TUI renders Mermaid diagram blocks inline rather than displaying raw syntax. When an assistant message contains a fenced code block tagged ` ```mermaid `, the TUI parses the diagram and draws an ASCII representation directly in the conversation:
+
+| Diagram type                                   | Support                                           |
+| ---------------------------------------------- | ------------------------------------------------- |
+| `graph` / `flowchart`                          | ✅ Rendered inline                                 |
+| `sequenceDiagram`                              | ✅ Rendered inline                                 |
+| `stateDiagram` / `stateDiagram-v2`             | ✅ Rendered inline (supports `direction TD/TB/BT/LR/RL`) |
+| Other types (`classDiagram`, `erDiagram`, …) | Falls back to a syntax-highlighted code block     |
+
+Mermaid rendering works in both the full TUI and the lean TUI. Unsupported or syntactically invalid diagram blocks are displayed as ordinary fenced code blocks — no configuration is required and there is no way to disable it.
+
+### LaTeX Math Rendering
+
+The TUI renders LaTeX math expressions as terminal-friendly Unicode text. When an assistant message contains inline math (delimited by `$…$`) or display math (delimited by `$$…$$`), the TUI converts supported LaTeX commands to their Unicode equivalents and displays them directly in the conversation.
+
+Supported features include:
+
+- Greek letters (`\alpha`, `\beta`, `\gamma`, …)
+- Mathematical operators (`\times`, `\div`, `\pm`, `\oplus`, …)
+- Relations (`\le`, `\ge`, `\approx`, `\equiv`, …)
+- Set operators (`\cap`, `\cup`, `\subset`, `\in`, …)
+- Calculus symbols (`\int`, `\sum`, `\prod`, `\partial`, `\nabla`, …)
+- Arrows and logic (`\to`, `\implies`, `\forall`, `\exists`, …)
+- Superscripts and subscripts (e.g., `x^2`, `a_i`)
+- Fractions (`\frac{a}{b}`), square roots (`\sqrt{x}`), and matrices
+- Common functions (`\sin`, `\cos`, `\log`, `\lim`, …)
+
+Unsupported or syntactically invalid LaTeX expressions fall back to displaying the raw source. LaTeX rendering works in both the full TUI and the lean TUI, requires no configuration, and cannot be disabled.
+
+### Markdown Images
+
+The TUI fetches and renders images referenced in agent responses using the Kitty graphics protocol. When an assistant message contains a standard Markdown image reference, the TUI downloads the image in the background and displays it inline at the point of the reference. While the image is loading a placeholder is shown; once loaded, the message re-renders with the image in place.
+
+Only `http://`, `https://`, and `data:image/…;base64,…` URIs are resolved. `file://`, `sandbox://`, and any other URI scheme are rejected as a security measure against prompt-injection attacks that could otherwise read local files. Bare relative paths (e.g. `./output.png`, used for agent-generated images) are read via the local filesystem. Images that fail to load are silently dropped — the surrounding message text is unaffected. Image rendering requires a terminal that supports the Kitty graphics protocol; it is automatically disabled when the terminal does not support it. You can also disable it explicitly via `render_images: false` in `~/.config/cagent/config.yaml` or the **Render images** toggle in `/settings`.
 
 ### Snapshots, `/undo`, and `/snapshots`
 
@@ -208,7 +262,7 @@ settings:
   snapshot: true
 ```
 
-When enabled, docker-agent records filesystem snapshots at turn boundaries. The TUI exposes two slash commands that operate on those snapshots:
+When enabled, Docker Agent records filesystem snapshots at turn boundaries. The TUI exposes two slash commands that operate on those snapshots:
 
 - **`/undo`** restores files from the most recent snapshot (one step back).
 - **`/snapshots`** opens a dialog showing how many snapshots have been captured and the number of files in each one. Use <kbd>↑</kbd>/<kbd>↓</kbd> (or <kbd>j</kbd>/<kbd>k</kbd>) to highlight an entry, then press <kbd>r</kbd> to reset the workspace to that point. Pick `<original>` to revert every snapshot and bring the workspace back to its pre-agent state. <kbd>Esc</kbd> closes the dialog without changing anything.
@@ -232,19 +286,23 @@ Explain what the code in @pkg/agent/agent.go does
 
 The agent receives the full file contents in a structured `<attachments>` block, while the UI shows just the reference.
 
-Attached files are also recorded on the session so sub-agents spawned by task transfer can read them. To review what is attached, open `/context`: the dialog lists every attached file (and resolved prompt file) with a per-file token estimate. Use <kbd>↑</kbd>/<kbd>↓</kbd> to select an attached file and press <kbd>d</kbd> (or <kbd>x</kbd>/<kbd>Del</kbd>) to drop it, or run `/drop <path>` directly. Dropping stops sharing the file with sub-agents and skills; content already inlined in earlier messages stays in the conversation until compaction, and the file can always be re-attached with `@` or `/attach`.
+For large or frequently-reused documents, or for getting content to an agent over the API or chat server instead of the TUI, see [Choosing a Large-Input Strategy](../../guides/headless/index.md#choosing-a-large-input-strategy).
+
+Attached files are also recorded on the session so sub-agents spawned by task transfer can read them. To review what is attached, open `/context`: the dialog lists every attached file (and resolved prompt file) with a per-file token estimate and, when a compaction has occurred, displays the verbatim text of the most recent compaction summary. Use <kbd>↑</kbd>/<kbd>↓</kbd> to select an attached file and press <kbd>d</kbd> (or <kbd>x</kbd>/<kbd>Del</kbd>) to drop it, or run `/drop <path>` directly — press <kbd>Tab</kbd> after `/drop` and a space to complete the path from the currently attached files. Dropping stops sharing the file with sub-agents and skills; content already inlined in earlier messages stays in the conversation until compaction, and the file can always be re-attached with `@` or `/attach`.
 
 ### Team Context Budgets and Targeted Compaction
 
-The `/context` dialog also shows a **Live sessions** section: the current session plus every currently running sub-agent session (foreground children spawned by task transfer and long-running `run_background_agent` tasks). Each row shows the agent name, a short session ID (so two concurrent runs of the same agent stay distinguishable), and that session's context budget: used tokens, context limit, and percentage, or an explicit "limit unknown" reading when the model's window cannot be resolved.
+The `/context` dialog also shows a **Live sessions** section: the current session plus every currently running sub-agent session (foreground children spawned by task transfer and long-running `run_background_agent` tasks). Each row shows the agent name, a short session ID (so two concurrent runs of the same agent stay distinguishable), and that session's context budget: used tokens, context limit, and percentage, or an explicit "limit unknown" reading when the model's window cannot be resolved. Live-sessions rows do not repeat the compaction-cap wording themselves — the dialog's header line is the sole authority on which model, if any, caps the effective limit.
+
+When a compaction has occurred, the dialog displays the verbatim text of the most recent compaction summary below the file inventory, under a "Latest compaction summary" section. This shows exactly what was summarized, preserving hard newlines and soft-wrapping long lines to the dialog width.
 
 Select a live session with <kbd>↑</kbd>/<kbd>↓</kbd> and press <kbd>Enter</kbd> to explicitly compact it. Cross-agent compaction happens only on this explicit request: no idle-triggered automatic compaction is added, and the existing automatic threshold and overflow-recovery compaction of sub-agent sessions is unchanged. The request is queued onto the target session's own run loop and executes at the next safe point between model turns, so it cannot corrupt an in-flight turn. The dialog closes and a notification confirms the request; a second notification reports the outcome (compacted, skipped, or failed) with the agent's name. Selecting the main row runs the same compaction as `/compact`. `/compact` itself keeps compacting the current root session. Remote runtimes do not expose live-session tracking, so the section is omitted there.
 
 ## Runtime Model Switching
 
-Change the AI model during a session with `/model` or <kbd>Ctrl</kbd>+<kbd>M</kbd>:
+Change the AI model during a session with `/model` or <kbd>Ctrl</kbd>+<kbd>M</kbd>. Model switching works in both the full TUI and the lean TUI.
 
-1. Press <kbd>Ctrl</kbd>+<kbd>M</kbd> or type `/model`
+1. Press <kbd>Ctrl</kbd>+<kbd>M</kbd> (full TUI) or type `/model` (both TUIs)
 2. Select from config models or type a custom `provider/model`
 3. The model switch is saved with the session and restored on reload
 
@@ -269,10 +327,10 @@ Each error message includes a clickable **↻ retry** button. Clicking it resume
 
 ## Session Management
 
-docker-agent automatically saves your sessions. Use `/sessions` to browse past conversations:
+Docker Agent automatically saves your sessions. Use `/sessions` to browse past conversations:
 
-- **Browse** past sessions with search and filtering
-- **Workspace grouping**: sessions started in the current directory are listed first under "This workspace", everything else under "Other locations" with its originating directory shown next to each entry; press <kbd>Ctrl</kbd>+<kbd>G</kbd> in the browser to cycle between all, current-directory only, and other-directory views. Restoring a session reopens it in its original directory, so the label always matches where a restore will land
+- **Browse** past sessions with search and filtering. The search matches against session **titles** and **session IDs** (full UUIDs, dash-less variants, and partial fragments all resolve correctly — useful when jumping back to a session from a copied ID or log).
+- **Workspace grouping**: sessions are grouped by **git repository root** (worktree-aware) — sessions from any subdirectory or linked worktree of the same repository are grouped together under "This workspace", and the header shows the repository root path. Sessions outside the current repository appear under "Other locations" with their originating directory. Press <kbd>Ctrl</kbd>+<kbd>G</kbd> in the browser to cycle between all, current-workspace only, and other-directory views. Restoring a session reopens it in its original directory, so the label always matches where a restore will land.
 - **Star** important sessions with `/star`
 - **Branch** conversations by editing any previous user message — preserving the original session history
 - **Resume** sessions with `docker agent run config.yaml --session <id>`
@@ -280,7 +338,7 @@ docker-agent automatically saves your sessions. Use `/sessions` to browse past c
 
 ### Session Title Editing
 
-Customize session titles to make them more meaningful and easier to find. By default, docker-agent auto-generates titles based on your first message, but you can override or regenerate them at any time.
+Customize session titles to make them more meaningful and easier to find. By default, Docker Agent auto-generates titles based on your first message, but you can override or regenerate them at any time.
 
 **Using the `/title` command:**
 
@@ -319,14 +377,16 @@ Customize session titles to make them more meaningful and easier to find. By def
 | Ctrl+Z     | Suspend TUI to background (resume with `fg`)    |
 | Ctrl+X     | Clear queued messages                           |
 | Escape     | Cancel current operation                        |
-| Enter      | Send message (or newline with Shift+Enter)      |
+| Enter      | Send message (or steer while the agent is running) |
+| Alt+Enter  | Queue a follow-up turn while the agent is running |
+| Shift+Enter | Insert a newline |
 | Up/Down    | Navigate message history                        |
 
 Press <kbd>Ctrl</kbd>+<kbd>H</kbd> to view the complete list of all available keyboard shortcuts.
 
 ### Custom Keybindings
 
-You can remap the shortcuts above by adding a `keybindings` list to the `settings` block of your `~/.config/cagent/config.yaml`. Each entry maps an action to one or more key combinations in [Bubbles key format](https://github.com/charmbracelet/bubbles) (for example `ctrl+q`, `alt+enter`, `f2`). Unlisted actions keep their defaults.
+You can remap the shortcuts above by adding a `keybindings` list to the `settings` block of your `~/.config/cagent/config.yaml` (see [User Settings](../../configuration/user-settings/index.md#settings-reference) for the field reference). Each entry maps an action to one or more key combinations in [Bubbles key format](https://github.com/charmbracelet/bubbles) (for example `ctrl+q`, `alt+enter`, `f2`). Unlisted actions keep their defaults.
 
 This is the recommended way to replace the `Ctrl+J` newline fallback, which conflicts with common editor/terminal shortcuts (for example inside VS Code).
 
@@ -376,9 +436,15 @@ Press <kbd>Ctrl</kbd>+<kbd>R</kbd> to enter incremental history search mode. Sta
 
 Run `/settings` to open the settings dialog. Use <kbd>Tab</kbd> to switch between **Appearance**, **Behavior**, and **Notifications**.
 
+> [!TIP]
+> **Full settings reference**
+>
+> This section covers the `/settings` dialog. For the complete list of `settings:` fields (including ones with no dialog UI, like `permissions`, `hooks`, and `keybindings`) and how they interact with CLI flags and aliases, see [User Settings](../../configuration/user-settings/index.md).
+
 The **Appearance** tab selects the theme and customizes the layout. Layout changes show a live schematic preview and apply immediately to the UI behind the dialog:
 
-- **Sidebar position**: `Right` (default), `Left`, `Top`, or `Bottom`. Left/right keep the full vertical sidebar next to the chat; top/bottom render it as a compact horizontal band above or below the chat (session title, working directory, usage, plus a one-line summary of the current agent, tools, and todos).
+- **Sidebar position**: `Right` (default), `Left`, `Top`, or `Bottom`. Left/right keep the full vertical sidebar next to the chat; top/bottom render it as a compact horizontal band above or below the chat (session title, working directory, token usage, plus a one-line summary of the current agent and its model; in multi-agent configurations all team agents are listed by name after the current agent).
+- **Sidebar info mode**: `Compact` (default) or `Detailed`. Controls how the Agents panel renders agent rows — see [Agents Panel](#agents-panel) for details. Persisted as `settings.layout.sidebar_info_mode: detailed`; compact is the default and omitted from the config.
 - **Section spacing**: `Compact`, `Normal` (default), or `Relaxed`, the number of blank lines between the sidebar sections (1, 2, or 3).
 - **Sidebar sections**: toggle the visibility of the **Session path** (the working directory line, including its git branch) and the **Token usage**, **Agents**, **Tools**, and **Todos** sections. The session title is always shown.
 
@@ -396,10 +462,12 @@ settings:
   busy_send_mode: queue # steer (default), queue
   layout:
     sidebar_position: left # right (default), left, top, bottom
+    sidebar_info_mode: detailed # compact (default, omitted), detailed
     section_spacing: compact # normal (default), compact, relaxed
     hide_session_path: false
     hide_usage: true
     hide_agents: false
+    active_agents_only: false # true to filter to session-active agents
     hide_tools: false
     hide_todos: false
 ```
@@ -428,7 +496,7 @@ settings:
   theme_light: default-light # optional, theme used on light backgrounds (default: default-light)
 ```
 
-At startup the terminal background is queried (OSC 11) to pick the dark or light theme of the pair; non-interactive runs (pipes, CI) fall back to the dark theme. In terminals that report appearance changes (DEC mode 2031 — Ghostty, kitty, contour, …), flipping the OS or terminal appearance while docker-agent is running switches the theme live. Terminals without that mode re-sync when the window regains focus.
+At startup the terminal background is queried (OSC 11) to pick the dark or light theme of the pair; non-interactive runs (pipes, CI) fall back to the dark theme. In terminals that report appearance changes (DEC mode 2031 — Ghostty, kitty, contour, …), flipping the OS or terminal appearance while Docker Agent is running switches the theme live. Terminals without that mode re-sync when the window regains focus.
 
 ### Custom Themes
 
@@ -474,7 +542,7 @@ markdown:
 
 ### Applying Themes
 
-**In user config** (`~/.config/cagent/config.yaml`):
+**In user config** (`~/.config/cagent/config.yaml`, see [User Settings](../../configuration/user-settings/index.md) for the full reference):
 
 ```yaml
 settings:
@@ -497,7 +565,7 @@ settings:
 
 ## Tool Permissions
 
-When an agent calls a tool, docker-agent shows a confirmation dialog by default. You can:
+When an agent calls a tool, Docker Agent shows a confirmation dialog by default. You can:
 
 - **Approve once** — Allow this specific call
 - **Always allow** — Permanently approve this tool/command for the session
@@ -508,7 +576,7 @@ When an agent calls a tool, docker-agent shows a confirmation dialog by default.
 > [!TIP]
 > **YOLO mode**
 >
-> Use `--yolo` or the `/yolo` command to auto-approve all tool calls. You can also toggle this mid-session. For aliases, set `--yolo` when creating the alias: `docker agent alias add fast agentcatalog/coder --yolo`.
+> Use `--yolo` or the `/yolo` command to auto-approve all tool calls. You can also toggle this mid-session. For aliases, set `--yolo` when creating the alias: `docker agent alias add fast myorg/coder --yolo`.
 
 ## Notifications
 

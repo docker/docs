@@ -1,5 +1,5 @@
 #!/bin/bash
-# Run markdownlint and vale on specific files.
+# Run rumdl and Vale on specific files.
 # Usage: scripts/lint.sh <file> [file...]
 #
 # Scoped output — no repo-wide noise. For full repo validation, use:
@@ -13,8 +13,8 @@ fi
 
 exit_code=0
 
-echo "=== markdownlint ==="
-if ! npx markdownlint-cli "$@" 2>&1; then
+echo "=== rumdl ==="
+if ! npx --no-install rumdl check "$@" 2>&1; then
   exit_code=1
 fi
 

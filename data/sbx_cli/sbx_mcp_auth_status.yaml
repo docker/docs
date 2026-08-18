@@ -1,0 +1,29 @@
+name: sbx mcp auth status
+synopsis: Show MCP server OAuth status
+description: |-
+    Show hosted OAuth credential status for registered MCP servers.
+
+    This command does not start OAuth or refresh expired credentials.
+usage: sbx mcp auth status [server-name] [flags]
+options:
+    - name: all
+      default_value: "false"
+      usage: Apply to all registered OAuth servers
+    - name: format
+      default_value: text
+      usage: 'Output format: "text" or "json"'
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for status
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      sbx mcp auth status --all
+      sbx mcp auth status notion
+      sbx mcp auth status --all --format=json
+see_also:
+    - sbx mcp auth - Authorize MCP servers

@@ -152,15 +152,23 @@ $ cat /sys/fs/cgroup/user.slice/user-$(id -u).slice/user@$(id -u).service/cgroup
 memory pids
 ```
 
-To allow delegation of all controllers, you need to change the systemd configuration as follows:
+To allow delegation of all controllers, change the systemd configuration:
 
 ```console
-# mkdir -p /etc/systemd/system/user@.service.d
-# cat > /etc/systemd/system/user@.service.d/delegate.conf << EOF
+$ sudo mkdir -p /etc/systemd/system/user@.service.d
+```
+
+Create `/etc/systemd/system/user@.service.d/delegate.conf`:
+
+```ini
 [Service]
 Delegate=cpu cpuset io memory pids
-EOF
-# systemctl daemon-reload
+```
+
+Then reload systemd:
+
+```console
+$ sudo systemctl daemon-reload
 ```
 
 > [!NOTE]

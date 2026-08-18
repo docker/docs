@@ -35,7 +35,7 @@ Cursor supports two authentication methods: an API key or OAuth.
 [stored secrets](../security/credentials.md#stored-secrets):
 
 ```console
-$ sbx secret set -g cursor
+$ sbx secret set cursor
 ```
 
 **OAuth**: If no API key is set, Cursor prompts you to sign in interactively

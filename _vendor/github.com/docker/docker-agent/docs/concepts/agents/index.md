@@ -1,16 +1,16 @@
 ---
 title: "Agents"
-description: "Agents are the core building blocks of docker-agent. Each agent is an AI-powered entity with a model, instructions, tools, and optional sub-agents."
+description: "Agents are the core building blocks of Docker Agent. Each agent is an AI-powered entity with a model, instructions, tools, and optional sub-agents."
 keywords: docker agent, ai agents, concepts, agents
 weight: 10
 canonical: https://docs.docker.com/ai/docker-agent/concepts/agents/
 ---
 
-_Agents are the core building blocks of docker-agent. Each agent is an AI-powered entity with a model, instructions, tools, and optional sub-agents._
+_Agents are the core building blocks of Docker Agent. Each agent is an AI-powered entity with a model, instructions, tools, and optional sub-agents._
 
 ## What is an Agent?
 
-An agent in docker-agent is defined by:
+An agent in Docker Agent is defined by:
 
 - **Model** — The AI model powering it (e.g., Claude, GPT-5, Gemini). See [Models](../models/index.md).
 - **Description** — A brief summary of what the agent does (used by other agents for delegation)
@@ -34,7 +34,7 @@ agents:
 
 ## The Root Agent
 
-Every docker-agent configuration has a **root agent** — the entry point that receives user messages. In a single-agent setup, this is the only agent. In a multi-agent setup, the root agent acts as a coordinator, delegating tasks to specialized sub-agents.
+Every Docker Agent configuration has a **root agent** — the entry point that receives user messages. In a single-agent setup, this is the only agent. In a multi-agent setup, the root agent acts as a coordinator, delegating tasks to specialized sub-agents.
 
 > [!NOTE]
 > **Naming**
@@ -97,10 +97,10 @@ Commands support environment variable interpolation using JavaScript template li
 
 ## Default Agent
 
-Running `docker agent run` without a config file uses a built-in default agent. This is a capable general-purpose agent for quick tasks without needing any configuration.
+Running `docker agent run` without a config argument uses `docker-agent.yaml`, `docker-agent.yml`, or `docker-agent.hcl` from the current directory when present. Otherwise, it uses a capable built-in default agent for quick tasks without needing any configuration.
 
 ```bash
-# Use the default agent
+# Use the project config or built-in default agent
 $ docker agent run
 
 # Override the default with an alias

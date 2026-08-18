@@ -86,7 +86,9 @@ flag is more explicit and supports all the available options.
 
 If you use `--volume` to bind-mount a file or directory that does not yet
 exist on the Docker host, Docker automatically creates the directory on the
-host for you. It's always created as a directory.
+host for you. It's always created as a directory. If the Docker daemon doesn't
+have permission to create the source directory, create it before starting the
+container.
 
 By default, `--mount` does not automatically create a directory if the specified mount
 path does not exist on the host. Instead, it produces an error:

@@ -33,7 +33,7 @@ Copilot requires a GitHub token with Copilot access. Store your token using
 [stored secrets](../security/credentials.md#stored-secrets):
 
 ```console
-$ echo "$(gh auth token)" | sbx secret set -g github
+$ echo "$(gh auth token)" | sbx secret set github
 ```
 
 ## Configuration

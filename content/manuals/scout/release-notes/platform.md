@@ -23,7 +23,10 @@ The following Docker Scout features were retired:
 
 - Health scores and Scout Everywhere: Docker Hub and Docker Desktop no longer
   display health scores or the always-on Scout experience. Use
-  `docker scout quickview` for a quick vulnerability and policy summary.
+  `docker scout quickview` for a quick vulnerability and policy summary. This is
+  unrelated to the health score reported locally by `docker scout policy`,
+  `docker scout quickview`, and `docker scout compare`. See
+  [Health score](../policy/local.md#health-score).
 - Sysdig integration: The Sysdig runtime environment integration has been removed.
 - GitHub source code management integration: Migrate to GitHub Dependabot for
   base-image updates and build with `--provenance=mode=max` for

@@ -1,19 +1,20 @@
 ---
 title: "Local Models (Ollama, vLLM, LocalAI)"
-description: "Run docker-agent with locally hosted models for privacy, offline use, or cost savings."
-keywords: docker agent, ai agents, model providers, llm, local models (ollama, vllm, localai)
+description: "Run Docker Agent with locally hosted models for privacy, offline use, or cost savings."
+keywords: docker agent, ai agents, model providers, llm, local models, ollama, vllm, localai, offline models
 linkTitle: "Local Models"
 weight: 150
 canonical: https://docs.docker.com/ai/docker-agent/providers/local/
 aliases:
   - /ai/docker-agent/local-models/
+  - /ai/docker-agent/providers/ollama/
 ---
 
-_Run docker-agent with locally hosted models for privacy, offline use, or cost savings._
+_Run Docker Agent with locally hosted models for privacy, offline use, or cost savings._
 
 ## Overview
 
-docker-agent can connect to any OpenAI-compatible local model server. This guide covers the most popular options:
+Docker Agent can connect to any OpenAI-compatible local model server. This guide covers the most popular options:
 
 - **Ollama** — Easy-to-use local model runner
 - **vLLM** — High-performance inference server
@@ -26,7 +27,7 @@ docker-agent can connect to any OpenAI-compatible local model server. This guide
 
 ## Ollama
 
-Ollama is a popular tool for running LLMs locally. docker-agent includes a built-in `ollama` alias for easy configuration.
+Ollama is a popular tool for running LLMs locally. Docker Agent includes a built-in `ollama` alias for easy configuration.
 
 ### Setup
 

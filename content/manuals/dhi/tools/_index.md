@@ -20,6 +20,10 @@ params:
       description: Use the DHI Terraform provider to manage mirrors and automate DHI configuration as infrastructure as code.
       icon: wrench-screwdriver
       link: /dhi/tools/terraform/
+    - title: Use the DHI API
+      description: Query Docker Hardened Images data programmatically using the DHI GraphQL API.
+      icon: code-bracket
+      link: /dhi/tools/api/
 ---
 
 Docker Hardened Images can be accessed and managed through several interfaces.

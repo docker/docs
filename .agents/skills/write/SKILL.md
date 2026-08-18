@@ -41,14 +41,14 @@ front matter. If any are missing from a file you touch, add them.
 
 ## 4. Validate
 
-Prettier runs automatically after each edit via the PostToolUse hook.
+rumdl runs automatically after each edit via the PostToolUse hook.
 Run lint manually after all edits are complete:
 
 ```bash
 scripts/lint.sh <changed-files>
 ```
 
-The lint script runs markdownlint and vale on only the files you pass it,
+The lint script runs rumdl and Vale on only the files you pass it,
 so the output is scoped to your changes. Fix any errors it reports.
 
 ## 5. Self-review

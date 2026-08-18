@@ -1,0 +1,4 @@
+interface:
+  display_name: "Curate What's New"
+  short_description: "Curate noteworthy Docker launches from merged docs"
+  default_prompt: "Use $curate-whats-new to curate Docker launches published during the requested date range."

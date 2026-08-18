@@ -122,7 +122,7 @@ options described below to customize these defaults.
 | Option           | Default   | Description                                                                                                                                       |
 | :--------------- | :-------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `cache-disabled` | `"false"` | Disable local caching. Boolean value passed as a string (`true`, `1`, `0`, or `false`).                                                           |
-| `cache-max-size` | `"20m"`   | The maximum size of the cache before it is rotated. A positive integer plus a modifier representing the unit of measure (`k`, `m`, or `g`).       |
+| `cache-max-size` | `"20m"`   | The maximum size of the cache before it is rotated. A positive integer plus a unit modifier (`k`, `m`, or `g`; case-insensitive).       |
 | `cache-max-file` | `"5"`     | The maximum number of cache files that can be present. If rotating the logs creates excess files, the oldest file is removed. A positive integer. |
 | `cache-compress` | `"true"`  | Enable or disable compression of rotated log files. Boolean value passed as a string (`true`, `1`, `0`, or `false`).                              |
 

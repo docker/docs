@@ -14,7 +14,7 @@ _Open a fixed URL in the user's default browser._
 The `open_url` toolset exposes a single, argument-less tool that opens a URL
 baked into the toolset definition in the user's default browser. The model
 never supplies the URL — it just calls the tool by name. Launching the browser
-is cross-platform: docker-agent uses `open` on macOS, `xdg-open` on Linux, and
+is cross-platform: Docker Agent uses `open` on macOS, `xdg-open` on Linux, and
 `rundll32` on Windows.
 
 > [!NOTE]
@@ -88,7 +88,7 @@ toolsets:
 - The URL must include a scheme (e.g. `https://`); bare paths are rejected.
 - URLs that look like a command-line flag (starting with `-`) are refused to
   prevent argument injection into the platform `open` helper.
-- The tool opens the URL on the **host** running docker-agent; in headless or
+- The tool opens the URL on the **host** running Docker Agent; in headless or
   remote environments where no browser/launcher is available, the call fails
   gracefully and reports the error to the agent.
 

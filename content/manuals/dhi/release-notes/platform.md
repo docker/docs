@@ -20,6 +20,9 @@ New features and enhancements released in the third quarter of 2026.
   repositories, inspect image metadata, retrieve SBOMs, check CVEs, and manage
   mirrors using plain language. For more information, see [Use the DHI MCP
   server](/dhi/tools/mcp/).
+- DHI API: VEX statements and suppressed CVEs for a Docker Hardened Image are
+  now available to query by digest through the DHI GraphQL API. For more
+  information, see [Use the DHI API](../tools/api.md).
 
 ## Q2 2026
 

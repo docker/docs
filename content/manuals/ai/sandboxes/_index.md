@@ -18,47 +18,14 @@ system.
 > [organization governance](governance/) requires a separate paid subscription.
 
 Organization admins can
-[centrally manage sandbox network and filesystem policies](governance/org.md),
-so the same rules apply uniformly across every developer's machine. Available
-on a separate paid subscription.
+[centrally manage sandbox network, filesystem, and MCP policies](governance/access-controls/organization.md),
+so the same controls apply uniformly across every developer's machine.
+Available on a separate paid subscription.
 
 ## Get started
 
-For complete system requirements, see the
-[get started prerequisites](get-started.md#prerequisites).
-
-Install the `sbx` CLI and sign in:
-
-{{< tabs >}}
-{{< tab name="macOS" >}}
-
-```console
-$ brew trust docker/tap
-$ brew install docker/tap/sbx
-$ sbx login
-```
-
-{{< /tab >}}
-{{< tab name="Windows" >}}
-
-```powershell
-> winget install -h Docker.sbx
-> sbx login
-```
-
-{{< /tab >}}
-{{< tab name="Linux (Ubuntu)" >}}
-
-```console
-$ curl -fsSL https://get.docker.com | sudo REPO_ONLY=1 sh
-$ sudo apt-get install docker-sbx
-$ sudo usermod -aG kvm $USER
-$ newgrp kvm
-$ sbx login
-```
-
-{{< /tab >}}
-{{< /tabs >}}
+Follow the [installation guide](install.md) to check the system requirements,
+install the `sbx` CLI, and sign in.
 
 Then launch an agent in a sandbox:
 
@@ -67,18 +34,22 @@ $ cd ~/my-project
 $ sbx run claude
 ```
 
-See the [get started guide](get-started.md) for a full walkthrough, or jump to
-the [usage guide](usage.md) for basic commands.
+See the [get started guide](get-started.md) for a first-session walkthrough, or
+jump to the [usage guide](usage.md) for basic commands.
 
 ## Learn more
 
 - [Agents](agents/) — supported agents and per-agent configuration
 - [Integrations](integrations/) — connect editors and apps like VS Code and
   Cursor to a sandbox over SSH
+- [MCP gateway](mcp-gateway.md) — register MCP servers and connect them to
+  sandboxed agents
 - [Customize](customize/) — reusable templates and declarative kits for
   extending or tailoring sandboxes
 - [Architecture](architecture.md) — microVM isolation, workspace mounting,
   networking
+- [Upstream proxy](upstream-proxy.md) — route sandbox and daemon traffic through
+  a corporate proxy, PAC file, or your OS system proxy
 - [Security](security/) — isolation model, credential handling, and
   network policies
 - [CLI reference](/reference/cli/sbx/) — full list of `sbx` commands and options

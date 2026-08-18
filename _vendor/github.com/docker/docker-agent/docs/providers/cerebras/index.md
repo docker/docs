@@ -1,19 +1,19 @@
 ---
 title: "Cerebras"
-description: "Use Cerebras models with docker-agent."
+description: "Use Cerebras models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, cerebras
 weight: 50
 canonical: https://docs.docker.com/ai/docker-agent/providers/cerebras/
 ---
 
-_Use Cerebras models with docker-agent._
+_Use Cerebras models with Docker Agent._
 
 ## Overview
 
 [Cerebras](https://www.cerebras.ai/) serves open-weight models such as GPT-OSS
 and GLM through an OpenAI-compatible API on its wafer-scale hardware, delivering
 some of the highest tokens/sec available. That speed makes it a strong fit for
-latency-sensitive coding workflows. docker-agent includes built-in support for
+latency-sensitive coding workflows. Docker Agent includes built-in support for
 Cerebras as an alias provider.
 
 ## Setup
@@ -75,14 +75,14 @@ for current model IDs, context limits, and pricing.
 
 ## How It Works
 
-Cerebras is implemented as a built-in alias in docker-agent:
+Cerebras is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://api.cerebras.ai/v1`
 - **Token Variable:** `CEREBRAS_API_KEY`
 
 Because Cerebras fronts open-weight models whose chat templates may only accept
-a single leading system message, docker-agent coalesces its per-source system
+a single leading system message, Docker Agent coalesces its per-source system
 messages (agent instruction plus each toolset's instructions) into one before
 sending the request.
 

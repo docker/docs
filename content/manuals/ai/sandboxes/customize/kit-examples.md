@@ -1,7 +1,7 @@
 ---
 title: Kit examples
 linkTitle: Examples
-description: Copy-and-adapt spec.yaml snippets for common mixin and sandbox kit patterns — static files, install commands, shell customization, background services, initFiles, Claude Code skills, and agent forks.
+description: Copy-and-adapt spec.yaml snippets for common mixin and sandbox kit patterns — static files, install commands, shell customization, background services, setup files, Claude Code skills, and agent forks.
 keywords: sandboxes, sbx, kits, mixins, examples, patterns, skills
 weight: 25
 ---
@@ -35,13 +35,13 @@ ruff-lint/
 ```
 
 ```yaml {title="ruff-lint/spec.yaml"}
-schemaVersion: "1"
+schemaVersion: "2"
 kind: mixin
 name: ruff-lint
 displayName: Ruff
 description: Python linting with shared team config
 
-commands:
+setup:
   install:
     - command: "uv tool install ruff@latest"
       user: "1000"
@@ -56,12 +56,20 @@ select = ["E", "F", "I"]
 
 ## Install a tool at sandbox creation
 
-`commands.install` runs once per sandbox, at creation time. It's where
+`setup.install` runs once per sandbox, at creation time. It's where
 anything that needs to land in the image goes — package managers
 (`apt-get`, `pip`, `npm`), binary downloads, or vendor install scripts.
 
+> [!TIP]
+> Each new sandbox runs all `setup.install` commands. The results aren't
+> cached between sandboxes. Creating a kit avoids building and distributing an
+> image, so kits work well for smaller, composable changes. For substantial
+> build or installation steps, consider a
+> [custom template](templates.md#build-a-custom-template). Sandboxes reuse
+> template images from the local cache.
+
 ```yaml
-commands:
+setup:
   install:
     - command: "apt-get update && apt-get install -y jq"
     - command: "curl -fsSL https://example.com/install.sh | sh"
@@ -77,7 +85,7 @@ Install steps run under `sh`, not bash, so bash-only builtins such as
 (`curl … | bash`) or wrap the step in `bash -c '…'` when you need them.
 
 Downloads are subject to the sandbox's
-[deny-by-default network policy](../governance/local.md). A domain that
+[network access rules](../governance/access-controls/network.md). A domain that
 resolves from your host can still be blocked inside the sandbox — for
 example, `get.sdkman.io` returns a 403 until you allow it with
 `sbx policy allow network get.sdkman.io`. A tool may also need base
@@ -93,7 +101,7 @@ instance, needs `zip` and `unzip`, so add an
 > failed fetch fails the step:
 >
 > ```yaml
-> commands:
+> setup:
 >   install:
 >     - command: "curl -fsSL https://example.com/install.sh -o /tmp/install.sh && bash /tmp/install.sh"
 >       user: "1000"
@@ -117,13 +125,13 @@ you'd set a custom environment variable; see the
 [FAQ](../faq.md#how-do-i-set-custom-environment-variables-inside-a-sandbox).
 
 ```yaml {title="nvm/spec.yaml"}
-schemaVersion: "1"
+schemaVersion: "2"
 kind: mixin
 name: nvm
 displayName: nvm
 description: Node version manager available in every shell
 
-commands:
+setup:
   install:
     - command: "curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash"
       user: "1000"
@@ -134,15 +142,15 @@ commands:
         unset NPM_CONFIG_PREFIX
         [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
         EOF
+      user: "1000"
       description: Source nvm for every shell
 ```
 
-The install step runs as `user: "1000"` so the tool lands under
-`/home/agent/`. The append step runs as root (the default), since
-`/etc/sandbox-persistent.sh` is a system file. The `$HOME` in the
-appended lines resolves per user at source time, so the agent user finds
-its own install. Append to the file rather than overwriting it — the
-sandbox relies on its existing contents.
+Both install steps run as `user: "1000"`. This installs the tool under
+`/home/agent/` and can update `/etc/sandbox-persistent.sh`, which the agent user
+owns. The `$HOME` in the appended lines resolves per user at source time, so the
+agent user finds its own install. Append to the file rather than overwriting it
+— the sandbox relies on its existing contents.
 
 The base image ships its own Node and sets `NPM_CONFIG_PREFIX`, which
 nvm won't activate alongside. `unset NPM_CONFIG_PREFIX` before sourcing
@@ -179,11 +187,11 @@ the kit and install each certificate before running
 `update-ca-certificates`.
 
 ```yaml {title="internal-ca/spec.yaml"}
-schemaVersion: "1"
+schemaVersion: "2"
 kind: mixin
 name: internal-ca
 
-commands:
+setup:
   install:
     - command: "install -m 0644 /home/agent/internal-ca.crt /usr/local/share/ca-certificates/internal-ca.crt && update-ca-certificates"
       user: "0"
@@ -196,13 +204,13 @@ certificates without further configuration.
 
 ## Run a background service
 
-`commands.startup` runs on every sandbox start. To keep a long-running
+`setup.startup` runs on every sandbox start. To keep a long-running
 service such as a dev server or daemon alive, set `background: true`. The
 sandbox runs the command in the background and replays startup commands on
 each start, so the service comes back after a stop/start cycle:
 
 ```yaml
-commands:
+setup:
   startup:
     - command: ["my-service", "--port", "8080"]
       user: "1000"
@@ -215,7 +223,7 @@ for debugging, wrap the command in a shell and redirect to a log file. Let
 trailing `&` yourself:
 
 ```yaml
-commands:
+setup:
   startup:
     - command:
         - sh
@@ -228,16 +236,16 @@ commands:
 An empty log file tells you the wrapper ran; a populated one tells you why
 the service failed.
 
-## Bake runtime values into a file with initFiles
+## Write runtime values to a file
 
 When a config file needs a value that isn't known until sandbox start
-— most often the absolute workspace path — use `commands.initFiles`.
+— most often the absolute workspace path — use `setup.files`.
 The `${WORKDIR}` placeholder expands to the primary workspace path
 when the file is written.
 
 ```yaml
-commands:
-  initFiles:
+setup:
+  files:
     - path: /home/agent/.local/bin/start-code-server.sh
       content: |
         exec code-server --bind-addr 0.0.0.0:8080 --auth none "${WORKDIR}"
@@ -253,7 +261,7 @@ commands:
 `mode: "0755"` makes the generated file executable so the startup
 command can invoke it directly.
 
-Use `initFiles` instead of a static file whenever the content depends
+Use `setup.files` instead of a static file whenever the content depends
 on a runtime value. Use a static file otherwise.
 
 > [!TIP]
@@ -280,7 +288,7 @@ docker-review/
 ```
 
 ```yaml {title="docker-review/spec.yaml"}
-schemaVersion: "1"
+schemaVersion: "2"
 kind: mixin
 name: docker-review
 displayName: Dockerfile review skill
@@ -308,71 +316,144 @@ See the
 [FAQ](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for details.
 
-## Override agent settings
+## Customize agent settings
 
-Sandboxes seed settings files for some built-in agents during setup.
-For example, the sandbox writes `/home/agent/.claude/settings.json`
-for the `claude` agent. This happens after the kit's static files and
-`initFiles`, so a kit can't override those paths with either mechanism.
-Use `commands.startup` instead, which runs after the sandbox seeds its
-files:
+Some agents combine settings from several files. When the agent supports it,
+place kit settings in a separate file instead of replacing
+[sandbox-managed agent configuration](kits.md#sandbox-managed-agent-configuration).
 
-```yaml
-commands:
-  startup:
-    - command:
-        - sh
-        - -c
-        - |
-          mkdir -p /home/agent/.claude
-          cat > /home/agent/.claude/settings.json <<'JSON'
-          {"permissions": {"allow": ["Bash(echo:*)"]}}
-          JSON
-      user: "1000"
-      description: Write user-scope claude settings
+Claude Code's `--settings` option loads an additional settings file. Extend the
+built-in `claude` kit to add the option without reproducing its configuration,
+and place the additional file outside the path the sandbox manages:
+
+```text
+claude-sonnet/
+├── spec.yaml
+└── files/
+    └── home/
+        └── .config/
+            └── claude/
+                └── sonnet.json
 ```
 
-Startup commands replay on every sandbox start, so the script must be
-idempotent. The heredoc pattern overwrites cleanly each time.
+```yaml {title="claude-sonnet/spec.yaml"}
+schemaVersion: "2"
+kind: sandbox
+name: claude-sonnet
+extends: claude
+
+sandbox:
+  command:
+    - --dangerously-skip-permissions
+    - --settings
+    - /home/agent/.config/claude/sonnet.json
+```
+
+```json {title="claude-sonnet/files/home/.config/claude/sonnet.json"}
+{
+  "model": "sonnet"
+}
+```
+
+Claude Code merges the additional file with the sandbox-managed user settings.
+Because the file is under `files/home/`, it stays inside the sandbox instead of
+being written into a directly mounted host workspace. Launch the sandbox with
+the child kit's name:
+
+```console
+$ sbx run claude-sonnet --kit ./claude-sonnet
+```
+
+Proxy-managed OAuth isn't supported for a third-party kit that extends the
+built-in `claude` agent. Store an Anthropic API key on the host before the first
+launch:
+
+```console
+$ sbx secret set anthropic
+```
+
+When you launch the kit for the first time, `sbx` prompts you to approve its
+inherited Anthropic credentials. Because this is a third-party schema v2 kit,
+`sbx` records your approval as a
+[credential binding](../security/credentials.md#credential-bindings). The
+sandbox receives a sentinel value, and the proxy injects the real API key into
+requests to the domains declared by the kit.
+
+> [!WARNING]
+> The approval prompt also lists OAuth, but OAuth doesn't work for the extended
+> agent. If you use Claude Code's `/login` command, Claude Code stores the real
+> OAuth tokens inside the sandbox.
+
+OpenCode supports an additional config file through `OPENCODE_CONFIG`. Keep the
+kit's config separate from the sandbox-managed
+`/home/agent/.config/opencode/opencode.json`, for example at
+`/home/agent/.config/opencode/team.json`:
+
+```text
+opencode-team/
+├── spec.yaml
+└── files/
+    └── home/
+        └── .config/
+            └── opencode/
+                └── team.json
+```
+
+```yaml {title="opencode-team/spec.yaml"}
+schemaVersion: "2"
+kind: mixin
+name: opencode-team
+requires:
+  agent: opencode
+
+environment:
+  variables:
+    OPENCODE_CONFIG: /home/agent/.config/opencode/team.json
+```
+
+```json {title="opencode-team/files/home/.config/opencode/team.json"}
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": false
+}
+```
+
+OpenCode merges the custom file with its global and project config files. See
+the OpenCode [config precedence](https://opencode.ai/docs/config/#precedence-order)
+for the complete order.
+
+Agent settings mechanisms differ. If an agent doesn't support an additional
+config file, launch option, or environment variable for the setting, kits can't
+replace the sandbox-managed user settings before the agent launches.
+`setup.startup` doesn't gate the agent entrypoint, so don't use it for settings
+the agent must read during initialization.
 
 ## Fork an existing agent
 
 Sandbox kits (`kind: sandbox`) define a full agent from scratch. The most
-common variant is a fork of a built-in agent — same image and
-credentials, but a different entrypoint. This example reproduces the
-built-in `claude` agent but drops `--dangerously-skip-permissions` so
-every tool call prompts for approval:
+common variant is a fork of a built-in agent. Use `extends:` to inherit the
+parent's complete configuration and declare only the fields you want to change.
+This example replaces the built-in `claude` entrypoint so Claude Code uses
+manual permission mode instead of bypassing approval prompts:
 
 ```yaml {title="claude-safe/spec.yaml"}
-schemaVersion: "1"
+schemaVersion: "2"
 kind: sandbox
 name: claude-safe
 displayName: Claude Code (with approval prompts)
-description: Claude Code without --dangerously-skip-permissions
+description: Claude Code in manual permission mode
+
+extends: claude
 
 sandbox:
-  image: "docker/sandbox-templates:claude-code-docker"
-  aiFilename: CLAUDE.md
-  entrypoint:
-    run: [claude]
-
-network:
-  serviceDomains:
-    api.anthropic.com: anthropic
-    console.anthropic.com: anthropic
-  serviceAuth:
-    anthropic:
-      headerName: x-api-key
-      valueFormat: "%s"
-  allowedDomains:
-    - "claude.com:443"
-
-credentials:
-  sources:
-    anthropic:
-      env:
-        - ANTHROPIC_API_KEY
+  entrypoint: [claude, "--permission-mode", "manual"]
 ```
+
+The child inherits the built-in image, credentials, network permissions,
+persistent volumes, settings, MCP integration, and agent instructions. Its
+`sandbox.entrypoint` replaces the inherited entrypoint. Proxy-managed OAuth
+isn't supported for the extended agent, so follow the
+[Anthropic API-key setup](#customize-agent-settings) before launching it.
 
 Launch with the kit's `name:` as the agent argument to `sbx run`:
 

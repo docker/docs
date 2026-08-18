@@ -59,7 +59,7 @@ the IP address.
 Because other nodes contact the manager node on its IP address, you should use a
 fixed IP address.
 
-You can run `ifconfig` on Linux or macOS to see a list of the
+You can run `ip addr` on Linux, or `ifconfig` on macOS, to see a list of the
 available network interfaces.
 
 The tutorial uses `manager1` : `192.168.99.100`.

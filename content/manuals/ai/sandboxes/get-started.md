@@ -2,8 +2,8 @@
 title: Get started with Docker Sandboxes
 linkTitle: Get started
 weight: 10
-description: Install the sbx CLI, configure credentials, and work through your first sandbox session.
-keywords: sandbox, sbx, get started, install, credentials, clone mode, network policy
+description: Configure agent credentials and work through your first Docker Sandboxes session.
+keywords: sandbox, sbx, get started, credentials, clone mode, network policy
 ---
 
 Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
@@ -11,121 +11,16 @@ sandbox gets its own Docker daemon, filesystem, and network — the agent can
 build containers, install packages, and modify files without touching your host
 system.
 
-This page walks through your first session: install the CLI, run an agent in a
-sandbox, see how the sandbox isolates it, control what it can reach on the
-network, and clean up.
+This page walks through your first session: run an agent in a sandbox, see how
+the sandbox isolates it, control what it can reach on the network, and clean
+up.
 
 ## Prerequisites
 
-{{< tabs group="os" >}}
-{{< tab name="macOS" >}}
-
-- macOS Sonoma (version 14) or later
-- Apple silicon
-- An API key or authentication method for the agent you want to use. Most agents
-  require an API key for their model provider (Anthropic, OpenAI, Google, and
-  others). See the [agent pages](agents/) for provider-specific instructions.
-
-{{< /tab >}}
-{{< tab name="Windows" >}}
-
-- 64-bit Intel or AMD (x86_64)
-- Windows 11
-- Windows Hypervisor Platform enabled. Open an elevated PowerShell prompt (Run
-  as Administrator) and run:
-  ```powershell
-  Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -All
-  ```
-- An API key or authentication method for the agent you want to use. Most agents
-  require an API key for their model provider (Anthropic, OpenAI, Google, and
-  others). See the [agent pages](agents/) for provider-specific instructions.
-
-{{< /tab >}}
-{{< tab name="Linux (Ubuntu)" >}}
-
-- Ubuntu 24.04 or later
-- 64-bit Intel or AMD (x86_64) or 64-bit Arm (aarch64)
-- KVM hardware virtualization supported and enabled by the CPU. If you're
-  running inside a VM, nested virtualization must be turned on. Verify that KVM
-  is available:
-  ```console
-  $ lsmod | grep kvm
-  ```
-  A working setup shows `kvm_intel`, `kvm_amd`, `kvm_arm64`, or `kvm` in the output. If the output
-  is empty, run `kvm-ok` for diagnostics. If KVM is unavailable, `sbx` will
-  not start.
-- Your user in the `kvm` group:
-  ```console
-  $ sudo usermod -aG kvm $USER
-  ```
-  Log out and back in (or run `newgrp kvm`) for the group change to take effect.
-- An API key or authentication method for the agent you want to use. Most agents
-  require an API key for their model provider (Anthropic, OpenAI, Google, and
-  others). See the [agent pages](agents/) for provider-specific instructions.
-
-{{< /tab >}}
-{{< /tabs >}}
-
-Docker Desktop is not required to use `sbx`.
-
-## Install and sign in
-
-{{< tabs group="os" >}}
-{{< tab name="macOS" >}}
-
-```console
-$ brew trust docker/tap
-$ brew install docker/tap/sbx
-$ sbx login
-```
-
-{{< /tab >}}
-{{< tab name="Windows" >}}
-
-```powershell
-> winget install -h Docker.sbx
-> sbx login
-```
-
-{{< /tab >}}
-{{< tab name="Linux (Ubuntu)" >}}
-
-```console
-$ curl -fsSL https://get.docker.com | sudo REPO_ONLY=1 sh
-$ sudo apt-get install docker-sbx
-$ sbx login
-```
-
-The first command adds Docker's `apt` repository to your system.
-
-{{< /tab >}}
-{{< /tabs >}}
-
-If you need to install `sbx` manually, download a binary directly from the
-[sbx-releases](https://github.com/docker/sbx-releases/releases) repository.
-
-`sbx login` opens a browser for Docker OAuth. On first login (and after `sbx
-policy reset`), the CLI prompts you to choose a default network policy for your
-sandboxes:
-
-```plaintext
-Choose a default network policy:
-
-     1. Open         — All network traffic allowed, no restrictions.
-     2. Balanced     — Default deny, with common dev sites allowed.
-     3. Locked Down  — All network traffic blocked unless you allow it.
-
-Use ↑/↓ to navigate, Enter to select, or press 1–3.
-```
-
-**Balanced** is a good starting point — it permits traffic to common
-development services while blocking everything else. You can adjust individual
-rules later. See [Policies](governance/local.md) for a full description of each
-option.
-
-> [!NOTE]
-> See the [FAQ](faq.md) for details on why sign-in is required and what
-> happens with your data.
+- [Install the `sbx` CLI](install.md) and sign in to Docker
+- Configure an authentication method for the agent you want to use. Most agents
+  require an API key for their model provider. See the [agent pages](agents/)
+  for provider-specific instructions.
 
 ## Authenticate your agent
 
@@ -142,7 +37,7 @@ To give the agent access to GitHub for creating pull requests or interacting
 with repositories:
 
 ```console
-$ sbx secret set -g github -t "$(gh auth token)"
+$ sbx secret set github -t "$(gh auth token)"
 ```
 
 ## Run your first sandbox
@@ -154,6 +49,28 @@ Pick a project directory and launch an agent with
 $ cd ~/my-project
 $ sbx run --name my-sandbox claude
 ```
+
+The first time you run a sandbox, the CLI prompts you to choose a default
+network preset:
+
+```plaintext
+Initialize the global network policy for your sandboxes:
+
+  Applies to all sandboxes, current and future — change it later with
+  "sbx policy allow/deny/rm". Kits, including built-in agent kits, may
+  also add per-sandbox rules.
+
+     1. Open         — All network traffic allowed, no restrictions.
+  ❯  2. Balanced     — Default deny, with common dev sites allowed.
+     3. Locked Down  — All network traffic blocked unless you allow it.
+
+  Use ↑/↓ or 1–3 to navigate, Enter to confirm, Esc to cancel.
+```
+
+**Balanced** is a good starting point — it permits traffic to common
+development services while blocking everything else. You can adjust individual
+rules later. See [Local policy](governance/access-controls/local.md) for a full
+description of each option.
 
 Replace `claude` with the agent you want to use — see [Agents](agents/) for the
 full list.
@@ -201,8 +118,8 @@ when running several agents on one repository — use
 ## Control what the agent can reach
 
 Isolation isn't only about the filesystem. You also control what the sandbox
-can reach on the network. You chose a default policy when you signed in, and
-you can inspect or adjust it at any time.
+can reach on the network. You chose a default policy before the sandbox
+started, and you can inspect or adjust it at any time.
 
 Check which rules are in effect:
 
@@ -216,11 +133,11 @@ To allow a specific host:
 $ sbx policy allow network registry.npmjs.org
 ```
 
-With **Balanced**, common development services are allowed by default. With
-**Locked Down**, everything is blocked until you allow it — including your
-model provider's API. If the agent can't reach a service it needs, the network
-policy is the first place to look. See [Policies](governance/local.md) for the
-full rule set and how to customize it.
+With **Locked Down**, even your model provider API is blocked unless you
+explicitly allow it. With **Balanced**, common development services are
+permitted by default. See
+[local policy](governance/access-controls/local.md) for the full rule set
+and how to customize it.
 
 ## Clean up
 
@@ -264,5 +181,5 @@ Then explore:
   network rules into a reusable definition you launch with a single flag.
 - [Agents](agents/) — the full list of supported agents and how to configure
   each one.
-- [Governance](governance/) — centrally manage network and filesystem policies
-  across a team.
+- [Governance](governance/) — centrally manage network, filesystem, and MCP
+  policies across a team.

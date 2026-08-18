@@ -1,50 +1,58 @@
 ---
 title: Local policy
 weight: 10
-description: Configure network access rules for sandboxes on your local machine.
+description: Configure local network access rules for sandboxes on your machine.
 keywords: docker sandboxes, local policy, network access, allow rules, deny rules, sbx policy
 aliases:
   - /ai/sandboxes/security/policy/
+  - /ai/sandboxes/governance/local/
 ---
 
-The `sbx policy` command manages network access rules on your local machine.
-Rules apply to all sandboxes on the machine when you use the global scope, or
-to a single sandbox when scoped by name.
+The `sbx policy` command manages the local policy on your machine. The local
+policy contains network access rules. Rules apply to all sandboxes on the
+machine when you use the global scope, or to a single sandbox when scoped by
+name.
 
-Local rules apply only when your organization doesn't enforce governance:
+Local policy interacts with organization governance as follows:
 
-- **No org governance**: local rules fully control what sandboxes can access.
-- **Org governance active**: the organization policy replaces local policy.
-  Local rules are inactive, and `sbx policy allow` and `sbx policy deny` have
-  no effect. To list the inactive local rules, run
+- **No org governance**: the local policy controls what sandboxes can access.
+- **Org governance active**: only organization allow rules grant access, so
+  local allow rules are inactive and can't expand what the organization permits.
+  Local deny rules are still evaluated, so you can restrict access further than
+  the organization policy does. To list inactive rules, run
   `sbx policy ls --include-inactive`. See
-  [Monitoring](monitoring.md#showing-inactive-rules).
+  [Monitoring](../monitor-and-enforce/monitoring.md#showing-inactive-rules).
 
-See [Organization policy](org.md) for how organization governance works.
+See [Organization policies](organization.md) for how organization governance
+works.
 
 For domain patterns, wildcards, CIDR ranges, and filesystem path syntax, see
-[Policy concepts](concepts.md#rule-syntax).
+[Policy concepts](../concepts.md#rule-syntax).
 
 ## Default preset
 
-The only way traffic can leave a sandbox is through an HTTP/HTTPS proxy on
-your host, which enforces access rules on every outbound request. Non-HTTP TCP
-traffic, including SSH, can be allowed by adding a policy rule for the
-destination IP and port (for example, `sbx policy allow network "10.1.2.3:22"`).
-UDP and ICMP are blocked at the network layer and can't be unblocked with policy
-rules.
+Outbound TCP traffic passes through a proxy on your host, which enforces access
+rules on every connection. Non-HTTP TCP traffic, including SSH, can be allowed
+with a hostname rule (for example, `sbx policy allow network "myhost:22"`) or an
+address-based rule. UDP and ICMP are blocked at the network layer and can't be
+unblocked with policy rules.
 
-On first start, and after running `sbx policy reset`, the daemon prompts you
-to choose a network preset:
+If you haven't chosen a default preset, the CLI prompts you before it runs a
+sandbox. Running `sbx policy reset` clears the preset and prompts you to choose
+again:
 
 ```plaintext
-Choose a default network policy:
+Initialize the global network policy for your sandboxes:
+
+  Applies to all sandboxes, current and future — change it later with
+  "sbx policy allow/deny/rm". Kits, including built-in agent kits, may
+  also add per-sandbox rules.
 
      1. Open         — All network traffic allowed, no restrictions.
-     2. Balanced     — Default deny, with common dev sites allowed.
+  ❯  2. Balanced     — Default deny, with common dev sites allowed.
      3. Locked Down  — All network traffic blocked unless you allow it.
 
-  Use ↑/↓ to navigate, Enter to select, or press 1–3.
+  Use ↑/↓ or 1–3 to navigate, Enter to confirm, Esc to cancel.
 ```
 
 | Preset      | Description                                                                                                                                       |
@@ -61,7 +69,7 @@ v0.35.0, the Balanced preset also allows VS Code domains, Azure Blob Storage
 > [!NOTE]
 > If your organization manages sandbox policies centrally, organization rules
 > take precedence over the preset you select here. See
-> [Organization policy](org.md).
+> [Organization policies](organization.md).
 
 ### Non-interactive environments
 
@@ -94,6 +102,19 @@ $ sbx policy allow network --sandbox my-sandbox api.example.com
 $ sbx policy deny network --sandbox my-sandbox ads.example.com
 ```
 
+As of v0.38.0, you can also set per-sandbox deny rules at creation time with
+`--deny-network` on `sbx create` or `sbx run`, instead of adding them after the
+fact:
+
+```console
+$ sbx create --deny-network ads.example.com claude .
+$ sbx run --deny-network ads.example.com claude
+```
+
+Pass the flag multiple times to deny more than one host. Rules added this way
+appear in `sbx policy ls <name>` and can be removed with
+`sbx policy rm network --sandbox <name> --resource <host>`.
+
 Specify multiple hosts in one command with a comma-separated list:
 
 ```console
@@ -117,7 +138,8 @@ To inspect which policies are active and where they come from, use
 `sbx policy ls`. Use `--source` to filter by origin (`local`, `org`, `kit`),
 `--decision` to filter by outcome (`allow`, `deny`), and `--wide` for
 rule-level detail including rule IDs. To inspect a single policy or rule in
-full, use `sbx policy inspect`. See [Monitoring](monitoring.md).
+full, use `sbx policy inspect`. See
+[Monitoring](../monitor-and-enforce/monitoring.md).
 
 ## Testing policy
 
@@ -152,10 +174,9 @@ To remove all custom rules and start fresh with a new preset, use
 $ sbx policy reset
 ```
 
-This deletes the local policy store and stops the daemon. When the daemon
-restarts on the next command, you are prompted to choose a new preset. Running
-sandboxes stop when the daemon shuts down. Pass `--force` to skip the
-confirmation prompt:
+This deletes the local policy store, restarts the daemon, and prompts you to
+choose a new preset. Running sandboxes stop when the daemon shuts down. Pass
+`--force` to skip the confirmation prompt:
 
 ```console
 $ sbx policy reset --force
@@ -163,26 +184,29 @@ $ sbx policy reset --force
 
 ## Troubleshooting
 
-### Local rules have no effect
+### Local allow rules have no effect
 
-If rules you add with `sbx policy allow` or `sbx policy deny` don't change
-sandbox behavior, your organization likely has governance enabled. Run `sbx
-policy ls` to check: if the output starts with a `Governance:` status line
-showing `Managed by <org>`, org governance is active. When it's active,
-the organization policy replaces local policy, so your rules have no effect.
-They're hidden from `sbx policy ls` by default; run `sbx policy ls
---include-inactive` to see them with an `inactive` status in the `STATUS`
-column.
+If rules you add with `sbx policy allow` don't change sandbox behavior, your
+organization likely has governance enabled. Run `sbx policy ls` to check: if
+the output starts with a `Governance:` status line showing `Managed by <org>`,
+org governance is active. When it's active, local allow rules are inactive.
+You can't use them to loosen restrictions the org policy imposes.
 
-Organization policy can't be supplemented from your machine. To change what
-your sandboxes can access, ask your admin to update the organization policy.
+Inactive allow rules are hidden from `sbx policy ls` by default; run
+`sbx policy ls --include-inactive` to see them with an `inactive` status in
+the `STATUS` column.
+
+When organization governance is active, only organization allow rules can grant
+access. Ask your admin to update the organization policy if you need access to
+an additional resource. Local deny rules remain active, so you can use
+`sbx policy deny` to restrict access further.
 
 ### A domain is still blocked after adding an allow rule
 
 If a domain remains blocked after you add a local allow rule, your organization
-likely enforces governance, which makes local rules inactive. Run `sbx policy
-ls` to check whether org governance is active; if the output starts with a
-`Governance:` status line showing `Managed by <org>`, it is. Add
-`--include-inactive` to confirm your rule shows an `inactive` status. If so, the
-block can only be lifted by updating the org policy in Docker Home or via
+likely enforces governance, which makes local allow rules inactive. Run `sbx
+policy ls` to check whether org governance is active; if the output starts with
+a `Governance:` status line showing `Managed by <org>`, it is. Add
+`--include-inactive` to confirm your rule shows an `inactive` status. If so,
+the block can only be lifted by updating the org policy in Docker Home or via
 the [API](/reference/api/ai-governance/).

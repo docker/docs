@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-weight: 60
+weight: 100
 description: Resolve common issues when using Docker Sandboxes.
 keywords: docker sandboxes, sbx, troubleshooting, diagnostics, reset, network policy, git, ssh
 ---
@@ -28,8 +28,7 @@ If sandbox commands hang, fail to connect to the daemon, or keep returning
 daemon errors, restart the sandbox daemon before resetting sandbox state:
 
 ```console
-$ sbx daemon stop
-$ sbx daemon start --detach
+$ sbx daemon restart
 ```
 
 Then retry the command that failed. Restarting the daemon doesn't delete
@@ -44,7 +43,8 @@ data. Create fresh sandboxes afterwards.
 
 ## Agent can't install packages or reach an API
 
-Sandboxes use a [deny-by-default network policy](governance/local.md).
+Sandboxes use [network access rules](governance/access-controls/network.md) to
+control outbound traffic.
 If the agent fails to install packages or call an external API, the target
 domain is likely not in the allow list. Check which requests are being blocked:
 
@@ -66,7 +66,7 @@ $ sbx policy allow network "**"
 
 If `sbx policy allow` doesn't unblock the request, your organization may
 manage sandbox policies centrally and take precedence over local rules. See
-[Organization governance](governance/org.md).
+[Organization policies](governance/access-controls/organization.md).
 
 ## Kit fails to install: source not in allowlist
 
@@ -91,23 +91,27 @@ any remote source, see [Restrict kit sources](customize/kits.md#restrict-kit-sou
 
 ## SSH and other non-HTTP connections fail
 
-Non-HTTP TCP connections like SSH can be allowed by adding a policy rule for
-the destination IP address and port. For example, to allow SSH to a specific
-host:
+Non-HTTP TCP connections such as SSH can be allowed by adding a policy rule for
+the destination. Hostname rules work for these connections because the sandbox
+recovers the hostname from its DNS resolver when the protocol doesn't include
+one:
+
+```console
+$ sbx policy allow network "myhost:22"
+```
+
+If the destination is reached by IP address without a DNS lookup, the hostname
+can't be recovered. Use an address-based rule in that case:
 
 ```console
 $ sbx policy allow network "10.1.2.3:22"
 ```
 
-Hostname-based rules (for example, `myhost:22`) don't work for non-HTTP
-connections because the proxy can't resolve the hostname to an IP address in
-this context. Use the IP address directly.
-
 UDP and ICMP traffic is blocked at the network layer and can't be unblocked
 with policy rules.
 
 For Git operations over SSH, you can either add an allow rule for the Git
-server's IP address or use HTTPS URLs instead:
+server's hostname or IP address, or use HTTPS URLs instead:
 
 ```console
 $ git clone https://github.com/owner/repo.git
@@ -141,7 +145,7 @@ If credentials are configured correctly but API calls still fail, check
 the `transparent` proxy don't get credential injection. This can happen when a
 client inside the sandbox (such as a process in a Docker container) isn't
 configured to use the forward proxy. See
-[Monitoring network activity](governance/monitoring.md)
+[Monitoring network activity](governance/monitor-and-enforce/monitoring.md)
 for details.
 
 ## API calls fail with a certificate error
@@ -209,6 +213,15 @@ $ DOCKER_SANDBOXES_ROOT_SIZE=40g sbx run claude
 
 `DOCKER_SANDBOXES_ROOT_SIZE` controls the root filesystem size. `DOCKER_SANDBOXES_DOCKER_SIZE`
 controls the Docker data disk (`/var/lib/docker`) size. The two are independent — set both if needed.
+
+For a [clone-mode sandbox](usage.md#clone-mode), set
+`DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE` before creating the sandbox to
+configure the cloned workspace volume capacity. The variable accepts
+human-readable size strings such as `100g`:
+
+```console
+$ DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE=100g sbx run --clone claude
+```
 
 ## Filesystem operations are slow in large repositories
 

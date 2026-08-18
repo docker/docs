@@ -1,18 +1,18 @@
 ---
 title: "DeepSeek"
-description: "Use DeepSeek models with docker-agent."
+description: "Use DeepSeek models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, deepseek
 weight: 80
 canonical: https://docs.docker.com/ai/docker-agent/providers/deepseek/
 ---
 
-_Use DeepSeek models with docker-agent._
+_Use DeepSeek models with Docker Agent._
 
 ## Overview
 
 [DeepSeek](https://www.deepseek.com/) serves its frontier chat and reasoning
 models through an OpenAI-compatible API, with strong price/performance on coding
-and reasoning tasks. docker-agent includes built-in support for DeepSeek as an
+and reasoning tasks. Docker Agent includes built-in support for DeepSeek as an
 alias provider.
 
 ## Setup
@@ -73,7 +73,7 @@ for current model IDs, context limits, and pricing.
 
 ## How It Works
 
-DeepSeek is implemented as a built-in alias in docker-agent:
+DeepSeek is implemented as a built-in alias in Docker Agent:
 
 - **API Type:** OpenAI-compatible (`openai_chatcompletions`)
 - **Base URL:** `https://api.deepseek.com/v1`

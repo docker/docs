@@ -1,0 +1,48 @@
+name: sbx skills import
+synopsis: Import skills from supported agent directories
+experimental: true
+description: |-
+    Copy skills from supported agent directories on the host into the
+    persistent store shared by sandboxes.
+
+    Sources are scanned in this order (alphabetical; first wins on conflict):
+      ~/.agents/skills
+      ~/.claude/skills
+      ~/.copilot/skills
+      ~/.cursor/skills
+      ~/.factory/skills
+
+    If two sources contain a skill with the same name, the later source is skipped
+    with a warning — the first source's version is kept.
+
+    Each imported skill folder replaces any store folder of the same name (the
+    existing folder is backed up first, then the new copy is installed) so stale
+    files from a previous version cannot linger. You will be prompted before any
+    existing skill is overwritten; use --force to skip all prompts.
+
+    Symlinks at the top level are followed if they point to a directory. Symlinks
+    within skill folders and loose files at the top level are skipped.
+
+    The store lives under the sandbox state directory and is cleared by
+    'sbx reset'. Supported by Claude, Codex, Copilot, Cursor, and Droid agents.
+usage: sbx skills import [flags]
+options:
+    - name: dry-run
+      default_value: "false"
+      usage: |
+        Preview which skills would be imported without copying anything
+    - name: force
+      shorthand: f
+      default_value: "false"
+      usage: Overwrite existing skills without prompting
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for import
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx skills - (Experimental) Manage skills shared across sandboxes
