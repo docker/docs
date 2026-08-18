@@ -50,15 +50,17 @@ your organization's needs.
 
 Custom roles are permission sets you build by selecting individual
 permissions, such as billing or team management. Use custom roles when you
-need a combination that core roles don't offer, for example a billing
+need a combination that core roles don't offer. For example, you may create a custom role for a billing
 administrator or a security auditor, or when you want to grant
-least-privilege access. Custom roles require a Docker Business subscription.
+least-privilege access.
+
+Custom roles require a Docker Business subscription.
 
 ## Roles and team permissions
 
-Roles apply organization-wide, and team permissions apply to specific
+Roles apply organization-wide. Team permissions apply to specific
 repositories. The two systems work together: a user's role sets their
-organization-wide access, and team membership can extend their access to
+organization-wide access and team membership can extend their access to
 individual repositories.
 
 ## Next steps
