@@ -74,7 +74,13 @@ Install `sbx` using Windows Package Manager:
 winget install -h Docker.sbx
 ```
 
-## Install on Linux
+## Install on Ubuntu
+
+> [!NOTE]
+>
+> Docker does not test or support Docker Sandboxes on Ubuntu derivatives, such
+> as Linux Mint and Pop!_OS. The convenience script can configure an incorrect
+> package repository on these distributions.
 
 You can install `sbx` with Docker Engine or install only the `sbx` package.
 
@@ -94,13 +100,15 @@ repository and install the `docker-sbx` package:
 
 ```console
 $ curl -fsSL https://get.docker.com | sudo REPO_ONLY=1 sh
-$ sudo apt-get install docker-sbx
+$ sudo apt install docker-sbx
 ```
 
-## Install manually
+## Install from release artifacts
 
-To install `sbx` without a package manager, download a binary from the
-[sbx-releases repository](https://github.com/docker/sbx-releases/releases).
+To install `sbx` from a package or archive, follow the
+[manual installation instructions](https://github.com/docker/sbx-releases#manual-install-from-release-artifacts).
+The availability of a Linux release artifact does not indicate that Docker
+tests or supports the corresponding distribution.
 
 ## Sign in
 
