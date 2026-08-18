@@ -67,6 +67,13 @@ Click on a platform's link to view the relevant installation procedure.
 | [Ubuntu](ubuntu.md)                            |       ✅       |       ✅        |      ✅      |   ✅    |  ✅   |
 | [Binaries](binaries.md)                        |       ✅       |       ✅        |      ✅      |         |       |
 
+> [!WARNING]
+>
+> Docker Engine v28 is the last major version that provides packages for
+> [Raspberry Pi OS 32-bit (armhf)](raspberry-pi-os.md). Starting with v29,
+> use the [Debian `arm64`](debian.md) packages, or Debian `armhf` on 32-bit
+> ARMv7.
+
 ### Other Linux distributions
 
 > [!NOTE]
