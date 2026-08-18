@@ -34,26 +34,29 @@ with a short-lived token.
 Use `docker/login-action` version 4.5.0 or later. The action exchanges
 the GitHub OIDC token and signs in to Docker Hub in a single step.
 
-1. Add the following `permissions` and `steps` to your workflow YAML.
-   Replace `<YOUR_ORG_NAME>` with your Docker organization name and
-   `<YOUR_CONNECTION_ID>` with the ID you copied from Docker Home:
+1. Add the following to your workflow YAML. Replace `<YOUR_ORG_NAME>`
+   with your Docker organization name and `<YOUR_CONNECTION_ID>` with
+   the ID you copied from Docker Home:
 
    ```yaml
    permissions:
      contents: read
      id-token: write
 
-   steps:
-     - name: Docker login
-       uses: docker/login-action@v4 # v4.5.0+
-       with:
-         username: <YOUR_ORG_NAME>
-       env:
-         DOCKERHUB_OIDC_CONNECTIONID: <YOUR_CONNECTION_ID>
+   jobs:
+     build:
+       runs-on: ubuntu-latest
+       steps:
+         - name: Docker login
+           uses: docker/login-action@v4 # v4.5.0+
+           with:
+             username: <YOUR_ORG_NAME>
+           env:
+             DOCKERHUB_OIDC_CONNECTIONID: <YOUR_CONNECTION_ID>
    ```
 
-   The `username` value must be a Docker organization name. Personal
-   accounts are not supported.
+   The `username` value must be a Docker organization name. Only
+   organization accounts can sign in using OIDC.
 
 1. Run the workflow and confirm it can sign in to Docker.
 
