@@ -506,12 +506,12 @@ $ docker exec -it docker-ruby-on-rails-web-1 rake db:migrate RAILS_ENV=test
 
 You will see a similar message like this:
 
-`console
+```console
 == 20240710193146 CreateWhales: migrating =====================================
 -- create_table(:whales)
    -> 0.0126s
 == 20240710193146 CreateWhales: migrated (0.0127s) ============================
-`
+```
 
 Refresh <http://localhost:3000> in your browser and add the whales.
 

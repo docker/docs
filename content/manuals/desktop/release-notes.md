@@ -24,6 +24,94 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.87.0
+
+{{< release-date date="2026-08-17" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.87.0" build_path="/236836/" >}}
+
+### Updates
+
+- [Docker Agent v1.122.0](https://github.com/docker/docker-agent/releases/tag/v1.122.0)
+- [Docker Buildx v0.36.1](https://github.com/docker/buildx/releases/tag/v0.36.1)
+- Docker Offload `v0.6.10`
+- [Docker Compose v5.4.0](https://github.com/docker/compose/releases/tag/v5.4.0)
+- Linux kernel `v7.0.12`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where the in-app update failed with `Source and destination path must have identical roots` when Docker Desktop was installed to a custom directory on another drive.
+- Fixed a misleading proxy error that named the destination server instead of the unreachable upstream proxy, and included machine-wide proxy configuration in diagnostics.
+- Fixed a bug where updating could keep failing with a `file exists` error after an earlier update had failed.
+- Fixed an issue where Gordon would lose access to tools and show misleading sign-in prompts after a failed auto-login at startup, without requiring a restart of Docker Desktop.
+
+#### For Mac
+
+- Fixed a false `Docker Desktop encountered an unexpected error` dialog that could appear during VM shutdown on with the `libkrun` engine.
+- Fixed a rare crash where the Docker Desktop with the Apple Virtualization Framework VM stopped unexpectedly right after a new connection was opened.
+
+#### For Windows
+
+- Fixed WSL error recovery on Windows not displaying specific, actionable error messages for errors like `HCS/0x80070569`, showing the generic fallback instead.
+- Fixed an issue on Windows where per-user `.EXE` installs applying an auto-update wrote `install-settings.json` to the system-wide path instead of the correct per-user location.
+- Fixed an issue on Windows where diagnostic bundles were missing network connection profile data due to an empty `Get-NetConnectionProfile.json` file.
+- Fixed a bug on Windows where Docker Desktop repeatedly asked users to run `wsl --update` when WSL was installed via the Microsoft Store rather than the inbox optional component.
+- Fixed an issue where the Resource Saver settings section was incorrectly shown when using Windows containers instead of Linux containers.
+- Fixed an issue on Windows where the disk image usage limit was hidden in **Resources** settings when Hyper-V was selected as the hypervisor.
+- Fixed an issue on Windows where installer logs from per-user installations were missing from diagnostic bundles.
+- Fixed the virtual disk limit not being applied when lowered on Windows with Hyper-V.
+- Fixed the disk usage limit slider being hidden and ignored for the Docker VMM backend on Windows, so users can now set and enforce disk size in **Settings** > **Resources** > **Advanced**.
+- Fixed a Windows auto-update failure when a self-updated CLI plugin (`docker scout` or `docker agent`) newer than the bundled version was already present in the user's CLI-plugins folder.
+
+## 4.86.0
+
+{{< release-date date="2026-08-10" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.86.0" build_path="/236216/" >}}
+
+### Updates
+
+- [Docker Engine v29.7.2](https://docs.docker.com/engine/release-notes/29/#2972)
+- [Docker Buildx v0.36.0](https://github.com/docker/buildx/releases/tag/v0.36.0)
+- [Docker Scout CLI v1.24.0](https://github.com/docker/scout-cli/releases/tag/v1.24.0)
+- [Docker Agent v1.119.0](https://github.com/docker/docker-agent/releases/tag/v1.119.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Docker VMM Beta performance improvements by Docker’s own container-optimized hypervisor. Available for Mac and Windows.
+- Gordon now displays specific error messages for tool failures, policy-blocked actions, and loop detection instead of a generic **Agent error**.
+- Fixed container stop timeouts and `unless-stopped` restart policies not being honored during engine shutdown.
+- Fixed a bug where enabling Docker Offload from the Docker Desktop Dashboard failed when the proxy was configured by the operating system instead of by environment variables.
+- Fixed a crash on startup after upgrading, for users whose settings file was written by a very old version.
+- Fixed port forwarding for Swarm services that use automatically assigned published ports, including host-mode task ports and repeated ingress port definitions.
+- Added a three-mode safety system (Strict, Balanced, Autonomous) to the Gordon AI agent's tool confirmation UI, replacing the previous binary approve/allow-all dialog, with risk-tier labels on confirmation.
+- Fixed a flash of incorrect UI content on app launch, such as a brief 'Waiting for the Docker Engine...' screen or unexpected navigation away from gated pages.
+- AF_UNIX sockets shared over VirtioFS now work in both directions (host to guest and guest to host).
+- Fixed a bug where restarting the VM would steal the window focus.
+
+#### For Mac
+
+- Fixed a bug where a Kubernetes (kind) cluster with Enhanced Container Isolation could fail to recover after a Docker Desktop restart.
+- Fixed nftables `fib` expressions failing with "Operation not supported" in `inet` tables on Apple Silicon.
+
+#### For Windows
+
+- Fixed an issue where the Windows installer reported success when it could not write its settings or enterprise policy files.
+- Fixed Model Runner failing to start with `CreateJobObject: Access is denied` when Docker Desktop is launched via a Secondary Logon (run-as-user) session.
+- Updated the bundled 7-Zip to 26.02 to avoid antivirus software quarantining it during an upgrade on Windows.
+
+#### For Linux
+
+- Fixed Docker Desktop failing to start on Linux arm64 hosts due to incorrect QEMU binary path resolution.
+
+### Security
+
+- Addressed CVE-2026-17106, a destination-escape flaw in `docker container cp`.
+
 ## 4.85.0
 
 {{< release-date date="2026-08-03" >}}
@@ -370,7 +458,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For Windows
 
-- Added [Synchronized file shares](/manuals/desktop/features/synchronized-file-sharing.md) support for the WSL2 backend.
 - Fixed Docker Desktop getting stuck on **Starting the Docker Engine…** after an in-place upgrade.
 - Fixed a bug where Docker Desktop was not restarted after a failed update was reverted to the previous version.
 - Fixed delta updates failing to prepare.

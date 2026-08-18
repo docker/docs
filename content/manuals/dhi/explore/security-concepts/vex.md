@@ -37,7 +37,9 @@ status values. DHI uses three of them:
 | `fixed` | The vulnerability has been remediated in this version. DHI does not use this status (see below). |
 
 You can view the VEX statements for any DHI using Docker Scout. See [Scan Docker
-Hardened Images](/manuals/dhi/how-to/scan.md).
+Hardened Images](/manuals/dhi/how-to/scan.md). To query suppressed CVEs
+programmatically by image digest, see [Query suppressed CVEs for a DHI by
+digest](/manuals/dhi/how-to/vex-api.md).
 
 ### `not_affected` justification codes
 

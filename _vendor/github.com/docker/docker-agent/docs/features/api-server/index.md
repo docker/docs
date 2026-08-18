@@ -23,8 +23,13 @@ $ docker agent serve api agent.yaml --listen 0.0.0.0:8080
 $ docker agent serve api agent.yaml --session-db ./sessions.db
 
 # Auto-refresh from OCI registry every 10 minutes
-$ docker agent serve api agentcatalog/coder --pull-interval 10
+$ docker agent serve api myorg/coder --pull-interval 10
 ```
+
+> [!TIP]
+> **When to use API server vs. chat server**
+>
+> Use the **API server** when you want full control over sessions, agent execution, tool-call confirmations, and streamed runtime events — this is Docker Agent's native protocol. Use the [Chat Server](../chat-server/index.md) when you want to plug Docker Agent into existing OpenAI-compatible tooling (chat UIs, IDE integrations, OpenAI SDK clients) instead.
 
 ## Endpoints
 
@@ -37,6 +42,15 @@ All endpoints are under the `/api` prefix.
 | `GET`  | `/api/agents`     | List all available agents         |
 | `GET`  | `/api/agents/:id` | Get an agent's full configuration |
 
+Each agent entry in the `GET /api/agents` response contains:
+
+| Field        | Type            | Description                                                                                   |
+| ------------ | --------------- | --------------------------------------------------------------------------------------------- |
+| `name`       | string          | Agent identifier (config filename without `.yaml`).                                           |
+| `description`| string          | The root agent's `description` field.                                                         |
+| `multi`      | boolean         | `true` when the config defines more than one agent.                                           |
+| `commands`   | array of string | Sorted list of named command keys defined on the root agent. Omitted when no commands exist.  |
+
 ### Sessions
 
 | Method   | Path                                | Description                                             |
@@ -46,7 +60,7 @@ All endpoints are under the `/api` prefix.
 | `GET`    | `/api/sessions/:id`                 | Get a session by ID (messages, tokens, permissions)     |
 | `GET`    | `/api/sessions/:id/status`          | Lightweight runtime state (streaming, title, agent, tokens). Requires an attached runtime. |
 | `GET`    | `/api/sessions/:id/snapshot`        | Full state in one call (stored fields + runtime state + `last_event_seq`) for gapless resync — see [Reconnecting without gaps](#reconnecting-without-gaps). |
-| `GET`    | `/api/sessions/:id/events`          | Live session event stream (SSE) with sequence numbers and replay. Available for a run attached via [`--listen`](#listen). |
+| `GET`    | `/api/sessions/:id/events`          | Live session event stream (SSE) with sequence numbers and replay. Available for a run attached via [`--listen`](#listen), or once a session has raised at least one out-of-band event (e.g. a background job's elicitation, answered via `POST .../elicitation`), which creates a session-scoped event log on demand carrying such out-of-band events — see [Session event stream](#session-event-stream-and-reconnection) for what each kind of log contains. |
 | `DELETE` | `/api/sessions/:id`                 | Delete a session                                        |
 | `PATCH`  | `/api/sessions/:id/title`           | Update session title                                    |
 | `PATCH`  | `/api/sessions/:id/permissions`     | Update session permissions                              |
@@ -55,7 +69,7 @@ All endpoints are under the `/api` prefix.
 | `PATCH`  | `/api/sessions/:id/messages/:msg_id` | Update an existing message by ID. Returns `409 Conflict` while the session has an active run. |
 | `POST`   | `/api/sessions/:id/resume`          | Resume a paused session (after tool confirmation)       |
 | `POST`   | `/api/sessions/:id/tools/toggle`    | Toggle auto-approve (YOLO) mode                         |
-| `POST`   | `/api/sessions/:id/elicitation`     | Respond to an MCP tool elicitation request              |
+| `POST`   | `/api/sessions/:id/elicitation`     | Respond to an MCP tool elicitation request. Pass the `elicitation_id` from the `elicitation_request` event to target a specific concurrent request; omitted, it resolves the sole pending one. |
 | `POST`   | `/api/sessions/:id/steer`           | Inject messages into a running turn (pre-empts current) |
 | `POST`   | `/api/sessions/:id/followup`        | Enqueue messages to run after the current turn finishes (supports an `Idempotency-Key` — see [Idempotent follow-ups](#idempotent-follow-ups)). |
 | `GET`    | `/api/sessions/:id/models`          | List available models for the session's current agent   |
@@ -139,6 +153,7 @@ Event types include:
 - `tool_call` — Agent requesting tool execution
 - `tool_call_confirmation` — Tool call waiting for user approval
 - `tool_call_response` — Tool execution result
+- `plan_changed` — A shared plan was created, updated, or deleted through the plan toolset. The payload carries the plan's `scope`, `name`, `action`, and `version` — never its content. Shared plans are deliberately process-global: every active stream served by the same process subscribes to the same shared plan notifier and receives the event regardless of which session performed the mutation, and the payload does not identify the mutating session (read the plan's `author` metadata for collaborative attribution).
 - `error` — Error during execution
 
 ## Typical Workflow
@@ -153,7 +168,7 @@ Event types include:
 ```bash
 # 1. List available agents
 $ curl http://localhost:8080/api/agents
-[{"name":"my-agent","multi":false,"description":"A helpful assistant"}]
+[{"name":"my-agent","multi":false,"description":"A helpful assistant","commands":["deploy","review"]}]
 
 # 2. Create a session
 $ curl -X POST http://localhost:8080/api/sessions \
@@ -182,16 +197,23 @@ docker agent serve api <agent-file>|<agents-dir> [flags]
 | ------------------ | ---------------- | ------------------------------------------------ |
 | `-l, --listen`     | `127.0.0.1:8080` | Address to listen on                             |
 | `--auth-token`     | (none)           | Bearer token required for all API requests. Leave empty to disable authentication (safe when listening on loopback interfaces only). Recommended when `--listen` binds to a network-reachable interface. |
+| `--max-request-size <bytes>` | `1048576` (1 MiB) | Maximum request body size in bytes. Requests whose body exceeds this limit are rejected with HTTP 413 (Request Entity Too Large) — see [Troubleshooting: HTTP 413](../../community/troubleshooting/index.md#http-413-request-body-too-large) if you hit this. |
+| `--session-workingdir-root` | (none — unrestricted) | Confine the `working_dir` accepted by `POST /api/sessions` to this directory: after resolving symlinks, the requested directory must be the root or one of its descendants. By default any clean host directory is accepted — the intended behaviour for local single-user daemons that open arbitrary workspaces — but raw values containing `..` are always rejected. Set a root whenever the API serves callers that must not reach arbitrary host paths (multi-user or network-exposed deployments). |
 | `-s, --session-db` | `session.db`     | Path to the SQLite session database              |
 | `--pull-interval`  | `0` (disabled)   | Auto-pull OCI reference every N minutes          |
 | `--fake`           | (none)           | Replay AI responses from cassette file (testing) |
 | `--record`         | (none)           | Record AI API interactions to cassette file. Routes through `--models-gateway` when one is configured. |
-| `--mcp-oauth-redirect-uri` | (none)   | Public HTTPS URL advertised as the OAuth `redirect_uri` for unmanaged MCP OAuth flows. When set, docker-agent drives PKCE and code exchange in-process and sends the full authorize URL to the client via elicitation. See [Remote MCP](../remote-mcp/index.md) for details. |
+| `--mcp-oauth-redirect-uri` | (none)   | Public HTTPS URL advertised as the OAuth `redirect_uri` for unmanaged MCP OAuth flows. When set, Docker Agent drives PKCE and code exchange in-process and sends the full authorize URL to the client via elicitation. See [Remote MCP](../remote-mcp/index.md) for details. |
+
+> [!NOTE]
+> **What `--max-request-size` does and doesn't cover**
+>
+> This is a finite, process-wide cap on one serialized inbound HTTP request body — it isn't a model context-window limit, and raising it doesn't increase what a provider/model accepts or how large a local attachment/prompt file can be. A larger cap also means the server buffers more memory per request from an unauthenticated or malicious client, so weigh that against your deployment's exposure. If a reverse proxy or gateway sits in front of this server, it may enforce its own, lower cap regardless of this flag. See [Troubleshooting: HTTP 413](../../community/troubleshooting/index.md#http-413-request-body-too-large) for full diagnosis.
 
 > [!TIP]
 > **Live profiling (advanced)**
 >
-> For production diagnostics, set the `CAGENT_PPROF_ADDR` environment variable (or the hidden `--pprof-addr` flag) to a TCP address such as `127.0.0.1:6060`. docker-agent will start a Go pprof HTTP server at `/debug/pprof/`, which you can query with `go tool pprof`. Use a loopback address — a non-loopback binding logs a security warning. This flag is intentionally hidden from `--help`.
+> For production diagnostics, set the `CAGENT_PPROF_ADDR` environment variable (or the hidden `--pprof-addr` flag) to a TCP address such as `127.0.0.1:6060`. Docker Agent will start a Go pprof HTTP server at `/debug/pprof/`, which you can query with `go tool pprof`. Use a loopback address — a non-loopback binding logs a security warning. This flag is intentionally hidden from `--help`.
 
 > [!TIP]
 > **Multi-agent configs**
@@ -249,6 +271,11 @@ $ curl -X POST http://127.0.0.1:8080/api/sessions/$SID/followup \
 >
 > Each run started with `--listen` writes a discovery record to `<data-dir>/runs/<pid>.json` containing its address and session id, so a supervising process can find a live run by session id, pid, or address.
 
+> [!WARNING]
+> **This control plane has a fixed 1 MiB request-body cap and no built-in authentication**
+>
+> Unlike the standalone `docker agent serve api` process above, an attached run's `--listen` control plane exposes neither `--max-request-size` nor `--auth-token`: every request is capped at a fixed, non-configurable 1 MiB body (returning HTTP 413 above it — see [Troubleshooting: HTTP 413](../../community/troubleshooting/index.md#http-413-request-body-too-large)), and there is no bearer token to require. If you need a configurable cap, built-in bearer auth, or a network-reachable listener, run a standalone `docker agent serve api` deployment instead. Otherwise, keep `--listen` on loopback, a unix socket, or behind an authenticating reverse proxy.
+
 ## Session event stream and reconnection
 
 `GET /api/sessions/:id/events` is a **Server-Sent Events** stream of the
@@ -257,7 +284,16 @@ session's runtime events — `stream_started`, `agent_choice`, `tool_call`,
 per-request stream returned by the agent-execution endpoint, it is
 session-scoped and survives across turns, so a client can watch a session for
 its whole lifetime. It is available for a run attached via
-[`--listen`](#listen).
+[`--listen`](#listen), and — since a session-scoped event log is created on
+demand the first time a session raises an out-of-band event, such as an
+`elicitation_request` from a background job — for any API-created session
+that has produced at least one (see the
+[Sessions endpoint table](#sessions) above). The two kinds of log differ in
+coverage: a `--listen` run feeds its full runtime event stream into the log,
+while an on-demand log for an API-created session carries the session's
+out-of-band events — not necessarily all ordinary turn events, which flow on
+the per-request SSE stream of the [agent-execution](#agent-execution)
+request that runs the turn.
 
 Each event carries a monotonic **sequence number** in the SSE `id:` field, and
 the server buffers recent events. This makes the stream resumable:

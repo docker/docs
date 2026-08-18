@@ -3,6 +3,11 @@ synopsis: Remove a network rule
 description: |-
     Remove a network rule by rule ID, resource, or both.
 
+    --id takes the RULE_ID value shown by "sbx policy ls --wide" and
+    "sbx policy inspect" — the rule's identifier, not its name. Passing a rule
+    name fails with an error that names the actual rule ID and, for removable
+    rules, the exact corrected command.
+
     The rule is removed from the global policy by default. Use --sandbox to
     remove from policy "local" scoped to a single sandbox instead.
 

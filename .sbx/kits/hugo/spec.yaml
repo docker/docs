@@ -1,0 +1,52 @@
+schemaVersion: "2"
+kind: mixin
+name: hugo
+displayName: Hugo
+description: Installs the Hugo Extended static site generator from a pinned GitHub release.
+
+permissions:
+  network:
+    allow:
+      # Release tarball download (install time, one-shot).
+      # github.com 302-redirects to release-assets.githubusercontent.com for binary downloads.
+      - github.com
+      - release-assets.githubusercontent.com
+
+setup:
+  install:
+    - command: |
+        set -euo pipefail
+        # Keep in sync with ARG HUGO_VERSION in this repo's Dockerfile.
+        HUGO_VERSION=0.163.0
+        ARCH=$(dpkg --print-architecture)
+        case "$ARCH" in
+          amd64)
+            TARBALL="hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz"
+            SHA256="6291775b7d012f9b10fb377ba914e5b1589c0b0d2531b695fa9029be14750111"
+            ;;
+          arm64)
+            TARBALL="hugo_extended_${HUGO_VERSION}_linux-arm64.tar.gz"
+            SHA256="ed50d3ec8c5b427013137e38718a5d398a90956ce9e3a8a3cb7ebf3fdd01072b"
+            ;;
+          *)
+            echo "unsupported arch: $ARCH" >&2
+            exit 1
+            ;;
+        esac
+        curl --proto '=https' --tlsv1.2 -fsSL \
+          -o /tmp/hugo.tgz \
+          "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${TARBALL}"
+        echo "${SHA256}  /tmp/hugo.tgz" | sha256sum -c -
+        tar -C /usr/local/bin -xzf /tmp/hugo.tgz hugo
+        rm /tmp/hugo.tgz
+        hugo version
+      user: "0"
+      description: "Install pinned Hugo Extended CLI"
+
+agentInstructions:
+  content: |
+    ## Hugo static site generator
+
+    The `hugo` CLI (extended edition, v0.163.0) is installed and available on
+    `PATH`. This repository builds https://docs.docker.com/ with Hugo. Run
+    `hugo version` to confirm, and `hugo server` to preview the site locally.

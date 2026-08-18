@@ -13,12 +13,14 @@ _Give your agents access to document knowledge bases with background indexing, m
 
 ## Overview
 
-The `rag` toolset lets agents search through your documents to find relevant information before responding. Knowledge bases are declared once at the top of the config under `rag:` and then referenced from any agent via `type: rag, ref: <name>`. docker-agent supports:
+The `rag` toolset lets agents search through your documents to find relevant information before responding. Knowledge bases are declared once at the top of the config under `rag:` and then referenced from any agent via `type: rag, ref: <name>`. Docker Agent supports:
 
 - **Background indexing** — Files are indexed automatically and re-indexed on change
 - **Multiple strategies** — Semantic embeddings, BM25 keyword search, and LLM-enhanced search
 - **Hybrid search** — Combine strategies with result fusion for best results
 - **Reranking** — Re-score results with specialized models for improved relevance
+
+RAG is the strategy to reach for when a document collection is too large to inline directly, or gets queried repeatedly across turns/sessions — see [Choosing a Large-Input Strategy](../../guides/headless/index.md#choosing-a-large-input-strategy) for how it compares to `@`/`/attach` attachments and prompt files.
 
 ## Quick Start
 
@@ -182,7 +184,7 @@ $ docker agent run config.yaml --debug --log-file debug.log
 
 Look for log tags: `[RAG Manager]`, `[Chunked-Embeddings Strategy]`, `[BM25 Strategy]`, `[RRF Fusion]`, `[Reranker]`.
 
-**Permanent model errors abort early.** If the embedding model, semantic-LLM model, or reranking model returns a permanent error (HTTP 400, 401, 404, or 429 — invalid config, bad auth, unknown model, or rate limit), docker-agent treats the model configuration as invalid and stops immediately rather than retrying doomed requests:
+**Permanent model errors abort early.** If the embedding model, semantic-LLM model, or reranking model returns a permanent error (HTTP 400, 401, 404, or 429 — invalid config, bad auth, unknown model, or rate limit), Docker Agent treats the model configuration as invalid and stops immediately rather than retrying doomed requests:
 
 - **Indexing** — the entire indexing run is aborted after the first permanent failure (including 429). The error is surfaced in the logs so you know immediately if a model name or API key is wrong, rather than silently producing incomplete results.
 - **Reranking** — a permanent error (including 429) permanently disables the reranker for the lifetime of the manager. Subsequent queries fall back to un-reranked results. Only transient errors (5xx, timeouts) fall back and retry on the next query.

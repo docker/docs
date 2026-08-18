@@ -16,14 +16,7 @@ reference material for everyday development and operations tasks.
 - [Manuals](/manuals/): Install, configure, and use Docker products.
 - [Reference](/reference/): Browse CLI, API, and file format documentation.
 
-## Featured topics
-
-- [Docker Hardened Images](/dhi/)
-- [Get started with Docker Sandboxes](/ai/sandboxes/get-started/)
-- [Docker Desktop overview](/desktop/)
-- [Install Docker Engine](/engine/install/)
-- [Dockerfile reference](/reference/dockerfile/)
-- [Docker Build overview](/build/)
+{{< whats-new >}}
 
 ## Common questions
 

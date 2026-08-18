@@ -1,12 +1,12 @@
 ---
 title: "OpenAI"
-description: "Use GPT-5.6, GPT-4o, GPT-5, GPT-5-mini, and other OpenAI models with docker-agent."
+description: "Use GPT-5.6, GPT-4o, GPT-5, GPT-5-mini, and other OpenAI models with Docker Agent."
 keywords: docker agent, ai agents, model providers, llm, openai
 weight: 200
 canonical: https://docs.docker.com/ai/docker-agent/providers/openai/
 ---
 
-_Use GPT-5.6, GPT-4o, GPT-5, GPT-5-mini, and other OpenAI models with docker-agent._
+_Use GPT-5.6, GPT-4o, GPT-5, GPT-5-mini, and other OpenAI models with Docker Agent._
 
 ## Setup
 
@@ -86,7 +86,7 @@ Token counts, `adaptive`, and `adaptive/<effort>` are rejected with a configurat
 > [!WARNING]
 > **Hidden reasoning tokens**
 >
-> OpenAI reasoning models always produce hidden reasoning tokens that count against `max_tokens` — even with `thinking_budget: none` on older models. docker-agent automatically raises the output-token floor for its internal low-effort calls so reasoning cannot starve visible text output.
+> OpenAI reasoning models always produce hidden reasoning tokens that count against `max_tokens` — even with `thinking_budget: none` on older models. Docker Agent automatically raises the output-token floor for its internal low-effort calls so reasoning cannot starve visible text output.
 
 See the [Thinking / Reasoning guide](../../guides/thinking/index.md) for a cross-provider overview.
 

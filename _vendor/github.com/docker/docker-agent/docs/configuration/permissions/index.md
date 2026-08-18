@@ -15,7 +15,65 @@ Permissions provide fine-grained control over tool execution. You can configure 
 > [!NOTE]
 > **Evaluation Order**
 >
-> Permissions are evaluated in this order: **Deny → Allow → Ask**. Deny patterns take priority, then allow patterns, and anything else defaults to asking for user confirmation.
+> Permissions are evaluated in this order: **Deny → Allow → Ask**. Deny patterns take priority, then allow patterns, and anything else falls through to the session's [safety mode](#safety-modes).
+
+## Safety Modes
+
+Every session runs in a **safety mode** that decides what happens when no permission rule matched a tool call. The runtime labels each call `safe` (safe-listed shell command such as `ls` or `git status`, or a read-only-annotated tool), `destructive` (destructive shell command such as `rm -rf`, or a destructive-annotated tool), or `unknown` — and the mode gates on that label:
+
+| Mode | safe | destructive | unknown |
+| ---- | ---- | ----------- | ------- |
+| `strict` | ask | ask | ask |
+| `balanced` | **allow** | ask | ask |
+| `autonomous` | **allow** | **allow** | **allow** |
+
+- **`strict`** prompts for every tool call, read-only ones included. Only an `allow:` rule silences a prompt.
+- **`balanced`** runs safe calls silently and asks about everything else.
+- **`autonomous`** is the legacy `--yolo` behavior: everything runs. Only `deny:` rules, session-scoped `ask:` rules, and `preempt_yolo` hooks still gate.
+
+Pick a mode with the `--safety` flag (`docker-agent run --safety balanced ...`), the `safety_policy` field on session create (`POST /api/sessions`) or mid-session (`PATCH /api/sessions/:id/safety-policy`), or escalate directly from a confirmation prompt (`B` switches to balanced, `A` to autonomous). Sessions that never choose a mode keep the historical default: read-only tools auto-approve, everything else asks.
+
+### Declarative Safety Defaults
+
+Safety modes can also be declared as **defaults** in YAML, at four scopes:
+
+| Scope | Location | Owner |
+| ----- | -------- | ----- |
+| Alias | `aliases.<name>.safety` in `~/.config/cagent/config.yaml` (or `docker agent alias add ... --safety <mode>`) | User |
+| Global settings | `settings.safety` in `~/.config/cagent/config.yaml` | User |
+| Per-agent | `agents.<name>.safety` in the agent YAML | Agent author |
+| Config-wide | `runtime.safety` in the agent YAML | Agent author |
+
+```yaml
+# Agent YAML (author-declared defaults)
+runtime:
+  safety: balanced # config-wide default for new sessions
+
+agents:
+  root:
+    safety: strict # overrides runtime.safety for this agent
+```
+
+All four fields accept only the three canonical modes — `strict`, `balanced`, `autonomous` (yes, an author may declare `autonomous`) — and any other value fails loading with an error naming the field. The legacy spellings remain as aliases for `autonomous`: `settings.YOLO`, the alias `yolo` option, and the `--yolo` flag. When both are set at the same scope, `safety` wins over the legacy `YOLO`/`yolo`.
+
+For a **new** root session the first source in this order wins:
+
+1. explicit `--safety` flag
+2. explicit `--yolo` flag
+3. alias `safety`/`yolo` option
+4. `settings.safety`/`settings.YOLO` (user config)
+5. selected agent's `agents.<name>.safety`
+6. `runtime.safety`
+7. the historical default (read-only tools auto-approve, everything else asks)
+
+**Resuming a session never re-applies defaults**: the stored mode is kept unless you pass an explicit `--safety` or `--yolo` flag for that run. Agent switches, handoffs, and delegated sub-agent sessions inherit the active session's mode rather than resetting it.
+
+Sessions created through the API (`POST /api/sessions`) without a `safety_policy` receive the author-declared defaults (5–6) when their first run starts — the earliest point the agent configuration is loaded. If the server restarts before that first run, the session keeps the historical unset default (7).
+
+> [!WARNING]
+> **Trust: author defaults never outrank you.** `runtime.safety` and `agents.<name>.safety` are written by the agent's author — which may be a config you pulled from a URL or an OCI registry. They only fill the gap when you expressed no preference: any user-owned source (CLI flag, alias option, user settings) always takes precedence, and a resumed session keeps its stored mode. Still, an author default of `autonomous` means a fresh session runs every tool call unprompted — review third-party configs before running them, or pin your own floor with `settings.safety` / `--safety`.
+
+**Custom rules always win over the mode**, with one asymmetry: `ask:` rules written in an agent's YAML (or global config) are agent-author advisories and yield to a user-chosen `balanced`/`autonomous` mode, while `ask:` rules granted at the session level (interactive "always ask" decisions, the session permissions API) always prompt.
 
 ## Permission Levels
 
@@ -104,7 +162,7 @@ Permissions support glob-style patterns with optional argument matching:
 | -------------- | ------------------------------ |
 | `shell`        | Exact match for `shell` tool   |
 | `read_*`       | Any tool starting with `read_` |
-| `mcp:github:*` | Any GitHub MCP tool            |
+| `github_*`     | Any GitHub MCP tool            |
 | `*`            | All tools                      |
 
 ### Argument Matching
@@ -129,6 +187,12 @@ permissions:
     - "write_file:path=/etc/*"
     - "write_file:path=/usr/*"
 ```
+
+> [!NOTE]
+> **Colons inside argument values are preserved.** Only the `:key=` token boundaries between
+> argument conditions split a pattern — colons that appear inside a value are treated as
+> ordinary characters and do not start a new condition. Check a tool’s actual argument names
+> (and whether they accept a string or a list) before writing an argument-matching pattern.
 
 ### Multiple Argument Conditions
 
@@ -219,25 +283,27 @@ Control MCP tools by their qualified names:
 permissions:
   allow:
     # Allow all GitHub read operations
-    - "mcp:github:get_*"
-    - "mcp:github:list_*"
-    - "mcp:github:search_*"
+    - "github_get_*"
+    - "github_list_*"
+    - "github_search_*"
   deny:
     # Block destructive GitHub operations
-    - "mcp:github:delete_*"
-    - "mcp:github:close_*"
+    - "github_delete_*"
+    - "github_close_*"
 ```
 
 ## Combining with Hooks
 
 Permissions work alongside [hooks](../hooks/index.md). The evaluation order is:
 
-1. Check **deny** patterns — if matched, tool is blocked
-2. Check **allow** patterns — if matched, tool is auto-approved
-3. Run **pre_tool_use hooks** — hooks can allow, deny, or ask
-4. If no decision, **ask user** for confirmation
+1. Run **`preempt_yolo` pre_tool_use hooks** — security-critical checks that no mode or allow rule can bypass
+2. Check **deny** patterns — if matched, tool is blocked
+3. Check **allow** patterns — if matched, tool is auto-approved
+4. Apply the **[safety mode](#safety-modes)** to the call's safety label — may auto-approve
+5. Run **pre_tool_use hooks** — hooks can allow, deny, or ask
+6. If no decision, **ask user** for confirmation
 
-Hooks can override allow decisions but cannot override deny decisions.
+Default-lane hooks only see calls the rules and the mode routed to "ask"; they cannot override deny decisions.
 
 > [!WARNING]
 > **Security Note**

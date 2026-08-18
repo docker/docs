@@ -29,7 +29,7 @@ Hooks allow you to execute shell commands or scripts at key points in an agent's
 
 ## Hook Types
 
-docker-agent dispatches the following hook events:
+Docker Agent dispatches the following hook events:
 
 | Event                       | When it fires                                                                     | Can block? |
 | --------------------------- | --------------------------------------------------------------------------------- | ---------- |
@@ -158,7 +158,7 @@ Global hooks cannot be suppressed by an individual agent. Use them for user-wide
 
 ### Hook drop-in files (`hooks.d`)
 
-External tools that integrate with docker-agent (terminal emulators, IDEs, audit or observability sidecars) shouldn't have to rewrite your `config.yaml` to install a hook. Instead, docker-agent also loads every `*.yaml` / `*.yml` file from the `hooks.d` directory next to your user config (default: `~/.config/cagent/hooks.d/`). Each file is a standalone hooks block with the same schema as the content of `settings.hooks`:
+External tools that integrate with Docker Agent (terminal emulators, IDEs, audit or observability sidecars) shouldn't have to rewrite your `config.yaml` to install a hook. Instead, Docker Agent also loads every `*.yaml` / `*.yml` file from the `hooks.d` directory next to your user config (default: `~/.config/cagent/hooks.d/`). Each file is a standalone hooks block with the same schema as the content of `settings.hooks`:
 
 ```yaml
 # ~/.config/cagent/hooks.d/50-mytool.yaml
@@ -178,7 +178,7 @@ The config directory can be relocated with the `--config-dir` flag or the `DOCKE
 
 ## Built-in Hooks
 
-In addition to shell `command` hooks, docker-agent ships a small library of **built-in hooks** — in-process Go functions that run without spawning a subprocess. They're invoked with `type: builtin`, where `command` is the builtin's registered name and `args` are passed through as the builtin's parameters.
+In addition to shell `command` hooks, Docker Agent ships a small library of **built-in hooks** — in-process Go functions that run without spawning a subprocess. They're invoked with `type: builtin`, where `command` is the builtin's registered name and `args` are passed through as the builtin's parameters.
 
 ```yaml
 hooks:
@@ -214,10 +214,10 @@ Built-ins are typically zero-config and faster than equivalent shell hooks becau
 | `add_user_info`         | `session_start`                                                                           | _none_                | Adds the current OS user (username and full name) and the hostname.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `add_recent_commits`    | `session_start`                                                                           | _none_, or `["<N>"]`  | Adds `git log --oneline -n N`. `N` defaults to 10; pass a positive integer to override.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `max_iterations`        | `before_llm_call`                                                                         | `["<N>"]` (required)  | Hard-stops the agent after `N` model calls. Stateless: the runtime supplies the iteration counter on every dispatch.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `snapshot`              | `session_start`, `turn_start`, `turn_end`, `pre_tool_use`, `post_tool_use`, `session_end` | _none_                | Records filesystem snapshots in a shadow git repo under the docker-agent data directory. No-op outside git repos; respects the source repo's ignore rules and skips newly-added files larger than 2 MiB.                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `snapshot`              | `session_start`, `turn_start`, `turn_end`, `pre_tool_use`, `post_tool_use`, `session_end` | _none_                | Records filesystem snapshots in a shadow git repo under the Docker Agent data directory. No-op outside git repos; respects the source repo's ignore rules and skips newly-added files larger than 2 MiB.                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `redact_secrets`        | `pre_tool_use`, `before_llm_call`, `tool_response_transform`                              | _none_                | Scrubs detected secrets (API keys, tokens, private keys, …) out of tool call arguments, outgoing chat content, and tool output. The same builtin handles all three events and dispatches on the event name. Auto-registered on all three events by `redact_secrets: true` on the agent — see [`examples/redact_secrets_hooks.yaml`](https://github.com/docker/docker-agent/blob/main/examples/redact_secrets_hooks.yaml) for the manual wiring.                                                                                                                                                                                     |
-| `limit_large_tool_results` | `tool_response_transform`, `session_end`                                               | _none_                | **Always-on safety hook** — automatically injected by the runtime, no configuration required. When a tool result from the `filesystem`, `shell`, `mcp`, or `a2a` categories exceeds 2,000 lines or 50 KiB, the full payload is written to a per-session temp file and replaced in the conversation with a notice plus a bounded tail (last 2,000 lines, up to 50 KiB). The `session_end` leg deletes the temp directory. Internal toolsets (`memory`, `plan`, `tasks`, `think`, …) are not affected. |
-| `safer_shell`           | `pre_tool_use` (with `preempt_yolo: true`)                                                | `["<policy>"]` (optional pin) | Classifies shell commands against an embedded taxonomy. Verdict adapts to the session's `SafetyPolicy`. `unsafe`: silent. `safer`: destructive matches Ask with `blast_radius`/`category` metadata; safe and unknown flow through silently. `safe-auto`: safe matches auto-Allow with `blast_radius=safe`; destructive and unknown Ask. `strict` (default): safe, destructive, and unknown all Ask with `blast_radius` metadata (safe/low/medium/high/unknown). Filters by tool name internally (no-op for non-shell calls). Auto-registered by `safer: true` on a shell toolset — see [`examples/shell_safer.yaml`](https://github.com/docker/docker-agent/blob/main/examples/shell_safer.yaml). |
+| `limit_large_tool_results` | `tool_response_transform`, `session_end`                                               | _none_                | **Always-on safety hook** — automatically injected by the runtime, no configuration required. When a tool result from the `filesystem`, `shell`, `mcp`, or `a2a` categories exceeds 2,000 lines or 50 KiB, the full payload is written to a per-session temp file and replaced in the conversation with a notice plus a bounded excerpt (2,000 lines, up to 50 KiB): the tail for most tools, but the head for the built-in filesystem `read_file`, whose notice suggests a follow-up call with `line`/`limit` to continue reading. The `session_end` leg deletes the temp directory. Internal toolsets (`memory`, `plan`, `tasks`, `think`, …) are not affected. |
+| `safer_shell`           | `pre_tool_use`                                                                            | _none_                | **Deprecated compatibility shim.** The runtime now classifies every shell command natively (`safe` / `destructive` / `unknown`) and gates it through the session's [safety mode](../permissions/index.md#safety-modes), so this builtin no longer emits verdicts. Pinned entries keep working as pure labellers that attach classification metadata (`safety_label`, `blast_radius`, `category`, `reason`) to the call. Filters by tool name internally (no-op for non-shell calls). |
 | `unload`                | `on_agent_switch`                                                                         | _none_                | POSTs `{"model": "<id>"}` to each of the previous agent's DMR model endpoints (`/_unload` by default, overridable per-model via `unload_api`) to free the GPU/RAM the just-departing model was holding. Pure HTTP — reads the model snapshot the runtime ships on `on_agent_switch` and depends on no provider-specific runtime state. Non-DMR providers (OpenAI, Anthropic, …) are silently skipped, so cross-provider chains are safe. Errors are logged and swallowed; agent switching never blocks on a slow or unreachable engine (each call has a 10 s timeout). See [`examples/unload_on_switch.yaml`](https://github.com/docker/docker-agent/blob/main/examples/unload_on_switch.yaml). |
 
 > [!NOTE]
@@ -397,13 +397,13 @@ The `hook_specific_output` for `pre_tool_use` (and `permission_request`) support
 | `updated_input`              | object | Modified tool input (replaces original) |
 | `metadata`                   | object | (`permission_request` and `pre_tool_use` entries with `preempt_yolo: true` only) string key/value annotations merged onto the tool-call confirmation prompt — see below |
 
-### Preempting `--yolo` from `pre_tool_use`
+### Preempting auto-approval from `pre_tool_use`
 
 `pre_tool_use` entries default to firing AFTER the deterministic approval
-pipeline (`--yolo` / permission allow-rules / read-only hint), so a yolo'd
-call skips them entirely. For security-critical checks that MUST run on
-every call regardless of `--yolo`, set `preempt_yolo: true` on the matcher
-entry:
+pipeline (custom allow rules / safety mode), so an auto-approved call
+skips them entirely. For security-critical checks that MUST run on every
+call regardless of the safety mode (including `autonomous`, the legacy
+`--yolo`), set `preempt_yolo: true` on the matcher entry:
 
 ```yaml
 hooks:
@@ -411,8 +411,8 @@ hooks:
     - matcher: "*"
       preempt_yolo: true
       hooks:
-        - type: builtin
-          command: safer_shell
+        - type: command
+          command: ./security-check.sh
 ```
 
 The entry then fires in a dedicated stage 0 BEFORE `Decide()`:
@@ -420,7 +420,10 @@ The entry then fires in a dedicated stage 0 BEFORE `Decide()`:
 - `deny` rejects the call outright; the user is not prompted.
 - `ask` forces user confirmation. The default `pre_tool_use` lane and
   `permission_request` are skipped on this path so a policy-level
-  allow there can't override the security verdict.
+  allow there can't override the security verdict. The one exception
+  is a session-scoped allow grant (the interactive "always allow this
+  tool" decision) — an informed user opt-in made in response to this
+  very prompt.
 - `allow` is advisory — the pipeline still runs `Decide()` and the
   rest of `pre_tool_use`. Same shape as a regular `allow` on the
   default lane, just observed earlier.
@@ -431,16 +434,21 @@ the default `pre_tool_use` posture.
 
 Preempting entries can attach structured context via
 `hook_specific_output.metadata` (`map[string]string`). The runtime merges
-that into the tool-call confirmation event. Two key conventions get
-special rendering in the TUI confirmation prompt:
+that into the tool-call confirmation event, on top of the metadata it
+already derives from its own safety classification (`safety_label`,
+`blast_radius`, `category`, `reason`). Key conventions with special
+rendering in the TUI confirmation prompt:
 
-- `blast_radius` — one of `low`, `medium`, `high`, `unknown`. Rendered
-  as a colored severity badge (green / yellow / red / muted).
+- `safety_label` — the three-value taxonomy: `safe`, `destructive`, or
+  `unknown`.
+- `blast_radius` — one of `safe`, `low`, `medium`, `high`, `unknown`.
+  Rendered as a colored severity badge (green / yellow / red / muted).
 - `category` — taxonomy tag (e.g. `fs-delete`, `dk-volume-del`).
 
 Plus a free-form `reason` key that the dialog shows as supporting
 context. Other keys render as plain text. Last writer wins on key
-clashes across hooks. The `safer_shell` builtin uses this convention.
+clashes across hooks, and preempting entries win over the runtime's own
+classification.
 
 ### Tool-Response-Transform Specific Output
 
@@ -719,7 +727,7 @@ At every transfer the runtime ships a snapshot of the previous agent's model end
 
 `worktree_create` fires once, just after `docker agent run --worktree[=name]` creates a fresh [git worktree](../../features/cli/index.md) and **before** the session starts. Each hook runs **inside** the new worktree — its working directory (and `cwd` in the input) is the fresh checkout — so setup commands operate on the new tree rather than your original one. The worktree path and branch are in `worktree_path` and `worktree_branch`, and `worktree_source_dir` carries the repository root it was branched from.
 
-Use it to prepare the checkout before the agent begins: copy untracked files git won't carry over (`.env`, local config), install dependencies, or warm caches. Because the worktree lives under the docker-agent data directory — not next to your checkout — resolve the original files through `worktree_source_dir` rather than a relative path. A hook may **abort the run** by returning `decision: block` / `{"continue": false}` / exit code 2 (for example, when a setup step fails); plain stdout is surfaced as additional context.
+Use it to prepare the checkout before the agent begins: copy untracked files git won't carry over (`.env`, local config), install dependencies, or warm caches. Because the worktree lives under the Docker Agent data directory — not next to your checkout — resolve the original files through `worktree_source_dir` rather than a relative path. A hook may **abort the run** by returning `decision: block` / `{"continue": false}` / exit code 2 (for example, when a setup step fails); plain stdout is surfaced as additional context.
 
 ```yaml
 hooks:
@@ -815,7 +823,7 @@ hooks:
 
 ### Permission-Request: programmatic tool approval
 
-`permission_request` fires just before the runtime would prompt the user to approve a tool call (i.e. when neither `--yolo` nor a permissions rule short-circuited the decision and the tool is not read-only). Use the same `hook_specific_output.permission_decision` shape as `pre_tool_use` to auto-approve or auto-deny the call:
+`permission_request` fires just before the runtime would prompt the user to approve a tool call (i.e. when neither the safety mode nor a permissions rule short-circuited the decision). Use the same `hook_specific_output.permission_decision` shape as `pre_tool_use` to auto-approve or auto-deny the call:
 
 ```yaml
 hooks:
@@ -934,7 +942,7 @@ $ docker agent run agent.yaml \
   --hook-post-tool-use "./scripts/log.sh"
 
 # Add hooks to an agent from a registry
-$ docker agent run agentcatalog/coder \
+$ docker agent run myorg/coder \
   --hook-pre-tool-use "./audit.sh"
 ```
 

@@ -8,7 +8,7 @@ description: Invite and manage organization members in Docker Home. Assign
 keywords: members, invite members, organization members, Docker Home, Docker
   Hub, export member list, edit roles, manage invitations, CSV invite, bulk
   invite, resend invitation, remove member, accept invitation, teams, pending
-  invitations, organization owner
+  invitations, organization owner, licenses
 aliases:
   - /docker-hub/members/
   - /admin/organization/members/
@@ -26,6 +26,11 @@ invitations occupy a seat.
 When you invite members, you assign them a role. See
 [Roles and permissions][roles-permissions] for details about the access
 permissions for each role.
+
+You can also select one or more product licenses for an invitee. Docker
+assigns available licenses when they accept. Unlike a seat, licenses aren't
+deducted from your organization's available licenses until the invitee
+accepts. See [Licenses and invites][licenses-and-invites].
 
 {{< tabs >}}
 {{< tab name="Email or username" >}}
@@ -80,13 +85,12 @@ permissions for each role.
 You can also bulk invite members with the Docker Hub API. For more
 information, see the [Bulk create invites][bulk-invites] API endpoint.
 
-Pending invitations appear in the Members table. Invitees receive an email
-with a link to Docker Hub to accept or decline.
+Pending invitations appear in the Members table. Invitees can accept or
+decline from the invitation email or the **Notifications Center**.
 
 ## Accept an invitation
 
-After you receive an email invitation, open the link to Docker Hub to accept
-or decline it.
+To accept from the invitation email:
 
 1. Open the Docker invitation email and select the link to Docker Hub.
 1. The Docker account creation page opens. If you already have an account,
@@ -98,11 +102,17 @@ or decline it.
    navigation menu.
 1. Select **Accept** on your invitation.
 
+To accept from the **Notifications Center**:
+
+1. Sign in to [Docker Hub](https://hub.docker.com/) or
+   [Docker Home](https://app.docker.com/).
+1. Open the **Notifications Center** in the header.
+1. Select **Accept** on the invitation.
+
 After you accept the invitation, you are a member of the organization.
 
-Invitation email links expire after 14 days. If your link has expired, sign in
-to [Docker Hub](https://hub.docker.com/) with the email address the invitation
-was sent to, then accept the invitation from the **Notifications** panel.
+Invitation email links expire after 14 days. If your link has expired, you
+can still accept from the **Notifications Center**.
 
 ## Manage invitations
 
@@ -246,6 +256,7 @@ After you invite and manage members, explore these related topics:
   management
 
 [roles-permissions]: /manuals/enterprise/security/roles-and-permissions/_index.md
+[licenses-and-invites]: /manuals/admin/organization/manage/manage-licenses.md#licenses-and-invites
 [bulk-invites]: /reference/api/hub/latest/#tag/invites/paths/~1v2~1invites~1bulk/post
 [docker-pricing]: https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminMembers
 [scim-role-mapping]: /manuals/enterprise/security/provisioning/scim/_index.md

@@ -32,7 +32,7 @@ area/tests:
   - changed-files:
       - any-glob-to-any-file:
           - .htmltest.yml
-          - .markdownlint.json
+          - .rumdl.toml
           - .vale.ini
           - _vale/**
           - hack/test/*

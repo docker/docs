@@ -108,9 +108,8 @@ Use contractions ("it's", "you're", "don't").
 ## Step 5: Validate
 
 1. Confirm frontmatter has `title`, `description`, `keywords`, and `params.tags` including `labs`.
-2. Run `npx prettier --write <file>` to format.
+2. Run `npx --no-install rumdl fmt <file>` to format.
 3. Run `docker buildx bake lint vale` and fix any errors.
 4. Re-read the file and verify: correct shortcode syntax, objectives match source content, modules match `labspace.yaml`, no vendored paths edited.
 
 Do not proceed to commit until validation passes.
-

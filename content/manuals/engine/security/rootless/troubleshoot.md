@@ -82,6 +82,11 @@ weight: 30
 - Port forwarding with `docker run -p` does not propagate source IP addresses by default.
   See [`docker run -p` does not propagate source IP addresses](#docker-run--p-does-not-propagate-source-ip-addresses) to enable source IP propagation.
 - NFS mounts as the docker "data-root" is not supported. This limitation is not specific to rootless mode.
+- Capabilities added with `--cap-add` apply only to resources governed by the
+  container's user namespace. They don't grant privileges over host or other
+  global resources. As a result, operations that require capabilities in the
+  [initial user namespace](https://man7.org/linux/man-pages/man7/user_namespaces.7.html)
+  can still fail.
 
 ### Historical limitations
 

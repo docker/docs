@@ -76,6 +76,13 @@ A `session_plan_updated` event is emitted whenever `write_session_plan` succeeds
 
 Embedders that render the plan inline can subscribe and update without re-reading the file.
 
+## Managing session plans from the host
+
+A session plan belongs to its session: hosts can read and export it, never change it.
+
+- **CLI** — the [`docker agent plans`](../../features/cli/index.md#docker-agent-plans) command group lists, reads (`get --session <session-id>`), and exports session plans alongside shared plans. Mutations (`update`, `status`, `delete`) are refused with an `unsupported` error explaining the ownership rule.
+- **TUI** — the `/plans` browser (see the [plan toolset docs](../plan/index.md#the-plans-browser-in-the-tui) for the full keybinding table) includes the **current session's** plan as the `session` scope row; plans of other sessions are never enumerated. Its identity is the session ID and its version column shows `-` — session plans have no versions. <kbd>Enter</kbd> opens the detail view (scope, session ID, update time, scrollable markdown) and <kbd>x</kbd> exports to `session-plan-<short-id>.md` in the working directory (refusing to overwrite an existing file). <kbd>e</kbd> opens the plan body in your external editor (`$VISUAL` or `$EDITOR`) for editing — the write is unguarded and last-write-wins by design. Status and delete visibly report that session plans don't support them (session plans belong to their session and carry no shared-plan metadata). The browser refreshes live on the `session_plan_updated` event, so a plan the agent just wrote appears without reopening.
+
 ## Example
 
 A two-agent workflow: `root` executes, `planner` plans. `/plan` hands off to the planner; `exit_plan_mode` signals "ready", and the host decides what happens next.

@@ -37,7 +37,7 @@ your Factory account.
 [stored secrets](../security/credentials.md#stored-secrets):
 
 ```console
-$ sbx secret set -g droid
+$ sbx secret set droid
 ```
 
 **OAuth**: If no API key is set, Droid prompts you to authenticate

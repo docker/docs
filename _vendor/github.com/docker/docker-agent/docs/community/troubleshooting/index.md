@@ -1,12 +1,12 @@
 ---
 title: "Troubleshooting"
-description: "Common issues and how to resolve them when working with docker-agent."
+description: "Common issues and how to resolve them when working with Docker Agent."
 keywords: docker agent, ai agents, community, troubleshooting
 weight: 20
 canonical: https://docs.docker.com/ai/docker-agent/community/troubleshooting/
 ---
 
-_Common issues and how to resolve them when working with docker-agent._
+_Common issues and how to resolve them when working with Docker Agent._
 
 ## Common Errors
 
@@ -29,7 +29,7 @@ The agent hit its `max_iterations` limit without completing the task.
 
 ### Model Fallback Triggered
 
-When the primary model fails, docker-agent automatically switches to fallback models. Look for log messages like `"Switching to fallback model"`.
+When the primary model fails, Docker Agent automatically switches to fallback models. Look for log messages like `"Switching to fallback model"`.
 
 - **429 errors:** Rate limited — the cooldown period keeps using the fallback
 - **5xx errors:** Server issues — retries with exponential backoff first, then falls back
@@ -49,7 +49,7 @@ agents:
 
 ## Missing credentials or model errors
 
-When docker-agent can't find a usable model at startup, it fails fast with an actionable error. The message names the exact next step. `docker agent doctor` is the fastest way to see the full picture — which providers have credentials, whether Docker Model Runner is reachable, and which model `auto` would pick.
+When Docker Agent can't find a usable model at startup, it fails fast with an actionable error. The message names the exact next step. `docker agent doctor` is the fastest way to see the full picture — which providers have credentials, whether Docker Model Runner is reachable, and which model `auto` would pick.
 
 ### Required environment variables not set
 
@@ -60,10 +60,9 @@ The following environment variables must be set:
  - ANTHROPIC_API_KEY
 
 Provide them using any of these sources:
- - Shell environment:  export ANTHROPIC_API_KEY=<value>
- - Env file:           docker agent run --env-from-file <file> ...
- - pass:               pass insert ANTHROPIC_API_KEY
- - macOS Keychain:     security add-generic-password -a "$USER" -s ANTHROPIC_API_KEY -w
+ - Shell environment:      export ANTHROPIC_API_KEY=<value>
+ - Env file:               docker agent run --env-from-file <file> ...
+ - Docker Agent env file:  docker agent setup (stores the key in ~/.config/cagent/.env)
 
 See https://docs.docker.com/ai/docker-agent/guides/secrets/ for details.
 ```
@@ -109,7 +108,7 @@ If instead you see `cannot query Docker Model Runner at <url>`, Docker Model Run
 
 ## Debug Mode
 
-The first step for any issue is enabling debug logging. This provides detailed information about what docker-agent is doing internally.
+The first step for any issue is enabling debug logging. This provides detailed information about what Docker Agent is doing internally.
 
 ```bash
 # Enable debug logging (writes to ~/.cagent/cagent.debug.log)
@@ -168,7 +167,7 @@ If the agent hangs or times out, check that you can reach the provider's API end
 
 - Ensure the MCP tool command is installed and on your `PATH`
 - Check file permissions — tools need to be executable
-- Test MCP tools independently before integrating with docker-agent
+- Test MCP tools independently before integrating with Docker Agent
 - For Docker-based MCP tools (`ref: docker:*`), ensure Docker Desktop is running
 
 ### Filesystem / shell tool errors
@@ -184,7 +183,7 @@ MCP and LSP toolsets are managed by a supervisor that auto-restarts them when th
 - `/tools` — the unified tools dialog. Its top section lists every toolset with its current state (`Stopped`, `Starting`, `Ready`, `Degraded`, `Restarting`, `Failed`), restart count, and last error; the bottom section lists every tool the agent can call. Start here whenever a tool seems missing or stuck.
 - `/toolset-restart <name>` — force a supervisor-driven reconnect of the named toolset. Useful after completing OAuth, when a remote MCP server has been redeployed, or when a language server like `gopls` is unresponsive.
 
-Remote MCP servers that return `401 invalid_token` (e.g. because the stored OAuth token was revoked or rotated) are now self-healing: docker-agent silently exchanges the refresh token for a new one when possible, or surfaces an OAuth re-authentication prompt on your next message when refresh is not possible. No more stuck toolsets that require a process restart — but if you want to trigger re-auth immediately, `/toolset-restart <name>` forces it right away.
+Remote MCP servers that return `401 invalid_token` (e.g. because the stored OAuth token was revoked or rotated) are now self-healing: Docker Agent silently exchanges the refresh token for a new one when possible, or surfaces an OAuth re-authentication prompt on your next message when refresh is not possible. No more stuck toolsets that require a process restart — but if you want to trigger re-auth immediately, `/toolset-restart <name>` forces it right away.
 
 MCP tools using stdio transport must complete the initialization handshake before becoming available. If tools fail silently:
 
@@ -196,7 +195,7 @@ MCP tools using stdio transport must complete the initialization handshake befor
 > [!NOTE]
 > **Startup tool-listing timeout**
 >
-> At startup, docker-agent queries each toolset for its tool list. If a toolset does not respond within 10 seconds (e.g. a wedged MCP stdio server that never answers `tools/list`), that toolset is skipped with a warning and the remaining toolsets load normally. The sidebar resolves showing whichever tools did load — no infinite spinner. Enable `--debug` to see the warning message, and use `/toolset-restart <name>` once the server becomes responsive.
+> At startup, Docker Agent queries each toolset for its tool list. If a toolset does not respond within 10 seconds (e.g. a wedged MCP stdio server that never answers `tools/list`), that toolset is skipped with a warning and the remaining toolsets load normally. The sidebar resolves showing whichever tools did load — no infinite spinner. Enable `--debug` to see the warning message, and use `/toolset-restart <name>` once the server becomes responsive.
 
 If a toolset keeps crashing in a tight loop, tune the [`lifecycle`](../../configuration/tools/index.md#toolset-lifecycle) block on the toolset (e.g. raise `backoff.initial`, lower `max_restarts`, or switch to the `best-effort` profile) so a flaky dependency does not amplify into a restart storm.
 
@@ -204,7 +203,7 @@ If a toolset keeps crashing in a tight loop, tune the [`lifecycle`](../../config
 
 ### YAML syntax issues
 
-docker-agent validates config at startup and reports errors with line numbers. Common problems:
+Docker Agent validates config at startup and reports errors with line numbers. Common problems:
 
 - Incorrect indentation (YAML is whitespace-sensitive)
 - Missing quotes around values containing special characters (`:`, `#`, `{`, `}`)
@@ -212,7 +211,7 @@ docker-agent validates config at startup and reports errors with line numbers. C
 
 ### Missing references
 
-- Local agents in `sub_agents` must be defined in the `agents` section (external OCI references like `agentcatalog/pirate` are resolved from registries automatically)
+- Local agents in `sub_agents` must be defined in the `agents` section (external OCI references like `myorg/agent:tag` are resolved from registries automatically)
 - Named model references must exist in the `models` section (or use inline format like `openai/gpt-5`)
 - RAG source names referenced by agents must be defined in the `rag` section
 
@@ -231,7 +230,7 @@ docker-agent validates config at startup and reports errors with line numbers. C
 
 ### Port conflicts
 
-When running docker-agent as an API server or MCP server, ensure the port is not already in use:
+When running Docker Agent as an API server or MCP server, ensure the port is not already in use:
 
 ```bash
 # Check if port 8080 is in use
@@ -257,6 +256,27 @@ The API server stores every conversation as a distinct session in the SQLite dat
 - Make sure each client creates a fresh session via `POST /api/sessions` (don't reuse session IDs across users).
 - Confirm `--session-db` points to the path you expect — a stale database from another run can resurface old sessions.
 - Use `GET /api/sessions/:id` to inspect what is actually stored, and `DELETE /api/sessions/:id` to clear sessions you don't want anymore.
+
+### HTTP 413: request body too large
+
+Three kinds of process reject an oversized request body with `413 Request Entity Too Large`: `docker agent serve api`, `docker agent serve chat`, and an interactive run's control plane ([`docker agent run --listen`](../../features/api-server/index.md#listen)). They aren't configured the same way: `serve api` and `serve chat` each expose their own `--max-request-size` flag (1 MiB default). A `--listen` control plane has no such flag — it enforces a fixed, non-configurable 1 MiB limit — and no `--auth-token` either. Work through these layers in order:
+
+1. **Identify which server is involved.** `serve api`, `serve chat`, and an attached run's `--listen` control plane are three separate kinds of process. `serve api` and `serve chat` each have their own `--max-request-size` flag and 1 MiB default — check the flags the process that returned the 413 was actually started with. A `--listen` control plane has no `--max-request-size` flag: its 1 MiB cap is fixed.
+2. **Measure the serialized request body, not a source file's size.** JSON string escaping and, for any base64-encoded binary content, base64's ~33% expansion both inflate the wire size well past the original file size — a file just under the limit can still push the encoded request over it.
+3. **Rule out an intermediary.** If a reverse proxy, gateway, or load balancer sits in front of Docker Agent, it usually enforces its own, independent body-size limit — often with a differently formatted error — and can reject the request before Docker Agent ever sees it.
+4. **Confirm who actually returned the error.** A 413 (or a context-length error) can also come from the model provider itself once the request reaches it; that is a separate limit unrelated to `--max-request-size` — see [Context Window Exceeded](#context-window-exceeded) above.
+5. **Resolve it.** Once you've confirmed Docker Agent's own server rejected the request, send less content — split it across turns. On `serve api` or `serve chat` you can also restart the server with a deliberately chosen, larger `--max-request-size` (see [API Server](../../features/api-server/index.md#cli-flags) or [Chat Server](../../features/chat-server/index.md#cli-flags)). A `--listen` control plane has no `--max-request-size` flag to raise — sending less content is the only fix.
+
+A few things that catch people out:
+
+- `--max-request-size` is set once at process startup and applies to every request that server handles — it isn't per-request or per-client. Only `serve api` and `serve chat` have it; a `--listen` control plane's 1 MiB cap can't be changed.
+- `0` or a negative value falls back to the 1 MiB default; it does not mean "no limit".
+- Retrying the same oversized body against the same server won't succeed — the limit doesn't change between requests.
+- On all three, the body-size check runs ahead of request authentication, so an oversized request can come back as 413 even without valid credentials.
+- Piping stdin into a **local** run (`docker agent run agent.yaml -`) never crosses Docker Agent's own inbound HTTP boundary — Docker Agent may still send that content onward to a model/provider over HTTP, but no request reaches Docker Agent's own server to be measured against a `--max-request-size` cap. Piping stdin into `docker agent run --remote ... -`, however, does cross that boundary: the CLI serializes that stdin text into a native API run request and sends it to whichever Docker Agent server the `--remote` address points at — a `serve api` process or another run's `--listen` control plane, never `serve chat`, which speaks a different protocol — so it's measured against that server's own limit like any other request (a configurable `--max-request-size` for `serve api`, or the fixed 1 MiB cap for a `--listen` control plane). That initial request carries only message text — conversion currently drops any attachment resolved locally (`@path`, `/attach`, `--attach`) for the first message, so it alone can't be the cause of a 413. But a `--remote` run doesn't stay text-only for its whole lifetime: a locally resolved attachment added to a *later* message while the agent is still busy — via the default steer behavior or an explicit follow-up (Alt+Enter) — is forwarded as part of that native API request, counts toward the same limit, and can trigger 413 just like any other oversized request.
+
+> [!WARNING]
+> Raising `--max-request-size` increases how much memory an unauthenticated or malicious client can force the server to buffer per request. Pick a value with your deployment's exposure in mind, and pair any non-loopback listener with `--auth-token` (API server) or `--api-key`/`--api-key-env` (chat server). A `--listen` control plane has neither flag — keep it on loopback, a unix socket, or behind an authenticating reverse proxy if it must be reachable from elsewhere.
 
 ## Performance Issues
 

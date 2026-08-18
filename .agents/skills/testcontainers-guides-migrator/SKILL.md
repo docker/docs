@@ -350,8 +350,8 @@ If any test fails, debug and fix the code in both the temporary project AND the 
 
 **IMPORTANT**: Run ALL validation locally before committing. Vale checks run on CI and will block the PR if they fail — fixing after push wastes CI cycles and review time.
 
-1. `npx prettier --write content/guides/testcontainers-{LANG}-{GUIDE_ID}/`
-2. `npx prettier --write content/manuals/testcontainers.md`
+1. `npx --no-install rumdl fmt content/guides/testcontainers-{LANG}-{GUIDE_ID}/`
+2. `npx --no-install rumdl fmt content/manuals/testcontainers.md`
 3. `docker buildx bake lint` — must pass with no errors
 4. `docker buildx bake vale` — then check for errors in the new files:
    ```bash

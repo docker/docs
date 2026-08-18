@@ -1,12 +1,12 @@
 ---
 title: "Chat Server"
-description: "Expose your agents through an OpenAI-compatible Chat Completions API so any tool that already speaks OpenAI can drive a docker-agent agent."
+description: "Expose your agents through an OpenAI-compatible Chat Completions API so any tool that already speaks OpenAI can drive a Docker Agent agent."
 keywords: docker agent, ai agents, features, chat server
 weight: 90
 canonical: https://docs.docker.com/ai/docker-agent/features/chat-server/
 ---
 
-_Expose your agents through an OpenAI-compatible Chat Completions API so any tool that already speaks OpenAI can drive a docker-agent agent._
+_Expose your agents through an OpenAI-compatible Chat Completions API so any tool that already speaks OpenAI can drive a Docker Agent agent._
 
 ## Overview
 
@@ -15,7 +15,7 @@ more agents through an **OpenAI-compatible Chat Completions API** at
 `/v1/chat/completions` and `/v1/models`. Any client that already speaks the
 OpenAI protocol — for example
 [Open WebUI](https://github.com/open-webui/open-webui), `curl`, the OpenAI
-Python SDK, or LangChain — can drive a docker-agent agent without any custom
+Python SDK, or LangChain — can drive a Docker Agent agent without any custom
 integration.
 
 ```bash
@@ -29,7 +29,7 @@ $ docker agent serve chat ./team.yaml
 $ docker agent serve chat ./team.yaml --agent reviewer
 
 # Run an agent straight from the registry
-$ docker agent serve chat agentcatalog/pirate --listen 127.0.0.1:9090
+$ docker agent serve chat myorg/agent:tag --listen 127.0.0.1:9090
 
 # Require a Bearer token, sourced from an env var
 $ docker agent serve chat agent.yaml --api-key-env CHAT_BEARER_TOKEN
@@ -38,7 +38,7 @@ $ docker agent serve chat agent.yaml --api-key-env CHAT_BEARER_TOKEN
 > [!TIP]
 > **When to use chat server vs. API server**
 >
-> Use the **chat server** when you want to plug docker-agent into existing OpenAI-compatible tooling (chat UIs, IDE integrations, OpenAI SDK clients). Use the [API server](../api-server/index.md) when you want full control over sessions, agent execution, tool-call confirmations, and streamed runtime events.
+> Use the **chat server** when you want to plug Docker Agent into existing OpenAI-compatible tooling (chat UIs, IDE integrations, OpenAI SDK clients). Use the [API server](../api-server/index.md) when you want full control over sessions, agent execution, tool-call confirmations, and streamed runtime events.
 
 ## Endpoints
 
@@ -195,7 +195,7 @@ docker agent serve chat <agent-file>|<registry-ref> [flags]
 | `--cors-origin <origin>`      | (none)             | Allowed CORS origin (e.g. `https://example.com`). Empty disables CORS.                                            |
 | `--api-key <token>`           | (none)             | Required Bearer token clients must present (`Authorization: Bearer <token>`). Empty disables auth.                |
 | `--api-key-env <name>`        | (none)             | Read the API key from this environment variable instead of the command line.                                      |
-| `--max-request-size <bytes>`  | `1048576` (1 MiB)  | Maximum request body size.                                                                                        |
+| `--max-request-size <bytes>`  | `1048576` (1 MiB)  | Maximum request body size in bytes. Requests whose body exceeds this limit are rejected with HTTP 413 (Request Entity Too Large) — see [Troubleshooting: HTTP 413](../../community/troubleshooting/index.md#http-413-request-body-too-large) if you hit this. |
 | `--request-timeout <dur>`     | `5m`               | Per-request timeout (covers model + tool calls + streaming).                                                      |
 | `--conversations-max <n>`     | `0`                | Cache up to N conversations server-side, keyed by `X-Conversation-Id`. `0` disables — clients must resend history. |
 | `--conversation-ttl <dur>`    | `30m`              | Idle TTL after which a cached conversation is evicted.                                                            |
@@ -205,9 +205,24 @@ All [runtime configuration flags](../cli/index.md#runtime-configuration-flags)
 (`--working-dir`, `--env-from-file`, `--models-gateway`, `--hook-*`, …) are
 also accepted.
 
+> [!NOTE]
+> **What `--max-request-size` does and doesn't cover**
+>
+> This is a finite, process-wide cap on one serialized inbound HTTP request body — it isn't a model context-window limit, and raising it doesn't increase what a provider/model accepts or how large a local attachment/prompt file can be. A larger cap also means the server buffers more memory per request from an unauthenticated or malicious client, so weigh that against your deployment's exposure. If a reverse proxy or gateway sits in front of this server, it may enforce its own, lower cap regardless of this flag. See [Troubleshooting: HTTP 413](../../community/troubleshooting/index.md#http-413-request-body-too-large) for full diagnosis.
+
+## Image Inputs
+
+Messages can include OpenAI-style `image_url` content parts alongside `text`:
+
+```json
+{"type": "image_url", "image_url": {"url": "data:image/png;base64,..."}}
+```
+
+A `data:` URL embeds the image bytes directly in the JSON body, so its base64-encoded size counts toward `--max-request-size` above like any other request content. A remote `http(s)://` URL is passed through to the selected model provider rather than fetched by the chat server itself — whether it works depends on that provider and model: some accept a remote URL directly, others only accept `data:` URLs, and a provider/model without image support drops the part. Don't assume a remote image URL will be fetched or rendered universally; verify against the specific provider/model you've configured.
+
 ## Open WebUI Integration
 
-Open WebUI can talk to any OpenAI-compatible endpoint. To plug docker-agent
+Open WebUI can talk to any OpenAI-compatible endpoint. To plug Docker Agent
 in:
 
 1. Start the chat server, optionally with auth:
@@ -229,4 +244,4 @@ in:
 > [!NOTE]
 > **See also**
 >
-> For the docker-agent–native HTTP API (sessions, tool-call confirmation, runtime events), see the [API Server](../api-server/index.md). For full CLI flag documentation, see the [CLI Reference](../cli/index.md#docker-agent-serve-chat).
+> For the Docker Agent–native HTTP API (sessions, tool-call confirmation, runtime events), see the [API Server](../api-server/index.md). For full CLI flag documentation, see the [CLI Reference](../cli/index.md#docker-agent-serve-chat).

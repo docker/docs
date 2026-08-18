@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/docker/docker-agent/refs/heads/main/agent-schema.json
+models:
+  claude-sonnet-5:
+    provider: anthropic
+    model: claude-sonnet-5
+    max_tokens: 4096
+
+agents:
+  root:
+    model: claude-sonnet-5
+    description: Curates user-facing Docker launches from recently published documentation
+    instruction: |
+      Use the curate-whats-new skill for every request.
+    skills:
+      - curate-whats-new
+
+    toolsets:
+      - type: filesystem
+        tools:
+          - read_file
+          - read_multiple_files
+          - write_file
+          - list_directory
+          - directory_tree
+      - type: shell
+
+permissions:
+  allow:
+    - shell:cmd=gh pr list --*
+    - shell:cmd=gh pr view --*
+    - shell:cmd=gh pr diff --*
+    - shell:cmd=git diff --*
+    - shell:cmd=git log --*

@@ -2,15 +2,14 @@
 title: SIEM forwarding
 linkTitle: SIEM forwarding
 weight: 35
-description: Forward Docker AI Governance audit events to Splunk, Dynatrace, or a custom HTTPS endpoint.
-keywords: docker sandboxes, SIEM, audit logs, Splunk, Dynatrace, AI Governance, forwarding, NDJSON
+description: Forward Docker AI Governance audit events to Splunk, Dynatrace, Datadog, or a custom HTTPS endpoint.
+keywords: docker sandboxes, SIEM, audit logs, Splunk, Dynatrace, Datadog, AI Governance, forwarding, NDJSON
 ---
 
 Docker can forward audit events to your security information and event
 management (SIEM) system, letting you centralize Docker governance data
-alongside other security signals. Events are forwarded in NDJSON format.
-Docker verifies the endpoint is reachable with the supplied credential before
-saving.
+alongside other security signals. Docker verifies the endpoint is reachable
+with the supplied credential before saving.
 
 ## Supported destinations
 
@@ -19,7 +18,12 @@ saving.
 | Splunk Cloud (HEC)               | Hosted Splunk using the HTTP Event Collector                    |
 | Splunk Enterprise (self-hosted)  | Self-hosted Splunk using the HTTP Event Collector               |
 | Dynatrace                        | Dynatrace Log Management using the Log Ingest API               |
+| Datadog                          | Datadog Logs using the HTTP log intake API                      |
 | Custom HTTPS endpoint (advanced) | Any SIEM that accepts HTTPS with a custom authentication header |
+
+For any SIEM without a native integration, use the custom HTTPS endpoint
+option. Custom endpoints receive JSON Lines (NDJSON), where each line is one
+complete audit record.
 
 ## Before you begin
 
@@ -37,6 +41,8 @@ Gather credentials from your SIEM before configuring forwarding:
   Optionally, a Splunk index name. See [Splunk documentation](https://docs.splunk.com/).
 - **Dynatrace**: Log Ingest API URL and an API token with the `logs.ingest`
   scope. See [Dynatrace documentation](https://docs.dynatrace.com/).
+- **Datadog**: Logs intake URL for your Datadog site and an API key. See
+  [Datadog documentation](https://docs.datadoghq.com/).
 - **Custom HTTPS endpoint**: Your endpoint URL, authentication header name, and
   full header value including any scheme (for example, `Bearer <token>`).
 
