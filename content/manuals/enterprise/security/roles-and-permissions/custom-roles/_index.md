@@ -29,17 +29,17 @@ permission sets meet your needs, use
 [core roles](/manuals/enterprise/security/roles-and-permissions/core-roles.md)
 instead.
 
+## Prerequisites
+
+- A Docker Business subscription
+- Owner permissions in your Docker organization
+
 ## Custom roles
 
 With custom roles, you select permissions from organization management,
 Docker Hub, billing, AI Governance, Docker Hardened Images, and Docker
 Offload. You can assign a custom role to individual users or to teams.
 Users and teams get either a core role or a custom role, but not both.
-
-## Prerequisites
-
-- A Docker Business subscription
-- Owner permissions in your Docker organization
 
 ## Using custom roles
 
