@@ -36,6 +36,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Buildx v0.36.1](https://github.com/docker/buildx/releases/tag/v0.36.1)
 - Docker Offload `v0.6.10`
 - [Docker Compose v5.4.0](https://github.com/docker/compose/releases/tag/v5.4.0)
+- Linux kernel `v7.0.12`
 
 ### Bug fixes and enhancements
 
