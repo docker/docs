@@ -6,7 +6,7 @@ keywords: custom roles, manage custom roles, role assignments, access control, D
 weight: 10
 ---
 
-{{< summary-bar feature_name="General admin" >}}
+{{< summary-bar feature_name="Custom roles" >}}
 
 Create custom roles, manage their permissions, and assign them to users and
 teams. For a full list of permissions, see the

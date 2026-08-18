@@ -10,7 +10,7 @@ keywords: >-
 weight: 20
 ---
 
-{{< summary-bar feature_name="General admin" >}}
+{{< summary-bar feature_name="Custom roles" >}}
 
 Custom roles use permissions from several categories. Use the following tables
 to [create or edit a custom role](manage.md).

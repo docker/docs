@@ -15,7 +15,7 @@ grid:
     link: /enterprise/security/roles-and-permissions/custom-roles/permissions-reference/
 ---
 
-{{< summary-bar feature_name="General admin" >}}
+{{< summary-bar feature_name="Custom roles" >}}
 
 Custom roles are permission sets built from individual permissions. This page
 defines custom roles and explains when to use them.
