@@ -63,7 +63,7 @@ Disable hardware acceleration:
 2. Add the following entry:
 
    ```JSON
-   $ "disableHardwareAcceleration": "always"
+   "disableHardwareAcceleration": "always"
    ```
 
 3. Save the file and restart Docker Desktop.
