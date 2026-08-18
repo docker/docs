@@ -1,15 +1,20 @@
 ---
-title: Manage custom roles in Docker
+title: Manage custom roles in Docker Home
 linkTitle: Manage
-description: Create, edit, assign, reassign, and delete custom roles in Docker Home for organization users and teams
-keywords: custom roles, manage custom roles, role assignments, access control, Docker Home, organization roles, permissions
+description: >-
+  Create, edit, assign, reassign, and delete custom roles in Docker Home
+  for organization users and teams
+keywords: >-
+  custom roles, manage custom roles, role assignments, access control,
+  Docker Home, Docker Business, organization roles, permissions, teams
 weight: 10
 ---
 
 {{< summary-bar feature_name="Custom roles" >}}
 
-Create custom roles, manage their permissions, and assign them to users and
-teams. For a full list of permissions, see the
+Create custom roles, manage their permissions, and assign them to users
+and teams. Use a custom role to grant only the permissions a user or
+team needs. For a full list of permissions, see the
 [custom roles permissions reference](permissions-reference.md).
 
 ## Create a custom role
@@ -20,7 +25,7 @@ Before you can assign a custom role, create one:
 1. Select **Roles**, then **Create role**.
 1. Define the role:
    - Provide a **Label**
-   - Enter a unique **Name** identifier. You can't change it later.
+   - Enter a unique **Name** identifier. The identifier is permanent.
    - Add an optional **Description**
 1. Set permissions for the role by expanding permission categories and
    selecting the checkboxes for permissions. For a full list of available
@@ -39,9 +44,9 @@ After you create a custom role, you can
 1. Find your custom role in the list, then select the **Actions** menu.
 1. Select **Edit**.
 1. Edit any of the following settings:
-   - Label
-   - Description
-   - Permissions
+   - **Label**
+   - **Description**
+   - **Permissions**
 1. Select **Save**.
 
 ## Assign custom roles
@@ -54,7 +59,7 @@ After you create a custom role, you can
 1. Locate the member you want to assign a custom role to, then select the
    **Actions** menu.
 1. Select **Change role**.
-1. In the **Select a role** drop-down, select your custom role.
+1. From the **Select a role** drop-down list, select your custom role.
 1. Select **Save**.
 
 {{< /tab >}}
@@ -65,8 +70,8 @@ After you create a custom role, you can
 1. Use the checkboxes in the username column to select the users you want
    to assign a custom role to.
 1. Select **Change role**.
-1. In the **Select a role** drop-down, select your custom role or a core
-   role.
+1. From the **Select a role** drop-down list, select your custom role or
+   a core role.
 1. Select **Save**.
 
 {{< /tab >}}
@@ -104,7 +109,7 @@ To see which users and teams are assigned to roles:
 1. Locate the member you want to reassign, then select the **Actions**
    menu.
 1. Select **Change role**.
-1. In the **Select a role** drop-down, select the new role.
+1. From the **Select a role** drop-down list, select the new role.
 1. Select **Save**.
 
 {{< /tab >}}
@@ -115,7 +120,7 @@ To see which users and teams are assigned to roles:
 1. Use the checkboxes in the username column to select the users you want
    to reassign.
 1. Select **Change role**.
-1. In the **Select a role** drop-down, select the new role.
+1. From the **Select a role** drop-down list, select the new role.
 1. Select **Save**.
 
 {{< /tab >}}
@@ -125,8 +130,7 @@ To see which users and teams are assigned to roles:
 1. Select **Teams**.
 1. Locate the team, then select the **Actions** menu.
 1. Select **Change role**.
-1. In the pop-up window, select a role from the drop-down, then select
-   **Save**.
+1. From the drop-down list, select a role, then select **Save**.
 
 {{< /tab >}}
 {{< /tabs >}}

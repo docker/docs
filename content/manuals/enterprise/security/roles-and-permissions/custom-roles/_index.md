@@ -1,8 +1,14 @@
 ---
 title: Custom roles and permissions overview
 linkTitle: Custom roles
-description: Use custom roles to assign tailored permissions to users and teams in your Docker organization
-keywords: custom roles, custom permissions, permission sets, access control, least privilege, docker business, docker home, organization management, role assignment, teams, security
+description: >-
+  Use custom roles to assign tailored permissions to users and teams in
+  your Docker organization
+keywords: >-
+  custom roles, custom permissions, permission sets, access control,
+  least privilege, Docker Business, Docker Home, organization
+  management, role assignment, teams, AI Governance, Docker Offload,
+  security
 weight: 20
 grid:
   - title: Manage custom roles
@@ -17,20 +23,20 @@ grid:
 
 {{< summary-bar feature_name="Custom roles" >}}
 
-Custom roles are permission sets built from individual permissions. This page
-defines custom roles and explains when to use them.
-If Docker's predefined permission sets meet your needs, use
+Custom roles are permission sets built from individual permissions, so you
+can grant only the access a user or team needs. If Docker's predefined
+permission sets meet your needs, use
 [core roles](/manuals/enterprise/security/roles-and-permissions/core-roles.md)
 instead.
 
 ## Custom roles
 
-With custom roles, you select permissions from categories such as
-organization management, Docker Hub, billing, and governance. You can assign
-a custom role to individual users or to teams. Users and teams get either a
-core role or a custom role, but not both.
+With custom roles, you select permissions from organization management,
+Docker Hub, billing, AI Governance, Docker Hardened Images, and Docker
+Offload. You can assign a custom role to individual users or to teams.
+Users and teams get either a core role or a custom role, but not both.
 
-Before configuring custom roles, you need:
+## Prerequisites
 
 - A Docker Business subscription
 - Owner permissions in your Docker organization

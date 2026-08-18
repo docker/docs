@@ -1,19 +1,20 @@
 ---
 title: Docker core roles and permissions
 linkTitle: Core roles
-description: Compare Member, Editor, and Owner permissions across Docker products
+description: >-
+  Compare Member, Editor, and Owner permissions across Docker products
 keywords: >-
   Docker roles, core roles, Member role, Editor role, Owner role, organization
   permissions, company owner, Docker Hub, Docker Scout, Docker Build Cloud,
-  OIDC, teams, access control
+  OIDC, teams, access control, Docker Business, custom roles
 weight: 10
 ---
 
 {{< summary-bar feature_name="General admin" >}}
 
 Docker organizations use built-in Member, Editor, and Owner roles with
-predefined permissions. This reference compares their permissions across Docker
-products. To assign a different combination of permissions, use
+predefined permissions. This reference compares their permissions across
+Docker products. To assign a different combination of permissions, use
 [custom roles](/manuals/enterprise/security/roles-and-permissions/custom-roles/_index.md)
 instead.
 
@@ -21,9 +22,9 @@ instead.
 
 Docker organizations have three core roles:
 
-- Owner provides full administrative access. Owners can manage all organization
-  settings, including repositories, teams, members, billing, and security
-  features.
+- Owner provides full administrative access. Owners can manage all
+  organization settings, including repositories, teams, members, billing,
+  and security features.
 - Editor has partial administrative access. Editors can create, edit, and
   delete repositories. They can also manage team permissions for
   repositories.
@@ -32,8 +33,8 @@ Docker organizations have three core roles:
   access to.
 
 A company owner has the same organization-management permissions as an
-organization owner. Content and registry permissions, such as repository pull
-and push, don't apply to company owners. For more information, see
+organization owner. Content and registry permissions, such as repository
+pull and push, don't apply to company owners. For more information, see
 [Company overview](/manuals/admin/company/_index.md).
 
 ## Permissions reference
