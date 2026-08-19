@@ -91,6 +91,10 @@ The behavior is the same as running `docker compose up --build <svc>`.
 Rebuild is ideal for compiled languages or as a fallback for modifications to particular files that require a full
 image rebuild (e.g. `package.json`).
 
+> [!NOTE]
+>
+> When a service is rebuilt, the previous image version becomes dangling. By default, Compose removes these superseded dangling images after each rebuild to avoid accumulating unused layers. Use `docker compose watch --prune=false` to keep them.
+
 #### Sync + Restart
 
 If `action` is set to `sync+restart`, Compose synchronizes your changes with the service containers and restarts them. 
