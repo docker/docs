@@ -1,0 +1,35 @@
+name: sbx env rm
+synopsis: Remove a sandbox environment and its scoped resources
+experimental: true
+description: |-
+    Remove the sandbox declared in .sbxenv.yaml along with the
+    secret values provisioned at its sandbox scope (service, custom, and registry
+    credentials). Global credential bindings are left in place by default since
+    they are user-wide and may be shared with other sandboxes; pass
+    --prune-bindings to also remove the bindings this environment declares.
+
+    Each PATH may be a directory (the file is <PATH>/.sbxenv.yaml) or the
+    path to the environment file itself. Passing more than one PATH deep-merges them
+    in order (docker-compose `-f` semantics), so the same set used to create the
+    environment resolves to the same sandbox on removal.
+usage: sbx env rm [PATH...] [flags]
+options:
+    - name: force
+      shorthand: f
+      default_value: "false"
+      usage: Skip confirmation prompts
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for rm
+    - name: prune-bindings
+      default_value: "false"
+      usage: |
+        Also remove this environment's bindings from the global credentials.yaml
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx env - (Experimental) Manage sandboxes declaratively from a .sbxenv.yaml file
