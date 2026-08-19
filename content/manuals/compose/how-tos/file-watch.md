@@ -93,7 +93,7 @@ image rebuild (e.g. `package.json`).
 
 > [!NOTE]
 >
-> When a service is rebuilt, the previous image version becomes dangling. By default, Compose removes these superseded dangling images after each rebuild to avoid accumulating unused layers. Use `docker compose watch --prune=false` to keep them.
+> When a service is rebuilt, the previous image version becomes dangling. By default, Compose removes these superseded dangling images after each rebuild to avoid accumulating unused layers. To keep them, use `docker compose watch --prune=false`.
 
 #### Sync + Restart
 
