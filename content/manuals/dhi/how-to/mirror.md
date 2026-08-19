@@ -34,7 +34,7 @@ repositories:
 
 ## Mirror a DHI repository to your organization
 
-Organization owners, editors, and members with a [custom role](../../enterprise/security/roles-and-permissions/custom-roles.md)
+Organization owners, editors, and members with a [custom role](../../enterprise/security/roles-and-permissions/custom-roles/_index.md)
 that includes the DHI mirroring permission can create, view, and manage mirrors.
 When using the CLI or Terraform, you can also mirror using an [organization
 access token (OAT)](../../enterprise/security/access-tokens.md) with the
