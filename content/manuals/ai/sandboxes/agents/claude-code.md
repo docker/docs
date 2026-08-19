@@ -146,11 +146,10 @@ $ sbx run --model gemma4 claude
 On first use, `sbx` starts `llmman`, pulls the model, and leaves the server
 running on your host. Later sandboxes reuse the server and its model store.
 
-To use an existing Ollama installation instead, prefix the model name with
-`ollama/`:
+To use an existing Ollama installation instead, set the provider to `ollama`:
 
 ```console
-$ sbx run --model ollama/gemma4 claude
+$ sbx run --model gemma4 --provider ollama claude
 ```
 
 Ollama must already be installed and running. `sbx` connects to it but doesn't
