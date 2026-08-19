@@ -36,6 +36,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Buildx v0.36.1](https://github.com/docker/buildx/releases/tag/v0.36.1)
 - Docker Offload `v0.6.10`
 - [Docker Compose v5.4.0](https://github.com/docker/compose/releases/tag/v5.4.0)
+- Linux kernel `v7.0.12`
 
 ### Bug fixes and enhancements
 
@@ -62,6 +63,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed an issue on Windows where installer logs from per-user installations were missing from diagnostic bundles.
 - Fixed the virtual disk limit not being applied when lowered on Windows with Hyper-V.
 - Fixed the disk usage limit slider being hidden and ignored for the Docker VMM backend on Windows, so users can now set and enforce disk size in **Settings** > **Resources** > **Advanced**.
+- Fixed a Windows auto-update failure when a self-updated CLI plugin (`docker scout` or `docker agent`) newer than the bundled version was already present in the user's CLI-plugins folder.
 
 ## 4.86.0
 

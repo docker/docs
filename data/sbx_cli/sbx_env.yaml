@@ -1,0 +1,28 @@
+name: sbx env
+synopsis: |
+    Manage sandboxes declaratively from a .sbxenv.yaml file
+experimental: true
+description: |-
+    Manage a sandbox environment declared in a .sbxenv.yaml file.
+
+    The file describes the agent, optional mixin kits, workspace mounts,
+    environment variables, secrets to provision, and per-service credential
+    bindings. Secrets are provisioned at the environment's sandbox scope so
+    `sbx env rm` can remove everything it created.
+usage: sbx env COMMAND
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for env
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx - Manage AI coding agent sandboxes.
+    - sbx env create - Create a sandbox environment from .sbxenv.yaml
+    - sbx env exec - Execute a command inside a sandbox environment
+    - sbx env rm - Remove a sandbox environment and its scoped resources
+    - sbx env run - Create (if needed) and attach to a sandbox environment
