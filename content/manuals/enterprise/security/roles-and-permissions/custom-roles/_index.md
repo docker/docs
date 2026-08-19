@@ -36,7 +36,7 @@ instead.
 - A Docker Business subscription
 - Owner permissions in your Docker organization
 
-## Custom roles
+## Creating custom roles
 
 To create a custom role, you select permissions from organization management,
 Docker Hub, billing, AI Governance, Docker Hardened Images, and Docker
