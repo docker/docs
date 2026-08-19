@@ -247,15 +247,12 @@ credentials:
         refreshToken: <sentinel>
       credentialFile:
         path: <path>
-        template: |
-          {
-            "<key>": {
-              "accessToken": "{{.AccessToken}}",
-              "refreshToken": "{{.RefreshToken}}",
-              "expiresAt": {{.ExpiresAt}},
-              "scopes": {{.ScopesJSON}}
-            }
-          }
+        structure:
+          <key>:
+            accessToken: "{{.AccessToken}}"
+            refreshToken: "{{.RefreshToken}}"
+            expiresAt: "{{.ExpiresAt}}"
+            scopes: "{{.Scopes}}"
 ```
 
 `credentials` is a list; each entry names a `service` and configures one or more
@@ -298,12 +295,16 @@ the real token response into the sandbox.
 | `tokenEndpoint.host` / `path`            | The OAuth token endpoint the proxy intercepts.                                                                                                                                                    |
 | `sentinels.accessToken` / `refreshToken` | Sentinel values written into the container in place of the real tokens.                                                                                                                           |
 | `credentialFile.path`                    | Where to write the credential file inside the container (`~` expands).                                                                                                                            |
-| `credentialFile.template`                | Go template used to render the credential file. Supports `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, `{{.Scopes}}`, and `{{.ScopesJSON}}`. Use `{{.ScopesJSON}}` for a JSON array. |
-| `credentialFile.structure`               | Declarative JSON shape defined by schema v2 but not supported by the `sbx` engine. A structure-only kit fails validation. Use `credentialFile.template`.                                          |
+| `credentialFile.structure`               | Declarative JSON shape. Supports `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, and `{{.Scopes}}`.                                                                                   |
+| `credentialFile.template`                | Go template. Supports `{{.AccessToken}}`, `{{.RefreshToken}}`, `{{.ExpiresAt}}`, `{{.Scopes}}`, and `{{.ScopesJSON}}`.                                                                          |
 | `resourceHosts`                          | API hosts where the proxy attaches the token on outbound requests, distinct from the token endpoint host.                                                                                         |
 | `skipIfEnv`                              | Accepted for compatibility, but ignored for schema v2. A v2 binding is authoritative instead of host environment variables.                                                                       |
 | `responseFields`                         | Overrides the default field names the proxy reads from the token response.                                                                                                                        |
 | `passthrough`                            | If `true`, the proxy passes the token response through unchanged instead of replacing the tokens with sentinels.                                                                                  |
+
+`credentialFile.structure` provides a declarative alternative to
+`credentialFile.template`. The engine renders it as well-formed JSON. If both
+fields are set, `structure` takes precedence.
 
 ## Network
 
