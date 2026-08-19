@@ -23,8 +23,12 @@ grid:
 
 {{< summary-bar feature_name="Custom roles" >}}
 
-Custom roles are permission sets built from individual permissions, so you
-can grant only the access a user or team needs. 
+Custom roles are permission sets that you choose to grant access to users or teams based on specific use cases. Use custom roles when you need:
+
+- Specialized roles such as billing administrators, security auditors, or
+  repository managers
+- Department-specific access control
+- Least-privilege access with precise permission grants
 
 If Docker's predefined
 permission sets meet your needs, use
@@ -43,15 +47,6 @@ Docker Hub, billing, AI Governance, Docker Hardened Images, and Docker
 Offload. You then assign custom roles you created to individual users or to teams.
 
 Users and teams get either a core role or a custom role, but not both.
-
-## Using custom roles
-
-Use custom roles when you need:
-
-- Specialized roles such as billing administrators, security auditors, or
-  repository managers
-- Department-specific access control
-- Least-privilege access with precise permission grants
 
 ## Next steps
 
