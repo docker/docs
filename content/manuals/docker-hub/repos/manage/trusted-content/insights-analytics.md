@@ -53,8 +53,8 @@ subscription:
 - Tracked companies shows how those companies use your own images.
 - Technographic companies shows which other images those companies use
   alongside yours.
-- Benchmark shows how those companies use images you've configured to
-  benchmark against, such as a competitor's image, instead of your own.
+- Benchmark shows how those companies use the specific images you've configured to
+  benchmark against, such as a single repository.
 
 After your organization is provisioned for DVP analytics, it takes up to one
 week for the first reports to become available.
@@ -243,9 +243,9 @@ points:
 
 #### Benchmark report
 
-The benchmark report shows how companies interact with images you've
-configured to benchmark against, such as a competitor's image, rather than
-your own. The report is generated per repository, so each benchmark repository
+The benchmark report shows how companies interact with the specific images you've
+configured to benchmark against, such as a single repository.
+The report is generated per repository, so each benchmark repository
 you configure produces its own report.
 
 To access the report:
