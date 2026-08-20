@@ -14,8 +14,9 @@ environment.
 $ sbx run shell ~/my-project
 ```
 
-The workspace path defaults to the current directory. To run a one-off
-command instead of an interactive shell, pass it after `--`:
+Omit the workspace path to open a
+[mountless sandbox](../usage.md#choose-a-workspace). To run a one-off command
+without a host workspace, pass it after `--`:
 
 ```console
 $ sbx run shell -- -c "echo 'Hello from sandbox'"

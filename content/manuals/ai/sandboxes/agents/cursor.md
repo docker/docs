@@ -20,12 +20,15 @@ Create a sandbox and run Cursor for a project directory:
 $ sbx run cursor ~/my-project
 ```
 
-The workspace parameter is optional and defaults to the current directory:
+Use `.` to mount the current directory:
 
 ```console
 $ cd ~/my-project
-$ sbx run cursor
+$ sbx run cursor .
 ```
+
+Omit the workspace path to create a
+[mountless sandbox](../usage.md#choose-a-workspace) instead.
 
 ## Authentication
 
@@ -65,7 +68,7 @@ Arguments after `--` are added after the default flags when the first one is
 itself a flag (begins with `-`), so `--yolo` is preserved:
 
 ```console
-$ sbx run cursor -- -p "refactor this"   # runs cursor-agent --yolo -p "refactor this"
+$ sbx run cursor . -- -p "refactor this"   # runs cursor-agent --yolo -p "refactor this"
 ```
 
 When the first argument is a bare word — a subcommand or prompt — it replaces

@@ -20,12 +20,15 @@ Create a sandbox and run Codex for a project directory:
 $ sbx run codex ~/my-project
 ```
 
-The workspace parameter is optional and defaults to the current directory:
+Use `.` to mount the current directory:
 
 ```console
 $ cd ~/my-project
-$ sbx run codex
+$ sbx run codex .
 ```
+
+Omit the workspace path to create a
+[mountless sandbox](../usage.md#choose-a-workspace) instead.
 
 ## Authentication
 
@@ -75,7 +78,7 @@ itself a flag (begins with `-`). A bare word — such as a prompt — replaces t
 defaults instead, so lead with the flag to keep bypass mode:
 
 ```console
-$ sbx run codex -- --dangerously-bypass-approvals-and-sandbox "fix the build"
+$ sbx run codex . -- --dangerously-bypass-approvals-and-sandbox "fix the build"
 ```
 
 ## Base image

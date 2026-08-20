@@ -6,8 +6,8 @@ description: What a sandbox permits and blocks before you change any settings.
 keywords: docker sandboxes, security defaults, network policy, credentials, shared skills, sbx
 ---
 
-A sandbox created with `sbx run` and no additional flags has the following
-security posture.
+A mountless sandbox created with `sbx run claude` has the following security
+posture.
 
 ## Network defaults
 
@@ -24,13 +24,16 @@ rules. See
 
 ## Workspace defaults
 
-Sandboxes use a direct mount by default. The agent sees and modifies your
-working tree directly, and changes appear on your host immediately.
+When you omit the workspace path, the sandbox doesn't mount a host workspace.
+The agent works in the container image's working directory. Built-in images use
+`/home/agent/workspace`. Files in this directory persist across stops and
+restarts and are deleted when you remove the sandbox.
 
-The agent can read, write, and delete any file within the workspace directory,
-including hidden files, configuration files, build scripts, and Git hooks.
-See [Workspace isolation](isolation.md#workspace-isolation) for what to
-review after an agent session.
+Pass a path such as `.` to mount a host directory. The agent can then read,
+write, and delete any file within that directory, including hidden files,
+configuration files, build scripts, and Git hooks. See
+[Workspace isolation](isolation.md#workspace-isolation) for the available
+workspace modes and what to review after a direct-mount session.
 
 ## Shared skills defaults
 
@@ -59,9 +62,10 @@ The agent runs with full control inside the sandbox VM:
 - Full read and write access to the VM filesystem
 
 Everything the agent installs or creates inside the VM, including packages,
-Docker images, and configuration changes, persists across stop and restart
-cycles. When you remove the sandbox with `sbx rm`, the VM and its contents
-are deleted. Workspace files and the shared skills store remain on the host.
+Docker images, mountless workspace files, and configuration changes, persists
+across stop and restart cycles. When you remove the sandbox with `sbx rm`, the
+VM and its contents are deleted. Direct-mounted workspace files and the shared
+skills store remain on the host, as do repositories used as clone sources.
 
 ## What is blocked by default
 
