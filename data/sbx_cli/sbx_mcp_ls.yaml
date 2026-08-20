@@ -1,5 +1,14 @@
 name: sbx mcp ls
-synopsis: List registered MCP servers
+synopsis: List MCP servers, grouped by the gateway that serves them
+description: |-
+    List registered MCP servers under the gateway that serves them.
+
+    The gateway header reports where it runs, who controls it, and whether you are
+    signed in; each server row reports its transport and whether it is usable now.
+    Servers needing authorization carry the 'sbx mcp auth' next step.
+
+    Auth status is read without starting an OAuth flow — from the local token store
+    in local data-plane mode, otherwise from the hosted control plane.
 usage: sbx mcp ls [flags]
 options:
     - name: help

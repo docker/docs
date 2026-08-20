@@ -9,7 +9,10 @@ description: |-
 
     Running 'sbx mcp auth <server>' authorizes or reauthorizes one server. If the
     stored credential is expired, sbx asks the control plane to refresh it first and
-    only falls back to interactive OAuth when refresh needs user consent.
+    only falls back to interactive OAuth when refresh needs user consent. A name
+    with no local registration is resolved from the Docker MCP catalog and
+    authorized under its catalog name, so no 'sbx mcp add' is required for catalog
+    servers.
 
     Use 'sbx mcp auth status' to inspect hosted credential status without starting
     OAuth, and 'sbx mcp auth rm' to remove hosted credentials without removing

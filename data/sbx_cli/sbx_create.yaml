@@ -18,6 +18,15 @@ options:
       default_value: '[]'
       usage: |
         Add a per-sandbox network deny rule at creation time. Can be specified multiple times. The rule applies only to the new sandbox and can be listed or removed later with `sbx policy ls <NAME>` / `sbx policy rm network --sandbox <NAME> --resource <HOST>`. Safe under centralized governance because a local deny can only narrow, never widen, egress.
+    - name: env
+      shorthand: e
+      default_value: '[]'
+      usage: |
+        Set an environment variable in the sandbox (can be repeated): KEY=VALUE, or a bare KEY to take the value from the current environment
+    - name: env-file
+      default_value: '[]'
+      usage: |
+        Read environment variables from a file (can be repeated). --env wins over any file; a later file wins over an earlier one
     - name: help
       shorthand: h
       default_value: "false"
@@ -33,7 +42,7 @@ options:
         Memory limit in binary units (e.g., 1024m, 8g). Default: 50% of host memory, max 32 GiB
     - name: name
       usage: |
-        Name for the sandbox (default: <agent>-<workdir>, letters, numbers, hyphens, periods, plus signs and minus signs only)
+        Name for the sandbox (defaults to <agent>-<workdir>; at least two characters, starting with a letter or number, containing only letters, numbers, hyphens and periods; 'default' is reserved)
     - name: publish
       shorthand: p
       default_value: '[]'

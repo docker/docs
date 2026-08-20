@@ -1,0 +1,62 @@
+name: sbx kit sign
+synopsis: Sign a kit artifact
+experimental: true
+description: |-
+    Sign a kit artifact with cosign-compatible Sigstore signatures.
+
+    For a local directory, a detached signature bundle is written to
+    kit.sig.bundle next to spec.yaml. For an OCI reference, the
+    signature is attached to the kit manifest as an OCI referrer.
+
+    Signing is keyless by default (Fulcio + Rekor), which requires an OIDC
+    identity token. In CI the token is minted automatically by the detected
+    platform (GitHub Actions, Buildkite, GCP, SPIFFE, or a projected
+    service-account token on disk). Elsewhere, supply one with
+    --identity-token-file or --identity-token, or complete an interactive
+    browser login. Prefer the file form: process arguments are readable by
+    other local users and are recorded in shell history. A token is never
+    read from SIGSTORE_ID_TOKEN, so it cannot be chosen by anything that can
+    set an environment variable. Use --key for key-based signing with an
+    unencrypted PEM private key.
+
+    For private kits whose signing event must not leak to a public log, pass
+    --tlog-upload=false to skip the Rekor transparency log. This only affects
+    keyless signing (key-based signing never uploads to Rekor) and requires
+    the signing config to provide a timestamp authority so the signature stays
+    verifiable after the short-lived certificate expires. For fully offline,
+    private signing, prefer key-based signing with --key.
+usage: sbx kit sign REFERENCE [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for sign
+    - name: identity-token
+      usage: |
+        OIDC identity token for keyless signing; defaults to the ambient CI provider, then an interactive browser login
+    - name: identity-token-file
+      usage: |
+        File holding the OIDC identity token; keeps it out of the process arguments
+    - name: key
+      usage: |
+        Private key for key-based signing (PEM); omit for keyless signing
+    - name: tlog-upload
+      default_value: "true"
+      usage: |
+        Upload the keyless signature to the Rekor transparency log; set false for private kits
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      # Keyless-sign a local kit directory
+      sbx kit sign ./my-kit/
+
+      # Key-based sign an OCI kit
+      sbx kit sign --key cosign.key ghcr.io/org/my-kit:1.0
+
+      # Keyless-sign without uploading to the public transparency log
+      sbx kit sign --tlog-upload=false ghcr.io/org/private-kit:1.0
+see_also:
+    - sbx kit - (Experimental) Manage kit artifacts
