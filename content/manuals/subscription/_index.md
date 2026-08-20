@@ -42,12 +42,13 @@ You can subscribe to several Docker plans that range from free to paid plans. Wh
 
 You can subscribe to plans for individual or organization accounts, or plans for specific products. The following table summarizes the available plans.
 
-| Plans                                                              | Billing model                                             | Types                                                     |
-| ------------------------------------------------------------------ | --------------------------------------------------------- | --------------------------------------------------------- |
-| [Docker](/manuals/subscription/plans/docker.md)                    | Flat-rate plans for personal and organization accounts    | Docker Personal, Docker Pro, Docker Team, Docker Business |
-| [Docker Hardened Images (DHI)](/manuals/subscription/plans/dhi.md) | Graduated security features for hardened container images | DHI Community, DHI Select, DHI Enterprise                 |
-| [Gordon](/manuals/subscription/plans/gordon.md)                    | Prepaid usage for the Gordon AI agent                     | Gordon Plus, Gordon Max, Gordon Ultra                     |
-| [AI Governance](/manuals/subscription/plans/ai-governance.md)      | Purchase set amount of licenses                           | AI Governance                                             |
+| Plans                                                                  | Billing model                                             | Types                                                     |
+| ---------------------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| [Docker](/manuals/subscription/plans/docker.md)                        | Flat-rate plans for personal and organization accounts    | Docker Personal, Docker Pro, Docker Team, Docker Business |
+| [Docker Hardened Images (DHI)](/manuals/subscription/plans/dhi.md)     | Graduated security features for hardened container images | DHI Community, DHI Select, DHI Enterprise                 |
+| [Gordon](/manuals/subscription/plans/gordon.md)                        | Prepaid usage for the Gordon AI agent                     | Gordon Plus, Gordon Max, Gordon Ultra                     |
+| [AI Governance](/manuals/subscription/plans/ai-governance.md)          | Purchase set amount of licenses                           | AI Governance                                             |
+| [Docker Verified Publisher (DVP)](/manuals/subscription/plans/docker-verified-publisher.md)  | Annual plans based on tracked companies                   | DVP Starter, DVP Growth                                   |
 
 Docker plans that upgrade your account (Docker Pro or Docker Team and Business) can provide a foundation for most use cases. Some product plans may require an upgraded Docker account while other product plans let you subscribe without an upgraded account. To learn more, see [Docker plans](/manuals/subscription/plans/_index.md).
 
@@ -55,12 +56,13 @@ Docker plans that upgrade your account (Docker Pro or Docker Team and Business) 
 
 Plans come with usage entitlements that can be extended without upgrading to a different plan.
 
-| Unit         | Description                                                                           | Examples                      |
-| ------------ | ------------------------------------------------------------------------------------- | ----------------------------- |
-| Seats        | Each seat extends entitlements to one more member.                                    | Docker Team, Docker Business  |
-| Licenses     | Access to specific products or features.                                              | AI Governance, Docker Offload |
-| Minutes      | Cloud build capacity, sold in blocks and consumed within the billing period.          | Docker Build Cloud            |
-| Repositories | Additional container repositories covered by security scanning and analysis features. | DHI                           |
+| Unit              | Description                                                                           | Examples                      |
+| ----------------- | ------------------------------------------------------------------------------------- | ----------------------------- |
+| Seats             | Each seat extends entitlements to one more member.                                    | Docker Team, Docker Business  |
+| Licenses          | Access to specific products or features.                                              | AI Governance, Docker Offload |
+| Minutes           | Cloud build capacity, sold in blocks and consumed within the billing period.          | Docker Build Cloud            |
+| Repositories      | Additional container repositories covered by security scanning and analysis features. | DHI                           |
+| Tracked companies | Additional companies tracked in publisher analytics, sold in blocks of 25.            | DVP Starter, DVP Growth       |
 
 ## Manage your plans
 
