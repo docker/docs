@@ -47,7 +47,7 @@ For details on the reports available to verified publishers, see
 To add DVP Starter or DVP Growth, apply for a DVP plan, then subscribe
 after approval.
 
-1. Go to the [DVP landing page](https://www.docker.com/partners/programs/).
+1. Go to the [DVP landing page](https://hub.docker.com/publisher-program).
    The page contains information about DVP Starter and DVP Growth.
 1. Select **Apply for Growth**.
 1. Select an existing organization namespace, or create a new one if
