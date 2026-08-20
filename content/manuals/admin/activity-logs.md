@@ -111,6 +111,22 @@ Refer to the following section for a list of events and their descriptions:
 | Change SSO Connection Type | Details of a connection type change on an existing org/company SSO connection |
 | Toggle JIT provisioning | Details of a JIT toggle on an existing org/company SSO connection |
 
+### AI Governance events
+
+These events record who created or edited an
+[AI Governance](/manuals/ai/sandboxes/governance/) policy in Docker Home.
+They are not the same as
+[AI Governance Audit Logs](/manuals/ai/sandboxes/governance/audit/),
+which record sandbox policy decisions at runtime.
+
+| Event | Description |
+|:------|:------------|
+| Created governance policy | An organization owner created an AI Governance policy |
+| Created governance policy rule | A rule was added to an AI Governance policy |
+| Updated governance policy rule | A rule on an AI Governance policy was changed |
+| Deleted governance policy rule | A rule was removed from an AI Governance policy |
+| Set governance setting | An AI Governance setting was changed from one value to another |
+
 ### Repository events
 
 > [!NOTE]

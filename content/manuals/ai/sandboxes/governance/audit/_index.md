@@ -46,6 +46,10 @@ AI Governance Audit Logs cover Docker Sandboxes policy decisions and sandbox
 session events. Other Docker AI sources can emit records through the same schema
 as they become available.
 
+Changes to the policies themselves (who created or edited a policy) are
+recorded in the organization
+[Activity logs](/manuals/admin/activity-logs/#ai-governance-events), not here.
+
 ## Delivery modes
 
 Docker supports two delivery modes for audit records:
@@ -81,3 +85,5 @@ Policy](https://www.docker.com/legal/privacy/).
 - [View and export audit events](view-export.md)
 - [SIEM forwarding](siem.md)
 - [Audit record reference](record-reference.md)
+- [Activity logs](/manuals/admin/activity-logs/#ai-governance-events) for
+  policy-change events
