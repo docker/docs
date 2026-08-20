@@ -34,8 +34,8 @@ run them from your terminal. Docker Agent is a general-purpose agent runtime,
 not specific to Docker tasks.
 
 **Docker Sandboxes** provides isolated microVM environments for running coding
-agents. It supports multiple agents including Claude Code, Codex, Copilot,
-Gemini, and Docker Agent. Sandboxes is the isolation layer — the agents
+agents. It supports multiple agents including Claude Code, Codex, Gemini, and
+Docker Agent. Sandboxes is the isolation layer — the agents
 themselves are separate tools.
 
 **Model Runner** lets you run LLMs locally. Other tools like Docker Agent can
