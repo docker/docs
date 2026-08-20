@@ -1,69 +1,71 @@
 ---
 title: Docker Verified Publisher plans
-linkTitle: Docker Verified Publisher (DVP)
+linkTitle: Docker Verified Publisher
 description:
-  Learn about DVP Starter and DVP Growth for organization accounts,
-  including usage, billing, applying, and tracked companies.
+  Manage DVP Starter and DVP Growth for organization accounts,
+  including how to apply, add tracked companies, and handle billing.
 keywords:
   docker verified publisher, dvp, dvp starter, dvp growth, tracked
-  companies, publisher analytics, organization subscription, apply for
-  dvp, auto-renewal
+  companies, publisher analytics, organization subscription, apply
+  for dvp, auto-renewal, billing portal, docker hub
 weight: 50
 ---
 
 [Docker Verified Publisher (DVP)](/manuals/docker-hub/repos/manage/trusted-content/dvp-program.md)
 is a program for commercial publishers who distribute content on Docker
-Hub. DVP Starter and DVP Growth are paid plans for organization
-accounts. They add publisher analytics and reporting on top of your
-verified publisher status.
+Hub. DVP Starter and DVP Growth are paid organization plans that add
+publisher analytics and reporting to verified publisher status.
 
-- DVP Starter includes verified publisher status, prioritized search
-  ranking, Docker Scout vulnerability scanning, and a summary analytics
-  report.
-- DVP Growth extends Starter with a trends report, tracked company
-  reports, and 25 included tracked companies.
+- DVP Starter includes a verified publisher badge, prioritized search
+  ranking, [Docker Scout](/manuals/scout/_index.md) vulnerability
+  scanning, and weekly and monthly summary reports.
+- DVP Growth includes everything in DVP Starter, plus trends, tracked
+  companies, technographic companies, and benchmark reports, with 25
+  tracked companies included.
+
+For a plan comparison, see the
+[DVP landing page](https://hub.docker.com/publisher-program).
 
 > [!TIP]
-> You subscribe to a DVP plan by first submitting an application for
-> review. See
-> [Apply for DVP Starter or Growth](#apply-for-dvp-starter-or-growth).
+> DVP plans require an approved application before you can subscribe.
+> See [Apply for DVP Starter or Growth](#apply-for-dvp-starter-or-growth).
 
 ## Usage
 
-Any organization can hold a DVP plan with or without Docker Team or
-Docker Business. If you only have a Docker Personal or Docker Pro
-account, you can create an organization when you apply.
+Organizations can hold a DVP plan and DVP entitlements apply per organization
+namespace. If you operate multiple namespaces, each one needs its own DVP
+application. If you only have a Docker Personal or Docker Pro account, you can
+create an organization when you apply.
 
-Tracked companies represent the unique companies that pull your images
-over a period. You can add more tracked companies to a DVP Growth plan
-in increments of 25 from the billing portal. For
-steps, see [Add tracked companies](#add-tracked-companies).
+Tracked companies are unique company domains that pull your images.
+On DVP Growth, you can add more tracked companies in increments of
+25 from the billing portal. For steps, see
+[Add tracked companies](#add-tracked-companies).
 
 For details on the reports available to verified publishers, see
 [Insights and analytics](/manuals/docker-hub/repos/manage/trusted-content/insights-analytics.md).
 
 ## Apply for DVP Starter or Growth
 
-To add DVP Starter or DVP Growth, apply for a DVP plan, then subscribe
-after approval.
+To add DVP Starter or DVP Growth, you must apply for a DVP plan. After Docker
+approves your application, complete checkout to subscribe.
 
 1. Go to the [DVP landing page](https://hub.docker.com/publisher-program).
    The page contains information about DVP Starter and DVP Growth.
-1. Select **Apply for Growth**.
+1. Select **Apply for DVP**. Sign in if prompted.
 1. Select an existing organization namespace, or create a new one if
    needed.
 1. Fill in the content you want to publish and select DVP Starter or
    DVP Growth.
-1. Submit your application for review with **Submit application**, then
-   continue to **Configure your plan**.
-1. If approved, you will receive an email to complete checkout. Open the link, then select the plan you applied for from the **Configure your plan**
-   page.
+1. Submit your application for review with **Submit application**.
+1. After approval, Docker emails you a checkout link. Open the link,
+   then select DVP Starter or DVP Growth.
 1. Verify your billing details, continue to payment, and complete
    checkout.
 
 > [!IMPORTANT]
-> Your account is charged only upon approval, which you receive as an
-> email notification.
+> Docker emails a checkout link after it approves your application.
+> You're charged when you complete payment.
 
 ## Add tracked companies
 
@@ -82,15 +84,14 @@ portal:
 
 ## Billing behaviors
 
-DVP Starter and DVP Growth are billed annually. If you have DVP
-Starter, you can upgrade to DVP Growth without submitting a new
-application. Upgrades take effect immediately.
+DVP Starter and DVP Growth are billed annually. You can upgrade from
+DVP Starter to DVP Growth without a new application. Upgrades take
+effect immediately.
 
-For DVP Growth plans, you can add additional tracked
-companies. Tracked company add-ons are prorated from the date of
-purchase for the remainder of your billing period and expire at the
+On DVP Growth, tracked company add-ons are prorated from the purchase
+date through the rest of your billing period, and they expire at the
 end of your annual subscription. You can reduce your add-on count at
-any time. Removing tracked companies takes effect at the end of the current billing cycle.
+any time. Removals take effect at the end of the current billing cycle.
 
 > [!IMPORTANT]
 > No mid-cycle refunds are issued when you reduce tracked company

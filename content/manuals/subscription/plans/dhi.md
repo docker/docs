@@ -1,13 +1,13 @@
 ---
 title: DHI plans
-linkTitle: Docker Hardened Images (DHI)
+linkTitle: Docker Hardened Images
 description:
   Manage Docker Hardened Images Select and Enterprise repositories for
   organization accounts, including purchasing, adding repositories, and
   deactivating
 keywords: dhi select, dhi enterprise, docker hardened images, hardened images,
   repositories, organization subscription, secure images
-weight: 30
+weight: 40
 aliases:
   - /subscription/products/dhi-select/
   - /subscription/dhi-select/
