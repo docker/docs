@@ -77,6 +77,7 @@ For example, if you mount `/Users/bob/src/my-project`, select
 - [Cursor](cursor.md)
 - [Claude Desktop](claude-desktop.md)
 - [ChatGPT](chatgpt.md)
+- [T3 Code](t3-code.md)
 
 ## How SSH connections work
 
