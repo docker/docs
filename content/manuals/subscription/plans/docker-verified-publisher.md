@@ -56,11 +56,10 @@ after approval.
    DVP Growth.
 1. Submit your application for review with **Submit application**, then
    continue to **Configure your plan**.
-1. If approved, select the plan you applied for from the **Configure your plan**
+1. If approved, you will receive an email to complete checkout. Open the link, then select the plan you applied for from the **Configure your plan**
    page.
 1. Verify your billing details, continue to payment, and complete
-   checkout. You are not charged until Docker approves your
-   application.
+   checkout.
 
 > [!IMPORTANT]
 > Your account is charged only upon approval, which you receive as an
