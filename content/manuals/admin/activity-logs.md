@@ -114,9 +114,9 @@ Refer to the following section for a list of events and their descriptions:
 ### AI Governance events
 
 These events record who created or edited an
-[AI Governance](/manuals/ai/sandboxes/governance/) policy in Docker Home.
+[AI Governance](/manuals/ai/sandboxes/governance/_index.md) policy in Docker Home.
 They are not the same as
-[AI Governance Audit Logs](/manuals/ai/sandboxes/governance/audit/),
+[AI Governance Audit Logs](/manuals/ai/sandboxes/governance/audit/_index.md),
 which record sandbox policy decisions at runtime.
 
 | Event | Description |
