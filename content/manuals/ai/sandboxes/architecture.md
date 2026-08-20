@@ -8,16 +8,27 @@ keywords: docker sandboxes, architecture, microVM, workspace mounting, sandbox l
 This page explains how Docker Sandboxes work under the hood. For the security
 properties of the architecture, see [Sandbox isolation](security/isolation.md).
 
-## Workspace mounting
+## Workspace storage
 
-Your workspace is mounted directly into the sandbox through a filesystem
-passthrough. The sandbox sees your actual host files, so changes in either
-direction are instant with no sync process involved.
+The workspace path is optional. When you omit it, the sandbox has no host
+workspace bind mount. The agent works in the container image's configured
+working directory instead. Built-in images use `/home/agent/workspace`; custom
+templates can define another absolute working directory. Files created there
+stay inside the sandbox and persist across stops and restarts.
 
-Your workspace is mounted at the same absolute path as on your host. Preserving
-absolute paths means error messages, configuration files, and build outputs all
-reference paths you can find on your host. The agent sees exactly the directory
-structure you see, which reduces confusion when debugging or reviewing changes.
+When you pass a workspace path, the directory is mounted into the sandbox
+through a filesystem passthrough. The sandbox sees your actual host files, so
+changes in either direction are instant with no sync process involved.
+
+A directly mounted workspace appears at the same absolute path as on your
+host. Preserving absolute paths means error messages, configuration files, and
+build outputs all reference paths you can find on your host. The agent sees the
+same directory structure, which reduces confusion when debugging or reviewing
+changes.
+
+Clone mode uses a third storage layout. The host repository is mounted
+read-only at `/run/sandbox/source`, and the agent works in a private clone
+inside the sandbox. See [Clone mode](usage.md#clone-mode).
 
 > [!WARNING]
 > Avoid mounting network-attached or remote storage (network drives, SMB/NFS
@@ -29,7 +40,8 @@ structure you see, which reduces confusion when debugging or reviewing changes.
 
 When you create a sandbox, everything inside it persists until you remove it:
 Docker images and containers built or pulled by the agent, installed packages,
-agent state and history, and workspace changes.
+agent state and history, and files in mountless or cloned workspaces. Files in
+a directly mounted workspace live on the host instead.
 
 Each sandbox maintains its own Docker daemon state, image cache, and package
 installations. Multiple sandboxes don't share images or layers. The
@@ -40,14 +52,15 @@ when creating the sandbox.
 Each sandbox consumes disk space for its VM image, Docker images, container
 layers, and volumes, and this grows as you build images and install packages.
 
-Virtiofs caching is enabled by default on all operating systems. File reads
-from the sandbox VM are cached on the host side, reducing round-trips through
-the filesystem passthrough and improving performance for read-heavy workloads
-such as `git status` or directory scans. To opt out, set
+Virtiofs caching is enabled by default for directly mounted workspaces on all
+operating systems. File reads from the sandbox VM are cached on the host side,
+reducing round-trips through the filesystem passthrough and improving
+performance for read-heavy workloads such as `git status` or directory scans.
+To opt out, set
 `DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0` when creating the sandbox:
 
 ```console
-$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <template>
+$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <agent> .
 ```
 
 ## Networking
@@ -98,9 +111,9 @@ tool calls, resource reads, prompt retrieval, or gateway meta-tool execution.
 
 ## Lifecycle
 
-`sbx run` initializes a VM with a workspace for a specified agent and starts
-the agent. You can stop and restart without recreating the VM, preserving
-installed packages and Docker images.
+`sbx run` initializes a VM for a specified agent and starts the agent. You can
+stop and restart without recreating the VM, preserving installed packages,
+Docker images, and in-sandbox files.
 
 Sandboxes persist until explicitly removed. Stopping an agent doesn't delete
 the VM; environment setup carries over between runs. Use `sbx rm` to delete

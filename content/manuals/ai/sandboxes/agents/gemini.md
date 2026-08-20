@@ -20,12 +20,15 @@ Create a sandbox and run Gemini for a project directory:
 $ sbx run gemini ~/my-project
 ```
 
-The workspace parameter is optional and defaults to the current directory:
+Use `.` to mount the current directory:
 
 ```console
 $ cd ~/my-project
-$ sbx run gemini
+$ sbx run gemini .
 ```
+
+Omit the workspace path to create a
+[mountless sandbox](../usage.md#choose-a-workspace) instead.
 
 ## Authentication
 
@@ -65,7 +68,7 @@ Arguments after `--` are added after the default flags when the first one is
 itself a flag (begins with `-`), so `--yolo` is preserved:
 
 ```console
-$ sbx run gemini -- -p "explain this"   # runs gemini --yolo -p "explain this"
+$ sbx run gemini . -- -p "explain this"   # runs gemini --yolo -p "explain this"
 ```
 
 When the first argument is a bare word — a subcommand or prompt — it replaces

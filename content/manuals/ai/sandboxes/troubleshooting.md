@@ -220,23 +220,22 @@ configure the cloned workspace volume capacity. The variable accepts
 human-readable size strings such as `100g`:
 
 ```console
-$ DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE=100g sbx run --clone claude
+$ DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE=100g sbx run --clone claude .
 ```
 
 ## Filesystem operations are slow in large repositories
 
 Filesystem operations such as `git status`, `git log`, or directory scans can
-be noticeably slow when the sandbox workspace is mounted in direct mode (the
-default for workspaces without `--clone`). Virtiofs caching speeds up these
-workloads. Clone-mode sandboxes always enable it, so this tuning applies only
-to direct mode.
+be noticeably slow when you pass a workspace path and use direct mode.
+Virtiofs caching speeds up these workloads. Clone-mode sandboxes always enable
+it, so this tuning applies only to direct mode.
 
 Virtiofs caching is enabled by default on all operating systems. If you
 experience Git index corruption or unexpected file content, disable caching
 with the kill switch and recreate the sandbox:
 
 ```console
-$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <template>
+$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <agent> .
 ```
 
 ## Clone mode reports "not in a Git repository" on WSL

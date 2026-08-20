@@ -10,8 +10,8 @@ params:
 
 Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
 sandbox gets its own Docker daemon, filesystem, and network — the agent can
-build containers, install packages, and modify files without touching your host
-system.
+build containers, install packages, and modify files without accessing host
+resources beyond those you share.
 
 > [!NOTE]
 > The `sbx` CLI is free to use, including for commercial work. Only
@@ -31,7 +31,7 @@ Then launch an agent in a sandbox:
 
 ```console
 $ cd ~/my-project
-$ sbx run claude
+$ sbx run claude .
 ```
 
 See the [get started guide](get-started.md) for a first-session walkthrough, or

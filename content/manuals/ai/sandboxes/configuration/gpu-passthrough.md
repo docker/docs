@@ -116,7 +116,7 @@ sbx create --gpu claude .
 The `sbx run` command takes the same flag:
 
 ```console
-sbx run --gpu claude
+sbx run --gpu claude .
 ```
 
 The flag takes effect when the sandbox is created. Passing it when you
