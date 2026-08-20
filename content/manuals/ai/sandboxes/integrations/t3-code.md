@@ -18,6 +18,25 @@ that tunnels back to the app.
 - SSH access set up. See [Editor and app integrations](_index.md#enable-ssh-access).
 - T3 Code installed.
 
+The first connection installs the T3 server in the sandbox, which needs a
+build toolchain. T3 depends on `node-pty`, which ships prebuilt binaries only
+for macOS and Windows. On a Linux sandbox, `node-pty` compiles from source and
+the build fails without `make`, `python3`, and a compiler such as `g++`:
+
+```console
+$ sbx exec <sandbox> -- sudo apt-get update
+$ sbx exec <sandbox> -- sudo DEBIAN_FRONTEND=noninteractive apt-get install -y g++ make python3
+```
+
+Verify the toolchain is in place:
+
+```console
+$ sbx exec <sandbox> -- sh -lc 'command -v g++ && command -v make && command -v python3'
+```
+
+This setup does not persist across sandbox recreation. For a setup that does,
+add the package to a custom image or kit instead.
+
 ## Connect
 
 Confirm that you can connect to the sandbox from a terminal:
@@ -48,18 +67,50 @@ sandbox "sandboxes"… Remote T3 server did not become ready on
 current: { node: 'v22.22.1', npm: '9.2.0' } }
 ```
 
-The `npm WARN EBADENGINE` lines warn about the transitive `ini` dependency.
-They aren't the cause of the failure — npm doesn't enforce engine
-requirements by default, so this warning alone doesn't stop the install.
-Check free disk space in the sandbox. A full disk can fail the T3 server
-install partway through, and T3 Code reports this the same way as a
-connection timeout:
+The `npm WARN EBADENGINE` lines warn about the transitive `ini` dependency
+and are separate from the failure: npm enforces engine requirements only
+when `engine-strict` is set, which is off by default, so this warning alone
+still lets the install proceed.
+
+The most common causes are a missing C++ toolchain and a full disk, and both
+produce this identical error. Get npm's actual output to tell them apart:
+
+```console
+$ sbx exec <sandbox> -- sh -lc \
+  'rm -rf /tmp/t3probe && mkdir -p /tmp/t3probe && cd /tmp/t3probe \
+   && npm init -y >/dev/null && npm install t3@latest 2>&1 | tail -40'
+```
+
+A missing compiler fails the native `node-pty` build with `Error 127` from
+`make`:
+
+```text
+npm ERR! make: g++: No such file or directory
+npm ERR! make: *** [pty.target.mk:115: Release/obj.target/pty/src/unix/pty.o] Error 127
+npm ERR! gyp ERR! build error
+npm ERR! gyp ERR! stack Error: `make` failed with exit code: 2
+```
+
+Install the build toolchain as described in [Prerequisites](#prerequisites).
+
+A full disk fails with `ENOSPC`, and no gyp output appears at all because npm
+fails before the native build starts:
+
+```text
+npm ERR! code ENOSPC
+npm ERR! nospc ENOSPC: no space left on device
+```
+
+Check free disk space:
 
 ```console
 $ sbx exec <sandbox> -- df -h /
 ```
 
-Free up space and reconnect if the sandbox is close to full.
+A sandbox can have both problems at once. Fixing one still leaves the same
+top-level error, so check both the toolchain and disk space before
+concluding the sandbox is ready. Free up space or install the toolchain as
+needed, then reconnect.
 
 ## Troubleshoot `turn/setPermissionMode failed`
 
