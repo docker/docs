@@ -451,8 +451,7 @@ don't gate the agent's entrypoint: the agent launches once startup
 commands have been dispatched, regardless of `background`. A value of
 `false` waits within the startup dispatcher before it runs the next command;
 it doesn't delay the agent entrypoint. Use startup commands
-for non-interactive prep — launching daemons, warming caches,
-refreshing config — and use `setup.files` for any value that
+for work that can run alongside the agent. Use `setup.files` for any value that
 needs to land on disk before the agent runs.
 
 Startup commands must be idempotent. They run on every sandbox start
