@@ -21,6 +21,13 @@ All Docker Pro, Team, and Business subscribers receive email support for Docker 
 - Docker Team: 2 business day response, 24×5 availability
 - Docker Business: 1 business day response, 24×5 availability
 
+Docker Verified Publisher (DVP) organizations follow the response times for their
+Docker Pro, Team, or Business subscription. Without one of those subscriptions,
+the following response times apply:
+
+- DVP Starter: 3 business day response
+- DVP Growth: 2 business day response, 24×5 availability
+
 > [!TIP]
 >
 > Premium Support with faster response times and 24×7 availability is available as an add-on for [Docker Business subscribers](https://www.docker.com/pricing?ref=Docs&refAction=DocsSupport).

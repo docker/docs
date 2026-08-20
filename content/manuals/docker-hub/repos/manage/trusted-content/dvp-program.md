@@ -18,8 +18,9 @@ toc_max: 2
 ---
 
 [The Docker Verified Publisher
-Program](https://hub.docker.com/search?badges=verified_publisher) provides
-high-quality images from commercial publishers verified by Docker.
+Program](https://hub.docker.com/search?badges=verified_publisher) is a paid
+subscription program that provides high-quality images from commercial
+publishers verified by Docker.
 
 These images help development teams build secure software supply chains,
 minimizing exposure to malicious content early in the process to save time and
@@ -28,8 +29,8 @@ money later.
 ## Who's eligible to become a verified publisher?
 
 Any independent software vendor who distributes software on Docker Hub can join
-the Verified Publisher Program. Find out more by heading to the [Docker Verified
-Publisher Program](https://www.docker.com/partners/programs) page.
+the Verified Publisher Program. To apply, see the [Verified Publisher Program
+application](https://hub.docker.com/publisher-program/apply).
 
 > [!NOTE]
 >
@@ -55,8 +56,6 @@ on participation tier:
   with Docker Scout
 - [Priority search ranking](#priority-search-ranking): Enhanced discoverability
   in Docker Hub search results
-- [Co-marketing opportunities](#co-marketing-opportunities): Joint promotional
-  activities with Docker
 
 ### Enterprise-grade infrastructure
 
@@ -116,13 +115,6 @@ results, making it easier for developers to discover your content. This improved
 discoverability helps drive adoption of your images within the developer
 community.
 
-### Co-marketing opportunities
-
-Docker collaborates with verified publishers on joint marketing initiatives,
-including blog posts, case studies, webinars, and conference presentations.
-These opportunities help amplify your brand visibility within the Docker
-ecosystem.
-
 ### Insights and analytics
 
 The insights and analytics service provides usage metrics for how
@@ -133,6 +125,13 @@ There is both a [web interface](./insights-analytics.md) and an
 
 The usage metrics show the number of image pulls by tag or by digest,
 geolocation, cloud provider, client, and more.
+
+## Support
+
+The program doesn't change support for your organization. Support follows your
+organization's Docker subscription, or your program tier if you don't have a paid
+Docker subscription. For details, see [support response
+times](/manuals/support/_index.md#support-response-times).
 
 ## Manage repository logo
 
