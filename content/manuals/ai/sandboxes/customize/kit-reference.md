@@ -472,6 +472,11 @@ Files written at sandbox start, with runtime substitution.
 | `mode`          | `"0644"` | File permissions in octal.                                |
 | `onlyIfMissing` | `false`  | Skip if the file already exists.                          |
 
+The runtime writes these files as the agent user with UID 1000. The target
+path must be writable by that user. To write to a root-owned path such as
+`/etc`, use an `install` command, which runs as root by default. Set ownership
+in the install command if the agent needs to modify the file later.
+
 ## Static files
 
 ```text
