@@ -1,6 +1,6 @@
 ---
 title: Cursor
-weight: 33
+weight: 40
 description: |
   Use Cursor in Docker Sandboxes with API key or proxy-managed OAuth
   authentication.
@@ -32,7 +32,7 @@ $ sbx run cursor
 Cursor supports two authentication methods: an API key or OAuth.
 
 **API key**: Store your Cursor API key using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set cursor

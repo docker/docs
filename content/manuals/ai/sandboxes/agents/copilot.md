@@ -30,7 +30,7 @@ $ sbx run copilot
 ## Authentication
 
 Copilot requires a GitHub token with Copilot access. Store your token using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set github --command 'gh auth token'

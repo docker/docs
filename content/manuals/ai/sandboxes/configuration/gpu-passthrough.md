@@ -3,7 +3,9 @@ title: Enable NVIDIA GPU passthrough
 linkTitle: GPU passthrough
 description: Run GPU-accelerated workloads in a sandbox by building and installing the NVIDIA driver bundle for VFIO passthrough.
 keywords: docker sandboxes, sbx, gpu, gpu passthrough, nvidia, vfio, iommu, driver bundle, cuda
-weight: 65
+weight: 30
+aliases:
+  - /ai/sandboxes/gpu-passthrough/
 ---
 
 > [!IMPORTANT]

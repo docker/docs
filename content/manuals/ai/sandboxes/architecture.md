@@ -1,6 +1,6 @@
 ---
 title: Architecture
-weight: 70
+weight: 100
 description: Technical architecture of Docker Sandboxes; workspace mounting, storage, networking, and sandbox lifecycle.
 keywords: docker sandboxes, architecture, microVM, workspace mounting, sandbox lifecycle
 ---
@@ -33,7 +33,7 @@ agent state and history, and workspace changes.
 
 Each sandbox maintains its own Docker daemon state, image cache, and package
 installations. Multiple sandboxes don't share images or layers. The
-[shared agent skills store](workflows.md#share-agent-skills) is an exception:
+[shared agent skills store](workflows/agent-skills.md) is an exception:
 supported agents mount the same host-side store read-write unless you opt out
 when creating the sandbox.
 
@@ -56,7 +56,7 @@ All outbound TCP traffic from the sandbox routes through a proxy on your host.
 Agents use a forward proxy for HTTP and HTTPS; other TCP traffic is forwarded
 transparently. Both paths enforce
 [network access policies](governance/access-controls/network.md). The forward
-proxy also handles [credential injection](security/credentials.md). See
+proxy also handles [credential injection](configuration/credentials.md). See
 [Network isolation](security/isolation.md#network-isolation) for how this
 works and [Default security posture](security/defaults.md) for what is
 allowed out of the box.
@@ -74,7 +74,7 @@ By default, both sandbox traffic and the daemon's own traffic follow your OS
 system proxy, so this usually works without any configuration. To set a proxy
 explicitly — with a proxy URL, a PAC file, a SOCKS5 proxy, or separate settings
 for sandbox and daemon traffic — see
-[Configure an upstream proxy](upstream-proxy.md). Upstream proxy support is
+[Configure an upstream proxy](configuration/upstream-proxy.md). Upstream proxy support is
 experimental and subject to change.
 
 Only HTTP and HTTPS traffic can be forwarded to an upstream proxy. Other TCP

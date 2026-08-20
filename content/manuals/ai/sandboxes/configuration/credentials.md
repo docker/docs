@@ -1,8 +1,11 @@
 ---
-title: Credentials
-weight: 20
+title: Manage credentials
+linkTitle: Credentials
+weight: 10
 description: How Docker Sandboxes handle API keys and authentication credentials for sandboxed agents.
 keywords: docker sandboxes, credentials, api keys, authentication, proxy, ssh agent, secrets
+aliases:
+  - /ai/sandboxes/security/credentials/
 ---
 
 Most agents need an API key for their model provider. An HTTP/HTTPS proxy on
@@ -10,7 +13,7 @@ your host intercepts outbound requests from the sandbox, looks up the matching
 credential on the host, and overwrites the auth header before forwarding. The
 real credential stays on the host when proxy management is active; the sandbox
 sees only a sentinel value. See
-[Trust boundaries](_index.md#trust-boundaries) for how credential isolation
+[Trust boundaries](../security/_index.md#trust-boundaries) for how credential isolation
 fits into the broader sandbox security model.
 
 ## How credential injection works
@@ -182,7 +185,7 @@ $ sbx secret import openai --force
 
 Pass `--dry-run` to preview what would be imported without writing anything.
 Run `sbx secret ls` afterwards to confirm what's stored. For setting up
-credentials in CI, see [CI and headless use](../workflows.md#ci-and-headless-use).
+credentials in CI, see [CI and headless use](../workflows/automation.md).
 
 ### Built-in services
 
@@ -281,7 +284,7 @@ Use SSH agent forwarding for Git operations over SSH and SSH-based commit
 signing. The signing key must be loaded in the host SSH agent for sandboxed
 commit signing to work. Outbound SSH connections are still subject to sandbox
 network policy. For details, see
-[Commit signing](../workflows.md#commit-signing).
+[Commit signing](../workflows/git.md#commit-signing).
 
 ## Custom secrets
 
@@ -539,8 +542,8 @@ $ sbx secret rm --sandbox my-sandbox --registry ghcr.io -f
   appears when the agent starts. See the individual [agent pages](../agents/)
   for each agent's flow.
 - If you store credentials in 1Password or AWS Secrets Manager, see
-  [Sourcing credentials from 1Password](../workflows.md#sourcing-credentials-from-1password)
-  and [Sourcing credentials from AWS Secrets Manager](../workflows.md#sourcing-credentials-from-aws-secrets-manager).
+  [Sourcing credentials from 1Password](../workflows/authentication.md#source-credentials-from-1password)
+  and [Sourcing credentials from AWS Secrets Manager](../workflows/authentication.md#source-credentials-from-aws-secrets-manager).
 
 ## Custom templates and placeholder values
 

@@ -60,7 +60,7 @@
       "product": "Docker Sandboxes",
       "title": "Share agent skills across sandboxes",
       "description": "Import skills from supported host agents into a persistent store that sandboxes can share.",
-      "url": "/ai/sandboxes/workflows/#share-agent-skills",
+      "url": "/ai/sandboxes/workflows/agent-skills/",
       "published": "2026-07-24",
       "source_prs": [25588],
       "featured": false

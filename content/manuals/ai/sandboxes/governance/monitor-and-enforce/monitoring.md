@@ -141,7 +141,7 @@ The `PROXY` column shows how the request left the sandbox:
 
 | Value            | Description                                                                                                    |
 | ---------------- | -------------------------------------------------------------------------------------------------------------- |
-| `forward`        | Routed through the forward proxy. Supports [credential injection](../../security/credentials.md).              |
+| `forward`        | Routed through the forward proxy. Supports [credential injection](../../configuration/credentials.md).              |
 | `forward-bypass` | Routed through the forward proxy without credential injection.                                                 |
 | `transparent`    | Intercepted by the transparent proxy. Policy is enforced but credential injection is not available.            |
 | `network`        | Non-HTTP traffic (raw TCP, UDP, ICMP). TCP can be allowed with a policy rule. UDP and ICMP are always blocked. |

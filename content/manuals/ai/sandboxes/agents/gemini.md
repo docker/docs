@@ -1,6 +1,6 @@
 ---
 title: Gemini
-weight: 40
+weight: 70
 description: |
   Use Google Gemini in Docker Sandboxes with proxy-managed authentication and
   API key configuration.
@@ -32,7 +32,7 @@ $ sbx run gemini
 Gemini requires either a Google API key or a Google account with Gemini access.
 
 **API key**: Store your key using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set google

@@ -1,7 +1,7 @@
 ---
 title: Editor and app integrations
 linkTitle: Integrations
-weight: 37
+weight: 70
 description: Connect editors and desktop apps to a Docker Sandbox over SSH.
 keywords: docker sandboxes, ssh, integrations, vs code, cursor, remote development, sbx
 ---

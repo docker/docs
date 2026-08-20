@@ -1,6 +1,6 @@
 ---
 title: OpenCode
-weight: 60
+weight: 90
 description: |
   Use OpenCode in Docker Sandboxes with multi-provider authentication and TUI
   interface for AI development.
@@ -33,7 +33,7 @@ preferred LLM provider and interact with the agent.
 ## Authentication
 
 OpenCode supports multiple providers. Store keys for the providers you want to
-use with [stored secrets](../security/credentials.md#stored-secrets):
+use with [stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set openai
@@ -52,7 +52,7 @@ available credentials and offers those providers in the TUI.
 
 OpenCode Zen API keys aren't part of the built-in OpenCode credentials that
 `sbx secret set` supports. To use an OpenCode Zen API key, store it as a
-[custom secret](../security/credentials.md#custom-secrets):
+[custom secret](../configuration/credentials.md#custom-secrets):
 
 Set the `OPENCODE_API_KEY` environment variable on the host, then store it:
 

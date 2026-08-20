@@ -46,13 +46,13 @@ in your OS keychain. The OAuth flow runs on the host, not inside the sandbox,
 so browser-based authentication works without any extra setup.
 
 **API key**: Store your OpenAI API key using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set openai
 ```
 
-See [Credentials](../security/credentials.md) for more details.
+See [Credentials](../configuration/credentials.md) for more details.
 
 ## Configuration
 

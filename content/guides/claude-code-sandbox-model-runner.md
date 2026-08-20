@@ -88,7 +88,7 @@ $ sbx policy allow network localhost:12434
 ```
 
 For background on host access from sandboxes, see
-[Accessing host services from a sandbox](../manuals/ai/sandboxes/workflows.md#accessing-host-services-from-a-sandbox).
+[Accessing host services from a sandbox](../manuals/ai/sandboxes/workflows/development.md#accessing-host-services-from-a-sandbox).
 
 ## Step 3: Create a Claude Code sandbox
 
@@ -111,7 +111,7 @@ You don't need to set an Anthropic API key or run `sbx secret set
 anthropic`. Docker Model Runner doesn't authenticate the local endpoint,
 and the sandbox proxy only injects credentials for requests bound for
 `api.anthropic.com`. See
-[Credentials](../manuals/ai/sandboxes/security/credentials.md) for the full
+[Credentials](../manuals/ai/sandboxes/configuration/credentials.md) for the full
 list of services the proxy authenticates. For more ways to set variables, see
 [Set environment variables](../manuals/ai/sandboxes/usage.md#set-environment-variables).
 

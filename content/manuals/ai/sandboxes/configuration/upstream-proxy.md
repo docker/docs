@@ -3,7 +3,9 @@ title: Configure an upstream proxy
 linkTitle: Upstream proxy
 description: Route sandbox and daemon traffic through a corporate or upstream proxy, including PAC files, SOCKS5, and your OS system proxy.
 keywords: docker sandboxes, sbx, upstream proxy, corporate proxy, pac, socks5, system proxy, no_proxy, egress, ntlm, kerberos
-weight: 75
+weight: 40
+aliases:
+  - /ai/sandboxes/upstream-proxy/
 ---
 
 > [!IMPORTANT]
@@ -15,7 +17,7 @@ weight: 75
 
 An upstream proxy is the corporate or network proxy that Docker Sandboxes
 forwards outbound traffic through on its way to the internet. This is separate
-from the [network policy](governance/access-controls/network.md), which decides
+from the [network policy](../governance/access-controls/network.md), which decides
 _which_ destinations are allowed. The upstream proxy decides _how_ allowed
 traffic reaches them.
 
@@ -164,7 +166,7 @@ platforms, credentials in the proxy URL remain the only option.
 
 ## Related pages
 
-- [Network isolation](security/isolation.md) — how traffic leaves a sandbox and
+- [Network isolation](../security/isolation.md) — how traffic leaves a sandbox and
   the network policy it passes through
-- [Troubleshooting: API calls fail with a certificate error](troubleshooting.md#api-calls-fail-with-a-certificate-error)
+- [Troubleshooting: API calls fail with a certificate error](../troubleshooting.md#api-calls-fail-with-a-certificate-error)
   — installing an internal root CA when your proxy inspects HTTPS traffic

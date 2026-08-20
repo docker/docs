@@ -3,7 +3,7 @@ title: Kit examples
 linkTitle: Examples
 description: Copy-and-adapt spec.yaml snippets for common mixin and sandbox kit patterns — static files, install commands, shell customization, background services, setup files, Claude Code skills, and agent forks.
 keywords: sandboxes, sbx, kits, mixins, examples, patterns, skills
-weight: 25
+weight: 40
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
@@ -376,7 +376,7 @@ $ sbx secret set anthropic
 When you launch the kit for the first time, `sbx` prompts you to approve its
 inherited Anthropic credentials. Because this is a third-party schema v2 kit,
 `sbx` records your approval as a
-[credential binding](../security/credentials.md#credential-bindings). The
+[credential binding](../configuration/credentials.md#credential-bindings). The
 sandbox receives a sentinel value, and the proxy injects the real API key into
 requests to the domains declared by the kit.
 

@@ -1,7 +1,7 @@
 ---
 title: Security model
 linkTitle: Security model
-weight: 80
+weight: 110
 description: Trust boundaries, isolation layers, and security properties of Docker Sandboxes.
 keywords: docker sandboxes, security model, isolation, trust boundaries, microVM
 ---
@@ -112,7 +112,7 @@ store is mounted read-write, so one sandbox can modify instructions or scripts
 that an agent later uses in another sandbox. This doesn't expose the rest of
 the host filesystem or create a direct network path between sandboxes, but it
 does put participating sandboxes in the same trust boundary. See
-[Share agent skills](../workflows.md#share-agent-skills) for details and the
+[Share agent skills](../workflows/agent-skills.md) for details and the
 per-sandbox opt-out.
 
 Local stdio MCP servers run outside the sandbox VM. If you register a local MCP
@@ -137,6 +137,7 @@ admins.
   workspace, and credential isolation work
 - [Default security posture](defaults/): what a fresh sandbox permits and
   blocks
-- [Credentials](credentials/): how to provide and manage API keys
+- [Manage credentials](../configuration/credentials.md): provide and manage API
+  keys while keeping their values outside the sandbox
 - [Governance](../governance/): configure network, filesystem, and MCP access
   controls locally or across your organization

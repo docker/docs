@@ -22,7 +22,7 @@ processes, files, or resources outside its defined boundaries.
   are invisible to your host and to other sandboxes
 - **Filesystem isolation:** your workspace directory and, for supported agents
   that haven't opted out, the dedicated [shared skills
-  store](../workflows.md#share-agent-skills) are shared with the host. The rest
+  store](../workflows/agent-skills.md) are shared with the host. The rest
   of the VM filesystem persists across restarts but is removed when you delete
   the sandbox. Symlinks pointing outside the workspace scope are not followed.
 - **Full cleanup:** when you remove a sandbox with `sbx rm`, the VM and
@@ -36,13 +36,13 @@ hypervisor boundary is the isolation control, not in-VM privilege separation.
 Each sandbox has its own isolated network. Sandboxes cannot communicate
 directly with each other or share a network with your host. To reach a service
 running on the host through a policy-controlled connection, see
-[Accessing host services from a sandbox](../workflows.md#accessing-host-services-from-a-sandbox).
+[Accessing host services from a sandbox](../workflows/development.md#accessing-host-services-from-a-sandbox).
 
 All outbound TCP traffic passes through a proxy on your host that enforces the
 [network access policy](../governance/access-controls/network.md). The sandbox
 routes traffic through either a forward proxy or a transparent proxy depending
 on the client's configuration. Both enforce the network policy. Only the
-forward proxy [injects credentials](credentials.md) for AI services.
+forward proxy [injects credentials](../configuration/credentials.md) for AI services.
 
 Direct external UDP and ICMP are blocked at the network layer. DNS queries use
 the sandbox's internal resolver, which enforces network policy. TCP connections
@@ -51,7 +51,7 @@ are allowed only when a policy rule matches the destination.
 For the default set of allowed domains, see
 [Default security posture](defaults.md). To forward allowed traffic through a
 corporate or upstream proxy, see
-[Configure an upstream proxy](../upstream-proxy.md).
+[Configure an upstream proxy](../configuration/upstream-proxy.md).
 
 ## Docker Engine isolation
 
@@ -104,7 +104,7 @@ workspace with it:
   the VM and the agent works on a private clone inside the VM. The
   agent's edits never reach your host until you fetch them.
 
-See [Git workflows](../workflows.md#git-workflows) for the workflow side of
+See [Git workflows](../workflows/git.md) for the workflow side of
 each.
 
 ### Direct mount (default)
@@ -166,7 +166,7 @@ or any tracked file on your host.
 > inspection**. Your repository is still mounted read-only into the sandbox,
 > including untracked files and files excluded by `.gitignore`. Files such as
 > `.env` remain readable by the agent. Store secrets outside your working
-> directory or use [credential isolation](credentials.md) instead.
+> directory or use [credential isolation](#credential-isolation) instead.
 
 ```mermaid
 flowchart LR
@@ -233,4 +233,4 @@ environment variables or files inside the sandbox unless you explicitly set
 them. This means a compromised sandbox cannot read API keys from the local
 environment.
 
-For how to store and manage credentials, see [Credentials](credentials.md).
+For how to store and manage credentials, see [Credentials](../configuration/credentials.md).

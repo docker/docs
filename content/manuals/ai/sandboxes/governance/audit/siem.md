@@ -1,7 +1,7 @@
 ---
 title: SIEM forwarding
 linkTitle: SIEM forwarding
-weight: 35
+weight: 40
 description: Forward Docker AI Governance audit events to Splunk, Dynatrace, or Datadog.
 keywords: docker sandboxes, SIEM, audit logs, Splunk, Dynatrace, Datadog, AI Governance, forwarding, NDJSON
 ---

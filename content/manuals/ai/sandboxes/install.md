@@ -1,7 +1,7 @@
 ---
 title: Install Docker Sandboxes
 linkTitle: Install
-weight: 5
+weight: 10
 description: Install the sbx CLI on macOS, Windows, or Linux and sign in to Docker Sandboxes.
 keywords: sandbox, sbx, install, macOS, Windows, Linux, Ubuntu
 ---

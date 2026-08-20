@@ -1,6 +1,6 @@
 ---
 title: Docker Agent
-weight: 70
+weight: 50
 description: |
   Use Docker Agent in Docker Sandboxes with multi-provider authentication
   supporting OpenAI, Anthropic, and more.
@@ -23,7 +23,7 @@ The workspace parameter defaults to the current directory, so
 ## Authentication
 
 Docker Agent supports multiple providers. Store keys for the providers you want
-to use with [stored secrets](../security/credentials.md#stored-secrets):
+to use with [stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set openai

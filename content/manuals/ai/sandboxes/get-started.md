@@ -1,7 +1,7 @@
 ---
 title: Get started with Docker Sandboxes
 linkTitle: Get started
-weight: 10
+weight: 20
 description: Configure agent credentials and work through your first Docker Sandboxes session.
 keywords: sandbox, sbx, get started, credentials, clone mode, network policy
 ---
@@ -30,7 +30,7 @@ in with OAuth. The session token stays on your host and is never stored inside
 the sandbox.
 
 If you prefer to authenticate with an API key, see
-[Credentials](security/credentials.md) for how to store one with
+[Credentials](configuration/credentials.md) for how to store one with
 `sbx secret set`.
 
 To give the agent access to GitHub for creating pull requests or interacting
@@ -175,9 +175,9 @@ Then explore:
 
 - [Usage guide](usage.md) — basic commands, reconnecting, workspaces, and port
   publishing.
-- [Workflow patterns](workflows.md) — Git strategies, local services, CI, and
+- [Workflow patterns](workflows/) — Git strategies, local services, CI, and
   authenticated tools.
-- [Sandbox environment files](sandbox-environments.md) — declare and share
+- [Sandbox environment files](configuration/environment-files.md) — declare and share
   repeatable local sandbox configurations with `.sbxenv.yaml`. Requires `sbx`
   0.39.0 or later.
 - [Customize with kits](customize/) — package an agent, its tools, and its

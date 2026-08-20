@@ -1,6 +1,6 @@
 ---
 title: FAQ
-weight: 110
+weight: 140
 description: Frequently asked questions about Docker Sandboxes.
 keywords: docker sandboxes, sbx, faq, sign in, telemetry, clipboard, image paste, pricing, commercial use, allowlist, firewall, domains, proxy
 ---
@@ -104,7 +104,7 @@ the sandbox, to pick up the new value.
 
 The sandbox itself is the safety boundary. Because agents run inside an
 isolated microVM with [network policies](governance/access-controls/network.md),
-[credential isolation](security/credentials.md), and no access to your host
+[credential isolation](security/isolation.md#credential-isolation), and no access to your host
 system outside explicitly shared paths, the usual reasons for approval prompts
 (preventing destructive commands, network access, file modifications) are
 handled by the sandbox isolation layers instead.
@@ -151,7 +151,7 @@ inside the sandbox.
 
 Shared agent skills are the exception. Run `sbx skills import` to copy skills
 from supported host directories into a persistent store shared with
-sandboxes. See [Share agent skills](workflows.md#share-agent-skills) for the
+sandboxes. See [Share agent skills](workflows/agent-skills.md) for the
 supported directories, mount behavior, and per-sandbox opt-out.
 
 Keep project-specific skills and other agent configuration in the project
@@ -211,4 +211,4 @@ storing them: install `gnome-keyring` and start `dbus-run-session`, or run the
 keyring daemon under a login session that unlocks it. Once a working Secret
 Service is available, `sbx` stores new
 secrets in the keychain again. For where each platform keeps secrets, see
-[Where secrets are stored](security/credentials.md#where-secrets-are-stored).
+[Where secrets are stored](configuration/credentials.md#where-secrets-are-stored).
