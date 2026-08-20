@@ -347,18 +347,21 @@ Use `ports` to expose sandbox services to the host:
 ```yaml
 ports:
   - container: 8080
-    protocol: tcp
     name: web
 ```
 
 | Field       | Description                                                         |
 | ----------- | ------------------------------------------------------------------- |
 | `container` | Container port, 1 to 65535.                                         |
-| `protocol`  | `tcp` or `udp`. Empty means `tcp`.                                  |
+| `protocol`  | `tcp` or `udp`. Empty publishes one family; see below.              |
 | `name`      | Optional label surfaced by tools that list published port bindings. |
 
-Host ports are allocated ephemerally on `127.0.0.1`. Users can pin host ports
-with `sbx ports --publish <host>:<container>`.
+Host ports are allocated ephemerally. Leave `protocol` empty unless the service
+listens on IPv6: an empty value publishes IPv4 only (`127.0.0.1`), which is what
+a service bound to `0.0.0.0` needs, while `tcp` publishes both `127.0.0.1` and
+`::1` — and a client arriving over `::1` is accepted and then reset if nothing
+in the sandbox is listening there. Users can pin host ports with
+`sbx ports --publish <host>:<container>`.
 
 ## Environment
 
