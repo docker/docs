@@ -41,6 +41,35 @@ If you hit persistent issues or corrupted state, run
 [`sbx reset`](/reference/cli/sbx/reset/) to stop all VMs and delete all sandbox
 data. Create fresh sandboxes afterwards.
 
+## Sandbox doesn't contain my project files
+
+Starting with `sbx` version 0.40.0, omitting the workspace path creates a
+mountless sandbox. The following command doesn't mount the current directory,
+so your host project files don't appear in the sandbox:
+
+```console
+$ sbx run <agent>
+```
+
+Pass `.` to mount the current directory when you create the sandbox:
+
+```console
+$ sbx run <agent> .
+```
+
+A sandbox's workspace configuration is fixed when the sandbox is created. To
+reuse the name of an existing mountless sandbox, first
+[copy out any files you want to keep](usage.md#copy-files-between-host-and-sandbox),
+then remove and recreate it with a workspace path:
+
+```console
+$ sbx rm <sandbox-name>
+$ sbx run --name <sandbox-name> <agent> .
+```
+
+See [Choose a workspace](usage.md#choose-a-workspace) for mountless, direct,
+and clone-mode behavior.
+
 ## Agent can't install packages or reach an API
 
 Sandboxes use [network access rules](governance/access-controls/network.md) to
