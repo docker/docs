@@ -274,11 +274,35 @@ interact with GitHub APIs on your behalf.
 
 ### SSH agent
 
-If your host has an SSH agent and `SSH_AUTH_SOCK` is set, Docker Sandboxes
-forwards the agent into the sandbox and sets `SSH_AUTH_SOCK` there. The
-private keys stay on your host. Processes inside the sandbox can request
-signatures from the forwarded agent, but they can't read or copy the private
-key.
+SSH agent forwarding is disabled by default. To let sandboxes use your host
+SSH agent, enable it explicitly and restart the daemon:
+
+```console
+$ sbx settings set ssh.agentForwardingEnabled true
+$ sbx daemon restart
+```
+
+With forwarding enabled, Docker Sandboxes forwards your host agent into the
+sandbox and sets `SSH_AUTH_SOCK` there. The private keys stay on your host.
+Processes inside the sandbox can request signatures from the forwarded agent,
+but they can't read or copy the private key.
+
+Each sandbox uses the `SSH_AUTH_SOCK` supplied by the client that creates,
+starts, or joins it. If a sandbox picks up the wrong agent, re-enter it from
+a shell where `SSH_AUTH_SOCK` points at the intended one.
+
+To always forward a fixed socket instead — for example, the 1Password SSH
+agent — set `ssh.agentSocketPath`:
+
+```console
+$ sbx settings set ssh.agentForwardingEnabled true
+$ sbx settings set ssh.agentSocketPath "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+$ sbx daemon restart
+```
+
+When `ssh.agentSocketPath` is set, every sandbox uses that socket regardless
+of the client's `SSH_AUTH_SOCK`. Clearing the path switches back to the
+per-client socket; it doesn't disable forwarding.
 
 Use SSH agent forwarding for Git operations over SSH and SSH-based commit
 signing. The signing key must be loaded in the host SSH agent for sandboxed
