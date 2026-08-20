@@ -68,7 +68,7 @@ Arguments after `--` are added after the default flags when the first one is
 itself a flag (begins with `-`), so `--yolo` is preserved:
 
 ```console
-$ sbx run gemini . -- -p "explain this"   # runs gemini --yolo -p "explain this"
+$ sbx run --name <sandbox-name> -- -p "explain this"   # runs gemini --yolo -p "explain this"
 ```
 
 When the first argument is a bare word — a subcommand or prompt — it replaces

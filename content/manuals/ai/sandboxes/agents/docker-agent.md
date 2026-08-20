@@ -60,7 +60,7 @@ as the `run` subcommand or a config file — it replaces the defaults, so includ
 `run --yolo` yourself:
 
 ```console
-$ sbx run docker-agent . -- run --yolo agent.yml
+$ sbx run --name <sandbox-name> -- run --yolo agent.yml
 ```
 
 ## Base image

@@ -73,7 +73,7 @@ itself a flag (begins with `-`), so `--dangerously-skip-permissions` is
 preserved:
 
 ```console
-$ sbx run claude . -- -c   # runs claude --dangerously-skip-permissions -c
+$ sbx run --name <sandbox-name> -- -c   # runs claude --dangerously-skip-permissions -c
 ```
 
 When the first argument is a bare word, such as the `agents` subcommand, it

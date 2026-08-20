@@ -61,7 +61,7 @@ The sandbox runs `droid` with no implicit flags. Args after `--` are passed
 straight through:
 
 ```console
-$ sbx run droid . -- exec "fix the build"
+$ sbx run --name <sandbox-name> -- exec "fix the build"
 ```
 
 ## Base image

@@ -97,7 +97,7 @@ The sandbox runs `opencode` with no implicit flags. Args after `--` are passed
 straight through. For example, to resume an existing session:
 
 ```console
-$ sbx run opencode . -- -s <session-id>
+$ sbx run --name <sandbox-name> -- -s <session-id>
 ```
 
 ### TUI mode
