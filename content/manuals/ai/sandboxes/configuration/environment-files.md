@@ -1,7 +1,7 @@
 ---
 title: Sandbox environment files
 linkTitle: Environment files
-weight: 35
+weight: 20
 description: Use a declarative .sbxenv.yaml file to describe and share your sandbox configuration.
 keywords:
   - docker sandboxes
@@ -10,6 +10,8 @@ keywords:
   - environment file
   - sandbox configuration
   - declarative
+aliases:
+  - /ai/sandboxes/sandbox-environments/
 params:
   sidebar:
     badge:
@@ -237,10 +239,10 @@ The loader rejects unknown fields and unsupported schema versions.
 `kits` accepts local directories, ZIP archives, OCI registry references, and
 Git URLs prefixed with `git+https://` or `git+ssh://`. Kits can install tools,
 configure the sandbox, and give the agent project-specific instructions. See
-[Kits](customize/kits.md) for details.
+[Kits](../customize/kits.md) for details.
 
 Remote kit sources must match the
-[kit source allowlist](customize/kits.md#restrict-kit-sources). Docker Hub is
+[kit source allowlist](../customize/kits.md#restrict-kit-sources). Docker Hub is
 allowed by default. To use Git kits from `docker/sbx-kits-contrib`, add its
 source:
 
@@ -258,11 +260,11 @@ When specified as a string, `workspace` is the path. Use the object form for
 clone mode:
 
 > [!WARNING]
-> With [direct mount](security/isolation.md#direct-mount-default), the agent can
+> With [direct mount](../security/isolation.md#direct-mount-default), the agent can
 > modify every file in a workspace. If an environment file is inside a mounted
 > workspace, the agent can change the file that controls later `sbx env`
 > commands. Store environment files outside all direct-mounted workspaces.
-> [Clone mode](security/isolation.md#clone-mode) protects files in the primary
+> [Clone mode](../security/isolation.md#clone-mode) protects files in the primary
 > repository, but additional workspaces remain direct-mounted.
 
 | Field   | Type    | Default                | Description                                                             |
@@ -363,7 +365,7 @@ registries:
 ### `mcp`
 
 The `mcp.servers` list registers servers with the built-in
-[MCP gateway](mcp-gateway.md) and adds them to the sandbox. MCP registrations
+[MCP gateway](../mcp-gateway.md) and adds them to the sandbox. MCP registrations
 are host-global and remain after `sbx env rm`.
 
 | Field     | Type            | Required | Default | Description                                                     |

@@ -191,7 +191,7 @@ auth header before the request leaves the sandbox.
 A kit declares the service, the in-container environment variable, and how
 to inject the credential. It doesn't declare a host discovery source. The user
 provides the value through the secret store or first-run prompt, and a
-[credential binding](../security/credentials.md) authorizes its use:
+[credential binding](../configuration/credentials.md) authorizes its use:
 
 ```yaml
 credentials:
@@ -215,10 +215,10 @@ request with that sentinel in `Authorization`, and the proxy overwrites
 the header with the real credential before forwarding. The real
 secret never enters the VM.
 
-See [Credentials](../security/credentials.md) for how to provide the
+See [Credentials](../configuration/credentials.md) for how to provide the
 credential value on your host, other approaches for cases the example
 above doesn't fit, and what the proxy does at request time. See
-[Credential bindings](../security/credentials.md) to approve the mechanisms
+[Credential bindings](../configuration/credentials.md) to approve the mechanisms
 and domains declared by a third-party v2 kit.
 
 ### Inject agent memory
@@ -370,7 +370,7 @@ For Docker Hub, include the full `docker.io` prefix. See
 > [!IMPORTANT]
 > For Docker Hub, `sbx` reuses your `sbx login` session to pull private
 > kits. For other registries, store pull credentials with
-> [`sbx secret set --registry`](../security/credentials.md#registry-credentials)
+> [`sbx secret set --registry`](../configuration/credentials.md#registry-credentials)
 > before running the sandbox:
 >
 > ```console
@@ -498,7 +498,7 @@ For Docker Hub, include the full `docker.io` prefix — `sbx` doesn't add it
 automatically.
 
 `sbx kit pull` prefers credentials stored with
-[`sbx secret set --registry`](../security/credentials.md#registry-credentials),
+[`sbx secret set --registry`](../configuration/credentials.md#registry-credentials),
 falling back to the Docker credential store. `sbx kit push` only uses the
 Docker credential store, so pushing to a private registry requires a prior
 `docker login`.

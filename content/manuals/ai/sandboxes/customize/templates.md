@@ -121,7 +121,7 @@ $ docker build -t my-org/my-template:v1 --push .
 > For Docker Hub, `sbx` reuses your `sbx login` session to pull private
 > images. For other registries (GitHub Container Registry, ECR, ACR, a
 > self-hosted Nexus, and so on), store pull credentials with
-> [`sbx secret set --registry`](../security/credentials.md#registry-credentials)
+> [`sbx secret set --registry`](../configuration/credentials.md#registry-credentials)
 > before running the sandbox:
 >
 > ```console
@@ -186,7 +186,7 @@ interactively and want to preserve it.
 > shared with anyone you distribute it to. To keep credentials out of
 > templates, manage them with `sbx secret set` instead — the proxy injects
 > them at runtime so they're never written to the filesystem. For more
-> information, see [Manage credentials](../security/credentials.md).
+> information, see [Manage credentials](../configuration/credentials.md).
 
 ### Save and reuse
 

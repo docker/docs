@@ -1,6 +1,6 @@
 ---
 title: Shell
-weight: 90
+weight: 100
 description: Run an agent-less sandbox with a Bash login shell for manual setup, testing custom agent implementations, or inspecting a running environment.
 keywords: sandboxes, sbx, shell, agent, manual setup, testing
 ---
@@ -33,7 +33,7 @@ $ sbx run shell -- -c "echo hi"   # runs bash -l -c "echo hi"
 
 When the first argument is a bare word, it replaces `-l` instead.
 
-Store credentials using [stored secrets](../security/credentials.md#stored-secrets)
+Store credentials using [stored secrets](../configuration/credentials.md#stored-secrets)
 before running the sandbox. The proxy injects them into outbound API requests;
 credentials are never stored inside the VM:
 

@@ -32,7 +32,7 @@ prompt from a file with `-- "$(cat prompt.txt)"`.
 Claude Code requires either an Anthropic API key or a Claude subscription.
 
 **API key**: Store your key using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set anthropic
@@ -84,7 +84,7 @@ for available options.
 
 Claude Code's [agents view](https://code.claude.com/docs/en/agent-view)
 starts background sessions that run tasks in parallel. Pair it with
-[clone mode](../workflows.md#clone-mode) to keep their changes inside the
+[clone mode](../workflows/git.md#clone-mode) to keep their changes inside the
 sandbox:
 
 ```console
@@ -115,7 +115,7 @@ $ git fetch sandbox-<sandbox-name>
 $ git diff main..sandbox-<sandbox-name>/<branch>
 ```
 
-See [Git workflows](../workflows.md#git-workflows) for clone-mode details.
+See [Git workflows](../workflows/git.md) for clone-mode details.
 
 ## Base image
 

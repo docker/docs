@@ -1,7 +1,7 @@
 ---
 title: AI Governance Audit Logs
 linkTitle: Audit logs
-weight: 28
+weight: 30
 description: Capture, view, export, and collect structured audit records for Docker AI Governance policy decisions.
 keywords: docker sandboxes, audit log, audit logging, AI Governance, policy decision, SIEM, compliance, jsonl
 ---

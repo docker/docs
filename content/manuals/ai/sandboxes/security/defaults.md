@@ -1,7 +1,7 @@
 ---
 title: Default security posture
 linkTitle: Defaults
-weight: 15
+weight: 20
 description: What a sandbox permits and blocks before you change any settings.
 keywords: docker sandboxes, security defaults, network policy, credentials, shared skills, sbx
 ---
@@ -38,7 +38,7 @@ Sandboxes for supported agents mount a persistent shared skills store
 read-write by default. Every sandbox that uses the store can change skills that
 other participating sandboxes may load. Use `--no-share-skills` when creating a
 sandbox to keep it outside this shared trust boundary. See
-[Share agent skills](../workflows.md#share-agent-skills).
+[Share agent skills](../workflows/agent-skills.md).
 
 ## Credential defaults
 
@@ -47,7 +47,7 @@ No credentials are available to the sandbox unless you provide them using
 host-side proxy injects them into outbound HTTP headers. The agent cannot
 read the raw credential values.
 
-See [Credentials](credentials.md) for setup instructions.
+See [Credentials](../configuration/credentials.md) for setup instructions.
 
 ## Agent capabilities inside the sandbox
 

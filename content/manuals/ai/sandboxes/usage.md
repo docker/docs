@@ -1,12 +1,12 @@
 ---
 title: Usage
-weight: 20
+weight: 30
 description: Basic sbx commands for creating, managing, and connecting to Docker Sandboxes.
 keywords: docker sandboxes, sbx, usage, run, create, stop, remove, ports, workspaces
 ---
 
 Use this page as a command-oriented guide to day-to-day `sbx` operations. For
-scenario-based recommendations, see [Workflow patterns](workflows.md).
+scenario-based recommendations, see [Workflow patterns](workflows/).
 
 ## Sign in
 
@@ -17,7 +17,7 @@ $ sbx login
 ```
 
 For scripts or CI runners where a browser isn't available, see
-[CI and headless use](workflows.md#ci-and-headless-use).
+[CI and headless use](workflows/automation.md).
 
 ## Start, stop, and remove
 
@@ -163,9 +163,9 @@ afterward. Restart a running agent, or stop and start the sandbox, to pick up
 the new value.
 
 Environment variables are readable by processes inside the sandbox. For API
-keys and other credentials, use [`sbx secret set`](security/credentials.md#store-a-secret)
+keys and other credentials, use [`sbx secret set`](configuration/credentials.md#store-a-secret)
 for a supported service or the experimental
-[`sbx secret set-custom`](security/credentials.md#custom-secrets) for a
+[`sbx secret set-custom`](configuration/credentials.md#custom-secrets) for a
 credential sent to known hosts. The host-side proxy can then inject the real
 value without exposing it to the agent.
 
@@ -214,7 +214,7 @@ it when you create the sandbox:
   `/run/sandbox/source`, but only with read access.
 
 For guidance on branch strategy, fetching work from a sandbox, and parallel
-agent workflows, see [Git workflows](workflows.md#git-workflows). For the
+agent workflows, see [Git workflows](workflows/git.md). For the
 security model behind each mode, see
 [Workspace isolation](security/isolation.md#workspace-isolation).
 
@@ -333,13 +333,13 @@ $ sbx ports my-sandbox --unpublish 8080:3000
 When `sbx run` re-attaches to an existing sandbox, it ignores `--publish`. Use
 `sbx ports` to publish ports on that sandbox. For dev server and host-service
 recipes, see
-[Local services](workflows.md#local-services).
+[Local services](workflows/development.md#local-services).
 
 ## What persists
 
 While a sandbox exists, installed packages, Docker images, configuration
 changes, and command history all persist across stops and restarts. When you
 remove a sandbox, everything inside is deleted. Your workspace files and the
-[shared agent skills store](workflows.md#share-agent-skills) remain on your
+[shared agent skills store](workflows/agent-skills.md) remain on your
 host. To preserve a configured environment, create a [custom
 template](customize/templates.md) or use a [kit](customize/kits.md).

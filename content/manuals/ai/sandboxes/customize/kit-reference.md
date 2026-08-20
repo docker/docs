@@ -3,7 +3,7 @@ title: Kit spec reference
 linkTitle: Spec reference
 description: Field-by-field reference for a kit's spec.yaml, including credentials, network rules, environment, setup, files, agent instructions, and the sandbox block.
 keywords: sandboxes, sbx, kits, spec.yaml, reference, schema, fields
-weight: 22
+weight: 50
 ---
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
@@ -66,7 +66,7 @@ What changed in v2:
 Credential discovery also moved out of the kit in v2: a kit declares which
 credentials it needs and how to inject them, but where each value comes from is
 controlled by the user through
-[credential bindings](../security/credentials.md#credential-bindings).
+[credential bindings](../configuration/credentials.md#credential-bindings).
 
 > [!NOTE]
 > `mixins` and `sandbox.build` are accepted by the parser, but runtime support
@@ -217,7 +217,7 @@ file.
 A kit declares the credentials it needs and how the proxy injects them into
 outbound requests. It does not declare a host discovery source. The user
 provides the value through the secret store or the first-run prompt, and a
-[credential binding](../security/credentials.md) authorizes its use. A kit
+[credential binding](../configuration/credentials.md) authorizes its use. A kit
 can't read arbitrary host environment variables or files.
 
 ```yaml
@@ -261,7 +261,7 @@ auth mechanisms.
 | Field         | Description                                                                                                                                 |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `service`     | Credential identifier, matched against the value stored with `sbx secret set`. Lowercase kebab-case.                                        |
-| `description` | Optional. Shown to the user when approving a [binding](../security/credentials.md#credential-bindings).                                     |
+| `description` | Optional. Shown to the user when approving a [binding](../configuration/credentials.md#credential-bindings).                                     |
 | `required`    | Marks the credential as essential to the agent. If it has no binding, `sbx` warns and starts with the credential withheld. Default `false`. |
 | `provider`    | Reserved for a provider registry. Accepted with a warning and no runtime effect.                                                            |
 | `apiKey`      | API-key injection (see [apiKey](#apikey)).                                                                                                  |

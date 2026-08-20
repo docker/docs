@@ -40,18 +40,18 @@ jump to the [usage guide](usage.md) for basic commands.
 ## Learn more
 
 - [Agents](agents/) — supported agents and per-agent configuration
+- [Workflows](workflows/) — patterns for Git, local development,
+  authentication, agent skills, and automation
+- [Configuration](configuration/) — manage credentials, declare project
+  environments, turn on GPU passthrough, and configure an upstream proxy
 - [Integrations](integrations/) — connect editors and apps like VS Code and
   Cursor to a sandbox over SSH
 - [MCP gateway](mcp-gateway.md) — register MCP servers and connect them to
   sandboxed agents
 - [Customize](customize/) — reusable templates and declarative kits for
   extending or tailoring sandboxes
-- [GPU passthrough](gpu-passthrough.md) — build the NVIDIA driver bundle and
-  run GPU-accelerated workloads in a sandbox
 - [Architecture](architecture.md) — microVM isolation, workspace mounting,
   networking
-- [Upstream proxy](upstream-proxy.md) — route sandbox and daemon traffic through
-  a corporate proxy, PAC file, or your OS system proxy
 - [Security](security/) — isolation model, credential handling, and
   network policies
 - [CLI reference](/reference/cli/sbx/) — full list of `sbx` commands and options
