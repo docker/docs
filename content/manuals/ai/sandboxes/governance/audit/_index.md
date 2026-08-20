@@ -48,7 +48,7 @@ as they become available.
 
 Changes to the policies themselves (who created or edited a policy) are
 recorded in the organization
-[Activity logs](/manuals/admin/activity-logs/#ai-governance-events), not here.
+[Activity logs](/manuals/admin/activity-logs.md#ai-governance-events), not here.
 
 ## Delivery modes
 
@@ -85,5 +85,5 @@ Policy](https://www.docker.com/legal/privacy/).
 - [View and export audit events](view-export.md)
 - [SIEM forwarding](siem.md)
 - [Audit record reference](record-reference.md)
-- [Activity logs](/manuals/admin/activity-logs/#ai-governance-events) for
+- [Activity logs](/manuals/admin/activity-logs.md#ai-governance-events) for
   policy-change events
