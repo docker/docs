@@ -416,6 +416,69 @@ $ sbx settings set kit.allowLocalKits false
 For non-interactive use, both settings have environment-variable equivalents:
 `DOCKER_SANDBOXES_KIT_ALLOWED_SOURCES` and `DOCKER_SANDBOXES_KIT_ALLOW_LOCAL`.
 
+## Sign and verify kits
+
+Use cosign-compatible Sigstore signatures to verify who approved a kit and
+that its signed content hasn't changed. Signing is keyless by default. Verify a
+keyless signature with the certificate identity and OpenID Connect (OIDC)
+issuer:
+
+```console
+$ sbx kit sign ./my-kit/
+$ sbx kit verify \
+    --certificate-identity user@example.com \
+    --certificate-oidc-issuer https://accounts.google.com \
+    ./my-kit/
+```
+
+For key-based signing, use an ECDSA P-256 key pair:
+
+```console
+$ sbx kit sign --key cosign.key ./my-kit/
+$ sbx kit verify --key cosign.pub ./my-kit/
+```
+
+For a local directory, `sbx kit sign` writes a `kit.sig.bundle` file next to
+`spec.yaml`. Commit this file so consumers can verify a kit loaded from the Git
+repository. For an OCI kit, the signature is stored as an OCI referrer. You can
+sign an OCI kit after pushing it, or push and sign it in one step:
+
+```console
+$ sbx kit push ./my-kit/ ghcr.io/myorg/my-kit:1.0 --sign
+```
+
+ZIP kits can't carry verifiable signatures.
+
+### Require signed kits
+
+Set a trusted signer policy for the identities or keys you trust before
+requiring signatures. Otherwise, `sbx` uses the default policy, which trusts
+Docker employee identities attested by Google's OpenID Connect issuer. A
+keyless policy must specify both the certificate identity and its OpenID
+Connect issuer:
+
+```console
+$ sbx settings set kit.trustedSigners \
+    '[{"identity":"release-bot@example.com","issuer":"https://accounts.google.com"}]'
+$ sbx settings set kit.requireSignature true
+```
+
+To trust a key-based signature, set the policy to the public key path:
+
+```console
+$ sbx settings set kit.trustedSigners '[{"key":"/path/to/cosign.pub"}]'
+$ sbx settings set kit.requireSignature true
+```
+
+When `kit.requireSignature` is `true`, `sbx` rejects unsigned kits, signatures
+that don't match `kit.trustedSigners`, and ZIP kits. This policy applies when a
+kit is loaded from a local directory, Git repository, or OCI registry.
+
+The signature covers `spec.yaml` and the kit's `files/` content, but not mutable
+dependencies such as image tags or content downloaded by install and startup
+commands. Pin those dependencies by digest or checksum when they must remain
+immutable.
+
 ## Packaging and distribution
 
 The `sbx kit` subcommands validate, inspect, and publish kits:
