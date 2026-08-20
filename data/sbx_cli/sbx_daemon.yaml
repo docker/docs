@@ -1,5 +1,6 @@
 name: sbx daemon
 synopsis: Manage sandboxd daemon
+usage: sbx daemon COMMAND
 options:
     - name: help
       shorthand: h

@@ -3,6 +3,7 @@ synopsis: Generate the autocompletion script for the specified shell
 description: |
     Generate the autocompletion script for sbx for the specified shell.
     See each sub-command's help for details on how to use the generated script.
+usage: sbx completion COMMAND
 options:
     - name: help
       shorthand: h

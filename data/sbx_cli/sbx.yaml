@@ -4,7 +4,7 @@ description: |-
     Docker Sandboxes creates isolated sandbox environments for AI agents, powered by Docker.
 
     Run without a command to launch interactive mode, or pass a command for CLI usage.
-usage: sbx
+usage: sbx COMMAND
 options:
     - name: debug
       shorthand: D
@@ -20,6 +20,7 @@ see_also:
     - sbx create - Create a sandbox for an agent
     - sbx daemon - Manage sandboxd daemon
     - sbx diagnose - Diagnose common issues with your sbx installation
+    - sbx env - (Experimental) Manage sandboxes declaratively from a .sbxenv.yaml file
     - sbx exec - Execute a command inside a sandbox
     - sbx kit - (Experimental) Manage kit artifacts
     - sbx login - Sign in to Docker
@@ -28,6 +29,7 @@ see_also:
     - sbx mcp - Manage MCP servers
     - sbx policy - Manage sandbox policies
     - sbx ports - Manage sandbox port publishing
+    - sbx prune - Remove all stopped sandboxes
     - sbx reset - Reset all sandboxes and clean up state
     - sbx rm - Remove one or more sandboxes
     - sbx run - Run an agent in a sandbox
