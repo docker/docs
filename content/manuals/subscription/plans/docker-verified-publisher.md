@@ -36,7 +36,7 @@ account, you can create an organization when you apply.
 
 Tracked companies represent the unique companies that pull your images
 over a period. You can add more tracked companies to a DVP Growth plan
-in increments of 25, up to 100 additional, from the billing portal. For
+in increments of 25 from the billing portal. For
 steps, see [Add tracked companies](#add-tracked-companies).
 
 For details on the reports available to verified publishers, see
@@ -56,7 +56,7 @@ after approval.
    DVP Growth.
 1. Submit your application for review with **Submit application**, then
    continue to **Configure your plan**.
-1. Select the plan you applied for from the **Configure your plan**
+1. If approved, select the plan you applied for from the **Configure your plan**
    page.
 1. Verify your billing details, continue to payment, and complete
    checkout. You are not charged until Docker approves your
@@ -87,11 +87,11 @@ DVP Starter and DVP Growth are billed annually. If you have DVP
 Starter, you can upgrade to DVP Growth without submitting a new
 application. Upgrades take effect immediately.
 
-For DVP Growth plans, you can add up to 100 additional tracked
+For DVP Growth plans, you can add additional tracked
 companies. Tracked company add-ons are prorated from the date of
 purchase for the remainder of your billing period and expire at the
 end of your annual subscription. You can reduce your add-on count at
-any time. Changes take effect at the end of the current billing cycle.
+any time. Removing tracked companies takes effect at the end of the current billing cycle.
 
 > [!IMPORTANT]
 > No mid-cycle refunds are issued when you reduce tracked company
@@ -110,5 +110,3 @@ auto-renewal:
 1. Select **Disable auto-renewal**.
 1. Optional. To remove tracked companies, select **Remove tracked
    companies**, then choose the number to remove.
-
-To resume DVP access after a plan expires, you must reapply.
