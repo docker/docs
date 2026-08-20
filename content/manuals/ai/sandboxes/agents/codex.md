@@ -78,7 +78,7 @@ itself a flag (begins with `-`). A bare word — such as a prompt — replaces t
 defaults instead, so lead with the flag to keep bypass mode:
 
 ```console
-$ sbx run codex . -- --dangerously-bypass-approvals-and-sandbox "fix the build"
+$ sbx run --name <sandbox-name> -- --dangerously-bypass-approvals-and-sandbox "fix the build"
 ```
 
 ## Base image
