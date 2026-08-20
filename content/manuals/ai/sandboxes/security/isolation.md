@@ -233,4 +233,11 @@ environment variables or files inside the sandbox unless you explicitly set
 them. This means a compromised sandbox cannot read API keys from the local
 environment.
 
+SSH agent forwarding is also off by default. When you opt in, private keys
+stay on the host, but any process inside the sandbox can ask the forwarded
+agent to authenticate or sign data. Docker Sandboxes validates the upstream
+socket as an SSH agent before forwarding requests. If forwarding is disabled,
+the settings can't be read, or no client socket is available, the sandbox
+doesn't receive access to an SSH agent.
+
 For how to store and manage credentials, see [Credentials](../configuration/credentials.md).
