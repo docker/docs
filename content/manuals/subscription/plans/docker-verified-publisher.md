@@ -32,12 +32,10 @@ For a plan comparison, see the
 
 ## Usage
 
-Any organization can hold a DVP plan with or without Docker Team or
-Docker Business. If you only have a Docker Personal or Docker Pro
-account, you can create an organization when you apply.
-
-DVP entitlements apply per organization namespace. If you operate
-multiple namespaces, each one needs its own DVP application.
+Organizations can hold a DVP plan and DVP entitlements apply per organization
+namespace. If you operate multiple namespaces, each one needs its own DVP
+application. If you only have a Docker Personal or Docker Pro account, you can
+create an organization when you apply.
 
 Tracked companies are unique company domains that pull your images.
 On DVP Growth, you can add more tracked companies in increments of
@@ -49,8 +47,8 @@ For details on the reports available to verified publishers, see
 
 ## Apply for DVP Starter or Growth
 
-Apply for a DVP plan. After Docker approves your application, complete
-checkout to subscribe.
+To add DVP Starter or DVP Growth, you must apply for a DVP plan. After Docker
+approves your application, complete checkout to subscribe.
 
 1. Go to the [DVP landing page](https://hub.docker.com/publisher-program).
    The page contains information about DVP Starter and DVP Growth.
