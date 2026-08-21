@@ -59,7 +59,7 @@ Every shell command is classified against an embedded taxonomy before the approv
 - **Known-safe reads** (`ls`, `cat`, `git status`, `git diff`, `docker ps`, `docker logs`, `kubectl get`, …) are labelled `safe`.
 - **Everything else** is labelled `unknown`.
 
-The session's [safety mode](../../configuration/permissions/index.md#safety-modes) decides what each label means: `strict` asks about everything, `balanced` auto-runs safe commands and asks about destructive/unknown ones, `autonomous` runs everything. Custom permission rules always win over the mode.
+The session's [safety mode](../../configuration/permissions/index.md#safety-modes) decides what each label means: `strict` asks about everything, `balanced` auto-runs safe commands and asks about destructive/unknown ones, `restricted` auto-runs safe commands and denies destructive/unknown ones without asking (fail-closed for unattended runs), `autonomous` runs everything. Custom permission rules always win over the mode.
 
 Compound shell (`a && b`, `a; b`, `a | b`) is never matched against the safe allowlist; any destructive segment falls through to ask. The full taxonomy lives in [`pkg/safety/safety_patterns.json`](https://github.com/docker/docker-agent/blob/main/pkg/safety/safety_patterns.json).
 

@@ -160,18 +160,6 @@ Keybindings:
 
 Every mutation is guarded by the version shown on screen (the same optimistic locking as `last_known_revision`): if an agent changed the plan in the meantime, the write is rejected, a notification reports the current version, the newer content is left intact and re-read into the browser, and an edit draft is kept in a temp file so nothing is lost. Session plans are read-only here — status, edit, and delete report why instead of attempting the write. The browser also refreshes live when agents in the same process write, re-status, or delete plans (and when this session's agent updates its session plan); in the lean TUI, which has no overlays, `/plans` is unavailable.
 
-## Related plan work
-
-Plan support grew across several issues and pull requests; they are useful context for the design decisions on this page:
-
-- [#2788](https://github.com/docker/docker-agent/issues/2788) — proposed `/plan`, approval UX, and plan/execution separation; superseded by read-only planner sub-agents and the dedicated plan tools.
-- [#3227](https://github.com/docker/docker-agent/pull/3227) / [#3237](https://github.com/docker/docker-agent/issues/3237) — introduced the shared `plan` toolset and its pluggable-storage direction.
-- [#3239](https://github.com/docker/docker-agent/pull/3239) — added the pluggable `Storage` interface.
-- [#3263](https://github.com/docker/docker-agent/issues/3263) / [#3274](https://github.com/docker/docker-agent/pull/3274) — file-based revisions, export, free-form status, and optimistic locking.
-- [#3292](https://github.com/docker/docker-agent/pull/3292) / [#3305](https://github.com/docker/docker-agent/pull/3305) — the per-session markdown plan of the [session plan toolset](../session_plan/index.md) and its `exit_plan_mode` marker, alongside the shared plan toolset.
-- [#3140](https://github.com/docker/docker-agent/pull/3140) / [#3168](https://github.com/docker/docker-agent/pull/3168) — related plan-mode and persona history.
-- [#3844](https://github.com/docker/docker-agent/issues/3844) — the host-facing management layer: the [`docker agent plans` CLI](../../features/cli/index.md#docker-agent-plans) and the TUI `/plans` browser documented above.
-
 > [!TIP]
 > **Plan vs. Todo vs. Tasks**
 >
