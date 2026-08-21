@@ -27,8 +27,8 @@ $ cd ~/my-project
 $ sbx run gemini
 ```
 
-To create the sandbox without mounting a host workspace, omit the path from
-[`sbx create`](../usage.md#choose-a-workspace), then attach by name.
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name.
 
 ## Authentication
 

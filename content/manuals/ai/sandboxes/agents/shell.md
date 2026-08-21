@@ -21,8 +21,8 @@ command instead of an interactive shell, pass it after `--`:
 $ sbx run shell -- -c "echo 'Hello from sandbox'"
 ```
 
-To open a [mountless sandbox](../usage.md#choose-a-workspace), omit the
-workspace path from `sbx create`, then attach by name:
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name:
 
 ```console
 $ sbx create --name scratch shell
