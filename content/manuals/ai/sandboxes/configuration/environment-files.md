@@ -31,6 +31,7 @@ setup steps.
 ## Start an environment
 
 Keep the environment file outside the directories you mount into the sandbox.
+That includes the primary workspace and every `additionalWorkspaces` mount.
 For example, place it beside your project:
 
 ```text
@@ -73,7 +74,9 @@ named `web-app`, installs Playwright and Chromium, and publishes sandbox port
 existing sandbox.
 
 This placement keeps the environment file outside the agent's writable
-workspace. See the [`workspace` guidance](#workspace) for details.
+workspace. If you later add `additionalWorkspaces`, keep `.sbxenv.yaml`
+outside those directories too. See the [`workspace` guidance](#workspace)
+for details.
 
 ## Commands
 
@@ -263,7 +266,8 @@ clone mode:
 > With [direct mount](../security/isolation.md#direct-mount-default), the agent can
 > modify every file in a workspace. If an environment file is inside a mounted
 > workspace, the agent can change the file that controls later `sbx env`
-> commands. Store environment files outside all direct-mounted workspaces.
+> commands. Store environment files outside all direct-mounted workspaces,
+> including every `additionalWorkspaces` mount.
 > [Clone mode](../security/isolation.md#clone-mode) protects files in the primary
 > repository, but additional workspaces remain direct-mounted.
 
