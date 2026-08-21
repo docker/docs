@@ -10,15 +10,18 @@ properties of the architecture, see [Sandbox isolation](security/isolation.md).
 
 ## Workspace storage
 
-The workspace path is optional. When you omit it, the sandbox has no host
-workspace bind mount. The agent works in the container image's configured
-working directory instead. Built-in images use `/home/agent/workspace`; custom
-templates can define another absolute working directory. Files created there
-stay inside the sandbox and persist across stops and restarts.
+Starting with `sbx` version 0.40.0, workspace paths are optional for
+`sbx create`. When you omit them, the sandbox has no host workspace bind mount.
+The agent works in the container image's configured working directory instead.
+Built-in images use `/home/agent/workspace`; custom templates can define
+another absolute working directory. Files created there stay inside the
+sandbox and persist across stops and restarts.
 
-When you pass a workspace path, the directory is mounted into the sandbox
-through a filesystem passthrough. The sandbox sees your actual host files, so
-changes in either direction are instant with no sync process involved.
+When you pass a workspace path to `sbx create` or `sbx run`, the directory is
+mounted into the sandbox through a filesystem passthrough. `sbx run` uses the
+current directory when you don't pass a path. The sandbox sees your actual
+host files, so changes in either direction are instant with no sync process
+involved.
 
 A directly mounted workspace appears at the same absolute path as on your
 host. Preserving absolute paths means error messages, configuration files, and

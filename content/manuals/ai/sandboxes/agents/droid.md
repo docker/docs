@@ -19,15 +19,15 @@ Create a sandbox and run Droid for a project directory:
 $ sbx run droid ~/my-project
 ```
 
-Use `.` to mount the current directory:
+`sbx run` defaults the workspace to the current directory:
 
 ```console
 $ cd ~/my-project
-$ sbx run droid .
+$ sbx run droid
 ```
 
-Omit the workspace path to create a
-[mountless sandbox](../usage.md#choose-a-workspace) instead.
+To create the sandbox without mounting a host workspace, omit the path from
+[`sbx create`](../usage.md#choose-a-workspace), then attach by name.
 
 ## Authentication
 

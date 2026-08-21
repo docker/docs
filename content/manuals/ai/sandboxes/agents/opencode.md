@@ -20,15 +20,15 @@ Create a sandbox and run OpenCode for a project directory:
 $ sbx run opencode ~/my-project
 ```
 
-Use `.` to mount the current directory:
+`sbx run` defaults the workspace to the current directory:
 
 ```console
 $ cd ~/my-project
-$ sbx run opencode .
+$ sbx run opencode
 ```
 
-Omit the workspace path to create a
-[mountless sandbox](../usage.md#choose-a-workspace) instead.
+To create the sandbox without mounting a host workspace, omit the path from
+[`sbx create`](../usage.md#choose-a-workspace), then attach by name.
 
 OpenCode launches a TUI (text user interface) where you can select your
 preferred LLM provider and interact with the agent.

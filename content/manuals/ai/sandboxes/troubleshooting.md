@@ -43,18 +43,23 @@ data. Create fresh sandboxes afterwards.
 
 ## Sandbox doesn't contain my project files
 
-Starting with `sbx` version 0.40.0, omitting the workspace path creates a
-mountless sandbox. The following command doesn't mount the current directory,
-so your host project files don't appear in the sandbox:
+Starting with `sbx` version 0.40.0, the workspace path is optional for
+`sbx create`. When you omit it, the command creates a mountless sandbox. For
+example, these commands create and attach to a sandbox without mounting your
+host project files:
 
 ```console
-$ sbx run <agent>
+$ sbx create --name <sandbox-name> <agent>
+$ sbx run --name <sandbox-name>
 ```
 
-Pass `.` to mount the current directory when you create the sandbox:
+By contrast, `sbx run <agent>` mounts the current directory when you don't pass
+a workspace path. Pass `.` to `sbx create` to mount the current directory when
+creating a sandbox without attaching:
 
 ```console
-$ sbx run <agent> .
+$ sbx create --name <sandbox-name> <agent> .
+$ sbx run --name <sandbox-name>
 ```
 
 A sandbox's workspace configuration is fixed when the sandbox is created. To
@@ -64,7 +69,8 @@ then remove and recreate it with a workspace path:
 
 ```console
 $ sbx rm <sandbox-name>
-$ sbx run --name <sandbox-name> <agent> .
+$ sbx create --name <sandbox-name> <agent> .
+$ sbx run --name <sandbox-name>
 ```
 
 See [Choose a workspace](usage.md#choose-a-workspace) for mountless, direct,

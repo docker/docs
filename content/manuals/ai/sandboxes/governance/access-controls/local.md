@@ -108,7 +108,7 @@ fact:
 
 ```console
 $ sbx create --deny-network ads.example.com claude .
-$ sbx run --deny-network ads.example.com claude .
+$ sbx run --deny-network ads.example.com claude
 ```
 
 Pass the flag multiple times to deny more than one host. Rules added this way
