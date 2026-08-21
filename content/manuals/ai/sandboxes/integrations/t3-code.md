@@ -21,7 +21,20 @@ that tunnels back to the app.
 The first connection installs the T3 server in the sandbox, which needs a
 build toolchain. T3 depends on `node-pty`, which ships prebuilt binaries only
 for macOS and Windows. On a Linux sandbox, `node-pty` compiles from source and
-the build fails without `make`, `python3`, and a compiler such as `g++`:
+the build fails without `make`, `python3`, and a compiler such as `g++`.
+
+The [`t3code` kit](https://github.com/docker/sbx-kits-contrib/tree/main/t3code)
+prepares a sandbox for T3 Code: it installs the build toolchain and the `t3`
+npm package when the sandbox is created, so the first connection starts a
+pre-installed server instead of building `node-pty` from source. Pair it with
+any agent whose base image ships Node.js 18 or later, which all standard
+agent templates do:
+
+```console
+$ sbx run claude --kit docker.io/sbx/t3code-kit:latest
+```
+
+For an existing sandbox, install the toolchain manually:
 
 ```console
 $ sbx exec <sandbox> -- sudo apt-get update
@@ -34,8 +47,10 @@ Verify the toolchain is in place:
 $ sbx exec <sandbox> -- sh -lc 'command -v g++ && command -v make && command -v python3'
 ```
 
-This setup does not persist across sandbox recreation. For a setup that does,
-add the package to a custom image or kit instead.
+A manual install lasts only until the sandbox is recreated, and the first
+connection still builds `node-pty` from source. For a setup that persists,
+recreate the sandbox with the [kit](../customize/kits.md) or a custom
+[template](../customize/templates.md).
 
 ## Connect
 
@@ -47,7 +62,8 @@ $ ssh demo.sbx
 
 In T3 Code, add an SSH environment and enter the sandbox hostname, such as
 `demo.sbx`, as the host. The first connection installs the T3 server inside
-the sandbox, so it can take a moment. Later connections are faster.
+the sandbox unless the `t3code` kit pre-installed it, so it can take a
+moment. Later connections are faster.
 
 Then add a new project, select the SSH environment from the list, and
 [choose the mounted workspace](_index.md#select-the-workspace-folder) as the
