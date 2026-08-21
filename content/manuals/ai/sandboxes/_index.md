@@ -31,7 +31,7 @@ Then launch an agent in a sandbox:
 
 ```console
 $ cd ~/my-project
-$ sbx run claude .
+$ sbx run claude
 ```
 
 See the [get started guide](get-started.md) for a first-session walkthrough, or

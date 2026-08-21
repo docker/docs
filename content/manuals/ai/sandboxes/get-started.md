@@ -47,7 +47,7 @@ Pick a project directory and launch an agent with
 
 ```console
 $ cd ~/my-project
-$ sbx run --name my-sandbox claude .
+$ sbx run --name my-sandbox claude
 ```
 
 The first time you run a sandbox, the CLI prompts you to choose a default
@@ -99,10 +99,10 @@ Each row shows a sandbox's name, the agent running in it, its status, any
 workspace — the host directory shared into the sandbox. That workspace is the
 one part of your machine the agent can see.
 
-Because you passed `.` as the workspace path, the current directory is shared
-read-write. The agent and your host see the same files. Edits the agent makes
-to your project appear in your working tree as it writes them, and you review
-them as an ordinary Git diff before committing.
+Because `sbx run` defaults the workspace to the current directory, your project
+is shared read-write. The agent and your host see the same files. Edits the
+agent makes to your project appear in your working tree as it writes them, and
+you review them as an ordinary Git diff before committing.
 
 Everything else runs inside the microVM, isolated from your host:
 
