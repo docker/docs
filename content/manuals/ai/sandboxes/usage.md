@@ -61,33 +61,36 @@ Run `sbx prune` without flags to confirm and remove all stopped sandboxes.
 
 ## Choose a workspace
 
-Starting with `sbx` version 0.40.0, the workspace path is optional. Omit it to
-create a mountless sandbox without a host workspace bind mount:
+`sbx run` mounts the current directory when you don't pass a workspace path.
+Pass a path to mount another directory instead:
 
 ```console
-$ sbx run --name scratch claude
+$ sbx run claude
+$ sbx run claude ~/my-project
 ```
 
-This mountless mode is the default when you don't pass a path. The agent works
-in the container image's working directory. Built-in images use
+The first workspace path is the primary workspace. The agent starts there, and
+`sbx exec` uses it as the default working directory. The host directory is
+mounted at the same absolute path inside the sandbox. When you don't pass a
+path to `sbx run`, the current directory is the primary workspace.
+
+Starting with `sbx` version 0.40.0, workspace paths are optional for
+`sbx create`. Omit them to create a mountless sandbox without a host workspace
+bind mount, then attach to the sandbox by name:
+
+```console
+$ sbx create --name scratch claude
+$ sbx run --name scratch
+```
+
+Mountless mode is the default for `sbx create` when you don't pass a path. The
+agent works in the container image's working directory. Built-in images use
 `/home/agent/workspace`; a custom template can define another absolute working
 directory. Files in a mountless workspace persist when you stop and restart
 the sandbox, but they are deleted with the sandbox. Use `--name` to give a
 mountless sandbox a stable identity for reconnecting. Use
 [`sbx cp`](#copy-files-between-host-and-sandbox) to move files between the
 mountless workspace and your host.
-
-Pass a path to share a host directory with the sandbox. Use `.` to mount the
-current directory:
-
-```console
-$ sbx run claude .
-$ sbx run claude ~/my-project
-```
-
-The first path is the primary workspace. The agent starts there, and `sbx exec`
-uses it as the default working directory. The host directory is mounted at the
-same absolute path inside the sandbox.
 
 ## Reconnect and name sandboxes
 
@@ -241,9 +244,9 @@ hosts, and add custom network rules. Press `?` to see all keyboard shortcuts.
 When your primary workspace is a Git repository, choose how the sandbox receives
 it when you create the sandbox:
 
-- Direct mode is the default when you pass a workspace path. The agent has
-  read-write access to your working tree, and changes appear on your host
-  immediately.
+- Direct mode is the default for `sbx run`. It also applies when you pass a
+  workspace path to `sbx create`. The agent has read-write access to your
+  working tree, and changes appear on your host immediately.
 - [Clone mode](#clone-mode) uses `--clone`. The agent edits a separate Git clone
   inside the sandbox. Its changes stay there until you fetch them or the agent
   pushes them. Your host repository is also available at
@@ -332,7 +335,7 @@ tools can't reach a server running inside one by default. A port mapping of
 If you know which ports you need, publish them when you create the sandbox:
 
 ```console
-$ sbx run --publish 8080:3000 --name my-sandbox claude .
+$ sbx run --publish 8080:3000 --name my-sandbox claude
 ```
 
 For an existing sandbox, use [`sbx ports`](/reference/cli/sbx/ports/) to

@@ -20,15 +20,15 @@ Create a sandbox and run Kiro for a project directory:
 $ sbx run kiro ~/my-project
 ```
 
-Use `.` to mount the current directory:
+`sbx run` defaults the workspace to the current directory:
 
 ```console
 $ cd ~/my-project
-$ sbx run kiro .
+$ sbx run kiro
 ```
 
-Omit the workspace path to create a
-[mountless sandbox](../usage.md#choose-a-workspace) instead.
+To create the sandbox without mounting a host workspace, omit the path from
+[`sbx create`](../usage.md#choose-a-workspace), then attach by name.
 
 On first run, Kiro prompts you to authenticate using device flow.
 

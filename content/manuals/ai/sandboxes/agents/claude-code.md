@@ -26,8 +26,8 @@ $ sbx run --name my-sandbox claude . -- "Add error handling to the login functio
 Everything after `--` is passed directly to Claude Code. You can also pipe in a
 prompt from a file with `-- "$(cat prompt.txt)"`.
 
-Omit the workspace path to create a
-[mountless sandbox](../usage.md#choose-a-workspace) instead.
+To create the sandbox without mounting a host workspace, omit the path from
+[`sbx create`](../usage.md#choose-a-workspace), then attach by name.
 
 ## Authentication
 

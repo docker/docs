@@ -18,11 +18,12 @@ anything on your host except what is explicitly shared.
 
 What crosses the boundary into the VM:
 
-- **Host workspace directory:** shared only when you pass a workspace path.
-  A direct mount is read-write, so the agent edits your working tree in place.
-  With [`--clone`](../usage.md#clone-mode), your repository is mounted
-  read-only and the agent works on a private clone. A mountless sandbox doesn't
-  share a host workspace.
+- **Host workspace directory:** shared when you pass a workspace path or use
+  `sbx run`, which defaults to the current directory. A direct mount is
+  read-write, so the agent edits your working tree in place. With
+  [`--clone`](../usage.md#clone-mode), your repository is mounted read-only and
+  the agent works on a private clone. A mountless sandbox doesn't share a host
+  workspace.
 - **Credentials:** the host-side proxy injects authentication headers into
   outbound HTTP requests. The raw credential values never enter the VM.
 - **Network access:** outbound TCP connections to destinations allowed by

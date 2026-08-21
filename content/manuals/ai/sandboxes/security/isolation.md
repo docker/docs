@@ -20,8 +20,9 @@ processes, files, or resources outside its defined boundaries.
 
 - **Process isolation:** separate kernel per sandbox; processes inside the VM
   are invisible to your host and to other sandboxes
-- **Filesystem isolation:** a host workspace is shared only when you pass a
-  workspace path. For supported agents that haven't opted out, the dedicated
+- **Filesystem isolation:** a host workspace is shared when you pass a
+  workspace path or use `sbx run`, which defaults to the current directory.
+  For supported agents that haven't opted out, the dedicated
   [shared skills store](../workflows/agent-skills.md) is also shared with the
   host. The rest of the VM filesystem persists across restarts but is removed
   when you delete the sandbox. Symlinks pointing outside the workspace scope
@@ -97,8 +98,8 @@ flowchart TB
 
 When you create a sandbox, choose how the agent receives a workspace:
 
-- **Mountless** (no path): the sandbox doesn't receive a host workspace. The
-  agent works in the sandbox's own filesystem.
+- **Mountless** (no path to `sbx create`): the sandbox doesn't receive a host
+  workspace. The agent works in the sandbox's own filesystem.
 - **Direct mount** (a path such as `.`): the agent has read-write access to
   your working tree. There is no boundary between the agent's edits and your
   host filesystem.
@@ -111,10 +112,12 @@ workflows.
 
 ### Mountless
 
-Omit the workspace path to create a mountless sandbox:
+Omit the workspace path from `sbx create` to create a mountless sandbox, then
+attach by name:
 
 ```console
-$ sbx run --name scratch claude
+$ sbx create --name scratch claude
+$ sbx run --name scratch
 ```
 
 The agent works in the container image's configured working directory.
@@ -128,10 +131,11 @@ be mounted.
 
 Pass a workspace path to share it into the VM as a read-write mount. The agent
 and the host see the same files, and changes the agent makes appear on your
-host as soon as they're written:
+host as soon as they're written. `sbx run` mounts the current directory when
+you don't pass a path:
 
 ```console
-$ sbx run claude .
+$ sbx run claude
 ```
 
 There is no isolation between the agent and your workspace in this mode.

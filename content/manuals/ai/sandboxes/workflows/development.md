@@ -41,7 +41,7 @@ tools can't reach a server running inside one by default. A port mapping of
 If you know which ports you need, publish them when you create the sandbox:
 
 ```console
-$ sbx run --publish 8080:3000 --name my-sandbox claude .
+$ sbx run --publish 8080:3000 --name my-sandbox claude
 ```
 
 For an existing sandbox, use [`sbx ports`](/reference/cli/sbx/ports/) to
