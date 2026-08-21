@@ -53,13 +53,11 @@ $ sbx create --name <sandbox-name> <agent>
 $ sbx run --name <sandbox-name>
 ```
 
-By contrast, `sbx run <agent>` mounts the current directory when you don't pass
-a workspace path. Pass `.` to `sbx create` to mount the current directory when
-creating a sandbox without attaching:
+By contrast, `sbx run` mounts the current directory when you don't pass a
+workspace path:
 
 ```console
-$ sbx create --name <sandbox-name> <agent> .
-$ sbx run --name <sandbox-name>
+$ sbx run <agent>
 ```
 
 A sandbox's workspace configuration is fixed when the sandbox is created. To
@@ -69,8 +67,7 @@ then remove and recreate it with a workspace path:
 
 ```console
 $ sbx rm <sandbox-name>
-$ sbx create --name <sandbox-name> <agent> .
-$ sbx run --name <sandbox-name>
+$ sbx run --name <sandbox-name> <agent>
 ```
 
 See [Choose a workspace](usage.md#choose-a-workspace) for mountless, direct,

@@ -18,9 +18,10 @@ $ sbx run docker-agent ~/my-project
 ```
 
 `sbx run docker-agent` defaults the workspace to the current directory, so you
-can run it from inside your project. To create the sandbox without mounting a
-host workspace, omit the path from
-[`sbx create`](../usage.md#choose-a-workspace), then attach by name.
+can run it from inside your project.
+
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name.
 
 ## Authentication
 
