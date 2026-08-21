@@ -113,9 +113,9 @@ By default, your workspace is shared into the VM as a read-write mount.
 The agent and the host see the same files, and changes the agent makes
 appear on your host as soon as they're written.
 
-There is no isolation between the agent and your workspace in this mode.
-The agent can create, modify, or delete any file in the workspace,
-including:
+Except for loaded sandbox environment files described in this section, there
+is no isolation between the agent and your workspace in this mode. The agent
+can create, modify, or delete workspace files, including:
 
 - Source code and configuration files
 - Build files (`Makefile`, `package.json`, `Cargo.toml`)
@@ -123,7 +123,6 @@ including:
 - CI configuration (`.github/workflows/`, `.gitlab-ci.yml`)
 - IDE configuration (`.vscode/tasks.json`, `.idea/` run configurations)
 - AI project configuration and settings (`.claude/`, `.codex/`, `.gemini/`)
-- Sandbox environment files (`.sbxenv.yaml`)
 - Hidden files, shell scripts, and executables
 
 Some of these files execute code when you trigger normal development
@@ -142,12 +141,19 @@ Review them after any agent session before performing those actions:
 - AI project configuration and settings (`.claude/settings.json`, `.codex/config.toml`,
   `.gemini/settings.json`) can define hooks and startup commands that
   execute automatically.
-- Sandbox environment files (`.sbxenv.yaml`) can declare `secrets` and
-  `registries` whose values come from a `command`. Those commands run on
-  the host, as you, the next time you run `sbx env create` or
-  `sbx env run` in that directory — before the sandbox exists. Because the
-  file sits in the workspace, an agent in direct mount can add or change
-  one.
+
+Sandbox environment files can declare lifecycle and credential commands that
+run on the host with your privileges. `sbx` shows these commands in an
+environment plan and asks for approval before applying it. It also binds a
+loaded environment file read-only when a workspace would otherwise make it
+writable.
+
+An agent can still reach the underlying writable file by renaming a
+subdirectory that contains it, or when
+`sandboxOptions.writableEnvFiles: true` is set. Store `sbxenv.yaml` outside a
+direct-mounted workspace or directly in the workspace root. Review the plan
+before approving host commands. See
+[Sandbox environment files](../configuration/environment-files.md#workspace).
 
 > [!WARNING]
 > Treat sandbox-modified workspace files the same way you would treat a pull
