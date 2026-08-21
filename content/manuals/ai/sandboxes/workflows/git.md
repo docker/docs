@@ -33,7 +33,7 @@ branches yourself.
 2. Start the sandbox. No special flags needed:
 
    ```console
-   $ sbx run claude .
+   $ sbx run claude
    ```
 
 3. The agent edits files in your working tree. Review diffs, stage, and

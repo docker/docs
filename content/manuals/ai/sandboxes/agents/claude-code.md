@@ -20,7 +20,7 @@ $ sbx run claude ~/my-project
 To start Claude with a specific prompt in the current directory:
 
 ```console
-$ sbx run --name my-sandbox claude . -- "Add error handling to the login function"
+$ sbx run --name my-sandbox claude -- "Add error handling to the login function"
 ```
 
 Everything after `--` is passed directly to Claude Code. You can also pipe in a

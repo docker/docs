@@ -27,7 +27,7 @@ The basic workflow is [`run`](/reference/cli/sbx/run/) to start,
 [`rm`](/reference/cli/sbx/rm/) to clean up:
 
 ```console
-$ sbx run claude .                  # start an agent in the current directory
+$ sbx run claude                    # start an agent in the current directory
 $ sbx ls                            # see what's running
 $ sbx stop my-sandbox               # pause it
 $ sbx rm my-sandbox                 # delete it entirely
@@ -45,7 +45,7 @@ If you need a clean slate, remove the sandbox and run it again:
 ```console
 $ sbx stop my-sandbox
 $ sbx rm my-sandbox
-$ sbx run claude .
+$ sbx run claude
 ```
 
 To remove all stopped local sandboxes, use `sbx prune`. Running sandboxes are
@@ -105,7 +105,7 @@ $ sbx run claude ~/my-project  # reconnects to same sandbox
 Use `--name` to give a sandbox an explicit identity:
 
 ```console
-$ sbx run claude --name my-project .
+$ sbx run --name my-project claude
 ```
 
 Once a named sandbox exists, use `--name` to re-attach to it from any working

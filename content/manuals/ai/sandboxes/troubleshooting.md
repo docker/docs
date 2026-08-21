@@ -267,7 +267,7 @@ experience Git index corruption or unexpected file content, disable caching
 with the kill switch and recreate the sandbox:
 
 ```console
-$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <agent> .
+$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <agent>
 ```
 
 ## Clone mode reports "not in a Git repository" on WSL
