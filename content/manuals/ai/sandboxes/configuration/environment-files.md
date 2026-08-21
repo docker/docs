@@ -102,6 +102,78 @@ The user-level file must not set `name` or `workspace`, because those fields
 identify a project. Lists such as `ports` and `mcp.servers` concatenate across
 the user and project files.
 
+### Parameterize an environment
+
+Declare inputs in a top-level `args` block when values need to vary between
+uses of the same environment file. Each argument must have exactly one of
+`default` or `required: true`:
+
+```yaml
+schemaVersion: "1"
+name: web-app
+agent: claude
+
+args:
+  channel:
+    default: stable
+    description: Release channel
+    enum:
+      - stable
+      - beta
+  endpoint:
+    required: true
+    description: API endpoint
+  cpus:
+    default: "4"
+    pattern: "[1-9][0-9]*"
+
+env:
+  RELEASE_CHANNEL: ${{ env.args.channel }}
+  API_ENDPOINT: ${{ env.args.endpoint }}
+
+sandboxOptions:
+  cpus: ${{ env.args.cpus }}
+```
+
+Reference a declared argument as `${{ env.args.NAME }}` anywhere a YAML value
+can appear. References can't be used in field names or within the `args` block.
+An unquoted reference is interpreted as a YAML value after substitution, so
+the `cpus` value in this example becomes an integer. Quote a reference to
+preserve it as a string.
+
+All `sbx env` commands accept repeatable `--env-arg NAME=VALUE` flags. Values
+provided with a flag replace defaults from the environment file:
+
+```console
+$ sbx env run --env-arg endpoint=https://api.example.com --env-arg channel=beta
+```
+
+Use `--env-args-file` to load values from a file. Each non-empty, non-comment
+line must have the form `NAME=VALUE`:
+
+```text
+# production.args
+channel=beta
+endpoint=https://api.example.com
+```
+
+```console
+$ sbx env run --env-args-file production.args
+```
+
+You can pass multiple argument files. Later files take precedence over earlier
+files, and `--env-arg` flags take precedence over every argument file. The
+command rejects undeclared arguments, missing required values, and values that
+don't satisfy an argument's `enum` or `pattern`. Values can contain `=`, and
+values in an argument file are read literally rather than expanded by a shell.
+
+Argument references are the only variable expressions expanded in an
+environment file. Shell-style expressions such as `${VAR}` aren't expanded
+from the host environment. Other dollar signs remain literal, so a value such
+as `$PATH:/opt/bin` is passed unchanged. Use `$${{ env.args.NAME }}` to produce
+the literal text `${{ env.args.NAME }}`. Substituted values aren't expanded a
+second time.
+
 ## Common workflows
 
 The following examples combine environment file fields into configurations you
@@ -269,7 +341,8 @@ The loader rejects unknown fields and unsupported schema versions.
 | `schemaVersion`        | string           | Yes      | None                           | Schema version. The supported value is `"1"`                                   |
 | `name`                 | string           | No       | `<agent>-<workspace-basename>` | Sandbox name                                                                    |
 | `agent`                | string           | Yes      | None                           | Built-in agent or the name of an agent kit                                      |
-| `kits`                 | list of strings  | No       | None                           | Kits to install at creation. See [`kits`](#kits)                                 |
+| `args`                 | map              | No       | None                           | Environment arguments. See [`args`](#args)                                      |
+| `kits`                 | list             | No       | None                           | Kits to install at creation. See [`kits`](#kits)                                 |
 | `workspace`            | string or object | No       | First file's directory         | Primary workspace. See [`workspace`](#workspace)                                |
 | `additionalWorkspaces` | list             | No       | None                           | Extra directories to mount. See [`additionalWorkspaces`](#additionalworkspaces) |
 | `env`                  | map of strings   | No       | None                           | Environment variables for the sandbox                                           |
@@ -281,12 +354,40 @@ The loader rejects unknown fields and unsupported schema versions.
 | `ports`                | list             | No       | None                           | Port mappings. See [`ports`](#ports)                                            |
 | `lifecycle`            | object           | No       | None                           | Host commands. See [`lifecycle`](#lifecycle)                                    |
 
+### `args`
+
+`args` maps argument names to their declarations. Names must start with a
+letter or underscore and can contain letters, numbers, underscores, and
+hyphens. Each declaration must set exactly one of `default` or `required:
+true`.
+
+| Field         | Type            | Default | Description                                                       |
+| ------------- | --------------- | ------- | ----------------------------------------------------------------- |
+| `default`     | string          | None    | Value used when the command doesn't supply the argument           |
+| `required`    | boolean         | `false` | Require the command to supply the argument                         |
+| `description` | string          | None    | Explanation shown in command output                               |
+| `enum`        | list of strings | None    | Values accepted for the argument                                  |
+| `pattern`     | string          | None    | Go (`RE2`) expression matched against the complete argument value |
+
+`enum` and `pattern` can't be used together. A default value must satisfy the
+declared `enum` or `pattern`.
+
 ### `kits`
 
 `kits` accepts local directories, ZIP archives, OCI registry references, and
 Git URLs prefixed with `git+https://` or `git+ssh://`. Kits can install tools,
 configure the sandbox, and give the agent project-specific instructions. See
 [Kits](../customize/kits.md) for details.
+
+Use an object entry to pass arguments to a kit. Set `source` to the kit
+reference and map the kit's argument names to values under `args`:
+
+```yaml
+kits:
+  - source: ./kits/tool
+    args:
+      version: ${{ env.args.channel }}
+```
 
 Remote kit sources must match the
 [kit source allowlist](../customize/kits.md#restrict-kit-sources). Docker Hub is
