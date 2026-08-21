@@ -12,9 +12,11 @@ properties of the architecture, see [Sandbox isolation](security/isolation.md).
 
 Starting with `sbx` version 0.40.0, workspace paths are optional for
 `sbx create`. When you omit them, the sandbox has no host workspace bind mount.
-The agent works in the container image's configured working directory instead.
-Built-in images use `/home/agent/workspace`; custom templates can define
-another absolute working directory. Files created there stay inside the
+The agent works in the template image's configured `WORKDIR` instead. The
+Docker-provided images for built-in agents set `WORKDIR` to
+`/home/agent/workspace`. A custom template can set another absolute path. If
+the daemon can't resolve a usable absolute `WORKDIR` from the image config, it
+falls back to `/home/agent/workspace`. Files created there stay inside the
 sandbox and persist across stops and restarts.
 
 When you pass a workspace path to `sbx create` or `sbx run`, the directory is
