@@ -29,7 +29,7 @@ $ docker agent run [config] [message...] [flags]
 | --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | `-a, --agent <name>`                    | Run a specific agent from the config                                                                                                      |
 | `--yolo`                                | Auto-approve tool calls (unless explicitly denied). Legacy alias for `--safety autonomous`.                                              |
-| `--safety <mode>`                       | Safety mode for tool approval: `strict` (ask for everything), `balanced` (auto-approve safe calls), or `autonomous` (approve everything). Wins over `--yolo` when both are given. Without the flag, the mode falls back to alias/user-config defaults, then the agent YAML's `agents.<name>.safety` / `runtime.safety`; a resumed session keeps its stored mode unless `--safety`/`--yolo` is passed explicitly. See [Safety Modes](../../configuration/permissions/index.md#safety-modes). |
+| `--safety <mode>`                       | Safety mode for tool approval: `strict` (ask for everything), `balanced` (auto-approve safe calls), `restricted` (auto-approve safe calls, deny the rest — fail-closed for unattended runs), or `autonomous` (approve everything). Wins over `--yolo` when both are given. Without the flag, the mode falls back to alias/user-config defaults, then the agent YAML's `agents.<name>.safety` / `runtime.safety`; a resumed session keeps its stored mode unless `--safety`/`--yolo` is passed explicitly. See [Safety Modes](../../configuration/permissions/index.md#safety-modes). |
 | `--model <ref>`                         | Override model(s). Use `provider/model` for all agents, or `agent=provider/model` for specific agents. Comma-separate multiple overrides. |
 | `--session <id>`                        | Resume a previous session. Supports relative refs (`-1` = newest by creation time, `-2` = second-newest, … — creation order, not last-used). An explicit ID that does not exist yet is created with that ID, so a supervisor can own the session ID upfront and reuse it across runs. |
 | `-s, --session-db <path>`               | Path to the SQLite session database (default: `<data-dir>/session.db`, so `~/.cagent/session.db` unless `--data-dir` is set)              |
@@ -318,6 +318,9 @@ $ docker agent serve mcp <config> [flags]
 | `-a, --agent <name>`   | (all agents)       | Name of the agent to expose. If omitted, every agent in the config is exposed as a separate tool. |
 | `--tool-name <name>`   | (agent name)       | Override the MCP tool identifier clients call; only valid when exposing a single agent.           |
 | `--http`               | `false`            | Use streaming HTTP transport instead of stdio.                                                    |
+| `--safety <policy>`    | `restricted`       | HTTP MCP safety policy; no effect on stdio or `--attach`.                                         |
+| `--auth-token <token>` | (none)             | Required Bearer token for HTTP MCP requests.                                                       |
+| `--insecure-no-auth`   | `false`            | Permit unauthenticated non-loopback HTTP MCP binding.                                              |
 | `-l, --listen <addr>`  | `127.0.0.1:8081`   | Address to listen on (only used with `--http`).                                                   |
 | `--mcp-keepalive <dur>`| `0` (disabled)     | Interval between MCP keep-alive pings (e.g. `30s`).                                               |
 | `--attach [target]`    | (none)             | Attach to a running TUI run by pid, address, or session id; given without a value, selects the most recent run.   |
@@ -394,7 +397,9 @@ $ docker agent serve chat <config> [flags]
 | `-l, --listen <addr>`         | `127.0.0.1:8083`   | Address to listen on.                                                                                             |
 | `--cors-origin <origin>`      | (none)             | Allowed CORS origin (e.g. `https://example.com`). Empty disables CORS.                                            |
 | `--api-key <token>`           | (none)             | Required Bearer token clients must present (`Authorization: Bearer <token>`). Empty disables auth.                |
-| `--api-key-env <name>`        | (none)             | Read the API key from this environment variable instead of the command line.                                      |
+| `--api-key-env <name>`        | (none)             | Read the required API key from this non-empty environment variable.                                      |
+| `--insecure-no-auth`           | `false`            | Permit unauthenticated non-loopback binding.                                                                  |
+| `--safety <policy>`            | `restricted`       | Tool safety policy; CLI value overrides agent/runtime configuration.                                           |
 | `--max-request-size <bytes>`  | `1048576` (1 MiB)  | Maximum request body size. Requests exceeding this limit are rejected with HTTP 413 — see [Troubleshooting: HTTP 413](../../community/troubleshooting/index.md#http-413-request-body-too-large).                                                                                        |
 | `--request-timeout <dur>`     | `5m`               | Per-request timeout (covers model + tool calls + streaming).                                                      |
 | `--conversations-max <n>`     | `0`                | Cache up to N conversations server-side, keyed by `X-Conversation-Id`. `0` disables — clients must resend history. |
@@ -449,6 +454,48 @@ $ docker agent share pull docker.io/username/my-agent:latest --force
 
 See [Agent Distribution](../../concepts/distribution/index.md) for full registry workflow details.
 
+### `docker agent sessions diff`
+
+Compare two recorded sessions and report the first point where the agent behaved
+differently — the triage answer when a task that worked yesterday does not work
+today.
+
+```bash
+$ docker agent sessions diff <session-a> <session-b> [flags]
+```
+
+```console
+$ docker agent sessions diff -1 -2
+Comparing a1b2c3d4 (7 turns) against e5f6a7b8 (9 turns)
+
+❌ First divergence at turn 3 (after 3 matching turn(s)).
+   a1b2c3d4 called:
+     read_file({"path":"pkg/cache/cache.go"})
+   e5f6a7b8 called:
+     search_files_content({"query":"persistToDisk","path":"."})
+
+Everything after this point is downstream of the divergence and is not compared.
+```
+
+Session references accept a full ID, a unique ID prefix, or a relative form such
+as `-1` for the most recent run.
+
+| Flag                    | Default                 | Description                                    |
+| ----------------------- | ----------------------- | ------------------------------------------------ |
+| `-s, --session-db`      | `<data-dir>/session.db` | Path to the session database                   |
+| `--json`                | `false`                 | Emit the comparison as JSON                    |
+| `--fail-on-divergence`  | `false`                 | Exit non-zero when the two sessions diverge    |
+
+Comparison is over the sequence of tool calls, not the assistant's prose: model
+output is nondeterministic, so two runs of the same task almost always word
+things differently while doing the same work. Turns taken by delegated
+sub-agents are included in sequence. Reporting stops at the first divergence —
+everything after it is downstream of that difference.
+
+This locates *where* two runs diverged, not *why*. Re-running a session against
+a different model while holding the environment fixed is a separate, unbuilt
+feature.
+
 ### `docker agent eval`
 
 Run agent evaluations against a directory of recorded sessions.
@@ -468,6 +515,8 @@ $ docker agent eval <agent-file>|<registry-ref> [<eval-dir>|./evals] [flags]
 | `--keep-containers` | `false`                              | Keep containers after evaluation (don't remove with `--rm`)                |
 | `-e, --env`         | (none)                               | Environment variables to pass to container (`KEY` or `KEY=VALUE`, repeatable) |
 | `--repeat <n>`      | `1`                                  | Number of times to repeat each evaluation (useful for computing baselines) |
+| `--baseline <file>` | (none)                               | Compare against a previously saved run JSON (`<output>/<run>.json`) and exit non-zero on regression |
+| `--regression-tolerance <n>` | `0`                         | How far an aggregate quality rate may fall before `--baseline` reports a regression (0–1) |
 
 All [runtime configuration flags](#runtime-configuration-flags) are also accepted.
 
@@ -524,7 +573,7 @@ $ docker agent run yolo-coder
 **Alias Options:** Aliases can include runtime options that apply automatically when used:
 
 - `--yolo` — Auto-approve tool calls (unless explicitly denied) when running the alias. Legacy alias for `--safety autonomous`.
-- `--safety <mode>` — Default [safety mode](../../configuration/permissions/index.md#safety-modes) (`strict`, `balanced`, or `autonomous`) when running the alias. Wins over the alias's `yolo` option; both are stored declaratively in the user config (`aliases.<name>.safety` / `aliases.<name>.yolo`), so you can also edit them there by hand.
+- `--safety <mode>` — Default [safety mode](../../configuration/permissions/index.md#safety-modes) (`strict`, `balanced`, `restricted`, or `autonomous`) when running the alias. Wins over the alias's `yolo` option; both are stored declaratively in the user config (`aliases.<name>.safety` / `aliases.<name>.yolo`), so you can also edit them there by hand.
 - `--model <ref>` — Override the model for the alias
 - `--hide-tool-results` — Hide tool call results in the TUI when running the alias
 - `--sandbox` — Always run the alias inside a [Docker sandbox](../../configuration/sandbox/index.md)
@@ -677,7 +726,7 @@ $ docker agent debug <subcommand> [flags]
 | `toolsets <agent-file>` | List every toolset each agent in the config exposes, with each tool's name and description. |
 | `skills <agent-file>` | List the skills discovered for each agent, marking forked skills. |
 | `title <agent-file> <question>` | Generate a session title for `<question>` using the same title-generation path the TUI uses (including any configured `title_model`), without starting a session. See [Session Titles](../sessions/index.md#session-titles). |
-| `auth` | Print parsed Docker Desktop authentication info from the locally stored JWT (subject, issuer, expiry, username/email). Add `--json` for machine-readable output. |
+| `auth` | Print parsed Docker authentication info from the token in use (source, subject, issuer, expiry, username/email). Add `--json` for machine-readable output. |
 | `oauth list` | List stored MCP OAuth tokens (resource, scope, expiry, redacted access token). Add `--json` for machine-readable output. |
 | `oauth remove <resource-url>` | Remove a stored MCP OAuth token. |
 | `oauth login <agent-file> <mcp-name>` | Perform an interactive OAuth login for a remote MCP server declared in the config, by its name or URL. See [Remote MCP Servers](../remote-mcp/index.md). |
@@ -696,7 +745,9 @@ $ docker agent debug oauth login agent.yaml github
 > [!WARNING]
 > **`debug auth --json` prints the full bearer token**
 >
-> The text output of `debug auth` truncates the token to a short preview, but `--json` includes the complete, unredacted JWT in its `token` field. Never paste `debug auth --json` output into logs, issue trackers, or bug reports — anyone with that token can act as you against Docker Desktop's backend. Use the plain-text output (or redact the `token` field yourself) when sharing diagnostic output.
+> The text output of `debug auth` truncates the token to a short preview, but `--json` includes the complete, unredacted JWT in its `token` field. Never paste `debug auth --json` output into logs, issue trackers, or bug reports — anyone with that token can act as you against Docker. Use the plain-text output (or redact the `token` field yourself) when sharing diagnostic output.
+
+The `Source` field says where the token came from: `docker desktop`, or `minted from the stored access token` when it was obtained by exchanging the access token `docker login` stored. See [Docker authentication](../../guides/secrets/index.md#docker-authentication).
 
 The `config`, `toolsets`, `skills`, and `title` subcommands also accept [runtime configuration flags](#runtime-configuration-flags) (`--working-dir`, `--models-gateway`, …); `title` additionally accepts `--model` to override the model used to resolve the config before generating the title.
 

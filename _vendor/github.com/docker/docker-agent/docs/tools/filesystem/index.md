@@ -44,12 +44,23 @@ This helps agents distinguish between an empty directory and a tool failure, avo
 | `read_file`            | Read the contents of a file (whole file, or a line range of a text file)  |
 | `read_multiple_files`  | Read several files in one call (more efficient than multiple `read_file`) |
 | `write_file`           | Create or overwrite a file with new content                               |
-| `edit_file`            | Make line-based edits (find-and-replace) in an existing file              |
+| `edit_file`            | Make line-based edits (find-and-replace) in an existing file. Each edit must specify a non-empty `oldText` to match and replace; empty `oldText` values are rejected with an error. |
 | `list_directory`       | List files and directories at a given path (explicitly reports empty directories) |
 | `directory_tree`       | Recursive tree view of a directory                                        |
 | `create_directory`     | Create a new directory (creates parent directories as needed)             |
 | `remove_directory`     | Remove an empty directory                                                 |
 | `search_files_content` | Search for text or regex patterns across files                            |
+
+## edit_file Validation
+
+The `edit_file` tool applies a sequence of find-and-replace edits to a file in memory, then writes the result back atomically. Each edit must provide a non-empty `oldText` value:
+
+- **Valid**: `{"oldText": "line one", "newText": "LINE ONE"}`
+- **Invalid**: `{"oldText": "", "newText": "INJECTED"}` — rejected with error
+
+An empty `oldText` is never a meaningful edit: Go's `strings.Contains(s, "")` is always `true`, and `strings.Replace(s, "", new, 1)` silently inserts at offset 0. Without validation, this would prepend content to the file while still reporting success. The tool now returns an explicit error ("oldText must not be empty") when an edit has an empty `oldText`, and no changes are written to disk.
+
+When a sequence contains multiple edits and a later one is rejected, the entire operation fails and the file is left untouched — edits are applied in memory and only written once at the end, so partial application is not possible.
 
 ## Configuration
 

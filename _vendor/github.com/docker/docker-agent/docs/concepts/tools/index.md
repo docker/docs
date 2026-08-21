@@ -49,6 +49,12 @@ Docker Agent ships with several built-in tools that require no external dependen
 | [Handoff](../../tools/handoff/index.md) | Hand the conversation off to another local agent in the same config (auto-enabled with `handoffs:`) |
 | [A2A](../../tools/a2a/index.md) | Connect to remote agents via the Agent-to-Agent protocol |
 | [MCP Catalog](../../tools/mcp-catalog/index.md) | Discover and activate remote MCP servers from the Docker MCP Catalog on demand |
+| [Git](../../tools/git/index.md) | Read-only git repository inspection |
+| [Scheduler](../../tools/scheduler/index.md) | Schedule instructions to run at a time or on a recurring interval |
+| [Webhook](../../tools/webhook/index.md) | Outbound notifications to Slack, Discord, Telegram, IFTTT, and more |
+| [Plan](../../tools/plan/index.md) | Shared persistent scratchpad for multi-agent collaboration |
+| [Session Plan](../../tools/session_plan/index.md) | Per-session plan tracker for the draft/review/execute workflow |
+| [Session Context](../../tools/session_context/index.md) | Reference a previous session as context |
 
 ## MCP Tools
 
