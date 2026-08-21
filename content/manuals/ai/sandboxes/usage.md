@@ -84,11 +84,13 @@ $ sbx run --name scratch
 ```
 
 Mountless mode is the default for `sbx create` when you don't pass a path. The
-agent works in the container image's working directory. Built-in images use
-`/home/agent/workspace`; a custom template can define another absolute working
-directory. Files in a mountless workspace persist when you stop and restart
-the sandbox, but they are deleted with the sandbox. Use `--name` to give a
-mountless sandbox a stable identity for reconnecting. Use
+agent works in the template image's configured `WORKDIR`. The Docker-provided
+images for built-in agents set `WORKDIR` to `/home/agent/workspace`. A custom
+template can set another absolute path. If the daemon can't resolve a usable
+absolute `WORKDIR` from the image config, it falls back to
+`/home/agent/workspace`. Files in a mountless workspace persist when you stop
+and restart the sandbox, but they are deleted with the sandbox. Use `--name` to
+give a mountless sandbox a stable identity for reconnecting. Use
 [`sbx cp`](#copy-files-between-host-and-sandbox) to move files between the
 mountless workspace and your host.
 

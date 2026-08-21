@@ -427,11 +427,12 @@ the sandbox with the kit.
 Runs synchronously when a kit is applied, either during sandbox creation or
 through `sbx kit add`. Shell strings are passed to `sh -c`.
 
-Install commands inherit the container image's working directory. Built-in
-images use `/home/agent/workspace`, but this isn't necessarily the primary
-workspace in a directly mounted or clone-mode sandbox. Don't rely on the
-current directory to locate workspace files. Use absolute paths for bundled
-assets from `files/home/`.
+Install commands inherit the template image's working directory. The
+Docker-provided images for built-in agents set `WORKDIR` to
+`/home/agent/workspace`, but this isn't necessarily the primary workspace in a
+directly mounted or clone-mode sandbox. Don't rely on the current directory to
+locate workspace files. Use absolute paths for bundled assets from
+`files/home/`.
 
 | Field         | Default | Description                   |
 | ------------- | ------- | ----------------------------- |
