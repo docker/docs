@@ -24,6 +24,41 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.88.0
+
+{{< release-date date="2026-08-24" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.88.0" build_path="/xxxxxx/" >}}
+
+### Updates
+
+- [Docker Agent v1.124.0](https://github.com/docker/docker-agent/releases/tag/v1.124.0)
+- Docker Offload `v0.6.13`
+- [Docker Model Runner v1.2.8](https://github.com/docker/model-cli/releases/tag/v1.2.8)
+- [containerd v2.3.3](https://github.com/containerd/containerd/releases/tag/v2.3.3)
+- [Runc v1.4.3](https://github.com/opencontainers/runc/releases/tag/v1.4.3)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where Docker Desktop reported `enable fsverity failed: operation not supported` as the crash cause instead of the real underlying error.
+- Fixed a bug where changing the hypervisor type in Settings had no effect when Docker Desktop was in resource saver mode.
+- Fixed port bindings reported by `docker ps` to accurately reflect active listeners when using 'Localhost by default' or 'Localhost only' settings, and added `[::1]` loopback listener alongside `127.0.
+- Fixed an HTTP 500 error that could occur during Docker Desktop startup or wake from idle-shutdown when the engine socket existed but was not yet listening.
+- Fixed a bug where Docker Desktop would fail to start if `~/.docker/daemon.json` was corrupted with null bytes (typically caused by a crash or power-loss during a settings save). Docker Desktop now automatically recovers to default daemon settings in this case.
+- Fixed an issue in the Docker Engine config editor  in settings where validation error messages would disappear immediately while typing invalid JSON.
+- Fixed a Docker VMM regression that reduced container inbound network throughput to roughly 0.3 Gb/s.
+
+#### For Mac
+
+- Docker VMM can now use more than 28GiB of host memory.
+
+#### For Windows
+
+- Fixed a Windows auto-update failure when a self-updated CLI plugin (e.g `docker scout` or `docker agent`) newer than the bundled version was already present in the user's cli-plugins folder.
+- Fixed an issue on per-user Windows installs where Hyper-V, Windows containers, and related settings are now correctly disabled and grayed out, preventing broken behavior caused by the unavailable priv
+
 ## 4.87.0
 
 {{< release-date date="2026-08-17" >}}
