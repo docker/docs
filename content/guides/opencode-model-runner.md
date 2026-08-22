@@ -8,7 +8,6 @@ keywords: ai, opencode, docker model runner, local models, coding assistant
 weight: 3
 params:
   tags: [ai]
-  featured: true
   time: 10 minutes
 ---
 
