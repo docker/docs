@@ -23,9 +23,10 @@ registry directly, rather than loading the image and then pushing it. Pushing
 directly speeds up your builds and avoids unnecessary file transfers.
 
 If you just want to build and discard the output, export the results to the
-build cache or build without tagging the image. When you use Docker Build Cloud,
-Buildx automatically loads the build result if you build a tagged image.
-See [Loading build results](./usage/#loading-build-results) for details.
+build cache or build without tagging the image. With no explicit output, Buildx
+leaves an untagged result in the cloud build cache and automatically loads
+eligible tagged images. See
+[Loading build results](./usage/#loading-build-results) for details.
 
 > [!NOTE]
 >
@@ -67,6 +68,17 @@ If you are not an organization administrator:
 
 ## CI platform examples
 
+The following examples require Docker CLI with Buildx version 0.37.0 or later,
+which includes the `cloud` driver. Check the Buildx version available on your CI
+runner:
+
+```console
+$ docker buildx version
+```
+
+If the runner doesn't include a compatible version, install Buildx as a
+[Docker CLI plugin](https://github.com/docker/buildx#manual-download).
+
 > [!NOTE]
 >
 > In your CI/CD configuration, set the following variables/secrets:
@@ -77,6 +89,8 @@ If you are not an organization administrator:
 > This ensures your builds authenticate correctly with Docker Build Cloud.
 
 ### GitHub Actions
+
+<!-- TODO: Confirm whether standard Buildx requires a minimum setup-buildx-action version. -->
 
 ```yaml
 name: ci
@@ -140,19 +154,12 @@ For more information about the `BUILDX_BUILDER` environment variable, see
 
 ```yaml
 default:
-  image: docker:24-dind
+  image: docker:cli
   services:
-    - docker:24-dind
+    - docker:dind
   before_script:
     - docker info
     - echo "$DOCKER_ACCESS_TOKEN" | docker login --username "$DOCKER_ACCOUNT" --password-stdin
-    - |
-      apk add curl jq
-      ARCH=${CI_RUNNER_EXECUTABLE_ARCH#*/}
-      BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
-      mkdir -vp ~/.docker/cli-plugins/
-      curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
-      chmod a+x ~/.docker/cli-plugins/docker-buildx
     - docker buildx create --use --driver cloud ${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}
 
 variables:
@@ -195,13 +202,6 @@ jobs:
     steps:
       - checkout
 
-      - run: |
-          mkdir -vp ~/.docker/cli-plugins/
-          ARCH=amd64
-          BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
-          curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
-          chmod a+x ~/.docker/cli-plugins/docker-buildx
-
       - run: echo "$DOCKER_ACCESS_TOKEN" | docker login --username $DOCKER_ACCOUNT --password-stdin
       - run: docker buildx create --use --driver cloud "${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}"
 
@@ -217,13 +217,6 @@ jobs:
       image: ubuntu-2204:current
     steps:
       - checkout
-
-      - run: |
-          mkdir -vp ~/.docker/cli-plugins/
-          ARCH=amd64
-          BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
-          curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
-          chmod a+x ~/.docker/cli-plugins/docker-buildx
 
       - run: echo "$DOCKER_ACCESS_TOKEN" | docker login --username $DOCKER_ACCOUNT --password-stdin
       - run: docker buildx create --use --driver cloud "${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}"
@@ -281,28 +274,6 @@ steps:
 Create the `build.sh` script:
 
 ```bash
-DOCKER_DIR=/usr/libexec/docker
-
-# Get download link for latest buildx binary.
-# Set $ARCH to the CPU architecture (e.g. amd64, arm64)
-UNAME_ARCH=`uname -m`
-case $UNAME_ARCH in
-  aarch64)
-    ARCH="arm64";
-    ;;
-  amd64)
-    ARCH="amd64";
-    ;;
-  *)
-    ARCH="amd64";
-    ;;
-esac
-BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
-
-# Download docker buildx with Build Cloud support
-curl --silent -L --output $DOCKER_DIR/cli-plugins/docker-buildx $BUILDX_URL
-chmod a+x ~/.docker/cli-plugins/docker-buildx
-
 # Connect to your builder and set it as the default builder
 docker buildx create --use --driver cloud "${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}"
 
@@ -328,7 +299,6 @@ pipeline {
   agent any
 
   environment {
-    ARCH = 'amd64'
     DOCKER_ACCESS_TOKEN = credentials('docker-access-token')
     DOCKER_ACCOUNT = credentials('docker-account')
     CLOUD_BUILDER_NAME = '<CLOUD_BUILDER_NAME>'
@@ -337,13 +307,7 @@ pipeline {
 
   stages {
     stage('Build') {
-      environment {
-        BUILDX_URL = sh (returnStdout: true, script: 'curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\\"linux-$ARCH\\"))"').trim()
-      }
       steps {
-        sh 'mkdir -vp ~/.docker/cli-plugins/'
-        sh 'curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL'
-        sh 'chmod a+x ~/.docker/cli-plugins/docker-buildx'
         sh 'echo "$DOCKER_ACCESS_TOKEN" | docker login --username $DOCKER_ACCOUNT --password-stdin'
         sh 'docker buildx create --use --driver cloud "${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}"'
         // Cache-only build
@@ -372,12 +336,7 @@ env:
 before_install: |
   echo "$DOCKER_ACCESS_TOKEN" | docker login --username "$DOCKER_ACCOUNT" --password-stdin
 
-install: |
-  set -e 
-  BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$TRAVIS_CPU_ARCH\"))")
-  mkdir -vp ~/.docker/cli-plugins/
-  curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
-  chmod a+x ~/.docker/cli-plugins/docker-buildx
+before_script: |
   docker buildx create --use --driver cloud "${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}"
 
 script: |
@@ -393,18 +352,13 @@ script: |
 # Prerequisites: $DOCKER_ACCOUNT, $CLOUD_BUILDER_NAME, $DOCKER_ACCESS_TOKEN setup as deployment variables
 # This pipeline assumes $BITBUCKET_REPO_SLUG as the image name
 
-image: atlassian/default-image:3
+image: docker:cli
 
 pipelines:
   default:
     - step:
         name: Build multi-platform image
         script:
-          - mkdir -vp ~/.docker/cli-plugins/
-          - ARCH=amd64
-          - BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
-          - curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
-          - chmod a+x ~/.docker/cli-plugins/docker-buildx
           - echo "$DOCKER_ACCESS_TOKEN" | docker login --username $DOCKER_ACCOUNT --password-stdin
           - docker buildx create --use --driver cloud "${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}"
           - IMAGE_NAME=$BITBUCKET_REPO_SLUG
@@ -420,15 +374,6 @@ pipelines:
 
 ```bash
 #!/bin/bash
-
-# Get download link for latest buildx binary. Set $ARCH to the CPU architecture (e.g. amd64, arm64)
-ARCH=amd64
-BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
-
-# Download docker buildx with Build Cloud support
-mkdir -vp ~/.docker/cli-plugins/
-curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
-chmod a+x ~/.docker/cli-plugins/docker-buildx
 
 # Login to Docker Hub with an access token. See https://docs.docker.com/build-cloud/ci/#creating-access-tokens
 echo "$DOCKER_ACCESS_TOKEN" | docker login --username $DOCKER_ACCOUNT --password-stdin
@@ -452,28 +397,12 @@ docker buildx build \
 
 ### Docker Compose
 
-Use this implementation if you want to use `docker compose build` with
-Docker Build Cloud in CI.
+This example requires Buildx version 0.37.0 or later and a Docker Compose
+version that supports Docker Build Cloud. Set the cloud builder as the default
+builder before running `docker compose build` in CI:
 
 ```bash
 #!/bin/bash
-
-# Get download link for latest buildx binary. Set $ARCH to the CPU architecture (e.g. amd64, arm64)
-ARCH=amd64
-BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
-COMPOSE_URL=$(curl -sL \
-  -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer <GITHUB_TOKEN>" \
-  -H "X-GitHub-Api-Version: 2022-11-28" \
-  https://api.github.com/repos/docker/compose-desktop/releases \
-  | jq "[ .[] | select(.prerelease==false and .draft==false) ] | .[0].assets.[] | select(.name | endswith(\"linux-${ARCH}\")) | .browser_download_url")
-
-# Download docker buildx with Build Cloud support
-mkdir -vp ~/.docker/cli-plugins/
-curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
-curl --silent -L --output ~/.docker/cli-plugins/docker-compose $COMPOSE_URL
-chmod a+x ~/.docker/cli-plugins/docker-buildx
-chmod a+x ~/.docker/cli-plugins/docker-compose
 
 # Login to Docker Hub with an access token. See https://docs.docker.com/build-cloud/ci/#creating-access-tokens
 echo "$DOCKER_ACCESS_TOKEN" | docker login --username $DOCKER_ACCOUNT --password-stdin
@@ -481,6 +410,6 @@ echo "$DOCKER_ACCESS_TOKEN" | docker login --username $DOCKER_ACCOUNT --password
 # Connect to your builder and set it as the default builder
 docker buildx create --use --driver cloud "${DOCKER_ACCOUNT}/${CLOUD_BUILDER_NAME}"
 
-# Build the image build
+# Build the images
 docker compose build
 ```
