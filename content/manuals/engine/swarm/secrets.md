@@ -264,6 +264,39 @@ real-world example, continue to
     $ docker secret rm my_secret_data
     ```
 
+### Example: Use a Go template for a secret
+
+Secrets support the same Go templates as [configs](configs.md#example-use-a-templated-config).
+Pass `--template-driver golang` when you create the secret. The template is
+rendered when the container is created.
+
+1.  Save the following into a new file `db-password.tmpl`.
+
+    ```text
+    {{ env "DB_PASSWORD" }}
+    ```
+
+2.  Create the secret and a service that has the environment variable and
+    the secret.
+
+    ```console
+    $ docker secret create --template-driver golang db-password db-password.tmpl
+
+    $ docker service create \
+         --name db \
+         --env DB_PASSWORD="s3cret" \
+         --secret source=db-password,target=db_password \
+         redis:alpine
+    ```
+
+3.  The task reads the rendered value, not the template text.
+
+    ```console
+    $ docker container exec $(docker ps --filter name=db -q) cat /run/secrets/db_password
+
+    s3cret
+    ```
+
 ### Simple example: Use secrets in a Windows service
 
 This is a very simple example which shows how to use secrets with a Microsoft
