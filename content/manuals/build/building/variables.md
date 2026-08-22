@@ -64,6 +64,26 @@ Values for environment variables must be declared in the Dockerfile.
 You can combine environment variables and build arguments to allow
 environment variables to be configured at build-time.
 
+### How substitution works
+
+The builder interpolates `$VAR` / `${VAR}` in instructions such as
+`FROM`, `COPY`, `ADD`, `ENV`, `EXPOSE`, `LABEL`, `USER`, `VOLUME`,
+and `WORKDIR`.
+
+It does not interpolate `RUN`, `CMD`, or `ENTRYPOINT`. Those get
+variables from the shell (or whatever process you start) when the
+instruction actually runs — `RUN` at build time, `CMD` / `ENTRYPOINT`
+when the container starts. The exec form does not start a shell, so
+`$HOME` stays literal unless you invoke `sh -c` yourself.
+
+`FROM` only substitutes `ARG` values declared before that `FROM`.
+An `ENV` is not visible there.
+
+Both `ARG` and `ENV` show up in the environment of a shell-form `RUN`.
+`ENV` is persisted in the image; `ARG` is not, unless you copy it into
+an `ENV`. If both set the same name, later instructions see the most
+recently set value.
+
 For an example on how to use environment variables for configuring builds,
 see [`ENV` usage example](#env-usage-example).
 
