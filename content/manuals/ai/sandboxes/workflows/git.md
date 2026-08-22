@@ -183,18 +183,27 @@ yourself after reviewing the changes.
 
 ## Commit signing
 
-Sandboxes forward your host SSH agent into the sandbox, so the agent can
-sign commits with your SSH key without the private key ever leaving your
-host.
+Sandboxes can forward your host SSH agent into the sandbox, so the agent can
+sign commits with your SSH key without the private key ever leaving your host.
 
-1. On your host, make sure the signing key is loaded in your SSH agent:
+1. On your host, turn on SSH agent forwarding:
+
+   ```console
+   $ sbx settings set ssh.agentForwardingEnabled true
+   $ sbx daemon restart
+   ```
+
+   Forwarding is off by default. If you use a custom SSH agent socket, first
+   [configure its path](../configuration/credentials.md#ssh-agent).
+
+2. Make sure the signing key is loaded in your host SSH agent:
 
    ```console
    $ ssh-add ~/.ssh/id_ed25519
    $ ssh-add -L  # confirm the key appears
    ```
 
-2. Inside the sandbox, configure Git to sign with SSH. Use the forwarded key
+3. Inside the sandbox, configure Git to sign with SSH. Use the forwarded key
    directly rather than a file path, since host paths don't exist inside the
    sandbox:
 
@@ -203,7 +212,7 @@ host.
    $ git config --global user.signingkey "key::$(ssh-add -L | head -n 1)"
    ```
 
-3. Sign commits as usual:
+4. Sign commits as usual:
 
    ```console
    $ git commit -S -m "feat: my change"
