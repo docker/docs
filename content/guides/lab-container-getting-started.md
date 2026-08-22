@@ -19,6 +19,8 @@ image, and see container immutability and isolation in action.
 
 ## Launch the lab
 
+If you're using Docker Desktop, use version 4.43 or later before launching this lab.
+
 {{< labspace-launch image="dockersamples/labspace-container-getting-started" >}}
 
 ## What you'll learn
