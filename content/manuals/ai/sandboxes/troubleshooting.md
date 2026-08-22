@@ -273,6 +273,19 @@ the command again:
 Docker Sandboxes can sign Git commits with SSH keys from your host agent.
 For setup steps, see [Commit signing](workflows/git.md#commit-signing).
 
+SSH agent forwarding is disabled by default. If `SSH_AUTH_SOCK` isn't set
+inside the sandbox, enable forwarding on the host and restart the daemon:
+
+```console
+$ sbx settings set ssh.agentForwardingEnabled true
+$ sbx daemon restart
+```
+
+Then re-enter the sandbox from a shell where `SSH_AUTH_SOCK` points at the
+agent that holds your keys. See
+[SSH agent](configuration/credentials.md#ssh-agent) for how the forwarded socket
+is selected.
+
 If `ssh-add -L` prints `The agent has no identities.`, the sandbox can reach
 the forwarded agent, but the host agent doesn't have a loaded key. Load the
 signing key into your host SSH agent:
