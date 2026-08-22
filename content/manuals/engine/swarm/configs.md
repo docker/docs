@@ -6,7 +6,7 @@ keywords: swarm, configuration, configs
 
 ## About configs
 
-Docker swarm service configs  allow you to store non-sensitive information,
+Docker swarm service configs allow you to store non-sensitive information,
 such as configuration files, outside a service's image or running containers.
 This allows you to keep your images as generic as possible, without the need to
 bind-mount configuration files into the containers or use environment variables.
@@ -46,7 +46,7 @@ following notable differences in mind:
   container.
 
 - On Windows, create or update a service using `--credential-spec` with the
-  `config://<config-name>` format.  This passes the gMSA credentials file
+  `config://<config-name>` format. This passes the gMSA credentials file
   directly to nodes before a container starts. No gMSA credentials are written
   to disk on worker nodes. For more information, refer to
   [Deploy services to a swarm](services.md#gmsa-for-swarm).
@@ -93,7 +93,7 @@ configs. You cannot remove a config that a running service is
 using. See [Rotate a config](configs.md#example-rotate-a-config) for a way to
 remove a config without disrupting running services.
 
-To update or roll back configs more easily, consider adding a version
+To update or roll back configs, consider adding a version
 number or date to the config name. This is made easier by the ability to control
 the mount point of the config within a given container.
 
@@ -234,7 +234,7 @@ real-world example, continue to
 
 This is a very simple example which shows how to use configs with a Microsoft
 IIS service running on Docker for Windows running Windows containers on
-Microsoft Windows 10.  It is a naive example that stores the webpage in a config.
+Microsoft Windows 10. It is a naive example that stores the webpage in a config.
 
 This example assumes that you have PowerShell installed.
 
@@ -242,7 +242,9 @@ This example assumes that you have PowerShell installed.
 
     ```html
     <html lang="en">
-      <head><title>Hello Docker</title></head>
+      <head>
+        <title>Hello Docker</title>
+      </head>
       <body>
         <p>Hello Docker! You have deployed a HTML page.</p>
       </body>
@@ -292,7 +294,9 @@ name as its argument. The template will be rendered when container is created.
 
     ```html
     <html lang="en">
-      <head><title>Hello Docker</title></head>
+      <head>
+        <title>Hello Docker</title>
+      </head>
       <body>
         <p>Hello {{ env "HELLO" }}! I'm service {{ .Service.Name }}.</p>
       </body>
@@ -433,7 +437,7 @@ generate the site key and certificate, name the files `site.key` and
 
 1.  Produce a very basic Nginx configuration that serves static files over HTTPS.
     The TLS certificate and key are stored as Docker secrets so that they
-    can be rotated easily.
+    can be rotated.
 
     In the current directory, create a new file called `site.conf` with the
     following contents:
@@ -479,7 +483,6 @@ generate the site key and certificate, name the files `site.key` and
     4ory233120ccg7biwvy11gl5z   site.conf           4 seconds ago       4 seconds ago
     ```
 
-
 4.  Create a service that runs Nginx and has access to the two secrets and the
     config. Set the mode to `0440` so that the file is only readable by its
     owner and that owner's group, not the world.
@@ -496,7 +499,6 @@ generate the site key and certificate, name the files `site.key` and
     ```
 
     Within the running containers, the following three files now exist:
-
     - `/run/secrets/site.key`
     - `/run/secrets/site.crt`
     - `/etc/nginx/conf.d/site.conf`
