@@ -349,6 +349,8 @@ build:
 ### `network`
 
 Set the network containers connect to for the `RUN` instructions during build.
+This applies only to build-time containers, not to the running service containers.
+To connect running service containers to networks, use [`networks`](services.md#networks) instead.
 
 ```yaml
 build:
