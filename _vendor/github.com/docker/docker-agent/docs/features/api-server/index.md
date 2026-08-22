@@ -51,6 +51,10 @@ Each agent entry in the `GET /api/agents` response contains:
 | `multi`      | boolean         | `true` when the config defines more than one agent.                                           |
 | `commands`   | array of string | Sorted list of named command keys defined on the root agent. Omitted when no commands exist.  |
 
+### Remote agent sources
+
+For an agent loaded from a remote HTTP(S) configuration source, endpoints that need to load that source return `502 Bad Gateway` when fetching it fails. A missing configured agent returns `404 Not Found`; invalid source URLs or configuration return `500 Internal Server Error`.
+
 ### Sessions
 
 | Method   | Path                                | Description                                             |

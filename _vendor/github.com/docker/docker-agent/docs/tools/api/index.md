@@ -220,7 +220,7 @@ agents:
 - Default 30-second timeout per request (override with the `timeout` field)
 - Only HTTP and HTTPS URLs are supported
 - No support for file uploads or multipart forms
-- By default, requests to non-public IP ranges (loopback, RFC1918, link-local, the cloud-metadata endpoint, multicast, the unspecified address) are refused at dial time — even when DNS for an otherwise-public host resolves there. Set `allow_private_ips: true` to disable that check.
+- On its direct path, requests to non-public IP ranges (loopback, RFC1918, link-local, the cloud-metadata endpoint, multicast, the unspecified address) are refused at dial time — even when DNS for an otherwise-public host resolves there. Set `allow_private_ips: true` to disable that check.
 
 ## Reaching internal services
 
@@ -240,6 +240,8 @@ toolsets:
 > **SSRF**
 >
 > Setting `allow_private_ips: true` re-exposes the SSRF surface for this tool. Only enable it when the configured `endpoint` is a trusted internal service — a prompt-injected agent cannot redirect the call elsewhere because the endpoint is fixed in config, but redirects from the configured host can still reach unexpected places.
+
+When Docker Desktop is running, eligible public destinations use its PAC proxy before standard environment-proxy routing. A PAC `DIRECT` response selects Docker Desktop's direct egress. `NO_PROXY` does not bypass Desktop PAC selection; set `DOCKER_AGENT_DISABLE_DESKTOP_PROXY=1` (or `true`, `yes`, or `on`) to bypass only the Desktop adapter per request and restore standard `HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` routing. Loopback always stays direct. For guarded requests, Docker Desktop PAC routing is restricted to Docker-owned hostnames (docker.com and docker.io families); all other hosts use the direct SSRF-guarded path. Within the allowed set, local DNS preflight requires public addresses before Docker Desktop is selected; all lookup failures — including NXDOMAIN, empty results, errors, and private or mixed answers — stay on the SSRF-protected direct path. This preflight does not validate Docker Desktop-selected egress, whether PAC selects a proxy or `DIRECT`. `allow_private_ips: true` removes that direct-path address guard for trusted internal services, but Desktop PAC still takes precedence for eligible non-loopback destinations. See [Docker Desktop proxy](../fetch/index.md#docker-desktop-proxy).
 
 > [!TIP]
 > **For Complex APIs**
