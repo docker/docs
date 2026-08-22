@@ -47,7 +47,7 @@ toolsets:
 
 ### Reaching internal services
 
-By default the OpenAPI tool refuses connections to non-public IP addresses, blocking SSRF attempts even when DNS resolves an otherwise-public host to an internal range. Opt in with `allow_private_ips` when the spec or its `servers` entries legitimately target localhost or your internal network:
+By default, the OpenAPI tool's **direct path** refuses connections to non-public IP addresses, including a public hostname that resolves to an internal address. Docker Agent does not evaluate PAC, so the dial-time guard applies when Docker Desktop is unavailable or bypassed; egress selected by Docker Desktop — through a proxy or with PAC `DIRECT` — is outside local dial-time enforcement. Opt in with `allow_private_ips` when the spec or its `servers` entries legitimately target localhost or your internal network:
 
 ```yaml
 toolsets:
@@ -55,6 +55,8 @@ toolsets:
     url: "http://localhost:8080/openapi.json"
     allow_private_ips: true
 ```
+
+When Docker Desktop is running, eligible public destinations use its PAC proxy before standard environment-proxy routing. A PAC `DIRECT` response selects Docker Desktop's direct egress. `NO_PROXY` does not bypass Desktop PAC selection; set `DOCKER_AGENT_DISABLE_DESKTOP_PROXY=1` (or `true`, `yes`, or `on`) to bypass only the Desktop adapter per request and restore standard `HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` routing. Loopback always stays direct. For guarded requests, Docker Desktop PAC routing is restricted to Docker-owned hostnames (docker.com and docker.io families); all other hosts use the direct SSRF-guarded path. Within the allowed set, local DNS preflight requires public addresses before Docker Desktop is selected; all lookup failures — including NXDOMAIN, empty results, errors, and private or mixed answers — stay on the SSRF-protected direct path. This preflight does not validate Docker Desktop-selected egress, whether PAC selects a proxy or `DIRECT`. `allow_private_ips: true` removes that direct-path guard for trusted internal services, but Desktop PAC still takes precedence for eligible non-loopback destinations. See [Docker Desktop proxy](../fetch/index.md#docker-desktop-proxy).
 
 ## Properties
 

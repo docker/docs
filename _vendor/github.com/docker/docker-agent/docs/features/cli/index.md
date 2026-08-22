@@ -349,6 +349,10 @@ $ docker agent serve a2a <config> [flags]
 | ---------------------- | ------------------ | ------------------------------------------------------------------------------------------ |
 | `-a, --agent <name>`   | (team default)     | Name of the agent to run. Defaults to the team's first agent if not specified.             |
 | `-l, --listen <addr>`  | `127.0.0.1:8082`   | Address to listen on.                                                                       |
+| `--auth-token <token>` | (none)             | Bearer token required for agent-card and invocation requests.                              |
+| `--cors-origin <origins>` | (none)          | Allowed browser origins, comma-separated; empty disables CORS.                             |
+| `--insecure-no-auth`   | `false`            | Allow an unauthenticated non-loopback listener (unsafe).                                   |
+| `--safety <policy>`    | `restricted`       | Tool safety policy; `autonomous` is permitted only through this explicit CLI flag.         |
 | `-s, --session-db <path>` | `<data-dir>/session.db` | Path to the SQLite session database.                                                 |
 
 All [runtime configuration flags](#runtime-configuration-flags) are also accepted.

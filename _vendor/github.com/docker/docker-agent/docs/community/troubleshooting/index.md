@@ -159,7 +159,7 @@ Model names must match the provider's naming exactly. Common mistakes:
 
 ### Network connectivity
 
-If the agent hangs or times out, check that you can reach the provider's API endpoint. Firewalls, VPNs, or proxy settings may block requests.
+If the agent hangs or times out, check that you can reach the provider's API endpoint. Firewalls, VPNs, or proxy settings may block requests. Docker Agent does not evaluate PAC files or URLs directly. When Docker Desktop is running, eligible requests use its PAC adapter before environment proxy settings; `NO_PROXY` does not bypass that selection. Set `DOCKER_AGENT_DISABLE_DESKTOP_PROXY=1` (or `true`, `yes`, or `on`) to restore `HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` routing per request; see [Docker Desktop proxy](../../tools/fetch/index.md#docker-desktop-proxy) for scope and SSRF behavior.
 
 ## Tool Execution Failures
 

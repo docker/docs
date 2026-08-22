@@ -62,6 +62,8 @@ For full configuration details, see the [Tool Config](../../configuration/tools/
 
 Set `allow_private_ips: true` on a remote MCP toolset only when the MCP server or its OAuth registration/token endpoints intentionally resolve to private, loopback, or link-local addresses. The default blocks those OAuth helper requests to reduce SSRF risk.
 
+When Docker Desktop is running, eligible OAuth discovery, registration, token exchange, refresh, and helper requests use its PAC adapter before environment proxy settings. It does not apply to remote MCP Streamable HTTP/SSE transport. Set `DOCKER_AGENT_DISABLE_DESKTOP_PROXY=1` (or `true`, `yes`, or `on`) to restore standard `HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` routing; `NO_PROXY` does not bypass Desktop PAC selection. Docker Agent does not evaluate PAC files or URLs directly—see [Docker Desktop proxy](../../tools/fetch/index.md#docker-desktop-proxy).
+
 > [!NOTE]
 > **Headers forwarded during OAuth discovery**
 >

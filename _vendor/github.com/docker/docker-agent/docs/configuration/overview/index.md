@@ -164,11 +164,12 @@ API keys and secrets are read from environment variables — never stored in con
 | `DOCKER_AGENT_AUTO_UPDATE`          | Set to a truthy value (`1`, `true`, `yes`, `on`) to let standalone release binaries self-update before running. See [Optional Self-Updates](../../getting-started/installation/index.md#optional-self-updates). |
 | `DOCKER_AGENT_NO_TOKEN_EXCHANGE`    | Set to `1` to stop Docker Agent from exchanging the access token stored by `docker login` for a Docker token. See [Docker authentication](../../guides/secrets/index.md#docker-authentication). |
 | `DOCKER_AGENT_HUB_LOGIN_URL`        | Point the token exchange at a Docker staging environment. Ignored unless it is an HTTPS `docker.com` URL. |
+| `DOCKER_AGENT_DISABLE_DESKTOP_PROXY` | Set to a truthy value (`1`, `true`, `yes`, `on`) to bypass Docker Desktop's PAC adapter per request and restore standard `HTTP_PROXY`/`HTTPS_PROXY`/`ALL_PROXY`/`NO_PROXY` routing. |
 
 > [!NOTE]
 > **Legacy `CAGENT_*` aliases**
 >
-> The same variables are also accepted with the legacy `CAGENT_` prefix (e.g. `CAGENT_DEFAULT_MODEL`, `CAGENT_MODELS_GATEWAY`, `CAGENT_HIDE_TELEMETRY_BANNER`) for backward compatibility. Prefer the `DOCKER_AGENT_*` form in new setups.
+> The same variables are also accepted with the legacy `CAGENT_` prefix (e.g. `CAGENT_DEFAULT_MODEL`, `CAGENT_MODELS_GATEWAY`, `CAGENT_HIDE_TELEMETRY_BANNER`) for backward compatibility. `DOCKER_AGENT_DISABLE_DESKTOP_PROXY` is the exception: it has no legacy `CAGENT_*` alias. Prefer the `DOCKER_AGENT_*` form in new setups.
 
 > [!IMPORTANT]
 > Model references are case-sensitive: `openai/gpt-5` is not the same as `openai/GPT-5`.
