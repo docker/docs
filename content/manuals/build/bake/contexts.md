@@ -89,4 +89,4 @@ target "app" {
 
 In most cases you should just use a single multi-stage Dockerfile with multiple
 targets for similar behavior. This case is only recommended when you have
-multiple Dockerfiles that can't be easily merged into one.
+multiple Dockerfiles that can't be merged into one.
