@@ -20,11 +20,13 @@ processes, files, or resources outside its defined boundaries.
 
 - **Process isolation:** separate kernel per sandbox; processes inside the VM
   are invisible to your host and to other sandboxes
-- **Filesystem isolation:** your workspace directory and, for supported agents
-  that haven't opted out, the dedicated [shared skills
-  store](../workflows/agent-skills.md) are shared with the host. The rest
-  of the VM filesystem persists across restarts but is removed when you delete
-  the sandbox. Symlinks pointing outside the workspace scope are not followed.
+- **Filesystem isolation:** a host workspace is shared when you pass a
+  workspace path or use `sbx run`, which defaults to the current directory.
+  For supported agents that haven't opted out, the dedicated
+  [shared skills store](../workflows/agent-skills.md) is also shared with the
+  host. The rest of the VM filesystem persists across restarts but is removed
+  when you delete the sandbox. Symlinks pointing outside the workspace scope
+  are not followed.
 - **Full cleanup:** when you remove a sandbox with `sbx rm`, the VM and
   everything inside it is deleted
 
@@ -94,24 +96,49 @@ flowchart TB
 
 ## Workspace isolation
 
-When you create a sandbox, you choose one of two ways to share your
-workspace with it:
+When you create a sandbox, choose how the agent receives a workspace:
 
-- **Direct mount** (the default): the agent has read-write access to
-  your working tree. There is no boundary between the agent's edits and
-  your host filesystem.
-- **Clone mode** (`--clone`): your repository is mounted read-only into
-  the VM and the agent works on a private clone inside the VM. The
-  agent's edits never reach your host until you fetch them.
+- **Mountless** (no path to `sbx create`): the sandbox doesn't receive a host
+  workspace. The agent works in the sandbox's own filesystem.
+- **Direct mount** (a path such as `.`): the agent has read-write access to
+  your working tree. There is no boundary between the agent's edits and your
+  host filesystem.
+- **Clone mode** (`--clone` and a Git path): your repository is mounted
+  read-only into the VM and the agent works on a private clone inside the VM.
+  The agent's edits never reach your host until you fetch them.
 
-See [Git workflows](../workflows/git.md) for the workflow side of
-each.
+See [Git workflows](../workflows/git.md) for direct-mount and clone-mode
+workflows.
 
-### Direct mount (default)
+### Mountless
 
-By default, your workspace is shared into the VM as a read-write mount.
-The agent and the host see the same files, and changes the agent makes
-appear on your host as soon as they're written.
+Omit the workspace path from `sbx create` to create a mountless sandbox, then
+attach by name:
+
+```console
+$ sbx create --name scratch claude
+$ sbx run --name scratch
+```
+
+The agent works in the template image's configured `WORKDIR`. The
+Docker-provided images for built-in agents set `WORKDIR` to
+`/home/agent/workspace`. If the daemon can't resolve a usable absolute
+`WORKDIR` from the image config, it falls back to that path. Files there stay
+within the sandbox, persist across stops and restarts, and are deleted when you
+remove the sandbox. A mountless sandbox doesn't expose a host project
+directory, but separately configured host resources such as the shared skills
+store can still be mounted.
+
+### Direct mount
+
+Pass a workspace path to share it into the VM as a read-write mount. The agent
+and the host see the same files, and changes the agent makes appear on your
+host as soon as they're written. `sbx run` mounts the current directory when
+you don't pass a path:
+
+```console
+$ sbx run claude
+```
 
 There is no isolation between the agent and your workspace in this mode.
 The agent can create, modify, or delete any file in the workspace,
