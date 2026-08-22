@@ -165,6 +165,20 @@ $ docker inspect buildx_buildkit_mybuilder0 --format={{.NetworkSettings.Networks
 map[foonet:0xc00018c0c0]
 ```
 
+To reach a service on the host (for example a local registry or a
+development database), put the builder on the host network instead:
+
+```console
+$ docker buildx create --use --bootstrap \
+  --driver docker-container \
+  --name mybuilder \
+  --driver-opt network=host
+```
+
+The default `docker` driver cannot see Docker overlay networks. Use a
+`docker-container` builder with `network=host` (or a user-defined
+network, as above) when the build needs that connectivity.
+
 ## Further reading
 
 For more information on the Docker container driver, see the
