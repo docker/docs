@@ -12,7 +12,6 @@ Docker Sandboxes runs the following agents out of the box:
 - [Codex](codex/)
 - [Cursor](cursor/)
 - [Docker Agent](docker-agent/)
-- [Droid](droid/)
 - [Gemini](gemini/)
 - [OpenCode](opencode/)
 - [Shell](shell/) — agent-less sandbox for manual setup or testing

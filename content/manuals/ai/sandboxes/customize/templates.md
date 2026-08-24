@@ -45,7 +45,6 @@ CLI, and common development tools like Node.js, Python, Go, and Java.
 | `codex`               | [OpenAI Codex](https://github.com/openai/codex)                      |
 | `cursor-agent`        | [Cursor](https://cursor.com/cli)                                     |
 | `docker-agent`        | [Docker Agent](https://github.com/docker/docker-agent)               |
-| `droid`               | [Droid](https://www.factory.ai)                                      |
 | `gemini`              | [Gemini CLI](https://github.com/google-gemini/gemini-cli)            |
 | `opencode`            | [OpenCode](https://opencode.ai)                                      |
 | `shell`               | No agent pre-installed. Use for manual agent setup.                  |
