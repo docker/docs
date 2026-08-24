@@ -2,6 +2,7 @@
 title: Docker Agent
 description: Docker Agent lets you build, orchestrate, and share AI agents that work together as a team.
 weight: 60
+url: /ai/docker-agent/
 aliases:
   - /ai/cagent/
   - /manuals/ai/cagent/
