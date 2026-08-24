@@ -53,8 +53,14 @@ exports.handler = (event, context, callback) => {
     if (!request.uri.startsWith(`/${rp["prefix"]}`)) {
       continue;
     }
+    const prefixRoot = `/${rp["prefix"]}`.replace(/\/$/, "");
+    if (rp["excludeRoot"] && requestUrl === prefixRoot) {
+      continue;
+    }
     let newlocation = "/";
-    if (rp["strip"]) {
+    if (rp["target"]) {
+      newlocation = rp["target"];
+    } else if (rp["strip"]) {
       let re = new RegExp(`(^/${rp["prefix"]})`, "gi");
       newlocation = request.uri.replace(re, "/");
     }

@@ -89,7 +89,7 @@ Or add it manually to `.claude/mcp.json` in your project:
 {{< /tab >}}
 {{< tab name="Docker Agent" >}}
 
-In your [Docker Agent](/manuals/ai/docker-agent/_index.md) YAML configuration, add the
+In your [Docker Agent](https://docker.github.io/docker-agent/) YAML configuration, add the
 DHI MCP server as a remote toolset:
 
 ```yaml

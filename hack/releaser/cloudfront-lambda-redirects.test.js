@@ -22,11 +22,20 @@ const REDIRECTS = {
   "/target-with-query/": "/dest/?ref=docs",
   "/target-with-fragment/": "/dest/?ref=docs#install",
   "/external-target/": "https://www.docker.com/example?ref=docs#install",
+  "/ai/docker-agent/getting-started/quickstart/":
+    "https://docker.github.io/docker-agent/getting-started/quickstart/",
+  "/ai/docker-agent/getting-started/quickstart.md":
+    "https://docker.github.io/docker-agent/getting-started/quickstart/",
 };
 
 const REDIRECTS_PREFIXES = [
   { prefix: "keep/", strip: false },
   { prefix: "strip/", strip: true },
+  {
+    prefix: "ai/docker-agent/",
+    target: "https://docker.github.io/docker-agent/",
+    excludeRoot: true,
+  },
 ];
 
 // Render the template the same way getLambdaFunctionZip in aws.go does, then
@@ -139,6 +148,44 @@ test("prefix redirect (no strip) preserves the query string", async () => {
   });
   assert.equal(result.status, "301");
   assert.equal(locationOf(result), "/?utm_source=x");
+});
+
+test("external prefix redirect preserves the query string", async () => {
+  const { result } = await invoke({
+    uri: "/ai/docker-agent/removed-page/",
+    querystring: "utm_source=x",
+  });
+  assert.equal(result.status, "301");
+  assert.equal(
+    locationOf(result),
+    "https://docker.github.io/docker-agent/?utm_source=x",
+  );
+});
+
+test("exact redirect takes precedence over an external prefix", async () => {
+  const { result } = await invoke({
+    uri: "/ai/docker-agent/getting-started/quickstart/",
+  });
+  assert.equal(
+    locationOf(result),
+    "https://docker.github.io/docker-agent/getting-started/quickstart/",
+  );
+});
+
+test("markdown exact redirect takes precedence over an external prefix", async () => {
+  const { result } = await invoke({
+    uri: "/ai/docker-agent/getting-started/quickstart.md",
+  });
+  assert.equal(
+    locationOf(result),
+    "https://docker.github.io/docker-agent/getting-started/quickstart/",
+  );
+});
+
+test("external prefix redirect excludes the retained root page", async () => {
+  const { result, request } = await invoke({ uri: "/ai/docker-agent/" });
+  assert.equal(result, request);
+  assert.equal(request.uri, "/ai/docker-agent/index.html");
 });
 
 test("directory rewrite passes the request through with query string intact", async () => {
