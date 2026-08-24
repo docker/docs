@@ -1,8 +1,7 @@
 [
   {
     "prefix": "ai/docker-agent/",
-    "target": "https://docker.github.io/docker-agent/",
-    "excludeRoot": true
+    "target": "https://docker.github.io/docker-agent/"
   },
   {
     "prefix": "compliance/",

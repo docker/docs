@@ -53,8 +53,7 @@ exports.handler = (event, context, callback) => {
     if (!request.uri.startsWith(`/${rp["prefix"]}`)) {
       continue;
     }
-    const prefixRoot = `/${rp["prefix"]}`.replace(/\/$/, "");
-    if (rp["excludeRoot"] && requestUrl === prefixRoot) {
+    if (rp["target"] && requestUrl === `/${rp["prefix"]}`.replace(/\/$/, "")) {
       continue;
     }
     let newlocation = "/";

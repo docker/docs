@@ -41,14 +41,5 @@
 {{- $redirects.SetInMap "paths" . $target -}}
 {{- end -}}
 {{- end -}}
-{{- range hugo.Data.docker_agent_redirects.paths -}}
-  {{- $target := printf "https://docker.github.io/docker-agent/%s/" . -}}
-  {{- $redirects.SetInMap "paths" (printf "/ai/docker-agent/%s/" .) $target -}}
-  {{- $redirects.SetInMap "paths" (printf "/ai/docker-agent/%s.md" .) $target -}}
-{{- end -}}
-{{- range $source, $targetPath := hugo.Data.docker_agent_redirects.aliases -}}
-  {{- $target := printf "https://docker.github.io/docker-agent/%s/" $targetPath -}}
-  {{- $redirects.SetInMap "paths" $source $target -}}
-{{- end -}}
 {{- $opts := dict "noHTMLEscape" true }}
 {{- $redirects.Get "paths" | jsonify $opts }}
