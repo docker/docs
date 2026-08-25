@@ -68,16 +68,20 @@ If you are not an organization administrator:
 
 ## CI platform examples
 
-The following examples require Docker CLI with Buildx version 0.37.0 or later,
-which includes the `cloud` driver. Check the Buildx version available on your CI
-runner:
-
-```console
-$ docker buildx version
-```
-
-If the runner doesn't include a compatible version, install Buildx as a
-[Docker CLI plugin](https://github.com/docker/buildx#manual-download).
+> [!IMPORTANT]
+>
+> These examples require Buildx version 0.37.0 or later, which includes the
+> `cloud` driver. The Docker CLI version doesn't determine the installed Buildx
+> plugin version, and CI runner images may include an earlier Buildx release.
+>
+> Check the installed version:
+>
+> ```console
+> $ docker buildx version
+> ```
+>
+> If the version is earlier than 0.37.0, install Buildx as a
+> [Docker CLI plugin](https://github.com/docker/buildx#manual-download).
 
 > [!NOTE]
 >
