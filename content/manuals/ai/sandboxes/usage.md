@@ -84,12 +84,16 @@ $ sbx run --name scratch
 ```
 
 Mountless mode is the default for `sbx create` when you don't pass a path. The
-agent works in the template image's configured `WORKDIR`. The Docker-provided
-images for built-in agents set `WORKDIR` to `/home/agent/workspace`. A custom
-template can set another absolute path. If the daemon can't resolve a usable
-absolute `WORKDIR` from the image config, it falls back to
-`/home/agent/workspace`. Files in a mountless workspace persist when you stop
-and restart the sandbox, but they are deleted with the sandbox. Use `--name` to
+agent uses the sandbox template's default working directory. Docker-provided
+agent templates use `/home/agent/workspace`. A custom template can use another
+absolute path. If the template doesn't define a usable absolute working
+directory, the daemon uses `/home/agent/workspace`.
+
+The default working directory is part of the sandbox filesystem and is
+separate from any workspace path you pass. It can still exist when a sandbox
+has a primary workspace, but the agent and `sbx exec` start in the primary
+workspace instead. Files in a mountless workspace persist when you stop and
+restart the sandbox, but they are deleted with the sandbox. Use `--name` to
 give a mountless sandbox a stable identity for reconnecting. Use
 [`sbx cp`](#copy-files-between-host-and-sandbox) to move files between the
 mountless workspace and your host.
@@ -295,9 +299,9 @@ The first path is the primary workspace — the agent starts here, and the
 sandbox's in-container Git clone is populated from this directory if you
 use `--clone`. Extra workspaces are always mounted directly.
 
-All workspaces appear inside the sandbox at their absolute host paths. Append
-`:ro` to mount an extra workspace read-only — useful for reference material or
-shared libraries the agent shouldn't modify:
+Each workspace path appears inside the sandbox at the same absolute path as on
+the host. Append `:ro` to mount an extra workspace read-only — useful for
+reference material or shared libraries the agent shouldn't modify:
 
 ```console
 $ sbx run claude ~/project-a ~/shared-libs:ro ~/docs:ro
@@ -316,8 +320,12 @@ $ sbx rm <sandbox-name>       # when finished
 
 Use [`sbx cp`](/reference/cli/sbx/cp/) to copy files or directories between
 your host and a sandbox. This is useful for one-off files that aren't part of a
-mounted workspace, such as generated output, logs, or setup files. For example,
-copy files to or from the workspace used by a built-in image:
+mounted workspace, such as generated output, logs, or setup files. The sandbox
+path must be absolute. `sbx cp` doesn't resolve relative paths such as `.`
+against the sandbox's default working directory.
+
+For example, copy files to or from the default working directory used by a
+Docker-provided agent template:
 
 ```console
 $ sbx cp ./config.json my-sandbox:/home/agent/workspace/

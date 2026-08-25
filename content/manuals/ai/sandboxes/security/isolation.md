@@ -120,14 +120,13 @@ $ sbx create --name scratch claude
 $ sbx run --name scratch
 ```
 
-The agent works in the template image's configured `WORKDIR`. The
-Docker-provided images for built-in agents set `WORKDIR` to
-`/home/agent/workspace`. If the daemon can't resolve a usable absolute
-`WORKDIR` from the image config, it falls back to that path. Files there stay
-within the sandbox, persist across stops and restarts, and are deleted when you
-remove the sandbox. A mountless sandbox doesn't expose a host project
-directory, but separately configured host resources such as the shared skills
-store can still be mounted.
+The agent uses the sandbox template's default working directory.
+Docker-provided agent templates use `/home/agent/workspace`. If the template
+doesn't define a usable absolute working directory, the daemon uses that path.
+Files there stay within the sandbox, persist across stops and restarts, and are
+deleted when you remove the sandbox. A mountless sandbox doesn't expose a host
+project directory, but separately configured host resources such as the shared
+skills store can still be mounted.
 
 ### Direct mount
 
