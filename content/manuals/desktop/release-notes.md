@@ -24,6 +24,18 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.88.1
+
+{{< release-date date="2026-08-25" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.88.1" build_path="/237512/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where opening the Dashboard would incorrectly redirect unauthenticated users to the sign-in prompt page.
+
 ## 4.88.0
 
 {{< release-date date="2026-08-24" >}}
