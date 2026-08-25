@@ -29,12 +29,11 @@ The agent can read, write, and delete any file within that directory, including
 hidden files, configuration files, build scripts, and Git hooks.
 
 When you omit the workspace path from `sbx create`, the sandbox doesn't mount a
-host workspace. The agent works in the template image's configured `WORKDIR`.
-The Docker-provided images for built-in agents set `WORKDIR` to
-`/home/agent/workspace`. If the daemon can't resolve a usable absolute
-`WORKDIR` from the image config, it falls back to that path. Files in this
-directory persist across stops and restarts and are deleted when you remove the
-sandbox. See
+host workspace. The agent uses the sandbox template's default working
+directory. Docker-provided agent templates use `/home/agent/workspace`. If the
+template doesn't define a usable absolute working directory, the daemon uses
+that path. Files in this directory persist across stops and restarts and are
+deleted when you remove the sandbox. See
 [Workspace isolation](isolation.md#workspace-isolation) for the available
 workspace modes and what to review after a direct-mount session.
 
