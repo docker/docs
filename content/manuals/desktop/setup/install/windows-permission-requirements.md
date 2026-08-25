@@ -65,7 +65,6 @@ The privileged helper `com.docker.service` is a Windows service which runs in th
 The service performs the following functionalities:
 - Ensuring that `kubernetes.docker.internal` is defined in the Win32 hosts file. Defining the DNS name `kubernetes.docker.internal` allows Docker to share Kubernetes contexts with containers.
 - Ensuring that `host.docker.internal` and `gateway.docker.internal` are defined in the Win32 hosts file. They point to the host local IP address and allow an application to resolve the host IP using the same name from either the host itself or a container.
-- Securely caching the Registry Access Management policy which is read-only for the developer.
 - Creating the Hyper-V VM `"DockerDesktopVM"` and managing its lifecycle - starting, stopping, and destroying it. The VM name is hard coded in the service code so the service cannot be used for creating or manipulating any other VMs.
 - Moving the VHDX file or folder.
 - Starting and stopping the Windows Docker engine and querying whether it's running.
