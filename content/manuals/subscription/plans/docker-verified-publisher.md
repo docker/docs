@@ -3,10 +3,10 @@ title: Docker Verified Publisher plans
 linkTitle: Docker Verified Publisher
 description:
   Manage DVP Starter and DVP Growth for organization accounts,
-  including how to apply, add tracked companies, and handle billing.
+  including how to apply, add consuming domains, and handle billing.
 keywords:
-  docker verified publisher, dvp, dvp starter, dvp growth, tracked
-  companies, publisher analytics, organization subscription, apply
+  docker verified publisher, dvp, dvp starter, dvp growth, consuming
+  domains, publisher analytics, organization subscription, apply
   for dvp, auto-renewal, billing portal, docker hub
 weight: 50
 ---
@@ -19,9 +19,9 @@ publisher analytics and reporting to verified publisher status.
 - DVP Starter includes a verified publisher badge, prioritized search
   ranking, [Docker Scout](/manuals/scout/_index.md) vulnerability
   scanning, and weekly and monthly summary reports.
-- DVP Growth includes everything in DVP Starter, plus trends, tracked
-  companies, technographic companies, and benchmark reports, with 25
-  tracked companies included.
+- DVP Growth includes everything in DVP Starter, plus trends,
+  domain-level reports, and benchmark reports, with 25 consuming
+  domains included.
 
 For a plan comparison, see the
 [DVP landing page](https://hub.docker.com/publisher-program).
@@ -37,10 +37,10 @@ namespace. If you operate multiple namespaces, each one needs its own DVP
 application. If you only have a Docker Personal or Docker Pro account, you can
 create an organization when you apply.
 
-Tracked companies are unique company domains that pull your images.
-On DVP Growth, you can add more tracked companies in increments of
+Consuming domains are unique company domains that pull your images.
+On DVP Growth, you can add more consuming domains in increments of
 25 from the billing portal. For steps, see
-[Add tracked companies](#add-tracked-companies).
+[Add consuming domains](#add-consuming-domains).
 
 For details on the reports available to verified publishers, see
 [Insights and analytics](/manuals/docker-hub/repos/manage/trusted-content/insights-analytics.md).
@@ -67,9 +67,9 @@ approves your application, complete checkout to subscribe.
 > Docker emails a checkout link after it approves your application.
 > You're charged when you complete payment.
 
-## Add tracked companies
+## Add consuming domains
 
-On a DVP Growth plan, you can add tracked companies from the billing
+On a DVP Growth plan, you can add consuming domains from the billing
 portal:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and go to
@@ -77,7 +77,7 @@ portal:
 1. From **Active plans**, select **Manage** next to **Docker Verified
    Publisher**.
 1. Select **Add tracked companies** under **Tracked companies**.
-1. Select the number of tracked companies you want to add to your
+1. Select the number of consuming domains you want to add to your
    subscription.
 1. Verify your billing details, continue to payment, and complete
    checkout.
@@ -88,13 +88,13 @@ DVP Starter and DVP Growth are billed annually. You can upgrade from
 DVP Starter to DVP Growth without a new application. Upgrades take
 effect immediately.
 
-On DVP Growth, tracked company add-ons are prorated from the purchase
+On DVP Growth, consuming domain add-ons are prorated from the purchase
 date through the rest of your billing period, and they expire at the
 end of your annual subscription. You can reduce your add-on count at
 any time. Removals take effect at the end of the current billing cycle.
 
 > [!IMPORTANT]
-> No mid-cycle refunds are issued when you reduce tracked company
+> No mid-cycle refunds are issued when you reduce consuming domain
 > add-ons or end a DVP plan.
 
 ## Disable auto-renewal
@@ -108,5 +108,5 @@ auto-renewal:
 1. From **Active plans**, select **Manage** next to **Docker Verified
    Publisher**.
 1. Select **Disable auto-renewal**.
-1. Optional. To remove tracked companies, select **Remove tracked
+1. Optional. To remove consuming domains, select **Remove tracked
    companies**, then choose the number to remove.
