@@ -55,7 +55,7 @@ You can upgrade active plans from the billing Overview page.
 1. Verify your billing details, continue to payment, and complete checkout.
 
 > [!TIP]
-> Billing behaviors vary from plan to plan. Learn more about usage, downgrading, or canceling plans
+> Billing cycle details vary from plan to plan. Learn more about usage, downgrading, or canceling plans
 > from the relevant
 > [product page](/manuals/subscription/plans/_index.md).
 

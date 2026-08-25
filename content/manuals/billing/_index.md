@@ -68,11 +68,11 @@ The billing **Credits** page shows credits applied to your costs. If you
 received a promotional credit, you can see how it applies to your bill
 from this page.
 
-## Docker plans and billing behaviors
+## Docker plans and billing cycle
 
 Your invoice history is a reference to the Docker plans you subscribe
 to. For information about your billing cycle and renewal dates, see
-[plan details](/manuals/subscription/plans/_index.md). To upgrade or add
+[Billing cycle](/manuals/billing/details.md#billing-cycle). To upgrade or add
 a new plan, see [Subscription](/manuals/subscription/_index.md).
 
 ## Next steps
