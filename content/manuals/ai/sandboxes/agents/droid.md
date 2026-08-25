@@ -1,6 +1,6 @@
 ---
 title: Droid
-weight: 35
+weight: 60
 description: |
   Use Droid in Docker Sandboxes with API key or OAuth authentication.
 keywords: docker sandboxes, droid, factory, ai agent, sbx
@@ -34,7 +34,7 @@ where you supply a model provider key, Factory manages model access through
 your Factory account.
 
 **API key**: Store your Factory API key using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set droid

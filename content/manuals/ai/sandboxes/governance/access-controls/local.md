@@ -31,12 +31,11 @@ For domain patterns, wildcards, CIDR ranges, and filesystem path syntax, see
 
 ## Default preset
 
-The only way traffic can leave a sandbox is through an HTTP/HTTPS proxy on
-your host, which enforces access rules on every outbound request. Non-HTTP TCP
-traffic, including SSH, can be allowed by adding a policy rule for the
-destination IP and port (for example, `sbx policy allow network "10.1.2.3:22"`).
-UDP and ICMP are blocked at the network layer and can't be unblocked with policy
-rules.
+Outbound TCP traffic passes through a proxy on your host, which enforces access
+rules on every connection. Non-HTTP TCP traffic, including SSH, can be allowed
+with a hostname rule (for example, `sbx policy allow network "myhost:22"`) or an
+address-based rule. UDP and ICMP are blocked at the network layer and can't be
+unblocked with policy rules.
 
 If you haven't chosen a default preset, the CLI prompts you before it runs a
 sandbox. Running `sbx policy reset` clears the preset and prompts you to choose

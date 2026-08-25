@@ -228,6 +228,13 @@ Docker Agent validates config at startup and reports errors with line numbers. C
 
 ## Session &amp; Connectivity Issues
 
+### Downgrade fails with a newer-database error
+
+If an older Docker Agent binary cannot open the session database after an upgrade,
+the database may contain a schema migration that the older binary does not know.
+Restore a database created by the older version, or use a binary that includes the
+migration.
+
 ### Port conflicts
 
 When running Docker Agent as an API server or MCP server, ensure the port is not already in use:

@@ -18,9 +18,9 @@ aliases:
   whale icon to become unresponsive, Docker tasks to show as not responding in the Activity Monitor, and for some processes to consume a large amount of CPU resources. Reboot and restart Docker to resolve these issues.
 
 - Docker Desktop uses the `HyperKit` hypervisor
-  (https://github.com/docker/hyperkit) in macOS 10.10 Yosemite and higher. If
-  you are developing with tools that have conflicts with `HyperKit`, such as
-  [Intel Hardware Accelerated Execution Manager
+  (https://github.com/docker/hyperkit). If you are developing with tools that
+  have conflicts with `HyperKit`, such as [Intel Hardware Accelerated Execution
+  Manager
   (HAXM)](https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager/),
   the current workaround is not to run them at the same time. You can pause
   `HyperKit` by quitting Docker Desktop temporarily while you work with HAXM.
@@ -39,15 +39,13 @@ aliases:
 {{< /tab >}}
 {{< tab name="For Mac with Apple silicon" >}}
 
-- Some command line tools do not work when Rosetta 2 is not installed.
-  - The old version 1.x of `docker-compose`. Use Compose V2 instead - type `docker compose`.
-  - The `docker-credential-ecr-login` credential helper.
+- **"Docker.app is damaged" dialog**: If you see a "Docker.app is damaged and can't be opened" dialog during installation or updates, this is typically caused by non-atomic copy operations when other applications are using the Docker CLI. See [Fix "Docker.app is damaged" on macOS](mac-damaged-dialog.md) for resolution steps.
+
 - Some images do not support the ARM64 architecture. You can add `--platform linux/amd64` to run (or build) an Intel image using emulation.
 
    However, attempts to run Intel-based containers on Apple silicon machines under emulation can crash as QEMU sometimes fails to run the container. In addition, filesystem change notification APIs (`inotify`) do not work under QEMU emulation. Even when the containers do run correctly under emulation, they will be slower and use more memory than the native equivalent.
 
    In summary, running Intel-based containers on Arm-based machines should be regarded as "best effort" only. We recommend running `arm64` containers on Apple silicon machines whenever possible, and encouraging container authors to produce `arm64`, or multi-arch, versions of their containers. This issue should become less common over time, as more and more images are rebuilt [supporting multiple architectures](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/).
-- Users may occasionally experience data drop when a TCP stream is half-closed.
 
 {{< /tab >}}
 {{< /tabs >}}

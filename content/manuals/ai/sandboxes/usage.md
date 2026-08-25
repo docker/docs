@@ -1,12 +1,12 @@
 ---
 title: Usage
-weight: 20
+weight: 30
 description: Basic sbx commands for creating, managing, and connecting to Docker Sandboxes.
 keywords: docker sandboxes, sbx, usage, run, create, stop, remove, ports, workspaces
 ---
 
 Use this page as a command-oriented guide to day-to-day `sbx` operations. For
-scenario-based recommendations, see [Workflow patterns](workflows.md).
+scenario-based recommendations, see [Workflow patterns](workflows/).
 
 ## Sign in
 
@@ -17,7 +17,7 @@ $ sbx login
 ```
 
 For scripts or CI runners where a browser isn't available, see
-[CI and headless use](workflows.md#ci-and-headless-use).
+[CI and headless use](workflows/automation.md).
 
 ## Start, stop, and remove
 
@@ -47,6 +47,17 @@ $ sbx stop my-sandbox
 $ sbx rm my-sandbox
 $ sbx run claude
 ```
+
+To remove all stopped local sandboxes, use `sbx prune`. Running sandboxes are
+never removed. Preview the sandboxes that would be removed, or filter out
+sandboxes stopped within the last week:
+
+```console
+$ sbx prune --dry-run
+$ sbx prune --filter since=168h
+```
+
+Run `sbx prune` without flags to confirm and remove all stopped sandboxes.
 
 ## Reconnect and name sandboxes
 
@@ -96,6 +107,68 @@ Unlike `run`, `create` requires an explicit workspace path. Attach later with
 $ sbx run --name my-project
 ```
 
+## Set environment variables
+
+> [!NOTE]
+> The `-e`/`--env` and `--env-file` flags require `sbx` version 0.39.0 or
+> later.
+
+Pass `-e` or `--env` to `sbx run` or `sbx create` to set an environment
+variable in the sandbox:
+
+```console
+$ sbx run -e LOG_LEVEL=debug claude
+```
+
+Specify a variable name without a value to copy its value from the host
+environment:
+
+```console
+$ export API_URL=https://api.example.com
+$ sbx run -e API_URL claude
+```
+
+To load multiple variables, pass one or more environment files:
+
+```console
+$ sbx create --name my-project --env-file .env.sandbox claude .
+```
+
+The flags follow `docker run` precedence rules. Values passed with `-e`
+override values from environment files. When you pass multiple environment
+files, a value in a later file overrides the same variable in an earlier file.
+
+When either command creates a sandbox, the variables are stored with the
+sandbox. They are also available to the agent session started by `sbx run`.
+When `sbx run` re-attaches to an existing sandbox, the variables apply to that
+agent session without changing the sandbox's stored environment. To set
+variables for one command instead, use `sbx exec -e` or
+`sbx exec --env-file`.
+
+To persist a variable across future sessions of an existing sandbox, append an
+export to `/etc/sandbox-persistent.sh`:
+
+```console
+$ sbx exec -d <sandbox-name> bash -c "echo 'export INTERNAL_API_URL=https://api.example.com' >> /etc/sandbox-persistent.sh"
+```
+
+The `bash -c` wrapper ensures the `>>` redirect runs inside the sandbox instead
+of on your host. The file is sourced when Bash starts inside the sandbox,
+including for interactive sessions and agents started with `sbx run`. A command
+passed directly to `sbx exec` doesn't start a shell. Wrap that command in
+`bash -c` if it needs variables from the persistent environment file.
+
+A variable added to the file only takes effect for sessions and agents started
+afterward. Restart a running agent, or stop and start the sandbox, to pick up
+the new value.
+
+Environment variables are readable by processes inside the sandbox. For API
+keys and other credentials, use [`sbx secret set`](configuration/credentials.md#store-a-secret)
+for a supported service or the experimental
+[`sbx secret set-custom`](configuration/credentials.md#custom-secrets) for a
+credential sent to known hosts. The host-side proxy can then inject the real
+value without exposing it to the agent.
+
 ## Run commands inside a sandbox
 
 To get a shell inside a running sandbox, use [`sbx exec`](/reference/cli/sbx/exec/):
@@ -141,7 +214,7 @@ it when you create the sandbox:
   `/run/sandbox/source`, but only with read access.
 
 For guidance on branch strategy, fetching work from a sandbox, and parallel
-agent workflows, see [Git workflows](workflows.md#git-workflows). For the
+agent workflows, see [Git workflows](workflows/git.md). For the
 security model behind each mode, see
 [Workspace isolation](security/isolation.md#workspace-isolation).
 
@@ -260,13 +333,13 @@ $ sbx ports my-sandbox --unpublish 8080:3000
 When `sbx run` re-attaches to an existing sandbox, it ignores `--publish`. Use
 `sbx ports` to publish ports on that sandbox. For dev server and host-service
 recipes, see
-[Local services](workflows.md#local-services).
+[Local services](workflows/development.md#local-services).
 
 ## What persists
 
 While a sandbox exists, installed packages, Docker images, configuration
 changes, and command history all persist across stops and restarts. When you
 remove a sandbox, everything inside is deleted. Your workspace files and the
-[shared agent skills store](workflows.md#share-agent-skills) remain on your
+[shared agent skills store](workflows/agent-skills.md) remain on your
 host. To preserve a configured environment, create a [custom
 template](customize/templates.md) or use a [kit](customize/kits.md).

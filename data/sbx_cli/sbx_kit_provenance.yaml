@@ -1,0 +1,53 @@
+name: sbx kit provenance
+synopsis: Show the SLSA provenance attached to a kit
+experimental: true
+description: |-
+    Print the SLSA provenance attestation attached to an OCI kit.
+
+    Provenance is attached by `sbx kit push` as an OCI referrer of the kit
+    manifest. It records the kit's content digests, the sandbox image its spec
+    declares, and the source git commit the kit was pushed from.
+
+    Provenance pushed without --sign is unsigned: it is printed but marked
+    UNSIGNED, because anyone with push access to the repository could have
+    written it. To verify a signed attestation, pass --key for a key-based
+    signature, or --certificate-identity (or --certificate-identity-regexp)
+    together with --certificate-oidc-issuer (or its regexp form) for a keyless
+    one; only attestations that verify and whose subject matches the kit's own
+    digest are reported as VERIFIED.
+usage: sbx kit provenance REFERENCE [flags]
+options:
+    - name: certificate-identity
+      usage: Exact keyless signer identity (certificate SAN)
+    - name: certificate-identity-regexp
+      usage: Keyless signer identity regexp (certificate SAN)
+    - name: certificate-oidc-issuer
+      usage: Exact keyless OIDC issuer
+    - name: certificate-oidc-issuer-regexp
+      usage: Keyless OIDC issuer regexp
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for provenance
+    - name: insecure-ignore-tlog
+      default_value: "false"
+      usage: |
+        Do not require a Rekor transparency-log entry (for private keyless signatures)
+    - name: key
+      usage: Public key for key-based verification (PEM)
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      # Show provenance (unsigned attestations are printed as-is)
+      sbx kit provenance ghcr.io/org/my-kit:1.0
+
+      # Verify a signed attestation before printing it
+      sbx kit provenance \
+        --certificate-identity user@example.com \
+        --certificate-oidc-issuer https://accounts.google.com \
+        ghcr.io/org/my-kit:1.0
+see_also:
+    - sbx kit - (Experimental) Manage kit artifacts

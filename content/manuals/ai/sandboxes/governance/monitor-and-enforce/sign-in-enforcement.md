@@ -1,7 +1,7 @@
 ---
 title: Sign-in enforcement
 linkTitle: Sign-in enforcement
-weight: 30
+weight: 20
 description: Require Docker Sandboxes users to sign in as members of your organization, enforced through endpoint management.
 keywords: docker sandboxes, sign-in enforcement, organization enforcement, sbx login, MDM, configuration profile, registry key, allowedOrgs
 aliases:

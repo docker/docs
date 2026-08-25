@@ -23,6 +23,7 @@ autolock
 Azure
 Azure AD
 [Bb]ackport
+[Bb]enchmarked
 bootup
 Bitnami
 Btrfs

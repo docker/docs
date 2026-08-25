@@ -54,7 +54,7 @@ description: |-
 
       Client secrets (confidential clients):
         There is no --client-secret flag. The secret for a confidential client
-        lives in the encrypted secret store in the global scope under the
+        lives in the secret store in the global scope under the
         service name "mcp:<server>.client_secret", and is read from there
         whenever the server is used:
 

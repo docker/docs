@@ -22,7 +22,7 @@ processes, files, or resources outside its defined boundaries.
   are invisible to your host and to other sandboxes
 - **Filesystem isolation:** your workspace directory and, for supported agents
   that haven't opted out, the dedicated [shared skills
-  store](../workflows.md#share-agent-skills) are shared with the host. The rest
+  store](../workflows/agent-skills.md) are shared with the host. The rest
   of the VM filesystem persists across restarts but is removed when you delete
   the sandbox. Symlinks pointing outside the workspace scope are not followed.
 - **Full cleanup:** when you remove a sandbox with `sbx rm`, the VM and
@@ -33,28 +33,25 @@ hypervisor boundary is the isolation control, not in-VM privilege separation.
 
 ## Network isolation
 
-Each sandbox has its own isolated network. Sandboxes cannot communicate with
-each other and cannot reach your host's localhost. There is no shared network
-between sandboxes or between a sandbox and your host.
+Each sandbox has its own isolated network. Sandboxes cannot communicate
+directly with each other or share a network with your host. To reach a service
+running on the host through a policy-controlled connection, see
+[Accessing host services from a sandbox](../workflows/development.md#accessing-host-services-from-a-sandbox).
 
-All HTTP and HTTPS traffic leaving a sandbox passes through a proxy on your
-host that enforces the
+All outbound TCP traffic passes through a proxy on your host that enforces the
 [network access policy](../governance/access-controls/network.md). The sandbox
 routes traffic through either a forward proxy or a transparent proxy depending
 on the client's configuration. Both enforce the network policy. Only the
-forward proxy [injects credentials](credentials.md) for AI services.
+forward proxy [injects credentials](../configuration/credentials.md) for AI services.
 
-Raw TCP connections, UDP, and ICMP are blocked at the network layer. DNS
-resolution goes through the proxy and is subject to the same network policy —
-domains that policy denies are refused at the resolver; loopback names such as
-`localhost` are always resolved regardless of policy. Traffic to private IP
-ranges, loopback, and link-local addresses is also blocked. Only domains
-explicitly listed in the policy are reachable.
+Direct external UDP and ICMP are blocked at the network layer. DNS queries use
+the sandbox's internal resolver, which enforces network policy. TCP connections
+are allowed only when a policy rule matches the destination.
 
 For the default set of allowed domains, see
 [Default security posture](defaults.md). To forward allowed traffic through a
 corporate or upstream proxy, see
-[Configure an upstream proxy](../upstream-proxy.md).
+[Configure an upstream proxy](../configuration/upstream-proxy.md).
 
 ## Docker Engine isolation
 
@@ -107,7 +104,7 @@ workspace with it:
   the VM and the agent works on a private clone inside the VM. The
   agent's edits never reach your host until you fetch them.
 
-See [Git workflows](../workflows.md#git-workflows) for the workflow side of
+See [Git workflows](../workflows/git.md) for the workflow side of
 each.
 
 ### Direct mount (default)
@@ -126,6 +123,7 @@ including:
 - CI configuration (`.github/workflows/`, `.gitlab-ci.yml`)
 - IDE configuration (`.vscode/tasks.json`, `.idea/` run configurations)
 - AI project configuration and settings (`.claude/`, `.codex/`, `.gemini/`)
+- Sandbox environment files (`.sbxenv.yaml`)
 - Hidden files, shell scripts, and executables
 
 Some of these files execute code when you trigger normal development
@@ -144,6 +142,12 @@ Review them after any agent session before performing those actions:
 - AI project configuration and settings (`.claude/settings.json`, `.codex/config.toml`,
   `.gemini/settings.json`) can define hooks and startup commands that
   execute automatically.
+- Sandbox environment files (`.sbxenv.yaml`) can declare `secrets` and
+  `registries` whose values come from a `command`. Those commands run on
+  the host, as you, the next time you run `sbx env create` or
+  `sbx env run` in that directory — before the sandbox exists. Because the
+  file sits in the workspace, an agent in direct mount can add or change
+  one.
 
 > [!WARNING]
 > Treat sandbox-modified workspace files the same way you would treat a pull
@@ -162,7 +166,7 @@ or any tracked file on your host.
 > inspection**. Your repository is still mounted read-only into the sandbox,
 > including untracked files and files excluded by `.gitignore`. Files such as
 > `.env` remain readable by the agent. Store secrets outside your working
-> directory or use [credential isolation](credentials.md) instead.
+> directory or use [credential isolation](#credential-isolation) instead.
 
 ```mermaid
 flowchart LR
@@ -229,4 +233,4 @@ environment variables or files inside the sandbox unless you explicitly set
 them. This means a compromised sandbox cannot read API keys from the local
 environment.
 
-For how to store and manage credentials, see [Credentials](credentials.md).
+For how to store and manage credentials, see [Credentials](../configuration/credentials.md).

@@ -1,6 +1,6 @@
 ---
 title: DHI plans
-linkTitle: Docker Hardened Images (DHI)
+linkTitle: Docker Hardened Images
 description:
   Manage Docker Hardened Images Select and Enterprise repositories for
   organization accounts, including purchasing, adding repositories, and

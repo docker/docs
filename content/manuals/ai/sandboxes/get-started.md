@@ -1,9 +1,9 @@
 ---
 title: Get started with Docker Sandboxes
 linkTitle: Get started
-weight: 10
-description: Install the sbx CLI, configure credentials, and work through your first sandbox session.
-keywords: sandbox, sbx, get started, install, credentials, clone mode, network policy
+weight: 20
+description: Configure agent credentials and work through your first Docker Sandboxes session.
+keywords: sandbox, sbx, get started, credentials, clone mode, network policy
 ---
 
 Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
@@ -11,107 +11,16 @@ sandbox gets its own Docker daemon, filesystem, and network — the agent can
 build containers, install packages, and modify files without touching your host
 system.
 
-This page walks through your first session: install the CLI, run an agent in a
-sandbox, see how the sandbox isolates it, control what it can reach on the
-network, and clean up.
+This page walks through your first session: run an agent in a sandbox, see how
+the sandbox isolates it, control what it can reach on the network, and clean
+up.
 
 ## Prerequisites
 
-{{< tabs group="os" >}}
-{{< tab name="macOS" >}}
-
-- macOS Sonoma (version 14) or later
-- Apple silicon
-- An API key or authentication method for the agent you want to use. Most agents
-  require an API key for their model provider (Anthropic, OpenAI, Google, and
-  others). See the [agent pages](agents/) for provider-specific instructions.
-
-{{< /tab >}}
-{{< tab name="Windows" >}}
-
-- 64-bit Intel or AMD (x86_64)
-- Windows 11
-- Windows Hypervisor Platform enabled. Open an elevated PowerShell prompt (Run
-  as Administrator) and run:
-  ```powershell
-  Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -All
-  ```
-- An API key or authentication method for the agent you want to use. Most agents
-  require an API key for their model provider (Anthropic, OpenAI, Google, and
-  others). See the [agent pages](agents/) for provider-specific instructions.
-
-{{< /tab >}}
-{{< tab name="Linux (Ubuntu)" >}}
-
-- Ubuntu 24.04 or later
-- 64-bit Intel or AMD (x86_64) or 64-bit Arm (aarch64)
-- KVM hardware virtualization supported and enabled by the CPU. If you're
-  running inside a VM, nested virtualization must be turned on. Verify that KVM
-  is available:
-  ```console
-  $ lsmod | grep kvm
-  ```
-  A working setup shows `kvm_intel`, `kvm_amd`, `kvm_arm64`, or `kvm` in the output. If the output
-  is empty, run `kvm-ok` for diagnostics. If KVM is unavailable, `sbx` will
-  not start.
-- Your user in the `kvm` group:
-  ```console
-  $ sudo usermod -aG kvm $USER
-  ```
-  Log out and back in (or run `newgrp kvm`) for the group change to take effect.
-- An API key or authentication method for the agent you want to use. Most agents
-  require an API key for their model provider (Anthropic, OpenAI, Google, and
-  others). See the [agent pages](agents/) for provider-specific instructions.
-
-{{< /tab >}}
-{{< /tabs >}}
-
-If you run `sbx` in a virtual desktop infrastructure (VDI) environment, the
-environment must support nested virtualization.
-
-Docker Desktop is not required to use `sbx`.
-
-## Install and sign in
-
-{{< tabs group="os" >}}
-{{< tab name="macOS" >}}
-
-```console
-$ brew trust docker/tap
-$ brew install docker/tap/sbx
-$ sbx login
-```
-
-{{< /tab >}}
-{{< tab name="Windows" >}}
-
-```powershell
-> winget install -h Docker.sbx
-> sbx login
-```
-
-{{< /tab >}}
-{{< tab name="Linux (Ubuntu)" >}}
-
-```console
-$ curl -fsSL https://get.docker.com | sudo REPO_ONLY=1 sh
-$ sudo apt-get install docker-sbx
-$ sbx login
-```
-
-The first command adds Docker's `apt` repository to your system.
-
-{{< /tab >}}
-{{< /tabs >}}
-
-If you need to install `sbx` manually, download a binary directly from the
-[sbx-releases](https://github.com/docker/sbx-releases/releases) repository.
-
-`sbx login` opens a browser for Docker OAuth.
-
-> [!NOTE]
-> See the [FAQ](faq.md) for details on why sign-in is required and what
-> happens with your data.
+- [Install the `sbx` CLI](install.md) and sign in to Docker
+- Configure an authentication method for the agent you want to use. Most agents
+  require an API key for their model provider. See the [agent pages](agents/)
+  for provider-specific instructions.
 
 ## Authenticate your agent
 
@@ -121,14 +30,14 @@ in with OAuth. The session token stays on your host and is never stored inside
 the sandbox.
 
 If you prefer to authenticate with an API key, see
-[Credentials](security/credentials.md) for how to store one with
+[Credentials](configuration/credentials.md) for how to store one with
 `sbx secret set`.
 
 To give the agent access to GitHub for creating pull requests or interacting
 with repositories:
 
 ```console
-$ sbx secret set github -t "$(gh auth token)"
+$ sbx secret set github --command 'gh auth token'
 ```
 
 ## Run your first sandbox
@@ -266,8 +175,11 @@ Then explore:
 
 - [Usage guide](usage.md) — basic commands, reconnecting, workspaces, and port
   publishing.
-- [Workflow patterns](workflows.md) — Git strategies, local services, CI, and
+- [Workflow patterns](workflows/) — Git strategies, local services, CI, and
   authenticated tools.
+- [Sandbox environment files](configuration/environment-files.md) — declare and share
+  repeatable local sandbox configurations with `.sbxenv.yaml`. Requires `sbx`
+  0.39.0 or later.
 - [Customize with kits](customize/) — package an agent, its tools, and its
   network rules into a reusable definition you launch with a single flag.
 - [Agents](agents/) — the full list of supported agents and how to configure

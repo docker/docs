@@ -8,7 +8,7 @@ description: |-
     Agent secrets are detected from the built-in agent kit specs and the
     env vars set on this host, and accepted secrets are imported into the global
     secrets store (the same store as "sbx secret set").
-usage: sbx setup
+usage: sbx setup [COMMAND]
 options:
     - name: help
       shorthand: h

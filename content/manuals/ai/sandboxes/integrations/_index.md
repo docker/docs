@@ -1,7 +1,7 @@
 ---
 title: Editor and app integrations
 linkTitle: Integrations
-weight: 37
+weight: 70
 description: Connect editors and desktop apps to a Docker Sandbox over SSH.
 keywords: docker sandboxes, ssh, integrations, vs code, cursor, remote development, sbx
 ---
@@ -77,6 +77,7 @@ For example, if you mount `/Users/bob/src/my-project`, select
 - [Cursor](cursor.md)
 - [Claude Desktop](claude-desktop.md)
 - [ChatGPT](chatgpt.md)
+- [T3 Code](t3-code.md)
 
 ## How SSH connections work
 

@@ -118,6 +118,8 @@ github.com/docker/cli v29.6.2+incompatible h1:/bjePvcbbFTnRrMfWJBY7AjfICdsiLVgHn
 github.com/docker/cli v29.6.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v29.7.1+incompatible h1:ILZpP6B7fedIr6ANy824QkDp1WMJuouIq0O2SrBkB2w=
 github.com/docker/cli v29.7.1+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v29.7.2+incompatible h1:dlkwallR8XqfeVnA2ELEhdwvb4lsSwuB4IgsG8Q9cLY=
+github.com/docker/cli v29.7.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/compose/v5 v5.0.0 h1:J2uMCzJ/5xLcoIVVXvMmPe6HBzVQpmJThKa7Qk7Xldc=
 github.com/docker/compose/v5 v5.0.0/go.mod h1:BurapGv8zmYnsbSmlpCz5EU2Pi3YFV/PjeUnoFpcw64=
 github.com/docker/compose/v5 v5.0.1 h1:5yCjDJbwUqcuI+6WNFHNWz2/3vyBDsNnfe8LlFjyxEc=
@@ -136,6 +138,8 @@ github.com/docker/compose/v5 v5.3.1 h1:rZiPwrtg1dBmVGcHiioLtzCS+TcvZq81zl0zs2Bwt
 github.com/docker/compose/v5 v5.3.1/go.mod h1:qTcMBinqXyp2CQT6OJfBqtG8UPfYgOk1rwqIGYKLpGk=
 github.com/docker/compose/v5 v5.4.0 h1:i0xFmVvWv9QILfRE2PD07GmQqJYjpYAGutafIrJLURE=
 github.com/docker/compose/v5 v5.4.0/go.mod h1:bNeEncwZhG0F4MN+0zgln4EA2ILqGZC7knRI8QYJz9U=
+github.com/docker/compose/v5 v5.5.0 h1:B5Eh5CtlbscCMlbyMydbEj3rpIuP9GthdD7PC0IsvgQ=
+github.com/docker/compose/v5 v5.5.0/go.mod h1:5yn5qs7G7V7OZc1Kkd6wLz72Le0C45xLNJQ7dgASvMk=
 github.com/docker/distribution v2.8.3+incompatible h1:AtKxIZ36LoNK51+Z6RpzLpddBirtxJnzDrHLEKxTAYk=
 github.com/docker/distribution v2.8.3+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
 github.com/docker/docker v28.5.2+incompatible h1:DBX0Y0zAjZbSrm1uzOkdr1onVghKaftjlSWt4AFexzM=
@@ -152,6 +156,8 @@ github.com/docker/docker-agent v1.122.0 h1:xOei5d7L1M0stvZNwULnOssOS4CzDRE2Xj7k1
 github.com/docker/docker-agent v1.122.0/go.mod h1:HgHOV3OkqM1Hl0qD7iTCBZSBNWpy5mWN2s8tr2/NdOA=
 github.com/docker/docker-agent v1.124.0 h1:dNVrrRozYq5IMgokjaSm6grYReEMP1inrEaHVnVQiyg=
 github.com/docker/docker-agent v1.124.0/go.mod h1:CyLlU/NVcq3kSjffVzRKNaO0XIngqKPOxhgmbru+LWE=
+github.com/docker/docker-agent v1.126.0 h1:GjX84SHcvS4Txo7dGjatWhKGFLNpDqKcGAoIsyvfj40=
+github.com/docker/docker-agent v1.126.0/go.mod h1:K38q6CsnSTHDOrLP46HLGhKwv3i+vjmu33cjmjpkAvg=
 github.com/docker/docker-credential-helpers v0.9.3 h1:gAm/VtF9wgqJMoxzT3Gj5p4AqIjCBS4wrsOh9yRqcz8=
 github.com/docker/docker-credential-helpers v0.9.3/go.mod h1:x+4Gbw9aGmChi3qTLZj8Dfn0TD20M/fuWy0E5+WDeCo=
 github.com/docker/docker-credential-helpers v0.9.5 h1:EFNN8DHvaiK8zVqFA2DT6BjXE0GzfLOZ38ggPTKePkY=

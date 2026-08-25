@@ -1,7 +1,7 @@
 ---
 title: Default security posture
 linkTitle: Defaults
-weight: 15
+weight: 20
 description: What a sandbox permits and blocks before you change any settings.
 keywords: docker sandboxes, security defaults, network policy, credentials, shared skills, sbx
 ---
@@ -11,10 +11,10 @@ security posture.
 
 ## Network defaults
 
-All outbound HTTP and HTTPS traffic is blocked unless an explicit rule allows
-it (deny-by-default). All non-HTTP protocols (raw TCP, UDP including DNS, and
-ICMP) are blocked at the network layer. Traffic to private IP ranges, loopback
-addresses, and link-local addresses is also blocked.
+All outbound TCP traffic, including HTTP, HTTPS, and SSH, is blocked unless an
+explicit rule allows the destination. Direct external UDP and ICMP traffic is
+blocked at the network layer. DNS queries use the sandbox's internal resolver,
+which enforces network policy.
 
 Run `sbx policy ls` to see the active network rules for your installation.
 Rules can be customized per machine with the `sbx policy` CLI, or managed
@@ -38,7 +38,7 @@ Sandboxes for supported agents mount a persistent shared skills store
 read-write by default. Every sandbox that uses the store can change skills that
 other participating sandboxes may load. Use `--no-share-skills` when creating a
 sandbox to keep it outside this shared trust boundary. See
-[Share agent skills](../workflows.md#share-agent-skills).
+[Share agent skills](../workflows/agent-skills.md).
 
 ## Credential defaults
 
@@ -47,7 +47,7 @@ No credentials are available to the sandbox unless you provide them using
 host-side proxy injects them into outbound HTTP headers. The agent cannot
 read the raw credential values.
 
-See [Credentials](credentials.md) for setup instructions.
+See [Credentials](../configuration/credentials.md) for setup instructions.
 
 ## Agent capabilities inside the sandbox
 
@@ -71,10 +71,8 @@ policy configuration:
 - Host filesystem access outside explicitly mounted workspaces and the shared
   skills store
 - Host Docker daemon
-- Host network and localhost
 - Direct network communication between sandboxes
-- Raw TCP, UDP, and ICMP connections
-- Traffic to private IP ranges and link-local addresses
+- Direct external UDP and ICMP connections
 
-Outbound HTTP/HTTPS to domains not in the allow list is also blocked by
-default, but you can add allow rules with `sbx policy allow`.
+Outbound TCP to destinations not in the allow list is also blocked by default,
+but you can add allow rules with `sbx policy allow`.

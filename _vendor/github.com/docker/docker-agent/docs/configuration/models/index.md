@@ -77,7 +77,7 @@ models:
 | `title_model`         | string     | ✗        | Model used for session-title generation. Can be a named model from the `models:` section or an inline `provider/model` string. When omitted, the agent's primary model generates titles. Cannot be combined with `first_available`. |
 | `compaction_model`    | string     | ✗        | Model used for session compaction (summary generation). Can be a named model or an inline `provider/model` string. The agent-level `compaction_model` takes precedence over this value, which in turn takes precedence over a provider-level default. When none is set, the primary model compacts. Cannot be combined with `first_available`. See the [Context & Compaction guide](../../guides/compaction/index.md). |
 | `compaction_threshold` | float     | ✗        | Fraction of the context window at which proactive auto-compaction triggers for agents running this model. Must be greater than `0` and at most `1`. Takes precedence over the agent-level `compaction_threshold`. Cannot be combined with `first_available`. Default: `0.9`. See the [Context & Compaction guide](../../guides/compaction/index.md). |
-| `bypass_models_gateway` | boolean  | ✗        | When `true`, this model connects directly to its provider even when a models gateway (`--models-gateway` / `CAGENT_MODELS_GATEWAY`) is configured. Implied by a custom `base_url`. See [Gateway Bypass](#gateway-bypass). |
+| `bypass_models_gateway` | boolean  | ✗        | When `true`, this model connects directly to its provider even when a models gateway (`--models-gateway` / `DOCKER_AGENT_MODELS_GATEWAY`) is configured. Implied by a custom `base_url`. See [Gateway Bypass](#gateway-bypass). |
 
 ## Attachment Capability Overrides
 
@@ -256,7 +256,7 @@ for complete examples.
 
 ## Gateway Bypass
 
-When a models gateway (`--models-gateway` / `CAGENT_MODELS_GATEWAY`) is configured,
+When a models gateway (`--models-gateway` / `DOCKER_AGENT_MODELS_GATEWAY`) is configured,
 models without a custom `base_url` route through it by default. Set
 `bypass_models_gateway: true` on a specific model to make it connect directly
 to its provider instead:

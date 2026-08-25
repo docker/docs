@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-weight: 100
+weight: 130
 description: Resolve common issues when using Docker Sandboxes.
 keywords: docker sandboxes, sbx, troubleshooting, diagnostics, reset, network policy, git, ssh
 ---
@@ -91,23 +91,27 @@ any remote source, see [Restrict kit sources](customize/kits.md#restrict-kit-sou
 
 ## SSH and other non-HTTP connections fail
 
-Non-HTTP TCP connections like SSH can be allowed by adding a policy rule for
-the destination IP address and port. For example, to allow SSH to a specific
-host:
+Non-HTTP TCP connections such as SSH can be allowed by adding a policy rule for
+the destination. Hostname rules work for these connections because the sandbox
+recovers the hostname from its DNS resolver when the protocol doesn't include
+one:
+
+```console
+$ sbx policy allow network "myhost:22"
+```
+
+If the destination is reached by IP address without a DNS lookup, the hostname
+can't be recovered. Use an address-based rule in that case:
 
 ```console
 $ sbx policy allow network "10.1.2.3:22"
 ```
 
-Hostname-based rules (for example, `myhost:22`) don't work for non-HTTP
-connections because the proxy can't resolve the hostname to an IP address in
-this context. Use the IP address directly.
-
 UDP and ICMP traffic is blocked at the network layer and can't be unblocked
 with policy rules.
 
 For Git operations over SSH, you can either add an allow rule for the Git
-server's IP address or use HTTPS URLs instead:
+server's hostname or IP address, or use HTTPS URLs instead:
 
 ```console
 $ git clone https://github.com/owner/repo.git
@@ -117,7 +121,7 @@ $ git clone https://github.com/owner/repo.git
 
 If a request to `127.0.0.1` or a local network IP returns "connection refused"
 from inside a sandbox, the address is not reachable from within the sandbox VM.
-See [Accessing host services from a sandbox](workflows.md#accessing-host-services-from-a-sandbox).
+See [Accessing host services from a sandbox](workflows/development.md#accessing-host-services-from-a-sandbox).
 
 ## Docker authentication failure
 
@@ -132,7 +136,7 @@ If the agent can't reach its model provider or you see API key errors, the key
 is likely invalid, expired, or not configured. Verify it's set in your shell
 configuration file and that you sourced it or opened a new terminal.
 
-For agents that use the [credential proxy](security/credentials.md), make sure
+For agents that use the [credential proxy](configuration/credentials.md), make sure
 you haven't set the API key to an invalid value inside the sandbox — the proxy
 injects credentials automatically on outbound requests.
 
@@ -267,7 +271,7 @@ the command again:
 ## Sandbox commits aren't signed
 
 Docker Sandboxes can sign Git commits with SSH keys from your host agent.
-For setup steps, see [Commit signing](workflows.md#commit-signing).
+For setup steps, see [Commit signing](workflows/git.md#commit-signing).
 
 If `ssh-add -L` prints `The agent has no identities.`, the sandbox can reach
 the forwarded agent, but the host agent doesn't have a loaded key. Load the

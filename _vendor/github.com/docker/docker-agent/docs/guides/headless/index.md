@@ -92,7 +92,7 @@ Interactively, the TUI prompts for confirmation before a tool call runs unless i
 
 Two different questions come up here, and it's worth keeping them separate:
 
-- **What is allowed to run without asking?** — the safety mode (`--safety strict|balanced|autonomous`, with `--yolo` as the legacy spelling of `autonomous`) and permission allow-lists answer this.
+- **What is allowed to run without asking?** — the safety mode (`--safety strict|balanced|restricted|autonomous`, with `--yolo` as the legacy spelling of `autonomous`) and permission allow-lists answer this.
 - **What happens if the model runs something it shouldn't have?** — only `--sandbox` answers that one. The rest of this section explains why, and treats that distinction as the whole point.
 
 ### `--sandbox`: the isolation boundary
@@ -114,12 +114,29 @@ Permission allow-lists (`permissions.allow` on the agent, or `settings.permissio
 - Both work by matching the shell command **string** (or, for `permissions`, the tool's arguments). The classifier's safe-list refuses to vouch for any command carrying shell metacharacters (`;`, `&`, `|`, `<`, `>`, backticks, `$(`, newlines — spaced or not), so `ls && rm -rf ~`, `grep foo|rm -rf /`, and `grep x > /etc/passwd` all fall through to a confirmation instead of inheriting a safe verdict. But string matching still can't reason about what a command actually *does* — see the next point.
 - Command-string and argument matching in general can't reason about what a command actually does; a dynamically built string, an unusual quoting form, or a wrapper script can slip past any fixed set of patterns.
 
-Treat permissions and the balanced mode as a way to reduce prompt fatigue and catch the obvious cases, paired with least-privilege CI credentials — never as the reason a CI job is safe to run unattended. For that, use `--sandbox`.
+For unattended runs, the `restricted` safety mode packages this stance as a fail-closed default: classifier-safe calls run, every other unmatched call is **denied outright** instead of falling through to a confirmation prompt nobody will answer. Pair it with an allow-list scoped to what the job actually needs — explicit `allow` rules still win over the mode, so the job's known-good commands run even when the classifier can't vouch for them:
+
+```yaml
+# agent.yaml — the allow-list overrides restricted's deny for these calls
+permissions:
+  allow:
+    - "shell:cmd=go test*"
+    - "shell:cmd=go build*"
+```
+
+```bash
+# Safe and allow-listed calls run; every other call is denied without prompting
+$ docker agent run --exec --safety restricted agent.yaml --json "Fix the failing test"
+```
+
+Like the allow-list itself, `restricted` is defense in depth, not a security boundary: it narrows what runs unattended, but only `--sandbox` contains what a misbehaving agent can do with the calls that are allowed.
+
+Treat permissions and the balanced/restricted modes as a way to reduce prompt fatigue and catch the obvious cases, paired with least-privilege CI credentials — never as the reason a CI job is safe to run unattended. For that, use `--sandbox`.
 
 > [!WARNING]
 > **`--yolo` without `--sandbox` runs untrusted, unattended code with no boundary**
 >
-> A CI job is exactly the environment where a runaway or misled agent does the most damage before anyone notices — no one is at the keyboard to catch a bad `shell` call before it runs, and, per above, a permission allow-list or the shell classifier can't be trusted to catch everything either. If you can't add `--sandbox`, prefer `--safety balanced` or a permission allow-list scoped to what the job actually needs over blanket `--yolo`, and budget for the credentials and blast radius of the agent's toolsets as if the job itself were compromised — see [`examples/permissions.yaml`](https://github.com/docker/docker-agent/blob/main/examples/permissions.yaml) for a worked allow/deny list.
+> A CI job is exactly the environment where a runaway or misled agent does the most damage before anyone notices — no one is at the keyboard to catch a bad `shell` call before it runs, and, per above, a permission allow-list or the shell classifier can't be trusted to catch everything either. If you can't add `--sandbox`, prefer `--safety restricted` with a permission allow-list scoped to what the job actually needs over blanket `--yolo`, and budget for the credentials and blast radius of the agent's toolsets as if the job itself were compromised — see [`examples/permissions.yaml`](https://github.com/docker/docker-agent/blob/main/examples/permissions.yaml) for a worked allow/deny list.
 
 > [!NOTE]
 > **A worktree is not a security boundary either**

@@ -1,6 +1,6 @@
 ---
 title: Kiro
-weight: 50
+weight: 80
 description: |
   Use Kiro in Docker Sandboxes with device flow authentication for interactive
   AI-assisted development.

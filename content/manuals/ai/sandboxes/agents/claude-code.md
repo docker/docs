@@ -32,7 +32,7 @@ prompt from a file with `-- "$(cat prompt.txt)"`.
 Claude Code requires either an Anthropic API key or a Claude subscription.
 
 **API key**: Store your key using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
 $ sbx secret set anthropic
@@ -48,6 +48,15 @@ Sandboxes don't pick up user-level configuration from your host, such as
 available inside the sandbox. See
 [Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
+
+### Remote control
+
+To use Claude Code's `/remote-control` command inside a sandbox, turn on remote
+control:
+
+```console
+$ sbx settings set claude.remoteControl true
+```
 
 ### Default startup command
 
@@ -75,7 +84,7 @@ for available options.
 
 Claude Code's [agents view](https://code.claude.com/docs/en/agent-view)
 starts background sessions that run tasks in parallel. Pair it with
-[clone mode](../workflows.md#clone-mode) to keep their changes inside the
+[clone mode](../workflows/git.md#clone-mode) to keep their changes inside the
 sandbox:
 
 ```console
@@ -106,7 +115,7 @@ $ git fetch sandbox-<sandbox-name>
 $ git diff main..sandbox-<sandbox-name>/<branch>
 ```
 
-See [Git workflows](../workflows.md#git-workflows) for clone-mode details.
+See [Git workflows](../workflows/git.md) for clone-mode details.
 
 ## Base image
 
@@ -137,11 +146,10 @@ $ sbx run --model gemma4 claude
 On first use, `sbx` starts `llmman`, pulls the model, and leaves the server
 running on your host. Later sandboxes reuse the server and its model store.
 
-To use an existing Ollama installation instead, prefix the model name with
-`ollama/`:
+To use an existing Ollama installation instead, set the provider to `ollama`:
 
 ```console
-$ sbx run --model ollama/gemma4 claude
+$ sbx run --model gemma4 --provider ollama claude
 ```
 
 Ollama must already be installed and running. `sbx` connects to it but doesn't

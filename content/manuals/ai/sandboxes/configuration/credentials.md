@@ -1,8 +1,11 @@
 ---
-title: Credentials
-weight: 20
+title: Manage credentials
+linkTitle: Credentials
+weight: 10
 description: How Docker Sandboxes handle API keys and authentication credentials for sandboxed agents.
 keywords: docker sandboxes, credentials, api keys, authentication, proxy, ssh agent, secrets
+aliases:
+  - /ai/sandboxes/security/credentials/
 ---
 
 Most agents need an API key for their model provider. An HTTP/HTTPS proxy on
@@ -10,7 +13,7 @@ your host intercepts outbound requests from the sandbox, looks up the matching
 credential on the host, and overwrites the auth header before forwarding. The
 real credential stays on the host when proxy management is active; the sandbox
 sees only a sentinel value. See
-[Trust boundaries](_index.md#trust-boundaries) for how credential isolation
+[Trust boundaries](../security/_index.md#trust-boundaries) for how credential isolation
 fits into the broader sandbox security model.
 
 ## How credential injection works
@@ -31,7 +34,7 @@ value for the same service, the stored secret takes precedence.
 
 | Form                                                                        | What it is                                                   | Use it when                                                                                                      |
 | --------------------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| [Stored secrets](#stored-secrets) (`sbx secret set`)                        | A value in your OS keychain, keyed by service                | The default for any built-in or kit-declared service                                                             |
+| [Stored secrets](#stored-secrets) (`sbx secret set`)                        | A value or dynamic source in your OS keychain, keyed by service | The default for any built-in or kit-declared service                                                          |
 | [Custom secrets](#custom-secrets) (`sbx secret set-custom`)                 | A value keyed to a domain and environment variable           | The service model doesn't fit — the agent validates the variable's format, or the secret rides in a request body |
 | OAuth                                                                       | A host-side sign-in flow; the token never enters the sandbox | The agent supports it, such as Claude Code, Codex, Cursor, or Droid                                              |
 | [Credential bindings](#credential-bindings) (`credentials.yaml`)            | Per-service mechanism and domain approval                    | Required for third-party `schemaVersion: "2"` kits                                                               |
@@ -43,9 +46,10 @@ credentials based on the API endpoint being called. See individual
 
 ## Stored secrets
 
-`sbx secret set` stores credentials in your OS keychain, keyed on a service
-identifier. Built-in agents declare a fixed set of services. Custom kits can
-declare their own. The same `sbx secret set` flow works for both.
+`sbx secret set` stores credential values or dynamic secret sources in your OS
+keychain, keyed on a service identifier. Built-in agents declare a fixed set of
+services. Custom kits can declare their own. The same `sbx secret set` flow
+works for both.
 
 ### Where secrets are stored
 
@@ -59,22 +63,25 @@ The store backing `sbx secret set` depends on your operating system:
 The Ubuntu package depends on GNOME Keyring, so a standard desktop install
 needs no extra setup.
 
-On Linux hosts without a running Secret Service — headless servers and some
-WSL setups — `sbx` falls back to an encrypted file under your user config
-directory `$XDG_CONFIG_HOME/com.docker.sandboxes`, which defaults to
+On Linux hosts without a running Secret Service — headless servers and some WSL
+setups — `sbx` falls back to a file under your user config directory
+`$XDG_CONFIG_HOME/com.docker.sandboxes`, which defaults to
 `~/.config/com.docker.sandboxes` when `$XDG_CONFIG_HOME` is unset. The fallback
 is automatic and needs no configuration. When you store a secret this way,
 `sbx` prints a notice:
 
 ```text
-No keychain detected - this secret will be stored in an encrypted file on disk
+No keychain detected - this secret will be stored on disk, protected by file permissions rather than a password
 ```
 
-The file is encrypted at rest and protected by `0700` directory permissions,
-the same posture as `~/.docker/config.json`. This is weaker than an OS
-keychain, which also mediates access per application. If you start a Secret
-Service on the host later, `sbx` stores new secrets in the keychain again. For
-more on running sandboxes without a desktop keyring, see
+`sbx` stores the file in a directory with `0700` permissions, the same
+file-permission model used for `~/.docker/config.json`. Any user or process that
+can read the file can retrieve the stored credentials, so treat the directory as
+sensitive. Where available, prefer a keychain, which mediates access per
+application.
+
+If you start a Secret Service on the host later, `sbx` stores new secrets in the
+keychain again. For more on running sandboxes without a desktop keyring, see
 [Can I use Docker Sandboxes on headless Linux?](../faq.md#can-i-use-docker-sandboxes-on-headless-linux)
 
 ### Store a secret
@@ -96,6 +103,60 @@ $ sbx secret set openai --sandbox my-sandbox
 > running. A global secret only applies when a sandbox is created. If
 > you set or change a global secret while a sandbox is running, recreate the
 > sandbox for the new value to take effect.
+
+### Use a dynamic secret source
+
+Dynamic secret sources let `sbx` retrieve a credential from an authenticated
+host tool when the proxy needs it. The secret store contains the reference or
+command instead of the credential value. Resolution and caching happen on the
+host, and the sandbox still receives only the proxy-managed placeholder.
+
+Use `--ref` with a 1Password secret reference or an AWS Secrets Manager ARN:
+
+```console
+$ sbx secret set anthropic --ref 'op://Work/Anthropic/credential'
+$ sbx secret set openai \
+    --ref 'arn:aws:secretsmanager:us-west-2:123456789012:secret:openai-api-key'
+```
+
+The corresponding `op` or `aws` CLI must be installed and authenticated on the
+host.
+
+> [!NOTE]
+> To resolve a reference with a specific 1Password account or AWS profile, set
+> `OP_ACCOUNT` or `AWS_PROFILE` when you run `sbx secret set`. `sbx` uses that
+> account or profile whenever it resolves the secret. If neither variable is
+> set, the provider CLI uses its default.
+
+Use `--command` for another host tool that prints a secret to standard output:
+
+```console
+$ sbx secret set github --command 'gh auth token'
+```
+
+`sbx` runs the command through the host shell and trims its output. The command
+text is stored and replayed by the daemon. Don't embed a secret directly in the
+command because the text can appear in shell history and process listings.
+
+By default, `sbx` verifies the source when you register it and reports an error
+without exposing the resolver's standard error. Use `--no-verify` to store a
+source that can't be resolved during registration. To troubleshoot an initial
+verification failure, use `--show-error`. Provider error output can contain
+sensitive information. You can't combine `--show-error` with `--no-verify`.
+
+Resolved service secrets are cached for 55 minutes by default. To change the
+cache duration, use `--refresh <duration>`. To resolve the source for every
+credential use instead of caching it, pass `--refresh on-demand`:
+
+```console
+$ sbx secret set anthropic \
+    --ref 'op://Work/Anthropic/credential' \
+    --refresh 30m
+$ sbx secret set github --command 'gh auth token' --refresh on-demand
+```
+
+`--ref` and `--command` are mutually exclusive. They can't be combined with
+`--token`, `--oauth`, or `--registry`.
 
 ### Import from environment variables
 
@@ -124,7 +185,7 @@ $ sbx secret import openai --force
 
 Pass `--dry-run` to preview what would be imported without writing anything.
 Run `sbx secret ls` afterwards to confirm what's stored. For setting up
-credentials in CI, see [CI and headless use](../workflows.md#ci-and-headless-use).
+credentials in CI, see [CI and headless use](../workflows/automation.md).
 
 ### Built-in services
 
@@ -201,14 +262,15 @@ $ sbx secret rm github
 ### GitHub token
 
 The `github` service gives the agent access to the `gh` CLI inside the
-sandbox. Pass your existing GitHub CLI token:
+sandbox. Resolve your existing GitHub CLI token on the host:
 
 ```console
-$ echo "$(gh auth token)" | sbx secret set github
+$ sbx secret set github --command 'gh auth token'
 ```
 
-This is useful for agents that create pull requests, open issues, or interact
-with GitHub APIs on your behalf.
+The daemon refreshes the token from the host command after the default cache
+period. This is useful for agents that create pull requests, open issues, or
+interact with GitHub APIs on your behalf.
 
 ### SSH agent
 
@@ -222,7 +284,7 @@ Use SSH agent forwarding for Git operations over SSH and SSH-based commit
 signing. The signing key must be loaded in the host SSH agent for sandboxed
 commit signing to work. Outbound SSH connections are still subject to sandbox
 network policy. For details, see
-[Commit signing](../workflows.md#commit-signing).
+[Commit signing](../workflows/git.md#commit-signing).
 
 ## Custom secrets
 
@@ -261,6 +323,21 @@ A `--host` value can also use wildcards, with the same syntax as
 [network rules](../governance/concepts.md#network-rules): `*` matches a
 single label (`*.example.com` covers `api.example.com`) and `**` matches any
 number (`**.example.com` covers `api.example.com` and `v2.api.example.com`).
+
+Custom secrets also accept [dynamic secret sources](#use-a-dynamic-secret-source).
+Replace `--value` with either `--ref` or `--command`:
+
+```console
+$ sbx secret set-custom \
+    --host api.example.com \
+    --env API_KEY \
+    --ref 'op://Work/Example/credential'
+```
+
+Dynamic custom secrets resolve on demand by default. Pass `--refresh` with a
+duration to cache the resolved value. The verification and error-output flags
+work the same as they do for service secrets. `--ref` and `--command` can't be
+combined with `--value` or `--token`.
 
 > [!WARNING]
 > Passing the secret as `--value <secret>` records it in your shell history
@@ -445,9 +522,10 @@ $ sbx secret rm --sandbox my-sandbox --registry ghcr.io -f
 
 ## Best practices
 
-- Use [stored secrets](#stored-secrets) to provide credentials. They are
-  encrypted at rest in the OS keychain (or an encrypted file on Linux hosts
-  without a keychain). See [Where secrets are stored](#where-secrets-are-stored).
+- Use [stored secrets](#stored-secrets) to provide credentials. The OS keychain
+  protects them at rest; on Linux hosts without a keychain they are held in a
+  permission-protected file instead. See
+  [Where secrets are stored](#where-secrets-are-stored).
 - Don't set API keys manually inside the sandbox. Sandbox agents are
   pre-configured to use proxy-managed credentials.
 - Registry credentials stay on the host and are injected by the proxy when a
@@ -463,9 +541,9 @@ $ sbx secret rm --sandbox my-sandbox --registry ghcr.io -f
   Code; Cursor and Droid have no ahead-of-time option, so their sign-in prompt
   appears when the agent starts. See the individual [agent pages](../agents/)
   for each agent's flow.
-- If you store credentials in 1Password, see
-  [Sourcing credentials from 1Password](../workflows.md#sourcing-credentials-from-1password)
-  for how to use `op read` and `op run` with `sbx`.
+- If you store credentials in 1Password or AWS Secrets Manager, see
+  [Sourcing credentials from 1Password](../workflows/authentication.md#source-credentials-from-1password)
+  and [Sourcing credentials from AWS Secrets Manager](../workflows/authentication.md#source-credentials-from-aws-secrets-manager).
 
 ## Custom templates and placeholder values
 

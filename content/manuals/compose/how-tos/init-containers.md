@@ -30,7 +30,7 @@ For background tasks with their own lifecycle - scheduled backups, post-exit cle
 Each step in a service's `pre_start` list:
 
 - Runs in its own ephemeral container, created after the service container is created but before it starts.
-- Inherits the service's image by default. Set `image` to override.
+- Inherits the service's image by default. Set `image` to override. The hook image follows the parent service's `pull_policy`, including refresh interval (`daily`, `weekly`, `every_<duration>`). This applies when starting services and when running `docker compose pull`.
 - Joins the same networks as the service, so it can reach services declared in [`depends_on`](/reference/compose-file/services.md#depends_on).
 - Shares the service's volume mounts, so files written to a shared volume are immediately visible to the service.
 - Must exit `0` for the next step, and the service itself, to start. A non-zero exit aborts startup for the service and anything that depends on it.

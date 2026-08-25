@@ -53,9 +53,9 @@ setup:
     - command: "apt-get update && apt-get install -y jq"
 ```
 
-Startup commands cover things like launching background services,
-warming caches, or refreshing config on each start. They must be
-idempotent — see the [`startup`](kit-reference.md#startup) spec reference:
+Startup commands are for work that can run alongside the agent, such as a
+background service. They must be idempotent — see the
+[`startup`](kit-reference.md#startup) spec reference:
 
 ```yaml
 setup:
@@ -191,7 +191,7 @@ auth header before the request leaves the sandbox.
 A kit declares the service, the in-container environment variable, and how
 to inject the credential. It doesn't declare a host discovery source. The user
 provides the value through the secret store or first-run prompt, and a
-[credential binding](../security/credentials.md) authorizes its use:
+[credential binding](../configuration/credentials.md) authorizes its use:
 
 ```yaml
 credentials:
@@ -215,10 +215,10 @@ request with that sentinel in `Authorization`, and the proxy overwrites
 the header with the real credential before forwarding. The real
 secret never enters the VM.
 
-See [Credentials](../security/credentials.md) for how to provide the
+See [Credentials](../configuration/credentials.md) for how to provide the
 credential value on your host, other approaches for cases the example
 above doesn't fit, and what the proxy does at request time. See
-[Credential bindings](../security/credentials.md) to approve the mechanisms
+[Credential bindings](../configuration/credentials.md) to approve the mechanisms
 and domains declared by a third-party v2 kit.
 
 ### Inject agent memory
@@ -370,7 +370,7 @@ For Docker Hub, include the full `docker.io` prefix. See
 > [!IMPORTANT]
 > For Docker Hub, `sbx` reuses your `sbx login` session to pull private
 > kits. For other registries, store pull credentials with
-> [`sbx secret set --registry`](../security/credentials.md#registry-credentials)
+> [`sbx secret set --registry`](../configuration/credentials.md#registry-credentials)
 > before running the sandbox:
 >
 > ```console
@@ -416,6 +416,69 @@ $ sbx settings set kit.allowLocalKits false
 For non-interactive use, both settings have environment-variable equivalents:
 `DOCKER_SANDBOXES_KIT_ALLOWED_SOURCES` and `DOCKER_SANDBOXES_KIT_ALLOW_LOCAL`.
 
+## Sign and verify kits
+
+Use cosign-compatible Sigstore signatures to verify who approved a kit and
+that its signed content hasn't changed. Signing is keyless by default. Verify a
+keyless signature with the certificate identity and OpenID Connect (OIDC)
+issuer:
+
+```console
+$ sbx kit sign ./my-kit/
+$ sbx kit verify \
+    --certificate-identity user@example.com \
+    --certificate-oidc-issuer https://accounts.google.com \
+    ./my-kit/
+```
+
+For key-based signing, use an ECDSA P-256 key pair:
+
+```console
+$ sbx kit sign --key cosign.key ./my-kit/
+$ sbx kit verify --key cosign.pub ./my-kit/
+```
+
+For a local directory, `sbx kit sign` writes a `kit.sig.bundle` file next to
+`spec.yaml`. Commit this file so consumers can verify a kit loaded from the Git
+repository. For an OCI kit, the signature is stored as an OCI referrer. You can
+sign an OCI kit after pushing it, or push and sign it in one step:
+
+```console
+$ sbx kit push ./my-kit/ ghcr.io/myorg/my-kit:1.0 --sign
+```
+
+ZIP kits can't carry verifiable signatures.
+
+### Require signed kits
+
+Set a trusted signer policy for the identities or keys you trust before
+requiring signatures. Otherwise, `sbx` uses the default policy, which trusts
+Docker employee identities attested by Google's OpenID Connect issuer. A
+keyless policy must specify both the certificate identity and its OpenID
+Connect issuer:
+
+```console
+$ sbx settings set kit.trustedSigners \
+    '[{"identity":"release-bot@example.com","issuer":"https://accounts.google.com"}]'
+$ sbx settings set kit.requireSignature true
+```
+
+To trust a key-based signature, set the policy to the public key path:
+
+```console
+$ sbx settings set kit.trustedSigners '[{"key":"/path/to/cosign.pub"}]'
+$ sbx settings set kit.requireSignature true
+```
+
+When `kit.requireSignature` is `true`, `sbx` rejects unsigned kits, signatures
+that don't match `kit.trustedSigners`, and ZIP kits. This policy applies when a
+kit is loaded from a local directory, Git repository, or OCI registry.
+
+The signature covers `spec.yaml` and the kit's `files/` content, but not mutable
+dependencies such as image tags or content downloaded by install and startup
+commands. Pin those dependencies by digest or checksum when they must remain
+immutable.
+
 ## Packaging and distribution
 
 The `sbx kit` subcommands validate, inspect, and publish kits:
@@ -435,7 +498,7 @@ For Docker Hub, include the full `docker.io` prefix — `sbx` doesn't add it
 automatically.
 
 `sbx kit pull` prefers credentials stored with
-[`sbx secret set --registry`](../security/credentials.md#registry-credentials),
+[`sbx secret set --registry`](../configuration/credentials.md#registry-credentials),
 falling back to the Docker credential store. `sbx kit push` only uses the
 Docker credential store, so pushing to a private registry requires a prior
 `docker login`.

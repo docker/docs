@@ -184,6 +184,14 @@ The command is invoked with the variable name appended as the final argument, an
 
 On machines where Docker Desktop is installed, Docker Agent queries Docker Desktop's backend for secrets stored against your signed-in Docker account. This is transparent — no extra configuration — and it is how signed-in Docker users get provider API keys without setting any environment variables.
 
+## Docker Authentication
+
+Routing model traffic through the [Docker models gateway](../../configuration/models/index.md) needs a Docker token. Docker Desktop hands out one that is valid for 15 minutes and cannot be renewed by Docker Agent, so when Desktop has nothing usable to offer — it is signed out, not running, or its own refresh is stuck — Docker Agent exchanges the long-lived access token that `docker login` left in your credential store for a fresh Docker token, the same exchange `docker login` itself performs. Signing in with `docker login` is therefore enough; Docker Desktop is not required.
+
+Only Docker access tokens are exchanged — the `dckr_…` secrets `docker login` stores — never an account password, and the exchange goes to Docker Hub over HTTPS. The resulting bearer token is cached in a private file under Docker Agent's cache directory so sibling processes reuse it instead of minting their own, and it stops being used within seconds of a `docker logout` or an account switch. Run `docker agent debug auth` to see which token is in use and where it came from.
+
+Set `DOCKER_AGENT_NO_TOKEN_EXCHANGE=1` to opt out: Docker Agent then relies on Docker Desktop alone.
+
 ## 1Password References
 
 Any secret value resolved through the chain above can be a **1Password secret reference** instead of the literal secret. If the value starts with `op://`, Docker Agent resolves it by invoking the [1Password CLI](https://developer.1password.com/docs/cli/) (`op read <reference>`) and uses the result.

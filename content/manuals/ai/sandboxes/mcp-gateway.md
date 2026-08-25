@@ -2,7 +2,7 @@
 title: MCP gateway
 description: Register MCP servers, authorize OAuth-backed servers, and connect MCP tools to Docker Sandboxes.
 keywords: docker sandboxes, sbx, MCP gateway, Model Context Protocol, MCP servers, sbx mcp, static MCP, OAuth
-weight: 50
+weight: 80
 ---
 
 Docker Sandboxes includes an MCP gateway for connecting agents to Model Context

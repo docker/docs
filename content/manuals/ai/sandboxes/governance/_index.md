@@ -1,6 +1,6 @@
 ---
 title: Governance
-weight: 90
+weight: 120
 description: Control what sandboxes can access, from local developer rules to org-wide enforcement.
 keywords: docker sandboxes, governance, policy, network access, filesystem access, mcp policy, organization policy
 ---

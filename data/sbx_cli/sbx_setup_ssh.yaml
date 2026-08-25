@@ -2,8 +2,9 @@ name: sbx setup ssh
 synopsis: Set up SSH client config for the sandbox endpoint
 experimental: true
 description: |-
-    Write an ~/.ssh/config block + known_hosts so "ssh <name>.sbx" connects
-    to a sandbox with no prompts. Re-run any time; it's idempotent.
+    Write a generated SSH config + known_hosts and include it from
+    ~/.ssh/config so "ssh <name>.sbx" connects with no prompts. Named app instances
+    use "ssh <name>.sbx-<app>" instead. Re-run any time; it's idempotent.
 
     No SSH client key is needed — authentication is handled by the daemon's Unix
     socket (OS user boundary) combined with an active Docker login. Sign in first
@@ -27,3 +28,4 @@ example: |4-
       ssh my-sandbox.sbx -- echo hello
 see_also:
     - sbx setup - (Experimental) Detect host configuration and prepare Docker Sandboxes
+    - sbx setup ssh remove - Remove SSH client config for the current local app instance

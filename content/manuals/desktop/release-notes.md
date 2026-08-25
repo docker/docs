@@ -24,6 +24,95 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.88.1
+
+{{< release-date date="2026-08-25" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.88.1" build_path="/237512/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where opening the Dashboard would incorrectly redirect unauthenticated users to the sign-in prompt page.
+
+## 4.88.0
+
+{{< release-date date="2026-08-24" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.88.0" build_path="/237115/" >}}
+
+### Updates
+
+- [Docker Agent v1.124.0](https://github.com/docker/docker-agent/releases/tag/v1.124.0)
+- Docker Offload `v0.6.13`
+- [Docker Model Runner v1.2.8](https://github.com/docker/model-cli/releases/tag/v1.2.8)
+- [containerd v2.3.3](https://github.com/containerd/containerd/releases/tag/v2.3.3)
+- [Runc v1.4.3](https://github.com/opencontainers/runc/releases/tag/v1.4.3)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where Docker Desktop reported `enable fsverity failed: operation not supported` as the crash cause instead of the real underlying error.
+- Fixed a bug where changing the hypervisor type in **Settings** had no effect when Docker Desktop was in Resource saver mode.
+- Fixed port bindings reported by `docker ps` to accurately reflect active listeners when using 'Localhost by default' or 'Localhost only' settings, and added `[::1]` loopback listener alongside `127.0.0.1`.
+- Fixed an HTTP 500 error that could occur during Docker Desktop startup or wake from idle-shutdown when the engine socket existed but was not yet listening.
+- Fixed a bug where Docker Desktop would fail to start if `~/.docker/daemon.json` was corrupted with null bytes (typically caused by a crash or power-loss during a settings save). Docker Desktop now automatically recovers to default daemon settings.
+- Fixed an issue in the Docker Engine config editor in settings where validation error messages would disappear immediately while typing invalid JSON.
+- Fixed a Docker VMM regression that reduced container inbound network throughput to roughly 0.3 GB per second.
+- Fixed error messages shown when the Docker Desktop VM exits unexpectedly to include the exit status code and surface the actual root cause of the crash.
+
+#### For Mac
+
+- Docker VMM can now use more than 28GiB of host memory.
+
+#### For Windows
+
+- Fixed a Windows auto-update failure when a self-updated CLI plugin (e.g `docker scout` or `docker agent`) newer than the bundled version was already present in the user's CLI-plugins folder.
+- Fixed an issue on per-user Windows installs where Hyper-V, Windows containers, and related settings are now correctly disabled and grayed out, preventing broken behavior caused by the unavailable priveleged helper service.
+
+## 4.87.0
+
+{{< release-date date="2026-08-17" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.87.0" build_path="/236836/" >}}
+
+### Updates
+
+- [Docker Agent v1.122.0](https://github.com/docker/docker-agent/releases/tag/v1.122.0)
+- [Docker Buildx v0.36.1](https://github.com/docker/buildx/releases/tag/v0.36.1)
+- Docker Offload `v0.6.10`
+- [Docker Compose v5.4.0](https://github.com/docker/compose/releases/tag/v5.4.0)
+- Linux kernel `v7.0.12`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where the in-app update failed with `Source and destination path must have identical roots` when Docker Desktop was installed to a custom directory on another drive.
+- Fixed a misleading proxy error that named the destination server instead of the unreachable upstream proxy, and included machine-wide proxy configuration in diagnostics.
+- Fixed a bug where updating could keep failing with a `file exists` error after an earlier update had failed.
+- Fixed an issue where Gordon would lose access to tools and show misleading sign-in prompts after a failed auto-login at startup, without requiring a restart of Docker Desktop.
+
+#### For Mac
+
+- Fixed a false `Docker Desktop encountered an unexpected error` dialog that could appear during VM shutdown on with the `libkrun` engine.
+- Fixed a rare crash where the Docker Desktop with the Apple Virtualization Framework VM stopped unexpectedly right after a new connection was opened.
+
+#### For Windows
+
+- Fixed WSL error recovery on Windows not displaying specific, actionable error messages for errors like `HCS/0x80070569`, showing the generic fallback instead.
+- Fixed an issue on Windows where per-user `.EXE` installs applying an auto-update wrote `install-settings.json` to the system-wide path instead of the correct per-user location.
+- Fixed an issue on Windows where diagnostic bundles were missing network connection profile data due to an empty `Get-NetConnectionProfile.json` file.
+- Fixed a bug on Windows where Docker Desktop repeatedly asked users to run `wsl --update` when WSL was installed via the Microsoft Store rather than the inbox optional component.
+- Fixed an issue where the Resource Saver settings section was incorrectly shown when using Windows containers instead of Linux containers.
+- Fixed an issue on Windows where the disk image usage limit was hidden in **Resources** settings when Hyper-V was selected as the hypervisor.
+- Fixed an issue on Windows where installer logs from per-user installations were missing from diagnostic bundles.
+- Fixed the virtual disk limit not being applied when lowered on Windows with Hyper-V.
+- Fixed the disk usage limit slider being hidden and ignored for the Docker VMM backend on Windows, so users can now set and enforce disk size in **Settings** > **Resources** > **Advanced**.
+- Fixed a Windows auto-update failure when a self-updated CLI plugin (`docker scout` or `docker agent`) newer than the bundled version was already present in the user's CLI-plugins folder.
+
 ## 4.86.0
 
 {{< release-date date="2026-08-10" >}}
