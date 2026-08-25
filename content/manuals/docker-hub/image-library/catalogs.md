@@ -58,3 +58,20 @@ With the AI Models Catalog and Docker Model Runner, you can:
 Whether you're building generative AI applications, integrating LLMs into your
 workflows, or experimenting with machine learning tools, the AI Models Catalog
 simplifies the model management experience.
+
+## Sandbox Kits
+
+The [Sandbox Kits](https://hub.docker.com/search?type=sbx_kit) catalog lists
+kits for [Docker Sandboxes](../../ai/sandboxes/_index.md), which run AI coding
+agents in isolated microVM sandboxes.
+
+Each kit packages what an agent needs to run in a sandbox, including:
+
+- The agent's image and entrypoint
+- Tools, credentials, and environment variables
+- Network rules that scope what the sandbox can reach
+- Startup commands and agent memory instructions
+
+Each kit's Hub page shows the command to run it, in the form
+`sbx run <agent> --kit docker.io/<namespace>/<kit-name>`. To learn more about
+building and running kits, see [Kits](../../ai/sandboxes/customize/kits.md).
