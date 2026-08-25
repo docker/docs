@@ -19,8 +19,8 @@ weight: 20
 
 [Docker Agentic Platform](https://agentic-platform.docker.com/) is a
 pay-as-you-go plan for running agent and tool workloads in isolated
-sandboxes on Docker-managed cloud infrastructure. There is no recurring
-subscription fee. You pay for the usage you accrue.
+sandboxes with Docker-managed cloud infrastructure. You pay for the usage you accrue without a recurring
+subscription fee.
 
 ## Usage
 
@@ -28,13 +28,16 @@ subscription fee. You pay for the usage you accrue.
 > Docker Agentic Platform is available only on Docker Personal and
 > Docker Pro accounts.
 
-You bring your own API keys for inference. Your inference provider
+Docker Agentic Platform requires bringing your own API keys for inference. Your inference provider
 handles those costs.
 
 After you subscribe, your invoice reflects metered, pay-as-you-go
 compute usage. Docker meters compute usage in seconds, based on sandbox
 runtime and the vCPU plus memory configuration you choose at setup.
 Different sandbox configurations can produce different costs.
+
+You can track usage and pricing from the
+[Usage & billing](https://agentic-platform.docker.com/usage) page in Agentic Platform.
 
 To track usage for Docker Agentic Platform from Docker Home:
 
@@ -44,9 +47,6 @@ To track usage for Docker Agentic Platform from Docker Home:
    plans**.
 1. Select **Manage** next to **Docker Agentic Platform**.
 1. View the estimated totals and usage for the current pay period.
-
-You can also track usage and pricing from the
-[Usage & billing](https://agentic-platform.docker.com/usage) page.
 
 ## Billing cycle
 
