@@ -214,7 +214,7 @@ To access the report:
 1. Sign in to [Docker Hub](https://hub.docker.com/).
 2. Select **My Hub** in the top navigation.
 3. Select your organization in the left navigation.
-4. Select **Analytics** > **Tracked Companies** in the left navigation.
+4. Select **Analytics** > **Consuming Domains** in the left navigation.
 5. Select **DATA BY WEEK** or **DATA BY MONTH** to choose the data granularity.
 6. Select **Download report** for the desired week or month.
 
@@ -290,7 +290,7 @@ your verified publisher namespaces.
 1. Sign in to [Docker Home](https://app.docker.com) and select your organization.
 2. Select **Admin Console** > **Verified Publisher**.
 3. Configure the settings:
-   - **Tracked companies**: Set the number of consuming domains to track for
+   - **Consuming domains**: Set the number of consuming domains to track for
      reporting purposes. This setting determines how many domains appear in
      your [Domain-level reports](#domain-level-reports). You can only set this
      number up to the maximum included in your DVP subscription.

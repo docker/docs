@@ -76,7 +76,7 @@ portal:
    **Billing**.
 1. From **Active plans**, select **Manage** next to **Docker Verified
    Publisher**.
-1. Select **Add tracked companies** under **Tracked companies**.
+1. Select **Add consuming domains** under **Consuming Domains**.
 1. Select the number of consuming domains you want to add to your
    subscription.
 1. Verify your billing details, continue to payment, and complete
@@ -108,5 +108,5 @@ auto-renewal:
 1. From **Active plans**, select **Manage** next to **Docker Verified
    Publisher**.
 1. Select **Disable auto-renewal**.
-1. Optional. To remove consuming domains, select **Remove tracked
-   companies**, then choose the number to remove.
+1. Optional. To remove consuming domains, select **Remove consuming
+   domains**, then choose the number to remove.
