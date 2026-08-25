@@ -34,13 +34,6 @@ If your Docker CLI installation doesn't include a compatible Buildx version,
 [install Buildx](https://github.com/docker/buildx#manual-download) as a Docker
 CLI plugin.
 
-> [!IMPORTANT]
->
-> The `cloud` driver in standard Buildx doesn't support
-> [private resource access](builder-settings.md#private-resource-access). If
-> your cloud builder uses this feature, continue using the private Buildx
-> client.
-
 <!-- TODO: Specify the minimum Compose version after the coordinated Compose release. -->
 To use Docker Build Cloud with Docker Compose, you need Buildx version 0.37.0 or
 later and a Docker Compose version that supports Docker Build Cloud.
