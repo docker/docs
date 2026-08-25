@@ -397,9 +397,8 @@ docker buildx build \
 
 ### Docker Compose
 
-This example requires Buildx version 0.37.0 or later and a Docker Compose
-version that supports Docker Build Cloud. Set the cloud builder as the default
-builder before running `docker compose build` in CI:
+This example requires Buildx version 0.37.0 or later. Set the cloud builder as
+the default builder before running `docker compose build` in CI:
 
 ```bash
 #!/bin/bash

@@ -58,7 +58,7 @@ cloud builder as your selected builder, then run your build.
 
 > [!NOTE]
 >
-> Make sure you're using a supported version of Docker Compose, see
+> Make sure Buildx version 0.37.0 or later is installed. See
 > [Prerequisites](setup.md#prerequisites).
 
 ```console

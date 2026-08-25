@@ -34,10 +34,6 @@ If your Docker CLI installation doesn't include a compatible Buildx version,
 [install Buildx](https://github.com/docker/buildx#manual-download) as a Docker
 CLI plugin.
 
-<!-- TODO: Specify the minimum Compose version after the coordinated Compose release. -->
-To use Docker Build Cloud with Docker Compose, you need Buildx version 0.37.0 or
-later and a Docker Compose version that supports Docker Build Cloud.
-
 ## Steps
 
 You can add a cloud builder using the CLI, with the `docker buildx create`
