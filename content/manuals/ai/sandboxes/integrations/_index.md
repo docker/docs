@@ -63,16 +63,17 @@ $ ssh demo.sbx
 ## Select the workspace folder
 
 Connecting an app to a sandbox selects the remote environment, but it might not
-open the primary workspace automatically. With Docker-provided agent
-templates, an SSH connection initially opens at `/home/agent/workspace`, the
-sandbox's default working directory. This directory is separate from any
-workspace path you pass when you create the sandbox.
+open the primary workspace automatically. The initial folder depends on the
+client. A remote folder picker might open at the sandbox user's home directory,
+`/home/agent`, while an interactive `ssh` shell might start in
+`/home/agent/workspace`. Select the intended folder explicitly instead of
+relying on the initial location.
 
-Use the app's remote folder picker to select the primary workspace when you
-configure the connection or start a session. Each workspace path appears
-inside the sandbox at the same absolute path as on the host. For example, if
-you pass `/Users/bob/src/my-project`, select that path in the remote folder
-picker.
+For a sandbox with a primary workspace, each workspace path appears inside the
+sandbox at the same absolute path as on the host. For example, if you pass
+`/Users/bob/src/my-project`, select that path in the remote folder picker. For
+a mountless sandbox that uses a Docker-provided agent template, select
+`/home/agent/workspace`.
 
 ## Connect a specific tool
 
