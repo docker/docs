@@ -82,7 +82,7 @@ portal:
 1. Verify your billing details, continue to payment, and complete
    checkout.
 
-## Billing behaviors
+## Billing cycle
 
 DVP Starter and DVP Growth are billed annually. You can upgrade from
 DVP Starter to DVP Growth without a new application. Upgrades take

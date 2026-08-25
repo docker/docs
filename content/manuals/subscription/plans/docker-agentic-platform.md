@@ -16,12 +16,8 @@ weight: 20
 > credit toward cloud compute usage. To review your balance, see
 > [Credits](/manuals/billing/_index.md#credits).
 
-Docker Agentic Platform runs agent and tool workloads in isolated sandboxes on Docker-managed cloud infrastructure.
-
-Docker Agentic Platform is a pay-as-you-go plan. There is no
-recurring subscription fee, so you pay for the usage you accrue. To add
-it to your Docker subscription, see
-[Manage plans](/manuals/subscription/manage.md).
+[Docker Agentic Platform](https://agentic-platform.docker.com/) is a pay-as-you-go plan that lets you run agent and tool workloads in isolated sandboxes on Docker-managed cloud infrastructure. There is no
+recurring subscription fee, so you pay for the usage you accrue.
 
 ## Usage
 
@@ -29,15 +25,17 @@ it to your Docker subscription, see
 > Docker Agentic Platform is available only on Docker Personal and
 > Docker Pro accounts.
 
-Docker Agentic Platform requires that you bring your own API keys
+Docker Agentic Platform requires bringing your own API keys
 for inference. Your inference provider handles those costs.
 
 After you subscribe, your invoice reflects metered, pay-as-you-go
 compute usage. Docker meters compute usage based on sandbox runtime
 consumption in seconds of compute calculated from
 vCPU plus memory. Depending on the configuration you choose at setup, 
-your costs may vary across different sandboxes. To track usage for Docker
-Agentic Platform:
+your costs may vary across different sandboxes. 
+
+To track usage for Docker
+Agentic Platform from Docker Home:
 
 1. Sign in to [Docker Home](https://app.docker.com/), then choose your
    account.
@@ -46,10 +44,9 @@ Agentic Platform:
 1. Select **Manage** next to **Docker Agentic Platform**.
 1. View the estimated totals with usage for the current pay period.
 
-To learn more about tracking usage across different plans, see
-[Usage](/manuals/billing/_index.md#usage).
+You can also track usage and pricing from the [**Usage & billing**](https://agentic-platform.docker.com/usage) page.
 
-## Billing behaviors
+## Billing cycle
 
 Docker Agentic Platform is billed monthly on the day you subscribe.
 Your invoice reflects compute usage accrued during the
@@ -74,3 +71,10 @@ the plan period.
 1. Select **Cancel subscription**.
 1. Review usage behavior, then select **Cancel subscription** to
    confirm.
+
+## Next steps
+
+- To learn how to manage your Docker subscription, see
+[Manage plans](/manuals/subscription/manage.md).
+- To learn more about tracking usage across different plans in your subscription, see
+[Usage](/manuals/billing/_index.md#usage).

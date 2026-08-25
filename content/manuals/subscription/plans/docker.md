@@ -38,7 +38,7 @@ Docker Personal and Docker Pro are Docker plans for individual account types whi
 > and want to keep your username,
 > [convert your user account into an organization](/manuals/admin/organization/setup/convert-account.md).
 
-## Billing behaviors
+## Billing cycle
 
 Docker individual and organization plans are billed at a flat rate per user per month, with monthly or
 annual billing options.
