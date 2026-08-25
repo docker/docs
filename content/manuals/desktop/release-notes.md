@@ -35,6 +35,31 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For all platforms
 
 - Fixed an issue where opening the Dashboard would incorrectly redirect unauthenticated users to the sign-in prompt page.
+## 4.89.0
+
+{{< release-date date="2026-08-31" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.89.0" build_path="/xxxxxx/" >}}
+
+### Updates
+
+- [Docker Compose v5.5.0](https://github.com/docker/compose/releases/tag/v5.5.0)
+- [NVIDIA Container Toolkit v1.20.0](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.20.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms 
+
+- Fixed an issue where background container and image polling was waking the Docker engine unnecessarily when Resource Saver mode was active.
+- Fixed slow Zsh startup caused by duplicated Docker CLI completion setup in `.zshrc`. Docker Desktop now keeps a single completion block and removes existing duplicates. Fixes [docker/desktop-feedback#561](https://github.com/docker/desktop-feedback/issues/561).
+- Sidebar customization permanently is now available to all users. Right-click the left-hand navigation, select **Customize**, and then select, deselect, or re-order the tabs.
+- Fixed the **Disk usage** slider in **Settings** to no longer show duplicate tick marks at small ranges, now displaying values in GiB with one decimal place for ranges up to 8 TiB.
+- Fixed excessive update notifications in the notification center so that pop-ups only appear for failures or when user action is required, not during in-progress update steps.
+
+#### For Windows
+
+- When `CONTAINERD_BUILDX_FOR_WINDOWS` is enabled, Windows Containers now uses `dockerd`'s embedded containerd and in-process BuildKit, replacing the standalone containerd and buildkitd services.
+
 
 ## 4.88.0
 
