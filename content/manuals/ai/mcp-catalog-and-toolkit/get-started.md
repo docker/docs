@@ -387,7 +387,20 @@ Mistral Vibe uses a TOML configuration file at `~/.vibe/config.toml`. Add the
 MCP Toolkit as a stdio MCP server in the `[[mcp_servers]]` section:
 
 {{< tabs >}}
-{{< tab name="macOS / Linux" >}}
+{{< tab name="Linux" >}}
+
+```toml
+[[mcp_servers]]
+name = "MCP_DOCKER"
+transport = "stdio"
+command = ["docker"]
+args = ["mcp", "gateway", "run", "--profile", "my_profile"]
+startup_timeout_sec = 60
+disabled = false
+```
+
+{{< /tab >}}
+{{< tab name="macOS" >}}
 
 ```toml
 [[mcp_servers]]
