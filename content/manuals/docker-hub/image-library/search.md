@@ -25,7 +25,7 @@ specific needs of developers and organizations. These products include:
 
 - Images
 - Extensions
-- Sandbox Kits
+- Sandbox kits
 - Helm charts
 - Compose files
 - AI models
@@ -72,7 +72,7 @@ Desktop's interface.
 To learn more about extensions, see [Docker
 Extensions](/manuals/extensions/_index.md).
 
-#### Sandbox Kits
+#### Sandbox kits
 
 Docker Hub hosts kits for [Docker Sandboxes](/manuals/ai/sandboxes/_index.md),
 which run AI coding agents in isolated microVM sandboxes. A kit packages what
@@ -267,5 +267,5 @@ The **Sandbox Kit type** filter lets you narrow sandbox kit results by kind.
 > [!NOTE]
 >
 > The **Sandbox Kit type** filter is only available for sandbox kits. To make
-> the filter available, you must select only the **Sandbox Kits** filter in
+> the filter available, you must select only the **Sandbox kits** filter in
 > **Products**.
