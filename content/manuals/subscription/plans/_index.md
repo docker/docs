@@ -20,10 +20,6 @@ grid:
     description: Personal and organization plans, including build and runtime minutes.
     link: /subscription/plans/docker/
     icon: credit-card
-  - title: Docker Agentic Platform
-    description: Pay-as-you-go plan for cloud sandboxes and MCP Gateway.
-    link: /subscription/plans/docker-agentic-platform/
-    icon: cloud
   - title: Gordon plans
     description: Usage plans that increase your Gordon allowance.
     link: /subscription/plans/gordon/

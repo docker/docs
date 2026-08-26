@@ -10,6 +10,7 @@ keywords:
   subscription, promotional credit, cancel subscription, sandbox
   compute, usage and billing
 weight: 20
+sitemap: false
 ---
 
 > [!TIP]
