@@ -12,6 +12,8 @@
   - /learn
 "/security/access-tokens/":
   - /go/access-tokens/
+"/agentic-platform/":
+  - /go/dap/
 "/reference/api/engine/#deprecated-api-versions":
   - /engine/api/v1.18/
   - /engine/api/v1.19/
