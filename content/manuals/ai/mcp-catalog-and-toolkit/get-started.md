@@ -438,8 +438,8 @@ The `startup_timeout_sec = 60` is recommended because the Docker MCP Gateway
 takes approximately 15-25 seconds to start. The default timeout is 10 seconds,
 which isn't enough for the gateway to initialize.
 
-Restart Vibe and run the `/mcp` command in a Vibe CLI session. The
-`MCP_DOCKER` server should appear with its tools listed:
+Restart Vibe. In a Vibe CLI session, run `/mcp` to view active MCP servers.
+The `MCP_DOCKER` server should appear in the list:
 
 ```console
 $ vibe
