@@ -386,6 +386,9 @@ MCP servers:
 Mistral Vibe uses a TOML configuration file at `~/.vibe/config.toml`. Add the
 MCP Toolkit as a stdio MCP server in the `[[mcp_servers]]` section:
 
+{{< tabs >}}
+{{< tab name="macOS / Linux" >}}
+
 ```toml
 [[mcp_servers]]
 name = "MCP_DOCKER"
@@ -396,37 +399,39 @@ startup_timeout_sec = 60
 disabled = false
 ```
 
+{{< /tab >}}
+{{< tab name="Windows" >}}
+
+On Windows, the Docker installation path (`C:\Program Files\Docker\...`)
+contains a space. Use a list for `command` with the full path to `docker.exe`,
+and add `PROGRAMFILES` and `PROGRAMDATA` environment variables that the MCP
+Python SDK doesn't inherit by default:
+
+```toml
+[[mcp_servers]]
+name = "MCP_DOCKER"
+transport = "stdio"
+command = ["C:/Program Files/Docker/Docker/resources/bin/docker.exe"]
+args = ["mcp", "gateway", "run", "--profile", "my_profile"]
+env = { PROGRAMFILES = "C:\\Program Files", PROGRAMDATA = "C:\\ProgramData" }
+startup_timeout_sec = 60
+disabled = false
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
 The `startup_timeout_sec = 60` is recommended because the Docker MCP Gateway
 takes approximately 15-25 seconds to start. The default timeout is 10 seconds,
 which isn't enough for the gateway to initialize.
 
-> [!NOTE]
-> On Windows, the Docker installation path (`C:\Program Files\Docker\...`)
-> contains a space. Use a list for `command` with the full path to
-> `docker.exe`, and add `PROGRAMFILES` and `PROGRAMDATA` environment
-> variables that the MCP Python SDK doesn't inherit by default:
->
-> ```toml
-> [[mcp_servers]]
-> name = "MCP_DOCKER"
-> transport = "stdio"
-> command = ["C:/Program Files/Docker/Docker/resources/bin/docker.exe"]
-> args = ["mcp", "gateway", "run", "--profile", "my_profile"]
-> env = { PROGRAMFILES = "C:\\Program Files", PROGRAMDATA = "C:\\ProgramData" }
-> startup_timeout_sec = 60
-> disabled = false
-> ```
-
-Restart Vibe. If the connection is successful, Vibe exposes MCP tools prefixed
-with `MCP_DOCKER_` (such as `MCP_DOCKER_fetch`, `MCP_DOCKER_search`, and so on).
-To verify, check that no `MCP stdio discovery failed` warnings appear in the
-log:
+Restart Vibe and run the `/mcp` command in a Vibe CLI session. The
+`MCP_DOCKER` server should appear with its tools listed:
 
 ```console
-$ grep "MCP stdio discovery failed" ~/.vibe/logs/vibe.log
+$ vibe
+> /mcp
 ```
-
-If the command returns no output, the connection is successful.
 
 Test the connection by submitting a prompt that invokes one of your installed
 MCP servers:
