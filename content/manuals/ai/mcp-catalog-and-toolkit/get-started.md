@@ -396,6 +396,10 @@ startup_timeout_sec = 60
 disabled = false
 ```
 
+The `startup_timeout_sec = 60` is recommended because the Docker MCP Gateway
+takes approximately 15-25 seconds to start. The default timeout is 10 seconds,
+which isn't enough for the gateway to initialize.
+
 > [!NOTE]
 > On Windows, the Docker installation path (`C:\Program Files\Docker\...`)
 > contains a space. Use a list for `command` with the full path to
@@ -413,18 +417,16 @@ disabled = false
 > disabled = false
 > ```
 
-Restart Vibe and check the MCP server status. Vibe logs MCP connection
-results at startup. Check the log for a successful connection:
-
-```console
-$ grep "MCP" ~/.vibe/logs/vibe.log | tail -5
-```
-
-If the connection fails, the log shows the error:
+Restart Vibe. If the connection is successful, Vibe exposes MCP tools prefixed
+with `MCP_DOCKER_` (such as `MCP_DOCKER_fetch`, `MCP_DOCKER_search`, and so on).
+To verify, check that no `MCP stdio discovery failed` warnings appear in the
+log:
 
 ```console
 $ grep "MCP stdio discovery failed" ~/.vibe/logs/vibe.log
 ```
+
+If the command returns no output, the connection is successful.
 
 Test the connection by submitting a prompt that invokes one of your installed
 MCP servers:
