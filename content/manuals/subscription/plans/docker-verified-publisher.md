@@ -8,7 +8,7 @@ keywords:
   docker verified publisher, dvp, dvp starter, dvp growth, consuming
   domains, publisher analytics, organization subscription, apply
   for dvp, auto-renewal, billing portal, docker hub
-weight: 50
+weight: 60
 ---
 
 [Docker Verified Publisher (DVP)](/manuals/docker-hub/repos/manage/trusted-content/dvp-program.md)
@@ -82,7 +82,7 @@ portal:
 1. Verify your billing details, continue to payment, and complete
    checkout.
 
-## Billing behaviors
+## Billing cycle
 
 DVP Starter and DVP Growth are billed annually. You can upgrade from
 DVP Starter to DVP Growth without a new application. Upgrades take

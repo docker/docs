@@ -1,8 +1,13 @@
 ---
 title: Manage billing and payments
 linkTitle: Billing
-description: Find information about managing billing and payments for Docker subscriptions.
-keywords: billing, invoice, payment, subscription, Docker billing, update payment method, billing history, invoices, payment verification
+description: >
+  Manage Docker billing and payments, including usage, costs, credits,
+  invoices, payment methods, and tax details.
+keywords:
+  billing, invoice, payment, subscription, Docker billing, update payment
+  method, billing history, invoices, payment verification, tax exemption,
+  usage, costs, credits, metered billing
 weight: 30
 params:
   sidebar:
@@ -32,12 +37,43 @@ aliases:
   - /billing/docker-hub-pricing/
 ---
 
-You can use the billing portal to manage actions for your Docker subscriptions, such as updating
-payment methods, reviewing billing details, and tracking invoice history.
+You can use the billing portal to manage your Docker subscriptions, such
+as updating payment methods, reviewing billing details, and tracking
+invoice history.
 
-## Docker plans and billing behaviors
+## Billing
 
-Your invoice history is a reference to the Docker plans you subscribe to. For information about your billing cycle and renewal dates, see [plan details](/manuals/subscription/plans/_index.md). To upgrade or add a new plan, see [Subscription](/manuals/subscription/_index.md).
+You can manage your Docker plans from the billing portal:
+
+1. Sign in to [Docker Home](https://app.docker.com/), then choose your
+   account.
+1. Go to **Billing** to view the **Overview** page.
+1. Select the page you want to explore.
+
+### Usage
+
+The billing **Usage** page helps you compare usage-based charges across
+billing periods. You can track usage by changing the period, product,
+and how the product is metered.
+
+### Costs
+
+The billing **Costs** page aggregates all costs by billing period. It
+breaks down charges by resource (the product accruing a charge), the
+status of your billing period, and costs to date.
+
+### Credits
+
+The billing **Credits** page shows credits applied to your costs. If you
+received a promotional credit, you can see how it applies to your bill
+from this page.
+
+## Docker plans and billing cycle
+
+Your invoice history is a reference to the Docker plans you subscribe
+to. For information about your billing cycle and renewal dates, see
+[Billing cycle](/manuals/billing/details.md#billing-cycle). To upgrade or add
+a new plan, see [Subscription](/manuals/subscription/_index.md).
 
 ## Next steps
 

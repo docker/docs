@@ -32,7 +32,7 @@ DHI Enterprise extends DHI Select with unlimited customizations, optional full c
 
 For details on setting up and managing repositories, see [Get started with DHI Select and Enterprise](/manuals/dhi/how-to/select-enterprise.md).
 
-## Billing behaviors
+## Billing cycle
 
 DHI Select is an annual plan billed per repository from the date your plan starts. Repositories added mid-cycle are prorated for the remainder of the billing period. You can add more repositories to your DHI Select plan by going to **Active plans** in the billing portal. For steps, see [Manage plans](../manage.md#upgrade-plans).
 

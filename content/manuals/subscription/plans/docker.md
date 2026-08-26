@@ -3,7 +3,7 @@ title: Docker plans
 linkTitle: Docker
 description:
   Learn about Docker plans that upgrade personal and organization accounts,
-  including usage entitlements, billing behaviors, and downgrade options.
+  including usage entitlements, billing cycle, and downgrade options.
 keywords:
   docker core, docker team, docker business, docker pro, docker personal,
   subscription seats, upgrade subscription, downgrade subscription, docker
@@ -38,7 +38,7 @@ Docker Personal and Docker Pro are Docker plans for individual account types whi
 > and want to keep your username,
 > [convert your user account into an organization](/manuals/admin/organization/setup/convert-account.md).
 
-## Billing behaviors
+## Billing cycle
 
 Docker individual and organization plans are billed at a flat rate per user per month, with monthly or
 annual billing options.
@@ -119,4 +119,3 @@ To cancel your plan:
 1. Sign in to [Docker Home](https://app.docker.com/) and go to **Billing**.
 2. From **Active plans**, select the action menu next to your Docker plan.
 3. Select **Cancel plan** and complete the feedback survey.
-

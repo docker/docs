@@ -7,7 +7,7 @@ description:
 keywords:
   gordon, gordon plus, gordon max, gordon ultra, gordon usage, gordon plan,
   personal subscription, ai assistant, usage allowance
-weight: 20
+weight: 30
 aliases:
   - /subscription/products/gordon/
   - /subscription/gordon/
@@ -31,7 +31,7 @@ Gordon usage is measured in questions. When you upgrade from Gordon Base to a pa
 > plan while signed in with an organization account, the plan applies
 > to your personal account automatically.
 
-## Billing behaviors
+## Billing cycle
 
 Gordon plans are billed monthly at the first of the month. If you purchase after the first of the month, your invoice reflects prorated charges for the remaining days in the cycle. Subscribing to a Gordon plan charges you at the time of purchase. When you upgrade your Gordon plan, usage limits are immediately effective after payment. 
 

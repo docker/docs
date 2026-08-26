@@ -7,7 +7,7 @@ description:
 keywords:
   ai governance, licenses, organization licenses, ai policy, docker sandbox,
   subscription management
-weight: 30
+weight: 50
 aliases:
   - /subscription/products/ai-governance/
   - /subscription/ai-governance/
@@ -24,6 +24,6 @@ AI Governance lets organization owners enforce [organization policies](/manuals/
 
 You can [assign AI Governance licenses](/manuals/admin/organization/manage/manage-licenses.md) to any organization member, even if they don't occupy a Docker Team or Docker Business seat. For best practice, review available licenses as you add new members since members without an AI Governance license can still use Docker AI products.
 
-## Billing behaviors
+## Billing cycle
 
 AI Governance plan pricing is based on the number of licenses purchased. To add or remove licenses, contact your Docker sales representative.

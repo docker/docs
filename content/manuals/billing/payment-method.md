@@ -72,7 +72,27 @@ You can only remove secondary payment methods. To remove a secondary payment met
 1. Select the **Actions** menu next to the payment method you want to remove, then select **Remove**.
 1. Verify your billing details, then select **Save as default**.
 
-You can't remove a default payment method. If you want to remove your default payment method, you must change your default payment method then follow the remove payment method procedures.
+To remove your default payment method, first set a different payment method as default, or [downgrade to a free subscription](/manuals/subscription/plans/docker.md#cancel-a-docker-plan).
+
+## Enable and disable pay by invoice
+
+> [!TIP]
+> Do you need to pay by invoice? [Upgrade to a Docker Business or Docker Team plan](https://www.docker.com/pricing?ref=Docs&refAction=DocsBillingPaymentMethod) and choose the annual subscription.
+
+Pay by invoice requires you to pay upfront for your first subscription period using a payment card or ACH bank transfer. At renewal time, instead of automatic payment, you'll receive an invoice via
+email that you must pay manually.
+
+Follow these steps to enable or disable pay by invoice:
+
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+   organization.
+2. Select **Billing**, then **Payment methods**.
+3. Select **Pay by invoice**, then select the pay by invoice toggle to enable or disable.
+4. Confirm your billing contact details. If you need to change them, select
+   **Change** and enter your new details.
+
+Pay by invoice is not available for
+subscription upgrades or changes.
 
 ## Verify a bank account
 
