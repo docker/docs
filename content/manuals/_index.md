@@ -139,4 +139,3 @@ subscription management.
 Targeted at IT administrators with help on deploying Docker Desktop at scale with configuration guidance on security related features.
 
 {{< grid items=enterprise >}}
-
