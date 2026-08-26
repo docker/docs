@@ -130,6 +130,7 @@ is working:
 - [Sema4.ai](#sema4)
 - [Visual Studio Code](#vscode)
 - [Zed](#zed)
+- [Mistral Vibe](#mistral-vibe)
 
 ### Claude Code
 
@@ -378,6 +379,58 @@ MCP servers:
 
 ```plaintext
 {{% param test_prompt %}}
+```
+
+### Mistral Vibe
+
+Mistral Vibe uses a TOML configuration file at `~/.vibe/config.toml`. Add the
+MCP Toolkit as a stdio MCP server in the `[[mcp_servers]]` section:
+
+```toml
+[[mcp_servers]]
+name = "MCP_DOCKER"
+transport = "stdio"
+command = ["docker"]
+args = ["mcp", "gateway", "run", "--profile", "my_profile"]
+startup_timeout_sec = 60
+disabled = false
+```
+
+> [!NOTE]
+> On Windows, the Docker installation path (`C:\Program Files\Docker\...`)
+> contains a space. Use a list for `command` with the full path to
+> `docker.exe`, and add `PROGRAMFILES` and `PROGRAMDATA` environment
+> variables that the MCP Python SDK doesn't inherit by default:
+>
+> ```toml
+> [[mcp_servers]]
+> name = "MCP_DOCKER"
+> transport = "stdio"
+> command = ["C:/Program Files/Docker/Docker/resources/bin/docker.exe"]
+> args = ["mcp", "gateway", "run", "--profile", "my_profile"]
+> env = { PROGRAMFILES = "C:\\Program Files", PROGRAMDATA = "C:\\ProgramData" }
+> startup_timeout_sec = 60
+> disabled = false
+> ```
+
+Restart Vibe and check the MCP server status. Vibe logs MCP connection
+results at startup. Check the log for a successful connection:
+
+```console
+$ grep "MCP" ~/.vibe/logs/vibe.log | tail -5
+```
+
+If the connection fails, the log shows the error:
+
+```console
+$ grep "MCP stdio discovery failed" ~/.vibe/logs/vibe.log
+```
+
+Test the connection by submitting a prompt that invokes one of your installed
+MCP servers:
+
+```console
+$ vibe "{{% param test_prompt %}}"
 ```
 
 ## Further reading
