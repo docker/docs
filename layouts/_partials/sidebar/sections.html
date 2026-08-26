@@ -15,9 +15,16 @@
 </nav>
 
 {{ define "renderChildren" }}
-  {{- $pages := where .Pages "Params.sitemap" "ne" "false" }}
+  {{- $sourcePages := .Pages }}
   {{- if .Params.sidebar.reverse }}
-    {{ $pages = .Pages.Reverse }}
+    {{ $sourcePages = $sourcePages.Reverse }}
+  {{- end }}
+  {{- $pages := slice }}
+  {{- range $sourcePages }}
+    {{- $isActive := or (eq page .) (page.IsDescendant .) }}
+    {{- if or (ne .Params.sitemap false) $isActive }}
+      {{- $pages = $pages | append . }}
+    {{- end }}
   {{- end }}
   {{- $ungrouped := where $pages "Params.sidebar.group" "==" nil }}
   {{- range $ungrouped }}
