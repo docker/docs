@@ -348,7 +348,11 @@ build:
 
 ### `network`
 
-Set the network containers connect to for the `RUN` instructions during build.
+Set the networking mode for `RUN` instructions during the build. This is
+the same as [`docker build --network`](/reference/cli/docker/buildx/build/#network).
+It is not a Compose network from the top-level [`networks`](networks.md) key.
+
+The value is a mode (`default`, `none`, or `host`), not a network name:
 
 ```yaml
 build:
@@ -356,13 +360,7 @@ build:
   network: host
 ```
 
-```yaml
-build:
-  context: .
-  network: custom_network_1
-```
-
-Use `none` to disable networking during build:
+Use `none` to disable networking during the build:
 
 ```yaml
 build:
