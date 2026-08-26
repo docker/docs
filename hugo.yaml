@@ -10,6 +10,16 @@ ignoreLogs:
 
 taxonomies: {}
 
+security:
+  exec:
+    allow:
+    - ^(dart-)?sass$
+    - ^go$
+    - ^git$
+    - ^node$
+    - ^postcss$
+    - ^tailwindcss$
+
 # Cascade layout and type settings to content subtrees.
 # See https://gohugo.io/configuration/cascade/#target
 cascade:
