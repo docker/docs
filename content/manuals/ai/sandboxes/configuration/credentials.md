@@ -274,16 +274,10 @@ interact with GitHub APIs on your behalf.
 
 ### SSH agent
 
-SSH agent forwarding is off by default. To use your host SSH agent for Git
-authentication or commit signing inside a sandbox, turn it on:
-
-```console
-$ sbx settings set ssh.agentForwardingEnabled true
-```
-
-When forwarding is enabled, Docker Sandboxes uses the `SSH_AUTH_SOCK` value
-from the client that creates, starts, or joins each sandbox. It forwards that
-agent into the sandbox and sets `SSH_AUTH_SOCK` there.
+SSH agent forwarding is enabled by default. When `SSH_AUTH_SOCK` is set,
+Docker Sandboxes uses the value from the client that creates, starts, or joins
+each sandbox. It forwards that agent into the sandbox and sets `SSH_AUTH_SOCK`
+there.
 
 If your agent uses a custom socket path, such as the 1Password SSH agent,
 configure a fixed path:
@@ -292,9 +286,18 @@ configure a fixed path:
 $ sbx settings set ssh.agentSocketPath /path/to/agent.sock
 ```
 
-An empty `ssh.agentSocketPath` uses each client's current `SSH_AUTH_SOCK`
-instead. You can also configure forwarding and choose between the current
-client socket and a fixed path by running `sbx setup`.
+An empty `ssh.agentSocketPath`, which is the default, uses each client's
+current `SSH_AUTH_SOCK` instead. A non-empty value overrides client sockets
+with the fixed path.
+
+To prevent sandboxes from using your SSH agent, turn off forwarding:
+
+```console
+$ sbx settings set ssh.agentForwardingEnabled false
+```
+
+You can also configure forwarding and choose between the current client socket
+and a fixed path by running `sbx setup`.
 
 Restart the daemon after changing either setting to replace forwarders for
 existing sandboxes:
