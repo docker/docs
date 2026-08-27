@@ -83,20 +83,12 @@ $ sbx create --name scratch claude
 $ sbx run --name scratch
 ```
 
-Mountless mode is the default for `sbx create` when you don't pass a path. The
-agent uses the sandbox template's default working directory. Docker-provided
-agent templates use `/home/agent/workspace`. A custom template can use another
-absolute path. If the template doesn't define a usable absolute working
-directory, the daemon uses `/home/agent/workspace`.
-
-The default working directory is part of the sandbox filesystem and is
-separate from any workspace path you pass. It can still exist when a sandbox
-has a primary workspace, but the agent and `sbx exec` start in the primary
-workspace instead. Files in a mountless workspace persist when you stop and
-restart the sandbox, but they are deleted with the sandbox. Use `--name` to
-give a mountless sandbox a stable identity for reconnecting. Use
-[`sbx cp`](#copy-files-between-host-and-sandbox) to move files between the
-mountless workspace and your host.
+In a mountless sandbox, the agent starts in the template image's working
+directory. Docker-provided templates use `/home/agent/workspace`. Files there
+persist across stops and restarts but are deleted when you remove the sandbox.
+Assign the sandbox a name so you can reconnect to it, and use
+[`sbx cp`](#copy-files-between-host-and-sandbox) to transfer files between the
+sandbox and the host.
 
 ## Reconnect and name sandboxes
 
@@ -114,8 +106,8 @@ Use `--name` to give a sandbox an explicit identity:
 $ sbx run --name my-project claude
 ```
 
-Once a named sandbox exists, use `--name` to re-attach to it from any working
-directory, with or without the agent positional:
+Once a named sandbox exists, reattach from any working directory with
+`sbx run --name`. You can omit the agent name when reattaching:
 
 ```console
 $ sbx run --name my-project        # re-attaches from anywhere
