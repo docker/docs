@@ -159,6 +159,12 @@ tags:
     x-audience: public
     description: |
       The organization access token endpoints allow you to manage organization access tokens (OATs). See [Organization access tokens](https://docs.docker.com/security/for-admins/access-tokens/) for more information.
+
+      OATs only authenticate requests to the modern namespace-scoped routes under `/v2/namespaces/{namespace}/repositories/`. Legacy repository paths are OAT unsupported, regardless of the token's scopes, and reject every OAT with `403 token issued from organization access token is not allowed`:
+
+      - `GET /v2/repositories/{namespace}/{repository}` — use [Get repository](#tag/repositories/operation/GetRepository) instead.
+      - `GET /v2/repositories/{namespace}` — use [List repositories](#tag/repositories/operation/listNamespaceRepositories) instead.
+      - `GET /v2/users/{username}/repositories` — use [List repositories](#tag/repositories/operation/listNamespaceRepositories) instead.
 paths:
   /v2/users/login:
     post:
@@ -1244,7 +1250,7 @@ paths:
 
         <span class="oat"></span>
 
-        **OAT listing behavior**: an OAT with the `scope-repository-list` scope sees all repositories including private ones. An OAT without that scope only sees public repositories.
+        **OAT listing behavior**: an OAT with the `scope-repository-list` scope sees all repositories including private ones. An OAT without that scope only sees public repositories. This filtering is silent: the response is a normal `200` with no indication that private repositories were withheld.
       tags:
         - repositories
       security:

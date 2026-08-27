@@ -146,6 +146,10 @@ Higher scopes include the permissions of lower ones where noted.
 | `scope-repository-create` | Create new repositories |
 | `scope-registry-usage-read` | Read namespace-level registry usage metrics |
 
+Creating a repository requires the organization-level `scope-repository-create`
+permission. No repository-level scope, including admin scopes on existing
+repositories, grants this permission.
+
 ## Hub API support
 
 OATs can authenticate requests to most Docker Hub API endpoints under
@@ -174,6 +178,23 @@ token's configured scopes:
   returned, including private ones.
 - **Without that scope**: only public repositories are returned.
 
+This filtering is silent: the response is a normal `200`, with no error or
+indicator that private repositories were withheld.
+
+### Unsupported legacy endpoints
+
+OATs only authenticate requests to the namespace-scoped routes documented
+above. The following legacy repository paths are OAT unsupported and reject
+every OAT with `403 token issued from organization access token is not
+allowed`, regardless of the token's scopes. Use the linked replacement
+endpoints instead:
+
+- `GET /v2/repositories/{namespace}/{repository}` — use
+  [Get repository](/reference/api/hub/latest/#tag/repositories/operation/GetRepository).
+- `GET /v2/repositories/{namespace}` — use
+  [List repositories](/reference/api/hub/latest/#tag/repositories/operation/listNamespaceRepositories).
+- `GET /v2/users/{username}/repositories` — use
+  [List repositories](/reference/api/hub/latest/#tag/repositories/operation/listNamespaceRepositories).
 
 ## Organization access token best practices
 
