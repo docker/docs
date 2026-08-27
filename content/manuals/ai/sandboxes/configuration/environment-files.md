@@ -291,8 +291,8 @@ recording anything:
 $ sbx env plan
 ```
 
-The plan compares the environment file with what the environment last applied
-and with resources on the host. It omits resources that are unchanged and
+The plan compares the environment file with the environment's last applied
+state and the resources on the host. It omits resources that are unchanged and
 already approved. Literal secret values appear as SHA-256 digests. Secret
 references, host commands, environment variables, ports, paths, and binding
 domains remain visible so you can review them.
@@ -304,10 +304,10 @@ the environment changes or a resource is missing. An approval provided with
 
 ## Update an environment
 
-For an existing sandbox, `sbx env run` applies changes to `env` to the new
-session and reconciles declared MCP servers. The plan marks changes to
-workspaces, kits, ports, secrets, bindings, and `sandboxOptions` as waiting for
-the next sandbox creation. Remove the environment with `sbx env rm`, then create
+For an existing sandbox, `sbx env run` applies updated `env` values to the new
+agent session and reconciles declared MCP servers. Changes to workspaces, kits,
+ports, secrets, bindings, and `sandboxOptions` take effect only when the
+sandbox is next created. Remove the environment with `sbx env rm`, then create
 it again to apply those changes.
 
 ## Remove an environment
@@ -418,14 +418,8 @@ clone mode. Omit `workspace` to create a sandbox without a host bind mount. Set
 file. If `workspace` is present, its path can't be empty or contain only
 whitespace.
 
-When an environment file is inside a writable workspace, `sbx` binds the file
-read-only at its path in the sandbox. Other files in the workspace remain
-writable.
-
-> [!WARNING]
-> Store the environment file outside direct-mounted workspaces or directly in
-> a workspace's root. The read-only bind can't fully protect a file in a
-> writable subdirectory.
+`sbx` mounts the environment file read-only inside the sandbox. Keep the file
+outside direct-mounted workspaces or directly in a workspace root.
 
 | Field   | Type    | Required | Default | Description                                                     |
 | ------- | ------- | -------- | ------- | --------------------------------------------------------------- |
@@ -485,16 +479,17 @@ Lifecycle phases run at the following points:
 
 | Phase        | Timing                                                                                                           |
 | ------------ | ---------------------------------------------------------------------------------------------------------------- |
-| `initialize` | Before `sbx` resolves, provisions, creates, or attaches. Runs for every `create` and `run`                        |
+| `initialize` | Before other create or run actions. Runs for every `create` and `run`                                             |
 | `postCreate` | After a new sandbox is created. For `run`, before attachment. Does not run when attaching to an existing sandbox   |
 | `preRemove`  | After you approve removal and before `sbx` deletes resources. A failure produces a warning and removal continues  |
 
 `sbx env exec` doesn't run lifecycle commands. Commands within a phase run in
-order and stop at the first failure. Write `initialize` commands so repeated
-runs produce the same result.
+order and stop at the first failure. Make `initialize` commands safe to run
+more than once.
 
-After `preRemove` finishes, `sbx` checks the destroy plan again. Removal stops
-if the command added or changed a resource that the approved plan didn't name.
+After `preRemove` commands finish, `sbx` generates the destroy plan again.
+Removal stops if the commands introduced changes that weren't included in the
+approved plan.
 
 Each command requires `command` and accepts the following fields:
 
