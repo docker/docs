@@ -41,11 +41,11 @@ Registry Access Management works with any container registry, including:
 
 Before configuring Registry Access Management, you must:
 
-- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
+- [Enforce sign-in](/manuals/platform/security/authentication/enforce-sign-in/_index.md).
   Registry Access Management only takes effect when users are signed in to
   Docker Desktop with organization credentials.
 - Use
-  [Organization access tokens (OATs)](/manuals/enterprise/security/access-tokens.md)
+  [Organization access tokens (OATs)](/manuals/platform/security/access-tokens/organization-access-tokens.md)
   for authentication
 - Have a Docker Business subscription
 
@@ -138,7 +138,7 @@ Users can potentially bypass Registry Access Management through:
 
 To maximize security effectiveness:
 
-- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) to
+- [Enforce sign-in](/manuals/platform/security/authentication/enforce-sign-in/_index.md) to
   prevent bypass through sign-out
 - Implement additional network-level controls for complete protection
 - Use Registry Access Management as part of a broader security strategy

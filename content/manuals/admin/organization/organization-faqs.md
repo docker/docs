@@ -28,7 +28,7 @@ assign them to a team during the invite process.
 ### Can I force my organization's members to authenticate before using Docker Desktop and are there any benefits?
 
 Yes. You can
-[enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
+[enforce sign-in](/manuals/platform/security/authentication/enforce-sign-in/_index.md).
 
 Some benefits of enforcing sign-in are:
 

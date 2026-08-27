@@ -94,7 +94,7 @@ params:
   - title: Security
     description: Security guardrails for both administrators and developers.
     icon: lock-closed
-    link: /security/
+    link: /platform/security/
   - title: Subscription
     description: Commercial use licenses for Docker products.
     icon: credit-card

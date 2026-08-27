@@ -17,7 +17,7 @@ Settings Management lets you configure and enforce Docker Desktop settings acros
 
 Before you begin, make sure you have:
 
-- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) for
+- [Enforce sign-in](/manuals/platform/security/authentication/enforce-sign-in/_index.md) for
   your organization
 - A Docker Business subscription
 

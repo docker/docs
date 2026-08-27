@@ -44,8 +44,8 @@ Use the repository allowlist when you need to:
 
 Before configuring Image Access Management, you must:
 
-- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md). Image Access Management only takes effect when users are signed in to Docker Desktop with organization credentials.
-- Use [personal access tokens (PATs)](/manuals/security/access-tokens.md) for authentication (Organization access tokens aren't supported)
+- [Enforce sign-in](/manuals/platform/security/authentication/enforce-sign-in/_index.md). Image Access Management only takes effect when users are signed in to Docker Desktop with organization credentials.
+- Use [personal access tokens (PATs)](/manuals/platform/security/access-tokens/personal-access-tokens.md) for authentication (Organization access tokens aren't supported)
 - Have a Docker Business subscription
 
 ## Configure image access

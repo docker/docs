@@ -228,7 +228,7 @@ what the integration provided.
 4. Set up your Scout credentials.
 
    1. Generate an organization access token. For more details, see
-      [Create an organization access token](/enterprise/security/access-tokens/#create-an-organization-access-token).
+      [Create an organization access token](/enterprise/platform/security/access-tokens/personal-access-tokens/#create-an-organization-access-token).
    2. Sign in to Docker using the organization access token.
 
       ```console

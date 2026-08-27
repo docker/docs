@@ -67,7 +67,7 @@ permissions.
 
 For details about each role and its permissions, see
 [Roles and
-permissions](/manuals/enterprise/security/roles-and-permissions/_index.md).
+permissions](/manuals/platform/security/roles-and-permissions/_index.md).
 
 ## Next steps
 

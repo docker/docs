@@ -41,7 +41,7 @@ Other considerations:
 
 Before configuring air-gapped containers, you must have:
 
-- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) enabled to ensure users authenticate with your organization
+- [Enforce sign-in](/manuals/platform/security/authentication/enforce-sign-in/_index.md) enabled to ensure users authenticate with your organization
 - A Docker Business subscription
 - Configured [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) with the `admin-settings.json` file to manage organization policies
 

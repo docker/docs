@@ -58,7 +58,7 @@ Docker's predefined roles offer flexibility for various organizational needs. As
 - Editor: Partial administrative access to the organization. Editors can create, edit, and delete repositories. They can also edit an existing team's access permissions.
 - Owner: Full organization administrative access. Owners can manage organization repositories, teams, members, settings, and billing.
 
-For more information, see [Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md).
+For more information, see [Roles and permissions](/manuals/platform/security/roles-and-permissions.md).
 
 #### Enhance with teams
 
@@ -89,7 +89,7 @@ This page guides you through onboarding owners and members, and using tools like
 
 When you create a Docker organization, you automatically become its sole owner. While optional, adding additional owners can significantly ease the process of onboarding and managing your organization by distributing administrative responsibilities. It also ensures continuity and prevents blockers if the primary owner is unavailable.
 
-For detailed information on owners, see [Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md).
+For detailed information on owners, see [Roles and permissions](/manuals/platform/security/roles-and-permissions.md).
 
 ### Invite members and assign roles
 
@@ -119,11 +119,11 @@ SSO:
 - Reduces password-related vulnerabilities.
 - Simplifies onboarding as it works seamlessly with SCIM and group mapping for automated provisioning.
 
-For more information, see the [SSO documentation](/manuals/enterprise/security/single-sign-on/_index.md).
+For more information, see the [SSO documentation](/manuals/platform/security/authentication/single-sign-on/_index.md).
 
 #### Automate onboarding with SCIM and JIT provisioning
 
-Streamline user provisioning and role management with [SCIM](/manuals/enterprise/security/provisioning/scim/_index.md) and [Just-in-Time (JIT) provisioning](/manuals/enterprise/security/provisioning/just-in-time.md).
+Streamline user provisioning and role management with [SCIM](/manuals/platform/security/provisioning/scim/_index.md) and [Just-in-Time (JIT) provisioning](/manuals/platform/security/provisioning/just-in-time.md).
 
 With SCIM you can:
 
@@ -145,7 +145,7 @@ It also:
 - Ensures consistent access control policies.
 - Help you scale permissions as teams grow or change.
 
-For more information on how it works, see [Group mapping](/manuals/enterprise/security/provisioning/scim/group-mapping.md).
+For more information on how it works, see [Group mapping](/manuals/platform/security/provisioning/scim/group-mapping.md).
 
 ## Monitoring and insights
 

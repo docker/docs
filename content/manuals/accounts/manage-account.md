@@ -77,7 +77,7 @@ To update your two-factor authentication (2FA) settings:
 1. Select **2FA**.
 
 For more information, see
-[Enable two-factor authentication](/manuals/security/2fa/_index.md).
+[Enable two-factor authentication](/manuals/platform/security/authentication/2fa/_index.md).
 
 ## Manage personal access tokens
 
@@ -88,7 +88,7 @@ To manage personal access tokens:
 1. Select **Personal access tokens**.
 
 For more information, see
-[Create and manage access tokens](/manuals/security/access-tokens.md).
+[Create and manage access tokens](/manuals/platform/security/access-tokens/personal-access-tokens.md).
 
 ## Manage connected accounts
 
@@ -127,4 +127,4 @@ For information on deactivating your account, see
 
 - [Docker accounts overview](/manuals/accounts/_index.md)
 - [Create a Docker account](/manuals/accounts/create-account.md)
-- [Enable two-factor authentication](/manuals/security/2fa/_index.md)
+- [Enable two-factor authentication](/manuals/platform/security/authentication/2fa/_index.md)

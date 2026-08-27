@@ -17,7 +17,7 @@ aliases:
 
 Docker recommends signing in with the **Sign in** option in the top-right corner of the Docker Dashboard. 
 
-In large enterprises where admin access is restricted, administrators can [enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md). 
+In large enterprises where admin access is restricted, administrators can [enforce sign-in](/manuals/platform/security/authentication/enforce-sign-in/_index.md). 
 
 > [!TIP]
 >

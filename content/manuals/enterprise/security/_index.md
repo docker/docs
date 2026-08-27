@@ -28,42 +28,10 @@ grid_admins:
     description: Restrict containers from accessing unwanted network resources.
     icon: lock-closed
     link: /enterprise/security/hardened-desktop/air-gapped-containers/
-  - title: Enforce sign-in
-    description: Configure sign-in for members of your teams and organizations.
-    link: /enterprise/security/enforce-sign-in/
-    icon: finger-print
-  - title: OIDC connections
-    description: Configure OpenID Connect connections for automated workload authentication.
-    link: /enterprise/security/oidc-connections/
-    icon: link
-  - title: Domain management
-    description: Identify uncaptured users in your organization.
-    link: /enterprise/security/domain-management/
-    icon: magnifying-glass
-  - title: Docker Scout
-    description: Explore how Docker Scout can help you create a more secure software supply chain.
-    icon: chart-bar
-    link: /scout/
-  - title: SSO
-    description: Learn how to configure SSO for your company or organization.
-    icon: key
-    link: /enterprise/security/single-sign-on/
-  - title: SCIM
-    description: Set up SCIM to automatically provision and deprovision users.
-    icon: clipboard-document-check
-    link: /enterprise/security/provisioning/scim/
-  - title: Roles and permissions
-    description: Assign roles to individuals giving them different permissions within an organization.
-    icon: identification
-    link: /enterprise/security/roles-and-permissions/
-  - title: Private marketplace for Extensions (Beta)
-    description: Learn how to configure and set up a private marketplace with a curated list of extensions for your Docker Desktop users.
-    icon: building-storefront
-    link: /extensions/private-marketplace/
-  - title: Organization access tokens
-    description: Create organization access tokens as an alternative to a password.
-    link: /enterprise/security/access-tokens/
+  - title: Namespace access
+    description: Control which Kubernetes namespaces developers can access in Docker Desktop.
     icon: lock-closed
+    link: /enterprise/security/hardened-desktop/namespace-access/
 ---
 
 Docker provides security guardrails for both administrators and developers.
