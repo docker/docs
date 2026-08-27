@@ -6,10 +6,9 @@ keywords: docker sandboxes, sbx, registry mirror, docker hub, templates, kits, i
 weight: 50
 ---
 
-Configure a registry mirror to route Docker Hub image pulls through your
-organization's registry infrastructure. The mirror applies to sandbox template
-images and OCI kit images. When the mirror is compatible with Docker Engine,
-it also applies to Docker Hub pulls made by Docker inside a sandbox.
+A registry mirror routes Docker Hub pulls for sandbox templates and OCI kits
+through your organization's registry infrastructure. If the mirror meets
+Docker Engine's requirements, Docker inside the sandbox uses it too.
 
 ## Configure the mirror
 
@@ -52,15 +51,14 @@ network namespace, so Docker Sandboxes doesn't add them to the sandbox's Docker
 Engine configuration. A path prefix is also excluded because Docker Engine
 interprets mirror URL paths differently from image repository prefixes.
 
-The mirror serves Docker Engine traffic over HTTPS. The sandbox must trust the
+Docker Engine connects to the mirror over HTTPS, so the sandbox must trust the
 certificate that the mirror presents. For a mirror that uses an internal
 certificate authority, add the CA to the sandbox's system trust store. See
 [Install an internal CA certificate](../customize/kit-examples.md#install-an-internal-ca-certificate).
 
-Changes apply to subsequent template and kit pulls. Docker Sandboxes writes the
-in-sandbox Docker Engine configuration when it creates the sandbox, and that
-configuration persists across sandbox stops and starts. Remove and create an
-existing sandbox again to apply a changed mirror to its Docker Engine.
+Template and kit pulls use the changed setting immediately. Existing sandboxes
+retain the Docker Engine mirror configuration with which they were created.
+Recreate a sandbox to apply a changed mirror to Docker inside it.
 
 ## Disable the mirror
 
