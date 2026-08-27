@@ -4,6 +4,8 @@ description: Run agents and tools in isolated, hosted sandboxes with Docker Agen
 keywords: docker agentic platform, agents, sandboxes, mcp, secrets, network policies
 weight: 5
 sitemap: false
+cascade:
+  sitemap: false
 params:
   sidebar:
     group: AI and agents
