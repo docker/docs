@@ -55,9 +55,9 @@ To update specific skills, pass one or more names:
 $ sbx skills update frontend-design pdf
 ```
 
-`sbx skills update` only refreshes skills installed with `sbx skills add`.
-Skills imported from the host must be imported again or added from a
-repository before they can be updated.
+`sbx skills update` only refreshes skills installed with `sbx skills add`. To
+refresh a skill imported from the host, run `sbx skills import` again. To manage
+it with `sbx skills update`, install it from a repository instead.
 
 Remove one or more installed skills:
 
@@ -65,8 +65,8 @@ Remove one or more installed skills:
 $ sbx skills rm frontend-design pdf
 ```
 
-Because running agents may be reading installed skills, `sbx` prompts before
-removing them. Use `--force` to skip the prompt in scripts.
+`sbx` asks for confirmation before removing skills that running agents may be
+using. Use `--force` to skip confirmation in scripts.
 
 ## Import skills from the host
 
@@ -113,8 +113,8 @@ When a skill already exists in the store, `sbx` prompts before replacing it.
 Use `--force` to replace existing skills without prompts. Importing replaces
 the complete skill directory rather than merging files. Run the import command
 again when you want to copy updates from the host. If an import replaces a
-repository-installed skill, the imported copy becomes authoritative and
-`sbx skills update` no longer refreshes it from the repository.
+repository-installed skill, `sbx` no longer associates that skill with its
+repository, so `sbx skills update` won't refresh it.
 
 ## Shared store behavior
 
