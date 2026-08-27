@@ -5,6 +5,7 @@ weight: 20
 description: Learn how to manage your company, including its organizations, owners, and members, using Docker Home.
 keywords: company, manage company, multiple organizations, company owners, company members, Docker Home, add organization, resend invites
 aliases:
+  - /admin/company/manage/
   - /admin/company/manage/organizations/
   - /admin/company/manage/owners/
   - /admin/company/manage/users/
@@ -46,7 +47,7 @@ longer manage it through the company, and its owner must manage it separately.
 
 A company can have multiple owners who manage the company and all of its
 organizations. For details about the company owner role and how it affects
-seats, see [Company roles](/manuals/admin/company/_index.md#company-roles).
+seats, see [Company roles](/manuals/accounts/organization/company/_index.md#company-roles).
 
 ### Add a company owner
 
@@ -108,7 +109,7 @@ To bulk resend invitations:
 
 If you have a self-serve subscription that has no pending subscription changes,
 you can add seats using Docker Home. For more information about adding seats,
-see [Manage seats](/manuals/admin/organization/manage/manage-seats.md#add-seats-to-your-subscription).
+see [Manage seats](/manuals/accounts/organization/manage/manage-seats.md#add-seats-to-your-subscription).
 
 If you have a sales-assisted subscription, you must contact Docker support or
 sales to add seats.
@@ -118,4 +119,4 @@ sales to add seats.
 Teams exist at the organization level, not the company level. After inviting
 members to an organization, you can add them to teams within that organization.
 For more details, see
-[Manage members on a team](/manuals/admin/organization/manage/members.md#manage-members-on-a-team).
+[Manage members on a team](/manuals/accounts/organization/manage/members.md#manage-members-on-a-team).

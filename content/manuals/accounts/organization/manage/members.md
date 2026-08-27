@@ -7,6 +7,7 @@ description: Manage organization members, including invitations, roles, teams,
 keywords: members, organization members, invitations, teams, manage team
   members, export member list, edit roles, user management
 aliases:
+  - /admin/organization/manage/members/
   - /docker-hub/members/
   - /admin/organization/members/
 ---
@@ -25,7 +26,7 @@ You can also select one or more product licenses for an invitee; Docker
 assigns available licenses when they accept. Unlike a seat, licenses aren't
 deducted from your organization's available licenses until the invitee accepts.
 See
-[Licenses and invites](/manuals/admin/organization/manage/manage-licenses.md#licenses-and-invites).
+[Licenses and invites](/manuals/accounts/organization/manage/manage-licenses.md#licenses-and-invites).
 
 ### Invite members via Docker ID or email address
 
@@ -137,7 +138,7 @@ able to invite more members.
 > Need to manage more than 1,000 team members?
 > [Upgrade to Docker Business for unlimited user invites](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminMembers)
 > and advanced role management. You can also
-> [add seats](/manuals/admin/organization/manage/manage-seats.md) to your
+> [add seats](/manuals/accounts/organization/manage/manage-seats.md) to your
 > subscription.
 
 ### Resend an invitation

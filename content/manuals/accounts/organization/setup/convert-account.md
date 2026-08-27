@@ -5,6 +5,7 @@ title: Convert an account into an organization
 keywords: docker hub, hub, organization, convert account, migrate account
 weight: 40
 aliases:
+  - /admin/organization/setup/convert-account/
   - /docker-hub/convert-account/
   - /admin/organization/convert-account/
 ---
@@ -15,7 +16,7 @@ Learn how to convert an existing user account into an organization. This is
 useful if you need multiple users to access your account and the repositories
 it’s connected to. Converting it to an organization gives you better control
 over permissions for these users through
-[teams](/manuals/admin/organization/manage/manage-a-team.md) and
+[teams](/manuals/accounts/organization/manage/manage-a-team.md) and
 [roles](/manuals/enterprise/security/roles-and-permissions.md).
 
 When you convert a user account to an organization, the account is migrated to

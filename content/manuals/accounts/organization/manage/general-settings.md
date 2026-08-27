@@ -1,11 +1,13 @@
 ---
 title: Change general organization information
 linkTitle: Change information
-weight: 30
+weight: 60
 description: Learn how to manage settings for organizations.
 keywords: organization, settings, Docker Home, manage, Docker organization, Gravatar, SCIM, SSO setup, domain management, organization settings
 aliases:
+  - /admin/organization/setup/general-settings/
   - /admin/organization/general-settings/
+  - /accounts/organization/setup/general-settings/
 ---
 
 Learn how to update your organization information.
@@ -36,4 +38,4 @@ After configuring your organization information, you can:
 - [Configure single sign-on (SSO)](/manuals/enterprise/security/single-sign-on/connect.md)
 - [Set up SCIM provisioning](/manuals/enterprise/security/provisioning/scim/_index.md)
 - [Manage domains](/manuals/enterprise/security/domain-management.md)
-- [Create a company](/manuals/admin/company/new-company.md)
+- [Create a company](/manuals/accounts/organization/company/new-company.md)

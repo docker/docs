@@ -8,6 +8,8 @@ keywords:
   manage docker account, account settings, update email, change password,
   Gravatar, two-factor authentication, personal access tokens, Google, GitHub,
   connected accounts, convert account, deactivate account, Docker Home
+aliases:
+  - /accounts/manage-account/
 ---
 
 You can manage your Docker account in Docker Home, including administrative
@@ -116,15 +118,15 @@ or GitHub. See Google or GitHub's documentation for more information:
 
 For information on converting your account into an organization, see
 [Convert an account into an
-organization](/manuals/admin/organization/setup/convert-account.md).
+organization](/manuals/accounts/organization/setup/convert-account.md).
 
 ## Deactivate your account
 
 For information on deactivating your account, see
-[Deactivate a Docker account](/manuals/accounts/deactivate-user-account.md).
+[Deactivate a Docker account](/manuals/accounts/individual/deactivate-user-account.md).
 
 ## Next steps
 
-- [Docker accounts overview](/manuals/accounts/_index.md)
-- [Create a Docker account](/manuals/accounts/create-account.md)
+- [Docker individual accounts overview](/manuals/accounts/individual/_index.md)
+- [Create a Docker account](/manuals/accounts/individual/create-account.md)
 - [Enable two-factor authentication](/manuals/security/2fa/_index.md)

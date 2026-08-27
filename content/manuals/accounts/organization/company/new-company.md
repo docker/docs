@@ -5,6 +5,7 @@ weight: 10
 description: Learn how to create a company to centrally manage multiple organizations.
 keywords: company, hub, organization, company owner, Docker Home, company management, Docker Business, create company
 aliases:
+  - /admin/company/new-company/
   - /docker-hub/new-company/
 ---
 

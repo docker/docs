@@ -79,22 +79,22 @@ params:
     icon: /icons/Scout.svg
     link: /scout/
   platform:
-  - title: Administration
-    description: Centralized observability for companies and organizations.
-    icon: shield-check
-    link: /admin/
+  - title: Accounts
+    description: Manage Docker individual and organization accounts.
+    icon: user-circle
+    link: /accounts/
   - title: Billing
     description: Manage billing and payment methods.
     icon: credit-card
     link: /billing/
-  - title: Accounts
-    description: Manage your Docker account.
-    icon: user-circle
-    link: /accounts/
   - title: Security
     description: Security guardrails for both administrators and developers.
     icon: lock-closed
     link: /security/
+  - title: FAQs
+    description: Frequently asked questions about Docker accounts, organizations, and companies.
+    icon: question-mark-circle
+    link: /faqs/
   - title: Subscription
     description: Commercial use licenses for Docker products.
     icon: credit-card

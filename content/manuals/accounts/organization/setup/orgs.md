@@ -5,6 +5,7 @@ weight: 10
 description: Learn how to create an organization.
 keywords: docker organizations, organization, create organization, docker teams, organization management
 aliases:
+  - /admin/organization/setup/orgs/
   - /docker-hub/orgs/
   - /admin/organization/orgs/
 ---
@@ -19,9 +20,9 @@ There are multiple ways to create an organization. You can either:
 
 ## Prerequisites
 
-- Before you create an organization, you need a [Docker ID](/manuals/accounts/create-account.md).
+- Before you create an organization, you need a [Docker ID](/manuals/accounts/individual/create-account.md).
 - For prerequisites and detailed instructions on converting an existing user account to an organization, see
-  [Convert an account into an organization](/manuals/admin/organization/setup/convert-account.md).
+  [Convert an account into an organization](/manuals/accounts/organization/setup/convert-account.md).
 
 > [!TIP]
 > Need a different plan for your team's needs? Review different [Docker subscriptions and features](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminOrgs) to choose a subscription for your organization.
@@ -36,7 +37,7 @@ There are multiple ways to create an organization. You can either:
    your organization in Docker Hub.
    - It's not possible to change the name of the organization after you've created it.
    - Your Docker ID and organization can't share the same name.
-   - If you want to use your Docker ID as the organization name, then you must first [convert your account into an organization](/manuals/admin/organization/setup/convert-account.md).
+   - If you want to use your Docker ID as the organization name, then you must first [convert your account into an organization](/manuals/accounts/organization/setup/convert-account.md).
 1. Enter your **Company name**. This is the full name of your company.
    - Docker displays the company name on your organization page and in the details of any
      public images you publish.

@@ -1,9 +1,10 @@
 ---
 title: Activity logs
-weight: 30
+weight: 40
 description: Learn how to access and interpret Docker activity logs for organizations and repositories.
 keywords: audit log, organization activity, Docker business logs, repository activity, track changes Docker, security logs Docker, filter logs, log Docker events
 aliases:
+- /admin/activity-logs/
 - /docker-hub/audit-log/
 - /admin/organization/activity-logs/
 ---

@@ -7,13 +7,15 @@ keywords:
   deactivate docker account, delete docker account, close docker account,
   disable docker account, account management, leave organization, privacy
   request, personal data
+aliases:
+  - /accounts/deactivate-user-account/
 ---
 
 Learn how to deactivate an individual Docker account, including the
 prerequisites required for deactivation.
 
 For information on deactivating an organization, see
-[Deactivate an organization](/manuals/admin/organization/deactivate-account.md).
+[Deactivate an organization](/manuals/accounts/organization/manage/deactivate-account.md).
 
 > [!WARNING]
 >

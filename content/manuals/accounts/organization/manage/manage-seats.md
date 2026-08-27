@@ -4,6 +4,7 @@ linkTitle: Seats
 description: Add or remove seats for Docker Team and Business subscriptions
 keywords: manage seats, add seats, remove seats, subscription billing, team members
 aliases:
+  - /admin/organization/manage/manage-seats/
   - /docker-hub/billing/add-seats/
   - /subscription/add-seats/
   - /docker-hub/billing/remove-seats/
