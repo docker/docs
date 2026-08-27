@@ -377,24 +377,13 @@ If you have set custom `XDG_STATE_HOME`, `XDG_CACHE_HOME`, or
 {{< /tab >}}
 {{< /tabs >}}
 
-## Control automatic diagnostics uploads
+## Enable automatic diagnostics uploads
 
-After certain daemon errors, Docker Sandboxes can collect and upload a
-diagnostics bundle to Docker Support. Automatic uploads require your consent.
-If you haven't saved a preference, an interactive `sbx` command prompts after
-it finishes. Enter `yes` to opt in, or enter `no` or press Enter to decline.
-Docker Sandboxes saves your choice and doesn't prompt again.
-
-Without a stored preference, non-interactive commands and commands running
-with `CI=true` or `DOCKER_CI=true` neither prompt nor upload. To set or change
-your preference directly, run:
+To opt in to automatic diagnostics uploads after certain daemon errors, run:
 
 ```console
 $ sbx settings set diagnostics.autoUpload yes
 ```
-
-Replace `yes` with `no` to turn off automatic uploads. Turning off automatic
-uploads also discards any bundles queued for upload.
 
 Automatic bundles include basic system information and client, daemon, crash,
 and MCP logs. Docker Sandboxes redacts recognized identity values and
@@ -416,6 +405,4 @@ $ sbx diagnose --upload
 The bundle contains daemon logs, diagnostic check results, and basic system
 information. When `--upload` is confirmed, the bundle is uploaded to Docker
 support and the command prints a diagnostics ID. Include this ID in your
-issue so the team can correlate it with the uploaded bundle. This manual
-upload is separate from the automatic upload preference: the command saves a
-local bundle and asks for confirmation each time.
+issue so the team can correlate it with the uploaded bundle.
