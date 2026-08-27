@@ -83,12 +83,12 @@ depends on what you register:
 Local stdio servers run on the host, not inside the sandbox. The agent inside
 the sandbox connects only to the MCP gateway.
 
-When a `--url` host resolves to a private, loopback, link-local, or cloud
-metadata address, `sbx` continues resolving and registering the server but
-prints a warning with the resolved address. Only register URLs you trust. A
-manifest URL can reach internal services or cloud metadata, and a DNS rebinding
-attack can change where the hostname resolves. For a trusted internal server,
-`--skip-ssrf-check` suppresses the check and warning for that registration.
+If a `--url` hostname resolves to a private, loopback, link-local, or cloud
+metadata address, `sbx` registers the server but warns you about the resolved
+address. Register only URLs you trust. Fetching a manifest from an untrusted
+URL can expose internal services or cloud metadata, and DNS rebinding can
+redirect a hostname after it has been checked. For a trusted internal server,
+pass `--skip-ssrf-check` to suppress the check and warning.
 
 ### Remote endpoint URL
 
@@ -261,11 +261,11 @@ $ sbx mcp auth serverx --no-scope
 
 You can't combine `--no-scope` with `--scope`. If the authorization server
 advertises supported scopes, each scope you choose must be in that set. The
-server can still refuse an advertised scope for a particular client. For a
-local authorization flow, `sbx` reports the requested, advertised, and refused
-scopes, then shows a command that retries with the refused scopes removed. If
-the server doesn't identify which scopes it refused, the retry command uses
-`--no-scope`. `sbx` doesn't retry with narrower permissions automatically.
+authorization server can still refuse an advertised scope for a particular
+client. For a local authorization flow, `sbx` lists the requested, advertised,
+and refused scopes and suggests a retry command. If the server identifies the
+refused scopes, the command removes them. Otherwise, it uses `--no-scope`.
+`sbx` never retries automatically.
 
 For each OAuth-backed remote server exposed to a sandbox, the gateway exposes a
 helper tool named `<server>-authorize`, such as `notion-authorize`. The agent can
