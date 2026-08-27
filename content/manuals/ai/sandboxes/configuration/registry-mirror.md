@@ -37,19 +37,19 @@ host.
 ## Mirror Docker pulls inside the sandbox
 
 Docker Sandboxes configures Docker Engine inside a sandbox to use the same
-mirror when the setting contains a reachable host without a path prefix.
+mirror when the setting contains a non-loopback host without a path prefix.
 
-| Mirror setting                              | Template and OCI kit pulls | Docker pulls inside the sandbox |
-| ------------------------------------------- | -------------------------- | ------------------------------- |
-| `registry.example.com`                      | Mirrored                   | Mirrored                        |
-| `registry.example.com:5000`                 | Mirrored                   | Mirrored                        |
-| `registry.example.com/docker-remote`        | Mirrored                   | Not mirrored                    |
-| `localhost:5000`, `127.0.0.1`, or `0.0.0.0` | Mirrored when host-reachable | Not mirrored                    |
+| Mirror setting                         | Template and OCI kit pulls | Docker pulls inside the sandbox |
+| -------------------------------------- | -------------------------- | ------------------------------- |
+| `registry.example.com`                 | Mirrored                   | Mirrored                        |
+| `registry.example.com:5000`            | Mirrored                   | Mirrored                        |
+| `registry.example.com/docker-remote`   | Mirrored                   | Not mirrored                    |
+| `localhost:5000` or `127.0.0.1`        | Mirrored                   | Not mirrored                    |
 
-Loopback and wildcard addresses refer to the sandbox itself from inside its
-network namespace, so Docker Sandboxes doesn't add them to the sandbox's Docker
-Engine configuration. A path prefix is also excluded because Docker Engine
-interprets mirror URL paths differently from image repository prefixes.
+Loopback addresses refer to the sandbox itself from inside its network
+namespace, so Docker Sandboxes doesn't add them to the sandbox's Docker Engine
+configuration. A path prefix is also excluded because Docker Engine interprets
+mirror URL paths differently from image repository prefixes.
 
 Docker Engine connects to the mirror over HTTPS, so the sandbox must trust the
 certificate that the mirror presents. For a mirror that uses an internal
