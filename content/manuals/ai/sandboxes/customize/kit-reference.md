@@ -354,11 +354,12 @@ ports:
 | Field       | Description                                                         |
 | ----------- | ------------------------------------------------------------------- |
 | `container` | Container port, 1 to 65535.                                         |
-| `protocol`  | `tcp` or `udp`. Empty means `tcp`.                                  |
+| `protocol`  | `tcp` or `udp`. Omit for `tcp4`, which binds only IPv4. Set `tcp` to bind both address families. |
 | `name`      | Optional label surfaced by tools that list published port bindings. |
 
-Host ports are allocated ephemerally on `127.0.0.1`. Users can pin host ports
-with `sbx ports --publish <host>:<container>`.
+Host ports are allocated ephemerally on the loopback addresses that match the
+protocol. Users can pin host ports with
+`sbx ports --publish <host>:<container>`.
 
 ## Environment
 

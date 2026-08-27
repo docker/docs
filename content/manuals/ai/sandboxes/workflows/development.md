@@ -45,7 +45,8 @@ $ sbx run --publish 8080:3000 --name my-sandbox claude
 ```
 
 For an existing sandbox, use [`sbx ports`](/reference/cli/sbx/ports/) to
-forward traffic from your host.
+forward traffic from your host. Publishing a port on a stopped local sandbox
+starts the sandbox first.
 
 The common case: an agent has started a dev server or API, and you want to open
 it in your browser or run tests against it.
@@ -70,7 +71,7 @@ lists them in detail:
 ```console
 $ sbx ls
 SANDBOX         AGENT   STATUS   PORTS                    WORKSPACE
-my-sandbox      claude  running  127.0.0.1:8080->3000/tcp /home/user/proj
+my-sandbox      claude  running  127.0.0.1:8080->3000/tcp4 /home/user/proj
 ```
 
 To stop forwarding a port:
@@ -82,12 +83,10 @@ $ sbx ports my-sandbox --unpublish 8080:3000
 For a service to be reachable, it must listen on all interfaces inside the
 sandbox, not only `127.0.0.1`. Bind it to `0.0.0.0` for IPv4 or `[::]` for both
 IPv4 and IPv6. Most dev servers need a flag like `--host 0.0.0.0` to do this.
-On the host, `--publish` listens on both `127.0.0.1` and `::1`, so a client
-resolving `localhost` might pick IPv6 and fail with "connection reset by peer"
-if the sandboxed service only listens on IPv4, even when
-`http://127.0.0.1:<port>/` works. To fix that, bind the service to `[::]`, or
-pin the published port to one family with `--publish 8080:3000/tcp4` or
-`/tcp6`.
+When you omit the protocol, `--publish` uses `tcp4` and listens on
+`127.0.0.1`. If you specify an IPv6 host IP, the omitted protocol uses `tcp6`
+instead. Set the protocol to `tcp` to listen on both `127.0.0.1` and `::1`, or
+use `tcp6` to listen only on IPv6.
 
 Published ports survive restarts: `sbx` re-publishes them when the sandbox or
 the daemon restarts. Explicit host ports are reused, while a port published with

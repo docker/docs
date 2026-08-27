@@ -321,7 +321,7 @@ them in detail.
 ```console
 $ sbx ls
 SANDBOX         AGENT   STATUS   PORTS                    WORKSPACE
-my-sandbox      claude  running  127.0.0.1:8080->3000/tcp /home/user/proj
+my-sandbox      claude  running  127.0.0.1:8080->3000/tcp4 /home/user/proj
 ```
 
 To stop forwarding a port:
