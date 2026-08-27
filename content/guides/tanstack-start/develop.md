@@ -121,10 +121,10 @@ services:
 > For more details, see the official guide:
 > [Use Compose Watch](/manuals/compose/how-tos/file-watch.md).
 
-### Step 3: Update vite.config.ts for Docker development
+### Step 3: Configure Vite for Docker development
 
 To make Vite's development server reachable from outside the container, add
-`server` options to your `vite.config.ts`:
+`server` options to your Vite config file (`vite.config.ts`):
 
 ```ts {hl_lines="11-15",linenos=true}
 import { defineConfig } from "vite";
