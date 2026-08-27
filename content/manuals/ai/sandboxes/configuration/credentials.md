@@ -279,28 +279,18 @@ Docker Sandboxes uses the value from the client that creates, starts, or joins
 each sandbox. It forwards that agent into the sandbox and sets `SSH_AUTH_SOCK`
 there.
 
-If your agent uses a custom socket path, such as the 1Password SSH agent,
-configure a fixed path:
+Run `sbx setup` to configure forwarding and choose which socket to use:
 
 ```console
-$ sbx settings set ssh.agentSocketPath /path/to/agent.sock
+$ sbx setup
 ```
 
-An empty `ssh.agentSocketPath`, which is the default, uses each client's
-current `SSH_AUTH_SOCK` instead. A non-empty value overrides client sockets
-with the fixed path.
+From the SSH agent row, you can disable forwarding, use each client's current
+`SSH_AUTH_SOCK`, or set a fixed socket path for every sandbox. A fixed path is
+useful for agents that use a custom socket, such as the 1Password SSH agent.
 
-To prevent sandboxes from using your SSH agent, turn off forwarding:
-
-```console
-$ sbx settings set ssh.agentForwardingEnabled false
-```
-
-You can also configure forwarding and choose between the current client socket
-and a fixed path by running `sbx setup`.
-
-Restart the daemon after changing either setting to replace forwarders for
-existing sandboxes:
+Restart the daemon after changing forwarding or the socket mode to replace
+forwarders for existing sandboxes:
 
 ```console
 $ sbx daemon restart
