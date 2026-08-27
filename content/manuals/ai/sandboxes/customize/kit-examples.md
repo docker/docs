@@ -358,11 +358,11 @@ sandbox:
 
 Claude Code merges the additional file with the sandbox-managed user settings.
 Because the file is under `files/home/`, it stays inside the sandbox instead of
-being written into a directly mounted host workspace. Launch the sandbox with
-the child kit's name:
+being written into a directly mounted host workspace. Launch the sandbox by
+passing the child kit directory as the agent positional:
 
 ```console
-$ sbx run claude-sonnet --kit ./claude-sonnet
+$ sbx run ./claude-sonnet
 ```
 
 Proxy-managed OAuth isn't supported for a third-party kit that extends the
@@ -451,15 +451,16 @@ sandbox:
 ```
 
 The child inherits the built-in image, credentials, network permissions,
-persistent volumes, settings, MCP integration, and agent instructions. Its
-`sandbox.entrypoint` replaces the inherited entrypoint. Proxy-managed OAuth
+persistent volumes, settings, MCP integration, agent instructions, setup
+entries, and environment variables. Its `sandbox.entrypoint` replaces the
+inherited entrypoint. Proxy-managed OAuth
 isn't supported for the extended agent, so follow the
 [Anthropic API-key setup](#customize-agent-settings) before launching it.
 
-Launch with the kit's `name:` as the agent argument to `sbx run`:
+Launch by passing the sandbox kit as the agent positional to `sbx run`:
 
 ```console
-$ sbx run claude-safe --kit ./claude-safe
+$ sbx run ./claude-safe
 ```
 
 For a step-by-step walkthrough of building a new sandbox kit from
@@ -470,8 +471,14 @@ scratch, see [Build an agent](build-an-agent.md).
 These patterns are all drawn from working kits in the
 [sbx-kits-contrib](https://github.com/docker/sbx-kits-contrib)
 repository, which contains each example as a complete, loadable kit.
-Use it to study the full shape of a kit, or load one directly:
+Use it to study the full shape of a kit. Load a mixin with `--kit`:
 
 ```console
 $ sbx run claude --kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=<kit>"
+```
+
+For a `kind: sandbox` kit, pass the reference as the agent positional instead:
+
+```console
+$ sbx run "git+https://github.com/docker/sbx-kits-contrib.git#dir=<kit>"
 ```

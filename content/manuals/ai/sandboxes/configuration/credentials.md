@@ -495,9 +495,10 @@ To scope the credential to a single sandbox, store it under that sandbox's name:
 $ gh auth token | sbx secret set --sandbox my-app --registry ghcr.io --password-stdin
 ```
 
-`sbx kit pull` also uses these credentials, with the Docker credential
-store as a fallback. `sbx kit push` uses only the Docker credential store —
-push targets still require a prior `docker login`.
+For Docker Hub, `sbx kit pull` and `sbx kit push` use the session from
+`sbx login`. For other registries, both commands use these credentials. Both
+commands fall back to the Docker credential store, so credentials from
+`docker login` also work.
 
 ### Remove registry credentials
 

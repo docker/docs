@@ -256,18 +256,17 @@ Validate the spec:
 $ sbx kit validate ./amp/
 ```
 
-Launch a sandbox with the kit, passing the kit's `name:` (`amp`) as the
-agent argument:
+Launch a sandbox with the kit by passing its directory as the agent positional:
 
 ```console
-$ sbx run --kit ./amp/ amp
+$ sbx run ./amp/
 ```
 
 The published copy of this kit also runs directly from the contrib
 repository:
 
 ```console
-$ sbx run --kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=amp" amp
+$ sbx run "git+https://github.com/docker/sbx-kits-contrib.git#dir=amp"
 ```
 
 ## Iterate
@@ -279,7 +278,7 @@ Two loops help:
   requests, then add their domains to `allowedDomains`.
 - Add domains to `deniedDomains` when the agent should stay blocked from
   a host even if another policy permits it.
-- Edit the spec and re-run `sbx run --kit ./amp/ amp` to pick up changes.
+- Edit the spec and re-run `sbx run ./amp/` to pick up changes.
   Remove the sandbox first (`sbx rm <name>`) for a clean start.
 
 Flesh out the `agentContext` block as you refine how Amp should behave in the
