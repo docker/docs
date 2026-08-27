@@ -241,6 +241,7 @@ Testcontainers
 tmpfs
 Traefik
 Trivy
+TanStack
 Trixie
 Turtlesim
 typesafe
