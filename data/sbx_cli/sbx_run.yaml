@@ -3,20 +3,44 @@ synopsis: Run an agent in a sandbox
 description: |-
     Run an agent in a sandbox, creating the sandbox if it does not already exist.
 
-    The first positional argument is the agent to run. To re-attach to an existing
-    sandbox by name, use --name; the agent positional is optional when the named
-    sandbox already exists and is read from its spec.
+    The first positional argument identifies the agent to run. It may be a built-in
+    agent name or a sandbox kit reference. Sandbox kit references may be local
+    directories, ZIP files, git repositories, or OCI references. Relative local
+    references must be explicit paths such as ./my-kit or ../my-kit.zip; bare values
+    retain their agent or sandbox-name meaning. To re-attach to an existing sandbox
+    by name, use --name; the agent positional is optional when the named sandbox
+    already exists and is read from its spec.
 
     Pass agent arguments after the "--" separator. Additional workspaces can be
-    provided as extra arguments. Append ":ro" to mount them read-only.
+    provided as extra arguments. Append ":ro" to mount them read-only; a read-only
+    argument may name a single file, which holds that one path out of reach inside a
+    workspace the sandbox can otherwise write.
+
+    Omit the path to mount the current directory. Pass a path to mount a different
+    workspace.
 
     To create a sandbox without attaching, use "sbx create" instead, or
     pass --detached (-d) to print the sandbox ID and exit without opening an
     interactive session.
 
-    Available agents: claude, codex, copilot, cursor, docker-agent, droid, gemini, kiro, opencode, shell
-usage: sbx run [flags] [AGENT] [PATH...] [-- AGENT_ARGS...]
+    With --cloud: the agent runs in the cloud sandbox image (started server-side).
+    Running an agent that has existing sandboxes (running or stopped) prompts you
+    to pick one to reuse or to create a new one. Pass --new to skip the prompt and
+    always create a fresh sandbox. --detached also skips the prompt and always
+    creates a new sandbox; a non-interactive run without --detached is refused.
+    Use --detached for non-interactive scripting (e.g.
+    sbx --cloud run -d claude && sbx --cloud exec ...).
+    Without --cpus/--memory a cloud sandbox defaults to 2 CPUs and 4 GiB.
+    Templates referenced via -t / --template must already exist in the cloud registry;
+    the CLI does not upload them automatically. See https://docs.docker.com/ai/sandboxes/ for the cloud sandbox model.
+
+    Available agents: claude, codex, cursor, devin, docker-agent, gemini, opencode, shell
+usage: sbx run [flags] [AGENT|SANDBOX_KIT] [PATH...] [-- AGENT_ARGS...]
 options:
+    - name: allow-network
+      default_value: '[]'
+      usage: |
+        Network pattern to allow for cloud sandbox egress (cloud only; can be specified multiple times)
     - name: clone
       default_value: "false"
       usage: |
@@ -29,6 +53,9 @@ options:
       default_value: '[]'
       usage: |
         Add a per-sandbox network deny rule at creation time. Can be specified multiple times. The rule applies only to the new sandbox and can be listed or removed later with `sbx policy ls <NAME>` / `sbx policy rm network --sandbox <NAME> --resource <HOST>`. Safe under centralized governance because a local deny can only narrow, never widen, egress.
+    - name: detach-keys
+      usage: |
+        Override the detach gesture that leaves the agent running (Docker-style, e.g. "ctrl-\", "ctrl-x,ctrl-d"). Default: Ctrl-\. Use this when the default collides with an agent's keymap (cloud only).
     - name: env
       shorthand: e
       default_value: '[]'
@@ -42,17 +69,40 @@ options:
       shorthand: h
       default_value: "false"
       usage: help for run
+    - name: image-ref
+      usage: |
+        OCI image reference for inline-mode cloud create (mutually exclusive with --template; requires --cpus and --memory)
     - name: kit
       default_value: '[]'
       experimental: true
       usage: |
-        Kit reference (directory, ZIP, or OCI). Can be specified multiple times
+        Additional kit reference (must be a mixin; directory, ZIP, git, or OCI). Can be specified multiple times
+    - name: kit-arg
+      default_value: '[]'
+      experimental: true
+      usage: |
+        Value for an argument the kit declares, as name=value for every kit or kit.name=value for one (can be repeated)
+    - name: kit-args-file
+      default_value: '[]'
+      experimental: true
+      usage: |
+        File of name=value kit arguments, one per line (can be repeated); --kit-arg overrides
     - name: memory
       shorthand: m
       usage: |
         Memory limit in binary units (e.g., 1024m, 8g). Default: 50% of host memory, max 32 GiB
     - name: name
       usage: 'Name for the sandbox (default: <agent>-<workdir>)'
+    - name: new
+      default_value: "false"
+      usage: |
+        Always create a new cloud sandbox instead of prompting to reuse an existing one (cloud only)
+    - name: on-timeout
+      usage: |
+        What happens when --ttl lapses: 'delete' (default) tombstones the sandbox, or 'stop' stops it in place so it can be started again later (cloud only; 'stop' requires your account to be entitled to it).
+    - name: platform
+      usage: |
+        Target platform: linux/amd64 or linux/arm64 (cloud only). With --image-ref, omitting it lets the server resolve the platform from the image and the CLI sends the local CPU as a hint for multi-platform images. With --template, omitting it inherits the template platform.
     - name: publish
       shorthand: p
       default_value: '[]'
@@ -62,14 +112,41 @@ options:
       shorthand: t
       usage: |
         Container image to use for the sandbox (default: agent-specific image)
+    - name: ttl
+      default_value: 0s
+      usage: |
+        Cloud sandbox time-to-live before it times out (e.g. 30m, 2h; cloud only; default: server-side)
+    - name: volume
+      shorthand: v
+      default_value: '[]'
+      experimental: true
+      usage: |
+        Attach an existing persistent volume, NAME:MOUNTPATH (cloud only, experimental; repeatable)
 inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
     - name: debug
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
 example: |4-
-      # Create and run a sandbox with claude in current directory
+      # Create and run a sandbox with claude in the current directory
       sbx run claude
+
+      # Create and run from a local sandbox kit
+      sbx run ../path/to/my-agent/
+
+      # Create and run from an OCI sandbox kit
+      sbx run ghcr.io/foo/my-agent:latest
+
+      # Add a mixin to a built-in agent
+      sbx run claude --kit ./my-mixin/
 
       # Create and run with additional workspaces (read-only)
       sbx run claude . /path/to/docs:ro
@@ -82,5 +159,8 @@ example: |4-
 
       # Run a sandbox with agent arguments
       sbx run claude -- --continue
+
+      # Create a cloud sandbox non-interactively and print its ID
+      sbx --cloud run --detached claude
 see_also:
     - sbx - Manage AI coding agent sandboxes.

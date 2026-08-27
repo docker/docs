@@ -1,8 +1,8 @@
 name: sbx kit add
-synopsis: Add a kit to a sandbox
+synopsis: Add a mixin to a sandbox
 experimental: true
 description: |-
-    Add a kit artifact to an existing sandbox.
+    Add a mixin artifact to an existing sandbox.
 
     The sandbox's container is recreated with the new kit appended to its
     original kit list, preserving kit-owned volumes (e.g. agent session
@@ -22,13 +22,31 @@ options:
       shorthand: h
       default_value: "false"
       usage: help for add
+    - name: kit-arg
+      default_value: '[]'
+      experimental: true
+      usage: |
+        Value for an argument the kit declares, as name=value for every kit or kit.name=value for one (can be repeated)
+    - name: kit-args-file
+      default_value: '[]'
+      experimental: true
+      usage: |
+        File of name=value kit arguments, one per line (can be repeated); --kit-arg overrides
 inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
     - name: debug
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
 example: |4-
-      # Add a local kit directory to a sandbox
+      # Add a local mixin directory to a sandbox
       sbx kit add my-sandbox ./mcp-postgres/
 
       # Add a kit from a ZIP file
@@ -39,5 +57,8 @@ example: |4-
 
       # Add a kit from a git repository
       sbx kit add my-sandbox git+https://github.com/org/kits.git#dir=mcp-postgres
+
+      # Add a parameterized kit
+      sbx kit add my-sandbox ./mcp-postgres/ --kit-arg host=db.internal
 see_also:
     - sbx kit - (Experimental) Manage kit artifacts

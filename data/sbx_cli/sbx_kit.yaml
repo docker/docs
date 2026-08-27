@@ -4,8 +4,9 @@ experimental: true
 description: |-
     Manage kit artifacts.
 
-    Kits are declarative YAML artifacts that extend sandbox agents with additional
-    credentials, network policies, environment variables, startup commands, and files.
+    Kits are declarative YAML artifacts that define sandbox agents or extend them
+    with additional credentials, network policies, environment variables, startup
+    commands, and files.
 usage: sbx kit COMMAND
 options:
     - name: help
@@ -13,13 +14,21 @@ options:
       default_value: "false"
       usage: help for kit
 inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
     - name: debug
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
 see_also:
     - sbx - Manage AI coding agent sandboxes.
-    - sbx kit add - Add a kit to a sandbox
+    - sbx kit add - Add a mixin to a sandbox
     - sbx kit inspect - Display details about a kit artifact
     - sbx kit pack - Package a directory as a kit artifact
     - sbx kit provenance - Show the SLSA provenance attached to a kit

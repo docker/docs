@@ -1,0 +1,65 @@
+name: sbx move
+synopsis: Move a sandbox between local and cloud
+description: |-
+    Move a sandbox between the local host and Docker's hosted Sandboxes service.
+
+    Move captures the source sandbox's filesystem as a template, transports the
+    OCI image across the local↔cloud boundary, and launches a new sandbox from
+    it on the destination.
+
+    Semantics (per the May 2026 design):
+      - Source disposition: neither direction deletes the source. A local→cloud
+        move stops the local source. A cloud→local move also tries to stop a
+        source with a structured agent (best-effort: an ineligible account, or a
+        request/wait failure, leaves it running instead); once stopped it keeps
+        its ID and full state, so 'sbx --cloud run <agent>' brings it back, and
+        'sbx --cloud rm <id>' deletes it when you no longer need it. A source
+        with no reported agent is left running instead.
+      - The destination sandbox gets a new ID; pass --name to control its name.
+      - Filesystem-only: in-memory state, running processes, and open sockets
+        are NOT carried across.
+      - Network policy: a local→cloud move carries the source's egress
+        allow/deny rules onto the cloud sandbox. A cloud→local move starts the
+        local sandbox with the host's default network posture (the cloud source's
+        policy is not currently read back). Secrets never follow.
+usage: sbx move SANDBOX [flags]
+options:
+    - name: force
+      shorthand: f
+      default_value: "false"
+      usage: |
+        Skip the confirmation prompt when moving a sandbox whose workspace files won't travel to the cloud
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for move
+    - name: name
+      usage: |
+        Name for the destination sandbox (default: derived from the source ID)
+    - name: to
+      usage: |
+        Destination of the move: 'local' (cloud→local) or 'cloud' (local→cloud)
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      # Move a cloud sandbox down to the local host
+      sbx move sbx_abc123 --to local
+
+      # Move a local sandbox up to the cloud
+      sbx move my-sandbox --to cloud
+
+      # Give the destination sandbox a custom name
+      sbx move sbx_abc123 --to local --name big-refactor
+see_also:
+    - sbx - Manage AI coding agent sandboxes.

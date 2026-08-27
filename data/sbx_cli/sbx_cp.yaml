@@ -2,7 +2,9 @@ name: sbx cp
 synopsis: Copy files or directories between a sandbox and the host
 description: |-
     Either SRC or DST must be a sandbox path, written as SANDBOX:PATH.
-    The other must be a local path. Copying between two sandboxes is not supported.
+    The other must be a local path. Copying between two sandboxes is not supported. Or — with --cloud — the cloud sandbox
+    ID (sbx_*) or name from "sbx --cloud ls". Cloud transfers go through the Docker
+    Sandboxes Cloud file API instead of the local sandboxd.
 
     When copying a directory, the directory itself is placed at the destination.
     If the destination path does not exist it is created; if it already exists
@@ -18,6 +20,14 @@ options:
       default_value: "false"
       usage: help for cp
 inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
     - name: debug
       shorthand: D
       default_value: "false"
@@ -31,5 +41,9 @@ example: |4-
 
       # Copy a directory
       sbx cp ./src/ my-sandbox:/home/user/src
+
+      # Copy to/from a cloud sandbox
+      sbx --cloud cp ./config.json sbx_abc:/workspace/config.json
+      sbx --cloud cp sbx_abc:/workspace/out.log ./
 see_also:
     - sbx - Manage AI coding agent sandboxes.

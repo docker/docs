@@ -3,22 +3,40 @@ synopsis: Create a sandbox for claude
 description: |-
     Create a sandbox with access to a host workspace for claude.
 
-    The workspace path is required and will be mounted inside the sandbox at the
-    same path as on the host. Additional workspaces can be provided as extra
-    arguments. Append ":ro" to mount them read-only.
+    The workspace path is mounted inside the sandbox at the same path as on the
+    host. Additional workspaces can be provided as extra arguments. Append ":ro" to
+    mount them read-only; a read-only argument may name a single file, which holds
+    that one path out of reach inside a workspace the sandbox can otherwise write.
+
+    Omit the path to create a sandbox without a workspace bind mount: the agent
+    then works in the container's own filesystem instead of on your files.
 
     Use "sbx run --name SANDBOX" to attach to the agent after creation.
-usage: sbx create claude PATH [PATH...] [flags]
+
+    Without --cpus/--memory a cloud sandbox defaults to 2 CPUs and 4 GiB.
+usage: sbx create claude [PATH...] [flags]
 options:
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for claude
 inherited_options:
+    - name: allow-network
+      default_value: '[]'
+      usage: |
+        Network pattern to allow for cloud sandbox egress (cloud only; can be specified multiple times)
     - name: clone
       default_value: "false"
       usage: |
         Run the agent on a private in-container clone of the host Git repository (mounted read-only) instead of bind-mounting the workspace; the agent's commits are accessible via the sandbox-<name> git remote on the host
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
     - name: cpus
       default_value: "0"
       usage: |
@@ -40,11 +58,24 @@ inherited_options:
       default_value: '[]'
       usage: |
         Read environment variables from a file (can be repeated). --env wins over any file; a later file wins over an earlier one
+    - name: image-ref
+      usage: |
+        OCI image reference for inline-mode cloud create (mutually exclusive with --template; requires --cpus and --memory)
     - name: kit
       default_value: '[]'
       experimental: true
       usage: |
-        Kit reference (directory, ZIP, or OCI). Can be specified multiple times
+        Additional kit reference (must be a mixin; directory, ZIP, git, or OCI). Can be specified multiple times
+    - name: kit-arg
+      default_value: '[]'
+      experimental: true
+      usage: |
+        Value for an argument the kit declares, as name=value for every kit or kit.name=value for one (can be repeated)
+    - name: kit-args-file
+      default_value: '[]'
+      experimental: true
+      usage: |
+        File of name=value kit arguments, one per line (can be repeated); --kit-arg overrides
     - name: memory
       shorthand: m
       usage: |
@@ -52,6 +83,12 @@ inherited_options:
     - name: name
       usage: |
         Name for the sandbox (defaults to <agent>-<workdir>; at least two characters, starting with a letter or number, containing only letters, numbers, hyphens and periods; 'default' is reserved)
+    - name: on-timeout
+      usage: |
+        What happens when --ttl lapses: 'delete' (default) tombstones the sandbox, or 'stop' stops it in place so it can be started again later (cloud only; 'stop' requires your account to be entitled to it).
+    - name: platform
+      usage: |
+        Target platform: linux/amd64 or linux/arm64 (cloud only). With --image-ref, omitting it lets the server resolve the platform from the image and the CLI sends the local CPU as a hint for multi-platform images. With --template, omitting it inherits the template platform.
     - name: publish
       shorthand: p
       default_value: '[]'
@@ -65,6 +102,16 @@ inherited_options:
       shorthand: t
       usage: |
         Container image to use for the sandbox (default: agent-specific image)
+    - name: ttl
+      default_value: 0s
+      usage: |
+        Cloud sandbox time-to-live before it times out (e.g. 30m, 2h; cloud only; default: server-side)
+    - name: volume
+      shorthand: v
+      default_value: '[]'
+      experimental: true
+      usage: |
+        Attach an existing persistent volume, NAME:MOUNTPATH (cloud only, experimental; repeatable)
 example: |4-
       # Create in the current directory
       sbx create claude .
@@ -74,5 +121,8 @@ example: |4-
 
       # Create with additional read-only workspaces
       sbx create claude . /path/to/docs:ro
+
+      # Create without a workspace bind mount
+      sbx create claude
 see_also:
     - sbx create - Create a sandbox for an agent

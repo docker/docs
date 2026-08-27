@@ -17,7 +17,18 @@ options:
       shorthand: h
       default_value: "false"
       usage: help for inspect
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
 inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
     - name: debug
       shorthand: D
       default_value: "false"
@@ -28,5 +39,8 @@ example: |4-
 
       # Inspect a rule by ID
       sbx policy inspect 2d3c1f0e-4a73-4e05-bc9d-f2f9a4b50d67
+
+      # Machine-readable output for scripting
+      sbx policy inspect "Developer access" --json
 see_also:
     - sbx policy - Manage sandbox policies

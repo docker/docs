@@ -1,0 +1,32 @@
+name: sbx volume create
+synopsis: Create a new persistent volume
+description: |-
+    Create a new persistent volume.
+
+    The volume name must be unique per account; an attempt to create a volume
+    with a name already in use is rejected.
+usage: sbx volume create NAME [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for create
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: '  sbx --cloud volume create my-cache'
+see_also:
+    - sbx volume - Manage persistent volumes (cloud-only)

@@ -1,0 +1,39 @@
+name: sbx template inspect
+synopsis: Show full metadata for a single template
+description: |-
+    Show full metadata for a single template.
+
+    NAME|ID can be either a template name (resolved to its ID via the server's
+    ?name= filter) or a template ID (tmpl_*).
+
+    Cloud-only in v1: requires --cloud.
+usage: sbx template inspect NAME|ID [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for inspect
+    - name: json
+      default_value: "false"
+      usage: Output in JSON format
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      sbx template inspect my-template --cloud
+      sbx template inspect tmpl_abc123 --cloud
+
+      # Output in JSON format
+      sbx template inspect my-template --cloud --json
+see_also:
+    - sbx template - Manage sandbox templates

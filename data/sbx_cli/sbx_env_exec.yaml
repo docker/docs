@@ -2,16 +2,31 @@ name: sbx env exec
 synopsis: Execute a command inside a sandbox environment
 experimental: true
 description: |-
-    Run COMMAND in the sandbox declared in .sbxenv.yaml. The sandbox
+    Run COMMAND in the sandbox declared in sbxenv.yaml. The sandbox
     must already exist (see "sbx env create" and "sbx env run"); a stopped sandbox is
     started first.
 
     Arguments before `--` are environment-file paths, following the same rules as
     the other "sbx env" subcommands: each PATH may be a directory (the file is
-    <PATH>/.sbxenv.yaml) or the path to the environment file itself, and passing
+    <PATH>/sbxenv.yaml) or the path to the environment file itself, and passing
     more than one deep-merges them in order. Without a `--` every positional
     argument forms the command and the environment file is read from the current
     directory.
+
+    A directory resolves to the sbxenv.yaml in it and to no other name; any
+    other file is read only when a PATH names it. The hidden .sbxenv.yaml was once
+    read as a directory's own environment too, so a project still holding one now
+    reads as having none.
+
+    With no PATH, an existing .sbxenv.yaml in your home directory is merged
+    underneath as a base layer for defaults shared across projects; naming any
+    PATH skips the layer. It may not set "name:" or "workspace:", each of which
+    identifies a single project. Changing its "agent:" changes the derived
+    <agent>-<directory-basename> sandbox name, leaving sandboxes created under
+    the previous name for "sbx env rm" to miss.
+
+    A list such as "ports" or "mcp.servers" concatenates across layers rather
+    than overriding, so an entry declared in both appears twice.
 
     Flags match the behavior of "sbx exec".
 usage: sbx env exec [flags] [PATH...] -- COMMAND [ARG...]
@@ -26,6 +41,16 @@ options:
       shorthand: e
       default_value: '[]'
       usage: Set environment variables
+    - name: env-arg
+      default_value: '[]'
+      experimental: true
+      usage: |
+        Value for an argument the environment file declares, as name=value (can be repeated)
+    - name: env-args-file
+      default_value: '[]'
+      experimental: true
+      usage: |
+        File of name=value environment arguments, one per line (can be repeated); --env-arg overrides
     - name: env-file
       default_value: '[]'
       usage: Read in a file of environment variables
@@ -51,6 +76,14 @@ options:
       shorthand: w
       usage: Working directory inside the container
 inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
     - name: debug
       shorthand: D
       default_value: "false"
@@ -63,6 +96,6 @@ example: |4-
       sbx env exec -it -- bash
 
       # Run against explicitly merged environment files
-      sbx env exec .sbxenv.yaml override.yaml -- npm test
+      sbx env exec sbxenv.yaml override.yaml -- npm test
 see_also:
-    - sbx env - (Experimental) Manage sandboxes declaratively from a .sbxenv.yaml file
+    - sbx env - (Experimental) Manage sandboxes declaratively from an sbxenv.yaml file

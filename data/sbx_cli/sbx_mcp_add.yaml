@@ -24,15 +24,16 @@ description: |-
     docker.io/foo:tag) are no longer accepted. Use a server manifest instead.
 
     SSRF guard and --skip-ssrf-check:
-      A --url whose host resolves to a private/RFC1918, loopback, link-local,
-      or cloud-metadata address is rejected by the SSRF guard (this protects
-      against manifest URLs that reach internal services, cloud metadata, or
-      DNS-rebinding targets). Some legitimate servers live on private networks
-      (split-horizon DNS, internal load balancers, VPN-only endpoints,
-      PrivateLink), so their public hostname resolves to a private address.
-      Pass --skip-ssrf-check to opt out of the guard for a single add when you
-      trust the host. This also disables DNS-rebinding/redirect re-checks, so
-      use it only for URLs you control.
+      A --url whose host resolves to a private/RFC1918, loopback, link-local, or
+      cloud-metadata address is fetched anyway, but flagged: the add proceeds and
+      a warning naming the resolved address is printed (this protects against
+      manifest URLs that reach internal services, cloud metadata, or
+      DNS-rebinding targets by making them visible, not by blocking them). Some
+      legitimate servers live on private networks (split-horizon DNS, internal
+      load balancers, VPN-only endpoints, PrivateLink), so their public hostname
+      resolves to a private address and the warning is expected noise for them.
+      Pass --skip-ssrf-check to silence the check entirely for a single add when
+      you trust the host; use it only for URLs you control.
 
     OAuth for remote endpoints (--oauth-authorization-server / --client-id):
       Two related options configure OAuth for a remote --url server (both are
@@ -42,8 +43,10 @@ description: |-
       metadata for a server that publishes no well-known RFC 9728/8414 metadata
       (e.g. Gmail). It is a local file path or an http(s) URL to a JSON document
       conforming to the RFC 8414 oauth-authorization-server shape
-      (authorization_endpoint and token_endpoint are required). In this CLI it
-      must be accompanied by --client-id.
+      (authorization_endpoint and token_endpoint are required). --client-id is
+      required alongside it UNLESS the metadata document itself advertises a
+      registration_endpoint, in which case a client is registered dynamically
+      (RFC 7591) and --client-id may be omitted.
 
       --client-id supplies a PRE-REGISTERED OAuth client. It may be given WITHOUT
       --oauth-authorization-server: the server's authorization metadata is then
@@ -90,16 +93,35 @@ description: |-
           field is optional in RFC 8414), the requirement cannot be determined and
           the add proceeds as usual.
 
-    Default OAuth scopes (--scope):
+    Default OAuth scopes (--scope / --no-scope):
       --scope records the DEFAULT set of scopes to request at consent time for a
-      remote --url OAuth server (repeatable). These are requested by 'sbx mcp auth'
-      when it is run with no --scope of its own. Scopes are validated only when the
-      authorization server advertises a supported set (RFC 8414 scopes_supported):
-      then every scope must be a member or the add fails naming the offending
-      scope(s). If the server advertises no supported set (the field is optional in
-      RFC 8414), the requested scopes are accepted as given. --scope applies both to
-      a hand-supplied override and to a plain --url server whose OAuth metadata is
-      discovered.
+      remote --url OAuth server (repeatable). Precedence at authorization time is
+      --no-scope > an explicit 'sbx mcp auth --scope' > the set recorded here > the
+      scope set the RESOURCE itself says it requires (from its RFC 9728
+      protected-resource metadata or its WWW-Authenticate challenge) > nothing, and
+      "nothing" means the 'scope' parameter is OMITTED so the authorization server
+      applies its own default grant (RFC 6749 §3.3). The server's advertised set is
+      never requested wholesale.
+
+      A resource that publishes a required set therefore gets it requested with no
+      flag at all, and the consent block marks that set as derived rather than
+      chosen. --no-scope suppresses it and takes the server's default grant.
+
+      Scopes you name are validated only when the authorization server advertises a
+      supported set (RFC 8414 scopes_supported): then every scope must be a member or
+      the add fails naming the offending scope(s). If the server advertises no
+      supported set (the field is optional in RFC 8414), the requested scopes are
+      accepted as given. A set derived from the resource's own required list is never
+      validated — it is the server's statement about itself, and scopes_supported is
+      allowed to be non-exhaustive. Validation is a spelling check, not a promise: scopes_supported is what
+      the server SUPPORTS, not what it will grant this client, so a scope it
+      advertises can still be refused at consent time.
+
+      Scope values may be URN-shaped (urn:ietf:params:oauth:scope:mail) or
+      URL-shaped (https://www.fastmail.com/dev/mcp). Neither needs quoting — a scope
+      token cannot contain a space or a quote — and both are percent-encoded
+      normally on the wire. --scope applies both to a hand-supplied override and to
+      a plain --url server whose OAuth metadata is discovered.
 
     Alternative input — local stdio command (--command + --args):
       The command runs as a subprocess on the HOST, outside the sandbox.
@@ -128,25 +150,37 @@ options:
     - name: local
       default_value: "false"
       usage: Run registry OCI server locally via docker run
+    - name: no-scope
+      default_value: "false"
+      usage: |
+        Request no scopes during add-time authorization, so the authorization server applies its own default grant. Suppresses the resource's required set; cannot be combined with --scope. Applies to --url remote OAuth servers.
     - name: oauth-authorization-server
       usage: |
         Path or http(s) URL to an RFC 8414 oauth-authorization-server metadata JSON document
     - name: scope
       default_value: '[]'
       usage: |
-        Default OAuth scope to request at consent time (repeatable; must be advertised by the server's authorization metadata). Applies to --url remote OAuth servers.
-    - name: skip-ssrf-check
-      default_value: "false"
-      usage: |
-        Disable the SSRF guard for this add: allow a --url whose host resolves to a private/metadata address (operator asserts the host is trusted)
-    - name: skip_auth
+        Default OAuth scope to request at consent time (repeatable; must be advertised by the server's authorization metadata, which does not promise the server will grant it). With no --scope, the scope set the resource itself requires is requested; with neither, no scopes are requested and the authorization server applies its own default grant. Applies to --url remote OAuth servers.
+    - name: skip-auth
       default_value: "false"
       usage: |
         Register an OAuth server without starting the hosted OAuth flow
+    - name: skip-ssrf-check
+      default_value: "false"
+      usage: |
+        Silence the SSRF check for this add: a --url whose host resolves to a private/metadata address is registered either way, but with this flag no warning is printed (operator asserts the host is trusted)
     - name: url
       usage: |
         MCP server manifest URL, remote endpoint URL, or dhi.io image ref
 inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
     - name: debug
       shorthand: D
       default_value: "false"
@@ -188,6 +222,9 @@ example: |4-
       # Record default OAuth scopes to request at consent time (must be advertised
       # by the server's authorization metadata; repeat --scope for each one)
       sbx mcp add acme --url https://mcp.acme.com/mcp --scope read --scope write
+
+      # URN- and URL-shaped scope values are ordinary scopes and need no quoting
+      sbx mcp add fastmail --url https://api.fastmail.com/mcp --scope https://www.fastmail.com/dev/mcp --scope offline_access
 
       # Local stdio command (runs on host — development only)
       sbx mcp add github --command npx --args @modelcontextprotocol/server-github

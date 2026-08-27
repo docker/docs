@@ -1,0 +1,30 @@
+name: sbx skills update
+synopsis: Update skills added from repositories
+experimental: true
+description: |-
+    Download the latest versions of skills installed with 'sbx skills add'.
+
+    With no names, every skill added from a repository is updated. Specify one or
+    more names to update only those skills. Skills installed with 'sbx skills
+    import' must be added from a repository before they can be updated.
+usage: sbx skills update [skill]... [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for update
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx skills - (Experimental) Manage skills available in sandboxes

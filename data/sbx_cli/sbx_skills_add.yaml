@@ -1,0 +1,48 @@
+name: sbx skills add
+synopsis: Add skills from a Git repository
+experimental: true
+description: |-
+    Install skills from a Git repository for use in Docker Sandboxes. The
+    repository must contain one or more valid SKILL.md files.
+
+    All discovered skills are installed when --skill is omitted. Use --skill one
+    or more times, or pass a comma-separated list, to install only named skills.
+    Replacing an installed skill requires confirmation; use --force to skip
+    prompts.
+
+    The repository can be specified as a Git URL or as GitHub owner/repository
+    shorthand. Skills installed with this command can later be refreshed with
+    'sbx skills update'.
+usage: sbx skills add <repository> [flags]
+options:
+    - name: force
+      shorthand: f
+      default_value: "false"
+      usage: Overwrite existing skills without prompting
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for add
+    - name: skill
+      shorthand: s
+      default_value: '[]'
+      usage: Add only the named skill (repeatable or comma-separated)
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      sbx skills add https://github.com/anthropics/skills --skill frontend-design
+      sbx skills add anthropics/skills --skill frontend-design --skill pdf
+      sbx skills add https://github.com/anthropics/skills --force
+see_also:
+    - sbx skills - (Experimental) Manage skills available in sandboxes

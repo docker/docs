@@ -5,13 +5,47 @@ description: |-
 
     The loaded image can be used as a template for new sandboxes.
     Tar files are typically created with: sbx template save SANDBOX TAG --output FILE
-usage: sbx template load FILE [flags]
+
+    With --cloud:
+    The tar is uploaded to the cloud template registry as a new template.
+    Takes two arguments (FILE, NAME). NAME must be unique per account.
+    --cpus and --memory-mib are required (the server enforces power-of-two
+    CPUs and memory:cpu ratio constraints). --capture-mode controls what
+    gets captured for the template: "disk" (default) is faster to load and
+    cold-boots from the filesystem; "all" captures memory + disk + microVM
+    checkpoint so subsequent runs resume in sub-second time at the cost of
+    a slower load.
+
+    Cloud loads upload your full tar to the registry; multi-GB uploads can
+    take several minutes. See https://docs.docker.com/ai/sandboxes/ for the snapshot/load model.
+usage: sbx template load FILE [NAME] [flags]
 options:
+    - name: capture-mode
+      default_value: disk
+      usage: |
+        What gets captured for this template. "disk" (default) captures only the filesystem — cold-boot from a standard OCI image, faster load. "all" captures memory + disk + microVM checkpoint — sub-second TTI on resume, slower load. Only effective with --cloud.
+    - name: cpus
+      default_value: "0"
+      usage: Number of CPUs (1, 2, 4, 8, or 16; required with --cloud)
+    - name: description
+      usage: Optional template description (--cloud only)
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for load
+    - name: memory-mib
+      default_value: "0"
+      usage: |
+        Memory in MiB (512–32768, must satisfy 2:1/1:1/1:2 ratio with --cpus; required with --cloud)
 inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
     - name: debug
       shorthand: D
       default_value: "false"
@@ -23,5 +57,14 @@ example: |4-
 
       # Use the loaded image as a template
       sbx run -t myimage:v1.0 claude
+
+      # Cloud: upload a tar as a cloud-managed template (disk capture, faster load)
+      sbx template load /tmp/myimage.tar my-template --cloud --cpus 2 --memory-mib 2048
+
+      # Cloud: capture memory + disk + microVM checkpoint for sub-second resume
+      sbx template load /tmp/myimage.tar my-template --cloud --cpus 2 --memory-mib 2048 --capture-mode all
+
+      # Cloud: with a description
+      sbx template load /tmp/myimage.tar my-template --cloud --cpus 2 --memory-mib 2048 --description "Nightly baseline"
 see_also:
     - sbx template - Manage sandbox templates

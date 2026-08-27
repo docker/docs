@@ -1,0 +1,33 @@
+name: sbx volume rm
+synopsis: Delete a persistent volume
+description: |-
+    Delete a persistent volume by name.
+
+    Volumes attached to active sandboxes cannot be deleted; detach them
+    first by stopping or deleting the sandbox(es) that mount the volume.
+usage: sbx volume rm NAME [flags]
+options:
+    - name: force
+      shorthand: f
+      default_value: "false"
+      usage: Skip confirmation prompt
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for rm
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: '  sbx --cloud volume rm my-cache'
+see_also:
+    - sbx volume - Manage persistent volumes (cloud-only)

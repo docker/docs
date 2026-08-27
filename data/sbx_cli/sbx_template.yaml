@@ -5,6 +5,9 @@ description: |-
 
     Templates are saved snapshots of sandboxes that can be reused to create new
     sandboxes with: sbx run -t TAG AGENT [WORKSPACE]
+
+    Cloud mode (--cloud) snapshots and loads typically produce multi-GB artifacts
+    and take several minutes. See https://docs.docker.com/ai/sandboxes/ for details.
 usage: sbx template COMMAND
 options:
     - name: help
@@ -12,12 +15,21 @@ options:
       default_value: "false"
       usage: help for template
 inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
     - name: debug
       shorthand: D
       default_value: "false"
       usage: Enable debug logging
 see_also:
     - sbx - Manage AI coding agent sandboxes.
+    - sbx template inspect - Show full metadata for a single template
     - sbx template load - Load an image from a tar file into the sandbox runtime
     - sbx template ls - List template images
     - sbx template rm - Remove a template image

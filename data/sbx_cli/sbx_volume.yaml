@@ -1,0 +1,36 @@
+name: sbx volume
+synopsis: Manage persistent volumes (cloud-only)
+description: |-
+    Manage persistent volumes for cloud sandboxes.
+
+    Volumes provide persistent storage that survives across sandbox runs.
+    Data is saved as a snapshot when a sandbox exits, not continuously
+    synced. If multiple sandboxes mount the same volume concurrently, the
+    last sandbox to exit wins — its snapshot overwrites the others.
+
+    Volumes are a cloud-only feature; every subcommand requires --cloud.
+usage: sbx volume COMMAND
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for volume
+inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx - Manage AI coding agent sandboxes.
+    - sbx volume create - Create a new persistent volume
+    - sbx volume inspect - Show details for a volume
+    - sbx volume ls - List persistent volumes
+    - sbx volume rm - Delete a persistent volume

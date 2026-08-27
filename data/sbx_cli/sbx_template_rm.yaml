@@ -6,13 +6,25 @@ description: |-
     The image can be identified by tag (e.g. "myimage:v1.0") or by image ID
     (full or prefix, e.g. "abc123"). Use "sbx template ls" to see available
     images and their IDs.
-usage: sbx template rm TAG|ID [flags]
+
+    With --cloud:
+    The template can be identified by its tmpl_* ID or by its human name
+    (resolved via the server-side ?name= filter). Use "sbx template ls --cloud".
+usage: sbx template rm TAG|ID|NAME [flags]
 options:
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for rm
 inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
     - name: debug
       shorthand: D
       default_value: "false"
@@ -23,5 +35,11 @@ example: |4-
 
       # Remove by image ID (prefix)
       sbx template rm abc123
+
+      # Cloud: remove by name
+      sbx template rm my-template --cloud
+
+      # Cloud: remove by tmpl_* id
+      sbx template rm tmpl_abc123 --cloud
 see_also:
     - sbx template - Manage sandbox templates

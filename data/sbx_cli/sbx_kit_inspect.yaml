@@ -5,6 +5,9 @@ description: |-
     Load and display details about a kit artifact.
 
     The reference can be a local directory, ZIP file path, OCI registry reference, or git repository.
+
+    Pass --kit-arg to preview how the kit resolves with a given set of
+    arguments; the output shows the substituted content.
 usage: sbx kit inspect REFERENCE [flags]
 options:
     - name: help
@@ -14,7 +17,25 @@ options:
     - name: json
       default_value: "false"
       usage: Output in JSON format
+    - name: kit-arg
+      default_value: '[]'
+      experimental: true
+      usage: |
+        Value for an argument the kit declares, as name=value for every kit or kit.name=value for one (can be repeated)
+    - name: kit-args-file
+      default_value: '[]'
+      experimental: true
+      usage: |
+        File of name=value kit arguments, one per line (can be repeated); --kit-arg overrides
 inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
     - name: debug
       shorthand: D
       default_value: "false"

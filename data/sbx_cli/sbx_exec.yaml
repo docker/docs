@@ -1,9 +1,12 @@
 name: sbx exec
 synopsis: Execute a command inside a sandbox
 description: |-
-    Execute a command in a sandbox. If the sandbox is stopped, it is started first.
+    Execute a command in a sandbox. If the sandbox is stopped, it is started first. Or — with --cloud — the cloud sandbox
+    ID (sbx_*) or name from "sbx --cloud ls".
 
-    Flags match the behavior of "docker exec".
+    Flags match the behavior of "docker exec". Some flags (-d, --user, --privileged)
+    are not supported with --cloud and are rejected rather than silently ignored.
+    --detach-keys applies only to an interactive (-i/-t) cloud exec.
 usage: sbx exec [flags] SANDBOX COMMAND [ARG...]
 options:
     - name: detach
@@ -41,6 +44,14 @@ options:
       shorthand: w
       usage: Working directory inside the container
 inherited_options:
+    - name: cloud
+      default_value: "false"
+      usage: |
+        Dispatch to Docker Cloud Sandboxes API instead of local sandboxd (supported by a growing set of verbs — run 'sbx --cloud --help' for the current list)
+    - name: cloud-api-url
+      default_value: https://api.sandboxes-cloud.docker.com/v1
+      usage: |
+        Cloud Sandboxes API URL; only used with --cloud. Defaults to prod (https://api.sandboxes-cloud.docker.com/v1). Set DOCKER_CLOUD_API_URL or pass this flag to override.
     - name: debug
       shorthand: D
       default_value: "false"
@@ -54,5 +65,9 @@ example: |4-
 
       # Run as root
       sbx exec -u root my-sandbox apt-get update
+
+      # Cloud: run a command in a cloud sandbox by ID or name
+      sbx --cloud exec -it sbx_abc123 bash
+      sbx --cloud exec -it claude/my-sandbox bash
 see_also:
     - sbx - Manage AI coding agent sandboxes.
