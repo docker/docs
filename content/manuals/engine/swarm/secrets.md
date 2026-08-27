@@ -125,9 +125,9 @@ Use these links to read about specific commands, or continue to the
 - [`--secret`](/reference/cli/docker/service/create/#secret) flag for `docker service create`
 - [`--secret-add` and `--secret-rm`](/reference/cli/docker/service/update/#secret-add) flags for `docker service update`
 
-## Defining and using secrets in compose files
+## Defining and using secrets in Compose files
 
-Using secrets in compose files alongside Docker Swarm is as simple as defining a secret
+Using secrets in a Compose file alongside Docker Swarm is as simple as defining a secret
 using `docker secret create`.
 
 ```console
@@ -150,8 +150,8 @@ secrets:
         external: true
 ```
 
-Both the `docker-compose` and `docker stack` commands support defining secrets
-in a compose file. See
+Both the `docker compose` and `docker stack` commands support defining secrets
+in a Compose file. See
 [the Compose file reference](/reference/compose-file/secrets.md) for details.
 
 ## Examples
