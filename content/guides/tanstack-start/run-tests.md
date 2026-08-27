@@ -53,9 +53,8 @@ Then add the `test` script to `package.json` as shown above.
 
 Add a `test` block to your `vite.config.ts`:
 
-```ts {hl_lines="20-23",linenos=true}
+```ts {hl_lines="16-19",linenos=true}
 import { defineConfig } from "vite";
-import { devtools } from "@tanstack/devtools-vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import viteTsConfigPaths from "vite-tsconfig-paths";
@@ -64,7 +63,6 @@ import { nitro } from "nitro/vite";
 
 const config = defineConfig({
   plugins: [
-    devtools(),
     nitro(),
     viteTsConfigPaths({ projects: ["./tsconfig.json"] }),
     tailwindcss(),

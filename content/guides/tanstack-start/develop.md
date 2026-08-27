@@ -126,9 +126,8 @@ services:
 To make Vite's development server reachable from outside the container, add
 `server` options to your `vite.config.ts`:
 
-```ts {hl_lines="15-19",linenos=true}
+```ts {hl_lines="11-15",linenos=true}
 import { defineConfig } from "vite";
-import { devtools } from "@tanstack/devtools-vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import viteTsConfigPaths from "vite-tsconfig-paths";
@@ -137,7 +136,6 @@ import { nitro } from "nitro/vite";
 
 const config = defineConfig({
   plugins: [
-    devtools(),
     nitro(),
     viteTsConfigPaths({ projects: ["./tsconfig.json"] }),
     tailwindcss(),
