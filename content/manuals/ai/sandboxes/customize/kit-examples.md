@@ -359,7 +359,7 @@ sandbox:
 Claude Code merges the additional file with the sandbox-managed user settings.
 Because the file is under `files/home/`, it stays inside the sandbox instead of
 being written into a directly mounted host workspace. Launch the sandbox by
-passing the child kit directory as the agent positional:
+passing the child kit directory in place of a built-in agent name:
 
 ```console
 $ sbx run ./claude-sonnet
@@ -457,7 +457,7 @@ inherited entrypoint. Proxy-managed OAuth
 isn't supported for the extended agent, so follow the
 [Anthropic API-key setup](#customize-agent-settings) before launching it.
 
-Launch by passing the sandbox kit as the agent positional to `sbx run`:
+Launch by passing the sandbox kit in place of a built-in agent name:
 
 ```console
 $ sbx run ./claude-safe
@@ -477,7 +477,7 @@ Use it to study the full shape of a kit. Load a mixin with `--kit`:
 $ sbx run claude --kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=<kit>"
 ```
 
-For a `kind: sandbox` kit, pass the reference as the agent positional instead:
+For a `kind: sandbox` kit, pass the reference in place of the agent name:
 
 ```console
 $ sbx run "git+https://github.com/docker/sbx-kits-contrib.git#dir=<kit>"

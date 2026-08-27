@@ -256,7 +256,8 @@ Validate the spec:
 $ sbx kit validate ./amp/
 ```
 
-Launch a sandbox with the kit by passing its directory as the agent positional:
+Launch the sandbox by passing the kit directory in place of a built-in agent
+name:
 
 ```console
 $ sbx run ./amp/

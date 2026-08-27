@@ -313,13 +313,12 @@ that changes Claude Code's permission mode.
 ## Using kits
 
 Kits can be loaded from a local path (a directory or ZIP file), a Git
-repository, or an OCI registry. Pass a sandbox kit reference as the first
-positional argument to `sbx run` or `sbx create`, in the same position as a
-built-in agent name. Use `--kit` for mixins, and pass it more than once to stack
-several mixins on the same sandbox.
+repository, or an OCI registry. To launch a sandbox kit, pass its reference in
+place of a built-in agent name to `sbx run` or `sbx create`. Use `--kit` for
+mixins, and repeat the flag to apply multiple mixins to the same sandbox.
 
-Starting with Docker Sandboxes version 0.42.0, the sandbox kit reference is the
-agent positional:
+Starting with Docker Sandboxes version 0.42.0, pass the sandbox kit reference
+as the first argument:
 
 ```console
 $ sbx run <sandbox-kit-ref> [PATH...]
@@ -356,9 +355,9 @@ in your shell history, and argument files store their values unencrypted. Don't
 use kit arguments for secrets. Use [Credentials](../configuration/credentials.md)
 instead.
 
-An argument without a kit-name prefix is offered to every kit that declares it.
-When several kits declare the same argument, prefix it with the value of the
-kit's `name` field and a period to target one kit:
+An argument without a kit name prefix applies to every kit that declares it.
+To target one kit, prefix the argument with the value of that kit's `name`
+field and a period:
 
 ```console
 $ sbx run ./my-agent/ \
@@ -397,8 +396,8 @@ kit declares. Pass the same argument flags to `sbx kit validate` or
 
 ### Local
 
-Launch a local sandbox kit by passing its directory or ZIP file as the agent
-positional. Relative paths must start with `./` or `../` so `sbx` can
+Launch a local sandbox kit by passing its directory or ZIP file in place of the
+agent name. Relative paths must start with `./` or `../` so `sbx` can
 distinguish them from agent and sandbox names:
 
 ```console
