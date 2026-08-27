@@ -41,7 +41,7 @@ A pull is defined as the following:
 ## Pull attribution
 
 Pulls from authenticated users can be attributed to either a personal or an
-[organization namespace](/manuals/accounts/general-faqs.md#whats-an-organization-name-or-namespace).
+[organization namespace](/manuals/faqs/general-faqs.md#whats-an-organization-name-or-namespace).
 
 Attribution is based on the following:
 
@@ -55,7 +55,7 @@ Attribution is based on the following:
 - Single organization membership:
   - If the owner of the verified domain is a company and the user is part of
     only one organization within that
-    [company](../../admin/company/company-faqs.md),
+    [company](../../faqs/company-faqs.md),
     the pull is attributed to that specific organization.
   - If the user is part of only one organization, the pull is attributed to
     that specific organization.

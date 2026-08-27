@@ -105,7 +105,7 @@ to re-enable it:
 **Manually invite users**
 
 When JIT is disabled, users are not automatically added to your organization when they authenticate through SSO.
-To manually invite users, see [Invite members](/manuals/admin/organization/manage/members.md#invite-members).
+To manually invite users, see [Invite members](/manuals/accounts/organization/manage/members.md#invite-members).
 
 **Configure SCIM provisioning**
 
@@ -162,11 +162,11 @@ This error occurs when the organization has no available seats for the user when
 
 **Add more seats to the organization**
 
-Purchase additional Docker Business subscription seats. For details, see [Manage subscription seats](/manuals/admin/organization/manage/manage-seats.md).
+Purchase additional Docker Business subscription seats. For details, see [Manage subscription seats](/manuals/accounts/organization/manage/manage-seats.md).
 
 **Remove users or pending invitations**
 
-Review your organization members and pending invitations. Remove inactive users or pending invitations to free up seats. For more details, see [Manage organization members](/manuals/admin/organization/manage/members.md).
+Review your organization members and pending invitations. Remove inactive users or pending invitations to free up seats. For more details, see [Manage organization members](/manuals/accounts/organization/manage/members.md).
 
 ## Domain is not verified for SSO connection
 

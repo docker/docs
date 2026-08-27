@@ -51,7 +51,7 @@ policies.
 
 This guide covers the following Docker features:
 
-- [Organizations](/manuals/admin/organization/_index.md): The core structure
+- [Organizations](/manuals/accounts/organization/_index.md): The core structure
   for managing your Docker environment, grouping users, teams, and image
   repositories. Your organization was created with your subscription and is
   managed by one or more owners. Users signed into the organization are
@@ -130,7 +130,7 @@ files to be distributed to developer machines. Use MDM tools to deploy these con
 ### Identify Docker organizations
 
 Some companies may have more than one
-[Docker organization](/manuals/admin/organization/_index.md) created. These
+[Docker organization](/manuals/accounts/organization/_index.md) created. These
 organizations may have been created for specific purposes, or may not be
 needed anymore.
 
@@ -185,8 +185,8 @@ settings, along with your chosen method for [enforcing sign-in](/manuals/enterpr
 ### Manage your organizations
 
 If you have more than one organization, consider either [consolidating them
-into one organization](/manuals/admin/organization/setup/orgs.md) or creating a
-[Docker company](/manuals/admin/company/_index.md) to manage multiple
+into one organization](/manuals/accounts/organization/setup/orgs.md) or creating a
+[Docker company](/manuals/accounts/organization/company/_index.md) to manage multiple
 organizations.
 
 ### Begin setup
@@ -325,6 +325,6 @@ for Docker.
 
 To continue optimizing your Docker environment:
 
-- Review your [organization's usage data](/manuals/admin/insights.md) to track adoption
+- Review your [organization's usage data](/manuals/accounts/organization/insights.md) to track adoption
 - Monitor [Docker Scout findings](/manuals/scout/explore/analysis.md) for security insights
 - Explore [additional security features](/manuals/enterprise/security/_index.md) to enhance your configuration

@@ -153,7 +153,7 @@ area/subscription:
 area/admin:
   - changed-files:
       - any-glob-to-any-file:
-          - content/manuals/admin/**
+          - content/manuals/accounts/organization/**
 
 area/extensions:
   - changed-files:
@@ -175,6 +175,7 @@ area/accounts:
   - changed-files:
       - any-glob-to-any-file:
           - content/manuals/accounts/**
+          - content/manuals/faqs/**
 
 area/copilot:
   - changed-files:

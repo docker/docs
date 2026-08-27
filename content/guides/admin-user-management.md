@@ -46,7 +46,7 @@ With the right configurations, you can ensure your developers have easy access t
 
 Before setting up roles and permissions, it's important to have a clear understanding of who in your organization requires Docker access. Focus on gathering a comprehensive view of active users, their roles within projects, and how they interact with Docker resources. This process can be supported by tools like device management software or manual assessments. Encourage all users to update their Docker accounts to use organizational email addresses, ensuring seamless integration with your subscription.
 
-For steps on how you can do this, see [step 1 of onboarding your organization](/manuals/admin/organization/setup/onboard.md).
+For steps on how you can do this, see [step 1 of onboarding your organization](/manuals/accounts/organization/setup/onboard.md).
 
 ### Assign roles strategically
 
@@ -68,7 +68,7 @@ Teams in Docker provide a structured way to manage member access and they provid
 - Assign permissions at the team level rather than individually. For instance, a development team might have "Read & Write" access to certain repositories, while a QA team has "Read-only" access.
 - As teams grow or responsibilities shift, you can easily update permissions or add new members, maintaining consistency without reconfiguring individual settings.
 
-For more information, see [Create and manage a team](/manuals/admin/organization/manage/manage-a-team.md).
+For more information, see [Create and manage a team](/manuals/accounts/organization/manage/manage-a-team.md).
 
 #### Example scenarios
 
@@ -103,7 +103,7 @@ Members are granted controlled access to resources and enjoy enhanced organizati
 - Access to enhanced features: Members benefit from organization-wide perks, such as increased pull limits and access to premium Docker features.
 - Security control: Apply and enforce security settings at an organizational level, reducing risks associated with unmanaged accounts.
 
-For detailed information, see [Manage organization members](/manuals/admin/organization/manage/members.md).
+For detailed information, see [Manage organization members](/manuals/accounts/organization/manage/members.md).
 
 ### Future-proof user management
 
@@ -168,7 +168,7 @@ Activity logs are available for Docker Team or Docker Business plans, with data 
 - Team collaboration review: Logs show which team members pushed updates to a critical repository, ensuring accountability during a development sprint.
 - Billing adjustments: Track who added or removed subscription seats to maintain budgetary control and compliance.
 
-For more information, see [Activity logs](/manuals/admin/activity-logs.md).
+For more information, see [Activity logs](/manuals/accounts/organization/activity-logs.md).
 
 ### Insights
 
@@ -186,13 +186,13 @@ Insights provide data-driven views of Docker usage to improve team productivity 
 - Build efficiency: Track average build times and success rates to pinpoint bottlenecks in development processes.
 - Container utilization: Analyze container activity across departments to ensure proper resource distribution and cost efficiency.
 
-For more information, see [Insights](/manuals/admin/insights.md).
+For more information, see [Insights](/manuals/accounts/organization/insights.md).
 
 ### Next steps
 
 Now that you've mastered user and access management in Docker, you can:
 
-- Review your [activity logs](/manuals/admin/activity-logs.md) regularly to maintain security awareness
-- Check your [Insights dashboard](/manuals/admin/insights.md) to identify opportunities for optimization
+- Review your [activity logs](/manuals/accounts/organization/activity-logs.md) regularly to maintain security awareness
+- Check your [Insights dashboard](/manuals/accounts/organization/insights.md) to identify opportunities for optimization
 - Explore [advanced security features](/manuals/enterprise/security/_index.md) to further enhance your Docker environment
 - Share best practices with your team to ensure consistent adoption of security policies

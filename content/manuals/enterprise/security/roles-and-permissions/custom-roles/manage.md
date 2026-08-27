@@ -160,5 +160,5 @@ To see which users and teams are assigned to roles:
   permissions you can grant to a custom role
 - [Core roles and permissions](/manuals/enterprise/security/roles-and-permissions/core-roles.md):
   Compare built-in Member, Editor, and Owner permissions
-- [Manage organization members](/manuals/admin/organization/manage/members.md):
+- [Manage organization members](/manuals/accounts/organization/manage/members.md):
   Invite and manage users in your organization

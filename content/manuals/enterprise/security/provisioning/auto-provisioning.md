@@ -20,7 +20,7 @@ When auto-provisioning is enabled for a verified domain:
 - Auto-provisioning only adds existing Docker users to your organization, it doesn't create new accounts.
 - Users experience no changes to their sign-in process.
 - Company and organization owners receive email notifications when new users are added.
-- You may need to [manage seats](/manuals/admin/organization/manage/manage-seats.md) to accommodate new users.
+- You may need to [manage seats](/manuals/accounts/organization/manage/manage-seats.md) to accommodate new users.
 
 ### Enable auto-provisioning
 

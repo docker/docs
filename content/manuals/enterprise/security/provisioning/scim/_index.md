@@ -55,7 +55,7 @@ SCIM automates:
 >
 > To remove those users, delete them manually from your Docker organization.
 > For more information, see
-> [Manage organization members](/manuals/admin/organization/manage/members.md).
+> [Manage organization members](/manuals/accounts/organization/manage/members.md).
 
 ## Next steps
 

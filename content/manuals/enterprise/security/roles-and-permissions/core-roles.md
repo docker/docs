@@ -35,7 +35,7 @@ Docker organizations have three core roles:
 A company owner has the same organization-management permissions as an
 organization owner. Content and registry permissions, such as repository
 pull and push, don't apply to company owners. For more information, see
-[Company overview](/manuals/admin/company/_index.md).
+[Company overview](/manuals/accounts/organization/company/_index.md).
 
 ## Permissions reference
 
@@ -131,7 +131,7 @@ _\* If not part of a company_
 
 - [Custom roles](/manuals/enterprise/security/roles-and-permissions/custom-roles/_index.md):
   Create tailored permission sets on a Docker Business plan
-- [Manage organization members](/manuals/admin/organization/manage/members.md):
+- [Manage organization members](/manuals/accounts/organization/manage/members.md):
   Invite users and assign roles
-- [Company overview](/manuals/admin/company/_index.md): Understand company
+- [Company overview](/manuals/accounts/organization/company/_index.md): Understand company
   owner permissions versus organization owner permissions

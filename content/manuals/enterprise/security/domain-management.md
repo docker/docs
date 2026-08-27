@@ -110,7 +110,7 @@ The CSV file contains the following columns:
 
 You can bulk invite uncaptured users to your organization using the exported
 CSV file. For more information on bulk inviting users, see
-[Manage organization members](/manuals/admin/organization/manage/members.md).
+[Manage organization members](/manuals/accounts/organization/manage/members.md).
 
 ## Auto-provisioning
 
