@@ -195,7 +195,7 @@ The following policies are available by default:
 | No fixable critical or high vulnerabilities | Critical/high CVEs that have a fix available |
 | No high-profile vulnerabilities | Curated list of well-known CVEs (Log4Shell, XZ backdoor, and others) |
 | No copyleft licenses | Packages under AGPL, GPL, LGPL, MPL, and similar licenses |
-| No outdated base images | Base image is behind the latest digest of its tag |
+| Up-to-Date Base Images | Base image is behind the latest digest of its tag |
 | Supply chain attestations | Provenance and SBOM attestations are attached |
 | Default non-root user | Image is configured to run as a non-root user |
 | No unapproved base images | Base image matches a configurable allowlist |
