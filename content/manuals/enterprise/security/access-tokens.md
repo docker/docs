@@ -63,13 +63,13 @@ organization.
     - Description (optional): Additional details
     - Expiration date: When the token should expire
 1. Expand the **Repository** drop-down to set per-repository access permissions:
-    1. Optional. Select **Read public repositories** for access to public repositories.
-    1. Select **Add repository** and choose a repository from the drop-down.
-    1. Set the permission level for each repository. Available scopes range from
+    - Optional. Select **Read public repositories** for access to public repositories.
+    - Select **Add repository** and choose a repository from the drop-down.
+    - Set the permission level for each repository. Available scopes range from
        pulling and pushing images to managing tags, webhooks, repository groups,
        and immutable tag settings. See [Repository scopes](#repository-scopes)
        for the full list.
-    1. Add up to 50 repositories as needed.
+    - Add up to 50 repositories as needed.
 1. Optional. Configure organization-level permissions by expanding the **Organization** drop-down and selecting **Allow management access to this organization's resources**:
     - **Member Edit**: Edit members of the organization
     - **Member Read**: Read members of the organization
