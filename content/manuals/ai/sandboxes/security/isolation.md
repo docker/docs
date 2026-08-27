@@ -31,11 +31,10 @@ processes, files, or resources outside its defined boundaries.
 The agent runs as a non-root user with sudo privileges inside the VM. The
 hypervisor boundary is the isolation control, not in-VM privilege separation.
 
-Processes in a local sandbox can write text to your host clipboard through the
-provided clipboard command shims. This integration doesn't give the sandbox
-access to existing clipboard text. Host clipboard image reads are separate and
-opt-in. After running untrusted code, check clipboard contents before pasting
-them on the host.
+Processes in a local sandbox can write text to your host clipboard, but can't
+read existing clipboard text. Host clipboard image reads are a separate,
+opt-in feature. After running untrusted code, check clipboard contents before
+pasting them on the host.
 
 ## Network isolation
 
