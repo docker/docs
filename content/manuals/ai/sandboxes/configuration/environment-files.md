@@ -74,7 +74,7 @@ named `web-app`, installs Playwright and Chromium, and publishes sandbox port
 existing sandbox.
 
 This placement keeps the environment file outside the agent's writable
-workspace. If you later add `additionalWorkspaces`, keep `.sbxenv.yaml`
+workspace. If you later add `additionalWorkspaces`, keep `sbxenv.yaml`
 outside those directories too. See the [`workspace` guidance](#workspace)
 for details.
 
@@ -346,7 +346,7 @@ The loader rejects unknown fields and unsupported schema versions.
 | `agent`                | string           | Yes      | None                           | Built-in agent or the name of an agent kit                                      |
 | `args`                 | map              | No       | None                           | Environment arguments. See [`args`](#args)                                      |
 | `kits`                 | list             | No       | None                           | Kits to install at creation. See [`kits`](#kits)                                 |
-| `workspace`            | string or object | No       | First file's directory         | Primary workspace. See [`workspace`](#workspace)                                |
+| `workspace`            | string or object | No       | No host mount                  | Primary workspace. See [`workspace`](#workspace)                                |
 | `additionalWorkspaces` | list             | No       | None                           | Extra directories to mount. See [`additionalWorkspaces`](#additionalworkspaces) |
 | `env`                  | map of strings   | No       | None                           | Environment variables for the sandbox                                           |
 | `sandboxOptions`       | object           | No       | None                           | Creation options. See [`sandboxOptions`](#sandboxoptions)                        |
@@ -382,6 +382,11 @@ Git URLs prefixed with `git+https://` or `git+ssh://`. Kits can install tools,
 configure the sandbox, and give the agent project-specific instructions. See
 [Kits](../customize/kits.md) for details.
 
+Explicit relative paths resolve from the directory of the environment file
+that declares them. These include `.`, `..`, paths that start with `./` or
+`../`, and relative paths that end in `.zip`. Bare references such as
+`organization/kit` remain registry references.
+
 Use an object entry to pass arguments to a kit. Set `source` to the kit
 reference and map the kit's argument names to values under `args`:
 
@@ -408,7 +413,10 @@ parameter and OCI kits with an immutable tag or digest.
 ### `workspace`
 
 When specified as a string, `workspace` is the path. Use the object form for
-clone mode.
+clone mode. Omit `workspace` to create a sandbox without a host bind mount. Set
+`workspace: .` to mount the directory that contains the first environment
+file. If `workspace` is present, its path can't be empty or contain only
+whitespace.
 
 When an environment file is inside a writable workspace, `sbx` binds the file
 read-only at its path in the sandbox. Other files in the workspace remain
@@ -421,10 +429,10 @@ writable.
 > workspaces or directly in a workspace's root directory. Set
 > `sandboxOptions.writableEnvFiles` only when the agent must edit the file.
 
-| Field   | Type    | Default                | Description                                                             |
-| ------- | ------- | ---------------------- | ----------------------------------------------------------------------- |
-| `path`  | string  | First file's directory | Workspace directory. Relative paths resolve from the first file         |
-| `clone` | boolean | `false`                | Use a private clone, equivalent to `sbx create --clone`                  |
+| Field   | Type    | Required | Default | Description                                                     |
+| ------- | ------- | -------- | ------- | --------------------------------------------------------------- |
+| `path`  | string  | Yes      | None    | Workspace directory. Relative paths resolve from the first file |
+| `clone` | boolean | No       | `false` | Use a private clone, equivalent to `sbx create --clone`          |
 
 You can override `workspace.clone` for one `create` or `run` invocation with
 `--clone` or `--clone=false`.
@@ -441,14 +449,21 @@ paths resolve from the directory of the first environment file.
 
 ### `sandboxOptions`
 
-| Field              | Type    | Default  | Description                                                                       |
-| ------------------ | ------- | -------- | --------------------------------------------------------------------------------- |
-| `template`         | string  | None     | Custom sandbox template image                                                     |
-| `memory`           | string  | None     | Memory limit, such as `8g` or `512m`                                               |
-| `cpus`             | integer | `0`      | Number of CPUs. `0` allocates all host CPUs                                        |
-| `pullPolicy`       | string  | `always` | Image pull policy: `always`, `missing`, or `never`                                 |
-| `profile`          | string  | None     | Governance profile name                                                           |
-| `writableEnvFiles` | boolean | `false`  | Let the sandbox modify loaded environment files that would otherwise be read-only |
+| Field              | Type            | Default  | Description                                                                       |
+| ------------------ | --------------- | -------- | --------------------------------------------------------------------------------- |
+| `template`         | string          | None     | Custom sandbox template image                                                     |
+| `memory`           | string          | None     | Memory limit, such as `8g` or `512m`                                               |
+| `cpus`             | integer         | `0`      | Number of CPUs. `0` allocates all host CPUs                                        |
+| `pullPolicy`       | string          | `always` | Image pull policy: `always`, `missing`, or `never`                                 |
+| `profile`          | string          | None     | Governance profile name                                                           |
+| `shareSkills`      | boolean         | `true`   | Mount the shared agent skills store                                                |
+| `display`          | boolean         | `false`  | Provision a display socket for graphical applications                             |
+| `gpu`              | boolean         | `false`  | Pass the host GPU through to the sandbox                                           |
+| `usb`              | list of strings | None     | USB device selectors to pass through to the sandbox                               |
+| `writableEnvFiles` | boolean         | `false`  | Let the sandbox modify loaded environment files that would otherwise be read-only |
+
+Imported [agent skills](../workflows/agent-skills.md) are shared with the
+sandbox by default. Set `shareSkills: false` to opt out.
 
 ### `lifecycle`
 
@@ -602,12 +617,15 @@ Each server must set exactly one of `url` or `command`.
 `ports` publishes sandbox ports when the environment is created. Ports exposed
 by a kit but omitted from this list receive an ephemeral host port.
 
-| Field      | Type    | Required | Default          | Description                                                           |
-| ---------- | ------- | -------- | ---------------- | --------------------------------------------------------------------- |
-| `sandbox`  | integer | Yes      | None             | Sandbox port from 1 through 65535                                     |
-| `host`     | integer | No       | Ephemeral        | Host port from 1 through 65535                                        |
-| `protocol` | string  | No       | `tcp`            | `tcp`, `tcp4`, `tcp6`, `udp`, `udp4`, or `udp6`                       |
-| `hostIP`   | string  | No       | Loopback         | Host interface. The default uses available IPv4 and IPv6 loopback     |
+| Field      | Type    | Required | Default                              | Description                                     |
+| ---------- | ------- | -------- | ------------------------------------ | ----------------------------------------------- |
+| `sandbox`  | integer | Yes      | None                                 | Sandbox port from 1 through 65535               |
+| `host`     | integer | No       | Ephemeral                            | Host port from 1 through 65535                  |
+| `protocol` | string  | No       | `tcp4`, or `tcp6` for IPv6 `hostIP` | `tcp`, `tcp4`, `tcp6`, `udp`, `udp4`, or `udp6` |
+| `hostIP`   | string  | No       | Loopback                             | Host interface to bind                          |
+
+Set `protocol: tcp` to bind both IPv4 and IPv6. Leave `hostIP` unset for a
+dual-stack binding because an explicit address binds only its own IP family.
 
 If a port can't be published, sandbox creation fails and removes the new
 sandbox.
