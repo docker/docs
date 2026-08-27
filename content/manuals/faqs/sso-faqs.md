@@ -84,7 +84,7 @@ Yes, bot accounts need seats like regular users, requiring a non-aliased domain 
 
 The SSO implementation uses Just-in-Time (JIT) provisioning by default. You can optionally turn off JIT in Docker Home if you turn on auto-provisioning using SCIM. See [Just-in-Time provisioning](/manuals/platform/security/provisioning/just-in-time.md).
 
-## My Entra ID SSO connection isn't working and shows an error. How can I troubleshoot this?
+## How can I troubleshoot an Entra ID SSO connection error?
 
 Confirm that you've configured the necessary API permissions in Entra ID for your SSO connection. You need to grant administrator consent within your Entra ID tenant. See [Entra ID (formerly Azure AD) documentation](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=portal#grant-admin-consent-in-app-registrations).
 

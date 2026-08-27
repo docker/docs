@@ -10,7 +10,7 @@ params:
     group: Enterprise
 aliases:
   - /security/for-admins/hardened-desktop/
-  - /enterprise/hardened-desktop/
+  - /enterprise/security/hardened-desktop/
   - /enterprise/security/
 grid:
   - title: "Settings Management"
