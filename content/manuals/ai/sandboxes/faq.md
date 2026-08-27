@@ -158,6 +158,20 @@ Keep project-specific skills and other agent configuration in the project
 itself. This versions the configuration alongside the code. Don't use symlinks
 to host paths because a sandboxed agent can't follow them outside the sandbox.
 
+## Can a sandbox copy text to my host clipboard?
+
+Starting with `sbx` version 0.42.0, processes in a local sandbox can write text
+to your host clipboard. Use `wl-copy`, `xclip` in input mode, `xsel`, `pbcopy`,
+or `clip.exe`. For example, run this command inside a sandbox:
+
+```console
+$ printf 'Copied from a sandbox' | wl-copy
+```
+
+The `clipboard.imagePaste` setting isn't required for clipboard writes. That
+setting controls opt-in image reads from the host clipboard. Host clipboard
+text isn't available to processes inside the sandbox.
+
 ## Can I paste images into an agent?
 
 Yes, but it's off by default. Text paste already works, because the terminal
