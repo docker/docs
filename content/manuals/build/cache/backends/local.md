@@ -28,6 +28,7 @@ The following table describes the available CSV parameters that you can pass to
 |---------------------|--------------|-------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------|
 | `src`               | `cache-from` | String                  |         | Path of the local directory where cache gets imported from.                                                                     |
 | `digest`            | `cache-from` | String                  |         | Digest of manifest to import, see [cache versioning][4].                                                                        |
+| `tag`               | `cache-to`,`cache-from` | String                  | `latest` | Tag of the cache manifest, see [cache versioning][4].                                                                          |
 | `dest`              | `cache-to`   | String                  |         | Path of the local directory where cache gets exported to.                                                                       |
 | `mode`              | `cache-to`   | `min`,`max`             | `min`   | Cache layers to export, see [cache mode][1].                                                                                    |
 | `oci-mediatypes`    | `cache-to`   | `true`,`false`          | `true`  | Use OCI media types in exported manifests, see [OCI media types][2].                                                            |
@@ -47,10 +48,28 @@ build continues.
 
 ## Cache versioning
 
-<!-- FIXME: update once https://github.com/moby/buildkit/pull/3111 is released -->
-
 This section describes how versioning works for caches on a local filesystem,
-and how you can use the `digest` parameter to use older versions of cache.
+and how you can use the `digest` and `tag` parameters to select which version of
+the cache to use.
+
+Cache exports are annotated with a tag, which defaults to `latest`. Use the
+`tag` parameter to scope exports, which lets you keep multiple cache versions in
+the same directory:
+
+```console
+$ docker buildx build --cache-to type=local,dest=path/to/local/dir,tag=v1 .
+$ docker buildx build --cache-to type=local,dest=path/to/local/dir,tag=v2 .
+```
+
+To import a specific version, pass the same tag to `--cache-from`:
+
+```console
+$ docker buildx build --cache-from type=local,src=path/to/local/dir,tag=v1 .
+```
+
+If you specify `digest`, the `tag` parameter is ignored. Use `digest` to pin the
+cache to an exact manifest, and `tag` when you want a stable name that you can
+update over time.
 
 If you inspect the cache directory manually, you can see the resulting OCI image
 layout:
