@@ -425,8 +425,7 @@ writable.
 > [!WARNING]
 > Store the environment file outside direct-mounted workspaces or directly in
 > a workspace's root. The read-only bind can't fully protect a file in a
-> writable subdirectory. Set
-> `sandboxOptions.writableEnvFiles` only when the agent must edit the file.
+> writable subdirectory.
 
 | Field   | Type    | Required | Default | Description                                                     |
 | ------- | ------- | -------- | ------- | --------------------------------------------------------------- |
@@ -448,18 +447,17 @@ paths resolve from the directory of the first environment file.
 
 ### `sandboxOptions`
 
-| Field              | Type            | Default  | Description                                                                       |
-| ------------------ | --------------- | -------- | --------------------------------------------------------------------------------- |
-| `template`         | string          | None     | Custom sandbox template image                                                     |
-| `memory`           | string          | None     | Memory limit, such as `8g` or `512m`                                               |
-| `cpus`             | integer         | `0`      | Number of CPUs. `0` allocates all host CPUs                                        |
-| `pullPolicy`       | string          | `always` | Image pull policy: `always`, `missing`, or `never`                                 |
-| `profile`          | string          | None     | Governance profile name                                                           |
-| `shareSkills`      | boolean         | `true`   | Mount the shared agent skills store                                                |
-| `display`          | boolean         | `false`  | Provision a display socket for graphical applications                             |
-| `gpu`              | boolean         | `false`  | Pass the host GPU through to the sandbox                                           |
-| `usb`              | list of strings | None     | USB device selectors to pass through to the sandbox                               |
-| `writableEnvFiles` | boolean         | `false`  | Let the sandbox modify loaded environment files that would otherwise be read-only |
+| Field         | Type            | Default  | Description                                           |
+| ------------- | --------------- | -------- | ----------------------------------------------------- |
+| `template`    | string          | None     | Custom sandbox template image                         |
+| `memory`      | string          | None     | Memory limit, such as `8g` or `512m`                   |
+| `cpus`        | integer         | `0`      | Number of CPUs. `0` allocates all host CPUs            |
+| `pullPolicy`  | string          | `always` | Image pull policy: `always`, `missing`, or `never`     |
+| `profile`     | string          | None     | Governance profile name                               |
+| `shareSkills` | boolean         | `true`   | Mount the shared agent skills store                    |
+| `display`     | boolean         | `false`  | Provision a display socket for graphical applications |
+| `gpu`         | boolean         | `false`  | Pass the host GPU through to the sandbox               |
+| `usb`         | list of strings | None     | USB device selectors to pass through to the sandbox   |
 
 Imported [agent skills](../workflows/agent-skills.md) are shared with the
 sandbox by default. Set `shareSkills: false` to opt out.
