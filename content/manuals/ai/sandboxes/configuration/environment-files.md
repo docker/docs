@@ -423,10 +423,9 @@ read-only at its path in the sandbox. Other files in the workspace remain
 writable.
 
 > [!WARNING]
-> With [direct mount](../security/isolation.md#direct-mount-default), an agent
-> can rename a subdirectory that contains an environment file and reach the
-> underlying writable file. Store the environment file outside direct-mounted
-> workspaces or directly in a workspace's root directory. Set
+> Store the environment file outside direct-mounted workspaces or directly in
+> a workspace's root. The read-only bind can't fully protect a file in a
+> writable subdirectory. Set
 > `sandboxOptions.writableEnvFiles` only when the agent must edit the file.
 
 | Field   | Type    | Required | Default | Description                                                     |

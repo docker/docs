@@ -121,8 +121,7 @@ do not block this access because they evaluate the workspace path rather than
 other paths to the same file. [Clone mode](#clone-mode) prevents writes through
 the primary workspace by mounting the host repository read-only.
 
-Except for loaded sandbox environment files described in this section, there
-is no isolation between the agent and your workspace in this mode. The agent
+Direct mount gives the agent broad write access to your workspace. The agent
 can create, modify, or delete workspace files, including:
 
 - Source code and configuration files
@@ -150,17 +149,14 @@ Review them after any agent session before performing those actions:
   `.gemini/settings.json`) can define hooks and startup commands that
   execute automatically.
 
-Sandbox environment files can declare lifecycle and credential commands that
-run on the host with your privileges. `sbx` shows these commands in an
-environment plan and asks for approval before applying it. It also binds a
-loaded environment file read-only when a workspace would otherwise make it
-writable.
+#### Sandbox environment files
 
-An agent can still reach the underlying writable file by renaming a
-subdirectory that contains it, or when
-`sandboxOptions.writableEnvFiles: true` is set. Store `sbxenv.yaml` outside a
-direct-mounted workspace or directly in the workspace root. Review the plan
-before approving host commands. See
+Sandbox environment files can declare lifecycle and credential commands that
+run on the host with your privileges. Before running these commands, `sbx`
+shows them in an environment plan and asks for approval. Review the plan before
+you approve host commands.
+
+For file placement and read-only protection, see
 [Sandbox environment files](../configuration/environment-files.md#workspace).
 
 > [!WARNING]
