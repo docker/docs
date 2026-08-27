@@ -64,22 +64,15 @@ mode inside the microVM (not on your host), with a dedicated block volume at
 block volume defaults to 10 GB and uses a sparse file, so it only consumes
 disk space as Docker writes to it.
 
-To change the default for sandboxes you create later, set
-`sandbox.disk.dockerVolume`:
-
-```console
-$ sbx settings set sandbox.disk.dockerVolume 20g
-```
-
-To override the default for one sandbox, set
+To change the volume size for a sandbox, set
 `DOCKER_SANDBOXES_DOCKER_SIZE` when you create it:
 
 ```console
 $ DOCKER_SANDBOXES_DOCKER_SIZE=20g sbx run claude
 ```
 
-The volume size must be at least 512 MiB. Changing the setting or using the
-environment variable doesn't resize existing volumes.
+The volume size must be at least 512 MiB. The environment variable doesn't
+resize existing volumes.
 
 Use the non-Docker variant if you don't need to build or run containers
 inside the sandbox and want a lighter, non-privileged environment. Specify
