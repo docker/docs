@@ -99,10 +99,11 @@ Each row shows a sandbox's name, the agent running in it, its status, any
 workspace — the host directory shared into the sandbox. That workspace is the
 one part of your machine the agent can see.
 
-Because `sbx run` defaults the workspace to the current directory, your project
-is shared read-write. The agent and your host see the same files. Edits the
-agent makes to your project appear in your working tree as it writes them, and
-you review them as an ordinary Git diff before committing.
+When you run `sbx run` from a project directory without passing a workspace
+path, the current directory is mounted read-write. The agent and your host see
+the same files. Edits the agent makes to your project appear in your working
+tree as it writes them, and you review them as an ordinary Git diff before
+committing.
 
 Everything else runs inside the microVM, isolated from your host:
 
