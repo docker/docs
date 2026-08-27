@@ -1,7 +1,7 @@
 ---
 title: Docker account FAQs
-linkTitle: FAQs
-weight: 40
+linkTitle: Accounts
+weight: 10
 description: FAQs about Docker IDs, account creation, and organization names
 keywords:
   docker ID, docker account FAQ, change docker ID, username taken, trademark,
@@ -9,6 +9,8 @@ keywords:
   deactivate docker ID
 tags: [FAQ]
 aliases:
+  - /accounts/general-faqs/
+  - /accounts/individual/general-faqs/
   - /docker-hub/general-faqs/
   - /docker-hub/onboarding-faqs/
   - /faq/admin/general-faqs/
@@ -28,7 +30,7 @@ Your Docker ID must be between 4 and 30 characters long, and can only contain
 numbers and lowercase letters. You can't use any special characters or spaces.
 
 For more information, see
-[Create a Docker account](/manuals/accounts/create-account.md).
+[Create a Docker account](/manuals/accounts/individual/create-account.md).
 
 ## Can I change my Docker ID?
 
@@ -53,10 +55,10 @@ the organization ID, is the unique identifier of a Docker organization. The
 organization name can't be the same as an existing Docker ID.
 
 For more information, see
-[Docker organization overview](/manuals/admin/organization/_index.md).
+[Organization accounts](/manuals/accounts/organization/_index.md).
 
 ## Next steps
 
-- [Create a Docker account](/manuals/accounts/create-account.md)
-- [Manage a Docker account](/manuals/accounts/manage-account.md)
-- [Docker organization overview](/manuals/admin/organization/_index.md)
+- [Create a Docker account](/manuals/accounts/individual/create-account.md)
+- [Manage a Docker account](/manuals/accounts/individual/manage-account.md)
+- [Organization accounts](/manuals/accounts/organization/_index.md)
