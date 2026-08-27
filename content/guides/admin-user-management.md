@@ -194,5 +194,5 @@ Now that you've mastered user and access management in Docker, you can:
 
 - Review your [activity logs](/manuals/admin/activity-logs.md) regularly to maintain security awareness
 - Check your [Insights dashboard](/manuals/admin/insights.md) to identify opportunities for optimization
-- Explore [advanced security features](/manuals/enterprise/security/_index.md) to further enhance your Docker environment
+- Explore [advanced security features](/manuals/enterprise/hardened-desktop/_index.md) to further enhance your Docker environment
 - Share best practices with your team to ensure consistent adoption of security policies

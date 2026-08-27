@@ -7,6 +7,7 @@ weight: 30
 aliases:
  - /security/for-admins/hardened-desktop/settings-management/compliance-reporting/
 ---
+  - /enterprise/security/hardened-desktop/settings-management/compliance-reporting/
 
 {{< summary-bar feature_name="Compliance reporting" >}}
 

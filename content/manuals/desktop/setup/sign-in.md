@@ -29,7 +29,7 @@ In large enterprises where admin access is restricted, administrators can [enfor
 
 - Increase your pull rate limit compared to anonymous users. See [Usage and limits](/manuals/docker-hub/usage/_index.md).
 
-- Enhance your organization’s security posture for containerized development with [Hardened Desktop](/manuals/enterprise/security/hardened-desktop/_index.md).
+- Enhance your organization’s security posture for containerized development with [Hardened Desktop](/manuals/enterprise/hardened-desktop/_index.md).
 
 > [!NOTE]
 >

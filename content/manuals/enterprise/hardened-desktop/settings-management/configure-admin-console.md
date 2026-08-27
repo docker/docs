@@ -7,6 +7,7 @@ weight: 20
 aliases:
   - /security/for-admins/hardened-desktop/settings-management/configure-admin-console/
 ---
+  - /enterprise/security/hardened-desktop/settings-management/configure-admin-console/
 
 {{< summary-bar feature_name="Admin Console" >}}
 

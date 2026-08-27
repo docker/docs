@@ -12,6 +12,7 @@ aliases:
   - /security/for-admins/registry-access-management/
   - /security/for-admins/hardened-desktop/registry-access-management/
   - /docker-hub/registry-access-management/
+  - /enterprise/security/hardened-desktop/registry-access-management/
 weight: 40
 ---
 
@@ -164,5 +165,5 @@ To maximize security effectiveness:
   - Confirm all necessary redirect domains are included
   - Ensure development workflows aren't disrupted
 - Combine with
-  [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md)
+  [Enhanced Container Isolation](/manuals/enterprise/hardened-desktop/enhanced-container-isolation/_index.md)
   for broader Desktop security

@@ -97,7 +97,7 @@ WSL is designed to aid interoperability between Windows and Linux environments. 
 For environments that require stricter isolation:
 
 - Run Docker Desktop in Hyper-V mode instead of WSL 2 to avoid the shared-kernel model entirely.
-- Enable [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md) to add an additional layer of protection around container workloads regardless of backend.
+- Enable [Enhanced Container Isolation](/manuals/enterprise/hardened-desktop/enhanced-container-isolation/_index.md) to add an additional layer of protection around container workloads regardless of backend.
 
 ## Additional resources
 

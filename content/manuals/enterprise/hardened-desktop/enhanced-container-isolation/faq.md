@@ -6,6 +6,7 @@ keywords: enhanced container isolation, faq, troubleshooting, docker desktop
 toc_max: 2
 aliases:
  - /security/for-admins/hardened-desktop/enhanced-container-isolation/faq/
+  - /enterprise/security/hardened-desktop/enhanced-container-isolation/faq/
 weight: 40
 ---
 
@@ -19,7 +20,7 @@ No. ECI works automatically in the background by creating more secure containers
 
 ## Do all container workloads work well with ECI?
 
-Most container workloads run without issues when ECI is turned on. However, some advanced workloads that require specific kernel-level access may not work. For details about which workloads are affected, see [ECI limitations](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/limitations.md).
+Most container workloads run without issues when ECI is turned on. However, some advanced workloads that require specific kernel-level access may not work. For details about which workloads are affected, see [ECI limitations](/manuals/enterprise/hardened-desktop/enhanced-container-isolation/limitations.md).
 
 ## Why not just restrict usage of the `--privileged` flag?
 
@@ -50,7 +51,7 @@ $ docker stop $(docker ps -q)
 $ docker rm $(docker ps -aq)
 ```
 
-For more details, see [Enable Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/enable-eci.md).
+For more details, see [Enable Enhanced Container Isolation](/manuals/enterprise/hardened-desktop/enhanced-container-isolation/enable-eci.md).
 
 ## Which containers does ECI protect?
 
@@ -72,13 +73,13 @@ ECI protection varies by container type and Docker Desktop version:
 - Docker Debug containers
 - Kubernetes with Kubeadm provisioner
 
-For complete details, see [ECI limitations](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/limitations.md).
+For complete details, see [ECI limitations](/manuals/enterprise/hardened-desktop/enhanced-container-isolation/limitations.md).
 
 ## Can I mount the Docker socket with ECI turned on?
 
 By default, no. ECI blocks Docker socket bind mounts for security. However, you can configure exceptions for trusted images like Testcontainers.
 
-For configuration details, see [Configure Docker socket exceptions](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md).
+For configuration details, see [Configure Docker socket exceptions](/manuals/enterprise/hardened-desktop/enhanced-container-isolation/config.md).
 
 ## What bind mounts does ECI restrict?
 

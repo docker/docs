@@ -77,5 +77,5 @@ Administrators can:
 - Lock tool configuration to prevent users from changing it
 - Set organization-wide tool policies
 
-See [Settings Management](/enterprise/security/hardened-desktop/settings-management/)
+See [Settings Management](/enterprise/hardened-desktop/settings-management/)
 for details.

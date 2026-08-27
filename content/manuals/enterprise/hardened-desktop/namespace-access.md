@@ -5,6 +5,8 @@ description: Control whether organization members can push content to their pers
 keywords: namespace access, docker hub, personal namespace, organization security, docker business
 tags: [admin]
 weight: 60
+aliases:
+  - /enterprise/security/hardened-desktop/namespace-access/
 ---
 
 {{< summary-bar feature_name="Namespace access" >}}

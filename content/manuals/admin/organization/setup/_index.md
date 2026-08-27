@@ -28,7 +28,7 @@ grid:
   - title: Security
     description: Configure single sign-on, provisioning, and access management.
     icon: shield-check
-    link: /enterprise/security/
+    link: /platform/security/
 ---
 
 Before you manage members and access, set up your Docker organization. You can

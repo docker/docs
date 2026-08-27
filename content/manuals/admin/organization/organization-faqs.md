@@ -33,7 +33,7 @@ Yes. You can
 Some benefits of enforcing sign-in are:
 
 - Ensures users receive the benefits of your subscription.
-- Ensures security features like [Image Access Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md) and [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) are applied.
+- Ensures security features like [Image Access Management](/manuals/enterprise/hardened-desktop/image-access-management.md) and [Registry Access Management](/manuals/enterprise/hardened-desktop/registry-access-management.md) are applied.
 - Ensures you gain insights into users' activity.
 
 ### Can I convert my personal Docker ID to an organization account?

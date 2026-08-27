@@ -16,7 +16,7 @@ grid:
   - title: Security
     description: Configure single sign-on, provisioning, and access management.
     icon: shield-check
-    link: /enterprise/security/
+    link: /platform/security/
   - title: Billing
     description: Manage payment methods and view billing history.
     icon: credit-card

@@ -8,6 +8,7 @@ aliases:
   - /security/for-admins/hardened-desktop/settings-management/configure/
   - /security/for-admins/hardened-desktop/settings-management/configure-json-file/
 ---
+  - /enterprise/security/hardened-desktop/settings-management/configure-json-file/
 
 {{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
