@@ -26,7 +26,11 @@ consistent containerized environment from development to production.
 
 > **Acknowledgment**
 >
-> Docker extends its sincere gratitude to [Kristiyan Velkov](https://www.linkedin.com/in/kristiyan-velkov-763130b3/) for authoring this guide and maintaining the [docker-tanstack-start-sample](https://github.com/kristiyan-velkov/docker-tanstack-start-sample) repository used throughout this guide.
+> Docker extends its sincere gratitude to
+> [Kristiyan Velkov](https://www.linkedin.com/in/kristiyan-velkov-763130b3/) for
+> authoring this guide and maintaining the
+> [docker-tanstack-start-sample](https://github.com/kristiyan-velkov/docker-tanstack-start-sample)
+> repository used throughout this guide.
 
 ---
 

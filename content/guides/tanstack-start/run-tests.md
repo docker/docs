@@ -19,7 +19,8 @@ learn how to:
 - Run unit tests using Vitest inside a Docker container.
 - Use Docker Compose to run tests in an isolated, reproducible environment.
 
-The [sample project](https://github.com/kristiyan-velkov/docker-tanstack-start-sample) uses [Vitest](https://vitest.dev/) with
+The [sample project](https://github.com/kristiyan-velkov/docker-tanstack-start-sample)
+uses [Vitest](https://vitest.dev/) with
 [Testing Library](https://testing-library.com/) for component testing.
 
 ---
@@ -51,7 +52,7 @@ Then add the `test` script to `package.json` as shown above.
 
 ### Step 1: Configure Vitest
 
-Add a `test` block to your `vite.config.ts`:
+Add a `test` block to your Vite config file (`vite.config.ts`):
 
 ```ts {hl_lines="16-19",linenos=true}
 import { defineConfig } from "vite";
@@ -160,7 +161,7 @@ application inside a Docker container using Vitest and Docker Compose.
 
 What you accomplished:
 
-- Configured Vitest in `vite.config.ts` for component testing
+- Configured Vitest in your Vite config file for component testing
 - Created a `tanstack-start-test` service in `compose.yml`
 - Ran tests with `docker compose run --rm tanstack-start-test`
 
