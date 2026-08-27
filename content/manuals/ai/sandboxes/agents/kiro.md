@@ -20,15 +20,12 @@ Create a sandbox and run Kiro for a project directory:
 $ sbx run kiro ~/my-project
 ```
 
-`sbx run` defaults the workspace to the current directory:
+The workspace parameter is optional and defaults to the current directory:
 
 ```console
 $ cd ~/my-project
 $ sbx run kiro
 ```
-
-To create a [mountless sandbox](../usage.md#choose-a-workspace), use
-`sbx create` without a workspace path, then attach by name.
 
 On first run, Kiro prompts you to authenticate using device flow.
 
@@ -56,7 +53,7 @@ repeated login unless you destroy and recreate the sandbox.
 You can trigger the login flow manually:
 
 ```console
-$ sbx run --name <sandbox-name> -- login --use-device-flow
+$ sbx run kiro --name <sandbox-name> -- login --use-device-flow
 ```
 
 This command initiates device flow authentication without starting a coding
@@ -89,15 +86,14 @@ kiro chat --trust-all-tools
 ```
 
 When the first argument after `--` is a flag (begins with `-`), it's added
-after the defaults — for example, `sbx run --name <sandbox-name> -- --resume` runs
+after the defaults — for example, `sbx run kiro -- --resume` runs
 `kiro chat --trust-all-tools --resume`. When the first argument is a bare word,
-it replaces the defaults, which is why
-`sbx run --name <sandbox-name> -- login --use-device-flow` runs the login
-subcommand on its own. To run `chat` with extra arguments of your own, include
-the subcommand:
+it replaces the defaults, which is why `sbx run kiro -- login --use-device-flow`
+runs the login subcommand on its own. To run `chat` with extra arguments of
+your own, include the subcommand:
 
 ```console
-$ sbx run --name <sandbox-name> -- chat --trust-all-tools --resume
+$ sbx run kiro -- chat --trust-all-tools --resume
 ```
 
 ## Base image

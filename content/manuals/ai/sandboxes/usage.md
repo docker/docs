@@ -74,7 +74,7 @@ The first workspace path is the primary workspace. The agent starts there, and
 mounted at the same absolute path inside the sandbox. When you don't pass a
 path to `sbx run`, the current directory is the primary workspace.
 
-Starting with `sbx` version 0.40.0, workspace paths are optional for
+Starting with `sbx` version 0.42.0, workspace paths are optional for
 `sbx create`. Omit them to create a mountless sandbox without a host workspace
 bind mount, then attach to the sandbox by name:
 

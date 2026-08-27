@@ -19,15 +19,12 @@ Create a sandbox and run Droid for a project directory:
 $ sbx run droid ~/my-project
 ```
 
-`sbx run` defaults the workspace to the current directory:
+The workspace parameter is optional and defaults to the current directory:
 
 ```console
 $ cd ~/my-project
 $ sbx run droid
 ```
-
-To create a [mountless sandbox](../usage.md#choose-a-workspace), use
-`sbx create` without a workspace path, then attach by name.
 
 ## Authentication
 
@@ -61,7 +58,7 @@ The sandbox runs `droid` with no implicit flags. Args after `--` are passed
 straight through:
 
 ```console
-$ sbx run --name <sandbox-name> -- exec "fix the build"
+$ sbx run droid -- exec "fix the build"
 ```
 
 ## Base image

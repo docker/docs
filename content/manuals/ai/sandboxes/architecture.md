@@ -10,7 +10,7 @@ properties of the architecture, see [Sandbox isolation](security/isolation.md).
 
 ## Workspace storage
 
-Starting with `sbx` version 0.40.0, workspace paths are optional for
+Starting with `sbx` version 0.42.0, workspace paths are optional for
 `sbx create`. When you omit them, the sandbox has no host workspace bind mount.
 The sandbox uses the template image's configured `WORKDIR` as its default
 working directory. Docker-provided agent templates set `WORKDIR` to

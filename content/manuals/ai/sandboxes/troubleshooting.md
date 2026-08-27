@@ -43,7 +43,7 @@ data. Create fresh sandboxes afterwards.
 
 ## Sandbox doesn't contain my project files
 
-Starting with `sbx` version 0.40.0, the workspace path is optional for
+Starting with `sbx` version 0.42.0, the workspace path is optional for
 `sbx create`. When you omit it, the command creates a mountless sandbox. For
 example, these commands create and attach to a sandbox without mounting your
 host project files:
