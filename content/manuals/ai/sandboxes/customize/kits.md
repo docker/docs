@@ -351,6 +351,11 @@ value with `--kit-arg name=value`:
 $ sbx run ./my-agent/ --kit-arg channel=beta
 ```
 
+Kit argument values are plain text. Values supplied with `--kit-arg` can remain
+in your shell history, and argument files store their values unencrypted. Don't
+use kit arguments for secrets. Use [Credentials](../configuration/credentials.md)
+instead.
+
 An argument without a kit-name prefix is offered to every kit that declares it.
 When several kits declare the same argument, prefix it with the value of the
 kit's `name` field and a period to target one kit:

@@ -126,14 +126,18 @@ args:
   channel:
     default: stable
     enum: [stable, beta, nightly]
-  token:
+  target:
     required: true
-    description: API token
+    description: Build target
 
 environment:
   variables:
     TOOL_VERSION: "${{ kit.args.version }}"
 ```
+
+Don't use kit arguments for API tokens, passwords, or other secrets. Use
+[Credentials](../configuration/credentials.md) to provide sensitive values to
+a sandbox.
 
 | Field         | Description                                                                                                  |
 | ------------- | ------------------------------------------------------------------------------------------------------------ |
