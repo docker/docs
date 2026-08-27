@@ -280,10 +280,10 @@ is enabled and the SSH agent row shows the intended socket mode:
 $ sbx setup
 ```
 
-In dynamic mode, reconnect from a shell where `SSH_AUTH_SOCK` points to the
-intended agent. In fixed mode, confirm that the configured path points to your
-active host agent socket. After changing forwarding or the socket mode, run
-`sbx daemon restart`.
+If you use each client's current `SSH_AUTH_SOCK`, reconnect from a shell where
+it points to the intended agent. If you use a fixed socket, confirm that the
+configured path points to an active host agent. After changing forwarding or
+the socket selection, run `sbx daemon restart`.
 
 If `ssh-add -L` prints `The agent has no identities.`, the sandbox can reach
 the forwarded agent, but the host agent doesn't have a loaded key. Load the

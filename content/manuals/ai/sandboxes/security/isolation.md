@@ -235,9 +235,8 @@ environment.
 
 SSH agent forwarding is enabled by default. Private keys stay on the host, but
 any process inside the sandbox can ask the forwarded agent to authenticate or
-sign data. Docker Sandboxes validates the upstream socket as an SSH agent
-before forwarding requests. If forwarding is disabled, the settings can't be
-read, or no usable fixed or client socket is available, the sandbox doesn't
-receive access to an SSH agent.
+sign data. Docker Sandboxes forwards only sockets it recognizes as SSH agents.
+A sandbox receives no SSH agent when forwarding is disabled, the configuration
+is unavailable, or the selected socket can't be used.
 
 For how to store and manage credentials, see [Credentials](../configuration/credentials.md).

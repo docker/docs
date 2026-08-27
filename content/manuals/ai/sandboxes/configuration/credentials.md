@@ -285,12 +285,12 @@ Run `sbx setup` to configure forwarding and choose which socket to use:
 $ sbx setup
 ```
 
-From the SSH agent row, you can disable forwarding, use each client's current
+In the SSH agent step, you can disable forwarding, use each client's current
 `SSH_AUTH_SOCK`, or set a fixed socket path for every sandbox. A fixed path is
 useful for agents that use a custom socket, such as the 1Password SSH agent.
 
-Restart the daemon after changing forwarding or the socket mode to replace
-forwarders for existing sandboxes:
+After changing forwarding or the socket selection, restart the daemon so
+existing sandboxes use the new configuration:
 
 ```console
 $ sbx daemon restart
