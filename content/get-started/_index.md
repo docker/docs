@@ -13,9 +13,9 @@ params:
       time: 15 min
     - audience: AI developers
       title: Run an AI agent safely
-      description: Give an agent an isolated environment with its own Docker daemon and system tools.
+      description: Work with an agent normally while its tools and system changes stay in a disposable environment.
       link: /get-started/tutorials/run-an-agent/
-      time: 10 min
+      time: 15 min
     - audience: Administrators
       title: Roll out Docker to a pilot group
       description: Invite a pilot user, apply a Docker Desktop policy, and verify the managed experience.
