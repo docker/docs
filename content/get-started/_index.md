@@ -13,7 +13,7 @@ params:
       time: 15 min
     - audience: AI developers
       title: Run an AI agent safely
-      description: Give an agent a normal workflow while containing the side effects of a destructive cleanup task.
+      description: Reset a real Compose project with an agent without risking another checkout's database.
       link: /get-started/tutorials/run-an-agent/
       time: 15 min
     - audience: Administrators
