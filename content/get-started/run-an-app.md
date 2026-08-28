@@ -6,9 +6,13 @@ keywords: Docker, get started, containers, Docker Compose, Compose Watch
 weight: 1
 ---
 
-In this 10-minute tutorial, you'll start a five-service development application
-with one command and see a code change update while it runs. Docker provides the
-runtimes and database, so your host only needs Git and Docker Desktop.
+A development application can depend on language runtimes, a database, and
+supporting tools. Installing and matching that stack on every machine delays the
+first useful result.
+
+In this 10-minute tutorial, you'll start a prepared five-service application
+with one command, change its code, and see the result. Your host needs only Git
+and Docker Desktop.
 
 ## Before you start
 
@@ -24,7 +28,8 @@ $ git clone https://github.com/docker/getting-started-todo-app
 $ cd getting-started-todo-app
 ```
 
-The project includes a `compose.yaml` file that defines its complete development
+The prepared project gives Docker something concrete to run. You will change one
+source file. Its `compose.yaml` file already defines the rest of the development
 environment.
 
 ## Start the application
@@ -36,8 +41,11 @@ $ docker compose watch
 ```
 
 Docker builds the application images, pulls the images for supporting services,
-and starts the containers. After the services start, open
-[http://localhost](http://localhost) to see the to-do application.
+and starts the containers. The first run prints build and startup logs in the
+terminal.
+
+After the services start, open [http://localhost](http://localhost). You should
+see a greeting and an empty to-do list.
 
 Add an item to confirm that the application and its database are working.
 
@@ -50,9 +58,9 @@ to use your own greeting:
 const GREETING = 'Hello from Docker!';
 ```
 
-Save the file, then refresh [http://localhost](http://localhost). Compose Watch
-copies the change into the backend container, and the application displays the
-updated greeting.
+Save the file, then refresh [http://localhost](http://localhost). The application
+displays your greeting while `docker compose watch` keeps running. Compose Watch
+detected the edit and copied the file into the backend container.
 
 ## See what Docker started
 
@@ -62,9 +70,9 @@ Open another terminal in the project directory and list the services:
 $ docker compose ps
 ```
 
-The application runs a frontend, an API, a MySQL database, a database management
-interface, and a proxy in separate containers. Docker started the stack without
-installing Node.js, MySQL, or Traefik on your host.
+The `STATUS` column shows each service as running, with the MySQL service marked
+as healthy. One command started the frontend, API, database, database management
+interface, and proxy without installing Node.js, MySQL, or Traefik on your host.
 
 ## Stop the application
 
@@ -77,14 +85,12 @@ $ docker compose down --volumes
 
 Your source files remain in the project directory.
 
-## What happened
+## What you proved
 
-The `compose.yaml` file described the full application stack. Docker created a
-repeatable environment from that description, connected its services, and kept
-the running code in sync with your editor.
-
-You can hand the same project to another developer, run it in CI, or deploy it
-without recreating the stack by hand.
+You started a complete development environment from a version-controlled
+description, changed the running application, and removed the environment. The
+project carried its required stack instead of relying on a matching stack on
+your host.
 
 To containerize an application of your own, choose its language from the
 [Docker guides](/guides/).

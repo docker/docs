@@ -6,9 +6,13 @@ keywords: Docker, get started, AI agents, Docker Sandboxes, sbx, sandbox
 weight: 2
 ---
 
-In this 10-minute tutorial, you'll give an AI coding agent a real task inside an
-isolated microVM. The agent can edit code, install tools, and run containers,
-while your host working tree stays unchanged.
+An AI coding agent is most useful when it can edit files, install tools, and run
+commands. Running those actions directly on your host also increases the impact
+of a mistake.
+
+In this 10-minute tutorial, you'll give an agent a real task in an isolated
+microVM. The agent works in a private clone, while you decide when its changes
+cross back to your Git repository.
 
 This path uses Claude Code and clone mode to provide one direct route through
 the experience.
@@ -30,6 +34,9 @@ $ git clone https://github.com/docker/getting-started-todo-app
 $ cd getting-started-todo-app
 ```
 
+The prepared project gives the agent something concrete to change and test. You
+will review one source file rather than learn the application itself.
+
 ## Start the agent
 
 Launch Claude Code in a named sandbox with a private clone of the project:
@@ -41,6 +48,9 @@ $ sbx run --clone --name agent-demo claude
 On the first run, select the **Balanced** network policy. This policy blocks
 network destinations by default and includes access to common development
 services.
+
+The CLI then creates the microVM and starts Claude Code. When the Claude Code
+prompt appears, the sandbox is ready.
 
 Enter `/login` inside Claude Code and complete the browser sign-in.
 
@@ -56,6 +66,9 @@ tests. Do not push the branch.
 
 The agent works in a private clone inside the sandbox. Your source repository is
 mounted in the sandbox with read-only access.
+
+When Claude Code reports that the task is complete, confirm that it created the
+`sandbox-demo` branch and that the backend tests passed.
 
 ## Check the boundary
 
@@ -75,8 +88,9 @@ $ git fetch sandbox-agent-demo
 $ git diff main..sandbox-agent-demo/sandbox-demo -- backend/src/routes/getGreeting.js
 ```
 
-The sandbox acts as a Git remote. You choose when to fetch a branch and whether
-to keep it.
+The diff should show `Hello world!` replaced by `Hello from a sandbox!`. Fetching
+the branch made the change available for review without applying it to your
+working tree.
 
 ## Remove the sandbox
 
@@ -89,12 +103,11 @@ $ sbx rm agent-demo
 This deletes the private clone, packages, images, containers, and other files
 inside the microVM. The project on your host remains unchanged.
 
-## What made this safer
+## What you proved
 
-- The agent ran inside a microVM with its own filesystem and Docker daemon
-- Clone mode gave the agent a private working copy and read-only access to the
-  host repository
-- The network policy limited which destinations the sandbox could reach
+The agent changed code and ran tests with its own filesystem, Docker daemon, and
+private working copy. Your host repository remained read-only to the agent, and
+the network policy limited which destinations the sandbox could reach.
 
 Using a sandbox narrows what an agent can access. Review the network rules,
 credentials, and files you share before assigning sensitive work.
