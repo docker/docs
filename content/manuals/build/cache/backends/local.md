@@ -36,6 +36,7 @@ The following table describes the available CSV parameters that you can pass to
 | `compression-level` | `cache-to`   | `0..22`                 |         | Compression level, see [cache compression][3].                                                                                  |
 | `force-compression` | `cache-to`   | `true`,`false`          | `false` | Forcibly apply compression, see [cache compression][3].                                                                         |
 | `ignore-error`      | `cache-to`   | Boolean                 | `false` | Ignore errors caused by failed cache exports.                                                                                   |
+| `reset`             | `cache-to`   | `true`,`false`          | `false` | Remove blobs from the cache directory that aren't referenced by the current manifests in `index.json`. Useful for preventing the local cache directory from growing indefinitely. |
 
 [1]: _index.md#cache-mode
 [2]: _index.md#oci-media-types
