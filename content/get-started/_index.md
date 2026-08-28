@@ -5,10 +5,6 @@ description: Choose a tutorial to build and run an application, work with an AI 
 layout: get-started
 params:
   notoc: true
-  sidebar:
-    include:
-      - Run an application with Docker
-      - Run an AI agent in a sandbox
   tutorials:
     - audience: New to Docker
       title: Build and run an application
