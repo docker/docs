@@ -31,7 +31,7 @@ Data written to the container layer doesn't persist when the container is
 destroyed. This means that it can be difficult to get the data out of the
 container if another process needs it.
 
-The writable layer is unique per container. You can't easily extract the data
+The writable layer is unique per container. You can't extract the data
 from the writeable layer to the host, or to another container.
 
 ## Storage mount options
