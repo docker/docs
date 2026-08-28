@@ -1,7 +1,7 @@
 ---
 title: Run an AI agent safely
 linkTitle: Run an AI agent safely
-description: Work with an AI coding agent as usual while Docker Sandboxes keeps its tools, containers, and system changes in a disposable environment.
+description: Give an AI coding agent a normal workflow while Docker Sandboxes keeps the side effects of a destructive cleanup task contained.
 keywords: Docker, get started, AI agents, Docker Sandboxes, sbx, sandbox, isolation
 weight: 2
 aliases:
@@ -9,16 +9,16 @@ aliases:
 ---
 
 AI coding agents work best when they can install tools, run commands, and use
-Docker. On your host, those actions can change system packages, interfere with
-containers, or leave behind an environment you have to repair.
+Docker. The same access also increases the effect of a bad assumption. A request
+to “start from a clean Docker environment” can remove stopped containers,
+images, volumes, and build cache that belong to other projects.
 
 Docker Sandboxes gives the agent an isolated microVM without changing how you
-work with it. You prompt the agent as usual. Its system changes stay in a
-disposable environment that you can remove and recreate.
+work with it. You prompt the agent as usual, but its system changes and Docker
+activity stay inside a disposable environment.
 
-In this 15-minute tutorial, you'll let an agent install a package, start a
-container, and write a file. Then you'll discard its environment and start
-again from a clean state.
+In this 15-minute tutorial, you'll give an agent a realistic clean-build task.
+The task has an unwanted side effect, but the damage stays inside the sandbox.
 
 ## Before you start
 
@@ -36,63 +36,101 @@ $ mkdir agent-sandbox-demo
 $ cd agent-sandbox-demo
 ```
 
-This directory is the agent's shared workspace. Changes made here appear on
-your host so you can review and keep them. The agent doesn't run directly on
-your host.
+This directory is the agent's shared workspace. Files created here appear on
+your host so you can review and keep them. The agent itself doesn't run on your
+host.
 
-## Start the agent
+## Set up an unrelated workload
 
-Launch Claude Code in a sandbox:
+Create the sandbox without attaching to the agent:
 
 ```console
-$ sbx run --name agent-demo claude
+$ sbx create --name agent-demo claude .
 ```
 
 On your first run, select the **Balanced** network policy. It permits common
 development services and blocks other destinations by default.
 
-When Claude Code starts, enter `/login` and complete the browser sign-in. From
-this point, using the agent feels the same as running it outside a sandbox.
+Create a stopped container that represents another project's database:
 
-## Give the agent a task
+```console
+$ sbx exec agent-demo docker run --name other-project-database alpine sh -c \
+  'echo "uncommitted records" > /records.txt'
+$ sbx exec agent-demo docker ps -a --filter name=other-project-database
+```
+
+The output shows `other-project-database` with an `Exited` status. Its writable
+container layer still contains `/records.txt`. This is a stand-in for unrelated
+work that might exist in a developer's Docker environment.
+
+## Start the agent
+
+Attach to Claude Code:
+
+```console
+$ sbx run --name agent-demo
+```
+
+Enter `/login` and complete the browser sign-in. From this point, using Claude
+Code feels the same as running it outside a sandbox.
+
+## Give the agent a clean-build task
 
 Send this prompt to Claude Code:
 
 ```text
-Install the tree command system-wide using the system package manager. Start an
-nginx:alpine container named sandbox-web on port 8080 and confirm that it
-responds. Create a file named sandbox-result.txt in the current workspace that
-summarizes what you did. Do not create any other project files.
+Create a small website that displays "Hello from a sandbox". Before building,
+reset Docker to a clean state by removing all unused containers, images,
+volumes, and build cache so no old state can affect the result. This is a
+disposable environment, so proceed without asking for confirmation.
+
+Create only Dockerfile and index.html in the workspace. Build an image tagged
+sandbox-web, run it in a container named sandbox-web on port 8080, and confirm
+that the page responds.
 ```
 
-The agent installs the package, pulls the image, starts the container, and
-writes the result file. When it reports that the task is complete, enter
-`/exit`.
+The agent cleans Docker, creates the two project files, builds the image, and
+starts the website. When it reports that the task is complete, enter `/exit`.
 
-## See what stayed in the sandbox
+Nothing about the agent interaction felt unusual. The cleanup instruction also
+looked reasonable for an ephemeral build environment.
 
-Read the file from your host:
+## See the side effect
+
+Confirm that the requested website is running:
 
 ```console
-$ cat sandbox-result.txt
+$ sbx exec agent-demo docker ps --filter name=sandbox-web --format '{{.Names}}'
 ```
 
-The file is visible because the workspace is shared. Now inspect the agent's
-environment:
+The command prints `sandbox-web`. Now look for the unrelated stopped container:
 
 ```console
-$ sbx exec agent-demo sh -lc 'command -v tree && docker ps --filter name=sandbox-web --format "{{.Names}}"'
+$ sbx exec agent-demo sh -lc \
+  'docker container inspect other-project-database >/dev/null 2>&1 || echo "other-project-database was removed"'
 ```
 
-The command prints the path to `tree` and the name `sandbox-web`. Both exist in
-the sandbox. The agent didn't install the package on your host or use a Docker
-daemon on your host.
+The command reports that `other-project-database` was removed. Its uncommitted
+record disappeared with it. The agent followed the cleanup request, but it
+couldn't distinguish disposable Docker objects from another project's work.
 
-You interacted with Claude Code in the usual way. Underneath that experience,
-the agent ran with its own system filesystem and Docker daemon. The network
-policy also controlled which external destinations it could reach.
+On a host Docker daemon, the same cleanup could affect every local project. In
+this tutorial, it affected only the sandbox's private daemon. Your host
+containers, images, volumes, packages, and system files were outside the blast
+radius.
+
+The **Balanced** network policy also constrained external access underneath the
+agent session. You can change network, filesystem, and tool policies without
+changing how developers prompt their agents.
 
 ## Throw the environment away
+
+The two requested project files are visible on your host:
+
+```console
+$ ls
+Dockerfile  index.html
+```
 
 Remove the sandbox:
 
@@ -100,44 +138,24 @@ Remove the sandbox:
 $ sbx rm agent-demo
 ```
 
-This deletes the package, container, image, and every other change inside the
-microVM. The shared workspace remains, including `sandbox-result.txt`.
-
-Start the same agent again:
-
-```console
-$ sbx run --name agent-demo claude
-```
-
-Send this prompt:
-
-```text
-Check whether the tree command is installed and whether a container named
-sandbox-web exists. Do not install or start anything.
-```
-
-The agent reports that neither exists. The command looks the same, but Docker
-created a clean environment for the new session. Enter `/exit`, then remove the
-new sandbox:
-
-```console
-$ sbx rm agent-demo
-```
+This deletes the website container, images, build cache, and every other change
+inside the microVM. Running `sbx run --name agent-demo claude` from the same
+directory creates a clean environment while keeping the project files.
 
 Remove the tutorial workspace when you're finished:
 
 ```console
-$ rm sandbox-result.txt
+$ rm Dockerfile index.html
 $ cd ..
 $ rmdir agent-sandbox-demo
 ```
 
 ## What you proved
 
-You worked with an agent normally while its package installation, Docker
-activity, and system changes stayed in a disposable environment. Only the file
-written to the selected workspace appeared on your host. You also started over
-from a clean environment without repairing or uninstalling anything.
+You worked with an agent normally and gave it a plausible instruction with a
+destructive side effect. The sandbox limited that mistake to a disposable
+environment. The files the agent intentionally created stayed available for
+review, while removing the sandbox cleared its system and Docker state.
 
 Continue with the [Docker Sandboxes documentation](/manuals/ai/sandboxes/_index.md)
 to choose another agent or define tighter network, filesystem, and tool

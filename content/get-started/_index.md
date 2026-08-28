@@ -13,7 +13,7 @@ params:
       time: 15 min
     - audience: AI developers
       title: Run an AI agent safely
-      description: Work with an agent normally while its tools and system changes stay in a disposable environment.
+      description: Give an agent a normal workflow while containing the side effects of a destructive cleanup task.
       link: /get-started/tutorials/run-an-agent/
       time: 15 min
     - audience: Administrators
