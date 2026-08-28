@@ -37,6 +37,7 @@ The following table describes the available CSV parameters that you can pass to
 | `compression-level` | `cache-to`   | `0..22`                 |         | Compression level, see [cache compression][3].                                                                                  |
 | `force-compression` | `cache-to`   | `true`,`false`          | `false` | Forcibly apply compression, see [cache compression][3].                                                                         |
 | `ignore-error`      | `cache-to`   | Boolean                 | `false` | Ignore errors caused by failed cache exports.                                                                                   |
+| `reset`             | `cache-to`   | `true`,`false`          | `false` | Delete blobs that no tag references, see [cache versioning][4].                                                                 |
 
 [1]: _index.md#cache-mode
 [2]: _index.md#oci-media-types
@@ -83,6 +84,16 @@ If you specify both `digest` and `tag`, BuildKit uses `digest`.
 By default, updating a tag doesn't delete the blobs used by its previous
 manifest. The previous manifest remains available by digest, so the local cache
 directory grows over time.
+
+Buildx version 0.35.0 and later supports `reset=true` on export, which deletes
+blobs that no tag references:
+
+```console
+$ docker buildx build --cache-to type=local,dest=path/to/local/dir,reset=true .
+```
+
+Blobs that other tags reference are kept. Manifests that no tag references are
+deleted, so you can no longer import them by digest.
 
 ## Further reading
 
