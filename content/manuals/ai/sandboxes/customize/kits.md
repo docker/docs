@@ -112,6 +112,7 @@ file removes. In this table, `~` is `/home/agent`.
 | `claude` | `~/.claude.json`, `~/.claude/settings.json`, `~/.claude/.config.json` |
 | `codex` | `~/.codex/config.toml` |
 | `cursor` | `~/.cursor/cli-config.json` |
+| `devin` | `~/.config/devin/config.json`, `~/.config/devin/mcp_config.json` |
 | `gemini` | `~/.gemini/settings.json` |
 | `opencode` | `~/.config/opencode/opencode.json` |
 

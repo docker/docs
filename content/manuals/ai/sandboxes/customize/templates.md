@@ -44,6 +44,7 @@ CLI, and common development tools like Node.js, Python, Go, and Java.
 | `claude-code-minimal` | Claude Code with a minimal toolset (no Node.js, Python, Go, or Java) |
 | `codex`               | [OpenAI Codex](https://github.com/openai/codex)                      |
 | `cursor-agent`        | [Cursor](https://cursor.com/cli)                                     |
+| `devin`               | [Devin CLI](https://docs.devin.ai/work-with-devin/devin-cli)         |
 | `docker-agent`        | [Docker Agent](https://github.com/docker/docker-agent)               |
 | `gemini`              | [Gemini CLI](https://github.com/google-gemini/gemini-cli)            |
 | `opencode`            | [OpenCode](https://opencode.ai)                                      |
