@@ -113,6 +113,14 @@ By default, your workspace is shared into the VM as a read-write mount.
 The agent and the host see the same files, and changes the agent makes
 appear on your host as soon as they're written.
 
+Direct mounts enforce access by path. If a workspace file is a hard link to a
+file outside the workspace, the agent can read and modify the underlying file
+through the workspace path. Changes affect every hard link to that file,
+including links outside the authorized workspace. Filesystem access policies
+do not block this access because they evaluate the workspace path rather than
+other paths to the same file. [Clone mode](#clone-mode) prevents writes through
+the primary workspace by mounting the host repository read-only.
+
 There is no isolation between the agent and your workspace in this mode.
 The agent can create, modify, or delete any file in the workspace,
 including:
