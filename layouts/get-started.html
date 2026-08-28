@@ -1,11 +1,11 @@
 {{ define "right" }}{{ end }}
 {{ define "article" }}
-  <article class="mx-auto w-full max-w-6xl pb-12 md:pb-20">
+  <article class="w-full max-w-5xl pb-10 md:pb-16">
     {{ partial "breadcrumbs.html" . }}
-    <header class="max-w-3xl pt-8 pb-10 md:pt-12 md:pb-14">
+    <header class="max-w-3xl pb-8 md:pb-10">
       <h1
         data-pagefind-weight="10"
-        class="mb-4 text-4xl leading-tight font-semibold tracking-tight text-balance text-gray-950 md:text-5xl dark:text-white"
+        class="mb-3 text-4xl leading-tight font-semibold tracking-tight text-balance text-gray-950 md:text-5xl dark:text-white"
       >
         Get started with Docker
       </h1>
@@ -20,7 +20,7 @@
       {{ range .Params.tutorials }}
         <a
           href="{{ .link }}"
-          class="group grid grid-cols-1 gap-4 border-t border-gray-200 px-2 py-7 transition-colors last:border-b hover:bg-blue-50/70 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-400/40 focus-visible:ring-inset md:py-9 xl:grid-cols-[10rem_minmax(0,1fr)_10rem] xl:items-center xl:gap-8 xl:px-4 dark:border-gray-700 dark:hover:bg-gray-900/60"
+          class="group grid grid-cols-1 gap-4 border-t border-gray-200 px-3 py-6 transition-colors last:border-b hover:bg-blue-50/70 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-400/40 focus-visible:ring-inset md:py-7 lg:grid-cols-[8rem_minmax(0,1fr)_6rem] lg:items-center lg:gap-6 dark:border-gray-700 dark:hover:bg-gray-900/60"
         >
           <p
             class="font-mono text-xs font-semibold tracking-[0.12em] text-gray-600 uppercase transition-colors group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-blue-400"
@@ -42,7 +42,7 @@
           </div>
 
           <div
-            class="flex items-center justify-between gap-5 text-gray-600 xl:justify-end dark:text-gray-300"
+            class="flex items-center justify-between gap-4 text-gray-600 lg:justify-end dark:text-gray-300"
           >
             <span
               class="font-mono text-xs font-semibold tracking-wide uppercase"

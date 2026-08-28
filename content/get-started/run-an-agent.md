@@ -4,6 +4,9 @@ linkTitle: Run an AI agent
 description: Give an AI coding agent an isolated workspace, let it change and test code, and review its work without changing your host working tree.
 keywords: Docker, get started, AI agents, Docker Sandboxes, sbx, sandbox
 weight: 2
+params:
+  sidebar:
+    group: Tutorials
 ---
 
 An AI coding agent is most useful when it can edit files, install tools, and run

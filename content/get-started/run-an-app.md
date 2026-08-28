@@ -4,6 +4,9 @@ linkTitle: Run an application
 description: Start a multi-service application with Docker Compose, change its code, and see the update without installing the application stack.
 keywords: Docker, get started, containers, Docker Compose, Compose Watch
 weight: 1
+params:
+  sidebar:
+    group: Tutorials
 ---
 
 A development application can depend on language runtimes, a database, and

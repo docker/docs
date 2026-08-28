@@ -5,6 +5,10 @@ description: Choose a tutorial to build and run an application, work with an AI 
 layout: get-started
 params:
   notoc: true
+  sidebar:
+    groups:
+      - Tutorials
+    groupsFirst: true
   tutorials:
     - audience: New to Docker
       title: Build and run an application
