@@ -1,0 +1,120 @@
+{{ define "right" }}{{ end }}
+{{ define "article" }}
+  <article class="mx-auto w-full max-w-6xl">
+    {{ partial "breadcrumbs.html" . }}
+    <header class="max-w-3xl pt-8 pb-10 md:pt-12 md:pb-14">
+      <p
+        class="mb-4 font-mono text-xs font-semibold tracking-[0.18em] text-blue-600 uppercase dark:text-blue-400"
+      >
+        Two paths. One clear outcome.
+      </p>
+      <h1
+        data-pagefind-weight="10"
+        class="mb-5 text-4xl leading-[1.05] font-semibold tracking-tight text-balance text-gray-950 md:text-6xl dark:text-white"
+      >
+        What do you want Docker to do?
+      </h1>
+      <p
+        class="max-w-2xl text-lg leading-relaxed text-gray-600 md:text-xl dark:text-gray-300"
+      >
+        Run an application without rebuilding its environment, or give an AI
+        agent an isolated place to work. Pick one and see the result in about 10
+        minutes.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
+      {{ range $index, $journey := .Params.journeys }}
+        <a
+          href="{{ $journey.link }}"
+          class="group {{ if eq $index 0 }}
+            border-gray-200 bg-white hover:-translate-y-1 hover:border-blue-400
+            hover:shadow-xl lg:col-span-5 dark:border-gray-700 dark:bg-gray-900
+            dark:hover:border-blue-500
+          {{ else }}
+            border-blue-300 bg-blue-50 hover:-translate-y-1
+            hover:border-blue-500 hover:shadow-xl lg:col-span-7
+            dark:border-blue-800 dark:bg-blue-950/40 dark:hover:border-blue-500
+          {{ end }} relative flex min-h-[30rem] flex-col overflow-hidden rounded-2xl border p-7 transition duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-400/40 md:p-9"
+        >
+          <div class="mb-12 flex items-center justify-between gap-4">
+            <span
+              class="font-mono text-xs font-semibold tracking-[0.14em] text-gray-600 uppercase dark:text-gray-300"
+            >
+              {{ $journey.label }}
+            </span>
+            <span
+              class="rounded-full border border-current/20 px-3 py-1 text-xs font-medium text-gray-600 dark:text-gray-300"
+            >
+              {{ $journey.time }}
+            </span>
+          </div>
+
+          <div
+            class="{{ if eq $index 0 }}
+              bg-blue-100 text-blue-600 dark:bg-blue-950 dark:text-blue-300
+            {{ else }}
+              bg-blue-600 text-white dark:bg-blue-500
+            {{ end }} mb-6 flex size-12 items-center justify-center rounded-xl"
+          >
+            <span class="icon-svg">
+              {{ partialCached "icon" $journey.icon $journey.icon }}
+            </span>
+          </div>
+
+          <h2
+            class="mb-4 max-w-xl text-3xl leading-tight font-semibold tracking-tight text-balance text-gray-950 md:text-4xl dark:text-white"
+          >
+            {{ $journey.title }}
+          </h2>
+          <p
+            class="mb-8 max-w-xl text-base leading-relaxed text-gray-600 md:text-lg dark:text-gray-300"
+          >
+            {{ $journey.description }}
+          </p>
+
+          <div class="mt-auto">
+            {{ if eq $index 1 }}
+              <div
+                class="mb-5 grid grid-cols-[1fr_auto_1fr] items-center gap-2 font-mono text-[0.68rem] tracking-wide text-gray-600 uppercase dark:text-gray-300"
+                aria-hidden="true"
+              >
+                <span
+                  class="rounded-lg border border-gray-300 bg-white/70 px-3 py-2 text-center dark:border-gray-700 dark:bg-gray-900/70"
+                  >Your project · read only</span
+                >
+                <span class="text-blue-500">→</span>
+                <span
+                  class="rounded-lg border border-blue-300 bg-blue-100 px-3 py-2 text-center text-blue-800 dark:border-blue-700 dark:bg-blue-900/60 dark:text-blue-200"
+                  >Agent · isolated</span
+                >
+              </div>
+            {{ end }}
+            <div
+              class="mb-6 overflow-x-auto rounded-xl bg-gray-950 px-4 py-3 font-mono text-sm whitespace-nowrap text-gray-100 shadow-inner"
+            >
+              <span class="mr-2 text-blue-400">$</span>{{ $journey.command }}
+            </div>
+            <div
+              class="flex items-center justify-between gap-4 font-semibold text-gray-950 dark:text-white"
+            >
+              <span>{{ $journey.action }}</span>
+              <span
+                class="icon-svg text-blue-600 transition-transform group-hover:translate-x-1 dark:text-blue-400"
+              >
+                {{ partialCached "icon" "arrow-right" "arrow-right" }}
+              </span>
+            </div>
+          </div>
+        </a>
+      {{ end }}
+    </div>
+
+    <p
+      class="mx-auto mt-10 max-w-2xl text-center text-sm leading-relaxed text-gray-500 dark:text-gray-400"
+    >
+      Both tutorials use a prepared project and one supported path. Explore the
+      options after you see Docker working.
+    </p>
+  </article>
+{{ end }}

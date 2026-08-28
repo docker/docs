@@ -31,10 +31,7 @@ page index, use [llms-full.txt](https://docs.docker.com/llms-full.txt).
 {{ with $getStarted }}
 ## Starter paths
 
-{{- range index .Params "get-started" }}
-- [{{ .title }}]({{ .link | absURL }}): {{ .description }}
-{{- end }}
-{{- range index .Params "get-started2" }}
+{{- range .Params.journeys }}
 - [{{ .title }}]({{ .link | absURL }}): {{ .description }}
 {{- end }}
 {{- end }}
