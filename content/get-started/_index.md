@@ -5,20 +5,16 @@ description: Choose a tutorial to build and run an application, work with an AI 
 layout: get-started
 params:
   notoc: true
-  sidebar:
-    groups:
-      - Tutorials
-    groupsFirst: true
   tutorials:
     - audience: New to Docker
       title: Build and run an application
       description: Start a multi-service development stack, change its code, and see the result.
-      link: /get-started/run-an-app/
+      link: /get-started/tutorials/run-an-app/
       time: 10 min
     - audience: AI developers
       title: Run an AI agent safely
       description: Give an agent an isolated place to change and test code without handing over your machine.
-      link: /get-started/run-an-agent/
+      link: /get-started/tutorials/run-an-agent/
       time: 10 min
     - audience: Administrators
       title: Set up Docker for your organization

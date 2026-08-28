@@ -21,7 +21,7 @@ reference material for everyday development and operations tasks.
 ## Common questions
 
 - [How do I get started with Docker?](/get-started/)
-- [How do I run an application with Docker?](/get-started/run-an-app/)
-- [Can I run my AI agent in a sandbox?](/get-started/run-an-agent/)
+- [How do I run an application with Docker?](/get-started/tutorials/run-an-app/)
+- [Can I run my AI agent in a sandbox?](/get-started/tutorials/run-an-agent/)
 - [What are Docker Hardened Images?](/dhi/)
 - [Why should I use Docker Compose?](/compose/)

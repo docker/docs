@@ -4,9 +4,8 @@ linkTitle: Run an application
 description: Start a multi-service application with Docker Compose, change its code, and see the update without installing the application stack.
 keywords: Docker, get started, containers, Docker Compose, Compose Watch
 weight: 1
-params:
-  sidebar:
-    group: Tutorials
+aliases:
+  - /get-started/run-an-app/
 ---
 
 A development application can depend on language runtimes, a database, and
@@ -20,7 +19,7 @@ and Docker Desktop.
 ## Before you start
 
 - Install [Git](https://git-scm.com/downloads)
-- [Install Docker Desktop](get-docker.md) and start it
+- [Install Docker Desktop](../get-docker.md) and start it
 
 ## Get the application
 

@@ -8,6 +8,5 @@ build:
   render: never
 params:
   sidebar:
-    group: Tutorials
     goto: /guides/admin-set-up/
 ---

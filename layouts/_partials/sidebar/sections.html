@@ -29,9 +29,6 @@
     {{- end }}
   {{- end }}
   {{- $ungrouped := where $pages "Params.sidebar.group" "==" nil }}
-  {{- if $section.Params.sidebar.groupsFirst }}
-    {{- template "renderGroups" (dict "groups" $section.Params.sidebar.groups "pages" $pages "revealHidden" $revealHidden) }}
-  {{- end }}
   {{- range $ungrouped }}
     {{- if .IsSection }}
       {{- template "renderList" (dict "section" . "revealHidden" $revealHidden) }}
@@ -39,16 +36,7 @@
       {{- template "renderSingle" . }}
     {{- end }}
   {{- end }}
-  {{- if not $section.Params.sidebar.groupsFirst }}
-    {{- template "renderGroups" (dict "groups" $section.Params.sidebar.groups "pages" $pages "revealHidden" $revealHidden) }}
-  {{- end }}
-
-{{ end }}
-
-{{ define "renderGroups" }}
-  {{- $pages := .pages }}
-  {{- $revealHidden := .revealHidden }}
-  {{- range .groups }}
+  {{- range $section.Params.sidebar.groups }}
     <!--  Main titles -->
     <div class="navbar-group">
       <li class="navbar-group-font-title">
@@ -63,6 +51,7 @@
       {{- end }}
     </div>
   {{- end }}
+
 {{ end }}
 
 {{/* Recursive template for sidebar items */}}
