@@ -1,23 +1,20 @@
 ---
-title: Run an AI agent in a sandbox
-linkTitle: Run an AI agent
-description: Give an AI coding agent an isolated workspace, let it change and test code, and review its work without changing your host working tree.
-keywords: Docker, get started, AI agents, Docker Sandboxes, sbx, sandbox
+title: Run an AI agent safely
+linkTitle: Run an AI agent safely
+description: Run an AI coding agent in an isolated environment with its own Docker daemon and system tools.
+keywords: Docker, get started, AI agents, Docker Sandboxes, sbx, sandbox, isolation
 weight: 2
 aliases:
   - /get-started/run-an-agent/
 ---
 
-An AI coding agent is most useful when it can edit files, install tools, and run
-commands. Running those actions directly on your host also increases the impact
-of a mistake.
+AI coding agents are more useful when they can run commands, install tools, and
+use Docker. Giving an autonomous process those capabilities directly on your
+host increases the impact of a mistake.
 
-In this 10-minute tutorial, you'll give an agent a real task in an isolated
-microVM. The agent works in a private clone, while you decide when its changes
-cross back to your Git repository.
-
-This path uses Claude Code and clone mode to provide one direct route through
-the experience.
+In this 10-minute tutorial, you'll run an agent in an isolated microVM, ask it
+to build and test a project, inspect what it created, and remove the entire
+environment.
 
 ## Before you start
 
@@ -25,94 +22,88 @@ the experience.
 - Install [Git](https://git-scm.com/downloads)
 - Have access to a Claude subscription
 
-The `sbx` CLI runs without Docker Desktop or Docker Engine on the host.
+Docker Desktop and Docker Engine aren't required on the host.
 
 ## Get a project
 
-Clone the sample application and open its directory:
+Clone a prepared application and open its directory:
 
 ```console
 $ git clone https://github.com/docker/getting-started-todo-app
 $ cd getting-started-todo-app
 ```
 
-The prepared project gives the agent something concrete to change and test. You
-will review one source file rather than learn the application itself.
+The project gives the agent a real Dockerfile and test suite to work with.
 
 ## Start the agent
 
-Launch Claude Code in a named sandbox with a private clone of the project:
+Launch Claude Code in a named sandbox:
 
 ```console
-$ sbx run --clone --name agent-demo claude
+$ sbx run --name agent-demo claude
 ```
 
-On the first run, select the **Balanced** network policy. This policy blocks
-network destinations by default and includes access to common development
-services.
+On your first run, select the **Balanced** network policy. It permits common
+development services and blocks other destinations by default.
 
-The CLI then creates the microVM and starts Claude Code. When the Claude Code
-prompt appears, the sandbox is ready.
-
-Enter `/login` inside Claude Code and complete the browser sign-in.
+When Claude Code starts, enter `/login` and complete the browser sign-in. The
+agent is then running inside the sandbox with the current project as its
+workspace.
 
 ## Give the agent a task
 
-Send the following prompt to Claude Code:
+Send this prompt to Claude Code:
 
 ```text
-Create a branch named sandbox-demo. Change the greeting in
-backend/src/routes/getGreeting.js to "Hello from a sandbox!". Run the backend
-tests. Do not push the branch.
+Build the Dockerfile's test stage as an image tagged sandbox-demo. Report
+whether the tests pass. Do not change any project files.
 ```
 
-The agent works in a private clone inside the sandbox. Your source repository is
-mounted in the sandbox with read-only access.
+The agent can use Docker without controlling a daemon on your host. Its images,
+containers, installed packages, and system files stay inside the sandbox.
 
-When Claude Code reports that the task is complete, confirm that it created the
-`sandbox-demo` branch and that the backend tests passed.
+When the agent reports that the build and tests passed, enter `/exit`.
 
 ## Check the boundary
 
-After the agent finishes, enter `/exit`. Then check the host working tree:
+Confirm that the project files are unchanged:
 
 ```console
 $ git status --short
 ```
 
-The command produces no output. The agent edited only the private clone.
-
-Fetch the branch from the sandbox and review the change without applying it to
-your working tree:
+The command produces no output. Inspect the image in the sandbox's private
+Docker daemon:
 
 ```console
-$ git fetch sandbox-agent-demo
-$ git diff main..sandbox-agent-demo/sandbox-demo -- backend/src/routes/getGreeting.js
+$ sbx exec agent-demo docker image inspect sandbox-demo --format '{{ join .RepoTags ", " }}'
 ```
 
-The diff should show `Hello world!` replaced by `Hello from a sandbox!`. Fetching
-the branch made the change available for review without applying it to your
-working tree.
+The command prints the `sandbox-demo` tag. The agent created the image inside
+the microVM, not on your host.
+
+The selected project directory is shared read-write with the sandbox so an
+agent can work on it. The agent runtime, Docker daemon, installed packages, and
+system filesystem remain inside the microVM. Review project changes as you
+would review any code change before keeping them.
 
 ## Remove the sandbox
 
-Remove the sandbox when you're finished:
+Delete the sandbox and everything the agent created inside it:
 
 ```console
 $ sbx rm agent-demo
 ```
 
-This deletes the private clone, packages, images, containers, and other files
-inside the microVM. The project on your host remains unchanged.
+The project directory remains on your host. The sandbox's image, Docker daemon,
+packages, and filesystem are removed together.
 
 ## What you proved
 
-The agent changed code and ran tests with its own filesystem, Docker daemon, and
-private working copy. Your host repository remained read-only to the agent, and
-the network policy limited which destinations the sandbox could reach.
-
-Using a sandbox narrows what an agent can access. Review the network rules,
-credentials, and files you share before assigning sensitive work.
+You gave an AI agent the tools to build and test a real project without giving
+it the rest of your host system. The sandbox contained the agent's runtime and
+Docker activity, while the shared workspace kept its code changes visible for
+review.
 
 Continue with the [Docker Sandboxes documentation](/manuals/ai/sandboxes/_index.md)
-to use another agent or configure tighter controls.
+to use another supported agent or configure organization policies.

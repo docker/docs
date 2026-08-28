@@ -1,98 +1,126 @@
 ---
-title: Run an application with Docker
-linkTitle: Run an application
-description: Start a multi-service application with Docker Compose, change its code, and see the update without installing the application stack.
-keywords: Docker, get started, containers, Docker Compose, Compose Watch
+title: Build and share a containerized application
+linkTitle: Containerize an application
+description: Run a container and an application stack, build an image, and share it through Docker Hub.
+keywords: Docker, get started, containerize application, containers, Docker Compose, images, Docker Hub
 weight: 1
 aliases:
   - /get-started/run-an-app/
 ---
 
-A development application can depend on language runtimes, a database, and
-supporting tools. Installing and matching that stack on every machine delays the
-first useful result.
+An application can depend on a particular runtime, database, and supporting
+tools. Recreating that environment on every machine takes time and produces
+different results.
 
-In this 10-minute tutorial, you'll start a prepared five-service application
-with one command, change its code, and see the result. Your host needs only Git
-and Docker Desktop.
+In this 15-minute tutorial, you'll run a container, start a multi-container
+application, package the application as an image, and share the image through
+Docker Hub.
 
 ## Before you start
 
-- Install [Git](https://git-scm.com/downloads)
 - [Install Docker Desktop](../get-docker.md) and start it
+- Install [Git](https://git-scm.com/downloads)
+- Create a [Docker account](https://app.docker.com/signup)
 
-## Get the application
+## Run a container
 
-Clone the sample application and open its directory:
+Start with an application that is already packaged as an image:
+
+```console
+$ docker run -d --name welcome -p 8080:80 docker/welcome-to-docker
+```
+
+Open [http://localhost:8080](http://localhost:8080). Docker pulled the image and
+started a container from it. The `-p` flag made the container's web server
+available on your host.
+
+Remove the container before continuing:
+
+```console
+$ docker rm -f welcome
+```
+
+The image remains available locally, but the running application is gone.
+
+## Run an application stack
+
+Clone a prepared application and open its directory:
 
 ```console
 $ git clone https://github.com/docker/getting-started-todo-app
 $ cd getting-started-todo-app
 ```
 
-The prepared project gives Docker something concrete to run. You will change one
-source file. Its `compose.yaml` file already defines the rest of the development
-environment.
-
-## Start the application
-
-Start the environment and watch the project for file changes:
+Start the development stack:
 
 ```console
-$ docker compose watch
+$ docker compose up --build -d
 ```
 
-Docker builds the application images, pulls the images for supporting services,
-and starts the containers. The first run prints build and startup logs in the
-terminal.
+Open [http://localhost](http://localhost), then add an item to the to-do list.
 
-After the services start, open [http://localhost](http://localhost). You should
-see a greeting and an empty to-do list.
+The project's `compose.yaml` file describes the frontend, API, database,
+database management interface, and proxy. Compose built the application
+services, pulled the supporting images, and connected the containers.
 
-Add an item to confirm that the application and its database are working.
-
-## Change the application
-
-Open `backend/src/routes/getGreeting.js` in a text editor. Change the first line
-to use your own greeting:
-
-```javascript
-const GREETING = 'Hello from Docker!';
-```
-
-Save the file, then refresh [http://localhost](http://localhost). The application
-displays your greeting while `docker compose watch` keeps running. Compose Watch
-detected the edit and copied the file into the backend container.
-
-## See what Docker started
-
-Open another terminal in the project directory and list the services:
+Check the stack:
 
 ```console
 $ docker compose ps
 ```
 
-The `STATUS` column shows each service as running, with the MySQL service marked
-as healthy. One command started the frontend, API, database, database management
-interface, and proxy without installing Node.js, MySQL, or Traefik on your host.
+Each row represents one part of the application. The stack can move between
+machines as one version-controlled definition.
 
-## Stop the application
+## Build an image
 
-Press `Ctrl+C` in the terminal running Compose Watch. Then remove the containers,
-network, and sample database volume:
+The repository also contains a `Dockerfile` that packages the frontend and API
+as one production image. Build it and replace `<YOUR_DOCKER_USERNAME>` with
+your Docker username:
 
 ```console
+$ docker build -t <YOUR_DOCKER_USERNAME>/getting-started-todo-app .
+```
+
+Run the image as a new container:
+
+```console
+$ docker run -d --name todo -p 8080:3000 <YOUR_DOCKER_USERNAME>/getting-started-todo-app
+```
+
+Open [http://localhost:8080](http://localhost:8080). This time, the complete
+application is running from the image you built.
+
+## Share the image
+
+In [Docker Home](https://app.docker.com), create a public repository named
+`getting-started-todo-app` in your personal namespace.
+
+Sign in from the command line, then push the image:
+
+```console
+$ docker login
+$ docker push <YOUR_DOCKER_USERNAME>/getting-started-todo-app
+```
+
+Open the repository in Docker Home. The image is ready for another machine or
+deployment system to pull and run.
+
+## Clean up
+
+Remove the standalone container and the development stack:
+
+```console
+$ docker rm -f todo
 $ docker compose down --volumes
 ```
 
-Your source files remain in the project directory.
-
 ## What you proved
 
-You started a complete development environment from a version-controlled
-description, changed the running application, and removed the environment. The
-project carried its required stack instead of relying on a matching stack on
-your host.
+You ran software packaged by someone else, started an application stack from a
+declarative file, built your own image, and published it. Containers carry the
+application environment, Compose coordinates multiple containers, and a
+registry makes images available beyond one machine.
 
-To containerize an application of your own, choose its language from the
-[Docker guides](/guides/).
+Choose a language-specific [Docker guide](/guides/) to containerize an
+application of your own.

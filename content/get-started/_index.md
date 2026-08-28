@@ -7,20 +7,20 @@ params:
   notoc: true
   tutorials:
     - audience: New to Docker
-      title: Build and run an application
-      description: Start a multi-service development stack, change its code, and see the result.
+      title: Build and share a containerized application
+      description: Run a container and an application stack, build an image, and share it through Docker Hub.
       link: /get-started/tutorials/run-an-app/
-      time: 10 min
+      time: 15 min
     - audience: AI developers
       title: Run an AI agent safely
-      description: Give an agent an isolated place to change and test code without handing over your machine.
+      description: Give an agent an isolated environment with its own Docker daemon and system tools.
       link: /get-started/tutorials/run-an-agent/
       time: 10 min
     - audience: Administrators
-      title: Set up Docker for your organization
-      description: Plan a controlled rollout, configure sign-in and settings, and verify the setup with a pilot group.
-      link: /guides/admin-set-up/
-      time: 20 min
+      title: Roll out Docker to a pilot group
+      description: Invite a pilot user, apply a Docker Desktop policy, and verify the managed experience.
+      link: /get-started/tutorials/admin-set-up/
+      time: 15 min
 aliases:
   - /engine/get-started/
   - /engine/tutorials/usingdocker/
