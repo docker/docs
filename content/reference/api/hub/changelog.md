@@ -15,6 +15,18 @@ issues for Docker Service APIs.
 
 ---
 
+## 2026-08-27
+
+### Updates
+
+- Document organization access token (OAT) support for
+  [repository management](/reference/api/hub/latest/#tag/repositories)
+  endpoints, the scope-dependent behavior of
+  [List repositories](/reference/api/hub/latest/#tag/repositories/operation/listNamespaceRepositories),
+  and legacy paths that are OAT unsupported.
+
+---
+
 ## 2025-11-21
 
 ### Updates
