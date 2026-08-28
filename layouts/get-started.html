@@ -1,230 +1,62 @@
 {{ define "right" }}{{ end }}
 {{ define "article" }}
-  <article class="mx-auto w-full max-w-7xl pb-8 md:pb-16">
+  <article class="mx-auto w-full max-w-6xl pb-12 md:pb-20">
     {{ partial "breadcrumbs.html" . }}
-    <header class="max-w-4xl pt-8 pb-12 md:pt-12 md:pb-16">
-      <p
-        class="mb-4 font-mono text-xs font-semibold tracking-[0.18em] text-blue-600 uppercase dark:text-blue-400"
-      >
-        Three ways to get started
-      </p>
+    <header class="max-w-3xl pt-8 pb-10 md:pt-12 md:pb-14">
       <h1
         data-pagefind-weight="10"
-        class="mb-5 text-4xl leading-[1.05] font-semibold tracking-tight text-balance text-gray-950 md:text-6xl dark:text-white"
+        class="mb-4 text-4xl leading-tight font-semibold tracking-tight text-balance text-gray-950 md:text-5xl dark:text-white"
       >
-        Start with the work in front of you.
+        Get started with Docker
       </h1>
       <p
-        class="max-w-3xl text-lg leading-relaxed text-gray-600 md:text-xl dark:text-gray-300"
+        class="max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-300"
       >
-        Learn how to build and run with containers, give an AI agent an isolated
-        place to work, or roll Docker out across your organization.
+        Choose the tutorial that matches what you want to do.
       </p>
     </header>
 
-    <div class="grid grid-cols-1 items-start gap-5 lg:grid-cols-3 lg:gap-6">
-      {{ range $index, $journey := .Params.journeys }}
-        <section
-          class="{{ if eq $index 0 }}
-            border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-900
-          {{ else if eq $index 1 }}
-            border-blue-500 bg-blue-600 text-white shadow-xl shadow-blue-950/10
-            dark:border-blue-400 dark:bg-blue-600
-          {{ else }}
-            border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/40
-          {{ end }} {{ if eq $index 1 }}
-            lg:mt-10
-          {{ else if eq $index 2 }}
-            lg:mt-20
-          {{ end }} relative flex flex-col rounded-3xl border p-6 md:p-7"
+    <div>
+      {{ range .Params.tutorials }}
+        <a
+          href="{{ .link }}"
+          class="group grid grid-cols-1 gap-4 border-t border-gray-200 px-2 py-7 transition-colors last:border-b hover:bg-blue-50/70 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-400/40 focus-visible:ring-inset md:grid-cols-[10rem_minmax(0,1fr)_10rem] md:items-center md:gap-8 md:px-4 md:py-9 dark:border-gray-700 dark:hover:bg-gray-900/60"
         >
-          <div class="mb-9 flex items-center justify-between gap-4">
-            <div class="flex min-w-0 items-center gap-3">
-              <span
-                class="icon-svg {{ if eq $index 1 }}
-                  bg-white/15 text-white
-                {{ else }}
-                  bg-blue-100 text-blue-600 dark:bg-blue-900/60
-                  dark:text-blue-300
-                {{ end }} flex size-10 flex-none items-center justify-center rounded-xl"
-              >
-                {{ partialCached "icon" $journey.icon $journey.icon }}
-              </span>
-              <span
-                class="{{ if eq $index 1 }}
-                  text-blue-50
-                {{ else }}
-                  text-gray-600 dark:text-gray-300
-                {{ end }} truncate font-mono text-xs font-semibold tracking-[0.12em] uppercase"
-              >
-                {{ $journey.persona }}
-              </span>
-            </div>
-            <span
-              class="{{ if eq $index 1 }}
-                border-white/25 text-blue-50
-              {{ else }}
-                border-gray-300 text-gray-600 dark:border-gray-700
-                dark:text-gray-300
-              {{ end }} flex-none rounded-full border px-3 py-1 text-xs font-medium"
-            >
-              {{ $journey.length }}
-            </span>
-          </div>
+          <p
+            class="font-mono text-xs font-semibold tracking-[0.12em] text-gray-600 uppercase transition-colors group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-blue-400"
+          >
+            {{ .audience }}
+          </p>
 
-          <p
-            class="{{ if eq $index 1 }}
-              text-blue-100
-            {{ else }}
-              text-blue-600 dark:text-blue-400
-            {{ end }} mb-3 font-mono text-xs font-semibold tracking-[0.14em] uppercase"
-          >
-            {{ $journey.label }}
-          </p>
-          <h2
-            class="{{ if eq $index 1 }}
-              text-white
-            {{ else }}
-              text-gray-950 dark:text-white
-            {{ end }} mb-3 text-2xl leading-tight font-semibold tracking-tight text-balance md:text-3xl"
-          >
-            {{ $journey.title }}
-          </h2>
-          <p
-            class="{{ if eq $index 1 }}
-              text-blue-50
-            {{ else }}
-              text-gray-600 dark:text-gray-300
-            {{ end }} leading-relaxed"
-          >
-            {{ $journey.description }}
-          </p>
+          <div class="min-w-0">
+            <h2
+              class="mb-2 text-2xl leading-tight font-semibold tracking-tight text-gray-950 md:text-3xl dark:text-white"
+            >
+              {{ .title }}
+            </h2>
+            <p
+              class="max-w-2xl leading-relaxed text-gray-600 dark:text-gray-300"
+            >
+              {{ .description }}
+            </p>
+          </div>
 
           <div
-            class="{{ if eq $index 1 }}
-              border-blue-400/50 bg-blue-700/40
-            {{ else if eq $index 0 }}
-              border-gray-200 bg-gray-50/80 dark:border-gray-700
-              dark:bg-gray-950/50
-            {{ else }}
-              border-blue-200 bg-white/70 dark:border-blue-800
-              dark:bg-gray-950/30
-            {{ end }} mt-8 rounded-2xl border p-4"
+            class="flex items-center justify-between gap-5 text-gray-600 md:justify-end dark:text-gray-300"
           >
-            <p
-              class="{{ if eq $index 1 }}
-                text-blue-100
-              {{ else }}
-                text-gray-600 dark:text-gray-300
-              {{ end }} mb-5 font-mono text-[0.68rem] font-semibold tracking-[0.14em] uppercase"
+            <span
+              class="font-mono text-xs font-semibold tracking-wide uppercase"
             >
-              Your route
-            </p>
-            <ol>
-              {{ $guideCount := len $journey.guides }}
-              {{ range $guideIndex, $guide := $journey.guides }}
-                <li
-                  class="relative grid grid-cols-[1.5rem_1fr] gap-3 pb-5 last:pb-0"
-                >
-                  {{ if lt (add $guideIndex 1) $guideCount }}
-                    <span
-                      class="{{ if eq $index 1 }}
-                        bg-blue-300/70
-                      {{ else }}
-                        bg-blue-200 dark:bg-blue-800
-                      {{ end }} absolute top-6 left-[0.72rem] h-[calc(100%-1rem)] w-px"
-                      aria-hidden="true"
-                    ></span>
-                  {{ end }}
-                  <span
-                    class="{{ if eq $index 1 }}
-                      border-blue-300 bg-blue-500 text-white
-                    {{ else }}
-                      border-blue-300 bg-white text-blue-700
-                      dark:border-blue-700 dark:bg-gray-900 dark:text-blue-300
-                    {{ end }} relative z-10 flex size-6 items-center justify-center rounded-full border font-mono text-[0.62rem] font-semibold"
-                  >
-                    {{ printf "%02d" (add $guideIndex 1) }}
-                  </span>
-                  <div class="min-w-0">
-                    {{ if $guide.link }}
-                      <a
-                        href="{{ $guide.link }}"
-                        class="group/guide {{ if eq $index 1 }}
-                          text-white focus-visible:ring-white/50
-                        {{ else }}
-                          text-gray-950 focus-visible:ring-blue-400/50
-                          dark:text-white
-                        {{ end }} -m-1 flex items-start justify-between gap-3 rounded-lg p-1 font-semibold focus:outline-none focus-visible:ring-4"
-                      >
-                        <span>{{ $guide.title }}</span>
-                        <span
-                          class="icon-svg {{ if eq $index 1 }}
-                            text-blue-100
-                          {{ else }}
-                            text-blue-600 dark:text-blue-400
-                          {{ end }} mt-0.5 flex-none transition-transform group-hover/guide:translate-x-1 motion-reduce:transform-none"
-                        >
-                          {{ partialCached "icon" "arrow-right" "arrow-right" }}
-                        </span>
-                      </a>
-                    {{ else }}
-                      <div class="flex items-start justify-between gap-3">
-                        <span
-                          class="{{ if eq $index 1 }}
-                            text-white
-                          {{ else }}
-                            text-gray-950 dark:text-white
-                          {{ end }} font-semibold"
-                        >
-                          {{ $guide.title }}
-                        </span>
-                        <span
-                          class="{{ if eq $index 1 }}
-                            border-white/20 text-blue-100
-                          {{ else }}
-                            border-gray-300 text-gray-600 dark:border-gray-700
-                            dark:text-gray-300
-                          {{ end }} flex-none rounded-full border px-2 py-0.5 font-mono text-[0.62rem] tracking-wide uppercase"
-                        >
-                          Planned
-                        </span>
-                      </div>
-                    {{ end }}
-                    <p
-                      class="{{ if eq $index 1 }}
-                        text-blue-100
-                      {{ else }}
-                        text-gray-600 dark:text-gray-300
-                      {{ end }} mt-1 text-sm leading-relaxed"
-                    >
-                      {{ $guide.description }}
-                    </p>
-                    {{ with $guide.meta }}
-                      <p
-                        class="{{ if eq $index 1 }}
-                          text-blue-100
-                        {{ else }}
-                          text-gray-600 dark:text-gray-300
-                        {{ end }} mt-2 font-mono text-[0.68rem] tracking-wide uppercase"
-                      >
-                        {{ . }}
-                      </p>
-                    {{ end }}
-                  </div>
-                </li>
-              {{ end }}
-            </ol>
+              {{ .time }}
+            </span>
+            <span
+              class="icon-svg text-blue-600 transition-transform group-hover:translate-x-1 motion-reduce:transform-none dark:text-blue-400"
+            >
+              {{ partialCached "icon" "arrow-right" "arrow-right" }}
+            </span>
           </div>
-        </section>
+        </a>
       {{ end }}
     </div>
-
-    <p
-      class="mx-auto mt-12 max-w-2xl text-center text-sm leading-relaxed text-gray-500 md:mt-20 dark:text-gray-400"
-    >
-      Start with one supported path. Follow the broader documentation when you
-      need more options or implementation detail.
-    </p>
   </article>
 {{ end }}
