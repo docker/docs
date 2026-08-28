@@ -1,7 +1,7 @@
 <header class="sticky top-0 z-20 h-16 w-full bg-blue-600 text-white">
   <div class="mx-auto flex h-full justify-between gap-2 px-4">
     <div class="flex h-full items-center gap-2 lg:gap-8">
-      {{- if not .IsHome }}
+      {{- if and (not .IsHome) (not .Params.sidebar.hidePage) }}
         <button
           x-data
           @click="$store.showSidebar = true"

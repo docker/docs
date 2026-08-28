@@ -10,11 +10,12 @@
     {{ partial "header.html" . }}
     {{ partial "gordon-chat.html" . }}
     <main class="relative flex w-full max-w-[1920px]">
-      <!-- Sidebar -->
-      <div
-        style="scroll-behavior: smooth;"
-        x-data
-        x-init="$nextTick(() => {
+      {{ if not .Params.sidebar.hidePage }}
+        <!-- Sidebar -->
+        <div
+          style="scroll-behavior: smooth;"
+          x-data
+          x-init="$nextTick(() => {
           const container = $el; // The div with overflow
           const item = document.getElementById('sidebar-current-page')
           if (item) {
@@ -29,34 +30,39 @@
                   container.scrollTop = itemTop - (container.clientHeight / 2 - item.offsetHeight / 2);
               }
           }
-      })"
-        class="bg-background-toc dark:bg-background-toc fixed top-0 z-40 hidden h-screen w-full flex-none overflow-x-hidden overflow-y-auto{{ if ne .Type "guides" }} md:sticky md:top-16 md:z-auto md:block md:h-[calc(100vh-64px)] md:w-[320px]{{ end }}"
-        :class="{ 'hidden': ! $store.showSidebar }"
-      >
-        <!-- Gray backdrop on small screens -->
-        <div
-          class="fixed bg-black/50 md:hidden"
-          x-show="$store.showSidebar"
-          @click="openSidebar = false"
-          x-transition.opacity
-        ></div>
-        <div
-          class="bg-background-toc dark:bg-background-toc z-50 w-full p-3 md:block md:w-[300px]"
+        })"
+          class="bg-background-toc dark:bg-background-toc overflow-y-auto{{ if ne .Type "guides" }}
+            md:sticky md:top-16 md:z-auto md:block md:h-[calc(100vh-64px)]
+            md:w-[320px]
+          {{ end }} fixed top-0 z-40 hidden h-screen w-full flex-none overflow-x-hidden"
+          :class="{ 'hidden': ! $store.showSidebar }"
         >
-          <!-- Collapse button for small screens -->
-          <button class="my-4 md:hidden" @click="$store.showSidebar = false">
-            <span class="icon-svg"
-              >{{ partialCached "icon" "arrow-left" "arrow-left" }}</span
-            >
-            Back
-          </button>
-          <!-- Actual Sidebar Content -->
-          {{ block "left" . }}
-            {{ partial "sidebar/mainnav.html" . }}
-            {{ partial "sidebar/sections.html" . }}
-          {{ end }}
+          <!-- Gray backdrop on small screens -->
+          <div
+            class="fixed bg-black/50 md:hidden"
+            x-show="$store.showSidebar"
+            @click="openSidebar = false"
+            x-transition.opacity
+          ></div>
+          <div
+            class="bg-background-toc dark:bg-background-toc z-50 w-full p-3 md:block md:w-[300px]"
+          >
+            <!-- Collapse button for small screens -->
+            <button class="my-4 md:hidden" @click="$store.showSidebar = false">
+              <span class="icon-svg"
+                >{{ partialCached "icon" "arrow-left" "arrow-left" }}</span
+              >
+              Back
+            </button>
+            <!-- Actual Sidebar Content -->
+            {{ block "left" . }}
+              {{ partial "sidebar/mainnav.html" . }}
+              {{ partial "sidebar/sections.html" . }}
+            {{ end }}
+          </div>
         </div>
-      </div>
+      {{ end }}
+
 
       <!-- Main content -->
       <div

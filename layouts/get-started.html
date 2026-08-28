@@ -1,8 +1,8 @@
 {{ define "right" }}{{ end }}
 {{ define "article" }}
-  <article class="mx-auto w-full max-w-6xl">
+  <article class="mx-auto w-full max-w-7xl">
     {{ partial "breadcrumbs.html" . }}
-    <header class="max-w-3xl pt-8 pb-10 md:pt-12 md:pb-14">
+    <header class="max-w-3xl pt-8 pb-10 md:pt-12 md:pb-12">
       <p
         class="mb-4 font-mono text-xs font-semibold tracking-[0.18em] text-blue-600 uppercase dark:text-blue-400"
       >
@@ -23,21 +23,21 @@
       </p>
     </header>
 
-    <div class="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
+    <div class="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
       {{ range $index, $journey := .Params.journeys }}
         <a
           href="{{ $journey.link }}"
           class="group {{ if eq $index 0 }}
             border-gray-200 bg-white hover:-translate-y-1 hover:border-blue-400
-            hover:shadow-xl lg:col-span-5 dark:border-gray-700 dark:bg-gray-900
+            hover:shadow-xl dark:border-gray-700 dark:bg-gray-900
             dark:hover:border-blue-500
           {{ else }}
             border-blue-300 bg-blue-50 hover:-translate-y-1
-            hover:border-blue-500 hover:shadow-xl lg:col-span-7
-            dark:border-blue-800 dark:bg-blue-950/40 dark:hover:border-blue-500
-          {{ end }} relative flex min-h-[30rem] flex-col overflow-hidden rounded-2xl border p-7 transition duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-400/40 md:p-9"
+            hover:border-blue-500 hover:shadow-xl dark:border-blue-800
+            dark:bg-blue-950/40 dark:hover:border-blue-500
+          {{ end }} relative flex flex-col overflow-hidden rounded-2xl border p-6 transition duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-400/40 md:p-8"
         >
-          <div class="mb-12 flex items-center justify-between gap-4">
+          <div class="mb-8 flex items-center justify-between gap-4">
             <span
               class="font-mono text-xs font-semibold tracking-[0.14em] text-gray-600 uppercase dark:text-gray-300"
             >
@@ -55,7 +55,7 @@
               bg-blue-100 text-blue-600 dark:bg-blue-950 dark:text-blue-300
             {{ else }}
               bg-blue-600 text-white dark:bg-blue-500
-            {{ end }} mb-6 flex size-12 items-center justify-center rounded-xl"
+            {{ end }} mb-5 flex size-12 items-center justify-center rounded-xl"
           >
             <span class="icon-svg">
               {{ partialCached "icon" $journey.icon $journey.icon }}
@@ -63,12 +63,12 @@
           </div>
 
           <h2
-            class="mb-4 max-w-xl text-3xl leading-tight font-semibold tracking-tight text-balance text-gray-950 md:text-4xl dark:text-white"
+            class="mb-3 max-w-xl text-2xl leading-tight font-semibold tracking-tight text-balance text-gray-950 md:text-3xl dark:text-white"
           >
             {{ $journey.title }}
           </h2>
           <p
-            class="mb-8 max-w-xl text-base leading-relaxed text-gray-600 md:text-lg dark:text-gray-300"
+            class="mb-7 max-w-xl text-base leading-relaxed text-gray-600 dark:text-gray-300"
           >
             {{ $journey.description }}
           </p>
