@@ -6,6 +6,10 @@ keywords: docker agentic platform, release notes, updates, fixes
 weight: 90
 ---
 
+## August 27, 2026
+
+- Added Groq and xAI credentials under **Secrets** for OpenCode sandboxes.
+
 ## August 26, 2026
 
 Docker Agentic Platform is available for running agent and tool workloads in
