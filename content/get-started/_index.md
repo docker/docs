@@ -24,10 +24,6 @@ params:
     description: Gain a better understanding of foundational Docker concepts.
     link: /get-started/docker-concepts/the-basics/what-is-a-container/
     icon: home
-  - title: Docker workshop
-    description: Get guided through a 45-minute workshop to learn about Docker.
-    link: /get-started/workshop/
-    icon: computer-desktop
 aliases:
   - /engine/get-started/
   - /engine/tutorials/usingdocker/
