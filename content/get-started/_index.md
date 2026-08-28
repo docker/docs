@@ -6,7 +6,6 @@ layout: get-started
 params:
   notoc: true
   sidebar:
-    hidePage: true
     include:
       - Run an application with Docker
       - Run an AI agent in a sandbox
