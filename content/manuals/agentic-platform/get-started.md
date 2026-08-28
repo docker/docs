@@ -21,7 +21,7 @@ creating the sandbox or provide it in the launcher when prompted.
 
 The available sandbox types are Claude Code, Codex, OpenCode, Copilot, and
 Gemini CLI. The supported model provider credentials are Anthropic, OpenAI,
-GitHub Copilot, and Google.
+GitHub Copilot, Google, Groq, and xAI.
 
 ## Start a sandbox
 

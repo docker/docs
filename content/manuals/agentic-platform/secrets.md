@@ -19,6 +19,8 @@ Docker Agentic Platform supports the following credentials:
 | Anthropic     | `ANTHROPIC_API_KEY` | Claude Code and OpenCode with Anthropic models    |
 | OpenAI        | `OPENAI_API_KEY`    | Codex and OpenCode with OpenAI models             |
 | Google Gemini | `GEMINI_API_KEY`    | Gemini CLI and OpenCode with Google models        |
+| Groq          | `GROQ_API_KEY`      | OpenCode with Groq models                         |
+| xAI           | `XAI_API_KEY`       | OpenCode with xAI models                          |
 | GitHub        | `GITHUB_TOKEN`      | Copilot and any sandbox type that accesses GitHub |
 
 Provider-specific credentials are applied only to matching requests from
