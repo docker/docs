@@ -94,6 +94,7 @@ weight: 30
 
 - Host network (`docker run --net=host`) was namespaced inside RootlessKit.
   This meant that ports listened by containers with `--net=host` were not reachable from the real host network namespace.
+  This limitation was resolved in Docker Engine v29.5.
 
 ## Troubleshooting
 
@@ -293,8 +294,9 @@ network namespace. Use `docker run -p` instead.
 
 #### `--net=host` doesn't listen ports on the host network namespace
 
-This was an expected behavior until Docker Engine v29.5, as the daemon was namespaced inside RootlessKit's
-network namespace. Use `docker run -p` instead, or upgrade to Docker Engine v29.5 or later.
+On Docker Engine v29.4 or earlier, `--net=host` was namespaced inside
+RootlessKit's network namespace. Upgrade to Docker Engine v29.5 or later
+to resolve this limitation, or use `docker run -p` as a workaround.
 
 #### Network is slow
 
