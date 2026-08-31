@@ -23,6 +23,10 @@ grid:
     description: FAQs about Docker plans, payments, taxes, and invoices.
     icon: credit-card
     link: /faqs/subscription-billing/
+  - title: Platform FAQs
+    description: FAQs about Docker Desktop containers, networking, VMs, and general platform security.
+    icon: cpu-chip
+    link: /faqs/platform/
 ---
 
 Answers to common questions about Docker accounts, organizations, companies,

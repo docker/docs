@@ -35,7 +35,7 @@ grid_resources:
 - title: Security FAQs
   description: Explore common security FAQs.
   icon: question-mark-circle
-  link: /faq/security/general/
+  link: /faqs/platform/
 - title: Security best practices
   description: Understand the steps you can take to improve the security of your container.
   icon: squares-2x2
