@@ -3,7 +3,7 @@ linkTitle: Security
 title: Security for enterprises
 description: Learn about enterprise level security features Docker has to offer and explore best practices
 keywords: docker, docker hub, docker desktop, security, enterprises, scale
-weight: 10
+weight: 30
 params:
   sidebar:
     group: Enterprise

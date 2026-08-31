@@ -8,6 +8,7 @@ aliases:
   - /admin/company/settings/sso/
   - /admin/organization/security-settings/sso-management/
   - /security/for-admins/single-sign-on/
+  - /enterprise/security/single-sign-on/
   - /platform/security/authentication/single-sign-on/
 weight: 10
 ---
