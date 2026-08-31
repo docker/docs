@@ -19,13 +19,21 @@ document.querySelectorAll("[data-interactive-diagram]").forEach((root) => {
   const nextButton = root.querySelector("[data-step-next]");
   const playButton = root.querySelector("[data-step-play]");
   const playLabel = root.querySelector("[data-step-play-label]");
-  const playTimerLabel = root.querySelector("[data-step-play-timer]");
   const progress = root.querySelector("[data-step-progress]");
-  const autoplayDuration = config.autoplayDuration ?? 4000;
+  const autoplayProgress = root.querySelector("[data-step-autoplay-progress]");
+  const autoplayProgressBar = root.querySelector(
+    "[data-step-autoplay-progress-bar]",
+  );
+  const autoplayDuration = Math.max(
+    100,
+    Number(config.autoplayDuration) || 4000,
+  );
   let currentStep = 0;
   let playTimer;
-  let countdownFrame;
-  let stepDeadline;
+  let progressFrame;
+  let stepStartedAt;
+  let elapsedInStep = 0;
+  let isPlaying = false;
 
   const stepButtons = config.steps.map((step, index) => {
     const button = document.createElement("button");
@@ -33,7 +41,7 @@ document.querySelectorAll("[data-interactive-diagram]").forEach((root) => {
     button.className = "interactive-diagram__progress-step";
     button.setAttribute("aria-label", `Show step ${index + 1}: ${step.label}`);
     button.addEventListener("click", () => {
-      stopPlaying();
+      resetPlayback();
       showStep(index);
     });
     progress?.append(button);
@@ -61,8 +69,10 @@ document.querySelectorAll("[data-interactive-diagram]").forEach((root) => {
     );
     setText(root, "[data-step-title]", step.label);
     setText(root, "[data-step-body]", step.body);
-    setText(root, "[data-state-label]", step.stateLabel);
-    setText(root, "[data-state-value]", step.stateValue);
+    setText(root, "[data-step-state]", step.state);
+
+    elapsedInStep = 0;
+    setAutoplayProgress(0);
 
     if (previousButton) previousButton.disabled = currentStep === 0;
     if (nextButton)
@@ -72,64 +82,119 @@ document.querySelectorAll("[data-interactive-diagram]").forEach((root) => {
       button.classList.toggle("is-active", selected);
       button.setAttribute("aria-current", selected ? "step" : "false");
     });
+    updatePlayButton();
   }
 
-  function stopPlaying() {
+  function clearPlaybackTimers() {
     window.clearTimeout(playTimer);
-    window.cancelAnimationFrame(countdownFrame);
+    window.cancelAnimationFrame(progressFrame);
     playTimer = undefined;
-    countdownFrame = undefined;
-    stepDeadline = undefined;
-    playButton?.setAttribute("aria-pressed", "false");
-    if (playLabel) playLabel.textContent = "Play";
-    if (playTimerLabel) {
-      playTimerLabel.hidden = true;
-      playTimerLabel.textContent = "";
+    progressFrame = undefined;
+  }
+
+  function resetPlayback() {
+    clearPlaybackTimers();
+    isPlaying = false;
+    elapsedInStep = 0;
+    setAutoplayProgress(0);
+    updatePlayButton();
+  }
+
+  function pausePlaying() {
+    if (!isPlaying) return;
+    elapsedInStep = Math.min(
+      autoplayDuration,
+      elapsedInStep + now() - stepStartedAt,
+    );
+    clearPlaybackTimers();
+    isPlaying = false;
+    setAutoplayProgress(elapsedInStep / autoplayDuration);
+    updatePlayButton();
+  }
+
+  function startPlaying() {
+    if (
+      currentStep === config.steps.length - 1 &&
+      elapsedInStep >= autoplayDuration
+    ) {
+      showStep(0);
+    }
+    isPlaying = true;
+    stepStartedAt = now();
+    updatePlayButton();
+    scheduleCurrentStep();
+  }
+
+  function scheduleCurrentStep() {
+    clearPlaybackTimers();
+    const remaining = Math.max(0, autoplayDuration - elapsedInStep);
+    playTimer = window.setTimeout(completeCurrentStep, remaining);
+    updateAutoplayProgress();
+  }
+
+  function completeCurrentStep() {
+    elapsedInStep = autoplayDuration;
+    setAutoplayProgress(1);
+    if (currentStep === config.steps.length - 1) {
+      clearPlaybackTimers();
+      isPlaying = false;
+      updatePlayButton();
+      return;
+    }
+    showStep(currentStep + 1);
+    stepStartedAt = now();
+    scheduleCurrentStep();
+  }
+
+  function updateAutoplayProgress() {
+    if (!isPlaying) return;
+    const elapsed = Math.min(
+      autoplayDuration,
+      elapsedInStep + now() - stepStartedAt,
+    );
+    setAutoplayProgress(elapsed / autoplayDuration);
+    if (elapsed < autoplayDuration) {
+      progressFrame = window.requestAnimationFrame(updateAutoplayProgress);
     }
   }
 
-  function scheduleNextStep() {
-    window.clearTimeout(playTimer);
-    window.cancelAnimationFrame(countdownFrame);
-    stepDeadline = now() + autoplayDuration;
-    playTimer = window.setTimeout(() => {
-      if (currentStep === config.steps.length - 1) {
-        stopPlaying();
-      } else {
-        showStep(currentStep + 1);
-        scheduleNextStep();
-      }
-    }, autoplayDuration);
-    updateCountdown();
+  function setAutoplayProgress(value) {
+    const progressValue = Math.max(0, Math.min(1, value));
+    if (autoplayProgressBar) {
+      autoplayProgressBar.style.transform = `scaleX(${progressValue})`;
+    }
+    autoplayProgress?.setAttribute(
+      "aria-valuenow",
+      String(Math.round(progressValue * 100)),
+    );
   }
 
-  function updateCountdown() {
-    if (!playTimer || !stepDeadline || !playTimerLabel) return;
-    const remaining = Math.max(0, stepDeadline - now());
-    playTimerLabel.textContent = `${(Math.ceil(remaining / 100) / 10).toFixed(1)}s`;
-    if (remaining > 0) {
-      countdownFrame = window.requestAnimationFrame(updateCountdown);
+  function updatePlayButton() {
+    playButton?.setAttribute("aria-pressed", String(isPlaying));
+    if (!playLabel) return;
+    if (isPlaying) {
+      playLabel.textContent = "Pause";
+    } else if (
+      currentStep === config.steps.length - 1 &&
+      elapsedInStep >= autoplayDuration
+    ) {
+      playLabel.textContent = "Restart";
+    } else {
+      playLabel.textContent = "Play";
     }
   }
 
   previousButton?.addEventListener("click", () => {
-    stopPlaying();
+    resetPlayback();
     showStep(currentStep - 1);
   });
   nextButton?.addEventListener("click", () => {
-    stopPlaying();
+    resetPlayback();
     showStep(currentStep + 1);
   });
   playButton?.addEventListener("click", () => {
-    if (playTimer) {
-      stopPlaying();
-      return;
-    }
-    if (currentStep === config.steps.length - 1) showStep(0);
-    playButton.setAttribute("aria-pressed", "true");
-    if (playLabel) playLabel.textContent = "Pause";
-    if (playTimerLabel) playTimerLabel.hidden = false;
-    scheduleNextStep();
+    if (isPlaying) pausePlaying();
+    else startPlaying();
   });
 
   root.classList.add("is-enhanced");
