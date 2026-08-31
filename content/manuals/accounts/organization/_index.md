@@ -100,7 +100,7 @@ subscriber has at least one organization.
 
 Organization owners hold the organization owner administrator role and manage
 organization settings, users, and access controls. Each owner occupies a
-[seat](/manuals/faqs/organization-faqs.md#what-is-the-difference-between-user-invitee-seat-and-member).
+[seat](/manuals/faqs/accounts.md#what-is-the-difference-between-user-invitee-seat-and-member).
 
 [Upgrading to a Docker Business plan](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdmin)
 grants you the company owner role so you can manage multiple organizations.

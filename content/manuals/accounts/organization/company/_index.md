@@ -23,7 +23,7 @@ grid:
     link: /security/provisioning/domain-management/
   - title: FAQs
     description: Explore frequently asked questions about companies.
-    link: /faqs/company-faqs/
+    link: /faqs/accounts/
     icon: question-mark-circle
 aliases:
   - /admin/company/

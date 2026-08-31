@@ -30,10 +30,6 @@ grid_subscriptions:
     description: Review the terms of the Docker Subscription Service Agreement.
     link: /subscription-billing/desktop-license/
     icon: document-text
-  - title: Plan FAQs
-    description: Find the answers you need and explore common questions.
-    link: /subscription-billing/faqs/subscription/
-    icon: question-mark-circle
 grid_core:
   - title: Add or update a payment method
     description: Learn how to add or update a payment method for your personal account or organization.

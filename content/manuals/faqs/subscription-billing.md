@@ -1,13 +1,48 @@
 ---
-title: Billing FAQs
-linkTitle: Billing FAQ
-description: Find answers to common questions about Docker billing, failed payments, taxes, and pay by invoice.
-keywords: billing, renewal, failed payments, sales tax, VAT, academic pricing, pay by invoice
+title: Subscription and billing FAQs
+linkTitle: Subscription and billing
+description: Frequently asked questions about Docker subscriptions, billing, failed payments, taxes, and plans.
+keywords: subscription faqs, billing, docker plans, renewal, failed payments, sales tax, VAT, academic pricing, pay by invoice, subscription transfer
 tags: [FAQ]
-weight: 20
+weight: 35
 aliases:
+  - /subscription/faq/
   - /billing/faqs/
+  - /subscription-billing/faqs/subscription/
+  - /subscription-billing/faqs/billing/
 ---
+
+For more information on Docker subscriptions, see
+[Subscription and billing](/manuals/subscription-billing/_index.md).
+
+## Can I transfer my subscription from one user or organization account to another?
+
+Subscriptions are non-transferable between accounts or organizations.
+
+## Can I pause or delay my Docker subscription?
+
+You can't pause or delay a subscription, but you can downgrade your
+subscription. If a subscription invoice isn't paid by the due date, there's a
+15-day grace period starting from the due date.
+
+## Does Docker offer academic pricing?
+
+For academic pricing, contact the
+[Docker Sales Team](https://www.docker.com/company/contact).
+
+## How can I contribute to Docker content?
+
+Docker offers two content contribution programs:
+
+- [Docker-Sponsored Open Source Program (DSOS)](/manuals/docker-hub/repos/manage/trusted-content/dsos-program.md)
+  for open source projects
+- [Docker Verified Publisher (DVP)](/manuals/docker-hub/repos/manage/trusted-content/dvp-program.md)
+  for commercial publishers
+
+You can also join the
+[Developer Preview Program](https://www.docker.com/community/get-involved/developer-preview/)
+or sign up for early access programs to participate in research and try new
+features.
 
 ## What happens if my subscription payment fails?
 
@@ -50,11 +85,6 @@ To help ensure correct tax assessments, keep your
 adding a VAT number or submitting a US tax exemption certificate, see
 [Taxes](/manuals/subscription-billing/manage/tax-certificate.md).
 
-## Does Docker offer academic pricing?
-
-For academic pricing, contact the
-[Docker Sales Team](https://www.docker.com/company/contact).
-
 ## Can I use pay by invoice for upgrades or additional seats?
 
 No. Pay by invoice is only available for renewing annual subscriptions, not for
@@ -63,3 +93,7 @@ accounts for these changes.
 
 For a list of supported payment methods, see
 [Add or update a payment method](/manuals/subscription-billing/manage/payment-method.md).
+
+> [!TIP]
+>
+> Need to upgrade? <a href="https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscriptionFaq" id="pricing-link" class="link" rel="noopener">Compare Docker Team and Docker Business</a> to choose the plan that best fits your team's needs.

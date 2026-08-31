@@ -57,5 +57,5 @@ assigned to an organization, and added to a team.
 ## Next steps
 
 - Start [configuring SSO](connect.md).
-- Read the [FAQs](/manuals/faqs/sso-faqs.md).
+- Read the [FAQs](/manuals/faqs/security.md).
 - [Troubleshoot](/manuals/security/authentication/single-sign-on/troubleshoot-sso.md) SSO issues.

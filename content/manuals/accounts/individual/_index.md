@@ -32,7 +32,7 @@ grid:
   - title: Account FAQs
     description: Explore frequently asked questions about Docker accounts.
     icon: question-mark-circle
-    link: /faqs/general-faqs/
+    link: /faqs/accounts/
 ---
 
 A Docker account is how Docker identifies you. Use it to access products like

@@ -1,8 +1,8 @@
 ---
 title: FAQs
 linkTitle: FAQs
-description: Frequently asked questions about Docker accounts, organizations, companies, and security.
-keywords: FAQ, FAQs, accounts, organizations, companies, Docker ID, Docker Home, security FAQs, SSO FAQs
+description: Frequently asked questions about Docker accounts, subscriptions, billing, and security.
+keywords: FAQ, FAQs, accounts, Docker ID, Docker Home, subscription FAQs, billing FAQs, security FAQs, SSO FAQs
 weight: 45
 params:
   sidebar:
@@ -12,29 +12,21 @@ aliases:
   - /faq/security/
 grid:
   - title: Account FAQs
-    description: FAQs about Docker IDs, account creation, and organization names.
+    description: FAQs about Docker IDs, account creation, organizations, and companies.
     icon: question-mark-circle
-    link: /faqs/general-faqs/
-  - title: Organization FAQs
-    description: FAQs about organization members, seats, and authentication.
-    icon: user-group
-    link: /faqs/organization-faqs/
-  - title: Company FAQs
-    description: FAQs about companies, seats, and company owners.
-    icon: building-office-2
-    link: /faqs/company-faqs/
-  - title: SSO FAQs
-    description: FAQs about single sign-on, identity providers, and user management.
+    link: /faqs/accounts/
+  - title: Security FAQs
+    description: FAQs about single sign-on, identity providers, enforcement, and domains.
     icon: lock-closed
-    link: /faqs/sso-faqs/
-  - title: SSO domain FAQs
-    description: FAQs about domain verification and management for SSO.
-    icon: globe-alt
-    link: /faqs/domain-faqs/
+    link: /faqs/security/
+  - title: Subscription and billing FAQs
+    description: FAQs about Docker plans, payments, taxes, and invoices.
+    icon: credit-card
+    link: /faqs/subscription-billing/
 ---
 
 Answers to common questions about Docker accounts, organizations, companies,
-security, authentication, and related topics.
+subscriptions, billing, security, authentication, and related topics.
 
 ## Next steps
 
