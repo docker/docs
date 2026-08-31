@@ -7,9 +7,6 @@ weight: 20
 tags: [FAQ]
 aliases:
 - /faq/security/containers/
-- /security/faqs/containers/
-- /platform/security/resources/faqs/containers/
-- /platform/security/faqs/containers/
 ---
 
 ## How are containers isolated from the host in Docker Desktop?

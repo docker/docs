@@ -6,10 +6,9 @@ keywords: docker desktop settings, configuration reference, admin controls, sett
 toc_max: 2
 aliases:
  - /security/for-admins/hardened-desktop/settings-management/settings-reference/
- - /enterprise/security/hardened-desktop/settings-management/settings-reference/
 ---
 
-This reference documents Docker Desktop settings that administrators can configure using [Settings Management](/manuals/enterprise/hardened-desktop/settings-management/_index.md). Use this page to understand which settings are available, their accepted values, platform compatibility, and which configuration methods apply.
+This reference documents Docker Desktop settings that administrators can configure using [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md). Use this page to understand which settings are available, their accepted values, platform compatibility, and which configuration methods apply.
  
 > [!NOTE]
 >
@@ -432,7 +431,7 @@ The [`proxy`](#proxy) setting governs Docker Desktop host-level traffic: the Des
 }
 ```
 
-For more information, see [Air-gapped containers](/manuals/enterprise/hardened-desktop/air-gapped-containers.md).
+For more information, see [Air-gapped containers](/manuals/enterprise/security/hardened-desktop/air-gapped-containers.md).
 
 ## LinuxVM
 

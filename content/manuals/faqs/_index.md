@@ -23,18 +23,6 @@ grid:
     description: FAQs about companies, seats, and company owners.
     icon: building-office-2
     link: /faqs/company-faqs/
-  - title: General security FAQs
-    description: FAQs about Docker security, authentication, and organization management.
-    icon: lock-closed
-    link: /faqs/general/
-  - title: Container security FAQs
-    description: FAQs about container security and isolation.
-    icon: lock-closed
-    link: /faqs/containers/
-  - title: Network and VM FAQs
-    description: FAQs about Docker Desktop networking and virtualization security.
-    icon: globe-alt
-    link: /faqs/networking-and-vms/
   - title: SSO FAQs
     description: FAQs about single sign-on, identity providers, and user management.
     icon: lock-closed

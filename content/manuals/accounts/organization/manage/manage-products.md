@@ -40,9 +40,9 @@ To manage Docker Hub access:
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization, then select **Docker Desktop**.
 1. Select **Registry Access** to configure
-   [Registry Access Management](../../../enterprise/hardened-desktop/registry-access-management.md).
+   [Registry Access Management](../../../enterprise/security/hardened-desktop/registry-access-management.md).
 1. Select **Image Access** to control
-   [Image Access Management](../../../enterprise/hardened-desktop/image-access-management.md).
+   [Image Access Management](../../../enterprise/security/hardened-desktop/image-access-management.md).
 
 ### Docker Build Cloud access
 
@@ -73,7 +73,7 @@ To manage Docker Scout access:
    [repository settings](../../../scout/explore/dashboard.md#repository-settings).
 1. To manage access to Docker Scout for use on local images with Docker
    Desktop, use
-   [Settings Management](../../../enterprise/hardened-desktop/settings-management/_index.md)
+   [Settings Management](../../../enterprise/security/hardened-desktop/settings-management/_index.md)
    and set `sbomIndexing` to `false` to disable, or to `true` to enable.
 
 ### Testcontainers Cloud access
@@ -99,7 +99,7 @@ To manage access to Testcontainers Cloud:
 > subscribe.
 
 To manage Docker Offload access for your organization, use [Settings
-Management](../../../enterprise/hardened-desktop/settings-management/_index.md):
+Management](../../../enterprise/security/hardened-desktop/settings-management/_index.md):
 
 1. Sign in to [Docker Home](https://app.docker.com/), then select **Docker
    Desktop**.
@@ -124,7 +124,7 @@ Management](../../../enterprise/hardened-desktop/settings-management/_index.md):
 1. Select **Save**.
 
 For more details on Settings Management, see the [Settings
-reference](../../../enterprise/hardened-desktop/settings-management/settings-reference.md#enable-docker-offload).
+reference](../../../enterprise/security/hardened-desktop/settings-management/settings-reference.md#enable-docker-offload).
 
 ## Monitor product usage for your organization
 

@@ -7,16 +7,13 @@ weight: 30
 tags: [FAQ]
 aliases:
 - /faq/security/networking-and-vms/
-- /security/faqs/networking-and-vms/
-- /platform/security/resources/faqs/networking-and-vms/
-- /platform/security/faqs/networking-and-vms/
 ---
 
 ## How can I limit container internet access?
 
 Docker Desktop doesn't have a built-in mechanism for this, but you can use process-level firewalls on the host. Apply rules to the `com.docker.vpnkit` user-space process to control where it can connect (DNS allowlists, packet filters) and which ports/protocols it can use.
 
-For enterprise environments, consider [Air-gapped containers](/manuals/enterprise/hardened-desktop/air-gapped-containers.md) which provide network access controls for containers.
+For enterprise environments, consider [Air-gapped containers](/manuals/enterprise/security/hardened-desktop/air-gapped-containers.md) which provide network access controls for containers.
 
 ## Can I apply firewall rules to container network traffic?
 

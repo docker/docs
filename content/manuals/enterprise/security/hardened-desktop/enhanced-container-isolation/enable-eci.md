@@ -4,8 +4,6 @@ linkTitle: Enable ECI
 description: Enable Enhanced Container Isolation to secure containers in Docker Desktop
 keywords: enhanced container isolation, enable eci, container security, docker desktop setup
 weight: 15
-aliases:
-  - /enterprise/security/hardened-desktop/enhanced-container-isolation/enable-eci/
 ---
 
 {{< summary-bar feature_name="Hardened Docker Desktop" >}}
@@ -53,13 +51,13 @@ Configure Enhanced Container Isolation organization-wide using Settings Manageme
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your organization from the top-left account drop-down.
 1. Select **Docker Desktop**, then **Settings Management**.
-1. [Create or edit a setting policy](/manuals/enterprise/hardened-desktop/settings-management/configure-admin-console.md).
+1. [Create or edit a setting policy](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md).
 1. Set **Enhanced Container Isolation** to **Always enabled**.
 
 {{< /tab >}}
 {{< tab name="JSON file" >}}
 
-1. Create an [`admin-settings.json` file](/manuals/enterprise/hardened-desktop/settings-management/configure-json-file.md) and add:
+1. Create an [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md) and add:
 
       ```json
       {
@@ -90,7 +88,7 @@ For ECI settings to take effect:
 >
 > Restarting from the Docker Desktop menu isn't sufficient. Users must completely quit and reopen Docker Desktop.
 
-You can also configure [Docker socket mount permissions](/manuals/enterprise/hardened-desktop/enhanced-container-isolation/config.md) for trusted images that need Docker API access.
+You can also configure [Docker socket mount permissions](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md) for trusted images that need Docker API access.
 
 ## Verify Enhanced Container Isolation is active
 
@@ -166,5 +164,5 @@ Docker Desktop settings.
 
 ## Next steps
 
-- Review [Configure Docker socket exceptions and advanced settings](/manuals/enterprise/hardened-desktop/enhanced-container-isolation/config.md).
-- Review [Enhanced Container Isolation limitations](/manuals/enterprise/hardened-desktop/enhanced-container-isolation/limitations.md).
+- Review [Configure Docker socket exceptions and advanced settings](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md).
+- Review [Enhanced Container Isolation limitations](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/limitations.md).

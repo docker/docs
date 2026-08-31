@@ -121,5 +121,5 @@ Available controls:
 For Business subscriptions, Gordon must be enabled by an administrator before
 users can access it.
 
-See [Settings Management](/enterprise/hardened-desktop/settings-management/)
+See [Settings Management](/enterprise/security/hardened-desktop/settings-management/)
 for details.

@@ -95,7 +95,7 @@ For Business subscriptions, administrators can enable or disable Gordon for
 their organization using Settings Management. Review your organization's data
 handling requirements before enabling Gordon.
 
-See [Settings Management](/enterprise/hardened-desktop/settings-management/)
+See [Settings Management](/enterprise/security/hardened-desktop/settings-management/)
 for configuration details.
 
 ## Disabling Gordon
@@ -112,7 +112,7 @@ Individual users:
 Business organizations:
 
 Administrators can disable Gordon for the entire organization using Settings
-Management. See [Settings Management](/enterprise/hardened-desktop/settings-management/)
+Management. See [Settings Management](/enterprise/security/hardened-desktop/settings-management/)
 for details.
 
 ## Questions about privacy

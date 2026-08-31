@@ -4,7 +4,6 @@ description: Restrict outbound container traffic using proxy rules, PAC files, a
 keywords: air gapped containers, network security, proxy configuration, container isolation, docker desktop, PAC file, network isolation
 aliases:
  - /security/for-admins/hardened-desktop/air-gapped-containers/
-  - /enterprise/security/hardened-desktop/air-gapped-containers/
 weight: 30
 ---
 
@@ -44,11 +43,11 @@ Before configuring air-gapped containers, you must have:
 
 - [Enforce sign-in](/manuals/security/authentication/enforce-sign-in/_index.md) enabled to ensure users authenticate with your organization
 - A Docker Business subscription
-- Configured [Settings Management](/manuals/enterprise/hardened-desktop/settings-management/_index.md) with the `admin-settings.json` file to manage organization policies
+- Configured [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) with the `admin-settings.json` file to manage organization policies
 
 ## Configure air-gapped containers
 
-Add the container proxy to your [`admin-settings.json` file](/manuals/enterprise/hardened-desktop/settings-management/configure-json-file.md). For example:
+Add the container proxy to your [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md). For example:
 
 ```json
 {
@@ -141,11 +140,11 @@ function FindProxyForURL(url, host) {
 ### General considerations
 
  - `FindProxyForURL` function URL parameter format is `http://host_or_ip:port` or `https://host_or_ip:port`
- - If you have an internal container trying to access `https://docs.docker.com/enterprise/hardened-desktop/air-gapped-containers` the Docker proxy service will submit docs.docker.com for the host value and https://docs.docker.com:443 for the URL value to `FindProxyForURL`, if you are using `shExpMatch` function in your PAC file as follows:
+ - If you have an internal container trying to access `https://docs.docker.com/enterprise/security/hardened-desktop/air-gapped-containers` the Docker proxy service will submit docs.docker.com for the host value and https://docs.docker.com:443 for the URL value to `FindProxyForURL`, if you are using `shExpMatch` function in your PAC file as follows:
 
    <!-- vale off -->
    ```console
-   if(shExpMatch(url, "https://docs.docker.com:443/enterprise/hardened-desktop/*")) return "DIRECT";
+   if(shExpMatch(url, "https://docs.docker.com:443/enterprise/security/hardened-desktop/*")) return "DIRECT";
    ```
 
    `shExpMatch` function will fail, instead use:
@@ -230,5 +229,5 @@ $ docker run --rm alpine wget -O- https://docker.io
 
 ## Next steps
 
-- [Explore Enhanced Container Isolation](/manuals/enterprise/hardened-desktop/enhanced-container-isolation/_index.md) to further restrict what containers can do at runtime
+- [Explore Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md) to further restrict what containers can do at runtime
 - [Understand how Docker Desktop handles host and container networking](/manuals/desktop/features/networking/_index.md)

@@ -103,7 +103,7 @@ params:
   - title: Hardened Docker Desktop
     description: Security features that strengthen developer environments.
     icon: shield-check
-    link: /enterprise/hardened-desktop/
+    link: /enterprise/security/hardened-desktop/
 ---
 
 This section contains user guides on how to install, set up, configure, and use

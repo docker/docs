@@ -32,6 +32,10 @@ grid_developers:
   icon: shield-exclamation
   link: /compose/how-tos/use-secrets/
 grid_resources:
+- title: Security FAQs
+  description: Explore common security FAQs.
+  icon: question-mark-circle
+  link: /faq/security/general/
 - title: Security best practices
   description: Understand the steps you can take to improve the security of your container.
   icon: squares-2x2

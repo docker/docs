@@ -4,39 +4,33 @@ linkTitle: Hardened Docker Desktop
 description: Security features that help organizations secure developer environments without impacting productivity
 keywords: security, hardened desktop, enhanced container isolation, registry access management, settings management, admins, docker desktop, image access management, air-gapped containers
 tags: [admin]
-weight: 30
-params:
-  sidebar:
-    group: Enterprise
 aliases:
   - /security/for-admins/hardened-desktop/
-  - /enterprise/security/hardened-desktop/
-  - /enterprise/security/
 grid:
   - title: "Settings Management"
     description: Learn how Settings Management can secure your developers' workflows.
     icon: shield-check
-    link: /enterprise/hardened-desktop/settings-management/
+    link: /enterprise/security/hardened-desktop/settings-management/
   - title: "Enhanced Container Isolation"
     description: Understand how Enhanced Container Isolation can prevent container attacks.
     icon: shield-check
-    link: /enterprise/hardened-desktop/enhanced-container-isolation/
+    link: /enterprise/security/hardened-desktop/enhanced-container-isolation/
   - title: "Registry Access Management"
     description: Control the registries developers can access while using Docker Desktop.
     icon: server
-    link: /enterprise/hardened-desktop/registry-access-management/
+    link: /enterprise/security/hardened-desktop/registry-access-management/
   - title: "Image Access Management"
     description: Control the images developers can pull from Docker Hub.
     icon: photo
-    link: /enterprise/hardened-desktop/image-access-management/
+    link: /enterprise/security/hardened-desktop/image-access-management/
   - title: "Air-Gapped Containers"
     description: Restrict containers from accessing unwanted network resources.
     icon: lock-closed
-    link: /enterprise/hardened-desktop/air-gapped-containers/
+    link: /enterprise/security/hardened-desktop/air-gapped-containers/
   - title: "Namespace access"
     description: Control whether organization members can push content to their personal namespaces.
     icon: folder-open
-    link: /enterprise/hardened-desktop/namespace-access/
+    link: /enterprise/security/hardened-desktop/namespace-access/
 ---
 
 {{< summary-bar feature_name="Hardened Docker Desktop" >}}

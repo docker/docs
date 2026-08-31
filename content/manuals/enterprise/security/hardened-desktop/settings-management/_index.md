@@ -6,7 +6,6 @@ title: Settings Management
 linkTitle: Settings Management
 aliases:
   - /security/for-admins/hardened-desktop/settings-management/
-  - /enterprise/security/hardened-desktop/settings-management/
 weight: 10
 ---
 
@@ -26,9 +25,9 @@ Settings Management is designed for organizations that:
 
 Administrators can define settings using one of these methods:
 
-- [Docker Home](/manuals/enterprise/hardened-desktop/settings-management/configure-admin-console.md): Create and assign settings policies via Docker Home. This provides a web-based interface for managing settings
+- [Docker Home](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md): Create and assign settings policies via Docker Home. This provides a web-based interface for managing settings
   across your organization.
-- [`admin-settings.json` file](/manuals/enterprise/hardened-desktop/settings-management/configure-json-file.md): Place a configuration file on the
+- [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md): Place a configuration file on the
   user's machine to enforce settings. This method works well for automated
   deployments and scripted installations.
 
@@ -46,7 +45,7 @@ Settings Management supports a wide range of Docker Desktop features, including:
 - Security policies
 - Cloud policies
 
-For a complete list of settings you can enforce, see the [Settings reference](/manuals/enterprise/hardened-desktop/settings-management/settings-reference.md).
+For a complete list of settings you can enforce, see the [Settings reference](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md).
 
 ## Policy precedence
 
@@ -66,7 +65,7 @@ You can create settings management policies at any time, but your organization n
    ensure all developers authenticate with your organization.
 3. Choose a configuration method:
    - Use the `--admin-settings` installer flag on [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) or [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json`.
-   - Manually create and configure the [`admin-settings.json` file](/manuals/enterprise/hardened-desktop/settings-management/configure-json-file.md).
+   - Manually create and configure the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md).
    - Create a settings policy in the [Docker Home](configure-admin-console.md).
 
 After configuration, developers receive the enforced settings when they:

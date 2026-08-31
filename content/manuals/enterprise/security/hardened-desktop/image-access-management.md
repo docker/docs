@@ -7,7 +7,6 @@ aliases:
  - /admin/organization/image-access/
  - /security/for-admins/image-access-management/
  - /security/for-admins/hardened-desktop/image-access-management/
-  - /enterprise/security/hardened-desktop/image-access-management/
 weight: 50
 ---
 
@@ -110,7 +109,7 @@ Image access restrictions apply to all Docker Hub operations including pulls, bu
 
 ## Scope and bypass considerations
 
-- Image Access Management only controls access to Docker Hub images. Images from other registries aren't affected by these policies. Use [Registry Access Management](/manuals/enterprise/hardened-desktop/registry-access-management.md) to control access to other registries.
+- Image Access Management only controls access to Docker Hub images. Images from other registries aren't affected by these policies. Use [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) to control access to other registries.
 - Users can potentially bypass Image Access Management by signing out of Docker Desktop (unless sign-in is enforced), using images from other registries that aren't restricted, or using registry mirrors or proxies. Enforce sign-in and combine with Registry Access Management for comprehensive control.
 - Image restrictions apply to Dockerfile `FROM` instructions, Docker Compose services using restricted images will fail, multi-stage builds may be affected if intermediate images are restricted, and CI/CD pipelines using diverse image types may be impacted.
 

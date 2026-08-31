@@ -24,7 +24,7 @@ Docker Extensions is switched off by default. To change your settings:
 >   - `~/Library/Group Containers/group.com.docker/settings-store.json` on Mac
 >   - `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings-store.json` on Windows
 >
-> This can also be done with [Hardened Docker Desktop](/manuals/enterprise/hardened-desktop/_index.md)
+> This can also be done with [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/_index.md)
 
 ### Turn on or turn off extensions not available in the Marketplace
 

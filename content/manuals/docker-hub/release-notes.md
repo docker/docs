@@ -170,7 +170,7 @@ known issues for each Docker Hub release.
 
 ### New
 
-- [Registry Access Management](/manuals/enterprise/hardened-desktop/registry-access-management.md) is now available for all Docker Business subscriptions. When enabled, your users can access specific registries in Docker Hub.
+- [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) is now available for all Docker Business subscriptions. When enabled, your users can access specific registries in Docker Hub.
 
 ## 2022-05-03
 

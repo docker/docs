@@ -5,7 +5,6 @@ description: Configure Docker socket exceptions and advanced settings for Enhanc
 keywords: enhanced container isolation, docker socket, configuration, testcontainers, admin settings
 aliases:
  - /security/for-admins/hardened-desktop/enhanced-container-isolation/config/
-  - /enterprise/security/hardened-desktop/enhanced-container-isolation/config/
 weight: 20
 ---
 
@@ -33,7 +32,7 @@ Configure Docker socket exceptions using Settings Management:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your organization from the top-left account drop-down.
 1. Select **Docker Desktop**, then **Settings Management**.
-1. [Create or edit a setting policy](/manuals/enterprise/hardened-desktop/settings-management/configure-admin-console.md).
+1. [Create or edit a setting policy](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md).
 1. Find **Enhanced Container Isolation** settings.
 1. Configure **Docker socket access control** with your trusted images and
 command restrictions.
@@ -41,7 +40,7 @@ command restrictions.
 {{< /tab >}}
 {{< tab name="JSON file" >}}
 
-Create an [`admin-settings.json` file](/manuals/enterprise/hardened-desktop/settings-management/configure-json-file.md) and add:
+Create an [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md) and add:
 
 ```json
 {
@@ -279,5 +278,5 @@ This resolves digest mismatches when upstream images are updated.
 
 ## Next steps
 
-- Review [Enhanced Container Isolation limitations](/manuals/enterprise/hardened-desktop/enhanced-container-isolation/limitations.md).
-- Review [Enhanced Container Isolation FAQs](/manuals/enterprise/hardened-desktop/enhanced-container-isolation/faq.md).
+- Review [Enhanced Container Isolation limitations](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/limitations.md).
+- Review [Enhanced Container Isolation FAQs](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/faq.md).

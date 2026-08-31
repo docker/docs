@@ -63,7 +63,7 @@ The chart contains the following data:
 | :--------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Active user                  | The number of users who have actively used Docker Desktop and either signed in with a Docker account that has a license in your organization or signed in to a Docker account with an email address from a domain associated with your organization. <br><br>Users who don’t sign in to an account associated with your organization are not represented in the data. To ensure users sign in with an account associated with your organization, you can [enforce sign-in](/manuals/security/authentication/enforce-sign-in/_index.md). |
 | Total organization members   | The number of users who have used Docker Desktop, regardless of their Insights activity.                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| Users opted out of analytics | The number of users who are members of your organization that have opted out of sending analytics. <br><br>When users opt out of sending analytics, you won't see any of their data in Insights. To ensure that the data includes all users, you can use [Settings Management](/manuals/enterprise/hardened-desktop/settings-management/_index.md) to set `analyticsEnabled` for all your users.                                                                                                                           |
+| Users opted out of analytics | The number of users who are members of your organization that have opted out of sending analytics. <br><br>When users opt out of sending analytics, you won't see any of their data in Insights. To ensure that the data includes all users, you can use [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) to set `analyticsEnabled` for all your users.                                                                                                                           |
 | Active users (graph)         | The view over time for total active users.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 ### Builds
@@ -175,7 +175,7 @@ A Docker Desktop user export file contains the following data points:
   installed
 - Last Seen Date: The last date the user used the Docker Desktop application
 - Opted Out Analytics: Whether the user has opted out of the
-  [Send usage statistics](/manuals/enterprise/hardened-desktop/settings-management/settings-reference.md#send-usage-statistics) setting in Docker Desktop
+  [Send usage statistics](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md#send-usage-statistics) setting in Docker Desktop
 
 ## Troubleshoot Insights
 
@@ -193,7 +193,7 @@ solutions to resolve common problems:
   If users have opted out of sending usage statistics for Docker Desktop, then
   their usage data will not be a part of Insights. To manage the setting at
   scale for all your users, you can use [Settings
-  Management](/manuals/enterprise/hardened-desktop/settings-management/_index.md) and turn on the
+  Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) and turn on the
   `analyticsEnabled` setting.
 
 - Ensure users use Docker Desktop and aren't using the standalone

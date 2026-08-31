@@ -317,7 +317,7 @@
 "/admin/organization/insights/#extensions":
   - /go/insights-extensions/
 
-"/enterprise/hardened-desktop/settings-management/":
+"/enterprise/security/hardened-desktop/settings-management/":
   - /go/settings-management/
 
 # Billing - cancellation

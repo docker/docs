@@ -142,7 +142,7 @@ If you suspect your company has multiple Docker organizations:
 
 ### Gather requirements
 
-[Settings Management](/manuals/enterprise/hardened-desktop/settings-management/_index.md) lets you preset numerous configuration parameters for Docker Desktop.
+[Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) lets you preset numerous configuration parameters for Docker Desktop.
 
 Work with the following stakeholders to establish your company's baseline
 configuration:
@@ -158,7 +158,7 @@ Review these areas together:
   for Docker Desktop users
 - Additional Docker products included in your subscriptions
 
-To view the parameters that can be preset, see [Configure Settings Management](/manuals/enterprise/hardened-desktop/settings-management/configure-json-file.md#step-two-configure-the-settings-you-want-to-lock-in).
+To view the parameters that can be preset, see [Configure Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md#step-two-configure-the-settings-you-want-to-lock-in).
 
 ### Optional: Meet with the Docker Implementation team
 
@@ -172,8 +172,8 @@ To schedule a meeting, email successteam@docker.com.
 ### Send finalized settings files to the MDM team
 
 After reaching an agreement with the relevant teams about your baseline and
-security configurations as outlined in the previous section, configure Settings Management either via [Docker Home](/manuals/enterprise/hardened-desktop/settings-management/configure-admin-console.md) or with an
-[`admin-settings.json` file](/manuals/enterprise/hardened-desktop/settings-management/configure-json-file.md).
+security configurations as outlined in the previous section, configure Settings Management either via [Docker Home](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md) or with an
+[`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md).
 
 Once the file is ready, collaborate with your MDM team to deploy your chosen
 settings, along with your chosen method for [enforcing sign-in](/manuals/security/authentication/enforce-sign-in/_index.md).
@@ -261,7 +261,7 @@ SSO and SCIM setup.
 > Communicate with your users before proceeding, as this step will impact all
 > existing users signing into your Docker organization.
 
-If you plan to use [Registry Access Management (RAM)](/manuals/enterprise/hardened-desktop/registry-access-management.md) and/or [Image Access Management (IAM)](/manuals/enterprise/hardened-desktop/image-access-management.md):
+If you plan to use [Registry Access Management (RAM)](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) and/or [Image Access Management (IAM)](/manuals/enterprise/security/hardened-desktop/image-access-management.md):
 
 1. Ensure your test developer signs in to Docker Desktop using their
    organization credentials
@@ -327,4 +327,4 @@ To continue optimizing your Docker environment:
 
 - Review your [organization's usage data](/manuals/accounts/organization/insights.md) to track adoption
 - Monitor [Docker Scout findings](/manuals/scout/explore/analysis.md) for security insights
-- Explore [additional security features](/manuals/enterprise/hardened-desktop/_index.md) to enhance your configuration
+- Explore [additional security features](/manuals/enterprise/security/hardened-desktop/_index.md) to enhance your configuration
