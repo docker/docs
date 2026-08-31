@@ -18,9 +18,14 @@ document.querySelectorAll("[data-interactive-diagram]").forEach((root) => {
   const previousButton = root.querySelector("[data-step-previous]");
   const nextButton = root.querySelector("[data-step-next]");
   const playButton = root.querySelector("[data-step-play]");
+  const playLabel = root.querySelector("[data-step-play-label]");
+  const playTimerLabel = root.querySelector("[data-step-play-timer]");
   const progress = root.querySelector("[data-step-progress]");
+  const autoplayDuration = config.autoplayDuration ?? 4000;
   let currentStep = 0;
   let playTimer;
+  let countdownFrame;
+  let stepDeadline;
 
   const stepButtons = config.steps.map((step, index) => {
     const button = document.createElement("button");
@@ -70,10 +75,41 @@ document.querySelectorAll("[data-interactive-diagram]").forEach((root) => {
   }
 
   function stopPlaying() {
-    window.clearInterval(playTimer);
+    window.clearTimeout(playTimer);
+    window.cancelAnimationFrame(countdownFrame);
     playTimer = undefined;
+    countdownFrame = undefined;
+    stepDeadline = undefined;
     playButton?.setAttribute("aria-pressed", "false");
-    if (playButton) playButton.textContent = "Play";
+    if (playLabel) playLabel.textContent = "Play";
+    if (playTimerLabel) {
+      playTimerLabel.hidden = true;
+      playTimerLabel.textContent = "";
+    }
+  }
+
+  function scheduleNextStep() {
+    window.clearTimeout(playTimer);
+    window.cancelAnimationFrame(countdownFrame);
+    stepDeadline = now() + autoplayDuration;
+    playTimer = window.setTimeout(() => {
+      if (currentStep === config.steps.length - 1) {
+        stopPlaying();
+      } else {
+        showStep(currentStep + 1);
+        scheduleNextStep();
+      }
+    }, autoplayDuration);
+    updateCountdown();
+  }
+
+  function updateCountdown() {
+    if (!playTimer || !stepDeadline || !playTimerLabel) return;
+    const remaining = Math.max(0, stepDeadline - now());
+    playTimerLabel.textContent = `${(Math.ceil(remaining / 100) / 10).toFixed(1)}s`;
+    if (remaining > 0) {
+      countdownFrame = window.requestAnimationFrame(updateCountdown);
+    }
   }
 
   previousButton?.addEventListener("click", () => {
@@ -91,14 +127,9 @@ document.querySelectorAll("[data-interactive-diagram]").forEach((root) => {
     }
     if (currentStep === config.steps.length - 1) showStep(0);
     playButton.setAttribute("aria-pressed", "true");
-    playButton.textContent = "Pause";
-    playTimer = window.setInterval(() => {
-      if (currentStep === config.steps.length - 1) {
-        stopPlaying();
-      } else {
-        showStep(currentStep + 1);
-      }
-    }, 2600);
+    if (playLabel) playLabel.textContent = "Pause";
+    if (playTimerLabel) playTimerLabel.hidden = false;
+    scheduleNextStep();
   });
 
   root.classList.add("is-enhanced");
@@ -230,14 +261,13 @@ function positionToken(state, config, tokenConfig) {
     return;
   }
 
-  let x;
-  let y;
+  const width = Math.max(70, tokenConfig.label.length * 7.2 + 24);
+  let point;
   let travelStart;
   if (tokenConfig.node) {
     const node = state.nodesById.get(tokenConfig.node);
     if (node) {
-      x = node.x + node.width / 2;
-      y = node.y + node.height / 2;
+      point = nodeTokenPoint(node, width, tokenConfig.placement);
     }
   } else if (tokenConfig.edge) {
     const edge = config.edges.find(
@@ -247,19 +277,18 @@ function positionToken(state, config, tokenConfig) {
     const to = state.nodesById.get(edge?.to);
     if (from && to) {
       const points = edgePoints(from, to, edge.offset);
-      const progress = 0.62;
-      x = points.x1 + (points.x2 - points.x1) * progress;
-      y = points.y1 + (points.y2 - points.y1) * progress;
-      travelStart = { x: points.x1, y: points.y1 };
+      const progress = tokenConfig.progress ?? 0.5;
+      const labelOffset = tokenConfig.labelOffset ?? 0;
+      point = edgeTokenPoint(points, progress, labelOffset);
+      travelStart = edgeTokenPoint(points, 0, labelOffset);
     }
   }
-  if (x === undefined || y === undefined) return;
+  if (!point) return;
 
-  const width = Math.max(70, tokenConfig.label.length * 7.2 + 24);
   state.token.hidden = false;
   state.token.setAttribute(
     "transform",
-    `translate(${x - width / 2} ${y - 14})`,
+    `translate(${point.x - width / 2} ${point.y - 14})`,
   );
   state.tokenRect.setAttribute("width", width);
   state.tokenText.setAttribute("x", width / 2);
@@ -267,12 +296,46 @@ function positionToken(state, config, tokenConfig) {
   state.tokenText.textContent = tokenConfig.label;
   state.token.classList.remove("is-entering");
   if (travelStart && !prefersReducedMotion()) {
-    animateTokenTravel(state, travelStart, { x, y }, width);
+    animateTokenTravel(state, travelStart, point, width);
   } else {
     window.requestAnimationFrame(() =>
       state.token.classList.add("is-entering"),
     );
   }
+}
+
+function nodeTokenPoint(node, width, placement = "bottom") {
+  const gap = 8;
+  const halfHeight = 14;
+  const positions = {
+    top: {
+      x: node.x + node.width / 2,
+      y: node.y - gap - halfHeight,
+    },
+    right: {
+      x: node.x + node.width + gap + width / 2,
+      y: node.y + node.height / 2,
+    },
+    bottom: {
+      x: node.x + node.width / 2,
+      y: node.y + node.height + gap + halfHeight,
+    },
+    left: {
+      x: node.x - gap - width / 2,
+      y: node.y + node.height / 2,
+    },
+  };
+  return positions[placement] ?? positions.bottom;
+}
+
+function edgeTokenPoint(points, progress, labelOffset) {
+  const dx = points.x2 - points.x1;
+  const dy = points.y2 - points.y1;
+  const length = Math.hypot(dx, dy) || 1;
+  return {
+    x: points.x1 + dx * progress - (dy / length) * labelOffset,
+    y: points.y1 + dy * progress + (dx / length) * labelOffset,
+  };
 }
 
 function animateTokenTravel(state, from, to, width) {
@@ -304,6 +367,10 @@ function prefersReducedMotion() {
   return (
     window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false
   );
+}
+
+function now() {
+  return window.performance?.now?.() ?? Date.now();
 }
 
 function edgePoints(from, to, offset = 0) {

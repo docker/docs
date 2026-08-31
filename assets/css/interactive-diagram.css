@@ -255,10 +255,20 @@
 }
 
 .interactive-diagram__controls {
+  display: grid;
+  grid-template-areas: "transport progress";
+  grid-template-columns: auto auto;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 0.8rem 1rem;
+}
+
+.interactive-diagram__transport {
   display: flex;
+  grid-area: transport;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.8rem 1rem;
 }
 
 .interactive-diagram__button {
@@ -289,14 +299,30 @@
 }
 
 .interactive-diagram__button--play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
   min-width: 3.8rem;
   border-color: var(--diagram-accent);
   color: var(--diagram-accent);
 }
 
+.interactive-diagram__timer {
+  min-width: 2.3rem;
+  padding-left: 0.45rem;
+  border-left: 1px solid
+    color-mix(in srgb, var(--diagram-accent) 55%, transparent);
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.65rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  text-align: right;
+}
+
 .interactive-diagram__progress {
   display: flex;
-  flex: 1;
+  grid-area: progress;
   justify-content: center;
   gap: 0.45rem;
 }
@@ -378,16 +404,18 @@
   }
 
   .interactive-diagram__controls {
-    flex-wrap: wrap;
+    grid-template-areas:
+      "progress"
+      "transport";
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.35rem;
   }
 
   .interactive-diagram__progress {
-    order: 4;
-    flex-basis: 100%;
-    padding-top: 0.35rem;
+    padding-bottom: 0.2rem;
   }
 
-  .interactive-diagram__button:last-child {
-    margin-left: auto;
+  .interactive-diagram__transport {
+    justify-content: center;
   }
 }
