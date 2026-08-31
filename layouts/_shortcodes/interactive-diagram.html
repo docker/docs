@@ -40,29 +40,37 @@
     </p>
   </div>
   <div class="interactive-diagram__controls" data-diagram-controls>
-    <button
-      type="button"
-      class="interactive-diagram__button"
-      data-step-previous
-    >
-      Previous
-    </button>
-    <button
-      type="button"
-      class="interactive-diagram__button interactive-diagram__button--play"
-      data-step-play
-      aria-pressed="false"
-    >
-      Play
-    </button>
+    <div class="interactive-diagram__transport">
+      <button
+        type="button"
+        class="interactive-diagram__button"
+        data-step-previous
+      >
+        Previous
+      </button>
+      <button
+        type="button"
+        class="interactive-diagram__button interactive-diagram__button--play"
+        data-step-play
+        aria-pressed="false"
+      >
+        <span data-step-play-label>Play</span>
+        <span
+          class="interactive-diagram__timer"
+          data-step-play-timer
+          aria-hidden="true"
+          hidden
+        ></span>
+      </button>
+      <button type="button" class="interactive-diagram__button" data-step-next>
+        Next
+      </button>
+    </div>
     <div
       class="interactive-diagram__progress"
       data-step-progress
       aria-label="Diagram steps"
     ></div>
-    <button type="button" class="interactive-diagram__button" data-step-next>
-      Next
-    </button>
   </div>
   <div class="interactive-diagram__fallback">
     <ol>
