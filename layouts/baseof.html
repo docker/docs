@@ -95,5 +95,9 @@
     {{ with .Store.Get "mermaid" }}
       {{ partialCached "mermaid-script.html" "-" "-" }}
     {{ end }}
+    {{/* Load interactive diagrams only on pages that contain the shortcode */}}
+    {{ with .Store.Get "interactive-diagram" }}
+      {{ partialCached "interactive-diagram-script.html" "-" "-" }}
+    {{ end }}
   </body>
 </html>

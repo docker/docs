@@ -1,0 +1,374 @@
+.interactive-diagram {
+  --diagram-accent: var(--color-blue-500);
+  --diagram-accent-soft: var(--color-blue-50);
+  --diagram-border: var(--color-gray-200);
+  --diagram-ink: var(--color-gray-900);
+  --diagram-muted: var(--color-gray-600);
+  overflow: hidden;
+  border: 1px solid var(--diagram-border);
+  border-radius: 0.5rem;
+  background: white;
+  color: var(--diagram-ink);
+}
+
+.dark .interactive-diagram {
+  --diagram-accent: var(--color-blue-300);
+  --diagram-accent-soft: var(--color-blue-950);
+  --diagram-border: var(--color-gray-700);
+  --diagram-ink: var(--color-gray-100);
+  --diagram-muted: var(--color-gray-400);
+  background: var(--color-gray-950);
+}
+
+.interactive-diagram__header {
+  padding: 1.25rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--diagram-border);
+}
+
+.interactive-diagram__title,
+.interactive-diagram__description,
+.interactive-diagram__step-title,
+.interactive-diagram__step-body,
+.interactive-diagram__state {
+  margin: 0;
+}
+
+.interactive-diagram__title {
+  color: var(--diagram-ink);
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.interactive-diagram__description {
+  margin-top: 0.25rem;
+  color: var(--diagram-muted);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.interactive-diagram__stage {
+  overflow-x: auto;
+  background-color: var(--diagram-accent-soft);
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--diagram-border) 28%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--diagram-border) 28%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 24px 24px;
+}
+
+.interactive-diagram__svg {
+  display: block;
+  width: 100%;
+  min-width: 760px;
+  height: auto;
+  font-family: "Roboto Flex", sans-serif;
+}
+
+.interactive-diagram__boundary rect {
+  fill: color-mix(in srgb, white 72%, transparent);
+  stroke: var(--diagram-border);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 5;
+}
+
+.dark .interactive-diagram__boundary rect {
+  fill: color-mix(in srgb, var(--color-gray-900) 82%, transparent);
+}
+
+.interactive-diagram__boundary--sandbox rect {
+  stroke: color-mix(in srgb, var(--diagram-accent) 65%, var(--diagram-border));
+  stroke-width: 2;
+}
+
+.interactive-diagram__boundary-label {
+  fill: var(--diagram-muted);
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.interactive-diagram__edge {
+  stroke: var(--color-gray-400);
+  stroke-width: 2;
+  stroke-dasharray: 5 7;
+  opacity: 0.5;
+  transition:
+    opacity 180ms ease,
+    stroke 180ms ease,
+    stroke-width 180ms ease;
+}
+
+.interactive-diagram__svg marker path {
+  fill: context-stroke;
+}
+
+.interactive-diagram__edge.is-active {
+  stroke: var(--diagram-accent);
+  stroke-width: 3;
+  stroke-dasharray: none;
+  opacity: 1;
+}
+
+.interactive-diagram__node rect {
+  fill: white;
+  stroke: var(--diagram-border);
+  stroke-width: 1.5;
+  transition:
+    fill 180ms ease,
+    stroke 180ms ease,
+    stroke-width 180ms ease;
+}
+
+.dark .interactive-diagram__node rect {
+  fill: var(--color-gray-900);
+}
+
+.interactive-diagram__node--context {
+  opacity: 0.64;
+}
+
+.interactive-diagram__node--secret rect {
+  fill: var(--color-green-50);
+  stroke: var(--color-green-400);
+}
+
+.dark .interactive-diagram__node--secret rect {
+  fill: var(--color-green-950);
+  stroke: var(--color-green-700);
+}
+
+.interactive-diagram__node.is-active rect {
+  fill: var(--diagram-accent-soft);
+  stroke: var(--diagram-accent);
+  stroke-width: 3;
+}
+
+.interactive-diagram__node-label {
+  fill: var(--diagram-ink);
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.interactive-diagram__node-description {
+  fill: var(--diagram-muted);
+  font-size: 11px;
+}
+
+.interactive-diagram__token rect {
+  fill: var(--diagram-ink);
+  stroke: white;
+  stroke-width: 2;
+  filter: drop-shadow(0 2px 3px rgb(18 21 31 / 0.18));
+}
+
+.interactive-diagram__token-label {
+  fill: white;
+  font-family: "Roboto Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+
+.interactive-diagram__status {
+  min-height: 7.5rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--diagram-border);
+  border-bottom: 1px solid var(--diagram-border);
+  background: white;
+}
+
+.dark .interactive-diagram__status {
+  background: var(--color-gray-950);
+}
+
+.interactive-diagram__step-copy {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 0.75rem;
+}
+
+.interactive-diagram__step-number {
+  color: var(--diagram-accent);
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.interactive-diagram__step-title {
+  color: var(--diagram-ink);
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+.interactive-diagram__step-body {
+  margin-top: 0.25rem;
+  color: var(--diagram-muted);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.interactive-diagram__state {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  margin-left: 4.25rem;
+  color: var(--diagram-muted);
+  font-size: 0.78rem;
+}
+
+.interactive-diagram__state code {
+  padding: 0.05rem 0.35rem;
+  border-radius: 0.2rem;
+  background: var(--diagram-accent-soft);
+  color: var(--diagram-ink);
+  font-size: 0.75rem;
+}
+
+.interactive-diagram__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1rem;
+}
+
+.interactive-diagram__button {
+  min-height: 2.25rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--diagram-border);
+  border-radius: 0.25rem;
+  background: transparent;
+  color: var(--diagram-ink);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.interactive-diagram__button:hover:not(:disabled) {
+  border-color: var(--diagram-accent);
+  background: var(--diagram-accent-soft);
+}
+
+.interactive-diagram__button:focus-visible,
+.interactive-diagram__progress-step:focus-visible {
+  outline: 3px solid var(--color-blue-focusvisible);
+  outline-offset: 2px;
+}
+
+.interactive-diagram__button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.interactive-diagram__button--play {
+  min-width: 3.8rem;
+  border-color: var(--diagram-accent);
+  color: var(--diagram-accent);
+}
+
+.interactive-diagram__progress {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.interactive-diagram__progress-step {
+  position: relative;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.interactive-diagram__progress-step::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.6rem;
+  height: 0.6rem;
+  border: 1px solid var(--color-gray-400);
+  border-radius: 50%;
+  background: transparent;
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+.interactive-diagram__progress-step.is-active::before {
+  border-color: var(--diagram-accent);
+  background: var(--diagram-accent);
+  box-shadow: 0 0 0 3px var(--color-blue-focus);
+}
+
+.interactive-diagram__fallback {
+  padding: 1rem 1.5rem;
+}
+
+.interactive-diagram.is-enhanced .interactive-diagram__fallback {
+  display: none;
+}
+
+.interactive-diagram:not(.is-enhanced) .interactive-diagram__stage,
+.interactive-diagram:not(.is-enhanced) .interactive-diagram__status,
+.interactive-diagram:not(.is-enhanced) .interactive-diagram__controls {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .interactive-diagram__token.is-entering {
+    animation: interactive-diagram-token 280ms ease-out;
+  }
+
+  @keyframes interactive-diagram-token {
+    from {
+      opacity: 0;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interactive-diagram__edge,
+  .interactive-diagram__node rect {
+    transition: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .interactive-diagram__header,
+  .interactive-diagram__status {
+    padding-inline: 1rem;
+  }
+
+  .interactive-diagram__step-copy {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .interactive-diagram__state {
+    margin-left: 0;
+  }
+
+  .interactive-diagram__controls {
+    flex-wrap: wrap;
+  }
+
+  .interactive-diagram__progress {
+    order: 4;
+    flex-basis: 100%;
+    padding-top: 0.35rem;
+  }
+
+  .interactive-diagram__button:last-child {
+    margin-left: auto;
+  }
+}
