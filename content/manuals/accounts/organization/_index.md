@@ -76,7 +76,7 @@ permissions.
 
 For details about each role and its permissions, see
 [Roles and
-permissions](/manuals/enterprise/security/roles-and-permissions/_index.md).
+permissions](/manuals/security/roles-and-permissions/_index.md).
 
 ## Company and organization hierarchy
 

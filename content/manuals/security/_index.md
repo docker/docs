@@ -5,7 +5,6 @@ description: Learn about developer-level security features like 2FA and access t
 keywords: docker, docker hub, docker desktop, security, developer security, 2FA, access tokens
 weight: 40
 aliases:
-  - /security/
   - /security/for-developers/
   - /platform/security/
 params:

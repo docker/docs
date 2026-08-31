@@ -9,7 +9,6 @@ weight: 1
 toc_min: 1
 toc_max: 2
 aliases:
-  - /security/security-announcements/
   - /platform/security/resources/security-announcements/
   - /security-announcements/
   - /platform/security/security-announcements/

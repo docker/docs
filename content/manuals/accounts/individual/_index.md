@@ -54,7 +54,7 @@ Docker also ties a verified email to the account.
 - Email: How Docker contacts you for notifications and security-related
   communications.
 - Sign-in method: Email and password,
-  [single sign-on (SSO)](/manuals/enterprise/security/single-sign-on/_index.md),
+  [single sign-on (SSO)](/manuals/security/authentication/single-sign-on/_index.md),
   Google, or GitHub.
 
 ## Next steps
