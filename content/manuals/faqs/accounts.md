@@ -135,21 +135,21 @@ Yes. Organization owners occupy a seat.
 Yes. In a scenario where a user belongs to two organizations, they take up one
 seat in each organization.
 
-## Companies
+### Companies
 
-### Some of my organizations don’t have a Docker Business subscription. Can I still use a parent company?
+#### Some of my organizations don’t have a Docker Business subscription. Can I still use a parent company?
 
 Yes, but you can only add organizations with a Docker Business subscription
 to a company. For more details, see [Add more organizations](/manuals/accounts/organization/company/manage.md#add-more-organizations).
 
-### What happens if one of my organizations downgrades from Docker Business, but I still need access as a company owner?
+#### What happens if one of my organizations downgrades from Docker Business, but I still need access as a company owner?
 
 To access and manage a nested organization, it must have a Docker Business
 subscription. If an organization downgrades from Docker Business, its owner must
 manage it outside of the company. For more details, see
 [Add more organizations](/manuals/accounts/organization/company/manage.md#add-more-organizations).
 
-### Do company owners occupy a subscription seat?
+#### Do company owners occupy a subscription seat?
 
 Company owners don't occupy a seat unless one of the following is true:
 
@@ -164,7 +164,7 @@ owner. To free up that seat,
 and remove yourself from the organization. You keep full administrative access
 as a company owner without using a subscription seat.
 
-### What permissions does the company owner have in the associated/nested organizations?
+#### What permissions does the company owner have in the associated/nested organizations?
 
 Company owners can navigate to the **Organizations** page to view all their
 nested organizations in a single location. They can also view or edit
@@ -173,9 +173,3 @@ Cross-domain Identity Management (SCIM) settings. Changes to company settings
 impact all users in each organization under the company.
 
 For more information, see [Roles and permissions](/manuals/security/roles-and-permissions.md).
-
-## Next steps
-
-- [Create a Docker account](/manuals/accounts/individual/create-account.md)
-- [Manage a Docker account](/manuals/accounts/individual/manage-account.md)
-- [Organization accounts](/manuals/accounts/organization/_index.md)
