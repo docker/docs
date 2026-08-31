@@ -1,0 +1,88 @@
+title: Run Docker inside the microVM
+description: Step through a Docker command and see why it never reaches the host Docker daemon.
+autoplayDuration: 4000
+canvas:
+  width: 820
+  height: 310
+boundaries:
+  - id: host
+    label: Host machine
+    x: 16
+    y: 20
+    width: 788
+    height: 270
+    kind: host
+  - id: sandbox
+    label: Sandbox microVM
+    x: 38
+    y: 58
+    width: 590
+    height: 210
+    kind: sandbox
+nodes:
+  - id: agent
+    label: AI agent
+    description: Runs a Docker command
+    x: 70
+    y: 126
+    width: 150
+    height: 72
+    kind: process
+  - id: sandbox-engine
+    label: Docker Engine
+    description: Private to the sandbox
+    x: 264
+    y: 126
+    width: 150
+    height: 72
+    kind: control
+  - id: container
+    label: Container
+    description: Runs inside the microVM
+    x: 458
+    y: 126
+    width: 150
+    height: 72
+    kind: process
+  - id: host-engine
+    label: Host Docker Engine
+    description: Not reachable
+    x: 636
+    y: 126
+    width: 150
+    height: 72
+    kind: context
+edges:
+  - id: agent-engine
+    from: agent
+    to: sandbox-engine
+  - id: engine-container
+    from: sandbox-engine
+    to: container
+steps:
+  - label: The agent runs a Docker command
+    body: The command starts inside the sandbox microVM.
+    activeNodes: [agent]
+    token:
+      node: agent
+      label: docker run
+      placement: bottom
+    state: The command originates inside the microVM.
+  - label: The sandbox engine receives the command
+    body: The agent connects to the Docker Engine dedicated to this sandbox.
+    activeNodes: [agent, sandbox-engine]
+    activeEdges: [agent-engine]
+    token:
+      edge: agent-engine
+      label: Docker API
+      labelOffset: -54
+    state: No command reaches the host Docker daemon.
+  - label: The engine creates the container
+    body: The private engine creates and runs the container inside the same microVM.
+    activeNodes: [sandbox-engine, container]
+    activeEdges: [engine-container]
+    token:
+      edge: engine-container
+      label: create
+      labelOffset: 54
+    state: The container and its engine remain inside the sandbox boundary.

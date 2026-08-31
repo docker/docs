@@ -56,9 +56,29 @@ sandbox VM. An agent can invoke the tools those servers expose through the MCP
 gateway, subject to MCP policies when organization governance is active. Treat
 local MCP servers as trusted host integrations.
 
-The following diagram shows a sandbox with a directly mounted workspace:
+The following sequences focus on three distinct interactions across these trust
+boundaries. To follow an outbound request through network policy and credential
+injection, see [Architecture](../architecture.md#follow-an-authenticated-request).
 
-![Docker Sandbox security model](../images/sbx-security.png)
+### Run Docker inside the microVM
+
+The sandbox Docker Engine handles the agent's commands without exposing the
+Docker daemon on the host.
+
+{{< interactive-diagram src="../diagrams/private-docker-engine.yaml" >}}
+
+### Follow a workspace edit
+
+Direct mode mounts the workspace read-write, so the agent and host tools see
+the same working tree.
+
+{{< interactive-diagram src="../diagrams/direct-workspace-edit.yaml" >}}
+
+### Follow an MCP tool call
+
+The host-side MCP gateway brokers access from the agent to a remote MCP server.
+
+{{< interactive-diagram src="../diagrams/mcp-tool-call.yaml" >}}
 
 ## Isolation layers
 
