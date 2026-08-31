@@ -1,0 +1,77 @@
+{{- $src := .Get "src" -}}
+{{- if not $src -}}
+  {{- errorf "interactive-diagram shortcode: missing src: %s" .Position -}}
+{{- end -}}
+{{- $filePath := path.Join .Page.File.Dir $src -}}
+{{- if not (fileExists $filePath) -}}
+  {{- errorf "interactive-diagram shortcode: file %q not found: %s" $filePath .Position -}}
+{{- end -}}
+{{- $diagram := readFile $filePath | transform.Unmarshal -}}
+{{- $id := printf "interactive-diagram-%s-%d" .Page.File.UniqueID .Ordinal -}}
+{{- .Page.Store.Set "interactive-diagram" true -}}
+<figure
+  id="{{ $id }}"
+  class="interactive-diagram not-prose my-6"
+  data-interactive-diagram
+  aria-labelledby="{{ $id }}-title"
+>
+  <figcaption class="interactive-diagram__header">
+    <p id="{{ $id }}-title" class="interactive-diagram__title">
+      {{ $diagram.title }}
+    </p>
+    <p class="interactive-diagram__description">{{ $diagram.description }}</p>
+  </figcaption>
+  <div class="interactive-diagram__stage" data-diagram-stage></div>
+  <div
+    class="interactive-diagram__status"
+    aria-live="polite"
+    aria-atomic="true"
+  >
+    <div class="interactive-diagram__step-copy">
+      <span class="interactive-diagram__step-number" data-step-number></span>
+      <div>
+        <p class="interactive-diagram__step-title" data-step-title></p>
+        <p class="interactive-diagram__step-body" data-step-body></p>
+      </div>
+    </div>
+    <p class="interactive-diagram__state">
+      <span data-state-label></span>
+      <code data-state-value></code>
+    </p>
+  </div>
+  <div class="interactive-diagram__controls" data-diagram-controls>
+    <button
+      type="button"
+      class="interactive-diagram__button"
+      data-step-previous
+    >
+      Previous
+    </button>
+    <button
+      type="button"
+      class="interactive-diagram__button interactive-diagram__button--play"
+      data-step-play
+      aria-pressed="false"
+    >
+      Play
+    </button>
+    <div
+      class="interactive-diagram__progress"
+      data-step-progress
+      aria-label="Diagram steps"
+    ></div>
+    <button type="button" class="interactive-diagram__button" data-step-next>
+      Next
+    </button>
+  </div>
+  <div class="interactive-diagram__fallback">
+    <ol>
+      {{- range $diagram.steps }}
+        <li>{{ .label }}: {{ .body }}</li>
+      {{- end }}
+    </ol>
+  </div>
+  <script type="application/json" data-interactive-diagram-config>
+    {{- $diagram | jsonify | safeJS -}}
+  </script>
+</figure>
