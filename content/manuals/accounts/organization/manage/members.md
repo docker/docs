@@ -41,7 +41,7 @@ or email address.
    1000 members and separate multiple entries by comma, semicolon, or space.
 
 When you invite members, you assign them a role. See
-[Roles and permissions](/manuals/platform/security/roles-and-permissions/_index.md)
+[Roles and permissions](/manuals/security/roles-and-permissions/_index.md)
 for details about the access permissions for each role.
 
 Pending invitations appear in the table. Invitees can accept or decline the
@@ -197,7 +197,7 @@ being added to the team.
 ### Remove members from teams
 
 If your organization uses single sign-on (SSO) with
-[SCIM](/manuals/platform/security/provisioning/scim/_index.md) enabled, you
+[SCIM](/manuals/security/provisioning/scim/_index.md) enabled, you
 should remove members from your identity provider (IdP). This automatically
 removes members from Docker. If SCIM is disabled, follow procedures in this
 doc to remove members manually in Docker.
@@ -216,10 +216,10 @@ from a specific team:
 ### Update a member role
 
 Organization owners can manage
-[roles](/manuals/platform/security/roles-and-permissions/_index.md) within
+[roles](/manuals/security/roles-and-permissions/_index.md) within
 an organization. If an organization is part of a company, the company owner
 can also manage that organization's roles. If you have SSO enabled, you can
-use [SCIM for role mapping](/manuals/platform/security/provisioning/scim/_index.md).
+use [SCIM for role mapping](/manuals/security/provisioning/scim/_index.md).
 
 To update a member role:
 

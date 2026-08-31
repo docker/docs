@@ -102,7 +102,7 @@ Scout.
 
    1. Generate an organization access token for accessing Scout. For more
       details, see [Create an organization access
-      token](/platform/security/access-tokens/organization-access-tokens/#create-an-organization-access-token).
+      token](/security/access-tokens/organization-access-tokens/#create-an-organization-access-token).
    2. Sign in to Docker using the organization access token.
 
        ```console

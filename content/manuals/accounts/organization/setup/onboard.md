@@ -106,7 +106,7 @@ add additional owners.
 
 To add an owner, invite a user and assign them the owner role. For more
 details, see [Invite members](/manuals/accounts/organization/manage/members.md) and
-[Roles and permissions](/manuals/platform/security/roles-and-permissions/_index.md).
+[Roles and permissions](/manuals/security/roles-and-permissions/_index.md).
 
 ### Step three: Invite members
 
@@ -117,7 +117,7 @@ they are signed in.
 
 To add a member, invite a user and assign them the member role.
 For more details, see [Invite members](/manuals/accounts/organization/manage/members.md) and
-[Roles and permissions](/manuals/platform/security/roles-and-permissions/_index.md).
+[Roles and permissions](/manuals/security/roles-and-permissions/_index.md).
 
 ### Step four: Manage user access with SSO and SCIM
 
@@ -128,20 +128,20 @@ subscription, see [Upgrade a plan](/manuals/subscription/manage.md#upgrade-plans
 Use your identity provider (IdP) to manage members and provision them to Docker
 automatically via SSO and SCIM. See the following for more details:
 
-- [Configure SSO](/manuals/platform/security/authentication/single-sign-on/connect.md)
+- [Configure SSO](/manuals/security/authentication/single-sign-on/connect.md)
   to authenticate and add members when they sign in to Docker through your
   identity provider.
 - Optional.
-  [Enforce SSO](/manuals/platform/security/authentication/single-sign-on/connect.md) to
+  [Enforce SSO](/manuals/security/authentication/single-sign-on/connect.md) to
   ensure that when users sign in to Docker, they must use SSO.
 
   > [!NOTE]
   >
   > Enforcing single sign-on (SSO) and enforcing Docker Desktop sign in
   > are different features. For more details, see
-  > [Enforcing sign-in versus enforcing single sign-on (SSO)](/manuals/platform/security/authentication/enforce-sign-in/_index.md#enforcing-sign-in-versus-enforcing-single-sign-on-sso).
+  > [Enforcing sign-in versus enforcing single sign-on (SSO)](/manuals/security/authentication/enforce-sign-in/_index.md#enforcing-sign-in-versus-enforcing-single-sign-on-sso).
 
-- [Configure SCIM](/manuals/platform/security/provisioning/scim/_index.md) to
+- [Configure SCIM](/manuals/security/provisioning/scim/_index.md) to
   automatically provision, add, and de-provision members to Docker through
   your identity provider.
 
@@ -156,9 +156,9 @@ and they can circumvent [Docker’s security features](/manuals/enterprise/harde
 There are multiple ways you can enforce sign-in, depending on your organization's
 Docker configuration:
 
-- [Registry key method (Windows only)](/manuals/platform/security/authentication/enforce-sign-in/methods.md#registry-key-method-windows-only)
-- [`.plist` method (Mac only)](/manuals/platform/security/authentication/enforce-sign-in/methods.md#plist-method-mac-only)
-- [`registry.json` method (All)](/manuals/platform/security/authentication/enforce-sign-in/methods.md#registryjson-method-all)
+- [Registry key method (Windows only)](/manuals/security/authentication/enforce-sign-in/methods.md#registry-key-method-windows-only)
+- [`.plist` method (Mac only)](/manuals/security/authentication/enforce-sign-in/methods.md#plist-method-mac-only)
+- [`registry.json` method (All)](/manuals/security/authentication/enforce-sign-in/methods.md#registryjson-method-all)
 
 ### Step six: Manage Docker Desktop security
 
@@ -173,7 +173,7 @@ security posture:
 
 - [Manage Docker products](../manage/manage-products.md) to configure access and view usage.
 - Configure [Hardened Docker Desktop](/manuals/enterprise/hardened-desktop/_index.md) to improve your organization’s security posture for containerized development.
-- [Manage your domains](/manuals/platform/security/provisioning/domain-management.md) to ensure that all Docker users in your domain are part of your organization.
+- [Manage your domains](/manuals/security/provisioning/domain-management.md) to ensure that all Docker users in your domain are part of your organization.
 
 Your Docker subscription provides many more additional features. To learn more,
 see [Docker subscriptions and features](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminOnboard).

@@ -90,7 +90,7 @@ params:
   - title: Security
     description: Security guardrails for both administrators and developers.
     icon: lock-closed
-    link: /platform/security/
+    link: /security/
   - title: FAQs
     description: Frequently asked questions about Docker accounts, organizations, companies, and security.
     icon: question-mark-circle

@@ -35,7 +35,7 @@ To edit this information:
 
 After configuring your organization information, you can:
 
-- [Configure single sign-on (SSO)](/manuals/platform/security/authentication/single-sign-on/connect.md)
-- [Set up SCIM provisioning](/manuals/platform/security/provisioning/scim/_index.md)
-- [Manage domains](/manuals/platform/security/provisioning/domain-management.md)
+- [Configure single sign-on (SSO)](/manuals/security/authentication/single-sign-on/connect.md)
+- [Set up SCIM provisioning](/manuals/security/provisioning/scim/_index.md)
+- [Manage domains](/manuals/security/provisioning/domain-management.md)
 - [Create a company](/manuals/accounts/organization/company/new-company.md)

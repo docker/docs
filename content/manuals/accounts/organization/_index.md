@@ -23,7 +23,7 @@ grid:
   - title: Security
     description: Explore security features for administrators.
     icon: shield-check
-    link: /platform/security/
+    link: /security/
 aliases:
   - /admin/
   - /docker-hub/admin-overview

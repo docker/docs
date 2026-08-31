@@ -215,7 +215,7 @@ jobs:
 
 The `docker/login-action` step authenticates with Docker Hub so the runner can
 pull the DHI base image and the `dhi/policies` bundle. Store your Docker Hub
-username and a [personal access token](/manuals/platform/security/access-tokens/personal-access-tokens.md) as the
+username and a [personal access token](/manuals/security/access-tokens/personal-access-tokens.md) as the
 `DOCKER_USER` and `DOCKER_PAT` repository secrets.
 
 Set `exit-code: true` to fail the step when any policy isn't met. The

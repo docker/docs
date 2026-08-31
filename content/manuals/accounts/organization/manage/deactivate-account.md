@@ -39,7 +39,7 @@ organization:
 - Unlink your [GitHub and Bitbucket
   accounts](/manuals/docker-hub/repos/manage/builds/link-source.md#unlink-a-github-user-account).
 - For Business organizations, [remove your SSO
-  connection](/manuals/platform/security/authentication/single-sign-on/manage.md#delete-a-connection).
+  connection](/manuals/security/authentication/single-sign-on/manage.md#delete-a-connection).
 
 ## Deactivate
 

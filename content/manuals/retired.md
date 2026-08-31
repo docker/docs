@@ -195,7 +195,7 @@ Enhanced Service Account add-ons provided tiered pull rate limits for automated
 workflows and service accounts accessing Docker Hub.
 
 Docker recommends transitioning to [Organization Access Tokens
-(OATs)](/manuals/platform/security/access-tokens/organization-access-tokens.md), which provide secure,
+(OATs)](/manuals/security/access-tokens/organization-access-tokens.md), which provide secure,
 programmatic access to Docker Hub with granular repository permissions, token
 expiration, and better security auditing. OATs are included with Docker Team
 and Business subscriptions and offer similar functionality without requiring

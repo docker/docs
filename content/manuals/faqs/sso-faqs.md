@@ -44,7 +44,7 @@ No specific firewall rules are required as long as `login.docker.com` is accessi
 
 ## Does Docker use my IdP's default session timeout?
 
-Yes, Docker supports your IdP's session timeout using a custom `dockerSessionMinutes` SAML attribute instead of the standard `SessionNotOnOrAfter` element. See [SSO attributes](/manuals/platform/security/provisioning/_index.md#sso-attributes) for more information.
+Yes, Docker supports your IdP's session timeout using a custom `dockerSessionMinutes` SAML attribute instead of the standard `SessionNotOnOrAfter` element. See [SSO attributes](/manuals/security/provisioning/_index.md#sso-attributes) for more information.
 
 ## Can I use multiple identity providers with Docker SSO?
 
@@ -52,7 +52,7 @@ Yes, Docker supports multiple IdP configurations. A domain can be associated wit
 
 ## Can I change my identity provider after configuring SSO?
 
-Yes. Delete your existing IdP configuration in your Docker SSO connection, then [configure SSO using your new IdP](/manuals/platform/security/authentication/single-sign-on/connect.md). If you had already turned on enforcement, turn off enforcement before updating the provider connection.
+Yes. Delete your existing IdP configuration in your Docker SSO connection, then [configure SSO using your new IdP](/manuals/security/authentication/single-sign-on/connect.md). If you had already turned on enforcement, turn off enforcement before updating the provider connection.
 
 ## What information do I need from my identity provider to configure SSO?
 
@@ -63,7 +63,7 @@ To turn on SSO in Docker, you need the following from your IdP:
 
 ## What happens if my existing certificate expires?
 
-Contact your identity provider to retrieve a new X.509 certificate. Update with the new certificate in [SSO configuration settings](/manuals/platform/security/authentication/single-sign-on/manage.md#manage-sso-connections) from Docker Home.
+Contact your identity provider to retrieve a new X.509 certificate. Update with the new certificate in [SSO configuration settings](/manuals/security/authentication/single-sign-on/manage.md#manage-sso-connections) from Docker Home.
 
 - If your organization enforces SSO, username and password credentials won't work.
 - If your organization doesn't enforce SSO, users can sign in with their username and password credentials.
@@ -82,7 +82,7 @@ Yes, bot accounts need seats like regular users, requiring a non-aliased domain 
 
 ## Does SAML SSO use Just-in-Time provisioning?
 
-The SSO implementation uses Just-in-Time (JIT) provisioning by default. You can optionally turn off JIT in Docker Home if you turn on auto-provisioning using SCIM. See [Just-in-Time provisioning](/manuals/platform/security/provisioning/just-in-time.md).
+The SSO implementation uses Just-in-Time (JIT) provisioning by default. You can optionally turn off JIT in Docker Home if you turn on auto-provisioning using SCIM. See [Just-in-Time provisioning](/manuals/security/provisioning/just-in-time.md).
 
 ## How can I troubleshoot an Entra ID SSO connection error?
 
@@ -111,13 +111,13 @@ Yes, you can convert existing users to SSO accounts. Ensure users have:
 - Personal access tokens created to replace passwords for CLI access
 - CI/CD pipelines updated to use PATs instead of passwords
 
-For detailed instructions, see [Configure single sign-on](/manuals/platform/security/authentication/single-sign-on/connect.md).
+For detailed instructions, see [Configure single sign-on](/manuals/security/authentication/single-sign-on/connect.md).
 
 ## Is Docker SSO fully synced with the IdP?
 
 Docker SSO provides Just-in-Time (JIT) provisioning by default. Users are provisioned when they authenticate with SSO. If users leave the organization, administrators must manually [remove the user](/manuals/accounts/organization/manage/members.md#remove-members-from-teams) from the organization.
 
-[SCIM](/manuals/platform/security/provisioning/scim/_index.md) provides full synchronization with users and groups. When using SCIM, the recommended configuration is to turn off JIT so all auto-provisioning is handled by SCIM.
+[SCIM](/manuals/security/provisioning/scim/_index.md) provides full synchronization with users and groups. When using SCIM, the recommended configuration is to turn off JIT so all auto-provisioning is handled by SCIM.
 
 Additionally, you can use the [Docker Hub API](/reference/api/hub/latest.md) to complete this process.
 
@@ -125,7 +125,7 @@ Additionally, you can use the [Docker Hub API](/reference/api/hub/latest.md) to 
 
 When JIT is turned off (available with SCIM in Docker Home), users must be organization members or have pending invitations to access Docker. Users who don't meet these criteria get an "Access denied" error and need administrator invitations.
 
-See [SSO authentication with JIT provisioning disabled](/manuals/platform/security/provisioning/just-in-time.md#sso-authentication-with-jit-provisioning-disabled).
+See [SSO authentication with JIT provisioning disabled](/manuals/security/provisioning/just-in-time.md#sso-authentication-with-jit-provisioning-disabled).
 
 ## Can someone join an organization without an invitation?
 

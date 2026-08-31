@@ -52,7 +52,7 @@ a member:
 1. Select **Emails or usernames**.
 1. Enter the email addresses or Docker IDs of the people you want to invite,
    then assign their
-   [role](/manuals/platform/security/roles-and-permissions/_index.md).
+   [role](/manuals/security/roles-and-permissions/_index.md).
 1. Under **Licenses (optional)**, select one or more licenses that are
    available to your organization.
 1. Select **Invite** to send the invite.
@@ -90,8 +90,8 @@ set up auto-assignment for Docker Core as well.
 AI Governance licenses include single sign-on (SSO) and provisioning features
 regardless of your Docker Core subscription. Automatic license assignment
 requires
-[setting up SSO](/manuals/platform/security/authentication/single-sign-on/connect.md), then
-[provisioning](/manuals/platform/security/provisioning/_index.md) with System
+[setting up SSO](/manuals/security/authentication/single-sign-on/connect.md), then
+[provisioning](/manuals/security/provisioning/_index.md) with System
 for Cross-domain Identity Management (SCIM) or Just-in-Time (JIT).
 
 ## Manage licenses

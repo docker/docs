@@ -16,11 +16,11 @@ grid:
   - title: Configure SSO and SCIM
     description: Set up single sign-on and SCIM provisioning for your company.
     icon: key
-    link: /platform/security/authentication/single-sign-on/
+    link: /security/authentication/single-sign-on/
   - title: Domain management
     description: Add and verify your company's domains.
     icon: check-badge
-    link: /platform/security/provisioning/domain-management/
+    link: /security/provisioning/domain-management/
   - title: FAQs
     description: Explore frequently asked questions about companies.
     link: /faqs/company-faqs/

@@ -56,11 +56,11 @@ This guide covers the following Docker features:
   repositories. Your organization was created with your subscription and is
   managed by one or more owners. Users signed into the organization are
   assigned seats based on the purchased subscription.
-- [Enforce sign-in](/manuals/platform/security/authentication/enforce-sign-in/_index.md):
+- [Enforce sign-in](/manuals/security/authentication/enforce-sign-in/_index.md):
   By default, Docker Desktop doesn't require sign-in. You can configure
   settings to enforce this and ensure your developers sign in to your
   Docker organization.
-- [SSO](/manuals/platform/security/authentication/single-sign-on/_index.md): Without SSO,
+- [SSO](/manuals/security/authentication/single-sign-on/_index.md): Without SSO,
   user management in a Docker organization is manual. Setting
   up an SSO connection between your identity provider and Docker ensures
   compliance with your security policy and automates user provisioning. Adding
@@ -154,7 +154,7 @@ configuration:
 Review these areas together:
 
 - Security features and
-  [enforcing sign-in](/manuals/platform/security/authentication/enforce-sign-in/_index.md)
+  [enforcing sign-in](/manuals/security/authentication/enforce-sign-in/_index.md)
   for Docker Desktop users
 - Additional Docker products included in your subscriptions
 
@@ -176,7 +176,7 @@ security configurations as outlined in the previous section, configure Settings 
 [`admin-settings.json` file](/manuals/enterprise/hardened-desktop/settings-management/configure-json-file.md).
 
 Once the file is ready, collaborate with your MDM team to deploy your chosen
-settings, along with your chosen method for [enforcing sign-in](/manuals/platform/security/authentication/enforce-sign-in/_index.md).
+settings, along with your chosen method for [enforcing sign-in](/manuals/security/authentication/enforce-sign-in/_index.md).
 
 > [!IMPORTANT]
 >
@@ -196,9 +196,9 @@ organizations.
 Single sign-on (SSO) lets developers authenticate using their identity
 providers (IdPs) to access Docker. SSO is available for a whole company and all associated organizations, or an individual organization that has a Docker
 Business subscription. For more information, see the
-[documentation](/manuals/platform/security/authentication/single-sign-on/_index.md).
+[documentation](/manuals/security/authentication/single-sign-on/_index.md).
 
-You can also enable [SCIM](/manuals/platform/security/provisioning/scim/_index.md)
+You can also enable [SCIM](/manuals/security/provisioning/scim/_index.md)
 for further automation of provisioning and deprovisioning of users.
 
 #### Set up Docker product entitlements included in the subscription
@@ -252,7 +252,7 @@ SSO and SCIM setup.
 > [!IMPORTANT]
 >
 > Some users may need CLI based logins to Docker Hub, and for this they will
-> need a [personal access token (PAT)](/manuals/platform/security/access-tokens/personal-access-tokens.md).
+> need a [personal access token (PAT)](/manuals/security/access-tokens/personal-access-tokens.md).
 
 ### Test Registry Access Management and Image Access Management
 
@@ -312,7 +312,7 @@ that matches your verified domain must sign in using your SSO connection. Make
 sure the Identity provider groups associated with your SSO connection cover all
 the developer groups that you want to have access to the Docker subscription.
 
-For instructions on how to enforce SSO, see [Enforce SSO](/manuals/platform/security/authentication/single-sign-on/connect.md).
+For instructions on how to enforce SSO, see [Enforce SSO](/manuals/security/authentication/single-sign-on/connect.md).
 
 ### Deploy configuration settings and enforce sign-in to users
 

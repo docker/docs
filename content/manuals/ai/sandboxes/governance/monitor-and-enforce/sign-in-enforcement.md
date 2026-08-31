@@ -269,5 +269,5 @@ For access, contact ACME IT Security:
   Console
 - [Governance overview](../_index.md): how local and organization governance fit
   together
-- [Enforce sign-in for Docker Desktop](/manuals/platform/security/authentication/enforce-sign-in/_index.md):
+- [Enforce sign-in for Docker Desktop](/manuals/security/authentication/enforce-sign-in/_index.md):
   the equivalent control for Docker Desktop

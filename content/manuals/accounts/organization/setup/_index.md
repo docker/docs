@@ -24,7 +24,7 @@ grid:
   - title: Security
     description: Configure single sign-on, provisioning, and access management.
     icon: shield-check
-    link: /platform/security/
+    link: /security/
 aliases:
   - /admin/organization/setup/
 ---
@@ -37,7 +37,7 @@ account into an organization.
 
 You set up your organization from [Docker Home](https://app.docker.com) and
 must be assigned the
-[organization owner role](/manuals/platform/security/roles-and-permissions/_index.md).
+[organization owner role](/manuals/security/roles-and-permissions/_index.md).
 Setting up an organization happens in broad phases:
 
 1. You can create a new organization, or convert an existing user account

@@ -87,4 +87,4 @@ basis:
 ## Next steps
 
 - [Manage a Docker account](/manuals/accounts/individual/manage-account.md)
-- [Enable two-factor authentication](/manuals/platform/security/authentication/2fa/_index.md)
+- [Enable two-factor authentication](/manuals/security/authentication/2fa/_index.md)
