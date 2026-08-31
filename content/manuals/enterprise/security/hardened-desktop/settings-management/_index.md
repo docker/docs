@@ -54,14 +54,14 @@ When multiple policies exist, Docker Desktop applies them in this order:
 1. User-specific policies: Highest priority
 1. Organization default policy: Applied when no user-specific policy exists
 1. Local `admin-settings.json` file: Lowest priority, overridden by Docker Home policies
-1. [Configuration profiles](/manuals/security/authentication/enforce-sign-in/methods.md#configuration-profiles-method-mac-only) when used to control proxy settings
+1. [Configuration profiles](/manuals/enterprise/security/enforce-sign-in/methods.md#configuration-profiles-method-mac-only) when used to control proxy settings
 
 ## Set up Settings Management
 
 You can create settings management policies at any time, but your organization needs to verify a domain before the policies take effect.
 
 1. Check that you have [added and verified](/manuals/security/provisioning/domain-management.md#add-and-verify-a-domain) your organization's domain.
-2. [Enforce sign-in](/manuals/security/authentication/enforce-sign-in/_index.md) to
+2. [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) to
    ensure all developers authenticate with your organization.
 3. Choose a configuration method:
    - Use the `--admin-settings` installer flag on [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) or [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json`.

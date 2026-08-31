@@ -56,7 +56,7 @@ This guide covers the following Docker features:
   repositories. Your organization was created with your subscription and is
   managed by one or more owners. Users signed into the organization are
   assigned seats based on the purchased subscription.
-- [Enforce sign-in](/manuals/security/authentication/enforce-sign-in/_index.md):
+- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md):
   By default, Docker Desktop doesn't require sign-in. You can configure
   settings to enforce this and ensure your developers sign in to your
   Docker organization.
@@ -154,7 +154,7 @@ configuration:
 Review these areas together:
 
 - Security features and
-  [enforcing sign-in](/manuals/security/authentication/enforce-sign-in/_index.md)
+  [enforcing sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md)
   for Docker Desktop users
 - Additional Docker products included in your subscriptions
 
@@ -176,7 +176,7 @@ security configurations as outlined in the previous section, configure Settings 
 [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md).
 
 Once the file is ready, collaborate with your MDM team to deploy your chosen
-settings, along with your chosen method for [enforcing sign-in](/manuals/security/authentication/enforce-sign-in/_index.md).
+settings, along with your chosen method for [enforcing sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
 
 > [!IMPORTANT]
 >

@@ -12,6 +12,10 @@ grid:
     description: Security features that strengthen developer environments.
     icon: shield-check
     link: /enterprise/security/hardened-desktop/
+  - title: Enforce sign-in
+    description: Configure sign-in for members of your teams and organizations.
+    icon: finger-print
+    link: /enterprise/security/enforce-sign-in/
 ---
 
 [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/_index.md)

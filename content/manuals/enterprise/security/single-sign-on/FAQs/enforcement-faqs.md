@@ -9,8 +9,6 @@ aliases:
   - /single-sign-on/enforcement-faqs/
   - /faq/security/single-sign-on/enforcement-faqs/
   - /security/faqs/single-sign-on/enforcement-faqs/
-  - /platform/security/authentication/single-sign-on/FAQs/enforcement-faqs/
-  - /platform/security/faqs/enforcement-faqs/
 ---
 
 ## Does Docker SSO support authenticating through the command line?
@@ -42,4 +40,4 @@ These are separate features you can use independently or together:
 - Enforcing SSO ensures users sign in using SSO credentials instead of their Docker ID, enabling better credential management.
 - Enforcing sign-in to Docker Desktop ensures users always sign in to accounts that are members of your organization, so security settings and subscription benefits are always applied.
 
-For more details, see [Enforce sign-in for Desktop](/manuals/security/authentication/enforce-sign-in/_index.md#enforcing-sign-in-versus-enforcing-single-sign-on-sso).
+For more details, see [Enforce sign-in for Desktop](/manuals/enterprise/security/enforce-sign-in/_index.md#enforcing-sign-in-versus-enforcing-single-sign-on-sso).

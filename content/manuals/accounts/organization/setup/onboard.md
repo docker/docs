@@ -139,7 +139,7 @@ automatically via SSO and SCIM. See the following for more details:
   >
   > Enforcing single sign-on (SSO) and enforcing Docker Desktop sign in
   > are different features. For more details, see
-  > [Enforcing sign-in versus enforcing single sign-on (SSO)](/manuals/security/authentication/enforce-sign-in/_index.md#enforcing-sign-in-versus-enforcing-single-sign-on-sso).
+  > [Enforcing sign-in versus enforcing single sign-on (SSO)](/manuals/enterprise/security/enforce-sign-in/_index.md#enforcing-sign-in-versus-enforcing-single-sign-on-sso).
 
 - [Configure SCIM](/manuals/security/provisioning/scim/_index.md) to
   automatically provision, add, and de-provision members to Docker through
@@ -156,9 +156,9 @@ and they can circumvent [Docker’s security features](/manuals/enterprise/secur
 There are multiple ways you can enforce sign-in, depending on your organization's
 Docker configuration:
 
-- [Registry key method (Windows only)](/manuals/security/authentication/enforce-sign-in/methods.md#registry-key-method-windows-only)
-- [`.plist` method (Mac only)](/manuals/security/authentication/enforce-sign-in/methods.md#plist-method-mac-only)
-- [`registry.json` method (All)](/manuals/security/authentication/enforce-sign-in/methods.md#registryjson-method-all)
+- [Registry key method (Windows only)](/manuals/enterprise/security/enforce-sign-in/methods.md#registry-key-method-windows-only)
+- [`.plist` method (Mac only)](/manuals/enterprise/security/enforce-sign-in/methods.md#plist-method-mac-only)
+- [`registry.json` method (All)](/manuals/enterprise/security/enforce-sign-in/methods.md#registryjson-method-all)
 
 ### Step six: Manage Docker Desktop security
 

@@ -26,7 +26,7 @@ use the following procedures to control access for all members.
 
 To manage Docker Desktop access:
 
-1. [Enforce sign-in](../../../security/authentication/enforce-sign-in/_index.md).
+1. [Enforce sign-in](../../../enterprise/security/enforce-sign-in/_index.md).
 1. Manage members [manually](./members.md) or use
    [provisioning](../../../security/provisioning/_index.md).
 

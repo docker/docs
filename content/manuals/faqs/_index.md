@@ -31,10 +31,6 @@ grid:
     description: FAQs about domain verification and management for SSO.
     icon: globe-alt
     link: /faqs/domain-faqs/
-  - title: SSO enforcement FAQs
-    description: FAQs about SSO enforcement and its effects on users.
-    icon: shield-check
-    link: /faqs/enforcement-faqs/
 ---
 
 Answers to common questions about Docker accounts, organizations, companies,

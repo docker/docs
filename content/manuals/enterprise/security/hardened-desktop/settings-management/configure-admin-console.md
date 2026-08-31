@@ -18,7 +18,7 @@ Before you begin, make sure you have:
 
 - [Docker Desktop](/manuals/desktop/release-notes.md) installed
 - [A verified domain](/security/authentication/single-sign-on/connect/#step-1-add-a-domain)
-- [Enforced sign-in](/manuals/security/authentication/enforce-sign-in/_index.md) for your organization
+- [Enforced sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) for your organization
 - A Docker Business subscription
 
 > [!IMPORTANT]

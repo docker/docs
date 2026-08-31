@@ -258,6 +258,6 @@ Docker Hub. If you want to use 2FA, you must enable 2FA through your IdP.
 ## Next steps
 
 - [Provision users](/manuals/security/provisioning/_index.md).
-- [Enforce sign-in](../enforce-sign-in/_index.md).
+- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
 - [Create personal access tokens](/manuals/security/access-tokens/personal-access-tokens.md).
 - [Troubleshoot SSO](/manuals/security/authentication/single-sign-on/troubleshoot-sso.md) issues.

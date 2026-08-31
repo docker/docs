@@ -1572,7 +1572,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### New
 
 - You can now specify PAC files and Embedded PAC scripts with installer flags for [macOS](/manuals/desktop/setup/install/mac-install.md#proxy-configuration) and [Windows](/manuals/desktop/setup/install/windows-install.md#proxy-configuration). 
-- Administrators can set proxy settings via [macOS configuration profiles](/manuals/security/authentication/enforce-sign-in/methods.md#macos-configuration-profiles-method-recommended). 
+- Administrators can set proxy settings via [macOS configuration profiles](/manuals/enterprise/security/enforce-sign-in/methods.md#macos-configuration-profiles-method-recommended). 
 
 ### Upgrades
 
@@ -1951,7 +1951,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 - Improved the sign-in enforcement message when more than 10 organizations are enforced.
 - Changed the way ports are mapped by Docker Desktop to fully support IPv6 ports.
 - Fixed a bug in the Dashboard container logs screen causing the scrollbar to disappear as the mouse approaches.
-- [Enforced sign-in](/manuals/security/authentication/enforce-sign-in/_index.md) fixed for Teams subscription users.
+- [Enforced sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) fixed for Teams subscription users.
 - `llama.cpp` server now supports streaming and tool calling in Model Runner.
 - Sign-in Enforcement capability is now available to all subscriptions.
 
@@ -2352,7 +2352,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 - Existing Docker Desktop installations using the WSL2 engine on Windows are now automatically migrated to a unified single-distribution architecture for enhanced consistency and performance.
 - Administrators can now:
-  - Enforce sign-in with macOS [configuration profiles](/manuals/security/authentication/enforce-sign-in/methods.md#configuration-profiles-method-mac-only) (Early Access).
+  - Enforce sign-in with macOS [configuration profiles](/manuals/enterprise/security/enforce-sign-in/methods.md#configuration-profiles-method-mac-only) (Early Access).
   - Enforce sign-in for more than one organization at a time (Early Access).
   - Deploy Docker Desktop for Mac in bulk with the [PKG installer](/manuals/enterprise/enterprise-deployment/pkg-install-and-configure.md) (Early Access).
   - Use Desktop Settings Management to manage and enforce defaults via admin.docker.com (Early Access).
@@ -2470,7 +2470,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
   - Image tags added to **Build results** section under the **Info** tab.
 - Improved efficiency of host-side disk utilization for fresh installations on Mac and Linux.
 - Fixed a bug that prevented the Sign in enforcement popup to be triggered when token expires.
-- Fixed a bug where containers would not be displayed in the GUI immediately after signing in when using [enforced sign-in](/manuals/security/authentication/enforce-sign-in/_index.md).
+- Fixed a bug where containers would not be displayed in the GUI immediately after signing in when using [enforced sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
 - `settings.json` has been renamed to `settings-store.json`
 - The host networking feature no longer requires users to be signed-in in order to use it.
 
@@ -2572,7 +2572,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 - If you authenticate via the CLI, you can now authenticate through a browser-based flow, removing the need for manual PAT generation.
 - Windows now supports automatic reclamation of disk space in Docker Desktop for WSL2 installations [using a managed virtual hard disk](/manuals/desktop/features/wsl/best-practices.md).
 - Deploying Docker Desktop via the [MSI installer](/manuals/enterprise/enterprise-deployment/msi-install-and-configure.md) is now generally available.
-- Two new methods to [enforce sign-in](/manuals/security/authentication/enforce-sign-in/_index.md) (windows registry key and `.plist` file) are now generally available.
+- Two new methods to [enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) (windows registry key and `.plist` file) are now generally available.
 - Fresh installations of Docker Desktop now use the containerd image store by default.
 - [Compose Bridge](/manuals/compose/bridge/_index.md) (Experimental) is now available from the Compose file viewer. Easily convert and deploy your Compose project to a Kubernetes cluster.
 

@@ -18,7 +18,7 @@ Before you can use Docker Desktop settings reporting, make sure you have:
 
 - [Docker Desktop](/manuals/desktop/release-notes.md) installed across your organization
 - [A verified domain](/manuals/security/authentication/single-sign-on/connect.md)
-- [Enforced sign-in](/manuals/security/authentication/enforce-sign-in/_index.md) for your organization
+- [Enforced sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) for your organization
 - A Docker Business subscription
 - At least one settings policy configured
 

@@ -93,7 +93,7 @@ Domain audit can't identify:
 - Users who authenticate using an account that doesn't have an
   email address associated with one of your verified domains
 
-To prevent unidentifiable users from accessing Docker Desktop, [enforce sign-in](/manuals/security/authentication/enforce-sign-in/_index.md).
+To prevent unidentifiable users from accessing Docker Desktop, [enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
 
 ### Run a domain audit
 

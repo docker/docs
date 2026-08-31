@@ -6,8 +6,6 @@ keywords: authentication, registry.json, configure, enforce sign-in, docker desk
 tags: [admin]
 aliases:
  - /security/for-admins/enforce-sign-in/methods/
- - /enterprise/security/enforce-sign-in/methods/
- - /platform/security/authentication/enforce-sign-in/methods/
 ---
 
 {{< summary-bar feature_name="Enforce sign-in" >}}

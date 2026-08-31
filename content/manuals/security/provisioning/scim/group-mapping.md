@@ -196,4 +196,4 @@ Once complete, a user who signs in to Docker through SSO is automatically added 
 ## Next steps
 
 - [Assign roles](/manuals/security/roles-and-permissions/core-roles.md) to members of your org.
-- [Enforce sign in](/manuals/security/authentication/enforce-sign-in.md), if needed.
+- [Enforce sign in](/manuals/enterprise/security/enforce-sign-in.md), if needed.

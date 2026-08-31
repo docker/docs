@@ -214,7 +214,7 @@ These files must be placed on developer's machines. Depending on your operating 
 - Windows: `C:\ProgramData\DockerDesktop`
 - Linux: `/usr/share/docker-desktop`
 
-Make sure your developers are signed in to Docker Desktop in order for the private marketplace configuration to take effect. As an administrator, you should [enforce sign-in](/manuals/security/authentication/enforce-sign-in/_index.md).
+Make sure your developers are signed in to Docker Desktop in order for the private marketplace configuration to take effect. As an administrator, you should [enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
 
 ## Feedback
 

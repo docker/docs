@@ -17,7 +17,7 @@ This page shows you how to turn on Enhanced Container Isolation (ECI) and verify
 Before you begin, you must have:
 
 - A Docker Business subscription
-- [Enforced sign-in](/manuals/security/authentication/enforce-sign-in/_index.md) (for administrators managing organization-wide settings only)
+- [Enforced sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) (for administrators managing organization-wide settings only)
 
 ## Enable Enhanced Container Isolation
 
