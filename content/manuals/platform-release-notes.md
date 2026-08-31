@@ -6,7 +6,7 @@ keywords: Docker Home, billing, subscription, security, admin, releases, what's 
 weight: 60
 params:
   sidebar:
-    group: Platform
+    group: Accounts and admin
 tags: [Release notes, admin]
 ---
 

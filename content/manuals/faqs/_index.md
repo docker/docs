@@ -6,7 +6,7 @@ keywords: FAQ, FAQs, accounts, Docker ID, Docker Home, subscription FAQs, billin
 weight: 45
 params:
   sidebar:
-    group: Platform
+    group: Accounts and admin
 aliases:
   - /platform/security/faqs/
   - /faq/security/

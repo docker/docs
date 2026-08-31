@@ -6,7 +6,7 @@ keywords: support, help, docker desktop, subscriptions, community, troubleshooti
 weight: 50
 params:
   sidebar:
-    group: Platform
+    group: Accounts and admin
 ---
 
 Docker offers multiple support channels depending on your subscription level and needs.

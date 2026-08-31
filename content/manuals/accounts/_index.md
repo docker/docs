@@ -8,7 +8,7 @@ keywords: accounts, admin, Docker ID, organization, company, Docker Home,
 weight: 10
 params:
   sidebar:
-    group: Platform
+    group: Accounts and admin
 grid:
   - title: Docker individual accounts
     description: Create and manage your Docker ID, email, and sign-in methods.

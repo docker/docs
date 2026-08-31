@@ -12,7 +12,7 @@ params:
       - AI and agents
       - Application development
       - Supply chain security
-      - Platform
+      - Accounts and admin
       - Enterprise
   notoc: true
   ai-and-agents:
@@ -92,7 +92,7 @@ params:
     icon: lock-closed
     link: /security/
   - title: FAQs
-    description: Frequently asked questions about Docker accounts, organizations, companies, and security.
+    description: Frequently asked questions about Docker accounts, organizations, companies, subscriptions, billing, and security.
     icon: question-mark-circle
     link: /faqs/
   enterprise:
@@ -127,10 +127,9 @@ Security guardrails and image analysis for your software supply chain.
 
 {{< grid items=supply-chain-security >}}
 
-## Platform
+## Accounts and admin
 
-Documentation related to the Docker platform, such as administration and
-subscription management.
+Manage Docker accounts, administration, subscriptions, billing, and security.
 
 {{< grid items=platform >}}
 

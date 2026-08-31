@@ -6,7 +6,7 @@ keywords: subscription, billing, docker plans, payments, invoices, pricing
 weight: 20
 params:
   sidebar:
-    group: Platform
+    group: Accounts and admin
 aliases:
   - /subscription/
   - /billing/

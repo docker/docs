@@ -1,6 +1,6 @@
 ---
 title: Update your billing details
-linkTitle: Update details
+linkTitle: Billing details
 weight: 40
 description: Learn how to update billing details, like contact information, addresses, and notification email for Docker subscriptions.
 keywords: payments, billing, subscription, invoices, update billing email, change billing address, Docker billing account

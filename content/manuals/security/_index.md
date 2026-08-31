@@ -9,7 +9,7 @@ aliases:
   - /platform/security/
 params:
   sidebar:
-    group: Platform
+    group: Accounts and admin
 grid_developers:
 - title: Set up two-factor authentication
   description: Add an extra layer of authentication to your Docker account.
