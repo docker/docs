@@ -210,10 +210,21 @@ function buildDiagram(stage, config) {
   svg.append(token);
   stage.append(svg);
 
-  return { nodes, edges, nodesById, token, tokenRect, tokenText };
+  return {
+    nodes,
+    edges,
+    nodesById,
+    token,
+    tokenRect,
+    tokenText,
+    tokenAnimation: undefined,
+  };
 }
 
 function positionToken(state, config, tokenConfig) {
+  state.tokenAnimation?.remove();
+  state.tokenAnimation = undefined;
+
   if (!tokenConfig) {
     state.token.hidden = true;
     return;
@@ -221,6 +232,7 @@ function positionToken(state, config, tokenConfig) {
 
   let x;
   let y;
+  let travelStart;
   if (tokenConfig.node) {
     const node = state.nodesById.get(tokenConfig.node);
     if (node) {
@@ -235,8 +247,10 @@ function positionToken(state, config, tokenConfig) {
     const to = state.nodesById.get(edge?.to);
     if (from && to) {
       const points = edgePoints(from, to, edge.offset);
-      x = (points.x1 + points.x2) / 2;
-      y = (points.y1 + points.y2) / 2;
+      const progress = 0.62;
+      x = points.x1 + (points.x2 - points.x1) * progress;
+      y = points.y1 + (points.y2 - points.y1) * progress;
+      travelStart = { x: points.x1, y: points.y1 };
     }
   }
   if (x === undefined || y === undefined) return;
@@ -252,7 +266,44 @@ function positionToken(state, config, tokenConfig) {
   state.tokenText.setAttribute("y", "18");
   state.tokenText.textContent = tokenConfig.label;
   state.token.classList.remove("is-entering");
-  window.requestAnimationFrame(() => state.token.classList.add("is-entering"));
+  if (travelStart && !prefersReducedMotion()) {
+    animateTokenTravel(state, travelStart, { x, y }, width);
+  } else {
+    window.requestAnimationFrame(() =>
+      state.token.classList.add("is-entering"),
+    );
+  }
+}
+
+function animateTokenTravel(state, from, to, width) {
+  const animation = createSvgElement("animateTransform", {
+    attributeName: "transform",
+    type: "translate",
+    from: `${from.x - width / 2} ${from.y - 14}`,
+    to: `${to.x - width / 2} ${to.y - 14}`,
+    dur: "650ms",
+    calcMode: "spline",
+    keyTimes: "0;1",
+    keySplines: "0.2 0 0 1",
+  });
+  state.token.prepend(animation);
+  state.tokenAnimation = animation;
+  if (typeof animation.beginElement === "function") {
+    animation.beginElement();
+    window.setTimeout(() => {
+      animation.remove();
+      if (state.tokenAnimation === animation) state.tokenAnimation = undefined;
+    }, 700);
+  } else {
+    animation.remove();
+    state.tokenAnimation = undefined;
+  }
+}
+
+function prefersReducedMotion() {
+  return (
+    window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false
+  );
 }
 
 function edgePoints(from, to, offset = 0) {

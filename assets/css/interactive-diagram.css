@@ -2,8 +2,11 @@
   --diagram-accent: var(--color-blue-500);
   --diagram-accent-soft: var(--color-blue-50);
   --diagram-border: var(--color-gray-200);
+  --diagram-structure: var(--color-gray-500);
   --diagram-ink: var(--color-gray-900);
   --diagram-muted: var(--color-gray-600);
+  --diagram-token-bg: var(--color-gray-900);
+  --diagram-token-fg: white;
   overflow: hidden;
   border: 1px solid var(--diagram-border);
   border-radius: 0.5rem;
@@ -15,8 +18,11 @@
   --diagram-accent: var(--color-blue-300);
   --diagram-accent-soft: var(--color-blue-950);
   --diagram-border: var(--color-gray-700);
+  --diagram-structure: var(--color-gray-600);
   --diagram-ink: var(--color-gray-100);
   --diagram-muted: var(--color-gray-400);
+  --diagram-token-bg: var(--color-blue-300);
+  --diagram-token-fg: var(--color-gray-950);
   background: var(--color-gray-950);
 }
 
@@ -73,7 +79,7 @@
 
 .interactive-diagram__boundary rect {
   fill: color-mix(in srgb, white 72%, transparent);
-  stroke: var(--diagram-border);
+  stroke: var(--diagram-structure);
   stroke-width: 1.5;
   stroke-dasharray: 5 5;
 }
@@ -97,7 +103,7 @@
 }
 
 .interactive-diagram__edge {
-  stroke: var(--color-gray-400);
+  stroke: var(--diagram-structure);
   stroke-width: 2;
   stroke-dasharray: 5 7;
   opacity: 0.5;
@@ -120,7 +126,7 @@
 
 .interactive-diagram__node rect {
   fill: white;
-  stroke: var(--diagram-border);
+  stroke: var(--diagram-structure);
   stroke-width: 1.5;
   transition:
     fill 180ms ease,
@@ -133,7 +139,20 @@
 }
 
 .interactive-diagram__node--context {
-  opacity: 0.64;
+  color: var(--diagram-muted);
+}
+
+.interactive-diagram__node--context rect {
+  fill: var(--color-gray-50);
+  stroke-dasharray: 3 3;
+}
+
+.dark .interactive-diagram__node--context rect {
+  fill: var(--color-gray-900);
+}
+
+.interactive-diagram__node--context .interactive-diagram__node-label {
+  fill: var(--diagram-muted);
 }
 
 .interactive-diagram__node--secret rect {
@@ -164,14 +183,14 @@
 }
 
 .interactive-diagram__token rect {
-  fill: var(--diagram-ink);
-  stroke: white;
+  fill: var(--diagram-token-bg);
+  stroke: var(--diagram-token-fg);
   stroke-width: 2;
   filter: drop-shadow(0 2px 3px rgb(18 21 31 / 0.18));
 }
 
 .interactive-diagram__token-label {
-  fill: white;
+  fill: var(--diagram-token-fg);
   font-family: "Roboto Mono", monospace;
   font-size: 11px;
   font-weight: 600;
@@ -245,7 +264,7 @@
 .interactive-diagram__button {
   min-height: 2.25rem;
   padding: 0.4rem 0.7rem;
-  border: 1px solid var(--diagram-border);
+  border: 1px solid var(--diagram-structure);
   border-radius: 0.25rem;
   background: transparent;
   color: var(--diagram-ink);
@@ -297,7 +316,7 @@
   left: 50%;
   width: 0.6rem;
   height: 0.6rem;
-  border: 1px solid var(--color-gray-400);
+  border: 1px solid var(--diagram-structure);
   border-radius: 50%;
   background: transparent;
   content: "";
