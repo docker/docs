@@ -5,6 +5,8 @@
   --diagram-structure: var(--color-gray-500);
   --diagram-ink: var(--color-gray-900);
   --diagram-muted: var(--color-gray-600);
+  --diagram-shared: var(--color-green-600);
+  --diagram-brokered: var(--color-violet-600);
   --diagram-token-bg: var(--color-gray-900);
   --diagram-token-fg: white;
   overflow: hidden;
@@ -21,6 +23,8 @@
   --diagram-structure: var(--color-gray-600);
   --diagram-ink: var(--color-gray-100);
   --diagram-muted: var(--color-gray-400);
+  --diagram-shared: var(--color-green-400);
+  --diagram-brokered: var(--color-violet-300);
   --diagram-token-bg: var(--color-blue-300);
   --diagram-token-fg: var(--color-gray-950);
   background: var(--color-gray-950);
@@ -37,6 +41,10 @@
 
 .interactive-diagram__header-copy {
   min-width: 0;
+}
+
+.interactive-diagram--topology .interactive-diagram__header {
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .interactive-diagram__title,
@@ -132,6 +140,64 @@
   opacity: 1;
 }
 
+.interactive-diagram__edge--interactive {
+  cursor: pointer;
+  opacity: 0.82;
+}
+
+.interactive-diagram__edge--shared {
+  stroke: var(--diagram-shared);
+}
+
+.interactive-diagram__edge--brokered {
+  stroke: var(--diagram-brokered);
+}
+
+.interactive-diagram__edge-hit {
+  stroke: transparent;
+  stroke-width: 22;
+  stroke-dasharray: none;
+  pointer-events: stroke;
+}
+
+.interactive-diagram__edge-label rect {
+  fill: white;
+  stroke: var(--diagram-border);
+  stroke-width: 1;
+  stroke-dasharray: none;
+}
+
+.dark .interactive-diagram__edge-label rect {
+  fill: var(--color-gray-900);
+}
+
+.interactive-diagram__edge-label-text {
+  fill: var(--diagram-ink);
+  stroke: none;
+  font-family: "Roboto Mono", monospace;
+  font-size: 10.5px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+
+.interactive-diagram__edge--interactive.is-active
+  .interactive-diagram__edge-label
+  rect {
+  stroke: var(--diagram-accent);
+  stroke-width: 2;
+}
+
+.interactive-diagram__edge--interactive:focus-visible {
+  outline: none;
+}
+
+.interactive-diagram__edge--interactive:focus-visible
+  .interactive-diagram__edge-label
+  rect {
+  stroke: var(--color-blue-focusvisible);
+  stroke-width: 3;
+}
+
 .interactive-diagram__node rect {
   fill: white;
   stroke: var(--diagram-structure);
@@ -140,6 +206,20 @@
     fill 180ms ease,
     stroke 180ms ease,
     stroke-width 180ms ease;
+}
+
+.interactive-diagram--topology .interactive-diagram__node {
+  cursor: pointer;
+  transition: opacity 180ms ease;
+}
+
+.interactive-diagram--topology .interactive-diagram__node:focus-visible {
+  outline: none;
+}
+
+.interactive-diagram--topology .interactive-diagram__node:focus-visible rect {
+  stroke: var(--color-blue-focusvisible);
+  stroke-width: 3;
 }
 
 .dark .interactive-diagram__node rect {
@@ -168,6 +248,24 @@
   stroke: var(--color-green-400);
 }
 
+.interactive-diagram__node--shared rect {
+  fill: var(--color-green-50);
+  stroke: var(--diagram-shared);
+}
+
+.dark .interactive-diagram__node--shared rect {
+  fill: var(--color-green-950);
+}
+
+.interactive-diagram__node--restricted rect {
+  fill: var(--color-gray-50);
+  stroke-dasharray: 3 3;
+}
+
+.dark .interactive-diagram__node--restricted rect {
+  fill: var(--color-gray-900);
+}
+
 .dark .interactive-diagram__node--secret rect {
   fill: var(--color-green-950);
   stroke: var(--color-green-700);
@@ -177,6 +275,18 @@
   fill: var(--diagram-accent-soft);
   stroke: var(--diagram-accent);
   stroke-width: 3;
+}
+
+.interactive-diagram__node.is-related rect {
+  stroke: var(--diagram-accent);
+  stroke-width: 2;
+}
+
+.interactive-diagram--topology.has-topology-focus
+  .interactive-diagram__node:not(.is-active, .is-related),
+.interactive-diagram--topology.has-topology-focus
+  .interactive-diagram__edge:not(.is-active) {
+  opacity: 0.22;
 }
 
 .interactive-diagram__node-label {
@@ -252,6 +362,49 @@
   color: var(--diagram-ink);
   font-size: 0.78rem;
   line-height: 1.45;
+}
+
+.interactive-diagram__topology-detail {
+  display: grid;
+  min-height: 7rem;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1rem 1.5rem 1.15rem;
+  border-top: 1px solid var(--diagram-border);
+  background: white;
+}
+
+.dark .interactive-diagram__topology-detail {
+  background: var(--color-gray-950);
+}
+
+.interactive-diagram__topology-category,
+.interactive-diagram__topology-title,
+.interactive-diagram__topology-body {
+  margin: 0;
+}
+
+.interactive-diagram__topology-category {
+  padding-top: 0.15rem;
+  color: var(--diagram-accent);
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.interactive-diagram__topology-title {
+  color: var(--diagram-ink);
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+.interactive-diagram__topology-body {
+  margin-top: 0.3rem;
+  color: var(--diagram-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
 }
 
 .interactive-diagram__autoplay-progress {
@@ -363,6 +516,7 @@
 
 .interactive-diagram:not(.is-enhanced) .interactive-diagram__stage,
 .interactive-diagram:not(.is-enhanced) .interactive-diagram__status,
+.interactive-diagram:not(.is-enhanced) .interactive-diagram__topology-detail,
 .interactive-diagram:not(.is-enhanced) .interactive-diagram__autoplay-progress,
 .interactive-diagram:not(.is-enhanced) .interactive-diagram__controls {
   display: none;
@@ -386,6 +540,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .interactive-diagram__edge,
+  .interactive-diagram__node,
   .interactive-diagram__node rect {
     transition: none;
   }
@@ -393,11 +548,18 @@
 
 @media (max-width: 640px) {
   .interactive-diagram__header,
-  .interactive-diagram__status {
+  .interactive-diagram__status,
+  .interactive-diagram__topology-detail {
     padding-inline: 1rem;
   }
 
   .interactive-diagram__step-copy {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .interactive-diagram__topology-detail {
+    min-height: 8.5rem;
     grid-template-columns: 1fr;
     gap: 0.35rem;
   }

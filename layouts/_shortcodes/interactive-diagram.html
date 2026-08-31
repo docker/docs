@@ -7,12 +7,14 @@
   {{- errorf "interactive-diagram shortcode: file %q not found: %s" $filePath .Position -}}
 {{- end -}}
 {{- $diagram := readFile $filePath | transform.Unmarshal -}}
+{{- $type := $diagram.type | default "sequence" -}}
 {{- $id := printf "interactive-diagram-%s-%d" .Page.File.UniqueID .Ordinal -}}
 {{- .Page.Store.Set "interactive-diagram" true -}}
 <figure
   id="{{ $id }}"
-  class="interactive-diagram not-prose my-6"
+  class="interactive-diagram interactive-diagram--{{ $type }} not-prose my-6"
   data-interactive-diagram
+  data-diagram-type="{{ $type }}"
   aria-labelledby="{{ $id }}-title"
 >
   <figcaption class="interactive-diagram__header">
@@ -22,67 +24,101 @@
       </p>
       <p class="interactive-diagram__description">{{ $diagram.description }}</p>
     </div>
-    <button
-      type="button"
-      class="interactive-diagram__button interactive-diagram__button--play"
-      data-step-play
-      aria-pressed="false"
-    >
-      <span data-step-play-label>Play</span>
-    </button>
+    {{- if eq $type "sequence" }}
+      <button
+        type="button"
+        class="interactive-diagram__button interactive-diagram__button--play"
+        data-step-play
+        aria-pressed="false"
+      >
+        <span data-step-play-label>Play</span>
+      </button>
+    {{- end }}
   </figcaption>
   <div class="interactive-diagram__stage" data-diagram-stage></div>
-  <div
-    class="interactive-diagram__status"
-    aria-live="polite"
-    aria-atomic="true"
-  >
-    <div class="interactive-diagram__step-copy">
-      <span class="interactive-diagram__step-number" data-step-number></span>
-      <div>
-        <p class="interactive-diagram__step-title" data-step-title></p>
-        <p class="interactive-diagram__step-body" data-step-body></p>
+  {{- if eq $type "topology" }}
+    <div
+      class="interactive-diagram__topology-detail"
+      data-topology-detail
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <p class="interactive-diagram__topology-category" data-topology-category>
+        {{ $diagram.overview.category }}
+      </p>
+      <div class="interactive-diagram__topology-detail-copy">
+        <p class="interactive-diagram__topology-title" data-topology-title>
+          {{ $diagram.overview.label }}
+        </p>
+        <p class="interactive-diagram__topology-body" data-topology-body>
+          {{ $diagram.overview.body }}
+        </p>
       </div>
     </div>
-    <p class="interactive-diagram__state" data-step-state></p>
-  </div>
-  <div
-    class="interactive-diagram__autoplay-progress"
-    data-step-autoplay-progress
-    role="progressbar"
-    aria-label="Time until the next step"
-    aria-valuemin="0"
-    aria-valuemax="100"
-    aria-valuenow="0"
-  >
-    <span
-      class="interactive-diagram__autoplay-progress-bar"
-      data-step-autoplay-progress-bar
-    ></span>
-  </div>
-  <div class="interactive-diagram__controls" data-diagram-controls>
-    <button
-      type="button"
-      class="interactive-diagram__button"
-      data-step-previous
-    >
-      Previous
-    </button>
+  {{- else }}
     <div
-      class="interactive-diagram__progress"
-      data-step-progress
-      aria-label="Diagram steps"
-    ></div>
-    <button type="button" class="interactive-diagram__button" data-step-next>
-      Next
-    </button>
-  </div>
+      class="interactive-diagram__status"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <div class="interactive-diagram__step-copy">
+        <span class="interactive-diagram__step-number" data-step-number></span>
+        <div>
+          <p class="interactive-diagram__step-title" data-step-title></p>
+          <p class="interactive-diagram__step-body" data-step-body></p>
+        </div>
+      </div>
+      <p class="interactive-diagram__state" data-step-state></p>
+    </div>
+    <div
+      class="interactive-diagram__autoplay-progress"
+      data-step-autoplay-progress
+      role="progressbar"
+      aria-label="Time until the next step"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+    >
+      <span
+        class="interactive-diagram__autoplay-progress-bar"
+        data-step-autoplay-progress-bar
+      ></span>
+    </div>
+    <div class="interactive-diagram__controls" data-diagram-controls>
+      <button
+        type="button"
+        class="interactive-diagram__button"
+        data-step-previous
+      >
+        Previous
+      </button>
+      <div
+        class="interactive-diagram__progress"
+        data-step-progress
+        aria-label="Diagram steps"
+      ></div>
+      <button type="button" class="interactive-diagram__button" data-step-next>
+        Next
+      </button>
+    </div>
+  {{- end }}
   <div class="interactive-diagram__fallback">
-    <ol>
-      {{- range $diagram.steps }}
-        <li>{{ .label }}: {{ .body }}</li>
-      {{- end }}
-    </ol>
+    {{- if eq $type "topology" }}
+      <ul>
+        {{- range $diagram.nodes }}
+          <li>{{ .label }}: {{ .details }}</li>
+        {{- end }}
+        {{- range $diagram.edges }}
+          <li>{{ .label }}: {{ .details }}</li>
+        {{- end }}
+      </ul>
+    {{- else }}
+      <ol>
+        {{- range $diagram.steps }}
+          <li>{{ .label }}: {{ .body }}</li>
+        {{- end }}
+      </ol>
+    {{- end }}
   </div>
   <script type="application/json" data-interactive-diagram-config>
     {{- $diagram | jsonify | safeJS -}}

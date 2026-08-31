@@ -12,9 +12,17 @@ document.querySelectorAll("[data-interactive-diagram]").forEach((root) => {
   }
 
   const stage = root.querySelector("[data-diagram-stage]");
-  if (!stage || !config.canvas || !config.steps?.length) return;
+  if (!stage || !config.canvas || !config.nodes?.length) return;
 
   const state = buildDiagram(stage, config);
+  if (config.type === "topology") {
+    initializeTopology(root, stage, state, config);
+  } else if (config.steps?.length) {
+    initializeSequence(root, state, config);
+  }
+});
+
+function initializeSequence(root, state, config) {
   const previousButton = root.querySelector("[data-step-previous]");
   const nextButton = root.querySelector("[data-step-next]");
   const playButton = root.querySelector("[data-step-play]");
@@ -199,12 +207,141 @@ document.querySelectorAll("[data-interactive-diagram]").forEach((root) => {
 
   root.classList.add("is-enhanced");
   showStep(0);
-});
+}
+
+function initializeTopology(root, stage, state, config) {
+  const overview = config.overview ?? {
+    category: "Overview",
+    label: config.title,
+    body: config.description,
+  };
+  let pinnedItem;
+
+  const items = [
+    ...config.nodes.map((node) => ({
+      ...node,
+      itemType: "node",
+      element: state.nodes.get(node.id),
+    })),
+    ...config.edges.map((edge) => ({
+      ...edge,
+      itemType: "edge",
+      element: state.edges.get(edge.id),
+    })),
+  ].filter((item) => item.element);
+
+  items.forEach((item) => {
+    const { element } = item;
+    element.setAttribute("role", "button");
+    element.setAttribute("tabindex", "0");
+    element.setAttribute("aria-label", `${item.label}. ${item.details}`);
+    element.setAttribute("aria-pressed", "false");
+
+    element.addEventListener("pointerenter", () => {
+      if (!pinnedItem) showItem(item);
+    });
+    element.addEventListener("pointerleave", () => {
+      if (!pinnedItem && element !== document.activeElement) showOverview();
+    });
+    element.addEventListener("focus", () => {
+      if (!pinnedItem) showItem(item);
+    });
+    element.addEventListener("blur", () => {
+      if (!pinnedItem) showOverview();
+    });
+    element.addEventListener("click", (event) => {
+      event.stopPropagation();
+      if (pinnedItem?.itemType === item.itemType && pinnedItem.id === item.id) {
+        pinnedItem = undefined;
+        showOverview();
+      } else {
+        pinnedItem = item;
+        showItem(item);
+      }
+      updatePressedState();
+    });
+    element.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        element.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      }
+    });
+  });
+
+  stage.addEventListener("click", () => {
+    pinnedItem = undefined;
+    updatePressedState();
+    showOverview();
+  });
+  root.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    pinnedItem = undefined;
+    updatePressedState();
+    showOverview();
+  });
+
+  function showItem(item) {
+    const activeNodes = new Set();
+    const relatedNodes = new Set();
+    const activeEdges = new Set();
+
+    if (item.itemType === "node") {
+      activeNodes.add(item.id);
+      config.edges.forEach((edge) => {
+        if (edge.from !== item.id && edge.to !== item.id) return;
+        activeEdges.add(edge.id);
+        relatedNodes.add(edge.from === item.id ? edge.to : edge.from);
+      });
+    } else {
+      activeEdges.add(item.id);
+      activeNodes.add(item.from);
+      activeNodes.add(item.to);
+    }
+
+    root.classList.add("has-topology-focus");
+    state.nodes.forEach((element, id) => {
+      element.classList.toggle("is-active", activeNodes.has(id));
+      element.classList.toggle("is-related", relatedNodes.has(id));
+    });
+    state.edges.forEach((element, id) => {
+      element.classList.toggle("is-active", activeEdges.has(id));
+    });
+    setTopologyDetail(root, item.category, item.label, item.details);
+  }
+
+  function showOverview() {
+    root.classList.remove("has-topology-focus");
+    state.nodes.forEach((element) => {
+      element.classList.remove("is-active", "is-related");
+    });
+    state.edges.forEach((element) => element.classList.remove("is-active"));
+    setTopologyDetail(root, overview.category, overview.label, overview.body);
+  }
+
+  function updatePressedState() {
+    items.forEach((item) => {
+      const pressed =
+        pinnedItem?.itemType === item.itemType && pinnedItem.id === item.id;
+      item.element.setAttribute("aria-pressed", String(pressed));
+      item.element.classList.toggle("is-pinned", pressed);
+    });
+  }
+
+  root.classList.add("is-enhanced");
+  showOverview();
+}
+
+function setTopologyDetail(root, category, label, body) {
+  setText(root, "[data-topology-category]", category);
+  setText(root, "[data-topology-title]", label);
+  setText(root, "[data-topology-body]", body);
+}
 
 function buildDiagram(stage, config) {
+  const isTopology = config.type === "topology";
   const svg = createSvgElement("svg", {
     viewBox: `0 0 ${config.canvas.width} ${config.canvas.height}`,
-    role: "img",
+    role: isTopology ? "group" : "img",
     "aria-label": config.description,
   });
   svg.classList.add("interactive-diagram__svg");
@@ -254,16 +391,69 @@ function buildDiagram(stage, config) {
     const to = nodesById.get(edge.to);
     if (!from || !to) return;
     const points = edgePoints(from, to, edge.offset);
-    const line = createSvgElement("line", {
+    const lineAttributes = {
       x1: points.x1,
       y1: points.y1,
       x2: points.x2,
       y2: points.y2,
       "marker-end": `url(#${marker.id})`,
-    });
-    line.classList.add("interactive-diagram__edge");
-    svg.append(line);
-    edges.set(edge.id, line);
+    };
+    if (edge.bidirectional) {
+      lineAttributes["marker-start"] = `url(#${marker.id})`;
+    }
+
+    if (isTopology) {
+      const group = createSvgElement("g");
+      group.classList.add(
+        "interactive-diagram__edge",
+        "interactive-diagram__edge--interactive",
+        `interactive-diagram__edge--${edge.kind}`,
+      );
+      const line = createSvgElement("line", lineAttributes);
+      line.classList.add("interactive-diagram__edge-line");
+      const hitTarget = createSvgElement("line", {
+        x1: points.x1,
+        y1: points.y1,
+        x2: points.x2,
+        y2: points.y2,
+      });
+      hitTarget.classList.add("interactive-diagram__edge-hit");
+      group.append(line, hitTarget);
+
+      if (edge.label) {
+        const labelPoint = edgeTokenPoint(
+          points,
+          edge.labelProgress ?? 0.5,
+          edge.labelOffset ?? 0,
+        );
+        const labelWidth = Math.max(68, edge.label.length * 6.6 + 20);
+        const labelGroup = createSvgElement("g");
+        labelGroup.classList.add("interactive-diagram__edge-label");
+        labelGroup.append(
+          createSvgElement("rect", {
+            x: labelPoint.x - labelWidth / 2,
+            y: labelPoint.y - 13,
+            width: labelWidth,
+            height: 26,
+            rx: "13",
+          }),
+          createSvgText(
+            edge.label,
+            labelPoint.x,
+            labelPoint.y + 4,
+            "interactive-diagram__edge-label-text",
+          ),
+        );
+        group.append(labelGroup);
+      }
+      svg.append(group);
+      edges.set(edge.id, group);
+    } else {
+      const line = createSvgElement("line", lineAttributes);
+      line.classList.add("interactive-diagram__edge");
+      svg.append(line);
+      edges.set(edge.id, line);
+    }
   });
 
   const nodes = new Map();
@@ -298,12 +488,17 @@ function buildDiagram(stage, config) {
     nodes.set(node.id, group);
   });
 
-  const token = createSvgElement("g");
-  token.classList.add("interactive-diagram__token");
-  const tokenRect = createSvgElement("rect", { height: "28", rx: "14" });
-  const tokenText = createSvgText("", 0, 0, "interactive-diagram__token-label");
-  token.append(tokenRect, tokenText);
-  svg.append(token);
+  let token;
+  let tokenRect;
+  let tokenText;
+  if (!isTopology) {
+    token = createSvgElement("g");
+    token.classList.add("interactive-diagram__token");
+    tokenRect = createSvgElement("rect", { height: "28", rx: "14" });
+    tokenText = createSvgText("", 0, 0, "interactive-diagram__token-label");
+    token.append(tokenRect, tokenText);
+    svg.append(token);
+  }
   stage.append(svg);
 
   return {
