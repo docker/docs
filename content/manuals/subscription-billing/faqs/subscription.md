@@ -1,13 +1,15 @@
 ---
 title: Plan FAQs
-linkTitle: FAQs
+linkTitle: Subscription FAQ
 description: Frequently asked questions about Docker subscriptions and billing
 keywords: subscription faqs, docker billing, subscription transfer, academic pricing, docker programs
 tags: [FAQ]
-weight: 30
+weight: 10
+aliases:
+  - /subscription/faq/
 ---
 
-For more information on Docker subscriptions, see [Docker subscription overview](_index.md).  
+For more information on Docker subscriptions, see [Docker subscription overview](/manuals/subscription-billing/subscription/_index.md).  
 
 ## Can I transfer my subscription from one user or organization account to another?
 
@@ -25,8 +27,8 @@ Contact the [Docker Sales Team](https://www.docker.com/company/contact) for info
 
 Docker offers two content contribution programs:
 
-- [Docker-Sponsored Open Source Program (DSOS)](../docker-hub/repos/manage/trusted-content/dsos-program.md) for open source projects
-- [Docker Verified Publisher (DVP)](../docker-hub/repos/manage/trusted-content/dvp-program.md) for commercial publishers
+- [Docker-Sponsored Open Source Program (DSOS)](/manuals/docker-hub/repos/manage/trusted-content/dsos-program.md) for open source projects
+- [Docker Verified Publisher (DVP)](/manuals/docker-hub/repos/manage/trusted-content/dvp-program.md) for commercial publishers
 
 You can also join the [Developer Preview Program](https://www.docker.com/community/get-involved/developer-preview/) or sign up for early access programs to participate in research and try new features.
 

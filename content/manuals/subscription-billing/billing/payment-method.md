@@ -5,6 +5,7 @@ weight: 20
 description: Learn how to manage cards, US bank accounts, Stripe Link, and pay by invoice for Docker subscriptions.
 keywords: payments, billing, subscription, payment methods, credit card, ACH, US bank account, Stripe Link, pay by invoice, failed payments
 aliases:
+  - /billing/payment-method/
   - /billing/core-billing/payment-method/
 ---
 
@@ -72,7 +73,7 @@ You can only remove secondary payment methods. To remove a secondary payment met
 1. Select the **Actions** menu next to the payment method you want to remove, then select **Remove**.
 1. Verify your billing details, then select **Save as default**.
 
-To remove your default payment method, first set a different payment method as default, or [downgrade to a free subscription](/manuals/subscription/plans/docker.md#cancel-a-docker-plan).
+To remove your default payment method, first set a different payment method as default, or [downgrade to a free subscription](/manuals/subscription-billing/subscription/plans/docker.md#cancel-a-docker-plan).
 
 ## Enable and disable pay by invoice
 

@@ -8,6 +8,8 @@ keywords:
   billing, sales tax, VAT, tax exemption certificate, tax ID, VAT number,
   United States tax exemption, Docker Support, billing portal
 weight: 70
+aliases:
+  - /billing/tax-certificate/
 ---
 
 Depending on your location, Docker may collect sales tax or VAT on your
@@ -88,4 +90,4 @@ Your VAT number must include your country prefix. For example, enter
 > existing payment method or billing details in billing settings.
 
 Add a VAT number or tax ID when you
-[set up a new plan](/manuals/subscription/manage.md#set-up-a-new-plan).
+[set up a new plan](/manuals/subscription-billing/subscription/manage.md#set-up-a-new-plan).

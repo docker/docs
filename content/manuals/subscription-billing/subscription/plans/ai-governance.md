@@ -9,6 +9,7 @@ keywords:
   subscription management
 weight: 50
 aliases:
+  - /subscription/plans/ai-governance/
   - /subscription/products/ai-governance/
   - /subscription/ai-governance/
 ---

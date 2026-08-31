@@ -141,7 +141,7 @@ following table to learn where you can monitor organization usage:
 | Docker Offload       | From [Docker Home](https://app.docker.com/), select **Offload**, then **Offload activity**. See [Docker Offload usage and billing](../../../offload/usage.md) for more details.                  |
 
 If your usage or seat count exceeds your subscription amount, you can
-[add seats](./manage-seats.md) or [view available Docker plans](../../../subscription/plans/_index.md) to meet your needs.
+[add seats](./manage-seats.md) or [view available Docker plans](../../../subscription-billing/subscription/plans/_index.md) to meet your needs.
 
 ## Next steps
 

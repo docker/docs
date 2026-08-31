@@ -83,10 +83,10 @@ params:
     description: Manage Docker individual and organization accounts.
     icon: user-circle
     link: /accounts/
-  - title: Billing
-    description: Manage billing and payment methods.
+  - title: Subscription and billing
+    description: Manage Docker subscriptions, plans, billing, and payments.
     icon: credit-card
-    link: /billing/
+    link: /subscription-billing/
   - title: Security
     description: Security guardrails for both administrators and developers.
     icon: lock-closed
@@ -95,10 +95,6 @@ params:
     description: Frequently asked questions about Docker accounts, organizations, companies, and security.
     icon: question-mark-circle
     link: /faqs/
-  - title: Subscription
-    description: Commercial use licenses for Docker products.
-    icon: credit-card
-    link: /subscription/
   enterprise:
   - title: Deploy Docker Desktop
     description: Deploy Docker Desktop at scale within your company

@@ -8,33 +8,28 @@ keywords:
   billing, invoice, payment, subscription, Docker billing, update payment
   method, billing history, invoices, payment verification, tax exemption,
   usage, costs, credits, metered billing
-weight: 30
-params:
-  sidebar:
-    group: Platform
+weight: 20
 grid_core:
   - title: Add or update a payment method
     description: Learn how to add or update a payment method for your personal account or organization.
-    link: /billing/payment-method/
+    link: /subscription-billing/billing/payment-method/
     icon: credit-card
   - title: Update billing information
     description: Learn how to update billing information for your personal account or organization.
-    link: /billing/details/
+    link: /subscription-billing/billing/details/
     icon: pencil-square
   - title: View billing history
     description: Learn how to view billing history and download past invoices.
-    link: /billing/history/
+    link: /subscription-billing/billing/history/
     icon: credit-card
   - title: 3D Secure authentication
     description: Learn how 3DS works and how to troubleshoot verification issues.
-    link: /billing/3d-secure/
+    link: /subscription-billing/billing/3d-secure/
     icon: wallet
   - title: Taxes
     description: Learn how to submit a US tax exemption certificate or add a VAT number.
-    link: /billing/tax-certificate/
+    link: /subscription-billing/billing/tax-certificate/
     icon: document-text
-aliases:
-  - /billing/docker-hub-pricing/
 ---
 
 You can use the billing portal to manage your Docker subscriptions, such
@@ -72,8 +67,8 @@ from this page.
 
 Your invoice history is a reference to the Docker plans you subscribe
 to. For information about your billing cycle and renewal dates, see
-[Billing cycle](/manuals/billing/details.md#billing-cycle). To upgrade or add
-a new plan, see [Subscription](/manuals/subscription/_index.md).
+[Billing cycle](/manuals/subscription-billing/billing/details.md#billing-cycle). To upgrade or add
+a new plan, see [Subscription](/manuals/subscription-billing/subscription/_index.md).
 
 ## Next steps
 

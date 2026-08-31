@@ -40,7 +40,7 @@ requirements:
   and then remove yourself, or deactivate the company.
 - If you have an active Docker subscription,
   [downgrade it to a Docker Personal
-  subscription](/manuals/subscription/plans/docker.md#cancel-a-docker-plan).
+  subscription](/manuals/subscription-billing/subscription/plans/docker.md#cancel-a-docker-plan).
 - Download any images and tags you want to keep. Use
   `docker pull -a <image>` to pull all tags, or `docker pull <image>:<tag>`
   to pull a specific tag.

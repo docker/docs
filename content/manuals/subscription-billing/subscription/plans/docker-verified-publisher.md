@@ -9,6 +9,8 @@ keywords:
   domains, publisher analytics, organization subscription, apply
   for dvp, auto-renewal, billing portal, docker hub
 weight: 60
+aliases:
+  - /subscription/plans/docker-verified-publisher/
 ---
 
 [Docker Verified Publisher (DVP)](/manuals/docker-hub/repos/manage/trusted-content/dvp-program.md)

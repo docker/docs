@@ -38,7 +38,7 @@ grid:
       Ensure that your artifacts align with supply chain best practices.
     icon: shield-check
   - title: Upgrade
-    link: /subscription/change/
+    link: /subscription-billing/subscription/manage/
     description: |
       A Personal subscription includes up to 1 repository. Upgrade for more.
     icon: arrow-up-circle

@@ -10,6 +10,7 @@ keywords:
   pricing, subscription changes, build cloud minutes, testcontainers minutes
 weight: 10
 aliases:
+  - /subscription/plans/docker/
   - /subscription/plans/core/
   - /subscription/products/core/
   - /subscription/core/

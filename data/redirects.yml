@@ -321,7 +321,7 @@
   - /go/settings-management/
 
 # Billing - cancellation
-"/subscription/desktop-license/":
+"/subscription-billing/desktop-license/":
   - /go/desktop-license/
 "/docker-hub/usage/pulls/":
   - /go/hub-pull-limits/

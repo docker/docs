@@ -9,6 +9,7 @@ keywords: dhi select, dhi enterprise, docker hardened images, hardened images,
   repositories, organization subscription, secure images
 weight: 40
 aliases:
+  - /subscription/plans/dhi/
   - /subscription/products/dhi-select/
   - /subscription/dhi-select/
   - /subscription/plans/dhi-select/
