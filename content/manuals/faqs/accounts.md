@@ -137,7 +137,7 @@ seat in each organization.
 
 ### Companies
 
-#### Some of my organizations don’t have a Docker Business subscription. Can I still use a parent company?
+#### Can I use a parent company if some of my organizations don’t have a Docker Business subscription?
 
 Yes, but you can only add organizations with a Docker Business subscription
 to a company. For more details, see [Add more organizations](/manuals/accounts/organization/company/manage.md#add-more-organizations).

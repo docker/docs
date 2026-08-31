@@ -169,7 +169,7 @@ Before enforcing SSO, you must [create personal access tokens](/manuals/security
 
 Yes, you can turn on SSO without enforcement. Users can choose between Docker ID (standard email and password) or domain-verified email address (SSO) at the sign-in screen.
 
-### SSO is enforced, but a user can sign in using a username and password. Why is this happening?
+### Why can a user sign in with a username and password when SSO is enforced?
 
 Guest users who aren't part of your registered domain but have been invited to your organization don't sign in through your SSO identity provider. SSO enforcement only applies to users who belong to your verified domain.
 

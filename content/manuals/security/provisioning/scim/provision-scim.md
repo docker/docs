@@ -4,7 +4,6 @@ linkTitle: Setup
 description: Learn how System for Cross-domain Identity Management works and how to set it up.
 weight: 10
 aliases:
-  - /platform/security/provisioning/scim/
   - /platform/security/provisioning/scim/provision-scim/
 ---
 
