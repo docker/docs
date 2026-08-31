@@ -5,6 +5,7 @@ title: Security FAQs
 linkTitle: Security
 weight: 20
 tags: [FAQ]
+toc_max: 2
 aliases:
   - /single-sign-on/faqs/
   - /faq/security/single-sign-on/faqs/
