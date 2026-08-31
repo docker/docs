@@ -35,7 +35,7 @@ For details on setting up and managing repositories, see [Get started with DHI S
 
 ## Billing cycle
 
-DHI Select is an annual plan billed per repository from the date your plan starts. Repositories added mid-cycle are prorated for the remainder of the billing period. You can add more repositories to your DHI Select plan by going to **Active plans** in the billing portal. For steps, see [Manage plans](../manage.md#upgrade-plans).
+DHI Select is an annual plan billed per repository from the date your plan starts. Repositories added mid-cycle are prorated for the remainder of the billing period. You can add more repositories to your DHI Select plan by going to **Active plans** in the billing portal. For steps, see [Manage plans](/manuals/subscription-billing/manage/plans.md#upgrade-plans).
 
 ## Disable auto-renewal
 
