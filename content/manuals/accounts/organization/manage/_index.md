@@ -28,7 +28,7 @@ grid:
   - title: Billing
     description: Manage payment methods and view billing history.
     icon: credit-card
-    link: /subscription-billing/billing/
+    link: /subscription-billing/
 aliases:
   - /admin/organization/manage/
 ---

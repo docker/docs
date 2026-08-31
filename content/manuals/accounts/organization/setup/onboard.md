@@ -123,7 +123,7 @@ For more details, see [Invite members](/manuals/accounts/organization/manage/mem
 
 Configuring SSO and SCIM is optional and only available to Docker Business
 subscribers. To upgrade a Docker Team subscription to a Docker Business
-subscription, see [Upgrade a plan](/manuals/subscription-billing/subscription/manage.md#upgrade-plans).
+subscription, see [Upgrade a plan](/manuals/subscription-billing/manage/plans.md#upgrade-plans).
 
 Use your identity provider (IdP) to manage members and provision them to Docker
 automatically via SSO and SCIM. See the following for more details:

@@ -15,7 +15,7 @@ products.
 
 > [!TIP]
 > To learn more about product licenses, Docker Core seats, and other Docker
-> add-ons, see [Docker plans](/manuals/subscription-billing/subscription/plans/_index.md),
+> add-ons, see [Docker plans](/manuals/subscription-billing/plans/_index.md),
 > or
 > <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_cs_admin_licenses" class="link" rel="noopener">contact sales</a>
 > to purchase licenses.
@@ -116,11 +116,11 @@ To manage licenses for your organization:
 
 Explore Docker Core add-ons and products that need licenses:
 
-- [Docker plans](/manuals/subscription-billing/subscription/plans/_index.md) to learn about different
+- [Docker plans](/manuals/subscription-billing/plans/_index.md) to learn about different
   add-ons
 - [Manage seats](/manuals/accounts/organization/manage/manage-seats.md) to add more
   seats to your Docker Core subscription
-- [AI Governance plan](/manuals/subscription-billing/subscription/plans/ai-governance.md) to learn
+- [AI Governance plan](/manuals/subscription-billing/plans/ai-governance.md) to learn
   about AI Governance license usage and billing
 - [Docker Offload](/manuals/offload/about.md) to let your developers offload
   building and running containers to the cloud

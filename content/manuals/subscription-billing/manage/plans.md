@@ -1,13 +1,13 @@
 ---
 title: Manage plans
-linkTitle: Manage
+linkTitle: Plans
 description: >
   Learn how to set up, upgrade, downgrade, or cancel plans, and how to
   manage auto-renewal and credits.
 keywords:
   purchase subscription, buy docker subscription, product catalog, browse
   products, upgrade subscription, downgrade subscription, docker billing, cancel auto-renewal, cancel, top up, manage
-weight: 20
+weight: 10
 aliases:
   - /subscription/manage/
   - /subscription/change/
@@ -58,17 +58,17 @@ You can upgrade active plans from the billing Overview page.
 > [!TIP]
 > Billing cycle details vary from plan to plan. Learn more about usage, downgrading, or canceling plans
 > from the relevant
-> [product page](/manuals/subscription-billing/subscription/plans/_index.md).
+> [product page](/manuals/subscription-billing/plans/_index.md).
 
 ## View your credits
 
 Docker displays available account credits in the billing portal. Credits
 offset eligible usage automatically before Docker charges your payment
 method. To review credit balance and applied credits, see
-[Credits](/manuals/subscription-billing/billing/_index.md#credits).
+[Credits](/manuals/subscription-billing/_index.md#credits).
 
 Credits apply to
-[Docker Agentic Platform](/manuals/subscription-billing/subscription/plans/docker-agentic-platform.md).
+[Docker Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md).
 When you sign up for Docker Agentic Platform, Docker adds a one-time
 promotional credit to your account. This credit is non-recurring,
 doesn't expire, and applies to cloud compute usage only. It doesn't
@@ -81,9 +81,9 @@ Some products are sales-led. You must
 
 ## Next steps
 
-- [Learn about available plans](/manuals/subscription-billing/subscription/plans/_index.md)
-- [Set up payment information](/manuals/subscription-billing/billing/payment-method.md)
-- [View invoices](/manuals/subscription-billing/billing/history.md)
-- To learn more about managing your billing details, see [Billing](/manuals/subscription-billing/billing/_index.md).
+- [Learn about available plans](/manuals/subscription-billing/plans/_index.md)
+- [Set up payment information](/manuals/subscription-billing/manage/payment-method.md)
+- [View invoices](/manuals/subscription-billing/manage/history.md)
+- To learn more about managing your billing details, see [Billing](/manuals/subscription-billing/_index.md).
 - To learn about sales tax and VAT, see
-  [Taxes](/manuals/subscription-billing/billing/tax-certificate.md).
+  [Taxes](/manuals/subscription-billing/manage/tax-certificate.md).

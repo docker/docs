@@ -59,7 +59,7 @@ Docker finalizes your invoice. For more information, see [Update billing informa
 
 ## View renewal date
 
-Renewal dates are set on a per-plan basis, so check each plan individually if you subscribe to more than one. Depending on the product, your billing cycle can be monthly, annual, or another cadence. For plan-specific renewal and billing cycle details, see [Plans](/manuals/subscription-billing/subscription/plans/_index.md).
+Renewal dates are set on a per-plan basis, so check each plan individually if you subscribe to more than one. Depending on the product, your billing cycle can be monthly, annual, or another cadence. For plan-specific renewal and billing cycle details, see [Plans](/manuals/subscription-billing/plans/_index.md).
 
 ## Pay by invoice
 

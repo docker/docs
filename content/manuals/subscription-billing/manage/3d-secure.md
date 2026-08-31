@@ -29,9 +29,9 @@ requirements.
 You may be asked to verify your identity when performing any of the following
 actions:
 
-- Starting a [paid subscription](/manuals/subscription-billing/subscription/manage.md)
-- Changing your [billing cycle](/manuals/subscription-billing/billing/details.md#billing-cycle) from monthly to annual
-- [Upgrading your subscription](/manuals/subscription-billing/subscription/manage.md#upgrade-plans)
+- Starting a [paid subscription](/manuals/subscription-billing/manage/plans.md)
+- Changing your [billing cycle](/manuals/subscription-billing/manage/details.md#billing-cycle) from monthly to annual
+- [Upgrading your subscription](/manuals/subscription-billing/manage/plans.md#upgrade-plans)
 - [Adding seats](/manuals/accounts/organization/manage/manage-seats.md) to an existing
   subscription
 

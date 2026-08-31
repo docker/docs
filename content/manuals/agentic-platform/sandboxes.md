@@ -62,7 +62,7 @@ when the sandbox is created and cannot be changed while it runs.
 
 Docker bills sandbox compute per second while the sandbox runs. Model inference
 uses your external provider credential and is metered by that provider. For
-account, usage, and payment information, see [Docker Billing](/subscription-billing/billing/).
+account, usage, and payment information, see [Docker Billing](/subscription-billing/).
 
 ## Check sandbox configuration
 

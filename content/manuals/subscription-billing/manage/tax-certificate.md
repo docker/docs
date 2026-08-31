@@ -90,4 +90,4 @@ Your VAT number must include your country prefix. For example, enter
 > existing payment method or billing details in billing settings.
 
 Add a VAT number or tax ID when you
-[set up a new plan](/manuals/subscription-billing/subscription/manage.md#set-up-a-new-plan).
+[set up a new plan](/manuals/subscription-billing/manage/plans.md#set-up-a-new-plan).

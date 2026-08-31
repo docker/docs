@@ -19,23 +19,23 @@ aliases:
 grid:
   - title: Docker
     description: Personal and organization plans, including build and runtime minutes.
-    link: /subscription-billing/subscription/plans/docker/
+    link: /subscription-billing/plans/docker/
     icon: credit-card
   - title: Gordon plans
     description: Usage plans that increase your Gordon allowance.
-    link: /subscription-billing/subscription/plans/gordon/
+    link: /subscription-billing/plans/gordon/
     icon: /icons/gordon.svg
   - title: Docker Hardened Images (DHI)
     description: Hardened image repositories for organization accounts.
-    link: /subscription-billing/subscription/plans/dhi/
+    link: /subscription-billing/plans/dhi/
     icon: /icons/dhi.svg
   - title: AI Governance
     description: Licenses for organization-wide AI policy enforcement.
-    link: /subscription-billing/subscription/plans/ai-governance/
+    link: /subscription-billing/plans/ai-governance/
     icon: shield-check
   - title: Docker Verified Publisher (DVP)
     description: Publisher analytics and reporting plans for organization accounts.
-    link: /subscription-billing/subscription/plans/docker-verified-publisher/
+    link: /subscription-billing/plans/docker-verified-publisher/
     icon: check-badge
 ---
 
@@ -47,7 +47,7 @@ You can subscribe to plans on a self-serve basis when you go to the Docker produ
 
 This section covers usage entitlements, billing cycle, and plan management options for each available plan.
 
-To manage your plans by adding a new plan or upgrading an active plan, see [Manage plans](/manuals/subscription-billing/subscription/manage.md).
+To manage your plans by adding a new plan or upgrading an active plan, see [Manage plans](/manuals/subscription-billing/manage/plans.md).
 
 ## Product catalog
 

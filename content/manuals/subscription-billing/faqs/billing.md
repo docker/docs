@@ -34,7 +34,7 @@ Stripe.
 
 Before retrying, verify that your default payment method is up to date. For
 instructions, see
-[Manage a payment method](/manuals/subscription-billing/billing/payment-method.md#manage-payment-method).
+[Manage a payment method](/manuals/subscription-billing/manage/payment-method.md#manage-payment-method).
 
 ## Does Docker collect sales tax and VAT?
 
@@ -46,9 +46,9 @@ Docker collects sales tax or VAT from the following customers:
 - For United Kingdom customers, Docker began collecting VAT on May 1, 2025.
 
 To help ensure correct tax assessments, keep your
-[billing information](/manuals/subscription-billing/billing/details.md) up to date. For details on
+[billing information](/manuals/subscription-billing/manage/details.md) up to date. For details on
 adding a VAT number or submitting a US tax exemption certificate, see
-[Taxes](/manuals/subscription-billing/billing/tax-certificate.md).
+[Taxes](/manuals/subscription-billing/manage/tax-certificate.md).
 
 ## Does Docker offer academic pricing?
 
@@ -62,4 +62,4 @@ purchasing upgrades or additional seats. You must use card payment or US bank
 accounts for these changes.
 
 For a list of supported payment methods, see
-[Add or update a payment method](/manuals/subscription-billing/billing/payment-method.md).
+[Add or update a payment method](/manuals/subscription-billing/manage/payment-method.md).

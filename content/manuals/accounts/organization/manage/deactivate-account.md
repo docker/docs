@@ -34,7 +34,7 @@ organization:
   to pull all tags, or `docker pull <image>:<tag>` to pull a specific tag.
 - If you have an active Docker subscription, [downgrade it to a basic
   organization
-  account](/manuals/subscription-billing/subscription/plans/docker.md#cancel-a-docker-plan).
+  account](/manuals/subscription-billing/plans/docker.md#cancel-a-docker-plan).
 - Remove all other members within the organization.
 - Unlink your [GitHub and Bitbucket
   accounts](/manuals/docker-hub/repos/manage/builds/link-source.md#unlink-a-github-user-account).

@@ -5262,7 +5262,7 @@ The updated [Docker Subscription Service Agreement](https://www.docker.com/legal
 - **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
 
 To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq).
-For more information, see [Docker subscription overview](../subscription-billing/subscription/_index.md).
+For more information, see [Docker subscription overview](../subscription-billing/_index.md).
 
 ### Upgrades
 

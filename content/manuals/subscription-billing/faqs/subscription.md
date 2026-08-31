@@ -9,7 +9,7 @@ aliases:
   - /subscription/faq/
 ---
 
-For more information on Docker subscriptions, see [Docker subscription overview](/manuals/subscription-billing/subscription/_index.md).  
+For more information on Docker subscriptions, see [Docker subscription overview](/manuals/subscription-billing/_index.md).  
 
 ## Can I transfer my subscription from one user or organization account to another?
 
