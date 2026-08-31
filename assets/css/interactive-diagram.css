@@ -149,6 +149,10 @@
   stroke: var(--diagram-shared);
 }
 
+.interactive-diagram__edge--credential {
+  stroke: var(--diagram-shared);
+}
+
 .interactive-diagram__edge--brokered {
   stroke: var(--diagram-brokered);
 }
