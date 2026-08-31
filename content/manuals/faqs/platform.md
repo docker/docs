@@ -5,7 +5,7 @@ description: Frequently asked questions about Docker platform security, containe
 keywords: Docker security, FAQs, authentication, vulnerability reporting, session management, container security, docker desktop isolation, enhanced container isolation, file sharing, docker desktop networking, virtualization, hyper-v, wsl2, network security, firewall
 weight: 40
 tags: [FAQ]
-toc_max: 3
+toc_max: 2
 aliases:
   - /faq/security/general/
   - /security/faqs/general/
