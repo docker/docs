@@ -161,9 +161,9 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
 {{< tab name="CLI" >}}
 
 Authenticate with `docker login` using your Docker credentials or a [personal
-access token (PAT)](../../security/access-tokens.md) with **Read & Write**
+access token (PAT)](../../platform/security/access-tokens/personal-access-tokens.md) with **Read & Write**
 permissions, or an [organization access token
-(OAT)](../../enterprise/security/access-tokens.md). When using an OAT, the
+(OAT)](../../platform/security/access-tokens/organization-access-tokens.md). When using an OAT, the
 available operations depend on the token's permission scope:
 
 - To list or get customizations, or to view build logs, the OAT must have read

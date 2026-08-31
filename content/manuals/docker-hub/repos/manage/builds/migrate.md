@@ -21,11 +21,11 @@ To grant your CI workflows the ability to pull and push images to and from
 Docker Hub, you first need to create access tokens:
 
 - For a personal repository: Create a [Personal
-  Access Token](../../../../security/access-tokens.md) with **Read & Write**
+  Access Token](../../../../platform/security/access-tokens/personal-access-tokens.md) with **Read & Write**
   permissions.
 
 - For an organization repository: Create an [Organization Access
-  Token](../../../../enterprise/security/access-tokens.md) with the following
+  Token](../../../../platform/security/access-tokens/organization-access-tokens.md) with the following
   permissions:
   - **Read public repositories**
   - **Image Pull** on any private repositories that the build needs to pull from

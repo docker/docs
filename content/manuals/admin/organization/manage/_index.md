@@ -16,7 +16,7 @@ grid:
   - title: Security
     description: Configure single sign-on, provisioning, and access management.
     icon: shield-check
-    link: /enterprise/security/
+    link: /platform/security/
   - title: Billing
     description: Manage payment methods and view billing history.
     icon: credit-card
@@ -31,7 +31,7 @@ revoke licenses and seats, and change access to Docker products.
 
 You manage your organization from [Docker Home](https://app.docker.com) and
 must be assigned the
-[organization owner role](/manuals/enterprise/security/roles-and-permissions/_index.md).
+[organization owner role](/manuals/platform/security/roles-and-permissions/_index.md).
 
 ## Seats and licenses
 

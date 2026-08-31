@@ -105,7 +105,7 @@ add additional owners.
 
 To add an owner, invite a user and assign them the owner role. For more
 details, see [Invite members](/manuals/admin/organization/manage/members.md) and
-[Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md).
+[Roles and permissions](/manuals/platform/security/roles-and-permissions.md).
 
 ### Step three: Invite members
 
@@ -116,7 +116,7 @@ they are signed in.
 
 To add a member, invite a user and assign them the member role.
 For more details, see [Invite members](/manuals/admin/organization/manage/members.md) and
-[Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md).
+[Roles and permissions](/manuals/platform/security/roles-and-permissions.md).
 
 ### Step four: Manage user access with SSO and SCIM
 
@@ -127,20 +127,20 @@ subscription, see [Upgrade a plan](/manuals/subscription/manage.md#upgrade-plans
 Use your identity provider (IdP) to manage members and provision them to Docker
 automatically via SSO and SCIM. See the following for more details:
 
-- [Configure SSO](/manuals/enterprise/security/single-sign-on/connect.md)
+- [Configure SSO](/manuals/platform/security/authentication/single-sign-on/connect.md)
   to authenticate and add members when they sign in to Docker through your
   identity provider.
 - Optional.
-  [Enforce SSO](/manuals/enterprise/security/single-sign-on/connect.md) to
+  [Enforce SSO](/manuals/platform/security/authentication/single-sign-on/connect.md) to
   ensure that when users sign in to Docker, they must use SSO.
 
   > [!NOTE]
   >
   > Enforcing single sign-on (SSO) and enforcing Docker Desktop sign in
   > are different features. For more details, see
-  > [Enforcing sign-in versus enforcing single sign-on (SSO)](/manuals/enterprise/security/enforce-sign-in/_index.md#enforcing-sign-in-versus-enforcing-single-sign-on-sso).
+  > [Enforcing sign-in versus enforcing single sign-on (SSO)](/manuals/platform/security/authentication/enforce-sign-in/_index.md#enforcing-sign-in-versus-enforcing-single-sign-on-sso).
 
-- [Configure SCIM](/manuals/enterprise/security/provisioning/scim/_index.md) to
+- [Configure SCIM](/manuals/platform/security/provisioning/scim/_index.md) to
   automatically provision, add, and de-provision members to Docker through
   your identity provider.
 
@@ -150,29 +150,29 @@ By default, members of your organization can use Docker Desktop without signing
 in. When users don’t sign in as a member of your organization, they don’t
 receive the
 [benefits of your organization’s subscription](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminOnboard)
-and they can circumvent [Docker’s security features](/manuals/enterprise/security/hardened-desktop/_index.md).
+and they can circumvent [Docker’s security features](/manuals/enterprise/hardened-desktop/_index.md).
 
 There are multiple ways you can enforce sign-in, depending on your organization's
 Docker configuration:
 
-- [Registry key method (Windows only)](/manuals/enterprise/security/enforce-sign-in/methods.md#registry-key-method-windows-only)
-- [`.plist` method (Mac only)](/manuals/enterprise/security/enforce-sign-in/methods.md#plist-method-mac-only)
-- [`registry.json` method (All)](/manuals/enterprise/security/enforce-sign-in/methods.md#registryjson-method-all)
+- [Registry key method (Windows only)](/manuals/platform/security/authentication/enforce-sign-in/methods.md#registry-key-method-windows-only)
+- [`.plist` method (Mac only)](/manuals/platform/security/authentication/enforce-sign-in/methods.md#plist-method-mac-only)
+- [`registry.json` method (All)](/manuals/platform/security/authentication/enforce-sign-in/methods.md#registryjson-method-all)
 
 ### Step six: Manage Docker Desktop security
 
 Docker offers the following security features to manage your organization's
 security posture:
 
-- [Image Access Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md): Control which types of images your developers can pull from Docker Hub.
-- [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md): Define which registries your developers can access.
-- [Settings management](/manuals/enterprise/security/hardened-desktop/settings-management.md): Set and control Docker Desktop settings for your users.
+- [Image Access Management](/manuals/enterprise/hardened-desktop/image-access-management.md): Control which types of images your developers can pull from Docker Hub.
+- [Registry Access Management](/manuals/enterprise/hardened-desktop/registry-access-management.md): Define which registries your developers can access.
+- [Settings management](/manuals/enterprise/hardened-desktop/settings-management.md): Set and control Docker Desktop settings for your users.
 
 ## Next steps
 
 - [Manage Docker products](../manage/manage-products.md) to configure access and view usage.
-- Configure [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/_index.md) to improve your organization’s security posture for containerized development.
-- [Manage your domains](/manuals/enterprise/security/domain-management.md) to ensure that all Docker users in your domain are part of your organization.
+- Configure [Hardened Docker Desktop](/manuals/enterprise/hardened-desktop/_index.md) to improve your organization’s security posture for containerized development.
+- [Manage your domains](/manuals/platform/security/provisioning/domain-management.md) to ensure that all Docker users in your domain are part of your organization.
 
 Your Docker subscription provides many more additional features. To learn more,
 see [Docker subscriptions and features](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdminOnboard).

@@ -40,7 +40,7 @@ Every query takes a `Context` argument (conventionally named `ctx` in the
 
 ## Authentication
 
-An [organization access token](/manuals/enterprise/security/access-tokens.md)
+An [organization access token](/manuals/platform/security/access-tokens/organization-access-tokens.md)
 (OAT) or personal access token (PAT) isn't used directly as the bearer
 token. Exchange it first for an access token:
 

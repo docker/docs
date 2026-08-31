@@ -22,10 +22,10 @@ grid:
   - title: Personal access tokens
     description: Learn how to create and manage access tokens for your account.
     icon: lock-closed
-    link: /security/access-tokens/
+    link: /platform/security/access-tokens/personal-access-tokens/
   - title: Set up two-factor authentication
     description: Add an extra layer of authentication to your Docker account.
-    link: /security/2fa/
+    link: /platform/security/authentication/2fa/
     icon: device-phone-mobile
   - title: Organization overview
     description: Learn how to create and manage Docker organizations.
@@ -56,7 +56,7 @@ Docker also ties a verified email to the account.
 - Email: How Docker contacts you for notifications and security-related
   communications.
 - Sign-in method: Email and password,
-  [single sign-on (SSO)](/manuals/enterprise/security/single-sign-on/_index.md),
+  [single sign-on (SSO)](/manuals/platform/security/authentication/single-sign-on/_index.md),
   Google, or GitHub.
 
 ## Next steps

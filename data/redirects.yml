@@ -10,7 +10,7 @@
 # in its help output, which can be redirected to elsewhere in the documentation.
 "/learn/":
   - /learn
-"/security/access-tokens/":
+"/platform/security/access-tokens/personal-access-tokens/":
   - /go/access-tokens/
 "/agentic-platform/":
   - /go/dap/
@@ -317,7 +317,7 @@
 "/admin/organization/insights/#extensions":
   - /go/insights-extensions/
 
-"/enterprise/security/hardened-desktop/settings-management/":
+"/enterprise/hardened-desktop/settings-management/":
   - /go/settings-management/
 
 # Billing - cancellation

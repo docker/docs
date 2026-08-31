@@ -94,7 +94,7 @@ params:
   - title: Security
     description: Security guardrails for both administrators and developers.
     icon: lock-closed
-    link: /security/
+    link: /platform/security/
   - title: Subscription
     description: Commercial use licenses for Docker products.
     icon: credit-card
@@ -104,6 +104,10 @@ params:
     description: Deploy Docker Desktop at scale within your company
     icon: arrow-down-tray
     link: /enterprise/enterprise-deployment/
+  - title: Hardened Docker Desktop
+    description: Security features that strengthen developer environments.
+    icon: shield-check
+    link: /enterprise/hardened-desktop/
 ---
 
 This section contains user guides on how to install, set up, configure, and use

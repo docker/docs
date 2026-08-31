@@ -110,7 +110,7 @@ known issues for each Docker Hub release.
 
 ### New
 
-- Organizations can assign the [editor role](/manuals/enterprise/security/roles-and-permissions/_index.md) to members to grant additional permissions without full administrative access.
+- Organizations can assign the [editor role](/manuals/platform/security/roles-and-permissions/_index.md) to members to grant additional permissions without full administrative access.
 
 ## 2023-05-09
 
@@ -140,7 +140,7 @@ known issues for each Docker Hub release.
 
 ### Bug fixes and enhancements
 
-- In Docker Hub, you can now download a [registry.json](/manuals/enterprise/security/enforce-sign-in/_index.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
+- In Docker Hub, you can now download a [registry.json](/manuals/platform/security/authentication/enforce-sign-in/_index.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
 
 ## 2022-09-19
 
@@ -170,7 +170,7 @@ known issues for each Docker Hub release.
 
 ### New
 
-- [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) is now available for all Docker Business subscriptions. When enabled, your users can access specific registries in Docker Hub.
+- [Registry Access Management](/manuals/enterprise/hardened-desktop/registry-access-management.md) is now available for all Docker Business subscriptions. When enabled, your users can access specific registries in Docker Hub.
 
 ## 2022-05-03
 
@@ -318,7 +318,7 @@ Docker introduces Hub Vulnerability Scanning which enables you to automatically 
 
 ### New features
 
-- You can now [create personal access tokens](/security/access-tokens/) in Docker Hub and use them to authenticate from the Docker CLI. Find them in your account settings, under the new **[Security](https://hub.docker.com/settings/security)** section.
+- You can now [create personal access tokens](/platform/security/access-tokens/personal-access-tokens/) in Docker Hub and use them to authenticate from the Docker CLI. Find them in your account settings, under the new **[Security](https://hub.docker.com/settings/security)** section.
 
 ### Known Issues
 

@@ -26,7 +26,7 @@ grid:
       Start here to manage security and access for your organization, including
       single sign-on, provisioning, and image and registry access management.
     icon: shield-check
-    link: /enterprise/security/
+    link: /platform/security/
 ---
 
 A Docker organization is a collection of teams and repositories under
@@ -67,7 +67,7 @@ permissions.
 
 For details about each role and its permissions, see
 [Roles and
-permissions](/manuals/enterprise/security/roles-and-permissions/_index.md).
+permissions](/manuals/platform/security/roles-and-permissions/_index.md).
 
 ## Next steps
 

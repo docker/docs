@@ -11,7 +11,7 @@ weight: 30
 
 Learn how to configure and set up a private marketplace with a curated list of extensions for your Docker Desktop users.
 
-Docker Extensions' private marketplace is designed specifically for organizations who don’t give developers root access to their machines. It makes use of [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) so administrators have complete control over the private marketplace.
+Docker Extensions' private marketplace is designed specifically for organizations who don’t give developers root access to their machines. It makes use of [Settings Management](/manuals/enterprise/hardened-desktop/settings-management/_index.md) so administrators have complete control over the private marketplace.
 
 ## Prerequisites
 
@@ -65,7 +65,7 @@ This creates 2 files:
 
 > [!IMPORTANT]
 >
-> If your org is using [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) via [Docker Home](manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console/_index.md), you will not need the `admin-settings.json` file. Delete the generated file and keep only the `extensions.txt` file.
+> If your org is using [Settings Management](/manuals/enterprise/hardened-desktop/settings-management/_index.md) via [Docker Home](manuals/enterprise/hardened-desktop/settings-management/configure-admin-console/_index.md), you will not need the `admin-settings.json` file. Delete the generated file and keep only the `extensions.txt` file.
 
 ## Step two: Set the behaviour
 
@@ -73,7 +73,7 @@ The generated `admin-settings.json` file includes various settings you can modif
 
 > [!IMPORTANT]
 >
-> If your org is managing settings via [Docker Home](manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console/_index.md), you will define the same settings in Docker Home instead of the `admin-settings.json` file.
+> If your org is managing settings via [Docker Home](manuals/enterprise/hardened-desktop/settings-management/configure-admin-console/_index.md), you will define the same settings in Docker Home instead of the `admin-settings.json` file.
 
 Each setting has a `value` that you can set, including a `locked` field that lets you lock the setting and make it unchangeable by your developers.
 
@@ -89,7 +89,7 @@ Each setting has a `value` that you can set, including a `locked` field that let
   }
   ```
 
-To find out more information about the `admin-settings.json` file, see [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md).
+To find out more information about the `admin-settings.json` file, see [Settings Management](/manuals/enterprise/hardened-desktop/settings-management/_index.md).
 
 ## Step three: List allowed extensions
 
@@ -194,7 +194,7 @@ It's recommended that you try the private marketplace on your Docker Desktop ins
 
 > [!IMPORTANT]
 >
-> > If your org is managing settings via [Docker Home](manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console/_index.md), in Docker Desktop 4.59 and earlier, you must manually delete the `admin-settings.json` file created in the target folder by the `apply` command before step 2. In Docker Desktop 4.60 and later, this step is no longer necessary. 
+> > If your org is managing settings via [Docker Home](manuals/enterprise/hardened-desktop/settings-management/configure-admin-console/_index.md), in Docker Desktop 4.59 and earlier, you must manually delete the `admin-settings.json` file created in the target folder by the `apply` command before step 2. In Docker Desktop 4.60 and later, this step is no longer necessary. 
 
 When you select the **Extensions** tab, you should see the private marketplace listing only the extensions you have allowed in `extensions.txt`.
 
@@ -205,7 +205,7 @@ When you select the **Extensions** tab, you should see the private marketplace l
 Once you’ve confirmed that the private marketplace configuration works, the final step is to distribute the files to the developers’ machines with the MDM software your organization uses. For example, [Jamf](https://www.jamf.com/).
 
 The files to distribute are:
-* `admin-settings.json` (except if your org is managing settings via [Docker Home](manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console/_index.md))
+* `admin-settings.json` (except if your org is managing settings via [Docker Home](manuals/enterprise/hardened-desktop/settings-management/configure-admin-console/_index.md))
 * the entire `extension-marketplace` folder and its subfolders
 
 These files must be placed on developer's machines. Depending on your operating system, the target location is (as mentioned above):
@@ -214,7 +214,7 @@ These files must be placed on developer's machines. Depending on your operating 
 - Windows: `C:\ProgramData\DockerDesktop`
 - Linux: `/usr/share/docker-desktop`
 
-Make sure your developers are signed in to Docker Desktop in order for the private marketplace configuration to take effect. As an administrator, you should [enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
+Make sure your developers are signed in to Docker Desktop in order for the private marketplace configuration to take effect. As an administrator, you should [enforce sign-in](/manuals/platform/security/authentication/enforce-sign-in/_index.md).
 
 ## Feedback
 
