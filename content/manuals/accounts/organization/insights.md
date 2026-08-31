@@ -1,8 +1,10 @@
 ---
 title: Insights
-weight: 40
+weight: 50
 description: Gain insights about your organization's users and their Docker usage.
 keywords: organization, insights, Docker Desktop analytics, user usage statistics, Docker Business, track Docker activity
+aliases:
+  - /admin/insights/
 ---
 
 {{< summary-bar feature_name="Insights" >}}

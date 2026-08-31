@@ -8,6 +8,7 @@ keywords:
   create docker account, docker ID, sign up, sign in, email, Google, GitHub,
   verification, OTP, password, docker login, username requirements
 aliases:
+  - /accounts/create-account/
   - /docker-hub/accounts/
   - /docker-id/
 ---
@@ -85,5 +86,5 @@ basis:
 
 ## Next steps
 
-- [Manage a Docker account](/manuals/accounts/manage-account.md)
+- [Manage a Docker account](/manuals/accounts/individual/manage-account.md)
 - [Enable two-factor authentication](/manuals/platform/security/authentication/2fa/_index.md)

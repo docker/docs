@@ -115,7 +115,7 @@ For detailed instructions, see [Configure single sign-on](/manuals/platform/secu
 
 ## Is Docker SSO fully synced with the IdP?
 
-Docker SSO provides Just-in-Time (JIT) provisioning by default. Users are provisioned when they authenticate with SSO. If users leave the organization, administrators must manually [remove the user](/manuals/admin/organization/manage/members.md#remove-members-from-teams) from the organization.
+Docker SSO provides Just-in-Time (JIT) provisioning by default. Users are provisioned when they authenticate with SSO. If users leave the organization, administrators must manually [remove the user](/manuals/accounts/organization/manage/members.md#remove-members-from-teams) from the organization.
 
 [SCIM](/manuals/platform/security/provisioning/scim/_index.md) provides full synchronization with users and groups. When using SCIM, the recommended configuration is to turn off JIT so all auto-provisioning is handled by SCIM.
 

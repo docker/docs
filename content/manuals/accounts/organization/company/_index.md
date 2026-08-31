@@ -1,18 +1,18 @@
 ---
 title: Company overview
-linkTitle: Company
-weight: 20
+linkTitle: Companies
+weight: 30
 description: Learn how to manage multiple organizations using companies, including managing users, owners, and security.
 keywords: company, multiple organizations, manage companies, Docker Home, Docker Business settings
 grid:
   - title: Create a company
     description: Get started by learning how to create a company.
     icon: building-office-2
-    link: /admin/company/new-company/
+    link: /accounts/organization/company/new-company/
   - title: Manage your company
     description: Add organizations, manage company owners, and invite members.
     icon: building-storefront
-    link: /admin/company/manage/
+    link: /accounts/organization/company/manage/
   - title: Configure SSO and SCIM
     description: Set up single sign-on and SCIM provisioning for your company.
     icon: key
@@ -23,16 +23,17 @@ grid:
     link: /platform/security/provisioning/domain-management/
   - title: FAQs
     description: Explore frequently asked questions about companies.
-    link: /faq/admin/company-faqs/
+    link: /faqs/company-faqs/
     icon: question-mark-circle
 aliases:
+  - /admin/company/
   - /docker-hub/creating-companies/
 ---
 
 {{< summary-bar feature_name="Company" >}}
 
-A company provides a single point of visibility across multiple
-organizations, for centralized organization and settings management.
+A company groups multiple Docker organizations for centralized configuration
+and provides a single point of visibility across those organizations.
 Organization owners with a Docker Business subscription can create a company
 and manage it through Docker Home.
 
@@ -41,10 +42,10 @@ and manage it through Docker Home.
 The following diagram shows how a company relates to its associated
 organizations.
 
-![Diagram showing how companies relate to Docker organizations](/admin/images/docker-admin-structure.webp)
+![Diagram showing how companies relate to Docker organizations](/accounts/organization/images/docker-admin-structure.webp)
 
-For the full administration hierarchy, see the
-[administration overview](/manuals/admin/_index.md#company-and-organization-hierarchy).
+For the full administration hierarchy, see
+[Company and organization hierarchy](/manuals/accounts/organization/_index.md#company-and-organization-hierarchy).
 
 ## Company roles
 
@@ -62,7 +63,7 @@ organization owners.
     automatically adds them as an organization member.
 
 To add or remove company owners, see
-[Manage your company](/manuals/admin/company/manage.md#company-owners).
+[Manage your company](/manuals/accounts/organization/company/manage.md#company-owners).
 
 ## Next steps
 

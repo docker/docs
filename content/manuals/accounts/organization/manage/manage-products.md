@@ -5,6 +5,7 @@ weight: 50
 description: Learn how to manage access and usage for Docker products for your organization
 keywords: organization, product access, product usage, access control, docker desktop, docker hub, docker scout, docker build cloud, docker offload, testcontainers cloud
 aliases:
+  - /admin/organization/manage/manage-products/
   - /admin/organization/manage-products/
 ---
 
@@ -132,7 +133,7 @@ following table to learn where you can monitor organization usage:
 
 | Product              | Monitor usage                                                                                                                                                                                    |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Docker Desktop       | From [Docker Home](https://app.docker.com/), view the [**Insights**](../../insights.md) page.                                                                                                    |
+| Docker Desktop       | From [Docker Home](https://app.docker.com/), view the [**Insights**](/manuals/accounts/organization/insights.md) page.                                                                                                    |
 | Docker Hub           | From Docker Hub, view the [**Usage** page](https://hub.docker.com/usage).                                                                                                                        |
 | Docker Build Cloud   | From [Docker Build Cloud](http://app.docker.com/build), view the **Build minutes** page.                                                                                                         |
 | Docker Scout         | From [Docker Home](https://app.docker.com/), select **Go to Scout** to view the [**Repository settings** page](https://scout.docker.com/settings/repos).                                         |

@@ -6,6 +6,7 @@ description: Learn how to create and manage teams for your organization
 keywords: docker, registry, teams, organizations, plans, Dockerfile, Docker
   Hub, docs, documentation, repository permissions, configure repository access, team management
 aliases:
+  - /admin/organization/manage/manage-a-team/
   - /docker-hub/manage-a-team/
   - /admin/organization/manage-a-team/
 ---
@@ -60,7 +61,7 @@ For more information on roles, see
 
 You must create a team before you are able to configure repository permissions.
 For more details, see [Create and manage a
-team](/manuals/admin/organization/manage/manage-a-team.md).
+team](/manuals/accounts/organization/manage/manage-a-team.md).
 
 To set team repository permissions:
 

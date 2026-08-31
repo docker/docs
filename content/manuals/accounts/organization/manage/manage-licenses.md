@@ -4,6 +4,8 @@ linkTitle: License assignment
 description: Manage product licenses for your organization, including invite-time assignment, revocation, and automatic assignment.
 keywords: licenses, organization, members, invite, invitation, Docker Core, Docker Offload, AI Governance, license assignment, docker home
 weight: 30
+aliases:
+  - /admin/organization/manage/manage-licenses/
 ---
 
 Licenses let you choose which organization members can access supported Docker
@@ -57,7 +59,7 @@ a member:
 
 For more about sending, resending, and removing invitations, including CSV
 file limits, see
-[Manage organization members](/manuals/admin/organization/manage/members.md).
+[Manage organization members](/manuals/accounts/organization/manage/members.md).
 
 ### Accept invites
 
@@ -116,7 +118,7 @@ Explore Docker Core add-ons and products that need licenses:
 
 - [Docker plans](/manuals/subscription/plans/_index.md) to learn about different
   add-ons
-- [Manage seats](/manuals/admin/organization/manage/manage-seats.md) to add more
+- [Manage seats](/manuals/accounts/organization/manage/manage-seats.md) to add more
   seats to your Docker Core subscription
 - [AI Governance plan](/manuals/subscription/plans/ai-governance.md) to learn
   about AI Governance license usage and billing

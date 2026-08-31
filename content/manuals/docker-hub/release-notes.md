@@ -146,7 +146,7 @@ known issues for each Docker Hub release.
 
 ### Bug fixes and enhancements
 
-- You can now [export a CSV file of members](../admin/organization/manage/members.md#export-members-csv-file) from organizations that you own.
+- You can now [export a CSV file of members](../accounts/organization/manage/members.md#export-members-csv-file) from organizations that you own.
 
 ## 2022-07-22
 
@@ -239,7 +239,7 @@ Docker introduces the Advanced Image Management dashboard that enables you to vi
 
 Docker introduces Audit logs, a new feature that allows team owners to view a list of activities that occur at organization and repository levels. This feature begins tracking the activities from the release date, that is, **from 25 January 2021**.
 
-For more information about this feature and for instructions on how to use it, see [Activity logs](../admin/activity-logs.md).
+For more information about this feature and for instructions on how to use it, see [Activity logs](../accounts/organization/activity-logs.md).
 
 ## 2020-11-10
 

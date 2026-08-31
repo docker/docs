@@ -108,7 +108,7 @@ it only to members of the teams you select.
 ### Before you start
 
 Team scoping targets your organization's existing
-[teams](/manuals/admin/organization/manage/manage-a-team.md), so a team must
+[teams](/manuals/accounts/organization/manage/manage-a-team.md), so a team must
 exist before you can scope a policy to it. Create teams and manage their members
 in one of two ways:
 

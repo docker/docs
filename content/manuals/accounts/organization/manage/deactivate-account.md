@@ -5,9 +5,11 @@ description: Learn how to deactivate a Docker organization and required
   prerequisite steps.
 keywords: deactivate organization, delete organization, organization
   management, Docker Home, cancel subscription, unlink GitHub, remove SSO
-weight: 50
+weight: 70
 aliases:
+  - /admin/organization/deactivate-account/
   - /docker-hub/deactivate-account/
+  - /accounts/organization/deactivate-account/
 ---
 
 {{< summary-bar feature_name="General admin" >}}
@@ -15,7 +17,7 @@ aliases:
 Learn how to deactivate a Docker organization, including required prerequisite
 steps. For information about deactivating user accounts, see
 [Deactivate a Docker
-account](/manuals/accounts/deactivate-user-account.md).
+account](/manuals/accounts/individual/deactivate-user-account.md).
 
 > [!WARNING]
 >

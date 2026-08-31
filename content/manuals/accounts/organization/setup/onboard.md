@@ -7,6 +7,7 @@ keywords: business, team, organizations, get started, onboarding, Docker Home, o
 toc_min: 1
 toc_max: 3
 aliases:
+  - /admin/organization/setup/onboard/
   - /docker-hub/onboard/
   - /docker-hub/onboard-team/
   - /docker-hub/onboard-business/
@@ -40,7 +41,7 @@ Before you start onboarding your organization, ensure you:
   > When purchasing a self-serve subscription, the on-screen instructions
   > guide you through creating an organization. If you have purchased a
   > subscription through Docker Sales and you have not yet created an
-  > organization, see [Create an organization](/manuals/admin/organization/setup/orgs.md).
+  > organization, see [Create an organization](/manuals/accounts/organization/setup/orgs.md).
 
 - Familiarize yourself with Docker concepts and terminology in
   the [administration overview](../../_index.md).
@@ -50,7 +51,7 @@ Before you start onboarding your organization, ensure you:
 Docker Home has a guided setup to help you
 onboard your organization. The guided setup's steps consist of basic onboarding
 tasks. If you want to onboard outside of the guided setup,
-see [Recommended onboarding steps](/manuals/admin/organization/setup/onboard.md#recommended-onboarding-steps).
+see [Recommended onboarding steps](/manuals/accounts/organization/setup/onboard.md#recommended-onboarding-steps).
 
 To onboard using the guided setup,
 navigate to [Docker Home](https://app.docker.com) and
@@ -104,8 +105,8 @@ When you create an organization, you are the only owner. It is optional to
 add additional owners.
 
 To add an owner, invite a user and assign them the owner role. For more
-details, see [Invite members](/manuals/admin/organization/manage/members.md) and
-[Roles and permissions](/manuals/platform/security/roles-and-permissions.md).
+details, see [Invite members](/manuals/accounts/organization/manage/members.md) and
+[Roles and permissions](/manuals/platform/security/roles-and-permissions/_index.md).
 
 ### Step three: Invite members
 
@@ -115,8 +116,8 @@ receive increased pull limits and other organization wide benefits when
 they are signed in.
 
 To add a member, invite a user and assign them the member role.
-For more details, see [Invite members](/manuals/admin/organization/manage/members.md) and
-[Roles and permissions](/manuals/platform/security/roles-and-permissions.md).
+For more details, see [Invite members](/manuals/accounts/organization/manage/members.md) and
+[Roles and permissions](/manuals/platform/security/roles-and-permissions/_index.md).
 
 ### Step four: Manage user access with SSO and SCIM
 

@@ -23,7 +23,7 @@ package manager, and may run as a non-root user by default.
 > pull DHI Community images. You can authenticate using either of the following:
 >
 > - **Docker ID and password:** Use your Docker Hub username and password. If
->   you don't have a Docker account, [create one](../../accounts/create-account.md)
+>   you don't have a Docker account, [create one](../../accounts/individual/create-account.md
 >   for free.
 > - **Access token:** Use a [personal access token
 >   (PAT)](../../platform/security/access-tokens/personal-access-tokens.md) for personal accounts, or an

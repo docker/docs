@@ -52,7 +52,7 @@ data between cloud builders.
 ## Get Docker Build Cloud
 
 To get started with Docker Build Cloud,
-[create a Docker account](/accounts/create-account/). There are two options
+[create a Docker account](/accounts/individual/create-account/). There are two options
 to get access to Docker Build Cloud:
 
 - Users with a free Personal account can opt-in to a 7-day free trial, with the option
