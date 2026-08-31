@@ -66,7 +66,7 @@ and which host resources remain outside the agent's reach.
 
 {{< interactive-diagram src="../diagrams/trust-boundary-topology.yaml" >}}
 
-### Network and credential access
+### Host proxy
 
 This topology shows how network policy, the host proxy, and host-side
 credentials control access to remote services.
@@ -75,13 +75,6 @@ credentials control access to remote services.
 
 To follow an outbound request through network policy and credential injection,
 see [Architecture](../architecture.md#follow-an-authenticated-request).
-
-### MCP integrations
-
-This topology shows how the host-managed MCP gateway connects the sandbox to
-remote and local servers without moving gateway credentials into the microVM.
-
-{{< interactive-diagram src="../diagrams/mcp-topology.yaml" >}}
 
 ## Isolation layers
 

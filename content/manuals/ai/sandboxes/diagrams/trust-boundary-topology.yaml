@@ -2,26 +2,26 @@ type: topology
 title: Explore the microVM isolation boundary
 description: Select a component or labeled connection to inspect what is private, mounted, or unreachable.
 canvas:
-  width: 820
-  height: 410
+  width: 720
+  height: 520
 overview:
   category: Isolation overview
   label: The agent is contained inside the microVM
-  body: The agent controls the private VM filesystem and Docker Engine. Only the workspace and optional skills store are explicitly mounted from the host; other host resources have no direct access path.
+  body: The agent controls the private VM filesystem and Docker Engine. The workspace, optional skills store, and forwarded SSH agent socket are explicit host connections; other host resources have no direct access path.
 boundaries:
   - id: host
     label: Host machine
-    x: 18
-    y: 20
-    width: 784
-    height: 370
+    x: 12
+    y: 18
+    width: 696
+    height: 484
     kind: host
   - id: sandbox
     label: Sandbox microVM
-    x: 42
-    y: 60
-    width: 390
-    height: 310
+    x: 34
+    y: 56
+    width: 350
+    height: 426
     kind: sandbox
 nodes:
   - id: agent
@@ -29,8 +29,8 @@ nodes:
     description: Full control in the microVM
     details: The agent has sudo access inside the microVM. It can install packages, run code, and modify resources that are inside the sandbox boundary.
     category: Inside the microVM
-    x: 76
-    y: 108
+    x: 90
+    y: 165
     width: 180
     height: 72
     kind: process
@@ -39,9 +39,9 @@ nodes:
     description: Private to this sandbox
     details: The microVM has its own persistent filesystem. The agent cannot use it to browse files elsewhere on the host.
     category: Inside the microVM
-    x: 70
-    y: 278
-    width: 165
+    x: 50
+    y: 370
+    width: 158
     height: 72
     kind: context
   - id: sandbox-engine
@@ -49,9 +49,9 @@ nodes:
     description: No host connection
     details: Containers created by the agent run on the Docker Engine inside the microVM. This engine has no connection to the Docker daemon on the host.
     category: Inside the microVM
-    x: 250
-    y: 278
-    width: 150
+    x: 218
+    y: 370
+    width: 145
     height: 72
     kind: control
   - id: workspace
@@ -59,9 +59,9 @@ nodes:
     description: Mounted from the host
     details: Direct mode mounts the host working tree read-write, so edits are visible on both sides. Clone mode mounts the host repository read-only and gives the agent a private clone.
     category: Explicitly shared
-    x: 520
-    y: 72
-    width: 190
+    x: 445
+    y: 68
+    width: 205
     height: 72
     kind: shared
   - id: skills
@@ -69,9 +69,19 @@ nodes:
     description: Optional shared mount
     details: Supported agents mount the host-side skills store read-write unless you opt out. Changes can become visible to agents in other participating sandboxes.
     category: Explicitly shared
-    x: 520
-    y: 172
-    width: 190
+    x: 445
+    y: 170
+    width: 205
+    height: 72
+    kind: shared
+  - id: ssh-agent
+    label: SSH agent socket
+    description: Forwarded by default
+    details: When SSH_AUTH_SOCK is set on the host, Docker Sandboxes forwards the agent socket into the microVM. Sandbox processes can request signatures, but the private keys stay on the host.
+    category: Explicitly shared
+    x: 445
+    y: 272
+    width: 205
     height: 72
     kind: shared
   - id: host-resources
@@ -79,9 +89,9 @@ nodes:
     description: No direct access
     details: The agent has no direct path to the rest of the host filesystem, host processes, or the host Docker daemon.
     category: Outside the microVM
-    x: 520
-    y: 278
-    width: 190
+    x: 445
+    y: 390
+    width: 205
     height: 72
     kind: restricted
 edges:
@@ -93,7 +103,7 @@ edges:
     category: Shared relationship
     kind: shared
     bidirectional: true
-    labelOffset: -18
+    labelOffset: -4
   - id: skills-mount
     from: agent
     to: skills
@@ -102,4 +112,12 @@ edges:
     category: Shared relationship
     kind: shared
     bidirectional: true
-    labelOffset: 2
+  - id: ssh-agent-mount
+    from: agent
+    to: ssh-agent
+    label: SSH agent socket
+    details: The forwarded socket gives sandbox processes access to signing operations through the host SSH agent without exposing the private keys.
+    category: Shared relationship
+    kind: shared
+    bidirectional: true
+    labelOffset: 4

@@ -93,6 +93,10 @@
   font-family: "Roboto Flex", sans-serif;
 }
 
+.interactive-diagram--topology .interactive-diagram__svg {
+  min-width: 680px;
+}
+
 .interactive-diagram__boundary rect {
   fill: color-mix(in srgb, white 72%, transparent);
   stroke: var(--diagram-structure);
