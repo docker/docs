@@ -53,13 +53,32 @@ sandbox VM. An agent can invoke the tools those servers expose through the MCP
 gateway, subject to MCP policies when organization governance is active. Treat
 local MCP servers as trusted host integrations.
 
-The topology below shows the resources inside each boundary and the explicit
-paths that cross them.
+The following topologies separate the security model into its primary trust
+relationships.
+
+### MicroVM isolation
+
+This topology shows what is private to the microVM, what is explicitly mounted,
+and which host resources remain outside the agent's reach.
 
 {{< interactive-diagram src="../diagrams/trust-boundary-topology.yaml" >}}
 
+### Network and credential access
+
+This topology shows how network policy, the host proxy, and host-side
+credentials control access to remote services.
+
+{{< interactive-diagram src="../diagrams/network-credentials-topology.yaml" >}}
+
 To follow an outbound request through network policy and credential injection,
 see [Architecture](../architecture.md#follow-an-authenticated-request).
+
+### MCP integrations
+
+This topology shows how the host-managed MCP gateway connects the sandbox to
+remote and local servers without moving gateway credentials into the microVM.
+
+{{< interactive-diagram src="../diagrams/mcp-topology.yaml" >}}
 
 ## Isolation layers
 

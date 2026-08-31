@@ -1,0 +1,133 @@
+type: topology
+title: Explore the MCP trust boundary
+description: Select a component or labeled connection to inspect where MCP policy, credentials, and servers run.
+canvas:
+  width: 940
+  height: 430
+overview:
+  category: MCP overview
+  label: The agent connects to one host-managed MCP gateway
+  body: The gateway exposes registered servers to the sandbox, applies organization policy when active, and keeps OAuth credentials on the host. Remote servers stay outside the host; local stdio servers run on it.
+boundaries:
+  - id: host
+    label: Host machine
+    x: 18
+    y: 20
+    width: 690
+    height: 390
+    kind: host
+  - id: sandbox
+    label: Sandbox microVM
+    x: 42
+    y: 60
+    width: 210
+    height: 330
+    kind: sandbox
+  - id: external
+    label: Outside the host
+    x: 752
+    y: 60
+    width: 170
+    height: 330
+    kind: external
+nodes:
+  - id: agent
+    label: AI agent
+    description: Uses one MCP endpoint
+    details: Supported agents connect to the gateway endpoint configured when the sandbox starts. They do not connect directly to registered MCP servers.
+    category: Inside the microVM
+    x: 70
+    y: 180
+    width: 150
+    height: 72
+    kind: process
+  - id: gateway
+    label: MCP gateway
+    description: Runs on the host
+    details: The gateway presents loaded MCP servers through one endpoint. It manages server connections, live updates, authentication, and the tools visible to the agent.
+    category: Host integration
+    x: 300
+    y: 180
+    width: 160
+    height: 72
+    kind: control
+  - id: policy
+    label: MCP policy
+    description: Organization governance
+    details: When organization governance is active, MCP policy controls which servers, tools, and operations the sandbox can use through the gateway.
+    category: Host control
+    x: 500
+    y: 70
+    width: 170
+    height: 72
+    kind: control
+  - id: oauth
+    label: OAuth credentials
+    description: Stored on the host
+    details: OAuth tokens for remote MCP servers stay in the host operating system's credential store. The gateway uses them without copying the values into the sandbox.
+    category: Host secret
+    x: 500
+    y: 290
+    width: 170
+    height: 72
+    kind: secret
+  - id: local-server
+    label: Local stdio server
+    description: Runs on the host
+    details: A local stdio server runs on the host, outside sandbox isolation. Its process or container uses host permissions and can access resources explicitly made available to it.
+    category: Host integration
+    x: 300
+    y: 310
+    width: 160
+    height: 72
+    kind: process
+  - id: remote-server
+    label: Remote MCP server
+    description: Runs outside the host
+    details: A remote MCP server runs at its registered endpoint outside the host. The sandbox reaches it only through the host-managed gateway.
+    category: Outside the host
+    x: 761
+    y: 180
+    width: 152
+    height: 72
+    kind: external
+edges:
+  - id: agent-gateway
+    from: agent
+    to: gateway
+    label: One endpoint
+    details: The gateway is the agent's single MCP connection, regardless of how many registered servers are loaded.
+    category: Gateway relationship
+    kind: brokered
+    bidirectional: true
+    labelOffset: -52
+  - id: gateway-policy
+    from: gateway
+    to: policy
+    label: Policy checks
+    details: When governance is active, the gateway evaluates MCP access against organization policy.
+    category: Policy relationship
+    kind: brokered
+  - id: oauth-gateway
+    from: oauth
+    to: gateway
+    label: Host OAuth
+    details: The gateway uses the host-side OAuth token when it connects to an authorized remote server. The token stays outside the microVM.
+    category: Credential relationship
+    kind: credential
+  - id: gateway-local
+    from: gateway
+    to: local-server
+    label: stdio
+    details: The gateway starts or connects to the registered stdio process on the host and brokers its tools to the sandbox.
+    category: Local MCP relationship
+    kind: brokered
+    bidirectional: true
+  - id: gateway-remote
+    from: gateway
+    to: remote-server
+    label: Remote transport
+    details: The gateway connects to the registered remote endpoint and returns tool results through the same sandbox-facing MCP connection.
+    category: Remote MCP relationship
+    kind: brokered
+    bidirectional: true
