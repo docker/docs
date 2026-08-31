@@ -20,7 +20,7 @@ grid:
   - title: Billing
     description: Manage payment methods and view billing history.
     icon: credit-card
-    link: /billing/
+    link: /subscription-billing/billing/
 ---
 
 As an organization owner, you manage your organization's membership, access,

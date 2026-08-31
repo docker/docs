@@ -49,7 +49,7 @@ also shows the equivalent hourly rate.
 
 Model inference is billed separately. The sandbox uses your credential for an
 external model provider, which meters and bills inference under that provider
-account. See [Docker Billing](/billing/) for account, usage, and payment
+account. See [Docker Billing](/subscription-billing/billing/) for account, usage, and payment
 information.
 
 ## How long are logs, telemetry, and snapshots retained?

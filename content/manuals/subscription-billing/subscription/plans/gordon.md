@@ -9,6 +9,7 @@ keywords:
   personal subscription, ai assistant, usage allowance
 weight: 30
 aliases:
+  - /subscription/plans/gordon/
   - /subscription/products/gordon/
   - /subscription/gordon/
 ---
@@ -20,7 +21,7 @@ aliases:
 - Gordon Max is for power users who rely on Gordon throughout their workflow. It offers a significantly higher usage allowance than Plus.
 - Gordon Ultra is for developers with the highest usage needs. It provides the maximum monthly allowance available on a self-serve plan.
 
-To upgrade to a Gordon paid plan, see [Manage plans](/manuals/subscription/manage.md).
+To upgrade to a Gordon paid plan, see [Manage plans](/manuals/subscription-billing/subscription/manage.md).
 
 ## Usage
 

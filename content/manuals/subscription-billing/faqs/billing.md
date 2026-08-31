@@ -1,10 +1,12 @@
 ---
 title: Billing FAQs
-linkTitle: FAQs
+linkTitle: Billing FAQ
 description: Find answers to common questions about Docker billing, failed payments, taxes, and pay by invoice.
 keywords: billing, renewal, failed payments, sales tax, VAT, academic pricing, pay by invoice
 tags: [FAQ]
-weight: 80
+weight: 20
+aliases:
+  - /billing/faqs/
 ---
 
 ## What happens if my subscription payment fails?
@@ -32,7 +34,7 @@ Stripe.
 
 Before retrying, verify that your default payment method is up to date. For
 instructions, see
-[Manage a payment method](/manuals/billing/payment-method.md#manage-payment-method).
+[Manage a payment method](/manuals/subscription-billing/billing/payment-method.md#manage-payment-method).
 
 ## Does Docker collect sales tax and VAT?
 
@@ -44,9 +46,9 @@ Docker collects sales tax or VAT from the following customers:
 - For United Kingdom customers, Docker began collecting VAT on May 1, 2025.
 
 To help ensure correct tax assessments, keep your
-[billing information](/manuals/billing/details.md) up to date. For details on
+[billing information](/manuals/subscription-billing/billing/details.md) up to date. For details on
 adding a VAT number or submitting a US tax exemption certificate, see
-[Taxes](/manuals/billing/tax-certificate.md).
+[Taxes](/manuals/subscription-billing/billing/tax-certificate.md).
 
 ## Does Docker offer academic pricing?
 
@@ -60,4 +62,4 @@ purchasing upgrades or additional seats. You must use card payment or US bank
 accounts for these changes.
 
 For a list of supported payment methods, see
-[Add or update a payment method](/manuals/billing/payment-method.md).
+[Add or update a payment method](/manuals/subscription-billing/billing/payment-method.md).

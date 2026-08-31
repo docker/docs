@@ -29,7 +29,7 @@ don't send audit data to audit logs.
 
 To use AI Governance Audit Logs, your organization needs:
 
-- A Docker [AI Governance plan](/manuals/subscription/plans/ai-governance.md)
+- A Docker [AI Governance plan](/manuals/subscription-billing/subscription/plans/ai-governance.md)
 - An enforced organization governance policy
 - A Docker organization account
 - An organization owner, or a user with a [custom role](/manuals/enterprise/security/roles-and-permissions/custom-roles/_index.md) that includes AI Governance audit permissions, to configure delivery and view hosted events

@@ -143,12 +143,12 @@ area/scout:
 area/billing:
   - changed-files:
       - any-glob-to-any-file:
-          - content/manuals/billing/**
+          - content/manuals/subscription-billing/**
 
 area/subscription:
   - changed-files:
       - any-glob-to-any-file:
-          - content/manuals/subscription/**
+          - content/manuals/subscription-billing/**
 
 area/admin:
   - changed-files:
