@@ -88,13 +88,9 @@
 .interactive-diagram__svg {
   display: block;
   width: 100%;
-  min-width: 760px;
+  min-width: 680px;
   height: auto;
   font-family: "Roboto Flex", sans-serif;
-}
-
-.interactive-diagram--topology .interactive-diagram__svg {
-  min-width: 680px;
 }
 
 .interactive-diagram__boundary rect {
