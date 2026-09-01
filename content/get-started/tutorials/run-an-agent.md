@@ -1,7 +1,7 @@
 ---
 title: Run an AI agent safely
 linkTitle: Run an AI agent safely
-description: Let an AI agent reset a real Compose project without risking the database in another checkout.
+description: Give an AI agent a real debugging task inside a disposable Docker Sandbox.
 keywords: Docker, get started, AI agents, Docker Sandboxes, sbx, sandbox, isolation
 weight: 2
 aliases:
@@ -9,186 +9,115 @@ aliases:
 ---
 
 AI coding agents work best when they can install tools, run commands, and use
-Docker. The same access increases the effect of a mistaken assumption. For
-example, an agent can reset the database for one checkout and accidentally
-delete data from another checkout that Compose identifies as the same project.
+Docker. The same access makes ordinary requests risky. Asking an agent to
+reproduce a problem from an empty database might lead it to delete persistent
+Docker data on your machine.
 
 Docker Sandboxes gives the agent its own Docker daemon and Linux environment.
-You prompt the agent as usual, but its containers, packages, and system changes
-stay inside a disposable microVM.
+You work with the agent as usual, but its containers, packages, and system
+changes stay inside a disposable microVM.
 
-In this 15-minute tutorial, you'll run a real to-do application with saved data,
-then ask an agent to reset a parallel checkout. The agent completes the task,
-while the application on your host remains untouched.
+In this tutorial, you'll give an agent a real Compose application and ask it to
+reproduce a clean first run. The workflow feels normal, but its side effects
+remain inside the sandbox.
 
 ## Before you start
 
-- Install and start [Docker Desktop](../get-docker.md) or
-  [Docker Engine](/manuals/engine/install/_index.md)
 - [Install Docker Sandboxes](/manuals/ai/sandboxes/install.md) and run `sbx login`
 - Install [Git](https://git-scm.com/downloads)
 - Have access to a Claude subscription
 
-Docker Sandboxes doesn't require a host Docker runtime for normal use. This
-tutorial uses one to make the isolation visible with a real application on your
-host.
+You don't need Docker Desktop or Docker Engine on your host.
 
-## Create two checkouts
+## Get the application
 
-Agent tools and workspace managers often keep parallel checkouts under separate
-workspace roots while preserving the repository name. Create that common layout
-with two checkouts of Docker's sample to-do application:
+Clone Docker's sample to-do application:
 
 ```console
-$ mkdir agent-sandbox-demo
-$ cd agent-sandbox-demo
-$ mkdir developer agent
-$ git clone https://github.com/dockersamples/todo-list-app developer/todo-list-app
-$ git clone https://github.com/dockersamples/todo-list-app agent/todo-list-app
+$ git clone https://github.com/dockersamples/todo-list-app
+$ cd todo-list-app
 ```
 
-The checkouts have different parent directories, but both end in
-`todo-list-app`. That detail will matter later.
+The project contains a Node.js application and a Compose file for the
+application and its MySQL database. You don't need to install Node.js or MySQL.
 
-## Start your application
+## Start the agent
 
-Open the developer checkout and start its application stack on your host:
-
-```console
-$ cd developer/todo-list-app
-$ docker compose up -d
-```
-
-Wait for the API to become available:
+Run Claude Code in a sandbox with the project as its workspace:
 
 ```console
-$ curl --retry 30 --retry-all-errors --retry-delay 2 -fsS http://localhost:3000/items
-```
-
-Open [http://localhost:3000](http://localhost:3000), then add a to-do named
-`Prepare the release notes`.
-
-The item is stored in the application's MySQL database. Confirm that the API
-returns it:
-
-```console
-$ curl -fsS http://localhost:3000/items
-```
-
-Keep this application running.
-
-## Create an environment for the agent
-
-Move to the agent's checkout and create a sandbox without attaching to it:
-
-```console
-$ cd ../../agent/todo-list-app
-$ sbx create --name onboarding-test claude .
+$ sbx run --name todo-debug claude
 ```
 
 On your first run, select the **Balanced** network policy. It permits common
 development services and blocks other destinations by default.
 
-The checkout is shared with the sandbox, so the agent can work with the project
-files. The agent's operating system and Docker daemon are separate from your
-host.
+Enter `/login` and complete the browser sign-in. From this point, using Claude
+Code feels the same as running it directly on your machine.
 
-## Give the agent a normal task
+## Give the agent a debugging task
 
-Attach to Claude Code:
-
-```console
-$ sbx run --name onboarding-test
-```
-
-Enter `/login` and complete the browser sign-in. Then send this prompt:
+Send this prompt:
 
 ```text
-I'm testing the first-run experience in this checkout. Reset this checkout's
-Compose environment, including its database, then start the application. Add a
-to-do named "Review onboarding copy" through the application API and confirm
-that it is the only item. Don't modify the source files. Handle the task end to
-end.
+Reproduce this application's first-run experience from a clean local state.
+Reset its Compose environment, including persistent database data, then start
+the application. Through its API, add to-dos named "Draft release notes" and
+"Review onboarding copy". Verify that the API returns exactly those two items.
+Don't modify the source files. Report what you did and what you found.
 ```
 
 Claude inspects the project, prepares a clean Compose environment, starts the
-stack, and uses the API. These are the same commands and the same interaction
-you would expect outside a sandbox. When Claude reports that the task is
-complete, enter `/exit`.
+application, and uses its API. It can pull images, start containers, install
+tools, and troubleshoot without asking you to prepare its machine.
 
-## Preview what could have happened
+When Claude reports that the task is complete, enter `/exit`.
 
-You are still in the agent checkout. Ask Compose on your host to preview the
-same kind of database reset:
+## See the isolated environment
 
-```console
-$ docker compose --dry-run down --volumes
-```
-
-The dry run identifies the running `todo-list-app` containers and its MySQL
-volume for removal. Do not repeat the command without `--dry-run` yet.
-
-Compose uses the [directory name as the default project name](/manuals/compose/how-tos/project-name.md).
-Both checkouts are named `todo-list-app`, so on a shared Docker daemon they have
-the same identity. An agent working directly on your host could interpret
-“reset this checkout” correctly and still delete the database used by your
-other checkout.
-
-The sandbox has a private Docker daemon, so the agent's identically named
-containers and volume never collided with the ones on your host.
-
-## Verify both applications
-
-Check the application on your host again:
+List the containers the agent started:
 
 ```console
-$ curl -fsS http://localhost:3000/items
+$ sbx exec todo-debug docker ps --format 'table {{.Names}}\t{{.Status}}'
 ```
 
-The response still contains `Prepare the release notes`. Now query the
-application inside the sandbox:
+The output shows the application and MySQL containers. Query the application
+inside the sandbox:
 
 ```console
-$ sbx exec onboarding-test curl -fsS http://localhost:3000/items
+$ sbx exec todo-debug curl -fsS http://localhost:3000/items
 ```
 
-This response contains only `Review onboarding copy`. The same source project
-has two independent application environments, and the agent could reset only
-its own.
+The response contains the two requested to-dos.
 
-The selected project directory is shared read-write, so source edits would
-still appear on your host. Keep project files under version control and review
-agent changes as usual. The sandbox isolates everything around that workspace:
-the operating system, installed packages, Docker objects, and network policy.
+The agent used Docker as it would on a developer machine, including resetting
+persistent data. The difference is scope: it could see only the sandbox's
+private Docker daemon. Your host's containers, images, volumes, packages, and
+system files were outside the environment.
+
+The project directory is shared read-write, so source edits would still appear
+on your host. Keep project files under version control and review agent changes
+as usual.
 
 ## Throw the environment away
 
-Remove the sandbox and everything the agent created inside it:
+Remove the sandbox:
 
 ```console
-$ sbx rm onboarding-test
+$ sbx rm todo-debug
 ```
 
-The agent's application stack, database, images, packages, and other system
-changes are deleted together. The source checkout and the application running
-on your host remain.
-
-When you're finished with the host application, remove its stack and volume:
-
-```console
-$ cd ../../developer/todo-list-app
-$ docker compose down --volumes
-```
-
-You can also delete the `agent-sandbox-demo` directory and both checkouts.
+This deletes the application stack, MySQL database, images, installed packages,
+and every other change inside the microVM. The project files remain on your
+host. Running the same `sbx run` command creates a clean environment for the
+next task.
 
 ## What you proved
 
-You gave an agent a reasonable development task without changing how you
-prompted or supervised it. A subtle scope collision could have deleted a real
-database on a shared Docker daemon. The sandbox kept the agent's Docker and
-system state in a disposable environment, while its intended project remained
-available on your host.
+You gave an agent the freedom to complete a normal development task without
+running its tools and Docker workloads on your host. The agent could reset
+Docker state and install what it needed, while the sandbox constrained the
+effects to an environment you could discard with one command.
 
 Continue with the [Docker Sandboxes documentation](/manuals/ai/sandboxes/_index.md)
 to choose another agent or define tighter network, filesystem, and tool

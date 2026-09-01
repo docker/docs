@@ -13,7 +13,7 @@ params:
       time: 15 min
     - audience: AI developers
       title: Run an AI agent safely
-      description: Reset a real Compose project with an agent without risking another checkout's database.
+      description: Give an agent a real debugging task inside a disposable Docker Sandbox.
       link: /get-started/tutorials/run-an-agent/
       time: 15 min
     - audience: Administrators
