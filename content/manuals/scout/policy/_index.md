@@ -120,17 +120,3 @@ attestations at build time:
 ```console
 $ docker buildx build --provenance=true -t <IMAGE> --push .
 ```
-
-## Policies page in the Dashboard
-
-> [!IMPORTANT]
->
-> The `docker scout policy` command brings policy evaluation directly to your
-> CLI so you can evaluate any image locally, in CI, or with custom policies
-> without needing the Dashboard. The Policies page in the Dashboard is
-> deprecated and will be retired on September 1, 2026. See
-> [Evaluate policies](./local.md).
-
-The Docker Scout Dashboard previously provided a visual interface for tracking
-policy compliance across your organization's images. See
-[Use the Policies page in the Dashboard](./dashboard.md).
