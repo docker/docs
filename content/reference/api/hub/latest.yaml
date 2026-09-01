@@ -1708,11 +1708,12 @@ paths:
               properties:
                 role:
                   type: string
-                  description: Role of the member
-                  enum:
-                    - owner
-                    - editor
-                    - member
+                  description: |
+                    Role of the member. Valid values are the core roles
+                    `owner`, `editor`, and `member`, or the name of an
+                    existing [custom role](https://docs.docker.com/enterprise/security/roles-and-permissions/custom-roles/manage/).
+                    Use the custom role's name identifier, not its label or UUID.
+                  example: owner
       responses:
         "200":
           description: Member role updated
@@ -1941,6 +1942,13 @@ paths:
                   type: string
                 description:
                   type: string
+                role:
+                  type: string
+                  description: |
+                    Role assigned to the team. Valid values are the core roles
+                    `owner`, `editor`, and `member`, or the name of an
+                    existing [custom role](https://docs.docker.com/enterprise/security/roles-and-permissions/custom-roles/manage/).
+                    Use the custom role's name identifier, not its label or UUID.
       responses:
         "200":
           description: ""
@@ -3750,6 +3758,11 @@ components:
           type: number
           example: 10
           description: Member count of the group
+        role:
+          type: string
+          description: |
+            Role assigned to the team. A core role (`owner`, `editor`, or `member`)
+            or the name of a custom role (not the label or UUID).
     group_member:
       type: object
       properties:
