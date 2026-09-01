@@ -20,8 +20,8 @@ Docker Desktop on Mac is designed with security in mind. Administrative rights a
 Docker Desktop for Mac is run as an unprivileged user. However, Docker Desktop requires certain functionalities to perform a limited set of privileged configurations such as:
  - [Installing symlinks](#installing-symlinks) in`/usr/local/bin`.
  - [Ensuring `localhost` and `kubernetes.docker.internal` are defined](#ensuring-localhost-and-kubernetesdockerinternal-are-defined) in `/etc/hosts`. Some old macOS installs don't have `localhost` in `/etc/hosts`, which causes Docker to fail. Defining the DNS name `kubernetes.docker.internal` allows Docker to share Kubernetes contexts with containers.
-  - [Binding privileged ports](#binding-privileged-ports) that are less than 1024. Although privileged ports (ports below 1024) are not typically used as a security boundary, operating systems still prevent unprivileged processes from binding to them which breaks commands like `docker run -p 127.0.0.1:80:80 docker/getting-started`. (Applies to Docker Desktop version 4.88 and earlier).
-  - Securely caching the Registry Access Management policy which is read-only for the developer. (Applies to Docker Desktop version 4.88 and earlier).
+  - [Binding privileged ports](#binding-privileged-ports) that are less than 1024. Although privileged ports (ports below 1024) are not typically used as a security boundary, operating systems still prevent unprivileged processes from binding to them which breaks commands like `docker run -p 127.0.0.1:80:80 docker/getting-started`. (Applies to version 4.88 and earlier).
+  - Securely caching the Registry Access Management policy which is read-only for the developer. (Applies to version 4.88 and earlier).
 
 Privileged access, when needed, is granted through the **Advanced** page in **Settings**. With version 4.88 and earlier, this is granted during installation.
 
@@ -47,7 +47,7 @@ As the `/var/run` is mounted as a tmpfs, its content is deleted on restart, syml
 
 It is your responsibility to ensure that localhost is resolved to `127.0.0.1` and if Kubernetes is used, that `kubernetes.docker.internal` is resolved to `127.0.0.1`.
 
-### Binding privileged ports (version 4.88 and earlier)
+### Binding privileged ports (version 4.88.0 and earlier)
 
 You can choose to enable privileged port mapping during installation, or from the **Advanced** page in **Settings** post-installation. Docker Desktop requires authorization to confirm this choice.
 
@@ -62,7 +62,7 @@ The limitation of this approach is that Docker Desktop can only be run by one us
 
 ## Privileged helper (version 4.88 and earlier)
 
-In the limited situations when the privileged helper is needed, for example binding privileged ports or caching the Registry Access Management policy, the privileged helper is started by `launchd` and runs in the background unless it is disabled at runtime as previously described. The Docker Desktop backend communicates with the privileged helper over the UNIX domain socket `/var/run/com.docker.vmnetd.sock`. The functionalities it performs are:
+In the limited situations when the privileged helper is needed, for example binding privileged ports or caching the Registry Access Management policy, the privileged helper is started by `launchd` and runs in the background unless it is disabled at runtime as previously described. The Docker Desktop backend communicates with the privileged helper over the Unix domain socket `/var/run/com.docker.vmnetd.sock`. The functionalities it performs are:
 - Binding privileged ports that are less than 1024.
 - Securely caching the Registry Access Management policy which is read-only for the developer.
 - Uninstalling the privileged helper.
