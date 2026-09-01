@@ -47,9 +47,9 @@ As the `/var/run` is mounted as a tmpfs, its content is deleted on restart, syml
 
 It is your responsibility to ensure that localhost is resolved to `127.0.0.1` and if Kubernetes is used, that `kubernetes.docker.internal` is resolved to `127.0.0.1`.
 
-### Binding privileged ports (version 4.88.0 and earlier)
+### Binding privileged ports
 
-You can choose to enable privileged port mapping during installation, or from the **Advanced** page in **Settings** post-installation. Docker Desktop requires authorization to confirm this choice.
+You can choose to enable privileged port mapping during installation (version 4.88.0 and earlier), or from the **Advanced** page in **Settings** post-installation. Docker Desktop requires authorization to confirm this choice.
 
 ## Installing from the command line
 
