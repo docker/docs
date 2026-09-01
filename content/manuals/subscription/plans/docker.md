@@ -26,7 +26,10 @@ licensing, and expanded feature sets.
 - Docker Personal is free for individual developers. Docker Pro adds unlimited private repositories, Docker Build Cloud, and commercial Docker Desktop use.
 - Docker Team and Docker Business are plans for organizations, with Team adding audit logs and role-based access control, and Business adding SSO, SCIM, hardened Docker Desktop, and image access management.
 
-To upgrade your free Docker plan in the billing portal, see [Manage plans](../manage.md).
+To upgrade to Docker Pro, go to the
+<a href="https://www.docker.com/pricing/" id="dkr_docs_pricing_docker_pro" class="link" rel="noopener">Docker pricing page</a>
+and select **Buy now**.
+To upgrade to Docker Team or Docker Business, see [Manage plans](../manage.md).
 
 ## Usage
 
