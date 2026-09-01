@@ -12,11 +12,58 @@
       <p
         class="max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-300"
       >
-        Choose the tutorial that matches what you want to do.
+        Install what you need, then choose a tutorial that matches what you want
+        to do.
       </p>
     </header>
 
-    <div>
+    <section class="mb-12 md:mb-16" aria-labelledby="install-heading">
+      <h2
+        id="install-heading"
+        class="mb-5 text-2xl leading-tight font-semibold tracking-tight text-gray-950 dark:text-white"
+      >
+        Install what you need
+      </h2>
+      <div
+        class="grid grid-cols-1 border-y border-gray-200 md:grid-cols-2 md:divide-x md:divide-gray-200 dark:border-gray-700 dark:md:divide-gray-700"
+      >
+        {{ range .Params.installs }}
+          <a
+            href="{{ .link }}"
+            class="group flex items-start justify-between gap-5 border-b border-gray-200 px-3 py-5 transition-colors last:border-b-0 hover:bg-blue-50/70 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-400/40 focus-visible:ring-inset md:border-b-0 md:px-5 dark:border-gray-700 dark:hover:bg-gray-900/60"
+          >
+            <div>
+              <p
+                class="mb-1 font-mono text-xs font-semibold tracking-[0.12em] text-gray-600 uppercase dark:text-gray-300"
+              >
+                {{ .eyebrow }}
+              </p>
+              <h3
+                class="mb-1 text-lg font-semibold text-gray-950 dark:text-white"
+              >
+                {{ .title }}
+              </h3>
+              <p class="leading-relaxed text-gray-600 dark:text-gray-300">
+                {{ .description }}
+              </p>
+            </div>
+            <span
+              class="icon-svg mt-1 shrink-0 text-blue-600 transition-transform group-hover:translate-x-1 motion-reduce:transform-none dark:text-blue-400"
+            >
+              {{ partialCached "icon" "arrow-right" "arrow-right" }}
+            </span>
+          </a>
+        {{ end }}
+      </div>
+    </section>
+
+    <section aria-labelledby="tutorials-heading">
+      <h2
+        id="tutorials-heading"
+        class="mb-5 text-2xl leading-tight font-semibold tracking-tight text-gray-950 dark:text-white"
+      >
+        Choose a tutorial
+      </h2>
       {{ range .Params.tutorials }}
         <a
           href="{{ .link }}"
@@ -29,11 +76,11 @@
           </p>
 
           <div class="min-w-0">
-            <h2
+            <h3
               class="mb-2 text-2xl leading-tight font-semibold tracking-tight text-gray-950 md:text-3xl dark:text-white"
             >
               {{ .title }}
-            </h2>
+            </h3>
             <p
               class="max-w-2xl leading-relaxed text-gray-600 dark:text-gray-300"
             >
@@ -57,6 +104,6 @@
           </div>
         </a>
       {{ end }}
-    </div>
+    </section>
   </article>
 {{ end }}

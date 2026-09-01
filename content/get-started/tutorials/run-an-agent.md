@@ -1,124 +1,122 @@
 ---
-title: Run an AI agent safely
-linkTitle: Run an AI agent safely
-description: Give an AI agent a real debugging task inside a disposable Docker Sandbox.
-keywords: Docker, get started, AI agents, Docker Sandboxes, sbx, sandbox, isolation
+title: Run your coding agent in a sandbox
+linkTitle: Sandbox a coding agent
+description: Move your existing AI coding agent workflow into a disposable Docker Sandbox.
+keywords: Docker, get started, AI agents, coding agents, Docker Sandboxes, sbx, sandbox, YOLO mode
 weight: 2
 aliases:
   - /get-started/run-an-agent/
 ---
 
-AI coding agents work best when they can install tools, run commands, and use
-Docker. The same access makes ordinary requests risky. Asking an agent to
-reproduce a problem from an empty database might lead it to delete persistent
-Docker data on your machine.
+Coding agents can work faster in full-autonomy modes that let them run commands,
+install tools, and use Docker without stopping for approval. Giving an agent
+that access directly on your machine also gives mistakes a wider reach.
 
-Docker Sandboxes gives the agent its own Docker daemon and Linux environment.
-You work with the agent as usual, but its containers, packages, and system
-changes stay inside a disposable microVM.
+Docker Sandboxes change where the agent runs, not how you work with it. The
+agent gets a private microVM with its own operating system and Docker daemon.
+Your project remains available on your host, while packages, containers, and
+other system changes stay inside an environment you can discard.
 
-In this tutorial, you'll give an agent a real Compose application and ask it to
-reproduce a clean first run. The workflow feels normal, but its side effects
-remain inside the sandbox.
+In this tutorial, you'll move an existing coding-agent workflow into a sandbox.
 
 ## Before you start
 
-- [Install Docker Sandboxes](/manuals/ai/sandboxes/install.md) and run `sbx login`
-- Install [Git](https://git-scm.com/downloads)
-- Have access to a Claude subscription
+- Have a project directory for the agent to work with
+- Have access to a [supported coding agent](/manuals/ai/sandboxes/agents/_index.md)
 
 You don't need Docker Desktop or Docker Engine on your host.
 
-## Get the application
+## Install and sign in
 
-Clone Docker's sample to-do application:
-
-```console
-$ git clone https://github.com/dockersamples/todo-list-app
-$ cd todo-list-app
-```
-
-The project contains a Node.js application and a Compose file for the
-application and its MySQL database. You don't need to install Node.js or MySQL.
-
-## Start the agent
-
-Run Claude Code in a sandbox with the project as its workspace:
+[Install Docker Sandboxes](/manuals/ai/sandboxes/install.md) for your operating
+system, then sign in to Docker:
 
 ```console
-$ sbx run --name todo-debug claude
+$ sbx login
 ```
+
+## Bring your agent setup
+
+This step is optional. Skip it if you want to start with a clean agent setup.
+
+If you use agent skills on your host, preview and import them:
+
+```console
+$ sbx skills import --dry-run
+$ sbx skills import
+```
+
+Imported skills are stored separately from their host originals and shared
+with supported sandboxes. This feature is experimental. See
+[Share agent skills](/manuals/ai/sandboxes/workflows/agent-skills.md) for the
+supported agents and trust boundary.
+
+If your model-provider API keys are already exported in your shell, import them
+into the `sbx` credential store:
+
+```console
+$ sbx secret import --dry-run
+$ sbx secret import
+```
+
+You can skip this command when you use a subscription or OAuth. Your agent
+prompts you to authenticate when it starts. See
+[Credentials](/manuals/ai/sandboxes/configuration/credentials.md) for other
+secret sources and provider-specific commands.
+
+## Run your agent
+
+Open your project and start your preferred agent. This example uses Codex:
+
+```console
+$ cd ~/my-project
+$ sbx run --name my-project codex
+```
+
+Replace `codex` with another supported agent identifier, such as `claude`,
+`copilot`, `cursor`, or `gemini`.
 
 On your first run, select the **Balanced** network policy. It permits common
 development services and blocks other destinations by default.
 
-Enter `/login` and complete the browser sign-in. From this point, using Claude
-Code feels the same as running it directly on your machine.
+The built-in integrations start coding agents in their full-autonomy mode. For
+example, Codex bypasses approvals, Claude Code skips permission prompts, and
+Cursor, Copilot, and Gemini use YOLO mode. You don't need to add those flags.
 
-## Give the agent a debugging task
-
-Send this prompt:
-
-```text
-Reproduce this application's first-run experience from a clean local state.
-Reset its Compose environment, including persistent database data, then start
-the application. Through its API, add to-dos named "Draft release notes" and
-"Review onboarding copy". Verify that the API returns exactly those two items.
-Don't modify the source files. Report what you did and what you found.
-```
-
-Claude inspects the project, prepares a clean Compose environment, starts the
-application, and uses its API. It can pull images, start containers, install
-tools, and troubleshoot without asking you to prepare its machine.
-
-When Claude reports that the task is complete, enter `/exit`.
-
-## See the isolated environment
-
-List the containers the agent started:
+Give the agent the same task you would give it on your host. Source changes
+appear in your working tree, so you can inspect them with your usual tools:
 
 ```console
-$ sbx exec todo-debug docker ps --format 'table {{.Names}}\t{{.Status}}'
+$ git diff
 ```
 
-The output shows the application and MySQL containers. Query the application
-inside the sandbox:
+The project directory is shared read-write. The agent can modify or delete
+files in that directory, so keep your work under version control. Everything
+around the project—the agent process, installed packages, Docker objects, and
+system files—stays inside the sandbox.
+
+## Return or start over
+
+Exit the agent when you're finished. Reconnect to the same environment later:
 
 ```console
-$ sbx exec todo-debug curl -fsS http://localhost:3000/items
+$ sbx run --name my-project
 ```
 
-The response contains the two requested to-dos.
-
-The agent used Docker as it would on a developer machine, including resetting
-persistent data. The difference is scope: it could see only the sandbox's
-private Docker daemon. Your host's containers, images, volumes, packages, and
-system files were outside the environment.
-
-The project directory is shared read-write, so source edits would still appear
-on your host. Keep project files under version control and review agent changes
-as usual.
-
-## Throw the environment away
-
-Remove the sandbox:
+When you want a clean environment, remove the sandbox:
 
 ```console
-$ sbx rm todo-debug
+$ sbx rm my-project
 ```
 
-This deletes the application stack, MySQL database, images, installed packages,
-and every other change inside the microVM. The project files remain on your
-host. Running the same `sbx run` command creates a clean environment for the
-next task.
+Removing the sandbox deletes its packages, containers, images, and system
+changes. Your project directory and imported skills remain on your host.
 
-## What you proved
+## What changed
 
-You gave an agent the freedom to complete a normal development task without
-running its tools and Docker workloads on your host. The agent could reset
-Docker state and install what it needed, while the sandbox constrained the
-effects to an environment you could discard with one command.
+You kept your project, agent, skills, credentials, and prompting workflow. The
+only essential change was launching the agent with `sbx run`. That moved its
+full-autonomy execution into an environment you control and can throw away.
 
 Continue with the [Docker Sandboxes documentation](/manuals/ai/sandboxes/_index.md)
-to choose another agent or define tighter network, filesystem, and tool
-policies.
+to configure tighter network, filesystem, and tool policies.
