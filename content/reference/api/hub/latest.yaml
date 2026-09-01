@@ -3672,9 +3672,12 @@ components:
           example: example@docker.com
         role:
           type: string
-          description: User's role in the Organization
+          description: |
+            The member's role in the organization (`Owner`, `Editor`,
+            `Member`, or `Invitee` for pending invites).
           enum:
             - Owner
+            - Editor
             - Member
             - Invitee
           example: Owner
