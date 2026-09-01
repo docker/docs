@@ -47,7 +47,7 @@ two builders:
 
 ### Get more build cache space
 
-To get more Build cache space, [upgrade your subscription](/manuals/subscription/manage.md#upgrade-plans).
+To get more Build cache space, [upgrade your subscription](/manuals/subscription/plans/docker.md).
 
 > [!TIP]
 >
