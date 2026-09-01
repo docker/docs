@@ -22,10 +22,6 @@ aliases:
 You can add and manage your plans from the billing portal in Docker Home. Within the billing portal, you use the product catalog to view
 self-serve Docker products, while the Overview page shows your active plans with options to upgrade or cancel.
 
-To upgrade to Docker Pro, go to the
-<a href="https://www.docker.com/pricing/" id="dkr_docs_pricing_manage_pro" class="link" rel="noopener">Docker pricing page</a>
-and select **Buy now**.
-
 ## Set up a new plan
 
 You can purchase Docker Team, Docker Business, and other products through the product catalog:
@@ -43,6 +39,10 @@ You can purchase Docker Team, Docker Business, and other products through the pr
      checkbox and enter your Tax ID.
    - Your VAT number must include your country prefix. For example, enter
      `DE123456789` for a German VAT number.
+
+To upgrade to Docker Pro, go to the
+<a href="https://www.docker.com/pricing/" id="dkr_docs_pricing_manage_pro" class="link" rel="noopener">Docker pricing page</a>
+and select **Buy now**.
 
 ## Upgrade plans
 

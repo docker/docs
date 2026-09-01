@@ -67,7 +67,7 @@ Plans come with usage entitlements that can be extended without upgrading to a d
 
 ## Manage your plans
 
-To subscribe to a new plan or upgrade an active plan, see [Manage plans](/manuals/subscription/manage.md) or [Docker plans](/manuals/subscription/plans/docker.md). You can also <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_index_sales" class="link" rel="noopener">contact sales</a>.
+To subscribe to a new plan or upgrade an active plan, see [Manage plans](/manuals/subscription/manage.md). See [Docker plans](/manuals/subscription/plans/docker.md) to learn about Docker Team, Business, and Pro. You can also <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_index_sales" class="link" rel="noopener">contact sales</a>.
 
 ## Next steps
 
