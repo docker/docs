@@ -73,6 +73,7 @@ The service performs the following functionalities:
 - Checking if the bootloader activates Hyper-V.
 - Checking if required Windows features are both installed and enabled.
 - Conducting healthchecks and retrieving the version of the service itself.
+- Securely caching the Registry Access Management policy which is read-only for the developer. (Applies to Docker Desktop version 4.88 and earlier)
 
 The service start mode depends on which container engine is selected, and, for WSL, on whether it is needed to maintain `host.docker.internal` and `gateway.docker.internal` in the Win32 hosts file. This is controlled by a setting under `Use the WSL 2 based engine` in the settings page. When this is set, WSL engine behaves the same as Hyper-V. So:
 - With Windows containers, or Hyper-v Linux containers, the service is started when the system boots and runs all the time, even when Docker Desktop isn't running. This is required so you can launch Docker Desktop without admin privileges.
