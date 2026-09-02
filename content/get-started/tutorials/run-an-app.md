@@ -8,9 +8,9 @@ aliases:
   - /get-started/run-an-app/
 ---
 
-An application can depend on a particular runtime, database, and supporting
-tools. Recreating that environment on every machine takes time and produces
-different results.
+An application can depend on a particular runtime, libraries, database, and
+supporting tools. Docker packages these dependencies with the application so
+you can run it consistently without preparing each machine by hand.
 
 In this 15-minute tutorial, you'll run a container, start a multi-container
 application, package the application as an image, and share the image through
@@ -24,77 +24,118 @@ Docker Hub.
 
 ## Run a container
 
-Start with an application that is already packaged as an image:
+Start with a small web application that someone else has packaged for Docker.
+Docker distributes applications in images. An image is a ready-to-run package
+that contains an application and everything it needs. A container is a running
+instance of an image.
+
+Download the image from Docker Hub:
 
 ```console
-$ docker run -d --name welcome -p 8080:80 docker/welcome-to-docker
+$ docker pull docker/welcome-to-docker
 ```
 
-Open [http://localhost:8080](http://localhost:8080). Docker pulled the image and
-started a container from it. The `-p` flag made the container's web server
-available on your host.
+Start a container from the image:
+
+```console
+$ docker run --detach --name welcome --publish 8080:80 docker/welcome-to-docker
+```
+
+This command runs the container in the background (`--detach`), names it
+`welcome` (`--name`), and makes its web server available at port 8080 on your
+machine (`--publish 8080:80`). The final argument identifies the image to run.
+
+Open [http://localhost:8080](http://localhost:8080) to see the application.
+You downloaded an image and started one container from it.
 
 Remove the container before continuing:
 
 ```console
-$ docker rm -f welcome
+$ docker rm --force welcome
 ```
 
-The image remains available locally, but the running application is gone.
+This removes the running application. The image remains available locally, so
+Docker can create another container from it later.
 
 ## Run an application stack
 
-Clone a prepared application and open its directory:
+The first application needed only one container. Applications often have
+several parts, such as a frontend, an API, and a database. You could start each
+part with a separate `docker run` command, but you would also need to keep their
+configuration and connections in sync.
+
+Docker Compose describes all the parts of an application in a `compose.yaml`
+file and manages them together. Compose is included with Docker Desktop.
+
+Try it with a prepared to-do application. Clone the project and open its
+directory:
 
 ```console
 $ git clone https://github.com/docker/getting-started-todo-app
 $ cd getting-started-todo-app
 ```
 
-Start the development stack:
+The project's `compose.yaml` file defines five services: a frontend, an API, a
+database, a database management interface, and a proxy. A service represents
+one part of the application and runs in its own container.
+
+Start the complete development stack:
 
 ```console
-$ docker compose up --build -d
+$ docker compose up --build --detach
 ```
+
+The `docker compose up` command reads `compose.yaml` and starts its services.
+The `--build` option builds the frontend and API images from the project, and
+`--detach` leaves the containers running in the background. Compose also pulls
+the images for the supporting services and connects the containers.
 
 Open [http://localhost](http://localhost), then add an item to the to-do list.
 
-The project's `compose.yaml` file describes the frontend, API, database,
-database management interface, and proxy. Compose built the application
-services, pulled the supporting images, and connected the containers.
-
-Check the stack:
+See the containers that Compose started:
 
 ```console
 $ docker compose ps
 ```
 
-Each row represents one part of the application. The stack can move between
-machines as one version-controlled definition.
+Each row represents a container for one of the application's services. Instead
+of preserving a collection of commands, the project keeps the complete stack
+in one version-controlled definition.
 
 ## Build an image
 
-The repository also contains a `Dockerfile` that packages the frontend and API
-as one production image. Build it and replace `<YOUR_DOCKER_USERNAME>` with
-your Docker username:
+So far, you have run a published image and used Compose to build and manage a
+development stack. Next, build an image of your own that packages the to-do
+application's frontend and API together.
+
+The repository contains a `Dockerfile`, which is a set of instructions for
+building the image. Replace `<YOUR_DOCKER_USERNAME>` with your Docker username,
+then run:
 
 ```console
-$ docker build -t <YOUR_DOCKER_USERNAME>/getting-started-todo-app .
+$ docker build --tag <YOUR_DOCKER_USERNAME>/getting-started-todo-app .
 ```
 
-Run the image as a new container:
+The `--tag` option gives the image a name. The username prefix identifies where
+the image will be stored on Docker Hub. The final `.` tells Docker to find the
+`Dockerfile` and application source in the current directory.
+
+Create a container from your image, as you did with the welcome image:
 
 ```console
-$ docker run -d --name todo -p 8080:3000 <YOUR_DOCKER_USERNAME>/getting-started-todo-app
+$ docker run --detach --name todo --publish 8080:3000 <YOUR_DOCKER_USERNAME>/getting-started-todo-app
 ```
 
-Open [http://localhost:8080](http://localhost:8080). This time, the complete
-application is running from the image you built.
+Open [http://localhost:8080](http://localhost:8080). This time, the frontend and
+API are running together from the image you built.
 
 ## Share the image
 
+Images can be shared through a registry. Docker Hub is a registry for storing
+images and making them available to other machines and deployment systems.
+
 In [Docker Home](https://app.docker.com), create a public repository named
-`getting-started-todo-app` in your personal namespace.
+`getting-started-todo-app` under your Docker username.
 
 Sign in from the command line, then push the image:
 
@@ -103,24 +144,25 @@ $ docker login
 $ docker push <YOUR_DOCKER_USERNAME>/getting-started-todo-app
 ```
 
-Open the repository in Docker Home. The image is ready for another machine or
-deployment system to pull and run.
+The `docker push` command uploads the image to Docker Hub. Open the repository
+in Docker Home to see it. Another machine or deployment system can pull and run
+the same image.
 
 ## Clean up
 
 Remove the standalone container and the development stack:
 
 ```console
-$ docker rm -f todo
+$ docker rm --force todo
 $ docker compose down --volumes
 ```
 
-## What you proved
+## What you learned
 
-You ran software packaged by someone else, started an application stack from a
-declarative file, built your own image, and published it. Containers carry the
-application environment, Compose coordinates multiple containers, and a
-registry makes images available beyond one machine.
+You ran software packaged by someone else, started a multi-container
+application with Compose, built your own image, and published it. An image
+packages an application, a container runs that image, Compose coordinates
+multiple containers, and a registry makes images available beyond one machine.
 
 Choose a language-specific [Docker guide](/guides/) to containerize an
 application of your own.
