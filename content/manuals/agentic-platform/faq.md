@@ -11,8 +11,8 @@ aliases:
 ## What can I run in Docker Agentic Platform?
 
 Docker Agentic Platform provides predefined sandbox types for Claude Code,
-Codex, OpenCode, Copilot, and Gemini CLI. Each runs in an isolated, Docker-hosted
-sandbox with a live terminal.
+Codex, OpenCode, Copilot, Gemini CLI, and Shell. Each type runs in an isolated,
+Docker-hosted sandbox with a live terminal.
 
 ## How does Docker Agentic Platform differ from Docker Sandboxes?
 
