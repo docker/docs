@@ -141,4 +141,4 @@ options:
 
 ## Next steps
 
-- Take a look at [Get started with Docker](/get-started/introduction/_index.md) to learn how to build an image and run it as a containerized application.
+- Take a look at [Get started with Docker](/get-started/tutorials/run-an-app.md) to learn how to build an image and run it as a containerized application.
