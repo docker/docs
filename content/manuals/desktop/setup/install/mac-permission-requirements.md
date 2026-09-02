@@ -19,42 +19,37 @@ Docker Desktop on Mac is designed with security in mind. Administrative rights a
 
 Docker Desktop for Mac is run as an unprivileged user. However, Docker Desktop requires certain functionalities to perform a limited set of privileged configurations such as:
  - [Installing symlinks](#installing-symlinks) in`/usr/local/bin`.
- - [Binding privileged ports](#binding-privileged-ports) that are less than 1024. Although privileged ports (ports below 1024) are not typically used as a security boundary, operating systems still prevent unprivileged processes from binding to them which breaks commands like `docker run -p 127.0.0.1:80:80 docker/getting-started`.
  - [Ensuring `localhost` and `kubernetes.docker.internal` are defined](#ensuring-localhost-and-kubernetesdockerinternal-are-defined) in `/etc/hosts`. Some old macOS installs don't have `localhost` in `/etc/hosts`, which causes Docker to fail. Defining the DNS name `kubernetes.docker.internal` allows Docker to share Kubernetes contexts with containers.
- - Securely caching the Registry Access Management policy which is read-only for the developer.
+  - [Binding privileged ports](#binding-privileged-ports) that are less than 1024. Although privileged ports (ports below 1024) are not typically used as a security boundary, operating systems still prevent unprivileged processes from binding to them which breaks commands like `docker run -p 127.0.0.1:80:80 docker/getting-started`. (Applies to version 4.88 and earlier).
+  - Securely caching the Registry Access Management policy which is read-only for the developer. (Applies to version 4.88 and earlier).
 
-Privileged access is granted during installation.
+Privileged access, when needed, is granted through the **Advanced** page in **Settings**. With version 4.88 and earlier, this is granted during installation.
 
-The first time Docker Desktop for Mac launches, it presents an installation window where you can choose to either use the default settings, which work for most developers and requires you to grant privileged access, or use advanced settings.
-
-If you work in an environment with elevated security requirements, for instance where local administrative access is prohibited, then you can use the advanced settings to remove the need for granting privileged access. You can configure:
+From the **Advanced** page, you can enable:
 - The location of the Docker CLI tools either in the system or user directory
 - The default Docker socket
-- Privileged port mapping
+
+If you work in an environment with elevated security requirements, for instance where local administrative access is prohibited, then you can leave these settings at their defaults to avoid granting privileged access.
 
 Depending on which advanced settings you configure, you must enter your password to confirm.
 
-You can change these configurations at a later date from the **Advanced** page in **Settings**.
-
 ### Installing symlinks
 
-The Docker binaries are installed by default in `/Applications/Docker.app/Contents/Resources/bin`. Docker Desktop creates symlinks for the binaries in `/usr/local/bin`, which means they're automatically included in `PATH` on most systems.
+The Docker binaries are installed by default in `/Applications/Docker.app/Contents/Resources/bin`. By default, Docker Desktop creates symlinks for the binaries in `$HOME/.docker/bin`, which is automatically added to your terminal's `PATH`.
 
-You can choose whether to install symlinks either in `/usr/local/bin` or `$HOME/.docker/bin` during installation of Docker Desktop.
+You can change the symlink location to `/usr/local/bin` from the **Advanced** page in **Settings**. If `/usr/local/bin` is not writable by unprivileged users, Docker Desktop requires authorization to confirm this choice before the symlinks to Docker binaries are created there.
 
-If `/usr/local/bin` is chosen, and this location is not writable by unprivileged users, Docker Desktop requires authorization to confirm this choice before the symlinks to Docker binaries are created in `/usr/local/bin`. If `$HOME/.docker/bin` is chosen, authorization is not required, but then you must [manually add `$HOME/.docker/bin`](/manuals/desktop/settings-and-maintenance/settings.md#advanced) to your PATH.
+You are also given the option to enable the installation of the `/var/run/docker.sock` symlink from the **Advanced** page in **Settings**. Creating this symlink ensures various Docker clients relying on the default Docker socket path work without additional changes.
 
-You are also given the option to enable the installation of the `/var/run/docker.sock` symlink. Creating this symlink ensures various Docker clients relying on the default Docker socket path work without additional changes.
-
-As the `/var/run` is mounted as a tmpfs, its content is deleted on restart, symlink to the Docker socket included. To ensure the Docker socket exists after restart, Docker Desktop sets up a `launchd` startup task that creates the symlink by running `ln -s -f /Users/<user>/.docker/run/docker.sock /var/run/docker.sock`. This ensures the you aren't prompted on each startup to create the symlink. If you don't enable this option at installation, the symlink and the startup task is not created and you may have to explicitly set the `DOCKER_HOST` environment variable to `/Users/<user>/.docker/run/docker.sock` in the clients it is using. The Docker CLI relies on the current context to retrieve the socket path, the current context is set to `desktop-linux` on Docker Desktop startup.
-
-### Binding privileged ports
-
-You can choose to enable privileged port mapping during installation, or from the **Advanced** page in **Settings** post-installation. Docker Desktop requires authorization to confirm this choice.
+As the `/var/run` is mounted as a tmpfs, its content is deleted on restart, symlink to the Docker socket included. To ensure the Docker socket exists after restart, Docker Desktop sets up a `launchd` startup task that creates the symlink by running `ln -s -f /Users/<user>/.docker/run/docker.sock /var/run/docker.sock`. This ensures the you aren't prompted on each startup to create the symlink. If you don't enable this option, the symlink and the startup task is not created and you may have to explicitly set the `DOCKER_HOST` environment variable to `/Users/<user>/.docker/run/docker.sock` in the clients it is using. The Docker CLI relies on the current context to retrieve the socket path, the current context is set to `desktop-linux` on Docker Desktop startup.
 
 ### Ensuring `localhost` and `kubernetes.docker.internal` are defined
 
 It is your responsibility to ensure that localhost is resolved to `127.0.0.1` and if Kubernetes is used, that `kubernetes.docker.internal` is resolved to `127.0.0.1`.
+
+### Binding privileged ports
+
+You can choose to enable privileged port mapping during installation (version 4.88.0 and earlier), or from the **Advanced** page in **Settings** post-installation. Docker Desktop requires authorization to confirm this choice.
 
 ## Installing from the command line
 
@@ -65,9 +60,9 @@ Privileged configurations are applied during the installation with the `--user` 
 
 The limitation of this approach is that Docker Desktop can only be run by one user-account per machine, namely the one specified in the `-–user` flag.
 
-## Privileged helper
+## Privileged helper (version 4.88 and earlier)
 
-In the limited situations when the privileged helper is needed, for example binding privileged ports or caching the Registry Access Management policy, the privileged helper is started by `launchd` and runs in the background unless it is disabled at runtime as previously described. The Docker Desktop backend communicates with the privileged helper over the UNIX domain socket `/var/run/com.docker.vmnetd.sock`. The functionalities it performs are:
+In the limited situations when the privileged helper is needed, for example binding privileged ports or caching the Registry Access Management policy, the privileged helper is started by `launchd` and runs in the background unless it is disabled at runtime as previously described. The Docker Desktop backend communicates with the privileged helper over the Unix domain socket `/var/run/com.docker.vmnetd.sock`. The functionalities it performs are:
 - Binding privileged ports that are less than 1024.
 - Securely caching the Registry Access Management policy which is read-only for the developer.
 - Uninstalling the privileged helper.
@@ -92,14 +87,13 @@ $ rm /Library/PrivilegedHelperTools/com.docker.vmnetd
 
 ## Backend helper socket
 
-Aside from the optional [privileged helper](#privileged-helper), the Docker
-Desktop backend process (`com.docker.backend`) uses an internal helper socket
+The Docker Desktop backend process (`com.docker.backend`) uses an internal helper socket
 (`~/Library/Containers/com.docker.docker/Data/forkexecd.sock`) to fork and execute
 helper processes as part of running Docker Desktop.
 
-Unlike the privileged helper, this socket does not run as `root` and grants no
-elevated privileges. It is owned by, and accessible only to, the same macOS user
-running Docker Desktop, and is contained in Docker Desktop's application container.
+This socket does not run as `root` and grants no elevated privileges. It is owned by,
+and accessible only to, the same macOS user running Docker Desktop, and is contained
+in Docker Desktop's application container.
 
 ## Containers running as root within the Linux VM
 

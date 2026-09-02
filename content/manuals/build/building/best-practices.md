@@ -259,15 +259,15 @@ checks if pinned digests in your Dockerfile correspond to the correct version.
 If a publisher updates an image that you've pinned, the policy evaluation
 returns a non-compliant status, indicating that you should update your image.
 
-Docker Scout also supports an automated remediation workflow for keeping your
-base images up-to-date. When a new image digest is available, Docker Scout can
-automatically raise a pull request on your repository to update your
-Dockerfiles to use the latest version. This is better than using a tag that
-changes the version automatically, because you're in control and you have an
-audit trail of when and how the change occurred.
+To keep your base images up-to-date automatically, use
+[GitHub Dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuring-dependabot-version-updates)
+with `package-ecosystem: "docker"`. Dependabot raises pull requests to update
+your base image tags and digests on a schedule. This is better than using a tag
+that changes the version automatically, because you're in control and you have
+an audit trail of when and how the change occurred.
 
-For more information about automatically updating your base images with Docker
-Scout, see [Remediation](/manuals/scout/policy/dashboard.md).
+You can also review available base image updates from the CLI with
+[`docker scout recommendations`](/reference/cli/docker/scout/recommendations/).
 
 ## Build and test your images in CI
 

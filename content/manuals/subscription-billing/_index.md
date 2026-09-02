@@ -84,9 +84,7 @@ Plans come with usage entitlements that can be extended without upgrading to a d
 
 ## Manage your plans
 
-To subscribe to a new plan, you can self-serve through **Billing** in [Docker Home](https://app.docker.com), or by <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_index_sales" class="link" rel="noopener">contacting sales</a>.
-
-To learn more about adding a new plan or upgrading an active plan, see [Manage plans](/manuals/subscription-billing/manage/plans.md).
+To subscribe to a new plan or upgrade an active plan, see [Manage plans](/manuals/subscription-billing/manage/plans.md). See [Docker plans](/manuals/subscription-billing/plans/docker.md) to learn about Docker Team, Business, and Pro. You can also <a href="https://www.docker.com/pricing/contact-sales/" id="dkr_docs_index_sales" class="link" rel="noopener">contact sales</a>.
 
 You can use the billing portal to manage your Docker subscriptions, such
 as updating payment methods, reviewing billing details, and tracking

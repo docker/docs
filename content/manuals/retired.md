@@ -65,6 +65,9 @@ aliases:
   - /desktop/features/dev-environments/
   - /scout/policy/scores/
   - /scout/integrations/environment/sysdig/
+  - /scout/integrations/team-collaboration/slack/
+  - /scout/integrations/code-quality/sonarqube/
+  - /scout/integrations/source-code-management/github/
 ---
 
 This document provides an overview of Docker features, products, and
@@ -160,23 +163,31 @@ details, see the [Scout platform release notes](/manuals/scout/release-notes/pla
   Retired July 1, 2026.
 - GitHub source code management integration: linked images to their source
   repository and automated base-image updates via PRs. Retired July 1, 2026.
-  For migration options, see
-  [GitHub integration](/manuals/scout/integrations/source-code-management/github.md).
-- Notifications: alerted users to newly disclosed CVEs in-product and by email.
-  Deprecated, retiring September 1, 2026.
+  For base-image updates, use
+  [GitHub Dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuring-dependabot-version-updates)
+  with `package-ecosystem: "docker"`. For image-to-source linkage, build with
+  `--provenance=mode=max`. This retirement doesn't affect the
+  [`docker/scout-action`](https://github.com/docker/scout-action) GitHub Action
+  for CI pipelines.
 - Slack integration: sent vulnerability and policy compliance notifications to
-  Slack channels. Deprecated, retiring July 30, 2026. For more information,
-  see [Slack integration](/manuals/scout/integrations/team-collaboration/slack.md).
-- Amazon ECR integration: automatically analyzed images pushed to ECR
-  registries. Deprecated, retiring September 1, 2026. For migration options, see
-  [ECR integration](/manuals/scout/integrations/registry/ecr.md).
-- Azure Container Registry integration: automatically analyzed images pushed to
-  ACR registries. Deprecated, retiring September 1, 2026. For migration options,
-  see [ACR integration](/manuals/scout/integrations/registry/acr.md).
+  Slack channels. Retired July 30, 2026.
+- Notifications: alerted users to newly disclosed CVEs in-product and by
+  email. Retired September 1, 2026. To surface CVE and policy results without
+  push notifications, integrate `docker scout cves` or `docker scout policy`
+  into your CI pipeline.
+- Native Amazon ECR integration: automatically analyzed images pushed to ECR
+  registries using a CloudFormation stack. Retired September 1, 2026. Docker
+  Scout still supports ECR through
+  [`docker scout watch`](/manuals/scout/integrations/registry.md).
+- Native Azure Container Registry integration: automatically analyzed images
+  pushed to ACR registries using an ARM template. Retired September 1, 2026.
+  Docker Scout still supports ACR through
+  [`docker scout watch`](/manuals/scout/integrations/registry.md).
 - Policies page in the Dashboard: the `docker scout policy`
-  CLI continues to work. Deprecated, retiring September 1, 2026. See
+  CLI continues to work. Retired September 1, 2026. See
   [Evaluate policies](/manuals/scout/policy/local.md).
-- SonarQube integration: surfaced SonarQube quality gate results as a Docker Scout policy. Deprecated, retiring September 1, 2026.
+- SonarQube integration: surfaced SonarQube quality gate results as a Docker
+  Scout policy. Retired September 1, 2026.
 
 ### GitHub Copilot extension
 

@@ -339,14 +339,14 @@ Notifications appear briefly in the lower-right of the Docker Desktop Dashboard,
 
 ## Advanced (Mac only)
 
-Reconfigure CLI tool installation paths and privileged system permissions set during initial install.
+Reconfigure CLI tool installation paths and privileged system permissions. With Docker Desktop version 4.88.0 and earlier, these can be set during installation.
 
 | Setting             | Description                               | Notes                               |
 | ------------------- | ----------------------------------------- | ------------------------------------- |
-| CLI tools installation — **System** | Install Docker CLI tools to `/usr/local/bin`. | |
-| CLI tools installation — **User** | Install Docker CLI tools to `$HOME/.docker/bin` | Add `$HOME/.docker/bin` to your PATH by appending `export PATH=$PATH:~/.docker/bin` to `~/.bashrc` or `~/.zshrc`, then restart your shell. |
+| CLI tools installation — **System** | Install Docker CLI tools to `/usr/local/bin`. | Requires password with version 4.89.0 and later. |
+| CLI tools installation — **User** | Install Docker CLI tools to `$HOME/.docker/bin`. This is the default with version 4.89.0 and later. | Automatically added to your PATH in version 4.89.0 and later. |
 | **Allow the default Docker socket to be used** | Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#installing-symlinks). | Requires password |
-| **Allow privileged port mapping** | Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#binding-privileged-ports). | Requires password |
+| **Allow privileged port mapping** | Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#binding-privileged-ports). | Available with version 4.88.0 and earlier. Requires password |
 
 ## Docker Offload
 

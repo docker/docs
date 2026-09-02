@@ -25,13 +25,17 @@
 
 /content/reference/cli/ @dvdksn
 
-/content/manuals/subscription-billing/ @sarahsanders-docker
+/content/manuals/subscription-billing/ @akristen
 
-/content/manuals/security/ @aevesdocker @sarahsanders-docker
+/content/manuals/security/ @aevesdocker @akristen
 
-/content/manuals/admin/ @sarahsanders-docker
+/content/manuals/admin/ @akristen
 
-/content/manuals/accounts/ @sarahsanders-docker
+/content/manuals/accounts/ @akristen
+
+/content/manuals/support/ @akristen
+
+/content/manuals/platform-release-notes.md @akristen
 
 /content/manuals/ai/ @dvdksn
 

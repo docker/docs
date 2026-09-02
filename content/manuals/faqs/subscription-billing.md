@@ -47,6 +47,12 @@ You can also join the
 or sign up for early access programs to participate in research and try new
 features.
 
+### How do I upgrade to Docker Pro?
+
+To upgrade to Docker Pro, go to the
+<a href="https://www.docker.com/pricing?ref=Docs&refAction=DocsSubscriptionFaqPro" id="dkr_docs_pricing_faq_pro" class="link" rel="noopener">Docker pricing page</a>
+and select **Buy now**.
+
 ## Payments
 
 ### What happens if my subscription payment fails?

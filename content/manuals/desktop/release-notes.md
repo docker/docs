@@ -24,6 +24,35 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.89.0
+
+{{< release-date date="2026-08-31" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.89.0" build_path="/238018/" >}}
+
+### Updates
+
+- [Docker Compose v5.5.0](https://github.com/docker/compose/releases/tag/v5.5.0)
+- [NVIDIA Container Toolkit v1.20.0](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.20.0)
+- [Docker Agent v1.127.0](https://github.com/docker/docker-agent/releases/tag/v1.127.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms 
+
+- Fixed an issue where background container and image polling was waking the Docker engine unnecessarily when Resource Saver mode was active.
+- Fixed slow Zsh startup caused by duplicated Docker CLI completion setup in `.zshrc`. Docker Desktop now keeps a single completion block and removes existing duplicates. Fixes [docker/desktop-feedback#561](https://github.com/docker/desktop-feedback/issues/561).
+- Sidebar customization permanently is now available to all users. Right-click the left-hand navigation, select **Customize**, and then select, deselect, or re-order the tabs.
+- Fixed the **Disk usage** slider in **Settings** to no longer show duplicate tick marks at small ranges, now displaying values in GiB with one decimal place for ranges up to 8 TiB.
+- Fixed excessive update notifications in the notification center so that pop-ups only appear for failures or when user action is required, not during in-progress update steps.
+- Fixed a dashboard crash issue. Fixes [docker/desktop-feedback#611](https://github.com/docker/desktop-feedback/issues/611)
+
+#### For Windows
+
+- When `CONTAINERD_BUILDX_FOR_WINDOWS` is enabled, Windows Containers now uses `dockerd`'s embedded containerd and in-process BuildKit, replacing the standalone containerd and buildkitd services.
+- Fixed a bug where Docker Desktop could fail to start after an ungraceful shutdown left behind a stuck socket file.
+- Fixed a bug where Docker VMM did not explain how to fix an unavailable Windows Hypervisor platform.
+
 ## 4.88.1
 
 {{< release-date date="2026-08-25" >}}
@@ -931,8 +960,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-03-30" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.67.0" build_path="/222858/" >}}
-
 ### New
 
 - Docker MCP Toolkit now has MCP profile template cards and an onboarding tour accessible via the **Profiles** tab.
@@ -975,8 +1002,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-03-26" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.66.1" build_path="/222799/" >}}
-
 ### Updates
 
 - [Docker Engine v29.3.1](/manuals/engine/release-notes/29.md#2931)
@@ -984,8 +1009,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.66.0
 
 {{< release-date date="2026-03-23" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.66.0" build_path="/222299/" >}}
 
 ### Updates
 
@@ -1011,8 +1034,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.65.0
 
 {{< release-date date="2026-03-16" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.65.0" build_path="/221669/" >}}
 
 ### New
 
@@ -1045,8 +1066,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.64.0
 
 {{< release-date date="2026-03-11" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.64.0" build_path="/221278/" >}}
 
 ### Updates
 
@@ -1081,8 +1100,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-03-02" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.63.0" build_path="/220185/" >}}
-
 ### New
 
 - Added SLSA v1 provenance support in the **Builds** view. 
@@ -1112,8 +1129,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.62.0
 
 {{< release-date date="2026-02-23" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.62.0" build_path="/219486/" >}}
 
 ### New
 
@@ -1149,8 +1164,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.61.0
 
 {{< release-date date="2026-02-18" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.61.0" build_path="/219004/" >}}
 
 ### New
 
@@ -1195,8 +1208,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-02-09" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.60.0" build_path="/218231/" >}}
-
 ### New
 
 - Added a new `docker desktop diagnose` command to gather diagnostics.
@@ -1222,8 +1233,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-02-03" >}}
 
-{{< desktop-install-v2 mac=true version="4.59.1" build_path="/217750/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Mac
@@ -1233,8 +1242,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.59.0
 
 {{< release-date date="2026-02-02" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.59.0" build_path="/217644/" >}}
 
 ### Updates
 
@@ -1278,8 +1285,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.58.0
 
 {{< release-date date="2026-01-26" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.58.0" build_path="/216728/" >}}
 
 ### New
 
@@ -1327,8 +1332,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2026-01-19" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.57.0" build_path="/215387/" >}}
-
 ### Security
 
 - Fixed [CVE-2025-14740](https://www.cve.org/cverecord?id=CVE-2025-14740) where the Docker Desktop for Windows installer contained multiple incorrect permission assignment vulnerabilities in the handling of the `C:\ProgramData\DockerDesktop` directory.
@@ -1351,8 +1354,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.56.0
 
 {{< release-date date="2026-01-12" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.56.0" build_path="/214940/" >}}
 
 ### New
 
@@ -1388,8 +1389,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.55.0
 
 {{< release-date date="2025-12-16" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.55.0" build_path="/213807/" >}}
 
 ### Updates
 
