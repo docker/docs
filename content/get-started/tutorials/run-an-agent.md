@@ -13,9 +13,10 @@ install tools, and use Docker without stopping for approval. Giving an agent
 that access directly on your machine also gives mistakes a wider reach.
 
 Docker Sandboxes change where the agent runs, not how you work with it. The
-agent gets a private microVM with its own operating system and Docker daemon.
-Your project remains available on your host, while packages, containers, and
-other system changes stay inside an environment you can discard.
+agent gets a private environment with its own operating system and Docker
+daemon. Your project remains available on your host, while tools the agent
+installs and system changes it makes stay inside an environment you can
+discard.
 
 In this tutorial, you'll move an existing coding-agent workflow into a sandbox.
 
@@ -46,10 +47,10 @@ $ sbx skills import --dry-run
 $ sbx skills import
 ```
 
-Imported skills are stored separately from their host originals and shared
-with supported sandboxes. This feature is experimental. See
-[Share agent skills](/manuals/ai/sandboxes/workflows/agent-skills.md) for the
-supported agents and trust boundary.
+Imported skills become available to supported agents across your sandboxes.
+This feature is experimental. See
+[Share agent skills](/manuals/ai/sandboxes/workflows/agent-skills.md) for
+supported agents and security considerations.
 
 If your model-provider API keys are already exported in your shell, import them
 into the `sbx` credential store:
@@ -76,8 +77,11 @@ $ sbx run --name my-project codex
 Replace `codex` with another supported agent identifier, such as `claude`,
 `copilot`, `cursor`, or `gemini`.
 
-On your first run, select the **Balanced** network policy. It permits common
-development services and blocks other destinations by default.
+The first time you run a sandbox, `sbx` asks you to choose a default network
+policy. This policy controls which external services your sandboxes can reach.
+Select **Balanced** to permit common development services and block other
+destinations by default. You can change these rules later with
+[`sbx policy`](/manuals/ai/sandboxes/governance/access-controls/local.md).
 
 The built-in integrations start coding agents in their full-autonomy mode. For
 example, Codex bypasses approvals, Claude Code skips permission prompts, and
@@ -90,10 +94,10 @@ appear in your working tree, so you can inspect them with your usual tools:
 $ git diff
 ```
 
-The project directory is shared read-write. The agent can modify or delete
-files in that directory, so keep your work under version control. Everything
-around the project—the agent process, installed packages, Docker objects, and
-system files—stays inside the sandbox.
+Your project directory is the exception to the sandbox boundary. It is shared
+read-write, so the agent can modify or delete its files and you can see those
+changes immediately. Keep your work under version control. Tools the agent
+installs and changes to the sandbox's operating system stay inside the sandbox.
 
 ## Return or start over
 
@@ -109,8 +113,8 @@ When you want a clean environment, remove the sandbox:
 $ sbx rm my-project
 ```
 
-Removing the sandbox deletes its packages, containers, images, and system
-changes. Your project directory and imported skills remain on your host.
+Removing the sandbox deletes the environment and everything installed inside
+it. It doesn't delete your project directory.
 
 ## What changed
 
