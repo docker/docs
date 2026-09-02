@@ -34,6 +34,10 @@ and collaborative ownership are not part of the initial release.
 
 ## How does a sandbox access external services?
 
+By default, every new sandbox uses the **Open** user policy, regardless of
+sandbox type. **Open** allows access to all outbound destinations. To restrict
+egress, replace **Open** with **Balanced**, a custom policy, or no user policy.
+
 Network policies control the destinations a sandbox can reach. The sandbox
 type's read-only kit policy applies automatically, and you can select zero or
 more user policies when you create the sandbox. If you select no user policies,
