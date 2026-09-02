@@ -18,7 +18,7 @@ aliases:
 > [!TIP]
 > Docker Agentic Platform signups receive a one-time promotional
 > credit toward cloud compute usage. To review your balance, see
-> [Credits](/manuals/subscription-billing/_index.md#credits).
+> [Credits](/manuals/subscription-billing/manage/_index.md#credits).
 
 [Docker Agentic Platform](https://agentic-platform.docker.com/) is a
 pay-as-you-go plan for running agent and tool workloads in isolated
@@ -81,4 +81,4 @@ the plan period.
 - To add or cancel a plan, see
   [Manage plans](/manuals/subscription-billing/manage/plans.md)
 - To track usage across plans, see
-  [Usage](/manuals/subscription-billing/_index.md#usage)
+  [Usage](/manuals/subscription-billing/manage/_index.md#usage)

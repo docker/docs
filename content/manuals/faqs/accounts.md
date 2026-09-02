@@ -140,14 +140,14 @@ seat in each organization.
 #### Can I use a parent company if some of my organizations don’t have a Docker Business subscription?
 
 Yes, but you can only add organizations with a Docker Business subscription
-to a company. For more details, see [Add more organizations](/manuals/accounts/organization/company/manage.md#add-more-organizations).
+to a company. For more details, see [Add more organizations](/manuals/accounts/company/manage.md#add-more-organizations).
 
 #### What happens if one of my organizations downgrades from Docker Business, but I still need access as a company owner?
 
 To access and manage a nested organization, it must have a Docker Business
 subscription. If an organization downgrades from Docker Business, its owner must
 manage it outside of the company. For more details, see
-[Add more organizations](/manuals/accounts/organization/company/manage.md#add-more-organizations).
+[Add more organizations](/manuals/accounts/company/manage.md#add-more-organizations).
 
 #### Do company owners occupy a subscription seat?
 

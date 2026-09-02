@@ -6,7 +6,7 @@ description:
   organizations.
 keywords:
   docker products, docker subscriptions, docker core, ai governance, dhi select,
-  docker build cloud, gordon plans, docker agentic platform, product catalog
+  docker build cloud, gordon plans, product catalog
 weight: 10
 aliases:
   - /subscription/plans/
@@ -43,11 +43,20 @@ grid:
 > Interested in pricing details? Check out the
 > <a href="https://www.docker.com/pricing/" id="dkr_docs_index_pricing" class="link" rel="noopener">pricing page</a> to compare plans.
 
-To subscribe to a plan, see [Manage plans](../manage.md) or [Docker plans](docker.md). Plans can be tied to personal or organization account types, and include options to extend usage limits.
+Docker plans attach to a personal account, an organization, or a specific
+product. Personal plans (Docker Personal and Docker Pro) upgrade an individual
+account. Organization plans (Docker Team and Docker Business) upgrade an
+organization. Product add-ons add usage or features without changing that
+account's Docker plan type: Gordon increases usage on a personal account, and
+DHI, AI Governance, and DVP add product features on an organization.
 
-This section covers usage entitlements, billing cycle, and plan management options for each available plan.
+Topping up extends a plan's entitlements, such as seats, licenses, or
+minutes, without changing the plan type. For the units you can top up, see
+[Top up your plan](/manuals/subscription-billing/_index.md#top-up-your-plan).
 
-To manage your plans by adding a new plan or upgrading an active plan, see [Manage plans](/manuals/subscription-billing/manage/plans.md).
+Each plan page covers usage entitlements, billing cycle, and management
+options. To add or upgrade a plan, see
+[Manage plans](/manuals/subscription-billing/manage/plans.md).
 
 ## Product catalog
 

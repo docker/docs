@@ -10,6 +10,8 @@ aliases:
 weight: 20
 ---
 
+{{< summary-bar feature_name="2FA" >}}
+
 This page explains how to recover your Docker account and manage recovery codes for two-factor authentication.
 
 ## Generate a new recovery code

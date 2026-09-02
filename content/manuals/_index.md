@@ -95,6 +95,14 @@ params:
     description: Frequently asked questions about Docker accounts, organizations, companies, subscriptions, billing, and security.
     icon: question-mark-circle
     link: /faqs/
+  - title: Support
+    description: Support options for paid subscriptions and community resources.
+    icon: chat-bubble-left
+    link: /support/
+  - title: Release notes
+    description: Features, bug fixes, and breaking changes for Docker Home, billing, security, and subscriptions.
+    icon: document-plus
+    link: /platform-release-notes/
   enterprise:
   - title: Deploy Docker Desktop
     description: Deploy Docker Desktop at scale within your company

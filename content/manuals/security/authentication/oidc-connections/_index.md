@@ -35,19 +35,8 @@ GitHub follows these steps:
 All tokens created and exchanged during an OIDC workflow are short-lived
 and issued on a per-workflow basis.
 
-## OIDC connections and OATs
-
-[Organization access tokens (OATs)](/manuals/security/access-tokens/organization-access-tokens.md)
-provide programmatic access to your Docker resources at the organization
-level. Unlike personal access tokens, OATs aren't tied to individual
-members, so access continues when membership changes.
-
-OIDC connections don't replace OATs. OIDC connections authenticate a
-workflow as if it were a user, then authorize access after authentication.
-
-While OATs govern access to your Docker resources through organization
-membership, OIDC connections authenticate GitHub Actions workflows when
-they request a change to your Docker resources.
+For how OIDC connections compare to organization access tokens, see
+[Access tokens](/manuals/security/access-tokens/_index.md).
 
 ## Next steps
 

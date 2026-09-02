@@ -69,7 +69,7 @@ You can upgrade active plans from the billing Overview page.
 Docker displays available account credits in the billing portal. Credits
 offset eligible usage automatically before Docker charges your payment
 method. To review credit balance and applied credits, see
-[Credits](/manuals/subscription-billing/_index.md#credits).
+[Credits](/manuals/subscription-billing/manage/_index.md#credits).
 
 Credits apply to
 [Docker Agentic Platform](/manuals/subscription-billing/plans/docker-agentic-platform.md).

@@ -186,7 +186,7 @@ settings, along with your chosen method for [enforcing sign-in](/manuals/enterpr
 
 If you have more than one organization, consider either [consolidating them
 into one organization](/manuals/accounts/organization/setup/orgs.md) or creating a
-[Docker company](/manuals/accounts/organization/company/_index.md) to manage multiple
+[Docker company](/manuals/accounts/company/_index.md) to manage multiple
 organizations.
 
 ### Begin setup

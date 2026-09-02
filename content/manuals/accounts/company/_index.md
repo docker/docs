@@ -1,18 +1,18 @@
 ---
 title: Company overview
-linkTitle: Companies
-weight: 30
+linkTitle: Company
+weight: 20
 description: Learn how to manage multiple organizations using companies, including managing users, owners, and security.
 keywords: company, multiple organizations, manage companies, Docker Home, Docker Business settings
 grid:
   - title: Create a company
     description: Get started by learning how to create a company.
     icon: building-office-2
-    link: /accounts/organization/company/new-company/
+    link: /accounts/company/new-company/
   - title: Manage your company
     description: Add organizations, manage company owners, and invite members.
     icon: building-storefront
-    link: /accounts/organization/company/manage/
+    link: /accounts/company/manage/
   - title: Configure SSO and SCIM
     description: Set up single sign-on and SCIM provisioning for your company.
     icon: key
@@ -39,13 +39,21 @@ and manage it through Docker Home.
 
 ## Company structure
 
-The following diagram shows how a company relates to its associated
-organizations.
+A company sits at the top of the hierarchy and groups multiple Docker
+organizations for centralized configuration. Companies are only available
+for Docker Business subscribers.
 
-![Diagram showing how companies relate to Docker organizations](/accounts/organization/images/docker-admin-structure.webp)
+![Diagram showing Docker’s administration hierarchy with Company at the top, followed by Organizations, Teams, and Members](../organization/images/docker-admin-structure.webp)
 
-For the full administration hierarchy, see
-[Company and organization hierarchy](/manuals/accounts/organization/_index.md#company-and-organization-hierarchy).
+An organization sits below the company. You group teams and members there
+and assign access to repositories. Every Docker Team and Business
+subscriber has at least one organization.
+
+For organization structure, including teams and members, see
+[Organization accounts](/manuals/accounts/organization/_index.md).
+
+[Upgrading to a Docker Business plan](https://www.docker.com/pricing?ref=Docs&refAction=DocsAdmin)
+grants you the company owner role so you can manage multiple organizations.
 
 ## Company roles
 
@@ -63,7 +71,7 @@ organization owners.
     automatically adds them as an organization member.
 
 To add or remove company owners, see
-[Manage your company](/manuals/accounts/organization/company/manage.md#company-owners).
+[Manage your company](/manuals/accounts/company/manage.md#company-owners).
 
 ## Next steps
 

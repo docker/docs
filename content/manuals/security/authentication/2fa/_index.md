@@ -13,6 +13,8 @@ aliases:
  - /platform/security/authentication/2fa/
 ---
 
+{{< summary-bar feature_name="2FA" >}}
+
 Two-factor authentication (2FA) adds an essential security layer to your Docker account by requiring a unique security code in addition to your password when signing in. This prevents unauthorized access even if your password is compromised.
 
 When you turn on two-factor authentication, Docker provides a unique recovery code specific to your account. Store this code securely as it lets you recover your account if you lose access to your authenticator app.

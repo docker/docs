@@ -9,7 +9,7 @@ keywords: accounts, docker ID, username, email, Google, GitHub, sign-in,
   organization account, account types, Docker Hub, SSO, deactivate account
 weight: 10
 grid:
-  - title: Create an account
+  - title: Set up your account
     description: Get started with Docker and create an account.
     icon: finger-print
     link: /accounts/individual/create-account/
@@ -38,9 +38,9 @@ grid:
 A Docker account is how Docker identifies you. Use it to access products like
 Docker Hub and Docker Desktop, manage settings, and join organizations.
 
-Docker has two primary account types: individual and organization. You create
-and administer organizations with your individual account. For organization
-accounts, including companies, see
+For how individual, organization, and company accounts compare, see
+[Accounts](/manuals/accounts/_index.md). For organization accounts, including
+companies, see
 [Organization accounts](/manuals/accounts/organization/_index.md).
 
 ## Docker ID, email, and sign-in

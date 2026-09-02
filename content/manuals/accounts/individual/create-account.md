@@ -1,6 +1,6 @@
 ---
 title: Create a Docker account
-linkTitle: Create
+linkTitle: Setup
 weight: 10
 description: Create a Docker ID with email, Google, or GitHub, then verify your
   account

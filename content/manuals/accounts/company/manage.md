@@ -47,7 +47,7 @@ longer manage it through the company, and its owner must manage it separately.
 
 A company can have multiple owners who manage the company and all of its
 organizations. For details about the company owner role and how it affects
-seats, see [Company roles](/manuals/accounts/organization/company/_index.md#company-roles).
+seats, see [Company roles](/manuals/accounts/company/_index.md#company-roles).
 
 ### Add a company owner
 

@@ -12,6 +12,8 @@ aliases:
  - /platform/security/access-tokens/personal-access-tokens/
 ---
 
+{{< summary-bar feature_name="PATs" >}}
+
 Personal access tokens (PATs) provide a secure alternative to passwords for Docker CLI authentication. Use PATs to authenticate automated systems, CI/CD pipelines, and development tools without exposing your Docker Hub password.
 
 ## Key benefits

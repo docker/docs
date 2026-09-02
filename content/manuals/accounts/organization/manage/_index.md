@@ -9,6 +9,18 @@ grid:
     description: Invite, manage, and assign roles to your organization members.
     icon: user-plus
     link: /accounts/organization/manage/members/
+  - title: Teams
+    description: Create teams and manage repository access for groups of members.
+    icon: user-group
+    link: /accounts/organization/manage/manage-a-team/
+  - title: Seats
+    description: Add or remove seats for Docker Team and Business subscriptions.
+    icon: user-circle
+    link: /accounts/organization/manage/manage-seats/
+  - title: Licenses
+    description: Assign and revoke product licenses for organization members.
+    icon: key
+    link: /accounts/organization/manage/manage-licenses/
   - title: Product access and usage
     description: Manage access and view usage for Docker products across your organization.
     icon: squares-2x2

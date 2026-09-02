@@ -30,7 +30,7 @@ grid:
 ---
 
 Answers to common questions about Docker accounts, organizations, companies,
-subscriptions, billing, security, authentication, and related topics.
+subscriptions, billing, and security.
 
 ## Next steps
 
