@@ -82,7 +82,7 @@ see [Data handling](/manuals/scout/deep-dive/data-handling.md).
 4. Set up your Scout credentials.
 
    1. Generate an organization access token. For more details, see
-      [Create an organization access token](/enterprise/security/access-tokens/#create-an-organization-access-token).
+      [Create an organization access token](/manuals/security/access-tokens/organization-access-tokens.md#create-an-organization-access-token).
    2. Sign in to Docker using the organization access token.
 
       ```console
