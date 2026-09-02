@@ -6,6 +6,14 @@ keywords: Docker, get started, containerize application, containers, Docker Comp
 weight: 1
 aliases:
   - /get-started/run-an-app/
+  - /get-started/introduction/
+  - /get-started/introduction/develop-with-containers/
+  - /get-started/introduction/build-and-push-first-image/
+  - /get-started/introduction/whats-next/
+  - /guides/getting-started/
+  - /guides/getting-started/develop-with-containers/
+  - /guides/getting-started/build-and-push-first-image/
+  - /guides/getting-started/whats-next/
 ---
 
 An application can depend on a particular runtime, libraries, database, and
@@ -163,6 +171,15 @@ You ran software packaged by someone else, started a multi-container
 application with Compose, built your own image, and published it. An image
 packages an application, a container runs that image, Compose coordinates
 multiple containers, and a registry makes images available beyond one machine.
+
+## What's next
+
+Explore the concepts from this tutorial in more detail:
+
+- [What is a container?](../docker-concepts/the-basics/what-is-a-container.md)
+- [What is an image?](../docker-concepts/the-basics/what-is-an-image.md)
+- [What is Docker Compose?](../docker-concepts/the-basics/what-is-docker-compose.md)
+- [What is a registry?](../docker-concepts/the-basics/what-is-a-registry.md)
 
 Choose a language-specific [Docker guide](/guides/) to containerize an
 application of your own.

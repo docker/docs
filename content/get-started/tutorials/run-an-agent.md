@@ -122,5 +122,13 @@ You kept your project, agent, skills, credentials, and prompting workflow. The
 only essential change was launching the agent with `sbx run`. That moved its
 full-autonomy execution into an environment you control and can throw away.
 
-Continue with the [Docker Sandboxes documentation](/manuals/ai/sandboxes/_index.md)
-to configure tighter network, filesystem, and tool policies.
+## What's next
+
+Continue with the Docker Sandboxes manuals:
+
+- [Manage your sandboxes](/manuals/ai/sandboxes/usage.md) with day-to-day
+  commands
+- [Configure your coding agent](/manuals/ai/sandboxes/agents/_index.md) for its
+  authentication and settings
+- [Review the security defaults](/manuals/ai/sandboxes/security/defaults.md) for
+  workspace, network, and credential access

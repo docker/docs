@@ -11,7 +11,8 @@ reference material for everyday development and operations tasks.
 
 ## Browse docs by area
 
-- [Get started](/get-started/): Run an application or sandbox an AI agent.
+- [Get started](/get-started/): Run an application, sandbox an AI agent, or
+  roll out Docker.
 - [Guides](/guides/): Follow task-focused walkthroughs for common workflows.
 - [Manuals](/manuals/): Install, configure, and use Docker products.
 - [Reference](/reference/): Browse CLI, API, and file format documentation.
