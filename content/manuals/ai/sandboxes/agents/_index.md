@@ -3,31 +3,22 @@ title: Supported agents
 linkTitle: Agents
 weight: 40
 description: AI coding agents supported by Docker Sandboxes.
-keywords: docker sandboxes, ai agents, claude code, codex, copilot, cursor, devin, droid, gemini, kiro, sandbox kits
-aliases:
-  - /ai/sandboxes/agents/copilot/
-  - /ai/sandboxes/agents/droid/
-  - /ai/sandboxes/agents/kiro/
+keywords: docker sandboxes, ai agents, claude code, codex, cursor, devin, gemini
 ---
 
 Docker Sandboxes runs the following agents out of the box:
 
 - [Claude Code](claude-code/)
 - [Codex](codex/)
+- [Copilot](copilot/)
 - [Cursor](cursor/)
 - [Devin](devin/)
 - [Docker Agent](docker-agent/)
+- [Droid](droid/)
 - [Gemini](gemini/)
+- [Kiro](kiro/)
 - [OpenCode](opencode/)
 - [Shell](shell/) — agent-less sandbox for manual setup or testing
-
-Copilot, Droid, and Kiro are available as community kits:
-
-```console
-$ sbx run docker.io/sbx/copilot-kit:latest
-$ sbx run docker.io/sbx/droid-kit:latest
-$ sbx run docker.io/sbx/kiro-kit:latest
-```
 
 Want to pre-install tools or customize an agent's environment?
 See [Customize](../customize/).

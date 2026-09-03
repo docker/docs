@@ -111,9 +111,11 @@ file removes. In this table, `~` is `/home/agent`.
 | ------------------ | --------------------------- |
 | `claude` | `~/.claude.json`, `~/.claude/settings.json`, `~/.claude/.config.json` |
 | `codex` | `~/.codex/config.toml` |
+| `copilot` | `~/.copilot/config.json` |
 | `cursor` | `~/.cursor/cli-config.json` |
 | `devin` | `~/.config/devin/config.json`, `~/.config/devin/mcp_config.json` |
 | `gemini` | `~/.gemini/settings.json` |
+| `kiro` | `~/.kiro/settings/mcp.json` |
 | `opencode` | `~/.config/opencode/opencode.json` |
 
 Use a separate settings layer when the agent supports one. For example, Claude
