@@ -167,7 +167,7 @@ policy's Rego metadata, or override it per policy in the policy-config file:
 {
   "policies": [
     {
-      "name": "no-copyleft-licenses",
+      "name": "copyleft-license",
       "weight": 0
     }
   ]
