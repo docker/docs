@@ -3,7 +3,7 @@ description: Migrate from Autobuilds to CI/CD workflows
 keywords: automated builds, autobuilds, migration, github actions, bitbucket pipelines
 title: Migrate from Autobuilds
 linkTitle: Migrate
-weight: 80
+weight: 1
 ---
 
 > [!WARNING]
