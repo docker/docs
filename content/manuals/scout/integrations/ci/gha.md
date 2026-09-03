@@ -110,7 +110,7 @@ This creates workflow steps to:
 > and leave `sbom` / `provenance` off so the image can land in the runner's
 > local store.
 >
-> On push events the same job turns SBOM and provenance on and `push`es to
+> On push events the same job turns SBOM and provenance on and pushes to
 > the registry. Don't enable those attestations (or a multi-platform build)
 > on the PR path — those images can't be loaded locally, and compare would
 > have nothing to inspect.
