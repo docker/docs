@@ -296,7 +296,7 @@ features:
 | subscription | Subscription tier required            | All, Personal, Pro, Team, Business                |
 | availability | Product development stage             | Experimental, Beta, Early Access, GA, Retired     |
 | requires     | Minimum version requirement           | String describing version (link to release notes) |
-| for          | Indicates administrator-only features | Administrators                                    |
+| for          | Audience for the feature              | Administrators, Individuals                       |
 
 ### Buttons
 

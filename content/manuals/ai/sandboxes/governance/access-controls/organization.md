@@ -23,10 +23,10 @@ programmatic management of network and filesystem policies, use the
 [Governance API](/reference/api/ai-governance/).
 
 By default, only organization
-[owners](/manuals/enterprise/security/roles-and-permissions/core-roles.md) can
+[owners](/manuals/security/roles-and-permissions/core-roles.md) can
 view and manage AI Governance policies. To let someone other than an owner
 manage policies, create a
-[custom role](/manuals/enterprise/security/roles-and-permissions/custom-roles/_index.md)
+[custom role](/manuals/security/roles-and-permissions/custom-roles/_index.md)
 with the **Governance** permissions and assign it to a user or team.
 
 > [!NOTE]
@@ -108,13 +108,13 @@ it only to members of the teams you select.
 ### Before you start
 
 Team scoping targets your organization's existing
-[teams](/manuals/admin/organization/manage/manage-a-team.md), so a team must
+[teams](/manuals/accounts/organization/manage/manage-a-team.md), so a team must
 exist before you can scope a policy to it. Create teams and manage their members
 in one of two ways:
 
 - Manually, in Docker Home.
 - Automatically, by using
-  [group mapping](/manuals/enterprise/security/provisioning/scim/group-mapping.md)
+  [group mapping](/manuals/security/provisioning/scim/group-mapping.md)
   to synchronize your identity provider's groups with the teams in your
   organization. Group mapping creates teams that don't already exist and keeps
   their membership in step with your IdP groups.

@@ -65,6 +65,6 @@ Account-level configuration can be reused across sandboxes:
 
 To begin, open [Docker Agentic Platform](https://agentic-platform.docker.com/)
 and sign in with your Docker account. Docker meters sandbox compute per second.
-For account and payment information, see [Docker Billing](/billing/).
+For account and payment information, see [Docker Billing](/subscription-billing/).
 
 {{< grid >}}

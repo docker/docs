@@ -140,10 +140,11 @@ function FindProxyForURL(url, host) {
 ### General considerations
 
  - `FindProxyForURL` function URL parameter format is `http://host_or_ip:port` or `https://host_or_ip:port`
- - If you have an internal container trying to access `https://docs.docker.com/enterprise/security/hardened-desktop/air-gapped-containers` the Docker proxy service will submit docs.docker.com for the host value and https://docs.docker.com:443 for the url value to `FindProxyForURL`, if you are using `shExpMatch` function in your PAC file as follows:
+ - If you have an internal container trying to access `https://docs.docker.com/enterprise/security/hardened-desktop/air-gapped-containers` the Docker proxy service will submit docs.docker.com for the host value and https://docs.docker.com:443 for the URL value to `FindProxyForURL`, if you are using `shExpMatch` function in your PAC file as follows:
 
+   <!-- vale off -->
    ```console
-   if(shExpMatch(url, "https://docs.docker.com:443/enterprise/security/*")) return "DIRECT";
+   if(shExpMatch(url, "https://docs.docker.com:443/enterprise/security/hardened-desktop/*")) return "DIRECT";
    ```
 
    `shExpMatch` function will fail, instead use:
@@ -151,6 +152,7 @@ function FindProxyForURL(url, host) {
    ```console
    if (host == docs.docker.com && url.indexOf(":443") > 0) return "DIRECT";
    ```
+   <!-- vale on -->
 
 ### PAC file return values
 

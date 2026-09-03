@@ -4982,7 +4982,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 ### New
 
 - Easy, Secure sign in with Auth0 and Single Sign-on
-  - Single Sign-on: Users with a Docker Business subscription can now configure SSO to authenticate using their identity providers (IdPs) to access Docker. For more information, see [Single Sign-on](/manuals/enterprise/security/single-sign-on/_index.md).
+  - Single Sign-on: Users with a Docker Business subscription can now configure SSO to authenticate using their identity providers (IdPs) to access Docker. For more information, see [Single Sign-on](/manuals/security/authentication/single-sign-on/_index.md).
   - Signing in to Docker Desktop now takes you through the browser so that you get all the benefits of auto-filling from password managers.
 
 ### Upgrades
@@ -4994,7 +4994,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 ### Security
 
-- Fixed [CVE-2021-45449](../security/_index.md#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
+- Fixed [CVE-2021-45449](../security/security-announcements.md#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
 
 Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
 This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
@@ -5034,7 +5034,7 @@ This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user 
 
 ### Security
 
-- Fixed [CVE-2021-45449](../security/_index.md#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
+- Fixed [CVE-2021-45449](../security/security-announcements.md#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
 
 Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
 This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
@@ -5261,7 +5261,7 @@ The updated [Docker Subscription Service Agreement](https://www.docker.com/legal
 - **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
 
 To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq).
-For more information, see [Docker subscription overview](../subscription/_index.md).
+For more information, see [Docker subscription overview](../subscription-billing/_index.md).
 
 ### Upgrades
 

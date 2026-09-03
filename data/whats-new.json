@@ -6,7 +6,7 @@
       "product": "Docker Verified Publisher",
       "title": "Join Docker Verified Publisher through self-service plans",
       "description": "Apply for DVP Starter or Growth, complete checkout after approval, and manage publisher analytics, tracked companies, and billing.",
-      "url": "/subscription/plans/docker-verified-publisher/",
+      "url": "/subscription-billing/plans/docker-verified-publisher/",
       "published": "2026-08-20",
       "source_prs": [25891, 25903],
       "featured": true

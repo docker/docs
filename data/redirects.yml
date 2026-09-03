@@ -10,7 +10,7 @@
 # in its help output, which can be redirected to elsewhere in the documentation.
 "/learn/":
   - /learn
-"/security/access-tokens/":
+"/security/access-tokens/personal-access-tokens/":
   - /go/access-tokens/
 "/agentic-platform/":
   - /go/dap/
@@ -320,7 +320,7 @@
   - /go/settings-management/
 
 # Billing - cancellation
-"/subscription/desktop-license/":
+"/subscription-billing/desktop-license/":
   - /go/desktop-license/
 "/docker-hub/usage/pulls/":
   - /go/hub-pull-limits/

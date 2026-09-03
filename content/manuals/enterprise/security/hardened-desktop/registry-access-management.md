@@ -45,7 +45,7 @@ Before configuring Registry Access Management, you must:
   Registry Access Management only takes effect when users are signed in to
   Docker Desktop with organization credentials.
 - Use
-  [Organization access tokens (OATs)](/manuals/enterprise/security/access-tokens.md)
+  [Organization access tokens (OATs)](/manuals/security/access-tokens/organization-access-tokens.md)
   for authentication
 - Have a Docker Business subscription
 
