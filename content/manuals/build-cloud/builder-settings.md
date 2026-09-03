@@ -56,6 +56,14 @@ To get more Build cache space, [upgrade your subscription](/manuals/subscription
 
 ## Private resource access
 
+> [!IMPORTANT]
+>
+> Private resource access requires the private Buildx client. The `cloud`
+> driver in standard Buildx doesn't support this feature. If your cloud builder
+> uses private resource access, continue using the
+> [latest private Buildx release](https://github.com/docker/buildx-desktop/releases/latest)
+> until the feature is supported in standard Buildx.
+
 Private resource access lets cloud builders pull images and packages from private resources. This feature is useful when builds rely on self-hosted artifact repositories or private OCI registries.
 
 For example, if your organization hosts a private [PyPI](https://pypi.org/) repository on a private network, Docker Build Cloud would not be able to access it by default, since the cloud builder is not connected to your private network.

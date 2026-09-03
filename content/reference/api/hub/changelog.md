@@ -15,6 +15,19 @@ issues for Docker Service APIs.
 
 ---
 
+## 2026-09-01
+
+### Updates
+
+- Document that [Update org member (role)](/reference/api/hub/latest/#tag/orgs)
+  accepts a custom role name in `role`.
+- Document the `role` field on
+  [Update some details for an organization group](/reference/api/hub/latest/#tag/groups).
+- Add `Editor` to `org_member.role` on
+  [organization members](/reference/api/hub/latest/#tag/orgs).
+
+---
+
 ## 2026-08-27
 
 ### Updates
