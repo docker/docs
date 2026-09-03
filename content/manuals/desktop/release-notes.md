@@ -1536,7 +1536,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New 
 
-- [Docker Agent](/manuals/ai/docker-agent/_index.md) is now available through Docker Desktop. 
+- [Docker Agent](/manuals/ai/docker-agent.md) is now available through Docker Desktop.
 - [Docker Debug](/reference/cli/docker/debug/) is now free for all users. 
 
 ### Upgrades

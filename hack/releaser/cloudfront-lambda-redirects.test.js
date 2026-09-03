@@ -27,6 +27,10 @@ const REDIRECTS = {
 const REDIRECTS_PREFIXES = [
   { prefix: "keep/", strip: false },
   { prefix: "strip/", strip: true },
+  {
+    prefix: "external/",
+    target: "https://example.com/docs/",
+  },
 ];
 
 // Render the template the same way getLambdaFunctionZip in aws.go does, then
@@ -139,6 +143,21 @@ test("prefix redirect (no strip) preserves the query string", async () => {
   });
   assert.equal(result.status, "301");
   assert.equal(locationOf(result), "/?utm_source=x");
+});
+
+test("fixed-target prefix redirect preserves the query string", async () => {
+  const { result } = await invoke({
+    uri: "/external/removed-page/",
+    querystring: "utm_source=x",
+  });
+  assert.equal(result.status, "301");
+  assert.equal(locationOf(result), "https://example.com/docs/?utm_source=x");
+});
+
+test("fixed-target prefix redirect leaves the prefix root unchanged", async () => {
+  const { result, request } = await invoke({ uri: "/external/" });
+  assert.equal(result, request);
+  assert.equal(request.uri, "/external/index.html");
 });
 
 test("directory rewrite passes the request through with query string intact", async () => {

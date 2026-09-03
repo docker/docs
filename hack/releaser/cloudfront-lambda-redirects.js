@@ -53,8 +53,13 @@ exports.handler = (event, context, callback) => {
     if (!request.uri.startsWith(`/${rp["prefix"]}`)) {
       continue;
     }
+    if (rp["target"] && requestUrl === `/${rp["prefix"]}`.replace(/\/$/, "")) {
+      continue;
+    }
     let newlocation = "/";
-    if (rp["strip"]) {
+    if (rp["target"]) {
+      newlocation = rp["target"];
+    } else if (rp["strip"]) {
       let re = new RegExp(`(^/${rp["prefix"]})`, "gi");
       newlocation = request.uri.replace(re, "/");
     }
