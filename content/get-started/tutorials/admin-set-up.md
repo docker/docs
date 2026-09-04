@@ -66,11 +66,13 @@ Docker Desktop checks for policy updates when it starts and every 60 minutes
 while running. Fully quitting and reopening it applies the policy without
 waiting for the next check.
 
-## What you proved
+## What you learned
 
 You added a user, targeted a policy, and verified the managed Docker
 Desktop experience before applying controls across the organization. Use the
 pilot's feedback to refine the policy and its deployment communication.
+
+## What's next
 
 Continue with these guides when you're ready to expand the deployment:
 

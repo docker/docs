@@ -52,18 +52,29 @@ This feature is experimental. See
 [Share agent skills](/manuals/ai/sandboxes/workflows/agent-skills.md) for
 supported agents and security considerations.
 
-If your model-provider API keys are already exported in your shell, import them
-into the `sbx` credential store:
+## Choose how to authenticate
+
+Your agent needs access to a model provider. Subscription sign-in uses OAuth,
+while API keys are stored on your host and supplied to the agent through the
+sandbox proxy. Choose your agent and authentication method for the preparation
+steps:
+
+{{< sandbox-auth >}}
+
+If you already exported a supported API key in your shell, you can import it
+instead of setting it separately:
 
 ```console
 $ sbx secret import --dry-run
 $ sbx secret import
 ```
 
-You can skip this command when you use a subscription or OAuth. Your agent
-prompts you to authenticate when it starts. See
+The dry run shows which exported keys `sbx` found. The import command prompts
+you to confirm each key before storing it. If the dry run finds nothing, use
+the `sbx secret set` command from the picker. See
 [Credentials](/manuals/ai/sandboxes/configuration/credentials.md) for other
-secret sources and provider-specific commands.
+secret sources and [supported coding agents](/manuals/ai/sandboxes/agents/_index.md)
+for agent-specific authentication.
 
 ## Run your agent
 
