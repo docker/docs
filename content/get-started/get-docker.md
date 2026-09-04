@@ -12,6 +12,8 @@ aliases:
  - /get-docker/
  - /desktop/install/
  - /desktop/setup/install/
+ - /get-started/introduction/get-docker-desktop/
+ - /getting-started/get-docker-desktop/
 ---
 
 Docker is an open platform for developing, shipping, and running applications.

@@ -1,47 +1,34 @@
 ---
 title: Get started
-keywords: Docker, get started
-description: Get started with Docker
-layout: wide
+keywords: Docker, get started, containers, AI agents, sandboxes, administration
+description: Choose a tutorial to build and run an application, work with an AI agent safely, or set up Docker for your organization.
+layout: get-started
 params:
-  icon: arrow-down-tray
   notoc: true
-  get-started:
-  - title: Get Docker
-    description: Choose the best installation path for your setup.
-    link: /get-started/get-docker/
-    icon: arrow-down-tray
-  - title: What is Docker?
-    description: Learn about the Docker platform.
-    link: /get-started/docker-overview/
-    icon: document-text
-  get-started2:
-  - title: Introduction
-    description: Get started with the basics and the benefits of containerizing your applications.
-    link: /get-started/introduction/
-    icon: rocket-launch
-  - title: Docker concepts
-    description: Gain a better understanding of foundational Docker concepts.
-    link: /get-started/docker-concepts/the-basics/what-is-a-container/
-    icon: home
+  installs:
+    - eyebrow: Docker
+      title: Install Docker
+      description: Get Docker Desktop or Docker Engine for your operating system.
+      link: /get-started/get-docker/
+    - eyebrow: Docker Sandboxes
+      title: Install Docker Sandboxes
+      description: Install the sbx command to run coding agents in isolated environments.
+      link: /ai/sandboxes/install/
+  tutorials:
+    - audience: New to Docker
+      title: Build and share a containerized application
+      description: Run a container and an application stack, build an image, and share it through Docker Hub.
+      link: /get-started/tutorials/run-an-app/
+    - audience: AI developers
+      title: Run your coding agent in a sandbox
+      description: Move your existing full-autonomy coding-agent workflow into a disposable Docker Sandbox.
+      link: /get-started/tutorials/run-an-agent/
+    - audience: Administrators
+      title: Roll out Docker to a pilot group
+      description: Invite a pilot user, apply a Docker Desktop policy, and verify the managed experience.
+      link: /get-started/tutorials/admin-set-up/
 aliases:
   - /engine/get-started/
   - /engine/tutorials/usingdocker/
   - /guides/getting-started/get-docker-desktop/
 ---
-
-If you're new to Docker, this section guides you through the essential resources to get started.
-
-Follow the guides to help you get started and learn how Docker can optimize your development workflows. 
-
-For more advanced concepts and scenarios in Docker, see [Guides](/guides/).
-
-## Foundations of Docker
-
-Install Docker and jump into discovering what Docker is. 
-
-{{< grid items="get-started" >}}
-
-Learn the foundational concepts and workflows of Docker.
-
-{{< grid items="get-started2" >}}
