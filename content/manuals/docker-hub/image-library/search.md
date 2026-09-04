@@ -25,6 +25,7 @@ specific needs of developers and organizations. These products include:
 
 - Images
 - Extensions
+- Sandbox kits
 - Helm charts
 - Compose files
 - AI models
@@ -70,6 +71,20 @@ Desktop's interface.
 
 To learn more about extensions, see [Docker
 Extensions](/manuals/extensions/_index.md).
+
+#### Sandbox kits
+
+Docker Hub hosts kits for [Docker Sandboxes](/manuals/ai/sandboxes/_index.md),
+which run AI coding agents in isolated microVM sandboxes. A kit packages what
+an agent needs to run in a sandbox, such as its image, tools, credentials,
+network rules, and startup commands. Sandbox kits come in two kinds:
+
+- Sandbox: Defines a full agent from scratch, including its image and
+  entrypoint.
+- Mixin: Layers tools, credentials, or configuration onto an existing agent.
+
+To learn more about building and running kits, see
+[Kits](/manuals/ai/sandboxes/customize/kits.md).
 
 #### Helm charts
 
@@ -241,3 +256,16 @@ extension has been reviewed by Docker for quality and reliability.
 >
 > The **Reviewed by Docker** filter is only available for extensions. To make
 > the filter available, you must select only the **Extensions** filter in **Products**.
+
+### Sandbox Kit type
+
+The **Sandbox Kit type** filter lets you narrow sandbox kit results by kind.
+
+- **Sandbox**: Kits that define a full agent from scratch.
+- **Mixin**: Kits that layer onto an existing agent's sandbox.
+
+> [!NOTE]
+>
+> The **Sandbox Kit type** filter is only available for sandbox kits. To make
+> the filter available, you must select only the **Sandbox kits** filter in
+> **Products**.

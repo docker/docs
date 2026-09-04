@@ -1,16 +1,17 @@
 ---
-description: Explore specialized Docker Hub collections like the generative AI catalogs.
-keywords: Docker Hub, Hub, catalog
-title: Docker Hub catalogs
-linkTitle: Catalogs
+description: Explore Docker Hub's generative AI catalogs and sandbox kits.
+keywords: Docker Hub, Hub, generative AI, catalog
+title: Docker Hub Generative AI
+linkTitle: Generative AI
 weight: 60
 ---
 
-Docker Hub catalogs are your go-to collections of trusted, ready-to-use
-container images and resources, tailored to meet specific development needs.
-They make it easier to find high-quality, pre-verified content so you can
-quickly build, deploy, and manage your applications with confidence. Catalogs in
-Docker Hub:
+Docker Hub groups its generative AI content, including curated catalogs and
+sandbox kits, under Generative AI. Catalogs are your go-to collections of
+trusted, ready-to-use container images and resources, tailored to meet
+specific development needs. They make it easier to find high-quality,
+pre-verified content so you can quickly build, deploy, and manage your
+applications with confidence. Catalogs in Docker Hub:
 
 - Simplify content discovery: Organized and curated content makes it easy to
   discover tools and resources tailored to your specific domain or technology.
@@ -19,7 +20,8 @@ Docker Hub:
 - Accelerate development: Quickly integrate advanced capabilities into your
   applications without the hassle of extensive research or setup.
 
-The following sections provide an overview of the key catalogs available in Docker Hub.
+The following sections provide an overview of the generative AI content
+available in Docker Hub.
 
 ## MCP Catalog
 
@@ -58,3 +60,13 @@ With the AI Models Catalog and Docker Model Runner, you can:
 Whether you're building generative AI applications, integrating LLMs into your
 workflows, or experimenting with machine learning tools, the AI Models Catalog
 simplifies the model management experience.
+
+## Sandbox kits
+
+[Sandbox kits](https://hub.docker.com/search?type=sbx_kit) package what an AI
+coding agent needs to run in a [Docker Sandbox](../../ai/sandboxes/_index.md):
+its image, tools, credentials, network rules, and startup commands.
+
+Each kit's Hub page shows the command to run it, in the form
+`sbx run <agent> --kit docker.io/<namespace>/<kit-name>`. To learn more about
+building and running kits, see [Kits](../../ai/sandboxes/customize/kits.md).
