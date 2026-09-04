@@ -14,7 +14,7 @@ require (
 	github.com/docker/docker-agent v1.126.0
 	github.com/docker/model-runner v1.1.36
 	github.com/moby/buildkit v0.33.0
-	github.com/moby/moby/api v1.55.0
+	github.com/moby/moby/api v1.56.0
 )
 
 tool (
