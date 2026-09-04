@@ -83,6 +83,13 @@ depends on what you register:
 Local stdio servers run on the host, not inside the sandbox. The agent inside
 the sandbox connects only to the MCP gateway.
 
+If a `--url` hostname resolves to a private, loopback, link-local, or cloud
+metadata address, `sbx` registers the server but warns you about the resolved
+address. Register only URLs you trust. Fetching a manifest from an untrusted
+URL can expose internal services or cloud metadata, and DNS rebinding can
+redirect a hostname after it has been checked. For a trusted internal server,
+pass `--skip-ssrf-check` to suppress the check and warning.
+
 ### Remote endpoint URL
 
 For a remote MCP endpoint, pass the server URL:
@@ -172,10 +179,10 @@ MCP server "notion" registered (type: remote)
 OAuth credentials stay on the host. In local gateway mode, `sbx` stores tokens
 in the host operating system's credential store.
 
-To register an OAuth-backed server without authorizing it, pass `--skip_auth`:
+To register an OAuth-backed server without authorizing it, pass `--skip-auth`:
 
 ```console
-$ sbx mcp add notion --url https://mcp.notion.com/mcp --skip_auth
+$ sbx mcp add notion --url https://mcp.notion.com/mcp --skip-auth
 ```
 
 ### Use a pre-registered OAuth client
@@ -227,9 +234,38 @@ $ sbx mcp add serverx --url https://mcp.serverx.example/mcp \
   --scope read --scope write
 ```
 
-The `sbx mcp auth` command also accepts `--scope` to override the recorded
-defaults for one authorization. If the authorization server advertises
-supported scopes, every requested scope must be in that set.
+The `sbx mcp auth` command accepts `--scope` to override the recorded defaults
+for one authorization:
+
+```console
+$ sbx mcp auth serverx --scope read
+```
+
+Unless you pass `--no-scope`, `sbx` requests the first available scope set in
+the following order:
+
+1. Scopes passed to `sbx mcp auth --scope`
+2. Default scopes recorded by `sbx mcp add --scope`
+3. Scopes that the protected resource says it requires
+
+If none of these provide a scope set, `sbx` omits the OAuth `scope` parameter so
+the authorization server applies its default grant. The authorization server's
+full advertised scope set is never requested automatically.
+
+Pass `--no-scope` to suppress both the recorded defaults and the resource's
+required scopes for one authorization:
+
+```console
+$ sbx mcp auth serverx --no-scope
+```
+
+You can't combine `--no-scope` with `--scope`. If the authorization server
+advertises supported scopes, each scope you choose must be in that set. The
+authorization server can still refuse an advertised scope for a particular
+client. For a local authorization flow, `sbx` lists the requested, advertised,
+and refused scopes and suggests a retry command. If the server identifies the
+refused scopes, the command removes them. Otherwise, it uses `--no-scope`.
+`sbx` never retries automatically.
 
 For each OAuth-backed remote server exposed to a sandbox, the gateway exposes a
 helper tool named `<server>-authorize`, such as `notion-authorize`. The agent can
@@ -245,7 +281,15 @@ $ sbx mcp auth rm notion
 ```
 
 Use `--all` to apply `auth`, `auth status`, or `auth rm` to all registered
-OAuth-backed servers. Use `--format=json` for machine-readable output.
+OAuth-backed servers. The `auth status` output reports the scopes granted by the
+authorization server, the defaults recorded with `sbx mcp add --scope`, and the
+scopes the server supports. It collapses duplicate scope names and highlights
+granted scopes that weren't requested or are no longer in the supported set.
+Use `--json` for machine-readable output:
+
+```console
+$ sbx mcp auth status notion --json
+```
 
 ## Choose an MCP mode
 
