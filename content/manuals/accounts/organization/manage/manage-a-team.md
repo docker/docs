@@ -57,6 +57,19 @@ For more information on roles, see
 1. Select **Create team**.
 1. Provide the team's information, then select **Create**.
 
+Docker opens the team view, where you can add members and assign licenses.
+
+## Assign licenses to a team
+
+Each team has a **Licenses** card that lists the product licenses the team
+assigns. Every member of the team receives those licenses, including members
+who join later.
+
+To assign licenses, open the team from **Teams**, then select the edit icon on
+the **Licenses** card. For the full procedure, what happens when you don't have
+enough licenses, and what members lose when you remove a license, see
+[Manage licenses](/manuals/accounts/organization/manage/manage-licenses.md#assign-licenses-to-a-team).
+
 ## Set team repository permissions
 
 You must create a team before you are able to configure repository permissions.
@@ -119,7 +132,10 @@ The following table shows what each permission level allows users to do:
 Organization owners can delete a team. When you remove a team from your
 organization, this action revokes member access to the team's permitted
 resources. It won't remove users from other teams that they belong to, and it
-won't delete any resources.
+won't delete any resources. Members also lose the licenses that came only from
+that team, unless another team assigns the same license or they hold a direct
+assignment. See
+[Remove or lose a license](/manuals/accounts/organization/manage/manage-licenses.md#remove-or-lose-a-license).
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.

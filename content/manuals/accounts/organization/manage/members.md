@@ -28,6 +28,12 @@ deducted from your organization's available licenses until the invitee accepts.
 See
 [Licenses and invites](/manuals/accounts/organization/manage/manage-licenses.md#licenses-and-invites).
 
+The Members page is where you assign or revoke a license for one member, using
+the action menu on their row or the **Bulk actions** menu. To assign a license
+to a whole team, or to view how many licenses your organization has, use the
+Teams and Licenses views. See
+[Manage licenses](/manuals/accounts/organization/manage/manage-licenses.md).
+
 ### Invite members via Docker ID or email address
 
 Use the following steps to invite members to your organization via Docker ID
