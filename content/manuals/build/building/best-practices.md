@@ -252,8 +252,8 @@ to look up and include the image digest for base image versions manually each
 time you want to update it. And you're opting out of automated security fixes,
 which is likely something you want to get.
 
-Docker Scout's default [**Up-to-Date Base Images**
-policy](../../scout/policy/_index.md#up-to-date-base-images) checks whether the
+Docker Scout's default [**No outdated base images**
+policy](../../scout/policy/_index.md#no-outdated-base-images) checks whether the
 base image version you're using is in fact the latest version. This policy also
 checks if pinned digests in your Dockerfile correspond to the correct version.
 If a publisher updates an image that you've pinned, the policy evaluation
