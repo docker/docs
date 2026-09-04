@@ -19,7 +19,7 @@ sandbox proxy, so your API key stays on the host and never enters the VM.
 Rather than install the agent fresh on every run, you'll bake a pinned image
 once and reuse it. Pinning the agent version and building a dedicated image
 gives you reproducible sandboxes and faster startups, and it's the approach
-Docker recommends for [building your own agent](../manuals/ai/sandboxes/customize/build-an-agent.md).
+Docker recommends for building your own agent.
 
 In this guide, you'll learn how to:
 
@@ -92,16 +92,20 @@ USER agent
 RUN uv tool install "mistral-vibe==${VIBE_VERSION}" --with "httpx[socks]" \
     && vibe --version
 
-CMD ["vibe"]
+CMD ["vibe", "--agent", "auto-approve"]
 ```
 
-Two choices are worth calling out:
+Three choices are worth calling out:
 
 - Pinning `mistral-vibe` to an explicit version keeps the image
   reproducible. To move to a newer release, change `VIBE_VERSION` and rebuild.
 - Installing the `httpx[socks]` extra explicitly avoids a startup failure
   when the agent runs behind the sandbox proxy. Some Vibe releases don't pull
   it in on their own.
+- The `CMD` launches Vibe with `--agent auto-approve`, so the agent approves
+  tool executions automatically. Baking the flags into the image keeps the
+  kit's launch behavior in one place, so the kit doesn't override the
+  entrypoint.
 
 ## Step 3: Build and publish the image
 
@@ -124,63 +128,54 @@ next step always resolves to the same build.
 
 ## Step 4: Write the agent kit
 
-The kit ties the image, launch command, network policy, and credentials
-together. Create a directory for the kit with a `spec.yaml` inside. Replace
+The kit ties the image, network policy, and credentials together. The image
+already sets the launch command in its `CMD`. Create a directory for the kit
+with a `spec.yaml` inside. Replace
 `YOUR_NAMESPACE` with the namespace you published to:
 
 ```yaml {title="mistral-vibe/spec.yaml"}
-schemaVersion: "1"
-kind: agent
+schemaVersion: "2"
+kind: sandbox
 name: mistral-vibe
 displayName: Mistral Vibe
 
-agent:
+sandbox:
   image: docker.io/YOUR_NAMESPACE/sbx-mistral-vibe:0.1.0
-  aiFilename: AGENTS.md
-  entrypoint:
-    run: [vibe, "--agent", "auto-approve"]
 
-network:
-  serviceDomains:
-    api.mistral.ai: mistral
-  serviceAuth:
-    mistral:
-      headerName: Authorization
-      valueFormat: "Bearer %s"
-  allowedDomains:
-    - "api.mistral.ai:443"
+agentInstructions:
+  filename: AGENTS.md
+  content: |
+    You are running inside an isolated Docker Sandbox microVM.
+    Network access is restricted to the Mistral API. Prefer tools and
+    packages already available in the workspace.
+
+permissions:
+  network:
+    allow:
+      - "api.mistral.ai:443"
 
 credentials:
-  sources:
-    mistral:
-      env:
-        - MISTRAL_API_KEY
-
-environment:
-  proxyManaged:
-    - MISTRAL_API_KEY
-
-memory: |
-  You are running inside an isolated Docker Sandbox microVM.
-  Network access is restricted to the Mistral API. Prefer tools and
-  packages already available in the workspace.
+  - service: mistral
+    apiKey:
+      name: MISTRAL_API_KEY
+      inject:
+        - domain: api.mistral.ai
+          scheme: bearer
 ```
 
 Each field does the following:
 
-| Field                      | Purpose                                                                                                   |
-| -------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `kind: agent`              | Declares a standalone agent: a complete image plus its launch configuration.                              |
-| `name`                     | The kit's identifier, reused in the `sbx run` command.                                                    |
-| `agent.image`              | The pinned image you published in Step 3.                                                                 |
-| `agent.aiFilename`         | The instructions file Vibe reads in the project.                                                          |
-| `agent.entrypoint.run`     | The command run at start. `--agent auto-approve` runs Vibe with automatic tool approvals.                 |
-| `network.allowedDomains`   | The hosts the sandbox may reach. Without it, requests are blocked by the default deny policy.             |
-| `network.serviceDomains`   | Maps `api.mistral.ai` to the `mistral` service. Keep this narrow to avoid intercepting unrelated traffic. |
-| `network.serviceAuth`      | The header format the proxy injects: `Authorization: Bearer <key>`.                                       |
-| `credentials.sources`      | Where the key comes from. Without it, requests to `api.mistral.ai` return 401.                            |
-| `environment.proxyManaged` | Places a sentinel `MISTRAL_API_KEY` in the VM so Vibe sees a non-empty key and skips its setup screen.    |
-| `memory`                   | Markdown appended to `AGENTS.md` at creation to prime the agent about its environment.                    |
+| Field                       | Purpose                                                                                                        |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `kind: sandbox`             | Declares a sandbox agent: a complete image plus its launch configuration.                                      |
+| `name`                      | The kit's identifier, reused in the `sbx run` command.                                                         |
+| `sandbox.image`             | The pinned image you published in Step 3. Its `CMD` launches Vibe, so the kit doesn't set an entrypoint.       |
+| `agentInstructions.filename`| The instructions file Vibe reads in the project.                                                               |
+| `agentInstructions.content` | Markdown appended to `AGENTS.md` at creation to prime the agent about its environment.                         |
+| `permissions.network.allow` | The hosts the sandbox may reach. Without it, requests are blocked by the default deny policy.                  |
+| `credentials[].service`     | The built-in service that supplies the key. `mistral` maps to `MISTRAL_API_KEY` and `api.mistral.ai`.          |
+| `credentials[].apiKey.name` | The environment variable the proxy manages. Vibe sees a sentinel value; the proxy swaps in the real key.       |
+| `credentials[].apiKey.inject`| Where and how the proxy attaches the key. `scheme: bearer` sets `Authorization: Bearer <key>` for the domain. |
 
 For the full kit format, see
 [Kits](../manuals/ai/sandboxes/customize/kits.md).
@@ -224,7 +219,8 @@ $ sbx policy log
 ```
 
 Each entry shows the request, the rule it matched, and how the proxy handled
-it. Use it to spot a host missing from `allowedDomains`. After you change `spec.yaml`, recreate the sandbox for a clean start:
+it. Use it to spot a host missing from `permissions.network.allow`. After you
+change `spec.yaml`, recreate the sandbox for a clean start:
 
 ```console
 $ sbx rm mistral-vibe && sbx run --kit ./mistral-vibe --name mistral-vibe mistral-vibe .
