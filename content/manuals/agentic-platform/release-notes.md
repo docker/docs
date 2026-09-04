@@ -6,6 +6,15 @@ keywords: docker agentic platform, release notes, updates, fixes
 weight: 90
 ---
 
+## September 1, 2026
+
+- Added inline credential saving and credential selection for sandbox launches.
+
+## August 28, 2026
+
+- Fixed **Usage & billing** to show the active billing cycle and accrued
+  compute costs for plans that renew mid-month.
+
 ## August 27, 2026
 
 - Added Groq and xAI credentials under **Secrets** for OpenCode sandboxes.

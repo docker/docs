@@ -30,6 +30,9 @@ GitHub Copilot, Google, Groq, and xAI.
 2. Choose a sandbox type and select or add its required model credential.
    Copilot uses `GITHUB_TOKEN`; add the same GitHub secret to any other sandbox
    type that needs private repository access.
+   A stored credential is attached only when you select it for the launch.
+   Docker Agentic Platform remembers credential selections for each sandbox
+   type. Credentials shown as required are included automatically.
 3. Configure the sandbox. The initial settings are **open access**, **no tools
    added**, and **medium compute**.
 4. Choose whether Docker stops or deletes the sandbox when its timer expires,

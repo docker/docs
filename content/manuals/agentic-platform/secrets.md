@@ -12,6 +12,11 @@ Secrets provide credentials to agents without placing their values in a
 sandbox. Docker Agentic Platform stores each value outside sandboxes and uses
 the sandbox proxy to apply it to matching requests.
 
+Saving a credential makes it available for sandbox launches but does not
+attach it to every compatible sandbox. Select the stored credentials that a
+launch should use. Docker Agentic Platform remembers selections for each
+sandbox type. Credentials shown as required are included automatically.
+
 Docker Agentic Platform supports the following credentials:
 
 | Service       | Secret ID           | Used by                                           |
@@ -23,17 +28,17 @@ Docker Agentic Platform supports the following credentials:
 | xAI           | `XAI_API_KEY`       | OpenCode with xAI models                          |
 | GitHub        | `GITHUB_TOKEN`      | Copilot and any sandbox type that accesses GitHub |
 
-Provider-specific credentials are applied only to matching requests from
-compatible sandbox types. For example, an Anthropic credential is not applied
-to requests from a Codex sandbox. OpenCode can use any configured provider that
-it supports.
+After you select a credential for a launch, Docker Agentic Platform applies it
+only to matching requests from compatible sandbox types. For example, an
+Anthropic credential is not applied to requests from a Codex sandbox. OpenCode
+can use any selected provider that it supports.
 
 ## GitHub credential
 
 `GITHUB_TOKEN` authenticates both Copilot and GitHub repository operations.
 Entering it in the launcher stores it as the same GitHub secret shown under
-**Secrets**. Any sandbox type can use it for matching GitHub requests, such as
-cloning a private repository or pushing changes.
+**Secrets**. Any sandbox type can select it for matching GitHub requests, such
+as cloning a private repository or pushing changes.
 
 ## Configure a secret
 
@@ -43,8 +48,8 @@ To configure a credential before launching a sandbox:
 2. Select the edit icon for that service.
 3. Enter its API key or token and save the value.
 
-You can also provide a required credential from **New** when you launch a
-sandbox.
+You can also provide a credential from **New** when you launch a sandbox.
+Saving a credential in the launcher selects it for that launch.
 
 ## Manage secrets
 

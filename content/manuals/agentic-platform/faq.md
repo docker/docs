@@ -44,7 +44,8 @@ more user policies when you create the sandbox. If you select no user policies,
 only the kit policy applies and destinations that it does not allow are blocked.
 A deny rule takes precedence over an allow rule. Docker stores configured
 secret values outside the sandbox and applies them to matching requests through
-the sandbox proxy.
+the sandbox proxy. Select stored credentials when you launch a sandbox to
+attach them. Credentials shown as required are included automatically.
 
 ## How are sandbox usage and model inference billed?
 
