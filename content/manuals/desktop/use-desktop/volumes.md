@@ -89,7 +89,7 @@ using the volume before you can delete the volume.
 
 To delete a volume:
 
-1. In the **Volumes** view, select **Delete** icon in the **Actions** column for
+1. In the **Volumes** view, select the **Delete** icon in the **Actions** column for
    the volume you want to delete.
 2. In the **Delete volume?** modal, select **Delete forever**.
 
@@ -136,10 +136,9 @@ You can either [export a volume now](#export-a-volume-now) or [schedule a recurr
 
    {{< tabs >}}
    {{< tab name="Local or Hub storage" >}}
-   
    - **Local file**: Specify a file name and select a folder.
    - **Local image**: Select a local image to export the content to. Any
-    existing data in the image will be replaced by the exported content.
+     existing data in the image will be replaced by the exported content.
    - **New image**: Specify a name for the new image.
    - **Registry**: Specify a Docker Hub repository.
 
@@ -151,7 +150,6 @@ You can either [export a volume now](#export-a-volume-now) or [schedule a recurr
    Select your cloud provider and then specify the URL to upload to the storage.
    Refer to the following documentation for your cloud provider to learn how to
    obtain a URL.
-
    - Amazon Web Services: [Create a presigned URL of Amazon S3 using an AWS SDK](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example_s3_Scenario_PresignedUrl_section.html)
    - Microsoft Azure: [Generate a SAS token and URL](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/api/connection-strings/generate-sas-token)
    - Google Cloud: [Create a signed URL to upload an object](https://cloud.google.com/storage/docs/access-control/signing-urls-with-helpers#upload-object)
@@ -169,7 +167,6 @@ You can either [export a volume now](#export-a-volume-now) or [schedule a recurr
 4. Select **Schedule export**.
 5. In **Recurrence**, select how often the export occurs, and then specify the
    following additional details based on your selection.
-
    - **Daily**: Specify the time that the backup occurs each day.
    - **Weekly**: Specify one or more days, and the time that the backup occurs
      each week.
@@ -179,13 +176,12 @@ You can either [export a volume now](#export-a-volume-now) or [schedule a recurr
 6. Select whether to export the volume to **Local or Hub storage** or **External
    cloud storage**, then specify the following additional details depending on
    your selection.
-   
+
    {{< tabs >}}
    {{< tab name="Local or Hub storage" >}}
-   
    - **Local file**: Specify a file name and select a folder.
    - **Local image**: Select a local image to export the content to. Any
-    existing data in the image will be replaced by the exported content.
+     existing data in the image will be replaced by the exported content.
    - **New image**: Specify a name for the new image.
    - **Registry**: Specify a Docker Hub repository.
 
@@ -197,7 +193,6 @@ You can either [export a volume now](#export-a-volume-now) or [schedule a recurr
    Select your cloud provider and then specify the URL to upload to the storage.
    Refer to the following documentation for your cloud provider to learn how to
    obtain a URL.
-
    - Amazon Web Services: [Create a presigned URL of Amazon S3 using an AWS SDK](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example_s3_Scenario_PresignedUrl_section.html)
    - Microsoft Azure: [Generate a SAS token and URL](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/api/connection-strings/generate-sas-token)
    - Google Cloud: [Create a signed URL to upload an object](https://cloud.google.com/storage/docs/access-control/signing-urls-with-helpers#upload-object)
@@ -224,7 +219,6 @@ To import a volume:
 4. Select **Import**.
 5. Select where the content is coming from and then specify the following
    additional details depending on your selection:
-
    - **Local file**: Select the file that contains the content.
    - **Local image**: Select the local image that contains the content.
    - **Registry**: Specify the image from Docker Hub that contains the content.
