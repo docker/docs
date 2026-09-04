@@ -377,6 +377,19 @@ If you have set custom `XDG_STATE_HOME`, `XDG_CACHE_HOME`, or
 {{< /tab >}}
 {{< /tabs >}}
 
+## Enable automatic diagnostics uploads
+
+To opt in to automatic diagnostics uploads after certain daemon errors, run:
+
+```console
+$ sbx settings set diagnostics.autoUpload yes
+```
+
+Automatic bundles include basic system information and client, daemon, crash,
+and MCP logs. Docker Sandboxes redacts recognized identity values and
+credential patterns, but collected logs can still contain user content. Failed
+uploads remain in a local queue for a later retry.
+
 ## Report an issue
 
 If you've exhausted the steps above and the problem persists, file a GitHub
