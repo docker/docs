@@ -24,6 +24,58 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.90.0
+
+{{< release-date date="2026-09-07" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.90.0" build_path="/XXXXXX/" >}}
+
+### Updates
+
+- [Docker Agent v1.128.0](https://github.com/docker/docker-agent/releases/tag/v1.128.0)
+- Docker Offload `v0.6.15`
+- Docker Desktop CLI v0.4.4
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Added Ask Gordon as a right-side drawer in the dashboard, keeping users in context while chatting with Gordon alongside any page being viewed. 
+- Containers, images and volumes rows with detected issues now show an Ask Gordon sign that starts a diagnosis in one click.
+- Fixed a bug where generating a diagnostics bundle could hang until its timeout if a file it collects was on an unresponsive filesystem.
+- Fixed an issue where changing the auto-pause timeout while Docker Desktop was already idle would not apply until the original timer expired. 
+- Fixed a crash in the **Images** view ('Maximum update depth exceeded') that occurred when many images loaded simultaneously on cold launch or after waking from Resource Saver mode.
+- Fixed a Docker Desktop Dashboard crash issue. Fixes [docker/desktop-feedback#611](https://github.com/docker/desktop-feedback/issues/611).
+- Added support for starting and stopping a Kubernetes cloud cluster via Docker Offload, with configurable Kubernetes version and node count.
+- Improvements so the Docker Desktop Dashboard displays the specific reason Docker Engine failed to start, when available.
+- Fixed a bug where `renameat2(RENAME_EXCHANGE)` on a shared folder overwrote the target instead of swapping the two files.
+- Fixed a bug where `mmap()` of a file on a Synchronized File Share failed with "No such device", breaking git and pnpm. Fixes [docker/desktop-feedback#627](https://github.com/docker/desktop-feedback/issues/627).
+- Fixed a bug where repeatedly replacing files on a shared folder leaked VM disk space until Docker Desktop was restarted. Fixes [docker/desktop-feedback#619](https://github.com/docker/desktop-feedback/issues/619).
+- Fixed a bug where a bind-mount root intermittently reported ownership as 0:0, causing git to report "detected dubious ownership". Fixes [docker/desktop-feedback#628](https://github.com/docker/desktop-feedback/issues/628).
+
+#### For Mac
+
+- Fixed an installer crash (exit status 42) that occurred when the user's home folder was on a different disk than `/Applications` (e.g. external APFS volume). Fresh installs and auto-updates now complete successfully in this configuration.
+- Fixed startup failures caused by `VZErrorInvalidVirtualMachineConfiguration` (Code=2) due to stale file locks on `Docker.raw` and APFS disk metadata sync races.
+
+#### For Windows
+
+- Fixed a startup hang where Docker Desktop would get stuck on 'Starting' after a WinGet upgrade due to conflicting engine settings in `install-settings.json`.
+- The Docker VMM engine option is now always available and no longer flips engines shortly after startup while feature flags load.
+- Fixed an issue where the `noWindowsContainers` setting in `install-settings.json` was cleared during a self-update, causing Windows containers to be re-enabled unexpectedly.
+- Added a prompt during in-app updates for all-users installations, offering users the option to migrate to a per-user installation that requires no admin privileges for future updates.
+- Fixed a bug where Docker Desktop could fail to start after an ungraceful shutdown left behind a stuck socket file.
+- Docker Desktop now checks that a Windows host can run Docker VMM before switching to it, and offers to switch back instead of leaving no working engine.
+- Fixed Docker VMM telling users to enable the Windows Hypervisor Platform feature when it was already enabled and the real cause was elsewhere.
+- Fixed a bug where a failing third-party WSL plugin (for example the Microsoft Defender for Endpoint plug-in for WSL) was reported as a missing Docker Desktop disk instead of naming the plugin that blocked WSL from starting.
+- Fixed the MSI installer ignoring `ENGINE=docker-vmm`, which left the Windows Hypervisor Platform feature disabled and the engine unselected.
+- Fixed a bug where running the installer with only command-line flags and no `install` verb failed with exit code `4294967291` and no error message.
+- Fixed a bug where Docker VMM did not explain how to fix an unavailable Windows Hypervisor Platform.
+
+### Security 
+
+- Updated the Kind cloud provider image to `v0.7.0`, addressing [CVE-2026-46595](https://github.com/advisories/GHSA-x527-x647-q7gg) and [CVE-2026-39834](https://github.com/advisories/GHSA-rm3j-f69w-wqmq).
+
 ## 4.89.0
 
 {{< release-date date="2026-08-31" >}}
