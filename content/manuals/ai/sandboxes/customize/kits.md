@@ -113,6 +113,7 @@ file removes. In this table, `~` is `/home/agent`.
 | `codex` | `~/.codex/config.toml` |
 | `copilot` | `~/.copilot/config.json` |
 | `cursor` | `~/.cursor/cli-config.json` |
+| `devin` | `~/.config/devin/config.json`, `~/.config/devin/mcp_config.json` |
 | `gemini` | `~/.gemini/settings.json` |
 | `kiro` | `~/.kiro/settings/mcp.json` |
 | `opencode` | `~/.config/opencode/opencode.json` |
