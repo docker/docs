@@ -53,7 +53,15 @@ sandbox VM. An agent can invoke the tools those servers expose through the MCP
 gateway, subject to MCP policies when organization governance is active. Treat
 local MCP servers as trusted host integrations.
 
-![Sandbox security model showing the hypervisor boundary between the sandbox VM and the host system. The workspace directory is shared read-write. The agent process, Docker Engine, packages, and VM filesystem are inside the VM. Host filesystem, processes, Docker Engine, and network are outside the VM and not accessible. A proxy enforces allow/deny policies and injects credentials into outbound requests.](../images/sbx-security.png)
+### MicroVM isolation
+
+This topology shows what is private to the microVM, what is explicitly mounted,
+and which host resources remain outside the agent's reach.
+
+{{< interactive-diagram src="../diagrams/trust-boundary-topology.yaml" >}}
+
+To follow an outbound request through network policy and credential injection,
+see [Architecture](../architecture.md#follow-an-authenticated-request).
 
 ## Isolation layers
 
