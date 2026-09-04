@@ -19,7 +19,7 @@ You need:
 
 - A Docker Business subscription
 - Owner access to a Docker organization
-- A [verified company domain](/manuals/enterprise/security/single-sign-on/connect.md#step-1-add-a-domain)
+- A [verified company domain](/manuals/security/authentication/single-sign-on/connect.md#step-1-add-a-domain)
 - [Enforced Docker Desktop sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md)
 - One pilot user with Docker Desktop installed
 
@@ -78,11 +78,11 @@ Continue with these guides when you're ready to expand the deployment:
 
 - [Set up your company for success with Docker](/guides/admin-set-up/) for the
   full deployment handbook
-- [Manage organization members](/manuals/admin/organization/manage/members.md)
+- [Manage organization members](/manuals/accounts/organization/manage/members.md)
   for roles, teams, and bulk invitations
 - [Configure Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
   for additional policies and deployment controls
-- [Set up SSO and provisioning](/manuals/enterprise/security/single-sign-on/_index.md)
+- [Set up SSO and provisioning](/manuals/security/authentication/single-sign-on/_index.md)
   for centralized identity management
 - [Govern Docker Sandboxes](/manuals/ai/sandboxes/governance/_index.md) for
   organization-wide agent policies
