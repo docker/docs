@@ -123,33 +123,6 @@ jobs:
               exit 1
             fi
           }
-               - name: Test model pull and run
-        run: |
-          MODEL="${{ github.event.inputs.test_model || 'ai/smollm2:360M-Q4_K_M' }}"
-          echo "Testing with model: $MODEL"
-          
-          # Test model pull
-          echo "Pulling model..."
-          sudo docker model pull "$MODEL"
-          
-          if [ $? -eq 0 ]; then
-            echo "✅ Model pull successful"
-          else
-            echo "❌ Model pull failed"
-            exit 1
-          fi
-                  
-          # Test basic model run (with timeout to avoid hanging)
-          echo "Testing docker model run..."
-          timeout 60s sudo docker model run "$MODEL" "Give me a fact about whales." || {
-            exit_code=$?
-            if [ $exit_code -eq 124 ]; then
-              echo "✅ Model run test completed (timed out as expected for non-interactive test)"
-            else
-              echo "❌ Model run failed with exit code: $exit_code"
-              exit 1
-            fi
-          }
 
       - name: Test API endpoint
         run: |

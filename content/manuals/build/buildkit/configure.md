@@ -136,9 +136,29 @@ $ docker buildx build --push --tag myregistry.com/myimage:latest .
 ## CNI networking
 
 CNI networking for builders can be useful for dealing with network port
-contention during concurrent builds. CNI is [not yet](https://github.com/moby/buildkit/issues/28)
-available in the default BuildKit image. But you can create your own image that
-includes CNI support.
+contention during concurrent builds.
+
+### Bridge networking
+
+The BuildKit image ships with a built-in bridge network provider that uses a
+minimal set of bundled CNI plugins, so you don't need to build a custom image
+or supply your own CNI configuration. To use it, set the worker network mode to
+`bridge` when you create the builder:
+
+```console
+$ docker buildx create --use --bootstrap \
+  --name mybuilder \
+  --driver docker-container \
+  --buildkitd-flags "--oci-worker-net=bridge"
+```
+
+BuildKit creates a `buildkit0` bridge with a default subnet of `10.10.0.0/16`,
+and cleans up the bridge automatically when the daemon shuts down.
+
+### Custom CNI configuration
+
+For more control over networking, build a custom BuildKit image with your own
+CNI configuration and plugins.
 
 The following Dockerfile example shows a custom BuildKit image with CNI support.
 It uses the [CNI config for integration tests](https://github.com/moby/buildkit/blob/master//hack/fixtures/cni.json)

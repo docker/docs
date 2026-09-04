@@ -24,20 +24,20 @@
     >
       {{- with $curr.Params.icon }}
         <span class="icon-sm icon-svg pr-2">
-          {{- partialCached "icon.html" . . -}}
+          {{- partialCached "icon" . . -}}
         </span>
       {{- end }}
       {{- $curr.LinkTitle -}}
     </a>
     <button
       @click="expanded = !expanded"
-      class="rounded-sm hover:bg-gray-200 hover:dark:bg-gray-800"
+      class="rounded-sm px-1 hover:bg-gray-200 hover:dark:bg-gray-800"
     >
-      <span x-show="! expanded" class="icon-svg">
-        {{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}
+      <span x-show="! expanded" class="icon-svg icon-sm">
+        {{ partialCached "icon" "chevron-down" "chevron-down" }}
       </span>
-      <span x-cloak x-show="expanded" class="icon-svg">
-        {{ partialCached "icon" "arrow_drop_up" "arrow_drop_up" }}
+      <span x-cloak x-show="expanded" class="icon-svg icon-sm">
+        {{ partialCached "icon" "chevron-up" "chevron-up" }}
       </span>
     </button>
   </div>
@@ -48,7 +48,7 @@
           <a class="hover:text-blue dark:hover:text-blue" href="{{ .URL }}">
             {{- with .Page.Params.icon }}
               <span class="icon-sm icon-svg pr-2">
-                {{- partialCached "icon.html" . . -}}
+                {{- partialCached "icon" . . -}}
               </span>
             {{- end }}
             {{- .Name }}

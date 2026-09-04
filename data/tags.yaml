@@ -1,42 +1,27 @@
 admin:
-  title: Administration
+  title: Admin
+  description: Manage Docker organizations, users, and access controls.
 ai:
   title: AI
-app-dev:
-  title: App development
-best-practices:
-  title: Best practices
-cloud-services:
-  title: Cloud services
-data-science:
-  title: Data science
+  description: Build AI-powered apps, agents, and integrations with Docker.
+cicd:
+  title: CI/CD
+  description: Automate builds, tests, and deployments in your pipelines.
 databases:
   title: Databases
-deploy:
+  description: Run and connect to databases in containers.
+deployment:
   title: Deployment
-devops:
-  title: DevOps
-dhi:
-  title: Docker Hardened Images
-distributed-systems:
-  title: Distributed systems
-faq:
-  title: FAQ
-frameworks:
-  title: Frameworks
+  description: Deploy containerized apps to Kubernetes and other platforms.
 labs:
-  title: Labs
-networking:
-  title: Networking
-observability:
-  title: Observability
-product-demo:
-  title: Product demo
-release-notes:
-  title: Release notes
-secrets:
-  title: Secrets
-testing-with-docker:
-  title: Testing with Docker
-troubleshooting:
-  title: Troubleshooting
+  title: Hands-on labs
+  description: Interactive, guided labs you can run directly in your browser.
+languages:
+  title: Languages & frameworks
+  description: Containerize and develop apps in your language of choice.
+security:
+  title: Security
+  description: Harden images, scan vulnerabilities, and secure your supply chain.
+testing:
+  title: Testing
+  description: Integration testing with real databases and services.

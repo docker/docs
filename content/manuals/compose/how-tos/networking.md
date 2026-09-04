@@ -12,7 +12,7 @@ Compose handles networking for you by default, but gives you fine-grained contro
 
 ## Default network and service discovery
 
-By default, Compose sets up a single [network](/reference/cli/docker/network/create/) for your app. Each container for a service joins the default network and is both reachable by other containers on that network, and discoverable by its service name. This network uses the `bridge` driver. To understand when you'd use a different driver, see [Network drivers: bridge vs host](#change-the-network-mode).
+By default, Compose sets up a single [network](/reference/cli/docker/network/create/) for your app. Each container for a service joins the default network and is both reachable by other containers on that network, and discoverable by its service name. This network uses the `bridge` driver. To attach services to a different Compose network or an external one, see [Specify custom networks](#specify-custom-networks). To change how a service uses the host network stack (`network_mode: host`), see [Change the network mode](#change-the-network-mode).
 
 For most development setups, the default network is sufficient. When you run `docker compose up`, Compose creates a network named `<project-name>_default` and attaches all services to it. Each service registers its name with an internal DNS server, so containers can reach each other using the service name directly. No IP addresses or manual configuration is needed.
 

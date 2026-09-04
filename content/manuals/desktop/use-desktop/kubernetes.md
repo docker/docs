@@ -4,8 +4,6 @@ keywords: deploy, kubernetes, kubectl, orchestration, Docker Desktop
 title: Explore the Kubernetes view
 linkTitle: Kubernetes
 aliases:
-- /docker-for-windows/kubernetes/
-- /docker-for-mac/kubernetes/
 - /desktop/kubernetes/
 - /desktop/features/kubernetes/
 weight: 50

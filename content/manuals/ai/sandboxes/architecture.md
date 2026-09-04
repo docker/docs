@@ -1,11 +1,9 @@
 ---
 title: Architecture
-weight: 40
+weight: 100
 description: Technical architecture of Docker Sandboxes; workspace mounting, storage, networking, and sandbox lifecycle.
 keywords: docker sandboxes, architecture, microVM, workspace mounting, sandbox lifecycle
 ---
-
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 This page explains how Docker Sandboxes work under the hood. For the security
 properties of the architecture, see [Sandbox isolation](security/isolation.md).
@@ -21,28 +19,82 @@ absolute paths means error messages, configuration files, and build outputs all
 reference paths you can find on your host. The agent sees exactly the directory
 structure you see, which reduces confusion when debugging or reviewing changes.
 
+> [!WARNING]
+> Avoid mounting network-attached or remote storage (network drives, SMB/NFS
+> shares, or cloud-synced folders) as a workspace. The sandbox accesses
+> workspaces through a filesystem passthrough, so every file read and write
+> goes over the network. This adds latency and slows agent performance.
+
 ## Storage and persistence
 
 When you create a sandbox, everything inside it persists until you remove it:
 Docker images and containers built or pulled by the agent, installed packages,
 agent state and history, and workspace changes.
 
-Sandboxes are isolated from each other. Each one maintains its own Docker
-daemon state, image cache, and package installations. Multiple sandboxes don't
-share images or layers.
+Each sandbox maintains its own Docker daemon state, image cache, and package
+installations. Multiple sandboxes don't share images or layers. The
+[shared agent skills store](workflows/agent-skills.md) is an exception:
+supported agents mount the same host-side store read-write unless you opt out
+when creating the sandbox.
 
 Each sandbox consumes disk space for its VM image, Docker images, container
 layers, and volumes, and this grows as you build images and install packages.
 
+Virtiofs caching is enabled by default on all operating systems. File reads
+from the sandbox VM are cached on the host side, reducing round-trips through
+the filesystem passthrough and improving performance for read-heavy workloads
+such as `git status` or directory scans. To opt out, set
+`DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0` when creating the sandbox:
+
+```console
+$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <template>
+```
+
 ## Networking
 
-All outbound traffic from the sandbox routes through an HTTP/HTTPS proxy on
-your host. Agents are configured to use the proxy automatically. The proxy
-enforces [network access policies](security/policy.md) and handles
-[credential injection](security/credentials.md). See
+All outbound TCP traffic from the sandbox routes through a proxy on your host.
+Agents use a forward proxy for HTTP and HTTPS; other TCP traffic is forwarded
+transparently. Both paths enforce
+[network access policies](governance/access-controls/network.md). The forward
+proxy also handles [credential injection](configuration/credentials.md). See
 [Network isolation](security/isolation.md#network-isolation) for how this
 works and [Default security posture](security/defaults.md) for what is
 allowed out of the box.
+
+### Upstream proxy
+
+The host-side proxy makes its outbound connections using your host's network
+configuration and routing. When a destination is reachable through a direct
+route, traffic follows that route. When reaching a destination requires an
+upstream proxy, the host-side proxy forwards the request to it. Chaining to an
+upstream proxy means sandbox traffic respects the same egress controls as other
+applications on your host.
+
+By default, both sandbox traffic and the daemon's own traffic follow your OS
+system proxy, so this usually works without any configuration. To set a proxy
+explicitly — with a proxy URL, a PAC file, a SOCKS5 proxy, or separate settings
+for sandbox and daemon traffic — see
+[Configure an upstream proxy](configuration/upstream-proxy.md). Upstream proxy support is
+experimental and subject to change.
+
+Only HTTP and HTTPS traffic can be forwarded to an upstream proxy. Other TCP
+traffic can't be redirected to a proxy.
+
+## MCP gateway
+
+Supported agents connect to a single MCP gateway endpoint for the sandbox. The
+gateway runs on the host side of the sandbox boundary and brokers access to
+registered MCP servers.
+
+Registered MCP servers can be remote endpoints, or they can be local stdio
+servers launched on the host. Local stdio servers don't run inside the sandbox
+VM. If a local stdio server is packaged as an OCI image, or if you register an
+explicit `docker` command, it uses Docker on the host.
+
+When MCP policies apply, enforcement happens on the MCP gateway path, separate
+from the HTTP/HTTPS network proxy. Server registration is checked before the
+server is stored, and governed MCP requests are checked by the gateway before
+tool calls, resource reads, prompt retrieval, or gateway meta-tool execution.
 
 ## Lifecycle
 
@@ -53,7 +105,8 @@ installed packages and Docker images.
 Sandboxes persist until explicitly removed. Stopping an agent doesn't delete
 the VM; environment setup carries over between runs. Use `sbx rm` to delete
 the sandbox, its VM, and all of its contents. If the sandbox used
-`--branch`, the worktree directories and their branches are also removed.
+[`--clone`](usage.md#clone-mode), the `sandbox-<name>` Git remote is also
+removed from your host repository.
 
 ## Comparison to alternatives
 

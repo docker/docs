@@ -1,0 +1,57 @@
+name: sbx kit verify
+synopsis: Verify a kit artifact's signature
+experimental: true
+description: |-
+    Verify a kit artifact's cosign-compatible signature.
+
+    For a local directory, the kit.sig.bundle sidecar is checked
+    against the kit's content. For a git reference, the repository is cloned and
+    its committed kit.sig.bundle sidecar is checked the same way.
+    For an OCI reference, signatures attached as OCI referrers are checked against
+    the kit manifest.
+
+    Use --key to verify a key-based signature against a PEM public key. For
+    keyless signatures, supply the accepted signer identity with
+    --certificate-identity (or --certificate-identity-regexp) and
+    --certificate-oidc-issuer (or --certificate-oidc-issuer-regexp).
+
+    Pass --insecure-ignore-tlog to verify a private keyless signature made
+    with --tlog-upload=false: it drops the requirement for a Rekor
+    transparency-log entry and relies on the timestamp-authority timestamp
+    instead. It has no effect on key-based verification.
+usage: sbx kit verify REFERENCE [flags]
+options:
+    - name: certificate-identity
+      usage: Exact keyless signer identity (certificate SAN)
+    - name: certificate-identity-regexp
+      usage: Keyless signer identity regexp (certificate SAN)
+    - name: certificate-oidc-issuer
+      usage: Exact keyless OIDC issuer
+    - name: certificate-oidc-issuer-regexp
+      usage: Keyless OIDC issuer regexp
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for verify
+    - name: insecure-ignore-tlog
+      default_value: "false"
+      usage: |
+        Do not require a Rekor transparency-log entry (for private keyless signatures)
+    - name: key
+      usage: Public key for key-based verification (PEM)
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      # Verify a key-based signature
+      sbx kit verify --key cosign.pub ghcr.io/org/my-kit:1.0
+
+      # Verify a keyless signature by identity
+      sbx kit verify \
+        --certificate-identity user@example.com \
+        --certificate-oidc-issuer https://accounts.google.com \
+        ./my-kit/
+see_also:
+    - sbx kit - (Experimental) Manage kit artifacts

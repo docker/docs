@@ -4,6 +4,7 @@ linkTitle: Customize an image or chart
 weight: 25
 keywords: hardened images, DHI, customize, certificate, artifact, helm chart, terraform, infrastructure as code
 description: Learn how to customize Docker Hardened Images (DHI) and charts.
+toc_max: 4
 ---
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
@@ -65,8 +66,8 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
       image.
 
       The packages available in the drop-down are OS system packages for the
-      selected image variant. For version 3.23 Alpine-based images, these are
-      hardened packages that have been built from source by Docker with
+      selected image variant. For version 3.23 and later Alpine-based images,
+      these are hardened packages that have been built from source by Docker with
       cryptographic signatures and full supply chain security. For version 3.22
       Alpine-based images and Debian-based images, these are standard system
       packages.
@@ -80,8 +81,7 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
       built and pushed to a repository in the same namespace as the mirrored
       DHI. For example, you can add a custom root CA certificate or another
       image that contains a tool you need, like adding Python to a Node.js
-      image. For more details on how to create an OCI artifact image, see
-      [Create an OCI artifact image](#create-an-oci-artifact-image-for-image-customization).
+      image.
 
       You can add multiple OCI artifact images to a single customization. When
       you add more than one, they're applied in the order you add them in the
@@ -100,6 +100,8 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
       > When files necessary for runtime are overwritten by OCI artifacts, the
       > image build still succeeds, but you may have issues when running the
       > image.
+
+      For more details, see [OCI artifacts](#oci-artifacts).
 
    1. In the **Scripts** section, you can add, edit, or remove scripts.
 
@@ -158,10 +160,10 @@ You can create customizations using either the DHI CLI or the Docker Hub web int
 {{< /tab >}}
 {{< tab name="CLI" >}}
 
-Authenticate with `docker login` using your Docker credentials, a [personal
-access token (PAT)](../../security/access-tokens.md) with **Read & Write**
+Authenticate with `docker login` using your Docker credentials or a [personal
+access token (PAT)](../../security/access-tokens/personal-access-tokens.md) with **Read & Write**
 permissions, or an [organization access token
-(OAT)](../../enterprise/security/access-tokens.md). When using an OAT, the
+(OAT)](../../security/access-tokens/organization-access-tokens.md). When using an OAT, the
 available operations depend on the token's permission scope:
 
 - To list or get customizations, or to view build logs, the OAT must have read
@@ -174,12 +176,17 @@ available operations depend on the token's permission scope:
 Use the [`docker dhi customization`](/reference/cli/docker/dhi/customization/) command:
 
 ```console
-# Prepare a customization scaffold
+# Prepare a single customization scaffold
 $ docker dhi customization prepare golang 1.25 \
   --org my-org \
   --destination my-org/dhi-golang \
   --name "golang with git" \
-  --output my-customization.yaml
+  > my-customization.yaml
+
+# Prepare a bulk customization scaffold (pipe JSON array via stdin)
+$ echo '[{"destination":"my-org/dhi-golang","tag-definition-id":"golang/alpine-3.23/1.24-dev"}]' \
+  | docker dhi customization prepare --name "golang with git" --org my-org \
+  > my-customization.yaml
 
 # Create a customization
 $ docker dhi customization create my-customization.yaml --org my-org
@@ -192,27 +199,29 @@ $ docker dhi customization list --org my-org --filter git
 $ docker dhi customization list --org my-org --repo dhi-golang
 $ docker dhi customization list --org my-org --source golang
 
-# Get a customization
-$ docker dhi customization get my-org/dhi-golang "golang with git" --org my-org --output my-customization.yaml
+# Get a customization by ID
+$ docker dhi customization get <id> --org my-org
 
 # Update a customization
 $ docker dhi customization edit my-customization.yaml --org my-org
 
-# Delete a customization
-$ docker dhi customization delete my-org/dhi-golang "golang with git" --org my-org
+# Delete a customization by ID
+$ docker dhi customization delete <id> --org my-org
 
 # Delete without confirmation prompt
-$ docker dhi customization delete my-org/dhi-golang "golang with git" --org my-org --yes
+$ docker dhi customization delete <id> --org my-org --force
 ```
+
+For a complete reference of all YAML fields, see
+[Image customization YAML file](#image-customization-yaml-file).
 
 {{< /tab >}}
 {{< tab name="Terraform" >}}
 
 You can manage DHI customizations as infrastructure-as-code using the [DHI
-Terraform
-provider](https://registry.terraform.io/providers/docker-hardened-images/dhi/latest/docs).
-If you haven't configured the provider yet, see the Terraform tab in [Mirror a
-repository](./mirror.md) for setup instructions.
+Terraform provider](/dhi/tools/terraform/). If you haven't configured the
+provider yet, see [DHI Terraform provider](/dhi/tools/terraform/) for setup
+instructions.
 
 Define a `dhi_customization` resource for each customization:
 
@@ -252,49 +261,237 @@ documentation](https://registry.terraform.io/providers/docker-hardened-images/dh
 {{< /tab >}}
 {{< /tabs >}}
 
-### Monitor customization builds
+### Image customization YAML file
 
-{{< tabs >}}
-{{< tab name="Docker Hub" >}}
+When using the CLI, customizations are defined in a YAML file. Use
+`docker dhi customization prepare` to generate a scaffold with all available
+fields and commented-out examples. Edit the file to describe what you want,
+then pass it to `docker dhi customization create`.
 
-1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **My Hub**.
-3. In the namespace drop-down, select your organization.
-4. Select **Hardened Images** > **Manage**.
-5. Select the **Customizations** tab.
+The file has two parts: a preamble that identifies the customization and
+its targets, and a configuration section that specifies what to change.
 
-{{< /tab >}}
-{{< tab name="CLI" >}}
+#### About the `id` field
 
-List builds for a customization:
+The `id` field is assigned automatically by Docker Hub when you run
+`docker dhi customization create`. When creating a new customization, omit
+`id` entirely. It is read-only.
 
-```console
-$ docker dhi customization build list my-org/dhi-golang "golang with git" --org my-org
-```
-
-Get details of a specific build:
+To find the ID of an existing customization, run:
 
 ```console
-$ docker dhi customization build get my-org/dhi-golang "golang with git" <build-id> --org my-org
+$ docker dhi customization list --org my-org
 ```
 
-View build logs:
+The `id` appears in the output and in files retrieved with
+`docker dhi customization get <id> --org my-org`. It lets
+`docker dhi customization edit` identify which customization to update.
+Scaffolds from `docker dhi customization prepare` do not include `id`, and
+that is expected.
 
-```console
-$ docker dhi customization build logs my-org/dhi-golang "golang with git" <build-id> --org my-org
+#### Set targets
+
+The `name` and `targets` fields are required in every customization file. The
+`targets` array specifies which image versions the customization applies to.
+Use a single entry for a single-image customization, or multiple entries for a
+bulk customization that applies the same configuration to several images at
+once.
+
+```yaml
+name: golang with git
+
+targets:
+  - destination: my-org/dhi-golang
+    tag_definition_id: golang/alpine-3.23/1.25
 ```
 
-{{< /tab >}}
-{{< /tabs >}}
+| Field | Description |
+|:---|:---|
+| `name` | Human-readable name. Converted to lowercase and hyphenated, it becomes the image tag suffix. For example, `golang with git` produces tags ending in `_golang-with-git`. |
+| `targets[].destination` | Destination repository in Docker Hub, such as `my-org/dhi-golang`. |
+| `targets[].tag_definition_id` | Tag definition to customize, such as `golang/alpine-3.23/1.25`. Use `docker dhi customization prepare` with tab completion to find valid values. |
 
-### Create an OCI artifact image for image customization
+> [!NOTE]
+>
+> When `targets` has more than one entry, the fields `accounts`, `entrypoint`,
+> and `cmd` are not supported. Including them causes `docker dhi customization
+> create` to return an error.
 
-An OCI artifact image is a Docker image that contains files or directories that
-you want to include in your customized Docker Hardened Image (DHI). This can
-include additional tools, libraries, or configuration files.
+#### Add packages
 
-When creating an image to use as an OCI artifact, it should ideally be as
-minimal as possible and contain only the necessary files.
+To install additional OS packages in your customized image, list them under
+`contents.packages`. Available packages depend on the base image variant.
+
+```yaml
+contents:
+  packages:
+    - git
+    - curl
+```
+
+#### Add OCI artifacts
+
+To layer additional files into your customized image, such as custom
+certificates, internal tools, or configuration files, list OCI artifact
+images under `contents.artifacts`.
+
+```yaml
+contents:
+  artifacts:
+    - name: my-org/my-certs:latest
+      includes:
+        - etc/ssl/certs
+      excludes:
+        - etc/ssl/certs/old
+```
+
+| Field | Description |
+|:---|:---|
+| `name` | Image reference of the OCI artifact. Must be in the same Docker Hub namespace as the mirrored DHI. |
+| `includes` | Paths to copy from the artifact. No files are included by default. You must list at least one path. |
+| `excludes` | Paths to exclude after applying `includes`. |
+
+To learn more about OCI artifacts, including how to create them, best
+practices, and how environment variables behave, see
+[OCI artifacts](#oci-artifacts).
+
+#### Inject files into the image
+
+To add static files at build time, such as configuration files or startup
+scripts, use the `paths` field. Files are added as static content and are not
+executed during the build.
+
+```yaml
+paths:
+  - path: /etc/myconfig
+    contents: |
+      key=value
+    mode: "0644"
+    uid: 0
+    gid: 0
+```
+
+| Field | Description |
+|:---|:---|
+| `path` | Absolute path where the file will be placed in the image. |
+| `contents` | File content. Use a YAML block scalar (`\|`) for multi-line content. |
+| `mode` | Octal file permissions, such as `"0644"`. Quote the value to prevent YAML from treating the leading zero as octal notation. |
+| `uid` | User ID of the file owner. |
+| `gid` | Group ID of the file owner. |
+
+#### Configure user accounts
+
+To add users or groups to the image, or to change which user the container
+runs as, use the `accounts` field.
+
+> [!NOTE]
+>
+> Not supported for bulk customizations (multiple `targets`).
+
+```yaml
+accounts:
+  root: true
+  runs-as: nonroot
+  users:
+    - name: nonroot
+      uid: 65532
+      gid: 65532
+  groups:
+    - name: nonroot
+      gid: 65532
+      members:
+        - nonroot
+```
+
+| Field | Description |
+|:---|:---|
+| `root` | Whether to enable the root user. Default is `false`. Required if `runs-as` is set to `root`. |
+| `runs-as` | The default user the container runs as. |
+| `users[].name` | Username. |
+| `users[].uid` | User ID. |
+| `users[].gid` | Primary group ID. Optional. |
+| `groups[].name` | Group name. |
+| `groups[].gid` | Group ID. |
+| `groups[].members` | Usernames to add to this group. Optional. |
+
+#### Set environment variables
+
+To add or override environment variables in the image, use the `environment`
+field. These are merged with the base image's existing environment and do not
+replace it.
+
+```yaml
+environment:
+  MY_VAR: my_value
+  DEBUG: "false"
+```
+
+Quote values that a YAML parser would interpret as non-string types, for
+example `"false"`, `"0"`, and `"null"`.
+
+#### Set labels and annotations
+
+To add OCI metadata to the image, use `labels` and `annotations`. Labels are
+stored in the image config; annotations are stored in the image manifest. Use
+[OCI standard keys](https://specs.opencontainers.org/image-spec/annotations/)
+where applicable.
+
+```yaml
+labels:
+  org.opencontainers.image.authors: your-email@example.com
+  org.opencontainers.image.version: "1.0.0"
+
+annotations:
+  org.opencontainers.image.title: Custom hardened image
+  org.opencontainers.image.description: Customized Docker Hardened Image
+```
+
+#### Override entrypoint and command
+
+To change how the container starts, use `entrypoint` and `cmd`. These arguments
+are appended to the base image's existing entrypoint and command.
+
+> [!NOTE]
+>
+> Not supported for bulk customizations (multiple `targets`).
+
+```yaml
+entrypoint:
+  - /docker-entrypoint.sh
+
+cmd:
+  - /bin/bash
+```
+
+#### Set platforms and compression
+
+To build for multiple architectures, list them under `platforms`. At least one
+platform is required.
+
+```yaml
+platforms:
+  - linux/amd64
+  - linux/arm64
+```
+
+To control layer compression, set `compression`. `ZSTD` (the default) offers
+better compression and faster pulls. Use `GZIP` for compatibility with older
+tooling.
+
+```yaml
+compression: ZSTD
+```
+
+## OCI artifacts
+
+In DHI customization, OCI artifacts are Docker images containing files you
+want to layer into your image, such as custom certificates, internal tools, or
+configuration files.
+
+### Create an OCI artifact image
+
+Keep artifact images as minimal as possible and include only the necessary
+files.
 
 For example, to distribute a custom root CA certificate as part of a trusted CA
 bundle, you can use a multi-stage build. This approach registers your
@@ -351,13 +548,31 @@ Once pushed to a repository in your organization's namespace, the OCI artifact
 automatically appears in the customization workflow when you select OCI
 artifacts to add to your customized Docker Hardened Image.
 
-#### Best practices for OCI artifacts
+### Environment variables
+
+When you include OCI artifacts in a customization, the environment variables
+defined in those artifacts are merged into the final image. The merge follows
+these rules:
+
+- Your customization's environment settings take precedence. An artifact's
+  variable is only applied if the corresponding key is absent or empty in your
+  customization.
+- `PATH` is an exception. Artifact `PATH` entries are added to the front of
+  the existing `PATH`, giving them runtime precedence.
+
+This differs from `COPY --from` in a Dockerfile, which copies files without
+inheriting environment variables from the source image. To avoid inheriting
+environment variables, build the artifact using a `FROM scratch` final stage.
+See [Create an OCI artifact image](#create-an-oci-artifact-image).
+
+### Best practices
 
 Follow these best practices when creating OCI artifacts for DHI customizations:
 
 - Use multi-stage builds: Build or install dependencies in a builder stage,
   then copy only the necessary files to a `FROM scratch` final stage. This keeps
-  the OCI artifact minimal and free of unnecessary build tools.
+  the OCI artifact minimal and avoids inheriting environment variables from the
+  builder image into your customization.
 
 - Include only essential files: OCI artifacts should contain only the files
   you need to add to the customized image. Avoid including package managers,
@@ -417,9 +632,74 @@ To customize a Docker Hardened Image Helm chart after it has been mirrored:
    At this point, the on-screen instructions will guide you through the
    customization process.
 
+### Helm chart customization YAML file
+
+When using the CLI, Helm chart customizations use the same `prepare` / `create`
+workflow as image customizations, but the configuration section uses
+`reference_mappings` instead of image fields.
+
+Use `reference_mappings` to substitute image references within the chart, for
+example to point a chart's image references at your mirrored DHIs.
+
+```yaml
+name: use mirrored images
+
+targets:
+  - destination: my-org/dhi-haproxy-chart
+    tag_definition_id: haproxy/helm/1
+
+reference_mappings:
+  - from: dhi/haproxy
+    to: my-org/dhi-haproxy
+```
+
+| Field | Description |
+|:---|:---|
+| `reference_mappings[].from` | The image reference in the chart to replace. |
+| `reference_mappings[].to` | The replacement image reference, typically a mirrored DHI in your organization. |
+
+## Monitor customization builds
+
+After creating a customization, you can track build status and view logs
+through Docker Hub or the DHI CLI.
+
+{{< tabs >}}
+{{< tab name="Docker Hub" >}}
+
+1. Sign in to [Docker Hub](https://hub.docker.com).
+2. Select **My Hub**.
+3. In the namespace drop-down, select your organization.
+4. Select **Hardened Images** > **Manage**.
+5. Select the **Customizations** tab.
+
+{{< /tab >}}
+{{< tab name="CLI" >}}
+
+List builds for a customization:
+
+```console
+$ docker dhi customization build list <customization-id> --org my-org
+```
+
+Get details of a specific build:
+
+```console
+$ docker dhi customization build get <customization-id> <build-id> --org my-org
+```
+
+View build logs:
+
+```console
+$ docker dhi customization build logs <customization-id> <build-id> --org my-org
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
 ## Edit or delete a customization
 
-To edit or delete a DHI or chart customization, follow these steps:
+{{< tabs >}}
+{{< tab name="Docker Hub" >}}
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select **My Hub**.
@@ -435,3 +715,27 @@ To edit or delete a DHI or chart customization, follow these steps:
    - **Delete**: Delete the customization.
 
 7. Follow the on-screen instructions to complete the edit or deletion.
+
+{{< /tab >}}
+{{< tab name="CLI" >}}
+
+To edit a customization, update your YAML file and run:
+
+```console
+$ docker dhi customization edit my-customization.yaml --org my-org
+```
+
+The YAML file must include the `id` field to identify which customization to
+update. To find the ID, run `docker dhi customization list --org my-org`.
+
+To delete a customization by ID:
+
+```console
+$ docker dhi customization delete <id> --org my-org
+$ docker dhi customization delete <id> --org my-org --force
+```
+
+The `--force` flag skips the confirmation prompt.
+
+{{< /tab >}}
+{{< /tabs >}}

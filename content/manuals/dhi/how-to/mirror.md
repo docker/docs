@@ -34,9 +34,23 @@ repositories:
 
 ## Mirror a DHI repository to your organization
 
-To mirror repositories, you must be an organization owner or editor, or use a
-personal access token (PAT) or organization access token (OAT). See the CLI and
-Terraform tabs in the following sections for required permission scopes.
+Organization owners, editors, and members with a [custom role](../../security/roles-and-permissions/custom-roles/_index.md)
+that includes the DHI mirroring permission can create, view, and manage mirrors.
+When using the CLI or Terraform, you can also mirror using an [organization
+access token (OAT)](../../security/access-tokens/organization-access-tokens.md) with the
+appropriate permission scopes, without requiring role-based access.
+
+When a member with a custom role that includes the DHI mirroring permission
+creates a mirror, Docker automatically creates and manages the
+`dhi-mirroring-admins` team in your organization, adds that member to it, and
+grants the team access to the new mirror. This lets the member manage mirrors
+they create without organization owner or editor access. Mirrors created by
+organization owners or editors don't use this team. Removing members from this
+team may affect their ability to view and manage mirrors.
+
+You can mirror image and chart repositories to your organization's namespace on
+Docker Hub. Mirroring makes the repositories available within your organization
+and lets you customize them for your environment:
 
 - Image repositories: Mirroring lets you customize images by adding packages,
   OCI artifacts (such as custom certificates or additional tools), environment
@@ -69,9 +83,9 @@ It may take a few minutes for all the tags to finish mirroring.
 {{< tab name="CLI" >}}
 
 Authenticate with `docker login` using your Docker credentials, a [personal
-access token (PAT)](../../security/access-tokens.md) with **Read & Write**
+access token (PAT)](../../security/access-tokens/personal-access-tokens.md) with **Read & Write**
 permissions, or an [organization access token
-(OAT)](../../enterprise/security/access-tokens.md). When using an OAT, the
+(OAT)](../../security/access-tokens/organization-access-tokens.md). When using an OAT, the
 available operations depend on the token's permission scope:
 
 - To list mirrored repositories, the OAT must have read (pull) access to the
@@ -89,15 +103,15 @@ Use the [`docker dhi mirror`](/reference/cli/docker/dhi/mirror/) command:
 
 ```console
 $ docker dhi mirror start --org my-org \
-  -r dhi/golang,my-org/dhi-golang \
-  -r dhi/nginx,my-org/dhi-nginx \
-  -r dhi/prometheus-chart,my-org/dhi-prometheus-chart
+  dhi/golang,my-org/dhi-golang \
+  dhi/nginx,my-org/dhi-nginx \
+  dhi/prometheus-chart,my-org/dhi-prometheus-chart
 ```
 
 Mirror with dependencies:
 
 ```console
-$ docker dhi mirror start --org my-org -r dhi/golang,my-org/dhi-golang --dependencies
+$ docker dhi mirror start --org my-org dhi/golang,my-org/dhi-golang --dependencies
 ```
 
 List mirrored images in your organization:
@@ -118,37 +132,9 @@ $ docker dhi mirror list --org my-org --type helm-chart
 {{< tab name="Terraform" >}}
 
 You can manage DHI mirrors as infrastructure-as-code using the [DHI Terraform
-provider](https://registry.terraform.io/providers/docker-hardened-images/dhi/latest/docs).
+provider](/dhi/tools/terraform/).
 
-First, install and configure the provider:
-
-```hcl
-terraform {
-  required_providers {
-    dhi = {
-      source = "docker-hardened-images/dhi"
-    }
-  }
-}
-
-provider "dhi" {
-  docker_hub_username = var.docker_username
-  docker_hub_password = var.docker_password
-  organization        = var.org_name
-}
-```
-
-> [!NOTE]
->
-> Instead of specifying credentials in the provider block, you can set the
-> `DOCKER_USERNAME`, `DOCKER_PASSWORD`, and `DHI_ORG` environment variables. You
-> can also authenticate using an organization access token (OAT) in place of a
-> password. Set `DOCKER_USERNAME` to your organization namespace and
-> `DOCKER_PASSWORD` to the OAT. When using an OAT, the same permission scopes
-> apply as with the CLI: read (pull) access is required to list mirrors, and
-> push access is required to create or delete them.
-
-Then, define a `dhi_mirror` resource for each repository you want to mirror:
+Define a `dhi_mirror` resource for each repository you want to mirror:
 
 ```hcl
 resource "dhi_mirror" "golang" {
@@ -214,9 +200,9 @@ updates. You can still use the last images or charts that were mirrored.
 {{< tab name="CLI" >}}
 
 Authenticate with `docker login` using your Docker credentials, a [personal
-access token (PAT)](../../security/access-tokens.md) with **Read & Write**
+access token (PAT)](../../security/access-tokens/personal-access-tokens.md) with **Read & Write**
 permissions, or an [organization access token
-(OAT)](../../enterprise/security/access-tokens.md) with push access to the
+(OAT)](../../security/access-tokens/organization-access-tokens.md) with push access to the
 relevant repository.
 
 Use the [`docker dhi mirror`](/reference/cli/docker/dhi/mirror/) command:
@@ -315,15 +301,13 @@ same steps to a non-mirrored image by updating the `SRC_ATT_REPO` and
 1. Set environment variables for your specific environment. Replace the
    placeholders with your actual values.
 
-   In this example, you use a Docker username to represent a member of the Docker
-   Hub organization that the DHI repositories are mirrored in. Prepare a
-   [personal access token (PAT)](../../security/access-tokens.md) for the user
-   with `read only` access. Alternatively, you can use your organization name and
-   an [organization access token
-   (OAT)](../../enterprise/security/access-tokens.md) to authenticate with `docker.io`.
-   Note that OATs are not supported for `registry.scout.docker.com`. If your
-   workflow requires authenticating to the Scout registry, use a personal access
-   token (PAT) for that step.
+   In this example, you authenticate as your Docker organization using an
+   [organization access token
+   (OAT)](../../security/access-tokens/organization-access-tokens.md). The OAT must have at
+   least pull access to every DHI repository you want to mirror. Only
+   repositories in the token's scope are accessible. Alternatively, you can
+   authenticate as a Docker Hub user with a [personal access token
+   (PAT)](../../security/access-tokens/personal-access-tokens.md) that has `read only` access.
 
    > [!WARNING]
    >
@@ -334,9 +318,8 @@ same steps to a non-mirrored image by updating the `SRC_ATT_REPO` and
    > at runtime, or secret management tools.
 
    ```console
-   $ export DOCKER_USERNAME="YOUR_DOCKER_USERNAME"
-   $ export DOCKER_PAT="YOUR_DOCKER_PAT"
    $ export DOCKER_ORG="YOUR_DOCKER_ORG"
+   $ export DOCKER_OAT="YOUR_DOCKER_OAT"
    $ export DEST_REG="registry.example.com"
    $ export DEST_REPO="mirror/dhi-python"
    $ export DEST_REG_USERNAME="YOUR_DESTINATION_REGISTRY_USERNAME"
@@ -350,8 +333,8 @@ same steps to a non-mirrored image by updating the `SRC_ATT_REPO` and
    the attestations, and your destination registry.
 
    ```console
-   $ echo $DOCKER_PAT | regctl registry login -u "$DOCKER_USERNAME" --pass-stdin docker.io
-   $ echo $DOCKER_PAT | regctl registry login -u "$DOCKER_USERNAME" --pass-stdin registry.scout.docker.com
+   $ echo $DOCKER_OAT | regctl registry login -u "$DOCKER_ORG" --pass-stdin docker.io
+   $ echo $DOCKER_OAT | regctl registry login -u "$DOCKER_ORG" --pass-stdin registry.scout.docker.com
    $ echo $DEST_REG_TOKEN | regctl registry login -u "$DEST_REG_USERNAME" --pass-stdin "$DEST_REG"
    ```
 
@@ -401,11 +384,11 @@ version: 1
 # Optional: inline creds if not relying on prior CLI logins
 # creds:
 #   - registry: docker.io
-#     user: <your-docker-username>
-#     pass: "{{file \"/run/secrets/docker_token\"}}"
+#     user: <your-docker-org>
+#     pass: "{{file \"/run/secrets/docker_oat\"}}"
 #   - registry: registry.scout.docker.com
-#     user: <your-docker-username>
-#     pass: "{{file \"/run/secrets/docker_token\"}}"
+#     user: <your-docker-org>
+#     pass: "{{file \"/run/secrets/docker_oat\"}}"
 #   - registry: registry.example.com
 #     user: <service-user>
 #     pass: "{{file \"/run/secrets/dest_token\"}}"

@@ -1,0 +1,68 @@
+name: sbx env exec
+synopsis: Execute a command inside a sandbox environment
+experimental: true
+description: |-
+    Run COMMAND in the sandbox declared in .sbxenv.yaml. The sandbox
+    must already exist (see "sbx env create" and "sbx env run"); a stopped sandbox is
+    started first.
+
+    Arguments before `--` are environment-file paths, following the same rules as
+    the other "sbx env" subcommands: each PATH may be a directory (the file is
+    <PATH>/.sbxenv.yaml) or the path to the environment file itself, and passing
+    more than one deep-merges them in order. Without a `--` every positional
+    argument forms the command and the environment file is read from the current
+    directory.
+
+    Flags match the behavior of "sbx exec".
+usage: sbx env exec [flags] [PATH...] -- COMMAND [ARG...]
+options:
+    - name: detach
+      shorthand: d
+      default_value: "false"
+      usage: 'Detached mode: run command in the background'
+    - name: detach-keys
+      usage: Override the key sequence for detaching a container
+    - name: env
+      shorthand: e
+      default_value: '[]'
+      usage: Set environment variables
+    - name: env-file
+      default_value: '[]'
+      usage: Read in a file of environment variables
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for exec
+    - name: interactive
+      shorthand: i
+      default_value: "false"
+      usage: Keep STDIN open even if not attached
+    - name: privileged
+      default_value: "false"
+      usage: Give extended privileges to the command
+    - name: tty
+      shorthand: t
+      default_value: "false"
+      usage: Allocate a pseudo-TTY
+    - name: user
+      shorthand: u
+      usage: 'Username or UID (format: <name|uid>[:<group|gid>])'
+    - name: workdir
+      shorthand: w
+      usage: Working directory inside the container
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: |4-
+      # Run a command in the environment declared in the current directory
+      sbx env exec go test ./...
+
+      # Open a shell
+      sbx env exec -it -- bash
+
+      # Run against explicitly merged environment files
+      sbx env exec .sbxenv.yaml override.yaml -- npm test
+see_also:
+    - sbx env - (Experimental) Manage sandboxes declaratively from a .sbxenv.yaml file

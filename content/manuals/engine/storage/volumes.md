@@ -403,9 +403,8 @@ $ docker volume rm nginx-vol
 
 ## Use a read-only volume
 
-For some development applications, the container needs to write into the bind
-mount so that changes are propagated back to the Docker host. At other times,
-the container only needs read access to the data. Multiple
+For some applications, the container needs to write to the volume. At other
+times, the container only needs read access to the data. Multiple
 containers can mount the same volume. You can simultaneously mount a
 single volume as `read-write` for some containers and as `read-only` for others.
 
@@ -809,5 +808,6 @@ $ docker volume prune
 
 - Learn about [bind mounts](bind-mounts.md).
 - Learn about [tmpfs mounts](tmpfs.md).
+- Learn about [image mounts](image-mounts.md).
 - Learn about [storage drivers](/engine/storage/drivers/).
 - Learn about [third-party volume driver plugins](/engine/extend/legacy_plugins/).

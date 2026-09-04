@@ -1,19 +1,17 @@
 ---
 title: Troubleshooting
-weight: 60
+weight: 130
 description: Resolve common issues when using Docker Sandboxes.
 keywords: docker sandboxes, sbx, troubleshooting, diagnostics, reset, network policy, git, ssh
 ---
-
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 ## Run diagnostics
 
 Before digging into a specific issue, run
 [`sbx diagnose`](/reference/cli/sbx/diagnose/) to check for common problems
-with your installation, such as a missing CLI binary, an unresponsive daemon,
-a CLI/daemon version mismatch, missing storage directories, or broken
-authentication.
+with your installation, such as a missing CLI binary, daemon reachability
+problems, a CLI/daemon version mismatch, missing storage directories, or
+broken authentication.
 
 ```console
 $ sbx diagnose
@@ -24,6 +22,19 @@ with suggested fixes. Use `--output json` to get machine-readable output, or
 `--output github-issue` to generate a Markdown snippet suitable for pasting
 into a GitHub issue.
 
+## Restart the sandbox daemon
+
+If sandbox commands hang, fail to connect to the daemon, or keep returning
+daemon errors, restart the sandbox daemon before resetting sandbox state:
+
+```console
+$ sbx daemon restart
+```
+
+Then retry the command that failed. Restarting the daemon doesn't delete
+sandbox data. If the issue persists or state is corrupted, use
+[`sbx reset`](/reference/cli/sbx/reset/).
+
 ## Resetting sandboxes
 
 If you hit persistent issues or corrupted state, run
@@ -32,7 +43,8 @@ data. Create fresh sandboxes afterwards.
 
 ## Agent can't install packages or reach an API
 
-Sandboxes use a [deny-by-default network policy](security/policy.md).
+Sandboxes use [network access rules](governance/access-controls/network.md) to
+control outbound traffic.
 If the agent fails to install packages or call an external API, the target
 domain is likely not in the allow list. Check which requests are being blocked:
 
@@ -43,38 +55,63 @@ $ sbx policy log
 Then allow the domains your workflow needs:
 
 ```console
-$ sbx policy allow network -g "*.npmjs.org,*.pypi.org,files.pythonhosted.org"
+$ sbx policy allow network "*.npmjs.org,*.pypi.org,files.pythonhosted.org"
 ```
 
 To allow all outbound traffic instead:
 
 ```console
-$ sbx policy allow network -g "**"
+$ sbx policy allow network "**"
 ```
 
 If `sbx policy allow` doesn't unblock the request, your organization may
 manage sandbox policies centrally and take precedence over local rules. See
-[Organization governance](security/governance.md).
+[Organization policies](governance/access-controls/organization.md).
+
+## Kit fails to install: source not in allowlist
+
+If loading a kit fails with a message like its source is not in your
+allowlist:
+
+```console
+$ sbx run claude --kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=vale"
+ERROR: resolve kits: kit "git+https://github.com/docker/sbx-kits-contrib.git#dir=vale" cannot be installed — its source is not in your allowlist.
+```
+
+`sbx` restricts kit installs to an allowlist of sources, which defaults to
+Docker Hub (`docker.io/`) only. Add the kit's publisher to the
+`kit.allowedSources` setting, keeping the entries you want to retain:
+
+```console
+$ sbx settings set kit.allowedSources '["docker.io/","github.com/docker/"]'
+```
+
+Then run the command again. For details, including how to allow local kits or
+any remote source, see [Restrict kit sources](customize/kits.md#restrict-kit-sources).
 
 ## SSH and other non-HTTP connections fail
 
-Non-HTTP TCP connections like SSH can be allowed by adding a policy rule for
-the destination IP address and port. For example, to allow SSH to a specific
-host:
+Non-HTTP TCP connections such as SSH can be allowed by adding a policy rule for
+the destination. Hostname rules work for these connections because the sandbox
+recovers the hostname from its DNS resolver when the protocol doesn't include
+one:
 
 ```console
-$ sbx policy allow network -g "10.1.2.3:22"
+$ sbx policy allow network "myhost:22"
 ```
 
-Hostname-based rules (for example, `myhost:22`) don't work for non-HTTP
-connections because the proxy can't resolve the hostname to an IP address in
-this context. Use the IP address directly.
+If the destination is reached by IP address without a DNS lookup, the hostname
+can't be recovered. Use an address-based rule in that case:
+
+```console
+$ sbx policy allow network "10.1.2.3:22"
+```
 
 UDP and ICMP traffic is blocked at the network layer and can't be unblocked
 with policy rules.
 
 For Git operations over SSH, you can either add an allow rule for the Git
-server's IP address or use HTTPS URLs instead:
+server's hostname or IP address, or use HTTPS URLs instead:
 
 ```console
 $ git clone https://github.com/owner/repo.git
@@ -84,7 +121,7 @@ $ git clone https://github.com/owner/repo.git
 
 If a request to `127.0.0.1` or a local network IP returns "connection refused"
 from inside a sandbox, the address is not reachable from within the sandbox VM.
-See [Accessing host services from a sandbox](usage.md#accessing-host-services-from-a-sandbox).
+See [Accessing host services from a sandbox](workflows/development.md#accessing-host-services-from-a-sandbox).
 
 ## Docker authentication failure
 
@@ -99,7 +136,7 @@ If the agent can't reach its model provider or you see API key errors, the key
 is likely invalid, expired, or not configured. Verify it's set in your shell
 configuration file and that you sourced it or opened a new terminal.
 
-For agents that use the [credential proxy](security/credentials.md), make sure
+For agents that use the [credential proxy](configuration/credentials.md), make sure
 you haven't set the API key to an invalid value inside the sandbox — the proxy
 injects credentials automatically on outbound requests.
 
@@ -108,41 +145,133 @@ If credentials are configured correctly but API calls still fail, check
 the `transparent` proxy don't get credential injection. This can happen when a
 client inside the sandbox (such as a process in a Docker container) isn't
 configured to use the forward proxy. See
-[Monitoring network activity](security/policy.md#monitoring)
+[Monitoring network activity](governance/monitor-and-enforce/monitoring.md)
 for details.
 
-## Docker build export fails with an ownership error
+## API calls fail with a certificate error
 
-Running `docker build` with the local exporter (`--output=type=local` or `-o
-<path>`) inside a sandbox fails because the exporter tries to `lchown` output
-files to preserve ownership from the build. Processes inside the sandbox run as
-an unprivileged user without `CAP_CHOWN`, so the operation is denied.
+If your organization uses a proxy that inspects HTTPS traffic, agent requests
+can fail with a certificate error such as
+`SSL certificate problem: self-signed certificate in certificate chain`. Install
+your organization's internal root CA inside the sandbox so the agent and its
+SDKs trust certificates signed by the proxy. Certificate errors can stop a
+request before the credential proxy can inject credentials.
 
-Use the tar exporter and extract the archive instead:
+For repeatable setup, create a [sandbox kit](customize/kits.md) that installs
+the CA when the sandbox is created. See
+[Install an internal CA certificate](customize/kit-examples.md#install-an-internal-ca-certificate)
+for an example kit.
+
+Use a PEM-encoded certificate with a `.crt` extension. If traffic can be signed
+by more than one internal proxy, install each proxy's root CA before running
+`update-ca-certificates`.
+
+Create a sandbox with the kit:
 
 ```console
-$ mkdir -p ./result
-$ docker build --output type=tar,dest=- . | tar xf - -C ./result
+$ sbx run claude --kit ./internal-ca/
 ```
 
-Extracting the tar archive as the current user avoids the `chown` call.
-
-## Stale Git worktree after removing a sandbox
-
-If you used `--branch`, worktree cleanup during `sbx rm` is best-effort. If
-it fails, the sandbox is removed but the branch and worktree are left behind.
-If `git worktree list` shows a stale worktree in `.sbx/` after removing a
-sandbox, clean it up manually:
+To update an existing sandbox, copy the certificate into the sandbox and update
+the trust store:
 
 ```console
-$ git worktree remove .sbx/<sandbox-name>-worktrees/<branch-name>
-$ git branch -D <branch-name>
+$ sbx cp ./internal-ca.crt <sandbox-name>:/tmp/internal-ca.crt
+$ sbx exec <sandbox-name> -- sudo install -m 0644 /tmp/internal-ca.crt /usr/local/share/ca-certificates/internal-ca.crt
+$ sbx exec <sandbox-name> -- sudo update-ca-certificates
+```
+
+> [!IMPORTANT]
+> Install the CA into the system trust store with `update-ca-certificates`, as
+> shown above. Don't override the sandbox's TLS trust variables (such as
+> `SSL_CERT_FILE`) to point at only your internal CA. Doing so replaces the
+> system bundle
+> and breaks the trust the credential proxy depends on, so requests on the
+> `forward` egress path fail.
+
+If API calls still fail after installing the CA, run `sbx policy log` and check
+the egress path in the **PROXY** column:
+
+- `forward`: the credential proxy terminates TLS and presents its own
+  certificate, which the sandbox already trusts. Requests on this path don't
+  need the internal CA, and overriding the sandbox's trust variables breaks
+  them, as described above.
+- `forward-bypass` and `transparent`: the proxy forwards packets to the
+  upstream proxy without terminating TLS, so the sandbox sees your
+  organization's certificate directly. These paths are where installing the
+  internal CA applies. The only difference between them is whether the client
+  knows it's talking to a proxy.
+
+## Sandbox runs out of disk space
+
+The sandbox root (`/`) filesystem defaults to 20 GB. To increase it, set `DOCKER_SANDBOXES_ROOT_SIZE`
+before creating the sandbox:
+
+```console
+$ DOCKER_SANDBOXES_ROOT_SIZE=40g sbx run claude
+```
+
+`DOCKER_SANDBOXES_ROOT_SIZE` controls the root filesystem size. `DOCKER_SANDBOXES_DOCKER_SIZE`
+controls the Docker data disk (`/var/lib/docker`) size. The two are independent — set both if needed.
+
+For a [clone-mode sandbox](usage.md#clone-mode), set
+`DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE` before creating the sandbox to
+configure the cloned workspace volume capacity. The variable accepts
+human-readable size strings such as `100g`:
+
+```console
+$ DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE=100g sbx run --clone claude
+```
+
+## Filesystem operations are slow in large repositories
+
+Filesystem operations such as `git status`, `git log`, or directory scans can
+be noticeably slow when the sandbox workspace is mounted in direct mode (the
+default for workspaces without `--clone`). Virtiofs caching speeds up these
+workloads. Clone-mode sandboxes always enable it, so this tuning applies only
+to direct mode.
+
+Virtiofs caching is enabled by default on all operating systems. If you
+experience Git index corruption or unexpected file content, disable caching
+with the kill switch and recreate the sandbox:
+
+```console
+$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <template>
+```
+
+## Clone mode reports "not in a Git repository" on WSL
+
+On Windows, running [`sbx run --clone`](usage.md#clone-mode) against a
+repository on a WSL filesystem (a `\\wsl.localhost\...` path) can fail even
+though the directory is a valid Git repository:
+
+```console
+> sbx run --clone claude \\wsl.localhost\Ubuntu\home\you\repo
+ERROR: --clone requires a Git repository, but \\wsl.localhost\Ubuntu\home\you\repo is not in a Git repository
+```
+
+The cause is Git's dubious ownership check. When Git on Windows accesses a
+repository owned by a different user across the WSL boundary, it refuses to
+operate on it, so the underlying repository detection fails:
+
+```console
+> git -C \\wsl.localhost\Ubuntu\home\you\repo rev-parse --show-toplevel
+fatal: detected dubious ownership in repository at '//wsl.localhost/Ubuntu/home/you/repo'
+```
+
+Add the repository to Git's `safe.directory` list to allow access, then run
+the command again:
+
+```console
+> git config --global --add safe.directory '%(prefix)///wsl.localhost/Ubuntu/home/you/repo'
+> sbx run --clone claude \\wsl.localhost\Ubuntu\home\you\repo
+✓ Git repository detected: \\wsl.localhost\Ubuntu\home\you\repo
 ```
 
 ## Sandbox commits aren't signed
 
 Docker Sandboxes can sign Git commits with SSH keys from your host agent.
-For setup steps, see [Signed commits](usage.md#signed-commits).
+For setup steps, see [Commit signing](workflows/git.md#commit-signing).
 
 If `ssh-add -L` prints `The agent has no identities.`, the sandbox can reach
 the forwarded agent, but the host agent doesn't have a loaded key. Load the
@@ -186,24 +315,6 @@ isn't configured, use one of these workarounds:
 
   This replays each commit on the branch and re-signs it with your local
   signing key.
-
-## Clock drift after sleep/wake
-
-If your laptop sleeps and wakes while a sandbox is running, the VM clock can
-fall behind the host clock. This causes problems such as:
-
-- External API calls failing because of timestamp validation.
-- Git commits with incorrect timestamps.
-- TLS certificate errors due to time mismatches.
-
-To fix the issue, stop and restart the sandbox:
-
-```console
-$ sbx stop <sandbox-name>
-$ sbx run <sandbox-name>
-```
-
-Restarting the sandbox re-syncs the VM clock with the host.
 
 ## Daemon fails to start after downgrading
 

@@ -8,7 +8,10 @@ description: |-
 
     Port spec format: [[HOST_IP:]HOST_PORT:]SANDBOX_PORT[/PROTOCOL]
     If HOST_PORT is omitted, an ephemeral port is allocated automatically.
-    HOST_IP defaults to 127.0.0.1, PROTOCOL defaults to tcp.
+    If HOST_IP is omitted, the port is bound on loopback, expanded based on
+    PROTOCOL and the sandbox's address families: tcp/udp binds both 127.0.0.1
+    and ::1 (or only 127.0.0.1 if the sandbox is IPv4-only); tcp4/udp4 binds
+    only 127.0.0.1; tcp6/udp6 binds only ::1. PROTOCOL defaults to tcp.
     Supported protocols: tcp, tcp4, tcp6, udp, udp4, udp6.
 usage: sbx ports SANDBOX [flags]
 options:

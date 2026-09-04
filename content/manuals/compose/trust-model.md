@@ -14,7 +14,7 @@ This means that any Compose file you run, whether it lives on your local
 filesystem, in a Git repository, or in an OCI registry, has full control over
 how containers interact with your host. The security boundary is not where the file comes from but whether you trust the author.
 
-Evaluating trust means asking: do you know who authored this file, can you verify it hasn't changed since you last reviewed it, and do you understand every privilege it requests?
+Evaluating trust means asking: Who authored this file? Has it changed since you last reviewed it? Do you understand every privilege it requests?
 
 ## The dependency chain
 
@@ -85,8 +85,16 @@ implications when set by an untrusted author:
 | `pid: host` | Shares the host PID namespace |
 | `devices` | Exposes host devices to the container |
 | `image` | Pulls and runs an arbitrary container image |
+| `env_file`, `label_file`, `secrets`/`configs` (`file:`), `include`, `extends` | Read files from the host, directly or through symlinks resolved from a remote checkout, and can surface their contents during configuration loading |
+| `provider` | Runs the binary named by `provider.type` on the host, outside any container, when you run `up`, `down`, or `stop` |
 
 When in doubt, look up the effect of any unfamiliar field before running the configuration.
+
+Like `volumes`, the file-reference fields read any file the user running Compose
+can access, including through symlinks resolved from a remote checkout, and their
+contents can appear in `docker compose config` output before any container starts.
+Compose does not confine reads to the project directory. Treat a Compose project as
+code you run, not data you inspect.
 
 ### CI/CD environments
 
@@ -100,7 +108,7 @@ access to credentials, cloud provider tokens, or Docker sockets.
 
 ### Pin remote references to digests
 
-Tags are mutable meaning anyone with push access to a registry can overwrite a tag silently, so a reference you reviewed last week may point to different content today.
+Tags are mutable, meaning anyone with push access to a registry can overwrite a tag silently, so a reference you reviewed last week may point to different content today.
 
 Digests are immutable. Instead of referencing by tag, pin to the digest. 
 

@@ -4,11 +4,10 @@ keywords: tensorflow.js, machine learning, ml, mediapipe, blazeface, face detect
 title: Face detection with TensorFlow.js
 summary: |
   This guide explains how to run TensorFlow.js in Docker containers.
-tags: [ai]
-languages: [js]
 aliases:
   - /guides/use-case/tensorflowjs/
 params:
+  tags: [ai]
   time: 20 minutes
 ---
 
@@ -43,7 +42,7 @@ pre-trained models, facilitating a wide range of ML applications directly in web
 environments. TensorFlow.js offers efficient computation, making sophisticated
 ML tasks accessible to web developers without deep ML expertise.
 
-## Why Use TensorFlow.js and Docker together?
+## Why use TensorFlow.js and Docker together?
 
 - Environment consistency and simplified deployment: Docker packages
   TensorFlow.js applications and their dependencies into containers, ensuring

@@ -16,6 +16,7 @@
         "hooks": [
           {
             "type": "command",
+            "if": "Bash(git add *)",
             "command": "bash .agents/hooks/enforce-git-hygiene.sh"
           }
         ],

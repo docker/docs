@@ -1,15 +1,16 @@
 ---
 title: Isolation layers
 weight: 10
-description: How Docker Sandboxes isolate AI agents using hypervisor, network, Docker Engine, and credential boundaries.
-keywords: docker sandboxes, isolation, hypervisor, network, credentials
+description: How Docker Sandboxes isolate AI agents using hypervisor, network, Docker Engine, workspace, and credential boundaries.
+keywords: docker sandboxes, isolation, hypervisor, network, credentials, workspace, git
+aliases:
+  - /ai/sandboxes/security/workspace/
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 AI coding agents need to execute code, install packages, and run tools on
-your behalf. Docker Sandboxes run each agent in its own microVM with four
-isolation layers: hypervisor, network, Docker Engine, and credential proxy.
+your behalf. Docker Sandboxes run each agent in its own microVM. Five
+isolation layers protect your host: hypervisor, network, Docker Engine,
+workspace, and credential proxy.
 
 ## Hypervisor isolation
 
@@ -19,10 +20,11 @@ processes, files, or resources outside its defined boundaries.
 
 - **Process isolation:** separate kernel per sandbox; processes inside the VM
   are invisible to your host and to other sandboxes
-- **Filesystem isolation:** only your workspace directory is shared with the
-  host. The rest of the VM filesystem persists across restarts but is removed
-  when you delete the sandbox. Symlinks pointing outside the workspace scope
-  are not followed.
+- **Filesystem isolation:** your workspace directory and, for supported agents
+  that haven't opted out, the dedicated [shared skills
+  store](../workflows/agent-skills.md) are shared with the host. The rest
+  of the VM filesystem persists across restarts but is removed when you delete
+  the sandbox. Symlinks pointing outside the workspace scope are not followed.
 - **Full cleanup:** when you remove a sandbox with `sbx rm`, the VM and
   everything inside it is deleted
 
@@ -31,23 +33,25 @@ hypervisor boundary is the isolation control, not in-VM privilege separation.
 
 ## Network isolation
 
-Each sandbox has its own isolated network. Sandboxes cannot communicate with
-each other and cannot reach your host's localhost. There is no shared network
-between sandboxes or between a sandbox and your host.
+Each sandbox has its own isolated network. Sandboxes cannot communicate
+directly with each other or share a network with your host. To reach a service
+running on the host through a policy-controlled connection, see
+[Accessing host services from a sandbox](../workflows/development.md#accessing-host-services-from-a-sandbox).
 
-All HTTP and HTTPS traffic leaving a sandbox passes through a proxy on your
-host that enforces the [network policy](policy.md). The sandbox routes
-traffic through either a forward proxy or a transparent proxy depending on the
-client's configuration. Both enforce the network policy; only the forward proxy
-[injects credentials](credentials.md) for AI services.
+All outbound TCP traffic passes through a proxy on your host that enforces the
+[network access policy](../governance/access-controls/network.md). The sandbox
+routes traffic through either a forward proxy or a transparent proxy depending
+on the client's configuration. Both enforce the network policy. Only the
+forward proxy [injects credentials](../configuration/credentials.md) for AI services.
 
-Raw TCP connections, UDP, and ICMP are blocked at the network layer. DNS
-resolution is handled by the proxy; the sandbox cannot make raw DNS queries.
-Traffic to private IP ranges, loopback, and link-local addresses is also
-blocked. Only domains explicitly listed in the policy are reachable.
+Direct external UDP and ICMP are blocked at the network layer. DNS queries use
+the sandbox's internal resolver, which enforces network policy. TCP connections
+are allowed only when a policy rule matches the destination.
 
 For the default set of allowed domains, see
-[Default security posture](defaults.md).
+[Default security posture](defaults.md). To forward allowed traffic through a
+corporate or upstream proxy, see
+[Configure an upstream proxy](../configuration/upstream-proxy.md).
 
 ## Docker Engine isolation
 
@@ -56,22 +60,175 @@ Mounting your host Docker socket into a container would give the agent full
 access to your environment.
 
 Docker Sandboxes avoid this by running a separate [Docker
-Engine](https://docs.docker.com/engine/) inside the sandbox environment, isolated from
+Engine](/manuals/engine/_index.md) inside the sandbox environment, isolated from
 your host. When the agent runs `docker build` or `docker compose up`, those
 commands execute against that engine. The agent has no path to your host Docker
 daemon.
 
-```plaintext
-Host system
-  ├── Host Docker daemon
-  │   └── Your containers and images
-  │
-  └── Sandbox Docker engine (isolated from host)
-      ├── [VM] Agent container — sandbox 1
-      │    └── [VM] Containers created by agent
-      └── [VM] Agent container — sandbox 2
-           └── [VM] Containers created by agent
+This Docker Engine boundary applies to processes running inside the sandbox VM.
+It doesn't apply to local stdio MCP servers registered through the
+[MCP gateway](../mcp-gateway.md). Those servers run on the host, outside the
+sandbox VM. If a local MCP server starts a Docker container, it uses Docker on
+the host.
+
+Each sandbox VM runs its own Docker Engine. The agent runs inside the VM,
+alongside that engine, and drives it to create containers, all within the
+VM:
+
+```mermaid
+flowchart TB
+  subgraph host["Host system"]
+    subgraph hostd["Host Docker daemon"]
+      hc["Your containers and images"]
+    end
+    subgraph vm["Sandbox (microVM)"]
+      a["Agent"]
+      subgraph e["Sandbox Docker engine"]
+        c["Containers created by agent"]
+      end
+      a -->|"docker build / compose up"| e
+    end
+  end
+  style host fill:#3b82f622,stroke:#3b82f6
 ```
+
+## Workspace isolation
+
+When you create a sandbox, you choose one of two ways to share your
+workspace with it:
+
+- **Direct mount** (the default): the agent has read-write access to
+  your working tree. There is no boundary between the agent's edits and
+  your host filesystem.
+- **Clone mode** (`--clone`): your repository is mounted read-only into
+  the VM and the agent works on a private clone inside the VM. The
+  agent's edits never reach your host until you fetch them.
+
+See [Git workflows](../workflows/git.md) for the workflow side of
+each.
+
+### Direct mount (default)
+
+By default, your workspace is shared into the VM as a read-write mount.
+The agent and the host see the same files, and changes the agent makes
+appear on your host as soon as they're written.
+
+Direct mounts enforce access by path. If a workspace file is a hard link to a
+file outside the workspace, the agent can read and modify the underlying file
+through the workspace path. Changes affect every hard link to that file,
+including links outside the authorized workspace. Filesystem access policies
+do not block this access because they evaluate the workspace path rather than
+other paths to the same file. [Clone mode](#clone-mode) prevents writes through
+the primary workspace by mounting the host repository read-only.
+
+There is no isolation between the agent and your workspace in this mode.
+The agent can create, modify, or delete any file in the workspace,
+including:
+
+- Source code and configuration files
+- Build files (`Makefile`, `package.json`, `Cargo.toml`)
+- Git hooks (`.git/hooks/`)
+- CI configuration (`.github/workflows/`, `.gitlab-ci.yml`)
+- IDE configuration (`.vscode/tasks.json`, `.idea/` run configurations)
+- AI project configuration and settings (`.claude/`, `.codex/`, `.gemini/`)
+- Sandbox environment files (`.sbxenv.yaml`)
+- Hidden files, shell scripts, and executables
+
+Some of these files execute code when you trigger normal development
+actions — committing, pushing, building, or opening the project in an IDE.
+Review them after any agent session before performing those actions:
+
+- Git hooks (`.git/hooks/`) run on commit, push, and other Git actions.
+  These are inside `.git/` and don't appear in `git diff` output —
+  check them separately with `ls -la .git/hooks/`.
+- CI configuration (`.github/workflows/`, `.gitlab-ci.yml`) runs on
+  push.
+- Build files (`Makefile`, `package.json` scripts, `Cargo.toml`) run
+  during build or install steps.
+- IDE configuration (`.vscode/tasks.json`, `.idea/`) can run tasks
+  when you open the project.
+- AI project configuration and settings (`.claude/settings.json`, `.codex/config.toml`,
+  `.gemini/settings.json`) can define hooks and startup commands that
+  execute automatically.
+- Sandbox environment files (`.sbxenv.yaml`) can declare `secrets` and
+  `registries` whose values come from a `command`. Those commands run on
+  the host, as you, the next time you run `sbx env create` or
+  `sbx env run` in that directory — before the sandbox exists. Because the
+  file sits in the workspace, an agent in direct mount can add or change
+  one.
+
+> [!WARNING]
+> Treat sandbox-modified workspace files the same way you would treat a pull
+> request from an untrusted contributor: review before you trust them on
+> your host.
+
+### Clone mode
+
+When you start a sandbox with [`--clone`](../usage.md#clone-mode), the agent
+never works directly against your host repository. Even with full root
+inside the VM, it cannot modify your `.git` directory, your working tree,
+or any tracked file on your host.
+
+> [!IMPORTANT]
+> Clone mode protects your host repository from modification, **not from
+> inspection**. Your repository is still mounted read-only into the sandbox,
+> including untracked files and files excluded by `.gitignore`. Files such as
+> `.env` remain readable by the agent. Store secrets outside your working
+> directory or use [credential isolation](#credential-isolation) instead.
+
+```mermaid
+flowchart LR
+  subgraph host["Host repository (untouched)"]
+    direction TB
+    repo[".git/ + working tree"]
+    remote["remote sandbox-&lt;name&gt;"]
+  end
+  subgraph vm["Sandbox VM"]
+    direction TB
+    mount["/run/sandbox/source<br/>(read-only bind mount)"]
+    clone["private clone (RW)<br/>agent edits here"]
+    daemon["git-daemon"]
+  end
+  repo -->|"read-only bind mount"| mount
+  mount -->|"git clone"| clone
+  clone --> daemon
+  daemon -->|"git fetch"| remote
+```
+
+How the boundary is enforced:
+
+- Your repository's Git root is mounted at `/run/sandbox/source` as
+  read-only. The mount covers your entire working directory, including
+  untracked files and files excluded by `.gitignore`. Nothing the agent
+  does inside the VM can write back through that mount, but all files
+  under the Git root are readable inside the sandbox. This includes
+  credential files not tracked by Git, such as `.env`.
+- The agent works on a private clone that lives inside the sandbox. The
+  clone has its own index, its own refs, and its own working tree. Writes
+  to the clone never reach your host.
+- The sandbox publishes the clone over a Git daemon bound to localhost on
+  the host. The CLI wires it up as a `sandbox-<sandbox-name>` Git remote on
+  your host repository. Fetching from that remote uses the same trust
+  model as fetching from any third-party remote — nothing is integrated
+  until you explicitly merge or check out the fetched refs.
+
+The practical guarantees:
+
+- The agent cannot modify any tracked file or any byte under `.git/` on
+  your host. A compromised or buggy agent cannot drop a
+  `.git/hooks/pre-commit`, alter `.github/workflows/`, or sneak changes
+  into your working tree.
+- Concurrent `git` commands on the host and inside the sandbox cannot
+  race on a shared `.git/index` or shared refs — there is no shared
+  writable Git state.
+- Credentials, signing keys, and any settings in your repository's
+  `.git/config` stay on the host. The agent's clone has its own
+  independent configuration.
+
+Use clone mode whenever you want a strong boundary between the agent's
+Git activity and your host repository — for example when running an
+unfamiliar agent, running multiple agents on the same repository at once,
+or keeping your working tree clean while the agent works.
 
 ## Credential isolation
 
@@ -84,4 +241,4 @@ environment variables or files inside the sandbox unless you explicitly set
 them. This means a compromised sandbox cannot read API keys from the local
 environment.
 
-For how to store and manage credentials, see [Credentials](credentials.md).
+For how to store and manage credentials, see [Credentials](../configuration/credentials.md).

@@ -13,11 +13,11 @@
       {{- end }}
       {{ .title }}
     </div>
-    <span :class="{ 'hidden' : !open }" class="icon-svg"
-      >{{ partialCached "icon" "arrow_drop_up" "arrow_drop_up" }}</span
+    <span :class="{ 'hidden' : !open }" class="icon-svg icon-sm"
+      >{{ partialCached "icon" "chevron-up" "chevron-up" }}</span
     >
-    <span :class="{ 'hidden' : open }" class="icon-svg"
-      >{{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}</span
+    <span :class="{ 'hidden' : open }" class="icon-svg icon-sm"
+      >{{ partialCached "icon" "chevron-down" "chevron-down" }}</span
     >
   </button>
   <div x-show="open" x-collapse class="px-4">

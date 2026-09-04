@@ -48,7 +48,7 @@ replaced by the new hardened image.
 > You must authenticate to `dhi.io` before you can pull Docker Hardened Images.
 > Use your Docker ID credentials (the same username and password you use for
 > Docker Hub). If you don't have a Docker account, [create
-> one](../../accounts/create-account.md) for free.
+> one](../../accounts/individual/create-account.md) for free.
 >
 > Run `docker login dhi.io` to authenticate.
 
@@ -58,7 +58,7 @@ replaced by the new hardened image.
 - FROM golang:1.25
 
 + ## Updated to use hardened base image
-+ FROM dhi.io/golang:1.25-debian12-dev
++ FROM dhi.io/golang:1.25-debian13-dev
 ```
 
 Note that DHI does not have a `latest` tag in order to promote best practices
@@ -89,20 +89,20 @@ The following example shows a multi-stage Dockerfile with a build stage and runt
 
 ```dockerfile
 # Build stage
-FROM dhi.io/golang:1.25-debian12-dev AS builder
+FROM dhi.io/golang:1.25-debian13-dev AS builder
 WORKDIR /app
 COPY . .
 RUN go build -o myapp
 
 # Runtime stage
-FROM dhi.io/golang:1.25-debian12
+FROM dhi.io/golang:1.25-debian13
 WORKDIR /app
 COPY --from=builder /app/myapp .
 ENTRYPOINT ["/app/myapp"]
 ```
 
 After updating your Dockerfile, build and test your application. If you encounter
-issues, see the [Troubleshoot](/manuals/dhi/troubleshoot.md) guide for common
+issues, see the [Troubleshoot](/manuals/dhi/how-to/troubleshoot.md) guide for common
 problems and solutions.
 
 ## Language-specific examples

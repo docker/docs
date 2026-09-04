@@ -1,6 +1,6 @@
 ---
 title: "Lab: Getting Started with Docker"
-linkTitle: "Lab: Getting Started with Docker"
+linkTitle: "Lab: Docker basics"
 description: |
   Learn Docker fundamentals by running containers, exploring the container
   lifecycle, and packaging a real Node.js app into your own custom image.
@@ -11,13 +11,6 @@ keywords: Docker, containers, Dockerfile, images, getting started, lab, labspace
 params:
   tags: [labs]
   time: 30 minutes
-  resource_links:
-    - title: Docker overview
-      url: /get-started/docker-overview/
-    - title: Dockerfile reference
-      url: /reference/dockerfile/
-    - title: Labspace repository
-      url: https://github.com/dockersamples/labspace-container-getting-started
 ---
 
 Start from zero and learn Docker's core building blocks. You'll run pre-built

@@ -114,9 +114,11 @@ $ docker build --no-cache -t my-image:my-tag .
 ```
 
 This gets the latest available versions of dependencies from package
-managers like `apt-get` or `npm`. However, `--no-cache` doesn't pull a
-fresh base image - it only prevents reusing cached layers. For a
-completely fresh build with the latest base image, combine both flags:
+managers like `apt-get` or `npm`. It does not pull a fresh base image —
+for that, use `--pull`.
+
+The two flags serve distinct purposes and can be combined. Use both
+together to get a fresh base image and re-execute all build steps:
 
 ```console
 $ docker build --pull --no-cache -t my-image:my-tag .
@@ -250,22 +252,22 @@ to look up and include the image digest for base image versions manually each
 time you want to update it. And you're opting out of automated security fixes,
 which is likely something you want to get.
 
-Docker Scout's default [**Up-to-Date Base Images**
-policy](../../scout/policy/_index.md#up-to-date-base-images) checks whether the
+Docker Scout's default [**No outdated base images**
+policy](../../scout/policy/_index.md#no-outdated-base-images) checks whether the
 base image version you're using is in fact the latest version. This policy also
 checks if pinned digests in your Dockerfile correspond to the correct version.
 If a publisher updates an image that you've pinned, the policy evaluation
 returns a non-compliant status, indicating that you should update your image.
 
-Docker Scout also supports an automated remediation workflow for keeping your
-base images up-to-date. When a new image digest is available, Docker Scout can
-automatically raise a pull request on your repository to update your
-Dockerfiles to use the latest version. This is better than using a tag that
-changes the version automatically, because you're in control and you have an
-audit trail of when and how the change occurred.
+To keep your base images up-to-date automatically, use
+[GitHub Dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuring-dependabot-version-updates)
+with `package-ecosystem: "docker"`. Dependabot raises pull requests to update
+your base image tags and digests on a schedule. This is better than using a tag
+that changes the version automatically, because you're in control and you have
+an audit trail of when and how the change occurred.
 
-For more information about automatically updating your base images with Docker
-Scout, see [Remediation](/manuals/scout/policy/remediation.md).
+You can also review available base image updates from the CLI with
+[`docker scout recommendations`](/reference/cli/docker/scout/recommendations/).
 
 ## Build and test your images in CI
 

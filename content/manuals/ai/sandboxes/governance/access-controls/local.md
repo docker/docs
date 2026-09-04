@@ -1,0 +1,212 @@
+---
+title: Local policy
+weight: 10
+description: Configure local network access rules for sandboxes on your machine.
+keywords: docker sandboxes, local policy, network access, allow rules, deny rules, sbx policy
+aliases:
+  - /ai/sandboxes/security/policy/
+  - /ai/sandboxes/governance/local/
+---
+
+The `sbx policy` command manages the local policy on your machine. The local
+policy contains network access rules. Rules apply to all sandboxes on the
+machine when you use the global scope, or to a single sandbox when scoped by
+name.
+
+Local policy interacts with organization governance as follows:
+
+- **No org governance**: the local policy controls what sandboxes can access.
+- **Org governance active**: only organization allow rules grant access, so
+  local allow rules are inactive and can't expand what the organization permits.
+  Local deny rules are still evaluated, so you can restrict access further than
+  the organization policy does. To list inactive rules, run
+  `sbx policy ls --include-inactive`. See
+  [Monitoring](../monitor-and-enforce/monitoring.md#showing-inactive-rules).
+
+See [Organization policies](organization.md) for how organization governance
+works.
+
+For domain patterns, wildcards, CIDR ranges, and filesystem path syntax, see
+[Policy concepts](../concepts.md#rule-syntax).
+
+## Default preset
+
+Outbound TCP traffic passes through a proxy on your host, which enforces access
+rules on every connection. Non-HTTP TCP traffic, including SSH, can be allowed
+with a hostname rule (for example, `sbx policy allow network "myhost:22"`) or an
+address-based rule. UDP and ICMP are blocked at the network layer and can't be
+unblocked with policy rules.
+
+If you haven't chosen a default preset, the CLI prompts you before it runs a
+sandbox. Running `sbx policy reset` clears the preset and prompts you to choose
+again:
+
+```plaintext
+Initialize the global network policy for your sandboxes:
+
+  Applies to all sandboxes, current and future — change it later with
+  "sbx policy allow/deny/rm". Kits, including built-in agent kits, may
+  also add per-sandbox rules.
+
+     1. Open         — All network traffic allowed, no restrictions.
+  ❯  2. Balanced     — Default deny, with common dev sites allowed.
+     3. Locked Down  — All network traffic blocked unless you allow it.
+
+  Use ↑/↓ or 1–3 to navigate, Enter to confirm, Esc to cancel.
+```
+
+| Preset      | Description                                                                                                                                       |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Open        | All outbound traffic is allowed. Equivalent to adding a wildcard allow rule with `sbx policy allow network "**"`.                                 |
+| Balanced    | Default deny, with a baseline allowlist covering AI provider APIs, package managers, code hosts, container registries, and common cloud services. |
+| Locked Down | All outbound traffic is blocked, including model provider APIs (for example, `api.anthropic.com`). You must explicitly allow everything you need. |
+
+The **Balanced** preset's baseline allowlist is a good starting point for most
+workflows. Run `sbx policy ls` to see exactly which rules it includes. As of
+v0.35.0, the Balanced preset also allows VS Code domains, Azure Blob Storage
+(`*.blob.core.windows.net`), and `dhi.io` over HTTP.
+
+> [!NOTE]
+> If your organization manages sandbox policies centrally, organization rules
+> take precedence over the preset you select here. See
+> [Organization policies](organization.md).
+
+### Non-interactive environments
+
+In non-interactive environments such as CI pipelines or headless servers, the
+interactive prompt can't be displayed. Use `sbx policy init` to set the
+preset before running any other `sbx` commands:
+
+```console
+$ sbx policy init balanced
+```
+
+Available values are `allow-all`, `balanced`, and `deny-all`.
+
+## Managing rules
+
+Use [`sbx policy allow`](/reference/cli/sbx/policy/allow/) and
+[`sbx policy deny`](/reference/cli/sbx/policy/deny/) to add or restrict access
+on top of the active preset. Changes take effect immediately. Rules apply to
+all sandboxes by default:
+
+```console
+$ sbx policy allow network api.anthropic.com
+$ sbx policy deny network ads.example.com
+```
+
+Pass `--sandbox <name>` to scope a rule to one sandbox:
+
+```console
+$ sbx policy allow network --sandbox my-sandbox api.example.com
+$ sbx policy deny network --sandbox my-sandbox ads.example.com
+```
+
+As of v0.38.0, you can also set per-sandbox deny rules at creation time with
+`--deny-network` on `sbx create` or `sbx run`, instead of adding them after the
+fact:
+
+```console
+$ sbx create --deny-network ads.example.com claude .
+$ sbx run --deny-network ads.example.com claude
+```
+
+Pass the flag multiple times to deny more than one host. Rules added this way
+appear in `sbx policy ls <name>` and can be removed with
+`sbx policy rm network --sandbox <name> --resource <host>`.
+
+Specify multiple hosts in one command with a comma-separated list:
+
+```console
+$ sbx policy allow network "api.anthropic.com,*.npmjs.org,*.pypi.org"
+```
+
+Remove a rule by resource or by rule ID:
+
+```console
+$ sbx policy rm network --resource ads.example.com
+$ sbx policy rm network --id 2d3c1f0e-4a73-4e05-bc9d-f2f9a4b50d67
+```
+
+To remove a sandbox-scoped rule, pass `--sandbox <name>`:
+
+```console
+$ sbx policy rm network --sandbox my-sandbox --resource api.example.com
+```
+
+To inspect which policies are active and where they come from, use
+`sbx policy ls`. Use `--source` to filter by origin (`local`, `org`, `kit`),
+`--decision` to filter by outcome (`allow`, `deny`), and `--wide` for
+rule-level detail including rule IDs. To inspect a single policy or rule in
+full, use `sbx policy inspect`. See
+[Monitoring](../monitor-and-enforce/monitoring.md).
+
+## Testing policy
+
+Before running a sandbox, you can check whether the current policy would allow
+a network request with `sbx policy check network`:
+
+```console
+$ sbx policy check network api.anthropic.com
+Allowed: api.anthropic.com
+
+$ sbx policy check network blocked.example.com
+Denied: blocked.example.com
+```
+
+The target can be a hostname, a `host:port` pair, an IP address, or a URL.
+Bare hostnames and IP addresses are evaluated against port 443. This is useful
+for verifying custom rules or checking what the Locked Down preset blocks
+before you start an agent.
+
+To check policy in the context of a specific sandbox:
+
+```console
+$ sbx policy check network --sandbox my-sandbox api.example.com
+```
+
+### Resetting
+
+To remove all custom rules and start fresh with a new preset, use
+`sbx policy reset`:
+
+```console
+$ sbx policy reset
+```
+
+This deletes the local policy store, restarts the daemon, and prompts you to
+choose a new preset. Running sandboxes stop when the daemon shuts down. Pass
+`--force` to skip the confirmation prompt:
+
+```console
+$ sbx policy reset --force
+```
+
+## Troubleshooting
+
+### Local allow rules have no effect
+
+If rules you add with `sbx policy allow` don't change sandbox behavior, your
+organization likely has governance enabled. Run `sbx policy ls` to check: if
+the output starts with a `Governance:` status line showing `Managed by <org>`,
+org governance is active. When it's active, local allow rules are inactive.
+You can't use them to loosen restrictions the org policy imposes.
+
+Inactive allow rules are hidden from `sbx policy ls` by default; run
+`sbx policy ls --include-inactive` to see them with an `inactive` status in
+the `STATUS` column.
+
+When organization governance is active, only organization allow rules can grant
+access. Ask your admin to update the organization policy if you need access to
+an additional resource. Local deny rules remain active, so you can use
+`sbx policy deny` to restrict access further.
+
+### A domain is still blocked after adding an allow rule
+
+If a domain remains blocked after you add a local allow rule, your organization
+likely enforces governance, which makes local allow rules inactive. Run `sbx
+policy ls` to check whether org governance is active; if the output starts with
+a `Governance:` status line showing `Managed by <org>`, it is. Add
+`--include-inactive` to confirm your rule shows an `inactive` status. If so,
+the block can only be lifted by updating the org policy in Docker Home or via
+the [API](/reference/api/ai-governance/).

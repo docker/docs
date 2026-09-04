@@ -24,7 +24,7 @@ Hardened Images. Each example includes five variations:
 > You must authenticate to `dhi.io` before you can pull Docker Hardened Images.
 > Use your Docker ID credentials (the same username and password you use for
 > Docker Hub). If you don't have a Docker account, [create
-> one](../../../accounts/create-account.md) for free.
+> one](../../../accounts/individual/create-account.md) for free.
 >
 > Run `docker login dhi.io` to authenticate.
 
@@ -92,7 +92,7 @@ ENTRYPOINT ["/app/main"]
 #syntax=docker/dockerfile:1
 
 # === Build stage: Compile Go application ===
-FROM dhi.io/golang:1-alpine3.21-dev AS builder
+FROM dhi.io/golang:1.25-alpine3.23-dev AS builder
 
 WORKDIR /app
 ADD . ./
@@ -103,7 +103,7 @@ ADD . ./
 RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags="-s -w" --installsuffix cgo -o main .
 
 # === Final stage: Create minimal runtime image ===
-FROM dhi.io/golang:1-alpine3.21
+FROM dhi.io/golang:1.25-alpine3.23
 
 WORKDIR /app
 COPY --from=builder /app/main  /app/main
@@ -117,7 +117,7 @@ ENTRYPOINT ["/app/main"]
 ```dockerfile
 #syntax=docker/dockerfile:1
 
-FROM dhi.io/golang:1-alpine3.21-dev
+FROM dhi.io/golang:1.25-alpine3.23-dev
 
 WORKDIR /app
 ADD . ./

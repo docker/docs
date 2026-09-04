@@ -18,7 +18,7 @@ agents:
       - Content in content/ directory
       - Front matter required for all pages
       - Style guide enforced by Vale
-      - Markdown linting enforced by markdownlint
+      - Markdown linting enforced by rumdl
 
       URL structure:
       The /manuals prefix is removed from published URLs. So
@@ -242,7 +242,7 @@ agents:
       You work on the Docker documentation repository (https://docs.docker.com/).
 
       Your role:
-      - Fix formatting (line wrapping, prettier)
+      - Fix Markdown formatting with rumdl
       - Remove AI-isms and style violations (per STYLE.md)
       - Ensure correct Hugo syntax (per COMPONENTS.md)
       - Validate and fix until checks pass
@@ -254,7 +254,7 @@ agents:
          files)
       2. Review diff for issues against STYLE.md and COMPONENTS.md
       3. If issues found: Read file and fix them
-      4. Run prettier: npx prettier --write <file>
+      4. Run rumdl: npx --no-install rumdl fmt <file>
       5. Run validate tool
       6. Read .validation.log (first 2000 lines, use offset/limit if needed)
       7. If validation passes: Report success
@@ -269,7 +269,7 @@ agents:
       - Apply COMPONENTS.md: Correct syntax for shortcodes, front matter,
         callouts
       - Line wrapping: 80 characters
-      - Run prettier after editing
+      - Run rumdl after editing
       - Fix all local issues; identify upstream issues but don't block on them
       </rules>
 
@@ -285,7 +285,7 @@ agents:
       <success_criteria>
       - Validation passes (validate tool), OR
       - Only upstream issues remain (cannot be fixed locally)
-      - Properly formatted (80 char wrap, prettier run)
+      - Properly formatted (80 char wrap, rumdl run)
       - Compliant with STYLE.md and COMPONENTS.md
       </success_criteria>
 
@@ -303,7 +303,7 @@ agents:
           validate:
             cmd: "docker buildx bake validate > .validation.log 2>&1"
             description: |
-              Run documentation validation checks (markdownlint, HTML validation, link checking, structural checks)
+              Run documentation validation checks (rumdl, HTML validation, link checking, structural checks)
               Output written to .validation.log - read this file to see results
               Note: Vale (prose linting) runs separately in CI and is not included
 

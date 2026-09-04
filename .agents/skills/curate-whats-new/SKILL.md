@@ -1,0 +1,101 @@
+---
+name: curate-whats-new
+description: Curate noteworthy Docker launches from documentation pull requests merged during a requested period. Use when generating or reviewing data/whats-new.json, preparing the Docker Docs What's new timeline, or deciding which documented releases merit Docker-wide highlights.
+---
+
+# Curate What's New
+
+Treat merged documentation as evidence that a capability shipped, but do not
+treat a documentation change as news by itself.
+
+Include an item only when the merged documentation directly shows all of the
+following:
+
+- A released user-facing feature, material enhancement, or broader availability
+  milestone that was not available before the period
+- A substantial capability or workflow, not new syntax or a small control
+  within an existing workflow
+- Enough Docker-wide editorial significance to merit proactively telling users
+  about it outside product release notes
+- A useful published page and a factual title and description
+
+Apply a high bar. The result is a curated launch archive, not a complete
+changelog. A specialized feature can qualify when its user impact is
+substantial. A quiet period can produce few or no items.
+
+## Exclusions
+
+Exclude documentation maintenance; fixes; rewrites; guidance for old behavior;
+routine release or generated-content syncs; limitations, prerequisites, and
+workarounds; narrow flags, settings, command variants, protocols, and
+compatibility changes; incremental UI, safety, permissions, or observability
+improvements; and lower-level Engine, Build, networking, or storage changes.
+These qualify only when they are part of an independently newsworthy
+product-level launch.
+
+Judge the user outcome, not PR size, product popularity, labels, changed lines,
+a dedicated page, or the existence of a new API or command.
+
+## Select highlights
+
+Include every qualifying launch; do not impose a quota. Mark the five most
+important as `featured: true`, or all items when fewer than five qualify. Rank
+by the magnitude and distinctness of the user outcome and the value of helping
+its audience discover it. Breadth can matter, but a major capability for a
+specialized audience can outrank a smaller change for a broad audience. Recency
+and product variety are not ranking goals.
+
+Create one item per launch and combine PRs that document the same launch.
+Preserve existing copy while it remains accurate and qualifies. Change featured
+status only when the relative importance of the candidate set changes.
+
+## Procedure
+
+1. Read `data/whats-new.json`.
+2. Determine the review mode from the request:
+   - If the request does not specify a publication window, end it on the
+     previous UTC day and start it 29 days earlier.
+   - For an incremental review, list PRs merged from the day after the supplied
+     checkpoint through the end of the publication window. Retain existing
+     items inside the publication window without re-reviewing their source PRs.
+     If the request does not supply a checkpoint, use the existing
+     `period_end` from `data/whats-new.json`.
+   - For a full review, inspect every PR merged in the supplied publication
+     window.
+3. List PRs in the range that applies to the review mode:
+
+   ```console
+   $ gh pr list --repo docker/docs --state merged --search 'merged:START..END' --limit 200
+   ```
+
+   If an incremental search returns no PRs, skip candidate inspection and only
+   remove expired items.
+4. Inspect the diff and resulting pages for every plausible new candidate.
+5. Decide what qualifies using only evidence in the merged documentation.
+6. Remove existing items published before the requested publication window.
+   Add newly qualifying launches, combine related PRs, and reconsider featured
+   status across the resulting list. Do not replace or rewrite retained items
+   merely because they were not part of the incremental candidate range.
+7. Replace `period_start`, `period_end`, and `items` in
+   `data/whats-new.json`. Sort items by `published` date, newest first.
+8. Report the curation outcome in the response:
+   - Enumerate every newly selected entry by product, title, and source PRs.
+   - Summarize retained and expired entries by count. Identify any retained
+     entry whose content or sources changed.
+   - Explain only the most relevant plausible exclusions. Do not enumerate
+     routine maintenance PRs that were never credible candidates.
+
+If the request includes creating a pull request, use the same report in the PR
+body with `## Summary`, `## Selected entries`, and `## Curation notes`
+sections. Put each selected entry on one Markdown bullet and reference PRs as
+`#NNNN` rather than full same-repository links. Do not hard-wrap bullets. Do
+not create `.pr-body.md` or another handoff file unless the request explicitly
+asks for one.
+
+Each item must contain `product`, `title`, `description`, `url`, `published`,
+`source_prs`, and `featured`. Use the canonical product name, a published
+internal URL, the merge date in `YYYY-MM-DD` format, and source PR numbers.
+
+Write factual, restrained copy. Avoid superlatives, promotional language, and
+claims about ease or importance. Do not modify tracked files other than
+`data/whats-new.json`.

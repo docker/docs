@@ -32,7 +32,7 @@ For example, imagine you want to load balance between three instances of an HTTP
 listener. The diagram below shows an HTTP listener service with three replicas.
 Each of the three instances of the listener is a task in the swarm.
 
-![ HTTP listener service with three replicas](../images/services-diagram.webp?w=550)
+![HTTP listener service with three replicas](../images/services-diagram.webp?w=550)
 
 A container is an isolated process. In the Swarm mode model, each task invokes
 exactly one container. A task is analogous to a “slot” where the scheduler

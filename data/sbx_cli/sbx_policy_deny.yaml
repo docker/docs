@@ -1,7 +1,7 @@
 name: sbx policy deny
-synopsis: Add a deny policy for sandboxes
+synopsis: Add a deny rule for sandboxes
 description: |-
-    Add a policy that blocks sandboxes from accessing specified resources.
+    Add a rule that blocks sandboxes from accessing specified resources.
 
     Deny rules always take precedence over allow rules. If a resource matches
     both an allow and a deny rule, the request is blocked.

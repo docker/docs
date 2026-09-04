@@ -1,0 +1,132 @@
+{
+  "period_start": "2026-07-24",
+  "period_end": "2026-08-23",
+  "items": [
+    {
+      "product": "Docker Verified Publisher",
+      "title": "Join Docker Verified Publisher through self-service plans",
+      "description": "Apply for DVP Starter or Growth, complete checkout after approval, and manage publisher analytics, tracked companies, and billing.",
+      "url": "/subscription-billing/plans/docker-verified-publisher/",
+      "published": "2026-08-20",
+      "source_prs": [25891, 25903],
+      "featured": true
+    },
+    {
+      "product": "Docker Sandboxes",
+      "title": "Sign and enforce trusted sandbox kits",
+      "description": "Sign kits with cosign-compatible Sigstore signatures, verify keyless or key-based signatures, and reject kits outside a trusted-signer policy.",
+      "url": "/ai/sandboxes/customize/kits/#sign-and-verify-kits",
+      "published": "2026-08-20",
+      "source_prs": [25791, 25896],
+      "featured": false
+    },
+    {
+      "product": "Docker Sandboxes",
+      "title": "Define reproducible sandbox environments",
+      "description": "Capture an agent, workspaces, kits, credentials, ports, and resources in a shareable .sbxenv.yaml file and manage it with sbx env.",
+      "url": "/ai/sandboxes/configuration/environment-files/",
+      "published": "2026-08-19",
+      "source_prs": [25487, 25896],
+      "featured": true
+    },
+    {
+      "product": "Docker Sandboxes",
+      "title": "Resolve sandbox secrets from external sources",
+      "description": "Keep references to 1Password, AWS Secrets Manager, or host commands in the secret store and resolve credentials on the host when the proxy needs them.",
+      "url": "/ai/sandboxes/configuration/credentials/#use-a-dynamic-secret-source",
+      "published": "2026-08-19",
+      "source_prs": [25785, 25896],
+      "featured": false
+    },
+    {
+      "product": "Docker Sandboxes",
+      "title": "Run GPU workloads in sandboxes",
+      "description": "Pass an NVIDIA GPU through to a sandbox on supported Linux hosts for GPU-accelerated agent workloads.",
+      "url": "/ai/sandboxes/configuration/gpu-passthrough/",
+      "published": "2026-08-19",
+      "source_prs": [25869],
+      "featured": false
+    },
+    {
+      "product": "Docker Hardened Images",
+      "title": "Query DHI VEX data with the GraphQL API",
+      "description": "Build automation or dashboards that query image packages, CVEs, VEX statements, and suppressed vulnerabilities by digest.",
+      "url": "/dhi/tools/api/",
+      "published": "2026-08-17",
+      "source_prs": [25836],
+      "featured": false
+    },
+    {
+      "product": "Docker Desktop",
+      "title": "Use Docker VMM on Mac and Windows",
+      "description": "Run Docker Desktop with Docker's container-optimized hypervisor on supported Mac and Windows systems.",
+      "url": "/desktop/features/vmm/",
+      "published": "2026-08-10",
+      "source_prs": [25702, 25726],
+      "featured": true
+    },
+    {
+      "product": "Docker Sandboxes",
+      "title": "Connect sandboxes through an MCP gateway",
+      "description": "Register local or remote MCP servers on the host, reuse them across sandboxes, and govern server and tool access with Cedar policies.",
+      "url": "/ai/sandboxes/mcp-gateway/",
+      "published": "2026-08-06",
+      "source_prs": [25559, 25707],
+      "featured": true
+    },
+    {
+      "product": "Docker Sandboxes",
+      "title": "Author version 2 sandbox kits",
+      "description": "Define kit setup, permissions, networking, and API key or OAuth credential requirements with the version 2 kit schema.",
+      "url": "/ai/sandboxes/customize/kit-reference/#schema-versions",
+      "published": "2026-08-06",
+      "source_prs": [25467, 25707],
+      "featured": false
+    },
+    {
+      "product": "Docker Sandboxes",
+      "title": "Run Claude Code with local models",
+      "description": "Route Claude Code sandbox requests to the bundled local-model server or an existing Ollama installation.",
+      "url": "/ai/sandboxes/agents/claude-code/#use-a-local-model",
+      "published": "2026-08-06",
+      "source_prs": [25641, 25707],
+      "featured": false
+    },
+    {
+      "product": "Docker AI Governance",
+      "title": "Search and forward audit events",
+      "description": "Search and export policy decisions from Docker Cloud, or forward events to Splunk Cloud, Dynatrace, and Datadog.",
+      "url": "/ai/sandboxes/governance/audit/",
+      "published": "2026-08-03",
+      "source_prs": [25679, 25687, 25887],
+      "featured": false
+    },
+    {
+      "product": "Docker Desktop",
+      "title": "Install from the Microsoft Store without administrator privileges",
+      "description": "Fresh Microsoft Store installations on Windows use per-user mode by default.",
+      "url": "/desktop/release-notes/#4850",
+      "published": "2026-08-03",
+      "source_prs": [25665],
+      "featured": false
+    },
+    {
+      "product": "Docker Sandboxes",
+      "title": "Share agent skills across sandboxes",
+      "description": "Import skills from supported host agents into a persistent store that sandboxes can share.",
+      "url": "/ai/sandboxes/workflows/agent-skills/",
+      "published": "2026-07-24",
+      "source_prs": [25588],
+      "featured": false
+    },
+    {
+      "product": "Docker Sandboxes",
+      "title": "Connect editors and desktop apps over SSH",
+      "description": "Use a sandbox from VS Code, Cursor, Claude Desktop, ChatGPT, or another SSH-capable tool.",
+      "url": "/ai/sandboxes/integrations/",
+      "published": "2026-07-24",
+      "source_prs": [25557],
+      "featured": true
+    }
+  ]
+}

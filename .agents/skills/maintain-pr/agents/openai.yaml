@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maintain PR"
+  short_description: "Maintain an authored PR through review and CI"
+  default_prompt: "Use $maintain-pr to maintain this pull request through CI and review follow-up."

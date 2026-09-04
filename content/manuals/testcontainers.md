@@ -11,11 +11,11 @@ params:
 intro:
   - title: What is Testcontainers?
     description: Learn about what Testcontainers does and its key benefits
-    icon: feature_search
+    icon: magnifying-glass
     link: https://testcontainers.com/getting-started/#what-is-testcontainers
   - title: The Testcontainers workflow
     description: Understand the Testcontainers workflow
-    icon: explore
+    icon: magnifying-glass-plus
     link: https://testcontainers.com/getting-started/#testcontainers-workflow
 quickstart:
   - title: Testcontainers for Go

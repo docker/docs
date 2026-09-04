@@ -11,12 +11,9 @@ params:
 aliases:
   - /docker-hub/service-accounts/
   - /cloud/
-  - /cloud/aci-compose-features/
   - /cloud/aci-container-features/
   - /cloud/aci-integration/
   - /cloud/ecs-architecture/
-  - /cloud/ecs-compose-examples/
-  - /cloud/ecs-compose-features/
   - /cloud/ecs-integration/
   - /compose/migrate/
   - /engine/context/aci-integration/
@@ -66,11 +63,11 @@ aliases:
   - /toolbox/toolbox_install_mac/
   - /toolbox/toolbox_install_windows/
   - /desktop/features/dev-environments/
-  - /desktop/features/dev-environments/create-dev-env/
-  - /desktop/features/dev-environments/set-up/
-  - /desktop/features/dev-environments/share/
-  - /desktop/features/dev-environments/dev-cli/
-  - /desktop/dev-environments/
+  - /scout/policy/scores/
+  - /scout/integrations/environment/sysdig/
+  - /scout/integrations/team-collaboration/slack/
+  - /scout/integrations/code-quality/sonarqube/
+  - /scout/integrations/source-code-management/github/
 ---
 
 This document provides an overview of Docker features, products, and
@@ -151,12 +148,46 @@ project requirements.
 ### Docker Desktop sandboxes
 
 Docker Desktop sandboxes let users run AI coding agents in isolated microVMs
-through the `docker sandbox` command. The Docker Desktop integration is
-deprecated. Use the standalone [`sbx` CLI](/manuals/ai/sandboxes/_index.md)
-instead.
+through the `docker sandbox` command. The `docker sandbox` plugin was removed
+in Docker Desktop 4.80.0. Use the standalone
+[`sbx` CLI](/manuals/ai/sandboxes/_index.md) instead.
 
-You can still view the
-[Docker Desktop sandboxes documentation](/manuals/ai/sandboxes/docker-desktop.md).
+### Docker Scout features
+
+The following Docker Scout features have been retired or deprecated. For
+details, see the [Scout platform release notes](/manuals/scout/release-notes/platform.md).
+
+- Health scores and Scout Everywhere: graded Docker Hub images from A to F
+  based on policy compliance, surfaced across Docker Hub. Retired July 1, 2026.
+- Sysdig integration: detected images running in your cluster via the Sysdig API.
+  Retired July 1, 2026.
+- GitHub source code management integration: linked images to their source
+  repository and automated base-image updates via PRs. Retired July 1, 2026.
+  For base-image updates, use
+  [GitHub Dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuring-dependabot-version-updates)
+  with `package-ecosystem: "docker"`. For image-to-source linkage, build with
+  `--provenance=mode=max`. This retirement doesn't affect the
+  [`docker/scout-action`](https://github.com/docker/scout-action) GitHub Action
+  for CI pipelines.
+- Slack integration: sent vulnerability and policy compliance notifications to
+  Slack channels. Retired July 30, 2026.
+- Notifications: alerted users to newly disclosed CVEs in-product and by
+  email. Retired September 1, 2026. To surface CVE and policy results without
+  push notifications, integrate `docker scout cves` or `docker scout policy`
+  into your CI pipeline.
+- Native Amazon ECR integration: automatically analyzed images pushed to ECR
+  registries using a CloudFormation stack. Retired September 1, 2026. Docker
+  Scout still supports ECR through
+  [`docker scout watch`](/manuals/scout/integrations/registry.md).
+- Native Azure Container Registry integration: automatically analyzed images
+  pushed to ACR registries using an ARM template. Retired September 1, 2026.
+  Docker Scout still supports ACR through
+  [`docker scout watch`](/manuals/scout/integrations/registry.md).
+- Policies page in the Dashboard: the `docker scout policy`
+  CLI continues to work. Retired September 1, 2026. See
+  [Evaluate policies](/manuals/scout/policy/local.md).
+- SonarQube integration: surfaced SonarQube quality gate results as a Docker
+  Scout policy. Retired September 1, 2026.
 
 ### GitHub Copilot extension
 
@@ -175,7 +206,7 @@ Enhanced Service Account add-ons provided tiered pull rate limits for automated
 workflows and service accounts accessing Docker Hub.
 
 Docker recommends transitioning to [Organization Access Tokens
-(OATs)](/manuals/enterprise/security/access-tokens.md), which provide secure,
+(OATs)](/manuals/security/access-tokens/organization-access-tokens.md), which provide secure,
 programmatic access to Docker Hub with granular repository permissions, token
 expiration, and better security auditing. OATs are included with Docker Team
 and Business subscriptions and offer similar functionality without requiring
@@ -187,6 +218,16 @@ Docker Hub Automated Builds was a feature of Docker Hub that allowed building
 Docker images from source code in an external repository and automatically pushing
 the built image to your Docker repositories. This feature has been deprecated and
 will be removed on April 1, 2027.
+
+### Docker Content Trust (DCT)
+
+Docker Content Trust (DCT) and the Notary v1 service at `notary.docker.io` are
+being fully retired. If you've never set `DOCKER_CONTENT_TRUST=1` or used
+`docker trust` commands, this change doesn't affect you. The service shuts down
+completely on December 8, 2026, following brownout windows in July and August.
+For the timeline, migration guidance, and modern alternatives such as
+Sigstore/Cosign and Notation, see the [Docker Content Trust retirement and
+migration blog post](https://www.docker.com/blog/docker-content-trust-retirement-and-migration-guidance/).
 
 
 ## Open source projects
@@ -211,6 +252,15 @@ compose`), which is written in Go and integrates with the Docker CLI. Compose
 v1 is no longer maintained, and users should migrate to Compose v2.
 
 [Compose v2 Documentation](/manuals/compose/_index.md)
+
+### Docker SBOM CLI plugin
+
+The Docker SBOM CLI plugin provided the `docker sbom` command for generating
+and viewing software bill of materials (SBOMs) for container images. The plugin
+is discontinued. Use [`docker scout sbom`](/reference/cli/docker/scout/sbom/)
+for SBOM generation and inspection.
+
+[See Docker SBOM CLI plugin release notes for migration guidance](https://github.com/docker/sbom-cli-plugin/releases/tag/v0.7.0)
 
 ### InfraKit
 

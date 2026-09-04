@@ -7,8 +7,6 @@ description: |
 keywords: docker sandboxes, github copilot, ai agent, github token, sbx
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 This guide covers authentication, configuration, and usage of GitHub Copilot
 in a sandboxed environment.
 
@@ -32,15 +30,11 @@ $ sbx run copilot
 ## Authentication
 
 Copilot requires a GitHub token with Copilot access. Store your token using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
-$ echo "$(gh auth token)" | sbx secret set -g github
+$ sbx secret set github --command 'gh auth token'
 ```
-
-Alternatively, export the `GH_TOKEN` or `GITHUB_TOKEN` environment variable in
-your shell before running the sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
 
 ## Configuration
 
@@ -53,19 +47,29 @@ for workarounds.
 Copilot is configured to trust the workspace directory by default, so it
 operates without repeated confirmations for workspace files.
 
-### Pass options at runtime
+### Default startup command
 
-Pass Copilot CLI options after `--`:
+Without extra args, the sandbox runs:
+
+```text
+copilot --yolo
+```
+
+Arguments after `--` are added after the default flags when the first one is
+itself a flag (begins with `-`), so `--yolo` is preserved:
 
 ```console
-$ sbx run copilot --name <sandbox-name> -- <copilot-options>
+$ sbx run copilot -- -p "review this PR"   # runs copilot --yolo -p "review this PR"
 ```
+
+When the first argument is a bare word — a subcommand or prompt — it replaces
+the defaults instead.
 
 ## Base image
 
 Template: `docker/sandbox-templates:copilot`
 
-Preconfigured to trust the workspace directory and run without approval prompts.
+Preconfigured to trust the workspace directory.
 
 See [Customize](../customize/) to pre-install tools or customize this
 environment.

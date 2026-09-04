@@ -6,8 +6,6 @@ description: Explainer on the best ways to set, use, and manage environment vari
 keywords: compose, orchestration, environment, env file, environment variables
 tags: [Best practices]
 weight: 50
-aliases:
-- /compose/environment-variables/best-practices/
 ---
 
 #### Handle sensitive information securely

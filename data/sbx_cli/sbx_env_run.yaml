@@ -1,0 +1,35 @@
+name: sbx env run
+synopsis: Create (if needed) and attach to a sandbox environment
+experimental: true
+description: |-
+    Read the environment file from PATH (default: current directory)
+    and drop into the sandbox shell. If the sandbox already exists it is started
+    and re-attached without re-provisioning; otherwise it is created first
+    (provisioning secrets and bindings) and then attached.
+
+    Each PATH may be a directory (the file is <PATH>/.sbxenv.yaml) or the
+    path to the environment file itself. Passing more than one PATH deep-merges them
+    in order (docker-compose `-f` semantics): later files override earlier ones.
+    Values may reference environment variables with ${VAR} / $VAR (and
+    ${VAR:-default}); see the docs for the full syntax.
+usage: sbx env run [PATH...] [flags]
+options:
+    - name: clone
+      default_value: "false"
+      usage: |
+        Override workspace.clone in .sbxenv.yaml (see 'sbx create --clone')
+    - name: detached
+      shorthand: d
+      default_value: "false"
+      usage: Create/start the sandbox without attaching
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for run
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+see_also:
+    - sbx env - (Experimental) Manage sandboxes declaratively from a .sbxenv.yaml file

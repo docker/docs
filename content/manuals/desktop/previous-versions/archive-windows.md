@@ -4,8 +4,6 @@ keywords: Docker Desktop for Windows, release notes
 title: Release notes for previous versions
 toc_min: 1
 toc_max: 2
-aliases:
-- /desktop/windows/release-notes/archive/
 sitemap: false
 ---
 

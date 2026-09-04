@@ -4,9 +4,8 @@ description: &desc Learn how to instrument a JavaScript application using OpenTe
 keywords: OpenTelemetry, observability, tracing
 linktitle: Instrumenting JS Apps with OpenTelemetry
 summary: *desc
-tags: [app-dev, observability]
-languages: [js]
 params:
+  tags: [cicd]
   time: 10 minutes
 ---
 
@@ -33,7 +32,7 @@ The [Docker Official Image for OpenTelemetry](https://hub.docker.com/r/otel/open
 
 Basic knowledge of Node.js and Docker.
 
-## Project Structure
+## Project structure
 
 Create the project directory:
 ```bash
@@ -51,7 +50,7 @@ otel-js-app/
 │   └── tracer.js
 ```
 
-## Create a Simple Node.js App
+## Create a simple Node.js app
 
 Initialize a basic Node.js app:
 
@@ -82,7 +81,7 @@ app.listen(PORT, () => {
 });
 ```
 
-## Configure OpenTelemetry Tracing
+## Configure OpenTelemetry tracing
 
 Create the tracer configuration file:
 
@@ -128,13 +127,11 @@ service:
       exporters: [logging, jaeger]
 ```
 
-## Add Docker Compose Configuration
+## Add Docker Compose configuration
 
 Create the `docker-compose.yaml` file:
 
 ```yaml
-version: '3.9'
-
 services:
   app:
     build: ./app
@@ -173,7 +170,7 @@ RUN npm install
 CMD ["node", "app.js"]
 ```
 
-## Start the Stack
+## Start the stack
 
 Start all services with Docker Compose:
 
@@ -187,7 +184,7 @@ Visit your app at [http://localhost:3000](http://localhost:3000)
 
 View traces at [http://localhost:16686](http://localhost:16686) in the Jaeger UI
 
-## Verify Traces in Jaeger
+## Verify traces in Jaeger
 
 After visiting your app's root endpoint, open Jaeger’s UI, search for the service (default is usually `unknown_service` unless explicitly named), and check the traces.
 

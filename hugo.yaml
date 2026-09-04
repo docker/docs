@@ -10,14 +10,19 @@ ignoreLogs:
 
 taxonomies: {}
 
+security:
+  exec:
+    allow:
+    - ^(dart-)?sass$
+    - ^go$
+    - ^git$
+    - ^node$
+    - ^postcss$
+    - ^tailwindcss$
+
 # Cascade layout and type settings to content subtrees.
 # See https://gohugo.io/configuration/cascade/#target
 cascade:
-  # Guide sections use the series layout (metadata card + modules list)
-  - target:
-      path: /guides/**
-      kind: section
-    layout: series
   # Sample pages use the samples type (routes to layouts/samples/)
   - target:
       path: /reference/samples/**
@@ -37,6 +42,14 @@ cascade:
   - target:
       path: /reference/cli/sbx/**
     layout: sbx-cli
+  # Docker Agent section indexes are mounted navigation stubs; skip
+  # rendering them so they don't produce empty pages (same pattern as
+  # gordon/concepts and other render:never section indexes)
+  - target:
+      path: /manuals/ai/docker-agent/**
+      kind: section
+    build:
+      render: never
 
 # Remove the /manuals prefix for content in the manuals section
 permalinks:
@@ -142,6 +155,14 @@ params:
     google: GTM-WL2QLG5
     onetrust: 65425fb0-7b36-4317-9f10-7b3e08039af0
     vwo: 723167
+    marlin:
+      # Public-write API keys for the Marlin analytics SDK.
+      apiKey:
+        prod: mrl_2nuEKUo5bzRv8GcDKeYjij4J4U--OLdN
+        stage: mrl_W14SGEQ7nYmBsAyjZPyOM-nlgE53E-vX
+      endpoint:
+        prod: https://marlin-2.docker.com
+        stage: https://marlin-2-stage.docker.com
 
   # Docs repository URL
   repo: https://github.com/docker/docs
@@ -152,16 +173,16 @@ params:
   # Use `grep` to figure out how they might be used.
 
   # Latest version of the Docker Engine API
-  latest_engine_api_version: "1.54"
+  latest_engine_api_version: "1.56"
   # Latest version of Docker Engine
-  docker_ce_version: "29.5.1"
+  docker_ce_version: "29.8.0"
   # Previous version of the Docker Engine
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
-  docker_ce_version_prev: "29.5.0"
+  docker_ce_version_prev: "29.7.2"
   # Latest Docker Compose version
-  compose_version: "v5.1.2"
+  compose_version: "v5.5.0"
   # Latest BuildKit version
-  buildkit_version: "0.28.0"
+  buildkit_version: "0.32.0"
   # Latest actions version
   bake_action_version: "v7"
   build_push_action_version: "v7"
@@ -177,7 +198,7 @@ params:
   cache_action_version: "v5"
 
   # Example runtime/library/os versions
-  example_go_version: "1.25"
+  example_go_version: "1.26"
   example_alpine_version: "3.23"
   example_node_version: "24"
 
@@ -314,7 +335,7 @@ module:
       source: hugo_stats.json
       target: assets/notwatching/hugo_stats.json
     # Mount the icon files to assets so we can access them with resources.Get
-    - source: node_modules/@material-symbols/svg-400/rounded
+    - source: node_modules/heroicons/24/solid
       target: assets/icons
     # Mount highlight.js theme for Gordon chat syntax highlighting
     - source: node_modules/highlight.js/styles/github-dark.css
@@ -382,3 +403,29 @@ module:
         - source: cmd/cli/docs/reference
           target: data/cli/model
           files: ["*.yaml"]
+
+    # Docker Agent
+    # Single-sources https://docker.github.io/docker-agent/ content;
+    # bumped on each docker-agent release by sync-docker-agent-docs.yml.
+    # Sections are mounted individually so hugo mod vendor does not
+    # vendor the upstream Jekyll site files that also live in docs/.
+    - path: github.com/docker/docker-agent
+      mounts:
+        - source: docs/getting-started
+          target: content/manuals/ai/docker-agent/getting-started
+        - source: docs/concepts
+          target: content/manuals/ai/docker-agent/concepts
+        - source: docs/configuration
+          target: content/manuals/ai/docker-agent/configuration
+        - source: docs/tools
+          target: content/manuals/ai/docker-agent/tools
+        - source: docs/providers
+          target: content/manuals/ai/docker-agent/providers
+        - source: docs/features
+          target: content/manuals/ai/docker-agent/features
+        - source: docs/guides
+          target: content/manuals/ai/docker-agent/guides
+        - source: docs/community
+          target: content/manuals/ai/docker-agent/community
+        - source: docs/demo.gif
+          target: content/manuals/ai/docker-agent/demo.gif

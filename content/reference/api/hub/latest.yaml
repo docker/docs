@@ -101,7 +101,7 @@ tags:
   - name: access-tokens
     x-displayName: Personal Access Tokens
     description: |
-      The Personal Access Token endpoints lets you manage personal access tokens. For more information, see [Access Tokens](https://docs.docker.com/security/access-tokens/).
+      The Personal Access Token endpoints lets you manage personal access tokens. For more information, see [Access Tokens](https://docs.docker.com/security/access-tokens/personal-access-tokens/).
 
       You can use a personal access token instead of a password in the [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) or in the [Create an authentication token](#operation/PostUsersLogin) route to obtain a bearer token.
 
@@ -159,6 +159,12 @@ tags:
     x-audience: public
     description: |
       The organization access token endpoints allow you to manage organization access tokens (OATs). See [Organization access tokens](https://docs.docker.com/security/for-admins/access-tokens/) for more information.
+
+      OATs only authenticate requests to the modern namespace-scoped routes under `/v2/namespaces/{namespace}/repositories/`. Legacy repository paths are OAT unsupported, regardless of the token's scopes, and reject every OAT with `403 token issued from organization access token is not allowed`:
+
+      - `GET /v2/repositories/{namespace}/{repository}` — use [Get repository](#tag/repositories/operation/GetRepository) instead.
+      - `GET /v2/repositories/{namespace}` — use [List repositories](#tag/repositories/operation/listNamespaceRepositories) instead.
+      - `GET /v2/users/{username}/repositories` — use [List repositories](#tag/repositories/operation/listNamespaceRepositories) instead.
 paths:
   /v2/users/login:
     post:
@@ -729,6 +735,19 @@ paths:
                         timestamp: "2021-02-19T01:34:35Z"
                         action_description: |
                           pushed the tag latest with the digest sha256:c1ae9c435032a to the repository docker/example
+                      - account: docker
+                        action: offload.lease.end
+                        name: docker
+                        actor: docker
+                        data:
+                          lease_id: l_3EgPuRCjtUqT279CFPOQWcO8zOf
+                          resource_type: run_4cpu_8mem
+                          started_at: "2026-06-04T18:24:21Z"
+                          updated_at: "2026-06-04T18:36:43Z"
+                          org_id: b908ca6e-b9a9-4a53-a9a5-6bec96f72432
+                          user_id: ecae6747-e42c-43cb-925d-cfce1ab32b02
+                        timestamp: "2026-06-04T18:36:43Z"
+                        action_description: "offload lease 'l_3EgPuRCjtUqT279CFPOQWcO8zOf' ended, ran for '12m22s'"
         "429":
           description: ""
           content:
@@ -1026,6 +1045,10 @@ paths:
     get:
       operationId: ListRepositoryTags
       summary: List repository tags
+      description: |
+        Returns the list of tags for the specified repository.
+
+        <span class="oat"></span>
       tags:
         - repositories
       security:
@@ -1052,6 +1075,10 @@ paths:
           $ref: "#/components/responses/NotFound"
     head:
       summary: Check repository tags
+      description: |
+        Checks whether the repository has any tags.
+
+        <span class="oat"></span>
       tags:
         - repositories
       security:
@@ -1071,6 +1098,10 @@ paths:
     get:
       operationId: GetRepositoryTag
       summary: Read repository tag
+      description: |
+        Returns details for a specific tag in the specified repository.
+
+        <span class="oat"></span>
       tags:
         - repositories
       security:
@@ -1084,6 +1115,10 @@ paths:
           $ref: "#/components/responses/NotFound"
     head:
       summary: Check repository tag
+      description: |
+        Checks whether the specified tag exists in the repository.
+
+        <span class="oat"></span>
       tags:
         - repositories
       security:
@@ -1106,6 +1141,8 @@ paths:
         Updates the immutable tags configuration for this repository.
 
         **Only users with administrative privileges for the repository can modify these settings.**
+
+        <span class="oat"></span>
       tags:
         - repositories
       security:
@@ -1131,9 +1168,11 @@ paths:
       operationId: VerifyRepositoryImmutableTags
       summary: "Verify repository immutable tags"
       description: |
-        Validates  the immutable tags regex pass in parameter and returns a list of tags matching it in this repository.
+        Validates the immutable tags regex passed in the request body and returns a list of tags matching it in this repository.
 
-        **Only users with administrative privileges for the repository call this endpoint.**
+        **Only users with administrative privileges for the repository can call this endpoint.**
+
+        <span class="oat"></span>
       tags:
         - repositories
       security:
@@ -1157,6 +1196,10 @@ paths:
       - $ref: "#/components/parameters/repository"
     post:
       summary: Assign a group (Team) to a repository for access
+      description: |
+        Assigns an organization group (team) to a repository with a specified permission level.
+
+        <span class="oat"></span>
       tags:
         - repositories
       operationId: CreateRepositoryGroup
@@ -1204,6 +1247,10 @@ paths:
         Returns a list of repositories within the specified namespace (organization or user).
 
         Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
+
+        <span class="oat"></span>
+
+        **OAT listing behavior**: an OAT with the `scope-repository-list` scope sees all repositories including private ones. An OAT without that scope only sees public repositories. This filtering is silent: the response is a normal `200` with no indication that private repositories were withheld.
       tags:
         - repositories
       security:
@@ -1347,6 +1394,8 @@ paths:
       description: |
         Creates a new repository within the specified namespace. The repository will be created
         with the provided metadata including name, description, and privacy settings.
+
+        <span class="oat"></span>
       operationId: CreateRepository
       tags:
         - repositories
@@ -1418,6 +1467,8 @@ paths:
         Returns a repository within the specified namespace (organization or user).
 
         Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
+
+        <span class="oat"></span>
       tags:
         - repositories
       security:
@@ -1469,6 +1520,8 @@ paths:
         Check a repository within the specified namespace (organization or user).
 
         Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
+
+        <span class="oat"></span>
       tags:
         - repositories
       security:
@@ -1655,11 +1708,12 @@ paths:
               properties:
                 role:
                   type: string
-                  description: Role of the member
-                  enum:
-                    - owner
-                    - editor
-                    - member
+                  description: |
+                    Role of the member. Valid values are the core roles
+                    `owner`, `editor`, and `member`, or the name of an
+                    existing [custom role](https://docs.docker.com/enterprise/security/roles-and-permissions/custom-roles/manage/).
+                    Use the custom role's name identifier, not its label or UUID.
+                  example: owner
       responses:
         "200":
           description: Member role updated
@@ -1888,6 +1942,13 @@ paths:
                   type: string
                 description:
                   type: string
+                role:
+                  type: string
+                  description: |
+                    Role assigned to the team. Valid values are the core roles
+                    `owner`, `editor`, and `member`, or the name of an
+                    existing [custom role](https://docs.docker.com/enterprise/security/roles-and-permissions/custom-roles/manage/).
+                    Use the custom role's name identifier, not its label or UUID.
       responses:
         "200":
           description: ""
@@ -3611,9 +3672,12 @@ components:
           example: example@docker.com
         role:
           type: string
-          description: User's role in the Organization
+          description: |
+            The member's role in the organization (`Owner`, `Editor`,
+            `Member`, or `Invitee` for pending invites).
           enum:
             - Owner
+            - Editor
             - Member
             - Invitee
           example: Owner
@@ -3697,6 +3761,11 @@ components:
           type: number
           example: 10
           description: Member count of the group
+        role:
+          type: string
+          description: |
+            Role assigned to the team. A core role (`owner`, `editor`, or `member`)
+            or the name of a custom role (not the label or UUID).
     group_member:
       type: object
       properties:

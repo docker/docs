@@ -75,7 +75,7 @@ options:
     - option: driver
       value_type: string
       description: |
-        Driver to use (available: `docker-container`, `kubernetes`, `remote`)
+        Driver to use (available: `cloud`, `docker-container`, `kubernetes`, `remote`)
       details_url: '#driver'
       deprecated: false
       hidden: false
@@ -244,6 +244,7 @@ examples: |-
     backend. Buildx supports the following drivers:
 
     * `docker` (default)
+    * `cloud`
     * `docker-container`
     * `kubernetes`
     * `remote`
@@ -256,6 +257,34 @@ examples: |-
     the [`--load`](/reference/cli/docker/buildx/build/#load) flag is implied by default on
     `buildx build`. However, building multi-platform images or exporting cache is
     not currently supported.
+
+    #### `cloud` driver
+
+    Uses Docker Build Cloud builders. For Docker Build Cloud access and setup, see
+    [Docker Build Cloud setup](/build-cloud/setup/). For
+    build examples, see [Building with Docker Build Cloud](/build-cloud/usage/).
+
+    Connect Buildx to an existing cloud builder with `--driver cloud` and the
+    builder name in the form `<account>/<builder>` or
+    `cloud://<account>/<builder>`. You must be signed in with `docker login` and
+    have access to the builder.
+
+    ```console
+    $ docker buildx create --driver cloud --name cloud-builder --use org/builder
+    $ docker buildx create --driver cloud --name cloud-builder --use cloud://org/builder
+    ```
+
+    When you don't specify an output, an untagged result remains in the cloud build
+    cache. If you use `--tag`, Buildx automatically loads the image when the build
+    targets a single platform and runs on one cloud node. For details about loading
+    behavior, Docker contexts, and other output configurations, see
+    [Load results from Docker Build Cloud](/build/exporters/).
+
+    When `buildx create` resolves a Build Cloud builder group, each service instance
+    becomes a Buildx node. `--append` requires the resolved instance names to be
+    unique in the Buildx builder. Resolved cloud nodes are a create-time snapshot;
+    recreate the Buildx builder to refresh topology after Build Cloud membership or
+    placement changes.
 
     #### `docker-container` driver
 
@@ -299,6 +328,18 @@ examples: |-
     * [`docker-container` driver](/build/builders/drivers/docker-container/)
     * [`kubernetes` driver](/build/builders/drivers/kubernetes/)
     * [`remote` driver](/build/builders/drivers/remote/)
+
+    With `BUILDX_DEFAULT_POLICY=1`, the `docker-container` driver verifies signed
+    `moby/buildkit` builder image tags before creating the builder. To explicitly
+    bypass this verification, set `allow-untrusted-image=true`. For example:
+
+    ```console
+    $ BUILDX_DEFAULT_POLICY=1 docker buildx create --driver docker-container \
+        --driver-opt allow-untrusted-image=true
+    ```
+
+    Only use this option for an image that you trust. It disables builder image
+    verification for the new builder node.
 
     ### Remove a node from a builder (--leave) {#leave}
 

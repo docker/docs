@@ -6,6 +6,11 @@ options:
       shorthand: h
       default_value: "false"
       usage: help for login
+    - name: password-stdin
+      default_value: "false"
+      usage: Read password or access token from stdin
+    - name: username
+      usage: Docker username for non-interactive login
 inherited_options:
     - name: debug
       shorthand: D

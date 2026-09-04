@@ -5,7 +5,7 @@ keywords: AI, Docker, Model Runner, MCP Toolkit, AI agents, application developm
 summary: |
   Learn how to create AI agent applications using Docker Model Runner, and MCP Toolkit.
 params:
-  tags: [AI]
+  tags: [ai]
   time: 30 minutes
 ---
 

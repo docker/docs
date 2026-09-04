@@ -8,7 +8,6 @@ tags: [ Troubleshooting ]
 weight: 10 
 aliases:
  - /desktop/troubleshoot/topics/
- - /manuals/desktop/troubleshoot-and-support/troubleshoot/workarounds/
 ---
 
 > [!TIP]
@@ -64,7 +63,7 @@ Disable hardware acceleration:
 2. Add the following entry:
 
    ```JSON
-   $ "disableHardwareAcceleration": true
+   "disableHardwareAcceleration": "always"
    ```
 
 3. Save the file and restart Docker Desktop.

@@ -4,8 +4,8 @@
 ARG ALPINE_VERSION=3.23
 ARG GO_VERSION=1.26
 ARG HTMLTEST_VERSION=0.17.0
-ARG VALE_VERSION=3.11.2
-ARG HUGO_VERSION=0.161.1
+ARG VALE_VERSION=3.17.0
+ARG HUGO_VERSION=0.163.0
 ARG NODE_VERSION=24
 ARG PAGEFIND_VERSION=1.5.2
 
@@ -61,12 +61,8 @@ RUN --mount=type=cache,target=/tmp/hugo_cache \
 RUN ./hack/flatten-and-resolve.js public
 
 # lint lints markdown files
-FROM ghcr.io/igorshubovych/markdownlint-cli:v0.45.0 AS lint
-RUN --mount=type=bind,target=. \
-    markdownlint \
-    "content/**/*.md" \
-    --ignore "content/manuals/engine/release-notes/*.md" \
-    --ignore "content/manuals/desktop/previous-versions/*.md"
+FROM ghcr.io/rvben/rumdl:0.2.49-alpine AS lint
+RUN --mount=type=bind,target=. rumdl check content
 
 # test validates HTML output and checks for broken links
 FROM wjdp/htmltest:v${HTMLTEST_VERSION} AS test

@@ -1,6 +1,6 @@
 ---
 title: "Lab: Container-Supported Development"
-linkTitle: "Lab: Container-Supported Development"
+linkTitle: "Lab: Container-supported dev"
 description: |
   Learn to use containers for local development by running a PostgreSQL
   database, defining a Compose file, and adding a pgAdmin dev tool — no local
@@ -13,13 +13,6 @@ keywords: Docker, Compose, local development, PostgreSQL, pgAdmin, containers, l
 params:
   tags: [labs]
   time: 30 minutes
-  resource_links:
-    - title: Docker Compose docs
-      url: /compose/
-    - title: Bind mounts
-      url: /engine/storage/bind-mounts/
-    - title: Labspace repository
-      url: https://github.com/dockersamples/labspace-container-supported-development
 ---
 
 Use containers to run the services your app depends on — databases, caches,

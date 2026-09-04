@@ -84,7 +84,7 @@ ddClient.host.openExternal("https://docker.com");
 
 For more details about method parameters and the return types available, see [Desktop host API reference](/reference/api/extensions-sdk/Host.md).
 
-> Deprecated user notifications
+> Deprecated external URL opening
 >
 > This method is deprecated and will be removed in a future version. Use the methods specified above.
 

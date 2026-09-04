@@ -62,7 +62,7 @@ file
 
 Usually, the backend is made of one container that runs within the Docker Desktop VM. Internally, Docker Desktop creates
 a Docker Compose project, creates the container from the `image` option of the `vm` section of the `metadata.json`, and
-attaches it to the Compose project. See the [ui metadata section](metadata.md#vm-section) for more details.
+attaches it to the Compose project. See the [`vm` metadata section](metadata.md#vm-section) for more details.
 
 In some cases, a `compose.yaml` file can be used instead of an `image`. This is useful when the backend container
 needs more specific options, such as mounting volumes or requesting [capabilities](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities)
@@ -97,7 +97,7 @@ Shipping those executables with the extension ensure that the CLI tool is always
 the users' machine.
 
 When Docker Desktop installs the extension, it copies the executables on the host as defined by the `host` section in
-the `metadata.json`. See the [ui metadata section](metadata.md#host-section) for more details.
+the `metadata.json`. See the [`host` metadata section](metadata.md#host-section) for more details.
 
 ![Executable and frontend communication](images/extensions-arch-3.png?w=250h=300)
 

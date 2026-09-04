@@ -3,10 +3,10 @@ title: Get support for Docker products
 linkTitle: Support
 description: Learn about support options for Docker products including paid subscriptions and community resources
 keywords: support, help, docker desktop, subscriptions, community, troubleshooting
-weight: 5
+weight: 50
 params:
   sidebar:
-    group: Platform
+    group: Accounts and admin
 ---
 
 Docker offers multiple support channels depending on your subscription level and needs.
@@ -20,6 +20,13 @@ All Docker Pro, Team, and Business subscribers receive email support for Docker 
 - Docker Pro: 3 business day response
 - Docker Team: 2 business day response, 24×5 availability
 - Docker Business: 1 business day response, 24×5 availability
+
+Docker Verified Publisher (DVP) organizations follow the response times for their
+Docker Pro, Team, or Business subscription. Without one of those subscriptions,
+the following response times apply:
+
+- DVP Starter: 3 business day response
+- DVP Growth: 2 business day response, 24×5 availability
 
 > [!TIP]
 >

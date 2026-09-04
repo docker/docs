@@ -4,11 +4,6 @@ keywords: docker compose sdk, compose api, Docker developer SDK
 title: Using the Compose SDK
 linkTitle: Compose SDK 
 weight: 60
-params:
-  sidebar:
-    badge:
-      color: green
-      text: New
 ---
 
 {{< summary-bar feature_name="Compose SDK" >}}

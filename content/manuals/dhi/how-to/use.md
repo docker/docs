@@ -23,12 +23,12 @@ package manager, and may run as a non-root user by default.
 > pull DHI Community images. You can authenticate using either of the following:
 >
 > - **Docker ID and password:** Use your Docker Hub username and password. If
->   you don't have a Docker account, [create one](../../accounts/create-account.md)
+>   you don't have a Docker account, [create one](../../accounts/individual/create-account.md
 >   for free.
 > - **Access token:** Use a [personal access token
->   (PAT)](../../security/access-tokens.md) for personal accounts, or an
+>   (PAT)](../../security/access-tokens/personal-access-tokens.md) for personal accounts, or an
 >   [organization access token
->   (OAT)](../../enterprise/security/access-tokens.md) with your organization
+>   (OAT)](../../security/access-tokens/organization-access-tokens.md) with your organization
 >   name as the username.
 >
 > Run `docker login dhi.io` to authenticate.
@@ -81,7 +81,7 @@ For multi-stage builds:
   executables](#use-a-static-image-for-compiled-executables).
 
 To learn how to search for available variants, see [Search and evaluate
-images](./explore.md).
+images](./search-evaluate.md).
 
 ## Use a DHI in CI/CD pipelines
 
@@ -90,7 +90,7 @@ You can reference them in Dockerfiles, pull them as part of a pipeline step, or
 run containers based on them during builds and tests.
 
 Unlike typical container images, DHIs also include signed
-[attestations](../core-concepts/attestations.md) such as SBOMs and provenance
+[attestations](../explore/security-concepts/attestations.md) such as SBOMs and provenance
 metadata. You can incorporate these into your pipeline to support supply chain
 security, policy checks, or audit requirements if your tooling supports it.
 
@@ -109,14 +109,14 @@ attached to Docker Hardened Images. This is particularly useful in CI/CD
 pipelines for supply chain security validation and compliance checks.
 
 For automated workflows, authenticate using an [organization access token
-(OAT)](../../enterprise/security/access-tokens.md). OATs are owned by the
+(OAT)](../../security/access-tokens/organization-access-tokens.md). OATs are owned by the
 organization rather than an individual user, making them better suited for CI/CD
 pipelines.
 
 To discover attestations with ORAS:
 
 1. [Generate an organization access
-   token](../../enterprise/security/access-tokens.md) with **Read public
+   token](../../security/access-tokens/organization-access-tokens.md) with **Read public
    repositories** scope.
 
    The following example shows how to discover attestations on DHI community
@@ -204,6 +204,33 @@ migration examples:
 - [Python](../migration/examples/python.md)
 - [Node.js](../migration/examples/node.md)
 
+## Use Socket Firewall variants to monitor package installations
+
+If you want supply chain protection during dependency installation, use a Socket
+Firewall variant in place of the standard `-dev` variant in your build stage.
+These variants come with [Socket](https://socket.dev/) preinstalled to monitor
+package manager activity and block malicious packages before they reach your
+image.
+
+Two tiers are available. Use `-sfw-dev` for Socket Firewall Free, or
+`-sfw-ent-dev` for Socket Firewall Enterprise (requires an API key from Socket).
+The runtime stage stays the same regardless of which build stage variant you
+use.
+
+```dockerfile
+FROM dhi.io/python:3.13-alpine3.23-sfw-dev AS build
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+FROM dhi.io/python:3.13-alpine3.23
+COPY --from=build /app /app
+CMD ["python", "app.py"]
+```
+
+For more information on Socket Firewall variants, see [Available image
+types](../explore/available.md).
+
 ## Use compliance and ELS variants
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
@@ -241,8 +268,8 @@ For the `--docker-server` value:
 #### Using an access token
 
 Create a secret using a [Personal Access Token
-(PAT)](../../security/access-tokens.md) or [Organization Access Token
-(OAT)](../../enterprise/security/access-tokens.md). Ensure the token has at
+(PAT)](../../security/access-tokens/personal-access-tokens.md) or [Organization Access Token
+(OAT)](../../security/access-tokens/organization-access-tokens.md). Ensure the token has at
 least read-only access to the repositories.
 
 ```console

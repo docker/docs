@@ -158,7 +158,7 @@ options:
     - option: password
       shorthand: p
       value_type: string
-      description: Password or Personal Access Token (PAT)
+      description: Password or Personal Access Token (PAT), or `-` to read from stdin
       deprecated: false
       hidden: false
       experimental: false
@@ -271,6 +271,13 @@ examples: |-
 
     ```console
     $ cat ~/my_password.txt | docker login --username foo --password-stdin
+    ```
+
+    You can also pass `-` as the value for `--password` or `-p` to read the
+    password from `STDIN`.
+
+    ```console
+    $ cat ~/my_password.txt | docker login --username foo --password -
     ```
 deprecated: false
 hidden: false

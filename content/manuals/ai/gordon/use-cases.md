@@ -7,112 +7,140 @@ weight: 10
 
 {{< summary-bar feature_name="Gordon" >}}
 
-Gordon handles Docker workflows through natural conversation. This page shows
-example prompts for the most common use cases.
+Gordon handles Docker workflows through natural conversation. In Docker
+Desktop, Gordon is available from the sidebar for open-ended sessions and from
+contextual entry points in views like Containers, Images, Builds, and Volumes.
+Selecting Gordon from one of these views opens a conversation pre-loaded with
+context about the item you're looking at. You can ask the same questions from
+the CLI with `docker ai`.
 
-## Debug and troubleshoot
+## Debug a failing container
 
-Fix broken containers, diagnose build failures, and resolve issues.
+You're in the Containers view and a container has crashed or behaves
+unexpectedly. Open Gordon from the container row to ask about that container's
+state and configuration:
+
+- "Why did this container exit?"
+- "What environment variables are set in this container?"
+- "How long did this container run?"
+- "What security settings are applied to this container?"
+
+From the CLI:
 
 ```console
-# Diagnose container crashes
-$ docker ai "why did my postgres container crash?"
+$ docker ai "why is my postgres container crashing on startup?"
+```
 
-# Debug build failures
+## Debug a failed build
+
+You're in the Builds view looking at a build that failed or is slower than
+expected. Open Gordon from the build to inspect the Dockerfile, build
+arguments, and cache behavior:
+
+- "Why did this build fail?"
+- "How can I improve cache usage for this build?"
+- "What Dockerfile instructions were used?"
+- "What build arguments were used?"
+
+From the CLI:
+
+```console
 $ docker ai "my build is failing at the pip install step, what's wrong?"
+```
 
-# Fix networking issues
-$ docker ai "my web container can't reach my database container"
+## Inspect an image
 
-# Investigate performance problems
-$ docker ai "my container is using too much memory, help me investigate"
+You're in the Images view and want to understand what's in an image before
+running it, or you want to size up a base image:
+
+- "How do I run this image in the CLI?"
+- "What environment variables are configured?"
+- "What entrypoint is configured?"
+- "What's the base architecture of this image?"
+- "Is there a lighter version of this image?"
+
+From the CLI:
+
+```console
+$ docker ai "compare my python:3.12 image to python:3.12-slim"
+```
+
+## Manage volumes and resources
+
+From the Volumes view, ask Gordon about what's stored, which containers use a
+volume, or how to clean up. From any view, use the Gordon sidebar to inspect
+your wider environment:
+
+- "Which containers are using this volume?"
+- "Show me all my containers and their status"
+- "How much disk space is Docker using?"
+- "List my images sorted by size"
+
+From the CLI:
+
+```console
+$ docker ai "clean up all unused Docker resources"
 ```
 
 ## Build and containerize
 
-Create Docker assets for applications and migrate to hardened images.
+For new projects, start a conversation in the Gordon sidebar or via `docker
+ai` from your project directory. Gordon reads your working directory and
+proposes the right files:
+
+- "Containerize my Node.js app"
+- "Create a docker-compose for my stack"
+- "Set up a dev environment with Postgres and Redis"
+
+From the CLI:
 
 ```console
-# Create Dockerfile from scratch
-$ docker ai "create a Dockerfile for my Node.js application"
-
-# Generate compose file
-$ docker ai "create a docker-compose.yml for my application stack"
-
-# Migrate to Docker Hardened Images
-$ docker ai "migrate my Dockerfile to use Docker Hardened Images"
-```
-
-## Execute operations
-
-Run Docker commands to manage containers, images, and resources.
-
-```console
-# Start containers with configuration
-$ docker ai "run a redis container with persistence"
-
-# Build and tag images
-$ docker ai "build my Dockerfile and tag it for production"
-
-# Clean up resources
-$ docker ai "clean up all unused Docker resources"
+$ cd ~/my-project
+$ docker ai "create a Dockerfile for this application"
 ```
 
 ## Develop and optimize
 
-Improve Dockerfiles and configure secure, efficient development environments.
+Ask Gordon to review and improve existing Dockerfiles or service definitions.
+You can start from the Images view (for an image you've already built) or from
+the Gordon sidebar with your project context:
+
+- "Optimize this Dockerfile"
+- "Add a health check to my service"
+- "Make my Dockerfile more secure"
+
+From the CLI:
 
 ```console
-# Optimize existing Dockerfile
 $ docker ai "rate my Dockerfile and suggest improvements"
-
-# Add security improvements
-$ docker ai "make my Dockerfile more secure"
-
-# Configure development workflow
-$ docker ai "set up my container for development with hot reload"
-```
-
-## Manage resources
-
-Inspect containers, images, and resource usage.
-
-```console
-# Check container status
-$ docker ai "show me all my containers and their status"
-
-# Analyze disk usage
-$ docker ai "how much disk space is Docker using?"
-
-# Review image details
-$ docker ai "list my images sorted by size"
 ```
 
 ## Learn Docker
 
-Understand concepts and commands in the context of your projects.
+For conceptual questions, use the Gordon sidebar or CLI. Gordon explains
+concepts grounded in your environment, not generic answers:
+
+- "What is a Docker volume?"
+- "Explain multi-stage builds"
+- "How does networking work in Docker?"
+
+From the CLI:
 
 ```console
-# Explain Docker concepts
-$ docker ai "explain how Docker networking works"
-
-# Understand commands
-$ docker ai "what's the difference between COPY and ADD in Dockerfile?"
-
-# Get troubleshooting guidance
-$ docker ai "how do I debug a container that exits immediately?"
+$ docker ai "what's the difference between COPY and ADD in a Dockerfile?"
 ```
-
 
 ## Writing effective prompts
 
 Be specific:
+
 - Include relevant context: "my postgres container" not "the database"
 - State your goal: "make my build faster" not "optimize"
 - Include error messages when debugging
 
-Gordon works best when you describe what you want to achieve rather than how to
-do it.
+Gordon works best when you describe what you want to achieve rather than how
+to do it. Gordon maintains context across a conversation, so you can follow up
+with clarifications or ask related questions without repeating yourself.
 
 ### Working directory context
 

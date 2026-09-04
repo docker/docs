@@ -1,1 +1,0 @@
-{{- template "alias.html" (dict "Permalink" .Params.target) -}}

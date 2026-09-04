@@ -19,8 +19,8 @@ To use this workflow, you need:
 - Organization owner access in your Docker Hub namespace.
 - One of the following:
   - A DHI Select or Enterprise subscription. [Contact Docker
-    sales](https://www.docker.com/products/hardened-images/#compare) to purchase
-    or learn more about these subscriptions.
+    sales](https://www.docker.com/products/hardened-images/#compare) to purchase DHI Enterprise
+    or [learn more about DHI plans](../../subscription-billing/plans/dhi.md).
   - An active DHI trial. [Start a free DHI
     trial](https://hub.docker.com/hardened-images/start-free-trial).
 - [Docker Desktop](../../desktop/release-notes.md) 4.65 or later to use the
@@ -72,7 +72,7 @@ can use either interface.
 {{< /tabs >}}
 
 Continue to the next step to mirror the image. To dive deeper into exploring
-images see [Search and evaluate Docker Hardened Images](explore.md).
+images see [Search and evaluate Docker Hardened Images](search-evaluate.md).
 
 ## Step 2: Mirror the repository
 
@@ -97,14 +97,13 @@ can mirror repositories.
 
 To use the following commands, you must authenticate or configure DHI CLI
 authentication using your Docker token. For details, see [Use the DHI
-CLI](cli.md#configuration).
+CLI](../tools/cli.md#configuration).
 
 1. Start mirroring the repository to your organization namespace. Replace
    `<your-org>` with your organization name.
 
    ```console
-   $ docker dhi mirror start --org <your-org> \
-       -r dhi/python,<your-org>/dhi-python
+   $ docker dhi mirror start --org <your-org> dhi/python,<your-org>/dhi-python
    ```
 
 2. Wait for images to finish mirroring. This can take a few minutes.
@@ -153,7 +152,7 @@ column to monitor the build status.
 
 To use the following commands, you must authenticate or configure DHI CLI
 authentication using your Docker token. For details, see [Use the DHI
-CLI](cli.md#configuration).
+CLI](../tools/cli.md#configuration).
 
 1. Create a customization. Replace `<your-org>` with your organization name.
    This creates a file called `my-customization.yaml` with the customization
@@ -163,7 +162,7 @@ CLI](cli.md#configuration).
    $ docker dhi customization prepare --org <your-org> python 3-alpine3.23 \
        --destination <your-org>/dhi-python \
        --name "python with curl" \
-       --output my-customization.yaml
+       > my-customization.yaml
    ```
 
 2. Add the `curl` package to the customization. You can edit the file with any

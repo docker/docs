@@ -5,7 +5,7 @@ This site builds https://docs.docker.com/ using Hugo.
 
 ## Project structure
 
-```
+```text
 content/          # Documentation source (Markdown + Hugo front matter)
 ├── manuals/      # Product docs (Engine, Desktop, Hub, etc.)
 ├── guides/       # Task-oriented guides
@@ -45,9 +45,15 @@ must go to the source repository:
 | Model Runner reference | docker/model-runner |
 | Dockerfile reference | moby/buildkit |
 | Engine API reference | moby/moby |
+| AI Governance API (`content/reference/api/ai-governance/api.yaml`) | docker/governor-services (private) |
 
 If a validation failure or broken link traces back to vendored content, note
 the upstream repo that needs fixing. Do not attempt to fix it locally.
+
+`content/reference/api/ai-governance/api.yaml` is a verbatim copy of the
+upstream `openapi.yaml` — do not edit it by hand. Re-vendor it with
+`hack/sync-governance-api.sh`, which fetches the latest spec from the private
+`docker/governor-services` repo (using your own `gh` auth).
 
 ## Writing guidelines
 
@@ -113,12 +119,60 @@ Every content page under `content/` requires:
 
 - `title:` — page title
 - `description:` — short description for SEO/previews
-- `keywords:` — list of search keywords (omitting this fails markdownlint)
+- `keywords:` — list of search keywords
 
 Additional common fields:
 
 - `linkTitle:` — sidebar label (keep under 30 chars)
 - `weight:` — ordering within a section
+
+## Sidebar navigation
+
+The section sidebar is rendered by
+`layouts/_partials/sidebar/sections.html`. It starts at `.FirstSection` and
+recursively walks each section's `.Pages`. Page weight controls the default
+order. Section front matter can group entries with `sidebar.groups`, reverse
+their order with `sidebar.reverse`, override a link with `sidebar.goto`, and
+add a badge with `sidebar.badge`.
+
+The sidebar expands the current page's ancestor sections and marks the current
+page with `aria-current`. When changing the recursive templates, pass all
+navigation state through both `renderChildren` and `renderList`. Keep the page
+filter and the `$hasChildren` calculation aligned so an expand control never
+points to an empty list or disappears for a rendered list.
+
+## Hidden pages
+
+Set `sitemap: false` to hide a page from site-wide discovery. This setting:
+
+- Excludes the page from `sitemap.xml`, `metadata.json`, and `llms-full.txt`
+- Excludes the page body from the site search index
+- Adds a `noindex` robots meta tag
+
+The page is still built and remains available through direct links. This is
+not an access control mechanism.
+
+Hugo does not automatically apply `sitemap: false` from a section page to its
+descendants. To hide an entire subtree, cascade the value from the section's
+`_index.md`:
+
+```yaml
+sitemap: false
+cascade:
+  sitemap: false
+```
+
+## Hidden sections in the sidebar
+
+The sidebar uses `sitemap` as a navigation visibility filter. A hidden page is
+absent from the sidebar outside its active navigation path. The current page
+and its ancestors remain visible so direct links to hidden pages do not produce
+an empty navigation path.
+
+When the active path enters a hidden section, `revealHidden` propagates down
+that branch and renders the whole hidden subtree. This keeps the section's
+navigation available while you are in it. The state must remain scoped to that
+branch so unrelated hidden pages stay hidden.
 
 ## Hugo shortcodes
 
@@ -129,8 +183,9 @@ produces broken HTML — always check COMPONENTS.md for correct syntax.
 ## Commands
 
 ```sh
-npx prettier --write <file>        # Format before committing
-scripts/lint.sh <file>...          # Lint specific files (markdownlint + vale)
+npx --no-install rumdl fmt <file>  # Format Markdown before committing
+npx prettier --write <file>        # Format non-Markdown files
+scripts/lint.sh <file>...          # Lint specific files (rumdl + Vale)
 docker buildx bake validate        # Run all validation checks
 docker buildx bake lint            # Markdown linting only
 docker buildx bake vale            # Style guide checks only
@@ -151,7 +206,7 @@ and `validate-vendor` targets run correctly in CI.
 ## Verification loop
 
 1. Make changes
-2. Format with prettier: `npx prettier --write <file>`
+2. Format Markdown with rumdl: `npx --no-install rumdl fmt <file>`
 3. Lint the changed files: `scripts/lint.sh <file>...`
 4. Run a full build with `docker buildx bake` (optional for small changes)
 

@@ -1,13 +1,11 @@
 ---
 title: Cursor
-weight: 33
+weight: 40
 description: |
   Use Cursor in Docker Sandboxes with API key or proxy-managed OAuth
   authentication.
 keywords: docker sandboxes, cursor, cursor agent, ai agent, sbx
 ---
-
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 This guide covers authentication, configuration, and usage of Cursor in a
 sandboxed environment.
@@ -34,15 +32,11 @@ $ sbx run cursor
 Cursor supports two authentication methods: an API key or OAuth.
 
 **API key**: Store your Cursor API key using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
-$ sbx secret set -g cursor
+$ sbx secret set cursor
 ```
-
-Alternatively, export the `CURSOR_API_KEY` environment variable in your shell
-before running the sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
 
 **OAuth**: If no API key is set, Cursor prompts you to sign in interactively
 on first run. The proxy intercepts the token exchange with
@@ -59,21 +53,31 @@ for workarounds.
 
 Cursor reads `AGENTS.md` from the workspace for agent-specific instructions.
 
-The sandbox runs Cursor in YOLO mode by default, which executes commands
-without approval prompts. Pass additional `cursor-agent` CLI options after
-`--`:
+### Default startup command
+
+Without extra args, the sandbox runs:
+
+```text
+cursor-agent --yolo
+```
+
+Arguments after `--` are added after the default flags when the first one is
+itself a flag (begins with `-`), so `--yolo` is preserved:
 
 ```console
-$ sbx run cursor --name <sandbox-name> -- <cursor-options>
+$ sbx run cursor -- -p "refactor this"   # runs cursor-agent --yolo -p "refactor this"
 ```
+
+When the first argument is a bare word — a subcommand or prompt — it replaces
+the defaults instead.
 
 ## Base image
 
 Template: `docker/sandbox-templates:cursor-agent-docker`
 
-Preconfigured to run in YOLO mode with HTTP/1.1 and server-sent events for
-agent traffic so requests flow through the host proxy. Authentication state
-is persisted across sandbox restarts.
+Preconfigured with HTTP/1.1 and server-sent events for agent traffic so
+requests flow through the host proxy. Authentication state is persisted across
+sandbox restarts.
 
 See [Customize](../customize/) to pre-install tools or customize this
 environment.

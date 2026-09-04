@@ -1,45 +1,56 @@
 ---
-title: Docker accounts
-description: Learn how to create and manage your Docker account
-keywords: accounts, docker ID, account management, account settings, docker account, docker home
-weight: 30
+title: Accounts
+description: >
+  Manage Docker individual accounts and organization administration, including
+  members, teams, and companies.
+keywords: accounts, admin, Docker ID, organization, company, Docker Home,
+  account management
+weight: 10
 params:
   sidebar:
-    group: Platform
+    group: Accounts and admin
 grid:
-- title: Create a Docker ID
-  description: Get started with Docker and create an account.
-  icon: fingerprint
-  link: /accounts/create-account/
-- title: Manage account
-  description: Learn how to manage the settings for your account.
-  icon: manage_accounts
-  link: /accounts/manage-account/
-- title: Personal access tokens
-  description: Learn how to create and manage access tokens for your account.
-  icon: password
-  link: /security/access-tokens/
-- title: Set up two-factor authentication
-  description: Add an extra layer of authentication to your Docker account.
-  link: /security/2fa/
-  icon: mobile_lock_portrait
-- title: Deactivate an account
-  description: Learn how to deactivate a Docker user account.
-  link: /accounts/deactivate-user-account/
-  icon: disabled_by_default
-- title: Account FAQ
-  description: Explore frequently asked questions about Docker accounts.
-  icon: help
-  link: /accounts/general-faqs/
+  - title: Docker individual accounts
+    description: Create and manage your Docker ID, email, and sign-in methods.
+    icon: user-circle
+    link: /accounts/individual/
+  - title: Organization accounts
+    description: Manage members, teams, and organization settings.
+    icon: building-storefront
+    link: /accounts/organization/
+  - title: Company accounts
+    description: Group multiple organizations for centralized administration.
+    icon: building-office-2
+    link: /accounts/company/
+  - title: Security
+    description: Authentication, tokens, and roles for accounts and organizations.
+    icon: lock-closed
+    link: /security/
+  - title: Subscription and billing
+    description: Plans, payments, and invoices for your account or organization.
+    icon: credit-card
+    link: /subscription-billing/
+  - title: FAQs
+    description: Common questions about accounts, billing, and security.
+    icon: question-mark-circle
+    link: /faqs/
 ---
 
-This section covers individual Docker accounts and Docker IDs. It does
-not cover organizations, companies, or administrator roles.
+A Docker account identifies you and lets you access Docker products. You
+manage it in [Docker Home](https://app.docker.com/). Docker has two
+primary account types: individual and organization. A company groups
+multiple organizations.
 
-A Docker account is required to:
-- Create a Docker ID
-- Access Docker products and services like Docker Hub and Docker Desktop
-- Receive organization invitations
-- Manage your personal settings and security features
+| Account type | What it is | Who it's for |
+| --- | --- | --- |
+| Individual | A Docker ID with personal settings, Hub repositories, and sign-in methods | A person |
+| Organization | A shared workspace for members, teams, and repositories | Teams on Docker Team or Business |
+| Company | Multiple organizations under centralized administration | Docker Business subscribers |
+
+You always sign in with your individual account, then work in the
+organizations you own or belong to. Those organizations sit under a
+company when you administer more than one.
+
+## Next steps
 
 {{< grid >}}

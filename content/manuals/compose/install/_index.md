@@ -6,10 +6,6 @@ title: Overview of installing Docker Compose
 linkTitle: Install
 weight: 20
 toc_max: 3
-aliases:
-- /compose/compose-desktop/
-- /compose/install/other/
-- /compose/install/compose-desktop/
 ---
 
 This page summarizes the different ways you can install Docker Compose, depending on your platform and needs.

@@ -3,8 +3,6 @@ title: Air-gapped containers
 description: Restrict outbound container traffic using proxy rules, PAC files, and network isolation with Docker Desktop air-gapped containers
 keywords: air gapped containers, network security, proxy configuration, container isolation, docker desktop, PAC file, network isolation
 aliases:
- - /desktop/hardened-desktop/settings-management/air-gapped-containers/
- - /desktop/hardened-desktop/air-gapped-containers/
  - /security/for-admins/hardened-desktop/air-gapped-containers/
 weight: 30
 ---
@@ -25,16 +23,17 @@ Use air-gapped containers if:
 
 ## How air-gapped containers work
 
-Air-gapped containers operate by intercepting container network traffic and applying proxy rules:
+`containersProxy` governs two distinct traffic paths:
 
-1. Traffic interception: Docker Desktop intercepts all outgoing network connections from containers
-1. Port filtering: Only traffic on specified ports (`transparentPorts`) is subject to proxy rules
-1. Rule evaluation: PAC file rules or static proxy settings determine how to handle each connection
-1. Connection handling: Traffic is allowed directly, routed through a proxy, or blocked based on the rules
+- Image pulls (always enforced): Docker Desktop hardwires `http.docker.internal:3128` as the daemon's proxy in `daemon.json` at VM startup, so all `docker pull` and Compose pull operations always go through `containersProxy`, including any PAC file rules.
+- Running container outbound traffic (opt-in): Docker Desktop intercepts container TCP connections and applies proxy rules only for ports listed in `transparentPorts`. Without it, running container traffic bypasses `containersProxy` entirely.
 
-Some important considerations include:
+> [!IMPORTANT]
+>
+> If you configure a PAC file under `containersProxy`, the PAC file must return an appropriate proxy server to connect to the registries where your images are hosted.
 
-- The existing `proxy` setting continues to apply to Docker Desktop application traffic on the host
+Other considerations:
+
 - If PAC file download fails, containers block requests to target URLs
 - Hostname is available for ports 80 and 443, but only IP addresses for other ports
 
@@ -67,7 +66,7 @@ Add the container proxy to your [`admin-settings.json` file](/manuals/enterprise
 
 ### Configuration parameters
 
-The `containersProxy` setting controls network policies applied to container traffic:
+The `containersProxy` setting controls network policies applied to `docker image pull` and, when `transparentPorts` is configured, running container outbound traffic:
 
 | Parameter | Description | Value |
 |-----------|-------------|-------|
@@ -141,10 +140,11 @@ function FindProxyForURL(url, host) {
 ### General considerations
 
  - `FindProxyForURL` function URL parameter format is `http://host_or_ip:port` or `https://host_or_ip:port`
- - If you have an internal container trying to access `https://docs.docker.com/enterprise/security/hardened-desktop/air-gapped-containers` the Docker proxy service will submit docs.docker.com for the host value and https://docs.docker.com:443 for the url value to `FindProxyForURL`, if you are using `shExpMatch` function in your PAC file as follows:
+ - If you have an internal container trying to access `https://docs.docker.com/enterprise/security/hardened-desktop/air-gapped-containers` the Docker proxy service will submit docs.docker.com for the host value and https://docs.docker.com:443 for the URL value to `FindProxyForURL`, if you are using `shExpMatch` function in your PAC file as follows:
 
+   <!-- vale off -->
    ```console
-   if(shExpMatch(url, "https://docs.docker.com:443/enterprise/security/*")) return "DIRECT";
+   if(shExpMatch(url, "https://docs.docker.com:443/enterprise/security/hardened-desktop/*")) return "DIRECT";
    ```
 
    `shExpMatch` function will fail, instead use:
@@ -152,6 +152,7 @@ function FindProxyForURL(url, host) {
    ```console
    if (host == docs.docker.com && url.indexOf(":443") > 0) return "DIRECT";
    ```
+   <!-- vale on -->
 
 ### PAC file return values
 

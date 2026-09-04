@@ -1,12 +1,12 @@
 ---
 title: Release notes for Docker Home, the Admin Console, billing, security, and subscription features
 linkTitle: Release notes
-description: Learn about the new features, bug fixes, and breaking changes for Docker Home, the Admin Console, and billing and subscription features
-keywords: Docker Home, Docker Admin Console, billing, subscription, security, admin, releases, what's new
+description: Learn about the new features, bug fixes, and breaking changes for Docker Home and billing and subscription features
+keywords: Docker Home, billing, subscription, security, admin, releases, what's new
 weight: 60
 params:
   sidebar:
-    group: Platform
+    group: Accounts and admin
 tags: [Release notes, admin]
 ---
 
@@ -67,7 +67,7 @@ This page provides details on new features, enhancements, known issues, and bug 
 
 ### New
 
-- [Personal access tokens](/security/access-tokens/) (PATs) now support expiration dates.
+- [Personal access tokens](/security/access-tokens/personal-access-tokens/) (PATs) now support expiration dates.
 
 ## 2024-10-15
 
@@ -86,7 +86,7 @@ This page provides details on new features, enhancements, known issues, and bug 
 
 ### New
 
-- Administrators can now view [organization Insights](/manuals/admin/insights.md).
+- Administrators can now view [organization Insights](/manuals/accounts/organization/insights.md).
 
 ## 2024-07-17
 

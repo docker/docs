@@ -1,13 +1,11 @@
 ---
 title: Gemini
-weight: 40
+weight: 70
 description: |
   Use Google Gemini in Docker Sandboxes with proxy-managed authentication and
   API key configuration.
 keywords: docker sandboxes, gemini, google, ai agent, sbx
 ---
-
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 This guide covers authentication, configuration, and usage of Google Gemini in
 a sandboxed environment.
@@ -34,15 +32,11 @@ $ sbx run gemini
 Gemini requires either a Google API key or a Google account with Gemini access.
 
 **API key**: Store your key using
-[stored secrets](../security/credentials.md#stored-secrets):
+[stored secrets](../configuration/credentials.md#stored-secrets):
 
 ```console
-$ sbx secret set -g google
+$ sbx secret set google
 ```
-
-Alternatively, export the `GEMINI_API_KEY` or `GOOGLE_API_KEY` environment
-variable in your shell before running the sandbox. See
-[Credentials](../security/credentials.md) for details on both methods.
 
 **Google account**: If no API key is set, Gemini prompts you to sign in
 interactively when it starts. Interactive authentication is scoped to the
@@ -56,21 +50,33 @@ available inside the sandbox. See
 [Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
-The sandbox runs Gemini without approval prompts by default and disables
-Gemini's built-in sandbox tool (since the sandbox itself provides isolation).
-Pass additional Gemini CLI options after `--`:
+The sandbox disables Gemini's built-in sandbox tool (since the sandbox itself
+provides isolation).
+
+### Default startup command
+
+Without extra args, the sandbox runs:
+
+```text
+gemini --yolo
+```
+
+Arguments after `--` are added after the default flags when the first one is
+itself a flag (begins with `-`), so `--yolo` is preserved:
 
 ```console
-$ sbx run gemini --name <sandbox-name> -- <gemini-options>
+$ sbx run gemini -- -p "explain this"   # runs gemini --yolo -p "explain this"
 ```
+
+When the first argument is a bare word — a subcommand or prompt — it replaces
+the defaults instead.
 
 ## Base image
 
 Template: `docker/sandbox-templates:gemini`
 
 Gemini is configured to disable its built-in OAuth flow. Authentication is
-managed through the proxy with API keys. Preconfigured to run without
-approval prompts.
+managed through the proxy with API keys.
 
 See [Customize](../customize/) to pre-install tools or customize this
 environment.

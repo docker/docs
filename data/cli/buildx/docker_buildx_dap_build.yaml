@@ -27,7 +27,7 @@ options:
       value_type: stringArray
       default_value: '[]'
       description: |
-        Allow extra privileged entitlement (e.g., `network.host`, `security.insecure`, `device`)
+        Allow extra privileged entitlement (e.g., `network.host`, `security.insecure`, `device`, `buildx.local.delete`)
       deprecated: false
       hidden: false
       experimental: false
@@ -135,8 +135,7 @@ options:
       kubernetes: false
       swarm: false
     - option: cpu-period
-      value_type: int64
-      default_value: "0"
+      value_type: string
       description: Limit the CPU CFS (Completely Fair Scheduler) period
       deprecated: false
       hidden: true
@@ -145,8 +144,7 @@ options:
       kubernetes: false
       swarm: false
     - option: cpu-quota
-      value_type: int64
-      default_value: "0"
+      value_type: string
       description: Limit the CPU CFS (Completely Fair Scheduler) quota
       deprecated: false
       hidden: true
@@ -156,8 +154,7 @@ options:
       swarm: false
     - option: cpu-shares
       shorthand: c
-      value_type: int64
-      default_value: "0"
+      value_type: string
       description: CPU shares (relative weight)
       deprecated: false
       hidden: true
@@ -386,6 +383,17 @@ options:
       value_type: bool
       default_value: "false"
       description: Suppress the build output and print image ID on success
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: resource
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Resource limits for build containers (format: `memory=2g`, `cpu-quota=50000`)
       deprecated: false
       hidden: false
       experimental: false

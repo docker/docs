@@ -8,26 +8,35 @@
   */
 -}}
 <!-- section tree -->
-<nav class="navbar-font flex flex-col mt-1 mx-1">
+<nav class="navbar-font mx-1 mt-1 flex flex-col">
   <ul>
-    {{ template "renderChildren" .FirstSection }}
+    {{ template "renderChildren" (dict "section" .FirstSection "revealHidden" false) }}
   </ul>
 </nav>
 
 {{ define "renderChildren" }}
-  {{- $pages := where .Pages "Params.sitemap" "ne" "false" }}
-  {{- if .Params.sidebar.reverse }}
-    {{ $pages = .Pages.Reverse }}
+  {{- $section := .section }}
+  {{- $revealHidden := .revealHidden }}
+  {{- $sourcePages := $section.Pages }}
+  {{- if $section.Params.sidebar.reverse }}
+    {{ $sourcePages = $sourcePages.Reverse }}
+  {{- end }}
+  {{- $pages := slice }}
+  {{- range $sourcePages }}
+    {{- $isActive := or (eq page .) (page.IsDescendant .) }}
+    {{- if or (ne .Params.sitemap false) $isActive $revealHidden }}
+      {{- $pages = $pages | append . }}
+    {{- end }}
   {{- end }}
   {{- $ungrouped := where $pages "Params.sidebar.group" "==" nil }}
   {{- range $ungrouped }}
     {{- if .IsSection }}
-      {{- template "renderList" . }}
+      {{- template "renderList" (dict "section" . "revealHidden" $revealHidden) }}
     {{- else }}
       {{- template "renderSingle" . }}
     {{- end }}
   {{- end }}
-  {{- range .Params.sidebar.groups }}
+  {{- range $section.Params.sidebar.groups }}
     <!--  Main titles -->
     <div class="navbar-group">
       <li class="navbar-group-font-title">
@@ -35,7 +44,7 @@
       </li>
       {{- range where $pages "Params.sidebar.group" . }}
         {{- if .IsSection }}
-          {{- template "renderList" . }}
+          {{- template "renderList" (dict "section" . "revealHidden" $revealHidden) }}
         {{- else }}
           {{- template "renderSingle" . }}
         {{- end }}
@@ -47,8 +56,10 @@
 
 {{/* Recursive template for sidebar items */}}
 {{ define "renderList" }}
-  {{ $isCurrent := eq page . }}
-  {{ $expanded := or $isCurrent (page.IsDescendant .) }}
+  {{- $section := .section }}
+  {{- $isCurrent := eq page $section }}
+  {{- $expanded := or $isCurrent (page.IsDescendant $section) }}
+  {{- $revealHidden := or .revealHidden (and (eq $section.Params.sitemap false) $expanded) }}
   <li class="" x-data="{ expanded: {{ $expanded }} }">
     <div
       class="{{ if $isCurrent }}
@@ -56,7 +67,7 @@
       {{ end }} flex w-full items-center justify-between rounded-sm"
     >
       <div class="navbar-entry-margin w-full truncate">
-        {{- if .Permalink }}
+        {{- if $section.Permalink }}
           {{/* If the link is not empty, use it */}}
           <!-- Sections that have children and linking to a page -->
           <a
@@ -64,9 +75,9 @@
               aria-current="page" id="sidebar-current-page"
             {{ end }}
             class="hover:text-blue block select-none hover:dark:text-blue-400"
-            href="{{ .Permalink }}"
+            href="{{ $section.Permalink }}"
           >
-            {{ template "renderTitle" . }}
+            {{ template "renderTitle" $section }}
           </a>
         {{- else }}
           {{/* Otherwise, just expand the section */}}
@@ -75,38 +86,45 @@
             @click="expanded = !expanded"
             class="hover:text-blue w-full text-left select-none hover:dark:text-blue-400"
           >
-            {{ template "renderTitle" . }}
+            {{ template "renderTitle" $section }}
           </button>
         {{- end }}
       </div>
       {{/* Only show expand group button if section has children */}}
-      {{- $hasChildren := gt (len (where .Pages "Params.sitemap" "ne" "false")) 0 }}
+      {{- $children := slice }}
+      {{- range $section.Pages }}
+        {{- $isActive := or (eq page .) (page.IsDescendant .) }}
+        {{- if or (ne .Params.sitemap false) $isActive $revealHidden }}
+          {{- $children = $children | append . }}
+        {{- end }}
+      {{- end }}
+      {{- $hasChildren := gt (len $children) 0 }}
       {{- if $hasChildren }}
-      <!-- Expand group button -->
-      <button
-        @click="expanded = !expanded"
-        class="rounded-sm hover:bg-gray-200 hover:dark:bg-gray-800"
-      >
-        <span
-          :class="{ 'hidden' : expanded }"
-          class="icon-svg {{ if $expanded }}hidden{{ end }}"
+        <!-- Expand group button -->
+        <button
+          @click="expanded = !expanded"
+          class="rounded-sm px-1 hover:bg-gray-200 hover:dark:bg-gray-800"
         >
-          {{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}
-        </span>
-        <span
-          :class="{ 'hidden' : !expanded }"
-          class="icon-svg {{ if not $expanded }}hidden{{ end }}"
-        >
-          {{ partialCached "icon" "arrow_drop_up" "arrow_drop_up" }}
-        </span>
-      </button>
+          <span
+            :class="{ 'hidden' : expanded }"
+            class="icon-svg icon-sm {{ if $expanded }}hidden{{ end }}"
+          >
+            {{ partialCached "icon" "chevron-down" "chevron-down" }}
+          </span>
+          <span
+            :class="{ 'hidden' : !expanded }"
+            class="icon-svg icon-sm {{ if not $expanded }}hidden{{ end }}"
+          >
+            {{ partialCached "icon" "chevron-up" "chevron-up" }}
+          </span>
+        </button>
       {{- end }}
     </div>
     <ul
       :class="{ 'hidden' : !expanded }"
       class="{{ if not $expanded }}hidden{{ end }} ml-3"
     >
-      {{ template "renderChildren" . }}
+      {{ template "renderChildren" (dict "section" $section "revealHidden" $revealHidden) }}
     </ul>
   </li>
 {{ end }}

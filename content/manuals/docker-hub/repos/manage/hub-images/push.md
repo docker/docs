@@ -42,3 +42,7 @@ images with others or use them in different environments.
    This command pushes the image tagged `v1.0` to the `my-namespace/my-repo` repository.
 
 3. Verify the image on Docker Hub.
+
+   Sign in to [Docker Hub](https://hub.docker.com) and navigate to your
+   repository (`my-namespace/my-repo` in this example). Select the **Tags**
+   tab to confirm that your tag (`v1.0` in this example) appears in the list.

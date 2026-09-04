@@ -1,11 +1,9 @@
 ---
 title: Shell
-weight: 90
+weight: 100
 description: Run an agent-less sandbox with a Bash login shell for manual setup, testing custom agent implementations, or inspecting a running environment.
 keywords: sandboxes, sbx, shell, agent, manual setup, testing
 ---
-
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 `sbx run shell` drops you into a Bash login shell inside a sandbox with no
 pre-installed agent binary. It's useful for installing and configuring
@@ -23,13 +21,25 @@ command instead of an interactive shell, pass it after `--`:
 $ sbx run shell -- -c "echo 'Hello from sandbox'"
 ```
 
-Set your API keys as environment variables so the sandbox proxy can inject
-them into API requests automatically. Credentials are never stored inside
-the VM:
+## Default startup command
+
+Without extra args, the sandbox runs `bash -l`. When the first argument after
+`--` is a flag (begins with `-`), it's added after `-l`, so login-shell
+behavior is preserved:
 
 ```console
-$ export ANTHROPIC_API_KEY=sk-ant-xxxxx
-$ export OPENAI_API_KEY=sk-xxxxx
+$ sbx run shell -- -c "echo hi"   # runs bash -l -c "echo hi"
+```
+
+When the first argument is a bare word, it replaces `-l` instead.
+
+Store credentials using [stored secrets](../configuration/credentials.md#stored-secrets)
+before running the sandbox. The proxy injects them into outbound API requests;
+credentials are never stored inside the VM:
+
+```console
+$ sbx secret set anthropic
+$ sbx secret set openai
 ```
 
 Once inside the shell, you can install agents using their standard methods,

@@ -4,19 +4,12 @@ description: Docker Desktop Enterprise
 keywords: Docker Desktop Enterprise
 sitemap: false
 aliases:
-- /ee/desktop/
-- /desktop/enterprise/release-notes/
 - /desktop/enterprise/admin/install/mac/
 - /desktop/enterprise/admin/configure/mac-admin/
 - /desktop/enterprise/admin/configure/windows-admin/
-- /desktop/enterprise/user/mac-user/
-- /desktop/enterprise/user/windows-user/
-- /desktop/enterprise/app-designer/
-- /desktop/enterprise/troubleshoot/mac-issues/
-- /desktop/enterprise/troubleshoot/windows-issues/
 ---
 
-Docker Desktop Enterprise (DDE) has been deprecated and is no longer in active development. Please use [Docker Desktop](../_index.md) Community instead.
+Docker Desktop Enterprise (DDE) has been deprecated and is no longer in active development. Use [Docker Desktop](/manuals/enterprise/enterprise-deployment/_index.md) instead.
 
 If you are an existing DDE customer, use the [Support form](https://hub.docker.com/support/desktop/) to request a transition to one of the new [subscriptions](https://www.docker.com/pricing?ref=Docs&refAction=DocsDesktopEnterprise).
 

@@ -6,9 +6,6 @@ description:
 weight: 40
 params:
   sidebar:
-    badge:
-      color: blue
-      text: Beta
     group: AI and agents
 aliases:
   - /desktop/features/gordon/
@@ -16,9 +13,9 @@ aliases:
 
 {{< summary-bar feature_name="Gordon" >}}
 
-Gordon is an AI-powered assistant that takes action on your Docker workflows. It analyzes
-your environment, proposes solutions, and executes commands with your
-permission. Available in Docker Desktop and via the `docker ai` CLI command.
+Gordon is an AI-powered assistant that takes action on your Docker workflows.
+It analyzes your environment, proposes solutions, and executes commands with
+your permission.
 
 ## What Gordon does
 
@@ -32,26 +29,48 @@ Gordon takes action to help you with Docker tasks:
 
 Gordon proposes every action before executing. You approve what it does.
 
+## Where to use Gordon
+
+Gordon is available on four surfaces:
+
+- Open the Gordon view from the Docker Desktop sidebar to run Docker commands
+  with your approval. See [Using Gordon in Docker
+  Desktop](./how-to/docker-desktop.md).
+- Run `docker ai` in the terminal to use the full assistant from the command
+  line. See [Using Gordon via CLI](./how-to/cli.md).
+- Select the Gordon icon on any repository page at
+  [hub.docker.com](https://hub.docker.com) to ask about a repository's
+  images, tags, and metadata. Hand off to Docker Desktop to take action.
+- Select the Gordon icon on any page at
+  [docs.docker.com](https://docs.docker.com) to ask Docker questions.
+
+Docker Desktop and the CLI count against your Gordon plan's [usage
+limits](./usage-limits.md). Gordon on Docker Hub and docs.docker.com is free
+and does not require a Docker account or a Docker Desktop install. It has
+its own shared public usage limit and does not access your Docker
+environment.
+
 ## Get started
 
 ### Prerequisites
 
 Before you begin:
 
-- Docker Desktop 4.61.0 or later
+- Docker Desktop 4.74 or later
 - Sign in to your Docker account
 
 > [!NOTE]
-> Gordon is enabled by default for Personal, Pro, and Team subscriptions.
-> Business subscribers must complete two steps before users can access Gordon:
+> Gordon is enabled by default for signed-in Docker users. If your account
+> belongs to an organization with a Business subscription, access requires two
+> additional steps:
 >
 > 1. Contact Docker Support to activate Gordon for your organization. Docker
 >    will confirm when activation is complete.
-> 2. Once confirmed, an organization administrator must set **Enable Gordon** to
->    **Enabled** or **Always enabled** in the
->    [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md).
->    Do not leave the setting at its default value, as this will not activate
->    Gordon organization-wide.
+> 2. Once confirmed, an organization administrator must turn on Gordon via
+>    [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md).
+>    Set **Enable Gordon** to **Enabled** or **Always enabled**. Ensure all
+>    Settings Management prerequisites are met for the setting to take effect
+>    on Docker Desktop clients.
 
 ### Quick start
 
@@ -80,7 +99,7 @@ Before you begin:
 
 2. Type a question: "what containers are running?" and press <kbd>Enter</kbd>.
 
-   ![Gordon running in the terminal](./images/gordon_tui.avif?border=true)
+   ![Gordon running in the terminal](./images/gordon_tui.avif)
 
 3. Review Gordon's proposed actions and approve by typing `y`.
 
@@ -92,7 +111,7 @@ Before you begin:
 By default, Gordon asks for approval before executing actions. You can approve
 individual actions or allow all actions for the current session.
 
-![Gordon permission request](./images/permissions.avif)
+![Gordon permission request](./images/gordon_permissions_prompt.avif)
 
 Permissions reset for each session. To configure default permissions or enable
 auto-approve mode, see [Permissions](./how-to/permissions.md).

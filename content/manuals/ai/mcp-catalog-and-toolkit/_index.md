@@ -13,11 +13,11 @@ keywords: Docker, ai, mcp servers, ai agents, extension, docker desktop, llm, do
 grid:
   - title: Get started with MCP Toolkit
     description: Learn how to quickly install and use the MCP Toolkit to set up servers and clients.
-    icon: explore
+    icon: magnifying-glass-plus
     link: /ai/mcp-catalog-and-toolkit/get-started/
   - title: MCP Catalog
     description: Browse Docker's curated collection of verified MCP servers
-    icon: hub
+    icon: globe-alt
     link: /ai/mcp-catalog-and-toolkit/catalog/
   - title: MCP Profiles
     description: Organize servers into profiles for different projects and share configurations
@@ -29,19 +29,15 @@ grid:
     link: /ai/mcp-catalog-and-toolkit/toolkit/
   - title: MCP Gateway
     description: Use the CLI and Gateway to run MCP servers with custom configurations
-    icon: developer_board
+    icon: cpu-chip
     link: /ai/mcp-catalog-and-toolkit/mcp-gateway/
   - title: Dynamic MCP
-    description: Discover and add MCP servers on-demand using natural language
-    icon: search
+    description: Discover and add MCP servers on-demand using natural language. This feature is experimental.
+    icon: magnifying-glass
     link: /ai/mcp-catalog-and-toolkit/dynamic-mcp/
-  - title: Docker Hub MCP server
-    description: Use the Docker Hub MCP server to search images and manage repositories
-    icon: device_hub
-    link: /ai/mcp-catalog-and-toolkit/hub-mcp/
   - title: Security FAQs
     description: Common questions about MCP security, credentials, and server verification
-    icon: security
+    icon: shield-check
     link: /ai/mcp-catalog-and-toolkit/faqs/
   - title: E2B sandboxes
     description: Cloud sandboxes for AI agents with built-in MCP Catalog access
@@ -90,6 +86,9 @@ once, then share it across clients or with your team.
 Clients are the AI applications that connect to your profiles. Claude Code,
 Cursor, Zed, and others connect through the MCP Gateway, which routes requests
 to the right server and handles authentication and lifecycle management.
+
+> [!NOTE]
+> MCP Gateway as part of Docker AI Governance is an invite-only feature. [Contact Docker Sales](https://www.docker.com/pricing/contact-sales/) to learn more.
 
 ## Learn more
 

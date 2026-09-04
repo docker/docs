@@ -1,3 +1,17 @@
+{{/*
+  include shortcode — inlines a reusable snippet from content/includes.
+
+  Usage:
+    {{% include "root-errors.md" %}}
+    {{% include "compose/services.md" %}}
+
+  The argument is a path relative to content/includes. The build fails with
+  a clear message if the target does not exist, so a renamed or deleted
+  snippet surfaces immediately instead of silently rendering nothing.
+*/}}
 {{ $fileToInclude := .Get 0 }}
 {{ $filePath := printf "includes/%s" $fileToInclude }}
+{{ if not (fileExists $filePath) }}
+  {{- errorf "include shortcode: file %q not found: %s" $filePath .Position -}}
+{{ end }}
 {{ readFile $filePath | safeHTML }}

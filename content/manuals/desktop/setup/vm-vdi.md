@@ -4,7 +4,6 @@ keywords: nested virtualization, Docker Desktop, windows, VM, VDI environment
 title: Run Docker Desktop for Windows in a VM or VDI environment
 linkTitle: VM or VDI environments
 aliases:
-  - /desktop/nested-virtualization/
   - /desktop/vm-vdi/
 weight: 30
 ---

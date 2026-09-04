@@ -1,0 +1,16 @@
+name: sbx mcp rm
+synopsis: Remove a registered MCP server
+usage: sbx mcp rm <name> [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for rm
+inherited_options:
+    - name: debug
+      shorthand: D
+      default_value: "false"
+      usage: Enable debug logging
+example: '  sbx mcp rm notion'
+see_also:
+    - sbx mcp - Manage MCP servers

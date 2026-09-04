@@ -20,9 +20,9 @@ When migrating from Ubuntu-based images to DHI Debian, be aware of these key dif
 | Item               | Ubuntu-based images                                                                                                                                                                                                                                                                                                         | Docker Hardened Images                                                                                                                                                                                                                                                                                                         |
 |:-------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Package management | Varies by image. Some include APT package manager, others don't                                                                                                                                                                                                  | Package managers generally only available in images with a `dev` tag. Runtime images don't contain package managers. Use multi-stage builds and copy necessary artifacts from the build stage to the runtime stage.                                                                  |
-| Non-root user      | Varies by image. Some run as root, others as non-root                                                                                                                                                                                                                                                                                                | Runtime variants run as the non-root user by default. Ensure that necessary files and directories are accessible to the non-root user.                                                                                                                                                                                                          |
+| Non-root user      | Varies by image. Some run as root, others as non-root                                                                                                                                                                                                                                                                                                | Runtime variants run as the nonroot user by default. Ensure that necessary files and directories are accessible to the nonroot user.                                                                                                                                                                                                          |
 | Multi-stage build  | Recommended                                                                                                                                                                                                                                                                                                                       | Recommended. Use images with a `dev` or `sdk` tags for build stages and non-dev images for runtime.                                                                                                                                                                                                                           |
-| Ports              | Can bind to privileged ports (under 1024) when running as root                                                                                                                                                                                                                                                                 | Run as a non-root user by default. Applications can't bind to privileged ports (under 1024) when running in Kubernetes or in Docker Engine versions older than 20.10. Configure your application to listen on port 1025 and up inside the container.                                                                        |
+| Ports              | Can bind to privileged ports (under 1024) when running as root                                                                                                                                                                                                                                                                 | Run as a nonroot user by default. Applications can't bind to privileged ports (under 1024) when running in Kubernetes or in Docker Engine versions older than 20.10. Configure your application to listen on port 1025 or higher inside the container.                                                                        |
 | Entry point        | Varies by image                                                                                                                                                                                                                                                                                                                | May have different entry points than Ubuntu-based images. Inspect entry points and update your Dockerfile if necessary.                                                                                                                                                                                                    |
 | Shell              | Varies by image. Some include a shell, others don't                                                                                                                                                                                                                                                                                                  | Runtime images don't contain a shell. Use `dev` images in build stages to run shell commands and then copy artifacts to the runtime stage.                                                                                                                                                                                      |
 | Package repositories | Uses Ubuntu package repositories                                                                                                                                                                                                                                                                                                  | Uses Debian package repositories. Most packages have similar names, but some may differ.                                                                                                                                                                                      |
@@ -43,7 +43,7 @@ replaced by the new DHI Debian image.
 > You must authenticate to `dhi.io` before you can pull Docker Hardened Images.
 > Use your Docker ID credentials (the same username and password you use for
 > Docker Hub). If you don't have a Docker account, [create
-> one](../../accounts/create-account.md) for free.
+> one](../../accounts/individual/create-account.md) for free.
 >
 > Run `docker login dhi.io` to authenticate.
 
@@ -53,7 +53,7 @@ replaced by the new DHI Debian image.
 - FROM ubuntu/go:1.22-24.04
 
 + ## Updated to use hardened Debian-based image
-+ FROM dhi.io/golang:1-debian13-dev
++ FROM dhi.io/golang:1.25-debian13-dev
 ```
 
 To find the right tag, explore the available tags in the [DHI
@@ -74,7 +74,7 @@ contain package managers.
 -     && rm -rf /var/lib/apt/lists/*
 
 + ## DHI: Use a language-specific dev image with package manager
-+ FROM dhi.io/golang:1-debian13-dev
++ FROM dhi.io/golang:1.25-debian13-dev
 + RUN apt-get update && apt-get install -y \
 +     git \
 +     && rm -rf /var/lib/apt/lists/*
@@ -105,7 +105,7 @@ The following example shows a multi-stage Dockerfile migrating from Ubuntu to DH
 
 ```dockerfile
 # Build stage
-FROM dhi.io/golang:1-debian13-dev AS builder
+FROM dhi.io/golang:1.25-debian13-dev AS builder
 WORKDIR /app
 
 # Install system dependencies (only available in dev images)
@@ -121,7 +121,7 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags="-s -w" -o main .
 
 # Runtime stage
-FROM dhi.io/golang:1-debian13
+FROM dhi.io/golang:1.25-debian13
 WORKDIR /app
 
 # Copy compiled binary from builder

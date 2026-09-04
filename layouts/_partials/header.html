@@ -8,7 +8,7 @@
           class="icon-svg block h-full px-4 md:hidden"
           aria-label="Menu"
         >
-          {{ partialCached "icon" "menu" "menu" }}
+          {{ partialCached "icon" "bars-3" "bars-3" }}
         </button>
       {{- end }}
       <div>
@@ -55,10 +55,10 @@
             class="group shimmer flex cursor-pointer items-center gap-2 rounded-lg border border-blue-500 bg-blue-700 p-2 text-white transition-colors focus:ring focus:ring-blue-400 focus:outline-none"
           >
             <span class="icon-svg group-hover:hidden">
-              {{ partialCached "icon" "icons/gordon.svg" "icons/gordon.svg" }}
+              {{ partialCached "icon" "gordon" "gordon" }}
             </span>
             <span class="icon-svg hidden group-hover:block">
-              {{ partialCached "icon" "icons/gordon-happy.svg" "icons/gordon-happy.svg" }}
+              {{ partialCached "icon" "gordon-happy" "gordon-happy" }}
             </span>
             <span class="hidden px-1 lg:inline">Gordon</span>
           </button>
@@ -105,13 +105,13 @@
           @click="theme = (theme === 'light' ? 'dark' : theme === 'dark' ? 'auto' : 'light')"
         >
           <span class="theme-icon-sun icon-svg" x-show="theme === 'light'"
-            >{{ partialCached "icon" "icons/sun.svg" "sun" }}
+            >{{ partialCached "icon" "sun" "sun" }}
           </span>
           <span class="theme-icon-moon icon-svg" x-show="theme === 'dark'">
-            {{ partialCached "icon" "icons/moon.svg" "moon" }}
+            {{ partialCached "icon" "moon" "moon" }}
           </span>
           <span class="theme-icon-auto icon-svg" x-show="theme === 'auto'">
-            {{ partialCached "icon" "contrast" "contrast" }}
+            {{ partialCached "icon" "system" "system" }}
           </span>
         </button>
       </div>

@@ -19,11 +19,11 @@ These instructions assume you are running in Linux or macOS. You can run
 this sandbox on a local machine or on a virtual machine. You need to
 have privileges to run docker commands on your local machine or in the VM.
 
-This sandbox requires you to install two Docker tools: Docker Engine >= 1.10.0
-and Docker Compose >= 1.6.0. To install the Docker Engine, choose from the
-[list of supported platforms](../../install/_index.md). To install
-Docker Compose, see the
-[detailed instructions here](/manuals/compose/install/_index.md).
+This sandbox requires a current Docker Engine and Docker Compose install. To
+install Docker Engine, choose from the
+[list of supported platforms](../../install/_index.md). To install Docker
+Compose, see the
+[Compose install instructions](/manuals/compose/install/_index.md).
 
 ## What is in the sandbox?
 

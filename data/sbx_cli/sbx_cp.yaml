@@ -12,8 +12,7 @@ options:
     - name: follow-link
       shorthand: L
       default_value: "false"
-      usage: |
-        Follow symbolic links in the source path when copying from host to sandbox
+      usage: Follow symbolic links in the source path
     - name: help
       shorthand: h
       default_value: "false"

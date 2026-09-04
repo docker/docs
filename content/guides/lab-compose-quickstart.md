@@ -13,13 +13,6 @@ keywords: Docker, Compose, multi-container, Flask, Redis, watch mode, volumes, l
 params:
   tags: [labs]
   time: 45 minutes
-  resource_links:
-    - title: Docker Compose docs
-      url: /compose/
-    - title: Compose watch mode
-      url: /compose/how-tos/file-watch/
-    - title: Labspace repository
-      url: https://github.com/dockersamples/labspace-compose-quickstart
 ---
 
 Build a Python Flask and Redis hit-counter app using Docker Compose, starting

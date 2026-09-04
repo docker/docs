@@ -29,7 +29,7 @@ ask the agent to install what's needed.
 > create new agent runtimes. The agent that launches inside the sandbox is
 > determined by the base image variant you extend and the agent you specify
 > in the `sbx run` command, not by binaries installed in the template. To
-> define a new agent from scratch, see [Kits](kits.md#defining-an-agent).
+> define a new agent from scratch, see [Kits](kits.md#define-an-agent).
 
 ### Base images
 
@@ -82,7 +82,7 @@ $ sbx run claude --template docker.io/docker/sandbox-templates:claude-code
 ### Build a custom template
 
 Building a custom template requires
-[Docker Desktop](https://docs.docker.com/desktop/).
+[Docker Desktop](/manuals/desktop/_index.md).
 
 Write a Dockerfile that extends one of the base images. Pick the variant
 that matches the agent you plan to run. For example, extend `claude-code`
@@ -118,15 +118,21 @@ $ docker build -t my-org/my-template:v1 --push .
 > daemon on the host.
 
 > [!IMPORTANT]
-> Private templates are only supported on Docker Hub. `sbx` reuses your
-> `sbx login` session to pull private images from Docker Hub. Other
-> registries (such as GitHub Container Registry, ECR, or a self-hosted
-> registry like Nexus) are pulled anonymously, so private images on those
-> registries fail to pull.
+> For Docker Hub, `sbx` reuses your `sbx login` session to pull private
+> images. For other registries (GitHub Container Registry, ECR, ACR, a
+> self-hosted Nexus, and so on), store pull credentials with
+> [`sbx secret set --registry`](../configuration/credentials.md#registry-credentials)
+> before running the sandbox:
+>
+> ```console
+> $ gh auth token | sbx secret set --registry ghcr.io --password-stdin
+> ```
+>
+> Without stored credentials, pulls from non-Docker Hub registries are
+> anonymous and private images fail to pull.
 
-For locally-built images or private images on registries that `sbx`
-can't authenticate against, save the image to a tar and load it
-directly into the sandbox runtime instead of pulling from a registry:
+For locally-built images, save the image to a tar and load it directly
+into the sandbox runtime instead of pulling from a registry:
 
 ```console
 $ docker image save my-org/my-template:v1 -o my-template.tar
@@ -142,7 +148,7 @@ Unless you use the permissive `allow-all` network policy, you may also need
 to allow-list any domains that your custom tools depend on:
 
 ```console
-$ sbx policy allow network -g "*.example.com:443,example.com:443"
+$ sbx policy allow network "*.example.com:443,example.com:443"
 ```
 
 Then run a sandbox with your template. The agent you specify must match
@@ -172,6 +178,15 @@ Instead of writing a Dockerfile, you can save a running sandbox's state as
 a template. This captures installed packages, configuration changes, and
 files into a reusable image — useful when you've set up an environment
 interactively and want to preserve it.
+
+> [!WARNING]
+> Saving a sandbox captures its entire filesystem, including any secrets
+> stored on it. If you manually added API keys, tokens, or other
+> credentials to the sandbox, they're embedded in the saved template and
+> shared with anyone you distribute it to. To keep credentials out of
+> templates, manage them with `sbx secret set` instead — the proxy injects
+> them at runtime so they're never written to the filesystem. For more
+> information, see [Manage credentials](../configuration/credentials.md).
 
 ### Save and reuse
 

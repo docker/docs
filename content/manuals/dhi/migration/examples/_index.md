@@ -7,16 +7,24 @@ params:
   grid_examples:
     - title: Go
       description: Learn how to migrate Go applications to Docker Hardened Images with practical examples and best practices.
-      icon: code
+      icon: code-bracket
       link: /dhi/migration/examples/go/
     - title: Python
       description: Learn how to migrate Python applications to Docker Hardened Images with practical examples and best practices.
-      icon: code
+      icon: code-bracket
       link: /dhi/migration/examples/python/
     - title: Node.js
       description: Learn how to migrate Node.js applications to Docker Hardened Images with practical examples and best practices.
-      icon: code
+      icon: code-bracket
       link: /dhi/migration/examples/node/
+    - title: .NET
+      description: Learn how to migrate .NET applications to Docker Hardened Images with practical examples and best practices.
+      icon: code-bracket
+      link: /dhi/migration/examples/dotnet/
+    - title: Java
+      description: Learn how to migrate Java applications to Docker Hardened Images with practical examples and best practices.
+      icon: code-bracket
+      link: /dhi/migration/examples/java/
 ---
 
 This section provides detailed migration examples for common programming languages and frameworks.

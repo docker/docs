@@ -7,5 +7,10 @@ action:
   params:
     - trim_right
     - "!"
+# Product names that legitimately end in an exclamation point. List the
+# name without the trailing "!" — the exception is matched against the
+# word that precedes the exclamation point.
+exceptions:
+  - 'SDKMAN'
 tokens:
   - '\w+!(?:\s|$)'

@@ -4,10 +4,6 @@ description: Use Intune, Microsoft's cloud-based device management tool, to depl
 keywords: microsoft, windows, docker desktop, deploy, mdm, enterprise, administrator, mac, pkg, dmg
 tags: [admin]
 weight: 40
-aliases:
- - /desktop/install/msi/use-intune/
- - /desktop/setup/install/msi/use-intune/
- - /desktop/setup/install/enterprise-deployment/use-intune/
 ---
 
 {{< summary-bar feature_name="Intune" >}}

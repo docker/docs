@@ -44,8 +44,8 @@ Configure startup behavior, UI appearance, terminal preferences, and feature def
 | **Expose daemon on tcp://localhost:2375 without TLS** | Allow legacy clients to connect to the Docker daemon. Use with caution as exposing the daemon without TLS can result in remote code execution attacks. | Disabled                  | Windows (Hyper-V backend only) | |
 | **Use the WSL 2 based engine** | WSL 2 provides better performance than the Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](/manuals/desktop/features/wsl/_index.md). | Disabled | Windows | |
 | **Add \*.docker.internal to host file**                | Adds internal DNS entries.                                  | Enabled                   | Windows                        | Helps resolve Docker-internal domains |
-| **Choose Virtual Machine Manager (VMM)**              | Choose the VMM for creating and managing the Docker Desktop Linux VM. For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md). | | Mac | Select **Docker VMM** for the latest and most performant Hypervisor/Virtual Machine Manager. This option is available only on Apple Silicon Macs and is in Beta.|
-| **Choose file sharing implementation for your containers** | Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs (Legacy)** | **VirtioFS** | Mac | Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206). It is the only file sharing implementation supported by Docker VMM. |
+| **Choose Virtual Machine Manager (VMM)**              | Choose the VMM for creating and managing the Docker Desktop Linux VM. For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md). | | Mac, Windows | Select **Docker VMM** for optimized container performance. Docker VMM is in Beta. |
+| **Choose file sharing implementation for your containers** | Choose whether you want to share files using **VirtioFS**, or **gRPC FUSE** | **VirtioFS** | Mac | Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206). It is the only file sharing implementation supported by Docker VMM. |
 |**Use Rosetta for x86_64/amd64 emulation on Apple Silicon** | Accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have selected **Apple Virtualization framework** as the Virtual Machine Manager. | Disabled | Mac | |
 | **Send usage statistics** | Send diagnostics, crash reports, and usage data to Docker to improve and troubleshoot the application. Docker may periodically prompt you for more information. | Enabled | All | |
 | **Use Enhanced Container Isolation** | Prevent containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md). | Disabled | All | Must be signed in and have a Docker Business subscription. |
@@ -123,7 +123,7 @@ To prevent developers from accidentally changing the proxy settings, see
 
 #### Docker Desktop proxy
 
-Used for signing in to Docker, pulling and pushing images, fetching artifacts during image builds, and reporting error diagnostics.
+Used for Docker Desktop host-level traffic: signing in to Docker, the Desktop application, CLI, and extensions. Acts as a fallback for `docker image pull` only when [Containers proxy](#containers-proxy) is not configured.
 
 | Proxy mode | Description |
 |------------|-------------|
@@ -137,7 +137,7 @@ Used for signing in to Docker, pulling and pushing images, fetching artifacts du
 
 #### Containers proxy
 
-Used for outbound traffic from running containers.
+Used for `docker image pull` (always enforced - all `docker pull` and Compose pull operations go through this proxy) and for outbound traffic from running containers when air-gapped container enforcement is configured. If a PAC file is configured here, ensure it returns an appropriate proxy server for Docker registry endpoints, or image pulls will fail.
 
 | Proxy mode | Description |
 |------------|-------------|
@@ -149,6 +149,16 @@ Used for outbound traffic from running containers.
 > [!NOTE]
 >
 > The HTTPS proxy used for image scanning is configured using the `HTTPS_PROXY` environment variable.
+
+#### Windows Docker daemon proxy
+
+When you run Windows containers, enable **Use proxy for Windows Docker daemon**
+to let the Windows Docker daemon connect to Docker Desktop's internal proxy.
+This allows Windows containers to use the configured Docker Desktop proxy, and
+it is required if you want [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md)
+restrictions to apply to Windows image operations. Administrators can manage
+the same behavior with
+[**Override Windows "dockerd" port**](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md#override-windows-dockerd-port).
 
 #### Proxy authentication
 
@@ -253,6 +263,13 @@ Running a build automatically starts the container if it's stopped.
 
 You can only start and stop builders using the `docker-container` driver.
 
+## AI
+
+From the AI tab, you can configure settings for:
+
+- [Gordon](/manuals/ai/gordon/_index.md), the AI-powered assistant that takes action on your Docker workflows.
+- [Docker Model Runner](/manuals/ai/model-runner/_index.md), which makes it easy to manage, run, and deploy AI models using Docker.
+
 ## Kubernetes
 
 > [!NOTE]
@@ -287,7 +304,7 @@ Enable Docker Extensions and control which extensions are available to install a
 
 | Setting             | Description                               |
 | ------------------- | ----------------------------------------- |
-| **Enable Docker Extensions** | Turn Docker Extensions on or off. |
+| **Enable Docker Extensions** | Turn Docker Extensions on or off. Turned off by default. |
 | **Allow only extensions distributed through the Docker Marketplace** | Restrict extensions to Marketplace-approved sources only. |
 | **Show Docker Extensions system containers** | Show containers used by Docker Extensions. |
 
@@ -322,14 +339,14 @@ Notifications appear briefly in the lower-right of the Docker Desktop Dashboard,
 
 ## Advanced (Mac only)
 
-Reconfigure CLI tool installation paths and privileged system permissions set during initial install.
+Reconfigure CLI tool installation paths and privileged system permissions. With Docker Desktop version 4.88.0 and earlier, these can be set during installation.
 
 | Setting             | Description                               | Notes                               |
 | ------------------- | ----------------------------------------- | ------------------------------------- |
-| CLI tools installation — **System** | Install Docker CLI tools to `/usr/local/bin`. | |
-| CLI tools installation — **User** | Install Docker CLI tools to `$HOME/.docker/bin` | Add `$HOME/.docker/bin` to your PATH by appending `export PATH=$PATH:~/.docker/bin` to `~/.bashrc` or `~/.zshrc`, then restart your shell. |
+| CLI tools installation — **System** | Install Docker CLI tools to `/usr/local/bin`. | Requires password with version 4.89.0 and later. |
+| CLI tools installation — **User** | Install Docker CLI tools to `$HOME/.docker/bin`. This is the default with version 4.89.0 and later. | Automatically added to your PATH in version 4.89.0 and later. |
 | **Allow the default Docker socket to be used** | Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#installing-symlinks). | Requires password |
-| **Allow privileged port mapping** | Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#binding-privileged-ports). | Requires password |
+| **Allow privileged port mapping** | Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#binding-privileged-ports). | Available with version 4.88.0 and earlier. Requires password |
 
 ## Docker Offload
 
@@ -338,5 +355,5 @@ Enable Docker Offload and configure idle timeout and GPU support for cloud-based
 | Setting             | Description                               | Notes                                 |
 | ------------------- | ----------------------------------------- | ------------------------------------- |
 | **Enable Docker Offload** | Run your containers in the cloud.  | Requires sign-in and an Offload subscription |
-| **Idle timeout** | Set the duration of time between no activity and Docker Offload entering idle mode. For details about idle timeout, see [Active and idle states](../../offload/configuration.md#understand-active-and-idle-states). | |
+| **Idle timeout** | Set the duration of time between no activity and Docker Offload entering idle mode. For details about idle timeout, see [Session management and idle state](/manuals/offload/about.md#session-management-and-idle-state). | |
 | **Enable GPU support** | Let your workloads use cloud GPU if available. | |

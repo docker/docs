@@ -14,6 +14,45 @@ tags: [Release notes]
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+## 2026-08-20
+
+### New
+
+- The [Docker Verified Publisher Program](./repos/manage/trusted-content/dvp-program.md)
+  is now available via self-serve. Apply directly on the [DVP application
+  page](https://hub.docker.com/publisher-program/apply).
+
+## 2026-06-29
+
+### New
+
+- Docker Hub integrates with Cloudsmith, letting it handle authentication
+  for Docker Hub and Docker Hardened Images (DHI) upstreams using a managed
+  token. This removes the need to supply your own credentials during setup.
+  See Cloudsmith's announcement, [Set up Docker Hub and DHI upstreams with
+  Cloudsmith-managed
+  authentication](https://cloudsmith.com/changelog/set-up-docker-hub-and-dhi-upstreams-with-cloudsmith-managed-authentication),
+  for details.
+
+## 2026-05-20
+
+### Infrastructure updates
+
+- Docker Hub has added Amazon CloudFront as a CDN for image pushes and pulls,
+  improving reliability. You may see a new domain,
+  `production.cloudfront.docker.com`, in your network logs. TLS certificates for
+  this domain are issued by Amazon Trust Services.
+
+  Most users are unaffected. You may need to take action if your environment
+  uses an egress firewall with a domain allowlist, a TLS inspection proxy, or a
+  managed CA trust store. See the [Docker Desktop
+  allowlist](/manuals/desktop/setup/allow-list.md) for updated domain
+  requirements. If you see TLS errors, ensure your trust store includes the
+  [Amazon Trust Services Root CAs](https://www.amazontrust.com/repository/). If
+  you're a paid subscriber, you can [contact Docker
+  Support](https://hub.docker.com/support/contact/) if you need updated TLS
+  certificate details or the issue persists.
+
 ## 2026-05-06
 
 ### Deprecation notice
@@ -71,7 +110,7 @@ known issues for each Docker Hub release.
 
 ### New
 
-- Organizations can assign the [editor role](/manuals/enterprise/security/roles-and-permissions/_index.md) to members to grant additional permissions without full administrative access.
+- Organizations can assign the [editor role](/manuals/security/roles-and-permissions/_index.md) to members to grant additional permissions without full administrative access.
 
 ## 2023-05-09
 
@@ -107,7 +146,7 @@ known issues for each Docker Hub release.
 
 ### Bug fixes and enhancements
 
-- You can now [export a CSV file of members](../admin/organization/manage/members.md#export-members-csv-file) from organizations that you own.
+- You can now [export a CSV file of members](../accounts/organization/manage/members.md#export-members-csv-file) from organizations that you own.
 
 ## 2022-07-22
 
@@ -143,7 +182,7 @@ known issues for each Docker Hub release.
 
 ### New
 
-- You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription//change.md).
+- You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription-billing/plans/docker.md).
 
 ## 2021-08-31
 
@@ -160,7 +199,7 @@ The updated [Docker Subscription Service Agreement](https://www.docker.com/legal
 - The existing Docker Free subscription has been renamed **Docker Personal**.
 - **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
 
-  To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq). For more information, see [Docker subscription overview](../subscription/_index.md).
+  To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq). For more information, see [Docker subscription overview](../subscription-billing/_index.md).
 
 ## 2021-05-05
 
@@ -184,7 +223,7 @@ You can now specify any email address to receive billing-related emails for your
 
 To change the email address receiving billing-related emails, log into Docker Hub and navigate to the **Billing** tab of your organization. Select **Payment Methods** > **Billing Information**. Enter the new email address that you'd like to use in the **Email** field. Click **Update** for the changes to take effect.
 
-For details on how to update your billing information, see [Update billing information](../billing/_index.md).
+For details on how to update your billing information, see [Update billing information](../subscription-billing/_index.md).
 
 ## 2021-03-22
 
@@ -200,7 +239,7 @@ Docker introduces the Advanced Image Management dashboard that enables you to vi
 
 Docker introduces Audit logs, a new feature that allows team owners to view a list of activities that occur at organization and repository levels. This feature begins tracking the activities from the release date, that is, **from 25 January 2021**.
 
-For more information about this feature and for instructions on how to use it, see [Activity logs](../admin/activity-logs.md).
+For more information about this feature and for instructions on how to use it, see [Activity logs](../accounts/organization/activity-logs.md).
 
 ## 2020-11-10
 
@@ -218,7 +257,7 @@ Docker introduces Hub Vulnerability Scanning which enables you to automatically 
 
 ### New features
 
-- Docker has announced a new, per-seat pricing model to accelerate developer workflows for cloud-native development. The previous private repository/concurrent autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories. For more information, see [Docker subscription](../subscription/_index.md).
+- Docker has announced a new, per-seat pricing model to accelerate developer workflows for cloud-native development. The previous private repository/concurrent autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories. For more information, see [Docker subscription](../subscription-billing/_index.md).
 
 - Docker has enabled download rate limits for downloads and pull requests on Docker Hub. This caps the number of objects that users can download within a specified timeframe. For more information, see [Usage and limits](/manuals/docker-hub/usage/_index.md).
 
@@ -279,7 +318,7 @@ Docker introduces Hub Vulnerability Scanning which enables you to automatically 
 
 ### New features
 
-- You can now [create personal access tokens](/security/access-tokens/) in Docker Hub and use them to authenticate from the Docker CLI. Find them in your account settings, under the new **[Security](https://hub.docker.com/settings/security)** section.
+- You can now [create personal access tokens](/security/access-tokens/personal-access-tokens/) in Docker Hub and use them to authenticate from the Docker CLI. Find them in your account settings, under the new **[Security](https://hub.docker.com/settings/security)** section.
 
 ### Known Issues
 
@@ -289,7 +328,7 @@ Docker introduces Hub Vulnerability Scanning which enables you to automatically 
 
 ### Enhancements
 
-- The [billing page](../subscription/change.md) for personal accounts has been updated. You can access the page at its new URL: [https://hub.docker.com/billing/plan](https://hub.docker.com/billing/plan).
+- The [billing page](../subscription-billing/plans/docker.md) for personal accounts has been updated. You can access the page at its new URL: [https://hub.docker.com/billing/plan](https://hub.docker.com/billing/plan).
 
 ### Known Issues
 

@@ -7,7 +7,6 @@ keywords: authentication, registry.json, configure, enforce sign-in, docker desk
 tags: [admin]
 aliases:
  - /security/for-admins/configure-sign-in/
- - /docker-hub/configure-sign-in/
  - /security/for-admins/enforce-sign-in/
 weight: 30
 ---
@@ -56,8 +55,7 @@ On the next Docker Desktop restart:
 
 ## Enforcing sign-in versus enforcing single sign-on (SSO)
 
-Enforcing Docker Desktop sign-in and [enforcing SSO](/manuals/enterprise/security/single-sign-on/connect.md#optional-enforce-sso) are different features that serve different purposes:
-
+Enforcing Docker Desktop sign-in and [enforcing SSO](/manuals/security/authentication/single-sign-on/connect.md#enforce-sso) are different features that serve different purposes:
 
 | Enforcement                       | Description                                                     | Benefits                                                                                                                                                                                                                                                   |
 |:----------------------------------|:----------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -69,4 +67,4 @@ Enforcing Docker Desktop sign-in and [enforcing SSO](/manuals/enterprise/securit
 ## Next steps
 
 - To set up sign-in enforcement, see [Configure sign-in enforcement](/manuals/enterprise/security/enforce-sign-in/methods.md).
-- To configure SSO enforcement, see [Enforce SSO](/manuals/enterprise/security/single-sign-on/connect.md).
+- To configure SSO enforcement, see [Enforce SSO](/manuals/security/authentication/single-sign-on/connect.md).

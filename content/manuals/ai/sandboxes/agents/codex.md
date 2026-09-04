@@ -7,8 +7,6 @@ description: |
 keywords: docker sandboxes, codex, openai, ai agent, sbx
 ---
 
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
-
 This guide covers authentication, configuration, and usage of Codex in a
 sandboxed environment.
 
@@ -31,30 +29,30 @@ $ sbx run codex
 
 ## Authentication
 
-Codex supports two authentication methods: an API key or OAuth.
+If you haven't stored an OpenAI credential, `sbx run codex` prompts you to
+authenticate on your host before launching the sandbox. The flow runs on the
+host, so credentials are never exposed inside the sandbox.
 
-**API key**: Store your OpenAI API key using
-[stored secrets](../security/credentials.md#stored-secrets):
+To set up authentication ahead of time, choose one of the following methods.
 
-```console
-$ sbx secret set -g openai
-```
-
-Alternatively, export the `OPENAI_API_KEY` environment variable in your shell
-before running the sandbox.
-
-**OAuth**: If you prefer not to use an API key, start the OAuth flow on your
-host with:
+**OAuth**: Start the OAuth flow on your host with:
 
 ```console
-$ sbx secret set -g openai --oauth
+$ sbx secret set openai --oauth
 ```
 
 This opens a browser window for authentication and stores the resulting tokens
 in your OS keychain. The OAuth flow runs on the host, not inside the sandbox,
 so browser-based authentication works without any extra setup.
 
-See [Credentials](../security/credentials.md) for more details.
+**API key**: Store your OpenAI API key using
+[stored secrets](../configuration/credentials.md#stored-secrets):
+
+```console
+$ sbx secret set openai
+```
+
+See [Credentials](../configuration/credentials.md) for more details.
 
 ## Configuration
 
@@ -64,18 +62,25 @@ available inside the sandbox. See
 [Why doesn't the sandbox use my user-level agent configuration?](../faq.md#why-doesnt-the-sandbox-use-my-user-level-agent-configuration)
 for workarounds.
 
-The sandbox runs Codex without approval prompts by default. Pass additional
-Codex CLI options after `--`:
+### Default startup command
+
+Without extra args, the sandbox runs:
+
+```text
+codex --dangerously-bypass-approvals-and-sandbox
+```
+
+Arguments after `--` are added after the default flags when the first one is
+itself a flag (begins with `-`). A bare word — such as a prompt — replaces the
+defaults instead, so lead with the flag to keep bypass mode:
 
 ```console
-$ sbx run codex --name <sandbox-name> -- <codex-options>
+$ sbx run codex -- --dangerously-bypass-approvals-and-sandbox "fix the build"
 ```
 
 ## Base image
 
 Template: `docker/sandbox-templates:codex`
-
-Preconfigured to run without approval prompts.
 
 See [Customize](../customize/) to pre-install tools or customize this
 environment.

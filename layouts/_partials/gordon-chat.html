@@ -334,14 +334,14 @@
     x-transition:leave="transition ease-in duration-200"
     x-transition:leave-start="translate-x-0"
     x-transition:leave-end="translate-x-full"
-    class="fixed top-0 right-0 z-50 flex h-screen w-full flex-col overflow-hidden rounded-none bg-white shadow-2xl transition-all duration-200 md:w-[min(80ch,90vw)] dark:bg-gray-950"
+    class="fixed top-0 right-0 z-50 flex h-screen w-full flex-col overflow-hidden overscroll-contain rounded-none bg-white shadow-2xl transition-all duration-200 md:w-[min(80ch,90vw)] dark:bg-gray-950"
   >
     <!-- Header -->
     <div
       class="z-10 flex items-center justify-between bg-blue-500 px-6 py-3 shadow-lg/30 dark:shadow-lg/60"
     >
       <div class="flex items-center gap-3">
-        {{ partial "utils/svg.html" "images/gordon-logo.svg" }}
+        {{ partialCached "icon" "images/gordon-logo.svg" "images/gordon-logo.svg" }}
       </div>
       <div class="flex items-center gap-2">
         <div data-tooltip-wrapper class="relative">
@@ -352,7 +352,7 @@
             :disabled="messages.length === 0"
           >
             <span class="icon-svg">
-              {{ partialCached "icon" "replay" "replay" }}
+              {{ partialCached "icon" "arrow-path" "arrow-path" }}
             </span>
           </button>
           <div
@@ -376,7 +376,7 @@
           aria-label="Close chat"
         >
           <span class="icon-svg">
-            {{ partialCached "icon" "close" "close" }}
+            {{ partialCached "icon" "x-mark" "x-mark" }}
           </span>
         </button>
       </div>
@@ -385,21 +385,20 @@
     <!-- Messages container -->
     <div
       x-ref="messagesContainer"
-      class="flex-1 space-y-4 p-6"
+      class="flex min-h-0 flex-1 flex-col space-y-4 overflow-y-auto overscroll-contain p-6"
       style="scrollbar-width: none; &::-webkit-scrollbar: { display: none; }"
-      :class="{ 'overflow-y-auto': messages.length > 0 }"
     >
       <!-- Welcome message when empty -->
       <template x-if="messages.length === 0">
         <div
-          class="flex h-full flex-col items-center justify-start overflow-y-auto px-2 pt-4 pb-2 text-center"
+          class="my-auto flex flex-col items-center gap-2 px-2 pt-4 pb-2 text-center"
         >
-          <div class="mx-auto mb-2 w-4/5 max-w-xs" aria-hidden="true">
-            <div
-              class="motion-safe:animate-[robotFloat_5s_ease-in-out_infinite]"
-            >
-              {{ partial "utils/svg.html" "images/gordon-robot.svg" }}
-            </div>
+          <div
+            class="mx-auto mb-2"
+            style="width: clamp(80px, 35%, 160px)"
+            aria-hidden="true"
+          >
+            {{ partialCached "icon" "images/gordon-robot.svg" "images/gordon-robot.svg" }}
           </div>
           <div class="flex w-full flex-col items-center justify-start gap-3">
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
@@ -420,7 +419,7 @@
               (dict
               "title" "Get started with Docker"
               "question" "Help me get started with Docker. What should I do first?"
-              "icon" "icons/rocket.svg")
+              "icon" "rocket-launch")
               (dict
               "title" "Docker Hardened Images"
               "question" "How do Docker Hardened Images work?"
@@ -497,7 +496,7 @@
                       class="flex items-center gap-1.5 text-gray-600 dark:text-gray-400"
                     >
                       <span class="icon-svg icon-sm">
-                        {{ partialCached "icon" "icons/gordon.svg" "icons/gordon.svg" }}
+                        {{ partialCached "icon" "gordon" "gordon" }}
                       </span>
                       <span class="font-medium">Was this helpful?</span>
                     </div>
@@ -514,7 +513,7 @@
                         title="Helpful"
                       >
                         <span class="icon-svg icon-sm transition-transform">
-                          {{ partialCached "icon" "thumb_up" "thumb_up" }}
+                          {{ partialCached "icon" "hand-thumb-up" "hand-thumb-up" }}
                         </span>
                         <span class="hidden font-medium sm:inline"
                           >Helpful</span
@@ -531,7 +530,7 @@
                         title="Not quite"
                       >
                         <span class="icon-svg icon-sm transition-transform">
-                          {{ partialCached "icon" "thumb_down" "thumb_down" }}
+                          {{ partialCached "icon" "hand-thumb-down" "hand-thumb-down" }}
                         </span>
                         <span class="hidden font-medium sm:inline"
                           >Not quite</span
@@ -552,13 +551,13 @@
                         x-show="message.copied !== true"
                         class="icon-svg icon-sm"
                       >
-                        {{ partialCached "icon" "content_copy" "content_copy" }}
+                        {{ partialCached "icon" "document-duplicate" "document-duplicate" }}
                       </span>
                       <span
                         x-show="message.copied === true"
                         class="icon-svg icon-sm"
                       >
-                        {{ partialCached "icon" "check_circle" "check_circle" }}
+                        {{ partialCached "icon" "check-circle" "check-circle" }}
                       </span>
                       <span class="hidden font-medium sm:inline">Copy</span>
                     </button>
@@ -650,12 +649,12 @@
         >
           <template x-if="!isLoading">
             <span class="icon-svg">
-              {{ partialCached "icon" "send" "send" }}
+              {{ partialCached "icon" "paper-airplane" "paper-airplane" }}
             </span>
           </template>
           <template x-if="isLoading">
             <span class="icon-svg animate-spin">
-              {{ partialCached "icon" "progress_activity" "progress_activity" }}
+              {{ partialCached "icon" "arrow-path" "arrow-path" }}
             </span>
           </template>
         </button>
@@ -711,17 +710,6 @@
 
 <!-- Styles for Gordon chat -->
 <style>
-  /* Robot floating animation */
-  @keyframes robotFloat {
-    0%,
-    100% {
-      transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-      transform: translateY(-15px) rotate(1deg);
-    }
-  }
-
   /* Code block styles */
   #gordon-chat pre {
     background: #0d1117;

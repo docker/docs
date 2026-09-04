@@ -3,8 +3,9 @@ synopsis: Reset policies to defaults
 description: |-
     Remove all custom policies and restart the daemon to restore defaults.
 
-    This deletes the local policy store and stops the daemon. When the daemon
-    restarts (automatically on next command), the default policy is installed.
+    This deletes the local policy store and stops the daemon. The daemon restarts
+    automatically on the next command, then prompts you to initialize the global
+    network policy again.
 
     If sandboxes are currently running, they will be stopped when the daemon
     shuts down. You will be prompted for confirmation unless --force is used.
@@ -24,7 +25,7 @@ inherited_options:
       default_value: "false"
       usage: Enable debug logging
 example: |4-
-      # Reset policies (prompts if sandboxes are running)
+      # Reset policies — prompts if sandboxes are running
       sbx policy reset
 
       # Reset policies without confirmation

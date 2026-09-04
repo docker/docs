@@ -17,6 +17,9 @@ Note that some configuration options are only useful in edge cases.
 root = "/var/lib/buildkit"
 # insecure-entitlements allows insecure entitlements, disabled by default.
 insecure-entitlements = [ "network.host", "security.insecure", "device" ]
+# proxyNetwork enables proxy network enforcement for all builds, disabled by default.
+# It can also be enabled with buildkitd --proxy-network.
+proxyNetwork = true
 # provenanceEnvDir is the directory where extra config is loaded that is added
 # to the provenance of builds:
 # slsa v0.2: invocation.environment.*
@@ -61,7 +64,11 @@ provenanceEnvDir = "/etc/buildkit/provenance.d"
 [history]
   # maxAge is the maximum age of history entries to keep, in seconds.
   maxAge = 172800
-  # maxEntries is the maximum number of history entries to keep.
+  # maxEntries is the maximum number of history entries to keep. When the
+  # history section is omitted, the default is 50. If only maxAge is set,
+  # all entries older than maxAge are removed.
+  # Setting this value to 0 prevents recording new build history, including
+  # active-build events. Existing records remain available until normal GC.
   maxEntries = 50
 
 [worker.oci]
@@ -212,6 +219,9 @@ provenanceEnvDir = "/etc/buildkit/provenance.d"
 [system]
   # how often buildkit scans for changes in the supported emulated platforms
   platformsCacheMaxAge = "1h"
+  # maxRegistryConcurrency sets the maximum number of concurrent connections
+  # per registry. If unset, the default concurrency limit is used.
+  maxRegistryConcurrency = 4
 
 
 # optional signed cache configuration for GitHub Actions backend

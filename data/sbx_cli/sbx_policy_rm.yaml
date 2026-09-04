@@ -1,6 +1,6 @@
 name: sbx policy rm
-synopsis: Remove a policy
-description: Remove a previously added allow or deny policy.
+synopsis: Remove a policy rule
+description: Remove a previously added allow or deny rule.
 usage: sbx policy rm COMMAND
 options:
     - name: help
@@ -14,4 +14,4 @@ inherited_options:
       usage: Enable debug logging
 see_also:
     - sbx policy - Manage sandbox policies
-    - sbx policy rm network - Remove a network policy
+    - sbx policy rm network - Remove a network rule

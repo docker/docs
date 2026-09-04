@@ -7,12 +7,12 @@ attestations can provide valuable information from the build process,
 including, but not limited to: [SBOMs](https://en.wikipedia.org/wiki/Software_supply_chain),
 [SLSA Provenance](https://slsa.dev/provenance), build logs, etc.
 
-This document describes the current custom format used to store attestations,
-which is designed to be compatible with current registry implementations today.
-In the future, we may support exporting attestations in additional formats.
+This document describes the formats used to store attestations. BuildKit stores
+attestations as OCI artifacts when OCI media types are enabled. Set the image
+exporter option `oci-artifact=false` to use the legacy attestation image
+manifest format.
 
-Attestations are stored as manifest objects in the image index, similar in
-style to OCI artifacts.
+Attestations are stored as manifest objects in the image index.
 
 ## Properties
 
@@ -21,12 +21,18 @@ style to OCI artifacts.
 Attestation manifests are attached to the root image index object, under a
 separate [OCI image manifest](https://github.com/opencontainers/image-spec/blob/main/manifest.md).
 Each attestation manifest can contain multiple [attestation blobs](#attestation-blob),
-with all the of the attestations in a manifest applying to a single platform
+with all of the attestations in a manifest applying to a single platform
 manifest. All properties of standard OCI and Docker manifests continue to
 apply.
 
-The image `config` descriptor will point to a valid [image config](https://github.com/opencontainers/image-spec/blob/main/config.md),
-however, it will not contain attestation-specific details, and should be
+When OCI artifact storage is enabled, the manifest `artifactType` is set to
+`application/vnd.docker.attestation.manifest.v1+json`, the `subject` descriptor
+points to the target image manifest, and the `config` descriptor uses the OCI
+empty JSON descriptor.
+
+When `oci-artifact=false` is set, the image `config` descriptor will point to a
+valid [image config](https://github.com/opencontainers/image-spec/blob/main/config.md).
+The image config will not contain attestation-specific details, and should be
 ignored as it is only included for compatibility purposes.
 
 Each image layer in `layers` will contain a descriptor for a single
@@ -62,7 +68,7 @@ The contents of each layer will be a blob dependent on its `mediaType`.
 
   ```json
   {
-    "_type": "https://in-toto.io/Statement/v0.1",
+    "_type": "https://in-toto.io/Statement/v1",
     "subject": [
       {
         "name": "<NAME>",
@@ -78,6 +84,10 @@ The contents of each layer will be a blob dependent on its `mediaType`.
   The subject of the attestation should be set to be the same digest as the
   target manifest described in the [Attestation Manifest Descriptor](#attestation-manifest-descriptor),
   or some object within.
+
+BuildKit limits each attestation file read from a build result to 80 MiB
+before wrapping it as an in-toto statement. This protects exporters from
+unbounded reads of frontend-provided attestation files.
 
 ### Attestation Manifest Descriptor
 
@@ -160,10 +170,12 @@ This attestation manifest contains one attestation that is an in-toto attestatio
 {
   "mediaType": "application/vnd.oci.image.manifest.v1+json",
   "schemaVersion": 2,
+  "artifactType": "application/vnd.docker.attestation.manifest.v1+json",
   "config": {
-    "mediaType": "application/vnd.oci.image.config.v1+json",
-    "digest": "sha256:a781560066f20ec9c28f2115a95a886e5e71c7c7aa9d8fd680678498b82f3ea3",
-    "size": 123
+    "mediaType": "application/vnd.oci.empty.v1+json",
+    "digest": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "size": 2,
+    "data": "e30="
   },
   "layers": [
     {
@@ -174,22 +186,11 @@ This attestation manifest contains one attestation that is an in-toto attestatio
         "in-toto.io/predicate-type": "https://spdx.dev/Document"
       }
     }
-  ]
-}
-```
-
-#### Image config (`sha256:a781560066f20ec9c28f2115a95a886e5e71c7c7aa9d8fd680678498b82f3ea3`):
-
-```json
-{
-  "architecture": "unknown",
-  "os": "unknown",
-  "config": {},
-  "rootfs": {
-    "type": "layers",
-    "diff_ids": [
-      "sha256:133ae3f9bcc385295b66c2d83b28c25a9f294ce20954d5cf922dda860429734a"
-    ]
+  ],
+  "subject": {
+    "mediaType": "application/vnd.oci.image.manifest.v1+json",
+    "digest": "sha256:23678f31b3b3586c4fb318aecfe64a96a1f0916ba8faf9b2be2abee63fa9e827",
+    "size": 1234
   }
 }
 ```
@@ -200,7 +201,7 @@ Attestation body containing the SBOM data listing the packages used during the b
 
 ```json
 {
-  "_type": "https://in-toto.io/Statement/v0.1",
+  "_type": "https://in-toto.io/Statement/v1",
   "predicateType": "https://spdx.dev/Document",
   "subject": [
     {

@@ -18,9 +18,12 @@ docs_notes=$(mktemp   -t new)
 github_notes=$(mktemp -t old)
 
 # Get the release notes from the docs.
-grep -A 10000 "## ${version}" "content/manuals/engine/release-notes/${major_version}.md" | \
-    grep -m 2 -A 0 -B 10000 '^## ' | \
-    sed '$d' | \
+awk -v heading="## ${version}" '
+    $0 == heading { found = 1; print; next }
+    found && /^## / { exit }
+    found { print }
+    END { if (!found) exit 1 }
+' "content/manuals/engine/release-notes/${major_version}.md" | \
     sed '/{{< release-date /{N;d;}' \
     > "$docs_notes" || { echo "Release notes for ${version} not found" && exit 1; }
 

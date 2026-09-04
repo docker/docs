@@ -1,11 +1,15 @@
 name: sbx logout
-synopsis: Sign out of Docker
+synopsis: Stop all running sandboxes and sign out of Docker
 usage: sbx logout [flags]
 options:
     - name: help
       shorthand: h
       default_value: "false"
       usage: help for logout
+    - name: "yes"
+      shorthand: "y"
+      default_value: "false"
+      usage: Skip confirmation prompt
 inherited_options:
     - name: debug
       shorthand: D

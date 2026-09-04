@@ -8,25 +8,10 @@ linkTitle: Sign in
 weight: 40
 aliases:
 - /desktop/linux/
-- /desktop/linux/index/
 - /desktop/mac/
-- /desktop/mac/index/
 - /desktop/windows/
-- /desktop/windows/index/
 - /docker-for-mac/
-- /docker-for-mac/index/
-- /docker-for-mac/osx/
-- /docker-for-mac/started/
 - /docker-for-windows/
-- /docker-for-windows/index/
-- /docker-for-windows/started/
-- /mac/
-- /mackit/
-- /mackit/getting-started/
-- /win/
-- /windows/
-- /winkit/
-- /winkit/getting-started/
 - /desktop/get-started/
 ---
 
@@ -53,7 +38,7 @@ In large enterprises where admin access is restricted, administrators can [enfor
 ## Signing in with Docker Desktop for Linux
 
 Docker Desktop for Linux relies on [`pass`](https://www.passwordstore.org/) to store credentials in GPG-encrypted files.
-Before signing in to Docker Desktop with your [Docker ID](/accounts/create-account/), you must initialize `pass`.
+Before signing in to Docker Desktop with your [Docker ID](/accounts/individual/create-account/), you must initialize `pass`.
 Docker Desktop displays a warning if `pass` is not configured.
 
 1. Generate a GPG key. You can initialize pass by using a gpg key. To generate a gpg key, run:

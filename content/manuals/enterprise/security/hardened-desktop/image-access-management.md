@@ -4,8 +4,6 @@ description: Control which Docker Hub images developers can access with Image Ac
 keywords: image access management, docker official images, verified publisher, supply chain security, docker business, allow list, image restrictions, pull restrictions
 tags: [admin]
 aliases:
- - /docker-hub/image-access-management/
- - /desktop/hardened-desktop/image-access-management/
  - /admin/organization/image-access/
  - /security/for-admins/image-access-management/
  - /security/for-admins/hardened-desktop/image-access-management/
@@ -47,7 +45,7 @@ Use the repository allowlist when you need to:
 Before configuring Image Access Management, you must:
 
 - [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md). Image Access Management only takes effect when users are signed in to Docker Desktop with organization credentials.
-- Use [personal access tokens (PATs)](/manuals/security/access-tokens.md) for authentication (Organization access tokens aren't supported)
+- Use [personal access tokens (PATs)](/manuals/security/access-tokens/personal-access-tokens.md) for authentication (Organization access tokens aren't supported)
 - Have a Docker Business subscription
 
 ## Configure image access
@@ -59,7 +57,7 @@ Before configuring Image Access Management, you must:
 To configure Image Access Management:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your organization from the top-left account drop-down.
-1. Select **Admin Console**, then **Image access**.
+1. Select **Docker Desktop**, then **Image Access**.
 1. Use the **toggle** to enable image access.
 1. Select which image types to allow:
     - **Organization images**: Images from your organization (always allowed by default). These can be public or private images created by members within your organization.

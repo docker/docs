@@ -1,155 +1,43 @@
 ---
 title: Get started with Docker Sandboxes
 linkTitle: Get started
-weight: 10
-description: Install the sbx CLI, configure credentials, and work through your first sandbox session.
-keywords: sandbox, sbx, get started, install, credentials, branch mode, network policy
+weight: 20
+description: Configure agent credentials and work through your first Docker Sandboxes session.
+keywords: sandbox, sbx, get started, credentials, clone mode, network policy
 ---
-
-{{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
 Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
 sandbox gets its own Docker daemon, filesystem, and network — the agent can
 build containers, install packages, and modify files without touching your host
 system.
 
-This page walks through a typical first session: installing the CLI,
-authenticating your agent, running a sandbox, working with branches, and
-cleaning up.
+This page walks through your first session: run an agent in a sandbox, see how
+the sandbox isolates it, control what it can reach on the network, and clean
+up.
 
 ## Prerequisites
 
-{{< tabs group="os" >}}
-{{< tab name="macOS" >}}
-
-- macOS Sonoma (version 14) or later
-- Apple silicon
-
-{{< /tab >}}
-{{< tab name="Windows" >}}
-
-- 64-bit Intel or AMD (x86_64)
-- Windows 11
-- Windows Hypervisor Platform enabled. Open an elevated PowerShell prompt (Run
-  as Administrator) and run:
-  ```powershell
-  Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -All
-  ```
-
-{{< /tab >}}
-{{< tab name="Linux (Ubuntu)" >}}
-
-- Ubuntu 24.04 or later
-- 64-bit Intel or AMD (x86_64)
-- KVM hardware virtualization supported and enabled by the CPU. If you're
-  running inside a VM, nested virtualization must be turned on. Verify that KVM
-  is available:
-  ```console
-  $ lsmod | grep kvm
-  ```
-  A working setup shows `kvm_intel` or `kvm_amd` in the output. If the output
-  is empty, run `kvm-ok` for diagnostics. If KVM is unavailable, `sbx` will
-  not start.
-- Your user in the `kvm` group:
-  ```console
-  $ sudo usermod -aG kvm $USER
-  ```
-  Log out and back in (or run `newgrp kvm`) for the group change to take effect.
-
-{{< /tab >}}
-{{< /tabs >}}
-
-An API key or authentication method for the agent you want to use. Most agents
-require an API key for their model provider (Anthropic, OpenAI, Google, and
-others). See the [agent pages](agents/) for provider-specific instructions.
-
-Docker Desktop is not required to use `sbx`.
-
-## Install and sign in
-
-{{< tabs group="os" >}}
-{{< tab name="macOS" >}}
-
-```console
-$ brew install docker/tap/sbx
-$ sbx login
-```
-
-{{< /tab >}}
-{{< tab name="Windows" >}}
-
-```powershell
-> winget install -h Docker.sbx
-> sbx login
-```
-
-{{< /tab >}}
-{{< tab name="Linux (Ubuntu)" >}}
-
-```console
-$ curl -fsSL https://get.docker.com | sudo REPO_ONLY=1 sh
-$ sudo apt-get install docker-sbx
-$ sbx login
-```
-
-The first command adds Docker's `apt` repository to your system.
-
-{{< /tab >}}
-{{< /tabs >}}
-
-If you need to install `sbx` manually, download a binary directly from the
-[sbx-releases](https://github.com/docker/sbx-releases/releases) repository.
-
-`sbx login` opens a browser for Docker OAuth. On first login (and after `sbx
-policy reset`), the CLI prompts you to choose a default network policy for your
-sandboxes:
-
-```plaintext
-Choose a default network policy:
-
-     1. Open         — All network traffic allowed, no restrictions.
-     2. Balanced     — Default deny, with common dev sites allowed.
-     3. Locked Down  — All network traffic blocked unless you allow it.
-
-Use ↑/↓ to navigate, Enter to select, or press 1–3.
-```
-
-**Balanced** is a good starting point — it permits traffic to common
-development services while blocking everything else. You can adjust individual
-rules later. See [Policies](security/policy.md) for a full description of each
-option.
-
-> [!NOTE]
-> See the [FAQ](faq.md) for details on why sign-in is required and what
-> happens with your data.
+- [Install the `sbx` CLI](install.md) and sign in to Docker
+- Configure an authentication method for the agent you want to use. Most agents
+  require an API key for their model provider. See the [agent pages](agents/)
+  for provider-specific instructions.
 
 ## Authenticate your agent
 
-Agents need credentials for their model provider. How you provide them depends
-on the agent.
-
 For Claude Code with a Claude subscription (Max, Team, or Enterprise), no
 upfront setup is needed — use the `/login` command inside the sandbox to sign
-in with OAuth. The session token stays on your host and is injected by a
-proxy, not stored inside the sandbox.
+in with OAuth. The session token stays on your host and is never stored inside
+the sandbox.
 
-For agents that use API keys (or if you prefer API key authentication for
-Claude Code), store the key before starting a sandbox:
-
-```console
-$ sbx secret set -g anthropic
-```
-
-This prompts for the secret value and stores it in your OS keychain. A proxy on
-your host injects the key into outbound API requests so it's never exposed
-inside the sandbox. See [Credentials](security/credentials.md) for details on
-scoping, supported services, and alternative methods.
+If you prefer to authenticate with an API key, see
+[Credentials](configuration/credentials.md) for how to store one with
+`sbx secret set`.
 
 To give the agent access to GitHub for creating pull requests or interacting
 with repositories:
 
 ```console
-$ sbx secret set -g github -t "$(gh auth token)"
+$ sbx secret set github --command 'gh auth token'
 ```
 
 ## Run your first sandbox
@@ -159,8 +47,30 @@ Pick a project directory and launch an agent with
 
 ```console
 $ cd ~/my-project
-$ sbx run claude
+$ sbx run --name my-sandbox claude
 ```
+
+The first time you run a sandbox, the CLI prompts you to choose a default
+network preset:
+
+```plaintext
+Initialize the global network policy for your sandboxes:
+
+  Applies to all sandboxes, current and future — change it later with
+  "sbx policy allow/deny/rm". Kits, including built-in agent kits, may
+  also add per-sandbox rules.
+
+     1. Open         — All network traffic allowed, no restrictions.
+  ❯  2. Balanced     — Default deny, with common dev sites allowed.
+     3. Locked Down  — All network traffic blocked unless you allow it.
+
+  Use ↑/↓ or 1–3 to navigate, Enter to confirm, Esc to cancel.
+```
+
+**Balanced** is a good starting point — it permits traffic to common
+development services while blocking everything else. You can adjust individual
+rules later. See [Local policy](governance/access-controls/local.md) for a full
+description of each option.
 
 Replace `claude` with the agent you want to use — see [Agents](agents/) for the
 full list.
@@ -168,58 +78,48 @@ full list.
 The first run takes a little longer while the agent image is pulled. Subsequent
 runs reuse the cached image and start in seconds.
 
-You can check what's running at any time:
+This attaches you to the agent running inside the sandbox. Give it a real
+task — ask it to add a feature, install a dependency, or build and run your
+project. The agent has a full Linux environment with its own Docker daemon, so
+it can install packages, build images, and start containers on its own while it
+works.
+
+## See what the agent can touch
+
+From another terminal, list your sandboxes:
 
 ```console
 $ sbx ls
-SANDBOX              AGENT    STATUS    PORTS   WORKSPACE
-claude-my-project    claude   running           ~/my-project
+SANDBOX       AGENT    STATUS    PORTS   WORKSPACE
+my-sandbox    claude   running           ~/my-project
 ```
 
-You can also run `sbx` with no arguments to open an interactive dashboard.
-The dashboard shows your sandboxes with live status, lets you attach to
-agents, open shells, and manage network rules from one place. See
-[Interactive mode](usage.md#interactive-mode) for details.
+Each row shows a sandbox's name, the agent running in it, its status, any
+[published ports](usage.md#publish-ports), and its
+workspace — the host directory shared into the sandbox. That workspace is the
+one part of your machine the agent can see.
 
-![The interactive dashboard showing sandbox status, resource usage, and network governance controls.](images/sbx-dashboard.png)
+By default, the workspace is shared read-write, so the agent and your host see
+the same files. Edits the agent makes to your project appear in your working
+tree as it writes them, and you review them as an ordinary Git diff before
+committing.
 
-## Use branch mode
+Everything else runs inside the microVM, isolated from your host:
 
-By default, the agent edits your working tree directly. To give it its own
-Git branch, use `--branch`:
+- The agent has its own filesystem, Docker daemon, and network.
+- Packages it installs, images it pulls, and containers it starts stay inside
+  the sandbox. Your host system is untouched, and removing the sandbox discards
+  them.
 
-```console
-$ sbx run claude --branch my-feature
-```
+If you'd rather the agent not touch your working tree at all — for example,
+when running several agents on one repository — use
+[clone mode](usage.md#clone-mode), which gives it a private clone instead.
 
-This creates a [Git worktree](https://git-scm.com/docs/git-worktree) under
-`.sbx/` in your repository root. The agent works on its own branch and
-directory without touching your main working tree.
+## Control what the agent can reach
 
-When the session ends, review what the agent did from the worktree:
-
-```console
-$ cd .sbx/<sandbox-name>-worktrees/my-feature
-$ git log
-$ git diff main
-```
-
-If you're satisfied, push the branch and open a pull request:
-
-```console
-$ git push -u origin my-feature
-$ gh pr create
-```
-
-Branch mode is especially useful when running multiple agents on the same
-repository — each gets its own branch and can't overwrite the other's changes.
-See [Branch mode](usage.md#branch-mode) for more options, including
-`--branch auto` and multiple branches per sandbox.
-
-## Manage network access
-
-Your network policy controls what the sandbox can reach. If the agent fails to
-connect to an API or service, it's likely blocked by the policy.
+Isolation isn't only about the filesystem. You also control what the sandbox
+can reach on the network. You chose a default policy before the sandbox
+started, and you can inspect or adjust it at any time.
 
 Check which rules are in effect:
 
@@ -230,17 +130,19 @@ $ sbx policy ls
 To allow a specific host:
 
 ```console
-$ sbx policy allow network -g registry.npmjs.org
+$ sbx policy allow network registry.npmjs.org
 ```
 
 With **Locked Down**, even your model provider API is blocked unless you
 explicitly allow it. With **Balanced**, common development services are
-permitted by default. See [Policies](security/policy.md) for the full rule
-set and how to customize it.
+permitted by default. See
+[local policy](governance/access-controls/local.md) for the full rule set
+and how to customize it.
 
 ## Clean up
 
-Sandboxes persist after the agent exits. To stop a sandbox without deleting it:
+Sandboxes persist after the agent exits, so you can stop one and pick up where
+you left off later:
 
 ```console
 $ sbx stop my-sandbox
@@ -255,16 +157,32 @@ $ sbx rm my-sandbox
 ```
 
 Removing a sandbox deletes everything inside it — installed packages, Docker
-images, and any branch mode worktrees under `.sbx/`. Files in your main
-working tree are unaffected.
+images, and the in-sandbox Git clone if you used clone mode. Files in your
+host working tree are unaffected.
 
-## Next steps
+## What's next
 
-- [Usage guide](usage.md) — sandbox management, reconnecting, multiple
-  workspaces, port forwarding, and more
-- [Agents](agents/) — supported agents and configuration
-- [Customize](customize/) — build reusable templates or declare capabilities
-  with kits
-- [Credentials](security/credentials.md) — credential storage and management
-- [Workspace trust](security/workspace.md) — review agent changes safely
-- [Policies](security/policy.md) — control outbound access
+You've run an agent, seen how the sandbox isolates it, and controlled its
+network access. A few directions from here.
+
+Run `sbx` with no arguments to open the interactive dashboard: a live view of
+every sandbox where you can attach to agents, open shells, and manage network
+rules from one place.
+
+![The interactive dashboard showing sandbox status, resource usage, and network governance controls.](images/sbx-dashboard.png)
+
+Then explore:
+
+- [Usage guide](usage.md) — basic commands, reconnecting, workspaces, and port
+  publishing.
+- [Workflow patterns](workflows/) — Git strategies, local services, CI, and
+  authenticated tools.
+- [Sandbox environment files](configuration/environment-files.md) — declare and share
+  repeatable local sandbox configurations with `.sbxenv.yaml`. Requires `sbx`
+  0.39.0 or later.
+- [Customize with kits](customize/) — package an agent, its tools, and its
+  network rules into a reusable definition you launch with a single flag.
+- [Agents](agents/) — the full list of supported agents and how to configure
+  each one.
+- [Governance](governance/) — centrally manage network, filesystem, and MCP
+  policies across a team.

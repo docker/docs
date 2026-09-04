@@ -11,16 +11,19 @@ Aleksandrov
 Awaitility
 Amazon
 Anchore
+Ansible
 Apple
 Artifactory
 armhf
 [Aa]uditability
 auditable
+[Aa]utoconfiguration
 autolock
 [Aa]llowlist(ing)?
 Azure
 Azure AD
 [Bb]ackport
+[Bb]enchmarked
 bootup
 Bitnami
 Btrfs
@@ -42,17 +45,19 @@ classpath
 cli
 CLI
 CloudFront
+composable
 Codefresh
 Codespaces
 config
 containerd
 Couchbase
 CouchDB
-Crowdstrike
+CrowdStrike
 [Cc]ybersecurity
 datacenter
 datasource
 Datadog
+DBeaver
 Ddosify
 Debootstrap
 denylist
@@ -81,7 +86,9 @@ dockerignore
 Dockerize
 Dockerized
 Dockerizing
+Dependabot
 DuckDuckGo
+Dynatrace
 Entra
 EPERM
 ESXi
@@ -90,6 +97,7 @@ Ethernet
 [Ff]ailover
 Fargate
 Fedora
+Filebeat
 firewalld
 Flink
 Fluentd
@@ -169,6 +177,7 @@ Netplan
 NFSv\d
 Nginx
 npm
+nvm
 Nutanix
 Nuxeo
 NVIDIA
@@ -197,6 +206,7 @@ Quickview
 rebalance
 reimplement
 reloader
+repinning
 Rego
 Rekor
 ROCm
@@ -215,6 +225,7 @@ Sigstore
 Snyk
 Solr
 SonarQube
+Sonatype
 Sonoma
 Splunk
 SQLite
@@ -295,6 +306,7 @@ Zsh
 [Ff]iletypes?
 [GgCc]oroutine
 [Hh]ealthcheck
+[Hh]eredoc
 [Hh]ostname
 [Ii]nfosec
 [Ii]nline
@@ -314,6 +326,7 @@ Zsh
 README
 [Rr]eal-time
 [Rr]egex(es)?
+[Rr]uleset(s)?
 [Rr]untimes?
 [Ss]andbox(ed)?
 [Ss]eccomp
@@ -415,12 +428,14 @@ bootloader
 Buildkite
 crypto
 Graylog
+Heartbleed
 Kubuntu
 Libnetwork
 lockfile
 Lubuntu
 multimodal
 multithreading
+Log4Shell
 NLP
 Nodemon
 oldoldstable
@@ -428,6 +443,8 @@ parallelizable
 PHPUnit
 pnpm
 PyTorch
+Shellshock
+Spring4Shell
 superset
 tokenization
 WebGL

@@ -9,7 +9,6 @@ title: Docker Compose Quickstart
 linkTitle: Quickstart
 weight: 30
 aliases:
-- /compose/samples-for-compose/
 - /compose/support-and-feedback/samples-for-compose/
 ---
 
@@ -65,16 +64,33 @@ Make sure you have:
 
    ```dockerfile
    # syntax=docker/dockerfile:1
-   FROM python:3.12-alpine  # Builds an image with the Python 3.12 image
-   WORKDIR /code  # Sets the working directory to `/code`
-   ENV FLASK_APP=app.py  # Sets environment variables used by the `flask` command
+   
+   # Build an image with the Python 3.12 image
+   FROM python:3.12-alpine
+   
+   # Set the working directory to `/code`
+   WORKDIR /code
+   
+   # Set environment variables used by the `flask` command
+   ENV FLASK_APP=app.py
    ENV FLASK_RUN_HOST=0.0.0.0
-   RUN apk add --no-cache gcc musl-dev linux-headers  # Installs `gcc` and other dependencies
-   COPY requirements.txt .  # Copies `requirements.txt`
-   RUN pip install -r requirements.txt  # Installs the Python dependencies
-   COPY . .  # Copies the current directory `.` in the project to the workdir `.` in the image
+   
+   # Install `gcc` and other dependencies
+   RUN apk add --no-cache gcc musl-dev linux-headers
+   
+   # Copy `requirements.txt`
+   COPY requirements.txt .
+   
+   # Install the Python dependencies
+   RUN pip install -r requirements.txt
+   
+   # Copy the current directory `.` in the project to the workdir `.` in the image
+   COPY . .
+   
    EXPOSE 5000
-   CMD ["flask", "run", "--debug"]  # Sets the default command for the container to `flask run --debug`
+   
+   # Set the default command for the container to `flask run --debug`
+   CMD ["flask", "run", "--debug"]
    ```
 
    > [!IMPORTANT]
@@ -373,7 +389,7 @@ you want to reuse infrastructure definitions across projects.
 1. Create a new file in your project directory called `infra.yaml` and move the Redis service and volume into it:
 
    ```yaml
-    services:
+   services:
      redis:
        image: redis:alpine
        volumes:
