@@ -33,8 +33,8 @@ The following table describes the available parameters:
 | Parameter           | Type                                   | Default | Description                                                                                                                           |
 | ------------------- | -------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | `name`              | String                                 |         | Specify image name(s)                                                                                                                 |
-| `dest`              | String                                 |         | Path                                                                                                                                  |
-| `tar`               | `true`,`false`                         | `true`  | Bundle the output into a tarball layout                                                                                               |
+| `dest`              | String                                 |         | Path for the output. With default `tar=true`, this is the tarball file path. With `tar=false`, this is a directory. If omitted, Buildx does not write a layout file; for `type=docker` the result is often loaded into the local image store instead. |
+| `tar`               | `true`,`false`                         | `true`  | When `true`, write a single tarball at `dest`. When `false`, write an unpacked image layout directory at `dest` (required when you want a directory layout). |
 | `compression`       | `uncompressed`,`gzip`,`estargz`,`zstd` | `gzip`  | Compression type, see [compression][1]                                                                                                |
 | `compression-level` | `0..22`                                |         | Compression level, see [compression][1]                                                                                               |
 | `force-compression` | `true`,`false`                         | `false` | Forcefully apply compression, see [compression][1]                                                                                    |
@@ -46,6 +46,23 @@ The following table describes the available parameters:
 [2]: _index.md#oci-media-types
 [3]: #annotations
 [4]: https://github.com/moby/buildkit/blob/master/docs/build-repro.md
+
+### `dest` and `tar`
+
+These exporters either produce a layout tarball or an unpacked layout directory:
+
+```console
+# Write an OCI layout tarball (default tar=true)
+$ docker buildx build --output type=oci,dest=./image.tar .
+
+# Write an unpacked Docker layout directory
+$ docker buildx build --output type=docker,dest=./docker-layout,tar=false .
+```
+
+If you omit `dest` with `type=docker`, Buildx commonly loads the image into the
+local Docker image store rather than leaving a file on disk (see also
+[`--load`](/manuals/build/exporters/_index.md)). Set `dest` when you need a
+portable tarball or directory layout.
 
 ## Annotations
 
