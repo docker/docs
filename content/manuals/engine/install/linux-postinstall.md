@@ -22,12 +22,14 @@ The Docker daemon binds to a Unix socket, not a TCP port. By default it's the
 `root` user that owns the Unix socket, and other users can only access it using
 `sudo`. The Docker daemon always runs as the `root` user.
 
-If you don't want to preface the `docker` command with `sudo`, create a Unix
-group called `docker` and add users to it. When the Docker daemon starts, it
-creates a Unix socket accessible by members of the `docker` group. On some Linux
-distributions, the system automatically creates this group when installing
-Docker Engine using a package manager. In that case, there is no need for you to
-manually create the group.
+When the Docker daemon starts, it creates a Unix socket accessible by members of the `docker` group.
+On some Linux distributions, the system automatically creates this group when installing Docker Engine using a package manager.
+In that case, you don't need to create the group manually.
+
+There are two ways to run `docker` commands without `sudo` while the Docker daemon runs as `root`:
+
+- [Add your user to the `docker` group](#add-your-user-to-the-docker-group) for access throughout your login session.
+- [Access the `docker` group on demand](#access-the-docker-group-on-demand) by entering a password-protected, Docker-enabled shell.
 
 <!-- prettier-ignore -->
 > [!WARNING]
@@ -40,6 +42,8 @@ manually create the group.
 >
 > To run Docker without root privileges, see
 > [Run the Docker daemon as a non-root user (Rootless mode)](../security/rootless.md).
+
+### Add your user to the `docker` group
 
 To create the `docker` group and add your user:
 
@@ -94,6 +98,137 @@ To create the `docker` group and add your user:
    $ sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
    $ sudo chmod g+rwx "$HOME/.docker" -R
    ```
+
+### Access the `docker` group on demand
+
+Group passwords are a legacy Unix access-control mechanism, but they can be useful for gating Docker access on a single-user workstation.
+Like `sudo`, this method adds an explicit password step before privileged access.
+Unlike running `sudo docker`, `newgrp` keeps the Docker CLI running under your user ID and grants access through the shell's primary group, so the CLI doesn't access its configuration as `root`.
+
+Permanent membership in the `docker` group gives every process in your login session access to the Docker socket.
+The Docker-enabled shell and its descendants inherit access to the Docker socket.
+This reduces ambient access from applications running elsewhere in your login session.
+To configure this access, keep your user out of the group, set a group password, and use `newgrp` to start a Docker-enabled shell.
+
+> [!WARNING]
+>
+> A group password reduces ambient access to the Docker socket, but it doesn't reduce the root-level privileges granted after access is authorized.
+> Group passwords are also shared secrets and don't provide per-user accountability.
+> This method isn't a security boundary against malicious code running as your user.
+> Such code can modify user-writable shell configuration, commands, or scripts that you later use from the Docker-enabled shell and gain Docker access after you authenticate.
+> Don't rely on a group password to contain untrusted code or protect a compromised login session.
+> This configuration is most suitable for a single-user workstation.
+> For stronger isolation, use [Rootless mode](../security/rootless.md) or run Docker in a virtual machine.
+
+This procedure requires `gpasswd` and `newgrp`.
+The package names for these commands vary by Linux distribution.
+Verify that both commands are available:
+
+```console
+$ command -v gpasswd newgrp
+/usr/bin/gpasswd
+/usr/bin/newgrp
+```
+
+To require a password for Docker access:
+
+1. Create the `docker` group if it doesn't exist:
+
+   ```console
+   $ sudo groupadd --force docker
+   ```
+
+   The `--force` option makes the command succeed when the group already exists.
+
+2. If your user is a member of the `docker` group, remove the membership:
+
+   ```console
+   $ sudo gpasswd --delete "$USER" docker
+   ```
+
+   Sign out of the desktop or SSH session completely, then sign back in.
+   Group membership remains in the credentials of existing processes, so opening a new terminal isn't sufficient.
+
+   Verify that `docker` is absent from the group list before continuing:
+
+   ```console
+   $ id -nG
+   user wheel
+   ```
+
+   Your group list varies by system, but it must not include `docker`.
+
+3. Set a dedicated password for the `docker` group:
+
+   ```console
+   $ sudo gpasswd docker
+   Changing the password for group docker
+   New Password:
+   Re-enter new password:
+   ```
+
+   Don't add your user back to the group.
+   Users configured as group members can use `newgrp` without entering the group password.
+
+4. Start a child shell with `docker` as its primary group:
+
+   ```console
+   $ newgrp docker
+   Password:
+   ```
+
+   Verify that the shell still uses your user ID and has `docker` as its primary group, then test Docker access:
+
+   ```console
+   $ id -un
+   user
+   $ id -gn
+   docker
+   $ docker run --rm hello-world
+   ```
+
+   Commands and applications started from this shell inherit access to the Docker socket.
+   Applications that were already running outside the shell don't gain access.
+
+   > [!CAUTION]
+   >
+   > Files and directories created from this shell normally have `docker` as their group owner.
+   > Use this shell only for Docker-related commands, or verify the group ownership of files you create.
+
+5. Exit the Docker-enabled shell when you finish:
+
+   ```console
+   $ exit
+   ```
+
+   Verify that `docker` is no longer in the original shell's group list:
+
+   ```console
+   $ id -nG
+   user wheel
+   ```
+
+> [!CAUTION]
+>
+> Exiting the shell doesn't revoke access from background, detached, or daemonized processes started inside it.
+> Those processes retain the `docker` group until they exit.
+
+To change the group password, run `sudo gpasswd docker` again.
+
+#### Disable password-based entry
+
+To stop using the shared password and require configured group membership, run:
+
+```console
+$ sudo gpasswd --restrict docker
+```
+
+This reverses the password-gated setup.
+Afterward, only users configured as members of the `docker` group can enter it.
+The change affects new authorization attempts; it doesn't terminate existing Docker-enabled shells or their descendant processes.
+
+`gpasswd` manages local `/etc/group` and `/etc/gshadow` files.
+Systems using LDAP, NIS, or another identity service require that service's group-management mechanism.
 
 ## Configure Docker to start on boot with systemd
 
