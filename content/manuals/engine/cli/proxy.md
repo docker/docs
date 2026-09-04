@@ -139,6 +139,13 @@ settings for all daemons that the client connects to.
 To configure the proxies for individual daemons,
 use the address of the daemon instead of the `default` key.
 
+The map key must be exactly `default`, or the daemon endpoint string the CLI
+uses for that context (the **DOCKER ENDPOINT** column from `docker context ls`,
+for example `unix:///var/run/docker.sock`, `ssh://user@host`, or
+`tcp://host:2376`). A placeholder such as `http://docker.example.com` is not a
+magic value — if that string is not the active endpoint, the CLI ignores it and
+falls back to `default` only when the `default` entry exists.
+
 The following example configures both a default proxy config,
 and a no-proxy override for the Docker daemon on address
 `tcp://docker-daemon1.example.com`:
