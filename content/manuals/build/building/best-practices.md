@@ -428,7 +428,7 @@ For example:
 RUN apt-get update && apt-get install -y --no-install-recommends \
     package-bar \
     package-baz \
-    package-foo=1.3.*
+    package-foo=1.3.0
 ```
 
 Version pinning forces the build to retrieve a particular version regardless of
@@ -451,11 +451,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     reprepro \
     ruby1.9.1 \
     ruby1.9.1-dev \
-    s3cmd=1.1.* \
+    s3cmd=1.1.0 \
     && rm -rf /var/lib/apt/lists/*
 ```
 
-The `s3cmd` argument specifies a version `1.1.*`. If the image previously
+The `s3cmd` argument specifies version `1.1.0`. If the image previously
 used an older version, specifying the new one causes a cache bust of `apt-get
 update` and ensures the installation of the new version. Listing packages on
 each line can also prevent mistakes in package duplication.
