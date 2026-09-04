@@ -31,11 +31,12 @@ sandbox; files that exist only in a deleted sandbox are not available from a
 later sandbox.
 
 Docker Agentic Platform supports GitHub repositories for bringing source into
-a sandbox and preserving changes. Configure `GITHUB_TOKEN` under **Secrets** or
-from the sandbox launcher to clone a private repository or perform write
-operations such as pushing a branch or opening a pull request. The token must
-have the required repository permissions. Public repositories can be cloned
-without a GitHub credential, but writing to them still requires authentication.
+a sandbox and preserving changes. `GITHUB_TOKEN` authenticates both Copilot and
+GitHub repository operations. Copilot uses the same token for both. To clone a
+private repository or push changes from another sandbox type, select or add
+`GITHUB_TOKEN` in the launcher. The token must have the required repository
+permissions. Public repositories can be cloned without a GitHub credential,
+but writing to them still requires authentication.
 
 ## Open a sandbox
 
@@ -72,5 +73,5 @@ applies to the request:
 - Confirm that the network policies permit the destination.
 - If the agent needs an MCP tool, confirm that its server is connected and
   authorized.
-- If the destination requires authentication, confirm that the required
-  service credential is configured under **Secrets**.
+- If the destination requires authentication, confirm that the sandbox was
+  created with the service credential.
