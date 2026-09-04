@@ -115,7 +115,9 @@ $ docker build -t my-org/my-template:v1 --push .
 > [!NOTE]
 > The Docker daemon used by Docker Sandboxes pulls templates from a
 > registry directly; it doesn't share the image store of your local Docker
-> daemon on the host.
+> daemon on the host. To route Docker Hub image pulls through your
+> organization's registry infrastructure, configure a
+> [registry mirror](../configuration/registry-mirror.md).
 
 > [!IMPORTANT]
 > For Docker Hub, `sbx` reuses your `sbx login` session to pull private
