@@ -427,6 +427,12 @@ the sandbox with the kit.
 Runs synchronously when a kit is applied, either during sandbox creation or
 through `sbx kit add`. Shell strings are passed to `sh -c`.
 
+Kit install commands start in the template image's configured `WORKDIR`.
+Docker-provided templates use `/home/agent/workspace`, which isn't necessarily
+the primary workspace in a direct-mounted or clone-mode sandbox. Don't rely on
+the current directory to locate workspace files. Use absolute paths for bundled
+assets from `files/home/`.
+
 | Field         | Default | Description                   |
 | ------------- | ------- | ----------------------------- |
 | `command`     | —       | Shell command string.         |

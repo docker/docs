@@ -263,7 +263,7 @@ When specified as a string, `workspace` is the path. Use the object form for
 clone mode:
 
 > [!WARNING]
-> With [direct mount](../security/isolation.md#direct-mount-default), the agent can
+> With [direct mount](../security/isolation.md#direct-mount), the agent can
 > modify every file in a workspace. If an environment file is inside a mounted
 > workspace, the agent can change the file that controls later `sbx env`
 > commands. Store environment files outside all direct-mounted workspaces,

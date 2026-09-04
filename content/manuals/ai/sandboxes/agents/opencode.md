@@ -20,12 +20,15 @@ Create a sandbox and run OpenCode for a project directory:
 $ sbx run opencode ~/my-project
 ```
 
-The workspace parameter is optional and defaults to the current directory:
+`sbx run` defaults the workspace to the current directory:
 
 ```console
 $ cd ~/my-project
 $ sbx run opencode
 ```
+
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name.
 
 OpenCode launches a TUI (text user interface) where you can select your
 preferred LLM provider and interact with the agent.
@@ -94,7 +97,7 @@ The sandbox runs `opencode` with no implicit flags. Args after `--` are passed
 straight through. For example, to resume an existing session:
 
 ```console
-$ sbx run opencode -- -s <session-id>
+$ sbx run --name <sandbox-name> -- -s <session-id>
 ```
 
 ### TUI mode

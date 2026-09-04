@@ -93,7 +93,7 @@ It's only reachable while the sandbox is running:
 1. Start a clone-mode sandbox:
 
    ```console
-   $ sbx run --clone claude
+   $ sbx run --clone claude .
    ```
 
 2. Ask the agent to create a branch before it starts editing:
@@ -126,7 +126,7 @@ It's only reachable while the sandbox is running:
    [agents view](../agents/claude-code.md#agents-view):
 
    ```console
-   $ sbx run --clone claude
+   $ sbx run --clone claude .
    ```
 
 2. Dispatch each independent task to a separate background session. Your agent

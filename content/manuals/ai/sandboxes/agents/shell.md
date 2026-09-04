@@ -14,11 +14,19 @@ environment.
 $ sbx run shell ~/my-project
 ```
 
-The workspace path defaults to the current directory. To run a one-off
+`sbx run` defaults the workspace to the current directory. To run a one-off
 command instead of an interactive shell, pass it after `--`:
 
 ```console
 $ sbx run shell -- -c "echo 'Hello from sandbox'"
+```
+
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name:
+
+```console
+$ sbx create --name scratch shell
+$ sbx run --name scratch
 ```
 
 ## Default startup command

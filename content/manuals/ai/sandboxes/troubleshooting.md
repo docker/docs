@@ -41,6 +41,38 @@ If you hit persistent issues or corrupted state, run
 [`sbx reset`](/reference/cli/sbx/reset/) to stop all VMs and delete all sandbox
 data. Create fresh sandboxes afterwards.
 
+## Sandbox doesn't contain my project files
+
+Starting with `sbx` version 0.42.0, the workspace path is optional for
+`sbx create`. When you omit it, the command creates a mountless sandbox. For
+example, these commands create and attach to a sandbox without mounting your
+host project files:
+
+```console
+$ sbx create --name <sandbox-name> <agent>
+$ sbx run --name <sandbox-name>
+```
+
+By contrast, `sbx run` mounts the current directory when you don't pass a
+workspace path:
+
+```console
+$ sbx run <agent>
+```
+
+A sandbox's workspace configuration is fixed when the sandbox is created. To
+reuse the name of an existing mountless sandbox, first
+[copy out any files you want to keep](usage.md#copy-files-between-host-and-sandbox),
+then remove and recreate it with a workspace path:
+
+```console
+$ sbx rm <sandbox-name>
+$ sbx run --name <sandbox-name> <agent>
+```
+
+See [Choose a workspace](usage.md#choose-a-workspace) for mountless, direct,
+and clone-mode behavior.
+
 ## Agent can't install packages or reach an API
 
 Sandboxes use [network access rules](governance/access-controls/network.md) to
@@ -220,23 +252,22 @@ configure the cloned workspace volume capacity. The variable accepts
 human-readable size strings such as `100g`:
 
 ```console
-$ DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE=100g sbx run --clone claude
+$ DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE=100g sbx run --clone claude .
 ```
 
 ## Filesystem operations are slow in large repositories
 
 Filesystem operations such as `git status`, `git log`, or directory scans can
-be noticeably slow when the sandbox workspace is mounted in direct mode (the
-default for workspaces without `--clone`). Virtiofs caching speeds up these
-workloads. Clone-mode sandboxes always enable it, so this tuning applies only
-to direct mode.
+be noticeably slow when you pass a workspace path and use direct mode.
+Virtiofs caching speeds up these workloads. Clone-mode sandboxes always enable
+it, so this tuning applies only to direct mode.
 
 Virtiofs caching is enabled by default on all operating systems. If you
 experience Git index corruption or unexpected file content, disable caching
 with the kill switch and recreate the sandbox:
 
 ```console
-$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <template>
+$ DOCKER_SANDBOXES_ENABLE_VIRTIOFS_CACHE=0 sbx run <agent>
 ```
 
 ## Clone mode reports "not in a Git repository" on WSL
