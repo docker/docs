@@ -1954,6 +1954,11 @@ examples: |-
     and input as needed. You can specify to which of the three standard streams
     (`STDIN`, `STDOUT`, `STDERR`) you'd like to connect instead, as in:
 
+    Attaching `STDIN` is not the same as `--interactive`. Without `-i`, the
+    container's standard input is closed, so
+    `docker run -a stdin -a stdout -a stderr busybox cat < file` prints nothing.
+    Add `-i` when you want to send input.
+
     ```console
     $ docker run -a stdin -a stdout -i -t ubuntu /bin/bash
     ```
