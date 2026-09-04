@@ -1,7 +1,7 @@
 ---
 title: Kit spec reference
 linkTitle: Spec reference
-description: Field-by-field reference for a kit's spec.yaml, including credentials, network rules, environment, setup, files, agent instructions, and the sandbox block.
+description: Field-by-field reference for a kit's spec.yaml, including arguments, credentials, network rules, environment, setup, files, agent instructions, and the sandbox block.
 keywords: sandboxes, sbx, kits, spec.yaml, reference, schema, fields
 weight: 50
 ---
@@ -88,6 +88,10 @@ locked:
   - sandbox.image
 security:
   privileged: false
+args:
+  channel:
+    default: stable
+    enum: [stable, beta]
 ```
 
 | Field           | Required | Description                                                                                     |
@@ -102,9 +106,60 @@ security:
 | `licenses`      | No       | SPDX license identifiers.                                                                       |
 | `locked`        | No       | Dotted paths child kits may not override.                                                       |
 | `security`      | No       | Container security settings. `security.privileged: true` runs the container in privileged mode. |
+| `args`          | No       | Arguments supplied when the kit is loaded. Schema v2 only.                                      |
 
 A kit also declares behavior blocks such as `agentInstructions`,
 `permissions`, `ports`, `credentials`, `environment`, `setup`, and `volumes`.
+
+## Arguments
+
+A schema v2 kit can declare arguments and reference them anywhere in
+`spec.yaml` or under `files/` as `${{ kit.args.<name> }}`. Substitution happens
+before the spec is decoded.
+
+```yaml
+args:
+  version:
+    default: latest
+    description: Tool version to install
+    pattern: '^(latest|[0-9]+\.[0-9]+\.[0-9]+)$'
+  channel:
+    default: stable
+    enum: [stable, beta, nightly]
+  target:
+    required: true
+    description: Build target
+
+environment:
+  variables:
+    TOOL_VERSION: "${{ kit.args.version }}"
+```
+
+Don't use kit arguments for API tokens, passwords, or other secrets. Use
+[Credentials](../configuration/credentials.md) to provide sensitive values to
+a sandbox.
+
+| Field         | Description                                                                                                  |
+| ------------- | ------------------------------------------------------------------------------------------------------------ |
+| Argument name | Starts with a letter or underscore and contains only letters, digits, underscores, and hyphens.             |
+| `default`     | String to use when the caller supplies no value. Mutually exclusive with `required: true`.                   |
+| `required`    | Set to `true` when the caller must supply a value. Mutually exclusive with `default`.                        |
+| `description` | Optional help text shown when a required value is missing.                                                   |
+| `enum`        | Optional list of accepted values. Mutually exclusive with `pattern`.                                         |
+| `pattern`     | Optional Go RE2 regular expression matched against the complete value. Mutually exclusive with `enum`.       |
+
+Each argument must declare either `default`, including an empty-string
+default, or `required: true`. A declared default must satisfy its own `enum` or
+`pattern`. Every `${{ kit.args.<name> }}` reference must have a matching
+declaration.
+
+Argument values are strings, but substitution happens before YAML decoding.
+Quote a placeholder in a string-valued field so a value such as `1.20` isn't
+decoded as a number.
+
+Supply values with `--kit-arg` or `--kit-args-file` when loading the kit. See
+[Pass arguments to kits](kits.md#pass-arguments-to-kits) for scoping,
+precedence, and validation behavior.
 
 ## Kit kinds
 
