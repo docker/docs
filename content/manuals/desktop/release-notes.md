@@ -34,6 +34,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - [Docker Agent v1.128.0](https://github.com/docker/docker-agent/releases/tag/v1.128.0)
 - Docker Offload `v0.6.15`
+- Docker Desktop CLI v0.4.4
 
 ### Bug fixes and enhancements
 
@@ -47,6 +48,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a Docker Desktop Dashboard crash issue. Fixes [docker/desktop-feedback#611](https://github.com/docker/desktop-feedback/issues/611).
 - Added support for starting and stopping a Kubernetes cloud cluster via Docker Offload, with configurable Kubernetes version and node count.
 - Improvements so the Docker Desktop Dashboard displays the specific reason Docker Engine failed to start, when available.
+- Fixed a bug where `renameat2(RENAME_EXCHANGE)` on a shared folder overwrote the target instead of swapping the two files.
+- Fixed a bug where `mmap()` of a file on a Synchronized File Share failed with "No such device", breaking git and pnpm. Fixes [docker/desktop-feedback#627](https://github.com/docker/desktop-feedback/issues/627).
+- Fixed a bug where repeatedly replacing files on a shared folder leaked VM disk space until Docker Desktop was restarted. Fixes [docker/desktop-feedback#619](https://github.com/docker/desktop-feedback/issues/619).
+- Fixed a bug where a bind-mount root intermittently reported ownership as 0:0, causing git to report "detected dubious ownership". Fixes [docker/desktop-feedback#628](https://github.com/docker/desktop-feedback/issues/628).
 
 #### For Mac
 
