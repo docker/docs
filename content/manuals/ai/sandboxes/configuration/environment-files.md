@@ -2,7 +2,7 @@
 title: Sandbox environment files
 linkTitle: Environment files
 weight: 20
-description: Use a declarative .sbxenv.yaml file to describe and share your sandbox configuration.
+description: Use a declarative sbxenv.yaml file to describe and share your sandbox configuration.
 keywords:
   - docker sandboxes
   - sbx env
@@ -20,13 +20,12 @@ params:
 ---
 
 A sandbox environment file captures the setup for a project in a
-`.sbxenv.yaml` file. Share the file with project contributors so they use the
+`sbxenv.yaml` file. Share the file with project contributors so they use the
 same agent, tools, resources, and credentials without reproducing CLI flags and
 setup steps.
 
 > [!NOTE]
-> `sbx env` requires `sbx` 0.39.0 or later. The feature is experimental, so the
-> command interface and file format may change in future releases.
+> `sbx env` is experimental. The command interface and file format may change.
 
 ## Start an environment
 
@@ -36,11 +35,11 @@ For example, place it beside your project:
 
 ```text
 web-app-env/
-├── .sbxenv.yaml
+├── sbxenv.yaml
 └── web-app/
 ```
 
-Create `web-app-env/.sbxenv.yaml`. This example gives the agent a shared
+Create `web-app-env/sbxenv.yaml`. This example gives the agent a shared
 environment variable and the Playwright browser-testing tools. It also
 publishes the application's development port:
 
@@ -67,32 +66,116 @@ From `web-app-env`, run the environment:
 $ sbx env run
 ```
 
-The `web-app` directory becomes the workspace, while `.sbxenv.yaml` remains
+`sbx` shows an environment plan and asks you to approve it. If you approve the
+plan, the `web-app` directory becomes the workspace, while `sbxenv.yaml` remains
 outside the sandbox. If the environment doesn't exist, `sbx` creates a sandbox
 named `web-app`, installs Playwright and Chromium, and publishes sandbox port
 `3000` on the host. It then attaches to the agent. Later runs attach to the
 existing sandbox.
 
 This placement keeps the environment file outside the agent's writable
-workspace. If you later add `additionalWorkspaces`, keep `.sbxenv.yaml`
+workspace. If you later add `additionalWorkspaces`, keep `sbxenv.yaml`
 outside those directories too. See the [`workspace` guidance](#workspace)
 for details.
 
 ## Commands
 
-| Command                                                                                 | Description                                                                                          |
-| --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| [`sbx env run`](/reference/cli/sbx/env/run/) `[PATH...]`                                | Creates the environment if needed, then attaches. Re-runs apply only [`env` and MCP changes](#update-an-environment). Remove and recreate for other changes |
-| [`sbx env create`](/reference/cli/sbx/env/create/) `[PATH...]`                          | Creates the environment without attaching                                                            |
-| [`sbx env exec`](/reference/cli/sbx/env/exec/) `[PATH...] -- COMMAND [ARG...]`           | Runs a command in an existing environment                                                            |
-| [`sbx env rm`](/reference/cli/sbx/env/rm/) `[PATH...]`                                  | Removes the sandbox and its scoped credentials                                                       |
+| Command                                                                       | Description                                                                          |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `sbx env plan [PATH...]`                                                       | Shows what applying the environment would change without changing or approving it    |
+| [`sbx env run`](/reference/cli/sbx/env/run/) `[PATH...]`                      | Applies the approved plan, creates the environment if needed, and attaches            |
+| [`sbx env create`](/reference/cli/sbx/env/create/) `[PATH...]`                | Applies the approved plan and creates the environment without attaching              |
+| [`sbx env exec`](/reference/cli/sbx/env/exec/) `[PATH...] -- COMMAND [ARG...]` | Runs a command in an existing environment without running lifecycle commands         |
+| [`sbx env rm`](/reference/cli/sbx/env/rm/) `[PATH...]`                        | Shows a destroy plan, then removes the sandbox and resources named in the plan        |
 
-`PATH` can be a directory or a direct path to an environment file. When you
-pass a directory, `sbx` reads `.sbxenv.yaml` and falls back to `.sbxenv.yml`.
-With no path, `sbx` searches the working directory.
+`PATH` can be a directory or a direct path to an environment file. A directory
+always resolves to `sbxenv.yaml`. To use another filename, pass the file path
+explicitly. With no path, `sbx` reads `sbxenv.yaml` from the working directory.
 
-Pass the same set of paths to each lifecycle command so they resolve the same
+Pass the same set of paths to each `sbx env` command so they resolve the same
 sandbox.
+
+### Set user defaults
+
+Create `~/.sbxenv.yaml` to define defaults shared across projects. When you run
+an `sbx env` command without a path, `sbx` merges this file beneath the
+project's `sbxenv.yaml`. Passing any path skips the user-level file.
+
+The user-level file must not set `name` or `workspace`, because those fields
+identify a project. Lists such as `ports` and `mcp.servers` concatenate across
+the user and project files.
+
+### Parameterize an environment
+
+Declare inputs in a top-level `args` block when values need to vary between
+uses of the same environment file. Each argument must have exactly one of
+`default` or `required: true`:
+
+```yaml
+schemaVersion: "1"
+name: web-app
+agent: claude
+
+args:
+  channel:
+    default: stable
+    description: Release channel
+    enum:
+      - stable
+      - beta
+  endpoint:
+    required: true
+    description: API endpoint
+  cpus:
+    default: "4"
+    pattern: "[1-9][0-9]*"
+
+env:
+  RELEASE_CHANNEL: ${{ env.args.channel }}
+  API_ENDPOINT: ${{ env.args.endpoint }}
+
+sandboxOptions:
+  cpus: ${{ env.args.cpus }}
+```
+
+Reference a declared argument as `${{ env.args.NAME }}` anywhere a YAML value
+can appear. References can't be used in field names or within the `args` block.
+An unquoted reference is interpreted as a YAML value after substitution, so
+the `cpus` value in this example becomes an integer. Quote a reference to
+preserve it as a string.
+
+All `sbx env` commands accept repeatable `--env-arg NAME=VALUE` flags. Values
+provided with a flag replace defaults from the environment file:
+
+```console
+$ sbx env run --env-arg endpoint=https://api.example.com --env-arg channel=beta
+```
+
+Use `--env-args-file` to load values from a file. Each non-empty, non-comment
+line must have the form `NAME=VALUE`:
+
+```text
+# production.args
+channel=beta
+endpoint=https://api.example.com
+```
+
+```console
+$ sbx env run --env-args-file production.args
+```
+
+You can pass multiple argument files. Later files take precedence over earlier
+files, and `--env-arg` flags take precedence over every argument file. The
+command rejects undeclared arguments, missing required values, and values that
+don't satisfy an argument's `enum` or `pattern`. Values can contain `=`, and
+values in an argument file are read literally rather than expanded by a shell.
+
+Argument references are the only variable expressions expanded in an
+environment file. Shell-style expressions such as `${VAR}` aren't expanded
+from the host environment. Other dollar signs remain literal, so a value such
+as `$PATH:/opt/bin` is passed unchanged. Use `$${{ env.args.NAME }}` to produce
+the literal text `${{ env.args.NAME }}`. Substituted values aren't expanded a
+second time.
 
 ## Common workflows
 
@@ -147,7 +230,7 @@ Mount related repositories alongside the primary project when the agent needs
 to coordinate changes or consult shared code and documentation:
 
 ```yaml
-# .sbxenv.yaml in the directory above the repositories
+# sbxenv.yaml in the directory above the repositories
 schemaVersion: "1"
 name: web-platform
 agent: codex
@@ -179,22 +262,53 @@ Automation can create the sandbox without attaching, run commands in it, and
 remove it afterward:
 
 ```console
-$ sbx env create
+$ sbx env create --auto-approve
 $ sbx env exec -- npm test
 $ sbx env rm --force
 ```
+
+`--auto-approve` approves the plan for that invocation without recording
+consent for later invocations. Use the flag for each unattended `create` or
+`run`. The `--force` flag approves the destroy plan and removes the sandbox even
+when it is in use.
 
 Commands and vault references under `secrets` resolve on the host, so the
 automation runner must provide the referenced tools and authentication. The
 secret values remain outside the environment file.
 
+## Review an environment plan
+
+`sbx env create`, `sbx env run`, and `sbx env rm` show the changes an
+environment makes outside its sandbox and ask for approval before applying
+them. The plan includes host commands, credentials, bindings, MCP
+registrations, directories, kits, published ports, sandbox options, and
+environment variables.
+
+Run `sbx env plan` to inspect the apply plan without changing, approving, or
+recording anything:
+
+```console
+$ sbx env plan
+```
+
+The plan compares the environment file with the environment's last applied
+state and the resources on the host. It omits resources that are unchanged and
+already approved. Literal secret values appear as SHA-256 digests. Secret
+references, host commands, environment variables, ports, paths, and binding
+domains remain visible so you can review them.
+
+Interactive approval is recorded for the environment under the `sbx` state
+directory. Plans without host commands apply silently on later invocations until
+the environment changes or a resource is missing. An approval provided with
+`--auto-approve` applies only to that invocation.
+
 ## Update an environment
 
-`sbx env run` starts and attaches to an existing sandbox without provisioning
-its secrets and bindings again. For an existing sandbox, the command applies
-changes to `env` to the new session and reconciles declared MCP servers. Changes
-to workspaces, kits, ports, secrets, bindings, and `sandboxOptions` require you
-to remove the environment with `sbx env rm` and create it again.
+For an existing sandbox, `sbx env run` applies updated `env` values to the new
+agent session and reconciles declared MCP servers. Changes to workspaces, kits,
+ports, secrets, bindings, and `sandboxOptions` take effect only when the
+sandbox is next created. Remove the environment with `sbx env rm`, then create
+it again to apply those changes.
 
 ## Remove an environment
 
@@ -202,9 +316,13 @@ Secrets and registry credentials are sandbox-scoped. Credential bindings and
 MCP server registrations are host-global and can be shared by multiple
 sandboxes.
 
-`sbx env rm` removes the sandbox and its scoped credentials. Global credential
-bindings remain unless you pass `--prune-bindings`. MCP registrations remain
-available to other sandboxes.
+`sbx env rm` builds a destroy plan from the resources on the host. The plan
+includes all credentials stored at the sandbox's scope, including credentials
+that the environment file no longer declares. After approval, `sbx` removes
+only the resources named in the plan.
+
+Global credential bindings remain unless you pass `--prune-bindings`. MCP
+registrations remain available to other sandboxes.
 
 ### Clean up after a failed create
 
@@ -226,8 +344,9 @@ The loader rejects unknown fields and unsupported schema versions.
 | `schemaVersion`        | string           | Yes      | None                           | Schema version. The supported value is `"1"`                                   |
 | `name`                 | string           | No       | `<agent>-<workspace-basename>` | Sandbox name                                                                    |
 | `agent`                | string           | Yes      | None                           | Built-in agent or the name of an agent kit                                      |
-| `kits`                 | list of strings  | No       | None                           | Kits to install at creation. See [`kits`](#kits)                                 |
-| `workspace`            | string or object | No       | First file's directory         | Primary workspace. See [`workspace`](#workspace)                                |
+| `args`                 | map              | No       | None                           | Environment arguments. See [`args`](#args)                                      |
+| `kits`                 | list             | No       | None                           | Kits to install at creation. See [`kits`](#kits)                                 |
+| `workspace`            | string or object | No       | No host mount                  | Primary workspace. See [`workspace`](#workspace)                                |
 | `additionalWorkspaces` | list             | No       | None                           | Extra directories to mount. See [`additionalWorkspaces`](#additionalworkspaces) |
 | `env`                  | map of strings   | No       | None                           | Environment variables for the sandbox                                           |
 | `sandboxOptions`       | object           | No       | None                           | Creation options. See [`sandboxOptions`](#sandboxoptions)                        |
@@ -236,6 +355,25 @@ The loader rejects unknown fields and unsupported schema versions.
 | `registries`           | map              | No       | None                           | Registry pull credentials. See [`registries`](#registries)                      |
 | `mcp`                  | object           | No       | None                           | MCP servers. See [`mcp`](#mcp)                                                  |
 | `ports`                | list             | No       | None                           | Port mappings. See [`ports`](#ports)                                            |
+| `lifecycle`            | object           | No       | None                           | Host commands. See [`lifecycle`](#lifecycle)                                    |
+
+### `args`
+
+`args` maps argument names to their declarations. Names must start with a
+letter or underscore and can contain letters, numbers, underscores, and
+hyphens. Each declaration must set exactly one of `default` or `required:
+true`.
+
+| Field         | Type            | Default | Description                                                       |
+| ------------- | --------------- | ------- | ----------------------------------------------------------------- |
+| `default`     | string          | None    | Value used when the command doesn't supply the argument           |
+| `required`    | boolean         | `false` | Require the command to supply the argument                         |
+| `description` | string          | None    | Explanation shown in command output                               |
+| `enum`        | list of strings | None    | Values accepted for the argument                                  |
+| `pattern`     | string          | None    | Go (`RE2`) expression matched against the complete argument value |
+
+`enum` and `pattern` can't be used together. A default value must satisfy the
+declared `enum` or `pattern`.
 
 ### `kits`
 
@@ -243,6 +381,21 @@ The loader rejects unknown fields and unsupported schema versions.
 Git URLs prefixed with `git+https://` or `git+ssh://`. Kits can install tools,
 configure the sandbox, and give the agent project-specific instructions. See
 [Kits](../customize/kits.md) for details.
+
+Explicit relative paths resolve from the directory of the environment file
+that declares them. These include `.`, `..`, paths that start with `./` or
+`../`, and relative paths that end in `.zip`. Bare references such as
+`organization/kit` remain registry references.
+
+Use an object entry to pass arguments to a kit. Set `source` to the kit
+reference and map the kit's argument names to values under `args`:
+
+```yaml
+kits:
+  - source: ./kits/tool
+    args:
+      version: ${{ env.args.channel }}
+```
 
 Remote kit sources must match the
 [kit source allowlist](../customize/kits.md#restrict-kit-sources). Docker Hub is
@@ -260,21 +413,18 @@ parameter and OCI kits with an immutable tag or digest.
 ### `workspace`
 
 When specified as a string, `workspace` is the path. Use the object form for
-clone mode:
+clone mode. Omit `workspace` to create a sandbox without a host bind mount. Set
+`workspace: .` to mount the directory that contains the first environment
+file. If `workspace` is present, its path can't be empty or contain only
+whitespace.
 
-> [!WARNING]
-> With [direct mount](../security/isolation.md#direct-mount-default), the agent can
-> modify every file in a workspace. If an environment file is inside a mounted
-> workspace, the agent can change the file that controls later `sbx env`
-> commands. Store environment files outside all direct-mounted workspaces,
-> including every `additionalWorkspaces` mount.
-> [Clone mode](../security/isolation.md#clone-mode) protects files in the primary
-> repository, but additional workspaces remain direct-mounted.
+`sbx` mounts the environment file read-only inside the sandbox. Keep the file
+outside direct-mounted workspaces or directly in a workspace root.
 
-| Field   | Type    | Default                | Description                                                             |
-| ------- | ------- | ---------------------- | ----------------------------------------------------------------------- |
-| `path`  | string  | First file's directory | Workspace directory. Relative paths resolve from the first file         |
-| `clone` | boolean | `false`                | Use a private clone, equivalent to `sbx create --clone`                  |
+| Field   | Type    | Required | Default | Description                                                     |
+| ------- | ------- | -------- | ------- | --------------------------------------------------------------- |
+| `path`  | string  | Yes      | None    | Workspace directory. Relative paths resolve from the first file |
+| `clone` | boolean | No       | `false` | Use a private clone, equivalent to `sbx create --clone`          |
 
 You can override `workspace.clone` for one `create` or `run` invocation with
 `--clone` or `--clone=false`.
@@ -291,13 +441,86 @@ paths resolve from the directory of the first environment file.
 
 ### `sandboxOptions`
 
-| Field        | Type    | Default  | Description                                                     |
-| ------------ | ------- | -------- | --------------------------------------------------------------- |
-| `template`   | string  | None     | Custom sandbox template image                                   |
-| `memory`     | string  | None     | Memory limit, such as `8g` or `512m`                             |
-| `cpus`       | integer | `0`      | Number of CPUs. `0` allocates all host CPUs                      |
-| `pullPolicy` | string  | `always` | Image pull policy: `always`, `missing`, or `never`               |
-| `profile`    | string  | None     | Governance profile name                                         |
+| Field         | Type            | Default  | Description                                           |
+| ------------- | --------------- | -------- | ----------------------------------------------------- |
+| `template`    | string          | None     | Custom sandbox template image                         |
+| `memory`      | string          | None     | Memory limit, such as `8g` or `512m`                   |
+| `cpus`        | integer         | `0`      | Number of CPUs. `0` allocates all host CPUs            |
+| `pullPolicy`  | string          | `always` | Image pull policy: `always`, `missing`, or `never`     |
+| `profile`     | string          | None     | Governance profile name                               |
+| `shareSkills` | boolean         | `true`   | Mount the shared agent skills store                    |
+| `display`     | boolean         | `false`  | Provision a display socket for graphical applications |
+| `gpu`         | boolean         | `false`  | Pass the host GPU through to the sandbox               |
+| `usb`         | list of strings | None     | USB device selectors to pass through to the sandbox   |
+
+Imported [agent skills](../workflows/agent-skills.md) are shared with the
+sandbox by default. Set `shareSkills: false` to opt out.
+
+### `lifecycle`
+
+The `lifecycle` block declares commands that run on the host with your user
+privileges. Use lifecycle commands for work that must happen outside the
+sandbox, such as creating a workspace, seeding fixtures, or archiving state.
+
+```yaml
+lifecycle:
+  initialize:
+    - name: Prepare workspace
+      command: test -d web-app || git clone https://github.com/example/web-app
+      timeout: 5m
+  postCreate:
+    - command: ./scripts/seed-fixtures.sh
+      workdir: web-app
+  preRemove:
+    - command: ./scripts/archive-state.sh
+```
+
+Lifecycle phases run at the following points:
+
+| Phase        | Timing                                                                                                           |
+| ------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `initialize` | Before other create or run actions. Runs for every `create` and `run`                                             |
+| `postCreate` | After a new sandbox is created. For `run`, before attachment. Does not run when attaching to an existing sandbox   |
+| `preRemove`  | After you approve removal and before `sbx` deletes resources. A failure produces a warning and removal continues  |
+
+`sbx env exec` doesn't run lifecycle commands. Commands within a phase run in
+order and stop at the first failure. Make `initialize` commands safe to run
+more than once.
+
+After `preRemove` commands finish, `sbx` generates the destroy plan again.
+Removal stops if the commands introduced changes that weren't included in the
+approved plan.
+
+Each command requires `command` and accepts the following fields:
+
+| Field     | Type   | Default           | Description                                                                    |
+| --------- | ------ | ----------------- | ------------------------------------------------------------------------------ |
+| `name`    | string | Command text      | Label shown in progress and plan output                                        |
+| `command` | string | None              | Command passed to the user's shell                                             |
+| `workdir` | string | Project directory | Host working directory. Relative paths resolve from the first file's directory |
+| `timeout` | string | None              | Maximum runtime, such as `90s` or `5m`                                         |
+
+Commands inherit the environment of the `sbx` process and receive the following
+variables:
+
+- `SBX_LIFECYCLE_PHASE`
+- `SBX_ENV_FILE` and `SBX_ENV_FILES`
+- `SBX_ENV_DIR`
+- `SBX_SANDBOX_NAME`
+- `SBX_AGENT`
+- `SBX_WORKSPACE`
+
+The environment file's `env` values and resolved secrets aren't passed to host
+commands.
+
+Plans containing lifecycle commands or credential `command` sources require
+approval for every invocation by default, even when the command text hasn't
+changed. Approve one invocation with `--auto-approve`, skip lifecycle commands
+with `--skip-host-commands`, or remember approval until the commands change:
+
+```console
+$ sbx settings set env.rememberHostCommands true
+```
 
 ### `secrets`
 
@@ -386,12 +609,15 @@ Each server must set exactly one of `url` or `command`.
 `ports` publishes sandbox ports when the environment is created. Ports exposed
 by a kit but omitted from this list receive an ephemeral host port.
 
-| Field      | Type    | Required | Default          | Description                                                           |
-| ---------- | ------- | -------- | ---------------- | --------------------------------------------------------------------- |
-| `sandbox`  | integer | Yes      | None             | Sandbox port from 1 through 65535                                     |
-| `host`     | integer | No       | Ephemeral        | Host port from 1 through 65535                                        |
-| `protocol` | string  | No       | `tcp`            | `tcp`, `tcp4`, `tcp6`, `udp`, `udp4`, or `udp6`                       |
-| `hostIP`   | string  | No       | Loopback         | Host interface. The default uses available IPv4 and IPv6 loopback     |
+| Field      | Type    | Required | Default                              | Description                                     |
+| ---------- | ------- | -------- | ------------------------------------ | ----------------------------------------------- |
+| `sandbox`  | integer | Yes      | None                                 | Sandbox port from 1 through 65535               |
+| `host`     | integer | No       | Ephemeral                            | Host port from 1 through 65535                  |
+| `protocol` | string  | No       | `tcp4`, or `tcp6` for IPv6 `hostIP` | `tcp`, `tcp4`, `tcp6`, `udp`, `udp4`, or `udp6` |
+| `hostIP`   | string  | No       | Loopback                             | Host interface to bind                          |
+
+Set `protocol: tcp` to bind both IPv4 and IPv6. Leave `hostIP` unset for a
+dual-stack binding because an explicit address binds only its own IP family.
 
 If a port can't be published, sandbox creation fails and removes the new
 sandbox.

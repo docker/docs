@@ -121,9 +121,8 @@ do not block this access because they evaluate the workspace path rather than
 other paths to the same file. [Clone mode](#clone-mode) prevents writes through
 the primary workspace by mounting the host repository read-only.
 
-There is no isolation between the agent and your workspace in this mode.
-The agent can create, modify, or delete any file in the workspace,
-including:
+Direct mount gives the agent broad write access to your workspace. The agent
+can create, modify, or delete workspace files, including:
 
 - Source code and configuration files
 - Build files (`Makefile`, `package.json`, `Cargo.toml`)
@@ -131,7 +130,6 @@ including:
 - CI configuration (`.github/workflows/`, `.gitlab-ci.yml`)
 - IDE configuration (`.vscode/tasks.json`, `.idea/` run configurations)
 - AI project configuration and settings (`.claude/`, `.codex/`, `.gemini/`)
-- Sandbox environment files (`.sbxenv.yaml`)
 - Hidden files, shell scripts, and executables
 
 Some of these files execute code when you trigger normal development
@@ -150,12 +148,16 @@ Review them after any agent session before performing those actions:
 - AI project configuration and settings (`.claude/settings.json`, `.codex/config.toml`,
   `.gemini/settings.json`) can define hooks and startup commands that
   execute automatically.
-- Sandbox environment files (`.sbxenv.yaml`) can declare `secrets` and
-  `registries` whose values come from a `command`. Those commands run on
-  the host, as you, the next time you run `sbx env create` or
-  `sbx env run` in that directory — before the sandbox exists. Because the
-  file sits in the workspace, an agent in direct mount can add or change
-  one.
+
+#### Sandbox environment files
+
+Sandbox environment files can declare lifecycle and credential commands that
+run on the host with your privileges. Before running these commands, `sbx`
+shows them in an environment plan and asks for approval. Review the plan before
+you approve host commands.
+
+For file placement and read-only protection, see
+[Sandbox environment files](../configuration/environment-files.md#workspace).
 
 > [!WARNING]
 > Treat sandbox-modified workspace files the same way you would treat a pull
