@@ -204,15 +204,24 @@ the egress path in the **PROXY** column:
 
 ## Sandbox runs out of disk space
 
-The sandbox root (`/`) filesystem defaults to 20 GB. To increase it, set `DOCKER_SANDBOXES_ROOT_SIZE`
-before creating the sandbox:
+The sandbox root (`/`) filesystem defaults to 20 GB. To increase it, set
+`DOCKER_SANDBOXES_ROOT_SIZE` before creating the sandbox:
 
 ```console
 $ DOCKER_SANDBOXES_ROOT_SIZE=40g sbx run claude
 ```
 
-`DOCKER_SANDBOXES_ROOT_SIZE` controls the root filesystem size. `DOCKER_SANDBOXES_DOCKER_SIZE`
-controls the Docker data disk (`/var/lib/docker`) size. The two are independent — set both if needed.
+`DOCKER_SANDBOXES_ROOT_SIZE` controls the root filesystem size. The Docker data
+disk at `/var/lib/docker` is independent and defaults to 10 GB. To change the
+Docker data disk size for a sandbox, set `DOCKER_SANDBOXES_DOCKER_SIZE` when you
+create it:
+
+```console
+$ DOCKER_SANDBOXES_DOCKER_SIZE=20g sbx run claude
+```
+
+The Docker data disk must be at least 512 MiB. The environment variable doesn't
+resize existing volumes.
 
 For a [clone-mode sandbox](usage.md#clone-mode), set
 `DOCKER_SANDBOXES_CLONED_WORKSPACE_SIZE` before creating the sandbox to
