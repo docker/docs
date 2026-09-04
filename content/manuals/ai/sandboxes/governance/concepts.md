@@ -64,6 +64,10 @@ ranges, or ports. The governance policy schema also accepts `connect:udp`, but
 Docker Sandboxes always blocks direct external UDP and ICMP. `connect:udp`
 rules have no effect.
 
+When a resource doesn't specify a port, the rule matches every port on that
+destination. `example.com` matches all ports on `example.com`; `example.com:443`
+matches only port 443.
+
 **Hostname patterns**
 
 | Pattern               | Example           | Matches                                            |
