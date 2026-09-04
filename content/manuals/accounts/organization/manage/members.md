@@ -26,12 +26,12 @@ You can also select one or more product licenses for an invitee; Docker
 assigns available licenses when they accept. Unlike a seat, licenses aren't
 deducted from your organization's available licenses until the invitee accepts.
 See
-[Licenses and invites](/manuals/accounts/organization/manage/manage-licenses.md#licenses-and-invites).
+[Invitations](/manuals/accounts/organization/manage/manage-licenses.md#invitations).
 
-The Members page is where you assign or revoke a license for one member, using
-the action menu on their row or the **Bulk actions** menu. To assign a license
-to a whole team, or to view how many licenses your organization has, use the
-Teams and Licenses views. See
+The **Members** page is where you assign or revoke a license for one member,
+using the **action menu** on their row or the **Bulk actions** menu. To assign
+a license to a whole team, or to view how many licenses your organization has,
+use the **Teams** and **Licenses** views. See
 [Manage licenses](/manuals/accounts/organization/manage/manage-licenses.md).
 
 ### Invite members via Docker ID or email address

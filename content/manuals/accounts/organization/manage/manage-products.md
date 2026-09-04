@@ -1,7 +1,7 @@
 ---
 title: Manage usage and access for Docker products
-linkTitle: Product usage and access
-weight: 50
+linkTitle: Products
+weight: 30
 description: Learn how to manage access and usage for Docker products for your organization
 keywords: organization, product access, product usage, access control, docker desktop, docker hub, docker scout, docker build cloud, docker offload, testcontainers cloud
 aliases:

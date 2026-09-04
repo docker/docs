@@ -13,23 +13,23 @@ grid:
     description: Create teams and manage repository access for groups of members.
     icon: user-group
     link: /accounts/organization/manage/manage-a-team/
-  - title: Seats
-    description: Add or remove seats for Docker Team and Business subscriptions.
-    icon: user-circle
-    link: /accounts/organization/manage/manage-seats/
+  - title: Products
+    description: Manage access and view usage for Docker products across your organization.
+    icon: squares-2x2
+    link: /accounts/organization/manage/manage-products/
   - title: Licenses
     description: View your license inventory and assign licenses to teams or individual members.
     icon: key
     link: /accounts/organization/manage/manage-licenses/
-  - title: Product access and usage
-    description: Manage access and view usage for Docker products across your organization.
-    icon: squares-2x2
-    link: /accounts/organization/manage/manage-products/
-  - title: Change information
+  - title: Seats
+    description: Add or remove seats for Docker Team and Business subscriptions.
+    icon: user-circle
+    link: /accounts/organization/manage/manage-seats/
+  - title: Information
     description: Update your organization's general information and settings.
     icon: pencil-square
     link: /accounts/organization/manage/general-settings/
-  - title: Deactivate
+  - title: Deactivation
     description: Deactivate an organization after completing the required steps.
     icon: minus-circle
     link: /accounts/organization/manage/deactivate-account/

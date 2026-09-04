@@ -65,10 +65,10 @@ Each team has a **Licenses** card that lists the product licenses the team
 assigns. Every member of the team receives those licenses, including members
 who join later.
 
-To assign licenses, open the team from **Teams**, then select the edit icon on
-the **Licenses** card. For the full procedure, what happens when you don't have
-enough licenses, and what members lose when you remove a license, see
-[Manage licenses](/manuals/accounts/organization/manage/manage-licenses.md#assign-licenses-to-a-team).
+To assign licenses, open the team from **Teams**, then select the **edit** icon
+on the **Licenses** card. For the full procedure, what happens when you don't
+have enough licenses, and what members lose when you remove a license, see
+[Manage licenses](/manuals/accounts/organization/manage/manage-licenses.md#teams).
 
 ## Set team repository permissions
 
@@ -135,7 +135,7 @@ resources. It won't remove users from other teams that they belong to, and it
 won't delete any resources. Members also lose the licenses that came only from
 that team, unless another team assigns the same license or they hold a direct
 assignment. See
-[Remove or lose a license](/manuals/accounts/organization/manage/manage-licenses.md#remove-or-lose-a-license).
+[Remove licenses](/manuals/accounts/organization/manage/manage-licenses.md#remove-licenses).
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
    organization.
