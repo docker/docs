@@ -1,4 +1,4 @@
----
+83DCE2C9-4C85-4C50-8492-79B361E3538F/20260905170703---
 description:
   Understand how to diagnose and troubleshoot Docker Desktop, and how to
   check the logs.
