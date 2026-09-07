@@ -45,7 +45,8 @@ $ sbx run --publish 8080:3000 --name my-sandbox claude
 ```
 
 For an existing sandbox, use [`sbx ports`](/reference/cli/sbx/ports/) to
-forward traffic from your host.
+forward traffic from your host. Publishing a port on a stopped local sandbox
+starts it first.
 
 The common case: an agent has started a dev server or API, and you want to open
 it in your browser or run tests against it.
@@ -85,8 +86,10 @@ IPv4 and IPv6. Most dev servers need a flag like `--host 0.0.0.0` to do this.
 
 On the host, a published port binds IPv4 (`127.0.0.1`) unless you name another
 protocol, so `http://localhost:<port>/` reaches a service listening on IPv4
-whichever address your resolver picks for `localhost`. To publish on both
-families use `--publish 8080:3000/tcp`, and for IPv6 alone `/tcp6`. Both of
+whichever address your resolver picks for `localhost`. Naming an explicit IPv6
+host address, such as `--publish [::1]:8080:3000`, defaults the protocol to
+`tcp6` instead. To publish on both families use `--publish 8080:3000/tcp`, and
+for IPv6 alone `/tcp6`. Both of
 those require the sandboxed service to listen on IPv6 as well — bind it to
 `[::]` — or a client arriving over `::1` has its connection accepted and then
 reset.
