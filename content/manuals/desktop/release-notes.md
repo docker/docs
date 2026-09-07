@@ -40,24 +40,23 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- Added Ask Gordon as a right-side drawer in the dashboard, keeping users in context while chatting with Gordon alongside any page being viewed. 
-- Containers, images and volumes rows with detected issues now show an Ask Gordon sign that starts a diagnosis in one click.
+- Ask Gordon is now accessible as a right-side drawer, keeping users in context while chatting with Gordon alongside any page being viewed. 
+- A container, image, or volume row with a detected issue now shows an Ask Gordon symbol that starts a diagnosis in one click.
 - Fixed a bug where generating a diagnostics bundle could hang until its timeout if a file it collects was on an unresponsive filesystem.
 - Fixed an issue where changing the auto-pause timeout while Docker Desktop was already idle would not apply until the original timer expired. 
-- Fixed a crash in the **Images** view ('Maximum update depth exceeded') that occurred when many images loaded simultaneously on cold launch or after waking from Resource Saver mode.
+- Fixed a crash in the **Images** view that occurred when many images loaded simultaneously on cold launch or after waking from Resource Saver mode.
 - Fixed a Docker Desktop Dashboard crash issue. Fixes [docker/desktop-feedback#611](https://github.com/docker/desktop-feedback/issues/611).
 - Added support for starting and stopping a Kubernetes cloud cluster via Docker Offload, with configurable Kubernetes version and node count.
-- Improvements so the Docker Desktop Dashboard displays the specific reason Docker Engine failed to start, when available.
+- The Docker Desktop Dashboard now displays the specific reason Docker Engine failed to start, when available.
 - Fixed a bug where `renameat2(RENAME_EXCHANGE)` on a shared folder overwrote the target instead of swapping the two files.
 - Fixed a bug where `mmap()` of a file on a Synchronized File Share failed with "No such device", breaking git and pnpm. Fixes [docker/desktop-feedback#627](https://github.com/docker/desktop-feedback/issues/627).
 - Fixed a bug where repeatedly replacing files on a shared folder leaked VM disk space until Docker Desktop was restarted. Fixes [docker/desktop-feedback#619](https://github.com/docker/desktop-feedback/issues/619).
 - Fixed a bug where a bind-mount root intermittently reported ownership as 0:0, causing git to report "detected dubious ownership". Fixes [docker/desktop-feedback#628](https://github.com/docker/desktop-feedback/issues/628).
-- Fixed race conditions and stability issues in LinuxKit VM kernel modules (fakeowner, selfowner, shiftfs) causing incorrect file ownership, disk block leaks on rename, and broken mmap operations.
 
 #### For Mac
 
-- Fixed an installer crash (exit status 42) that occurred when the user's home folder was on a different disk than `/Applications` (e.g. external APFS volume). Fresh installs and auto-updates now complete successfully in this configuration.
-- Fixed startup failures caused by `VZErrorInvalidVirtualMachineConfiguration` (Code=2) due to stale file locks on `Docker.raw` and APFS disk metadata sync races.
+- Fixed an installer crash that occurred when the user's home folder was on a different disk than `/Applications`. Fresh installs and auto-updates now complete successfully in this configuration.
+- Fixed startup failures caused by `VZErrorInvalidVirtualMachineConfiguration` due to stale file locks on `Docker.raw` and APFS disk metadata sync races.
 
 #### For Windows
 
@@ -72,7 +71,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed the MSI installer ignoring `ENGINE=docker-vmm`, which left the Windows Hypervisor Platform feature disabled and the engine unselected.
 - Fixed a bug where running the installer with only command-line flags and no `install` verb failed with exit code `4294967291` and no error message.
 - Fixed a bug where Docker VMM did not explain how to fix an unavailable Windows Hypervisor Platform.
-
 
 ### Security 
 
