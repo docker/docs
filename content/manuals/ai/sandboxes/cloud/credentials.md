@@ -95,10 +95,30 @@ the sandbox starts. OAuth credentials can't use sandbox scope.
 
 ## Service identifiers
 
-Cloud secrets accept a defined set of service identifiers. A service supported
-by the local secret store isn't necessarily supported by the cloud secret
-store. The CLI returns an error if the cloud service doesn't support the
-identifier you specify.
+The following table shows cloud secret support for the
+[built-in services documented for local sandboxes](../configuration/credentials.md#built-in-services):
+
+| Service | Cloud secret authentication |
+| --- | --- |
+| `anthropic` | API key or OAuth |
+| `cursor` | Not supported |
+| `droid` | API key; cloud-managed OAuth is not supported |
+| `github` | Token |
+| `google` | API key |
+| `groq` | API key |
+| `mistral` | API key |
+| `nebius` | API key |
+| `openai` | API key or OAuth |
+| `openrouter` | Not supported |
+| `xai` | API key |
+
+To configure a supported service, run `sbx --cloud secret set <service>`.
+Cloud-managed OAuth is available only for `anthropic` and `openai`, at account
+scope. Other providers' interactive sign-in flows do not use the cloud secret
+store.
+
+Services declared by local kits aren't automatically supported in cloud
+sandboxes. A kit cannot add a service to the cloud secret store.
 
 Registry credentials, dynamic `--ref` values, and host-run `--command`
 resolvers aren't cloud secret workflows.
