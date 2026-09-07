@@ -34,7 +34,7 @@ and external secret-provider workflows.
 ## Reuse and automate workflows
 
 Sandbox environment files work like Compose files for sandboxes: they capture
-project configuration in a versioned YAML file. Use `.sbxenv.yaml` to define
+project configuration in a versioned YAML file. Use `sbxenv.yaml` to define
 the agent, workspaces, tools, resources, credentials, and ports so contributors
 can start a consistent environment without reproducing CLI flags and setup
 steps. See [Sandbox environment files](../configuration/environment-files.md).
