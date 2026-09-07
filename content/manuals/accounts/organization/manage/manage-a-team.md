@@ -60,8 +60,7 @@ For more information on roles, see
 ## Set team repository permissions
 
 You must create a team before you are able to configure repository permissions.
-For more details, see [Create and manage a
-team](/manuals/accounts/organization/manage/manage-a-team.md).
+For more details, see [Create a team](#create-a-team).
 
 To set team repository permissions:
 
