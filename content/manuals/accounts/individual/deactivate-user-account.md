@@ -44,8 +44,9 @@ requirements:
 - Download any images and tags you want to keep. Use
   `docker pull -a <image>` to pull all tags, or `docker pull <image>:<tag>`
   to pull a specific tag.
-- If you linked a GitHub or Bitbucket account for automated builds, unlink
-  it. See
+- Docker Hub Automated Builds is deprecated and will be fully retired on
+  April 1, 2027. If you linked a GitHub or Bitbucket account for automated
+  builds, unlink it. See
   [Unlink a GitHub user
   account](/manuals/docker-hub/repos/manage/builds/link-source.md#unlink-a-github-user-account)
   or
