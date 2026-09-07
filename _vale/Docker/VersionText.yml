@@ -1,6 +1,5 @@
 extends: existence
 message: Use later when talking about version numbers.
-link: https://docs.docker.com/contribute/style/recommended-words/#later
 scope: raw
 raw:
   - '\bv?'

@@ -1,6 +1,5 @@
 extends: substitution
 message: "Consider using '%s' instead of '%s'"
-link: https://docs.docker.com/contribute/style/recommended-words/
 ignorecase: true
 level: suggestion
 action:
@@ -29,11 +28,20 @@ swap:
   click: select
   distro: distribution
   ergo: therefore
+  facilitate: help
+  facilitates: helps
+  facilitated: helped
+  facilitating: helping
   file name: filename
+  in order to: to
   keypress: keystroke
   mutices: mutexes
   repo: repository
   scroll: navigate
   url: URL
+  utilize: use
+  utilizes: uses
+  utilized: used
+  utilizing: using
   '\bvs\b(?!\.|\s+Code)': versus
   wish: want
