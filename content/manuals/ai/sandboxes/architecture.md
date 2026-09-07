@@ -61,6 +61,14 @@ proxy also handles [credential injection](configuration/credentials.md). See
 works and [Default security posture](security/defaults.md) for what is
 allowed out of the box.
 
+### Follow an authenticated request
+
+The following diagram shows where Docker Sandboxes checks network policy and
+replaces a sentinel credential with the real value. The real credential stays
+outside the sandbox throughout the request.
+
+{{< interactive-diagram src="diagrams/credential-injection.yaml" >}}
+
 ### Upstream proxy
 
 The host-side proxy makes its outbound connections using your host's network
