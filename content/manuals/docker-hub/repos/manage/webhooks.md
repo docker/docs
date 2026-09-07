@@ -9,6 +9,23 @@ aliases:
 
 You can use webhooks to cause an action in another service in response to a push event in the repository. Webhooks are POST requests sent to a URL you define in Docker Hub.
 
+## Prerequisites
+
+For a personal repository, only the repository owner can create webhooks.
+Collaborators can't create webhooks.
+
+For an organization repository, you must be an organization owner or editor,
+or a team member with Admin permissions on the repository. For more details,
+see [Organization teams](/manuals/docker-hub/repos/manage/access.md#organization-teams).
+
+To create a webhook using the Docker Hub API, authenticate with one of the
+following:
+
+- A [personal access token](/manuals/security/access-tokens/personal-access-tokens.md)
+  with Delete permissions
+- An [organization access token](/manuals/security/access-tokens/organization-access-tokens.md)
+  with the `scope-webhook-edit` scope or higher
+
 ## Create a webhook
 
 To create a webhook:
