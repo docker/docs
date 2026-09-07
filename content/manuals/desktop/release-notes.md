@@ -24,6 +24,55 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.91.0
+
+{{< release-date date="2026-09-14" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.91.0" build_path="/XXXXXX/" >}}
+
+### Updates
+
+- [Docker Engine v29.8.0](https://docs.docker.com/engine/release-notes/29/#2980)
+- [containerd v2.3.4](https://github.com/containerd/containerd/releases/tag/v2.3.4)
+- [Docker Compose v5.5.1](https://github.com/docker/compose/releases/tag/v5.5.1)
+- [Docker AI Agent v1.131.0](https://github.com/docker/docker-agent/releases/tag/v1.131.0)
+- Docker Desktop Build `v0.38.0`
+- [Docker Buildx v0.37.0](https://github.com/docker/buildx/releases/tag/v0.37.0)
+- Docker Offload `v0.6.17`
+- [Credential helpers v0.9.9](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.9)
+
+### Bug fixes and enhancements
+
+#### For all platforms 
+
+- Fixed an issue where the **Last modified** column in the Volumes and container filesystem browsers displayed inaccurate timestamps like '57 years ago' instead of a blank when modification time was unavailable.
+- Fixed Docker Desktop writing invalid export PATH syntax into csh/tcsh profiles when adding `~/.docker/bin` to PATH.
+- Fixed an issue where Docker Scout CLI hints would persist after upgrading.
+- Fixed a bug where a corrupt Docker network database, usually caused by an abrupt shutdown, prevented Docker Engine from starting and left a factory reset as the only recovery option.
+- Fixed CLI plugin updates failing repeatedly when the plugin binary was locked by another process. The update is now retried automatically on the next start.
+- Fixed Docker Desktop's interface getting stuck in an indefinite restart loop on machines with certain graphics driver issues, and added a message explaining when the interface can't be displayed due to a hardware compatibility problem.
+- Improved startup experience in the new UI by showing a themed skeleton layout (header, sidebar, footer) immediately instead of a blank window while the app loads.
+- Fixed Docker Desktop sometimes taking five extra minutes to report the engine as stopped when the virtual machine stopped unexpectedly.
+- Fix Kubernetes (kubeadm) missing CNI loopback interface name.
+- Fixed MCP profile tours getting stuck or rendering tooltips off-screen.
+- Fixed a bug where changing the disk image location to a different volume could delete the existing disk image if the operation was interrupted before the copy started.
+- Fixed Docker Compose rebuilding locally-built images on every Resource Saver wake. Fixes [docker/desktop-feedback#507](https://github.com/docker/desktop-feedback/issues/507).
+- Fixed a regression where Hub image search and tag listing would break if the Docker Hub API response included unexpected or changed fields.
+- Fixed an issue where the VM could be unexpectedly shut down when the idle timeout was set to 0.
+
+#### For Mac
+
+- Fixed Docker Desktop adding `~/.docker/bin` to the login-shell PATH even when CLI tools were installed to the system path, which could create a `~/.bash_profile` that hid the user's existing shell environment.
+- Added `kubectl` shell completions. Fixes [docker/for-mac](https://github.com/docker/for-mac/issues/7205)
+
+#### For Windows
+
+- Fixed a bug where switching to Windows containers with the WSL engine still enabled could incorrectly offer to continue without starting the required privileged service.
+- Fixed an issue where uninstalling Docker Desktop left a stale `FeaturesRequireReboot=1` registry key, which could cause unexpected reboot prompts on subsequent installs.
+- Fixed Docker Desktop staying on "Starting..." indefinitely when WSL could not access the disk image location, and reported the access failure with actionable guidance instead of a generic WSL error.
+- Fixed the Windows MSI installer reporting success even when the Docker Desktop service failed to install or start.
+- Fixed a spurious failure when running a command right after switching to Windows containers.
+
 ## 4.90.0
 
 {{< release-date date="2026-09-07" >}}
