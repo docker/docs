@@ -128,3 +128,4 @@ after each failed payment attempt.
 If the invoice remains unpaid after the grace period, the
 subscription downgrades to a free subscription and all paid features are
 disabled.
+
