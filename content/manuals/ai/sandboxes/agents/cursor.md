@@ -7,6 +7,10 @@ description: |
 keywords: docker sandboxes, cursor, cursor agent, ai agent, sbx
 ---
 
+The following instructions apply to local sandboxes. For cloud authentication
+and usage, see [Authenticate cloud agents](../cloud/credentials.md) and
+[Use cloud sandboxes](../cloud/usage.md).
+
 This guide covers authentication, configuration, and usage of Cursor in a
 sandboxed environment.
 

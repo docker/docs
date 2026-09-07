@@ -12,16 +12,16 @@ sandbox scopes.
 
 > [!IMPORTANT]
 >
-> Docker Sandboxes organization policies aren't a central enforcement layer
-> for cloud sandboxes. Organization and team network policy changes aren't
-> continuously applied to cloud sandboxes. Configure and verify cloud rules with
-> `sbx --cloud policy` rather than relying on organization governance.
+> Organization governance is not available for cloud sandboxes in this
+> release. Configure cloud rules with `sbx --cloud policy` and verify network
+> access using connection checks and policy logs.
 
 ## Understand policy scope
 
-The cloud policy service doesn't provide organization or team scopes. An
-account policy supplies the default for cloud sandboxes in the Docker account,
-and a sandbox policy targets one cloud sandbox.
+The cloud CLI supports account and sandbox policy scopes. Your account policy
+supplies the default for cloud sandboxes you create in the Docker account. A
+sandbox policy adds rules for one cloud sandbox. Matching deny rules take
+precedence over allow rules across the applicable policies.
 
 When a local sandbox daemon is available, `sbx --cloud create` reads active
 network rules from its local policy store and copies them into the cloud
@@ -35,9 +35,9 @@ This copy applies only to `sbx --cloud create`. A sandbox created by
 policy, network rules passed to the command, and network access declared by the
 agent or kit.
 
-Define the intended policy in the cloud store and use `sbx --cloud policy ls`
-to verify it after creating the sandbox. Don't treat copied local rules as a
-central enforcement boundary.
+Define the intended policy in the cloud store. After creation, inspect the
+configured rules and [verify connection decisions](#inspect-network-policy).
+Don't treat copied local rules as a central enforcement boundary.
 
 ## Initialize account policy
 
@@ -47,8 +47,10 @@ Initialize the account policy with an allow-all or deny-all default:
 $ sbx --cloud policy init deny-all
 ```
 
-The default applies to cloud sandboxes in the Docker account. You can add
+The default applies to your cloud sandboxes in the Docker account. You can add
 rules after initialization or specify initial rules when creating a sandbox.
+A deny-all default still permits destinations allowed by applicable sandbox
+or agent-kit rules.
 
 ## Add network rules
 
@@ -78,16 +80,22 @@ $ sbx --cloud create --name cloud-project \
 
 ## Inspect network policy
 
-List account-level rules or the rules that apply to one sandbox:
+Inspect your account policy or a sandbox's configured policy:
 
 ```console
 $ sbx --cloud policy ls
 $ sbx --cloud policy ls cloud-project
 ```
 
-Review connection decisions for a sandbox:
+The sandbox view shows its policy document, or your account default when the
+sandbox has no policy document. It does not show the complete combination of
+applicable rules.
+
+To verify enforcement, attempt the connection from the sandbox, then review
+the connection decisions:
 
 ```console
+$ sbx --cloud exec cloud-project curl -I https://api.github.com
 $ sbx --cloud policy log cloud-project
 ```
 
@@ -103,9 +111,12 @@ command with `--help` to see the resource and scope options:
 $ sbx --cloud policy rm network --help
 ```
 
-Reset the account's cloud network policy when you need to clear its default
-and rules:
+Reset your account policy to deny-all and remove its rules:
 
 ```console
 $ sbx --cloud policy reset
 ```
+
+Sandbox-specific policies remain in place and can still grant access. Inspect
+those policies separately. In `sbx` version 0.42.0, the reset command prints
+"reset to allow-all", but the service resets the account policy to deny-all.

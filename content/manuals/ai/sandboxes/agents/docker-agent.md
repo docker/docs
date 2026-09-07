@@ -7,6 +7,10 @@ description: |
 keywords: docker sandboxes, docker agent, openai, anthropic, sbx
 ---
 
+The following instructions apply to local sandboxes. For cloud authentication
+and usage, see [Authenticate cloud agents](../cloud/credentials.md) and
+[Use cloud sandboxes](../cloud/usage.md).
+
 Official documentation: [Docker Agent](/manuals/ai/docker-agent/_index.md)
 
 ## Quick start

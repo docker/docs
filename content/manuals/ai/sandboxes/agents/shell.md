@@ -5,6 +5,10 @@ description: Run an agent-less sandbox with a Bash login shell for manual setup,
 keywords: sandboxes, sbx, shell, agent, manual setup, testing
 ---
 
+The following instructions apply to local sandboxes. For cloud authentication
+and usage, see [Authenticate cloud agents](../cloud/credentials.md) and
+[Use cloud sandboxes](../cloud/usage.md).
+
 `sbx run shell` drops you into a Bash login shell inside a sandbox with no
 pre-installed agent binary. It's useful for installing and configuring
 agents manually, testing custom implementations, or inspecting a running

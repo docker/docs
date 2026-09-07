@@ -7,6 +7,9 @@ aliases:
   - /ai/sandboxes/security/workspace/
 ---
 
+This page describes local sandboxes and their host integrations. For the cloud
+operating model, see [Compare local and cloud sandboxes](../cloud/local-vs-cloud.md).
+
 AI coding agents need to execute code, install packages, and run tools on
 your behalf. Docker Sandboxes run each agent in its own microVM. Five
 isolation layers protect your host: hypervisor, network, Docker Engine,

@@ -6,6 +6,9 @@ description: What a sandbox permits and blocks before you change any settings.
 keywords: docker sandboxes, security defaults, network policy, credentials, shared skills, sbx
 ---
 
+This page describes local sandboxes and their host integrations. For the cloud
+operating model, see [Compare local and cloud sandboxes](../cloud/local-vs-cloud.md).
+
 A sandbox created with `sbx run claude` and no additional flags has the
 following security posture.
 

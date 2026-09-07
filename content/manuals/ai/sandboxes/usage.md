@@ -5,6 +5,9 @@ description: Basic sbx commands for creating, managing, and connecting to Docker
 keywords: docker sandboxes, sbx, usage, run, create, stop, remove, ports, workspaces
 ---
 
+This page describes local sandboxes. For cloud commands, file transfers, ports,
+and expiration, see [Use cloud sandboxes](cloud/usage.md).
+
 Use this page as a command-oriented guide to day-to-day `sbx` operations. For
 scenario-based recommendations, see [Workflow patterns](workflows/).
 

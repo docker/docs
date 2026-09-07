@@ -15,6 +15,9 @@ params:
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
+The procedures on this page use local sandboxes. For cloud template and kit
+usage, see [Customize a cloud sandbox](../cloud/usage.md#customize-a-cloud-sandbox).
+
 Docker Sandboxes offers two ways to customize a sandbox beyond the built-in
 defaults:
 

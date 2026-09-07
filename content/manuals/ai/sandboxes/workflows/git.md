@@ -6,6 +6,12 @@ description: Choose a Git workspace mode and manage branches, parallel tasks, an
 keywords: docker sandboxes, sbx, git, clone mode, direct mode, worktrees, branches, commit signing
 ---
 
+These workspace modes apply to local sandboxes. In cloud sandboxes,
+[transfer files or clone a remote repository](../cloud/usage.md#transfer-files).
+To copy a sandbox filesystem between environments, see
+[Move a sandbox](../cloud/move.md). Host mounts and clone-mode volumes are not
+included in that snapshot.
+
 Sandboxes support three approaches for working with Git repositories. The
 right choice depends on whether you want branch isolation and whether you
 plan to run tasks in parallel:

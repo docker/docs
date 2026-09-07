@@ -8,6 +8,9 @@ aliases:
   - /ai/sandboxes/gpu-passthrough/
 ---
 
+GPU passthrough applies to local sandboxes. Cloud sandboxes cannot access host
+hardware. See [Local and cloud differences](../cloud/local-vs-cloud.md).
+
 > [!IMPORTANT]
 > GPU passthrough is experimental. The `--gpu` flag, the driver bundle, and the
 > setup steps on this page are subject to change.

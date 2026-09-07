@@ -5,6 +5,9 @@ description: Technical architecture of Docker Sandboxes; workspace mounting, sto
 keywords: docker sandboxes, architecture, microVM, workspace mounting, sandbox lifecycle
 ---
 
+This page describes local sandboxes and their host integrations. For the cloud
+operating model, see [Compare local and cloud sandboxes](cloud/local-vs-cloud.md).
+
 This page explains how Docker Sandboxes work under the hood. For the security
 properties of the architecture, see [Sandbox isolation](security/isolation.md).
 

@@ -6,6 +6,9 @@ keywords: docker sandboxes, sbx, registry mirror, docker hub, templates, kits, i
 weight: 50
 ---
 
+These mirror settings apply to the local sandbox runtime. For the cloud
+operating model, see [Local and cloud differences](../cloud/local-vs-cloud.md).
+
 A registry mirror routes Docker Hub pulls for sandbox templates and OCI kits
 through your organization's registry infrastructure. If the mirror meets
 Docker Engine's requirements, Docker inside the sandbox uses it too.

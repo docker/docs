@@ -19,6 +19,9 @@ params:
       text: Experimental
 ---
 
+Sandbox environment files configure local sandboxes. For cloud workflows, see
+[Use cloud sandboxes](../cloud/usage.md).
+
 A sandbox environment file captures the setup for a project in a
 `sbxenv.yaml` file. Share the file with project contributors so they use the
 same agent, tools, resources, and credentials without reproducing CLI flags and

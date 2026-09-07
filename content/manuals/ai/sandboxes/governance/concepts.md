@@ -5,6 +5,10 @@ description: The resource model, rule syntax, and evaluation logic behind Docker
 keywords: docker sandboxes, policy concepts, rule syntax, network rules, filesystem rules, mcp policy, cedar policy, precedence, rule evaluation
 ---
 
+The governance described here applies to local sandboxes. Organization
+governance is not available for cloud sandboxes in this release. See
+[Cloud network policy](../cloud/network-policy.md) for cloud controls.
+
 ## Resource model
 
 Docker sandbox governance is built around two resource types: **policies** and

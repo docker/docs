@@ -2,7 +2,7 @@
 title: Cloud sandboxes
 description: Run Docker Sandboxes on Docker-managed cloud infrastructure and understand the cloud-specific command, storage, and billing model.
 keywords: docker sandboxes, cloud sandboxes, sbx cloud, ai agents, agentic platform
-weight: 15
+weight: 35
 ---
 
 Cloud sandboxes run AI agents on Docker-managed infrastructure instead of your
@@ -26,9 +26,12 @@ workflow.
 
 To use cloud sandboxes, you need:
 
-- The [`sbx` CLI](../install.md)
+- The [`sbx` CLI](../install.md), version 0.42.0 or later
 - A Docker account signed in through `sbx login`
 - An active [Docker Agentic Platform plan](/manuals/subscription-billing/plans/docker-agentic-platform.md)
+
+To subscribe, open [Docker Agentic Platform](https://agentic-platform.docker.com/)
+and sign in. The plan is available for Docker Personal and Docker Pro accounts.
 
 Cloud sandbox compute is metered through the Docker Agentic Platform
 pay-as-you-go plan. Inference charges aren't included. Your model provider
@@ -45,23 +48,50 @@ For example, authenticate Claude Code with Anthropic OAuth:
 $ sbx --cloud secret set anthropic --oauth
 ```
 
-Then create and attach to a cloud sandbox:
+Cloud sandboxes expire after one hour by default and are deleted when they
+expire. Copy out work you want to keep before expiration. For other timeout
+options, see [Configure expiration](usage.md#configure-expiration).
+
+Create a sandbox without attaching, allowing access to GitHub for this example:
 
 ```console
-$ sbx --cloud run claude --name cloud-project
+$ sbx --cloud create --name cloud-project --allow-network github.com:443 claude
 ```
 
-The command creates the sandbox when the name doesn't exist, then opens the
-agent session. Cloud sandboxes don't accept a local workspace path. Copy files
-into the sandbox after creation or clone a repository from inside the sandbox.
-
-Use `sbx --cloud` for later operations on the same sandbox:
+Cloud sandboxes don't accept a local workspace path. Clone the public
+[Welcome to Docker repository](https://github.com/docker/welcome-to-docker)
+inside the sandbox:
 
 ```console
-$ sbx --cloud ls
-$ sbx --cloud exec cloud-project git status
+$ sbx --cloud exec cloud-project git clone \
+    https://github.com/docker/welcome-to-docker.git /home/agent/workspace/project
+```
+
+Attach to the agent:
+
+```console
 $ sbx --cloud attach cloud-project
 ```
+
+Ask Claude to inspect `/home/agent/workspace/project` and write a description
+of the application to `/home/agent/workspace/review.md`. When the file is ready,
+press `Ctrl+\` to detach and leave the agent running.
+
+Copy the result to your machine:
+
+```console
+$ sbx --cloud cp cloud-project:/home/agent/workspace/review.md ./review.md
+```
+
+Read the result, then remove the sandbox when you're finished:
+
+```console
+$ sbx --cloud rm cloud-project
+```
+
+Removal deletes files stored only in the sandbox. For your own projects, see
+[Transfer files](usage.md#transfer-files) and
+[Authenticate cloud agents](credentials.md) before cloning private repositories.
 
 ## Learn more
 

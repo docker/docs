@@ -7,6 +7,9 @@ keywords: sandboxes, sbx, templates, images, dockerfile, snapshot, custom enviro
 
 {{< summary-bar feature_name="Docker Sandboxes sbx" >}}
 
+The procedures on this page use local sandboxes. For cloud template and kit
+usage, see [Customize a cloud sandbox](../cloud/usage.md#customize-a-cloud-sandbox).
+
 Every sandbox is customizable — agents install packages, pull images, and
 configure tools as they work, and those changes persist for the sandbox's
 lifetime. Templates capture a configured environment into a reusable image
