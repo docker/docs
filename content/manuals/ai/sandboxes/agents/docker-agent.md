@@ -17,8 +17,11 @@ Create a sandbox and run Docker Agent for a project directory:
 $ sbx run docker-agent ~/my-project
 ```
 
-The workspace parameter defaults to the current directory, so
-`sbx run docker-agent` from inside your project works too.
+`sbx run docker-agent` defaults the workspace to the current directory, so you
+can run it from inside your project.
+
+To create a [mountless sandbox](../usage.md#choose-a-workspace), use
+`sbx create` without a workspace path, then attach by name.
 
 ## Authentication
 
@@ -60,7 +63,7 @@ as the `run` subcommand or a config file — it replaces the defaults, so includ
 `run --yolo` yourself:
 
 ```console
-$ sbx run docker-agent -- run --yolo agent.yml
+$ sbx run --name <sandbox-name> -- run --yolo agent.yml
 ```
 
 ## Base image

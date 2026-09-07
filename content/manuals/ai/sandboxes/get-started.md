@@ -8,8 +8,8 @@ keywords: sandbox, sbx, get started, credentials, clone mode, network policy
 
 Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
 sandbox gets its own Docker daemon, filesystem, and network — the agent can
-build containers, install packages, and modify files without touching your host
-system.
+build containers, install packages, and modify files without accessing host
+resources beyond those you share.
 
 This page walks through your first session: run an agent in a sandbox, see how
 the sandbox isolates it, control what it can reach on the network, and clean
@@ -99,7 +99,8 @@ Each row shows a sandbox's name, the agent running in it, its status, any
 workspace — the host directory shared into the sandbox. That workspace is the
 one part of your machine the agent can see.
 
-By default, the workspace is shared read-write, so the agent and your host see
+When you run `sbx run` from a project directory without passing a workspace
+path, the current directory is mounted read-write. The agent and your host see
 the same files. Edits the agent makes to your project appear in your working
 tree as it writes them, and you review them as an ordinary Git diff before
 committing.
