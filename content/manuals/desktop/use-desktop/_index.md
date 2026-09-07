@@ -20,7 +20,8 @@ In addition, the Docker Desktop Dashboard lets you:
 - Be notified of new releases, installation progress updates, and more in the **Notifications center**. Select the bell icon in the bottom-right corner of the Docker Desktop Dashboard to access the notification center.
 - Access the **Learning center** from the Dashboard header. It helps you get started with quick in-app walkthroughs and provides other resources for learning about Docker. 
 
-  For a more detailed guide about getting started, see [Get started](/get-started/introduction/_index.md).
+  For a guided introduction, see
+  [Build and share a containerized application](/get-started/tutorials/run-an-app.md).
 - Access [Docker Hub](/manuals/docker-hub/_index.md) to search, browse, pull, run, or view details
   of images.
 - Navigate to [Docker Extensions](/manuals/extensions/_index.md) if you have enabled it.
