@@ -80,20 +80,19 @@ To remove your default payment method, first set a different payment method as d
 > [!TIP]
 > Do you need to pay by invoice? [Upgrade to a Docker Business or Docker Team plan](https://www.docker.com/pricing?ref=Docs&refAction=DocsBillingPaymentMethod) and choose the annual subscription.
 
-Pay by invoice requires you to pay upfront for your first subscription period using a payment card or ACH bank transfer. At renewal time, instead of automatic payment, you'll receive an invoice via
-email that you must pay manually.
+Pay by invoice is available for annual Docker Team and Docker Business subscriptions. Pay by invoice may require enablement by Docker Sales before it appears in Docker Home. For the first subscription period, you pay using a payment card or ACH bank transfer. At renewal time, instead of automatic payment, you'll receive an invoice by email that you must pay manually.
 
 Follow these steps to enable or disable pay by invoice:
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your
-   organization.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your organization.
 2. Select **Billing**, then **Payment methods**.
-3. Select **Pay by invoice**, then select the pay by invoice toggle to enable or disable.
+3. Select **Pay by invoice**, then use the pay by invoice toggle to enable or disable.
 4. Confirm your billing contact details. If you need to change them, select
    **Change** and enter your new details.
 
-Pay by invoice is not available for
-subscription upgrades or changes.
+If the pay by invoice option isn't available in Docker Home, contact your Docker sales representative.
+
+Pay by invoice isn't available for subscription upgrades or changes.
 
 ## Verify a bank account
 
@@ -138,10 +137,7 @@ disabled.
 > [upgrade to a Docker Team or Docker Business plan](https://www.docker.com/pricing?ref=Docs&refAction=DocsBillingPaymentMethod)
 > and choose an annual subscription.
 
-Pay by invoice requires upfront payment for your first subscription period
-using a payment card or ACH bank transfer. At renewal, Docker emails you an
-invoice to pay manually instead of charging your default payment method.
+Pay by invoice is a payment method for annual Docker Team and Docker Business subscriptions. If pay by invoice isn't already enabled on your account, contact your Docker sales representative.
 
-- To add pay by invoice as a payment method, contact your Docker sales representative.
-- You can only pay by invoice by choosing it as a payment method when subscribing to Docker Team or Docker Business plans. 
+- You can only pay by invoice by choosing it as a payment method when subscribing to Docker Team or Docker Business plans.
 - Pay by invoice isn't available for subscription upgrades or changes.
