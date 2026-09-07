@@ -39,8 +39,9 @@ the agent, workspaces, tools, resources, credentials, and ports so contributors
 can start a consistent environment without reproducing CLI flags and setup
 steps. See [Sandbox environment files](../configuration/environment-files.md).
 
-You can also import skills from supported host agents into a persistent store
-shared with new sandboxes. See [Share agent skills](agent-skills.md).
+You can also add skills from Git repositories or import them from supported
+host agents into a persistent store shared with new sandboxes. See
+[Share agent skills](agent-skills.md).
 
 For unattended jobs, use headless authentication and manage the sandbox
 lifecycle from scripts. See [Run sandboxes in CI](automation.md).

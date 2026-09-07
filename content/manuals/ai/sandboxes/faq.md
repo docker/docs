@@ -149,10 +149,12 @@ settings, and other files under directories such as `~/.claude` remain on the
 host. Project-level configuration in the working directory remains available
 inside the sandbox.
 
-Shared agent skills are the exception. Run `sbx skills import` to copy skills
-from supported host directories into a persistent store shared with
-sandboxes. See [Share agent skills](workflows/agent-skills.md) for the
-supported directories, mount behavior, and per-sandbox opt-out.
+Shared agent skills are the exception. Use `sbx skills add` to install skills
+from a Git repository, or run `sbx skills import` to copy skills from supported
+host directories. `sbx` keeps the skills in a persistent store shared with
+sandboxes. See [Share agent skills](workflows/agent-skills.md) for repository
+management, supported host directories, mount behavior, and per-sandbox
+opt-out.
 
 Keep project-specific skills and other agent configuration in the project
 itself. This versions the configuration alongside the code. Don't use symlinks
