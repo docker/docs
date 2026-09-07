@@ -129,7 +129,7 @@ sandbox:
     run: [claude]
 ```
 
-Run it with `sbx run claude-safe --kit ./claude-safe/`. See
+Run it with `sbx run ./claude-safe/`. See
 [Sandbox kits](customize/kits.md#sandbox-kits) for the full pattern.
 
 ## How do I know if my agent is running in a sandbox?
