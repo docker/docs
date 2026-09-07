@@ -341,7 +341,8 @@ $ sbx run --publish 8080:3000 --name my-sandbox claude
 ```
 
 For an existing sandbox, use [`sbx ports`](/reference/cli/sbx/ports/) to
-forward traffic from your host:
+forward traffic from your host. Publishing a port on a stopped local sandbox
+starts it first:
 
 ```console
 $ sbx ports my-sandbox --publish 8080:3000
@@ -363,7 +364,7 @@ them in detail.
 ```console
 $ sbx ls
 SANDBOX         AGENT   STATUS   PORTS                    WORKSPACE
-my-sandbox      claude  running  127.0.0.1:8080->3000/tcp /home/user/proj
+my-sandbox      claude  running  127.0.0.1:8080->3000/tcp4 /home/user/proj
 ```
 
 To stop forwarding a port:
