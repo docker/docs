@@ -45,6 +45,7 @@ CLI, and common development tools like Node.js, Python, Go, and Java.
 | `codex`               | [OpenAI Codex](https://github.com/openai/codex)                      |
 | `copilot`             | [GitHub Copilot](https://github.com/github/copilot-cli)              |
 | `cursor-agent`        | [Cursor](https://cursor.com/cli)                                     |
+| `devin`               | [Devin CLI](https://docs.devin.ai/work-with-devin/devin-cli)         |
 | `docker-agent`        | [Docker Agent](https://github.com/docker/docker-agent)               |
 | `droid`               | [Droid](https://www.factory.ai)                                      |
 | `gemini`              | [Gemini CLI](https://github.com/google-gemini/gemini-cli)            |

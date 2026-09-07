@@ -3,7 +3,7 @@ title: Share agent skills
 linkTitle: Agent skills
 weight: 40
 description: Add skills from Git repositories or import them from supported host agents into a store shared with Docker Sandboxes.
-keywords: docker sandboxes, sbx, agent skills, shared skills, git repository, claude code, codex, copilot, cursor, droid
+keywords: docker sandboxes, sbx, agent skills, shared skills, git repository, claude code, codex, copilot, cursor, devin, droid
 ---
 
 Shared agent skills let you install skills from Git repositories or import
@@ -83,7 +83,7 @@ store at the path the agent reads inside the sandbox.
 | Agent       | Host source         | Sandbox mount target          |
 | ----------- | ------------------- | ----------------------------- |
 | Claude Code | `~/.claude/skills`  | `/home/agent/.claude/skills`  |
-| Codex       | `~/.agents/skills`  | `/home/agent/.agents/skills`  |
+| Codex and Devin | `~/.agents/skills` | `/home/agent/.agents/skills` |
 | Copilot     | `~/.copilot/skills` | `/home/agent/.copilot/skills` |
 | Cursor      | `~/.cursor/skills`  | `/home/agent/.cursor/skills`  |
 | Droid       | `~/.factory/skills` | `/home/agent/.factory/skills` |
