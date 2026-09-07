@@ -57,7 +57,7 @@ local MCP servers as trusted host integrations.
 
 The following diagram shows a sandbox with a directly mounted workspace:
 
-![Sandbox security model showing the hypervisor boundary between the sandbox VM and the host system. A directly mounted workspace directory is shared read-write. The agent process, Docker Engine, packages, and VM filesystem are inside the VM. Host filesystem, processes, Docker Engine, and network are outside the VM and not accessible. A proxy enforces allow/deny policies and injects credentials into outbound requests.](../images/sbx-security.png)
+![Docker Sandbox security model](../images/sbx-security.png)
 
 ## Isolation layers
 
