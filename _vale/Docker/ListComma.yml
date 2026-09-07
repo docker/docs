@@ -1,6 +1,5 @@
 extends: existence
 message: Don’t add commas (,) or semicolons (;) to the ends of list items.
-link: https://docs.docker.com/contribute/style/grammar/#lists
 level: warning
 scope: list
 raw: '[,;]$'
