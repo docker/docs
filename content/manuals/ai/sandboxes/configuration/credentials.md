@@ -274,11 +274,31 @@ interact with GitHub APIs on your behalf.
 
 ### SSH agent
 
-If your host has an SSH agent and `SSH_AUTH_SOCK` is set, Docker Sandboxes
-forwards the agent into the sandbox and sets `SSH_AUTH_SOCK` there. The
-private keys stay on your host. Processes inside the sandbox can request
-signatures from the forwarded agent, but they can't read or copy the private
-key.
+SSH agent forwarding is enabled by default. When `SSH_AUTH_SOCK` is set,
+Docker Sandboxes uses the value from the client that creates, starts, or joins
+each sandbox. It forwards that agent into the sandbox and sets `SSH_AUTH_SOCK`
+there.
+
+If your agent exposes a stable socket path, such as the 1Password SSH agent,
+configure that path for every sandbox:
+
+```console
+$ sbx settings set ssh.agentSocketPath "$SSH_AUTH_SOCK"
+```
+
+An empty `ssh.agentSocketPath`, which is the default, uses each client's
+current `SSH_AUTH_SOCK` instead. The `ssh.agentForwardingEnabled` setting is a
+boolean that turns forwarding on or off.
+
+After changing forwarding or the socket selection, restart the daemon so
+existing sandboxes use the new configuration:
+
+```console
+$ sbx daemon restart
+```
+
+The private keys stay on your host. Processes inside the sandbox can request
+signatures from the forwarded agent, but they can't read or copy a private key.
 
 Use SSH agent forwarding for Git operations over SSH and SSH-based commit
 signing. The signing key must be loaded in the host SSH agent for sandboxed
