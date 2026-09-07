@@ -231,6 +231,15 @@ manifests as an error response from the Docker daemon and a Docker Desktop start
 For a temporary workaround, uninstall the anti-virus software, or
 add Docker to the exclusions/exceptions in your antivirus software.
 
+Some anti-virus software, such as Avast, also has its own hardware-assisted
+virtualization or hardened mode that claims exclusive access to
+Hyper-V, which blocks Docker Desktop and WSL from using it. If your Docker
+Desktop start failure includes an error such as
+`Wsl/Service/RegisterDistro/CreateVm/HCS/ERROR_NOT_SUPPORTED`, disable this
+feature in your anti-virus software. For example, in Avast, go to **Menu** >
+**Settings** > **Troubleshooting** and clear **Enable hardware-assisted
+virtualization**.
+
 ### Permissions errors on data directories for shared volumes
 
 #### Cause 
@@ -342,7 +351,8 @@ Portability of the scripts is not affected as Linux treats multiple `/` as a sin
 #### Error message
 
 A typical error message is "Docker Desktop - Unexpected WSL error" mentioning the error code
-`Wsl/Service/RegisterDistro/CreateVm/HCS/HCS_E_HYPERV_NOT_INSTALLED`. Manually executing `wsl` commands
+`Wsl/Service/RegisterDistro/CreateVm/HCS/HCS_E_HYPERV_NOT_INSTALLED` or
+`Wsl/Service/RegisterDistro/CreateVm/HCS/ERROR_NOT_SUPPORTED`. Manually executing `wsl` commands
 also fails with the same error code.
 
 #### Cause
