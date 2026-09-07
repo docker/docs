@@ -51,7 +51,7 @@ policies.
 
 This guide covers the following Docker features:
 
-- [Organizations](/manuals/admin/organization/_index.md): The core structure
+- [Organizations](/manuals/accounts/organization/_index.md): The core structure
   for managing your Docker environment, grouping users, teams, and image
   repositories. Your organization was created with your subscription and is
   managed by one or more owners. Users signed into the organization are
@@ -60,7 +60,7 @@ This guide covers the following Docker features:
   By default, Docker Desktop doesn't require sign-in. You can configure
   settings to enforce this and ensure your developers sign in to your
   Docker organization.
-- [SSO](/manuals/enterprise/security/single-sign-on/_index.md): Without SSO,
+- [SSO](/manuals/security/authentication/single-sign-on/_index.md): Without SSO,
   user management in a Docker organization is manual. Setting
   up an SSO connection between your identity provider and Docker ensures
   compliance with your security policy and automates user provisioning. Adding
@@ -130,7 +130,7 @@ files to be distributed to developer machines. Use MDM tools to deploy these con
 ### Identify Docker organizations
 
 Some companies may have more than one
-[Docker organization](/manuals/admin/organization/_index.md) created. These
+[Docker organization](/manuals/accounts/organization/_index.md) created. These
 organizations may have been created for specific purposes, or may not be
 needed anymore.
 
@@ -185,8 +185,8 @@ settings, along with your chosen method for [enforcing sign-in](/manuals/enterpr
 ### Manage your organizations
 
 If you have more than one organization, consider either [consolidating them
-into one organization](/manuals/admin/organization/setup/orgs.md) or creating a
-[Docker company](/manuals/admin/company/_index.md) to manage multiple
+into one organization](/manuals/accounts/organization/setup/orgs.md) or creating a
+[Docker company](/manuals/accounts/company/_index.md) to manage multiple
 organizations.
 
 ### Begin setup
@@ -196,9 +196,9 @@ organizations.
 Single sign-on (SSO) lets developers authenticate using their identity
 providers (IdPs) to access Docker. SSO is available for a whole company and all associated organizations, or an individual organization that has a Docker
 Business subscription. For more information, see the
-[documentation](/manuals/enterprise/security/single-sign-on/_index.md).
+[documentation](/manuals/security/authentication/single-sign-on/_index.md).
 
-You can also enable [SCIM](/manuals/enterprise/security/provisioning/scim/_index.md)
+You can also enable [SCIM](/manuals/security/provisioning/scim/_index.md)
 for further automation of provisioning and deprovisioning of users.
 
 #### Set up Docker product entitlements included in the subscription
@@ -252,7 +252,7 @@ SSO and SCIM setup.
 > [!IMPORTANT]
 >
 > Some users may need CLI based logins to Docker Hub, and for this they will
-> need a [personal access token (PAT)](/manuals/security/access-tokens.md).
+> need a [personal access token (PAT)](/manuals/security/access-tokens/personal-access-tokens.md).
 
 ### Test Registry Access Management and Image Access Management
 
@@ -312,7 +312,7 @@ that matches your verified domain must sign in using your SSO connection. Make
 sure the Identity provider groups associated with your SSO connection cover all
 the developer groups that you want to have access to the Docker subscription.
 
-For instructions on how to enforce SSO, see [Enforce SSO](/manuals/enterprise/security/single-sign-on/connect.md).
+For instructions on how to enforce SSO, see [Enforce SSO](/manuals/security/authentication/single-sign-on/connect.md).
 
 ### Deploy configuration settings and enforce sign-in to users
 
@@ -325,6 +325,6 @@ for Docker.
 
 To continue optimizing your Docker environment:
 
-- Review your [organization's usage data](/manuals/admin/insights.md) to track adoption
+- Review your [organization's usage data](/manuals/accounts/organization/insights.md) to track adoption
 - Monitor [Docker Scout findings](/manuals/scout/explore/analysis.md) for security insights
-- Explore [additional security features](/manuals/enterprise/security/_index.md) to enhance your configuration
+- Explore [additional security features](/manuals/enterprise/security/hardened-desktop/_index.md) to enhance your configuration

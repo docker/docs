@@ -155,7 +155,9 @@ When a request fails — for example because the model returns an error or the `
 
 ## Authentication
 
-The chat server has **no authentication by default**. To require a Bearer
+The chat server defaults to loopback binding. A non-loopback `--listen` address requires `--api-key`, `--api-key-env`, or the explicit `--insecure-no-auth` override. An environment variable selected by `--api-key-env` must be set and non-empty.
+
+To require a Bearer
 token, pass `--api-key` (literal value) or `--api-key-env` (name of an
 environment variable that holds the value):
 
@@ -170,7 +172,11 @@ protected once a key is set.
 > [!WARNING]
 > **Public exposure**
 >
-> The default listen address is `127.0.0.1:8083`. If you bind to a non-loopback address, always set `--api-key` or `--api-key-env` — there is no other authentication layer.
+> The default listen address is `127.0.0.1:8083`. Non-loopback binding is rejected unless `--api-key`, `--api-key-env`, or `--insecure-no-auth` is supplied. Use the insecure override only behind a trusted authentication boundary.
+
+## Tool safety
+
+The chat server resolves its safety policy in this order: `--safety`, agent configuration, runtime configuration, then `restricted`. Cached conversations retain the more restrictive of their prior policy and the server policy, so a continuation cannot regain permissions after the server policy becomes stricter.
 
 ## CORS
 
@@ -194,7 +200,9 @@ docker agent serve chat <agent-file>|<registry-ref> [flags]
 | `-l, --listen <addr>`         | `127.0.0.1:8083`   | Address to listen on.                                                                                             |
 | `--cors-origin <origin>`      | (none)             | Allowed CORS origin (e.g. `https://example.com`). Empty disables CORS.                                            |
 | `--api-key <token>`           | (none)             | Required Bearer token clients must present (`Authorization: Bearer <token>`). Empty disables auth.                |
-| `--api-key-env <name>`        | (none)             | Read the API key from this environment variable instead of the command line.                                      |
+| `--api-key-env <name>`        | (none)             | Read the required API key from this non-empty environment variable.                                               |
+| `--insecure-no-auth`          | `false`            | Permit unauthenticated non-loopback binding. Use only behind a trusted authentication boundary.                  |
+| `--safety <policy>`           | `restricted`       | Tool safety policy. CLI value overrides agent/runtime configuration.                                               |
 | `--max-request-size <bytes>`  | `1048576` (1 MiB)  | Maximum request body size in bytes. Requests whose body exceeds this limit are rejected with HTTP 413 (Request Entity Too Large) — see [Troubleshooting: HTTP 413](../../community/troubleshooting/index.md#http-413-request-body-too-large) if you hit this. |
 | `--request-timeout <dur>`     | `5m`               | Per-request timeout (covers model + tool calls + streaming).                                                      |
 | `--conversations-max <n>`     | `0`                | Cache up to N conversations server-side, keyed by `X-Conversation-Id`. `0` disables — clients must resend history. |

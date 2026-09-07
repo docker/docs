@@ -169,7 +169,7 @@ example: |4-
       sbx mcp add fetch --local --url https://registry.modelcontextprotocol.io/v0/servers/fetch-mcp/versions/latest
 
       # Private-network endpoint (host resolves to a private address) — opt out of the SSRF guard
-      sbx mcp add internal --url https://maas.prd.astra.example.com/mcp --skip-ssrf-check
+      sbx mcp add internal --url https://private.example.com/mcp --skip-ssrf-check
 
       # Remote endpoint with a hand-supplied OAuth override (server publishes no
       # well-known OAuth metadata): --oauth-authorization-server is a path or

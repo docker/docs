@@ -17,6 +17,41 @@ params:
   prerequisites: None
 aliases:
   - /guides/getting-started/
+  - /guides/get-started/
+  - /get-started/hands-on-overview/
+  - /guides/workshop/
+  - /get-started/workshop/
+  - /get-started/part2/
+  - /get-started/02_our_app/
+  - /guides/workshop/02_our_app/
+  - /guides/walkthroughs/containerize-your-app/
+  - /get-started/workshop/02_our_app/
+  - /get-started/03_updating_app/
+  - /guides/workshop/03_updating_app/
+  - /get-started/workshop/03_updating_app/
+  - /get-started/part3/
+  - /get-started/04_sharing_app/
+  - /guides/workshop/04_sharing_app/
+  - /get-started/workshop/04_sharing_app/
+  - /get-started/05_persisting_data/
+  - /guides/workshop/05_persisting_data/
+  - /get-started/workshop/05_persisting_data/
+  - /guides/walkthroughs/access-local-folder/
+  - /get-started/06_bind_mounts/
+  - /guides/workshop/06_bind_mounts/
+  - /get-started/workshop/06_bind_mounts/
+  - /get-started/07_multi_container/
+  - /guides/workshop/07_multi_container/
+  - /get-started/workshop/07_multi_container/
+  - /get-started/08_using_compose/
+  - /guides/workshop/08_using_compose/
+  - /get-started/workshop/08_using_compose/
+  - /get-started/09_image_best/
+  - /guides/workshop/09_image_best/
+  - /get-started/workshop/09_image_best/
+  - /get-started/11_what_next/
+  - /guides/workshop/10_what_next/
+  - /get-started/workshop/10_what_next/
 ---
 
 ## About this series

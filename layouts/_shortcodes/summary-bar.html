@@ -23,12 +23,13 @@
     "Retired" "archive-box"
   }}
   {{ $requiresIcon := "arrow-down-circle" }}
-  {{ $forIcon := "shield-check" }}
+  {{ $forIcons := dict
+    "Administrators" "shield-check"
+    "Individuals" "user-circle"
+  }}
 
 
-  <div
-    class="not-prose summary-bar"
-  >
+  <div class="not-prose summary-bar">
     {{ with $feature.subscription }}
       <div class="flex flex-wrap gap-1">
         <span class="font-bold">Subscription:</span>
@@ -75,9 +76,9 @@
       <div class="flex flex-wrap gap-1">
         <span class="font-bold">For:</span>
         <span>{{ . }}</span>
-        {{ if eq . "Administrators" }}
+        {{ with index $forIcons . }}
           <span class="icon-svg icon-sm">
-            {{ partialCached "icon" $forIcon $forIcon }}
+            {{ partialCached "icon" . . }}
           </span>
         {{ end }}
       </div>

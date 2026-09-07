@@ -80,6 +80,34 @@ Images loaded to the image store are available to `docker run` immediately
 after the build finishes, and you'll see them in the list of images when you run
 the `docker images` command.
 
+#### Load results from Docker Build Cloud
+
+Builds that use the [cloud driver](/manuals/build/builders/drivers/cloud.md) run
+on remote Docker Build Cloud workers. You can still load an image into Docker
+Engine so that it's available to `docker run` and `docker images` without first
+pushing it to a registry.
+
+The [target Docker context](/manuals/engine/manage-resources/contexts.md)
+determines which Docker Engine image store receives the image. A local context
+loads it into a local image store. A remote context loads it into the remote
+Docker daemon's image store.
+
+When you don't specify an output, Buildx leaves an untagged build result in the
+cloud build cache and doesn't load it into Docker Engine. If you use `--tag`,
+Buildx automatically loads the image when the build targets a single platform
+and runs on one cloud node. Use `--load` to request loading explicitly. The
+`--load` flag is shorthand for `--output type=docker`.
+
+To leave a tagged result in the build cache, use `--output type=cacheonly`.
+Setting `default-load=false` doesn't turn off automatic loading for a tagged
+cloud build with no explicit output.
+
+Buildx uses the standard exporter path when direct loading isn't available.
+This includes multi-node or multi-platform builds, requests for more than one
+distinct image output, outputs targeting different Docker contexts, and
+outputs written to a file, standard output, or a directory. The standard path
+also applies if the target context doesn't support direct loading.
+
 ### Push to registry
 
 To push a built image to a container registry, you can use the `registry` or
@@ -195,7 +223,7 @@ different exporters:
 
 - The `registry` exporter to push the image to a registry
 - The `local` exporter to extract the build results to the local filesystem
-- The `--load` flag (a shorthand for the `image` exporter) to load the results to the local image store.
+- The `--load` flag (a shorthand for the `docker` exporter) to load the results to the local image store.
 
 ```console
 $ docker buildx build \

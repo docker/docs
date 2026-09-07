@@ -27,6 +27,8 @@ toolsets:
       X-Tenant: "acme"
 ```
 
+The `Authorization` header shown above authenticates to endpoints served with `docker agent serve a2a --auth-token`.
+
 ## Properties
 
 | Property   | Type             | Required | Description                                                                                              |

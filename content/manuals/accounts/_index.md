@@ -1,63 +1,55 @@
 ---
-title: Docker accounts
+title: Accounts
 description: >
-  Learn what a Docker account is, how Docker IDs, emails, and sign-in methods
-  relate, and how individual accounts connect to organizations
-keywords: accounts, docker ID, username, email, Google, GitHub, sign-in,
-  authentication, account management, docker account, individual account,
-  organization account, account types, Docker Hub, SSO, deactivate account
+  Manage Docker individual accounts and organization administration, including
+  members, teams, and companies.
+keywords: accounts, admin, Docker ID, organization, company, Docker Home,
+  account management
 weight: 10
 params:
   sidebar:
-    group: Platform
+    group: Accounts and admin
 grid:
-  - title: Create an account
-    description: Get started with Docker and create an account.
-    icon: finger-print
-    link: /accounts/create-account/
-  - title: Manage account
-    description: Learn how to manage the settings for your account.
-    icon: cog
-    link: /accounts/manage-account/
-  - title: Personal access tokens
-    description: Learn how to create and manage access tokens for your account.
-    icon: lock-closed
-    link: /security/access-tokens/
-  - title: Set up two-factor authentication
-    description: Add an extra layer of authentication to your Docker account.
-    link: /security/2fa/
-    icon: device-phone-mobile
-  - title: Organization overview
-    description: Learn how to create and manage Docker organizations.
+  - title: Docker individual accounts
+    description: Create and manage your Docker ID, email, and sign-in methods.
+    icon: user-circle
+    link: /accounts/individual/
+  - title: Organization accounts
+    description: Manage members, teams, and organization settings.
     icon: building-storefront
-    link: /admin/organization/
-  - title: Account FAQs
-    description: Explore frequently asked questions about Docker accounts.
+    link: /accounts/organization/
+  - title: Company accounts
+    description: Group multiple organizations for centralized administration.
+    icon: building-office-2
+    link: /accounts/company/
+  - title: Security
+    description: Authentication, tokens, and roles for accounts and organizations.
+    icon: lock-closed
+    link: /security/
+  - title: Subscription and billing
+    description: Plans, payments, and invoices for your account or organization.
+    icon: credit-card
+    link: /subscription-billing/
+  - title: FAQs
+    description: Common questions about accounts, billing, and security.
     icon: question-mark-circle
-    link: /accounts/general-faqs/
+    link: /faqs/
 ---
 
-A Docker account is how Docker identifies you. Use it to access products like
-Docker Hub and Docker Desktop, manage settings, and join organizations.
+A Docker account identifies you and lets you access Docker products. You
+manage it in [Docker Home](https://app.docker.com/). Docker has two
+primary account types: individual and organization. A company groups
+multiple organizations.
 
-Docker has two primary account types: individual and organization. You create
-and administer organizations with your individual account. For organization
-accounts, see [Organizations](/manuals/admin/organization/_index.md). For
-organizations and companies, see [Administration](/manuals/admin/_index.md).
+| Account type | What it is | Who it's for |
+| --- | --- | --- |
+| Individual | A Docker ID with personal settings, Hub repositories, and sign-in methods | A person |
+| Organization | A shared workspace for members, teams, and repositories | Teams on Docker Team or Business |
+| Company | Multiple organizations under centralized administration | Docker Business subscribers |
 
-## Docker ID, email, and sign-in
-
-When you create an account, you choose a Docker ID and a sign-in method.
-Docker also ties a verified email to the account.
-
-- Docker account: Associates your plans, Hub repositories, and account
-  settings.
-- Docker ID: A unique username that identifies you.
-- Email: How Docker contacts you for notifications and security-related
-  communications.
-- Sign-in method: Email and password,
-  [single sign-on (SSO)](/manuals/enterprise/security/single-sign-on/_index.md),
-  Google, or GitHub.
+You always sign in with your individual account, then work in the
+organizations you own or belong to. Those organizations sit under a
+company when you administer more than one.
 
 ## Next steps
 

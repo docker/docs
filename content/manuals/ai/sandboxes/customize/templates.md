@@ -62,15 +62,18 @@ default.
 The agent containers created from the `-docker` templates run in privileged
 mode inside the microVM (not on your host), with a dedicated block volume at
 `/var/lib/docker`, and `dockerd` starts automatically inside the sandbox. The
-block volume defaults to 50 GB and uses a sparse file, so it only consumes
+block volume defaults to 10 GB and uses a sparse file, so it only consumes
 disk space as Docker writes to it.
 
-To override the volume size, set the `DOCKER_SANDBOXES_DOCKER_SIZE`
-environment variable to a size string before starting the sandbox:
+To change the volume size for a sandbox, set
+`DOCKER_SANDBOXES_DOCKER_SIZE` when you create it:
 
 ```console
-$ DOCKER_SANDBOXES_DOCKER_SIZE=10g sbx run claude
+$ DOCKER_SANDBOXES_DOCKER_SIZE=20g sbx run claude
 ```
+
+The volume size must be at least 512 MiB. The environment variable doesn't
+resize existing volumes.
 
 Use the non-Docker variant if you don't need to build or run containers
 inside the sandbox and want a lighter, non-privileged environment. Specify
@@ -116,7 +119,9 @@ $ docker build -t my-org/my-template:v1 --push .
 > [!NOTE]
 > The Docker daemon used by Docker Sandboxes pulls templates from a
 > registry directly; it doesn't share the image store of your local Docker
-> daemon on the host.
+> daemon on the host. To route Docker Hub image pulls through your
+> organization's registry infrastructure, configure a
+> [registry mirror](../configuration/registry-mirror.md).
 
 > [!IMPORTANT]
 > For Docker Hub, `sbx` reuses your `sbx login` session to pull private

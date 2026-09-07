@@ -1,3 +1,6 @@
+2FA:
+  subscription: [Personal, Pro]
+  for: Individuals
 AI Governance Audit Logs:
   subscription: [AI Governance]
   requires: Docker Sandboxes [0.39.0](/manuals/ai/sandboxes/release-notes.md) or later
@@ -261,6 +264,10 @@ MSI installer:
   for: Administrators
 OATs:
   subscription: [Team, Business]
+  for: Administrators
+PATs:
+  subscription: [Personal, Pro]
+  for: Individuals
 Pay by invoice:
   subscription: [Team, Business]
 PKG installer:

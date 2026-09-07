@@ -273,11 +273,12 @@ For more information about this workaround, refer to the
 
 ### Local cache
 
-> [!WARNING]
+> [!NOTE]
 >
-> At the moment, old cache entries aren't deleted, so the cache size [keeps growing](https://github.com/docker/build-push-action/issues/252).
-> The following example uses the `Move cache` step as a workaround (see [`moby/buildkit#1896`](https://github.com/moby/buildkit/issues/1896)
-> for more info).
+> Exporting to a directory that already holds a cache leaves the blobs of the
+> previous export behind, so the directory grows with every run. The following
+> example passes `reset=true` to delete them. This parameter requires Buildx
+> version 0.35.0 or later.
 
 You can also leverage [GitHub cache](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows)
 using the [actions/cache](https://github.com/actions/cache) and [local cache exporter](../../cache/backends/local.md)
@@ -316,13 +317,5 @@ jobs:
           push: true
           tags: user/app:latest
           cache-from: type=local,src=${{ runner.temp }}/.buildx-cache
-          cache-to: type=local,dest=${{ runner.temp }}/.buildx-cache-new,mode=max
-
-      - # Temp fix
-        # https://github.com/docker/build-push-action/issues/252
-        # https://github.com/moby/buildkit/issues/1896
-        name: Move cache
-        run: |
-          rm -rf ${{ runner.temp }}/.buildx-cache
-          mv ${{ runner.temp }}/.buildx-cache-new ${{ runner.temp }}/.buildx-cache
+          cache-to: type=local,dest=${{ runner.temp }}/.buildx-cache,mode=max,reset=true
 ```

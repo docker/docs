@@ -5,7 +5,7 @@ description: Security features that help organizations secure developer environm
 keywords: security, hardened desktop, enhanced container isolation, registry access management, settings management, admins, docker desktop, image access management, air-gapped containers
 tags: [admin]
 aliases:
- - /security/for-admins/hardened-desktop/
+  - /security/for-admins/hardened-desktop/
 grid:
   - title: "Settings Management"
     description: Learn how Settings Management can secure your developers' workflows.
@@ -31,7 +31,6 @@ grid:
     description: Control whether organization members can push content to their personal namespaces.
     icon: folder-open
     link: /enterprise/security/hardened-desktop/namespace-access/
-weight: 60
 ---
 
 {{< summary-bar feature_name="Hardened Docker Desktop" >}}

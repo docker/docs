@@ -140,6 +140,7 @@ to provide full compatibility, some functionality may not be available.
 
 | Docker version | Maximum API version                          | Minimum API version                          | Change log                                                         |
 |:---------------|:---------------------------------------------|:---------------------------------------------|:-------------------------------------------------------------------|
+| 29.8           | [1.55](/reference/api/engine/version/v1.56/) | [1.40](/reference/api/engine/version/v1.40/) | [changes](/reference/api/engine/version-history/#v156-api-changes) |
 | 29.7           | [1.55](/reference/api/engine/version/v1.55/) | [1.40](/reference/api/engine/version/v1.40/) | [changes](/reference/api/engine/version-history/#v155-api-changes) |
 | 29.6           | [1.55](/reference/api/engine/version/v1.55/) | [1.40](/reference/api/engine/version/v1.40/) | [changes](/reference/api/engine/version-history/#v155-api-changes) |
 | 29.5           | [1.54](/reference/api/engine/version/v1.54/) | [1.40](/reference/api/engine/version/v1.40/) | [changes](/reference/api/engine/version-history/#v154-api-changes) |

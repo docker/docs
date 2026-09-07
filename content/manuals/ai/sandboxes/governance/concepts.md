@@ -47,7 +47,7 @@ to specific teams:
 - Team-scoped: with one or more teams assigned, the policy applies only to
   members of those teams.
 
-Teams are the same [teams](/manuals/admin/organization/manage/manage-a-team.md)
+Teams are the same [teams](/manuals/accounts/organization/manage/manage-a-team.md)
 you manage for your organization; Docker matches a policy's teams against each
 user's team membership. Because an organization can mix org-wide and team-scoped
 policies, a single user is often subject to several at once. The policies that

@@ -178,8 +178,7 @@ Then explore:
 - [Workflow patterns](workflows/) — Git strategies, local services, CI, and
   authenticated tools.
 - [Sandbox environment files](configuration/environment-files.md) — declare and share
-  repeatable local sandbox configurations with `.sbxenv.yaml`. Requires `sbx`
-  0.39.0 or later.
+  repeatable local sandbox configurations with `sbxenv.yaml`.
 - [Customize with kits](customize/) — package an agent, its tools, and its
   network rules into a reusable definition you launch with a single flag.
 - [Agents](agents/) — the full list of supported agents and how to configure

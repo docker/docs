@@ -47,7 +47,7 @@ two builders:
 
 ### Get more build cache space
 
-To get more Build cache space, [upgrade your subscription](/manuals/subscription/manage.md#upgrade-plans).
+To get more Build cache space, [upgrade your subscription](/manuals/subscription-billing/manage/plans.md#upgrade-plans).
 
 > [!TIP]
 >
@@ -55,6 +55,14 @@ To get more Build cache space, [upgrade your subscription](/manuals/subscription
 > leave more space for active builds.
 
 ## Private resource access
+
+> [!IMPORTANT]
+>
+> Private resource access requires the private Buildx client. The `cloud`
+> driver in standard Buildx doesn't support this feature. If your cloud builder
+> uses private resource access, continue using the
+> [latest private Buildx release](https://github.com/docker/buildx-desktop/releases/latest)
+> until the feature is supported in standard Buildx.
 
 Private resource access lets cloud builders pull images and packages from private resources. This feature is useful when builds rely on self-hosted artifact repositories or private OCI registries.
 

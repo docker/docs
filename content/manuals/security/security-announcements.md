@@ -2,12 +2,16 @@
 description: Docker security announcements
 keywords: Docker, CVEs, security, notice, Log4J 2, Log4Shell, Text4Shell, announcements
 title: Docker security announcements
-linkTitle: Security announcements
+linkTitle: Announcements
 outputs: ["HTML", "markdown", "RSS"]
 layout: security-announcements
-weight: 80
+weight: 1
 toc_min: 1
 toc_max: 2
+aliases:
+  - /platform/security/resources/security-announcements/
+  - /security-announcements/
+  - /platform/security/security-announcements/
 ---
 
 [Subscribe to security RSS feed](/security/security-announcements/index.xml)
@@ -64,7 +68,7 @@ A vulnerability in Docker Desktop for Windows was fixed on October 23 in the [4.
 
 A vulnerability in Docker Desktop was fixed on September 25 in the [4.47.0](/manuals/desktop/release-notes.md#4470) release:
 
-- Fixed [CVE-2025-10657](https://www.cve.org/CVERecord?id=CVE-2025-10657) where the Enhanced Container Isolation [Docker Socket command restrictions](../enterprise/security/hardened-desktop/enhanced-container-isolation/config.md#command-restrictions) feature was not working properly in Docker Desktop 4.46.0 only (the configuration for it was being ignored).
+- Fixed [CVE-2025-10657](https://www.cve.org/CVERecord?id=CVE-2025-10657) where the Enhanced Container Isolation [Docker Socket command restrictions](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md#command-restrictions) feature was not working properly in Docker Desktop 4.46.0 only (the configuration for it was being ignored).
 
 ## Docker Desktop 4.44.3 security update: CVE-2025-9074
 
@@ -117,7 +121,7 @@ We strongly encourage you to update to Docker Desktop [4.34.2](/manuals/desktop/
 
 _Last updated July, 2024_
 
-When [SSO enforcement](/manuals/enterprise/security/single-sign-on/connect.md) was first introduced, Docker provided a grace period to continue to let passwords be used on the Docker CLI when authenticating to Docker Hub. This was allowed so organizations could more easily use SSO enforcement. It is recommended that administrators configuring SSO encourage users using the CLI [to switch over to Personal Access Tokens](/manuals/enterprise/security/single-sign-on/_index.md#prerequisites) in anticipation of this grace period ending.
+When [SSO enforcement](/manuals/security/authentication/single-sign-on/connect.md) was first introduced, Docker provided a grace period to continue to let passwords be used on the Docker CLI when authenticating to Docker Hub. This was allowed so organizations could more easily use SSO enforcement. It is recommended that administrators configuring SSO encourage users using the CLI [to switch over to Personal Access Tokens](/manuals/security/authentication/single-sign-on/_index.md#prerequisites) in anticipation of this grace period ending.
 
 On September 16, 2024, the grace period ended and passwords can no longer authenticate to Docker Hub via the Docker CLI when SSO is enforced. Affected users are required to switch over to using PATs to continue signing in.
 
@@ -161,7 +165,7 @@ If you are using affected versions of runc, BuildKit, Moby, or Docker Desktop, m
 
 If you are unable to update to an unaffected version promptly, follow these best practices to mitigate risk:
 
-- Only use trusted Docker images (such as [Docker Official Images](../docker-hub/image-library/trusted-content.md#docker-official-images)).
+- Only use trusted Docker images (such as [Docker Official Images](/manuals/docker-hub/image-library/trusted-content.md#docker-official-images)).
 - Don't build Docker images from untrusted sources or untrusted Dockerfiles.
 - If you are a Docker Business customer using Docker Desktop and unable to update to v4.27.1, make sure to enable [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/_index.md) features such as:
   - [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md), which mitigates the impact of CVE-2024-21626 in the case of running containers from malicious images.
@@ -247,11 +251,11 @@ Docker Hub security scans triggered after 1200 UTC 21 October 2021 are now
 correctly identifying the Text4Shell CVE. Scans before this date do not
 currently reflect the status of this vulnerability. Therefore, we recommend that
 you trigger scans by pushing new images to Docker Hub to view the status of
-the Text4Shell CVE in the vulnerability report. For detailed instructions, see [Scan images on Docker Hub](../docker-hub/repos/manage/vulnerability-scanning.md).
+the Text4Shell CVE in the vulnerability report. For detailed instructions, see [Scan images on Docker Hub](/manuals/docker-hub/repos/manage/vulnerability-scanning.md).
 
 ### Docker Official Images impacted by CVE-2022-42889
 
-A number of [Docker Official Images](../docker-hub/image-library/trusted-content.md#docker-official-images) contain the vulnerable versions of
+A number of [Docker Official Images](/manuals/docker-hub/image-library/trusted-content.md#docker-official-images) contain the vulnerable versions of
 Apache Commons Text. The following lists Docker Official Images that
 may contain the vulnerable versions of Apache Commons Text:
 
@@ -297,13 +301,13 @@ Docker Hub security scans triggered after 1700 UTC 13 December 2021 are now
 correctly identifying the Log4j 2 CVEs. Scans before this date do not
 currently reflect the status of this vulnerability. Therefore, we recommend that
 you trigger scans by pushing new images to Docker Hub to view the status of
-Log4j 2 CVE in the vulnerability report. For detailed instructions, see [Scan images on Docker Hub](../docker-hub/repos/manage/vulnerability-scanning.md).
+Log4j 2 CVE in the vulnerability report. For detailed instructions, see [Scan images on Docker Hub](/manuals/docker-hub/repos/manage/vulnerability-scanning.md).
 
 ## Docker Official Images impacted by Log4j 2 CVE
 
 _Last updated December 2021_
 
-A number of [Docker Official Images](../docker-hub/image-library/trusted-content.md#docker-official-images) contain the vulnerable versions of
+A number of [Docker Official Images](/manuals/docker-hub/image-library/trusted-content.md#docker-official-images) contain the vulnerable versions of
 Log4j 2 CVE-2021-44228. The following table lists Docker Official Images that
 may contained the vulnerable versions of Log4j 2. We updated Log4j 2 in these images to the latest version. Some of these images may not be
 vulnerable for other reasons. We recommend that you also review the guidelines published on the upstream websites.

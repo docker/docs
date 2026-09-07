@@ -38,7 +38,7 @@ In large enterprises where admin access is restricted, administrators can [enfor
 ## Signing in with Docker Desktop for Linux
 
 Docker Desktop for Linux relies on [`pass`](https://www.passwordstore.org/) to store credentials in GPG-encrypted files.
-Before signing in to Docker Desktop with your [Docker ID](/accounts/create-account/), you must initialize `pass`.
+Before signing in to Docker Desktop with your [Docker ID](/accounts/individual/create-account/), you must initialize `pass`.
 Docker Desktop displays a warning if `pass` is not configured.
 
 1. Generate a GPG key. You can initialize pass by using a gpg key. To generate a gpg key, run:

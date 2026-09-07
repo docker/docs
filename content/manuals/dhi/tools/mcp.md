@@ -148,7 +148,7 @@ based on what you ask:
 ## Authenticate for mirror tools
 
 The mirror tools require a Docker Hub username and [personal access token
-(PAT)](/security/access-tokens/) with owner access to the target organization,
+(PAT)](/security/access-tokens/personal-access-tokens/) with owner access to the target organization,
 passed as an HTTP Basic auth header. Generate the value with:
 
 ```console

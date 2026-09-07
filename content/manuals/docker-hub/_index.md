@@ -27,7 +27,7 @@ grid:
 - title: Organizations
   description: Learn about organization administration.
   icon: building-storefront
-  link: /admin/
+  link: /accounts/organization/
 - title: Usage and limits
   description: Explore usage limits and how to better utilize Docker Hub.
   icon: chart-bar

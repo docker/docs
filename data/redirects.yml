@@ -10,8 +10,10 @@
 # in its help output, which can be redirected to elsewhere in the documentation.
 "/learn/":
   - /learn
-"/security/access-tokens/":
+"/security/access-tokens/personal-access-tokens/":
   - /go/access-tokens/
+"/agentic-platform/":
+  - /go/dap/
 "/reference/api/engine/#deprecated-api-versions":
   - /engine/api/v1.18/
   - /engine/api/v1.19/
@@ -154,8 +156,9 @@
   - /go/scout-policy-dsp006/
 "/scout/policy/#approved-base-images":
   - /go/scout-policy-dsp007/
-"/scout/policy/#sonarqube-quality-gates":
+"/retired/#docker-scout-features":
   - /go/scout-policy-dsp008/
+  - "/go/scout-github/"
 "/scout/policy/configure/":
   - /go/scout-configure-policy/
 "/build/building/best-practices/#pin-base-image-versions":
@@ -173,7 +176,7 @@
   - "/go/scout-circle-ci/"
 "/scout/integrations/ci/jenkins/":
   - "/go/scout-jenkins/"
-"/scout/integrations/registry/artifactory":
+"/scout/integrations/registry/":
   - /go/scout-artifactory/
 "/scout/integrations/registry/ecr/":
   - "/go/scout-ecr/"
@@ -185,8 +188,6 @@
   - "/go/scout-acr/"
 "/scout/integrations/code-quality/sonarqube/":
   - "/go/scout-sq/"
-"/scout/integrations/source-code-management/github/":
-  - "/go/scout-github/"
 "/scout/guides/vex/":
   - "/go/vex-guide/"
 "/scout/explore/metrics-exporter/":
@@ -319,7 +320,7 @@
   - /go/settings-management/
 
 # Billing - cancellation
-"/subscription/desktop-license/":
+"/subscription-billing/desktop-license/":
   - /go/desktop-license/
 "/docker-hub/usage/pulls/":
   - /go/hub-pull-limits/

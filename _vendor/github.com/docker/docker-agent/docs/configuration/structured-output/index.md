@@ -57,12 +57,45 @@ agents:
 
 ## Properties
 
-| Property      | Type    | Required | Description                                         |
-| ------------- | ------- | -------- | --------------------------------------------------- |
-| `name`        | string  | ✓        | Name identifier for the output schema               |
-| `description` | string  | ✗        | Description of what the output represents           |
-| `strict`      | boolean | ✗        | Enforce strict schema validation (default: `false`) |
-| `schema`      | object  | ✓        | JSON Schema defining the output structure           |
+| Property      | Type    | Required | Description                                                       |
+| ------------- | ------- | -------- | ----------------------------------------------------------------- |
+| `name`        | string  | ✓        | Name identifier for the output schema                             |
+| `description` | string  | ✗        | Description of what the output represents                         |
+| `strict`      | boolean | ✗        | Enforce strict schema adherence — `native` mode only (default: `false`) |
+| `schema`      | object  | ✓        | JSON Schema defining the output structure                         |
+| `mode`        | string  | ✗        | Enforcement mode: `native` (default) or `tool` (see [Modes](#modes)) |
+
+## Modes
+
+### `native` (default)
+
+The schema is passed to the provider's native structured-output support (OpenAI JSON mode, Gemini JSON mode, ...). Omitting `mode` keeps this behavior.
+
+### `tool`
+
+```yaml
+structured_output:
+  mode: tool
+  name: analysis_result
+  schema:
+    type: object
+    properties:
+      summary:
+        type: string
+    required: ["summary"]
+```
+
+In tool mode nothing is sent to the provider's native structured-output API. Instead, the runtime exposes an internal tool named `__structured_output__` whose parameters are exactly the configured schema. The model works normally — including calling other tools — and delivers its final answer by calling that tool, alone, as the only tool call of its response. The runtime validates the arguments against the schema:
+
+- A valid call ends the turn; the validated (compacted) JSON becomes the final assistant message.
+- Invalid JSON gets a detailed tool error so the model can correct itself and retry.
+- If the model answers in plain text instead, the runtime injects a transient system reminder and retries (at most 2 reminders), then fails with a `structured_output_failed` error.
+
+Tool-mode validation applies the full JSON Schema, including `additionalProperties` — unexpected fields are rejected when the schema forbids them. External `$ref` references (`http(s)://`, `file://`, cross-document) are rejected when the schema is compiled; only same-document references starting with `#` (e.g. `#/definitions/item`) are allowed. The `strict` flag has no effect in tool mode.
+
+Fork-mode skills (`context: fork`) run as exempt sub-sessions: the skill produces its own plain-text answer for the calling agent and is not required to call the output tool. The parent agent still delivers its final answer through the tool.
+
+Use tool mode when the model must combine tool use with a schema-constrained final answer, or when the provider has no native structured-output support. See [`examples/structured-output-tool-mode.yaml`](https://github.com/docker/docker-agent/blob/main/examples/structured-output-tool-mode.yaml).
 
 ## Schema Format
 
@@ -119,7 +152,7 @@ schema:
 
 ## Strict Mode
 
-When `strict: true`, the model is constrained to only produce output that exactly matches the schema. This provides stronger guarantees but may limit the model's flexibility.
+`strict` only applies to `native` mode: it is passed to the provider's structured-output API. Tool mode ignores it and always validates against the full schema instead. When `strict: true`, the model is constrained to only produce output that exactly matches the schema. This provides stronger guarantees but may limit the model's flexibility.
 
 - **`strict: false` (default)** — model aims to match the schema but may include additional fields or slight variations.
 - **`strict: true`** — model output is constrained to exactly match the schema. Stronger guarantees.
@@ -214,4 +247,4 @@ agents:
 > [!WARNING]
 > **Tool Limitations**
 >
-> When using structured output, the agent typically cannot use tools since its response format is constrained to the schema. Design your agent workflow accordingly — structured output agents work best for single-turn analysis or extraction tasks.
+> When using native structured output, the agent typically cannot use tools since its response format is constrained to the schema. Design your agent workflow accordingly — native structured output agents work best for single-turn analysis or extraction tasks. Use `mode: tool` when the agent needs to call tools before producing its schema-constrained final answer.

@@ -153,11 +153,7 @@ Before you move on, take a moment and reflect on what happened here. Within a fe
 
 - Start a complete development project with zero installation effort. The containerized environment provided the development environment, ensuring you have everything you need. You didn't have to install Node, MySQL, or any of the other dependencies directly on your machine. All you needed was Docker Desktop and a code editor.
 
-- Make changes and see them immediately. This was made possible because
-  1. the processes running in each container are watching and responding to
-     file changes and 2) the files in your local project directory are shared
-     with the containerized environment, so edits you make locally are
-     automatically synced to the containers.
+- Make changes and see them immediately. This was made possible because 1) the processes running in each container are watching and responding to file changes and 2) the files in your local project directory are shared with the containerized environment, so edits you make locally are automatically synced to the containers.
 
 Docker Desktop enables all of this and so much more. Once you start thinking with containers, you can create almost any environment and easily share it with your team.
 

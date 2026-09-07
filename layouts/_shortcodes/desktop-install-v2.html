@@ -12,6 +12,7 @@
     {{- if or $all $win }}
       <li>
         <a rel="noopener"
+           marlin-label="download_exe_click"
            href="https://desktop.docker.com/win/main/amd64{{ $build_path }}Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-windows">Windows</a>
         (<a rel="noopener"
             href="https://desktop.docker.com/win/main/amd64{{ $build_path }}checksums.txt">checksum</a>)
@@ -20,6 +21,7 @@
     {{- if or $win_arm_release }}
         <li>
           <a rel="noopener"
+             marlin-label="download_exe_click"
              href="https://desktop.docker.com/win/main/arm64{{ $build_path }}Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-windows">Windows ARM {{ $win_arm_release }}</a>
           (<a rel="noopener"
               href="https://desktop.docker.com/win/main/arm64{{ $build_path }}checksums.txt">checksum</a>)
@@ -30,12 +32,12 @@
     {{- if or $all $mac }}
       <ul>
         <li>
-          <a rel="noopener" href="https://desktop.docker.com/mac/main/arm64{{ $build_path }}Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64">Mac with Apple chip</a>
+          <a rel="noopener" marlin-label="download_dmg_click" href="https://desktop.docker.com/mac/main/arm64{{ $build_path }}Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64">Mac with Apple chip</a>
           (<a rel="noopener"
               href="https://desktop.docker.com/mac/main/arm64{{ $build_path }}checksums.txt">checksum</a>)
         </li>
         <li>
-          <a rel="noopener" href="https://desktop.docker.com/mac/main/amd64{{ $build_path }}Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64">Mac with Intel chip</a>
+          <a rel="noopener" marlin-label="download_dmg_click" href="https://desktop.docker.com/mac/main/amd64{{ $build_path }}Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64">Mac with Intel chip</a>
           (<a rel="noopener"
               href="https://desktop.docker.com/mac/main/amd64{{ $build_path }}checksums.txt">checksum</a>)
         </li>

@@ -23,12 +23,12 @@ package manager, and may run as a non-root user by default.
 > pull DHI Community images. You can authenticate using either of the following:
 >
 > - **Docker ID and password:** Use your Docker Hub username and password. If
->   you don't have a Docker account, [create one](../../accounts/create-account.md)
+>   you don't have a Docker account, [create one](../../accounts/individual/create-account.md
 >   for free.
 > - **Access token:** Use a [personal access token
->   (PAT)](../../security/access-tokens.md) for personal accounts, or an
+>   (PAT)](../../security/access-tokens/personal-access-tokens.md) for personal accounts, or an
 >   [organization access token
->   (OAT)](../../enterprise/security/access-tokens.md) with your organization
+>   (OAT)](../../security/access-tokens/organization-access-tokens.md) with your organization
 >   name as the username.
 >
 > Run `docker login dhi.io` to authenticate.
@@ -109,14 +109,14 @@ attached to Docker Hardened Images. This is particularly useful in CI/CD
 pipelines for supply chain security validation and compliance checks.
 
 For automated workflows, authenticate using an [organization access token
-(OAT)](../../enterprise/security/access-tokens.md). OATs are owned by the
+(OAT)](../../security/access-tokens/organization-access-tokens.md). OATs are owned by the
 organization rather than an individual user, making them better suited for CI/CD
 pipelines.
 
 To discover attestations with ORAS:
 
 1. [Generate an organization access
-   token](../../enterprise/security/access-tokens.md) with **Read public
+   token](../../security/access-tokens/organization-access-tokens.md) with **Read public
    repositories** scope.
 
    The following example shows how to discover attestations on DHI community
@@ -268,8 +268,8 @@ For the `--docker-server` value:
 #### Using an access token
 
 Create a secret using a [Personal Access Token
-(PAT)](../../security/access-tokens.md) or [Organization Access Token
-(OAT)](../../enterprise/security/access-tokens.md). Ensure the token has at
+(PAT)](../../security/access-tokens/personal-access-tokens.md) or [Organization Access Token
+(OAT)](../../security/access-tokens/organization-access-tokens.md). Ensure the token has at
 least read-only access to the repositories.
 
 ```console
