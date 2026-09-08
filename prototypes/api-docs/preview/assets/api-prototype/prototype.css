@@ -451,10 +451,26 @@
   color: var(--api-muted);
 }
 .api-schema-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 0 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.api-schema-links li {
+  min-width: 0;
+  border-bottom: 1px solid var(--api-line);
+}
+.api-schema-links a {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px 20px;
-  font-size: 14px;
+  align-items: center;
+  height: 100%;
+  min-height: 44px;
+  padding: 10px 8px;
+}
+.api-schema-links a:hover {
+  background: var(--api-selected);
 }
 .api-review {
   font-size: 13px;

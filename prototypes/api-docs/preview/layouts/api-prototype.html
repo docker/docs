@@ -131,9 +131,13 @@
           {{ end }}
         </div>
         <h2>Schemas</h2>
-        <div class="api-schema-links">
-          {{ range $api.schemas }}<a href="{{ .url }}">{{ .name }}</a>{{ end }}
-        </div>
+        <ul class="api-schema-links" aria-label="Schemas">
+          {{ range $api.schemas }}
+            <li>
+              <a href="{{ .url }}"><code>{{ .name }}</code></a>
+            </li>
+          {{ end }}
+        </ul>
         <details class="api-review">
           <summary>
             Source review status ·
