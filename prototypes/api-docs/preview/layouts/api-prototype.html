@@ -96,7 +96,8 @@
         <section class="api-connection">
           <h2>
             {{ if eq $api.connection "unix" }}
-              Connecting to {{ $api.title }}
+              Connecting to
+              {{ $api.title }}
             {{ else }}
               Connecting to the {{ $api.title }} API
             {{ end }}
