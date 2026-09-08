@@ -57,7 +57,7 @@
       "moduleVersion": "github.com/moby/moby/api@v1.56.0",
       "manual": "/manuals/engine/",
       "connection": "unix",
-      "auth": "Connect to a daemon you operate. Local socket permissions control access; remote daemons require their configured transport protection. X-Registry-Auth delegates registry credentials and does not authenticate the daemon caller.",
+      "auth": "Connect to a daemon you operate. Local socket permissions control access; remote daemons require their configured transport protection.",
       "guides": [
         "/manuals/engine/security/protect-access.md",
         "/manuals/engine/daemon/remote-access.md"
@@ -72,7 +72,7 @@
       "moduleVersion": "github.com/moby/moby/api@v1.56.0",
       "manual": "/manuals/engine/",
       "connection": "unix",
-      "auth": "Connect to a daemon you operate. Local socket permissions control access; remote daemons require their configured transport protection. X-Registry-Auth delegates registry credentials and does not authenticate the daemon caller.",
+      "auth": "Connect to a daemon you operate. Local socket permissions control access; remote daemons require their configured transport protection.",
       "guides": [
         "/manuals/engine/security/protect-access.md",
         "/manuals/engine/daemon/remote-access.md"

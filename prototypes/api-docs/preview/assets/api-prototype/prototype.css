@@ -249,13 +249,8 @@
   color: var(--api-muted);
 }
 .api-connection {
-  padding: 4px 24px 18px;
-  background: var(--api-surface);
-  border-radius: 6px;
-  margin: 28px 0;
-}
-.api-connection h2 {
-  margin-top: 18px;
+  max-width: 72ch;
+  margin: 32px 0;
 }
 .api-filter-label {
   display: block;

@@ -92,6 +92,26 @@
           <div class="prose dark:prose-invert">
             {{ partial "api-prototype/description.html" (dict "text" $api.description "api" $api) | markdownify }}
           </div>
+        </section>
+        <section class="api-connection">
+          <h2>
+            {{ if eq $api.connection "unix" }}
+              Connecting to {{ $api.title }}
+            {{ else }}
+              Connecting to the {{ $api.title }} API
+            {{ end }}
+          </h2>
+          <p>{{ $api.auth }}</p>
+          {{ if eq $api.connection "unix" }}
+            <pre><code>curl --unix-socket /var/run/docker.sock http://localhost/v{{ $api.version }}/version</code></pre>
+          {{ else }}
+            {{ range $api.servers }}<code>{{ .url }}</code>{{ end }}
+          {{ end }}{{ range $api.guides }}
+            {{ $guide := site.GetPage (index (split . "#") 0) }}
+            <p><a href="{{ ref $ . }}">{{ $guide.Title }}</a></p>
+          {{ end }}
+        </section>
+        <div class="api-overview">
           {{ $overviewTags := partial "api-prototype/overview-tags.html" $api }}
           {{ range $api.tags }}
             {{ if not (in $overviewTags .) }}
@@ -100,24 +120,13 @@
           {{ end }}
           {{ range $overviewTags }}
             <section id="tag-{{ .name | urlize }}">
-              <h3>{{ .summary }}</h3>
+              <h2>{{ .summary }}</h2>
               <div class="prose dark:prose-invert">
                 {{ partial "api-prototype/description.html" (dict "text" .description "api" $api) | markdownify }}
               </div>
             </section>
           {{ end }}
-        </section>
-        <section class="api-connection">
-          <h2>Connect and authenticate</h2>
-          <p>{{ $api.auth }}</p>
-          {{ if eq $api.connection "unix" }}
-            <pre><code>curl --unix-socket /var/run/docker.sock http://localhost/v{{ $api.version }}/version</code></pre>
-          {{ else }}
-            {{ range $api.servers }}<code>{{ .url }}</code>{{ end }}
-          {{ end }}{{ range $api.guides }}
-            <p><a href="{{ ref $ . }}">Related setup guidance ↗</a></p>
-          {{ end }}
-        </section>
+        </div>
         <h2>Operations</h2>
         <label class="api-filter-label"
           >Filter operations
@@ -186,6 +195,12 @@
                 </div>
                 <h2>Connection and access</h2>
                 <p>{{ $api.auth }}</p>
+                {{ if and (eq $api.product "engine") (where .parameters "name" "X-Registry-Auth") }}
+                  <p>
+                    <code>X-Registry-Auth</code> delegates registry credentials
+                    and does not authenticate the daemon caller.
+                  </p>
+                {{ end }}
                 {{ range .servers }}
                   <p>
                     <code>{{ .url }}</code>{{ with .description }}

@@ -18,12 +18,7 @@ API version: {{ $api.version }}
 ## Overview
 
 {{ partial "api-prototype/description.html" (dict "text" $api.description "api" $api) }}
-{{ range (partial "api-prototype/overview-tags.html" $api) }}
-### {{ .summary }}
-
-{{ partial "api-prototype/description.html" (dict "text" .description "api" $api) }}
-{{ end }}
-## Connection and authentication
+## {{ if eq $api.connection "unix" }}Connecting to {{ $api.title }}{{ else }}Connecting to the {{ $api.title }} API{{ end }}
 
 {{ $api.auth }}
 {{ range $api.servers }}
@@ -33,6 +28,16 @@ Server: `{{ .url }}`
 ```console
 curl --unix-socket /var/run/docker.sock http://localhost/v{{ $api.version }}/version
 ```
+{{ end }}
+{{ range $api.guides }}
+{{ $guide := site.GetPage (index (split . "#") 0) }}
+- [{{ $guide.Title }}]({{ ref $ . }})
+{{ end }}
+
+{{ range (partial "api-prototype/overview-tags.html" $api) }}
+## {{ .summary }}
+
+{{ partial "api-prototype/description.html" (dict "text" .description "api" $api) }}
 {{ end }}
 ## Operations
 {{ range $api.operations }}
@@ -58,6 +63,9 @@ Deprecated operation.
 ## Connection and access
 
 {{ $api.auth }}
+{{ if and (eq $api.product "engine") (where .parameters "name" "X-Registry-Auth") }}
+`X-Registry-Auth` delegates registry credentials and does not authenticate the daemon caller.
+{{ end }}
 {{ range .servers }}
 Server: `{{ .url }}`
 {{ end }}
