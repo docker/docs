@@ -24,6 +24,11 @@ The build exports the complete preview site, including the existing manuals,
 under `tmp/api-prototype/site`. It never deploys or submits upstream changes.
 The API pages exist only with the prototype Hugo config.
 
+This draft's Netlify deploy previews run the same pipeline and publish
+`tmp/api-prototype/site`, using `DEPLOY_PRIME_URL` as the site origin. Open
+`/api-prototype/` on the deploy preview to explore the catalog. Production
+builds retain their existing configuration.
+
 ## Commands
 
 | Command | Behavior |

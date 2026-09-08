@@ -28,6 +28,10 @@ site with the command in the [tooling README](hack/api-docs/README.md).
 Default site builds exclude the prototype. No production URLs or navigation
 were migrated.
 
+This draft's Netlify deploy previews include the prototype at `/api-prototype/`.
+The deploy-preview context runs the same pipeline and publishes its site output;
+production builds retain their existing configuration.
+
 ![API catalog](prototypes/api-docs/evidence/catalog.png)
 
 ![Operation reference](prototypes/api-docs/evidence/operation.png)
