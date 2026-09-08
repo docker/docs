@@ -6,11 +6,11 @@ Prototype: converted specifications contain documented assumptions pending produ
 
 {{ if eq .Params.view "catalog" }}
 Choose a Docker HTTP API:
-{{ range $data.apis }}
+{{ range where $data.apis "id" "ne" "engine-1.55" }}
 - [{{ .title }} API {{ .version }}]({{ .url }}): {{ len .operations }} operations; {{ .connection }} connection
 {{ end }}
 {{ else }}
-[API catalog](/api-prototype/) · [{{ $api.title }} overview]({{ $api.url }}) · [Product manual]({{ ref . $api.manual }}) · [Source package](/api-prototype/sources/{{ $api.id }}/source.zip)
+[API catalog](/reference/api/) · [{{ $api.title }} overview]({{ $api.url }}) · [Product manual]({{ ref . $api.manual }}) · [Source package](/api-prototype/sources/{{ $api.id }}/source.zip)
 
 API version: {{ $api.version }}
 

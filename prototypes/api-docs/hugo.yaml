@@ -5,6 +5,15 @@ module:
   mounts:
     - source: content
       target: content
+      files:
+        - "! reference/api/_index.md"
+        - "! reference/api/ai-governance/index.md"
+        - "! reference/api/hub/latest.md"
+        - "! reference/api/dvp/latest.md"
+        - "! reference/api/registry/latest.md"
+        - "! reference/api/engine/version/v1.56.md"
+    - source: prototypes/api-docs/preview/layouts
+      target: layouts
     - source: layouts
       target: layouts
     - source: static
@@ -19,10 +28,6 @@ module:
       target: assets/css/highlight-github-dark.css
     - source: prototypes/api-docs/preview/content
       target: content
-    - source: prototypes/api-docs/preview/layouts
-      target: layouts
-    - source: prototypes/api-docs/preview/static
-      target: static
     - source: prototypes/api-docs/preview/assets
       target: assets
     - source: tmp/api-prototype/data

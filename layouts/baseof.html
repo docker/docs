@@ -2,7 +2,12 @@
 <html lang="en">
   <head>
     {{ partial "head.html" . }}
-    {{ block "head-extra" . }}{{ end }}
+    {{ block "head-extra" . }}
+      {{ if site.Params.apiPrototype }}
+        {{ $style := resources.Get "api-prototype/prototype.css" | fingerprint }}
+        <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
+      {{ end }}
+    {{ end }}
   </head>
 
   <body

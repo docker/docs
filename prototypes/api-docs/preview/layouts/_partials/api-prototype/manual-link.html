@@ -1,6 +1,6 @@
 {{ if site.Params.apiPrototype }}
   {{ $data := index hugo.Data "api-prototype" }}
-  {{ range $data.apis }}
+  {{ range where $data.apis "id" "ne" "engine-1.55" }}
     {{ $manual := site.GetPage .manual }}
     {{ if and $manual (eq $manual.RelPermalink $.RelPermalink) }}
       <p

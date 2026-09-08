@@ -17,7 +17,7 @@ From the repository root:
 ./hack/api-docs/run.sh serve
 ```
 
-Open <http://localhost:1314/api-prototype/>. The complete container build is:
+Open <http://localhost:1314/reference/api/>. The complete container build is:
 
 ```console
 docker buildx bake api-prototype
@@ -25,10 +25,11 @@ docker buildx bake api-prototype
 
 It exports the site and reports under `tmp/api-prototype`. Serve the exported
 site with the command in the [tooling README](hack/api-docs/README.md).
-Default site builds exclude the prototype. No production URLs or navigation
-were migrated.
+Default site builds exclude the prototype. Preview builds replace the latest
+references at their established URLs and integrate them into the Reference sidebar.
 
-This draft's Netlify deploy previews include the prototype at `/api-prototype/`.
+This draft's Netlify deploy previews include the catalog at `/reference/api/`.
+The earlier `/api-prototype/` address redirects to the catalog.
 The deploy-preview context runs the same pipeline and publishes its site output;
 production builds retain their existing configuration.
 
@@ -148,9 +149,9 @@ processor or a production reference design:
   complete schema-position discovery, and publication across external resources
   need additional integration fixtures. Callback/webhook navigation is an
   explicit capability error.
-- Temporary routes demonstrate navigation and version selection. Production
-  IA, historical discoverability, legacy fragment compatibility, and the full
-  Engine archive remain implementation work.
+- Preview routes exercise the existing Reference hierarchy and legacy fragment
+  compatibility. Production launch and a complete inbound-link audit remain
+  implementation work.
 
 ## Build and browser evidence
 
@@ -222,3 +223,49 @@ Keep the [inventory](API-DOCUMENTATION-INVENTORY.md),
 [tooling review](API-DOCUMENTATION-TOOLING.md) alongside this report. Source
 corrections require implementation evidence and owner review even when the
 prototype's static checks pass.
+
+## Reference navigation integration
+
+The preview replaces only the latest reference page for each API:
+
+| API | Preview reference URL |
+| --- | --- |
+| Governance | `/reference/api/ai-governance/` |
+| Hub | `/reference/api/hub/latest/` |
+| Publisher analytics | `/reference/api/dvp/latest/` |
+| Registry | `/reference/api/registry/latest/` |
+| Engine 1.56 | `/reference/api/engine/version/v1.56/` |
+
+The catalog occupies `/reference/api/`. Operation and schema pages sit below
+these reference URLs. The Reference sidebar retains its other groups, API
+supporting guides, SDK pages, and Engine version history. API branches use the
+method-colored operation navigation instead of listing schema pages among
+operations.
+
+Engine v1.55–v1.40 retain their original pages and ReDoc renderer. The version
+selector links to those references. The converted 1.55 comparison fixture remains
+at `/api-prototype/engine-1.55/` for migration checks; the catalog and manual links
+present only the latest references. Converting historical specifications is not
+required for this launch.
+
+Hugo aliases preserve earlier prototype page URLs, the Governance manual alias,
+and both Engine latest aliases. Generated fragment links preserve ReDoc operation
+and tag destinations and Governance operation/schema anchors. JavaScript follows
+these links to individual pages; without JavaScript, the compatibility links
+remain available in a disclosure. Preview alias pages preserve fragments with
+JavaScript; their no-JavaScript refresh reaches the overview without the fragment.
+A production migration still needs an audit of
+external inbound links and host-specific redirect behavior.
+
+The preview configuration excludes only the replaced Markdown pages from its
+content mount. Authoritative specifications and historical files remain unchanged.
+A preview-only sidebar template selects the tailored operation navigation. Its
+shared navigation logic must stay aligned with the site template until production
+integration replaces this overlay.
+
+Verification for this integration passed: 746 HTML/Markdown pairs, all 16 legacy
+Engine pages retaining ReDoc, prototype page aliases, Go tests, snapshot replay,
+and 14 browser checks. A default build retained the existing latest references
+and excluded the prototype catalog.
+
+![Reference sidebar integration](prototypes/api-docs/evidence/reference-sidebar.png)

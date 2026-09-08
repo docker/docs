@@ -9,8 +9,19 @@ import (
 	"strings"
 )
 
-func route(id string) string { return "/api-prototype/" + id + "/" }
-func slug(s string) string   { return url.PathEscape(s) }
+func route(id string) string {
+	switch id {
+	case "governance":
+		return "/reference/api/ai-governance/"
+	case "hub", "dvp", "registry":
+		return "/reference/api/" + id + "/latest/"
+	case "engine-1.56":
+		return "/reference/api/engine/version/v1.56/"
+	default:
+		return "/api-prototype/" + id + "/"
+	}
+}
+func slug(s string) string { return url.PathEscape(s) }
 func (d *Document) model() Object {
 	ops := d.operations()
 	schemas := []any{}

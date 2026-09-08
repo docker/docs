@@ -28,7 +28,7 @@ function check(url) {
   count++;
   return [decode(html), md];
 }
-check("/api-prototype/");
+check("/reference/api/");
 for (const api of data.apis) {
   check(api.url);
   for (const op of api.operations) {
@@ -76,10 +76,12 @@ function files(dir) {
         : [path.join(dir, e.name)],
     );
 }
-for (const file of files(path.join(base, "api-prototype")).filter((p) =>
-  p.endsWith(".html"),
-)) {
+for (const file of [
+  ...files(path.join(base, "api-prototype")),
+  ...files(path.join(base, "reference/api")),
+].filter((p) => p.endsWith(".html"))) {
   const html = fs.readFileSync(file, "utf8");
+  if (!html.includes("data-api-view=")) continue;
   for (const m of html.matchAll(/href="([^"]+)"/g)) {
     let url;
     try {
@@ -92,7 +94,10 @@ for (const file of files(path.join(base, "api-prototype")).filter((p) =>
     }
     if (
       url.hostname !== "localhost" ||
-      !url.pathname.startsWith("/api-prototype/")
+      !(
+        url.pathname.startsWith("/api-prototype/") ||
+        url.pathname.startsWith("/reference/api/")
+      )
     )
       continue;
     const target = path.join(
@@ -104,6 +109,34 @@ for (const file of files(path.join(base, "api-prototype")).filter((p) =>
       problems.push(
         `Broken preview link: ${path.relative(base, file)} -> ${m[1]}`,
       );
+  }
+}
+// Historical Engine pages must keep the original renderer at their existing URLs.
+for (let minor = 40; minor <= 55; minor++) {
+  const url = `/reference/api/engine/version/v1.${minor}/`;
+  const html = fs.readFileSync(path.join(base, url, "index.html"), "utf8");
+  if (!html.includes("<redoc") || html.includes("data-api-view="))
+    problems.push(`Legacy Engine renderer changed: ${url}`);
+}
+for (const api of data.apis.filter((api) => api.id !== "engine-1.55")) {
+  const overview = decode(
+    fs.readFileSync(path.join(base, api.url, "index.html"), "utf8"),
+  );
+  for (const op of api.operations) {
+    if (!overview.includes(`id="operation/${op.id}"`))
+      problems.push(
+        `Missing historical operation fragment: ${api.id} ${op.id}`,
+      );
+  }
+  for (const url of [
+    api.url,
+    ...api.operations.map((op) => op.url),
+    ...api.schemas.map((schema) => schema.url),
+  ]) {
+    const alias = url.replace(api.url, `/api-prototype/${api.id}/`);
+    const html = fs.readFileSync(path.join(base, alias, "index.html"), "utf8");
+    if (!html.includes(url))
+      problems.push(`Incorrect prototype alias: ${alias}`);
   }
 }
 if (problems.length)

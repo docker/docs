@@ -11,7 +11,7 @@ Run from the repository root:
 ./hack/api-docs/run.sh serve
 ```
 
-Open `http://localhost:1314/api-prototype/`. The local commands need Go 1.26.5,
+Open `http://localhost:1314/reference/api/`. The local commands need Go 1.26.5,
 Hugo 0.163.0, Node.js, npm, and standard shell utilities. The server command also
 uses Python 3. The container build supplies its dependencies:
 
@@ -26,7 +26,7 @@ The API pages exist only with the prototype Hugo config.
 
 This draft's Netlify deploy previews run the same pipeline and publish
 `tmp/api-prototype/site`, using `DEPLOY_PRIME_URL` as the site origin. Open
-`/api-prototype/` on the deploy preview to explore the catalog. Production
+`/reference/api/` on the deploy preview to explore the catalog. Production
 builds retain their existing configuration.
 
 ## Commands

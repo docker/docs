@@ -7,11 +7,21 @@ export default async function verify(page, base = "http://localhost:1314") {
   };
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(base + "/api-prototype/");
+  await page.waitForURL("**/reference/api/");
+  await page.locator(".api-card").first().waitFor();
   assert(
-    (await page.locator(".api-card").count()) === 6,
-    "Catalog exposes all six snapshots",
+    (await page.locator(".api-card").count()) === 5,
+    "Catalog exposes five latest API references",
   );
-  await page.goto(base + "/api-prototype/engine-1.56/");
+  await page.goto(base + "/reference/api/engine/latest/#operation/SystemPing");
+  await page.waitForURL(
+    "**/reference/api/engine/version/v1.56/operations/SystemPing/",
+  );
+  assert(
+    page.url().endsWith("/operations/SystemPing/"),
+    "Latest alias preserves the operation fragment",
+  );
+  await page.goto(base + "/reference/api/engine/version/v1.56/");
   await page.locator("[data-api-filter]").fill("archive");
   const visible = page.locator("[data-api-filter-item]:visible");
   assert(
@@ -27,12 +37,17 @@ export default async function verify(page, base = "http://localhost:1314") {
   await page.locator("[data-api-version]").focus();
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("Enter");
-  await page.waitForURL("**/api-prototype/engine-1.55/");
+  await page.waitForURL("**/reference/api/engine/version/v1.55/");
   assert(
-    page.url().endsWith("/engine-1.55/"),
+    page.url().endsWith("/v1.55/"),
     "Keyboard version selection changes the reference",
   );
-  await page.goto(base + "/api-prototype/governance/operations/listPolicies/");
+  await page.goto(
+    base + "/reference/api/ai-governance/#operation-listPolicies",
+  );
+  await page.waitForURL(
+    "**/reference/api/ai-governance/operations/listPolicies/",
+  );
   await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
   await page.locator("[data-api-copy]").focus();
   await page.keyboard.press("Enter");
@@ -52,7 +67,9 @@ export default async function verify(page, base = "http://localhost:1314") {
       .count()) === 1,
     "Product manual links back to the same API reference",
   );
-  await page.goto(base + "/api-prototype/engine-1.56/operations/SystemPing/");
+  await page.goto(
+    base + "/reference/api/engine/version/v1.56/operations/SystemPing/",
+  );
   const select = page.locator("[data-api-media-select]");
   const options = await select
     .locator("option")
@@ -63,7 +80,9 @@ export default async function verify(page, base = "http://localhost:1314") {
     (await page.locator("[data-api-media][hidden]").count()) > 0,
     "Media selection filters without removing source variants",
   );
-  await page.goto(base + "/api-prototype/governance/operations/createPolicy/");
+  await page.goto(
+    base + "/reference/api/ai-governance/operations/createPolicy/",
+  );
   const exampleSelect = page.locator("[data-api-example-select]").first();
   if (await exampleSelect.count()) {
     const n = await exampleSelect.locator("option").count();
@@ -88,13 +107,15 @@ export default async function verify(page, base = "http://localhost:1314") {
   assert(
     search.some(
       (r) =>
-        r.url.includes("/api-prototype/engine-1.56/") &&
+        r.url.includes("/reference/api/engine/version/v1.56/") &&
         r.title.includes("1.56"),
     ),
     "Search finds schema properties with API version context",
   );
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto(base + "/api-prototype/governance/operations/listPolicies/");
+  await page.goto(
+    base + "/reference/api/ai-governance/operations/listPolicies/",
+  );
   assert(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth + 1,
@@ -112,7 +133,7 @@ export default async function verify(page, base = "http://localhost:1314") {
     .newContext({ javaScriptEnabled: false });
   const staticPage = await noJS.newPage();
   await staticPage.goto(
-    base + "/api-prototype/governance/operations/listPolicies/",
+    base + "/reference/api/ai-governance/operations/listPolicies/",
   );
   assert(
     (await staticPage.locator("[data-api-variant]").count()) > 0 &&

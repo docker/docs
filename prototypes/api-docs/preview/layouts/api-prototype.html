@@ -1,11 +1,12 @@
 {{ define "head-extra" }}
   {{ $style := resources.Get "api-prototype/prototype.css" | fingerprint }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
-  <script src="/api-prototype/prototype.js" defer></script>
+  {{ $script := resources.Get "api-prototype/prototype.js" | fingerprint }}
+  <script src="{{ $script.RelPermalink }}" defer></script>
 {{ end }}
 {{ define "left" }}
   {{ partial "sidebar/mainnav.html" . }}
-  {{ partial "api-prototype/navigation.html" . }}
+  {{ partial "sidebar/sections.html" . }}
 {{ end }}
 {{ define "main" }}
   <article class="api-preview" data-api-view="{{ .Params.view }}">
@@ -30,7 +31,7 @@
         Choose an API to find connection guidance, operations, and data models.
       </p>
       <div class="api-cards">
-        {{ range $data.apis }}
+        {{ range where $data.apis "id" "ne" "engine-1.55" }}
           <a class="api-card" href="{{ .url }}"
             ><span class="api-label"
               >{{ if eq .connection "unix" }}
@@ -47,7 +48,7 @@
       </div>
     {{ else }}
       <nav class="api-crumbs" aria-label="API breadcrumb">
-        <a href="/api-prototype/">APIs</a> /
+        <a href="/reference/api/">APIs</a> /
         <a href="{{ $api.url }}">{{ $api.title }}</a> /
         <span>API {{ $api.version }}</span>
       </nav>
@@ -55,13 +56,25 @@
         <label
           >API version
           <select data-api-version>
+            {{ if eq $api.id "engine-1.55" }}
+              <option value="{{ $api.url }}" selected>
+                1.55 (comparison prototype)
+              </option>
+            {{ end }}
             {{ range $data.apis }}
-              {{ if eq .product $api.product }}
+              {{ if and (eq .product $api.product) (ne .id "engine-1.55") }}
                 <option
                   value="{{ .url }}"
                   {{ if eq .id $api.id }}selected{{ end }}
                 >
                   {{ .version }}
+                </option>
+              {{ end }}
+            {{ end }}
+            {{ if eq $api.product "engine" }}
+              {{ range seq 55 -1 40 }}
+                <option value="/reference/api/engine/version/v1.{{ . }}/">
+                  1.{{ . }} (legacy)
                 </option>
               {{ end }}
             {{ end }}
@@ -93,7 +106,7 @@
             {{ partial "api-prototype/description.html" (dict "text" $api.description "api" $api) | markdownify }}
           </div>
         </section>
-        <section class="api-connection">
+        <section class="api-connection" id="authentication">
           <h2>
             {{ if eq $api.connection "unix" }}
               Connecting to
@@ -146,7 +159,7 @@
             >
           {{ end }}
         </div>
-        <h2>Schemas</h2>
+        <h2 id="schemas">Schemas</h2>
         <ul class="api-schema-links" aria-label="Schemas">
           {{ range $api.schemas }}
             <li>
@@ -154,6 +167,7 @@
             </li>
           {{ end }}
         </ul>
+        {{ partial "api-prototype/legacy-fragments.html" $api }}
         <details class="api-review">
           <summary>
             Source review status ·
